@@ -1,0 +1,45 @@
+{
+    "name": "BasiGX",
+    "type": "code",
+    "creator": "terrestris GmbH & Co. KG",
+    "author": "terrestris GmbH & Co. KG",
+    "license": "gpl-3",
+    "summary": "Basic Components for ExtJS 6 and GeoExt 3",
+    "description": "Basic Components for ExtJS 6 and GeoExt 3",
+    "detailedDescription": "This package consists of several components that can be used to setup an Application based on ExtJS 6, GeoExt 3 and OL3",
+    "version": "1.0.0",
+    "compatVersion": "1.0.0",
+    "format": "1",
+    "framework": "ext",
+    "requires": [
+        "GeoExt"
+    ],
+    "toolkit": "classic",
+    "theme": "theme-neptune",
+    "local": true,
+    "slicer": {
+        "js": [
+            {
+                "path": "${package.dir}/sass/example/custom.js",
+                "isWidgetManifest": true
+            }
+        ]
+    },
+    "sass": {
+        "namespace": "BasiGX",
+        "etc": "sass/etc/all.scss",
+        "var": "sass/var",
+        "src": "sass/src"
+    },
+    "output": "${package.dir}/build",
+    "scripts": {
+        "lint-js": "eslint -c .eslintrc src/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@gitlab.intranet.terrestris.de:terrestris/BasiGX.git"
+    },
+    "devDependencies": {
+        "eslint": "^1.2.1"
+    }
+}

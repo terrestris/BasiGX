@@ -1,0 +1,36 @@
+.basigx-map-tools {
+    right: 0 !important;
+    left: auto !important;
+    background-color: transparent;
+}
+
+.basigx-overview-map {
+    top: auto !important;
+    bottom: 0 !important;
+    background-color: white;
+}
+
+.basigx-overview-map-button {
+    top: auto !important;
+    bottom: 5px !important;
+    left: 5px !important;
+}
+
+.ol-scale-line {
+    bottom: 5px;
+    left: 50px;
+}
+.ol-scale-line.basigx-scaline-adjusted {
+    left: 405px;
+}
+
+.basigx-combo-scale {
+    top: auto;
+    bottom: 5px;
+    left: 50px;
+    background-color: white;
+}
+
+.basigx-combo-scale-adjusted {
+    left: 405px;
+}
