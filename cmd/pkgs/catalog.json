@@ -1,0 +1,62 @@
+{
+  "format": "1",
+  "packages": [
+    {
+      "name": "BasiGX",
+      "format": "1",
+      "version": "1.0.0",
+      "creator": "terrestris GmbH \u0026 Co. KG",
+      "summary": "Basic Components for ExtJS 6 and GeoExt 3",
+      "detailedDescription": "This package consists of several components that can be used to setup an Application based on ExtJS 6, GeoExt 3 and OL3",
+      "type": "code",
+      "requires": [
+        "GeoExt"
+      ],
+      "signatures": [
+        {
+          "name": "terrestris GmbH \u0026 Co. KG",
+          "uuid": "ce892cdb-9cfa-4b81-985b-a9aa788a7004",
+          "created": "2015-10-19T13:51:37Z",
+          "algorithm": "SHA1withRSA",
+          "nonce": "o0CWgUVNMjY\u003d",
+          "signature": "dNpo9GiGpyc2K9VeeoBpuOmFMXFTGynXJC0vHOS9gKHesaQQGRFeE05bEpUpflhit47SUHRwTfhqn4HXMjQmrTAg+FioAxJ9C/cp0ByaELN3HcsIIBfNrAFGtcAzYD7/yjjaBj+CK3+bK0MI/W+v7IfVUaQtg4WPYI9pgU9dPIEXs4U3w0qFj4tCxhQ9PW+ORfwMzP4J98LXgAAreFblkkbS+ezJsiGma+uggtwNHrvLHFDJsY8L9JvLonRQyJ7zSjpjwjnwHWviRinBntuu4MtJVgkns0IC5NDhAyzqebE68TCpFmBT6oFdiHYxT6zLrZAmhuJjwpJRQaYJMVnupA\u003d\u003d"
+        }
+      ],
+      "slicer": {
+        "js": [
+          {
+            "path": "${package.dir}/sass/example/custom.js",
+            "isWidgetManifest": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "GeoExt",
+      "format": "1",
+      "version": "3.0.0",
+      "creator": "GeoExt Contributors",
+      "summary": "GIS Package for ExtJS",
+      "detailedDescription": "GeoExt is Open Source and enables building desktop-like GIS applications through the web. It is a JavaScript framework that combines the GIS functionality of OpenLayers with the user interface savvy of the ExtJS library provided by Sencha.",
+      "type": "code",
+      "signatures": [
+        {
+          "name": "GeoExt Contributors",
+          "uuid": "862a56bd-5add-4d27-9f89-052607dcc4ff",
+          "created": "2015-10-07T07:23:23Z",
+          "algorithm": "SHA1withRSA",
+          "nonce": "lvm2Ae9PAvk\u003d",
+          "signature": "aOa198wLFvuwFhlpzeluP+yACOyuYVM/sVjZCoOoW2tARDrmFexQ3j63c+cesPfQRl6ncGf16IyqfQ7TB+5BOe4a0o1Yu0+JAPioj98h70LV8X+1ezXEGKOX/DHsK7EDJU26OlVODnE0AxdCFOqqNl9NPK2ykpXgpkSTM7kfRWmUX03j9ck7GcmihZDfOVNqWSJs3T019ZxTi0uCwnZaIzJYHq/Wfd34Ln4xvwQKyq8ZY2YkrKyx9m+Hjm4Eqi8w5Kd19p5F6Tmxi+pgm3tHly6ykskML22rK1Z6FOCHpcdwl4Wy2GkiAnRPnoFgedIQeiaHQDKYmhCqwIK9+bXWNg\u003d\u003d"
+        }
+      ],
+      "slicer": {
+        "js": [
+          {
+            "path": "${package.dir}/sass/example/custom.js",
+            "isWidgetManifest": true
+          }
+        ]
+      }
+    }
+  ]
+}

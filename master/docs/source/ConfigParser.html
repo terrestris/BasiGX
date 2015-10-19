@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-util-ConfigParser'>/**
+</span> * ConfigParser Util
+ *
+ * parses an application context in JSON Format
+ * in order to generate ol3 based layers and map with the given configuration.
+ * Example appContext response from SHOGun 1:
+
+        {
+            &quot;data&quot;: {
+                &quot;merge&quot;: {
+                    &quot;id&quot;: 3841,
+                    &quot;created_at&quot;: &quot;04.05.2015 12:05:29&quot;,
+                    &quot;updated_at&quot;: &quot;04.05.2015 12:05:29&quot;,
+                    &quot;app_user&quot;: &quot;default&quot;,
+                    &quot;name&quot;: &quot;test&quot;,
+                    &quot;language&quot;: &quot;DE&quot;,
+                    &quot;open&quot;: false,
+                    &quot;active&quot;: true,
+                    &quot;css&quot;: &quot;ext-all.css&quot;,
+                    &quot;description&quot;: null,
+                    &quot;shortdescription&quot;: null,
+                    &quot;url&quot;: &quot;client/gisclient/index-dev.html&quot;,
+                    &quot;startCenter&quot;: &quot;385067,5535472&quot;,
+                    &quot;startZoom&quot;: &quot;0&quot;,
+                    &quot;startResolution&quot;: &quot;560&quot;,
+                    &quot;startBbox&quot;: &quot;-106720,4973280,1040160,6406880&quot;,
+                    &quot;specialinstance&quot;: false,
+                    &quot;zoomslider&quot;: true,
+                    &quot;applicationheader&quot;: true,
+                    &quot;initiallegendvisibility&quot;: true,
+                    &quot;editableForCurrentUser&quot;: false,
+                    &quot;initiallyactivetoolpertab&quot;: &quot;t_pan_button&quot;,
+                    &quot;initialwestpanelstate&quot;: 300,
+                    &quot;initialstatusbarstate&quot;: &quot;full&quot;,
+                    &quot;mapLayers&quot;: [
+                        {
+                            &quot;id&quot;: 230,
+                            &quot;created_at&quot;: &quot;16.03.2015 11:55:48&quot;,
+                            &quot;updated_at&quot;: &quot;16.03.2015 11:55:48&quot;,
+                            &quot;app_user&quot;: &quot;auto-create-on-init&quot;,
+                            &quot;name&quot;: &quot;(mainz) Klimatische Wasserbilanz&quot;,
+                            &quot;type&quot;: &quot;WMS&quot;,
+                            &quot;isBaseLayer&quot;: false,
+                            &quot;alwaysInRange&quot;: null,
+                            &quot;visibility&quot;: true,
+                            &quot;displayInLayerSwitcher&quot;: true,
+                            &quot;attribution&quot;: null,
+                            &quot;gutter&quot;: null,
+                            &quot;projection&quot;: null,
+                            &quot;units&quot;: null,
+                            &quot;scales&quot;: null,
+                            &quot;resolutions&quot;: null,
+                            &quot;maxExtent&quot;: null,
+                            &quot;minExtent&quot;: null,
+                            &quot;maxResolution&quot;: null,
+                            &quot;minResolution&quot;: null,
+                            &quot;maxScale&quot;: null,
+                            &quot;minScale&quot;: null,
+                            &quot;numZoomLevels&quot;: null,
+                            &quot;displayOutsideMaxExtent&quot;: false,
+                            &quot;transitionEffect&quot;: null,
+                            &quot;metadata&quot;: [],
+                            &quot;groups&quot;: [
+                                20,
+                                19,
+                                23
+                            ],
+                            &quot;owner&quot;: null,
+                            &quot;additionalOwners&quot;: [],
+                            &quot;url&quot;: &quot;/GDAWasser/geoserver.action&quot;,
+                            &quot;layers&quot;: &quot;GDA_Wasser:WRRL_WASSERBILANZ_EINSTUFUNG&quot;,
+                            &quot;transparent&quot;: true,
+                            &quot;singleTile&quot;: false,
+                            &quot;ratio&quot;: null,
+                            &quot;format&quot;: &quot;image/png8&quot;,
+                            &quot;language&quot;: &quot;de&quot;,
+                            &quot;description&quot;: null,
+                            &quot;exportable&quot;: true,
+                            &quot;queryableInfoFormat&quot;: null,
+                            &quot;editableForCurrentUser&quot;: false,
+                            &quot;sysLayer&quot;: true,
+                            &quot;digiLayer&quot;: false,
+                            &quot;specialLayer&quot;: false,
+                            &quot;specialLayerUrlTemplate&quot;: null,
+                            &quot;specialLayerWinWidth&quot;: null,
+                            &quot;specialLayerWinHeight&quot;: null,
+                            &quot;hoverField&quot;: &quot;{{GEMEINDE_BEZ}}&quot;,
+                            &quot;dataLayerWindowTitle&quot;: null,
+                            &quot;layerStyleConfigurable&quot;: null,
+                            &quot;temporaryLayer&quot;: false,
+                            &quot;rasterLayer&quot;: false,
+                            &quot;rasterLayerFeatureInfo&quot;: null,
+                            &quot;dataLayer&quot;: false,
+                            &quot;waterCourseLevel&quot;: 0,
+                            &quot;geometryType&quot;: null,
+                            &quot;layerGroupName&quot;: null,
+                            &quot;tiled&quot;: true
+                        }
+                    ],
+                    &quot;grantedOverviewMapLayers&quot;: null,
+                    &quot;overviewMapLayers&quot;: [],
+                    &quot;grantedMapLayers&quot;: null,
+                    &quot;mapConfig&quot;: {
+                        &quot;id&quot;: 13,
+                        &quot;created_at&quot;: &quot;16.03.2015 11:55:49&quot;,
+                        &quot;updated_at&quot;: &quot;16.03.2015 11:55:49&quot;,
+                        &quot;app_user&quot;: &quot;auto-create-on-init&quot;,
+                        &quot;name&quot;: &quot;default-mapconfig&quot;,
+                        &quot;mapId&quot;: &quot;stdmap&quot;,
+                        &quot;title&quot;: &quot;Map&quot;,
+                        &quot;projection&quot;: &quot;EPSG:25832&quot;,
+                        &quot;units&quot;: &quot;m&quot;,
+                        &quot;maxResolution&quot;: 560,
+                        &quot;maxExtent&quot;: &quot;-106720,4973280,1040160,6406880&quot;,
+                        &quot;center&quot;: &quot;385067,5535472&quot;,
+                        &quot;resolutions&quot;: &quot;560, 280, 140, 70, 28, 14, 7, 2.8, 1.4&quot;,
+                        &quot;scales&quot;: null,
+                        &quot;zoom&quot;: 0
+                    },
+                    &quot;grantedMapConfig&quot;: null,
+                    &quot;modules&quot;: [
+                        {
+                            &quot;id&quot;: 1,
+                            &quot;created_at&quot;: &quot;16.03.2015 11:55:49&quot;,
+                            &quot;updated_at&quot;: &quot;16.03.2015 11:55:49&quot;,
+                            &quot;app_user&quot;: &quot;auto-create-on-init&quot;,
+                            &quot;module_name&quot;: &quot;layertreepanel&quot;,
+                            &quot;module_fullname&quot;: &quot;Standard Layer Tree&quot;,
+                            &quot;region&quot;: &quot;west&quot;,
+                            &quot;isDefault&quot;: true,
+                            &quot;type&quot;: &quot;internet&quot;
+                        },
+                        {
+                            &quot;id&quot;: 3,
+                            &quot;created_at&quot;: &quot;16.03.2015 11:55:49&quot;,
+                            &quot;updated_at&quot;: &quot;16.03.2015 11:55:49&quot;,
+                            &quot;app_user&quot;: &quot;auto-create-on-init&quot;,
+                            &quot;module_name&quot;: &quot;overviewmappanel&quot;,
+                            &quot;module_fullname&quot;: &quot;Standard Overview Map&quot;,
+                            &quot;region&quot;: &quot;west&quot;,
+                            &quot;isDefault&quot;: true,
+                            &quot;type&quot;: &quot;internet&quot;
+                        },
+                        {
+                            &quot;id&quot;: 2,
+                            &quot;created_at&quot;: &quot;16.03.2015 11:55:49&quot;,
+                            &quot;updated_at&quot;: &quot;16.03.2015 11:55:49&quot;,
+                            &quot;app_user&quot;: &quot;auto-create-on-init&quot;,
+                            &quot;module_name&quot;: &quot;layerlistpanel&quot;,
+                            &quot;module_fullname&quot;: &quot;Standard Layer List&quot;,
+                            &quot;region&quot;: &quot;west&quot;,
+                            &quot;isDefault&quot;: true,
+                            &quot;type&quot;: &quot;internet&quot;
+                        }
+                    ],
+                    &quot;grantedModules&quot;: null,
+                    &quot;groups&quot;: [],
+                    &quot;grantedGroups&quot;: null,
+                    &quot;orderedMapTools&quot;: [
+                        {
+                            &quot;id&quot;: 3847,
+                            &quot;created_at&quot;: &quot;04.05.2015 12:05:29&quot;,
+                            &quot;updated_at&quot;: &quot;04.05.2015 12:05:29&quot;,
+                            &quot;app_user&quot;: &quot;default&quot;,
+                            &quot;module&quot;: {
+                                &quot;id&quot;: 4,
+                                &quot;created_at&quot;: &quot;16.03.2015 11:55:49&quot;,
+                                &quot;updated_at&quot;: &quot;16.03.2015 11:55:49&quot;,
+                                &quot;app_user&quot;: &quot;auto-create-on-init&quot;,
+                                &quot;module_name&quot;: &quot;navigation_select&quot;,
+                                &quot;module_fullname&quot;: &quot;Werkzeuge zum Navigieren&quot;,
+                                &quot;region&quot;: &quot;maptoolbar&quot;,
+                                &quot;isDefault&quot;: false,
+                                &quot;type&quot;: &quot;intranet&quot;
+                            },
+                            &quot;tbIndex&quot;: 0
+                        },
+                        {
+                            &quot;id&quot;: 3848,
+                            &quot;created_at&quot;: &quot;04.05.2015 12:05:29&quot;,
+                            &quot;updated_at&quot;: &quot;04.05.2015 12:05:29&quot;,
+                            &quot;app_user&quot;: &quot;default&quot;,
+                            &quot;module&quot;: {
+                                &quot;id&quot;: 5,
+                                &quot;created_at&quot;: &quot;16.03.2015 11:55:50&quot;,
+                                &quot;updated_at&quot;: &quot;16.03.2015 11:55:50&quot;,
+                                &quot;app_user&quot;: &quot;auto-create-on-init&quot;,
+                                &quot;module_name&quot;: &quot;query_evaluate&quot;,
+                                &quot;module_fullname&quot;: &quot;Werkzeuge zum Abfragen&quot;,
+                                &quot;region&quot;: &quot;maptoolbar&quot;,
+                                &quot;isDefault&quot;: false,
+                                &quot;type&quot;: &quot;intranet&quot;
+                            },
+                            &quot;tbIndex&quot;: 1
+                        },
+                        {
+                            &quot;id&quot;: 3849,
+                            &quot;created_at&quot;: &quot;04.05.2015 12:05:29&quot;,
+                            &quot;updated_at&quot;: &quot;04.05.2015 12:05:29&quot;,
+                            &quot;app_user&quot;: &quot;default&quot;,
+                            &quot;module&quot;: {
+                                &quot;id&quot;: 6,
+                                &quot;created_at&quot;: &quot;16.03.2015 11:55:50&quot;,
+                                &quot;updated_at&quot;: &quot;16.03.2015 11:55:50&quot;,
+                                &quot;app_user&quot;: &quot;auto-create-on-init&quot;,
+                                &quot;module_name&quot;: &quot;print_load_save&quot;,
+                                &quot;module_fullname&quot;: &quot;Werkzeuge zum Drucken&quot;,
+                                &quot;region&quot;: &quot;maptoolbar&quot;,
+                                &quot;isDefault&quot;: false,
+                                &quot;type&quot;: &quot;intranet&quot;
+                            },
+                            &quot;tbIndex&quot;: 2
+                        },
+                        {
+                            &quot;id&quot;: 3850,
+                            &quot;created_at&quot;: &quot;04.05.2015 12:05:29&quot;,
+                            &quot;updated_at&quot;: &quot;04.05.2015 12:05:29&quot;,
+                            &quot;app_user&quot;: &quot;default&quot;,
+                            &quot;module&quot;: {
+                                &quot;id&quot;: 7,
+                                &quot;created_at&quot;: &quot;16.03.2015 11:55:50&quot;,
+                                &quot;updated_at&quot;: &quot;16.03.2015 11:55:50&quot;,
+                                &quot;app_user&quot;: &quot;auto-create-on-init&quot;,
+                                &quot;module_name&quot;: &quot;annotate&quot;,
+                                &quot;module_fullname&quot;: &quot;Werkzeuge zum Zeichnen&quot;,
+                                &quot;region&quot;: &quot;maptoolbar&quot;,
+                                &quot;isDefault&quot;: false,
+                                &quot;type&quot;: &quot;intranet&quot;
+                            },
+                            &quot;tbIndex&quot;: 3
+                        },
+                        {
+                            &quot;id&quot;: 3851,
+                            &quot;created_at&quot;: &quot;04.05.2015 12:05:29&quot;,
+                            &quot;updated_at&quot;: &quot;04.05.2015 12:05:29&quot;,
+                            &quot;app_user&quot;: &quot;default&quot;,
+                            &quot;module&quot;: {
+                                &quot;id&quot;: 9,
+                                &quot;created_at&quot;: &quot;16.03.2015 11:55:50&quot;,
+                                &quot;updated_at&quot;: &quot;16.03.2015 11:55:50&quot;,
+                                &quot;app_user&quot;: &quot;auto-create-on-init&quot;,
+                                &quot;module_name&quot;: &quot;special_tools&quot;,
+                                &quot;module_fullname&quot;: &quot;verschiedene Werkzeuge&quot;,
+                                &quot;region&quot;: &quot;maptoolbar&quot;,
+                                &quot;isDefault&quot;: false,
+                                &quot;type&quot;: &quot;intranet&quot;
+                            },
+                            &quot;tbIndex&quot;: 4
+                        }
+                    ],
+                    &quot;publicSearchLayer&quot;: null,
+                    &quot;publicResponsiveSearchLayer&quot;: 3,
+                    &quot;layerTreeConfig&quot;: &quot;{\&quot;id\&quot;:2537,\&quot;name\&quot;:\&quot;Root\&quot;,\&quot;...&quot;,
+                    &quot;annotationGeometries&quot;: null,
+                    &quot;owner&quot;: 1254,
+                    &quot;ownerName&quot;: &quot;Till Adams&quot;,
+                    &quot;additionalOwners&quot;: [],
+                    &quot;additionalOwnerIds&quot;: null,
+                    &quot;wpsActions&quot;: [],
+                    &quot;targetGroup&quot;: &quot;gisclient&quot;,
+                    &quot;maxResolution&quot;: 560,
+                    &quot;minResolution&quot;: 0.14
+                },
+                &quot;loggedInDspfUserId&quot;: &quot;6815&quot;,
+                &quot;loggedInUser&quot;: &quot;Herr Till Adams&quot;,
+                &quot;preferences&quot;: {}
+            },
+            &quot;total&quot;: 1,
+            &quot;success&quot;: true
+        }
+
+     * Example of a simple broken down appcontext:
+
+         {
+            data: {
+                merge: {
+                    startCenter: [983487, 6998170],
+                    startZoom: 13,
+                    mapLayers: [
+                        {
+                            name: &quot;Hintergrundkarten&quot;,
+                            type: &quot;Folder&quot;,
+                            layers: [
+                                {
+                                    name: &quot;OSM WMS Grau&quot;,
+                                    type: &quot;TileWMS&quot;,
+                                    treeColor: &quot;rgba(41, 213, 4, 0.26)&quot;,
+                                    url: &quot;http://ows.terrestris.de/osm-gray/service?&quot;,
+                                    layers: &quot;OSM-WMS&quot;,
+                                    legendUrl: &quot;http://ows.terrestris.de/osm-gray/service?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetMap&amp;FORMAT=image%2Fpng&amp;TRANSPARENT=true&amp;LAYERS=OSM-WMS&amp;TILED=true&amp;WIDTH=256&amp;HEIGHT=256&amp;CRS=EPSG%3A3857&amp;STYLES=&amp;BBOX=978393.9620502554%2C7000408.798469583%2C983285.9318605067%2C7005300.768279834&quot;,
+                                    topic: false
+                                },
+                                {
+                                    name: &quot;OSM WMS Farbig&quot;,
+                                    type: &quot;TileWMS&quot;,
+                                    treeColor: &quot;rgba(41, 213, 4, 0.26)&quot;,
+                                    url: &quot;http://ows.terrestris.de/osm/service?&quot;,
+                                    layers: &quot;OSM-WMS&quot;,
+                                    legendUrl: &quot;http://ows.terrestris.de/osm/service?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetMap&amp;FORMAT=image%2Fpng&amp;TRANSPARENT=true&amp;LAYERS=OSM-WMS&amp;TILED=true&amp;WIDTH=256&amp;HEIGHT=256&amp;CRS=EPSG%3A3857&amp;STYLES=&amp;BBOX=978393.9620502554%2C7000408.798469583%2C983285.9318605067%2C7005300.768279834&quot;,
+                                    topic: false,
+                                    visibility: false
+                                },
+                                {
+                                    name: 'Subfolder',
+                                    type: &quot;Folder&quot;,
+                                    layers: [
+                                        {
+                                            name: &quot;OSM WMS Farbig&quot;,
+                                            type: &quot;TileWMS&quot;,
+                                            treeColor: &quot;rgba(41, 213, 4, 0.26)&quot;,
+                                            url: &quot;http://ows.terrestris.de/osm/service?&quot;,
+                                            layers: &quot;OSM-WMS&quot;,
+                                            legendUrl: &quot;http://ows.terrestris.de/osm/service?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetMap&amp;FORMAT=image%2Fpng&amp;TRANSPARENT=true&amp;LAYERS=OSM-WMS&amp;TILED=true&amp;WIDTH=256&amp;HEIGHT=256&amp;CRS=EPSG%3A3857&amp;STYLES=&amp;BBOX=978393.9620502554%2C7000408.798469583%2C983285.9318605067%2C7005300.768279834&quot;,
+                                            topic: false,
+                                            visibility: false
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            name: 'OSM POIs',
+                            type: &quot;Folder&quot;,
+                            layers: [
+                                {
+                                    name: &quot;Tankstellen&quot;,
+                                    type: &quot;WMS&quot;,
+                                    treeColor: &quot;rgba(161, 177, 228, 0.53)&quot;,
+                                    url: &quot;http://ows.terrestris.de/geoserver/osm/wms?&quot;,
+                                    legendHeight: 40,
+                                    legendUrl: &quot;http://ows.terrestris.de/geoserver/osm/wms?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;FORMAT=image%2Fpng&amp;TRANSPARENT=true&amp;LAYER=osm%3Aosm-fuel&amp;HEIGHT=40&amp;WIDTH=40&quot;,
+                                    layers: &quot;osm:osm-fuel&quot;,
+                                    topic: true,
+                                    transparent: true,
+                                    crossOrigin: &quot;Anonymous&quot;
+                                },
+                                {
+                                    name: &quot;Bushaltestellen&quot;,
+                                    type: &quot;WMS&quot;,
+                                    treeColor: &quot;rgba(161, 177, 228, 0.53)&quot;,
+                                    url: &quot;http://ows.terrestris.de/osm-haltestellen?&quot;,
+                                    legendHeight: 30,
+                                    legendUrl: &quot;http://ows.terrestris.de/osm-haltestellen?SERVICE=WMS&amp;VERSION=1.1.0&amp;REQUEST=GetLegendGraphic&amp;FORMAT=image%2Fpng&amp;TRANSPARENT=true&amp;LAYER=OSM-Bushaltestellen&amp;HEIGHT=40&amp;WIDTH=40&quot;,
+                                    layers: &quot;OSM-Bushaltestellen&quot;,
+                                    topic: true,
+                                    transparent: true,
+                                    crossOrigin: &quot;Anonymous&quot;
+                                }
+                            ]
+                        }
+                    ],
+                    mapConfig: {
+                        projection: &quot;EPSG:3857&quot;,
+                        resolutions: [156543.03390625, 78271.516953125, 39135.7584765625, 19567.87923828125, 9783.939619140625, 4891.9698095703125, 2445.9849047851562, 1222.9924523925781, 611.4962261962891, 305.74811309814453, 152.87405654907226, 76.43702827453613, 38.218514137268066, 19.109257068634033, 9.554628534317017, 4.777314267158508, 2.388657133579254, 1.194328566789627, 0.5971642833948135],
+                        zoom: 0
+                    }
+                }
+            }
+        }
+
+ */
+Ext.define('BasiGX.util.ConfigParser', {
+
+<span id='BasiGX-util-ConfigParser-property-autocreateLegends'>    autocreateLegends: false,
+</span>
+<span id='BasiGX-util-ConfigParser-property-activeRouting'>    activeRouting: false,
+</span>
+    statics: {
+
+<span id='BasiGX-util-ConfigParser-static-property-layerArray'>        /**
+</span>         * the layer array which will hold the the maps layers and grouplayers
+         */
+        layerArray: [],
+
+<span id='BasiGX-util-ConfigParser-static-method-setupMap'>        /**
+</span>         * Method creates an ol3 map and its layers based on the given context
+         *
+         * @param {Object} context - the context object
+         * @return {ol.Map} map - An ol3-map or null if an invalid context was
+         *     given
+         */
+        setupMap: function(context) {
+            var me = this,
+                config;
+
+            if (!context || !context.data || !context.data.merge ||
+                !context.data.merge.mapConfig) {
+                    Ext.log.warn('Invalid context given to configParser!');
+                    return null;
+            }
+
+            config = context.data.merge;
+
+            // TODO Refactor
+            if(window.location.hash.indexOf('center') &gt; 0){
+                var centerString = location.hash.split('center/')[1].
+                split('|')[0];
+                config.startCenter = centerString;
+            }
+
+            me.map = new ol.Map({
+                controls: [new ol.control.ScaleLine()], // TODO add attribution
+                view: new ol.View({
+                  center: this.convertStringToNumericArray(
+                      'int', config.startCenter),
+                  zoom: config.startZoom || 2,
+                  maxResolution: config.maxResolution,
+                  minResolution: config.minResolution,
+                  extent: me.convertStringToNumericArray(
+                      'float', config.startBbox),
+                  projection: config.mapConfig.projection || 'EPSG:3857',
+                  units: 'm',
+                  resolutions: me.convertStringToNumericArray(
+                      'float', config.mapConfig.resolutions)
+                }),
+                logo: false
+            });
+            // create the layers
+            me.getLayersArray(context);
+            // add the layers
+            var layerGroup = new ol.layer.Group({layers: me.layerArray.reverse()});
+            me.map.setLayerGroup(layerGroup);
+
+            return me.map;
+        },
+
+<span id='BasiGX-util-ConfigParser-static-method-createLayer'>        /**
+</span>         * Creates an ol3 layer based on a config object
+         *
+         * @param {Object} layer - the layer object
+         * @returns {ol.Layer} - An ol3 layer object
+         */
+        createLayer: function(layer) {
+            var me = this;
+            var layerType = &quot;Image&quot;;
+            var sourceType = &quot;ImageWMS&quot;;
+
+            if (layer.type === &quot;TileWMS&quot; || layer.type === &quot;WMS&quot;) {
+                layerType = &quot;Tile&quot;;
+                sourceType = &quot;TileWMS&quot;;
+            } else if (layer.type === &quot;XYZ&quot;) {
+                layerType = &quot;Tile&quot;;
+                sourceType = &quot;XYZ&quot;;
+            } else if (layer.type === &quot;WFSCluster&quot; || layer.type === &quot;WFS&quot;) {
+                layerType = &quot;Vector&quot;;
+                sourceType = &quot;Vector&quot;;
+            } else if (layer.type === &quot;WMTS&quot;) {
+                layerType = &quot;WMTS&quot;;
+                sourceType = &quot;WMTS&quot;;
+            }
+
+            var source = me.getSourceForType(layer, sourceType);
+            return me.getLayerForType(layer, layerType, source);
+        },
+
+<span id='BasiGX-util-ConfigParser-static-method-getSourceForType'>        /**
+</span>         *
+         */
+        getSourceForType: function(config, sourceType) {
+
+            var me = this;
+            var map = me.map;
+            var projection = map.getView().getProjection();
+            var projCode = map.getView().getProjection().getCode();
+            var cfg;
+
+            var attributions = config.attribution ?
+                [new ol.Attribution({html: config.attribution})] : undefined;
+
+            if (sourceType === &quot;Vector&quot;) {
+
+                // the wfscluster type expects a geoserver view similar
+                // as descibed on https://wiki.intranet.terrestris.de/doku.php?id=clustering
+                // There is currently now way in ol3 to request features on every
+                // extent change, so we need to handle it ourselves with map listeners,
+                // which happens in the cluster plugin
+                if (config.type === &quot;WFSCluster&quot;) {
+                    cfg = {
+                        attributions: attributions
+                    };
+                } else {
+                    cfg = {
+                        attributions: attributions,
+                        loader: function(extent/*, resolution, projection */) {
+                            var vectorSource = this;
+                            var extraParams = {};
+
+                            var finalParams = Ext.apply({
+                                service: 'WFS',
+                                version: '1.1.0',
+                                request: 'GetFeature',
+                                outputFormat: 'application/json',
+                                typeName: config.layers,
+                                srsname: projCode,
+                                bbox: extent.join(',') + ',' + projCode
+                            }, extraParams || {});
+
+                            Ext.Ajax.request({
+                                url: config.url,
+                                method: 'GET',
+                                params: finalParams,
+                                success: function(response) {
+                                    var format = new ol.format.GeoJSON();
+                                    var features = format.readFeatures(response.responseText);
+                                    vectorSource.addFeatures(features);
+                                },
+                                failure: function(response) {
+                                    Ext.log.info('server-side failure with status code ' + response.status);
+                                }
+                            });
+
+                        },
+                        strategy: ol.loadingstrategy.tile(ol.tilegrid.createXYZ({
+                            maxZoom: 28
+                        }))
+                    };
+                }
+            } else if (sourceType === &quot;TileWMS&quot; ||
+                       sourceType === &quot;WMS&quot; ||
+                       sourceType === &quot;ImageWMS&quot; ||
+                       sourceType === &quot;XYZ&quot;) {
+
+                cfg = {
+                    url: config.url,
+//                    crossOrigin: 'Anonymous',
+                    attributions: attributions,
+                    params: {
+                        LAYERS: config.layers,
+                        TRANSPARENT: config.transparent || false,
+                        VERSION: config.version || '1.1.1'
+                    }
+                };
+
+                if ((config.type === &quot;TileWMS&quot; ||
+                     config.type === &quot;WMS&quot; ||
+                     config.type === &quot;XYZ&quot;) &amp;&amp; config.tiled) {
+                        cfg.params.TILED = true;
+                }
+
+            } else if (sourceType === &quot;WMTS&quot;) {
+                var tileGrid;
+                // we simply assume it is a worldwide layer
+                var origin = ol.extent.getTopLeft(projection.getExtent());
+                var projectionExtent = projection.getExtent();
+                var size = ol.extent.getWidth(projectionExtent) / 256;
+                var resolutions = new Array(14);
+                var matrixIds = new Array(14);
+                for (var z = 0; z &lt; 14; ++z) {
+                    // generate resolutions and matrixIds arrays for this
+                    // WMTS
+                    resolutions[z] = size / Math.pow(2, z);
+                    matrixIds[z] = z;
+                }
+                tileGrid = new ol.tilegrid.WMTS({
+                    origin: origin,
+                    resolutions: resolutions,
+                    matrixIds: matrixIds
+                });
+
+                cfg = {
+                    url: config.url,
+                    layer: config.layers,
+                    attributions: attributions,
+                    matrixSet: config.tilematrixset,
+                    format: config.format,
+                    projection: projection,
+                    tileGrid: tileGrid,
+                    style: config.style
+                };
+            }
+
+            return new ol.source[sourceType](cfg);
+
+        },
+
+<span id='BasiGX-util-ConfigParser-static-method-getLayerForType'>        /**
+</span>         *
+         */
+        getLayerForType: function(layer, layerType, source) {
+
+            var olLayerConfig = {
+                name: layer.name || 'No Name given',
+                legendUrl: layer.legendUrl || (this.autocreateLegends ?
+                    this.generateLegendUrl(layer) : null),
+                legendHeight: layer.legendHeight || null,
+                minResolution: layer.minResolution || undefined,
+                maxResolution: layer.maxResolution || undefined,
+                opacity: layer.opacity || 1,
+                visible: (layer.visibility === false) ? false : true,
+                treeColor: layer.treeColor,
+                routingId: layer.id || null,
+                olStyle: layer.olStyle || null,
+                hoverable: layer.hoverable || !!layer.hoverField,
+                hoverField: layer.hoverField,
+                topic: layer.topic || layer.hoverField || null,
+                source: source,
+                type: layer.type,
+                featureType: layer.layers
+            };
+
+            // TODO Refactor ... Do we need an icon or a color...
+            if (layer.type === &quot;WFSCluster&quot;) {
+                if(!layer.clusterColorString) {
+                    var r = Math.round(Math.random()*255, 10).toString();
+                    var g = Math.round(Math.random()*255, 10).toString();
+                    var b = Math.round(Math.random()*255, 10).toString();
+                    olLayerConfig.clusterColorString =
+                        'rgba('+r+','+g+','+b+',0.5)';
+                } else {
+                    olLayerConfig.clusterColorString = layer.clusterColorString;
+                }
+                olLayerConfig.icon = layer.icon;
+            }
+
+            // apply custom params of layer from appContext
+            if(layer.customParams) {
+                Ext.applyIf(olLayerConfig, layer.customParams);
+            }
+
+            return new ol.layer[layerType](olLayerConfig);
+        },
+
+<span id='BasiGX-util-ConfigParser-static-method-createFolder'>        /**
+</span>         * Creates an ol3 layer group
+         *
+         * @param {Object} node - the node which has been identified as group
+         * @returns {ol.layer.Group} - An ol3-layer group
+         */
+        createFolder: function(node) {
+            return new ol.layer.Group({
+                name: node.name,
+                visible: node.checked ? node.checked : false
+            });
+        },
+
+<span id='BasiGX-util-ConfigParser-static-method-getLayersArray'>        /**
+</span>         * This method gets called internally by the setupMap method, so there
+         * should be no need to call this directly
+         *
+         * @param {Object} context - The context holding the layers config
+         */
+        getLayersArray: function(context) {
+            var me = this,
+                layerConfig,
+                layerTreeConfig;
+
+            if (!context || !context.data || !context.data.merge ||
+                !context.data.merge.mapLayers) {
+                    Ext.log.warn('Invalid context given to configParser!');
+                    return;
+            }
+
+            layerConfig = context.data.merge.mapLayers;
+            layerTreeConfig = Ext.decode(context.data.merge.layerTreeConfig);
+
+            if (!Ext.isEmpty(layerTreeConfig)) {
+                // we have a SHOGun context and need to iterate through
+                // the treeconfig to get access to folders and special
+                // layer information
+               me.createLayersArrayFromShogunContext(layerTreeConfig, layerConfig);
+            } else {
+                me.createLayersArray(layerConfig);
+            }
+        },
+
+<span id='BasiGX-util-ConfigParser-static-method-createLayersArray'>        /**
+</span>         * Method sets up an layer and grouplayer collection for an ol3 map
+         *
+         * @param {Object} layerConfig - the layerconfig object
+         * @param {ol.layer.Group} parent - the parent to which we may append
+         */
+        createLayersArray: function(layerConfig, parent) {
+            var me = this;
+
+            Ext.each(layerConfig, function(node) {
+
+                if (node.type === &quot;Folder&quot;) {
+                    var folder = me.createFolder(node);
+
+                    if (parent) {
+                        parent.getLayers().push(folder);
+                    } else {
+                        me.layerArray.push(folder);
+                    }
+
+                    // create child nodes if necessary
+                    if (node.layers &amp;&amp; node.layers.length &gt; 0) {
+                        me.createLayersArray(node.layers, folder);
+                    }
+
+                } else {
+                    if (parent) {
+                        parent.getLayers().push(me.createLayer(node));
+                    } else {
+                        me.layerArray.push(me.createLayer(node));
+                    }
+                }
+            }, me);
+        },
+
+<span id='BasiGX-util-ConfigParser-static-method-createLayersArrayFromShogunContext'>        /**
+</span>         * Method sets up an layer and grouplayer collection for an ol3 map
+         * based on an SHOGun application Context
+         *
+         * @param {Object} layerTreeConfig - the layerTreeConfig object
+         * @param {Object} layerConfig - the layerconfig object
+         * @param {ol.layer.Group} parent - the parent to which we may append
+         */
+        createLayersArrayFromShogunContext: function(layerTreeConfig, layerConfig, parent) {
+            var me = this;
+
+            Ext.each(layerTreeConfig, function(node) {
+
+                //handling the rootnode first
+                if (node.parentId === null &amp;&amp; node.children) {
+                    me.createLayersArrayFromShogunContext(node.children, layerConfig);
+                } else if (node.leaf === false) {
+                    // handling folders
+                    var folder = me.createFolder(node);
+
+                    if (parent) {
+                        parent.getLayers().push(folder);
+                    } else {
+                        me.layerArray.push(folder);
+                    }
+
+                    // create child nodes if necessary
+                    if (node.children &amp;&amp; node.children.length &gt; 0) {
+                        me.createLayersArrayFromShogunContext(
+                            node.children.reverse(), layerConfig, folder);
+                    }
+
+                } else {
+
+                    // handling layers
+                     // get node from config by its id
+                    var mergedNode = me.getNodeFromConfigById(node.mapLayerId, layerConfig);
+                    // adding properties from treeConfig to node from layerconfig
+                    mergedNode.visibility = node.checked;
+                    mergedNode.expanded = node.expanded;
+
+                    if (parent) {
+                        parent.getLayers().push(me.createLayer(mergedNode));
+                    } else {
+                        me.layerArray.push(me.createLayer(mergedNode));
+                    }
+                }
+            }, me);
+        },
+
+<span id='BasiGX-util-ConfigParser-static-method-getNodeFromConfigById'>        /**
+</span>         * Method retrieves a layerconfig object by the given id
+         *
+         * @param {Integer} mapLayerId - the mapLayerId
+         * @returns {Object} match - the layer object that has been found
+         */
+        getNodeFromConfigById: function(mapLayerId, layerConfig) {
+            var match;
+            Ext.each(layerConfig, function(layer) {
+                if (layer.id === mapLayerId) {
+                    match = layer;
+                    return false;
+                }
+            });
+            return match;
+        },
+
+<span id='BasiGX-util-ConfigParser-static-method-convertStringToNumericArray'>        /**
+</span>         * Method turns a comma separated string into an array
+         * containing integers or floats
+         *
+         * @param {String} type - the type to convert to
+         * @param {String} string - the string to convert
+         * @returns {Array} arr - the parsed array
+         */
+        convertStringToNumericArray: function(type, string) {
+            if (Ext.isEmpty(string) || Ext.isEmpty(type) ||
+                Ext.isArray(string)) {
+                return string;
+            }
+            var arr = [];
+            Ext.each(string.split(','), function(part) {
+                if (type === 'int') {
+                    arr.push(parseInt(part, 10));
+                } else if (type === 'float') {
+                    arr.push(parseFloat(part, 10));
+                }
+            });
+            return arr;
+        },
+
+<span id='BasiGX-util-ConfigParser-static-method-generateLegendUrl'>        /**
+</span>         * Method creates a hopefully valid getlegendgraphic request for the
+         * given layer
+         */
+        generateLegendUrl: function(layer) {
+            var url = layer.url;
+            url += &quot;?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;&quot;;
+            url += &quot;FORMAT=image%2Fpng&amp;TRANSPARENT=TRUE&amp;&quot;;//HEIGHT=128&amp;WIDTH=40&amp;&quot;;
+            url += &quot;LAYER=&quot; + layer.layers;
+
+            return url;
+        }
+    }
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-panel-MapContainer'>/**
+</span> * MapContainer Panel
+ *
+ * Represents a main viewport which holds the map and other map related
+ * components. Using this container leads to a map with integrated or
+ * overlapping components, instead of arranging them in a border layout.
+ *
+ */
+Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
+    extend: &quot;Ext.panel.Panel&quot;,
+    xtype: &quot;basigx-panel-mapcontainer&quot;,
+
+    requires: [
+        &quot;Ext.dom.Query&quot;,
+        &quot;GeoExt.data.store.LayersTree&quot;,
+        &quot;GeoExt.component.OverviewMap&quot;,
+
+        &quot;BasiGX.util.Layer&quot;,
+        &quot;BasiGX.view.component.Map&quot;,
+        &quot;BasiGX.view.panel.LegendTree&quot;,
+        &quot;BasiGX.view.panel.Menu&quot;,
+
+        &quot;BasiGX.view.button.ZoomIn&quot;,
+        &quot;BasiGX.view.button.ZoomOut&quot;,
+        &quot;BasiGX.view.button.ZoomToExtent&quot;,
+        &quot;BasiGX.view.button.ToggleLegend&quot;
+    ],
+
+<span id='BasiGX-view-panel-MapContainer-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            titleLegendPanel: 'Legende'
+        }
+    },
+
+<span id='BasiGX-view-panel-MapContainer-property-layout'>    /**
+</span>     *
+     */
+    layout: 'absolute',
+
+<span id='BasiGX-view-panel-MapContainer-property-header'>    /**
+</span>     *
+     */
+    header: false,
+
+<span id='BasiGX-view-panel-MapContainer-property-mapPanel'>    /**
+</span>     * The mapPanel containing the map.
+     */
+    mapPanel: null,
+
+<span id='BasiGX-view-panel-MapContainer-property-config'>    /**
+</span>     * Config
+     */
+    config: {
+<span id='BasiGX-view-panel-MapContainer-cfg-mapComponentConfig'>        mapComponentConfig: {
+</span>            xtype: 'basigx-component-map',
+            anchor: '100% 100%'
+        },
+<span id='BasiGX-view-panel-MapContainer-cfg-menuConfig'>        menuConfig: {
+</span>            xtype: 'basigx-panel-menu',
+            width: 300,
+            items: []
+        },
+<span id='BasiGX-view-panel-MapContainer-cfg-toolbarConfig'>        toolbarConfig: {
+</span>            xtype: 'toolbar',
+            vertical: true,
+            width: 50,
+            cls: 'basigx-map-tools',
+            x: 0,
+            y: 0,
+            defaults: {
+                scale: 'large'
+            }
+        },
+<span id='BasiGX-view-panel-MapContainer-cfg-overviewMapConfig'>        overviewMapConfig: {
+</span>            xtype: 'gx_overviewmap',
+            magnification: 10,
+            width: 400,
+            height: 150,
+            padding: 5,
+            cls: 'basigx-overview-map',
+            hidden: true,
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.MapQuest({layer: 'sat'})
+                })
+            ]
+        },
+<span id='BasiGX-view-panel-MapContainer-cfg-overviewMapToggleButtonConfig'>        overviewMapToggleButtonConfig: {
+</span>            xtype: 'button',
+            scale: 'large',
+            helpKey: 'basigx-overview-map-button',
+            cls: 'basigx-overview-map-button',
+            glyph: 'xf0ac@FontAwesome',
+            enableToggle: true
+        },
+<span id='BasiGX-view-panel-MapContainer-cfg-legendPanelConfig'>        legendPanelConfig: {
+</span>            xtype: 'basigx-panel-legendtree',
+            width: 250,
+            height: 300,
+            layout: 'fit',
+            collapsible: true,
+            collapsed: true,
+            hideCollapseTool: true,
+            collapseDirection: 'bottom',
+            titleCollapse: true,
+            titleAlign: 'center',
+            rootVisible: false,
+            bind: {
+                title: '{titleLegendPanel}'
+            }
+        },
+<span id='BasiGX-view-panel-MapContainer-cfg-additionalItems'>        /* use this property for additional items that can not be added
+</span>         * to &quot;items&quot; immediately as they depend on the map or
+         * other components that are built in the MapContainer and should be
+         * instanciated first
+         */
+        additionalItems: []
+    },
+
+<span id='BasiGX-view-panel-MapContainer-method-initComponent'>    /**
+</span>     * Init
+     */
+    initComponent: function(){
+        var me = this;
+
+        // call parent (we can use this.add() after this call)
+        me.callParent();
+
+        /* add the map component and set it as member
+         * the map should be built first as some other components
+         * depend on it
+         */
+        me.addMapComponent();
+
+        // add the menu. TODO: make optional based on config and pass menuItems
+        me.addMenu();
+
+        // add the toolbar. TODO: make optional based on config
+        me.addToolbar();
+
+        // add the overview map. TODO make optional based on config
+        me.addOverviewMap();
+
+        // add the overview map toggle button. TODO make optional
+        me.addOverviewMapToggleButton();
+
+        /* add additional items (that possibly depend on the map or other
+         * components that were built in the lines before)
+         */
+        me.addAdditionalItems();
+
+        // TODO make optional based on config
+        me.on('afterrender', me.addLegendPanel, me, {single: true});
+    },
+
+<span id='BasiGX-view-panel-MapContainer-method-addMapComponent'>    /**
+</span>     *
+     */
+    addMapComponent: function() {
+        var me = this;
+
+        var mapComponent = me.getMapComponentConfig();
+
+        me.add(mapComponent);
+
+        // query the mapPanel we just built to set it as a member
+        me.mapPanel = me.down(mapComponent.xtype);
+    },
+
+<span id='BasiGX-view-panel-MapContainer-method-addMenu'>    /**
+</span>     *
+     */
+    addMenu: function() {
+        var me = this;
+
+        var menu = me.getMenuConfig();
+
+        me.add(menu);
+    },
+
+<span id='BasiGX-view-panel-MapContainer-method-addToolbar'>    /**
+</span>     *
+     */
+    addToolbar: function() {
+        var me = this;
+
+        var toolbar = me.getToolbarConfig();
+
+        toolbar.items = me.buildToolbarItems();
+
+        me.add(toolbar);
+    },
+
+<span id='BasiGX-view-panel-MapContainer-method-addOverviewMap'>    /**
+</span>     *
+     */
+    addOverviewMap: function() {
+        var me = this;
+
+        var overviewMap = me.getOverviewMapConfig();
+
+        // set the overviewmap parent map
+        if(!overviewMap.parentMap &amp;&amp; me.mapPanel) {
+            overviewMap.parentMap = me.mapPanel.getMap();
+        }
+
+        me.add(overviewMap);
+    },
+
+<span id='BasiGX-view-panel-MapContainer-method-addOverviewMapToggleButton'>    /**
+</span>     *
+     */
+    addOverviewMapToggleButton: function() {
+        var me = this;
+
+        var overviewMapToggleButton = me.getOverviewMapToggleButtonConfig();
+
+        // set the toggleHandler if not configured
+        if(!overviewMapToggleButton.toggleHander &amp;&amp; me.toggleOverviewMap) {
+            overviewMapToggleButton.toggleHandler = me.toggleOverviewMap;
+        }
+
+        // set the scope (e.g. for handler or toggleHandler)
+        if(!overviewMapToggleButton.scope) {
+            overviewMapToggleButton.scope = me;
+        }
+
+        me.add(overviewMapToggleButton);
+    },
+
+<span id='BasiGX-view-panel-MapContainer-method-addAdditionalItems'>    /**
+</span>     *
+     */
+    addAdditionalItems: function() {
+        var me = this;
+
+        var additionalItems = me.getAdditionalItems();
+
+        me.add(additionalItems);
+    },
+
+<span id='BasiGX-view-panel-MapContainer-method-addLegendPanel'>    /**
+</span>     *
+     */
+    addLegendPanel: function() {
+        var me = this;
+
+        var legendTreeConfig = me.getLegendPanelConfig();
+
+        // set the store if not configured
+        if(!legendTreeConfig.store &amp;&amp; me.mapPanel) {
+            var treeStore = Ext.create('GeoExt.data.store.LayersTree', {
+                layerGroup: me.mapPanel.getMap().getLayerGroup(),
+                showLayerGroupNode: false,
+                filters: [
+                    // filter out vector layers
+                    function(rec) {
+                        var layer = rec.data;
+                        var util = BasiGX.util.Layer;
+                        var showKey = util.KEY_DISPLAY_IN_LAYERSWITCHER;
+                        if (layer.get(showKey) === false) {
+                            return false;
+                        }
+                        return true;
+                    }
+                ]
+            });
+
+            // set the store
+            legendTreeConfig.store = treeStore;
+        }
+
+        // add the legend panel
+        me.add(legendTreeConfig);
+    },
+
+<span id='BasiGX-view-panel-MapContainer-method-buildToolbarItems'>    /**
+</span>     *
+     */
+    buildToolbarItems: function() {
+        var toolbarItems = [{
+                xtype: 'basigx-button-zoomin'
+            }, {
+                xtype: 'basigx-button-zoomout'
+            }, {
+                xtype: 'basigx-button-zoomtoextent'
+            }, {
+                xtype: 'basigx-button-togglelegend'
+            }];
+
+        return toolbarItems;
+    },
+
+<span id='BasiGX-view-panel-MapContainer-method-toggleOverviewMap'>    /**
+</span>     *
+     */
+    toggleOverviewMap: function(button, pressed){
+        var ovm = button.up(&quot;basigx-panel-mapcontainer&quot;)
+                .down('gx_overviewmap');
+        if (pressed) {
+            ovm.show(button);
+        } else {
+            ovm.hide(button);
+        }
+        button.blur();
+        this.toggleScalelineAdjustment();
+        this.toggleScalecomboAdjustment();
+    },
+
+<span id='BasiGX-view-panel-MapContainer-method-toggleScalelineAdjustment'>    /**
+</span>     *
+     */
+    toggleScalelineAdjustment: function(){
+        var scaleline = Ext.dom.Query.select('.ol-scale-line')[0];
+        var scalelineElem;
+        if(scaleline) {
+            scalelineElem = Ext.get(scaleline);
+        }
+        if(scalelineElem){
+            scalelineElem.toggleCls('basigx-scaline-adjusted');
+        }
+    },
+
+<span id='BasiGX-view-panel-MapContainer-method-toggleScalecomboAdjustment'>    /**
+</span>     *
+     */
+    toggleScalecomboAdjustment: function(){
+        var scaleCombo = Ext.ComponentQuery.query('basigx-combo-scale')[0];
+        var scaleComboEl;
+        if(scaleCombo){
+            scaleComboEl = scaleCombo.getEl();
+        }
+        if(scaleComboEl){
+            scaleComboEl.toggleCls('basigx-combo-scale-adjusted');
+        }
+    }
+});
+</pre>
+</body>
+</html>

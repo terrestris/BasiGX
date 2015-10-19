@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-panel-Header'>/**
+</span> * Header Panel
+ *
+ * Used to show a headerpanel in the viewport.
+ * Class usually instanciated in the map container.
+ *
+ */
+Ext.define(&quot;BasiGX.view.panel.Header&quot;, {
+    extend: &quot;Ext.panel.Panel&quot;,
+    xtype: &quot;basigx-panel-header&quot;,
+
+    requires: [
+        &quot;Ext.Img&quot;
+    ],
+
+    config: {
+<span id='BasiGX-view-panel-Header-cfg-addLogo'>        addLogo: true,
+</span><span id='BasiGX-view-panel-Header-cfg-logoUrl'>        logoUrl: 'resources/images/logo.png',
+</span><span id='BasiGX-view-panel-Header-cfg-link'>        link: null,
+</span><span id='BasiGX-view-panel-Header-cfg-logoAltText'>        logoAltText: 'Logo',
+</span><span id='BasiGX-view-panel-Header-cfg-logoHeight'>        logoHeight: 80,
+</span><span id='BasiGX-view-panel-Header-cfg-logoWidth'>        logoWidth: 200,
+</span><span id='BasiGX-view-panel-Header-cfg-logoMargin'>        logoMargin: '0 50px',
+</span><span id='BasiGX-view-panel-Header-cfg-additionalItems'>        additionalItems: []
+</span>    },
+
+<span id='BasiGX-view-panel-Header-property-layout'>    layout: {
+</span>        type: 'hbox',
+        align: 'stretch'
+    },
+
+<span id='BasiGX-view-panel-Header-property-padding'>    padding: 5,
+</span>
+<span id='BasiGX-view-panel-Header-property-cls'>    cls: 'basigx-header',
+</span>
+
+<span id='BasiGX-view-panel-Header-property-items'>    items: [],
+</span>
+<span id='BasiGX-view-panel-Header-method-initComponent'>    /**
+</span>    *
+    */
+    initComponent: function() {
+        var me = this;
+
+        // add logo
+        if(me.getAddLogo() === true) {
+            me.addLogoItem();
+        }
+
+        var additionalItems = me.getAdditionalItems();
+        // add additional items
+        if(!Ext.isEmpty(additionalItems) &amp;&amp;
+                Ext.isArray(additionalItems)) {
+            Ext.each(additionalItems, function(item) {
+                me.items.push(item);
+            });
+        }
+
+        me.callParent();
+    },
+
+<span id='BasiGX-view-panel-Header-method-addLogoItem'>    /**
+</span>     *
+     */
+    addLogoItem: function() {
+        var me = this;
+        var logo = {
+            xtype: 'image',
+            margin: me.getLogoMargin(),
+            alt: me.getLogoAltText(),
+            src: me.getLogoUrl(),
+            height: me.getLogoHeight(),
+            width: me.getLogoWidth(),
+            autoEl: {
+                tag: 'a',
+                href: me.getLink()
+            }
+        };
+
+        me.items.push(logo);
+   },
+
+<span id='BasiGX-view-panel-Header-method-setBackgroundColor'>   /**
+</span>    *
+    */
+   setBackgroundColor: function(color) {
+       this.setStyle({
+           'background-color': color, //fallback for ie9 and lower
+           background: &quot;linear-gradient(to right, white, &quot; + color + &quot;)&quot;
+       });
+   }
+});
+</pre>
+</body>
+</html>

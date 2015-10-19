@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-container-WfsSearch'>/**
+</span> * WFS Search
+ *
+ * Used to search in multiple featuretypes
+ *
+ * Example usage:
+ *
+ * {
+ *      xtype: 'basigx-search-wfs'
+ * }
+ *
+ */
+Ext.define(&quot;BasiGX.view.container.WfsSearch&quot;, {
+    extend: &quot;Ext.container.Container&quot;,
+    xtype: &quot;basigx-search-wfs&quot;,
+
+    requires: [
+        'GeoExt.data.store.Features',
+        'GeoExt.grid.column.Symbolizer',
+
+        'BasiGX.util.Animate'
+    ],
+
+    config: {
+<span id='BasiGX-view-container-WfsSearch-cfg-layers'>        /**
+</span>         * Array of ol-layers to search in
+         */
+        layers: [],
+
+<span id='BasiGX-view-container-WfsSearch-cfg-wfsServerUrl'>        /**
+</span>         * The WFS server URL
+         */
+        wfsServerUrl: null,
+
+<span id='BasiGX-view-container-WfsSearch-cfg-minSearchTextChars'>        /**
+</span>         * minimum chars to trigger the search
+         */
+        minSearchTextChars: 3,
+
+<span id='BasiGX-view-container-WfsSearch-cfg-typeDelay'>        /**
+</span>         * delay before query gets triggered to avoid triggers while typing
+         */
+        typeDelay: 300,
+
+<span id='BasiGX-view-container-WfsSearch-cfg-allowedFeatureTypeDataTypes'>        /**
+</span>         * the allowed data-types to match against in the describefeaturetype
+         * response
+         */
+        allowedFeatureTypeDataTypes: [
+            'xsd:string'
+        ],
+
+<span id='BasiGX-view-container-WfsSearch-cfg-groupHeaderTpl'>        /**
+</span>         * the template to change the groups titles
+         */
+        groupHeaderTpl: '{name}',
+
+<span id='BasiGX-view-container-WfsSearch-cfg-searchResultFeatureStyle'>        /**
+</span>         *
+         */
+        searchResultFeatureStyle: new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 6,
+                fill: new ol.style.Fill({
+                    color: '#8B0000'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#fff',
+                    width: 2
+                })
+            }),
+            fill: new ol.style.Fill({
+                color: '#8B0000'
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#8B0000',
+                width: 4
+            })
+        }),
+
+<span id='BasiGX-view-container-WfsSearch-cfg-searchResultHighlightFeatureStyleFn'>        /**
+</span>         *
+         */
+        searchResultHighlightFeatureStyleFn: function(radius, text) {
+            return new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: radius,
+                    fill: new ol.style.Fill({
+                        color: '#EE0000'
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: 'gray',
+                        width: 3
+                    })
+                }),
+                text: text ? new ol.style.Text({
+                    text: text.toString(),
+                    fill: new ol.style.Fill({
+                        color: '#fff'
+                    })
+                }) : undefined
+            });
+        },
+
+<span id='BasiGX-view-container-WfsSearch-cfg-searchResultSelectFeatureStyle'>        /**
+</span>         *
+         */
+        searchResultSelectFeatureStyle: new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 8,
+                fill: new ol.style.Fill({
+                    color: '#0099CC'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#fff',
+                    width: 2
+                })
+            }),
+            fill: new ol.style.Fill({
+                color: '#0099CC'
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#0099CC',
+                width: 6
+            })
+        }),
+
+<span id='BasiGX-view-container-WfsSearch-cfg-clusterStyleFn'>       /**
+</span>        *
+        */
+        clusterStyleFn: function(amount, radius) {
+            // set maxradius
+            var maxRadius = this.clusterLayer.getSource().distance_ / 2;
+            if (radius &gt; maxRadius) {
+                radius = maxRadius;
+            }
+            return [new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: radius,
+                    stroke: new ol.style.Stroke({
+                        color: '#fff'
+                    }),
+                    fill: new ol.style.Fill({
+                        color: '#3399CC'
+                    })
+                }),
+                text: new ol.style.Text({
+                    text: amount.toString(),
+                    fill: new ol.style.Fill({
+                        color: '#fff'
+                    })
+                })
+            })];
+        },
+
+<span id='BasiGX-view-container-WfsSearch-cfg-highLightFeatureOnHoverInGrid'>        /**
+</span>         *
+         */
+        highLightFeatureOnHoverInGrid: true
+    },
+
+<span id='BasiGX-view-container-WfsSearch-property-layout'>    /**
+</span>     *
+     */
+    layout: 'fit',
+
+<span id='BasiGX-view-container-WfsSearch-property-typeDelayTask'>    /**
+</span>     *
+     */
+    typeDelayTask: null,
+
+<span id='BasiGX-view-container-WfsSearch-property-searchTerm'>    /**
+</span>     *
+     */
+    searchTerm: null,
+
+<span id='BasiGX-view-container-WfsSearch-property-searchResultVectorLayer'>    /**
+</span>     *
+     */
+    searchResultVectorLayer: null,
+
+<span id='BasiGX-view-container-WfsSearch-property-clusterLayer'>    /**
+</span>     *
+     */
+    clusterLayer: null,
+
+<span id='BasiGX-view-container-WfsSearch-property-clusterResults'>    /**
+</span>     *
+     */
+    clusterResults: false,
+
+<span id='BasiGX-view-container-WfsSearch-property-styleCache'>    /**
+</span>     *
+     */
+    styleCache: [],
+
+<span id='BasiGX-view-container-WfsSearch-method-initComponent'>    /**
+</span>     *
+     */
+    initComponent: function() {
+        var me = this,
+            map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+
+        if (Ext.isEmpty(me.getLayers())) {
+            Ext.log.error('No layers given to search component!');
+        }
+
+        if (!me.searchResultVectorLayer) {
+            me.searchResultVectorLayer = new ol.layer.Vector({
+                source: new ol.source.Vector(),
+                style: me.getSearchResultFeatureStyle(),
+                visible: !me.clusterResults
+            });
+            map.addLayer(me.searchResultVectorLayer);
+        }
+
+        if (me.clusterResults &amp;&amp; !me.clusterLayer) {
+            var clusterSource = new ol.source.Cluster({
+                distance: 40,
+                source: me.searchResultVectorLayer.getSource()//new ol.source.Vector()
+            });
+
+            me.clusterLayer = new ol.layer.Vector({
+                source: clusterSource,
+                style: function(feature) {
+                    var amount = feature.get('features').length;
+                    var style = me.styleCache[amount];
+                    if (!style) {
+                        style = me.clusterStyleFn(amount, amount + 10);
+                        me.styleCache[amount] = style;
+                    }
+                    return style;
+                }
+            });
+            map.addLayer(me.clusterLayer);
+
+            // correct the vectorlayerstyle for the grid symbolizer
+            me.searchResultVectorLayer.setStyle(me.clusterStyleFn('', 8));
+
+        }
+
+        var searchResultStore = Ext.create('GeoExt.data.store.Features', {
+            map: map,
+            layer: me.searchResultVectorLayer,
+            groupField: 'featuretype'
+        });
+
+        me.items = [
+            {
+                xtype: 'textfield',
+                name: 'searchTerm',
+                fieldLabel: 'Suchbegriff',
+                enableKeyEvents: true,
+                listeners: {
+                    change: me.handleKeyDown
+                }
+            },
+            {
+                xtype: 'grid',
+                name: 'searchresultgrid',
+                hidden: true,
+                hideHeaders: true,
+                title: 'Suchergebnisse',
+                store: searchResultStore,
+                columns: [
+                    {
+                        xtype: 'gx_symbolizercolumn',
+                        flex: 1
+                    },
+                    {
+                        dataIndex: 'displayfield',
+                        flex: 7,
+                        renderer: function(value) {
+                            return '&lt;span data-qtip=&quot;' + value + '&quot;&gt;' +
+                                value + '&lt;/span&gt;';
+                        }
+                    }
+                ],
+                features: [{
+                    ftype: 'grouping',
+                    groupHeaderTpl: me.getGroupHeaderTpl()
+                }],
+                width: 200,
+                height: 300
+            }, {
+                xtype: 'button',
+                text: 'Zurücksetzen',
+                margin: '10 0 0 0',
+                handler: me.resetSearchGridAndText,
+                scope: me
+            }
+        ];
+        me.callParent(arguments);
+
+        me.on('describeFeatureTypeResponse', me.getFeatures);
+        me.on('getFeatureResponse', me.showSearchResults);
+        me.on('show', me.down('textfield').focus);
+
+        var grid = me.down('grid[name=searchresultgrid]');
+
+        if (me.getHighLightFeatureOnHoverInGrid()) {
+            grid.on('itemmouseenter', me.highlightFeature, me);
+            grid.on('itemmouseleave', me.unhighlightFeature, me);
+        }
+        grid.on('itemclick', me.highlightSelectedFeature, me);
+    },
+
+<span id='BasiGX-view-container-WfsSearch-method-handleKeyDown'>    /**
+</span>     *
+     */
+    handleKeyDown: function(textfield) {
+        var me = textfield.up('basigx-search-wfs'),
+            val = textfield.getValue();
+
+        if (val.length &lt; me.getMinSearchTextChars()) {
+            return;
+        }
+
+        // set the searchterm on component
+        me.searchTerm = val;
+
+        // reset grid from aold values
+        me.resetGrid();
+
+        // prepare the describeFeatureType for all given layers
+        if (me.typeDelayTask) {
+            me.typeDelayTask.cancel();
+        }
+        me.typeDelayTask = new Ext.util.DelayedTask(function(){
+            me.describeFeatureTypes();
+        });
+        me.typeDelayTask.delay(me.getTypeDelay());
+
+    },
+
+<span id='BasiGX-view-container-WfsSearch-method-resetSearchGridAndText'>    resetSearchGridAndText: function() {
+</span>        var me = this;
+        me.down('textfield[name=searchTerm]').setValue('');
+        me.resetGrid();
+    },
+
+
+<span id='BasiGX-view-container-WfsSearch-method-resetGrid'>    /**
+</span>     *
+     */
+    resetGrid: function() {
+        var me = this;
+        me.searchResultVectorLayer.getSource().clear();
+        me.down('grid[name=searchresultgrid]').hide();
+    },
+
+<span id='BasiGX-view-container-WfsSearch-method-describeFeatureTypes'>    /**
+</span>     *
+     */
+    describeFeatureTypes: function() {
+        var me = this,
+            typeNames = [],
+            featureTypes;
+
+        Ext.each(me.getLayers(), function(l) {
+            if (l.getSource().getParams) {
+                typeNames.push(l.getSource().getParams().LAYERS);
+            }
+        });
+
+        var describeFeatureTypeParams = {
+            REQUEST: &quot;DescribeFeatureType&quot;,
+            SERVICE: &quot;WFS&quot;,
+            VERSION: &quot;1.1.0&quot;,
+            OUTPUTFORMAT: &quot;application/json&quot;,
+            TYPENAME: typeNames.toString()
+        };
+
+        var url = me.getWfsServerUrl() + &quot;?&quot;;
+        Ext.iterate(describeFeatureTypeParams, function(k, v) {
+            url += k + &quot;=&quot; + v + &quot;&amp;&quot;;
+        });
+
+        me.setLoading(true);
+
+        Ext.Ajax.request({
+            url: url,
+            success: function(response){
+                me.setLoading(false);
+                if(Ext.isString(response.responseText)) {
+                    featureTypes = Ext.decode(response.responseText);
+                } else if(Ext.isObject(response.responseText)) {
+                    featureTypes = response.responseText;
+                } else {
+                    Ext.log.error(&quot;Error! Could not parse &quot; +
+                        &quot;describe featuretype response!&quot;);
+                }
+                me.fireEvent('describeFeatureTypeResponse', featureTypes);
+            },
+            failure: function(response) {
+                me.setLoading(false);
+                Ext.log.error(&quot;Error on describe featuretype request:&quot;,
+                    response);
+            }
+        });
+    },
+
+<span id='BasiGX-view-container-WfsSearch-method-getFeatures'>    /**
+</span>     *
+     */
+    getFeatures: function(resp) {
+        var me = this;
+        var featureTypes = resp.featureTypes;
+        var cleanedFeatureType = me.cleanUpFeatureDataTypes(featureTypes);
+        var url = me.getWfsServerUrl();
+        var xml = me.setupXmlPostBody(cleanedFeatureType);
+        var features;
+
+        me.setLoading(true);
+
+        Ext.Ajax.request({
+            url: url,
+            method: 'POST',
+            xmlData: xml,
+            success: function(response){
+                me.setLoading(false);
+                if(Ext.isString(response.responseText)) {
+                    features = Ext.decode(response.responseText).features;
+                } else if(Ext.isObject(response.responseText)) {
+                    features = response.responseText.features;
+                } else {
+                    Ext.log.error(&quot;Error! Could not parse &quot; +
+                        &quot;GetFeature response!&quot;);
+                }
+                me.fireEvent('getFeatureResponse', features);
+            },
+            failure: function(response) {
+                me.setLoading(false);
+                Ext.log.error(&quot;Error on GetFeature request:&quot;,
+                    response);
+            }
+        });
+    },
+
+<span id='BasiGX-view-container-WfsSearch-method-cleanUpFeatureDataTypes'>    /**
+</span>     * Method removes unwanted dataTypes
+     */
+    cleanUpFeatureDataTypes: function(featureTypes) {
+        var me = this,
+            cleanedFeatureType = [];
+        Ext.each(featureTypes, function(ft, index) {
+            cleanedFeatureType.push({
+                typeName: ft.typeName,
+                properties: []
+            });
+
+            Ext.each(ft.properties, function(prop) {
+                if (Ext.Array.contains(
+                    me.getAllowedFeatureTypeDataTypes(), prop.type) &amp;&amp;
+                    prop.name.indexOf(&quot; &quot;) &lt; 0) {
+                        cleanedFeatureType[index].properties.push(prop);
+                }
+            });
+        });
+        return cleanedFeatureType;
+    },
+
+<span id='BasiGX-view-container-WfsSearch-method-setupXmlPostBody'>    /**
+</span>     *
+     */
+    setupXmlPostBody: function(featureTypes) {
+        var me = this;
+        var xml =
+            '&lt;wfs:GetFeature service=&quot;WFS&quot; version=&quot;1.1.0&quot; ' +
+              'outputFormat=&quot;application/json&quot; ' +
+              'xmlns:wfs=&quot;http://www.opengis.net/wfs&quot; ' +
+              'xmlns:ogc=&quot;http://www.opengis.net/ogc&quot; ' +
+              'xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; ' +
+              'xsi:schemaLocation=&quot;http://www.opengis.net/wfs ' +
+              'http://schemas.opengis.net/wfs/1.0.0/WFS-basic.xsd&quot;&gt;';
+
+        Ext.each(featureTypes, function(ft) {
+            Ext.each(ft.properties, function(prop) {
+                xml +=
+                    '&lt;wfs:Query typeName=&quot;' + ft.typeName + '&quot;&gt;' +
+                        '&lt;ogc:Filter&gt;' +
+                            '&lt;ogc:PropertyIsLike wildCard=&quot;*&quot; singleChar=&quot;.&quot; escape=&quot;\\&quot; matchCase=&quot;false&quot;&gt;' +
+                                '&lt;ogc:PropertyName&gt;' + prop.name + '&lt;/ogc:PropertyName&gt;' +
+                                '&lt;ogc:Literal&gt;*' + me.searchTerm + '*&lt;/ogc:Literal&gt;' +
+                            '&lt;/ogc:PropertyIsLike&gt;' +
+                        '&lt;/ogc:Filter&gt;' +
+                    '&lt;/wfs:Query&gt;';
+            });
+        });
+
+        xml += '&lt;/wfs:GetFeature&gt;';
+
+        return xml;
+    },
+
+<span id='BasiGX-view-container-WfsSearch-method-showSearchResults'>    /**
+</span>     *
+     */
+    showSearchResults: function(features) {
+
+        var me = this,
+            grid = me.down('grid[name=searchresultgrid]'),
+            parser = new ol.format.GeoJSON();
+
+        if(features.length &gt; 0){
+            grid.show();
+        }
+
+        Ext.each(features, function(feature) {
+            var featuretype = feature.id.split(&quot;.&quot;)[0];
+            var displayfield;
+
+            // find the matching value in order to display it
+            Ext.iterate(feature.properties, function(k, v) {
+                if (v &amp;&amp; v.toString().toLowerCase().indexOf(me.searchTerm) &gt; -1) {
+                    displayfield = v;
+                    return false;
+                }
+            });
+
+            feature.properties.displayfield = displayfield;
+            feature.properties.featuretype = featuretype;
+
+            var olFeat = parser.readFeatures(feature, {
+                dataProjection: 'EPSG:31467',
+                featureProjection: 'EPSG:31467'
+            })[0];
+            me.searchResultVectorLayer.getSource().addFeature(olFeat);
+        });
+
+        var featureExtent = me.searchResultVectorLayer.getSource().getExtent();
+        if(!Ext.Array.contains(featureExtent, Infinity)){
+            me.zoomToExtent(featureExtent);
+        }
+    },
+
+<span id='BasiGX-view-container-WfsSearch-method-zoomToExtent'>    /**
+</span>     * Works with extent or geom.
+     */
+    zoomToExtent: function(extent){
+        var olMap = Ext.ComponentQuery.query('gx_map')[0].getMap();
+        var olView = olMap.getView();
+        var pan = ol.animation.pan({
+            source: olView.getCenter()
+        });
+        var zoom = ol.animation.zoom({
+           resolution: olView.getResolution()
+        });
+        olMap.beforeRender(pan, zoom);
+
+        olView.fit(extent, olMap.getSize());
+    },
+
+<span id='BasiGX-view-container-WfsSearch-method-updateRenderer'>    /**
+</span>     * update the symbolizer in the grid
+     */
+    updateRenderer: function(item, style){
+        var renderer = Ext.getCmp(
+            Ext.query('div[id^=gx_renderer', true, item)[0].id);
+        var src = renderer.map.getLayers().getArray()[0].getSource();
+        src.getFeatures()[0].setStyle(style);
+    },
+
+<span id='BasiGX-view-container-WfsSearch-method-highlightFeature'>    /**
+</span>     *
+     */
+    highlightFeature: function(tableView, record, item) {
+        if(this.enterEventRec === record){
+            return;
+        }
+        var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+        var feature;
+        var radius;
+        var text;
+
+        this.enterEventRec = record;
+        ol.Observable.unByKey(this.flashListenerKey);
+
+        if (this.clusterResults) {
+            feature = this.getClusterFeatureFromFeature(record.olObject);
+            var featureStyle = this.clusterLayer.getStyle()(
+                feature, map.getView().getResolution())[0];
+            radius = featureStyle.getImage().getRadius();
+            text = featureStyle.getText().getText();
+        } else {
+            feature = record.olObject;
+            radius = 5; // default value
+        }
+
+        if (tableView.getSelection()[0] !== record) {
+            feature.setStyle(
+                this.getSearchResultHighlightFeatureStyleFn()(radius, text)
+            );
+            this.updateRenderer(item,
+                this.getSearchResultHighlightFeatureStyleFn()(8, text)
+            );
+        }
+        if (feature) {
+            this.flashListenerKey = BasiGX.util.Animate.flashFeature(
+                feature, 1000, radius);
+        }
+    },
+
+<span id='BasiGX-view-container-WfsSearch-method-unhighlightFeature'>    /**
+</span>     *
+     */
+    unhighlightFeature: function(tableView, record, item) {
+        if(this.leaveEventRec === record){
+            return;
+        }
+        this.leaveEventRec = record;
+        if (tableView.getSelection()[0] !== record) {
+            record.olObject.setStyle(this.getSearchResultFeatureStyle());
+            if (this.clusterResults) {
+                this.updateRenderer(item, this.clusterStyleFn('', 8));
+            } else {
+                this.updateRenderer(item, this.getSearchResultFeatureStyle());
+            }
+        }
+    },
+
+<span id='BasiGX-view-container-WfsSearch-method-highlightSelectedFeature'>    /**
+</span>     *
+     */
+    highlightSelectedFeature: function(tableView, record, item) {
+        var store = tableView.getStore();
+        store.each(function(rec){
+            rec.olObject.setStyle(this.getSearchResultFeatureStyle());
+            var row = tableView.getRowByRecord(rec);
+            if (this.clusterResults) {
+                this.updateRenderer(row, this.clusterStyleFn('', 8));
+            } else {
+                this.updateRenderer(row, this.getSearchResultFeatureStyle());
+            }
+        }, this);
+
+        record.olObject.setStyle(this.getSearchResultSelectFeatureStyle());
+        this.updateRenderer(item, this.getSearchResultSelectFeatureStyle());
+
+        this.zoomToExtent(record.olObject.getGeometry());
+    },
+
+<span id='BasiGX-view-container-WfsSearch-method-getClusterFeatureFromFeature'>    /**
+</span>     *
+     */
+    getClusterFeatureFromFeature: function(feature){
+        var me = this;
+        var clusterFeature;
+        var clusterFeatures = me.clusterLayer.getSource().getFeatures();
+        Ext.each(clusterFeatures, function(feat) {
+            if (!Ext.isEmpty(feat.get('features'))) {
+                Ext.each(feat.get('features'), function(f) {
+                    if (f.getId() === feature.getId()) {
+                        clusterFeature = feat;
+                        return false;
+                    }
+                });
+            }
+            if (!Ext.isEmpty(clusterFeature)) {
+                return false;
+            }
+        });
+        return clusterFeature;
+    }
+});
+</pre>
+</body>
+</html>

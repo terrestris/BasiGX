@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-form-Permalink'>/**
+</span> * Permalink FormPanel
+ *
+ * Used to show a permalink of the mapstate (center, zoom, visible layers)
+ *
+ */
+Ext.define(&quot;BasiGX.view.form.Permalink&quot;, {
+    extend: &quot;Ext.form.Panel&quot;,
+
+    xtype: 'basigx-form-permalink',
+
+    requires: [
+        'Ext.button.Button'
+    ],
+
+<span id='BasiGX-view-form-Permalink-cfg-viewModel'>    viewModel: {
+</span>        data: {
+            permalink: 'Permalink'
+        }
+    },
+
+<span id='BasiGX-view-form-Permalink-cfg-padding'>    padding: 5,
+</span><span id='BasiGX-view-form-Permalink-cfg-layout'>    layout: 'fit',
+</span><span id='BasiGX-view-form-Permalink-cfg-minWidth'>    minWidth: 320,
+</span><span id='BasiGX-view-form-Permalink-cfg-defaults'>    defaults: {
+</span>        anchor: '100%'
+    },
+
+<span id='BasiGX-view-form-Permalink-property-items'>    items: [{
+</span>        xtype: 'textfield',
+        name: 'textfield-permalink',
+        editable: false,
+        listeners: {
+            afterrender: function(textfield){
+                var permalink = textfield.up('form').getPermalink();
+                textfield.setValue(permalink);
+            },
+            change: function(textfield){
+                var width = Ext.util.TextMetrics.measure(
+                    textfield.getEl(), textfield.getValue()).width;
+                textfield.setWidth(width + 20);
+            }
+        }
+    }],
+
+<span id='BasiGX-view-form-Permalink-cfg-buttons'>    buttons: [{
+</span>        text: 'Erneuern',
+        handler: function(btn){
+            var permalink = btn.up('form').getPermalink();
+            var textfield = btn.up('form').down('textfield');
+            textfield.setValue(permalink);
+        }
+    }],
+
+<span id='BasiGX-view-form-Permalink-method-getPermalink'>    getPermalink: function(){
+</span>        var route = BasiGX.util.Application.getRoute();
+        var hrefWithoutHash = window.location.origin +
+            window.location.pathname +
+            window.location.search;
+        var permalink = hrefWithoutHash + '#' + route;
+        return permalink;
+    }
+
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*eslint no-eval:1*/ // turn eval usage into a warning when linting
+<span id='global-property-'>/**
+</span> *
+ * This an ux originally created for ExtJS 4.2.2 by David French under MIT License.
+ *
+ * Modified by terrestris to fit the needs of ExtJS 6.
+ * https://github.com/davidffrench/Ext.ux.RowExpanderWithComponents
+ *
+ */
+<span id='BasiGX-ux-RowExpanderWithComponents'>/**
+</span> * RowExpanderWithComponents plugin
+ */
+Ext.define('BasiGX.ux.RowExpanderWithComponents', {
+    extend: 'Ext.grid.plugin.RowExpander',
+    alias: 'plugin.rowexpanderwithcomponents',
+
+<span id='BasiGX-ux-RowExpanderWithComponents-cfg-rowBodyTpl'>    /**
+</span>     * @cfg {XTemplate} rowBodyTpl
+     * This needs to default to the below for ExtJS components to render to the correct row
+     * (defaults to &lt;tt&gt;&lt;div id=&quot;display-row-{id}&quot;&gt; &lt;/div&gt;&lt;/tt&gt;).
+     */
+    rowBodyTpl: new Ext.XTemplate(
+        '&lt;div id=&quot;display-row-{id}&quot;&gt; &lt;/div&gt;'
+    ),
+
+<span id='BasiGX-ux-RowExpanderWithComponents-cfg-rowBodyCompTemplate'>    /**
+</span>     * @cfg {Object} rowBodyCompTemplate
+     * This template will be used for every record. It can contain general
+     * Ext JS Components. Text in &quot;{{ }}&quot; will be executed as JavaScript.
+     * Sample below
+     * rowBodyCompTemplate: {
+            xtype: 'container',
+            items: [{
+                xtype: 'image',
+                src: '{{record.getOlLayer().get(&quot;legendUrl&quot;)}}',
+                height: '{{record.getOlLayer().get(&quot;legendHeight&quot;)}}',
+                alt: '{{record.getOlLayer().get(&quot;legendUrl&quot;)}}'
+            }]
+        }
+     * (defaults to &lt;tt&gt;null&lt;/tt&gt;).
+     */
+    rowBodyCompTemplate: null,
+
+<span id='BasiGX-ux-RowExpanderWithComponents-cfg-expandOnClick'>    /**
+</span>     * @cfg {Boolean} expandOnClick
+     * &lt;tt&gt;true&lt;/tt&gt; to toggle a row between expanded/collapsed when single clicked
+     * (defaults to &lt;tt&gt;true&lt;/tt&gt;).
+     */
+    expandOnClick: false,
+
+<span id='BasiGX-ux-RowExpanderWithComponents-cfg-hideExpandColumn'>    /**
+</span>     * @cfg {Boolean} hideExpandColumn
+     * &lt;tt&gt;true&lt;/tt&gt; to hide the column that contains the expand/collapse icons
+     * (defaults to &lt;tt&gt;true&lt;/tt&gt;).
+     */
+    hideExpandColumn: false,
+
+<span id='BasiGX-ux-RowExpanderWithComponents-cfg-enableTextSelection'>    /**
+</span>     * @cfg {Boolean} enableTextSelection
+     * &lt;tt&gt;true&lt;/tt&gt; to enable text selection within the grid
+     * (defaults to &lt;tt&gt;true&lt;/tt&gt;).
+     */
+    enableTextSelection: true,
+
+<span id='BasiGX-ux-RowExpanderWithComponents-property-preventRecursionArray'>    preventRecursionArray: [],
+</span>
+<span id='BasiGX-ux-RowExpanderWithComponents-method-init'>    init: function(grid){
+</span>        var me = this,
+            view;
+
+        me.callParent(arguments);
+
+        //get the grids view
+        view = me.view = grid.getView();
+
+        //this css does not highlight the row expander body
+        grid.addCls('rowexpanderwithcomponents');
+
+        //set the rowexpander column to hidden if hideExpandColumn config is true
+        if(me.hideExpandColumn){
+            grid.headerCt.query('gridcolumn')[0].hidden = true;
+        }
+        //enable text selection if the config is true
+        if(me.enableTextSelection){
+            view.enableTextSelection = true;
+        }
+
+        view.on('expandbody', function(rowNode, record){
+            var recId = record.getId();
+            if(!recId){
+                Ext.Error.raise('Error: Records must have an id to use the' +
+                    'rowExpanderWithComponents plugin. ' +
+                    'Use http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.' +
+                    'Model-cfg-idProperty or http://docs.sencha.com/extjs/' +
+                    '4.2.2/#!/api/Ext.data.Model-cfg-idgen');
+            }
+
+            var row = 'display-row-' + recId,
+                clonedRowTemplate = Ext.clone(me.rowBodyCompTemplate);
+
+            // TODO The rowbody behaviour seems to be not that smooth. We
+            // should have a look at this
+            // if the row got children dont add it again
+            if (Ext.get(row).dom.children.length === 0){
+                var parentCont = Ext.create(Ext.container.Container, {
+                    height: '100%',
+                    width: '100%',
+                    itemId: grid.getId() + '-parentRowExpCont-' + recId,
+                    items: [
+                        me.replaceObjValues(clonedRowTemplate, record)
+                    ]
+                });
+                //render the ExtJS component to the div
+                parentCont.render(row);
+
+                //Stop all events in the row body from bubbling up
+                var rowEl = parentCont.getEl().parent('.x-grid-rowbody');
+                rowEl.swallowEvent(['mouseenter', 'click', 'mouseover', 'mousedown',
+                                    'dblclick', 'cellclick', 'itemmouseenter', 'itemmouseleave',
+                                    'onRowFocus', 'mouseleave']);
+
+                // adding the dynamic css to component
+                var rowToStyle = parentCont.getEl().parent('.x-grid-rowbody-tr');
+                rowToStyle.addCls(grid.getCssForRow(record));
+            }
+
+        });
+        //assign the helper functions to the gridview and grid
+        view.getRowComponent = me.getRowComponent;
+        grid.getRowComponent = me.getRowComponent;
+
+        grid.addToRowComponent = me.addToRowComponent;
+        grid.addToRowComponent = me.addToRowComponent;
+    },
+
+<span id='BasiGX-ux-RowExpanderWithComponents-method-getRowComponent'>    /**
+</span>     * Gets the parent ExtJS container in the rowexpander body from the rows record id
+     * @param {integer} recId The row record id
+     * @return {Ext.container.Container} the parent ExtJS container in the rowexpander body
+     */
+    getRowComponent: function(recId){
+        return Ext.ComponentQuery.query('#' + this.up('treepanel').getId() + '-parentRowExpCont-' + recId)[0];
+    },
+
+<span id='BasiGX-ux-RowExpanderWithComponents-method-removeAllFromRowComponent'>    /**
+</span>     * Removes all ExtJS items from the parent row component
+     * @param {integer} recId The row record id
+     */
+    removeAllFromRowComponent: function(recId){
+        var rowCont = this.getRowComponent(recId);
+
+        rowCont.removeAll();
+    },
+
+<span id='BasiGX-ux-RowExpanderWithComponents-method-addToRowComponent'>    /**
+</span>     * Adds items to the parent ExtJS container in the rowexpander body
+     * @param {integer} recId The row record id
+     * @param {Array} items ExtJS components
+     */
+    addToRowComponent: function(recId, items){
+        var rowCont = this.getRowComponent(recId);
+
+        rowCont.add(items);
+    },
+
+<span id='BasiGX-ux-RowExpanderWithComponents-method-bindView'>    /**
+</span>     * @private
+     * allow single click to expand grid
+     */
+    bindView: function(view) {
+        if (this.expandOnClick) {
+            view.on('itemclick', this.onItemClick, this);
+        }
+        this.callParent(arguments);
+    },
+<span id='BasiGX-ux-RowExpanderWithComponents-method-onItemClick'>    /**
+</span>     * @private
+     * allow single click to expand grid
+     */
+    onItemClick: function(view, record, row, rowIdx) {
+        this.toggleRow(rowIdx, record);
+    },
+
+<span id='BasiGX-ux-RowExpanderWithComponents-method-replaceObjValues'>    /**
+</span>     * @private
+     * Converts all string values with {{}} to code
+     * Example: '{{record.get('test'}}' converts to record.get('test')
+     */
+    replaceObjValues: function( obj, record ){
+
+        for( var all in obj ) {
+            if(typeof obj[all] === &quot;string&quot; &amp;&amp; obj[all].match(/{{(.*)}}/)){
+                obj[all] = eval(obj[all].match(/{{(.*)}}/)[1]);
+            }
+            if(typeof obj[all] === &quot;object&quot; &amp;&amp; obj[all] !== null){
+                if(Ext.Array.contains(this.preventRecursionArray, obj[all])){
+                    return obj;
+                } else {
+                    this.preventRecursionArray.push(obj[all]);
+                    this.replaceObjValues( obj[all], record );
+                }
+            }
+            if(obj.xtype){
+                obj.layerRec = record;
+                // if we do not have a cluster layer, we remove the &quot;double
+                // symbology / legend&quot;
+                if (record.getOlLayer() &amp;&amp; record.getOlLayer().get('type') &amp;&amp;
+                    record.getOlLayer().get('type') !== &quot;WFSCluster&quot; &amp;&amp;
+                    Ext.isArray(obj.items) &amp;&amp; obj.items.length &gt; 1) {
+                        obj.items.pop();
+                }
+            }
+        }
+
+        return obj;
+    }
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*global Ext, window*/
+/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-util-Url'>/**
+</span> * Layer Util
+ *
+ * Some methods to work with ol-layers
+ *
+ */
+Ext.define('BasiGX.util.Url', {
+    statics: {
+
+<span id='BasiGX-util-Url-static-method-getParamValue'>        /**
+</span>         * Returns an URL params value from the current location or the given
+         * optional url.
+         *
+         * @param {String} key The key to search for
+         * @param {String} [url=location.href] The url to search in.
+         */
+        getParamValue: function(key, url){
+            var re = new RegExp('[\\?&amp;]' + (key + &quot;&quot;) + '=([^&amp;#]*)'),
+                regexResult = re.exec(url || window.location.href),
+                value;
+            if (regexResult) {
+                value = decodeURIComponent(regexResult[1]);
+            }
+            return value;
+        },
+
+<span id='BasiGX-util-Url-static-method-getCurrentAppUrl'>        /**
+</span>         * Returns the URL of the used application like this
+         *
+         *   http://localhost:8080/Tribulus/client/gizmo/index-dev.html?
+         */
+        getCurrentAppUrl: function() {
+
+            return window.location.protocol + &quot;//&quot; + window.location.host + window.location.pathname + &quot;?&quot;;
+        },
+
+<span id='BasiGX-util-Url-static-method-getWebProjectBaseUrl'>        /**
+</span>         * Return the name of the web project like this
+         *
+         *   Tribulus
+         */
+        getWebProjectBaseUrl: function() {
+
+            var url = window.location.protocol + &quot;//&quot; + window.location.host,
+                webProjectName = window.location.pathname.match(/\/[A-Za-z\-]*\//)[0];
+
+            return url + webProjectName;
+        },
+
+<span id='BasiGX-util-Url-static-method-getProjectBaseUrl'>        /**
+</span>         * Return the name of the basepath of the project like this
+         *
+         * http://somehost:someport/
+         */
+        getProjectBaseUrl: function() {
+            var baseUrl = window.location.protocol + &quot;//&quot; + window.location.host + &quot;/&quot;;
+            return baseUrl;
+        }
+
+    }
+});
+</pre>
+</body>
+</html>

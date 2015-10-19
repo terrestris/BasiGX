@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-button-Hsi'>/**
+</span> * ZoomIn Button
+ *
+ * Button used to zoom in
+ *
+ */
+Ext.define(&quot;BasiGX.view.button.Hsi&quot;, {
+    extend: &quot;Ext.button.Button&quot;,
+    xtype: 'basigx-button-hsi',
+
+<span id='BasiGX-view-button-Hsi-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Informationsabfrage',
+            text: null
+        }
+    },
+
+<span id='BasiGX-view-button-Hsi-cfg-bind'>    bind: {
+</span>        text: '{text}',
+        tooltip: '{tooltip}'
+    },
+
+<span id='BasiGX-view-button-Hsi-cfg-glyph'>    glyph: 'xf05a@FontAwesome',
+</span>
+<span id='BasiGX-view-button-Hsi-cfg-enableToggle'>    enableToggle: true,
+</span><span id='BasiGX-view-button-Hsi-property-pressed'>    pressed: true,
+</span>
+<span id='BasiGX-view-button-Hsi-method-initComponent'>    initComponent: function(){
+</span>        this.callParent([arguments]);
+        this.setControlStatus(this.pressed);
+    },
+
+<span id='BasiGX-view-button-Hsi-method-toggleHandler'>   toggleHandler: function(button){
+</span>       this.setControlStatus(button.pressed);
+   },
+
+<span id='BasiGX-view-button-Hsi-method-setControlStatus'>   setControlStatus: function(status){
+</span>       var mapComponent = Ext.ComponentQuery.query('basigx-component-map')[0];
+       mapComponent.setPointerRest(status);
+   }
+
+});
+</pre>
+</body>
+</html>

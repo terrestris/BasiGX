@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-view-LayerSet'>/**
+</span> * LayerSet View
+ *
+ * Used in the LayerSetChooser Panel
+ *
+ */
+Ext.define(&quot;BasiGX.view.view.LayerSet&quot;, {
+    extend: &quot;Ext.view.View&quot;,
+    xtype: &quot;basigx-view-layerset&quot;,
+
+    requires: [
+        &quot;Ext.data.Store&quot;
+    ],
+
+<span id='BasiGX-view-view-LayerSet-property-layerSetUrl'>    /**
+</span>     * the url to request the layerset json-file.
+     * If this is null, a demo set will be shown
+     */
+    layerSetUrl: null,
+
+<span id='BasiGX-view-view-LayerSet-property-defaultImagePath'>    /**
+</span>     * the default path to request the images from
+     */
+    defaultImagePath: 'classic/resources/img/themes/',
+
+<span id='BasiGX-view-view-LayerSet-property-demoThumb'>    /**
+</span>     * the demo image to use
+     */
+    demoThumb: 'https://www.terrestris.de/wp-content/uploads/2014/03/' +
+        'logo_terrestris_small3.png',
+
+<span id='BasiGX-view-view-LayerSet-property-width'>    /**
+</span>     *
+     */
+    width: 400,
+
+<span id='BasiGX-view-view-LayerSet-property-height'>    /**
+</span>     *
+     */
+    height: 300,
+
+<span id='BasiGX-view-view-LayerSet-property-singleSelect'>    /**
+</span>     *
+     */
+    singleSelect: true,
+
+<span id='BasiGX-view-view-LayerSet-property-cls'>    /**
+</span>     *
+     */
+    cls: 'img-chooser-view',
+
+<span id='BasiGX-view-view-LayerSet-property-overItemCls'>    /**
+</span>     *
+     */
+    overItemCls: 'x-view-over',
+
+<span id='BasiGX-view-view-LayerSet-property-itemSelector'>    /**
+</span>     *
+     */
+    itemSelector: 'div.thumb-wrap',
+
+<span id='BasiGX-view-view-LayerSet-property-tpl'>    /**
+</span>     *
+     */
+    tpl: null,
+
+<span id='BasiGX-view-view-LayerSet-method-initComponent'>    /**
+</span>     *
+     */
+    initComponent: function() {
+
+        var me = this,
+            store;
+
+        if (Ext.isEmpty(me.layerSetUrl)) {
+            // setup demo content
+            store = Ext.create('Ext.data.Store', {
+                fields: ['name', 'thumb', 'url', 'type'],
+                sorters: 'type',
+                data: [
+                    {
+                        &quot;title&quot;: &quot;Stadtkarte&quot;,
+                        &quot;name&quot;: &quot;stadtkarte&quot;,
+                        &quot;thumb&quot;: me.demoThumb
+                    },
+                    {
+                        &quot;title&quot;: &quot;Verkehr&quot;,
+                        &quot;name&quot;: &quot;verkehr&quot;,
+                        &quot;thumb&quot;: me.demoThumb
+                    },
+                    {
+                        &quot;title&quot;: &quot;Umwelt&quot;,
+                        &quot;name&quot;: &quot;umwelt&quot;,
+                        &quot;thumb&quot;: me.demoThumb
+                    }
+                ]
+            });
+
+        } else {
+            store = Ext.create('Ext.data.Store', {
+                autoLoad: true,
+                fields: ['name', 'title', 'thumb'],
+                remoteSort: false,
+                sorters: 'type',
+                proxy: {
+                    type: 'ajax',
+                    url: me.layerSetUrl,
+                    reader: {
+                        type: 'json'
+                    }
+                }
+            });
+        }
+
+        // setup default template if none given
+        if (Ext.isEmpty(me.tpl)) {
+            me.tpl = [
+                 '&lt;tpl for=&quot;.&quot;&gt;',
+                     '&lt;div class=&quot;thumb-wrap&quot;&gt;',
+                         '&lt;div class=&quot;thumb&quot;&gt;',
+                             // if the thumb is a href to an online resource, we
+                             // dont need the defaultImagePath
+                             '&lt;tpl if=&quot;thumb.indexOf(\'http\') &amp;gt;= 0&quot;&gt;',
+                                 '&lt;img src=&quot;{thumb}&quot; /&gt;',
+                             '&lt;tpl else&gt;',
+                                 '&lt;img src=&quot;' + me.defaultImagePath,
+                                 '{thumb}&quot; /&gt;',
+                             '&lt;/tpl&gt;',
+                         '&lt;/div&gt;',
+                         '&lt;span&gt;{title}&lt;/span&gt;',
+                     '&lt;/div&gt;',
+                 '&lt;/tpl&gt;'
+             ];
+        }
+
+        // setup store
+        me.store = store;
+
+        this.callParent(arguments);
+    }
+});
+</pre>
+</body>
+</html>

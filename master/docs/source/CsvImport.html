@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*global FileReader*/
+/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-form-CsvImport'>/**
+</span> * HTML 5 - CSV Importer
+ *
+ * This form is used to import csv files to an Ext-JS Grid. As it uses the HTML5
+ * File-Api InternetExplorer &lt; 10 is not supported.
+ *
+ * Current CSV Requirements:
+ *      First Row contains headers.
+ *      Seperator is comma.
+ *      Strings are in doublequotes.
+ *
+ */
+Ext.define(&quot;BasiGX.view.form.CsvImport&quot;,{
+    extend: &quot;Ext.form.Panel&quot;,
+
+    xtype: &quot;form-csvimport&quot;,
+
+    config: {
+<span id='BasiGX-view-form-CsvImport-cfg-grid'>        grid: null,
+</span><span id='BasiGX-view-form-CsvImport-cfg-dataArray'>        dataArray: null
+</span>    },
+
+<span id='BasiGX-view-form-CsvImport-method-initComponent'>    initComponent: function(conf){
+</span>        var me = this;
+        me.callParent(conf);
+
+        if(!me.getGrid()){
+            Ext.Error.raise('No grid defined for csv-importer.');
+        }
+    },
+
+<span id='BasiGX-view-form-CsvImport-property-associatonObject'>    /**
+</span>     * You can put default associations here. These will fill the comboboxes.
+     *
+     * The key represents the csv-column.
+     * The value represents the Grid column text.
+     *
+     * associatonObject: {
+     *     Name: &quot;Nachname&quot;,
+     *     Vorname: &quot;Vorname&quot;,
+     *     Straße: null,
+     *     Hausnummer: null,
+           Postleitzahl: null,
+     *     Stadt: null,
+     *     &quot;E-Mail_1&quot;: &quot;E-Mail&quot;,
+     *     &quot;E-Mail_2&quot;: null
+     *},
+     */
+    associatonObject: {
+
+    },
+
+<span id='BasiGX-view-form-CsvImport-property-bodyPadding'>    bodyPadding: 10,
+</span>
+<span id='BasiGX-view-form-CsvImport-property-items'>    items: [{
+</span>        xtype: 'filefield',
+        name: 'csv_file',
+        fieldLabel: 'CSV-Datei',
+        labelWidth: 70,
+        width: 400,
+        msgTarget: 'side',
+        allowBlank: false,
+        buttonText: 'Datei auswähen …',
+        validator: function(val) {
+            var fileName = /^.*\.(csv)$/i;
+            var errMsg = 'Der Datenimport ist nur mit CSV-Dateien möglich.';
+            return fileName.test(val) || errMsg;
+      }
+    }],
+
+<span id='BasiGX-view-form-CsvImport-property-buttons'>    buttons: [{
+</span>        xtype: &quot;button&quot;,
+        name: &quot;importBtn&quot;,
+        text: &quot;Importieren&quot;,
+        handler: function(btn){
+            var me = this.up('form');
+            me.startImport(btn);
+        },
+        disabled: true
+    },{
+        text: 'Datei einlesen',
+        handler: function() {
+            if (window.FileReader) {
+                var me = this.up('form');
+                var fileField = me.down('filefield');
+                var file = fileField.extractFileInput().files[0];
+                var reader = new FileReader();
+
+                reader.readAsText(file);
+                reader.onload = me.onLoad;
+                reader.onerror = me.onError;
+            } else {
+                Ext.Toast('FileReader are not supported in this browser.');
+            }
+        }
+    }],
+
+<span id='BasiGX-view-form-CsvImport-method-onLoad'>    onLoad: function(event) {
+</span>        var me = Ext.ComponentQuery.query('form-csvimport')[0];
+        var csv = event.target.result;
+        var dataArray = Ext.util.CSV.decode(csv);
+        me.setDataArray(dataArray);
+
+        me.setupAssociations(dataArray[0], me);
+
+    },
+
+<span id='BasiGX-view-form-CsvImport-method-onError'>    onError: function(evt) {
+</span>        if(evt.target.error.name === &quot;NotReadableError&quot;) {
+            Ext.toast(&quot;Canno't read file !&quot;);
+        }
+    },
+
+<span id='BasiGX-view-form-CsvImport-method-setupAssociations'>    setupAssociations: function(titleRow, me){
+</span>        var dataModelColumns = me.getGrid().query('gridcolumn[hidden=false]');
+        var columnTitles = [];
+        var assoFieldset = Ext.create(&quot;Ext.form.FieldSet&quot;, {
+            title: &quot;Felder asozieren&quot;,
+            name: &quot;assoFieldset&quot;,
+            layout: &quot;form&quot;,
+            scrollable: &quot;y&quot;,
+            maxHeight: 300,
+            collapsible: true,
+            margin: &quot;0 0 30 0&quot;
+        });
+
+        Ext.each(dataModelColumns, function(column){
+            columnTitles.push(column.text);
+        }, me);
+
+        Ext.each(titleRow, function(columnName){
+            assoFieldset.add({
+                xtype: &quot;combobox&quot;,
+                name: columnName,
+                fieldLabel: columnName,
+                store: columnTitles,
+                value: me.associatonObject[columnName],
+                msgTarget: &quot;side&quot;
+            });
+        }, me);
+
+        me.down('button[name=importBtn]').enable();
+
+        me.add(assoFieldset);
+    },
+
+<span id='BasiGX-view-form-CsvImport-method-addToGrid'>    addToGrid: function(dataArray){
+</span>        var me = this;
+        var store = me.getGrid().getStore();
+
+        me.setLoading(true);
+        Ext.each(dataArray, function(dataRow, index){
+            if(index &gt; 0){ //skip first row of csv. it contains the header
+                var instance = this.parseDataFromRow(dataRow);
+                store.add(instance);
+            }
+        }, me);
+        me.setLoading(false);
+    },
+
+<span id='BasiGX-view-form-CsvImport-method-parseDataFromRow'>    parseDataFromRow: function(dataRow){
+</span>        var me = this;
+        var data = {};
+
+        Ext.each(dataRow, function(csvColumn, rowIdx){
+            var gridColumText = me.associatonObject[
+                me.getDataArray()[0][rowIdx]];
+            if(!Ext.isEmpty(csvColumn) &amp;&amp; !Ext.isEmpty(gridColumText)){
+                var gridColumn = me.getGrid()
+                    .down('gridcolumn[text='+gridColumText+']');
+                if(gridColumn){
+                    var dataIndex = gridColumn.dataIndex;
+                    data[dataIndex] = csvColumn;
+                } else {
+                    Ext.Error.raise(gridColumText,
+                        ' does not exist. Please check you associationObject.');
+                }
+            }
+        });
+
+        return Ext.create(this.getGrid().getStore().getModel(), data);
+    },
+
+<span id='BasiGX-view-form-CsvImport-method-startImport'>    startImport: function(btn){
+</span>        var me = this;
+        var combos = btn.up('form').down('fieldset[name=assoFieldset]').
+            query('combo');
+        var comboValues = [];
+        var formValid = true;
+
+        Ext.each(combos, function(combo){
+            var comboVal = combo.getValue();
+            if(Ext.Array.contains(comboValues, comboVal) &amp;&amp;
+                !Ext.isEmpty(comboVal)){
+                combo.markInvalid(&quot;Diese Feld wurde bereits mit einer anderen&quot; +
+                    &quot;Spalte asoziert&quot;);
+                formValid = false;
+            } else {
+                this.associatonObject[combo.getFieldLabel()] = comboVal;
+            }
+            comboValues.push(comboVal);
+        }, me);
+
+        if(formValid &amp;&amp; me.getDataArray()){
+            me.addToGrid(me.getDataArray());
+        }
+
+        me.fireEvent('importcomplete', me);
+    }
+});
+</pre>
+</body>
+</html>
