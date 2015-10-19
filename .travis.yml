@@ -1,0 +1,9 @@
+language: node_js
+node_js: "0.12"
+install:
+  - npm install
+script:
+  - npm run lint-js
+branches:
+  only:
+    - master
