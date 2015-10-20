@@ -160,7 +160,9 @@ Ext.define('BasiGX.plugin.Hover', {
            },
            success: cb,
            failure: function(resp) {
-               Ext.log.error('Couldn\'t get FeatureInfo', resp);
+               if(!resp.aborted){
+                   Ext.log.error('Couldn\'t get FeatureInfo', resp);
+               }
            }
        });
    },
@@ -205,7 +207,8 @@ Ext.define('BasiGX.plugin.Hover', {
            // or has any other value than "false", the layer will be
            // requested
            if(hoverable !== false) {
-               if (source instanceof ol.source.TileWMS) {
+               if (source instanceof ol.source.TileWMS ||
+                   source instanceof ol.source.ImageWMS) {
 //                   me.cleanupHoverArtifacts();
                    var url = source.getGetFeatureInfoUrl(
                            evt.coordinate,
