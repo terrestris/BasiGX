@@ -224,6 +224,9 @@ Ext.define('BasiGX.plugin.Hover', {
                            .readFeatures(resp.responseText);
                        var respProjection = (new ol.format.GeoJSON())
                            .readProjection(resp.responseText);
+
+                       var hvl = me.getHoverVectorLayer();
+                       hvl.setStyle(me.highlightStyleFunction);
                        me.showHoverFeature(layer, respFeatures, respProjection);
 
                        Ext.each(respFeatures, function(feature){
