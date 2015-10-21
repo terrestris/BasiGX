@@ -282,23 +282,20 @@ Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
 
         var legendTreeConfig = me.getLegendPanelConfig();
 
+
         // set the store if not configured
         if(!legendTreeConfig.store &amp;&amp; me.mapPanel) {
             var treeStore = Ext.create('GeoExt.data.store.LayersTree', {
-                layerGroup: me.mapPanel.getMap().getLayerGroup(),
-                showLayerGroupNode: false,
-                filters: [
-                    // filter out vector layers
-                    function(rec) {
-                        var layer = rec.data;
-                        var util = BasiGX.util.Layer;
-                        var showKey = util.KEY_DISPLAY_IN_LAYERSWITCHER;
-                        if (layer.get(showKey) === false) {
-                            return false;
-                        }
-                        return true;
-                    }
-                ]
+                layerGroup: me.mapPanel.getMap().getLayerGroup()
+            });
+            treeStore.addFilter(function(rec) {
+                var layer = rec.getOlLayer();
+                var util = BasiGX.util.Layer;
+                var showKey = util.KEY_DISPLAY_IN_LAYERSWITCHER;
+                if (layer.get(showKey) === false) {
+                    return false;
+                }
+                return true;
             });
 
             // set the store
