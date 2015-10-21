@@ -68,6 +68,22 @@ cp -r $INSTALL_DIR/../repo/pkgs/$BASIGX_PACKAGE_NAME/$BASIGX_PACKAGE_VERSION cmd
 cp $INSTALL_DIR/../repo/pkgs/catalog.json cmd/pkgs/
 cp $INSTALL_DIR/../repo/pkgs/$BASIGX_PACKAGE_NAME/catalog.json cmd/pkgs/$BASIGX_PACKAGE_NAME
 
+# Since the catalog.json also references the GeoExt package, we also republish
+# it here
+#
+# TODO how can we avoid this republishing or optionally at least have the
+#      versions and names be auto-configured?
+#      * One idea would be to simply copy over the complete `repo/pkgs`-folder
+#      * Alternatively, we should probably only advertize the BasiGX package in
+#        the catalog json, but I am unsure, if that fits with the sencha
+#        philosophy. It may be that dependent packages have to provided along
+#        with the main package, to ensure the dependencies can be resolved at
+#        time sencha builds concrete apps / other packages.
+GEOEXT_PACKAGE_NAME=GeoExt
+GEOEXT_PACKAGE_VERSION=3.0.0
+mkdir -p cmd/pkgs/$GEOEXT_PACKAGE_NAME
+rm -Rf cmd/pkgs/$GEOEXT_PACKAGE_NAME/$GEOEXT_PACKAGE_VERSION
+cp -r $INSTALL_DIR/../repo/pkgs/$GEOEXT_PACKAGE_NAME/$GEOEXT_PACKAGE_VERSION cmd/pkgs/$GEOEXT_PACKAGE_NAME
 
 # 2. examples, resources & src copied from repo
 for RAW_CP_DIR in $RAW_CP_DIRS
