@@ -20,7 +20,7 @@
  *
  */
 Ext.define("BasiGX.view.panel.LegendTree", {
-    extend: "GeoExt.tree.Panel",
+    extend: "Ext.tree.Panel",
     xtype: "basigx-panel-legendtree",
 
     requires: [
@@ -36,6 +36,7 @@ Ext.define("BasiGX.view.panel.LegendTree", {
      * adding custom method to get access to row styles
      */
     viewConfig: {
+        plugins: { ptype: 'treeviewdragdrop' },
         getRowClass: function(record){
             return this.up().getCssForRow(record);
         }
