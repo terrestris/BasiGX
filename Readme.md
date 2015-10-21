@@ -1,5 +1,7 @@
 # BasiGX
 
+[![Build Status](https://travis-ci.org/terrestris/BasiGX.svg?branch=master)](https://travis-ci.org/terrestris/BasiGX)
+
 …pronounced `ˈbeɪsɪks/`
 
 BasiGX is an ExtJS package used to create modern GIS-Applications based on ExtJS 6, GeoExt3 and OpenLayers 3.
