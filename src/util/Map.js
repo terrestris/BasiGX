@@ -15,7 +15,7 @@
  */
 /**
  *
- * Layer Util
+ * Map Util
  *
  * Some methods to work with ol-layers
  *
@@ -27,6 +27,9 @@ Ext.define('BasiGX.util.Map', {
             return map.getView().getResolution();
         },
 
+        /**
+         * http://gis.stackexchange.com/questions/158435/how-to-get-current-scale-in-openlayers-3
+         */
         getScale: function(map){
             var res = this.getResolution(map);
             var units = map.getView().getProjection().getUnits();
