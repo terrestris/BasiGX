@@ -117,6 +117,8 @@ Ext.define("BasiGX.view.panel.LayerSetChooser", {
         this.down('basigx-view-layerset').on(
             'select', this.onLayerSetSelect);
         this.down('basigx-view-layerset').on(
+            'selectionchange', this.onLayerSetSelectionchange);
+        this.down('basigx-view-layerset').on(
                 'itemclick', this.onLayerSetClick);
         this.down('basigx-view-layerset').on(
             'itemdblclick', this.onLayerSetDblClick);
@@ -130,6 +132,15 @@ Ext.define("BasiGX.view.panel.LayerSetChooser", {
     onLayerSetSelect: function (view, rec, index, opts) {
         this.up('basigx-panel-layersetchooser').fireEvent(
             'select', view, rec, index, opts);
+    },
+
+    /**
+     * Just firing an event on the panel.
+     * Listen to the select event to implement custom handling
+     */
+    onLayerSetSelectionchange: function (view, selected, eOpts) {
+        this.up('basigx-panel-layersetchooser').fireEvent(
+            'selectionchange', view, selected, eOpts);
     },
 
     /**
