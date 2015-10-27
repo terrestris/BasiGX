@@ -3,7 +3,7 @@
 (function(doc, global){
     var specPath = './spec/',
         dependencies = [
-            'basics.js'
+            'basics.test.js'
         ],
         getScriptTag = global.TestUtil.getExternalScriptTag,
         dependencyCnt = dependencies.length,
