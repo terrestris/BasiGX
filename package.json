@@ -3,7 +3,7 @@
     "type": "code",
     "creator": "terrestris GmbH & Co. KG",
     "author": "terrestris GmbH & Co. KG",
-    "license": "gpl-3",
+    "license": "GPL-3.0",
     "summary": "Basic Components for ExtJS 6 and GeoExt 3",
     "description": "Basic Components for ExtJS 6 and GeoExt 3",
     "detailedDescription": "This package consists of several components that can be used to setup an Application based on ExtJS 6, GeoExt 3 and OL3",
