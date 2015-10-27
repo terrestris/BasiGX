@@ -9,7 +9,7 @@ install:
   - npm install
   - gem install jsduck
 script:
-  - npm run lint-js
+  - npm test
   - ./ci/create-sencha-package.sh
 after_success:
   - ./ci/update-gh-pages.sh > /dev/null 2>&1

@@ -33,13 +33,19 @@
     },
     "output": "${package.dir}/build",
     "scripts": {
-        "lint-js": "eslint -c .eslintrc src/"
+        "pretest": "npm run lint-js",
+        "test": "mocha-phantomjs --ssl-protocol=any --ignore-ssl-errors=true test/index.html",
+        "lint-js": "eslint -c .eslintrc src/ && eslint -c test/.eslintrc test/"
     },
     "repository": {
         "type": "git",
         "url": "git@gitlab.intranet.terrestris.de:terrestris/BasiGX.git"
     },
     "devDependencies": {
-        "eslint": "^1.2.1"
+        "eslint": "1.7.3",
+        "expect.js": "0.3.1",
+        "mocha": "2.3.3",
+        "mocha-phantomjs": "4.0.1",
+        "sinon": "1.17.2"
     }
 }
