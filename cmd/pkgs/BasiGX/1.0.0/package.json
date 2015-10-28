@@ -12,11 +12,11 @@
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "7af976f7-9242-4d4e-a6c1-4e6a5169d268",
-      "created": "2015-10-27T11:19:51Z",
+      "uuid": "b049d2f7-5a3a-4b04-96b7-9a54efd30416",
+      "created": "2015-10-28T11:29:32Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "4GZGTb9pCGM\u003d",
-      "signature": "getkTlvXl8p1ORQMH2qtvNpKvPVyea/AfXi8ZLc/OG0PcYL0lM5EL0cQankfBIkVzTLWUeAb2iqYd5DueubDGE3YoKzyQ5UnmmNnbZTHwM9wzKVtrJoplV1F3tDhjJTp/ZBLLTYHNQdlOnDEByZ+I5DEf23Bmd2TAxA3NI/h1JxUib8W+hsEXtKtPSKnQ8bte5aSWVf0M7v68m9bEBpuJM9jFXUTw1tLocvEvJ6w6ZCInALnjhEsCGhG6vkc3vosI8SBd/lSOssNXxQftUMv66vUONjg7B+a+Qu8+w7Aw9xXm88MEDC+cEOBFQvEGUKq/teOCEq0rUA99a0t+r/ODQ\u003d\u003d"
+      "nonce": "GpoMU40yXDA\u003d",
+      "signature": "LgVkOfvsoyRLkKogoK+AjTrUfP0U+qYsIELdqARy/FUZ5psEq3m9fxpGxs/6xyze7ao1U7UoHgVooEis15fZ+iBhTZ2SQf3odfhiAh0qgnVYMdB4M0NQWsvSWaQVOc0aki60dKyEglTQX+CO1rozow4G5mv72K+MVtOEAShGCut+IqzQVdJEIFEHt/m2rN2m6u4jn3X6gj2L53TZyxXj7JJ7YrrI3c/MivkYWODT5jxrbOE5d8jwSB95NjuzxXdBRjvwPeWrtmgUTc64yMnxmHNMbyvRH3zR813//GoHzbE3ZbOAQXUcKoq4sLOzE7n/43H4Y0tz8Zi7XpF8tKE2Ag\u003d\u003d"
     }
   ],
   "slicer": {
@@ -41,13 +41,25 @@
   },
   "output": "${package.dir}/build",
   "scripts": {
-    "lint-js": "eslint -c .eslintrc src/"
+    "pretest": "npm run lint-js",
+    "test": "mocha-phantomjs --ssl-protocol\u003dany --ignore-ssl-errors\u003dtrue test/index.html",
+    "lint-js": "eslint -c .eslintrc src/ \u0026\u0026 eslint -c test/.eslintrc test/",
+    "save-coverage": "mocha-phantomjs --ssl-protocol\u003dany --ignore-ssl-errors\u003dtrue --hooks ./test/phantom_hooks.js test/index.html",
+    "clean-coverage": "rm -rf src_instrumented src_old coverage",
+    "ci-coverage": "npm run clean-coverage \u0026\u0026 istanbul instrument src -o src_instrumented \u0026\u0026 mv src src_old \u0026\u0026 mv src_instrumented src \u0026\u0026 istanbul cover npm run save-coverage \u0026\u0026 mv src src_instrumented \u0026\u0026 mv src_old src \u0026\u0026 istanbul report --root ./coverage lcovonly \u0026\u0026 cat ./coverage/lcov.info | coveralls",
+    "html-coverage": "npm run clean-coverage \u0026\u0026 istanbul instrument src -o src_instrumented \u0026\u0026 mv src src_old \u0026\u0026 mv src_instrumented src \u0026\u0026 istanbul cover npm run save-coverage \u0026\u0026 mv src src_instrumented \u0026\u0026 mv src_old src \u0026\u0026 istanbul report --root ./coverage html"
   },
   "repository": {
     "type": "git",
     "url": "git@gitlab.intranet.terrestris.de:terrestris/BasiGX.git"
   },
   "devDependencies": {
-    "eslint": "^1.2.1"
+    "coveralls": "2.11.4",
+    "eslint": "1.7.3",
+    "expect.js": "0.3.1",
+    "istanbul": "0.3.18",
+    "mocha": "2.3.3",
+    "mocha-phantomjs": "4.0.1",
+    "sinon": "1.17.2"
   }
 }
