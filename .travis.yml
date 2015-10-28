@@ -9,9 +9,10 @@ install:
   - npm install
   - gem install jsduck
 script:
-  - npm run lint-js
+  - npm test
   - ./ci/create-sencha-package.sh
 after_success:
+  - npm run ci-coverage
   - ./ci/update-gh-pages.sh > /dev/null 2>&1
 branches:
   only:

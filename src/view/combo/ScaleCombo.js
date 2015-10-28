@@ -105,7 +105,6 @@ Ext.define("BasiGX.view.combo.ScaleCombo", {
             me.map = Ext.ComponentQuery.query("gx_map")[0].getMap();
         }
 
-
         // using hard scales here as there is no way currently known to
         // retrieve all resolutions from the map
         var scaleStore = Ext.create('Ext.data.Store', {
@@ -162,6 +161,7 @@ Ext.define("BasiGX.view.combo.ScaleCombo", {
      * a little getScale helper
      */
     getCurrentScale: function (resolution) {
+        // TODO don't query! And move some other place.
         var map = Ext.ComponentQuery.query('gx_map')[0].getMap(),
             units = map.getView().getProjection().getUnits(),
             dpi = 25.4 / 0.28,
