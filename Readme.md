@@ -1,6 +1,6 @@
 # BasiGX
 
-[![Build Status](https://travis-ci.org/terrestris/BasiGX.svg?branch=master)](https://travis-ci.org/terrestris/BasiGX)
+[![Build Status](https://travis-ci.org/terrestris/BasiGX.svg?branch=master)](https://travis-ci.org/terrestris/BasiGX) [![Coverage Status](https://coveralls.io/repos/terrestris/BasiGX/badge.svg?branch=master&service=github)](https://coveralls.io/github/terrestris/BasiGX?branch=master)
 
 …pronounced `ˈbeɪsɪks/`
 
@@ -38,4 +38,3 @@ Feedback is more than welcome. Please open an issue or contact us directly via `
 ## License
 
 GPL v3
-
