@@ -115,7 +115,7 @@ Ext.define("BasiGX.view.component.Map", {
     constructor: function(config) {
         var me = this;
 
-        if (!me.getMap()){
+        if (!config.map){
 
             // need to handle config first as its not applied yet
             var url = config && config.appContextPath ?
@@ -150,9 +150,10 @@ Ext.define("BasiGX.view.component.Map", {
             me.setMap(olMap);
         }
 
+        me.callParent([config]);
+
         me.addControls();
 
-        me.callParent([config]);
     },
 
     addControls: function(){
