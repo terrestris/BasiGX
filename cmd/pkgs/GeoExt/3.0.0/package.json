@@ -9,11 +9,11 @@
   "signatures": [
     {
       "name": "GeoExt Contributors",
-      "uuid": "7b3bdd25-67c6-4202-a019-e5b90cfbc3bf",
-      "created": "2015-10-29T00:32:55Z",
+      "uuid": "52b62f33-c685-4072-9b32-a7691bcf1d71",
+      "created": "2015-11-04T10:56:26Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "klCzhsRk0Ug\u003d",
-      "signature": "g+sR9OVjGDmFD7DHO4xJXUacw0ed+3ITct5gGfNRiNZTGDOdY87punfs/v/eYkMQmuymeB7oXHVi/o69Z5HUFChcSAQEfW3SmAezUeMmGsGwwXCSSiyi0B2ARfRXaIajCJcV8hWfs6zVUvvTZrSTsae4/ehfdSk+0rBA1BUws4zfBk8NxZkv3qRbfkPM35O9CWnq8/J2AG1yalmlUgatDZXDtxR6xGRlTmVixC7J0PnTZQrml9PkqEfoUa596yQ+N2nslFjBQTBHevlDVhH7dDJSV2/kKg6qaoAktkwA4dxyR8ad7EiJf/sTaq6y9p0QuiGLnsa/k5iSkBsSfQZbBw\u003d\u003d"
+      "nonce": "l66SbZeXYiU\u003d",
+      "signature": "Svcfm1rStL5s/iaRSW0Aa2JVRCNd+U18U1pQFxa+mBU+FsBrva8FNn2S7LJR9O0h0nCvBdsxcswcABURokhYIosBY0nr8RSMExLGWIAP8LV1lbIaNIVNaQIZT2/CzXBvJLcc28nF9m4c1Y5XMjYbNi8rswOA/7SlMOYmTao7XGmcpNqGl+1G7dGgsJ5lSyCDDwRo5dkmeDXlUFPasU7eWDjwiLb6kLeli9FavkdhaDPs1NW8ObCfwMl5Dkw/8fq6vXpyedPk9tSyQHrKP3UV5wq6xU+pq0kLxpD5gJF3jP83sEA3iEZdlGGZkv0/EuylGFZsKs3JKeicwH1KxCAnRg\u003d\u003d"
     }
   ],
   "slicer": {
@@ -33,6 +33,7 @@
     "url": "https://github.com/geoext/geoext3.git"
   },
   "scripts": {
+    "pretest": "npm run-script lint-js",
     "test": "mocha-phantomjs --ssl-protocol\u003dany --ignore-ssl-errors\u003dtrue test/index.html",
     "test:watch": "watch \u0027npm test\u0027 src/ test/",
     "lint-js": "eslint src/ examples/ \u0026\u0026 eslint -c test/.eslintrc test/spec/",
