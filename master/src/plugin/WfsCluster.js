@@ -140,8 +140,11 @@ Ext.define('BasiGX.plugin.WfsCluster', {
             Ext.each(clusterLayers, function(layer) {
                 if (layer.getVisible()) {
                     var featureType = layer.get('featureType');
+                    var baseUrl = layer.get('url');
                     Ext.Ajax.request({
-                        url: "../../geoserver.action?service=WFS&version=1.0.0&request=GetFeature&" +
+                        url: baseUrl + "?service=WFS&" +
+                            "version=1.0.0&" +
+                            "request=GetFeature&" +
                             "typeName=" + featureType + "&" +
                             "outputFormat=application/json&" +
                             "bbox=" + extent.join(",") + "&" +
