@@ -43,7 +43,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git@gitlab.intranet.terrestris.de:terrestris/BasiGX.git"
+        "url": "https://github.com/terrestris/BasiGX.git"
     },
     "devDependencies": {
         "coveralls": "2.11.4",
