@@ -12,11 +12,11 @@
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "838c2d2a-0912-457e-a0af-713001e11040",
-      "created": "2015-11-05T12:37:00Z",
+      "uuid": "695955d0-0dfe-4e14-a7fe-2da62132aa1a",
+      "created": "2015-11-18T08:49:36Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "HJ//OE1NcUs\u003d",
-      "signature": "VEU6iJYdOWA9j8EWseQquMGe2389o2b0MyjNYOsucOctspj2qLaB1JkGxOFIFDOkOVH61Csh+R7G+fs6nSUhXLgNbKu5Z2Wm8CPIgghCI9r7xmmKZ1ByvHkWSNaYkw05d2uhW0693BRmWXaRpBAW2sv5GaB+DMiaMhy4wp+4nNPCPCIVc4qb5EcIbtCr8Pzo/Cpaq+kfIyvi3r900IabtUf92iKPPyaU6q6G6HQjMv/YNS/7493LAorPbb+dcx+/2IXg/EBcbXIggv+vMicS3I+4EMEBqEZVGbj4oDAi0fIXr5dq/Ickge5djH03ah49erQeFfT29sC2eBqgpBXhPA\u003d\u003d"
+      "nonce": "CjBTo01PzRM\u003d",
+      "signature": "YvCtuVpUjKfKnvSZVbjTq/V/n7AjKnRiEJE2JGET3WIo/8+uPD5DOJPyEyqs/TN6T9BZU/NLNNp+sc2HB4U5smBC/g32ec6LByQnvv3duD/FzngA1sdYw3TNMQgeruxDm+j84cm9JeOvO67AlB4dbfJfC4Pk+9TqdeXlzUbrCGtx7B1DHAj9r7ISR+fVIEt3su7JzCgrppQ61L7sIR75kgCjfu7rNidG/C0cw7lpQzoi2SKjhcFyWVsdoru7OOHNNsUGE7bJ27snXWcJwv/AwWpgG3nRij9f3mBMoo1UErutQXvTCVPFtb6zbyNWSvazETt2Mmu0VR9cKAnXd89fFg\u003d\u003d"
     }
   ],
   "slicer": {
