@@ -82,6 +82,11 @@ Ext.define("BasiGX.view.panel.LayerSetChooser", {
     /**
      *
      */
+    tpl: null,
+
+    /**
+     *
+     */
     scrollable: 'y',
 
     /**
@@ -107,7 +112,8 @@ Ext.define("BasiGX.view.panel.LayerSetChooser", {
             this.items = [{
                 xtype: 'basigx-view-layerset',
                 scrollable: true,
-                layerSetUrl: this.layerSetUrl
+                layerSetUrl: this.layerSetUrl,
+                tpl: this.tpl
             }];
         }
 
