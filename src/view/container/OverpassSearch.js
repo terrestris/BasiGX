@@ -44,6 +44,11 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         overpassUrl: 'http://overpass-api.de/api/interpreter',
 
         /**
+         * The URL used to find tags for searchterms
+         */
+        tagFinderUrl: 'http://tagfinder.herokuapp.com/api/search',
+
+        /**
          *
          */
         format: 'json',
@@ -51,7 +56,7 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         /**
          * limit the search results count
          */
-        limit: 100,
+        limit: 300,
 
         /**
          * The lat-lon viewbox to limit the searchquery to
@@ -252,8 +257,25 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
 
             // correct the vectorlayerstyle for the grid symbolizer
             me.searchResultVectorLayer.setStyle(me.clusterStyleFn('', 8));
-
         }
+
+        var tagFinderResultStore = Ext.create('Ext.data.Store', {
+            sorters: [{
+                property: 'countAll',
+                direction: 'DESC'
+            }],
+            fields: [
+                 'prefLabel',
+                 {
+                     name: 'termRelated',
+                     type: 'string',
+                     convert: function(val) {
+                         return val.de[0] ? val.de[0] : '-';
+                     }
+                 },
+                 'countAll'
+            ]
+        });
 
         var searchResultStore = Ext.create('GeoExt.data.store.Features', {
             map: map,
@@ -270,6 +292,40 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
                 listeners: {
                     change: me.handleKeyDown
                 }
+            },
+            {
+                xtype: 'grid',
+                name: 'tagfinderresultgrid',
+                hidden: true,
+                title: 'Suchkategorien',
+                store: tagFinderResultStore,
+                columns: [
+                    {
+                        dataIndex: 'prefLabel',
+                        text: 'OSM-Tag',
+                        flex: 3,
+                        renderer: function(value) {
+                            return '<span data-qtip="' + value + '">' +
+                                value + '</span>';
+                        }
+                    },
+                    {
+                        dataIndex: 'termRelated',
+                        text: 'Kategorie',
+                        flex: 3,
+                        renderer: function(value) {
+                            return '<span data-qtip="' + value + '">' +
+                                value + '</span>';
+                        }
+                    },
+                    {
+                        dataIndex: 'countAll',
+                        text: 'Tag-Häufigkeit',
+                        flex: 2
+                    }
+                ],
+                width: 200,
+                height: 300
             },
             {
                 xtype: 'grid',
@@ -308,16 +364,23 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         ];
         me.callParent(arguments);
 
-        me.on('overpassResponse', me.showSearchResults);
-        me.on('show', me.down('textfield').focus);
-
         var grid = me.down('grid[name=overpasssearchresultgrid]');
+        var tagFinderGrid = me.down('grid[name=tagfinderresultgrid]');
+
+        me.on('tagfinderResponse', function(res) {
+            tagFinderGrid.getStore().loadData(res);
+            tagFinderGrid.show();
+        });
+        me.on('overpassResponse', me.showSearchResults, me);
+
+        me.on('show', me.down('textfield').focus);
 
         if (me.getHighLightFeatureOnHoverInGrid()) {
             grid.on('itemmouseenter', me.highlightFeature, me);
             grid.on('itemmouseleave', me.unhighlightFeature, me);
         }
         grid.on('itemclick', me.highlightSelectedFeature, me);
+        tagFinderGrid.on('itemclick', me.triggerSearch, me);
     },
 
     /**
@@ -334,15 +397,15 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         // set the searchterm on component
         me.searchTerm = val;
 
-        // reset grid from aold values
-        me.resetGrid();
+        // reset grid from old values
+        me.resetGrids();
 
         // prepare the describeFeatureType for all given layers
         if (me.typeDelayTask) {
             me.typeDelayTask.cancel();
         }
         me.typeDelayTask = new Ext.util.DelayedTask(function(){
-            me.triggerSearch();
+            me.findTagForSearchTerm();
         });
         me.typeDelayTask.delay(me.getTypeDelay());
 
@@ -351,35 +414,39 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
     resetSearchGridAndText: function() {
         var me = this;
         me.down('textfield[name=overpassSearchTerm]').setValue('');
-        me.resetGrid();
+        me.resetGrids();
     },
 
 
     /**
      *
      */
-    resetGrid: function() {
+    resetGrids: function() {
         var me = this;
-        me.searchResultVectorLayer.getSource().clear();
-        me.down('grid[name=overpasssearchresultgrid]').hide();
+        var overpassGrid = me.down('grid[name=overpasssearchresultgrid]');
+        var tagFinderGrid = me.down('grid[name=tagfinderresultgrid]');
+        me.searchResultVectorLayer.getSource().clear(true);
+        overpassGrid.hide();
+        overpassGrid.getStore().removeAll();
+        tagFinderGrid.hide();
+        tagFinderGrid.getStore().removeAll();
     },
 
     /**
-     *
+     * find osm tags for the searchterm
      */
-    triggerSearch: function() {
+    findTagForSearchTerm: function() {
+
         var me = this,
             results;
 
-        // details for query params:
-        // http://wiki.openstreetmap.org/wiki/Overpass_API/Language_Guide
         var requestParams = {
-            data: '[out:' + me.getFormat() + '];' +
-            'node["name"~"' + me.searchTerm + '"]' +
-            '(' + me.getViewboxlbrt() + ');out ' + me.getLimit() + ' qt;'
+            query: me.searchTerm,
+            format: 'json',
+            lang: 'de'
         };
 
-        var url = me.getOverpassUrl() + "?";
+        var url = me.getTagFinderUrl() + "?";
         Ext.iterate(requestParams, function(k, v) {
             url += k + "=" + encodeURIComponent(v) + "&";
         });
@@ -390,6 +457,64 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
             url: url,
             success: function(response){
                 me.setLoading(false);
+                if(Ext.isString(response.responseText)) {
+                    results = Ext.decode(response.responseText);
+                } else if(Ext.isObject(response.responseText)) {
+                    results = response.responseText;
+                } else {
+                    Ext.log.error("Error! Could not parse " +
+                        "tagfinder response!");
+                }
+                if (results.length > 0) {
+                    var tagArray = [];
+                    Ext.each(results, function(res) {
+                        if (res.isTag) {
+                            tagArray.push(res);
+                        }
+                    });
+                    me.fireEvent('tagfinderResponse', tagArray);
+                } else {
+                    Ext.Msg.alert("Info", "Keine passenden Einträge gefunden");
+                }
+
+            },
+            failure: function(response) {
+                me.setLoading(false);
+                Ext.log.error("Error on tagfinder request:",
+                    response);
+            }
+        });
+    },
+
+    /**
+     *
+     */
+    triggerSearch: function(grid, rec) {
+        var me = this,
+            tagFinderGrid = me.down('grid[name=tagfinderresultgrid]');
+
+        if (tagFinderGrid.isVisible()) {
+            tagFinderGrid.hide();
+        }
+
+        var requestParams = {
+            data: '[out:' + me.getFormat() + '];'
+        };
+
+        requestParams.data += 'node[' + rec.data.prefLabel + ']';
+        requestParams.data += '(' + me.getViewboxlbrt() + ');';
+        requestParams.data += 'out ' + me.getLimit() + ' qt;';
+
+        var url = me.getOverpassUrl() + "?";
+
+        me.setLoading(true);
+
+        Ext.Ajax.request({
+            url: url,
+            params: {data: requestParams.data},
+            success: function(response){
+                me.setLoading(false);
+                var results;
                 if(Ext.isString(response.responseText)) {
                     results = Ext.decode(response.responseText);
                 } else if(Ext.isObject(response.responseText)) {
@@ -408,30 +533,6 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         });
     },
 
-    /**
-     * Response example:
-     *  {
-          "version": 0.6,
-          "generator": "Overpass API",
-          "osm3s": {
-            "timestamp_osm_base": "2015-09-25T06:54:02Z",
-            "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
-          },
-          "elements": [
-            {
-              "type": "node",
-              "id": 429033932,
-              "lat": 52.8368526,
-              "lon": 7.1013506,
-              "tags": {
-                "amenity": "pharmacy",
-                "dispensing": "yes",
-                "name": "Maximilianapotheke"
-              }
-            }
-          ]
-        }
-     */
     showSearchResults: function(response) {
 
         var me = this,
@@ -450,10 +551,12 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
                 )),
                 properties: feature
             });
-            olFeat.set('displayfield', feature.tags.name);
+            olFeat.set('displayfield', feature.tags.name || 'Kein Name gefunden');
 
             me.searchResultVectorLayer.getSource().addFeature(olFeat);
         });
+
+        me.searchResultVectorLayer.setStyle(me.getSearchResultFeatureStyle());
 
         var featureExtent = me.searchResultVectorLayer.getSource().getExtent();
         if(!Ext.Array.contains(featureExtent, Infinity)){
@@ -550,20 +653,8 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
      *
      */
     highlightSelectedFeature: function(tableView, record, item) {
-        var store = tableView.getStore();
-        store.each(function(rec){
-            rec.olObject.setStyle(this.getSearchResultFeatureStyle());
-            var row = tableView.getRowByRecord(rec);
-            if (this.clusterResults) {
-                this.updateRenderer(row, this.clusterStyleFn('', 8));
-            } else {
-                this.updateRenderer(row, this.getSearchResultFeatureStyle());
-            }
-        }, this);
-
         record.olObject.setStyle(this.getSearchResultSelectFeatureStyle());
         this.updateRenderer(item, this.getSearchResultSelectFeatureStyle());
-
         this.zoomToExtent(record.olObject.getGeometry());
     },
 
