@@ -19,6 +19,7 @@
  * Button used to instanciate the basigx-form-addwms in order to add a
  * WMS to the map
  *
+ * @class BasiGX.view.button.AddWms
  */
 Ext.define("BasiGX.view.button.AddWms", {
     extend: "Ext.button.Button",

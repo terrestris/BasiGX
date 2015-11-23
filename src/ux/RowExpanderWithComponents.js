@@ -1,14 +1,13 @@
 /*eslint no-eval:1*/ // turn eval usage into a warning when linting
 /**
+ * RowExpanderWithComponents plugin
  *
  * This an ux originally created for ExtJS 4.2.2 by David French under MIT License.
  *
  * Modified by terrestris to fit the needs of ExtJS 6.
  * https://github.com/davidffrench/Ext.ux.RowExpanderWithComponents
  *
- */
-/**
- * RowExpanderWithComponents plugin
+ * @class BasiGX.ux.RowExpanderWithComponents
  */
 Ext.define('BasiGX.ux.RowExpanderWithComponents', {
     extend: 'Ext.grid.plugin.RowExpander',

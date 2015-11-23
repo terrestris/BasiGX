@@ -18,6 +18,7 @@
  *
  * Lets the user control the maps scale with a combobox
  *
+ * @class BasiGX.view.combo.ScaleCombo
  */
 Ext.define("BasiGX.view.combo.ScaleCombo", {
     xtype: "basigx-combo-scale",

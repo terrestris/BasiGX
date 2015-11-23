@@ -19,6 +19,7 @@
  * Used to show a headerpanel in the viewport.
  * Class usually instanciated in the map container.
  *
+ * @class BasiGX.view.panel.Header
  */
 Ext.define("BasiGX.view.panel.Header", {
     extend: "Ext.panel.Panel",

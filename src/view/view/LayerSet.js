@@ -18,6 +18,7 @@
  *
  * Used in the LayerSetChooser Panel
  *
+ * @class BasiGX.view.view.LayerSet
  */
 Ext.define("BasiGX.view.view.LayerSet", {
     extend: "Ext.view.View",

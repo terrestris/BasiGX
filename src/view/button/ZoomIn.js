@@ -18,6 +18,7 @@
  *
  * Button used to zoom in
  *
+ * @class BasiGX.view.button.ZoomIn
  */
 Ext.define("BasiGX.view.button.ZoomIn", {
     extend: "Ext.button.Button",

@@ -22,14 +22,16 @@
  * selected record
  *
  * Example:
- *      {
-            xtype: 'basigx-panel-layersetchooser',
-            layerSetUrl: 'classic/resources/layerset.json',
-            listeners: {
-                itemclick: this.handleLayerSetClick
-            }
-        }
  *
+ *     {
+ *         xtype: 'basigx-panel-layersetchooser',
+ *         layerSetUrl: 'classic/resources/layerset.json',
+ *         listeners: {
+ *             itemclick: this.handleLayerSetClick
+ *         }
+ *     }
+ *
+ * @class BasiGX.view.panel.LayerSetChooser
  */
 Ext.define("BasiGX.view.panel.LayerSetChooser", {
     extend: "Ext.panel.Panel",

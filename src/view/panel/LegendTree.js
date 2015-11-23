@@ -18,6 +18,7 @@
  *
  * Used to build a TreePanel with layer legends.
  *
+ * @class BasiGX.view.panel.LegendTree
  */
 Ext.define("BasiGX.view.panel.LegendTree", {
     extend: "Ext.tree.Panel",

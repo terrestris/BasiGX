@@ -20,6 +20,7 @@
  * components. Using this container leads to a map with integrated or
  * overlapping components, instead of arranging them in a border layout.
  *
+ * @class BasiGX.view.panel.MapContainer
  */
 Ext.define("BasiGX.view.panel.MapContainer", {
     extend: "Ext.panel.Panel",

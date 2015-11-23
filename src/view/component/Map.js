@@ -20,6 +20,7 @@
  * If no appContext is found, a default one will be loaded.
  * Class usually instanciated in map container.
  *
+ * @class BasiGX.view.component.Map
  */
 Ext.define("BasiGX.view.component.Map", {
     extend: "GeoExt.component.Map",

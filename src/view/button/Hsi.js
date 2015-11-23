@@ -14,10 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * ZoomIn Button
+ * HSI Button
  *
- * Button used to zoom in
+ * Button used to query for information.
  *
+ * @class BasiGX.view.button.Hsi
  */
 Ext.define("BasiGX.view.button.Hsi", {
     extend: "Ext.button.Button",
