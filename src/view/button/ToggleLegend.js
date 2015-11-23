@@ -42,9 +42,11 @@ Ext.define("BasiGX.view.button.ToggleLegend", {
     },
 
     /**
-     *
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
      */
     glyph: 'xf022@FontAwesome',
+    html: '<i class="fa fa-list-alt fa-2x"></i>',
 
     config: {
         handler: function(button){

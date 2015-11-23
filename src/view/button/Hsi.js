@@ -42,9 +42,11 @@ Ext.define("BasiGX.view.button.Hsi", {
     },
 
     /**
-     *
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
      */
     glyph: 'xf05a@FontAwesome',
+    html: '<i class="fa fa-info-circle fa-2x"></i>',
 
     /**
      *

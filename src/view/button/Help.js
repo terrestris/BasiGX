@@ -46,9 +46,11 @@ Ext.define("BasiGX.view.button.Help", {
     },
 
     /**
-     *
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
      */
     glyph: 'xf059@FontAwesome',
+    html: '<i class="fa fa-question-circle fa-2x"></i>',
 
     /**
      *

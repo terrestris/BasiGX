@@ -38,7 +38,12 @@ Ext.define("BasiGX.view.button.ZoomIn", {
         text: '{text}'
     },
 
+    /**
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
     glyph: 'xf00e@FontAwesome',
+    html: '<i class="fa fa-search-plus fa-2x"></i>',
 
     /**
      *

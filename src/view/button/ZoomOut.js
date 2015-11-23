@@ -42,9 +42,11 @@ Ext.define("BasiGX.view.button.ZoomOut", {
     },
 
     /**
-     *
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
      */
     glyph: 'xf010@FontAwesome',
+    html: '<i class="fa fa-search-minus fa-2x"></i>',
 
     config: {
         handler: function() {

@@ -79,9 +79,11 @@ Ext.define("BasiGX.view.button.ZoomToExtent", {
     },
 
     /**
-     *
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
      */
     glyph: 'xf0b2@FontAwesome',
+    html: '<i class="fa fa-arrows-alt fa-2x"></i>',
 
     /**
      *
