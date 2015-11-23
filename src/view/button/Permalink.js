@@ -21,7 +21,7 @@
  * @class BasiGX.view.button.Permalink
  */
 Ext.define("BasiGX.view.button.Permalink", {
-    extend: "Ext.button.Button",
+    extend: "Ext.Button",
     xtype: 'basigx-button-permalink',
 
     requires: [
@@ -32,28 +32,8 @@ Ext.define("BasiGX.view.button.Permalink", {
     ],
 
     bind: {
-        text: '{text}',
-        tooltip: '{tooltip}'
+        text: '{text}'
     },
-
-    /**
-    *
-    */
-   handler: function(){
-       var win = Ext.ComponentQuery.query('[name=permalink-window]')[0];
-       if(!win){
-           Ext.create('Ext.window.Window', {
-               name: 'permalink-window',
-               title: 'Permalink',
-               layout: 'fit',
-               items: [{
-                   xtype: 'basigx-form-permalink'
-               }]
-           }).show();
-       } else {
-           BasiGX.util.Animate.shake(win);
-       }
-   },
 
     /**
      *
@@ -62,6 +42,36 @@ Ext.define("BasiGX.view.button.Permalink", {
         data: {
             tooltip: 'Permalink',
             text: 'Permalink'
+        }
+    },
+
+    config: {
+        handler: function(){
+            var win = Ext.ComponentQuery.query('[name=permalink-window]')[0];
+            if(!win){
+                Ext.create('Ext.window.Window', {
+                    name: 'permalink-window',
+                    title: 'Permalink',
+                    layout: 'fit',
+                    items: [{
+                        xtype: 'basigx-form-permalink'
+                    }]
+                }).show();
+            } else {
+                BasiGX.util.Animate.shake(win);
+            }
+        }
+    },
+
+    /**
+     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
         }
     }
 });

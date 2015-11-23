@@ -21,7 +21,7 @@
  * @class BasiGX.view.button.ZoomOut
  */
 Ext.define("BasiGX.view.button.ZoomOut", {
-    extend: "Ext.button.Button",
+    extend: "Ext.Button",
     xtype: 'basigx-button-zoomout',
 
     /**
@@ -34,29 +34,41 @@ Ext.define("BasiGX.view.button.ZoomOut", {
         }
     },
 
+    /**
+     *
+     */
     bind: {
-        text: '{text}',
-        tooltip: '{tooltip}'
+        text: '{text}'
     },
 
+    /**
+     *
+     */
     glyph: 'xf010@FontAwesome',
 
+    config: {
+        handler: function() {
+            var olMap = Ext.ComponentQuery.query('basigx-component-map')[0].getMap();
+            var olView = olMap.getView();
+            var zoom = ol.animation.zoom({
+                resolution: olView.getResolution(),
+                duration: 500
+            });
+
+            olMap.beforeRender(zoom);
+            olView.setResolution(olView.getResolution() * 2);
+        }
+    },
+
     /**
-    *
-    */
-   handler: function(button){
-       // TODO refactor so this works even outside of the mapcontainer
-       var olMap = button.up("basigx-panel-mapcontainer")
-           .down('gx_map').getMap();
-       var olView = button.up("basigx-panel-mapcontainer")
-           .down('gx_map').getView();
-       var zoom = ol.animation.zoom({
-           resolution: olView.getResolution(),
-           duration: 500
-       });
-
-       olMap.beforeRender(zoom);
-       olView.setResolution(olView.getResolution() * 2);
-   }
-
+     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+    }
 });

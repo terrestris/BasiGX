@@ -22,7 +22,7 @@
  * @class BasiGX.view.button.AddWms
  */
 Ext.define("BasiGX.view.button.AddWms", {
-    extend: "Ext.button.Button",
+    extend: "Ext.Button",
     xtype: 'basigx-button-addwms',
 
     requires: [
@@ -31,31 +31,12 @@ Ext.define("BasiGX.view.button.AddWms", {
         'BasiGX.util.Animate'
     ],
 
-    bind: {
-        text: '{text}',
-        tooltip: '{tooltip}'
-    },
-
     /**
-    *
-    */
-   handler: function(){
-       var win = Ext.ComponentQuery.query('[name=add-wms-window]')[0];
-       if(!win){
-           Ext.create('Ext.window.Window', {
-               name: 'add-wms-window',
-               title: 'WMS hinzufügen',
-               width: 500,
-               height: 400,
-               layout: 'fit',
-               items: [{
-                   xtype: 'basigx-form-addwms'
-               }]
-           }).show();
-       } else {
-           BasiGX.util.Animate.shake(win);
-       }
-   },
+     *
+     */
+    bind: {
+        text: '{text}'
+    },
 
     /**
      *
@@ -65,6 +46,41 @@ Ext.define("BasiGX.view.button.AddWms", {
             tooltip: 'WMS hinzufügen…',
             text: 'WMS <span style="font-size: 1.7em; ' +
                 'font-weight: normal;">⊕</span>'
+        }
+    },
+
+    /**
+     *
+     */
+    config: {
+        handler: function(){
+            var win = Ext.ComponentQuery.query('[name=add-wms-window]')[0];
+            if(!win){
+                Ext.create('Ext.window.Window', {
+                    name: 'add-wms-window',
+                    title: 'WMS hinzufügen',
+                    width: 500,
+                    height: 400,
+                    layout: 'fit',
+                    items: [{
+                        xtype: 'basigx-form-addwms'
+                    }]
+                }).show();
+            } else {
+                BasiGX.util.Animate.shake(win);
+            }
+        }
+    },
+
+    /**
+     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
         }
     }
 });
