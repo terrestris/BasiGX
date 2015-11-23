@@ -199,11 +199,12 @@ Ext.define("BasiGX.view.form.AddWms", {
                // only available for 1.3.0
                 return;
             }
+            var style = layer.Style;
             var olSource = new ol.source.TileWMS({
                 url: url,
                 params: {
                     LAYERS: layer.Name,
-                    STYLES: layer.Style[0].Name,
+                    STYLES: style ? style[0].Name : '',
                     VERSION: version
                 }
             });
@@ -211,7 +212,7 @@ Ext.define("BasiGX.view.form.AddWms", {
                 topic: true,
                 name: layer.Title,
                 source: olSource,
-                legendUrl: layer.Style[0].LegendURL[0].OnlineResource
+                legendUrl: style ? style[0].LegendURL[0].OnlineResource : null
             });
             compatible.push(olLayer);
         });
