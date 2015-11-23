@@ -29,7 +29,8 @@ Ext.define("BasiGX.view.grid.FeaturePropertyGrid", {
 
     config: {
         olFeature: null,
-        propertyWhiteList: null
+        propertyWhiteList: null,
+        propertyMapping: null
     },
 
     /**
@@ -44,12 +45,15 @@ Ext.define("BasiGX.view.grid.FeaturePropertyGrid", {
 
         me.callParent([arguments]);
         me.on('afterrender', me.setUpFeatureValues, me);
-        // Equal to editabel: false. Which does not exist.
+        // Equal to editable: false. Which does not exist.
         me.on('beforeedit', function(){
             return false;
         });
     },
 
+    /**
+     * Prepares the values by handling the property whitelist and mapping
+     */
     setUpFeatureValues: function(){
         var me = this;
         var displayValues = {};
@@ -62,7 +66,12 @@ Ext.define("BasiGX.view.grid.FeaturePropertyGrid", {
         };
 
         Ext.each(me.getPropertyWhiteList(), function(property){
-            displayValues[property] = me.getOlFeature().get(property);
+            var mappedKey = me.getPropertyMapping() &&
+                me.getPropertyMapping()[property];
+            var key = mappedKey ? mappedKey : property;
+            var val = me.getOlFeature().get(property);
+            val = me.convertToHref(val);
+            displayValues[key] = val;
         });
 
         if(displayValues){
@@ -70,6 +79,26 @@ Ext.define("BasiGX.view.grid.FeaturePropertyGrid", {
         } else {
             Ext.Error.raise('Feature in FeaturePropertyGrid has no values.');
         }
+    },
+
+    /**
+     * Method checks if a value looks like a link and converts it to a
+     * clickable href
+     *
+     * @param {Mixed} value - the value to check and convert if needed
+     * @return {String} value - the converted html-href string
+     */
+    convertToHref: function(value) {
+        if (!value || !value.indexOf) {
+            return value;
+        }
+        if (value.indexOf("http") === 0) {
+            value = "<a href='" + value + "' target='_blank'>" + value + "</a>";
+        } else if (value.indexOf("www.") === 0) {
+            value = "<a href='http://" + value + "' target='_blank'>" +
+                value + "</a>";
+        }
+        return value;
     }
 
 });
