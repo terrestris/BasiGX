@@ -42,6 +42,7 @@
  *     checked / unchecked
  *   * Make the slider / label positioning more flexible / dynamic
  *
+ * @class BasiGX.view.container.LayerSlider
  */
 Ext.define("BasiGX.view.container.LayerSlider", {
     extend: "Ext.container.Container",

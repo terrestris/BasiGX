@@ -19,6 +19,7 @@
  * Used to show a menu containing different panels of your choice, e.g.
  * the print form panel
  *
+ * @class BasiGX.view.panel.Menu
  */
 Ext.define("BasiGX.view.panel.Menu", {
     extend: "Ext.panel.Panel",

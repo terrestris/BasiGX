@@ -18,6 +18,7 @@
  *
  * A PropertyGrid showing feature values.
  *
+ * @class BasiGX.view.grid.FeaturePropertyGrid
  */
 Ext.define("BasiGX.view.grid.FeaturePropertyGrid", {
     xtype: "basigx-grid-featurepropertygrid",

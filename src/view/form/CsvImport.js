@@ -25,6 +25,7 @@
  *      Seperator is comma.
  *      Strings are in doublequotes.
  *
+ * @class BasiGX.view.form.CsvImport
  */
 Ext.define("BasiGX.view.form.CsvImport",{
     extend: "Ext.form.Panel",

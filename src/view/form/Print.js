@@ -18,6 +18,7 @@
  *
  * Used to show an Mapfish Print v3 compatible print panel
  *
+ * @class BasiGX.view.form.Print
  */
 Ext.define("BasiGX.view.form.Print", {
     extend: "Ext.form.Panel",

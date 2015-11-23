@@ -20,10 +20,11 @@
  *
  * Example usage:
  *
- * {
- *      xtype: 'basigx-search-wfs'
- * }
+ *     {
+ *         xtype: 'basigx-search-wfs'
+ *     }
  *
+ * @class BasiGX.view.container.WfsSearch
  */
 Ext.define("BasiGX.view.container.WfsSearch", {
     extend: "Ext.container.Container",

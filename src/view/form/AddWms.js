@@ -18,6 +18,7 @@
  *
  * Used to add an WMS to the map
  *
+ * @class BasiGX.view.form.AddWms
  */
 Ext.define("BasiGX.view.form.AddWms", {
     extend: "Ext.form.Panel",

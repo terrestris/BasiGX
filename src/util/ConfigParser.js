@@ -373,6 +373,7 @@
             }
         }
 
+ * @class BasiGX.util.ConfigParser
  */
 Ext.define('BasiGX.util.ConfigParser', {
 

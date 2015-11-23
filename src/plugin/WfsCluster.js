@@ -16,6 +16,8 @@
 /**
  * Plugin used for serversided (GeoServer SQL-View) Clustering. And clientsided
  * (OL3) styling.
+ *
+ * @class BasiGX.plugin.WfsCluster
  */
 Ext.define('BasiGX.plugin.WfsCluster', {
     extend: 'Ext.plugin.Abstract',

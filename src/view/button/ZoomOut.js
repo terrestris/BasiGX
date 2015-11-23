@@ -14,10 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * ZoomIn Button
+ * ZoomOut Button
  *
- * Button used to zoom in
+ * Button used to zoom out.
  *
+ * @class BasiGX.view.button.ZoomOut
  */
 Ext.define("BasiGX.view.button.ZoomOut", {
     extend: "Ext.button.Button",

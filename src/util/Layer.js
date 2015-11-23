@@ -19,6 +19,7 @@
  *
  * Some methods to work with ol-layers
  *
+ * @class BasiGX.util.Layer
  */
 Ext.define('BasiGX.util.Layer', {
 

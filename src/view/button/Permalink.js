@@ -14,11 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * AddWms Button
+ * Permalink Button
  *
- * Button used to instanciate the basigx-form-addwms in order to add a
- * WMS to the map
+ * Button used to open a permalink window.
  *
+ * @class BasiGX.view.button.Permalink
  */
 Ext.define("BasiGX.view.button.Permalink", {
     extend: "Ext.button.Button",
