@@ -14,10 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * ZoomIn Button
+ * ToggleLegend Button
  *
- * Button used to zoom in
+ * Button used to toggle the collapsed state of the legend.
  *
+ * @class BasiGX.view.button.ToggleLegend
  */
 Ext.define("BasiGX.view.button.ToggleLegend", {
     extend: "Ext.button.Button",

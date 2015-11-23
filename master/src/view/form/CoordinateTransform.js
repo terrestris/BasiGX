@@ -18,6 +18,7 @@
  *
  * Used to show and transform coordinates
  *
+ * @class BasiGX.view.form.CoordinateTransform
  */
 Ext.define("BasiGX.view.form.CoordinateTransform", {
     extend: "Ext.form.Panel",

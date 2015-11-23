@@ -18,7 +18,6 @@
  * @author terrestris GmbH & Co. KG
  * @author M. Jansen <jansen@terrestris.de>
  */
-
 /**
  * Provides a bunch of (static) methods to open a help window whose URL has an
  * anchor if the provided xy-location was found to have special documentation.
@@ -34,6 +33,8 @@
  *
  * Based on code from Animal and timo.nuros at
  * http://www.sencha.com/forum/showthread.php?63272-Implementing-a-context-sensitive-help
+ *
+ * @class BasiGX.ux.ContextSensitiveHelp
  */
 Ext.define('BasiGX.ux.ContextSensitiveHelp', {
     statics: {

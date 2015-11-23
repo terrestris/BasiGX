@@ -18,6 +18,7 @@
  *
  * Used to show a permalink of the mapstate (center, zoom, visible layers)
  *
+ * @class BasiGX.view.form.Permalink
  */
 Ext.define("BasiGX.view.form.Permalink", {
     extend: "Ext.form.Panel",

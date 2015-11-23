@@ -18,6 +18,7 @@
  *
  * Some methods to work with application
  *
+ * @class BasiGX.util.Application
  */
 Ext.define('BasiGX.util.Application', {
 

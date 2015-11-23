@@ -16,8 +16,9 @@
 /**
  * Measure Tool Button
  *
- * Mainly ripped from ol3 examples
+ * Mainly influenced by ol3 examples
  *
+ * @class BasiGX.view.button.Measure
  */
 Ext.define("BasiGX.view.button.Measure", {
     extend: "Ext.button.Button",

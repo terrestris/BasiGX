@@ -30,33 +30,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
+<span id='BasiGX-plugin-Hover'>/**
+</span> * @class BasiGX.plugin.Hover
+ */
 Ext.define('BasiGX.plugin.Hover', {
     extend: 'Ext.plugin.Abstract',
 
     alias: 'plugin.hover',
-    pluginId: 'hover',
-
+<span id='BasiGX-plugin-Hover-cfg-pluginId'>    pluginId: 'hover',
+</span>
     inheritableStatics: {
-        HOVER_OVERLAY_IDENTIFIER_KEY: 'name',
-        HOVER_OVERLAY_IDENTIFIER_VALUE: 'featureinfooverlay'
-    },
+<span id='BasiGX-plugin-Hover-static-property-HOVER_OVERLAY_IDENTIFIER_KEY'>        HOVER_OVERLAY_IDENTIFIER_KEY: 'name',
+</span><span id='BasiGX-plugin-Hover-static-property-HOVER_OVERLAY_IDENTIFIER_VALUE'>        HOVER_OVERLAY_IDENTIFIER_VALUE: 'featureinfooverlay'
+</span>    },
 
     config: {
-        pointerRest: true,
-        pointerRestInterval: 300,
-        pointerRestPixelTolerance: 5,
-        featureInfoEpsg: 'EPSG:3857',
-        hoverVectorLayerSource: null,
-        hoverVectorLayer: null,
-        hoverVectorLayerInteraction: null
-    },
+<span id='BasiGX-plugin-Hover-cfg-pointerRest'>        pointerRest: true,
+</span><span id='BasiGX-plugin-Hover-cfg-pointerRestInterval'>        pointerRestInterval: 300,
+</span><span id='BasiGX-plugin-Hover-cfg-pointerRestPixelTolerance'>        pointerRestPixelTolerance: 5,
+</span><span id='BasiGX-plugin-Hover-cfg-featureInfoEpsg'>        featureInfoEpsg: 'EPSG:3857',
+</span><span id='BasiGX-plugin-Hover-cfg-hoverVectorLayerSource'>        hoverVectorLayerSource: null,
+</span><span id='BasiGX-plugin-Hover-cfg-hoverVectorLayer'>        hoverVectorLayer: null,
+</span><span id='BasiGX-plugin-Hover-cfg-hoverVectorLayerInteraction'>        hoverVectorLayerInteraction: null
+</span>    },
 
-    currentHoverTarget: null,
-
-    pendingRequest: null,
-
-    init: function (cmp) {
-        var me = this;
+<span id='BasiGX-plugin-Hover-property-currentHoverTarget'>    currentHoverTarget: null,
+</span>
+<span id='BasiGX-plugin-Hover-property-pendingRequest'>    pendingRequest: null,
+</span>
+<span id='BasiGX-plugin-Hover-method-init'>    init: function (cmp) {
+</span>        var me = this;
 
         me.addHoverVectorLayerSource();
         me.addHoverVectorLayer();
@@ -73,7 +76,7 @@ Ext.define('BasiGX.plugin.Hover', {
         cmp.on('pointerrestout', me.cleanupHoverArtifacts, me);
     },
 
-<span id='global-method-setupMapEventListeners'>    /**
+<span id='BasiGX-plugin-Hover-method-setupMapEventListeners'>    /**
 </span>     * Adds any relevant listeners on the ol.Map. For now we only ensure that
      * when the top-level layerGroup changes (e.g. by adding or removing a
      * layer), we cleanup any visual artifacts from hovering.
@@ -88,7 +91,7 @@ Ext.define('BasiGX.plugin.Hover', {
         map.on('change:layerGroup', me.cleanupHoverArtifacts, me);
     },
 
-<span id='global-method-addHoverVectorLayerInteraction'>    /**
+<span id='BasiGX-plugin-Hover-method-addHoverVectorLayerInteraction'>    /**
 </span>    *
     */
    addHoverVectorLayerInteraction: function() {
@@ -110,7 +113,7 @@ Ext.define('BasiGX.plugin.Hover', {
         }
    },
 
-<span id='global-method-onFeatureClicked'>   /**
+<span id='BasiGX-plugin-Hover-method-onFeatureClicked'>   /**
 </span>    *
     */
    onFeatureClicked: function(olEvt) {
@@ -120,7 +123,7 @@ Ext.define('BasiGX.plugin.Hover', {
        mapComponent.fireEvent('hoverfeaturesclick', olFeatures);
    },
 
-<span id='global-method-addHoverVectorLayerSource'>   /**
+<span id='BasiGX-plugin-Hover-method-addHoverVectorLayerSource'>   /**
 </span>    *
     */
    addHoverVectorLayerSource: function() {
@@ -130,7 +133,7 @@ Ext.define('BasiGX.plugin.Hover', {
        }
    },
 
-<span id='global-method-addHoverVectorLayer'>   /**
+<span id='BasiGX-plugin-Hover-method-addHoverVectorLayer'>   /**
 </span>    *
     */
    addHoverVectorLayer: function() {
@@ -154,7 +157,7 @@ Ext.define('BasiGX.plugin.Hover', {
        hoverVectorLayer.set(displayInLayerSwitcherKey, false);
    },
 
-<span id='global-method-clearPendingRequests'>   /**
+<span id='BasiGX-plugin-Hover-method-clearPendingRequests'>   /**
 </span>    *
     */
    clearPendingRequests: function() {
@@ -164,7 +167,7 @@ Ext.define('BasiGX.plugin.Hover', {
        }
    },
 
-<span id='global-method-requestAsynchronously'>   /**
+<span id='BasiGX-plugin-Hover-method-requestAsynchronously'>   /**
 </span>    *
     */
    requestAsynchronously: function(url, cb) {
@@ -184,8 +187,8 @@ Ext.define('BasiGX.plugin.Hover', {
        });
    },
 
-   cleanupHoverArtifacts: function(){
-       var me = this;
+<span id='BasiGX-plugin-Hover-method-cleanupHoverArtifacts'>   cleanupHoverArtifacts: function(){
+</span>       var me = this;
        var overlayIdentifierKey = me.self.HOVER_OVERLAY_IDENTIFIER_KEY;
        var overlayIdentifierVal = me.self.HOVER_OVERLAY_IDENTIFIER_VALUE;
        var mapComponent = me.getCmp();
@@ -200,7 +203,7 @@ Ext.define('BasiGX.plugin.Hover', {
        });
    },
 
-<span id='global-method-onPointerRest'>   /**
+<span id='BasiGX-plugin-Hover-method-onPointerRest'>   /**
 </span>    */
    onPointerRest: function(evt){
        var me = this;
@@ -282,7 +285,7 @@ Ext.define('BasiGX.plugin.Hover', {
        me.showHoverToolTip(evt, hoverLayers, hoverFeatures);
    },
 
-<span id='global-method-hoverLayerFilter'>   /**
+<span id='BasiGX-plugin-Hover-method-hoverLayerFilter'>   /**
 </span>    *
     */
    hoverLayerFilter: function(candidate) {
@@ -294,7 +297,7 @@ Ext.define('BasiGX.plugin.Hover', {
       }
    },
 
-<span id='global-method-showHoverFeature'>   /**
+<span id='BasiGX-plugin-Hover-method-showHoverFeature'>   /**
 </span>    *
     */
    showHoverFeature: function(layer, features, projection) {
@@ -318,7 +321,7 @@ Ext.define('BasiGX.plugin.Hover', {
        });
    },
 
-<span id='global-method-showHoverToolTip'>   /**
+<span id='BasiGX-plugin-Hover-method-showHoverToolTip'>   /**
 </span>    *
     */
    showHoverToolTip: function(evt, layers, features) {
@@ -348,7 +351,7 @@ Ext.define('BasiGX.plugin.Hover', {
 
    },
 
-<span id='global-method-getToolTipHtml'>   /**
+<span id='BasiGX-plugin-Hover-method-getToolTipHtml'>   /**
 </span>    *
     */
    getToolTipHtml: function(layers, features){
@@ -383,8 +386,8 @@ Ext.define('BasiGX.plugin.Hover', {
        return innerHtml;
    },
 
-   highlightStyleFunction: function(feature){
-       var count = feature.get('count'),
+<span id='BasiGX-plugin-Hover-method-highlightStyleFunction'>   highlightStyleFunction: function(feature){
+</span>       var count = feature.get('count'),
        radius = 14,
        fontSize = 10;
 
@@ -426,8 +429,8 @@ Ext.define('BasiGX.plugin.Hover', {
        ];
    },
 
-   selectStyleFunction: function(feature){
-       var count = feature.get('count'),
+<span id='BasiGX-plugin-Hover-method-selectStyleFunction'>   selectStyleFunction: function(feature){
+</span>       var count = feature.get('count'),
        radius = 14,
        fontSize = 10;
 
@@ -468,8 +471,8 @@ Ext.define('BasiGX.plugin.Hover', {
        ];
    },
 
-   hoverClusterFeatures: function(pixel){
-       var me = this;
+<span id='BasiGX-plugin-Hover-method-hoverClusterFeatures'>   hoverClusterFeatures: function(pixel){
+</span>       var me = this;
        var mapComponent = me.getCmp();
        var map = mapComponent.getMap();
        var wmsHoverPlugin = mapComponent.getPlugin('wmshover');

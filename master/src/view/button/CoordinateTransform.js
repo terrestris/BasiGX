@@ -19,6 +19,7 @@
  * Button used to instanciate the basigx-form-CoordinateTransform in order
  * to show and transform coordinates
  *
+ * @class BasiGX.view.button.CoordinateTransform
  */
 Ext.define("BasiGX.view.button.CoordinateTransform", {
     extend: "Ext.button.Button",

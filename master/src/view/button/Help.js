@@ -14,10 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * ZoomIn Button
+ * Help Button
  *
- * Button used to zoom in
+ * Button used to instantiate BasiGX.ux.ContextSensitiveHelp
  *
+ * @class BasiGX.view.button.Help
  */
 Ext.define("BasiGX.view.button.Help", {
     extend: "Ext.button.Button",

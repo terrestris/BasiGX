@@ -19,6 +19,7 @@
  *
  * Some methods to work with ol-layers
  *
+ * @class BasiGX.util.Url
  */
 Ext.define('BasiGX.util.Url', {
     statics: {

@@ -18,6 +18,7 @@
  *
  * Button used to zoom to Extent
  *
+ * @class BasiGX.view.button.ZoomToExtent
  */
 Ext.define("BasiGX.view.button.ZoomToExtent", {
     extend: "Ext.button.Button",
