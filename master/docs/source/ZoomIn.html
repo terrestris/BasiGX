@@ -38,7 +38,7 @@
  * @class BasiGX.view.button.ZoomIn
  */
 Ext.define(&quot;BasiGX.view.button.ZoomIn&quot;, {
-    extend: &quot;Ext.button.Button&quot;,
+    extend: &quot;Ext.Button&quot;,
     xtype: 'basigx-button-zoomin',
 
 <span id='BasiGX-view-button-ZoomIn-property-viewModel'>    /**
@@ -52,29 +52,44 @@ Ext.define(&quot;BasiGX.view.button.ZoomIn&quot;, {
     },
 
 <span id='BasiGX-view-button-ZoomIn-property-bind'>    bind: {
-</span>        text: '{text}',
-        tooltip: '{tooltip}'
+</span>        text: '{text}'
     },
 
-<span id='BasiGX-view-button-ZoomIn-property-glyph'>    glyph: 'xf00e@FontAwesome',
+<span id='BasiGX-view-button-ZoomIn-property-glyph'>    /**
+</span>     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: 'xf00e@FontAwesome',
+<span id='BasiGX-view-button-ZoomIn-property-html'>    html: '&lt;i class=&quot;fa fa-search-plus fa-2x&quot;&gt;&lt;/i&gt;',
 </span>
-<span id='BasiGX-view-button-ZoomIn-method-handler'>    /**
-</span>    *
-    */
-   handler: function(button){
-      var olMap = button.up(&quot;basigx-panel-mapcontainer&quot;)
-          .down('gx_map').getMap();
-      var olView = button.up(&quot;basigx-panel-mapcontainer&quot;)
-          .down('gx_map').getView();
-      var zoom = ol.animation.zoom({
-          resolution: olView.getResolution(),
-          duration: 500
-      });
+<span id='BasiGX-view-button-ZoomIn-property-config'>    /**
+</span>     *
+     */
+    config: {
+<span id='BasiGX-view-button-ZoomIn-cfg-handler'>        handler: function(){
+</span>            var olMap = Ext.ComponentQuery.query('basigx-component-map')[0].getMap();
+            var olView = olMap.getView();
+            var zoom = ol.animation.zoom({
+                resolution: olView.getResolution(),
+                duration: 500
+            });
 
-      olMap.beforeRender(zoom);
-      olView.setResolution(olView.getResolution() / 2);
-   }
+            olMap.beforeRender(zoom);
+            olView.setResolution(olView.getResolution() / 2);
+        }
+    },
 
+<span id='BasiGX-view-button-ZoomIn-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+    }
 });
 </pre>
 </body>

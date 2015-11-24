@@ -38,7 +38,7 @@
  * @class BasiGX.view.button.ZoomOut
  */
 Ext.define(&quot;BasiGX.view.button.ZoomOut&quot;, {
-    extend: &quot;Ext.button.Button&quot;,
+    extend: &quot;Ext.Button&quot;,
     xtype: 'basigx-button-zoomout',
 
 <span id='BasiGX-view-button-ZoomOut-property-viewModel'>    /**
@@ -51,31 +51,45 @@ Ext.define(&quot;BasiGX.view.button.ZoomOut&quot;, {
         }
     },
 
-<span id='BasiGX-view-button-ZoomOut-cfg-bind'>    bind: {
-</span>        text: '{text}',
-        tooltip: '{tooltip}'
+<span id='BasiGX-view-button-ZoomOut-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: '{text}'
     },
 
-<span id='BasiGX-view-button-ZoomOut-cfg-glyph'>    glyph: 'xf010@FontAwesome',
+<span id='BasiGX-view-button-ZoomOut-property-glyph'>    /**
+</span>     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: 'xf010@FontAwesome',
+<span id='BasiGX-view-button-ZoomOut-cfg-html'>    html: '&lt;i class=&quot;fa fa-search-minus fa-2x&quot;&gt;&lt;/i&gt;',
 </span>
-<span id='BasiGX-view-button-ZoomOut-method-handler'>    /**
-</span>    *
-    */
-   handler: function(button){
-       // TODO refactor so this works even outside of the mapcontainer
-       var olMap = button.up(&quot;basigx-panel-mapcontainer&quot;)
-           .down('gx_map').getMap();
-       var olView = button.up(&quot;basigx-panel-mapcontainer&quot;)
-           .down('gx_map').getView();
-       var zoom = ol.animation.zoom({
-           resolution: olView.getResolution(),
-           duration: 500
-       });
+    config: {
+<span id='BasiGX-view-button-ZoomOut-cfg-handler'>        handler: function() {
+</span>            var olMap = Ext.ComponentQuery.query('basigx-component-map')[0].getMap();
+            var olView = olMap.getView();
+            var zoom = ol.animation.zoom({
+                resolution: olView.getResolution(),
+                duration: 500
+            });
 
-       olMap.beforeRender(zoom);
-       olView.setResolution(olView.getResolution() * 2);
-   }
+            olMap.beforeRender(zoom);
+            olView.setResolution(olView.getResolution() * 2);
+        }
+    },
 
+<span id='BasiGX-view-button-ZoomOut-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+    }
 });
 </pre>
 </body>

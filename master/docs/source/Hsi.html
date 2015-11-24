@@ -38,7 +38,7 @@
  * @class BasiGX.view.button.Hsi
  */
 Ext.define(&quot;BasiGX.view.button.Hsi&quot;, {
-    extend: &quot;Ext.button.Button&quot;,
+    extend: &quot;Ext.Button&quot;,
     xtype: 'basigx-button-hsi',
 
 <span id='BasiGX-view-button-Hsi-property-viewModel'>    /**
@@ -51,30 +51,73 @@ Ext.define(&quot;BasiGX.view.button.Hsi&quot;, {
         }
     },
 
-<span id='BasiGX-view-button-Hsi-property-bind'>    bind: {
-</span>        text: '{text}',
-        tooltip: '{tooltip}'
+<span id='BasiGX-view-button-Hsi-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: '{text}'
     },
 
-<span id='BasiGX-view-button-Hsi-property-glyph'>    glyph: 'xf05a@FontAwesome',
+<span id='BasiGX-view-button-Hsi-property-glyph'>    /**
+</span>     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: 'xf05a@FontAwesome',
+<span id='BasiGX-view-button-Hsi-property-html'>    html: '&lt;i class=&quot;fa fa-info-circle fa-2x&quot;&gt;&lt;/i&gt;',
 </span>
-<span id='BasiGX-view-button-Hsi-property-enableToggle'>    enableToggle: true,
-</span><span id='BasiGX-view-button-Hsi-property-pressed'>    pressed: true,
-</span>
-<span id='BasiGX-view-button-Hsi-method-initComponent'>    initComponent: function(){
-</span>        this.callParent([arguments]);
-        this.setControlStatus(this.pressed);
+<span id='BasiGX-view-button-Hsi-property-enableToggle'>    /**
+</span>     *
+     */
+    enableToggle: true,
+
+<span id='BasiGX-view-button-Hsi-property-buttonPressed'>    /**
+</span>     *
+     */
+    buttonPressed: true,
+
+<span id='BasiGX-view-button-Hsi-property-config'>    /**
+</span>     *
+     */
+    config: {
+<span id='BasiGX-view-button-Hsi-cfg-handler'>        handler: function() {
+</span>            this.buttonPressed = !this.buttonPressed;
+            this.toggleButton();
+        }
     },
 
-<span id='BasiGX-view-button-Hsi-method-toggleHandler'>   toggleHandler: function(button){
-</span>       this.setControlStatus(button.pressed);
-   },
+<span id='BasiGX-view-button-Hsi-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+        this.toggleButton();
+    },
 
-<span id='BasiGX-view-button-Hsi-method-setControlStatus'>   setControlStatus: function(status){
-</span>       var mapComponent = Ext.ComponentQuery.query('basigx-component-map')[0];
-       mapComponent.setPointerRest(status);
-   }
+<span id='BasiGX-view-button-Hsi-method-toggleButton'>    /**
+</span>     *
+     */
+    toggleButton: function() {
+        if (this.setPressed) {
+            this.setPressed(this.buttonPressed);
+        } else {
+            this.setCls(this.buttonPressed ? this.getPressedCls() :
+                &quot;basigx-map-tool-button&quot;);
+        }
+        this.setControlStatus(this.buttonPressed);
+    },
 
+<span id='BasiGX-view-button-Hsi-method-setControlStatus'>    /**
+</span>     *
+     */
+    setControlStatus: function(status){
+        var mapComponent = Ext.ComponentQuery.query('basigx-component-map')[0];
+        mapComponent.setPointerRest(status);
+    }
 });
 </pre>
 </body>

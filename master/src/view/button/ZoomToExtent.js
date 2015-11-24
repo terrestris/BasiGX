@@ -21,7 +21,7 @@
  * @class BasiGX.view.button.ZoomToExtent
  */
 Ext.define("BasiGX.view.button.ZoomToExtent", {
-    extend: "Ext.button.Button",
+    extend: "Ext.Button",
     xtype: 'basigx-button-zoomtoextent',
 
     requires: ['BasiGX.util.Application'],
@@ -43,20 +43,60 @@ Ext.define("BasiGX.view.button.ZoomToExtent", {
     config: {
         center: null,
         zoom: null,
-        resolution: null
+        resolution: null,
+        handler: function(){
+            this.setConfigValues();
+
+            var olMap = Ext.ComponentQuery.query('basigx-component-map')[0].getMap();
+            var olView = olMap.getView();
+            var targetCenter = this.getCenter();
+            var targetResolution = this.getResolution();
+            var targetZoom = this.getZoom();
+            var pan = ol.animation.pan({
+                    source: olView.getCenter()
+                });
+            var zoom = ol.animation.zoom({
+                   resolution: olView.getResolution()
+                });
+
+            olMap.beforeRender(pan);
+            olMap.beforeRender(zoom);
+            olView.setCenter(targetCenter);
+
+            if(targetZoom){
+                olView.setZoom(targetZoom);
+            } else {
+                olView.setResolution(targetResolution);
+            }
+        }
     },
 
+    /**
+     *
+     */
     bind: {
-        text: '{text}',
-        tooltip: '{tooltip}'
+        text: '{text}'
     },
 
+    /**
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
     glyph: 'xf0b2@FontAwesome',
+    html: '<i class="fa fa-arrows-alt fa-2x"></i>',
 
-    initComponent: function(){
-        this.callParent(arguments);
+    /**
+     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
         if(this.getZoom() && this.getResolution()){
-            Ext.raise('Zoom and resolution set for Extent Button!' +
+            Ext.raise('No zoom and resolution set for Extent Button!' +
             'Please choose one.');
         }
         this.setConfigValues();
@@ -76,38 +116,5 @@ Ext.define("BasiGX.view.button.ZoomToExtent", {
                 this.setZoom(appContext.startZoom);
             }
         }
-    },
-
-    /**
-    *
-    */
-    handler: function(button){
-        this.setConfigValues();
-
-        // TODO refactor so this works even outside of the mapcontainer
-        var olMap = button.up("basigx-panel-mapcontainer")
-           .down('gx_map').getMap();
-        var olView = button.up("basigx-panel-mapcontainer")
-           .down('gx_map').getView();
-        var targetCenter = this.getCenter();
-        var targetResolution = this.getResolution();
-        var targetZoom = this.getZoom();
-        var pan = ol.animation.pan({
-                source: olView.getCenter()
-            });
-        var zoom = ol.animation.zoom({
-               resolution: olView.getResolution()
-            });
-
-        olMap.beforeRender(pan);
-        olMap.beforeRender(zoom);
-        olView.setCenter(targetCenter);
-
-        if(targetZoom){
-            olView.setZoom(targetZoom);
-        } else {
-            olView.setResolution(targetResolution);
-        }
     }
-
 });

@@ -38,7 +38,7 @@
  * @class BasiGX.view.button.ToggleLegend
  */
 Ext.define(&quot;BasiGX.view.button.ToggleLegend&quot;, {
-    extend: &quot;Ext.button.Button&quot;,
+    extend: &quot;Ext.Button&quot;,
     xtype: 'basigx-button-togglelegend',
 
 <span id='BasiGX-view-button-ToggleLegend-property-viewModel'>    /**
@@ -51,28 +51,45 @@ Ext.define(&quot;BasiGX.view.button.ToggleLegend&quot;, {
         }
     },
 
-<span id='BasiGX-view-button-ToggleLegend-property-bind'>    bind: {
-</span>        text: '{text}',
-        tooltip: '{tooltip}'
+<span id='BasiGX-view-button-ToggleLegend-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: '{text}'
     },
 
-<span id='BasiGX-view-button-ToggleLegend-property-glyph'>    glyph: 'xf022@FontAwesome',
+<span id='BasiGX-view-button-ToggleLegend-property-glyph'>    /**
+</span>     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: 'xf022@FontAwesome',
+<span id='BasiGX-view-button-ToggleLegend-property-html'>    html: '&lt;i class=&quot;fa fa-list-alt fa-2x&quot;&gt;&lt;/i&gt;',
 </span>
-<span id='BasiGX-view-button-ToggleLegend-method-handler'>    /**
-</span>    *
-    */
-   handler: function(button){
-       // TODO refactor so this works even outside of the mapcontainer
-       var legendPanel = button.up(&quot;basigx-panel-mapcontainer&quot;)
-           .down('basigx-panel-legendtree');
-       if(legendPanel.getCollapsed()) {
-           legendPanel.expand();
-       } else {
-           legendPanel.collapse();
-       }
-       button.blur();
-   }
+    config: {
+<span id='BasiGX-view-button-ToggleLegend-cfg-handler'>        handler: function(button){
+</span>            // TODO refactor so this works even outside of the mapcontainer
+            var legendPanel = button.up(&quot;basigx-panel-mapcontainer&quot;)
+                .down('basigx-panel-legendtree');
+            if(legendPanel.getCollapsed()) {
+                legendPanel.expand();
+            } else {
+                legendPanel.collapse();
+            }
+            button.blur();
+        }
+    },
 
+<span id='BasiGX-view-button-ToggleLegend-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+    }
 });
 </pre>
 </body>

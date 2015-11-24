@@ -38,7 +38,7 @@
  * @class BasiGX.view.button.Help
  */
 Ext.define(&quot;BasiGX.view.button.Help&quot;, {
-    extend: &quot;Ext.button.Button&quot;,
+    extend: &quot;Ext.Button&quot;,
     xtype: 'basigx-button-help',
 
     requires: [
@@ -55,25 +55,42 @@ Ext.define(&quot;BasiGX.view.button.Help&quot;, {
         }
     },
 
-<span id='BasiGX-view-button-Help-property-bind'>    bind: {
-</span>        text: '{text}',
-        tooltip: '{tooltip}'
+<span id='BasiGX-view-button-Help-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: '{text}'
     },
 
-<span id='BasiGX-view-button-Help-property-glyph'>    glyph: 'xf059@FontAwesome',
+<span id='BasiGX-view-button-Help-property-glyph'>    /**
+</span>     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: 'xf059@FontAwesome',
+<span id='BasiGX-view-button-Help-property-html'>    html: '&lt;i class=&quot;fa fa-question-circle fa-2x&quot;&gt;&lt;/i&gt;',
 </span>
+<span id='BasiGX-view-button-Help-property-config'>    /**
+</span>     *
+     */
     config: {
-<span id='BasiGX-view-button-Help-cfg-additonalHelpKeys'>        additonalHelpKeys: null
-</span>    },
+<span id='BasiGX-view-button-Help-cfg-additonalHelpKeys'>        additonalHelpKeys: null,
+</span><span id='BasiGX-view-button-Help-cfg-handler'>        handler: function(button){
+</span>            var help = Ext.create('BasiGX.ux.ContextSensitiveHelp');
+            help.setContextHelp(button.getAdditonalHelpKeys());
+        }
+    },
 
-<span id='BasiGX-view-button-Help-method-handler'>    /**
-</span>    *
-    */
-   handler: function(button){
-       var help = Ext.create('BasiGX.ux.ContextSensitiveHelp');
-       help.setContextHelp(button.getAdditonalHelpKeys());
-   }
-
+<span id='BasiGX-view-button-Help-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+    }
 });
 </pre>
 </body>

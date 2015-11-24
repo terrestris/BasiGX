@@ -15,11 +15,11 @@
       "signatures": [
         {
           "name": "terrestris GmbH \u0026 Co. KG",
-          "uuid": "ccefaadb-712e-4548-9351-28f5453de175",
-          "created": "2015-11-23T13:49:10Z",
+          "uuid": "3bf1bbbf-5ad6-48f3-ad95-8adf70ed6f91",
+          "created": "2015-11-24T17:02:30Z",
           "algorithm": "SHA1withRSA",
-          "nonce": "4CtaMWZW5H0\u003d",
-          "signature": "L1dVST0NXFt7FInc0Sg3CYAqFeakyudX+Ow2OySnJuUUZnBCVKuK/uGwLd4DM4pAFtnD3Tbs9Zw44F74qZMgyLPalyt0uzgqu5ZT9rxi/SP4hD3twVyIdnzj1RwrFpCE1azTdWA0JFz0p/IO6jR2NmJdhtTOCVrFqEVZTwgyjQs3nRYLygIEGgCyqSNZkYXU553Kf4gqBBNQiVPr5hm9eZSgmW+mkQ4Wz4ZSBUdAnuRHP3EJnW9FOIeMaHO3hqJpx0xOUkxVsbT6xy81GIimhcNtjyX/7+5Y8cRG6bnmBQtQ2q6lFojEdHaUTpQ5u6f0cUfpacaAcBLJo2DLBjKVFg\u003d\u003d"
+          "nonce": "QpWkYmKHehk\u003d",
+          "signature": "NgOJesyuWSiP7xMfps0PLe17jLWrigNnhMUlsl7YSeL5d1f9XV/sABbaEs2y16yXtvxpaIVc6zXw6K2yOTievWGugQGbMekRdQYWEXUDCE7thCpRuaYNSdeAHXksZThQZlKoUmu3pSAiygTZ4+EN3YPH4bJZAsV3t4aSsuYsR+kPF+QUSI+Tfqi7svHNJozt8ajy919rwuVzFY7kImKPptBhkag/tINnrDNQrUVLVk19Bn7cPrv5GnbgjhzayXbtnGs8kBjRV+UjbP87R6W6RWeTBrSMMEiN36sxEAY69PSqfbHU8aj20Th3jCNKoM47smU33JWLot1b6mlQ1lAneQ\u003d\u003d"
         }
       ],
       "slicer": {
@@ -42,11 +42,11 @@
       "signatures": [
         {
           "name": "GeoExt Contributors",
-          "uuid": "be6c027a-89d2-4d15-8d97-aab60970c39d",
-          "created": "2015-11-23T08:42:17Z",
+          "uuid": "7f4590de-e86f-4402-b7b6-5d1d8f646334",
+          "created": "2015-11-23T15:16:23Z",
           "algorithm": "SHA1withRSA",
-          "nonce": "L8HyDeN4n7I\u003d",
-          "signature": "zgOBVrLQFqu50XMrhsX+qRkt8vssYRjVxd3nzoQwJHZpSJLyFtsJKVT8lSV9milGAWAr7nx1ZW1gwOH6ZZMO28fQk1wSVKCsRjWF6GeE5rVbPuH0lbamG2F5aTqC0l+ZkzZXMFb4xJGuYFJVpW8TRlgiqYpQ7XaxC05PLmmgBOUqmKCJtb75ZjluPIBLyKRRs1vApDgWsV6FbFzX/GRsLdqu8DdgFbl3WGf5XIj0pSGXgmFIIfZnCgmpJFlG3CqrY+gAUfmtUC4w8zlFnZpgxTGso9kdKUHcvSrbR0xvcYJVzLttt7UnS0OcmMafOI5DcLjUcKSVUa8MClSuLRD+5A\u003d\u003d"
+          "nonce": "UBUiCTogQ+k\u003d",
+          "signature": "fvn6sDQmAboFkoqDDsoLxRdhJhFoT/U1mYo8urim9dwUFcy3eB6HUXZCR5BdPgi7pEOCpJzksejEAa0f3vNgeAwma6l45MmV/h7RkrsK2sdn9W4AXG1ijeQYlzzn08vxuTR7FhjbRugza1zmQ25FULOUv1yrNGQ2R3wCxqqSLQsoMghiDWVhJ2eDjpk3ssbE5iHv2qP1m86mULxrnZ/ktZExiQigW8yR2Qaf/NTLYNe2JRcvmX2aaCbL7n15GhBOdFzGEW4Z7tqtDmrMp1zFEIZ8wQI7+A+WwNBt2aTvVfNqmpkoXg3IdQJzXjxadSx2zYmOFhGk4tiWgOY10jyl3g\u003d\u003d"
         }
       ],
       "slicer": {

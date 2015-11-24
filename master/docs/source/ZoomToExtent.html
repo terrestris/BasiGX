@@ -38,7 +38,7 @@
  * @class BasiGX.view.button.ZoomToExtent
  */
 Ext.define(&quot;BasiGX.view.button.ZoomToExtent&quot;, {
-    extend: &quot;Ext.button.Button&quot;,
+    extend: &quot;Ext.Button&quot;,
     xtype: 'basigx-button-zoomtoextent',
 
     requires: ['BasiGX.util.Application'],
@@ -60,20 +60,60 @@ Ext.define(&quot;BasiGX.view.button.ZoomToExtent&quot;, {
     config: {
 <span id='BasiGX-view-button-ZoomToExtent-cfg-center'>        center: null,
 </span><span id='BasiGX-view-button-ZoomToExtent-cfg-zoom'>        zoom: null,
-</span><span id='BasiGX-view-button-ZoomToExtent-cfg-resolution'>        resolution: null
-</span>    },
+</span><span id='BasiGX-view-button-ZoomToExtent-cfg-resolution'>        resolution: null,
+</span><span id='BasiGX-view-button-ZoomToExtent-cfg-handler'>        handler: function(){
+</span>            this.setConfigValues();
 
-<span id='BasiGX-view-button-ZoomToExtent-property-bind'>    bind: {
-</span>        text: '{text}',
-        tooltip: '{tooltip}'
+            var olMap = Ext.ComponentQuery.query('basigx-component-map')[0].getMap();
+            var olView = olMap.getView();
+            var targetCenter = this.getCenter();
+            var targetResolution = this.getResolution();
+            var targetZoom = this.getZoom();
+            var pan = ol.animation.pan({
+                    source: olView.getCenter()
+                });
+            var zoom = ol.animation.zoom({
+                   resolution: olView.getResolution()
+                });
+
+            olMap.beforeRender(pan);
+            olMap.beforeRender(zoom);
+            olView.setCenter(targetCenter);
+
+            if(targetZoom){
+                olView.setZoom(targetZoom);
+            } else {
+                olView.setResolution(targetResolution);
+            }
+        }
     },
 
-<span id='BasiGX-view-button-ZoomToExtent-property-glyph'>    glyph: 'xf0b2@FontAwesome',
+<span id='BasiGX-view-button-ZoomToExtent-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: '{text}'
+    },
+
+<span id='BasiGX-view-button-ZoomToExtent-property-glyph'>    /**
+</span>     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: 'xf0b2@FontAwesome',
+<span id='BasiGX-view-button-ZoomToExtent-property-html'>    html: '&lt;i class=&quot;fa fa-arrows-alt fa-2x&quot;&gt;&lt;/i&gt;',
 </span>
-<span id='BasiGX-view-button-ZoomToExtent-method-initComponent'>    initComponent: function(){
-</span>        this.callParent(arguments);
+<span id='BasiGX-view-button-ZoomToExtent-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
         if(this.getZoom() &amp;&amp; this.getResolution()){
-            Ext.raise('Zoom and resolution set for Extent Button!' +
+            Ext.raise('No zoom and resolution set for Extent Button!' +
             'Please choose one.');
         }
         this.setConfigValues();
@@ -93,40 +133,7 @@ Ext.define(&quot;BasiGX.view.button.ZoomToExtent&quot;, {
                 this.setZoom(appContext.startZoom);
             }
         }
-    },
-
-<span id='BasiGX-view-button-ZoomToExtent-method-handler'>    /**
-</span>    *
-    */
-    handler: function(button){
-        this.setConfigValues();
-
-        // TODO refactor so this works even outside of the mapcontainer
-        var olMap = button.up(&quot;basigx-panel-mapcontainer&quot;)
-           .down('gx_map').getMap();
-        var olView = button.up(&quot;basigx-panel-mapcontainer&quot;)
-           .down('gx_map').getView();
-        var targetCenter = this.getCenter();
-        var targetResolution = this.getResolution();
-        var targetZoom = this.getZoom();
-        var pan = ol.animation.pan({
-                source: olView.getCenter()
-            });
-        var zoom = ol.animation.zoom({
-               resolution: olView.getResolution()
-            });
-
-        olMap.beforeRender(pan);
-        olMap.beforeRender(zoom);
-        olView.setCenter(targetCenter);
-
-        if(targetZoom){
-            olView.setZoom(targetZoom);
-        } else {
-            olView.setResolution(targetResolution);
-        }
     }
-
 });
 </pre>
 </body>

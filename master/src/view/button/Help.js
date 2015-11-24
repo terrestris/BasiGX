@@ -21,7 +21,7 @@
  * @class BasiGX.view.button.Help
  */
 Ext.define("BasiGX.view.button.Help", {
-    extend: "Ext.button.Button",
+    extend: "Ext.Button",
     xtype: 'basigx-button-help',
 
     requires: [
@@ -38,23 +38,40 @@ Ext.define("BasiGX.view.button.Help", {
         }
     },
 
+    /**
+     *
+     */
     bind: {
-        text: '{text}',
-        tooltip: '{tooltip}'
-    },
-
-    glyph: 'xf059@FontAwesome',
-
-    config: {
-        additonalHelpKeys: null
+        text: '{text}'
     },
 
     /**
-    *
-    */
-   handler: function(button){
-       var help = Ext.create('BasiGX.ux.ContextSensitiveHelp');
-       help.setContextHelp(button.getAdditonalHelpKeys());
-   }
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: 'xf059@FontAwesome',
+    html: '<i class="fa fa-question-circle fa-2x"></i>',
 
+    /**
+     *
+     */
+    config: {
+        additonalHelpKeys: null,
+        handler: function(button){
+            var help = Ext.create('BasiGX.ux.ContextSensitiveHelp');
+            help.setContextHelp(button.getAdditonalHelpKeys());
+        }
+    },
+
+    /**
+     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+    }
 });

@@ -39,7 +39,7 @@
  * @class BasiGX.view.button.AddWms
  */
 Ext.define(&quot;BasiGX.view.button.AddWms&quot;, {
-    extend: &quot;Ext.button.Button&quot;,
+    extend: &quot;Ext.Button&quot;,
     xtype: 'basigx-button-addwms',
 
     requires: [
@@ -48,31 +48,12 @@ Ext.define(&quot;BasiGX.view.button.AddWms&quot;, {
         'BasiGX.util.Animate'
     ],
 
-<span id='BasiGX-view-button-AddWms-property-bind'>    bind: {
-</span>        text: '{text}',
-        tooltip: '{tooltip}'
+<span id='BasiGX-view-button-AddWms-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: '{text}'
     },
-
-<span id='BasiGX-view-button-AddWms-method-handler'>    /**
-</span>    *
-    */
-   handler: function(){
-       var win = Ext.ComponentQuery.query('[name=add-wms-window]')[0];
-       if(!win){
-           Ext.create('Ext.window.Window', {
-               name: 'add-wms-window',
-               title: 'WMS hinzufügen',
-               width: 500,
-               height: 400,
-               layout: 'fit',
-               items: [{
-                   xtype: 'basigx-form-addwms'
-               }]
-           }).show();
-       } else {
-           BasiGX.util.Animate.shake(win);
-       }
-   },
 
 <span id='BasiGX-view-button-AddWms-property-viewModel'>    /**
 </span>     *
@@ -82,6 +63,41 @@ Ext.define(&quot;BasiGX.view.button.AddWms&quot;, {
             tooltip: 'WMS hinzufügen…',
             text: 'WMS &lt;span style=&quot;font-size: 1.7em; ' +
                 'font-weight: normal;&quot;&gt;⊕&lt;/span&gt;'
+        }
+    },
+
+<span id='BasiGX-view-button-AddWms-property-config'>    /**
+</span>     *
+     */
+    config: {
+<span id='BasiGX-view-button-AddWms-cfg-handler'>        handler: function(){
+</span>            var win = Ext.ComponentQuery.query('[name=add-wms-window]')[0];
+            if(!win){
+                Ext.create('Ext.window.Window', {
+                    name: 'add-wms-window',
+                    title: 'WMS hinzufügen',
+                    width: 500,
+                    height: 400,
+                    layout: 'fit',
+                    items: [{
+                        xtype: 'basigx-form-addwms'
+                    }]
+                }).show();
+            } else {
+                BasiGX.util.Animate.shake(win);
+            }
+        }
+    },
+
+<span id='BasiGX-view-button-AddWms-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
         }
     }
 });

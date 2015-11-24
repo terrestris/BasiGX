@@ -21,7 +21,7 @@
  * @class BasiGX.view.button.Measure
  */
 Ext.define("BasiGX.view.button.Measure", {
-    extend: "Ext.button.Button",
+    extend: "Ext.Button",
     xtype: 'basigx-button-measure',
 
     requires: [
@@ -143,10 +143,11 @@ Ext.define("BasiGX.view.button.Measure", {
     /**
      *
      */
-    initComponent: function() {
+    constructor: function(config) {
+        var me = this;
+        me.callParent([config]);
 
-        var me = this,
-            source = new ol.source.Vector({
+        var source = new ol.source.Vector({
                 features: new ol.Collection()
             }),
             measureLayer;
@@ -215,20 +216,11 @@ Ext.define("BasiGX.view.button.Measure", {
         });
         me.drawAction.setActive(false);
         me.map.addInteraction(me.drawAction);
-    },
-
-   /**
-    *
-    */
-    handler: function(){
-        var me = this;
-
         me.on('toggle', function(btn, pressed) {
             if (pressed) {
                 me.drawAction.setActive(true);
                 me.createMeasureTooltip();
                 me.createHelpTooltip();
-
                 me.drawAction.on('drawstart', me.drawStart, me);
                 me.drawAction.on('drawend', me.drawEnd, me);
                 me.map.on('pointermove', me.pointerMoveHandler, me);
@@ -237,7 +229,6 @@ Ext.define("BasiGX.view.button.Measure", {
                 me.cleanUp(me);
             }
         });
-        me.toggle();
     },
 
     /**

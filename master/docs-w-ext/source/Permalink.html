@@ -38,7 +38,7 @@
  * @class BasiGX.view.button.Permalink
  */
 Ext.define(&quot;BasiGX.view.button.Permalink&quot;, {
-    extend: &quot;Ext.button.Button&quot;,
+    extend: &quot;Ext.Button&quot;,
     xtype: 'basigx-button-permalink',
 
     requires: [
@@ -49,28 +49,8 @@ Ext.define(&quot;BasiGX.view.button.Permalink&quot;, {
     ],
 
 <span id='BasiGX-view-button-Permalink-cfg-bind'>    bind: {
-</span>        text: '{text}',
-        tooltip: '{tooltip}'
+</span>        text: '{text}'
     },
-
-<span id='BasiGX-view-button-Permalink-method-handler'>    /**
-</span>    *
-    */
-   handler: function(){
-       var win = Ext.ComponentQuery.query('[name=permalink-window]')[0];
-       if(!win){
-           Ext.create('Ext.window.Window', {
-               name: 'permalink-window',
-               title: 'Permalink',
-               layout: 'fit',
-               items: [{
-                   xtype: 'basigx-form-permalink'
-               }]
-           }).show();
-       } else {
-           BasiGX.util.Animate.shake(win);
-       }
-   },
 
 <span id='BasiGX-view-button-Permalink-property-viewModel'>    /**
 </span>     *
@@ -79,6 +59,36 @@ Ext.define(&quot;BasiGX.view.button.Permalink&quot;, {
         data: {
             tooltip: 'Permalink',
             text: 'Permalink'
+        }
+    },
+
+    config: {
+<span id='BasiGX-view-button-Permalink-cfg-handler'>        handler: function(){
+</span>            var win = Ext.ComponentQuery.query('[name=permalink-window]')[0];
+            if(!win){
+                Ext.create('Ext.window.Window', {
+                    name: 'permalink-window',
+                    title: 'Permalink',
+                    layout: 'fit',
+                    items: [{
+                        xtype: 'basigx-form-permalink'
+                    }]
+                }).show();
+            } else {
+                BasiGX.util.Animate.shake(win);
+            }
+        }
+    },
+
+<span id='BasiGX-view-button-Permalink-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
         }
     }
 });

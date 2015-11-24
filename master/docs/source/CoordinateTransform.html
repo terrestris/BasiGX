@@ -39,7 +39,7 @@
  * @class BasiGX.view.button.CoordinateTransform
  */
 Ext.define(&quot;BasiGX.view.button.CoordinateTransform&quot;, {
-    extend: &quot;Ext.button.Button&quot;,
+    extend: &quot;Ext.Button&quot;,
     xtype: 'basigx-button-coordinatetransform',
 
     requires: [
@@ -48,9 +48,21 @@ Ext.define(&quot;BasiGX.view.button.CoordinateTransform&quot;, {
         'BasiGX.util.Animate'
     ],
 
-<span id='BasiGX-view-button-CoordinateTransform-property-bind'>    bind: {
-</span>        text: '{text}',
-        tooltip: '{tooltip}'
+<span id='BasiGX-view-button-CoordinateTransform-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: '{text}'
+    },
+
+<span id='BasiGX-view-button-CoordinateTransform-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Koordinaten transformieren und anzeigen',
+            text: 'Koordinaten transformieren'
+        }
     },
 
 <span id='BasiGX-view-button-CoordinateTransform-property-coordinateSystemsToUse'>    /**
@@ -63,36 +75,40 @@ Ext.define(&quot;BasiGX.view.button.CoordinateTransform&quot;, {
      */
     transformCenterOnRender: true,
 
-<span id='BasiGX-view-button-CoordinateTransform-method-handler'>    /**
-</span>    *
-    */
-   handler: function(){
-       var win = Ext.ComponentQuery.query('[name=coordinate-transform-window]')[0];
-       if(!win){
-           Ext.create('Ext.window.Window', {
-               name: 'coordinate-transform-window',
-               title: 'Koordinaten transformieren',
-               width: 500,
-               height: 400,
-               layout: 'fit',
-               items: [{
-                   xtype: 'basigx-form-coordinatetransform',
-                   coordinateSystemsToUse: this.coordinateSystemsToUse,
-                   transformCenterOnRender: this.transformCenterOnRender
-               }]
-           }).showAt(0);
-       } else {
-           BasiGX.util.Animate.shake(win);
-       }
-   },
-
-<span id='BasiGX-view-button-CoordinateTransform-property-viewModel'>    /**
+<span id='BasiGX-view-button-CoordinateTransform-property-config'>    /**
 </span>     *
      */
-    viewModel: {
-        data: {
-            tooltip: 'Koordinaten transformieren und anzeigen',
-            text: 'Koordinaten transformieren'
+    config: {
+<span id='BasiGX-view-button-CoordinateTransform-cfg-handler'>        handler: function(){
+</span>            var win = Ext.ComponentQuery.query('[name=coordinate-transform-window]')[0];
+            if(!win){
+                Ext.create('Ext.window.Window', {
+                    name: 'coordinate-transform-window',
+                    title: 'Koordinaten transformieren',
+                    width: 500,
+                    height: 400,
+                    layout: 'fit',
+                    items: [{
+                        xtype: 'basigx-form-coordinatetransform',
+                        coordinateSystemsToUse: this.coordinateSystemsToUse,
+                        transformCenterOnRender: this.transformCenterOnRender
+                    }]
+                }).showAt(0);
+            } else {
+                BasiGX.util.Animate.shake(win);
+            }
+        }
+    },
+
+<span id='BasiGX-view-button-CoordinateTransform-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
         }
     }
 });
