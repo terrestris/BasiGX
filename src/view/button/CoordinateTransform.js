@@ -22,7 +22,7 @@
  * @class BasiGX.view.button.CoordinateTransform
  */
 Ext.define("BasiGX.view.button.CoordinateTransform", {
-    extend: "Ext.button.Button",
+    extend: "Ext.Button",
     xtype: 'basigx-button-coordinatetransform',
 
     requires: [
@@ -31,9 +31,21 @@ Ext.define("BasiGX.view.button.CoordinateTransform", {
         'BasiGX.util.Animate'
     ],
 
+    /**
+     *
+     */
     bind: {
-        text: '{text}',
-        tooltip: '{tooltip}'
+        text: '{text}'
+    },
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Koordinaten transformieren und anzeigen',
+            text: 'Koordinaten transformieren'
+        }
     },
 
     /**
@@ -47,35 +59,39 @@ Ext.define("BasiGX.view.button.CoordinateTransform", {
     transformCenterOnRender: true,
 
     /**
-    *
-    */
-   handler: function(){
-       var win = Ext.ComponentQuery.query('[name=coordinate-transform-window]')[0];
-       if(!win){
-           Ext.create('Ext.window.Window', {
-               name: 'coordinate-transform-window',
-               title: 'Koordinaten transformieren',
-               width: 500,
-               height: 400,
-               layout: 'fit',
-               items: [{
-                   xtype: 'basigx-form-coordinatetransform',
-                   coordinateSystemsToUse: this.coordinateSystemsToUse,
-                   transformCenterOnRender: this.transformCenterOnRender
-               }]
-           }).showAt(0);
-       } else {
-           BasiGX.util.Animate.shake(win);
-       }
-   },
+     *
+     */
+    config: {
+        handler: function(){
+            var win = Ext.ComponentQuery.query('[name=coordinate-transform-window]')[0];
+            if(!win){
+                Ext.create('Ext.window.Window', {
+                    name: 'coordinate-transform-window',
+                    title: 'Koordinaten transformieren',
+                    width: 500,
+                    height: 400,
+                    layout: 'fit',
+                    items: [{
+                        xtype: 'basigx-form-coordinatetransform',
+                        coordinateSystemsToUse: this.coordinateSystemsToUse,
+                        transformCenterOnRender: this.transformCenterOnRender
+                    }]
+                }).showAt(0);
+            } else {
+                BasiGX.util.Animate.shake(win);
+            }
+        }
+    },
 
     /**
      *
      */
-    viewModel: {
-        data: {
-            tooltip: 'Koordinaten transformieren und anzeigen',
-            text: 'Koordinaten transformieren'
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
         }
     }
 });

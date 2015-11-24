@@ -21,7 +21,7 @@
  * @class BasiGX.view.button.Hsi
  */
 Ext.define("BasiGX.view.button.Hsi", {
-    extend: "Ext.button.Button",
+    extend: "Ext.Button",
     xtype: 'basigx-button-hsi',
 
     /**
@@ -34,28 +34,71 @@ Ext.define("BasiGX.view.button.Hsi", {
         }
     },
 
+    /**
+     *
+     */
     bind: {
-        text: '{text}',
-        tooltip: '{tooltip}'
+        text: '{text}'
     },
 
+    /**
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
     glyph: 'xf05a@FontAwesome',
+    html: '<i class="fa fa-info-circle fa-2x"></i>',
 
+    /**
+     *
+     */
     enableToggle: true,
-    pressed: true,
 
-    initComponent: function(){
-        this.callParent([arguments]);
-        this.setControlStatus(this.pressed);
+    /**
+     *
+     */
+    buttonPressed: true,
+
+    /**
+     *
+     */
+    config: {
+        handler: function() {
+            this.buttonPressed = !this.buttonPressed;
+            this.toggleButton();
+        }
     },
 
-   toggleHandler: function(button){
-       this.setControlStatus(button.pressed);
-   },
+    /**
+     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+        this.toggleButton();
+    },
 
-   setControlStatus: function(status){
-       var mapComponent = Ext.ComponentQuery.query('basigx-component-map')[0];
-       mapComponent.setPointerRest(status);
-   }
+    /**
+     *
+     */
+    toggleButton: function() {
+        if (this.setPressed) {
+            this.setPressed(this.buttonPressed);
+        } else {
+            this.setCls(this.buttonPressed ? this.getPressedCls() :
+                "basigx-map-tool-button");
+        }
+        this.setControlStatus(this.buttonPressed);
+    },
 
+    /**
+     *
+     */
+    setControlStatus: function(status){
+        var mapComponent = Ext.ComponentQuery.query('basigx-component-map')[0];
+        mapComponent.setPointerRest(status);
+    }
 });

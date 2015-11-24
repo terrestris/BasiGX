@@ -21,7 +21,7 @@
  * @class BasiGX.view.button.ToggleLegend
  */
 Ext.define("BasiGX.view.button.ToggleLegend", {
-    extend: "Ext.button.Button",
+    extend: "Ext.Button",
     xtype: 'basigx-button-togglelegend',
 
     /**
@@ -34,26 +34,43 @@ Ext.define("BasiGX.view.button.ToggleLegend", {
         }
     },
 
+    /**
+     *
+     */
     bind: {
-        text: '{text}',
-        tooltip: '{tooltip}'
+        text: '{text}'
     },
 
+    /**
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
     glyph: 'xf022@FontAwesome',
+    html: '<i class="fa fa-list-alt fa-2x"></i>',
+
+    config: {
+        handler: function(button){
+            // TODO refactor so this works even outside of the mapcontainer
+            var legendPanel = button.up("basigx-panel-mapcontainer")
+                .down('basigx-panel-legendtree');
+            if(legendPanel.getCollapsed()) {
+                legendPanel.expand();
+            } else {
+                legendPanel.collapse();
+            }
+            button.blur();
+        }
+    },
 
     /**
-    *
-    */
-   handler: function(button){
-       // TODO refactor so this works even outside of the mapcontainer
-       var legendPanel = button.up("basigx-panel-mapcontainer")
-           .down('basigx-panel-legendtree');
-       if(legendPanel.getCollapsed()) {
-           legendPanel.expand();
-       } else {
-           legendPanel.collapse();
-       }
-       button.blur();
-   }
-
+     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+    }
 });
