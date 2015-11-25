@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-panel-MobileWindow'>/**
+</span> * Mobile Window
+ *
+ * Used to show a window-like panel in the viewport.
+ * Panel is hideable / closable.
+ *
+ * Usage Example:
+ *
+ * win = Ext.create('BasiGX.view.panel.MobileWindow', {
+ *     title: 'Objektinformation',
+ *     name: 'hsi-panel',
+ *     additionalItems: [
+ *         {
+ *             xtype: 'tabpanel',
+ *             items: tabArray,
+ *             flex: 7
+ *         }
+ *     ]
+ * };
+ * viewport.add(win);
+ * win.show();
+ *
+ * @class BasiGX.view.panel.MobileWindow
+ */
+Ext.define(&quot;BasiGX.view.panel.MobileWindow&quot;, {
+    extend: &quot;Ext.Panel&quot;,
+    xtype: &quot;basigx-panel-mobilewindow&quot;,
+
+    requires: [
+        'Ext.Container'
+    ],
+
+    config: {
+<span id='BasiGX-view-panel-MobileWindow-cfg-title'>        title: '',
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-centered'>        centered: true,
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-scrollable'>        scrollable: 'y',
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-minWidth'>        minWidth: '50%',
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-maxWidth'>        maxWidth: '80%',
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-minHeight'>        minHeight: '50%',
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-maxHeight'>        maxHeight: '80%',
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-width'>        width: 200,
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-height'>        height: 200,
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-padding'>        padding: '10 10 10 10',
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-layout'>        layout: 'vbox',
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-name'>        name: '',
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-additionalItems'>        additionalItems: []
+</span>    },
+
+<span id='BasiGX-view-panel-MobileWindow-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function(config) {
+        var me = this;
+        me.callParent([config]);
+
+        var headerPanel = Ext.create('Ext.Container', {
+            styleHtmlContent: true,
+            html: '&lt;b&gt;' + me.getTitle() + '&lt;/b&gt;' +
+                '&lt;i class=&quot;fa fa-times-circle-o fa-2x&quot; ' +
+                'style=&quot;position:absolute;right:10px;top:0px;&quot; ' +
+                'onclick=&quot;Ext.ComponentQuery.query(' +
+                '\'basigx-panel-mobilewindow[name=' + me.getName() + ']\')' +
+                '[0].hide();&quot;&gt;' +
+                '&lt;/i&gt;',
+            flex: 1
+        });
+        me.add(headerPanel);
+
+        if (me.getAdditionalItems().length &gt; 0) {
+            me.add(me.getAdditionalItems());
+        }
+    }
+});
+</pre>
+</body>
+</html>
