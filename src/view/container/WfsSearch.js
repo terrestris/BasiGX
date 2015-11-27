@@ -639,17 +639,6 @@ Ext.define("BasiGX.view.container.WfsSearch", {
      *
      */
     highlightSelectedFeature: function(tableView, record, item) {
-        var store = tableView.getStore();
-        store.each(function(rec){
-            rec.olObject.setStyle(this.getSearchResultFeatureStyle());
-            var row = tableView.getRowByRecord(rec);
-            if (this.clusterResults) {
-                this.updateRenderer(row, this.clusterStyleFn('', 8));
-            } else {
-                this.updateRenderer(row, this.getSearchResultFeatureStyle());
-            }
-        }, this);
-
         record.olObject.setStyle(this.getSearchResultSelectFeatureStyle());
         this.updateRenderer(item, this.getSearchResultSelectFeatureStyle());
 
