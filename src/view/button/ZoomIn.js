@@ -23,6 +23,9 @@
 Ext.define("BasiGX.view.button.ZoomIn", {
     extend: "Ext.Button",
     xtype: 'basigx-button-zoomin',
+    requires: [
+        'Ext.app.ViewModel'
+    ],
 
     /**
      *

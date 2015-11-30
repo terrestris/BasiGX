@@ -25,7 +25,8 @@ Ext.define("BasiGX.view.form.AddWms", {
     xtype: 'basigx-form-addwms',
 
     requires: [
-        'Ext.button.Button'
+        'Ext.button.Button',
+        'Ext.app.ViewModel'
     ],
 
     viewModel: {
