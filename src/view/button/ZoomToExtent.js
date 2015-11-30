@@ -24,7 +24,10 @@ Ext.define("BasiGX.view.button.ZoomToExtent", {
     extend: "Ext.Button",
     xtype: 'basigx-button-zoomtoextent',
 
-    requires: ['BasiGX.util.Application'],
+    requires: [
+        'BasiGX.util.Application',
+        'Ext.app.ViewModel'
+    ],
 
     /**
      *

@@ -26,6 +26,7 @@ Ext.define("BasiGX.view.form.Print", {
 
     requires: [
         "Ext.window.Toast",
+        "Ext.app.ViewModel",
         "Ext.form.action.StandardSubmit",
 
         "BasiGX.util.Layer",

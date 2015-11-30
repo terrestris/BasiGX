@@ -27,6 +27,7 @@ Ext.define("BasiGX.view.button.AddWms", {
 
     requires: [
         'Ext.window.Window',
+        'Ext.app.ViewModel',
         'BasiGX.view.form.AddWms',
         'BasiGX.util.Animate'
     ],

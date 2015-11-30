@@ -28,6 +28,7 @@ Ext.define("BasiGX.view.panel.MapContainer", {
 
     requires: [
         "Ext.dom.Query",
+        "Ext.app.ViewModel",
         "GeoExt.data.store.LayersTree",
         "GeoExt.component.OverviewMap",
 

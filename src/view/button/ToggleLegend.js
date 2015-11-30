@@ -23,6 +23,9 @@
 Ext.define("BasiGX.view.button.ToggleLegend", {
     extend: "Ext.Button",
     xtype: 'basigx-button-togglelegend',
+    requires: [
+        'Ext.app.ViewModel'
+    ],
 
     /**
      *

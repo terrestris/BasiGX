@@ -25,7 +25,8 @@ Ext.define("BasiGX.view.panel.LegendTree", {
     xtype: "basigx-panel-legendtree",
 
     requires: [
-        'BasiGX.ux.RowExpanderWithComponents'
+        'BasiGX.ux.RowExpanderWithComponents',
+        'Ext.app.ViewModel'
     ],
 
     viewModel: {

@@ -27,6 +27,7 @@ Ext.define("BasiGX.view.button.CoordinateTransform", {
 
     requires: [
         'Ext.window.Window',
+        'Ext.app.ViewModel',
         'BasiGX.view.form.CoordinateTransform',
         'BasiGX.util.Animate'
     ],

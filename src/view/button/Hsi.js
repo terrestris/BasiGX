@@ -23,6 +23,9 @@
 Ext.define("BasiGX.view.button.Hsi", {
     extend: "Ext.Button",
     xtype: 'basigx-button-hsi',
+    requires: [
+        'Ext.app.ViewModel'
+    ],
 
     /**
      *

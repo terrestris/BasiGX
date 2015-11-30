@@ -25,7 +25,8 @@ Ext.define("BasiGX.view.button.Measure", {
     xtype: 'basigx-button-measure',
 
     requires: [
-        "BasiGX.util.Layer"
+        "BasiGX.util.Layer",
+        "Ext.app.ViewModel"
     ],
 
    /**

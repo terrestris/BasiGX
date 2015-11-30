@@ -25,7 +25,8 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
     xtype: 'basigx-form-coordinatetransform',
 
     requires: [
-        'Ext.button.Button'
+        'Ext.button.Button',
+        'Ext.app.ViewModel'
     ],
 
     viewModel: {

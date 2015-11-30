@@ -38,7 +38,8 @@ Ext.define("BasiGX.view.panel.LayerSetChooser", {
     xtype: "basigx-panel-layersetchooser",
 
     requires: [
-        "BasiGX.view.view.LayerSet"
+        "BasiGX.view.view.LayerSet",
+        "Ext.app.ViewModel"
     ],
 
     viewModel: {
