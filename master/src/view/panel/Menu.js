@@ -26,7 +26,8 @@ Ext.define("BasiGX.view.panel.Menu", {
     xtype: "basigx-panel-menu",
 
     requires: [
-        "Ext.layout.container.Accordion"
+        "Ext.layout.container.Accordion",
+        "Ext.app.ViewModel"
     ],
 
     viewModel: {

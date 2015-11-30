@@ -26,6 +26,7 @@ Ext.define("BasiGX.view.button.Permalink", {
 
     requires: [
         'Ext.window.Window',
+        'Ext.app.ViewModel',
         'BasiGX.view.form.Permalink',
         'BasiGX.util.Animate',
         'BasiGX.util.Application'

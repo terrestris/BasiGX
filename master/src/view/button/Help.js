@@ -25,7 +25,8 @@ Ext.define("BasiGX.view.button.Help", {
     xtype: 'basigx-button-help',
 
     requires: [
-        'BasiGX.ux.ContextSensitiveHelp'
+        'BasiGX.ux.ContextSensitiveHelp',
+        'Ext.app.ViewModel'
     ],
 
     /**

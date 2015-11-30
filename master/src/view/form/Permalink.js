@@ -26,7 +26,8 @@ Ext.define("BasiGX.view.form.Permalink", {
     xtype: 'basigx-form-permalink',
 
     requires: [
-        'Ext.button.Button'
+        'Ext.button.Button',
+        'Ext.app.ViewModel'
     ],
 
     viewModel: {
