@@ -79,6 +79,38 @@ Ext.define("BasiGX.view.form.Print", {
 
     defaultType: 'textfield',
 
+    /**
+     * Fires after an `attributefields`-object was added to a fieldset of e.g.
+     * the layout attributes.
+     *
+     * This event can be used to change the appearance of e.g. a textfield.
+     *
+     * @event attributefieldsadd
+     * @param {BasiGX.view.form.Print} printForm The print form instance.
+     * @param {Object} attributefields The `attributefields`-object, which was
+     *     added.
+     * @param {Ext.Component} The actually added component.
+     */
+    /**
+     * Fires before an `attributefields`-object is added to the fieldset of e.g.
+     * the layout attributes. If any handler for this event returns the boolean
+     * value `false`, the `attributefields`-object will be skipped and not added
+     * to the fieldset.
+     *
+     * This event can therefore be used to remove specific fields from the form
+     * or to change the appearance of e.g. a textfield. You can manipulate the
+     * passed `attributefields`-object and the changes will directly take
+     * effect.
+     *
+     * @event beforeattributefieldsadd
+     * @param {BasiGX.view.form.Print} printForm The print form instance.
+     * @param {Object} attributefields An `attributefields`-object, which often
+     *     are formfields like `textfields`, `combos` etc.
+     */
+
+    /**
+     * Initializes the print form.
+     */
     initComponent: function(){
         var url = this.getUrl();
 
@@ -521,37 +553,44 @@ Ext.define("BasiGX.view.form.Print", {
     },
 
     addAttributeFields: function(attributeRec, fieldset){
-        var olView = this.getMapComponent().getMap().getView();
+        var me = this;
+        var olView = me.getMapComponent().getMap().getView();
 
         var attributeFields;
         switch (attributeRec.get('type')) {
             case "MapAttributeValues":
-                attributeFields = this.getMapAttributeFields(attributeRec);
-                olView.on('propertychange', this.renderAllClientInfos, this);
+                attributeFields = me.getMapAttributeFields(attributeRec);
+                olView.on('propertychange', me.renderAllClientInfos, me);
                 break;
             case "NorthArrowAttributeValues":
-                attributeFields =
-                    this.getNorthArrowAttributeFields(attributeRec);
+                attributeFields = me.getNorthArrowAttributeFields(attributeRec);
                 break;
             case "ScalebarAttributeValues":
-                attributeFields = this.getScalebarAttributeFields(attributeRec);
+                attributeFields = me.getScalebarAttributeFields(attributeRec);
                 break;
             case "LegendAttributeValue":
-                attributeFields = this.getLegendAttributeFields(attributeRec);
+                attributeFields = me.getLegendAttributeFields(attributeRec);
                 break;
             case "String":
-                attributeFields = this.getStringField(attributeRec);
+                attributeFields = me.getStringField(attributeRec);
                 break;
             case "DataSourceAttributeValue":
-                Ext.toast('Data Source not ye supported');
-                attributeFields = this.getStringField(attributeRec);
+                Ext.toast('Data Source not yet supported');
+                attributeFields = me.getStringField(attributeRec);
                 break;
             default:
                 break;
         }
 
         if (attributeFields) {
-            fieldset.add(attributeFields);
+            var doContinue = me.fireEvent(
+                    'beforeattributefieldsadd', me, attributeFields
+                );
+            // a beforeattributefieldsadd handler may have cancelled the adding
+            if (doContinue !== false) {
+                var added = fieldset.add(attributeFields);
+                me.fireEvent('attributefieldsadd', me, attributeFields, added);
+            }
         }
     },
 
