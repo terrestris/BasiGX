@@ -103,6 +103,7 @@ Ext.define("BasiGX.view.form.Print", {
                     Ext.each(records, function(rec){
                         rawValues.push(rec.data);
                     });
+                    Ext.Array.sort(rawValues);
                     this.down('combo[name=appCombo]').setStore(rawValues);
                 },
                 scope: this
@@ -388,6 +389,7 @@ Ext.define("BasiGX.view.form.Print", {
     addFormatCombo: function(provider){
         var fs = this.down('fieldset[name=generic-fieldset]');
         var formatStore = provider.capabilityRec.get('formats');
+        Ext.Array.sort(formatStore);
         var formatCombo = {
             xtype: 'combo',
             name: 'format',
@@ -407,6 +409,7 @@ Ext.define("BasiGX.view.form.Print", {
     addLayoutCombo: function(provider){
         var fs = this.down('fieldset[name=generic-fieldset]');
         var layoutStore = provider.capabilityRec.layouts();
+        layoutStore.sort('name', 'ASC');
         var layoutCombo = {
             xtype: 'combo',
             name: 'layout',
