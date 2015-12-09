@@ -335,14 +335,13 @@ Ext.define("BasiGX.view.container.WfsSearch", {
         // set the searchterm on component
         me.searchTerm = val;
 
-        // reset grid from aold values
-        me.resetGrid();
-
-        // prepare the describeFeatureType for all given layers
         if (me.typeDelayTask) {
             me.typeDelayTask.cancel();
         }
         me.typeDelayTask = new Ext.util.DelayedTask(function(){
+            // reset grid from old values
+            me.resetGrid();
+            // prepare the describeFeatureType for all given layers
             me.describeFeatureTypes();
         });
         me.typeDelayTask.delay(me.getTypeDelay());
@@ -361,8 +360,10 @@ Ext.define("BasiGX.view.container.WfsSearch", {
      */
     resetGrid: function() {
         var me = this;
-        me.searchResultVectorLayer.getSource().clear();
-        me.down('grid[name=searchresultgrid]').hide();
+        var searchresultgrid = me.down('grid[name=searchresultgrid]');
+        me.searchResultVectorLayer.getSource().clear(true);
+        searchresultgrid.hide();
+        searchresultgrid.getStore().removeAll();
     },
 
     /**
@@ -639,17 +640,6 @@ Ext.define("BasiGX.view.container.WfsSearch", {
      *
      */
     highlightSelectedFeature: function(tableView, record, item) {
-        var store = tableView.getStore();
-        store.each(function(rec){
-            rec.olObject.setStyle(this.getSearchResultFeatureStyle());
-            var row = tableView.getRowByRecord(rec);
-            if (this.clusterResults) {
-                this.updateRenderer(row, this.clusterStyleFn('', 8));
-            } else {
-                this.updateRenderer(row, this.getSearchResultFeatureStyle());
-            }
-        }, this);
-
         record.olObject.setStyle(this.getSearchResultSelectFeatureStyle());
         this.updateRenderer(item, this.getSearchResultSelectFeatureStyle());
 
