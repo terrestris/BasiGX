@@ -167,8 +167,12 @@ describe('BasiGX.util.ConfigParser', function() {
                     "ENT=true&LAYERS=OSM-WMS&TILED=true&WIDTH=256&HEIGHT=256&" +
                     "CRS=EPSG%3A3857&STYLES=&BBOX=978393.9620502554%2C7000408" +
                     ".798469583%2C983285.9318605067%2C7005300.768279834",
-                topic: false,
-                visibility: false
+                topic: false, // TODO we should get rid of `topic`
+                visibility: false,
+                // this is our 'standard' for hover-enabled layers, both
+                // `hoverable` and `hoverfield` set
+                hoverable: true,
+                hoverfield: 'HumptyDumpty'
             });
         });
         afterEach(function() {
@@ -226,6 +230,50 @@ describe('BasiGX.util.ConfigParser', function() {
             var retVal = BasiGX.util.ConfigParser.
                 convertStringToNumericArray("float", "3.1415,2.00124,1.512172");
             expect(retVal).to.be.eql([3.1415,2.00124,1.512172]);
+        });
+
+        describe('hoverable and hoverfield configuration', function(){
+            it('reads out and respects hoverable and hoverfield (enabled)',
+                function(){
+                    expect(layer.get('hoverable')).to.be(true);
+                    expect(layer.get('hoverfield')).to.be('HumptyDumpty');
+                }
+            );
+            it('reads out and respects hoverable and hoverfield (disabled)',
+                function(){
+                    var layer2 = BasiGX.util.ConfigParser.createLayer({
+                        name: "Only hoverfield no hoverable",
+                        type: "TileWMS",
+                        // this is our 'standard' for hover-disabled layers,
+                        // both `hoverable` is false and `hoverfield` set
+                        hoverable: false,
+                        hoverfield: null
+                    });
+                    expect(layer2.get('hoverable')).to.be(false);
+                    expect(layer2.get('hoverfield')).to.be(null);
+                }
+            );
+            it('reads out and respects hoverfield (not configured)', function(){
+                var layer3 = BasiGX.util.ConfigParser.createLayer({
+                    name: "Neither hoverfield nor hoverable",
+                    type: "TileWMS"
+                    // what happens if we do not have the props at all?
+                });
+                expect(layer3.get('hoverable')).to.be(false);
+                expect(layer3.get('hoverfield')).to.be(undefined);
+            });
+            it('reads out and respects hoverfield (only hoverfield)',
+                function(){
+                    var layer4 = BasiGX.util.ConfigParser.createLayer({
+                        name: "Only hoverfield no hoverable",
+                        type: "TileWMS",
+                        // what happens if only a `hoverfield` is set
+                        hoverfield: 'HumptyDumpty'
+                    });
+                    expect(layer4.get('hoverable')).to.be(true);
+                    expect(layer4.get('hoverfield')).to.be('HumptyDumpty');
+                }
+            );
         });
     });
 });

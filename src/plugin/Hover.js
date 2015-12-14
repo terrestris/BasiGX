@@ -24,7 +24,23 @@ Ext.define('BasiGX.plugin.Hover', {
 
     inheritableStatics: {
         HOVER_OVERLAY_IDENTIFIER_KEY: 'name',
-        HOVER_OVERLAY_IDENTIFIER_VALUE: 'featureinfooverlay'
+        HOVER_OVERLAY_IDENTIFIER_VALUE: 'featureinfooverlay',
+
+        /**
+         * The property of a layer that holds a boolean value which indicates
+         * whether this layer qualifies for hovering.
+         *
+         * @type {String}
+         */
+        LAYER_HOVERABLE_PROPERTY_NAME: 'hoverable',
+
+        /**
+         * The property of a layer that holds a string value which indicates,
+         * which field of the layer shall be shown when hovering.
+         *
+         * @type {String}
+         */
+        LAYER_HOVERFIELD_PROPERTY_NAME: 'hoverfield'
     },
 
     config: {
@@ -194,6 +210,7 @@ Ext.define('BasiGX.plugin.Hover', {
        var map = mapComponent.getMap();
        var mapView = map.getView();
        var pixel = evt.pixel;
+       var hoverableProp = BasiGX.plugin.Hover.LAYER_HOVERABLE_PROPERTY_NAME;
        var hoverLayers = [];
        var hoverFeatures = [];
 
@@ -203,7 +220,7 @@ Ext.define('BasiGX.plugin.Hover', {
            var source = layer.getSource();
            var resolution = mapView.getResolution();
            var projCode = mapView.getProjection().getCode();
-           var hoverable = layer.get('hoverable');
+           var hoverable = layer.get(hoverableProp);
 
            // a layer will NOT be requested for hovering if there is a
            // "hoverable" property set to false. If this property is not set
@@ -272,12 +289,13 @@ Ext.define('BasiGX.plugin.Hover', {
     *
     */
    hoverLayerFilter: function(candidate) {
-       if(candidate.get('hoverable') ||
-           candidate.get('type') === 'WFSCluster'){
+       var hoverableProp = BasiGX.plugin.Hover.LAYER_HOVERABLE_PROPERTY_NAME;
+       if(candidate.get(hoverableProp) ||
+               candidate.get('type') === 'WFSCluster'){
            return true;
        } else {
            return false;
-      }
+       }
    },
 
    /**
@@ -339,10 +357,11 @@ Ext.define('BasiGX.plugin.Hover', {
     */
    getToolTipHtml: function(layers, features){
        var innerHtml = '';
+       var hoverfieldProp = BasiGX.plugin.Hover.LAYER_HOVERFIELD_PROPERTY_NAME;
 
        Ext.each(features, function(feat){
            var layer = feat.get('layer');
-           var hoverfield = layer.get('hoverfield');
+           var hoverfield = layer.get(hoverfieldProp);
 
            // fallback if hoverfield is not configured
            if(!hoverfield) {

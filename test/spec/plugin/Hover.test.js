@@ -1,6 +1,7 @@
 Ext.Loader.syncRequire(['BasiGX.plugin.Hover', 'BasiGX.view.component.Map']);
 
 describe('BasiGX.plugin.Hover', function() {
+
     describe('Basics', function() {
         it('is defined', function() {
             expect(BasiGX.plugin.Hover).to.not.be(undefined);
@@ -10,6 +11,116 @@ describe('BasiGX.plugin.Hover', function() {
             expect(plugin).to.be.a(BasiGX.plugin.Hover);
         });
     });
+
+    describe('Static properties', function() {
+        describe('they are defined for the base plugin', function(){
+            it('works for #HOVER_OVERLAY_IDENTIFIER_KEY', function(){
+                var prop = BasiGX.plugin.Hover.HOVER_OVERLAY_IDENTIFIER_KEY;
+                expect(prop).to.not.be(undefined);
+            });
+            it('works for #HOVER_OVERLAY_IDENTIFIER_VALUE', function(){
+                var prop = BasiGX.plugin.Hover.HOVER_OVERLAY_IDENTIFIER_VALUE;
+                expect(prop).to.not.be(undefined);
+            });
+            it('works for #LAYER_HOVERABLE_PROPERTY_NAME', function(){
+                var prop = BasiGX.plugin.Hover.LAYER_HOVERABLE_PROPERTY_NAME;
+                expect(prop).to.not.be(undefined);
+            });
+            it('works for #LAYER_HOVERFIELD_PROPERTY_NAME', function(){
+                var prop = BasiGX.plugin.Hover.LAYER_HOVERFIELD_PROPERTY_NAME;
+                expect(prop).to.not.be(undefined);
+            });
+        });
+        describe('they are inherited for subclasses', function() {
+            var ParentClass = BasiGX.plugin.Hover;
+            var ExtendedClass = null;
+            beforeEach(function(){
+                ExtendedClass = Ext.define('TestExtendHover', {
+                    extend: 'BasiGX.plugin.Hover',
+                    alias: 'plugin.test-extend-hover',
+                    pluginId: 'test-hover'
+                });
+            });
+            afterEach(function() {
+                Ext.undefine('TestExtendHover');
+                ExtendedClass = null;
+            });
+            it('works for #HOVER_OVERLAY_IDENTIFIER_KEY', function(){
+                var originalProp = ParentClass.HOVER_OVERLAY_IDENTIFIER_KEY;
+                var prop = ExtendedClass.HOVER_OVERLAY_IDENTIFIER_KEY;
+                expect(prop).to.not.be(undefined);
+                expect(prop).to.be(originalProp);
+            });
+            it('works for #HOVER_OVERLAY_IDENTIFIER_VALUE', function(){
+                var originalProp = ParentClass.HOVER_OVERLAY_IDENTIFIER_VALUE;
+                var prop = ExtendedClass.HOVER_OVERLAY_IDENTIFIER_VALUE;
+                expect(prop).to.not.be(undefined);
+                expect(prop).to.be(originalProp);
+            });
+            it('works for #LAYER_HOVERABLE_PROPERTY_NAME', function(){
+                var originalProp = ParentClass.LAYER_HOVERABLE_PROPERTY_NAME;
+                var prop = ExtendedClass.LAYER_HOVERABLE_PROPERTY_NAME;
+                expect(prop).to.not.be(undefined);
+                expect(prop).to.be(originalProp);
+            });
+            it('works for #LAYER_HOVERFIELD_PROPERTY_NAME', function(){
+                var originalProp = ParentClass.LAYER_HOVERFIELD_PROPERTY_NAME;
+                var prop = ExtendedClass.LAYER_HOVERFIELD_PROPERTY_NAME;
+                expect(prop).to.not.be(undefined);
+                expect(prop).to.be(originalProp);
+            });
+        });
+        describe('they can be overridden for subclasses', function() {
+            var ParentClass = BasiGX.plugin.Hover;
+            var ExtendedClass = null;
+            beforeEach(function(){
+                ExtendedClass = Ext.define('TestExtendHover', {
+                    extend: 'BasiGX.plugin.Hover',
+                    alias: 'plugin.test-extend-hover',
+                    pluginId: 'test-hover',
+                    inheritableStatics: {
+                        HOVER_OVERLAY_IDENTIFIER_KEY: 'a',
+                        HOVER_OVERLAY_IDENTIFIER_VALUE: 'b',
+                        LAYER_HOVERABLE_PROPERTY_NAME: 'c',
+                        LAYER_HOVERFIELD_PROPERTY_NAME: 'd'
+                    }
+                });
+            });
+            afterEach(function() {
+                Ext.undefine('TestExtendHover');
+                ExtendedClass = null;
+            });
+            it('works for #HOVER_OVERLAY_IDENTIFIER_KEY', function(){
+                var originalProp = ParentClass.HOVER_OVERLAY_IDENTIFIER_KEY;
+                var prop = ExtendedClass.HOVER_OVERLAY_IDENTIFIER_KEY;
+                expect(prop).to.not.be(undefined);
+                expect(prop).to.not.be(originalProp);
+                expect(prop).to.be('a');
+            });
+            it('works for #HOVER_OVERLAY_IDENTIFIER_VALUE', function(){
+                var originalProp = ParentClass.HOVER_OVERLAY_IDENTIFIER_VALUE;
+                var prop = ExtendedClass.HOVER_OVERLAY_IDENTIFIER_VALUE;
+                expect(prop).to.not.be(undefined);
+                expect(prop).to.not.be(originalProp);
+                expect(prop).to.be('b');
+            });
+            it('works for #LAYER_HOVERABLE_PROPERTY_NAME', function(){
+                var originalProp = ParentClass.LAYER_HOVERABLE_PROPERTY_NAME;
+                var prop = ExtendedClass.LAYER_HOVERABLE_PROPERTY_NAME;
+                expect(prop).to.not.be(undefined);
+                expect(prop).to.not.be(originalProp);
+                expect(prop).to.be('c');
+            });
+            it('works for #LAYER_HOVERFIELD_PROPERTY_NAME', function(){
+                var originalProp = ParentClass.LAYER_HOVERFIELD_PROPERTY_NAME;
+                var prop = ExtendedClass.LAYER_HOVERFIELD_PROPERTY_NAME;
+                expect(prop).to.not.be(undefined);
+                expect(prop).to.not.be(originalProp);
+                expect(prop).to.be('d');
+            });
+        });
+    });
+
     describe('Usage as plugin for BasiGX.view.component.Map', function() {
         var plugin;
         var mapComponent;
@@ -35,6 +146,7 @@ describe('BasiGX.plugin.Hover', function() {
             expect(plugin.getCmp()).to.be(mapComponent);
         });
     });
+
     describe('Configuration options', function(){
         var div;
         var plugin;
@@ -153,4 +265,5 @@ describe('BasiGX.plugin.Hover', function() {
             });
         });
     });
+
 });
