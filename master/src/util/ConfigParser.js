@@ -606,13 +606,28 @@ Ext.define('BasiGX.util.ConfigParser', {
                 treeColor: layer.treeColor,
                 routingId: layer.id || null,
                 olStyle: layer.olStyle || null,
-                hoverable: layer.hoverable || !!layer.hoverField,
-                hoverField: layer.hoverField,
+                // TODO we should get rid of `topic`
                 topic: layer.topic || layer.hoverField || null,
                 source: source,
                 type: layer.type,
                 featureType: layer.layers
             };
+
+            // We don't require the hover plugin class to allow for smaller
+            // builds
+            if ('plugin' in BasiGX && 'Hover' in BasiGX.plugin) {
+                var hoverCls = BasiGX.plugin.Hover;
+                var hoverableProp = hoverCls.LAYER_HOVERABLE_PROPERTY_NAME;
+                var hoverfieldProp = hoverCls.LAYER_HOVERFIELD_PROPERTY_NAME;
+                var shallHover = false;
+                if (hoverableProp in layer) {
+                    shallHover = layer[hoverableProp];
+                } else {
+                    shallHover = !!layer[hoverfieldProp];
+                }
+                olLayerConfig[hoverableProp] = shallHover;
+                olLayerConfig[hoverfieldProp] = layer[hoverfieldProp];
+            }
 
             // TODO Refactor ... Do we need an icon or a color...
             if (layer.type === "WFSCluster") {
