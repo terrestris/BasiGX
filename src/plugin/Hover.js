@@ -53,12 +53,39 @@ Ext.define('BasiGX.plugin.Hover', {
         hoverVectorLayerInteraction: null
     },
 
+    /**
+     * Whether the `ol.interaction.Select` shall be configured to select
+     * multiple features from the hover layer.
+     *
+     * @property {boolean}
+     * @cfg
+     */
+    selectMulti: true,
+
+    /**
+     * The origin of the select event. We support two origins:
+     *
+     * * `'collection'` (the current default), which fires whenever an `add`
+     *   event of the collection of selected features is fired, and
+     * * `'interaction'` which fires when the select interaction fires the
+     *   select event.
+     *
+     * Older versions of ol3 did not expose / have the latter event, and
+     * therefore the 'workaround' with the collection events was chosen.
+     *
+     * @property {string}
+     * @cfg
+     */
+    selectEventOrigin: 'collection',
+
     currentHoverTarget: null,
 
     pendingRequest: null,
 
     init: function (cmp) {
         var me = this;
+
+        me.checkSelectEventOrigin();
 
         me.addHoverVectorLayerSource();
         me.addHoverVectorLayer();
@@ -73,6 +100,23 @@ Ext.define('BasiGX.plugin.Hover', {
 
         cmp.on('pointerrest', me.onPointerRest, me);
         cmp.on('pointerrestout', me.cleanupHoverArtifacts, me);
+    },
+
+    /**
+     * Called during the initialisation phase, this methdo ensures that the
+     * configuration option #selectEventOrigin has a valid value; e.g. either
+     * is `'collection'` (historical default) or `'interaction'`.
+     */
+    checkSelectEventOrigin: function(){
+        var me = this;
+        var allowedOrigins = ['collection', 'interaction'];
+        var defaultOrigin = allowedOrigins[0];
+        var selOrigin = me.selectEventOrigin;
+        if(!Ext.Array.contains(allowedOrigins, selOrigin)) {
+            Ext.log.warn('Unexpected selectEventOrigin "' + selOrigin + '",' +
+                ' correcting to "' + defaultOrigin + '".');
+            me.selectEventOrigin = defaultOrigin;
+        }
     },
 
     /**
@@ -100,17 +144,20 @@ Ext.define('BasiGX.plugin.Hover', {
 
        if (!me.getHoverVectorLayerInteraction()) {
             var interaction = new ol.interaction.Select({
-                multi: true,
+                multi: me.selectMulti,
                 style: me.selectStyleFunction,
                 layers : [ me.getHoverVectorLayer() ]
             });
-            var featureCollecion = interaction.getFeatures();
-
-            featureCollecion.on('add', this.onFeatureClicked, this);
+            if (me.selectEventOrigin === 'collection') {
+                var featureCollection = interaction.getFeatures();
+                featureCollection.on('add', me.onFeatureClicked, me);
+            } else {
+                interaction.on('select', me.onFeatureClicked, me);
+            }
             map.addInteraction(interaction);
             me.setHoverVectorLayerInteraction(interaction);
         }
-   },
+    },
 
    /**
     *
@@ -118,7 +165,12 @@ Ext.define('BasiGX.plugin.Hover', {
    onFeatureClicked: function(olEvt) {
        var me = this;
        var mapComponent = me.getCmp();
-       var olFeatures = olEvt.target.getArray();
+       var olFeatures;
+       if(me.selectEventOrigin === 'collection') {
+           olFeatures = olEvt.target.getArray();
+       } else {
+           olFeatures = olEvt.selected;
+       }
        mapComponent.fireEvent('hoverfeaturesclick', olFeatures);
    },
 
