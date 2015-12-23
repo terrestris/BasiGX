@@ -264,6 +264,84 @@ describe('BasiGX.plugin.Hover', function() {
                 );
             });
         });
+        describe("Configurable selectEventOrigin", function(){
+            it("is 'collection' by default", function(){
+                // setup
+                var mapComp = Ext.create("BasiGX.view.component.Map", {
+                    plugins: {
+                        ptype: "hover"
+                    },
+                    map: new ol.Map({target: div})
+                });
+                var hoverPlugin = mapComp.getPlugin("hover");
+
+                // test
+                expect(hoverPlugin.selectEventOrigin).to.be("collection");
+
+                // teardown
+                mapComp.destroy();
+                mapComp = null;
+            });
+            it("can be set to 'interaction'", function(){
+                // setup
+                var mapComp = Ext.create("BasiGX.view.component.Map", {
+                    plugins: {
+                        ptype: "hover",
+                        selectEventOrigin: "interaction"
+                    },
+                    map: new ol.Map({target: div})
+                });
+                var hoverPlugin = mapComp.getPlugin("hover");
+
+                // test
+                expect(hoverPlugin.selectEventOrigin).to.be("interaction");
+
+                // teardown
+                mapComp.destroy();
+                mapComp = null;
+            });
+            it("defaults to 'collection' on unexpected values", function(){
+                // setup
+                var mapComp = Ext.create("BasiGX.view.component.Map", {
+                    plugins: {
+                        ptype: "hover",
+                        selectEventOrigin: "humpty-dumpty"
+                    },
+                    map: new ol.Map({target: div})
+                });
+                var hoverPlugin = mapComp.getPlugin("hover");
+
+                // test
+                // actually uses the default:
+                expect(hoverPlugin.selectEventOrigin).to.be("collection");
+
+                // teardown
+                mapComp.destroy();
+                mapComp = null;
+            });
+            it("warns with hints when defaulting to 'collection'", function() {
+                // setup
+                var loggerSpy = sinon.spy(Ext.log, "warn");
+                var mapComp = Ext.create("BasiGX.view.component.Map", {
+                    plugins: {
+                        ptype: "hover",
+                        selectEventOrigin: "humpty-dumpty"
+                    },
+                    map: new ol.Map({target: div})
+                });
+
+                // test
+                expect(loggerSpy.calledOnce).to.be.ok();
+                var warnMessage = loggerSpy.firstCall.args[0];
+                expect(/selectEventOrigin/.test(warnMessage)).to.be.ok();
+                expect(/collection/.test(warnMessage)).to.be.ok();
+
+                // teardown
+                Ext.log.warn.restore();
+                mapComp.destroy();
+                mapComp = null;
+            });
+        });
     });
 
 });
