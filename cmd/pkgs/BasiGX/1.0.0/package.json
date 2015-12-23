@@ -12,11 +12,11 @@
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "5937c429-97d8-4dd9-b434-f4b62361e577",
-      "created": "2015-12-14T15:16:10Z",
+      "uuid": "6b168232-0bbd-480a-9d58-60a1015eeefe",
+      "created": "2015-12-23T08:51:00Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "/Tm51ZiO3os\u003d",
-      "signature": "ZbqBuYGaIUuvrZbUZizltbg4iAFe9InqVReOtCphLyZgh+hb5xaVROvzyDPjmQqud3wW5qT44pIJYa5pogizUF85L5eYRr+vaSnSbCdo13TGJ8/Y7a4le3Wz25CGFOmbe7rtnMnYf9UolKagy4Z1Y8b1moPjfBR/Iht7wX/rDUVV0lSqgSSJjIGSoSTYcu+c3yqjFWcfV2IfXO2cS9AZUHF6Wu7u9m3WJ8cpKYSSIcqeum3rMC7AJxG7JAUe1KDiIBThrwgkrU7VuUYuRyGIKpoF/CRskHm1+tDgoTyIOHzDlkrwJ4TAwuZDzOvsgFi/rj6oOZySrYkuMgo6JuRmQQ\u003d\u003d"
+      "nonce": "GlNqazN40Vw\u003d",
+      "signature": "ZJF36QjDmaZIQKBTbn/LAjo8/Pbi/h67lfF6VwhyJodbBa9w3EobfaFQeWpOLQEwiQADqH2BpZX/Y6D7Ukize7YJo5dqY/jrX4CwMg/6Kmu7g/TqzbXlRt/3jhsLQPJcsjegNdLpn7wNUsgZ4PgHc46mJghLvC8LEzOZNJZ4/YJS5eUqn3CAqKFq7CZ59mNGmxz4SHx8GF9VTNOZsnMGWFyLd/hkoifrXBYj5jO3YfQmd4mClssQTjnO18EQRJ898WrxwHl345vzyfnioWGo6wPCbfmA5g3cZr5NWtBkO9rpKnkyItlmd3ouYE65rPS9UEHK89nNPNWRi7j+3ty3Ug\u003d\u003d"
     }
   ],
   "slicer": {
@@ -54,7 +54,7 @@
     "url": "https://github.com/terrestris/BasiGX.git"
   },
   "devDependencies": {
-    "coveralls": "2.11.4",
+    "coveralls": "2.11.6",
     "eslint": "1.7.3",
     "expect.js": "0.3.1",
     "istanbul": "0.3.18",
