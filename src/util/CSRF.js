@@ -26,7 +26,7 @@ Ext.define('BasiGX.util.CSRF', {
     statics: {
         /**
         * Get the CSRF token value.
-        * 
+        *
         * @return {String} - the key value, e.g. "741a3b1-221f-4d1d-..."
         */
         getValue: function() {
@@ -35,7 +35,7 @@ Ext.define('BasiGX.util.CSRF', {
 
         /**
         * Get the CSRF token key.
-        * 
+        *
         * @return {String} - the key string, e.g. "X-CSRF-TOKEN"
         */
         getKey: function() {
@@ -44,7 +44,7 @@ Ext.define('BasiGX.util.CSRF', {
 
         /**
         * Get the full CSRF token object.
-        * 
+        *
         * @return {Object} header - the header containing the csrf key and value
         */
         getHeader: function() {
