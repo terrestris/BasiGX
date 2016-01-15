@@ -15,25 +15,54 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('BasiGX.util.CSRF', {
+  <pre class="prettyprint lang-js">/* Copyright (c) 2016 terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-util-CSRF'>/**
+</span> *
+ * CSRF Util
+ *
+ * Some methods to access the csrf-token information served by spring security
+ *
+ * @class BasiGX.util.CSRF
+ */
+Ext.define('BasiGX.util.CSRF', {
 
     statics: {
-<span id='global-method-getValue'>        /**
+<span id='BasiGX-util-CSRF-static-method-getValue'>        /**
 </span>        * Get the CSRF token value.
+        *
+        * @return {String} - the key value, e.g. &quot;741a3b1-221f-4d1d-...&quot;
         */
         getValue: function() {
             return Ext.DomQuery.select('meta[name=_csrf]')[0].content;
         },
 
-<span id='global-method-getKey'>        /**
+<span id='BasiGX-util-CSRF-static-method-getKey'>        /**
 </span>        * Get the CSRF token key.
+        *
+        * @return {String} - the key string, e.g. &quot;X-CSRF-TOKEN&quot;
         */
         getKey: function() {
             return Ext.DomQuery.select('meta[name=_csrf_header]')[0].content;
         },
 
-<span id='global-method-getHeader'>        /**
+<span id='BasiGX-util-CSRF-static-method-getHeader'>        /**
 </span>        * Get the full CSRF token object.
+        *
+        * @return {Object} header - the header containing the csrf key and value
         */
         getHeader: function() {
             var me = this,
