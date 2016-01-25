@@ -40,7 +40,7 @@ Ext.define('BasiGX.plugin.Hover', {
          *
          * @type {String}
          */
-        LAYER_HOVERFIELD_PROPERTY_NAME: 'hoverfield'
+        LAYER_HOVERFIELD_PROPERTY_NAME: 'hoverField'
     },
 
     config: {
