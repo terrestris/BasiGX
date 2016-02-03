@@ -248,7 +248,8 @@ Ext.define(&quot;BasiGX.view.form.CoordinateTransform&quot;, {
             fieldSets = me.query('fieldset'),
             transformvectorlayer = BasiGX.util.Layer.getLayerByName(
                 'transformvectorlayer'),
-            isOlEvt = evtOrBtnOrArray instanceof ol.MapBrowserPointerEvent,
+            isOlEvt = Ext.isArray(evtOrBtnOrArray.coordinate) &amp;&amp;
+                evtOrBtnOrArray.coordinate.length === 2,
             isCoordArray = Ext.isArray(evtOrBtnOrArray) &amp;&amp;
                 evtOrBtnOrArray.length === 2,
             coords = [],
