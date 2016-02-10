@@ -12,6 +12,7 @@
             'util/Controller.test.js',
             'util/Layer.test.js',
             'util/Map.test.js',
+            'util/Object.test.js',
             'util/Url.test.js',
             'ux/ContextSensitiveHelp.test.js',
             'ux/RowExpanderWithComponents.test.js',
