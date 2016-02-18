@@ -769,7 +769,7 @@ Ext.define('BasiGX.util.ConfigParser', {
                     mergedNode.expanded = node.expanded;
 
                     if (parent) {
-                        parent.getLayers().push(me.createLayer(mergedNode));
+                        parent.getLayers().getArray().unshift(me.createLayer(mergedNode));
                     } else {
                         me.layerArray.push(me.createLayer(mergedNode));
                     }
