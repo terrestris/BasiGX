@@ -422,8 +422,6 @@ Ext.define('BasiGX.util.ConfigParser', {
                   zoom: config.startZoom || 2,
                   maxResolution: config.maxResolution,
                   minResolution: config.minResolution,
-                  extent: me.convertStringToNumericArray(
-                      'float', config.startBbox),
                   projection: config.mapConfig.projection || 'EPSG:3857',
                   units: 'm',
                   resolutions: me.convertStringToNumericArray(
