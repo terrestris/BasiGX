@@ -608,7 +608,7 @@ Ext.define("BasiGX.view.form.Print", {
         view.extentLayer.getSource().clear();
 
         var fieldsets = view.query(
-            'fieldset[name=attributes] fieldset'
+            'fieldset[name=attributes] fieldset[name=map]'
         );
         Ext.each(fieldsets, function(fieldset){
             var feat = GeoExt.data.MapfishPrintProvider.renderPrintExtent(
