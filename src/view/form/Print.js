@@ -610,11 +610,15 @@ Ext.define("BasiGX.view.form.Print", {
         var fieldsets = view.query(
             'fieldset[name=attributes] fieldset[name=map]'
         );
+
         Ext.each(fieldsets, function(fieldset){
-            var feat = GeoExt.data.MapfishPrintProvider.renderPrintExtent(
-                    this.getMapComponent(), view.extentLayer,
-                    fieldset.clientInfo
-            );
+            if (this.getMapComponent() && view.extentLayer &&
+                    fieldset.clientInfo) {
+                var feat = GeoExt.data.MapfishPrintProvider.renderPrintExtent(
+                        this.getMapComponent(), view.extentLayer,
+                        fieldset.clientInfo
+                );
+            }
             fieldset.extentFeature = feat;
         }, this);
         delete view._renderingClientExtents;
