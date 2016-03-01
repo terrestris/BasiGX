@@ -96,24 +96,24 @@ done
 
 # 3. Update the API docs
 # 3.1 … without ExtJS
-mkdir -p $DOCS_DIR # for the API-docs without ExtJS classes
-rm -Rf $DOCS_DIR/* # remove any content from previous runs
-jsduck \
-    --title="$BASIGX_PACKAGE_NAME $BASIGX_PACKAGE_VERSION$DOC_SUFFIX Documentation" \
-    --output="$DOCS_DIR/" \
-    $TRAVIS_BUILD_DIR/src/
+# mkdir -p $DOCS_DIR # for the API-docs without ExtJS classes
+# rm -Rf $DOCS_DIR/* # remove any content from previous runs
+# jsduck \
+#     --title="$BASIGX_PACKAGE_NAME $BASIGX_PACKAGE_VERSION$DOC_SUFFIX Documentation" \
+#     --output="$DOCS_DIR/" \
+#     $TRAVIS_BUILD_DIR/src/
 
 
 # TODO include GeoExt sources
 # 3.2 … with ExtJS
-mkdir -p $DOCS_W_EXT_DIR # for the API-docs without ExtJS classes
-rm -Rf $DOCS_W_EXT_DIR/* # remove any content from previous runs
-jsduck \
-    --title="$BASIGX_PACKAGE_NAME $BASIGX_PACKAGE_VERSION$DOC_SUFFIX Documentation (incl. ExtJS classes)" \
-    --output="$DOCS_W_EXT_DIR/" \
-    "$DOWN_DIR/ext-$SENCHA_EXTJS_VERSION/packages/core/src" \
-    "$DOWN_DIR/ext-$SENCHA_EXTJS_VERSION/classic/classic/src" \
-    $TRAVIS_BUILD_DIR/src/
+# mkdir -p $DOCS_W_EXT_DIR # for the API-docs without ExtJS classes
+# rm -Rf $DOCS_W_EXT_DIR/* # remove any content from previous runs
+# jsduck \
+#     --title="$BASIGX_PACKAGE_NAME $BASIGX_PACKAGE_VERSION$DOC_SUFFIX Documentation (incl. ExtJS classes)" \
+#     --output="$DOCS_W_EXT_DIR/" \
+#     "$DOWN_DIR/ext-$SENCHA_EXTJS_VERSION/packages/core/src" \
+#     "$DOWN_DIR/ext-$SENCHA_EXTJS_VERSION/classic/classic/src" \
+#     $TRAVIS_BUILD_DIR/src/
 
 
 # 4. done.
