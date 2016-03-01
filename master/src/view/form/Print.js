@@ -548,6 +548,7 @@ Ext.define("BasiGX.view.form.Print", {
             xtype: 'textfield',
             name: attributeRec.get('name'),
             fieldLabel: attributeRec.get('name'),
+            value: attributeRec.get('default'),
             allowBlank: false
         };
     },
@@ -607,13 +608,17 @@ Ext.define("BasiGX.view.form.Print", {
         view.extentLayer.getSource().clear();
 
         var fieldsets = view.query(
-            'fieldset[name=attributes] fieldset'
+            'fieldset[name=attributes] fieldset[name=map]'
         );
+
         Ext.each(fieldsets, function(fieldset){
-            var feat = GeoExt.data.MapfishPrintProvider.renderPrintExtent(
-                    this.getMapComponent(), view.extentLayer,
-                    fieldset.clientInfo
-            );
+            if (this.getMapComponent() && view.extentLayer &&
+                    fieldset.clientInfo) {
+                var feat = GeoExt.data.MapfishPrintProvider.renderPrintExtent(
+                        this.getMapComponent(), view.extentLayer,
+                        fieldset.clientInfo
+                );
+            }
             fieldset.extentFeature = feat;
         }, this);
         delete view._renderingClientExtents;

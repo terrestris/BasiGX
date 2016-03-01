@@ -202,6 +202,7 @@ Ext.define("BasiGX.view.panel.LegendTree", {
                 '.' + elemenIdAndCssClass + ' { ' +
                 ' background-color: ' + color + ';' +
                 ' background:linear-gradient(to right, white, ' + color + ');' +
+                ' filter: alpha(opacity=50)\10;' +//IE9 fallback
                 '}';
             Ext.util.CSS.createStyleSheet(css, elemenIdAndCssClass);
 

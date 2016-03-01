@@ -100,12 +100,41 @@ Ext.define('BasiGX.util.Animate', {
                var vectorContext = event.vectorContext;
                var frameState = event.frameState;
                var elapsed = frameState.time - start;
-               var deltaX = targetGeom.flatCoordinates[0] -
-                   movingGeom.flatCoordinates[0];
-               var deltaY = targetGeom.flatCoordinates[1] -
-                   movingGeom.flatCoordinates[1];
-               movingGeom.translate(deltaX / (duration/70), deltaY / (duration/70));
 
+               var movingGeomFlatCoordinates = [];
+               var targetGeomFlatCoordinates = [];
+               if (movingGeom instanceof ol.geom.Point) {
+                   movingGeomFlatCoordinates = movingGeom.getCoordinates();
+               } else if (movingGeom instanceof ol.geom.LineString) {
+                   Ext.each(movingGeom.getCoordinates(), function(coordinatepair) {
+                       movingGeomFlatCoordinates.push(coordinatepair[0]);
+                       movingGeomFlatCoordinates.push(coordinatepair[1]);
+                   });
+               } else { // Polygon
+                   Ext.each(movingGeom.getCoordinates()[0], function(coordinatepair) {
+                       movingGeomFlatCoordinates.push(coordinatepair[0]);
+                       movingGeomFlatCoordinates.push(coordinatepair[1]);
+                   });
+               }
+               if (targetGeom instanceof ol.geom.Point) {
+                   targetGeomFlatCoordinates = targetGeom.getCoordinates();
+               } else if (targetGeom instanceof ol.geom.LineString) {
+                   Ext.each(targetGeom.getCoordinates(), function(coordinatepair) {
+                       targetGeomFlatCoordinates.push(coordinatepair[0]);
+                       targetGeomFlatCoordinates.push(coordinatepair[1]);
+                   });
+               } else { // Polygon
+                   Ext.each(targetGeom.getCoordinates()[0], function(coordinatepair) {
+                       targetGeomFlatCoordinates.push(coordinatepair[0]);
+                       targetGeomFlatCoordinates.push(coordinatepair[1]);
+                   });
+               }
+
+               var deltaX = targetGeomFlatCoordinates[0] -
+                   movingGeomFlatCoordinates[0];
+               var deltaY = targetGeomFlatCoordinates[1] -
+                   movingGeomFlatCoordinates[1];
+               movingGeom.translate(deltaX / (duration/70), deltaY / (duration/70));
                var imageStyle = style.getImage();
 
                if (fadeOut) {

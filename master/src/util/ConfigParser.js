@@ -422,8 +422,6 @@ Ext.define('BasiGX.util.ConfigParser', {
                   zoom: config.startZoom || 2,
                   maxResolution: config.maxResolution,
                   minResolution: config.minResolution,
-                  extent: me.convertStringToNumericArray(
-                      'float', config.startBbox),
                   projection: config.mapConfig.projection || 'EPSG:3857',
                   units: 'm',
                   resolutions: me.convertStringToNumericArray(
@@ -771,7 +769,7 @@ Ext.define('BasiGX.util.ConfigParser', {
                     mergedNode.expanded = node.expanded;
 
                     if (parent) {
-                        parent.getLayers().push(me.createLayer(mergedNode));
+                        parent.getLayers().getArray().unshift(me.createLayer(mergedNode));
                     } else {
                         me.layerArray.push(me.createLayer(mergedNode));
                     }
