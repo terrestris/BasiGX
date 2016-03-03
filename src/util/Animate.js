@@ -84,75 +84,58 @@ Ext.define('BasiGX.util.Animate', {
        },
 
        /**
-        * Moves / translates Features from origin geometry to destination in
-        * the given duration in ms, using the given style, optionally fading out
+        * Moves / translates a Feature to the given pixel delta in
+        * the given duration in ms, using the given style, calling a doneFn
+        * in the end
         *
         * Useful e.g. when hovering clustered features to show their children
         */
-       moveFeature: function(featureToMove, originFeature, duration, style, fadeOut) {
+       moveFeature: function(featureToMove, duration, pixel, style, doneFn) {
            var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
-           var start = new Date().getTime();
            var listenerKey;
-           var movingGeom = originFeature.getGeometry().clone();
-           var targetGeom = featureToMove.getGeometry();
 
-           function animate(event) {
+           var geometry = featureToMove.getGeometry();
+           var start = new Date().getTime();
+           var resolution = map.getView().getResolution();
+
+           if (typeof style === 'function') {
+               style = style(featureToMove, resolution);
+           }
+
+           var totalDisplacement = pixel * resolution;
+           var expectedFrames = duration / 1000 * 60;
+           var actualFrames = 0;
+           var deltaX = totalDisplacement / expectedFrames;
+           var deltaY = totalDisplacement / expectedFrames;
+
+           var animate = function(event) {
                var vectorContext = event.vectorContext;
                var frameState = event.frameState;
                var elapsed = frameState.time - start;
 
-               var movingGeomFlatCoordinates = [];
-               var targetGeomFlatCoordinates = [];
-               if (movingGeom instanceof ol.geom.Point) {
-                   movingGeomFlatCoordinates = movingGeom.getCoordinates();
-               } else if (movingGeom instanceof ol.geom.LineString) {
-                   Ext.each(movingGeom.getCoordinates(), function(coordinatepair) {
-                       movingGeomFlatCoordinates.push(coordinatepair[0]);
-                       movingGeomFlatCoordinates.push(coordinatepair[1]);
-                   });
-               } else { // Polygon
-                   Ext.each(movingGeom.getCoordinates()[0], function(coordinatepair) {
-                       movingGeomFlatCoordinates.push(coordinatepair[0]);
-                       movingGeomFlatCoordinates.push(coordinatepair[1]);
-                   });
-               }
-               if (targetGeom instanceof ol.geom.Point) {
-                   targetGeomFlatCoordinates = targetGeom.getCoordinates();
-               } else if (targetGeom instanceof ol.geom.LineString) {
-                   Ext.each(targetGeom.getCoordinates(), function(coordinatepair) {
-                       targetGeomFlatCoordinates.push(coordinatepair[0]);
-                       targetGeomFlatCoordinates.push(coordinatepair[1]);
-                   });
-               } else { // Polygon
-                   Ext.each(targetGeom.getCoordinates()[0], function(coordinatepair) {
-                       targetGeomFlatCoordinates.push(coordinatepair[0]);
-                       targetGeomFlatCoordinates.push(coordinatepair[1]);
-                   });
+               geometry.translate(deltaX, deltaY);
+
+               vectorContext.setFillStrokeStyle(style.getFill(), style.getStroke());
+               vectorContext.setImageStyle(style.getImage());
+               if (geometry instanceof ol.geom.Point) {
+                   vectorContext.drawPointGeometry(geometry, null);
+               } else if (geometry instanceof ol.geom.LineString) {
+                   vectorContext.drawLineStringGeometry(geometry, null);
+               } else {
+                   vectorContext.drawPolygonGeometry(geometry, null);
                }
 
-               var deltaX = targetGeomFlatCoordinates[0] -
-                   movingGeomFlatCoordinates[0];
-               var deltaY = targetGeomFlatCoordinates[1] -
-                   movingGeomFlatCoordinates[1];
-               movingGeom.translate(deltaX / (duration/70), deltaY / (duration/70));
-               var imageStyle = style.getImage();
-
-               if (fadeOut) {
-                   var factor = (duration - elapsed) / duration;
-                   if (factor > 0) {
-                       imageStyle.setOpacity(factor);
-                   }
-               }
-
-               vectorContext.setImageStyle(imageStyle);
-               vectorContext.drawPointGeometry(movingGeom, null);
-               if (elapsed > duration) {
+               if (elapsed > duration || actualFrames >= expectedFrames) {
                    ol.Observable.unByKey(listenerKey);
+                   doneFn(featureToMove);
                    return;
                }
                // tell OL3 to continue postcompose animation
                frameState.animate = true;
-           }
+
+               actualFrames++;
+           };
+
            listenerKey = map.on('postcompose', animate);
            return listenerKey;
        }
