@@ -112,7 +112,6 @@ Ext.define('BasiGX.util.Animate', {
                var vectorContext = event.vectorContext;
                var frameState = event.frameState;
                var elapsed = frameState.time - start;
-               var factor = elapsed / duration;
 
                geometry.translate(deltaX, deltaY);
 
