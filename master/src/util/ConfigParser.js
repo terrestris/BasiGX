@@ -746,9 +746,11 @@ Ext.define('BasiGX.util.ConfigParser', {
                 } else if (node.leaf === false) {
                     // handling folders
                     var folder = me.createFolder(node);
+                    folder.set('expanded', node.expanded);
 
                     if (parent) {
                         parent.getLayers().push(folder);
+                        folder.set('parentFolder', parent);
                     } else {
                         me.layerArray.push(folder);
                     }
@@ -770,6 +772,14 @@ Ext.define('BasiGX.util.ConfigParser', {
 
                     if (parent) {
                         parent.getLayers().getArray().unshift(me.createLayer(mergedNode));
+                        if (node.checked) {
+                            parent.set('visible', true);
+                            var nextParent = parent.get('parentFolder');
+                            while (nextParent) {
+                                nextParent.set('visible', true);
+                                nextParent = nextParent.get('parentFolder');
+                            }
+                        }
                     } else {
                         me.layerArray.push(me.createLayer(mergedNode));
                     }
