@@ -746,6 +746,7 @@ Ext.define('BasiGX.util.ConfigParser', {
                 } else if (node.leaf === false) {
                     // handling folders
                     var folder = me.createFolder(node);
+                    folder.set('expanded', node.expanded);
 
                     if (parent) {
                         parent.getLayers().push(folder);
