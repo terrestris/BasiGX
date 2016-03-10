@@ -536,7 +536,7 @@ Ext.define('BasiGX.util.ConfigParser', {
 
                 cfg = {
                     url: config.url,
-//                    crossOrigin: 'Anonymous',
+                    crossOrigin: config.crossOrigin,
                     attributions: attributions,
                     params: {
                         LAYERS: config.layers,
