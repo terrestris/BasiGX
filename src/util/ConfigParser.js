@@ -381,6 +381,8 @@ Ext.define('BasiGX.util.ConfigParser', {
 
     activeRouting: false,
 
+    appContext: null,
+
     statics: {
 
         /**
@@ -406,6 +408,7 @@ Ext.define('BasiGX.util.ConfigParser', {
             }
 
             config = context.data.merge;
+            me.appContext = config;
 
             // TODO Refactor
             if(window.location.hash.indexOf('center') > 0){
@@ -544,6 +547,16 @@ Ext.define('BasiGX.util.ConfigParser', {
                         VERSION: config.version || '1.1.1'
                     }
                 };
+
+                // set a tilegrid if needed
+                if (me.appContext && config.type === "TileWMS" ||
+                    config.type === "XYZ") {
+                        cfg.tileGrid = new ol.tilegrid.TileGrid({
+                            extent: map.getView().getProjection().getExtent(),
+                            resolutions: me.convertStringToNumericArray(
+                                'float', me.appContext.mapConfig.resolutions)
+                        });
+                }
 
                 if ((config.type === "TileWMS" ||
                      config.type === "WMS" ||
