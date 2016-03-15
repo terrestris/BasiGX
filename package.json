@@ -12,7 +12,8 @@
     "format": "1",
     "framework": "ext",
     "requires": [
-        "GeoExt"
+        "GeoExt",
+        "ux"
     ],
     "toolkit": "classic",
     "theme": "theme-neptune",
