@@ -54,7 +54,7 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
     chooseImageBtnText: 'Choose',
     uploadBtnText: 'Upload',
     uploadWaitMsg: 'Please wait...',
-    uploadErrorText: 'Error on upload',
+    uploadErrorText: 'Error on upload, check file type and size',
     msgConfirmDeletionTpl: 'Do your really want to delete this picture?',
     graphicDeleteInfoSuccess: 'Image successfully deleted',
     graphicDeleteInfoError: 'Image deletion failed',
@@ -208,6 +208,9 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
                     } else {
                         BasiGX.error(me.uploadErrorText);
                     }
+                },
+                failure: function() {
+                    BasiGX.error(me.uploadErrorText);
                 }
             });
         }
