@@ -1,0 +1,37 @@
+/* Copyright (c) 2016 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * @class BasiGX.util.Color
+ */
+Ext.define('BasiGX.util.Color', {
+
+    statics: {
+
+        /**
+         * Method converts a hex8 color string into an rgba color string
+         */
+        hex8ToRgba: function(hex8) {
+            hex8 = hex8.replace('#','');
+            var r = parseInt(hex8.substring(0,2), 16);
+            var g = parseInt(hex8.substring(2,4), 16);
+            var b = parseInt(hex8.substring(4,6), 16);
+            var a = (parseInt(hex8.substring(6,8), 16) / 255).toFixed(2) * 1;
+
+            var result = 'rgba('+r+','+g+','+b+','+a+')';
+            return result;
+        }
+    }
+});
