@@ -10,16 +10,17 @@
       "detailedDescription": "This package consists of several components that can be used to setup an Application based on ExtJS 6, GeoExt 3 and OL3",
       "type": "code",
       "requires": [
-        "GeoExt"
+        "GeoExt",
+        "ux"
       ],
       "signatures": [
         {
           "name": "terrestris GmbH \u0026 Co. KG",
-          "uuid": "42c53632-823b-47c2-9b1b-9b624de416d0",
-          "created": "2016-03-15T07:57:00Z",
+          "uuid": "b85ecf74-9820-4c22-a6fc-730e34b07e37",
+          "created": "2016-03-16T15:17:16Z",
           "algorithm": "SHA1withRSA",
-          "nonce": "Dm1G+qmDvhs\u003d",
-          "signature": "jmxwtkTjBQBNShe1IkBzvwXV41RC01i/DCcH31OjsXs6Y/AYCRwRLbosOP3OxGgAeUdV2pt1rrrIssHJNqj89+ErxUJ9oYYfY/Br24SORlfb10G3q17USsK/im5n5t/oCWoL+5bEXiwftFgzpU2ZOwW1udO8t5/2w6tw/xZNUfghglD+yueUFCD8HXTKxNFENpYzjd+03rCNfBxSxYFx9FBuvat1MZXI3cBpre+UtjTLzMzKw5VB00NQ3V/a+CWNQlh1og4zJvEfSulG6y8Jqh1eeEn6k5YwEBG2/D7t0OjJVIcIXclgVazvVsbdQVRphoOg6fzgaDfowq3xa6gQcA\u003d\u003d"
+          "nonce": "Gfnr7ke4f/Q\u003d",
+          "signature": "GH/1Yem8pbTSwY9lb6lIKPJq1SEMt877KpRZU3b6ExsEiLndFUM/rDKKph3flgpWrqi4CDzVWDOlX2gOpXCOBowi7zi9TK4NcIh4w+dW/f2Tb+r6scts72TjItqtjxNwJNg1kAnUNg4ytq3aFdzUibNvwupHS2NeYTDu/aq4cDfY7awh6WtW+hATZl03mCXECO+PpMqQgmpsPpA43qSGt9R7KiXcO10uCvZ3pvAvnvbNZadpHwQpVz+vApadr98mLbm6A6ZPB9PE+fCUqUaaX2V0H2ptk8zBuFW3YsmhsbbThrNnSJQlj8R2yg2CjxXaNAPd7BeuFOBWtNSNNfdiGw\u003d\u003d"
         }
       ],
       "slicer": {
