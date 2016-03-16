@@ -15,15 +15,15 @@
  */
 /**
  *
- * BasiGX.view.window.GraphicPool
+ * BasiGX.view.panel.GraphicPool
  *
  * Used to upload, select and delete graphics
  *
- * @class BasiGX.view.window.GraphicPool
+ * @class BasiGX.view.panel.GraphicPool
  */
-Ext.define("BasiGX.view.window.GraphicPool", {
-    extend: "Ext.window.Window",
-    xtype: "basigx-window-graphicpool",
+Ext.define("BasiGX.view.panel.GraphicPool", {
+    extend: "Ext.panel.Panel",
+    xtype: "basigx-panel-graphicpool",
 
     requires: [
         'Ext.form.field.File',
@@ -33,11 +33,6 @@ Ext.define("BasiGX.view.window.GraphicPool", {
         'BasiGX.util.CSRF',
         'BasiGX.util.MsgBox'
     ],
-
-    /**
-     * constrain the window
-     */
-    constrained: true,
 
     /**
      * a default width for this component
@@ -52,7 +47,6 @@ Ext.define("BasiGX.view.window.GraphicPool", {
     /**
      * i18n
      */
-    title: 'Graphic Pool',
     delButtonText: 'Delete',
     okBtnText: 'Ok',
     msgBoxNoElementSelectedText: 'No image selected',
@@ -106,7 +100,13 @@ Ext.define("BasiGX.view.window.GraphicPool", {
         /**
          * the callback function that should be called on image deletion
          */
-        deleteClickCallbackFn: null
+        deleteClickCallbackFn: null,
+
+        /**
+         * should we offer a close button? Will close a parent window if
+         * one exists
+         */
+        useCloseButton: true
     },
 
     /**
@@ -181,7 +181,8 @@ Ext.define("BasiGX.view.window.GraphicPool", {
             {
                 text: me.closeBtnText,
                 scope: me,
-                handler: me.close
+                handler: me.onCloseButtonClick,
+                hidden: !me.getUseCloseButton()
             }
         ];
 
@@ -272,7 +273,9 @@ Ext.define("BasiGX.view.window.GraphicPool", {
             } else {
                 Ext.log.warn('Please implement your own callback function');
             }
-            this.close();
+            if (this.up('window')) {
+                this.up('window').close();
+            }
         } else {
             this.infoNoSelection();
         }
@@ -304,6 +307,16 @@ Ext.define("BasiGX.view.window.GraphicPool", {
             });
         } else {
             this.infoNoSelection();
+        }
+    },
+
+    /**
+     *
+     */
+    onCloseButtonClick: function() {
+        var me = this;
+        if (me.up('window')) {
+            me.up('window').close();
         }
     }
 });

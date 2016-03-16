@@ -29,7 +29,7 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
 
     requires: [
         'Ext.ux.colorpick.Button',
-        'BasiGX.view.window.GraphicPool'
+        'BasiGX.view.panel.GraphicPool'
     ],
 
     /**
@@ -466,57 +466,17 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
         if (pointStyle) {
             oldStyle = redliningContainer.getRedlinePointStyle();
             renderer = me.down('gx_renderer[name=pointRenderPreview]');
-            style = new ol.style.Style({
-              image: pointStyle.radius || pointStyle.fillcolor ||
-                 pointStyle.fillopacity || pointStyle.strokewidth ||
-                 pointStyle.strokecolor ? new ol.style.Circle({
-                  radius: pointStyle.radius || oldStyle.getImage().getRadius(),
-                  fill: pointStyle.fillcolor || pointStyle.fillopacity ?
-                      new ol.style.Fill({
-                      color: pointStyle.fillcolor ? pointStyle.fillcolor :
-                          oldStyle.getImage().getFill().getColor(),
-                      opacity: pointStyle.fillopacity ? pointStyle.fillopacity :
-                          oldStyle.getImage().getFill().getColor()}) :
-                              oldStyle.getImage().getFill(),
-                  stroke: pointStyle.strokewidth || pointStyle.strokecolor ?
-                      new ol.style.Stroke({
-                      color: pointStyle.strokecolor ? pointStyle.strokecolor :
-                          oldStyle.getImage().getStroke().getColor(),
-                      width: pointStyle.strokewidth ? pointStyle.strokewidth :
-                          oldStyle.getImage().getStroke().getWidth()}) :
-                              oldStyle.getImage().getStroke()
-              }) : oldStyle.getImage()
-            });
+            style = me.generatePointStyle(oldStyle, pointStyle);
             redliningContainer.setRedlinePointStyle(style);
         } else if (lineStyle) {
             oldStyle = redliningContainer.getRedlineLineStringStyle();
             renderer = me.down('gx_renderer[name=lineRenderPreview]');
-            style = new ol.style.Style({
-                stroke: lineStyle.strokewidth || lineStyle.strokecolor ?
-                    new ol.style.Stroke({
-                        color: lineStyle.strokecolor ? lineStyle.strokecolor :
-                            oldStyle.getStroke().getColor(),
-                        width: lineStyle.strokewidth ? lineStyle.strokewidth :
-                            oldStyle.getStroke().getWidth()}) :
-                                oldStyle.getStroke()
-
-            });
+            style = me.generateLineStringStyle(oldStyle, lineStyle);
             redliningContainer.setRedlineLineStringStyle(style);
         } else {
             oldStyle = redliningContainer.getRedlinePolygonStyle();
             renderer = me.down('gx_renderer[name=polygonRenderPreview]');
-            style = new ol.style.Style({
-                fill: polygonStyle.fillcolor ? new ol.style.Fill({
-                    color: polygonStyle.fillcolor
-                }) : oldStyle.getFill(),
-                stroke: polygonStyle.strokewidth || polygonStyle.strokecolor ?
-                    new ol.style.Stroke({
-                    color: polygonStyle.strokecolor ? polygonStyle.strokecolor :
-                        oldStyle.getStroke().getColor(),
-                    width: polygonStyle.strokewidth ? polygonStyle.strokewidth :
-                        oldStyle.getStroke().getWidth()}) :
-                            oldStyle.getStroke()
-            });
+            style = me.generatePolygonStyle(oldStyle, polygonStyle);
             redliningContainer.setRedlinePolygonStyle(style);
         }
 
@@ -527,6 +487,71 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
         // reapply the styleFn on the layer so that ol3 starts redrawing
         // with new styles
         me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
+    },
+
+    /**
+     *
+     */
+    generatePointStyle: function(oldStyle, pointStyle) {
+        var style = new ol.style.Style({
+            image: pointStyle.radius || pointStyle.fillcolor ||
+            pointStyle.fillopacity || pointStyle.strokewidth ||
+            pointStyle.strokecolor ?
+            new ol.style.Circle({
+                radius: pointStyle.radius || oldStyle.getImage().getRadius(),
+                fill: pointStyle.fillcolor || pointStyle.fillopacity ?
+                new ol.style.Fill({
+                    color: pointStyle.fillcolor ? pointStyle.fillcolor :
+                        oldStyle.getImage().getFill().getColor(),
+                    opacity: pointStyle.fillopacity ? pointStyle.fillopacity :
+                        oldStyle.getImage().getFill().getColor()
+                }) : oldStyle.getImage().getFill(),
+                stroke: pointStyle.strokewidth || pointStyle.strokecolor ?
+                new ol.style.Stroke({
+                    color: pointStyle.strokecolor ? pointStyle.strokecolor :
+                        oldStyle.getImage().getStroke().getColor(),
+                    width: pointStyle.strokewidth ? pointStyle.strokewidth :
+                        oldStyle.getImage().getStroke().getWidth()
+                }) : oldStyle.getImage().getStroke()
+            }) : oldStyle.getImage()
+       });
+        return style;
+    },
+
+    /**
+     *
+     */
+    generateLineStringStyle: function(oldStyle, lineStyle) {
+        var style = new ol.style.Style({
+            stroke: lineStyle.strokewidth || lineStyle.strokecolor ?
+            new ol.style.Stroke({
+                color: lineStyle.strokecolor ? lineStyle.strokecolor :
+                    oldStyle.getStroke().getColor(),
+                width: lineStyle.strokewidth ? lineStyle.strokewidth :
+                    oldStyle.getStroke().getWidth()
+            }) : oldStyle.getStroke()
+        });
+        return style;
+    },
+
+    /**
+     *
+     */
+    generatePolygonStyle: function(oldStyle, polygonStyle) {
+        var style = new ol.style.Style({
+            fill: polygonStyle.fillcolor ?
+            new ol.style.Fill({
+                color: polygonStyle.fillcolor
+            }) : oldStyle.getFill(),
+            stroke: polygonStyle.strokewidth || polygonStyle.strokecolor ?
+            new ol.style.Stroke({
+                color: polygonStyle.strokecolor ? polygonStyle.strokecolor :
+                    oldStyle.getStroke().getColor(),
+                width: polygonStyle.strokewidth ? polygonStyle.strokewidth :
+                    oldStyle.getStroke().getWidth()
+            }) : oldStyle.getStroke()
+        });
+        return style;
     },
 
     /**
@@ -568,12 +593,19 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
             );
         };
 
-        Ext.create('BasiGX.view.window.GraphicPool', {
+        var graphicPool = Ext.create('BasiGX.view.panel.GraphicPool', {
             backendUrls: me.getBackendUrls(),
             okClickCallbackFn: okClickCallbackFn,
             deleteClickCallbackFn: deleteClickCallbackFn,
             useCsrfToken: true
-        }).show();
+        });
+
+        var graphicPoolWin = Ext.create('Ext.window.Window', {
+            title: 'Graphic Pool',
+            constrained: true,
+            items: [graphicPool]
+        });
+        graphicPoolWin.show();
     },
 
     /**
