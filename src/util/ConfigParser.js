@@ -549,8 +549,11 @@ Ext.define('BasiGX.util.ConfigParser', {
                 };
 
                 // set a tilegrid if needed
-                if (me.appContext && config.type === "TileWMS" ||
-                    config.type === "XYZ") {
+                if (me.appContext &&
+                    me.appContext.mapConfig &&
+                    me.appContext.mapConfig.resolutions &&
+                    (config.type === "TileWMS" || config.type === "XYZ") &&
+                    config.tileGrid === undefined) {
                         cfg.tileGrid = new ol.tilegrid.TileGrid({
                             extent: map.getView().getProjection().getExtent(),
                             resolutions: me.convertStringToNumericArray(
@@ -826,8 +829,14 @@ Ext.define('BasiGX.util.ConfigParser', {
          * @returns {Array} arr - the parsed array
          */
         convertStringToNumericArray: function(type, string) {
-            if (Ext.isEmpty(string) || Ext.isEmpty(type) ||
-                Ext.isArray(string)) {
+            if (Ext.isEmpty(string) || Ext.isEmpty(type)) {
+                Ext.log.warn('Cannot convert string to numeric array. Passed ' +
+                    'type was: ' + type + '; Passed string was: ' + string);
+                return string;
+            }
+            if (Ext.isArray(string)) {
+                Ext.log.warn('Passed array instead of string to convert to ' +
+                    ' array of ' + type + '. Returning input array unchanged.');
                 return string;
             }
             var arr = [];
