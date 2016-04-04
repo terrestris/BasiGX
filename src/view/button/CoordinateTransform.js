@@ -35,18 +35,20 @@ Ext.define("BasiGX.view.button.CoordinateTransform", {
     /**
      *
      */
-    bind: {
-        text: '{text}'
+    viewModel: {
+        data: {
+            tooltip: 'Koordinaten transformieren und anzeigen',
+            text: 'Koordinaten transformieren',
+            windowTitle: 'Koordinaten transformieren'
+        }
     },
 
     /**
      *
      */
-    viewModel: {
-        data: {
-            tooltip: 'Koordinaten transformieren und anzeigen',
-            text: 'Koordinaten transformieren'
-        }
+    bind: {
+        tooltip: '{tooltip}',
+        text: '{text}'
     },
 
     /**
@@ -68,7 +70,7 @@ Ext.define("BasiGX.view.button.CoordinateTransform", {
             if(!win){
                 Ext.create('Ext.window.Window', {
                     name: 'coordinate-transform-window',
-                    title: 'Koordinaten transformieren',
+                    title: this.getViewModel().get('windowTitle'),
                     width: 500,
                     height: 400,
                     layout: 'fit',
@@ -89,10 +91,5 @@ Ext.define("BasiGX.view.button.CoordinateTransform", {
      */
     constructor: function(config) {
         this.callParent([config]);
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
-        }
     }
 });

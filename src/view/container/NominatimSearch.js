@@ -38,6 +38,14 @@ Ext.define("BasiGX.view.container.NominatimSearch", {
         'BasiGX.util.Animate'
     ],
 
+    viewModel: {
+        data: {
+            searchTermTextFieldLabel: 'Suchbegriff',
+            searchResultGridTitle: 'Suchergebnisse',
+            resetBtnText: 'Zurücksetzen'
+        }
+    },
+
     config: {
         /**
          * The URL to the nominatim service
@@ -266,7 +274,9 @@ Ext.define("BasiGX.view.container.NominatimSearch", {
             {
                 xtype: 'textfield',
                 name: 'nominatimSearchTerm',
-                fieldLabel: 'Suchbegriff',
+                bind: {
+                    fieldLabel: '{searchTermTextFieldLabel}'
+                },
                 enableKeyEvents: true,
                 listeners: {
                     change: me.handleKeyDown
@@ -277,7 +287,9 @@ Ext.define("BasiGX.view.container.NominatimSearch", {
                 name: 'nominatimsearchresultgrid',
                 hidden: true,
                 hideHeaders: true,
-                title: 'Suchergebnisse',
+                bind: {
+                    title: '{searchResultGridTitle}'
+                },
                 store: searchResultStore,
                 columns: [
                     {
@@ -301,7 +313,9 @@ Ext.define("BasiGX.view.container.NominatimSearch", {
                 height: 300
             }, {
                 xtype: 'button',
-                text: 'Zurücksetzen',
+                bind: {
+                    text: '{resetBtnText}'
+                },
                 margin: '10 0 0 0',
                 handler: me.resetSearchGridAndText,
                 scope: me
@@ -349,12 +363,14 @@ Ext.define("BasiGX.view.container.NominatimSearch", {
 
     },
 
+    /**
+     *
+     */
     resetSearchGridAndText: function() {
         var me = this;
         me.down('textfield[name=nominatimSearchTerm]').setValue('');
         me.resetGrid();
     },
-
 
     /**
      *

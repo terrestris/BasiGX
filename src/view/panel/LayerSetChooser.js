@@ -44,7 +44,8 @@ Ext.define("BasiGX.view.panel.LayerSetChooser", {
 
     viewModel: {
         data: {
-            title: 'Themen Auswahl'
+            title: 'Themen Auswahl',
+            filterFieldLabel: 'Filter'
         }
     },
 
@@ -99,7 +100,9 @@ Ext.define("BasiGX.view.panel.LayerSetChooser", {
         {
             xtype: 'textfield',
             name: 'filter',
-            fieldLabel: 'Filter',
+            bind: {
+                fieldLabel: '{filterFieldLabel}'
+            },
             labelAlign: 'left',
             labelWidth: 45,
             flex: 1

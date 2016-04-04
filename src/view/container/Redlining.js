@@ -28,80 +28,100 @@ Ext.define("BasiGX.view.container.Redlining", {
 
     layout: 'hbox',
 
-   /**
-    *
-    */
-   drawPointInteraction: null,
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            drawPointsBtnText: 'Draw Points',
+            drawLinesBtnText: 'Draw Lines',
+            drawPolygonsBtnText: 'Draw Polygons',
+            drawPostItBtnText: 'Draw Post-it',
+            copyObjectBtnText: 'Copy Object',
+            moveObjectBtnText: 'Move Object',
+            modifyObjectBtnText: 'Modify Object',
+            deleteObjectBtnText: 'Delete Object',
+            openStyleBtnText: 'Styler',
+            stylerWindowTitle: 'Styler',
+            postItWindowTitle: 'Enter the Post-its text',
+            postItWindowCreatePostItBtnText: 'Create Post-it'
+        }
+    },
 
-   /**
-    *
-    */
-   drawLineInteraction: null,
+    /**
+     *
+     */
+    drawPointInteraction : null,
 
-   /**
-    *
-    */
-   drawPolygonInteraction: null,
+    /**
+     *
+     */
+    drawLineInteraction : null,
 
-   /**
-    *
-    */
-   drawPostitInteraction: null,
+    /**
+     *
+     */
+    drawPolygonInteraction : null,
 
-   /**
-    *
-    */
-   copySelectInteraction: null,
+    /**
+     *
+     */
+    drawPostitInteraction : null,
 
-   /**
-    *
-    */
-   translateInteraction: null,
+    /**
+     *
+     */
+    copySelectInteraction : null,
 
-   /**
-    *
-    */
-   translateSelectInteraction: null,
+    /**
+     *
+     */
+    translateInteraction : null,
 
-   /**
-    *
-    */
-   modifyInteraction: null,
+    /**
+     *
+     */
+    translateSelectInteraction : null,
 
-   /**
-    *
-    */
-   selectInteraction: null,
+    /**
+     *
+     */
+    modifyInteraction : null,
 
-   /**
-    *
-    */
-   deleteSelectInteraction: null,
+    /**
+     *
+     */
+    selectInteraction : null,
 
-   /**
-    *
-    */
-   deleteModifyInteraction: null,
+    /**
+     *
+     */
+    deleteSelectInteraction : null,
 
-   /**
-    *
-    */
-   deleteSnapInteraction: null,
+    /**
+     *
+     */
+    deleteModifyInteraction : null,
 
-   /**
-    *
-    */
-   redliningVectorLayer: null,
+    /**
+     *
+     */
+    deleteSnapInteraction : null,
 
-   /**
-    *
-    */
-   redlineFeatures: null,
+    /**
+     *
+     */
+    redliningVectorLayer : null,
 
-   /**
-    *
-    */
-   redliningToolsWin: null,
+    /**
+     *
+     */
+    redlineFeatures : null,
+
+    /**
+     *
+     */
+    redliningToolsWin : null,
 
    /**
     *
@@ -210,7 +230,9 @@ Ext.define("BasiGX.view.container.Redlining", {
        return [
            {
                xtype: 'button',
-               text: 'Draw Points',
+               bind: {
+                   text: '{drawPointsBtnText}'
+               },
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -230,7 +252,9 @@ Ext.define("BasiGX.view.container.Redlining", {
                }
            }, {
                xtype: 'button',
-               text: 'Draw Lines',
+               bind: {
+                   text: '{drawLinesBtnText}'
+               },
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -250,7 +274,9 @@ Ext.define("BasiGX.view.container.Redlining", {
                }
            }, {
                xtype: 'button',
-               text: 'Draw Polygons',
+               bind: {
+                   text: '{drawPolygonsBtnText}'
+               },
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -270,7 +296,9 @@ Ext.define("BasiGX.view.container.Redlining", {
                }
            }, {
                xtype: 'button',
-               text: 'Draw Post-it',
+               bind: {
+                   text: '{drawPostItBtnText}'
+               },
                name: 'postitbutton',
                toggleGroup: 'draw',
                listeners: {
@@ -309,7 +337,9 @@ Ext.define("BasiGX.view.container.Redlining", {
                }
            }, {
                xtype: 'button',
-               text: 'Copy Object',
+               bind: {
+                   text: '{copyObjectBtnText}'
+               },
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -339,7 +369,9 @@ Ext.define("BasiGX.view.container.Redlining", {
                }
            }, {
                xtype: 'button',
-               text: 'Move Object',
+               bind: {
+                   text: '{moveObjectBtnText}'
+               },
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -365,7 +397,9 @@ Ext.define("BasiGX.view.container.Redlining", {
                }
            }, {
                xtype: 'button',
-               text: 'Modify Object',
+               bind: {
+                   text: '{modifyObjectBtnText}'
+               },
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -388,7 +422,9 @@ Ext.define("BasiGX.view.container.Redlining", {
                }
            }, {
                xtype: 'button',
-               text: 'Delete Object',
+               bind: {
+                   text: '{deleteObjectBtnText}'
+               },
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -431,13 +467,15 @@ Ext.define("BasiGX.view.container.Redlining", {
                }
            }, {
                xtype: 'button',
-               text: 'Styler',
+               bind: {
+                   text: '{openStyleBtnText}'
+               },
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
                        if (!me.stylerWindow) {
                            me.stylerWindow = Ext.create('Ext.window.Window', {
-                               title: 'Styler',
+                               title: me.getViewModel().get('stylerWindowTitle'),
                                width: 500,
                                layout: 'fit',
                                constrainHeader: true,
@@ -474,7 +512,7 @@ Ext.define("BasiGX.view.container.Redlining", {
        Ext.create('Ext.window.Window', {
            width: 300,
            height: 170,
-           title: 'Enter the Post-its text',
+           title: me.getViewModel().get('postItWindowTitle'),
            defaults: {
                width: '100%'
            },
@@ -485,7 +523,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                },
                {
                    xtype: 'button',
-                   text: 'Create Post-it',
+                   text: me.getViewModel().get('postItWindowCreatePostItBtnText'),
                    handler: function(btn) {
                        var text = btn.up('window').down(
                            'textarea[name=postittext]').getValue();

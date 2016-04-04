@@ -30,6 +30,19 @@ Ext.define("BasiGX.view.view.GraphicPool", {
         'BasiGX.util.Url'
     ],
 
+    viewModel: {
+        data: {
+            /**
+             * text displayed when no pictures were found
+             */
+            emptyStoreMsg: 'No data found'
+        }
+    },
+
+    bind: {
+        emptyText: '{emptyStoreMsg}'
+    },
+
     /**
      *
      */
@@ -56,11 +69,6 @@ Ext.define("BasiGX.view.view.GraphicPool", {
          * Can contain url and method property
          */
         backendUrls: null,
-
-        /**
-         * text displayed when no pictures were found
-         */
-        emptyStoreMsg: 'No data found',
 
         /**
          *
@@ -104,7 +112,6 @@ Ext.define("BasiGX.view.view.GraphicPool", {
 
         me.itemSelector = me.getItemSelector();
         me.store = store;
-        me.emptyText = me.getEmptyStoreMsg();
 
         me.tpl = [
             '<tpl for=".">',
