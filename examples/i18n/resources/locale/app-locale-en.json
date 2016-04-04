@@ -1,0 +1,536 @@
+{
+    "BasiGX.view.button.AddWms": {
+        "config": {
+            "data": {
+                "tooltip": "Add WMS",
+                "text": "WMS <span style=\"font-size: 1.7em; font-weight: normal;\">⊕</span>",
+                "windowTitle": "Add WMS"
+            }
+        }
+    },
+    "BasiGX.view.button.CoordinateTransform": {
+        "config": {
+            "data": {
+                "tooltip": "Transform coordinates",
+                "text": "Transform coordinates",
+                "windowTitle": "Transform coordinates"
+            }
+        }
+    },
+    "BasiGX.view.button.Help": {
+        "config": {
+            "data": {
+                "tooltip": "Help",
+                "text": null
+            }
+        }
+    },
+    "BasiGX.view.button.Hsi": {
+        "config": {
+            "data": {
+                "tooltip": "Query object information",
+                "text": null
+            }
+        }
+    },
+    "BasiGX.view.button.Measure": {
+        "config": {
+            "data": {
+                "textline": "Measure line",
+                "textpoly": "Measure area",
+                "continuePolygonMsg": "Click to start measuring the area",
+                "continueLineMsg": "Click to start measuring the line",
+                "clickToDrawText": "Click to start measuring"
+            }
+        }
+    },
+    "BasiGX.view.button.Permalink": {
+        "config": {
+            "data": {
+                "tooltip": "Create permalink",
+                "text": "Permalink",
+                "windowTitle": "Link to application"
+            }
+        }
+    },
+    "BasiGX.view.button.ToggleLegend": {
+        "config": {
+            "data": {
+                "tooltip": "Show legend",
+                "text": null
+            }
+        }
+    },
+    "BasiGX.view.button.ZoomIn": {
+        "config": {
+            "data": {
+                "tooltip": "Zoom in",
+                "text": null
+            }
+        }
+    },
+    "BasiGX.view.button.ZoomOut": {
+        "config": {
+            "data": {
+                "tooltip": "Zoom out",
+                "text": null
+            }
+        }
+    },
+    "BasiGX.view.button.ZoomToExtent": {
+        "config": {
+            "data": {
+                "tooltip": "Zoom to maximum extent",
+                "text": null
+            }
+        }
+    },
+
+    "BasiGX.view.combo.Language": {
+        "config": {
+            "data": {
+                "fieldLabel": null
+            }
+        }
+    },
+    "BasiGX.view.combo.ScaleCombo": {
+        "config": {
+            "data": {
+                "fieldLabel": null
+            }
+        }
+    },
+
+    "BasiGX.view.container.LayerSlider": {
+        "config": {
+            "data": {
+                "disabeldLabelHtml": "Off"
+            }
+        }
+    },
+    "BasiGX.view.container.NominatimSearch": {
+        "config": {
+            "data": {
+                "searchTermTextFieldLabel": "Search term",
+                "searchResultGridTitle": "Search results",
+                "resetBtnText": "Reset"
+            }
+        }
+    },
+    "BasiGX.view.container.OverpassSearch": {
+        "config": {
+            "data": {
+                "searchTermTextFieldLabel": "Search term",
+                "searchCriteriaGridTitle": "Search criteria",
+                "searchCriteriaLabelTag": "OSM-Tag",
+                "searchCriteriaCategoryTag": "Category",
+                "searchCriteriaOccurenceTag": "Tag-occurence",
+                "searchResultGridTitle": "Search results",
+                "resetBtnText": "Reset",
+                "noMatchesFoundErrText": "No matches found"
+            }
+        }
+    },
+    "BasiGX.view.container.WfsSearch": {
+        "config": {
+            "data": {
+                "searchTermTextFieldLabel": "Search term",
+                "searchResultGridTitle": "Search results",
+                "resetBtnText": "Reset"
+            }
+        }
+    },
+    "BasiGX.view.container.RedlineStyler": {
+        "config": {
+            "data": {
+                "pointStyleFieldSetTitle": "Point Style",
+                "pointStyleSymbolPanelTitle": "Symbol",
+                "pointStyleRadiusNumberFieldLabel": "Point Radius",
+                "pointStyleStrokeNumberFieldLabel": "Stroke Width",
+                "pointStyleStrokeColorFieldLabel": "Stroke Color",
+                "pointStyleFillColorFieldLabel": "Fill Color",
+                "pointStyleGraphicPanelTitle": "Graphic",
+                "pointStyleChooseImgBtnText": "Choose Image",
+                "pointStyleImgOffsetXSliderLabel": "Graphic Offset X",
+                "pointStyleImgOffsetYSliderLabel": "Graphic Offset Y",
+                "pointStyleImgScaleSliderLabel": "Scale",
+                "lineStyleFieldSetTitle": "LineString Style",
+                "lineStyleStrokeNumberFieldLabel": "Stroke Width",
+                "lineStyleStrokeColorFieldLabel": "Stroke Color",
+                "polygonStyleFieldSetTitle": "Polygon Style",
+                "polygonStyleStrokeNumberFieldLabel": "Stroke Width",
+                "polygonStyleStrokeColorFieldLabel": "Stroke Color",
+                "polygonStyleFillColorFieldLabel": "Fill Color",
+                "pointGrapicDeletedSuccessMsgText": "The icon has been deleted. Please reassign a new one.",
+                "pointGrapicDeletedSuccessMsgTitle": "Deletion succesfull",
+                "graphicPoolWindowTitle": "Graphic Pool"
+            }
+        }
+    },
+    "BasiGX.view.container.Redlining": {
+        "config": {
+            "data": {
+                "drawPointsBtnText": "Draw Points",
+                "drawLinesBtnText": "Draw Lines",
+                "drawPolygonsBtnText": "Draw Polygons",
+                "drawPostItBtnText": "Draw Post-it",
+                "copyObjectBtnText": "Copy Object",
+                "moveObjectBtnText": "Move Object",
+                "modifyObjectBtnText": "Modify Object",
+                "deleteObjectBtnText": "Delete Object",
+                "openStyleBtnText": "Styler",
+                "stylerWindowTitle": "Styler",
+                "postItWindowTitle": "Enter the Post-its text",
+                "postItWindowCreatePostItBtnText": "Create Post-it"
+            }
+        }
+    },
+
+    "BasiGX.view.form.AddWms": {
+        "config": {
+            "data": {
+                "queryParamsFieldSetTitle": "Query parameters",
+                "wmsUrlTextFieldLabel": "WMS-URL",
+                "wmsVersionContainerFieldLabel": "Version",
+                "availableLayesFieldSetTitle": "Available layers",
+                "resetBtnText": "Reset",
+                "requestLayersBtnText": "Request available layers",
+                "addCheckedLayersBtnText": "Add selected layers",
+                "errorIncompatibleWMS": "The requested WMS is not compatible with this application",
+                "errorRequestFailed": "Could not reach the desired location",
+                "errorCouldntParseResponse": "Error while reading the response send by the server"
+            }
+        }
+    },
+    "BasiGX.view.form.CoordinateTransform": {
+        "config": {
+            "data": {
+                "coordFieldSetTitle": "Coordinates",
+                "coordXFieldLabel": "X-Coordinate",
+                "coordYFieldLabel": "Y-Coordinate",
+                "transformBtnText": "Transform",
+                "resetFormBtnText": "Reset"
+            }
+        }
+    },
+    "BasiGX.view.form.Permalink": {
+        "config": {
+            "data": {
+                "refreshBtnText": "Refresh"
+            }
+        }
+    },
+    "BasiGX.view.form.Print": {
+        "config": {
+            "data": {
+                "title": "Print",
+                "labelDpi": "DPI",
+                "printButtonSuffix": "request",
+                "downloadButtonPrefix": "Download",
+                "printFormat": "pdf",
+                "genericFieldSetTitle": "Settings"
+            }
+        }
+    },
+
+    "BasiGX.view.panel.GraphicPool": {
+        "config": {
+            "data": {
+                "delButtonText": "Delete",
+                "okBtnText": "Ok",
+                "msgBoxNoElementSelectedText": "No image selected",
+                "closeBtnText": "Close",
+                "chooseImageBtnText": "Choose",
+                "uploadBtnText": "Upload",
+                "uploadWaitMsg": "Please wait...",
+                "uploadErrorText": "Error on upload, check file type and size",
+                "msgConfirmDeletionTpl": "Do you really want to delete this picture?",
+                "graphicDeleteInfoSuccess": "Image successfully deleted",
+                "graphicDeleteInfoError": "Image deletion failed",
+                "msgDeletionCancelled": "Deletion cancelled."
+            }
+        }
+    },
+    "BasiGX.view.panel.LayerSetChooser": {
+        "config": {
+            "data": {
+                "title": "Themes",
+                "filterFieldLabel": "Filter"
+            }
+        }
+    },
+    "BasiGX.view.panel.MapContainer": {
+        "config": {
+            "data": {
+                "titleLegendPanel": "Legend"
+            }
+        }
+    },
+    "BasiGX.view.panel.Menu": {
+        "config": {
+            "data": {
+                "closedMenuTitle": "Close menu",
+                "openedMenuTitle": "Show menu"
+            }
+        }
+    },
+
+    "BasiGX.view.view.GraphicPool": {
+        "config": {
+            "data": {
+                "emptyStoreMsg": "No data found"
+            }
+        }
+    },
+
+    "Ext.Date": {
+        "monthNames": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ],
+        "defaultFormat": "m/d/Y",
+        "monthNumbers": {
+            "Jan": 0,
+            "Feb": 1,
+            "Mar": 2,
+            "Apr": 3,
+            "May": 4,
+            "Jun": 5,
+            "Jul": 6,
+            "Aug": 7,
+            "Sep": 8,
+            "Oct": 9,
+            "Nov": 10,
+            "Dec": 11
+        },
+        "dayNames": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ]
+    },
+    "Ext.util.Format": {
+        "thousandSeparator": ",",
+        "decimalSeparator": ".",
+        "currencySign": "$",
+        "dateFormat": "m/d/Y"
+    },
+    "Ext.view.View": {
+        "emptyText": ""
+    },
+    "Ext.grid.plugin.DragDrop": {
+        "dragText": "{0} selected row{1}"
+    },
+    "Ext.tab.Tab": {
+        "closeText": "Close this Tab"
+    },
+    "Ext.form.Basic": {
+        "waitTitle": "Please Wait..."
+    },
+    "Ext.form.field.Base": {
+        "invalidText": "The value in this field is invalid"
+    },
+    "Ext.LoadMask": {
+        "msg": "Loading..."
+    },
+    "Ext.view.AbstractView": {
+        "loadingText": "Loading..."
+    },
+    "Ext.picker.Date": {
+        "todayText": "Today",
+        "minText": "This date is before the minimum date",
+        "maxText": "This date is after the maximum date",
+        "disabledDaysText": "",
+        "disabledDatesText": "",
+        "nextText": "Next Month (Control+Right)",
+        "prevText": "Previous Month (Control+Left)",
+        "monthYearText": "Choose a month (Control+Up/Down to move years)",
+        "todayTip": "{0} (Spacebar)",
+        "format": "m/d/y",
+        "startDay": 0
+    },
+    "Ext.picker.Month": {
+        "okText": "&#160;OK&#160;",
+        "cancelText": "Cancel"
+    },
+    "Ext.toolbar.Paging": {
+        "beforePageText": "Page",
+        "afterPageText": "of {0}",
+        "firstText": "First Page",
+        "prevText": "Previous Page",
+        "nextText": "Next Page",
+        "lastText": "Last Page",
+        "refreshText": "Refresh",
+        "displayMsg": "Displaying {0} - {1} of {2}",
+        "emptyMsg": "No data to display"
+    },
+    "Ext.form.field.Text": {
+        "minLengthText": "The minimum length for this field is {0}",
+        "maxLengthText": "The maximum length for this field is {0}",
+        "blankText": "This field is required",
+        "regexText": "",
+        "emptyText": null
+    },
+    "Ext.form.field.Number": {
+        "minText": "The minimum value for this field is {0}",
+        "maxText": "The maximum value for this field is {0}",
+        "nanText": "{0} is not a valid number"
+    },
+    "Ext.form.field.Date": {
+        "disabledDaysText": "Disabled",
+        "disabledDatesText": "Disabled",
+        "minText": "The date in this field must be after {0}",
+        "maxText": "The date in this field must be before {0}",
+        "invalidText": "{0} is not a valid date - it must be in the format {1}",
+        "format": "m/d/y",
+        "altFormats": "m/d/Y|m-d-y|m-d-Y|m/d|m-d|md|mdy|mdY|d|Y-m-d",
+        "startDay": 1
+    },
+    "Ext.form.field.ComboBox": {
+        "valueNotFoundText": null,
+        "defaultListConfig": {
+            "loadingText": "Loading..."
+        }
+    },
+    "Ext.form.field.VTypes": {
+        "emailText": "This field should be an e-mail address in the format 'user@example.com'",
+        "urlText": "This field should be a URL in the format 'http://www.example.com'",
+        "alphaText": "This field should only contain letters and _",
+        "alphanumText": "This field should only contain letters, numbers and _"
+    },
+    "Ext.form.field.HtmlEditor": {
+        "createLinkText": "Please enter the URL for the link:",
+        "buttonTips": {
+            "bold": {
+                "title": "Bold (Ctrl+B)",
+                "text": "Make the selected text bold.",
+                "cls": "x-html-editor-tip"
+            },
+            "italic": {
+                "title": "Italic (Ctrl+I)",
+                "text": "Make the selected text italic.",
+                "cls": "x-html-editor-tip"
+            },
+            "underline": {
+                "title": "Underline (Ctrl+U)",
+                "text": "Underline the selected text.",
+                "cls": "x-html-editor-tip"
+            },
+            "increasefontsize": {
+                "title": "Grow Text",
+                "text": "Increase the font size.",
+                "cls": "x-html-editor-tip"
+            },
+            "decreasefontsize": {
+                "title": "Shrink Text",
+                "text": "Decrease the font size.",
+                "cls": "x-html-editor-tip"
+            },
+            "backcolor": {
+                "title": "Text Highlight Color",
+                "text": "Change the background color of the selected text.",
+                "cls": "x-html-editor-tip"
+            },
+            "forecolor": {
+                "title": "Font Color",
+                "text": "Change the color of the selected text.",
+                "cls": "x-html-editor-tip"
+            },
+            "justifyleft": {
+                "title": "Align Text Left",
+                "text": "Align text to the left.",
+                "cls": "x-html-editor-tip"
+            },
+            "justifycenter": {
+                "title": "Center Text",
+                "text": "Center text in the editor.",
+                "cls": "x-html-editor-tip"
+            },
+            "justifyright": {
+                "title": "Align Text Right",
+                "text": "Align text to the right.",
+                "cls": "x-html-editor-tip"
+            },
+            "insertunorderedlist": {
+                "title": "Bullet List",
+                "text": "Start a bulleted list.",
+                "cls": "x-html-editor-tip"
+            },
+            "insertorderedlist": {
+                "title": "Numbered List",
+                "text": "Start a numbered list.",
+                "cls": "x-html-editor-tip"
+            },
+            "createlink": {
+                "title": "Hyperlink",
+                "text": "Make the selected text a hyperlink.",
+                "cls": "x-html-editor-tip"
+            },
+            "sourceedit": {
+                "title": "Source Edit",
+                "text": "Switch to source editing mode.",
+                "cls": "x-html-editor-tip"
+            }
+        }
+    },
+    "Ext.grid.header.Container": {
+        "sortAscText": "Sort Ascending",
+        "sortDescText": "Sort Descending",
+        "sortClearText": "Remove Sorting",
+        "columnsText": "Columns"
+    },
+    "Ext.grid.PropertyColumnModel": {
+        "nameText": "Name",
+        "valueText": "Value",
+        "dateFormat": "m/j/Y",
+        "trueText": "true",
+        "falseText": "false"
+    },
+    "Ext.grid.BooleanColumn": {
+        "trueText": "true",
+        "falseText": "false"
+    },
+    "Ext.grid.NumberColumn": {
+        "format": "0.000,00/i"
+    },
+    "Ext.grid.DateColumn": {
+        "format": "m/d/Y"
+    },
+    "Ext.form.field.Time": {
+        "minText": "The time in this field must be equal to or after {0}",
+        "maxText": "The time in this field must be equal to or before {0}",
+        "invalidText": "{0} is not a valid time",
+        "format": "g:i A"
+    },
+    "Ext.form.CheckboxGroup": {
+        "blankText": "You must select at least one item in this group"
+    },
+    "Ext.form.RadioGroup": {
+        "blankText": "You must select one item in this group"
+    },
+    "Ext.window.MessageBox": {
+        "buttonText": {
+            "ok": "OK",
+            "cancel": "Cancel",
+            "yes": "Yes",
+            "no": "No"
+        }
+    },
+    "Ext.window.Window": {
+        "closeToolText": "close window"
+    }
+}
