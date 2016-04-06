@@ -190,7 +190,8 @@ Ext.define("BasiGX.view.container.Redlining", {
            me.redlineFeatures = new ol.Collection();
            me.redliningVectorLayer = new ol.layer.Vector({
                source: new ol.source.Vector({features: me.redlineFeatures}),
-               style: me.getRedlineStyleFunction()
+               style: me.getRedlineStyleFunction(),
+               displayInLayerSwitcher: false
            });
            map.addLayer(me.redliningVectorLayer);
        }
