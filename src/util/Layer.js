@@ -27,13 +27,14 @@ Ext.define('BasiGX.util.Layer', {
         KEY_DISPLAY_IN_LAYERSWITCHER: 'bp_displayInLayerSwitcher',
 
         /**
-         * Method gets an ol layer by the given name
+         * Method gets a ol3-layer by the given key-value constellation
          *
-         * @param {String} layername - the layers name
+         * @param {String} key - the layers property name
+         * @param {String} val - the layers property value for the given key
          * @param {ol.Collection} collection - optional collection to search in
          * @returns {ol.Layer} matchingLayer - the ol3-layer
          */
-        getLayerByName: function(layername, collection) {
+        getLayerBy: function(key, val, collection) {
             var me = this,
                 matchingLayer,
                 layers;
@@ -50,15 +51,26 @@ Ext.define('BasiGX.util.Layer', {
                 if (matchingLayer) {
                     return false;
                 }
-                if (layer.get('name') === layername &&
+                if (layer.get(key) === val &&
                     layer instanceof ol.layer.Base) {
                     matchingLayer = layer;
                     return false;
                 } else if (layer instanceof ol.layer.Group) {
-                    matchingLayer = me.getLayerByName(layername, layer.getLayers());
+                    matchingLayer = me.getLayerBy(key, val, layer.getLayers());
                 }
             });
             return matchingLayer;
+        },
+
+        /**
+         * Method gets an ol layer by the given name
+         *
+         * @param {String} layername - the layers name
+         * @param {ol.Collection} collection - optional collection to search in
+         * @returns {ol.Layer} matchingLayer - the ol3-layer
+         */
+        getLayerByName: function(layername, collection) {
+            return this.getLayerBy('name', layername, collection);
         },
 
         /**
