@@ -185,6 +185,8 @@ Ext.define("BasiGX.view.container.Redlining", {
        var me = this;
        var mapComponent = Ext.ComponentQuery.query('gx_component_map')[0];
        var map = mapComponent.getMap();
+       var displayInLayerSwitcherKey = BasiGX.util.Layer.
+           KEY_DISPLAY_IN_LAYERSWITCHER;
 
        if (!me.redliningVectorLayer) {
            me.redlineFeatures = new ol.Collection();
@@ -192,6 +194,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                source: new ol.source.Vector({features: me.redlineFeatures}),
                style: me.getRedlineStyleFunction()
            });
+           me.redliningVectorLayer.set(displayInLayerSwitcherKey, false);
            map.addLayer(me.redliningVectorLayer);
        }
 
