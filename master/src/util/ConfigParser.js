@@ -787,7 +787,7 @@ Ext.define('BasiGX.util.ConfigParser', {
                     mergedNode.expanded = node.expanded;
 
                     if (parent) {
-                        parent.getLayers().getArray().unshift(me.createLayer(mergedNode));
+                        parent.getLayers().getArray().push(me.createLayer(mergedNode));
                         if (node.checked) {
                             parent.set('visible', true);
                             var nextParent = parent.get('parentFolder');
