@@ -29,7 +29,8 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
 
     requires: [
         'Ext.ux.colorpick.Button',
-        'BasiGX.view.panel.GraphicPool'
+        'BasiGX.view.panel.GraphicPool',
+        'BasiGX.util.Color'
     ],
 
     viewModel: {
@@ -78,7 +79,10 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
             pictureSrc: null,
             pictureUpload: null,
             graphicDelete: null
-        }
+        },
+        redlinePointStyle: null,
+        redlineLineStringStyle: null,
+        redlinePolygonStyle: null
     },
 
     /**
@@ -95,16 +99,37 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
     /**
      *
      */
-    getPointFieldset: function(){
-        var redliningContainer = Ext.ComponentQuery.query(
-                'basigx-container-redlining')[0],
-            style = redliningContainer.getRedlinePointStyle(),
-            me = this,
-            fs = {
+    getPointFieldset: function() {
+        var me = this,
+            style = me.getRedlinePointStyle(),
+            imageStyle = style.getImage(),
+            imageAnchor,
+            imageScale,
+            radius = 10,
+            strokeWidth = 2,
+            fillColor = '#008000',
+            strokeColor = '#ffcc33';
+
+        if (imageStyle instanceof ol.style.Icon) {
+            imageAnchor = imageStyle.getAnchor();
+            imageScale = imageStyle.getScale() * 100;
+        } else if (imageStyle instanceof ol.style.Circle) {
+            radius = imageStyle.getRadius();
+            strokeWidth = imageStyle.getStroke().getWidth();
+            fillColor = imageStyle.getFill().getColor();
+            fillColor = fillColor.indexOf('rgba') > -1 ? BasiGX.util.Color.
+                rgbaToHex(fillColor) : fillColor;
+            strokeColor = style.getImage().getStroke().getColor();
+            strokeColor = strokeColor.indexOf('rgba') > -1 ? BasiGX.util.Color.
+                rgbaToHex(strokeColor) : strokeColor;
+        }
+
+        var fs = {
                 xtype: 'fieldset',
                 bind: {
                     title: '{pointStyleFieldSetTitle}'
                 },
+                name: 'pointstyle',
                 layout: 'hbox',
                 items: [
                   {
@@ -125,7 +150,8 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                                      bind: {
                                          fieldLabel: '{pointStyleRadiusNumberFieldLabel}'
                                      },
-                                     value : style.getImage().getRadius(),
+                                     name: 'pointradius',
+                                     value : radius,
                                      minValue: 1,
                                      maxValue: 50,
                                      listeners: {
@@ -139,8 +165,8 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                                      bind: {
                                          fieldLabel: '{pointStyleStrokeNumberFieldLabel}'
                                      },
-                                     value : style.getImage().getStroke()
-                                         .getWidth(),
+                                     name: 'pointstrokewidth',
+                                     value : strokeWidth,
                                      minValue: 0,
                                      maxValue: 50,
                                      listeners: {
@@ -164,18 +190,21 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                                              }
                                          },{
                                             xtype : 'colorbutton',
+                                            name: 'pointstrokecolor',
                                             format: 'hex8',
-                                            value : style.getImage()
-                                                .getStroke().getColor(),
+                                            value : strokeColor,
                                             margin: '5 0 0 10',
                                             listeners: {
-                                                change: function(field, val) {
-                                                    var color =
-                                                        BasiGX.util.Color
-                                                        .hex8ToRgba(val);
-                                                    me.updateStyle(
-                                                        {strokecolor: color}
-                                                    );
+                                                change: function(field, val,
+                                                    oldVal) {
+                                                    if (oldVal) {
+                                                        var color =
+                                                            BasiGX.util.Color
+                                                            .hex8ToRgba(val);
+                                                        me.updateStyle(
+                                                            {strokecolor: color}
+                                                        );
+                                                    }
                                                 }
                                             }
                                         }
@@ -196,18 +225,21 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                                              }
                                          },{
                                             xtype : 'colorbutton',
+                                            name: 'pointfillcolor',
                                             format: 'hex8',
                                             margin: '0 0 0 10',
-                                            value : style.getImage().getFill()
-                                                .getColor(),
+                                            value : fillColor,
                                             listeners: {
-                                                change: function(field, val) {
-                                                    var color =
-                                                        BasiGX.util.Color
-                                                        .hex8ToRgba(val);
-                                                    me.updateStyle(
-                                                        {fillcolor: color}
-                                                    );
+                                                change: function(field, val,
+                                                    oldVal) {
+                                                    if (oldVal) {
+                                                        var color =
+                                                            BasiGX.util.Color
+                                                            .hex8ToRgba(val);
+                                                        me.updateStyle(
+                                                            {fillcolor: color}
+                                                        );
+                                                    }
                                                 }
                                             }
                                         }
@@ -220,6 +252,7 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                              bind: {
                                  title: '{pointStyleGraphicPanelTitle}'
                              },
+                             name: 'pointgraphic',
                              defaults: {
                                  margin: 3,
                                  width: 220
@@ -239,7 +272,7 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                                          fieldLabel: '{pointStyleImgOffsetXSliderLabel}'
                                      },
                                      name: 'xoffset',
-                                     value: 50,
+                                     value: imageAnchor ? imageAnchor[0] : 50,
                                      minValue: 0,
                                      maxValue: 100,
                                      listeners: {
@@ -257,7 +290,7 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                                          fieldLabel: '{pointStyleImgOffsetYSliderLabel}'
                                      },
                                      name: 'yoffset',
-                                     value: 50,
+                                     value: imageAnchor ? imageAnchor[1] : 50,
                                      minValue: 0,
                                      maxValue: 100,
                                      listeners: {
@@ -275,7 +308,7 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                                         fieldLabel: '{pointStyleImgScaleSliderLabel}'
                                     },
                                     name: 'iconscale',
-                                    value: 100,
+                                    value: imageScale ? imageScale : 100,
                                     increment: 1,
                                     minValue: 10,
                                     maxValue: 500,
@@ -315,14 +348,16 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
      */
     getLineStringFieldset: function() {
         var me = this,
-            redliningContainer = Ext.ComponentQuery.query(
-                'basigx-container-redlining')[0],
-            style = redliningContainer.getRedlineLineStringStyle(),
+            style = me.getRedlineLineStringStyle(),
+            styleStrokeColor = style.getStroke().getColor(),
+            strokeColor = styleStrokeColor.indexOf('rgba') > -1 ?
+                BasiGX.util.Color.rgbaToHex(styleStrokeColor) : styleStrokeColor,
             fs = {
                 xtype: 'fieldset',
                 bind: {
                     title: '{lineStyleFieldSetTitle}'
                 },
+                name: 'linestringstyle',
                 layout: 'hbox',
                 items: [{
                     xtype: 'fieldset',
@@ -363,7 +398,7 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                                  },{
                                     xtype : 'colorbutton',
                                     format: 'hex8',
-                                    value : style.getStroke().getColor(),
+                                    value : strokeColor,
                                     margin: '5 0 0 10',
                                     listeners: {
                                         change: function(field, val) {
@@ -401,14 +436,19 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
      */
     getPolygonFieldset: function() {
         var me = this,
-            redliningContainer = Ext.ComponentQuery.query(
-                'basigx-container-redlining')[0],
-            style = redliningContainer.getRedlinePolygonStyle(),
+            style = me.getRedlinePolygonStyle(),
+            styleFillColor = style.getFill().getColor(),
+            fillColor = styleFillColor.indexOf('rgba') > -1 ?
+                BasiGX.util.Color.rgbaToHex(styleFillColor) : styleFillColor,
+            styleStrokeColor = style.getStroke().getColor(),
+            strokeColor = styleStrokeColor.indexOf('rgba') > -1 ?
+                BasiGX.util.Color.rgbaToHex(styleStrokeColor) : styleStrokeColor,
             fs = {
                 xtype: 'fieldset',
                 bind: {
                     title: '{polygonStyleFieldSetTitle}'
                 },
+                name: 'polygonstyle',
                 layout: 'hbox',
                 items: [{
                     xtype: 'fieldset',
@@ -450,7 +490,7 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                                  },{
                                     xtype : 'colorbutton',
                                     format: 'hex8',
-                                    value : style.getStroke().getColor(),
+                                    value : strokeColor,
                                     margin: '5 0 0 10',
                                     listeners: {
                                         change: function(field, val) {
@@ -481,7 +521,7 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                                     xtype : 'colorbutton',
                                     format: 'hex8',
                                     margin: '0 0 0 10',
-                                    value : style.getFill().getColor(),
+                                    value : fillColor,
                                     listeners: {
                                         change: function(field, val) {
                                             var color = BasiGX.util.Color
@@ -526,19 +566,22 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
             'basigx-container-redlining')[0];
 
         if (pointStyle) {
-            oldStyle = redliningContainer.getRedlinePointStyle();
+            oldStyle = me.getRedlinePointStyle();
             renderer = me.down('gx_renderer[name=pointRenderPreview]');
             style = me.generatePointStyle(oldStyle, pointStyle);
+            me.setRedlinePointStyle(style);
             redliningContainer.setRedlinePointStyle(style);
         } else if (lineStyle) {
-            oldStyle = redliningContainer.getRedlineLineStringStyle();
+            oldStyle = me.getRedlineLineStringStyle();
             renderer = me.down('gx_renderer[name=lineRenderPreview]');
             style = me.generateLineStringStyle(oldStyle, lineStyle);
+            me.setRedlineLineStringStyle(style);
             redliningContainer.setRedlineLineStringStyle(style);
         } else {
-            oldStyle = redliningContainer.getRedlinePolygonStyle();
+            oldStyle = me.getRedlinePolygonStyle();
             renderer = me.down('gx_renderer[name=polygonRenderPreview]');
             style = me.generatePolygonStyle(oldStyle, polygonStyle);
+            me.setRedlinePolygonStyle(style);
             redliningContainer.setRedlinePolygonStyle(style);
         }
 
@@ -546,6 +589,7 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
         if (renderer) {
             renderer.setSymbolizers(style);
         }
+
         // reapply the styleFn on the layer so that ol3 starts redrawing
         // with new styles
         me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
@@ -555,28 +599,44 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
      *
      */
     generatePointStyle: function(oldStyle, pointStyle) {
+        var fallBackRadius = 7;
+        var fallBackFillColor = '#008000';
+        var fallBackStrokeColor = '#ffcc33';
+        var fallBackStrokeWidth = 2;
+        var oldImage = oldStyle.getImage();
+        if (oldImage && oldImage.getRadius) {
+            fallBackRadius = oldImage.getRadius();
+        }
+        if (oldImage && oldImage.getFill && oldImage.getFill() &&
+            oldImage.getFill().getColor) {
+            fallBackFillColor = oldImage.getFill().getColor();
+        }
+        if (oldImage && oldImage.getStroke && oldImage.getStroke() &&
+            oldImage.getStroke().getColor) {
+            fallBackStrokeColor = oldImage.getStroke().getColor();
+        }
+        if (oldImage && oldImage.getStroke && oldImage.getStroke() &&
+            oldImage.getStroke().getWidth) {
+            fallBackStrokeWidth = oldImage.getStroke().getWidth();
+        }
         var style = new ol.style.Style({
             image: pointStyle.radius || pointStyle.fillcolor ||
             pointStyle.fillopacity || pointStyle.strokewidth ||
             pointStyle.strokecolor ?
             new ol.style.Circle({
-                radius: pointStyle.radius || oldStyle.getImage().getRadius(),
-                fill: pointStyle.fillcolor || pointStyle.fillopacity ?
-                new ol.style.Fill({
+                radius: pointStyle.radius || fallBackRadius,
+                fill: new ol.style.Fill({
                     color: pointStyle.fillcolor ? pointStyle.fillcolor :
-                        oldStyle.getImage().getFill().getColor(),
-                    opacity: pointStyle.fillopacity ? pointStyle.fillopacity :
-                        oldStyle.getImage().getFill().getColor()
-                }) : oldStyle.getImage().getFill(),
-                stroke: pointStyle.strokewidth || pointStyle.strokecolor ?
-                new ol.style.Stroke({
+                        fallBackFillColor
+                }),
+                stroke: new ol.style.Stroke({
                     color: pointStyle.strokecolor ? pointStyle.strokecolor :
-                        oldStyle.getImage().getStroke().getColor(),
+                        fallBackStrokeColor,
                     width: pointStyle.strokewidth ? pointStyle.strokewidth :
-                        oldStyle.getImage().getStroke().getWidth()
-                }) : oldStyle.getImage().getStroke()
-            }) : oldStyle.getImage()
-       });
+                        fallBackStrokeWidth
+                })
+            }) : oldImage
+        });
         return style;
     },
 
@@ -641,6 +701,7 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                 })
             });
             redliningContainer.setRedlinePointStyle(imageStyle);
+            me.setRedlinePointStyle(imageStyle);
             // reapply the styleFn on the layer so that ol3 starts redrawing
             // with new styles
             me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
@@ -682,7 +743,11 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
         var redliningContainer = Ext.ComponentQuery.query(
             'basigx-container-redlining')[0];
         var renderer = me.down('gx_renderer[name=pointRenderPreview]');
-        var oldStyle = redliningContainer.getRedlinePointStyle().getImage();
+        var oldStyle = me.getRedlinePointStyle().getImage();
+        // just set a new style if an icon style has already been set
+        if (!(oldStyle instanceof ol.style.Icon)) {
+            return;
+        }
         var iconStyle = new ol.style.Style({
             image: new ol.style.Icon({
                 scale: scale,
@@ -697,6 +762,7 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
         });
         renderer.setSymbolizers(iconStyle);
         redliningContainer.setRedlinePointStyle(iconStyle);
+        me.setRedlinePointStyle(iconStyle);
         // reapply the styleFn on the layer so that ol3 starts redrawing
         // with new styles
         me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
@@ -717,5 +783,67 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
            'slider[name=iconscale]')
            .getValue() / 100;
         return [fractionX, fractionY, scale];
+    },
+
+    /**
+     * Method return the current state of the redlining styles
+     */
+    getState: function() {
+        var me = this;
+
+        var state = {
+            pointStyle: me.getRedlinePointStyle(),
+            lineStyle: me.getRedlineLineStringStyle(),
+            polygonStyle: me.getRedlinePolygonStyle()
+        };
+
+        return state;
+    },
+
+    /**
+     * Method set the state of the redlining styles
+     */
+    setState: function(state) {
+        var me = this;
+        var redliningContainer = Ext.ComponentQuery.query(
+            'basigx-container-redlining')[0];
+        if (state.pointStyle) {
+            me.setRedlinePointStyle(state.pointStyle);
+            redliningContainer.setRedlinePointStyle(state.pointStyle);
+            var pointFieldSet = me.down('fieldset[name=pointstyle]');
+            if (pointFieldSet) {
+                pointFieldSet.destroy();
+                var anotherPointFieldSet = this.getPointFieldset();
+                me.insert(0, anotherPointFieldSet);
+                var isIconStyle = state.pointStyle.getImage() instanceof
+                    ol.style.Icon;
+                if (isIconStyle) {
+                    var iconTab = me.down('panel[name=pointgraphic]');
+                    var tabPanel = me.down('fieldset[name=pointstyle]').down(
+                        'tabpanel');
+                    tabPanel.setActiveTab(iconTab);
+                }
+            }
+        }
+
+        if (state.lineStyle) {
+            me.setRedlineLineStringStyle(state.lineStyle);
+            redliningContainer.setRedlineLineStringStyle(state.lineStyle);
+            var lineStringFieldSet = me.down('fieldset[name=linestringstyle]');
+            if (lineStringFieldSet) {
+                lineStringFieldSet.destroy();
+                me.insert(1, this.getLineStringFieldset());
+            }
+        }
+
+        if (state.polygonStyle) {
+            me.setRedlinePolygonStyle(state.polygonStyle);
+            redliningContainer.setRedlinePolygonStyle(state.polygonStyle);
+            var polygonFieldSet = me.down('fieldset[name=polygonstyle]');
+            if (polygonFieldSet) {
+                polygonFieldSet.destroy();
+                me.insert(2, this.getPolygonFieldset());
+            }
+        }
     }
 });

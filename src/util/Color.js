@@ -21,7 +21,11 @@ Ext.define('BasiGX.util.Color', {
     statics: {
 
         /**
-         * Method converts a hex8 color string into an rgba color string
+         * Method converts a hex8 color string into an rgba color string.
+         *
+         * Example:
+         *     var rgba = BasiGX.util.Color.hex8ToRgba("#ff000000");
+         *     // rgba is now: "rgba(255,0,0,0)"
          */
         hex8ToRgba: function(hex8) {
             hex8 = hex8.replace('#','');
@@ -32,6 +36,23 @@ Ext.define('BasiGX.util.Color', {
 
             var result = 'rgba('+r+','+g+','+b+','+a+')';
             return result;
+        },
+
+        /**
+         * Method converts a rgba color string into an hex6 color string.
+         *
+         * Example:
+         *     var hex = BasiGX.util.Color.rgbaToHex("rgba(255,0,0,0)");
+         *     // hex is now: "#ff0000"
+         */
+        rgbaToHex: function(rgba){
+            var regex = new RegExp("^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?," +
+                "[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?", "i");
+            rgba = rgba.match(regex);
+            return (rgba && rgba.length === 4) ? "#" +
+                ("0" + parseInt(rgba[1],10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgba[2],10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgba[3],10).toString(16)).slice(-2) : '';
         }
     }
 });
