@@ -150,9 +150,6 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
                 xtype: 'fieldset',
                 layout: 'form',
                 bind: {
-                    title: '{fieldSetTitle}'
-                },
-                bind: {
                     title: '{coordFieldSetTitle}'
                 },
                 items: crsFieldsets
