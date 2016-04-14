@@ -32,18 +32,20 @@ Ext.define("BasiGX.view.button.Permalink", {
         'BasiGX.util.Application'
     ],
 
-    bind: {
-        text: '{text}'
-    },
-
     /**
      *
      */
     viewModel: {
         data: {
-            tooltip: 'Permalink',
-            text: 'Permalink'
+            tooltip: 'Permalink erzeugen',
+            text: 'Permalink',
+            windowTitle: 'Link zur Anwendung'
         }
+    },
+
+    bind: {
+        tooltip: '{tooltip}',
+        text: '{text}'
     },
 
     config: {
@@ -52,7 +54,7 @@ Ext.define("BasiGX.view.button.Permalink", {
             if(!win){
                 Ext.create('Ext.window.Window', {
                     name: 'permalink-window',
-                    title: 'Permalink',
+                    title: this.getViewModel().get('windowTitle'),
                     layout: 'fit',
                     items: [{
                         xtype: 'basigx-form-permalink'
@@ -69,10 +71,5 @@ Ext.define("BasiGX.view.button.Permalink", {
      */
     constructor: function(config) {
         this.callParent([config]);
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
-        }
     }
 });

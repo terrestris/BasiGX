@@ -52,6 +52,18 @@ Ext.define("BasiGX.view.container.LayerSlider", {
         "Ext.slider.Single"
     ],
 
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            disabeldLabelHtml: 'Aus'
+        }
+    },
+
+    /**
+     *
+     */
     sliderConfig: {
         flex: 6,
         value: 0,
@@ -103,8 +115,6 @@ Ext.define("BasiGX.view.container.LayerSlider", {
     initComponent: function() {
         var me = this,
             map = Ext.ComponentQuery.query('gx_map')[0].getMap(),
-            layoutColumns = me.addOffState ?
-                me.layerNames.length + 1 : me.layerNames.length,
             labelItems = me.getLabelItems(),
             items = [];
 
@@ -122,7 +132,8 @@ Ext.define("BasiGX.view.container.LayerSlider", {
         }
 
         // set the colspan for slider
-        me.config.colspan = layoutColumns;
+        me.config.colspan = me.addOffState ?
+                me.layerNames.length + 1 : me.layerNames.length;
         var slider = Ext.create('Ext.slider.Single', me.sliderConfig);
 
         if (!Ext.isEmpty(me.topTitle)) {
@@ -187,11 +198,13 @@ Ext.define("BasiGX.view.container.LayerSlider", {
             labelItems = [];
 
         if (me.addOffState) {
-         // add the starter
+            // add the starter
             labelItems.push(
                 {
                     xtype: 'container',
-                    html: 'Aus',
+                    bind: {
+                        html: '{disabeldLabelHtml}'
+                    },
                     flex: 1,
                     cls: 'sliderLabel'
                 }

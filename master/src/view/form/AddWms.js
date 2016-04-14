@@ -26,19 +26,26 @@ Ext.define("BasiGX.view.form.AddWms", {
 
     requires: [
         'Ext.button.Button',
-        'Ext.app.ViewModel'
+        'Ext.app.ViewModel',
+
+        'BasiGX.util.MsgBox'
     ],
 
     viewModel: {
         data: {
-            errorIncompatibleWMS:
-                'Der angefragte WMS ist nicht kompatibel zur Anwendung',
-            errorRequestFailedS:
-                'Die angegebene URL konte nicht abgefragt werden',
-            errorCouldntParseResponse:
-                'Die erhaltene Antwort konnte nicht erfolgreich geparst werden',
-            addCheckedLayers:
-                'Ausgewählte Layer hinzufügen'
+            queryParamsFieldSetTitle: 'Anfrageparameter',
+            wmsUrlTextFieldLabel: 'WMS-URL',
+            wmsVersionContainerFieldLabel: 'Version',
+            availableLayesFieldSetTitle: 'Verfügbare Layer',
+            resetBtnText: 'Zurücksetzen',
+            requestLayersBtnText: 'Verfügbare Layer abfragen',
+            addCheckedLayersBtnText: 'Ausgewählte Layer hinzufügen',
+            errorIncompatibleWMS: 'Der angefragte WMS ist nicht kompatibel ' +
+                    'zur Anwendung',
+            errorRequestFailed: 'Die angegebene URL konte nicht abgefragt ' +
+                    'werden',
+            errorCouldntParseResponse: 'Die erhaltene Antwort konnte nicht ' +
+                    'erfolgreich geparst werden'
         }
     },
 
@@ -57,16 +64,22 @@ Ext.define("BasiGX.view.form.AddWms", {
             defaults: {
                 anchor: '100%'
             },
-            title: 'Anfrageparameter',
+            bind: {
+                title: '{queryParamsFieldSetTitle}'
+            },
             items: [{
                 xtype: 'textfield',
-                fieldLabel: 'WMS-URL',
+                bind: {
+                    fieldLabel: '{wmsUrlTextFieldLabel}'
+                },
                 name: 'url',
                 allowBlank: false,
                 value: 'http://ows.terrestris.de/osm/service'
             }, {
                 xtype: 'fieldcontainer',
-                fieldLabel: 'Version',
+                bind: {
+                    fieldLabel: '{wmsVersionContainerFieldLabel}'
+                },
                 defaultType: 'radiofield',
                 defaults: {
                     flex: 1
@@ -103,20 +116,26 @@ Ext.define("BasiGX.view.form.AddWms", {
             defaults: {
                 anchor: '100%'
             },
-            title: 'Verfügbare Layer'
+            bind: {
+                title: '{availableLayesFieldSetTitle}'
+            }
         }
     ],
 
     // Reset and Submit buttons
     buttons: [{
-        text: 'Zurücksetzen',
+        bind: {
+            text: '{resetBtnText}'
+        },
         handler: function(btn){
             var view = btn.up('basigx-form-addwms');
             view.getForm().reset();
             view.emptyAvailableLayersFieldset();
         }
     }, '->', {
-        text: 'Verfügbare Layer abfragen',
+        bind: {
+            text: '{requestLayersBtnText}'
+        },
         formBind: true, //only enabled once the form is valid
         disabled: true,
         handler: function(btn){
@@ -141,45 +160,37 @@ Ext.define("BasiGX.view.form.AddWms", {
                         try {
                             result = parser.read(response.responseText);
                         } catch(ex) {
-                            view.showWarning(
-                                viewModel.get('errorCouldntParseResponse')
-                            );
-                            return;
+                            BasiGX.util.MsgBox.warn(
+                                    viewModel.get('errorCouldntParseResponse'));
                         }
                         var compatibleLayers =
                             view.isCompatibleCapabilityResponse(result);
                         if (!compatibleLayers) {
-                            view.showWarning(
-                                viewModel.get('errorIncompatibleWMS')
-                            );
-                            return;
+                            BasiGX.util.MsgBox.warn(
+                                viewModel.get('errorIncompatibleWMS'));
                         }
                         view.fillAvailableLayersFieldset(compatibleLayers);
                     },
                     failure: function() {
-                        view.showWarning(viewModel.get('errorRequestFailedS'));
+                        BasiGX.util.MsgBox.warn(
+                                viewModel.get('errorRequestFailed'));
                     }
                 });
             }
         }
     }],
 
-
+    /**
+     *
+     */
     emptyAvailableLayersFieldset: function(){
         var fs = this.down('[name="fs-available-layers"]');
         fs.removeAll();
     },
 
-    showWarning: function(msg) {
-        Ext.Msg.show({
-            title: 'Warnung',
-            message: 'Ein Fehler trat auf: ' + msg,
-            width: 300,
-            buttons: Ext.Msg.OK,
-            icon: Ext.Msg.WARNING
-        });
-    },
-
+    /**
+     *
+     */
     isCompatibleCapabilityResponse: function (capabilities) {
         if (!capabilities) {
             return false;
@@ -192,13 +203,14 @@ Ext.define("BasiGX.view.form.AddWms", {
         var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
         var mapProj = map.getView().getProjection().getCode();
 
-        var layers = capabilities.Capability.Layer.Layer;//same in both versions
+        // same in both versions
+        var layers = capabilities.Capability.Layer.Layer;
         var url = capabilities.Capability.Request.GetMap.
             DCPType[0].HTTP.Get.OnlineResource;
         Ext.each(layers, function(layer){
             if (version === '1.3.0' &&
                 !Ext.Array.contains(layer.CRS, mapProj)) {
-               // only available for 1.3.0
+                // only available for 1.3.0
                 return;
             }
             var style = layer.Style;
@@ -222,11 +234,13 @@ Ext.define("BasiGX.view.form.AddWms", {
         return compatible.length > 0 ? compatible : false;
     },
 
+    /**
+     *
+     */
     fillAvailableLayersFieldset: function(layers){
         this.emptyAvailableLayersFieldset();
         var view = this;
         var fs = view.down('[name="fs-available-layers"]');
-        var viewModel = this.getViewModel();
         Ext.each(layers, function(layer){
             fs.add({
                 xtype: 'checkbox',
@@ -237,13 +251,18 @@ Ext.define("BasiGX.view.form.AddWms", {
         });
         fs.add({
             xtype: 'button',
-            text: viewModel.get('addCheckedLayers'),
+            bind: {
+                text: '{addCheckedLayersBtnText}'
+            },
             margin: 10,
             handler: this.addCheckedLayers,
             scope: this
         });
     },
 
+    /**
+     *
+     */
     addCheckedLayers: function() {
         var fs = this.down('[name="fs-available-layers"]');
         var checkboxes = fs.query('checkbox[checked=true][disabled=false]');

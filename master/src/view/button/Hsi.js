@@ -41,6 +41,7 @@ Ext.define("BasiGX.view.button.Hsi", {
      *
      */
     bind: {
+        tooltip: '{tooltip}',
         text: '{text}'
     },
 
@@ -76,11 +77,6 @@ Ext.define("BasiGX.view.button.Hsi", {
      */
     constructor: function(config) {
         this.callParent([config]);
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
-        }
         this.toggleButton();
     },
 

@@ -35,8 +35,22 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         'GeoExt.data.store.Features',
         'GeoExt.grid.column.Symbolizer',
 
-        'BasiGX.util.Animate'
+        'BasiGX.util.Animate',
+        'BasiGX.util.MsgBox'
     ],
+
+    viewModel: {
+        data: {
+            searchTermTextFieldLabel: 'Suchbegriff',
+            searchCriteriaGridTitle: 'Suchkategorien',
+            searchCriteriaLabelTag: 'OSM-Tag',
+            searchCriteriaCategoryTag: 'Kategorie',
+            searchCriteriaOccurenceTag: 'Tag-Häufigkeit',
+            searchResultGridTitle: 'Suchergebnisse',
+            resetBtnText: 'Zurücksetzen',
+            noMatchesFoundErrText: 'Keine passenden Einträge gefunden'
+        }
+    },
 
     config: {
         /**
@@ -288,7 +302,9 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
             {
                 xtype: 'textfield',
                 name: 'overpassSearchTerm',
-                fieldLabel: 'Suchbegriff',
+                bind: {
+                    fieldLabel: '{searchTermTextFieldLabel}'
+                },
                 enableKeyEvents: true,
                 listeners: {
                     change: me.handleKeyDown
@@ -298,12 +314,16 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
                 xtype: 'grid',
                 name: 'tagfinderresultgrid',
                 hidden: true,
-                title: 'Suchkategorien',
+                bind: {
+                    title: '{searchCriteriaGridTitle}'
+                },
                 store: tagFinderResultStore,
                 columns: [
                     {
                         dataIndex: 'prefLabel',
-                        text: 'OSM-Tag',
+                        bind: {
+                            text: '{searchCriteriaLabelTag}'
+                        },
                         flex: 3,
                         renderer: function(value) {
                             return '<span data-qtip="' + value + '">' +
@@ -312,7 +332,9 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
                     },
                     {
                         dataIndex: 'termRelated',
-                        text: 'Kategorie',
+                        bind: {
+                            text: '{searchCriteriaCategoryTag}'
+                        },
                         flex: 3,
                         renderer: function(value) {
                             return '<span data-qtip="' + value + '">' +
@@ -321,7 +343,9 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
                     },
                     {
                         dataIndex: 'countAll',
-                        text: 'Tag-Häufigkeit',
+                        bind: {
+                            text: '{searchCriteriaOccurenceTag}'
+                        },
                         flex: 2
                     }
                 ],
@@ -333,7 +357,9 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
                 name: 'overpasssearchresultgrid',
                 hidden: true,
                 hideHeaders: true,
-                title: 'Suchergebnisse',
+                bind: {
+                    title: '{searchResultGridTitle}'
+                },
                 store: searchResultStore,
                 columns: [
                     {
@@ -357,7 +383,9 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
                 height: 300
             }, {
                 xtype: 'button',
-                text: 'Zurücksetzen',
+                bind: {
+                    text: '{resetBtnText}'
+                },
                 margin: '10 0 0 0',
                 handler: me.resetSearchGridAndText,
                 scope: me
@@ -412,12 +440,14 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
 
     },
 
+    /**
+     *
+     */
     resetSearchGridAndText: function() {
         var me = this;
         me.down('textfield[name=overpassSearchTerm]').setValue('');
         me.resetGrids();
     },
-
 
     /**
      *
@@ -475,7 +505,8 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
                     });
                     me.fireEvent('tagfinderResponse', tagArray);
                 } else {
-                    Ext.Msg.alert("Info", "Keine passenden Einträge gefunden");
+                    BasiGX.util.MsgBox.info(me.getViewModel().get(
+                            'noMatchesFoundErrText'));
                 }
 
             },

@@ -38,6 +38,7 @@ Ext.define("BasiGX.view.button.ZoomIn", {
     },
 
     bind: {
+        tooltip: '{tooltip}',
         text: '{text}'
     },
 
@@ -70,10 +71,5 @@ Ext.define("BasiGX.view.button.ZoomIn", {
      */
     constructor: function(config) {
         this.callParent([config]);
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
-        }
     }
 });

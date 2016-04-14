@@ -32,7 +32,7 @@ Ext.define("BasiGX.view.form.Permalink", {
 
     viewModel: {
         data: {
-            permalink: 'Permalink'
+            refreshBtnText: 'Erneuern'
         }
     },
 
@@ -61,7 +61,9 @@ Ext.define("BasiGX.view.form.Permalink", {
     }],
 
     buttons: [{
-        text: 'Erneuern',
+        bind: {
+            text: '{refreshBtnText}'
+        },
         handler: function(btn){
             var permalink = btn.up('form').getPermalink();
             var textfield = btn.up('form').down('textfield');
