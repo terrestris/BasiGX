@@ -264,11 +264,14 @@ Ext.define("BasiGX.view.form.AddWms", {
      *
      */
     addCheckedLayers: function() {
+        var me = this;
         var fs = this.down('[name="fs-available-layers"]');
         var checkboxes = fs.query('checkbox[checked=true][disabled=false]');
         var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
         Ext.each(checkboxes, function(checkbox) {
+            me.fireEvent("beforewmsadd", checkbox.olLayer);
             map.addLayer(checkbox.olLayer);
+            me.fireEvent("wmsadd", checkbox.olLayer);
             checkbox.setDisabled(true);
         });
     }
