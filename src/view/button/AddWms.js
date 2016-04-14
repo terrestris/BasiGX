@@ -35,19 +35,21 @@ Ext.define("BasiGX.view.button.AddWms", {
     /**
      *
      */
-    bind: {
-        text: '{text}'
+    viewModel: {
+        data: {
+            tooltip: 'WMS hinzufügen',
+            text: 'WMS <span style="font-size: 1.7em; ' +
+                'font-weight: normal;">⊕</span>',
+            windowTitle: 'WMS hinzufügen'
+        }
     },
 
     /**
      *
      */
-    viewModel: {
-        data: {
-            tooltip: 'WMS hinzufügen…',
-            text: 'WMS <span style="font-size: 1.7em; ' +
-                'font-weight: normal;">⊕</span>'
-        }
+    bind: {
+        tooltip: '{tooltip}',
+        text: '{text}'
     },
 
     /**
@@ -59,7 +61,7 @@ Ext.define("BasiGX.view.button.AddWms", {
             if(!win){
                 Ext.create('Ext.window.Window', {
                     name: 'add-wms-window',
-                    title: 'WMS hinzufügen',
+                    title: this.getViewModel().get('windowTitle'),
                     width: 500,
                     height: 400,
                     layout: 'fit',
@@ -78,10 +80,5 @@ Ext.define("BasiGX.view.button.AddWms", {
      */
     constructor: function(config) {
         this.callParent([config]);
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
-        }
     }
 });

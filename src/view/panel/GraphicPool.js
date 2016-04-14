@@ -35,6 +35,26 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
     ],
 
     /**
+     *
+     */
+    viewModel: {
+        data: {
+            delButtonText: 'Delete',
+            okBtnText: 'Ok',
+            msgBoxNoElementSelectedText: 'No image selected',
+            closeBtnText: 'Close',
+            chooseImageBtnText: 'Choose',
+            uploadBtnText: 'Upload',
+            uploadWaitMsg: 'Please wait...',
+            uploadErrorText: 'Error on upload, check file type and size',
+            msgConfirmDeletionTpl: 'Do you really want to delete this picture?',
+            graphicDeleteInfoSuccess: 'Image successfully deleted',
+            graphicDeleteInfoError: 'Image deletion failed',
+            msgDeletionCancelled: 'Deletion cancelled.'
+        }
+    },
+
+    /**
      * a default width for this component
      */
     width: 535,
@@ -43,21 +63,6 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
      * a default height for this component
      */
     height: 600,
-
-    /**
-     * i18n
-     */
-    delButtonText: 'Delete',
-    okBtnText: 'Ok',
-    msgBoxNoElementSelectedText: 'No image selected',
-    closeBtnText: 'Close',
-    chooseImageBtnText: 'Choose',
-    uploadBtnText: 'Upload',
-    uploadWaitMsg: 'Please wait...',
-    uploadErrorText: 'Error on upload, check file type and size',
-    msgConfirmDeletionTpl: 'Do your really want to delete this picture?',
-    graphicDeleteInfoSuccess: 'Image successfully deleted',
-    graphicDeleteInfoError: 'Image deletion failed',
 
     /**
      * the layout to use
@@ -129,7 +134,9 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
             name: 'file',
             width: 300,
             allowBlank: false,
-            buttonText: me.chooseImageBtnText
+            bind: {
+                buttonText: '{chooseImageBtnText}'
+            }
         },
         {
             xtype: 'splitter'
@@ -137,7 +144,9 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
         {
             xtype: 'button',
             formBind: true,
-            text: me.uploadBtnText,
+            bind: {
+                text: '{uploadBtnText}'
+            },
             scope: me,
             handler: me.onUploadButtonClick
         }];
@@ -168,18 +177,24 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
 
         me.bbar = [
             {
-                text: me.delButtonText,
+                bind: {
+                    text: '{delButtonText}'
+                },
                 scope: me,
                 handler: me.onDelButtonClick
             },
             '->',
             {
-                text: me.okBtnText,
+                bind: {
+                    text: '{okBtnText}'
+                },
                 scope: me,
                 handler: me.onOkButtonClick
             },
             {
-                text: me.closeBtnText,
+                bind: {
+                    text: '{closeBtnText}'
+                },
                 scope: me,
                 handler: me.onCloseButtonClick,
                 hidden: !me.getUseCloseButton()
@@ -201,16 +216,18 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
         if(form.isValid() && targetUrl){
             form.submit({
                 url: targetUrl,
-                waitMsg: me.uploadWaitMsg,
+                bind: {
+                    waitMsg: '{uploadWaitMsg}'
+                },
                 success: function(fp, response) {
                     if (response.result && response.result.success === true) {
                         me.pictureView.getStore().load();
                     } else {
-                        BasiGX.error(me.uploadErrorText);
+                        BasiGX.error(me.getViewModel().get('uploadErrorText'));
                     }
                 },
                 failure: function() {
-                    BasiGX.error(me.uploadErrorText);
+                    BasiGX.error(me.getViewModel().get('uploadErrorText'));
                 }
             });
         }
@@ -236,13 +253,13 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
                 var json = Ext.decode(response.responseText);
                 if (json.success) {
                     me.pictureView.getStore().load();
-                    BasiGX.info(me.graphicDeleteInfoSuccess);
+                    BasiGX.info(me.getViewModel().get('graphicDeleteInfoSuccess'));
                 } else {
-                    BasiGX.error(me.graphicDeleteInfoError);
+                    BasiGX.error(me.getViewModel().get('graphicDeleteInfoError'));
                 }
             },
             failure: function(){
-                BasiGX.error(me.graphicDeleteInfoError);
+                BasiGX.error(me.getViewModel().get('graphicDeleteInfoError'));
             }
         });
     },
@@ -261,7 +278,7 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
      *
      */
     infoNoSelection: function (){
-        BasiGX.info(this.msgBoxNoElementSelectedText);
+        BasiGX.info(this.getViewModel().get('msgBoxNoElementSelectedText'));
     },
 
     /**
@@ -289,9 +306,9 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
      */
     onDelButtonClick: function() {
         var me = this;
-        var pic = this.getSelectedPicture();
+        var pic = me.getSelectedPicture();
         if (pic) {
-            BasiGX.confirm('Do you really want to delete this picture?', {
+            BasiGX.confirm(me.getViewModel().get('msgConfirmDeletionTpl'), {
                 fn: function(decision) {
                     if (decision === 'yes') {
                         me.sendDeletionRequest(pic);
@@ -304,7 +321,7 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
                         }
                         me.close();
                     } else {
-                        BasiGX.info("Deletion cancelled.");
+                        BasiGX.info(me.getViewModel().get('msgDeletionCancelled'));
                     }
                 }
             });

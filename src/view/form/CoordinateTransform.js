@@ -31,6 +31,11 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
 
     viewModel: {
         data: {
+            coordFieldSetTitle: 'Koordinaten',
+            coordXFieldLabel: 'X-Koordinate',
+            coordYFieldLabel: 'Y-Koordinate',
+            transformBtnText: 'Transformieren',
+            resetFormBtnText: 'Zurücksetzen'
         }
     },
 
@@ -60,7 +65,6 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
      *
      */
     initComponent: function() {
-
         var me = this,
             crsFieldsets = [],
             map = Ext.ComponentQuery.query('basigx-component-map')[0].getMap();
@@ -90,7 +94,9 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
                         name: 'xcoord',
                         decimalSeparator: ',',
                         decimalPrecision: 7,
-                        fieldLabel: 'X-Koordinate',
+                        bind: {
+                            fieldLabel: '{coordXFieldLabel}'
+                        },
                         value: '',
                         // Remove spinner buttons, and arrow key and mouse wheel listeners
                         hideTrigger: true,
@@ -109,7 +115,9 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
                             name: 'ycoord',
                             decimalSeparator: ',',
                             decimalPrecision: 7,
-                            fieldLabel: 'Y-Koordinate',
+                            bind: {
+                                fieldLabel: '{coordYFieldLabel}'
+                            },
                             value: '',
                             // Remove spinner buttons, and arrow key and mouse wheel listeners
                             hideTrigger: true,
@@ -123,7 +131,9 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
                             name: 'transform',
                             margin: '0 0 0 30',
                             width: 110,
-                            text: 'Transformieren',
+                            bind: {
+                                text: '{transformBtnText}'
+                            },
                             hidden: true,
                             handler: me.transform
                         }]
@@ -140,7 +150,9 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
                 defaults: {
                     anchor: '100%'
                 },
-                title: 'Koordinaten',
+                bind: {
+                    title: '{coordFieldSetTitle}'
+                },
                 items: crsFieldsets
             }
         ];
@@ -173,7 +185,9 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
 
     // Reset and Submit buttons
     buttons: [{
-        text: 'Zurücksetzen',
+        bind: {
+            text: '{resetFormBtnText}'
+        },
         handler: function(btn){
             var view = btn.up('basigx-form-coordinatetransform');
             view.reset();

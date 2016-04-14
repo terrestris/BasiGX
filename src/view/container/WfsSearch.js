@@ -37,6 +37,20 @@ Ext.define("BasiGX.view.container.WfsSearch", {
         'BasiGX.util.Animate'
     ],
 
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            searchTermTextFieldLabel: 'Suchbegriff',
+            searchResultGridTitle: 'Suchergebnisse',
+            resetBtnText: 'Zurücksetzen'
+        }
+    },
+
+    /**
+     *
+     */
     config: {
         /**
          * Array of ol-layers to search in
@@ -265,7 +279,9 @@ Ext.define("BasiGX.view.container.WfsSearch", {
             {
                 xtype: 'textfield',
                 name: 'searchTerm',
-                fieldLabel: 'Suchbegriff',
+                bind: {
+                    fieldLabel: '{searchTermTextFieldLabel}'
+                },
                 enableKeyEvents: true,
                 listeners: {
                     change: me.handleKeyDown
@@ -276,7 +292,9 @@ Ext.define("BasiGX.view.container.WfsSearch", {
                 name: 'searchresultgrid',
                 hidden: true,
                 hideHeaders: true,
-                title: 'Suchergebnisse',
+                bind: {
+                    title: '{searchResultGridTitle}'
+                },
                 store: searchResultStore,
                 columns: [
                     {
@@ -300,7 +318,9 @@ Ext.define("BasiGX.view.container.WfsSearch", {
                 height: 300
             }, {
                 xtype: 'button',
-                text: 'Zurücksetzen',
+                bind: {
+                    text: '{resetBtnText}'
+                },
                 margin: '10 0 0 0',
                 handler: me.resetSearchGridAndText,
                 scope: me
@@ -348,12 +368,14 @@ Ext.define("BasiGX.view.container.WfsSearch", {
 
     },
 
+    /**
+     *
+     */
     resetSearchGridAndText: function() {
         var me = this;
         me.down('textfield[name=searchTerm]').setValue('');
         me.resetGrid();
     },
-
 
     /**
      *

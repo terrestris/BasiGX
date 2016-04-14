@@ -35,9 +35,17 @@ Ext.define("BasiGX.view.button.Measure", {
     viewModel: {
        data: {
            textline: 'Strecke messen',
-           textpoly: 'Fläche messen'
+           textpoly: 'Fläche messen',
+           continuePolygonMsg: 'Klicken zum Zeichnen der Fläche',
+           continueLineMsg: 'Klicken zum Zeichnen der Strecke',
+           clickToDrawText: 'Klicken zum Messen'
        }
     },
+
+    /**
+     *
+     */
+    enableToggle: true,
 
     /**
      *
@@ -71,7 +79,6 @@ Ext.define("BasiGX.view.button.Measure", {
      */
     helpTooltipElement: null,
 
-
     /**
      * Overlay to show the help messages.
      * @type {ol.Overlay}
@@ -89,25 +96,6 @@ Ext.define("BasiGX.view.button.Measure", {
      * @type {ol.Overlay}
      */
     measureTooltip: null,
-
-
-    /**
-     * Message to show when the user is drawing a polygon.
-     * @type {string}
-     */
-    continuePolygonMsg: 'Klicken zum Zeichnen der Fläche',
-
-
-    /**
-     * Message to show when the user is drawing a line.
-     * @type {string}
-     */
-    continueLineMsg: 'Klicken zum Zeichnen der Strecke',
-
-    /**
-     *
-     */
-    clickToDrawText: 'Klicken zum Messen',
 
     /**
      * used to allow / disallow multiple drawings at a time on the map
@@ -155,10 +143,11 @@ Ext.define("BasiGX.view.button.Measure", {
 
         me.map = Ext.ComponentQuery.query('gx_map')[0].getMap();
 
-//        var btnText = (me.measureType === 'line' ? '{textline}' : '{textpoly}');
-//        me.setBind({
-//            text: btnText
-//        });
+        var btnText = (me.measureType === 'line' ? '{textline}' : '{textpoly}');
+        me.setBind({
+            text: btnText,
+            tooltip: btnText
+        });
 
         measureLayer = BasiGX.util.Layer.getLayerByName('measurelayer');
 
@@ -186,6 +175,7 @@ Ext.define("BasiGX.view.button.Measure", {
         } else {
             me.measureVectorLayer = measureLayer;
         }
+
         // Set our internal flag to filter this layer out of the tree / legend
         var noLayerSwitcherKey = BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
         me.measureVectorLayer.set(noLayerSwitcherKey, false);
@@ -265,6 +255,10 @@ Ext.define("BasiGX.view.button.Measure", {
             }
         });
     },
+
+    /**
+     *
+     */
     addMeasureStopToolTip: function(evt) {
         var me = this;
         if (!Ext.isEmpty(me.sketch)) {
@@ -340,80 +334,81 @@ Ext.define("BasiGX.view.button.Measure", {
         me.createMeasureTooltip();
     },
 
-   /**
-    * Handle pointer move.
-    * @param {ol.MapBrowserEvent} evt
-    */
-   pointerMoveHandler: function(evt) {
-       var me = this;
+    /**
+     * Handle pointer move.
+     * @param {ol.MapBrowserEvent} evt
+     */
+    pointerMoveHandler: function(evt) {
+        var me = this;
 
-       if (evt.dragging) {
-           return;
-       }
-       var helpMsg = me.clickToDrawText;
-       var helpTooltipCoord = evt.coordinate;
-       var measureTooltipCoord = evt.coordinate;
+        if (evt.dragging) {
+            return;
+        }
 
-       if (me.sketch) {
-           var output;
-           var geom = (me.sketch.getGeometry());
-           if (geom instanceof ol.geom.Polygon) {
-               output = me.formatArea(geom);
-               helpMsg = me.continuePolygonMsg;
-               helpTooltipCoord = geom.getLastCoordinate();
-               measureTooltipCoord = geom.getInteriorPoint().getCoordinates();
-           } else if (geom instanceof ol.geom.LineString) {
-               output = me.formatLength(geom);
-               helpMsg = me.continueLineMsg;
-               helpTooltipCoord = geom.getLastCoordinate();
-               measureTooltipCoord = geom.getLastCoordinate();
-           }
-           me.measureTooltipElement.innerHTML = output;
-           me.measureTooltip.setPosition(measureTooltipCoord);
-       }
+        var helpMsg = me.getViewModel().get('clickToDrawText');
+        var helpTooltipCoord = evt.coordinate;
+        var measureTooltipCoord = evt.coordinate;
 
-       me.helpTooltipElement.innerHTML = helpMsg;
-       me.helpTooltip.setPosition(helpTooltipCoord);
-   },
+        if (me.sketch) {
+            var output;
+            var geom = (me.sketch.getGeometry());
+            if (geom instanceof ol.geom.Polygon) {
+                output = me.formatArea(geom);
+                helpMsg = me.getViewModel().get('continuePolygonMsg');
+                helpTooltipCoord = geom.getLastCoordinate();
+                measureTooltipCoord = geom.getInteriorPoint().getCoordinates();
+            } else if (geom instanceof ol.geom.LineString) {
+                output = me.formatLength(geom);
+                helpMsg = me.getViewModel().get('continueLineMsg');
+                helpTooltipCoord = geom.getLastCoordinate();
+                measureTooltipCoord = geom.getLastCoordinate();
+            }
+            me.measureTooltipElement.innerHTML = output;
+            me.measureTooltip.setPosition(measureTooltipCoord);
+        }
 
-   /**
-    * Creates a new help tooltip
-    */
-   createHelpTooltip: function() {
-       var me = this;
+        me.helpTooltipElement.innerHTML = helpMsg;
+        me.helpTooltip.setPosition(helpTooltipCoord);
+    },
 
-       if (me.helpTooltipElement) {
-           me.helpTooltipElement.parentNode.removeChild(me.helpTooltipElement);
-       }
-       me.helpTooltipElement = Ext.dom.Helper.createDom('<div>');
-       me.helpTooltipElement.className = 'tooltip';
-       me.helpTooltip = new ol.Overlay({
-           element: me.helpTooltipElement,
-           offset: [15, 0],
-           positioning: 'center-left'
-       });
-       me.map.addOverlay(me.helpTooltip);
+    /**
+     * Creates a new help tooltip
+     */
+    createHelpTooltip: function() {
+        var me = this;
+
+        if (me.helpTooltipElement) {
+            me.helpTooltipElement.parentNode.removeChild(me.helpTooltipElement);
+        }
+        me.helpTooltipElement = Ext.dom.Helper.createDom('<div>');
+        me.helpTooltipElement.className = 'tooltip';
+        me.helpTooltip = new ol.Overlay({
+            element: me.helpTooltipElement,
+            offset: [15, 0],
+            positioning: 'center-left'
+        });
+        me.map.addOverlay(me.helpTooltip);
     },
 
 
-   /**
-    * Creates a new measure tooltip
-    */
-   createMeasureTooltip: function() {
-       var me = this;
-       if (me.measureTooltipElement) {
-           me.measureTooltipElement.parentNode.removeChild(
-               me.measureTooltipElement);
-       }
-       me.measureTooltipElement = Ext.dom.Helper.createDom('<div>');
-       me.measureTooltipElement.className = 'tooltip tooltip-measure';
-       me.measureTooltip = new ol.Overlay({
-           element: me.measureTooltipElement,
-           offset: [0, -15],
-           positioning: 'bottom-center'
-       });
-       me.map.addOverlay(me.measureTooltip);
-   },
+    /**
+     * Creates a new measure tooltip
+     */
+    createMeasureTooltip: function() {
+        var me = this;
+        if (me.measureTooltipElement) {
+            me.measureTooltipElement.parentNode.removeChild(
+                me.measureTooltipElement);
+        }
+        me.measureTooltipElement = Ext.dom.Helper.createDom('<div>');
+        me.measureTooltipElement.className = 'tooltip tooltip-measure';
+        me.measureTooltip = new ol.Overlay({
+            element: me.measureTooltipElement,
+            offset: [0, -15],
+            positioning: 'bottom-center'
+        });
+        me.map.addOverlay(me.measureTooltip);
+    },
 
    /**
     * format length output
@@ -450,35 +445,34 @@ Ext.define("BasiGX.view.button.Measure", {
         return output;
    },
 
+    /**
+     * format length output
+     * @param {ol.geom.Polygon} polygon
+     * @return {string}
+     */
+    formatArea: function(polygon) {
+        var me = this,
+            decimalHelper = Math.pow(10, me.decimalPlacesInToolTips),
+            area;
+        if (me.geodesic) {
+            var wgs84Sphere = new ol.Sphere(6378137);
+            var sourceProj = me.map.getView().getProjection();
+            var geom = (polygon.clone().transform(
+                sourceProj, 'EPSG:4326'));
+            var coordinates = geom.getLinearRing(0).getCoordinates();
+            area = Math.abs(wgs84Sphere.geodesicArea(coordinates));
+        } else {
+            area = polygon.getArea();
+        }
 
-   /**
-    * format length output
-    * @param {ol.geom.Polygon} polygon
-    * @return {string}
-    */
-   formatArea: function(polygon) {
-       var me = this,
-           decimalHelper = Math.pow(10, me.decimalPlacesInToolTips),
-           area;
-       if (me.geodesic) {
-           var wgs84Sphere = new ol.Sphere(6378137);
-           var sourceProj = me.map.getView().getProjection();
-           var geom = (polygon.clone().transform(
-               sourceProj, 'EPSG:4326'));
-           var coordinates = geom.getLinearRing(0).getCoordinates();
-           area = Math.abs(wgs84Sphere.geodesicArea(coordinates));
-       } else {
-           area = polygon.getArea();
-       }
-
-       var output;
-       if (me.switchToKmOnLargeValues && area > 10000) {
-           output = (Math.round(area / 1000000 * decimalHelper) /
-                   decimalHelper) + ' km<sup>2</sup>';
-       } else {
-           output = (Math.round(area * decimalHelper) / decimalHelper) +
-               ' ' + 'm<sup>2</sup>';
-       }
-       return output;
+        var output;
+        if (me.switchToKmOnLargeValues && area > 10000) {
+            output = (Math.round(area / 1000000 * decimalHelper) /
+                    decimalHelper) + ' km<sup>2</sup>';
+        } else {
+            output = (Math.round(area * decimalHelper) / decimalHelper) +
+                ' ' + 'm<sup>2</sup>';
+        }
+        return output;
    }
 });

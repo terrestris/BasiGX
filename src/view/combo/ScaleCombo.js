@@ -26,6 +26,16 @@ Ext.define("BasiGX.view.combo.ScaleCombo", {
     requires: [
     ],
 
+    viewModel: {
+        data: {
+            fieldLabel: null
+        }
+    },
+
+    bind: {
+       fieldLabel: '{fieldLabel}'
+    },
+
     /**
      *
      */
@@ -65,11 +75,6 @@ Ext.define("BasiGX.view.combo.ScaleCombo", {
      *
      */
     fields: ['scale', 'resolution'],
-
-    /**
-     *
-     */
-    fieldLabel: '',
 
     /**
      *
