@@ -549,7 +549,7 @@ Ext.define("BasiGX.view.form.Print", {
             name: attributeRec.get('name'),
             fieldLabel: attributeRec.get('name'),
             value: attributeRec.get('default'),
-            allowBlank: false
+            allowBlank: true
         };
     },
 
@@ -691,17 +691,30 @@ Ext.define("BasiGX.view.form.Print", {
         return legendObj;
     },
 
+    /**
+     * Creates a NorthArrow-Object
+     */
     getNorthArrowObject: function() {
-        // TODO
         var northArrowObject = {};
-
+        // This file is located right beneath the config.yaml
+        northArrowObject.graphic = "file://NorthArrow_10.svg";
+        northArrowObject.backgroundColor = "rgba(0, 0, 0, 0)";
         return northArrowObject;
     },
 
+    /**
+     * Creates a ScaleBar-Object
+     */
     getScaleBarObject: function() {
-        // TODO
         var scaleBarObj = {};
-
+        scaleBarObj.color = "black";
+        scaleBarObj.backgroundColor = "rgba(255, 255, 255, 0)";
+        scaleBarObj.barBgColor = "white";
+        scaleBarObj.fontColor = "black";
+        scaleBarObj.align = "right";
+        scaleBarObj.intervals = 2;
+        scaleBarObj.fontSize = 10;
+        scaleBarObj.renderAsSvg = true;
         return scaleBarObj;
     },
 
