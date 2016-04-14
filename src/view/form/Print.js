@@ -691,17 +691,29 @@ Ext.define("BasiGX.view.form.Print", {
         return legendObj;
     },
 
+    /**
+     * Creates a NorthArrow-Object
+     */
     getNorthArrowObject: function() {
-        // TODO
         var northArrowObject = {};
-
+        northArrowObject.graphic = "file://NorthArrow_10.svg";
+        northArrowObject.backgroundColor = "rgba(0, 0, 0, 0)";
         return northArrowObject;
     },
 
+    /**
+     * Creates a ScaleBar-Object
+     */
     getScaleBarObject: function() {
-        // TODO
         var scaleBarObj = {};
-
+        scaleBarObj.color = "black";
+        scaleBarObj.backgroundColor = "rgba(255, 255, 255, 0)";
+        scaleBarObj.barBgColor = "white";
+        scaleBarObj.fontColor = "black";
+        scaleBarObj.align = "right";
+        scaleBarObj.intervals = 2;
+        scaleBarObj.fontSize = 10;
+        scaleBarObj.renderAsSvg = true;
         return scaleBarObj;
     },
 
