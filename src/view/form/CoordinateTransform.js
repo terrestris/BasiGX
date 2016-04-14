@@ -35,7 +35,9 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
             coordXFieldLabel: 'X-Koordinate',
             coordYFieldLabel: 'Y-Koordinate',
             transformBtnText: 'Transformieren',
-            resetFormBtnText: 'Zurücksetzen'
+            resetFormBtnText: 'Zurücksetzen',
+            transformBtnIconCls: '{transformButtonIconCls}',
+            transformBtnTooltip: '{transformButtonToolTip}'
         }
     },
 
@@ -130,7 +132,9 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
                             margin: '0 0 0 30',
                             width: 110,
                             bind: {
-                                text: '{transformBtnText}'
+                                text: '{transformBtnText}',
+                                iconCls: '{transformButtonIconCls}',
+                                tooltip: '{transformButtonToolTip}'
                             },
                             hidden: true,
                             handler: me.transform
