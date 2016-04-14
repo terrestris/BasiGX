@@ -549,7 +549,7 @@ Ext.define("BasiGX.view.form.Print", {
             name: attributeRec.get('name'),
             fieldLabel: attributeRec.get('name'),
             value: attributeRec.get('default'),
-            allowBlank: false
+            allowBlank: true
         };
     },
 
