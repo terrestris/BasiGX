@@ -696,6 +696,7 @@ Ext.define("BasiGX.view.form.Print", {
      */
     getNorthArrowObject: function() {
         var northArrowObject = {};
+        // This file is located right beneath the config.yaml
         northArrowObject.graphic = "file://NorthArrow_10.svg";
         northArrowObject.backgroundColor = "rgba(0, 0, 0, 0)";
         return northArrowObject;
