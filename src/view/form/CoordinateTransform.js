@@ -35,17 +35,16 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
             coordXFieldLabel: 'X-Koordinate',
             coordYFieldLabel: 'Y-Koordinate',
             transformBtnText: 'Transformieren',
-            resetFormBtnText: 'Zurücksetzen'
+            resetFormBtnText: 'Zurücksetzen',
+            transformBtnIconCls: '{transformButtonIconCls}',
+            transformBtnTooltip: '{transformButtonToolTip}'
         }
     },
 
     padding: 5,
-    layout: 'anchor',
-    defaults: {
-        anchor: '100%'
-    },
+    layout: 'form',
 
-    scrollable: true,
+    scrollable: 'y',
 
     config: {
         /**
@@ -67,7 +66,7 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
     initComponent: function() {
         var me = this,
             crsFieldsets = [],
-            map = Ext.ComponentQuery.query('basigx-component-map')[0].getMap();
+            map = Ext.ComponentQuery.query('gx_map')[0].getMap();
 
         if (Ext.isEmpty(me.getCoordinateSystemsToUse())) {
             Ext.log.warn('No coordinatesystems given to Component');
@@ -87,7 +86,6 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
                 xtype: 'fieldset',
                 title: crs.name,
                 crs: crs.code,
-                margin: 5,
                 items: [
                     {
                         xtype: 'numberfield',
@@ -98,7 +96,8 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
                             fieldLabel: '{coordXFieldLabel}'
                         },
                         value: '',
-                        // Remove spinner buttons, and arrow key and mouse wheel listeners
+                        // Remove spinner buttons, and arrow key and mouse wheel
+                        // listeners
                         hideTrigger: true,
                         keyNavEnabled: false,
                         mouseWheelEnabled: false,
@@ -119,7 +118,8 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
                                 fieldLabel: '{coordYFieldLabel}'
                             },
                             value: '',
-                            // Remove spinner buttons, and arrow key and mouse wheel listeners
+                            // Remove spinner buttons, and arrow key and mouse
+                            // wheel listeners
                             hideTrigger: true,
                             keyNavEnabled: false,
                             mouseWheelEnabled: false,
@@ -132,7 +132,9 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
                             margin: '0 0 0 30',
                             width: 110,
                             bind: {
-                                text: '{transformBtnText}'
+                                text: '{transformBtnText}',
+                                iconCls: '{transformButtonIconCls}',
+                                tooltip: '{transformButtonToolTip}'
                             },
                             hidden: true,
                             handler: me.transform
@@ -146,10 +148,7 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
         me.items = [
             {
                 xtype: 'fieldset',
-                layout: 'anchor',
-                defaults: {
-                    anchor: '100%'
-                },
+                layout: 'form',
                 bind: {
                     title: '{coordFieldSetTitle}'
                 },
@@ -240,7 +239,7 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
     transform: function(evtOrBtnOrArray) {
         var me = Ext.ComponentQuery.query(
             'basigx-form-coordinatetransform')[0],
-            map = Ext.ComponentQuery.query('basigx-component-map')[0].getMap(),
+            map = Ext.ComponentQuery.query('gx_map')[0].getMap(),
             mapProjection = map.getView().getProjection(),
             fieldSets = me.query('fieldset'),
             transformvectorlayer = BasiGX.util.Layer.getLayerByName(
