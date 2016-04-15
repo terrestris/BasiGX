@@ -11,16 +11,16 @@
       "type": "code",
       "requires": [
         "GeoExt",
-        "ux"
+        "ext-ux-colorpick"
       ],
       "signatures": [
         {
           "name": "terrestris GmbH \u0026 Co. KG",
-          "uuid": "77bb4192-d737-4448-b7f7-a4bce3fd88de",
-          "created": "2016-04-15T07:13:27Z",
+          "uuid": "6dbace9d-46f5-4a09-bdca-97b651d8c4ab",
+          "created": "2016-04-15T07:21:43Z",
           "algorithm": "SHA1withRSA",
-          "nonce": "wAlIL0d29Kc\u003d",
-          "signature": "J9ooEubI2hMjlazKOs5CQ72iz71J3VYdK3/8N0J++pWSFm1uYZBXQrs642HR56nHyfkbIMGxuTtWHKoDJwuma2tB5RB6FjzTNiYeNCdEuXjhS9P8SHiX+C+1drTX7EHs+0MzpvB4kW6ksvsbcXZp/rtJmXYSvZqONTnyjP+7i5RR1jOxAtRGxPXUNkhF35O2+JoIXSORcuCc765LUoOKQesM53L0+19eQE3OWzjtdBhoR1XZK/nbYuui+F5dqg8eScVoKcdXWzuj0cY62HSfM79ofkuSQdnA584juLTuwl23czePwJklvf+J4xOPhn33omdbu1YPs8o2DI5kh43QgQ\u003d\u003d"
+          "nonce": "jE9ADvYYPlk\u003d",
+          "signature": "DzyIquHwLsjlKI6yI63SsvOF+2n1uZ7w0EAYGwST5VeeQCogbHbpJv7NKrpDB8unrU0pMnwy1ZfWH7m80pnLqZS7SZ022jxxSsVkXXxQMIRURSSfMIBC8l/JPCWN9GuooSO6jCwUZj8reNALF4QGmgHeOub+2eEKEfCxrb029N8fInHGiOx8CBIC0DghTYwM8Nu1nKjRLTZI7As3px+sCVTZlOk+EaZaDG4pgGv8kEocGa/Ws8WFTj1q/MU30SRUMThFFxMi+oSqPDKxENdkEmu1spwLr0bsi9+WCGxBqBiiwN28KnN0MkUruoGf4LmTpB6y+l3YvXtd3XwjEcGfvA\u003d\u003d"
         }
       ],
       "slicer": {
@@ -57,6 +57,45 @@
             "isWidgetManifest": true
           }
         ]
+      }
+    },
+    {
+      "name": "ext-ux-colorpick",
+      "format": "1",
+      "version": "1.0.0.180",
+      "compatVersion": "1.0.0",
+      "creator": "Sencha",
+      "summary": "Enhanced Color Pickers",
+      "detailedDescription": "This package provides Ext.ux.colorpick.Field and other color components.",
+      "type": "code",
+      "signatures": [
+        {
+          "name": "Sencha",
+          "uuid": "e93ebd09-85f5-46b6-bfc1-c7f06cf0b8a5",
+          "created": "2014-09-08T20:12:33Z",
+          "algorithm": "SHA1withRSA",
+          "nonce": "uNX0ZMAQXxw\u003d",
+          "signature": "AriYpAg/EPrtBMRgzyx2Sw3GCBTAdk8j8GiWLv+EoJb6SRn0LmyIG3doBMXEI8lzuvCe+sRCshmPLKCOy/04HCOlGKFzxK4RPgMXHDQQX0DZmoXT4jXCBnqylbX9IwDDioDrB4rqX+T2qioUHQY33NBqhrvojXH9vV71DProySDI49Z77BBKcGosl7sNxPQa/qFmHwhGHWehoR5SYrJ78KNrkhCvHEvxSz/0FbsO3hw+JdO1ySWAtaDIqOs5GfgsJcxA2uTkfbjYrEdukn+f0S97/vxtZ4DGvc09mOUVDx5Z2+JiLZKoXLbU3PWaH3i6f0C3HeUmyRywf0G8QX3W7KmnzkEE9u6InT9+mZfN4zmyWDGqJWZrwbiHWTnzCbJiWa7sRXSp36V3X0QXuCRX04Z7rPt1wLzv+xzBAkH4ZcwToiN+QqCWGZA5Zw1aAtUv7siSR5si3KGkh1tObHIhM3WYTpuMoJn59ezVJO1ai7w6nyVdO1TKu8q5TAOaTwmzmSqDtNsV80Zgqfl4lCK8wDkO5qrXQAEBab/YNjdH7L7WyJnMJ/a2FeTq81da6zQgV8wJRLpsb/Ic5Ipe8N/4gSWGojY8ZjhDuOtbxSBoT1qrlLt5XZ6BFO0Q3a2nqt7o+MwlxTvEwdKvmp/zielJg0tm2YMHEqkQH+FVoKufE4Q\u003d"
+        }
+      ],
+      "slicer": {
+        "js": [
+          {
+            "path": "${package.dir}/sass/example/custom.js",
+            "isWidgetManifest": true
+          }
+        ]
+      },
+      "builds": {
+        "classic": {
+          "theme": "ext-theme-classic"
+        },
+        "crisp": {
+          "theme": "ext-theme-crisp"
+        },
+        "neptune": {
+          "theme": "ext-theme-neptune"
+        }
       }
     }
   ]

@@ -8,16 +8,16 @@
   "type": "code",
   "requires": [
     "GeoExt",
-    "ux"
+    "ext-ux-colorpick"
   ],
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "77bb4192-d737-4448-b7f7-a4bce3fd88de",
-      "created": "2016-04-15T07:13:27Z",
+      "uuid": "6dbace9d-46f5-4a09-bdca-97b651d8c4ab",
+      "created": "2016-04-15T07:21:43Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "wAlIL0d29Kc\u003d",
-      "signature": "J9ooEubI2hMjlazKOs5CQ72iz71J3VYdK3/8N0J++pWSFm1uYZBXQrs642HR56nHyfkbIMGxuTtWHKoDJwuma2tB5RB6FjzTNiYeNCdEuXjhS9P8SHiX+C+1drTX7EHs+0MzpvB4kW6ksvsbcXZp/rtJmXYSvZqONTnyjP+7i5RR1jOxAtRGxPXUNkhF35O2+JoIXSORcuCc765LUoOKQesM53L0+19eQE3OWzjtdBhoR1XZK/nbYuui+F5dqg8eScVoKcdXWzuj0cY62HSfM79ofkuSQdnA584juLTuwl23czePwJklvf+J4xOPhn33omdbu1YPs8o2DI5kh43QgQ\u003d\u003d"
+      "nonce": "jE9ADvYYPlk\u003d",
+      "signature": "DzyIquHwLsjlKI6yI63SsvOF+2n1uZ7w0EAYGwST5VeeQCogbHbpJv7NKrpDB8unrU0pMnwy1ZfWH7m80pnLqZS7SZ022jxxSsVkXXxQMIRURSSfMIBC8l/JPCWN9GuooSO6jCwUZj8reNALF4QGmgHeOub+2eEKEfCxrb029N8fInHGiOx8CBIC0DghTYwM8Nu1nKjRLTZI7As3px+sCVTZlOk+EaZaDG4pgGv8kEocGa/Ws8WFTj1q/MU30SRUMThFFxMi+oSqPDKxENdkEmu1spwLr0bsi9+WCGxBqBiiwN28KnN0MkUruoGf4LmTpB6y+l3YvXtd3XwjEcGfvA\u003d\u003d"
     }
   ],
   "slicer": {
