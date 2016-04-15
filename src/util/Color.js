@@ -40,6 +40,7 @@ Ext.define('BasiGX.util.Color', {
 
         /**
          * Method converts a rgba color string into an hex6 color string.
+         * Warning: You will loose the alpha channel when using this method.
          *
          * Example:
          *     var hex = BasiGX.util.Color.rgbaToHex("rgba(255,0,0,0)");
