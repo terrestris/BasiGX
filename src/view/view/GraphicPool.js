@@ -39,10 +39,6 @@ Ext.define("BasiGX.view.view.GraphicPool", {
         }
     },
 
-    bind: {
-        emptyText: '{emptyStoreMsg}'
-    },
-
     /**
      *
      */
@@ -91,6 +87,9 @@ Ext.define("BasiGX.view.view.GraphicPool", {
      */
     initComponent : function() {
         var me = this;
+        var viewModel = me.getViewModel();
+        var emptyText = viewModel.get('emptyStoreMsg');
+        me.emptyText = emptyText;
 
         var store = Ext.create('Ext.data.Store', {
             sorters: 'fileName',
