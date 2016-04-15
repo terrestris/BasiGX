@@ -13,7 +13,7 @@
     "framework": "ext",
     "requires": [
         "GeoExt",
-        "ext-ux-colorpick"
+        "ux"
     ],
     "toolkit": "classic",
     "theme": "theme-neptune",
