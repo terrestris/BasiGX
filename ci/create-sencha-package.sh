@@ -27,6 +27,9 @@ done
 # Switch to the now properly filled directory in the sencha workspace
 cd $BASIGX_IN_SENCHA_WS_FOLDER
 
+# Debug output: list all available packages
+$SENCHA_CMD package list
+
 # Remove BasiGX package (if any)
 $SENCHA_CMD package remove $BASIGX_PACKAGE_NAME
 
