@@ -487,7 +487,12 @@ Ext.define("BasiGX.view.container.Redlining", {
                                items: Ext.create(
                                    'BasiGX.view.container.RedlineStyler', {
                                    redliningVectorLayer: me.redliningVectorLayer,
-                                   backendUrls: me.getBackendUrls()
+                                   backendUrls: me.getBackendUrls(),
+                                   redlinePointStyle: me.getRedlinePointStyle(),
+                                   redlineLineStringStyle:
+                                       me.getRedlineLineStringStyle(),
+                                   redlinePolygonStyle:
+                                       me.getRedlinePolygonStyle()
                                })
                            });
                            me.stylerWindow.on("close", function() {
@@ -600,5 +605,66 @@ Ext.define("BasiGX.view.container.Redlining", {
            }
        }
        return str;
+    },
+
+    /**
+     * Method return the current state of the redlining, containing all features
+     * and the configured styles
+     */
+    getState: function() {
+        var me = this;
+        var features = [];
+        me.redlineFeatures.forEach(function(feature) {
+            features.push(feature.clone());
+        });
+
+        var state = {
+            features: features,
+            pointStyle: me.getRedlinePointStyle(),
+            lineStyle: me.getRedlineLineStringStyle(),
+            polygonStyle: me.getRedlinePolygonStyle(),
+            styleFunction: me.getRedlineStyleFunction()
+        };
+
+        return state;
+    },
+
+    /**
+     * Method sets the state of the redlining, containing drawn features
+     * and the configured styles
+     */
+    setState: function(state) {
+        var me = this;
+        var styler = Ext.ComponentQuery.query(
+            'basigx-container-redlinestyler')[0];
+
+        if (state.features) {
+            me.redliningVectorLayer.getSource().clear();
+            me.redliningVectorLayer.getSource().addFeatures(state.features);
+        }
+
+        if (state.pointStyle) {
+            me.setRedlinePointStyle(state.pointStyle);
+        }
+
+        if (state.lineStyle) {
+            me.setRedlineLineStringStyle(state.lineStyle);
+        }
+
+        if (state.polygonStyle) {
+            me.setRedlinePolygonStyle(state.polygonStyle);
+        }
+
+        if (styler) {
+            styler.setState(state);
+        }
+
+        if (state.styleFunction) {
+            me.setRedlineStyleFunction(state.styleFunction);
+        }
+
+        // reapply the styleFn on the layer so that ol3 starts redrawing
+        // with new styles
+        me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
     }
 });
