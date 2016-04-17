@@ -125,6 +125,8 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
             title: false,
             backendUrls: me.getBackendUrls()
         });
+        var viewModel = me.getViewModel();
+        var btnText = viewModel.get('chooseImageBtnText');
 
         me.items = [me.pictureView];
 
@@ -134,9 +136,7 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
             name: 'file',
             width: 300,
             allowBlank: false,
-            bind: {
-                buttonText: '{chooseImageBtnText}'
-            }
+            buttonText: btnText
         },
         {
             xtype: 'splitter'
