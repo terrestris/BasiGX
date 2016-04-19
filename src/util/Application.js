@@ -26,9 +26,9 @@ Ext.define('BasiGX.util.Application', {
 
     statics: {
 
-        getAppContext: function(){
+        getAppContext: function(mapComponentXType){
             var mapComponent = Ext.ComponentQuery
-                .query('basigx-component-map')[0];
+                .query(mapComponentXType)[0];
 
             if(mapComponent && mapComponent.appContext){
                 return mapComponent.appContext.data.merge;
@@ -37,9 +37,9 @@ Ext.define('BasiGX.util.Application', {
             }
         },
 
-        getRoute: function(){
+        getRoute: function(mapComponentXType){
                 var mapComponent = Ext.ComponentQuery
-                    .query('basigx-component-map')[0];
+                    .query(mapComponentXType)[0];
                 var map = mapComponent.getMap();
                 var zoom = map.getView().getZoom();
                 var center = map.getView().getCenter().toString();
