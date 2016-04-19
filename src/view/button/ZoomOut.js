@@ -46,6 +46,11 @@ Ext.define("BasiGX.view.button.ZoomOut", {
     },
 
     /**
+     * The OL3 map this button is bounded to
+     */
+    olMap: null,
+
+    /**
      * The icons the button should use.
      * Classic Toolkit uses glyphs, modern toolkit uses html
      */
@@ -54,9 +59,18 @@ Ext.define("BasiGX.view.button.ZoomOut", {
 
     config: {
         handler: function() {
-            var olMap = Ext.ComponentQuery.query('basigx-component-map')[0].getMap();
-            var olView = olMap.getView();
-            var zoom = ol.animation.zoom({
+            var me = this,
+                olMap = me.olMap,
+                olView,
+                zoom;
+
+            // fallback
+            if (Ext.isEmpty(olMap)) {
+                olMap = Ext.ComponentQuery.query('basigx-component-map')[0];
+            }
+
+            olView = olMap.getView(),
+            zoom = ol.animation.zoom({
                 resolution: olView.getResolution(),
                 duration: 500
             });

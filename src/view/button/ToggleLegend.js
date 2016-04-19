@@ -52,17 +52,30 @@ Ext.define("BasiGX.view.button.ToggleLegend", {
     glyph: 'xf022@FontAwesome',
     html: '<i class="fa fa-list-alt fa-2x"></i>',
 
+    /**
+     * Placeholder for the xtype of the legend tree component
+     * (e.g. 'basigx-panel-legendtree').
+     * Will be used to be able to determine the component dynamically.
+     */
+    legendPanelXType: null,
+
     config: {
         handler: function(button){
-            // TODO refactor so this works even outside of the mapcontainer
-            var legendPanel = button.up("basigx-panel-mapcontainer")
-                .down('basigx-panel-legendtree');
-            if(legendPanel.getCollapsed()) {
-                legendPanel.expand();
-            } else {
-                legendPanel.collapse();
+            var me = this,
+                legendPanel = Ext.ComponentQuery.query(me.legendPanelXType)[0];
+
+            //fallback
+            if (Ext.isEmpty(legendPanel)) {
+                legendPanel = Ext.ComponentQuery.query('basigx-panel-legendtree')[0];
             }
-            button.blur();
+            if (legendPanel) {
+                if(legendPanel.getCollapsed()) {
+                    legendPanel.expand();
+                } else {
+                    legendPanel.collapse();
+                }
+                button.blur();
+            }
         }
     },
 
