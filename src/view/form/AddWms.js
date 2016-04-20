@@ -20,13 +20,23 @@
  *
  * @class BasiGX.view.form.AddWms
  */
-Ext.define("BasiGX.view.form.AddWms", {
-    extend: "Ext.form.Panel",
+Ext.define('BasiGX.view.form.AddWms', {
+    extend: 'Ext.form.Panel',
     xtype: 'basigx-form-addwms',
 
     requires: [
-        'Ext.button.Button',
         'Ext.app.ViewModel',
+        'Ext.button.Button',
+        'Ext.form.CheckboxGroup',
+        'Ext.form.FieldContainer',
+        'Ext.form.FieldSet',
+        'Ext.form.field.Text',
+        'Ext.form.field.Hidden',
+        'Ext.form.field.Checkbox',
+        'Ext.form.field.Radio',
+        'Ext.layout.container.Anchor',
+        'Ext.layout.container.HBox',
+        'Ext.toolbar.Toolbar',
 
         'BasiGX.util.MsgBox'
     ],
@@ -39,6 +49,8 @@ Ext.define("BasiGX.view.form.AddWms", {
             availableLayesFieldSetTitle: 'Verfügbare Layer',
             resetBtnText: 'Zurücksetzen',
             requestLayersBtnText: 'Verfügbare Layer abfragen',
+            checkAllLayersBtnText: 'Alle auswählen',
+            uncheckAllLayersBtnText: 'Nichts auswählen',
             addCheckedLayersBtnText: 'Ausgewählte Layer hinzufügen',
             errorIncompatibleWMS: 'Der angefragte WMS ist nicht kompatibel ' +
                     'zur Anwendung',
@@ -56,6 +68,41 @@ Ext.define("BasiGX.view.form.AddWms", {
     },
 
     scrollable: true,
+
+    config: {
+
+        /**
+         * Whether layers shall start `checked` or `unchecked` in the available
+         * layers fieldset.
+         */
+        candidatesInitiallyChecked: true,
+
+        /**
+         * Whether to add a `Check all layers` button to the toolbar to interact
+         * with the layers of a GetCapabilities response.
+         */
+        hasCheckAllBtn: false,
+
+        /**
+         * Whether to add a `Uncheck all layers` button to the toolbar to
+         * interactthe with the layers of a GetCapabilities response.
+         */
+        hasUncheckAllBtn: false,
+
+        /**
+         * Whether to include sublayers when creting the list of available
+         * layers.
+         */
+        includeSubLayer: false
+    },
+
+    /**
+     * The ol.format.WMSCapabilities which we use to parse any responses. Will
+     * be set in `initComponent`
+     *
+     * @private
+     */
+    parser: null,
 
     items: [
         {
@@ -113,85 +160,244 @@ Ext.define("BasiGX.view.form.AddWms", {
             xtype: 'fieldset',
             name: 'fs-available-layers',
             layout: 'anchor',
+            scrollable: 'y',
+            maxHeight: 200,
             defaults: {
                 anchor: '100%'
             },
             bind: {
                 title: '{availableLayesFieldSetTitle}'
+            },
+            items: {
+                xtype: 'checkboxgroup',
+                listeners: {
+                    change: {
+                        fn: function(cbGroup) {
+                            var form = cbGroup.up('basigx-form-addwms');
+                            form.updateControlToolbarState();
+                        },
+                        buffer: 50
+                    }
+                },
+                columns: 2,
+                vertical: true
             }
         }
     ],
 
     // Reset and Submit buttons
-    buttons: [{
-        bind: {
-            text: '{resetBtnText}'
+    buttons: [
+        {
+            bind: {
+                text: '{resetBtnText}'
+            },
+            handler: function(btn){
+                var view = btn.up('basigx-form-addwms');
+                view.getForm().reset();
+                view.removeAddLayersComponents();
+            }
         },
-        handler: function(btn){
-            var view = btn.up('basigx-form-addwms');
-            view.getForm().reset();
-            view.emptyAvailableLayersFieldset();
-        }
-    }, '->', {
-        bind: {
-            text: '{requestLayersBtnText}'
-        },
-        formBind: true, //only enabled once the form is valid
-        disabled: true,
-        handler: function(btn){
-            var view = btn.up('basigx-form-addwms');
-            var viewModel = view.getViewModel();
-            var form = view.getForm();
-
-            if (form.isValid()) {
-                view.emptyAvailableLayersFieldset();
-
-                var values = form.getValues();
-                var url = values.url;
-                delete values.url;
-
-                Ext.Ajax.request({
-                    url: url,
-                    method: 'GET',
-                    params: values,
-                    success: function(response) {
-                        var parser = new ol.format.WMSCapabilities();
-                        var result;
-                        try {
-                            result = parser.read(response.responseText);
-                        } catch(ex) {
-                            BasiGX.util.MsgBox.warn(
-                                    viewModel.get('errorCouldntParseResponse'));
-                        }
-                        var compatibleLayers =
-                            view.isCompatibleCapabilityResponse(result);
-                        if (!compatibleLayers) {
-                            BasiGX.util.MsgBox.warn(
-                                viewModel.get('errorIncompatibleWMS'));
-                        }
-                        view.fillAvailableLayersFieldset(compatibleLayers);
-                    },
-                    failure: function() {
-                        BasiGX.util.MsgBox.warn(
-                                viewModel.get('errorRequestFailed'));
-                    }
-                });
+        '->',
+        {
+            bind: {
+                text: '{requestLayersBtnText}'
+            },
+            formBind: true, // only enabled once the form is valid
+            disabled: true,
+            handler: function(btn){
+                var view = btn.up('basigx-form-addwms');
+                view.requestGetCapabilities();
             }
         }
-    }],
+    ],
 
     /**
-     *
+     * Initializes the form and sets up the parser instance.
      */
-    emptyAvailableLayersFieldset: function(){
-        var fs = this.down('[name="fs-available-layers"]');
-        fs.removeAll();
+    initComponent: function() {
+        this.callParent();
+        this.parser = new ol.format.WMSCapabilities();
+    },
+
+
+    /**
+     * Will be called with the 'get layers' button. Issues a GetCapabilities
+     * request and sets up handlewrs for reacting on the response.
+     */
+    requestGetCapabilities: function(){
+        var me = this;
+        var form = me.getForm();
+        if (form.isValid()) {
+            me.setLoading(true);
+            me.removeAddLayersComponents();
+            var values = form.getValues();
+            var url = values.url;
+            delete values.url;
+
+            Ext.Ajax.request({
+                url: url,
+                method: 'GET',
+                params: values,
+                scope: me,
+                success: me.onGetCapabilitiesSuccess,
+                failure: me.onGetCapabilitiesFailure
+            });
+        }
     },
 
     /**
+     * Called if we could successfully query for the capabiliteis of a WMS, this
+     * methdo will examine the answer and eventually set up a fieldset for all
+     * the layers that we have found in the server's answer.
      *
+     * @param response {XMLHttpRequest} The response of the request.
+     */
+    onGetCapabilitiesSuccess: function(response) {
+        var me = this;
+        var viewModel = me.getViewModel();
+        var parser = me.parser;
+        var result;
+        try {
+            result = parser.read(response.responseText);
+        } catch(ex) {
+            BasiGX.warn(viewModel.get('errorCouldntParseResponse'));
+        }
+        var compatibleLayers = me.isCompatibleCapabilityResponse(result);
+        if (!compatibleLayers) {
+            BasiGX.warn(viewModel.get('errorIncompatibleWMS'));
+        }
+        me.fillAvailableLayersFieldset(compatibleLayers);
+        me.updateControlToolbarState();
+        me.setLoading(false);
+    },
+
+    /**
+     * Called if we could not successfully query for the capabiliteis of a WMS.
+     *
+     * @param response {XMLHttpRequest} The response of the request.
+     */
+    onGetCapabilitiesFailure: function() {
+        this.setLoading(false);
+        BasiGX.warn(this.getViewModel().get('errorRequestFailed'));
+    },
+
+    /**
+     * Updates the disabled state of the buttons to control the layer
+     * checkboxes (e.g. check all, uncheck all, add selected).
+     */
+    updateControlToolbarState: function() {
+        var me = this;
+        var cbGroup = me.down('[name=fs-available-layers] checkboxgroup');
+        var allCbs = cbGroup.query('checkbox');
+        var allChecked = cbGroup.query('[checked=true]');
+        var allDisabled = cbGroup.query('[disabled=true]');
+        var checkAllBtn = me.down('[name=check-all-layers]');
+        var uncheckAllBtn = me.down('[name=uncheck-all-layers]');
+        var addBtn = me.down('[name=add-checked-layers]');
+        if (allCbs.length === 0) {
+            // no checkboxes, also no control toolbar, return
+            return;
+        }
+        if (allDisabled.length === allCbs.length) {
+            // all checkboxes are disabled, all controls can be disabled
+            addBtn.setDisabled(true);
+            if (checkAllBtn) {
+                checkAllBtn.setDisabled(true);
+            }
+            if (uncheckAllBtn) {
+                uncheckAllBtn.setDisabled(true);
+            }
+            return;
+        }
+        if (allChecked.length > 0) {
+            // at least one checkbox is checked
+            addBtn.setDisabled(false);
+        } else {
+            // not even one is checked
+            addBtn.setDisabled(true);
+        }
+
+        if (checkAllBtn) {
+            if (allCbs.length === allChecked.length) {
+                // all are checked already
+                checkAllBtn.setDisabled(true);
+            } else {
+                checkAllBtn.setDisabled(false);
+            }
+        }
+        if (uncheckAllBtn) {
+            if (allChecked.length === 0) {
+                // not a single one is checked
+                uncheckAllBtn.setDisabled(true);
+            } else {
+                uncheckAllBtn.setDisabled(false);
+            }
+        }
+    },
+
+    /**
+     * Remove the checkboxes ffor layxers from previous requests, and also the
+     * interact-toolbar.
+     */
+    removeAddLayersComponents: function() {
+        var me = this;
+        var cbGroup = me.down('[name=fs-available-layers] checkboxgroup');
+        var tb = me.down('toolbar[name=interact-w-available-layers]');
+        cbGroup.removeAll();
+        if (tb) {
+            me.remove(tb);
+        }
+    },
+
+    /**
+     * A utility method that creates an ol.layer.Tile with a ol.source.TileWMS
+     * from the properties of a layer from a getCapabilities response.
+     *
+     * @param {Object} capLayer A layer from a GetCapabilities response
+     * @param {String} version The WMS version.
+     * @param {String} mapProj The map projection as string.
+     * @param {String} url The WMS URL.
+     * @return {ol.layer.Tile} The created layer or `undefined`.
+     */
+    getOlLayer: function(capLayer, version, mapProj, url) {
+        // This really should not matter, as ol3 can reproject in the client
+        // At least it shoudl be configurable
+        if (version === '1.3.0' &&
+            Ext.isArray(capLayer.CRS) &&
+            !Ext.Array.contains(capLayer.CRS, mapProj)) {
+            // only available for 1.3.0
+            return;
+        }
+        var style = capLayer.Style;
+        var olSource = new ol.source.TileWMS({
+            url: url,
+            params: {
+                LAYERS: capLayer.Name,
+                STYLES: style ? style[0].Name : '',
+                VERSION: version
+            }
+        });
+        var olLayer = new ol.layer.Tile({
+            topic: true,
+            name: capLayer.Title,
+            source: olSource,
+            legendUrl: style ? style[0].LegendURL[0].OnlineResource : null
+        });
+        return olLayer;
+    },
+
+    /**
+     * Checks if the passed capabilities object (from the #parser) is
+     * compatible. It woill return an array of layers if we could determine any,
+     * and the boolean value `false` if not.
+     *
+     * @param {Object} capabilities The GetCapabbilties object as it is returned
+     *     by our parser.
+     * @return {ol.layer.Tile[]|boolean} Eitehr an array of comüatible layers or
+     *     `false`.
      */
     isCompatibleCapabilityResponse: function (capabilities) {
+        var me = this;
         if (!capabilities) {
             return false;
         }
@@ -207,72 +413,136 @@ Ext.define("BasiGX.view.form.AddWms", {
         var layers = capabilities.Capability.Layer.Layer;
         var url = capabilities.Capability.Request.GetMap.
             DCPType[0].HTTP.Get.OnlineResource;
+
+        var includeSubLayer = me.getIncludeSubLayer();
+
         Ext.each(layers, function(layer){
-            if (version === '1.3.0' &&
-                !Ext.Array.contains(layer.CRS, mapProj)) {
-                // only available for 1.3.0
-                return;
+            var olLayer = me.getOlLayer(layer, version, mapProj, url);
+            if (olLayer) {
+                compatible.push(olLayer);
             }
-            var style = layer.Style;
-            var olSource = new ol.source.TileWMS({
-                url: url,
-                params: {
-                    LAYERS: layer.Name,
-                    STYLES: style ? style[0].Name : '',
-                    VERSION: version
-                }
-            });
-            var olLayer = new ol.layer.Tile({
-                topic: true,
-                name: layer.Title,
-                source: olSource,
-                legendUrl: style ? style[0].LegendURL[0].OnlineResource : null
-            });
-            compatible.push(olLayer);
+
+            if (includeSubLayer && Ext.isArray(layer.Layer)) {
+                Ext.each(layer.Layer, function(subLayer) {
+                    var subOlLayer = me.getOlLayer(
+                        subLayer, version, mapProj, url
+                    );
+                    if (subOlLayer) {
+                        compatible.push(subOlLayer);
+                    }
+                });
+            }
         });
 
         return compatible.length > 0 ? compatible : false;
     },
 
     /**
+     * Takes an array of OpenLayers layers (as gathered by the method to fetch
+     * them from the capabilities object #isCompatibleCapabilityResponse) and
+     * updates the avaialable layers fieldset with matching entries.
      *
+     * @param {ol.layer.Tile[]} layers The layers for which the we shall fill
+     *     the fieldset.
      */
     fillAvailableLayersFieldset: function(layers){
-        this.emptyAvailableLayersFieldset();
-        var view = this;
-        var fs = view.down('[name="fs-available-layers"]');
+        var me = this;
+        me.removeAddLayersComponents();
+        var fs = me.down('[name=fs-available-layers]');
+        var cbGroup = fs.down('checkboxgroup');
+        var checkBoxes = [];
+        var candidatesInitiallyChecked = me.getCandidatesInitiallyChecked();
         Ext.each(layers, function(layer){
-            fs.add({
+            checkBoxes.push({
                 xtype: 'checkbox',
                 boxLabel: layer.get('name'),
-                checked: true,
+                checked: candidatesInitiallyChecked,
                 olLayer: layer
             });
         });
-        fs.add({
+        cbGroup.add(checkBoxes);
+
+        var tbItems = [];
+
+        if (me.getHasCheckAllBtn()) {
+            tbItems.push({
+                xtype: 'button',
+                name: 'check-all-layers',
+                bind: {
+                    text: '{checkAllLayersBtnText}'
+                },
+                handler: me.checkAllLayers,
+                scope: me
+            });
+        }
+
+        if (me.getHasUncheckAllBtn()) {
+            tbItems.push({
+                xtype: 'button',
+                name: 'uncheck-all-layers',
+                bind: {
+                    text: '{uncheckAllLayersBtnText}'
+                },
+                handler: me.uncheckAllLayers,
+                scope: me
+            });
+        }
+
+        tbItems.push('->');
+        tbItems.push({
             xtype: 'button',
+            name: 'add-checked-layers',
             bind: {
                 text: '{addCheckedLayersBtnText}'
             },
-            margin: 10,
-            handler: this.addCheckedLayers,
-            scope: this
+            handler: me.addCheckedLayers,
+            scope: me
+        });
+
+        me.add({
+            xtype: 'toolbar',
+            name: 'interact-w-available-layers',
+            items: tbItems
         });
     },
 
     /**
-     *
+     * Examines the available layers fieldset, and adds all checked layers to
+     * the map.
      */
     addCheckedLayers: function() {
         var me = this;
-        var fs = this.down('[name="fs-available-layers"]');
+        var fs = me.down('[name=fs-available-layers]');
         var checkboxes = fs.query('checkbox[checked=true][disabled=false]');
         var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
         Ext.each(checkboxes, function(checkbox) {
-            me.fireEvent("beforewmsadd", checkbox.olLayer);
+            me.fireEvent('beforewmsadd', checkbox.olLayer);
             map.addLayer(checkbox.olLayer);
-            me.fireEvent("wmsadd", checkbox.olLayer);
+            me.fireEvent('wmsadd', checkbox.olLayer);
             checkbox.setDisabled(true);
+        });
+        me.updateControlToolbarState();
+    },
+
+    /**
+     * Checks all checkboxes in the available layers fieldset.
+     */
+    checkAllLayers: function() {
+        var sel = '[name=fs-available-layers] checkbox[disabled=false]';
+        var checkboxes = this.query(sel);
+        Ext.each(checkboxes, function(checkbox) {
+            checkbox.setValue(true);
+        });
+    },
+
+    /**
+     * Unchecks all checkboxes in the available layers fieldset.
+     */
+    uncheckAllLayers: function() {
+        var sel = '[name=fs-available-layers] checkbox[disabled=false]';
+        var checkboxes = this.query(sel);
+        Ext.each(checkboxes, function(checkbox) {
+            checkbox.setValue(false);
         });
     }
 });
