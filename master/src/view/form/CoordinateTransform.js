@@ -280,6 +280,9 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
 
         // now show coord on map
         if (!Ext.isDefined(transformvectorlayer)) {
+            var displayInLayerSwitcherKey =
+                BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+
             transformvectorlayer = new ol.layer.Vector({
                 name: 'transformvectorlayer',
                 source: new ol.source.Vector(),
@@ -295,6 +298,8 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
                     })
                 })
             });
+
+            transformvectorlayer.set(displayInLayerSwitcherKey, false);
 
             map.addLayer(transformvectorlayer);
         }
