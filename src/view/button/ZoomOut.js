@@ -69,7 +69,7 @@ Ext.define("BasiGX.view.button.ZoomOut", {
                 olMap = Ext.ComponentQuery.query('basigx-component-map')[0];
             }
 
-            olView = olMap.getView(),
+            olView = olMap.getView();
             zoom = ol.animation.zoom({
                 resolution: olView.getResolution(),
                 duration: 500
