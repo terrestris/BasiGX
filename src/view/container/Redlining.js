@@ -138,6 +138,12 @@ Ext.define("BasiGX.view.container.Redlining", {
            graphicDelete: null
        },
 
+       /**
+        * The URL to a picture used for the postits.
+        * It is highly recommended that you set your own image source here
+        */
+       postitPictureUrl: null,
+
       /**
        *
        */
@@ -307,13 +313,8 @@ Ext.define("BasiGX.view.container.Redlining", {
                listeners: {
                    toggle: function(btn, pressed) {
                        if (!me.drawPostitInteraction) {
-                           var classPath = Ext.Loader.getPath(
-                               'BasiGX.view.container.Redlining');
-                           var imageBaseSrc;
-                           if (classPath) {
-                               imageBaseSrc = classPath.split(
-                                   'src/view/container/Redlining.js')[0];
-                           }
+                           var src = me.getPostitImgSrc();
+
                            me.drawPostitInteraction = new ol.interaction.Draw({
                                features: me.redlineFeatures,
                                type: 'Point',
@@ -322,8 +323,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                                        anchorXUnits: 'fraction',
                                        anchorYUnits: 'pixels',
                                        opacity: 0.75,
-                                       src: imageBaseSrc +
-                                           'resources/img/postit.png'
+                                       src: src
                                    })
                                })
                            });
@@ -513,35 +513,39 @@ Ext.define("BasiGX.view.container.Redlining", {
    /**
     *
     */
+   getPostitImgSrc: function() {
+       if (this.getPostitPictureUrl() !== null) {
+           return this.getPostitPictureUrl();
+       } else {
+           var classPath = Ext.Loader.getPath(
+               'BasiGX.view.container.Redlining');
+           var imageBaseSrc;
+           if (classPath) {
+               imageBaseSrc = classPath.split(
+                   'src/view/container/Redlining.js')[0];
+           }
+           return imageBaseSrc + 'resources/img/postit.png';
+       }
+   },
+
+   /**
+    *
+    */
    handlePostitAdd: function(evt) {
        var me = this;
        var feat = evt.element;
 
-       Ext.create('Ext.window.Window', {
-           width: 300,
-           height: 170,
-           title: me.getViewModel().get('postItWindowTitle'),
-           defaults: {
-               width: '100%'
-           },
-           items: [
-               {
-                   xtype: 'textarea',
-                   name: 'postittext'
-               },
-               {
-                   xtype: 'button',
-                   text: me.getViewModel().get('postItWindowCreatePostItBtnText'),
-                   handler: function(btn) {
-                       var text = btn.up('window').down(
-                           'textarea[name=postittext]').getValue();
-                       text = me.stringDivider(text, 16, '\n');
-                       me.setPostitStyleAndTextOnFeature(text, feat);
-                       btn.up('window').close();
-                   }
+       BasiGX.prompt(me.getViewModel().get('postItWindowTitle'), {
+           fn: function(decision, text) {
+               if (decision === "cancel") {
+                   me.redlineFeatures.remove(feat);
+               } else {
+                   text = me.stringDivider(text, 16, '\n');
+                   me.setPostitStyleAndTextOnFeature(text, feat);
                }
-           ]
-       }).show();
+           },
+           multiline: 150
+       });
 
        var button = Ext.ComponentQuery.query('button[name=postitbutton]')[0];
        button.toggle();
@@ -551,19 +555,13 @@ Ext.define("BasiGX.view.container.Redlining", {
     * sets a postit style and text on a feature
     */
    setPostitStyleAndTextOnFeature: function(text, feat) {
-       var classPath = Ext.Loader.getPath(
-           'BasiGX.view.container.Redlining');
-       var imageBaseSrc;
-       if (classPath) {
-           imageBaseSrc = classPath.split(
-               'src/view/container/Redlining.js')[0];
-       }
+       var me = this;
        feat.setStyle(new ol.style.Style({
            image: new ol.style.Icon({
                anchorXUnits: 'fraction',
                anchorYUnits: 'pixels',
                opacity: 0.75,
-               src: imageBaseSrc + 'resources/img/postit.png'
+               src: me.getPostitImgSrc()
            }),
            text: new ol.style.Text({
              text: text,
