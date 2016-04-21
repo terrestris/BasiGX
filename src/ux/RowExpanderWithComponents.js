@@ -206,7 +206,10 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
                 if (record.getOlLayer() && record.getOlLayer().get('type') &&
                     record.getOlLayer().get('type') !== "WFSCluster" &&
                     Ext.isArray(obj.items) && obj.items.length > 1) {
-                        obj.items.pop();
+                        var lastItem = obj.items[obj.items.length - 1];
+                        if(lastItem.xtype === "image"){
+                            obj.items.pop();
+                        }
                 }
             }
         }
