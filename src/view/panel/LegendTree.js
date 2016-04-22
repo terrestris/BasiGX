@@ -136,15 +136,76 @@ Ext.define("BasiGX.view.panel.LegendTree", {
     },
 
     /**
-     * Expands All RowBodies
+     * Expands, collapses or toggles all row bodies with the components,
+     * depending on the passed mode.
+     *
+     * @param {String} mode The mode to set; either `toggle`, `expand` or
+     *     `collapse`.
+     * @protected
+     */
+    setModeAllBodies: function(mode) {
+        var toggle = mode === 'toggle';
+        var expand = mode === 'expand';
+        var collapse = mode === 'collapse';
+        if (!toggle && !expand && !collapse) {
+            Ext.log.warn('Illegal mode, expected "' + mode + '"' +
+                ' to be bei either "toggle", "expand" or "collapse".');
+            return;
+        }
+        var me = this;
+        var plugin = me.getPlugin('rowexpanderwithcomponents');
+        var collapsedClass = me.plugins[0].rowCollapsedCls;
+
+        if (me.initiallyCollapsed) {
+            Ext.log.warn('Cannot set mode of all bodies, the view is still ' +
+                'collapsed');
+            return;
+        }
+        if (!plugin) {
+            Ext.log.warn('Cannot set mode of all bodies, Failed to determine ' +
+                'the row expander-plugin');
+            return;
+        }
+
+        var store = me.getStore();
+        store.each(function(record, index) {
+            if (toggle) {
+                plugin.toggleRow(index, record);
+            } else {
+                var rowNode = me.view.getNode(index);
+                var normalRow = Ext.fly(rowNode);
+                var currentlyCollapsed = normalRow.hasCls(collapsedClass);
+                if (currentlyCollapsed && expand) {
+                    plugin.toggleRow(index, record);
+                } else if (!currentlyCollapsed && collapse) {
+                    plugin.toggleRow(index, record);
+                }
+            }
+        });
+    },
+
+    /**
+     * Expands all row bodies with the components, effectively showing
+     * previously hidden legends.
      */
     expandAllBodies: function(){
-        var me = this;
-        if((!me.getBodyInitiallyCollapsed()) && me.plugins.length > 0){
-            me.getStore().each(function(record, index) {
-                me.plugins[0].toggleRow(index, record);
-            });
-        }
+        this.setModeAllBodies('expand');
+    },
+
+    /**
+     * Collapses all row bodies with the components, effectively hiding
+     * previously shown legends.
+     */
+    collapseAllBodies: function() {
+        this.setModeAllBodies('collapse');
+    },
+
+    /**
+     * Toggles all row bodies with the components, effectively showing
+     * previously hidden legends and hiding previously shown legends.
+     */
+    toggleAllBodies: function() {
+        this.setModeAllBodies('toggle');
     },
 
     /**
