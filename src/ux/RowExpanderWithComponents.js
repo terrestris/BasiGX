@@ -12,6 +12,7 @@
 Ext.define('BasiGX.ux.RowExpanderWithComponents', {
     extend: 'Ext.grid.plugin.RowExpander',
     alias: 'plugin.rowexpanderwithcomponents',
+    pluginId: 'rowexpanderwithcomponents',
 
     /**
      * @cfg {XTemplate} rowBodyTpl
