@@ -479,7 +479,7 @@ Ext.define("BasiGX.view.form.Print", {
         attributeFieldset = defaultFieldContainer.add({
             xtype: 'fieldset',
             bind: {
-                title: '{attributesTitle}',
+                title: '{attributesTitle}'
             },
             name: 'attributes',
             layout: 'anchor',
