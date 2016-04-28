@@ -45,7 +45,8 @@ Ext.define("BasiGX.view.form.Print", {
             printButtonSuffix: 'anfordern',
             downloadButtonPrefix: 'Download',
             printFormat: 'pdf',
-            genericFieldSetTitle: 'Einstellungen'
+            genericFieldSetTitle: 'Einstellungen',
+            attributesTitle: 'Eigenschaften'
         }
     },
 
@@ -477,7 +478,9 @@ Ext.define("BasiGX.view.form.Print", {
         }
         attributeFieldset = defaultFieldContainer.add({
             xtype: 'fieldset',
-            title: 'Eigenschaften',
+            bind: {
+                title: '{attributesTitle}'
+            },
             name: 'attributes',
             layout: 'anchor',
             defaults: {
