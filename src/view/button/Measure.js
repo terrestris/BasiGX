@@ -26,6 +26,7 @@ Ext.define("BasiGX.view.button.Measure", {
 
     requires: [
         "BasiGX.util.Layer",
+        "BasiGX.util.Map",
         "Ext.app.ViewModel"
     ],
 
@@ -141,7 +142,7 @@ Ext.define("BasiGX.view.button.Measure", {
             }),
             measureLayer;
 
-        me.map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+        me.map = BasiGX.util.Map.getMapComponent().getMap();
 
         var btnText = (me.measureType === 'line' ? '{textline}' : '{textpoly}');
         me.setBind({

@@ -26,6 +26,7 @@ Ext.define("BasiGX.view.button.ZoomToExtent", {
 
     requires: [
         'BasiGX.util.Application',
+        'BasiGX.util.Map',
         'Ext.app.ViewModel'
     ],
 
@@ -48,6 +49,11 @@ Ext.define("BasiGX.view.button.ZoomToExtent", {
     },
 
     /**
+     * The OL3 map this button is bounded to
+     */
+    olMap: null,
+
+    /**
      * Center is required on instantiation.
      * Either zoom or Resolution is required on instantiation.
      */
@@ -58,15 +64,21 @@ Ext.define("BasiGX.view.button.ZoomToExtent", {
         handler: function(){
             this.setConfigValues();
 
-            var olMap = Ext.ComponentQuery.query('basigx-component-map')[0].getMap();
-            var olView = olMap.getView();
-            var targetCenter = this.getCenter();
-            var targetResolution = this.getResolution();
-            var targetZoom = this.getZoom();
-            var pan = ol.animation.pan({
+            var olMap = this.olMap;
+
+            //fallback
+            if (Ext.isEmpty(olMap)) {
+                olMap = BasiGX.util.Map.getMapComponent();
+            }
+
+            var olView = olMap.getView(),
+                targetCenter = this.getCenter(),
+                targetResolution = this.getResolution(),
+                targetZoom = this.getZoom(),
+                pan = ol.animation.pan({
                     source: olView.getCenter()
-                });
-            var zoom = ol.animation.zoom({
+                }),
+                zoom = ol.animation.zoom({
                    resolution: olView.getResolution()
                 });
 
