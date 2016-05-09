@@ -608,6 +608,7 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
      * Works with extent or geom.
      */
     zoomToExtent: function(extent){
+        var me = this;
         var olView = me.map.getView();
         var pan = ol.animation.pan({
             source: olView.getCenter()
@@ -647,7 +648,7 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         if (this.clusterResults) {
             feature = this.getClusterFeatureFromFeature(record.olObject);
             var featureStyle = this.clusterLayer.getStyle()(
-                feature, me.map.getView().getResolution())[0];
+                feature, this.map.getView().getResolution())[0];
             radius = featureStyle.getImage().getRadius();
             text = featureStyle.getText().getText();
         } else {

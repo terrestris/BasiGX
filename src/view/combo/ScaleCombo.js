@@ -167,7 +167,8 @@ Ext.define("BasiGX.view.combo.ScaleCombo", {
      * a little getScale helper
      */
     getCurrentScale: function (resolution) {
-        var units = me.map.getView().getProjection().getUnits(),
+        var me = this,
+            units = me.map.getView().getProjection().getUnits(),
             dpi = 25.4 / 0.28,
             mpu = ol.proj.METERS_PER_UNIT[units],
             scale = resolution * mpu * 39.37 * dpi;

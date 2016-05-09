@@ -86,6 +86,6 @@ Ext.define('BasiGX.util.Map', {
                 legendComponent = Ext.ComponentQuery.query('basigx-panel-legendtree')[0];
             }
             return legendComponent;
-        },
+        }
     }
 });
