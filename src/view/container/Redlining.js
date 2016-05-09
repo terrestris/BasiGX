@@ -220,7 +220,7 @@ Ext.define("BasiGX.view.container.Redlining", {
        //set map
        me.map = BasiGX.util.Map.getMapComponent().getMap();
 
-       if (!me.redlmapiningVectorLayer) {
+       if (!me.redliningVectorLayer) {
            me.redlineFeatures = new ol.Collection();
            me.redliningVectorLayer = new ol.layer.Vector({
                source: new ol.source.Vector({features: me.redlineFeatures}),
