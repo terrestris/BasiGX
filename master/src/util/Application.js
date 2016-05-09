@@ -22,13 +22,15 @@
  */
 Ext.define('BasiGX.util.Application', {
 
-    requires: ['BasiGX.util.Layer'],
+    requires: [
+        'BasiGX.util.Layer',
+        'BasiGX.util.Map'
+        ],
 
     statics: {
 
-        getAppContext: function(){
-            var mapComponent = Ext.ComponentQuery
-                .query('basigx-component-map')[0];
+        getAppContext: function(mapComponentXType){
+            var mapComponent = BasiGX.util.Map.getMapComponent(mapComponentXType);
 
             if(mapComponent && mapComponent.appContext){
                 return mapComponent.appContext.data.merge;
@@ -37,25 +39,24 @@ Ext.define('BasiGX.util.Application', {
             }
         },
 
-        getRoute: function(){
-                var mapComponent = Ext.ComponentQuery
-                    .query('basigx-component-map')[0];
-                var map = mapComponent.getMap();
-                var zoom = map.getView().getZoom();
-                var center = map.getView().getCenter().toString();
-                var visibleLayers = BasiGX.util.Layer
-                    .getVisibleLayers(map);
-                var visibleLayerRoutingIds = [];
+        getRoute: function(mapComponentXType){
+            var mapComponent = BasiGX.util.Map.getMapComponent(mapComponentXType);
+            var map = mapComponent.getMap();
+            var zoom = map.getView().getZoom();
+            var center = map.getView().getCenter().toString();
+            var visibleLayers = BasiGX.util.Layer
+                .getVisibleLayers(map);
+            var visibleLayerRoutingIds = [];
 
-                Ext.each(visibleLayers, function(layer){
-                    visibleLayerRoutingIds.push(layer.get('routingId'));
-                });
+            Ext.each(visibleLayers, function(layer){
+                visibleLayerRoutingIds.push(layer.get('routingId'));
+            });
 
-                var hash = 'center/' + center +
-                           '|zoom/' + zoom +
-                           '|layers/' + visibleLayerRoutingIds.toString();
+            var hash = 'center/' + center +
+                       '|zoom/' + zoom +
+                       '|layers/' + visibleLayerRoutingIds.toString();
 
-                return hash;
+            return hash;
         }
     }
 });

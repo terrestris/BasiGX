@@ -46,6 +46,11 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
 
     scrollable: 'y',
 
+    /**
+     *
+     */
+    map: null,
+
     config: {
         /**
          * Array of Objects containing code in EPSG notation and Name to display
@@ -65,8 +70,10 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
      */
     initComponent: function() {
         var me = this,
-            crsFieldsets = [],
-            map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+            crsFieldsets = [];
+
+        //set map
+        me.map = BasiGX.util.Map.getMapComponent().getMap();
 
         if (Ext.isEmpty(me.getCoordinateSystemsToUse())) {
             Ext.log.warn('No coordinatesystems given to Component');
@@ -167,18 +174,18 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
             }
 
             if(me.getTransformCenterOnRender()){
-                var coordToTransform = map.getView().getCenter();
+                var coordToTransform = me.map.getView().getCenter();
                 me.transform(coordToTransform);
             }
         });
 
-        map.on('click', me.transform);
+        me.map.on('click', me.transform);
 
         me.on('beforedestroy', function(){
             var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
                 'transformvectorlayer');
             transformvectorlayer.getSource().clear();
-            map.un('click', me.transform);
+            me.map.un('click', me.transform);
         });
     },
 
@@ -239,8 +246,7 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
     transform: function(evtOrBtnOrArray) {
         var me = Ext.ComponentQuery.query(
             'basigx-form-coordinatetransform')[0],
-            map = Ext.ComponentQuery.query('gx_map')[0].getMap(),
-            mapProjection = map.getView().getProjection(),
+            mapProjection = me.map.getView().getProjection(),
             fieldSets = me.query('fieldset'),
             transformvectorlayer = BasiGX.util.Layer.getLayerByName(
                 'transformvectorlayer'),
@@ -300,8 +306,7 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
             });
 
             transformvectorlayer.set(displayInLayerSwitcherKey, false);
-
-            map.addLayer(transformvectorlayer);
+            me.map.addLayer(transformvectorlayer);
         }
 
         var transformedMapCoords = ol.proj.transform(
@@ -314,7 +319,7 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
         transformvectorlayer.getSource().addFeatures([feature]);
         // recenter if we were not triggered by click in map
         if (!isOlEvt) {
-            map.getView().setCenter(transformedMapCoords);
+            me.map.getView().setCenter(transformedMapCoords);
         }
     }
 });

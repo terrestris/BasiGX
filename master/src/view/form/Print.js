@@ -30,6 +30,7 @@ Ext.define("BasiGX.view.form.Print", {
         "Ext.form.action.StandardSubmit",
 
         "BasiGX.util.Layer",
+        "BasiGX.util.Map",
 
         "GeoExt.data.MapfishPrintProvider"
     ],
@@ -294,7 +295,7 @@ Ext.define("BasiGX.view.form.Print", {
      *
      */
     addExtentLayer: function(){
-        var targetMap = Ext.ComponentQuery.query('gx_map')[0];
+        var targetMap = BasiGX.util.Map.getMapComponent().getMap();
 
         // TODO MJ: the lines below are possible better suited at the
         //          cleanupPrintExtent method, but tzhat may currently

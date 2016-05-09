@@ -34,7 +34,8 @@ Ext.define("BasiGX.view.container.WfsSearch", {
         'GeoExt.data.store.Features',
         'GeoExt.grid.column.Symbolizer',
 
-        'BasiGX.util.Animate'
+        'BasiGX.util.Animate',
+        'BasiGX.util.Map'
     ],
 
     /**
@@ -227,9 +228,16 @@ Ext.define("BasiGX.view.container.WfsSearch", {
     /**
      *
      */
+    map: null,
+
+    /**
+     *
+     */
     initComponent: function() {
-        var me = this,
-            map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+        var me = this;
+
+        //set map
+        me.map = BasiGX.util.Map.getMapComponent().getMap();
 
         if (Ext.isEmpty(me.getLayers())) {
             Ext.log.error('No layers given to search component!');
@@ -241,7 +249,7 @@ Ext.define("BasiGX.view.container.WfsSearch", {
                 style: me.getSearchResultFeatureStyle(),
                 visible: !me.clusterResults
             });
-            map.addLayer(me.searchResultVectorLayer);
+            me.map.addLayer(me.searchResultVectorLayer);
         }
 
         if (me.clusterResults && !me.clusterLayer) {
@@ -262,7 +270,7 @@ Ext.define("BasiGX.view.container.WfsSearch", {
                     return style;
                 }
             });
-            map.addLayer(me.clusterLayer);
+            me.map.addLayer(me.clusterLayer);
 
             // correct the vectorlayerstyle for the grid symbolizer
             me.searchResultVectorLayer.setStyle(me.clusterStyleFn('', 8));
@@ -270,7 +278,7 @@ Ext.define("BasiGX.view.container.WfsSearch", {
         }
 
         var searchResultStore = Ext.create('GeoExt.data.store.Features', {
-            map: map,
+            map: me.map,
             layer: me.searchResultVectorLayer,
             groupField: 'featuretype'
         });
@@ -577,17 +585,17 @@ Ext.define("BasiGX.view.container.WfsSearch", {
      * Works with extent or geom.
      */
     zoomToExtent: function(extent){
-        var olMap = Ext.ComponentQuery.query('gx_map')[0].getMap();
-        var olView = olMap.getView();
+        var me = this;
+        var olView = me.map.getView();
         var pan = ol.animation.pan({
             source: olView.getCenter()
         });
         var zoom = ol.animation.zoom({
            resolution: olView.getResolution()
         });
-        olMap.beforeRender(pan, zoom);
+        me.map.beforeRender(pan, zoom);
 
-        olView.fit(extent, olMap.getSize());
+        olView.fit(extent, me.map.getSize());
     },
 
     /**
@@ -607,7 +615,7 @@ Ext.define("BasiGX.view.container.WfsSearch", {
         if(this.enterEventRec === record){
             return;
         }
-        var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+        var me = this;
         var feature;
         var radius;
         var text;
@@ -618,7 +626,7 @@ Ext.define("BasiGX.view.container.WfsSearch", {
         if (this.clusterResults) {
             feature = this.getClusterFeatureFromFeature(record.olObject);
             var featureStyle = this.clusterLayer.getStyle()(
-                feature, map.getView().getResolution())[0];
+                feature, me.map.getView().getResolution())[0];
             radius = featureStyle.getImage().getRadius();
             text = featureStyle.getText().getText();
         } else {

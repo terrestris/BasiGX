@@ -38,6 +38,7 @@ Ext.define('BasiGX.view.form.AddWms', {
         'Ext.layout.container.HBox',
         'Ext.toolbar.Toolbar',
 
+        'BasiGX.util.Map',
         'BasiGX.util.MsgBox'
     ],
 
@@ -406,7 +407,7 @@ Ext.define('BasiGX.view.form.AddWms', {
             return false;
         }
         var compatible = [];
-        var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+        var map = BasiGX.util.Map.getMapComponent().getMap();
         var mapProj = map.getView().getProjection().getCode();
 
         // same in both versions
@@ -514,7 +515,7 @@ Ext.define('BasiGX.view.form.AddWms', {
         var me = this;
         var fs = me.down('[name=fs-available-layers]');
         var checkboxes = fs.query('checkbox[checked=true][disabled=false]');
-        var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+        var map = BasiGX.util.Map.getMapComponent().getMap();
         Ext.each(checkboxes, function(checkbox) {
             me.fireEvent('beforewmsadd', checkbox.olLayer);
             map.addLayer(checkbox.olLayer);

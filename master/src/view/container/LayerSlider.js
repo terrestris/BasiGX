@@ -114,7 +114,7 @@ Ext.define("BasiGX.view.container.LayerSlider", {
      */
     initComponent: function() {
         var me = this,
-            map = Ext.ComponentQuery.query('gx_map')[0].getMap(),
+            map = BasiGX.util.Map.getMapComponent().getMap(),
             labelItems = me.getLabelItems(),
             items = [];
 
