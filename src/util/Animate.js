@@ -17,7 +17,9 @@
  * @class BasiGX.util.Animate
  */
 Ext.define('BasiGX.util.Animate', {
-
+    requires: [
+        'BasiGX.util.Map'
+    ],
     statics: {
        shake: function(component, duration, amplitude){
            duration = duration || 200;
@@ -46,7 +48,7 @@ Ext.define('BasiGX.util.Animate', {
        },
 
        flashFeature: function(feature, duration) {
-           var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+           var map = BasiGX.util.Map.getMapComponent().getMap();
            var start = new Date().getTime();
            var listenerKey;
 
@@ -91,7 +93,7 @@ Ext.define('BasiGX.util.Animate', {
         * Useful e.g. when hovering clustered features to show their children
         */
        moveFeature: function(featureToMove, duration, pixel, style, doneFn) {
-           var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+           var map = BasiGX.util.Map.getMapComponent().getMap();
            var listenerKey;
 
            var geometry = featureToMove.getGeometry();

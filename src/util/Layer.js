@@ -22,7 +22,9 @@
  * @class BasiGX.util.Layer
  */
 Ext.define('BasiGX.util.Layer', {
-
+    requires: [
+        'BasiGX.util.Map'
+    ],
     statics: {
         KEY_DISPLAY_IN_LAYERSWITCHER: 'bp_displayInLayerSwitcher',
 
@@ -43,7 +45,7 @@ Ext.define('BasiGX.util.Layer', {
                 layers = collection.getArray ?
                     collection.getArray() : collection;
             } else {
-                var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+                var map = BasiGX.util.Map.getMapComponent().getMap();
                 layers = map.getLayers().getArray();
             }
 
@@ -89,7 +91,7 @@ Ext.define('BasiGX.util.Layer', {
                 layers = collection.getArray ?
                     collection.getArray() : collection;
             } else {
-                var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+                var map = BasiGX.util.Map.getMapComponent().getMap();
                 layers = map.getLayers().getArray();
             }
 

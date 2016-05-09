@@ -108,7 +108,7 @@ Ext.define("BasiGX.view.combo.ScaleCombo", {
         var me = this;
 
         if (!me.map) {
-            me.map = Ext.ComponentQuery.query("gx_map")[0].getMap();
+            me.map = BasiGX.util.Map.getMapComponent().getMap();
         }
 
         // using hard scales here as there is no way currently known to
@@ -167,9 +167,7 @@ Ext.define("BasiGX.view.combo.ScaleCombo", {
      * a little getScale helper
      */
     getCurrentScale: function (resolution) {
-        // TODO don't query! And move some other place.
-        var map = Ext.ComponentQuery.query('gx_map')[0].getMap(),
-            units = map.getView().getProjection().getUnits(),
+        var units = me.map.getView().getProjection().getUnits(),
             dpi = 25.4 / 0.28,
             mpu = ol.proj.METERS_PER_UNIT[units],
             scale = resolution * mpu * 39.37 * dpi;

@@ -123,6 +123,11 @@ Ext.define("BasiGX.view.container.Redlining", {
      */
     redliningToolsWin : null,
 
+    /**
+     *
+     */
+    map: null,
+
    /**
     *
     */
@@ -209,19 +214,20 @@ Ext.define("BasiGX.view.container.Redlining", {
     */
    initComponent: function() {
        var me = this;
-       var mapComponent = Ext.ComponentQuery.query('gx_component_map')[0];
-       var map = mapComponent.getMap();
        var displayInLayerSwitcherKey = BasiGX.util.Layer.
            KEY_DISPLAY_IN_LAYERSWITCHER;
 
-       if (!me.redliningVectorLayer) {
+       //set map
+       me.map = BasiGX.util.Map.getMapComponent().getMap();
+
+       if (!me.redlmapiningVectorLayer) {
            me.redlineFeatures = new ol.Collection();
            me.redliningVectorLayer = new ol.layer.Vector({
                source: new ol.source.Vector({features: me.redlineFeatures}),
                style: me.getRedlineStyleFunction()
            });
            me.redliningVectorLayer.set(displayInLayerSwitcherKey, false);
-           map.addLayer(me.redliningVectorLayer);
+           me.map.addLayer(me.redliningVectorLayer);
        }
 
        me.items = me.getRedlineItems();
@@ -233,8 +239,6 @@ Ext.define("BasiGX.view.container.Redlining", {
     */
    getRedlineItems: function() {
        var me = this;
-       var mapComponent = Ext.ComponentQuery.query('gx_component_map')[0];
-       var map = mapComponent.getMap();
 
        return [
            {
@@ -250,7 +254,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                                features: me.redlineFeatures,
                                type: 'Point'
                            });
-                           map.addInteraction(me.drawPointInteraction);
+                           me.map.addInteraction(me.drawPointInteraction);
                        }
                        if (pressed) {
                            me.drawPointInteraction.setActive(true);
@@ -272,7 +276,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                                features: me.redlineFeatures,
                                type: 'LineString'
                            });
-                           map.addInteraction(me.drawLineInteraction);
+                           me.map.addInteraction(me.drawLineInteraction);
                        }
                        if (pressed) {
                            me.drawLineInteraction.setActive(true);
@@ -294,7 +298,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                                features: me.redlineFeatures,
                                type: 'Polygon'
                            });
-                           map.addInteraction(me.drawPolygonInteraction);
+                           me.map.addInteraction(me.drawPolygonInteraction);
                        }
                        if (pressed) {
                            me.drawPolygonInteraction.setActive(true);
@@ -327,7 +331,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                                    })
                                })
                            });
-                           map.addInteraction(me.drawPostitInteraction);
+                           me.map.addInteraction(me.drawPostitInteraction);
                        }
                        if (pressed) {
                            me.drawPostitInteraction.setActive(true);
@@ -361,7 +365,7 @@ Ext.define("BasiGX.view.container.Redlining", {
 
                                me.copySelectInteraction.getFeatures().clear();
                            });
-                           map.addInteraction(me.copySelectInteraction);
+                           me.map.addInteraction(me.copySelectInteraction);
                        }
                        if (pressed) {
                            me.copySelectInteraction.setActive(true);
@@ -381,13 +385,13 @@ Ext.define("BasiGX.view.container.Redlining", {
                        if (!me.translateInteraction) {
                            me.translateSelectInteraction =
                                new ol.interaction.Select();
-                           map.addInteraction(me.translateSelectInteraction);
+                           me.map.addInteraction(me.translateSelectInteraction);
                            me.translateInteraction =
                                new ol.interaction.Translate({
                                    features: me.translateSelectInteraction
                                        .getFeatures()
                            });
-                           map.addInteraction(me.translateInteraction);
+                           me.map.addInteraction(me.translateInteraction);
                        }
                        if (pressed) {
                            me.translateInteraction.setActive(true);
@@ -414,7 +418,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                                        .singleClick(event);
                                }
                            });
-                           map.addInteraction(me.modifyInteraction);
+                           me.map.addInteraction(me.modifyInteraction);
                        }
                        if (pressed) {
                            me.modifyInteraction.setActive(true);
@@ -434,7 +438,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                        if (!me.deleteSelectInteraction) {
                            me.deleteSelectInteraction =
                                new ol.interaction.Select();
-                           map.addInteraction(me.deleteSelectInteraction);
+                           me.map.addInteraction(me.deleteSelectInteraction);
                            me.deleteSelectInteraction.getFeatures().on('add',
                                function(evt) {
 
@@ -451,11 +455,11 @@ Ext.define("BasiGX.view.container.Redlining", {
                                        .singleClick(event);
                                }
                            });
-                           map.addInteraction(me.deleteModifyInteraction);
+                           me.map.addInteraction(me.deleteModifyInteraction);
                            me.deleteSnapInteraction = new ol.interaction.Snap({
                                features: me.redlineFeatures
                            });
-                           map.addInteraction(me.deleteSnapInteraction);
+                           me.map.addInteraction(me.deleteSnapInteraction);
                        }
                        if (pressed) {
                            me.deleteSelectInteraction.setActive(true);

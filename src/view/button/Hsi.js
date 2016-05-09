@@ -24,7 +24,8 @@ Ext.define("BasiGX.view.button.Hsi", {
     extend: "Ext.Button",
     xtype: 'basigx-button-hsi',
     requires: [
-        'Ext.app.ViewModel'
+        'Ext.app.ViewModel',
+        'BasiGX.util.Map'
     ],
 
     /**
@@ -63,15 +64,14 @@ Ext.define("BasiGX.view.button.Hsi", {
     buttonPressed: true,
 
     /**
-     * Placeholder for the xtype of the map component (e.g. 'basigx-component-map').
-     * Will be used to be able to determine the map component dynamically
-     */
-    mapPanelXType: null,
-
-    /**
      *
      */
     config: {
+        /**
+         * Placeholder for the xtype of the map component (e.g. 'basigx-component-map').
+         * Will be used to be able to determine the map component dynamically
+         */
+        mapPanelXType: null,
         handler: function() {
             this.buttonPressed = !this.buttonPressed;
             this.toggleButton();
@@ -103,13 +103,10 @@ Ext.define("BasiGX.view.button.Hsi", {
      *
      */
     setControlStatus: function(status){
-        var me = this,
-            mapComponent = Ext.ComponentQuery.query(me.mapPanelXType)[0];
+        var me = this;
+        var mapComponent;
 
-        //fallback
-        if (Ext.isEmpty(mapComponent)) {
-            mapComponent = Ext.ComponentQuery.query('basigx-component-map')[0];
-        }
+        mapComponent = BasiGX.util.Map.getMapComponent(me.getMapPanelXtype());
         mapComponent.setPointerRest(status);
     }
 });

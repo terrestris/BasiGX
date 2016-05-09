@@ -28,12 +28,13 @@ Ext.define("BasiGX.view.component.Map", {
 
     requires: [
         "BasiGX.util.ConfigParser",
+        "BasiGX.util.Map",
         "BasiGX.util.Layer"
     ],
 
     inheritableStatics: {
         guess: function(){
-            return Ext.ComponentQuery.query('basigx-component-map')[0];
+            return BasiGX.util.Map.getMapComponent(this.xtype);
         }
     },
 

@@ -24,7 +24,8 @@ Ext.define("BasiGX.view.button.ZoomOut", {
     extend: "Ext.Button",
     xtype: 'basigx-button-zoomout',
     requires: [
-        'Ext.app.ViewModel'
+        'Ext.app.ViewModel',
+        'BasiGX.util.Map'
     ],
 
     /**
@@ -66,7 +67,7 @@ Ext.define("BasiGX.view.button.ZoomOut", {
 
             // fallback
             if (Ext.isEmpty(olMap)) {
-                olMap = Ext.ComponentQuery.query('basigx-component-map')[0];
+                olMap = BasiGX.util.Map.getMapComponent();
             }
 
             olView = olMap.getView();
