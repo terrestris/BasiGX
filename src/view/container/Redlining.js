@@ -222,6 +222,7 @@ Ext.define("BasiGX.view.container.Redlining", {
 
        if (!me.redliningVectorLayer) {
            me.redlineFeatures = new ol.Collection();
+           me.redlineFeatures.on('propertychange', me.fireRedliningChanged, me);
            me.redliningVectorLayer = new ol.layer.Vector({
                source: new ol.source.Vector({features: me.redlineFeatures}),
                style: me.getRedlineStyleFunction()
@@ -396,9 +397,13 @@ Ext.define("BasiGX.view.container.Redlining", {
                        if (pressed) {
                            me.translateInteraction.setActive(true);
                            me.translateSelectInteraction.setActive(true);
+                           me.translateInteraction.on('translateend',
+                                   me.fireRedliningChanged, me);
                        } else {
                            me.translateInteraction.setActive(false);
                            me.translateSelectInteraction.setActive(false);
+                           me.translateInteraction.un('translateend',
+                                   me.fireRedliningChanged, me);
                        }
                    }
                }
@@ -422,8 +427,12 @@ Ext.define("BasiGX.view.container.Redlining", {
                        }
                        if (pressed) {
                            me.modifyInteraction.setActive(true);
+                           me.modifyInteraction.on('modifyend',
+                                   me.fireRedliningChanged, me);
                        } else {
                            me.modifyInteraction.setActive(false);
+                           me.modifyInteraction.un('modifyend',
+                                   me.fireRedliningChanged, me);
                        }
                    }
                }
@@ -637,6 +646,9 @@ Ext.define("BasiGX.view.container.Redlining", {
      */
     setState: function(state) {
         var me = this;
+
+        me.stateChangeActive = true;
+
         var styler = Ext.ComponentQuery.query(
             'basigx-container-redlinestyler')[0];
 
@@ -668,5 +680,12 @@ Ext.define("BasiGX.view.container.Redlining", {
         // reapply the styleFn on the layer so that ol3 starts redrawing
         // with new styles
         me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
+
+        me.stateChangeActive = false;
+    },
+
+    fireRedliningChanged: function(){
+        this.fireEvent('redliningchanged', this, this.getState(),
+                this.stateChangeActive);
     }
 });
