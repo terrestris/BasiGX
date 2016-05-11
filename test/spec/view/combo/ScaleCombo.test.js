@@ -8,6 +8,7 @@ describe('BasiGX.view.combo.ScaleCombo', function() {
     var map;
     var combo;
     var mapComponent;
+    var dpi = 25.4 / 0.28;
     beforeEach(function() {
         div = document.createElement('div');
         document.body.appendChild(div);
@@ -56,9 +57,16 @@ describe('BasiGX.view.combo.ScaleCombo', function() {
     });
     describe('initially selected value', function() {
         it('is taken from the map', function() {
-            expect(combo.getValue()).to.be(map.getView().getResolution());
+            var units = map.getView().getProjection().getUnits();
+            var mpu = ol.proj.METERS_PER_UNIT[units];
+            var scale = map.getView().getResolution() * mpu * 39.37 * dpi;
+            expect(combo.getValue()).to.be(
+                "1:" + Math.round(scale.toLocaleString()).toFixed(0));
         });
+
         it('is taken from map even if not existing in store', function() {
+            var units = map.getView().getProjection().getUnits();
+            var mpu = ol.proj.METERS_PER_UNIT[units];
             map.setView(new ol.View({resolution: 4711}));
             var combo2 = Ext.create('BasiGX.view.combo.ScaleCombo', {
                 map: map,
@@ -66,7 +74,9 @@ describe('BasiGX.view.combo.ScaleCombo', function() {
                     {scale: "1:2.000.000", resolution: 560}
                 ]
             });
-            expect(combo2.getValue()).to.be(4711);
+            var scale = 4711 * mpu * 39.37 * dpi;
+            expect(combo2.getValue()).to.be(
+                    "1:" + Math.round(scale.toLocaleString()).toFixed(0));
         });
     });
     describe('two-way binding', function() {
