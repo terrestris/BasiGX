@@ -128,6 +128,11 @@ Ext.define("BasiGX.view.container.Redlining", {
      */
     map: null,
 
+    /**
+     * Temporary member that will be set to true while setState is runnning.
+     */
+    stateChangeActive: false,
+
    /**
     *
     */
@@ -210,6 +215,17 @@ Ext.define("BasiGX.view.container.Redlining", {
    },
 
    /**
+    * @event redliningchanged
+    * An event that fires everytime a feature is added, deleted, moved or
+    * modified.
+    * @param {BasiGX.view.container.Redlining} container
+    *     The Redlining container.
+    * @param {Object} state The current redlining state.
+    * @param {Boolean} stateChangeActive While setState is runnning this will be
+    *     true otherwise false.
+    */
+
+   /**
     *
     */
    initComponent: function() {
@@ -234,6 +250,15 @@ Ext.define("BasiGX.view.container.Redlining", {
        me.items = me.getRedlineItems();
        me.callParent(arguments);
    },
+
+    listeners: {
+        beforedestroy: function(){
+            if(this.redlineFeatures){
+                this.redlineFeatures.un('propertychange',
+                    this.fireRedliningChanged, this);
+            }
+        }
+    },
 
    /**
     *
