@@ -100,28 +100,35 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
      *
      */
     getPointFieldset: function() {
-        var me = this,
-            style = me.getRedlinePointStyle(),
-            imageStyle = style.getImage(),
-            imageAnchor,
-            imageScale,
-            radius = 10,
-            strokeWidth = 2,
-            fillColor = '#008000',
-            strokeColor = '#ffcc33';
+        var me = this;
+        var style = me.getRedlinePointStyle();
+        if(Ext.isEmpty(style)){
+            return null;
+        }
+        var imageStyle = style.getImage();
+        var imageAnchor;
+        var imageScale;
+        var radius = 10;
+        var strokeWidth = 0;
+        var fillColor = '#008000';
+        var strokeColor = '#ffcc33';
 
         if (imageStyle instanceof ol.style.Icon) {
             imageAnchor = imageStyle.getAnchor();
             imageScale = imageStyle.getScale() * 100;
         } else if (imageStyle instanceof ol.style.Circle) {
             radius = imageStyle.getRadius();
-            strokeWidth = imageStyle.getStroke().getWidth();
-            fillColor = imageStyle.getFill().getColor();
-            fillColor = fillColor.indexOf('rgba') > -1 ? BasiGX.util.Color.
-                rgbaToHex(fillColor) : fillColor;
-            strokeColor = style.getImage().getStroke().getColor();
-            strokeColor = strokeColor.indexOf('rgba') > -1 ? BasiGX.util.Color.
-                rgbaToHex(strokeColor) : strokeColor;
+            if(imageStyle.getStroke()){
+                strokeWidth = imageStyle.getStroke().getWidth();
+                strokeColor = imageStyle.getStroke().getColor();
+                strokeColor = strokeColor.indexOf('rgba') > -1 ?
+                        BasiGX.util.Color.rgbaToHex(strokeColor) : strokeColor;
+            }
+            if(imageStyle.getFill()){
+                fillColor = imageStyle.getFill().getColor();
+                fillColor = fillColor.indexOf('rgba') > -1 ? BasiGX.util.Color.
+                        rgbaToHex(fillColor) : fillColor;
+            }
         }
 
         var fs = {
@@ -347,12 +354,15 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
      *
      */
     getLineStringFieldset: function() {
-        var me = this,
-            style = me.getRedlineLineStringStyle(),
-            styleStrokeColor = style.getStroke().getColor(),
-            strokeColor = styleStrokeColor.indexOf('rgba') > -1 ?
-                BasiGX.util.Color.rgbaToHex(styleStrokeColor) : styleStrokeColor,
-            fs = {
+        var me = this;
+        var style = me.getRedlineLineStringStyle();
+        if(Ext.isEmpty(style)){
+            return null;
+        }
+        var styleStrokeColor = style.getStroke().getColor();
+        var strokeColor = styleStrokeColor.indexOf('rgba') > -1 ?
+                BasiGX.util.Color.rgbaToHex(styleStrokeColor) : styleStrokeColor;
+        var fs = {
                 xtype: 'fieldset',
                 bind: {
                     title: '{lineStyleFieldSetTitle}'
@@ -435,15 +445,18 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
      *
      */
     getPolygonFieldset: function() {
-        var me = this,
-            style = me.getRedlinePolygonStyle(),
-            styleFillColor = style.getFill().getColor(),
-            fillColor = styleFillColor.indexOf('rgba') > -1 ?
-                BasiGX.util.Color.rgbaToHex(styleFillColor) : styleFillColor,
-            styleStrokeColor = style.getStroke().getColor(),
-            strokeColor = styleStrokeColor.indexOf('rgba') > -1 ?
-                BasiGX.util.Color.rgbaToHex(styleStrokeColor) : styleStrokeColor,
-            fs = {
+        var me = this;
+        var style = me.getRedlinePolygonStyle();
+        if(Ext.isEmpty(style)){
+            return null;
+        }
+        var styleFillColor = style.getFill().getColor();
+        var fillColor = styleFillColor.indexOf('rgba') > -1 ?
+                BasiGX.util.Color.rgbaToHex(styleFillColor) : styleFillColor;
+        var styleStrokeColor = style.getStroke().getColor();
+        var strokeColor = styleStrokeColor.indexOf('rgba') > -1 ?
+                BasiGX.util.Color.rgbaToHex(styleStrokeColor) : styleStrokeColor;
+        var fs = {
                 xtype: 'fieldset',
                 bind: {
                     title: '{polygonStyleFieldSetTitle}'

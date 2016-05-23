@@ -24,6 +24,26 @@ Ext.define('BasiGX.util.Color', {
          * Method converts a hex8 color string into an rgba color string.
          *
          * Example:
+         *     var rgba = BasiGX.util.Color.hexToRgba("#ff0000", 0.5);
+         *     // rgba is now: "rgba(255,0,0,0.5)"
+         */
+        hexToRgba: function(hex, opacity) {
+            hex = hex.replace('#','');
+            var r = parseInt(hex.substring(0,2), 16);
+            var g = parseInt(hex.substring(2,4), 16);
+            var b = parseInt(hex.substring(4,6), 16);
+            var a = opacity;
+
+            if(opacity){
+                return 'rgba('+r+','+g+','+b+','+a+')';
+            }
+            return 'rgba('+r+','+g+','+b+',1)';
+        },
+
+        /**
+         * Method converts a hex8 color string into an rgba color string.
+         *
+         * Example:
          *     var rgba = BasiGX.util.Color.hex8ToRgba("#ff000000");
          *     // rgba is now: "rgba(255,0,0,0)"
          */
