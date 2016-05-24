@@ -470,6 +470,10 @@ Ext.define('BasiGX.plugin.Hover', {
                        color: 'gray'
                    })
                }),
+               stroke: new ol.style.Stroke({
+                   color: "rgba(255, 0, 0, 0.6)",
+                   width: 5
+               }),
                text: new ol.style.Text({
                    text: count > 1 ? count.toString() : '',
                    font: 'bold ' + fontSize * 2 + 'px Arial',
