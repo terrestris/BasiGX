@@ -67,7 +67,7 @@ Ext.define("BasiGX.view.button.ZoomIn", {
 
             //fallback
             if (Ext.isEmpty(olMap)) {
-                olMap = BasiGX.util.Map.getMapComponent();
+                olMap = BasiGX.util.Map.getMapComponent().getMap();
             }
 
             olView = olMap.getView();
