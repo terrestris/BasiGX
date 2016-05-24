@@ -68,7 +68,7 @@ Ext.define("BasiGX.view.button.ZoomToExtent", {
 
             //fallback
             if (Ext.isEmpty(olMap)) {
-                olMap = BasiGX.util.Map.getMapComponent();
+                olMap = BasiGX.util.Map.getMapComponent().getMap();
             }
 
             var olView = olMap.getView(),
