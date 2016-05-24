@@ -44,7 +44,6 @@ Ext.define("BasiGX.view.button.ZoomToExtent", {
      *
      */
     bind: {
-        tooltip: '{tooltip}',
         text: '{text}'
     },
 
@@ -106,6 +105,12 @@ Ext.define("BasiGX.view.button.ZoomToExtent", {
      */
     constructor: function(config) {
         this.callParent([config]);
+
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
 
         if(this.getZoom() && this.getResolution()){
             Ext.raise('No zoom and resolution set for Extent Button!' +
