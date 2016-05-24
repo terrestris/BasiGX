@@ -106,7 +106,7 @@ Ext.define("BasiGX.view.button.Hsi", {
         var me = this;
         var mapComponent;
 
-        mapComponent = BasiGX.util.Map.getMapComponent(me.getMapPanelXtype());
+        mapComponent = BasiGX.util.Map.getMapComponent(me.getMapPanelXType());
         mapComponent.setPointerRest(status);
     }
 });
