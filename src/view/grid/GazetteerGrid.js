@@ -37,10 +37,10 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
     viewModel: {
         data: {
             title: 'Gazetteer',
-            hideToolTooltip: 'Hide Gazetteer',
-            limitCboxLabel: 'Limit to current map extent',
-            refreshBtnTooltip: 'Refresh',
-            directionBtnTooltip: 'Directions'
+            hideToolTooltip: 'Gazetteer verbergen',
+            limitCboxLabel: 'Auf den sichtbaren Kartenbereich einschränken',
+            refreshBtnTooltip: 'Aktualisieren',
+            directionBtnTooltip: 'Hinweise zu Gazetteer'
         }
     },
 
@@ -138,9 +138,12 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
         me.callParent(arguments);
 
         // set handler for all grid items
-        me.down('checkbox[name=limitcheckbox]').on('change', me.refreshSearchResults, me);
-        me.down('button[name=refreshsearchbutton]').setHandler(me.refreshSearchResults, me);
-        me.down('button[name=directionsbutton]').setHandler(me.showDirections, me);
+        me.down('checkbox[name=limitcheckbox]')
+            .on('change', me.refreshSearchResults, me);
+        me.down('button[name=refreshsearchbutton]')
+            .setHandler(me.refreshSearchResults, me);
+        me.down('button[name=directionsbutton]')
+            .setHandler(me.showDirections, me);
 
         // add listeners
         me.on('boxready', me.onBoxReady, me);
@@ -235,16 +238,19 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
             }
         } else {
             Ext.create('Ext.window.Window', {
-                title: 'Gazetteer Directions',
+                title: 'Gazetteer',
                 name: 'gazetteerdirections',
                 height: 200,
                 width: 400,
                 layout: 'fit',
                 bodyPadding: 5,
-                html: 'Hover a searchresult to highlight it on the map.<br/>' +
-                    'Click an item to zoom to its extent.<br/>' +
-                    'Beware that if you unchecked "Limit to current map ' +
-                    'extent" searchresults may be out of your scope.'
+                html: 'Führen Sie die Maus über die Suchergebnisse, um diese ' +
+                    'auf der Karte zu markieren.<br/> Klicken Sie auf ein ' +
+                    'Element, um die Karte darauf zu zentrieren.<br/>' +
+                    'Beachten Sie, dass einige Suchergebnisse außerhalb des ' +
+                    'sichtbaren Kartenbereichs liegen können, falls die ' +
+                    'Option "Auf den sichtbaren Kartenbereich einschränken" ' +
+                    'abgewählt ist.'
             }).show();
         }
     },
