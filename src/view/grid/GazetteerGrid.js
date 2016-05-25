@@ -147,6 +147,9 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
         me.on('itemmouseenter', me.onItemMouseEnter, me);
         me.on('itemmouseleave', me.onItemMouseLeave, me);
         me.on('itemclick', me.onItemClick, me);
+
+        // unregister listeners on grid hide
+        me.on('hide', me.unregisterListeners, me);
     },
 
     /**
@@ -244,5 +247,17 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
                     'extent" searchresults may be out of your scope.'
             }).show();
         }
+    },
+
+    /**
+     *
+     */
+    unregisterListeners: function() {
+        var me = this;
+
+        me.un('boxready', me.onBoxReady, me);
+        me.un('itemmouseenter', me.onItemMouseEnter, me);
+        me.un('itemmouseleave', me.onItemMouseLeave, me);
+        me.un('itemclick', me.onItemClick, me);
     }
 });
