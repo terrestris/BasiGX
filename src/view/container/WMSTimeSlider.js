@@ -24,7 +24,7 @@
  * {
  *      xtype: 'basigx-container-wmstimeslider',
  *      url: 'http://example.de/geoserver/timeseries/wms',
- *      layerNameInWMS: "timeseries",
+ *      layerNameInWMS: 'timeseries',
  *      layerNameInClient: 'timeseries1'
  * }
  *
@@ -77,15 +77,15 @@ Ext.define("BasiGX.view.container.WMSTimeSlider",{
                     return;
                 }
                 Ext.each(result.Capability.Layer.Layer, function(layer) {
-                    if (layer.Name == slidercontainer.layerNameInWMS) {
+                    if (layer.Name === slidercontainer.layerNameInWMS) {
                         timelayer = layer;
                     }
-                })
+                });
                 Ext.each(timelayer.Dimension, function(dimension) {
-                    if (dimension.name == "time") {
+                    if (dimension.name === "time") {
                         timevalues = dimension.values;
                     }
-                })
+                });
 
                 var WMStimes = timevalues.split(",");
                 slidercontainer.setTimes(WMStimes);
@@ -131,7 +131,7 @@ Ext.define("BasiGX.view.container.WMSTimeSlider",{
                 xtype: 'slider',
                 name: 'timeslider',
                 tipText: function(thumb){
-                    var slider = Ext.ComponentQuery.query('timeseries-container-wmstimeslider')[0];
+                    var slider = Ext.ComponentQuery.query('basigx-container-wmstimeslider')[0];
                     var time = slider.getTimes()[thumb.value];
                     return Ext.Date.format(new Date(time), 'Y-m-d');
                 },
@@ -158,7 +158,7 @@ Ext.define("BasiGX.view.container.WMSTimeSlider",{
 
         var labelcontainer;
         Ext.each(me.items.items, function(item) {
-            if (item.name == "labelcontainer") {
+            if (item.name === "labelcontainer") {
                 labelcontainer = item;
             }
         });
@@ -184,10 +184,10 @@ Ext.define("BasiGX.view.container.WMSTimeSlider",{
         var me = this;
         var timeslider;
         Ext.each(me.items.items, function(item){
-            if (item.name == "timeslider") {
-                timeslider = item
+            if (item.name === "timeslider") {
+                timeslider = item;
             }
-        })
+        });
         var time = me.getTimes()[timeslider.getValue()];
         var layer = BasiGX.util.Layer.getLayerByName(me.layerNameInClient);
         layer.getSource().updateParams({TIME:time});
