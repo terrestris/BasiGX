@@ -48,9 +48,7 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo',{
     onBoxReady: function(){
         var me = this;
         me.nav = Ext.create('Ext.util.KeyNav', me.el, {
-            esc: function(){
-                me.clearValue();
-            },
+            esc: me.clearValue,
             scope: me
         });
     },
@@ -74,9 +72,8 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo',{
             if(gazetteerGrid) {
                 gazetteerGrid.getEl().slideOut('t', {
                     duration: 250,
-                    callback: function(){
-                        gazetteerGrid.hide();
-                    }
+                    callback: gazetteerGrid.onGazetteerGridSlideOut,
+                    scope: gazetteerGrid
                 });
             }
         }

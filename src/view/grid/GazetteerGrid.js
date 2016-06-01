@@ -265,5 +265,16 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
         me.un('itemmouseenter', me.onItemMouseEnter, me);
         me.un('itemmouseleave', me.onItemMouseLeave, me);
         me.un('itemclick', me.onItemClick, me);
-    }
+    },
+
+    /**
+     *
+     */
+    /**
+    *
+    */
+   onGazetteerGridSlideOut: function(){
+       var me = this;
+       me.hide();
+   }
 });
