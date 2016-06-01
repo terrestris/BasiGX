@@ -56,7 +56,7 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
     },
 
     tools:[{
-        type:'minimize',
+        type: 'minimize',
         bind: {
             tooltip: '{hideToolTooltip}'
         },
