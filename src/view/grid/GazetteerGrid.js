@@ -40,7 +40,14 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
             hideToolTooltip: 'Gazetteer verbergen',
             limitCboxLabel: 'Auf den sichtbaren Kartenbereich einschränken',
             refreshBtnTooltip: 'Aktualisieren',
-            directionBtnTooltip: 'Hinweise zu Gazetteer'
+            directionBtnTooltip: 'Hinweise zu Gazetteer',
+            gazetteerHtmlHints:'Führen Sie die Maus über die Suchergebnisse, ' +
+                'um diese auf der Karte zu markieren.<br/> Klicken Sie auf ' +
+                'ein Element, um die Karte darauf zu zentrieren.<br/>' +
+                'Beachten Sie, dass einige Suchergebnisse außerhalb des ' +
+                'sichtbaren Kartenbereichs liegen können, falls die ' +
+                'Option "Auf den sichtbaren Kartenbereich einschränken" ' +
+                'abgewählt ist.'
         }
     },
 
@@ -238,19 +245,13 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
             }
         } else {
             Ext.create('Ext.window.Window', {
-                title: 'Gazetteer',
+                title: this.getViewModel().get('title'),
                 name: 'gazetteerdirections',
                 height: 200,
                 width: 400,
                 layout: 'fit',
                 bodyPadding: 5,
-                html: 'Führen Sie die Maus über die Suchergebnisse, um diese ' +
-                    'auf der Karte zu markieren.<br/> Klicken Sie auf ein ' +
-                    'Element, um die Karte darauf zu zentrieren.<br/>' +
-                    'Beachten Sie, dass einige Suchergebnisse außerhalb des ' +
-                    'sichtbaren Kartenbereichs liegen können, falls die ' +
-                    'Option "Auf den sichtbaren Kartenbereich einschränken" ' +
-                    'abgewählt ist.'
+                html: this.getViewModel().get('gazetteerHtmlHints')
             }).show();
         }
     },
@@ -267,9 +268,6 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
         me.un('itemclick', me.onItemClick, me);
     },
 
-    /**
-     *
-     */
     /**
     *
     */
