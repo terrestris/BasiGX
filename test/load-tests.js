@@ -33,6 +33,7 @@
             'view/container/OverpassSearch.test.js',
             'view/container/Redlining.test.js',
             'view/container/WfsSearch.test.js',
+            'view/container/WMSTimeSlider.test.js',
             'view/form/AddWms.test.js',
             'view/form/CoordinateTransform.test.js',
             'view/form/CsvImport.test.js',
