@@ -167,11 +167,11 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
      */
     onBoxReady: function(){
         var me = this;
-        if(!me.map){
+        if(!me.getMap()){
             var map = BasiGX.util.Map.getMapComponent().getMap();
             me.setMap(map);
         }
-        if(!me.layer){
+        if(!me.getLayer()){
             var layer = new ol.layer.Vector({
                 source: new ol.source.Vector()
             });
