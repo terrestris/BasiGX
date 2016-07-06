@@ -101,7 +101,10 @@ Ext.define("BasiGX.view.panel.MapContainer", {
             hidden: true,
             layers: [
                 new ol.layer.Tile({
-                    source: new ol.source.MapQuest({layer: 'sat'})
+                      source: new ol.source.TileWMS({
+                          url:"http://ows.terrestris.de/osm/service?",
+                          params:{"layers": "OSM-WMS","TILED":true}
+                      })
                 })
             ]
         },
