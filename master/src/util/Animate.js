@@ -117,14 +117,22 @@ Ext.define('BasiGX.util.Animate', {
 
                geometry.translate(deltaX, deltaY);
 
-               vectorContext.setFillStrokeStyle(style.getFill(), style.getStroke());
-               vectorContext.setImageStyle(style.getImage());
-               if (geometry instanceof ol.geom.Point) {
-                   vectorContext.drawPointGeometry(geometry, null);
-               } else if (geometry instanceof ol.geom.LineString) {
-                   vectorContext.drawLineStringGeometry(geometry, null);
+               if (vectorContext.setFillStrokeStyle &&
+                   vectorContext.setImageStyle &&
+                   vectorContext.drawPointGeometry) {
+                       vectorContext.setFillStrokeStyle(
+                               style.getFill(), style.getStroke());
+                       vectorContext.setImageStyle(style.getImage());
+                       if (geometry instanceof ol.geom.Point) {
+                           vectorContext.drawPointGeometry(geometry, null);
+                       } else if (geometry instanceof ol.geom.LineString) {
+                           vectorContext.drawLineStringGeometry(geometry, null);
+                       } else {
+                           vectorContext.drawPolygonGeometry(geometry, null);
+                       }
                } else {
-                   vectorContext.drawPolygonGeometry(geometry, null);
+                   vectorContext.setStyle(style);
+                   vectorContext.drawGeometry(geometry);
                }
 
                if (elapsed > duration || actualFrames >= expectedFrames) {
