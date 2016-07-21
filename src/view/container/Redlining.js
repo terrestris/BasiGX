@@ -272,6 +272,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{drawPointsBtnText}'
                },
+               name: 'drawPointsBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -294,6 +295,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{drawLinesBtnText}'
                },
+               name: 'drawLinesBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -316,6 +318,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{drawPolygonsBtnText}'
                },
+               name: 'drawPolygonsBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -373,6 +376,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{copyObjectBtnText}'
                },
+               name: 'copyObjectBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -424,6 +428,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{moveObjectBtnText}'
                },
+               name: 'moveObjectBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -489,6 +494,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{modifyObjectBtnText}'
                },
+               name: 'modifyObjectBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -533,6 +539,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{deleteObjectBtnText}'
                },
+               name: 'deleteObjectBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -589,6 +596,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{openStyleBtnText}'
                },
+               name: 'openStyleBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
