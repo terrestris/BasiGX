@@ -91,17 +91,17 @@ Ext.define("BasiGX.view.container.Redlining", {
     /**
      *
      */
+    modifySelectInteraction: null,
+
+    /**
+     *
+     */
     selectInteraction : null,
 
     /**
      *
      */
     deleteSelectInteraction : null,
-
-    /**
-     *
-     */
-    deleteModifyInteraction : null,
 
     /**
      *
@@ -272,6 +272,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{drawPointsBtnText}'
                },
+               name: 'drawPointsBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -294,6 +295,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{drawLinesBtnText}'
                },
+               name: 'drawLinesBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -316,6 +318,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{drawPolygonsBtnText}'
                },
+               name: 'drawPolygonsBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -373,24 +376,44 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{copyObjectBtnText}'
                },
+               name: 'copyObjectBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
                        if (!me.copySelectInteraction) {
                            me.copySelectInteraction =
-                               new ol.interaction.Select();
-                           me.copySelectInteraction.getFeatures().on('add',
-                               function(evt) {
+                               new ol.interaction.Select({
+                                   condition: function(evt) {
+                                       return ol.events.condition.pointerMove(
+                                           evt) || ol.events.condition.
+                                           click(evt);
+                                   },
+                                   addCondition: function(evt) {
+                                       if (evt.type === "click") {
+                                           var features = me.
+                                               copySelectInteraction.
+                                               getFeatures().getArray();
 
-                               var copyFeature = evt.element.clone();
-                               var doneFn = function(finalFeature) {
-                                   me.redlineFeatures.push(finalFeature);
-                               };
-                               BasiGX.util.Animate.moveFeature(copyFeature, 500,
-                                   100, me.getRedlineStyleFunction(), doneFn);
+                                           if (features[0]) {
+                                               var copyFeature = features[0].
+                                                   clone();
+                                               var doneFn = function(
+                                                   finalFeature) {
+                                                   me.redlineFeatures.push(
+                                                           finalFeature);
+                                               };
+                                               BasiGX.util.Animate.moveFeature(
+                                                   copyFeature, 500,
+                                                   100,
+                                                   me.getRedlineStyleFunction(),
+                                                   doneFn);
 
-                               me.copySelectInteraction.getFeatures().clear();
-                           });
+                                               me.copySelectInteraction.
+                                                   getFeatures().clear();
+                                           }
+                                       }
+                                   }
+                               });
                            me.map.addInteraction(me.copySelectInteraction);
                        }
                        if (pressed) {
@@ -405,17 +428,51 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{moveObjectBtnText}'
                },
+               name: 'moveObjectBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
                        if (!me.translateInteraction) {
                            me.translateSelectInteraction =
-                               new ol.interaction.Select();
+                               new ol.interaction.Select({
+                                   condition: ol.events.condition.pointerMove,
+                                   addCondition: function() {
+                                       var selectedFeatures =
+                                           me.translateSelectInteraction.
+                                           getFeatures();
+                                       var firstFeature = selectedFeatures.
+                                           getArray()[0];
+
+                                       if (firstFeature) {
+                                           var redlineFeature = me.
+                                               getRedlineFeatureFromClone(
+                                                       firstFeature);
+
+                                           if (me.translateFeatureCollection.
+                                                   getLength() === 0) {
+                                               me.translateFeatureCollection.
+                                                   push(redlineFeature);
+                                           } else if (me.
+                                               translateFeatureCollection.
+                                               getLength() > 0 &&
+                                               redlineFeature !== me.
+                                               translateFeatureCollection.
+                                               getArray()[0]){
+                                                   me.
+                                                   translateFeatureCollection.
+                                                   clear();
+                                                   me.
+                                                   translateFeatureCollection.
+                                                   push(redlineFeature);
+                                           }
+                                       }
+                                   }
+                               });
                            me.map.addInteraction(me.translateSelectInteraction);
+                           me.translateFeatureCollection = new ol.Collection();
                            me.translateInteraction =
                                new ol.interaction.Translate({
-                                   features: me.translateSelectInteraction
-                                       .getFeatures()
+                                   features: me.translateFeatureCollection
                            });
                            me.map.addInteraction(me.translateInteraction);
                        }
@@ -437,12 +494,26 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{modifyObjectBtnText}'
                },
+               name: 'modifyObjectBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
                        if (!me.modifyInteraction) {
+                           me.modifySelectInteraction =
+                               new ol.interaction.Select();
+                           me.modifySelectInteraction.on('select', function(evt) {
+                               if (evt.selected && evt.selected[0]) {
+                                   var feature = evt.selected[0];
+                                   if (feature.get('isPostit')) {
+                                       me.modifyPostit(feature);
+                                   }
+                               }
+                               me.modifySelectInteraction.getFeatures().clear();
+                           });
+                           me.map.addInteraction(me.modifySelectInteraction);
                            me.modifyInteraction = new ol.interaction.Modify({
                                features: me.redlineFeatures,
+                               pixelTolerance: 20,
                                deleteCondition: function(event) {
                                    return ol.events.condition
                                        .singleClick(event);
@@ -452,10 +523,12 @@ Ext.define("BasiGX.view.container.Redlining", {
                        }
                        if (pressed) {
                            me.modifyInteraction.setActive(true);
+                           me.modifySelectInteraction.setActive(true);
                            me.modifyInteraction.on('modifyend',
                                    me.fireRedliningChanged, me);
                        } else {
                            me.modifyInteraction.setActive(false);
+                           me.modifySelectInteraction.setActive(false);
                            me.modifyInteraction.un('modifyend',
                                    me.fireRedliningChanged, me);
                        }
@@ -466,30 +539,44 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{deleteObjectBtnText}'
                },
+               name: 'deleteObjectBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
                        if (!me.deleteSelectInteraction) {
+                           var removeFeatures = function(selectedFeatures) {
+                               // find the matching feature in redlining layer
+                               selectedFeatures.forEach(
+                                       function(selectedFeature) {
+                                   var feature = me.getRedlineFeatureFromClone(
+                                       selectedFeature);
+                                   if (feature) {
+                                       me.redlineFeatures.remove(feature);
+                                   }
+                                   me.deleteSelectInteraction.getFeatures().
+                                       remove(selectedFeature);
+                                   me.map.renderSync();
+                               });
+                           };
                            me.deleteSelectInteraction =
-                               new ol.interaction.Select();
+                               new ol.interaction.Select({
+                                   condition: function(evt) {
+                                       return ol.events.condition.
+                                                pointerMove(evt) ||
+                                            ol.events.condition.
+                                                click(evt);
+                                   },
+                                   addCondition: function(evt) {
+                                       if (evt.type === "click") {
+                                           var selectedFeatures =
+                                               me.deleteSelectInteraction.
+                                               getFeatures();
+                                           removeFeatures(selectedFeatures,evt);
+                                       }
+                                   }
+                               });
                            me.map.addInteraction(me.deleteSelectInteraction);
-                           me.deleteSelectInteraction.getFeatures().on('add',
-                               function(evt) {
 
-                               var deletedFeature = evt.element;
-                               me.redlineFeatures.remove(deletedFeature);
-                               evt.target.clear();
-                           });
-                           // for snapping we need a modify interaction...
-                           me.deleteModifyInteraction =
-                               new ol.interaction.Modify({
-                               features: me.redlineFeatures,
-                               deleteCondition: function(event) {
-                                   return ol.events.condition
-                                       .singleClick(event);
-                               }
-                           });
-                           me.map.addInteraction(me.deleteModifyInteraction);
                            me.deleteSnapInteraction = new ol.interaction.Snap({
                                features: me.redlineFeatures
                            });
@@ -497,11 +584,9 @@ Ext.define("BasiGX.view.container.Redlining", {
                        }
                        if (pressed) {
                            me.deleteSelectInteraction.setActive(true);
-                           me.deleteModifyInteraction.setActive(true);
                            me.deleteSnapInteraction.setActive(true);
                        } else {
                            me.deleteSelectInteraction.setActive(false);
-                           me.deleteModifyInteraction.setActive(false);
                            me.deleteSnapInteraction.setActive(false);
                        }
                    }
@@ -511,6 +596,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                bind: {
                    text: '{openStyleBtnText}'
                },
+               name: 'openStyleBtn',
                toggleGroup: 'draw',
                listeners: {
                    toggle: function(btn, pressed) {
@@ -573,6 +659,8 @@ Ext.define("BasiGX.view.container.Redlining", {
        var me = this;
        var feat = evt.element;
 
+       feat.set('isPostit', true);
+
        BasiGX.prompt(me.getViewModel().get('postItWindowTitle'), {
            fn: function(decision, text) {
                if (decision === "cancel") {
@@ -587,6 +675,22 @@ Ext.define("BasiGX.view.container.Redlining", {
 
        var button = Ext.ComponentQuery.query('button[name=postitbutton]')[0];
        button.toggle();
+   },
+
+   /**
+    * Modify a postits text
+    */
+   modifyPostit: function(feature) {
+       var me = this;
+       BasiGX.prompt(me.getViewModel().get('postItWindowTitle'), {
+           fn: function(decision, text) {
+               if (decision === "ok") {
+                   text = me.stringDivider(text, 16, '\n');
+                   me.setPostitStyleAndTextOnFeature(text, feature);
+               }
+           },
+           multiline: 150
+       });
    },
 
    /**
@@ -608,6 +712,24 @@ Ext.define("BasiGX.view.container.Redlining", {
            })
        }));
    },
+
+   /**
+    *
+    */
+    getRedlineFeatureFromClone: function(clone) {
+
+        var redlineFeature;
+        var wktParser = new ol.format.WKT();
+        var cloneWktString = wktParser.writeFeature(clone);
+        Ext.each(this.redlineFeatures.getArray(), function(feature) {
+            var redlineFeatureWktString = wktParser.writeFeature(feature);
+            if (cloneWktString === redlineFeatureWktString) {
+                redlineFeature = feature;
+                return false;
+            }
+        });
+        return redlineFeature;
+    },
 
    // http://stackoverflow.com/questions/14484787/wrap-text-in-javascript
    stringDivider: function(str, width, spaceReplacer) {
