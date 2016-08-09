@@ -280,7 +280,7 @@ Ext.define("BasiGX.view.panel.MapContainer", {
                 var layer = rec.getOlLayer();
                 var util = BasiGX.util.Layer;
                 var showKey = util.KEY_DISPLAY_IN_LAYERSWITCHER;
-                if (layer.get(showKey) === false) {
+                if (layer && layer.get(showKey) === false) {
                     return false;
                 }
                 return true;
