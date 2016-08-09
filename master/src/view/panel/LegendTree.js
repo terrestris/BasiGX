@@ -106,7 +106,8 @@ Ext.define("BasiGX.view.panel.LegendTree", {
         me.plugins = [{
             ptype: 'rowexpanderwithcomponents',
             hideExpandColumn: true,
-            rowBodyCompTemplate: me.rowBodyCompTemplate
+            rowBodyCompTemplate: me.rowBodyCompTemplate,
+            pluginId: 'rowexpanderwithcomponents'
         }];
 
         // call parent
