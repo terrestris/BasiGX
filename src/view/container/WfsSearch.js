@@ -32,7 +32,7 @@ Ext.define("BasiGX.view.container.WfsSearch", {
 
     requires: [
         'GeoExt.data.store.Features',
-        'GeoExt.grid.column.Symbolizer',
+        'GeoExt.component.FeatureRenderer',
 
         'BasiGX.util.Animate',
         'BasiGX.util.Map'
@@ -306,8 +306,20 @@ Ext.define("BasiGX.view.container.WfsSearch", {
                 store: searchResultStore,
                 columns: [
                     {
-                        xtype: 'gx_symbolizercolumn',
-                        flex: 1
+                        xtype: 'widgetcolumn',
+                        flex: 1,
+                        widget: {
+                            xtype: 'gx_renderer'
+                        },
+                        onWidgetAttach: function(column, gxRenderer, record) {
+                            // update the symbolizer with the related feature
+                            var feature = record.olObject;
+                            gxRenderer.update({
+                                feature: feature,
+                                symbolizers: GeoExt.component.FeatureRenderer
+                                    .determineStyle(record)
+                            });
+                        }
                     },
                     {
                         dataIndex: 'displayfield',
