@@ -79,7 +79,10 @@ Ext.define("BasiGX.view.panel.MobileWindow", {
                 '[0].hide();">' +
                 '</i>',
             height: 40,
-            docked: 'top'
+            docked: 'top',
+            style: {
+                'background-color': 'white'
+            }
         });
         me.add(headerPanel);
 
