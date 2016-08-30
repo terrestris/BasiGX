@@ -84,10 +84,11 @@ Ext.define("BasiGX.view.panel.MobileWindow", {
         me.add(headerPanel);
 
         if (me.getAdditionalItems().length > 0) {
-            me.add(Ext.create('Ext.Panel', {
+            me.add({
+                xtype: 'panel',
                 layout: 'vbox',
                 items: me.getAdditionalItems()
-            }));
+            });
         }
     }
 });
