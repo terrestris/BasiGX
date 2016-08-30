@@ -22,7 +22,7 @@
  * Usage Example:
  *
  * win = Ext.create('BasiGX.view.panel.MobileWindow', {
- *     title: 'Objektinformation',
+ *     panelTitle: 'Objektinformation',
  *     name: 'hsi-panel',
  *     additionalItems: [
  *         {
@@ -46,9 +46,9 @@ Ext.define("BasiGX.view.panel.MobileWindow", {
     ],
 
     config: {
-        title: '',
+        panelTitle: '',
+        scrollable: true,
         centered: true,
-        scrollable: 'y',
         minWidth: '50%',
         maxWidth: '80%',
         minHeight: '50%',
@@ -70,19 +70,24 @@ Ext.define("BasiGX.view.panel.MobileWindow", {
 
         var headerPanel = Ext.create('Ext.Container', {
             styleHtmlContent: true,
-            html: '<b>' + me.getTitle() + '</b>' +
+            padding: '10 10 10 10',
+            html: '<b>' + me.getPanelTitle() + '</b>' +
                 '<i class="fa fa-times-circle-o fa-2x" ' +
-                'style="position:absolute;right:10px;top:0px;" ' +
+                'style="position:absolute;right:10px;top:5px;" ' +
                 'onclick="Ext.ComponentQuery.query(' +
                 '\'basigx-panel-mobilewindow[name=' + me.getName() + ']\')' +
                 '[0].hide();">' +
                 '</i>',
-            flex: 1
+            height: 40,
+            docked: 'top'
         });
         me.add(headerPanel);
 
         if (me.getAdditionalItems().length > 0) {
-            me.add(me.getAdditionalItems());
+            me.add(Ext.create('Ext.Panel', {
+                layout: 'vbox',
+                items: me.getAdditionalItems()
+            }));
         }
     }
 });
