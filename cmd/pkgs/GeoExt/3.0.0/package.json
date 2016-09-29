@@ -9,11 +9,11 @@
   "signatures": [
     {
       "name": "GeoExt Contributors",
-      "uuid": "7907f625-13df-4d10-9f37-faf8fb293223",
-      "created": "2016-08-23T15:42:00Z",
+      "uuid": "d0eebb60-8a61-415c-b93c-695227e6f93e",
+      "created": "2016-09-27T10:52:33Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "26AkkdZXtaA\u003d",
-      "signature": "n520jHEQQuTaSRKi6OQf8KCrgR56WK/FmPz2x2pjsBg17Rv93I6FgyVKJrukAjbUnZcp1CthMPi6ovmgP2ETRG95bH7pJ97QYVsnXqri4imzmTuW38Fai0AJInH41bYXCBuSknEUOQvwJ6cshpJOi5m4qpMf1aHXdj3fClfiQ9KwobY+z11j7RO4cJiSWJA5ztvbK+KYOpdBsPhuL2qX0Ax4ABiCL3Touih2N8QUMJcsd4BJldhKcwVJxkv0B7kmdMyGLhBr2tp7GQMIB8fM0eOWjQn8+MPUSe+5uIm0UDhQBz1doK+ukkvSGtUKKeEsv30TR7A3P4p9QB0J9ngVtw\u003d\u003d"
+      "nonce": "u6D4VXAH8PE\u003d",
+      "signature": "C+iCc6wZvM+sXS9+BGf8KDZ3CE9ogl4tonTU4QVshpt7Y0kEE9dvUYAhRplq+0PK7AoYV7EOJKoyxEJ8JdQQmbR5/D6K1U02L/xwmOuJsS9tlXsHXmAGEGZht9snyurTJJrr/isdiXaVC2zO7Ebj/9cwQa/4XY+WmI9HmDryoWxsKJ+PmjNZKe4C96qk4pIoiJvUHrIRcZ9LruBCx5qzYeSn3pCVt0X64d8tE8m9Lwh6VXQSP3YD3mAmt2fIwB92rBvRBqbeKnsJ48PUTE23LFOLLWG8F1wQ+mgVLCwawWR5yD1XQwa2kSD2MoCcMct/1Ji4q0w3beJ/bUNDcI65EA\u003d\u003d"
     }
   ],
   "slicer": {
@@ -45,24 +45,24 @@
     "start": "browser-sync start --server --directory --files \u0027src, test, examples\u0027",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "generate:example": "node bin/example-generator/index.js",
-    "generate:doc": "jsduck --config jsduck-cfg.json"
+    "generate:docs": "jsduck --config jsduck.json"
   },
   "dependencies": {},
   "devDependencies": {
-    "browser-sync": "2.12.5",
-    "coveralls": "2.11.9",
-    "eslint": "2.8.0",
-    "eslint-config-openlayers": "4.1.0",
+    "browser-sync": "2.16.0",
+    "coveralls": "2.11.14",
+    "eslint": "3.6.1",
+    "eslint-config-openlayers": "5.0.0",
     "expect.js": "0.3.1",
-    "karma": "0.13.22",
-    "karma-coverage": "0.5.5",
+    "karma": "1.3.0",
+    "karma-coverage": "1.1.1",
     "karma-eslint": "2.1.0",
-    "karma-expect": "1.1.2",
-    "karma-mocha": "0.2.2",
-    "karma-phantomjs-launcher": "1.0.0",
-    "karma-sinon": "1.0.4",
-    "mocha": "2.4.5",
-    "phantomjs-prebuilt": "2.1.7",
-    "sinon": "1.17.3"
+    "karma-expect": "1.1.3",
+    "karma-mocha": "1.2.0",
+    "karma-phantomjs-launcher": "1.0.2",
+    "karma-sinon": "1.0.5",
+    "mocha": "3.1.0",
+    "phantomjs-prebuilt": "2.1.12",
+    "sinon": "1.17.6"
   }
 }

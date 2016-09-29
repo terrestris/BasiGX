@@ -632,6 +632,7 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
             oldImage.getStroke().getWidth) {
             fallBackStrokeWidth = oldImage.getStroke().getWidth();
         }
+
         var style = new ol.style.Style({
             image: pointStyle.radius || pointStyle.fillcolor ||
             pointStyle.fillopacity || pointStyle.strokewidth ||
@@ -648,8 +649,10 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                     width: pointStyle.strokewidth ? pointStyle.strokewidth :
                         fallBackStrokeWidth
                 })
-            }) : oldImage
+            }) : oldImage,
+            text: oldStyle.getText() || new ol.style.Text()
         });
+
         return style;
     },
 
@@ -664,7 +667,8 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                     oldStyle.getStroke().getColor(),
                 width: lineStyle.strokewidth ? lineStyle.strokewidth :
                     oldStyle.getStroke().getWidth()
-            }) : oldStyle.getStroke()
+            }) : oldStyle.getStroke(),
+            text: oldStyle.getText() || new ol.style.Text()
         });
         return style;
     },
@@ -684,7 +688,8 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                     oldStyle.getStroke().getColor(),
                 width: polygonStyle.strokewidth ? polygonStyle.strokewidth :
                     oldStyle.getStroke().getWidth()
-            }) : oldStyle.getStroke()
+            }) : oldStyle.getStroke(),
+            text: oldStyle.getText() || new ol.style.Text()
         });
         return style;
     },
