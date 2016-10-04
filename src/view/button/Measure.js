@@ -172,14 +172,13 @@ Ext.define("BasiGX.view.button.Measure", {
                     })
                 })
             });
+            // Set our internal flag to filter this layer out of the tree / legend
+            var noLayerSwitcherKey = BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+            me.measureVectorLayer.set(noLayerSwitcherKey, false);
             me.map.addLayer(me.measureVectorLayer);
         } else {
             me.measureVectorLayer = measureLayer;
         }
-
-        // Set our internal flag to filter this layer out of the tree / legend
-        var noLayerSwitcherKey = BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
-        me.measureVectorLayer.set(noLayerSwitcherKey, false);
 
         var type = (me.measureType === 'line' ? 'MultiLineString' : 'MultiPolygon');
         me.drawAction = new ol.interaction.Draw({
