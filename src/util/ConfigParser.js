@@ -543,7 +543,7 @@ Ext.define('BasiGX.util.ConfigParser', {
                     attributions: attributions,
                     params: {
                         LAYERS: config.layers,
-                        TRANSPARENT: config.transparent || false,
+                        TRANSPARENT: config.transparent || true,
                         VERSION: config.version || '1.1.1'
                     }
                 };
