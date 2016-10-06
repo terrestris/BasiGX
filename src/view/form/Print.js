@@ -251,8 +251,8 @@ Ext.define("BasiGX.view.form.Print", {
                 attributes.legend = view.getLegendObject();
             } else if (field.getName() === 'scalebar') {
                 attributes.scalebar = view.getScaleBarObject();
-            } else if (field.getName() === 'northArrow') {
-                attributes.scalebar = view.getNorthArrowObject();
+            } else if (field.getName() === 'northArrowDef') {
+                attributes.northArrowDef = view.getNorthArrowObject();
             } else {
                 attributes[field.getName()] = field.getValue();
             }
@@ -283,6 +283,7 @@ Ext.define("BasiGX.view.form.Print", {
     },
 
     addParentCollapseExpandListeners: function(){
+
         var parent = this.up();
         parent.on({
             collapse: 'cleanupPrintExtent',
@@ -559,13 +560,13 @@ Ext.define("BasiGX.view.form.Print", {
 
     addAttributeFields: function(attributeRec, fieldset){
         var me = this;
-        var olView = me.getMapComponent().getMap().getView();
+        var map = me.getMapComponent().getMap();
 
         var attributeFields;
         switch (attributeRec.get('type')) {
             case "MapAttributeValues":
                 attributeFields = me.getMapAttributeFields(attributeRec);
-                olView.on('propertychange', me.renderAllClientInfos, me);
+                map.on('moveend', me.renderAllClientInfos, me);
                 break;
             case "NorthArrowAttributeValues":
                 attributeFields = me.getNorthArrowAttributeFields(attributeRec);
@@ -600,10 +601,14 @@ Ext.define("BasiGX.view.form.Print", {
     },
 
     /**
-     * TODO: NB: Enhance performance! This method seems to be called too often!
+     * Method is used to adjust a print infos (e.g. dimensions or extent
+     * rectangle on the map) after print layout was changed or map was zoomed
+     * or paned
      */
     renderAllClientInfos: function(){
+
         var view = this;
+
         if (view._renderingClientExtents || view.getCollapsed() !== false) {
             return;
         }
@@ -611,9 +616,11 @@ Ext.define("BasiGX.view.form.Print", {
 
         view.extentLayer.getSource().clear();
 
-        var fieldsets = view.query(
-            'fieldset[name=attributes] fieldset[name=map]'
-        );
+        if (view && view.items) {
+            var fieldsets = view.query(
+                    'fieldset[name=attributes] fieldset[name=map]'
+            );
+        }
 
         Ext.each(fieldsets, function(fieldset){
             if (this.getMapComponent() && view.extentLayer &&
@@ -628,9 +635,16 @@ Ext.define("BasiGX.view.form.Print", {
         delete view._renderingClientExtents;
     },
 
+    /**
+     * This method removes the print extent rectangle from client after print
+     * window was closed. Additionally `moveend` event on the map will
+     * be unregistered here.
+     */
     cleanupPrintExtent: function(){
         var view = this;
+        var map = view.getMapComponent().getMap();
         view.extentLayer.getSource().clear();
+        map.un('moveend', view.renderAllClientInfos, view);
     },
 
     getLegendObject: function() {
