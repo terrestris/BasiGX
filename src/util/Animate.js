@@ -62,18 +62,20 @@ Ext.define('BasiGX.util.Animate', {
              var radius = ol.easing.easeOut(elapsedRatio) * 25 + 5;
              var opacity = ol.easing.easeOut(1 - elapsedRatio);
 
-             var flashStyle = new ol.style.Circle({
-               radius: radius,
-               snapToPixel: false,
-               stroke: new ol.style.Stroke({
-                 color: 'rgba(255, 0, 0, ' + opacity + ')',
-                 width: 4,
-                 opacity: opacity
-               })
+             var flashStyle = new ol.style.Style({
+                 image: new ol.style.Circle({
+                     radius: radius,
+                     snapToPixel: false,
+                     stroke: new ol.style.Stroke({
+                         color: 'rgba(255, 0, 0, ' + opacity + ')',
+                         width: 4,
+                         opacity: opacity
+                     })
+                 })
              });
 
-             vectorContext.setImageStyle(flashStyle);
-             vectorContext.drawPointGeometry(flashGeom, null);
+             vectorContext.setStyle(flashStyle);
+             vectorContext.drawGeometry(flashGeom, null);
              if (elapsed > duration) {
                ol.Observable.unByKey(listenerKey);
                return;
