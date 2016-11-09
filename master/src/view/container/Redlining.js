@@ -620,6 +620,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                                })
                            });
                            me.stylerWindow.on("close", function() {
+                               me.fireRedliningChanged();
                                btn.toggle();
                            });
                        }
