@@ -61,19 +61,38 @@ Ext.define('BasiGX.util.Animate', {
              // radius will be 5 at start and 30 at end.
              var radius = ol.easing.easeOut(elapsedRatio) * 25 + 5;
              var opacity = ol.easing.easeOut(1 - elapsedRatio);
+             var flashStyle;
 
-             var flashStyle = new ol.style.Circle({
-               radius: radius,
-               snapToPixel: false,
-               stroke: new ol.style.Stroke({
-                 color: 'rgba(255, 0, 0, ' + opacity + ')',
-                 width: 4,
-                 opacity: opacity
-               })
-             });
+             if (vectorContext.setStyle && vectorContext.drawGeometry) {
+                 // for ol3 versions from v3.15.0
+                 flashStyle = new ol.style.Style({
+                     image: new ol.style.Circle({
+                         radius: radius,
+                         snapToPixel: false,
+                         stroke: new ol.style.Stroke({
+                             color: 'rgba(255, 0, 0, ' + opacity + ')',
+                             width: 4,
+                             opacity: opacity
+                         })
+                     })
+                 });
+                 vectorContext.setStyle(flashStyle);
+                 vectorContext.drawGeometry(flashGeom, null);
+             } else {
+                 // for ol3 versions older v3.15.0
+                 flashStyle = new ol.style.Circle({
+                     radius: radius,
+                     snapToPixel: false,
+                     stroke: new ol.style.Stroke({
+                         color: 'rgba(255, 0, 0, ' + opacity + ')',
+                         width: 4,
+                         opacity: opacity
+                     })
+                 });
+                 vectorContext.setImageStyle(flashStyle);
+                 vectorContext.drawPointGeometry(flashGeom, null);
+             }
 
-             vectorContext.setImageStyle(flashStyle);
-             vectorContext.drawPointGeometry(flashGeom, null);
              if (elapsed > duration) {
                ol.Observable.unByKey(listenerKey);
                return;
