@@ -1,4 +1,4 @@
-/* Copyright (c) 2015 terrestris GmbH & Co. KG
+/* Copyright (c) 2016 terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,6 +20,14 @@
  *  This class is used by BasiGX.view.form.field.MultiSearchCombo
  *
  * @class BasiGX.view.container.MultiSearchSettings
+ *
+ * @extends Ext.container.Container
+ *
+ * @requires BasiGX.util.Layer
+ * @requires Ext.form.field.Checkbox
+ * @requires Ext.form.FieldContainer
+ * @requires Ext.Button
+ *
  */
 Ext.define("BasiGX.view.container.MultiSearchSettings", {
     extend: 'Ext.container.Container',
@@ -27,7 +35,9 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
 
     requires: [
         "BasiGX.util.Layer",
-        "Ext.form.field.Checkbox"
+        "Ext.form.field.Checkbox",
+        "Ext.form.FieldContainer",
+        "Ext.Button"
     ],
 
     viewModel: {
@@ -35,7 +45,7 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
             generalSettingsLabel: "Allgemeine Einstellungen",
             limitCboxLabel: "Auf den sichtbaren Kartenbereich einschränken",
             gazetteerLabel: "Gazetteer Suche verwenden",
-            objectSearchLabel: "Object Suche verwenden",
+            objectSearchLabel: "Objekt Suche verwenden",
             objectSearchLayersLabel: "Layer für Objektsuche",
             saveBtnText: "Sucheinstellungen speichern"
         }
@@ -125,7 +135,9 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
     },
 
     /**
-    *
+    * called by "save"-button handler to persist the settings.
+    * This includes switching the gazetter or wfs search on and off, limiting
+    * search results to visible map extent and configuring search layers.
     */
     saveSettings: function(btn) {
         var me = btn.up();
@@ -134,8 +146,10 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
 
         var form = me.down('form');
 
+        var combo = me.getCombo();
+
         // set configured search layers to null and add the wanted below
-        me.getCombo().setConfiguredSearchLayers([]);
+        combo.setConfiguredSearchLayers([]);
 
         // set all configured values
         Ext.each(form.items.items, function(parentItem) {
@@ -143,11 +157,11 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
 
                 Ext.each(parentItem.items.items, function(item) {
                     if (item.name === 'objectsearch'){
-                        me.getCombo().setWfsSearch(item.checked);
+                        combo.setWfsSearch(item.checked);
                     } else if (item.name === 'gazetteersearch'){
-                        me.getCombo().setGazetteerSearch(item.checked);
+                        combo.setGazetteerSearch(item.checked);
                     } else if (item.name === 'limitcheckbox'){
-                        me.getCombo().setLimitToBBox(item.checked);
+                        combo.setLimitToBBox(item.checked);
                     }
                 });
 
@@ -156,7 +170,7 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
                 Ext.each(parentItem.items.items, function(item) {
                     var l = BasiGX.util.Layer.getLayerByName(item.name);
                     if (this.checked) {
-                        me.getCombo().configuredSearchLayers.push(l);
+                        combo.configuredSearchLayers.push(l);
                     }
                 });
 
@@ -166,13 +180,14 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
         });
 
         win.setLoading(true);
-        me.getCombo().refreshSearchResults();
+        me.combo.refreshSearchResults();
         win.setLoading(false);
         win.close();
     },
 
     /**
-    *
+    * called by OnBeforerender listener to get all configurable search layers
+    * to display them in the settings window
     */
     addLayers: function() {
         var me = this;
@@ -189,7 +204,7 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
                 checked: true
             });
 
-            container.items.items.push(item);
+            container.add(item);
 
         });
 
