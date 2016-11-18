@@ -19,6 +19,14 @@
  *  This class is used by BasiGX.view.form.field.MultiSearchCombo
  *
  * @class BasiGX.view.grid.MultiSearchGazetteerGrid
+ *
+ * @extends Ext.grid.Panel
+ *
+ * @requires BasiGX.store.GazetteerSearch
+ * @requires BasiGX.util.Map
+ * @requires BasiGX.util.Layer
+ * @requires BasiGX.util.Animate
+ *
  */
 Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
     extend: 'Ext.grid.Panel',
@@ -107,7 +115,7 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
     },
 
     /**
-     *
+     * Called by OnBoxeady listener to add the search layer
      */
     onBoxReady: function(){
         var me = this;
@@ -128,7 +136,8 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
     },
 
     /**
-     *
+     * Called by OnItemmouseenter listener to highlight the hovered search
+     * results on the map
      */
     onItemMouseEnter: function(grid, record){
         var me = this;
@@ -142,7 +151,8 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
     },
 
     /**
-     *
+     * Called by OnItemmouseleave listener to unhighlight the search
+     * results on the map
      */
     onItemMouseLeave: function(){
         var me = this;
@@ -151,7 +161,7 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
     },
 
     /**
-     *
+     * Called by OnItemclick listener to center map on clicked item
      */
     onItemClick: function(grid, record){
         var me = this;
@@ -166,7 +176,7 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
     },
 
     /**
-     *
+     * Called by OnHide listener to deactivate all listeners when inactive
      */
     unregisterListeners: function() {
         var me = this;
@@ -178,7 +188,11 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
     },
 
     /**
-    *
+    * called by BasiGX.view.form.field.MultiSearchCombo.doGazetteerSearch()
+    * This method does the actual search by updating the according store.
+    * It decides if the search should be done in the visible extent only.
+     * @param {string} value The search term
+     * @param {boolean} limitToBBox Search is limited to visible extent
     */
     doGazetteerSearch: function(value, limitToBBox){
 

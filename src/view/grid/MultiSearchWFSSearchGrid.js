@@ -19,6 +19,15 @@
  *  This class is used by BasiGX.view.form.field.MultiSearchCombo
  *
  * @class BasiGX.view.grid.MultiSearchWFSSearchGrid
+ *
+ * @extends Ext.grid.Panel
+ *
+ * @requires GeoExt.component.FeatureRenderer
+ * @requires GeoExt.data.store.Features
+ * @requires BasiGX.util.Map
+ * @requires BasiGX.util.Layer
+ * @requires BasiGX.util.Animate
+ *
  */
 Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
     extend: 'Ext.grid.Panel',
@@ -134,9 +143,9 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
 
         flashStyle: function() {
             return [new ol.style.Style({
-                    image: new ol.style.Circle({
-                        radius: 5
-                    })
+                image: new ol.style.Circle({
+                    radius: 5
+                })
             })];
         }
 
@@ -155,7 +164,9 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
     *
     */
     columns: [
-              // TODO gx_renderer doesn't render all features every time
+              /**
+               * @todo gx_renderer doesn't render all features every time
+               */
 //        {
 //            xtype: 'widgetcolumn',
 //            flex: 1,
@@ -231,7 +242,11 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
 
 
     /**
-    *
+    * called by BasiGX.view.form.field.MultiSearchCombo.doObjectSearch()
+    * This method starts the search by requesting the WFS-DescribyFeatureType
+    * for all wanted layers.
+     * @param {string} searchterm The search term
+     * @param {} combo The calling combobox to set it on the WFSGrid
     */
     describeFeatureTypes: function(searchterm, combo) {
         var me = this,
@@ -260,15 +275,12 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
             TYPENAME: typeNames.toString()
         };
 
-        var url = combo.getWfsServerUrl() + "?";
-        Ext.iterate(describeFeatureTypeParams, function(k, v) {
-            url += k + "=" + v + "&";
-        });
-
         me.setLoading(true);
 
         Ext.Ajax.request({
-            url: url,
+            url: combo.getWfsServerUrl(),
+            params: describeFeatureTypeParams,
+            method: 'GET',
             success: function(response){
                 me.setLoading(false);
                 if(Ext.isString(response.responseText)) {
@@ -290,8 +302,11 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
     },
 
     /**
-    *
-    */
+     * called by describeFeatureTypeResponse event fired by successfull
+     * describeFeatureTypes() response
+     * This method requests the actual features fitting to the search term
+      * @param {} resp The ajax response containing DescribeFeatureType
+     */
     getFeatures: function(resp) {
         var me = this;
         var featureTypes = resp.featureTypes;
@@ -328,7 +343,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
     },
 
     /**
-    *
+    * called by getFeatures() for less vulnerability
     */
     cleanUpFeatureDataTypes: function(featureTypes) {
         var me = this,
@@ -351,7 +366,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
     },
 
     /**
-    *
+    * called by getFeatures() to build the Post Body
+    * It decides if the search should be done in the visible extent only.
     */
     setupXmlPostBody: function(featureTypes) {
         var me = this;
@@ -412,12 +428,15 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
     },
 
     /**
-    *
+    * called by getFeatureResponse event fired by successfull response of
+    * getFeatures()
+    * This method parses the features and adds them to the store
     */
     showSearchResults: function(features) {
 
-        var me = this,
-            parser = new ol.format.GeoJSON();
+        var me = this;
+        var combo = me.getCombo();
+        var parser = new ol.format.GeoJSON();
 
         if (!features) {
             Ext.log.error("No feature found");
@@ -443,8 +462,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
                 feature.properties.featuretype = featuretype;
 
                 var olFeat = parser.readFeatures(feature, {
-                    dataProjection: 'EPSG:32648',
-                    featureProjection: 'EPSG:3857'
+                    dataProjection: combo.getWfsDataProjection(),
+                    featureProjection: combo.getWfsFeatureProjection()
                 })[0];
                 me.searchResultVectorLayer.getSource().addFeature(olFeat);
 
@@ -454,7 +473,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
     },
 
     /**
-    *
+    * called by OnBoxready listener to add search layer
     */
     onBoxReady: function(){
         var me = this;
@@ -464,7 +483,6 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
         }
         if(!me.getLayer()){
             var layer = new ol.layer.Vector({
-                name: "me.getLayer layer",
                 source: new ol.source.Vector()
             });
             var displayInLayerSwitcherKey =
@@ -476,7 +494,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
     },
 
     /**
-    *
+    * called by OnHide to deactivate all listeners when not needed
     */
     unregisterListeners: function() {
         var me = this;
@@ -489,18 +507,9 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
     },
 
     /**
-    *
-    */
-    updateRenderer: function(item, style){
-        var renderer = Ext.getCmp(
-            Ext.query('div[id^=gx_renderer', true, item)[0].id);
-        var src = renderer.map.getLayers().getArray()[0].getSource();
-        src.getFeatures()[0].setStyle(style);
-    },
-
-    /**
-    *
-    */
+     * Called by OnItemmouseenter listener to highlight the hovered search
+     * results on the map
+     */
     highlightFeature: function(tableView, record) {
 
         var me = this;
@@ -518,7 +527,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
     },
 
     /**
-     *
+     * Called by OnItemmouseleave listener to unhighlight the search
+     * results on the map
      */
     unhighlightFeature: function(tableView, record) {
 
@@ -535,7 +545,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
     },
 
     /**
-     *
+     * Called by OnItemclick listener to center map on clicked item
      */
     highlightSelectedFeature: function(tableView, record) {
 
@@ -543,8 +553,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
         var layer = me.getLayer();
         var feature = record.getFeature();
         var extent;
-        var X;
-        var Y;
+        var x;
+        var y;
 
         layer.getSource().clear();
 
@@ -553,10 +563,10 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{
             feature.setStyle(me.getSearchResultSelectFeatureStyle());
             layer.getSource().addFeature(feature);
             extent = feature.getGeometry().getExtent();
-            X = extent[0] + (extent[2]-extent[0])/2;
-            Y = extent[1] + (extent[3]-extent[1])/2;
+            x = extent[0] + (extent[2]-extent[0])/2;
+            y = extent[1] + (extent[3]-extent[1])/2;
 
-            me.getMap().getView().setCenter([X, Y]);
+            me.getMap().getView().setCenter([x, y]);
         }
 
     }

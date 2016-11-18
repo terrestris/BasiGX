@@ -14,14 +14,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
+ *
  * Multisearch combo used to search in the glorious dataset of OSM combined
  * with a WFS search searching through configurable layers. This class calls
  * BasiGX.view.container.MultiSearchSettings to configure settings and
  * BasiGX.view.grid.MultiSearchWFSSearchGrid as well as
  * BasiGX.view.grid.MultiSearchGazetteerGrid to show search results.
+ * This component assumes the use of only one
+ * BasiGX.util.Map.getMapComponent().getMap().
  *
- * Example usage:
- *
+ * @example
  *     {
  *         xtype: 'basigx-form-field-multisearch',
  *         config: {
@@ -33,6 +35,13 @@
  *     }
  *
  * @class BasiGX.view.form.field.MultiSearchCombo
+ *
+ * @extends Ext.form.field.ComboBox
+ *
+ * @requires BasiGX.util.Map
+ * @requires BasiGX.view.container.MultiSearchSettings
+ * @requires BasiGX.view.grid.MultiSearchWFSSearchGrid
+ * @requires BasiGX.view.grid.MultiSearchGazetteerGrid
  *
  */
 Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
@@ -64,6 +73,10 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
         wfsServerUrl: null,
 
         wfsPrefix: null,
+
+        wfsDataProjection: null,
+
+        wfsFeatureProjection: null,
 
         gazetteerSearch: true,
 
@@ -145,6 +158,14 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
         });
     },
 
+    /**
+     *
+     * Called by the onChange listener.
+     * When a search term is typed into the combobox, this method will trigger
+     * the included searches or fades out.
+     * @param {} the combo itself
+     * @param {string} the new value that was just typed
+     */
     onComboValueChange: function(combo, newValue){
         var me = this;
 
@@ -180,6 +201,12 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
         }
     },
 
+    /**
+     * Called by onComboValueChange() to start the gazetteer search.
+     * This method also handles inactive status if configured before.
+     * @param {string} value The typed search term of the user
+     * @param {boolean} limitToBBox Search is limited to visible extent
+     */
     doGazetteerSearch: function(value, limitToBBox){
 
         var me = this;
@@ -195,11 +222,17 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
                 gazetteerGrid.getStore().removeAll();
             }
         } else {
-            Ext.log.error("ObjectSearchGrid not found");
+            Ext.log.error("Gazetteer SearchGrid not found");
         }
 
     },
 
+    /**
+     * Called by onComboValueChange() to start the object search.
+     * This method also handles inactive status if configured before.
+     * @param {string} value The typed search term of the user
+     *
+     */
     doObjectSearch: function(value){
 
         var me = this;
@@ -220,39 +253,46 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
 
     },
 
+    /**
+     * Called by onComboValueChange() to build a container with the gazetteer
+     * grid and the object search grid containing all search results.
+     * This method builds the container at the bottom of the searchfield.
+     */
     showResults: function() {
         var me = this;
         var parentItem;
+        var parentRegion;
         var position;
         var searchContainer;
 
         if (!me.searchContainer) {
 
             parentItem = me.getEl();
+            parentRegion = parentItem.getClientRegion();
 
             position = {
-                    top: parentItem.getClientRegion().bottom + "px",
-                    left: parentItem.getClientRegion().left + "px",
-                    width: parentItem.getWidth() + "px"
+                top: parentRegion.bottom + "px",
+                left: parentRegion.left + "px",
+                width: parentItem.getWidth() + "px"
             };
 
             searchContainer = Ext.create(Ext.container.Container, {
                 renderTo: Ext.getBody(),
 
                 items: [
-                        {
-                            xtype: me.getGazetteerGrid()
-                        },{
-                            xtype: me.getWfsSearchGrid()
-                        }
-                        ],
+                    {
+                        xtype: me.getGazetteerGrid()
+                    },{
+                        xtype: me.getWfsSearchGrid()
+                    }
+                ],
 
-                        width: position.width,
+                width: position.width,
 
-                        style: {
-                            'top': position.top,
-                            'left': position.left
-                        }
+                style: {
+                    top: position.top,
+                    left: position.left
+                }
 
             });
 
@@ -262,6 +302,9 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
         me.searchContainer.show();
     },
 
+    /**
+     * Called by the refresh-trigger to search again.
+     */
     refreshSearchResults: function(){
         var me = this;
 
@@ -275,6 +318,10 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
         }
     },
 
+    /**
+     * Called by the settings-trigger to build a window containing the
+     * settings container
+     */
     showSettingsWindow: function(){
         var me = this;
         var settingsWindow;
