@@ -26,6 +26,7 @@
             'view/button/ZoomIn.test.js',
             'view/button/ZoomOut.test.js',
             'view/button/ZoomToExtent.test.js',
+            'view/combo/Language.test.js',
             'view/combo/ScaleCombo.test.js',
             'view/component/Map.test.js',
             'view/container/LayerSlider.test.js',

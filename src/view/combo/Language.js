@@ -286,9 +286,11 @@ Ext.define('BasiGX.view.combo.Language', {
                     var viewModel = configurator.values.viewModel;
                     var type = viewModel.type;
                     // if the component has an own viewModel instance
-                    if (!Ext.isEmpty(type)) {
+                    if (!Ext.isEmpty(type) || Ext.isString(viewModel)) {
+                        var viewName = type || viewModel;
                         var viewClassName = Ext.ClassManager.getName(
-                                Ext.ClassManager.getByAlias('viewmodel.' + type));
+                                Ext.ClassManager
+                                    .getByAlias('viewmodel.' + viewName));
                         baseLocaleObj.override = viewClassName;
                         Ext.define(viewClassName, baseLocaleObj);
                     } else if (!Ext.isEmpty(viewModel)) {
