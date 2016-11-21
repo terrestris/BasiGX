@@ -1,61 +1,9 @@
-/* Copyright (c) 2016 terrestris GmbH & Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-/**
- *
- * CSRF Util
- *
- * Some methods to access the csrf-token information served by spring security
- *
- * @class BasiGX.util.CSRF
- */
-Ext.define('BasiGX.util.CSRF', {
 
-    statics: {
-        /**
-        * Get the CSRF token value.
-        *
-        * @return {String} - the key value, e.g. "741a3b1-221f-4d1d-..."
-        */
-        getValue: function() {
-            return Ext.DomQuery.select('meta[name=_csrf]')[0].content;
-        },
-
-        /**
-        * Get the CSRF token key.
-        *
-        * @return {String} - the key string, e.g. "X-CSRF-TOKEN"
-        */
-        getKey: function() {
-            return Ext.DomQuery.select('meta[name=_csrf_header]')[0].content;
-        },
-
-        /**
-        * Get the full CSRF token object.
-        *
-        * @return {Object} header - the header containing the csrf key and value
-        */
-        getHeader: function() {
-            var me = this,
-                header = {},
-                headerName = me.getKey(),
-                headerVal = me.getValue();
-
-            header[headerName] = headerVal;
-
-            return header;
-        }
-    }
-});
+var __cov_e1FxRsyM01T8HsFVLj5KXg = (Function('return this'))();
+if (!__cov_e1FxRsyM01T8HsFVLj5KXg.__coverage__) { __cov_e1FxRsyM01T8HsFVLj5KXg.__coverage__ = {}; }
+__cov_e1FxRsyM01T8HsFVLj5KXg = __cov_e1FxRsyM01T8HsFVLj5KXg.__coverage__;
+if (!(__cov_e1FxRsyM01T8HsFVLj5KXg['/home/travis/build/terrestris/BasiGX/src/util/CSRF.js'])) {
+   __cov_e1FxRsyM01T8HsFVLj5KXg['/home/travis/build/terrestris/BasiGX/src/util/CSRF.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/CSRF.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0},"b":{},"f":{"1":0,"2":0,"3":0},"fnMap":{"1":{"name":"(anonymous_1)","line":32,"loc":{"start":{"line":32,"column":18},"end":{"line":32,"column":29}}},"2":{"name":"(anonymous_2)","line":41,"loc":{"start":{"line":41,"column":16},"end":{"line":41,"column":27}}},"3":{"name":"(anonymous_3)","line":50,"loc":{"start":{"line":50,"column":19},"end":{"line":50,"column":30}}}},"statementMap":{"1":{"start":{"line":24,"column":0},"end":{"line":61,"column":3}},"2":{"start":{"line":33,"column":12},"end":{"line":33,"column":70}},"3":{"start":{"line":42,"column":12},"end":{"line":42,"column":77}},"4":{"start":{"line":51,"column":12},"end":{"line":54,"column":42}},"5":{"start":{"line":56,"column":12},"end":{"line":56,"column":43}},"6":{"start":{"line":58,"column":12},"end":{"line":58,"column":26}}},"branchMap":{}};
+}
+__cov_e1FxRsyM01T8HsFVLj5KXg = __cov_e1FxRsyM01T8HsFVLj5KXg['/home/travis/build/terrestris/BasiGX/src/util/CSRF.js'];
+__cov_e1FxRsyM01T8HsFVLj5KXg.s['1']++;Ext.define('BasiGX.util.CSRF',{statics:{getValue:function(){__cov_e1FxRsyM01T8HsFVLj5KXg.f['1']++;__cov_e1FxRsyM01T8HsFVLj5KXg.s['2']++;return Ext.DomQuery.select('meta[name=_csrf]')[0].content;},getKey:function(){__cov_e1FxRsyM01T8HsFVLj5KXg.f['2']++;__cov_e1FxRsyM01T8HsFVLj5KXg.s['3']++;return Ext.DomQuery.select('meta[name=_csrf_header]')[0].content;},getHeader:function(){__cov_e1FxRsyM01T8HsFVLj5KXg.f['3']++;__cov_e1FxRsyM01T8HsFVLj5KXg.s['4']++;var me=this,header={},headerName=me.getKey(),headerVal=me.getValue();__cov_e1FxRsyM01T8HsFVLj5KXg.s['5']++;header[headerName]=headerVal;__cov_e1FxRsyM01T8HsFVLj5KXg.s['6']++;return header;}}});

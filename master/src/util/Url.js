@@ -1,78 +1,9 @@
-/*global Ext, window*/
-/* Copyright (c) 2015 terrestris GmbH & Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-/**
- * Layer Util
- *
- * Some methods to work with ol-layers
- *
- * @class BasiGX.util.Url
- */
-Ext.define('BasiGX.util.Url', {
-    statics: {
 
-        /**
-         * Returns an URL params value from the current location or the given
-         * optional url.
-         *
-         * @param {String} key The key to search for
-         * @param {String} [url=location.href] The url to search in.
-         */
-        getParamValue: function(key, url){
-            var re = new RegExp('[\\?&]' + (key + "") + '=([^&#]*)'),
-                regexResult = re.exec(url || window.location.href),
-                value;
-            if (regexResult) {
-                value = decodeURIComponent(regexResult[1]);
-            }
-            return value;
-        },
-
-        /**
-         * Returns the URL of the used application like this
-         *
-         *   http://localhost:8080/Tribulus/client/gizmo/index-dev.html?
-         */
-        getCurrentAppUrl: function() {
-
-            return window.location.protocol + "//" + window.location.host + window.location.pathname + "?";
-        },
-
-        /**
-         * Return the name of the web project like this
-         *
-         *   Tribulus
-         */
-        getWebProjectBaseUrl: function() {
-
-            var url = window.location.protocol + "//" + window.location.host,
-                webProjectName = window.location.pathname.match(/\/[A-Za-z\-]*\//)[0];
-
-            return url + webProjectName;
-        },
-
-        /**
-         * Return the name of the basepath of the project like this
-         *
-         * http://somehost:someport/
-         */
-        getProjectBaseUrl: function() {
-            var baseUrl = window.location.protocol + "//" + window.location.host + "/";
-            return baseUrl;
-        }
-
-    }
-});
+var __cov_0wNnbVvswlPSEm1rSeUerQ = (Function('return this'))();
+if (!__cov_0wNnbVvswlPSEm1rSeUerQ.__coverage__) { __cov_0wNnbVvswlPSEm1rSeUerQ.__coverage__ = {}; }
+__cov_0wNnbVvswlPSEm1rSeUerQ = __cov_0wNnbVvswlPSEm1rSeUerQ.__coverage__;
+if (!(__cov_0wNnbVvswlPSEm1rSeUerQ['/home/travis/build/terrestris/BasiGX/src/util/Url.js'])) {
+   __cov_0wNnbVvswlPSEm1rSeUerQ['/home/travis/build/terrestris/BasiGX/src/util/Url.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Url.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0},"b":{"1":[0,0],"2":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0},"fnMap":{"1":{"name":"(anonymous_1)","line":34,"loc":{"start":{"line":34,"column":23},"end":{"line":34,"column":41}}},"2":{"name":"(anonymous_2)","line":49,"loc":{"start":{"line":49,"column":26},"end":{"line":49,"column":37}}},"3":{"name":"(anonymous_3)","line":59,"loc":{"start":{"line":59,"column":30},"end":{"line":59,"column":41}}},"4":{"name":"(anonymous_4)","line":72,"loc":{"start":{"line":72,"column":27},"end":{"line":72,"column":38}}}},"statementMap":{"1":{"start":{"line":24,"column":0},"end":{"line":78,"column":3}},"2":{"start":{"line":35,"column":12},"end":{"line":37,"column":22}},"3":{"start":{"line":38,"column":12},"end":{"line":40,"column":13}},"4":{"start":{"line":39,"column":16},"end":{"line":39,"column":59}},"5":{"start":{"line":41,"column":12},"end":{"line":41,"column":25}},"6":{"start":{"line":51,"column":12},"end":{"line":51,"column":107}},"7":{"start":{"line":61,"column":12},"end":{"line":62,"column":86}},"8":{"start":{"line":64,"column":12},"end":{"line":64,"column":40}},"9":{"start":{"line":73,"column":12},"end":{"line":73,"column":87}},"10":{"start":{"line":74,"column":12},"end":{"line":74,"column":27}}},"branchMap":{"1":{"line":36,"type":"binary-expr","locations":[{"start":{"line":36,"column":38},"end":{"line":36,"column":41}},{"start":{"line":36,"column":45},"end":{"line":36,"column":65}}]},"2":{"line":38,"type":"if","locations":[{"start":{"line":38,"column":12},"end":{"line":38,"column":12}},{"start":{"line":38,"column":12},"end":{"line":38,"column":12}}]}}};
+}
+__cov_0wNnbVvswlPSEm1rSeUerQ = __cov_0wNnbVvswlPSEm1rSeUerQ['/home/travis/build/terrestris/BasiGX/src/util/Url.js'];
+__cov_0wNnbVvswlPSEm1rSeUerQ.s['1']++;Ext.define('BasiGX.util.Url',{statics:{getParamValue:function(key,url){__cov_0wNnbVvswlPSEm1rSeUerQ.f['1']++;__cov_0wNnbVvswlPSEm1rSeUerQ.s['2']++;var re=new RegExp('[\\?&]'+(key+'')+'=([^&#]*)'),regexResult=re.exec((__cov_0wNnbVvswlPSEm1rSeUerQ.b['1'][0]++,url)||(__cov_0wNnbVvswlPSEm1rSeUerQ.b['1'][1]++,window.location.href)),value;__cov_0wNnbVvswlPSEm1rSeUerQ.s['3']++;if(regexResult){__cov_0wNnbVvswlPSEm1rSeUerQ.b['2'][0]++;__cov_0wNnbVvswlPSEm1rSeUerQ.s['4']++;value=decodeURIComponent(regexResult[1]);}else{__cov_0wNnbVvswlPSEm1rSeUerQ.b['2'][1]++;}__cov_0wNnbVvswlPSEm1rSeUerQ.s['5']++;return value;},getCurrentAppUrl:function(){__cov_0wNnbVvswlPSEm1rSeUerQ.f['2']++;__cov_0wNnbVvswlPSEm1rSeUerQ.s['6']++;return window.location.protocol+'//'+window.location.host+window.location.pathname+'?';},getWebProjectBaseUrl:function(){__cov_0wNnbVvswlPSEm1rSeUerQ.f['3']++;__cov_0wNnbVvswlPSEm1rSeUerQ.s['7']++;var url=window.location.protocol+'//'+window.location.host,webProjectName=window.location.pathname.match(/\/[A-Za-z\-]*\//)[0];__cov_0wNnbVvswlPSEm1rSeUerQ.s['8']++;return url+webProjectName;},getProjectBaseUrl:function(){__cov_0wNnbVvswlPSEm1rSeUerQ.f['4']++;__cov_0wNnbVvswlPSEm1rSeUerQ.s['9']++;var baseUrl=window.location.protocol+'//'+window.location.host+'/';__cov_0wNnbVvswlPSEm1rSeUerQ.s['10']++;return baseUrl;}}});

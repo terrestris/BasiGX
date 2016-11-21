@@ -1,80 +1,9 @@
-/* Copyright (c) 2015 terrestris GmbH & Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-/**
- * Permalink Button
- *
- * Button used to open a permalink window.
- *
- * @class BasiGX.view.button.Permalink
- */
-Ext.define("BasiGX.view.button.Permalink", {
-    extend: "Ext.Button",
-    xtype: 'basigx-button-permalink',
 
-    requires: [
-        'Ext.window.Window',
-        'Ext.app.ViewModel',
-        'BasiGX.view.form.Permalink',
-        'BasiGX.util.Animate',
-        'BasiGX.util.Application'
-    ],
-
-    /**
-     *
-     */
-    viewModel: {
-        data: {
-            tooltip: 'Permalink erzeugen',
-            text: 'Permalink',
-            windowTitle: 'Link zur Anwendung'
-        }
-    },
-
-    bind: {
-        text: '{text}'
-    },
-
-    config: {
-        handler: function(){
-            var win = Ext.ComponentQuery.query('[name=permalink-window]')[0];
-            if(!win){
-                Ext.create('Ext.window.Window', {
-                    name: 'permalink-window',
-                    title: this.getViewModel().get('windowTitle'),
-                    layout: 'fit',
-                    items: [{
-                        xtype: 'basigx-form-permalink'
-                    }]
-                }).show();
-            } else {
-                BasiGX.util.Animate.shake(win);
-            }
-        }
-    },
-
-    /**
-     *
-     */
-    constructor: function(config) {
-        this.callParent([config]);
-
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
-        }
-    }
-});
+var __cov_GpplK_WRcJT7TGll46UASw = (Function('return this'))();
+if (!__cov_GpplK_WRcJT7TGll46UASw.__coverage__) { __cov_GpplK_WRcJT7TGll46UASw.__coverage__ = {}; }
+__cov_GpplK_WRcJT7TGll46UASw = __cov_GpplK_WRcJT7TGll46UASw.__coverage__;
+if (!(__cov_GpplK_WRcJT7TGll46UASw['/home/travis/build/terrestris/BasiGX/src/view/button/Permalink.js'])) {
+   __cov_GpplK_WRcJT7TGll46UASw['/home/travis/build/terrestris/BasiGX/src/view/button/Permalink.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/Permalink.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0},"b":{"1":[0,0],"2":[0,0]},"f":{"1":0,"2":0},"fnMap":{"1":{"name":"(anonymous_1)","line":51,"loc":{"start":{"line":51,"column":17},"end":{"line":51,"column":27}}},"2":{"name":"(anonymous_2)","line":71,"loc":{"start":{"line":71,"column":17},"end":{"line":71,"column":34}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":80,"column":3}},"2":{"start":{"line":52,"column":12},"end":{"line":52,"column":77}},"3":{"start":{"line":53,"column":12},"end":{"line":64,"column":13}},"4":{"start":{"line":54,"column":16},"end":{"line":61,"column":26}},"5":{"start":{"line":63,"column":16},"end":{"line":63,"column":47}},"6":{"start":{"line":72,"column":8},"end":{"line":72,"column":34}},"7":{"start":{"line":74,"column":8},"end":{"line":78,"column":9}},"8":{"start":{"line":75,"column":12},"end":{"line":75,"column":40}},"9":{"start":{"line":76,"column":12},"end":{"line":76,"column":62}},"10":{"start":{"line":77,"column":12},"end":{"line":77,"column":31}}},"branchMap":{"1":{"line":53,"type":"if","locations":[{"start":{"line":53,"column":12},"end":{"line":53,"column":12}},{"start":{"line":53,"column":12},"end":{"line":53,"column":12}}]},"2":{"line":74,"type":"if","locations":[{"start":{"line":74,"column":8},"end":{"line":74,"column":8}},{"start":{"line":74,"column":8},"end":{"line":74,"column":8}}]}}};
+}
+__cov_GpplK_WRcJT7TGll46UASw = __cov_GpplK_WRcJT7TGll46UASw['/home/travis/build/terrestris/BasiGX/src/view/button/Permalink.js'];
+__cov_GpplK_WRcJT7TGll46UASw.s['1']++;Ext.define('BasiGX.view.button.Permalink',{extend:'Ext.Button',xtype:'basigx-button-permalink',requires:['Ext.window.Window','Ext.app.ViewModel','BasiGX.view.form.Permalink','BasiGX.util.Animate','BasiGX.util.Application'],viewModel:{data:{tooltip:'Permalink erzeugen',text:'Permalink',windowTitle:'Link zur Anwendung'}},bind:{text:'{text}'},config:{handler:function(){__cov_GpplK_WRcJT7TGll46UASw.f['1']++;__cov_GpplK_WRcJT7TGll46UASw.s['2']++;var win=Ext.ComponentQuery.query('[name=permalink-window]')[0];__cov_GpplK_WRcJT7TGll46UASw.s['3']++;if(!win){__cov_GpplK_WRcJT7TGll46UASw.b['1'][0]++;__cov_GpplK_WRcJT7TGll46UASw.s['4']++;Ext.create('Ext.window.Window',{name:'permalink-window',title:this.getViewModel().get('windowTitle'),layout:'fit',items:[{xtype:'basigx-form-permalink'}]}).show();}else{__cov_GpplK_WRcJT7TGll46UASw.b['1'][1]++;__cov_GpplK_WRcJT7TGll46UASw.s['5']++;BasiGX.util.Animate.shake(win);}}},constructor:function(config){__cov_GpplK_WRcJT7TGll46UASw.f['2']++;__cov_GpplK_WRcJT7TGll46UASw.s['6']++;this.callParent([config]);__cov_GpplK_WRcJT7TGll46UASw.s['7']++;if(this.setTooltip){__cov_GpplK_WRcJT7TGll46UASw.b['2'][0]++;__cov_GpplK_WRcJT7TGll46UASw.s['8']++;var bind=this.config.bind;__cov_GpplK_WRcJT7TGll46UASw.s['9']++;bind.tooltip=this.getViewModel().get('tooltip');__cov_GpplK_WRcJT7TGll46UASw.s['10']++;this.setBind(bind);}else{__cov_GpplK_WRcJT7TGll46UASw.b['2'][1]++;}}});

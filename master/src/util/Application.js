@@ -1,62 +1,9 @@
-/* Copyright (c) 2015 terrestris GmbH & Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-/**
- * Application Util
- *
- * Some methods to work with application
- *
- * @class BasiGX.util.Application
- */
-Ext.define('BasiGX.util.Application', {
 
-    requires: [
-        'BasiGX.util.Layer',
-        'BasiGX.util.Map'
-        ],
-
-    statics: {
-
-        getAppContext: function(mapComponentXType){
-            var mapComponent = BasiGX.util.Map.getMapComponent(mapComponentXType);
-
-            if(mapComponent && mapComponent.appContext){
-                return mapComponent.appContext.data.merge;
-            } else {
-                return null;
-            }
-        },
-
-        getRoute: function(mapComponentXType){
-            var mapComponent = BasiGX.util.Map.getMapComponent(mapComponentXType);
-            var map = mapComponent.getMap();
-            var zoom = map.getView().getZoom();
-            var center = map.getView().getCenter().toString();
-            var visibleLayers = BasiGX.util.Layer
-                .getVisibleLayers(map);
-            var visibleLayerRoutingIds = [];
-
-            Ext.each(visibleLayers, function(layer){
-                visibleLayerRoutingIds.push(layer.get('routingId'));
-            });
-
-            var hash = 'center/' + center +
-                       '|zoom/' + zoom +
-                       '|layers/' + visibleLayerRoutingIds.toString();
-
-            return hash;
-        }
-    }
-});
+var __cov_$OfAed7J38XESAEYWcewyw = (Function('return this'))();
+if (!__cov_$OfAed7J38XESAEYWcewyw.__coverage__) { __cov_$OfAed7J38XESAEYWcewyw.__coverage__ = {}; }
+__cov_$OfAed7J38XESAEYWcewyw = __cov_$OfAed7J38XESAEYWcewyw.__coverage__;
+if (!(__cov_$OfAed7J38XESAEYWcewyw['/home/travis/build/terrestris/BasiGX/src/util/Application.js'])) {
+   __cov_$OfAed7J38XESAEYWcewyw['/home/travis/build/terrestris/BasiGX/src/util/Application.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Application.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0},"b":{"1":[0,0],"2":[0,0]},"f":{"1":0,"2":0,"3":0},"fnMap":{"1":{"name":"(anonymous_1)","line":32,"loc":{"start":{"line":32,"column":23},"end":{"line":32,"column":50}}},"2":{"name":"(anonymous_2)","line":42,"loc":{"start":{"line":42,"column":18},"end":{"line":42,"column":45}}},"3":{"name":"(anonymous_3)","line":51,"loc":{"start":{"line":51,"column":36},"end":{"line":51,"column":51}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":62,"column":3}},"2":{"start":{"line":33,"column":12},"end":{"line":33,"column":82}},"3":{"start":{"line":35,"column":12},"end":{"line":39,"column":13}},"4":{"start":{"line":36,"column":16},"end":{"line":36,"column":58}},"5":{"start":{"line":38,"column":16},"end":{"line":38,"column":28}},"6":{"start":{"line":43,"column":12},"end":{"line":43,"column":82}},"7":{"start":{"line":44,"column":12},"end":{"line":44,"column":44}},"8":{"start":{"line":45,"column":12},"end":{"line":45,"column":47}},"9":{"start":{"line":46,"column":12},"end":{"line":46,"column":62}},"10":{"start":{"line":47,"column":12},"end":{"line":48,"column":39}},"11":{"start":{"line":49,"column":12},"end":{"line":49,"column":44}},"12":{"start":{"line":51,"column":12},"end":{"line":53,"column":15}},"13":{"start":{"line":52,"column":16},"end":{"line":52,"column":68}},"14":{"start":{"line":55,"column":12},"end":{"line":57,"column":70}},"15":{"start":{"line":59,"column":12},"end":{"line":59,"column":24}}},"branchMap":{"1":{"line":35,"type":"if","locations":[{"start":{"line":35,"column":12},"end":{"line":35,"column":12}},{"start":{"line":35,"column":12},"end":{"line":35,"column":12}}]},"2":{"line":35,"type":"binary-expr","locations":[{"start":{"line":35,"column":15},"end":{"line":35,"column":27}},{"start":{"line":35,"column":31},"end":{"line":35,"column":54}}]}}};
+}
+__cov_$OfAed7J38XESAEYWcewyw = __cov_$OfAed7J38XESAEYWcewyw['/home/travis/build/terrestris/BasiGX/src/util/Application.js'];
+__cov_$OfAed7J38XESAEYWcewyw.s['1']++;Ext.define('BasiGX.util.Application',{requires:['BasiGX.util.Layer','BasiGX.util.Map'],statics:{getAppContext:function(mapComponentXType){__cov_$OfAed7J38XESAEYWcewyw.f['1']++;__cov_$OfAed7J38XESAEYWcewyw.s['2']++;var mapComponent=BasiGX.util.Map.getMapComponent(mapComponentXType);__cov_$OfAed7J38XESAEYWcewyw.s['3']++;if((__cov_$OfAed7J38XESAEYWcewyw.b['2'][0]++,mapComponent)&&(__cov_$OfAed7J38XESAEYWcewyw.b['2'][1]++,mapComponent.appContext)){__cov_$OfAed7J38XESAEYWcewyw.b['1'][0]++;__cov_$OfAed7J38XESAEYWcewyw.s['4']++;return mapComponent.appContext.data.merge;}else{__cov_$OfAed7J38XESAEYWcewyw.b['1'][1]++;__cov_$OfAed7J38XESAEYWcewyw.s['5']++;return null;}},getRoute:function(mapComponentXType){__cov_$OfAed7J38XESAEYWcewyw.f['2']++;__cov_$OfAed7J38XESAEYWcewyw.s['6']++;var mapComponent=BasiGX.util.Map.getMapComponent(mapComponentXType);__cov_$OfAed7J38XESAEYWcewyw.s['7']++;var map=mapComponent.getMap();__cov_$OfAed7J38XESAEYWcewyw.s['8']++;var zoom=map.getView().getZoom();__cov_$OfAed7J38XESAEYWcewyw.s['9']++;var center=map.getView().getCenter().toString();__cov_$OfAed7J38XESAEYWcewyw.s['10']++;var visibleLayers=BasiGX.util.Layer.getVisibleLayers(map);__cov_$OfAed7J38XESAEYWcewyw.s['11']++;var visibleLayerRoutingIds=[];__cov_$OfAed7J38XESAEYWcewyw.s['12']++;Ext.each(visibleLayers,function(layer){__cov_$OfAed7J38XESAEYWcewyw.f['3']++;__cov_$OfAed7J38XESAEYWcewyw.s['13']++;visibleLayerRoutingIds.push(layer.get('routingId'));});__cov_$OfAed7J38XESAEYWcewyw.s['14']++;var hash='center/'+center+'|zoom/'+zoom+'|layers/'+visibleLayerRoutingIds.toString();__cov_$OfAed7J38XESAEYWcewyw.s['15']++;return hash;}}});
