@@ -126,7 +126,9 @@ Ext.define("BasiGX.view.combo.ScaleCombo", {
         me.callParent([arguments]);
 
         // set the correct default value
-        me.setValue(me.map.getView().getResolution());
+        var defaultScale = Math.round(me.getCurrentScale(
+                me.map.getView().getResolution())).toLocaleString();
+        me.setValue('1:' + defaultScale);
 
         // register listeners to update combo and map
         me.on('select', function(combo, rec) {
@@ -172,6 +174,6 @@ Ext.define("BasiGX.view.combo.ScaleCombo", {
             dpi = 25.4 / 0.28,
             mpu = ol.proj.METERS_PER_UNIT[units],
             scale = resolution * mpu * 39.37 * dpi;
-        return scale;
+        return scale.toFixed(0);
     }
 });
