@@ -356,7 +356,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                            var src = me.getPostitImgSrc();
 
                            me.drawPostitInteraction = new ol.interaction.Draw({
-                               features: me.redlineFeatures,
+                               features: new ol.Collection(),
                                type: 'Point',
                                style: new ol.style.Style({
                                    image: new ol.style.Icon({
@@ -371,10 +371,12 @@ Ext.define("BasiGX.view.container.Redlining", {
                        }
                        if (pressed) {
                            me.drawPostitInteraction.setActive(true);
-                           me.redlineFeatures.on("add", me.handlePostitAdd, me);
+                           me.drawPostitInteraction.on('drawend',
+                               me.setDefaultPostitStyle, me);
                        } else {
                            me.drawPostitInteraction.setActive(false);
-                           me.redlineFeatures.un("add", me.handlePostitAdd, me);
+                           me.drawPostitInteraction.un('drawend',
+                               me.setDefaultPostitStyle, me);
                        }
                    }
                }
@@ -663,9 +665,28 @@ Ext.define("BasiGX.view.container.Redlining", {
    /**
     *
     */
-   handlePostitAdd: function(evt, oldText) {
+   setDefaultPostitStyle: function(evt) {
        var me = this;
-       var feat = evt.element;
+       var feature = evt.feature;
+       if (feature) {
+           feature.setStyle(new ol.style.Style({
+               image: new ol.style.Icon({
+                   anchorXUnits: 'fraction',
+                   anchorYUnits: 'pixels',
+                   opacity: 0.75,
+                   src: me.getPostitImgSrc()
+               })
+           }));
+           var clone = evt.feature.clone();
+           me.handlePostitAdd(clone);
+       }
+   },
+
+   /**
+    *
+    */
+   handlePostitAdd: function(feat, oldText) {
+       var me = this;
 
        feat.set('isPostit', true);
 
@@ -683,7 +704,7 @@ Ext.define("BasiGX.view.container.Redlining", {
                                    me.setPostitStyleAndTextOnFeature(
                                        text, feat);
                                } else {
-                                   me.handlePostitAdd(evt, text);
+                                   me.handlePostitAdd(feat, text);
                                }
                            }
                        });
@@ -704,16 +725,32 @@ Ext.define("BasiGX.view.container.Redlining", {
    /**
     * Modify a postits text
     */
-   modifyPostit: function(feature) {
+   modifyPostit: function(feature, oldText) {
        var me = this;
        BasiGX.prompt(me.getViewModel().get('postItWindowTitle'), {
            fn: function(decision, text) {
                if (decision === "ok") {
-                   text = me.stringDivider(text, 16, '\n');
-                   me.setPostitStyleAndTextOnFeature(text, feature);
+                   if (text.length > me.postitTextMaxLength) {
+                       BasiGX.confirm(me.getViewModel().get(
+                           'postItInputTooLongText'), {
+                           fn: function(choice) {
+                               if (choice === "yes") {
+                                   text = me.stringDivider(text, 16, '\n');
+                                   me.setPostitStyleAndTextOnFeature(
+                                       text, feature);
+                               } else {
+                                   me.modifyPostit(feature, text);
+                               }
+                           }
+                       });
+                   } else {
+                       text = me.stringDivider(text, 16, '\n');
+                       me.setPostitStyleAndTextOnFeature(text, feature);
+                   }
                }
            },
-           multiline: 150
+           multiline: 150,
+           value: oldText
        });
    },
 
@@ -735,6 +772,7 @@ Ext.define("BasiGX.view.container.Redlining", {
              offsetY: 80
            })
        }));
+       me.redlineFeatures.push(feat);
    },
 
    /**
