@@ -44,7 +44,9 @@ Ext.define("BasiGX.view.container.Redlining", {
             openStyleBtnText: 'Styler',
             stylerWindowTitle: 'Styler',
             postItWindowTitle: 'Enter the Post-its text',
-            postItWindowCreatePostItBtnText: 'Create Post-it'
+            postItWindowCreatePostItBtnText: 'Create Post-it',
+            postItInputTooLongText: 'The text you have entered is too long. ' +
+                'Do you want to continue anyway?'
         }
     },
 
@@ -153,6 +155,11 @@ Ext.define("BasiGX.view.container.Redlining", {
         * It is highly recommended that you set your own image source here
         */
        postitPictureUrl: null,
+
+       /**
+        * The maximum length of text allowed for the postit
+        */
+       postitTextMaxLength: 130,
 
       /**
        *
@@ -656,7 +663,7 @@ Ext.define("BasiGX.view.container.Redlining", {
    /**
     *
     */
-   handlePostitAdd: function(evt) {
+   handlePostitAdd: function(evt, oldText) {
        var me = this;
        var feat = evt.element;
 
@@ -667,15 +674,31 @@ Ext.define("BasiGX.view.container.Redlining", {
                if (decision === "cancel") {
                    me.redlineFeatures.remove(feat);
                } else {
-                   text = me.stringDivider(text, 16, '\n');
-                   me.setPostitStyleAndTextOnFeature(text, feat);
+                   if (text.length > me.postitTextMaxLength) {
+                       BasiGX.confirm(me.getViewModel().get(
+                           'postItInputTooLongText'), {
+                           fn: function(choice) {
+                               if (choice === "yes") {
+                                   text = me.stringDivider(text, 16, '\n');
+                                   me.setPostitStyleAndTextOnFeature(
+                                       text, feat);
+                               } else {
+                                   me.handlePostitAdd(evt, text);
+                               }
+                           }
+                       });
+                   } else {
+                       text = me.stringDivider(text, 16, '\n');
+                       me.setPostitStyleAndTextOnFeature(text, feat);
+                   }
                }
            },
-           multiline: 150
+           multiline: 150,
+           value: oldText
        });
 
        var button = Ext.ComponentQuery.query('button[name=postitbutton]')[0];
-       button.toggle();
+       button.toggle(false);
    },
 
    /**
