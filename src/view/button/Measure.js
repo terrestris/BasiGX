@@ -136,6 +136,19 @@ Ext.define("BasiGX.view.button.Measure", {
      */
     showMeasureInfoOnClickedPoints: false,
 
+    /**
+     * An object holding keyed `ol.EventsKey` instances returned by the `on`
+     * method of `ol.Observable`. These keys are used to unbind temporary
+     * listeners on events of the `ol.interaction.Draw` or `ol.Map`. The keys
+     * are the names of the events on the various objects. The `click` key is
+     * not always bound, but only for certain #measureType values.
+     *
+     * In #cleanUp, we unbind all events we have bound so as to not leak
+     * memory, and to ensure we have no concurring listeners being active at a
+     * time (E.g. when multiple measure buttons are in an application).
+     *
+     * @type {Object}
+     */
     eventKeys: {
         drawstart: null,
         drawend: null,
