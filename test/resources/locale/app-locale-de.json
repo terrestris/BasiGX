@@ -1,0 +1,11 @@
+{
+    "BasiGX.view.button.AddWms": {
+        "config": {
+            "data": {
+                "tooltip": "Open Add-WMS tool",
+                "text": "WMS",
+                "windowTitle": "Add WMS"
+            }
+        }
+    }
+}
