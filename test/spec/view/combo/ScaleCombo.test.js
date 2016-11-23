@@ -5,12 +5,16 @@ Ext.Loader.syncRequire([
 
 describe('BasiGX.view.combo.ScaleCombo', function() {
     var div;
+    var componentDiv;
     var map;
     var combo;
     var mapComponent;
     beforeEach(function() {
         div = document.createElement('div');
         document.body.appendChild(div);
+        componentDiv = document.createElement('div');
+        document.body.appendChild(componentDiv);
+
         map = new ol.Map({
             target: div,
             view: new ol.View({
@@ -18,7 +22,8 @@ describe('BasiGX.view.combo.ScaleCombo', function() {
             })
         });
         mapComponent = Ext.create('GeoExt.component.Map', {
-            map: map
+            map: map,
+            renderTo: componentDiv
         });
         combo = Ext.create('BasiGX.view.combo.ScaleCombo', {
             map: map
@@ -31,6 +36,8 @@ describe('BasiGX.view.combo.ScaleCombo', function() {
         map = null;
         document.body.removeChild(div);
         div = null;
+        document.body.removeChild(componentDiv);
+        componentDiv = null;
     });
 
     describe('Basics', function() {

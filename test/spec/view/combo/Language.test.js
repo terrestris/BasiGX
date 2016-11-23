@@ -6,6 +6,7 @@ describe('BasiGX.view.combo.Language', function() {
     var combo;
     beforeEach(function() {
         combo = Ext.create('BasiGX.view.combo.Language', {
+            onLoadAppLocaleFailure: function() {}
         });
     });
     afterEach(function() {
