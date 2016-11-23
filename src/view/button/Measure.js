@@ -14,9 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * Measure Tool Button
+ * A measure tool button.
  *
- * Mainly influenced by ol3 examples
+ * Mainly influenced by ol3 examples.
  *
  * @class BasiGX.view.button.Measure
  */
@@ -37,6 +37,7 @@ Ext.define("BasiGX.view.button.Measure", {
        data: {
            textline: 'Strecke messen',
            textpoly: 'Fläche messen',
+           textangle: 'Winkel messen',
            continuePolygonMsg: 'Klicken zum Zeichnen der Fläche',
            continueLineMsg: 'Klicken zum Zeichnen der Strecke',
            clickToDrawText: 'Klicken zum Messen'
@@ -70,36 +71,41 @@ Ext.define("BasiGX.view.button.Measure", {
 
     /**
      * Currently drawn feature.
+     *
      * @type {ol.Feature}
      */
     sketch: null,
 
     /**
      * The help tooltip element.
+     *
      * @type {Element}
      */
     helpTooltipElement: null,
 
     /**
      * Overlay to show the help messages.
+     *
      * @type {ol.Overlay}
      */
     helpTooltip: null,
 
     /**
      * The measure tooltip element.
+     *
      * @type {Element}
      */
     measureTooltipElement: null,
 
     /**
      * Overlay to show the measurement.
+     *
      * @type {ol.Overlay}
      */
     measureTooltip: null,
 
     /**
-     * used to allow / disallow multiple drawings at a time on the map
+     * Used to allow / disallow multiple drawings at a time on the map
      */
     allowOnlyOneDrawing: true,
 
@@ -119,72 +125,178 @@ Ext.define("BasiGX.view.button.Measure", {
     decimalPlacesInToolTips: 2,
 
     /**
-     * determine if a area / line greater than 10000
-     * should be switched to km instead of m in popups
+     * Determine if a area / line greater than 10000 should be switched to km
+     * instead of m in popups.
      */
     switchToKmOnLargeValues: true,
 
     /**
-     * determines if a marker with current measurement should be shown every
+     * Determines if a marker with current measurement should be shown every
      * time the user clicks while drawing
      */
     showMeasureInfoOnClickedPoints: false,
+
+    eventKeys: {
+        drawstart: null,
+        drawend: null,
+        pointermove: null,
+        click: null
+    },
+
+    /**
+     * An array of created divs we use for the tooltips. Used to eventually
+     * clean up everything we added.
+     *
+     * @type{Array<HTMLDivElement>}
+     */
+    createdTooltipDivs: [],
+
+    /**
+     * An array of created overlay we use for the tooltips. Used to eventually
+     * clean up everything we added.
+     *
+     * @type{Array<ol.Overlay>}
+     */
+    createdTooltipOverlays: [],
+
+    statics: {
+
+        /**
+         * CSS classes we'll assign to the popups from measuring. use these to
+         * style the text of the popups / overlays.
+         */
+        CSS_CLASSES: {
+
+            /**
+             * Every tooltip will have these classes. The unprefixed 'tooltip'
+             * is kept for backwards compatibility only and should not be used
+             * anymore for styling.
+             */
+            TOOLTIP: 'basigx-measure-tooltip tooltip',
+
+            /**
+             * Measurement tooltips with the everchanging values will have these
+             * classes. The unprefixed 'tooltip-measure' is kept for backwards
+             * compatibility only and should not be used anymore for styling.
+             */
+            TOOLTIP_DYNAMIC: 'basigx-measure-tooltip-dynamic tooltip-measure',
+
+            /**
+             * The tooltips for finished measurements will have these classes.
+             * The unprefixed 'tooltip-static' is kept for backwards
+             * compatibility only and should not be used anymore for styling.
+             */
+            TOOLTIP_STATIC: 'basigx-measure-tooltip-static tooltip-static',
+
+            /**
+             * A utility method that turns the passed space separated CSS class
+             * names into a selector.
+             *
+             *     BasiGX.view.button.Measure.CSS_CLASSES.toSelector('foo bar');
+             *     // returns '.foo.bar'
+             *
+             * @param {String} classStr The space separated names of classes.
+             * @return {String} A selector that can be used to query the DOM.
+             */
+            toSelector: function(classStr) {
+                var dot = '.';
+                return dot + classStr.split(' ').join(dot);
+            }
+        }
+    },
 
     /**
      *
      */
     constructor: function(config) {
         var me = this;
-        me.callParent([config]);
+        var LayerUtil = BasiGX.util.Layer;
 
-        var source = new ol.source.Vector({
-                features: new ol.Collection()
-            }),
-            measureLayer;
+        me.callParent([config]);
 
         me.map = BasiGX.util.Map.getMapComponent().getMap();
 
-        var btnText = (me.measureType === 'line' ? '{textline}' : '{textpoly}');
+        var btnText = me.btnTextByType();
         me.setBind({
             text: btnText,
             tooltip: btnText
         });
 
-        measureLayer = BasiGX.util.Layer.getLayerByName('measurelayer');
+        var nameMeasureLayer = LayerUtil.NAME_MEASURE_LAYER;
+        var measureLayer = LayerUtil.getLayerByName(nameMeasureLayer);
 
         if (Ext.isEmpty(measureLayer)) {
-            me.measureVectorLayer = new ol.layer.Vector({
-                name: 'measurelayer',
-                source: source,
-                style: new ol.style.Style({
-                    fill: new ol.style.Fill({
-                        color: me.fillColor
-                    }),
-                    stroke: new ol.style.Stroke({
-                        color: me.strokeColor,
-                        width: 2
-                    }),
-                    image: new ol.style.Circle({
-                        radius: 7,
-                        fill: new ol.style.Fill({
-                            color: me.fillColor
-                        })
-                    })
-                })
-            });
-            // Set our internal flag to filter this layer out of the tree / legend
-            var noLayerSwitcherKey = BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
-            me.measureVectorLayer.set(noLayerSwitcherKey, false);
-            me.map.addLayer(me.measureVectorLayer);
-        } else {
-            me.measureVectorLayer = measureLayer;
+            measureLayer = me.createMeasureLayer();
+            me.map.addLayer(measureLayer);
         }
 
-        var type = (me.measureType === 'line' ? 'MultiLineString' : 'MultiPolygon');
-        me.drawAction = new ol.interaction.Draw({
+        me.measureVectorLayer = measureLayer;
+
+        me.drawAction = me.drawInteractionByMeasureType();
+        me.drawAction.on('change:active', me.onDrawInteractionActiveChange, me);
+
+        me.drawAction.setActive(false);
+        me.map.addInteraction(me.drawAction);
+
+        me.on('toggle', me.onBtnToggle, me);
+    },
+
+    /**
+     *
+     */
+    onDrawInteractionActiveChange: function() {
+        var me = this;
+        if (me.drawAction.getActive()) {
+            me.createHelpTooltip();
+            me.createMeasureTooltip();
+        } else {
+            me.removeHelpTooltip();
+            me.removeMeasureTooltip();
+        }
+    },
+
+    /**
+     * Called when the button is toggled, this method ensures that everything
+     * is cleaned up when unpressed, and that measuring can start when pressed.
+     *
+     * @param {Ext.Button} btn The measure button itself.
+     * @param {Boolean} pressed Whether the biutton is now pressed or not.
+     */
+    onBtnToggle: function(btn, pressed) {
+        btn.cleanUp();
+        if (pressed) {
+            btn.drawAction.setActive(true);
+            btn.eventKeys.drawstart = btn.drawAction.on(
+                'drawstart', btn.drawStart, btn
+            );
+            btn.eventKeys.drawend = btn.drawAction.on(
+                'drawend', btn.drawEnd, btn
+            );
+            var throttledPointerMove = Ext.Function.createThrottled(
+                btn.pointerMoveHandler, 50, btn
+            );
+            btn.eventKeys.pointermove = btn.map.on(
+                'pointermove', throttledPointerMove
+            );
+        }
+    },
+
+    /**
+     * Creates a correctly configured OpenLayers draw interaction depending on
+     * the configured #measureType.
+     *
+     * @return {ol.interaction.Draw} The created interaction, which is not yet
+     *     added to the map.
+     */
+    drawInteractionByMeasureType: function() {
+        var me = this;
+        var drawType = me.drawTypeByMeasureType();
+        var maxPoints = me.measureType === 'angle' ? 2 : undefined;
+        var interaction = new ol.interaction.Draw({
             name: 'drawaction',
-            source: source,
-            type: type,
+            source: me.measureVectorLayer.getSource(),
+            type: drawType,
+            maxPoints: maxPoints,
             style: new ol.style.Style({
                 fill: new ol.style.Fill({
                     color: me.fillColor
@@ -203,71 +315,141 @@ Ext.define("BasiGX.view.button.Measure", {
                         color: me.fillColor
                     })
                 })
-            })
-        });
-        me.drawAction.setActive(false);
-        me.map.addInteraction(me.drawAction);
-        me.on('toggle', function(btn, pressed) {
-            if (pressed) {
-                me.drawAction.setActive(true);
-                me.createMeasureTooltip();
-                me.createHelpTooltip();
-                me.drawAction.on('drawstart', me.drawStart, me);
-                me.drawAction.on('drawend', me.drawEnd, me);
-                me.map.on('pointermove', me.pointerMoveHandler, me);
-            } else {
-                // we need to cleanup and return
-                me.cleanUp(me);
+            }),
+            freehandCondition: function() {
+                return false;
             }
         });
+        return interaction;
     },
 
     /**
+     * Creates a correctly setup vector layer on which the draw interaction will
+     * work.
      *
+     * @return {ol.layer.Vector} The layer on which the draw interaction will
+     *     work.
      */
-    cleanUp: function(me) {
+    createMeasureLayer: function() {
+        var me = this;
+        var LayerUtil = BasiGX.util.Layer;
+        var nameMeasureLayer = LayerUtil.NAME_MEASURE_LAYER;
+        var noLayerSwitcherKey = LayerUtil.KEY_DISPLAY_IN_LAYERSWITCHER;
+
+        var measureLayer = new ol.layer.Vector({
+            name: nameMeasureLayer,
+            source: new ol.source.Vector({
+                features: new ol.Collection()
+            }),
+            style: new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: me.fillColor
+                }),
+                stroke: new ol.style.Stroke({
+                    color: me.strokeColor,
+                    width: 2
+                }),
+                image: new ol.style.Circle({
+                    radius: 7,
+                    fill: new ol.style.Fill({
+                        color: me.fillColor
+                    })
+                })
+            })
+        });
+        // Set our internal flag to filter this layer out of the tree / legend
+        measureLayer.set(noLayerSwitcherKey, false);
+
+        return measureLayer;
+    },
+
+    /**
+     * Examines the #measureType property of the this button an returns the
+     * type to use for drawing vectors, either `'MultiLineString'` or
+     * `'MultiPolygon'`.
+     *
+     * @return {String} The type to draw.
+     */
+    drawTypeByMeasureType: function() {
+        var drawType = 'MultiLineString';
+        if (this.measureType === 'polygon') {
+            drawType = 'MultiPolygon';
+        }
+        return drawType;
+    },
+
+    /**
+     * Determines a viewmodel template to use for button texts depending on the
+     * configured #measureType.
+     *
+     * @return {String} The viewmodel template to use.
+     */
+    btnTextByType: function() {
+        var btnText;
+        switch(this.measureType) {
+            case 'line':
+                btnText = '{textline}';
+                break;
+            case 'polygon':
+                btnText = '{textpoly}';
+                break;
+            case 'angle':
+                btnText = '{textangle}';
+                break;
+        }
+        return btnText;
+    },
+
+    /**
+     * Cleans up artifacts from measuring when the button is unpressed.
+     */
+    cleanUp: function() {
+        var me = this;
         me.drawAction.setActive(false);
-        me.drawAction.un('drawstart', me.drawStart, me);
-        me.drawAction.un('drawend', me.drawEnd, me);
-        me.map.un('pointermove', me.pointerMoveHandler, me);
-        me.map.un('click', me.addMeasureStopToolTip, me);
-
+        Ext.iterate(me.eventKeys, function(key, eventKey) {
+            if (eventKey) {
+                ol.Observable.unByKey(eventKey);
+            }
+        });
+        me.eventKeys = {};
         me.cleanUpToolTips();
-
         me.measureVectorLayer.getSource().clear();
     },
 
     /**
-     *
+     * Cleans up tooltips when the button is unpressed.
      */
     cleanUpToolTips: function() {
         var me = this;
-        me.helpTooltipElement = null;
-        me.measureTooltipElement = null;
-        Ext.each(Ext.DomQuery.select('.tooltip-static'), function(el) {
-            el.parentNode.removeChild(el);
-        });
 
-        Ext.each(me.map.getOverlays().getArray(), function(overlay) {
-            if (overlay === me.measureTooltip ||
-                overlay === me.helpTooltip) {
-                    me.map.removeOverlay(overlay);
+        Ext.each(me.createdTooltipOverlays, function(tooltipOverlay) {
+            me.map.removeOverlay(tooltipOverlay);
+        });
+        me.createdTooltipOverlays = [];
+
+        Ext.each(me.createdTooltipDivs, function(tooltipDiv) {
+            var parent = tooltipDiv && tooltipDiv.parentNode;
+            if (parent) {
+                parent.removeChild(tooltipDiv);
             }
         });
+        me.createdTooltipDivs = [];
     },
 
     /**
-     *
+     * Adds a tooltip on click where a measuring stop occured.
      */
     addMeasureStopToolTip: function(evt) {
         var me = this;
+        var CSS = BasiGX.view.button.Measure.CSS_CLASSES;
+
         if (!Ext.isEmpty(me.sketch)) {
             var geom = me.sketch.getGeometry(),
                 value = me.measureType === 'line' ? me.formatLength(geom) :
                     me.formatArea(geom);
             if (parseInt(value, 10) > 0) {
                 var div = Ext.dom.Helper.createDom('<div>');
-                div.className = 'tooltip tooltip-static';
+                div.className = CSS.TOOLTIP + ' ' + CSS.TOOLTIP_STATIC;
                 div.innerHTML = value;
                 var tooltip = new ol.Overlay({
                     element: div,
@@ -276,66 +458,73 @@ Ext.define("BasiGX.view.button.Measure", {
                 });
                 me.map.addOverlay(tooltip);
                 tooltip.setPosition(evt.coordinate);
+
+                me.createdTooltipDivs.push(div);
+                me.createdTooltipOverlays.push(tooltip);
             }
         }
     },
 
     /**
-     *
+     * Sets up listeners whenever the drawing of a measurement sketch is
+     * started.
      */
     drawStart: function(evt) {
         var me = this;
         var source = me.measureVectorLayer.getSource();
         me.sketch = evt.feature;
 
-        if (me.showMeasureInfoOnClickedPoints &&
-            me.measureType === 'line') {
-                me.map.on('click', me.addMeasureStopToolTip, me);
+        if (me.showMeasureInfoOnClickedPoints && me.measureType === 'line') {
+            me.eventKeys.click = me.map.on(
+                'click', me.addMeasureStopToolTip, me
+            );
         }
 
         if (me.allowOnlyOneDrawing && source.getFeatures().length > 0) {
             me.cleanUpToolTips();
             me.createMeasureTooltip();
             me.createHelpTooltip();
-            me.measureVectorLayer.getSource().clear();
+            source.clear();
         }
     },
 
     /**
-     *
+     * Called whenever measuring stops, this method draws static tooltips with
+     * the result onto the map canvas and unregisters various listeners.
      */
-    drawEnd: function(evt) {
+    drawEnd: function() {
         var me = this;
 
-        me.map.un('click', me.addMeasureStopToolTip, me);
-
-        // seems we need to add the feature manually in polygon measure mode
-        // maybe an ol3 bug?
-        if (me.measureType === 'polygon') {
-            me.measureVectorLayer.getSource().addFeatures([evt.feature]);
+        if (me.eventKeys.click) {
+            ol.Observable.unByKey(me.eventKeys.click);
         }
 
-        if (me.showMeasureInfoOnClickedPoints &&
-            me.measureType === 'line') {
-                me.measureTooltip = null;
-                if (me.measureTooltipElement) {
-                    me.measureTooltipElement.parentNode.removeChild(
-                        me.measureTooltipElement);
-                }
-        } else {
-            me.measureTooltipElement.className = 'tooltip tooltip-static';
-            me.measureTooltip.setOffset([0, -7]);
-        }
+//        Left in for historic purposes, I cannot say what exactly the effects
+//        of this are.
+//
+//        var CSS = BasiGX.view.button.Measure.CSS_CLASSES;
+//        if (me.showMeasureInfoOnClickedPoints && me.measureType === 'line') {
+//            me.removeMeasureTooltip();
+//        } else {
+//            me.measureTooltipElement.className = CSS.TOOLTIP +
+//                ' ' + CSS.TOOLTIP_STATIC;
+//            me.measureTooltip.setOffset([0, -7]);
+//        }
 
         // unset sketch
         me.sketch = null;
-        // unset tooltip so that a new one can be created
-        me.measureTooltipElement = null;
-        me.createMeasureTooltip();
+
+//        Left in for historic purposes, I cannot say what exactly the effects
+//        of this are.
+//
+//        // unset tooltip so that a new one can be created
+//        me.measureTooltipElement = null;
+//        me.createMeasureTooltip();
     },
 
     /**
-     * Handle pointer move.
+     * Handle pointer move by updating and repositioning the dynamic tooltip.
+     *
      * @param {ol.MapBrowserEvent} evt
      */
     pointerMoveHandler: function(evt) {
@@ -345,23 +534,32 @@ Ext.define("BasiGX.view.button.Measure", {
             return;
         }
 
+        if (!me.helpTooltipElement || !me.measureTooltipElement) {
+            return;
+        }
+
         var helpMsg = me.getViewModel().get('clickToDrawText');
         var helpTooltipCoord = evt.coordinate;
         var measureTooltipCoord = evt.coordinate;
 
+        var measureType = me.measureType;
+
         if (me.sketch) {
             var output;
-            var geom = (me.sketch.getGeometry());
-            if (geom instanceof ol.geom.Polygon) {
+            var geom = me.sketch.getGeometry();
+            measureTooltipCoord = geom.getLastCoordinate();
+            if (measureType === 'polygon') {
                 output = me.formatArea(geom);
                 helpMsg = me.getViewModel().get('continuePolygonMsg');
-                helpTooltipCoord = geom.getLastCoordinate();
+                // attach area at interior point
                 measureTooltipCoord = geom.getInteriorPoint().getCoordinates();
-            } else if (geom instanceof ol.geom.LineString) {
+            } else if (measureType === 'line') {
                 output = me.formatLength(geom);
                 helpMsg = me.getViewModel().get('continueLineMsg');
-                helpTooltipCoord = geom.getLastCoordinate();
                 measureTooltipCoord = geom.getLastCoordinate();
+            } else if (measureType === 'angle') {
+                output = me.formatAngle(geom);
+                helpMsg = me.getViewModel().get('continueAngleMsg');
             }
             me.measureTooltipElement.innerHTML = output;
             me.measureTooltip.setPosition(measureTooltipCoord);
@@ -372,16 +570,18 @@ Ext.define("BasiGX.view.button.Measure", {
     },
 
     /**
-     * Creates a new help tooltip
+     * Creates a new help tooltip as `ol.Overlay`.
      */
     createHelpTooltip: function() {
         var me = this;
+        var CSS = BasiGX.view.button.Measure.CSS_CLASSES;
 
         if (me.helpTooltipElement) {
-            me.helpTooltipElement.parentNode.removeChild(me.helpTooltipElement);
+            return;
         }
+
         me.helpTooltipElement = Ext.dom.Helper.createDom('<div>');
-        me.helpTooltipElement.className = 'tooltip';
+        me.helpTooltipElement.className = CSS.TOOLTIP;
         me.helpTooltip = new ol.Overlay({
             element: me.helpTooltipElement,
             offset: [15, 0],
@@ -390,18 +590,19 @@ Ext.define("BasiGX.view.button.Measure", {
         me.map.addOverlay(me.helpTooltip);
     },
 
-
     /**
-     * Creates a new measure tooltip
+     * Creates a new measure tooltip as `ol.Overlay`.
      */
     createMeasureTooltip: function() {
         var me = this;
+        var CSS = BasiGX.view.button.Measure.CSS_CLASSES;
         if (me.measureTooltipElement) {
-            me.measureTooltipElement.parentNode.removeChild(
-                me.measureTooltipElement);
+            return;
         }
+
         me.measureTooltipElement = Ext.dom.Helper.createDom('<div>');
-        me.measureTooltipElement.className = 'tooltip tooltip-measure';
+        me.measureTooltipElement.className = CSS.TOOLTIP +
+            ' ' + CSS.TOOLTIP_DYNAMIC;
         me.measureTooltip = new ol.Overlay({
             element: me.measureTooltipElement,
             offset: [0, -15],
@@ -410,15 +611,49 @@ Ext.define("BasiGX.view.button.Measure", {
         me.map.addOverlay(me.measureTooltip);
     },
 
-   /**
-    * format length output
-    * @param {ol.geom.LineString} line
-    * @return {string}
-    */
+    /**
+     *
+     */
+    removeHelpTooltip: function(){
+        var me = this;
+        if (me.helpTooltipElement && me.helpTooltipElement.parent) {
+            me.helpTooltipElement.parent.removeChild(me.helpTooltipElement);
+        }
+        if (me.helpTooltip) {
+           me.map.removeOverlay(me.helpTooltip);
+        }
+        me.helpTooltipElement = null;
+        me.helpTooltip = null;
+    },
+
+    /**
+     *
+     */
+    removeMeasureTooltip: function(){
+        var me = this;
+        if (me.measureTooltipElement && me.measureTooltipElement.parent) {
+            me.measureTooltipElement.parent.removeChild(
+                me.measureTooltipElement
+            );
+        }
+        if (me.measureTooltip) {
+           me.map.removeOverlay(me.measureTooltip);
+        }
+        me.measureTooltipElement = null;
+        me.measureTooltip = null;
+    },
+
+    /**
+     * Format length output for the tooltip.
+     *
+     * @param {ol.geom.MultiLineString} line
+     * @return {String}
+     */
     formatLength: function(line) {
-        var me = this,
-            decimalHelper = Math.pow(10, me.decimalPlacesInToolTips),
-            length;
+        var me = this;
+        var decimalHelper = Math.pow(10, me.decimalPlacesInToolTips);
+        var length;
+
         if (me.geodesic) {
             var wgs84Sphere = new ol.Sphere(6378137);
             var coordinates = line.getCoordinates();
@@ -443,17 +678,19 @@ Ext.define("BasiGX.view.button.Measure", {
                 ' m';
         }
         return output;
-   },
+    },
 
     /**
-     * format length output
+     * Format length output for the tooltip.
+     *
      * @param {ol.geom.Polygon} polygon
      * @return {string}
      */
     formatArea: function(polygon) {
-        var me = this,
-            decimalHelper = Math.pow(10, me.decimalPlacesInToolTips),
-            area;
+        var me = this;
+        var decimalHelper = Math.pow(10, me.decimalPlacesInToolTips);
+        var area;
+
         if (me.geodesic) {
             var wgs84Sphere = new ol.Sphere(6378137);
             var sourceProj = me.map.getView().getProjection();
@@ -474,5 +711,111 @@ Ext.define("BasiGX.view.button.Measure", {
                 ' ' + 'm<sup>2</sup>';
         }
         return output;
-   }
+    },
+
+    /**
+     * Determine the angle between two coordinates. The angle will be between
+     * -180° and 180°, with 0° being in the east. The angle will increase
+     * counter-clockwise.
+     *
+     * Inspired by http://stackoverflow.com/a/31136507
+     *
+     * @param {Array<Number>} start The start coordinates of the line with the
+     *     x-coordinate being at index `0` and y-coordinate being at index `1`.
+     * @param {Array<Number>} end The end coordinates of the line with the
+     *     x-coordinate being at index `0` and y-coordinate being at index `1`.
+     * @return {Number} the angle in degreees, ranging from -180° to 180°.
+     */
+    angle: function(start, end) {
+        var dx = start[0] - end[0];
+        var dy = start[1] - end[1];
+        // range (-PI, PI]
+        var theta = Math.atan2(dy, dx);
+        // rads to degs, range (-180, 180]
+        theta *= 180 / Math.PI;
+        return theta;
+    },
+
+    /**
+     * Determine the angle between two coordinates. The angle will be between
+     * 0° and 360°, with 0° being in the east. The angle will increase
+     * counter-clockwise.
+     *
+     * Inspired by http://stackoverflow.com/a/31136507
+     *
+     * @param {Array<Number>} start The start coordinates of the line with the
+     *     x-coordinate being at index `0` and y-coordinate being at index `1`.
+     * @param {Array<Number>} end The end coordinates of the line with the
+     *     x-coordinate being at index `0` and y-coordinate being at index `1`.
+     * @return {Number} the angle in degreees, ranging from 0° and 360°.
+     */
+    angle360: function(start, end) {
+        // range (-180, 180]
+        var theta = this.angle(start, end);
+        if (theta < 0) {
+            // range [0, 360)
+            theta = 360 + theta;
+        }
+        return theta;
+    },
+
+    /**
+     * Given an angle between 0° and 360° this angle returns the exact opposite
+     * of the angle, e.g. for 90° you'll get back 270°. This effective turns the
+     * direction of the angle from counter-clockwise to clockwise.
+     *
+     * @param {Number} angle360 The input angle obtained counter-clockwise.
+     * @return {Number} The clockwise angle.
+     */
+    makeClockwise: function(angle360) {
+        return 360 - angle360;
+    },
+
+    /**
+     * This methods adds an offset of 90° to an counter-clockwise increasing
+     * angle of a line so that the origin (0°) lies at the top (in the north).
+     *
+     * @param {Number} angle360 The input angle obtained counter-clockwise, with
+     *     0° degrees being in the east.
+     * @return {Number} The adjusted angle, with 0° being in the north.
+     */
+    makeZeroDegreesAtNorth: function(angle360) {
+        var corrected = angle360 + 90;
+        if (corrected > 360) {
+            corrected = corrected - 360;
+        }
+        return corrected;
+    },
+
+    /**
+     * Returns the angle of the passed linestring in degrees, with 'N' being the
+     * 0°-line and the angle increases in clockwise direction.
+     *
+     * TODO The angle calculation assumes an unrotated view. We should enhance
+     *    this method to (optionally) correct the determined angle by the
+     *    rotation of the map.
+     *
+     * @param {ol.geom.LineString} line The linestring to get the
+     *     angle from. As this line is comming from our internal draw
+     *     interaction, we know that it will only consist of two points.
+     * @return {String} The formatted angle of the line.
+     */
+    formatAngle: function(line) {
+        var me = this;
+        var coords = line.getCoordinates();
+        var numCoords = coords.length;
+        if (numCoords < 2) {
+            return '';
+        }
+
+        var lastPoint = coords[numCoords - 1];
+        var prevPoint = coords[numCoords - 2];
+        var angle = me.angle360(prevPoint, lastPoint);
+
+        angle = me.makeZeroDegreesAtNorth(angle);
+        angle = me.makeClockwise(angle);
+        angle = angle.toFixed(me.decimalPlacesInToolTips);
+
+        return angle + '°';
+    }
 });
