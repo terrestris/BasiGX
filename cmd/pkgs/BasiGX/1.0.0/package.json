@@ -13,11 +13,11 @@
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "62c3c952-0532-4e88-ad71-f71373e71a79",
-      "created": "2016-11-23T14:04:30Z",
+      "uuid": "8e78e07a-7d97-472c-bc82-ab239757b133",
+      "created": "2016-11-23T14:19:29Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "n9lQEigzeCw\u003d",
-      "signature": "GJm9KNTOgi7+m7EHoRWirI6dW6l4HvV7ZBQeYh7YQVqOowpTVDanLeWKcdXfEKTqGB0TCMlp4YgH8sM3/oT8X7er5kk6mM4Y3MGEetORY4BGEXYmV6SJRiZlvnQdXKoIgJuWxzaA8nRIQqCq+0j/P9AonmG7VNhaWMivVOLf8vxupf1QOlQr6obpIJfZhL859abUuxNK22m/Td/Lb/WrMYMxNmdfWDMeQ+tJu0RUW0B6pVSpFyJ9546pGaMAa1TC3GjaKDZ/GNN3ptk+yb/mySg/v0Lqc17a3j/zrWLmQBK+uBSRI33K1y1AmmrB5F17WvQQdDMBmI7sMBUIDwR81w\u003d\u003d"
+      "nonce": "lYzr6gQ2F4o\u003d",
+      "signature": "dOVOVHw7PCewza0Hz69KaGR9vcsbSPPNYAnRcge74KAKnZRNUpUseocFEA6MfelkqDIV1iP1acjjagW5GETDJvc3qVxjCN5D7XbeDRjSJ+5uQKYEWj1fw16yRxKvKZXCp59jlhblkjpLZcD7skfxqMTBZ8zcDENY0ieF7XiA5FIU/cZ1n094mkqVcGeppqaWD/isTmSVGpjTyOOLkqiTvAxOBMRDLkCXgreK9wW8bbz7H6Vs2pSQAdJUzeVMX5INI9zm9aqRr3iFAa17IyJrehrdWP2lUJxpmIjISyvROTh/4zmAiXsfhus2vYklFg3aQl4psMvgfBY3TKGYMfudDQ\u003d\u003d"
     }
   ],
   "slicer": {
@@ -55,12 +55,12 @@
     "url": "https://github.com/terrestris/BasiGX.git"
   },
   "devDependencies": {
-    "coveralls": "2.11.6",
-    "eslint": "1.10.3",
+    "coveralls": "2.11.15",
+    "eslint": "3.10.2",
     "expect.js": "0.3.1",
     "istanbul": "0.4.1",
-    "mocha": "2.3.4",
-    "mocha-phantomjs": "4.0.1",
-    "sinon": "1.17.2"
+    "mocha": "3.1.2",
+    "mocha-phantomjs": "4.1.0",
+    "sinon": "1.17.6"
   }
 }
