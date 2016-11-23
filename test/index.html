@@ -30,13 +30,14 @@
       window.initMochaPhantomJS && window.initMochaPhantomJS();
       mocha.setup({
         ui: 'bdd',
-        bail: false
+        bail: true,
+        timeout: 10000
       });
     </script>
     <script src="./test-helper-functions.js"></script>
     <script src="./load-tests.js"></script>
     <script>
-      mocha.run()
+      mocha.run();
     </script>
   </body>
 </html>
