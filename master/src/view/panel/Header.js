@@ -1,9 +1,108 @@
+/* Copyright (c) 2015 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Header Panel
+ *
+ * Used to show a headerpanel in the viewport.
+ * Class usually instanciated in the map container.
+ *
+ * @class BasiGX.view.panel.Header
+ */
+Ext.define("BasiGX.view.panel.Header", {
+    extend: "Ext.panel.Panel",
+    xtype: "basigx-panel-header",
 
-var __cov_4ftK404SbToF7c3h$OPN0w = (Function('return this'))();
-if (!__cov_4ftK404SbToF7c3h$OPN0w.__coverage__) { __cov_4ftK404SbToF7c3h$OPN0w.__coverage__ = {}; }
-__cov_4ftK404SbToF7c3h$OPN0w = __cov_4ftK404SbToF7c3h$OPN0w.__coverage__;
-if (!(__cov_4ftK404SbToF7c3h$OPN0w['/home/travis/build/terrestris/BasiGX/src/view/panel/Header.js'])) {
-   __cov_4ftK404SbToF7c3h$OPN0w['/home/travis/build/terrestris/BasiGX/src/view/panel/Header.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/panel/Header.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0},"fnMap":{"1":{"name":"(anonymous_1)","line":58,"loc":{"start":{"line":58,"column":19},"end":{"line":58,"column":30}}},"2":{"name":"(anonymous_2)","line":70,"loc":{"start":{"line":70,"column":38},"end":{"line":70,"column":53}}},"3":{"name":"(anonymous_3)","line":81,"loc":{"start":{"line":81,"column":17},"end":{"line":81,"column":28}}},"4":{"name":"(anonymous_4)","line":102,"loc":{"start":{"line":102,"column":23},"end":{"line":102,"column":39}}}},"statementMap":{"1":{"start":{"line":24,"column":0},"end":{"line":108,"column":3}},"2":{"start":{"line":59,"column":8},"end":{"line":59,"column":22}},"3":{"start":{"line":62,"column":8},"end":{"line":64,"column":9}},"4":{"start":{"line":63,"column":12},"end":{"line":63,"column":29}},"5":{"start":{"line":66,"column":8},"end":{"line":66,"column":54}},"6":{"start":{"line":68,"column":8},"end":{"line":73,"column":9}},"7":{"start":{"line":70,"column":12},"end":{"line":72,"column":15}},"8":{"start":{"line":71,"column":16},"end":{"line":71,"column":36}},"9":{"start":{"line":75,"column":8},"end":{"line":75,"column":24}},"10":{"start":{"line":82,"column":8},"end":{"line":82,"column":22}},"11":{"start":{"line":83,"column":8},"end":{"line":94,"column":10}},"12":{"start":{"line":96,"column":8},"end":{"line":96,"column":28}},"13":{"start":{"line":103,"column":7},"end":{"line":106,"column":10}}},"branchMap":{"1":{"line":62,"type":"if","locations":[{"start":{"line":62,"column":8},"end":{"line":62,"column":8}},{"start":{"line":62,"column":8},"end":{"line":62,"column":8}}]},"2":{"line":68,"type":"if","locations":[{"start":{"line":68,"column":8},"end":{"line":68,"column":8}},{"start":{"line":68,"column":8},"end":{"line":68,"column":8}}]},"3":{"line":68,"type":"binary-expr","locations":[{"start":{"line":68,"column":11},"end":{"line":68,"column":40}},{"start":{"line":69,"column":16},"end":{"line":69,"column":44}}]}}};
-}
-__cov_4ftK404SbToF7c3h$OPN0w = __cov_4ftK404SbToF7c3h$OPN0w['/home/travis/build/terrestris/BasiGX/src/view/panel/Header.js'];
-__cov_4ftK404SbToF7c3h$OPN0w.s['1']++;Ext.define('BasiGX.view.panel.Header',{extend:'Ext.panel.Panel',xtype:'basigx-panel-header',requires:['Ext.Img'],config:{addLogo:true,logoUrl:'resources/images/logo.png',link:null,logoAltText:'Logo',logoHeight:80,logoWidth:200,logoMargin:'0 50px',additionalItems:[]},layout:{type:'hbox',align:'stretch'},padding:5,cls:'basigx-header',items:[],initComponent:function(){__cov_4ftK404SbToF7c3h$OPN0w.f['1']++;__cov_4ftK404SbToF7c3h$OPN0w.s['2']++;var me=this;__cov_4ftK404SbToF7c3h$OPN0w.s['3']++;if(me.getAddLogo()===true){__cov_4ftK404SbToF7c3h$OPN0w.b['1'][0]++;__cov_4ftK404SbToF7c3h$OPN0w.s['4']++;me.addLogoItem();}else{__cov_4ftK404SbToF7c3h$OPN0w.b['1'][1]++;}__cov_4ftK404SbToF7c3h$OPN0w.s['5']++;var additionalItems=me.getAdditionalItems();__cov_4ftK404SbToF7c3h$OPN0w.s['6']++;if((__cov_4ftK404SbToF7c3h$OPN0w.b['3'][0]++,!Ext.isEmpty(additionalItems))&&(__cov_4ftK404SbToF7c3h$OPN0w.b['3'][1]++,Ext.isArray(additionalItems))){__cov_4ftK404SbToF7c3h$OPN0w.b['2'][0]++;__cov_4ftK404SbToF7c3h$OPN0w.s['7']++;Ext.each(additionalItems,function(item){__cov_4ftK404SbToF7c3h$OPN0w.f['2']++;__cov_4ftK404SbToF7c3h$OPN0w.s['8']++;me.items.push(item);});}else{__cov_4ftK404SbToF7c3h$OPN0w.b['2'][1]++;}__cov_4ftK404SbToF7c3h$OPN0w.s['9']++;me.callParent();},addLogoItem:function(){__cov_4ftK404SbToF7c3h$OPN0w.f['3']++;__cov_4ftK404SbToF7c3h$OPN0w.s['10']++;var me=this;__cov_4ftK404SbToF7c3h$OPN0w.s['11']++;var logo={xtype:'image',margin:me.getLogoMargin(),alt:me.getLogoAltText(),src:me.getLogoUrl(),height:me.getLogoHeight(),width:me.getLogoWidth(),autoEl:{tag:'a',href:me.getLink()}};__cov_4ftK404SbToF7c3h$OPN0w.s['12']++;me.items.push(logo);},setBackgroundColor:function(color){__cov_4ftK404SbToF7c3h$OPN0w.f['4']++;__cov_4ftK404SbToF7c3h$OPN0w.s['13']++;this.setStyle({'background-color':color,background:'linear-gradient(to right, white, '+color+')'});}});
+    requires: [
+        "Ext.Img"
+    ],
+
+    config: {
+        addLogo: true,
+        logoUrl: 'resources/images/logo.png',
+        link: null,
+        logoAltText: 'Logo',
+        logoHeight: 80,
+        logoWidth: 200,
+        logoMargin: '0 50px',
+        additionalItems: []
+    },
+
+    layout: {
+        type: 'hbox',
+        align: 'stretch'
+    },
+
+    padding: 5,
+
+    cls: 'basigx-header',
+
+
+    items: [],
+
+    /**
+    *
+    */
+    initComponent: function() {
+        var me = this;
+
+        // add logo
+        if(me.getAddLogo() === true) {
+            me.addLogoItem();
+        }
+
+        var additionalItems = me.getAdditionalItems();
+        // add additional items
+        if(!Ext.isEmpty(additionalItems) &&
+                Ext.isArray(additionalItems)) {
+            Ext.each(additionalItems, function(item) {
+                me.items.push(item);
+            });
+        }
+
+        me.callParent();
+    },
+
+    /**
+     *
+     */
+    addLogoItem: function() {
+        var me = this;
+        var logo = {
+            xtype: 'image',
+            margin: me.getLogoMargin(),
+            alt: me.getLogoAltText(),
+            src: me.getLogoUrl(),
+            height: me.getLogoHeight(),
+            width: me.getLogoWidth(),
+            autoEl: {
+                tag: 'a',
+                href: me.getLink()
+            }
+        };
+
+        me.items.push(logo);
+   },
+
+   /**
+    *
+    */
+   setBackgroundColor: function(color) {
+       this.setStyle({
+           'background-color': color, //fallback for ie9 and lower
+           background: "linear-gradient(to right, white, " + color + ")"
+       });
+   }
+});

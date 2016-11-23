@@ -1,9 +1,172 @@
+/* Copyright (c) 2015 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Plugin used for serversided (GeoServer SQL-View) Clustering. And clientsided
+ * (OL3) styling.
+ *
+ * @class BasiGX.plugin.WfsCluster
+ */
+Ext.define('BasiGX.plugin.WfsCluster', {
+    extend: 'Ext.plugin.Abstract',
 
-var __cov_zYiRqyRgRCGFgFR6FZK_ng = (Function('return this'))();
-if (!__cov_zYiRqyRgRCGFgFR6FZK_ng.__coverage__) { __cov_zYiRqyRgRCGFgFR6FZK_ng.__coverage__ = {}; }
-__cov_zYiRqyRgRCGFgFR6FZK_ng = __cov_zYiRqyRgRCGFgFR6FZK_ng.__coverage__;
-if (!(__cov_zYiRqyRgRCGFgFR6FZK_ng['/home/travis/build/terrestris/BasiGX/src/plugin/WfsCluster.js'])) {
-   __cov_zYiRqyRgRCGFgFR6FZK_ng['/home/travis/build/terrestris/BasiGX/src/plugin/WfsCluster.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/plugin/WfsCluster.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0,0,0],"12":[0,0],"13":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0},"fnMap":{"1":{"name":"(anonymous_1)","line":28,"loc":{"start":{"line":28,"column":10},"end":{"line":28,"column":25}}},"2":{"name":"(anonymous_2)","line":35,"loc":{"start":{"line":35,"column":24},"end":{"line":35,"column":46}}},"3":{"name":"(anonymous_3)","line":41,"loc":{"start":{"line":41,"column":28},"end":{"line":41,"column":44}}},"4":{"name":"(anonymous_4)","line":48,"loc":{"start":{"line":48,"column":47},"end":{"line":48,"column":61}}},"5":{"name":"(anonymous_5)","line":65,"loc":{"start":{"line":65,"column":30},"end":{"line":65,"column":41}}},"6":{"name":"(anonymous_6)","line":71,"loc":{"start":{"line":71,"column":25},"end":{"line":71,"column":43}}},"7":{"name":"(anonymous_7)","line":123,"loc":{"start":{"line":123,"column":25},"end":{"line":123,"column":49}}},"8":{"name":"(anonymous_8)","line":142,"loc":{"start":{"line":142,"column":36},"end":{"line":142,"column":52}}},"9":{"name":"(anonymous_9)","line":158,"loc":{"start":{"line":158,"column":33},"end":{"line":158,"column":51}}},"10":{"name":"(anonymous_10)","line":164,"loc":{"start":{"line":164,"column":33},"end":{"line":164,"column":43}}}},"statementMap":{"1":{"start":{"line":22,"column":0},"end":{"line":172,"column":3}},"2":{"start":{"line":29,"column":8},"end":{"line":29,"column":22}},"3":{"start":{"line":30,"column":8},"end":{"line":30,"column":25}},"4":{"start":{"line":32,"column":8},"end":{"line":32,"column":45}},"5":{"start":{"line":36,"column":8},"end":{"line":36,"column":22}},"6":{"start":{"line":37,"column":8},"end":{"line":37,"column":40}},"7":{"start":{"line":38,"column":8},"end":{"line":38,"column":60}},"8":{"start":{"line":39,"column":8},"end":{"line":39,"column":31}},"9":{"start":{"line":41,"column":8},"end":{"line":61,"column":11}},"10":{"start":{"line":42,"column":12},"end":{"line":60,"column":13}},"11":{"start":{"line":47,"column":16},"end":{"line":53,"column":17}},"12":{"start":{"line":48,"column":20},"end":{"line":52,"column":23}},"13":{"start":{"line":49,"column":24},"end":{"line":51,"column":25}},"14":{"start":{"line":50,"column":28},"end":{"line":50,"column":58}},"15":{"start":{"line":54,"column":16},"end":{"line":54,"column":42}},"16":{"start":{"line":55,"column":16},"end":{"line":59,"column":17}},"17":{"start":{"line":56,"column":20},"end":{"line":56,"column":57}},"18":{"start":{"line":58,"column":20},"end":{"line":58,"column":59}},"19":{"start":{"line":63,"column":8},"end":{"line":68,"column":9}},"20":{"start":{"line":65,"column":12},"end":{"line":67,"column":19}},"21":{"start":{"line":66,"column":16},"end":{"line":66,"column":54}},"22":{"start":{"line":72,"column":8},"end":{"line":72,"column":22}},"23":{"start":{"line":73,"column":8},"end":{"line":77,"column":9}},"24":{"start":{"line":74,"column":12},"end":{"line":74,"column":54}},"25":{"start":{"line":76,"column":12},"end":{"line":76,"column":49}},"26":{"start":{"line":79,"column":8},"end":{"line":79,"column":64}},"27":{"start":{"line":80,"column":8},"end":{"line":82,"column":21}},"28":{"start":{"line":84,"column":8},"end":{"line":93,"column":9}},"29":{"start":{"line":85,"column":12},"end":{"line":85,"column":24}},"30":{"start":{"line":86,"column":12},"end":{"line":86,"column":26}},"31":{"start":{"line":87,"column":15},"end":{"line":93,"column":9}},"32":{"start":{"line":88,"column":12},"end":{"line":88,"column":25}},"33":{"start":{"line":89,"column":12},"end":{"line":89,"column":23}},"34":{"start":{"line":91,"column":12},"end":{"line":91,"column":31}},"35":{"start":{"line":92,"column":12},"end":{"line":92,"column":35}},"36":{"start":{"line":94,"column":8},"end":{"line":116,"column":10}},"37":{"start":{"line":124,"column":8},"end":{"line":124,"column":22}},"38":{"start":{"line":125,"column":8},"end":{"line":125,"column":39}},"39":{"start":{"line":126,"column":8},"end":{"line":126,"column":40}},"40":{"start":{"line":128,"column":8},"end":{"line":170,"column":9}},"41":{"start":{"line":130,"column":12},"end":{"line":130,"column":52}},"42":{"start":{"line":131,"column":12},"end":{"line":131,"column":70}},"43":{"start":{"line":135,"column":12},"end":{"line":135,"column":46}},"44":{"start":{"line":139,"column":12},"end":{"line":141,"column":13}},"45":{"start":{"line":140,"column":16},"end":{"line":140,"column":27}},"46":{"start":{"line":142,"column":12},"end":{"line":169,"column":15}},"47":{"start":{"line":143,"column":16},"end":{"line":168,"column":17}},"48":{"start":{"line":144,"column":20},"end":{"line":144,"column":63}},"49":{"start":{"line":145,"column":20},"end":{"line":145,"column":51}},"50":{"start":{"line":146,"column":20},"end":{"line":167,"column":23}},"51":{"start":{"line":159,"column":28},"end":{"line":159,"column":62}},"52":{"start":{"line":160,"column":28},"end":{"line":160,"column":80}},"53":{"start":{"line":161,"column":28},"end":{"line":161,"column":54}},"54":{"start":{"line":162,"column":28},"end":{"line":162,"column":61}},"55":{"start":{"line":165,"column":28},"end":{"line":165,"column":81}}},"branchMap":{"1":{"line":42,"type":"if","locations":[{"start":{"line":42,"column":12},"end":{"line":42,"column":12}},{"start":{"line":42,"column":12},"end":{"line":42,"column":12}}]},"2":{"line":47,"type":"if","locations":[{"start":{"line":47,"column":16},"end":{"line":47,"column":16}},{"start":{"line":47,"column":16},"end":{"line":47,"column":16}}]},"3":{"line":49,"type":"if","locations":[{"start":{"line":49,"column":24},"end":{"line":49,"column":24}},{"start":{"line":49,"column":24},"end":{"line":49,"column":24}}]},"4":{"line":55,"type":"if","locations":[{"start":{"line":55,"column":16},"end":{"line":55,"column":16}},{"start":{"line":55,"column":16},"end":{"line":55,"column":16}}]},"5":{"line":63,"type":"if","locations":[{"start":{"line":63,"column":8},"end":{"line":63,"column":8}},{"start":{"line":63,"column":8},"end":{"line":63,"column":8}}]},"6":{"line":73,"type":"if","locations":[{"start":{"line":73,"column":8},"end":{"line":73,"column":8}},{"start":{"line":73,"column":8},"end":{"line":73,"column":8}}]},"7":{"line":84,"type":"if","locations":[{"start":{"line":84,"column":8},"end":{"line":84,"column":8}},{"start":{"line":84,"column":8},"end":{"line":84,"column":8}}]},"8":{"line":87,"type":"if","locations":[{"start":{"line":87,"column":15},"end":{"line":87,"column":15}},{"start":{"line":87,"column":15},"end":{"line":87,"column":15}}]},"9":{"line":107,"type":"cond-expr","locations":[{"start":{"line":107,"column":38},"end":{"line":107,"column":54}},{"start":{"line":107,"column":57},"end":{"line":107,"column":59}}]},"10":{"line":128,"type":"if","locations":[{"start":{"line":128,"column":8},"end":{"line":128,"column":8}},{"start":{"line":128,"column":8},"end":{"line":128,"column":8}}]},"11":{"line":128,"type":"binary-expr","locations":[{"start":{"line":128,"column":12},"end":{"line":128,"column":15}},{"start":{"line":128,"column":19},"end":{"line":128,"column":32}},{"start":{"line":128,"column":36},"end":{"line":128,"column":65}},{"start":{"line":129,"column":12},"end":{"line":129,"column":25}}]},"12":{"line":139,"type":"if","locations":[{"start":{"line":139,"column":12},"end":{"line":139,"column":12}},{"start":{"line":139,"column":12},"end":{"line":139,"column":12}}]},"13":{"line":143,"type":"if","locations":[{"start":{"line":143,"column":16},"end":{"line":143,"column":16}},{"start":{"line":143,"column":16},"end":{"line":143,"column":16}}]}}};
-}
-__cov_zYiRqyRgRCGFgFR6FZK_ng = __cov_zYiRqyRgRCGFgFR6FZK_ng['/home/travis/build/terrestris/BasiGX/src/plugin/WfsCluster.js'];
-__cov_zYiRqyRgRCGFgFR6FZK_ng.s['1']++;Ext.define('BasiGX.plugin.WfsCluster',{extend:'Ext.plugin.Abstract',alias:'plugin.wfscluster',pluginId:'wfscluster',init:function(cmp){__cov_zYiRqyRgRCGFgFR6FZK_ng.f['1']++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['2']++;var me=this;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['3']++;this.setCmp(cmp);__cov_zYiRqyRgRCGFgFR6FZK_ng.s['4']++;me.setUpClusterLayers(this.getCmp());},setUpClusterLayers:function(mapComponent){__cov_zYiRqyRgRCGFgFR6FZK_ng.f['2']++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['5']++;var me=this;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['6']++;var map=mapComponent.getMap();__cov_zYiRqyRgRCGFgFR6FZK_ng.s['7']++;var allLayers=BasiGX.util.Layer.getAllLayers(map);__cov_zYiRqyRgRCGFgFR6FZK_ng.s['8']++;var clusterLayers=[];__cov_zYiRqyRgRCGFgFR6FZK_ng.s['9']++;Ext.each(allLayers,function(layer){__cov_zYiRqyRgRCGFgFR6FZK_ng.f['3']++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['10']++;if(layer.get('type')==='WFSCluster'){__cov_zYiRqyRgRCGFgFR6FZK_ng.b['1'][0]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['11']++;if(!layer.visibilityListener){__cov_zYiRqyRgRCGFgFR6FZK_ng.b['2'][0]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['12']++;layer.on('change:visible',function(evt){__cov_zYiRqyRgRCGFgFR6FZK_ng.f['4']++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['13']++;if(evt.target.getVisible()){__cov_zYiRqyRgRCGFgFR6FZK_ng.b['3'][0]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['14']++;me.loadClusterFeatures(layer);}else{__cov_zYiRqyRgRCGFgFR6FZK_ng.b['3'][1]++;}});}else{__cov_zYiRqyRgRCGFgFR6FZK_ng.b['2'][1]++;}__cov_zYiRqyRgRCGFgFR6FZK_ng.s['15']++;clusterLayers.push(layer);__cov_zYiRqyRgRCGFgFR6FZK_ng.s['16']++;if(layer.get('olStyle')){__cov_zYiRqyRgRCGFgFR6FZK_ng.b['4'][0]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['17']++;layer.setStyle(layer.get('olStyle'));}else{__cov_zYiRqyRgRCGFgFR6FZK_ng.b['4'][1]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['18']++;layer.setStyle(me.clusterStyleFuntion);}}else{__cov_zYiRqyRgRCGFgFR6FZK_ng.b['1'][1]++;}});__cov_zYiRqyRgRCGFgFR6FZK_ng.s['19']++;if(clusterLayers.length>0){__cov_zYiRqyRgRCGFgFR6FZK_ng.b['5'][0]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['20']++;map.on('moveend',function(){__cov_zYiRqyRgRCGFgFR6FZK_ng.f['5']++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['21']++;me.loadClusterFeatures(clusterLayers);},me);}else{__cov_zYiRqyRgRCGFgFR6FZK_ng.b['5'][1]++;}},clusterStyleFuntion:function(feature){__cov_zYiRqyRgRCGFgFR6FZK_ng.f['6']++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['22']++;var layerName;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['23']++;if(feature.getId()){__cov_zYiRqyRgRCGFgFR6FZK_ng.b['6'][0]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['24']++;layerName=feature.getId().split('.')[0];}else{__cov_zYiRqyRgRCGFgFR6FZK_ng.b['6'][1]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['25']++;layerName=feature.get('layerName');}__cov_zYiRqyRgRCGFgFR6FZK_ng.s['26']++;var layer=BasiGX.util.Layer.getLayerByName(layerName);__cov_zYiRqyRgRCGFgFR6FZK_ng.s['27']++;var count=feature.get('count'),radius,fontSize;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['28']++;if(count>10){__cov_zYiRqyRgRCGFgFR6FZK_ng.b['7'][0]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['29']++;radius=25;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['30']++;fontSize=14;}else{__cov_zYiRqyRgRCGFgFR6FZK_ng.b['7'][1]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['31']++;if(count<4){__cov_zYiRqyRgRCGFgFR6FZK_ng.b['8'][0]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['32']++;fontSize=7;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['33']++;radius=8;}else{__cov_zYiRqyRgRCGFgFR6FZK_ng.b['8'][1]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['34']++;radius=count*2;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['35']++;fontSize=count*1.3;}}__cov_zYiRqyRgRCGFgFR6FZK_ng.s['36']++;return[new ol.style.Style({image:new ol.style.Circle({radius:radius,fill:new ol.style.Fill({color:layer.get('clusterColorString')}),stroke:new ol.style.Stroke({color:'gray'})}),text:new ol.style.Text({text:count>1?(__cov_zYiRqyRgRCGFgFR6FZK_ng.b['9'][0]++,count.toString()):(__cov_zYiRqyRgRCGFgFR6FZK_ng.b['9'][1]++,''),font:'bold '+fontSize*2+'px Arial',stroke:new ol.style.Stroke({color:'black',width:1}),fill:new ol.style.Fill({color:'white'})})})];},loadClusterFeatures:function(clusterLayers){__cov_zYiRqyRgRCGFgFR6FZK_ng.f['7']++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['37']++;var me=this;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['38']++;var mapComponent=me.getCmp();__cov_zYiRqyRgRCGFgFR6FZK_ng.s['39']++;var map=mapComponent.getMap();__cov_zYiRqyRgRCGFgFR6FZK_ng.s['40']++;if((__cov_zYiRqyRgRCGFgFR6FZK_ng.b['11'][0]++,map)&&(__cov_zYiRqyRgRCGFgFR6FZK_ng.b['11'][1]++,map.getView())&&(__cov_zYiRqyRgRCGFgFR6FZK_ng.b['11'][2]++,map.getView().getResolution())&&(__cov_zYiRqyRgRCGFgFR6FZK_ng.b['11'][3]++,map.getSize())){__cov_zYiRqyRgRCGFgFR6FZK_ng.b['10'][0]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['41']++;var res=map.getView().getResolution();__cov_zYiRqyRgRCGFgFR6FZK_ng.s['42']++;var extent=map.getView().calculateExtent(map.getSize());__cov_zYiRqyRgRCGFgFR6FZK_ng.s['43']++;var factor=Math.round(res*70);__cov_zYiRqyRgRCGFgFR6FZK_ng.s['44']++;if(factor<250){__cov_zYiRqyRgRCGFgFR6FZK_ng.b['12'][0]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['45']++;factor=1;}else{__cov_zYiRqyRgRCGFgFR6FZK_ng.b['12'][1]++;}__cov_zYiRqyRgRCGFgFR6FZK_ng.s['46']++;Ext.each(clusterLayers,function(layer){__cov_zYiRqyRgRCGFgFR6FZK_ng.f['8']++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['47']++;if(layer.getVisible()){__cov_zYiRqyRgRCGFgFR6FZK_ng.b['13'][0]++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['48']++;var featureType=layer.get('featureType');__cov_zYiRqyRgRCGFgFR6FZK_ng.s['49']++;var baseUrl=layer.get('url');__cov_zYiRqyRgRCGFgFR6FZK_ng.s['50']++;Ext.Ajax.request({url:baseUrl+'?service=WFS&'+'version=1.0.0&'+'request=GetFeature&'+'typeName='+featureType+'&'+'outputFormat=application/json&'+'bbox='+extent.join(',')+'&'+'viewParams=resolutioninm:'+factor+';'+'bboxllx:'+extent[0]+';'+'bboxlly:'+extent[1]+';'+'bboxurx:'+extent[2]+';'+'bboxury:'+extent[3],success:function(response){__cov_zYiRqyRgRCGFgFR6FZK_ng.f['9']++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['51']++;var feats=response.responseText;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['52']++;var f=new ol.format.GeoJSON().readFeatures(feats);__cov_zYiRqyRgRCGFgFR6FZK_ng.s['53']++;layer.getSource().clear();__cov_zYiRqyRgRCGFgFR6FZK_ng.s['54']++;layer.getSource().addFeatures(f);},failure:function(){__cov_zYiRqyRgRCGFgFR6FZK_ng.f['10']++;__cov_zYiRqyRgRCGFgFR6FZK_ng.s['55']++;Ext.log.error('Failure on load of cluster features');}});}else{__cov_zYiRqyRgRCGFgFR6FZK_ng.b['13'][1]++;}});}else{__cov_zYiRqyRgRCGFgFR6FZK_ng.b['10'][1]++;}}});
+    alias: 'plugin.wfscluster',
+    pluginId: 'wfscluster',
+
+    init: function (cmp) {
+        var me = this;
+        this.setCmp(cmp);
+
+        me.setUpClusterLayers(this.getCmp());
+    },
+
+    setUpClusterLayers: function(mapComponent){
+        var me = this;
+        var map = mapComponent.getMap();
+        var allLayers = BasiGX.util.Layer.getAllLayers(map);
+        var clusterLayers = [];
+
+        Ext.each(allLayers, function(layer) {
+            if (layer.get('type') === "WFSCluster") {
+                // register visibility listener to load the features when
+                // layer is toggled in tree, which is not detected by the
+                // maps moveend listener
+                // TODO: check why this gets fired 2 times -> geoext?!!
+                if (!layer.visibilityListener) {
+                    layer.on("change:visible", function(evt) {
+                        if (evt.target.getVisible()) {
+                            me.loadClusterFeatures(layer);
+                        }
+                    });
+                }
+                clusterLayers.push(layer);
+                if(layer.get('olStyle')){
+                    layer.setStyle(layer.get('olStyle'));
+                } else {
+                    layer.setStyle(me.clusterStyleFuntion);
+                }
+            }
+        });
+
+        if (clusterLayers.length > 0) {
+            // on every map move
+            map.on('moveend', function() {
+                me.loadClusterFeatures(clusterLayers);
+            }, me);
+        }
+    },
+
+    clusterStyleFuntion: function(feature) {
+        var layerName;
+        if(feature.getId()){
+            layerName = feature.getId().split(".")[0];
+        } else {
+            layerName = feature.get('layerName');
+        }
+
+        var layer = BasiGX.util.Layer.getLayerByName(layerName);
+        var count = feature.get('count'),
+            radius,
+            fontSize;
+
+        if (count > 10) {
+            radius = 25;
+            fontSize = 14;
+        } else if (count < 4) {
+            fontSize = 7;
+            radius = 8;
+        } else {
+            radius = count * 2;
+            fontSize = count * 1.3;
+        }
+        return [
+            new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: radius,
+                    // opacity: 0.6,
+                    fill: new ol.style.Fill({
+                        color: layer.get('clusterColorString')
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: 'gray'
+                    })
+                }),
+                text: new ol.style.Text({
+                    text: count > 1 ? count.toString() : '',
+                    font: 'bold ' + fontSize * 2 + 'px Arial',
+                    stroke: new ol.style.Stroke({
+                        color: 'black',
+                        width: 1
+                    }),
+                    fill: new ol.style.Fill({color: 'white'})
+                })
+            })
+        ];
+    },
+
+    /**
+     * The wfscluster layerType expects a geoserver view which handles
+     * clustering with database methods
+     */
+    loadClusterFeatures: function(clusterLayers) {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
+
+        if (map && map.getView() && map.getView().getResolution() &&
+            map.getSize()) {
+            var res = map.getView().getResolution();
+            var extent = map.getView().calculateExtent(map.getSize());
+            // the factor which describes the distance used
+            // to decide when to cluster. Unit is very
+            // roughly ~meters.
+            var factor = Math.round(res * 70);
+
+            // when reaching the lower limit of 250, reduce /
+            // disable clustering to see the real features
+            if (factor < 250) {
+                factor = 1;
+            }
+            Ext.each(clusterLayers, function(layer) {
+                if (layer.getVisible()) {
+                    var featureType = layer.get('featureType');
+                    var baseUrl = layer.get('url');
+                    Ext.Ajax.request({
+                        url: baseUrl + "?service=WFS&" +
+                            "version=1.0.0&" +
+                            "request=GetFeature&" +
+                            "typeName=" + featureType + "&" +
+                            "outputFormat=application/json&" +
+                            "bbox=" + extent.join(",") + "&" +
+                            "viewParams=resolutioninm:" + factor + ";" +
+                            "bboxllx:" + extent[0] + ";" +
+                            "bboxlly:" + extent[1] + ";" +
+                            "bboxurx:" + extent[2] + ";" +
+                            "bboxury:" + extent[3],
+                        success: function(response){
+                            var feats = response.responseText;
+                            var f = new ol.format.GeoJSON().readFeatures(feats);
+                            layer.getSource().clear();
+                            layer.getSource().addFeatures(f);
+                        },
+                        failure: function(){
+                            Ext.log.error("Failure on load of cluster features");
+                        }
+                    });
+                }
+            });
+        }
+    }
+});

@@ -1,9 +1,95 @@
+/* Copyright (c) 2015 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * ZoomOut Button
+ *
+ * Button used to zoom out.
+ *
+ * @class BasiGX.view.button.ZoomOut
+ */
+Ext.define("BasiGX.view.button.ZoomOut", {
+    extend: "Ext.Button",
+    xtype: 'basigx-button-zoomout',
+    requires: [
+        'Ext.app.ViewModel',
+        'BasiGX.util.Map'
+    ],
 
-var __cov_QJFGxaSnnf1q0szJKZmC2g = (Function('return this'))();
-if (!__cov_QJFGxaSnnf1q0szJKZmC2g.__coverage__) { __cov_QJFGxaSnnf1q0szJKZmC2g.__coverage__ = {}; }
-__cov_QJFGxaSnnf1q0szJKZmC2g = __cov_QJFGxaSnnf1q0szJKZmC2g.__coverage__;
-if (!(__cov_QJFGxaSnnf1q0szJKZmC2g['/home/travis/build/terrestris/BasiGX/src/view/button/ZoomOut.js'])) {
-   __cov_QJFGxaSnnf1q0szJKZmC2g['/home/travis/build/terrestris/BasiGX/src/view/button/ZoomOut.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/ZoomOut.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0},"b":{"1":[0,0],"2":[0,0]},"f":{"1":0,"2":0},"fnMap":{"1":{"name":"(anonymous_1)","line":61,"loc":{"start":{"line":61,"column":17},"end":{"line":61,"column":28}}},"2":{"name":"(anonymous_2)","line":86,"loc":{"start":{"line":86,"column":17},"end":{"line":86,"column":34}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":95,"column":3}},"2":{"start":{"line":62,"column":12},"end":{"line":65,"column":21}},"3":{"start":{"line":68,"column":12},"end":{"line":70,"column":13}},"4":{"start":{"line":69,"column":16},"end":{"line":69,"column":67}},"5":{"start":{"line":72,"column":12},"end":{"line":72,"column":37}},"6":{"start":{"line":73,"column":12},"end":{"line":76,"column":15}},"7":{"start":{"line":78,"column":12},"end":{"line":78,"column":37}},"8":{"start":{"line":79,"column":12},"end":{"line":79,"column":61}},"9":{"start":{"line":87,"column":8},"end":{"line":87,"column":34}},"10":{"start":{"line":89,"column":8},"end":{"line":93,"column":9}},"11":{"start":{"line":90,"column":12},"end":{"line":90,"column":40}},"12":{"start":{"line":91,"column":12},"end":{"line":91,"column":62}},"13":{"start":{"line":92,"column":12},"end":{"line":92,"column":31}}},"branchMap":{"1":{"line":68,"type":"if","locations":[{"start":{"line":68,"column":12},"end":{"line":68,"column":12}},{"start":{"line":68,"column":12},"end":{"line":68,"column":12}}]},"2":{"line":89,"type":"if","locations":[{"start":{"line":89,"column":8},"end":{"line":89,"column":8}},{"start":{"line":89,"column":8},"end":{"line":89,"column":8}}]}}};
-}
-__cov_QJFGxaSnnf1q0szJKZmC2g = __cov_QJFGxaSnnf1q0szJKZmC2g['/home/travis/build/terrestris/BasiGX/src/view/button/ZoomOut.js'];
-__cov_QJFGxaSnnf1q0szJKZmC2g.s['1']++;Ext.define('BasiGX.view.button.ZoomOut',{extend:'Ext.Button',xtype:'basigx-button-zoomout',requires:['Ext.app.ViewModel','BasiGX.util.Map'],viewModel:{data:{tooltip:'Herauszoomen',text:null}},bind:{text:'{text}'},olMap:null,glyph:'xf010@FontAwesome',html:'<i class="fa fa-search-minus fa-2x"></i>',config:{handler:function(){__cov_QJFGxaSnnf1q0szJKZmC2g.f['1']++;__cov_QJFGxaSnnf1q0szJKZmC2g.s['2']++;var me=this,olMap=me.olMap,olView,zoom;__cov_QJFGxaSnnf1q0szJKZmC2g.s['3']++;if(Ext.isEmpty(olMap)){__cov_QJFGxaSnnf1q0szJKZmC2g.b['1'][0]++;__cov_QJFGxaSnnf1q0szJKZmC2g.s['4']++;olMap=BasiGX.util.Map.getMapComponent().getMap();}else{__cov_QJFGxaSnnf1q0szJKZmC2g.b['1'][1]++;}__cov_QJFGxaSnnf1q0szJKZmC2g.s['5']++;olView=olMap.getView();__cov_QJFGxaSnnf1q0szJKZmC2g.s['6']++;zoom=ol.animation.zoom({resolution:olView.getResolution(),duration:500});__cov_QJFGxaSnnf1q0szJKZmC2g.s['7']++;olMap.beforeRender(zoom);__cov_QJFGxaSnnf1q0szJKZmC2g.s['8']++;olView.setResolution(olView.getResolution()*2);}},constructor:function(config){__cov_QJFGxaSnnf1q0szJKZmC2g.f['2']++;__cov_QJFGxaSnnf1q0szJKZmC2g.s['9']++;this.callParent([config]);__cov_QJFGxaSnnf1q0szJKZmC2g.s['10']++;if(this.setTooltip){__cov_QJFGxaSnnf1q0szJKZmC2g.b['2'][0]++;__cov_QJFGxaSnnf1q0szJKZmC2g.s['11']++;var bind=this.config.bind;__cov_QJFGxaSnnf1q0szJKZmC2g.s['12']++;bind.tooltip=this.getViewModel().get('tooltip');__cov_QJFGxaSnnf1q0szJKZmC2g.s['13']++;this.setBind(bind);}else{__cov_QJFGxaSnnf1q0szJKZmC2g.b['2'][1]++;}}});
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Herauszoomen',
+            text: null
+        }
+    },
+
+    /**
+     *
+     */
+    bind: {
+        text: '{text}'
+    },
+
+    /**
+     * The OL3 map this button is bounded to
+     */
+    olMap: null,
+
+    /**
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: 'xf010@FontAwesome',
+    html: '<i class="fa fa-search-minus fa-2x"></i>',
+
+    config: {
+        handler: function() {
+            var me = this,
+                olMap = me.olMap,
+                olView,
+                zoom;
+
+            // fallback
+            if (Ext.isEmpty(olMap)) {
+                olMap = BasiGX.util.Map.getMapComponent().getMap();
+            }
+
+            olView = olMap.getView();
+            zoom = ol.animation.zoom({
+                resolution: olView.getResolution(),
+                duration: 500
+            });
+
+            olMap.beforeRender(zoom);
+            olView.setResolution(olView.getResolution() * 2);
+        }
+    },
+
+    /**
+     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+    }
+});

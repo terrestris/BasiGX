@@ -1,9 +1,105 @@
+/* Copyright (c) 2015 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * FeaturePropertyGrid
+ *
+ * A PropertyGrid showing feature values.
+ *
+ * @class BasiGX.view.grid.FeaturePropertyGrid
+ */
+Ext.define("BasiGX.view.grid.FeaturePropertyGrid", {
+    xtype: "basigx-grid-featurepropertygrid",
+    extend: 'Ext.grid.property.Grid',
+    requires: [
+    ],
 
-var __cov_5$EVhnLYcWrfbXFynSx$sg = (Function('return this'))();
-if (!__cov_5$EVhnLYcWrfbXFynSx$sg.__coverage__) { __cov_5$EVhnLYcWrfbXFynSx$sg.__coverage__ = {}; }
-__cov_5$EVhnLYcWrfbXFynSx$sg = __cov_5$EVhnLYcWrfbXFynSx$sg.__coverage__;
-if (!(__cov_5$EVhnLYcWrfbXFynSx$sg['/home/travis/build/terrestris/BasiGX/src/view/grid/FeaturePropertyGrid.js'])) {
-   __cov_5$EVhnLYcWrfbXFynSx$sg['/home/travis/build/terrestris/BasiGX/src/view/grid/FeaturePropertyGrid.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/grid/FeaturePropertyGrid.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0},"fnMap":{"1":{"name":"(anonymous_1)","line":40,"loc":{"start":{"line":40,"column":19},"end":{"line":40,"column":29}}},"2":{"name":"(anonymous_2)","line":50,"loc":{"start":{"line":50,"column":28},"end":{"line":50,"column":38}}},"3":{"name":"(anonymous_3)","line":58,"loc":{"start":{"line":58,"column":24},"end":{"line":58,"column":34}}},"4":{"name":"(anonymous_4)","line":64,"loc":{"start":{"line":64,"column":31},"end":{"line":64,"column":57}}},"5":{"name":"(anonymous_5)","line":69,"loc":{"start":{"line":69,"column":44},"end":{"line":69,"column":62}}},"6":{"name":"(anonymous_6)","line":92,"loc":{"start":{"line":92,"column":19},"end":{"line":92,"column":35}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":105,"column":3}},"2":{"start":{"line":41,"column":8},"end":{"line":41,"column":22}},"3":{"start":{"line":43,"column":8},"end":{"line":45,"column":9}},"4":{"start":{"line":44,"column":12},"end":{"line":44,"column":71}},"5":{"start":{"line":47,"column":8},"end":{"line":47,"column":35}},"6":{"start":{"line":48,"column":8},"end":{"line":48,"column":56}},"7":{"start":{"line":50,"column":8},"end":{"line":52,"column":11}},"8":{"start":{"line":51,"column":12},"end":{"line":51,"column":25}},"9":{"start":{"line":59,"column":8},"end":{"line":59,"column":22}},"10":{"start":{"line":60,"column":8},"end":{"line":60,"column":31}},"11":{"start":{"line":63,"column":8},"end":{"line":63,"column":45}},"12":{"start":{"line":64,"column":8},"end":{"line":67,"column":10}},"13":{"start":{"line":65,"column":12},"end":{"line":65,"column":58}},"14":{"start":{"line":66,"column":12},"end":{"line":66,"column":25}},"15":{"start":{"line":69,"column":8},"end":{"line":76,"column":11}},"16":{"start":{"line":70,"column":12},"end":{"line":71,"column":50}},"17":{"start":{"line":72,"column":12},"end":{"line":72,"column":55}},"18":{"start":{"line":73,"column":12},"end":{"line":73,"column":54}},"19":{"start":{"line":74,"column":12},"end":{"line":74,"column":40}},"20":{"start":{"line":75,"column":12},"end":{"line":75,"column":37}},"21":{"start":{"line":78,"column":8},"end":{"line":82,"column":9}},"22":{"start":{"line":79,"column":12},"end":{"line":79,"column":40}},"23":{"start":{"line":81,"column":12},"end":{"line":81,"column":77}},"24":{"start":{"line":93,"column":8},"end":{"line":95,"column":9}},"25":{"start":{"line":94,"column":12},"end":{"line":94,"column":25}},"26":{"start":{"line":96,"column":8},"end":{"line":101,"column":9}},"27":{"start":{"line":97,"column":12},"end":{"line":97,"column":80}},"28":{"start":{"line":98,"column":15},"end":{"line":101,"column":9}},"29":{"start":{"line":99,"column":12},"end":{"line":100,"column":31}},"30":{"start":{"line":102,"column":8},"end":{"line":102,"column":21}}},"branchMap":{"1":{"line":43,"type":"if","locations":[{"start":{"line":43,"column":8},"end":{"line":43,"column":8}},{"start":{"line":43,"column":8},"end":{"line":43,"column":8}}]},"2":{"line":70,"type":"binary-expr","locations":[{"start":{"line":70,"column":28},"end":{"line":70,"column":51}},{"start":{"line":71,"column":16},"end":{"line":71,"column":49}}]},"3":{"line":72,"type":"cond-expr","locations":[{"start":{"line":72,"column":34},"end":{"line":72,"column":43}},{"start":{"line":72,"column":46},"end":{"line":72,"column":54}}]},"4":{"line":78,"type":"if","locations":[{"start":{"line":78,"column":8},"end":{"line":78,"column":8}},{"start":{"line":78,"column":8},"end":{"line":78,"column":8}}]},"5":{"line":93,"type":"if","locations":[{"start":{"line":93,"column":8},"end":{"line":93,"column":8}},{"start":{"line":93,"column":8},"end":{"line":93,"column":8}}]},"6":{"line":93,"type":"binary-expr","locations":[{"start":{"line":93,"column":12},"end":{"line":93,"column":18}},{"start":{"line":93,"column":22},"end":{"line":93,"column":36}}]},"7":{"line":96,"type":"if","locations":[{"start":{"line":96,"column":8},"end":{"line":96,"column":8}},{"start":{"line":96,"column":8},"end":{"line":96,"column":8}}]},"8":{"line":98,"type":"if","locations":[{"start":{"line":98,"column":15},"end":{"line":98,"column":15}},{"start":{"line":98,"column":15},"end":{"line":98,"column":15}}]}}};
-}
-__cov_5$EVhnLYcWrfbXFynSx$sg = __cov_5$EVhnLYcWrfbXFynSx$sg['/home/travis/build/terrestris/BasiGX/src/view/grid/FeaturePropertyGrid.js'];
-__cov_5$EVhnLYcWrfbXFynSx$sg.s['1']++;Ext.define('BasiGX.view.grid.FeaturePropertyGrid',{xtype:'basigx-grid-featurepropertygrid',extend:'Ext.grid.property.Grid',requires:[],width:300,config:{olFeature:null,propertyWhiteList:null,propertyMapping:null},initComponent:function(){__cov_5$EVhnLYcWrfbXFynSx$sg.f['1']++;__cov_5$EVhnLYcWrfbXFynSx$sg.s['2']++;var me=this;__cov_5$EVhnLYcWrfbXFynSx$sg.s['3']++;if(!me.getOlFeature()){__cov_5$EVhnLYcWrfbXFynSx$sg.b['1'][0]++;__cov_5$EVhnLYcWrfbXFynSx$sg.s['4']++;Ext.Error.raise('No Feature set for FeaturePropertyGrid.');}else{__cov_5$EVhnLYcWrfbXFynSx$sg.b['1'][1]++;}__cov_5$EVhnLYcWrfbXFynSx$sg.s['5']++;me.callParent([arguments]);__cov_5$EVhnLYcWrfbXFynSx$sg.s['6']++;me.on('afterrender',me.setUpFeatureValues,me);__cov_5$EVhnLYcWrfbXFynSx$sg.s['7']++;me.on('beforeedit',function(){__cov_5$EVhnLYcWrfbXFynSx$sg.f['2']++;__cov_5$EVhnLYcWrfbXFynSx$sg.s['8']++;return false;});},setUpFeatureValues:function(){__cov_5$EVhnLYcWrfbXFynSx$sg.f['3']++;__cov_5$EVhnLYcWrfbXFynSx$sg.s['9']++;var me=this;__cov_5$EVhnLYcWrfbXFynSx$sg.s['10']++;var displayValues={};__cov_5$EVhnLYcWrfbXFynSx$sg.s['11']++;var valueColumn=me.getColumns()[1];__cov_5$EVhnLYcWrfbXFynSx$sg.s['12']++;valueColumn.renderer=function(value,metadata){__cov_5$EVhnLYcWrfbXFynSx$sg.f['4']++;__cov_5$EVhnLYcWrfbXFynSx$sg.s['13']++;metadata.tdAttr='data-qtip="'+value+'"';__cov_5$EVhnLYcWrfbXFynSx$sg.s['14']++;return value;};__cov_5$EVhnLYcWrfbXFynSx$sg.s['15']++;Ext.each(me.getPropertyWhiteList(),function(property){__cov_5$EVhnLYcWrfbXFynSx$sg.f['5']++;__cov_5$EVhnLYcWrfbXFynSx$sg.s['16']++;var mappedKey=(__cov_5$EVhnLYcWrfbXFynSx$sg.b['2'][0]++,me.getPropertyMapping())&&(__cov_5$EVhnLYcWrfbXFynSx$sg.b['2'][1]++,me.getPropertyMapping()[property]);__cov_5$EVhnLYcWrfbXFynSx$sg.s['17']++;var key=mappedKey?(__cov_5$EVhnLYcWrfbXFynSx$sg.b['3'][0]++,mappedKey):(__cov_5$EVhnLYcWrfbXFynSx$sg.b['3'][1]++,property);__cov_5$EVhnLYcWrfbXFynSx$sg.s['18']++;var val=me.getOlFeature().get(property);__cov_5$EVhnLYcWrfbXFynSx$sg.s['19']++;val=me.convertToHref(val);__cov_5$EVhnLYcWrfbXFynSx$sg.s['20']++;displayValues[key]=val;});__cov_5$EVhnLYcWrfbXFynSx$sg.s['21']++;if(displayValues){__cov_5$EVhnLYcWrfbXFynSx$sg.b['4'][0]++;__cov_5$EVhnLYcWrfbXFynSx$sg.s['22']++;me.setSource(displayValues);}else{__cov_5$EVhnLYcWrfbXFynSx$sg.b['4'][1]++;__cov_5$EVhnLYcWrfbXFynSx$sg.s['23']++;Ext.Error.raise('Feature in FeaturePropertyGrid has no values.');}},convertToHref:function(value){__cov_5$EVhnLYcWrfbXFynSx$sg.f['6']++;__cov_5$EVhnLYcWrfbXFynSx$sg.s['24']++;if((__cov_5$EVhnLYcWrfbXFynSx$sg.b['6'][0]++,!value)||(__cov_5$EVhnLYcWrfbXFynSx$sg.b['6'][1]++,!value.indexOf)){__cov_5$EVhnLYcWrfbXFynSx$sg.b['5'][0]++;__cov_5$EVhnLYcWrfbXFynSx$sg.s['25']++;return value;}else{__cov_5$EVhnLYcWrfbXFynSx$sg.b['5'][1]++;}__cov_5$EVhnLYcWrfbXFynSx$sg.s['26']++;if(value.indexOf('http')===0){__cov_5$EVhnLYcWrfbXFynSx$sg.b['7'][0]++;__cov_5$EVhnLYcWrfbXFynSx$sg.s['27']++;value='<a href=\''+value+'\' target=\'_blank\'>'+value+'</a>';}else{__cov_5$EVhnLYcWrfbXFynSx$sg.b['7'][1]++;__cov_5$EVhnLYcWrfbXFynSx$sg.s['28']++;if(value.indexOf('www.')===0){__cov_5$EVhnLYcWrfbXFynSx$sg.b['8'][0]++;__cov_5$EVhnLYcWrfbXFynSx$sg.s['29']++;value='<a href=\'http://'+value+'\' target=\'_blank\'>'+value+'</a>';}else{__cov_5$EVhnLYcWrfbXFynSx$sg.b['8'][1]++;}}__cov_5$EVhnLYcWrfbXFynSx$sg.s['30']++;return value;}});
+    width: 300,
+
+    config: {
+        olFeature: null,
+        propertyWhiteList: null,
+        propertyMapping: null
+    },
+
+    /**
+     *
+     */
+    initComponent: function(){
+        var me = this;
+
+        if(!me.getOlFeature()){
+            Ext.Error.raise('No Feature set for FeaturePropertyGrid.');
+        }
+
+        me.callParent([arguments]);
+        me.on('afterrender', me.setUpFeatureValues, me);
+        // Equal to editable: false. Which does not exist.
+        me.on('beforeedit', function(){
+            return false;
+        });
+    },
+
+    /**
+     * Prepares the values by handling the property whitelist and mapping
+     */
+    setUpFeatureValues: function(){
+        var me = this;
+        var displayValues = {};
+
+        // Enable tooltip
+        var valueColumn = me.getColumns()[1];
+        valueColumn.renderer = function(value, metadata) {
+            metadata.tdAttr = 'data-qtip="' + value + '"';
+            return value;
+        };
+
+        Ext.each(me.getPropertyWhiteList(), function(property){
+            var mappedKey = me.getPropertyMapping() &&
+                me.getPropertyMapping()[property];
+            var key = mappedKey ? mappedKey : property;
+            var val = me.getOlFeature().get(property);
+            val = me.convertToHref(val);
+            displayValues[key] = val;
+        });
+
+        if(displayValues){
+            me.setSource(displayValues);
+        } else {
+            Ext.Error.raise('Feature in FeaturePropertyGrid has no values.');
+        }
+    },
+
+    /**
+     * Method checks if a value looks like a link and converts it to a
+     * clickable href
+     *
+     * @param {Mixed} value - the value to check and convert if needed
+     * @return {String} value - the converted html-href string
+     */
+    convertToHref: function(value) {
+        if (!value || !value.indexOf) {
+            return value;
+        }
+        if (value.indexOf("http") === 0) {
+            value = "<a href='" + value + "' target='_blank'>" + value + "</a>";
+        } else if (value.indexOf("www.") === 0) {
+            value = "<a href='http://" + value + "' target='_blank'>" +
+                value + "</a>";
+        }
+        return value;
+    }
+
+});

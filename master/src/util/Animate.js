@@ -1,9 +1,172 @@
+/* Copyright (c) 2015 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * @class BasiGX.util.Animate
+ */
+Ext.define('BasiGX.util.Animate', {
+    requires: [
+        'BasiGX.util.Map'
+    ],
+    statics: {
+       shake: function(component, duration, amplitude){
+           duration = duration || 200;
+           amplitude = amplitude || 5;
+           var startX = component.getX();
+           component.animate({
+               duration: duration,
+               keyframes: {
+                   0: {
+                       x: startX + amplitude
+                   },
+                   25: {
+                       x: startX - amplitude
+                   },
+                   50: {
+                       x: startX + amplitude
+                   },
+                   75: {
+                       x: startX - amplitude
+                   },
+                   100: {
+                       x: startX
+                   }
+               }
+           });
+       },
 
-var __cov_RJ1f6Sd$NLI4_EOa6h2dHQ = (Function('return this'))();
-if (!__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.__coverage__) { __cov_RJ1f6Sd$NLI4_EOa6h2dHQ.__coverage__ = {}; }
-__cov_RJ1f6Sd$NLI4_EOa6h2dHQ = __cov_RJ1f6Sd$NLI4_EOa6h2dHQ.__coverage__;
-if (!(__cov_RJ1f6Sd$NLI4_EOa6h2dHQ['/home/travis/build/terrestris/BasiGX/src/util/Animate.js'])) {
-   __cov_RJ1f6Sd$NLI4_EOa6h2dHQ['/home/travis/build/terrestris/BasiGX/src/util/Animate.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Animate.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":1,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0},"fnMap":{"1":{"name":"(anonymous_1)","line":24,"loc":{"start":{"line":24,"column":14},"end":{"line":24,"column":54}}},"2":{"name":"(anonymous_2)","line":50,"loc":{"start":{"line":50,"column":21},"end":{"line":50,"column":49}}},"3":{"name":"animate","line":55,"loc":{"start":{"line":55,"column":11},"end":{"line":55,"column":35}}},"4":{"name":"(anonymous_4)","line":114,"loc":{"start":{"line":114,"column":20},"end":{"line":114,"column":76}}},"5":{"name":"(anonymous_5)","line":132,"loc":{"start":{"line":132,"column":25},"end":{"line":132,"column":41}}}},"statementMap":{"1":{"start":{"line":19,"column":0},"end":{"line":172,"column":3}},"2":{"start":{"line":25,"column":11},"end":{"line":25,"column":38}},"3":{"start":{"line":26,"column":11},"end":{"line":26,"column":38}},"4":{"start":{"line":27,"column":11},"end":{"line":27,"column":41}},"5":{"start":{"line":28,"column":11},"end":{"line":47,"column":14}},"6":{"start":{"line":51,"column":11},"end":{"line":51,"column":64}},"7":{"start":{"line":52,"column":11},"end":{"line":52,"column":44}},"8":{"start":{"line":53,"column":11},"end":{"line":53,"column":27}},"9":{"start":{"line":55,"column":11},"end":{"line":102,"column":12}},"10":{"start":{"line":56,"column":13},"end":{"line":56,"column":53}},"11":{"start":{"line":57,"column":13},"end":{"line":57,"column":47}},"12":{"start":{"line":58,"column":13},"end":{"line":58,"column":59}},"13":{"start":{"line":59,"column":13},"end":{"line":59,"column":51}},"14":{"start":{"line":60,"column":13},"end":{"line":60,"column":51}},"15":{"start":{"line":62,"column":13},"end":{"line":62,"column":67}},"16":{"start":{"line":63,"column":13},"end":{"line":63,"column":63}},"17":{"start":{"line":64,"column":13},"end":{"line":64,"column":28}},"18":{"start":{"line":66,"column":13},"end":{"line":94,"column":14}},"19":{"start":{"line":68,"column":17},"end":{"line":78,"column":20}},"20":{"start":{"line":79,"column":17},"end":{"line":79,"column":52}},"21":{"start":{"line":80,"column":17},"end":{"line":80,"column":61}},"22":{"start":{"line":83,"column":17},"end":{"line":91,"column":20}},"23":{"start":{"line":92,"column":17},"end":{"line":92,"column":57}},"24":{"start":{"line":93,"column":17},"end":{"line":93,"column":66}},"25":{"start":{"line":96,"column":13},"end":{"line":99,"column":14}},"26":{"start":{"line":97,"column":15},"end":{"line":97,"column":50}},"27":{"start":{"line":98,"column":15},"end":{"line":98,"column":22}},"28":{"start":{"line":101,"column":13},"end":{"line":101,"column":39}},"29":{"start":{"line":103,"column":11},"end":{"line":103,"column":56}},"30":{"start":{"line":104,"column":11},"end":{"line":104,"column":30}},"31":{"start":{"line":115,"column":11},"end":{"line":115,"column":64}},"32":{"start":{"line":116,"column":11},"end":{"line":116,"column":27}},"33":{"start":{"line":118,"column":11},"end":{"line":118,"column":54}},"34":{"start":{"line":119,"column":11},"end":{"line":119,"column":44}},"35":{"start":{"line":120,"column":11},"end":{"line":120,"column":58}},"36":{"start":{"line":122,"column":11},"end":{"line":124,"column":12}},"37":{"start":{"line":123,"column":15},"end":{"line":123,"column":56}},"38":{"start":{"line":126,"column":11},"end":{"line":126,"column":54}},"39":{"start":{"line":127,"column":11},"end":{"line":127,"column":53}},"40":{"start":{"line":128,"column":11},"end":{"line":128,"column":32}},"41":{"start":{"line":129,"column":11},"end":{"line":129,"column":59}},"42":{"start":{"line":130,"column":11},"end":{"line":130,"column":59}},"43":{"start":{"line":132,"column":11},"end":{"line":166,"column":13}},"44":{"start":{"line":133,"column":15},"end":{"line":133,"column":55}},"45":{"start":{"line":134,"column":15},"end":{"line":134,"column":49}},"46":{"start":{"line":135,"column":15},"end":{"line":135,"column":53}},"47":{"start":{"line":137,"column":15},"end":{"line":137,"column":50}},"48":{"start":{"line":139,"column":15},"end":{"line":155,"column":16}},"49":{"start":{"line":142,"column":23},"end":{"line":143,"column":67}},"50":{"start":{"line":144,"column":23},"end":{"line":144,"column":69}},"51":{"start":{"line":145,"column":23},"end":{"line":151,"column":24}},"52":{"start":{"line":146,"column":27},"end":{"line":146,"column":75}},"53":{"start":{"line":147,"column":30},"end":{"line":151,"column":24}},"54":{"start":{"line":148,"column":27},"end":{"line":148,"column":80}},"55":{"start":{"line":150,"column":27},"end":{"line":150,"column":77}},"56":{"start":{"line":153,"column":19},"end":{"line":153,"column":49}},"57":{"start":{"line":154,"column":19},"end":{"line":154,"column":56}},"58":{"start":{"line":157,"column":15},"end":{"line":161,"column":16}},"59":{"start":{"line":158,"column":19},"end":{"line":158,"column":54}},"60":{"start":{"line":159,"column":19},"end":{"line":159,"column":41}},"61":{"start":{"line":160,"column":19},"end":{"line":160,"column":26}},"62":{"start":{"line":163,"column":15},"end":{"line":163,"column":41}},"63":{"start":{"line":165,"column":15},"end":{"line":165,"column":30}},"64":{"start":{"line":168,"column":11},"end":{"line":168,"column":56}},"65":{"start":{"line":169,"column":11},"end":{"line":169,"column":30}}},"branchMap":{"1":{"line":25,"type":"binary-expr","locations":[{"start":{"line":25,"column":22},"end":{"line":25,"column":30}},{"start":{"line":25,"column":34},"end":{"line":25,"column":37}}]},"2":{"line":26,"type":"binary-expr","locations":[{"start":{"line":26,"column":23},"end":{"line":26,"column":32}},{"start":{"line":26,"column":36},"end":{"line":26,"column":37}}]},"3":{"line":66,"type":"if","locations":[{"start":{"line":66,"column":13},"end":{"line":66,"column":13}},{"start":{"line":66,"column":13},"end":{"line":66,"column":13}}]},"4":{"line":66,"type":"binary-expr","locations":[{"start":{"line":66,"column":17},"end":{"line":66,"column":39}},{"start":{"line":66,"column":43},"end":{"line":66,"column":69}}]},"5":{"line":96,"type":"if","locations":[{"start":{"line":96,"column":13},"end":{"line":96,"column":13}},{"start":{"line":96,"column":13},"end":{"line":96,"column":13}}]},"6":{"line":122,"type":"if","locations":[{"start":{"line":122,"column":11},"end":{"line":122,"column":11}},{"start":{"line":122,"column":11},"end":{"line":122,"column":11}}]},"7":{"line":139,"type":"if","locations":[{"start":{"line":139,"column":15},"end":{"line":139,"column":15}},{"start":{"line":139,"column":15},"end":{"line":139,"column":15}}]},"8":{"line":139,"type":"binary-expr","locations":[{"start":{"line":139,"column":19},"end":{"line":139,"column":51}},{"start":{"line":140,"column":19},"end":{"line":140,"column":46}},{"start":{"line":141,"column":19},"end":{"line":141,"column":50}}]},"9":{"line":145,"type":"if","locations":[{"start":{"line":145,"column":23},"end":{"line":145,"column":23}},{"start":{"line":145,"column":23},"end":{"line":145,"column":23}}]},"10":{"line":147,"type":"if","locations":[{"start":{"line":147,"column":30},"end":{"line":147,"column":30}},{"start":{"line":147,"column":30},"end":{"line":147,"column":30}}]},"11":{"line":157,"type":"if","locations":[{"start":{"line":157,"column":15},"end":{"line":157,"column":15}},{"start":{"line":157,"column":15},"end":{"line":157,"column":15}}]},"12":{"line":157,"type":"binary-expr","locations":[{"start":{"line":157,"column":19},"end":{"line":157,"column":37}},{"start":{"line":157,"column":41},"end":{"line":157,"column":71}}]}}};
-}
-__cov_RJ1f6Sd$NLI4_EOa6h2dHQ = __cov_RJ1f6Sd$NLI4_EOa6h2dHQ['/home/travis/build/terrestris/BasiGX/src/util/Animate.js'];
-__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['1']++;Ext.define('BasiGX.util.Animate',{requires:['BasiGX.util.Map'],statics:{shake:function(component,duration,amplitude){__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.f['1']++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['2']++;duration=(__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['1'][0]++,duration)||(__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['1'][1]++,200);__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['3']++;amplitude=(__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['2'][0]++,amplitude)||(__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['2'][1]++,5);__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['4']++;var startX=component.getX();__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['5']++;component.animate({duration:duration,keyframes:{0:{x:startX+amplitude},25:{x:startX-amplitude},50:{x:startX+amplitude},75:{x:startX-amplitude},100:{x:startX}}});},flashFeature:function(feature,duration){__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.f['2']++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['6']++;var map=BasiGX.util.Map.getMapComponent().getMap();__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['7']++;var start=new Date().getTime();__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['8']++;var listenerKey;function animate(event){__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.f['3']++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['10']++;var vectorContext=event.vectorContext;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['11']++;var frameState=event.frameState;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['12']++;var flashGeom=feature.getGeometry().clone();__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['13']++;var elapsed=frameState.time-start;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['14']++;var elapsedRatio=elapsed/duration;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['15']++;var radius=ol.easing.easeOut(elapsedRatio)*25+5;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['16']++;var opacity=ol.easing.easeOut(1-elapsedRatio);__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['17']++;var flashStyle;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['18']++;if((__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['4'][0]++,vectorContext.setStyle)&&(__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['4'][1]++,vectorContext.drawGeometry)){__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['3'][0]++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['19']++;flashStyle=new ol.style.Style({image:new ol.style.Circle({radius:radius,snapToPixel:false,stroke:new ol.style.Stroke({color:'rgba(255, 0, 0, '+opacity+')',width:4,opacity:opacity})})});__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['20']++;vectorContext.setStyle(flashStyle);__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['21']++;vectorContext.drawGeometry(flashGeom,null);}else{__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['3'][1]++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['22']++;flashStyle=new ol.style.Circle({radius:radius,snapToPixel:false,stroke:new ol.style.Stroke({color:'rgba(255, 0, 0, '+opacity+')',width:4,opacity:opacity})});__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['23']++;vectorContext.setImageStyle(flashStyle);__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['24']++;vectorContext.drawPointGeometry(flashGeom,null);}__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['25']++;if(elapsed>duration){__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['5'][0]++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['26']++;ol.Observable.unByKey(listenerKey);__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['27']++;return;}else{__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['5'][1]++;}__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['28']++;frameState.animate=true;}__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['29']++;listenerKey=map.on('postcompose',animate);__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['30']++;return listenerKey;},moveFeature:function(featureToMove,duration,pixel,style,doneFn){__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.f['4']++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['31']++;var map=BasiGX.util.Map.getMapComponent().getMap();__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['32']++;var listenerKey;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['33']++;var geometry=featureToMove.getGeometry();__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['34']++;var start=new Date().getTime();__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['35']++;var resolution=map.getView().getResolution();__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['36']++;if(typeof style==='function'){__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['6'][0]++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['37']++;style=style(featureToMove,resolution);}else{__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['6'][1]++;}__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['38']++;var totalDisplacement=pixel*resolution;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['39']++;var expectedFrames=duration/1000*60;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['40']++;var actualFrames=0;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['41']++;var deltaX=totalDisplacement/expectedFrames;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['42']++;var deltaY=totalDisplacement/expectedFrames;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['43']++;var animate=function(event){__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.f['5']++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['44']++;var vectorContext=event.vectorContext;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['45']++;var frameState=event.frameState;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['46']++;var elapsed=frameState.time-start;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['47']++;geometry.translate(deltaX,deltaY);__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['48']++;if((__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['8'][0]++,vectorContext.setFillStrokeStyle)&&(__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['8'][1]++,vectorContext.setImageStyle)&&(__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['8'][2]++,vectorContext.drawPointGeometry)){__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['7'][0]++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['49']++;vectorContext.setFillStrokeStyle(style.getFill(),style.getStroke());__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['50']++;vectorContext.setImageStyle(style.getImage());__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['51']++;if(geometry instanceof ol.geom.Point){__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['9'][0]++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['52']++;vectorContext.drawPointGeometry(geometry,null);}else{__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['9'][1]++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['53']++;if(geometry instanceof ol.geom.LineString){__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['10'][0]++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['54']++;vectorContext.drawLineStringGeometry(geometry,null);}else{__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['10'][1]++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['55']++;vectorContext.drawPolygonGeometry(geometry,null);}}}else{__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['7'][1]++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['56']++;vectorContext.setStyle(style);__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['57']++;vectorContext.drawGeometry(geometry);}__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['58']++;if((__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['12'][0]++,elapsed>duration)||(__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['12'][1]++,actualFrames>=expectedFrames)){__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['11'][0]++;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['59']++;ol.Observable.unByKey(listenerKey);__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['60']++;doneFn(featureToMove);__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['61']++;return;}else{__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.b['11'][1]++;}__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['62']++;frameState.animate=true;__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['63']++;actualFrames++;};__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['64']++;listenerKey=map.on('postcompose',animate);__cov_RJ1f6Sd$NLI4_EOa6h2dHQ.s['65']++;return listenerKey;}}});
+       flashFeature: function(feature, duration) {
+           var map = BasiGX.util.Map.getMapComponent().getMap();
+           var start = new Date().getTime();
+           var listenerKey;
+
+           function animate(event) {
+             var vectorContext = event.vectorContext;
+             var frameState = event.frameState;
+             var flashGeom = feature.getGeometry().clone();
+             var elapsed = frameState.time - start;
+             var elapsedRatio = elapsed / duration;
+             // radius will be 5 at start and 30 at end.
+             var radius = ol.easing.easeOut(elapsedRatio) * 25 + 5;
+             var opacity = ol.easing.easeOut(1 - elapsedRatio);
+             var flashStyle;
+
+             if (vectorContext.setStyle && vectorContext.drawGeometry) {
+                 // for ol3 versions from v3.15.0
+                 flashStyle = new ol.style.Style({
+                     image: new ol.style.Circle({
+                         radius: radius,
+                         snapToPixel: false,
+                         stroke: new ol.style.Stroke({
+                             color: 'rgba(255, 0, 0, ' + opacity + ')',
+                             width: 4,
+                             opacity: opacity
+                         })
+                     })
+                 });
+                 vectorContext.setStyle(flashStyle);
+                 vectorContext.drawGeometry(flashGeom, null);
+             } else {
+                 // for ol3 versions older v3.15.0
+                 flashStyle = new ol.style.Circle({
+                     radius: radius,
+                     snapToPixel: false,
+                     stroke: new ol.style.Stroke({
+                         color: 'rgba(255, 0, 0, ' + opacity + ')',
+                         width: 4,
+                         opacity: opacity
+                     })
+                 });
+                 vectorContext.setImageStyle(flashStyle);
+                 vectorContext.drawPointGeometry(flashGeom, null);
+             }
+
+             if (elapsed > duration) {
+               ol.Observable.unByKey(listenerKey);
+               return;
+             }
+             // tell OL3 to continue postcompose animation
+             frameState.animate = true;
+           }
+           listenerKey = map.on('postcompose', animate);
+           return listenerKey;
+       },
+
+       /**
+        * Moves / translates a Feature to the given pixel delta in
+        * the given duration in ms, using the given style, calling a doneFn
+        * in the end
+        *
+        * Useful e.g. when hovering clustered features to show their children
+        */
+       moveFeature: function(featureToMove, duration, pixel, style, doneFn) {
+           var map = BasiGX.util.Map.getMapComponent().getMap();
+           var listenerKey;
+
+           var geometry = featureToMove.getGeometry();
+           var start = new Date().getTime();
+           var resolution = map.getView().getResolution();
+
+           if (typeof style === 'function') {
+               style = style(featureToMove, resolution);
+           }
+
+           var totalDisplacement = pixel * resolution;
+           var expectedFrames = duration / 1000 * 60;
+           var actualFrames = 0;
+           var deltaX = totalDisplacement / expectedFrames;
+           var deltaY = totalDisplacement / expectedFrames;
+
+           var animate = function(event) {
+               var vectorContext = event.vectorContext;
+               var frameState = event.frameState;
+               var elapsed = frameState.time - start;
+
+               geometry.translate(deltaX, deltaY);
+
+               if (vectorContext.setFillStrokeStyle &&
+                   vectorContext.setImageStyle &&
+                   vectorContext.drawPointGeometry) {
+                       vectorContext.setFillStrokeStyle(
+                               style.getFill(), style.getStroke());
+                       vectorContext.setImageStyle(style.getImage());
+                       if (geometry instanceof ol.geom.Point) {
+                           vectorContext.drawPointGeometry(geometry, null);
+                       } else if (geometry instanceof ol.geom.LineString) {
+                           vectorContext.drawLineStringGeometry(geometry, null);
+                       } else {
+                           vectorContext.drawPolygonGeometry(geometry, null);
+                       }
+               } else {
+                   vectorContext.setStyle(style);
+                   vectorContext.drawGeometry(geometry);
+               }
+
+               if (elapsed > duration || actualFrames >= expectedFrames) {
+                   ol.Observable.unByKey(listenerKey);
+                   doneFn(featureToMove);
+                   return;
+               }
+               // tell OL3 to continue postcompose animation
+               frameState.animate = true;
+
+               actualFrames++;
+           };
+
+           listenerKey = map.on('postcompose', animate);
+           return listenerKey;
+       }
+    }
+});

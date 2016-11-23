@@ -1,9 +1,100 @@
+/* Copyright (c) 2015 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * CoordinateTransform Button
+ *
+ * Button used to instanciate the basigx-form-CoordinateTransform in order
+ * to show and transform coordinates
+ *
+ * @class BasiGX.view.button.CoordinateTransform
+ */
+Ext.define("BasiGX.view.button.CoordinateTransform", {
+    extend: "Ext.Button",
+    xtype: 'basigx-button-coordinatetransform',
 
-var __cov_FmnuuHpuqeKM8LTua5joMg = (Function('return this'))();
-if (!__cov_FmnuuHpuqeKM8LTua5joMg.__coverage__) { __cov_FmnuuHpuqeKM8LTua5joMg.__coverage__ = {}; }
-__cov_FmnuuHpuqeKM8LTua5joMg = __cov_FmnuuHpuqeKM8LTua5joMg.__coverage__;
-if (!(__cov_FmnuuHpuqeKM8LTua5joMg['/home/travis/build/terrestris/BasiGX/src/view/button/CoordinateTransform.js'])) {
-   __cov_FmnuuHpuqeKM8LTua5joMg['/home/travis/build/terrestris/BasiGX/src/view/button/CoordinateTransform.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/CoordinateTransform.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0},"b":{"1":[0,0],"2":[0,0]},"f":{"1":0,"2":0},"fnMap":{"1":{"name":"(anonymous_1)","line":67,"loc":{"start":{"line":67,"column":17},"end":{"line":67,"column":27}}},"2":{"name":"(anonymous_2)","line":91,"loc":{"start":{"line":91,"column":17},"end":{"line":91,"column":34}}}},"statementMap":{"1":{"start":{"line":24,"column":0},"end":{"line":100,"column":3}},"2":{"start":{"line":68,"column":12},"end":{"line":68,"column":88}},"3":{"start":{"line":69,"column":12},"end":{"line":84,"column":13}},"4":{"start":{"line":70,"column":16},"end":{"line":81,"column":29}},"5":{"start":{"line":83,"column":16},"end":{"line":83,"column":47}},"6":{"start":{"line":92,"column":8},"end":{"line":92,"column":34}},"7":{"start":{"line":94,"column":8},"end":{"line":98,"column":9}},"8":{"start":{"line":95,"column":12},"end":{"line":95,"column":40}},"9":{"start":{"line":96,"column":12},"end":{"line":96,"column":62}},"10":{"start":{"line":97,"column":12},"end":{"line":97,"column":31}}},"branchMap":{"1":{"line":69,"type":"if","locations":[{"start":{"line":69,"column":12},"end":{"line":69,"column":12}},{"start":{"line":69,"column":12},"end":{"line":69,"column":12}}]},"2":{"line":94,"type":"if","locations":[{"start":{"line":94,"column":8},"end":{"line":94,"column":8}},{"start":{"line":94,"column":8},"end":{"line":94,"column":8}}]}}};
-}
-__cov_FmnuuHpuqeKM8LTua5joMg = __cov_FmnuuHpuqeKM8LTua5joMg['/home/travis/build/terrestris/BasiGX/src/view/button/CoordinateTransform.js'];
-__cov_FmnuuHpuqeKM8LTua5joMg.s['1']++;Ext.define('BasiGX.view.button.CoordinateTransform',{extend:'Ext.Button',xtype:'basigx-button-coordinatetransform',requires:['Ext.window.Window','Ext.app.ViewModel','BasiGX.view.form.CoordinateTransform','BasiGX.util.Animate'],viewModel:{data:{tooltip:'Koordinaten transformieren und anzeigen',text:'Koordinaten transformieren',windowTitle:'Koordinaten transformieren'}},bind:{text:'{text}'},coordinateSystemsToUse:[],transformCenterOnRender:true,config:{handler:function(){__cov_FmnuuHpuqeKM8LTua5joMg.f['1']++;__cov_FmnuuHpuqeKM8LTua5joMg.s['2']++;var win=Ext.ComponentQuery.query('[name=coordinate-transform-window]')[0];__cov_FmnuuHpuqeKM8LTua5joMg.s['3']++;if(!win){__cov_FmnuuHpuqeKM8LTua5joMg.b['1'][0]++;__cov_FmnuuHpuqeKM8LTua5joMg.s['4']++;Ext.create('Ext.window.Window',{name:'coordinate-transform-window',title:this.getViewModel().get('windowTitle'),width:500,height:400,layout:'fit',items:[{xtype:'basigx-form-coordinatetransform',coordinateSystemsToUse:this.coordinateSystemsToUse,transformCenterOnRender:this.transformCenterOnRender}]}).showAt(0);}else{__cov_FmnuuHpuqeKM8LTua5joMg.b['1'][1]++;__cov_FmnuuHpuqeKM8LTua5joMg.s['5']++;BasiGX.util.Animate.shake(win);}}},constructor:function(config){__cov_FmnuuHpuqeKM8LTua5joMg.f['2']++;__cov_FmnuuHpuqeKM8LTua5joMg.s['6']++;this.callParent([config]);__cov_FmnuuHpuqeKM8LTua5joMg.s['7']++;if(this.setTooltip){__cov_FmnuuHpuqeKM8LTua5joMg.b['2'][0]++;__cov_FmnuuHpuqeKM8LTua5joMg.s['8']++;var bind=this.config.bind;__cov_FmnuuHpuqeKM8LTua5joMg.s['9']++;bind.tooltip=this.getViewModel().get('tooltip');__cov_FmnuuHpuqeKM8LTua5joMg.s['10']++;this.setBind(bind);}else{__cov_FmnuuHpuqeKM8LTua5joMg.b['2'][1]++;}}});
+    requires: [
+        'Ext.window.Window',
+        'Ext.app.ViewModel',
+        'BasiGX.view.form.CoordinateTransform',
+        'BasiGX.util.Animate'
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Koordinaten transformieren und anzeigen',
+            text: 'Koordinaten transformieren',
+            windowTitle: 'Koordinaten transformieren'
+        }
+    },
+
+    /**
+     *
+     */
+    bind: {
+        text: '{text}'
+    },
+
+    /**
+     * Array of CRS in EPSG notation that should be used
+     */
+    coordinateSystemsToUse: [],
+
+    /**
+     *
+     */
+    transformCenterOnRender: true,
+
+    /**
+     *
+     */
+    config: {
+        handler: function(){
+            var win = Ext.ComponentQuery.query('[name=coordinate-transform-window]')[0];
+            if(!win){
+                Ext.create('Ext.window.Window', {
+                    name: 'coordinate-transform-window',
+                    title: this.getViewModel().get('windowTitle'),
+                    width: 500,
+                    height: 400,
+                    layout: 'fit',
+                    items: [{
+                        xtype: 'basigx-form-coordinatetransform',
+                        coordinateSystemsToUse: this.coordinateSystemsToUse,
+                        transformCenterOnRender: this.transformCenterOnRender
+                    }]
+                }).showAt(0);
+            } else {
+                BasiGX.util.Animate.shake(win);
+            }
+        }
+    },
+
+    /**
+     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+    }
+});

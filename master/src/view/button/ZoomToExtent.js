@@ -1,9 +1,138 @@
+/* Copyright (c) 2015 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * ZoomToExtent Button
+ *
+ * Button used to zoom to Extent
+ *
+ * @class BasiGX.view.button.ZoomToExtent
+ */
+Ext.define("BasiGX.view.button.ZoomToExtent", {
+    extend: "Ext.Button",
+    xtype: 'basigx-button-zoomtoextent',
 
-var __cov_GobDZuI68m9d$3WqHX4dDA = (Function('return this'))();
-if (!__cov_GobDZuI68m9d$3WqHX4dDA.__coverage__) { __cov_GobDZuI68m9d$3WqHX4dDA.__coverage__ = {}; }
-__cov_GobDZuI68m9d$3WqHX4dDA = __cov_GobDZuI68m9d$3WqHX4dDA.__coverage__;
-if (!(__cov_GobDZuI68m9d$3WqHX4dDA['/home/travis/build/terrestris/BasiGX/src/view/button/ZoomToExtent.js'])) {
-   __cov_GobDZuI68m9d$3WqHX4dDA['/home/travis/build/terrestris/BasiGX/src/view/button/ZoomToExtent.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/ZoomToExtent.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0]},"f":{"1":0,"2":0,"3":0},"fnMap":{"1":{"name":"(anonymous_1)","line":63,"loc":{"start":{"line":63,"column":17},"end":{"line":63,"column":27}}},"2":{"name":"(anonymous_2)","line":106,"loc":{"start":{"line":106,"column":17},"end":{"line":106,"column":34}}},"3":{"name":"(anonymous_3)","line":126,"loc":{"start":{"line":126,"column":21},"end":{"line":126,"column":31}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":138,"column":3}},"2":{"start":{"line":64,"column":12},"end":{"line":64,"column":35}},"3":{"start":{"line":66,"column":12},"end":{"line":66,"column":35}},"4":{"start":{"line":69,"column":12},"end":{"line":71,"column":13}},"5":{"start":{"line":70,"column":16},"end":{"line":70,"column":67}},"6":{"start":{"line":73,"column":12},"end":{"line":82,"column":19}},"7":{"start":{"line":84,"column":12},"end":{"line":84,"column":36}},"8":{"start":{"line":85,"column":12},"end":{"line":85,"column":37}},"9":{"start":{"line":86,"column":12},"end":{"line":86,"column":43}},"10":{"start":{"line":88,"column":12},"end":{"line":92,"column":13}},"11":{"start":{"line":89,"column":16},"end":{"line":89,"column":43}},"12":{"start":{"line":91,"column":16},"end":{"line":91,"column":55}},"13":{"start":{"line":107,"column":8},"end":{"line":107,"column":34}},"14":{"start":{"line":109,"column":8},"end":{"line":113,"column":9}},"15":{"start":{"line":110,"column":12},"end":{"line":110,"column":40}},"16":{"start":{"line":111,"column":12},"end":{"line":111,"column":62}},"17":{"start":{"line":112,"column":12},"end":{"line":112,"column":31}},"18":{"start":{"line":115,"column":8},"end":{"line":118,"column":9}},"19":{"start":{"line":116,"column":12},"end":{"line":117,"column":34}},"20":{"start":{"line":120,"column":8},"end":{"line":120,"column":31}},"21":{"start":{"line":127,"column":8},"end":{"line":127,"column":65}},"22":{"start":{"line":129,"column":8},"end":{"line":136,"column":9}},"23":{"start":{"line":130,"column":12},"end":{"line":132,"column":13}},"24":{"start":{"line":131,"column":16},"end":{"line":131,"column":55}},"25":{"start":{"line":133,"column":12},"end":{"line":135,"column":13}},"26":{"start":{"line":134,"column":16},"end":{"line":134,"column":51}}},"branchMap":{"1":{"line":69,"type":"if","locations":[{"start":{"line":69,"column":12},"end":{"line":69,"column":12}},{"start":{"line":69,"column":12},"end":{"line":69,"column":12}}]},"2":{"line":88,"type":"if","locations":[{"start":{"line":88,"column":12},"end":{"line":88,"column":12}},{"start":{"line":88,"column":12},"end":{"line":88,"column":12}}]},"3":{"line":109,"type":"if","locations":[{"start":{"line":109,"column":8},"end":{"line":109,"column":8}},{"start":{"line":109,"column":8},"end":{"line":109,"column":8}}]},"4":{"line":115,"type":"if","locations":[{"start":{"line":115,"column":8},"end":{"line":115,"column":8}},{"start":{"line":115,"column":8},"end":{"line":115,"column":8}}]},"5":{"line":115,"type":"binary-expr","locations":[{"start":{"line":115,"column":11},"end":{"line":115,"column":25}},{"start":{"line":115,"column":29},"end":{"line":115,"column":49}}]},"6":{"line":129,"type":"if","locations":[{"start":{"line":129,"column":8},"end":{"line":129,"column":8}},{"start":{"line":129,"column":8},"end":{"line":129,"column":8}}]},"7":{"line":130,"type":"if","locations":[{"start":{"line":130,"column":12},"end":{"line":130,"column":12}},{"start":{"line":130,"column":12},"end":{"line":130,"column":12}}]},"8":{"line":133,"type":"if","locations":[{"start":{"line":133,"column":12},"end":{"line":133,"column":12}},{"start":{"line":133,"column":12},"end":{"line":133,"column":12}}]},"9":{"line":133,"type":"binary-expr","locations":[{"start":{"line":133,"column":15},"end":{"line":133,"column":30}},{"start":{"line":133,"column":34},"end":{"line":133,"column":55}}]}}};
-}
-__cov_GobDZuI68m9d$3WqHX4dDA = __cov_GobDZuI68m9d$3WqHX4dDA['/home/travis/build/terrestris/BasiGX/src/view/button/ZoomToExtent.js'];
-__cov_GobDZuI68m9d$3WqHX4dDA.s['1']++;Ext.define('BasiGX.view.button.ZoomToExtent',{extend:'Ext.Button',xtype:'basigx-button-zoomtoextent',requires:['BasiGX.util.Application','BasiGX.util.Map','Ext.app.ViewModel'],viewModel:{data:{tooltip:'Auf Gesamtansicht zoomen',text:null}},bind:{text:'{text}'},olMap:null,config:{center:null,zoom:null,resolution:null,handler:function(){__cov_GobDZuI68m9d$3WqHX4dDA.f['1']++;__cov_GobDZuI68m9d$3WqHX4dDA.s['2']++;this.setConfigValues();__cov_GobDZuI68m9d$3WqHX4dDA.s['3']++;var olMap=this.olMap;__cov_GobDZuI68m9d$3WqHX4dDA.s['4']++;if(Ext.isEmpty(olMap)){__cov_GobDZuI68m9d$3WqHX4dDA.b['1'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['5']++;olMap=BasiGX.util.Map.getMapComponent().getMap();}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['1'][1]++;}__cov_GobDZuI68m9d$3WqHX4dDA.s['6']++;var olView=olMap.getView(),targetCenter=this.getCenter(),targetResolution=this.getResolution(),targetZoom=this.getZoom(),pan=ol.animation.pan({source:olView.getCenter()}),zoom=ol.animation.zoom({resolution:olView.getResolution()});__cov_GobDZuI68m9d$3WqHX4dDA.s['7']++;olMap.beforeRender(pan);__cov_GobDZuI68m9d$3WqHX4dDA.s['8']++;olMap.beforeRender(zoom);__cov_GobDZuI68m9d$3WqHX4dDA.s['9']++;olView.setCenter(targetCenter);__cov_GobDZuI68m9d$3WqHX4dDA.s['10']++;if(targetZoom){__cov_GobDZuI68m9d$3WqHX4dDA.b['2'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['11']++;olView.setZoom(targetZoom);}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['2'][1]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['12']++;olView.setResolution(targetResolution);}}},glyph:'xf0b2@FontAwesome',html:'<i class="fa fa-arrows-alt fa-2x"></i>',constructor:function(config){__cov_GobDZuI68m9d$3WqHX4dDA.f['2']++;__cov_GobDZuI68m9d$3WqHX4dDA.s['13']++;this.callParent([config]);__cov_GobDZuI68m9d$3WqHX4dDA.s['14']++;if(this.setTooltip){__cov_GobDZuI68m9d$3WqHX4dDA.b['3'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['15']++;var bind=this.config.bind;__cov_GobDZuI68m9d$3WqHX4dDA.s['16']++;bind.tooltip=this.getViewModel().get('tooltip');__cov_GobDZuI68m9d$3WqHX4dDA.s['17']++;this.setBind(bind);}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['3'][1]++;}__cov_GobDZuI68m9d$3WqHX4dDA.s['18']++;if((__cov_GobDZuI68m9d$3WqHX4dDA.b['5'][0]++,this.getZoom())&&(__cov_GobDZuI68m9d$3WqHX4dDA.b['5'][1]++,this.getResolution())){__cov_GobDZuI68m9d$3WqHX4dDA.b['4'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['19']++;Ext.raise('No zoom and resolution set for Extent Button!'+'Please choose one.');}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['4'][1]++;}__cov_GobDZuI68m9d$3WqHX4dDA.s['20']++;this.setConfigValues();},setConfigValues:function(){__cov_GobDZuI68m9d$3WqHX4dDA.f['3']++;__cov_GobDZuI68m9d$3WqHX4dDA.s['21']++;var appContext=BasiGX.util.Application.getAppContext();__cov_GobDZuI68m9d$3WqHX4dDA.s['22']++;if(appContext){__cov_GobDZuI68m9d$3WqHX4dDA.b['6'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['23']++;if(!this.getCenter()){__cov_GobDZuI68m9d$3WqHX4dDA.b['7'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['24']++;this.setCenter(appContext.startCenter);}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['7'][1]++;}__cov_GobDZuI68m9d$3WqHX4dDA.s['25']++;if((__cov_GobDZuI68m9d$3WqHX4dDA.b['9'][0]++,!this.getZoom())&&(__cov_GobDZuI68m9d$3WqHX4dDA.b['9'][1]++,!this.getResolution())){__cov_GobDZuI68m9d$3WqHX4dDA.b['8'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['26']++;this.setZoom(appContext.startZoom);}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['8'][1]++;}}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['6'][1]++;}}});
+    requires: [
+        'BasiGX.util.Application',
+        'BasiGX.util.Map',
+        'Ext.app.ViewModel'
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Auf Gesamtansicht zoomen',
+            text: null
+        }
+    },
+
+    /**
+     *
+     */
+    bind: {
+        text: '{text}'
+    },
+
+    /**
+     * The OL3 map this button is bounded to
+     */
+    olMap: null,
+
+    /**
+     * Center is required on instantiation.
+     * Either zoom or Resolution is required on instantiation.
+     */
+    config: {
+        center: null,
+        zoom: null,
+        resolution: null,
+        handler: function(){
+            this.setConfigValues();
+
+            var olMap = this.olMap;
+
+            //fallback
+            if (Ext.isEmpty(olMap)) {
+                olMap = BasiGX.util.Map.getMapComponent().getMap();
+            }
+
+            var olView = olMap.getView(),
+                targetCenter = this.getCenter(),
+                targetResolution = this.getResolution(),
+                targetZoom = this.getZoom(),
+                pan = ol.animation.pan({
+                    source: olView.getCenter()
+                }),
+                zoom = ol.animation.zoom({
+                   resolution: olView.getResolution()
+                });
+
+            olMap.beforeRender(pan);
+            olMap.beforeRender(zoom);
+            olView.setCenter(targetCenter);
+
+            if(targetZoom){
+                olView.setZoom(targetZoom);
+            } else {
+                olView.setResolution(targetResolution);
+            }
+        }
+    },
+
+    /**
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: 'xf0b2@FontAwesome',
+    html: '<i class="fa fa-arrows-alt fa-2x"></i>',
+
+    /**
+     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+
+        if(this.getZoom() && this.getResolution()){
+            Ext.raise('No zoom and resolution set for Extent Button!' +
+            'Please choose one.');
+        }
+
+        this.setConfigValues();
+    },
+
+    /**
+     *
+     */
+    setConfigValues: function(){
+        var appContext = BasiGX.util.Application.getAppContext();
+
+        if(appContext){
+            if(!this.getCenter()){
+                this.setCenter(appContext.startCenter);
+            }
+            if(!this.getZoom() && !this.getResolution()){
+                this.setZoom(appContext.startZoom);
+            }
+        }
+    }
+});

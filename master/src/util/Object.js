@@ -1,9 +1,125 @@
+/* Copyright (c) 2016 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Object Util
+ *
+ * Some methods to work with an Object
+ *
+ * @class BasiGX.util.Object
+ */
+Ext.define('BasiGX.util.Object', {
 
-var __cov_xdBD80cK8TJkcv9_Zafdlw = (Function('return this'))();
-if (!__cov_xdBD80cK8TJkcv9_Zafdlw.__coverage__) { __cov_xdBD80cK8TJkcv9_Zafdlw.__coverage__ = {}; }
-__cov_xdBD80cK8TJkcv9_Zafdlw = __cov_xdBD80cK8TJkcv9_Zafdlw.__coverage__;
-if (!(__cov_xdBD80cK8TJkcv9_Zafdlw['/home/travis/build/terrestris/BasiGX/src/util/Object.js'])) {
-   __cov_xdBD80cK8TJkcv9_Zafdlw['/home/travis/build/terrestris/BasiGX/src/util/Object.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Object.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0,0,0,0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0]},"f":{"1":0,"2":0},"fnMap":{"1":{"name":"(anonymous_1)","line":45,"loc":{"start":{"line":45,"column":18},"end":{"line":45,"column":50}}},"2":{"name":"(anonymous_2)","line":74,"loc":{"start":{"line":74,"column":47},"end":{"line":74,"column":61}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":125,"column":3}},"2":{"start":{"line":46,"column":12},"end":{"line":47,"column":27}},"3":{"start":{"line":51,"column":12},"end":{"line":57,"column":13}},"4":{"start":{"line":52,"column":16},"end":{"line":56,"column":80}},"5":{"start":{"line":59,"column":12},"end":{"line":63,"column":13}},"6":{"start":{"line":60,"column":16},"end":{"line":61,"column":49}},"7":{"start":{"line":62,"column":16},"end":{"line":62,"column":29}},"8":{"start":{"line":65,"column":12},"end":{"line":68,"column":13}},"9":{"start":{"line":66,"column":16},"end":{"line":66,"column":79}},"10":{"start":{"line":67,"column":16},"end":{"line":67,"column":29}},"11":{"start":{"line":73,"column":12},"end":{"line":83,"column":13}},"12":{"start":{"line":74,"column":16},"end":{"line":81,"column":19}},"13":{"start":{"line":75,"column":20},"end":{"line":80,"column":21}},"14":{"start":{"line":76,"column":24},"end":{"line":76,"column":55}},"15":{"start":{"line":79,"column":24},"end":{"line":79,"column":43}},"16":{"start":{"line":82,"column":16},"end":{"line":82,"column":35}},"17":{"start":{"line":87,"column":12},"end":{"line":119,"column":13}},"18":{"start":{"line":90,"column":16},"end":{"line":90,"column":45}},"19":{"start":{"line":94,"column":16},"end":{"line":96,"column":17}},"20":{"start":{"line":95,"column":20},"end":{"line":95,"column":33}},"21":{"start":{"line":99,"column":16},"end":{"line":104,"column":17}},"22":{"start":{"line":100,"column":20},"end":{"line":100,"column":62}},"23":{"start":{"line":101,"column":20},"end":{"line":103,"column":21}},"24":{"start":{"line":102,"column":24},"end":{"line":102,"column":42}},"25":{"start":{"line":108,"column":16},"end":{"line":118,"column":17}},"26":{"start":{"line":109,"column":20},"end":{"line":117,"column":21}},"27":{"start":{"line":110,"column":24},"end":{"line":110,"column":43}},"28":{"start":{"line":111,"column":24},"end":{"line":116,"column":25}},"29":{"start":{"line":112,"column":28},"end":{"line":112,"column":68}},"30":{"start":{"line":113,"column":28},"end":{"line":115,"column":29}},"31":{"start":{"line":114,"column":32},"end":{"line":114,"column":50}},"32":{"start":{"line":122,"column":12},"end":{"line":122,"column":29}}},"branchMap":{"1":{"line":51,"type":"if","locations":[{"start":{"line":51,"column":12},"end":{"line":51,"column":12}},{"start":{"line":51,"column":12},"end":{"line":51,"column":12}}]},"2":{"line":52,"type":"cond-expr","locations":[{"start":{"line":56,"column":20},"end":{"line":56,"column":72}},{"start":{"line":56,"column":75},"end":{"line":56,"column":79}}]},"3":{"line":52,"type":"binary-expr","locations":[{"start":{"line":52,"column":30},"end":{"line":52,"column":69}},{"start":{"line":53,"column":20},"end":{"line":53,"column":23}},{"start":{"line":53,"column":27},"end":{"line":53,"column":34}},{"start":{"line":53,"column":38},"end":{"line":53,"column":57}},{"start":{"line":54,"column":20},"end":{"line":54,"column":48}},{"start":{"line":55,"column":20},"end":{"line":55,"column":70}}]},"4":{"line":59,"type":"if","locations":[{"start":{"line":59,"column":12},"end":{"line":59,"column":12}},{"start":{"line":59,"column":12},"end":{"line":59,"column":12}}]},"5":{"line":65,"type":"if","locations":[{"start":{"line":65,"column":12},"end":{"line":65,"column":12}},{"start":{"line":65,"column":12},"end":{"line":65,"column":12}}]},"6":{"line":73,"type":"if","locations":[{"start":{"line":73,"column":12},"end":{"line":73,"column":12}},{"start":{"line":73,"column":12},"end":{"line":73,"column":12}}]},"7":{"line":75,"type":"if","locations":[{"start":{"line":75,"column":20},"end":{"line":75,"column":20}},{"start":{"line":75,"column":20},"end":{"line":75,"column":20}}]},"8":{"line":94,"type":"if","locations":[{"start":{"line":94,"column":16},"end":{"line":94,"column":16}},{"start":{"line":94,"column":16},"end":{"line":94,"column":16}}]},"9":{"line":99,"type":"if","locations":[{"start":{"line":99,"column":16},"end":{"line":99,"column":16}},{"start":{"line":99,"column":16},"end":{"line":99,"column":16}}]},"10":{"line":101,"type":"if","locations":[{"start":{"line":101,"column":20},"end":{"line":101,"column":20}},{"start":{"line":101,"column":20},"end":{"line":101,"column":20}}]},"11":{"line":108,"type":"if","locations":[{"start":{"line":108,"column":16},"end":{"line":108,"column":16}},{"start":{"line":108,"column":16},"end":{"line":108,"column":16}}]},"12":{"line":111,"type":"if","locations":[{"start":{"line":111,"column":24},"end":{"line":111,"column":24}},{"start":{"line":111,"column":24},"end":{"line":111,"column":24}}]},"13":{"line":113,"type":"if","locations":[{"start":{"line":113,"column":28},"end":{"line":113,"column":28}},{"start":{"line":113,"column":28},"end":{"line":113,"column":28}}]}}};
-}
-__cov_xdBD80cK8TJkcv9_Zafdlw = __cov_xdBD80cK8TJkcv9_Zafdlw['/home/travis/build/terrestris/BasiGX/src/util/Object.js'];
-__cov_xdBD80cK8TJkcv9_Zafdlw.s['1']++;Ext.define('BasiGX.util.Object',{requires:['BasiGX.util.Application'],statics:{getValue:function(queryKey,queryObject){__cov_xdBD80cK8TJkcv9_Zafdlw.f['1']++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['2']++;var me=this,queryMatch;__cov_xdBD80cK8TJkcv9_Zafdlw.s['3']++;if(!queryObject){__cov_xdBD80cK8TJkcv9_Zafdlw.b['1'][0]++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['4']++;queryObject=(__cov_xdBD80cK8TJkcv9_Zafdlw.b['3'][0]++,BasiGX.util.Application.getAppContext())||(__cov_xdBD80cK8TJkcv9_Zafdlw.b['3'][1]++,Ext)&&(__cov_xdBD80cK8TJkcv9_Zafdlw.b['3'][2]++,Ext.app)&&(__cov_xdBD80cK8TJkcv9_Zafdlw.b['3'][3]++,Ext.app.Application)&&(__cov_xdBD80cK8TJkcv9_Zafdlw.b['3'][4]++,Ext.app.Application.instance)&&(__cov_xdBD80cK8TJkcv9_Zafdlw.b['3'][5]++,Ext.app.Application.instance.getApplicationContext)?(__cov_xdBD80cK8TJkcv9_Zafdlw.b['2'][0]++,Ext.app.Application.instance.getApplicationContext()):(__cov_xdBD80cK8TJkcv9_Zafdlw.b['2'][1]++,null);}else{__cov_xdBD80cK8TJkcv9_Zafdlw.b['1'][1]++;}__cov_xdBD80cK8TJkcv9_Zafdlw.s['5']++;if(!Ext.isObject(queryObject)){__cov_xdBD80cK8TJkcv9_Zafdlw.b['4'][0]++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['6']++;Ext.Logger.error('Missing input parameter '+'queryObject <Object>!');__cov_xdBD80cK8TJkcv9_Zafdlw.s['7']++;return false;}else{__cov_xdBD80cK8TJkcv9_Zafdlw.b['4'][1]++;}__cov_xdBD80cK8TJkcv9_Zafdlw.s['8']++;if(!Ext.isString(queryKey)){__cov_xdBD80cK8TJkcv9_Zafdlw.b['5'][0]++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['9']++;Ext.Logger.error('Missing input parameter queryKey <String>!');__cov_xdBD80cK8TJkcv9_Zafdlw.s['10']++;return false;}else{__cov_xdBD80cK8TJkcv9_Zafdlw.b['5'][1]++;}__cov_xdBD80cK8TJkcv9_Zafdlw.s['11']++;if(queryKey.split('/').length>1){__cov_xdBD80cK8TJkcv9_Zafdlw.b['6'][0]++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['12']++;Ext.each(queryKey.split('/'),function(key){__cov_xdBD80cK8TJkcv9_Zafdlw.f['2']++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['13']++;if(queryObject[key]){__cov_xdBD80cK8TJkcv9_Zafdlw.b['7'][0]++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['14']++;queryObject=queryObject[key];}else{__cov_xdBD80cK8TJkcv9_Zafdlw.b['7'][1]++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['15']++;return queryObject;}});__cov_xdBD80cK8TJkcv9_Zafdlw.s['16']++;return queryObject;}else{__cov_xdBD80cK8TJkcv9_Zafdlw.b['6'][1]++;}__cov_xdBD80cK8TJkcv9_Zafdlw.s['17']++;for(var key in queryObject){__cov_xdBD80cK8TJkcv9_Zafdlw.s['18']++;var value=queryObject[key];__cov_xdBD80cK8TJkcv9_Zafdlw.s['19']++;if(key===queryKey){__cov_xdBD80cK8TJkcv9_Zafdlw.b['8'][0]++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['20']++;return value;}else{__cov_xdBD80cK8TJkcv9_Zafdlw.b['8'][1]++;}__cov_xdBD80cK8TJkcv9_Zafdlw.s['21']++;if(Ext.isObject(value)){__cov_xdBD80cK8TJkcv9_Zafdlw.b['9'][0]++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['22']++;queryMatch=me.getValue(queryKey,value);__cov_xdBD80cK8TJkcv9_Zafdlw.s['23']++;if(queryMatch){__cov_xdBD80cK8TJkcv9_Zafdlw.b['10'][0]++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['24']++;return queryMatch;}else{__cov_xdBD80cK8TJkcv9_Zafdlw.b['10'][1]++;}}else{__cov_xdBD80cK8TJkcv9_Zafdlw.b['9'][1]++;}__cov_xdBD80cK8TJkcv9_Zafdlw.s['25']++;if(Ext.isArray(value)){__cov_xdBD80cK8TJkcv9_Zafdlw.b['11'][0]++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['26']++;for(var i=0;i<value.length;i++){__cov_xdBD80cK8TJkcv9_Zafdlw.s['27']++;var val=value[i];__cov_xdBD80cK8TJkcv9_Zafdlw.s['28']++;if(Ext.isObject(val)){__cov_xdBD80cK8TJkcv9_Zafdlw.b['12'][0]++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['29']++;queryMatch=me.getValue(queryKey,val);__cov_xdBD80cK8TJkcv9_Zafdlw.s['30']++;if(queryMatch){__cov_xdBD80cK8TJkcv9_Zafdlw.b['13'][0]++;__cov_xdBD80cK8TJkcv9_Zafdlw.s['31']++;return queryMatch;}else{__cov_xdBD80cK8TJkcv9_Zafdlw.b['13'][1]++;}}else{__cov_xdBD80cK8TJkcv9_Zafdlw.b['12'][1]++;}}}else{__cov_xdBD80cK8TJkcv9_Zafdlw.b['11'][1]++;}}__cov_xdBD80cK8TJkcv9_Zafdlw.s['32']++;return undefined;}}});
+    requires: ['BasiGX.util.Application'],
+
+    statics: {
+
+        /**
+         * Method may be used to return a value of a given input object by a
+         * provided query key. The query key can be used in two ways:
+         *   * Single-value: Find the first matching key in the provided object
+         *     (Use with caution as the object/array order may not be as
+         *     expected and/or deterministic!).
+         *   * Backslash ("/") separated value: Find the last (!) matching key
+         *     in the provided object.
+         *
+         * @param {String} queryKey The key to be searched.
+         * @param {Object} [queryObject] The object to be searched on. If not
+         *     provided the global application context (on root-level) will
+         *     be used.
+         *
+         * @return The target value or undefined if the given couldn't be found.
+         */
+        getValue: function(queryKey, queryObject) {
+            var me = this,
+                queryMatch;
+
+            // if weren't called with an queryObject, get the global application
+            // context as input value
+            if (!queryObject) {
+                queryObject = BasiGX.util.Application.getAppContext() ||
+                    Ext && Ext.app && Ext.app.Application &&
+                    Ext.app.Application.instance &&
+                    Ext.app.Application.instance.getApplicationContext ?
+                    Ext.app.Application.instance.getApplicationContext() : null;
+            }
+
+            if (!Ext.isObject(queryObject)) {
+                Ext.Logger.error('Missing input parameter ' +
+                        'queryObject <Object>!');
+                return false;
+            }
+
+            if (!Ext.isString(queryKey)) {
+                Ext.Logger.error('Missing input parameter queryKey <String>!');
+                return false;
+            }
+
+            // if the queryKey contains backslashes we understand this as the
+            // path in the object-hierarchy and will return the last matching
+            // value
+            if (queryKey.split('\/').length > 1) {
+                Ext.each(queryKey.split('\/'), function(key) {
+                    if (queryObject[key]) {
+                        queryObject = queryObject[key];
+                    } else {
+                        // if the last entry wasn't found return the last match
+                        return queryObject;
+                    }
+                });
+                return queryObject;
+            }
+
+            // iterate over the input object and return the first matching
+            // value
+            for (var key in queryObject) {
+
+                // get the current value
+                var value = queryObject[key];
+
+                // if the given key is the queryKey, let's return the
+                // corresponding value
+                if (key === queryKey) {
+                    return value;
+                }
+
+                // if the value is an object, let's call ourself recursively
+                if (Ext.isObject(value)) {
+                    queryMatch = me.getValue(queryKey, value);
+                    if (queryMatch) {
+                        return queryMatch;
+                    }
+                }
+
+                // if the value is an array and the array contains an object as
+                // well, let's call ourself recursively for this object
+                if (Ext.isArray(value)) {
+                    for (var i = 0; i < value.length; i++) {
+                        var val = value[i];
+                        if (Ext.isObject(val)) {
+                            queryMatch = me.getValue(queryKey, val);
+                            if (queryMatch) {
+                                return queryMatch;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // if we couldn't find any match, return false
+            return undefined;
+        }
+    }
+});

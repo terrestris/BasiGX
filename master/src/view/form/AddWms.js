@@ -1,9 +1,549 @@
+/* Copyright (c) 2015 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * AddWms FormPanel
+ *
+ * Used to add an WMS to the map
+ *
+ * @class BasiGX.view.form.AddWms
+ */
+Ext.define('BasiGX.view.form.AddWms', {
+    extend: 'Ext.form.Panel',
+    xtype: 'basigx-form-addwms',
 
-var __cov_aw_ivxye20OPypoB_Way2A = (Function('return this'))();
-if (!__cov_aw_ivxye20OPypoB_Way2A.__coverage__) { __cov_aw_ivxye20OPypoB_Way2A.__coverage__ = {}; }
-__cov_aw_ivxye20OPypoB_Way2A = __cov_aw_ivxye20OPypoB_Way2A.__coverage__;
-if (!(__cov_aw_ivxye20OPypoB_Way2A['/home/travis/build/terrestris/BasiGX/src/view/form/AddWms.js'])) {
-   __cov_aw_ivxye20OPypoB_Way2A['/home/travis/build/terrestris/BasiGX/src/view/form/AddWms.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/form/AddWms.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0],"19":[0,0],"20":[0,0],"21":[0,0],"22":[0,0],"23":[0,0],"24":[0,0],"25":[0,0],"26":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0},"fnMap":{"1":{"name":"(anonymous_1)","line":176,"loc":{"start":{"line":176,"column":28},"end":{"line":176,"column":46}}},"2":{"name":"(anonymous_2)","line":195,"loc":{"start":{"line":195,"column":21},"end":{"line":195,"column":34}}},"3":{"name":"(anonymous_3)","line":208,"loc":{"start":{"line":208,"column":21},"end":{"line":208,"column":34}}},"4":{"name":"(anonymous_4)","line":218,"loc":{"start":{"line":218,"column":19},"end":{"line":218,"column":30}}},"5":{"name":"(anonymous_5)","line":228,"loc":{"start":{"line":228,"column":28},"end":{"line":228,"column":38}}},"6":{"name":"(anonymous_6)","line":256,"loc":{"start":{"line":256,"column":30},"end":{"line":256,"column":49}}},"7":{"name":"(anonymous_7)","line":280,"loc":{"start":{"line":280,"column":30},"end":{"line":280,"column":41}}},"8":{"name":"(anonymous_8)","line":289,"loc":{"start":{"line":289,"column":31},"end":{"line":289,"column":42}}},"9":{"name":"(anonymous_9)","line":343,"loc":{"start":{"line":343,"column":31},"end":{"line":343,"column":42}}},"10":{"name":"(anonymous_10)","line":363,"loc":{"start":{"line":363,"column":16},"end":{"line":363,"column":58}}},"11":{"name":"(anonymous_11)","line":400,"loc":{"start":{"line":400,"column":36},"end":{"line":400,"column":60}}},"12":{"name":"(anonymous_12)","line":420,"loc":{"start":{"line":420,"column":25},"end":{"line":420,"column":40}}},"13":{"name":"(anonymous_13)","line":427,"loc":{"start":{"line":427,"column":38},"end":{"line":427,"column":57}}},"14":{"name":"(anonymous_14)","line":449,"loc":{"start":{"line":449,"column":33},"end":{"line":449,"column":49}}},"15":{"name":"(anonymous_15)","line":456,"loc":{"start":{"line":456,"column":25},"end":{"line":456,"column":40}}},"16":{"name":"(anonymous_16)","line":514,"loc":{"start":{"line":514,"column":22},"end":{"line":514,"column":33}}},"17":{"name":"(anonymous_17)","line":519,"loc":{"start":{"line":519,"column":29},"end":{"line":519,"column":48}}},"18":{"name":"(anonymous_18)","line":531,"loc":{"start":{"line":531,"column":20},"end":{"line":531,"column":31}}},"19":{"name":"(anonymous_19)","line":534,"loc":{"start":{"line":534,"column":29},"end":{"line":534,"column":48}}},"20":{"name":"(anonymous_20)","line":542,"loc":{"start":{"line":542,"column":22},"end":{"line":542,"column":33}}},"21":{"name":"(anonymous_21)","line":545,"loc":{"start":{"line":545,"column":29},"end":{"line":545,"column":48}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":549,"column":3}},"2":{"start":{"line":177,"column":28},"end":{"line":177,"column":72}},"3":{"start":{"line":178,"column":28},"end":{"line":178,"column":61}},"4":{"start":{"line":196,"column":16},"end":{"line":196,"column":56}},"5":{"start":{"line":197,"column":16},"end":{"line":197,"column":39}},"6":{"start":{"line":198,"column":16},"end":{"line":198,"column":49}},"7":{"start":{"line":209,"column":16},"end":{"line":209,"column":56}},"8":{"start":{"line":210,"column":16},"end":{"line":210,"column":46}},"9":{"start":{"line":219,"column":8},"end":{"line":219,"column":26}},"10":{"start":{"line":220,"column":8},"end":{"line":220,"column":54}},"11":{"start":{"line":229,"column":8},"end":{"line":229,"column":22}},"12":{"start":{"line":230,"column":8},"end":{"line":230,"column":32}},"13":{"start":{"line":231,"column":8},"end":{"line":246,"column":9}},"14":{"start":{"line":232,"column":12},"end":{"line":232,"column":32}},"15":{"start":{"line":233,"column":12},"end":{"line":233,"column":43}},"16":{"start":{"line":234,"column":12},"end":{"line":234,"column":42}},"17":{"start":{"line":235,"column":12},"end":{"line":235,"column":33}},"18":{"start":{"line":236,"column":12},"end":{"line":236,"column":30}},"19":{"start":{"line":238,"column":12},"end":{"line":245,"column":15}},"20":{"start":{"line":257,"column":8},"end":{"line":257,"column":22}},"21":{"start":{"line":258,"column":8},"end":{"line":258,"column":42}},"22":{"start":{"line":259,"column":8},"end":{"line":259,"column":31}},"23":{"start":{"line":260,"column":8},"end":{"line":260,"column":19}},"24":{"start":{"line":261,"column":8},"end":{"line":265,"column":9}},"25":{"start":{"line":262,"column":12},"end":{"line":262,"column":56}},"26":{"start":{"line":264,"column":12},"end":{"line":264,"column":68}},"27":{"start":{"line":266,"column":8},"end":{"line":266,"column":73}},"28":{"start":{"line":267,"column":8},"end":{"line":269,"column":9}},"29":{"start":{"line":268,"column":12},"end":{"line":268,"column":63}},"30":{"start":{"line":270,"column":8},"end":{"line":270,"column":57}},"31":{"start":{"line":271,"column":8},"end":{"line":271,"column":39}},"32":{"start":{"line":272,"column":8},"end":{"line":272,"column":29}},"33":{"start":{"line":281,"column":8},"end":{"line":281,"column":31}},"34":{"start":{"line":282,"column":8},"end":{"line":282,"column":67}},"35":{"start":{"line":290,"column":8},"end":{"line":290,"column":22}},"36":{"start":{"line":291,"column":8},"end":{"line":291,"column":74}},"37":{"start":{"line":292,"column":8},"end":{"line":292,"column":47}},"38":{"start":{"line":293,"column":8},"end":{"line":293,"column":57}},"39":{"start":{"line":294,"column":8},"end":{"line":294,"column":59}},"40":{"start":{"line":295,"column":8},"end":{"line":295,"column":61}},"41":{"start":{"line":296,"column":8},"end":{"line":296,"column":65}},"42":{"start":{"line":297,"column":8},"end":{"line":297,"column":58}},"43":{"start":{"line":298,"column":8},"end":{"line":301,"column":9}},"44":{"start":{"line":300,"column":12},"end":{"line":300,"column":19}},"45":{"start":{"line":302,"column":8},"end":{"line":312,"column":9}},"46":{"start":{"line":304,"column":12},"end":{"line":304,"column":37}},"47":{"start":{"line":305,"column":12},"end":{"line":307,"column":13}},"48":{"start":{"line":306,"column":16},"end":{"line":306,"column":46}},"49":{"start":{"line":308,"column":12},"end":{"line":310,"column":13}},"50":{"start":{"line":309,"column":16},"end":{"line":309,"column":48}},"51":{"start":{"line":311,"column":12},"end":{"line":311,"column":19}},"52":{"start":{"line":313,"column":8},"end":{"line":319,"column":9}},"53":{"start":{"line":315,"column":12},"end":{"line":315,"column":38}},"54":{"start":{"line":318,"column":12},"end":{"line":318,"column":37}},"55":{"start":{"line":321,"column":8},"end":{"line":328,"column":9}},"56":{"start":{"line":322,"column":12},"end":{"line":327,"column":13}},"57":{"start":{"line":324,"column":16},"end":{"line":324,"column":46}},"58":{"start":{"line":326,"column":16},"end":{"line":326,"column":47}},"59":{"start":{"line":329,"column":8},"end":{"line":336,"column":9}},"60":{"start":{"line":330,"column":12},"end":{"line":335,"column":13}},"61":{"start":{"line":332,"column":16},"end":{"line":332,"column":48}},"62":{"start":{"line":334,"column":16},"end":{"line":334,"column":49}},"63":{"start":{"line":344,"column":8},"end":{"line":344,"column":22}},"64":{"start":{"line":345,"column":8},"end":{"line":345,"column":74}},"65":{"start":{"line":346,"column":8},"end":{"line":346,"column":70}},"66":{"start":{"line":347,"column":8},"end":{"line":347,"column":28}},"67":{"start":{"line":348,"column":8},"end":{"line":350,"column":9}},"68":{"start":{"line":349,"column":12},"end":{"line":349,"column":26}},"69":{"start":{"line":366,"column":8},"end":{"line":371,"column":9}},"70":{"start":{"line":370,"column":12},"end":{"line":370,"column":19}},"71":{"start":{"line":372,"column":8},"end":{"line":372,"column":35}},"72":{"start":{"line":373,"column":8},"end":{"line":380,"column":11}},"73":{"start":{"line":381,"column":8},"end":{"line":386,"column":11}},"74":{"start":{"line":387,"column":8},"end":{"line":387,"column":23}},"75":{"start":{"line":401,"column":8},"end":{"line":401,"column":22}},"76":{"start":{"line":402,"column":8},"end":{"line":404,"column":9}},"77":{"start":{"line":403,"column":12},"end":{"line":403,"column":25}},"78":{"start":{"line":405,"column":8},"end":{"line":405,"column":43}},"79":{"start":{"line":406,"column":8},"end":{"line":408,"column":9}},"80":{"start":{"line":407,"column":12},"end":{"line":407,"column":25}},"81":{"start":{"line":409,"column":8},"end":{"line":409,"column":28}},"82":{"start":{"line":410,"column":8},"end":{"line":410,"column":61}},"83":{"start":{"line":411,"column":8},"end":{"line":411,"column":62}},"84":{"start":{"line":414,"column":8},"end":{"line":414,"column":57}},"85":{"start":{"line":415,"column":8},"end":{"line":416,"column":47}},"86":{"start":{"line":418,"column":8},"end":{"line":418,"column":54}},"87":{"start":{"line":420,"column":8},"end":{"line":436,"column":11}},"88":{"start":{"line":421,"column":12},"end":{"line":421,"column":70}},"89":{"start":{"line":422,"column":12},"end":{"line":424,"column":13}},"90":{"start":{"line":423,"column":16},"end":{"line":423,"column":41}},"91":{"start":{"line":426,"column":12},"end":{"line":435,"column":13}},"92":{"start":{"line":427,"column":16},"end":{"line":434,"column":19}},"93":{"start":{"line":428,"column":20},"end":{"line":430,"column":22}},"94":{"start":{"line":431,"column":20},"end":{"line":433,"column":21}},"95":{"start":{"line":432,"column":24},"end":{"line":432,"column":52}},"96":{"start":{"line":438,"column":8},"end":{"line":438,"column":58}},"97":{"start":{"line":450,"column":8},"end":{"line":450,"column":22}},"98":{"start":{"line":451,"column":8},"end":{"line":451,"column":39}},"99":{"start":{"line":452,"column":8},"end":{"line":452,"column":55}},"100":{"start":{"line":453,"column":8},"end":{"line":453,"column":47}},"101":{"start":{"line":454,"column":8},"end":{"line":454,"column":28}},"102":{"start":{"line":455,"column":8},"end":{"line":455,"column":76}},"103":{"start":{"line":456,"column":8},"end":{"line":463,"column":11}},"104":{"start":{"line":457,"column":12},"end":{"line":462,"column":15}},"105":{"start":{"line":464,"column":8},"end":{"line":464,"column":32}},"106":{"start":{"line":466,"column":8},"end":{"line":466,"column":25}},"107":{"start":{"line":468,"column":8},"end":{"line":478,"column":9}},"108":{"start":{"line":469,"column":12},"end":{"line":477,"column":15}},"109":{"start":{"line":480,"column":8},"end":{"line":490,"column":9}},"110":{"start":{"line":481,"column":12},"end":{"line":489,"column":15}},"111":{"start":{"line":492,"column":8},"end":{"line":492,"column":27}},"112":{"start":{"line":493,"column":8},"end":{"line":501,"column":11}},"113":{"start":{"line":503,"column":8},"end":{"line":507,"column":11}},"114":{"start":{"line":515,"column":8},"end":{"line":515,"column":22}},"115":{"start":{"line":516,"column":8},"end":{"line":516,"column":55}},"116":{"start":{"line":517,"column":8},"end":{"line":517,"column":76}},"117":{"start":{"line":518,"column":8},"end":{"line":518,"column":61}},"118":{"start":{"line":519,"column":8},"end":{"line":524,"column":11}},"119":{"start":{"line":520,"column":12},"end":{"line":520,"column":59}},"120":{"start":{"line":521,"column":12},"end":{"line":521,"column":43}},"121":{"start":{"line":522,"column":12},"end":{"line":522,"column":53}},"122":{"start":{"line":523,"column":12},"end":{"line":523,"column":39}},"123":{"start":{"line":525,"column":8},"end":{"line":525,"column":39}},"124":{"start":{"line":532,"column":8},"end":{"line":532,"column":72}},"125":{"start":{"line":533,"column":8},"end":{"line":533,"column":41}},"126":{"start":{"line":534,"column":8},"end":{"line":536,"column":11}},"127":{"start":{"line":535,"column":12},"end":{"line":535,"column":36}},"128":{"start":{"line":543,"column":8},"end":{"line":543,"column":72}},"129":{"start":{"line":544,"column":8},"end":{"line":544,"column":41}},"130":{"start":{"line":545,"column":8},"end":{"line":547,"column":11}},"131":{"start":{"line":546,"column":12},"end":{"line":546,"column":37}}},"branchMap":{"1":{"line":231,"type":"if","locations":[{"start":{"line":231,"column":8},"end":{"line":231,"column":8}},{"start":{"line":231,"column":8},"end":{"line":231,"column":8}}]},"2":{"line":267,"type":"if","locations":[{"start":{"line":267,"column":8},"end":{"line":267,"column":8}},{"start":{"line":267,"column":8},"end":{"line":267,"column":8}}]},"3":{"line":298,"type":"if","locations":[{"start":{"line":298,"column":8},"end":{"line":298,"column":8}},{"start":{"line":298,"column":8},"end":{"line":298,"column":8}}]},"4":{"line":302,"type":"if","locations":[{"start":{"line":302,"column":8},"end":{"line":302,"column":8}},{"start":{"line":302,"column":8},"end":{"line":302,"column":8}}]},"5":{"line":305,"type":"if","locations":[{"start":{"line":305,"column":12},"end":{"line":305,"column":12}},{"start":{"line":305,"column":12},"end":{"line":305,"column":12}}]},"6":{"line":308,"type":"if","locations":[{"start":{"line":308,"column":12},"end":{"line":308,"column":12}},{"start":{"line":308,"column":12},"end":{"line":308,"column":12}}]},"7":{"line":313,"type":"if","locations":[{"start":{"line":313,"column":8},"end":{"line":313,"column":8}},{"start":{"line":313,"column":8},"end":{"line":313,"column":8}}]},"8":{"line":321,"type":"if","locations":[{"start":{"line":321,"column":8},"end":{"line":321,"column":8}},{"start":{"line":321,"column":8},"end":{"line":321,"column":8}}]},"9":{"line":322,"type":"if","locations":[{"start":{"line":322,"column":12},"end":{"line":322,"column":12}},{"start":{"line":322,"column":12},"end":{"line":322,"column":12}}]},"10":{"line":329,"type":"if","locations":[{"start":{"line":329,"column":8},"end":{"line":329,"column":8}},{"start":{"line":329,"column":8},"end":{"line":329,"column":8}}]},"11":{"line":330,"type":"if","locations":[{"start":{"line":330,"column":12},"end":{"line":330,"column":12}},{"start":{"line":330,"column":12},"end":{"line":330,"column":12}}]},"12":{"line":348,"type":"if","locations":[{"start":{"line":348,"column":8},"end":{"line":348,"column":8}},{"start":{"line":348,"column":8},"end":{"line":348,"column":8}}]},"13":{"line":366,"type":"if","locations":[{"start":{"line":366,"column":8},"end":{"line":366,"column":8}},{"start":{"line":366,"column":8},"end":{"line":366,"column":8}}]},"14":{"line":366,"type":"binary-expr","locations":[{"start":{"line":366,"column":12},"end":{"line":366,"column":31}},{"start":{"line":367,"column":12},"end":{"line":367,"column":37}},{"start":{"line":368,"column":12},"end":{"line":368,"column":54}}]},"15":{"line":377,"type":"cond-expr","locations":[{"start":{"line":377,"column":32},"end":{"line":377,"column":45}},{"start":{"line":377,"column":48},"end":{"line":377,"column":50}}]},"16":{"line":385,"type":"cond-expr","locations":[{"start":{"line":385,"column":31},"end":{"line":385,"column":67}},{"start":{"line":385,"column":70},"end":{"line":385,"column":74}}]},"17":{"line":402,"type":"if","locations":[{"start":{"line":402,"column":8},"end":{"line":402,"column":8}},{"start":{"line":402,"column":8},"end":{"line":402,"column":8}}]},"18":{"line":406,"type":"if","locations":[{"start":{"line":406,"column":8},"end":{"line":406,"column":8}},{"start":{"line":406,"column":8},"end":{"line":406,"column":8}}]},"19":{"line":406,"type":"binary-expr","locations":[{"start":{"line":406,"column":12},"end":{"line":406,"column":31}},{"start":{"line":406,"column":35},"end":{"line":406,"column":54}}]},"20":{"line":422,"type":"if","locations":[{"start":{"line":422,"column":12},"end":{"line":422,"column":12}},{"start":{"line":422,"column":12},"end":{"line":422,"column":12}}]},"21":{"line":426,"type":"if","locations":[{"start":{"line":426,"column":12},"end":{"line":426,"column":12}},{"start":{"line":426,"column":12},"end":{"line":426,"column":12}}]},"22":{"line":426,"type":"binary-expr","locations":[{"start":{"line":426,"column":16},"end":{"line":426,"column":31}},{"start":{"line":426,"column":35},"end":{"line":426,"column":59}}]},"23":{"line":431,"type":"if","locations":[{"start":{"line":431,"column":20},"end":{"line":431,"column":20}},{"start":{"line":431,"column":20},"end":{"line":431,"column":20}}]},"24":{"line":438,"type":"cond-expr","locations":[{"start":{"line":438,"column":39},"end":{"line":438,"column":49}},{"start":{"line":438,"column":52},"end":{"line":438,"column":57}}]},"25":{"line":468,"type":"if","locations":[{"start":{"line":468,"column":8},"end":{"line":468,"column":8}},{"start":{"line":468,"column":8},"end":{"line":468,"column":8}}]},"26":{"line":480,"type":"if","locations":[{"start":{"line":480,"column":8},"end":{"line":480,"column":8}},{"start":{"line":480,"column":8},"end":{"line":480,"column":8}}]}}};
-}
-__cov_aw_ivxye20OPypoB_Way2A = __cov_aw_ivxye20OPypoB_Way2A['/home/travis/build/terrestris/BasiGX/src/view/form/AddWms.js'];
-__cov_aw_ivxye20OPypoB_Way2A.s['1']++;Ext.define('BasiGX.view.form.AddWms',{extend:'Ext.form.Panel',xtype:'basigx-form-addwms',requires:['Ext.app.ViewModel','Ext.button.Button','Ext.form.CheckboxGroup','Ext.form.FieldContainer','Ext.form.FieldSet','Ext.form.field.Text','Ext.form.field.Hidden','Ext.form.field.Checkbox','Ext.form.field.Radio','Ext.layout.container.Anchor','Ext.layout.container.HBox','Ext.toolbar.Toolbar','BasiGX.util.Map','BasiGX.util.MsgBox'],viewModel:{data:{queryParamsFieldSetTitle:'Anfrageparameter',wmsUrlTextFieldLabel:'WMS-URL',wmsVersionContainerFieldLabel:'Version',availableLayesFieldSetTitle:'Verfügbare Layer',resetBtnText:'Zurücksetzen',requestLayersBtnText:'Verfügbare Layer abfragen',checkAllLayersBtnText:'Alle auswählen',uncheckAllLayersBtnText:'Nichts auswählen',addCheckedLayersBtnText:'Ausgewählte Layer hinzufügen',errorIncompatibleWMS:'Der angefragte WMS ist nicht kompatibel '+'zur Anwendung',errorRequestFailed:'Die angegebene URL konte nicht abgefragt '+'werden',errorCouldntParseResponse:'Die erhaltene Antwort konnte nicht '+'erfolgreich geparst werden'}},padding:5,layout:'anchor',defaults:{anchor:'100%'},scrollable:true,config:{candidatesInitiallyChecked:true,hasCheckAllBtn:false,hasUncheckAllBtn:false,includeSubLayer:false},parser:null,items:[{xtype:'fieldset',layout:'anchor',defaults:{anchor:'100%'},bind:{title:'{queryParamsFieldSetTitle}'},items:[{xtype:'textfield',bind:{fieldLabel:'{wmsUrlTextFieldLabel}'},name:'url',allowBlank:false,value:'http://ows.terrestris.de/osm/service'},{xtype:'fieldcontainer',bind:{fieldLabel:'{wmsVersionContainerFieldLabel}'},defaultType:'radiofield',defaults:{flex:1},layout:'hbox',items:[{boxLabel:'v1.1.1',name:'version',inputValue:'1.1.1',id:'v111-radio'},{boxLabel:'v1.3.0',name:'version',inputValue:'1.3.0',id:'v130-radio',checked:true}]},{xtype:'hiddenfield',name:'request',value:'GetCapabilities'},{xtype:'hiddenfield',name:'service',value:'WMS'}]},{xtype:'fieldset',name:'fs-available-layers',layout:'anchor',scrollable:'y',maxHeight:200,defaults:{anchor:'100%'},bind:{title:'{availableLayesFieldSetTitle}'},items:{xtype:'checkboxgroup',listeners:{change:{fn:function(cbGroup){__cov_aw_ivxye20OPypoB_Way2A.f['1']++;__cov_aw_ivxye20OPypoB_Way2A.s['2']++;var form=cbGroup.up('basigx-form-addwms');__cov_aw_ivxye20OPypoB_Way2A.s['3']++;form.updateControlToolbarState();},buffer:50}},columns:2,vertical:true}}],buttons:[{bind:{text:'{resetBtnText}'},handler:function(btn){__cov_aw_ivxye20OPypoB_Way2A.f['2']++;__cov_aw_ivxye20OPypoB_Way2A.s['4']++;var view=btn.up('basigx-form-addwms');__cov_aw_ivxye20OPypoB_Way2A.s['5']++;view.getForm().reset();__cov_aw_ivxye20OPypoB_Way2A.s['6']++;view.removeAddLayersComponents();}},'->',{bind:{text:'{requestLayersBtnText}'},formBind:true,disabled:true,handler:function(btn){__cov_aw_ivxye20OPypoB_Way2A.f['3']++;__cov_aw_ivxye20OPypoB_Way2A.s['7']++;var view=btn.up('basigx-form-addwms');__cov_aw_ivxye20OPypoB_Way2A.s['8']++;view.requestGetCapabilities();}}],initComponent:function(){__cov_aw_ivxye20OPypoB_Way2A.f['4']++;__cov_aw_ivxye20OPypoB_Way2A.s['9']++;this.callParent();__cov_aw_ivxye20OPypoB_Way2A.s['10']++;this.parser=new ol.format.WMSCapabilities();},requestGetCapabilities:function(){__cov_aw_ivxye20OPypoB_Way2A.f['5']++;__cov_aw_ivxye20OPypoB_Way2A.s['11']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['12']++;var form=me.getForm();__cov_aw_ivxye20OPypoB_Way2A.s['13']++;if(form.isValid()){__cov_aw_ivxye20OPypoB_Way2A.b['1'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['14']++;me.setLoading(true);__cov_aw_ivxye20OPypoB_Way2A.s['15']++;me.removeAddLayersComponents();__cov_aw_ivxye20OPypoB_Way2A.s['16']++;var values=form.getValues();__cov_aw_ivxye20OPypoB_Way2A.s['17']++;var url=values.url;__cov_aw_ivxye20OPypoB_Way2A.s['18']++;delete values.url;__cov_aw_ivxye20OPypoB_Way2A.s['19']++;Ext.Ajax.request({url:url,method:'GET',params:values,scope:me,success:me.onGetCapabilitiesSuccess,failure:me.onGetCapabilitiesFailure});}else{__cov_aw_ivxye20OPypoB_Way2A.b['1'][1]++;}},onGetCapabilitiesSuccess:function(response){__cov_aw_ivxye20OPypoB_Way2A.f['6']++;__cov_aw_ivxye20OPypoB_Way2A.s['20']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['21']++;var viewModel=me.getViewModel();__cov_aw_ivxye20OPypoB_Way2A.s['22']++;var parser=me.parser;__cov_aw_ivxye20OPypoB_Way2A.s['23']++;var result;__cov_aw_ivxye20OPypoB_Way2A.s['24']++;try{__cov_aw_ivxye20OPypoB_Way2A.s['25']++;result=parser.read(response.responseText);}catch(ex){__cov_aw_ivxye20OPypoB_Way2A.s['26']++;BasiGX.warn(viewModel.get('errorCouldntParseResponse'));}__cov_aw_ivxye20OPypoB_Way2A.s['27']++;var compatibleLayers=me.isCompatibleCapabilityResponse(result);__cov_aw_ivxye20OPypoB_Way2A.s['28']++;if(!compatibleLayers){__cov_aw_ivxye20OPypoB_Way2A.b['2'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['29']++;BasiGX.warn(viewModel.get('errorIncompatibleWMS'));}else{__cov_aw_ivxye20OPypoB_Way2A.b['2'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['30']++;me.fillAvailableLayersFieldset(compatibleLayers);__cov_aw_ivxye20OPypoB_Way2A.s['31']++;me.updateControlToolbarState();__cov_aw_ivxye20OPypoB_Way2A.s['32']++;me.setLoading(false);},onGetCapabilitiesFailure:function(){__cov_aw_ivxye20OPypoB_Way2A.f['7']++;__cov_aw_ivxye20OPypoB_Way2A.s['33']++;this.setLoading(false);__cov_aw_ivxye20OPypoB_Way2A.s['34']++;BasiGX.warn(this.getViewModel().get('errorRequestFailed'));},updateControlToolbarState:function(){__cov_aw_ivxye20OPypoB_Way2A.f['8']++;__cov_aw_ivxye20OPypoB_Way2A.s['35']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['36']++;var cbGroup=me.down('[name=fs-available-layers] checkboxgroup');__cov_aw_ivxye20OPypoB_Way2A.s['37']++;var allCbs=cbGroup.query('checkbox');__cov_aw_ivxye20OPypoB_Way2A.s['38']++;var allChecked=cbGroup.query('[checked=true]');__cov_aw_ivxye20OPypoB_Way2A.s['39']++;var allDisabled=cbGroup.query('[disabled=true]');__cov_aw_ivxye20OPypoB_Way2A.s['40']++;var checkAllBtn=me.down('[name=check-all-layers]');__cov_aw_ivxye20OPypoB_Way2A.s['41']++;var uncheckAllBtn=me.down('[name=uncheck-all-layers]');__cov_aw_ivxye20OPypoB_Way2A.s['42']++;var addBtn=me.down('[name=add-checked-layers]');__cov_aw_ivxye20OPypoB_Way2A.s['43']++;if(allCbs.length===0){__cov_aw_ivxye20OPypoB_Way2A.b['3'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['44']++;return;}else{__cov_aw_ivxye20OPypoB_Way2A.b['3'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['45']++;if(allDisabled.length===allCbs.length){__cov_aw_ivxye20OPypoB_Way2A.b['4'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['46']++;addBtn.setDisabled(true);__cov_aw_ivxye20OPypoB_Way2A.s['47']++;if(checkAllBtn){__cov_aw_ivxye20OPypoB_Way2A.b['5'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['48']++;checkAllBtn.setDisabled(true);}else{__cov_aw_ivxye20OPypoB_Way2A.b['5'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['49']++;if(uncheckAllBtn){__cov_aw_ivxye20OPypoB_Way2A.b['6'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['50']++;uncheckAllBtn.setDisabled(true);}else{__cov_aw_ivxye20OPypoB_Way2A.b['6'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['51']++;return;}else{__cov_aw_ivxye20OPypoB_Way2A.b['4'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['52']++;if(allChecked.length>0){__cov_aw_ivxye20OPypoB_Way2A.b['7'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['53']++;addBtn.setDisabled(false);}else{__cov_aw_ivxye20OPypoB_Way2A.b['7'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['54']++;addBtn.setDisabled(true);}__cov_aw_ivxye20OPypoB_Way2A.s['55']++;if(checkAllBtn){__cov_aw_ivxye20OPypoB_Way2A.b['8'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['56']++;if(allCbs.length===allChecked.length){__cov_aw_ivxye20OPypoB_Way2A.b['9'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['57']++;checkAllBtn.setDisabled(true);}else{__cov_aw_ivxye20OPypoB_Way2A.b['9'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['58']++;checkAllBtn.setDisabled(false);}}else{__cov_aw_ivxye20OPypoB_Way2A.b['8'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['59']++;if(uncheckAllBtn){__cov_aw_ivxye20OPypoB_Way2A.b['10'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['60']++;if(allChecked.length===0){__cov_aw_ivxye20OPypoB_Way2A.b['11'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['61']++;uncheckAllBtn.setDisabled(true);}else{__cov_aw_ivxye20OPypoB_Way2A.b['11'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['62']++;uncheckAllBtn.setDisabled(false);}}else{__cov_aw_ivxye20OPypoB_Way2A.b['10'][1]++;}},removeAddLayersComponents:function(){__cov_aw_ivxye20OPypoB_Way2A.f['9']++;__cov_aw_ivxye20OPypoB_Way2A.s['63']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['64']++;var cbGroup=me.down('[name=fs-available-layers] checkboxgroup');__cov_aw_ivxye20OPypoB_Way2A.s['65']++;var tb=me.down('toolbar[name=interact-w-available-layers]');__cov_aw_ivxye20OPypoB_Way2A.s['66']++;cbGroup.removeAll();__cov_aw_ivxye20OPypoB_Way2A.s['67']++;if(tb){__cov_aw_ivxye20OPypoB_Way2A.b['12'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['68']++;me.remove(tb);}else{__cov_aw_ivxye20OPypoB_Way2A.b['12'][1]++;}},getOlLayer:function(capLayer,version,mapProj,url){__cov_aw_ivxye20OPypoB_Way2A.f['10']++;__cov_aw_ivxye20OPypoB_Way2A.s['69']++;if((__cov_aw_ivxye20OPypoB_Way2A.b['14'][0]++,version==='1.3.0')&&(__cov_aw_ivxye20OPypoB_Way2A.b['14'][1]++,Ext.isArray(capLayer.CRS))&&(__cov_aw_ivxye20OPypoB_Way2A.b['14'][2]++,!Ext.Array.contains(capLayer.CRS,mapProj))){__cov_aw_ivxye20OPypoB_Way2A.b['13'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['70']++;return;}else{__cov_aw_ivxye20OPypoB_Way2A.b['13'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['71']++;var style=capLayer.Style;__cov_aw_ivxye20OPypoB_Way2A.s['72']++;var olSource=new ol.source.TileWMS({url:url,params:{LAYERS:capLayer.Name,STYLES:style?(__cov_aw_ivxye20OPypoB_Way2A.b['15'][0]++,style[0].Name):(__cov_aw_ivxye20OPypoB_Way2A.b['15'][1]++,''),VERSION:version}});__cov_aw_ivxye20OPypoB_Way2A.s['73']++;var olLayer=new ol.layer.Tile({topic:true,name:capLayer.Title,source:olSource,legendUrl:style?(__cov_aw_ivxye20OPypoB_Way2A.b['16'][0]++,style[0].LegendURL[0].OnlineResource):(__cov_aw_ivxye20OPypoB_Way2A.b['16'][1]++,null)});__cov_aw_ivxye20OPypoB_Way2A.s['74']++;return olLayer;},isCompatibleCapabilityResponse:function(capabilities){__cov_aw_ivxye20OPypoB_Way2A.f['11']++;__cov_aw_ivxye20OPypoB_Way2A.s['75']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['76']++;if(!capabilities){__cov_aw_ivxye20OPypoB_Way2A.b['17'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['77']++;return false;}else{__cov_aw_ivxye20OPypoB_Way2A.b['17'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['78']++;var version=capabilities.version;__cov_aw_ivxye20OPypoB_Way2A.s['79']++;if((__cov_aw_ivxye20OPypoB_Way2A.b['19'][0]++,version!=='1.1.1')&&(__cov_aw_ivxye20OPypoB_Way2A.b['19'][1]++,version!=='1.3.0')){__cov_aw_ivxye20OPypoB_Way2A.b['18'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['80']++;return false;}else{__cov_aw_ivxye20OPypoB_Way2A.b['18'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['81']++;var compatible=[];__cov_aw_ivxye20OPypoB_Way2A.s['82']++;var map=BasiGX.util.Map.getMapComponent().getMap();__cov_aw_ivxye20OPypoB_Way2A.s['83']++;var mapProj=map.getView().getProjection().getCode();__cov_aw_ivxye20OPypoB_Way2A.s['84']++;var layers=capabilities.Capability.Layer.Layer;__cov_aw_ivxye20OPypoB_Way2A.s['85']++;var url=capabilities.Capability.Request.GetMap.DCPType[0].HTTP.Get.OnlineResource;__cov_aw_ivxye20OPypoB_Way2A.s['86']++;var includeSubLayer=me.getIncludeSubLayer();__cov_aw_ivxye20OPypoB_Way2A.s['87']++;Ext.each(layers,function(layer){__cov_aw_ivxye20OPypoB_Way2A.f['12']++;__cov_aw_ivxye20OPypoB_Way2A.s['88']++;var olLayer=me.getOlLayer(layer,version,mapProj,url);__cov_aw_ivxye20OPypoB_Way2A.s['89']++;if(olLayer){__cov_aw_ivxye20OPypoB_Way2A.b['20'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['90']++;compatible.push(olLayer);}else{__cov_aw_ivxye20OPypoB_Way2A.b['20'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['91']++;if((__cov_aw_ivxye20OPypoB_Way2A.b['22'][0]++,includeSubLayer)&&(__cov_aw_ivxye20OPypoB_Way2A.b['22'][1]++,Ext.isArray(layer.Layer))){__cov_aw_ivxye20OPypoB_Way2A.b['21'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['92']++;Ext.each(layer.Layer,function(subLayer){__cov_aw_ivxye20OPypoB_Way2A.f['13']++;__cov_aw_ivxye20OPypoB_Way2A.s['93']++;var subOlLayer=me.getOlLayer(subLayer,version,mapProj,url);__cov_aw_ivxye20OPypoB_Way2A.s['94']++;if(subOlLayer){__cov_aw_ivxye20OPypoB_Way2A.b['23'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['95']++;compatible.push(subOlLayer);}else{__cov_aw_ivxye20OPypoB_Way2A.b['23'][1]++;}});}else{__cov_aw_ivxye20OPypoB_Way2A.b['21'][1]++;}});__cov_aw_ivxye20OPypoB_Way2A.s['96']++;return compatible.length>0?(__cov_aw_ivxye20OPypoB_Way2A.b['24'][0]++,compatible):(__cov_aw_ivxye20OPypoB_Way2A.b['24'][1]++,false);},fillAvailableLayersFieldset:function(layers){__cov_aw_ivxye20OPypoB_Way2A.f['14']++;__cov_aw_ivxye20OPypoB_Way2A.s['97']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['98']++;me.removeAddLayersComponents();__cov_aw_ivxye20OPypoB_Way2A.s['99']++;var fs=me.down('[name=fs-available-layers]');__cov_aw_ivxye20OPypoB_Way2A.s['100']++;var cbGroup=fs.down('checkboxgroup');__cov_aw_ivxye20OPypoB_Way2A.s['101']++;var checkBoxes=[];__cov_aw_ivxye20OPypoB_Way2A.s['102']++;var candidatesInitiallyChecked=me.getCandidatesInitiallyChecked();__cov_aw_ivxye20OPypoB_Way2A.s['103']++;Ext.each(layers,function(layer){__cov_aw_ivxye20OPypoB_Way2A.f['15']++;__cov_aw_ivxye20OPypoB_Way2A.s['104']++;checkBoxes.push({xtype:'checkbox',boxLabel:layer.get('name'),checked:candidatesInitiallyChecked,olLayer:layer});});__cov_aw_ivxye20OPypoB_Way2A.s['105']++;cbGroup.add(checkBoxes);__cov_aw_ivxye20OPypoB_Way2A.s['106']++;var tbItems=[];__cov_aw_ivxye20OPypoB_Way2A.s['107']++;if(me.getHasCheckAllBtn()){__cov_aw_ivxye20OPypoB_Way2A.b['25'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['108']++;tbItems.push({xtype:'button',name:'check-all-layers',bind:{text:'{checkAllLayersBtnText}'},handler:me.checkAllLayers,scope:me});}else{__cov_aw_ivxye20OPypoB_Way2A.b['25'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['109']++;if(me.getHasUncheckAllBtn()){__cov_aw_ivxye20OPypoB_Way2A.b['26'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['110']++;tbItems.push({xtype:'button',name:'uncheck-all-layers',bind:{text:'{uncheckAllLayersBtnText}'},handler:me.uncheckAllLayers,scope:me});}else{__cov_aw_ivxye20OPypoB_Way2A.b['26'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['111']++;tbItems.push('->');__cov_aw_ivxye20OPypoB_Way2A.s['112']++;tbItems.push({xtype:'button',name:'add-checked-layers',bind:{text:'{addCheckedLayersBtnText}'},handler:me.addCheckedLayers,scope:me});__cov_aw_ivxye20OPypoB_Way2A.s['113']++;me.add({xtype:'toolbar',name:'interact-w-available-layers',items:tbItems});},addCheckedLayers:function(){__cov_aw_ivxye20OPypoB_Way2A.f['16']++;__cov_aw_ivxye20OPypoB_Way2A.s['114']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['115']++;var fs=me.down('[name=fs-available-layers]');__cov_aw_ivxye20OPypoB_Way2A.s['116']++;var checkboxes=fs.query('checkbox[checked=true][disabled=false]');__cov_aw_ivxye20OPypoB_Way2A.s['117']++;var map=BasiGX.util.Map.getMapComponent().getMap();__cov_aw_ivxye20OPypoB_Way2A.s['118']++;Ext.each(checkboxes,function(checkbox){__cov_aw_ivxye20OPypoB_Way2A.f['17']++;__cov_aw_ivxye20OPypoB_Way2A.s['119']++;me.fireEvent('beforewmsadd',checkbox.olLayer);__cov_aw_ivxye20OPypoB_Way2A.s['120']++;map.addLayer(checkbox.olLayer);__cov_aw_ivxye20OPypoB_Way2A.s['121']++;me.fireEvent('wmsadd',checkbox.olLayer);__cov_aw_ivxye20OPypoB_Way2A.s['122']++;checkbox.setDisabled(true);});__cov_aw_ivxye20OPypoB_Way2A.s['123']++;me.updateControlToolbarState();},checkAllLayers:function(){__cov_aw_ivxye20OPypoB_Way2A.f['18']++;__cov_aw_ivxye20OPypoB_Way2A.s['124']++;var sel='[name=fs-available-layers] checkbox[disabled=false]';__cov_aw_ivxye20OPypoB_Way2A.s['125']++;var checkboxes=this.query(sel);__cov_aw_ivxye20OPypoB_Way2A.s['126']++;Ext.each(checkboxes,function(checkbox){__cov_aw_ivxye20OPypoB_Way2A.f['19']++;__cov_aw_ivxye20OPypoB_Way2A.s['127']++;checkbox.setValue(true);});},uncheckAllLayers:function(){__cov_aw_ivxye20OPypoB_Way2A.f['20']++;__cov_aw_ivxye20OPypoB_Way2A.s['128']++;var sel='[name=fs-available-layers] checkbox[disabled=false]';__cov_aw_ivxye20OPypoB_Way2A.s['129']++;var checkboxes=this.query(sel);__cov_aw_ivxye20OPypoB_Way2A.s['130']++;Ext.each(checkboxes,function(checkbox){__cov_aw_ivxye20OPypoB_Way2A.f['21']++;__cov_aw_ivxye20OPypoB_Way2A.s['131']++;checkbox.setValue(false);});}});
+    requires: [
+        'Ext.app.ViewModel',
+        'Ext.button.Button',
+        'Ext.form.CheckboxGroup',
+        'Ext.form.FieldContainer',
+        'Ext.form.FieldSet',
+        'Ext.form.field.Text',
+        'Ext.form.field.Hidden',
+        'Ext.form.field.Checkbox',
+        'Ext.form.field.Radio',
+        'Ext.layout.container.Anchor',
+        'Ext.layout.container.HBox',
+        'Ext.toolbar.Toolbar',
+
+        'BasiGX.util.Map',
+        'BasiGX.util.MsgBox'
+    ],
+
+    viewModel: {
+        data: {
+            queryParamsFieldSetTitle: 'Anfrageparameter',
+            wmsUrlTextFieldLabel: 'WMS-URL',
+            wmsVersionContainerFieldLabel: 'Version',
+            availableLayesFieldSetTitle: 'Verfügbare Layer',
+            resetBtnText: 'Zurücksetzen',
+            requestLayersBtnText: 'Verfügbare Layer abfragen',
+            checkAllLayersBtnText: 'Alle auswählen',
+            uncheckAllLayersBtnText: 'Nichts auswählen',
+            addCheckedLayersBtnText: 'Ausgewählte Layer hinzufügen',
+            errorIncompatibleWMS: 'Der angefragte WMS ist nicht kompatibel ' +
+                    'zur Anwendung',
+            errorRequestFailed: 'Die angegebene URL konte nicht abgefragt ' +
+                    'werden',
+            errorCouldntParseResponse: 'Die erhaltene Antwort konnte nicht ' +
+                    'erfolgreich geparst werden'
+        }
+    },
+
+    padding: 5,
+    layout: 'anchor',
+    defaults: {
+        anchor: '100%'
+    },
+
+    scrollable: true,
+
+    config: {
+
+        /**
+         * Whether layers shall start `checked` or `unchecked` in the available
+         * layers fieldset.
+         */
+        candidatesInitiallyChecked: true,
+
+        /**
+         * Whether to add a `Check all layers` button to the toolbar to interact
+         * with the layers of a GetCapabilities response.
+         */
+        hasCheckAllBtn: false,
+
+        /**
+         * Whether to add a `Uncheck all layers` button to the toolbar to
+         * interactthe with the layers of a GetCapabilities response.
+         */
+        hasUncheckAllBtn: false,
+
+        /**
+         * Whether to include sublayers when creting the list of available
+         * layers.
+         */
+        includeSubLayer: false
+    },
+
+    /**
+     * The ol.format.WMSCapabilities which we use to parse any responses. Will
+     * be set in `initComponent`
+     *
+     * @private
+     */
+    parser: null,
+
+    items: [
+        {
+            xtype: 'fieldset',
+            layout: 'anchor',
+            defaults: {
+                anchor: '100%'
+            },
+            bind: {
+                title: '{queryParamsFieldSetTitle}'
+            },
+            items: [{
+                xtype: 'textfield',
+                bind: {
+                    fieldLabel: '{wmsUrlTextFieldLabel}'
+                },
+                name: 'url',
+                allowBlank: false,
+                value: 'http://ows.terrestris.de/osm/service'
+            }, {
+                xtype: 'fieldcontainer',
+                bind: {
+                    fieldLabel: '{wmsVersionContainerFieldLabel}'
+                },
+                defaultType: 'radiofield',
+                defaults: {
+                    flex: 1
+                },
+                layout: 'hbox',
+                items: [
+                    {
+                        boxLabel: 'v1.1.1',
+                        name: 'version',
+                        inputValue: '1.1.1',
+                        id: 'v111-radio'
+                    }, {
+                        boxLabel: 'v1.3.0',
+                        name: 'version',
+                        inputValue: '1.3.0',
+                        id: 'v130-radio',
+                        checked: true
+                    }
+                ]
+            }, {
+                xtype: 'hiddenfield',
+                name: 'request',
+                value: 'GetCapabilities'
+            }, {
+                xtype: 'hiddenfield',
+                name: 'service',
+                value: 'WMS'
+            }]
+        },
+        {
+            xtype: 'fieldset',
+            name: 'fs-available-layers',
+            layout: 'anchor',
+            scrollable: 'y',
+            maxHeight: 200,
+            defaults: {
+                anchor: '100%'
+            },
+            bind: {
+                title: '{availableLayesFieldSetTitle}'
+            },
+            items: {
+                xtype: 'checkboxgroup',
+                listeners: {
+                    change: {
+                        fn: function(cbGroup) {
+                            var form = cbGroup.up('basigx-form-addwms');
+                            form.updateControlToolbarState();
+                        },
+                        buffer: 50
+                    }
+                },
+                columns: 2,
+                vertical: true
+            }
+        }
+    ],
+
+    // Reset and Submit buttons
+    buttons: [
+        {
+            bind: {
+                text: '{resetBtnText}'
+            },
+            handler: function(btn){
+                var view = btn.up('basigx-form-addwms');
+                view.getForm().reset();
+                view.removeAddLayersComponents();
+            }
+        },
+        '->',
+        {
+            bind: {
+                text: '{requestLayersBtnText}'
+            },
+            formBind: true, // only enabled once the form is valid
+            disabled: true,
+            handler: function(btn){
+                var view = btn.up('basigx-form-addwms');
+                view.requestGetCapabilities();
+            }
+        }
+    ],
+
+    /**
+     * Initializes the form and sets up the parser instance.
+     */
+    initComponent: function() {
+        this.callParent();
+        this.parser = new ol.format.WMSCapabilities();
+    },
+
+
+    /**
+     * Will be called with the 'get layers' button. Issues a GetCapabilities
+     * request and sets up handlewrs for reacting on the response.
+     */
+    requestGetCapabilities: function(){
+        var me = this;
+        var form = me.getForm();
+        if (form.isValid()) {
+            me.setLoading(true);
+            me.removeAddLayersComponents();
+            var values = form.getValues();
+            var url = values.url;
+            delete values.url;
+
+            Ext.Ajax.request({
+                url: url,
+                method: 'GET',
+                params: values,
+                scope: me,
+                success: me.onGetCapabilitiesSuccess,
+                failure: me.onGetCapabilitiesFailure
+            });
+        }
+    },
+
+    /**
+     * Called if we could successfully query for the capabiliteis of a WMS, this
+     * methdo will examine the answer and eventually set up a fieldset for all
+     * the layers that we have found in the server's answer.
+     *
+     * @param response {XMLHttpRequest} The response of the request.
+     */
+    onGetCapabilitiesSuccess: function(response) {
+        var me = this;
+        var viewModel = me.getViewModel();
+        var parser = me.parser;
+        var result;
+        try {
+            result = parser.read(response.responseText);
+        } catch(ex) {
+            BasiGX.warn(viewModel.get('errorCouldntParseResponse'));
+        }
+        var compatibleLayers = me.isCompatibleCapabilityResponse(result);
+        if (!compatibleLayers) {
+            BasiGX.warn(viewModel.get('errorIncompatibleWMS'));
+        }
+        me.fillAvailableLayersFieldset(compatibleLayers);
+        me.updateControlToolbarState();
+        me.setLoading(false);
+    },
+
+    /**
+     * Called if we could not successfully query for the capabiliteis of a WMS.
+     *
+     * @param response {XMLHttpRequest} The response of the request.
+     */
+    onGetCapabilitiesFailure: function() {
+        this.setLoading(false);
+        BasiGX.warn(this.getViewModel().get('errorRequestFailed'));
+    },
+
+    /**
+     * Updates the disabled state of the buttons to control the layer
+     * checkboxes (e.g. check all, uncheck all, add selected).
+     */
+    updateControlToolbarState: function() {
+        var me = this;
+        var cbGroup = me.down('[name=fs-available-layers] checkboxgroup');
+        var allCbs = cbGroup.query('checkbox');
+        var allChecked = cbGroup.query('[checked=true]');
+        var allDisabled = cbGroup.query('[disabled=true]');
+        var checkAllBtn = me.down('[name=check-all-layers]');
+        var uncheckAllBtn = me.down('[name=uncheck-all-layers]');
+        var addBtn = me.down('[name=add-checked-layers]');
+        if (allCbs.length === 0) {
+            // no checkboxes, also no control toolbar, return
+            return;
+        }
+        if (allDisabled.length === allCbs.length) {
+            // all checkboxes are disabled, all controls can be disabled
+            addBtn.setDisabled(true);
+            if (checkAllBtn) {
+                checkAllBtn.setDisabled(true);
+            }
+            if (uncheckAllBtn) {
+                uncheckAllBtn.setDisabled(true);
+            }
+            return;
+        }
+        if (allChecked.length > 0) {
+            // at least one checkbox is checked
+            addBtn.setDisabled(false);
+        } else {
+            // not even one is checked
+            addBtn.setDisabled(true);
+        }
+
+        if (checkAllBtn) {
+            if (allCbs.length === allChecked.length) {
+                // all are checked already
+                checkAllBtn.setDisabled(true);
+            } else {
+                checkAllBtn.setDisabled(false);
+            }
+        }
+        if (uncheckAllBtn) {
+            if (allChecked.length === 0) {
+                // not a single one is checked
+                uncheckAllBtn.setDisabled(true);
+            } else {
+                uncheckAllBtn.setDisabled(false);
+            }
+        }
+    },
+
+    /**
+     * Remove the checkboxes ffor layxers from previous requests, and also the
+     * interact-toolbar.
+     */
+    removeAddLayersComponents: function() {
+        var me = this;
+        var cbGroup = me.down('[name=fs-available-layers] checkboxgroup');
+        var tb = me.down('toolbar[name=interact-w-available-layers]');
+        cbGroup.removeAll();
+        if (tb) {
+            me.remove(tb);
+        }
+    },
+
+    /**
+     * A utility method that creates an ol.layer.Tile with a ol.source.TileWMS
+     * from the properties of a layer from a getCapabilities response.
+     *
+     * @param {Object} capLayer A layer from a GetCapabilities response
+     * @param {String} version The WMS version.
+     * @param {String} mapProj The map projection as string.
+     * @param {String} url The WMS URL.
+     * @return {ol.layer.Tile} The created layer or `undefined`.
+     */
+    getOlLayer: function(capLayer, version, mapProj, url) {
+        // This really should not matter, as ol3 can reproject in the client
+        // At least it shoudl be configurable
+        if (version === '1.3.0' &&
+            Ext.isArray(capLayer.CRS) &&
+            !Ext.Array.contains(capLayer.CRS, mapProj)) {
+            // only available for 1.3.0
+            return;
+        }
+        var style = capLayer.Style;
+        var olSource = new ol.source.TileWMS({
+            url: url,
+            params: {
+                LAYERS: capLayer.Name,
+                STYLES: style ? style[0].Name : '',
+                VERSION: version
+            }
+        });
+        var olLayer = new ol.layer.Tile({
+            topic: true,
+            name: capLayer.Title,
+            source: olSource,
+            legendUrl: style ? style[0].LegendURL[0].OnlineResource : null
+        });
+        return olLayer;
+    },
+
+    /**
+     * Checks if the passed capabilities object (from the #parser) is
+     * compatible. It woill return an array of layers if we could determine any,
+     * and the boolean value `false` if not.
+     *
+     * @param {Object} capabilities The GetCapabbilties object as it is returned
+     *     by our parser.
+     * @return {ol.layer.Tile[]|boolean} Eitehr an array of comüatible layers or
+     *     `false`.
+     */
+    isCompatibleCapabilityResponse: function (capabilities) {
+        var me = this;
+        if (!capabilities) {
+            return false;
+        }
+        var version = capabilities.version;
+        if (version !== '1.1.1' && version !== '1.3.0') {
+            return false;
+        }
+        var compatible = [];
+        var map = BasiGX.util.Map.getMapComponent().getMap();
+        var mapProj = map.getView().getProjection().getCode();
+
+        // same in both versions
+        var layers = capabilities.Capability.Layer.Layer;
+        var url = capabilities.Capability.Request.GetMap.
+            DCPType[0].HTTP.Get.OnlineResource;
+
+        var includeSubLayer = me.getIncludeSubLayer();
+
+        Ext.each(layers, function(layer){
+            var olLayer = me.getOlLayer(layer, version, mapProj, url);
+            if (olLayer) {
+                compatible.push(olLayer);
+            }
+
+            if (includeSubLayer && Ext.isArray(layer.Layer)) {
+                Ext.each(layer.Layer, function(subLayer) {
+                    var subOlLayer = me.getOlLayer(
+                        subLayer, version, mapProj, url
+                    );
+                    if (subOlLayer) {
+                        compatible.push(subOlLayer);
+                    }
+                });
+            }
+        });
+
+        return compatible.length > 0 ? compatible : false;
+    },
+
+    /**
+     * Takes an array of OpenLayers layers (as gathered by the method to fetch
+     * them from the capabilities object #isCompatibleCapabilityResponse) and
+     * updates the avaialable layers fieldset with matching entries.
+     *
+     * @param {ol.layer.Tile[]} layers The layers for which the we shall fill
+     *     the fieldset.
+     */
+    fillAvailableLayersFieldset: function(layers){
+        var me = this;
+        me.removeAddLayersComponents();
+        var fs = me.down('[name=fs-available-layers]');
+        var cbGroup = fs.down('checkboxgroup');
+        var checkBoxes = [];
+        var candidatesInitiallyChecked = me.getCandidatesInitiallyChecked();
+        Ext.each(layers, function(layer){
+            checkBoxes.push({
+                xtype: 'checkbox',
+                boxLabel: layer.get('name'),
+                checked: candidatesInitiallyChecked,
+                olLayer: layer
+            });
+        });
+        cbGroup.add(checkBoxes);
+
+        var tbItems = [];
+
+        if (me.getHasCheckAllBtn()) {
+            tbItems.push({
+                xtype: 'button',
+                name: 'check-all-layers',
+                bind: {
+                    text: '{checkAllLayersBtnText}'
+                },
+                handler: me.checkAllLayers,
+                scope: me
+            });
+        }
+
+        if (me.getHasUncheckAllBtn()) {
+            tbItems.push({
+                xtype: 'button',
+                name: 'uncheck-all-layers',
+                bind: {
+                    text: '{uncheckAllLayersBtnText}'
+                },
+                handler: me.uncheckAllLayers,
+                scope: me
+            });
+        }
+
+        tbItems.push('->');
+        tbItems.push({
+            xtype: 'button',
+            name: 'add-checked-layers',
+            bind: {
+                text: '{addCheckedLayersBtnText}'
+            },
+            handler: me.addCheckedLayers,
+            scope: me
+        });
+
+        me.add({
+            xtype: 'toolbar',
+            name: 'interact-w-available-layers',
+            items: tbItems
+        });
+    },
+
+    /**
+     * Examines the available layers fieldset, and adds all checked layers to
+     * the map.
+     */
+    addCheckedLayers: function() {
+        var me = this;
+        var fs = me.down('[name=fs-available-layers]');
+        var checkboxes = fs.query('checkbox[checked=true][disabled=false]');
+        var map = BasiGX.util.Map.getMapComponent().getMap();
+        Ext.each(checkboxes, function(checkbox) {
+            me.fireEvent('beforewmsadd', checkbox.olLayer);
+            map.addLayer(checkbox.olLayer);
+            me.fireEvent('wmsadd', checkbox.olLayer);
+            checkbox.setDisabled(true);
+        });
+        me.updateControlToolbarState();
+    },
+
+    /**
+     * Checks all checkboxes in the available layers fieldset.
+     */
+    checkAllLayers: function() {
+        var sel = '[name=fs-available-layers] checkbox[disabled=false]';
+        var checkboxes = this.query(sel);
+        Ext.each(checkboxes, function(checkbox) {
+            checkbox.setValue(true);
+        });
+    },
+
+    /**
+     * Unchecks all checkboxes in the available layers fieldset.
+     */
+    uncheckAllLayers: function() {
+        var sel = '[name=fs-available-layers] checkbox[disabled=false]';
+        var checkboxes = this.query(sel);
+        Ext.each(checkboxes, function(checkbox) {
+            checkbox.setValue(false);
+        });
+    }
+});

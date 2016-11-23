@@ -1,9 +1,83 @@
+/* Copyright (c) 2015 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Permalink FormPanel
+ *
+ * Used to show a permalink of the mapstate (center, zoom, visible layers)
+ *
+ * @class BasiGX.view.form.Permalink
+ */
+Ext.define("BasiGX.view.form.Permalink", {
+    extend: "Ext.form.Panel",
 
-var __cov_v1ptW8VcmF0$U4RnHZO_QQ = (Function('return this'))();
-if (!__cov_v1ptW8VcmF0$U4RnHZO_QQ.__coverage__) { __cov_v1ptW8VcmF0$U4RnHZO_QQ.__coverage__ = {}; }
-__cov_v1ptW8VcmF0$U4RnHZO_QQ = __cov_v1ptW8VcmF0$U4RnHZO_QQ.__coverage__;
-if (!(__cov_v1ptW8VcmF0$U4RnHZO_QQ['/home/travis/build/terrestris/BasiGX/src/view/form/Permalink.js'])) {
-   __cov_v1ptW8VcmF0$U4RnHZO_QQ['/home/travis/build/terrestris/BasiGX/src/view/form/Permalink.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/form/Permalink.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0},"b":{},"f":{"1":0,"2":0,"3":0,"4":0},"fnMap":{"1":{"name":"(anonymous_1)","line":51,"loc":{"start":{"line":51,"column":25},"end":{"line":51,"column":44}}},"2":{"name":"(anonymous_2)","line":55,"loc":{"start":{"line":55,"column":20},"end":{"line":55,"column":39}}},"3":{"name":"(anonymous_3)","line":67,"loc":{"start":{"line":67,"column":17},"end":{"line":67,"column":30}}},"4":{"name":"(anonymous_4)","line":74,"loc":{"start":{"line":74,"column":18},"end":{"line":74,"column":28}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":83,"column":3}},"2":{"start":{"line":52,"column":16},"end":{"line":52,"column":68}},"3":{"start":{"line":53,"column":16},"end":{"line":53,"column":46}},"4":{"start":{"line":56,"column":16},"end":{"line":57,"column":67}},"5":{"start":{"line":58,"column":16},"end":{"line":58,"column":47}},"6":{"start":{"line":68,"column":12},"end":{"line":68,"column":58}},"7":{"start":{"line":69,"column":12},"end":{"line":69,"column":61}},"8":{"start":{"line":70,"column":12},"end":{"line":70,"column":42}},"9":{"start":{"line":75,"column":8},"end":{"line":75,"column":55}},"10":{"start":{"line":76,"column":8},"end":{"line":78,"column":35}},"11":{"start":{"line":79,"column":8},"end":{"line":79,"column":54}},"12":{"start":{"line":80,"column":8},"end":{"line":80,"column":25}}},"branchMap":{}};
-}
-__cov_v1ptW8VcmF0$U4RnHZO_QQ = __cov_v1ptW8VcmF0$U4RnHZO_QQ['/home/travis/build/terrestris/BasiGX/src/view/form/Permalink.js'];
-__cov_v1ptW8VcmF0$U4RnHZO_QQ.s['1']++;Ext.define('BasiGX.view.form.Permalink',{extend:'Ext.form.Panel',xtype:'basigx-form-permalink',requires:['Ext.button.Button','Ext.app.ViewModel'],viewModel:{data:{refreshBtnText:'Erneuern'}},padding:5,layout:'fit',minWidth:320,defaults:{anchor:'100%'},items:[{xtype:'textfield',name:'textfield-permalink',editable:false,listeners:{afterrender:function(textfield){__cov_v1ptW8VcmF0$U4RnHZO_QQ.f['1']++;__cov_v1ptW8VcmF0$U4RnHZO_QQ.s['2']++;var permalink=textfield.up('form').getPermalink();__cov_v1ptW8VcmF0$U4RnHZO_QQ.s['3']++;textfield.setValue(permalink);},change:function(textfield){__cov_v1ptW8VcmF0$U4RnHZO_QQ.f['2']++;__cov_v1ptW8VcmF0$U4RnHZO_QQ.s['4']++;var width=Ext.util.TextMetrics.measure(textfield.getEl(),textfield.getValue()).width;__cov_v1ptW8VcmF0$U4RnHZO_QQ.s['5']++;textfield.setWidth(width+20);}}}],buttons:[{bind:{text:'{refreshBtnText}'},handler:function(btn){__cov_v1ptW8VcmF0$U4RnHZO_QQ.f['3']++;__cov_v1ptW8VcmF0$U4RnHZO_QQ.s['6']++;var permalink=btn.up('form').getPermalink();__cov_v1ptW8VcmF0$U4RnHZO_QQ.s['7']++;var textfield=btn.up('form').down('textfield');__cov_v1ptW8VcmF0$U4RnHZO_QQ.s['8']++;textfield.setValue(permalink);}}],getPermalink:function(){__cov_v1ptW8VcmF0$U4RnHZO_QQ.f['4']++;__cov_v1ptW8VcmF0$U4RnHZO_QQ.s['9']++;var route=BasiGX.util.Application.getRoute();__cov_v1ptW8VcmF0$U4RnHZO_QQ.s['10']++;var hrefWithoutHash=window.location.origin+window.location.pathname+window.location.search;__cov_v1ptW8VcmF0$U4RnHZO_QQ.s['11']++;var permalink=hrefWithoutHash+'#'+route;__cov_v1ptW8VcmF0$U4RnHZO_QQ.s['12']++;return permalink;}});
+    xtype: 'basigx-form-permalink',
+
+    requires: [
+        'Ext.button.Button',
+        'Ext.app.ViewModel'
+    ],
+
+    viewModel: {
+        data: {
+            refreshBtnText: 'Erneuern'
+        }
+    },
+
+    padding: 5,
+    layout: 'fit',
+    minWidth: 320,
+    defaults: {
+        anchor: '100%'
+    },
+
+    items: [{
+        xtype: 'textfield',
+        name: 'textfield-permalink',
+        editable: false,
+        listeners: {
+            afterrender: function(textfield){
+                var permalink = textfield.up('form').getPermalink();
+                textfield.setValue(permalink);
+            },
+            change: function(textfield){
+                var width = Ext.util.TextMetrics.measure(
+                    textfield.getEl(), textfield.getValue()).width;
+                textfield.setWidth(width + 20);
+            }
+        }
+    }],
+
+    buttons: [{
+        bind: {
+            text: '{refreshBtnText}'
+        },
+        handler: function(btn){
+            var permalink = btn.up('form').getPermalink();
+            var textfield = btn.up('form').down('textfield');
+            textfield.setValue(permalink);
+        }
+    }],
+
+    getPermalink: function(){
+        var route = BasiGX.util.Application.getRoute();
+        var hrefWithoutHash = window.location.origin +
+            window.location.pathname +
+            window.location.search;
+        var permalink = hrefWithoutHash + '#' + route;
+        return permalink;
+    }
+
+});

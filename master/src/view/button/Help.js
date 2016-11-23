@@ -1,9 +1,79 @@
+/* Copyright (c) 2015 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Help Button
+ *
+ * Button used to instantiate BasiGX.ux.ContextSensitiveHelp
+ *
+ * @class BasiGX.view.button.Help
+ */
+Ext.define("BasiGX.view.button.Help", {
+    extend: "Ext.Button",
+    xtype: 'basigx-button-help',
 
-var __cov_LGAWv6KD9etUCRKq3a8Bsg = (Function('return this'))();
-if (!__cov_LGAWv6KD9etUCRKq3a8Bsg.__coverage__) { __cov_LGAWv6KD9etUCRKq3a8Bsg.__coverage__ = {}; }
-__cov_LGAWv6KD9etUCRKq3a8Bsg = __cov_LGAWv6KD9etUCRKq3a8Bsg.__coverage__;
-if (!(__cov_LGAWv6KD9etUCRKq3a8Bsg['/home/travis/build/terrestris/BasiGX/src/view/button/Help.js'])) {
-   __cov_LGAWv6KD9etUCRKq3a8Bsg['/home/travis/build/terrestris/BasiGX/src/view/button/Help.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/Help.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0},"b":{"1":[0,0]},"f":{"1":0,"2":0},"fnMap":{"1":{"name":"(anonymous_1)","line":61,"loc":{"start":{"line":61,"column":17},"end":{"line":61,"column":33}}},"2":{"name":"(anonymous_2)","line":70,"loc":{"start":{"line":70,"column":17},"end":{"line":70,"column":34}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":79,"column":3}},"2":{"start":{"line":62,"column":12},"end":{"line":62,"column":68}},"3":{"start":{"line":63,"column":12},"end":{"line":63,"column":63}},"4":{"start":{"line":71,"column":8},"end":{"line":71,"column":34}},"5":{"start":{"line":73,"column":8},"end":{"line":77,"column":9}},"6":{"start":{"line":74,"column":12},"end":{"line":74,"column":40}},"7":{"start":{"line":75,"column":12},"end":{"line":75,"column":62}},"8":{"start":{"line":76,"column":12},"end":{"line":76,"column":31}}},"branchMap":{"1":{"line":73,"type":"if","locations":[{"start":{"line":73,"column":8},"end":{"line":73,"column":8}},{"start":{"line":73,"column":8},"end":{"line":73,"column":8}}]}}};
-}
-__cov_LGAWv6KD9etUCRKq3a8Bsg = __cov_LGAWv6KD9etUCRKq3a8Bsg['/home/travis/build/terrestris/BasiGX/src/view/button/Help.js'];
-__cov_LGAWv6KD9etUCRKq3a8Bsg.s['1']++;Ext.define('BasiGX.view.button.Help',{extend:'Ext.Button',xtype:'basigx-button-help',requires:['BasiGX.ux.ContextSensitiveHelp','Ext.app.ViewModel'],viewModel:{data:{tooltip:'Hilfe',text:null}},bind:{text:'{text}'},glyph:'xf059@FontAwesome',html:'<i class="fa fa-question-circle fa-2x"></i>',config:{additonalHelpKeys:null,handler:function(button){__cov_LGAWv6KD9etUCRKq3a8Bsg.f['1']++;__cov_LGAWv6KD9etUCRKq3a8Bsg.s['2']++;var help=Ext.create('BasiGX.ux.ContextSensitiveHelp');__cov_LGAWv6KD9etUCRKq3a8Bsg.s['3']++;help.setContextHelp(button.getAdditonalHelpKeys());}},constructor:function(config){__cov_LGAWv6KD9etUCRKq3a8Bsg.f['2']++;__cov_LGAWv6KD9etUCRKq3a8Bsg.s['4']++;this.callParent([config]);__cov_LGAWv6KD9etUCRKq3a8Bsg.s['5']++;if(this.setTooltip){__cov_LGAWv6KD9etUCRKq3a8Bsg.b['1'][0]++;__cov_LGAWv6KD9etUCRKq3a8Bsg.s['6']++;var bind=this.config.bind;__cov_LGAWv6KD9etUCRKq3a8Bsg.s['7']++;bind.tooltip=this.getViewModel().get('tooltip');__cov_LGAWv6KD9etUCRKq3a8Bsg.s['8']++;this.setBind(bind);}else{__cov_LGAWv6KD9etUCRKq3a8Bsg.b['1'][1]++;}}});
+    requires: [
+        'BasiGX.ux.ContextSensitiveHelp',
+        'Ext.app.ViewModel'
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Hilfe',
+            text: null
+        }
+    },
+
+    /**
+     *
+     */
+    bind: {
+        text: '{text}'
+    },
+
+    /**
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: 'xf059@FontAwesome',
+    html: '<i class="fa fa-question-circle fa-2x"></i>',
+
+    /**
+     *
+     */
+    config: {
+        additonalHelpKeys: null,
+        handler: function(button){
+            var help = Ext.create('BasiGX.ux.ContextSensitiveHelp');
+            help.setContextHelp(button.getAdditonalHelpKeys());
+        }
+    },
+
+    /**
+     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+    }
+});

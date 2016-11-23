@@ -1,9 +1,278 @@
+/* Copyright (c) 2016 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ *  A grid showing results of the gazetteer search response values.
+ *
+ * @class BasiGX.view.grid.GazetteerGrid
+ */
+Ext.define('BasiGX.view.grid.GazetteerGrid',{
+    extend: 'Ext.grid.Panel',
 
-var __cov_BE5OdlJUFhz6gt_WNP9TzA = (Function('return this'))();
-if (!__cov_BE5OdlJUFhz6gt_WNP9TzA.__coverage__) { __cov_BE5OdlJUFhz6gt_WNP9TzA.__coverage__ = {}; }
-__cov_BE5OdlJUFhz6gt_WNP9TzA = __cov_BE5OdlJUFhz6gt_WNP9TzA.__coverage__;
-if (!(__cov_BE5OdlJUFhz6gt_WNP9TzA['/home/travis/build/terrestris/BasiGX/src/view/grid/GazetteerGrid.js'])) {
-   __cov_BE5OdlJUFhz6gt_WNP9TzA['/home/travis/build/terrestris/BasiGX/src/view/grid/GazetteerGrid.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/grid/GazetteerGrid.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0},"fnMap":{"1":{"name":"(anonymous_1)","line":63,"loc":{"start":{"line":63,"column":17},"end":{"line":63,"column":48}}},"2":{"name":"(anonymous_2)","line":67,"loc":{"start":{"line":67,"column":26},"end":{"line":67,"column":36}}},"3":{"name":"(anonymous_3)","line":142,"loc":{"start":{"line":142,"column":19},"end":{"line":142,"column":31}}},"4":{"name":"(anonymous_4)","line":168,"loc":{"start":{"line":168,"column":16},"end":{"line":168,"column":26}}},"5":{"name":"(anonymous_5)","line":189,"loc":{"start":{"line":189,"column":22},"end":{"line":189,"column":44}}},"6":{"name":"(anonymous_6)","line":203,"loc":{"start":{"line":203,"column":22},"end":{"line":203,"column":32}}},"7":{"name":"(anonymous_7)","line":212,"loc":{"start":{"line":212,"column":17},"end":{"line":212,"column":39}}},"8":{"name":"(anonymous_8)","line":227,"loc":{"start":{"line":227,"column":26},"end":{"line":227,"column":36}}},"9":{"name":"(anonymous_9)","line":237,"loc":{"start":{"line":237,"column":20},"end":{"line":237,"column":30}}},"10":{"name":"(anonymous_10)","line":262,"loc":{"start":{"line":262,"column":25},"end":{"line":262,"column":36}}},"11":{"name":"(anonymous_11)","line":274,"loc":{"start":{"line":274,"column":28},"end":{"line":274,"column":38}}}},"statementMap":{"1":{"start":{"line":21,"column":0},"end":{"line":278,"column":3}},"2":{"start":{"line":64,"column":12},"end":{"line":64,"column":45}},"3":{"start":{"line":65,"column":12},"end":{"line":70,"column":15}},"4":{"start":{"line":68,"column":20},"end":{"line":68,"column":32}},"5":{"start":{"line":143,"column":8},"end":{"line":143,"column":22}},"6":{"start":{"line":145,"column":8},"end":{"line":145,"column":33}},"7":{"start":{"line":148,"column":8},"end":{"line":149,"column":55}},"8":{"start":{"line":150,"column":8},"end":{"line":151,"column":53}},"9":{"start":{"line":152,"column":8},"end":{"line":153,"column":47}},"10":{"start":{"line":156,"column":8},"end":{"line":156,"column":45}},"11":{"start":{"line":157,"column":8},"end":{"line":157,"column":57}},"12":{"start":{"line":158,"column":8},"end":{"line":158,"column":57}},"13":{"start":{"line":159,"column":8},"end":{"line":159,"column":47}},"14":{"start":{"line":162,"column":8},"end":{"line":162,"column":50}},"15":{"start":{"line":169,"column":8},"end":{"line":169,"column":22}},"16":{"start":{"line":170,"column":8},"end":{"line":173,"column":9}},"17":{"start":{"line":171,"column":12},"end":{"line":171,"column":65}},"18":{"start":{"line":172,"column":12},"end":{"line":172,"column":27}},"19":{"start":{"line":174,"column":8},"end":{"line":183,"column":9}},"20":{"start":{"line":175,"column":12},"end":{"line":177,"column":15}},"21":{"start":{"line":178,"column":12},"end":{"line":179,"column":63}},"22":{"start":{"line":180,"column":12},"end":{"line":180,"column":56}},"23":{"start":{"line":181,"column":12},"end":{"line":181,"column":31}},"24":{"start":{"line":182,"column":12},"end":{"line":182,"column":40}},"25":{"start":{"line":190,"column":8},"end":{"line":190,"column":22}},"26":{"start":{"line":191,"column":8},"end":{"line":191,"column":34}},"27":{"start":{"line":192,"column":8},"end":{"line":192,"column":73}},"28":{"start":{"line":193,"column":8},"end":{"line":193,"column":41}},"29":{"start":{"line":194,"column":8},"end":{"line":194,"column":40}},"30":{"start":{"line":195,"column":8},"end":{"line":195,"column":46}},"31":{"start":{"line":196,"column":8},"end":{"line":196,"column":65}},"32":{"start":{"line":197,"column":8},"end":{"line":197,"column":46}},"33":{"start":{"line":204,"column":8},"end":{"line":204,"column":22}},"34":{"start":{"line":205,"column":8},"end":{"line":205,"column":34}},"35":{"start":{"line":206,"column":8},"end":{"line":206,"column":34}},"36":{"start":{"line":213,"column":8},"end":{"line":213,"column":22}},"37":{"start":{"line":214,"column":8},"end":{"line":214,"column":30}},"38":{"start":{"line":215,"column":8},"end":{"line":215,"column":35}},"39":{"start":{"line":216,"column":8},"end":{"line":216,"column":58}},"40":{"start":{"line":217,"column":8},"end":{"line":217,"column":41}},"41":{"start":{"line":218,"column":8},"end":{"line":218,"column":40}},"42":{"start":{"line":219,"column":8},"end":{"line":219,"column":46}},"43":{"start":{"line":220,"column":8},"end":{"line":220,"column":76}},"44":{"start":{"line":221,"column":8},"end":{"line":221,"column":40}},"45":{"start":{"line":228,"column":8},"end":{"line":229,"column":76}},"46":{"start":{"line":230,"column":8},"end":{"line":230,"column":46}},"47":{"start":{"line":231,"column":8},"end":{"line":231,"column":48}},"48":{"start":{"line":238,"column":8},"end":{"line":239,"column":57}},"49":{"start":{"line":240,"column":8},"end":{"line":256,"column":9}},"50":{"start":{"line":241,"column":12},"end":{"line":245,"column":13}},"51":{"start":{"line":242,"column":16},"end":{"line":242,"column":47}},"52":{"start":{"line":244,"column":16},"end":{"line":244,"column":27}},"53":{"start":{"line":247,"column":12},"end":{"line":255,"column":22}},"54":{"start":{"line":263,"column":8},"end":{"line":263,"column":22}},"55":{"start":{"line":265,"column":8},"end":{"line":265,"column":45}},"56":{"start":{"line":266,"column":8},"end":{"line":266,"column":57}},"57":{"start":{"line":267,"column":8},"end":{"line":267,"column":57}},"58":{"start":{"line":268,"column":8},"end":{"line":268,"column":47}},"59":{"start":{"line":275,"column":7},"end":{"line":275,"column":21}},"60":{"start":{"line":276,"column":7},"end":{"line":276,"column":17}}},"branchMap":{"1":{"line":170,"type":"if","locations":[{"start":{"line":170,"column":8},"end":{"line":170,"column":8}},{"start":{"line":170,"column":8},"end":{"line":170,"column":8}}]},"2":{"line":174,"type":"if","locations":[{"start":{"line":174,"column":8},"end":{"line":174,"column":8}},{"start":{"line":174,"column":8},"end":{"line":174,"column":8}}]},"3":{"line":240,"type":"if","locations":[{"start":{"line":240,"column":8},"end":{"line":240,"column":8}},{"start":{"line":240,"column":8},"end":{"line":240,"column":8}}]},"4":{"line":241,"type":"if","locations":[{"start":{"line":241,"column":12},"end":{"line":241,"column":12}},{"start":{"line":241,"column":12},"end":{"line":241,"column":12}}]}}};
-}
-__cov_BE5OdlJUFhz6gt_WNP9TzA = __cov_BE5OdlJUFhz6gt_WNP9TzA['/home/travis/build/terrestris/BasiGX/src/view/grid/GazetteerGrid.js'];
-__cov_BE5OdlJUFhz6gt_WNP9TzA.s['1']++;Ext.define('BasiGX.view.grid.GazetteerGrid',{extend:'Ext.grid.Panel',xtype:'basigx_grid_gazetteergrid',requires:['BasiGX.store.GazetteerSearch','BasiGX.util.Map','BasiGX.util.Layer','BasiGX.util.Animate'],store:{type:'basigx-gazetteersearch'},viewModel:{data:{title:'Gazetteer',hideToolTooltip:'Gazetteer verbergen',limitCboxLabel:'Auf den sichtbaren Kartenbereich einschränken',refreshBtnTooltip:'Aktualisieren',directionBtnTooltip:'Hinweise zu Gazetteer',gazetteerHtmlHints:'Führen Sie die Maus über die Suchergebnisse, '+'um diese auf der Karte zu markieren.<br/> Klicken Sie auf '+'ein Element, um die Karte darauf zu zentrieren.<br/>'+'Beachten Sie, dass einige Suchergebnisse außerhalb des '+'sichtbaren Kartenbereichs liegen können, falls die '+'Option "Auf den sichtbaren Kartenbereich einschränken" '+'abgewählt ist.'}},bind:{title:'{title}'},tools:[{type:'minimize',bind:{tooltip:'{hideToolTooltip}'},handler:function(e,target,gridheader){__cov_BE5OdlJUFhz6gt_WNP9TzA.f['1']++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['2']++;var grid=gridheader.up('grid');__cov_BE5OdlJUFhz6gt_WNP9TzA.s['3']++;grid.getEl().slideOut('t',{duration:250,callback:function(){__cov_BE5OdlJUFhz6gt_WNP9TzA.f['2']++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['4']++;grid.hide();}});}}],width:500,maxHeight:400,hidden:true,tbar:[{xtype:'checkbox',name:'limitcheckbox',checked:true,bind:{boxLabel:'{limitCboxLabel}'}},{xtype:'button',name:'refreshsearchbutton',bind:{tooltip:'{refreshBtnTooltip}'},iconCls:'fa fa-refresh fa-2x'},'->',{xtype:'button',name:'directionsbutton',bind:{tooltip:'{directionBtnTooltip}'},iconCls:'fa fa-question fa-2x'}],style:{right:'75px',top:'10px'},config:{layer:null,map:null},columns:{items:[{text:'',xtype:'templatecolumn',width:40,tpl:'<img src="{icon}" height="16" width="16">'},{text:'Name',xtype:'templatecolumn',tpl:'<div data-qtip="{display_name}">'+'{display_name}'+'</div>',flex:2},{text:'Class',dataIndex:'class',flex:1},{text:'Type',dataIndex:'type',flex:1}]},initComponent:function(){__cov_BE5OdlJUFhz6gt_WNP9TzA.f['3']++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['5']++;var me=this;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['6']++;me.callParent(arguments);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['7']++;me.down('checkbox[name=limitcheckbox]').on('change',me.refreshSearchResults,me);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['8']++;me.down('button[name=refreshsearchbutton]').setHandler(me.refreshSearchResults,me);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['9']++;me.down('button[name=directionsbutton]').setHandler(me.showDirections,me);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['10']++;me.on('boxready',me.onBoxReady,me);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['11']++;me.on('itemmouseenter',me.onItemMouseEnter,me);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['12']++;me.on('itemmouseleave',me.onItemMouseLeave,me);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['13']++;me.on('itemclick',me.onItemClick,me);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['14']++;me.on('hide',me.unregisterListeners,me);},onBoxReady:function(){__cov_BE5OdlJUFhz6gt_WNP9TzA.f['4']++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['15']++;var me=this;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['16']++;if(!me.getMap()){__cov_BE5OdlJUFhz6gt_WNP9TzA.b['1'][0]++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['17']++;var map=BasiGX.util.Map.getMapComponent().getMap();__cov_BE5OdlJUFhz6gt_WNP9TzA.s['18']++;me.setMap(map);}else{__cov_BE5OdlJUFhz6gt_WNP9TzA.b['1'][1]++;}__cov_BE5OdlJUFhz6gt_WNP9TzA.s['19']++;if(!me.getLayer()){__cov_BE5OdlJUFhz6gt_WNP9TzA.b['2'][0]++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['20']++;var layer=new ol.layer.Vector({source:new ol.source.Vector()});__cov_BE5OdlJUFhz6gt_WNP9TzA.s['21']++;var displayInLayerSwitcherKey=BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['22']++;layer.set(displayInLayerSwitcherKey,false);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['23']++;me.setLayer(layer);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['24']++;me.getMap().addLayer(layer);}else{__cov_BE5OdlJUFhz6gt_WNP9TzA.b['2'][1]++;}},onItemMouseEnter:function(grid,record){__cov_BE5OdlJUFhz6gt_WNP9TzA.f['5']++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['25']++;var me=this;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['26']++;var layer=me.getLayer();__cov_BE5OdlJUFhz6gt_WNP9TzA.s['27']++;var projection=me.getMap().getView().getProjection().getCode();__cov_BE5OdlJUFhz6gt_WNP9TzA.s['28']++;var format=new ol.format.WKT();__cov_BE5OdlJUFhz6gt_WNP9TzA.s['29']++;var wkt=record.get('geotext');__cov_BE5OdlJUFhz6gt_WNP9TzA.s['30']++;var feature=format.readFeature(wkt);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['31']++;feature.getGeometry().transform('EPSG:4326',projection);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['32']++;layer.getSource().addFeature(feature);},onItemMouseLeave:function(){__cov_BE5OdlJUFhz6gt_WNP9TzA.f['6']++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['33']++;var me=this;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['34']++;var layer=me.getLayer();__cov_BE5OdlJUFhz6gt_WNP9TzA.s['35']++;layer.getSource().clear();},onItemClick:function(grid,record){__cov_BE5OdlJUFhz6gt_WNP9TzA.f['7']++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['36']++;var me=this;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['37']++;var map=me.getMap();__cov_BE5OdlJUFhz6gt_WNP9TzA.s['38']++;var olView=map.getView();__cov_BE5OdlJUFhz6gt_WNP9TzA.s['39']++;var projection=olView.getProjection().getCode();__cov_BE5OdlJUFhz6gt_WNP9TzA.s['40']++;var format=new ol.format.WKT();__cov_BE5OdlJUFhz6gt_WNP9TzA.s['41']++;var wkt=record.get('geotext');__cov_BE5OdlJUFhz6gt_WNP9TzA.s['42']++;var feature=format.readFeature(wkt);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['43']++;var geom=feature.getGeometry().transform('EPSG:4326',projection);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['44']++;olView.fit(geom,map.getSize());},refreshSearchResults:function(){__cov_BE5OdlJUFhz6gt_WNP9TzA.f['8']++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['45']++;var gazetteerCombo=Ext.ComponentQuery.query('basigx_form_field_gazetteercombo')[0];__cov_BE5OdlJUFhz6gt_WNP9TzA.s['46']++;var value=gazetteerCombo.getValue();__cov_BE5OdlJUFhz6gt_WNP9TzA.s['47']++;gazetteerCombo.doGazetteerSearch(value);},showDirections:function(){__cov_BE5OdlJUFhz6gt_WNP9TzA.f['9']++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['48']++;var win=Ext.ComponentQuery.query('window[name="gazetteerdirections"]')[0];__cov_BE5OdlJUFhz6gt_WNP9TzA.s['49']++;if(win){__cov_BE5OdlJUFhz6gt_WNP9TzA.b['3'][0]++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['50']++;if(win.isVisible()){__cov_BE5OdlJUFhz6gt_WNP9TzA.b['4'][0]++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['51']++;BasiGX.util.Animate.shake(win);}else{__cov_BE5OdlJUFhz6gt_WNP9TzA.b['4'][1]++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['52']++;win.show();}}else{__cov_BE5OdlJUFhz6gt_WNP9TzA.b['3'][1]++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['53']++;Ext.create('Ext.window.Window',{title:this.getViewModel().get('title'),name:'gazetteerdirections',height:200,width:400,layout:'fit',bodyPadding:5,html:this.getViewModel().get('gazetteerHtmlHints')}).show();}},unregisterListeners:function(){__cov_BE5OdlJUFhz6gt_WNP9TzA.f['10']++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['54']++;var me=this;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['55']++;me.un('boxready',me.onBoxReady,me);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['56']++;me.un('itemmouseenter',me.onItemMouseEnter,me);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['57']++;me.un('itemmouseleave',me.onItemMouseLeave,me);__cov_BE5OdlJUFhz6gt_WNP9TzA.s['58']++;me.un('itemclick',me.onItemClick,me);},onGazetteerGridSlideOut:function(){__cov_BE5OdlJUFhz6gt_WNP9TzA.f['11']++;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['59']++;var me=this;__cov_BE5OdlJUFhz6gt_WNP9TzA.s['60']++;me.hide();}});
+    xtype: 'basigx_grid_gazetteergrid',
+
+    requires: [
+        'BasiGX.store.GazetteerSearch',
+        'BasiGX.util.Map',
+        'BasiGX.util.Layer',
+        'BasiGX.util.Animate'
+    ],
+
+    store: {
+        type: 'basigx-gazetteersearch'
+    },
+
+    viewModel: {
+        data: {
+            title: 'Gazetteer',
+            hideToolTooltip: 'Gazetteer verbergen',
+            limitCboxLabel: 'Auf den sichtbaren Kartenbereich einschränken',
+            refreshBtnTooltip: 'Aktualisieren',
+            directionBtnTooltip: 'Hinweise zu Gazetteer',
+            gazetteerHtmlHints:'Führen Sie die Maus über die Suchergebnisse, ' +
+                'um diese auf der Karte zu markieren.<br/> Klicken Sie auf ' +
+                'ein Element, um die Karte darauf zu zentrieren.<br/>' +
+                'Beachten Sie, dass einige Suchergebnisse außerhalb des ' +
+                'sichtbaren Kartenbereichs liegen können, falls die ' +
+                'Option "Auf den sichtbaren Kartenbereich einschränken" ' +
+                'abgewählt ist.'
+        }
+    },
+
+    bind: {
+        title: '{title}'
+    },
+
+    tools:[{
+        type: 'minimize',
+        bind: {
+            tooltip: '{hideToolTooltip}'
+        },
+        handler: function(e, target, gridheader){
+            var grid = gridheader.up('grid');
+            grid.getEl().slideOut('t', {
+                duration: 250,
+                callback: function(){
+                    grid.hide();
+                }
+            });
+        }
+    }],
+
+    width: 500,
+
+    maxHeight: 400,
+
+    hidden: true,
+
+    tbar: [{
+        xtype: 'checkbox',
+        name: 'limitcheckbox',
+        checked: true,
+        bind: {
+            boxLabel: '{limitCboxLabel}'
+        }
+    },
+    {
+        xtype: 'button',
+        name: 'refreshsearchbutton',
+        bind: {
+            tooltip: '{refreshBtnTooltip}'
+        },
+        iconCls: 'fa fa-refresh fa-2x'
+    },
+    '->',
+    {
+        xtype: 'button',
+        name: 'directionsbutton',
+        bind: {
+            tooltip: '{directionBtnTooltip}'
+        },
+        iconCls: 'fa fa-question fa-2x'
+    }
+    ],
+
+    style: {
+        right: "75px",
+        top: "10px"
+    },
+
+    config: {
+        layer: null,
+
+        map: null
+    },
+
+    columns: {
+        items: [{
+            text: '',
+            xtype: 'templatecolumn',
+            width: 40,
+            tpl: '<img src="{icon}" height="16" width="16">'
+        }, {
+            text: 'Name',
+            xtype: 'templatecolumn',
+            tpl: '<div data-qtip="{display_name}">'+
+                        '{display_name}'+
+                '</div>',
+            flex: 2
+        }, {
+            text: 'Class',
+            dataIndex: 'class',
+            flex: 1
+        }, {
+            text: 'Type',
+            dataIndex: 'type',
+            flex: 1
+        }]
+    },
+
+    initComponent: function () {
+        var me = this;
+
+        me.callParent(arguments);
+
+        // set handler for all grid items
+        me.down('checkbox[name=limitcheckbox]')
+            .on('change', me.refreshSearchResults, me);
+        me.down('button[name=refreshsearchbutton]')
+            .setHandler(me.refreshSearchResults, me);
+        me.down('button[name=directionsbutton]')
+            .setHandler(me.showDirections, me);
+
+        // add listeners
+        me.on('boxready', me.onBoxReady, me);
+        me.on('itemmouseenter', me.onItemMouseEnter, me);
+        me.on('itemmouseleave', me.onItemMouseLeave, me);
+        me.on('itemclick', me.onItemClick, me);
+
+        // unregister listeners on grid hide
+        me.on('hide', me.unregisterListeners, me);
+    },
+
+    /**
+     *
+     */
+    onBoxReady: function(){
+        var me = this;
+        if(!me.getMap()){
+            var map = BasiGX.util.Map.getMapComponent().getMap();
+            me.setMap(map);
+        }
+        if(!me.getLayer()){
+            var layer = new ol.layer.Vector({
+                source: new ol.source.Vector()
+            });
+            var displayInLayerSwitcherKey =
+                BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+            layer.set(displayInLayerSwitcherKey, false);
+            me.setLayer(layer);
+            me.getMap().addLayer(layer);
+        }
+    },
+
+    /**
+     *
+     */
+    onItemMouseEnter: function(grid, record){
+        var me = this;
+        var layer = me.getLayer();
+        var projection = me.getMap().getView().getProjection().getCode();
+        var format = new ol.format.WKT();
+        var wkt = record.get('geotext');
+        var feature = format.readFeature(wkt);
+        feature.getGeometry().transform('EPSG:4326', projection);
+        layer.getSource().addFeature(feature);
+    },
+
+    /**
+     *
+     */
+    onItemMouseLeave: function(){
+        var me = this;
+        var layer = me.getLayer();
+        layer.getSource().clear();
+    },
+
+    /**
+     *
+     */
+    onItemClick: function(grid, record){
+        var me = this;
+        var map = me.getMap();
+        var olView = map.getView();
+        var projection = olView.getProjection().getCode();
+        var format = new ol.format.WKT();
+        var wkt = record.get('geotext');
+        var feature = format.readFeature(wkt);
+        var geom = feature.getGeometry().transform('EPSG:4326', projection);
+        olView.fit(geom, map.getSize());
+    },
+
+    /**
+     *
+     */
+    refreshSearchResults: function(){
+        var gazetteerCombo =
+            Ext.ComponentQuery.query('basigx_form_field_gazetteercombo')[0];
+        var value = gazetteerCombo.getValue();
+        gazetteerCombo.doGazetteerSearch(value);
+    },
+
+    /**
+     *
+     */
+    showDirections: function(){
+        var win = Ext.ComponentQuery.query(
+                'window[name="gazetteerdirections"]')[0];
+        if(win){
+            if(win.isVisible()){
+                BasiGX.util.Animate.shake(win);
+            } else {
+                win.show();
+            }
+        } else {
+            Ext.create('Ext.window.Window', {
+                title: this.getViewModel().get('title'),
+                name: 'gazetteerdirections',
+                height: 200,
+                width: 400,
+                layout: 'fit',
+                bodyPadding: 5,
+                html: this.getViewModel().get('gazetteerHtmlHints')
+            }).show();
+        }
+    },
+
+    /**
+     *
+     */
+    unregisterListeners: function() {
+        var me = this;
+
+        me.un('boxready', me.onBoxReady, me);
+        me.un('itemmouseenter', me.onItemMouseEnter, me);
+        me.un('itemmouseleave', me.onItemMouseLeave, me);
+        me.un('itemclick', me.onItemClick, me);
+    },
+
+    /**
+    *
+    */
+   onGazetteerGridSlideOut: function(){
+       var me = this;
+       me.hide();
+   }
+});

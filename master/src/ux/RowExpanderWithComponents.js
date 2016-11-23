@@ -1,9 +1,220 @@
+/*eslint no-eval:1*/ // turn eval usage into a warning when linting
+/**
+ * RowExpanderWithComponents plugin
+ *
+ * This an ux originally created for ExtJS 4.2.2 by David French under MIT License.
+ *
+ * Modified by terrestris to fit the needs of ExtJS 6.
+ * https://github.com/davidffrench/Ext.ux.RowExpanderWithComponents
+ *
+ * @class BasiGX.ux.RowExpanderWithComponents
+ */
+Ext.define('BasiGX.ux.RowExpanderWithComponents', {
+    extend: 'Ext.grid.plugin.RowExpander',
+    alias: 'plugin.rowexpanderwithcomponents',
+    pluginId: 'rowexpanderwithcomponents',
 
-var __cov_0nnc8WXfQdlMJBEXwFlxYw = (Function('return this'))();
-if (!__cov_0nnc8WXfQdlMJBEXwFlxYw.__coverage__) { __cov_0nnc8WXfQdlMJBEXwFlxYw.__coverage__ = {}; }
-__cov_0nnc8WXfQdlMJBEXwFlxYw = __cov_0nnc8WXfQdlMJBEXwFlxYw.__coverage__;
-if (!(__cov_0nnc8WXfQdlMJBEXwFlxYw['/home/travis/build/terrestris/BasiGX/src/ux/RowExpanderWithComponents.js'])) {
-   __cov_0nnc8WXfQdlMJBEXwFlxYw['/home/travis/build/terrestris/BasiGX/src/ux/RowExpanderWithComponents.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/ux/RowExpanderWithComponents.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0,0,0,0],"14":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0},"fnMap":{"1":{"name":"(anonymous_1)","line":67,"loc":{"start":{"line":67,"column":10},"end":{"line":67,"column":24}}},"2":{"name":"(anonymous_2)","line":88,"loc":{"start":{"line":88,"column":30},"end":{"line":88,"column":55}}},"3":{"name":"(anonymous_3)","line":141,"loc":{"start":{"line":141,"column":21},"end":{"line":141,"column":36}}},"4":{"name":"(anonymous_4)","line":149,"loc":{"start":{"line":149,"column":31},"end":{"line":149,"column":46}}},"5":{"name":"(anonymous_5)","line":160,"loc":{"start":{"line":160,"column":23},"end":{"line":160,"column":45}}},"6":{"name":"(anonymous_6)","line":170,"loc":{"start":{"line":170,"column":14},"end":{"line":170,"column":29}}},"7":{"name":"(anonymous_7)","line":180,"loc":{"start":{"line":180,"column":17},"end":{"line":180,"column":53}}},"8":{"name":"(anonymous_8)","line":189,"loc":{"start":{"line":189,"column":22},"end":{"line":189,"column":45}}}},"statementMap":{"1":{"start":{"line":12,"column":0},"end":{"line":220,"column":3}},"2":{"start":{"line":68,"column":8},"end":{"line":69,"column":17}},"3":{"start":{"line":71,"column":8},"end":{"line":71,"column":33}},"4":{"start":{"line":74,"column":8},"end":{"line":74,"column":40}},"5":{"start":{"line":77,"column":8},"end":{"line":77,"column":49}},"6":{"start":{"line":80,"column":8},"end":{"line":82,"column":9}},"7":{"start":{"line":81,"column":12},"end":{"line":81,"column":63}},"8":{"start":{"line":84,"column":8},"end":{"line":86,"column":9}},"9":{"start":{"line":85,"column":12},"end":{"line":85,"column":44}},"10":{"start":{"line":88,"column":8},"end":{"line":127,"column":11}},"11":{"start":{"line":89,"column":12},"end":{"line":89,"column":39}},"12":{"start":{"line":90,"column":12},"end":{"line":96,"column":13}},"13":{"start":{"line":91,"column":16},"end":{"line":95,"column":61}},"14":{"start":{"line":98,"column":12},"end":{"line":99,"column":70}},"15":{"start":{"line":104,"column":12},"end":{"line":125,"column":13}},"16":{"start":{"line":105,"column":16},"end":{"line":112,"column":19}},"17":{"start":{"line":114,"column":16},"end":{"line":114,"column":39}},"18":{"start":{"line":117,"column":16},"end":{"line":117,"column":73}},"19":{"start":{"line":118,"column":16},"end":{"line":120,"column":65}},"20":{"start":{"line":123,"column":16},"end":{"line":123,"column":81}},"21":{"start":{"line":124,"column":16},"end":{"line":124,"column":61}},"22":{"start":{"line":129,"column":8},"end":{"line":129,"column":50}},"23":{"start":{"line":130,"column":8},"end":{"line":130,"column":50}},"24":{"start":{"line":132,"column":8},"end":{"line":132,"column":54}},"25":{"start":{"line":133,"column":8},"end":{"line":133,"column":54}},"26":{"start":{"line":142,"column":8},"end":{"line":142,"column":110}},"27":{"start":{"line":150,"column":8},"end":{"line":150,"column":50}},"28":{"start":{"line":152,"column":8},"end":{"line":152,"column":28}},"29":{"start":{"line":161,"column":8},"end":{"line":161,"column":50}},"30":{"start":{"line":163,"column":8},"end":{"line":163,"column":27}},"31":{"start":{"line":171,"column":8},"end":{"line":173,"column":9}},"32":{"start":{"line":172,"column":12},"end":{"line":172,"column":57}},"33":{"start":{"line":174,"column":8},"end":{"line":174,"column":35}},"34":{"start":{"line":181,"column":8},"end":{"line":181,"column":39}},"35":{"start":{"line":191,"column":8},"end":{"line":216,"column":9}},"36":{"start":{"line":192,"column":12},"end":{"line":194,"column":13}},"37":{"start":{"line":193,"column":16},"end":{"line":193,"column":63}},"38":{"start":{"line":195,"column":12},"end":{"line":202,"column":13}},"39":{"start":{"line":196,"column":16},"end":{"line":201,"column":17}},"40":{"start":{"line":197,"column":20},"end":{"line":197,"column":31}},"41":{"start":{"line":199,"column":20},"end":{"line":199,"column":62}},"42":{"start":{"line":200,"column":20},"end":{"line":200,"column":62}},"43":{"start":{"line":203,"column":12},"end":{"line":215,"column":13}},"44":{"start":{"line":204,"column":16},"end":{"line":204,"column":38}},"45":{"start":{"line":207,"column":16},"end":{"line":214,"column":17}},"46":{"start":{"line":210,"column":24},"end":{"line":210,"column":71}},"47":{"start":{"line":211,"column":24},"end":{"line":213,"column":25}},"48":{"start":{"line":212,"column":28},"end":{"line":212,"column":44}},"49":{"start":{"line":218,"column":8},"end":{"line":218,"column":19}}},"branchMap":{"1":{"line":80,"type":"if","locations":[{"start":{"line":80,"column":8},"end":{"line":80,"column":8}},{"start":{"line":80,"column":8},"end":{"line":80,"column":8}}]},"2":{"line":84,"type":"if","locations":[{"start":{"line":84,"column":8},"end":{"line":84,"column":8}},{"start":{"line":84,"column":8},"end":{"line":84,"column":8}}]},"3":{"line":90,"type":"if","locations":[{"start":{"line":90,"column":12},"end":{"line":90,"column":12}},{"start":{"line":90,"column":12},"end":{"line":90,"column":12}}]},"4":{"line":104,"type":"if","locations":[{"start":{"line":104,"column":12},"end":{"line":104,"column":12}},{"start":{"line":104,"column":12},"end":{"line":104,"column":12}}]},"5":{"line":171,"type":"if","locations":[{"start":{"line":171,"column":8},"end":{"line":171,"column":8}},{"start":{"line":171,"column":8},"end":{"line":171,"column":8}}]},"6":{"line":192,"type":"if","locations":[{"start":{"line":192,"column":12},"end":{"line":192,"column":12}},{"start":{"line":192,"column":12},"end":{"line":192,"column":12}}]},"7":{"line":192,"type":"binary-expr","locations":[{"start":{"line":192,"column":15},"end":{"line":192,"column":43}},{"start":{"line":192,"column":47},"end":{"line":192,"column":73}}]},"8":{"line":195,"type":"if","locations":[{"start":{"line":195,"column":12},"end":{"line":195,"column":12}},{"start":{"line":195,"column":12},"end":{"line":195,"column":12}}]},"9":{"line":195,"type":"binary-expr","locations":[{"start":{"line":195,"column":15},"end":{"line":195,"column":43}},{"start":{"line":195,"column":47},"end":{"line":195,"column":64}}]},"10":{"line":196,"type":"if","locations":[{"start":{"line":196,"column":16},"end":{"line":196,"column":16}},{"start":{"line":196,"column":16},"end":{"line":196,"column":16}}]},"11":{"line":203,"type":"if","locations":[{"start":{"line":203,"column":12},"end":{"line":203,"column":12}},{"start":{"line":203,"column":12},"end":{"line":203,"column":12}}]},"12":{"line":207,"type":"if","locations":[{"start":{"line":207,"column":16},"end":{"line":207,"column":16}},{"start":{"line":207,"column":16},"end":{"line":207,"column":16}}]},"13":{"line":207,"type":"binary-expr","locations":[{"start":{"line":207,"column":20},"end":{"line":207,"column":39}},{"start":{"line":207,"column":43},"end":{"line":207,"column":74}},{"start":{"line":208,"column":20},"end":{"line":208,"column":68}},{"start":{"line":209,"column":20},"end":{"line":209,"column":42}},{"start":{"line":209,"column":46},"end":{"line":209,"column":66}}]},"14":{"line":211,"type":"if","locations":[{"start":{"line":211,"column":24},"end":{"line":211,"column":24}},{"start":{"line":211,"column":24},"end":{"line":211,"column":24}}]}}};
-}
-__cov_0nnc8WXfQdlMJBEXwFlxYw = __cov_0nnc8WXfQdlMJBEXwFlxYw['/home/travis/build/terrestris/BasiGX/src/ux/RowExpanderWithComponents.js'];
-__cov_0nnc8WXfQdlMJBEXwFlxYw.s['1']++;Ext.define('BasiGX.ux.RowExpanderWithComponents',{extend:'Ext.grid.plugin.RowExpander',alias:'plugin.rowexpanderwithcomponents',pluginId:'rowexpanderwithcomponents',rowBodyTpl:new Ext.XTemplate('<div id="display-row-{id}"> </div>'),rowBodyCompTemplate:null,expandOnClick:false,hideExpandColumn:false,enableTextSelection:true,preventRecursionArray:[],init:function(grid){__cov_0nnc8WXfQdlMJBEXwFlxYw.f['1']++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['2']++;var me=this,view;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['3']++;me.callParent(arguments);__cov_0nnc8WXfQdlMJBEXwFlxYw.s['4']++;view=me.view=grid.getView();__cov_0nnc8WXfQdlMJBEXwFlxYw.s['5']++;grid.addCls('rowexpanderwithcomponents');__cov_0nnc8WXfQdlMJBEXwFlxYw.s['6']++;if(me.hideExpandColumn){__cov_0nnc8WXfQdlMJBEXwFlxYw.b['1'][0]++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['7']++;grid.headerCt.query('gridcolumn')[0].hidden=true;}else{__cov_0nnc8WXfQdlMJBEXwFlxYw.b['1'][1]++;}__cov_0nnc8WXfQdlMJBEXwFlxYw.s['8']++;if(me.enableTextSelection){__cov_0nnc8WXfQdlMJBEXwFlxYw.b['2'][0]++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['9']++;view.enableTextSelection=true;}else{__cov_0nnc8WXfQdlMJBEXwFlxYw.b['2'][1]++;}__cov_0nnc8WXfQdlMJBEXwFlxYw.s['10']++;view.on('expandbody',function(rowNode,record){__cov_0nnc8WXfQdlMJBEXwFlxYw.f['2']++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['11']++;var recId=record.getId();__cov_0nnc8WXfQdlMJBEXwFlxYw.s['12']++;if(!recId){__cov_0nnc8WXfQdlMJBEXwFlxYw.b['3'][0]++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['13']++;Ext.Error.raise('Error: Records must have an id to use the'+'rowExpanderWithComponents plugin. '+'Use http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.'+'Model-cfg-idProperty or http://docs.sencha.com/extjs/'+'4.2.2/#!/api/Ext.data.Model-cfg-idgen');}else{__cov_0nnc8WXfQdlMJBEXwFlxYw.b['3'][1]++;}__cov_0nnc8WXfQdlMJBEXwFlxYw.s['14']++;var row='display-row-'+recId,clonedRowTemplate=Ext.clone(me.rowBodyCompTemplate);__cov_0nnc8WXfQdlMJBEXwFlxYw.s['15']++;if(Ext.get(row).dom.children.length===0){__cov_0nnc8WXfQdlMJBEXwFlxYw.b['4'][0]++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['16']++;var parentCont=Ext.create(Ext.container.Container,{height:'100%',width:'100%',itemId:grid.getId()+'-parentRowExpCont-'+recId,items:[me.replaceObjValues(clonedRowTemplate,record)]});__cov_0nnc8WXfQdlMJBEXwFlxYw.s['17']++;parentCont.render(row);__cov_0nnc8WXfQdlMJBEXwFlxYw.s['18']++;var rowEl=parentCont.getEl().parent('.x-grid-rowbody');__cov_0nnc8WXfQdlMJBEXwFlxYw.s['19']++;rowEl.swallowEvent(['mouseenter','click','mouseover','mousedown','dblclick','cellclick','itemmouseenter','itemmouseleave','onRowFocus','mouseleave']);__cov_0nnc8WXfQdlMJBEXwFlxYw.s['20']++;var rowToStyle=parentCont.getEl().parent('.x-grid-rowbody-tr');__cov_0nnc8WXfQdlMJBEXwFlxYw.s['21']++;rowToStyle.addCls(grid.getCssForRow(record));}else{__cov_0nnc8WXfQdlMJBEXwFlxYw.b['4'][1]++;}});__cov_0nnc8WXfQdlMJBEXwFlxYw.s['22']++;view.getRowComponent=me.getRowComponent;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['23']++;grid.getRowComponent=me.getRowComponent;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['24']++;grid.addToRowComponent=me.addToRowComponent;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['25']++;grid.addToRowComponent=me.addToRowComponent;},getRowComponent:function(recId){__cov_0nnc8WXfQdlMJBEXwFlxYw.f['3']++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['26']++;return Ext.ComponentQuery.query('#'+this.up('treepanel').getId()+'-parentRowExpCont-'+recId)[0];},removeAllFromRowComponent:function(recId){__cov_0nnc8WXfQdlMJBEXwFlxYw.f['4']++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['27']++;var rowCont=this.getRowComponent(recId);__cov_0nnc8WXfQdlMJBEXwFlxYw.s['28']++;rowCont.removeAll();},addToRowComponent:function(recId,items){__cov_0nnc8WXfQdlMJBEXwFlxYw.f['5']++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['29']++;var rowCont=this.getRowComponent(recId);__cov_0nnc8WXfQdlMJBEXwFlxYw.s['30']++;rowCont.add(items);},bindView:function(view){__cov_0nnc8WXfQdlMJBEXwFlxYw.f['6']++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['31']++;if(this.expandOnClick){__cov_0nnc8WXfQdlMJBEXwFlxYw.b['5'][0]++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['32']++;view.on('itemclick',this.onItemClick,this);}else{__cov_0nnc8WXfQdlMJBEXwFlxYw.b['5'][1]++;}__cov_0nnc8WXfQdlMJBEXwFlxYw.s['33']++;this.callParent(arguments);},onItemClick:function(view,record,row,rowIdx){__cov_0nnc8WXfQdlMJBEXwFlxYw.f['7']++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['34']++;this.toggleRow(rowIdx,record);},replaceObjValues:function(obj,record){__cov_0nnc8WXfQdlMJBEXwFlxYw.f['8']++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['35']++;for(var all in obj){__cov_0nnc8WXfQdlMJBEXwFlxYw.s['36']++;if((__cov_0nnc8WXfQdlMJBEXwFlxYw.b['7'][0]++,typeof obj[all]==='string')&&(__cov_0nnc8WXfQdlMJBEXwFlxYw.b['7'][1]++,obj[all].match(/{{(.*)}}/))){__cov_0nnc8WXfQdlMJBEXwFlxYw.b['6'][0]++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['37']++;obj[all]=eval(obj[all].match(/{{(.*)}}/)[1]);}else{__cov_0nnc8WXfQdlMJBEXwFlxYw.b['6'][1]++;}__cov_0nnc8WXfQdlMJBEXwFlxYw.s['38']++;if((__cov_0nnc8WXfQdlMJBEXwFlxYw.b['9'][0]++,typeof obj[all]==='object')&&(__cov_0nnc8WXfQdlMJBEXwFlxYw.b['9'][1]++,obj[all]!==null)){__cov_0nnc8WXfQdlMJBEXwFlxYw.b['8'][0]++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['39']++;if(Ext.Array.contains(this.preventRecursionArray,obj[all])){__cov_0nnc8WXfQdlMJBEXwFlxYw.b['10'][0]++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['40']++;return obj;}else{__cov_0nnc8WXfQdlMJBEXwFlxYw.b['10'][1]++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['41']++;this.preventRecursionArray.push(obj[all]);__cov_0nnc8WXfQdlMJBEXwFlxYw.s['42']++;this.replaceObjValues(obj[all],record);}}else{__cov_0nnc8WXfQdlMJBEXwFlxYw.b['8'][1]++;}__cov_0nnc8WXfQdlMJBEXwFlxYw.s['43']++;if(obj.xtype){__cov_0nnc8WXfQdlMJBEXwFlxYw.b['11'][0]++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['44']++;obj.layerRec=record;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['45']++;if((__cov_0nnc8WXfQdlMJBEXwFlxYw.b['13'][0]++,record.getOlLayer())&&(__cov_0nnc8WXfQdlMJBEXwFlxYw.b['13'][1]++,record.getOlLayer().get('type'))&&(__cov_0nnc8WXfQdlMJBEXwFlxYw.b['13'][2]++,record.getOlLayer().get('type')!=='WFSCluster')&&(__cov_0nnc8WXfQdlMJBEXwFlxYw.b['13'][3]++,Ext.isArray(obj.items))&&(__cov_0nnc8WXfQdlMJBEXwFlxYw.b['13'][4]++,obj.items.length>1)){__cov_0nnc8WXfQdlMJBEXwFlxYw.b['12'][0]++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['46']++;var lastItem=obj.items[obj.items.length-1];__cov_0nnc8WXfQdlMJBEXwFlxYw.s['47']++;if(lastItem.xtype==='image'){__cov_0nnc8WXfQdlMJBEXwFlxYw.b['14'][0]++;__cov_0nnc8WXfQdlMJBEXwFlxYw.s['48']++;obj.items.pop();}else{__cov_0nnc8WXfQdlMJBEXwFlxYw.b['14'][1]++;}}else{__cov_0nnc8WXfQdlMJBEXwFlxYw.b['12'][1]++;}}else{__cov_0nnc8WXfQdlMJBEXwFlxYw.b['11'][1]++;}}__cov_0nnc8WXfQdlMJBEXwFlxYw.s['49']++;return obj;}});
+    /**
+     * @cfg {XTemplate} rowBodyTpl
+     * This needs to default to the below for ExtJS components to render to the correct row
+     * (defaults to <tt><div id="display-row-{id}"> </div></tt>).
+     */
+    rowBodyTpl: new Ext.XTemplate(
+        '<div id="display-row-{id}"> </div>'
+    ),
+
+    /**
+     * @cfg {Object} rowBodyCompTemplate
+     * This template will be used for every record. It can contain general
+     * Ext JS Components. Text in "{{ }}" will be executed as JavaScript.
+     * Sample below
+     * rowBodyCompTemplate: {
+            xtype: 'container',
+            items: [{
+                xtype: 'image',
+                src: '{{record.getOlLayer().get("legendUrl")}}',
+                height: '{{record.getOlLayer().get("legendHeight")}}',
+                alt: '{{record.getOlLayer().get("legendUrl")}}'
+            }]
+        }
+     * (defaults to <tt>null</tt>).
+     */
+    rowBodyCompTemplate: null,
+
+    /**
+     * @cfg {Boolean} expandOnClick
+     * <tt>true</tt> to toggle a row between expanded/collapsed when single clicked
+     * (defaults to <tt>true</tt>).
+     */
+    expandOnClick: false,
+
+    /**
+     * @cfg {Boolean} hideExpandColumn
+     * <tt>true</tt> to hide the column that contains the expand/collapse icons
+     * (defaults to <tt>true</tt>).
+     */
+    hideExpandColumn: false,
+
+    /**
+     * @cfg {Boolean} enableTextSelection
+     * <tt>true</tt> to enable text selection within the grid
+     * (defaults to <tt>true</tt>).
+     */
+    enableTextSelection: true,
+
+    preventRecursionArray: [],
+
+    init: function(grid){
+        var me = this,
+            view;
+
+        me.callParent(arguments);
+
+        //get the grids view
+        view = me.view = grid.getView();
+
+        //this css does not highlight the row expander body
+        grid.addCls('rowexpanderwithcomponents');
+
+        //set the rowexpander column to hidden if hideExpandColumn config is true
+        if(me.hideExpandColumn){
+            grid.headerCt.query('gridcolumn')[0].hidden = true;
+        }
+        //enable text selection if the config is true
+        if(me.enableTextSelection){
+            view.enableTextSelection = true;
+        }
+
+        view.on('expandbody', function(rowNode, record){
+            var recId = record.getId();
+            if(!recId){
+                Ext.Error.raise('Error: Records must have an id to use the' +
+                    'rowExpanderWithComponents plugin. ' +
+                    'Use http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.' +
+                    'Model-cfg-idProperty or http://docs.sencha.com/extjs/' +
+                    '4.2.2/#!/api/Ext.data.Model-cfg-idgen');
+            }
+
+            var row = 'display-row-' + recId,
+                clonedRowTemplate = Ext.clone(me.rowBodyCompTemplate);
+
+            // TODO The rowbody behaviour seems to be not that smooth. We
+            // should have a look at this
+            // if the row got children dont add it again
+            if (Ext.get(row).dom.children.length === 0){
+                var parentCont = Ext.create(Ext.container.Container, {
+                    height: '100%',
+                    width: '100%',
+                    itemId: grid.getId() + '-parentRowExpCont-' + recId,
+                    items: [
+                        me.replaceObjValues(clonedRowTemplate, record)
+                    ]
+                });
+                //render the ExtJS component to the div
+                parentCont.render(row);
+
+                //Stop all events in the row body from bubbling up
+                var rowEl = parentCont.getEl().parent('.x-grid-rowbody');
+                rowEl.swallowEvent(['mouseenter', 'click', 'mouseover', 'mousedown',
+                                    'dblclick', 'cellclick', 'itemmouseenter', 'itemmouseleave',
+                                    'onRowFocus', 'mouseleave']);
+
+                // adding the dynamic css to component
+                var rowToStyle = parentCont.getEl().parent('.x-grid-rowbody-tr');
+                rowToStyle.addCls(grid.getCssForRow(record));
+            }
+
+        });
+        //assign the helper functions to the gridview and grid
+        view.getRowComponent = me.getRowComponent;
+        grid.getRowComponent = me.getRowComponent;
+
+        grid.addToRowComponent = me.addToRowComponent;
+        grid.addToRowComponent = me.addToRowComponent;
+    },
+
+    /**
+     * Gets the parent ExtJS container in the rowexpander body from the rows record id
+     * @param {integer} recId The row record id
+     * @return {Ext.container.Container} the parent ExtJS container in the rowexpander body
+     */
+    getRowComponent: function(recId){
+        return Ext.ComponentQuery.query('#' + this.up('treepanel').getId() + '-parentRowExpCont-' + recId)[0];
+    },
+
+    /**
+     * Removes all ExtJS items from the parent row component
+     * @param {integer} recId The row record id
+     */
+    removeAllFromRowComponent: function(recId){
+        var rowCont = this.getRowComponent(recId);
+
+        rowCont.removeAll();
+    },
+
+    /**
+     * Adds items to the parent ExtJS container in the rowexpander body
+     * @param {integer} recId The row record id
+     * @param {Array} items ExtJS components
+     */
+    addToRowComponent: function(recId, items){
+        var rowCont = this.getRowComponent(recId);
+
+        rowCont.add(items);
+    },
+
+    /**
+     * @private
+     * allow single click to expand grid
+     */
+    bindView: function(view) {
+        if (this.expandOnClick) {
+            view.on('itemclick', this.onItemClick, this);
+        }
+        this.callParent(arguments);
+    },
+    /**
+     * @private
+     * allow single click to expand grid
+     */
+    onItemClick: function(view, record, row, rowIdx) {
+        this.toggleRow(rowIdx, record);
+    },
+
+    /**
+     * @private
+     * Converts all string values with {{}} to code
+     * Example: '{{record.get('test'}}' converts to record.get('test')
+     */
+    replaceObjValues: function( obj, record ){
+
+        for( var all in obj ) {
+            if(typeof obj[all] === "string" && obj[all].match(/{{(.*)}}/)){
+                obj[all] = eval(obj[all].match(/{{(.*)}}/)[1]);
+            }
+            if(typeof obj[all] === "object" && obj[all] !== null){
+                if(Ext.Array.contains(this.preventRecursionArray, obj[all])){
+                    return obj;
+                } else {
+                    this.preventRecursionArray.push(obj[all]);
+                    this.replaceObjValues( obj[all], record );
+                }
+            }
+            if(obj.xtype){
+                obj.layerRec = record;
+                // if we do not have a cluster layer, we remove the "double
+                // symbology / legend"
+                if (record.getOlLayer() && record.getOlLayer().get('type') &&
+                    record.getOlLayer().get('type') !== "WFSCluster" &&
+                    Ext.isArray(obj.items) && obj.items.length > 1) {
+                        var lastItem = obj.items[obj.items.length - 1];
+                        if(lastItem.xtype === "image"){
+                            obj.items.pop();
+                        }
+                }
+            }
+        }
+
+        return obj;
+    }
+});

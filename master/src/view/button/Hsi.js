@@ -1,9 +1,118 @@
+/* Copyright (c) 2015 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * HSI Button
+ *
+ * Button used to query for information.
+ *
+ * @class BasiGX.view.button.Hsi
+ */
+Ext.define("BasiGX.view.button.Hsi", {
+    extend: "Ext.Button",
+    xtype: 'basigx-button-hsi',
+    requires: [
+        'Ext.app.ViewModel',
+        'BasiGX.util.Map'
+    ],
 
-var __cov_D3QXK2GJ8YTeJoCrtetZrQ = (Function('return this'))();
-if (!__cov_D3QXK2GJ8YTeJoCrtetZrQ.__coverage__) { __cov_D3QXK2GJ8YTeJoCrtetZrQ.__coverage__ = {}; }
-__cov_D3QXK2GJ8YTeJoCrtetZrQ = __cov_D3QXK2GJ8YTeJoCrtetZrQ.__coverage__;
-if (!(__cov_D3QXK2GJ8YTeJoCrtetZrQ['/home/travis/build/terrestris/BasiGX/src/view/button/Hsi.js'])) {
-   __cov_D3QXK2GJ8YTeJoCrtetZrQ['/home/travis/build/terrestris/BasiGX/src/view/button/Hsi.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/Hsi.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0},"fnMap":{"1":{"name":"(anonymous_1)","line":74,"loc":{"start":{"line":74,"column":17},"end":{"line":74,"column":28}}},"2":{"name":"(anonymous_2)","line":83,"loc":{"start":{"line":83,"column":17},"end":{"line":83,"column":34}}},"3":{"name":"(anonymous_3)","line":98,"loc":{"start":{"line":98,"column":18},"end":{"line":98,"column":29}}},"4":{"name":"(anonymous_4)","line":111,"loc":{"start":{"line":111,"column":22},"end":{"line":111,"column":38}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":118,"column":3}},"2":{"start":{"line":75,"column":12},"end":{"line":75,"column":53}},"3":{"start":{"line":76,"column":12},"end":{"line":76,"column":32}},"4":{"start":{"line":84,"column":8},"end":{"line":84,"column":34}},"5":{"start":{"line":86,"column":8},"end":{"line":90,"column":9}},"6":{"start":{"line":87,"column":12},"end":{"line":87,"column":40}},"7":{"start":{"line":88,"column":12},"end":{"line":88,"column":62}},"8":{"start":{"line":89,"column":12},"end":{"line":89,"column":31}},"9":{"start":{"line":92,"column":8},"end":{"line":92,"column":28}},"10":{"start":{"line":99,"column":8},"end":{"line":104,"column":9}},"11":{"start":{"line":100,"column":12},"end":{"line":100,"column":48}},"12":{"start":{"line":102,"column":12},"end":{"line":103,"column":42}},"13":{"start":{"line":105,"column":8},"end":{"line":105,"column":50}},"14":{"start":{"line":112,"column":8},"end":{"line":112,"column":22}},"15":{"start":{"line":113,"column":8},"end":{"line":113,"column":25}},"16":{"start":{"line":115,"column":8},"end":{"line":115,"column":78}},"17":{"start":{"line":116,"column":8},"end":{"line":116,"column":44}}},"branchMap":{"1":{"line":86,"type":"if","locations":[{"start":{"line":86,"column":8},"end":{"line":86,"column":8}},{"start":{"line":86,"column":8},"end":{"line":86,"column":8}}]},"2":{"line":99,"type":"if","locations":[{"start":{"line":99,"column":8},"end":{"line":99,"column":8}},{"start":{"line":99,"column":8},"end":{"line":99,"column":8}}]},"3":{"line":102,"type":"cond-expr","locations":[{"start":{"line":102,"column":45},"end":{"line":102,"column":65}},{"start":{"line":103,"column":16},"end":{"line":103,"column":40}}]}}};
-}
-__cov_D3QXK2GJ8YTeJoCrtetZrQ = __cov_D3QXK2GJ8YTeJoCrtetZrQ['/home/travis/build/terrestris/BasiGX/src/view/button/Hsi.js'];
-__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['1']++;Ext.define('BasiGX.view.button.Hsi',{extend:'Ext.Button',xtype:'basigx-button-hsi',requires:['Ext.app.ViewModel','BasiGX.util.Map'],viewModel:{data:{tooltip:'Informationsabfrage',text:null}},bind:{text:'{text}'},glyph:'xf05a@FontAwesome',html:'<i class="fa fa-info-circle fa-2x"></i>',enableToggle:true,buttonPressed:true,config:{mapPanelXType:null,handler:function(){__cov_D3QXK2GJ8YTeJoCrtetZrQ.f['1']++;__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['2']++;this.buttonPressed=!this.buttonPressed;__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['3']++;this.toggleButton();}},constructor:function(config){__cov_D3QXK2GJ8YTeJoCrtetZrQ.f['2']++;__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['4']++;this.callParent([config]);__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['5']++;if(this.setTooltip){__cov_D3QXK2GJ8YTeJoCrtetZrQ.b['1'][0]++;__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['6']++;var bind=this.config.bind;__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['7']++;bind.tooltip=this.getViewModel().get('tooltip');__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['8']++;this.setBind(bind);}else{__cov_D3QXK2GJ8YTeJoCrtetZrQ.b['1'][1]++;}__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['9']++;this.toggleButton();},toggleButton:function(){__cov_D3QXK2GJ8YTeJoCrtetZrQ.f['3']++;__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['10']++;if(this.setPressed){__cov_D3QXK2GJ8YTeJoCrtetZrQ.b['2'][0]++;__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['11']++;this.setPressed(this.buttonPressed);}else{__cov_D3QXK2GJ8YTeJoCrtetZrQ.b['2'][1]++;__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['12']++;this.setCls(this.buttonPressed?(__cov_D3QXK2GJ8YTeJoCrtetZrQ.b['3'][0]++,this.getPressedCls()):(__cov_D3QXK2GJ8YTeJoCrtetZrQ.b['3'][1]++,'basigx-map-tool-button'));}__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['13']++;this.setControlStatus(this.buttonPressed);},setControlStatus:function(status){__cov_D3QXK2GJ8YTeJoCrtetZrQ.f['4']++;__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['14']++;var me=this;__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['15']++;var mapComponent;__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['16']++;mapComponent=BasiGX.util.Map.getMapComponent(me.getMapPanelXType());__cov_D3QXK2GJ8YTeJoCrtetZrQ.s['17']++;mapComponent.setPointerRest(status);}});
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Informationsabfrage',
+            text: null
+        }
+    },
+
+    /**
+     *
+     */
+    bind: {
+        text: '{text}'
+    },
+
+    /**
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: 'xf05a@FontAwesome',
+    html: '<i class="fa fa-info-circle fa-2x"></i>',
+
+    /**
+     *
+     */
+    enableToggle: true,
+
+    /**
+     *
+     */
+    buttonPressed: true,
+
+    /**
+     *
+     */
+    config: {
+        /**
+         * Placeholder for the xtype of the map component (e.g. 'basigx-component-map').
+         * Will be used to be able to determine the map component dynamically
+         */
+        mapPanelXType: null,
+        handler: function() {
+            this.buttonPressed = !this.buttonPressed;
+            this.toggleButton();
+        }
+    },
+
+    /**
+     *
+     */
+    constructor: function(config) {
+        this.callParent([config]);
+
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+
+        this.toggleButton();
+    },
+
+    /**
+     *
+     */
+    toggleButton: function() {
+        if (this.setPressed) {
+            this.setPressed(this.buttonPressed);
+        } else {
+            this.setCls(this.buttonPressed ? this.getPressedCls() :
+                "basigx-map-tool-button");
+        }
+        this.setControlStatus(this.buttonPressed);
+    },
+
+    /**
+     *
+     */
+    setControlStatus: function(status){
+        var me = this;
+        var mapComponent;
+
+        mapComponent = BasiGX.util.Map.getMapComponent(me.getMapPanelXType());
+        mapComponent.setPointerRest(status);
+    }
+});

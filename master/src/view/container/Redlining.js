@@ -1,9 +1,900 @@
+/* Copyright (c) 2016 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Redlining Tools Container
+ *
+ * @class BasiGX.view.container.Redlining
+ */
+Ext.define("BasiGX.view.container.Redlining", {
+    extend: "Ext.container.Container",
+    xtype: "basigx-container-redlining",
 
-var __cov_ov56aHyK_$W$Za8FhOYfVw = (Function('return this'))();
-if (!__cov_ov56aHyK_$W$Za8FhOYfVw.__coverage__) { __cov_ov56aHyK_$W$Za8FhOYfVw.__coverage__ = {}; }
-__cov_ov56aHyK_$W$Za8FhOYfVw = __cov_ov56aHyK_$W$Za8FhOYfVw.__coverage__;
-if (!(__cov_ov56aHyK_$W$Za8FhOYfVw['/home/travis/build/terrestris/BasiGX/src/view/container/Redlining.js'])) {
-   __cov_ov56aHyK_$W$Za8FhOYfVw['/home/travis/build/terrestris/BasiGX/src/view/container/Redlining.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/container/Redlining.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0,"137":0,"138":0,"139":0,"140":0,"141":0,"142":0,"143":0,"144":0,"145":0,"146":0,"147":0,"148":0,"149":0,"150":0,"151":0,"152":0,"153":0,"154":0,"155":0,"156":0,"157":0,"158":0,"159":0,"160":0,"161":0,"162":0,"163":0,"164":0,"165":0,"166":0,"167":0,"168":0,"169":0,"170":0,"171":0,"172":0,"173":0,"174":0,"175":0,"176":0,"177":0,"178":0,"179":0,"180":0,"181":0,"182":0,"183":0,"184":0,"185":0,"186":0,"187":0,"188":0,"189":0,"190":0,"191":0,"192":0,"193":0,"194":0,"195":0,"196":0,"197":0,"198":0,"199":0,"200":0,"201":0,"202":0,"203":0,"204":0,"205":0,"206":0,"207":0,"208":0,"209":0,"210":0,"211":0,"212":0,"213":0,"214":0,"215":0,"216":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0],"19":[0,0],"20":[0,0],"21":[0,0],"22":[0,0],"23":[0,0],"24":[0,0],"25":[0,0],"26":[0,0],"27":[0,0],"28":[0,0],"29":[0,0],"30":[0,0],"31":[0,0],"32":[0,0],"33":[0,0],"34":[0,0],"35":[0,0],"36":[0,0],"37":[0,0],"38":[0,0],"39":[0,0],"40":[0,0],"41":[0,0],"42":[0,0],"43":[0,0,0],"44":[0,0],"45":[0,0],"46":[0,0],"47":[0,0],"48":[0,0],"49":[0,0],"50":[0,0],"51":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0},"fnMap":{"1":{"name":"(anonymous_1)","line":199,"loc":{"start":{"line":199,"column":28},"end":{"line":199,"column":46}}},"2":{"name":"(anonymous_2)","line":231,"loc":{"start":{"line":231,"column":18},"end":{"line":231,"column":29}}},"3":{"name":"(anonymous_3)","line":255,"loc":{"start":{"line":255,"column":23},"end":{"line":255,"column":33}}},"4":{"name":"(anonymous_4)","line":266,"loc":{"start":{"line":266,"column":20},"end":{"line":266,"column":31}}},"5":{"name":"(anonymous_5)","line":278,"loc":{"start":{"line":278,"column":27},"end":{"line":278,"column":50}}},"6":{"name":"(anonymous_6)","line":301,"loc":{"start":{"line":301,"column":27},"end":{"line":301,"column":50}}},"7":{"name":"(anonymous_7)","line":324,"loc":{"start":{"line":324,"column":27},"end":{"line":324,"column":50}}},"8":{"name":"(anonymous_8)","line":347,"loc":{"start":{"line":347,"column":27},"end":{"line":347,"column":50}}},"9":{"name":"(anonymous_9)","line":382,"loc":{"start":{"line":382,"column":27},"end":{"line":382,"column":50}}},"10":{"name":"(anonymous_10)","line":386,"loc":{"start":{"line":386,"column":46},"end":{"line":386,"column":60}}},"11":{"name":"(anonymous_11)","line":391,"loc":{"start":{"line":391,"column":49},"end":{"line":391,"column":63}}},"12":{"name":"(anonymous_12)","line":400,"loc":{"start":{"line":400,"column":60},"end":{"line":401,"column":65}}},"13":{"name":"(anonymous_13)","line":434,"loc":{"start":{"line":434,"column":27},"end":{"line":434,"column":50}}},"14":{"name":"(anonymous_14)","line":439,"loc":{"start":{"line":439,"column":49},"end":{"line":439,"column":60}}},"15":{"name":"(anonymous_15)","line":500,"loc":{"start":{"line":500,"column":27},"end":{"line":500,"column":50}}},"16":{"name":"(anonymous_16)","line":504,"loc":{"start":{"line":504,"column":67},"end":{"line":504,"column":81}}},"17":{"name":"(anonymous_17)","line":517,"loc":{"start":{"line":517,"column":48},"end":{"line":517,"column":64}}},"18":{"name":"(anonymous_18)","line":545,"loc":{"start":{"line":545,"column":27},"end":{"line":545,"column":50}}},"19":{"name":"(anonymous_19)","line":547,"loc":{"start":{"line":547,"column":48},"end":{"line":547,"column":75}}},"20":{"name":"(anonymous_20)","line":550,"loc":{"start":{"line":550,"column":39},"end":{"line":550,"column":65}}},"21":{"name":"(anonymous_21)","line":563,"loc":{"start":{"line":563,"column":46},"end":{"line":563,"column":60}}},"22":{"name":"(anonymous_22)","line":569,"loc":{"start":{"line":569,"column":49},"end":{"line":569,"column":63}}},"23":{"name":"(anonymous_23)","line":602,"loc":{"start":{"line":602,"column":27},"end":{"line":602,"column":50}}},"24":{"name":"(anonymous_24)","line":622,"loc":{"start":{"line":622,"column":55},"end":{"line":622,"column":66}}},"25":{"name":"(anonymous_25)","line":641,"loc":{"start":{"line":641,"column":20},"end":{"line":641,"column":31}}},"26":{"name":"(anonymous_26)","line":659,"loc":{"start":{"line":659,"column":20},"end":{"line":659,"column":34}}},"27":{"name":"(anonymous_27)","line":666,"loc":{"start":{"line":666,"column":15},"end":{"line":666,"column":40}}},"28":{"name":"(anonymous_28)","line":684,"loc":{"start":{"line":684,"column":17},"end":{"line":684,"column":35}}},"29":{"name":"(anonymous_29)","line":687,"loc":{"start":{"line":687,"column":15},"end":{"line":687,"column":40}}},"30":{"name":"(anonymous_30)","line":700,"loc":{"start":{"line":700,"column":35},"end":{"line":700,"column":56}}},"31":{"name":"(anonymous_31)","line":720,"loc":{"start":{"line":720,"column":32},"end":{"line":720,"column":48}}},"32":{"name":"(anonymous_32)","line":725,"loc":{"start":{"line":725,"column":50},"end":{"line":725,"column":68}}},"33":{"name":"(anonymous_33)","line":736,"loc":{"start":{"line":736,"column":18},"end":{"line":736,"column":54}}},"34":{"name":"(anonymous_34)","line":773,"loc":{"start":{"line":773,"column":14},"end":{"line":773,"column":25}}},"35":{"name":"(anonymous_35)","line":776,"loc":{"start":{"line":776,"column":35},"end":{"line":776,"column":53}}},"36":{"name":"(anonymous_36)","line":795,"loc":{"start":{"line":795,"column":14},"end":{"line":795,"column":30}}},"37":{"name":"(anonymous_37)","line":835,"loc":{"start":{"line":835,"column":26},"end":{"line":835,"column":36}}}},"statementMap":{"1":{"start":{"line":21,"column":0},"end":{"line":839,"column":3}},"2":{"start":{"line":200,"column":10},"end":{"line":200,"column":77}},"3":{"start":{"line":202,"column":10},"end":{"line":204,"column":11}},"4":{"start":{"line":203,"column":14},"end":{"line":203,"column":21}},"5":{"start":{"line":206,"column":10},"end":{"line":206,"column":47}},"6":{"start":{"line":207,"column":10},"end":{"line":213,"column":11}},"7":{"start":{"line":208,"column":14},"end":{"line":208,"column":47}},"8":{"start":{"line":209,"column":17},"end":{"line":213,"column":11}},"9":{"start":{"line":210,"column":14},"end":{"line":210,"column":52}},"10":{"start":{"line":212,"column":14},"end":{"line":212,"column":49}},"11":{"start":{"line":232,"column":7},"end":{"line":232,"column":21}},"12":{"start":{"line":233,"column":7},"end":{"line":234,"column":40}},"13":{"start":{"line":237,"column":7},"end":{"line":237,"column":59}},"14":{"start":{"line":239,"column":7},"end":{"line":248,"column":8}},"15":{"start":{"line":240,"column":11},"end":{"line":240,"column":52}},"16":{"start":{"line":241,"column":11},"end":{"line":241,"column":80}},"17":{"start":{"line":242,"column":11},"end":{"line":245,"column":14}},"18":{"start":{"line":246,"column":11},"end":{"line":246,"column":73}},"19":{"start":{"line":247,"column":11},"end":{"line":247,"column":52}},"20":{"start":{"line":250,"column":7},"end":{"line":250,"column":39}},"21":{"start":{"line":251,"column":7},"end":{"line":251,"column":32}},"22":{"start":{"line":256,"column":12},"end":{"line":259,"column":13}},"23":{"start":{"line":257,"column":16},"end":{"line":258,"column":53}},"24":{"start":{"line":267,"column":7},"end":{"line":267,"column":21}},"25":{"start":{"line":269,"column":7},"end":{"line":635,"column":9}},"26":{"start":{"line":279,"column":23},"end":{"line":285,"column":24}},"27":{"start":{"line":280,"column":27},"end":{"line":283,"column":30}},"28":{"start":{"line":284,"column":27},"end":{"line":284,"column":74}},"29":{"start":{"line":286,"column":23},"end":{"line":290,"column":24}},"30":{"start":{"line":287,"column":27},"end":{"line":287,"column":67}},"31":{"start":{"line":289,"column":27},"end":{"line":289,"column":68}},"32":{"start":{"line":302,"column":23},"end":{"line":308,"column":24}},"33":{"start":{"line":303,"column":27},"end":{"line":306,"column":30}},"34":{"start":{"line":307,"column":27},"end":{"line":307,"column":73}},"35":{"start":{"line":309,"column":23},"end":{"line":313,"column":24}},"36":{"start":{"line":310,"column":27},"end":{"line":310,"column":66}},"37":{"start":{"line":312,"column":27},"end":{"line":312,"column":67}},"38":{"start":{"line":325,"column":23},"end":{"line":331,"column":24}},"39":{"start":{"line":326,"column":27},"end":{"line":329,"column":30}},"40":{"start":{"line":330,"column":27},"end":{"line":330,"column":76}},"41":{"start":{"line":332,"column":23},"end":{"line":336,"column":24}},"42":{"start":{"line":333,"column":27},"end":{"line":333,"column":69}},"43":{"start":{"line":335,"column":27},"end":{"line":335,"column":70}},"44":{"start":{"line":348,"column":23},"end":{"line":364,"column":24}},"45":{"start":{"line":349,"column":27},"end":{"line":349,"column":58}},"46":{"start":{"line":351,"column":27},"end":{"line":362,"column":30}},"47":{"start":{"line":363,"column":27},"end":{"line":363,"column":75}},"48":{"start":{"line":365,"column":23},"end":{"line":371,"column":24}},"49":{"start":{"line":366,"column":27},"end":{"line":366,"column":68}},"50":{"start":{"line":367,"column":27},"end":{"line":367,"column":80}},"51":{"start":{"line":369,"column":27},"end":{"line":369,"column":69}},"52":{"start":{"line":370,"column":27},"end":{"line":370,"column":80}},"53":{"start":{"line":383,"column":23},"end":{"line":418,"column":24}},"54":{"start":{"line":384,"column":27},"end":{"line":416,"column":34}},"55":{"start":{"line":387,"column":39},"end":{"line":389,"column":54}},"56":{"start":{"line":392,"column":39},"end":{"line":414,"column":40}},"57":{"start":{"line":393,"column":43},"end":{"line":395,"column":72}},"58":{"start":{"line":397,"column":43},"end":{"line":413,"column":44}},"59":{"start":{"line":398,"column":47},"end":{"line":399,"column":59}},"60":{"start":{"line":400,"column":47},"end":{"line":404,"column":49}},"61":{"start":{"line":402,"column":51},"end":{"line":403,"column":73}},"62":{"start":{"line":405,"column":47},"end":{"line":409,"column":59}},"63":{"start":{"line":411,"column":47},"end":{"line":412,"column":73}},"64":{"start":{"line":417,"column":27},"end":{"line":417,"column":75}},"65":{"start":{"line":419,"column":23},"end":{"line":423,"column":24}},"66":{"start":{"line":420,"column":27},"end":{"line":420,"column":68}},"67":{"start":{"line":422,"column":27},"end":{"line":422,"column":69}},"68":{"start":{"line":435,"column":23},"end":{"line":478,"column":24}},"69":{"start":{"line":436,"column":27},"end":{"line":470,"column":34}},"70":{"start":{"line":440,"column":39},"end":{"line":442,"column":57}},"71":{"start":{"line":443,"column":39},"end":{"line":444,"column":57}},"72":{"start":{"line":446,"column":39},"end":{"line":468,"column":40}},"73":{"start":{"line":447,"column":43},"end":{"line":449,"column":69}},"74":{"start":{"line":451,"column":43},"end":{"line":467,"column":44}},"75":{"start":{"line":453,"column":47},"end":{"line":454,"column":72}},"76":{"start":{"line":455,"column":50},"end":{"line":467,"column":44}},"77":{"start":{"line":461,"column":51},"end":{"line":463,"column":59}},"78":{"start":{"line":464,"column":51},"end":{"line":466,"column":72}},"79":{"start":{"line":471,"column":27},"end":{"line":471,"column":80}},"80":{"start":{"line":472,"column":27},"end":{"line":472,"column":79}},"81":{"start":{"line":473,"column":27},"end":{"line":476,"column":30}},"82":{"start":{"line":477,"column":27},"end":{"line":477,"column":74}},"83":{"start":{"line":479,"column":23},"end":{"line":489,"column":24}},"84":{"start":{"line":480,"column":27},"end":{"line":480,"column":67}},"85":{"start":{"line":481,"column":27},"end":{"line":481,"column":73}},"86":{"start":{"line":482,"column":27},"end":{"line":483,"column":64}},"87":{"start":{"line":485,"column":27},"end":{"line":485,"column":68}},"88":{"start":{"line":486,"column":27},"end":{"line":486,"column":74}},"89":{"start":{"line":487,"column":27},"end":{"line":488,"column":64}},"90":{"start":{"line":501,"column":23},"end":{"line":523,"column":24}},"91":{"start":{"line":502,"column":27},"end":{"line":503,"column":59}},"92":{"start":{"line":504,"column":27},"end":{"line":512,"column":30}},"93":{"start":{"line":505,"column":31},"end":{"line":510,"column":32}},"94":{"start":{"line":506,"column":35},"end":{"line":506,"column":65}},"95":{"start":{"line":507,"column":35},"end":{"line":509,"column":36}},"96":{"start":{"line":508,"column":39},"end":{"line":508,"column":64}},"97":{"start":{"line":511,"column":31},"end":{"line":511,"column":80}},"98":{"start":{"line":513,"column":27},"end":{"line":513,"column":77}},"99":{"start":{"line":514,"column":27},"end":{"line":521,"column":30}},"100":{"start":{"line":518,"column":35},"end":{"line":519,"column":59}},"101":{"start":{"line":522,"column":27},"end":{"line":522,"column":71}},"102":{"start":{"line":524,"column":23},"end":{"line":534,"column":24}},"103":{"start":{"line":525,"column":27},"end":{"line":525,"column":64}},"104":{"start":{"line":526,"column":27},"end":{"line":526,"column":70}},"105":{"start":{"line":527,"column":27},"end":{"line":528,"column":64}},"106":{"start":{"line":530,"column":27},"end":{"line":530,"column":65}},"107":{"start":{"line":531,"column":27},"end":{"line":531,"column":71}},"108":{"start":{"line":532,"column":27},"end":{"line":533,"column":64}},"109":{"start":{"line":546,"column":23},"end":{"line":584,"column":24}},"110":{"start":{"line":547,"column":27},"end":{"line":560,"column":29}},"111":{"start":{"line":549,"column":31},"end":{"line":559,"column":34}},"112":{"start":{"line":551,"column":35},"end":{"line":552,"column":56}},"113":{"start":{"line":553,"column":35},"end":{"line":555,"column":36}},"114":{"start":{"line":554,"column":39},"end":{"line":554,"column":74}},"115":{"start":{"line":556,"column":35},"end":{"line":557,"column":63}},"116":{"start":{"line":558,"column":35},"end":{"line":558,"column":55}},"117":{"start":{"line":561,"column":27},"end":{"line":577,"column":34}},"118":{"start":{"line":564,"column":39},"end":{"line":567,"column":59}},"119":{"start":{"line":570,"column":39},"end":{"line":575,"column":40}},"120":{"start":{"line":571,"column":43},"end":{"line":573,"column":61}},"121":{"start":{"line":574,"column":43},"end":{"line":574,"column":80}},"122":{"start":{"line":578,"column":27},"end":{"line":578,"column":77}},"123":{"start":{"line":580,"column":27},"end":{"line":582,"column":30}},"124":{"start":{"line":583,"column":27},"end":{"line":583,"column":75}},"125":{"start":{"line":585,"column":23},"end":{"line":591,"column":24}},"126":{"start":{"line":586,"column":27},"end":{"line":586,"column":70}},"127":{"start":{"line":587,"column":27},"end":{"line":587,"column":68}},"128":{"start":{"line":589,"column":27},"end":{"line":589,"column":71}},"129":{"start":{"line":590,"column":27},"end":{"line":590,"column":69}},"130":{"start":{"line":603,"column":23},"end":{"line":626,"column":24}},"131":{"start":{"line":604,"column":27},"end":{"line":621,"column":30}},"132":{"start":{"line":622,"column":27},"end":{"line":625,"column":30}},"133":{"start":{"line":623,"column":31},"end":{"line":623,"column":57}},"134":{"start":{"line":624,"column":31},"end":{"line":624,"column":44}},"135":{"start":{"line":627,"column":23},"end":{"line":631,"column":24}},"136":{"start":{"line":628,"column":27},"end":{"line":628,"column":50}},"137":{"start":{"line":630,"column":27},"end":{"line":630,"column":50}},"138":{"start":{"line":642,"column":7},"end":{"line":653,"column":8}},"139":{"start":{"line":643,"column":11},"end":{"line":643,"column":45}},"140":{"start":{"line":645,"column":11},"end":{"line":646,"column":50}},"141":{"start":{"line":647,"column":11},"end":{"line":647,"column":28}},"142":{"start":{"line":648,"column":11},"end":{"line":651,"column":12}},"143":{"start":{"line":649,"column":15},"end":{"line":650,"column":57}},"144":{"start":{"line":652,"column":11},"end":{"line":652,"column":60}},"145":{"start":{"line":660,"column":7},"end":{"line":660,"column":21}},"146":{"start":{"line":661,"column":7},"end":{"line":661,"column":30}},"147":{"start":{"line":663,"column":7},"end":{"line":663,"column":34}},"148":{"start":{"line":665,"column":7},"end":{"line":675,"column":10}},"149":{"start":{"line":667,"column":15},"end":{"line":672,"column":16}},"150":{"start":{"line":668,"column":19},"end":{"line":668,"column":51}},"151":{"start":{"line":670,"column":19},"end":{"line":670,"column":59}},"152":{"start":{"line":671,"column":19},"end":{"line":671,"column":65}},"153":{"start":{"line":677,"column":7},"end":{"line":677,"column":77}},"154":{"start":{"line":678,"column":7},"end":{"line":678,"column":23}},"155":{"start":{"line":685,"column":7},"end":{"line":685,"column":21}},"156":{"start":{"line":686,"column":7},"end":{"line":694,"column":10}},"157":{"start":{"line":688,"column":15},"end":{"line":691,"column":16}},"158":{"start":{"line":689,"column":19},"end":{"line":689,"column":59}},"159":{"start":{"line":690,"column":19},"end":{"line":690,"column":68}},"160":{"start":{"line":701,"column":7},"end":{"line":701,"column":21}},"161":{"start":{"line":702,"column":7},"end":{"line":714,"column":11}},"162":{"start":{"line":722,"column":8},"end":{"line":722,"column":27}},"163":{"start":{"line":723,"column":8},"end":{"line":723,"column":44}},"164":{"start":{"line":724,"column":8},"end":{"line":724,"column":59}},"165":{"start":{"line":725,"column":8},"end":{"line":731,"column":11}},"166":{"start":{"line":726,"column":12},"end":{"line":726,"column":74}},"167":{"start":{"line":727,"column":12},"end":{"line":730,"column":13}},"168":{"start":{"line":728,"column":16},"end":{"line":728,"column":41}},"169":{"start":{"line":729,"column":16},"end":{"line":729,"column":29}},"170":{"start":{"line":732,"column":8},"end":{"line":732,"column":30}},"171":{"start":{"line":737,"column":7},"end":{"line":737,"column":21}},"172":{"start":{"line":738,"column":7},"end":{"line":738,"column":26}},"173":{"start":{"line":739,"column":7},"end":{"line":739,"column":29}},"174":{"start":{"line":740,"column":7},"end":{"line":765,"column":8}},"175":{"start":{"line":741,"column":11},"end":{"line":741,"column":25}},"176":{"start":{"line":742,"column":11},"end":{"line":742,"column":20}},"177":{"start":{"line":743,"column":11},"end":{"line":743,"column":21}},"178":{"start":{"line":744,"column":11},"end":{"line":746,"column":12}},"179":{"start":{"line":745,"column":15},"end":{"line":745,"column":19}},"180":{"start":{"line":747,"column":11},"end":{"line":764,"column":12}},"181":{"start":{"line":748,"column":17},"end":{"line":752,"column":18}},"182":{"start":{"line":749,"column":21},"end":{"line":749,"column":52}},"183":{"start":{"line":751,"column":21},"end":{"line":751,"column":48}},"184":{"start":{"line":753,"column":17},"end":{"line":753,"column":46}},"185":{"start":{"line":754,"column":17},"end":{"line":755,"column":50}},"186":{"start":{"line":758,"column":15},"end":{"line":758,"column":69}},"187":{"start":{"line":759,"column":15},"end":{"line":759,"column":52}},"188":{"start":{"line":760,"column":15},"end":{"line":760,"column":38}},"189":{"start":{"line":761,"column":15},"end":{"line":761,"column":34}},"190":{"start":{"line":762,"column":15},"end":{"line":763,"column":48}},"191":{"start":{"line":766,"column":7},"end":{"line":766,"column":18}},"192":{"start":{"line":774,"column":8},"end":{"line":774,"column":22}},"193":{"start":{"line":775,"column":8},"end":{"line":775,"column":26}},"194":{"start":{"line":776,"column":8},"end":{"line":778,"column":11}},"195":{"start":{"line":777,"column":12},"end":{"line":777,"column":43}},"196":{"start":{"line":780,"column":8},"end":{"line":786,"column":10}},"197":{"start":{"line":788,"column":8},"end":{"line":788,"column":21}},"198":{"start":{"line":796,"column":8},"end":{"line":796,"column":22}},"199":{"start":{"line":798,"column":8},"end":{"line":798,"column":36}},"200":{"start":{"line":800,"column":8},"end":{"line":801,"column":49}},"201":{"start":{"line":803,"column":8},"end":{"line":806,"column":9}},"202":{"start":{"line":804,"column":12},"end":{"line":804,"column":56}},"203":{"start":{"line":805,"column":12},"end":{"line":805,"column":76}},"204":{"start":{"line":808,"column":8},"end":{"line":810,"column":9}},"205":{"start":{"line":809,"column":12},"end":{"line":809,"column":54}},"206":{"start":{"line":812,"column":8},"end":{"line":814,"column":9}},"207":{"start":{"line":813,"column":12},"end":{"line":813,"column":58}},"208":{"start":{"line":816,"column":8},"end":{"line":818,"column":9}},"209":{"start":{"line":817,"column":12},"end":{"line":817,"column":58}},"210":{"start":{"line":820,"column":8},"end":{"line":822,"column":9}},"211":{"start":{"line":821,"column":12},"end":{"line":821,"column":35}},"212":{"start":{"line":824,"column":8},"end":{"line":826,"column":9}},"213":{"start":{"line":825,"column":12},"end":{"line":825,"column":60}},"214":{"start":{"line":830,"column":8},"end":{"line":830,"column":77}},"215":{"start":{"line":832,"column":8},"end":{"line":832,"column":37}},"216":{"start":{"line":836,"column":8},"end":{"line":837,"column":40}}},"branchMap":{"1":{"line":202,"type":"if","locations":[{"start":{"line":202,"column":10},"end":{"line":202,"column":10}},{"start":{"line":202,"column":10},"end":{"line":202,"column":10}}]},"2":{"line":207,"type":"if","locations":[{"start":{"line":207,"column":10},"end":{"line":207,"column":10}},{"start":{"line":207,"column":10},"end":{"line":207,"column":10}}]},"3":{"line":209,"type":"if","locations":[{"start":{"line":209,"column":17},"end":{"line":209,"column":17}},{"start":{"line":209,"column":17},"end":{"line":209,"column":17}}]},"4":{"line":239,"type":"if","locations":[{"start":{"line":239,"column":7},"end":{"line":239,"column":7}},{"start":{"line":239,"column":7},"end":{"line":239,"column":7}}]},"5":{"line":256,"type":"if","locations":[{"start":{"line":256,"column":12},"end":{"line":256,"column":12}},{"start":{"line":256,"column":12},"end":{"line":256,"column":12}}]},"6":{"line":279,"type":"if","locations":[{"start":{"line":279,"column":23},"end":{"line":279,"column":23}},{"start":{"line":279,"column":23},"end":{"line":279,"column":23}}]},"7":{"line":286,"type":"if","locations":[{"start":{"line":286,"column":23},"end":{"line":286,"column":23}},{"start":{"line":286,"column":23},"end":{"line":286,"column":23}}]},"8":{"line":302,"type":"if","locations":[{"start":{"line":302,"column":23},"end":{"line":302,"column":23}},{"start":{"line":302,"column":23},"end":{"line":302,"column":23}}]},"9":{"line":309,"type":"if","locations":[{"start":{"line":309,"column":23},"end":{"line":309,"column":23}},{"start":{"line":309,"column":23},"end":{"line":309,"column":23}}]},"10":{"line":325,"type":"if","locations":[{"start":{"line":325,"column":23},"end":{"line":325,"column":23}},{"start":{"line":325,"column":23},"end":{"line":325,"column":23}}]},"11":{"line":332,"type":"if","locations":[{"start":{"line":332,"column":23},"end":{"line":332,"column":23}},{"start":{"line":332,"column":23},"end":{"line":332,"column":23}}]},"12":{"line":348,"type":"if","locations":[{"start":{"line":348,"column":23},"end":{"line":348,"column":23}},{"start":{"line":348,"column":23},"end":{"line":348,"column":23}}]},"13":{"line":365,"type":"if","locations":[{"start":{"line":365,"column":23},"end":{"line":365,"column":23}},{"start":{"line":365,"column":23},"end":{"line":365,"column":23}}]},"14":{"line":383,"type":"if","locations":[{"start":{"line":383,"column":23},"end":{"line":383,"column":23}},{"start":{"line":383,"column":23},"end":{"line":383,"column":23}}]},"15":{"line":387,"type":"binary-expr","locations":[{"start":{"line":387,"column":46},"end":{"line":388,"column":47}},{"start":{"line":388,"column":51},"end":{"line":389,"column":53}}]},"16":{"line":392,"type":"if","locations":[{"start":{"line":392,"column":39},"end":{"line":392,"column":39}},{"start":{"line":392,"column":39},"end":{"line":392,"column":39}}]},"17":{"line":397,"type":"if","locations":[{"start":{"line":397,"column":43},"end":{"line":397,"column":43}},{"start":{"line":397,"column":43},"end":{"line":397,"column":43}}]},"18":{"line":419,"type":"if","locations":[{"start":{"line":419,"column":23},"end":{"line":419,"column":23}},{"start":{"line":419,"column":23},"end":{"line":419,"column":23}}]},"19":{"line":435,"type":"if","locations":[{"start":{"line":435,"column":23},"end":{"line":435,"column":23}},{"start":{"line":435,"column":23},"end":{"line":435,"column":23}}]},"20":{"line":446,"type":"if","locations":[{"start":{"line":446,"column":39},"end":{"line":446,"column":39}},{"start":{"line":446,"column":39},"end":{"line":446,"column":39}}]},"21":{"line":451,"type":"if","locations":[{"start":{"line":451,"column":43},"end":{"line":451,"column":43}},{"start":{"line":451,"column":43},"end":{"line":451,"column":43}}]},"22":{"line":455,"type":"if","locations":[{"start":{"line":455,"column":50},"end":{"line":455,"column":50}},{"start":{"line":455,"column":50},"end":{"line":455,"column":50}}]},"23":{"line":455,"type":"binary-expr","locations":[{"start":{"line":455,"column":54},"end":{"line":457,"column":62}},{"start":{"line":458,"column":47},"end":{"line":460,"column":60}}]},"24":{"line":479,"type":"if","locations":[{"start":{"line":479,"column":23},"end":{"line":479,"column":23}},{"start":{"line":479,"column":23},"end":{"line":479,"column":23}}]},"25":{"line":501,"type":"if","locations":[{"start":{"line":501,"column":23},"end":{"line":501,"column":23}},{"start":{"line":501,"column":23},"end":{"line":501,"column":23}}]},"26":{"line":505,"type":"if","locations":[{"start":{"line":505,"column":31},"end":{"line":505,"column":31}},{"start":{"line":505,"column":31},"end":{"line":505,"column":31}}]},"27":{"line":505,"type":"binary-expr","locations":[{"start":{"line":505,"column":35},"end":{"line":505,"column":47}},{"start":{"line":505,"column":51},"end":{"line":505,"column":66}}]},"28":{"line":507,"type":"if","locations":[{"start":{"line":507,"column":35},"end":{"line":507,"column":35}},{"start":{"line":507,"column":35},"end":{"line":507,"column":35}}]},"29":{"line":524,"type":"if","locations":[{"start":{"line":524,"column":23},"end":{"line":524,"column":23}},{"start":{"line":524,"column":23},"end":{"line":524,"column":23}}]},"30":{"line":546,"type":"if","locations":[{"start":{"line":546,"column":23},"end":{"line":546,"column":23}},{"start":{"line":546,"column":23},"end":{"line":546,"column":23}}]},"31":{"line":553,"type":"if","locations":[{"start":{"line":553,"column":35},"end":{"line":553,"column":35}},{"start":{"line":553,"column":35},"end":{"line":553,"column":35}}]},"32":{"line":564,"type":"binary-expr","locations":[{"start":{"line":564,"column":46},"end":{"line":565,"column":64}},{"start":{"line":566,"column":44},"end":{"line":567,"column":58}}]},"33":{"line":570,"type":"if","locations":[{"start":{"line":570,"column":39},"end":{"line":570,"column":39}},{"start":{"line":570,"column":39},"end":{"line":570,"column":39}}]},"34":{"line":585,"type":"if","locations":[{"start":{"line":585,"column":23},"end":{"line":585,"column":23}},{"start":{"line":585,"column":23},"end":{"line":585,"column":23}}]},"35":{"line":603,"type":"if","locations":[{"start":{"line":603,"column":23},"end":{"line":603,"column":23}},{"start":{"line":603,"column":23},"end":{"line":603,"column":23}}]},"36":{"line":627,"type":"if","locations":[{"start":{"line":627,"column":23},"end":{"line":627,"column":23}},{"start":{"line":627,"column":23},"end":{"line":627,"column":23}}]},"37":{"line":642,"type":"if","locations":[{"start":{"line":642,"column":7},"end":{"line":642,"column":7}},{"start":{"line":642,"column":7},"end":{"line":642,"column":7}}]},"38":{"line":648,"type":"if","locations":[{"start":{"line":648,"column":11},"end":{"line":648,"column":11}},{"start":{"line":648,"column":11},"end":{"line":648,"column":11}}]},"39":{"line":667,"type":"if","locations":[{"start":{"line":667,"column":15},"end":{"line":667,"column":15}},{"start":{"line":667,"column":15},"end":{"line":667,"column":15}}]},"40":{"line":688,"type":"if","locations":[{"start":{"line":688,"column":15},"end":{"line":688,"column":15}},{"start":{"line":688,"column":15},"end":{"line":688,"column":15}}]},"41":{"line":727,"type":"if","locations":[{"start":{"line":727,"column":12},"end":{"line":727,"column":12}},{"start":{"line":727,"column":12},"end":{"line":727,"column":12}}]},"42":{"line":740,"type":"if","locations":[{"start":{"line":740,"column":7},"end":{"line":740,"column":7}},{"start":{"line":740,"column":7},"end":{"line":740,"column":7}}]},"43":{"line":744,"type":"binary-expr","locations":[{"start":{"line":744,"column":18},"end":{"line":744,"column":23}},{"start":{"line":744,"column":28},"end":{"line":744,"column":42}},{"start":{"line":744,"column":46},"end":{"line":744,"column":60}}]},"44":{"line":747,"type":"if","locations":[{"start":{"line":747,"column":11},"end":{"line":747,"column":11}},{"start":{"line":747,"column":11},"end":{"line":747,"column":11}}]},"45":{"line":748,"type":"if","locations":[{"start":{"line":748,"column":17},"end":{"line":748,"column":17}},{"start":{"line":748,"column":17},"end":{"line":748,"column":17}}]},"46":{"line":803,"type":"if","locations":[{"start":{"line":803,"column":8},"end":{"line":803,"column":8}},{"start":{"line":803,"column":8},"end":{"line":803,"column":8}}]},"47":{"line":808,"type":"if","locations":[{"start":{"line":808,"column":8},"end":{"line":808,"column":8}},{"start":{"line":808,"column":8},"end":{"line":808,"column":8}}]},"48":{"line":812,"type":"if","locations":[{"start":{"line":812,"column":8},"end":{"line":812,"column":8}},{"start":{"line":812,"column":8},"end":{"line":812,"column":8}}]},"49":{"line":816,"type":"if","locations":[{"start":{"line":816,"column":8},"end":{"line":816,"column":8}},{"start":{"line":816,"column":8},"end":{"line":816,"column":8}}]},"50":{"line":820,"type":"if","locations":[{"start":{"line":820,"column":8},"end":{"line":820,"column":8}},{"start":{"line":820,"column":8},"end":{"line":820,"column":8}}]},"51":{"line":824,"type":"if","locations":[{"start":{"line":824,"column":8},"end":{"line":824,"column":8}},{"start":{"line":824,"column":8},"end":{"line":824,"column":8}}]}}};
-}
-__cov_ov56aHyK_$W$Za8FhOYfVw = __cov_ov56aHyK_$W$Za8FhOYfVw['/home/travis/build/terrestris/BasiGX/src/view/container/Redlining.js'];
-__cov_ov56aHyK_$W$Za8FhOYfVw.s['1']++;Ext.define('BasiGX.view.container.Redlining',{extend:'Ext.container.Container',xtype:'basigx-container-redlining',requires:['BasiGX.view.container.RedlineStyler'],layout:'hbox',viewModel:{data:{drawPointsBtnText:'Draw Points',drawLinesBtnText:'Draw Lines',drawPolygonsBtnText:'Draw Polygons',drawPostItBtnText:'Draw Post-it',copyObjectBtnText:'Copy Object',moveObjectBtnText:'Move Object',modifyObjectBtnText:'Modify Object',deleteObjectBtnText:'Delete Object',openStyleBtnText:'Styler',stylerWindowTitle:'Styler',postItWindowTitle:'Enter the Post-its text',postItWindowCreatePostItBtnText:'Create Post-it'}},drawPointInteraction:null,drawLineInteraction:null,drawPolygonInteraction:null,drawPostitInteraction:null,copySelectInteraction:null,translateInteraction:null,translateSelectInteraction:null,modifyInteraction:null,modifySelectInteraction:null,selectInteraction:null,deleteSelectInteraction:null,deleteSnapInteraction:null,redliningVectorLayer:null,redlineFeatures:null,redliningToolsWin:null,map:null,stateChangeActive:false,config:{backendUrls:{pictureList:null,pictureSrc:null,pictureUpload:null,graphicDelete:null},postitPictureUrl:null,redlinePointStyle:new ol.style.Style({image:new ol.style.Circle({radius:7,fill:new ol.style.Fill({color:'green'}),stroke:new ol.style.Stroke({color:'#ffcc33',width:2})})}),redlineLineStringStyle:new ol.style.Style({stroke:new ol.style.Stroke({color:'#ffcc33',width:2})}),redlinePolygonStyle:new ol.style.Style({stroke:new ol.style.Stroke({color:'#ffcc33',width:2}),fill:new ol.style.Fill({color:'green'})}),redlineStyleFunction:function(feature){__cov_ov56aHyK_$W$Za8FhOYfVw.f['1']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['2']++;var me=Ext.ComponentQuery.query('basigx-container-redlining')[0];__cov_ov56aHyK_$W$Za8FhOYfVw.s['3']++;if(!(feature instanceof ol.Feature)){__cov_ov56aHyK_$W$Za8FhOYfVw.b['1'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['4']++;return;}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['1'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['5']++;var geometry=feature.getGeometry();__cov_ov56aHyK_$W$Za8FhOYfVw.s['6']++;if(geometry instanceof ol.geom.Point){__cov_ov56aHyK_$W$Za8FhOYfVw.b['2'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['7']++;return me.getRedlinePointStyle();}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['2'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['8']++;if(geometry instanceof ol.geom.LineString){__cov_ov56aHyK_$W$Za8FhOYfVw.b['3'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['9']++;return me.getRedlineLineStringStyle();}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['3'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['10']++;return me.getRedlinePolygonStyle();}}}},initComponent:function(){__cov_ov56aHyK_$W$Za8FhOYfVw.f['2']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['11']++;var me=this;__cov_ov56aHyK_$W$Za8FhOYfVw.s['12']++;var displayInLayerSwitcherKey=BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;__cov_ov56aHyK_$W$Za8FhOYfVw.s['13']++;me.map=BasiGX.util.Map.getMapComponent().getMap();__cov_ov56aHyK_$W$Za8FhOYfVw.s['14']++;if(!me.redliningVectorLayer){__cov_ov56aHyK_$W$Za8FhOYfVw.b['4'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['15']++;me.redlineFeatures=new ol.Collection();__cov_ov56aHyK_$W$Za8FhOYfVw.s['16']++;me.redlineFeatures.on('propertychange',me.fireRedliningChanged,me);__cov_ov56aHyK_$W$Za8FhOYfVw.s['17']++;me.redliningVectorLayer=new ol.layer.Vector({source:new ol.source.Vector({features:me.redlineFeatures}),style:me.getRedlineStyleFunction()});__cov_ov56aHyK_$W$Za8FhOYfVw.s['18']++;me.redliningVectorLayer.set(displayInLayerSwitcherKey,false);__cov_ov56aHyK_$W$Za8FhOYfVw.s['19']++;me.map.addLayer(me.redliningVectorLayer);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['4'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['20']++;me.items=me.getRedlineItems();__cov_ov56aHyK_$W$Za8FhOYfVw.s['21']++;me.callParent(arguments);},listeners:{beforedestroy:function(){__cov_ov56aHyK_$W$Za8FhOYfVw.f['3']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['22']++;if(this.redlineFeatures){__cov_ov56aHyK_$W$Za8FhOYfVw.b['5'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['23']++;this.redlineFeatures.un('propertychange',this.fireRedliningChanged,this);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['5'][1]++;}}},getRedlineItems:function(){__cov_ov56aHyK_$W$Za8FhOYfVw.f['4']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['24']++;var me=this;__cov_ov56aHyK_$W$Za8FhOYfVw.s['25']++;return[{xtype:'button',bind:{text:'{drawPointsBtnText}'},name:'drawPointsBtn',toggleGroup:'draw',listeners:{toggle:function(btn,pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.f['5']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['26']++;if(!me.drawPointInteraction){__cov_ov56aHyK_$W$Za8FhOYfVw.b['6'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['27']++;me.drawPointInteraction=new ol.interaction.Draw({features:me.redlineFeatures,type:'Point'});__cov_ov56aHyK_$W$Za8FhOYfVw.s['28']++;me.map.addInteraction(me.drawPointInteraction);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['6'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['29']++;if(pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.b['7'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['30']++;me.drawPointInteraction.setActive(true);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['7'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['31']++;me.drawPointInteraction.setActive(false);}}}},{xtype:'button',bind:{text:'{drawLinesBtnText}'},name:'drawLinesBtn',toggleGroup:'draw',listeners:{toggle:function(btn,pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.f['6']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['32']++;if(!me.drawLineInteraction){__cov_ov56aHyK_$W$Za8FhOYfVw.b['8'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['33']++;me.drawLineInteraction=new ol.interaction.Draw({features:me.redlineFeatures,type:'LineString'});__cov_ov56aHyK_$W$Za8FhOYfVw.s['34']++;me.map.addInteraction(me.drawLineInteraction);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['8'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['35']++;if(pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.b['9'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['36']++;me.drawLineInteraction.setActive(true);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['9'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['37']++;me.drawLineInteraction.setActive(false);}}}},{xtype:'button',bind:{text:'{drawPolygonsBtnText}'},name:'drawPolygonsBtn',toggleGroup:'draw',listeners:{toggle:function(btn,pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.f['7']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['38']++;if(!me.drawPolygonInteraction){__cov_ov56aHyK_$W$Za8FhOYfVw.b['10'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['39']++;me.drawPolygonInteraction=new ol.interaction.Draw({features:me.redlineFeatures,type:'Polygon'});__cov_ov56aHyK_$W$Za8FhOYfVw.s['40']++;me.map.addInteraction(me.drawPolygonInteraction);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['10'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['41']++;if(pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.b['11'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['42']++;me.drawPolygonInteraction.setActive(true);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['11'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['43']++;me.drawPolygonInteraction.setActive(false);}}}},{xtype:'button',bind:{text:'{drawPostItBtnText}'},name:'postitbutton',toggleGroup:'draw',listeners:{toggle:function(btn,pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.f['8']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['44']++;if(!me.drawPostitInteraction){__cov_ov56aHyK_$W$Za8FhOYfVw.b['12'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['45']++;var src=me.getPostitImgSrc();__cov_ov56aHyK_$W$Za8FhOYfVw.s['46']++;me.drawPostitInteraction=new ol.interaction.Draw({features:me.redlineFeatures,type:'Point',style:new ol.style.Style({image:new ol.style.Icon({anchorXUnits:'fraction',anchorYUnits:'pixels',opacity:0.75,src:src})})});__cov_ov56aHyK_$W$Za8FhOYfVw.s['47']++;me.map.addInteraction(me.drawPostitInteraction);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['12'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['48']++;if(pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.b['13'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['49']++;me.drawPostitInteraction.setActive(true);__cov_ov56aHyK_$W$Za8FhOYfVw.s['50']++;me.redlineFeatures.on('add',me.handlePostitAdd,me);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['13'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['51']++;me.drawPostitInteraction.setActive(false);__cov_ov56aHyK_$W$Za8FhOYfVw.s['52']++;me.redlineFeatures.un('add',me.handlePostitAdd,me);}}}},{xtype:'button',bind:{text:'{copyObjectBtnText}'},name:'copyObjectBtn',toggleGroup:'draw',listeners:{toggle:function(btn,pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.f['9']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['53']++;if(!me.copySelectInteraction){__cov_ov56aHyK_$W$Za8FhOYfVw.b['14'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['54']++;me.copySelectInteraction=new ol.interaction.Select({condition:function(evt){__cov_ov56aHyK_$W$Za8FhOYfVw.f['10']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['55']++;return(__cov_ov56aHyK_$W$Za8FhOYfVw.b['15'][0]++,ol.events.condition.pointerMove(evt))||(__cov_ov56aHyK_$W$Za8FhOYfVw.b['15'][1]++,ol.events.condition.click(evt));},addCondition:function(evt){__cov_ov56aHyK_$W$Za8FhOYfVw.f['11']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['56']++;if(evt.type==='click'){__cov_ov56aHyK_$W$Za8FhOYfVw.b['16'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['57']++;var features=me.copySelectInteraction.getFeatures().getArray();__cov_ov56aHyK_$W$Za8FhOYfVw.s['58']++;if(features[0]){__cov_ov56aHyK_$W$Za8FhOYfVw.b['17'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['59']++;var copyFeature=features[0].clone();__cov_ov56aHyK_$W$Za8FhOYfVw.s['60']++;var doneFn=function(finalFeature){__cov_ov56aHyK_$W$Za8FhOYfVw.f['12']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['61']++;me.redlineFeatures.push(finalFeature);};__cov_ov56aHyK_$W$Za8FhOYfVw.s['62']++;BasiGX.util.Animate.moveFeature(copyFeature,500,100,me.getRedlineStyleFunction(),doneFn);__cov_ov56aHyK_$W$Za8FhOYfVw.s['63']++;me.copySelectInteraction.getFeatures().clear();}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['17'][1]++;}}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['16'][1]++;}}});__cov_ov56aHyK_$W$Za8FhOYfVw.s['64']++;me.map.addInteraction(me.copySelectInteraction);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['14'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['65']++;if(pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.b['18'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['66']++;me.copySelectInteraction.setActive(true);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['18'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['67']++;me.copySelectInteraction.setActive(false);}}}},{xtype:'button',bind:{text:'{moveObjectBtnText}'},name:'moveObjectBtn',toggleGroup:'draw',listeners:{toggle:function(btn,pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.f['13']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['68']++;if(!me.translateInteraction){__cov_ov56aHyK_$W$Za8FhOYfVw.b['19'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['69']++;me.translateSelectInteraction=new ol.interaction.Select({condition:ol.events.condition.pointerMove,addCondition:function(){__cov_ov56aHyK_$W$Za8FhOYfVw.f['14']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['70']++;var selectedFeatures=me.translateSelectInteraction.getFeatures();__cov_ov56aHyK_$W$Za8FhOYfVw.s['71']++;var firstFeature=selectedFeatures.getArray()[0];__cov_ov56aHyK_$W$Za8FhOYfVw.s['72']++;if(firstFeature){__cov_ov56aHyK_$W$Za8FhOYfVw.b['20'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['73']++;var redlineFeature=me.getRedlineFeatureFromClone(firstFeature);__cov_ov56aHyK_$W$Za8FhOYfVw.s['74']++;if(me.translateFeatureCollection.getLength()===0){__cov_ov56aHyK_$W$Za8FhOYfVw.b['21'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['75']++;me.translateFeatureCollection.push(redlineFeature);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['21'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['76']++;if((__cov_ov56aHyK_$W$Za8FhOYfVw.b['23'][0]++,me.translateFeatureCollection.getLength()>0)&&(__cov_ov56aHyK_$W$Za8FhOYfVw.b['23'][1]++,redlineFeature!==me.translateFeatureCollection.getArray()[0])){__cov_ov56aHyK_$W$Za8FhOYfVw.b['22'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['77']++;me.translateFeatureCollection.clear();__cov_ov56aHyK_$W$Za8FhOYfVw.s['78']++;me.translateFeatureCollection.push(redlineFeature);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['22'][1]++;}}}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['20'][1]++;}}});__cov_ov56aHyK_$W$Za8FhOYfVw.s['79']++;me.map.addInteraction(me.translateSelectInteraction);__cov_ov56aHyK_$W$Za8FhOYfVw.s['80']++;me.translateFeatureCollection=new ol.Collection();__cov_ov56aHyK_$W$Za8FhOYfVw.s['81']++;me.translateInteraction=new ol.interaction.Translate({features:me.translateFeatureCollection});__cov_ov56aHyK_$W$Za8FhOYfVw.s['82']++;me.map.addInteraction(me.translateInteraction);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['19'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['83']++;if(pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.b['24'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['84']++;me.translateInteraction.setActive(true);__cov_ov56aHyK_$W$Za8FhOYfVw.s['85']++;me.translateSelectInteraction.setActive(true);__cov_ov56aHyK_$W$Za8FhOYfVw.s['86']++;me.translateInteraction.on('translateend',me.fireRedliningChanged,me);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['24'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['87']++;me.translateInteraction.setActive(false);__cov_ov56aHyK_$W$Za8FhOYfVw.s['88']++;me.translateSelectInteraction.setActive(false);__cov_ov56aHyK_$W$Za8FhOYfVw.s['89']++;me.translateInteraction.un('translateend',me.fireRedliningChanged,me);}}}},{xtype:'button',bind:{text:'{modifyObjectBtnText}'},name:'modifyObjectBtn',toggleGroup:'draw',listeners:{toggle:function(btn,pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.f['15']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['90']++;if(!me.modifyInteraction){__cov_ov56aHyK_$W$Za8FhOYfVw.b['25'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['91']++;me.modifySelectInteraction=new ol.interaction.Select();__cov_ov56aHyK_$W$Za8FhOYfVw.s['92']++;me.modifySelectInteraction.on('select',function(evt){__cov_ov56aHyK_$W$Za8FhOYfVw.f['16']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['93']++;if((__cov_ov56aHyK_$W$Za8FhOYfVw.b['27'][0]++,evt.selected)&&(__cov_ov56aHyK_$W$Za8FhOYfVw.b['27'][1]++,evt.selected[0])){__cov_ov56aHyK_$W$Za8FhOYfVw.b['26'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['94']++;var feature=evt.selected[0];__cov_ov56aHyK_$W$Za8FhOYfVw.s['95']++;if(feature.get('isPostit')){__cov_ov56aHyK_$W$Za8FhOYfVw.b['28'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['96']++;me.modifyPostit(feature);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['28'][1]++;}}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['26'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['97']++;me.modifySelectInteraction.getFeatures().clear();});__cov_ov56aHyK_$W$Za8FhOYfVw.s['98']++;me.map.addInteraction(me.modifySelectInteraction);__cov_ov56aHyK_$W$Za8FhOYfVw.s['99']++;me.modifyInteraction=new ol.interaction.Modify({features:me.redlineFeatures,pixelTolerance:20,deleteCondition:function(event){__cov_ov56aHyK_$W$Za8FhOYfVw.f['17']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['100']++;return ol.events.condition.singleClick(event);}});__cov_ov56aHyK_$W$Za8FhOYfVw.s['101']++;me.map.addInteraction(me.modifyInteraction);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['25'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['102']++;if(pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.b['29'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['103']++;me.modifyInteraction.setActive(true);__cov_ov56aHyK_$W$Za8FhOYfVw.s['104']++;me.modifySelectInteraction.setActive(true);__cov_ov56aHyK_$W$Za8FhOYfVw.s['105']++;me.modifyInteraction.on('modifyend',me.fireRedliningChanged,me);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['29'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['106']++;me.modifyInteraction.setActive(false);__cov_ov56aHyK_$W$Za8FhOYfVw.s['107']++;me.modifySelectInteraction.setActive(false);__cov_ov56aHyK_$W$Za8FhOYfVw.s['108']++;me.modifyInteraction.un('modifyend',me.fireRedliningChanged,me);}}}},{xtype:'button',bind:{text:'{deleteObjectBtnText}'},name:'deleteObjectBtn',toggleGroup:'draw',listeners:{toggle:function(btn,pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.f['18']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['109']++;if(!me.deleteSelectInteraction){__cov_ov56aHyK_$W$Za8FhOYfVw.b['30'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['110']++;var removeFeatures=function(selectedFeatures){__cov_ov56aHyK_$W$Za8FhOYfVw.f['19']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['111']++;selectedFeatures.forEach(function(selectedFeature){__cov_ov56aHyK_$W$Za8FhOYfVw.f['20']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['112']++;var feature=me.getRedlineFeatureFromClone(selectedFeature);__cov_ov56aHyK_$W$Za8FhOYfVw.s['113']++;if(feature){__cov_ov56aHyK_$W$Za8FhOYfVw.b['31'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['114']++;me.redlineFeatures.remove(feature);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['31'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['115']++;me.deleteSelectInteraction.getFeatures().remove(selectedFeature);__cov_ov56aHyK_$W$Za8FhOYfVw.s['116']++;me.map.renderSync();});};__cov_ov56aHyK_$W$Za8FhOYfVw.s['117']++;me.deleteSelectInteraction=new ol.interaction.Select({condition:function(evt){__cov_ov56aHyK_$W$Za8FhOYfVw.f['21']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['118']++;return(__cov_ov56aHyK_$W$Za8FhOYfVw.b['32'][0]++,ol.events.condition.pointerMove(evt))||(__cov_ov56aHyK_$W$Za8FhOYfVw.b['32'][1]++,ol.events.condition.click(evt));},addCondition:function(evt){__cov_ov56aHyK_$W$Za8FhOYfVw.f['22']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['119']++;if(evt.type==='click'){__cov_ov56aHyK_$W$Za8FhOYfVw.b['33'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['120']++;var selectedFeatures=me.deleteSelectInteraction.getFeatures();__cov_ov56aHyK_$W$Za8FhOYfVw.s['121']++;removeFeatures(selectedFeatures,evt);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['33'][1]++;}}});__cov_ov56aHyK_$W$Za8FhOYfVw.s['122']++;me.map.addInteraction(me.deleteSelectInteraction);__cov_ov56aHyK_$W$Za8FhOYfVw.s['123']++;me.deleteSnapInteraction=new ol.interaction.Snap({features:me.redlineFeatures});__cov_ov56aHyK_$W$Za8FhOYfVw.s['124']++;me.map.addInteraction(me.deleteSnapInteraction);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['30'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['125']++;if(pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.b['34'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['126']++;me.deleteSelectInteraction.setActive(true);__cov_ov56aHyK_$W$Za8FhOYfVw.s['127']++;me.deleteSnapInteraction.setActive(true);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['34'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['128']++;me.deleteSelectInteraction.setActive(false);__cov_ov56aHyK_$W$Za8FhOYfVw.s['129']++;me.deleteSnapInteraction.setActive(false);}}}},{xtype:'button',bind:{text:'{openStyleBtnText}'},name:'openStyleBtn',toggleGroup:'draw',listeners:{toggle:function(btn,pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.f['23']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['130']++;if(!me.stylerWindow){__cov_ov56aHyK_$W$Za8FhOYfVw.b['35'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['131']++;me.stylerWindow=Ext.create('Ext.window.Window',{title:me.getViewModel().get('stylerWindowTitle'),width:500,layout:'fit',constrainHeader:true,autoScroll:true,closeAction:'hide',items:Ext.create('BasiGX.view.container.RedlineStyler',{redliningVectorLayer:me.redliningVectorLayer,backendUrls:me.getBackendUrls(),redlinePointStyle:me.getRedlinePointStyle(),redlineLineStringStyle:me.getRedlineLineStringStyle(),redlinePolygonStyle:me.getRedlinePolygonStyle()})});__cov_ov56aHyK_$W$Za8FhOYfVw.s['132']++;me.stylerWindow.on('close',function(){__cov_ov56aHyK_$W$Za8FhOYfVw.f['24']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['133']++;me.fireRedliningChanged();__cov_ov56aHyK_$W$Za8FhOYfVw.s['134']++;btn.toggle();});}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['35'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['135']++;if(pressed){__cov_ov56aHyK_$W$Za8FhOYfVw.b['36'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['136']++;me.stylerWindow.show();}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['36'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['137']++;me.stylerWindow.hide();}}}}];},getPostitImgSrc:function(){__cov_ov56aHyK_$W$Za8FhOYfVw.f['25']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['138']++;if(this.getPostitPictureUrl()!==null){__cov_ov56aHyK_$W$Za8FhOYfVw.b['37'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['139']++;return this.getPostitPictureUrl();}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['37'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['140']++;var classPath=Ext.Loader.getPath('BasiGX.view.container.Redlining');__cov_ov56aHyK_$W$Za8FhOYfVw.s['141']++;var imageBaseSrc;__cov_ov56aHyK_$W$Za8FhOYfVw.s['142']++;if(classPath){__cov_ov56aHyK_$W$Za8FhOYfVw.b['38'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['143']++;imageBaseSrc=classPath.split('src/view/container/Redlining.js')[0];}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['38'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['144']++;return imageBaseSrc+'resources/img/postit.png';}},handlePostitAdd:function(evt){__cov_ov56aHyK_$W$Za8FhOYfVw.f['26']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['145']++;var me=this;__cov_ov56aHyK_$W$Za8FhOYfVw.s['146']++;var feat=evt.element;__cov_ov56aHyK_$W$Za8FhOYfVw.s['147']++;feat.set('isPostit',true);__cov_ov56aHyK_$W$Za8FhOYfVw.s['148']++;BasiGX.prompt(me.getViewModel().get('postItWindowTitle'),{fn:function(decision,text){__cov_ov56aHyK_$W$Za8FhOYfVw.f['27']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['149']++;if(decision==='cancel'){__cov_ov56aHyK_$W$Za8FhOYfVw.b['39'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['150']++;me.redlineFeatures.remove(feat);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['39'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['151']++;text=me.stringDivider(text,16,'\n');__cov_ov56aHyK_$W$Za8FhOYfVw.s['152']++;me.setPostitStyleAndTextOnFeature(text,feat);}},multiline:150});__cov_ov56aHyK_$W$Za8FhOYfVw.s['153']++;var button=Ext.ComponentQuery.query('button[name=postitbutton]')[0];__cov_ov56aHyK_$W$Za8FhOYfVw.s['154']++;button.toggle();},modifyPostit:function(feature){__cov_ov56aHyK_$W$Za8FhOYfVw.f['28']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['155']++;var me=this;__cov_ov56aHyK_$W$Za8FhOYfVw.s['156']++;BasiGX.prompt(me.getViewModel().get('postItWindowTitle'),{fn:function(decision,text){__cov_ov56aHyK_$W$Za8FhOYfVw.f['29']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['157']++;if(decision==='ok'){__cov_ov56aHyK_$W$Za8FhOYfVw.b['40'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['158']++;text=me.stringDivider(text,16,'\n');__cov_ov56aHyK_$W$Za8FhOYfVw.s['159']++;me.setPostitStyleAndTextOnFeature(text,feature);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['40'][1]++;}},multiline:150});},setPostitStyleAndTextOnFeature:function(text,feat){__cov_ov56aHyK_$W$Za8FhOYfVw.f['30']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['160']++;var me=this;__cov_ov56aHyK_$W$Za8FhOYfVw.s['161']++;feat.setStyle(new ol.style.Style({image:new ol.style.Icon({anchorXUnits:'fraction',anchorYUnits:'pixels',opacity:0.75,src:me.getPostitImgSrc()}),text:new ol.style.Text({text:text,scale:1.5,offsetY:80})}));},getRedlineFeatureFromClone:function(clone){__cov_ov56aHyK_$W$Za8FhOYfVw.f['31']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['162']++;var redlineFeature;__cov_ov56aHyK_$W$Za8FhOYfVw.s['163']++;var wktParser=new ol.format.WKT();__cov_ov56aHyK_$W$Za8FhOYfVw.s['164']++;var cloneWktString=wktParser.writeFeature(clone);__cov_ov56aHyK_$W$Za8FhOYfVw.s['165']++;Ext.each(this.redlineFeatures.getArray(),function(feature){__cov_ov56aHyK_$W$Za8FhOYfVw.f['32']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['166']++;var redlineFeatureWktString=wktParser.writeFeature(feature);__cov_ov56aHyK_$W$Za8FhOYfVw.s['167']++;if(cloneWktString===redlineFeatureWktString){__cov_ov56aHyK_$W$Za8FhOYfVw.b['41'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['168']++;redlineFeature=feature;__cov_ov56aHyK_$W$Za8FhOYfVw.s['169']++;return false;}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['41'][1]++;}});__cov_ov56aHyK_$W$Za8FhOYfVw.s['170']++;return redlineFeature;},stringDivider:function(str,width,spaceReplacer){__cov_ov56aHyK_$W$Za8FhOYfVw.f['33']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['171']++;var me=this;__cov_ov56aHyK_$W$Za8FhOYfVw.s['172']++;var startIndex=0;__cov_ov56aHyK_$W$Za8FhOYfVw.s['173']++;var stopIndex=width;__cov_ov56aHyK_$W$Za8FhOYfVw.s['174']++;if(str.length>width){__cov_ov56aHyK_$W$Za8FhOYfVw.b['42'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['175']++;var p=width;__cov_ov56aHyK_$W$Za8FhOYfVw.s['176']++;var left;__cov_ov56aHyK_$W$Za8FhOYfVw.s['177']++;var right;__cov_ov56aHyK_$W$Za8FhOYfVw.s['178']++;while((__cov_ov56aHyK_$W$Za8FhOYfVw.b['43'][0]++,p>0)&&((__cov_ov56aHyK_$W$Za8FhOYfVw.b['43'][1]++,str[p]!==' ')&&(__cov_ov56aHyK_$W$Za8FhOYfVw.b['43'][2]++,str[p]!=='-'))){__cov_ov56aHyK_$W$Za8FhOYfVw.s['179']++;p--;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['180']++;if(p>0){__cov_ov56aHyK_$W$Za8FhOYfVw.b['44'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['181']++;if(str.substring(p,p+1)==='-'){__cov_ov56aHyK_$W$Za8FhOYfVw.b['45'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['182']++;left=str.substring(0,p+1);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['45'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['183']++;left=str.substring(0,p);}__cov_ov56aHyK_$W$Za8FhOYfVw.s['184']++;right=str.substring(p+1);__cov_ov56aHyK_$W$Za8FhOYfVw.s['185']++;return left+spaceReplacer+me.stringDivider(right,width,spaceReplacer);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['44'][1]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['186']++;left=str.substring(startIndex,stopIndex+1)+'-';__cov_ov56aHyK_$W$Za8FhOYfVw.s['187']++;right=str.substring(stopIndex+1);__cov_ov56aHyK_$W$Za8FhOYfVw.s['188']++;startIndex=stopIndex;__cov_ov56aHyK_$W$Za8FhOYfVw.s['189']++;stopIndex+=width;__cov_ov56aHyK_$W$Za8FhOYfVw.s['190']++;return left+spaceReplacer+me.stringDivider(right,width,spaceReplacer);}}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['42'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['191']++;return str;},getState:function(){__cov_ov56aHyK_$W$Za8FhOYfVw.f['34']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['192']++;var me=this;__cov_ov56aHyK_$W$Za8FhOYfVw.s['193']++;var features=[];__cov_ov56aHyK_$W$Za8FhOYfVw.s['194']++;me.redlineFeatures.forEach(function(feature){__cov_ov56aHyK_$W$Za8FhOYfVw.f['35']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['195']++;features.push(feature.clone());});__cov_ov56aHyK_$W$Za8FhOYfVw.s['196']++;var state={features:features,pointStyle:me.getRedlinePointStyle(),lineStyle:me.getRedlineLineStringStyle(),polygonStyle:me.getRedlinePolygonStyle(),styleFunction:me.getRedlineStyleFunction()};__cov_ov56aHyK_$W$Za8FhOYfVw.s['197']++;return state;},setState:function(state){__cov_ov56aHyK_$W$Za8FhOYfVw.f['36']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['198']++;var me=this;__cov_ov56aHyK_$W$Za8FhOYfVw.s['199']++;me.stateChangeActive=true;__cov_ov56aHyK_$W$Za8FhOYfVw.s['200']++;var styler=Ext.ComponentQuery.query('basigx-container-redlinestyler')[0];__cov_ov56aHyK_$W$Za8FhOYfVw.s['201']++;if(state.features){__cov_ov56aHyK_$W$Za8FhOYfVw.b['46'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['202']++;me.redliningVectorLayer.getSource().clear();__cov_ov56aHyK_$W$Za8FhOYfVw.s['203']++;me.redliningVectorLayer.getSource().addFeatures(state.features);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['46'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['204']++;if(state.pointStyle){__cov_ov56aHyK_$W$Za8FhOYfVw.b['47'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['205']++;me.setRedlinePointStyle(state.pointStyle);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['47'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['206']++;if(state.lineStyle){__cov_ov56aHyK_$W$Za8FhOYfVw.b['48'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['207']++;me.setRedlineLineStringStyle(state.lineStyle);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['48'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['208']++;if(state.polygonStyle){__cov_ov56aHyK_$W$Za8FhOYfVw.b['49'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['209']++;me.setRedlinePolygonStyle(state.polygonStyle);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['49'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['210']++;if(styler){__cov_ov56aHyK_$W$Za8FhOYfVw.b['50'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['211']++;styler.setState(state);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['50'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['212']++;if(state.styleFunction){__cov_ov56aHyK_$W$Za8FhOYfVw.b['51'][0]++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['213']++;me.setRedlineStyleFunction(state.styleFunction);}else{__cov_ov56aHyK_$W$Za8FhOYfVw.b['51'][1]++;}__cov_ov56aHyK_$W$Za8FhOYfVw.s['214']++;me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());__cov_ov56aHyK_$W$Za8FhOYfVw.s['215']++;me.stateChangeActive=false;},fireRedliningChanged:function(){__cov_ov56aHyK_$W$Za8FhOYfVw.f['37']++;__cov_ov56aHyK_$W$Za8FhOYfVw.s['216']++;this.fireEvent('redliningchanged',this,this.getState(),this.stateChangeActive);}});
+    requires: [
+        'BasiGX.view.container.RedlineStyler'
+    ],
+
+    layout: 'hbox',
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            drawPointsBtnText: 'Draw Points',
+            drawLinesBtnText: 'Draw Lines',
+            drawPolygonsBtnText: 'Draw Polygons',
+            drawPostItBtnText: 'Draw Post-it',
+            copyObjectBtnText: 'Copy Object',
+            moveObjectBtnText: 'Move Object',
+            modifyObjectBtnText: 'Modify Object',
+            deleteObjectBtnText: 'Delete Object',
+            openStyleBtnText: 'Styler',
+            stylerWindowTitle: 'Styler',
+            postItWindowTitle: 'Enter the Post-its text',
+            postItWindowCreatePostItBtnText: 'Create Post-it',
+            postItInputTooLongText: 'The text you have entered is too long. ' +
+                'Do you want to continue anyway?'
+        }
+    },
+
+    /**
+     *
+     */
+    drawPointInteraction : null,
+
+    /**
+     *
+     */
+    drawLineInteraction : null,
+
+    /**
+     *
+     */
+    drawPolygonInteraction : null,
+
+    /**
+     *
+     */
+    drawPostitInteraction : null,
+
+    /**
+     *
+     */
+    copySelectInteraction : null,
+
+    /**
+     *
+     */
+    translateInteraction : null,
+
+    /**
+     *
+     */
+    translateSelectInteraction : null,
+
+    /**
+     *
+     */
+    modifyInteraction : null,
+
+    /**
+     *
+     */
+    modifySelectInteraction: null,
+
+    /**
+     *
+     */
+    selectInteraction : null,
+
+    /**
+     *
+     */
+    deleteSelectInteraction : null,
+
+    /**
+     *
+     */
+    deleteSnapInteraction : null,
+
+    /**
+     *
+     */
+    redliningVectorLayer : null,
+
+    /**
+     *
+     */
+    redlineFeatures : null,
+
+    /**
+     *
+     */
+    redliningToolsWin : null,
+
+    /**
+     *
+     */
+    map: null,
+
+    /**
+     * Temporary member that will be set to true while setState is runnning.
+     */
+    stateChangeActive: false,
+
+   /**
+    *
+    */
+   config: {
+       /**
+        * The url objects for images.
+        * Can contain url and method property
+        */
+       backendUrls: {
+           pictureList: null,
+           pictureSrc: null,
+           pictureUpload: null,
+           graphicDelete: null
+       },
+
+       /**
+        * The URL to a picture used for the postits.
+        * It is highly recommended that you set your own image source here
+        */
+       postitPictureUrl: null,
+
+       /**
+        * The maximum length of text allowed for the postit
+        */
+       postitTextMaxLength: 130,
+
+      /**
+       *
+       */
+      redlinePointStyle: new ol.style.Style({
+          image: new ol.style.Circle({
+              radius: 7,
+              fill: new ol.style.Fill({
+                  color: 'green'
+              }),
+              stroke: new ol.style.Stroke({
+                  color: '#ffcc33',
+                  width: 2
+              })
+          })
+      }),
+
+      /**
+       *
+       */
+      redlineLineStringStyle: new ol.style.Style({
+          stroke: new ol.style.Stroke({
+              color: '#ffcc33',
+              width: 2
+          })
+      }),
+
+      /**
+       *
+       */
+      redlinePolygonStyle: new ol.style.Style({
+          stroke: new ol.style.Stroke({
+              color: '#ffcc33',
+              width: 2
+          }),
+          fill: new ol.style.Fill({
+              color: 'green'
+          })
+      }),
+
+      /**
+       *
+       */
+      redlineStyleFunction: function(feature) {
+          var me = Ext.ComponentQuery.query('basigx-container-redlining')[0];
+
+          if (!(feature instanceof ol.Feature)) {
+              return;
+          }
+
+          var geometry = feature.getGeometry();
+          if (geometry instanceof ol.geom.Point) {
+              return me.getRedlinePointStyle();
+          } else if (geometry instanceof ol.geom.LineString) {
+              return me.getRedlineLineStringStyle();
+          } else {
+              return me.getRedlinePolygonStyle();
+          }
+      }
+   },
+
+   /**
+    * @event redliningchanged
+    * An event that fires everytime a feature is added, deleted, moved or
+    * modified.
+    * @param {BasiGX.view.container.Redlining} container
+    *     The Redlining container.
+    * @param {Object} state The current redlining state.
+    * @param {Boolean} stateChangeActive While setState is runnning this will be
+    *     true otherwise false.
+    */
+
+   /**
+    *
+    */
+   initComponent: function() {
+       var me = this;
+       var displayInLayerSwitcherKey = BasiGX.util.Layer.
+           KEY_DISPLAY_IN_LAYERSWITCHER;
+
+       //set map
+       me.map = BasiGX.util.Map.getMapComponent().getMap();
+
+       if (!me.redliningVectorLayer) {
+           me.redlineFeatures = new ol.Collection();
+           me.redlineFeatures.on('propertychange', me.fireRedliningChanged, me);
+           me.redliningVectorLayer = new ol.layer.Vector({
+               source: new ol.source.Vector({features: me.redlineFeatures}),
+               style: me.getRedlineStyleFunction()
+           });
+           me.redliningVectorLayer.set(displayInLayerSwitcherKey, false);
+           me.map.addLayer(me.redliningVectorLayer);
+       }
+
+       me.items = me.getRedlineItems();
+       me.callParent(arguments);
+   },
+
+    listeners: {
+        beforedestroy: function(){
+            if(this.redlineFeatures){
+                this.redlineFeatures.un('propertychange',
+                    this.fireRedliningChanged, this);
+            }
+        }
+    },
+
+   /**
+    *
+    */
+   getRedlineItems: function() {
+       var me = this;
+
+       return [
+           {
+               xtype: 'button',
+               bind: {
+                   text: '{drawPointsBtnText}'
+               },
+               name: 'drawPointsBtn',
+               toggleGroup: 'draw',
+               listeners: {
+                   toggle: function(btn, pressed) {
+                       if (!me.drawPointInteraction) {
+                           me.drawPointInteraction = new ol.interaction.Draw({
+                               features: me.redlineFeatures,
+                               type: 'Point'
+                           });
+                           me.map.addInteraction(me.drawPointInteraction);
+                       }
+                       if (pressed) {
+                           me.drawPointInteraction.setActive(true);
+                       } else {
+                           me.drawPointInteraction.setActive(false);
+                       }
+                   }
+               }
+           }, {
+               xtype: 'button',
+               bind: {
+                   text: '{drawLinesBtnText}'
+               },
+               name: 'drawLinesBtn',
+               toggleGroup: 'draw',
+               listeners: {
+                   toggle: function(btn, pressed) {
+                       if (!me.drawLineInteraction) {
+                           me.drawLineInteraction = new ol.interaction.Draw({
+                               features: me.redlineFeatures,
+                               type: 'LineString'
+                           });
+                           me.map.addInteraction(me.drawLineInteraction);
+                       }
+                       if (pressed) {
+                           me.drawLineInteraction.setActive(true);
+                       } else {
+                           me.drawLineInteraction.setActive(false);
+                       }
+                   }
+               }
+           }, {
+               xtype: 'button',
+               bind: {
+                   text: '{drawPolygonsBtnText}'
+               },
+               name: 'drawPolygonsBtn',
+               toggleGroup: 'draw',
+               listeners: {
+                   toggle: function(btn, pressed) {
+                       if (!me.drawPolygonInteraction) {
+                           me.drawPolygonInteraction = new ol.interaction.Draw({
+                               features: me.redlineFeatures,
+                               type: 'Polygon'
+                           });
+                           me.map.addInteraction(me.drawPolygonInteraction);
+                       }
+                       if (pressed) {
+                           me.drawPolygonInteraction.setActive(true);
+                       } else {
+                           me.drawPolygonInteraction.setActive(false);
+                       }
+                   }
+               }
+           }, {
+               xtype: 'button',
+               bind: {
+                   text: '{drawPostItBtnText}'
+               },
+               name: 'postitbutton',
+               toggleGroup: 'draw',
+               listeners: {
+                   toggle: function(btn, pressed) {
+                       if (!me.drawPostitInteraction) {
+                           var src = me.getPostitImgSrc();
+
+                           me.drawPostitInteraction = new ol.interaction.Draw({
+                               features: new ol.Collection(),
+                               type: 'Point',
+                               style: new ol.style.Style({
+                                   image: new ol.style.Icon({
+                                       anchorXUnits: 'fraction',
+                                       anchorYUnits: 'pixels',
+                                       opacity: 0.75,
+                                       src: src
+                                   })
+                               })
+                           });
+                           me.map.addInteraction(me.drawPostitInteraction);
+                       }
+                       if (pressed) {
+                           me.drawPostitInteraction.setActive(true);
+                           me.drawPostitInteraction.on('drawend',
+                               me.setDefaultPostitStyle, me);
+                       } else {
+                           me.drawPostitInteraction.setActive(false);
+                           me.drawPostitInteraction.un('drawend',
+                               me.setDefaultPostitStyle, me);
+                       }
+                   }
+               }
+           }, {
+               xtype: 'button',
+               bind: {
+                   text: '{copyObjectBtnText}'
+               },
+               name: 'copyObjectBtn',
+               toggleGroup: 'draw',
+               listeners: {
+                   toggle: function(btn, pressed) {
+                       if (!me.copySelectInteraction) {
+                           me.copySelectInteraction =
+                               new ol.interaction.Select({
+                                   condition: function(evt) {
+                                       return ol.events.condition.pointerMove(
+                                           evt) || ol.events.condition.
+                                           click(evt);
+                                   },
+                                   addCondition: function(evt) {
+                                       if (evt.type === "click") {
+                                           var features = me.
+                                               copySelectInteraction.
+                                               getFeatures().getArray();
+
+                                           if (features[0]) {
+                                               var copyFeature = features[0].
+                                                   clone();
+                                               var doneFn = function(
+                                                   finalFeature) {
+                                                   me.redlineFeatures.push(
+                                                           finalFeature);
+                                               };
+                                               BasiGX.util.Animate.moveFeature(
+                                                   copyFeature, 500,
+                                                   100,
+                                                   me.getRedlineStyleFunction(),
+                                                   doneFn);
+
+                                               me.copySelectInteraction.
+                                                   getFeatures().clear();
+                                           }
+                                       }
+                                   }
+                               });
+                           me.map.addInteraction(me.copySelectInteraction);
+                       }
+                       if (pressed) {
+                           me.copySelectInteraction.setActive(true);
+                       } else {
+                           me.copySelectInteraction.setActive(false);
+                       }
+                   }
+               }
+           }, {
+               xtype: 'button',
+               bind: {
+                   text: '{moveObjectBtnText}'
+               },
+               name: 'moveObjectBtn',
+               toggleGroup: 'draw',
+               listeners: {
+                   toggle: function(btn, pressed) {
+                       if (!me.translateInteraction) {
+                           me.translateSelectInteraction =
+                               new ol.interaction.Select({
+                                   condition: ol.events.condition.pointerMove,
+                                   addCondition: function() {
+                                       var selectedFeatures =
+                                           me.translateSelectInteraction.
+                                           getFeatures();
+                                       var firstFeature = selectedFeatures.
+                                           getArray()[0];
+
+                                       if (firstFeature) {
+                                           var redlineFeature = me.
+                                               getRedlineFeatureFromClone(
+                                                       firstFeature);
+
+                                           if (me.translateFeatureCollection.
+                                                   getLength() === 0) {
+                                               me.translateFeatureCollection.
+                                                   push(redlineFeature);
+                                           } else if (me.
+                                               translateFeatureCollection.
+                                               getLength() > 0 &&
+                                               redlineFeature !== me.
+                                               translateFeatureCollection.
+                                               getArray()[0]){
+                                                   me.
+                                                   translateFeatureCollection.
+                                                   clear();
+                                                   me.
+                                                   translateFeatureCollection.
+                                                   push(redlineFeature);
+                                           }
+                                       }
+                                   }
+                               });
+                           me.map.addInteraction(me.translateSelectInteraction);
+                           me.translateFeatureCollection = new ol.Collection();
+                           me.translateInteraction =
+                               new ol.interaction.Translate({
+                                   features: me.translateFeatureCollection
+                           });
+                           me.map.addInteraction(me.translateInteraction);
+                       }
+                       if (pressed) {
+                           me.translateInteraction.setActive(true);
+                           me.translateSelectInteraction.setActive(true);
+                           me.translateInteraction.on('translateend',
+                                   me.fireRedliningChanged, me);
+                       } else {
+                           me.translateInteraction.setActive(false);
+                           me.translateSelectInteraction.setActive(false);
+                           me.translateInteraction.un('translateend',
+                                   me.fireRedliningChanged, me);
+                       }
+                   }
+               }
+           }, {
+               xtype: 'button',
+               bind: {
+                   text: '{modifyObjectBtnText}'
+               },
+               name: 'modifyObjectBtn',
+               toggleGroup: 'draw',
+               listeners: {
+                   toggle: function(btn, pressed) {
+                       if (!me.modifyInteraction) {
+                           me.modifySelectInteraction =
+                               new ol.interaction.Select();
+                           me.modifySelectInteraction.on('select', function(evt) {
+                               if (evt.selected && evt.selected[0]) {
+                                   var feature = evt.selected[0];
+                                   if (feature.get('isPostit')) {
+                                       me.modifyPostit(feature);
+                                   }
+                               }
+                               me.modifySelectInteraction.getFeatures().clear();
+                           });
+                           me.map.addInteraction(me.modifySelectInteraction);
+                           me.modifyInteraction = new ol.interaction.Modify({
+                               features: me.redlineFeatures,
+                               pixelTolerance: 20,
+                               deleteCondition: function(event) {
+                                   return ol.events.condition
+                                       .singleClick(event);
+                               }
+                           });
+                           me.map.addInteraction(me.modifyInteraction);
+                       }
+                       if (pressed) {
+                           me.modifyInteraction.setActive(true);
+                           me.modifySelectInteraction.setActive(true);
+                           me.modifyInteraction.on('modifyend',
+                                   me.fireRedliningChanged, me);
+                       } else {
+                           me.modifyInteraction.setActive(false);
+                           me.modifySelectInteraction.setActive(false);
+                           me.modifyInteraction.un('modifyend',
+                                   me.fireRedliningChanged, me);
+                       }
+                   }
+               }
+           }, {
+               xtype: 'button',
+               bind: {
+                   text: '{deleteObjectBtnText}'
+               },
+               name: 'deleteObjectBtn',
+               toggleGroup: 'draw',
+               listeners: {
+                   toggle: function(btn, pressed) {
+                       if (!me.deleteSelectInteraction) {
+                           var removeFeatures = function(selectedFeatures) {
+                               // find the matching feature in redlining layer
+                               selectedFeatures.forEach(
+                                       function(selectedFeature) {
+                                   var feature = me.getRedlineFeatureFromClone(
+                                       selectedFeature);
+                                   if (feature) {
+                                       me.redlineFeatures.remove(feature);
+                                   }
+                                   me.deleteSelectInteraction.getFeatures().
+                                       remove(selectedFeature);
+                                   me.map.renderSync();
+                               });
+                           };
+                           me.deleteSelectInteraction =
+                               new ol.interaction.Select({
+                                   condition: function(evt) {
+                                       return ol.events.condition.
+                                                pointerMove(evt) ||
+                                            ol.events.condition.
+                                                click(evt);
+                                   },
+                                   addCondition: function(evt) {
+                                       if (evt.type === "click") {
+                                           var selectedFeatures =
+                                               me.deleteSelectInteraction.
+                                               getFeatures();
+                                           removeFeatures(selectedFeatures,evt);
+                                       }
+                                   }
+                               });
+                           me.map.addInteraction(me.deleteSelectInteraction);
+
+                           me.deleteSnapInteraction = new ol.interaction.Snap({
+                               features: me.redlineFeatures
+                           });
+                           me.map.addInteraction(me.deleteSnapInteraction);
+                       }
+                       if (pressed) {
+                           me.deleteSelectInteraction.setActive(true);
+                           me.deleteSnapInteraction.setActive(true);
+                       } else {
+                           me.deleteSelectInteraction.setActive(false);
+                           me.deleteSnapInteraction.setActive(false);
+                       }
+                   }
+               }
+           }, {
+               xtype: 'button',
+               bind: {
+                   text: '{openStyleBtnText}'
+               },
+               name: 'openStyleBtn',
+               toggleGroup: 'draw',
+               listeners: {
+                   toggle: function(btn, pressed) {
+                       if (!me.stylerWindow) {
+                           me.stylerWindow = Ext.create('Ext.window.Window', {
+                               title: me.getViewModel().get('stylerWindowTitle'),
+                               width: 500,
+                               layout: 'fit',
+                               constrainHeader: true,
+                               autoScroll: true,
+                               closeAction: 'hide',
+                               items: Ext.create(
+                                   'BasiGX.view.container.RedlineStyler', {
+                                   redliningVectorLayer: me.redliningVectorLayer,
+                                   backendUrls: me.getBackendUrls(),
+                                   redlinePointStyle: me.getRedlinePointStyle(),
+                                   redlineLineStringStyle:
+                                       me.getRedlineLineStringStyle(),
+                                   redlinePolygonStyle:
+                                       me.getRedlinePolygonStyle()
+                               })
+                           });
+                           me.stylerWindow.on("close", function() {
+                               me.fireRedliningChanged();
+                               btn.toggle();
+                           });
+                       }
+                       if (pressed) {
+                           me.stylerWindow.show();
+                       } else {
+                           me.stylerWindow.hide();
+                       }
+                   }
+               }
+           }
+       ];
+   },
+
+   /**
+    *
+    */
+   getPostitImgSrc: function() {
+       if (this.getPostitPictureUrl() !== null) {
+           return this.getPostitPictureUrl();
+       } else {
+           var classPath = Ext.Loader.getPath(
+               'BasiGX.view.container.Redlining');
+           var imageBaseSrc;
+           if (classPath) {
+               imageBaseSrc = classPath.split(
+                   'src/view/container/Redlining.js')[0];
+           }
+           return imageBaseSrc + 'resources/img/postit.png';
+       }
+   },
+
+   /**
+    *
+    */
+   setDefaultPostitStyle: function(evt) {
+       var me = this;
+       var feature = evt.feature;
+       if (feature) {
+           feature.setStyle(new ol.style.Style({
+               image: new ol.style.Icon({
+                   anchorXUnits: 'fraction',
+                   anchorYUnits: 'pixels',
+                   opacity: 0.75,
+                   src: me.getPostitImgSrc()
+               })
+           }));
+           var clone = evt.feature.clone();
+           me.handlePostitAdd(clone);
+       }
+   },
+
+   /**
+    *
+    */
+   handlePostitAdd: function(feat, oldText) {
+       var me = this;
+
+       feat.set('isPostit', true);
+
+       BasiGX.prompt(me.getViewModel().get('postItWindowTitle'), {
+           fn: function(decision, text) {
+               if (decision === "cancel") {
+                   me.redlineFeatures.remove(feat);
+               } else {
+                   if (text.length > me.postitTextMaxLength) {
+                       BasiGX.confirm(me.getViewModel().get(
+                           'postItInputTooLongText'), {
+                           fn: function(choice) {
+                               if (choice === "yes") {
+                                   text = me.stringDivider(text, 16, '\n');
+                                   me.setPostitStyleAndTextOnFeature(
+                                       text, feat);
+                               } else {
+                                   me.handlePostitAdd(feat, text);
+                               }
+                           }
+                       });
+                   } else {
+                       text = me.stringDivider(text, 16, '\n');
+                       me.setPostitStyleAndTextOnFeature(text, feat);
+                   }
+               }
+           },
+           multiline: 150,
+           value: oldText
+       });
+
+       var button = Ext.ComponentQuery.query('button[name=postitbutton]')[0];
+       button.toggle(false);
+   },
+
+   /**
+    * Modify a postits text
+    */
+   modifyPostit: function(feature, oldText) {
+       var me = this;
+       BasiGX.prompt(me.getViewModel().get('postItWindowTitle'), {
+           fn: function(decision, text) {
+               if (decision === "ok") {
+                   if (text.length > me.postitTextMaxLength) {
+                       BasiGX.confirm(me.getViewModel().get(
+                           'postItInputTooLongText'), {
+                           fn: function(choice) {
+                               if (choice === "yes") {
+                                   text = me.stringDivider(text, 16, '\n');
+                                   me.setPostitStyleAndTextOnFeature(
+                                       text, feature);
+                               } else {
+                                   me.modifyPostit(feature, text);
+                               }
+                           }
+                       });
+                   } else {
+                       text = me.stringDivider(text, 16, '\n');
+                       me.setPostitStyleAndTextOnFeature(text, feature);
+                   }
+               }
+           },
+           multiline: 150,
+           value: oldText
+       });
+   },
+
+   /**
+    * sets a postit style and text on a feature
+    */
+   setPostitStyleAndTextOnFeature: function(text, feat) {
+       var me = this;
+       feat.setStyle(new ol.style.Style({
+           image: new ol.style.Icon({
+               anchorXUnits: 'fraction',
+               anchorYUnits: 'pixels',
+               opacity: 0.75,
+               src: me.getPostitImgSrc()
+           }),
+           text: new ol.style.Text({
+             text: text,
+             scale: 1.5,
+             offsetY: 80
+           })
+       }));
+       me.redlineFeatures.push(feat);
+   },
+
+   /**
+    *
+    */
+    getRedlineFeatureFromClone: function(clone) {
+
+        var redlineFeature;
+        var wktParser = new ol.format.WKT();
+        var cloneWktString = wktParser.writeFeature(clone);
+        Ext.each(this.redlineFeatures.getArray(), function(feature) {
+            var redlineFeatureWktString = wktParser.writeFeature(feature);
+            if (cloneWktString === redlineFeatureWktString) {
+                redlineFeature = feature;
+                return false;
+            }
+        });
+        return redlineFeature;
+    },
+
+   // http://stackoverflow.com/questions/14484787/wrap-text-in-javascript
+   stringDivider: function(str, width, spaceReplacer) {
+       var me = this;
+       var startIndex = 0;
+       var stopIndex = width;
+       if (str.length > width) {
+           var p = width;
+           var left;
+           var right;
+           while (p > 0 && (str[p] !== ' ' && str[p] !== '-')) {
+               p--;
+           }
+           if (p > 0) {
+                 if (str.substring(p, p + 1) === '-') {
+                     left = str.substring(0, p + 1);
+                 } else {
+                     left = str.substring(0, p);
+                 }
+                 right = str.substring(p + 1);
+                 return left + spaceReplacer + me.stringDivider(
+                     right, width, spaceReplacer);
+           } else {
+               // no whitespace or - found, splitting hard on the width length
+               left = str.substring(startIndex, stopIndex + 1) + '-';
+               right = str.substring(stopIndex + 1);
+               startIndex = stopIndex;
+               stopIndex += width;
+               return left + spaceReplacer + me.stringDivider(
+                   right, width, spaceReplacer);
+           }
+       }
+       return str;
+    },
+
+    /**
+     * Method return the current state of the redlining, containing all features
+     * and the configured styles
+     */
+    getState: function() {
+        var me = this;
+        var features = [];
+        me.redlineFeatures.forEach(function(feature) {
+            features.push(feature.clone());
+        });
+
+        var state = {
+            features: features,
+            pointStyle: me.getRedlinePointStyle(),
+            lineStyle: me.getRedlineLineStringStyle(),
+            polygonStyle: me.getRedlinePolygonStyle(),
+            styleFunction: me.getRedlineStyleFunction()
+        };
+
+        return state;
+    },
+
+    /**
+     * Method sets the state of the redlining, containing drawn features
+     * and the configured styles
+     */
+    setState: function(state) {
+        var me = this;
+
+        me.stateChangeActive = true;
+
+        var styler = Ext.ComponentQuery.query(
+            'basigx-container-redlinestyler')[0];
+
+        if (state.features) {
+            me.redliningVectorLayer.getSource().clear();
+            me.redliningVectorLayer.getSource().addFeatures(state.features);
+        }
+
+        if (state.pointStyle) {
+            me.setRedlinePointStyle(state.pointStyle);
+        }
+
+        if (state.lineStyle) {
+            me.setRedlineLineStringStyle(state.lineStyle);
+        }
+
+        if (state.polygonStyle) {
+            me.setRedlinePolygonStyle(state.polygonStyle);
+        }
+
+        if (styler) {
+            styler.setState(state);
+        }
+
+        if (state.styleFunction) {
+            me.setRedlineStyleFunction(state.styleFunction);
+        }
+
+        // reapply the styleFn on the layer so that ol3 starts redrawing
+        // with new styles
+        me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
+
+        me.stateChangeActive = false;
+    },
+
+    fireRedliningChanged: function(){
+        this.fireEvent('redliningchanged', this, this.getState(),
+                this.stateChangeActive);
+    }
+});

@@ -1,9 +1,198 @@
+/*global Ext, window, document*/
 
-var __cov_QPU4QDhjHjGYy_G_F796aQ = (Function('return this'))();
-if (!__cov_QPU4QDhjHjGYy_G_F796aQ.__coverage__) { __cov_QPU4QDhjHjGYy_G_F796aQ.__coverage__ = {}; }
-__cov_QPU4QDhjHjGYy_G_F796aQ = __cov_QPU4QDhjHjGYy_G_F796aQ.__coverage__;
-if (!(__cov_QPU4QDhjHjGYy_G_F796aQ['/home/travis/build/terrestris/BasiGX/src/ux/ContextSensitiveHelp.js'])) {
-   __cov_QPU4QDhjHjGYy_G_F796aQ['/home/travis/build/terrestris/BasiGX/src/ux/ContextSensitiveHelp.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/ux/ContextSensitiveHelp.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0},"fnMap":{"1":{"name":"(anonymous_1)","line":86,"loc":{"start":{"line":86,"column":22},"end":{"line":86,"column":34}}},"2":{"name":"(anonymous_2)","line":102,"loc":{"start":{"line":102,"column":31},"end":{"line":102,"column":47}}},"3":{"name":"(anonymous_3)","line":111,"loc":{"start":{"line":111,"column":30},"end":{"line":111,"column":50}}},"4":{"name":"(anonymous_4)","line":136,"loc":{"start":{"line":136,"column":35},"end":{"line":136,"column":51}}},"5":{"name":"(anonymous_5)","line":166,"loc":{"start":{"line":166,"column":20},"end":{"line":166,"column":49}}},"6":{"name":"(anonymous_6)","line":186,"loc":{"start":{"line":186,"column":30},"end":{"line":186,"column":51}}}},"statementMap":{"1":{"start":{"line":39,"column":0},"end":{"line":198,"column":3}},"2":{"start":{"line":87,"column":12},"end":{"line":87,"column":40}},"3":{"start":{"line":88,"column":12},"end":{"line":92,"column":13}},"4":{"start":{"line":89,"column":16},"end":{"line":89,"column":56}},"5":{"start":{"line":91,"column":14},"end":{"line":91,"column":25}},"6":{"start":{"line":103,"column":12},"end":{"line":103,"column":65}},"7":{"start":{"line":104,"column":12},"end":{"line":104,"column":44}},"8":{"start":{"line":105,"column":12},"end":{"line":105,"column":23}},"9":{"start":{"line":112,"column":12},"end":{"line":119,"column":39}},"10":{"start":{"line":121,"column":12},"end":{"line":129,"column":13}},"11":{"start":{"line":122,"column":16},"end":{"line":123,"column":61}},"12":{"start":{"line":125,"column":16},"end":{"line":125,"column":40}},"13":{"start":{"line":126,"column":16},"end":{"line":128,"column":17}},"14":{"start":{"line":127,"column":20},"end":{"line":127,"column":71}},"15":{"start":{"line":130,"column":12},"end":{"line":130,"column":29}},"16":{"start":{"line":137,"column":12},"end":{"line":141,"column":20}},"17":{"start":{"line":143,"column":12},"end":{"line":145,"column":13}},"18":{"start":{"line":144,"column":16},"end":{"line":144,"column":41}},"19":{"start":{"line":146,"column":12},"end":{"line":149,"column":33}},"20":{"start":{"line":151,"column":12},"end":{"line":158,"column":13}},"21":{"start":{"line":152,"column":16},"end":{"line":152,"column":28}},"22":{"start":{"line":154,"column":16},"end":{"line":157,"column":18}},"23":{"start":{"line":159,"column":12},"end":{"line":159,"column":24}},"24":{"start":{"line":167,"column":8},"end":{"line":168,"column":43}},"25":{"start":{"line":169,"column":8},"end":{"line":169,"column":52}},"26":{"start":{"line":170,"column":8},"end":{"line":170,"column":41}},"27":{"start":{"line":172,"column":8},"end":{"line":175,"column":9}},"28":{"start":{"line":173,"column":12},"end":{"line":174,"column":40}},"29":{"start":{"line":177,"column":8},"end":{"line":177,"column":70}},"30":{"start":{"line":179,"column":8},"end":{"line":179,"column":32}},"31":{"start":{"line":180,"column":8},"end":{"line":183,"column":11}},"32":{"start":{"line":184,"column":8},"end":{"line":184,"column":35}},"33":{"start":{"line":186,"column":8},"end":{"line":193,"column":11}},"34":{"start":{"line":187,"column":12},"end":{"line":187,"column":61}},"35":{"start":{"line":189,"column":12},"end":{"line":189,"column":35}},"36":{"start":{"line":190,"column":12},"end":{"line":191,"column":49}},"37":{"start":{"line":192,"column":12},"end":{"line":192,"column":25}},"38":{"start":{"line":194,"column":8},"end":{"line":194,"column":25}},"39":{"start":{"line":196,"column":8},"end":{"line":196,"column":33}}},"branchMap":{"1":{"line":88,"type":"if","locations":[{"start":{"line":88,"column":12},"end":{"line":88,"column":12}},{"start":{"line":88,"column":12},"end":{"line":88,"column":12}}]},"2":{"line":121,"type":"if","locations":[{"start":{"line":121,"column":12},"end":{"line":121,"column":12}},{"start":{"line":121,"column":12},"end":{"line":121,"column":12}}]},"3":{"line":121,"type":"binary-expr","locations":[{"start":{"line":121,"column":16},"end":{"line":121,"column":28}},{"start":{"line":121,"column":32},"end":{"line":121,"column":46}}]},"4":{"line":122,"type":"cond-expr","locations":[{"start":{"line":123,"column":20},"end":{"line":123,"column":37}},{"start":{"line":123,"column":40},"end":{"line":123,"column":60}}]},"5":{"line":126,"type":"if","locations":[{"start":{"line":126,"column":16},"end":{"line":126,"column":16}},{"start":{"line":126,"column":16},"end":{"line":126,"column":16}}]},"6":{"line":143,"type":"if","locations":[{"start":{"line":143,"column":12},"end":{"line":143,"column":12}},{"start":{"line":143,"column":12},"end":{"line":143,"column":12}}]},"7":{"line":151,"type":"if","locations":[{"start":{"line":151,"column":12},"end":{"line":151,"column":12}},{"start":{"line":151,"column":12},"end":{"line":151,"column":12}}]},"8":{"line":172,"type":"if","locations":[{"start":{"line":172,"column":8},"end":{"line":172,"column":8}},{"start":{"line":172,"column":8},"end":{"line":172,"column":8}}]}}};
-}
-__cov_QPU4QDhjHjGYy_G_F796aQ = __cov_QPU4QDhjHjGYy_G_F796aQ['/home/travis/build/terrestris/BasiGX/src/ux/ContextSensitiveHelp.js'];
-__cov_QPU4QDhjHjGYy_G_F796aQ.s['1']++;Ext.define('BasiGX.ux.ContextSensitiveHelp',{statics:{helpUrl:'../help/index.html',existingHelpKeys:['basigx-button-help','basigx-button-zoomin','basigx-button-zoomout','basigx-button-zoomtoextent','basigx-button-togglelegend','basigx-overview-map-button','basigx-button-addwms','basigx-button-measure','basigx-button-coordinatetransform','basigx-button-permalink','basigx-combo-scale','basigx-button-hsi','basigx-overview-map-button','basigx-panel-layersetchooser','basigx-form-print','basigx-container-overpasssearch'],warnPopupBlockerTitle:'Warnung',warnPopupBlockerContent:'Bitte deaktivieren Sie etwaige '+'Popup-Blocker,um die Hilfe anzuzeigen.',getCmpFromEl:function(el){__cov_QPU4QDhjHjGYy_G_F796aQ.f['1']++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['2']++;var cmp=Ext.getCmp(el.id);__cov_QPU4QDhjHjGYy_G_F796aQ.s['3']++;if(!cmp){__cov_QPU4QDhjHjGYy_G_F796aQ.b['1'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['4']++;return this.getCmpFromEl(el.parentNode);}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['1'][1]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['5']++;return cmp;}},getComponentFromPoint:function(point){__cov_QPU4QDhjHjGYy_G_F796aQ.f['2']++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['6']++;var el=document.elementFromPoint(point.x,point.y);__cov_QPU4QDhjHjGYy_G_F796aQ.s['7']++;var cmp=this.getCmpFromEl(el);__cov_QPU4QDhjHjGYy_G_F796aQ.s['8']++;return cmp;},bubbleToExistingHelp:function(component){__cov_QPU4QDhjHjGYy_G_F796aQ.f['3']++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['9']++;var helpClass=BasiGX.ux.ContextSensitiveHelp,existingHelpKeys=helpClass.existingHelpKeys,foundHelp,parent,xtypeHasHelp=Ext.Array.contains(existingHelpKeys,component.getXType()),compHasHelpKey=Ext.Array.contains(existingHelpKeys,component.helpKey);__cov_QPU4QDhjHjGYy_G_F796aQ.s['10']++;if((__cov_QPU4QDhjHjGYy_G_F796aQ.b['3'][0]++,xtypeHasHelp)||(__cov_QPU4QDhjHjGYy_G_F796aQ.b['3'][1]++,compHasHelpKey)){__cov_QPU4QDhjHjGYy_G_F796aQ.b['2'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['11']++;foundHelp=compHasHelpKey?(__cov_QPU4QDhjHjGYy_G_F796aQ.b['4'][0]++,component.helpKey):(__cov_QPU4QDhjHjGYy_G_F796aQ.b['4'][1]++,component.getXType());}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['2'][1]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['12']++;parent=component.up();__cov_QPU4QDhjHjGYy_G_F796aQ.s['13']++;if(parent){__cov_QPU4QDhjHjGYy_G_F796aQ.b['5'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['14']++;foundHelp=helpClass.bubbleToExistingHelp(parent);}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['5'][1]++;}}__cov_QPU4QDhjHjGYy_G_F796aQ.s['15']++;return foundHelp;},displayHelpForCoordinates:function(point){__cov_QPU4QDhjHjGYy_G_F796aQ.f['4']++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['16']++;var helpClass=BasiGX.ux.ContextSensitiveHelp,component=helpClass.getComponentFromPoint(point),helpKey=helpClass.bubbleToExistingHelp(component),helpUrl=helpClass.helpUrl,win;__cov_QPU4QDhjHjGYy_G_F796aQ.s['17']++;if(helpKey){__cov_QPU4QDhjHjGYy_G_F796aQ.b['6'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['18']++;helpUrl+='#'+helpKey;}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['6'][1]++;}__cov_QPU4QDhjHjGYy_G_F796aQ.s['19']++;win=window.open(helpUrl,'ContextSensitiveHelp','width=800,height=550,scrollbars=yes,left=200,top=150,'+'resizable=yes,location=yes,menubar=no,status=no,'+'dependent=yes');__cov_QPU4QDhjHjGYy_G_F796aQ.s['20']++;if(win){__cov_QPU4QDhjHjGYy_G_F796aQ.b['7'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['21']++;win.focus();}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['7'][1]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['22']++;Ext.Msg.alert(helpClass.warnPopupBlockerTitle,helpClass.warnPopupBlockerContent);}__cov_QPU4QDhjHjGYy_G_F796aQ.s['23']++;return true;}},setContextHelp:function(additionalHelpKeys){__cov_QPU4QDhjHjGYy_G_F796aQ.f['5']++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['24']++;var me=this,size=Ext.getBody().getSize();__cov_QPU4QDhjHjGYy_G_F796aQ.s['25']++;var helpDom=document.createElement('div');__cov_QPU4QDhjHjGYy_G_F796aQ.s['26']++;var helpLayer=Ext.get(helpDom);__cov_QPU4QDhjHjGYy_G_F796aQ.s['27']++;if(additionalHelpKeys){__cov_QPU4QDhjHjGYy_G_F796aQ.b['8'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['28']++;Ext.Array.push(BasiGX.ux.ContextSensitiveHelp.existingHelpKeys,additionalHelpKeys);}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['8'][1]++;}__cov_QPU4QDhjHjGYy_G_F796aQ.s['29']++;document.body.insertBefore(helpDom,document.body.firstChild);__cov_QPU4QDhjHjGYy_G_F796aQ.s['30']++;helpLayer.setSize(size);__cov_QPU4QDhjHjGYy_G_F796aQ.s['31']++;helpLayer.setStyle({'cursor':'help','position':'absolute'});__cov_QPU4QDhjHjGYy_G_F796aQ.s['32']++;helpLayer.setZIndex(20000);__cov_QPU4QDhjHjGYy_G_F796aQ.s['33']++;helpLayer.on('click',function(clickEvent){__cov_QPU4QDhjHjGYy_G_F796aQ.f['6']++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['34']++;var point=Ext.util.Point.fromEvent(clickEvent);__cov_QPU4QDhjHjGYy_G_F796aQ.s['35']++;me.helpLayer.destroy();__cov_QPU4QDhjHjGYy_G_F796aQ.s['36']++;BasiGX.ux.ContextSensitiveHelp.displayHelpForCoordinates(point);__cov_QPU4QDhjHjGYy_G_F796aQ.s['37']++;me.destroy();});__cov_QPU4QDhjHjGYy_G_F796aQ.s['38']++;helpLayer.show();__cov_QPU4QDhjHjGYy_G_F796aQ.s['39']++;me.helpLayer=helpLayer;}});
+/* Copyright (C) 2011-2013 terrestris GmbH & Co. KG, info@terrestris.de
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.-
+ *
+ * @author terrestris GmbH & Co. KG
+ * @author M. Jansen <jansen@terrestris.de>
+ */
+/**
+ * Provides a bunch of (static) methods to open a help window whose URL has an
+ * anchor if the provided xy-location was found to have special documentation.
+ *
+ * Usually you create an instance of the class and then call #setContextHelp to
+ * overlay the complete application with a layer that listens for clicks to get
+ * contextual help. The #helpUrl will be opened in a popup after every click and
+ * an anchor is appended to the URL, if the clicked component either has a
+ * `xtype` or `helpKey` set to something that also exists in the list
+ * #existingHelpKeys. Only instances of Ext.window.Window or more generally
+ * instances of subclasses of Ext.container.Container qualifiy as candidates for
+ * help.
+ *
+ * Based on code from Animal and timo.nuros at
+ * http://www.sencha.com/forum/showthread.php?63272-Implementing-a-context-sensitive-help
+ *
+ * @class BasiGX.ux.ContextSensitiveHelp
+ */
+Ext.define('BasiGX.ux.ContextSensitiveHelp', {
+    statics: {
+
+        /**
+         * The base URL of the help HTML which contains named anchors as defined
+         * in #existingHelpKeys.
+         */
+        helpUrl: "../help/index.html",
+
+        /**
+         * A list of all named links/anchors in the HTML file #helpUrl. Remember
+         * to add all existing keys to this list.
+         */
+        existingHelpKeys: [
+            'basigx-button-help',
+            'basigx-button-zoomin',
+            'basigx-button-zoomout',
+            'basigx-button-zoomtoextent',
+            'basigx-button-togglelegend',
+            'basigx-overview-map-button',
+            'basigx-button-addwms',
+            'basigx-button-measure',
+            'basigx-button-coordinatetransform',
+            'basigx-button-permalink',
+            'basigx-combo-scale',
+            'basigx-button-hsi',
+            'basigx-overview-map-button',
+            'basigx-panel-layersetchooser',
+            'basigx-form-print',
+            'basigx-container-overpasssearch'
+        ],
+
+        /* begin i18n */
+
+        /**
+         * Title for the warning when a popup blocker is active.
+         */
+        warnPopupBlockerTitle: 'Warnung',
+
+        /**
+         * Content of the warning when a popup blocker is active.
+         */
+        warnPopupBlockerContent: 'Bitte deaktivieren Sie etwaige ' +
+            'Popup-Blocker,um die Hilfe anzuzeigen.',
+
+        /* end i18n */
+
+        getCmpFromEl: function(el){
+            var cmp = Ext.getCmp(el.id);
+            if(!cmp){
+                return this.getCmpFromEl(el.parentNode);
+            } else {
+              return cmp;
+            }
+        },
+
+        /**
+         * Returns the lowest level Component at the specified point.
+         *
+         * @param {Ext.util.Point/Number} p The Point at which to find the
+         *     associated Component, or the X coordinate of the point.
+         * @return {Ext.Component} The Component at the specified point.
+         */
+        getComponentFromPoint: function(point) {
+            var el = document.elementFromPoint(point.x, point.y);
+            var cmp = this.getCmpFromEl(el);
+            return cmp;
+        },
+
+        /**
+         *
+         */
+        bubbleToExistingHelp: function(component) {
+            var helpClass = BasiGX.ux.ContextSensitiveHelp,
+                existingHelpKeys = helpClass.existingHelpKeys,
+                foundHelp,
+                parent,
+                xtypeHasHelp = Ext.Array.contains(existingHelpKeys,
+                    component.getXType()),
+                compHasHelpKey = Ext.Array.contains(existingHelpKeys,
+                    component.helpKey);
+
+            if (xtypeHasHelp || compHasHelpKey) {
+                foundHelp = compHasHelpKey ?
+                    component.helpKey : component.getXType();
+            } else {
+                parent = component.up();
+                if (parent) {
+                    foundHelp = helpClass.bubbleToExistingHelp(parent);
+                }
+            }
+            return foundHelp;
+        },
+
+        /**
+         *
+         */
+        displayHelpForCoordinates: function(point) {
+            var helpClass = BasiGX.ux.ContextSensitiveHelp,
+                component = helpClass.getComponentFromPoint(point),
+                helpKey = helpClass.bubbleToExistingHelp(component),
+                helpUrl = helpClass.helpUrl,
+                win;
+
+            if (helpKey) {
+                helpUrl += "#" + helpKey;
+            }
+            win = window.open(helpUrl, "ContextSensitiveHelp",
+                "width=800,height=550,scrollbars=yes,left=200,top=150," +
+                "resizable=yes,location=yes,menubar=no,status=no," +
+                "dependent=yes");
+
+            if(win) {
+                win.focus();
+            } else {
+                Ext.Msg.alert(
+                    helpClass.warnPopupBlockerTitle,
+                    helpClass.warnPopupBlockerContent
+                );
+            }
+            return true;
+        }
+    },
+
+    /**
+     * The Main method of an instance of this class.
+     */
+    setContextHelp: function(additionalHelpKeys) {
+        var me = this,
+            size = Ext.getBody().getSize();
+        var helpDom = document.createElement('div');
+        var helpLayer = Ext.get(helpDom);
+
+        if(additionalHelpKeys){
+            Ext.Array.push(BasiGX.ux.ContextSensitiveHelp.existingHelpKeys,
+                    additionalHelpKeys);
+        }
+
+        document.body.insertBefore(helpDom, document.body.firstChild);
+
+        helpLayer.setSize(size);
+        helpLayer.setStyle({
+            "cursor": "help",
+            "position": "absolute"
+        });
+        helpLayer.setZIndex(20000);
+
+        helpLayer.on("click", function(clickEvent) {
+            var point = Ext.util.Point.fromEvent(clickEvent);
+
+            me.helpLayer.destroy();
+            BasiGX.ux.ContextSensitiveHelp.
+                displayHelpForCoordinates(point);
+            me.destroy();
+        });
+        helpLayer.show();
+
+        me.helpLayer = helpLayer;
+    }
+});

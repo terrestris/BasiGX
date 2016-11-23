@@ -1,9 +1,103 @@
+/* Copyright (c) 2016 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * @class BasiGX.util.Color
+ */
+Ext.define('BasiGX.util.Color', {
 
-var __cov_4k36TZLjvzbmMwEHOj3vyw = (Function('return this'))();
-if (!__cov_4k36TZLjvzbmMwEHOj3vyw.__coverage__) { __cov_4k36TZLjvzbmMwEHOj3vyw.__coverage__ = {}; }
-__cov_4k36TZLjvzbmMwEHOj3vyw = __cov_4k36TZLjvzbmMwEHOj3vyw.__coverage__;
-if (!(__cov_4k36TZLjvzbmMwEHOj3vyw['/home/travis/build/terrestris/BasiGX/src/util/Color.js'])) {
-   __cov_4k36TZLjvzbmMwEHOj3vyw['/home/travis/build/terrestris/BasiGX/src/util/Color.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Color.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0},"fnMap":{"1":{"name":"(anonymous_1)","line":30,"loc":{"start":{"line":30,"column":19},"end":{"line":30,"column":42}}},"2":{"name":"(anonymous_2)","line":50,"loc":{"start":{"line":50,"column":20},"end":{"line":50,"column":35}}},"3":{"name":"(anonymous_3)","line":69,"loc":{"start":{"line":69,"column":19},"end":{"line":69,"column":33}}},"4":{"name":"(anonymous_4)","line":89,"loc":{"start":{"line":89,"column":20},"end":{"line":89,"column":35}}}},"statementMap":{"1":{"start":{"line":19,"column":0},"end":{"line":103,"column":3}},"2":{"start":{"line":31,"column":12},"end":{"line":31,"column":38}},"3":{"start":{"line":32,"column":12},"end":{"line":32,"column":53}},"4":{"start":{"line":33,"column":12},"end":{"line":33,"column":53}},"5":{"start":{"line":34,"column":12},"end":{"line":34,"column":53}},"6":{"start":{"line":35,"column":12},"end":{"line":35,"column":28}},"7":{"start":{"line":37,"column":12},"end":{"line":39,"column":13}},"8":{"start":{"line":38,"column":16},"end":{"line":38,"column":55}},"9":{"start":{"line":40,"column":12},"end":{"line":40,"column":47}},"10":{"start":{"line":51,"column":12},"end":{"line":51,"column":40}},"11":{"start":{"line":52,"column":12},"end":{"line":52,"column":54}},"12":{"start":{"line":53,"column":12},"end":{"line":53,"column":54}},"13":{"start":{"line":54,"column":12},"end":{"line":54,"column":54}},"14":{"start":{"line":55,"column":12},"end":{"line":55,"column":77}},"15":{"start":{"line":57,"column":12},"end":{"line":57,"column":57}},"16":{"start":{"line":58,"column":12},"end":{"line":58,"column":26}},"17":{"start":{"line":70,"column":12},"end":{"line":72,"column":13}},"18":{"start":{"line":71,"column":16},"end":{"line":71,"column":26}},"19":{"start":{"line":73,"column":12},"end":{"line":74,"column":66}},"20":{"start":{"line":75,"column":12},"end":{"line":75,"column":37}},"21":{"start":{"line":76,"column":12},"end":{"line":79,"column":73}},"22":{"start":{"line":90,"column":12},"end":{"line":92,"column":13}},"23":{"start":{"line":91,"column":16},"end":{"line":91,"column":26}},"24":{"start":{"line":93,"column":12},"end":{"line":94,"column":99}},"25":{"start":{"line":95,"column":12},"end":{"line":95,"column":37}},"26":{"start":{"line":96,"column":12},"end":{"line":100,"column":90}}},"branchMap":{"1":{"line":37,"type":"if","locations":[{"start":{"line":37,"column":12},"end":{"line":37,"column":12}},{"start":{"line":37,"column":12},"end":{"line":37,"column":12}}]},"2":{"line":70,"type":"if","locations":[{"start":{"line":70,"column":12},"end":{"line":70,"column":12}},{"start":{"line":70,"column":12},"end":{"line":70,"column":12}}]},"3":{"line":76,"type":"cond-expr","locations":[{"start":{"line":76,"column":49},"end":{"line":79,"column":67}},{"start":{"line":79,"column":70},"end":{"line":79,"column":72}}]},"4":{"line":76,"type":"binary-expr","locations":[{"start":{"line":76,"column":20},"end":{"line":76,"column":24}},{"start":{"line":76,"column":28},"end":{"line":76,"column":45}}]},"5":{"line":90,"type":"if","locations":[{"start":{"line":90,"column":12},"end":{"line":90,"column":12}},{"start":{"line":90,"column":12},"end":{"line":90,"column":12}}]},"6":{"line":96,"type":"cond-expr","locations":[{"start":{"line":96,"column":49},"end":{"line":100,"column":84}},{"start":{"line":100,"column":87},"end":{"line":100,"column":89}}]},"7":{"line":96,"type":"binary-expr","locations":[{"start":{"line":96,"column":20},"end":{"line":96,"column":24}},{"start":{"line":96,"column":28},"end":{"line":96,"column":45}}]}}};
-}
-__cov_4k36TZLjvzbmMwEHOj3vyw = __cov_4k36TZLjvzbmMwEHOj3vyw['/home/travis/build/terrestris/BasiGX/src/util/Color.js'];
-__cov_4k36TZLjvzbmMwEHOj3vyw.s['1']++;Ext.define('BasiGX.util.Color',{statics:{hexToRgba:function(hex,opacity){__cov_4k36TZLjvzbmMwEHOj3vyw.f['1']++;__cov_4k36TZLjvzbmMwEHOj3vyw.s['2']++;hex=hex.replace('#','');__cov_4k36TZLjvzbmMwEHOj3vyw.s['3']++;var r=parseInt(hex.substring(0,2),16);__cov_4k36TZLjvzbmMwEHOj3vyw.s['4']++;var g=parseInt(hex.substring(2,4),16);__cov_4k36TZLjvzbmMwEHOj3vyw.s['5']++;var b=parseInt(hex.substring(4,6),16);__cov_4k36TZLjvzbmMwEHOj3vyw.s['6']++;var a=opacity;__cov_4k36TZLjvzbmMwEHOj3vyw.s['7']++;if(opacity){__cov_4k36TZLjvzbmMwEHOj3vyw.b['1'][0]++;__cov_4k36TZLjvzbmMwEHOj3vyw.s['8']++;return'rgba('+r+','+g+','+b+','+a+')';}else{__cov_4k36TZLjvzbmMwEHOj3vyw.b['1'][1]++;}__cov_4k36TZLjvzbmMwEHOj3vyw.s['9']++;return'rgba('+r+','+g+','+b+',1)';},hex8ToRgba:function(hex8){__cov_4k36TZLjvzbmMwEHOj3vyw.f['2']++;__cov_4k36TZLjvzbmMwEHOj3vyw.s['10']++;hex8=hex8.replace('#','');__cov_4k36TZLjvzbmMwEHOj3vyw.s['11']++;var r=parseInt(hex8.substring(0,2),16);__cov_4k36TZLjvzbmMwEHOj3vyw.s['12']++;var g=parseInt(hex8.substring(2,4),16);__cov_4k36TZLjvzbmMwEHOj3vyw.s['13']++;var b=parseInt(hex8.substring(4,6),16);__cov_4k36TZLjvzbmMwEHOj3vyw.s['14']++;var a=(parseInt(hex8.substring(6,8),16)/255).toFixed(2)*1;__cov_4k36TZLjvzbmMwEHOj3vyw.s['15']++;var result='rgba('+r+','+g+','+b+','+a+')';__cov_4k36TZLjvzbmMwEHOj3vyw.s['16']++;return result;},rgbaToHex:function(rgba){__cov_4k36TZLjvzbmMwEHOj3vyw.f['3']++;__cov_4k36TZLjvzbmMwEHOj3vyw.s['17']++;if(!rgba){__cov_4k36TZLjvzbmMwEHOj3vyw.b['2'][0]++;__cov_4k36TZLjvzbmMwEHOj3vyw.s['18']++;return'';}else{__cov_4k36TZLjvzbmMwEHOj3vyw.b['2'][1]++;}__cov_4k36TZLjvzbmMwEHOj3vyw.s['19']++;var regex=new RegExp('^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?,'+'[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?','i');__cov_4k36TZLjvzbmMwEHOj3vyw.s['20']++;rgba=rgba.match(regex);__cov_4k36TZLjvzbmMwEHOj3vyw.s['21']++;return(__cov_4k36TZLjvzbmMwEHOj3vyw.b['4'][0]++,rgba)&&(__cov_4k36TZLjvzbmMwEHOj3vyw.b['4'][1]++,rgba.length===4)?(__cov_4k36TZLjvzbmMwEHOj3vyw.b['3'][0]++,'#'+('0'+parseInt(rgba[1],10).toString(16)).slice(-2)+('0'+parseInt(rgba[2],10).toString(16)).slice(-2)+('0'+parseInt(rgba[3],10).toString(16)).slice(-2)):(__cov_4k36TZLjvzbmMwEHOj3vyw.b['3'][1]++,'');},rgbaToHex8:function(rgba){__cov_4k36TZLjvzbmMwEHOj3vyw.f['4']++;__cov_4k36TZLjvzbmMwEHOj3vyw.s['22']++;if(!rgba){__cov_4k36TZLjvzbmMwEHOj3vyw.b['5'][0]++;__cov_4k36TZLjvzbmMwEHOj3vyw.s['23']++;return'';}else{__cov_4k36TZLjvzbmMwEHOj3vyw.b['5'][1]++;}__cov_4k36TZLjvzbmMwEHOj3vyw.s['24']++;var regex=new RegExp('^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?,'+'[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+(?:\\.\\d+|))[\\s+]?','i');__cov_4k36TZLjvzbmMwEHOj3vyw.s['25']++;rgba=rgba.match(regex);__cov_4k36TZLjvzbmMwEHOj3vyw.s['26']++;return(__cov_4k36TZLjvzbmMwEHOj3vyw.b['7'][0]++,rgba)&&(__cov_4k36TZLjvzbmMwEHOj3vyw.b['7'][1]++,rgba.length===5)?(__cov_4k36TZLjvzbmMwEHOj3vyw.b['6'][0]++,'#'+('0'+parseInt(rgba[1],10).toString(16)).slice(-2)+('0'+parseInt(rgba[2],10).toString(16)).slice(-2)+('0'+parseInt(rgba[3],10).toString(16)).slice(-2)+('0'+Math.round(parseFloat(rgba[4])*255).toString(16)).slice(-2)):(__cov_4k36TZLjvzbmMwEHOj3vyw.b['6'][1]++,'');}}});
+    statics: {
+
+        /**
+         * Method converts a hex8 color string into an rgba color string.
+         *
+         * Example:
+         *     var rgba = BasiGX.util.Color.hexToRgba("#ff0000", 0.5);
+         *     // rgba is now: "rgba(255,0,0,0.5)"
+         */
+        hexToRgba: function(hex, opacity) {
+            hex = hex.replace('#','');
+            var r = parseInt(hex.substring(0,2), 16);
+            var g = parseInt(hex.substring(2,4), 16);
+            var b = parseInt(hex.substring(4,6), 16);
+            var a = opacity;
+
+            if(opacity){
+                return 'rgba('+r+','+g+','+b+','+a+')';
+            }
+            return 'rgba('+r+','+g+','+b+',1)';
+        },
+
+        /**
+         * Method converts a hex8 color string into an rgba color string.
+         *
+         * Example:
+         *     var rgba = BasiGX.util.Color.hex8ToRgba("#ff000000");
+         *     // rgba is now: "rgba(255,0,0,0)"
+         */
+        hex8ToRgba: function(hex8) {
+            hex8 = hex8.replace('#','');
+            var r = parseInt(hex8.substring(0,2), 16);
+            var g = parseInt(hex8.substring(2,4), 16);
+            var b = parseInt(hex8.substring(4,6), 16);
+            var a = (parseInt(hex8.substring(6,8), 16) / 255).toFixed(2) * 1;
+
+            var result = 'rgba('+r+','+g+','+b+','+a+')';
+            return result;
+        },
+
+        /**
+         * Method converts a rgba color string into an hex6 color string.
+         * Warning: You will loose the alpha channel when using this method.
+         *
+         * Example:
+         *     var hex = BasiGX.util.Color.rgbaToHex("rgba(255,0,0,0)");
+         *     // hex is now: "#ff0000"
+         */
+        rgbaToHex: function(rgba){
+            if (!rgba) {
+                return '';
+            }
+            var regex = new RegExp("^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?," +
+                "[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?", "i");
+            rgba = rgba.match(regex);
+            return (rgba && rgba.length === 4) ? "#" +
+                ("0" + parseInt(rgba[1],10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgba[2],10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgba[3],10).toString(16)).slice(-2) : '';
+        },
+
+        /**
+         * Method converts a rgba color string into an hex8 color string.
+         *
+         * Example:
+         *     var hex = BasiGX.util.Color.rgbaToHex("rgba(255,0,0,0)");
+         *     // hex is now: "#ff000000"
+         */
+        rgbaToHex8: function(rgba) {
+            if (!rgba) {
+                return '';
+            }
+            var regex = new RegExp("^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?," +
+                "[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+(?:\\.\\d+|))[\\s+]?", "i");
+            rgba = rgba.match(regex);
+            return (rgba && rgba.length === 5) ? "#" +
+                ("0" + parseInt(rgba[1],10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgba[2],10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgba[3],10).toString(16)).slice(-2) +
+                ("0" + Math.round(parseFloat(rgba[4]) * 255).toString(16)).slice(-2) : '';
+        }
+    }
+});

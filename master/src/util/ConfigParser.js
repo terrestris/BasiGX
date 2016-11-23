@@ -1,9 +1,866 @@
+/* Copyright (c) 2015 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * ConfigParser Util
+ *
+ * parses an application context in JSON Format
+ * in order to generate ol3 based layers and map with the given configuration.
+ * Example appContext response from SHOGun 1:
 
-var __cov_PIxjINIwH7HuiqKV8mI6$g = (Function('return this'))();
-if (!__cov_PIxjINIwH7HuiqKV8mI6$g.__coverage__) { __cov_PIxjINIwH7HuiqKV8mI6$g.__coverage__ = {}; }
-__cov_PIxjINIwH7HuiqKV8mI6$g = __cov_PIxjINIwH7HuiqKV8mI6$g.__coverage__;
-if (!(__cov_PIxjINIwH7HuiqKV8mI6$g['/home/travis/build/terrestris/BasiGX/src/util/ConfigParser.js'])) {
-   __cov_PIxjINIwH7HuiqKV8mI6$g['/home/travis/build/terrestris/BasiGX/src/util/ConfigParser.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/ConfigParser.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0,"137":0,"138":0,"139":0,"140":0,"141":0,"142":0,"143":0,"144":0,"145":0,"146":0,"147":0,"148":0,"149":0,"150":0,"151":0,"152":0,"153":0,"154":0,"155":0,"156":0,"157":0,"158":0,"159":0,"160":0,"161":0,"162":0},"b":{"1":[0,0],"2":[0,0,0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0,0,0],"18":[0,0],"19":[0,0],"20":[0,0],"21":[0,0,0,0,0,0],"22":[0,0],"23":[0,0,0,0],"24":[0,0],"25":[0,0],"26":[0,0],"27":[0,0],"28":[0,0],"29":[0,0],"30":[0,0],"31":[0,0],"32":[0,0],"33":[0,0],"34":[0,0],"35":[0,0,0],"36":[0,0],"37":[0,0],"38":[0,0],"39":[0,0],"40":[0,0],"41":[0,0],"42":[0,0],"43":[0,0],"44":[0,0,0,0],"45":[0,0],"46":[0,0],"47":[0,0],"48":[0,0],"49":[0,0],"50":[0,0],"51":[0,0],"52":[0,0],"53":[0,0],"54":[0,0],"55":[0,0],"56":[0,0],"57":[0,0],"58":[0,0],"59":[0,0],"60":[0,0],"61":[0,0],"62":[0,0],"63":[0,0],"64":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0},"fnMap":{"1":{"name":"(anonymous_1)","line":400,"loc":{"start":{"line":400,"column":18},"end":{"line":400,"column":36}}},"2":{"name":"(anonymous_2)","line":450,"loc":{"start":{"line":450,"column":21},"end":{"line":450,"column":37}}},"3":{"name":"(anonymous_3)","line":476,"loc":{"start":{"line":476,"column":26},"end":{"line":476,"column":55}}},"4":{"name":"(anonymous_4)","line":501,"loc":{"start":{"line":501,"column":32},"end":{"line":501,"column":78}}},"5":{"name":"(anonymous_5)","line":519,"loc":{"start":{"line":519,"column":41},"end":{"line":519,"column":60}}},"6":{"name":"(anonymous_6)","line":524,"loc":{"start":{"line":524,"column":41},"end":{"line":524,"column":60}}},"7":{"name":"(anonymous_7)","line":609,"loc":{"start":{"line":609,"column":25},"end":{"line":609,"column":60}}},"8":{"name":"(anonymous_8)","line":674,"loc":{"start":{"line":674,"column":22},"end":{"line":674,"column":37}}},"9":{"name":"(anonymous_9)","line":687,"loc":{"start":{"line":687,"column":24},"end":{"line":687,"column":42}}},"10":{"name":"(anonymous_10)","line":717,"loc":{"start":{"line":717,"column":27},"end":{"line":717,"column":57}}},"11":{"name":"(anonymous_11)","line":720,"loc":{"start":{"line":720,"column":34},"end":{"line":720,"column":49}}},"12":{"name":"(anonymous_12)","line":754,"loc":{"start":{"line":754,"column":44},"end":{"line":754,"column":91}}},"13":{"name":"(anonymous_13)","line":757,"loc":{"start":{"line":757,"column":38},"end":{"line":757,"column":53}}},"14":{"name":"(anonymous_14)","line":812,"loc":{"start":{"line":812,"column":31},"end":{"line":812,"column":65}}},"15":{"name":"(anonymous_15)","line":814,"loc":{"start":{"line":814,"column":34},"end":{"line":814,"column":50}}},"16":{"name":"(anonymous_16)","line":831,"loc":{"start":{"line":831,"column":37},"end":{"line":831,"column":60}}},"17":{"name":"(anonymous_17)","line":843,"loc":{"start":{"line":843,"column":40},"end":{"line":843,"column":55}}},"18":{"name":"(anonymous_18)","line":857,"loc":{"start":{"line":857,"column":27},"end":{"line":857,"column":43}}}},"statementMap":{"1":{"start":{"line":378,"column":0},"end":{"line":866,"column":3}},"2":{"start":{"line":401,"column":12},"end":{"line":402,"column":23}},"3":{"start":{"line":404,"column":12},"end":{"line":408,"column":13}},"4":{"start":{"line":406,"column":20},"end":{"line":406,"column":75}},"5":{"start":{"line":407,"column":20},"end":{"line":407,"column":32}},"6":{"start":{"line":410,"column":12},"end":{"line":410,"column":40}},"7":{"start":{"line":411,"column":12},"end":{"line":411,"column":35}},"8":{"start":{"line":414,"column":12},"end":{"line":418,"column":13}},"9":{"start":{"line":415,"column":16},"end":{"line":416,"column":30}},"10":{"start":{"line":417,"column":16},"end":{"line":417,"column":50}},"11":{"start":{"line":420,"column":12},"end":{"line":434,"column":15}},"12":{"start":{"line":436,"column":12},"end":{"line":436,"column":39}},"13":{"start":{"line":438,"column":12},"end":{"line":438,"column":83}},"14":{"start":{"line":439,"column":12},"end":{"line":439,"column":45}},"15":{"start":{"line":441,"column":12},"end":{"line":441,"column":26}},"16":{"start":{"line":451,"column":12},"end":{"line":451,"column":26}},"17":{"start":{"line":452,"column":12},"end":{"line":452,"column":36}},"18":{"start":{"line":453,"column":12},"end":{"line":453,"column":40}},"19":{"start":{"line":455,"column":12},"end":{"line":467,"column":13}},"20":{"start":{"line":456,"column":16},"end":{"line":456,"column":35}},"21":{"start":{"line":457,"column":16},"end":{"line":457,"column":39}},"22":{"start":{"line":458,"column":19},"end":{"line":467,"column":13}},"23":{"start":{"line":459,"column":16},"end":{"line":459,"column":35}},"24":{"start":{"line":460,"column":16},"end":{"line":460,"column":35}},"25":{"start":{"line":461,"column":19},"end":{"line":467,"column":13}},"26":{"start":{"line":462,"column":16},"end":{"line":462,"column":37}},"27":{"start":{"line":463,"column":16},"end":{"line":463,"column":38}},"28":{"start":{"line":464,"column":19},"end":{"line":467,"column":13}},"29":{"start":{"line":465,"column":16},"end":{"line":465,"column":35}},"30":{"start":{"line":466,"column":16},"end":{"line":466,"column":36}},"31":{"start":{"line":469,"column":12},"end":{"line":469,"column":64}},"32":{"start":{"line":470,"column":12},"end":{"line":470,"column":64}},"33":{"start":{"line":478,"column":12},"end":{"line":478,"column":26}},"34":{"start":{"line":479,"column":12},"end":{"line":479,"column":29}},"35":{"start":{"line":480,"column":12},"end":{"line":480,"column":59}},"36":{"start":{"line":481,"column":12},"end":{"line":481,"column":67}},"37":{"start":{"line":482,"column":12},"end":{"line":482,"column":20}},"38":{"start":{"line":484,"column":12},"end":{"line":485,"column":77}},"39":{"start":{"line":487,"column":12},"end":{"line":600,"column":13}},"40":{"start":{"line":494,"column":16},"end":{"line":534,"column":17}},"41":{"start":{"line":495,"column":20},"end":{"line":497,"column":22}},"42":{"start":{"line":499,"column":20},"end":{"line":533,"column":22}},"43":{"start":{"line":502,"column":28},"end":{"line":502,"column":52}},"44":{"start":{"line":503,"column":28},"end":{"line":503,"column":49}},"45":{"start":{"line":505,"column":28},"end":{"line":513,"column":50}},"46":{"start":{"line":515,"column":28},"end":{"line":527,"column":31}},"47":{"start":{"line":520,"column":36},"end":{"line":520,"column":73}},"48":{"start":{"line":521,"column":36},"end":{"line":521,"column":94}},"49":{"start":{"line":522,"column":36},"end":{"line":522,"column":71}},"50":{"start":{"line":525,"column":36},"end":{"line":525,"column":108}},"51":{"start":{"line":535,"column":19},"end":{"line":600,"column":13}},"52":{"start":{"line":540,"column":16},"end":{"line":549,"column":18}},"53":{"start":{"line":552,"column":16},"end":{"line":562,"column":17}},"54":{"start":{"line":557,"column":24},"end":{"line":561,"column":27}},"55":{"start":{"line":564,"column":16},"end":{"line":568,"column":17}},"56":{"start":{"line":567,"column":24},"end":{"line":567,"column":48}},"57":{"start":{"line":570,"column":19},"end":{"line":600,"column":13}},"58":{"start":{"line":571,"column":16},"end":{"line":571,"column":29}},"59":{"start":{"line":573,"column":16},"end":{"line":573,"column":74}},"60":{"start":{"line":574,"column":16},"end":{"line":574,"column":62}},"61":{"start":{"line":575,"column":16},"end":{"line":575,"column":70}},"62":{"start":{"line":576,"column":16},"end":{"line":576,"column":48}},"63":{"start":{"line":577,"column":16},"end":{"line":577,"column":46}},"64":{"start":{"line":578,"column":16},"end":{"line":583,"column":17}},"65":{"start":{"line":581,"column":20},"end":{"line":581,"column":59}},"66":{"start":{"line":582,"column":20},"end":{"line":582,"column":37}},"67":{"start":{"line":584,"column":16},"end":{"line":588,"column":19}},"68":{"start":{"line":590,"column":16},"end":{"line":599,"column":18}},"69":{"start":{"line":602,"column":12},"end":{"line":602,"column":50}},"70":{"start":{"line":611,"column":12},"end":{"line":628,"column":14}},"71":{"start":{"line":632,"column":12},"end":{"line":644,"column":13}},"72":{"start":{"line":633,"column":16},"end":{"line":633,"column":51}},"73":{"start":{"line":634,"column":16},"end":{"line":634,"column":75}},"74":{"start":{"line":635,"column":16},"end":{"line":635,"column":77}},"75":{"start":{"line":636,"column":16},"end":{"line":636,"column":39}},"76":{"start":{"line":637,"column":16},"end":{"line":641,"column":17}},"77":{"start":{"line":638,"column":20},"end":{"line":638,"column":54}},"78":{"start":{"line":640,"column":20},"end":{"line":640,"column":57}},"79":{"start":{"line":642,"column":16},"end":{"line":642,"column":58}},"80":{"start":{"line":643,"column":16},"end":{"line":643,"column":70}},"81":{"start":{"line":647,"column":12},"end":{"line":658,"column":13}},"82":{"start":{"line":648,"column":16},"end":{"line":656,"column":17}},"83":{"start":{"line":649,"column":20},"end":{"line":649,"column":73}},"84":{"start":{"line":650,"column":20},"end":{"line":650,"column":73}},"85":{"start":{"line":651,"column":20},"end":{"line":651,"column":73}},"86":{"start":{"line":652,"column":20},"end":{"line":653,"column":54}},"87":{"start":{"line":655,"column":20},"end":{"line":655,"column":80}},"88":{"start":{"line":657,"column":16},"end":{"line":657,"column":48}},"89":{"start":{"line":661,"column":12},"end":{"line":663,"column":13}},"90":{"start":{"line":662,"column":16},"end":{"line":662,"column":63}},"91":{"start":{"line":665,"column":12},"end":{"line":665,"column":58}},"92":{"start":{"line":675,"column":12},"end":{"line":678,"column":15}},"93":{"start":{"line":688,"column":12},"end":{"line":690,"column":32}},"94":{"start":{"line":692,"column":12},"end":{"line":696,"column":13}},"95":{"start":{"line":694,"column":20},"end":{"line":694,"column":75}},"96":{"start":{"line":695,"column":20},"end":{"line":695,"column":27}},"97":{"start":{"line":698,"column":12},"end":{"line":698,"column":55}},"98":{"start":{"line":699,"column":12},"end":{"line":699,"column":77}},"99":{"start":{"line":701,"column":12},"end":{"line":708,"column":13}},"100":{"start":{"line":705,"column":16},"end":{"line":705,"column":84}},"101":{"start":{"line":707,"column":16},"end":{"line":707,"column":50}},"102":{"start":{"line":718,"column":12},"end":{"line":718,"column":26}},"103":{"start":{"line":720,"column":12},"end":{"line":743,"column":19}},"104":{"start":{"line":722,"column":16},"end":{"line":742,"column":17}},"105":{"start":{"line":723,"column":20},"end":{"line":723,"column":55}},"106":{"start":{"line":725,"column":20},"end":{"line":729,"column":21}},"107":{"start":{"line":726,"column":24},"end":{"line":726,"column":56}},"108":{"start":{"line":728,"column":24},"end":{"line":728,"column":51}},"109":{"start":{"line":732,"column":20},"end":{"line":734,"column":21}},"110":{"start":{"line":733,"column":24},"end":{"line":733,"column":66}},"111":{"start":{"line":737,"column":20},"end":{"line":741,"column":21}},"112":{"start":{"line":738,"column":24},"end":{"line":738,"column":70}},"113":{"start":{"line":740,"column":24},"end":{"line":740,"column":65}},"114":{"start":{"line":755,"column":12},"end":{"line":755,"column":26}},"115":{"start":{"line":757,"column":12},"end":{"line":803,"column":19}},"116":{"start":{"line":760,"column":16},"end":{"line":802,"column":17}},"117":{"start":{"line":761,"column":20},"end":{"line":761,"column":86}},"118":{"start":{"line":762,"column":23},"end":{"line":802,"column":17}},"119":{"start":{"line":764,"column":20},"end":{"line":764,"column":55}},"120":{"start":{"line":765,"column":20},"end":{"line":765,"column":58}},"121":{"start":{"line":767,"column":20},"end":{"line":772,"column":21}},"122":{"start":{"line":768,"column":24},"end":{"line":768,"column":56}},"123":{"start":{"line":769,"column":24},"end":{"line":769,"column":59}},"124":{"start":{"line":771,"column":24},"end":{"line":771,"column":51}},"125":{"start":{"line":775,"column":20},"end":{"line":778,"column":21}},"126":{"start":{"line":776,"column":24},"end":{"line":777,"column":74}},"127":{"start":{"line":784,"column":20},"end":{"line":784,"column":92}},"128":{"start":{"line":786,"column":20},"end":{"line":786,"column":57}},"129":{"start":{"line":787,"column":20},"end":{"line":787,"column":56}},"130":{"start":{"line":789,"column":20},"end":{"line":801,"column":21}},"131":{"start":{"line":790,"column":24},"end":{"line":790,"column":87}},"132":{"start":{"line":791,"column":24},"end":{"line":798,"column":25}},"133":{"start":{"line":792,"column":28},"end":{"line":792,"column":56}},"134":{"start":{"line":793,"column":28},"end":{"line":793,"column":72}},"135":{"start":{"line":794,"column":28},"end":{"line":797,"column":29}},"136":{"start":{"line":795,"column":32},"end":{"line":795,"column":64}},"137":{"start":{"line":796,"column":32},"end":{"line":796,"column":76}},"138":{"start":{"line":800,"column":24},"end":{"line":800,"column":71}},"139":{"start":{"line":813,"column":12},"end":{"line":813,"column":22}},"140":{"start":{"line":814,"column":12},"end":{"line":819,"column":15}},"141":{"start":{"line":815,"column":16},"end":{"line":818,"column":17}},"142":{"start":{"line":816,"column":20},"end":{"line":816,"column":34}},"143":{"start":{"line":817,"column":20},"end":{"line":817,"column":33}},"144":{"start":{"line":820,"column":12},"end":{"line":820,"column":25}},"145":{"start":{"line":832,"column":12},"end":{"line":836,"column":13}},"146":{"start":{"line":833,"column":16},"end":{"line":834,"column":76}},"147":{"start":{"line":835,"column":16},"end":{"line":835,"column":30}},"148":{"start":{"line":837,"column":12},"end":{"line":841,"column":13}},"149":{"start":{"line":838,"column":16},"end":{"line":839,"column":80}},"150":{"start":{"line":840,"column":16},"end":{"line":840,"column":30}},"151":{"start":{"line":842,"column":12},"end":{"line":842,"column":25}},"152":{"start":{"line":843,"column":12},"end":{"line":849,"column":15}},"153":{"start":{"line":844,"column":16},"end":{"line":848,"column":17}},"154":{"start":{"line":845,"column":20},"end":{"line":845,"column":49}},"155":{"start":{"line":846,"column":23},"end":{"line":848,"column":17}},"156":{"start":{"line":847,"column":20},"end":{"line":847,"column":51}},"157":{"start":{"line":850,"column":12},"end":{"line":850,"column":23}},"158":{"start":{"line":858,"column":12},"end":{"line":858,"column":32}},"159":{"start":{"line":859,"column":12},"end":{"line":859,"column":74}},"160":{"start":{"line":860,"column":12},"end":{"line":860,"column":58}},"161":{"start":{"line":861,"column":12},"end":{"line":861,"column":43}},"162":{"start":{"line":863,"column":12},"end":{"line":863,"column":23}}},"branchMap":{"1":{"line":404,"type":"if","locations":[{"start":{"line":404,"column":12},"end":{"line":404,"column":12}},{"start":{"line":404,"column":12},"end":{"line":404,"column":12}}]},"2":{"line":404,"type":"binary-expr","locations":[{"start":{"line":404,"column":16},"end":{"line":404,"column":24}},{"start":{"line":404,"column":28},"end":{"line":404,"column":41}},{"start":{"line":404,"column":45},"end":{"line":404,"column":64}},{"start":{"line":405,"column":16},"end":{"line":405,"column":45}}]},"3":{"line":414,"type":"if","locations":[{"start":{"line":414,"column":12},"end":{"line":414,"column":12}},{"start":{"line":414,"column":12},"end":{"line":414,"column":12}}]},"4":{"line":425,"type":"binary-expr","locations":[{"start":{"line":425,"column":24},"end":{"line":425,"column":40}},{"start":{"line":425,"column":44},"end":{"line":425,"column":45}}]},"5":{"line":428,"type":"binary-expr","locations":[{"start":{"line":428,"column":30},"end":{"line":428,"column":57}},{"start":{"line":428,"column":61},"end":{"line":428,"column":72}}]},"6":{"line":455,"type":"if","locations":[{"start":{"line":455,"column":12},"end":{"line":455,"column":12}},{"start":{"line":455,"column":12},"end":{"line":455,"column":12}}]},"7":{"line":455,"type":"binary-expr","locations":[{"start":{"line":455,"column":16},"end":{"line":455,"column":40}},{"start":{"line":455,"column":44},"end":{"line":455,"column":64}}]},"8":{"line":458,"type":"if","locations":[{"start":{"line":458,"column":19},"end":{"line":458,"column":19}},{"start":{"line":458,"column":19},"end":{"line":458,"column":19}}]},"9":{"line":461,"type":"if","locations":[{"start":{"line":461,"column":19},"end":{"line":461,"column":19}},{"start":{"line":461,"column":19},"end":{"line":461,"column":19}}]},"10":{"line":461,"type":"binary-expr","locations":[{"start":{"line":461,"column":23},"end":{"line":461,"column":50}},{"start":{"line":461,"column":54},"end":{"line":461,"column":74}}]},"11":{"line":464,"type":"if","locations":[{"start":{"line":464,"column":19},"end":{"line":464,"column":19}},{"start":{"line":464,"column":19},"end":{"line":464,"column":19}}]},"12":{"line":484,"type":"cond-expr","locations":[{"start":{"line":485,"column":16},"end":{"line":485,"column":64}},{"start":{"line":485,"column":67},"end":{"line":485,"column":76}}]},"13":{"line":487,"type":"if","locations":[{"start":{"line":487,"column":12},"end":{"line":487,"column":12}},{"start":{"line":487,"column":12},"end":{"line":487,"column":12}}]},"14":{"line":494,"type":"if","locations":[{"start":{"line":494,"column":16},"end":{"line":494,"column":16}},{"start":{"line":494,"column":16},"end":{"line":494,"column":16}}]},"15":{"line":513,"type":"binary-expr","locations":[{"start":{"line":513,"column":31},"end":{"line":513,"column":42}},{"start":{"line":513,"column":46},"end":{"line":513,"column":48}}]},"16":{"line":535,"type":"if","locations":[{"start":{"line":535,"column":19},"end":{"line":535,"column":19}},{"start":{"line":535,"column":19},"end":{"line":535,"column":19}}]},"17":{"line":535,"type":"binary-expr","locations":[{"start":{"line":535,"column":23},"end":{"line":535,"column":47}},{"start":{"line":536,"column":23},"end":{"line":536,"column":43}},{"start":{"line":537,"column":23},"end":{"line":537,"column":48}},{"start":{"line":538,"column":23},"end":{"line":538,"column":43}}]},"18":{"line":546,"type":"binary-expr","locations":[{"start":{"line":546,"column":37},"end":{"line":546,"column":55}},{"start":{"line":546,"column":59},"end":{"line":546,"column":63}}]},"19":{"line":547,"type":"binary-expr","locations":[{"start":{"line":547,"column":33},"end":{"line":547,"column":47}},{"start":{"line":547,"column":51},"end":{"line":547,"column":58}}]},"20":{"line":552,"type":"if","locations":[{"start":{"line":552,"column":16},"end":{"line":552,"column":16}},{"start":{"line":552,"column":16},"end":{"line":552,"column":16}}]},"21":{"line":552,"type":"binary-expr","locations":[{"start":{"line":552,"column":20},"end":{"line":552,"column":33}},{"start":{"line":553,"column":20},"end":{"line":553,"column":43}},{"start":{"line":554,"column":20},"end":{"line":554,"column":55}},{"start":{"line":555,"column":21},"end":{"line":555,"column":46}},{"start":{"line":555,"column":50},"end":{"line":555,"column":71}},{"start":{"line":556,"column":20},"end":{"line":556,"column":49}}]},"22":{"line":564,"type":"if","locations":[{"start":{"line":564,"column":16},"end":{"line":564,"column":16}},{"start":{"line":564,"column":16},"end":{"line":564,"column":16}}]},"23":{"line":564,"type":"binary-expr","locations":[{"start":{"line":564,"column":21},"end":{"line":564,"column":46}},{"start":{"line":565,"column":21},"end":{"line":565,"column":42}},{"start":{"line":566,"column":21},"end":{"line":566,"column":42}},{"start":{"line":566,"column":47},"end":{"line":566,"column":59}}]},"24":{"line":570,"type":"if","locations":[{"start":{"line":570,"column":19},"end":{"line":570,"column":19}},{"start":{"line":570,"column":19},"end":{"line":570,"column":19}}]},"25":{"line":612,"type":"binary-expr","locations":[{"start":{"line":612,"column":22},"end":{"line":612,"column":32}},{"start":{"line":612,"column":36},"end":{"line":612,"column":51}}]},"26":{"line":613,"type":"binary-expr","locations":[{"start":{"line":613,"column":27},"end":{"line":613,"column":42}},{"start":{"line":613,"column":47},"end":{"line":614,"column":56}}]},"27":{"line":613,"type":"cond-expr","locations":[{"start":{"line":614,"column":20},"end":{"line":614,"column":49}},{"start":{"line":614,"column":52},"end":{"line":614,"column":56}}]},"28":{"line":615,"type":"binary-expr","locations":[{"start":{"line":615,"column":30},"end":{"line":615,"column":48}},{"start":{"line":615,"column":52},"end":{"line":615,"column":56}}]},"29":{"line":616,"type":"binary-expr","locations":[{"start":{"line":616,"column":31},"end":{"line":616,"column":50}},{"start":{"line":616,"column":54},"end":{"line":616,"column":63}}]},"30":{"line":617,"type":"binary-expr","locations":[{"start":{"line":617,"column":31},"end":{"line":617,"column":50}},{"start":{"line":617,"column":54},"end":{"line":617,"column":63}}]},"31":{"line":618,"type":"binary-expr","locations":[{"start":{"line":618,"column":25},"end":{"line":618,"column":38}},{"start":{"line":618,"column":42},"end":{"line":618,"column":43}}]},"32":{"line":619,"type":"cond-expr","locations":[{"start":{"line":619,"column":56},"end":{"line":619,"column":61}},{"start":{"line":619,"column":64},"end":{"line":619,"column":68}}]},"33":{"line":621,"type":"binary-expr","locations":[{"start":{"line":621,"column":27},"end":{"line":621,"column":35}},{"start":{"line":621,"column":39},"end":{"line":621,"column":43}}]},"34":{"line":622,"type":"binary-expr","locations":[{"start":{"line":622,"column":25},"end":{"line":622,"column":38}},{"start":{"line":622,"column":42},"end":{"line":622,"column":46}}]},"35":{"line":624,"type":"binary-expr","locations":[{"start":{"line":624,"column":23},"end":{"line":624,"column":34}},{"start":{"line":624,"column":38},"end":{"line":624,"column":54}},{"start":{"line":624,"column":58},"end":{"line":624,"column":62}}]},"36":{"line":632,"type":"if","locations":[{"start":{"line":632,"column":12},"end":{"line":632,"column":12}},{"start":{"line":632,"column":12},"end":{"line":632,"column":12}}]},"37":{"line":632,"type":"binary-expr","locations":[{"start":{"line":632,"column":16},"end":{"line":632,"column":34}},{"start":{"line":632,"column":38},"end":{"line":632,"column":62}}]},"38":{"line":637,"type":"if","locations":[{"start":{"line":637,"column":16},"end":{"line":637,"column":16}},{"start":{"line":637,"column":16},"end":{"line":637,"column":16}}]},"39":{"line":647,"type":"if","locations":[{"start":{"line":647,"column":12},"end":{"line":647,"column":12}},{"start":{"line":647,"column":12},"end":{"line":647,"column":12}}]},"40":{"line":648,"type":"if","locations":[{"start":{"line":648,"column":16},"end":{"line":648,"column":16}},{"start":{"line":648,"column":16},"end":{"line":648,"column":16}}]},"41":{"line":661,"type":"if","locations":[{"start":{"line":661,"column":12},"end":{"line":661,"column":12}},{"start":{"line":661,"column":12},"end":{"line":661,"column":12}}]},"42":{"line":677,"type":"cond-expr","locations":[{"start":{"line":677,"column":40},"end":{"line":677,"column":52}},{"start":{"line":677,"column":55},"end":{"line":677,"column":60}}]},"43":{"line":692,"type":"if","locations":[{"start":{"line":692,"column":12},"end":{"line":692,"column":12}},{"start":{"line":692,"column":12},"end":{"line":692,"column":12}}]},"44":{"line":692,"type":"binary-expr","locations":[{"start":{"line":692,"column":16},"end":{"line":692,"column":24}},{"start":{"line":692,"column":28},"end":{"line":692,"column":41}},{"start":{"line":692,"column":45},"end":{"line":692,"column":64}},{"start":{"line":693,"column":16},"end":{"line":693,"column":45}}]},"45":{"line":701,"type":"if","locations":[{"start":{"line":701,"column":12},"end":{"line":701,"column":12}},{"start":{"line":701,"column":12},"end":{"line":701,"column":12}}]},"46":{"line":722,"type":"if","locations":[{"start":{"line":722,"column":16},"end":{"line":722,"column":16}},{"start":{"line":722,"column":16},"end":{"line":722,"column":16}}]},"47":{"line":725,"type":"if","locations":[{"start":{"line":725,"column":20},"end":{"line":725,"column":20}},{"start":{"line":725,"column":20},"end":{"line":725,"column":20}}]},"48":{"line":732,"type":"if","locations":[{"start":{"line":732,"column":20},"end":{"line":732,"column":20}},{"start":{"line":732,"column":20},"end":{"line":732,"column":20}}]},"49":{"line":732,"type":"binary-expr","locations":[{"start":{"line":732,"column":24},"end":{"line":732,"column":35}},{"start":{"line":732,"column":39},"end":{"line":732,"column":61}}]},"50":{"line":737,"type":"if","locations":[{"start":{"line":737,"column":20},"end":{"line":737,"column":20}},{"start":{"line":737,"column":20},"end":{"line":737,"column":20}}]},"51":{"line":760,"type":"if","locations":[{"start":{"line":760,"column":16},"end":{"line":760,"column":16}},{"start":{"line":760,"column":16},"end":{"line":760,"column":16}}]},"52":{"line":760,"type":"binary-expr","locations":[{"start":{"line":760,"column":20},"end":{"line":760,"column":42}},{"start":{"line":760,"column":46},"end":{"line":760,"column":59}}]},"53":{"line":762,"type":"if","locations":[{"start":{"line":762,"column":23},"end":{"line":762,"column":23}},{"start":{"line":762,"column":23},"end":{"line":762,"column":23}}]},"54":{"line":767,"type":"if","locations":[{"start":{"line":767,"column":20},"end":{"line":767,"column":20}},{"start":{"line":767,"column":20},"end":{"line":767,"column":20}}]},"55":{"line":775,"type":"if","locations":[{"start":{"line":775,"column":20},"end":{"line":775,"column":20}},{"start":{"line":775,"column":20},"end":{"line":775,"column":20}}]},"56":{"line":775,"type":"binary-expr","locations":[{"start":{"line":775,"column":24},"end":{"line":775,"column":37}},{"start":{"line":775,"column":41},"end":{"line":775,"column":65}}]},"57":{"line":789,"type":"if","locations":[{"start":{"line":789,"column":20},"end":{"line":789,"column":20}},{"start":{"line":789,"column":20},"end":{"line":789,"column":20}}]},"58":{"line":791,"type":"if","locations":[{"start":{"line":791,"column":24},"end":{"line":791,"column":24}},{"start":{"line":791,"column":24},"end":{"line":791,"column":24}}]},"59":{"line":815,"type":"if","locations":[{"start":{"line":815,"column":16},"end":{"line":815,"column":16}},{"start":{"line":815,"column":16},"end":{"line":815,"column":16}}]},"60":{"line":832,"type":"if","locations":[{"start":{"line":832,"column":12},"end":{"line":832,"column":12}},{"start":{"line":832,"column":12},"end":{"line":832,"column":12}}]},"61":{"line":832,"type":"binary-expr","locations":[{"start":{"line":832,"column":16},"end":{"line":832,"column":35}},{"start":{"line":832,"column":39},"end":{"line":832,"column":56}}]},"62":{"line":837,"type":"if","locations":[{"start":{"line":837,"column":12},"end":{"line":837,"column":12}},{"start":{"line":837,"column":12},"end":{"line":837,"column":12}}]},"63":{"line":844,"type":"if","locations":[{"start":{"line":844,"column":16},"end":{"line":844,"column":16}},{"start":{"line":844,"column":16},"end":{"line":844,"column":16}}]},"64":{"line":846,"type":"if","locations":[{"start":{"line":846,"column":23},"end":{"line":846,"column":23}},{"start":{"line":846,"column":23},"end":{"line":846,"column":23}}]}}};
-}
-__cov_PIxjINIwH7HuiqKV8mI6$g = __cov_PIxjINIwH7HuiqKV8mI6$g['/home/travis/build/terrestris/BasiGX/src/util/ConfigParser.js'];
-__cov_PIxjINIwH7HuiqKV8mI6$g.s['1']++;Ext.define('BasiGX.util.ConfigParser',{autocreateLegends:false,activeRouting:false,appContext:null,statics:{layerArray:[],setupMap:function(context){__cov_PIxjINIwH7HuiqKV8mI6$g.f['1']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['2']++;var me=this,config;__cov_PIxjINIwH7HuiqKV8mI6$g.s['3']++;if((__cov_PIxjINIwH7HuiqKV8mI6$g.b['2'][0]++,!context)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['2'][1]++,!context.data)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['2'][2]++,!context.data.merge)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['2'][3]++,!context.data.merge.mapConfig)){__cov_PIxjINIwH7HuiqKV8mI6$g.b['1'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['4']++;Ext.log.warn('Invalid context given to configParser!');__cov_PIxjINIwH7HuiqKV8mI6$g.s['5']++;return null;}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['1'][1]++;}__cov_PIxjINIwH7HuiqKV8mI6$g.s['6']++;config=context.data.merge;__cov_PIxjINIwH7HuiqKV8mI6$g.s['7']++;me.appContext=config;__cov_PIxjINIwH7HuiqKV8mI6$g.s['8']++;if(window.location.hash.indexOf('center')>0){__cov_PIxjINIwH7HuiqKV8mI6$g.b['3'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['9']++;var centerString=location.hash.split('center/')[1].split('|')[0];__cov_PIxjINIwH7HuiqKV8mI6$g.s['10']++;config.startCenter=centerString;}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['3'][1]++;}__cov_PIxjINIwH7HuiqKV8mI6$g.s['11']++;me.map=new ol.Map({controls:[new ol.control.ScaleLine()],view:new ol.View({center:this.convertStringToNumericArray('int',config.startCenter),zoom:(__cov_PIxjINIwH7HuiqKV8mI6$g.b['4'][0]++,config.startZoom)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['4'][1]++,2),maxResolution:config.maxResolution,minResolution:config.minResolution,projection:(__cov_PIxjINIwH7HuiqKV8mI6$g.b['5'][0]++,config.mapConfig.projection)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['5'][1]++,'EPSG:3857'),units:'m',resolutions:me.convertStringToNumericArray('float',config.mapConfig.resolutions)}),logo:false});__cov_PIxjINIwH7HuiqKV8mI6$g.s['12']++;me.getLayersArray(context);__cov_PIxjINIwH7HuiqKV8mI6$g.s['13']++;var layerGroup=new ol.layer.Group({layers:me.layerArray.reverse()});__cov_PIxjINIwH7HuiqKV8mI6$g.s['14']++;me.map.setLayerGroup(layerGroup);__cov_PIxjINIwH7HuiqKV8mI6$g.s['15']++;return me.map;},createLayer:function(layer){__cov_PIxjINIwH7HuiqKV8mI6$g.f['2']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['16']++;var me=this;__cov_PIxjINIwH7HuiqKV8mI6$g.s['17']++;var layerType='Image';__cov_PIxjINIwH7HuiqKV8mI6$g.s['18']++;var sourceType='ImageWMS';__cov_PIxjINIwH7HuiqKV8mI6$g.s['19']++;if((__cov_PIxjINIwH7HuiqKV8mI6$g.b['7'][0]++,layer.type==='TileWMS')||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['7'][1]++,layer.type==='WMS')){__cov_PIxjINIwH7HuiqKV8mI6$g.b['6'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['20']++;layerType='Tile';__cov_PIxjINIwH7HuiqKV8mI6$g.s['21']++;sourceType='TileWMS';}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['6'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['22']++;if(layer.type==='XYZ'){__cov_PIxjINIwH7HuiqKV8mI6$g.b['8'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['23']++;layerType='Tile';__cov_PIxjINIwH7HuiqKV8mI6$g.s['24']++;sourceType='XYZ';}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['8'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['25']++;if((__cov_PIxjINIwH7HuiqKV8mI6$g.b['10'][0]++,layer.type==='WFSCluster')||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['10'][1]++,layer.type==='WFS')){__cov_PIxjINIwH7HuiqKV8mI6$g.b['9'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['26']++;layerType='Vector';__cov_PIxjINIwH7HuiqKV8mI6$g.s['27']++;sourceType='Vector';}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['9'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['28']++;if(layer.type==='WMTS'){__cov_PIxjINIwH7HuiqKV8mI6$g.b['11'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['29']++;layerType='WMTS';__cov_PIxjINIwH7HuiqKV8mI6$g.s['30']++;sourceType='WMTS';}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['11'][1]++;}}}}__cov_PIxjINIwH7HuiqKV8mI6$g.s['31']++;var source=me.getSourceForType(layer,sourceType);__cov_PIxjINIwH7HuiqKV8mI6$g.s['32']++;return me.getLayerForType(layer,layerType,source);},getSourceForType:function(config,sourceType){__cov_PIxjINIwH7HuiqKV8mI6$g.f['3']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['33']++;var me=this;__cov_PIxjINIwH7HuiqKV8mI6$g.s['34']++;var map=me.map;__cov_PIxjINIwH7HuiqKV8mI6$g.s['35']++;var projection=map.getView().getProjection();__cov_PIxjINIwH7HuiqKV8mI6$g.s['36']++;var projCode=map.getView().getProjection().getCode();__cov_PIxjINIwH7HuiqKV8mI6$g.s['37']++;var cfg;__cov_PIxjINIwH7HuiqKV8mI6$g.s['38']++;var attributions=config.attribution?(__cov_PIxjINIwH7HuiqKV8mI6$g.b['12'][0]++,[new ol.Attribution({html:config.attribution})]):(__cov_PIxjINIwH7HuiqKV8mI6$g.b['12'][1]++,undefined);__cov_PIxjINIwH7HuiqKV8mI6$g.s['39']++;if(sourceType==='Vector'){__cov_PIxjINIwH7HuiqKV8mI6$g.b['13'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['40']++;if(config.type==='WFSCluster'){__cov_PIxjINIwH7HuiqKV8mI6$g.b['14'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['41']++;cfg={attributions:attributions};}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['14'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['42']++;cfg={attributions:attributions,loader:function(extent){__cov_PIxjINIwH7HuiqKV8mI6$g.f['4']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['43']++;var vectorSource=this;__cov_PIxjINIwH7HuiqKV8mI6$g.s['44']++;var extraParams={};__cov_PIxjINIwH7HuiqKV8mI6$g.s['45']++;var finalParams=Ext.apply({service:'WFS',version:'1.1.0',request:'GetFeature',outputFormat:'application/json',typeName:config.layers,srsname:projCode,bbox:extent.join(',')+','+projCode},(__cov_PIxjINIwH7HuiqKV8mI6$g.b['15'][0]++,extraParams)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['15'][1]++,{}));__cov_PIxjINIwH7HuiqKV8mI6$g.s['46']++;Ext.Ajax.request({url:config.url,method:'GET',params:finalParams,success:function(response){__cov_PIxjINIwH7HuiqKV8mI6$g.f['5']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['47']++;var format=new ol.format.GeoJSON();__cov_PIxjINIwH7HuiqKV8mI6$g.s['48']++;var features=format.readFeatures(response.responseText);__cov_PIxjINIwH7HuiqKV8mI6$g.s['49']++;vectorSource.addFeatures(features);},failure:function(response){__cov_PIxjINIwH7HuiqKV8mI6$g.f['6']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['50']++;Ext.log.info('server-side failure with status code '+response.status);}});},strategy:ol.loadingstrategy.tile(ol.tilegrid.createXYZ({maxZoom:28}))};}}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['13'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['51']++;if((__cov_PIxjINIwH7HuiqKV8mI6$g.b['17'][0]++,sourceType==='TileWMS')||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['17'][1]++,sourceType==='WMS')||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['17'][2]++,sourceType==='ImageWMS')||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['17'][3]++,sourceType==='XYZ')){__cov_PIxjINIwH7HuiqKV8mI6$g.b['16'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['52']++;cfg={url:config.url,crossOrigin:config.crossOrigin,attributions:attributions,params:{LAYERS:config.layers,TRANSPARENT:(__cov_PIxjINIwH7HuiqKV8mI6$g.b['18'][0]++,config.transparent)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['18'][1]++,true),VERSION:(__cov_PIxjINIwH7HuiqKV8mI6$g.b['19'][0]++,config.version)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['19'][1]++,'1.1.1')}};__cov_PIxjINIwH7HuiqKV8mI6$g.s['53']++;if((__cov_PIxjINIwH7HuiqKV8mI6$g.b['21'][0]++,me.appContext)&&(__cov_PIxjINIwH7HuiqKV8mI6$g.b['21'][1]++,me.appContext.mapConfig)&&(__cov_PIxjINIwH7HuiqKV8mI6$g.b['21'][2]++,me.appContext.mapConfig.resolutions)&&((__cov_PIxjINIwH7HuiqKV8mI6$g.b['21'][3]++,config.type==='TileWMS')||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['21'][4]++,config.type==='XYZ'))&&(__cov_PIxjINIwH7HuiqKV8mI6$g.b['21'][5]++,config.tileGrid===undefined)){__cov_PIxjINIwH7HuiqKV8mI6$g.b['20'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['54']++;cfg.tileGrid=new ol.tilegrid.TileGrid({extent:map.getView().getProjection().getExtent(),resolutions:me.convertStringToNumericArray('float',me.appContext.mapConfig.resolutions)});}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['20'][1]++;}__cov_PIxjINIwH7HuiqKV8mI6$g.s['55']++;if(((__cov_PIxjINIwH7HuiqKV8mI6$g.b['23'][0]++,config.type==='TileWMS')||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['23'][1]++,config.type==='WMS')||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['23'][2]++,config.type==='XYZ'))&&(__cov_PIxjINIwH7HuiqKV8mI6$g.b['23'][3]++,config.tiled)){__cov_PIxjINIwH7HuiqKV8mI6$g.b['22'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['56']++;cfg.params.TILED=true;}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['22'][1]++;}}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['16'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['57']++;if(sourceType==='WMTS'){__cov_PIxjINIwH7HuiqKV8mI6$g.b['24'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['58']++;var tileGrid;__cov_PIxjINIwH7HuiqKV8mI6$g.s['59']++;var origin=ol.extent.getTopLeft(projection.getExtent());__cov_PIxjINIwH7HuiqKV8mI6$g.s['60']++;var projectionExtent=projection.getExtent();__cov_PIxjINIwH7HuiqKV8mI6$g.s['61']++;var size=ol.extent.getWidth(projectionExtent)/256;__cov_PIxjINIwH7HuiqKV8mI6$g.s['62']++;var resolutions=new Array(14);__cov_PIxjINIwH7HuiqKV8mI6$g.s['63']++;var matrixIds=new Array(14);__cov_PIxjINIwH7HuiqKV8mI6$g.s['64']++;for(var z=0;z<14;++z){__cov_PIxjINIwH7HuiqKV8mI6$g.s['65']++;resolutions[z]=size/Math.pow(2,z);__cov_PIxjINIwH7HuiqKV8mI6$g.s['66']++;matrixIds[z]=z;}__cov_PIxjINIwH7HuiqKV8mI6$g.s['67']++;tileGrid=new ol.tilegrid.WMTS({origin:origin,resolutions:resolutions,matrixIds:matrixIds});__cov_PIxjINIwH7HuiqKV8mI6$g.s['68']++;cfg={url:config.url,layer:config.layers,attributions:attributions,matrixSet:config.tilematrixset,format:config.format,projection:projection,tileGrid:tileGrid,style:config.style};}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['24'][1]++;}}}__cov_PIxjINIwH7HuiqKV8mI6$g.s['69']++;return new ol.source[sourceType](cfg);},getLayerForType:function(layer,layerType,source){__cov_PIxjINIwH7HuiqKV8mI6$g.f['7']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['70']++;var olLayerConfig={name:(__cov_PIxjINIwH7HuiqKV8mI6$g.b['25'][0]++,layer.name)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['25'][1]++,'No Name given'),legendUrl:(__cov_PIxjINIwH7HuiqKV8mI6$g.b['26'][0]++,layer.legendUrl)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['26'][1]++,this.autocreateLegends?(__cov_PIxjINIwH7HuiqKV8mI6$g.b['27'][0]++,this.generateLegendUrl(layer)):(__cov_PIxjINIwH7HuiqKV8mI6$g.b['27'][1]++,null)),legendHeight:(__cov_PIxjINIwH7HuiqKV8mI6$g.b['28'][0]++,layer.legendHeight)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['28'][1]++,null),minResolution:(__cov_PIxjINIwH7HuiqKV8mI6$g.b['29'][0]++,layer.minResolution)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['29'][1]++,undefined),maxResolution:(__cov_PIxjINIwH7HuiqKV8mI6$g.b['30'][0]++,layer.maxResolution)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['30'][1]++,undefined),opacity:(__cov_PIxjINIwH7HuiqKV8mI6$g.b['31'][0]++,layer.opacity)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['31'][1]++,1),visible:layer.visibility===false?(__cov_PIxjINIwH7HuiqKV8mI6$g.b['32'][0]++,false):(__cov_PIxjINIwH7HuiqKV8mI6$g.b['32'][1]++,true),treeColor:layer.treeColor,routingId:(__cov_PIxjINIwH7HuiqKV8mI6$g.b['33'][0]++,layer.id)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['33'][1]++,null),olStyle:(__cov_PIxjINIwH7HuiqKV8mI6$g.b['34'][0]++,layer.olStyle)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['34'][1]++,null),topic:(__cov_PIxjINIwH7HuiqKV8mI6$g.b['35'][0]++,layer.topic)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['35'][1]++,layer.hoverField)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['35'][2]++,null),source:source,type:layer.type,featureType:layer.layers};__cov_PIxjINIwH7HuiqKV8mI6$g.s['71']++;if((__cov_PIxjINIwH7HuiqKV8mI6$g.b['37'][0]++,'plugin'in BasiGX)&&(__cov_PIxjINIwH7HuiqKV8mI6$g.b['37'][1]++,'Hover'in BasiGX.plugin)){__cov_PIxjINIwH7HuiqKV8mI6$g.b['36'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['72']++;var hoverCls=BasiGX.plugin.Hover;__cov_PIxjINIwH7HuiqKV8mI6$g.s['73']++;var hoverableProp=hoverCls.LAYER_HOVERABLE_PROPERTY_NAME;__cov_PIxjINIwH7HuiqKV8mI6$g.s['74']++;var hoverfieldProp=hoverCls.LAYER_HOVERFIELD_PROPERTY_NAME;__cov_PIxjINIwH7HuiqKV8mI6$g.s['75']++;var shallHover=false;__cov_PIxjINIwH7HuiqKV8mI6$g.s['76']++;if(hoverableProp in layer){__cov_PIxjINIwH7HuiqKV8mI6$g.b['38'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['77']++;shallHover=layer[hoverableProp];}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['38'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['78']++;shallHover=!!layer[hoverfieldProp];}__cov_PIxjINIwH7HuiqKV8mI6$g.s['79']++;olLayerConfig[hoverableProp]=shallHover;__cov_PIxjINIwH7HuiqKV8mI6$g.s['80']++;olLayerConfig[hoverfieldProp]=layer[hoverfieldProp];}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['36'][1]++;}__cov_PIxjINIwH7HuiqKV8mI6$g.s['81']++;if(layer.type==='WFSCluster'){__cov_PIxjINIwH7HuiqKV8mI6$g.b['39'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['82']++;if(!layer.clusterColorString){__cov_PIxjINIwH7HuiqKV8mI6$g.b['40'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['83']++;var r=Math.round(Math.random()*255,10).toString();__cov_PIxjINIwH7HuiqKV8mI6$g.s['84']++;var g=Math.round(Math.random()*255,10).toString();__cov_PIxjINIwH7HuiqKV8mI6$g.s['85']++;var b=Math.round(Math.random()*255,10).toString();__cov_PIxjINIwH7HuiqKV8mI6$g.s['86']++;olLayerConfig.clusterColorString='rgba('+r+','+g+','+b+',0.5)';}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['40'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['87']++;olLayerConfig.clusterColorString=layer.clusterColorString;}__cov_PIxjINIwH7HuiqKV8mI6$g.s['88']++;olLayerConfig.icon=layer.icon;}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['39'][1]++;}__cov_PIxjINIwH7HuiqKV8mI6$g.s['89']++;if(layer.customParams){__cov_PIxjINIwH7HuiqKV8mI6$g.b['41'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['90']++;Ext.applyIf(olLayerConfig,layer.customParams);}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['41'][1]++;}__cov_PIxjINIwH7HuiqKV8mI6$g.s['91']++;return new ol.layer[layerType](olLayerConfig);},createFolder:function(node){__cov_PIxjINIwH7HuiqKV8mI6$g.f['8']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['92']++;return new ol.layer.Group({name:node.name,visible:node.checked?(__cov_PIxjINIwH7HuiqKV8mI6$g.b['42'][0]++,node.checked):(__cov_PIxjINIwH7HuiqKV8mI6$g.b['42'][1]++,false)});},getLayersArray:function(context){__cov_PIxjINIwH7HuiqKV8mI6$g.f['9']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['93']++;var me=this,layerConfig,layerTreeConfig;__cov_PIxjINIwH7HuiqKV8mI6$g.s['94']++;if((__cov_PIxjINIwH7HuiqKV8mI6$g.b['44'][0]++,!context)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['44'][1]++,!context.data)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['44'][2]++,!context.data.merge)||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['44'][3]++,!context.data.merge.mapLayers)){__cov_PIxjINIwH7HuiqKV8mI6$g.b['43'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['95']++;Ext.log.warn('Invalid context given to configParser!');__cov_PIxjINIwH7HuiqKV8mI6$g.s['96']++;return;}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['43'][1]++;}__cov_PIxjINIwH7HuiqKV8mI6$g.s['97']++;layerConfig=context.data.merge.mapLayers;__cov_PIxjINIwH7HuiqKV8mI6$g.s['98']++;layerTreeConfig=Ext.decode(context.data.merge.layerTreeConfig);__cov_PIxjINIwH7HuiqKV8mI6$g.s['99']++;if(!Ext.isEmpty(layerTreeConfig)){__cov_PIxjINIwH7HuiqKV8mI6$g.b['45'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['100']++;me.createLayersArrayFromShogunContext(layerTreeConfig,layerConfig);}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['45'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['101']++;me.createLayersArray(layerConfig);}},createLayersArray:function(layerConfig,parent){__cov_PIxjINIwH7HuiqKV8mI6$g.f['10']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['102']++;var me=this;__cov_PIxjINIwH7HuiqKV8mI6$g.s['103']++;Ext.each(layerConfig,function(node){__cov_PIxjINIwH7HuiqKV8mI6$g.f['11']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['104']++;if(node.type==='Folder'){__cov_PIxjINIwH7HuiqKV8mI6$g.b['46'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['105']++;var folder=me.createFolder(node);__cov_PIxjINIwH7HuiqKV8mI6$g.s['106']++;if(parent){__cov_PIxjINIwH7HuiqKV8mI6$g.b['47'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['107']++;parent.getLayers().push(folder);}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['47'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['108']++;me.layerArray.push(folder);}__cov_PIxjINIwH7HuiqKV8mI6$g.s['109']++;if((__cov_PIxjINIwH7HuiqKV8mI6$g.b['49'][0]++,node.layers)&&(__cov_PIxjINIwH7HuiqKV8mI6$g.b['49'][1]++,node.layers.length>0)){__cov_PIxjINIwH7HuiqKV8mI6$g.b['48'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['110']++;me.createLayersArray(node.layers,folder);}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['48'][1]++;}}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['46'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['111']++;if(parent){__cov_PIxjINIwH7HuiqKV8mI6$g.b['50'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['112']++;parent.getLayers().push(me.createLayer(node));}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['50'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['113']++;me.layerArray.push(me.createLayer(node));}}},me);},createLayersArrayFromShogunContext:function(layerTreeConfig,layerConfig,parent){__cov_PIxjINIwH7HuiqKV8mI6$g.f['12']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['114']++;var me=this;__cov_PIxjINIwH7HuiqKV8mI6$g.s['115']++;Ext.each(layerTreeConfig,function(node){__cov_PIxjINIwH7HuiqKV8mI6$g.f['13']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['116']++;if((__cov_PIxjINIwH7HuiqKV8mI6$g.b['52'][0]++,node.parentId===null)&&(__cov_PIxjINIwH7HuiqKV8mI6$g.b['52'][1]++,node.children)){__cov_PIxjINIwH7HuiqKV8mI6$g.b['51'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['117']++;me.createLayersArrayFromShogunContext(node.children,layerConfig);}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['51'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['118']++;if(node.leaf===false){__cov_PIxjINIwH7HuiqKV8mI6$g.b['53'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['119']++;var folder=me.createFolder(node);__cov_PIxjINIwH7HuiqKV8mI6$g.s['120']++;folder.set('expanded',node.expanded);__cov_PIxjINIwH7HuiqKV8mI6$g.s['121']++;if(parent){__cov_PIxjINIwH7HuiqKV8mI6$g.b['54'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['122']++;parent.getLayers().push(folder);__cov_PIxjINIwH7HuiqKV8mI6$g.s['123']++;folder.set('parentFolder',parent);}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['54'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['124']++;me.layerArray.push(folder);}__cov_PIxjINIwH7HuiqKV8mI6$g.s['125']++;if((__cov_PIxjINIwH7HuiqKV8mI6$g.b['56'][0]++,node.children)&&(__cov_PIxjINIwH7HuiqKV8mI6$g.b['56'][1]++,node.children.length>0)){__cov_PIxjINIwH7HuiqKV8mI6$g.b['55'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['126']++;me.createLayersArrayFromShogunContext(node.children.reverse(),layerConfig,folder);}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['55'][1]++;}}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['53'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['127']++;var mergedNode=me.getNodeFromConfigById(node.mapLayerId,layerConfig);__cov_PIxjINIwH7HuiqKV8mI6$g.s['128']++;mergedNode.visibility=node.checked;__cov_PIxjINIwH7HuiqKV8mI6$g.s['129']++;mergedNode.expanded=node.expanded;__cov_PIxjINIwH7HuiqKV8mI6$g.s['130']++;if(parent){__cov_PIxjINIwH7HuiqKV8mI6$g.b['57'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['131']++;parent.getLayers().getArray().push(me.createLayer(mergedNode));__cov_PIxjINIwH7HuiqKV8mI6$g.s['132']++;if(node.checked){__cov_PIxjINIwH7HuiqKV8mI6$g.b['58'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['133']++;parent.set('visible',true);__cov_PIxjINIwH7HuiqKV8mI6$g.s['134']++;var nextParent=parent.get('parentFolder');__cov_PIxjINIwH7HuiqKV8mI6$g.s['135']++;while(nextParent){__cov_PIxjINIwH7HuiqKV8mI6$g.s['136']++;nextParent.set('visible',true);__cov_PIxjINIwH7HuiqKV8mI6$g.s['137']++;nextParent=nextParent.get('parentFolder');}}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['58'][1]++;}}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['57'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['138']++;me.layerArray.push(me.createLayer(mergedNode));}}}},me);},getNodeFromConfigById:function(mapLayerId,layerConfig){__cov_PIxjINIwH7HuiqKV8mI6$g.f['14']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['139']++;var match;__cov_PIxjINIwH7HuiqKV8mI6$g.s['140']++;Ext.each(layerConfig,function(layer){__cov_PIxjINIwH7HuiqKV8mI6$g.f['15']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['141']++;if(layer.id===mapLayerId){__cov_PIxjINIwH7HuiqKV8mI6$g.b['59'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['142']++;match=layer;__cov_PIxjINIwH7HuiqKV8mI6$g.s['143']++;return false;}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['59'][1]++;}});__cov_PIxjINIwH7HuiqKV8mI6$g.s['144']++;return match;},convertStringToNumericArray:function(type,string){__cov_PIxjINIwH7HuiqKV8mI6$g.f['16']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['145']++;if((__cov_PIxjINIwH7HuiqKV8mI6$g.b['61'][0]++,Ext.isEmpty(string))||(__cov_PIxjINIwH7HuiqKV8mI6$g.b['61'][1]++,Ext.isEmpty(type))){__cov_PIxjINIwH7HuiqKV8mI6$g.b['60'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['146']++;Ext.log.warn('Cannot convert string to numeric array. Passed '+'type was: '+type+'; Passed string was: '+string);__cov_PIxjINIwH7HuiqKV8mI6$g.s['147']++;return string;}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['60'][1]++;}__cov_PIxjINIwH7HuiqKV8mI6$g.s['148']++;if(Ext.isArray(string)){__cov_PIxjINIwH7HuiqKV8mI6$g.b['62'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['149']++;Ext.log.warn('Passed array instead of string to convert to '+' array of '+type+'. Returning input array unchanged.');__cov_PIxjINIwH7HuiqKV8mI6$g.s['150']++;return string;}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['62'][1]++;}__cov_PIxjINIwH7HuiqKV8mI6$g.s['151']++;var arr=[];__cov_PIxjINIwH7HuiqKV8mI6$g.s['152']++;Ext.each(string.split(','),function(part){__cov_PIxjINIwH7HuiqKV8mI6$g.f['17']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['153']++;if(type==='int'){__cov_PIxjINIwH7HuiqKV8mI6$g.b['63'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['154']++;arr.push(parseInt(part,10));}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['63'][1]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['155']++;if(type==='float'){__cov_PIxjINIwH7HuiqKV8mI6$g.b['64'][0]++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['156']++;arr.push(parseFloat(part,10));}else{__cov_PIxjINIwH7HuiqKV8mI6$g.b['64'][1]++;}}});__cov_PIxjINIwH7HuiqKV8mI6$g.s['157']++;return arr;},generateLegendUrl:function(layer){__cov_PIxjINIwH7HuiqKV8mI6$g.f['18']++;__cov_PIxjINIwH7HuiqKV8mI6$g.s['158']++;var url=layer.url;__cov_PIxjINIwH7HuiqKV8mI6$g.s['159']++;url+='?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&';__cov_PIxjINIwH7HuiqKV8mI6$g.s['160']++;url+='FORMAT=image%2Fpng&TRANSPARENT=TRUE&';__cov_PIxjINIwH7HuiqKV8mI6$g.s['161']++;url+='LAYER='+layer.layers;__cov_PIxjINIwH7HuiqKV8mI6$g.s['162']++;return url;}}});
+        {
+            "data": {
+                "merge": {
+                    "id": 3841,
+                    "created_at": "04.05.2015 12:05:29",
+                    "updated_at": "04.05.2015 12:05:29",
+                    "app_user": "default",
+                    "name": "test",
+                    "language": "DE",
+                    "open": false,
+                    "active": true,
+                    "css": "ext-all.css",
+                    "description": null,
+                    "shortdescription": null,
+                    "url": "client/gisclient/index-dev.html",
+                    "startCenter": "385067,5535472",
+                    "startZoom": "0",
+                    "startResolution": "560",
+                    "startBbox": "-106720,4973280,1040160,6406880",
+                    "specialinstance": false,
+                    "zoomslider": true,
+                    "applicationheader": true,
+                    "initiallegendvisibility": true,
+                    "editableForCurrentUser": false,
+                    "initiallyactivetoolpertab": "t_pan_button",
+                    "initialwestpanelstate": 300,
+                    "initialstatusbarstate": "full",
+                    "mapLayers": [
+                        {
+                            "id": 230,
+                            "created_at": "16.03.2015 11:55:48",
+                            "updated_at": "16.03.2015 11:55:48",
+                            "app_user": "auto-create-on-init",
+                            "name": "(mainz) Klimatische Wasserbilanz",
+                            "type": "WMS",
+                            "isBaseLayer": false,
+                            "alwaysInRange": null,
+                            "visibility": true,
+                            "displayInLayerSwitcher": true,
+                            "attribution": null,
+                            "gutter": null,
+                            "projection": null,
+                            "units": null,
+                            "scales": null,
+                            "resolutions": null,
+                            "maxExtent": null,
+                            "minExtent": null,
+                            "maxResolution": null,
+                            "minResolution": null,
+                            "maxScale": null,
+                            "minScale": null,
+                            "numZoomLevels": null,
+                            "displayOutsideMaxExtent": false,
+                            "transitionEffect": null,
+                            "metadata": [],
+                            "groups": [
+                                20,
+                                19,
+                                23
+                            ],
+                            "owner": null,
+                            "additionalOwners": [],
+                            "url": "/GDAWasser/geoserver.action",
+                            "layers": "GDA_Wasser:WRRL_WASSERBILANZ_EINSTUFUNG",
+                            "transparent": true,
+                            "singleTile": false,
+                            "ratio": null,
+                            "format": "image/png8",
+                            "language": "de",
+                            "description": null,
+                            "exportable": true,
+                            "queryableInfoFormat": null,
+                            "editableForCurrentUser": false,
+                            "sysLayer": true,
+                            "digiLayer": false,
+                            "specialLayer": false,
+                            "specialLayerUrlTemplate": null,
+                            "specialLayerWinWidth": null,
+                            "specialLayerWinHeight": null,
+                            "hoverField": "{{GEMEINDE_BEZ}}",
+                            "dataLayerWindowTitle": null,
+                            "layerStyleConfigurable": null,
+                            "temporaryLayer": false,
+                            "rasterLayer": false,
+                            "rasterLayerFeatureInfo": null,
+                            "dataLayer": false,
+                            "waterCourseLevel": 0,
+                            "geometryType": null,
+                            "layerGroupName": null,
+                            "tiled": true
+                        }
+                    ],
+                    "grantedOverviewMapLayers": null,
+                    "overviewMapLayers": [],
+                    "grantedMapLayers": null,
+                    "mapConfig": {
+                        "id": 13,
+                        "created_at": "16.03.2015 11:55:49",
+                        "updated_at": "16.03.2015 11:55:49",
+                        "app_user": "auto-create-on-init",
+                        "name": "default-mapconfig",
+                        "mapId": "stdmap",
+                        "title": "Map",
+                        "projection": "EPSG:25832",
+                        "units": "m",
+                        "maxResolution": 560,
+                        "maxExtent": "-106720,4973280,1040160,6406880",
+                        "center": "385067,5535472",
+                        "resolutions": "560, 280, 140, 70, 28, 14, 7, 2.8, 1.4",
+                        "scales": null,
+                        "zoom": 0
+                    },
+                    "grantedMapConfig": null,
+                    "modules": [
+                        {
+                            "id": 1,
+                            "created_at": "16.03.2015 11:55:49",
+                            "updated_at": "16.03.2015 11:55:49",
+                            "app_user": "auto-create-on-init",
+                            "module_name": "layertreepanel",
+                            "module_fullname": "Standard Layer Tree",
+                            "region": "west",
+                            "isDefault": true,
+                            "type": "internet"
+                        },
+                        {
+                            "id": 3,
+                            "created_at": "16.03.2015 11:55:49",
+                            "updated_at": "16.03.2015 11:55:49",
+                            "app_user": "auto-create-on-init",
+                            "module_name": "overviewmappanel",
+                            "module_fullname": "Standard Overview Map",
+                            "region": "west",
+                            "isDefault": true,
+                            "type": "internet"
+                        },
+                        {
+                            "id": 2,
+                            "created_at": "16.03.2015 11:55:49",
+                            "updated_at": "16.03.2015 11:55:49",
+                            "app_user": "auto-create-on-init",
+                            "module_name": "layerlistpanel",
+                            "module_fullname": "Standard Layer List",
+                            "region": "west",
+                            "isDefault": true,
+                            "type": "internet"
+                        }
+                    ],
+                    "grantedModules": null,
+                    "groups": [],
+                    "grantedGroups": null,
+                    "orderedMapTools": [
+                        {
+                            "id": 3847,
+                            "created_at": "04.05.2015 12:05:29",
+                            "updated_at": "04.05.2015 12:05:29",
+                            "app_user": "default",
+                            "module": {
+                                "id": 4,
+                                "created_at": "16.03.2015 11:55:49",
+                                "updated_at": "16.03.2015 11:55:49",
+                                "app_user": "auto-create-on-init",
+                                "module_name": "navigation_select",
+                                "module_fullname": "Werkzeuge zum Navigieren",
+                                "region": "maptoolbar",
+                                "isDefault": false,
+                                "type": "intranet"
+                            },
+                            "tbIndex": 0
+                        },
+                        {
+                            "id": 3848,
+                            "created_at": "04.05.2015 12:05:29",
+                            "updated_at": "04.05.2015 12:05:29",
+                            "app_user": "default",
+                            "module": {
+                                "id": 5,
+                                "created_at": "16.03.2015 11:55:50",
+                                "updated_at": "16.03.2015 11:55:50",
+                                "app_user": "auto-create-on-init",
+                                "module_name": "query_evaluate",
+                                "module_fullname": "Werkzeuge zum Abfragen",
+                                "region": "maptoolbar",
+                                "isDefault": false,
+                                "type": "intranet"
+                            },
+                            "tbIndex": 1
+                        },
+                        {
+                            "id": 3849,
+                            "created_at": "04.05.2015 12:05:29",
+                            "updated_at": "04.05.2015 12:05:29",
+                            "app_user": "default",
+                            "module": {
+                                "id": 6,
+                                "created_at": "16.03.2015 11:55:50",
+                                "updated_at": "16.03.2015 11:55:50",
+                                "app_user": "auto-create-on-init",
+                                "module_name": "print_load_save",
+                                "module_fullname": "Werkzeuge zum Drucken",
+                                "region": "maptoolbar",
+                                "isDefault": false,
+                                "type": "intranet"
+                            },
+                            "tbIndex": 2
+                        },
+                        {
+                            "id": 3850,
+                            "created_at": "04.05.2015 12:05:29",
+                            "updated_at": "04.05.2015 12:05:29",
+                            "app_user": "default",
+                            "module": {
+                                "id": 7,
+                                "created_at": "16.03.2015 11:55:50",
+                                "updated_at": "16.03.2015 11:55:50",
+                                "app_user": "auto-create-on-init",
+                                "module_name": "annotate",
+                                "module_fullname": "Werkzeuge zum Zeichnen",
+                                "region": "maptoolbar",
+                                "isDefault": false,
+                                "type": "intranet"
+                            },
+                            "tbIndex": 3
+                        },
+                        {
+                            "id": 3851,
+                            "created_at": "04.05.2015 12:05:29",
+                            "updated_at": "04.05.2015 12:05:29",
+                            "app_user": "default",
+                            "module": {
+                                "id": 9,
+                                "created_at": "16.03.2015 11:55:50",
+                                "updated_at": "16.03.2015 11:55:50",
+                                "app_user": "auto-create-on-init",
+                                "module_name": "special_tools",
+                                "module_fullname": "verschiedene Werkzeuge",
+                                "region": "maptoolbar",
+                                "isDefault": false,
+                                "type": "intranet"
+                            },
+                            "tbIndex": 4
+                        }
+                    ],
+                    "publicSearchLayer": null,
+                    "publicResponsiveSearchLayer": 3,
+                    "layerTreeConfig": "{\"id\":2537,\"name\":\"Root\",\"...",
+                    "annotationGeometries": null,
+                    "owner": 1254,
+                    "ownerName": "Till Adams",
+                    "additionalOwners": [],
+                    "additionalOwnerIds": null,
+                    "wpsActions": [],
+                    "targetGroup": "gisclient",
+                    "maxResolution": 560,
+                    "minResolution": 0.14
+                },
+                "loggedInDspfUserId": "6815",
+                "loggedInUser": "Herr Till Adams",
+                "preferences": {}
+            },
+            "total": 1,
+            "success": true
+        }
+
+     * Example of a simple broken down appcontext:
+
+         {
+            data: {
+                merge: {
+                    startCenter: [983487, 6998170],
+                    startZoom: 13,
+                    mapLayers: [
+                        {
+                            name: "Hintergrundkarten",
+                            type: "Folder",
+                            layers: [
+                                {
+                                    name: "OSM WMS Grau",
+                                    type: "TileWMS",
+                                    treeColor: "rgba(41, 213, 4, 0.26)",
+                                    url: "http://ows.terrestris.de/osm-gray/service?",
+                                    layers: "OSM-WMS",
+                                    legendUrl: "http://ows.terrestris.de/osm-gray/service?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=OSM-WMS&TILED=true&WIDTH=256&HEIGHT=256&CRS=EPSG%3A3857&STYLES=&BBOX=978393.9620502554%2C7000408.798469583%2C983285.9318605067%2C7005300.768279834",
+                                    topic: false
+                                },
+                                {
+                                    name: "OSM WMS Farbig",
+                                    type: "TileWMS",
+                                    treeColor: "rgba(41, 213, 4, 0.26)",
+                                    url: "http://ows.terrestris.de/osm/service?",
+                                    layers: "OSM-WMS",
+                                    legendUrl: "http://ows.terrestris.de/osm/service?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=OSM-WMS&TILED=true&WIDTH=256&HEIGHT=256&CRS=EPSG%3A3857&STYLES=&BBOX=978393.9620502554%2C7000408.798469583%2C983285.9318605067%2C7005300.768279834",
+                                    topic: false,
+                                    visibility: false
+                                },
+                                {
+                                    name: 'Subfolder',
+                                    type: "Folder",
+                                    layers: [
+                                        {
+                                            name: "OSM WMS Farbig",
+                                            type: "TileWMS",
+                                            treeColor: "rgba(41, 213, 4, 0.26)",
+                                            url: "http://ows.terrestris.de/osm/service?",
+                                            layers: "OSM-WMS",
+                                            legendUrl: "http://ows.terrestris.de/osm/service?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=OSM-WMS&TILED=true&WIDTH=256&HEIGHT=256&CRS=EPSG%3A3857&STYLES=&BBOX=978393.9620502554%2C7000408.798469583%2C983285.9318605067%2C7005300.768279834",
+                                            topic: false,
+                                            visibility: false
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            name: 'OSM POIs',
+                            type: "Folder",
+                            layers: [
+                                {
+                                    name: "Tankstellen",
+                                    type: "WMS",
+                                    treeColor: "rgba(161, 177, 228, 0.53)",
+                                    url: "http://ows.terrestris.de/geoserver/osm/wms?",
+                                    legendHeight: 40,
+                                    legendUrl: "http://ows.terrestris.de/geoserver/osm/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&FORMAT=image%2Fpng&TRANSPARENT=true&LAYER=osm%3Aosm-fuel&HEIGHT=40&WIDTH=40",
+                                    layers: "osm:osm-fuel",
+                                    topic: true,
+                                    transparent: true,
+                                    crossOrigin: "Anonymous"
+                                },
+                                {
+                                    name: "Bushaltestellen",
+                                    type: "WMS",
+                                    treeColor: "rgba(161, 177, 228, 0.53)",
+                                    url: "http://ows.terrestris.de/osm-haltestellen?",
+                                    legendHeight: 30,
+                                    legendUrl: "http://ows.terrestris.de/osm-haltestellen?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetLegendGraphic&FORMAT=image%2Fpng&TRANSPARENT=true&LAYER=OSM-Bushaltestellen&HEIGHT=40&WIDTH=40",
+                                    layers: "OSM-Bushaltestellen",
+                                    topic: true,
+                                    transparent: true,
+                                    crossOrigin: "Anonymous"
+                                }
+                            ]
+                        }
+                    ],
+                    mapConfig: {
+                        projection: "EPSG:3857",
+                        resolutions: [156543.03390625, 78271.516953125, 39135.7584765625, 19567.87923828125, 9783.939619140625, 4891.9698095703125, 2445.9849047851562, 1222.9924523925781, 611.4962261962891, 305.74811309814453, 152.87405654907226, 76.43702827453613, 38.218514137268066, 19.109257068634033, 9.554628534317017, 4.777314267158508, 2.388657133579254, 1.194328566789627, 0.5971642833948135],
+                        zoom: 0
+                    }
+                }
+            }
+        }
+
+ * @class BasiGX.util.ConfigParser
+ */
+Ext.define('BasiGX.util.ConfigParser', {
+
+    autocreateLegends: false,
+
+    activeRouting: false,
+
+    appContext: null,
+
+    statics: {
+
+        /**
+         * the layer array which will hold the the maps layers and grouplayers
+         */
+        layerArray: [],
+
+        /**
+         * Method creates an ol3 map and its layers based on the given context
+         *
+         * @param {Object} context - the context object
+         * @return {ol.Map} map - An ol3-map or null if an invalid context was
+         *     given
+         */
+        setupMap: function(context) {
+            var me = this,
+                config;
+
+            if (!context || !context.data || !context.data.merge ||
+                !context.data.merge.mapConfig) {
+                    Ext.log.warn('Invalid context given to configParser!');
+                    return null;
+            }
+
+            config = context.data.merge;
+            me.appContext = config;
+
+            // TODO Refactor
+            if(window.location.hash.indexOf('center') > 0){
+                var centerString = location.hash.split('center/')[1].
+                split('|')[0];
+                config.startCenter = centerString;
+            }
+
+            me.map = new ol.Map({
+                controls: [new ol.control.ScaleLine()], // TODO add attribution
+                view: new ol.View({
+                  center: this.convertStringToNumericArray(
+                      'int', config.startCenter),
+                  zoom: config.startZoom || 2,
+                  maxResolution: config.maxResolution,
+                  minResolution: config.minResolution,
+                  projection: config.mapConfig.projection || 'EPSG:3857',
+                  units: 'm',
+                  resolutions: me.convertStringToNumericArray(
+                      'float', config.mapConfig.resolutions)
+                }),
+                logo: false
+            });
+            // create the layers
+            me.getLayersArray(context);
+            // add the layers
+            var layerGroup = new ol.layer.Group({layers: me.layerArray.reverse()});
+            me.map.setLayerGroup(layerGroup);
+
+            return me.map;
+        },
+
+        /**
+         * Creates an ol3 layer based on a config object
+         *
+         * @param {Object} layer - the layer object
+         * @returns {ol.Layer} - An ol3 layer object
+         */
+        createLayer: function(layer) {
+            var me = this;
+            var layerType = "Image";
+            var sourceType = "ImageWMS";
+
+            if (layer.type === "TileWMS" || layer.type === "WMS") {
+                layerType = "Tile";
+                sourceType = "TileWMS";
+            } else if (layer.type === "XYZ") {
+                layerType = "Tile";
+                sourceType = "XYZ";
+            } else if (layer.type === "WFSCluster" || layer.type === "WFS") {
+                layerType = "Vector";
+                sourceType = "Vector";
+            } else if (layer.type === "WMTS") {
+                layerType = "WMTS";
+                sourceType = "WMTS";
+            }
+
+            var source = me.getSourceForType(layer, sourceType);
+            return me.getLayerForType(layer, layerType, source);
+        },
+
+        /**
+         *
+         */
+        getSourceForType: function(config, sourceType) {
+
+            var me = this;
+            var map = me.map;
+            var projection = map.getView().getProjection();
+            var projCode = map.getView().getProjection().getCode();
+            var cfg;
+
+            var attributions = config.attribution ?
+                [new ol.Attribution({html: config.attribution})] : undefined;
+
+            if (sourceType === "Vector") {
+
+                // the wfscluster type expects a geoserver view similar
+                // as descibed on https://wiki.intranet.terrestris.de/doku.php?id=clustering
+                // There is currently now way in ol3 to request features on every
+                // extent change, so we need to handle it ourselves with map listeners,
+                // which happens in the cluster plugin
+                if (config.type === "WFSCluster") {
+                    cfg = {
+                        attributions: attributions
+                    };
+                } else {
+                    cfg = {
+                        attributions: attributions,
+                        loader: function(extent/*, resolution, projection */) {
+                            var vectorSource = this;
+                            var extraParams = {};
+
+                            var finalParams = Ext.apply({
+                                service: 'WFS',
+                                version: '1.1.0',
+                                request: 'GetFeature',
+                                outputFormat: 'application/json',
+                                typeName: config.layers,
+                                srsname: projCode,
+                                bbox: extent.join(',') + ',' + projCode
+                            }, extraParams || {});
+
+                            Ext.Ajax.request({
+                                url: config.url,
+                                method: 'GET',
+                                params: finalParams,
+                                success: function(response) {
+                                    var format = new ol.format.GeoJSON();
+                                    var features = format.readFeatures(response.responseText);
+                                    vectorSource.addFeatures(features);
+                                },
+                                failure: function(response) {
+                                    Ext.log.info('server-side failure with status code ' + response.status);
+                                }
+                            });
+
+                        },
+                        strategy: ol.loadingstrategy.tile(ol.tilegrid.createXYZ({
+                            maxZoom: 28
+                        }))
+                    };
+                }
+            } else if (sourceType === "TileWMS" ||
+                       sourceType === "WMS" ||
+                       sourceType === "ImageWMS" ||
+                       sourceType === "XYZ") {
+
+                cfg = {
+                    url: config.url,
+                    crossOrigin: config.crossOrigin,
+                    attributions: attributions,
+                    params: {
+                        LAYERS: config.layers,
+                        TRANSPARENT: config.transparent || true,
+                        VERSION: config.version || '1.1.1'
+                    }
+                };
+
+                // set a tilegrid if needed
+                if (me.appContext &&
+                    me.appContext.mapConfig &&
+                    me.appContext.mapConfig.resolutions &&
+                    (config.type === "TileWMS" || config.type === "XYZ") &&
+                    config.tileGrid === undefined) {
+                        cfg.tileGrid = new ol.tilegrid.TileGrid({
+                            extent: map.getView().getProjection().getExtent(),
+                            resolutions: me.convertStringToNumericArray(
+                                'float', me.appContext.mapConfig.resolutions)
+                        });
+                }
+
+                if ((config.type === "TileWMS" ||
+                     config.type === "WMS" ||
+                     config.type === "XYZ") && config.tiled) {
+                        cfg.params.TILED = true;
+                }
+
+            } else if (sourceType === "WMTS") {
+                var tileGrid;
+                // we simply assume it is a worldwide layer
+                var origin = ol.extent.getTopLeft(projection.getExtent());
+                var projectionExtent = projection.getExtent();
+                var size = ol.extent.getWidth(projectionExtent) / 256;
+                var resolutions = new Array(14);
+                var matrixIds = new Array(14);
+                for (var z = 0; z < 14; ++z) {
+                    // generate resolutions and matrixIds arrays for this
+                    // WMTS
+                    resolutions[z] = size / Math.pow(2, z);
+                    matrixIds[z] = z;
+                }
+                tileGrid = new ol.tilegrid.WMTS({
+                    origin: origin,
+                    resolutions: resolutions,
+                    matrixIds: matrixIds
+                });
+
+                cfg = {
+                    url: config.url,
+                    layer: config.layers,
+                    attributions: attributions,
+                    matrixSet: config.tilematrixset,
+                    format: config.format,
+                    projection: projection,
+                    tileGrid: tileGrid,
+                    style: config.style
+                };
+            }
+
+            return new ol.source[sourceType](cfg);
+
+        },
+
+        /**
+         *
+         */
+        getLayerForType: function(layer, layerType, source) {
+
+            var olLayerConfig = {
+                name: layer.name || 'No Name given',
+                legendUrl: layer.legendUrl || (this.autocreateLegends ?
+                    this.generateLegendUrl(layer) : null),
+                legendHeight: layer.legendHeight || null,
+                minResolution: layer.minResolution || undefined,
+                maxResolution: layer.maxResolution || undefined,
+                opacity: layer.opacity || 1,
+                visible: (layer.visibility === false) ? false : true,
+                treeColor: layer.treeColor,
+                routingId: layer.id || null,
+                olStyle: layer.olStyle || null,
+                // TODO we should get rid of `topic`
+                topic: layer.topic || layer.hoverField || null,
+                source: source,
+                type: layer.type,
+                featureType: layer.layers
+            };
+
+            // We don't require the hover plugin class to allow for smaller
+            // builds
+            if ('plugin' in BasiGX && 'Hover' in BasiGX.plugin) {
+                var hoverCls = BasiGX.plugin.Hover;
+                var hoverableProp = hoverCls.LAYER_HOVERABLE_PROPERTY_NAME;
+                var hoverfieldProp = hoverCls.LAYER_HOVERFIELD_PROPERTY_NAME;
+                var shallHover = false;
+                if (hoverableProp in layer) {
+                    shallHover = layer[hoverableProp];
+                } else {
+                    shallHover = !!layer[hoverfieldProp];
+                }
+                olLayerConfig[hoverableProp] = shallHover;
+                olLayerConfig[hoverfieldProp] = layer[hoverfieldProp];
+            }
+
+            // TODO Refactor ... Do we need an icon or a color...
+            if (layer.type === "WFSCluster") {
+                if(!layer.clusterColorString) {
+                    var r = Math.round(Math.random()*255, 10).toString();
+                    var g = Math.round(Math.random()*255, 10).toString();
+                    var b = Math.round(Math.random()*255, 10).toString();
+                    olLayerConfig.clusterColorString =
+                        'rgba('+r+','+g+','+b+',0.5)';
+                } else {
+                    olLayerConfig.clusterColorString = layer.clusterColorString;
+                }
+                olLayerConfig.icon = layer.icon;
+            }
+
+            // apply custom params of layer from appContext
+            if(layer.customParams) {
+                Ext.applyIf(olLayerConfig, layer.customParams);
+            }
+
+            return new ol.layer[layerType](olLayerConfig);
+        },
+
+        /**
+         * Creates an ol3 layer group
+         *
+         * @param {Object} node - the node which has been identified as group
+         * @returns {ol.layer.Group} - An ol3-layer group
+         */
+        createFolder: function(node) {
+            return new ol.layer.Group({
+                name: node.name,
+                visible: node.checked ? node.checked : false
+            });
+        },
+
+        /**
+         * This method gets called internally by the setupMap method, so there
+         * should be no need to call this directly
+         *
+         * @param {Object} context - The context holding the layers config
+         */
+        getLayersArray: function(context) {
+            var me = this,
+                layerConfig,
+                layerTreeConfig;
+
+            if (!context || !context.data || !context.data.merge ||
+                !context.data.merge.mapLayers) {
+                    Ext.log.warn('Invalid context given to configParser!');
+                    return;
+            }
+
+            layerConfig = context.data.merge.mapLayers;
+            layerTreeConfig = Ext.decode(context.data.merge.layerTreeConfig);
+
+            if (!Ext.isEmpty(layerTreeConfig)) {
+                // we have a SHOGun context and need to iterate through
+                // the treeconfig to get access to folders and special
+                // layer information
+                me.createLayersArrayFromShogunContext(layerTreeConfig, layerConfig);
+            } else {
+                me.createLayersArray(layerConfig);
+            }
+        },
+
+        /**
+         * Method sets up an layer and grouplayer collection for an ol3 map
+         *
+         * @param {Object} layerConfig - the layerconfig object
+         * @param {ol.layer.Group} parent - the parent to which we may append
+         */
+        createLayersArray: function(layerConfig, parent) {
+            var me = this;
+
+            Ext.each(layerConfig, function(node) {
+
+                if (node.type === "Folder") {
+                    var folder = me.createFolder(node);
+
+                    if (parent) {
+                        parent.getLayers().push(folder);
+                    } else {
+                        me.layerArray.push(folder);
+                    }
+
+                    // create child nodes if necessary
+                    if (node.layers && node.layers.length > 0) {
+                        me.createLayersArray(node.layers, folder);
+                    }
+
+                } else {
+                    if (parent) {
+                        parent.getLayers().push(me.createLayer(node));
+                    } else {
+                        me.layerArray.push(me.createLayer(node));
+                    }
+                }
+            }, me);
+        },
+
+        /**
+         * Method sets up an layer and grouplayer collection for an ol3 map
+         * based on an SHOGun application Context
+         *
+         * @param {Object} layerTreeConfig - the layerTreeConfig object
+         * @param {Object} layerConfig - the layerconfig object
+         * @param {ol.layer.Group} parent - the parent to which we may append
+         */
+        createLayersArrayFromShogunContext: function(layerTreeConfig, layerConfig, parent) {
+            var me = this;
+
+            Ext.each(layerTreeConfig, function(node) {
+
+                //handling the rootnode first
+                if (node.parentId === null && node.children) {
+                    me.createLayersArrayFromShogunContext(node.children, layerConfig);
+                } else if (node.leaf === false) {
+                    // handling folders
+                    var folder = me.createFolder(node);
+                    folder.set('expanded', node.expanded);
+
+                    if (parent) {
+                        parent.getLayers().push(folder);
+                        folder.set('parentFolder', parent);
+                    } else {
+                        me.layerArray.push(folder);
+                    }
+
+                    // create child nodes if necessary
+                    if (node.children && node.children.length > 0) {
+                        me.createLayersArrayFromShogunContext(
+                            node.children.reverse(), layerConfig, folder);
+                    }
+
+                } else {
+
+                    // handling layers
+                     // get node from config by its id
+                    var mergedNode = me.getNodeFromConfigById(node.mapLayerId, layerConfig);
+                    // adding properties from treeConfig to node from layerconfig
+                    mergedNode.visibility = node.checked;
+                    mergedNode.expanded = node.expanded;
+
+                    if (parent) {
+                        parent.getLayers().getArray().push(me.createLayer(mergedNode));
+                        if (node.checked) {
+                            parent.set('visible', true);
+                            var nextParent = parent.get('parentFolder');
+                            while (nextParent) {
+                                nextParent.set('visible', true);
+                                nextParent = nextParent.get('parentFolder');
+                            }
+                        }
+                    } else {
+                        me.layerArray.push(me.createLayer(mergedNode));
+                    }
+                }
+            }, me);
+        },
+
+        /**
+         * Method retrieves a layerconfig object by the given id
+         *
+         * @param {Integer} mapLayerId - the mapLayerId
+         * @returns {Object} match - the layer object that has been found
+         */
+        getNodeFromConfigById: function(mapLayerId, layerConfig) {
+            var match;
+            Ext.each(layerConfig, function(layer) {
+                if (layer.id === mapLayerId) {
+                    match = layer;
+                    return false;
+                }
+            });
+            return match;
+        },
+
+        /**
+         * Method turns a comma separated string into an array
+         * containing integers or floats
+         *
+         * @param {String} type - the type to convert to
+         * @param {String} string - the string to convert
+         * @returns {Array} arr - the parsed array
+         */
+        convertStringToNumericArray: function(type, string) {
+            if (Ext.isEmpty(string) || Ext.isEmpty(type)) {
+                Ext.log.warn('Cannot convert string to numeric array. Passed ' +
+                    'type was: ' + type + '; Passed string was: ' + string);
+                return string;
+            }
+            if (Ext.isArray(string)) {
+                Ext.log.warn('Passed array instead of string to convert to ' +
+                    ' array of ' + type + '. Returning input array unchanged.');
+                return string;
+            }
+            var arr = [];
+            Ext.each(string.split(','), function(part) {
+                if (type === 'int') {
+                    arr.push(parseInt(part, 10));
+                } else if (type === 'float') {
+                    arr.push(parseFloat(part, 10));
+                }
+            });
+            return arr;
+        },
+
+        /**
+         * Method creates a hopefully valid getlegendgraphic request for the
+         * given layer
+         */
+        generateLegendUrl: function(layer) {
+            var url = layer.url;
+            url += "?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&";
+            url += "FORMAT=image%2Fpng&TRANSPARENT=TRUE&";//HEIGHT=128&WIDTH=40&";
+            url += "LAYER=" + layer.layers;
+
+            return url;
+        }
+    }
+});

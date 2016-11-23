@@ -1,9 +1,651 @@
+/* Copyright (c) 2015 terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Nominatim Search
+ *
+ * Used to search in the glorious dataset of OSM
+ *
+ * Example of usage:
+ *     {
+ *         xtype: 'basigx-search-nominatim',
+ *         clusterResults: true,
+ *         viewboxlbrt: '6.9186,52.4677,11.2308,53.9642'
+ *     }
+ *
+ * @class BasiGX.view.container.NominatimSearch
+ */
+Ext.define("BasiGX.view.container.NominatimSearch", {
+    extend: "Ext.container.Container",
+    xtype: "basigx-search-nominatim",
 
-var __cov_qxo3zUK$wSegRtrvze0U_Q = (Function('return this'))();
-if (!__cov_qxo3zUK$wSegRtrvze0U_Q.__coverage__) { __cov_qxo3zUK$wSegRtrvze0U_Q.__coverage__ = {}; }
-__cov_qxo3zUK$wSegRtrvze0U_Q = __cov_qxo3zUK$wSegRtrvze0U_Q.__coverage__;
-if (!(__cov_qxo3zUK$wSegRtrvze0U_Q['/home/travis/build/terrestris/BasiGX/src/view/container/NominatimSearch.js'])) {
-   __cov_qxo3zUK$wSegRtrvze0U_Q['/home/travis/build/terrestris/BasiGX/src/view/container/NominatimSearch.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/container/NominatimSearch.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0,"137":0,"138":0,"139":0,"140":0,"141":0,"142":0,"143":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0],"19":[0,0],"20":[0,0],"21":[0,0],"22":[0,0],"23":[0,0],"24":[0,0],"25":[0,0],"26":[0,0],"27":[0,0,0],"28":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0},"fnMap":{"1":{"name":"(anonymous_1)","line":112,"loc":{"start":{"line":112,"column":45},"end":{"line":112,"column":68}}},"2":{"name":"(anonymous_2)","line":159,"loc":{"start":{"line":159,"column":24},"end":{"line":159,"column":49}}},"3":{"name":"(anonymous_3)","line":233,"loc":{"start":{"line":233,"column":19},"end":{"line":233,"column":30}}},"4":{"name":"(anonymous_4)","line":258,"loc":{"start":{"line":258,"column":23},"end":{"line":258,"column":41}}},"5":{"name":"(anonymous_5)","line":309,"loc":{"start":{"line":309,"column":40},"end":{"line":309,"column":77}}},"6":{"name":"(anonymous_6)","line":322,"loc":{"start":{"line":322,"column":34},"end":{"line":322,"column":50}}},"7":{"name":"(anonymous_7)","line":361,"loc":{"start":{"line":361,"column":19},"end":{"line":361,"column":39}}},"8":{"name":"(anonymous_8)","line":379,"loc":{"start":{"line":379,"column":52},"end":{"line":379,"column":62}}},"9":{"name":"(anonymous_9)","line":389,"loc":{"start":{"line":389,"column":28},"end":{"line":389,"column":39}}},"10":{"name":"(anonymous_10)","line":398,"loc":{"start":{"line":398,"column":15},"end":{"line":398,"column":26}}},"11":{"name":"(anonymous_11)","line":407,"loc":{"start":{"line":407,"column":19},"end":{"line":407,"column":30}}},"12":{"name":"(anonymous_12)","line":420,"loc":{"start":{"line":420,"column":35},"end":{"line":420,"column":50}}},"13":{"name":"(anonymous_13)","line":428,"loc":{"start":{"line":428,"column":21},"end":{"line":428,"column":39}}},"14":{"name":"(anonymous_14)","line":440,"loc":{"start":{"line":440,"column":21},"end":{"line":440,"column":40}}},"15":{"name":"(anonymous_15)","line":480,"loc":{"start":{"line":480,"column":23},"end":{"line":480,"column":42}}},"16":{"name":"(anonymous_16)","line":489,"loc":{"start":{"line":489,"column":27},"end":{"line":489,"column":45}}},"17":{"name":"(anonymous_17)","line":493,"loc":{"start":{"line":493,"column":33},"end":{"line":493,"column":48}}},"18":{"name":"(anonymous_18)","line":523,"loc":{"start":{"line":523,"column":18},"end":{"line":523,"column":34}}},"19":{"name":"(anonymous_19)","line":540,"loc":{"start":{"line":540,"column":20},"end":{"line":540,"column":41}}},"20":{"name":"(anonymous_20)","line":550,"loc":{"start":{"line":550,"column":22},"end":{"line":550,"column":56}}},"21":{"name":"(anonymous_21)","line":590,"loc":{"start":{"line":590,"column":24},"end":{"line":590,"column":58}}},"22":{"name":"(anonymous_22)","line":608,"loc":{"start":{"line":608,"column":30},"end":{"line":608,"column":64}}},"23":{"name":"(anonymous_23)","line":610,"loc":{"start":{"line":610,"column":19},"end":{"line":610,"column":32}}},"24":{"name":"(anonymous_24)","line":629,"loc":{"start":{"line":629,"column":34},"end":{"line":629,"column":51}}},"25":{"name":"(anonymous_25)","line":633,"loc":{"start":{"line":633,"column":34},"end":{"line":633,"column":49}}},"26":{"name":"(anonymous_26)","line":635,"loc":{"start":{"line":635,"column":47},"end":{"line":635,"column":59}}}},"statementMap":{"1":{"start":{"line":30,"column":0},"end":{"line":651,"column":3}},"2":{"start":{"line":113,"column":12},"end":{"line":130,"column":15}},"3":{"start":{"line":161,"column":12},"end":{"line":161,"column":72}},"4":{"start":{"line":162,"column":12},"end":{"line":164,"column":13}},"5":{"start":{"line":163,"column":16},"end":{"line":163,"column":35}},"6":{"start":{"line":165,"column":12},"end":{"line":181,"column":16}},"7":{"start":{"line":234,"column":8},"end":{"line":234,"column":22}},"8":{"start":{"line":237,"column":8},"end":{"line":237,"column":60}},"9":{"start":{"line":239,"column":8},"end":{"line":247,"column":9}},"10":{"start":{"line":240,"column":12},"end":{"line":245,"column":15}},"11":{"start":{"line":246,"column":12},"end":{"line":246,"column":56}},"12":{"start":{"line":249,"column":8},"end":{"line":273,"column":9}},"13":{"start":{"line":250,"column":12},"end":{"line":253,"column":15}},"14":{"start":{"line":255,"column":12},"end":{"line":267,"column":15}},"15":{"start":{"line":259,"column":20},"end":{"line":259,"column":64}},"16":{"start":{"line":260,"column":20},"end":{"line":260,"column":54}},"17":{"start":{"line":261,"column":20},"end":{"line":264,"column":21}},"18":{"start":{"line":262,"column":24},"end":{"line":262,"column":71}},"19":{"start":{"line":263,"column":24},"end":{"line":263,"column":54}},"20":{"start":{"line":265,"column":20},"end":{"line":265,"column":33}},"21":{"start":{"line":268,"column":12},"end":{"line":268,"column":45}},"22":{"start":{"line":271,"column":12},"end":{"line":271,"column":74}},"23":{"start":{"line":275,"column":8},"end":{"line":279,"column":11}},"24":{"start":{"line":281,"column":8},"end":{"line":343,"column":10}},"25":{"start":{"line":311,"column":28},"end":{"line":311,"column":58}},"26":{"start":{"line":312,"column":28},"end":{"line":316,"column":31}},"27":{"start":{"line":323,"column":28},"end":{"line":324,"column":50}},"28":{"start":{"line":344,"column":8},"end":{"line":344,"column":33}},"29":{"start":{"line":346,"column":8},"end":{"line":346,"column":57}},"30":{"start":{"line":347,"column":8},"end":{"line":347,"column":50}},"31":{"start":{"line":349,"column":8},"end":{"line":349,"column":67}},"32":{"start":{"line":351,"column":8},"end":{"line":354,"column":9}},"33":{"start":{"line":352,"column":12},"end":{"line":352,"column":63}},"34":{"start":{"line":353,"column":12},"end":{"line":353,"column":65}},"35":{"start":{"line":355,"column":8},"end":{"line":355,"column":62}},"36":{"start":{"line":362,"column":8},"end":{"line":363,"column":39}},"37":{"start":{"line":365,"column":8},"end":{"line":367,"column":9}},"38":{"start":{"line":366,"column":12},"end":{"line":366,"column":19}},"39":{"start":{"line":370,"column":8},"end":{"line":370,"column":28}},"40":{"start":{"line":373,"column":8},"end":{"line":373,"column":23}},"41":{"start":{"line":376,"column":8},"end":{"line":378,"column":9}},"42":{"start":{"line":377,"column":12},"end":{"line":377,"column":38}},"43":{"start":{"line":379,"column":8},"end":{"line":381,"column":11}},"44":{"start":{"line":380,"column":12},"end":{"line":380,"column":31}},"45":{"start":{"line":382,"column":8},"end":{"line":382,"column":50}},"46":{"start":{"line":390,"column":8},"end":{"line":390,"column":22}},"47":{"start":{"line":391,"column":8},"end":{"line":391,"column":68}},"48":{"start":{"line":392,"column":8},"end":{"line":392,"column":23}},"49":{"start":{"line":399,"column":8},"end":{"line":399,"column":22}},"50":{"start":{"line":400,"column":8},"end":{"line":400,"column":55}},"51":{"start":{"line":401,"column":8},"end":{"line":401,"column":63}},"52":{"start":{"line":408,"column":8},"end":{"line":409,"column":20}},"53":{"start":{"line":411,"column":8},"end":{"line":417,"column":10}},"54":{"start":{"line":419,"column":8},"end":{"line":419,"column":45}},"55":{"start":{"line":420,"column":8},"end":{"line":422,"column":11}},"56":{"start":{"line":421,"column":12},"end":{"line":421,"column":37}},"57":{"start":{"line":424,"column":8},"end":{"line":424,"column":28}},"58":{"start":{"line":426,"column":8},"end":{"line":445,"column":11}},"59":{"start":{"line":429,"column":16},"end":{"line":429,"column":37}},"60":{"start":{"line":430,"column":16},"end":{"line":437,"column":17}},"61":{"start":{"line":431,"column":20},"end":{"line":431,"column":64}},"62":{"start":{"line":432,"column":23},"end":{"line":437,"column":17}},"63":{"start":{"line":433,"column":20},"end":{"line":433,"column":52}},"64":{"start":{"line":435,"column":20},"end":{"line":436,"column":47}},"65":{"start":{"line":438,"column":16},"end":{"line":438,"column":59}},"66":{"start":{"line":441,"column":16},"end":{"line":441,"column":37}},"67":{"start":{"line":442,"column":16},"end":{"line":443,"column":30}},"68":{"start":{"line":482,"column":8},"end":{"line":483,"column":67}},"69":{"start":{"line":485,"column":8},"end":{"line":487,"column":9}},"70":{"start":{"line":486,"column":12},"end":{"line":486,"column":24}},"71":{"start":{"line":489,"column":8},"end":{"line":512,"column":11}},"72":{"start":{"line":490,"column":12},"end":{"line":490,"column":29}},"73":{"start":{"line":493,"column":12},"end":{"line":498,"column":15}},"74":{"start":{"line":494,"column":16},"end":{"line":497,"column":17}},"75":{"start":{"line":495,"column":20},"end":{"line":495,"column":37}},"76":{"start":{"line":496,"column":20},"end":{"line":496,"column":33}},"77":{"start":{"line":500,"column":12},"end":{"line":505,"column":15}},"78":{"start":{"line":506,"column":12},"end":{"line":510,"column":13}},"79":{"start":{"line":507,"column":16},"end":{"line":507,"column":65}},"80":{"start":{"line":509,"column":16},"end":{"line":509,"column":57}},"81":{"start":{"line":511,"column":12},"end":{"line":511,"column":70}},"82":{"start":{"line":514,"column":8},"end":{"line":514,"column":79}},"83":{"start":{"line":515,"column":8},"end":{"line":517,"column":9}},"84":{"start":{"line":516,"column":12},"end":{"line":516,"column":43}},"85":{"start":{"line":524,"column":8},"end":{"line":524,"column":22}},"86":{"start":{"line":525,"column":8},"end":{"line":525,"column":38}},"87":{"start":{"line":526,"column":8},"end":{"line":528,"column":11}},"88":{"start":{"line":529,"column":8},"end":{"line":531,"column":11}},"89":{"start":{"line":532,"column":8},"end":{"line":532,"column":39}},"90":{"start":{"line":534,"column":8},"end":{"line":534,"column":45}},"91":{"start":{"line":541,"column":8},"end":{"line":542,"column":64}},"92":{"start":{"line":543,"column":8},"end":{"line":543,"column":69}},"93":{"start":{"line":544,"column":8},"end":{"line":544,"column":45}},"94":{"start":{"line":551,"column":8},"end":{"line":553,"column":9}},"95":{"start":{"line":552,"column":12},"end":{"line":552,"column":19}},"96":{"start":{"line":554,"column":8},"end":{"line":554,"column":22}},"97":{"start":{"line":555,"column":8},"end":{"line":555,"column":20}},"98":{"start":{"line":556,"column":8},"end":{"line":556,"column":19}},"99":{"start":{"line":557,"column":8},"end":{"line":557,"column":17}},"100":{"start":{"line":559,"column":8},"end":{"line":559,"column":36}},"101":{"start":{"line":560,"column":8},"end":{"line":560,"column":53}},"102":{"start":{"line":562,"column":8},"end":{"line":571,"column":9}},"103":{"start":{"line":563,"column":12},"end":{"line":563,"column":73}},"104":{"start":{"line":564,"column":12},"end":{"line":565,"column":62}},"105":{"start":{"line":566,"column":12},"end":{"line":566,"column":57}},"106":{"start":{"line":567,"column":12},"end":{"line":567,"column":52}},"107":{"start":{"line":569,"column":12},"end":{"line":569,"column":38}},"108":{"start":{"line":570,"column":12},"end":{"line":570,"column":23}},"109":{"start":{"line":573,"column":8},"end":{"line":580,"column":9}},"110":{"start":{"line":574,"column":12},"end":{"line":576,"column":14}},"111":{"start":{"line":577,"column":12},"end":{"line":579,"column":14}},"112":{"start":{"line":581,"column":8},"end":{"line":584,"column":9}},"113":{"start":{"line":582,"column":12},"end":{"line":583,"column":39}},"114":{"start":{"line":591,"column":8},"end":{"line":593,"column":9}},"115":{"start":{"line":592,"column":12},"end":{"line":592,"column":19}},"116":{"start":{"line":594,"column":8},"end":{"line":594,"column":36}},"117":{"start":{"line":595,"column":8},"end":{"line":602,"column":9}},"118":{"start":{"line":596,"column":12},"end":{"line":596,"column":73}},"119":{"start":{"line":597,"column":12},"end":{"line":601,"column":13}},"120":{"start":{"line":598,"column":16},"end":{"line":598,"column":70}},"121":{"start":{"line":600,"column":16},"end":{"line":600,"column":78}},"122":{"start":{"line":609,"column":8},"end":{"line":609,"column":41}},"123":{"start":{"line":610,"column":8},"end":{"line":618,"column":17}},"124":{"start":{"line":611,"column":12},"end":{"line":611,"column":70}},"125":{"start":{"line":612,"column":12},"end":{"line":612,"column":52}},"126":{"start":{"line":613,"column":12},"end":{"line":617,"column":13}},"127":{"start":{"line":614,"column":16},"end":{"line":614,"column":69}},"128":{"start":{"line":616,"column":16},"end":{"line":616,"column":77}},"129":{"start":{"line":620,"column":8},"end":{"line":620,"column":75}},"130":{"start":{"line":621,"column":8},"end":{"line":621,"column":76}},"131":{"start":{"line":623,"column":8},"end":{"line":623,"column":57}},"132":{"start":{"line":630,"column":8},"end":{"line":630,"column":22}},"133":{"start":{"line":631,"column":8},"end":{"line":631,"column":27}},"134":{"start":{"line":632,"column":8},"end":{"line":632,"column":72}},"135":{"start":{"line":633,"column":8},"end":{"line":648,"column":11}},"136":{"start":{"line":634,"column":12},"end":{"line":644,"column":13}},"137":{"start":{"line":635,"column":16},"end":{"line":643,"column":19}},"138":{"start":{"line":636,"column":20},"end":{"line":642,"column":21}},"139":{"start":{"line":640,"column":27},"end":{"line":640,"column":49}},"140":{"start":{"line":641,"column":27},"end":{"line":641,"column":40}},"141":{"start":{"line":645,"column":12},"end":{"line":647,"column":13}},"142":{"start":{"line":646,"column":16},"end":{"line":646,"column":29}},"143":{"start":{"line":649,"column":8},"end":{"line":649,"column":30}}},"branchMap":{"1":{"line":124,"type":"cond-expr","locations":[{"start":{"line":124,"column":29},"end":{"line":129,"column":18}},{"start":{"line":129,"column":21},"end":{"line":129,"column":30}}]},"2":{"line":162,"type":"if","locations":[{"start":{"line":162,"column":12},"end":{"line":162,"column":12}},{"start":{"line":162,"column":12},"end":{"line":162,"column":12}}]},"3":{"line":239,"type":"if","locations":[{"start":{"line":239,"column":8},"end":{"line":239,"column":8}},{"start":{"line":239,"column":8},"end":{"line":239,"column":8}}]},"4":{"line":249,"type":"if","locations":[{"start":{"line":249,"column":8},"end":{"line":249,"column":8}},{"start":{"line":249,"column":8},"end":{"line":249,"column":8}}]},"5":{"line":249,"type":"binary-expr","locations":[{"start":{"line":249,"column":12},"end":{"line":249,"column":29}},{"start":{"line":249,"column":33},"end":{"line":249,"column":49}}]},"6":{"line":261,"type":"if","locations":[{"start":{"line":261,"column":20},"end":{"line":261,"column":20}},{"start":{"line":261,"column":20},"end":{"line":261,"column":20}}]},"7":{"line":351,"type":"if","locations":[{"start":{"line":351,"column":8},"end":{"line":351,"column":8}},{"start":{"line":351,"column":8},"end":{"line":351,"column":8}}]},"8":{"line":365,"type":"if","locations":[{"start":{"line":365,"column":8},"end":{"line":365,"column":8}},{"start":{"line":365,"column":8},"end":{"line":365,"column":8}}]},"9":{"line":376,"type":"if","locations":[{"start":{"line":376,"column":8},"end":{"line":376,"column":8}},{"start":{"line":376,"column":8},"end":{"line":376,"column":8}}]},"10":{"line":430,"type":"if","locations":[{"start":{"line":430,"column":16},"end":{"line":430,"column":16}},{"start":{"line":430,"column":16},"end":{"line":430,"column":16}}]},"11":{"line":432,"type":"if","locations":[{"start":{"line":432,"column":23},"end":{"line":432,"column":23}},{"start":{"line":432,"column":23},"end":{"line":432,"column":23}}]},"12":{"line":485,"type":"if","locations":[{"start":{"line":485,"column":8},"end":{"line":485,"column":8}},{"start":{"line":485,"column":8},"end":{"line":485,"column":8}}]},"13":{"line":494,"type":"if","locations":[{"start":{"line":494,"column":16},"end":{"line":494,"column":16}},{"start":{"line":494,"column":16},"end":{"line":494,"column":16}}]},"14":{"line":494,"type":"binary-expr","locations":[{"start":{"line":494,"column":20},"end":{"line":494,"column":21}},{"start":{"line":494,"column":25},"end":{"line":494,"column":79}}]},"15":{"line":506,"type":"if","locations":[{"start":{"line":506,"column":12},"end":{"line":506,"column":12}},{"start":{"line":506,"column":12},"end":{"line":506,"column":12}}]},"16":{"line":515,"type":"if","locations":[{"start":{"line":515,"column":8},"end":{"line":515,"column":8}},{"start":{"line":515,"column":8},"end":{"line":515,"column":8}}]},"17":{"line":551,"type":"if","locations":[{"start":{"line":551,"column":8},"end":{"line":551,"column":8}},{"start":{"line":551,"column":8},"end":{"line":551,"column":8}}]},"18":{"line":562,"type":"if","locations":[{"start":{"line":562,"column":8},"end":{"line":562,"column":8}},{"start":{"line":562,"column":8},"end":{"line":562,"column":8}}]},"19":{"line":573,"type":"if","locations":[{"start":{"line":573,"column":8},"end":{"line":573,"column":8}},{"start":{"line":573,"column":8},"end":{"line":573,"column":8}}]},"20":{"line":581,"type":"if","locations":[{"start":{"line":581,"column":8},"end":{"line":581,"column":8}},{"start":{"line":581,"column":8},"end":{"line":581,"column":8}}]},"21":{"line":591,"type":"if","locations":[{"start":{"line":591,"column":8},"end":{"line":591,"column":8}},{"start":{"line":591,"column":8},"end":{"line":591,"column":8}}]},"22":{"line":595,"type":"if","locations":[{"start":{"line":595,"column":8},"end":{"line":595,"column":8}},{"start":{"line":595,"column":8},"end":{"line":595,"column":8}}]},"23":{"line":597,"type":"if","locations":[{"start":{"line":597,"column":12},"end":{"line":597,"column":12}},{"start":{"line":597,"column":12},"end":{"line":597,"column":12}}]},"24":{"line":613,"type":"if","locations":[{"start":{"line":613,"column":12},"end":{"line":613,"column":12}},{"start":{"line":613,"column":12},"end":{"line":613,"column":12}}]},"25":{"line":634,"type":"if","locations":[{"start":{"line":634,"column":12},"end":{"line":634,"column":12}},{"start":{"line":634,"column":12},"end":{"line":634,"column":12}}]},"26":{"line":636,"type":"if","locations":[{"start":{"line":636,"column":20},"end":{"line":636,"column":20}},{"start":{"line":636,"column":20},"end":{"line":636,"column":20}}]},"27":{"line":636,"type":"binary-expr","locations":[{"start":{"line":636,"column":24},"end":{"line":636,"column":59}},{"start":{"line":637,"column":23},"end":{"line":637,"column":64}},{"start":{"line":638,"column":23},"end":{"line":639,"column":64}}]},"28":{"line":645,"type":"if","locations":[{"start":{"line":645,"column":12},"end":{"line":645,"column":12}},{"start":{"line":645,"column":12},"end":{"line":645,"column":12}}]}}};
-}
-__cov_qxo3zUK$wSegRtrvze0U_Q = __cov_qxo3zUK$wSegRtrvze0U_Q['/home/travis/build/terrestris/BasiGX/src/view/container/NominatimSearch.js'];
-__cov_qxo3zUK$wSegRtrvze0U_Q.s['1']++;Ext.define('BasiGX.view.container.NominatimSearch',{extend:'Ext.container.Container',xtype:'basigx-search-nominatim',requires:['GeoExt.data.store.Features','GeoExt.component.FeatureRenderer','BasiGX.util.Animate','BasiGX.util.Map'],viewModel:{data:{searchTermTextFieldLabel:'Suchbegriff',searchResultGridTitle:'Suchergebnisse',resetBtnText:'Zurücksetzen'}},config:{nominatimUrl:'http://nominatim.openstreetmap.org',format:'json',limit:100,viewboxlbrt:'-180,90,180,-90',minSearchTextChars:3,typeDelay:500,groupHeaderTpl:'{type}',searchResultFeatureStyle:new ol.style.Style({image:new ol.style.Circle({radius:6,fill:new ol.style.Fill({color:'#8B0000'}),stroke:new ol.style.Stroke({color:'#fff',width:2})}),fill:new ol.style.Fill({color:'#8B0000'}),stroke:new ol.style.Stroke({color:'#8B0000',width:4})}),searchResultHighlightFeatureStyleFn:function(radius,text){__cov_qxo3zUK$wSegRtrvze0U_Q.f['1']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['2']++;return new ol.style.Style({image:new ol.style.Circle({radius:radius,fill:new ol.style.Fill({color:'#EE0000'}),stroke:new ol.style.Stroke({color:'gray',width:3})}),text:text?(__cov_qxo3zUK$wSegRtrvze0U_Q.b['1'][0]++,new ol.style.Text({text:text.toString(),fill:new ol.style.Fill({color:'#fff'})})):(__cov_qxo3zUK$wSegRtrvze0U_Q.b['1'][1]++,undefined)});},searchResultSelectFeatureStyle:new ol.style.Style({image:new ol.style.Circle({radius:8,fill:new ol.style.Fill({color:'#0099CC'}),stroke:new ol.style.Stroke({color:'#fff',width:2})}),fill:new ol.style.Fill({color:'#0099CC'}),stroke:new ol.style.Stroke({color:'#0099CC',width:6})}),clusterStyleFn:function(amount,radius){__cov_qxo3zUK$wSegRtrvze0U_Q.f['2']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['3']++;var maxRadius=this.clusterLayer.getSource().distance_/2;__cov_qxo3zUK$wSegRtrvze0U_Q.s['4']++;if(radius>maxRadius){__cov_qxo3zUK$wSegRtrvze0U_Q.b['2'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['5']++;radius=maxRadius;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['2'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['6']++;return[new ol.style.Style({image:new ol.style.Circle({radius:radius,stroke:new ol.style.Stroke({color:'#fff'}),fill:new ol.style.Fill({color:'#3399CC'})}),text:new ol.style.Text({text:amount.toString(),fill:new ol.style.Fill({color:'#fff'})})})];},highLightFeatureOnHoverInGrid:true},layout:'fit',typeDelayTask:null,searchTerm:null,searchResultVectorLayer:null,clusterLayer:null,clusterResults:false,styleCache:[],map:null,initComponent:function(){__cov_qxo3zUK$wSegRtrvze0U_Q.f['3']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['7']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['8']++;me.map=BasiGX.util.Map.getMapComponent().getMap();__cov_qxo3zUK$wSegRtrvze0U_Q.s['9']++;if(!me.searchResultVectorLayer){__cov_qxo3zUK$wSegRtrvze0U_Q.b['3'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['10']++;me.searchResultVectorLayer=new ol.layer.Vector({name:'nominatimsearchresult',source:new ol.source.Vector(),style:me.getSearchResultFeatureStyle(),visible:!me.clusterResults});__cov_qxo3zUK$wSegRtrvze0U_Q.s['11']++;me.map.addLayer(me.searchResultVectorLayer);}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['3'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['12']++;if((__cov_qxo3zUK$wSegRtrvze0U_Q.b['5'][0]++,me.clusterResults)&&(__cov_qxo3zUK$wSegRtrvze0U_Q.b['5'][1]++,!me.clusterLayer)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['4'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['13']++;var clusterSource=new ol.source.Cluster({distance:40,source:me.searchResultVectorLayer.getSource()});__cov_qxo3zUK$wSegRtrvze0U_Q.s['14']++;me.clusterLayer=new ol.layer.Vector({name:'nominatimclusterlayer',source:clusterSource,style:function(feature){__cov_qxo3zUK$wSegRtrvze0U_Q.f['4']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['15']++;var amount=feature.get('features').length;__cov_qxo3zUK$wSegRtrvze0U_Q.s['16']++;var style=me.styleCache[amount];__cov_qxo3zUK$wSegRtrvze0U_Q.s['17']++;if(!style){__cov_qxo3zUK$wSegRtrvze0U_Q.b['6'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['18']++;style=me.clusterStyleFn(amount,amount+10);__cov_qxo3zUK$wSegRtrvze0U_Q.s['19']++;me.styleCache[amount]=style;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['6'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['20']++;return style;}});__cov_qxo3zUK$wSegRtrvze0U_Q.s['21']++;me.map.addLayer(me.clusterLayer);__cov_qxo3zUK$wSegRtrvze0U_Q.s['22']++;me.searchResultVectorLayer.setStyle(me.clusterStyleFn('',8));}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['4'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['23']++;var searchResultStore=Ext.create('GeoExt.data.store.Features',{map:me.map,layer:me.searchResultVectorLayer,groupField:'type'});__cov_qxo3zUK$wSegRtrvze0U_Q.s['24']++;me.items=[{xtype:'textfield',name:'nominatimSearchTerm',bind:{fieldLabel:'{searchTermTextFieldLabel}'},enableKeyEvents:true,listeners:{change:me.handleKeyDown}},{xtype:'grid',name:'nominatimsearchresultgrid',hidden:true,hideHeaders:true,bind:{title:'{searchResultGridTitle}'},store:searchResultStore,columns:[{xtype:'widgetcolumn',flex:1,widget:{xtype:'gx_renderer'},onWidgetAttach:function(column,gxRenderer,record){__cov_qxo3zUK$wSegRtrvze0U_Q.f['5']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['25']++;var feature=record.olObject;__cov_qxo3zUK$wSegRtrvze0U_Q.s['26']++;gxRenderer.update({feature:feature,symbolizers:GeoExt.component.FeatureRenderer.determineStyle(record)});}},{dataIndex:'displayfield',flex:7,renderer:function(value){__cov_qxo3zUK$wSegRtrvze0U_Q.f['6']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['27']++;return'<span data-qtip="'+value+'">'+value+'</span>';}}],features:[{ftype:'grouping',groupHeaderTpl:me.getGroupHeaderTpl()}],width:200,height:300},{xtype:'button',bind:{text:'{resetBtnText}'},margin:'10 0 0 0',handler:me.resetSearchGridAndText,scope:me}];__cov_qxo3zUK$wSegRtrvze0U_Q.s['28']++;me.callParent(arguments);__cov_qxo3zUK$wSegRtrvze0U_Q.s['29']++;me.on('nominatimResponse',me.showSearchResults);__cov_qxo3zUK$wSegRtrvze0U_Q.s['30']++;me.on('show',me.down('textfield').focus);__cov_qxo3zUK$wSegRtrvze0U_Q.s['31']++;var grid=me.down('grid[name=nominatimsearchresultgrid]');__cov_qxo3zUK$wSegRtrvze0U_Q.s['32']++;if(me.getHighLightFeatureOnHoverInGrid()){__cov_qxo3zUK$wSegRtrvze0U_Q.b['7'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['33']++;grid.on('itemmouseenter',me.highlightFeature,me);__cov_qxo3zUK$wSegRtrvze0U_Q.s['34']++;grid.on('itemmouseleave',me.unhighlightFeature,me);}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['7'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['35']++;grid.on('itemclick',me.highlightSelectedFeature,me);},handleKeyDown:function(textfield){__cov_qxo3zUK$wSegRtrvze0U_Q.f['7']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['36']++;var me=textfield.up('basigx-search-nominatim'),val=textfield.getValue();__cov_qxo3zUK$wSegRtrvze0U_Q.s['37']++;if(val.length<me.getMinSearchTextChars()){__cov_qxo3zUK$wSegRtrvze0U_Q.b['8'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['38']++;return;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['8'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['39']++;me.searchTerm=val;__cov_qxo3zUK$wSegRtrvze0U_Q.s['40']++;me.resetGrid();__cov_qxo3zUK$wSegRtrvze0U_Q.s['41']++;if(me.typeDelayTask){__cov_qxo3zUK$wSegRtrvze0U_Q.b['9'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['42']++;me.typeDelayTask.cancel();}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['9'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['43']++;me.typeDelayTask=new Ext.util.DelayedTask(function(){__cov_qxo3zUK$wSegRtrvze0U_Q.f['8']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['44']++;me.triggerSearch();});__cov_qxo3zUK$wSegRtrvze0U_Q.s['45']++;me.typeDelayTask.delay(me.getTypeDelay());},resetSearchGridAndText:function(){__cov_qxo3zUK$wSegRtrvze0U_Q.f['9']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['46']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['47']++;me.down('textfield[name=nominatimSearchTerm]').setValue('');__cov_qxo3zUK$wSegRtrvze0U_Q.s['48']++;me.resetGrid();},resetGrid:function(){__cov_qxo3zUK$wSegRtrvze0U_Q.f['10']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['49']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['50']++;me.searchResultVectorLayer.getSource().clear();__cov_qxo3zUK$wSegRtrvze0U_Q.s['51']++;me.down('grid[name=nominatimsearchresultgrid]').hide();},triggerSearch:function(){__cov_qxo3zUK$wSegRtrvze0U_Q.f['11']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['52']++;var me=this,results;__cov_qxo3zUK$wSegRtrvze0U_Q.s['53']++;var requestParams={q:me.searchTerm,format:me.getFormat(),limit:me.getLimit(),viewboxlbrt:me.getViewboxlbrt(),bounded:1};__cov_qxo3zUK$wSegRtrvze0U_Q.s['54']++;var url=me.getNominatimUrl()+'?';__cov_qxo3zUK$wSegRtrvze0U_Q.s['55']++;Ext.iterate(requestParams,function(k,v){__cov_qxo3zUK$wSegRtrvze0U_Q.f['12']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['56']++;url+=k+'='+v+'&';});__cov_qxo3zUK$wSegRtrvze0U_Q.s['57']++;me.setLoading(true);__cov_qxo3zUK$wSegRtrvze0U_Q.s['58']++;Ext.Ajax.request({url:url,success:function(response){__cov_qxo3zUK$wSegRtrvze0U_Q.f['13']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['59']++;me.setLoading(false);__cov_qxo3zUK$wSegRtrvze0U_Q.s['60']++;if(Ext.isString(response.responseText)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['10'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['61']++;results=Ext.decode(response.responseText);}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['10'][1]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['62']++;if(Ext.isObject(response.responseText)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['11'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['63']++;results=response.responseText;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['11'][1]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['64']++;Ext.log.error('Error! Could not parse '+'nominatim response!');}}__cov_qxo3zUK$wSegRtrvze0U_Q.s['65']++;me.fireEvent('nominatimResponse',results);},failure:function(response){__cov_qxo3zUK$wSegRtrvze0U_Q.f['14']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['66']++;me.setLoading(false);__cov_qxo3zUK$wSegRtrvze0U_Q.s['67']++;Ext.log.error('Error on nominatim request:',response);}});},showSearchResults:function(features){__cov_qxo3zUK$wSegRtrvze0U_Q.f['15']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['68']++;var me=this,grid=me.down('grid[name=nominatimsearchresultgrid]');__cov_qxo3zUK$wSegRtrvze0U_Q.s['69']++;if(features.length>0){__cov_qxo3zUK$wSegRtrvze0U_Q.b['12'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['70']++;grid.show();}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['12'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['71']++;Ext.each(features,function(feature){__cov_qxo3zUK$wSegRtrvze0U_Q.f['16']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['72']++;var displayfield;__cov_qxo3zUK$wSegRtrvze0U_Q.s['73']++;Ext.iterate(feature,function(k,v){__cov_qxo3zUK$wSegRtrvze0U_Q.f['17']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['74']++;if((__cov_qxo3zUK$wSegRtrvze0U_Q.b['14'][0]++,v)&&(__cov_qxo3zUK$wSegRtrvze0U_Q.b['14'][1]++,v.toString().toLowerCase().indexOf(me.searchTerm)>-1)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['13'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['75']++;displayfield=v;__cov_qxo3zUK$wSegRtrvze0U_Q.s['76']++;return false;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['13'][1]++;}});__cov_qxo3zUK$wSegRtrvze0U_Q.s['77']++;var olFeat=new ol.Feature({geometry:new ol.geom.Point(ol.proj.transform([parseFloat(feature.lon),parseFloat(feature.lat)],'EPSG:4326','EPSG:3857')),properties:feature});__cov_qxo3zUK$wSegRtrvze0U_Q.s['78']++;if(!displayfield){__cov_qxo3zUK$wSegRtrvze0U_Q.b['15'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['79']++;olFeat.set('displayfield',feature.display_name);}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['15'][1]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['80']++;olFeat.set('displayfield',displayfield);}__cov_qxo3zUK$wSegRtrvze0U_Q.s['81']++;me.searchResultVectorLayer.getSource().addFeature(olFeat);});__cov_qxo3zUK$wSegRtrvze0U_Q.s['82']++;var featureExtent=me.searchResultVectorLayer.getSource().getExtent();__cov_qxo3zUK$wSegRtrvze0U_Q.s['83']++;if(!Ext.Array.contains(featureExtent,Infinity)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['16'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['84']++;me.zoomToExtent(featureExtent);}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['16'][1]++;}},zoomToExtent:function(extent){__cov_qxo3zUK$wSegRtrvze0U_Q.f['18']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['85']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['86']++;var olView=me.map.getView();__cov_qxo3zUK$wSegRtrvze0U_Q.s['87']++;var pan=ol.animation.pan({source:olView.getCenter()});__cov_qxo3zUK$wSegRtrvze0U_Q.s['88']++;var zoom=ol.animation.zoom({resolution:olView.getResolution()});__cov_qxo3zUK$wSegRtrvze0U_Q.s['89']++;me.map.beforeRender(pan,zoom);__cov_qxo3zUK$wSegRtrvze0U_Q.s['90']++;olView.fit(extent,me.map.getSize());},updateRenderer:function(item,style){__cov_qxo3zUK$wSegRtrvze0U_Q.f['19']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['91']++;var renderer=Ext.getCmp(Ext.query('div[id^=gx_renderer',true,item)[0].id);__cov_qxo3zUK$wSegRtrvze0U_Q.s['92']++;var src=renderer.map.getLayers().getArray()[0].getSource();__cov_qxo3zUK$wSegRtrvze0U_Q.s['93']++;src.getFeatures()[0].setStyle(style);},highlightFeature:function(tableView,record,item){__cov_qxo3zUK$wSegRtrvze0U_Q.f['20']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['94']++;if(this.enterEventRec===record){__cov_qxo3zUK$wSegRtrvze0U_Q.b['17'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['95']++;return;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['17'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['96']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['97']++;var feature;__cov_qxo3zUK$wSegRtrvze0U_Q.s['98']++;var radius;__cov_qxo3zUK$wSegRtrvze0U_Q.s['99']++;var text;__cov_qxo3zUK$wSegRtrvze0U_Q.s['100']++;this.enterEventRec=record;__cov_qxo3zUK$wSegRtrvze0U_Q.s['101']++;ol.Observable.unByKey(this.flashListenerKey);__cov_qxo3zUK$wSegRtrvze0U_Q.s['102']++;if(this.clusterResults){__cov_qxo3zUK$wSegRtrvze0U_Q.b['18'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['103']++;feature=this.getClusterFeatureFromFeature(record.olObject);__cov_qxo3zUK$wSegRtrvze0U_Q.s['104']++;var featureStyle=this.clusterLayer.getStyle()(feature,me.map.getView().getResolution())[0];__cov_qxo3zUK$wSegRtrvze0U_Q.s['105']++;radius=featureStyle.getImage().getRadius();__cov_qxo3zUK$wSegRtrvze0U_Q.s['106']++;text=featureStyle.getText().getText();}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['18'][1]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['107']++;feature=record.olObject;__cov_qxo3zUK$wSegRtrvze0U_Q.s['108']++;radius=5;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['109']++;if(tableView.getSelection()[0]!==record){__cov_qxo3zUK$wSegRtrvze0U_Q.b['19'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['110']++;feature.setStyle(this.getSearchResultHighlightFeatureStyleFn()(radius,text));__cov_qxo3zUK$wSegRtrvze0U_Q.s['111']++;this.updateRenderer(item,this.getSearchResultHighlightFeatureStyleFn()(8,text));}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['19'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['112']++;if(feature){__cov_qxo3zUK$wSegRtrvze0U_Q.b['20'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['113']++;this.flashListenerKey=BasiGX.util.Animate.flashFeature(feature,1000,radius);}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['20'][1]++;}},unhighlightFeature:function(tableView,record,item){__cov_qxo3zUK$wSegRtrvze0U_Q.f['21']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['114']++;if(this.leaveEventRec===record){__cov_qxo3zUK$wSegRtrvze0U_Q.b['21'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['115']++;return;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['21'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['116']++;this.leaveEventRec=record;__cov_qxo3zUK$wSegRtrvze0U_Q.s['117']++;if(tableView.getSelection()[0]!==record){__cov_qxo3zUK$wSegRtrvze0U_Q.b['22'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['118']++;record.olObject.setStyle(this.getSearchResultFeatureStyle());__cov_qxo3zUK$wSegRtrvze0U_Q.s['119']++;if(this.clusterResults){__cov_qxo3zUK$wSegRtrvze0U_Q.b['23'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['120']++;this.updateRenderer(item,this.clusterStyleFn('',8));}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['23'][1]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['121']++;this.updateRenderer(item,this.getSearchResultFeatureStyle());}}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['22'][1]++;}},highlightSelectedFeature:function(tableView,record,item){__cov_qxo3zUK$wSegRtrvze0U_Q.f['22']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['122']++;var store=tableView.getStore();__cov_qxo3zUK$wSegRtrvze0U_Q.s['123']++;store.each(function(rec){__cov_qxo3zUK$wSegRtrvze0U_Q.f['23']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['124']++;rec.olObject.setStyle(this.getSearchResultFeatureStyle());__cov_qxo3zUK$wSegRtrvze0U_Q.s['125']++;var row=tableView.getRowByRecord(rec);__cov_qxo3zUK$wSegRtrvze0U_Q.s['126']++;if(this.clusterResults){__cov_qxo3zUK$wSegRtrvze0U_Q.b['24'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['127']++;this.updateRenderer(row,this.clusterStyleFn('',8));}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['24'][1]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['128']++;this.updateRenderer(row,this.getSearchResultFeatureStyle());}},this);__cov_qxo3zUK$wSegRtrvze0U_Q.s['129']++;record.olObject.setStyle(this.getSearchResultSelectFeatureStyle());__cov_qxo3zUK$wSegRtrvze0U_Q.s['130']++;this.updateRenderer(item,this.getSearchResultSelectFeatureStyle());__cov_qxo3zUK$wSegRtrvze0U_Q.s['131']++;this.zoomToExtent(record.olObject.getGeometry());},getClusterFeatureFromFeature:function(feature){__cov_qxo3zUK$wSegRtrvze0U_Q.f['24']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['132']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['133']++;var clusterFeature;__cov_qxo3zUK$wSegRtrvze0U_Q.s['134']++;var clusterFeatures=me.clusterLayer.getSource().getFeatures();__cov_qxo3zUK$wSegRtrvze0U_Q.s['135']++;Ext.each(clusterFeatures,function(feat){__cov_qxo3zUK$wSegRtrvze0U_Q.f['25']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['136']++;if(!Ext.isEmpty(feat.get('features'))){__cov_qxo3zUK$wSegRtrvze0U_Q.b['25'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['137']++;Ext.each(feat.get('features'),function(f){__cov_qxo3zUK$wSegRtrvze0U_Q.f['26']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['138']++;if((__cov_qxo3zUK$wSegRtrvze0U_Q.b['27'][0]++,f.getProperties().properties.osm_id)&&(__cov_qxo3zUK$wSegRtrvze0U_Q.b['27'][1]++,feature.getProperties().properties.osm_id)&&(__cov_qxo3zUK$wSegRtrvze0U_Q.b['27'][2]++,f.getProperties().properties.osm_id===feature.getProperties().properties.osm_id)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['26'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['139']++;clusterFeature=feat;__cov_qxo3zUK$wSegRtrvze0U_Q.s['140']++;return false;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['26'][1]++;}});}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['25'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['141']++;if(!Ext.isEmpty(clusterFeature)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['28'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['142']++;return false;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['28'][1]++;}});__cov_qxo3zUK$wSegRtrvze0U_Q.s['143']++;return clusterFeature;}});
+    requires: [
+        'GeoExt.data.store.Features',
+        'GeoExt.component.FeatureRenderer',
+
+        'BasiGX.util.Animate',
+        'BasiGX.util.Map'
+    ],
+
+    viewModel: {
+        data: {
+            searchTermTextFieldLabel: 'Suchbegriff',
+            searchResultGridTitle: 'Suchergebnisse',
+            resetBtnText: 'Zurücksetzen'
+        }
+    },
+
+    config: {
+        /**
+         * The URL to the nominatim service
+         */
+        nominatimUrl: 'http://nominatim.openstreetmap.org',
+
+        /**
+         *
+         */
+        format: 'json',
+
+        /**
+         * limit the search results count
+         */
+        limit: 100,
+
+        /**
+         * The lat-lon viewbox to limit the searchquery to
+         */
+        viewboxlbrt: '-180,90,180,-90',
+
+        /**
+         * minimum chars to trigger the search
+         */
+        minSearchTextChars: 3,
+
+        /**
+         * delay before query gets triggered to avoid triggers while typing
+         */
+        typeDelay: 500,
+
+        /**
+         * the template to change the groups titles
+         */
+        groupHeaderTpl: '{type}',
+
+        /**
+         *
+         */
+        searchResultFeatureStyle: new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 6,
+                fill: new ol.style.Fill({
+                    color: '#8B0000'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#fff',
+                    width: 2
+                })
+            }),
+            fill: new ol.style.Fill({
+                color: '#8B0000'
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#8B0000',
+                width: 4
+            })
+        }),
+
+        /**
+         *
+         */
+        searchResultHighlightFeatureStyleFn: function(radius, text) {
+            return new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: radius,
+                    fill: new ol.style.Fill({
+                        color: '#EE0000'
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: 'gray',
+                        width: 3
+                    })
+                }),
+                text: text ? new ol.style.Text({
+                    text: text.toString(),
+                    fill: new ol.style.Fill({
+                        color: '#fff'
+                    })
+                }) : undefined
+            });
+        },
+
+        /**
+         *
+         */
+        searchResultSelectFeatureStyle: new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 8,
+                fill: new ol.style.Fill({
+                    color: '#0099CC'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#fff',
+                    width: 2
+                })
+            }),
+            fill: new ol.style.Fill({
+                color: '#0099CC'
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#0099CC',
+                width: 6
+            })
+        }),
+
+       /**
+        *
+        */
+        clusterStyleFn: function(amount, radius) {
+            // set maxradius
+            var maxRadius = this.clusterLayer.getSource().distance_ / 2;
+            if (radius > maxRadius) {
+                radius = maxRadius;
+            }
+            return [new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: radius,
+                    stroke: new ol.style.Stroke({
+                        color: '#fff'
+                    }),
+                    fill: new ol.style.Fill({
+                        color: '#3399CC'
+                    })
+                }),
+                text: new ol.style.Text({
+                    text: amount.toString(),
+                    fill: new ol.style.Fill({
+                        color: '#fff'
+                    })
+                })
+            })];
+        },
+
+        /**
+         *
+         */
+        highLightFeatureOnHoverInGrid: true
+    },
+
+    /**
+     *
+     */
+    layout: 'fit',
+
+    /**
+     *
+     */
+    typeDelayTask: null,
+
+    /**
+     *
+     */
+    searchTerm: null,
+
+    /**
+     *
+     */
+    searchResultVectorLayer: null,
+
+    /**
+     *
+     */
+    clusterLayer: null,
+
+    /**
+     *
+     */
+    clusterResults: false,
+
+    /**
+     *
+     */
+    styleCache: [],
+
+    /**
+     *
+     */
+    map: null,
+
+    /**
+     *
+     */
+    initComponent: function() {
+        var me = this;
+
+        //set map
+        me.map = BasiGX.util.Map.getMapComponent().getMap();
+
+        if (!me.searchResultVectorLayer) {
+            me.searchResultVectorLayer = new ol.layer.Vector({
+                name: 'nominatimsearchresult',
+                source: new ol.source.Vector(),
+                style: me.getSearchResultFeatureStyle(),
+                visible: !me.clusterResults
+            });
+            me.map.addLayer(me.searchResultVectorLayer);
+        }
+
+        if (me.clusterResults && !me.clusterLayer) {
+            var clusterSource = new ol.source.Cluster({
+                distance: 40,
+                source: me.searchResultVectorLayer.getSource()//new ol.source.Vector()
+            });
+
+            me.clusterLayer = new ol.layer.Vector({
+                name: 'nominatimclusterlayer',
+                source: clusterSource,
+                style: function(feature) {
+                    var amount = feature.get('features').length;
+                    var style = me.styleCache[amount];
+                    if (!style) {
+                        style = me.clusterStyleFn(amount, amount + 10);
+                        me.styleCache[amount] = style;
+                    }
+                    return style;
+                }
+            });
+            me.map.addLayer(me.clusterLayer);
+
+            // correct the vectorlayerstyle for the grid symbolizer
+            me.searchResultVectorLayer.setStyle(me.clusterStyleFn('', 8));
+
+        }
+
+        var searchResultStore = Ext.create('GeoExt.data.store.Features', {
+            map: me.map,
+            layer: me.searchResultVectorLayer,
+            groupField: 'type'
+        });
+
+        me.items = [
+            {
+                xtype: 'textfield',
+                name: 'nominatimSearchTerm',
+                bind: {
+                    fieldLabel: '{searchTermTextFieldLabel}'
+                },
+                enableKeyEvents: true,
+                listeners: {
+                    change: me.handleKeyDown
+                }
+            },
+            {
+                xtype: 'grid',
+                name: 'nominatimsearchresultgrid',
+                hidden: true,
+                hideHeaders: true,
+                bind: {
+                    title: '{searchResultGridTitle}'
+                },
+                store: searchResultStore,
+                columns: [
+                    {
+                        xtype: 'widgetcolumn',
+                        flex: 1,
+                        widget: {
+                            xtype: 'gx_renderer'
+                        },
+                        onWidgetAttach: function(column, gxRenderer, record) {
+                            // update the symbolizer with the related feature
+                            var feature = record.olObject;
+                            gxRenderer.update({
+                                feature: feature,
+                                symbolizers: GeoExt.component.FeatureRenderer
+                                    .determineStyle(record)
+                            });
+                        }
+                    },
+                    {
+                        dataIndex: 'displayfield',
+                        flex: 7,
+                        renderer: function(value) {
+                            return '<span data-qtip="' + value + '">' +
+                                value + '</span>';
+                        }
+                    }
+                ],
+                features: [{
+                    ftype: 'grouping',
+                    groupHeaderTpl: me.getGroupHeaderTpl()
+                }],
+                width: 200,
+                height: 300
+            }, {
+                xtype: 'button',
+                bind: {
+                    text: '{resetBtnText}'
+                },
+                margin: '10 0 0 0',
+                handler: me.resetSearchGridAndText,
+                scope: me
+            }
+        ];
+        me.callParent(arguments);
+
+        me.on('nominatimResponse', me.showSearchResults);
+        me.on('show', me.down('textfield').focus);
+
+        var grid = me.down('grid[name=nominatimsearchresultgrid]');
+
+        if (me.getHighLightFeatureOnHoverInGrid()) {
+            grid.on('itemmouseenter', me.highlightFeature, me);
+            grid.on('itemmouseleave', me.unhighlightFeature, me);
+        }
+        grid.on('itemclick', me.highlightSelectedFeature, me);
+    },
+
+    /**
+     *
+     */
+    handleKeyDown: function(textfield) {
+        var me = textfield.up('basigx-search-nominatim'),
+            val = textfield.getValue();
+
+        if (val.length < me.getMinSearchTextChars()) {
+            return;
+        }
+
+        // set the searchterm on component
+        me.searchTerm = val;
+
+        // reset grid from aold values
+        me.resetGrid();
+
+        // prepare the describeFeatureType for all given layers
+        if (me.typeDelayTask) {
+            me.typeDelayTask.cancel();
+        }
+        me.typeDelayTask = new Ext.util.DelayedTask(function(){
+            me.triggerSearch();
+        });
+        me.typeDelayTask.delay(me.getTypeDelay());
+
+    },
+
+    /**
+     *
+     */
+    resetSearchGridAndText: function() {
+        var me = this;
+        me.down('textfield[name=nominatimSearchTerm]').setValue('');
+        me.resetGrid();
+    },
+
+    /**
+     *
+     */
+    resetGrid: function() {
+        var me = this;
+        me.searchResultVectorLayer.getSource().clear();
+        me.down('grid[name=nominatimsearchresultgrid]').hide();
+    },
+
+    /**
+     *
+     */
+    triggerSearch: function() {
+        var me = this,
+            results;
+
+        var requestParams = {
+            q: me.searchTerm,
+            format: me.getFormat(),
+            limit: me.getLimit(),
+            viewboxlbrt: me.getViewboxlbrt(),
+            bounded: 1
+        };
+
+        var url = me.getNominatimUrl() + "?";
+        Ext.iterate(requestParams, function(k, v) {
+            url += k + "=" + v + "&";
+        });
+
+        me.setLoading(true);
+
+        Ext.Ajax.request({
+            url: url,
+            success: function(response){
+                me.setLoading(false);
+                if(Ext.isString(response.responseText)) {
+                    results = Ext.decode(response.responseText);
+                } else if(Ext.isObject(response.responseText)) {
+                    results = response.responseText;
+                } else {
+                    Ext.log.error("Error! Could not parse " +
+                        "nominatim response!");
+                }
+                me.fireEvent('nominatimResponse', results);
+            },
+            failure: function(response) {
+                me.setLoading(false);
+                Ext.log.error("Error on nominatim request:",
+                    response);
+            }
+        });
+    },
+
+    /**
+     * Response example:
+     *  {
+            "place_id": "14823013",
+            "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright",
+            "osm_type": "node",
+            "osm_id": "1364459810",
+            "boundingbox": [
+                "53.4265254",
+                "53.4266254",
+                "8.5341417",
+                "8.5342417"
+            ],
+            "lat": "53.4265754",
+            "lon": "8.5341917",
+            "display_name": "Bäckerei, Bütteler Straße, Loxstedt, Landkreis Cuxhaven, Niedersachsen, 27612, Deutschland",
+            "class": "highway",
+            "type": "bus_stop",
+            "importance": 0.101,
+            "icon": "http://nominatim.openstreetmap.org/images/mapicons/transport_bus_stop2.p.20.png",
+            "address": {
+                "bus_stop": "Bäckerei",
+                "road": "Bütteler Straße",
+                "village": "Loxstedt",
+                "county": "Landkreis Cuxhaven",
+                "state": "Niedersachsen",
+                "postcode": "27612",
+                "country": "Deutschland",
+                "country_code": "de"
+            }
+     *  }
+     */
+    showSearchResults: function(features) {
+
+        var me = this,
+            grid = me.down('grid[name=nominatimsearchresultgrid]');
+
+        if(features.length > 0){
+            grid.show();
+        }
+
+        Ext.each(features, function(feature) {
+            var displayfield;
+
+            // find the matching value in order to display it
+            Ext.iterate(feature, function(k, v) {
+                if (v && v.toString().toLowerCase().indexOf(me.searchTerm) > -1) {
+                    displayfield = v;
+                    return false;
+                }
+            });
+
+            var olFeat = new ol.Feature({
+                geometry: new ol.geom.Point(ol.proj.transform(
+                    [parseFloat(feature.lon), parseFloat(feature.lat)], 'EPSG:4326', 'EPSG:3857'
+                )),
+                properties: feature
+            });
+            if (!displayfield) {
+                olFeat.set('displayfield', feature.display_name);
+            } else {
+                olFeat.set('displayfield', displayfield);
+            }
+            me.searchResultVectorLayer.getSource().addFeature(olFeat);
+        });
+
+        var featureExtent = me.searchResultVectorLayer.getSource().getExtent();
+        if(!Ext.Array.contains(featureExtent, Infinity)){
+            me.zoomToExtent(featureExtent);
+        }
+    },
+
+    /**
+     * Works with extent or geom.
+     */
+    zoomToExtent: function(extent){
+        var me = this;
+        var olView = me.map.getView();
+        var pan = ol.animation.pan({
+            source: olView.getCenter()
+        });
+        var zoom = ol.animation.zoom({
+           resolution: olView.getResolution()
+        });
+        me.map.beforeRender(pan, zoom);
+
+        olView.fit(extent, me.map.getSize());
+    },
+
+    /**
+     * update the symbolizer in the grid
+     */
+    updateRenderer: function(item, style){
+        var renderer = Ext.getCmp(
+            Ext.query('div[id^=gx_renderer', true, item)[0].id);
+        var src = renderer.map.getLayers().getArray()[0].getSource();
+        src.getFeatures()[0].setStyle(style);
+    },
+
+    /**
+     *
+     */
+    highlightFeature: function(tableView, record, item) {
+        if(this.enterEventRec === record){
+            return;
+        }
+        var me = this;
+        var feature;
+        var radius;
+        var text;
+
+        this.enterEventRec = record;
+        ol.Observable.unByKey(this.flashListenerKey);
+
+        if (this.clusterResults) {
+            feature = this.getClusterFeatureFromFeature(record.olObject);
+            var featureStyle = this.clusterLayer.getStyle()(
+                feature, me.map.getView().getResolution())[0];
+            radius = featureStyle.getImage().getRadius();
+            text = featureStyle.getText().getText();
+        } else {
+            feature = record.olObject;
+            radius = 5; // default value
+        }
+
+        if (tableView.getSelection()[0] !== record) {
+            feature.setStyle(
+                this.getSearchResultHighlightFeatureStyleFn()(radius, text)
+            );
+            this.updateRenderer(item,
+                this.getSearchResultHighlightFeatureStyleFn()(8, text)
+            );
+        }
+        if (feature) {
+            this.flashListenerKey = BasiGX.util.Animate.flashFeature(
+                feature, 1000, radius);
+        }
+    },
+
+    /**
+     *
+     */
+    unhighlightFeature: function(tableView, record, item) {
+        if(this.leaveEventRec === record){
+            return;
+        }
+        this.leaveEventRec = record;
+        if (tableView.getSelection()[0] !== record) {
+            record.olObject.setStyle(this.getSearchResultFeatureStyle());
+            if (this.clusterResults) {
+                this.updateRenderer(item, this.clusterStyleFn('', 8));
+            } else {
+                this.updateRenderer(item, this.getSearchResultFeatureStyle());
+            }
+        }
+    },
+
+    /**
+     *
+     */
+    highlightSelectedFeature: function(tableView, record, item) {
+        var store = tableView.getStore();
+        store.each(function(rec){
+            rec.olObject.setStyle(this.getSearchResultFeatureStyle());
+            var row = tableView.getRowByRecord(rec);
+            if (this.clusterResults) {
+                this.updateRenderer(row, this.clusterStyleFn('', 8));
+            } else {
+                this.updateRenderer(row, this.getSearchResultFeatureStyle());
+            }
+        }, this);
+
+        record.olObject.setStyle(this.getSearchResultSelectFeatureStyle());
+        this.updateRenderer(item, this.getSearchResultSelectFeatureStyle());
+
+        this.zoomToExtent(record.olObject.getGeometry());
+    },
+
+    /**
+     *
+     */
+    getClusterFeatureFromFeature: function(feature){
+        var me = this;
+        var clusterFeature;
+        var clusterFeatures = me.clusterLayer.getSource().getFeatures();
+        Ext.each(clusterFeatures, function(feat) {
+            if (!Ext.isEmpty(feat.get('features'))) {
+                Ext.each(feat.get('features'), function(f) {
+                    if (f.getProperties().properties.osm_id &&
+                       feature.getProperties().properties.osm_id &&
+                       f.getProperties().properties.osm_id ===
+                       feature.getProperties().properties.osm_id) {
+                           clusterFeature = feat;
+                           return false;
+                    }
+                });
+            }
+            if (!Ext.isEmpty(clusterFeature)) {
+                return false;
+            }
+        });
+        return clusterFeature;
+    }
+});
