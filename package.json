@@ -47,12 +47,12 @@
         "url": "https://github.com/terrestris/BasiGX.git"
     },
     "devDependencies": {
-        "coveralls": "2.11.6",
-        "eslint": "1.10.3",
+        "coveralls": "2.11.15",
+        "eslint": "3.10.2",
         "expect.js": "0.3.1",
         "istanbul": "0.4.1",
-        "mocha": "2.3.4",
-        "mocha-phantomjs": "4.0.1",
-        "sinon": "1.17.2"
+        "mocha": "3.1.2",
+        "mocha-phantomjs": "4.1.0",
+        "sinon": "1.17.6"
     }
 }
