@@ -45,6 +45,31 @@ describe('BasiGX.view.button.Measure', function() {
         });
     });
 
+    describe('Static methods', function() {
+        describe('#CSS_CLASSES.toSelector', function() {
+            var toSelector = BasiGX.view.button.Measure.CSS_CLASSES.toSelector;
+            it('transforms space separated string into CSS-selectors',
+                function() {
+                    expect(toSelector('a')).to.be('.a');
+                    expect(toSelector('  a  ')).to.be('.a');
+                    expect(toSelector('a b')).to.be('.a.b');
+                    expect(toSelector('a   b')).to.be('.a.b');
+                    expect(toSelector('  a b  ')).to.be('.a.b');
+                    expect(toSelector('  a   b  ')).to.be('.a.b');
+                    expect(toSelector('a b c d')).to.be('.a.b.c.d');
+                    expect(toSelector('  a   b   c   d  ')).to.be('.a.b.c.d');
+                }
+            );
+            it('throws un unexpected input',
+                function() {
+                    expect(toSelector).withArgs(undefined).to.throwException();
+                    expect(toSelector).withArgs('').to.throwException();
+                    expect(toSelector).withArgs(null).to.throwException();
+                }
+            );
+        });
+    });
+
     describe('Instantiation', function() {
 
         it('can be instanciated', function() {

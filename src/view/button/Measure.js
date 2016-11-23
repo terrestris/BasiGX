@@ -212,8 +212,16 @@ Ext.define("BasiGX.view.button.Measure", {
              * @return {String} A selector that can be used to query the DOM.
              */
             toSelector: function(classStr) {
+                if (!classStr) {
+                    Ext.raise('Cannot convert "' + classStr + '" to selector.');
+                }
                 var dot = '.';
-                return dot + classStr.split(' ').join(dot);
+                var space = ' ';
+                var trimmed = classStr
+                    .replace(/^\s+/, '') // leading whitespace
+                    .replace(/\s+$/, '') // trailing whitespace
+                    .replace(/\s+/g, space); // multiple spaces to one
+                return dot + trimmed.split(space).join(dot);
             }
         }
     },
