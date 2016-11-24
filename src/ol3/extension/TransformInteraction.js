@@ -2,7 +2,7 @@
  * https://raw.githubusercontent.com/Viglino/ol3-ext/gh-pages/interaction/transforminteraction.js
  * by https://github.com/Viglino at commit 8c92ee5c9668f3451c807f33fa4d9933eac2cd22
  * That code is licenced under the French Opensource BSD like CeCILL-B FREE
- * SOFTWARE LICENSE
+ * SOFTWARE LICENSE (http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html)
  */
 /**
  * A wrapper class that loads the excellent `ol.interaction.Transform` into
@@ -92,6 +92,13 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
         /** Can rotate the feature */
         this.set('rotate', (options.rotate !== false));
 
+        // TODO MJ: added option to keep a fixed scale when scaling at edges
+        var fixedScaleRatio = false;
+        if(options.fixedScaleRatio !== undefined) {
+            fixedScaleRatio = options.fixedScaleRatio;
+        }
+        this.set('fixedScaleRatio', fixedScaleRatio);
+
         // Force redraw when changed
         this.on('propertychange', function() {
             this.drawSketch_();
@@ -154,8 +161,12 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
         }
         ol.interaction.Pointer.prototype.setMap.call(this, map);
         this.overlayLayer_.setMap(map);
-        this.isTouch = /touch/.test(map.getViewport().className);
-        this.setDefaultStyle();
+        // Changed MJ: added guard whether map is not null.
+        // https://github.com/Viglino/ol3-ext/pull/16
+        if (map !== null) {
+            this.isTouch = /touch/.test(map.getViewport().className);
+            this.setDefaultStyle();
+        }
     };
 
     /**
@@ -548,14 +559,17 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
                 var scx = (evt.coordinate[0] - center[0]) / (this.coordinate_[0] - center[0]);
                 var scy = (evt.coordinate[1] - center[1]) / (this.coordinate_[1] - center[1]);
 
+                // TODO added MJ, fixedScaleRatio for scaling
+                var fixedScaleRatio = this.get('fixedScaleRatio');
                 if (this.constraint_) {
+                    // TODO added MJ, fixedScaleRatio for scaling
                     if (this.constraint_ === "h") {
-                        scx = 1;
+                        scx = fixedScaleRatio ? scy : 1;
                     } else {
-                        scy = 1;
+                        scy = fixedScaleRatio ? scx : 1;
                     }
                 } else {
-                    if (evt.originalEvent.shiftKey) {
+                    if (evt.originalEvent.shiftKey || fixedScaleRatio) {
                         scx = scy = Math.min(scx, scy);
                     }
                 }
@@ -581,7 +595,7 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
                 this.dispatchEvent({
                     type:'scaling',
                     feature: this.feature_,
-                    scale:[scx, scy],
+                    scale: [scx, scy],
                     pixel: evt.pixel,
                     coordinate: evt.coordinate
                 });
