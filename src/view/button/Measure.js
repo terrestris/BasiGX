@@ -165,7 +165,7 @@ Ext.define("BasiGX.view.button.Measure", {
     createdTooltipDivs: [],
 
     /**
-     * An array of created overlay we use for the tooltips. Used to eventually
+     * An array of created overlays we use for the tooltips. Used to eventually
      * clean up everything we added.
      *
      * @type{Array<ol.Overlay>}
@@ -281,7 +281,7 @@ Ext.define("BasiGX.view.button.Measure", {
      * is cleaned up when unpressed, and that measuring can start when pressed.
      *
      * @param {Ext.Button} btn The measure button itself.
-     * @param {Boolean} pressed Whether the biutton is now pressed or not.
+     * @param {Boolean} pressed Whether the button is now pressed or not.
      */
     onBtnToggle: function(btn, pressed) {
         btn.cleanUp();
