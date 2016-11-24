@@ -15,9 +15,7 @@
  */
 /**
  *
- * Layer Util
- *
- * Some methods to work with ol-layers
+ * A utility class offering static methods to work with OpenLayers layers.
  *
  * @class BasiGX.util.Layer
  */
@@ -26,10 +24,26 @@ Ext.define('BasiGX.util.Layer', {
         'BasiGX.util.Map'
     ],
     statics: {
+        /**
+         * A name of a boolean property that utility layers should set to an
+         * appropriate value (often `false`). The layer displaying components
+         * usually read out the property and determine whether to show an entry
+         * for the particular layer in question.
+         *
+         * TODO It should be safe to change the property to e.g.
+         *     `'basigx-displayInLayerSwitcher'`, but we'll keep it as is for
+         *     backwards compatibility for now.
+         */
         KEY_DISPLAY_IN_LAYERSWITCHER: 'bp_displayInLayerSwitcher',
 
         /**
-         * Method gets a ol3-layer by the given key-value constellation
+         * The name of a layer used for drawing measurements on. Can be used to
+         * dynamically determine that particular layer.
+         */
+        NAME_MEASURE_LAYER: 'basigx-measure-layer',
+
+        /**
+         * Get an ol3-layer by the given key-value constellation.
          *
          * @param {String} key - the layers property name
          * @param {String} val - the layers property value for the given key
@@ -65,7 +79,7 @@ Ext.define('BasiGX.util.Layer', {
         },
 
         /**
-         * Method gets an ol layer by the given name
+         * Get an ol3-layer by the given name.
          *
          * @param {String} layername - the layers name
          * @param {ol.Collection} collection - optional collection to search in
@@ -76,7 +90,7 @@ Ext.define('BasiGX.util.Layer', {
         },
 
         /**
-         * Method gets an ol layer by the given featureType
+         * Gets an ol3-layer by the given featureType.
          *
          * @param {String} featureType - the layers featureType
          * @param {ol.Collection} collection - optional collection to search in
