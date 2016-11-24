@@ -34,9 +34,10 @@
     },
     "output": "${package.dir}/build",
     "scripts": {
-        "pretest": "npm run lint-js",
+        "pretest": "npm run lint",
         "test": "mocha-phantomjs --ignore-resource-errors --ssl-protocol=any --ignore-ssl-errors=true --local-to-remote-url-access=true test/index.html",
-        "lint-js": "eslint -c .eslintrc src/ && eslint -c test/.eslintrc test/",
+        "lint": "eslint -c .eslintrc src/ && eslint -c test/.eslintrc test/",
+        "lint:fix": "eslint -c .eslintrc --fix src/ && eslint -c test/.eslintrc --fix test/",
         "save-coverage": "mocha-phantomjs --ignore-resource-errors --ssl-protocol=any --ignore-ssl-errors=true --local-to-remote-url-access=true --hooks ./test/phantom_hooks.js test/index.html",
         "clean-coverage": "rm -rf src_instrumented src_old coverage",
         "ci-coverage": "npm run clean-coverage && istanbul instrument src -o src_instrumented && mv src src_old && mv src_instrumented src && istanbul cover npm run save-coverage && mv src src_instrumented && mv src_old src && istanbul report --root ./coverage lcovonly && cat ./coverage/lcov.info | coveralls",
