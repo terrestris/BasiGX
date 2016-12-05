@@ -24,6 +24,55 @@
 Ext.define('BasiGX.util.Map', {
 
     statics: {
+        /**
+         * The dpi as defined by OGC (e.g. for WMTS tile matrix sets).
+         * Calculated as 25.4 / 0.28
+         *   * 25.4 mm in one inch
+         *   * one pixel is 0.28mm (per spec of OGC)
+         *
+         * @type {Number}
+         */
+        dpi: 90.7142857142857, // = 25.4 / 0.28;
+
+        /**
+         * The number of inches in a meter.
+         *
+         * @type {Number}
+         */
+        inchesPerMeter: 39.37,
+
+        /**
+         * Given a scale and a unit, this method will return a resolution.
+         *
+         * @param {Number} scale The scale ypu wish to have the resolution for.
+         * @param {String} units The units to get the resoultuion for, typically
+         *     the unit of the projection odf the map view. Allowed values are
+         *     `'degrees'`, `'ft'`, `'m'` or `'us-ft'`
+         * @return {Number} The calculated resolution.
+         */
+        getResolutionForScale: function(scale, units) {
+            var dpi = this.dpi;
+            var inchesPerMeter = this.inchesPerMeter;
+            var mpu = ol.proj.METERS_PER_UNIT[units];
+            return parseFloat(scale) / (mpu * inchesPerMeter * dpi);
+        },
+
+        /**
+         * Given a resolution and a unit, this method will return a scale.
+         *
+         * @param {Number} scale The resolution ypu wish to have the scale for.
+         * @param {String} units The units to get the resoultuion for, typically
+         *     the unit of the projection odf the map view. Allowed values are
+         *     `'degrees'`, `'ft'`, `'m'` or `'us-ft'`
+         * @return {Number} The calculated scale.
+         */
+        getScaleForResolution: function(resolution, units) {
+            var dpi = this.dpi;
+            var inchesPerMeter = this.inchesPerMeter;
+            var mpu = ol.proj.METERS_PER_UNIT[units];
+            return (resolution * mpu * inchesPerMeter * dpi);
+        },
+
         getResolution: function (map) {
             return map.getView().getResolution();
         },
@@ -34,11 +83,7 @@ Ext.define('BasiGX.util.Map', {
         getScale: function(map){
             var res = this.getResolution(map);
             var units = map.getView().getProjection().getUnits();
-            var dpi = 25.4 / 0.28;
-            var mpu = ol.proj.METERS_PER_UNIT[units];
-            var inchesPerMeter = 39.37;
-
-            return res * mpu * inchesPerMeter * dpi;
+            return this.getScaleForResolution(res, units);
         },
 
         /**
