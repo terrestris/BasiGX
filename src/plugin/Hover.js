@@ -490,6 +490,7 @@ Ext.define('BasiGX.plugin.Hover', {
         var me = this;
         var count = feature.get('count');
         var hoverColor = 'rgba(255, 0, 0, 0.6)';
+        var dynamicHoverColor = me.getDynamicHoverColor();
         var radius = 14;
         var fontSize = 10;
 
@@ -507,22 +508,22 @@ Ext.define('BasiGX.plugin.Hover', {
         return [
             new ol.style.Style({
                 fill: new ol.style.Fill({
-                    color: me.getDynamicHoverColor() ?
+                    color: dynamicHoverColor ?
                             me.transparify(baseColor, 0.3) : hoverColor
                 }),
                 image: new ol.style.Circle({
                     radius: radius,
                     fill: new ol.style.Fill({
-                        color: me.getDynamicHoverColor() ?
+                        color: dynamicHoverColor ?
                                 me.transparify(baseColor, 0.4) : hoverColor
                     }),
                     stroke: new ol.style.Stroke({
-                        color: me.getDynamicHoverColor() ?
+                        color: dynamicHoverColor ?
                                 me.transparify(baseColor, 0.6) : hoverColor
                     })
                 }),
                 stroke: new ol.style.Stroke({
-                    color: me.getDynamicHoverColor() ?
+                    color: dynamicHoverColor ?
                             me.transparify(baseColor, 0.5) : hoverColor,
                     width: 5
                 }),
