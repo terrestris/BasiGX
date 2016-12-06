@@ -469,9 +469,8 @@ Ext.define('BasiGX.plugin.Hover', {
         var green;
         var blue;
 
-        if (baseColor instanceof Uint8ClampedArray && baseColor.length === 4 &&
-                Ext.isNumber(baseColor[0]) && Ext.isNumber(baseColor[1]) &&
-                Ext.isNumber(baseColor[2]) && Ext.isNumber(baseColor[3])) {
+        if (baseColor.length === 4 && Ext.isNumber(baseColor[0]) &&
+                Ext.isNumber(baseColor[1]) && Ext.isNumber(baseColor[2])) {
             red = baseColor[0];
             green = baseColor[1];
             blue = baseColor[2];
