@@ -5,8 +5,7 @@
 "ol": false,
 "window": false,
 "location": false,
-"BasiGX": true,
-"Uint8ClampedArray": false
+"BasiGX": true
 },
 "rules": {
 "comma-dangle": 2,
