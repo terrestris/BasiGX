@@ -40,7 +40,23 @@ Ext.define('BasiGX.plugin.Hover', {
          *
          * @type {String}
          */
-        LAYER_HOVERFIELD_PROPERTY_NAME: 'hoverField'
+        LAYER_HOVERFIELD_PROPERTY_NAME: 'hoverField',
+
+        /**
+         * The prefix used in a regular expression to match any placeholder
+         * field in the hover template.
+         *
+         * @type {String}
+         */
+        HOVER_TEMPLATE_PLACEHOLDER_PREFIX: '\{\{',
+
+        /**
+         * The suffix used in a regular expression to match any placeholder
+         * field in the hover template.
+         *
+         * @type {String}
+         */
+        HOVER_TEMPLATE_PLACEHOLDER_SUFFIX: '\}\}'
     },
 
     config: {
@@ -50,7 +66,8 @@ Ext.define('BasiGX.plugin.Hover', {
         featureInfoEpsg: 'EPSG:3857',
         hoverVectorLayerSource: null,
         hoverVectorLayer: null,
-        hoverVectorLayerInteraction: null
+        hoverVectorLayerInteraction: null,
+        dynamicHoverColor: false
     },
 
     /**
@@ -135,18 +152,18 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
     /**
-    *
-    */
-   addHoverVectorLayerInteraction: function() {
-       var me = this;
-       var mapComponent = me.getCmp();
-       var map = mapComponent.getMap();
+     *
+     */
+    addHoverVectorLayerInteraction: function() {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
 
-       if (!me.getHoverVectorLayerInteraction()) {
+        if (!me.getHoverVectorLayerInteraction()) {
             var interaction = new ol.interaction.Select({
                 multi: me.selectMulti,
                 style: me.selectStyleFunction,
-                layers : [ me.getHoverVectorLayer() ]
+                layers: [ me.getHoverVectorLayer() ]
             });
             if (me.selectEventOrigin === 'collection') {
                 var featureCollection = interaction.getFeatures();
@@ -162,394 +179,517 @@ Ext.define('BasiGX.plugin.Hover', {
    /**
     *
     */
-   onFeatureClicked: function(olEvt) {
-       var me = this;
-       var mapComponent = me.getCmp();
-       var olFeatures;
-       if(me.selectEventOrigin === 'collection') {
-           olFeatures = olEvt.target.getArray();
-       } else {
-           olFeatures = olEvt.selected;
-       }
-       mapComponent.fireEvent('hoverfeaturesclick', olFeatures);
-   },
+    onFeatureClicked: function(olEvt) {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var olFeatures;
+        if (me.selectEventOrigin === 'collection') {
+            olFeatures = olEvt.target.getArray();
+        } else {
+            olFeatures = olEvt.selected;
+        }
+        mapComponent.fireEvent('hoverfeaturesclick', olFeatures);
+    },
 
-   /**
-    *
-    */
-   addHoverVectorLayerSource: function() {
-       var me = this;
-       if (!me.getHoverVectorLayerSource()) {
-           me.setHoverVectorLayerSource(new ol.source.Vector());
-       }
-   },
+    /**
+     *
+     */
+    addHoverVectorLayerSource: function() {
+        var me = this;
+        if (!me.getHoverVectorLayerSource()) {
+            me.setHoverVectorLayerSource(new ol.source.Vector());
+        }
+    },
 
-   /**
-    *
-    */
-   addHoverVectorLayer: function() {
-       var me = this;
-       var mapComponent = me.getCmp();
-       var map = mapComponent.getMap();
+    /**
+     *
+     */
+    addHoverVectorLayer: function() {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
 
-       var hoverVectorLayer = me.getHoverVectorLayer();
+        var hoverVectorLayer = me.getHoverVectorLayer();
 
-       if (!hoverVectorLayer) {
-           hoverVectorLayer = new ol.layer.Vector({
-               name: 'hoverVectorLayer',
-               source: me.getHoverVectorLayerSource(),
-               visible: true
-           });
-           map.addLayer(hoverVectorLayer);
-           me.setHoverVectorLayer(hoverVectorLayer);
-       }
-       // Set our internal flag to filter this layer out of the tree / legend
-       var displayInLayerSwitcherKey = BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
-       hoverVectorLayer.set(displayInLayerSwitcherKey, false);
-   },
+        if (!hoverVectorLayer) {
+            hoverVectorLayer = new ol.layer.Vector({
+                name: 'hoverVectorLayer',
+                source: me.getHoverVectorLayerSource(),
+                visible: true
+            });
+            map.addLayer(hoverVectorLayer);
+            me.setHoverVectorLayer(hoverVectorLayer);
+        }
+        // Set our internal flag to filter this layer out of the tree / legend
+        var displayInLayerSwitcherKey = BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+        hoverVectorLayer.set(displayInLayerSwitcherKey, false);
+    },
 
-   /**
-    *
-    */
-   clearPendingRequests: function() {
-       var me = this;
-       if(me.pendingRequest) {
-           Ext.Ajax.abort(me.pendingRequest);
-       }
-   },
+    /**
+     *
+     */
+    clearPendingRequests: function() {
+        var me = this;
+        if (me.pendingRequest) {
+            Ext.Ajax.abort(me.pendingRequest);
+        }
+    },
 
-   /**
-    *
-    */
-   requestAsynchronously: function(url, cb) {
-       var me = this;
+    /**
+     *
+     */
+    requestAsynchronously: function(url, cb) {
+        var me = this;
 
-       me.pendingRequest = Ext.Ajax.request({
-           url: url,
-           callback: function(){
-               me.pendingRequest = null;
-           },
-           success: cb,
-           failure: function(resp) {
-               if(!resp.aborted){
-                   Ext.log.error('Couldn\'t get FeatureInfo', resp);
-               }
-           }
-       });
-   },
+        me.pendingRequest = Ext.Ajax.request({
+            url: url,
+            callback: function() {
+                me.pendingRequest = null;
+            },
+            success: cb,
+            failure: function(resp) {
+                if (!resp.aborted) {
+                    Ext.log.error('Couldn\'t get FeatureInfo', resp);
+                }
+            }
+        });
+    },
 
-   cleanupHoverArtifacts: function(){
-       var me = this;
-       var overlayIdentifierKey = me.self.HOVER_OVERLAY_IDENTIFIER_KEY;
-       var overlayIdentifierVal = me.self.HOVER_OVERLAY_IDENTIFIER_VALUE;
-       var mapComponent = me.getCmp();
-       var map = mapComponent.getMap();
+    /**
+     *
+     */
+    cleanupHoverArtifacts: function() {
+        var me = this;
+        var overlayIdentifierKey = me.self.HOVER_OVERLAY_IDENTIFIER_KEY;
+        var overlayIdentifierVal = me.self.HOVER_OVERLAY_IDENTIFIER_VALUE;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
 
-       me.clearPendingRequests();
-       me.getHoverVectorLayerSource().clear();
-       map.getOverlays().forEach(function(o) {
-           if (o.get(overlayIdentifierKey) === overlayIdentifierVal) {
-               map.removeOverlay(o);
-           }
-       });
-   },
+        me.clearPendingRequests();
+        me.getHoverVectorLayerSource().clear();
+        map.getOverlays().forEach(function(o) {
+            if (o.get(overlayIdentifierKey) === overlayIdentifierVal) {
+                map.removeOverlay(o);
+            }
+        });
+    },
 
-   /**
-    */
-   onPointerRest: function(evt){
-       var me = this;
-       var mapComponent = me.getCmp();
-       var map = mapComponent.getMap();
-       var mapView = map.getView();
-       var pixel = evt.pixel;
-       var hoverableProp = BasiGX.plugin.Hover.LAYER_HOVERABLE_PROPERTY_NAME;
-       var hoverLayers = [];
-       var hoverFeatures = [];
+    /**
+     *
+     */
+    onPointerRest : function(evt) {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
+        var mapView = map.getView();
+        var pixel = evt.pixel;
+        var hoverableProp = me.self.LAYER_HOVERABLE_PROPERTY_NAME;
+        var hoverLayers = [];
+        var hoverFeatures = [];
 
-       me.cleanupHoverArtifacts();
+        me.cleanupHoverArtifacts();
 
-       map.forEachLayerAtPixel(pixel, function(layer) {
-           var source = layer.getSource();
-           var resolution = mapView.getResolution();
-           var projCode = mapView.getProjection().getCode();
-           var hoverable = layer.get(hoverableProp);
+        map.forEachLayerAtPixel(pixel, function(layer, pixelValues) {
+            var source = layer.getSource();
+            var resolution = mapView.getResolution();
+            var projCode = mapView.getProjection().getCode();
+            var hoverable = layer.get(hoverableProp);
 
-           // a layer will NOT be requested for hovering if there is a
-           // "hoverable" property set to false. If this property is not set
-           // or has any other value than "false", the layer will be
-           // requested
-           if(hoverable !== false) {
-               if (source instanceof ol.source.TileWMS ||
-                   source instanceof ol.source.ImageWMS) {
-//                   me.cleanupHoverArtifacts();
-                   var url = source.getGetFeatureInfoUrl(
-                           evt.coordinate,
-                           resolution,
-                           projCode,
-                           {'INFO_FORMAT': 'application/json'}
-                   );
-                   var urlWithParams = url + '&FEATURE_COUNT=50';
+            // a layer will NOT be requested for hovering if there is a
+            // "hoverable" property set to false. If this property is not set
+            // or has any other value than "false", the layer will be requested
+            if (hoverable !== false) {
+                if (source instanceof ol.source.TileWMS
+                        || source instanceof ol.source.ImageWMS) {
+                    // me.cleanupHoverArtifacts();
+                    var url = source.getGetFeatureInfoUrl(
+                        evt.coordinate,
+                        resolution,
+                        projCode,
+                        {
+                            'INFO_FORMAT': 'application/json',
+                            'FEATURE_COUNT': 50
+                        }
+                    );
 
-                   me.requestAsynchronously(urlWithParams, function(resp) {
-                       // TODO: replace evt/coords with real response geometry
-                       var respFeatures = (new ol.format.GeoJSON())
-                           .readFeatures(resp.responseText);
-                       var respProjection = (new ol.format.GeoJSON())
-                           .readProjection(resp.responseText);
+                    me.requestAsynchronously(url, function(resp) {
+                        // TODO: replace evt/coords with real response geometry
+                        var respFeatures = (new ol.format.GeoJSON())
+                                .readFeatures(resp.responseText);
+                        var respProjection = (new ol.format.GeoJSON())
+                                .readProjection(resp.responseText);
 
-                       var hvl = me.getHoverVectorLayer();
-                       hvl.setStyle(me.highlightStyleFunction);
-                       me.showHoverFeature(layer, respFeatures, respProjection);
+                        me.showHoverFeature(layer, respFeatures, respProjection);
 
-                       Ext.each(respFeatures, function(feature){
-                           feature.set('layer', layer);
-                           hoverFeatures.push(feature);
-                       });
-                       hoverLayers.push(layer);
+                        Ext.each(respFeatures, function(feature) {
+                            var featureStyle = me.highlightStyleFunction(
+                                    feature, resolution, pixelValues);
+                            feature.set('layer', layer);
+                            feature.setStyle(featureStyle);
+                            hoverFeatures.push(feature);
+                        });
 
-                       me.showHoverToolTip(evt, hoverLayers, hoverFeatures);
-                   });
-               } else if (source instanceof ol.source.Vector) {
-                   // VECTOR!
-                   map.forEachFeatureAtPixel(pixel, function(feat){
-                       if(layer.get('type') === "WFS" ||
-                          layer.get('type') === "WFSCluster"){
-                           var hvl = me.getHoverVectorLayer();
-                           // TODO This should be dynamically generated
-                           // from the clusterStyle
-                           hvl.setStyle(me.highlightStyleFunction);
-                       }
-                       var featureClone = feat.clone();
-                       featureClone.set('layer', layer);
-                       hoverLayers.push(layer);
-                       hoverFeatures.push(featureClone);
-                       me.showHoverFeature(layer, hoverFeatures);
-                       me.currentHoverTarget = feat;
+                        hoverLayers.push(layer);
 
-                   }, me, function(vectorCand){
-                       return vectorCand === layer;
-                   });
-               }
-           }
+                        me.showHoverToolTip(evt, hoverLayers, hoverFeatures);
+                    });
+                } else if (source instanceof ol.source.Vector) {
+                    // VECTOR!
+                    map.forEachFeatureAtPixel(pixel, function(feat) {
+                        if (layer.get('type') === "WFS" ||
+                                layer.get('type') === "WFSCluster") {
+                            var hvl = me.getHoverVectorLayer();
+                            // TODO This should be dynamically generated
+                            // from the clusterStyle
+                            hvl.setStyle(me.highlightStyleFunction);
+                        }
+                        var featureClone = feat.clone();
+                        featureClone.set('layer', layer);
+                        hoverLayers.push(layer);
+                        hoverFeatures.push(featureClone);
+                        me.showHoverFeature(layer, hoverFeatures);
+                        me.currentHoverTarget = feat;
+                    }, me, function(vectorCand) {
+                        return vectorCand === layer;
+                    });
+                }
+            }
+        }, this, me.hoverLayerFilter, this);
 
-       }, this, me.hoverLayerFilter);
+        me.showHoverToolTip(evt, hoverLayers, hoverFeatures);
+    },
 
-       me.showHoverToolTip(evt, hoverLayers, hoverFeatures);
-   },
+    /**
+     *
+     */
+    hoverLayerFilter: function(candidate) {
+        var me = this;
+        var hoverableProp = me.self.LAYER_HOVERABLE_PROPERTY_NAME;
+        if (candidate.get(hoverableProp) ||
+                candidate.get('type') === 'WFSCluster') {
+            return true;
+        } else {
+            return false;
+        }
+    },
 
-   /**
-    *
-    */
-   hoverLayerFilter: function(candidate) {
-       var hoverableProp = BasiGX.plugin.Hover.LAYER_HOVERABLE_PROPERTY_NAME;
-       if(candidate.get(hoverableProp) ||
-               candidate.get('type') === 'WFSCluster'){
-           return true;
-       } else {
-           return false;
-       }
-   },
+    /**
+     *
+     */
+    showHoverFeature: function(layer, features, projection) {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
+        var proj = me.getFeatureInfoEpsg();
+        if (projection) {
+            proj = projection;
+        }
 
-   /**
-    *
-    */
-   showHoverFeature: function(layer, features, projection) {
-       var me = this;
-       var mapComponent = me.getCmp();
-       var map = mapComponent.getMap();
-       var proj = me.getFeatureInfoEpsg();
-       if(projection){
-           proj = projection;
-       }
+        Ext.each(features, function(feat){
+            var g = feat.getGeometry();
+            if (g) {
+                g.transform(proj, map.getView().getProjection());
+            }
+            if(!Ext.Array.contains(me.getHoverVectorLayerSource().getFeatures(),
+                feat)){
+                me.getHoverVectorLayerSource().addFeature(feat);
+            }
+        });
+    },
 
-       Ext.each(features, function(feat){
-           var g = feat.getGeometry();
-           if(g){
-               g.transform(proj, map.getView().getProjection());
-           }
-           if(!Ext.Array.contains(me.getHoverVectorLayerSource().getFeatures(),
-               feat)){
-               me.getHoverVectorLayerSource().addFeature(feat);
-           }
-       });
-   },
+    /**
+     *
+     */
+    showHoverToolTip: function(evt, layers, features) {
+        var me = this;
+        var overlayIdentifierKey = me.self.HOVER_OVERLAY_IDENTIFIER_KEY;
+        var overlayIdentifierVal = me.self.HOVER_OVERLAY_IDENTIFIER_VALUE;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
+        var coords = evt.coordinate;
 
-   /**
-    *
-    */
-   showHoverToolTip: function(evt, layers, features) {
-       var me = this;
-       var overlayIdentifierKey = me.self.HOVER_OVERLAY_IDENTIFIER_KEY;
-       var overlayIdentifierVal = me.self.HOVER_OVERLAY_IDENTIFIER_VALUE;
-       var mapComponent = me.getCmp();
-       var map = mapComponent.getMap();
-       var coords = evt.coordinate;
+        if (layers.length > 0 && features.length > 0) {
+            map.getOverlays().forEach(function(o) {
+                map.removeOverlay(o);
+            });
 
-       if(layers.length > 0 && features.length > 0){
-           map.getOverlays().forEach(function(o) {
-               map.removeOverlay(o);
-           });
+            var div = Ext.dom.Helper.createDom('<div>');
+            div.className = 'feature-hover-popup';
+            div.innerHTML = this.getToolTipHtml(layers, features);
+            var overlay = new ol.Overlay({
+                position: coords,
+                offset: [10, -30],
+                element: div
+            });
+            overlay.set(overlayIdentifierKey, overlayIdentifierVal);
+            map.addOverlay(overlay);
+        }
 
-           var div = Ext.dom.Helper.createDom('<div>');
-           div.className = 'feature-hover-popup';
-           div.innerHTML = this.getToolTipHtml(layers, features);
-           var overlay = new ol.Overlay({
-               position: coords,
-               offset: [10, -30],
-               element: div
-           });
-           overlay.set(overlayIdentifierKey, overlayIdentifierVal);
-           map.addOverlay(overlay);
-       }
+    },
 
-   },
+    /**
+     *
+     */
+    getToolTipHtml: function(layers, features) {
+        var me = this;
+        var innerHtml = '';
+        var hoverfieldProp = me.self.LAYER_HOVERFIELD_PROPERTY_NAME;
 
-   /**
-    *
-    */
-   getToolTipHtml: function(layers, features){
-       var innerHtml = '';
-       var hoverfieldProp = BasiGX.plugin.Hover.LAYER_HOVERFIELD_PROPERTY_NAME;
+        Ext.each(features, function(feat) {
+            var layer = feat.get('layer');
+            var hoverFieldProp = layer.get(hoverfieldProp);
 
-       Ext.each(features, function(feat){
-           var layer = feat.get('layer');
-           var hoverfield = layer.get(hoverfieldProp);
+            var hoverText = me.getHoverTextFromTemplate(feat, hoverFieldProp);
 
-           // fallback if hoverfield is not configured
-           if(!hoverfield) {
-               // try to use "id" as fallback.
-               // if "id" is not available, the value will be "undefined"
-               hoverfield = 'id';
-           }
-           innerHtml += '<b>' + layer.get('name') + '</b>';
+            innerHtml += '<b>' + layer.get('name') + '</b>';
 
-           // we check for existing feature here as there maybe strange
-           // situations (e.g. when zooming in unfavorable situations)
-           // where feat is undefined
-           if(feat) {
-               if(layer.get('type') === 'WFSCluster'){
-                   var count = feat.get('count');
-                   innerHtml += '<br />' + count + '<br />';
-               } else {
-                   var hoverfieldValue = feat.get(hoverfield);
-                   innerHtml += '<br />' + hoverfieldValue + '<br />';
-               }
-           }
-       });
+            // we check for existing feature here as there maybe strange
+            // situations (e.g. when zooming in unfavorable situations) where
+            // feat is undefined
+            if (feat) {
+                if (layer.get('type') === 'WFSCluster') {
+                    var count = feat.get('count');
+                    innerHtml += '<br />' + count + '<br />';
+                } else {
+                    innerHtml += '<br />' + hoverText + '<br />';
+                }
+            }
+        });
 
-       return innerHtml;
-   },
+        return innerHtml;
+    },
 
-   highlightStyleFunction: function(feature){
-       var count = feature.get('count'),
-       radius = 14,
-       fontSize = 10;
+    /**
+     *
+     */
+    transparify: function(baseColor, alpha) {
+        var rgbaTemplate = 'rgba({0}, {1}, {2}, {3})';
+        var fallbackBaseColor = [255, 0, 0];
+        var red;
+        var green;
+        var blue;
 
-       if (count && count > 10) {
-           radius = 25;
-           fontSize = 14;
-       } else if (count && count < 4) {
-           fontSize = 7;
-           radius = 8;
-       } else if (count) {
-           radius = count * 2;
-           fontSize = count * 1.3;
-       }
+        if (baseColor instanceof Uint8ClampedArray && baseColor.length === 4 &&
+                Ext.isNumber(baseColor[0]) && Ext.isNumber(baseColor[1]) &&
+                Ext.isNumber(baseColor[2]) && Ext.isNumber(baseColor[3])) {
+            red = baseColor[0];
+            green = baseColor[1];
+            blue = baseColor[2];
+        } else {
+            red = fallbackBaseColor[0];
+            green = fallbackBaseColor[1];
+            blue = fallbackBaseColor[2];
+        }
 
-       return [
-           new ol.style.Style({
-               fill: new ol.style.Fill({
-                   color: "rgba(255, 0, 0, 0.6)"
-               }),
-               image: new ol.style.Circle({
-                   radius: radius,
-                   fill: new ol.style.Fill({
-                       color: "rgba(255, 0, 0, 0.6)"
-                   }),
-                   stroke: new ol.style.Stroke({
-                       color: 'gray'
-                   })
-               }),
-               stroke: new ol.style.Stroke({
-                   color: "rgba(255, 0, 0, 0.6)",
-                   width: 5
-               }),
-               text: new ol.style.Text({
-                   text: count > 1 ? count.toString() : '',
-                   font: 'bold ' + fontSize * 2 + 'px Arial',
-                   stroke: new ol.style.Stroke({
-                       color: 'black',
-                       width: 1
-                   }),
-                   fill: new ol.style.Fill({color: 'white'})
-               })
-           })
-       ];
-   },
+        return Ext.String.format(rgbaTemplate, red, green, blue, alpha || 1);
+    },
 
-   selectStyleFunction: function(feature){
-       var count = feature.get('count'),
-       radius = 14,
-       fontSize = 10;
+    /**
+     *
+     */
+    highlightStyleFunction: function(feature, resolution, baseColor) {
+        var me = this;
+        var count = feature.get('count');
+        var hoverColor = 'rgba(255, 0, 0, 0.6)';
+        var radius = 14;
+        var fontSize = 10;
 
-       if (count && count > 10) {
-           radius = 25;
-           fontSize = 14;
-       } else if (count && count < 4) {
-           fontSize = 7;
-           radius = 8;
-       } else if (count) {
-           radius = count * 2;
-           fontSize = count * 1.3;
-       }
-       return [
-           new ol.style.Style({
-               fill: new ol.style.Fill({
-                   color: "rgba(0, 0, 255, 0.6)"
-               }),
-               image: new ol.style.Circle({
-                   radius: radius,
-                   fill: new ol.style.Fill({
-                       color: "rgba(0, 0, 255, 0.6)"
-                   }),
-                   stroke: new ol.style.Stroke({
-                       color: 'gray'
-                   })
-               }),
-               text: new ol.style.Text({
-                   text: count > 1 ? count.toString() : '',
-                   font: 'bold ' + fontSize * 2 + 'px Arial',
-                   stroke: new ol.style.Stroke({
-                       color: 'black',
-                       width: 1
-                   }),
-                   fill: new ol.style.Fill({color: 'white'})
-               })
-           })
-       ];
-   },
+        if (count && count > 10) {
+            radius = 25;
+            fontSize = 14;
+        } else if (count && count < 4) {
+            fontSize = 7;
+            radius = 8;
+        } else if (count) {
+            radius = count * 2;
+            fontSize = count * 1.3;
+        }
 
-   hoverClusterFeatures: function(pixel){
-       var me = this;
-       var mapComponent = me.getCmp();
-       var map = mapComponent.getMap();
-       var wmsHoverPlugin = mapComponent.getPlugin('wmshover');
+        return [
+            new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: me.getDynamicHoverColor() ?
+                            me.transparify(baseColor, 0.3) : hoverColor
+                }),
+                image: new ol.style.Circle({
+                    radius: radius,
+                    fill: new ol.style.Fill({
+                        color: me.getDynamicHoverColor() ?
+                                me.transparify(baseColor, 0.4) : hoverColor
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: me.getDynamicHoverColor() ?
+                                me.transparify(baseColor, 0.6) : hoverColor
+                    })
+                }),
+                stroke: new ol.style.Stroke({
+                    color: me.getDynamicHoverColor() ?
+                            me.transparify(baseColor, 0.5) : hoverColor,
+                    width: 5
+                }),
+                text: new ol.style.Text({
+                    text: count > 1 ? count.toString() : '',
+                    font: 'bold ' + fontSize * 2 + 'px Arial',
+                    stroke: new ol.style.Stroke({
+                        color: 'black',
+                        width: 1
+                    }),
+                    fill: new ol.style.Fill({
+                        color: 'white'
+                    })
+                })
+            })
+        ];
+    },
 
-       var feature = map.forEachFeatureAtPixel(pixel, function(feat) {
-           return feat;
-       });
+    /**
+     *
+     */
+    selectStyleFunction: function(feature) {
+        var count = feature.get('count');
+        var radius = 14;
+        var fontSize = 10;
 
-       if(feature === me.highlightFeature || !feature){
-           wmsHoverPlugin.cleanupHoverArtifacts();
-           return;
-       } else {
-           var hvl = wmsHoverPlugin.getHoverVectorLayer();
-           hvl.setStyle(me.highlightStyleFunction);
-           var hvlSource = wmsHoverPlugin.getHoverVectorLayerSource();
-           wmsHoverPlugin.cleanupHoverArtifacts();
-           hvlSource.addFeature(feature);
-           me.highLightedFeature = feature;
-       }
-   }
+        if (count && count > 10) {
+            radius = 25;
+            fontSize = 14;
+        } else if (count && count < 4) {
+            fontSize = 7;
+            radius = 8;
+        } else if (count) {
+            radius = count * 2;
+            fontSize = count * 1.3;
+        }
+
+        return [
+            new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: "rgba(0, 0, 255, 0.6)"
+                }),
+                image: new ol.style.Circle({
+                    radius: radius,
+                    fill: new ol.style.Fill({
+                        color: "rgba(0, 0, 255, 0.6)"
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: 'gray'
+                    })
+                }),
+                text: new ol.style.Text({
+                    text: count > 1 ? count.toString() : '',
+                    font: 'bold ' + fontSize * 2 + 'px Arial',
+                    stroke: new ol.style.Stroke({
+                        color: 'black',
+                        width: 1
+                    }),
+                    fill: new ol.style.Fill({
+                        color: 'white'
+                    })
+                })
+            })
+        ];
+    },
+
+    /**
+     *
+     */
+    hoverClusterFeatures: function(pixel) {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
+        var wmsHoverPlugin = mapComponent.getPlugin('wmshover');
+
+        var feature = map.forEachFeatureAtPixel(pixel, function(feat) {
+            return feat;
+        });
+
+        if (feature === me.highlightFeature || !feature) {
+            wmsHoverPlugin.cleanupHoverArtifacts();
+            return;
+        } else {
+            var hvl = wmsHoverPlugin.getHoverVectorLayer();
+            hvl.setStyle(me.highlightStyleFunction);
+            var hvlSource = wmsHoverPlugin.getHoverVectorLayerSource();
+            wmsHoverPlugin.cleanupHoverArtifacts();
+            hvlSource.addFeature(feature);
+            me.highLightedFeature = feature;
+        }
+    },
+
+    /**
+     *
+     */
+    getHoverTextFromTemplate: function(feature, hoverTemplate) {
+        var me = this;
+        var placeHolderPrefix = me.self.HOVER_TEMPLATE_PLACEHOLDER_PREFIX;
+        var placeHolderSuffix = me.self.HOVER_TEMPLATE_PLACEHOLDER_SUFFIX;
+        var hoverText = '';
+
+        // Set the hoverfield for the popup, if set
+        if (feature && hoverTemplate) {
+            // Find any character between two braces (including the braces in
+            // the result)
+            var regExp = new RegExp(placeHolderPrefix + '(.*?)' +
+                    placeHolderSuffix, 'g');
+            var regExpRes = hoverTemplate.match(regExp);
+
+            // If we have a regex result, it means we found a placeholder in
+            // the template and have to replace the placeholder with its
+            // appropriate value
+            if (regExpRes) {
+                // Iterate over all regex match results and find the proper
+                // attribute for the given placeholder, finally set the desired
+                // value to the hover field text
+                Ext.each(regExpRes, function(res) {
+                    // We count every non matching candidate. If this count is
+                    // equal to the objects length, we assume that there is no
+                    // match at all and set the output value to an empty value
+                    var noMatchCnt = 0;
+
+                    Ext.iterate(feature.getProperties(), function(k, v) {
+                        // Remove the suffixes and find the matching attribute
+                        // column
+                        var placeHolderPrefixLength = decodeURIComponent(
+                                placeHolderPrefix).length;
+                        var placeHolderSuffixLength = decodeURIComponent(
+                                placeHolderSuffix).length;
+                        var placeHolderName = res.slice(placeHolderPrefixLength,
+                                res.length - placeHolderSuffixLength);
+                        if (placeHolderName === k) {
+                            hoverTemplate = hoverTemplate.replace(res, v);
+                            return false;
+                        } else {
+                            noMatchCnt++;
+                        }
+                    });
+
+                    // No key match found for this feature (e.g. if key not
+                    // present or value is null)
+                    if (noMatchCnt === Ext.Object.getSize(feature.attributes)) {
+                        hoverTemplate = hoverTemplate.replace(res, '');
+                    }
+                });
+            } else if (!Ext.isEmpty(feature.get(hoverTemplate))) {
+                // If we couldn't find any match, the hoverTemplate could be a
+                // simple string containing the "hoverField". To obtain
+                // backwards-compatibility, we check if this field is present
+                // and set the hoverText accordingly
+                hoverTemplate = feature.get(hoverTemplate);
+            } else {
+                // Try to use "id" as fallback. If "id" is not available, the
+                // value will be "undefined"
+                hoverText = feature.get('id');
+            }
+
+            hoverText = hoverTemplate;
+        }
+
+        // Replace all newline breaks with a html <br> tag
+        if (Ext.isString(hoverText)) {
+            hoverText = hoverText.replace(/\n/g, '<br>');
+        }
+
+        return hoverText;
+    }
 
 });
