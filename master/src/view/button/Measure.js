@@ -40,6 +40,7 @@ Ext.define("BasiGX.view.button.Measure", {
            textangle: 'Winkel messen',
            continuePolygonMsg: 'Klicken zum Zeichnen der Fläche',
            continueLineMsg: 'Klicken zum Zeichnen der Strecke',
+           continueAngleMsg: 'Klicken zum Zeichnen des Winkels',
            clickToDrawText: 'Klicken zum Messen'
        }
     },
