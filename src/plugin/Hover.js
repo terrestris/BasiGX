@@ -414,7 +414,9 @@ Ext.define('BasiGX.plugin.Hover', {
 
         if (layers.length > 0 && features.length > 0) {
             map.getOverlays().forEach(function(o) {
-                map.removeOverlay(o);
+                if (o.get(overlayIdentifierKey) === overlayIdentifierVal) {
+                    map.removeOverlay(o);
+                }
             });
 
             var div = Ext.dom.Helper.createDom('<div>');
