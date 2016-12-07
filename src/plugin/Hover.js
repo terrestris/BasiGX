@@ -67,7 +67,8 @@ Ext.define('BasiGX.plugin.Hover', {
         hoverVectorLayerSource: null,
         hoverVectorLayer: null,
         hoverVectorLayerInteraction: null,
-        dynamicHoverColor: false
+        dynamicHoverColor: false,
+        enableHoverSelection: true
     },
 
     /**
@@ -106,7 +107,10 @@ Ext.define('BasiGX.plugin.Hover', {
 
         me.addHoverVectorLayerSource();
         me.addHoverVectorLayer();
-        me.addHoverVectorLayerInteraction();
+
+        if (me.getEnableHoverSelection()) {
+            me.addHoverVectorLayerInteraction();
+        }
 
         me.setupMapEventListeners();
         this.setCmp(cmp);
