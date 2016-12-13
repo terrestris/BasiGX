@@ -305,7 +305,25 @@ Ext.define('BasiGX.view.combo.Language', {
             instantiatedClasses = cq(Ext.String.format(cqTpl, className));
             // set the locale for each class
             Ext.each(instantiatedClasses, function(clazz) {
-                clazz.getViewModel().setData(locale.config.data);
+                // Check if the locale contains an expected structure…
+                if ('config' in locale && 'data' in locale.config) {
+                    clazz.getViewModel().setData(locale.config.data);
+                }
+                // … and don't do anything if it doesn't. This is not
+                // technically an error, or sth. we should warn the user about.
+                // Consider the following: A specific button class (with a
+                // viewModel and a controller) opens an `Ext.window.Window`, and
+                // wants to have the title come from the `viewModel` of the
+                // button:
+                // Ext.create('Ext.window.Window', {
+                //     viewModel: myBtnViewModel, // a real instance of the vm
+                //     bind: {
+                //         title: '{myWinTitle}' // defined key in btn viewmodel
+                //     }
+                //     // other win properties
+                // });
+                // With this setup, the translation will work as long as the
+                // button is visible / instantiated.
             });
         });
     },
