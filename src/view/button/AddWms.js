@@ -55,10 +55,15 @@ Ext.define("BasiGX.view.button.AddWms", {
      *
      */
     config: {
+        windowConfig: {
+            // can be used by subclasses to apply/merge
+            // additional/other values for the window
+        },
         handler: function(){
             var win = Ext.ComponentQuery.query('[name=add-wms-window]')[0];
             if(!win){
-                Ext.create('Ext.window.Window', {
+
+                var windowConfig = {
                     name: 'add-wms-window',
                     title: this.getViewModel().get('windowTitle'),
                     width: 500,
@@ -67,7 +72,12 @@ Ext.define("BasiGX.view.button.AddWms", {
                     items: [{
                         xtype: 'basigx-form-addwms'
                     }]
-                }).show();
+                };
+
+                var windowConfigToApply = this.getConfig('windowConfig');
+                Ext.apply(windowConfig, windowConfigToApply);
+
+                Ext.create('Ext.window.Window', windowConfig).show();
             } else {
                 BasiGX.util.Animate.shake(win);
             }
