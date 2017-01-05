@@ -74,7 +74,7 @@ Ext.define("BasiGX.view.button.AddWms", {
                     }]
                 };
 
-                var windowConfigToApply = this.getConfig('windowConfig');
+                var windowConfigToApply = this.getWindowConfig();
                 Ext.apply(windowConfig, windowConfigToApply);
 
                 Ext.create('Ext.window.Window', windowConfig).show();
