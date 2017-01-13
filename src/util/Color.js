@@ -90,14 +90,23 @@ Ext.define('BasiGX.util.Color', {
             if (!rgba) {
                 return '';
             }
-            var regex = new RegExp("^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?," +
-                "[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+(?:\\.\\d+|))[\\s+]?", "i");
-            rgba = rgba.match(regex);
+            rgba = BasiGX.util.Color.rgbaAsArray(rgba);
+
             return (rgba && rgba.length === 5) ? "#" +
                 ("0" + parseInt(rgba[1],10).toString(16)).slice(-2) +
                 ("0" + parseInt(rgba[2],10).toString(16)).slice(-2) +
                 ("0" + parseInt(rgba[3],10).toString(16)).slice(-2) +
                 ("0" + Math.round(parseFloat(rgba[4]) * 255).toString(16)).slice(-2) : '';
+        },
+
+        /**
+         *
+         */
+        rgbaAsArray: function(rgba){
+            var regex = new RegExp("^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?," +
+                "[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+(?:\\.\\d+|))[\\s+]?", "i");
+            rgba = rgba.match(regex);
+            return rgba;
         }
     }
 });
