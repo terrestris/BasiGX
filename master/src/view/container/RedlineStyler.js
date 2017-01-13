@@ -122,12 +122,12 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                 strokeWidth = imageStyle.getStroke().getWidth();
                 strokeColor = imageStyle.getStroke().getColor();
                 strokeColor = strokeColor.indexOf('rgba') > -1 ?
-                        BasiGX.util.Color.rgbaToHex(strokeColor) : strokeColor;
+                        BasiGX.util.Color.rgbaToHex8(strokeColor) : strokeColor;
             }
             if(imageStyle.getFill()){
                 fillColor = imageStyle.getFill().getColor();
                 fillColor = fillColor.indexOf('rgba') > -1 ? BasiGX.util.Color.
-                        rgbaToHex(fillColor) : fillColor;
+                        rgbaToHex8(fillColor) : fillColor;
             }
         }
 
@@ -361,7 +361,8 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
         }
         var styleStrokeColor = style.getStroke().getColor();
         var strokeColor = styleStrokeColor.indexOf('rgba') > -1 ?
-                BasiGX.util.Color.rgbaToHex(styleStrokeColor) : styleStrokeColor;
+                BasiGX.util.Color.rgbaToHex8(styleStrokeColor) : styleStrokeColor;
+
         var fs = {
                 xtype: 'fieldset',
                 bind: {
@@ -452,10 +453,10 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
         }
         var styleFillColor = style.getFill().getColor();
         var fillColor = styleFillColor.indexOf('rgba') > -1 ?
-                BasiGX.util.Color.rgbaToHex(styleFillColor) : styleFillColor;
+                BasiGX.util.Color.rgbaToHex8(styleFillColor) : styleFillColor;
         var styleStrokeColor = style.getStroke().getColor();
         var strokeColor = styleStrokeColor.indexOf('rgba') > -1 ?
-                BasiGX.util.Color.rgbaToHex(styleStrokeColor) : styleStrokeColor;
+                BasiGX.util.Color.rgbaToHex8(styleStrokeColor) : styleStrokeColor;
         var fs = {
                 xtype: 'fieldset',
                 bind: {
