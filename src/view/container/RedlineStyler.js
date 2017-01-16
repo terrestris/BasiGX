@@ -132,221 +132,209 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
         }
 
         var fs = {
-                xtype: 'fieldset',
-                bind: {
-                    title: '{pointStyleFieldSetTitle}'
-                },
-                name: 'pointstyle',
-                layout: 'hbox',
-                items: [
-                  {
-                     xtype: 'tabpanel',
-                     items: [
-                         {
-                             xtype: 'panel',
-                             bind: {
-                                 title: '{pointStyleSymbolPanelTitle}'
-                             },
-                             defaults: {
-                                 margin: 3,
-                                 width: 220
-                             },
-                             items: [
-                                 {
-                                     xtype : 'numberfield',
-                                     bind: {
-                                         fieldLabel: '{pointStyleRadiusNumberFieldLabel}'
-                                     },
-                                     name: 'pointradius',
-                                     value : radius,
-                                     minValue: 1,
-                                     maxValue: 50,
-                                     listeners: {
-                                         change: function(field, val) {
-                                             me.updateStyle({radius: val});
-                                         }
-                                     }
-                                 },
-                                 {
-                                     xtype : 'numberfield',
-                                     bind: {
-                                         fieldLabel: '{pointStyleStrokeNumberFieldLabel}'
-                                     },
-                                     name: 'pointstrokewidth',
-                                     value : strokeWidth,
-                                     minValue: 0,
-                                     maxValue: 50,
-                                     listeners: {
-                                         change: function(field, val) {
-                                             me.updateStyle({strokewidth: val});
-                                         }
-                                     }
-                                 },
-                                 {
-                                     xtype: 'container',
-                                     layout: 'hbox',
-                                     defaults: {
-                                         width: 100
-                                     },
-                                     items: [
-                                        {
-                                             xtype: 'displayfield',
-                                             width: 100,
-                                             bind: {
-                                                 value: '{pointStyleStrokeColorFieldLabel}'
-                                             }
-                                         },{
-                                            xtype : 'colorbutton',
-                                            name: 'pointstrokecolor',
-                                            format: 'hex8',
-                                            value : strokeColor,
-                                            margin: '5 0 0 10',
-                                            listeners: {
-                                                change: function(field, val,
-                                                    oldVal) {
-                                                    if (oldVal) {
-                                                        var color =
-                                                            BasiGX.util.Color
-                                                            .hex8ToRgba(val);
-                                                        me.updateStyle(
-                                                            {strokecolor: color}
-                                                        );
-                                                    }
-                                                }
-                                            }
-                                        }
-                                     ]
-                                 },
-                                 {
-                                     xtype: 'container',
-                                     layout: 'hbox',
-                                     defaults: {
-                                         width: 100
-                                     },
-                                     items: [
-                                        {
-                                             xtype: 'displayfield',
-                                             width: 100,
-                                             bind: {
-                                                 value: '{pointStyleFillColorFieldLabel}'
-                                             }
-                                         },{
-                                            xtype : 'colorbutton',
-                                            name: 'pointfillcolor',
-                                            format: 'hex8',
-                                            margin: '0 0 0 10',
-                                            value : fillColor,
-                                            listeners: {
-                                                change: function(field, val,
-                                                    oldVal) {
-                                                    if (oldVal) {
-                                                        var color =
-                                                            BasiGX.util.Color
-                                                            .hex8ToRgba(val);
-                                                        me.updateStyle(
-                                                            {fillcolor: color}
-                                                        );
-                                                    }
-                                                }
-                                            }
-                                        }
-                                     ]
-                                 }
-                             ]
-                         },
-                         {
-                             xtype: 'panel',
-                             bind: {
-                                 title: '{pointStyleGraphicPanelTitle}'
-                             },
-                             name: 'pointgraphic',
-                             defaults: {
-                                 margin: 3,
-                                 width: 220
-                             },
-                             items: [
-                                 {
-                                     xtype : 'button',
-                                     bind: {
-                                         text: '{pointStyleChooseImgBtnText}'
-                                     },
-                                     handler: me.onChooseGraphicClick,
-                                     scope: me
-                                 },
-                                 {
-                                     xtype: 'slider',
-                                     bind: {
-                                         fieldLabel: '{pointStyleImgOffsetXSliderLabel}'
-                                     },
-                                     name: 'xoffset',
-                                     value: imageAnchor ? imageAnchor[0] : 50,
-                                     minValue: 0,
-                                     maxValue: 100,
-                                     listeners: {
-                                         change: function() {
-                                             var values =
-                                                 me.getImageAttributes();
-                                             me.changeIconStyle(values);
-                                         },
-                                         scope: me
-                                     }
-                                },
-                                {
-                                     xtype : 'slider',
-                                     bind: {
-                                         fieldLabel: '{pointStyleImgOffsetYSliderLabel}'
-                                     },
-                                     name: 'yoffset',
-                                     value: imageAnchor ? imageAnchor[1] : 50,
-                                     minValue: 0,
-                                     maxValue: 100,
-                                     listeners: {
-                                         change: function() {
-                                             var values =
-                                                 me.getImageAttributes();
-                                             me.changeIconStyle(values);
-                                         },
-                                         scope: me
-                                     }
-                                },
-                                {
-                                    xtype : 'slider',
-                                    bind: {
-                                        fieldLabel: '{pointStyleImgScaleSliderLabel}'
-                                    },
-                                    name: 'iconscale',
-                                    value: imageScale ? imageScale : 100,
-                                    increment: 1,
-                                    minValue: 10,
-                                    maxValue: 500,
-                                    listeners: {
-                                        change: function() {
-                                            var values =
-                                                me.getImageAttributes();
-                                            me.changeIconStyle(values);
-                                        },
-                                        scope: me
-                                    }
-                               }
-                            ]
-                        }
-                    ]
-                },
-                {
+            xtype: 'fieldset',
+            bind: {
+                title: '{pointStyleFieldSetTitle}'
+            },
+            name: 'pointstyle',
+            layout: 'hbox',
+            items: [{
+                xtype: 'tabpanel',
+                items: [{
                     xtype: 'panel',
-                    border: false,
-                    layout: 'fit',
-                    items: [{
-                        xtype: 'gx_renderer',
-                        margin: 20,
-                        width: 200,
-                        height: 160,
-                        name: 'pointRenderPreview',
-                        symbolizers: style,
-                        symbolType: 'Point'
+                    bind: {
+                        title: '{pointStyleSymbolPanelTitle}'
+                    },
+                    defaults: {
+                        margin: 3,
+                        width: 220
+                    },
+                        items: [{
+                            xtype : 'numberfield',
+                            bind: {
+                                fieldLabel: '{pointStyleRadiusNumberFieldLabel}'
+                            },
+                            name: 'pointradius',
+                            value : radius,
+                            minValue: 1,
+                            maxValue: 50,
+                            listeners: {
+                                change: function(field, val) {
+                                    me.updateStyle({radius: val});
+                                }
+                            }
+                        }, {
+                            xtype : 'numberfield',
+                            bind: {
+                                fieldLabel: '{pointStyleStrokeNumberFieldLabel}'
+                            },
+                            name: 'pointstrokewidth',
+                            value : strokeWidth,
+                            minValue: 0,
+                            maxValue: 50,
+                            listeners: {
+                                change: function(field, val) {
+                                    me.updateStyle({strokewidth: val});
+                                }
+                            }
+                        }, {
+                            xtype: 'container',
+                            layout: 'hbox',
+                            defaults: {
+                                width: 100
+                            },
+                            items: [{
+                                xtype: 'displayfield',
+                                width: 100,
+                                bind: {
+                                    value: '{pointStyleStrokeColorFieldLabel}'
+                                }
+                            }, {
+                                xtype : 'colorbutton',
+                                name: 'pointstrokecolor',
+                                format: 'hex8',
+                                value : strokeColor,
+                                margin: '5 0 0 10',
+                                listeners: {
+                                    boxready: function() {
+                                        var color = BasiGX.util.Color
+                                            .hex8ToRgba(this.getValue());
+                                        me.updateStyle({
+                                            strokecolor: color
+                                        });
+                                    },
+                                    change: function(field, val, oldVal) {
+                                        if (oldVal) {
+                                            var color = BasiGX.util.Color
+                                                .hex8ToRgba(val);
+                                            me.updateStyle({
+                                                strokecolor: color
+                                            });
+                                        }
+                                    }
+                                }
+                            }]
+                        }, {
+                            xtype: 'container',
+                            layout: 'hbox',
+                            defaults: {
+                                width: 100
+                            },
+                            items: [{
+                                xtype: 'displayfield',
+                                width: 100,
+                                bind: {
+                                    value: '{pointStyleFillColorFieldLabel}'
+                                }
+                            },{
+                                xtype : 'colorbutton',
+                                name: 'pointfillcolor',
+                                format: 'hex8',
+                                margin: '0 0 0 10',
+                                value : fillColor,
+                                listeners: {
+                                    boxready: function() {
+                                        var color = BasiGX.util.Color
+                                            .hex8ToRgba(this.getValue());
+                                        me.updateStyle({
+                                            fillcolor: color
+                                        });
+                                    },
+                                    change: function(field, val, oldVal) {
+                                        if (oldVal) {
+                                            var color = BasiGX.util.Color
+                                                .hex8ToRgba(val);
+                                            me.updateStyle({
+                                                fillcolor: color
+                                            });
+                                        }
+                                    }
+                                }
+                            }]
+                        }]
+                    }, {
+                        xtype: 'panel',
+                        bind: {
+                            title: '{pointStyleGraphicPanelTitle}'
+                        },
+                        name: 'pointgraphic',
+                        defaults: {
+                            margin: 3,
+                            width: 220
+                        },
+                        items: [{
+                            xtype : 'button',
+                            bind: {
+                                text: '{pointStyleChooseImgBtnText}'
+                            },
+                            handler: me.onChooseGraphicClick,
+                            scope: me
+                        }, {
+                            xtype: 'slider',
+                            bind: {
+                                fieldLabel: '{pointStyleImgOffsetXSliderLabel}'
+                            },
+                            name: 'xoffset',
+                            value: imageAnchor ? imageAnchor[0] : 50,
+                            minValue: 0,
+                            maxValue: 100,
+                            listeners: {
+                                change: function() {
+                                    var values = me.getImageAttributes();
+                                    me.changeIconStyle(values);
+                                },
+                                scope: me
+                            }
+                        }, {
+                            xtype : 'slider',
+                            bind: {
+                                fieldLabel: '{pointStyleImgOffsetYSliderLabel}'
+                            },
+                                name: 'yoffset',
+                            value: imageAnchor ? imageAnchor[1] : 50,
+                            minValue: 0,
+                            maxValue: 100,
+                            listeners: {
+                                change: function() {
+                                    var values = me.getImageAttributes();
+                                    me.changeIconStyle(values);
+                                },
+                                scope: me
+                            }
+                        }, {
+                            xtype : 'slider',
+                            bind: {
+                                fieldLabel: '{pointStyleImgScaleSliderLabel}'
+                            },
+                            name: 'iconscale',
+                            value: imageScale ? imageScale : 100,
+                            increment: 1,
+                            minValue: 10,
+                            maxValue: 500,
+                            listeners: {
+                                change: function() {
+                                    var values = me.getImageAttributes();
+                                    me.changeIconStyle(values);
+                                },
+                                scope: me
+                            }
+                        }]
                     }]
+            }, {
+                xtype: 'panel',
+                border: false,
+                layout: 'fit',
+                items: [{
+                    xtype: 'gx_renderer',
+                    margin: 20,
+                    width: 200,
+                    height: 160,
+                    name: 'pointRenderPreview',
+                    symbolizers: style,
+                    symbolType: 'Point'
                 }]
-            };
+            }]
+        };
         return fs;
     },
 
@@ -364,81 +352,83 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
                 BasiGX.util.Color.rgbaToHex8(styleStrokeColor) : styleStrokeColor;
 
         var fs = {
+            xtype: 'fieldset',
+            bind: {
+                title: '{lineStyleFieldSetTitle}'
+            },
+            name: 'linestringstyle',
+            layout: 'hbox',
+            items: [{
                 xtype: 'fieldset',
-                bind: {
-                    title: '{lineStyleFieldSetTitle}'
+                layout: 'vbox',
+                width: 220,
+                defaults: {
+                    margin: 3,
+                    width: 180
                 },
-                name: 'linestringstyle',
-                layout: 'hbox',
                 items: [{
-                    xtype: 'fieldset',
-                    layout: 'vbox',
-                    width: 220,
-                    defaults: {
-                        margin: 3,
-                        width: 180
+                    xtype : 'numberfield',
+                    bind: {
+                        fieldLabel: '{lineStyleStrokeNumberFieldLabel}'
                     },
-                    items: [
-                        {
-                             xtype : 'numberfield',
-                             bind: {
-                                 fieldLabel: '{lineStyleStrokeNumberFieldLabel}'
-                             },
-                             value : style.getStroke().getWidth(),
-                             minValue: 0,
-                             maxValue: 50,
-                             listeners: {
-                                 change: function(field, val) {
-                                     me.updateStyle(null, {strokewidth: val});
-                                 }
-                             }
-                         },
-                         {
-                             xtype: 'container',
-                             layout: 'hbox',
-                             defaults: {
-                                 width: 70
-                             },
-                             items: [
-                                {
-                                     xtype: 'displayfield',
-                                     width: 100,
-                                     bind: {
-                                         value: '{lineStyleStrokeColorFieldLabel}'
-                                     }
-                                 },{
-                                    xtype : 'colorbutton',
-                                    format: 'hex8',
-                                    value : strokeColor,
-                                    margin: '5 0 0 10',
-                                    listeners: {
-                                        change: function(field, val) {
-                                            var color = BasiGX.util.Color
-                                                .hex8ToRgba(val);
-                                            me.updateStyle(null,
-                                                {strokecolor: color}
-                                            );
-                                        }
-                                    }
-                                }
-                             ]
-                         }
-                     ]
-                },{
-                    xtype: 'panel',
-                    border: false,
-                    layout: 'fit',
+                    value : style.getStroke().getWidth(),
+                    minValue: 0,
+                    maxValue: 50,
+                    listeners: {
+                        change: function(field, val) {
+                            me.updateStyle(null, {strokewidth: val});
+                        }
+                    }
+                }, {
+                    xtype: 'container',
+                    layout: 'hbox',
+                    defaults: {
+                        width: 70
+                    },
                     items: [{
-                        xtype: 'gx_renderer',
-                        margin: 20,
-                        width: 200,
-                        height: 60,
-                        name: 'lineRenderPreview',
-                        symbolizers: style,
-                        symbolType: 'Line'
+                        xtype: 'displayfield',
+                        width: 100,
+                        bind: {
+                            value: '{lineStyleStrokeColorFieldLabel}'
+                        }
+                    },{
+                        xtype : 'colorbutton',
+                        format: 'hex8',
+                        value : strokeColor,
+                        margin: '5 0 0 10',
+                        listeners: {
+                            boxready: function() {
+                                var color = BasiGX.util.Color
+                                    .hex8ToRgba(this.getValue());
+                                me.updateStyle(null,{
+                                    strokecolor: color
+                                });
+                            },
+                            change: function(field, val) {
+                                var color = BasiGX.util.Color
+                                    .hex8ToRgba(val);
+                                me.updateStyle(null,
+                                    {strokecolor: color}
+                                );
+                            }
+                        }
                     }]
                 }]
-            };
+            },{
+                xtype: 'panel',
+                border: false,
+                layout: 'fit',
+                items: [{
+                    xtype: 'gx_renderer',
+                    margin: 20,
+                    width: 200,
+                    height: 60,
+                    name: 'lineRenderPreview',
+                    symbolizers: style,
+                    symbolType: 'Line'
+                }]
+            }]
+        };
         return fs;
     },
 
@@ -457,113 +447,120 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
         var styleStrokeColor = style.getStroke().getColor();
         var strokeColor = styleStrokeColor.indexOf('rgba') > -1 ?
                 BasiGX.util.Color.rgbaToHex8(styleStrokeColor) : styleStrokeColor;
+
         var fs = {
+            xtype: 'fieldset',
+            bind: {
+                title: '{polygonStyleFieldSetTitle}'
+            },
+            name: 'polygonstyle',
+            layout: 'hbox',
+            items: [{
                 xtype: 'fieldset',
-                bind: {
-                    title: '{polygonStyleFieldSetTitle}'
+                layout: 'vbox',
+                width: 220,
+                defaults: {
+                    width: 180
                 },
-                name: 'polygonstyle',
-                layout: 'hbox',
                 items: [{
-                    xtype: 'fieldset',
-                    layout: 'vbox',
-                    width: 220,
-                    defaults: {
-                        width: 180
+                    xtype : 'numberfield',
+                    bind: {
+                        fieldLabel: '{polygonStyleStrokeNumberFieldLabel}'
                     },
-                    items: [
-                        {
-                             xtype : 'numberfield',
-                             bind: {
-                                 fieldLabel: '{polygonStyleStrokeNumberFieldLabel}'
-                             },
-                             value : style.getStroke().getWidth(),
-                             minValue: 0,
-                             maxValue: 50,
-                             listeners: {
-                                 change: function(field, val) {
-                                     me.updateStyle(null, null,
-                                         {strokewidth: val}
-                                     );
-                                 }
-                             }
-                         },
-                         {
-                             xtype: 'container',
-                             layout: 'hbox',
-                             defaults: {
-                                 width: 70
-                             },
-                             items: [
-                                {
-                                     xtype: 'displayfield',
-                                     width: 100,
-                                     bind: {
-                                         value: '{polygonStyleStrokeColorFieldLabel}'
-                                     }
-                                 },{
-                                    xtype : 'colorbutton',
-                                    format: 'hex8',
-                                    value : strokeColor,
-                                    margin: '5 0 0 10',
-                                    listeners: {
-                                        change: function(field, val) {
-                                            var color = BasiGX.util.Color
-                                                .hex8ToRgba(val);
-                                            me.updateStyle(null, null,
-                                                {strokecolor: color}
-                                            );
-                                        }
-                                    }
-                                }
-                             ]
-                         },
-                         {
-                             xtype: 'container',
-                             layout: 'hbox',
-                             defaults: {
-                                 width: 100
-                             },
-                             items: [
-                                {
-                                     xtype: 'displayfield',
-                                     width: 100,
-                                     bind: {
-                                         value: '{polygonStyleFillColorFieldLabel}'
-                                     }
-                                 },{
-                                    xtype : 'colorbutton',
-                                    format: 'hex8',
-                                    margin: '0 0 0 10',
-                                    value : fillColor,
-                                    listeners: {
-                                        change: function(field, val) {
-                                            var color = BasiGX.util.Color
-                                                .hex8ToRgba(val);
-                                            me.updateStyle(null, null,
-                                                {fillcolor: color}
-                                            );
-                                        }
-                                    }
-                                }
-                             ]
-                         }
-                     ]
-                },{
-                    xtype: 'panel',
-                    border: false,
-                    layout: 'fit',
+                    value : style.getStroke().getWidth(),
+                    minValue: 0,
+                    maxValue: 50,
+                    listeners: {
+                        change: function(field, val) {
+                            me.updateStyle(null, null,
+                                {strokewidth: val}
+                            );
+                        }
+                    }
+                }, {
+                    xtype: 'container',
+                    layout: 'hbox',
+                    defaults: {
+                        width: 70
+                    },
                     items: [{
-                        xtype: 'gx_renderer',
-                        margin: 20,
-                        width: 200,
-                        height: 100,
-                        name: 'polygonRenderPreview',
-                        symbolizers: style,
-                        symbolType: 'Polygon'
+                        xtype: 'displayfield',
+                        width: 100,
+                        bind: {
+                            value: '{polygonStyleStrokeColorFieldLabel}'
+                        }
+                    },{
+                        xtype : 'colorbutton',
+                        format: 'hex8',
+                        value : strokeColor,
+                        margin: '5 0 0 10',
+                        listeners: {
+                            boxready: function() {
+                                var color = BasiGX.util.Color
+                                    .hex8ToRgba(this.getValue());
+                                me.updateStyle(null, null,{
+                                    strokecolor: color
+                                });
+                            },
+                            change: function(field, val) {
+                                var color = BasiGX.util.Color
+                                    .hex8ToRgba(val);
+                                me.updateStyle(null, null,
+                                    {strokecolor: color}
+                                );
+                            }
+                        }
+                    }]
+                }, {
+                    xtype: 'container',
+                    layout: 'hbox',
+                    defaults: {
+                        width: 100
+                    },
+                    items: [{
+                        xtype: 'displayfield',
+                        width: 100,
+                        bind: {
+                            value: '{polygonStyleFillColorFieldLabel}'
+                        }
+                    },{
+                        xtype : 'colorbutton',
+                        format: 'hex8',
+                        margin: '0 0 0 10',
+                        value : fillColor,
+                        listeners: {
+                            boxready: function() {
+                                var color = BasiGX.util.Color
+                                    .hex8ToRgba(this.getValue());
+                                me.updateStyle(null, null,{
+                                    fillcolor: color
+                                });
+                            },
+                            change: function(field, val) {
+                                var color = BasiGX.util.Color
+                                    .hex8ToRgba(val);
+                                me.updateStyle(null, null,
+                                    {fillcolor: color}
+                                );
+                            }
+                        }
                     }]
                 }]
-            };
+            },{
+                xtype: 'panel',
+                border: false,
+                layout: 'fit',
+                items: [{
+                    xtype: 'gx_renderer',
+                    margin: 20,
+                    width: 200,
+                    height: 100,
+                    name: 'polygonRenderPreview',
+                    symbolizers: style,
+                    symbolType: 'Polygon'
+                }]
+            }]
+        };
         return fs;
     },
 
@@ -618,6 +615,7 @@ Ext.define("BasiGX.view.container.RedlineStyler", {
         var fallBackStrokeColor = '#ffcc33';
         var fallBackStrokeWidth = 2;
         var oldImage = oldStyle.getImage();
+
         if (oldImage && oldImage.getRadius) {
             fallBackRadius = oldImage.getRadius();
         }
