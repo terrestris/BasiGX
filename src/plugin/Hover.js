@@ -326,9 +326,9 @@ Ext.define('BasiGX.plugin.Hover', {
                         me.showHoverFeature(layer, respFeatures, respProjection);
 
                         Ext.each(respFeatures, function(feature) {
+                            feature.set('layer', layer);
                             var featureStyle = me.highlightStyleFunction(
                                     feature, resolution, pixelValues);
-                            feature.set('layer', layer);
                             feature.setStyle(featureStyle);
                             hoverFeatures.push(feature);
                         });
