@@ -92,13 +92,17 @@ Ext.define("BasiGX.view.panel.LegendTree", {
     initComponent: function() {
         var me = this;
 
-        if (me.collapsed && me.hideCollapseTool) {
-            me.collapsed = false;
-            me.initiallyCollapsed = true;
-            Ext.log.info('Ignoring configuration "collapsed" and instead' +
-                    ' setup a one-time afterlayout listener that will' +
-                    ' collapse the panel (this is possibly due to a bug in' +
-                    ' ExtJS 6)');
+        // The following fix is needed for ExtJS versions between 6.0.0 and
+        // 6.2.0 only. We keep it for backwards compatibility.
+        if (me.isExtVersionLowerThan62()) {
+            if (me.collapsed && me.hideCollapseTool) {
+                me.collapsed = false;
+                me.initiallyCollapsed = true;
+                Ext.log.info('Ignoring configuration "collapsed" and instead' +
+                        ' setup a one-time afterlayout listener that will' +
+                        ' collapse the panel (this is possibly due to a bug in' +
+                        ' ExtJS 6)');
+            }
         }
         me.hideHeaders = true;
 
@@ -113,12 +117,16 @@ Ext.define("BasiGX.view.panel.LegendTree", {
         // call parent
         me.callParent();
 
-        // See the comment above the constructor why we need this.
-        if (me.initiallyCollapsed){
-            me.on('afterlayout', function(){
-                this.collapse();
-            }, me, {single: true, delay: 100});
-            me.initiallyCollapsed = null;
+        // The following fix is needed for ExtJS versions between 6.0.0 and
+        // 6.2.0 only. We keep it for backwards compatibility.
+        if (me.isExtVersionLowerThan62()) {
+            // See the comment above the constructor why we need this.
+            if (me.initiallyCollapsed){
+                me.on('afterlayout', function(){
+                    this.collapse();
+                }, me, {single: true, delay: 100});
+                me.initiallyCollapsed = null;
+            }
         }
     },
 
@@ -270,5 +278,14 @@ Ext.define("BasiGX.view.panel.LegendTree", {
 
             return elemenIdAndCssClass;
         }
+    },
+
+    /**
+     * Tests if the current ExtJS version is lower than 6.2.0.000.
+     *
+     * @return {Boolean} Whether the version is lower than 6.2.0.000 or not.
+     */
+    isExtVersionLowerThan62: function() {
+        return parseInt(Ext.getVersion().getShortVersion(), 10) < 620000;
     }
 });
