@@ -209,7 +209,9 @@ Ext.define("BasiGX.view.panel.MapContainer", {
 
         var toolbar = me.getToolbarConfig();
 
-        toolbar.items = me.buildToolbarItems();
+        if(!toolbar.items){
+            toolbar.items = me.buildToolbarItems();
+        }
 
         me.add(toolbar);
     },
