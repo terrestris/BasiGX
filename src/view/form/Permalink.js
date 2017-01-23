@@ -27,12 +27,15 @@ Ext.define("BasiGX.view.form.Permalink", {
 
     requires: [
         'Ext.button.Button',
-        'Ext.app.ViewModel'
+        'Ext.app.ViewModel',
+
+        'BasiGX.util.CopyClipboard'
     ],
 
     viewModel: {
         data: {
-            refreshBtnText: 'Erneuern'
+            refreshBtnText: 'Erneuern',
+            copyToClipboardBtnText: 'In Zwischenablage kopieren'
         }
     },
 
@@ -68,6 +71,17 @@ Ext.define("BasiGX.view.form.Permalink", {
             var permalink = btn.up('form').getPermalink();
             var textfield = btn.up('form').down('textfield');
             textfield.setValue(permalink);
+        }
+    }, {
+        hidden: !BasiGX.util.CopyClipboard.copyToClipboardSupported,
+        bind: {
+            text: '{copyToClipboardBtnText}'
+        },
+        handler: function(btn){
+            var textfield = btn.up('form').down('textfield');
+            var value = textfield.getValue();
+
+            BasiGX.util.CopyClipboard.copyTextToClipboard(value);
         }
     }],
 
