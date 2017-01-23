@@ -10,6 +10,7 @@
             'util/Application.test.js',
             'util/ConfigParser.test.js',
             'util/Controller.test.js',
+            'util/CopyClipboard.test.js',
             'util/CSRF.test.js',
             'util/Layer.test.js',
             'util/Map.test.js',
