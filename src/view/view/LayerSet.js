@@ -30,9 +30,16 @@ Ext.define("BasiGX.view.view.LayerSet", {
 
     /**
      * the url to request the layerset json-file.
-     * If this is null, a demo set will be shown
+     * If this is null, #layerSetData or a demo set will be shown
      */
     layerSetUrl: null,
+
+    /**
+     * The local JSON layerset configuration object.
+     * Only has an effect if #layerSetUrl is null.
+     * If this is null a demo set will be shown.
+     */
+    layerSetData: null,
 
     /**
      * the default path to request the images from
@@ -89,27 +96,31 @@ Ext.define("BasiGX.view.view.LayerSet", {
             store;
 
         if (Ext.isEmpty(me.layerSetUrl)) {
-            // setup demo content
+
+            // use given local data or demo data
+            var data = me.layerSetData || [
+                {
+                    "title": "Stadtkarte",
+                    "name": "stadtkarte",
+                    "thumb": me.demoThumb
+                },
+                {
+                    "title": "Verkehr",
+                    "name": "verkehr",
+                    "thumb": me.demoThumb
+                },
+                {
+                    "title": "Umwelt",
+                    "name": "umwelt",
+                    "thumb": me.demoThumb
+                }
+            ];
+
+            // setup local content
             store = Ext.create('Ext.data.Store', {
                 fields: ['name', 'thumb', 'url', 'type'],
                 sorters: 'type',
-                data: [
-                    {
-                        "title": "Stadtkarte",
-                        "name": "stadtkarte",
-                        "thumb": me.demoThumb
-                    },
-                    {
-                        "title": "Verkehr",
-                        "name": "verkehr",
-                        "thumb": me.demoThumb
-                    },
-                    {
-                        "title": "Umwelt",
-                        "name": "umwelt",
-                        "thumb": me.demoThumb
-                    }
-                ]
+                data: data
             });
 
         } else {

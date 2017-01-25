@@ -84,6 +84,13 @@ Ext.define("BasiGX.view.panel.LayerSetChooser", {
     layerSetUrl: null,
 
     /**
+     * JSON-object to be passed to the automatically created
+     * 'basigx-view-layerset'.
+     * Only has an effect if this.items is empty.
+     */
+    layerSetData: null,
+
+    /**
      *
      */
     tpl: null,
@@ -115,10 +122,12 @@ Ext.define("BasiGX.view.panel.LayerSetChooser", {
     initComponent: function() {
 
         if(Ext.isEmpty(this.items)) {
+
             this.items = [{
                 xtype: 'basigx-view-layerset',
                 scrollable: true,
                 layerSetUrl: this.layerSetUrl,
+                layerSetData: this.layerSetData,
                 tpl: this.tpl
             }];
         }
