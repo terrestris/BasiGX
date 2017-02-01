@@ -6,6 +6,7 @@
             'basics.test.js',
             'plugin/Hover.test.js',
             'plugin/WfsCluster.test.js',
+            'util/Accessibility.test.js',
             'util/Animate.test.js',
             'util/Application.test.js',
             'util/ConfigParser.test.js',
