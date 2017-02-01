@@ -1,5 +1,5 @@
-#!/bin/sh
-set -ex
+#!/usr/bin/env bash
+set -e
 
 # ------------------------------------------------------------------------------
 # This script is supposed to be called from Travis continuous integration server
@@ -35,11 +35,11 @@ STATS_DIR="/tmp/build-stats"
 # This is the executable sencha command once it has been installed
 SENCHA_CMD="$INSTALL_DIR/sencha"
 
-# The version of sencha command to downlaod and install
-SENCHA_CMD_VERSION="6.0.0.202"
+# The version of sencha command to download and install
+SENCHA_CMD_VERSION="6.2.1.29"
 
 # The version of ExtJS to download and configure the sencha workspace with
-SENCHA_EXTJS_VERSION="6.0.0"
+SENCHA_EXTJS_VERSION="6.2.0"
 
 # The resource of BasiGX we copy over from the current PR or build over to
 # the $BASIGX_IN_SENCHA_WS_FOLDER

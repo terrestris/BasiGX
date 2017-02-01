@@ -1,5 +1,5 @@
-#!/bin/sh
-set -ex
+#!/usr/bin/env bash
+set -e
 
 # ------------------------------------------------------------------------------
 # This script is supposed to be called from Travis continuous integration server
@@ -12,12 +12,19 @@ set -ex
 # the script `ci/shared.sh`.
 # ------------------------------------------------------------------------------
 
-# Load variables and the 'running-on-travis'-check
-. $TRAVIS_BUILD_DIR/ci/shared.sh
+if [ -f "$TRAVIS_BUILD_DIR/ci/shared.sh" ]; then
+    # Load variables and the 'running-on-travis'-check
+    source $TRAVIS_BUILD_DIR/ci/shared.sh
+else
+    echo "Failed to find shared.sh."
+    exit 1;
+fi
 
 # create directories (if needed), will not fail if they are there already
 mkdir -p $DOWN_DIR
 mkdir -p $INSTALL_DIR
+
+REINSTALL_SENCHA=false
 
 # Many of the commands below check if a resource or directory already exists,
 # this is here because the relevant directories are cached by travis and may
@@ -26,23 +33,25 @@ mkdir -p $INSTALL_DIR
 cd $DOWN_DIR
 
 # DOWNLOAD (if needed)
-# 1) Sencha cmd (v6.0.0.202)
+# 1) Sencha cmd
 if [ ! -f "SenchaCmd-$SENCHA_CMD_VERSION-linux-amd64.sh.zip" ]; then
     wget "http://cdn.sencha.com/cmd/$SENCHA_CMD_VERSION/no-jre/SenchaCmd-$SENCHA_CMD_VERSION-linux-amd64.sh.zip"
+    REINSTALL_SENCHA=true
 fi
 
-# 2) Ext JS (v6.0.0.640)
+# 2) Ext JS
 if [ ! -f "ext-$SENCHA_EXTJS_VERSION-gpl.zip" ]; then
     wget "http://cdn.sencha.com/ext/gpl/ext-$SENCHA_EXTJS_VERSION-gpl.zip"
 fi
 
 # EXTRACT (if needed)
-# 1) Sencha cmd (v6.0.0.202)
+# 1) Sencha cmd
 if [ ! -f "SenchaCmd-$SENCHA_CMD_VERSION-linux-amd64.sh" ]; then
     unzip -q "SenchaCmd-$SENCHA_CMD_VERSION-linux-amd64.sh.zip"
+    REINSTALL_SENCHA=true
 fi
 
-# 2) Ext JS (v6.0.0.640)
+# 2) Ext JS
 if [ ! -d "ext-$SENCHA_EXTJS_VERSION" ]; then
     unzip -q "ext-$SENCHA_EXTJS_VERSION-gpl.zip"
 fi
@@ -71,4 +80,4 @@ $SENCHA_CMD package repo add GeoExt http://geoext.github.io/geoext3/cmd/pkgs
 # Back to the original working directory
 cd $TRAVIS_BUILD_DIR
 
-return 0
+exit 0
