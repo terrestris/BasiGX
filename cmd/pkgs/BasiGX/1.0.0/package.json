@@ -1,5 +1,6 @@
 {
   "name": "BasiGX",
+  "namespace": "BasiGX",
   "format": "1",
   "version": "1.0.0",
   "creator": "terrestris GmbH \u0026 Co. KG",
@@ -13,11 +14,11 @@
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "8f46d43f-34b5-4f38-ba5c-be6f70419e99",
-      "created": "2017-01-25T13:08:30Z",
+      "uuid": "ce469fa7-c395-4742-806b-e81807936da1",
+      "created": "2017-02-02T09:11:28Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "VeT+I6/m5nU\u003d",
-      "signature": "bBHvib4TiUX+xQbaSy7WQX9EtKj8nhFuv3g5gbHeZlz/zELl5dVmp0dmT8RGHfnipSemSXt0xlWDuSGC7T1o0DEq/ki2ScukenCP9pzlnJSF2tQCV4JPj2dIjAxeoArN5CZeFXf0xoPRC0GrRVU1Evs4w/1q9VzPpcuB8ptxe4vuBiBFBSnPEfoJp78RYHSEwoVpDazjftzXlw5naqxFUN9hokHApB4ENxXHOlNcWbSRzZwZreadn0pNiQnXTm3xS9LkYldKB1mCjHuqQ3djnahxlqxOWIg7L3Injd/fDvs6uFJvRGy3nmoahQBjtBUsNP9lHYsNxnsbVHmJTTIcBQ\u003d\u003d"
+      "nonce": "vFhdlusjd9s\u003d",
+      "signature": "YOnq78V42XDRvtFEU1wp0Ph3akg9dSVDBVlIzxKoYURJ7sbnX5HTPgLwA1AIPkYsy/NACFck+acEbgK/o0eT0+BY2EA6YPG8h8p4CPM6oNo9aPF5IYNSRFRU02YS3LW/tMlfPN6/NMC5CD3RHglEFm4rNR68mFBRCuu+jdkuEjIsq9j1NZMv9h+DE6DPSWg0iOiIVmSShpAoO4+FvfmU307KcblSUfPdadq1se5zbgDUeXqTBt7pg6yhsnhrQtFxZ3l8gPLTmg5dcIYEzY3WZFtKXb1tLtWPZ/BxEMoxUqkrFB6yZxQRX3Wjn0BxbnaWwovLhr5uucYZOxh6qbHFjA\u003d\u003d"
     }
   ],
   "slicer": {
