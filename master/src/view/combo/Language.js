@@ -71,6 +71,7 @@ Ext.define('BasiGX.view.combo.Language', {
     extend: 'Ext.form.field.ComboBox',
     xtype: 'basigx-combo-language',
     requires: [
+        'BasiGX.util.Accessibility'
     ],
 
     viewModel: {
@@ -171,8 +172,9 @@ Ext.define('BasiGX.view.combo.Language', {
             change: me.onLanguageChange
         });
 
-        me.setValue(me.getDefaultLanguage());
-
+        var defaultLanguage = me.getDefaultLanguage();
+        me.setValue(defaultLanguage);
+        BasiGX.util.Accessibility.setHtmlLanguage(defaultLanguage);
     },
 
     /**
@@ -223,6 +225,7 @@ Ext.define('BasiGX.view.combo.Language', {
             } finally {
                 if (respObj) {
                     me.setAppLanguage(respObj);
+                    BasiGX.util.Accessibility.setHtmlLanguage(me.locale);
                     me.recreateSingletons();
                 }
             }
