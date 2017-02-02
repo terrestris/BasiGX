@@ -26,6 +26,11 @@ describe('BasiGX.view.combo.Language', function() {
             expect(combo.getDefaultLanguage()).to.not.be(undefined);
             expect(combo.getDefaultLanguage()).to.be.a('string');
         });
+        it('sets the default language on the <html>-element', function() {
+            var htmlElement = document.querySelector('html');
+            var currentLang = htmlElement.getAttribute('lang');
+            expect(currentLang).to.be(combo.getDefaultLanguage());
+        });
     });
     describe('locale template url', function() {
         it('found a template for locale url', function() {
@@ -37,6 +42,43 @@ describe('BasiGX.view.combo.Language', function() {
         it('has some default languages', function(){
             expect(combo.getLanguages()).to.not.be(undefined);
             expect(combo.getLanguages()).to.be.an(Array);
+        });
+    });
+    describe('can change the language', function() {
+        var origExtLogInfo = null;
+        var htmlElement = null;
+        beforeEach(function() {
+            htmlElement = document.querySelector('html');
+            origExtLogInfo = Ext.Logger.info;
+            Ext.Logger.info = function(){}; // don't output logs when testing
+        });
+        afterEach(function() {
+            Ext.Logger.info = origExtLogInfo; // restore old log
+            origExtLogInfo = null;
+            htmlElement = null;
+        });
+        it('changes the lang-attribute of the html-element', function() {
+            var mockLocale = "humptydumpty";
+            // The followiing lines mockup a change in the language:
+            // 1) set the private locale property
+            combo.locale = mockLocale;
+            // 2) Mock up a successfull response object
+            var responseMock = {
+                responseText: "{}"
+            };
+            // 3) Save the language to compare against it later
+            var langBefore = htmlElement.getAttribute('lang');
+            // 4) emulate a succesfull callback, not optimal but better than
+            //    nothing
+            combo.onLoadAppLocaleSuccess.call(combo, responseMock);
+
+            var langAfter = htmlElement.getAttribute('lang');
+
+            expect(langAfter).to.not.be(langBefore);
+            expect(langAfter).to.be(mockLocale); // it's 'humptydumpty' now
+
+            // cleanup
+            htmlElement.setAttribute("lang", langBefore);
         });
     });
 });
