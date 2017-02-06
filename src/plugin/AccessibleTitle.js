@@ -133,7 +133,7 @@ Ext.define('BasiGX.plugin.AccessibleTitle', {
      */
     getHeaderParent: function(){
         var cmp = this.getCmp();
-        var cmpParts = [cmp.header, cmp.body];
+        var cmpParts = [cmp.header, cmp.body, cmp];
         var headerParent;
         Ext.each(cmpParts, function(part) {
             if(!headerParent && part && part.el && part.el.dom) {
