@@ -4,6 +4,7 @@
     var specPath = './spec/',
         dependencies = [
             'basics.test.js',
+            'plugin/AccessibleTitle.test.js',
             'plugin/Hover.test.js',
             'plugin/WfsCluster.test.js',
             'util/Accessibility.test.js',
@@ -45,12 +46,14 @@
             'view/form/Print.test.js',
             'view/grid/FeaturePropertyGrid.test.js',
             'view/grid/GazetteerGrid.test.js',
+            'view/panel/Accessible.test.js',
             'view/panel/Header.test.js',
             'view/panel/LayerSetChooser.test.js',
             'view/panel/LegendTree.test.js',
             'view/panel/MapContainer.test.js',
             'view/panel/Menu.test.js',
-            'view/view/LayerSet.test.js'
+            'view/view/LayerSet.test.js',
+            'view/window/Accessible.test.js'
         ],
         getScriptTag = global.TestUtil.getExternalScriptTag,
         dependencyCnt = dependencies.length,
