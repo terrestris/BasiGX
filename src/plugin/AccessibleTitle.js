@@ -111,7 +111,7 @@ Ext.define('BasiGX.plugin.AccessibleTitle', {
         if (!headerDom) {
             return;
         }
-        me.addedHtmlHeader = Ext.DomHelper.append(headerDom, spec);
+        me.addedHtmlHeader = Ext.DomHelper.insertFirst(headerDom, spec);
     },
 
     /**
