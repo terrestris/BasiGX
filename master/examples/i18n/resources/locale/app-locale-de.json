@@ -228,7 +228,12 @@
                 "printButtonSuffix": "anfordern",
                 "downloadButtonPrefix": "Download",
                 "printFormat": "pdf",
-                "genericFieldSetTitle": "Einstellungen"
+                "printAppFieldSetTitle": "Vorlage",
+                "genericFieldSetTitle": "Einstellungen",
+                "formatComboLabel": "Format",
+                "layoutComboLabel": "Layout",
+                "attributesTitle": "Eigenschaften",
+                "mapTitleLabel": "Kartentitel"
             }
         }
     },
