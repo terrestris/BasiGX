@@ -21,8 +21,8 @@
  *
  * @class BasiGX.view.button.CoordinateTransform
  */
-Ext.define("BasiGX.view.button.CoordinateTransform", {
-    extend: "Ext.Button",
+Ext.define('BasiGX.view.button.CoordinateTransform', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-coordinatetransform',
 
     requires: [
@@ -82,19 +82,6 @@ Ext.define("BasiGX.view.button.CoordinateTransform", {
             } else {
                 BasiGX.util.Animate.shake(win);
             }
-        }
-    },
-
-    /**
-     *
-     */
-    constructor: function(config) {
-        this.callParent([config]);
-
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
         }
     }
 });

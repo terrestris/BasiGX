@@ -20,8 +20,8 @@
  *
  * @class BasiGX.view.button.Measure
  */
-Ext.define("BasiGX.view.button.Measure", {
-    extend: "Ext.Button",
+Ext.define('BasiGX.view.button.Measure', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-measure',
 
     requires: [

@@ -20,8 +20,8 @@
  *
  * @class BasiGX.view.button.Hsi
  */
-Ext.define("BasiGX.view.button.Hsi", {
-    extend: "Ext.Button",
+Ext.define('BasiGX.view.button.Hsi', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-hsi',
     requires: [
         'Ext.app.ViewModel',
@@ -80,15 +80,8 @@ Ext.define("BasiGX.view.button.Hsi", {
     /**
      *
      */
-    constructor: function(config) {
-        this.callParent([config]);
-
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
-        }
-
+    constructor: function() {
+        this.callParent(arguments);
         this.toggleButton();
     },
 
