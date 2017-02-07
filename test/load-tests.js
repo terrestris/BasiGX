@@ -21,6 +21,7 @@
             'ux/ContextSensitiveHelp.test.js',
             'ux/RowExpanderWithComponents.test.js',
             'view/button/AddWms.test.js',
+            'view/button/Base.test.js',
             'view/button/CoordinateTransform.test.js',
             'view/button/Help.test.js',
             'view/button/Hsi.test.js',

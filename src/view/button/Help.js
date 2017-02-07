@@ -20,8 +20,8 @@
  *
  * @class BasiGX.view.button.Help
  */
-Ext.define("BasiGX.view.button.Help", {
-    extend: "Ext.Button",
+Ext.define('BasiGX.view.button.Help', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-help',
 
     requires: [
@@ -61,19 +61,6 @@ Ext.define("BasiGX.view.button.Help", {
         handler: function(button){
             var help = Ext.create('BasiGX.ux.ContextSensitiveHelp');
             help.setContextHelp(button.getAdditonalHelpKeys());
-        }
-    },
-
-    /**
-     *
-     */
-    constructor: function(config) {
-        this.callParent([config]);
-
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
         }
     }
 });

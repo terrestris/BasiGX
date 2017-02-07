@@ -21,8 +21,8 @@
  *
  * @class BasiGX.view.button.AddWms
  */
-Ext.define("BasiGX.view.button.AddWms", {
-    extend: "Ext.Button",
+Ext.define('BasiGX.view.button.AddWms', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-addwms',
 
     requires: [
@@ -81,19 +81,6 @@ Ext.define("BasiGX.view.button.AddWms", {
             } else {
                 BasiGX.util.Animate.shake(win);
             }
-        }
-    },
-
-    /**
-     *
-     */
-    constructor: function(config) {
-        this.callParent([config]);
-
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
         }
     }
 });

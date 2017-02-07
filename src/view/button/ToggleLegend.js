@@ -20,8 +20,8 @@
  *
  * @class BasiGX.view.button.ToggleLegend
  */
-Ext.define("BasiGX.view.button.ToggleLegend", {
-    extend: "Ext.Button",
+Ext.define('BasiGX.view.button.ToggleLegend', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-togglelegend',
     requires: [
         'Ext.app.ViewModel',
@@ -72,19 +72,6 @@ Ext.define("BasiGX.view.button.ToggleLegend", {
                 }
                 button.blur();
             }
-        }
-    },
-
-    /**
-     *
-     */
-    constructor: function(config) {
-        this.callParent([config]);
-
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
         }
     }
 });

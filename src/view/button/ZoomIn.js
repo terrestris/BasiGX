@@ -20,8 +20,8 @@
  *
  * @class BasiGX.view.button.ZoomIn
  */
-Ext.define("BasiGX.view.button.ZoomIn", {
-    extend: "Ext.Button",
+Ext.define('BasiGX.view.button.ZoomIn', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-zoomin',
     requires: [
         'Ext.app.ViewModel',
@@ -77,19 +77,6 @@ Ext.define("BasiGX.view.button.ZoomIn", {
 
             olMap.beforeRender(zoom);
             olView.setResolution(olView.getResolution() / 2);
-        }
-    },
-
-    /**
-     *
-     */
-    constructor: function(config) {
-        this.callParent([config]);
-
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
         }
     }
 });

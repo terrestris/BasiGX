@@ -20,8 +20,8 @@
  *
  * @class BasiGX.view.button.ZoomToExtent
  */
-Ext.define("BasiGX.view.button.ZoomToExtent", {
-    extend: "Ext.Button",
+Ext.define('BasiGX.view.button.ZoomToExtent', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-zoomtoextent',
 
     requires: [
@@ -103,14 +103,8 @@ Ext.define("BasiGX.view.button.ZoomToExtent", {
     /**
      *
      */
-    constructor: function(config) {
-        this.callParent([config]);
-
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
-        }
+    constructor: function() {
+        this.callParent(arguments);
 
         if(this.getZoom() && this.getResolution()){
             Ext.raise('No zoom and resolution set for Extent Button!' +
