@@ -20,14 +20,14 @@
  *
  * @class BasiGX.view.button.Measure
  */
-Ext.define("BasiGX.view.button.Measure", {
-    extend: "Ext.Button",
+Ext.define('BasiGX.view.button.Measure', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-measure',
 
     requires: [
-        "BasiGX.util.Layer",
-        "BasiGX.util.Map",
-        "Ext.app.ViewModel"
+        'BasiGX.util.Layer',
+        'BasiGX.util.Map',
+        'Ext.app.ViewModel'
     ],
 
    /**
@@ -230,11 +230,11 @@ Ext.define("BasiGX.view.button.Measure", {
     /**
      *
      */
-    constructor: function(config) {
+    constructor: function() {
         var me = this;
         var LayerUtil = BasiGX.util.Layer;
 
-        me.callParent([config]);
+        me.callParent(arguments);
 
         me.map = BasiGX.util.Map.getMapComponent().getMap();
 

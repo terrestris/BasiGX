@@ -20,8 +20,8 @@
  *
  * @class BasiGX.view.button.Permalink
  */
-Ext.define("BasiGX.view.button.Permalink", {
-    extend: "Ext.Button",
+Ext.define('BasiGX.view.button.Permalink', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-permalink',
 
     requires: [
@@ -62,19 +62,6 @@ Ext.define("BasiGX.view.button.Permalink", {
             } else {
                 BasiGX.util.Animate.shake(win);
             }
-        }
-    },
-
-    /**
-     *
-     */
-    constructor: function(config) {
-        this.callParent([config]);
-
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
         }
     }
 });
