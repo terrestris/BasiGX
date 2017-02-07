@@ -43,6 +43,12 @@ describe('BasiGX.view.button.Measure', function() {
         it('is defined', function() {
             expect(BasiGX.view.button.Measure).to.not.be(undefined);
         });
+        it('can be instantiated', function() {
+            var myBtn = Ext.create('BasiGX.view.button.Measure');
+            expect(myBtn).to.be.a(BasiGX.view.button.Measure);
+            // teardown
+            myBtn.destroy();
+        });
     });
 
     describe('Static methods', function() {
