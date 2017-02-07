@@ -93,7 +93,7 @@ Ext.define('BasiGX.view.button.Hsi', {
             this.setPressed(this.buttonPressed);
         } else {
             this.setCls(this.buttonPressed ? this.getPressedCls() :
-                "basigx-map-tool-button");
+                'basigx-map-tool-button');
         }
         this.setControlStatus(this.buttonPressed);
     },
