@@ -49,7 +49,10 @@ Ext.define("BasiGX.view.form.Print", {
             printFormat: 'pdf',
             printAppFieldSetTitle: 'Vorlage',
             genericFieldSetTitle: 'Einstellungen',
-            attributesTitle: 'Eigenschaften'
+            formatComboLabel: 'Format',
+            layoutComboLabel: 'Layout',
+            attributesTitle: 'Eigenschaften',
+            mapTitleLabel: 'Kartentitel'
         }
     },
 
@@ -76,7 +79,7 @@ Ext.define("BasiGX.view.form.Print", {
         '#CCFF66'
     ],
 
-    layout: 'vbox',
+    layout: 'form',
 
     bodyPadding: '0 5px 0 0',
 
@@ -141,8 +144,7 @@ Ext.define("BasiGX.view.form.Print", {
      *     are formfields like `textfields`, `combos` etc.
      */
 
-    bbar: [{
-        xtype: 'button',
+    buttons: [{
         name: 'createPrint',
         bind: {
             text: '{printFormat:uppercase} {printButtonSuffix}'
@@ -153,7 +155,6 @@ Ext.define("BasiGX.view.form.Print", {
         },
         disabled: true
     }, {
-        xtype: 'button',
         name: 'downloadPrint',
         hidden: true,
         glyph: 'xf019@FontAwesome',
@@ -277,9 +278,10 @@ Ext.define("BasiGX.view.form.Print", {
                 title: '{printAppFieldSetTitle}'
             },
             name: 'print-app-fieldset',
-            layout: 'fit',
+            layout: 'anchor',
             items: [{
                 xtype: 'combo',
+                anchor: '100%',
                 name: 'appCombo',
                 allowBlank: false,
                 forceSelection: true,
@@ -575,6 +577,7 @@ Ext.define("BasiGX.view.form.Print", {
             valueField: 'name',
             store: formatStore,
             bind: {
+                fieldLabel: '{formatComboLabel}',
                 value: '{printFormat}'
             }
         };
@@ -597,6 +600,9 @@ Ext.define("BasiGX.view.form.Print", {
             queryMode: 'local',
             valueField: 'name',
             store: layoutStore,
+            bind: {
+                fieldLabel: '{layoutComboLabel}'
+            },
             listeners: {
                 change: this.onLayoutSelect,
                 scope: this
@@ -709,16 +715,36 @@ Ext.define("BasiGX.view.form.Print", {
     },
 
     /**
+     * Returns a text field based on given attribute record. Depending on record
+     * name the field label can be bound dynamically via view model.
+     * At the moment only `title` attribute is translatable. For all possible
+     * further attributes the name of the record will be taken as field label.
      *
+     * @param {Object} attributeRec Record with attribute properties.
+     * @return {Object} A configuration object for a textfield.
      */
     getStringField: function (attributeRec) {
-        return {
-            xtype: 'textfield',
-            name: attributeRec.get('name'),
-            fieldLabel: attributeRec.get('name'),
-            value: attributeRec.get('default'),
-            allowBlank: true
-        };
+        var fl = '';
+        var value = attributeRec.get('default');
+        var name = attributeRec.get('name');
+
+        if (attributeRec.get('name') === 'title') {
+            fl = '{mapTitleLabel}';
+        } else {
+            fl = name;
+        }
+
+        if (!Ext.isEmpty(fl)) {
+            return {
+                xtype: 'textfield',
+                name: name,
+                bind: {
+                    fieldLabel: fl
+                },
+                value: value,
+                allowBlank: true
+            };
+        }
     },
 
     /**
