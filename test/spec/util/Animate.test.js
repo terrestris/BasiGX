@@ -7,25 +7,19 @@ describe('BasiGX.util.Animate', function() {
         });
     });
     describe('Usage of static Methods', function() {
-        var div;
-        var mapComponent;
+        var btnDiv;
+        var testObjs;
         beforeEach(function() {
-            div = document.createElement('div');
-            document.body.appendChild(div);
-            mapComponent = Ext.create('BasiGX.view.component.Map', {
-                map: new ol.Map({
-                    target: div
-                })
-            });
+            btnDiv = TestUtil.setupTestDiv();
+            testObjs = TestUtil.setupTestObjects();
         });
         afterEach(function() {
-            document.body.removeChild(div);
-            div = null;
-            mapComponent.destroy();
+            TestUtil.teardownTestDiv(btnDiv);
+            TestUtil.teardownTestObjects(testObjs);
         });
 
         it('does not throw on shake method call', function() {
-            var component = Ext.create('Ext.button.Button', {renderTo: div});
+            var component = Ext.create('Ext.button.Button', {renderTo: btnDiv});
             expect(BasiGX.util.Animate.shake).withArgs(component, 100, 100).
                 to.not.throwException();
         });

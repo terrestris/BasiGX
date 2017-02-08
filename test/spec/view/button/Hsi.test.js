@@ -2,29 +2,12 @@ Ext.Loader.syncRequire(['BasiGX.view.button.Hsi']);
 
 describe('BasiGX.view.button.Hsi', function() {
     describe('Basics', function() {
-
-        var mapComponent;
-        var map;
-        var mapDiv;
-
+        var testObjs;
         beforeEach(function() {
-            mapDiv = document.createElement('div');
-            document.body.appendChild(mapDiv);
-
-            map = new ol.Map({target: mapDiv});
-            mapComponent = Ext.create('BasiGX.view.component.Map', {
-                map: map,
-                view: new ol.View({
-                    resolution: 7
-                })
-            });
+            testObjs = TestUtil.setupTestObjects();
         });
-
         afterEach(function() {
-            map.setTarget(null);
-            mapComponent.destroy();
-            document.body.removeChild(mapDiv);
-            mapDiv = null;
+            TestUtil.teardownTestObjects(testObjs);
         });
 
         it('is defined', function() {

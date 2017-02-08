@@ -10,7 +10,9 @@
 
         "Ext": false,
         "GeoExt": false,
-        "ol": false
+        "ol": false,
+
+        "TestUtil": false
     },
     "rules": {
         "comma-dangle": 2,
