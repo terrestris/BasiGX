@@ -1,0 +1,17 @@
+{
+    "--external": [
+        "ol.*",
+        "GeoExt.*"
+    ],
+    "--ignore-html": "debug",
+    "--output": "docs",
+    "--processes": 0,
+    "--title": "BasiGX",
+    "--warnings": [
+      "-extend",
+      "-link"
+    ],
+    "--": [
+        "src/"
+    ]
+}
