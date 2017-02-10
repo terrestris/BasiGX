@@ -1,43 +1,25 @@
-Ext.Loader.syncRequire([
-    'BasiGX.view.combo.ScaleCombo',
-    'GeoExt.component.Map'
-]);
+Ext.Loader.syncRequire(['BasiGX.view.combo.ScaleCombo']);
 
 describe('BasiGX.view.combo.ScaleCombo', function() {
-    var div;
-    var componentDiv;
     var map;
     var combo;
-    var mapComponent;
+    var testObjs;
     beforeEach(function() {
-        div = document.createElement('div');
-        document.body.appendChild(div);
-        componentDiv = document.createElement('div');
-        document.body.appendChild(componentDiv);
-
-        map = new ol.Map({
-            target: div,
-            view: new ol.View({
-                resolution: 7
-            })
+        testObjs = TestUtil.setupTestObjects({
+            mapOpts: {
+                view: new ol.View({
+                    resolution: 7
+                })
+            }
         });
-        mapComponent = Ext.create('GeoExt.component.Map', {
-            map: map,
-            renderTo: componentDiv
-        });
+        map = testObjs.map;
         combo = Ext.create('BasiGX.view.combo.ScaleCombo', {
             map: map
         });
     });
     afterEach(function() {
         combo.destroy();
-        mapComponent.destroy();
-        map.setTarget(null);
-        map = null;
-        document.body.removeChild(div);
-        div = null;
-        document.body.removeChild(componentDiv);
-        componentDiv = null;
+        TestUtil.teardownTestObjects(testObjs);
     });
 
     describe('Basics', function() {
@@ -51,7 +33,7 @@ describe('BasiGX.view.combo.ScaleCombo', function() {
     describe('autodetects map if not set', function() {
         it('works on an autodetected map if none configured', function() {
             var combo2 = Ext.create('BasiGX.view.combo.ScaleCombo');
-            expect(combo2.map).to.be(map);
+            expect(combo2.map).to.be(testObjs.map);
             combo2.destroy();
         });
     });

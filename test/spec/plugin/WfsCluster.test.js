@@ -13,33 +13,31 @@ describe('BasiGX.plugin.WfsCluster', function() {
     describe('Usage as plugin for BasiGX.view.component.Map', function() {
         var plugin;
         var mapComponent;
-        var div;
         var clusterLayerConf;
         var layer;
+        var testObjs;
         beforeEach(function() {
-            div = document.createElement('div');
-            document.body.appendChild(div);
+            testObjs = TestUtil.setupTestObjects({
+                mapOpts: {
+                    projection: 'EPSG:3857'
+                },
+                mapComponentOpts: {
+                    plugins: ['wfscluster']
+                }
+            });
             clusterLayerConf = {
                 type: 'WFSCluster',
                 layers: 'test',
                 url: 'http://test.com'
             };
-            mapComponent = Ext.create('BasiGX.view.component.Map', {
-                plugins: ['wfscluster'],
-                map: new ol.Map({
-                    target: div,
-                    projection: 'EPSG:3857'
-                })
-            });
-            BasiGX.util.ConfigParser.map = mapComponent.getMap();
+            mapComponent = testObjs.mapComponent;
+            BasiGX.util.ConfigParser.map = testObjs.map;
             layer = BasiGX.util.ConfigParser.createLayer(clusterLayerConf);
-            mapComponent.getMap().addLayer(layer);
+            testObjs.map.addLayer(layer);
             plugin = mapComponent.getPlugin('wfscluster');
         });
         afterEach(function() {
-            mapComponent.destroy();
-            document.body.removeChild(div);
-            div = null;
+            TestUtil.teardownTestObjects(testObjs);
         });
         it('creates an instance by pluginId', function() {
             expect(plugin).to.be.a(BasiGX.plugin.WfsCluster);
@@ -70,17 +68,14 @@ describe('BasiGX.plugin.WfsCluster', function() {
             expect(loadCount).to.not.be(0);
         });
 
-        //TODO: find a way to trigger the moveend event, setCenter wont work
-//        it('registers and calls a moveend listener on map', function() {
-//            var loadCount = 0;
-//
-//            plugin.loadClusterFeatures = function() {
-//                loadCount++;
-//            };
-//            plugin.setUpClusterLayers(mapComponent);
-//            mapComponent.getMap().getView().setCenter([22,3]);
-//            expect(loadCount).to.not.be(0);
-//
-//        });
+        it('registers and calls a moveend listener on map', function() {
+            var loadCount = 0;
+            plugin.loadClusterFeatures = function() {
+                loadCount++;
+            };
+            plugin.setUpClusterLayers(mapComponent);
+            testObjs.map.dispatchEvent('moveend');
+            expect(loadCount).to.not.be(0);
+        });
     });
 });

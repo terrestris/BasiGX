@@ -2,30 +2,14 @@ Ext.Loader.syncRequire(['BasiGX.view.container.Redlining']);
 
 describe('BasiGX.view.container.Redlining', function() {
     var redliningContainer;
-    var map;
-    var mapComponent;
-    var div;
+    var testObjs;
     beforeEach(function() {
-        div = document.createElement('div');
-        document.body.appendChild(div);
-        map = new ol.Map({
-            target: div,
-            view: new ol.View({
-                resolution: 7
-            })
-        });
-        mapComponent = Ext.create('GeoExt.component.Map', {
-            map: map
-        });
+        testObjs = TestUtil.setupTestObjects();
         redliningContainer = Ext.create('BasiGX.view.container.Redlining');
     });
     afterEach(function() {
         redliningContainer.destroy();
-        mapComponent.destroy();
-        map.setTarget(null);
-        map = null;
-        document.body.removeChild(div);
-        div = null;
+        TestUtil.teardownTestObjects(testObjs);
     });
 
     describe('Basics', function() {

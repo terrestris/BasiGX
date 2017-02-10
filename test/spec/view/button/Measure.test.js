@@ -3,40 +3,23 @@ Ext.Loader.syncRequire(['BasiGX.view.button.Measure']);
 describe('BasiGX.view.button.Measure', function() {
 
     var btn;
-    var mapComponent;
-    var map;
-    var mapDiv;
     var buttonDiv;
+    var testObjs;
 
     beforeEach(function() {
-        mapDiv = document.createElement('div');
-        document.body.appendChild(mapDiv);
-        buttonDiv = document.createElement('div');
-        document.body.appendChild(buttonDiv);
-
-        map = new ol.Map({target: mapDiv});
-        mapComponent = Ext.create('BasiGX.view.component.Map', {
-            map: map,
-            view: new ol.View({
-                resolution: 7
-            })
-        });
+        testObjs = TestUtil.setupTestObjects();
+        buttonDiv = TestUtil.setupTestDiv();
         btn = Ext.create('BasiGX.view.button.Measure', {
             renderTo: buttonDiv
         });
     });
 
     afterEach(function() {
-        map.setTarget(null);
-        mapComponent.destroy();
-        document.body.removeChild(mapDiv);
-        mapDiv = null;
+        TestUtil.teardownTestObjects(testObjs);
         if (btn) {
             btn.destroy();
         }
-        document.body.removeChild(buttonDiv);
-        buttonDiv = null;
-        btn = null;
+        TestUtil.teardownTestDiv(buttonDiv);
     });
 
     describe('Basics', function() {
@@ -85,7 +68,7 @@ describe('BasiGX.view.button.Measure', function() {
         it('is autoconfigured with a map', function() {
             expect(btn.map).to.be.ok();
             expect(btn.map).to.be.a(ol.Map);
-            expect(btn.map).to.be(map);
+            expect(btn.map).to.be(testObjs.map);
         });
 
         it('automatically adds a vector layer', function() {

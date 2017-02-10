@@ -2,44 +2,27 @@ Ext.Loader.syncRequire(['BasiGX.util.Layer']);
 
 describe('BasiGX.util.Layer', function() {
 
-    var div;
     var layer;
     var namedLayer;
     var map;
-    var mapComponent;
+    var testObjs;
 
     beforeEach(function() {
-        div = document.createElement('div');
-        div.style.position = "absolute";
-        div.style.top = "0";
-        div.style.left = "-1000px";
-        div.style.width = "512px";
-        div.style.height = "256px";
-        document.body.appendChild(div);
-
         layer = new ol.layer.Base({
             humpty: 'dumpty'
         });
         namedLayer = new ol.layer.Base({
             name: 'Some layername'
         });
-
-        map = new ol.Map({
-            layers: [layer, namedLayer],
-            view: new ol.View({
-                center: [0, 0],
-                zoom: 2
-            })
+        testObjs = TestUtil.setupTestObjects({
+            mapOpts: {
+                layers: [layer, namedLayer]
+            }
         });
-
-        mapComponent = Ext.create('GeoExt.component.Map', {
-            map: map
-        });
+        map = testObjs.map;
     });
     afterEach(function() {
-        mapComponent.destroy();
-        document.body.removeChild(div);
-        div = null;
+        TestUtil.teardownTestObjects(testObjs);
     });
 
     function addLayerWithKeyVal(key, val) {

@@ -1,4 +1,4 @@
-Ext.Loader.syncRequire(['BasiGX.plugin.Hover', 'BasiGX.view.component.Map']);
+Ext.Loader.syncRequire(['BasiGX.plugin.Hover']);
 
 describe('BasiGX.plugin.Hover', function() {
 
@@ -6,27 +6,27 @@ describe('BasiGX.plugin.Hover', function() {
         it('is defined', function() {
             expect(BasiGX.plugin.Hover).to.not.be(undefined);
         });
-        it('can be instantiated', function(){
+        it('can be instantiated', function() {
             var plugin = Ext.create('BasiGX.plugin.Hover');
             expect(plugin).to.be.a(BasiGX.plugin.Hover);
         });
     });
 
     describe('Static properties', function() {
-        describe('they are defined for the base plugin', function(){
-            it('works for #HOVER_OVERLAY_IDENTIFIER_KEY', function(){
+        describe('they are defined for the base plugin', function() {
+            it('works for #HOVER_OVERLAY_IDENTIFIER_KEY', function() {
                 var prop = BasiGX.plugin.Hover.HOVER_OVERLAY_IDENTIFIER_KEY;
                 expect(prop).to.not.be(undefined);
             });
-            it('works for #HOVER_OVERLAY_IDENTIFIER_VALUE', function(){
+            it('works for #HOVER_OVERLAY_IDENTIFIER_VALUE', function() {
                 var prop = BasiGX.plugin.Hover.HOVER_OVERLAY_IDENTIFIER_VALUE;
                 expect(prop).to.not.be(undefined);
             });
-            it('works for #LAYER_HOVERABLE_PROPERTY_NAME', function(){
+            it('works for #LAYER_HOVERABLE_PROPERTY_NAME', function() {
                 var prop = BasiGX.plugin.Hover.LAYER_HOVERABLE_PROPERTY_NAME;
                 expect(prop).to.not.be(undefined);
             });
-            it('works for #LAYER_HOVERFIELD_PROPERTY_NAME', function(){
+            it('works for #LAYER_HOVERFIELD_PROPERTY_NAME', function() {
                 var prop = BasiGX.plugin.Hover.LAYER_HOVERFIELD_PROPERTY_NAME;
                 expect(prop).to.not.be(undefined);
             });
@@ -34,7 +34,7 @@ describe('BasiGX.plugin.Hover', function() {
         describe('they are inherited for subclasses', function() {
             var ParentClass = BasiGX.plugin.Hover;
             var ExtendedClass = null;
-            beforeEach(function(){
+            beforeEach(function() {
                 ExtendedClass = Ext.define('TestExtendHover', {
                     extend: 'BasiGX.plugin.Hover',
                     alias: 'plugin.test-extend-hover',
@@ -45,25 +45,25 @@ describe('BasiGX.plugin.Hover', function() {
                 Ext.undefine('TestExtendHover');
                 ExtendedClass = null;
             });
-            it('works for #HOVER_OVERLAY_IDENTIFIER_KEY', function(){
+            it('works for #HOVER_OVERLAY_IDENTIFIER_KEY', function() {
                 var originalProp = ParentClass.HOVER_OVERLAY_IDENTIFIER_KEY;
                 var prop = ExtendedClass.HOVER_OVERLAY_IDENTIFIER_KEY;
                 expect(prop).to.not.be(undefined);
                 expect(prop).to.be(originalProp);
             });
-            it('works for #HOVER_OVERLAY_IDENTIFIER_VALUE', function(){
+            it('works for #HOVER_OVERLAY_IDENTIFIER_VALUE', function() {
                 var originalProp = ParentClass.HOVER_OVERLAY_IDENTIFIER_VALUE;
                 var prop = ExtendedClass.HOVER_OVERLAY_IDENTIFIER_VALUE;
                 expect(prop).to.not.be(undefined);
                 expect(prop).to.be(originalProp);
             });
-            it('works for #LAYER_HOVERABLE_PROPERTY_NAME', function(){
+            it('works for #LAYER_HOVERABLE_PROPERTY_NAME', function() {
                 var originalProp = ParentClass.LAYER_HOVERABLE_PROPERTY_NAME;
                 var prop = ExtendedClass.LAYER_HOVERABLE_PROPERTY_NAME;
                 expect(prop).to.not.be(undefined);
                 expect(prop).to.be(originalProp);
             });
-            it('works for #LAYER_HOVERFIELD_PROPERTY_NAME', function(){
+            it('works for #LAYER_HOVERFIELD_PROPERTY_NAME', function() {
                 var originalProp = ParentClass.LAYER_HOVERFIELD_PROPERTY_NAME;
                 var prop = ExtendedClass.LAYER_HOVERFIELD_PROPERTY_NAME;
                 expect(prop).to.not.be(undefined);
@@ -73,7 +73,7 @@ describe('BasiGX.plugin.Hover', function() {
         describe('they can be overridden for subclasses', function() {
             var ParentClass = BasiGX.plugin.Hover;
             var ExtendedClass = null;
-            beforeEach(function(){
+            beforeEach(function() {
                 ExtendedClass = Ext.define('TestExtendHover', {
                     extend: 'BasiGX.plugin.Hover',
                     alias: 'plugin.test-extend-hover',
@@ -90,28 +90,28 @@ describe('BasiGX.plugin.Hover', function() {
                 Ext.undefine('TestExtendHover');
                 ExtendedClass = null;
             });
-            it('works for #HOVER_OVERLAY_IDENTIFIER_KEY', function(){
+            it('works for #HOVER_OVERLAY_IDENTIFIER_KEY', function() {
                 var originalProp = ParentClass.HOVER_OVERLAY_IDENTIFIER_KEY;
                 var prop = ExtendedClass.HOVER_OVERLAY_IDENTIFIER_KEY;
                 expect(prop).to.not.be(undefined);
                 expect(prop).to.not.be(originalProp);
                 expect(prop).to.be('a');
             });
-            it('works for #HOVER_OVERLAY_IDENTIFIER_VALUE', function(){
+            it('works for #HOVER_OVERLAY_IDENTIFIER_VALUE', function() {
                 var originalProp = ParentClass.HOVER_OVERLAY_IDENTIFIER_VALUE;
                 var prop = ExtendedClass.HOVER_OVERLAY_IDENTIFIER_VALUE;
                 expect(prop).to.not.be(undefined);
                 expect(prop).to.not.be(originalProp);
                 expect(prop).to.be('b');
             });
-            it('works for #LAYER_HOVERABLE_PROPERTY_NAME', function(){
+            it('works for #LAYER_HOVERABLE_PROPERTY_NAME', function() {
                 var originalProp = ParentClass.LAYER_HOVERABLE_PROPERTY_NAME;
                 var prop = ExtendedClass.LAYER_HOVERABLE_PROPERTY_NAME;
                 expect(prop).to.not.be(undefined);
                 expect(prop).to.not.be(originalProp);
                 expect(prop).to.be('c');
             });
-            it('works for #LAYER_HOVERFIELD_PROPERTY_NAME', function(){
+            it('works for #LAYER_HOVERFIELD_PROPERTY_NAME', function() {
                 var originalProp = ParentClass.LAYER_HOVERFIELD_PROPERTY_NAME;
                 var prop = ExtendedClass.LAYER_HOVERFIELD_PROPERTY_NAME;
                 expect(prop).to.not.be(undefined);
@@ -124,20 +124,16 @@ describe('BasiGX.plugin.Hover', function() {
     describe('Usage as plugin for BasiGX.view.component.Map', function() {
         var plugin;
         var mapComponent;
-        var div;
+        var testObjs;
         beforeEach(function() {
-            div = document.createElement('div');
-            document.body.appendChild(div);
-            mapComponent = Ext.create('BasiGX.view.component.Map', {
-                plugins: ['hover'],
-                map: new ol.Map({target: div})
+            testObjs = TestUtil.setupTestObjects({
+                mapComponentOpts: {plugins: ['hover']}
             });
+            mapComponent = testObjs.mapComponent;
             plugin = mapComponent.getPlugin('hover');
         });
         afterEach(function() {
-            mapComponent.destroy();
-            document.body.removeChild(div);
-            div = null;
+            TestUtil.teardownTestObjects(testObjs);
         });
         it('creates an instance by pluginId', function() {
             expect(plugin).to.be.a(BasiGX.plugin.Hover);
@@ -147,26 +143,22 @@ describe('BasiGX.plugin.Hover', function() {
         });
     });
 
-    describe('Configuration options', function(){
-        var div;
+    describe('Configuration options', function() {
         var plugin;
         var mapComponent;
+        var testObjs;
         beforeEach(function() {
-            div = document.createElement('div');
-            document.body.appendChild(div);
-            mapComponent = Ext.create('BasiGX.view.component.Map', {
-                plugins: ['hover'],
-                map: new ol.Map({target: div})
+            testObjs = TestUtil.setupTestObjects({
+                mapComponentOpts: {plugins: ['hover']}
             });
+            mapComponent = testObjs.mapComponent;
             plugin = mapComponent.getPlugin('hover');
         });
         afterEach(function() {
-            mapComponent.destroy();
-            document.body.removeChild(div);
-            div = null;
+            TestUtil.teardownTestObjects(testObjs);
         });
 
-        describe('sane defaults', function(){
+        describe('sane defaults', function() {
             it('has pointerRest set to true', function() {
                 expect(plugin.getPointerRest()).to.be(true);
             });
@@ -195,22 +187,20 @@ describe('BasiGX.plugin.Hover', function() {
                 );
             });
         });
-        describe('defaults are changeable', function(){
+        describe('defaults are changeable', function() {
             var mapComponentConfigured;
             var pluginConfigured;
             var source;
             var layer;
             var interaction;
-            var div2;
+            var testObjs2;
 
             beforeEach(function() {
-                div2 = document.createElement('div');
-                document.body.appendChild(div2);
                 source = new ol.source.Vector();
                 layer = new ol.layer.Vector();
                 interaction = new ol.interaction.Select();
-                mapComponentConfigured = Ext.create(
-                    'BasiGX.view.component.Map', {
+                testObjs2 = TestUtil.setupTestObjects({
+                    mapComponentOpts: {
                         plugins: {
                             ptype:'hover',
                             pointerRest: false,
@@ -220,16 +210,14 @@ describe('BasiGX.plugin.Hover', function() {
                             hoverVectorLayerSource: source,
                             hoverVectorLayer: layer,
                             hoverVectorLayerInteraction: interaction
-                        },
-                        map: new ol.Map({target: div2})
+                        }
                     }
-                );
+                });
+                mapComponentConfigured = testObjs2.mapComponent;
                 pluginConfigured = mapComponentConfigured.getPlugin('hover');
             });
-            afterEach(function(){
-                mapComponentConfigured.destroy();
-                document.body.removeChild(div2);
-                div2 = null;
+            afterEach(function() {
+                TestUtil.teardownTestObjects(testObjs2);
             });
 
             it('has pointerRest set to false', function() {
@@ -264,70 +252,56 @@ describe('BasiGX.plugin.Hover', function() {
                 );
             });
         });
-        describe("Configurable selectEventOrigin", function(){
-            it("is 'collection' by default", function(){
-                // setup
-                var mapComp = Ext.create("BasiGX.view.component.Map", {
-                    plugins: {
-                        ptype: "hover"
-                    },
-                    map: new ol.Map({target: div})
-                });
-                var hoverPlugin = mapComp.getPlugin("hover");
-
+        describe("Configurable selectEventOrigin", function() {
+            it("is 'collection' by default", function() {
                 // test
-                expect(hoverPlugin.selectEventOrigin).to.be("collection");
-
-                // teardown
-                mapComp.destroy();
-                mapComp = null;
+                expect(plugin.selectEventOrigin).to.be("collection");
             });
-            it("can be set to 'interaction'", function(){
-                // setup
-                var mapComp = Ext.create("BasiGX.view.component.Map", {
-                    plugins: {
-                        ptype: "hover",
-                        selectEventOrigin: "interaction"
-                    },
-                    map: new ol.Map({target: div})
+            it("can be set to 'interaction'", function() {
+                var testObjs2 = TestUtil.setupTestObjects({
+                    mapComponentOpts: {
+                        plugins: {
+                            ptype: "hover",
+                            selectEventOrigin: "interaction"
+                        }
+                    }
                 });
-                var hoverPlugin = mapComp.getPlugin("hover");
+                var hoverPlugin = testObjs2.mapComponent.getPlugin("hover");
 
                 // test
                 expect(hoverPlugin.selectEventOrigin).to.be("interaction");
 
                 // teardown
-                mapComp.destroy();
-                mapComp = null;
+                TestUtil.teardownTestObjects(testObjs2);
             });
-            it("defaults to 'collection' on unexpected values", function(){
+            it("defaults to 'collection' on unexpected values", function() {
                 // setup
-                var mapComp = Ext.create("BasiGX.view.component.Map", {
-                    plugins: {
-                        ptype: "hover",
-                        selectEventOrigin: "humpty-dumpty"
-                    },
-                    map: new ol.Map({target: div})
+                var testObjs2 = TestUtil.setupTestObjects({
+                    mapComponentOpts: {
+                        plugins: {
+                            ptype: "hover",
+                            selectEventOrigin: "humpty-dumpty"
+                        }
+                    }
                 });
-                var hoverPlugin = mapComp.getPlugin("hover");
+                var hoverPlugin = testObjs2.mapComponent.getPlugin("hover");
 
-                // test
                 // actually uses the default:
                 expect(hoverPlugin.selectEventOrigin).to.be("collection");
 
                 // teardown
-                mapComp.destroy();
-                mapComp = null;
+                TestUtil.teardownTestObjects(testObjs2);
             });
             it("warns with hints when defaulting to 'collection'", function() {
                 // setup
                 var loggerSpy = sinon.spy(Ext.log, "warn");
-                var mapComp = Ext.create("BasiGX.view.component.Map", {
-                    plugins: {
-                        ptype: "hover",
-                        selectEventOrigin: "humpty-dumpty"
-                    },
-                    map: new ol.Map({target: div})
+                var testObjs2 = TestUtil.setupTestObjects({
+                    mapComponentOpts: {
+                        plugins: {
+                            ptype: "hover",
+                            selectEventOrigin: "humpty-dumpty"
+                        }
+                    }
                 });
 
                 // test
@@ -338,8 +312,7 @@ describe('BasiGX.plugin.Hover', function() {
 
                 // teardown
                 Ext.log.warn.restore();
-                mapComp.destroy();
-                mapComp = null;
+                TestUtil.teardownTestObjects(testObjs2);
             });
         });
     });

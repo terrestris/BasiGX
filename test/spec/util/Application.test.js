@@ -7,24 +7,14 @@ describe('BasiGX.util.Application', function() {
         });
     });
     describe('Usage of static Methods', function() {
-        var div;
         var mapComponent;
+        var testObjs;
         beforeEach(function() {
-            div = document.createElement('div');
-            document.body.appendChild(div);
-            mapComponent = Ext.create('BasiGX.view.component.Map', {
-                map: new ol.Map({
-                    target: div,
-                    view: new ol.View({
-                        center: [0, 0]
-                    })
-                })
-            });
+            testObjs = TestUtil.setupTestObjects();
+            mapComponent = testObjs.mapComponent;
         });
         afterEach(function() {
-            document.body.removeChild(div);
-            div = null;
-            mapComponent.destroy();
+            TestUtil.teardownTestObjects(testObjs);
         });
 
         it('does not throw on getAppContext call', function() {

@@ -153,8 +153,7 @@ describe('BasiGX.util.ConfigParser', function() {
             }
         };
         beforeEach(function() {
-            div = document.createElement('div');
-            document.body.appendChild(div);
+            div = TestUtil.setupTestDiv();
             map = BasiGX.util.ConfigParser.setupMap(appContext);
             layer = BasiGX.util.ConfigParser.createLayer({
                 name: "OSM WMS Farbig",
@@ -176,8 +175,8 @@ describe('BasiGX.util.ConfigParser', function() {
             });
         });
         afterEach(function() {
-            document.body.removeChild(div);
-            div = null;
+            TestUtil.teardownTestDiv(div);
+            map.setTarget(null);
             map = null;
             layer = null;
         });
