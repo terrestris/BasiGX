@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,8 +38,8 @@
  *
  * @class BasiGX.view.button.CoordinateTransform
  */
-Ext.define(&quot;BasiGX.view.button.CoordinateTransform&quot;, {
-    extend: &quot;Ext.Button&quot;,
+Ext.define('BasiGX.view.button.CoordinateTransform', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-coordinatetransform',
 
     requires: [
@@ -49,21 +49,22 @@ Ext.define(&quot;BasiGX.view.button.CoordinateTransform&quot;, {
         'BasiGX.util.Animate'
     ],
 
-<span id='BasiGX-view-button-CoordinateTransform-property-bind'>    /**
-</span>     *
-     */
-    bind: {
-        text: '{text}'
-    },
-
 <span id='BasiGX-view-button-CoordinateTransform-property-viewModel'>    /**
 </span>     *
      */
     viewModel: {
         data: {
             tooltip: 'Koordinaten transformieren und anzeigen',
-            text: 'Koordinaten transformieren'
+            text: 'Koordinaten transformieren',
+            windowTitle: 'Koordinaten transformieren'
         }
+    },
+
+<span id='BasiGX-view-button-CoordinateTransform-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: '{text}'
     },
 
 <span id='BasiGX-view-button-CoordinateTransform-property-coordinateSystemsToUse'>    /**
@@ -85,7 +86,7 @@ Ext.define(&quot;BasiGX.view.button.CoordinateTransform&quot;, {
             if(!win){
                 Ext.create('Ext.window.Window', {
                     name: 'coordinate-transform-window',
-                    title: 'Koordinaten transformieren',
+                    title: this.getViewModel().get('windowTitle'),
                     width: 500,
                     height: 400,
                     layout: 'fit',
@@ -98,18 +99,6 @@ Ext.define(&quot;BasiGX.view.button.CoordinateTransform&quot;, {
             } else {
                 BasiGX.util.Animate.shake(win);
             }
-        }
-    },
-
-<span id='BasiGX-view-button-CoordinateTransform-method-constructor'>    /**
-</span>     *
-     */
-    constructor: function(config) {
-        this.callParent([config]);
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
         }
     }
 });

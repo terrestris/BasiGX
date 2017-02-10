@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -109,13 +109,17 @@ Ext.define(&quot;BasiGX.view.panel.LegendTree&quot;, {
     initComponent: function() {
         var me = this;
 
-        if (me.collapsed &amp;&amp; me.hideCollapseTool) {
-            me.collapsed = false;
-            me.initiallyCollapsed = true;
-            Ext.log.info('Ignoring configuration &quot;collapsed&quot; and instead' +
-                    ' setup a one-time afterlayout listener that will' +
-                    ' collapse the panel (this is possibly due to a bug in' +
-                    ' ExtJS 6)');
+        // The following fix is needed for ExtJS versions between 6.0.0 and
+        // 6.2.0 only. We keep it for backwards compatibility.
+        if (me.isExtVersionLowerThan62()) {
+            if (me.collapsed &amp;&amp; me.hideCollapseTool) {
+                me.collapsed = false;
+                me.initiallyCollapsed = true;
+                Ext.log.info('Ignoring configuration &quot;collapsed&quot; and instead' +
+                        ' setup a one-time afterlayout listener that will' +
+                        ' collapse the panel (this is possibly due to a bug in' +
+                        ' ExtJS 6)');
+            }
         }
         me.hideHeaders = true;
 
@@ -123,18 +127,23 @@ Ext.define(&quot;BasiGX.view.panel.LegendTree&quot;, {
         me.plugins = [{
             ptype: 'rowexpanderwithcomponents',
             hideExpandColumn: true,
-            rowBodyCompTemplate: me.rowBodyCompTemplate
+            rowBodyCompTemplate: me.rowBodyCompTemplate,
+            pluginId: 'rowexpanderwithcomponents'
         }];
 
         // call parent
         me.callParent();
 
-        // See the comment above the constructor why we need this.
-        if (me.initiallyCollapsed){
-            me.on('afterlayout', function(){
-                this.collapse();
-            }, me, {single: true, delay: 100});
-            me.initiallyCollapsed = null;
+        // The following fix is needed for ExtJS versions between 6.0.0 and
+        // 6.2.0 only. We keep it for backwards compatibility.
+        if (me.isExtVersionLowerThan62()) {
+            // See the comment above the constructor why we need this.
+            if (me.initiallyCollapsed){
+                me.on('afterlayout', function(){
+                    this.collapse();
+                }, me, {single: true, delay: 100});
+                me.initiallyCollapsed = null;
+            }
         }
     },
 
@@ -152,16 +161,77 @@ Ext.define(&quot;BasiGX.view.panel.LegendTree&quot;, {
         }]
     },
 
+<span id='BasiGX-view-panel-LegendTree-method-setModeAllBodies'>    /**
+</span>     * Expands, collapses or toggles all row bodies with the components,
+     * depending on the passed mode.
+     *
+     * @param {String} mode The mode to set; either `toggle`, `expand` or
+     *     `collapse`.
+     * @protected
+     */
+    setModeAllBodies: function(mode) {
+        var toggle = mode === 'toggle';
+        var expand = mode === 'expand';
+        var collapse = mode === 'collapse';
+        if (!toggle &amp;&amp; !expand &amp;&amp; !collapse) {
+            Ext.log.warn('Illegal mode, expected &quot;' + mode + '&quot;' +
+                ' to be bei either &quot;toggle&quot;, &quot;expand&quot; or &quot;collapse&quot;.');
+            return;
+        }
+        var me = this;
+        var plugin = me.getPlugin('rowexpanderwithcomponents');
+        var collapsedClass = me.plugins[0].rowCollapsedCls;
+
+        if (me.initiallyCollapsed) {
+            Ext.log.warn('Cannot set mode of all bodies, the view is still ' +
+                'collapsed');
+            return;
+        }
+        if (!plugin) {
+            Ext.log.warn('Cannot set mode of all bodies, Failed to determine ' +
+                'the row expander-plugin');
+            return;
+        }
+
+        var store = me.getStore();
+        store.each(function(record, index) {
+            if (toggle) {
+                plugin.toggleRow(index, record);
+            } else {
+                var rowNode = me.view.getNode(index);
+                var normalRow = Ext.fly(rowNode);
+                var currentlyCollapsed = normalRow.hasCls(collapsedClass);
+                if (currentlyCollapsed &amp;&amp; expand) {
+                    plugin.toggleRow(index, record);
+                } else if (!currentlyCollapsed &amp;&amp; collapse) {
+                    plugin.toggleRow(index, record);
+                }
+            }
+        });
+    },
+
 <span id='BasiGX-view-panel-LegendTree-method-expandAllBodies'>    /**
-</span>     * Expands All RowBodies
+</span>     * Expands all row bodies with the components, effectively showing
+     * previously hidden legends.
      */
     expandAllBodies: function(){
-        var me = this;
-        if((!me.getBodyInitiallyCollapsed()) &amp;&amp; me.plugins.length &gt; 0){
-            me.getStore().each(function(record, index) {
-                me.plugins[0].toggleRow(index, record);
-            });
-        }
+        this.setModeAllBodies('expand');
+    },
+
+<span id='BasiGX-view-panel-LegendTree-method-collapseAllBodies'>    /**
+</span>     * Collapses all row bodies with the components, effectively hiding
+     * previously shown legends.
+     */
+    collapseAllBodies: function() {
+        this.setModeAllBodies('collapse');
+    },
+
+<span id='BasiGX-view-panel-LegendTree-method-toggleAllBodies'>    /**
+</span>     * Toggles all row bodies with the components, effectively showing
+     * previously hidden legends and hiding previously shown legends.
+     */
+    toggleAllBodies: function() {
+        this.setModeAllBodies('toggle');
     },
 
 <span id='BasiGX-view-panel-LegendTree-method-getColorFromRow'>    /**
@@ -219,11 +289,21 @@ Ext.define(&quot;BasiGX.view.panel.LegendTree&quot;, {
                 '.' + elemenIdAndCssClass + ' { ' +
                 ' background-color: ' + color + ';' +
                 ' background:linear-gradient(to right, white, ' + color + ');' +
+                ' filter: alpha(opacity=50)\10;' +//IE9 fallback
                 '}';
             Ext.util.CSS.createStyleSheet(css, elemenIdAndCssClass);
 
             return elemenIdAndCssClass;
         }
+    },
+
+<span id='BasiGX-view-panel-LegendTree-method-isExtVersionLowerThan62'>    /**
+</span>     * Tests if the current ExtJS version is lower than 6.2.0.000.
+     *
+     * @return {Boolean} Whether the version is lower than 6.2.0.000 or not.
+     */
+    isExtVersionLowerThan62: function() {
+        return parseInt(Ext.getVersion().getShortVersion(), 10) &lt; 620000;
     }
 });
 </pre>

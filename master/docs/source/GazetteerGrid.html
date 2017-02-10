@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2016-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-grid-GazetteerGrid'>/**
+</span> *  A grid showing results of the gazetteer search response values.
+ *
+ * @class BasiGX.view.grid.GazetteerGrid
+ */
+Ext.define('BasiGX.view.grid.GazetteerGrid',{
+    extend: 'Ext.grid.Panel',
+
+    xtype: 'basigx_grid_gazetteergrid',
+
+    requires: [
+        'BasiGX.store.GazetteerSearch',
+        'BasiGX.util.Map',
+        'BasiGX.util.Layer',
+        'BasiGX.util.Animate'
+    ],
+
+<span id='BasiGX-view-grid-GazetteerGrid-property-store'>    store: {
+</span>        type: 'basigx-gazetteersearch'
+    },
+
+<span id='BasiGX-view-grid-GazetteerGrid-property-viewModel'>    viewModel: {
+</span>        data: {
+            title: 'Gazetteer',
+            hideToolTooltip: 'Gazetteer verbergen',
+            limitCboxLabel: 'Auf den sichtbaren Kartenbereich einschränken',
+            refreshBtnTooltip: 'Aktualisieren',
+            directionBtnTooltip: 'Hinweise zu Gazetteer',
+            gazetteerHtmlHints:'Führen Sie die Maus über die Suchergebnisse, ' +
+                'um diese auf der Karte zu markieren.&lt;br/&gt; Klicken Sie auf ' +
+                'ein Element, um die Karte darauf zu zentrieren.&lt;br/&gt;' +
+                'Beachten Sie, dass einige Suchergebnisse außerhalb des ' +
+                'sichtbaren Kartenbereichs liegen können, falls die ' +
+                'Option &quot;Auf den sichtbaren Kartenbereich einschränken&quot; ' +
+                'abgewählt ist.'
+        }
+    },
+
+<span id='BasiGX-view-grid-GazetteerGrid-property-bind'>    bind: {
+</span>        title: '{title}'
+    },
+
+<span id='BasiGX-view-grid-GazetteerGrid-property-tools'>    tools:[{
+</span>        type: 'minimize',
+        bind: {
+            tooltip: '{hideToolTooltip}'
+        },
+        handler: function(e, target, gridheader){
+            var grid = gridheader.up('grid');
+            grid.getEl().slideOut('t', {
+                duration: 250,
+                callback: function(){
+                    grid.hide();
+                }
+            });
+        }
+    }],
+
+<span id='BasiGX-view-grid-GazetteerGrid-property-width'>    width: 500,
+</span>
+<span id='BasiGX-view-grid-GazetteerGrid-property-maxHeight'>    maxHeight: 400,
+</span>
+<span id='BasiGX-view-grid-GazetteerGrid-property-hidden'>    hidden: true,
+</span>
+<span id='BasiGX-view-grid-GazetteerGrid-property-tbar'>    tbar: [{
+</span>        xtype: 'checkbox',
+        name: 'limitcheckbox',
+        checked: true,
+        bind: {
+            boxLabel: '{limitCboxLabel}'
+        }
+    },
+    {
+        xtype: 'button',
+        name: 'refreshsearchbutton',
+        bind: {
+            tooltip: '{refreshBtnTooltip}'
+        },
+        iconCls: 'fa fa-refresh fa-2x'
+    },
+    '-&gt;',
+    {
+        xtype: 'button',
+        name: 'directionsbutton',
+        bind: {
+            tooltip: '{directionBtnTooltip}'
+        },
+        iconCls: 'fa fa-question fa-2x'
+    }
+    ],
+
+<span id='BasiGX-view-grid-GazetteerGrid-property-style'>    style: {
+</span>        right: &quot;75px&quot;,
+        top: &quot;10px&quot;
+    },
+
+    config: {
+<span id='BasiGX-view-grid-GazetteerGrid-cfg-layer'>        layer: null,
+</span>
+<span id='BasiGX-view-grid-GazetteerGrid-cfg-map'>        map: null
+</span>    },
+
+<span id='BasiGX-view-grid-GazetteerGrid-property-columns'>    columns: {
+</span>        items: [{
+            text: '',
+            xtype: 'templatecolumn',
+            width: 40,
+            tpl: '&lt;img src=&quot;{icon}&quot; height=&quot;16&quot; width=&quot;16&quot;&gt;'
+        }, {
+            text: 'Name',
+            xtype: 'templatecolumn',
+            tpl: '&lt;div data-qtip=&quot;{display_name}&quot;&gt;'+
+                        '{display_name}'+
+                '&lt;/div&gt;',
+            flex: 2
+        }, {
+            text: 'Class',
+            dataIndex: 'class',
+            flex: 1
+        }, {
+            text: 'Type',
+            dataIndex: 'type',
+            flex: 1
+        }]
+    },
+
+<span id='BasiGX-view-grid-GazetteerGrid-method-initComponent'>    initComponent: function () {
+</span>        var me = this;
+
+        me.callParent(arguments);
+
+        // set handler for all grid items
+        me.down('checkbox[name=limitcheckbox]')
+            .on('change', me.refreshSearchResults, me);
+        me.down('button[name=refreshsearchbutton]')
+            .setHandler(me.refreshSearchResults, me);
+        me.down('button[name=directionsbutton]')
+            .setHandler(me.showDirections, me);
+
+        // add listeners
+        me.on('boxready', me.onBoxReady, me);
+        me.on('itemmouseenter', me.onItemMouseEnter, me);
+        me.on('itemmouseleave', me.onItemMouseLeave, me);
+        me.on('itemclick', me.onItemClick, me);
+
+        // unregister listeners on grid hide
+        me.on('hide', me.unregisterListeners, me);
+    },
+
+<span id='BasiGX-view-grid-GazetteerGrid-method-onBoxReady'>    /**
+</span>     *
+     */
+    onBoxReady: function(){
+        var me = this;
+        if(!me.getMap()){
+            var map = BasiGX.util.Map.getMapComponent().getMap();
+            me.setMap(map);
+        }
+        if(!me.getLayer()){
+            var layer = new ol.layer.Vector({
+                source: new ol.source.Vector()
+            });
+            var displayInLayerSwitcherKey =
+                BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+            layer.set(displayInLayerSwitcherKey, false);
+            me.setLayer(layer);
+            me.getMap().addLayer(layer);
+        }
+    },
+
+<span id='BasiGX-view-grid-GazetteerGrid-method-onItemMouseEnter'>    /**
+</span>     *
+     */
+    onItemMouseEnter: function(grid, record){
+        var me = this;
+        var layer = me.getLayer();
+        var projection = me.getMap().getView().getProjection().getCode();
+        var format = new ol.format.WKT();
+        var wkt = record.get('geotext');
+        var feature = format.readFeature(wkt);
+        feature.getGeometry().transform('EPSG:4326', projection);
+        layer.getSource().addFeature(feature);
+    },
+
+<span id='BasiGX-view-grid-GazetteerGrid-method-onItemMouseLeave'>    /**
+</span>     *
+     */
+    onItemMouseLeave: function(){
+        var me = this;
+        var layer = me.getLayer();
+        layer.getSource().clear();
+    },
+
+<span id='BasiGX-view-grid-GazetteerGrid-method-onItemClick'>    /**
+</span>     *
+     */
+    onItemClick: function(grid, record){
+        var me = this;
+        var map = me.getMap();
+        var olView = map.getView();
+        var projection = olView.getProjection().getCode();
+        var format = new ol.format.WKT();
+        var wkt = record.get('geotext');
+        var feature = format.readFeature(wkt);
+        var geom = feature.getGeometry().transform('EPSG:4326', projection);
+        olView.fit(geom, map.getSize());
+    },
+
+<span id='BasiGX-view-grid-GazetteerGrid-method-refreshSearchResults'>    /**
+</span>     *
+     */
+    refreshSearchResults: function(){
+        var gazetteerCombo =
+            Ext.ComponentQuery.query('basigx_form_field_gazetteercombo')[0];
+        var value = gazetteerCombo.getValue();
+        gazetteerCombo.doGazetteerSearch(value);
+    },
+
+<span id='BasiGX-view-grid-GazetteerGrid-method-showDirections'>    /**
+</span>     *
+     */
+    showDirections: function(){
+        var win = Ext.ComponentQuery.query(
+                'window[name=&quot;gazetteerdirections&quot;]')[0];
+        if(win){
+            if(win.isVisible()){
+                BasiGX.util.Animate.shake(win);
+            } else {
+                win.show();
+            }
+        } else {
+            Ext.create('Ext.window.Window', {
+                title: this.getViewModel().get('title'),
+                name: 'gazetteerdirections',
+                height: 200,
+                width: 400,
+                layout: 'fit',
+                bodyPadding: 5,
+                html: this.getViewModel().get('gazetteerHtmlHints')
+            }).show();
+        }
+    },
+
+<span id='BasiGX-view-grid-GazetteerGrid-method-unregisterListeners'>    /**
+</span>     *
+     */
+    unregisterListeners: function() {
+        var me = this;
+
+        me.un('boxready', me.onBoxReady, me);
+        me.un('itemmouseenter', me.onItemMouseEnter, me);
+        me.un('itemmouseleave', me.onItemMouseLeave, me);
+        me.un('itemclick', me.onItemClick, me);
+    },
+
+<span id='BasiGX-view-grid-GazetteerGrid-method-onGazetteerGridSlideOut'>    /**
+</span>    *
+    */
+   onGazetteerGridSlideOut: function(){
+       var me = this;
+       me.hide();
+   }
+});
+</pre>
+</body>
+</html>

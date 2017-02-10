@@ -16,10 +16,27 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">/*eslint no-eval:1*/ // turn eval usage into a warning when linting
+/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
+ * Copyright (c) 2015-present David French
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
 <span id='BasiGX-ux-RowExpanderWithComponents'>/**
 </span> * RowExpanderWithComponents plugin
  *
- * This an ux originally created for ExtJS 4.2.2 by David French under MIT License.
+ * This an ux originally created for ExtJS 4.2.2 by David French under MIT
+ * License.
  *
  * Modified by terrestris to fit the needs of ExtJS 6.
  * https://github.com/davidffrench/Ext.ux.RowExpanderWithComponents
@@ -29,7 +46,8 @@
 Ext.define('BasiGX.ux.RowExpanderWithComponents', {
     extend: 'Ext.grid.plugin.RowExpander',
     alias: 'plugin.rowexpanderwithcomponents',
-
+<span id='BasiGX-ux-RowExpanderWithComponents-property-pluginId'>    pluginId: 'rowexpanderwithcomponents',
+</span>
 <span id='BasiGX-ux-RowExpanderWithComponents-cfg-rowBodyTpl'>    /**
 </span>     * @cfg {XTemplate} rowBodyTpl
      * This needs to default to the below for ExtJS components to render to the correct row
@@ -223,7 +241,10 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
                 if (record.getOlLayer() &amp;&amp; record.getOlLayer().get('type') &amp;&amp;
                     record.getOlLayer().get('type') !== &quot;WFSCluster&quot; &amp;&amp;
                     Ext.isArray(obj.items) &amp;&amp; obj.items.length &gt; 1) {
-                        obj.items.pop();
+                        var lastItem = obj.items[obj.items.length - 1];
+                        if(lastItem.xtype === &quot;image&quot;){
+                            obj.items.pop();
+                        }
                 }
             }
         }

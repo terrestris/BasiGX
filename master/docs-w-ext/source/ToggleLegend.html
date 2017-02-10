@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,11 +37,12 @@
  *
  * @class BasiGX.view.button.ToggleLegend
  */
-Ext.define(&quot;BasiGX.view.button.ToggleLegend&quot;, {
-    extend: &quot;Ext.Button&quot;,
+Ext.define('BasiGX.view.button.ToggleLegend', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-togglelegend',
     requires: [
-        'Ext.app.ViewModel'
+        'Ext.app.ViewModel',
+        'BasiGX.util.Map'
     ],
 
 <span id='BasiGX-view-button-ToggleLegend-property-viewModel'>    /**
@@ -69,28 +70,25 @@ Ext.define(&quot;BasiGX.view.button.ToggleLegend&quot;, {
 <span id='BasiGX-view-button-ToggleLegend-cfg-html'>    html: '&lt;i class=&quot;fa fa-list-alt fa-2x&quot;&gt;&lt;/i&gt;',
 </span>
     config: {
+<span id='BasiGX-view-button-ToggleLegend-cfg-legendTreeXType'>        /**
+</span>         * Placeholder for the xtype of the legendtree panel component
+         * (e.g. 'basigx-panel-legendtree').
+         * Will be used to be able to determine the component dynamically.
+         */
+        legendTreeXType: null,
 <span id='BasiGX-view-button-ToggleLegend-cfg-handler'>        handler: function(button){
-</span>            // TODO refactor so this works even outside of the mapcontainer
-            var legendPanel = button.up(&quot;basigx-panel-mapcontainer&quot;)
-                .down('basigx-panel-legendtree');
-            if(legendPanel.getCollapsed()) {
-                legendPanel.expand();
-            } else {
-                legendPanel.collapse();
-            }
-            button.blur();
-        }
-    },
+</span>            var me = this;
+            var legendPanel =
+                    BasiGX.util.Map.getLegendTreePanel(me.getLegendTreeXType());
 
-<span id='BasiGX-view-button-ToggleLegend-method-constructor'>    /**
-</span>     *
-     */
-    constructor: function(config) {
-        this.callParent([config]);
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
+            if (legendPanel) {
+                if(legendPanel.getCollapsed()) {
+                    legendPanel.expand();
+                } else {
+                    legendPanel.collapse();
+                }
+                button.blur();
+            }
         }
     }
 });

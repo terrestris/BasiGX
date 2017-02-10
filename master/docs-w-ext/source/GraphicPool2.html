@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2016-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-view-GraphicPool'>/**
+</span> *
+ * BasiGX.view.view.GraphicPool
+ *
+ * Used to upload, select and delete graphics
+ *
+ * @class BasiGX.view.view.GraphicPool
+ */
+Ext.define(&quot;BasiGX.view.view.GraphicPool&quot;, {
+    extend: &quot;Ext.view.View&quot;,
+    xtype: &quot;basigx-view-graphicpool&quot;,
+
+    requires: [
+        'Ext.data.Store',
+        'BasiGX.util.Url'
+    ],
+
+<span id='BasiGX-view-view-GraphicPool-cfg-viewModel'>    viewModel: {
+</span>        data: {
+<span id='BasiGX-view-view-GraphicPool-property-emptyStoreMsg'>            /**
+</span>             * text displayed when no pictures were found
+             */
+            emptyStoreMsg: 'No data found'
+        }
+    },
+
+<span id='BasiGX-view-view-GraphicPool-property-border'>    /**
+</span>     *
+     */
+    border: false,
+
+<span id='BasiGX-view-view-GraphicPool-property-autoScroll'>    /**
+</span>     *
+     */
+    autoScroll: true,
+
+<span id='BasiGX-view-view-GraphicPool-property-store'>    /**
+</span>     * readonly
+     *
+     * will be created on init
+     */
+    store: null,
+
+<span id='BasiGX-view-view-GraphicPool-property-config'>    /**
+</span>     *
+     */
+    config: {
+<span id='BasiGX-view-view-GraphicPool-cfg-backendUrls'>        /**
+</span>         * The url objects for images.
+         * Can contain url and method property
+         */
+        backendUrls: null,
+
+<span id='BasiGX-view-view-GraphicPool-cfg-itemSelector'>        /**
+</span>         *
+         */
+        itemSelector: 'div.thumb-wrap',
+
+<span id='BasiGX-view-view-GraphicPool-cfg-multiSelect'>        /**
+</span>         * allow multiselect?
+         */
+        multiSelect: false,
+
+<span id='BasiGX-view-view-GraphicPool-cfg-trackOver'>        /**
+</span>         * use trackover?
+         */
+        trackOver: true
+    },
+
+<span id='BasiGX-view-view-GraphicPool-method-initComponent'>    /**
+</span>     *
+     */
+    initComponent : function() {
+        var me = this;
+        var viewModel = me.getViewModel();
+        var emptyText = viewModel.get('emptyStoreMsg');
+        me.emptyText = emptyText;
+
+        var store = Ext.create('Ext.data.Store', {
+            sorters: 'fileName',
+//            TODO: add and make a model configurable?
+            proxy: {
+                type: 'ajax',
+                url: BasiGX.util.Url.getWebProjectBaseUrl() +
+                    me.getBackendUrls().pictureList.url,
+                reader: {
+                    type: 'json',
+                    rootProperty: 'data'
+                }
+            }
+        });
+        store.load();
+
+        var srcUrl = BasiGX.util.Url.getWebProjectBaseUrl() +
+            me.getBackendUrls().pictureSrc.url;
+
+        me.itemSelector = me.getItemSelector();
+        me.store = store;
+
+        me.tpl = [
+            '&lt;tpl for=&quot;.&quot;&gt;',
+                '&lt;div class=&quot;thumb-wrap&quot;&gt;',
+                    '&lt;div class=&quot;thumb&quot;&gt;',
+                        '&lt;img src=&quot;' + srcUrl + '{id}&quot;/&gt;',
+                    '&lt;/div&gt;',
+                    '&lt;span&gt;{fileName}&lt;/span&gt;',
+                '&lt;/div&gt;',
+            '&lt;/tpl&gt;'
+        ];
+
+        // call super
+        me.callParent(arguments);
+    }
+});
+</pre>
+</body>
+</html>

@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,6 +47,8 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
         &quot;Ext.form.action.StandardSubmit&quot;,
 
         &quot;BasiGX.util.Layer&quot;,
+        &quot;BasiGX.util.Map&quot;,
+        &quot;BasiGX.ol3.extension.TransformInteraction&quot;,
 
         &quot;GeoExt.data.MapfishPrintProvider&quot;
     ],
@@ -62,7 +64,12 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
             printButtonSuffix: 'anfordern',
             downloadButtonPrefix: 'Download',
             printFormat: 'pdf',
-            genericFieldSetTitle: 'Einstellungen'
+            printAppFieldSetTitle: 'Vorlage',
+            genericFieldSetTitle: 'Einstellungen',
+            formatComboLabel: 'Format',
+            layoutComboLabel: 'Layout',
+            attributesTitle: 'Eigenschaften',
+            mapTitleLabel: 'Kartentitel'
         }
     },
 
@@ -76,7 +83,10 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
 </span>
     config: {
 <span id='BasiGX-view-form-Print-cfg-url'>        url: null,
-</span><span id='BasiGX-view-form-Print-cfg-store'>        store: null
+</span><span id='BasiGX-view-form-Print-cfg-store'>        store: null,
+</span><span id='BasiGX-view-form-Print-cfg-printExtentAlwaysCentered'>        printExtentAlwaysCentered: true,
+</span><span id='BasiGX-view-form-Print-cfg-printExtentMovable'>        printExtentMovable: false,
+</span><span id='BasiGX-view-form-Print-cfg-printExtentScalable'>        printExtentScalable: false
 </span>    },
 
 <span id='BasiGX-view-form-Print-property-borderColors'>    borderColors: [
@@ -86,7 +96,7 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
         '#CCFF66'
     ],
 
-<span id='BasiGX-view-form-Print-property-layout'>    layout: 'vbox',
+<span id='BasiGX-view-form-Print-property-layout'>    layout: 'form',
 </span>
 <span id='BasiGX-view-form-Print-property-bodyPadding'>    bodyPadding: '0 5px 0 0',
 </span>
@@ -96,6 +106,32 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
 </span>
 <span id='BasiGX-view-form-Print-property-defaultType'>    defaultType: 'textfield',
 </span>
+<span id='BasiGX-view-form-Print-property-remotePrintAppsStore'>    /**
+</span>     * The store containing the apps of the print servlet. This is the base of
+     * the store that actually is being used in the apps combo (#appsStore).
+     *
+     * @type {Ext.data.Store}
+     */
+    remotePrintAppsStore: null,
+
+<span id='BasiGX-view-form-Print-property-appsStore'>    /**
+</span>     * The store of the combobox to choose an application from. Is created from
+     * the data in the #remotePrintAppsStore.
+     *
+     * @type {Ext.data.Store}
+     */
+    appsStore: null,
+
+<span id='BasiGX-view-form-Print-property-transformInteraction'>    /**
+</span>     * The transform interaction that we may have added to the map to manipulate
+     * the extent feature via dragging edges etc. Currently only added if either
+     * the config #printExtentMovable or #printExtentScalable is `true` and
+     * added in the method #addExtentInteractions.
+     *
+     * @type {ol.interaction.Transform}
+     */
+    transformInteraction: null,
+
 <span id='BasiGX-view-form-Print-event-attributefieldsadd'>    /**
 </span>     * Fires after an `attributefields`-object was added to a fieldset of e.g.
      * the layout attributes.
@@ -125,72 +161,7 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
      *     are formfields like `textfields`, `combos` etc.
      */
 
-<span id='BasiGX-view-form-Print-method-initComponent'>    /**
-</span>     * Initializes the print form.
-     */
-    initComponent: function(){
-        var url = this.getUrl();
-
-        if(!url){
-            this.html = 'No Url provided!';
-            this.callParent();
-            return;
-        }
-
-        this.callParent();
-
-        var appsStore = Ext.create('Ext.data.Store', {
-            autoLoad: true,
-            proxy: {
-                type: 'jsonp',
-                url: url + 'apps.json',
-                callbackKey: 'jsonp'
-            },
-            listeners: {
-                load: function(store, records) {
-                    var rawValues = [];
-                    Ext.each(records, function(rec){
-                        rawValues.push(rec.data);
-                    });
-                    Ext.Array.sort(rawValues);
-                    this.down('combo[name=appCombo]').setStore(rawValues);
-                },
-                scope: this
-            }
-        });
-
-        this.add({
-            xtype: 'combo',
-            name: 'appCombo',
-            allowBlank: false,
-            forceSelection: true,
-            store: appsStore,
-            listeners: {
-                select: 'onAppSelected',
-                scope: this
-            }
-        });
-
-        var formContainer = this.add({
-            xtype: 'fieldcontainer',
-            name: 'formContainer',
-            layout: 'hbox'
-        });
-
-        formContainer.add({
-            xtype: 'fieldcontainer',
-            name: 'defaultFieldContainer',
-            layout: 'form'
-        });
-
-        this.on('afterrender', this.addExtentLayer, this);
-        this.on('afterrender', this.addParentCollapseExpandListeners, this);
-        this.on('beforeDestroy', this.cleanupPrintExtent, this);
-
-    },
-
-<span id='BasiGX-view-form-Print-property-bbar'>    bbar: [{
-</span>        xtype: 'button',
+    buttons: [{
         name: 'createPrint',
         bind: {
             text: '{printFormat:uppercase} {printButtonSuffix}'
@@ -200,8 +171,7 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
             this.up('form').createPrint();
         },
         disabled: true
-    },{
-        xtype: 'button',
+    }, {
         name: 'downloadPrint',
         hidden: true,
         glyph: 'xf019@FontAwesome',
@@ -218,8 +188,138 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
         }
     }],
 
-<span id='BasiGX-view-form-Print-method-createPrint'>    createPrint: function(){
-</span>        var view = this;
+<span id='BasiGX-view-form-Print-property-listeners'>    listeners: {
+</span>        collapse: 'cleanupPrintExtent',
+        resize: 'renderAllClientInfos'
+    },
+
+<span id='BasiGX-view-form-Print-method-initComponent'>    /**
+</span>     * Initializes the print form.
+     */
+    initComponent: function(){
+        var me = this;
+        var url = me.getUrl();
+
+        if(!url){
+            me.html = 'No Url provided!';
+            me.callParent();
+            return;
+        }
+
+        me.callParent();
+
+        me.createAppsStore();
+
+        var printAppComponent = me.getPrintAppComponent();
+
+        me.add({
+            xtype: 'fieldcontainer',
+            name: 'defaultFieldContainer',
+            layout: 'form',
+            items: printAppComponent
+        });
+
+        me.on('afterrender', me.addExtentLayer, me);
+        me.on('afterrender', me.addExtentInteractions, me);
+
+        me.on('afterrender', me.addParentCollapseExpandListeners, me);
+        me.on('beforeDestroy', me.cleanupPrintExtent, me);
+
+    },
+
+<span id='BasiGX-view-form-Print-method-createAppsStore'>    /**
+</span>     *
+     */
+    createAppsStore: function() {
+        var me = this;
+        var remoteAppsStore = Ext.create('Ext.data.Store', {
+            autoLoad: true,
+            proxy: {
+                type: 'jsonp',
+                url: me.getUrl() + 'apps.json',
+                callbackKey: 'jsonp'
+            },
+            listeners: {
+                // The real work is done in the callback below, make sure
+                // to read the docs there
+                load: me.onRemoteAppStoreLoad,
+                scope: me
+            }
+        });
+        me.remotePrintAppsStore = remoteAppsStore;
+    },
+
+<span id='BasiGX-view-form-Print-method-onRemoteAppStoreLoad'>    /**
+</span>     * This method looks stupid at first, but it actually serves a purpose and
+     * it is the only way we found to make use of the returned json. The
+     * Mapfish print servlet anwers like this:
+     *
+     *     dynamicExtCallback([&quot;print-app-1&quot;, &quot;print-app-2&quot;])
+     *
+     * We cannot make use of that data directly in ExtJS it would at least
+     * expect
+     *
+     *     dynamicExtCallback([[&quot;print-app-1&quot;], [&quot;print-app-2&quot;]])
+     *
+     * In that case we could use an array reader and configure fields with
+     * indices, but … as it doesn't we tackle this as follows:
+     *
+     * In the load callback, create a plain array of names, sort it and assign
+     * it to the store.
+     *
+     * If you can come up with a different solution; I'd be very happy.
+     *
+     * @param {Ext.data.Store} store The stoire that has loaded.
+     * @param {Array&lt;Ext.data.Model&gt;} store The records that were loaded.
+     */
+    onRemoteAppStoreLoad: function(store, records) {
+        var me = this;
+        var rawValues = [];
+        var combo = me.down('combo[name=appCombo]');
+        Ext.each(records, function(rec){
+            rawValues.push(rec.data);
+        });
+        Ext.Array.sort(rawValues);
+
+        combo.setStore(rawValues);
+        me.appsStore = combo.getStore();
+    },
+
+<span id='BasiGX-view-form-Print-method-getPrintAppComponent'>    /**
+</span>     *
+     */
+    getPrintAppComponent: function() {
+        var component = {
+            xtype: 'fieldset',
+            bind: {
+                title: '{printAppFieldSetTitle}'
+            },
+            name: 'print-app-fieldset',
+            layout: 'anchor',
+            items: [{
+                xtype: 'combo',
+                anchor: '100%',
+                name: 'appCombo',
+                allowBlank: false,
+                forceSelection: true,
+                queryMode: 'local',
+                displayField: 'id',
+                valueField: 'id',
+                store: this.remotePrintAppsStore,
+                listeners: {
+                    select: 'onAppSelected',
+                    scope: this
+                }
+            }]
+        };
+        return component;
+    },
+
+<span id='BasiGX-view-form-Print-method-createPrint'>    /**
+</span>     *
+     */
+    createPrint: function(){
+        var view = this;
         var spec = {};
         var mapComponent = view.getMapComponent();
         var mapView = mapComponent.getMap().getView();
@@ -266,8 +366,8 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
                 attributes.legend = view.getLegendObject();
             } else if (field.getName() === 'scalebar') {
                 attributes.scalebar = view.getScaleBarObject();
-            } else if (field.getName() === 'northArrow') {
-                attributes.scalebar = view.getNorthArrowObject();
+            } else if (field.getName() === 'northArrowDef') {
+                attributes.northArrowDef = view.getNorthArrowObject();
             } else {
                 attributes[field.getName()] = field.getValue();
             }
@@ -292,13 +392,11 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
         submitForm.submit();
     },
 
-<span id='BasiGX-view-form-Print-property-listeners'>    listeners: {
-</span>        collapse: 'cleanupPrintExtent',
-        resize: 'renderAllClientInfos'
-    },
-
-<span id='BasiGX-view-form-Print-method-addParentCollapseExpandListeners'>    addParentCollapseExpandListeners: function(){
-</span>        var parent = this.up();
+<span id='BasiGX-view-form-Print-method-addParentCollapseExpandListeners'>    /**
+</span>     *
+     */
+    addParentCollapseExpandListeners: function(){
+        var parent = this.up();
         parent.on({
             collapse: 'cleanupPrintExtent',
             expand: 'renderAllClientInfos',
@@ -310,7 +408,7 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
 </span>     *
      */
     addExtentLayer: function(){
-        var targetMap = Ext.ComponentQuery.query('gx_map')[0];
+        var targetMap = BasiGX.util.Map.getMapComponent().getMap();
 
         // TODO MJ: the lines below are possible better suited at the
         //          cleanupPrintExtent method, but tzhat may currently
@@ -341,9 +439,38 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
         this.extentLayer = layer;
     },
 
+<span id='BasiGX-view-form-Print-method-addExtentInteractions'>    /**
+</span>     * Adds an instance of `ol.interaction.Transform` to the map which will
+     * allow to modify the print extent dynamically. Look up the property
+     * named #transformInteraction for the actually created instance.
+     */
+    addExtentInteractions: function() {
+        var me = this;
+        var extentLayer = me.extentLayer;
+        var needed = me.getPrintExtentMovable() || me.getPrintExtentScalable();
+        if (!extentLayer || !needed) {
+            return;
+        }
+        me.cleanupTransformInteraction();
+
+        // TODO remove this wild guessing everywhere
+        var targetMap = BasiGX.util.Map.getMapComponent().getMap();
+        me.transformInteraction = new ol.interaction.Transform({
+            layers: [extentLayer],
+            fixedScaleRatio: true,
+            translate: me.getPrintExtentMovable(),
+            scale: me.getPrintExtentScalable(),
+            stretch: me.getPrintExtentScalable(),
+            rotate: false
+        });
+
+        me.transformInteraction.setActive(true);
+        targetMap.addInteraction(me.transformInteraction);
+    },
+
 <span id='BasiGX-view-form-Print-method-layerFilter'>    /**
 </span>     * Filters the layer by properties or params. Used in createPrint.
-     * This method can/should be overriden in the application.
+     * This method can/should be overridden in the application.
      *
      * @param ol.layer
      */
@@ -382,16 +509,25 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
         }
     },
 
-<span id='BasiGX-view-form-Print-method-getMapComponent'>    getMapComponent: function(){
-</span>        return Ext.ComponentQuery.query('gx_component_map')[0];
+<span id='BasiGX-view-form-Print-method-getMapComponent'>    /**
+</span>     *
+     */
+    getMapComponent: function(){
+        return Ext.ComponentQuery.query('gx_component_map')[0];
     },
 
-<span id='BasiGX-view-form-Print-method-onPrintProviderReady'>    onPrintProviderReady: function(provider){
-</span>        this.addGenericFieldset(provider);
+<span id='BasiGX-view-form-Print-method-onPrintProviderReady'>    /**
+</span>     *
+     */
+    onPrintProviderReady: function(provider){
+        this.addGenericFieldset(provider);
     },
 
-<span id='BasiGX-view-form-Print-method-onAppSelected'>    onAppSelected: function(appCombo){
-</span>        this.provider = Ext.create('GeoExt.data.MapfishPrintProvider', {
+<span id='BasiGX-view-form-Print-method-onAppSelected'>    /**
+</span>     *
+     */
+    onAppSelected: function(appCombo){
+        this.provider = Ext.create('GeoExt.data.MapfishPrintProvider', {
             url: this.getUrl() + appCombo.getValue() + '/capabilities.json',
             listeners: {
                 ready: 'onPrintProviderReady',
@@ -400,16 +536,22 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
          });
     },
 
-<span id='BasiGX-view-form-Print-method-removeGenericFieldset'>    removeGenericFieldset: function(){
-</span>        var view = this;
+<span id='BasiGX-view-form-Print-method-removeGenericFieldset'>    /**
+</span>     *
+     */
+    removeGenericFieldset: function(){
+        var view = this;
         var fs = view.down('[name=&quot;generic-fieldset&quot;]');
         if (fs) {
             view.remove(fs);
         }
     },
 
-<span id='BasiGX-view-form-Print-method-addGenericFieldset'>    addGenericFieldset: function(provider){
-</span>        var view = this;
+<span id='BasiGX-view-form-Print-method-addGenericFieldset'>    /**
+</span>     *
+     */
+    addGenericFieldset: function(provider){
+        var view = this;
         var fs = view.down('[name=&quot;generic-fieldset&quot;]');
         var defaultFieldContainer = view.down(
             'fieldcontainer[name=defaultFieldContainer]');
@@ -435,8 +577,11 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
         this.fireEvent('genericfieldsetadded');
     },
 
-<span id='BasiGX-view-form-Print-method-addFormatCombo'>    addFormatCombo: function(provider){
-</span>        var fs = this.down('fieldset[name=generic-fieldset]');
+<span id='BasiGX-view-form-Print-method-addFormatCombo'>    /**
+</span>     *
+     */
+    addFormatCombo: function(provider){
+        var fs = this.down('fieldset[name=generic-fieldset]');
         var formatStore = provider.capabilityRec.get('formats');
         Ext.Array.sort(formatStore);
         var formatCombo = {
@@ -449,14 +594,18 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
             valueField: 'name',
             store: formatStore,
             bind: {
+                fieldLabel: '{formatComboLabel}',
                 value: '{printFormat}'
             }
         };
         fs.add(formatCombo);
     },
 
-<span id='BasiGX-view-form-Print-method-addLayoutCombo'>    addLayoutCombo: function(provider){
-</span>        var fs = this.down('fieldset[name=generic-fieldset]');
+<span id='BasiGX-view-form-Print-method-addLayoutCombo'>    /**
+</span>     *
+     */
+    addLayoutCombo: function(provider){
+        var fs = this.down('fieldset[name=generic-fieldset]');
         var layoutStore = provider.capabilityRec.layouts();
         layoutStore.sort('name', 'ASC');
         var layoutCombo = {
@@ -468,6 +617,9 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
             queryMode: 'local',
             valueField: 'name',
             store: layoutStore,
+            bind: {
+                fieldLabel: '{layoutComboLabel}'
+            },
             listeners: {
                 change: this.onLayoutSelect,
                 scope: this
@@ -477,8 +629,10 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
         layoutCombo.select(layoutStore.getAt(0));
     },
 
-<span id='BasiGX-view-form-Print-method-onLayoutSelect'>    // TODO REMOVE EXTENT
-</span>    onLayoutSelect: function(combo, layoutname){
+<span id='BasiGX-view-form-Print-method-onLayoutSelect'>    /**
+</span>     * TODO REMOVE EXTENT
+     */
+    onLayoutSelect: function(combo, layoutname){
         var view = this,
             attributesFieldset = view.down('fieldset[name=attributes]'),
             layoutRec = combo.findRecordByValue(layoutname),
@@ -494,7 +648,9 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
         }
         attributeFieldset = defaultFieldContainer.add({
             xtype: 'fieldset',
-            title: 'Eigenschaften',
+            bind: {
+                title: '{attributesTitle}'
+            },
             name: 'attributes',
             layout: 'anchor',
             defaults: {
@@ -510,8 +666,11 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
         view.down('button[name=&quot;createPrint&quot;]').enable();
     },
 
-<span id='BasiGX-view-form-Print-method-getMapAttributeFields'>    getMapAttributeFields: function (attributeRec) {
-</span>        var clientInfo = attributeRec.get('clientInfo');
+<span id='BasiGX-view-form-Print-method-getMapAttributeFields'>    /**
+</span>     *
+     */
+    getMapAttributeFields: function (attributeRec) {
+        var clientInfo = attributeRec.get('clientInfo');
         var mapTitle = attributeRec.get('name') + ' (' +
             clientInfo.width + ' × ' +
             clientInfo.height + ')';
@@ -538,8 +697,11 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
         return fs;
     },
 
-<span id='BasiGX-view-form-Print-method-getCheckBoxAttributeFields'>    getCheckBoxAttributeFields: function (attributeRec) {
-</span>        return {
+<span id='BasiGX-view-form-Print-method-getCheckBoxAttributeFields'>    /**
+</span>     *
+     */
+    getCheckBoxAttributeFields: function (attributeRec) {
+        return {
             xtype: 'checkbox',
             name: attributeRec.get('name'),
             checked: true,
@@ -548,36 +710,74 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
         };
     },
 
-<span id='BasiGX-view-form-Print-method-getNorthArrowAttributeFields'>    getNorthArrowAttributeFields: function (attributeRec) {
-</span>        return this.getCheckBoxAttributeFields(attributeRec);
+<span id='BasiGX-view-form-Print-method-getNorthArrowAttributeFields'>    /**
+</span>     *
+     */
+    getNorthArrowAttributeFields: function (attributeRec) {
+        return this.getCheckBoxAttributeFields(attributeRec);
     },
 
-<span id='BasiGX-view-form-Print-method-getLegendAttributeFields'>    getLegendAttributeFields: function (attributeRec) {
-</span>        return this.getCheckBoxAttributeFields(attributeRec);
+<span id='BasiGX-view-form-Print-method-getLegendAttributeFields'>    /**
+</span>     *
+     */
+    getLegendAttributeFields: function (attributeRec) {
+        return this.getCheckBoxAttributeFields(attributeRec);
     },
 
-<span id='BasiGX-view-form-Print-method-getScalebarAttributeFields'>    getScalebarAttributeFields: function (attributeRec) {
-</span>        return this.getCheckBoxAttributeFields(attributeRec);
+<span id='BasiGX-view-form-Print-method-getScalebarAttributeFields'>    /**
+</span>     *
+     */
+    getScalebarAttributeFields: function (attributeRec) {
+        return this.getCheckBoxAttributeFields(attributeRec);
     },
 
-<span id='BasiGX-view-form-Print-method-getStringField'>    getStringField: function (attributeRec) {
-</span>        return {
-            xtype: 'textfield',
-            name: attributeRec.get('name'),
-            fieldLabel: attributeRec.get('name'),
-            allowBlank: false
-        };
+<span id='BasiGX-view-form-Print-method-getStringField'>    /**
+</span>     * Returns a text field based on given attribute record. Depending on record
+     * name the field label can be bound dynamically via view model.
+     * At the moment only `title` attribute is translatable. For all possible
+     * further attributes the name of the record will be taken as field label.
+     *
+     * @param {Object} attributeRec Record with attribute properties.
+     * @return {Object} A configuration object for a textfield.
+     */
+    getStringField: function (attributeRec) {
+        var fl = '';
+        var value = attributeRec.get('default');
+        var name = attributeRec.get('name');
+
+        if (attributeRec.get('name') === 'title') {
+            fl = '{mapTitleLabel}';
+        } else {
+            fl = name;
+        }
+
+        if (!Ext.isEmpty(fl)) {
+            return {
+                xtype: 'textfield',
+                name: name,
+                bind: {
+                    fieldLabel: fl
+                },
+                value: value,
+                allowBlank: true
+            };
+        }
     },
 
-<span id='BasiGX-view-form-Print-method-addAttributeFields'>    addAttributeFields: function(attributeRec, fieldset){
-</span>        var me = this;
-        var olView = me.getMapComponent().getMap().getView();
+<span id='BasiGX-view-form-Print-method-addAttributeFields'>    /**
+</span>     *
+     */
+    addAttributeFields: function(attributeRec, fieldset){
+        var me = this;
+        var map = me.getMapComponent().getMap();
 
         var attributeFields;
         switch (attributeRec.get('type')) {
             case &quot;MapAttributeValues&quot;:
                 attributeFields = me.getMapAttributeFields(attributeRec);
-                olView.on('propertychange', me.renderAllClientInfos, me);
+                if (me.getPrintExtentAlwaysCentered()) {
+                    map.on('moveend', me.renderAllClientInfos, me);
+                }
                 break;
             case &quot;NorthArrowAttributeValues&quot;:
                 attributeFields = me.getNorthArrowAttributeFields(attributeRec);
@@ -612,10 +812,14 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
     },
 
 <span id='BasiGX-view-form-Print-method-renderAllClientInfos'>    /**
-</span>     * TODO: NB: Enhance performance! This method seems to be called too often!
+</span>     * Method is used to adjust a print infos (e.g. dimensions or extent
+     * rectangle on the map) after print layout was changed or map was zoomed
+     * or paned
      */
     renderAllClientInfos: function(){
+
         var view = this;
+
         if (view._renderingClientExtents || view.getCollapsed() !== false) {
             return;
         }
@@ -623,26 +827,74 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
 
         view.extentLayer.getSource().clear();
 
-        var fieldsets = view.query(
-            'fieldset[name=attributes] fieldset'
-        );
-        Ext.each(fieldsets, function(fieldset){
-            var feat = GeoExt.data.MapfishPrintProvider.renderPrintExtent(
-                    this.getMapComponent(), view.extentLayer,
-                    fieldset.clientInfo
+        view.resetExtentInteraction();
+
+        if (view &amp;&amp; view.items) {
+            var fieldsets = view.query(
+                    'fieldset[name=attributes] fieldset[name=map]'
             );
+        }
+
+        Ext.each(fieldsets, function(fieldset){
+            if (this.getMapComponent() &amp;&amp; view.extentLayer &amp;&amp;
+                    fieldset.clientInfo) {
+                var feat = GeoExt.data.MapfishPrintProvider.renderPrintExtent(
+                        this.getMapComponent(), view.extentLayer,
+                        fieldset.clientInfo
+                );
+            }
             fieldset.extentFeature = feat;
         }, this);
         delete view._renderingClientExtents;
     },
 
-<span id='BasiGX-view-form-Print-method-cleanupPrintExtent'>    cleanupPrintExtent: function(){
-</span>        var view = this;
-        view.extentLayer.getSource().clear();
+<span id='BasiGX-view-form-Print-method-resetExtentInteraction'>    /**
+</span>     * Toggles the extent interaction to effectovely remove any handles (etc.)
+     * that might have been added.
+     */
+    resetExtentInteraction: function() {
+        var interaction = this.transformInteraction;
+        if (interaction &amp;&amp; interaction.getActive) {
+            var currentActive = interaction.getActive();
+            interaction.setActive(!currentActive);
+            interaction.setActive(currentActive);
+        }
     },
 
-<span id='BasiGX-view-form-Print-method-getLegendObject'>    getLegendObject: function() {
-</span>        var classes = [];
+<span id='BasiGX-view-form-Print-method-cleanupPrintExtent'>    /**
+</span>     * This method removes the print extent rectangle from client after print
+     * window was closed. Additionally `moveend` event on the map will
+     * be unregistered here.
+     */
+    cleanupPrintExtent: function(){
+        var view = this;
+        var map = view.getMapComponent().getMap();
+        view.cleanupTransformInteraction();
+        view.extentLayer.getSource().clear();
+        map.un('moveend', view.renderAllClientInfos, view);
+    },
+
+<span id='BasiGX-view-form-Print-method-cleanupTransformInteraction'>    /**
+</span>     * This method effectively removes a #transformInteraction if we had one.
+     */
+    cleanupTransformInteraction: function() {
+        var me = this;
+        var interaction = me.transformInteraction;
+        if (interaction) {
+            interaction.setActive(false);
+            var map = interaction.getMap();
+            if (map) {
+                map.removeInteraction(interaction);
+            }
+        }
+        me.transformInteraction = null;
+    },
+
+<span id='BasiGX-view-form-Print-method-getLegendObject'>    /**
+</span>     *
+     */
+    getLegendObject: function() {
+        var classes = [];
         var url;
         var iconString;
         var printLayers = GeoExt.data.MapfishPrintProvider.getLayerArray(
@@ -668,7 +920,7 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
                         &quot;REQUEST=GetLegendGraphic&amp;&quot; +
                         &quot;EXCEPTIONS=application%2Fvnd.ogc.se_xml&amp;&quot; +
                         &quot;FORMAT=image%2Fgif&amp;&quot; +
-                        &quot;SCALE=6933504.262556662&amp;&quot; +
+                        &quot;SCALE=6933504.262556662&amp;&quot; + // TODO excuse me, what ?!
                         &quot;LAYER=&quot;;
                         iconString += layer.getSource().getParams().LAYERS;
                     classes.push({
@@ -684,7 +936,7 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
                         &quot;REQUEST=GetLegendGraphic&amp;&quot; +
                         &quot;EXCEPTIONS=application%2Fvnd.ogc.se_xml&amp;&quot; +
                         &quot;FORMAT=image%2Fgif&amp;&quot; +
-                        &quot;SCALE=6933504.262556662&amp;&quot; +
+                        &quot;SCALE=6933504.262556662&amp;&quot; + // TODO excuse me, what ?!
                         &quot;LAYER=&quot;;
                         iconString += layer.getSource().getParams().LAYERS;
                     classes.push({
@@ -703,22 +955,38 @@ Ext.define(&quot;BasiGX.view.form.Print&quot;, {
         return legendObj;
     },
 
-<span id='BasiGX-view-form-Print-method-getNorthArrowObject'>    getNorthArrowObject: function() {
-</span>        // TODO
+<span id='BasiGX-view-form-Print-method-getNorthArrowObject'>    /**
+</span>     * Creates a NorthArrow-Object
+     */
+    getNorthArrowObject: function() {
         var northArrowObject = {};
-
+        // This file is located right beneath the config.yaml
+        northArrowObject.graphic = &quot;file://NorthArrow_10.svg&quot;;
+        northArrowObject.backgroundColor = &quot;rgba(0, 0, 0, 0)&quot;;
         return northArrowObject;
     },
 
-<span id='BasiGX-view-form-Print-method-getScaleBarObject'>    getScaleBarObject: function() {
-</span>        // TODO
+<span id='BasiGX-view-form-Print-method-getScaleBarObject'>    /**
+</span>     * Creates a ScaleBar-Object
+     */
+    getScaleBarObject: function() {
         var scaleBarObj = {};
-
+        scaleBarObj.color = &quot;black&quot;;
+        scaleBarObj.backgroundColor = &quot;rgba(255, 255, 255, 0)&quot;;
+        scaleBarObj.barBgColor = &quot;white&quot;;
+        scaleBarObj.fontColor = &quot;black&quot;;
+        scaleBarObj.align = &quot;right&quot;;
+        scaleBarObj.intervals = 2;
+        scaleBarObj.fontSize = 10;
+        scaleBarObj.renderAsSvg = true;
         return scaleBarObj;
     },
 
-<span id='BasiGX-view-form-Print-method-getLayoutRec'>    getLayoutRec: function(){
-</span>        var combo = this.down('combo[name=&quot;layout&quot;]');
+<span id='BasiGX-view-form-Print-method-getLayoutRec'>    /**
+</span>     *
+     */
+    getLayoutRec: function(){
+        var combo = this.down('combo[name=&quot;layout&quot;]');
         var value = combo.getValue();
         var rec = combo.findRecordByValue(value);
         return rec;

@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,6 +42,16 @@ Ext.define(&quot;BasiGX.view.combo.ScaleCombo&quot;, {
     extend: 'Ext.form.field.ComboBox',
     requires: [
     ],
+
+<span id='BasiGX-view-combo-ScaleCombo-cfg-viewModel'>    viewModel: {
+</span>        data: {
+            fieldLabel: null
+        }
+    },
+
+<span id='BasiGX-view-combo-ScaleCombo-cfg-bind'>    bind: {
+</span>       fieldLabel: '{fieldLabel}'
+    },
 
 <span id='BasiGX-view-combo-ScaleCombo-property-queryMode'>    /**
 </span>     *
@@ -83,11 +93,6 @@ Ext.define(&quot;BasiGX.view.combo.ScaleCombo&quot;, {
      */
     fields: ['scale', 'resolution'],
 
-<span id='BasiGX-view-combo-ScaleCombo-property-fieldLabel'>    /**
-</span>     *
-     */
-    fieldLabel: '',
-
 <span id='BasiGX-view-combo-ScaleCombo-property-map'>    /**
 </span>     *
      */
@@ -120,7 +125,7 @@ Ext.define(&quot;BasiGX.view.combo.ScaleCombo&quot;, {
         var me = this;
 
         if (!me.map) {
-            me.map = Ext.ComponentQuery.query(&quot;gx_map&quot;)[0].getMap();
+            me.map = BasiGX.util.Map.getMapComponent().getMap();
         }
 
         // using hard scales here as there is no way currently known to
@@ -179,9 +184,8 @@ Ext.define(&quot;BasiGX.view.combo.ScaleCombo&quot;, {
 </span>     * a little getScale helper
      */
     getCurrentScale: function (resolution) {
-        // TODO don't query! And move some other place.
-        var map = Ext.ComponentQuery.query('gx_map')[0].getMap(),
-            units = map.getView().getProjection().getUnits(),
+        var me = this,
+            units = me.map.getView().getProjection().getUnits(),
             dpi = 25.4 / 0.28,
             mpu = ol.proj.METERS_PER_UNIT[units],
             scale = resolution * mpu * 39.37 * dpi;

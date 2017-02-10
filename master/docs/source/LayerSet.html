@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,9 +47,16 @@ Ext.define(&quot;BasiGX.view.view.LayerSet&quot;, {
 
 <span id='BasiGX-view-view-LayerSet-property-layerSetUrl'>    /**
 </span>     * the url to request the layerset json-file.
-     * If this is null, a demo set will be shown
+     * If this is null, #layerSetData or a demo set will be shown
      */
     layerSetUrl: null,
+
+<span id='BasiGX-view-view-LayerSet-property-layerSetData'>    /**
+</span>     * The local JSON layerset configuration object.
+     * Only has an effect if #layerSetUrl is null.
+     * If this is null a demo set will be shown.
+     */
+    layerSetData: null,
 
 <span id='BasiGX-view-view-LayerSet-property-defaultImagePath'>    /**
 </span>     * the default path to request the images from
@@ -106,27 +113,31 @@ Ext.define(&quot;BasiGX.view.view.LayerSet&quot;, {
             store;
 
         if (Ext.isEmpty(me.layerSetUrl)) {
-            // setup demo content
+
+            // use given local data or demo data
+            var data = me.layerSetData || [
+                {
+                    &quot;title&quot;: &quot;Stadtkarte&quot;,
+                    &quot;name&quot;: &quot;stadtkarte&quot;,
+                    &quot;thumb&quot;: me.demoThumb
+                },
+                {
+                    &quot;title&quot;: &quot;Verkehr&quot;,
+                    &quot;name&quot;: &quot;verkehr&quot;,
+                    &quot;thumb&quot;: me.demoThumb
+                },
+                {
+                    &quot;title&quot;: &quot;Umwelt&quot;,
+                    &quot;name&quot;: &quot;umwelt&quot;,
+                    &quot;thumb&quot;: me.demoThumb
+                }
+            ];
+
+            // setup local content
             store = Ext.create('Ext.data.Store', {
                 fields: ['name', 'thumb', 'url', 'type'],
                 sorters: 'type',
-                data: [
-                    {
-                        &quot;title&quot;: &quot;Stadtkarte&quot;,
-                        &quot;name&quot;: &quot;stadtkarte&quot;,
-                        &quot;thumb&quot;: me.demoThumb
-                    },
-                    {
-                        &quot;title&quot;: &quot;Verkehr&quot;,
-                        &quot;name&quot;: &quot;verkehr&quot;,
-                        &quot;thumb&quot;: me.demoThumb
-                    },
-                    {
-                        &quot;title&quot;: &quot;Umwelt&quot;,
-                        &quot;name&quot;: &quot;umwelt&quot;,
-                        &quot;thumb&quot;: me.demoThumb
-                    }
-                ]
+                data: data
             });
 
         } else {

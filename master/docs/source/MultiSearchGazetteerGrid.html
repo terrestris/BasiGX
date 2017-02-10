@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2016-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid'>/**
+</span> *  A grid showing results of the multisearch gazetteer response values.
+ *  inspired by BasiGX.view.grid.GazetteerGrid
+ *  This class is used by BasiGX.view.form.field.MultiSearchCombo
+ *
+ * @class BasiGX.view.grid.MultiSearchGazetteerGrid
+ *
+ * @extends Ext.grid.Panel
+ *
+ * @requires BasiGX.store.GazetteerSearch
+ * @requires BasiGX.util.Map
+ * @requires BasiGX.util.Layer
+ * @requires BasiGX.util.Animate
+ *
+ */
+Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
+    extend: 'Ext.grid.Panel',
+    xtype: 'basigx-grid-multisearchgazetteergrid',
+
+    requires: [
+        'BasiGX.store.GazetteerSearch',
+        'BasiGX.util.Map',
+        'BasiGX.util.Layer',
+        'BasiGX.util.Animate'
+    ],
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-property-store'>    store: {
+</span>        type: 'basigx-gazetteersearch'
+    },
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-property-viewModel'>    viewModel: {
+</span>        data: {
+            title: 'Gazetteer Suche'
+        }
+    },
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-property-bind'>    bind: {
+</span>        title: '{title}'
+    },
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-property-cls'>    cls: 'search-result-grid',
+</span>
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-property-collapsible'>    collapsible: true,
+</span>
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-property-titleCollapse'>    titleCollapse: true,
+</span>
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-property-collapseDirection'>    collapseDirection: 'top',
+</span>
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-property-headerPosition'>    headerPosition: 'left',
+</span>
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-property-hideHeaders'>    hideHeaders: true,
+</span>
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-property-maxHeight'>    maxHeight: 180,
+</span>
+    config: {
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-cfg-layer'>        layer: null,
+</span>
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-cfg-map'>        map: null
+</span>
+    },
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-property-columns'>    columns: {
+</span>        items: [{
+            text: '',
+            xtype: 'templatecolumn',
+            width: 40,
+            tpl: '&lt;img src=&quot;{icon}&quot; height=&quot;16&quot; width=&quot;16&quot;&gt;'
+        }, {
+            text: 'Name',
+            xtype: 'templatecolumn',
+            tpl: '&lt;div data-qtip=&quot;{display_name}&quot;&gt;'+
+            '{display_name}'+
+            '&lt;/div&gt;',
+            flex: 2
+        }, {
+            text: 'Class Type',
+            xtype: 'templatecolumn',
+            tpl: '{class} - {type}',
+            flex: 1
+        }]
+    },
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-method-initComponent'>    /**
+</span>    *
+    */
+    initComponent: function () {
+        var me = this;
+
+        me.callParent(arguments);
+
+        // add listeners
+        me.on('boxready', me.onBoxReady, me);
+        me.on('itemmouseenter', me.onItemMouseEnter, me);
+        me.on('itemmouseleave', me.onItemMouseLeave, me);
+        me.on('itemclick', me.onItemClick, me);
+
+        // unregister listeners on grid hide
+        me.on('hide', me.unregisterListeners, me);
+    },
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-method-onBoxReady'>    /**
+</span>     * Called by OnBoxeady listener to add the search layer
+     */
+    onBoxReady: function(){
+        var me = this;
+        if(!me.getMap()){
+            var map = BasiGX.util.Map.getMapComponent().getMap();
+            me.setMap(map);
+        }
+        if(!me.getLayer()){
+            var layer = new ol.layer.Vector({
+                source: new ol.source.Vector()
+            });
+            var displayInLayerSwitcherKey =
+                BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+            layer.set(displayInLayerSwitcherKey, false);
+            me.setLayer(layer);
+            me.getMap().addLayer(layer);
+        }
+    },
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-method-onItemMouseEnter'>    /**
+</span>     * Called by OnItemmouseenter listener to highlight the hovered search
+     * results on the map
+     */
+    onItemMouseEnter: function(grid, record){
+        var me = this;
+        var layer = me.getLayer();
+        var projection = me.getMap().getView().getProjection().getCode();
+        var format = new ol.format.WKT();
+        var wkt = record.get('geotext');
+        var feature = format.readFeature(wkt);
+        feature.getGeometry().transform('EPSG:4326', projection);
+        layer.getSource().addFeature(feature);
+    },
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-method-onItemMouseLeave'>    /**
+</span>     * Called by OnItemmouseleave listener to unhighlight the search
+     * results on the map
+     */
+    onItemMouseLeave: function(){
+        var me = this;
+        var layer = me.getLayer();
+        layer.getSource().clear();
+    },
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-method-onItemClick'>    /**
+</span>     * Called by OnItemclick listener to center map on clicked item
+     */
+    onItemClick: function(grid, record){
+        var me = this;
+        var map = me.getMap();
+        var olView = map.getView();
+        var projection = olView.getProjection().getCode();
+        var format = new ol.format.WKT();
+        var wkt = record.get('geotext');
+        var feature = format.readFeature(wkt);
+        var geom = feature.getGeometry().transform('EPSG:4326', projection);
+        olView.fit(geom, map.getSize());
+    },
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-method-unregisterListeners'>    /**
+</span>     * Called by OnHide listener to deactivate all listeners when inactive
+     */
+    unregisterListeners: function() {
+        var me = this;
+
+        me.un('boxready', me.onBoxReady, me);
+        me.un('itemmouseenter', me.onItemMouseEnter, me);
+        me.un('itemmouseleave', me.onItemMouseLeave, me);
+        me.un('itemclick', me.onItemClick, me);
+    },
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-method-doGazetteerSearch'>    /**
+</span>    * called by BasiGX.view.form.field.MultiSearchCombo.doGazetteerSearch()
+    * This method does the actual search by updating the according store.
+    * It decides if the search should be done in the visible extent only.
+     * @param {string} value The search term
+     * @param {boolean} limitToBBox Search is limited to visible extent
+    */
+    doGazetteerSearch: function(value, limitToBBox){
+
+        var me = this;
+
+        var store = me.getStore();
+
+        Ext.Ajax.abort(store._lastRequest);
+
+        store.getProxy().setExtraParam('q', value);
+
+        if(limitToBBox){
+            var map = BasiGX.util.Map.getMapComponent().getMap();
+            var olView = map.getView();
+            var projection = olView.getProjection().getCode();
+            var bbox = map.getView().calculateExtent(map.getSize());
+            var transformedBbox = ol.proj.transformExtent(bbox, projection,
+                    'EPSG:4326');
+            store.getProxy().setExtraParam('viewboxlbrt',
+                    transformedBbox.toString());
+        } else {
+            store.getProxy().setExtraParam('viewboxlbrt', null);
+        }
+        store.load();
+        store._lastRequest = Ext.Ajax.getLatest();
+
+        me.expand();
+
+    }
+
+});
+</pre>
+</body>
+</html>

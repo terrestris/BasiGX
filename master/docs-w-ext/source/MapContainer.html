@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -118,7 +118,10 @@ Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
             hidden: true,
             layers: [
                 new ol.layer.Tile({
-                    source: new ol.source.MapQuest({layer: 'sat'})
+                      source: new ol.source.TileWMS({
+                          url:&quot;http://ows.terrestris.de/osm/service?&quot;,
+                          params:{&quot;layers&quot;: &quot;OSM-WMS&quot;,&quot;TILED&quot;:true}
+                      })
                 })
             ]
         },
@@ -223,7 +226,9 @@ Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
 
         var toolbar = me.getToolbarConfig();
 
-        toolbar.items = me.buildToolbarItems();
+        if(!toolbar.items){
+            toolbar.items = me.buildToolbarItems();
+        }
 
         me.add(toolbar);
     },
@@ -294,7 +299,7 @@ Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
                 var layer = rec.getOlLayer();
                 var util = BasiGX.util.Layer;
                 var showKey = util.KEY_DISPLAY_IN_LAYERSWITCHER;
-                if (layer.get(showKey) === false) {
+                if (layer &amp;&amp; layer.get(showKey) === false) {
                     return false;
                 }
                 return true;

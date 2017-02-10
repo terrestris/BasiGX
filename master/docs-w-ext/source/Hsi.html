@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,11 +37,12 @@
  *
  * @class BasiGX.view.button.Hsi
  */
-Ext.define(&quot;BasiGX.view.button.Hsi&quot;, {
-    extend: &quot;Ext.Button&quot;,
+Ext.define('BasiGX.view.button.Hsi', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-hsi',
     requires: [
-        'Ext.app.ViewModel'
+        'Ext.app.ViewModel',
+        'BasiGX.util.Map'
     ],
 
 <span id='BasiGX-view-button-Hsi-property-viewModel'>    /**
@@ -82,6 +83,11 @@ Ext.define(&quot;BasiGX.view.button.Hsi&quot;, {
 </span>     *
      */
     config: {
+<span id='BasiGX-view-button-Hsi-cfg-mapPanelXType'>        /**
+</span>         * Placeholder for the xtype of the map component (e.g. 'basigx-component-map').
+         * Will be used to be able to determine the map component dynamically
+         */
+        mapPanelXType: null,
 <span id='BasiGX-view-button-Hsi-cfg-handler'>        handler: function() {
 </span>            this.buttonPressed = !this.buttonPressed;
             this.toggleButton();
@@ -91,13 +97,8 @@ Ext.define(&quot;BasiGX.view.button.Hsi&quot;, {
 <span id='BasiGX-view-button-Hsi-method-constructor'>    /**
 </span>     *
      */
-    constructor: function(config) {
-        this.callParent([config]);
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
-        }
+    constructor: function() {
+        this.callParent(arguments);
         this.toggleButton();
     },
 
@@ -109,7 +110,7 @@ Ext.define(&quot;BasiGX.view.button.Hsi&quot;, {
             this.setPressed(this.buttonPressed);
         } else {
             this.setCls(this.buttonPressed ? this.getPressedCls() :
-                &quot;basigx-map-tool-button&quot;);
+                'basigx-map-tool-button');
         }
         this.setControlStatus(this.buttonPressed);
     },
@@ -118,7 +119,10 @@ Ext.define(&quot;BasiGX.view.button.Hsi&quot;, {
 </span>     *
      */
     setControlStatus: function(status){
-        var mapComponent = Ext.ComponentQuery.query('basigx-component-map')[0];
+        var me = this;
+        var mapComponent;
+
+        mapComponent = BasiGX.util.Map.getMapComponent(me.getMapPanelXType());
         mapComponent.setPointerRest(status);
     }
 });

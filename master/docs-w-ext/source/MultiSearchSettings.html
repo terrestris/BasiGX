@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2016-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-container-MultiSearchSettings'>/**
+</span> *  A container showing settings for the multisearch including switching
+ *  gazetter or wfs search on and off, limit search results to visible extent
+ *  and configure layers for wfs search.
+ *  This class is used by BasiGX.view.form.field.MultiSearchCombo
+ *
+ * @class BasiGX.view.container.MultiSearchSettings
+ *
+ * @extends Ext.container.Container
+ *
+ * @requires BasiGX.util.Layer
+ * @requires Ext.form.field.Checkbox
+ * @requires Ext.form.FieldContainer
+ * @requires Ext.Button
+ *
+ */
+Ext.define(&quot;BasiGX.view.container.MultiSearchSettings&quot;, {
+    extend: 'Ext.container.Container',
+    xtype: 'basigx-container-multisearchsettings',
+
+    requires: [
+        &quot;BasiGX.util.Layer&quot;,
+        &quot;Ext.form.field.Checkbox&quot;,
+        &quot;Ext.form.FieldContainer&quot;,
+        &quot;Ext.Button&quot;
+    ],
+
+<span id='BasiGX-view-container-MultiSearchSettings-cfg-viewModel'>    viewModel: {
+</span>        data: {
+            generalSettingsLabel: &quot;Allgemeine Einstellungen&quot;,
+            limitCboxLabel: &quot;Auf den sichtbaren Kartenbereich einschränken&quot;,
+            gazetteerLabel: &quot;Gazetteer Suche verwenden&quot;,
+            objectSearchLabel: &quot;Objekt Suche verwenden&quot;,
+            objectSearchLayersLabel: &quot;Layer für Objektsuche&quot;,
+            saveBtnText: &quot;Sucheinstellungen speichern&quot;
+        }
+    },
+
+<span id='BasiGX-view-container-MultiSearchSettings-cfg-autoScroll'>    autoScroll: true,
+</span>
+<span id='BasiGX-view-container-MultiSearchSettings-property-constrainHeader'>    constrainHeader: true,
+</span>
+<span id='BasiGX-view-container-MultiSearchSettings-cfg-padding'>    padding: 20,
+</span>
+<span id='BasiGX-view-container-MultiSearchSettings-cfg-width'>    width: 500,
+</span>
+    config: {
+<span id='BasiGX-view-container-MultiSearchSettings-cfg-combo'>        combo: null
+</span>    },
+
+<span id='BasiGX-view-container-MultiSearchSettings-property-items'>    items: [{
+</span>        xtype: 'form',
+        width: '100%',
+        items: [
+            {
+                xtype: 'fieldcontainer',
+                name: 'generalsettings',
+                bind: {
+                    fieldLabel: '{generalSettingsLabel}'
+                },
+                defaultType: 'checkboxfield',
+                labelWidth: 200,
+                items: [
+                    {
+                        bind: {
+                            boxLabel: '{limitCboxLabel}'
+                        },
+                        labelWidth: 200,
+                        name: 'limitcheckbox',
+                        checked: true
+                    },{
+                        bind: {
+                            boxLabel: '{gazetteerLabel}'
+                        },
+                        labelWidth: 200,
+                        name: 'gazetteersearch',
+                        checked: true
+                    },{
+                        bind: {
+                            boxLabel: '{objectSearchLabel}'
+                        },
+                        labelWidth: 200,
+                        name: 'objectsearch',
+                        checked: true
+                    }
+                 ]
+            },{
+                xtype: 'fieldcontainer',
+                name: 'objectlayers',
+                bind: {
+                    fieldLabel: '{objectSearchLayersLabel}'
+                },
+                defaultType: 'checkboxfield',
+                labelWidth: 200
+            }
+        ]
+    },{
+        xtype: 'button',
+        bind: {
+            text: '{saveBtnText}'
+        },
+        formBind: true,
+        handler: function(btn) {
+            var me = this.up();
+            me.saveSettings(btn);
+        }
+    }],
+
+<span id='BasiGX-view-container-MultiSearchSettings-method-initComponent'>    /**
+</span>    *
+    */
+    initComponent: function() {
+        var me = this;
+
+        me.callParent();
+
+        me.setCombo(me.combo);
+
+        me.on('beforerender', me.addLayers);
+    },
+
+<span id='BasiGX-view-container-MultiSearchSettings-method-saveSettings'>    /**
+</span>    * called by &quot;save&quot;-button handler to persist the settings.
+    * This includes switching the gazetter or wfs search on and off, limiting
+    * search results to visible map extent and configuring search layers.
+    */
+    saveSettings: function(btn) {
+        var me = btn.up();
+
+        var win = me.up();
+
+        var form = me.down('form');
+
+        var combo = me.getCombo();
+
+        // set configured search layers to null and add the wanted below
+        combo.setConfiguredSearchLayers([]);
+
+        // set all configured values
+        Ext.each(form.items.items, function(parentItem) {
+            if (parentItem.name === 'generalsettings') {
+
+                Ext.each(parentItem.items.items, function(item) {
+                    if (item.name === 'objectsearch'){
+                        combo.setWfsSearch(item.checked);
+                    } else if (item.name === 'gazetteersearch'){
+                        combo.setGazetteerSearch(item.checked);
+                    } else if (item.name === 'limitcheckbox'){
+                        combo.setLimitToBBox(item.checked);
+                    }
+                });
+
+            } else if (parentItem.name === 'objectlayers' ) {
+
+                Ext.each(parentItem.items.items, function(item) {
+                    var l = BasiGX.util.Layer.getLayerByName(item.name);
+                    if (this.checked) {
+                        combo.configuredSearchLayers.push(l);
+                    }
+                });
+
+            } else {
+                Ext.log.error(&quot;Found setting for which no handler exists&quot;);
+            }
+        });
+
+        win.setLoading(true);
+        me.combo.refreshSearchResults();
+        win.setLoading(false);
+        win.close();
+    },
+
+<span id='BasiGX-view-container-MultiSearchSettings-method-addLayers'>    /**
+</span>    * called by OnBeforerender listener to get all configurable search layers
+    * to display them in the settings window
+    */
+    addLayers: function() {
+        var me = this;
+
+        var searchLayers = me.getCombo().getAllSearchLayers();
+
+        var container = me.down('fieldcontainer[name=&quot;objectlayers&quot;]');
+
+        Ext.each(searchLayers, function(l) {
+            var item = Ext.create('Ext.form.field.Checkbox', {
+                labelWidth: 200,
+                name: l.get('name'),
+                boxLabel:  l.get('name'),
+                checked: true
+            });
+
+            container.add(item);
+
+        });
+
+    }
+
+});
+</pre>
+</body>
+</html>

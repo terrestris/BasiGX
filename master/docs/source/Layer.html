@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,25 +32,42 @@
  */
 <span id='BasiGX-util-Layer'>/**
 </span> *
- * Layer Util
- *
- * Some methods to work with ol-layers
+ * A utility class offering static methods to work with OpenLayers layers.
  *
  * @class BasiGX.util.Layer
  */
 Ext.define('BasiGX.util.Layer', {
-
+    requires: [
+        'BasiGX.util.Map'
+    ],
     statics: {
-<span id='BasiGX-util-Layer-static-property-KEY_DISPLAY_IN_LAYERSWITCHER'>        KEY_DISPLAY_IN_LAYERSWITCHER: 'bp_displayInLayerSwitcher',
-</span>
-<span id='BasiGX-util-Layer-static-method-getLayerByName'>        /**
-</span>         * Method gets an ol layer by the given name
+<span id='BasiGX-util-Layer-static-property-KEY_DISPLAY_IN_LAYERSWITCHER'>        /**
+</span>         * A name of a boolean property that utility layers should set to an
+         * appropriate value (often `false`). The layer displaying components
+         * usually read out the property and determine whether to show an entry
+         * for the particular layer in question.
          *
-         * @param {String} layername - the layers name
+         * TODO It should be safe to change the property to e.g.
+         *     `'basigx-displayInLayerSwitcher'`, but we'll keep it as is for
+         *     backwards compatibility for now.
+         */
+        KEY_DISPLAY_IN_LAYERSWITCHER: 'bp_displayInLayerSwitcher',
+
+<span id='BasiGX-util-Layer-static-property-NAME_MEASURE_LAYER'>        /**
+</span>         * The name of a layer used for drawing measurements on. Can be used to
+         * dynamically determine that particular layer.
+         */
+        NAME_MEASURE_LAYER: 'basigx-measure-layer',
+
+<span id='BasiGX-util-Layer-static-method-getLayerBy'>        /**
+</span>         * Get an ol3-layer by the given key-value constellation.
+         *
+         * @param {String} key - the layers property name
+         * @param {String} val - the layers property value for the given key
          * @param {ol.Collection} collection - optional collection to search in
          * @returns {ol.Layer} matchingLayer - the ol3-layer
          */
-        getLayerByName: function(layername, collection) {
+        getLayerBy: function(key, val, collection) {
             var me = this,
                 matchingLayer,
                 layers;
@@ -59,7 +76,7 @@ Ext.define('BasiGX.util.Layer', {
                 layers = collection.getArray ?
                     collection.getArray() : collection;
             } else {
-                var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+                var map = BasiGX.util.Map.getMapComponent().getMap();
                 layers = map.getLayers().getArray();
             }
 
@@ -67,19 +84,30 @@ Ext.define('BasiGX.util.Layer', {
                 if (matchingLayer) {
                     return false;
                 }
-                if (layer.get('name') === layername &amp;&amp;
+                if (layer.get(key) === val &amp;&amp;
                     layer instanceof ol.layer.Base) {
                     matchingLayer = layer;
                     return false;
                 } else if (layer instanceof ol.layer.Group) {
-                    matchingLayer = me.getLayerByName(layername, layer.getLayers());
+                    matchingLayer = me.getLayerBy(key, val, layer.getLayers());
                 }
             });
             return matchingLayer;
         },
 
+<span id='BasiGX-util-Layer-static-method-getLayerByName'>        /**
+</span>         * Get an ol3-layer by the given name.
+         *
+         * @param {String} layername - the layers name
+         * @param {ol.Collection} collection - optional collection to search in
+         * @returns {ol.Layer} matchingLayer - the ol3-layer
+         */
+        getLayerByName: function(layername, collection) {
+            return this.getLayerBy('name', layername, collection);
+        },
+
 <span id='BasiGX-util-Layer-static-method-getLayerByFeatureType'>        /**
-</span>         * Method gets an ol layer by the given featureType
+</span>         * Gets an ol3-layer by the given featureType.
          *
          * @param {String} featureType - the layers featureType
          * @param {ol.Collection} collection - optional collection to search in
@@ -94,7 +122,7 @@ Ext.define('BasiGX.util.Layer', {
                 layers = collection.getArray ?
                     collection.getArray() : collection;
             } else {
-                var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+                var map = BasiGX.util.Map.getMapComponent().getMap();
                 layers = map.getLayers().getArray();
             }
 

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2016-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-form-field-MultiSearchCombo'>/**
+</span> *
+ * Multisearch combo used to search in the glorious dataset of OSM combined
+ * with a WFS search searching through configurable layers. This class calls
+ * BasiGX.view.container.MultiSearchSettings to configure settings and
+ * BasiGX.view.grid.MultiSearchWFSSearchGrid as well as
+ * BasiGX.view.grid.MultiSearchGazetteerGrid to show search results.
+ * This component assumes the use of only one
+ * BasiGX.util.Map.getMapComponent().getMap().
+ *
+ * @example
+ *     {
+ *         xtype: 'basigx-form-field-multisearch',
+ *         config: {
+ *             wfsServerUrl: &quot;yourdomain/geoserver/ows?&quot;,
+ *             searchLayerBlackList: [
+ *                 &quot;your-favorite-background-layer&quot;
+ *             ]
+ *         }
+ *     }
+ *
+ * @class BasiGX.view.form.field.MultiSearchCombo
+ *
+ * @extends Ext.form.field.ComboBox
+ *
+ * @requires BasiGX.util.Map
+ * @requires BasiGX.view.container.MultiSearchSettings
+ * @requires BasiGX.view.grid.MultiSearchWFSSearchGrid
+ * @requires BasiGX.view.grid.MultiSearchGazetteerGrid
+ *
+ */
+Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
+    extend: 'Ext.form.field.ComboBox',
+    xtype: 'basigx-form-field-multisearch',
+
+    requires: [
+        &quot;BasiGX.util.Map&quot;,
+        &quot;BasiGX.view.container.MultiSearchSettings&quot;,
+        &quot;BasiGX.view.grid.MultiSearchWFSSearchGrid&quot;,
+        &quot;BasiGX.view.grid.MultiSearchGazetteerGrid&quot;
+    ],
+
+<span id='BasiGX-view-form-field-MultiSearchCombo-property-viewModel'>    viewModel: {
+</span>        data: {
+            emptyText: &quot;Suche ...&quot;,
+            settingsWindowTitle: &quot;Sucheinstellungen&quot;
+        }
+    },
+
+    config: {
+
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-gazetteerGrid'>        gazetteerGrid: &quot;basigx-grid-multisearchgazetteergrid&quot;,
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-wfsSearchGrid'>        wfsSearchGrid: &quot;basigx-grid-multisearchwfssearchgrid&quot;,
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-searchSettings'>        searchSettings: &quot;basigx-container-multisearchsettings&quot;,
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-wfsServerUrl'>        wfsServerUrl: null,
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-wfsPrefix'>        wfsPrefix: null,
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-wfsDataProjection'>        wfsDataProjection: null,
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-wfsFeatureProjection'>        wfsFeatureProjection: null,
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-gazetteerSearch'>        gazetteerSearch: true,
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-wfsSearch'>        wfsSearch: true,
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-limitToBBox'>        limitToBBox: true,
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-allSearchLayers'>        allSearchLayers: [],
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-configuredSearchLayers'>        configuredSearchLayers: [],
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-searchLayerBlackList'>        searchLayerBlackList: []
+</span>
+    },
+
+<span id='BasiGX-view-form-field-MultiSearchCombo-property-store'>    store: [],
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-property-searchContainer'>    searchContainer: null,
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-property-settingsWindow'>    settingsWindow: null,
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-property-bind'>    bind: {
+</span>        emptyText: '{emptyText}'
+    },
+
+<span id='BasiGX-view-form-field-MultiSearchCombo-property-triggerCls'>    triggerCls: 'default-trigger',
+</span>
+<span id='BasiGX-view-form-field-MultiSearchCombo-property-triggers'>    triggers: {
+</span>        refresh: {
+            cls: 'multisearch-refresh-trigger',
+            handler: function(){
+                this.refreshSearchResults();
+            }
+        },
+        settings: {
+            cls: 'multisearch-settings-trigger',
+            handler: function(){
+                this.showSettingsWindow();
+            }
+        }
+    },
+
+<span id='BasiGX-view-form-field-MultiSearchCombo-method-initComponent'>    initComponent: function(){
+</span>        var me = this;
+
+        me.callParent(arguments);
+
+        me.setHideTrigger(false);
+
+        // get all layers from the map except the blacklisted ones
+        var map = BasiGX.util.Map.getMapComponent().getMap();
+        var allLayers = BasiGX.util.Layer.getAllLayers(map);
+        var blackList = me.getSearchLayerBlackList();
+
+        Ext.each(allLayers, function(l) {
+            if (l instanceof ol.layer.Tile &amp;&amp; !Ext.Array.contains(blackList,
+                    l.get('name'))) {
+                me.allSearchLayers.push(l);
+            }
+        });
+
+        // set search layers to all above layers if not configured different
+        if (me.getConfiguredSearchLayers().length === 0 ) {
+            Ext.each(me.getAllSearchLayers(), function(l) {
+                me.configuredSearchLayers.push(l);
+            });
+        }
+
+        me.on('boxready', me.onBoxReady, me);
+        me.on('change', me.onComboValueChange, me);
+
+    },
+
+<span id='BasiGX-view-form-field-MultiSearchCombo-method-onBoxReady'>    onBoxReady: function(){
+</span>        var me = this;
+        me.nav = Ext.create('Ext.util.KeyNav', me.el, {
+            esc: me.clearValue,
+            scope: me
+        });
+    },
+
+<span id='BasiGX-view-form-field-MultiSearchCombo-method-onComboValueChange'>    /**
+</span>     *
+     * Called by the onChange listener.
+     * When a search term is typed into the combobox, this method will trigger
+     * the included searches or fades out.
+     * @param {} the combo itself
+     * @param {string} the new value that was just typed
+     */
+    onComboValueChange: function(combo, newValue){
+        var me = this;
+
+        if(newValue){
+            // create the multi search panel
+            me.showResults();
+
+            // start the gazetteer search
+            me.doGazetteerSearch(newValue, me.getLimitToBBox);
+
+            // start the object search
+            me.doObjectSearch(newValue);
+
+        } else {
+            var objectSearchGrid =
+                Ext.ComponentQuery.query(me.getWfsSearchGrid())[0];
+            var searchLayer = objectSearchGrid.searchResultVectorLayer;
+
+            if(searchLayer) {
+                searchLayer.getSource().clear();
+            }
+
+            if(me.searchContainer) {
+                me.searchContainer.getEl().slideOut('t', {
+                    duration: 250,
+                    callback: function() {
+                        me.searchContainer.hide();
+                    },
+                    scope: me.searchContainer
+                });
+            }
+
+        }
+    },
+
+<span id='BasiGX-view-form-field-MultiSearchCombo-method-doGazetteerSearch'>    /**
+</span>     * Called by onComboValueChange() to start the gazetteer search.
+     * This method also handles inactive status if configured before.
+     * @param {string} value The typed search term of the user
+     * @param {boolean} limitToBBox Search is limited to visible extent
+     */
+    doGazetteerSearch: function(value, limitToBBox){
+
+        var me = this;
+
+        var gazetteerGrid =
+            Ext.ComponentQuery.query(me.getGazetteerGrid())[0];
+
+        if (gazetteerGrid) {
+            if (me.getGazetteerSearch()) {
+                gazetteerGrid.doGazetteerSearch(value, limitToBBox);
+                gazetteerGrid.expand();
+            } else {
+                gazetteerGrid.getStore().removeAll();
+            }
+        } else {
+            Ext.log.error(&quot;Gazetteer SearchGrid not found&quot;);
+        }
+
+    },
+
+<span id='BasiGX-view-form-field-MultiSearchCombo-method-doObjectSearch'>    /**
+</span>     * Called by onComboValueChange() to start the object search.
+     * This method also handles inactive status if configured before.
+     * @param {string} value The typed search term of the user
+     *
+     */
+    doObjectSearch: function(value){
+
+        var me = this;
+
+        var objectSearchGrid =
+            Ext.ComponentQuery.query(me.getWfsSearchGrid())[0];
+
+        if (objectSearchGrid) {
+            if (me.getWfsSearch()) {
+                objectSearchGrid.describeFeatureTypes(value, me);
+                objectSearchGrid.expand();
+            } else {
+                objectSearchGrid.getStore().removeAll();
+            }
+        } else {
+            Ext.log.error(&quot;ObjectSearchGrid not found&quot;);
+        }
+
+    },
+
+<span id='BasiGX-view-form-field-MultiSearchCombo-method-showResults'>    /**
+</span>     * Called by onComboValueChange() to build a container with the gazetteer
+     * grid and the object search grid containing all search results.
+     * This method builds the container at the bottom of the searchfield.
+     */
+    showResults: function() {
+        var me = this;
+        var parentItem;
+        var parentRegion;
+        var position;
+        var searchContainer;
+
+        if (!me.searchContainer) {
+
+            parentItem = me.getEl();
+            parentRegion = parentItem.getClientRegion();
+
+            position = {
+                top: parentRegion.bottom + &quot;px&quot;,
+                left: parentRegion.left + &quot;px&quot;,
+                width: parentItem.getWidth() + &quot;px&quot;
+            };
+
+            searchContainer = Ext.create(Ext.container.Container, {
+                renderTo: Ext.getBody(),
+
+                items: [
+                    {
+                        xtype: me.getGazetteerGrid()
+                    },{
+                        xtype: me.getWfsSearchGrid()
+                    }
+                ],
+
+                width: position.width,
+
+                style: {
+                    top: position.top,
+                    left: position.left
+                }
+
+            });
+
+            me.searchContainer = searchContainer;
+        }
+
+        me.searchContainer.show();
+    },
+
+<span id='BasiGX-view-form-field-MultiSearchCombo-method-refreshSearchResults'>    /**
+</span>     * Called by the refresh-trigger to search again.
+     */
+    refreshSearchResults: function(){
+        var me = this;
+
+        var value = me.getValue();
+
+        if (value) {
+            me.doGazetteerSearch(value);
+            me.doObjectSearch(value);
+        } else {
+            Ext.log.error(&quot;No value to search for&quot;);
+        }
+    },
+
+<span id='BasiGX-view-form-field-MultiSearchCombo-method-showSettingsWindow'>    /**
+</span>     * Called by the settings-trigger to build a window containing the
+     * settings container
+     */
+    showSettingsWindow: function(){
+        var me = this;
+        var settingsWindow;
+
+        if (me.settingsWindow) {
+            if (me.settingsWindow.hidden) {
+                me.settingsWindow.show();
+            } else {
+                BasiGX.util.Animate.shake(me.settingsWindow);
+            }
+        } else {
+            settingsWindow = Ext.create('Ext.window.Window', {
+                items: [{
+                    xtype: me.getSearchSettings(),
+                    combo: me
+                }],
+                title: me.getViewModel().get('settingsWindowTitle'),
+                closeAction: 'hide',
+                autoShow: true
+            });
+            me.settingsWindow = settingsWindow;
+        }
+
+    }
+
+});
+</pre>
+</body>
+</html>

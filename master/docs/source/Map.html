@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,6 +41,55 @@
 Ext.define('BasiGX.util.Map', {
 
     statics: {
+<span id='BasiGX-util-Map-static-property-dpi'>        /**
+</span>         * The dpi as defined by OGC (e.g. for WMTS tile matrix sets).
+         * Calculated as 25.4 / 0.28
+         *   * 25.4 mm in one inch
+         *   * one pixel is 0.28mm (per spec of OGC)
+         *
+         * @type {Number}
+         */
+        dpi: 90.7142857142857, // = 25.4 / 0.28;
+
+<span id='BasiGX-util-Map-static-property-inchesPerMeter'>        /**
+</span>         * The number of inches in a meter.
+         *
+         * @type {Number}
+         */
+        inchesPerMeter: 39.37,
+
+<span id='BasiGX-util-Map-static-method-getResolutionForScale'>        /**
+</span>         * Given a scale and a unit, this method will return a resolution.
+         *
+         * @param {Number} scale The scale ypu wish to have the resolution for.
+         * @param {String} units The units to get the resoultuion for, typically
+         *     the unit of the projection odf the map view. Allowed values are
+         *     `'degrees'`, `'ft'`, `'m'` or `'us-ft'`
+         * @return {Number} The calculated resolution.
+         */
+        getResolutionForScale: function(scale, units) {
+            var dpi = this.dpi;
+            var inchesPerMeter = this.inchesPerMeter;
+            var mpu = ol.proj.METERS_PER_UNIT[units];
+            return parseFloat(scale) / (mpu * inchesPerMeter * dpi);
+        },
+
+<span id='BasiGX-util-Map-static-method-getScaleForResolution'>        /**
+</span>         * Given a resolution and a unit, this method will return a scale.
+         *
+         * @param {Number} scale The resolution ypu wish to have the scale for.
+         * @param {String} units The units to get the resoultuion for, typically
+         *     the unit of the projection odf the map view. Allowed values are
+         *     `'degrees'`, `'ft'`, `'m'` or `'us-ft'`
+         * @return {Number} The calculated scale.
+         */
+        getScaleForResolution: function(resolution, units) {
+            var dpi = this.dpi;
+            var inchesPerMeter = this.inchesPerMeter;
+            var mpu = ol.proj.METERS_PER_UNIT[units];
+            return (resolution * mpu * inchesPerMeter * dpi);
+        },
+
 <span id='BasiGX-util-Map-static-method-getResolution'>        getResolution: function (map) {
 </span>            return map.getView().getResolution();
         },
@@ -51,11 +100,54 @@ Ext.define('BasiGX.util.Map', {
         getScale: function(map){
             var res = this.getResolution(map);
             var units = map.getView().getProjection().getUnits();
-            var dpi = 25.4 / 0.28;
-            var mpu = ol.proj.METERS_PER_UNIT[units];
-            var inchesPerMeter = 39.37;
+            return this.getScaleForResolution(res, units);
+        },
 
-            return res * mpu * inchesPerMeter * dpi;
+<span id='BasiGX-util-Map-static-method-getMapComponent'>        /**
+</span>         * Determine map component depending on provided xtype.
+         * If no xtype was specified, `basigx-component-map` component will be
+         * used as fallback. If this also could not be found, use the most
+         * common GeoExt map component `gx_map`.
+         * @param {String} mapCompXtype Provided map component xtype
+         * @return {Object} mapComponent
+         */
+        getMapComponent: function(mapCompXType){
+            var mapComponent;
+            if (mapCompXType) {
+                mapComponent = Ext.ComponentQuery.query(mapCompXType)[0];
+            }
+
+            //fallback to basigx map component
+            if (Ext.isEmpty(mapComponent)) {
+                mapComponent = Ext.ComponentQuery.query('basigx-component-map')[0];
+            }
+
+            //fallback to the most common GeoExt map component
+            if (Ext.isEmpty(mapComponent)) {
+                mapComponent = Ext.ComponentQuery.query('gx_map')[0];
+            }
+
+            return mapComponent;
+        },
+
+<span id='BasiGX-util-Map-static-method-getLegendTreePanel'>        /**
+</span>         * Determine legendtree panel component depending on provided xtype.
+         * If no xtype was specified, `basigx-panel-legendtree` component will be
+         * used as fallback.
+         * @param {String} legendCompXType Provided map component xtype
+         * @return {Object} legendComponent
+         */
+        getLegendTreePanel: function(legendCompXType){
+            var legendComponent;
+
+            if (legendCompXType) {
+                legendComponent = Ext.ComponentQuery.query(legendCompXType)[0];
+            }
+            //fallback to basigx legendtree panel component
+            if (Ext.isEmpty(legendComponent)) {
+                legendComponent = Ext.ComponentQuery.query('basigx-panel-legendtree')[0];
+            }
+            return legendComponent;
         }
     }
 });

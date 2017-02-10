@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,8 +38,8 @@
  *
  * @class BasiGX.view.button.AddWms
  */
-Ext.define(&quot;BasiGX.view.button.AddWms&quot;, {
-    extend: &quot;Ext.Button&quot;,
+Ext.define('BasiGX.view.button.AddWms', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-addwms',
 
     requires: [
@@ -49,6 +49,18 @@ Ext.define(&quot;BasiGX.view.button.AddWms&quot;, {
         'BasiGX.util.Animate'
     ],
 
+<span id='BasiGX-view-button-AddWms-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'WMS hinzufügen',
+            text: 'WMS &lt;span style=&quot;font-size: 1.7em; ' +
+                'font-weight: normal;&quot;&gt;⊕&lt;/span&gt;',
+            windowTitle: 'WMS hinzufügen'
+        }
+    },
+
 <span id='BasiGX-view-button-AddWms-property-bind'>    /**
 </span>     *
      */
@@ -56,49 +68,36 @@ Ext.define(&quot;BasiGX.view.button.AddWms&quot;, {
         text: '{text}'
     },
 
-<span id='BasiGX-view-button-AddWms-property-viewModel'>    /**
-</span>     *
-     */
-    viewModel: {
-        data: {
-            tooltip: 'WMS hinzufügen…',
-            text: 'WMS &lt;span style=&quot;font-size: 1.7em; ' +
-                'font-weight: normal;&quot;&gt;⊕&lt;/span&gt;'
-        }
-    },
-
 <span id='BasiGX-view-button-AddWms-property-config'>    /**
 </span>     *
      */
     config: {
+<span id='BasiGX-view-button-AddWms-cfg-windowConfig'>        windowConfig: {
+</span>            // can be used by subclasses to apply/merge
+            // additional/other values for the window
+        },
 <span id='BasiGX-view-button-AddWms-cfg-handler'>        handler: function(){
 </span>            var win = Ext.ComponentQuery.query('[name=add-wms-window]')[0];
             if(!win){
-                Ext.create('Ext.window.Window', {
+
+                var windowConfig = {
                     name: 'add-wms-window',
-                    title: 'WMS hinzufügen',
+                    title: this.getViewModel().get('windowTitle'),
                     width: 500,
                     height: 400,
                     layout: 'fit',
                     items: [{
                         xtype: 'basigx-form-addwms'
                     }]
-                }).show();
+                };
+
+                var windowConfigToApply = this.getWindowConfig();
+                Ext.apply(windowConfig, windowConfigToApply);
+
+                Ext.create('Ext.window.Window', windowConfig).show();
             } else {
                 BasiGX.util.Animate.shake(win);
             }
-        }
-    },
-
-<span id='BasiGX-view-button-AddWms-method-constructor'>    /**
-</span>     *
-     */
-    constructor: function(config) {
-        this.callParent([config]);
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
         }
     }
 });

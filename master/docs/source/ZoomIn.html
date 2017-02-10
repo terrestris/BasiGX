@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,11 +37,12 @@
  *
  * @class BasiGX.view.button.ZoomIn
  */
-Ext.define(&quot;BasiGX.view.button.ZoomIn&quot;, {
-    extend: &quot;Ext.Button&quot;,
+Ext.define('BasiGX.view.button.ZoomIn', {
+    extend: 'BasiGX.view.button.Base',
     xtype: 'basigx-button-zoomin',
     requires: [
-        'Ext.app.ViewModel'
+        'Ext.app.ViewModel',
+        'BasiGX.util.Map'
     ],
 
 <span id='BasiGX-view-button-ZoomIn-property-viewModel'>    /**
@@ -58,6 +59,11 @@ Ext.define(&quot;BasiGX.view.button.ZoomIn&quot;, {
 </span>        text: '{text}'
     },
 
+<span id='BasiGX-view-button-ZoomIn-property-olMap'>    /**
+</span>     * The OL3 map this button is bounded to
+     */
+    olMap: null,
+
 <span id='BasiGX-view-button-ZoomIn-property-glyph'>    /**
 </span>     * The icons the button should use.
      * Classic Toolkit uses glyphs, modern toolkit uses html
@@ -70,27 +76,24 @@ Ext.define(&quot;BasiGX.view.button.ZoomIn&quot;, {
      */
     config: {
 <span id='BasiGX-view-button-ZoomIn-cfg-handler'>        handler: function(){
-</span>            var olMap = Ext.ComponentQuery.query('basigx-component-map')[0].getMap();
-            var olView = olMap.getView();
-            var zoom = ol.animation.zoom({
+</span>            var me = this,
+                olMap = me.olMap,
+                olView,
+                zoom;
+
+            //fallback
+            if (Ext.isEmpty(olMap)) {
+                olMap = BasiGX.util.Map.getMapComponent().getMap();
+            }
+
+            olView = olMap.getView();
+            zoom = ol.animation.zoom({
                 resolution: olView.getResolution(),
                 duration: 500
             });
 
             olMap.beforeRender(zoom);
             olView.setResolution(olView.getResolution() / 2);
-        }
-    },
-
-<span id='BasiGX-view-button-ZoomIn-method-constructor'>    /**
-</span>     *
-     */
-    constructor: function(config) {
-        this.callParent([config]);
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
         }
     }
 });

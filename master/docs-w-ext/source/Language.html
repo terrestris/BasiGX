@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2016-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-combo-Language'>/**
+</span> * Combo for changing the language of a BasiGX based application out of a list
+ * of predefined languages on-the-fly.
+ *
+ * @example &lt;caption&gt;Basic usage:&lt;/caption&gt;
+ * {
+ *     xtype: 'basigx-combo-language'
+ * }
+ *
+ * The config object of this component can be adapted to the surrounding
+ * environment, where you want to set the preselected language, available
+ * languages and the path template to the language files.
+ *
+ * * @example &lt;caption&gt;Real world usage:&lt;/caption&gt;
+ * {
+ *     xtype: 'basigx-combo-language',
+ *     config: {
+ *         defaultLanguage: 'en',
+ *         languages: [{
+ *             code: 'de',
+ *             name: 'DE'
+ *         }, {
+ *             code: 'en',
+ *             name: 'EN'
+ *         }],
+ *         appLocaleUrlTpl: './resources/locale/app-locale-{0}.json'
+ *     }
+ * }
+ *
+ * &lt;b&gt;Important:&lt;/b&gt; The language file must be a valid JSON file following the
+ * syntax stated below (Remove the comments in your language file):
+ *
+ * &lt;code&gt;
+ * {
+ *     // full class name of the component
+ *     &quot;BasiGX.view.button.AddWms&quot;: {
+ *         &quot;config&quot;: {
+ *             // the viewModel object containing the language strings
+ *             &quot;data&quot;: {
+ *                 &quot;tooltip&quot;: &quot;Open Add-WMS tool&quot;,
+ *                 &quot;text&quot;: &quot;WMS&quot;,
+ *                 &quot;windowTitle&quot;: &quot;Add WMS&quot;
+ *             }
+ *         }
+ *     }
+ * }
+ * &lt;/code&gt;
+ *
+ * The file must be named as configured in the appLocaleUrlTpl config, where
+ * the placeholder {0} is to be replaced with the language code given in the
+ * languages config, e.g. app-locale-en.json.
+ *
+ * @class BasiGX.view.combo.Language
+ */
+Ext.define('BasiGX.view.combo.Language', {
+    extend: 'Ext.form.field.ComboBox',
+    xtype: 'basigx-combo-language',
+    requires: [
+        'BasiGX.util.Accessibility'
+    ],
+
+<span id='BasiGX-view-combo-Language-cfg-viewModel'>    viewModel: {
+</span>        data: {
+            fieldLabel: null
+        }
+    },
+
+<span id='BasiGX-view-combo-Language-cfg-bind'>    bind: {
+</span>       fieldLabel: '{fieldLabel}'
+    },
+
+<span id='BasiGX-view-combo-Language-property-fields'>    /**
+</span>     *
+     */
+    fields: ['code', 'name'],
+
+<span id='BasiGX-view-combo-Language-property-queryMode'>    /**
+</span>     *
+     */
+    queryMode: 'local',
+
+<span id='BasiGX-view-combo-Language-property-displayField'>    /**
+</span>     *
+     */
+    displayField: 'name',
+
+<span id='BasiGX-view-combo-Language-property-valueField'>    /**
+</span>     *
+     */
+    valueField: 'code',
+
+<span id='BasiGX-view-combo-Language-property-autoSelect'>    /**
+</span>     *
+     */
+    autoSelect: true,
+
+<span id='BasiGX-view-combo-Language-property-forceSelection'>    /**
+</span>     *
+     */
+    forceSelection: true,
+
+<span id='BasiGX-view-combo-Language-property-editable'>    /**
+</span>     *
+     */
+    editable: false,
+
+<span id='BasiGX-view-combo-Language-property-grow'>    /**
+</span>     *
+     */
+    grow: true,
+
+<span id='BasiGX-view-combo-Language-property-privates'>    /**
+</span>     *
+     */
+    privates: {
+        locale: null
+    },
+
+<span id='BasiGX-view-combo-Language-property-config'>    /**
+</span>     *
+     */
+    config: {
+<span id='BasiGX-view-combo-Language-cfg-defaultLanguage'>        defaultLanguage: 'de',
+</span><span id='BasiGX-view-combo-Language-cfg-languages'>        languages: [{
+</span>            code: 'de',
+            name: 'DE'
+        }, {
+            code: 'en',
+            name: 'EN'
+        }, {
+            code: 'fr',
+            name: 'FR'
+        }],
+<span id='BasiGX-view-combo-Language-cfg-appLocaleUrlTpl'>        appLocaleUrlTpl: './resources/locale/app-locale-{0}.json'
+</span>    },
+
+<span id='BasiGX-view-combo-Language-method-initComponent'>    /**
+</span>     *
+     */
+    initComponent: function() {
+        var me = this;
+
+        // set the the config according to any given config option
+        me.setConfig(me.config);
+
+        me.store = Ext.create('Ext.data.Store', {
+            sorters: [{
+                property: 'code',
+                direction: 'DESC'
+            }],
+            data: me.getLanguages()
+        });
+
+        me.callParent(arguments);
+
+        me.on({
+            change: me.onLanguageChange
+        });
+
+        var defaultLanguage = me.getDefaultLanguage();
+        me.setValue(defaultLanguage);
+        BasiGX.util.Accessibility.setHtmlLanguage(defaultLanguage);
+    },
+
+<span id='BasiGX-view-combo-Language-method-onLanguageChange'>    /**
+</span>     *
+     */
+    onLanguageChange: function(combo, newValue) {
+        var me = this;
+        if (!Ext.isEmpty(newValue)) {
+            me.requestLanguageFile(newValue);
+        }
+    },
+
+<span id='BasiGX-view-combo-Language-method-requestLanguageFile'>    /**
+</span>     *
+     */
+    requestLanguageFile: function(locale) {
+        var me = this;
+        var appLocaleUrl = Ext.util.Format.format(
+                me.getAppLocaleUrlTpl(), locale);
+
+        me.locale = locale;
+
+        Ext.Ajax.request({
+            method: 'GET',
+            url: appLocaleUrl,
+            success: me.onLoadAppLocaleSuccess,
+            failure: me.onLoadAppLocaleFailure,
+            scope: me
+        });
+    },
+
+<span id='BasiGX-view-combo-Language-method-onLoadAppLocaleSuccess'>    /**
+</span>     *
+     */
+    onLoadAppLocaleSuccess: function(resp) {
+        var me = this;
+        var respObj;
+
+        if (resp &amp;&amp; resp.responseText) {
+
+            // try to parse the given string as JSON
+            try {
+                respObj = Ext.decode(resp.responseText);
+                Ext.Logger.info('Succesfully loaded i18n file: ' + me.locale);
+            } catch(err) {
+                me.onLoadAppLocaleFailure();
+                return false;
+            } finally {
+                if (respObj) {
+                    me.setAppLanguage(respObj);
+                    BasiGX.util.Accessibility.setHtmlLanguage(me.locale);
+                    me.recreateSingletons();
+                }
+            }
+        }
+    },
+
+<span id='BasiGX-view-combo-Language-method-onLoadAppLocaleFailure'>    /**
+</span>     *
+     */
+    onLoadAppLocaleFailure: function() {
+        var me = this;
+        var defaultLanguage = me.getDefaultLanguage();
+
+        if (me.locale === defaultLanguage) {
+            me.erroneousTryToLoadDefaultLanguage = true;
+        }
+
+        // load default language, but try only once to prevent killswitch
+        if (!me.erroneousTryToLoadDefaultLanguage) {
+            Ext.Logger.warn('Error on loading the selected i18n file! Will ' +
+                    'try to load the default language ' + defaultLanguage +
+                    ' instead.');
+            me.requestLanguageFile(defaultLanguage);
+        } else {
+            Ext.Logger.error('٩(͡๏̯͡๏)۶ Could neither load the selected nor ' +
+                    'the fallback i18n file! Bad front-end behaviour is to ' +
+                    'be expected.');
+        }
+    },
+
+<span id='BasiGX-view-combo-Language-method-setAppLanguage'>    /**
+</span>     *
+     */
+    setAppLanguage: function(localeObj) {
+        var me = this;
+        var cq = Ext.ComponentQuery.query;
+        var cqTpl = '{self.getName() === &quot;{0}&quot;}{getViewModel()}';
+        var instantiatedClasses;
+        var baseLocaleObj;
+
+        Ext.iterate(localeObj, function(className, locale) {
+            baseLocaleObj = {
+                override: className
+            };
+
+            Ext.iterate(locale, function(key, value) {
+                baseLocaleObj[key] = value;
+            });
+
+            // 1. override the class itself
+            Ext.define(className + '.locale.' + me.locale, baseLocaleObj);
+
+            // 2. Now we will handle the classes viewmodel, if exisiting.
+            // The override has to be based on the unmodified classname in
+            // this case
+            var currentClass = Ext.ClassManager.get(className);
+            if (currentClass &amp;&amp; currentClass.getConfigurator) {
+                var configurator = currentClass.getConfigurator();
+                if (configurator &amp;&amp; configurator.values &amp;&amp;
+                    configurator.values.viewModel) {
+                    var viewModel = configurator.values.viewModel;
+                    var type = viewModel.type;
+                    // if the component has an own viewModel instance
+                    if (!Ext.isEmpty(type) || Ext.isString(viewModel)) {
+                        var viewName = type || viewModel;
+                        var viewClassName = Ext.ClassManager.getName(
+                                Ext.ClassManager
+                                    .getByAlias('viewmodel.' + viewName));
+                        baseLocaleObj.override = viewClassName;
+                        Ext.define(viewClassName, baseLocaleObj);
+                    } else if (!Ext.isEmpty(viewModel)) {
+                        // if the component has an inline viewModel
+                        Ext.apply(viewModel.data, locale.config.data);
+                    }
+                }
+            }
+
+            // 3. override the classes already instantiated
+            // get all instantiated classes (containing a view model)
+            instantiatedClasses = cq(Ext.String.format(cqTpl, className));
+            // set the locale for each class
+            Ext.each(instantiatedClasses, function(clazz) {
+                // Check if the locale contains an expected structure…
+                if ('config' in locale &amp;&amp; 'data' in locale.config) {
+                    clazz.getViewModel().setData(locale.config.data);
+                }
+                // … and don't do anything if it doesn't. This is not
+                // technically an error, or sth. we should warn the user about.
+                // Consider the following: A specific button class (with a
+                // viewModel and a controller) opens an `Ext.window.Window`, and
+                // wants to have the title come from the `viewModel` of the
+                // button:
+                // Ext.create('Ext.window.Window', {
+                //     viewModel: myBtnViewModel, // a real instance of the vm
+                //     bind: {
+                //         title: '{myWinTitle}' // defined key in btn viewmodel
+                //     }
+                //     // other win properties
+                // });
+                // With this setup, the translation will work as long as the
+                // button is visible / instantiated.
+            });
+        });
+    },
+
+<span id='BasiGX-view-combo-Language-method-recreateSingletons'>    /**
+</span>     *
+     */
+    recreateSingletons: function() {
+        Ext.MessageBox = Ext.Msg = new Ext.window.MessageBox();
+    }
+});
+</pre>
+</body>
+</html>

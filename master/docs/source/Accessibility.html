@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2017-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-util-Accessibility'>/**
+</span> * Accessibility Utility class
+ *
+ * Some methods to enhance the accessibility of an ExtJS application.
+ *
+ * @class BasiGX.util.Accessibility
+ */
+Ext.define('BasiGX.util.Accessibility', {
+    alternateClassName: 'BasiGX.util.A11y',
+    statics: {
+
+<span id='BasiGX-util-Accessibility-static-method-getHtmlElement'>        /**
+</span>         * Returns an `Ext.Element` for the top-level `&lt;html&gt;`-element.
+         *
+         * @return {Ext.Element} The `Ext.Element` wrapped around the
+         *     top-level `&lt;html&gt;`-element.
+         */
+        getHtmlElement: function() {
+            return Ext.get(Ext.DomQuery.select('html')[0]);
+        },
+
+<span id='BasiGX-util-Accessibility-static-method-setHtmlLanguage'>        /**
+</span>         * Sets the 'lang'-attribute of the top-level `&lt;html&gt;`-element to the
+         * passed value. This enables screenreaders to pronounce the content
+         * of a page better.
+         *
+         * @param {String} language The language to set. Should be an ISO 639-1
+         *     language code, e.g. `'en'` or `'de'`.
+         */
+        setHtmlLanguage: function(language) {
+            var htmlElem = BasiGX.util.Accessibility.getHtmlElement();
+            if (htmlElem) {
+                htmlElem.set({lang: language});
+            }
+        }
+
+    }
+});
+</pre>
+</body>
+</html>

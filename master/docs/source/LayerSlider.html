@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -69,8 +69,20 @@ Ext.define(&quot;BasiGX.view.container.LayerSlider&quot;, {
         &quot;Ext.slider.Single&quot;
     ],
 
-<span id='BasiGX-view-container-LayerSlider-property-sliderConfig'>    sliderConfig: {
-</span>        flex: 6,
+<span id='BasiGX-view-container-LayerSlider-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            disabeldLabelHtml: 'Aus'
+        }
+    },
+
+<span id='BasiGX-view-container-LayerSlider-property-sliderConfig'>    /**
+</span>     *
+     */
+    sliderConfig: {
+        flex: 6,
         value: 0,
         minValue: 0,
         maxValue: 100,
@@ -119,9 +131,7 @@ Ext.define(&quot;BasiGX.view.container.LayerSlider&quot;, {
      */
     initComponent: function() {
         var me = this,
-            map = Ext.ComponentQuery.query('gx_map')[0].getMap(),
-            layoutColumns = me.addOffState ?
-                me.layerNames.length + 1 : me.layerNames.length,
+            map = BasiGX.util.Map.getMapComponent().getMap(),
             labelItems = me.getLabelItems(),
             items = [];
 
@@ -139,7 +149,8 @@ Ext.define(&quot;BasiGX.view.container.LayerSlider&quot;, {
         }
 
         // set the colspan for slider
-        me.config.colspan = layoutColumns;
+        me.config.colspan = me.addOffState ?
+                me.layerNames.length + 1 : me.layerNames.length;
         var slider = Ext.create('Ext.slider.Single', me.sliderConfig);
 
         if (!Ext.isEmpty(me.topTitle)) {
@@ -204,11 +215,13 @@ Ext.define(&quot;BasiGX.view.container.LayerSlider&quot;, {
             labelItems = [];
 
         if (me.addOffState) {
-         // add the starter
+            // add the starter
             labelItems.push(
                 {
                     xtype: 'container',
-                    html: 'Aus',
+                    bind: {
+                        html: '{disabeldLabelHtml}'
+                    },
                     flex: 1,
                     cls: 'sliderLabel'
                 }

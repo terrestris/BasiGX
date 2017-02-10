@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,7 +34,9 @@
 </span> * @class BasiGX.util.Animate
  */
 Ext.define('BasiGX.util.Animate', {
-
+    requires: [
+        'BasiGX.util.Map'
+    ],
     statics: {
 <span id='BasiGX-util-Animate-static-method-shake'>       shake: function(component, duration, amplitude){
 </span>           duration = duration || 200;
@@ -63,7 +65,7 @@ Ext.define('BasiGX.util.Animate', {
        },
 
 <span id='BasiGX-util-Animate-static-method-flashFeature'>       flashFeature: function(feature, duration) {
-</span>           var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
+</span>           var map = BasiGX.util.Map.getMapComponent().getMap();
            var start = new Date().getTime();
            var listenerKey;
 
@@ -76,19 +78,38 @@ Ext.define('BasiGX.util.Animate', {
              // radius will be 5 at start and 30 at end.
              var radius = ol.easing.easeOut(elapsedRatio) * 25 + 5;
              var opacity = ol.easing.easeOut(1 - elapsedRatio);
+             var flashStyle;
 
-             var flashStyle = new ol.style.Circle({
-               radius: radius,
-               snapToPixel: false,
-               stroke: new ol.style.Stroke({
-                 color: 'rgba(255, 0, 0, ' + opacity + ')',
-                 width: 4,
-                 opacity: opacity
-               })
-             });
+             if (vectorContext.setStyle &amp;&amp; vectorContext.drawGeometry) {
+                 // for ol3 versions from v3.15.0
+                 flashStyle = new ol.style.Style({
+                     image: new ol.style.Circle({
+                         radius: radius,
+                         snapToPixel: false,
+                         stroke: new ol.style.Stroke({
+                             color: 'rgba(255, 0, 0, ' + opacity + ')',
+                             width: 4,
+                             opacity: opacity
+                         })
+                     })
+                 });
+                 vectorContext.setStyle(flashStyle);
+                 vectorContext.drawGeometry(flashGeom, null);
+             } else {
+                 // for ol3 versions older v3.15.0
+                 flashStyle = new ol.style.Circle({
+                     radius: radius,
+                     snapToPixel: false,
+                     stroke: new ol.style.Stroke({
+                         color: 'rgba(255, 0, 0, ' + opacity + ')',
+                         width: 4,
+                         opacity: opacity
+                     })
+                 });
+                 vectorContext.setImageStyle(flashStyle);
+                 vectorContext.drawPointGeometry(flashGeom, null);
+             }
 
-             vectorContext.setImageStyle(flashStyle);
-             vectorContext.drawPointGeometry(flashGeom, null);
              if (elapsed &gt; duration) {
                ol.Observable.unByKey(listenerKey);
                return;
@@ -101,46 +122,66 @@ Ext.define('BasiGX.util.Animate', {
        },
 
 <span id='BasiGX-util-Animate-static-method-moveFeature'>       /**
-</span>        * Moves / translates Features from origin geometry to destination in
-        * the given duration in ms, using the given style, optionally fading out
+</span>        * Moves / translates a Feature to the given pixel delta in
+        * the given duration in ms, using the given style, calling a doneFn
+        * in the end
         *
         * Useful e.g. when hovering clustered features to show their children
         */
-       moveFeature: function(featureToMove, originFeature, duration, style, fadeOut) {
-           var map = Ext.ComponentQuery.query('gx_map')[0].getMap();
-           var start = new Date().getTime();
+       moveFeature: function(featureToMove, duration, pixel, style, doneFn) {
+           var map = BasiGX.util.Map.getMapComponent().getMap();
            var listenerKey;
-           var movingGeom = originFeature.getGeometry().clone();
-           var targetGeom = featureToMove.getGeometry();
 
-           function animate(event) {
+           var geometry = featureToMove.getGeometry();
+           var start = new Date().getTime();
+           var resolution = map.getView().getResolution();
+
+           if (typeof style === 'function') {
+               style = style(featureToMove, resolution);
+           }
+
+           var totalDisplacement = pixel * resolution;
+           var expectedFrames = duration / 1000 * 60;
+           var actualFrames = 0;
+           var deltaX = totalDisplacement / expectedFrames;
+           var deltaY = totalDisplacement / expectedFrames;
+
+           var animate = function(event) {
                var vectorContext = event.vectorContext;
                var frameState = event.frameState;
                var elapsed = frameState.time - start;
-               var deltaX = targetGeom.flatCoordinates[0] -
-                   movingGeom.flatCoordinates[0];
-               var deltaY = targetGeom.flatCoordinates[1] -
-                   movingGeom.flatCoordinates[1];
-               movingGeom.translate(deltaX / (duration/70), deltaY / (duration/70));
 
-               var imageStyle = style.getImage();
+               geometry.translate(deltaX, deltaY);
 
-               if (fadeOut) {
-                   var factor = (duration - elapsed) / duration;
-                   if (factor &gt; 0) {
-                       imageStyle.setOpacity(factor);
-                   }
+               if (vectorContext.setFillStrokeStyle &amp;&amp;
+                   vectorContext.setImageStyle &amp;&amp;
+                   vectorContext.drawPointGeometry) {
+                       vectorContext.setFillStrokeStyle(
+                               style.getFill(), style.getStroke());
+                       vectorContext.setImageStyle(style.getImage());
+                       if (geometry instanceof ol.geom.Point) {
+                           vectorContext.drawPointGeometry(geometry, null);
+                       } else if (geometry instanceof ol.geom.LineString) {
+                           vectorContext.drawLineStringGeometry(geometry, null);
+                       } else {
+                           vectorContext.drawPolygonGeometry(geometry, null);
+                       }
+               } else {
+                   vectorContext.setStyle(style);
+                   vectorContext.drawGeometry(geometry);
                }
 
-               vectorContext.setImageStyle(imageStyle);
-               vectorContext.drawPointGeometry(movingGeom, null);
-               if (elapsed &gt; duration) {
+               if (elapsed &gt; duration || actualFrames &gt;= expectedFrames) {
                    ol.Observable.unByKey(listenerKey);
+                   doneFn(featureToMove);
                    return;
                }
                // tell OL3 to continue postcompose animation
                frameState.animate = true;
-           }
+
+               actualFrames++;
+           };
+
            listenerKey = map.on('postcompose', animate);
            return listenerKey;
        }

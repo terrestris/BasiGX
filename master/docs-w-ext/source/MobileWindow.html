@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@
  * Usage Example:
  *
  * win = Ext.create('BasiGX.view.panel.MobileWindow', {
- *     title: 'Objektinformation',
+ *     panelTitle: 'Objektinformation',
  *     name: 'hsi-panel',
  *     additionalItems: [
  *         {
@@ -63,9 +63,9 @@ Ext.define(&quot;BasiGX.view.panel.MobileWindow&quot;, {
     ],
 
     config: {
-<span id='BasiGX-view-panel-MobileWindow-cfg-title'>        title: '',
+<span id='BasiGX-view-panel-MobileWindow-cfg-panelTitle'>        panelTitle: '',
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-scrollable'>        scrollable: true,
 </span><span id='BasiGX-view-panel-MobileWindow-cfg-centered'>        centered: true,
-</span><span id='BasiGX-view-panel-MobileWindow-cfg-scrollable'>        scrollable: 'y',
 </span><span id='BasiGX-view-panel-MobileWindow-cfg-minWidth'>        minWidth: '50%',
 </span><span id='BasiGX-view-panel-MobileWindow-cfg-maxWidth'>        maxWidth: '80%',
 </span><span id='BasiGX-view-panel-MobileWindow-cfg-minHeight'>        minHeight: '50%',
@@ -87,19 +87,28 @@ Ext.define(&quot;BasiGX.view.panel.MobileWindow&quot;, {
 
         var headerPanel = Ext.create('Ext.Container', {
             styleHtmlContent: true,
-            html: '&lt;b&gt;' + me.getTitle() + '&lt;/b&gt;' +
+            padding: '10 10 10 10',
+            html: '&lt;b&gt;' + me.getPanelTitle() + '&lt;/b&gt;' +
                 '&lt;i class=&quot;fa fa-times-circle-o fa-2x&quot; ' +
-                'style=&quot;position:absolute;right:10px;top:0px;&quot; ' +
+                'style=&quot;position:absolute;right:10px;top:5px;&quot; ' +
                 'onclick=&quot;Ext.ComponentQuery.query(' +
                 '\'basigx-panel-mobilewindow[name=' + me.getName() + ']\')' +
                 '[0].hide();&quot;&gt;' +
                 '&lt;/i&gt;',
-            flex: 1
+            height: 40,
+            docked: 'top',
+            style: {
+                'background-color': 'white'
+            }
         });
         me.add(headerPanel);
 
         if (me.getAdditionalItems().length &gt; 0) {
-            me.add(me.getAdditionalItems());
+            me.add({
+                xtype: 'panel',
+                layout: 'vbox',
+                items: me.getAdditionalItems()
+            });
         }
     }
 });

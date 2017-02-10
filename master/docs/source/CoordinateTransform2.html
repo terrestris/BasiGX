@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015 terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -48,17 +48,26 @@ Ext.define(&quot;BasiGX.view.form.CoordinateTransform&quot;, {
 
 <span id='BasiGX-view-form-CoordinateTransform-property-viewModel'>    viewModel: {
 </span>        data: {
+            coordFieldSetTitle: 'Koordinaten',
+            coordXFieldLabel: 'X-Koordinate',
+            coordYFieldLabel: 'Y-Koordinate',
+            transformBtnText: 'Transformieren',
+            resetFormBtnText: 'Zurücksetzen',
+            transformBtnIconCls: '{transformButtonIconCls}',
+            transformBtnTooltip: '{transformButtonToolTip}'
         }
     },
 
 <span id='BasiGX-view-form-CoordinateTransform-property-padding'>    padding: 5,
-</span><span id='BasiGX-view-form-CoordinateTransform-property-layout'>    layout: 'anchor',
-</span><span id='BasiGX-view-form-CoordinateTransform-property-defaults'>    defaults: {
-</span>        anchor: '100%'
-    },
-
-<span id='BasiGX-view-form-CoordinateTransform-property-scrollable'>    scrollable: true,
+</span><span id='BasiGX-view-form-CoordinateTransform-property-layout'>    layout: 'form',
 </span>
+<span id='BasiGX-view-form-CoordinateTransform-property-scrollable'>    scrollable: 'y',
+</span>
+<span id='BasiGX-view-form-CoordinateTransform-property-map'>    /**
+</span>     *
+     */
+    map: null,
+
     config: {
 <span id='BasiGX-view-form-CoordinateTransform-cfg-coordinateSystemsToUse'>        /**
 </span>         * Array of Objects containing code in EPSG notation and Name to display
@@ -77,10 +86,11 @@ Ext.define(&quot;BasiGX.view.form.CoordinateTransform&quot;, {
 </span>     *
      */
     initComponent: function() {
-
         var me = this,
-            crsFieldsets = [],
-            map = Ext.ComponentQuery.query('basigx-component-map')[0].getMap();
+            crsFieldsets = [];
+
+        //set map
+        me.map = BasiGX.util.Map.getMapComponent().getMap();
 
         if (Ext.isEmpty(me.getCoordinateSystemsToUse())) {
             Ext.log.warn('No coordinatesystems given to Component');
@@ -100,16 +110,18 @@ Ext.define(&quot;BasiGX.view.form.CoordinateTransform&quot;, {
                 xtype: 'fieldset',
                 title: crs.name,
                 crs: crs.code,
-                margin: 5,
                 items: [
                     {
                         xtype: 'numberfield',
                         name: 'xcoord',
                         decimalSeparator: ',',
                         decimalPrecision: 7,
-                        fieldLabel: 'X-Koordinate',
+                        bind: {
+                            fieldLabel: '{coordXFieldLabel}'
+                        },
                         value: '',
-                        // Remove spinner buttons, and arrow key and mouse wheel listeners
+                        // Remove spinner buttons, and arrow key and mouse wheel
+                        // listeners
                         hideTrigger: true,
                         keyNavEnabled: false,
                         mouseWheelEnabled: false,
@@ -126,9 +138,12 @@ Ext.define(&quot;BasiGX.view.form.CoordinateTransform&quot;, {
                             name: 'ycoord',
                             decimalSeparator: ',',
                             decimalPrecision: 7,
-                            fieldLabel: 'Y-Koordinate',
+                            bind: {
+                                fieldLabel: '{coordYFieldLabel}'
+                            },
                             value: '',
-                            // Remove spinner buttons, and arrow key and mouse wheel listeners
+                            // Remove spinner buttons, and arrow key and mouse
+                            // wheel listeners
                             hideTrigger: true,
                             keyNavEnabled: false,
                             mouseWheelEnabled: false,
@@ -140,7 +155,11 @@ Ext.define(&quot;BasiGX.view.form.CoordinateTransform&quot;, {
                             name: 'transform',
                             margin: '0 0 0 30',
                             width: 110,
-                            text: 'Transformieren',
+                            bind: {
+                                text: '{transformBtnText}',
+                                iconCls: '{transformButtonIconCls}',
+                                tooltip: '{transformButtonToolTip}'
+                            },
                             hidden: true,
                             handler: me.transform
                         }]
@@ -153,11 +172,10 @@ Ext.define(&quot;BasiGX.view.form.CoordinateTransform&quot;, {
         me.items = [
             {
                 xtype: 'fieldset',
-                layout: 'anchor',
-                defaults: {
-                    anchor: '100%'
+                layout: 'form',
+                bind: {
+                    title: '{coordFieldSetTitle}'
                 },
-                title: 'Koordinaten',
                 items: crsFieldsets
             }
         ];
@@ -173,24 +191,26 @@ Ext.define(&quot;BasiGX.view.form.CoordinateTransform&quot;, {
             }
 
             if(me.getTransformCenterOnRender()){
-                var coordToTransform = map.getView().getCenter();
+                var coordToTransform = me.map.getView().getCenter();
                 me.transform(coordToTransform);
             }
         });
 
-        map.on('click', me.transform);
+        me.map.on('click', me.transform);
 
         me.on('beforedestroy', function(){
             var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
                 'transformvectorlayer');
             transformvectorlayer.getSource().clear();
-            map.un('click', me.transform);
+            me.map.un('click', me.transform);
         });
     },
 
 <span id='BasiGX-view-form-CoordinateTransform-property-buttons'>    // Reset and Submit buttons
 </span>    buttons: [{
-        text: 'Zurücksetzen',
+        bind: {
+            text: '{resetFormBtnText}'
+        },
         handler: function(btn){
             var view = btn.up('basigx-form-coordinatetransform');
             view.reset();
@@ -243,8 +263,7 @@ Ext.define(&quot;BasiGX.view.form.CoordinateTransform&quot;, {
     transform: function(evtOrBtnOrArray) {
         var me = Ext.ComponentQuery.query(
             'basigx-form-coordinatetransform')[0],
-            map = Ext.ComponentQuery.query('basigx-component-map')[0].getMap(),
-            mapProjection = map.getView().getProjection(),
+            mapProjection = me.map.getView().getProjection(),
             fieldSets = me.query('fieldset'),
             transformvectorlayer = BasiGX.util.Layer.getLayerByName(
                 'transformvectorlayer'),
@@ -284,6 +303,9 @@ Ext.define(&quot;BasiGX.view.form.CoordinateTransform&quot;, {
 
         // now show coord on map
         if (!Ext.isDefined(transformvectorlayer)) {
+            var displayInLayerSwitcherKey =
+                BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+
             transformvectorlayer = new ol.layer.Vector({
                 name: 'transformvectorlayer',
                 source: new ol.source.Vector(),
@@ -300,7 +322,8 @@ Ext.define(&quot;BasiGX.view.form.CoordinateTransform&quot;, {
                 })
             });
 
-            map.addLayer(transformvectorlayer);
+            transformvectorlayer.set(displayInLayerSwitcherKey, false);
+            me.map.addLayer(transformvectorlayer);
         }
 
         var transformedMapCoords = ol.proj.transform(
@@ -313,7 +336,7 @@ Ext.define(&quot;BasiGX.view.form.CoordinateTransform&quot;, {
         transformvectorlayer.getSource().addFeatures([feature]);
         // recenter if we were not triggered by click in map
         if (!isOlEvt) {
-            map.getView().setCenter(transformedMapCoords);
+            me.map.getView().setCenter(transformedMapCoords);
         }
     }
 });

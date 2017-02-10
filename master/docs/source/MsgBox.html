@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2016-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-util-MsgBox'>/**
+</span> *
+ * MsgBox Util
+ *
+ * Message box utilities for a common user experience.
+ *
+ * @class BasiGX.util.MsgBox
+ */
+Ext.define('BasiGX.util.MsgBox', {
+    requires: [
+        'Ext.util.DelayedTask',
+        'Ext.window.MessageBox'
+    ],
+    statics: {
+
+<span id='BasiGX-util-MsgBox-static-property-toFrontDelayMS'>        /**
+</span>         * The amount of milliseconds to wait before bringing {Ext.MessageBox}
+         * instances to the front of the visual element stack. Setting this to a
+         * value smaller than `0` will immediately bring the message box to the
+         * front. The method #bringToFront makes use of this configuration.
+         */
+        toFrontDelayMS: 50,
+
+<span id='BasiGX-util-MsgBox-static-property-msgBoxTitleInfo'>        /*begin i18n*/
+</span>        msgBoxTitleInfo: 'Info',
+<span id='BasiGX-util-MsgBox-static-property-msgBoxTitleWarn'>        msgBoxTitleWarn: 'Warn',
+</span><span id='BasiGX-util-MsgBox-static-property-msgBoxTitleError'>        msgBoxTitleError: 'Error',
+</span><span id='BasiGX-util-MsgBox-static-property-msgBoxTitlePrompt'>        msgBoxTitlePrompt: 'Question',
+</span>        /*end i18n*/
+
+<span id='BasiGX-util-MsgBox-static-method-bringToFront'>        /**
+</span>         * Takes an instance of {Ext.MessageBox} and brings it to the front
+         * of the visual element stack after a timeout specified in the
+         * configuration #toFrontDelayMS.
+         *
+         * As suggested in [this thread](http://www.sencha.com/forum/
+         * showthread.php?127202-Ext-Messagebox-appearing-behind-modal-window),
+         * we need to have a delay before bringing the window to the front. The
+         * configuration #toFrontDelayMS controls the number of milliseconds to
+         * wait.
+         *
+         * @param {Ext.MessageBox} msgBox The message box to bring to the front
+         * @private
+         */
+        bringToFront: function(msgBox) {
+            var delay = BasiGX.util.MsgBox.toFrontDelayMS,
+                toFrontFunc = function(){
+                    msgBox.toFront();
+                },
+                toFrontTask;
+
+            if (parseFloat(delay) &gt; 0) {
+                toFrontTask = new Ext.util.DelayedTask(toFrontFunc);
+                toFrontTask.delay(delay);
+            } else {
+                toFrontFunc.call();
+            }
+        },
+
+<span id='BasiGX-util-MsgBox-static-method-show'>        /**
+</span>         * Basic show method used by the various specific implementations.
+         *
+         * @param {String} msg The message that we'll show.
+         * @param {Object} [defaultConf] The specific configuration default as
+         *     described in the {@link Ext.MessageBox#method-show show-method}
+         *     of the Ext.MessageBox. Will be set from the public methods.
+         * @param {Object} [userConf] Optional configuration as described in the
+         *     {@link Ext.MessageBox#method-show show-method of the
+         *     Ext.MessageBox}.
+         * @private
+         */
+        show: function(msg, defaultConf, userConf){
+            var me = BasiGX.util.MsgBox,
+                msgInConf = Ext.apply({ msg: msg }, userConf),
+                msgConfig = Ext.apply(defaultConf, msgInConf),
+                msgBox = Ext.Msg.show(msgConfig);
+            me.bringToFront(msgBox);
+        },
+
+<span id='BasiGX-util-MsgBox-static-method-info'>        /**
+</span>         * Shows an information message box with the specified message.
+         *
+         * Can be further configured with the options specified in the {@link
+         * Ext.MessageBox#method-show show-method of the Ext.MessageBox-class}.
+         *
+         * @param {String} msg The message that we'll show.
+         * @param {Object} [userConf] Optional configuration as described in the
+         *     {@link Ext.MessageBox#method-show show-method of the
+         *     Ext.MessageBox}.
+         */
+        info: function(msg, userConf) {
+            var me = BasiGX.util.MsgBox,
+                defaultConf = {
+                    title: me.msgBoxTitleInfo,
+                    buttons: Ext.Msg.OK,
+                    icon: Ext.Msg.INFO
+                };
+            me.show(msg, defaultConf, userConf);
+        },
+
+<span id='BasiGX-util-MsgBox-static-method-warn'>        /**
+</span>         * Shows a warning message box with the specified message.
+         *
+         * Can be further configured with the options specified in the {@link
+         * Ext.MessageBox#method-show show-method of the Ext.MessageBox-class}.
+         *
+         * @param {String} msg The message that we'll show.
+         * @param {Object} [userConf] Optional configuration as described in the
+         *     {@link Ext.MessageBox#method-show show-method of the
+         *     Ext.MessageBox}.
+         */
+        warn: function(msg, userConf) {
+            var me = BasiGX.util.MsgBox,
+                defaultConf = {
+                    title: me.msgBoxTitleWarn,
+                    buttons: Ext.MessageBox.OKCANCEL,
+                    icon: Ext.Msg.WARNING
+                };
+            me.show(msg, defaultConf, userConf);
+        },
+
+<span id='BasiGX-util-MsgBox-static-method-error'>        /**
+</span>         * Shows an error message box with the specified message.
+         *
+         * Can be further configured with the options specified in the {@link
+         * Ext.MessageBox#method-show show-method of the Ext.MessageBox-class}.
+         *
+         * @param {String} msg The message that we'll show.
+         * @param {Object} [userConf] Optional configuration as described in the
+         *     {@link Ext.MessageBox#method-show show-method of the
+         *     Ext.MessageBox}.
+         */
+        error: function(msg, userConf) {
+            var me = BasiGX.util.MsgBox,
+                defaultConf = {
+                    title: me.msgBoxTitleError,
+                    buttons: Ext.MessageBox.OK,
+                    icon: Ext.Msg.ERROR
+                };
+            me.show(msg, defaultConf, userConf);
+        },
+
+<span id='BasiGX-util-MsgBox-static-method-prompt'>        /**
+</span>         * Shows a prompt message box with the specified message.
+         *
+         * Can be further configured with the options specified in the {@link
+         * Ext.MessageBox#method-show show-method of the Ext.MessageBox-class}.
+         *
+         * @param {String} msg The message that we'll show.
+         * @param {Object} [userConf] Optional configuration as described in the
+         *     {@link Ext.MessageBox#method-show show-method of the
+         *     Ext.MessageBox}.
+         */
+        prompt: function(msg, userConf) {
+            var me = BasiGX.util.MsgBox,
+                defaultConf = {
+                    title: me.msgBoxTitlePrompt,
+                    buttons: Ext.MessageBox.OKCANCEL,
+                    icon: Ext.Msg.QUESTION,
+                    width: 400,
+                    prompt: true
+                };
+            me.show(msg, defaultConf, userConf);
+        },
+
+<span id='BasiGX-util-MsgBox-static-method-confirm'>        /**
+</span>         * Shows a confirm message box with the specified message.
+         *
+         * Can be further configured with the options specified in the {@link
+         * Ext.MessageBox#method-show show-method of the Ext.MessageBox-class}.
+         *
+         * @param {String} msg The message that we'll show.
+         * @param {Object} [userConf] Optional configuration as described in the
+         *     {@link Ext.MessageBox#method-show show-method of the
+         *     Ext.MessageBox}.
+         */
+        confirm: function(msg, userConf) {
+            var me = BasiGX.util.MsgBox,
+                defaultConf = {
+                    title: me.msgBoxTitlePrompt,
+                    buttons: Ext.MessageBox.YESNO,
+                    icon: Ext.Msg.QUESTION
+                };
+            me.show(msg, defaultConf, userConf);
+        }
+    }
+}, function(){
+    var util = BasiGX.util.MsgBox;
+    Ext.applyIf(BasiGX, {
+<span id='BasiGX-method-info'>        /**
+</span>         * This method is an alias for {@link BasiGX.util.MsgBox#info}.
+         *
+         * Usage example:
+         *
+         *     BasiGX.info(&quot;The operation completed successfully.&quot;);
+         *
+         * @member BasiGX
+         * @method info
+         * @inheritdoc BasiGX.util.MsgBox#info
+         */
+        info: util.info,
+
+<span id='BasiGX-method-warn'>        /**
+</span>         * This method is an alias for {@link BasiGX.util.MsgBox#warn}.
+         *
+         * Usage example:
+         *
+         *     BasiGX.warn(&quot;The operation might not succeed.&quot;);
+         *
+         * @member BasiGX
+         * @method warn
+         * @inheritdoc BasiGX.util.MsgBox#warn
+         */
+        warn: util.warn,
+
+<span id='BasiGX-method-error'>        /**
+</span>         * This method is an alias for {@link BasiGX.util.MsgBox#error}.
+         *
+         * Usage example:
+         *
+         *     BasiGX.error(&quot;The operation failed.&quot;);
+         *
+         * @member BasiGX
+         * @method error
+         * @inheritdoc BasiGX.util.MsgBox#error
+         */
+        error: util.error,
+
+<span id='BasiGX-method-prompt'>        /**
+</span>         * This method is an alias for {@link BasiGX.util.MsgBox#prompt}.
+         *
+         * Usage example:
+         *
+         *     BasiGX.prompt(&quot;Please enter name for whatever&quot;, {
+         *         fn: function(decision, text){
+         *             if (decision === 'ok') {
+         *                 alert(&quot;You entered &quot; + text);
+         *             } else {
+         *                 alert(&quot;Action cancelled.&quot;);
+         *             }
+         *         },
+         *         value: 'prefilled value'
+         *     });
+         *
+         * @member BasiGX
+         * @method prompt
+         * @inheritdoc BasiGX.util.MsgBox#prompt
+         */
+        prompt: util.prompt,
+
+<span id='BasiGX-method-confirm'>        /**
+</span>         * This method is an alias for {@link BasiGX.util.MsgBox#confirm}.
+         *
+         * Usage example:
+         *
+         *     BasiGX.confirm(&quot;Please enter name for whatever&quot;, {
+         *         fn: function(decision){
+         *             if (decision === 'yes') {
+         *                 alert(&quot;You chose yes&quot;);
+         *             } else {
+         *                 alert(&quot;Action cancelled.&quot;);
+         *             }
+         *         }
+         *     });
+         *
+         * @member BasiGX
+         * @method confirm
+         * @inheritdoc BasiGX.util.MsgBox#confirm
+         */
+        confirm: util.confirm
+    });
+});
+</pre>
+</body>
+</html>
