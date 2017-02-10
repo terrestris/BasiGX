@@ -1,6 +1,5 @@
 /*global Ext, window, document*/
-
-/* Copyright (C) 2011-2013 terrestris GmbH & Co. KG, info@terrestris.de
+/* Copyright (C) 2011-present terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

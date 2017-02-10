@@ -1,3 +1,19 @@
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
+ * Copyright (c) 2016-present Jean-Marc Viglino
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 /* This file is basically a copy of
  * https://raw.githubusercontent.com/Viglino/ol3-ext/gh-pages/interaction/transforminteraction.js
  * by https://github.com/Viglino at commit 8c92ee5c9668f3451c807f33fa4d9933eac2cd22
