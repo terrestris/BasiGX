@@ -47,6 +47,7 @@
             'view/form/Print.test.js',
             'view/grid/FeaturePropertyGrid.test.js',
             'view/grid/GazetteerGrid.test.js',
+            'view/list/FocusableTreeItem.test.js',
             'view/panel/Accessible.test.js',
             'view/panel/Header.test.js',
             'view/panel/LayerSetChooser.test.js',
