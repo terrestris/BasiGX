@@ -1,8 +1,6 @@
 # BasiGX
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/terrestris/BasiGX.svg)](https://greenkeeper.io/)
-
-[![Build Status](https://travis-ci.org/terrestris/BasiGX.svg?branch=master)](https://travis-ci.org/terrestris/BasiGX) [![Coverage Status](https://coveralls.io/repos/terrestris/BasiGX/badge.svg?branch=master&service=github)](https://coveralls.io/github/terrestris/BasiGX?branch=master)
+[![Greenkeeper badge](https://badges.greenkeeper.io/terrestris/BasiGX.svg)](https://greenkeeper.io/) [![Build Status](https://travis-ci.org/terrestris/BasiGX.svg?branch=master)](https://travis-ci.org/terrestris/BasiGX) [![Coverage Status](https://coveralls.io/repos/terrestris/BasiGX/badge.svg?branch=master&service=github)](https://coveralls.io/github/terrestris/BasiGX?branch=master)
 
 …pronounced `ˈbeɪsɪks/`
 
