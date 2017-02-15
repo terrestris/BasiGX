@@ -34,15 +34,15 @@ Ext.define('BasiGX.view.button.Measure', {
     *
     */
     viewModel: {
-       data: {
-           textline: 'Strecke messen',
-           textpoly: 'Fläche messen',
-           textangle: 'Winkel messen',
-           continuePolygonMsg: 'Klicken zum Zeichnen der Fläche',
-           continueLineMsg: 'Klicken zum Zeichnen der Strecke',
-           continueAngleMsg: 'Klicken zum Zeichnen des Winkels',
-           clickToDrawText: 'Klicken zum Messen'
-       }
+        data: {
+            textline: 'Strecke messen',
+            textpoly: 'Fläche messen',
+            textangle: 'Winkel messen',
+            continuePolygonMsg: 'Klicken zum Zeichnen der Fläche',
+            continueLineMsg: 'Klicken zum Zeichnen der Strecke',
+            continueAngleMsg: 'Klicken zum Zeichnen des Winkels',
+            clickToDrawText: 'Klicken zum Messen'
+        }
     },
 
     /**
@@ -408,16 +408,18 @@ Ext.define('BasiGX.view.button.Measure', {
      */
     btnTextByType: function() {
         var btnText;
-        switch(this.measureType) {
-            case 'line':
-                btnText = '{textline}';
-                break;
-            case 'polygon':
-                btnText = '{textpoly}';
-                break;
-            case 'angle':
-                btnText = '{textangle}';
-                break;
+        switch (this.measureType) {
+        case 'line':
+            btnText = '{textline}';
+            break;
+        case 'polygon':
+            btnText = '{textpoly}';
+            break;
+        case 'angle':
+            btnText = '{textangle}';
+            break;
+        default:
+            break;
         }
         return btnText;
     },
@@ -460,14 +462,17 @@ Ext.define('BasiGX.view.button.Measure', {
 
     /**
      * Adds a tooltip on click where a measuring stop occured.
+     *
+     * @param {ol.MapBrowserEvent} evt The event which contains teh coordinate
+     *     for the tooltip.
      */
     addMeasureStopToolTip: function(evt) {
         var me = this;
         var CSS = BasiGX.view.button.Measure.CSS_CLASSES;
 
         if (!Ext.isEmpty(me.sketch)) {
-            var geom = me.sketch.getGeometry(),
-                value = me.measureType === 'line' ? me.formatLength(geom) :
+            var geom = me.sketch.getGeometry();
+            var value = me.measureType === 'line' ? me.formatLength(geom) :
                     me.formatArea(geom);
             if (parseInt(value, 10) > 0) {
                 var div = Ext.dom.Helper.createDom('<div>');
@@ -490,6 +495,9 @@ Ext.define('BasiGX.view.button.Measure', {
     /**
      * Sets up listeners whenever the drawing of a measurement sketch is
      * started.
+     *
+     * @param {ol.interaction.Draw.Event} evt The event which contains the
+     *     feature we are drawing.
      */
     drawStart: function(evt) {
         var me = this;
@@ -513,6 +521,8 @@ Ext.define('BasiGX.view.button.Measure', {
     /**
      * Called whenever measuring stops, this method draws static tooltips with
      * the result onto the map canvas and unregisters various listeners.
+     *
+     * TODO We should remove the commented code.
      */
     drawEnd: function() {
         var me = this;
@@ -547,7 +557,7 @@ Ext.define('BasiGX.view.button.Measure', {
     /**
      * Handle pointer move by updating and repositioning the dynamic tooltip.
      *
-     * @param {ol.MapBrowserEvent} evt
+     * @param {ol.MapBrowserEvent} evt The Event from the pointermove.
      */
     pointerMoveHandler: function(evt) {
         var me = this;
@@ -636,13 +646,13 @@ Ext.define('BasiGX.view.button.Measure', {
     /**
      *
      */
-    removeHelpTooltip: function(){
+    removeHelpTooltip: function() {
         var me = this;
         if (me.helpTooltipElement && me.helpTooltipElement.parent) {
             me.helpTooltipElement.parent.removeChild(me.helpTooltipElement);
         }
         if (me.helpTooltip) {
-           me.map.removeOverlay(me.helpTooltip);
+            me.map.removeOverlay(me.helpTooltip);
         }
         me.helpTooltipElement = null;
         me.helpTooltip = null;
@@ -651,7 +661,7 @@ Ext.define('BasiGX.view.button.Measure', {
     /**
      *
      */
-    removeMeasureTooltip: function(){
+    removeMeasureTooltip: function() {
         var me = this;
         if (me.measureTooltipElement && me.measureTooltipElement.parent) {
             me.measureTooltipElement.parent.removeChild(
@@ -659,7 +669,7 @@ Ext.define('BasiGX.view.button.Measure', {
             );
         }
         if (me.measureTooltip) {
-           me.map.removeOverlay(me.measureTooltip);
+            me.map.removeOverlay(me.measureTooltip);
         }
         me.measureTooltipElement = null;
         me.measureTooltip = null;
@@ -668,8 +678,8 @@ Ext.define('BasiGX.view.button.Measure', {
     /**
      * Format length output for the tooltip.
      *
-     * @param {ol.geom.MultiLineString} line
-     * @return {String}
+     * @param {ol.geom.MultiLineString} line The drawn line.
+     * @return {String} The formatted length of the line.
      */
     formatLength: function(line) {
         var me = this;
@@ -693,7 +703,7 @@ Ext.define('BasiGX.view.button.Measure', {
         }
         var output;
         if (me.switchToKmOnLargeValues && length > 1000) {
-           output = (Math.round(length / 1000 * decimalHelper) /
+            output = (Math.round(length / 1000 * decimalHelper) /
                decimalHelper) + ' ' + 'km';
         } else {
             output = (Math.round(length * decimalHelper) / decimalHelper) +
@@ -705,8 +715,8 @@ Ext.define('BasiGX.view.button.Measure', {
     /**
      * Format length output for the tooltip.
      *
-     * @param {ol.geom.Polygon} polygon
-     * @return {string}
+     * @param {ol.geom.Polygon} polygon The drawn polygon.
+     * @return {String} The formatted area of the polygon.
      */
     formatArea: function(polygon) {
         var me = this;
@@ -783,8 +793,8 @@ Ext.define('BasiGX.view.button.Measure', {
 
     /**
      * Given an angle between 0° and 360° this angle returns the exact opposite
-     * of the angle, e.g. for 90° you'll get back 270°. This effective turns the
-     * direction of the angle from counter-clockwise to clockwise.
+     * of the angle, e.g. for 90° you'll get back 270°. This effectively turns
+     * the direction of the angle from counter-clockwise to clockwise.
      *
      * @param {Number} angle360 The input angle obtained counter-clockwise.
      * @return {Number} The clockwise angle.
