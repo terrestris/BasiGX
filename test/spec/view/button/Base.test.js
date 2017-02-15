@@ -14,7 +14,7 @@ describe('BasiGX.view.button.Base', function() {
         it('binds to tooltip if `setTooltip` exists', function() {
             var btn = Ext.create('BasiGX.view.button.Base', {
                 viewModel: {
-                    data:{
+                    data: {
                         tooltip: 'My Tooltip'
                     }
                 }
@@ -31,7 +31,7 @@ describe('BasiGX.view.button.Base', function() {
             BasiGX.view.button.Base.prototype.setTooltip = undefined;
             var btn = Ext.create('BasiGX.view.button.Base', {
                 viewModel: {
-                    data:{
+                    data: {
                         tooltip: 'My Tooltip'
                     }
                 }
@@ -57,7 +57,7 @@ describe('BasiGX.view.button.Base', function() {
         it('binds to tooltip if `setTooltip` exists', function() {
             var btn = Ext.create('BasiGX.test.BaseButtonSubClass', {
                 viewModel: {
-                    data:{
+                    data: {
                         tooltip: 'My Tooltip'
                     }
                 }
@@ -74,7 +74,7 @@ describe('BasiGX.view.button.Base', function() {
             BasiGX.test.BaseButtonSubClass.prototype.setTooltip = undefined;
             var btn = Ext.create('BasiGX.test.BaseButtonSubClass', {
                 viewModel: {
-                    data:{
+                    data: {
                         tooltip: 'My Tooltip'
                     }
                 }
