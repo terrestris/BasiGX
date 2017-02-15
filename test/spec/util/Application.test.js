@@ -30,7 +30,7 @@ describe('BasiGX.util.Application', function() {
             mapComponent.appContext.data.merge = {};
 
             var retVal2 = BasiGX.util.Application.getAppContext();
-            expect(retVal2).to.be.an("object");
+            expect(retVal2).to.be.an('object');
         });
         it('does not throw on getRoute method call', function() {
             expect(BasiGX.util.Application.getRoute).
@@ -38,7 +38,7 @@ describe('BasiGX.util.Application', function() {
         });
         it('returns route on getRoute method call', function() {
             var retVal = BasiGX.util.Application.getRoute();
-            expect(retVal).to.be.a("string");
+            expect(retVal).to.be.a('string');
         });
     });
 });
