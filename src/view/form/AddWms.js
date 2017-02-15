@@ -192,7 +192,7 @@ Ext.define('BasiGX.view.form.AddWms', {
             bind: {
                 text: '{resetBtnText}'
             },
-            handler: function(btn){
+            handler: function(btn) {
                 var view = btn.up('basigx-form-addwms');
                 view.getForm().reset();
                 view.removeAddLayersComponents();
@@ -205,7 +205,7 @@ Ext.define('BasiGX.view.form.AddWms', {
             },
             formBind: true, // only enabled once the form is valid
             disabled: true,
-            handler: function(btn){
+            handler: function(btn) {
                 var view = btn.up('basigx-form-addwms');
                 view.requestGetCapabilities();
             }
@@ -225,7 +225,7 @@ Ext.define('BasiGX.view.form.AddWms', {
      * Will be called with the 'get layers' button. Issues a GetCapabilities
      * request and sets up handlewrs for reacting on the response.
      */
-    requestGetCapabilities: function(){
+    requestGetCapabilities: function() {
         var me = this;
         var form = me.getForm();
         if (form.isValid()) {
@@ -251,7 +251,7 @@ Ext.define('BasiGX.view.form.AddWms', {
      * methdo will examine the answer and eventually set up a fieldset for all
      * the layers that we have found in the server's answer.
      *
-     * @param response {XMLHttpRequest} The response of the request.
+     * @param {XMLHttpRequest} response The response of the request.
      */
     onGetCapabilitiesSuccess: function(response) {
         var me = this;
@@ -260,7 +260,7 @@ Ext.define('BasiGX.view.form.AddWms', {
         var result;
         try {
             result = parser.read(response.responseText);
-        } catch(ex) {
+        } catch (ex) {
             BasiGX.warn(viewModel.get('errorCouldntParseResponse'));
         }
         var compatibleLayers = me.isCompatibleCapabilityResponse(result);
@@ -275,7 +275,7 @@ Ext.define('BasiGX.view.form.AddWms', {
     /**
      * Called if we could not successfully query for the capabiliteis of a WMS.
      *
-     * @param response {XMLHttpRequest} The response of the request.
+     * @param {XMLHttpRequest} response The response of the request.
      */
     onGetCapabilitiesFailure: function() {
         this.setLoading(false);
@@ -397,7 +397,7 @@ Ext.define('BasiGX.view.form.AddWms', {
      * @return {ol.layer.Tile[]|boolean} Eitehr an array of comüatible layers or
      *     `false`.
      */
-    isCompatibleCapabilityResponse: function (capabilities) {
+    isCompatibleCapabilityResponse: function(capabilities) {
         var me = this;
         if (!capabilities) {
             return false;
@@ -417,7 +417,7 @@ Ext.define('BasiGX.view.form.AddWms', {
 
         var includeSubLayer = me.getIncludeSubLayer();
 
-        Ext.each(layers, function(layer){
+        Ext.each(layers, function(layer) {
             var olLayer = me.getOlLayer(layer, version, mapProj, url);
             if (olLayer) {
                 compatible.push(olLayer);
@@ -446,14 +446,14 @@ Ext.define('BasiGX.view.form.AddWms', {
      * @param {ol.layer.Tile[]} layers The layers for which the we shall fill
      *     the fieldset.
      */
-    fillAvailableLayersFieldset: function(layers){
+    fillAvailableLayersFieldset: function(layers) {
         var me = this;
         me.removeAddLayersComponents();
         var fs = me.down('[name=fs-available-layers]');
         var cbGroup = fs.down('checkboxgroup');
         var checkBoxes = [];
         var candidatesInitiallyChecked = me.getCandidatesInitiallyChecked();
-        Ext.each(layers, function(layer){
+        Ext.each(layers, function(layer) {
             checkBoxes.push({
                 xtype: 'checkbox',
                 boxLabel: layer.get('name'),
