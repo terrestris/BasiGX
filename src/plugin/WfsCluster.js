@@ -25,34 +25,34 @@ Ext.define('BasiGX.plugin.WfsCluster', {
     alias: 'plugin.wfscluster',
     pluginId: 'wfscluster',
 
-    init: function (cmp) {
+    init: function(cmp) {
         var me = this;
         this.setCmp(cmp);
 
         me.setUpClusterLayers(this.getCmp());
     },
 
-    setUpClusterLayers: function(mapComponent){
+    setUpClusterLayers: function(mapComponent) {
         var me = this;
         var map = mapComponent.getMap();
         var allLayers = BasiGX.util.Layer.getAllLayers(map);
         var clusterLayers = [];
 
         Ext.each(allLayers, function(layer) {
-            if (layer.get('type') === "WFSCluster") {
+            if (layer.get('type') === 'WFSCluster') {
                 // register visibility listener to load the features when
                 // layer is toggled in tree, which is not detected by the
                 // maps moveend listener
                 // TODO: check why this gets fired 2 times -> geoext?!!
                 if (!layer.visibilityListener) {
-                    layer.on("change:visible", function(evt) {
+                    layer.on('change:visible', function(evt) {
                         if (evt.target.getVisible()) {
                             me.loadClusterFeatures(layer);
                         }
                     });
                 }
                 clusterLayers.push(layer);
-                if(layer.get('olStyle')){
+                if (layer.get('olStyle')) {
                     layer.setStyle(layer.get('olStyle'));
                 } else {
                     layer.setStyle(me.clusterStyleFuntion);
@@ -70,16 +70,16 @@ Ext.define('BasiGX.plugin.WfsCluster', {
 
     clusterStyleFuntion: function(feature) {
         var layerName;
-        if(feature.getId()){
-            layerName = feature.getId().split(".")[0];
+        if (feature.getId()) {
+            layerName = feature.getId().split('.')[0];
         } else {
             layerName = feature.get('layerName');
         }
 
         var layer = BasiGX.util.Layer.getLayerByName(layerName);
-        var count = feature.get('count'),
-            radius,
-            fontSize;
+        var count = feature.get('count');
+        var radius;
+        var fontSize;
 
         if (count > 10) {
             radius = 25;
@@ -118,7 +118,9 @@ Ext.define('BasiGX.plugin.WfsCluster', {
 
     /**
      * The wfscluster layerType expects a geoserver view which handles
-     * clustering with database methods
+     * clustering with database methods.
+     *
+     * @param {Array<ol.layer.Vector>} clusterLayers The layers to cluster.
      */
     loadClusterFeatures: function(clusterLayers) {
         var me = this;
@@ -144,25 +146,26 @@ Ext.define('BasiGX.plugin.WfsCluster', {
                     var featureType = layer.get('featureType');
                     var baseUrl = layer.get('url');
                     Ext.Ajax.request({
-                        url: baseUrl + "?service=WFS&" +
-                            "version=1.0.0&" +
-                            "request=GetFeature&" +
-                            "typeName=" + featureType + "&" +
-                            "outputFormat=application/json&" +
-                            "bbox=" + extent.join(",") + "&" +
-                            "viewParams=resolutioninm:" + factor + ";" +
-                            "bboxllx:" + extent[0] + ";" +
-                            "bboxlly:" + extent[1] + ";" +
-                            "bboxurx:" + extent[2] + ";" +
-                            "bboxury:" + extent[3],
-                        success: function(response){
+                        url: baseUrl + '?service=WFS&' +
+                            'version=1.0.0&' +
+                            'request=GetFeature&' +
+                            'typeName=' + featureType + '&' +
+                            'outputFormat=application/json&' +
+                            'bbox=' + extent.join(',') + '&' +
+                            'viewParams=resolutioninm:' + factor + ';' +
+                            'bboxllx:' + extent[0] + ';' +
+                            'bboxlly:' + extent[1] + ';' +
+                            'bboxurx:' + extent[2] + ';' +
+                            'bboxury:' + extent[3],
+                        success: function(response) {
                             var feats = response.responseText;
                             var f = new ol.format.GeoJSON().readFeatures(feats);
                             layer.getSource().clear();
                             layer.getSource().addFeatures(f);
                         },
-                        failure: function(){
-                            Ext.log.error("Failure on load of cluster features");
+                        failure: function() {
+                            var msg = 'Failure on load of cluster features';
+                            Ext.log.error(msg);
                         }
                     });
                 }
