@@ -15,10 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /* This file is basically a copy of
- * https://raw.githubusercontent.com/Viglino/ol3-ext/gh-pages/interaction/transforminteraction.js
- * by https://github.com/Viglino at commit 8c92ee5c9668f3451c807f33fa4d9933eac2cd22
+ * https://raw.githubusercontent.com/Viglino/ol3-ext/gh-pages/interaction/
+ * transforminteraction.js by https://github.com/Viglino at commit
+ * 8c92ee5c9668f3451c807f33fa4d9933eac2cd22
  * That code is licenced under the French Opensource BSD like CeCILL-B FREE
- * SOFTWARE LICENSE (http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html)
+ * SOFTWARE LICENSE
+ * (http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html)
  */
 /**
  * A wrapper class that loads the excellent `ol.interaction.Transform` into
@@ -59,23 +61,33 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
      *
      * @constructor
      * @extends {ol.interaction.Pointer}
-     * @fires select | rotatestart | rotating | rotateend | translatestart | translating | translateend | scalestart | scaling | scaleend
-     * @param {olx.interaction.TransformOptions}
-     *  - layers {Array<ol.Layer>} array of layers to transform,
-     *  - features {ol.Collection<ol.Feature>} collection of feature to transform,
-     *  - translateFeature {bool} Translate when click on feature
-     *  - translate {bool} Can translate the feature
-     *  - stretch {bool} can stretch the feature
-     *  - scale {bool} can scale the feature
-     *  - rotate {bool} can rotate the feature
-     *  - style {} list of ol.style for handles
-     *
+     * @fires select
+     * @fires rotatestart
+     * @fires rotating
+     * @fires rotateend
+     * @fires translatestart
+     * @fires translating
+     * @fires translateend
+     * @fires scalestart
+     * @fires scaling
+     * @fires scaleend
+     * @param {olx.interaction.TransformOptions} options These are the
+     *     possible keys:
+     *     - layers {Array<ol.Layer>} array of layers to transform,
+     *     - features {ol.Collection<ol.Feature>} collection of feature to
+     *       transform,
+     *     - translateFeature {bool} Translate when click on feature
+     *     - translate {bool} Can translate the feature
+     *     - stretch {bool} can stretch the feature
+     *     - scale {bool} can scale the feature
+     *     - rotate {bool} can rotate the feature
+     *     - style {} list of ol.style for handles
      */
     ol.interaction.Transform = function(options) {
         if (!options) {
             options = {};
         }
-        var self = this;
+        var me = this;
 
         ol.interaction.Pointer.call(this, {
             handleDownEvent: this.handleDownEvent_,
@@ -110,7 +122,7 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
 
         // TODO MJ: added option to keep a fixed scale when scaling at edges
         var fixedScaleRatio = false;
-        if(options.fixedScaleRatio !== undefined) {
+        if (options.fixedScaleRatio !== undefined) {
             fixedScaleRatio = options.fixedScaleRatio;
         }
         this.set('fixedScaleRatio', fixedScaleRatio);
@@ -130,11 +142,11 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
             name: 'Transform overlay',
             displayInLayerSwitcher: false,
             // Return the style according to the handle type
-            style: function (feature) {
+            style: function(feature) {
                 var key = (feature.get('handle') || 'default') +
                     (feature.get('constraint') || '') +
-                    (feature.get('option')||'');
-                return (self.style[key]);
+                    (feature.get('option') || '');
+                return (me.style[key]);
             }
         });
         // Change BasiGX:
@@ -166,8 +178,9 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
     };
 
     /**
-     * Remove the interaction from its current map, if any, and attach it to a new
-     * map, if any. Pass `null` to just remove the interaction from the current map.
+     * Remove the interaction from its current map, if any, and attach it to a
+     * new map, if any. Pass `null` to just remove the interaction from the
+     * current map.
      * @param {ol.Map} map Map.
      * @api stable
      */
@@ -187,7 +200,7 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
 
     /**
      * Activate/deactivate interaction
-     * @param {bool}
+     * @param {boolean} b Whether the interaction hall be active.
      * @api stable
      */
     ol.interaction.Transform.prototype.setActive = function(b) {
@@ -215,7 +228,7 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
             color: [255, 0, 0, 0.01]
         });
         var fill = new ol.style.Fill({
-            color:[255, 255, 255, 0.8]
+            color: [255, 255, 255, 0.8]
         });
         var circle = new ol.style.RegularShape({
             fill: fill,
@@ -229,14 +242,14 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
             stroke: stroke,
             radius: this.isTouch ? 16 : 8,
             points: 4,
-            angle: Math.PI/4
+            angle: Math.PI / 4
         });
         var smallpt = new ol.style.RegularShape({
             fill: fill,
             stroke: stroke,
             radius: this.isTouch ? 12 : 6,
             points: 4,
-            angle: Math.PI/4
+            angle: Math.PI / 4
         });
         var createStyle = function(passedImage, passedStroke, passedFill) {
             return [
@@ -267,7 +280,9 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
 
     /**
      * Set sketch style.
-     * @param {ol.Map} map Map.
+     * @param {String} style The style key.
+     * @param {ol.style.Style|Array<ol.style.Style>} olstyle The OpenLayers
+     *     style or array of styles.
      * @api stable
      */
     ol.interaction.Transform.prototype.setStyle = function(style, olstyle) {
@@ -277,7 +292,7 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
         if (olstyle instanceof Array) {
             this.style[style] = olstyle;
         } else {
-            this.style[style] = [ olstyle ];
+            this.style[style] = [olstyle];
         }
         for (var i = 0, num = this.style[style].length; i < num; i++) {
             var im = this.style[style][i].getImage();
@@ -305,8 +320,9 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
     /**
      * Get Feature at pixel
      *
-     * @param {ol.Pixel}
-     * @return {ol.feature}
+     * @param {ol.Pixel} pixel The pixe to get a feature for.
+     * @return {Object} An object that has the found feature at the key
+     *     `feature` and possibly more information.
      * @private
      */
     ol.interaction.Transform.prototype.getFeatureAtPixel_ = function(pixel) {
@@ -328,7 +344,7 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
                         feature: feature,
                         handle: feature.get('handle'),
                         constraint: feature.get('constraint'),
-                        option:feature.get('option')
+                        option: feature.get('option')
                     };
                 }
             }
@@ -351,7 +367,7 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
                     }
                 });
                 if (found) {
-                    return { feature: feature };
+                    return {feature: feature};
                 } else {
                     return null;
                 }
@@ -386,7 +402,7 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
                 this.overlayLayer_.getSource().addFeature(
                     new ol.Feature({
                         geometry: new ol.geom.Point(this.center_),
-                        handle:'rotate0'
+                        handle: 'rotate0'
                     })
                 );
                 ext = this.feature_.getGeometry().getExtent();
@@ -414,11 +430,11 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
                     for (var i = 0, toI = g.length - 1; i < toI; i++) {
                         f = new ol.Feature({
                             geometry: new ol.geom.Point([
-                                (g[i][0] + g[i+1][0]) / 2,
-                                (g[i][1] + g[i+1][1]) / 2
+                                (g[i][0] + g[i + 1][0]) / 2,
+                                (g[i][1] + g[i + 1][1]) / 2
                             ]),
                             handle: 'scale',
-                            constraint: i % 2 ? "h" : "v",
+                            constraint: i % 2 ? 'h' : 'v',
                             option: i
                         });
                         features.push(f);
@@ -467,10 +483,11 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
      */
     ol.interaction.Transform.prototype.select = function(feature) {
         this.feature_ = feature;
-        this.ispt_ = this.feature_ ? (this.feature_.getGeometry().getType() === "Point") : false;
+        var geomType = this.feature_ && this.feature_.getGeometry().getType();
+        this.ispt_ = geomType ? (geomType === 'Point') : false;
         this.drawSketch_();
         this.dispatchEvent({
-            type:'select',
+            type: 'select',
             feature: this.feature_
         });
     };
@@ -482,8 +499,11 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
     ol.interaction.Transform.prototype.handleDownEvent_ = function(evt) {
         var sel = this.getFeatureAtPixel_(evt.pixel);
         var feature = sel.feature;
-        if (this.feature_ && this.feature_ === feature &&
-            ((this.ispt_ && this.get('translate')) || this.get('translateFeature'))) {
+        if (this.feature_ && this.feature_ === feature
+            && (
+                (this.ispt_ && this.get('translate'))
+                || this.get('translateFeature')
+            )) {
             sel.handle = 'translate';
         }
         if (sel.handle) {
@@ -494,7 +514,9 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
             this.coordinate_ = evt.coordinate;
             this.pixel_ = evt.pixel;
             this.geom_ = this.feature_.getGeometry().clone();
-            this.extent_ = (ol.geom.Polygon.fromExtent(this.geom_.getExtent())).getCoordinates()[0];
+            var geomExtent = this.geom_.getExtent();
+            var extentPoly = ol.geom.Polygon.fromExtent(geomExtent);
+            this.extent_ = extentPoly.getCoordinates()[0];
             this.center_ = ol.extent.getCenter(this.geom_.getExtent());
             this.angle_ = Math.atan2(
                 this.center_[1] - evt.coordinate[1],
@@ -510,10 +532,11 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
             return true;
         } else {
             this.feature_ = feature;
-            this.ispt_ = this.feature_ ? (this.feature_.getGeometry().getType() === "Point") : false;
+            var geomType = feature && feature.getGeometry().getType();
+            this.ispt_ = geomType ? (geomType === 'Point') : false;
             this.drawSketch_();
             this.dispatchEvent({
-                type:'select',
+                type: 'select',
                 feature: this.feature_,
                 pixel: evt.pixel,
                 coordinate: evt.coordinate
@@ -528,97 +551,105 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
      */
     ol.interaction.Transform.prototype.handleDragEvent_ = function(evt) {
         var geometry;
+        var deltaX;
+        var deltaY;
         switch (this.mode_) {
-            case 'rotate':
-                var a = Math.atan2(this.center_[1]-evt.coordinate[1], this.center_[0]-evt.coordinate[0]);
-                if (!this.ispt) {
-                    geometry = this.geom_.clone();
-                    geometry.rotate(a - this.angle_, this.center_);
+        case 'rotate':
+            deltaX = this.center_[0] - evt.coordinate[0];
+            deltaY = this.center_[1] - evt.coordinate[1];
+            var a = Math.atan2(deltaY, deltaX);
+            if (!this.ispt) {
+                geometry = this.geom_.clone();
+                geometry.rotate(a - this.angle_, this.center_);
 
-                    this.feature_.setGeometry(geometry);
-                }
-                this.drawSketch_(true);
-                this.dispatchEvent({
-                    type:'rotating',
-                    feature: this.feature_,
-                    angle: a - this.angle_,
-                    pixel: evt.pixel,
-                    coordinate: evt.coordinate
-                });
-                break;
+                this.feature_.setGeometry(geometry);
+            }
+            this.drawSketch_(true);
+            this.dispatchEvent({
+                type: 'rotating',
+                feature: this.feature_,
+                angle: a - this.angle_,
+                pixel: evt.pixel,
+                coordinate: evt.coordinate
+            });
+            break;
 
-            case 'translate':
-                var deltaX = evt.coordinate[0] - this.coordinate_[0];
-                var deltaY = evt.coordinate[1] - this.coordinate_[1];
+        case 'translate':
+            deltaX = evt.coordinate[0] - this.coordinate_[0];
+            deltaY = evt.coordinate[1] - this.coordinate_[1];
 
-                this.feature_.getGeometry().translate(deltaX, deltaY);
-                this.handles_.forEach(function(f) {
-                    f.getGeometry().translate(deltaX, deltaY);
-                });
+            this.feature_.getGeometry().translate(deltaX, deltaY);
+            this.handles_.forEach(function(f) {
+                f.getGeometry().translate(deltaX, deltaY);
+            });
 
-                this.coordinate_ = evt.coordinate;
-                this.dispatchEvent({
-                    type:'translating',
-                    feature: this.feature_,
-                    delta: [deltaX, deltaY],
-                    pixel: evt.pixel,
-                    coordinate: evt.coordinate
-                });
-                break;
+            this.coordinate_ = evt.coordinate;
+            this.dispatchEvent({
+                type: 'translating',
+                feature: this.feature_,
+                delta: [deltaX, deltaY],
+                pixel: evt.pixel,
+                coordinate: evt.coordinate
+            });
+            break;
 
-            case 'scale':
-                var center = this.center_;
-                if (evt.originalEvent.metaKey || evt.originalEvent.ctrlKey) {
-                    center = this.extent_[(Number(this.opt_)+2)%4];
-                }
+        case 'scale':
+            var center = this.center_;
+            if (evt.originalEvent.metaKey || evt.originalEvent.ctrlKey) {
+                center = this.extent_[(Number(this.opt_) + 2) % 4];
+            }
 
-                var scx = (evt.coordinate[0] - center[0]) / (this.coordinate_[0] - center[0]);
-                var scy = (evt.coordinate[1] - center[1]) / (this.coordinate_[1] - center[1]);
+            var x1 = evt.coordinate[0] - center[0];
+            var x2 = this.coordinate_[0] - center[0];
+            var scx = x1 / x2;
+            var y1 = evt.coordinate[1] - center[1];
+            var y2 = this.coordinate_[1] - center[1];
+            var scy = y1 / y2;
 
                 // TODO added MJ, fixedScaleRatio for scaling
-                var fixedScaleRatio = this.get('fixedScaleRatio');
-                if (this.constraint_) {
+            var fixedScaleRatio = this.get('fixedScaleRatio');
+            if (this.constraint_) {
                     // TODO added MJ, fixedScaleRatio for scaling
-                    if (this.constraint_ === "h") {
-                        scx = fixedScaleRatio ? scy : 1;
-                    } else {
-                        scy = fixedScaleRatio ? scx : 1;
-                    }
+                if (this.constraint_ === 'h') {
+                    scx = fixedScaleRatio ? scy : 1;
                 } else {
-                    if (evt.originalEvent.shiftKey || fixedScaleRatio) {
-                        scx = scy = Math.min(scx, scy);
-                    }
+                    scy = fixedScaleRatio ? scx : 1;
+                }
+            } else {
+                if (evt.originalEvent.shiftKey || fixedScaleRatio) {
+                    scx = scy = Math.min(scx, scy);
+                }
+            }
+
+            geometry = this.geom_.clone();
+            geometry.applyTransform(function(g1, g2, dim) {
+                if (dim < 2) {
+                    return g2;
                 }
 
-                geometry = this.geom_.clone();
-                geometry.applyTransform(function(g1, g2, dim) {
-                    if (dim < 2) {
-                        return g2;
+                for (var i = 0; i < g1.length; i += dim) {
+                    if (scx !== 1) {
+                        g2[i] = center[0] + (g1[i] - center[0]) * scx;
                     }
-
-                    for (var i = 0; i < g1.length; i+=dim) {
-                        if (scx !== 1) {
-                            g2[i] = center[0] + (g1[i]-center[0])*scx;
-                        }
-                        if (scy !== 1) {
-                            g2[i+1] = center[1] + (g1[i+1]-center[1])*scy;
-                        }
+                    if (scy !== 1) {
+                        g2[i + 1] = center[1] + (g1[i + 1] - center[1]) * scy;
                     }
-                    return g2;
-                });
-                this.feature_.setGeometry(geometry);
-                this.drawSketch_();
-                this.dispatchEvent({
-                    type:'scaling',
-                    feature: this.feature_,
-                    scale: [scx, scy],
-                    pixel: evt.pixel,
-                    coordinate: evt.coordinate
-                });
-                break;
+                }
+                return g2;
+            });
+            this.feature_.setGeometry(geometry);
+            this.drawSketch_();
+            this.dispatchEvent({
+                type: 'scaling',
+                feature: this.feature_,
+                scale: [scx, scy],
+                pixel: evt.pixel,
+                coordinate: evt.coordinate
+            });
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
     };
 
@@ -633,7 +664,7 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
             var element = map.getTargetElement();
             if (sel.feature) {
                 var c;
-                if(sel.handle) {
+                if (sel.handle) {
                     var key = (sel.handle || 'default') +
                         (sel.constraint || '') +
                         (sel.option || '');
