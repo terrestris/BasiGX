@@ -24,11 +24,14 @@
  *         xtype: 'basigx-search-wfs'
  *     }
  *
+ * TODO This class has a lot in common with both #NominatimSearch and
+ *      the #OverpassSearch. We should factor out shared code.
+ *
  * @class BasiGX.view.container.WfsSearch
  */
-Ext.define("BasiGX.view.container.WfsSearch", {
-    extend: "Ext.container.Container",
-    xtype: "basigx-search-wfs",
+Ext.define('BasiGX.view.container.WfsSearch', {
+    extend: 'Ext.container.Container',
+    xtype: 'basigx-search-wfs',
 
     requires: [
         'GeoExt.data.store.Features',
@@ -87,7 +90,9 @@ Ext.define("BasiGX.view.container.WfsSearch", {
         groupHeaderTpl: '{name}',
 
         /**
+         * An `ol.style.Style` for search result features.
          *
+         * @type {ol.style.Style}
          */
         searchResultFeatureStyle: new ol.style.Style({
             image: new ol.style.Circle({
@@ -110,7 +115,11 @@ Ext.define("BasiGX.view.container.WfsSearch", {
         }),
 
         /**
+         * A function generating an `ol.style.Style` for highlighting features.
          *
+         * @param {Number} radius The radius of the circle.
+         * @param {String} text The text for the style.
+         * @return {ol.style.Style} The generated style.
          */
         searchResultHighlightFeatureStyleFn: function(radius, text) {
             return new ol.style.Style({
@@ -134,7 +143,9 @@ Ext.define("BasiGX.view.container.WfsSearch", {
         },
 
         /**
+         * An `ol.style.Style` for selected search result features.
          *
+         * @type {ol.style.Style}
          */
         searchResultSelectFeatureStyle: new ol.style.Style({
             image: new ol.style.Circle({
@@ -156,9 +167,16 @@ Ext.define("BasiGX.view.container.WfsSearch", {
             })
         }),
 
-       /**
-        *
-        */
+        /**
+         * Returns an array of styles.
+         *
+         * TODO Are we accessing aprvate property here? `getSource().distance_`
+         *      This should be changed.
+         *
+         * @param {Number} amount The amount.
+         * @param {Number} radius The radius.
+         * @return {Array<ol.style.Style>} The generated styles.
+         */
         clusterStyleFn: function(amount, radius) {
             // set maxradius
             var maxRadius = this.clusterLayer.getSource().distance_ / 2;
@@ -185,7 +203,10 @@ Ext.define("BasiGX.view.container.WfsSearch", {
         },
 
         /**
+         * Whether we want to highlight the associated feature in the map when
+         * we hover over the row for the feature in the grid.
          *
+         * @type {Boolean}
          */
         highLightFeatureOnHoverInGrid: true
     },
@@ -255,7 +276,7 @@ Ext.define("BasiGX.view.container.WfsSearch", {
         if (me.clusterResults && !me.clusterLayer) {
             var clusterSource = new ol.source.Cluster({
                 distance: 40,
-                source: me.searchResultVectorLayer.getSource()//new ol.source.Vector()
+                source: me.searchResultVectorLayer.getSource()
             });
 
             me.clusterLayer = new ol.layer.Vector({
@@ -362,29 +383,32 @@ Ext.define("BasiGX.view.container.WfsSearch", {
     },
 
     /**
+     * Bound to the `change`-event of the textfield.
      *
+     * @param {Ext.form.field.Text} textfield The textfield in which one enters
+     *     the query.
      */
     handleKeyDown: function(textfield) {
-        var me = textfield.up('basigx-search-wfs'),
-            val = textfield.getValue();
+        var wfsSearchCont = textfield.up('basigx-search-wfs');
+        var val = textfield.getValue();
 
-        if (val.length < me.getMinSearchTextChars()) {
+        if (val.length < wfsSearchCont.getMinSearchTextChars()) {
             return;
         }
 
         // set the searchterm on component
-        me.searchTerm = val;
+        wfsSearchCont.searchTerm = val;
 
-        if (me.typeDelayTask) {
-            me.typeDelayTask.cancel();
+        if (wfsSearchCont.typeDelayTask) {
+            wfsSearchCont.typeDelayTask.cancel();
         }
-        me.typeDelayTask = new Ext.util.DelayedTask(function(){
+        wfsSearchCont.typeDelayTask = new Ext.util.DelayedTask(function() {
             // reset grid from old values
-            me.resetGrid();
+            wfsSearchCont.resetGrid();
             // prepare the describeFeatureType for all given layers
-            me.describeFeatureTypes();
+            wfsSearchCont.describeFeatureTypes();
         });
-        me.typeDelayTask.delay(me.getTypeDelay());
+        wfsSearchCont.typeDelayTask.delay(wfsSearchCont.getTypeDelay());
 
     },
 
@@ -409,12 +433,13 @@ Ext.define("BasiGX.view.container.WfsSearch", {
     },
 
     /**
-     *
+     * Issues a `DescribeFeatureType` request, so that we know details about the
+     * Featuretyoe we are working on.
      */
     describeFeatureTypes: function() {
-        var me = this,
-            typeNames = [],
-            featureTypes;
+        var me = this;
+        var typeNames = [];
+        var featureTypes;
 
         Ext.each(me.getLayers(), function(l) {
             if (l.getSource().getParams) {
@@ -423,44 +448,48 @@ Ext.define("BasiGX.view.container.WfsSearch", {
         });
 
         var describeFeatureTypeParams = {
-            REQUEST: "DescribeFeatureType",
-            SERVICE: "WFS",
-            VERSION: "1.1.0",
-            OUTPUTFORMAT: "application/json",
+            REQUEST: 'DescribeFeatureType',
+            SERVICE: 'WFS',
+            VERSION: '1.1.0',
+            OUTPUTFORMAT: 'application/json',
             TYPENAME: typeNames.toString()
         };
 
-        var url = me.getWfsServerUrl() + "?";
+        var url = me.getWfsServerUrl() + '?';
         Ext.iterate(describeFeatureTypeParams, function(k, v) {
-            url += k + "=" + v + "&";
+            url += k + '=' + v + '&';
         });
 
         me.setLoading(true);
 
         Ext.Ajax.request({
             url: url,
-            success: function(response){
+            success: function(response) {
                 me.setLoading(false);
-                if(Ext.isString(response.responseText)) {
+                if (Ext.isString(response.responseText)) {
                     featureTypes = Ext.decode(response.responseText);
-                } else if(Ext.isObject(response.responseText)) {
+                } else if (Ext.isObject(response.responseText)) {
                     featureTypes = response.responseText;
                 } else {
-                    Ext.log.error("Error! Could not parse " +
-                        "describe featuretype response!");
+                    Ext.log.error('Error! Could not parse ' +
+                        'describe featuretype response!');
                 }
                 me.fireEvent('describeFeatureTypeResponse', featureTypes);
             },
             failure: function(response) {
                 me.setLoading(false);
-                Ext.log.error("Error on describe featuretype request:",
+                Ext.log.error('Error on describe featuretype request:',
                     response);
             }
         });
     },
 
     /**
+     * Gets the features from the Featuretype, bound to our own event
+     * `describeFeatureTypeResponse`.
      *
+     * @param {Object} resp The XHR response from the DescribeFeatureType
+     *     call.
      */
     getFeatures: function(resp) {
         var me = this;
@@ -476,32 +505,35 @@ Ext.define("BasiGX.view.container.WfsSearch", {
             url: url,
             method: 'POST',
             xmlData: xml,
-            success: function(response){
+            success: function(response) {
                 me.setLoading(false);
-                if(Ext.isString(response.responseText)) {
+                if (Ext.isString(response.responseText)) {
                     features = Ext.decode(response.responseText).features;
-                } else if(Ext.isObject(response.responseText)) {
+                } else if (Ext.isObject(response.responseText)) {
                     features = response.responseText.features;
                 } else {
-                    Ext.log.error("Error! Could not parse " +
-                        "GetFeature response!");
+                    Ext.log.error('Error! Could not parse ' +
+                        'GetFeature response!');
                 }
                 me.fireEvent('getFeatureResponse', features);
             },
             failure: function(response) {
                 me.setLoading(false);
-                Ext.log.error("Error on GetFeature request:",
+                Ext.log.error('Error on GetFeature request:',
                     response);
             }
         });
     },
 
     /**
-     * Method removes unwanted dataTypes
+     * This method removes unwanted dataTypes from the passed ones.
+     *
+     * @param {Array<Object>} featureTypes The featuretypes.
+     * @return {Array<Object>} The wanted typenames.
      */
     cleanUpFeatureDataTypes: function(featureTypes) {
-        var me = this,
-            cleanedFeatureType = [];
+        var me = this;
+        var cleanedFeatureType = [];
         Ext.each(featureTypes, function(ft, index) {
             cleanedFeatureType.push({
                 typeName: ft.typeName,
@@ -511,8 +543,8 @@ Ext.define("BasiGX.view.container.WfsSearch", {
             Ext.each(ft.properties, function(prop) {
                 if (Ext.Array.contains(
                     me.getAllowedFeatureTypeDataTypes(), prop.type) &&
-                    prop.name.indexOf(" ") < 0) {
-                        cleanedFeatureType[index].properties.push(prop);
+                    prop.name.indexOf(' ') < 0) {
+                    cleanedFeatureType[index].properties.push(prop);
                 }
             });
         });
@@ -520,27 +552,37 @@ Ext.define("BasiGX.view.container.WfsSearch", {
     },
 
     /**
+     * Sets up a XML as string for a 'wfs:GetFeature'-operation.
      *
+     * @param {Array<Object>} featureTypes The featuretypes.
+     * @return {String} The XML.
      */
     setupXmlPostBody: function(featureTypes) {
         var me = this;
-        var xml =
-            '<wfs:GetFeature service="WFS" version="1.1.0" ' +
-              'outputFormat="application/json" ' +
-              'xmlns:wfs="http://www.opengis.net/wfs" ' +
-              'xmlns:ogc="http://www.opengis.net/ogc" ' +
-              'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
-              'xsi:schemaLocation="http://www.opengis.net/wfs ' +
-              'http://schemas.opengis.net/wfs/1.0.0/WFS-basic.xsd">';
+        var xml = '' +
+            '<wfs:GetFeature' +
+            ' service="WFS" version="1.1.0"' +
+            ' outputFormat="application/json"' +
+            ' xmlns:wfs="http://www.opengis.net/wfs"' +
+            ' xmlns:ogc="http://www.opengis.net/ogc"' +
+            ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' +
+            ' xsi:schemaLocation="http://www.opengis.net/wfs' +
+            ' http://schemas.opengis.net/wfs/1.0.0/WFS-basic.xsd">';
 
         Ext.each(featureTypes, function(ft) {
             Ext.each(ft.properties, function(prop) {
-                xml +=
+                xml += '' +
                     '<wfs:Query typeName="' + ft.typeName + '">' +
                         '<ogc:Filter>' +
-                            '<ogc:PropertyIsLike wildCard="*" singleChar="." escape="\\" matchCase="false">' +
-                                '<ogc:PropertyName>' + prop.name + '</ogc:PropertyName>' +
-                                '<ogc:Literal>*' + me.searchTerm + '*</ogc:Literal>' +
+                            '<ogc:PropertyIsLike' +
+                            ' wildCard="*" singleChar="." escape="\\"' +
+                            ' matchCase="false">' +
+                                '<ogc:PropertyName>' +
+                                    prop.name +
+                                '</ogc:PropertyName>' +
+                                '<ogc:Literal>' +
+                                    '*' + me.searchTerm + '*' +
+                                '</ogc:Literal>' +
                             '</ogc:PropertyIsLike>' +
                         '</ogc:Filter>' +
                     '</wfs:Query>';
@@ -553,25 +595,27 @@ Ext.define("BasiGX.view.container.WfsSearch", {
     },
 
     /**
+     * Show the search results in the grid.
      *
+     * @param {Array<ol.Feature>} features The features.
      */
     showSearchResults: function(features) {
+        var me = this;
+        var grid = me.down('grid[name=searchresultgrid]');
+        var parser = new ol.format.GeoJSON();
 
-        var me = this,
-            grid = me.down('grid[name=searchresultgrid]'),
-            parser = new ol.format.GeoJSON();
-
-        if(features.length > 0){
+        if (features.length > 0) {
             grid.show();
         }
 
+        var searchTerm = me.searchTerm;
         Ext.each(features, function(feature) {
-            var featuretype = feature.id.split(".")[0];
+            var featuretype = feature.id.split('.')[0];
             var displayfield;
 
             // find the matching value in order to display it
             Ext.iterate(feature.properties, function(k, v) {
-                if (v && v.toString().toLowerCase().indexOf(me.searchTerm) > -1) {
+                if (v && v.toString().toLowerCase().indexOf(searchTerm) > -1) {
                     displayfield = v;
                     return false;
                 }
@@ -588,22 +632,25 @@ Ext.define("BasiGX.view.container.WfsSearch", {
         });
 
         var featureExtent = me.searchResultVectorLayer.getSource().getExtent();
-        if(!Ext.Array.contains(featureExtent, Infinity)){
+        if (!Ext.Array.contains(featureExtent, Infinity)) {
             me.zoomToExtent(featureExtent);
         }
     },
 
     /**
      * Works with extent or geom.
+     *
+     * @param {ol.Extent|ol.geom.SimpleGeometry} extent The extent or geoemetry
+     *     to zoom to.
      */
-    zoomToExtent: function(extent){
+    zoomToExtent: function(extent) {
         var me = this;
         var olView = me.map.getView();
         var pan = ol.animation.pan({
             source: olView.getCenter()
         });
         var zoom = ol.animation.zoom({
-           resolution: olView.getResolution()
+            resolution: olView.getResolution()
         });
         me.map.beforeRender(pan, zoom);
 
@@ -611,9 +658,12 @@ Ext.define("BasiGX.view.container.WfsSearch", {
     },
 
     /**
-     * update the symbolizer in the grid
+     * Update the symbolizer in the grid.
+     *
+     * @param {HTMLElement} item The HTML-element where the renderer lives in.
+     * @param {ol.style.Style} style The new style for the renderer.
      */
-    updateRenderer: function(item, style){
+    updateRenderer: function(item, style) {
         var renderer = Ext.getCmp(
             Ext.query('div[id^=gx_renderer', true, item)[0].id);
         var src = renderer.map.getLayers().getArray()[0].getSource();
@@ -621,10 +671,16 @@ Ext.define("BasiGX.view.container.WfsSearch", {
     },
 
     /**
+     * Highlights the feature.
      *
+     * Bound to the `itemmouseenter`-event on the grid.
+     *
+     * @param {Ext.view.View} tableView The tableView / grid.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} item The item's element.
      */
     highlightFeature: function(tableView, record, item) {
-        if(this.enterEventRec === record){
+        if (this.enterEventRec === record) {
             return;
         }
         var me = this;
@@ -661,10 +717,16 @@ Ext.define("BasiGX.view.container.WfsSearch", {
     },
 
     /**
+     * Unhighlights a previously highlighted feature.
      *
+     * Bound to the `itemmouseleave`-event on the grid.
+     *
+     * @param {Ext.view.View} tableView The tableView / grid.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} item The item's element.
      */
     unhighlightFeature: function(tableView, record, item) {
-        if(this.leaveEventRec === record){
+        if (this.leaveEventRec === record) {
             return;
         }
         this.leaveEventRec = record;
@@ -679,7 +741,13 @@ Ext.define("BasiGX.view.container.WfsSearch", {
     },
 
     /**
+     * Highlights a selected feature.
      *
+     * Bound to the `itemclick`-event on the grid.
+     *
+     * @param {Ext.view.View} tableView The tableView / grid.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} item The item's element.
      */
     highlightSelectedFeature: function(tableView, record, item) {
         record.olObject.setStyle(this.getSearchResultSelectFeatureStyle());
@@ -689,9 +757,12 @@ Ext.define("BasiGX.view.container.WfsSearch", {
     },
 
     /**
+     * Returns the cluster feature from the given `ol.Feature`.
      *
+     * @param {ol.Feature} feature The feature to get the cluster feature from.
+     * @return {ol.Feature} The cluster feature.
      */
-    getClusterFeatureFromFeature: function(feature){
+    getClusterFeatureFromFeature: function(feature) {
         var me = this;
         var clusterFeature;
         var clusterFeatures = me.clusterLayer.getSource().getFeatures();
