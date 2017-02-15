@@ -75,6 +75,7 @@ Ext.define('BasiGX.plugin.AccessibleTitle', {
      * new #a11yHeadingLevel.
      *
      * @param {Number} newLevel The level of the heading, e.g. `4` for `<h4>`.
+     * @return {Number} The new level.
      */
     applyA11yHeadingLevel: function(newLevel) {
         var me = this;
@@ -131,12 +132,12 @@ Ext.define('BasiGX.plugin.AccessibleTitle', {
      *
      * @return {HTMLElement} The element into which we will add our HTML.
      */
-    getHeaderParent: function(){
+    getHeaderParent: function() {
         var cmp = this.getCmp();
         var cmpParts = [cmp.header, cmp.body, cmp];
         var headerParent;
         Ext.each(cmpParts, function(part) {
-            if(!headerParent && part && part.el && part.el.dom) {
+            if (!headerParent && part && part.el && part.el.dom) {
                 headerParent = part.el.dom;
             }
         });
@@ -146,7 +147,7 @@ Ext.define('BasiGX.plugin.AccessibleTitle', {
     /**
      * Returns a specification to be used with `Ext.DomHelper`.
      *
-     * @param {Number} newLevel The level of the heading, e.g. `4` for `<h4>`.
+     * @param {Number} level The level of the heading, e.g. `4` for `<h4>`.
      * @return {Object} An appropriate `Ext.DomHelper` specification for the
      *     passed level.
      */
