@@ -126,10 +126,10 @@ Ext.define('BasiGX.util.CSRF', {
          *     cannot be found.
          */
         getHeader: function() {
-            var me = BasiGX.util.CSRF;
+            var staticMe = BasiGX.util.CSRF;
             var header = {};
-            var headerName = me.getKey();
-            var headerVal = me.getValue();
+            var headerName = staticMe.getKey();
+            var headerVal = staticMe.getValue();
 
             if (headerName && headerVal) {
                 header[headerName] = headerVal;
@@ -148,9 +148,9 @@ Ext.define('BasiGX.util.CSRF', {
          *     meta fields cannot be found.
          */
         getDomHelperField: function() {
-            var me = BasiGX.util.CSRF;
-            var name = me.getParamName();
-            var value = me.getValue();
+            var staticMe = BasiGX.util.CSRF;
+            var name = staticMe.getParamName();
+            var value = staticMe.getValue();
             var field = {
                 tag: 'input',
                 type: 'hidden'
