@@ -16,7 +16,7 @@ describe('BasiGX.view.container.Redlining', function() {
         it('is defined', function() {
             expect(BasiGX.view.container.Redlining).to.not.be(undefined);
         });
-        it('can be instantiated', function(){
+        it('can be instantiated', function() {
             expect(redliningContainer).to.be.a(BasiGX.view.container.Redlining);
         });
     });
@@ -49,7 +49,7 @@ describe('BasiGX.view.container.Redlining', function() {
                         fill: new ol.style.Fill()
                     }
                 ),
-                styleFunction: function(){}
+                styleFunction: function() {}
             };
             redliningContainer.setState(customState);
             var state = redliningContainer.getState();
