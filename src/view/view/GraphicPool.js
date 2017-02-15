@@ -21,9 +21,9 @@
  *
  * @class BasiGX.view.view.GraphicPool
  */
-Ext.define("BasiGX.view.view.GraphicPool", {
-    extend: "Ext.view.View",
-    xtype: "basigx-view-graphicpool",
+Ext.define('BasiGX.view.view.GraphicPool', {
+    extend: 'Ext.view.View',
+    xtype: 'basigx-view-graphicpool',
 
     requires: [
         'Ext.data.Store',
@@ -85,7 +85,7 @@ Ext.define("BasiGX.view.view.GraphicPool", {
     /**
      *
      */
-    initComponent : function() {
+    initComponent: function() {
         var me = this;
         var viewModel = me.getViewModel();
         var emptyText = viewModel.get('emptyStoreMsg');
@@ -114,12 +114,12 @@ Ext.define("BasiGX.view.view.GraphicPool", {
 
         me.tpl = [
             '<tpl for=".">',
-                '<div class="thumb-wrap">',
-                    '<div class="thumb">',
-                        '<img src="' + srcUrl + '{id}"/>',
-                    '</div>',
-                    '<span>{fileName}</span>',
-                '</div>',
+            '<div class="thumb-wrap">',
+            '<div class="thumb">',
+            '<img src="' + srcUrl + '{id}"/>',
+            '</div>',
+            '<span>{fileName}</span>',
+            '</div>',
             '</tpl>'
         ];
 
