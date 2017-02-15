@@ -19,13 +19,13 @@
  * @class BasiGX.view.form.field.GazetteerCombo
  *
  */
-Ext.define('BasiGX.view.form.field.GazetteerCombo',{
+Ext.define('BasiGX.view.form.field.GazetteerCombo', {
     extend: 'Ext.form.field.ComboBox',
 
     xtype: 'basigx_form_field_gazetteercombo',
 
     requires: [
-         'BasiGX.util.Map'
+        'BasiGX.util.Map'
     ],
 
     store: [],
@@ -33,7 +33,7 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo',{
     /**
      * Initializes the gazetteer combo component.
      */
-    initComponent: function(){
+    initComponent: function() {
         var me = this;
 
         me.callParent(arguments);
@@ -45,7 +45,7 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo',{
     /**
      *
      */
-    onBoxReady: function(){
+    onBoxReady: function() {
         var me = this;
         me.nav = Ext.create('Ext.util.KeyNav', me.el, {
             esc: me.clearValue,
@@ -54,22 +54,23 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo',{
     },
 
     /**
-     * @param combo
-     * @param newValue
+     * When the combo value changes, do a ne w Gazetteer search.
+     *
+     * @param {BasiGX.view.form.field.GazetteerCombo} combo The combo.
+     * @param {String} newValue The new selected value.
      */
-    onComboValueChange: function(combo, newValue){
-
+    onComboValueChange: function(combo, newValue) {
         var me = this;
         var gazetteerGrid =
             Ext.ComponentQuery.query('basigx_grid_gazetteergrid')[0];
 
-        if(newValue){
-            if(gazetteerGrid) {
+        if (newValue) {
+            if (gazetteerGrid) {
                 gazetteerGrid.show(combo);
             }
             me.doGazetteerSearch(newValue);
         } else {
-            if(gazetteerGrid) {
+            if (gazetteerGrid) {
                 gazetteerGrid.getEl().slideOut('t', {
                     duration: 250,
                     callback: gazetteerGrid.onGazetteerGridSlideOut,
@@ -80,11 +81,14 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo',{
     },
 
     /**
-     * @param value
+     * Modifies and then loads the store of the `basigx_grid_gazetteergrid`.
+     *
+     * @param {String} value The new selected value.
      */
-    doGazetteerSearch: function(value){
-        var gazetteerGrid =
-            Ext.ComponentQuery.query('basigx_grid_gazetteergrid')[0];
+    doGazetteerSearch: function(value) {
+        var gazetteerGrid = Ext.ComponentQuery.query(
+            'basigx_grid_gazetteergrid'
+        )[0];
         var gazetteerStore = gazetteerGrid.getStore();
         var checkbox = gazetteerGrid.down('checkbox[name=limitcheckbox]');
         var limitToBBox = checkbox.getValue();
@@ -95,7 +99,7 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo',{
 
         gazetteerStore.getProxy().setExtraParam('q', value);
 
-        if(limitToBBox){
+        if (limitToBBox) {
             var map = BasiGX.util.Map.getMapComponent().getMap();
             var olView = map.getView();
             var projection = olView.getProjection().getCode();
