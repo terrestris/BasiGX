@@ -30,8 +30,8 @@
  * instances of subclasses of Ext.container.Container qualifiy as candidates for
  * help.
  *
- * Based on code from Animal and timo.nuros at
- * http://www.sencha.com/forum/showthread.php?63272-Implementing-a-context-sensitive-help
+ * Based on code from Animal and timo.nuros at http://www.sencha.com/forum/showt
+ * hread.php?63272-Implementing-a-context-sensitive-help
  *
  * @class BasiGX.ux.ContextSensitiveHelp
  */
@@ -42,7 +42,7 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
          * The base URL of the help HTML which contains named anchors as defined
          * in #existingHelpKeys.
          */
-        helpUrl: "../help/index.html",
+        helpUrl: '../help/index.html',
 
         /**
          * A list of all named links/anchors in the HTML file #helpUrl. Remember
@@ -82,20 +82,31 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
 
         /* end i18n */
 
-        getCmpFromEl: function(el){
+        /**
+         * Return a component for the passed element `el`.
+         *
+         * TODO does this actually do what it tells me it does?
+         *
+         * @param {HTMLElement} el The HTML element.
+         * @return {Ext.Component} The component.
+         */
+        getCmpFromEl: function(el) {
             var cmp = Ext.getCmp(el.id);
-            if(!cmp){
+            if (!cmp) {
                 return this.getCmpFromEl(el.parentNode);
             } else {
-              return cmp;
+                return cmp;
             }
         },
 
         /**
-         * Returns the lowest level Component at the specified point.
+         * Returns the lowest level component at the specified point.
          *
-         * @param {Ext.util.Point/Number} p The Point at which to find the
-         *     associated Component, or the X coordinate of the point.
+         * TODO Double check whether we can really pass only a x-coordinate, I
+         *      doubt that right now.
+         *
+         * @param {Ext.util.Point|Number} point The point at which to find the
+         *     associated component, or the x coordinate of the point.
          * @return {Ext.Component} The Component at the specified point.
          */
         getComponentFromPoint: function(point) {
@@ -105,17 +116,24 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
         },
 
         /**
+         * Bubbles up the component hierarchy until it finds one component for
+         * which we have a help.
          *
+         * @param {Ext.component} component The component from which we'll
+         *     bubble up until we find one that we have help for.
+         * @return {Ext.component} The found component.
          */
         bubbleToExistingHelp: function(component) {
-            var helpClass = BasiGX.ux.ContextSensitiveHelp,
-                existingHelpKeys = helpClass.existingHelpKeys,
-                foundHelp,
-                parent,
-                xtypeHasHelp = Ext.Array.contains(existingHelpKeys,
-                    component.getXType()),
-                compHasHelpKey = Ext.Array.contains(existingHelpKeys,
-                    component.helpKey);
+            var helpClass = BasiGX.ux.ContextSensitiveHelp;
+            var existingHelpKeys = helpClass.existingHelpKeys;
+            var foundHelp;
+            var parent;
+            var xtypeHasHelp = Ext.Array.contains(
+                existingHelpKeys, component.getXType()
+            );
+            var compHasHelpKey = Ext.Array.contains(
+                existingHelpKeys, component.helpKey
+            );
 
             if (xtypeHasHelp || compHasHelpKey) {
                 foundHelp = compHasHelpKey ?
@@ -130,24 +148,29 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
         },
 
         /**
+         * Determines the component at the passed pointb that has help info
+         * available, and opens an appropriate URL in a new window if possible.
          *
+         * @param {Ext.util.Point} point The point at which the pointer rests.
+         * @return {Boolean} Always true. We can probably remove this return
+         *     value.
          */
         displayHelpForCoordinates: function(point) {
-            var helpClass = BasiGX.ux.ContextSensitiveHelp,
-                component = helpClass.getComponentFromPoint(point),
-                helpKey = helpClass.bubbleToExistingHelp(component),
-                helpUrl = helpClass.helpUrl,
-                win;
+            var helpClass = BasiGX.ux.ContextSensitiveHelp;
+            var component = helpClass.getComponentFromPoint(point);
+            var helpKey = helpClass.bubbleToExistingHelp(component);
+            var helpUrl = helpClass.helpUrl;
+            var win;
 
             if (helpKey) {
-                helpUrl += "#" + helpKey;
+                helpUrl += '#' + helpKey;
             }
-            win = window.open(helpUrl, "ContextSensitiveHelp",
-                "width=800,height=550,scrollbars=yes,left=200,top=150," +
-                "resizable=yes,location=yes,menubar=no,status=no," +
-                "dependent=yes");
+            win = window.open(helpUrl, 'ContextSensitiveHelp',
+                'width=800,height=550,scrollbars=yes,left=200,top=150,' +
+                'resizable=yes,location=yes,menubar=no,status=no,' +
+                'dependent=yes');
 
-            if(win) {
+            if (win) {
                 win.focus();
             } else {
                 Ext.Msg.alert(
@@ -161,33 +184,36 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
 
     /**
      * The Main method of an instance of this class.
+     *
+     * @param {Array<String>} [additionalHelpKeys] An array of additional keys
+     *     for which help exists.
      */
     setContextHelp: function(additionalHelpKeys) {
-        var me = this,
-            size = Ext.getBody().getSize();
+        var me = this;
+        var size = Ext.getBody().getSize();
         var helpDom = document.createElement('div');
         var helpLayer = Ext.get(helpDom);
 
-        if(additionalHelpKeys){
-            Ext.Array.push(BasiGX.ux.ContextSensitiveHelp.existingHelpKeys,
-                    additionalHelpKeys);
+        if (additionalHelpKeys) {
+            Ext.Array.push(
+                BasiGX.ux.ContextSensitiveHelp.existingHelpKeys,
+                additionalHelpKeys
+            );
         }
 
         document.body.insertBefore(helpDom, document.body.firstChild);
 
         helpLayer.setSize(size);
         helpLayer.setStyle({
-            "cursor": "help",
-            "position": "absolute"
+            'cursor': 'help',
+            'position': 'absolute'
         });
         helpLayer.setZIndex(20000);
 
-        helpLayer.on("click", function(clickEvent) {
+        helpLayer.on('click', function(clickEvent) {
             var point = Ext.util.Point.fromEvent(clickEvent);
-
             me.helpLayer.destroy();
-            BasiGX.ux.ContextSensitiveHelp.
-                displayHelpForCoordinates(point);
+            BasiGX.ux.ContextSensitiveHelp.displayHelpForCoordinates(point);
             me.destroy();
         });
         helpLayer.show();
