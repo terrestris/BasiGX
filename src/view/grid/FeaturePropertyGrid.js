@@ -20,8 +20,8 @@
  *
  * @class BasiGX.view.grid.FeaturePropertyGrid
  */
-Ext.define("BasiGX.view.grid.FeaturePropertyGrid", {
-    xtype: "basigx-grid-featurepropertygrid",
+Ext.define('BasiGX.view.grid.FeaturePropertyGrid', {
+    xtype: 'basigx-grid-featurepropertygrid',
     extend: 'Ext.grid.property.Grid',
     requires: [
     ],
@@ -37,17 +37,17 @@ Ext.define("BasiGX.view.grid.FeaturePropertyGrid", {
     /**
      *
      */
-    initComponent: function(){
+    initComponent: function() {
         var me = this;
 
-        if(!me.getOlFeature()){
+        if (!me.getOlFeature()) {
             Ext.Error.raise('No Feature set for FeaturePropertyGrid.');
         }
 
         me.callParent([arguments]);
         me.on('afterrender', me.setUpFeatureValues, me);
         // Equal to editable: false. Which does not exist.
-        me.on('beforeedit', function(){
+        me.on('beforeedit', function() {
             return false;
         });
     },
@@ -55,7 +55,7 @@ Ext.define("BasiGX.view.grid.FeaturePropertyGrid", {
     /**
      * Prepares the values by handling the property whitelist and mapping
      */
-    setUpFeatureValues: function(){
+    setUpFeatureValues: function() {
         var me = this;
         var displayValues = {};
 
@@ -66,7 +66,7 @@ Ext.define("BasiGX.view.grid.FeaturePropertyGrid", {
             return value;
         };
 
-        Ext.each(me.getPropertyWhiteList(), function(property){
+        Ext.each(me.getPropertyWhiteList(), function(property) {
             var mappedKey = me.getPropertyMapping() &&
                 me.getPropertyMapping()[property];
             var key = mappedKey ? mappedKey : property;
@@ -75,7 +75,7 @@ Ext.define("BasiGX.view.grid.FeaturePropertyGrid", {
             displayValues[key] = val;
         });
 
-        if(displayValues){
+        if (displayValues) {
             me.setSource(displayValues);
         } else {
             Ext.Error.raise('Feature in FeaturePropertyGrid has no values.');
@@ -93,11 +93,16 @@ Ext.define("BasiGX.view.grid.FeaturePropertyGrid", {
         if (!value || !value.indexOf) {
             return value;
         }
-        if (value.indexOf("http") === 0) {
-            value = "<a href='" + value + "' target='_blank'>" + value + "</a>";
-        } else if (value.indexOf("www.") === 0) {
-            value = "<a href='http://" + value + "' target='_blank'>" +
-                value + "</a>";
+        if (value.indexOf('http') === 0) {
+            value = '' +
+                '<a href=\'' + value + '\' target=\'_blank\'>' +
+                value +
+                '</a>';
+        } else if (value.indexOf('www.') === 0) {
+            value = '' +
+                '<a href=\'http://' + value + '\' target=\'_blank\'>' +
+                value +
+                '</a>';
         }
         return value;
     }
