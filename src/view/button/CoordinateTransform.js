@@ -64,9 +64,11 @@ Ext.define('BasiGX.view.button.CoordinateTransform', {
      *
      */
     config: {
-        handler: function(){
-            var win = Ext.ComponentQuery.query('[name=coordinate-transform-window]')[0];
-            if(!win){
+        handler: function() {
+            var win = Ext.ComponentQuery.query(
+                '[name=coordinate-transform-window]'
+            )[0];
+            if (!win) {
                 Ext.create('Ext.window.Window', {
                     name: 'coordinate-transform-window',
                     title: this.getViewModel().get('windowTitle'),
