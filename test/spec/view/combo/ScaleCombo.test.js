@@ -26,7 +26,7 @@ describe('BasiGX.view.combo.ScaleCombo', function() {
         it('is defined', function() {
             expect(BasiGX.view.combo.ScaleCombo).to.not.be(undefined);
         });
-        it('can be instantiated', function(){
+        it('can be instantiated', function() {
             expect(combo).to.be.a(BasiGX.view.combo.ScaleCombo);
         });
     });
@@ -38,7 +38,7 @@ describe('BasiGX.view.combo.ScaleCombo', function() {
         });
     });
     describe('defaults', function() {
-        it('has some default scales', function(){
+        it('has some default scales', function() {
             expect(combo.getScales()).to.not.be(undefined);
             expect(combo.getScales()).to.be.an(Array);
         });
@@ -52,7 +52,7 @@ describe('BasiGX.view.combo.ScaleCombo', function() {
             var combo2 = Ext.create('BasiGX.view.combo.ScaleCombo', {
                 map: map,
                 scales: [
-                    {scale: "1:2.000.000", resolution: 560}
+                    {scale: '1:2.000.000', resolution: 560}
                 ]
             });
             expect(combo2.getValue()).to.be(4711);
