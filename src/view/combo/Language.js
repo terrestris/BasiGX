@@ -81,7 +81,7 @@ Ext.define('BasiGX.view.combo.Language', {
     },
 
     bind: {
-       fieldLabel: '{fieldLabel}'
+        fieldLabel: '{fieldLabel}'
     },
 
     /**
@@ -178,7 +178,11 @@ Ext.define('BasiGX.view.combo.Language', {
     },
 
     /**
+     * Bound on the change event of the combo, this method will request the new
+     * language file and trigger the translation of UI components.
      *
+     * @param {Ext.form.field.ComboBox} combo The combo box.
+     * @param {String} newValue The newly selected language.
      */
     onLanguageChange: function(combo, newValue) {
         var me = this;
@@ -188,7 +192,7 @@ Ext.define('BasiGX.view.combo.Language', {
     },
 
     /**
-     *
+     * @param {String} locale The locale identifier of the selected language.
      */
     requestLanguageFile: function(locale) {
         var me = this;
@@ -207,7 +211,12 @@ Ext.define('BasiGX.view.combo.Language', {
     },
 
     /**
+     * Called after we have received the response of the language file, this
+     * method calls into #setAppLanguage, to actually translate the application.
      *
+     * @param {Object} resp The response of the AJAX call for the language file.
+     * @return {Boolean|undefined} Will return `false` in case of an error,
+     *     and `undefined` otherwise.
      */
     onLoadAppLocaleSuccess: function(resp) {
         var me = this;
@@ -219,7 +228,7 @@ Ext.define('BasiGX.view.combo.Language', {
             try {
                 respObj = Ext.decode(resp.responseText);
                 Ext.Logger.info('Succesfully loaded i18n file: ' + me.locale);
-            } catch(err) {
+            } catch (err) {
                 me.onLoadAppLocaleFailure();
                 return false;
             } finally {
@@ -257,7 +266,11 @@ Ext.define('BasiGX.view.combo.Language', {
     },
 
     /**
+     * Translates the application according to the passed `localeObj`.
      *
+     * @param {Object} localeObj An object with locale data. The key is usually
+     *     class name, and the value is an object which we can use for
+     *     `Ext.define({override: 'classname'});`
      */
     setAppLanguage: function(localeObj) {
         var me = this;
