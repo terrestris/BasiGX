@@ -29,25 +29,25 @@
  * @requires Ext.Button
  *
  */
-Ext.define("BasiGX.view.container.MultiSearchSettings", {
+Ext.define('BasiGX.view.container.MultiSearchSettings', {
     extend: 'Ext.container.Container',
     xtype: 'basigx-container-multisearchsettings',
 
     requires: [
-        "BasiGX.util.Layer",
-        "Ext.form.field.Checkbox",
-        "Ext.form.FieldContainer",
-        "Ext.Button"
+        'BasiGX.util.Layer',
+        'Ext.form.field.Checkbox',
+        'Ext.form.FieldContainer',
+        'Ext.Button'
     ],
 
     viewModel: {
         data: {
-            generalSettingsLabel: "Allgemeine Einstellungen",
-            limitCboxLabel: "Auf den sichtbaren Kartenbereich einschränken",
-            gazetteerLabel: "Gazetteer Suche verwenden",
-            objectSearchLabel: "Objekt Suche verwenden",
-            objectSearchLayersLabel: "Layer für Objektsuche",
-            saveBtnText: "Sucheinstellungen speichern"
+            generalSettingsLabel: 'Allgemeine Einstellungen',
+            limitCboxLabel: 'Auf den sichtbaren Kartenbereich einschränken',
+            gazetteerLabel: 'Gazetteer Suche verwenden',
+            objectSearchLabel: 'Objekt Suche verwenden',
+            objectSearchLayersLabel: 'Layer für Objektsuche',
+            saveBtnText: 'Sucheinstellungen speichern'
         }
     },
 
@@ -83,14 +83,14 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
                         labelWidth: 200,
                         name: 'limitcheckbox',
                         checked: true
-                    },{
+                    }, {
                         bind: {
                             boxLabel: '{gazetteerLabel}'
                         },
                         labelWidth: 200,
                         name: 'gazetteersearch',
                         checked: true
-                    },{
+                    }, {
                         bind: {
                             boxLabel: '{objectSearchLabel}'
                         },
@@ -98,8 +98,8 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
                         name: 'objectsearch',
                         checked: true
                     }
-                 ]
-            },{
+                ]
+            }, {
                 xtype: 'fieldcontainer',
                 name: 'objectlayers',
                 bind: {
@@ -109,15 +109,15 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
                 labelWidth: 200
             }
         ]
-    },{
+    }, {
         xtype: 'button',
         bind: {
             text: '{saveBtnText}'
         },
         formBind: true,
         handler: function(btn) {
-            var me = this.up();
-            me.saveSettings(btn);
+            var multisearchSettingsContainer = this.up();
+            multisearchSettingsContainer.saveSettings(btn);
         }
     }],
 
@@ -135,18 +135,21 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
     },
 
     /**
-    * called by "save"-button handler to persist the settings.
-    * This includes switching the gazetter or wfs search on and off, limiting
-    * search results to visible map extent and configuring search layers.
-    */
+     * Called by "save"-button handler to persist the settings.
+     *
+     * This includes switching the gazetter or wfs search on and off, limiting
+     * search results to visible map extent and configuring search layers.
+     *
+     * @param {Ext.button.Button} btn The "save"-button.
+     */
     saveSettings: function(btn) {
-        var me = btn.up();
+        var settingsContainer = btn.up();
 
-        var win = me.up();
+        var win = settingsContainer.up();
 
-        var form = me.down('form');
+        var form = settingsContainer.down('form');
 
-        var combo = me.getCombo();
+        var combo = settingsContainer.getCombo();
 
         // set configured search layers to null and add the wanted below
         combo.setConfiguredSearchLayers([]);
@@ -156,16 +159,16 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
             if (parentItem.name === 'generalsettings') {
 
                 Ext.each(parentItem.items.items, function(item) {
-                    if (item.name === 'objectsearch'){
+                    if (item.name === 'objectsearch') {
                         combo.setWfsSearch(item.checked);
-                    } else if (item.name === 'gazetteersearch'){
+                    } else if (item.name === 'gazetteersearch') {
                         combo.setGazetteerSearch(item.checked);
-                    } else if (item.name === 'limitcheckbox'){
+                    } else if (item.name === 'limitcheckbox') {
                         combo.setLimitToBBox(item.checked);
                     }
                 });
 
-            } else if (parentItem.name === 'objectlayers' ) {
+            } else if (parentItem.name === 'objectlayers') {
 
                 Ext.each(parentItem.items.items, function(item) {
                     var l = BasiGX.util.Layer.getLayerByName(item.name);
@@ -175,12 +178,12 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
                 });
 
             } else {
-                Ext.log.error("Found setting for which no handler exists");
+                Ext.log.error('Found setting for which no handler exists');
             }
         });
 
         win.setLoading(true);
-        me.combo.refreshSearchResults();
+        settingsContainer.combo.refreshSearchResults();
         win.setLoading(false);
         win.close();
     },
@@ -200,7 +203,7 @@ Ext.define("BasiGX.view.container.MultiSearchSettings", {
             var item = Ext.create('Ext.form.field.Checkbox', {
                 labelWidth: 200,
                 name: l.get('name'),
-                boxLabel:  l.get('name'),
+                boxLabel: l.get('name'),
                 checked: true
             });
 
