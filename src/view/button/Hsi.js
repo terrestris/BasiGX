@@ -67,8 +67,9 @@ Ext.define('BasiGX.view.button.Hsi', {
      */
     config: {
         /**
-         * Placeholder for the xtype of the map component (e.g. 'basigx-component-map').
-         * Will be used to be able to determine the map component dynamically
+         * Placeholder for the xtype of the map component (e.g.
+         * 'basigx-component-map'). Will be used to be able to determine the map
+         * component dynamically
          */
         mapPanelXType: null,
         handler: function() {
@@ -99,9 +100,15 @@ Ext.define('BasiGX.view.button.Hsi', {
     },
 
     /**
+     * Activates or deactivates the `pointerrest`-event depending on the passed
+     * status.
      *
+     * TODO we should get rid of the guessing, or at least make it optional.
+     *
+     * @param {Boolean} status Whether to enable or disable the `pointerrest`
+     *     event.
      */
-    setControlStatus: function(status){
+    setControlStatus: function(status) {
         var me = this;
         var mapComponent;
 
