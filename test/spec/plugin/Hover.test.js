@@ -202,7 +202,7 @@ describe('BasiGX.plugin.Hover', function() {
                 testObjs2 = TestUtil.setupTestObjects({
                     mapComponentOpts: {
                         plugins: {
-                            ptype:'hover',
+                            ptype: 'hover',
                             pointerRest: false,
                             pointerRestInterval: 4711,
                             pointerRestPixelTolerance: 0,
@@ -252,54 +252,54 @@ describe('BasiGX.plugin.Hover', function() {
                 );
             });
         });
-        describe("Configurable selectEventOrigin", function() {
-            it("is 'collection' by default", function() {
+        describe('Configurable selectEventOrigin', function() {
+            it('is \'collection\' by default', function() {
                 // test
-                expect(plugin.selectEventOrigin).to.be("collection");
+                expect(plugin.selectEventOrigin).to.be('collection');
             });
-            it("can be set to 'interaction'", function() {
+            it('can be set to \'interaction\'', function() {
                 var testObjs2 = TestUtil.setupTestObjects({
                     mapComponentOpts: {
                         plugins: {
-                            ptype: "hover",
-                            selectEventOrigin: "interaction"
+                            ptype: 'hover',
+                            selectEventOrigin: 'interaction'
                         }
                     }
                 });
-                var hoverPlugin = testObjs2.mapComponent.getPlugin("hover");
+                var hoverPlugin = testObjs2.mapComponent.getPlugin('hover');
 
                 // test
-                expect(hoverPlugin.selectEventOrigin).to.be("interaction");
+                expect(hoverPlugin.selectEventOrigin).to.be('interaction');
 
                 // teardown
                 TestUtil.teardownTestObjects(testObjs2);
             });
-            it("defaults to 'collection' on unexpected values", function() {
+            it('defaults to \'collection\' on unexpected values', function() {
                 // setup
                 var testObjs2 = TestUtil.setupTestObjects({
                     mapComponentOpts: {
                         plugins: {
-                            ptype: "hover",
-                            selectEventOrigin: "humpty-dumpty"
+                            ptype: 'hover',
+                            selectEventOrigin: 'humpty-dumpty'
                         }
                     }
                 });
-                var hoverPlugin = testObjs2.mapComponent.getPlugin("hover");
+                var hoverPlugin = testObjs2.mapComponent.getPlugin('hover');
 
                 // actually uses the default:
-                expect(hoverPlugin.selectEventOrigin).to.be("collection");
+                expect(hoverPlugin.selectEventOrigin).to.be('collection');
 
                 // teardown
                 TestUtil.teardownTestObjects(testObjs2);
             });
-            it("warns with hints when defaulting to 'collection'", function() {
+            it('warns with hints (defaulting to \'collection\')', function() {
                 // setup
-                var loggerSpy = sinon.spy(Ext.log, "warn");
+                var loggerSpy = sinon.spy(Ext.log, 'warn');
                 var testObjs2 = TestUtil.setupTestObjects({
                     mapComponentOpts: {
                         plugins: {
-                            ptype: "hover",
-                            selectEventOrigin: "humpty-dumpty"
+                            ptype: 'hover',
+                            selectEventOrigin: 'humpty-dumpty'
                         }
                     }
                 });

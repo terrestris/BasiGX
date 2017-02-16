@@ -60,7 +60,7 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
         center: null,
         zoom: null,
         resolution: null,
-        handler: function(){
+        handler: function() {
             this.setConfigValues();
 
             var olMap = this.olMap;
@@ -70,22 +70,22 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
                 olMap = BasiGX.util.Map.getMapComponent().getMap();
             }
 
-            var olView = olMap.getView(),
-                targetCenter = this.getCenter(),
-                targetResolution = this.getResolution(),
-                targetZoom = this.getZoom(),
-                pan = ol.animation.pan({
-                    source: olView.getCenter()
-                }),
-                zoom = ol.animation.zoom({
-                   resolution: olView.getResolution()
-                });
+            var olView = olMap.getView();
+            var targetCenter = this.getCenter();
+            var targetResolution = this.getResolution();
+            var targetZoom = this.getZoom();
+            var pan = ol.animation.pan({
+                source: olView.getCenter()
+            });
+            var zoom = ol.animation.zoom({
+                resolution: olView.getResolution()
+            });
 
             olMap.beforeRender(pan);
             olMap.beforeRender(zoom);
             olView.setCenter(targetCenter);
 
-            if(targetZoom){
+            if (targetZoom) {
                 olView.setZoom(targetZoom);
             } else {
                 olView.setResolution(targetResolution);
@@ -106,7 +106,7 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
     constructor: function() {
         this.callParent(arguments);
 
-        if(this.getZoom() && this.getResolution()){
+        if (this.getZoom() && this.getResolution()) {
             Ext.raise('No zoom and resolution set for Extent Button!' +
             'Please choose one.');
         }
@@ -117,14 +117,14 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
     /**
      *
      */
-    setConfigValues: function(){
+    setConfigValues: function() {
         var appContext = BasiGX.util.Application.getAppContext();
 
-        if(appContext){
-            if(!this.getCenter()){
+        if (appContext) {
+            if (!this.getCenter()) {
                 this.setCenter(appContext.startCenter);
             }
-            if(!this.getZoom() && !this.getResolution()){
+            if (!this.getZoom() && !this.getResolution()) {
                 this.setZoom(appContext.startZoom);
             }
         }

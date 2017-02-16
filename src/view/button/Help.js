@@ -58,7 +58,7 @@ Ext.define('BasiGX.view.button.Help', {
      */
     config: {
         additonalHelpKeys: null,
-        handler: function(button){
+        handler: function(button) {
             var help = Ext.create('BasiGX.ux.ContextSensitiveHelp');
             help.setContextHelp(button.getAdditonalHelpKeys());
         }

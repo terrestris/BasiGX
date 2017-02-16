@@ -1,7 +1,7 @@
 // This file was originally taken from GeoExt3, and has been modified
 // to include more helpers, like #ensureMapComponentAvailable, #setupTestObjects
 // and some more.
-(function(global){
+(function(global) {
     /**
      * A helper method that'll return a HTML script tag for loading
      * an external JavaScript file.
@@ -9,7 +9,7 @@
      * @param {string} src The `src` of the external JavaScript file.
      * @return {string} The script tag with given `src`
      */
-    function getExternalScriptTag(src){
+    function getExternalScriptTag(src) {
         return '<scr' + 'ipt src="' + src + '"></scr' + 'ipt>';
     }
 
@@ -20,7 +20,7 @@
      * @param {string} code The code to execute.
      * @return {string} The script tag with given content.
      */
-    function getInlineScriptTag(code){
+    function getInlineScriptTag(code) {
         return '<scr' + 'ipt>' + code + '</scr' + 'ipt>';
     }
 
@@ -31,7 +31,7 @@
      * @private
      */
     function ensureMapComponentAvailable() {
-        if(!BasiGX || !BasiGX.view || !BasiGX.view.component ||
+        if (!BasiGX || !BasiGX.view || !BasiGX.view.component ||
             !BasiGX.view.component.Map) {
             Ext.Loader.syncRequire(['BasiGX.view.component.Map']);
         }
@@ -73,11 +73,11 @@
      * @param {HTMLDivElement} div The `<div>` you want to remove.
      */
     function teardownTestDiv(div) {
-        if(!div) {
+        if (!div) {
             return;
         }
         var parent = div.parentNode;
-        if(parent) {
+        if (parent) {
             parent.removeChild(div);
         }
         div = null;
@@ -149,13 +149,13 @@
      *     the method #setupTestObjects.
      */
     function teardownTestObjects(createdObjs) {
-        if(!createdObjs) {
+        if (!createdObjs) {
             return;
         }
-        if(createdObjs.mapComponent && createdObjs.mapComponent.destroy) {
+        if (createdObjs.mapComponent && createdObjs.mapComponent.destroy) {
             createdObjs.mapComponent.destroy();
         }
-        if(createdObjs.map && createdObjs.map.setTarget) {
+        if (createdObjs.map && createdObjs.map.setTarget) {
             createdObjs.map.setTarget(null);
         }
         teardownTestDiv(createdObjs.mapComponentDiv);

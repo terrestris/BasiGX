@@ -33,8 +33,8 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
 
     /**
      * @cfg {XTemplate} rowBodyTpl
-     * This needs to default to the below for ExtJS components to render to the correct row
-     * (defaults to <tt><div id="display-row-{id}"> </div></tt>).
+     * This needs to default to the below for ExtJS components to render to the
+     * correct row (defaults to <tt><div id="display-row-{id}"> </div></tt>).
      */
     rowBodyTpl: new Ext.XTemplate(
         '<div id="display-row-{id}"> </div>'
@@ -60,8 +60,8 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
 
     /**
      * @cfg {Boolean} expandOnClick
-     * <tt>true</tt> to toggle a row between expanded/collapsed when single clicked
-     * (defaults to <tt>true</tt>).
+     * <tt>true</tt> to toggle a row between expanded/collapsed when single
+     * clicked (defaults to <tt>true</tt>).
      */
     expandOnClick: false,
 
@@ -81,9 +81,9 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
 
     preventRecursionArray: [],
 
-    init: function(grid){
-        var me = this,
-            view;
+    init: function(grid) {
+        var me = this;
+        var view;
 
         me.callParent(arguments);
 
@@ -93,18 +93,19 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
         //this css does not highlight the row expander body
         grid.addCls('rowexpanderwithcomponents');
 
-        //set the rowexpander column to hidden if hideExpandColumn config is true
-        if(me.hideExpandColumn){
+        // set the rowexpander column to hidden if hideExpandColumn config is
+        // true
+        if (me.hideExpandColumn) {
             grid.headerCt.query('gridcolumn')[0].hidden = true;
         }
-        //enable text selection if the config is true
-        if(me.enableTextSelection){
+        // enable text selection if the config is true
+        if (me.enableTextSelection) {
             view.enableTextSelection = true;
         }
 
-        view.on('expandbody', function(rowNode, record){
+        view.on('expandbody', function(rowNode, record) {
             var recId = record.getId();
-            if(!recId){
+            if (!recId) {
                 Ext.Error.raise('Error: Records must have an id to use the' +
                     'rowExpanderWithComponents plugin. ' +
                     'Use http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.' +
@@ -112,13 +113,13 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
                     '4.2.2/#!/api/Ext.data.Model-cfg-idgen');
             }
 
-            var row = 'display-row-' + recId,
-                clonedRowTemplate = Ext.clone(me.rowBodyCompTemplate);
+            var row = 'display-row-' + recId;
+            var clonedRowTemplate = Ext.clone(me.rowBodyCompTemplate);
 
             // TODO The rowbody behaviour seems to be not that smooth. We
             // should have a look at this
             // if the row got children dont add it again
-            if (Ext.get(row).dom.children.length === 0){
+            if (Ext.get(row).dom.children.length === 0) {
                 var parentCont = Ext.create(Ext.container.Container, {
                     height: '100%',
                     width: '100%',
@@ -132,12 +133,14 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
 
                 //Stop all events in the row body from bubbling up
                 var rowEl = parentCont.getEl().parent('.x-grid-rowbody');
-                rowEl.swallowEvent(['mouseenter', 'click', 'mouseover', 'mousedown',
-                                    'dblclick', 'cellclick', 'itemmouseenter', 'itemmouseleave',
-                                    'onRowFocus', 'mouseleave']);
+                rowEl.swallowEvent(['mouseenter', 'click', 'mouseover',
+                    'mousedown', 'dblclick', 'cellclick', 'itemmouseenter',
+                    'itemmouseleave', 'onRowFocus', 'mouseleave']);
 
                 // adding the dynamic css to component
-                var rowToStyle = parentCont.getEl().parent('.x-grid-rowbody-tr');
+                var rowToStyle = parentCont.getEl().parent(
+                    '.x-grid-rowbody-tr'
+                );
                 rowToStyle.addCls(grid.getCssForRow(record));
             }
 
@@ -151,19 +154,25 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
     },
 
     /**
-     * Gets the parent ExtJS container in the rowexpander body from the rows record id
-     * @param {integer} recId The row record id
-     * @return {Ext.container.Container} the parent ExtJS container in the rowexpander body
+     * Gets the parent ExtJS container in the rowexpander body from the rows
+     * record id.
+     *
+     * @param {Number} recId The row record id.
+     * @return {Ext.container.Container} The parent ExtJS container in the
+     *     rowexpander body
      */
-    getRowComponent: function(recId){
-        return Ext.ComponentQuery.query('#' + this.up('treepanel').getId() + '-parentRowExpCont-' + recId)[0];
+    getRowComponent: function(recId) {
+        return Ext.ComponentQuery.query(
+            '#' + this.up('treepanel').getId() + '-parentRowExpCont-' + recId
+        )[0];
     },
 
     /**
-     * Removes all ExtJS items from the parent row component
-     * @param {integer} recId The row record id
+     * Removes all ExtJS items from the parent row component.
+     *
+     * @param {Number} recId The row record id.
      */
-    removeAllFromRowComponent: function(recId){
+    removeAllFromRowComponent: function(recId) {
         var rowCont = this.getRowComponent(recId);
 
         rowCont.removeAll();
@@ -174,15 +183,17 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
      * @param {integer} recId The row record id
      * @param {Array} items ExtJS components
      */
-    addToRowComponent: function(recId, items){
+    addToRowComponent: function(recId, items) {
         var rowCont = this.getRowComponent(recId);
 
         rowCont.add(items);
     },
 
     /**
+     * Allow single click to expand grid
+     *
+     * @param {Ext.view.Table} view The grid view.
      * @private
-     * allow single click to expand grid
      */
     bindView: function(view) {
         if (this.expandOnClick) {
@@ -190,44 +201,56 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
         }
         this.callParent(arguments);
     },
+
     /**
+     * Allow single click to expand grid.
+     *
+     * @param {Ext.view.Table} view The grid view.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} row The item's element.
+     * @param {Number} rowIdx The item's index.
      * @private
-     * allow single click to expand grid
      */
     onItemClick: function(view, record, row, rowIdx) {
         this.toggleRow(rowIdx, record);
     },
 
     /**
-     * @private
      * Converts all string values with {{}} to code
      * Example: '{{record.get('test'}}' converts to record.get('test')
+     *
+     * @param {Object} obj The object in which code in values might be
+     *     evaluated. Will be checked recursively.
+     * @param {Ext.data.Model} record The record used for replacing.
+     * @return {Object} The passed object in which replacements might have
+     *     occured.
+     * @private
      */
-    replaceObjValues: function( obj, record ){
+    replaceObjValues: function(obj, record) {
 
-        for( var all in obj ) {
-            if(typeof obj[all] === "string" && obj[all].match(/{{(.*)}}/)){
+        for (var all in obj) {
+            if (typeof obj[all] === 'string' && obj[all].match(/{{(.*)}}/)) {
                 obj[all] = eval(obj[all].match(/{{(.*)}}/)[1]);
             }
-            if(typeof obj[all] === "object" && obj[all] !== null){
-                if(Ext.Array.contains(this.preventRecursionArray, obj[all])){
+            if (typeof obj[all] === 'object' && obj[all] !== null) {
+                if (Ext.Array.contains(this.preventRecursionArray, obj[all])) {
                     return obj;
                 } else {
                     this.preventRecursionArray.push(obj[all]);
-                    this.replaceObjValues( obj[all], record );
+                    this.replaceObjValues(obj[all], record);
                 }
             }
-            if(obj.xtype){
+            if (obj.xtype) {
                 obj.layerRec = record;
                 // if we do not have a cluster layer, we remove the "double
                 // symbology / legend"
                 if (record.getOlLayer() && record.getOlLayer().get('type') &&
-                    record.getOlLayer().get('type') !== "WFSCluster" &&
+                    record.getOlLayer().get('type') !== 'WFSCluster' &&
                     Ext.isArray(obj.items) && obj.items.length > 1) {
-                        var lastItem = obj.items[obj.items.length - 1];
-                        if(lastItem.xtype === "image"){
-                            obj.items.pop();
-                        }
+                    var lastItem = obj.items[obj.items.length - 1];
+                    if (lastItem.xtype === 'image') {
+                        obj.items.pop();
+                    }
                 }
             }
         }

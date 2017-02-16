@@ -21,12 +21,12 @@
  *
  * @class BasiGX.view.panel.Header
  */
-Ext.define("BasiGX.view.panel.Header", {
-    extend: "Ext.panel.Panel",
-    xtype: "basigx-panel-header",
+Ext.define('BasiGX.view.panel.Header', {
+    extend: 'Ext.panel.Panel',
+    xtype: 'basigx-panel-header',
 
     requires: [
-        "Ext.Img"
+        'Ext.Img'
     ],
 
     config: {
@@ -53,19 +53,19 @@ Ext.define("BasiGX.view.panel.Header", {
     items: [],
 
     /**
-    *
-    */
+     * Initializes this header panel.
+     */
     initComponent: function() {
         var me = this;
 
         // add logo
-        if(me.getAddLogo() === true) {
+        if (me.getAddLogo() === true) {
             me.addLogoItem();
         }
 
         var additionalItems = me.getAdditionalItems();
         // add additional items
-        if(!Ext.isEmpty(additionalItems) &&
+        if (!Ext.isEmpty(additionalItems) &&
                 Ext.isArray(additionalItems)) {
             Ext.each(additionalItems, function(item) {
                 me.items.push(item);
@@ -76,7 +76,7 @@ Ext.define("BasiGX.view.panel.Header", {
     },
 
     /**
-     *
+     * Adds a `Ext.Img` to the list of items in this panel.
      */
     addLogoItem: function() {
         var me = this;
@@ -94,15 +94,18 @@ Ext.define("BasiGX.view.panel.Header", {
         };
 
         me.items.push(logo);
-   },
+    },
 
-   /**
-    *
-    */
-   setBackgroundColor: function(color) {
-       this.setStyle({
-           'background-color': color, //fallback for ie9 and lower
-           background: "linear-gradient(to right, white, " + color + ")"
-       });
-   }
+    /**
+     * Adds a background gradient from white to the passed color, with a full
+     * opaque variant as fallback for IE 9.
+     *
+     * @param {String} color A CSS color.
+     */
+    setBackgroundColor: function(color) {
+        this.setStyle({
+            'background-color': color, //fallback for ie9 and lower
+            'background': 'linear-gradient(to right, white, ' + color + ')'
+        });
+    }
 });

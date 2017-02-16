@@ -21,9 +21,9 @@
  *
  * @class BasiGX.view.panel.GraphicPool
  */
-Ext.define("BasiGX.view.panel.GraphicPool", {
-    extend: "Ext.panel.Panel",
-    xtype: "basigx-panel-graphicpool",
+Ext.define('BasiGX.view.panel.GraphicPool', {
+    extend: 'Ext.panel.Panel',
+    xtype: 'basigx-panel-graphicpool',
 
     requires: [
         'Ext.form.field.File',
@@ -117,7 +117,7 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
     /**
     * initializes this component
     */
-    initComponent : function() {
+    initComponent: function() {
         var me = this;
 
         // UI displaying the user pictures
@@ -208,12 +208,12 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
      *
      */
     onUploadButtonClick: function() {
-        var me = this,
-            form = me.down('form').getForm(),
-            baseUrl = BasiGX.util.Url.getWebProjectBaseUrl(),
-            targetUrl = baseUrl + me.getBackendUrls().pictureUpload.url;
+        var me = this;
+        var form = me.down('form').getForm();
+        var baseUrl = BasiGX.util.Url.getWebProjectBaseUrl();
+        var targetUrl = baseUrl + me.getBackendUrls().pictureUpload.url;
 
-        if(form.isValid() && targetUrl){
+        if (form.isValid() && targetUrl) {
             form.submit({
                 url: targetUrl,
                 bind: {
@@ -234,12 +234,14 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
     },
 
     /**
+     * Sends a deletion request for the passed image record.
      *
+     * @param {Ext.data.Model} imageRec The image record.
      */
-    sendDeletionRequest: function(imageRec){
-        var me = this,
-            id = imageRec.get('id'),
-            token;
+    sendDeletionRequest: function(imageRec) {
+        var me = this;
+        var id = imageRec.get('id');
+        var token;
 
         if (me.getUseCsrfToken()) {
             token = BasiGX.util.CSRF.getHeader();
@@ -249,23 +251,31 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
                 me.getBackendUrls().graphicDelete.url + id,
             method: me.getBackendUrls().graphicDelete.method || 'POST',
             headers: token,
-            success: function(response){
+            success: function(response) {
                 var json = Ext.decode(response.responseText);
                 if (json.success) {
                     me.pictureView.getStore().load();
-                    BasiGX.info(me.getViewModel().get('graphicDeleteInfoSuccess'));
+                    BasiGX.info(
+                        me.getViewModel().get('graphicDeleteInfoSuccess')
+                    );
                 } else {
-                    BasiGX.error(me.getViewModel().get('graphicDeleteInfoError'));
+                    BasiGX.error(
+                        me.getViewModel().get('graphicDeleteInfoError')
+                    );
                 }
             },
-            failure: function(){
-                BasiGX.error(me.getViewModel().get('graphicDeleteInfoError'));
+            failure: function() {
+                BasiGX.error(
+                    me.getViewModel().get('graphicDeleteInfoError')
+                );
             }
         });
     },
 
     /**
+     * Returns the Ext.data.Model instance for the selected picture.
      *
+     * @return {Ext.data.Model} The selected picture record.
      */
     getSelectedPicture: function() {
         var me = this;
@@ -275,14 +285,15 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
     },
 
     /**
-     *
+     * Informs the user that currently no element is selected.
      */
-    infoNoSelection: function (){
+    infoNoSelection: function() {
         BasiGX.info(this.getViewModel().get('msgBoxNoElementSelectedText'));
     },
 
     /**
-     *
+     * Callback for the click event on the OK button. Will eventually execute
+     * the #okClickCallbackFn.
      */
     onOkButtonClick: function() {
         var pic = this.getSelectedPicture();
@@ -302,7 +313,8 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
     },
 
     /**
-     *
+     * Callback for the click event on the delete button. Will eventually
+     * execute the #deleteClickCallbackFn.
      */
     onDelButtonClick: function() {
         var me = this;
@@ -321,7 +333,9 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
                         }
                         me.close();
                     } else {
-                        BasiGX.info(me.getViewModel().get('msgDeletionCancelled'));
+                        BasiGX.info(
+                            me.getViewModel().get('msgDeletionCancelled')
+                        );
                     }
                 }
             });
@@ -331,7 +345,7 @@ Ext.define("BasiGX.view.panel.GraphicPool", {
     },
 
     /**
-     *
+     * Closes the window where this panel is embedded, if any.
      */
     onCloseButtonClick: function() {
         var me = this;

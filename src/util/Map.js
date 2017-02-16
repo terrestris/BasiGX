@@ -60,7 +60,8 @@ Ext.define('BasiGX.util.Map', {
         /**
          * Given a resolution and a unit, this method will return a scale.
          *
-         * @param {Number} scale The resolution ypu wish to have the scale for.
+         * @param {Number} resolution The resolution you wish to have the scale
+         *     for.
          * @param {String} units The units to get the resoultuion for, typically
          *     the unit of the projection odf the map view. Allowed values are
          *     `'degrees'`, `'ft'`, `'m'` or `'us-ft'`
@@ -73,14 +74,26 @@ Ext.define('BasiGX.util.Map', {
             return (resolution * mpu * inchesPerMeter * dpi);
         },
 
-        getResolution: function (map) {
+        /**
+         * Returns the resolution of the passed map's view.
+         *
+         * @param {ol.Map} map The map to get the resolution from.
+         * @return {Number} The resolution of the view of the passed map.
+         */
+        getResolution: function(map) {
             return map.getView().getResolution();
         },
 
         /**
-         * http://gis.stackexchange.com/questions/158435/how-to-get-current-scale-in-openlayers-3
+         * Gets the scale of the passed map.
+         *
+         * See also http://gis.stackexchange.com/questions/158435/how-to-get-cur
+         * rent-scale-in-openlayers-3
+         *
+         * @param {ol.Map} map The map to get the scale from.
+         * @return {Number} The scale of the map.
          */
-        getScale: function(map){
+        getScale: function(map) {
             var res = this.getResolution(map);
             var units = map.getView().getProjection().getUnits();
             return this.getScaleForResolution(res, units);
@@ -88,13 +101,17 @@ Ext.define('BasiGX.util.Map', {
 
         /**
          * Determine map component depending on provided xtype.
+         *
          * If no xtype was specified, `basigx-component-map` component will be
-         * used as fallback. If this also could not be found, use the most
-         * common GeoExt map component `gx_map`.
-         * @param {String} mapCompXtype Provided map component xtype
-         * @return {Object} mapComponent
+         * used as fallback. If this also could not be found, use the first
+         * GeoExt map component with xtype `gx_map`.
+         *
+         * @param {String} mapCompXType Provided map component xtype
+         * @return {Object} The map component, which is at least a
+         *     GeoExt.component.Map and possibly an instance of the xtype you
+         *     passed.
          */
-        getMapComponent: function(mapCompXType){
+        getMapComponent: function(mapCompXType) {
             var mapComponent;
             if (mapCompXType) {
                 mapComponent = Ext.ComponentQuery.query(mapCompXType)[0];
@@ -102,7 +119,9 @@ Ext.define('BasiGX.util.Map', {
 
             //fallback to basigx map component
             if (Ext.isEmpty(mapComponent)) {
-                mapComponent = Ext.ComponentQuery.query('basigx-component-map')[0];
+                mapComponent = Ext.ComponentQuery.query(
+                    'basigx-component-map'
+                )[0];
             }
 
             //fallback to the most common GeoExt map component
@@ -115,12 +134,12 @@ Ext.define('BasiGX.util.Map', {
 
         /**
          * Determine legendtree panel component depending on provided xtype.
-         * If no xtype was specified, `basigx-panel-legendtree` component will be
-         * used as fallback.
+         * If no xtype was specified, `basigx-panel-legendtree` component will
+         * be used as fallback.
          * @param {String} legendCompXType Provided map component xtype
-         * @return {Object} legendComponent
+         * @return {Object} The legend component.
          */
-        getLegendTreePanel: function(legendCompXType){
+        getLegendTreePanel: function(legendCompXType) {
             var legendComponent;
 
             if (legendCompXType) {
@@ -128,7 +147,9 @@ Ext.define('BasiGX.util.Map', {
             }
             //fallback to basigx legendtree panel component
             if (Ext.isEmpty(legendComponent)) {
-                legendComponent = Ext.ComponentQuery.query('basigx-panel-legendtree')[0];
+                legendComponent = Ext.ComponentQuery.query(
+                    'basigx-panel-legendtree'
+                )[0];
             }
             return legendComponent;
         }

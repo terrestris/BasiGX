@@ -8,7 +8,7 @@ describe('BasiGX.view.window.Accessible', function() {
         it('is defined', function() {
             expect(BasiGX.view.window.Accessible).to.not.be(undefined);
         });
-        it('can be instantiated', function(){
+        it('can be instantiated', function() {
             var instance = Ext.create('BasiGX.view.window.Accessible');
             expect(instance).to.be.a(BasiGX.view.window.Accessible);
             instance.destroy();

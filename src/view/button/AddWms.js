@@ -59,9 +59,9 @@ Ext.define('BasiGX.view.button.AddWms', {
             // can be used by subclasses to apply/merge
             // additional/other values for the window
         },
-        handler: function(){
+        handler: function() {
             var win = Ext.ComponentQuery.query('[name=add-wms-window]')[0];
-            if(!win){
+            if (!win) {
 
                 var windowConfig = {
                     name: 'add-wms-window',

@@ -11,10 +11,10 @@ describe('BasiGX.util.Object', function() {
         beforeEach(function() {
             testObject = {
                 firstLevel: true,
-                level: "first",
+                level: 'first',
                 firstNested: {
                     secondLevel: true,
-                    level: "second"
+                    level: 'second'
                 }
             };
         });
@@ -25,14 +25,14 @@ describe('BasiGX.util.Object', function() {
         });
         it('returns as expected on getValue call', function() {
 
-            var retVal1 = BasiGX.util.Object.getValue("level", testObject);
-            expect(retVal1).to.be("first");
+            var retVal1 = BasiGX.util.Object.getValue('level', testObject);
+            expect(retVal1).to.be('first');
 
-            var retVal2 = BasiGX.util.Object.getValue("firstNested/level",
+            var retVal2 = BasiGX.util.Object.getValue('firstNested/level',
                     testObject);
-            expect(retVal2).to.be("second");
+            expect(retVal2).to.be('second');
 
-            var retVal3 = BasiGX.util.Object.getValue("secondLevel",
+            var retVal3 = BasiGX.util.Object.getValue('secondLevel',
                     testObject);
             expect(retVal3).to.be(true);
         });

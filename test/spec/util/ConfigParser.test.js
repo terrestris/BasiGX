@@ -17,65 +17,65 @@ describe('BasiGX.util.ConfigParser', function() {
                     startZoom: 13,
                     mapLayers: [
                         {
-                            name: "Hintergrundkarten",
-                            type: "Folder",
+                            name: 'Hintergrundkarten',
+                            type: 'Folder',
                             layers: [
                                 {
-                                    name: "OSM WMS Grau",
-                                    type: "TileWMS",
-                                    treeColor: "rgba(41, 213, 4, 0.26)",
-                                    url: "http://ows.terrestris.de/osm-gray/" +
-                                        "service?",
-                                    layers: "OSM-WMS",
-                                    legendUrl: "http://ows.terrestris.de/" +
-                                        "osm-gray/service?SERVICE=WMS&VERSION" +
-                                        "=1.3.0&REQUEST=GetMap&FORMAT=image" +
-                                        "%2Fpng&TRANSPARENT=true&LAYERS=OSM" +
-                                        "-WMS&TILED=true&WIDTH=256&HEIGHT=256" +
-                                        "&CRS=EPSG%3A3857&STYLES=&BBOX=978393" +
-                                        ".9620502554%2C7000408.798469583%2C98" +
-                                        "3285.9318605067%2C7005300.768279834",
+                                    name: 'OSM WMS Grau',
+                                    type: 'TileWMS',
+                                    treeColor: 'rgba(41, 213, 4, 0.26)',
+                                    url: 'http://ows.terrestris.de/osm-gray/' +
+                                        'service?',
+                                    layers: 'OSM-WMS',
+                                    legendUrl: 'http://ows.terrestris.de/' +
+                                        'osm-gray/service?SERVICE=WMS&VERSION' +
+                                        '=1.3.0&REQUEST=GetMap&FORMAT=image' +
+                                        '%2Fpng&TRANSPARENT=true&LAYERS=OSM' +
+                                        '-WMS&TILED=true&WIDTH=256&HEIGHT=256' +
+                                        '&CRS=EPSG%3A3857&STYLES=&BBOX=978393' +
+                                        '.9620502554%2C7000408.798469583%2C98' +
+                                        '3285.9318605067%2C7005300.768279834',
                                     topic: false
                                 },
                                 {
-                                    name: "OSM WMS Farbig",
-                                    type: "TileWMS",
-                                    treeColor: "rgba(41, 213, 4, 0.26)",
-                                    url: "http://ows.terrestris.de/osm/" +
-                                        "service?",
-                                    layers: "OSM-WMS",
-                                    legendUrl: "http://ows.terrestris.de/osm/" +
-                                        "service?SERVICE=WMS&VERSION=1.3.0&RE" +
-                                        "QUEST=GetMap&FORMAT=image%2Fpng&TRAN" +
-                                        "SPARENT=true&LAYERS=OSM-WMS&TILED=tr" +
-                                        "ue&WIDTH=256&HEIGHT=256&CRS=EPSG%3A3" +
-                                        "857&STYLES=&BBOX=978393.9620502554%2" +
-                                        "C7000408.798469583%2C983285.93186050" +
-                                        "67%2C7005300.768279834",
+                                    name: 'OSM WMS Farbig',
+                                    type: 'TileWMS',
+                                    treeColor: 'rgba(41, 213, 4, 0.26)',
+                                    url: 'http://ows.terrestris.de/osm/' +
+                                        'service?',
+                                    layers: 'OSM-WMS',
+                                    legendUrl: 'http://ows.terrestris.de/osm/' +
+                                        'service?SERVICE=WMS&VERSION=1.3.0&RE' +
+                                        'QUEST=GetMap&FORMAT=image%2Fpng&TRAN' +
+                                        'SPARENT=true&LAYERS=OSM-WMS&TILED=tr' +
+                                        'ue&WIDTH=256&HEIGHT=256&CRS=EPSG%3A3' +
+                                        '857&STYLES=&BBOX=978393.9620502554%2' +
+                                        'C7000408.798469583%2C983285.93186050' +
+                                        '67%2C7005300.768279834',
                                     topic: false,
                                     visibility: false
                                 },
                                 {
                                     name: 'Subfolder',
-                                    type: "Folder",
+                                    type: 'Folder',
                                     layers: [
                                         {
-                                            name: "OSM WMS Farbig",
-                                            type: "TileWMS",
-                                            treeColor: "rgba(41, 213, 4, 0.26)",
-                                            url: "http://ows.terrestris.de/" +
-                                                "osm/service?",
-                                            layers: "OSM-WMS",
-                                            legendUrl: "http://ows.terrestris" +
-                                                ".de/osm/service?SERVICE=WMS&" +
-                                                "VERSION=1.3.0&REQUEST=GetMap" +
-                                                "&FORMAT=image%2Fpng&TRANSPAR" +
-                                                "ENT=true&LAYERS=OSM-WMS&TILE" +
-                                                "D=true&WIDTH=256&HEIGHT=256&" +
-                                                "CRS=EPSG%3A3857&STYLES=&BBOX" +
-                                                "=978393.9620502554%2C7000408" +
-                                                ".798469583%2C983285.93186050" +
-                                                "67%2C7005300.768279834",
+                                            name: 'OSM WMS Farbig',
+                                            type: 'TileWMS',
+                                            treeColor: 'rgba(41, 213, 4, 0.26)',
+                                            url: 'http://ows.terrestris.de/' +
+                                                'osm/service?',
+                                            layers: 'OSM-WMS',
+                                            legendUrl: 'http://ows.terrestris' +
+                                                '.de/osm/service?SERVICE=WMS&' +
+                                                'VERSION=1.3.0&REQUEST=GetMap' +
+                                                '&FORMAT=image%2Fpng&TRANSPAR' +
+                                                'ENT=true&LAYERS=OSM-WMS&TILE' +
+                                                'D=true&WIDTH=256&HEIGHT=256&' +
+                                                'CRS=EPSG%3A3857&STYLES=&BBOX' +
+                                                '=978393.9620502554%2C7000408' +
+                                                '.798469583%2C983285.93186050' +
+                                                '67%2C7005300.768279834',
                                             topic: false,
                                             visibility: false
                                         }
@@ -85,47 +85,47 @@ describe('BasiGX.util.ConfigParser', function() {
                         },
                         {
                             name: 'OSM POIs',
-                            type: "Folder",
+                            type: 'Folder',
                             layers: [
                                 {
-                                    name: "Tankstellen",
-                                    type: "WMS",
-                                    treeColor: "rgba(161, 177, 228, 0.53)",
-                                    url: "http://ows.terrestris.de/geoserver/" +
-                                        "osm/wms?",
+                                    name: 'Tankstellen',
+                                    type: 'WMS',
+                                    treeColor: 'rgba(161, 177, 228, 0.53)',
+                                    url: 'http://ows.terrestris.de/geoserver/' +
+                                        'osm/wms?',
                                     legendHeight: 40,
-                                    legendUrl: "http://ows.terrestris.de/" +
-                                        "geoserver/osm/wms?SERVICE=WMS&VERSIO" +
-                                        "N=1.3.0&REQUEST=GetLegendGraphic&FOR" +
-                                        "MAT=image%2Fpng&TRANSPARENT=true&LAY" +
-                                        "ER=osm%3Aosm-fuel&HEIGHT=40&WIDTH=40",
-                                    layers: "osm:osm-fuel",
+                                    legendUrl: 'http://ows.terrestris.de/' +
+                                        'geoserver/osm/wms?SERVICE=WMS&VERSIO' +
+                                        'N=1.3.0&REQUEST=GetLegendGraphic&FOR' +
+                                        'MAT=image%2Fpng&TRANSPARENT=true&LAY' +
+                                        'ER=osm%3Aosm-fuel&HEIGHT=40&WIDTH=40',
+                                    layers: 'osm:osm-fuel',
                                     topic: true,
                                     transparent: true,
-                                    crossOrigin: "Anonymous"
+                                    crossOrigin: 'Anonymous'
                                 },
                                 {
-                                    name: "Bushaltestellen",
-                                    type: "WMS",
-                                    treeColor: "rgba(161, 177, 228, 0.53)",
-                                    url: "http://ows.terrestris.de/" +
-                                        "osm-haltestellen?",
+                                    name: 'Bushaltestellen',
+                                    type: 'WMS',
+                                    treeColor: 'rgba(161, 177, 228, 0.53)',
+                                    url: 'http://ows.terrestris.de/' +
+                                        'osm-haltestellen?',
                                     legendHeight: 30,
-                                    legendUrl: "http://ows.terrestris.de/osm-" +
-                                        "haltestellen?SERVICE=WMS&VERSION=1.1" +
-                                        ".0&REQUEST=GetLegendGraphic&FORMAT=i" +
-                                        "mage%2Fpng&TRANSPARENT=true&LAYER=OS" +
-                                        "M-Bushaltestellen&HEIGHT=40&WIDTH=40",
-                                    layers: "OSM-Bushaltestellen",
+                                    legendUrl: 'http://ows.terrestris.de/osm-' +
+                                        'haltestellen?SERVICE=WMS&VERSION=1.1' +
+                                        '.0&REQUEST=GetLegendGraphic&FORMAT=i' +
+                                        'mage%2Fpng&TRANSPARENT=true&LAYER=OS' +
+                                        'M-Bushaltestellen&HEIGHT=40&WIDTH=40',
+                                    layers: 'OSM-Bushaltestellen',
                                     topic: true,
                                     transparent: true,
-                                    crossOrigin: "Anonymous"
+                                    crossOrigin: 'Anonymous'
                                 }
                             ]
                         }
                     ],
                     mapConfig: {
-                        projection: "EPSG:3857",
+                        projection: 'EPSG:3857',
                         resolutions: [
                             156543.03390625,
                             78271.516953125,
@@ -156,16 +156,16 @@ describe('BasiGX.util.ConfigParser', function() {
             div = TestUtil.setupTestDiv();
             map = BasiGX.util.ConfigParser.setupMap(appContext);
             layer = BasiGX.util.ConfigParser.createLayer({
-                name: "OSM WMS Farbig",
-                type: "TileWMS",
-                treeColor: "rgba(41, 213, 4, 0.26)",
-                url: "http://ows.terrestris.de/osm/service?",
-                layers: "OSM-WMS",
-                legendUrl: "http://ows.terrestris.de/osm/service?SERVICE=WMS&" +
-                    "VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPAR" +
-                    "ENT=true&LAYERS=OSM-WMS&TILED=true&WIDTH=256&HEIGHT=256&" +
-                    "CRS=EPSG%3A3857&STYLES=&BBOX=978393.9620502554%2C7000408" +
-                    ".798469583%2C983285.9318605067%2C7005300.768279834",
+                name: 'OSM WMS Farbig',
+                type: 'TileWMS',
+                treeColor: 'rgba(41, 213, 4, 0.26)',
+                url: 'http://ows.terrestris.de/osm/service?',
+                layers: 'OSM-WMS',
+                legendUrl: 'http://ows.terrestris.de/osm/service?SERVICE=WMS&' +
+                    'VERSION=1.3.0&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPAR' +
+                    'ENT=true&LAYERS=OSM-WMS&TILED=true&WIDTH=256&HEIGHT=256&' +
+                    'CRS=EPSG%3A3857&STYLES=&BBOX=978393.9620502554%2C7000408' +
+                    '.798469583%2C983285.9318605067%2C7005300.768279834',
                 topic: false, // TODO we should get rid of `topic`
                 visibility: false,
                 // this is our 'standard' for hover-enabled layers, both
@@ -221,28 +221,28 @@ describe('BasiGX.util.ConfigParser', function() {
         it('converts number string to array on ' +
            'convertStringToNumericArray method call', function() {
             var retVal = BasiGX.util.ConfigParser.
-                convertStringToNumericArray("int", "3 , 2,1");
-            expect(retVal).to.be.eql([3,2,1]);
+                convertStringToNumericArray('int', '3 , 2,1');
+            expect(retVal).to.be.eql([3, 2, 1]);
         });
         it('converts float string to array on ' +
            'convertStringToNumericArray method call', function() {
             var retVal = BasiGX.util.ConfigParser.
-                convertStringToNumericArray("float", "3.1415,2.00124,1.512172");
-            expect(retVal).to.be.eql([3.1415,2.00124,1.512172]);
+                convertStringToNumericArray('float', '3.1415,2.00124,1.512172');
+            expect(retVal).to.be.eql([3.1415, 2.00124, 1.512172]);
         });
 
-        describe('hoverable and hoverField configuration', function(){
+        describe('hoverable and hoverField configuration', function() {
             it('reads out and respects hoverable and hoverField (enabled)',
-                function(){
+                function() {
                     expect(layer.get('hoverable')).to.be(true);
                     expect(layer.get('hoverField')).to.be('HumptyDumpty');
                 }
             );
             it('reads out and respects hoverable and hoverField (disabled)',
-                function(){
+                function() {
                     var layer2 = BasiGX.util.ConfigParser.createLayer({
-                        name: "Only hoverField no hoverable",
-                        type: "TileWMS",
+                        name: 'Only hoverField no hoverable',
+                        type: 'TileWMS',
                         // this is our 'standard' for hover-disabled layers,
                         // both `hoverable` is false and `hoverField` set
                         hoverable: false,
@@ -252,20 +252,20 @@ describe('BasiGX.util.ConfigParser', function() {
                     expect(layer2.get('hoverField')).to.be(null);
                 }
             );
-            it('reads out and respects hoverField (not configured)', function(){
+            it('reads out / respects hoverField (not configured)', function() {
                 var layer3 = BasiGX.util.ConfigParser.createLayer({
-                    name: "Neither hoverField nor hoverable",
-                    type: "TileWMS"
+                    name: 'Neither hoverField nor hoverable',
+                    type: 'TileWMS'
                     // what happens if we do not have the props at all?
                 });
                 expect(layer3.get('hoverable')).to.be(false);
                 expect(layer3.get('hoverField')).to.be(undefined);
             });
             it('reads out and respects hoverField (only hoverField)',
-                function(){
+                function() {
                     var layer4 = BasiGX.util.ConfigParser.createLayer({
-                        name: "Only hoverField no hoverable",
-                        type: "TileWMS",
+                        name: 'Only hoverField no hoverable',
+                        type: 'TileWMS',
                         // what happens if only a `hoverField` is set
                         hoverField: 'HumptyDumpty'
                     });

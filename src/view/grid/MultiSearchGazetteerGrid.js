@@ -28,7 +28,7 @@
  * @requires BasiGX.util.Animate
  *
  */
-Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
+Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid', {
     extend: 'Ext.grid.Panel',
     xtype: 'basigx-grid-multisearchgazetteergrid',
 
@@ -84,8 +84,8 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
         }, {
             text: 'Name',
             xtype: 'templatecolumn',
-            tpl: '<div data-qtip="{display_name}">'+
-            '{display_name}'+
+            tpl: '<div data-qtip="{display_name}">' +
+            '{display_name}' +
             '</div>',
             flex: 2
         }, {
@@ -99,7 +99,7 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
     /**
     *
     */
-    initComponent: function () {
+    initComponent: function() {
         var me = this;
 
         me.callParent(arguments);
@@ -117,13 +117,13 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
     /**
      * Called by OnBoxeady listener to add the search layer
      */
-    onBoxReady: function(){
+    onBoxReady: function() {
         var me = this;
-        if(!me.getMap()){
+        if (!me.getMap()) {
             var map = BasiGX.util.Map.getMapComponent().getMap();
             me.setMap(map);
         }
-        if(!me.getLayer()){
+        if (!me.getLayer()) {
             var layer = new ol.layer.Vector({
                 source: new ol.source.Vector()
             });
@@ -136,10 +136,13 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
     },
 
     /**
-     * Called by OnItemmouseenter listener to highlight the hovered search
-     * results on the map
+     * Called by onitemmouseenter listener to highlight the hovered search
+     * results on the map.
+     *
+     * @param {Ext.grid.Panel} grid The grid panel.
+     * @param {Ext.data.Model} record The record that belongs to the item.
      */
-    onItemMouseEnter: function(grid, record){
+    onItemMouseEnter: function(grid, record) {
         var me = this;
         var layer = me.getLayer();
         var projection = me.getMap().getView().getProjection().getCode();
@@ -151,19 +154,22 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
     },
 
     /**
-     * Called by OnItemmouseleave listener to unhighlight the search
+     * Called by onitemmouseleave listener to unhighlight the search
      * results on the map
      */
-    onItemMouseLeave: function(){
+    onItemMouseLeave: function() {
         var me = this;
         var layer = me.getLayer();
         layer.getSource().clear();
     },
 
     /**
-     * Called by OnItemclick listener to center map on clicked item
+     * Called by onitemclick listener to center map on clicked item.
+     *
+     * @param {Ext.grid.Panel} grid The grid panel.
+     * @param {Ext.data.Model} record The record that belongs to the item.
      */
-    onItemClick: function(grid, record){
+    onItemClick: function(grid, record) {
         var me = this;
         var map = me.getMap();
         var olView = map.getView();
@@ -176,7 +182,7 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
     },
 
     /**
-     * Called by OnHide listener to deactivate all listeners when inactive
+     * Called by onhide listener to deactivate all listeners when inactive.
      */
     unregisterListeners: function() {
         var me = this;
@@ -188,13 +194,14 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
     },
 
     /**
-    * called by BasiGX.view.form.field.MultiSearchCombo.doGazetteerSearch()
-    * This method does the actual search by updating the according store.
-    * It decides if the search should be done in the visible extent only.
-     * @param {string} value The search term
-     * @param {boolean} limitToBBox Search is limited to visible extent
-    */
-    doGazetteerSearch: function(value, limitToBBox){
+     * Called by BasiGX.view.form.field.MultiSearchCombo.doGazetteerSearch()
+     * This method does the actual search by updating the according store.
+     * It decides if the search should be done in the visible extent only.
+     *
+     * @param {string} value The search term.
+     * @param {boolean} limitToBBox Search is limited to visible extent.
+     */
+    doGazetteerSearch: function(value, limitToBBox) {
 
         var me = this;
 
@@ -204,7 +211,7 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid',{
 
         store.getProxy().setExtraParam('q', value);
 
-        if(limitToBBox){
+        if (limitToBBox) {
             var map = BasiGX.util.Map.getMapComponent().getMap();
             var olView = map.getView();
             var projection = olView.getProjection().getCode();

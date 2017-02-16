@@ -59,13 +59,13 @@ Ext.define('BasiGX.view.button.ToggleLegend', {
          * Will be used to be able to determine the component dynamically.
          */
         legendTreeXType: null,
-        handler: function(button){
+        handler: function(button) {
             var me = this;
             var legendPanel =
                     BasiGX.util.Map.getLegendTreePanel(me.getLegendTreeXType());
 
             if (legendPanel) {
-                if(legendPanel.getCollapsed()) {
+                if (legendPanel.getCollapsed()) {
                     legendPanel.expand();
                 } else {
                     legendPanel.collapse();

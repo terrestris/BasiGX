@@ -20,12 +20,12 @@
  *
  * @class BasiGX.view.view.LayerSet
  */
-Ext.define("BasiGX.view.view.LayerSet", {
-    extend: "Ext.view.View",
-    xtype: "basigx-view-layerset",
+Ext.define('BasiGX.view.view.LayerSet', {
+    extend: 'Ext.view.View',
+    xtype: 'basigx-view-layerset',
 
     requires: [
-        "Ext.data.Store"
+        'Ext.data.Store'
     ],
 
     /**
@@ -91,28 +91,27 @@ Ext.define("BasiGX.view.view.LayerSet", {
      *
      */
     initComponent: function() {
-
-        var me = this,
-            store;
+        var me = this;
+        var store;
 
         if (Ext.isEmpty(me.layerSetUrl)) {
 
             // use given local data or demo data
             var data = me.layerSetData || [
                 {
-                    "title": "Stadtkarte",
-                    "name": "stadtkarte",
-                    "thumb": me.demoThumb
+                    'title': 'Stadtkarte',
+                    'name': 'stadtkarte',
+                    'thumb': me.demoThumb
                 },
                 {
-                    "title": "Verkehr",
-                    "name": "verkehr",
-                    "thumb": me.demoThumb
+                    'title': 'Verkehr',
+                    'name': 'verkehr',
+                    'thumb': me.demoThumb
                 },
                 {
-                    "title": "Umwelt",
-                    "name": "umwelt",
-                    "thumb": me.demoThumb
+                    'title': 'Umwelt',
+                    'name': 'umwelt',
+                    'thumb': me.demoThumb
                 }
             ];
 
@@ -142,22 +141,22 @@ Ext.define("BasiGX.view.view.LayerSet", {
         // setup default template if none given
         if (Ext.isEmpty(me.tpl)) {
             me.tpl = [
-                 '<tpl for=".">',
-                     '<div class="thumb-wrap">',
-                         '<div class="thumb">',
-                             // if the thumb is a href to an online resource, we
-                             // dont need the defaultImagePath
-                             '<tpl if="thumb.indexOf(\'http\') &gt;= 0">',
-                                 '<img src="{thumb}" />',
-                             '<tpl else>',
-                                 '<img src="' + me.defaultImagePath,
-                                 '{thumb}" />',
-                             '</tpl>',
-                         '</div>',
-                         '<span>{title}</span>',
-                     '</div>',
-                 '</tpl>'
-             ];
+                '<tpl for=".">',
+                '<div class="thumb-wrap">',
+                '<div class="thumb">',
+                 // if the thumb is a href to an online resource, we
+                 // dont need the defaultImagePath
+                '<tpl if="thumb.indexOf(\'http\') &gt;= 0">',
+                '<img src="{thumb}" />',
+                '<tpl else>',
+                '<img src="' + me.defaultImagePath,
+                '{thumb}" />',
+                '</tpl>',
+                '</div>',
+                '<span>{title}</span>',
+                '</div>',
+                '</tpl>'
+            ];
         }
 
         // setup store

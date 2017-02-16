@@ -9,7 +9,7 @@ describe('BasiGX.plugin.AccessibleTitle', function() {
         it('is defined', function() {
             expect(BasiGX.plugin.AccessibleTitle).to.not.be(undefined);
         });
-        it('can be instantiated', function(){
+        it('can be instantiated', function() {
             var plugin = Ext.create('BasiGX.plugin.AccessibleTitle');
             expect(plugin).to.be.a(BasiGX.plugin.AccessibleTitle);
             plugin.destroy();
@@ -71,7 +71,7 @@ describe('BasiGX.plugin.AccessibleTitle', function() {
             var cntH4After = document.querySelectorAll('h4').length;
             expect(cntH4After).to.be(cntH4Before + 1);
         });
-        it('ensures the added HTML is invisible', function(){
+        it('ensures the added HTML is invisible', function() {
             var elem = Ext.get(plugin.addedHtmlHeader);
             expect(elem.isVisible()).to.be(false);
         });

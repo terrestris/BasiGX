@@ -15,9 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * Layer Util
+ * URL Util
  *
- * Some methods to work with ol-layers
+ * Some methods to work with URLs
+ *
+ * TODO These methods should be refactored, see inline comments.
  *
  * @class BasiGX.util.Url
  */
@@ -30,11 +32,12 @@ Ext.define('BasiGX.util.Url', {
          *
          * @param {String} key The key to search for
          * @param {String} [url=location.href] The url to search in.
+         * @return {String} The value of the `key`-parameter inside of `url`.
          */
-        getParamValue: function(key, url){
-            var re = new RegExp('[\\?&]' + (key + "") + '=([^&#]*)'),
-                regexResult = re.exec(url || window.location.href),
-                value;
+        getParamValue: function(key, url) {
+            var re = new RegExp('[\\?&]' + (key + '') + '=([^&#]*)');
+            var regexResult = re.exec(url || window.location.href);
+            var value;
             if (regexResult) {
                 value = decodeURIComponent(regexResult[1]);
             }
@@ -44,33 +47,45 @@ Ext.define('BasiGX.util.Url', {
         /**
          * Returns the URL of the used application like this
          *
-         *   http://localhost:8080/Tribulus/client/gizmo/index-dev.html?
+         *     http://localhost:8080/Tribulus/client/gizmo/index-dev.html?
+         *
+         * TODO can we really assume the presence of location.host?
+         *
+         * @return {String} The URL of the application.
          */
         getCurrentAppUrl: function() {
-
-            return window.location.protocol + "//" + window.location.host + window.location.pathname + "?";
+            var loc = window.location;
+            return loc.protocol + '//' + loc.host + loc.pathname + '?';
         },
 
         /**
-         * Return the name of the web project like this
+         * Return the base URL of the web project.
          *
-         *   Tribulus
+         * TODO Are we sure we have an application always deployed like it is
+         *      assumed herein?
+         *
+         * @return {String} The base URL including the webproject name (first
+         *     'folder').
          */
         getWebProjectBaseUrl: function() {
-
-            var url = window.location.protocol + "//" + window.location.host,
-                webProjectName = window.location.pathname.match(/\/[A-Za-z\-]*\//)[0];
+            var loc = window.location;
+            var url = loc.protocol + '//' + loc.host;
+            var webProjectName = window.location.pathname.match(
+                /\/[A-Za-z\-]*\//
+            )[0];
 
             return url + webProjectName;
         },
 
         /**
-         * Return the name of the basepath of the project like this
+         * Return the project base URL, e.g. `http://somehost:someport/`.
          *
-         * http://somehost:someport/
+         * @return {String} The project base URL, e.g.
+         *     `http://somehost:someport/`.
          */
         getProjectBaseUrl: function() {
-            var baseUrl = window.location.protocol + "//" + window.location.host + "/";
+            var loc = window.location;
+            var baseUrl = loc.protocol + '//' + loc.host + '/';
             return baseUrl;
         }
 

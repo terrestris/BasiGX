@@ -19,17 +19,21 @@
  * Used to search in the glorious dataset of OSM
  *
  * Example of usage:
+ *
  *     {
  *         xtype: 'basigx-search-overpass',
  *         clusterResults: true,
  *         viewboxlbrt: '52.4677,6.9186,53.9642,11.2308'
  *     }
  *
+ * TODO This class has a lot in common with both #NominatimSearch and the
+ *      generic #WfsSearch. We should factor out shared code.
+ *
  * @class BasiGX.view.container.OverpassSearch
  */
-Ext.define("BasiGX.view.container.OverpassSearch", {
-    extend: "Ext.container.Container",
-    xtype: "basigx-container-overpasssearch",
+Ext.define('BasiGX.view.container.OverpassSearch', {
+    extend: 'Ext.container.Container',
+    xtype: 'basigx-container-overpasssearch',
 
     requires: [
         'GeoExt.data.store.Features',
@@ -95,7 +99,9 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         groupHeaderTpl: '{type}',
 
         /**
+         * An `ol.style.Style` for search result features.
          *
+         * @type {ol.style.Style}
          */
         searchResultFeatureStyle: new ol.style.Style({
             image: new ol.style.Circle({
@@ -118,7 +124,11 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         }),
 
         /**
+         * A function generating an `ol.style.Style` for highlighting features.
          *
+         * @param {Number} radius The radius of the circle.
+         * @param {String} text The text for the style.
+         * @return {ol.style.Style} The generated style.
          */
         searchResultHighlightFeatureStyleFn: function(radius, text) {
             return new ol.style.Style({
@@ -142,7 +152,9 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         },
 
         /**
+         * An `ol.style.Style` for selected search result features.
          *
+         * @type {ol.style.Style}
          */
         searchResultSelectFeatureStyle: new ol.style.Style({
             image: new ol.style.Circle({
@@ -164,9 +176,16 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
             })
         }),
 
-       /**
-        *
-        */
+        /**
+         * Returns an array of styles.
+         *
+         * TODO Are we accessing a private property here?
+         *      `getSource().distance_` => this should be changed.
+         *
+         * @param {Number} amount The amount.
+         * @param {Number} radius The radius.
+         * @return {Array<ol.style.Style>} The generated styles.
+         */
         clusterStyleFn: function(amount, radius) {
             // set maxradius
             var maxRadius = this.clusterLayer.getSource().distance_ / 2;
@@ -193,7 +212,10 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         },
 
         /**
+         * Whether we want to highlight the associated feature in the map when
+         * we hover over the row for the feature in the grid.
          *
+         * @type {Boolean}
          */
         highLightFeatureOnHoverInGrid: true
     },
@@ -260,7 +282,7 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         if (me.clusterResults && !me.clusterLayer) {
             var clusterSource = new ol.source.Cluster({
                 distance: 40,
-                source: me.searchResultVectorLayer.getSource()//new ol.source.Vector()
+                source: me.searchResultVectorLayer.getSource()
             });
 
             me.clusterLayer = new ol.layer.Vector({
@@ -288,15 +310,15 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
                 direction: 'DESC'
             }],
             fields: [
-                 'prefLabel',
-                 {
-                     name: 'termRelated',
-                     type: 'string',
-                     convert: function(val) {
-                         return val.de[0] ? val.de[0] : '-';
-                     }
-                 },
-                 'countAll'
+                'prefLabel',
+                {
+                    name: 'termRelated',
+                    type: 'string',
+                    convert: function(val) {
+                        return val.de[0] ? val.de[0] : '-';
+                    }
+                },
+                'countAll'
             ]
         });
 
@@ -433,30 +455,33 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
     },
 
     /**
+     * Bound to the `change`-event of the textfield.
      *
+     * @param {Ext.form.field.Text} textfield The textfield in which one enters
+     *     the query.
      */
     handleKeyDown: function(textfield) {
-        var me = textfield.up('basigx-container-overpasssearch'),
-            val = textfield.getValue();
+        var overpassContainer = textfield.up('basigx-container-overpasssearch');
+        var val = textfield.getValue();
 
-        if (val.length < me.getMinSearchTextChars()) {
+        if (val.length < overpassContainer.getMinSearchTextChars()) {
             return;
         }
 
         // set the searchterm on component
-        me.searchTerm = val;
+        overpassContainer.searchTerm = val;
 
         // reset grid from old values
-        me.resetGrids();
+        overpassContainer.resetGrids();
 
         // prepare the describeFeatureType for all given layers
-        if (me.typeDelayTask) {
-            me.typeDelayTask.cancel();
+        if (overpassContainer.typeDelayTask) {
+            overpassContainer.typeDelayTask.cancel();
         }
-        me.typeDelayTask = new Ext.util.DelayedTask(function(){
-            me.findTagForSearchTerm();
+        overpassContainer.typeDelayTask = new Ext.util.DelayedTask(function() {
+            overpassContainer.findTagForSearchTerm();
         });
-        me.typeDelayTask.delay(me.getTypeDelay());
+        overpassContainer.typeDelayTask.delay(overpassContainer.getTypeDelay());
 
     },
 
@@ -487,9 +512,8 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
      * find osm tags for the searchterm
      */
     findTagForSearchTerm: function() {
-
-        var me = this,
-            results;
+        var me = this;
+        var results;
 
         var requestParams = {
             query: me.searchTerm,
@@ -497,24 +521,24 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
             lang: 'de'
         };
 
-        var url = me.getTagFinderUrl() + "?";
+        var url = me.getTagFinderUrl() + '?';
         Ext.iterate(requestParams, function(k, v) {
-            url += k + "=" + encodeURIComponent(v) + "&";
+            url += k + '=' + encodeURIComponent(v) + '&';
         });
 
         me.setLoading(true);
 
         Ext.Ajax.request({
             url: url,
-            success: function(response){
+            success: function(response) {
                 me.setLoading(false);
-                if(Ext.isString(response.responseText)) {
+                if (Ext.isString(response.responseText)) {
                     results = Ext.decode(response.responseText);
-                } else if(Ext.isObject(response.responseText)) {
+                } else if (Ext.isObject(response.responseText)) {
                     results = response.responseText;
                 } else {
-                    Ext.log.error("Error! Could not parse " +
-                        "tagfinder response!");
+                    Ext.log.error('Error! Could not parse ' +
+                        'tagfinder response!');
                 }
                 if (results.length > 0) {
                     var tagArray = [];
@@ -532,18 +556,21 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
             },
             failure: function(response) {
                 me.setLoading(false);
-                Ext.log.error("Error on tagfinder request:",
+                Ext.log.error('Error on tagfinder request:',
                     response);
             }
         });
     },
 
     /**
+     * Starts the search based on the clicked tag.
      *
+     * @param {Ext.grid.Panel} grid The tag finder grid.
+     * @param {Ext.data.Model} rec The clicked tag-record.
      */
     triggerSearch: function(grid, rec) {
-        var me = this,
-            tagFinderGrid = me.down('grid[name=tagfinderresultgrid]');
+        var me = this;
+        var tagFinderGrid = me.down('grid[name=tagfinderresultgrid]');
 
         if (tagFinderGrid.isVisible()) {
             tagFinderGrid.hide();
@@ -557,41 +584,45 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         requestParams.data += '(' + me.getViewboxlbrt() + ');';
         requestParams.data += 'out ' + me.getLimit() + ' qt;';
 
-        var url = me.getOverpassUrl() + "?";
+        var url = me.getOverpassUrl() + '?';
 
         me.setLoading(true);
 
         Ext.Ajax.request({
             url: url,
             params: {data: requestParams.data},
-            success: function(response){
+            success: function(response) {
                 me.setLoading(false);
                 var results;
-                if(Ext.isString(response.responseText)) {
+                if (Ext.isString(response.responseText)) {
                     results = Ext.decode(response.responseText);
-                } else if(Ext.isObject(response.responseText)) {
+                } else if (Ext.isObject(response.responseText)) {
                     results = response.responseText;
                 } else {
-                    Ext.log.error("Error! Could not parse " +
-                        "overpass response!");
+                    Ext.log.error('Error! Could not parse ' +
+                        'overpass response!');
                 }
                 me.fireEvent('overpassResponse', results);
             },
             failure: function(response) {
                 me.setLoading(false);
-                Ext.log.error("Error on overpass request:",
+                Ext.log.error('Error on overpass request:',
                     response);
             }
         });
     },
 
+    /**
+     * Show the search results in the grid.
+     *
+     * @param {Object} response The XHR response.
+     */
     showSearchResults: function(response) {
+        var me = this;
+        var grid = me.down('grid[name=overpasssearchresultgrid]');
+        var features = response.elements;
 
-        var me = this,
-            grid = me.down('grid[name=overpasssearchresultgrid]'),
-            features = response.elements;
-
-        if(features.length > 0){
+        if (features.length > 0) {
             grid.show();
         }
 
@@ -599,11 +630,14 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
 
             var olFeat = new ol.Feature({
                 geometry: new ol.geom.Point(ol.proj.transform(
-                    [parseFloat(feature.lon), parseFloat(feature.lat)], 'EPSG:4326', 'EPSG:3857'
+                    [parseFloat(feature.lon), parseFloat(feature.lat)],
+                    'EPSG:4326', 'EPSG:3857'
                 )),
                 properties: feature
             });
-            olFeat.set('displayfield', feature.tags.name || 'Kein Name gefunden');
+            olFeat.set('displayfield',
+                feature.tags.name || 'Kein Name gefunden' // TODO i18n
+            );
 
             me.searchResultVectorLayer.getSource().addFeature(olFeat);
         });
@@ -611,22 +645,25 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
         me.searchResultVectorLayer.setStyle(me.getSearchResultFeatureStyle());
 
         var featureExtent = me.searchResultVectorLayer.getSource().getExtent();
-        if(!Ext.Array.contains(featureExtent, Infinity)){
+        if (!Ext.Array.contains(featureExtent, Infinity)) {
             me.zoomToExtent(featureExtent);
         }
     },
 
     /**
      * Works with extent or geom.
+     *
+     * @param {ol.Extent|ol.geom.SimpleGeometry} extent The extent or geometry
+     *     to zoom to.
      */
-    zoomToExtent: function(extent){
+    zoomToExtent: function(extent) {
         var me = this;
         var olView = me.map.getView();
         var pan = ol.animation.pan({
             source: olView.getCenter()
         });
         var zoom = ol.animation.zoom({
-           resolution: olView.getResolution()
+            resolution: olView.getResolution()
         });
         me.map.beforeRender(pan, zoom);
 
@@ -634,9 +671,12 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
     },
 
     /**
-     * update the symbolizer in the grid
+     * Update the symbolizer in the grid.
+     *
+     * @param {HTMLElement} item The HTML-element where the renderer lives in.
+     * @param {ol.style.Style} style The new style for the renderer.
      */
-    updateRenderer: function(item, style){
+    updateRenderer: function(item, style) {
         var renderer = Ext.getCmp(
             Ext.query('div[id^=gx_renderer', true, item)[0].id);
         var src = renderer.map.getLayers().getArray()[0].getSource();
@@ -644,10 +684,16 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
     },
 
     /**
+     * Highlights the feature.
      *
+     * Bound to the `itemmouseenter`-event on the grid.
+     *
+     * @param {Ext.view.View} tableView The tableView / grid.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} item The item's element.
      */
     highlightFeature: function(tableView, record, item) {
-        if(this.enterEventRec === record){
+        if (this.enterEventRec === record) {
             return;
         }
         var feature;
@@ -683,10 +729,16 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
     },
 
     /**
+     * Unhighlights a previously highlighted feature.
      *
+     * Bound to the `itemmouseleave`-event on the grid.
+     *
+     * @param {Ext.view.View} tableView The tableView / grid.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} item The item's element.
      */
     unhighlightFeature: function(tableView, record, item) {
-        if(this.leaveEventRec === record){
+        if (this.leaveEventRec === record) {
             return;
         }
         this.leaveEventRec = record;
@@ -701,7 +753,13 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
     },
 
     /**
+     * Highlights a selected feature.
      *
+     * Bound to the `itemclick`-event on the grid.
+     *
+     * @param {Ext.view.View} tableView The tableView / grid.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} item The item's element.
      */
     highlightSelectedFeature: function(tableView, record, item) {
         record.olObject.setStyle(this.getSearchResultSelectFeatureStyle());
@@ -710,9 +768,12 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
     },
 
     /**
+     * Returns the cluster feature from the given `ol.Feature`.
      *
+     * @param {ol.Feature} feature The feature to get the cluster feature from.
+     * @return {ol.Feature} The cluster feature.
      */
-    getClusterFeatureFromFeature: function(feature){
+    getClusterFeatureFromFeature: function(feature) {
         var me = this;
         var clusterFeature;
         var clusterFeatures = me.clusterLayer.getSource().getFeatures();
@@ -723,8 +784,8 @@ Ext.define("BasiGX.view.container.OverpassSearch", {
                         feature.getProperties().properties.id &&
                         f.getProperties().properties.id ===
                         feature.getProperties().properties.id) {
-                           clusterFeature = feat;
-                           return false;
+                        clusterFeature = feat;
+                        return false;
                     }
                 });
             }

@@ -20,20 +20,20 @@
  *
  * @class BasiGX.view.form.Print
  */
-Ext.define("BasiGX.view.form.Print", {
-    extend: "Ext.form.Panel",
-    xtype: "basigx-form-print",
+Ext.define('BasiGX.view.form.Print', {
+    extend: 'Ext.form.Panel',
+    xtype: 'basigx-form-print',
 
     requires: [
-        "Ext.window.Toast",
-        "Ext.app.ViewModel",
-        "Ext.form.action.StandardSubmit",
+        'Ext.window.Toast',
+        'Ext.app.ViewModel',
+        'Ext.form.action.StandardSubmit',
 
-        "BasiGX.util.Layer",
-        "BasiGX.util.Map",
-        "BasiGX.ol3.extension.TransformInteraction",
+        'BasiGX.util.Layer',
+        'BasiGX.util.Map',
+        'BasiGX.ol3.extension.TransformInteraction',
 
-        "GeoExt.data.MapfishPrintProvider"
+        'GeoExt.data.MapfishPrintProvider'
     ],
     statics: {
         LAYER_IDENTIFIER_KEY: '_basigx_printextent_layer_'
@@ -150,7 +150,7 @@ Ext.define("BasiGX.view.form.Print", {
             text: '{printFormat:uppercase} {printButtonSuffix}'
         },
         formBind: true,
-        handler: function(){
+        handler: function() {
             this.up('form').createPrint();
         },
         disabled: true
@@ -162,8 +162,8 @@ Ext.define("BasiGX.view.form.Print", {
             text: '{downloadButtonPrefix} {printFormat:uppercase} '
         },
         link: null, // this has to be filled in application
-        handler: function(btn){
-            if(btn.link){
+        handler: function(btn) {
+            if (btn.link) {
                 window.open(btn.link);
             } else {
                 Ext.raise('No downloadlink defined');
@@ -179,11 +179,11 @@ Ext.define("BasiGX.view.form.Print", {
     /**
      * Initializes the print form.
      */
-    initComponent: function(){
+    initComponent: function() {
         var me = this;
         var url = me.getUrl();
 
-        if(!url){
+        if (!url) {
             me.html = 'No Url provided!';
             me.callParent();
             return;
@@ -253,13 +253,13 @@ Ext.define("BasiGX.view.form.Print", {
      * If you can come up with a different solution; I'd be very happy.
      *
      * @param {Ext.data.Store} store The stoire that has loaded.
-     * @param {Array<Ext.data.Model>} store The records that were loaded.
+     * @param {Array<Ext.data.Model>} records The records that were loaded.
      */
     onRemoteAppStoreLoad: function(store, records) {
         var me = this;
         var rawValues = [];
         var combo = me.down('combo[name=appCombo]');
-        Ext.each(records, function(rec){
+        Ext.each(records, function(rec) {
             rawValues.push(rec.data);
         });
         Ext.Array.sort(rawValues);
@@ -269,7 +269,11 @@ Ext.define("BasiGX.view.form.Print", {
     },
 
     /**
+     * Returns a configuration object for a fieldset with a combo for the print
+     * apps.
      *
+     * @return {Object} A configuration object for a fieldset with a combo
+     *     for the print apps.
      */
     getPrintAppComponent: function() {
         var component = {
@@ -301,13 +305,13 @@ Ext.define("BasiGX.view.form.Print", {
     /**
      *
      */
-    createPrint: function(){
-        var view = this;
+    createPrint: function() {
+        var me = this;
         var spec = {};
-        var mapComponent = view.getMapComponent();
+        var mapComponent = me.getMapComponent();
         var mapView = mapComponent.getMap().getView();
-        var layout = view.down('combo[name="layout"]').getValue();
-        var format = view.down('combo[name="format"]').getValue();
+        var layout = me.down('combo[name="layout"]').getValue();
+        var format = me.down('combo[name="format"]').getValue();
         var attributes = {};
         var projection = mapView.getProjection().getCode();
         var rotation = mapView.getRotation();
@@ -318,10 +322,9 @@ Ext.define("BasiGX.view.form.Print", {
             mapComponent, this.layerFilter, this
         );
 
-        var fieldsets =
-            view.query('fieldset[name=attributes] fieldset');
+        var fieldsets = me.query('fieldset[name=attributes] fieldset');
 
-        Ext.each(fieldsets, function(fs){
+        Ext.each(fieldsets, function(fs) {
             var name = fs.name;
             // TODO double check when rotated
             var featureBbox = fs.extentFeature.getGeometry().getExtent();
@@ -340,37 +343,35 @@ Ext.define("BasiGX.view.form.Print", {
         // Get all Fields except the DPI Field
         // TODO This query should be optimized or changed into some
         // different kind of logic
-        var additionalFields = view.query(
+        var additionalFields = me.query(
             'fieldset[name=attributes]>field[name!=dpi]'
         );
-        Ext.each(additionalFields, function(field){
+        Ext.each(additionalFields, function(field) {
 
-            if(field.getName() === 'legend') {
-                attributes.legend = view.getLegendObject();
+            if (field.getName() === 'legend') {
+                attributes.legend = me.getLegendObject();
             } else if (field.getName() === 'scalebar') {
-                attributes.scalebar = view.getScaleBarObject();
+                attributes.scalebar = me.getScaleBarObject();
             } else if (field.getName() === 'northArrowDef') {
-                attributes.northArrowDef = view.getNorthArrowObject();
+                attributes.northArrowDef = me.getNorthArrowObject();
             } else {
                 attributes[field.getName()] = field.getValue();
             }
         }, this);
 
-        var url = view.getUrl();
-        var app = view.down('combo[name=appCombo]').getValue();
+        var url = me.getUrl();
+        var app = me.down('combo[name=appCombo]').getValue();
         spec.attributes = attributes;
         spec.layout = layout;
         var submitForm = Ext.create('Ext.form.Panel', {
             standardSubmit: true,
             url: url + app + '/buildreport.' + format,
             method: 'POST',
-            items: [
-                {
-                    xtype: 'textfield',
-                    name: 'spec',
-                    value: Ext.encode(spec)
-                }
-            ]
+            items: [{
+                xtype: 'textfield',
+                name: 'spec',
+                value: Ext.encode(spec)
+            }]
         });
         submitForm.submit();
     },
@@ -378,7 +379,7 @@ Ext.define("BasiGX.view.form.Print", {
     /**
      *
      */
-    addParentCollapseExpandListeners: function(){
+    addParentCollapseExpandListeners: function() {
         var parent = this.up();
         parent.on({
             collapse: 'cleanupPrintExtent',
@@ -390,7 +391,7 @@ Ext.define("BasiGX.view.form.Print", {
     /**
      *
      */
-    addExtentLayer: function(){
+    addExtentLayer: function() {
         var targetMap = BasiGX.util.Map.getMapComponent().getMap();
 
         // TODO MJ: the lines below are possible better suited at the
@@ -415,7 +416,8 @@ Ext.define("BasiGX.view.form.Print", {
         layer.set(isPrintExtentLayerKey, true);
 
         // Set our internal flag to filter this layer out of the tree / legend
-        var displayInLayerSwitcherKey = BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+        var displayInLayerSwitcherKey = BasiGX.util.Layer
+            .KEY_DISPLAY_IN_LAYERSWITCHER;
         layer.set(displayInLayerSwitcherKey, false);
 
         targetMap.addLayer(layer);
@@ -455,7 +457,8 @@ Ext.define("BasiGX.view.form.Print", {
      * Filters the layer by properties or params. Used in createPrint.
      * This method can/should be overridden in the application.
      *
-     * @param ol.layer
+     * @param {ol.layer.Layer} layer The layer to test.
+     * @return {Boolean} Whether to include the layer in printouts.
      */
     layerFilter: function(layer) {
         var isChecked = !!layer.checked;
@@ -466,8 +469,8 @@ Ext.define("BasiGX.view.form.Print", {
         ) !== false); // may be undefined for certain layers
 
         if (isChecked && hasName && nonOpaque && inTree) {
-            if(layer instanceof ol.layer.Vector &&
-                layer.getSource().getFeatures().length < 1){
+            if (layer instanceof ol.layer.Vector &&
+                layer.getSource().getFeatures().length < 1) {
                 return false;
             }
             return true;
@@ -480,11 +483,12 @@ Ext.define("BasiGX.view.form.Print", {
      * Filters the layer by properties or params. Used in getLegendObject.
      * This method can/should be overriden in the application.
      *
-     * @param ol.layer
+     * @param {ol.layer.Layer} layer The layer to test.
+     * @return {Boolean} Whether to include the layer in legends.
      */
     legendLayerFilter: function(layer) {
         if (layer.checked && layer.get('name') &&
-            layer.get('name') !== "Hintergrundkarte" &&
+            layer.get('name') !== 'Hintergrundkarte' &&
             layer.get('opacity') > 0) {
             return true;
         } else {
@@ -493,50 +497,64 @@ Ext.define("BasiGX.view.form.Print", {
     },
 
     /**
+     * Returns the first map component on the page.
      *
+     * @return {GeoExt.component.Map} The first map component on the page.
      */
-    getMapComponent: function(){
+    getMapComponent: function() {
         return Ext.ComponentQuery.query('gx_component_map')[0];
     },
 
     /**
+     * Once the PrintCapability store is loaded, we can add the generic
+     * fieldset.
      *
+     * @param {GeoExt.data.MapfishPrintProvider} provider The Mapfish print
+     *     provider.
      */
-    onPrintProviderReady: function(provider){
+    onPrintProviderReady: function(provider) {
         this.addGenericFieldset(provider);
     },
 
     /**
+     * Bound to the select event of the print applications combo, this sets up a
+     * new `GeoExt.data.MapfishPrintProvider`, that, when ready, will call
+     * the method #onPrintProviderReady.
      *
+     * @param {Ext.form.field.ComboBox} appCombo The app combo.
      */
-    onAppSelected: function(appCombo){
+    onAppSelected: function(appCombo) {
         this.provider = Ext.create('GeoExt.data.MapfishPrintProvider', {
             url: this.getUrl() + appCombo.getValue() + '/capabilities.json',
             listeners: {
                 ready: 'onPrintProviderReady',
                 scope: this
             }
-         });
+        });
     },
 
     /**
-     *
+     * Removes the generic fieldset from the form.
      */
-    removeGenericFieldset: function(){
-        var view = this;
-        var fs = view.down('[name="generic-fieldset"]');
+    removeGenericFieldset: function() {
+        var me = this;
+        var fs = me.down('[name="generic-fieldset"]');
         if (fs) {
-            view.remove(fs);
+            me.remove(fs);
         }
     },
 
     /**
+     * Adds the generic fieldset to the form, with properties defined in the
+     * passed `GeoExt.data.MapfishPrintProvider`.
      *
+     * @param {GeoExt.data.MapfishPrintProvider} provider The Mapfish print
+     *     provider.
      */
-    addGenericFieldset: function(provider){
-        var view = this;
-        var fs = view.down('[name="generic-fieldset"]');
-        var defaultFieldContainer = view.down(
+    addGenericFieldset: function(provider) {
+        var me = this;
+        var fs = me.down('[name="generic-fieldset"]');
+        var defaultFieldContainer = me.down(
             'fieldcontainer[name=defaultFieldContainer]');
 
         if (fs) {
@@ -561,9 +579,12 @@ Ext.define("BasiGX.view.form.Print", {
     },
 
     /**
+     * Adds the format combo box with values from the passed provider.
      *
+     * @param {GeoExt.data.MapfishPrintProvider} provider The Mapfish print
+     *     provider.
      */
-    addFormatCombo: function(provider){
+    addFormatCombo: function(provider) {
         var fs = this.down('fieldset[name=generic-fieldset]');
         var formatStore = provider.capabilityRec.get('formats');
         Ext.Array.sort(formatStore);
@@ -585,9 +606,12 @@ Ext.define("BasiGX.view.form.Print", {
     },
 
     /**
+     * Adds the layout combo box with values from the passed provider.
      *
+     * @param {GeoExt.data.MapfishPrintProvider} provider The Mapfish print
+     *     provider.
      */
-    addLayoutCombo: function(provider){
+    addLayoutCombo: function(provider) {
         var fs = this.down('fieldset[name=generic-fieldset]');
         var layoutStore = provider.capabilityRec.layouts();
         layoutStore.sort('name', 'ASC');
@@ -614,19 +638,24 @@ Ext.define("BasiGX.view.form.Print", {
 
     /**
      * TODO REMOVE EXTENT
+     * TODO is the line above still valid?
+     *
+     * @param {Ext.form.field.Combo} combo The layout combobox.
+     * @param {String} layoutname The selected layout.
      */
-    onLayoutSelect: function(combo, layoutname){
-        var view = this,
-            attributesFieldset = view.down('fieldset[name=attributes]'),
-            layoutRec = combo.findRecordByValue(layoutname),
-            attributeFieldset,
-            defaultFieldContainer = view.down(
-                'fieldcontainer[name=defaultFieldContainer]');
+    onLayoutSelect: function(combo, layoutname) {
+        var me = this;
+        var attributesFieldset = me.down('fieldset[name=attributes]');
+        var layoutRec = combo.findRecordByValue(layoutname);
+        var attributeFieldset;
+        var defaultFieldContainer = me.down(
+            'fieldcontainer[name=defaultFieldContainer]'
+        );
 
-        view.remove(attributesFieldset);
+        me.remove(attributesFieldset);
 
         // add the layout attributes fieldset:
-        if(defaultFieldContainer && attributesFieldset){
+        if (defaultFieldContainer && attributesFieldset) {
             defaultFieldContainer.remove(attributesFieldset);
         }
         attributeFieldset = defaultFieldContainer.add({
@@ -641,18 +670,24 @@ Ext.define("BasiGX.view.form.Print", {
             }
         });
 
-        layoutRec.attributes().each(function(attribute){
+        layoutRec.attributes().each(function(attribute) {
             this.addAttributeFields(attribute, attributeFieldset);
         }, this);
 
         this.renderAllClientInfos();
-        view.down('button[name="createPrint"]').enable();
+        me.down('button[name="createPrint"]').enable();
     },
 
     /**
+     * Returns an ExtJS configuration for a fieldset for the passed map
+     * attribute record.
      *
+     * @param {GeoExt.data.model.print.LayoutAttribute} attributeRec An map
+     *     attribute record.
+     * @return {Object} An ExtJS configuration for a fieldset for the passed
+     *     map attribute record.
      */
-    getMapAttributeFields: function (attributeRec) {
+    getMapAttributeFields: function(attributeRec) {
         var clientInfo = attributeRec.get('clientInfo');
         var mapTitle = attributeRec.get('name') + ' (' +
             clientInfo.width + ' × ' +
@@ -681,36 +716,60 @@ Ext.define("BasiGX.view.form.Print", {
     },
 
     /**
+     * Returns an ExtJS configuration for a checkbox for the passed boolean
+     * attribute record.
      *
+     * @param {GeoExt.data.model.print.LayoutAttribute} attributeRec A boolean
+     *     attribute record.
+     * @return {Object} An ExtJS configuration for a checkbox for the passed
+     *     attribute record.
      */
-    getCheckBoxAttributeFields: function (attributeRec) {
+    getCheckBoxAttributeFields: function(attributeRec) {
         return {
             xtype: 'checkbox',
             name: attributeRec.get('name'),
             checked: true,
             fieldLabel: attributeRec.get('name'),
-            boxLabel: '…verwenden?'
+            boxLabel: '…verwenden?' // TODO i18n
         };
     },
 
     /**
+     * Returns an ExtJS configuration for a checkbox for the passed boolean
+     * attribute record for enabling / disabling the north arrow.
      *
+     * @param {GeoExt.data.model.print.LayoutAttribute} attributeRec A boolean
+     *     attribute record.
+     * @return {Object} An ExtJS configuration for a checkbox for the passed
+     *     attribute record.
      */
-    getNorthArrowAttributeFields: function (attributeRec) {
+    getNorthArrowAttributeFields: function(attributeRec) {
         return this.getCheckBoxAttributeFields(attributeRec);
     },
 
     /**
+     * Returns an ExtJS configuration for a checkbox for the passed boolean
+     * attribute record for enabling / disabling the legend.
      *
+     * @param {GeoExt.data.model.print.LayoutAttribute} attributeRec A boolean
+     *     attribute record.
+     * @return {Object} An ExtJS configuration for a checkbox for the passed
+     *     attribute record.
      */
-    getLegendAttributeFields: function (attributeRec) {
+    getLegendAttributeFields: function(attributeRec) {
         return this.getCheckBoxAttributeFields(attributeRec);
     },
 
     /**
+     * Returns an ExtJS configuration for a checkbox for the passed boolean
+     * attribute record for enabling / disabling the scalebar.
      *
+     * @param {GeoExt.data.model.print.LayoutAttribute} attributeRec A boolean
+     *     attribute record.
+     * @return {Object} An ExtJS configuration for a checkbox for the passed
+     *     attribute record.
      */
-    getScalebarAttributeFields: function (attributeRec) {
+    getScalebarAttributeFields: function(attributeRec) {
         return this.getCheckBoxAttributeFields(attributeRec);
     },
 
@@ -720,10 +779,11 @@ Ext.define("BasiGX.view.form.Print", {
      * At the moment only `title` attribute is translatable. For all possible
      * further attributes the name of the record will be taken as field label.
      *
-     * @param {Object} attributeRec Record with attribute properties.
+     * @param {GeoExt.data.model.print.LayoutAttribute} attributeRec Record with
+     *     attribute properties.
      * @return {Object} A configuration object for a textfield.
      */
-    getStringField: function (attributeRec) {
+    getStringField: function(attributeRec) {
         var fl = '';
         var value = attributeRec.get('default');
         var name = attributeRec.get('name');
@@ -748,33 +808,40 @@ Ext.define("BasiGX.view.form.Print", {
     },
 
     /**
+     * Adds ExtJS components to the passed `fieldset` for the passed
+     * `attributeRec`. Calls into dedicated sub methods for finding the correct
+     * ExtJS component based on the `type`-property/field of the record.
      *
+     * @param {GeoExt.data.model.print.LayoutAttribute} attributeRec An
+     *     attribute record.
+     * @param {Ext.form.Fieldset} fieldset The fieldset to add the ExtJS
+     *     components to.
      */
-    addAttributeFields: function(attributeRec, fieldset){
+    addAttributeFields: function(attributeRec, fieldset) {
         var me = this;
         var map = me.getMapComponent().getMap();
 
         var attributeFields;
         switch (attributeRec.get('type')) {
-            case "MapAttributeValues":
+            case 'MapAttributeValues':
                 attributeFields = me.getMapAttributeFields(attributeRec);
                 if (me.getPrintExtentAlwaysCentered()) {
                     map.on('moveend', me.renderAllClientInfos, me);
                 }
                 break;
-            case "NorthArrowAttributeValues":
+            case 'NorthArrowAttributeValues':
                 attributeFields = me.getNorthArrowAttributeFields(attributeRec);
                 break;
-            case "ScalebarAttributeValues":
+            case 'ScalebarAttributeValues':
                 attributeFields = me.getScalebarAttributeFields(attributeRec);
                 break;
-            case "LegendAttributeValue":
+            case 'LegendAttributeValue':
                 attributeFields = me.getLegendAttributeFields(attributeRec);
                 break;
-            case "String":
+            case 'String':
                 attributeFields = me.getStringField(attributeRec);
                 break;
-            case "DataSourceAttributeValue":
+            case 'DataSourceAttributeValue':
                 Ext.toast('Data Source not yet supported');
                 attributeFields = me.getStringField(attributeRec);
                 break;
@@ -784,8 +851,8 @@ Ext.define("BasiGX.view.form.Print", {
 
         if (attributeFields) {
             var doContinue = me.fireEvent(
-                    'beforeattributefieldsadd', me, attributeFields
-                );
+                'beforeattributefieldsadd', me, attributeFields
+            );
             // a beforeattributefieldsadd handler may have cancelled the adding
             if (doContinue !== false) {
                 var added = fieldset.add(attributeFields);
@@ -799,36 +866,37 @@ Ext.define("BasiGX.view.form.Print", {
      * rectangle on the map) after print layout was changed or map was zoomed
      * or paned
      */
-    renderAllClientInfos: function(){
+    renderAllClientInfos: function() {
+        var me = this;
 
-        var view = this;
-
-        if (view._renderingClientExtents || view.getCollapsed() !== false) {
+        if (me._renderingClientExtents || me.getCollapsed() !== false) {
             return;
         }
-        view._renderingClientExtents = true;
+        me._renderingClientExtents = true;
 
-        view.extentLayer.getSource().clear();
+        me.extentLayer.getSource().clear();
 
-        view.resetExtentInteraction();
+        me.resetExtentInteraction();
 
-        if (view && view.items) {
-            var fieldsets = view.query(
-                    'fieldset[name=attributes] fieldset[name=map]'
+        var fieldsets = [];
+        if (me && me.items) {
+            fieldsets = me.query(
+                'fieldset[name=attributes] fieldset[name=map]'
             );
         }
 
-        Ext.each(fieldsets, function(fieldset){
-            if (this.getMapComponent() && view.extentLayer &&
+        Ext.each(fieldsets, function(fieldset) {
+            var feat;
+            if (this.getMapComponent() && me.extentLayer &&
                     fieldset.clientInfo) {
-                var feat = GeoExt.data.MapfishPrintProvider.renderPrintExtent(
-                        this.getMapComponent(), view.extentLayer,
+                feat = GeoExt.data.MapfishPrintProvider.renderPrintExtent(
+                        this.getMapComponent(), me.extentLayer,
                         fieldset.clientInfo
                 );
             }
             fieldset.extentFeature = feat;
         }, this);
-        delete view._renderingClientExtents;
+        delete me._renderingClientExtents;
     },
 
     /**
@@ -849,12 +917,12 @@ Ext.define("BasiGX.view.form.Print", {
      * window was closed. Additionally `moveend` event on the map will
      * be unregistered here.
      */
-    cleanupPrintExtent: function(){
-        var view = this;
-        var map = view.getMapComponent().getMap();
-        view.cleanupTransformInteraction();
-        view.extentLayer.getSource().clear();
-        map.un('moveend', view.renderAllClientInfos, view);
+    cleanupPrintExtent: function() {
+        var me = this;
+        var map = me.getMapComponent().getMap();
+        me.cleanupTransformInteraction();
+        me.extentLayer.getSource().clear();
+        map.un('moveend', me.renderAllClientInfos, me);
     },
 
     /**
@@ -874,54 +942,57 @@ Ext.define("BasiGX.view.form.Print", {
     },
 
     /**
+     * Returns an object for the legends to print in a format that mapfish
+     * understands.
      *
+     * @return {Object} A legend serialisation for Mapfish.
      */
     getLegendObject: function() {
         var classes = [];
         var url;
         var iconString;
         var printLayers = GeoExt.data.MapfishPrintProvider.getLayerArray(
-                this.getMapComponent().getLayers().getArray()
+            this.getMapComponent().getLayers().getArray()
         );
 
         var filteredLayers = Ext.Array.filter(printLayers,
             this.legendLayerFilter);
 
-        Ext.each(filteredLayers, function(layer){
-            if(layer.get("legendUrl")){
+        Ext.each(filteredLayers, function(layer) {
+            if (layer.get('legendUrl')) {
                 classes.push({
-                    icons: [layer.get("legendUrl")],
+                    icons: [layer.get('legendUrl')],
                     name: layer.get('name')
                 });
             } else {
                 if (layer.getSource() instanceof ol.source.TileWMS) {
                     url = layer.getSource().getUrls()[0];
-                    iconString = url + "?" +
-                        "TRANSPARENT=TRUE&" +
-                        "VERSION=1.1.1&" +
-                        "SERVICE=WMS&" +
-                        "REQUEST=GetLegendGraphic&" +
-                        "EXCEPTIONS=application%2Fvnd.ogc.se_xml&" +
-                        "FORMAT=image%2Fgif&" +
-                        "SCALE=6933504.262556662&" + // TODO excuse me, what ?!
-                        "LAYER=";
-                        iconString += layer.getSource().getParams().LAYERS;
+                    iconString = url + '?' +
+                        'TRANSPARENT=TRUE&' +
+                        'VERSION=1.1.1&' +
+                        'SERVICE=WMS&' +
+                        'REQUEST=GetLegendGraphic&' +
+                        'EXCEPTIONS=application%2Fvnd.ogc.se_xml&' +
+                        'FORMAT=image%2Fgif&' +
+                        'SCALE=6933504.262556662&' + // TODO excuse me, what ?!
+                        'LAYER=';
+                    iconString += layer.getSource().getParams().LAYERS;
                     classes.push({
                         icons: [iconString],
                         name: layer.get('name')
                     });
-                } else if (layer.getSource() instanceof ol.source.ImageWMS){
+                } else if (layer.getSource() instanceof ol.source.ImageWMS) {
                     url = layer.getSource().getUrl();
-                    iconString = url + "?" +
-                        "TRANSPARENT=TRUE&" +
-                        "VERSION=1.1.1&" +
-                        "SERVICE=WMS&" +
-                        "REQUEST=GetLegendGraphic&" +
-                        "EXCEPTIONS=application%2Fvnd.ogc.se_xml&" +
-                        "FORMAT=image%2Fgif&" +
-                        "SCALE=6933504.262556662&" + // TODO excuse me, what ?!
-                        "LAYER=";
-                        iconString += layer.getSource().getParams().LAYERS;
+                    iconString = url + '?' +
+                        'TRANSPARENT=TRUE&' +
+                        'VERSION=1.1.1&' +
+                        'SERVICE=WMS&' +
+                        'REQUEST=GetLegendGraphic&' +
+                        'EXCEPTIONS=application%2Fvnd.ogc.se_xml&' +
+                        'FORMAT=image%2Fgif&' +
+                        'SCALE=6933504.262556662&' + // TODO excuse me, what ?!
+                        'LAYER=';
+                    iconString += layer.getSource().getParams().LAYERS;
                     classes.push({
                         icons: [iconString],
                         name: layer.get('name')
@@ -931,34 +1002,38 @@ Ext.define("BasiGX.view.form.Print", {
         });
 
         var legendObj = {
-                classes: classes,
-                name: ""
+            classes: classes,
+            name: ''
         };
 
         return legendObj;
     },
 
     /**
-     * Creates a NorthArrow-Object
+     * Creates and returns a NorthArrow-object for Mapfish.
+     *
+     * @return {Object} A north arrow serialisation for Mapfish.
      */
     getNorthArrowObject: function() {
         var northArrowObject = {};
         // This file is located right beneath the config.yaml
-        northArrowObject.graphic = "file://NorthArrow_10.svg";
-        northArrowObject.backgroundColor = "rgba(0, 0, 0, 0)";
+        northArrowObject.graphic = 'file://NorthArrow_10.svg';
+        northArrowObject.backgroundColor = 'rgba(0, 0, 0, 0)';
         return northArrowObject;
     },
 
     /**
-     * Creates a ScaleBar-Object
+     * Creates and returns a ScaleBar-object
+     *
+     * @return {Object} A scale bar serialisation for Mapfish.
      */
     getScaleBarObject: function() {
         var scaleBarObj = {};
-        scaleBarObj.color = "black";
-        scaleBarObj.backgroundColor = "rgba(255, 255, 255, 0)";
-        scaleBarObj.barBgColor = "white";
-        scaleBarObj.fontColor = "black";
-        scaleBarObj.align = "right";
+        scaleBarObj.color = 'black';
+        scaleBarObj.backgroundColor = 'rgba(255, 255, 255, 0)';
+        scaleBarObj.barBgColor = 'white';
+        scaleBarObj.fontColor = 'black';
+        scaleBarObj.align = 'right';
         scaleBarObj.intervals = 2;
         scaleBarObj.fontSize = 10;
         scaleBarObj.renderAsSvg = true;
@@ -966,9 +1041,11 @@ Ext.define("BasiGX.view.form.Print", {
     },
 
     /**
+     * Returns the currently selected layout record.
      *
+     * @return {Ext.data.Model} The selected layout record.
      */
-    getLayoutRec: function(){
+    getLayoutRec: function() {
         var combo = this.down('combo[name="layout"]');
         var value = combo.getValue();
         var rec = combo.findRecordByValue(value);

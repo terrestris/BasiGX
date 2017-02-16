@@ -20,9 +20,9 @@
  *
  * @class BasiGX.view.panel.LegendTree
  */
-Ext.define("BasiGX.view.panel.LegendTree", {
-    extend: "Ext.tree.Panel",
-    xtype: "basigx-panel-legendtree",
+Ext.define('BasiGX.view.panel.LegendTree', {
+    extend: 'Ext.tree.Panel',
+    xtype: 'basigx-panel-legendtree',
 
     requires: [
         'BasiGX.ux.RowExpanderWithComponents',
@@ -38,8 +38,8 @@ Ext.define("BasiGX.view.panel.LegendTree", {
      * adding custom method to get access to row styles
      */
     viewConfig: {
-        plugins: { ptype: 'treeviewdragdrop' },
-        getRowClass: function(record){
+        plugins: {ptype: 'treeviewdragdrop'},
+        getRowClass: function(record) {
             return this.up().getCssForRow(record);
         }
     },
@@ -100,8 +100,8 @@ Ext.define("BasiGX.view.panel.LegendTree", {
                 me.initiallyCollapsed = true;
                 Ext.log.info('Ignoring configuration "collapsed" and instead' +
                         ' setup a one-time afterlayout listener that will' +
-                        ' collapse the panel (this is possibly due to a bug in' +
-                        ' ExtJS 6)');
+                        ' collapse the panel (this is possibly due to a bug' +
+                        ' in ExtJS 6)');
             }
         }
         me.hideHeaders = true;
@@ -121,8 +121,8 @@ Ext.define("BasiGX.view.panel.LegendTree", {
         // 6.2.0 only. We keep it for backwards compatibility.
         if (me.isExtVersionLowerThan62()) {
             // See the comment above the constructor why we need this.
-            if (me.initiallyCollapsed){
-                me.on('afterlayout', function(){
+            if (me.initiallyCollapsed) {
+                me.on('afterlayout', function() {
                     this.collapse();
                 }, me, {single: true, delay: 100});
                 me.initiallyCollapsed = null;
@@ -197,7 +197,7 @@ Ext.define("BasiGX.view.panel.LegendTree", {
      * Expands all row bodies with the components, effectively showing
      * previously hidden legends.
      */
-    expandAllBodies: function(){
+    expandAllBodies: function() {
         this.setModeAllBodies('expand');
     },
 
@@ -218,9 +218,13 @@ Ext.define("BasiGX.view.panel.LegendTree", {
     },
 
     /**
+     * Recursively searches the passed record (or its children) for a
+     * `treeColor` field and eventually returns the found color.
      *
+     * @param {Ext.data.Model} rec A tree node record to search the color in.
+     * @return {String} A color value.
      */
-    getColorFromRow: function(rec){
+    getColorFromRow: function(rec) {
         var me = this;
         var color = rec.getData().get('treeColor');
 
@@ -228,28 +232,32 @@ Ext.define("BasiGX.view.panel.LegendTree", {
         if (!Ext.isDefined(color) &&
             !rec.isLeaf() &&
             rec.childNodes.length > 0) {
-                Ext.each(rec.childNodes, function(child) {
-                    color = me.getColorFromRow(child);
-                    if (Ext.isDefined(color)) {
-                        return false;
-                    }
-                });
+            Ext.each(rec.childNodes, function(child) {
+                color = me.getColorFromRow(child);
+                if (Ext.isDefined(color)) {
+                    return false;
+                }
+            });
         }
         return color;
     },
 
     /**
      * Method gives access to the rows style.
+     *
      * If a layer is configured with property 'treeColor', the color will
      * get applied here. Folders will inherit the color
+     *
+     * @param {Ext.data.Model} rec The tree node record of the row.
+     * @return {String} A CSS class to use.
      */
     getCssForRow: function(rec) {
 
-          var color = this.getColorFromRow(rec);
+        var color = this.getColorFromRow(rec);
 
         // if color is still not defined, return old default
         if (!Ext.isDefined(color)) {
-            return "my-body-class";
+            return 'my-body-class';
         }
 
         var elemenIdAndCssClass;

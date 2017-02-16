@@ -7,7 +7,7 @@ describe('BasiGX.util.CSRF', function() {
     var generated = [];
     var removeGeneratedDom = function() {
         Ext.each(generated, function(generatedElement) {
-            if(generatedElement && generatedElement.destroy) {
+            if (generatedElement && generatedElement.destroy) {
                 generatedElement.destroy();
             }
             generatedElement = null;

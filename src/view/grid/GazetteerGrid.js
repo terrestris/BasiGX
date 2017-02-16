@@ -18,7 +18,7 @@
  *
  * @class BasiGX.view.grid.GazetteerGrid
  */
-Ext.define('BasiGX.view.grid.GazetteerGrid',{
+Ext.define('BasiGX.view.grid.GazetteerGrid', {
     extend: 'Ext.grid.Panel',
 
     xtype: 'basigx_grid_gazetteergrid',
@@ -41,9 +41,10 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
             limitCboxLabel: 'Auf den sichtbaren Kartenbereich einschränken',
             refreshBtnTooltip: 'Aktualisieren',
             directionBtnTooltip: 'Hinweise zu Gazetteer',
-            gazetteerHtmlHints:'Führen Sie die Maus über die Suchergebnisse, ' +
-                'um diese auf der Karte zu markieren.<br/> Klicken Sie auf ' +
-                'ein Element, um die Karte darauf zu zentrieren.<br/>' +
+            gazetteerHtmlHints: 'Führen Sie die Maus über die ' +
+                'Suchergebnisse, um diese auf der Karte zu markieren.<br/>' +
+                'Klicken Sie auf ein Element, um die Karte darauf zu ' +
+                'zentrieren.<br/>' +
                 'Beachten Sie, dass einige Suchergebnisse außerhalb des ' +
                 'sichtbaren Kartenbereichs liegen können, falls die ' +
                 'Option "Auf den sichtbaren Kartenbereich einschränken" ' +
@@ -55,16 +56,16 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
         title: '{title}'
     },
 
-    tools:[{
+    tools: [{
         type: 'minimize',
         bind: {
             tooltip: '{hideToolTooltip}'
         },
-        handler: function(e, target, gridheader){
+        handler: function(e, target, gridheader) {
             var grid = gridheader.up('grid');
             grid.getEl().slideOut('t', {
                 duration: 250,
-                callback: function(){
+                callback: function() {
                     grid.hide();
                 }
             });
@@ -93,7 +94,7 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
         },
         iconCls: 'fa fa-refresh fa-2x'
     },
-    '->',
+        '->',
     {
         xtype: 'button',
         name: 'directionsbutton',
@@ -105,8 +106,8 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
     ],
 
     style: {
-        right: "75px",
-        top: "10px"
+        right: '75px',
+        top: '10px'
     },
 
     config: {
@@ -124,8 +125,8 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
         }, {
             text: 'Name',
             xtype: 'templatecolumn',
-            tpl: '<div data-qtip="{display_name}">'+
-                        '{display_name}'+
+            tpl: '<div data-qtip="{display_name}">' +
+                        '{display_name}' +
                 '</div>',
             flex: 2
         }, {
@@ -139,7 +140,7 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
         }]
     },
 
-    initComponent: function () {
+    initComponent: function() {
         var me = this;
 
         me.callParent(arguments);
@@ -165,13 +166,13 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
     /**
      *
      */
-    onBoxReady: function(){
+    onBoxReady: function() {
         var me = this;
-        if(!me.getMap()){
+        if (!me.getMap()) {
             var map = BasiGX.util.Map.getMapComponent().getMap();
             me.setMap(map);
         }
-        if(!me.getLayer()){
+        if (!me.getLayer()) {
             var layer = new ol.layer.Vector({
                 source: new ol.source.Vector()
             });
@@ -184,9 +185,12 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
     },
 
     /**
+     * Highlights the associated feature when the mouse hover over a grid row.
      *
+     * @param {Ext.grid.Panel} grid The grid panel.
+     * @param {Ext.data.Model} record The record that belongs to the item.
      */
-    onItemMouseEnter: function(grid, record){
+    onItemMouseEnter: function(grid, record) {
         var me = this;
         var layer = me.getLayer();
         var projection = me.getMap().getView().getProjection().getCode();
@@ -198,18 +202,23 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
     },
 
     /**
-     *
+     * Unhighlights the associated feature when the mouse hover out of the grid
+     * row.
      */
-    onItemMouseLeave: function(){
+    onItemMouseLeave: function() {
         var me = this;
         var layer = me.getLayer();
         layer.getSource().clear();
     },
 
     /**
+     * Recenters the map on the associated feature when the mouse clicks on a
+     * grid row.
      *
+     * @param {Ext.grid.Panel} grid The grid panel.
+     * @param {Ext.data.Model} record The record that belongs to the item.
      */
-    onItemClick: function(grid, record){
+    onItemClick: function(grid, record) {
         var me = this;
         var map = me.getMap();
         var olView = map.getView();
@@ -222,9 +231,10 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
     },
 
     /**
-     *
+     * Refreshes the search result by calling into `doGazetteerSearch` of the
+     * `basigx_form_field_gazetteercombo`.
      */
-    refreshSearchResults: function(){
+    refreshSearchResults: function() {
         var gazetteerCombo =
             Ext.ComponentQuery.query('basigx_form_field_gazetteercombo')[0];
         var value = gazetteerCombo.getValue();
@@ -232,13 +242,13 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
     },
 
     /**
-     *
+     * Opens a window with directions about how to use the gazetteer grid.
      */
-    showDirections: function(){
+    showDirections: function() {
         var win = Ext.ComponentQuery.query(
                 'window[name="gazetteerdirections"]')[0];
-        if(win){
-            if(win.isVisible()){
+        if (win) {
+            if (win.isVisible()) {
                 BasiGX.util.Animate.shake(win);
             } else {
                 win.show();
@@ -257,11 +267,11 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
     },
 
     /**
-     *
+     * When we are hidden, this method unregisters listeners for the various
+     * interactions with the grid.
      */
     unregisterListeners: function() {
         var me = this;
-
         me.un('boxready', me.onBoxReady, me);
         me.un('itemmouseenter', me.onItemMouseEnter, me);
         me.un('itemmouseleave', me.onItemMouseLeave, me);
@@ -269,10 +279,9 @@ Ext.define('BasiGX.view.grid.GazetteerGrid',{
     },
 
     /**
-    *
-    */
-   onGazetteerGridSlideOut: function(){
-       var me = this;
-       me.hide();
-   }
+     * TODO is this method still used?
+     */
+    onGazetteerGridSlideOut: function() {
+        this.hide();
+    }
 });

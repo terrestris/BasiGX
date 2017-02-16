@@ -5,7 +5,7 @@ describe('BasiGX.plugin.WfsCluster', function() {
         it('is defined', function() {
             expect(BasiGX.plugin.WfsCluster).to.not.be(undefined);
         });
-        it('can be instantiated', function(){
+        it('can be instantiated', function() {
             var plugin = Ext.create('BasiGX.plugin.WfsCluster');
             expect(plugin).to.be.a(BasiGX.plugin.WfsCluster);
         });
@@ -52,7 +52,7 @@ describe('BasiGX.plugin.WfsCluster', function() {
         });
         it('sets a defaut cluster style on the layer', function() {
             plugin.setUpClusterLayers(mapComponent);
-            expect(layer.getStyle()).to.be.a("function");
+            expect(layer.getStyle()).to.be.a('function');
             expect(layer.getStyle()).to.eql(plugin.clusterStyleFuntion);
         });
         it('registers and calls a visibilityListener on the layer', function() {

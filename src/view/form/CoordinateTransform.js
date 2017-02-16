@@ -20,8 +20,8 @@
  *
  * @class BasiGX.view.form.CoordinateTransform
  */
-Ext.define("BasiGX.view.form.CoordinateTransform", {
-    extend: "Ext.form.Panel",
+Ext.define('BasiGX.view.form.CoordinateTransform', {
+    extend: 'Ext.form.Panel',
     xtype: 'basigx-form-coordinatetransform',
 
     requires: [
@@ -69,8 +69,8 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
      *
      */
     initComponent: function() {
-        var me = this,
-            crsFieldsets = [];
+        var me = this;
+        var crsFieldsets = [];
 
         //set map
         me.map = BasiGX.util.Map.getMapComponent().getMap();
@@ -84,8 +84,8 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
             var targetCrs = ol.proj.get(crs.code);
             // first we check if the crs can be used at all
             if (!Ext.isDefined(targetCrs)) {
-                Ext.log.warn('The CRS ' + crs.code + ' is not defined, did you ' +
-                   'require it?');
+                Ext.log.warn('The CRS ' + crs.code + ' is not defined, did ' +
+                   'you require it?');
                 return;
             }
 
@@ -133,7 +133,7 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
                             listeners: {
                                 'focus': me.toggleBtnVisibility
                             }
-                         }, {
+                        }, {
                             xtype: 'button',
                             name: 'transform',
                             margin: '0 0 0 30',
@@ -166,14 +166,14 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
         me.callParent();
 
         // set the initial values
-        me.on('afterrender', function(){
+        me.on('afterrender', function() {
             var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
                 'transformvectorlayer');
-            if(transformvectorlayer){
+            if (transformvectorlayer) {
                 transformvectorlayer.setVisible(true);
             }
 
-            if(me.getTransformCenterOnRender()){
+            if (me.getTransformCenterOnRender()) {
                 var coordToTransform = me.map.getView().getCenter();
                 me.transform(coordToTransform);
             }
@@ -181,7 +181,7 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
 
         me.map.on('click', me.transform);
 
-        me.on('beforedestroy', function(){
+        me.on('beforedestroy', function() {
             var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
                 'transformvectorlayer');
             transformvectorlayer.getSource().clear();
@@ -194,7 +194,7 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
         bind: {
             text: '{resetFormBtnText}'
         },
-        handler: function(btn){
+        handler: function(btn) {
             var view = btn.up('basigx-form-coordinatetransform');
             view.reset();
             var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
@@ -204,12 +204,16 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
     }],
 
     /**
+     * Bound to the focus event of the textfields, this handler ensures that
+     * only the correct (associated) transform button is visible.
      *
+     * @param {Ext.form.fiel.Text} field The textfield.
      */
     toggleBtnVisibility: function(field) {
         var allBtns = Ext.ComponentQuery.query(
-                'basigx-form-coordinatetransform button[name=transform]'),
-            currentBtn = field.up('fieldset').down('button[name=transform]');
+                'basigx-form-coordinatetransform button[name=transform]'
+            );
+        var currentBtn = field.up('fieldset').down('button[name=transform]');
         Ext.each(allBtns, function(btn) {
             btn.setVisible(false);
         });
@@ -217,13 +221,19 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
     },
 
     /**
+     * Transforms the passed coordinates from `mapProjection` to `targetCrs`
+     * rounds according to the units of the `targetCrs`.
      *
+     * @param {ol.Coordinate} coordToTransform The coordinates to transform.
+     * @param {ol.proj.Projection} mapProjection The source projection.
+     * @param {ol.proj.Projection} targetCrs The target projection.
+     * @return {ol.Coordinate} The transformed and formatted coordinates.
      */
     transformCoords: function(coordToTransform, mapProjection, targetCrs) {
         var transformedCoords = ol.proj.transform(coordToTransform,
             mapProjection, targetCrs);
 
-        if (targetCrs.getUnits() === "m") {
+        if (targetCrs.getUnits() === 'm') {
             // round metric crs coords to decimeters
             transformedCoords[0] = Math.round(
                 transformedCoords[0] * 100) / 100;
@@ -241,22 +251,25 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
     },
 
     /**
-     *
+     * @param {ol.MapBrowserEvent|ol.Coordinate|Ext.button.Button}
+     *     evtOrBtnOrArray The input to transfrom, works with different types.
      */
     transform: function(evtOrBtnOrArray) {
-        var me = Ext.ComponentQuery.query(
-            'basigx-form-coordinatetransform')[0],
-            mapProjection = me.map.getView().getProjection(),
-            fieldSets = me.query('fieldset'),
-            transformvectorlayer = BasiGX.util.Layer.getLayerByName(
-                'transformvectorlayer'),
-            isOlEvt = Ext.isArray(evtOrBtnOrArray.coordinate) &&
-                evtOrBtnOrArray.coordinate.length === 2,
-            isCoordArray = Ext.isArray(evtOrBtnOrArray) &&
-                evtOrBtnOrArray.length === 2,
-            coords = [],
-            coordsSrs = mapProjection,
-            transformedCoords;
+        var coordTransformForm = Ext.ComponentQuery.query(
+            'basigx-form-coordinatetransform'
+        )[0];
+        var mapProjection = coordTransformForm.map.getView().getProjection();
+        var fieldSets = coordTransformForm.query('fieldset');
+        var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
+            'transformvectorlayer'
+        );
+        var isOlEvt = Ext.isArray(evtOrBtnOrArray.coordinate) &&
+            evtOrBtnOrArray.coordinate.length === 2;
+        var isCoordArray = Ext.isArray(evtOrBtnOrArray) &&
+            evtOrBtnOrArray.length === 2;
+        var coords = [];
+        var coordsSrs = mapProjection;
+        var transformedCoords;
 
         if (isOlEvt) {
             coords = evtOrBtnOrArray.coordinate;
@@ -272,15 +285,19 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
         Ext.each(fieldSets, function(fs) {
             if (!Ext.isEmpty(fs.crs)) {
                 if (coordsSrs) {
-                    transformedCoords = me.transformCoords(
+                    transformedCoords = coordTransformForm.transformCoords(
                         coords, coordsSrs, ol.proj.get(fs.crs));
                 } else {
-                    transformedCoords = me.transformCoords(
+                    transformedCoords = coordTransformForm.transformCoords(
                         coords, mapProjection, ol.proj.get(fs.crs));
                 }
 
-                fs.down('numberfield[name=xcoord]').setValue(transformedCoords[0]);
-                fs.down('numberfield[name=ycoord]').setValue(transformedCoords[1]);
+                fs.down('numberfield[name=xcoord]').setValue(
+                    transformedCoords[0]
+                );
+                fs.down('numberfield[name=ycoord]').setValue(
+                    transformedCoords[1]
+                );
             }
         });
 
@@ -306,7 +323,7 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
             });
 
             transformvectorlayer.set(displayInLayerSwitcherKey, false);
-            me.map.addLayer(transformvectorlayer);
+            coordTransformForm.map.addLayer(transformvectorlayer);
         }
 
         var transformedMapCoords = ol.proj.transform(
@@ -319,7 +336,7 @@ Ext.define("BasiGX.view.form.CoordinateTransform", {
         transformvectorlayer.getSource().addFeatures([feature]);
         // recenter if we were not triggered by click in map
         if (!isOlEvt) {
-            me.map.getView().setCenter(transformedMapCoords);
+            coordTransformForm.map.getView().setCenter(transformedMapCoords);
         }
     }
 });
