@@ -170,8 +170,8 @@ Ext.define('BasiGX.view.container.WfsSearch', {
         /**
          * Returns an array of styles.
          *
-         * TODO Are we accessing aprvate property here? `getSource().distance_`
-         *      This should be changed.
+         * TODO Are we accessing a private property here?
+         *      `getSource().distance_` => this should be changed.
          *
          * @param {Number} amount The amount.
          * @param {Number} radius The radius.
@@ -434,7 +434,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
 
     /**
      * Issues a `DescribeFeatureType` request, so that we know details about the
-     * Featuretyoe we are working on.
+     * featuretype we are working on.
      */
     describeFeatureTypes: function() {
         var me = this;
@@ -640,7 +640,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
     /**
      * Works with extent or geom.
      *
-     * @param {ol.Extent|ol.geom.SimpleGeometry} extent The extent or geoemetry
+     * @param {ol.Extent|ol.geom.SimpleGeometry} extent The extent or geometry
      *     to zoom to.
      */
     zoomToExtent: function(extent) {

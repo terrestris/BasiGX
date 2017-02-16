@@ -29,7 +29,7 @@ Ext.define('BasiGX.util.Color', {
          *     // rgba is now: "rgba(255,0,0,0.5)"
          *
          * @param {String} hex The hex string to convert.
-         * @param {Number} opacity The opacity to set, should be between `` and
+         * @param {Number} opacity The opacity to set, should be between `0` and
          *     `1`.
          * @return {String} A `rgba(r,g,b,a)` color string.
          */

@@ -200,7 +200,7 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
 
     /**
      * Activate/deactivate interaction
-     * @param {boolean} b Whether the interaction hall be active.
+     * @param {boolean} b Whether the interaction shall be active.
      * @api stable
      */
     ol.interaction.Transform.prototype.setActive = function(b) {

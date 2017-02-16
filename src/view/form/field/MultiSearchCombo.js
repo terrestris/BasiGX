@@ -151,7 +151,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
     },
 
     /**
-     * Ensures that the value is clearer when one hits escape.
+     * Ensures that the value is cleared when one hits escape.
      */
     onBoxReady: function() {
         var me = this;

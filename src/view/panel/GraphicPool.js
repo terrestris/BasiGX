@@ -273,7 +273,7 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
     },
 
     /**
-     * Returns the Ext.data.Model instacne for teh selected picture.
+     * Returns the Ext.data.Model instance for the selected picture.
      *
      * @return {Ext.data.Model} The selected picture record.
      */

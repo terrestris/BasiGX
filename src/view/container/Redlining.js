@@ -754,7 +754,7 @@ Ext.define('BasiGX.view.container.Redlining', {
     },
 
     /**
-     * Modify a postits text.
+     * Modify a postit text.
      *
      * @param {ol.Feature} feature The vector feature.
      * @param {String} oldText The old text of the postit.

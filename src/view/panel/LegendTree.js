@@ -218,7 +218,7 @@ Ext.define('BasiGX.view.panel.LegendTree', {
     },
 
     /**
-     * Recursively seacrhes the passed record (or its children) for a
+     * Recursively searches the passed record (or its children) for a
      * `treeColor` field and eventually returns the found color.
      *
      * @param {Ext.data.Model} rec A tree node record to search the color in.
@@ -248,7 +248,7 @@ Ext.define('BasiGX.view.panel.LegendTree', {
      * If a layer is configured with property 'treeColor', the color will
      * get applied here. Folders will inherit the color
      *
-     * @param {Ext.data.Model} rec The tree node recordof the row.
+     * @param {Ext.data.Model} rec The tree node record of the row.
      * @return {String} A CSS class to use.
      */
     getCssForRow: function(rec) {

@@ -463,7 +463,7 @@ Ext.define('BasiGX.view.button.Measure', {
     /**
      * Adds a tooltip on click where a measuring stop occured.
      *
-     * @param {ol.MapBrowserEvent} evt The event which contains teh coordinate
+     * @param {ol.MapBrowserEvent} evt The event which contains the coordinate
      *     for the tooltip.
      */
     addMeasureStopToolTip: function(evt) {
@@ -557,7 +557,7 @@ Ext.define('BasiGX.view.button.Measure', {
     /**
      * Handle pointer move by updating and repositioning the dynamic tooltip.
      *
-     * @param {ol.MapBrowserEvent} evt The Event from the pointermove.
+     * @param {ol.MapBrowserEvent} evt The event from the pointermove.
      */
     pointerMoveHandler: function(evt) {
         var me = this;

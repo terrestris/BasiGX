@@ -148,7 +148,7 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
         },
 
         /**
-         * Determines the component at the passed pointb that has help info
+         * Determines the component at the passed point that has help info
          * available, and opens an appropriate URL in a new window if possible.
          *
          * @param {Ext.util.Point} point The point at which the pointer rests.

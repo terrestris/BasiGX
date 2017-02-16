@@ -75,9 +75,9 @@ Ext.define('BasiGX.util.Map', {
         },
 
         /**
-         * Returns the resolution of the passed maps view.
+         * Returns the resolution of the passed map's view.
          *
-         * @param {ol.Map} map The map to get the resolution of.
+         * @param {ol.Map} map The map to get the resolution from.
          * @return {Number} The resolution of the view of the passed map.
          */
         getResolution: function(map) {

@@ -54,7 +54,7 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo', {
     },
 
     /**
-     * When the combo value changes, do a ne w Gazetteer search.
+     * When the combo value changes, do a new gazetteer search.
      *
      * @param {BasiGX.view.form.field.GazetteerCombo} combo The combo.
      * @param {String} newValue The new selected value.

@@ -518,7 +518,7 @@ Ext.define('BasiGX.util.ConfigParser', {
                 // as described on https://wiki.intranet.terrestris.de/doku.php
                 // ?id=clustering
                 //
-                // There is currently now way in ol3 to request features on
+                // There is currently no way in ol3 to request features on
                 // every extent change, so we need to handle it ourselves with
                 // map listeners, which happens in the cluster plugin
                 if (config.type === 'WFSCluster') {

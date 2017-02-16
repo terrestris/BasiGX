@@ -63,8 +63,9 @@ Ext.define('BasiGX.util.Url', {
          *
          * TODO Are we sure we have an application always deployed like it is
          *      assumed herein?
-         *     'folder').
+         *
          * @return {String} The base URL including the webproject name (first
+         *     'folder').
          */
         getWebProjectBaseUrl: function() {
             var loc = window.location;

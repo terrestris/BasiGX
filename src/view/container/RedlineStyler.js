@@ -843,7 +843,7 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
     },
 
     /**
-     * Gets an array of icon sytle attributes from the form elements to
+     * Gets an array of icon style attributes from the form elements to
      * manipulate them.
      *
      * @return {Array} The image properties for the new icon. `offsetX` is
