@@ -292,7 +292,7 @@ describe('BasiGX.plugin.Hover', function() {
                 // teardown
                 TestUtil.teardownTestObjects(testObjs2);
             });
-            it('warns with hints when defaulting to \'collection\'', function() {
+            it('warns with hints (defaulting to \'collection\')', function() {
                 // setup
                 var loggerSpy = sinon.spy(Ext.log, 'warn');
                 var testObjs2 = TestUtil.setupTestObjects({

@@ -554,102 +554,103 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
         var deltaX;
         var deltaY;
         switch (this.mode_) {
-        case 'rotate':
-            deltaX = this.center_[0] - evt.coordinate[0];
-            deltaY = this.center_[1] - evt.coordinate[1];
-            var a = Math.atan2(deltaY, deltaX);
-            if (!this.ispt) {
-                geometry = this.geom_.clone();
-                geometry.rotate(a - this.angle_, this.center_);
+            case 'rotate':
+                deltaX = this.center_[0] - evt.coordinate[0];
+                deltaY = this.center_[1] - evt.coordinate[1];
+                var a = Math.atan2(deltaY, deltaX);
+                if (!this.ispt) {
+                    geometry = this.geom_.clone();
+                    geometry.rotate(a - this.angle_, this.center_);
 
-                this.feature_.setGeometry(geometry);
-            }
-            this.drawSketch_(true);
-            this.dispatchEvent({
-                type: 'rotating',
-                feature: this.feature_,
-                angle: a - this.angle_,
-                pixel: evt.pixel,
-                coordinate: evt.coordinate
-            });
-            break;
+                    this.feature_.setGeometry(geometry);
+                }
+                this.drawSketch_(true);
+                this.dispatchEvent({
+                    type: 'rotating',
+                    feature: this.feature_,
+                    angle: a - this.angle_,
+                    pixel: evt.pixel,
+                    coordinate: evt.coordinate
+                });
+                break;
 
-        case 'translate':
-            deltaX = evt.coordinate[0] - this.coordinate_[0];
-            deltaY = evt.coordinate[1] - this.coordinate_[1];
+            case 'translate':
+                deltaX = evt.coordinate[0] - this.coordinate_[0];
+                deltaY = evt.coordinate[1] - this.coordinate_[1];
 
-            this.feature_.getGeometry().translate(deltaX, deltaY);
-            this.handles_.forEach(function(f) {
-                f.getGeometry().translate(deltaX, deltaY);
-            });
+                this.feature_.getGeometry().translate(deltaX, deltaY);
+                this.handles_.forEach(function(f) {
+                    f.getGeometry().translate(deltaX, deltaY);
+                });
 
-            this.coordinate_ = evt.coordinate;
-            this.dispatchEvent({
-                type: 'translating',
-                feature: this.feature_,
-                delta: [deltaX, deltaY],
-                pixel: evt.pixel,
-                coordinate: evt.coordinate
-            });
-            break;
+                this.coordinate_ = evt.coordinate;
+                this.dispatchEvent({
+                    type: 'translating',
+                    feature: this.feature_,
+                    delta: [deltaX, deltaY],
+                    pixel: evt.pixel,
+                    coordinate: evt.coordinate
+                });
+                break;
 
-        case 'scale':
-            var center = this.center_;
-            if (evt.originalEvent.metaKey || evt.originalEvent.ctrlKey) {
-                center = this.extent_[(Number(this.opt_) + 2) % 4];
-            }
+            case 'scale':
+                var center = this.center_;
+                if (evt.originalEvent.metaKey || evt.originalEvent.ctrlKey) {
+                    center = this.extent_[(Number(this.opt_) + 2) % 4];
+                }
 
-            var x1 = evt.coordinate[0] - center[0];
-            var x2 = this.coordinate_[0] - center[0];
-            var scx = x1 / x2;
-            var y1 = evt.coordinate[1] - center[1];
-            var y2 = this.coordinate_[1] - center[1];
-            var scy = y1 / y2;
+                var x1 = evt.coordinate[0] - center[0];
+                var x2 = this.coordinate_[0] - center[0];
+                var scx = x1 / x2;
+                var y1 = evt.coordinate[1] - center[1];
+                var y2 = this.coordinate_[1] - center[1];
+                var scy = y1 / y2;
 
                 // TODO added MJ, fixedScaleRatio for scaling
-            var fixedScaleRatio = this.get('fixedScaleRatio');
-            if (this.constraint_) {
+                var fixedScaleRatio = this.get('fixedScaleRatio');
+                if (this.constraint_) {
                     // TODO added MJ, fixedScaleRatio for scaling
-                if (this.constraint_ === 'h') {
-                    scx = fixedScaleRatio ? scy : 1;
+                    if (this.constraint_ === 'h') {
+                        scx = fixedScaleRatio ? scy : 1;
+                    } else {
+                        scy = fixedScaleRatio ? scx : 1;
+                    }
                 } else {
-                    scy = fixedScaleRatio ? scx : 1;
+                    if (evt.originalEvent.shiftKey || fixedScaleRatio) {
+                        scx = scy = Math.min(scx, scy);
+                    }
                 }
-            } else {
-                if (evt.originalEvent.shiftKey || fixedScaleRatio) {
-                    scx = scy = Math.min(scx, scy);
-                }
-            }
 
-            geometry = this.geom_.clone();
-            geometry.applyTransform(function(g1, g2, dim) {
-                if (dim < 2) {
+                geometry = this.geom_.clone();
+                geometry.applyTransform(function(g1, g2, dim) {
+                    if (dim < 2) {
+                        return g2;
+                    }
+
+                    for (var i = 0; i < g1.length; i += dim) {
+                        if (scx !== 1) {
+                            g2[i] = center[0] + (g1[i] - center[0]) * scx;
+                        }
+                        if (scy !== 1) {
+                            g2[i + 1] = center[1] +
+                                (g1[i + 1] - center[1]) * scy;
+                        }
+                    }
                     return g2;
-                }
+                });
+                this.feature_.setGeometry(geometry);
+                this.drawSketch_();
+                this.dispatchEvent({
+                    type: 'scaling',
+                    feature: this.feature_,
+                    scale: [scx, scy],
+                    pixel: evt.pixel,
+                    coordinate: evt.coordinate
+                });
+                break;
 
-                for (var i = 0; i < g1.length; i += dim) {
-                    if (scx !== 1) {
-                        g2[i] = center[0] + (g1[i] - center[0]) * scx;
-                    }
-                    if (scy !== 1) {
-                        g2[i + 1] = center[1] + (g1[i + 1] - center[1]) * scy;
-                    }
-                }
-                return g2;
-            });
-            this.feature_.setGeometry(geometry);
-            this.drawSketch_();
-            this.dispatchEvent({
-                type: 'scaling',
-                feature: this.feature_,
-                scale: [scx, scy],
-                pixel: evt.pixel,
-                coordinate: evt.coordinate
-            });
-            break;
-
-        default:
-            break;
+            default:
+                break;
         }
     };
 

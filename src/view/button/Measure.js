@@ -409,17 +409,17 @@ Ext.define('BasiGX.view.button.Measure', {
     btnTextByType: function() {
         var btnText;
         switch (this.measureType) {
-        case 'line':
-            btnText = '{textline}';
-            break;
-        case 'polygon':
-            btnText = '{textpoly}';
-            break;
-        case 'angle':
-            btnText = '{textangle}';
-            break;
-        default:
-            break;
+            case 'line':
+                btnText = '{textline}';
+                break;
+            case 'polygon':
+                btnText = '{textpoly}';
+                break;
+            case 'angle':
+                btnText = '{textangle}';
+                break;
+            default:
+                break;
         }
         return btnText;
     },

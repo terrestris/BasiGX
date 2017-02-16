@@ -823,30 +823,30 @@ Ext.define('BasiGX.view.form.Print', {
 
         var attributeFields;
         switch (attributeRec.get('type')) {
-        case 'MapAttributeValues':
-            attributeFields = me.getMapAttributeFields(attributeRec);
-            if (me.getPrintExtentAlwaysCentered()) {
-                map.on('moveend', me.renderAllClientInfos, me);
-            }
-            break;
-        case 'NorthArrowAttributeValues':
-            attributeFields = me.getNorthArrowAttributeFields(attributeRec);
-            break;
-        case 'ScalebarAttributeValues':
-            attributeFields = me.getScalebarAttributeFields(attributeRec);
-            break;
-        case 'LegendAttributeValue':
-            attributeFields = me.getLegendAttributeFields(attributeRec);
-            break;
-        case 'String':
-            attributeFields = me.getStringField(attributeRec);
-            break;
-        case 'DataSourceAttributeValue':
-            Ext.toast('Data Source not yet supported');
-            attributeFields = me.getStringField(attributeRec);
-            break;
-        default:
-            break;
+            case 'MapAttributeValues':
+                attributeFields = me.getMapAttributeFields(attributeRec);
+                if (me.getPrintExtentAlwaysCentered()) {
+                    map.on('moveend', me.renderAllClientInfos, me);
+                }
+                break;
+            case 'NorthArrowAttributeValues':
+                attributeFields = me.getNorthArrowAttributeFields(attributeRec);
+                break;
+            case 'ScalebarAttributeValues':
+                attributeFields = me.getScalebarAttributeFields(attributeRec);
+                break;
+            case 'LegendAttributeValue':
+                attributeFields = me.getLegendAttributeFields(attributeRec);
+                break;
+            case 'String':
+                attributeFields = me.getStringField(attributeRec);
+                break;
+            case 'DataSourceAttributeValue':
+                Ext.toast('Data Source not yet supported');
+                attributeFields = me.getStringField(attributeRec);
+                break;
+            default:
+                break;
         }
 
         if (attributeFields) {
