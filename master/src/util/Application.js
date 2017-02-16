@@ -25,30 +25,49 @@ Ext.define('BasiGX.util.Application', {
     requires: [
         'BasiGX.util.Layer',
         'BasiGX.util.Map'
-        ],
+    ],
 
     statics: {
+        /**
+         * Returns the application context object for the BasiGX map component
+         * defined by the passed `mapComponentXType`.
+         *
+         * @param {String} mapComponentXType The `xtype` of the component to
+         *     check. Will often be different than the `xtype` of the parent
+         *     class `BasiGX.component.Map` (e.g. when sub classing for
+         *     projects).
+         * @return {Object} The application context or `null`.
+         */
+        getAppContext: function(mapComponentXType) {
+            var mapComp = BasiGX.util.Map.getMapComponent(mapComponentXType);
 
-        getAppContext: function(mapComponentXType){
-            var mapComponent = BasiGX.util.Map.getMapComponent(mapComponentXType);
-
-            if(mapComponent && mapComponent.appContext){
-                return mapComponent.appContext.data.merge;
+            if (mapComp && mapComp.appContext) {
+                return mapComp.appContext.data.merge;
             } else {
                 return null;
             }
         },
 
-        getRoute: function(mapComponentXType){
-            var mapComponent = BasiGX.util.Map.getMapComponent(mapComponentXType);
-            var map = mapComponent.getMap();
+        /**
+         * Gets a route for the current map of the component with the passed
+         * `mapComponentXType`.
+         *
+         * @param {String} mapComponentXType The `xtype` of the component to
+         *     check. Will often be different than the `xtype` of the parent
+         *     class `BasiGX.component.Map` (e.g. when sub classing for
+         *     projects).
+         * @return {String} A route for the for the current map of the
+         *     component with the passed `mapComponentXType`
+         */
+        getRoute: function(mapComponentXType) {
+            var mapComp = BasiGX.util.Map.getMapComponent(mapComponentXType);
+            var map = mapComp.getMap();
             var zoom = map.getView().getZoom();
             var center = map.getView().getCenter().toString();
-            var visibleLayers = BasiGX.util.Layer
-                .getVisibleLayers(map);
+            var visibleLayers = BasiGX.util.Layer.getVisibleLayers(map);
             var visibleLayerRoutingIds = [];
 
-            Ext.each(visibleLayers, function(layer){
+            Ext.each(visibleLayers, function(layer) {
                 visibleLayerRoutingIds.push(layer.get('routingId'));
             });
 

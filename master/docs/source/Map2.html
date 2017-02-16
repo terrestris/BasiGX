@@ -39,18 +39,18 @@
  *
  * @class BasiGX.view.component.Map
  */
-Ext.define(&quot;BasiGX.view.component.Map&quot;, {
-    extend: &quot;GeoExt.component.Map&quot;,
-    xtype: &quot;basigx-component-map&quot;,
+Ext.define('BasiGX.view.component.Map', {
+    extend: 'GeoExt.component.Map',
+    xtype: 'basigx-component-map',
 
     requires: [
-        &quot;BasiGX.util.ConfigParser&quot;,
-        &quot;BasiGX.util.Map&quot;,
-        &quot;BasiGX.util.Layer&quot;
+        'BasiGX.util.ConfigParser',
+        'BasiGX.util.Map',
+        'BasiGX.util.Layer'
     ],
 
     inheritableStatics: {
-<span id='BasiGX-view-component-Map-static-method-guess'>        guess: function(){
+<span id='BasiGX-view-component-Map-static-method-guess'>        guess: function() {
 </span>            return BasiGX.util.Map.getMapComponent(this.xtype);
         }
     },
@@ -70,22 +70,22 @@ Ext.define(&quot;BasiGX.view.component.Map&quot;, {
 </span>     * The appContext to use when no real context could be retrieved
      */
     fallbackAppContext: {
-        &quot;data&quot;: {
-            &quot;merge&quot;: {
-                &quot;startCenter&quot;: [1163261, 6648489],
-                &quot;startZoom&quot;: 5,
-                &quot;mapLayers&quot;: [
+        'data': {
+            'merge': {
+                'startCenter': [1163261, 6648489],
+                'startZoom': 5,
+                'mapLayers': [
                     {
-                        &quot;name&quot;: &quot;OSM WMS&quot;,
-                        &quot;type&quot;: &quot;TileWMS&quot;,
-                        &quot;url&quot;: &quot;http://ows.terrestris.de/osm/service?&quot;,
-                        &quot;layers&quot;: &quot;OSM-WMS&quot;,
-                        &quot;topic&quot;: false
+                        'name': 'OSM WMS',
+                        'type': 'TileWMS',
+                        'url': 'http://ows.terrestris.de/osm/service?',
+                        'layers': 'OSM-WMS',
+                        'topic': false
                     }
                 ],
-                &quot;mapConfig&quot;: {
-                    &quot;projection&quot;: &quot;EPSG:3857&quot;,
-                    &quot;resolutions&quot;: [
+                'mapConfig': {
+                    'projection': 'EPSG:3857',
+                    'resolutions': [
                         156543.03390625,
                         78271.516953125,
                         39135.7584765625,
@@ -106,7 +106,7 @@ Ext.define(&quot;BasiGX.view.component.Map&quot;, {
                         1.194328566789627,
                         0.5971642833948135
                     ],
-                    &quot;zoom&quot;: 0
+                    'zoom': 0
                 }
             }
         }
@@ -134,7 +134,7 @@ Ext.define(&quot;BasiGX.view.component.Map&quot;, {
 <span id='BasiGX-view-component-Map-method-constructor'>    constructor: function(config) {
 </span>        var me = this;
 
-        if (!config.map){
+        if (!config.map) {
 
             // need to handle config first as its not applied yet
             var url = config &amp;&amp; config.appContextPath ?
@@ -143,18 +143,18 @@ Ext.define(&quot;BasiGX.view.component.Map&quot;, {
             Ext.Ajax.request({
                 url: url,
                 async: false,
-                success: function(response){
-                    if(Ext.isString(response.responseText)) {
+                success: function(response) {
+                    if (Ext.isString(response.responseText)) {
                         me.appContext = Ext.decode(response.responseText);
-                    } else if(Ext.isObject(response.responseText)) {
+                    } else if (Ext.isObject(response.responseText)) {
                         me.appContext = response.responseText;
                     } else {
-                        Ext.log.error(&quot;Error! Could not parse appContext!&quot;);
+                        Ext.log.error('Error! Could not parse appContext!');
                     }
                 },
                 failure: function(response) {
-                    Ext.log.error(&quot;Error! No application &quot; +
-                        &quot;context found, example loaded&quot;, response);
+                    Ext.log.error('Error! No application ' +
+                        'context found, example loaded', response);
                     me.appContext = me.fallbackAppContext;
                 }
             });
@@ -175,7 +175,7 @@ Ext.define(&quot;BasiGX.view.component.Map&quot;, {
 
     },
 
-<span id='BasiGX-view-component-Map-method-addControls'>    addControls: function(){
+<span id='BasiGX-view-component-Map-method-addControls'>    addControls: function() {
 </span>        var map = this.getMap();
         var attribution = new ol.control.Attribution({
             collapsible: false,

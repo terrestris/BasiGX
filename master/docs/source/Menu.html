@@ -38,13 +38,13 @@
  *
  * @class BasiGX.view.panel.Menu
  */
-Ext.define(&quot;BasiGX.view.panel.Menu&quot;, {
-    extend: &quot;Ext.panel.Panel&quot;,
-    xtype: &quot;basigx-panel-menu&quot;,
+Ext.define('BasiGX.view.panel.Menu', {
+    extend: 'Ext.panel.Panel',
+    xtype: 'basigx-panel-menu',
 
     requires: [
-        &quot;Ext.layout.container.Accordion&quot;,
-        &quot;Ext.app.ViewModel&quot;
+        'Ext.layout.container.Accordion',
+        'Ext.app.ViewModel'
     ],
 
 <span id='BasiGX-view-panel-Menu-property-viewModel'>    viewModel: {
@@ -89,7 +89,7 @@ Ext.define(&quot;BasiGX.view.panel.Menu&quot;, {
         afterrender: 'setTitleAccordingToCollapsedState'
     },
 
-<span id='BasiGX-view-panel-Menu-method-setTitleAccordingToCollapsedState'>    setTitleAccordingToCollapsedState: function(menu){
+<span id='BasiGX-view-panel-Menu-method-setTitleAccordingToCollapsedState'>    setTitleAccordingToCollapsedState: function(menu) {
 </span>        if (menu.getCollapsed() === false) {
             menu.setBind({
                 title: '{closedMenuTitle}'

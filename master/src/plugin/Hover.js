@@ -100,7 +100,7 @@ Ext.define('BasiGX.plugin.Hover', {
 
     pendingRequest: null,
 
-    init: function (cmp) {
+    init: function(cmp) {
         var me = this;
 
         me.checkSelectEventOrigin();
@@ -128,12 +128,12 @@ Ext.define('BasiGX.plugin.Hover', {
      * configuration option #selectEventOrigin has a valid value; e.g. either
      * is `'collection'` (historical default) or `'interaction'`.
      */
-    checkSelectEventOrigin: function(){
+    checkSelectEventOrigin: function() {
         var me = this;
         var allowedOrigins = ['collection', 'interaction'];
         var defaultOrigin = allowedOrigins[0];
         var selOrigin = me.selectEventOrigin;
-        if(!Ext.Array.contains(allowedOrigins, selOrigin)) {
+        if (!Ext.Array.contains(allowedOrigins, selOrigin)) {
             Ext.log.warn('Unexpected selectEventOrigin "' + selOrigin + '",' +
                 ' correcting to "' + defaultOrigin + '".');
             me.selectEventOrigin = defaultOrigin;
@@ -147,7 +147,7 @@ Ext.define('BasiGX.plugin.Hover', {
      *
      * @private
      */
-    setupMapEventListeners: function(){
+    setupMapEventListeners: function() {
         var me = this;
         var mapComponent = me.getCmp();
         var map = mapComponent.getMap();
@@ -167,7 +167,7 @@ Ext.define('BasiGX.plugin.Hover', {
             var interaction = new ol.interaction.Select({
                 multi: me.selectMulti,
                 style: me.selectStyleFunction,
-                layers: [ me.getHoverVectorLayer() ]
+                layers: [me.getHoverVectorLayer()]
             });
             if (me.selectEventOrigin === 'collection') {
                 var featureCollection = interaction.getFeatures();
@@ -181,7 +181,11 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
    /**
+    * Bound to either a collection- or select-interaction-event, this method
+    * fires the `hoverfeaturesclick` event on the map component.
     *
+    * @param {ol.Collection.Event|ol.interaction.Select.Event} olEvt The event
+    *     we listen to. Is dependend on #selectEventOrigin.
     */
     onFeatureClicked: function(olEvt) {
         var me = this;
@@ -225,12 +229,12 @@ Ext.define('BasiGX.plugin.Hover', {
             me.setHoverVectorLayer(hoverVectorLayer);
         }
         // Set our internal flag to filter this layer out of the tree / legend
-        var displayInLayerSwitcherKey = BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
-        hoverVectorLayer.set(displayInLayerSwitcherKey, false);
+        var inLayerSwitcherKey = BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+        hoverVectorLayer.set(inLayerSwitcherKey, false);
     },
 
     /**
-     *
+     * Aborts pending AJAX requests, if any.
      */
     clearPendingRequests: function() {
         var me = this;
@@ -240,7 +244,11 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
     /**
+     * Requests the passed `url` asynchrounously and calls `cb` when that call
+     * was successful.
      *
+     * @param {String} url The URL to request.
+     * @param {Function} cb The callback to execute when the call succeeded.
      */
     requestAsynchronously: function(url, cb) {
         var me = this;
@@ -279,9 +287,12 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
     /**
+     * The handler for the pointerrest event on the mapcomponent.
      *
+     * @param {ol.MapBrowserEvent} evt The original and most recent
+     *     MapBrowserEvent event.
      */
-    onPointerRest : function(evt) {
+    onPointerRest: function(evt) {
         var me = this;
         var mapComponent = me.getCmp();
         var map = mapComponent.getMap();
@@ -323,7 +334,9 @@ Ext.define('BasiGX.plugin.Hover', {
                         var respProjection = (new ol.format.GeoJSON())
                                 .readProjection(resp.responseText);
 
-                        me.showHoverFeature(layer, respFeatures, respProjection);
+                        me.showHoverFeature(
+                            layer, respFeatures, respProjection
+                        );
 
                         Ext.each(respFeatures, function(feature) {
                             feature.set('layer', layer);
@@ -340,8 +353,8 @@ Ext.define('BasiGX.plugin.Hover', {
                 } else if (source instanceof ol.source.Vector) {
                     // VECTOR!
                     map.forEachFeatureAtPixel(pixel, function(feat) {
-                        if (layer.get('type') === "WFS" ||
-                                layer.get('type') === "WFSCluster") {
+                        if (layer.get('type') === 'WFS' ||
+                                layer.get('type') === 'WFSCluster') {
                             var hvl = me.getHoverVectorLayer();
                             // TODO This should be dynamically generated
                             // from the clusterStyle
@@ -364,7 +377,8 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
     /**
-     *
+     * @param {ol.layer.Base} candidate The layer to check.
+     * @return {Boolean} Whether the passed layer should be hoverable.
      */
     hoverLayerFilter: function(candidate) {
         var me = this;
@@ -378,7 +392,12 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
     /**
+     * Adds the passed features to the hover vector layer.
      *
+     * @param {ol.layer.Layer} layer The layer. Currently unused in the method.
+     * @param {Array<ol.Feature>} features The features to hover by adding them
+     *     to the source of the hover vector layer.
+     * @param {ol.Projection} projection The projection of the features.
      */
     showHoverFeature: function(layer, features, projection) {
         var me = this;
@@ -388,21 +407,27 @@ Ext.define('BasiGX.plugin.Hover', {
         if (projection) {
             proj = projection;
         }
-
-        Ext.each(features, function(feat){
+        var source = me.getHoverVectorLayerSource();
+        Ext.each(features, function(feat) {
             var g = feat.getGeometry();
             if (g) {
                 g.transform(proj, map.getView().getProjection());
             }
-            if(!Ext.Array.contains(me.getHoverVectorLayerSource().getFeatures(),
-                feat)){
-                me.getHoverVectorLayerSource().addFeature(feat);
+            if (!Ext.Array.contains(source.getFeatures(),
+                feat)) {
+                source.addFeature(feat);
             }
         });
     },
 
     /**
+     * Shows the hover tooltip.
      *
+     * @param {ol.MapBrowserEvent} evt The OpenLayers event, containing e.g.
+     *     the coordinate.
+     * @param {Array<ol.layer.Layer>} layers The layers that the features may
+     *     originate from.
+     * @param {Array<ol.Feature>} features The features that were hovered.
      */
     showHoverToolTip: function(evt, layers, features) {
         var me = this;
@@ -434,7 +459,13 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
     /**
+     * Given a set of `layers` and features that stem from these, get the HTML
+     * for the tooltip.
      *
+     * @param {Array<ol.layer.Base>} layers The layers from which the features
+     *     stem.
+     * @param {Array<ol.Feature>} features The features that were hovered.
+     * @return {String} The HTML for the tooltip.
      */
     getToolTipHtml: function(layers, features) {
         var me = this;
@@ -466,7 +497,19 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
     /**
+     * Returns another variant of the passed `baseColor` with the passed
+     * `alpha` value. This can be used to get e.g. a half transparent reddish
+     * color from a true red. If no `alpha` is passed, `1` is assumed. One
+     * could therefore effectively use this to turn a half-transparent reddish
+     * color into true red by simply no passing an alpha.
      *
+     * @param {Array<Number>} baseColor An array of three (or four) numbers for
+     *     the `r`, `g`, `b` (and `a`) parts of a color. All of `r`, `g` and `b`
+     *     range from `0` to `255`, only integer values make sense. If passed,
+     *     `a` should be between `0` and `1`, and can be fractional.
+     * @param {Number} alpha The new `alpha` value. Should be between `0` and
+     *     `1`, and can be fractional.
+     * @return {String} The new color as string, in `rgba(r, g, b, a)`-format.
      */
     transparify: function(baseColor, alpha) {
         var rgbaTemplate = 'rgba({0}, {1}, {2}, {3})';
@@ -490,7 +533,13 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
     /**
+     * An OpenLayers style function that highlights the passed feature.
      *
+     * @param {ol.Feature} feature The feature to highlight.
+     * @param {Number} resolution The resolution the features is rendered in.
+     * @param {Array<Number>} baseColor The base color for highlighting.
+     * @return {Array<ol.style.Style>} The styles to use to highlight the
+     *     feature.
      */
     highlightStyleFunction: function(feature, resolution, baseColor) {
         var me = this;
@@ -549,7 +598,10 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
     /**
+     * An OpenLayers style function for selected features.
      *
+     * @param {ol.Feature} feature The feature that was selected.
+     * @return {Array<ol.style.Style>} The styles to use to style the feature.
      */
     selectStyleFunction: function(feature) {
         var count = feature.get('count');
@@ -570,12 +622,12 @@ Ext.define('BasiGX.plugin.Hover', {
         return [
             new ol.style.Style({
                 fill: new ol.style.Fill({
-                    color: "rgba(0, 0, 255, 0.6)"
+                    color: 'rgba(0, 0, 255, 0.6)'
                 }),
                 image: new ol.style.Circle({
                     radius: radius,
                     fill: new ol.style.Fill({
-                        color: "rgba(0, 0, 255, 0.6)"
+                        color: 'rgba(0, 0, 255, 0.6)'
                     }),
                     stroke: new ol.style.Stroke({
                         color: 'gray'
@@ -597,7 +649,10 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
     /**
+     * Highlights a hovered cluster feature at the passed `pixel`, if any.
      *
+     * @param {ol.Pixel} pixel An array with two numbers representing the pixel
+     *     to check for a feature.
      */
     hoverClusterFeatures: function(pixel) {
         var me = this;
@@ -623,7 +678,12 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
     /**
+     * Returns the hover text for the passed `feature` and `hoverTemplate`.
      *
+     * @param {ol.Feature} feature The feature that was hovered.
+     * @param {String} hoverTemplate The template to fill with feature
+     *     attributes.
+     * @return {String} The text for the hovered feature.
      */
     getHoverTextFromTemplate: function(feature, hoverTemplate) {
         var me = this;

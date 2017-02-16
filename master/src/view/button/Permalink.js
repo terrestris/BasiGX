@@ -48,9 +48,9 @@ Ext.define('BasiGX.view.button.Permalink', {
     },
 
     config: {
-        handler: function(){
+        handler: function() {
             var win = Ext.ComponentQuery.query('[name=permalink-window]')[0];
-            if(!win){
+            if (!win) {
                 Ext.create('Ext.window.Window', {
                     name: 'permalink-window',
                     title: this.getViewModel().get('windowTitle'),

@@ -58,11 +58,11 @@ Ext.define('BasiGX.view.button.ZoomIn', {
      *
      */
     config: {
-        handler: function(){
-            var me = this,
-                olMap = me.olMap,
-                olView,
-                zoom;
+        handler: function() {
+            var me = this;
+            var olMap = me.olMap;
+            var olView;
+            var zoom;
 
             //fallback
             if (Ext.isEmpty(olMap)) {

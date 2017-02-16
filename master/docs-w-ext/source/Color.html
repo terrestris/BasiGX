@@ -38,70 +38,96 @@ Ext.define('BasiGX.util.Color', {
     statics: {
 
 <span id='BasiGX-util-Color-static-method-hexToRgba'>        /**
-</span>         * Method converts a hex8 color string into an rgba color string.
+</span>         * This method converts a hex color string into an rgba color string.
          *
          * Example:
+         *
          *     var rgba = BasiGX.util.Color.hexToRgba(&quot;#ff0000&quot;, 0.5);
          *     // rgba is now: &quot;rgba(255,0,0,0.5)&quot;
+         *
+         * @param {String} hex The hex string to convert.
+         * @param {Number} opacity The opacity to set, should be between `0` and
+         *     `1`.
+         * @return {String} A `rgba(r,g,b,a)` color string.
          */
         hexToRgba: function(hex, opacity) {
-            hex = hex.replace('#','');
-            var r = parseInt(hex.substring(0,2), 16);
-            var g = parseInt(hex.substring(2,4), 16);
-            var b = parseInt(hex.substring(4,6), 16);
+            hex = hex.replace('#', '');
+            var r = parseInt(hex.substring(0, 2), 16);
+            var g = parseInt(hex.substring(2, 4), 16);
+            var b = parseInt(hex.substring(4, 6), 16);
             var a = opacity;
 
-            if(opacity){
-                return 'rgba('+r+','+g+','+b+','+a+')';
+            if (opacity) {
+                return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
             }
-            return 'rgba('+r+','+g+','+b+',1)';
+            return 'rgba(' + r + ',' + g + ',' + b + ',1)';
         },
 
 <span id='BasiGX-util-Color-static-method-hex8ToRgba'>        /**
-</span>         * Method converts a hex8 color string into an rgba color string.
+</span>         * This method converts a hex color string into an rgba color string.
          *
          * Example:
+         *
          *     var rgba = BasiGX.util.Color.hex8ToRgba(&quot;#ff000000&quot;);
          *     // rgba is now: &quot;rgba(255,0,0,0)&quot;
+         *
+         * @param {String} hex8 The hex8 string to convert.
+         * @return {String} A `rgba(r,g,b,a)` color string.
          */
         hex8ToRgba: function(hex8) {
-            hex8 = hex8.replace('#','');
-            var r = parseInt(hex8.substring(0,2), 16);
-            var g = parseInt(hex8.substring(2,4), 16);
-            var b = parseInt(hex8.substring(4,6), 16);
-            var a = (parseInt(hex8.substring(6,8), 16) / 255).toFixed(2) * 1;
+            hex8 = hex8.replace('#', '');
+            var r = parseInt(hex8.substring(0, 2), 16);
+            var g = parseInt(hex8.substring(2, 4), 16);
+            var b = parseInt(hex8.substring(4, 6), 16);
+            var a = (parseInt(hex8.substring(6, 8), 16) / 255).toFixed(2) * 1;
 
-            var result = 'rgba('+r+','+g+','+b+','+a+')';
+            var result = 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
             return result;
         },
 
 <span id='BasiGX-util-Color-static-method-rgbaToHex'>        /**
-</span>         * Method converts a rgba color string into an hex6 color string.
+</span>         * This method converts a rgba color string into an hex6 color string.
          * Warning: You will loose the alpha channel when using this method.
          *
          * Example:
+         *
          *     var hex = BasiGX.util.Color.rgbaToHex(&quot;rgba(255,0,0,0)&quot;);
          *     // hex is now: &quot;#ff0000&quot;
+         *
+         * @param {String} rgba A `rgba(r,g,b,a)` color string.
+         * @return {String} A hexadecimal color string, e.g. `#ff0000`.
          */
-        rgbaToHex: function(rgba){
+        rgbaToHex: function(rgba) {
             if (!rgba) {
                 return '';
             }
-            var regex = new RegExp(&quot;^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?,&quot; +
-                &quot;[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?&quot;, &quot;i&quot;);
+            // TODO we should have a utility rgbAsArray, just like we have
+            // rgbaAsArray, or not?
+            var regex = new RegExp('^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?,' +
+                '[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?', 'i');
             rgba = rgba.match(regex);
-            return (rgba &amp;&amp; rgba.length === 4) ? &quot;#&quot; +
-                (&quot;0&quot; + parseInt(rgba[1],10).toString(16)).slice(-2) +
-                (&quot;0&quot; + parseInt(rgba[2],10).toString(16)).slice(-2) +
-                (&quot;0&quot; + parseInt(rgba[3],10).toString(16)).slice(-2) : '';
+
+            if (!rgba || rgba.length !== 4) {
+                return '';
+            }
+
+            var makeHex = BasiGX.util.Color.makeHex;
+            var r = makeHex(rgba[1]);
+            var g = makeHex(rgba[2]);
+            var b = makeHex(rgba[3]);
+
+            return '#' + r + g + b;
         },
 
 <span id='BasiGX-util-Color-static-method-rgbaToHex8'>        /**
-</span>         * Method converts a rgba color string into an hex8 color string.
+</span>         * This method converts a rgba color string into an hex8 color string.
          *
          * Example:
          *     var hex = BasiGX.util.Color.rgbaToHex(&quot;rgba(255,0,0,0)&quot;);
          *     // hex is now: &quot;#ff000000&quot;
+         *
+         * @param {String} rgba A `rgba(r,g,b,a)` color string.
+         * @return {String} A hex8 color string, with alpha; e.g. `#ff000000`.
          */
         rgbaToHex8: function(rgba) {
             if (!rgba) {
@@ -109,19 +135,43 @@ Ext.define('BasiGX.util.Color', {
             }
             rgba = BasiGX.util.Color.rgbaAsArray(rgba);
 
-            return (rgba &amp;&amp; rgba.length === 5) ? &quot;#&quot; +
-                (&quot;0&quot; + parseInt(rgba[1],10).toString(16)).slice(-2) +
-                (&quot;0&quot; + parseInt(rgba[2],10).toString(16)).slice(-2) +
-                (&quot;0&quot; + parseInt(rgba[3],10).toString(16)).slice(-2) +
-                (&quot;0&quot; + Math.round(parseFloat(rgba[4]) * 255).toString(16)).slice(-2) : '';
+            if (!rgba || rgba.length !== 5) {
+                return '';
+            }
+
+            var makeHex = BasiGX.util.Color.makeHex;
+            var r = makeHex(rgba[1]);
+            var g = makeHex(rgba[2]);
+            var b = makeHex(rgba[3]);
+            var a = makeHex('' + Math.round(parseFloat(rgba[4]) * 255));
+
+            return '#' + r + g + b + a;
+        },
+
+<span id='BasiGX-util-Color-static-method-makeHex'>        /**
+</span>         * Returns the two digit hexadecimal value of the passed number string
+         * (between `'0'` and `'255'`).
+         *
+         * @param {String} numStr The number to convert as a string.
+         * @return {String} The hexadecimal number.
+         */
+        makeHex: function(numStr) {
+            var hex = parseInt(numStr, 10).toString(16);
+            return ('0' + hex).slice(-2);
         },
 
 <span id='BasiGX-util-Color-static-method-rgbaAsArray'>        /**
-</span>         *
+</span>         * Returns an array of the parts of an `rgba(r,g,b,a)` string as array.
+         * The index `1` will be `r`, `2` will be `g`, `3` will be `b` and
+         * `4` will be `a`.
+         *
+         * @param {String} rgba An `rgba(r,g,b,a)` string.
+         * @return {Array} An array with the parts of the rgba-string.
          */
-        rgbaAsArray: function(rgba){
-            var regex = new RegExp(&quot;^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?,&quot; +
-                &quot;[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+(?:\\.\\d+|))[\\s+]?&quot;, &quot;i&quot;);
+        rgbaAsArray: function(rgba) {
+            var regex = new RegExp('^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?,' +
+                '[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?,' +
+                '[\\s+]?(\\d+(?:\\.\\d+|))[\\s+]?', 'i');
             rgba = rgba.match(regex);
             return rgba;
         }

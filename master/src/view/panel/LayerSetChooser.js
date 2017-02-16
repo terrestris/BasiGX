@@ -33,13 +33,13 @@
  *
  * @class BasiGX.view.panel.LayerSetChooser
  */
-Ext.define("BasiGX.view.panel.LayerSetChooser", {
-    extend: "Ext.panel.Panel",
-    xtype: "basigx-panel-layersetchooser",
+Ext.define('BasiGX.view.panel.LayerSetChooser', {
+    extend: 'Ext.panel.Panel',
+    xtype: 'basigx-panel-layersetchooser',
 
     requires: [
-        "BasiGX.view.view.LayerSet",
-        "Ext.app.ViewModel"
+        'BasiGX.view.view.LayerSet',
+        'Ext.app.ViewModel'
     ],
 
     viewModel: {
@@ -121,7 +121,7 @@ Ext.define("BasiGX.view.panel.LayerSetChooser", {
      */
     initComponent: function() {
 
-        if(Ext.isEmpty(this.items)) {
+        if (Ext.isEmpty(this.items)) {
 
             this.items = [{
                 xtype: 'basigx-view-layerset',
@@ -148,46 +148,84 @@ Ext.define("BasiGX.view.panel.LayerSetChooser", {
 
     /**
      * Just firing an event on the panel.
-     * Listen to the select event to implement custom handling
+     *
+     * Listen to the select event to implement custom handling.
+     *
+     * @param {Ext.selection.DataViewModel} view The selection model.
+     * @param {Ext.data.Model} rec The selected record (layerset).
+     * @param {Number} index The index within the store of the selected record.
+     * @param {Object} opts The options object passed when the event handler
+     *     was registered.
      */
-    onLayerSetSelect: function (view, rec, index, opts) {
+    onLayerSetSelect: function(view, rec, index, opts) {
         this.up('basigx-panel-layersetchooser').fireEvent(
             'select', view, rec, index, opts);
     },
 
     /**
      * Just firing an event on the panel.
+     *
      * Listen to the select event to implement custom handling
+     *
+     * @param {Ext.selection.DataViewModel} view The selection model.
+     * @param {Array<Ext.data.Model>} selected The selected records (layersets).
+     * @param {Object} eOpts The options object passed when the event handler
+     *     was registered.
      */
-    onLayerSetSelectionchange: function (view, selected, eOpts) {
+    onLayerSetSelectionchange: function(view, selected, eOpts) {
         this.up('basigx-panel-layersetchooser').fireEvent(
             'selectionchange', view, selected, eOpts);
     },
 
     /**
      * Just firing an event on the panel.
+     *
      * Listen to the itemclick event to implement custom handling
+     *
+     * @param {BasiGX.view.view.LayerSet} view The LayerSet view.
+     * @param {Ext.data.Model} rec The clicked record (layerset).
+     * @param {HTMLElement} item The item's element.
+     * @param {Number} index The item's index.
+     * @param {Object} evt The raw event object.
+     * @param {Object} opts The options object passed when the event handler
+     *     was registered.
      */
-    onLayerSetClick: function (view, rec, item, index, evt, opts) {
+    onLayerSetClick: function(view, rec, item, index, evt, opts) {
         view.up('basigx-panel-layersetchooser').fireEvent(
             'itemclick', view, rec, item, index, evt, opts);
     },
 
     /**
      * Just firing an event on the panel.
-     * Listen to the itemdblclick event to implement custom handling
+     *
+     * Listen to the itemdblclick event to implement custom handling.
+     *
+     * @param {BasiGX.view.view.LayerSet} view The LayerSet view.
+     * @param {Ext.data.Model} rec The double-clicked record (layerset).
+     * @param {HTMLElement} item The item's element.
+     * @param {Number} index The item's index.
+     * @param {Object} evt The raw event object.
+     * @param {Object} opts The options object passed when the event handler
+     *     was registered.
      */
-    onLayerSetDblClick: function (view, rec, item, index, evt, opts) {
+    onLayerSetDblClick: function(view, rec, item, index, evt, opts) {
         view.up('basigx-panel-layersetchooser').fireEvent(
             'itemdblclick', view, rec, item, index, evt, opts);
     },
 
     /**
+     * Can be used to filter the layer sets by text, usually bound as
+     * eventhandler of the `change` event of a textfield.
      *
+     * @param {Ext.form.field.Text} textfield The textfield.
+     * @param {String} newVal The new value.
+     * @param {String} oldval The old value.
+     * @param {Ext.form.field.Text} listener The options object passed to
+     *     `Ext.util.Observable.addListener`.
      */
     filterLayerSetsByText: function(textfield, newVal, oldval, listener) {
-        var layerProfileView = listener.scope.down('basigx-view-layerset'),
-            store = layerProfileView.getStore();
+        var layerProfileView = listener.scope.down('basigx-view-layerset');
+        var store = layerProfileView.getStore();
         store.getFilters().replaceAll({
             property: 'name',
             anyMatch: true,

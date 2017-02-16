@@ -39,25 +39,25 @@
  *
  * @class BasiGX.view.panel.MapContainer
  */
-Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
-    extend: &quot;Ext.panel.Panel&quot;,
-    xtype: &quot;basigx-panel-mapcontainer&quot;,
+Ext.define('BasiGX.view.panel.MapContainer', {
+    extend: 'Ext.panel.Panel',
+    xtype: 'basigx-panel-mapcontainer',
 
     requires: [
-        &quot;Ext.dom.Query&quot;,
-        &quot;Ext.app.ViewModel&quot;,
-        &quot;GeoExt.data.store.LayersTree&quot;,
-        &quot;GeoExt.component.OverviewMap&quot;,
+        'Ext.dom.Query',
+        'Ext.app.ViewModel',
+        'GeoExt.data.store.LayersTree',
+        'GeoExt.component.OverviewMap',
 
-        &quot;BasiGX.util.Layer&quot;,
-        &quot;BasiGX.view.component.Map&quot;,
-        &quot;BasiGX.view.panel.LegendTree&quot;,
-        &quot;BasiGX.view.panel.Menu&quot;,
+        'BasiGX.util.Layer',
+        'BasiGX.view.component.Map',
+        'BasiGX.view.panel.LegendTree',
+        'BasiGX.view.panel.Menu',
 
-        &quot;BasiGX.view.button.ZoomIn&quot;,
-        &quot;BasiGX.view.button.ZoomOut&quot;,
-        &quot;BasiGX.view.button.ZoomToExtent&quot;,
-        &quot;BasiGX.view.button.ToggleLegend&quot;
+        'BasiGX.view.button.ZoomIn',
+        'BasiGX.view.button.ZoomOut',
+        'BasiGX.view.button.ZoomToExtent',
+        'BasiGX.view.button.ToggleLegend'
     ],
 
 <span id='BasiGX-view-panel-MapContainer-property-viewModel'>    /**
@@ -118,10 +118,10 @@ Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
             hidden: true,
             layers: [
                 new ol.layer.Tile({
-                      source: new ol.source.TileWMS({
-                          url:&quot;http://ows.terrestris.de/osm/service?&quot;,
-                          params:{&quot;layers&quot;: &quot;OSM-WMS&quot;,&quot;TILED&quot;:true}
-                      })
+                    source: new ol.source.TileWMS({
+                        url: 'http://ows.terrestris.de/osm/service?',
+                        params: {'layers': 'OSM-WMS', 'TILED': true}
+                    })
                 })
             ]
         },
@@ -160,7 +160,7 @@ Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
 <span id='BasiGX-view-panel-MapContainer-method-initComponent'>    /**
 </span>     * Init
      */
-    initComponent: function(){
+    initComponent: function() {
         var me = this;
 
         // call parent (we can use this.add() after this call)
@@ -226,7 +226,7 @@ Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
 
         var toolbar = me.getToolbarConfig();
 
-        if(!toolbar.items){
+        if (!toolbar.items) {
             toolbar.items = me.buildToolbarItems();
         }
 
@@ -242,7 +242,7 @@ Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
         var overviewMap = me.getOverviewMapConfig();
 
         // set the overviewmap parent map
-        if(!overviewMap.parentMap &amp;&amp; me.mapPanel) {
+        if (!overviewMap.parentMap &amp;&amp; me.mapPanel) {
             overviewMap.parentMap = me.mapPanel.getMap();
         }
 
@@ -258,12 +258,12 @@ Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
         var overviewMapToggleButton = me.getOverviewMapToggleButtonConfig();
 
         // set the toggleHandler if not configured
-        if(!overviewMapToggleButton.toggleHander &amp;&amp; me.toggleOverviewMap) {
+        if (!overviewMapToggleButton.toggleHander &amp;&amp; me.toggleOverviewMap) {
             overviewMapToggleButton.toggleHandler = me.toggleOverviewMap;
         }
 
         // set the scope (e.g. for handler or toggleHandler)
-        if(!overviewMapToggleButton.scope) {
+        if (!overviewMapToggleButton.scope) {
             overviewMapToggleButton.scope = me;
         }
 
@@ -291,7 +291,7 @@ Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
 
 
         // set the store if not configured
-        if(!legendTreeConfig.store &amp;&amp; me.mapPanel) {
+        if (!legendTreeConfig.store &amp;&amp; me.mapPanel) {
             var treeStore = Ext.create('GeoExt.data.store.LayersTree', {
                 layerGroup: me.mapPanel.getMap().getLayerGroup()
             });
@@ -314,27 +314,33 @@ Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
     },
 
 <span id='BasiGX-view-panel-MapContainer-method-buildToolbarItems'>    /**
-</span>     *
+</span>     * Returns an array of ExtJS configurations for toolbar items.
+     *
+     * @return {Array&lt;Object&gt;} An array of ExtJS configurations for toolbar
+     *     items (mostly buttons).
      */
     buildToolbarItems: function() {
         var toolbarItems = [{
-                xtype: 'basigx-button-zoomin'
-            }, {
-                xtype: 'basigx-button-zoomout'
-            }, {
-                xtype: 'basigx-button-zoomtoextent'
-            }, {
-                xtype: 'basigx-button-togglelegend'
-            }];
+            xtype: 'basigx-button-zoomin'
+        }, {
+            xtype: 'basigx-button-zoomout'
+        }, {
+            xtype: 'basigx-button-zoomtoextent'
+        }, {
+            xtype: 'basigx-button-togglelegend'
+        }];
 
         return toolbarItems;
     },
 
 <span id='BasiGX-view-panel-MapContainer-method-toggleOverviewMap'>    /**
-</span>     *
+</span>     * Toggles the overviewmap.
+     *
+     * @param {Ext.button.Button} button The toggle button for the overview map.
+     * @param {Boolean} pressed Whether the butten is currently pressed or not.
      */
-    toggleOverviewMap: function(button, pressed){
-        var ovm = button.up(&quot;basigx-panel-mapcontainer&quot;)
+    toggleOverviewMap: function(button, pressed) {
+        var ovm = button.up('basigx-panel-mapcontainer')
                 .down('gx_overviewmap');
         if (pressed) {
             ovm.show(button);
@@ -347,29 +353,31 @@ Ext.define(&quot;BasiGX.view.panel.MapContainer&quot;, {
     },
 
 <span id='BasiGX-view-panel-MapContainer-method-toggleScalelineAdjustment'>    /**
-</span>     *
+</span>     * Called from #toggleOverviewMap, this method toggles a CSS class on
+     * the Openlayers scaleline HTML element.
      */
-    toggleScalelineAdjustment: function(){
+    toggleScalelineAdjustment: function() {
         var scaleline = Ext.dom.Query.select('.ol-scale-line')[0];
         var scalelineElem;
-        if(scaleline) {
+        if (scaleline) {
             scalelineElem = Ext.get(scaleline);
         }
-        if(scalelineElem){
+        if (scalelineElem) {
             scalelineElem.toggleCls('basigx-scaline-adjusted');
         }
     },
 
 <span id='BasiGX-view-panel-MapContainer-method-toggleScalecomboAdjustment'>    /**
-</span>     *
+</span>     * Called from #toggleOverviewMap, this method toggles a CSS class on
+     * the BasiGX scale combo HTML element.
      */
-    toggleScalecomboAdjustment: function(){
+    toggleScalecomboAdjustment: function() {
         var scaleCombo = Ext.ComponentQuery.query('basigx-combo-scale')[0];
         var scaleComboEl;
-        if(scaleCombo){
+        if (scaleCombo) {
             scaleComboEl = scaleCombo.getEl();
         }
-        if(scaleComboEl){
+        if (scaleComboEl) {
             scaleComboEl.toggleCls('basigx-combo-scale-adjusted');
         }
     }

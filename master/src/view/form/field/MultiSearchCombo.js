@@ -17,13 +17,13 @@
  *
  * Multisearch combo used to search in the glorious dataset of OSM combined
  * with a WFS search searching through configurable layers. This class calls
- * BasiGX.view.container.MultiSearchSettings to configure settings and
- * BasiGX.view.grid.MultiSearchWFSSearchGrid as well as
- * BasiGX.view.grid.MultiSearchGazetteerGrid to show search results.
- * This component assumes the use of only one
- * BasiGX.util.Map.getMapComponent().getMap().
+ * `BasiGX.view.container.MultiSearchSettings` to configure settings and
+ * `BasiGX.view.grid.MultiSearchWFSSearchGrid` as well as
+ * `BasiGX.view.grid.MultiSearchGazetteerGrid` to show search results.
  *
- * @example
+ * This component assumes the use of only one `BasiGX.util.Map`; we use
+ * `BasiGX.util.Map.getMapComponent().getMap()`.
+ *
  *     {
  *         xtype: 'basigx-form-field-multisearch',
  *         config: {
@@ -44,31 +44,31 @@
  * @requires BasiGX.view.grid.MultiSearchGazetteerGrid
  *
  */
-Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
+Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
     extend: 'Ext.form.field.ComboBox',
     xtype: 'basigx-form-field-multisearch',
 
     requires: [
-        "BasiGX.util.Map",
-        "BasiGX.view.container.MultiSearchSettings",
-        "BasiGX.view.grid.MultiSearchWFSSearchGrid",
-        "BasiGX.view.grid.MultiSearchGazetteerGrid"
+        'BasiGX.util.Map',
+        'BasiGX.view.container.MultiSearchSettings',
+        'BasiGX.view.grid.MultiSearchWFSSearchGrid',
+        'BasiGX.view.grid.MultiSearchGazetteerGrid'
     ],
 
     viewModel: {
         data: {
-            emptyText: "Suche ...",
-            settingsWindowTitle: "Sucheinstellungen"
+            emptyText: 'Suche ...',
+            settingsWindowTitle: 'Sucheinstellungen'
         }
     },
 
     config: {
 
-        gazetteerGrid: "basigx-grid-multisearchgazetteergrid",
+        gazetteerGrid: 'basigx-grid-multisearchgazetteergrid',
 
-        wfsSearchGrid: "basigx-grid-multisearchwfssearchgrid",
+        wfsSearchGrid: 'basigx-grid-multisearchwfssearchgrid',
 
-        searchSettings: "basigx-container-multisearchsettings",
+        searchSettings: 'basigx-container-multisearchsettings',
 
         wfsServerUrl: null,
 
@@ -107,19 +107,19 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
     triggers: {
         refresh: {
             cls: 'multisearch-refresh-trigger',
-            handler: function(){
+            handler: function() {
                 this.refreshSearchResults();
             }
         },
         settings: {
             cls: 'multisearch-settings-trigger',
-            handler: function(){
+            handler: function() {
                 this.showSettingsWindow();
             }
         }
     },
 
-    initComponent: function(){
+    initComponent: function() {
         var me = this;
 
         me.callParent(arguments);
@@ -139,7 +139,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
         });
 
         // set search layers to all above layers if not configured different
-        if (me.getConfiguredSearchLayers().length === 0 ) {
+        if (me.getConfiguredSearchLayers().length === 0) {
             Ext.each(me.getAllSearchLayers(), function(l) {
                 me.configuredSearchLayers.push(l);
             });
@@ -150,7 +150,10 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
 
     },
 
-    onBoxReady: function(){
+    /**
+     * Ensures that the value is cleared when one hits escape.
+     */
+    onBoxReady: function() {
         var me = this;
         me.nav = Ext.create('Ext.util.KeyNav', me.el, {
             esc: me.clearValue,
@@ -159,17 +162,18 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
     },
 
     /**
-     *
      * Called by the onChange listener.
+     *
      * When a search term is typed into the combobox, this method will trigger
      * the included searches or fades out.
-     * @param {} the combo itself
-     * @param {string} the new value that was just typed
+     *
+     * @param {BasiGX.view.form.field.MultiSearchCombo} combo The combo itself.
+     * @param {String} newValue The new value that was just typed.
      */
-    onComboValueChange: function(combo, newValue){
+    onComboValueChange: function(combo, newValue) {
         var me = this;
 
-        if(newValue){
+        if (newValue) {
             // create the multi search panel
             me.showResults();
 
@@ -184,11 +188,11 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
                 Ext.ComponentQuery.query(me.getWfsSearchGrid())[0];
             var searchLayer = objectSearchGrid.searchResultVectorLayer;
 
-            if(searchLayer) {
+            if (searchLayer) {
                 searchLayer.getSource().clear();
             }
 
-            if(me.searchContainer) {
+            if (me.searchContainer) {
                 me.searchContainer.getEl().slideOut('t', {
                     duration: 250,
                     callback: function() {
@@ -204,10 +208,11 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
     /**
      * Called by onComboValueChange() to start the gazetteer search.
      * This method also handles inactive status if configured before.
+     *
      * @param {string} value The typed search term of the user
      * @param {boolean} limitToBBox Search is limited to visible extent
      */
-    doGazetteerSearch: function(value, limitToBBox){
+    doGazetteerSearch: function(value, limitToBBox) {
 
         var me = this;
 
@@ -222,7 +227,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
                 gazetteerGrid.getStore().removeAll();
             }
         } else {
-            Ext.log.error("Gazetteer SearchGrid not found");
+            Ext.log.error('Gazetteer SearchGrid not found');
         }
 
     },
@@ -230,10 +235,10 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
     /**
      * Called by onComboValueChange() to start the object search.
      * This method also handles inactive status if configured before.
-     * @param {string} value The typed search term of the user
      *
+     * @param {string} value The typed search term of the user
      */
-    doObjectSearch: function(value){
+    doObjectSearch: function(value) {
 
         var me = this;
 
@@ -248,7 +253,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
                 objectSearchGrid.getStore().removeAll();
             }
         } else {
-            Ext.log.error("ObjectSearchGrid not found");
+            Ext.log.error('ObjectSearchGrid not found');
         }
 
     },
@@ -271,9 +276,9 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
             parentRegion = parentItem.getClientRegion();
 
             position = {
-                top: parentRegion.bottom + "px",
-                left: parentRegion.left + "px",
-                width: parentItem.getWidth() + "px"
+                top: parentRegion.bottom + 'px',
+                left: parentRegion.left + 'px',
+                width: parentItem.getWidth() + 'px'
             };
 
             searchContainer = Ext.create(Ext.container.Container, {
@@ -282,7 +287,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
                 items: [
                     {
                         xtype: me.getGazetteerGrid()
-                    },{
+                    }, {
                         xtype: me.getWfsSearchGrid()
                     }
                 ],
@@ -305,7 +310,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
     /**
      * Called by the refresh-trigger to search again.
      */
-    refreshSearchResults: function(){
+    refreshSearchResults: function() {
         var me = this;
 
         var value = me.getValue();
@@ -314,7 +319,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
             me.doGazetteerSearch(value);
             me.doObjectSearch(value);
         } else {
-            Ext.log.error("No value to search for");
+            Ext.log.error('No value to search for');
         }
     },
 
@@ -322,7 +327,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo',{
      * Called by the settings-trigger to build a window containing the
      * settings container
      */
-    showSettingsWindow: function(){
+    showSettingsWindow: function() {
         var me = this;
         var settingsWindow;
 

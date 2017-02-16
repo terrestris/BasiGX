@@ -76,10 +76,10 @@ Ext.define('BasiGX.view.button.ZoomOut', {
 </span>
     config: {
 <span id='BasiGX-view-button-ZoomOut-cfg-handler'>        handler: function() {
-</span>            var me = this,
-                olMap = me.olMap,
-                olView,
-                zoom;
+</span>            var me = this;
+            var olMap = me.olMap;
+            var olView;
+            var zoom;
 
             // fallback
             if (Ext.isEmpty(olMap)) {

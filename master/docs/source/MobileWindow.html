@@ -54,9 +54,9 @@
  *
  * @class BasiGX.view.panel.MobileWindow
  */
-Ext.define(&quot;BasiGX.view.panel.MobileWindow&quot;, {
-    extend: &quot;Ext.Panel&quot;,
-    xtype: &quot;basigx-panel-mobilewindow&quot;,
+Ext.define('BasiGX.view.panel.MobileWindow', {
+    extend: 'Ext.Panel',
+    xtype: 'basigx-panel-mobilewindow',
 
     requires: [
         'Ext.Container'
@@ -79,7 +79,9 @@ Ext.define(&quot;BasiGX.view.panel.MobileWindow&quot;, {
 </span>    },
 
 <span id='BasiGX-view-panel-MobileWindow-method-constructor'>    /**
-</span>     *
+</span>     * The constructor for the MobileWindow class.
+     *
+     * @param {Object} config The configuration options for the MobileWindow.
      */
     constructor: function(config) {
         var me = this;

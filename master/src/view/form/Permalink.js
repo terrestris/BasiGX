@@ -20,8 +20,8 @@
  *
  * @class BasiGX.view.form.Permalink
  */
-Ext.define("BasiGX.view.form.Permalink", {
-    extend: "Ext.form.Panel",
+Ext.define('BasiGX.view.form.Permalink', {
+    extend: 'Ext.form.Panel',
 
     xtype: 'basigx-form-permalink',
 
@@ -51,11 +51,11 @@ Ext.define("BasiGX.view.form.Permalink", {
         name: 'textfield-permalink',
         editable: false,
         listeners: {
-            afterrender: function(textfield){
+            afterrender: function(textfield) {
                 var permalink = textfield.up('form').getPermalink();
                 textfield.setValue(permalink);
             },
-            change: function(textfield){
+            change: function(textfield) {
                 var width = Ext.util.TextMetrics.measure(
                     textfield.getEl(), textfield.getValue()).width;
                 textfield.setWidth(width + 20);
@@ -67,7 +67,7 @@ Ext.define("BasiGX.view.form.Permalink", {
         bind: {
             text: '{refreshBtnText}'
         },
-        handler: function(btn){
+        handler: function(btn) {
             var permalink = btn.up('form').getPermalink();
             var textfield = btn.up('form').down('textfield');
             textfield.setValue(permalink);
@@ -77,7 +77,7 @@ Ext.define("BasiGX.view.form.Permalink", {
         bind: {
             text: '{copyToClipboardBtnText}'
         },
-        handler: function(btn){
+        handler: function(btn) {
             var textfield = btn.up('form').down('textfield');
             var value = textfield.getValue();
 
@@ -85,7 +85,7 @@ Ext.define("BasiGX.view.form.Permalink", {
         }
     }],
 
-    getPermalink: function(){
+    getPermalink: function() {
         var route = BasiGX.util.Application.getRoute();
         var hrefWithoutHash = window.location.origin +
             window.location.pathname +

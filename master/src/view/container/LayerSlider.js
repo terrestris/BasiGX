@@ -44,12 +44,12 @@
  *
  * @class BasiGX.view.container.LayerSlider
  */
-Ext.define("BasiGX.view.container.LayerSlider", {
-    extend: "Ext.container.Container",
-    xtype: "basigx-slider-layer",
+Ext.define('BasiGX.view.container.LayerSlider', {
+    extend: 'Ext.container.Container',
+    xtype: 'basigx-slider-layer',
 
     requires: [
-        "Ext.slider.Single"
+        'Ext.slider.Single'
     ],
 
     /**
@@ -113,17 +113,17 @@ Ext.define("BasiGX.view.container.LayerSlider", {
      *
      */
     initComponent: function() {
-        var me = this,
-            map = BasiGX.util.Map.getMapComponent().getMap(),
-            labelItems = me.getLabelItems(),
-            items = [];
+        var me = this;
+        var map = BasiGX.util.Map.getMapComponent().getMap();
+        var labelItems = me.getLabelItems();
+        var items = [];
 
         me.layers = [];
 
         if (Ext.isEmpty(me.layerNames) || me.layerNames.length < 2) {
             Ext.log.error('Not enough layers given to slider!');
         } else {
-            Ext.each(me.layerNames, function(ln){
+            Ext.each(me.layerNames, function(ln) {
                 me.addLayerByName(map.getLayers().getArray(), ln);
             });
         }
@@ -146,12 +146,12 @@ Ext.define("BasiGX.view.container.LayerSlider", {
         }
 
         var labelContainer = {
-                xtype: 'container',
-                layout: {
-                    type: 'hbox',
-                    align: 'stretch'
-                },
-                items: labelItems
+            xtype: 'container',
+            layout: {
+                type: 'hbox',
+                align: 'stretch'
+            },
+            items: labelItems
         };
         items.push(labelContainer);
 
@@ -179,7 +179,7 @@ Ext.define("BasiGX.view.container.LayerSlider", {
 
         me.callParent();
 
-        slider.on("change", me.changeHandler);
+        slider.on('change', me.changeHandler);
 
         if (me.initialActiveLayerIdx > 0) {
             var sliderVal = slider.maxValue / (
@@ -191,11 +191,13 @@ Ext.define("BasiGX.view.container.LayerSlider", {
     },
 
     /**
-     * Returns the label items
+     * Returns the label items.
+     *
+     * @return {Array<Object>} The label items.
      */
     getLabelItems: function() {
-        var me = this,
-            labelItems = [];
+        var me = this;
+        var labelItems = [];
 
         if (me.addOffState) {
             // add the starter
@@ -223,7 +225,12 @@ Ext.define("BasiGX.view.container.LayerSlider", {
     },
 
     /**
-     * Adds Layers to a member variable by the given layernames
+     * Adds layers to a member variable by the given layernames.
+     *
+     * @param {ol.Collection} collection The collection to add the layer with
+     *     the passed name to.
+     * @param {String} ln The name of the layer to search and then add to the
+     *     collection.
      */
     addLayerByName: function(collection, ln) {
         var me = this;
@@ -249,12 +256,21 @@ Ext.define("BasiGX.view.container.LayerSlider", {
     },
 
     /**
-     * Handling the opacity change on the configured layers
+     * Handling the opacity change on the configured layers.
+     *
+     * TODO This method should be rewritten with readability in mind.
+     *
+     * @param {Ext.slider.Slider} slider The slider.
+     * @param {Number} value The position of the slider as number between
+     *     `minValue` and `maxValue` of the slider.
      */
     changeHandler: function(slider, value) {
-        var me = this.up('basigx-slider-layer'),
-            swapRange = slider.maxValue / (
-                me.addOffState ? me.layers.length : me.layers.length - 1);
+        var sliderContainer = this.up('basigx-slider-layer');
+        var layers = sliderContainer.layers;
+        var numLayers = layers.length;
+        var swapRange = slider.maxValue / (
+            sliderContainer.addOffState ? numLayers : numLayers - 1
+        );
 
         if (value === slider.maxValue) {
             // maxValue breaks mathematics so we use maxValue -1;
@@ -264,36 +280,38 @@ Ext.define("BasiGX.view.container.LayerSlider", {
 
         // disable all layers in order to avoid unnecessary requests and
         // gain performance. enable required ones later...
-        Ext.each(me.layers, function(layer) {
+        Ext.each(layers, function(layer) {
             layer.setVisible(false);
         });
 
-        if (value >= swapRange || !me.addOffState) {
+        if (value >= swapRange || !sliderContainer.addOffState) {
             // need to break down the value to the corresponding range.
             // with e.g. 4 layers this will always be between 0 and 25
             value = value - swapRange * idx;
 
-            if (!me.addOffState) {
-                me.layers[idx].set('opacity', Math.abs(1 -
-                        (value * me.layers.length / 100)));
-                me.layers[idx + 1].set('opacity',
-                        value * me.layers.length / 100);
+            if (!sliderContainer.addOffState) {
+                sliderContainer.layers[idx].set('opacity', Math.abs(1 -
+                        (value * layers.length / 100)));
+                sliderContainer.layers[idx + 1].set('opacity',
+                        value * layers.length / 100);
 
-                me.layers[idx].setVisible(true);
-                me.layers[idx + 1].setVisible(true);
+                sliderContainer.layers[idx].setVisible(true);
+                sliderContainer.layers[idx + 1].setVisible(true);
             } else {
-                me.layers[idx - 1].set('opacity', Math.abs(1 -
-                        (value * me.layers.length / 100)));
-                me.layers[idx].set('opacity', value * me.layers.length / 100);
+                sliderContainer.layers[idx - 1].set('opacity', Math.abs(1 -
+                        (value * layers.length / 100)));
+                sliderContainer.layers[idx].set('opacity',
+                        value * layers.length / 100);
 
-                me.layers[idx - 1].setVisible(true);
-                me.layers[idx].setVisible(true);
+                sliderContainer.layers[idx - 1].setVisible(true);
+                sliderContainer.layers[idx].setVisible(true);
             }
         } else {
             // we are on the first slide part and have an offState,
             // just fade in the first layer
-            me.layers[idx].set('opacity', value * me.layers.length / 100);
-            me.layers[idx].setVisible(true);
+            sliderContainer.layers[idx].set('opacity',
+                    value * layers.length / 100);
+            sliderContainer.layers[idx].setVisible(true);
         }
     }
 });

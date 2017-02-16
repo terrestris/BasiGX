@@ -44,21 +44,25 @@
  *
  * @class BasiGX.view.form.CsvImport
  */
-Ext.define(&quot;BasiGX.view.form.CsvImport&quot;,{
-    extend: &quot;Ext.form.Panel&quot;,
+Ext.define('BasiGX.view.form.CsvImport', {
+    extend: 'Ext.form.Panel',
 
-    xtype: &quot;form-csvimport&quot;,
+    xtype: 'form-csvimport',
 
     config: {
 <span id='BasiGX-view-form-CsvImport-cfg-grid'>        grid: null,
 </span><span id='BasiGX-view-form-CsvImport-cfg-dataArray'>        dataArray: null
 </span>    },
 
-<span id='BasiGX-view-form-CsvImport-method-initComponent'>    initComponent: function(conf){
-</span>        var me = this;
+<span id='BasiGX-view-form-CsvImport-method-initComponent'>    /**
+</span>     * Initializes the CsvImport form.
+     *
+     * @param {Object} conf The configuration for the CsvImport form.
+     */
+    initComponent: function(conf) {
+        var me = this;
         me.callParent(conf);
-
-        if(!me.getGrid()){
+        if (!me.getGrid()) {
             Ext.Error.raise('No grid defined for csv-importer.');
         }
     },
@@ -66,125 +70,153 @@ Ext.define(&quot;BasiGX.view.form.CsvImport&quot;,{
 <span id='BasiGX-view-form-CsvImport-property-associatonObject'>    /**
 </span>     * You can put default associations here. These will fill the comboboxes.
      *
-     * The key represents the csv-column.
-     * The value represents the Grid column text.
+     * The `key` represents the csv-column. The `value` represents the grid
+     * column text, e.g.:
      *
-     * associatonObject: {
-     *     Name: &quot;Nachname&quot;,
-     *     Vorname: &quot;Vorname&quot;,
-     *     Straße: null,
-     *     Hausnummer: null,
-           Postleitzahl: null,
-     *     Stadt: null,
-     *     &quot;E-Mail_1&quot;: &quot;E-Mail&quot;,
-     *     &quot;E-Mail_2&quot;: null
-     *},
+     *     // …
+     *     associatonObject: {
+     *         Name: &quot;Nachname&quot;,
+     *         Vorname: &quot;Vorname&quot;,
+     *         Straße: null,
+     *         Hausnummer: null,
+     *         Postleitzahl: null,
+     *         Stadt: null,
+     *         &quot;E-Mail_1&quot;: &quot;E-Mail&quot;,
+     *         &quot;E-Mail_2&quot;: null
+     *     },
+     *     // …
      */
-    associatonObject: {
-
-    },
+    associatonObject: {},
 
 <span id='BasiGX-view-form-CsvImport-property-bodyPadding'>    bodyPadding: 10,
 </span>
 <span id='BasiGX-view-form-CsvImport-property-items'>    items: [{
 </span>        xtype: 'filefield',
         name: 'csv_file',
-        fieldLabel: 'CSV-Datei',
+        fieldLabel: 'CSV-Datei',  // TODO i18n
         labelWidth: 70,
         width: 400,
         msgTarget: 'side',
         allowBlank: false,
-        buttonText: 'Datei auswähen …',
+        buttonText: 'Datei auswählen …', // TODO i18n
         validator: function(val) {
             var fileName = /^.*\.(csv)$/i;
+             // TODO i18n
             var errMsg = 'Der Datenimport ist nur mit CSV-Dateien möglich.';
             return fileName.test(val) || errMsg;
-      }
+        }
     }],
 
 <span id='BasiGX-view-form-CsvImport-property-buttons'>    buttons: [{
-</span>        xtype: &quot;button&quot;,
-        name: &quot;importBtn&quot;,
-        text: &quot;Importieren&quot;,
-        handler: function(btn){
-            var me = this.up('form');
-            me.startImport(btn);
+</span>        xtype: 'button',
+        name: 'importBtn',
+        text: 'Importieren', // TODO i18n
+        handler: function(btn) {
+            var csvImportForm = this.up('form');
+            csvImportForm.startImport(btn);
         },
         disabled: true
-    },{
-        text: 'Datei einlesen',
+    }, {
+        text: 'Datei einlesen', // TODO i18n
         handler: function() {
             if (window.FileReader) {
-                var me = this.up('form');
-                var fileField = me.down('filefield');
+                var csvImportForm = this.up('form');
+                var fileField = csvImportForm.down('filefield');
                 var file = fileField.extractFileInput().files[0];
                 var reader = new FileReader();
 
                 reader.readAsText(file);
-                reader.onload = me.onLoad;
-                reader.onerror = me.onError;
+                reader.onload = csvImportForm.onLoad;
+                reader.onerror = csvImportForm.onError;
             } else {
+                // TODO i18n
                 Ext.Toast('FileReader are not supported in this browser.');
             }
         }
     }],
 
-<span id='BasiGX-view-form-CsvImport-method-onLoad'>    onLoad: function(event) {
-</span>        var me = Ext.ComponentQuery.query('form-csvimport')[0];
+<span id='BasiGX-view-form-CsvImport-method-onLoad'>    /**
+</span>     * Bound on the FileReader.load event, this decodes the uploaded file as CSV
+     * and calls #setDataArray and #setupAssociations.
+     *
+     * @param {Object} event The event from the FileReader.
+     */
+    onLoad: function(event) {
+        var csvImportForm = Ext.ComponentQuery.query('form-csvimport')[0];
         var csv = event.target.result;
         var dataArray = Ext.util.CSV.decode(csv);
-        me.setDataArray(dataArray);
+        csvImportForm.setDataArray(dataArray);
 
-        me.setupAssociations(dataArray[0], me);
+        csvImportForm.setupAssociations(dataArray[0], csvImportForm);
 
     },
 
-<span id='BasiGX-view-form-CsvImport-method-onError'>    onError: function(evt) {
-</span>        if(evt.target.error.name === &quot;NotReadableError&quot;) {
-            Ext.toast(&quot;Canno't read file !&quot;);
+<span id='BasiGX-view-form-CsvImport-method-onError'>    /**
+</span>     * Bound on the FileReader.error event, this warns if a `NotReadableError`
+     * occured.
+     *
+     * @param {Object} evt The event from the FileReader.
+     */
+    onError: function(evt) {
+        if (evt.target.error.name === 'NotReadableError') {
+            // TODO i18n
+            Ext.toast('Canno\'t read file !');
         }
     },
 
-<span id='BasiGX-view-form-CsvImport-method-setupAssociations'>    setupAssociations: function(titleRow, me){
-</span>        var dataModelColumns = me.getGrid().query('gridcolumn[hidden=false]');
+<span id='BasiGX-view-form-CsvImport-method-setupAssociations'>    /**
+</span>     * Sets up associations between CSV and grid columns.
+     *
+     * @param {Array&lt;String&gt;} titleRow The first row of the CSV (the titles).
+     * @param {BasiGX.view.form.CsvImport} csvImportForm The CSV import form.
+     */
+    setupAssociations: function(titleRow, csvImportForm) {
+        var dataModelColumns = csvImportForm.getGrid().query(
+            'gridcolumn[hidden=false]'
+        );
         var columnTitles = [];
-        var assoFieldset = Ext.create(&quot;Ext.form.FieldSet&quot;, {
-            title: &quot;Felder asozieren&quot;,
-            name: &quot;assoFieldset&quot;,
-            layout: &quot;form&quot;,
-            scrollable: &quot;y&quot;,
+        var assoFieldset = Ext.create('Ext.form.FieldSet', {
+            title: 'Felder assoziieren', // TODO i18n
+            name: 'assoFieldset',
+            layout: 'form',
+            scrollable: 'y',
             maxHeight: 300,
             collapsible: true,
-            margin: &quot;0 0 30 0&quot;
+            margin: '0 0 30 0'
         });
 
-        Ext.each(dataModelColumns, function(column){
+        Ext.each(dataModelColumns, function(column) {
             columnTitles.push(column.text);
-        }, me);
+        }, csvImportForm);
 
-        Ext.each(titleRow, function(columnName){
+        Ext.each(titleRow, function(columnName) {
             assoFieldset.add({
-                xtype: &quot;combobox&quot;,
+                xtype: 'combobox',
                 name: columnName,
                 fieldLabel: columnName,
                 store: columnTitles,
-                value: me.associatonObject[columnName],
-                msgTarget: &quot;side&quot;
+                value: csvImportForm.associatonObject[columnName],
+                msgTarget: 'side'
             });
-        }, me);
+        }, csvImportForm);
 
-        me.down('button[name=importBtn]').enable();
+        csvImportForm.down('button[name=importBtn]').enable();
 
-        me.add(assoFieldset);
+        csvImportForm.add(assoFieldset);
     },
 
-<span id='BasiGX-view-form-CsvImport-method-addToGrid'>    addToGrid: function(dataArray){
-</span>        var me = this;
+<span id='BasiGX-view-form-CsvImport-method-addToGrid'>    /**
+</span>     * Adds a data array to the grid.
+     *
+     * @param {Array&lt;Object&gt;} dataArray The CSV rows.
+     */
+    addToGrid: function(dataArray) {
+        var me = this;
         var store = me.getGrid().getStore();
 
         me.setLoading(true);
-        Ext.each(dataArray, function(dataRow, index){
-            if(index &gt; 0){ //skip first row of csv. it contains the header
+        Ext.each(dataArray, function(dataRow, index) {
+            if (index &gt; 0) { //skip first row of csv. it contains the header
                 var instance = this.parseDataFromRow(dataRow);
                 store.add(instance);
             }
@@ -192,20 +224,27 @@ Ext.define(&quot;BasiGX.view.form.CsvImport&quot;,{
         me.setLoading(false);
     },
 
-<span id='BasiGX-view-form-CsvImport-method-parseDataFromRow'>    parseDataFromRow: function(dataRow){
-</span>        var me = this;
+<span id='BasiGX-view-form-CsvImport-method-parseDataFromRow'>    /**
+</span>     * Turns a data row into a record.
+     *
+     * @param {Object} dataRow A CSV data row.
+     * @return {Ext.data.Model} A created record for the grid.
+     */
+    parseDataFromRow: function(dataRow) {
+        var me = this;
         var data = {};
 
-        Ext.each(dataRow, function(csvColumn, rowIdx){
+        Ext.each(dataRow, function(csvColumn, rowIdx) {
             var gridColumText = me.associatonObject[
                 me.getDataArray()[0][rowIdx]];
-            if(!Ext.isEmpty(csvColumn) &amp;&amp; !Ext.isEmpty(gridColumText)){
+            if (!Ext.isEmpty(csvColumn) &amp;&amp; !Ext.isEmpty(gridColumText)) {
                 var gridColumn = me.getGrid()
-                    .down('gridcolumn[text='+gridColumText+']');
-                if(gridColumn){
+                    .down('gridcolumn[text=' + gridColumText + ']');
+                if (gridColumn) {
                     var dataIndex = gridColumn.dataIndex;
                     data[dataIndex] = csvColumn;
                 } else {
+                    // TODO i18n
                     Ext.Error.raise(gridColumText,
                         ' does not exist. Please check you associationObject.');
                 }
@@ -215,19 +254,25 @@ Ext.define(&quot;BasiGX.view.form.CsvImport&quot;,{
         return Ext.create(this.getGrid().getStore().getModel(), data);
     },
 
-<span id='BasiGX-view-form-CsvImport-method-startImport'>    startImport: function(btn){
-</span>        var me = this;
+<span id='BasiGX-view-form-CsvImport-method-startImport'>    /**
+</span>     * Starts the import.
+     *
+     * @param {Ext.button.Button} btn The button.
+     */
+    startImport: function(btn) {
+        var me = this;
         var combos = btn.up('form').down('fieldset[name=assoFieldset]').
             query('combo');
         var comboValues = [];
         var formValid = true;
 
-        Ext.each(combos, function(combo){
+        Ext.each(combos, function(combo) {
             var comboVal = combo.getValue();
-            if(Ext.Array.contains(comboValues, comboVal) &amp;&amp;
-                !Ext.isEmpty(comboVal)){
-                combo.markInvalid(&quot;Diese Feld wurde bereits mit einer anderen&quot; +
-                    &quot;Spalte asoziert&quot;);
+            if (Ext.Array.contains(comboValues, comboVal) &amp;&amp;
+                !Ext.isEmpty(comboVal)) {
+                // TODO i18n
+                combo.markInvalid('Diese Feld wurde bereits mit einer anderen' +
+                    'Spalte asoziert');
                 formValid = false;
             } else {
                 this.associatonObject[combo.getFieldLabel()] = comboVal;
@@ -235,7 +280,7 @@ Ext.define(&quot;BasiGX.view.form.CsvImport&quot;,{
             comboValues.push(comboVal);
         }, me);
 
-        if(formValid &amp;&amp; me.getDataArray()){
+        if (formValid &amp;&amp; me.getDataArray()) {
             me.addToGrid(me.getDataArray());
         }
 

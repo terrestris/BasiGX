@@ -20,8 +20,8 @@
  *
  * @class BasiGX.view.combo.ScaleCombo
  */
-Ext.define("BasiGX.view.combo.ScaleCombo", {
-    xtype: "basigx-combo-scale",
+Ext.define('BasiGX.view.combo.ScaleCombo', {
+    xtype: 'basigx-combo-scale',
     extend: 'Ext.form.field.ComboBox',
     requires: [
     ],
@@ -33,7 +33,7 @@ Ext.define("BasiGX.view.combo.ScaleCombo", {
     },
 
     bind: {
-       fieldLabel: '{fieldLabel}'
+        fieldLabel: '{fieldLabel}'
     },
 
     /**
@@ -86,25 +86,25 @@ Ext.define("BasiGX.view.combo.ScaleCombo", {
          *
          */
         scales: [
-                 {"scale": "1:2.000.000", "resolution": 560},
-                 {"scale": "1:1.000.000", "resolution": 280},
-                 {"scale": "1:500.000", "resolution": 140},
-                 {"scale": "1:250.000", "resolution": 70},
-                 {"scale": "1:100.000", "resolution": 28},
-                 {"scale": "1:50.000", "resolution": 14},
-                 {"scale": "1:25.000", "resolution": 7},
-                 {"scale": "1:10.000", "resolution": 2.8},
-                 {"scale": "1:5.000", "resolution": 1.4},
-                 {"scale": "1:2.500", "resolution": 0.7},
-                 {"scale": "1:1.000", "resolution": 0.28},
-                 {"scale": "1:500", "resolution": 0.14}
-             ]
+                 {'scale': '1:2.000.000', 'resolution': 560},
+                 {'scale': '1:1.000.000', 'resolution': 280},
+                 {'scale': '1:500.000', 'resolution': 140},
+                 {'scale': '1:250.000', 'resolution': 70},
+                 {'scale': '1:100.000', 'resolution': 28},
+                 {'scale': '1:50.000', 'resolution': 14},
+                 {'scale': '1:25.000', 'resolution': 7},
+                 {'scale': '1:10.000', 'resolution': 2.8},
+                 {'scale': '1:5.000', 'resolution': 1.4},
+                 {'scale': '1:2.500', 'resolution': 0.7},
+                 {'scale': '1:1.000', 'resolution': 0.28},
+                 {'scale': '1:500', 'resolution': 0.14}
+        ]
     },
 
     /**
      *
      */
-    initComponent: function(){
+    initComponent: function() {
         var me = this;
 
         if (!me.map) {
@@ -136,42 +136,51 @@ Ext.define("BasiGX.view.combo.ScaleCombo", {
     },
 
     /**
-     * Method updates the combo with the current maps scale
+     * This method updates the combo with the current maps scale.
+     *
      * If the current scale is not available in the scaleStore, it will
      * be created and added. This way we support maps with different scales than
-     * the hard ones in our scaleStore
+     * the hardwired ones in our scaleStore
+     *
+     * @param {ol.events.Event} evt The event from the `change:resolution`
+     *     event.
      */
     updateComboOnMapChange: function(evt) {
-       var resolution = evt.target.get(evt.key),
-           store = this.getStore(),
-           matchInStore = false;
+        var resolution = evt.target.get(evt.key); // map.get('resolution')
+        var store = this.getStore();
+        var matchInStore = false;
 
-       matchInStore = (store.findExact("resolution", resolution) >= 0) ?
+        matchInStore = (store.findExact('resolution', resolution) >= 0) ?
            true : false;
 
-       if (matchInStore) {
-           this.setValue(resolution);
-       } else {
-           var rec = {
-               scale: '1:' + Math.round(
+        if (matchInStore) {
+            this.setValue(resolution);
+        } else {
+            var rec = {
+                scale: '1:' + Math.round(
                    this.getCurrentScale(resolution)).toLocaleString(),
-               resolution: resolution
-           };
-           store.add(rec);
-           this.setValue(resolution);
-       }
+                resolution: resolution
+            };
+            store.add(rec);
+            this.setValue(resolution);
+        }
 
     },
 
     /**
-     * a little getScale helper
+     * A little helper method for getting a scale for a given resolution.
+     *
+     * TODO I think we have this elsewhere as well. We should reuse it probably.
+     *
+     * @param {Number} resolution The resolution to convert.
+     * @return {Number} The calculated scale.
      */
-    getCurrentScale: function (resolution) {
-        var me = this,
-            units = me.map.getView().getProjection().getUnits(),
-            dpi = 25.4 / 0.28,
-            mpu = ol.proj.METERS_PER_UNIT[units],
-            scale = resolution * mpu * 39.37 * dpi;
+    getCurrentScale: function(resolution) {
+        var me = this;
+        var units = me.map.getView().getProjection().getUnits();
+        var dpi = 25.4 / 0.28;
+        var mpu = ol.proj.METERS_PER_UNIT[units];
+        var scale = resolution * mpu * 39.37 * dpi;
         return scale;
     }
 });

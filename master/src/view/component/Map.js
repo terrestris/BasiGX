@@ -22,18 +22,18 @@
  *
  * @class BasiGX.view.component.Map
  */
-Ext.define("BasiGX.view.component.Map", {
-    extend: "GeoExt.component.Map",
-    xtype: "basigx-component-map",
+Ext.define('BasiGX.view.component.Map', {
+    extend: 'GeoExt.component.Map',
+    xtype: 'basigx-component-map',
 
     requires: [
-        "BasiGX.util.ConfigParser",
-        "BasiGX.util.Map",
-        "BasiGX.util.Layer"
+        'BasiGX.util.ConfigParser',
+        'BasiGX.util.Map',
+        'BasiGX.util.Layer'
     ],
 
     inheritableStatics: {
-        guess: function(){
+        guess: function() {
             return BasiGX.util.Map.getMapComponent(this.xtype);
         }
     },
@@ -53,22 +53,22 @@ Ext.define("BasiGX.view.component.Map", {
      * The appContext to use when no real context could be retrieved
      */
     fallbackAppContext: {
-        "data": {
-            "merge": {
-                "startCenter": [1163261, 6648489],
-                "startZoom": 5,
-                "mapLayers": [
+        'data': {
+            'merge': {
+                'startCenter': [1163261, 6648489],
+                'startZoom': 5,
+                'mapLayers': [
                     {
-                        "name": "OSM WMS",
-                        "type": "TileWMS",
-                        "url": "http://ows.terrestris.de/osm/service?",
-                        "layers": "OSM-WMS",
-                        "topic": false
+                        'name': 'OSM WMS',
+                        'type': 'TileWMS',
+                        'url': 'http://ows.terrestris.de/osm/service?',
+                        'layers': 'OSM-WMS',
+                        'topic': false
                     }
                 ],
-                "mapConfig": {
-                    "projection": "EPSG:3857",
-                    "resolutions": [
+                'mapConfig': {
+                    'projection': 'EPSG:3857',
+                    'resolutions': [
                         156543.03390625,
                         78271.516953125,
                         39135.7584765625,
@@ -89,7 +89,7 @@ Ext.define("BasiGX.view.component.Map", {
                         1.194328566789627,
                         0.5971642833948135
                     ],
-                    "zoom": 0
+                    'zoom': 0
                 }
             }
         }
@@ -117,7 +117,7 @@ Ext.define("BasiGX.view.component.Map", {
     constructor: function(config) {
         var me = this;
 
-        if (!config.map){
+        if (!config.map) {
 
             // need to handle config first as its not applied yet
             var url = config && config.appContextPath ?
@@ -126,18 +126,18 @@ Ext.define("BasiGX.view.component.Map", {
             Ext.Ajax.request({
                 url: url,
                 async: false,
-                success: function(response){
-                    if(Ext.isString(response.responseText)) {
+                success: function(response) {
+                    if (Ext.isString(response.responseText)) {
                         me.appContext = Ext.decode(response.responseText);
-                    } else if(Ext.isObject(response.responseText)) {
+                    } else if (Ext.isObject(response.responseText)) {
                         me.appContext = response.responseText;
                     } else {
-                        Ext.log.error("Error! Could not parse appContext!");
+                        Ext.log.error('Error! Could not parse appContext!');
                     }
                 },
                 failure: function(response) {
-                    Ext.log.error("Error! No application " +
-                        "context found, example loaded", response);
+                    Ext.log.error('Error! No application ' +
+                        'context found, example loaded', response);
                     me.appContext = me.fallbackAppContext;
                 }
             });
@@ -158,7 +158,7 @@ Ext.define("BasiGX.view.component.Map", {
 
     },
 
-    addControls: function(){
+    addControls: function() {
         var map = this.getMap();
         var attribution = new ol.control.Attribution({
             collapsible: false,

@@ -40,11 +40,12 @@ Ext.define('BasiGX.util.Object', {
          *     provided the global application context (on root-level) will
          *     be used.
          *
-         * @return The target value or undefined if the given couldn't be found.
+         * @return {*} The target value or `undefined` if the given couldn't be
+         *     found.
          */
         getValue: function(queryKey, queryObject) {
-            var me = this,
-                queryMatch;
+            var me = this;
+            var queryMatch;
 
             // if weren't called with an queryObject, get the global application
             // context as input value
@@ -118,7 +119,7 @@ Ext.define('BasiGX.util.Object', {
                 }
             }
 
-            // if we couldn't find any match, return false
+            // if we couldn't find any match, return undefined
             return undefined;
         }
     }

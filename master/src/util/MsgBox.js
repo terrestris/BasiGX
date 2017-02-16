@@ -58,11 +58,11 @@ Ext.define('BasiGX.util.MsgBox', {
          * @private
          */
         bringToFront: function(msgBox) {
-            var delay = BasiGX.util.MsgBox.toFrontDelayMS,
-                toFrontFunc = function(){
-                    msgBox.toFront();
-                },
-                toFrontTask;
+            var delay = BasiGX.util.MsgBox.toFrontDelayMS;
+            var toFrontFunc = function() {
+                msgBox.toFront();
+            };
+            var toFrontTask;
 
             if (parseFloat(delay) > 0) {
                 toFrontTask = new Ext.util.DelayedTask(toFrontFunc);
@@ -84,12 +84,12 @@ Ext.define('BasiGX.util.MsgBox', {
          *     Ext.MessageBox}.
          * @private
          */
-        show: function(msg, defaultConf, userConf){
-            var me = BasiGX.util.MsgBox,
-                msgInConf = Ext.apply({ msg: msg }, userConf),
-                msgConfig = Ext.apply(defaultConf, msgInConf),
-                msgBox = Ext.Msg.show(msgConfig);
-            me.bringToFront(msgBox);
+        show: function(msg, defaultConf, userConf) {
+            var staticMe = BasiGX.util.MsgBox;
+            var msgInConf = Ext.apply({msg: msg}, userConf);
+            var msgConfig = Ext.apply(defaultConf, msgInConf);
+            var msgBox = Ext.Msg.show(msgConfig);
+            staticMe.bringToFront(msgBox);
         },
 
         /**
@@ -104,13 +104,13 @@ Ext.define('BasiGX.util.MsgBox', {
          *     Ext.MessageBox}.
          */
         info: function(msg, userConf) {
-            var me = BasiGX.util.MsgBox,
-                defaultConf = {
-                    title: me.msgBoxTitleInfo,
-                    buttons: Ext.Msg.OK,
-                    icon: Ext.Msg.INFO
-                };
-            me.show(msg, defaultConf, userConf);
+            var staticMe = BasiGX.util.MsgBox;
+            var defaultConf = {
+                title: staticMe.msgBoxTitleInfo,
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.INFO
+            };
+            staticMe.show(msg, defaultConf, userConf);
         },
 
         /**
@@ -125,13 +125,13 @@ Ext.define('BasiGX.util.MsgBox', {
          *     Ext.MessageBox}.
          */
         warn: function(msg, userConf) {
-            var me = BasiGX.util.MsgBox,
-                defaultConf = {
-                    title: me.msgBoxTitleWarn,
-                    buttons: Ext.MessageBox.OKCANCEL,
-                    icon: Ext.Msg.WARNING
-                };
-            me.show(msg, defaultConf, userConf);
+            var staticMe = BasiGX.util.MsgBox;
+            var defaultConf = {
+                title: staticMe.msgBoxTitleWarn,
+                buttons: Ext.MessageBox.OKCANCEL,
+                icon: Ext.Msg.WARNING
+            };
+            staticMe.show(msg, defaultConf, userConf);
         },
 
         /**
@@ -146,13 +146,13 @@ Ext.define('BasiGX.util.MsgBox', {
          *     Ext.MessageBox}.
          */
         error: function(msg, userConf) {
-            var me = BasiGX.util.MsgBox,
-                defaultConf = {
-                    title: me.msgBoxTitleError,
-                    buttons: Ext.MessageBox.OK,
-                    icon: Ext.Msg.ERROR
-                };
-            me.show(msg, defaultConf, userConf);
+            var staticMe = BasiGX.util.MsgBox;
+            var defaultConf = {
+                title: staticMe.msgBoxTitleError,
+                buttons: Ext.MessageBox.OK,
+                icon: Ext.Msg.ERROR
+            };
+            staticMe.show(msg, defaultConf, userConf);
         },
 
         /**
@@ -167,15 +167,15 @@ Ext.define('BasiGX.util.MsgBox', {
          *     Ext.MessageBox}.
          */
         prompt: function(msg, userConf) {
-            var me = BasiGX.util.MsgBox,
-                defaultConf = {
-                    title: me.msgBoxTitlePrompt,
-                    buttons: Ext.MessageBox.OKCANCEL,
-                    icon: Ext.Msg.QUESTION,
-                    width: 400,
-                    prompt: true
-                };
-            me.show(msg, defaultConf, userConf);
+            var staticMe = BasiGX.util.MsgBox;
+            var defaultConf = {
+                title: staticMe.msgBoxTitlePrompt,
+                buttons: Ext.MessageBox.OKCANCEL,
+                icon: Ext.Msg.QUESTION,
+                width: 400,
+                prompt: true
+            };
+            staticMe.show(msg, defaultConf, userConf);
         },
 
         /**
@@ -190,16 +190,16 @@ Ext.define('BasiGX.util.MsgBox', {
          *     Ext.MessageBox}.
          */
         confirm: function(msg, userConf) {
-            var me = BasiGX.util.MsgBox,
-                defaultConf = {
-                    title: me.msgBoxTitlePrompt,
-                    buttons: Ext.MessageBox.YESNO,
-                    icon: Ext.Msg.QUESTION
-                };
-            me.show(msg, defaultConf, userConf);
+            var staticMe = BasiGX.util.MsgBox;
+            var defaultConf = {
+                title: staticMe.msgBoxTitlePrompt,
+                buttons: Ext.MessageBox.YESNO,
+                icon: Ext.Msg.QUESTION
+            };
+            staticMe.show(msg, defaultConf, userConf);
         }
     }
-}, function(){
+}, function() {
     var util = BasiGX.util.MsgBox;
     Ext.applyIf(BasiGX, {
         /**

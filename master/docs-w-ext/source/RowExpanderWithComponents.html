@@ -50,8 +50,8 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
 </span>
 <span id='BasiGX-ux-RowExpanderWithComponents-cfg-rowBodyTpl'>    /**
 </span>     * @cfg {XTemplate} rowBodyTpl
-     * This needs to default to the below for ExtJS components to render to the correct row
-     * (defaults to &lt;tt&gt;&lt;div id=&quot;display-row-{id}&quot;&gt; &lt;/div&gt;&lt;/tt&gt;).
+     * This needs to default to the below for ExtJS components to render to the
+     * correct row (defaults to &lt;tt&gt;&lt;div id=&quot;display-row-{id}&quot;&gt; &lt;/div&gt;&lt;/tt&gt;).
      */
     rowBodyTpl: new Ext.XTemplate(
         '&lt;div id=&quot;display-row-{id}&quot;&gt; &lt;/div&gt;'
@@ -77,8 +77,8 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
 
 <span id='BasiGX-ux-RowExpanderWithComponents-cfg-expandOnClick'>    /**
 </span>     * @cfg {Boolean} expandOnClick
-     * &lt;tt&gt;true&lt;/tt&gt; to toggle a row between expanded/collapsed when single clicked
-     * (defaults to &lt;tt&gt;true&lt;/tt&gt;).
+     * &lt;tt&gt;true&lt;/tt&gt; to toggle a row between expanded/collapsed when single
+     * clicked (defaults to &lt;tt&gt;true&lt;/tt&gt;).
      */
     expandOnClick: false,
 
@@ -98,9 +98,9 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
 
 <span id='BasiGX-ux-RowExpanderWithComponents-property-preventRecursionArray'>    preventRecursionArray: [],
 </span>
-<span id='BasiGX-ux-RowExpanderWithComponents-method-init'>    init: function(grid){
-</span>        var me = this,
-            view;
+<span id='BasiGX-ux-RowExpanderWithComponents-method-init'>    init: function(grid) {
+</span>        var me = this;
+        var view;
 
         me.callParent(arguments);
 
@@ -110,18 +110,19 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
         //this css does not highlight the row expander body
         grid.addCls('rowexpanderwithcomponents');
 
-        //set the rowexpander column to hidden if hideExpandColumn config is true
-        if(me.hideExpandColumn){
+        // set the rowexpander column to hidden if hideExpandColumn config is
+        // true
+        if (me.hideExpandColumn) {
             grid.headerCt.query('gridcolumn')[0].hidden = true;
         }
-        //enable text selection if the config is true
-        if(me.enableTextSelection){
+        // enable text selection if the config is true
+        if (me.enableTextSelection) {
             view.enableTextSelection = true;
         }
 
-        view.on('expandbody', function(rowNode, record){
+        view.on('expandbody', function(rowNode, record) {
             var recId = record.getId();
-            if(!recId){
+            if (!recId) {
                 Ext.Error.raise('Error: Records must have an id to use the' +
                     'rowExpanderWithComponents plugin. ' +
                     'Use http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.' +
@@ -129,13 +130,13 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
                     '4.2.2/#!/api/Ext.data.Model-cfg-idgen');
             }
 
-            var row = 'display-row-' + recId,
-                clonedRowTemplate = Ext.clone(me.rowBodyCompTemplate);
+            var row = 'display-row-' + recId;
+            var clonedRowTemplate = Ext.clone(me.rowBodyCompTemplate);
 
             // TODO The rowbody behaviour seems to be not that smooth. We
             // should have a look at this
             // if the row got children dont add it again
-            if (Ext.get(row).dom.children.length === 0){
+            if (Ext.get(row).dom.children.length === 0) {
                 var parentCont = Ext.create(Ext.container.Container, {
                     height: '100%',
                     width: '100%',
@@ -149,12 +150,14 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
 
                 //Stop all events in the row body from bubbling up
                 var rowEl = parentCont.getEl().parent('.x-grid-rowbody');
-                rowEl.swallowEvent(['mouseenter', 'click', 'mouseover', 'mousedown',
-                                    'dblclick', 'cellclick', 'itemmouseenter', 'itemmouseleave',
-                                    'onRowFocus', 'mouseleave']);
+                rowEl.swallowEvent(['mouseenter', 'click', 'mouseover',
+                    'mousedown', 'dblclick', 'cellclick', 'itemmouseenter',
+                    'itemmouseleave', 'onRowFocus', 'mouseleave']);
 
                 // adding the dynamic css to component
-                var rowToStyle = parentCont.getEl().parent('.x-grid-rowbody-tr');
+                var rowToStyle = parentCont.getEl().parent(
+                    '.x-grid-rowbody-tr'
+                );
                 rowToStyle.addCls(grid.getCssForRow(record));
             }
 
@@ -168,19 +171,25 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
     },
 
 <span id='BasiGX-ux-RowExpanderWithComponents-method-getRowComponent'>    /**
-</span>     * Gets the parent ExtJS container in the rowexpander body from the rows record id
-     * @param {integer} recId The row record id
-     * @return {Ext.container.Container} the parent ExtJS container in the rowexpander body
+</span>     * Gets the parent ExtJS container in the rowexpander body from the rows
+     * record id.
+     *
+     * @param {Number} recId The row record id.
+     * @return {Ext.container.Container} The parent ExtJS container in the
+     *     rowexpander body
      */
-    getRowComponent: function(recId){
-        return Ext.ComponentQuery.query('#' + this.up('treepanel').getId() + '-parentRowExpCont-' + recId)[0];
+    getRowComponent: function(recId) {
+        return Ext.ComponentQuery.query(
+            '#' + this.up('treepanel').getId() + '-parentRowExpCont-' + recId
+        )[0];
     },
 
 <span id='BasiGX-ux-RowExpanderWithComponents-method-removeAllFromRowComponent'>    /**
-</span>     * Removes all ExtJS items from the parent row component
-     * @param {integer} recId The row record id
+</span>     * Removes all ExtJS items from the parent row component.
+     *
+     * @param {Number} recId The row record id.
      */
-    removeAllFromRowComponent: function(recId){
+    removeAllFromRowComponent: function(recId) {
         var rowCont = this.getRowComponent(recId);
 
         rowCont.removeAll();
@@ -191,15 +200,17 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
      * @param {integer} recId The row record id
      * @param {Array} items ExtJS components
      */
-    addToRowComponent: function(recId, items){
+    addToRowComponent: function(recId, items) {
         var rowCont = this.getRowComponent(recId);
 
         rowCont.add(items);
     },
 
 <span id='BasiGX-ux-RowExpanderWithComponents-method-bindView'>    /**
-</span>     * @private
-     * allow single click to expand grid
+</span>     * Allow single click to expand grid
+     *
+     * @param {Ext.view.Table} view The grid view.
+     * @private
      */
     bindView: function(view) {
         if (this.expandOnClick) {
@@ -207,44 +218,56 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
         }
         this.callParent(arguments);
     },
+
 <span id='BasiGX-ux-RowExpanderWithComponents-method-onItemClick'>    /**
-</span>     * @private
-     * allow single click to expand grid
+</span>     * Allow single click to expand grid.
+     *
+     * @param {Ext.view.Table} view The grid view.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} row The item's element.
+     * @param {Number} rowIdx The item's index.
+     * @private
      */
     onItemClick: function(view, record, row, rowIdx) {
         this.toggleRow(rowIdx, record);
     },
 
 <span id='BasiGX-ux-RowExpanderWithComponents-method-replaceObjValues'>    /**
-</span>     * @private
-     * Converts all string values with {{}} to code
+</span>     * Converts all string values with {{}} to code
      * Example: '{{record.get('test'}}' converts to record.get('test')
+     *
+     * @param {Object} obj The object in which code in values might be
+     *     evaluated. Will be checked recursively.
+     * @param {Ext.data.Model} record The record used for replacing.
+     * @return {Object} The passed object in which replacements might have
+     *     occured.
+     * @private
      */
-    replaceObjValues: function( obj, record ){
+    replaceObjValues: function(obj, record) {
 
-        for( var all in obj ) {
-            if(typeof obj[all] === &quot;string&quot; &amp;&amp; obj[all].match(/{{(.*)}}/)){
+        for (var all in obj) {
+            if (typeof obj[all] === 'string' &amp;&amp; obj[all].match(/{{(.*)}}/)) {
                 obj[all] = eval(obj[all].match(/{{(.*)}}/)[1]);
             }
-            if(typeof obj[all] === &quot;object&quot; &amp;&amp; obj[all] !== null){
-                if(Ext.Array.contains(this.preventRecursionArray, obj[all])){
+            if (typeof obj[all] === 'object' &amp;&amp; obj[all] !== null) {
+                if (Ext.Array.contains(this.preventRecursionArray, obj[all])) {
                     return obj;
                 } else {
                     this.preventRecursionArray.push(obj[all]);
-                    this.replaceObjValues( obj[all], record );
+                    this.replaceObjValues(obj[all], record);
                 }
             }
-            if(obj.xtype){
+            if (obj.xtype) {
                 obj.layerRec = record;
                 // if we do not have a cluster layer, we remove the &quot;double
                 // symbology / legend&quot;
                 if (record.getOlLayer() &amp;&amp; record.getOlLayer().get('type') &amp;&amp;
-                    record.getOlLayer().get('type') !== &quot;WFSCluster&quot; &amp;&amp;
+                    record.getOlLayer().get('type') !== 'WFSCluster' &amp;&amp;
                     Ext.isArray(obj.items) &amp;&amp; obj.items.length &gt; 1) {
-                        var lastItem = obj.items[obj.items.length - 1];
-                        if(lastItem.xtype === &quot;image&quot;){
-                            obj.items.pop();
-                        }
+                    var lastItem = obj.items[obj.items.length - 1];
+                    if (lastItem.xtype === 'image') {
+                        obj.items.pop();
+                    }
                 }
             }
         }

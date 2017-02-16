@@ -36,17 +36,21 @@
  * Used to search in the glorious dataset of OSM
  *
  * Example of usage:
+ *
  *     {
  *         xtype: 'basigx-search-nominatim',
  *         clusterResults: true,
  *         viewboxlbrt: '6.9186,52.4677,11.2308,53.9642'
  *     }
  *
+ * TODO This class has a lot in common with both #OverpassSearch and the
+ *      generic #WfsSearch. We should factor out shared code.
+ *
  * @class BasiGX.view.container.NominatimSearch
  */
-Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
-    extend: &quot;Ext.container.Container&quot;,
-    xtype: &quot;basigx-search-nominatim&quot;,
+Ext.define('BasiGX.view.container.NominatimSearch', {
+    extend: 'Ext.container.Container',
+    xtype: 'basigx-search-nominatim',
 
     requires: [
         'GeoExt.data.store.Features',
@@ -100,8 +104,10 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
          */
         groupHeaderTpl: '{type}',
 
-<span id='BasiGX-view-container-NominatimSearch-cfg-searchResultFeatureStyle'>        /**
-</span>         *
+<span id='BasiGX-view-container-NominatimSearch-property-searchResultFeatureStyle'>        /**
+</span>         * An `ol.style.Style` for result features.
+         *
+         * @type {ol.style.Style}
          */
         searchResultFeatureStyle: new ol.style.Style({
             image: new ol.style.Circle({
@@ -123,8 +129,12 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
             })
         }),
 
-<span id='BasiGX-view-container-NominatimSearch-cfg-searchResultHighlightFeatureStyleFn'>        /**
-</span>         *
+<span id='BasiGX-view-container-NominatimSearch-method-searchResultHighlightFeatureStyleFn'>        /**
+</span>         * A function generating an `ol.style.Style` for highlighting features.
+         *
+         * @param {Number} radius The radius of the circle.
+         * @param {String} text The text for the style.
+         * @return {ol.style.Style} The generated style.
          */
         searchResultHighlightFeatureStyleFn: function(radius, text) {
             return new ol.style.Style({
@@ -147,8 +157,10 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
             });
         },
 
-<span id='BasiGX-view-container-NominatimSearch-cfg-searchResultSelectFeatureStyle'>        /**
-</span>         *
+<span id='BasiGX-view-container-NominatimSearch-property-searchResultSelectFeatureStyle'>        /**
+</span>         * An `ol.style.Style` for selected result features.
+         *
+         * @type {ol.style.Style}
          */
         searchResultSelectFeatureStyle: new ol.style.Style({
             image: new ol.style.Circle({
@@ -170,9 +182,16 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
             })
         }),
 
-<span id='BasiGX-view-container-NominatimSearch-cfg-clusterStyleFn'>       /**
-</span>        *
-        */
+<span id='BasiGX-view-container-NominatimSearch-method-clusterStyleFn'>        /**
+</span>         * Returns an array of styles.
+         *
+         * TODO Are we accessing a private property here?
+         *      `getSource().distance_` =&gt; this should be changed.
+         *
+         * @param {Number} amount The amount.
+         * @param {Number} radius The radius.
+         * @return {Array&lt;ol.style.Style&gt;} The generated styles.
+         */
         clusterStyleFn: function(amount, radius) {
             // set maxradius
             var maxRadius = this.clusterLayer.getSource().distance_ / 2;
@@ -198,8 +217,11 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
             })];
         },
 
-<span id='BasiGX-view-container-NominatimSearch-cfg-highLightFeatureOnHoverInGrid'>        /**
-</span>         *
+<span id='BasiGX-view-container-NominatimSearch-property-highLightFeatureOnHoverInGrid'>        /**
+</span>         * Whether we want to highlight the associated feature in the map when
+         * we hover over the row for the feature in the grid.
+         *
+         * @type {Boolean}
          */
         highLightFeatureOnHoverInGrid: true
     },
@@ -266,7 +288,7 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
         if (me.clusterResults &amp;&amp; !me.clusterLayer) {
             var clusterSource = new ol.source.Cluster({
                 distance: 40,
-                source: me.searchResultVectorLayer.getSource()//new ol.source.Vector()
+                source: me.searchResultVectorLayer.getSource()
             });
 
             me.clusterLayer = new ol.layer.Vector({
@@ -373,31 +395,35 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
     },
 
 <span id='BasiGX-view-container-NominatimSearch-method-handleKeyDown'>    /**
-</span>     *
+</span>     * Bound to the `change`-event of the textfield.
+     *
+     * @param {Ext.form.field.Text} textfield The textfield in which one enters
+     *     the query.
      */
     handleKeyDown: function(textfield) {
-        var me = textfield.up('basigx-search-nominatim'),
-            val = textfield.getValue();
+        var nominatimContainer = textfield.up('basigx-search-nominatim');
+        var val = textfield.getValue();
 
-        if (val.length &lt; me.getMinSearchTextChars()) {
+        if (val.length &lt; nominatimContainer.getMinSearchTextChars()) {
             return;
         }
 
         // set the searchterm on component
-        me.searchTerm = val;
+        nominatimContainer.searchTerm = val;
 
-        // reset grid from aold values
-        me.resetGrid();
+        // reset grid from old values
+        nominatimContainer.resetGrid();
 
         // prepare the describeFeatureType for all given layers
-        if (me.typeDelayTask) {
-            me.typeDelayTask.cancel();
+        if (nominatimContainer.typeDelayTask) {
+            nominatimContainer.typeDelayTask.cancel();
         }
-        me.typeDelayTask = new Ext.util.DelayedTask(function(){
-            me.triggerSearch();
+        nominatimContainer.typeDelayTask = new Ext.util.DelayedTask(function() {
+            nominatimContainer.triggerSearch();
         });
-        me.typeDelayTask.delay(me.getTypeDelay());
-
+        nominatimContainer.typeDelayTask.delay(
+            nominatimContainer.getTypeDelay()
+        );
     },
 
 <span id='BasiGX-view-container-NominatimSearch-method-resetSearchGridAndText'>    /**
@@ -419,11 +445,11 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
     },
 
 <span id='BasiGX-view-container-NominatimSearch-method-triggerSearch'>    /**
-</span>     *
+</span>     * Actually trigger the search.
      */
     triggerSearch: function() {
-        var me = this,
-            results;
+        var me = this;
+        var results;
 
         var requestParams = {
             q: me.searchTerm,
@@ -433,30 +459,30 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
             bounded: 1
         };
 
-        var url = me.getNominatimUrl() + &quot;?&quot;;
+        var url = me.getNominatimUrl() + '?';
         Ext.iterate(requestParams, function(k, v) {
-            url += k + &quot;=&quot; + v + &quot;&amp;&quot;;
+            url += k + '=' + v + '&amp;';
         });
 
         me.setLoading(true);
 
         Ext.Ajax.request({
             url: url,
-            success: function(response){
+            success: function(response) {
                 me.setLoading(false);
-                if(Ext.isString(response.responseText)) {
+                if (Ext.isString(response.responseText)) {
                     results = Ext.decode(response.responseText);
-                } else if(Ext.isObject(response.responseText)) {
+                } else if (Ext.isObject(response.responseText)) {
                     results = response.responseText;
                 } else {
-                    Ext.log.error(&quot;Error! Could not parse &quot; +
-                        &quot;nominatim response!&quot;);
+                    Ext.log.error('Error! Could not parse ' +
+                        'nominatim response!');
                 }
                 me.fireEvent('nominatimResponse', results);
             },
             failure: function(response) {
                 me.setLoading(false);
-                Ext.log.error(&quot;Error on nominatim request:&quot;,
+                Ext.log.error('Error on nominatim request:',
                     response);
             }
         });
@@ -464,51 +490,55 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
 
 <span id='BasiGX-view-container-NominatimSearch-method-showSearchResults'>    /**
 </span>     * Response example:
-     *  {
-            &quot;place_id&quot;: &quot;14823013&quot;,
-            &quot;licence&quot;: &quot;Data © OpenStreetMap contributors, ODbL 1.0. http://www.openstreetmap.org/copyright&quot;,
-            &quot;osm_type&quot;: &quot;node&quot;,
-            &quot;osm_id&quot;: &quot;1364459810&quot;,
-            &quot;boundingbox&quot;: [
-                &quot;53.4265254&quot;,
-                &quot;53.4266254&quot;,
-                &quot;8.5341417&quot;,
-                &quot;8.5342417&quot;
-            ],
-            &quot;lat&quot;: &quot;53.4265754&quot;,
-            &quot;lon&quot;: &quot;8.5341917&quot;,
-            &quot;display_name&quot;: &quot;Bäckerei, Bütteler Straße, Loxstedt, Landkreis Cuxhaven, Niedersachsen, 27612, Deutschland&quot;,
-            &quot;class&quot;: &quot;highway&quot;,
-            &quot;type&quot;: &quot;bus_stop&quot;,
-            &quot;importance&quot;: 0.101,
-            &quot;icon&quot;: &quot;http://nominatim.openstreetmap.org/images/mapicons/transport_bus_stop2.p.20.png&quot;,
-            &quot;address&quot;: {
-                &quot;bus_stop&quot;: &quot;Bäckerei&quot;,
-                &quot;road&quot;: &quot;Bütteler Straße&quot;,
-                &quot;village&quot;: &quot;Loxstedt&quot;,
-                &quot;county&quot;: &quot;Landkreis Cuxhaven&quot;,
-                &quot;state&quot;: &quot;Niedersachsen&quot;,
-                &quot;postcode&quot;: &quot;27612&quot;,
-                &quot;country&quot;: &quot;Deutschland&quot;,
-                &quot;country_code&quot;: &quot;de&quot;
-            }
-     *  }
+     *
+     *     {
+     *       &quot;place_id&quot;:&quot;14823013&quot;,
+     *       &quot;licence&quot;:&quot;Data © OpenStreetMap contributors, ODbL 1.0. http:/[…]&quot;,
+     *       &quot;osm_type&quot;:&quot;node&quot;,
+     *       &quot;osm_id&quot;:&quot;1364459810&quot;,
+     *       &quot;boundingbox&quot;:[
+     *         &quot;53.4265254&quot;,
+     *         &quot;53.4266254&quot;,
+     *         &quot;8.5341417&quot;,
+     *         &quot;8.5342417&quot;
+     *       ],
+     *       &quot;lat&quot;:&quot;53.4265754&quot;,
+     *       &quot;lon&quot;:&quot;8.5341917&quot;,
+     *       &quot;display_name&quot;:&quot;Bäckerei, Bütteler Straße, Loxstedt, Landkreis[…]&quot;,
+     *       &quot;class&quot;:&quot;highway&quot;,
+     *       &quot;type&quot;:&quot;bus_stop&quot;,
+     *       &quot;importance&quot;:0.101,
+     *       &quot;icon&quot;:&quot;http://nominatim.openstreetmap.org/images/mapicons/tra[…]&quot;,
+     *       &quot;address&quot;:{
+     *         &quot;bus_stop&quot;:&quot;Bäckerei&quot;,
+     *         &quot;road&quot;:&quot;Bütteler Straße&quot;,
+     *         &quot;village&quot;:&quot;Loxstedt&quot;,
+     *         &quot;county&quot;:&quot;Landkreis Cuxhaven&quot;,
+     *         &quot;state&quot;:&quot;Niedersachsen&quot;,
+     *         &quot;postcode&quot;:&quot;27612&quot;,
+     *         &quot;country&quot;:&quot;Deutschland&quot;,
+     *         &quot;country_code&quot;:&quot;de&quot;
+     *       }
+     *     }
+     *
+     * @param {Array&lt;ol.Feature&gt;} features The features to display in the result
+     *     grid.
      */
     showSearchResults: function(features) {
+        var me = this;
+        var grid = me.down('grid[name=nominatimsearchresultgrid]');
 
-        var me = this,
-            grid = me.down('grid[name=nominatimsearchresultgrid]');
-
-        if(features.length &gt; 0){
+        if (features.length &gt; 0) {
             grid.show();
         }
 
+        var searchTerm = me.searchTerm;
         Ext.each(features, function(feature) {
             var displayfield;
 
             // find the matching value in order to display it
             Ext.iterate(feature, function(k, v) {
-                if (v &amp;&amp; v.toString().toLowerCase().indexOf(me.searchTerm) &gt; -1) {
+                if (v &amp;&amp; v.toString().toLowerCase().indexOf(searchTerm) &gt; -1) {
                     displayfield = v;
                     return false;
                 }
@@ -516,7 +546,8 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
 
             var olFeat = new ol.Feature({
                 geometry: new ol.geom.Point(ol.proj.transform(
-                    [parseFloat(feature.lon), parseFloat(feature.lat)], 'EPSG:4326', 'EPSG:3857'
+                    [parseFloat(feature.lon), parseFloat(feature.lat)],
+                    'EPSG:4326', 'EPSG:3857'
                 )),
                 properties: feature
             });
@@ -529,22 +560,25 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
         });
 
         var featureExtent = me.searchResultVectorLayer.getSource().getExtent();
-        if(!Ext.Array.contains(featureExtent, Infinity)){
+        if (!Ext.Array.contains(featureExtent, Infinity)) {
             me.zoomToExtent(featureExtent);
         }
     },
 
 <span id='BasiGX-view-container-NominatimSearch-method-zoomToExtent'>    /**
 </span>     * Works with extent or geom.
+     *
+     * @param {ol.Extent|ol.geom.SimpleGeometry} extent The extent or geometry
+     *     to zoom to.
      */
-    zoomToExtent: function(extent){
+    zoomToExtent: function(extent) {
         var me = this;
         var olView = me.map.getView();
         var pan = ol.animation.pan({
             source: olView.getCenter()
         });
         var zoom = ol.animation.zoom({
-           resolution: olView.getResolution()
+            resolution: olView.getResolution()
         });
         me.map.beforeRender(pan, zoom);
 
@@ -552,20 +586,30 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
     },
 
 <span id='BasiGX-view-container-NominatimSearch-method-updateRenderer'>    /**
-</span>     * update the symbolizer in the grid
+</span>     * Update the symbolizer in the grid.
+     *
+     * @param {HTMLElement} item The HTML-element where the renderer lives in.
+     * @param {ol.style.Style} style The new style for the renderer.
      */
-    updateRenderer: function(item, style){
+    updateRenderer: function(item, style) {
         var renderer = Ext.getCmp(
-            Ext.query('div[id^=gx_renderer', true, item)[0].id);
+            Ext.query('div[id^=gx_renderer', true, item)[0].id
+        );
         var src = renderer.map.getLayers().getArray()[0].getSource();
         src.getFeatures()[0].setStyle(style);
     },
 
 <span id='BasiGX-view-container-NominatimSearch-method-highlightFeature'>    /**
-</span>     *
+</span>     * Highlights the feature.
+     *
+     * Bound to the `itemmouseenter`-event on the grid.
+     *
+     * @param {Ext.view.View} tableView The tableView / grid.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} item The item's element.
      */
     highlightFeature: function(tableView, record, item) {
-        if(this.enterEventRec === record){
+        if (this.enterEventRec === record) {
             return;
         }
         var me = this;
@@ -602,10 +646,16 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
     },
 
 <span id='BasiGX-view-container-NominatimSearch-method-unhighlightFeature'>    /**
-</span>     *
+</span>     * Unhighlights a previously highlighted feature.
+     *
+     * Bound to the `itemmouseleave`-event on the grid.
+     *
+     * @param {Ext.view.View} tableView The tableView / grid.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} item The item's element.
      */
     unhighlightFeature: function(tableView, record, item) {
-        if(this.leaveEventRec === record){
+        if (this.leaveEventRec === record) {
             return;
         }
         this.leaveEventRec = record;
@@ -620,11 +670,17 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
     },
 
 <span id='BasiGX-view-container-NominatimSearch-method-highlightSelectedFeature'>    /**
-</span>     *
+</span>     * Highlights a selected feature.
+     *
+     * Bound to the `itemclick`-event on the grid.
+     *
+     * @param {Ext.view.View} tableView The tableView / grid.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} item The item's element.
      */
     highlightSelectedFeature: function(tableView, record, item) {
         var store = tableView.getStore();
-        store.each(function(rec){
+        store.each(function(rec) {
             rec.olObject.setStyle(this.getSearchResultFeatureStyle());
             var row = tableView.getRowByRecord(rec);
             if (this.clusterResults) {
@@ -641,9 +697,12 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
     },
 
 <span id='BasiGX-view-container-NominatimSearch-method-getClusterFeatureFromFeature'>    /**
-</span>     *
+</span>     * Returns the cluster feature from the given `ol.Feature`.
+     *
+     * @param {ol.Feature} feature The feature to get the cluster feature from.
+     * @return {ol.Feature} The cluster feature.
      */
-    getClusterFeatureFromFeature: function(feature){
+    getClusterFeatureFromFeature: function(feature) {
         var me = this;
         var clusterFeature;
         var clusterFeatures = me.clusterLayer.getSource().getFeatures();
@@ -654,8 +713,8 @@ Ext.define(&quot;BasiGX.view.container.NominatimSearch&quot;, {
                        feature.getProperties().properties.osm_id &amp;&amp;
                        f.getProperties().properties.osm_id ===
                        feature.getProperties().properties.osm_id) {
-                           clusterFeature = feat;
-                           return false;
+                        clusterFeature = feat;
+                        return false;
                     }
                 });
             }

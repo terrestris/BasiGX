@@ -46,25 +46,25 @@
  * @requires Ext.Button
  *
  */
-Ext.define(&quot;BasiGX.view.container.MultiSearchSettings&quot;, {
+Ext.define('BasiGX.view.container.MultiSearchSettings', {
     extend: 'Ext.container.Container',
     xtype: 'basigx-container-multisearchsettings',
 
     requires: [
-        &quot;BasiGX.util.Layer&quot;,
-        &quot;Ext.form.field.Checkbox&quot;,
-        &quot;Ext.form.FieldContainer&quot;,
-        &quot;Ext.Button&quot;
+        'BasiGX.util.Layer',
+        'Ext.form.field.Checkbox',
+        'Ext.form.FieldContainer',
+        'Ext.Button'
     ],
 
 <span id='BasiGX-view-container-MultiSearchSettings-property-viewModel'>    viewModel: {
 </span>        data: {
-            generalSettingsLabel: &quot;Allgemeine Einstellungen&quot;,
-            limitCboxLabel: &quot;Auf den sichtbaren Kartenbereich einschränken&quot;,
-            gazetteerLabel: &quot;Gazetteer Suche verwenden&quot;,
-            objectSearchLabel: &quot;Objekt Suche verwenden&quot;,
-            objectSearchLayersLabel: &quot;Layer für Objektsuche&quot;,
-            saveBtnText: &quot;Sucheinstellungen speichern&quot;
+            generalSettingsLabel: 'Allgemeine Einstellungen',
+            limitCboxLabel: 'Auf den sichtbaren Kartenbereich einschränken',
+            gazetteerLabel: 'Gazetteer Suche verwenden',
+            objectSearchLabel: 'Objekt Suche verwenden',
+            objectSearchLayersLabel: 'Layer für Objektsuche',
+            saveBtnText: 'Sucheinstellungen speichern'
         }
     },
 
@@ -100,14 +100,14 @@ Ext.define(&quot;BasiGX.view.container.MultiSearchSettings&quot;, {
                         labelWidth: 200,
                         name: 'limitcheckbox',
                         checked: true
-                    },{
+                    }, {
                         bind: {
                             boxLabel: '{gazetteerLabel}'
                         },
                         labelWidth: 200,
                         name: 'gazetteersearch',
                         checked: true
-                    },{
+                    }, {
                         bind: {
                             boxLabel: '{objectSearchLabel}'
                         },
@@ -115,8 +115,8 @@ Ext.define(&quot;BasiGX.view.container.MultiSearchSettings&quot;, {
                         name: 'objectsearch',
                         checked: true
                     }
-                 ]
-            },{
+                ]
+            }, {
                 xtype: 'fieldcontainer',
                 name: 'objectlayers',
                 bind: {
@@ -126,15 +126,15 @@ Ext.define(&quot;BasiGX.view.container.MultiSearchSettings&quot;, {
                 labelWidth: 200
             }
         ]
-    },{
+    }, {
         xtype: 'button',
         bind: {
             text: '{saveBtnText}'
         },
         formBind: true,
         handler: function(btn) {
-            var me = this.up();
-            me.saveSettings(btn);
+            var multisearchSettingsContainer = this.up();
+            multisearchSettingsContainer.saveSettings(btn);
         }
     }],
 
@@ -152,18 +152,21 @@ Ext.define(&quot;BasiGX.view.container.MultiSearchSettings&quot;, {
     },
 
 <span id='BasiGX-view-container-MultiSearchSettings-method-saveSettings'>    /**
-</span>    * called by &quot;save&quot;-button handler to persist the settings.
-    * This includes switching the gazetter or wfs search on and off, limiting
-    * search results to visible map extent and configuring search layers.
-    */
+</span>     * Called by &quot;save&quot;-button handler to persist the settings.
+     *
+     * This includes switching the gazetter or wfs search on and off, limiting
+     * search results to visible map extent and configuring search layers.
+     *
+     * @param {Ext.button.Button} btn The &quot;save&quot;-button.
+     */
     saveSettings: function(btn) {
-        var me = btn.up();
+        var settingsContainer = btn.up();
 
-        var win = me.up();
+        var win = settingsContainer.up();
 
-        var form = me.down('form');
+        var form = settingsContainer.down('form');
 
-        var combo = me.getCombo();
+        var combo = settingsContainer.getCombo();
 
         // set configured search layers to null and add the wanted below
         combo.setConfiguredSearchLayers([]);
@@ -173,16 +176,16 @@ Ext.define(&quot;BasiGX.view.container.MultiSearchSettings&quot;, {
             if (parentItem.name === 'generalsettings') {
 
                 Ext.each(parentItem.items.items, function(item) {
-                    if (item.name === 'objectsearch'){
+                    if (item.name === 'objectsearch') {
                         combo.setWfsSearch(item.checked);
-                    } else if (item.name === 'gazetteersearch'){
+                    } else if (item.name === 'gazetteersearch') {
                         combo.setGazetteerSearch(item.checked);
-                    } else if (item.name === 'limitcheckbox'){
+                    } else if (item.name === 'limitcheckbox') {
                         combo.setLimitToBBox(item.checked);
                     }
                 });
 
-            } else if (parentItem.name === 'objectlayers' ) {
+            } else if (parentItem.name === 'objectlayers') {
 
                 Ext.each(parentItem.items.items, function(item) {
                     var l = BasiGX.util.Layer.getLayerByName(item.name);
@@ -192,12 +195,12 @@ Ext.define(&quot;BasiGX.view.container.MultiSearchSettings&quot;, {
                 });
 
             } else {
-                Ext.log.error(&quot;Found setting for which no handler exists&quot;);
+                Ext.log.error('Found setting for which no handler exists');
             }
         });
 
         win.setLoading(true);
-        me.combo.refreshSearchResults();
+        settingsContainer.combo.refreshSearchResults();
         win.setLoading(false);
         win.close();
     },
@@ -217,7 +220,7 @@ Ext.define(&quot;BasiGX.view.container.MultiSearchSettings&quot;, {
             var item = Ext.create('Ext.form.field.Checkbox', {
                 labelWidth: 200,
                 name: l.get('name'),
-                boxLabel:  l.get('name'),
+                boxLabel: l.get('name'),
                 checked: true
             });
 

@@ -48,12 +48,12 @@ Ext.define('BasiGX.util.Layer', {
          * @param {String} key - the layers property name
          * @param {String} val - the layers property value for the given key
          * @param {ol.Collection} collection - optional collection to search in
-         * @returns {ol.Layer} matchingLayer - the ol3-layer
+         * @return {ol.Layer} matchingLayer - the ol3-layer
          */
         getLayerBy: function(key, val, collection) {
-            var me = this,
-                matchingLayer,
-                layers;
+            var me = this;
+            var matchingLayer;
+            var layers;
 
             if (!Ext.isEmpty(collection)) {
                 layers = collection.getArray ?
@@ -83,7 +83,7 @@ Ext.define('BasiGX.util.Layer', {
          *
          * @param {String} layername - the layers name
          * @param {ol.Collection} collection - optional collection to search in
-         * @returns {ol.Layer} matchingLayer - the ol3-layer
+         * @return {ol.Layer} matchingLayer - the ol3-layer
          */
         getLayerByName: function(layername, collection) {
             return this.getLayerBy('name', layername, collection);
@@ -94,12 +94,12 @@ Ext.define('BasiGX.util.Layer', {
          *
          * @param {String} featureType - the layers featureType
          * @param {ol.Collection} collection - optional collection to search in
-         * @returns {ol.Layer} matchingLayer - the ol3-layer
+         * @return {ol.Layer} matchingLayer - the ol3-layer
          */
         getLayerByFeatureType: function(featureType, collection) {
-            var me = this,
-                matchingLayer,
-                layers;
+            var me = this;
+            var matchingLayer;
+            var layers;
 
             if (!Ext.isEmpty(collection)) {
                 layers = collection.getArray ?
@@ -113,8 +113,8 @@ Ext.define('BasiGX.util.Layer', {
                 if (matchingLayer) {
                     return false;
                 }
-                if(layer.get('featureType') &&
-                   layer.get('featureType') === featureType){
+                if (layer.get('featureType') &&
+                   layer.get('featureType') === featureType) {
                     matchingLayer = layer;
 
                     return false;
@@ -137,20 +137,20 @@ Ext.define('BasiGX.util.Layer', {
         /**
          * Returns all layers of an map. Even the hidden ones.
          *
-         *  @param {ol.Map} map
-         *  @returns {Array} allLayers - An array of all Layers.
+         * @param {ol.Map} map The OpenLayers map to get the layers from.
+         * @return {Array} An array of all Layers.
          */
-        getAllLayers: function(map){
+        getAllLayers: function(map) {
             var layers = map.getLayers();
             var me = this;
             var allLayers = [];
 
-            layers.forEach(function(layer){
-                if(layer instanceof ol.layer.Group){
+            layers.forEach(function(layer) {
+                if (layer instanceof ol.layer.Group) {
                     Ext.each(me.getAllLayers(layer),
-                        function(layeri){
-                        allLayers.push(layeri);
-                    });
+                        function(layeri) {
+                            allLayers.push(layeri);
+                        });
                 }
                 allLayers.push(layer);
             });
@@ -160,19 +160,20 @@ Ext.define('BasiGX.util.Layer', {
         /**
          * Returns all visible layers of an map.
          *
-         *  @param {ol.layerCollection/ol.Map} collection
-         *  @returns {Array} visibleLayers - An array of the visible Layers.
+         * @param {ol.layerCollection|ol.Map} collection Either a collection
+         *     of layers or an `OpenLayers.Map`.
+         * @return {Array} An array of the visible Layers.
          */
-        getVisibleLayers: function(collection){
+        getVisibleLayers: function(collection) {
             var me = this;
             var layers = me.getAllLayers(collection);
             var visibleLayers = [];
 
-            Ext.each(layers, function(layer){
-                if(layer.get('visible') &&
+            Ext.each(layers, function(layer) {
+                if (layer.get('visible') &&
                     layer.get('routingId') &&
-                    !layer.get('isSliderLayer')){
-                        visibleLayers.push(layer);
+                    !layer.get('isSliderLayer')) {
+                    visibleLayers.push(layer);
                 }
             });
 

@@ -39,8 +39,10 @@ Ext.define('BasiGX.view.list.FocusableTreeItem', {
     makeFocusableElement: function() {
         var me = this;
         var spec = me.element;
-        if(spec && Ext.isObject(spec)) {
-            if(!Ext.isDefined(spec.tabIndex) && !Ext.isDefined(spec.tabindex)) {
+        if (spec && Ext.isObject(spec)) {
+            var hasTabIndex = Ext.isDefined(spec.tabIndex) ||
+                Ext.isDefined(spec.tabindex);
+            if (!hasTabIndex) {
                 me.element.tabIndex = 0;
             }
         }
@@ -80,7 +82,7 @@ Ext.define('BasiGX.view.list.FocusableTreeItem', {
      * element focusable, and then registers a handler to handle `keypress`
      * events on focused list items.
      */
-    constructor: function () {
+    constructor: function() {
         var me = this;
         me.makeFocusableElement();
         me.callParent(arguments);

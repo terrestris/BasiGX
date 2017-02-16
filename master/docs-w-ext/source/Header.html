@@ -38,12 +38,12 @@
  *
  * @class BasiGX.view.panel.Header
  */
-Ext.define(&quot;BasiGX.view.panel.Header&quot;, {
-    extend: &quot;Ext.panel.Panel&quot;,
-    xtype: &quot;basigx-panel-header&quot;,
+Ext.define('BasiGX.view.panel.Header', {
+    extend: 'Ext.panel.Panel',
+    xtype: 'basigx-panel-header',
 
     requires: [
-        &quot;Ext.Img&quot;
+        'Ext.Img'
     ],
 
     config: {
@@ -70,19 +70,19 @@ Ext.define(&quot;BasiGX.view.panel.Header&quot;, {
 <span id='BasiGX-view-panel-Header-property-items'>    items: [],
 </span>
 <span id='BasiGX-view-panel-Header-method-initComponent'>    /**
-</span>    *
-    */
+</span>     * Initializes this header panel.
+     */
     initComponent: function() {
         var me = this;
 
         // add logo
-        if(me.getAddLogo() === true) {
+        if (me.getAddLogo() === true) {
             me.addLogoItem();
         }
 
         var additionalItems = me.getAdditionalItems();
         // add additional items
-        if(!Ext.isEmpty(additionalItems) &amp;&amp;
+        if (!Ext.isEmpty(additionalItems) &amp;&amp;
                 Ext.isArray(additionalItems)) {
             Ext.each(additionalItems, function(item) {
                 me.items.push(item);
@@ -93,7 +93,7 @@ Ext.define(&quot;BasiGX.view.panel.Header&quot;, {
     },
 
 <span id='BasiGX-view-panel-Header-method-addLogoItem'>    /**
-</span>     *
+</span>     * Adds a `Ext.Img` to the list of items in this panel.
      */
     addLogoItem: function() {
         var me = this;
@@ -111,17 +111,20 @@ Ext.define(&quot;BasiGX.view.panel.Header&quot;, {
         };
 
         me.items.push(logo);
-   },
+    },
 
-<span id='BasiGX-view-panel-Header-method-setBackgroundColor'>   /**
-</span>    *
-    */
-   setBackgroundColor: function(color) {
-       this.setStyle({
-           'background-color': color, //fallback for ie9 and lower
-           background: &quot;linear-gradient(to right, white, &quot; + color + &quot;)&quot;
-       });
-   }
+<span id='BasiGX-view-panel-Header-method-setBackgroundColor'>    /**
+</span>     * Adds a background gradient from white to the passed color, with a full
+     * opaque variant as fallback for IE 9.
+     *
+     * @param {String} color A CSS color.
+     */
+    setBackgroundColor: function(color) {
+        this.setStyle({
+            'background-color': color, //fallback for ie9 and lower
+            'background': 'linear-gradient(to right, white, ' + color + ')'
+        });
+    }
 });
 </pre>
 </body>
