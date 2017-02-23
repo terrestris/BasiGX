@@ -10,11 +10,11 @@
   "signatures": [
     {
       "name": "GeoExt Contributors",
-      "uuid": "eeaf1a23-61fc-4a28-9e15-50d9d7d9d9b6",
-      "created": "2017-02-17T17:28:48Z",
+      "uuid": "2d71ab6f-2285-497d-ab79-2a9e99e4d638",
+      "created": "2017-02-22T17:46:44Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "Jxl7NKZFBVI\u003d",
-      "signature": "lC/eTiMuPF4mZxhDyK10bU6hZbnXk/R+i/k9iXxlsS4hhtjnadoc7Ras8zC0ncUwp7K0I1SrnM6nd/5hYbEXRfQ+6YrpHnbE2gYZlPT87y91H2s9rOuUwKthi8Q4DHJjuJpTTMTgU8IDAeXGZrqRn2T0hOdjcxy5VlDDI647lLjt2pIDSIx2oaip/QUDcZQkeeyGd9y6kZYGJ5vGYkyAsYtWcEf7qV8/Y3/akqpuMQbX4BYnrcY4A9YpmEw5YqP+6tZcYMj+65DjNVx4LOYnAHiwN7z6pMHKlGeCRb4TKHBR4fHlfiz1HePShM+yLl/cQ7cqLj0PPbH52P/hd8OVew\u003d\u003d"
+      "nonce": "RktkYJBVamE\u003d",
+      "signature": "Q+g6MyE5OdProsqLhQXVxQ6hpEsvdHsiD75BFFc8AF90kAtage2rLg2BqHWhfHeYYJEqlZIVqcu0nL1MS5YxWlnYFrDJNc+Qw+ir2Y3sQUz4TlBS2nRV73UQA0xUcTzC1CYTNYna0L3fVSvw4GLnw4RfaMSoVLmAt9PaecIohZdp3QasfXCfn92QnlhBGGtNipncqYV3fFHMwTbtzFsWj9vQm1OwiFAHdaFdEqkXwrg+jahWUPXxQKzP10BvyMs9jc8qWSxIIwBNFXKOSMMH3UBlv4UnshL72b3RYqyKDzQhmn5BDQavQ+pLNB+IAnWZz3Uti8z92cKVTYrvUrbyWQ\u003d\u003d"
     }
   ],
   "slicer": {
@@ -35,6 +35,7 @@
   },
   "scripts": {
     "clean": "rm -rf coverage apidoc",
+    "postinstall": "node ./bin/fetch-external-resources.js",
     "lint": "eslint src/ examples/ \u0026\u0026 eslint -c test/.eslintrc test/",
     "lint:fix": "eslint --fix src/ examples/ \u0026\u0026 eslint --fix -c test/.eslintrc test/",
     "pretest": "npm run-script lint",
@@ -52,16 +53,18 @@
   "devDependencies": {
     "browser-sync": "2.18.8",
     "coveralls": "2.11.16",
-    "eslint": "3.15.0",
+    "eslint": "3.16.0",
     "eslint-config-openlayers": "7.0.0",
     "expect.js": "0.3.1",
-    "karma": "1.4.1",
+    "karma": "1.5.0",
     "karma-coverage": "1.1.1",
     "karma-eslint": "2.2.0",
     "karma-expect": "1.1.3",
     "karma-mocha": "1.3.0",
     "karma-phantomjs-launcher": "1.0.2",
     "karma-sinon": "1.0.5",
+    "log-update": "1.0.2",
+    "mkdirp": "0.5.1",
     "mocha": "3.2.0",
     "openlayers": "3.20.1",
     "phantomjs-prebuilt": "2.1.14",

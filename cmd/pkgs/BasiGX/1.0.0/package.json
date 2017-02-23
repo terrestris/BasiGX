@@ -14,11 +14,11 @@
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "2ff747b7-b567-43a3-9230-9d4d309ce3f8",
-      "created": "2017-02-20T17:34:23Z",
+      "uuid": "4b7f917f-65c3-4ab5-901c-ed3ecaed60b2",
+      "created": "2017-02-23T07:38:44Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "DdUww2IXVJ8\u003d",
-      "signature": "i0DIxfR2Dda9BCEYGAMSoMvUZgS3ijvyOgUMc8nP/pFB6DrNOH8bHCKgURY6ulBXaiDAShrWihRYd1i3GtQXAn6ahlrAFKy7imbqqLWWuNd1XJLBZ9jPuxBk3C3MICyf+oaqWR08/J906h99S2wvqUG+GVy1grLtwYp0OEQAkg4xJSsV3Y4tw+XXXv1E3IkTzj3aMRPIfDBoVpqKwAP7zjFv/I26IrotH0ARtBpVXv8o3u2HF1/OtPEFs/YPQFCAVmsYbF8iZaLsT0fzmlerduukIKCPZt2H9iGky/oYV4mG7oy6Rk6Sn3Y/nvru5QLIm7B4cNOAArlNuJnPWTVg9g\u003d\u003d"
+      "nonce": "QkM/N5r6t6Q\u003d",
+      "signature": "BAEb/lN16wGZdv7hvrj2tWpHgKgoWAAE3OcoU+CbCM58pMWV13k6kYA2iqonafBoch6N4VjioifpcGToEST/oKFililGnpfjrYGqehqNJ01o/ZcFJF081PU9GiTtqmsnHdHd8olDdROrhDPKkGxSS20tzlC3LP9wsZJ1n/8C8JhuJDBy9VclwonoBUc35wmYKYDHRHUfUUEEMBQNcPqs9ARyg5kg1dcCnqQ7BvZxRqx/Ah+7srDAEFekljWfl6gyjwcywf51Xi/NV2blyW/21CFipqPc1f/mjSxwNH1Nt3Zkg1RpYx9wR1aWgCfxMkC+43sj9moU4UxTdoD9V59UZA\u003d\u003d"
     }
   ],
   "slicer": {
@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "coveralls": "2.11.16",
-    "eslint": "3.16.0",
+    "eslint": "3.16.1",
     "eslint-config-openlayers": "7.0.0",
     "expect.js": "0.3.1",
     "istanbul": "0.4.5",
