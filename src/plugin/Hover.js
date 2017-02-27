@@ -223,7 +223,8 @@ Ext.define('BasiGX.plugin.Hover', {
             hoverVectorLayer = new ol.layer.Vector({
                 name: 'hoverVectorLayer',
                 source: me.getHoverVectorLayerSource(),
-                visible: true
+                visible: true,
+                zIndex: 1000
             });
             map.addLayer(hoverVectorLayer);
             me.setHoverVectorLayer(hoverVectorLayer);
