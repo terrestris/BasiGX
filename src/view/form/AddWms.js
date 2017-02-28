@@ -42,6 +42,7 @@ Ext.define('BasiGX.view.form.AddWms', {
         'BasiGX.util.MsgBox'
     ],
 
+
     viewModel: {
         data: {
             queryParamsFieldSetTitle: 'Anfrageparameter',
@@ -94,7 +95,17 @@ Ext.define('BasiGX.view.form.AddWms', {
          * Whether to include sublayers when creting the list of available
          * layers.
          */
-        includeSubLayer: false
+        includeSubLayer: false,
+
+        /**
+         * The WMS versions we try to use in the getCapabilities requests.
+         */
+        versionArray: ['1.3.0', '1.1.1'],
+
+        /**
+         * WMS versions we already tried to request the getCapabilities document
+         */
+        triedVersions: []
     },
 
     /**
@@ -122,39 +133,13 @@ Ext.define('BasiGX.view.form.AddWms', {
                 },
                 name: 'url',
                 allowBlank: false,
-                value: 'http://ows.terrestris.de/osm/service'
-            }, {
-                xtype: 'fieldcontainer',
-                bind: {
-                    fieldLabel: '{wmsVersionContainerFieldLabel}'
-                },
-                defaultType: 'radiofield',
-                defaults: {
-                    flex: 1
-                },
-                layout: 'hbox',
-                items: [
-                    {
-                        boxLabel: 'v1.1.1',
-                        name: 'version',
-                        inputValue: '1.1.1',
-                        id: 'v111-radio'
-                    }, {
-                        boxLabel: 'v1.3.0',
-                        name: 'version',
-                        inputValue: '1.3.0',
-                        id: 'v130-radio',
-                        checked: true
+                value: 'http://ows.terrestris.de/osm/service',
+                listeners: {
+                    change: function(textfield) {
+                        var view = textfield.up('basigx-form-addwms');
+                        view.setTriedVersions([]);
                     }
-                ]
-            }, {
-                xtype: 'hiddenfield',
-                name: 'request',
-                value: 'GetCapabilities'
-            }, {
-                xtype: 'hiddenfield',
-                name: 'service',
-                value: 'WMS'
+                }
             }]
         },
         {
@@ -196,6 +181,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                 var view = btn.up('basigx-form-addwms');
                 view.getForm().reset();
                 view.removeAddLayersComponents();
+                view.setTriedVersions([]);
             }
         },
         '->',
@@ -207,7 +193,9 @@ Ext.define('BasiGX.view.form.AddWms', {
             disabled: true,
             handler: function(btn) {
                 var view = btn.up('basigx-form-addwms');
+                view.setTriedVersions([]);
                 view.requestGetCapabilities();
+
             }
         }
     ],
@@ -233,12 +221,37 @@ Ext.define('BasiGX.view.form.AddWms', {
             me.removeAddLayersComponents();
             var values = form.getValues();
             var url = values.url;
-            delete values.url;
+
+            // try to detect the WMS version we should try next
+            var version;
+            var triedVersions = me.getTriedVersions();
+            var versionsToTry = me.getVersionArray();
+            Ext.each(versionsToTry, function(currentVersion) {
+                var alreadyTried = Ext.Array.contains(
+                triedVersions, currentVersion
+            );
+                if (!alreadyTried) {
+                    version = currentVersion;
+                    triedVersions.push(currentVersion);
+                    return false;
+                }
+            });
+
+            if (!version) {
+              // should only happen if all versions have been tried unsuccessful
+                me.setLoading(false);
+                BasiGX.warn(me.getViewModel().get('errorRequestFailed'));
+                return;
+            }
 
             Ext.Ajax.request({
                 url: url,
                 method: 'GET',
-                params: values,
+                params: {
+                    REQUEST: 'GetCapabilities',
+                    SERVICE: 'WMS',
+                    VERSION: version
+                },
                 scope: me,
                 success: me.onGetCapabilitiesSuccess,
                 failure: me.onGetCapabilitiesFailure
@@ -248,7 +261,7 @@ Ext.define('BasiGX.view.form.AddWms', {
 
     /**
      * Called if we could successfully query for the capabiliteis of a WMS, this
-     * methdo will examine the answer and eventually set up a fieldset for all
+     * method will examine the answer and eventually set up a fieldset for all
      * the layers that we have found in the server's answer.
      *
      * @param {XMLHttpRequest} response The response of the request.
@@ -258,14 +271,26 @@ Ext.define('BasiGX.view.form.AddWms', {
         var viewModel = me.getViewModel();
         var parser = me.parser;
         var result;
+        var isLastAvailbleVersion = me.getVersionArray().length ===
+          me.getTriedVersions().length;
         try {
             result = parser.read(response.responseText);
         } catch (ex) {
-            BasiGX.warn(viewModel.get('errorCouldntParseResponse'));
+            if (isLastAvailbleVersion) {
+                BasiGX.warn(viewModel.get('errorCouldntParseResponse'));
+                return;
+            }
+            me.requestGetCapabilities();
+            return;
         }
         var compatibleLayers = me.isCompatibleCapabilityResponse(result);
         if (!compatibleLayers) {
-            BasiGX.warn(viewModel.get('errorIncompatibleWMS'));
+            if (isLastAvailbleVersion) {
+                BasiGX.warn(viewModel.get('errorIncompatibleWMS'));
+                return;
+            }
+            me.requestGetCapabilities();
+            return;
         }
         me.fillAvailableLayersFieldset(compatibleLayers);
         me.updateControlToolbarState();
@@ -273,13 +298,13 @@ Ext.define('BasiGX.view.form.AddWms', {
     },
 
     /**
-     * Called if we could not successfully query for the capabiliteis of a WMS.
+     * Called if we could not successfully query for the capabilities of a WMS.
      *
      * @param {XMLHttpRequest} response The response of the request.
      */
     onGetCapabilitiesFailure: function() {
-        this.setLoading(false);
-        BasiGX.warn(this.getViewModel().get('errorRequestFailed'));
+        // we will try another WMS version automatically...
+        this.requestGetCapabilities();
     },
 
     /**
