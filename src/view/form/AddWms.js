@@ -105,7 +105,12 @@ Ext.define('BasiGX.view.form.AddWms', {
         /**
          * WMS versions we already tried to request the getCapabilities document
          */
-        triedVersions: []
+        triedVersions: [],
+
+        /**
+         * Whether to change the WMS versions manually.
+         */
+        versionsWmsAutomatically: false
     },
 
     /**
@@ -138,6 +143,37 @@ Ext.define('BasiGX.view.form.AddWms', {
                     change: function(textfield) {
                         var view = textfield.up('basigx-form-addwms');
                         view.setTriedVersions([]);
+                    }
+                }
+            }, {
+                xtype: 'fieldcontainer',
+                bind: {
+                    fieldLabel: '{wmsVersionContainerFieldLabel}'
+                },
+                defaultType: 'radiofield',
+                defaults: {
+                    flex: 1
+                },
+                layout: 'hbox',
+                items: [
+                    {
+                        boxLabel: 'v1.1.1',
+                        name: 'version',
+                        inputValue: '1.1.1',
+                        id: 'v111-radio'
+                    }, {
+                        boxLabel: 'v1.3.0',
+                        name: 'version',
+                        inputValue: '1.3.0',
+                        id: 'v130-radio',
+                        checked: true
+                    }
+                ],
+                listeners: {
+                    beforerender: function(fieldcontainer) {
+                        var view = fieldcontainer.up('basigx-form-addwms');
+                        var bool = view.versionsWmsAutomatically;
+                        fieldcontainer.setHidden(bool);
                     }
                 }
             }]
@@ -195,7 +231,6 @@ Ext.define('BasiGX.view.form.AddWms', {
                 var view = btn.up('basigx-form-addwms');
                 view.setTriedVersions([]);
                 view.requestGetCapabilities();
-
             }
         }
     ],
@@ -207,7 +242,6 @@ Ext.define('BasiGX.view.form.AddWms', {
         this.callParent();
         this.parser = new ol.format.WMSCapabilities();
     },
-
 
     /**
      * Will be called with the 'get layers' button. Issues a GetCapabilities
@@ -221,24 +255,31 @@ Ext.define('BasiGX.view.form.AddWms', {
             me.removeAddLayersComponents();
             var values = form.getValues();
             var url = values.url;
-
-            // try to detect the WMS version we should try next
             var version;
-            var triedVersions = me.getTriedVersions();
-            var versionsToTry = me.getVersionArray();
-            Ext.each(versionsToTry, function(currentVersion) {
-                var alreadyTried = Ext.Array.contains(
-                triedVersions, currentVersion
-            );
-                if (!alreadyTried) {
-                    version = currentVersion;
-                    triedVersions.push(currentVersion);
-                    return false;
-                }
-            });
+            var versionAutomatically = me.versionsWmsAutomatically;
+
+            if (versionAutomatically === false) {
+                version = values.version;
+            } else {
+                // try to detect the WMS version we should try next
+                var triedVersions = me.getTriedVersions();
+                var versionsToTry = me.getVersionArray();
+                Ext.each(versionsToTry, function(currentVersion) {
+                    var alreadyTried = Ext.Array.contains(
+                    triedVersions, currentVersion
+                  );
+
+                    if (!alreadyTried) {
+                        version = currentVersion;
+                        triedVersions.push(currentVersion);
+                        return false;
+                    }
+                });
+            }
 
             if (!version) {
-              // should only happen if all versions have been tried unsuccessful
+                // should only happen if all versions
+                // have been tried unsuccessful
                 me.setLoading(false);
                 BasiGX.warn(me.getViewModel().get('errorRequestFailed'));
                 return;
@@ -271,12 +312,12 @@ Ext.define('BasiGX.view.form.AddWms', {
         var viewModel = me.getViewModel();
         var parser = me.parser;
         var result;
-        var isLastAvailbleVersion = me.getVersionArray().length ===
+        var isLastAvailableVersion = me.getVersionArray().length ===
           me.getTriedVersions().length;
         try {
             result = parser.read(response.responseText);
         } catch (ex) {
-            if (isLastAvailbleVersion) {
+            if (isLastAvailableVersion) {
                 BasiGX.warn(viewModel.get('errorCouldntParseResponse'));
                 return;
             }
@@ -285,7 +326,7 @@ Ext.define('BasiGX.view.form.AddWms', {
         }
         var compatibleLayers = me.isCompatibleCapabilityResponse(result);
         if (!compatibleLayers) {
-            if (isLastAvailbleVersion) {
+            if (isLastAvailableVersion) {
                 BasiGX.warn(viewModel.get('errorIncompatibleWMS'));
                 return;
             }
@@ -303,8 +344,16 @@ Ext.define('BasiGX.view.form.AddWms', {
      * @param {XMLHttpRequest} response The response of the request.
      */
     onGetCapabilitiesFailure: function() {
-        // we will try another WMS version automatically...
-        this.requestGetCapabilities();
+        var me = this;
+        var versionAutomatically = me.versionsWmsAutomatically;
+        if (versionAutomatically === false) {
+            me.setLoading(false);
+            BasiGX.warn(this.getViewModel().get('errorRequestFailed'));
+            return;
+        } else {
+            // we will try another WMS version automatically...
+            this.requestGetCapabilities();
+        }
     },
 
     /**
