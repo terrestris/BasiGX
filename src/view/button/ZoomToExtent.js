@@ -88,7 +88,7 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
             var targetRotation = me.getRotation();
             var targetZoom = me.getZoom();
 
-            // Create the animation with their respectiove start values:
+            // Create the animation with their respective start values:
             var pan = ol.animation.pan({
                 source: olView.getCenter()
             });
