@@ -31,9 +31,15 @@
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
 <span id='BasiGX-view-button-ZoomToExtent'>/**
-</span> * ZoomToExtent Button
+</span> * The `ZoomToExtent` Button
  *
- * Button used to zoom to Extent
+ * Button used to zoom to an extent (currently defined by a `center` and either
+ * a `zoom` or a `resolution`).
+ *
+ * TODO This class should probably also accept an extent to configure it, that
+ *      most likely be what most users will expect.
+ *
+ * TODO This class will need some updates when we upgrade to OpenLayers &gt;= 4.
  *
  * @class BasiGX.view.button.ZoomToExtent
  */
@@ -65,43 +71,59 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
     },
 
 <span id='BasiGX-view-button-ZoomToExtent-property-olMap'>    /**
-</span>     * The OL3 map this button is bounded to
+</span>     * The OpenLayers map this button is bound to. If not passed when
+     * instantiating, a map will be guessed.
      */
     olMap: null,
 
 <span id='BasiGX-view-button-ZoomToExtent-property-config'>    /**
-</span>     * Center is required on instantiation.
-     * Either zoom or Resolution is required on instantiation.
+</span>     * The config option `center` is required on instantiation. Also required is
+     * either `zoom` or `resolution`, when both are passed, `zoom` will win.
+     *
+     * TODO Why can't we pass an extent? This is quite unexpected
      */
     config: {
 <span id='BasiGX-view-button-ZoomToExtent-cfg-center'>        center: null,
 </span><span id='BasiGX-view-button-ZoomToExtent-cfg-zoom'>        zoom: null,
 </span><span id='BasiGX-view-button-ZoomToExtent-cfg-resolution'>        resolution: null,
+</span><span id='BasiGX-view-button-ZoomToExtent-cfg-rotation'>        rotation: null,
 </span><span id='BasiGX-view-button-ZoomToExtent-cfg-handler'>        handler: function() {
-</span>            this.setConfigValues();
+</span>            var me = this;
+            me.setConfigValues();
 
-            var olMap = this.olMap;
+            var olMap = me.olMap;
 
-            //fallback
+            // fallback
             if (Ext.isEmpty(olMap)) {
                 olMap = BasiGX.util.Map.getMapComponent().getMap();
             }
 
             var olView = olMap.getView();
-            var targetCenter = this.getCenter();
-            var targetResolution = this.getResolution();
-            var targetZoom = this.getZoom();
+
+            var targetCenter = me.getCenter();
+            var targetResolution = me.getResolution();
+            var targetRotation = me.getRotation();
+            var targetZoom = me.getZoom();
+
+            // Create the animation with their respective start values:
             var pan = ol.animation.pan({
                 source: olView.getCenter()
             });
             var zoom = ol.animation.zoom({
                 resolution: olView.getResolution()
             });
+            var rotate = ol.animation.rotate({
+                rotation: olView.getRotation()
+            });
+            // before we actually render, animate to the new values using the
+            // methods defined above
+            olMap.beforeRender(pan, zoom, rotate);
 
-            olMap.beforeRender(pan);
-            olMap.beforeRender(zoom);
+            // Next: trigger a view change by setting `center`, `rotation` and
+            // either `zoom` (tried first) or `resolution`. The animation
+            // methods will transition smoothly.
             olView.setCenter(targetCenter);
-
+            olView.setRotation(targetRotation);
             if (targetZoom) {
                 olView.setZoom(targetZoom);
             } else {
@@ -121,28 +143,38 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
 </span>     *
      */
     constructor: function() {
-        this.callParent(arguments);
+        var me = this;
+        me.callParent(arguments);
 
-        if (this.getZoom() &amp;&amp; this.getResolution()) {
-            Ext.raise('No zoom and resolution set for Extent Button!' +
-            'Please choose one.');
+        if (me.getZoom() !== null &amp;&amp; me.getResolution() !== null) {
+            Ext.raise(
+                'Both zoom and resolution set for ZoomToExtent button. ' +
+                'Please choose one.'
+            );
         }
 
-        this.setConfigValues();
+        me.setConfigValues();
     },
 
 <span id='BasiGX-view-button-ZoomToExtent-method-setConfigValues'>    /**
-</span>     *
+</span>     * This method will be called on initialisation and whenever a click/tap
+     * on the button happens. If we were not configured with explicit values
+     * for `center`, `rotation` and either `zoom` or `resolution`, we will try
+     * read out matching values from the application context.
      */
     setConfigValues: function() {
+        var me = this;
         var appContext = BasiGX.util.Application.getAppContext();
 
         if (appContext) {
-            if (!this.getCenter()) {
-                this.setCenter(appContext.startCenter);
+            if (!me.getCenter()) {
+                me.setCenter(appContext.startCenter);
             }
-            if (!this.getZoom() &amp;&amp; !this.getResolution()) {
-                this.setZoom(appContext.startZoom);
+            if (me.getRotation() === null) { // 0 is a valid rotation…
+                me.setRotation(appContext.startRotation || 0);
+            }
+            if (!me.getZoom() &amp;&amp; !me.getResolution()) {
+                me.setZoom(appContext.startZoom);
             }
         }
     }
