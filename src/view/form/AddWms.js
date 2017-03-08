@@ -34,6 +34,7 @@ Ext.define('BasiGX.view.form.AddWms', {
         'Ext.form.field.Hidden',
         'Ext.form.field.Checkbox',
         'Ext.form.field.Radio',
+        'Ext.form.field.ComboBox',
         'Ext.layout.container.Anchor',
         'Ext.layout.container.HBox',
         'Ext.toolbar.Toolbar',
@@ -110,12 +111,22 @@ Ext.define('BasiGX.view.form.AddWms', {
         /**
          * Whether to change the WMS versions manually.
          */
-        versionsWmsAutomatically: false
+        versionsWmsAutomatically: false,
+
+        /**
+         * The WMS urls we try to fill the combobox.
+         */
+        urlArray: [],
+
+         /**
+          *Whether to change WMS Url from textfield to combobox.
+          */
+        urlField: true
     },
 
     /**
      * The ol.format.WMSCapabilities which we use to parse any responses. Will
-     * be set in `initComponent`
+     * be set in 'initComponent'
      *
      * @private
      */
@@ -140,9 +151,44 @@ Ext.define('BasiGX.view.form.AddWms', {
                 allowBlank: false,
                 value: 'http://ows.terrestris.de/osm/service',
                 listeners: {
+
                     change: function(textfield) {
                         var view = textfield.up('basigx-form-addwms');
                         view.setTriedVersions([]);
+                    },
+                    beforerender: function(textfield) {
+                        var view = textfield.up('basigx-form-addwms');
+                        var boolFieldUrl = view.urlField;
+                        if (boolFieldUrl === false) {
+                            textfield.setHidden(true);
+                        }
+                    }
+                }
+            }, {
+                xtype: 'combobox',
+                bind: {
+                    fieldLabel: '{wmsUrlTextFieldLabel}'
+                },
+                store: null,
+                name: 'urlCombo',
+                allowBlank: false,
+                autoRender: true,
+                ediable: true,
+                value: 'http://ows.terrestris.de/osm/service',
+                listeners: {
+                    change: function(combobox) {
+                        var view = combobox.up('basigx-form-addwms');
+                        view.setTriedVersions([]);
+                    },
+                    beforerender: function(combobox) {
+                        var view = combobox.up('basigx-form-addwms');
+                        var boolFieldUrl = view.urlField;
+                        if (boolFieldUrl === true) {
+                            combobox.setHidden(true);
+                        } else {
+                            var urlWms = view.urlArray;
+                            combobox.setStore(urlWms);
+                        }
                     }
                 }
             }, {
@@ -254,7 +300,14 @@ Ext.define('BasiGX.view.form.AddWms', {
             me.setLoading(true);
             me.removeAddLayersComponents();
             var values = form.getValues();
-            var url = values.url;
+            var url;
+
+            if (me.urlField === true) {
+                url = values.url;
+            } else {
+                url = values.urlCombo;
+            }
+
             var version;
             var versionAutomatically = me.versionsWmsAutomatically;
 
@@ -264,6 +317,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                 // try to detect the WMS version we should try next
                 var triedVersions = me.getTriedVersions();
                 var versionsToTry = me.getVersionArray();
+
                 Ext.each(versionsToTry, function(currentVersion) {
                     var alreadyTried = Ext.Array.contains(
                     triedVersions, currentVersion
@@ -411,7 +465,7 @@ Ext.define('BasiGX.view.form.AddWms', {
     },
 
     /**
-     * Remove the checkboxes ffor layxers from previous requests, and also the
+     * Remove the checkboxes for layers from previous requests, and also the
      * interact-toolbar.
      */
     removeAddLayersComponents: function() {
@@ -464,12 +518,12 @@ Ext.define('BasiGX.view.form.AddWms', {
     /**
      * Checks if the passed capabilities object (from the #parser) is
      * compatible. It woill return an array of layers if we could determine any,
-     * and the boolean value `false` if not.
+     * and the boolean value 'false' if not.
      *
      * @param {Object} capabilities The GetCapabbilties object as it is returned
      *     by our parser.
      * @return {ol.layer.Tile[]|boolean} Eitehr an array of comüatible layers or
-     *     `false`.
+     *     'false'.
      */
     isCompatibleCapabilityResponse: function(capabilities) {
         var me = this;
