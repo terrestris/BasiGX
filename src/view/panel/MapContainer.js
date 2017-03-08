@@ -141,6 +141,11 @@ Ext.define('BasiGX.view.panel.MapContainer', {
     },
 
     /**
+     * Fired when the overviewmap is toggled.
+     * @event overviewmapToggle
+     */
+
+    /**
      * Init
      */
     initComponent: function() {
