@@ -333,6 +333,7 @@ Ext.define('BasiGX.view.panel.MapContainer', {
         button.blur();
         this.toggleScalelineAdjustment();
         this.toggleScalecomboAdjustment();
+        this.fireEvent('overviewmapToggle', ovm);
     },
 
     /**
