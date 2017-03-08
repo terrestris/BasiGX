@@ -157,6 +157,11 @@ Ext.define('BasiGX.view.panel.MapContainer', {
         additionalItems: []
     },
 
+<span id='BasiGX-view-panel-MapContainer-event-overviewmapToggle'>    /**
+</span>     * Fired when the overviewmap is toggled.
+     * @event overviewmapToggle
+     */
+
 <span id='BasiGX-view-panel-MapContainer-method-initComponent'>    /**
 </span>     * Init
      */
@@ -350,6 +355,7 @@ Ext.define('BasiGX.view.panel.MapContainer', {
         button.blur();
         this.toggleScalelineAdjustment();
         this.toggleScalecomboAdjustment();
+        this.fireEvent('overviewmapToggle', ovm);
     },
 
 <span id='BasiGX-view-panel-MapContainer-method-toggleScalelineAdjustment'>    /**
