@@ -43,7 +43,6 @@ Ext.define('BasiGX.view.form.AddWms', {
         'BasiGX.util.MsgBox'
     ],
 
-
     viewModel: {
         data: {
             queryParamsFieldSetTitle: 'Anfrageparameter',
@@ -71,6 +70,7 @@ Ext.define('BasiGX.view.form.AddWms', {
     },
 
     scrollable: true,
+
 
     config: {
 
@@ -114,19 +114,20 @@ Ext.define('BasiGX.view.form.AddWms', {
         versionsWmsAutomatically: false,
 
         /**
-         * The WMS urls we try to fill the combobox.
+         * With the WMS urls we try to fill the combobox.
          */
-        urlArray: [],
+        wmsBaseUrls: [],
 
-         /**
-          *Whether to change WMS Url from textfield to combobox.
-          */
-        urlField: true
+        /**
+         * Default url for the textfield or combobox.
+         */
+        defaultUrl: 'http://ows.terrestris.de/osm/service'
+
     },
 
     /**
      * The ol.format.WMSCapabilities which we use to parse any responses. Will
-     * be set in 'initComponent'
+     * be set in `initComponent`
      *
      * @private
      */
@@ -149,17 +150,16 @@ Ext.define('BasiGX.view.form.AddWms', {
                 },
                 name: 'url',
                 allowBlank: false,
-                value: 'http://ows.terrestris.de/osm/service',
+                value:  null,
                 listeners: {
-
                     change: function(textfield) {
                         var view = textfield.up('basigx-form-addwms');
                         view.setTriedVersions([]);
                     },
                     beforerender: function(textfield) {
                         var view = textfield.up('basigx-form-addwms');
-                        var boolFieldUrl = view.urlField;
-                        if (boolFieldUrl === false) {
+                        var countUrls = view.wmsBaseUrls.length;
+                        if(countUrls !== 0) {
                             textfield.setHidden(true);
                         }
                     }
@@ -173,8 +173,8 @@ Ext.define('BasiGX.view.form.AddWms', {
                 name: 'urlCombo',
                 allowBlank: false,
                 autoRender: true,
-                ediable: true,
-                value: 'http://ows.terrestris.de/osm/service',
+                editable: true,
+                value:  null,
                 listeners: {
                     change: function(combobox) {
                         var view = combobox.up('basigx-form-addwms');
@@ -182,11 +182,11 @@ Ext.define('BasiGX.view.form.AddWms', {
                     },
                     beforerender: function(combobox) {
                         var view = combobox.up('basigx-form-addwms');
-                        var boolFieldUrl = view.urlField;
-                        if (boolFieldUrl === true) {
+                        var countUrls = view.wmsBaseUrls.length;
+                        if (countUrls === 0) {
                             combobox.setHidden(true);
                         } else {
-                            var urlWms = view.urlArray;
+                            var urlWms = view.wmsBaseUrls;
                             combobox.setStore(urlWms);
                         }
                     }
@@ -287,10 +287,15 @@ Ext.define('BasiGX.view.form.AddWms', {
     initComponent: function() {
         this.callParent();
         this.parser = new ol.format.WMSCapabilities();
+        var defaultValue = this.defaultUrl;
+        var combo = this.down('combobox[name=urlCombo]');
+        var textfield = this.down('textfield[name=url]');
+        combo.setValue(defaultValue);
+        textfield.setValue(defaultValue);
     },
 
     /**
-     * Will be called with the 'get layers' button. Issues a GetCapabilities
+     * Will be called with the `get layers` button. Issues a GetCapabilities
      * request and sets up handlewrs for reacting on the response.
      */
     requestGetCapabilities: function() {
@@ -302,7 +307,7 @@ Ext.define('BasiGX.view.form.AddWms', {
             var values = form.getValues();
             var url;
 
-            if (me.urlField === true) {
+            if (me.wmsBaseUrls.length === 0) {
                 url = values.url;
             } else {
                 url = values.urlCombo;
@@ -518,7 +523,7 @@ Ext.define('BasiGX.view.form.AddWms', {
     /**
      * Checks if the passed capabilities object (from the #parser) is
      * compatible. It woill return an array of layers if we could determine any,
-     * and the boolean value 'false' if not.
+     * and the boolean value `false` if not.
      *
      * @param {Object} capabilities The GetCapabbilties object as it is returned
      *     by our parser.
