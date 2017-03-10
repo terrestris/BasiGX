@@ -172,8 +172,6 @@ Ext.define('BasiGX.view.form.AddWms', {
                 store: null,
                 name: 'urlCombo',
                 allowBlank: false,
-                autoRender: true,
-                editable: true,
                 value:  null,
                 listeners: {
                     change: function(combobox) {
