@@ -150,7 +150,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                 },
                 name: 'url',
                 allowBlank: false,
-                value:  null,
+                value: null,
                 listeners: {
                     change: function(textfield) {
                         var view = textfield.up('basigx-form-addwms');
@@ -159,7 +159,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                     beforerender: function(textfield) {
                         var view = textfield.up('basigx-form-addwms');
                         var countUrls = view.wmsBaseUrls.length;
-                        if(countUrls !== 0) {
+                        if (countUrls !== 0) {
                             textfield.setHidden(true);
                         }
                     }
@@ -172,7 +172,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                 store: null,
                 name: 'urlCombo',
                 allowBlank: false,
-                value:  null,
+                value: null,
                 listeners: {
                     change: function(combobox) {
                         var view = combobox.up('basigx-form-addwms');
