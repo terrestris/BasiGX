@@ -262,6 +262,11 @@ Ext.define('BasiGX.view.form.AddWms', {
                 view.getForm().reset();
                 view.removeAddLayersComponents();
                 view.setTriedVersions([]);
+                var defaultValue = view.defaultUrl;
+                var combo = view.down('combobox[name=urlCombo]');
+                combo.setValue(defaultValue);
+                var textfield = view.down('textfield[name=url]');
+                textfield.setValue(defaultValue);
             }
         },
         '->',
@@ -269,6 +274,7 @@ Ext.define('BasiGX.view.form.AddWms', {
             bind: {
                 text: '{requestLayersBtnText}'
             },
+            name: 'requestLayersBtn',
             formBind: true, // only enabled once the form is valid
             disabled: true,
             handler: function(btn) {
@@ -294,7 +300,7 @@ Ext.define('BasiGX.view.form.AddWms', {
 
     /**
      * Will be called with the `get layers` button. Issues a GetCapabilities
-     * request and sets up handlewrs for reacting on the response.
+     * request and sets up handlers for reacting on the response.
      */
     requestGetCapabilities: function() {
         var me = this;
