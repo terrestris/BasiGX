@@ -265,7 +265,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                 var defaultValue = view.defaultUrl;
                 var combo = view.down('combobox[name=urlCombo]');
                 combo.setValue(defaultValue);
-                var textfield = view.down('textfield[name=url]')[0];
+                var textfield = view.down('textfield[name=url]');
                 textfield.setValue(defaultValue);
             }
         },
