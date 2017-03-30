@@ -56,10 +56,27 @@ Ext.define('BasiGX.view.form.AddWms', {
             addCheckedLayersBtnText: 'Ausgewählte Layer hinzufügen',
             errorIncompatibleWMS: 'Der angefragte WMS ist nicht kompatibel ' +
                     'zur Anwendung',
-            errorRequestFailed: 'Die angegebene URL konte nicht abgefragt ' +
+            errorRequestFailed: 'Die angegebene URL konnte nicht abgefragt ' +
                     'werden',
             errorCouldntParseResponse: 'Die erhaltene Antwort konnte nicht ' +
-                    'erfolgreich geparst werden'
+                    'erfolgreich geparst werden',
+            msgRequestTimedOut: 'Die Anfrage wurde nicht schnell genug ' +
+                    'beantwortet und abgebrochen',
+            msgServiceException: 'Eine OGC ServiceException ist aufgetreten',
+            msgCorsMisconfiguration: 'HTTP access control (CORS) auf dem ' +
+                    'Zielserver vermutlich nicht korrekt konfiguriert',
+            msgUnauthorized: 'Der Client ist nicht gegenüber dem Zielserver ' +
+                    'authentifiziert',
+            msgForbidden: 'Der Client hat keinen Zugriff auf die angefragte ' +
+                    'Ressource',
+            msgFileNotFound: 'Die angefragte Ressource existiert nicht',
+            msgTooManyRequests: 'Der Client hat zu viele Anfragen gestellt',
+            msgServiceUnavailable: 'Der Server ist derzeit nicht verfügbar ' +
+                    '(zu viele Anfragen bzw. Wartungsmodus)',
+            msgGatewayTimeOut: 'Der Server fungierte als Gateway und das ' +
+                    'Originalziel hat zu langsam geantwortet',
+            msgClientError: 'Ein unspezifizierter Clientfehler ist aufgetreten',
+            msgServerError: 'Ein unspezifizierter Serverfehler ist aufgetreten'
         }
     },
 
@@ -104,34 +121,73 @@ Ext.define('BasiGX.view.form.AddWms', {
         versionArray: ['1.3.0', '1.1.1'],
 
         /**
-         * WMS versions we already tried to request the getCapabilities document
+         * Whether to test the WMS versions in #versionArray automatically in
+         * descending order. This will hide the user interface for manually
+         * selecting the version to ask the WMS for.
          */
-        triedVersions: [],
+        autoDetectVersion: false,
 
         /**
-         * Whether to change the WMS versions manually.
-         */
-        versionsWmsAutomatically: false,
-
-        /**
-         * With the WMS urls we try to fill the combobox.
+         * With these WMS urls we fill the combobox. If this is empty (default),
+         * no combobox will be rendered but a plain textfield.
          */
         wmsBaseUrls: [],
 
         /**
          * Default url for the textfield or combobox.
          */
-        defaultUrl: 'http://ows.terrestris.de/osm/service'
+        defaultUrl: 'https://ows.terrestris.de/osm/service',
 
+        /**
+         * Whether we will send the `X-Requested-With` header when fetching the
+         * capabilities document from the URL. The `X-Requested-With` header is
+         * usually added for XHR, but adding it should lead to a preflight
+         * request (see https://goo.gl/6JzdUI), which some servers fail.
+         *
+         * @type {Boolean}
+         */
+        useDefaultXhrHeader: false,
+
+        /**
+         * Whether the request against the WMS servers will contain the ExtJS
+         * cache buster (`_dc=123…`) or not. If set to `false`, the param will
+         * not be send, if set to `true`, we'll pass it along (ExtJS default
+         * behaviour).
+         *
+         * The name of this parameter is taken from the config option of
+         * `Ext.Ajax`, turning the boolean logic around would be even more
+         * confusing.
+         *
+         * Defaults to `true`, e.g. the cache buster will be send along in the
+         * GET-request.
+         *
+         * @type {Boolean}
+         */
+        disableCaching: true
     },
 
     /**
-     * The ol.format.WMSCapabilities which we use to parse any responses. Will
+     * The `ol.format.WMSCapabilities` which we use to parse any responses. Will
      * be set in `initComponent`
      *
      * @private
      */
     parser: null,
+
+    /**
+     * Keeps track of the viewModel key of the last error (if any).
+     *
+     * @private
+     */
+    lastErrorMsgKey: null,
+
+    /**
+     * The WMS versions we already tried to request the getCapabilities
+     * document for.
+     *
+     * @private
+     */
+    triedVersions: [],
 
     items: [
         {
@@ -154,7 +210,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                 listeners: {
                     change: function(textfield) {
                         var view = textfield.up('basigx-form-addwms');
-                        view.setTriedVersions([]);
+                        view.resetState();
                     },
                     beforerender: function(textfield) {
                         var view = textfield.up('basigx-form-addwms');
@@ -176,7 +232,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                 listeners: {
                     change: function(combobox) {
                         var view = combobox.up('basigx-form-addwms');
-                        view.setTriedVersions([]);
+                        view.resetState();
                     },
                     beforerender: function(combobox) {
                         var view = combobox.up('basigx-form-addwms');
@@ -217,8 +273,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                 listeners: {
                     beforerender: function(fieldcontainer) {
                         var view = fieldcontainer.up('basigx-form-addwms');
-                        var bool = view.versionsWmsAutomatically;
-                        fieldcontainer.setHidden(bool);
+                        fieldcontainer.setHidden(view.getAutoDetectVersion());
                     }
                 }
             }]
@@ -262,7 +317,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                 var view = btn.up('basigx-form-addwms');
                 view.getForm().reset();
                 view.removeAddLayersComponents();
-                view.setTriedVersions([]);
+                view.resetState();
                 var defaultValue = view.defaultUrl;
                 var combo = view.down('combobox[name=urlCombo]');
                 combo.setValue(defaultValue);
@@ -280,7 +335,7 @@ Ext.define('BasiGX.view.form.AddWms', {
             disabled: true,
             handler: function(btn) {
                 var view = btn.up('basigx-form-addwms');
-                view.setTriedVersions([]);
+                view.resetState();
                 view.requestGetCapabilities();
             }
         }
@@ -290,13 +345,62 @@ Ext.define('BasiGX.view.form.AddWms', {
      * Initializes the form and sets up the parser instance.
      */
     initComponent: function() {
-        this.callParent();
-        this.parser = new ol.format.WMSCapabilities();
-        var defaultValue = this.defaultUrl;
-        var combo = this.down('combobox[name=urlCombo]');
-        var textfield = this.down('textfield[name=url]');
+        var me = this;
+        me.callParent();
+        me.parser = new ol.format.WMSCapabilities();
+        var defaultValue = me.defaultUrl;
+        var combo = me.down('combobox[name=urlCombo]');
+        var textfield = me.down('textfield[name=url]');
         combo.setValue(defaultValue);
         textfield.setValue(defaultValue);
+    },
+
+    /**
+     * Resets our internal state tracking properties for tracking the tried
+     * versions and the last error message key we have determined.
+     *
+     * @private
+     */
+    resetState: function() {
+        var me = this;
+        me.lastErrorMsgKey = null;
+        me.triedVersions = [];
+    },
+
+    /**
+     * Returns a key for a viewModel property for the passed HTTP status code or
+     * null if we don't consider the status code an error.
+     *
+     * @param {Number} status The HTTP status code of the last response.
+     * @return {String} An error message key to be looked up in the viewModel.
+     * @private
+     */
+    responseStatusToErrorMsgKey: function(status) {
+        status = parseInt(status, 10);
+        // handle very common ones specifically
+        if (status === 0) {
+            // Most likely CORS
+            // * either not enabled at all
+            // * or misconfigured
+            return 'msgCorsMisconfiguration';
+        } else if (status === 401) {
+            return 'msgUnauthorized';
+        } else if (status === 403) {
+            return 'msgForbidden';
+        } else if (status === 404) {
+            return 'msgFileNotFound';
+        } else if (status === 429) {
+            return 'msgTooManyRequests';
+        } else if (status === 503) {
+            return 'msgServiceUnavailable';
+        } else if (status === 504) {
+            return 'msgGatewayTimeOut';
+        } else if (status >= 400 && status < 500) {
+            return 'msgClientError';
+        } else if (status >= 500) {
+            return 'msgServerError';
+        }
+        return null;
     },
 
     /**
@@ -306,66 +410,81 @@ Ext.define('BasiGX.view.form.AddWms', {
     requestGetCapabilities: function() {
         var me = this;
         var form = me.getForm();
-        if (form.isValid()) {
-            me.setLoading(true);
-            me.removeAddLayersComponents();
-            var values = form.getValues();
-            var url;
+        if (!form.isValid()) {
+            return;
+        }
+        me.setLoading(true);
+        me.removeAddLayersComponents();
+        var values = form.getValues();
+        var url;
 
-            if (me.wmsBaseUrls.length === 0) {
-                url = values.url;
-            } else {
-                url = values.urlCombo;
-            }
+        if (me.wmsBaseUrls.length === 0) {
+            url = values.url;
+        } else {
+            url = values.urlCombo;
+        }
 
-            var version;
-            var versionAutomatically = me.versionsWmsAutomatically;
+        var version;
 
-            if (versionAutomatically === false) {
-                version = values.version;
-            } else {
-                // try to detect the WMS version we should try next
-                var triedVersions = me.getTriedVersions();
-                var versionsToTry = me.getVersionArray();
+        if (!me.getAutoDetectVersion()) {
+            version = values.version;
+        } else {
+            // try to detect the WMS version we should try next
+            var triedVersions = me.triedVersions;
+            var versionsToTry = me.getVersionArray();
 
-                Ext.each(versionsToTry, function(currentVersion) {
-                    var alreadyTried = Ext.Array.contains(
+            Ext.each(versionsToTry, function(currentVersion) {
+                var alreadyTried = Ext.Array.contains(
                     triedVersions, currentVersion
-                  );
+                );
 
-                    if (!alreadyTried) {
-                        version = currentVersion;
-                        triedVersions.push(currentVersion);
-                        return false;
-                    }
-                });
-            }
-
-            if (!version) {
-                // should only happen if all versions
-                // have been tried unsuccessful
-                me.setLoading(false);
-                BasiGX.warn(me.getViewModel().get('errorRequestFailed'));
-                return;
-            }
-
-            Ext.Ajax.request({
-                url: url,
-                method: 'GET',
-                params: {
-                    REQUEST: 'GetCapabilities',
-                    SERVICE: 'WMS',
-                    VERSION: version
-                },
-                scope: me,
-                success: me.onGetCapabilitiesSuccess,
-                failure: me.onGetCapabilitiesFailure
+                if (!alreadyTried) {
+                    version = currentVersion;
+                    triedVersions.push(currentVersion);
+                    return false;
+                }
             });
         }
+
+        if (!version) {
+            // should only happen if all versions have been tried and all failed
+            me.setLoading(false);
+            BasiGX.warn(me.getErrorMessage('errorRequestFailed'));
+            return;
+        }
+        Ext.Ajax.request({
+            url: url,
+            method: 'GET',
+            useDefaultXhrHeader: me.getUseDefaultXhrHeader(),
+            disableCaching: me.getDisableCaching(),
+            params: {
+                REQUEST: 'GetCapabilities',
+                SERVICE: 'WMS',
+                VERSION: version
+            },
+            success: me.onGetCapabilitiesSuccess,
+            failure: me.onGetCapabilitiesFailure,
+            scope: me
+        });
     },
 
     /**
-     * Called if we could successfully query for the capabiliteis of a WMS, this
+     * Returns true if the passed responseText is a service exception report.
+     *
+     * @param {String} responseText The responseText of a request which is
+     *     possibly a service exception report.
+     * @return {Boolean} Whether the response is a service exception report
+     *     document.
+     */
+    isServiceExceptionReport: function(responseText) {
+        if (!responseText) {
+            return false;
+        }
+        return (/<ServiceExceptionReport/g).test(responseText);
+    },
+
+    /**
+     * Called if we could successfully query for the capabilities of a WMS, this
      * method will examine the answer and eventually set up a fieldset for all
      * the layers that we have found in the server's answer.
      *
@@ -373,16 +492,27 @@ Ext.define('BasiGX.view.form.AddWms', {
      */
     onGetCapabilitiesSuccess: function(response) {
         var me = this;
+
+        me.lastErrorMsgKey = null;
+        // some servers answer with a ServiceExceptionReport, e.g. when a server
+        // only supports v1.1.1 but was requested with v1.3.0. In that case, we
+        // have to manually call the failure callback.
+        if (me.isServiceExceptionReport(response.responseText)) {
+            me.onGetCapabilitiesFailure(response);
+            return;
+        }
+
         var viewModel = me.getViewModel();
         var parser = me.parser;
         var result;
         var isLastAvailableVersion = me.getVersionArray().length ===
-          me.getTriedVersions().length;
+          me.triedVersions.length;
         try {
             result = parser.read(response.responseText);
         } catch (ex) {
             if (isLastAvailableVersion) {
                 BasiGX.warn(viewModel.get('errorCouldntParseResponse'));
+                me.setLoading(false);
                 return;
             }
             me.requestGetCapabilities();
@@ -392,6 +522,7 @@ Ext.define('BasiGX.view.form.AddWms', {
         if (!compatibleLayers) {
             if (isLastAvailableVersion) {
                 BasiGX.warn(viewModel.get('errorIncompatibleWMS'));
+                me.setLoading(false);
                 return;
             }
             me.requestGetCapabilities();
@@ -407,17 +538,93 @@ Ext.define('BasiGX.view.form.AddWms', {
      *
      * @param {XMLHttpRequest} response The response of the request.
      */
-    onGetCapabilitiesFailure: function() {
+    onGetCapabilitiesFailure: function(response) {
         var me = this;
-        var versionAutomatically = me.versionsWmsAutomatically;
-        if (versionAutomatically === false) {
+        var status = response.status;
+        var responseText = response.responseText;
+        var errDetails = [];
+        // Keep track of the last error, to eventually inform the user
+        me.lastErrorMsgKey = me.responseStatusToErrorMsgKey(status);
+
+        // we might simply have timed out
+        if (response.timedout) {
+            me.lastErrorMsgKey = 'msgRequestTimedOut';
+        }
+
+        // If we still do not have a msg key and a OK status, check if it's a SE
+        if (me.lastErrorMsgKey === null && status >= 200 && status < 300) {
+            if (me.isServiceExceptionReport(responseText)) {
+                // overwrite the key from the status, this should be considered
+                // an error
+                me.lastErrorMsgKey = 'msgServiceException';
+                errDetails = me.exceptionDetailsFromReport(responseText);
+            }
+        }
+
+        if (!me.getAutoDetectVersion()) {
             me.setLoading(false);
-            BasiGX.warn(this.getViewModel().get('errorRequestFailed'));
+            BasiGX.warn(me.getErrorMessage('errorRequestFailed', errDetails));
             return;
         } else {
-            // we will try another WMS version automatically...
-            this.requestGetCapabilities();
+            // we will try another WMS version automatically…
+            me.requestGetCapabilities();
         }
+    },
+
+    /**
+     * Returns an array of `<ServiceException>` text contents of the passed
+     * `<ServiceExceptionReport>` or an empty array.
+     *
+     * @param {String} exceptionReport An OGC ServiceExceptionReport as string.
+     * @return {Array<String>} exceptionReport An array of `<ServiceException>`
+     *     text contents of the passed `<ServiceExceptionReport>` or an empty
+     *     array.
+     */
+    exceptionDetailsFromReport: function(exceptionReport) {
+        var exceptionDetails = [];
+        if (DOMParser) {
+            var parser = new DOMParser();
+            try {
+                var xml = parser.parseFromString(exceptionReport, 'text/xml');
+                var exceptions = Ext.DomQuery.select('ServiceException', xml);
+                Ext.each(exceptions, function(exception) {
+                    exceptionDetails.push(exception.innerHTML);
+                });
+            } catch (e) {
+                // pass
+                Ext.Logger.warn('Failed to parse responseText as XML: ' + e);
+            }
+        }
+        return exceptionDetails;
+    },
+
+    /**
+     * Returns the error message to display to the user for the passed key,
+     * optionally adding the passed details.
+     *
+     * @param {String} errorKey The key to look up in the view model for the
+     *     error.
+     * @param {Array<String>} [errorDetails] Optional array of details to
+     *     display.
+     * @return {String} The error message to display.
+     * @private
+     */
+    getErrorMessage: function(errorKey, errorDetails) {
+        var me = this;
+        var viewModel = me.getViewModel();
+
+        var msg = viewModel.get(errorKey);
+        if (me.lastErrorMsgKey !== null) {
+            msg += '<br /><br />' + viewModel.get(me.lastErrorMsgKey);
+        }
+        if (errorDetails && errorDetails.length > 0) {
+            msg += '<ul>';
+            Ext.each(errorDetails, function(errorDetail) {
+                msg += '<li>' + errorDetail + '</li>';
+            });
+            msg += '</ul>';
+        }
+        return msg;
     },
 
     /**
