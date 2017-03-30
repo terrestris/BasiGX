@@ -88,12 +88,12 @@ Ext.define('BasiGX.view.form.AddWms', {
 
         /**
          * Whether to add a `Uncheck all layers` button to the toolbar to
-         * interactthe with the layers of a GetCapabilities response.
+         * interact with the layers of a GetCapabilities response.
          */
         hasUncheckAllBtn: false,
 
         /**
-         * Whether to include sublayers when creting the list of available
+         * Whether to include sublayers when creating the list of available
          * layers.
          */
         includeSubLayer: false,
@@ -200,6 +200,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                 },
                 layout: 'hbox',
                 items: [
+                    // TODO generate from #versionArray?
                     {
                         boxLabel: 'v1.1.1',
                         name: 'version',
