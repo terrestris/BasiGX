@@ -195,10 +195,23 @@
                 "availableLayesFieldSetTitle": "Verfügbare Layer",
                 "resetBtnText": "Zurücksetzen",
                 "requestLayersBtnText": "Verfügbare Layer abfragen",
+                "checkAllLayersBtnText": "Alle auswählen",
+                "uncheckAllLayersBtnText": "Nichts auswählen",
                 "addCheckedLayersBtnText": "Ausgewählte Layer hinzufügen",
                 "errorIncompatibleWMS": "Der angefragte WMS ist nicht kompatibel zur Anwendung",
-                "errorRequestFailed": "Die angegebene URL konte nicht abgefragt werden",
-                "errorCouldntParseResponse": "Die erhaltene Antwort konnte nicht erfolgreich geparst werden"
+                "errorRequestFailed": "Die angegebene URL konnte nicht abgefragt werden",
+                "errorCouldntParseResponse": "Die erhaltene Antwort konnte nicht erfolgreich geparst werden",
+                "msgRequestTimedOut": "Die Anfrage wurde nicht schnell genug beantwortet und abgebrochen",
+                "msgServiceException": "Eine OGC ServiceException ist aufgetreten",
+                "msgCorsMisconfiguration": "HTTP access control (CORS) auf dem Zielserver vermutlich nicht korrekt konfiguriert",
+                "msgUnauthorized": "Der Client ist nicht gegenüber dem Zielserver authentifiziert",
+                "msgForbidden": "Der Client hat keinen Zugriff auf die angefragte Ressource",
+                "msgFileNotFound": "Die angefragte Ressource existiert nicht",
+                "msgTooManyRequests": "Der Client hat zu viele Anfragen gestellt",
+                "msgServiceUnavailable": "Der Server ist derzeit nicht verfügbar (zu viele Anfragen bzw. Wartungsmodus)",
+                "msgGatewayTimeOut": "Der Server fungierte als Gateway und das Originalziel hat zu langsam geantwortet",
+                "msgClientError": "Ein unspezifizierter Clientfehler ist aufgetreten",
+                "msgServerError": "Ein unspezifizierter Serverfehler ist aufgetreten"
             }
         }
     },
@@ -412,8 +425,8 @@
         }
     },
     "Ext.form.field.VTypes": {
-        "emailText": "Dieses Feld sollte eine E-Mail-Adresse enthalten. Format: \"user@example.com\"",
-        "urlText": "Dieses Feld sollte eine URL enthalten. Format: \"http:\"www.example.com\"",
+        "emailText": "Dieses Feld sollte eine E-Mail-Adresse enthalten. Format: 'user@example.com'",
+        "urlText": "Dieses Feld sollte eine URL enthalten. Format: 'http:www.example.com'",
         "alphaText": "Dieses Feld darf nur Buchstaben enthalten und _",
         "alphanumText": "Dieses Feld darf nur Buchstaben und Zahlen enthalten und _"
     },

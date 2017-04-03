@@ -194,11 +194,24 @@
                 "wmsVersionContainerFieldLabel": "Version",
                 "availableLayesFieldSetTitle": "Available layers",
                 "resetBtnText": "Reset",
-                "requestLayersBtnText": "Request available layers",
+                "requestLayersBtnText": "Query for available layers",
+                "checkAllLayersBtnText": "Select all",
+                "uncheckAllLayersBtnText": "Select none",
                 "addCheckedLayersBtnText": "Add selected layers",
-                "errorIncompatibleWMS": "The requested WMS is not compatible with this application",
-                "errorRequestFailed": "Could not reach the desired location",
-                "errorCouldntParseResponse": "Error while reading the response send by the server"
+                "errorIncompatibleWMS": "The queried WMS is not compatible to the application",
+                "errorRequestFailed": "Failed to retrieve entered URL",
+                "errorCouldntParseResponse": "Failed to parse the response",
+                "msgRequestTimedOut": "The response was not delivered in time and the request has been aborted",
+                "msgServiceException": "An OGC ServiceException occured",
+                "msgCorsMisconfiguration": "HTTP access control (CORS) at the target server probably misconfigured",
+                "msgUnauthorized": "The client is not authorized",
+                "msgForbidden": "The client does not have access to the resource",
+                "msgFileNotFound": "The resource could not be found",
+                "msgTooManyRequests": "The client has sent too many requests",
+                "msgServiceUnavailable": "The service is not available",
+                "msgGatewayTimeOut": "The server was acting as a gateway and the upstream server was too slow sending a response",
+                "msgClientError": "An unspecified client error occured",
+                "msgServerError": "An unspecified server error occured"
             }
         }
     },
