@@ -1,5 +1,14 @@
+Ext.require([
+    'BasiGX.view.component.Map',
+    'BasiGX.view.combo.Language',
+    'BasiGX.view.button.ZoomIn',
+    'BasiGX.view.button.ZoomOut',
+    'BasiGX.view.button.ZoomToExtent',
+    'BasiGX.view.button.Measure',
+    'BasiGX.view.button.AddWms'
+]);
 
-Ext.onReady(function(){
+Ext.onReady(function() {
 
     // enable tooltips
     Ext.tip.QuickTipManager.init();
@@ -15,7 +24,7 @@ Ext.onReady(function(){
             layout: 'fit',
             items: [{
                 xtype: 'basigx-component-map',
-                appContextPath: './resources/appContext.json',
+                appContextPath: './resources/appContext.json'
             }],
             tbar: [{
                 xtype: 'basigx-combo-language',
@@ -47,7 +56,7 @@ Ext.onReady(function(){
                 xtype: 'tbseparator'
             }, {
                 xtype: 'basigx-button-addwms'
-            }],
+            }]
         }]
     });
 
