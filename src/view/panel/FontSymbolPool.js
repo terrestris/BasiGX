@@ -38,7 +38,8 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
      */
     viewModel: {
         data: {
-            closeBtnText: 'Close'
+            closeBtnText: 'Close',
+            fontSelectLabel: 'Select a font'
         }
     },
 
@@ -136,7 +137,9 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
             xtype: 'combo',
             width: 400,
             store: store,
-            fieldLabel: 'Select a font',
+            bind: {
+                fieldLabel: '{fontSelectLabel}'
+            },
             displayField: 'name',
             queryMode: 'local',
             listeners: {
@@ -146,13 +149,6 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
 
         me.bbar = [
             '->',
-            {
-                bind: {
-                    text: '{okBtnText}'
-                },
-                scope: me,
-                handler: me.onOkButtonClick
-            },
             {
                 bind: {
                     text: '{closeBtnText}'

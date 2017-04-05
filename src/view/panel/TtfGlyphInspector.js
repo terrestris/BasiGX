@@ -107,7 +107,7 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
     },
 
     /**
-     * @param {String} canvas The canvas id
+     * @param {String} canvas The canvas id or canvas element
      */
     enableHighDPICanvas: function(canvas) {
         if (typeof canvas === 'string') {
@@ -316,7 +316,7 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
     },
 
     /**
-     *
+     * Prepare the list of glyphs
      */
     prepareGlyphList: function() {
         var marker = document.getElementById('glyph-list-end');

@@ -24,6 +24,7 @@
  * @author Kai Volland
  */
 Ext.define('BasiGX.util.SLD', {
+    requires: ['BasiGX.util.Object'],
     statics: {
         jsonixContext: null,
         marshaller: null,
@@ -68,7 +69,7 @@ Ext.define('BasiGX.util.SLD', {
                 staticMe.toSldObject = function() {
                     Ext.log.error(msg);
                 };
-                staticMe.toSldObject = function() {
+                staticMe.toSldString = function() {
                     Ext.log.error(msg);
                 };
                 return;
@@ -104,6 +105,7 @@ Ext.define('BasiGX.util.SLD', {
             try {
                 return BasiGX.util.SLD.unmarshaller.unmarshalString(sldStr);
             } catch (e) {
+                Ext.log.warn('Could not unmarshal the SLD string!');
                 return null;
             }
         },
@@ -116,11 +118,6 @@ Ext.define('BasiGX.util.SLD', {
          * @param {Object} sldObject The SLD object to transform.
          */
         toSldString: function(sldObject) {
-            if (sldObject.value.namedLayerOrUserLayer[0]
-                    .namedStyleOrUserStyle[0].isDefault) {
-                delete sldObject.value.namedLayerOrUserLayer[0]
-                        .namedStyleOrUserStyle[0].isDefault;
-            }
             return BasiGX.util.SLD.marshaller.marshalString(sldObject);
         },
 
@@ -132,15 +129,13 @@ Ext.define('BasiGX.util.SLD', {
          * @param {Object} sldObject The SLD object to get the rules from.
          */
         rulesFromSldObject: function(sldObject) {
-            return sldObject.value.
-                namedLayerOrUserLayer[0].
-                namedStyleOrUserStyle[0].
-                featureTypeStyle[0].
-                rule;
+            return BasiGX.util.Object.getValue('rule', sldObject);
         },
 
         /**
-         * Gets a rule Object by the given name and SLD Object
+         * Gets a rule Object by the given name and SLD Object.
+         * As rule names are not unique, you may get an unexpected result as
+         * this method returns the first match
          *
          * @return {Object} rule The rule that was searched for.
          * @param {String} ruleName The name of the rule to search for.
@@ -163,7 +158,9 @@ Ext.define('BasiGX.util.SLD', {
 
         /**
          * Sets a rule Object by the given name and SLD Object.
-         * If no exisiting match is found, the rule will be created and added
+         * If no exisiting match is found, the rule will be created and added.
+         * As rule names are not unique, you may get an unexpected result as
+         * this method overrides the first match
          *
          * @return {Object} sldObject The modified SLD Object
          * @param {String} ruleName The name of the rule to modify or create.
@@ -207,11 +204,10 @@ Ext.define('BasiGX.util.SLD', {
          * @param {Array} rules An Array of SLD rules.
          */
         setRulesOfSldObject: function(sldObject, rules) {
-            sldObject.value.
-                namedLayerOrUserLayer[0].
-                namedStyleOrUserStyle[0].
-                featureTypeStyle[0].
-                rule = rules;
+            var ruleFromObject = BasiGX.util.Object.getValue('rule', sldObject);
+            if (ruleFromObject) {
+                ruleFromObject = rules;
+            }
             return sldObject;
         },
 

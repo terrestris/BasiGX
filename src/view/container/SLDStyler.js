@@ -58,7 +58,8 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         'BasiGX.view.panel.GraphicPool',
         'BasiGX.view.panel.FontSymbolPool',
         'BasiGX.util.Color',
-        'BasiGX.util.SLD'
+        'BasiGX.util.SLD',
+        'BasiGX.util.Object'
     ],
 
     viewModel: {
@@ -143,7 +144,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
             geoserverFontUrl: null
         },
         /**
-         * The mode indicates if we are styling a `point`, `line` or `poylgon`
+         * The mode indicates if we are styling a `point`, `line` or `polygon`
          */
         mode: 'point',
 
@@ -176,24 +177,22 @@ Ext.define('BasiGX.view.container.SLDStyler', {
     /**
      * @param {Object} config The configuration object for the SLD styler.
      */
-    initComponent: function(config) {
+    initComponent: function() {
         var sld = this.getSld();
         if (!sld) {
-            Ext.log.error('Component needs to be configured with a valid SLD');
+            Ext.log.warn('Component needs to be configured with a valid SLD');
             return;
         }
+        this.callParent();
         this.setSldObj(BasiGX.util.SLD.toSldObject(sld));
-        this.items = [];
 
         if (this.getMode() === 'point') {
-            this.items.push(this.getPointFieldset());
+            this.add(this.getPointFieldset());
         } else if (this.getMode() === 'line') {
-            this.items.push(this.getLineStringFieldset());
+            this.add(this.getLineStringFieldset());
         } else if (this.getMode() === 'polygon') {
-            this.items.push(this.getPolygonFieldset());
+            this.add(this.getPolygonFieldset());
         }
-
-        this.callParent([config]);
 
         // activate the graphic tab if necessary
         var usingExternalGraphic = false;
@@ -225,6 +224,10 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         var sldObj = me.getSldObj();
         var getVal = BasiGX.util.Object.getValue;
         var rule = BasiGX.util.SLD.getRuleByName(me.getRuleName(), sldObj);
+        var listenerConfig = {
+            change: me.updateSLDPreview,
+            scope: me
+        };
 
         if (!rule) {
             // take the first available rule to show an initial render
@@ -321,11 +324,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         value: radius,
                         minValue: 1,
                         maxValue: 50,
-                        listeners: {
-                            change: function(field, val) {
-                                me.updateSLDPreview();
-                            }
-                        }
+                        listeners: listenerConfig
                     }, {
                         xtype: 'numberfield',
                         bind: {
@@ -335,11 +334,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         value: strokeWidth,
                         minValue: 0,
                         maxValue: 50,
-                        listeners: {
-                            change: function(field, val) {
-                                me.updateSLDPreview();
-                            }
-                        }
+                        listeners: listenerConfig
                     }, {
                         xtype: 'container',
                         layout: 'hbox',
@@ -358,11 +353,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                             format: 'hex8',
                             value: strokeColor,
                             margin: '5 0 0 10',
-                            listeners: {
-                                change: function(field, val, oldVal) {
-                                    me.updateSLDPreview();
-                                }
-                            }
+                            listeners: listenerConfig
                         }]
                     }, {
                         xtype: 'container',
@@ -382,11 +373,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                             format: 'hex8',
                             margin: '0 0 0 10',
                             value: fillColor,
-                            listeners: {
-                                change: function(field, val, oldVal) {
-                                    me.updateSLDPreview();
-                                }
-                            }
+                            listeners: listenerConfig
                         }]
                     }]
                 }, {
@@ -427,12 +414,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         minValue: 0,
                         maxValue: 100,
                         increment: 10,
-                        listeners: {
-                            change: function() {
-                                me.updateSLDPreview();
-                            },
-                            scope: me
-                        }
+                        listeners: listenerConfig
                     }, {
                         xtype: 'slider',
                         bind: {
@@ -442,12 +424,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         value: graphicRotation,
                         minValue: 0,
                         maxValue: 360,
-                        listeners: {
-                            change: function() {
-                                me.updateSLDPreview();
-                            },
-                            scope: me
-                        }
+                        listeners: listenerConfig
                     }, {
                         xtype: 'slider',
                         bind: {
@@ -458,12 +435,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         increment: 1,
                         minValue: 1,
                         maxValue: 100,
-                        listeners: {
-                            change: function() {
-                                me.updateSLDPreview();
-                            },
-                            scope: me
-                        }
+                        listeners: listenerConfig
                     }, {
                         xtype: 'slider',
                         bind: {
@@ -474,11 +446,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         disabled: externalGraphicSrc ? true : false,
                         minValue: 0,
                         maxValue: 50,
-                        listeners: {
-                            change: function(field, val) {
-                                me.updateSLDPreview();
-                            }
-                        }
+                        listeners: listenerConfig
                     }, {
                         xtype: 'container',
                         layout: 'hbox',
@@ -499,11 +467,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                             format: 'hex8',
                             value: strokeColor,
                             margin: '5 0 0 10',
-                            listeners: {
-                                change: function(field, val, oldVal) {
-                                    me.updateSLDPreview();
-                                }
-                            }
+                            listeners: listenerConfig
                         }]
                     }, {
                         xtype: 'container',
@@ -526,21 +490,11 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                             format: 'hex8',
                             margin: '0 0 0 10',
                             value: fillColor,
-                            listeners: {
-                                change: function(field, val, oldVal) {
-                                    me.updateSLDPreview();
-                                }
-                            }
+                            listeners: listenerConfig
                         }]
                     }]
                 }]
-            }, {
-                xtype: 'panel',
-                border: false,
-                layout: 'fit',
-                width: 100,
-                items: [me.createSLDPreviewPanel()]
-            }]
+            }, me.createSLDPreviewPanel()]
         };
         return fs;
     },
@@ -557,6 +511,10 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         var sldObj = me.getSldObj();
         var getVal = BasiGX.util.Object.getValue;
         var rule = BasiGX.util.SLD.getRuleByName(me.getRuleName(), sldObj);
+        var listenerConfig = {
+            change: me.updateSLDPreview,
+            scope: me
+        };
 
         if (!rule) {
             // take the first available rule to show an initial render
@@ -604,11 +562,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                     name: 'stroke-width',
                     minValue: 0,
                     maxValue: 50,
-                    listeners: {
-                        change: function(field, val) {
-                            me.updateSLDPreview();
-                        }
-                    }
+                    listeners: listenerConfig
                 }, {
                     xtype: 'container',
                     layout: 'hbox',
@@ -627,20 +581,10 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         value: strokeColor,
                         name: 'stroke',
                         margin: '5 0 0 10',
-                        listeners: {
-                            change: function(field, val) {
-                                me.updateSLDPreview();
-                            }
-                        }
+                        listeners: listenerConfig
                     }]
                 }]
-            }, {
-                xtype: 'panel',
-                border: false,
-                layout: 'fit',
-                width: 100,
-                items: [me.createSLDPreviewPanel()]
-            }]
+            }, me.createSLDPreviewPanel()]
         };
         return fs;
     },
@@ -657,6 +601,10 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         var sldObj = me.getSldObj();
         var getVal = BasiGX.util.Object.getValue;
         var rule = BasiGX.util.SLD.getRuleByName(me.getRuleName(), sldObj);
+        var listenerConfig = {
+            change: me.updateSLDPreview,
+            scope: me
+        };
 
         if (!rule) {
             // take the first available rule to show an initial render
@@ -749,11 +697,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         name: 'stroke-width',
                         minValue: 0,
                         maxValue: 50,
-                        listeners: {
-                            change: function(field, val) {
-                                me.updateSLDPreview();
-                            }
-                        }
+                        listeners: listenerConfig
                     }, {
                         xtype: 'container',
                         layout: 'hbox',
@@ -772,11 +716,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                             value: strokeColor,
                             name: 'stroke',
                             margin: '5 0 0 10',
-                            listeners: {
-                                change: function(field, val) {
-                                    me.updateSLDPreview();
-                                }
-                            }
+                            listeners: listenerConfig
                         }]
                     }, {
                         xtype: 'container',
@@ -796,11 +736,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                             margin: '0 0 0 10',
                             value: fillColor,
                             name: 'fill',
-                            listeners: {
-                                change: function(field, val) {
-                                    me.updateSLDPreview();
-                                }
-                            }
+                            listeners: listenerConfig
                         }]
                     }]
                 }, {
@@ -844,12 +780,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         minValue: 0,
                         maxValue: 100,
                         increment: 10,
-                        listeners: {
-                            change: function() {
-                                me.updateSLDPreview();
-                            },
-                            scope: me
-                        }
+                        listeners: listenerConfig
                     },
                     {
                         xtype: 'slider',
@@ -861,12 +792,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         disabled: externalGraphicSrc ? true : false,
                         minValue: 0,
                         maxValue: 360,
-                        listeners: {
-                            change: function() {
-                                me.updateSLDPreview();
-                            },
-                            scope: me
-                        }
+                        listeners: listenerConfig
                     }, {
                         xtype: 'slider',
                         bind: {
@@ -877,12 +803,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         increment: 1,
                         minValue: 1,
                         maxValue: 200,
-                        listeners: {
-                            change: function() {
-                                me.updateSLDPreview();
-                            },
-                            scope: me
-                        }
+                        listeners: listenerConfig
                     }, {
                         xtype: 'slider',
                         bind: {
@@ -893,11 +814,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         disabled: externalGraphicSrc ? true : false,
                         minValue: 0,
                         maxValue: 10,
-                        listeners: {
-                            change: function(field, val) {
-                                me.updateSLDPreview();
-                            }
-                        }
+                        listeners: listenerConfig
                     }, {
                         xtype: 'container',
                         layout: 'hbox',
@@ -918,11 +835,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                             format: 'hex8',
                             value: strokeColor,
                             margin: '5 0 0 10',
-                            listeners: {
-                                change: function(field, val, oldVal) {
-                                    me.updateSLDPreview();
-                                }
-                            }
+                            listeners: listenerConfig
                         }]
                     }, {
                         xtype: 'container',
@@ -944,21 +857,11 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                             format: 'hex8',
                             margin: '0 0 0 10',
                             value: fillColor,
-                            listeners: {
-                                change: function(field, val, oldVal) {
-                                    me.updateSLDPreview();
-                                }
-                            }
+                            listeners: listenerConfig
                         }]
                     }]
                 }]
-            }, {
-                xtype: 'panel',
-                border: false,
-                layout: 'fit',
-                width: 200,
-                items: [me.createSLDPreviewPanel()]
-            }]
+            }, me.createSLDPreviewPanel()]
         };
         return fs;
     },
@@ -973,7 +876,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
             xtype: 'image',
             name: 'sldpreview-' + this.getMode(),
             src: null,
-            width: 80,
+            width: 200,
             minHeight: 80
         };
         return panel;
