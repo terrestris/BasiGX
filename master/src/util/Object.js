@@ -44,7 +44,6 @@ Ext.define('BasiGX.util.Object', {
          *     found.
          */
         getValue: function(queryKey, queryObject) {
-            var me = this;
             var queryMatch;
 
             // if weren't called with an queryObject, get the global application
@@ -98,7 +97,7 @@ Ext.define('BasiGX.util.Object', {
 
                 // if the value is an object, let's call ourself recursively
                 if (Ext.isObject(value)) {
-                    queryMatch = me.getValue(queryKey, value);
+                    queryMatch = BasiGX.util.Object.getValue(queryKey, value);
                     if (queryMatch) {
                         return queryMatch;
                     }
@@ -110,7 +109,8 @@ Ext.define('BasiGX.util.Object', {
                     for (var i = 0; i < value.length; i++) {
                         var val = value[i];
                         if (Ext.isObject(val)) {
-                            queryMatch = me.getValue(queryKey, val);
+                            queryMatch = BasiGX.util.Object.getValue(
+                                queryKey, val);
                             if (queryMatch) {
                                 return queryMatch;
                             }
