@@ -168,7 +168,7 @@ describe('BasiGX.util.SLD', function() {
             var obj = BasiGX.util.SLD.toSldObject(sld);
             var ruleName = 'rule1';
             var symbolizerObj = {
-                externalGraphicSrc: 'http://localhost/pip.png',
+                externalGraphicSrc: 'http://localhost/ajax-loader.gif',
                 graphicOpacity: '0.9',
                 graphicRotation: '269',
                 graphicSize: '57'

@@ -65,7 +65,7 @@ describe('BasiGX.view.container.SLDStyler', function() {
                 url: 'rest/images/',
                 method: 'DELETE'
             },
-            geoServerUrl: '../resources/pip.png',
+            geoServerUrl: '../resources/ajax-loader.gif',
             geoserverFontListUrl: null,
             geoserverFontUrl: null
         },
