@@ -252,8 +252,15 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
             method: me.getBackendUrls().graphicDelete.method || 'POST',
             headers: token,
             success: function(response) {
-                var json = Ext.decode(response.responseText);
-                if (json.success) {
+                if (!Ext.isEmpty(response.responseText)) {
+                    var json = Ext.decode(response.responseText);
+                    if (json.success) {
+                        me.pictureView.getStore().load();
+                        BasiGX.info(
+                            me.getViewModel().get('graphicDeleteInfoSuccess')
+                        );
+                    }
+                } else if (response.status === 204) {
                     me.pictureView.getStore().load();
                     BasiGX.info(
                         me.getViewModel().get('graphicDeleteInfoSuccess')
@@ -331,7 +338,6 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
                             Ext.log.warn('Please implement your own ' +
                                 'delete callback');
                         }
-                        me.close();
                     } else {
                         BasiGX.info(
                             me.getViewModel().get('msgDeletionCancelled')
