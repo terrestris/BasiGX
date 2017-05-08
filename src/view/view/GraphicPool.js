@@ -47,7 +47,7 @@ Ext.define('BasiGX.view.view.GraphicPool', {
     /**
      *
      */
-    autoScroll: true,
+    scrollable: true,
 
     /**
      * readonly

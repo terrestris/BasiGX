@@ -226,8 +226,21 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
                         BasiGX.error(me.getViewModel().get('uploadErrorText'));
                     }
                 },
-                failure: function() {
-                    BasiGX.error(me.getViewModel().get('uploadErrorText'));
+                failure: function(form, action) {
+                    // for some reasons we come here even in case of success
+                    // (with HTTP Status 200 and a valid response)
+                    var response = action.response;
+                    // for another unknown reason,
+                    // we'll have to decode twice here!?
+                    var responseJson =
+                            Ext.decode(Ext.decode(response.responseText));
+
+                    if (response.status === 200 &&
+                            responseJson.success === true) {
+                        me.pictureView.getStore().load();
+                    } else {
+                        BasiGX.error(me.getViewModel().get('uploadErrorText'));
+                    }
                 }
             });
         }
