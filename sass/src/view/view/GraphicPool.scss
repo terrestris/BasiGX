@@ -1,0 +1,13 @@
+.graphic-pool-view .thumb {
+    padding: 3px;
+}
+
+.graphic-pool-view .thumb-wrap {
+    /*height: 90px;*/
+    float: left;
+    margin: 4px;
+    margin-right: 0;
+    padding: 5px;
+    -webkit-transition: background-color 1s, border-color 0.5s;
+    transition: background-color 1s, border-color 0.5s;
+}
