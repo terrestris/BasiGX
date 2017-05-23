@@ -45,9 +45,24 @@ Ext.define('BasiGX.view.view.GraphicPool', {
     border: false,
 
     /**
-     *
+     * shall the dataview be scrollable
      */
-    autoScroll: true,
+    scrollable: true,
+
+    /**
+     * the default height of the dataview
+     */
+    height: '100%',
+
+    /**
+     * the default width of the dataview
+     */
+    width: '100%',
+
+    /**
+     * the default class
+     */
+    cls: 'graphic-pool-view',
 
     /**
      * readonly
