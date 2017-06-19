@@ -22,8 +22,10 @@ Ext.define('BasiGX.util.Geometry', {
 
         /**
          * Compares two ol.geom.Geometries.
-         * @param {ol.geom.Geometry} geometry1 The first geometry for the comparison.
-         * @param {ol.geom.Geometry} geometry2 The second geometry for the comparison.
+         * @param {ol.geom.Geometry} geometry1 The first geometry for the
+         *                                     comparison.
+         * @param {ol.geom.Geometry} geometry2 The second geometry for the
+         *                                     comparison.
          * @return {Boolean} Returns true if the WKT-representations are
          *                   identical.
          */
