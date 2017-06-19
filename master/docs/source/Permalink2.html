@@ -90,9 +90,18 @@ Ext.define('BasiGX.view.form.Permalink', {
             textfield.setValue(permalink);
         }
     }, {
-        hidden: !BasiGX.util.CopyClipboard.copyToClipboardSupported,
         bind: {
             text: '{copyToClipboardBtnText}'
+        },
+        listeners: {
+            boxready: function(btn) {
+                btn.setHidden(
+                        !BasiGX.util.CopyClipboard.copyToClipboardSupported);
+            },
+            initialize: function(btn) {
+                btn.setHidden(
+                        !BasiGX.util.CopyClipboard.copyToClipboardSupported);
+            }
         },
         handler: function(btn) {
             var textfield = btn.up('form').down('textfield');
