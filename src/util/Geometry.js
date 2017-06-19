@@ -1,4 +1,4 @@
-/* Copyright (c) 2016-present terrestris GmbH & Co. KG
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +22,8 @@ Ext.define('BasiGX.util.Geometry', {
 
         /**
          * Compares two ol.geom.Geometries.
-         *
-         * @param {ol.geom.Geometry} geometry1
-         * @param {ol.geom.Geometry} geometry2
+         * @param {ol.geom.Geometry} geometry1 The first geometry for the comparison.
+         * @param {ol.geom.Geometry} geometry2 The second geometry for the comparison.
          * @return {Boolean} Returns true if the WKT-representations are
          *                   identical.
          */
