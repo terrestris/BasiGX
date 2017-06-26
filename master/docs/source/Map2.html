@@ -173,6 +173,9 @@ Ext.define('BasiGX.view.component.Map', {
 
         me.addControls();
 
+        if (Ext.isFunction(BasiGX.util.ConfigParser.postprocessMap)) {
+            BasiGX.util.ConfigParser.postprocessMap(me.appContext);
+        }
     },
 
 <span id='BasiGX-view-component-Map-method-addControls'>    addControls: function() {
