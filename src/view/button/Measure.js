@@ -545,8 +545,10 @@ Ext.define('BasiGX.view.button.Measure', {
         me.sketch = null;
 
         // Fix doubled label for lastPoint of line
-        me.measureTooltipElement = null;
-        me.createMeasureTooltip();
+        if (me.showMeasureInfoOnClickedPoints && me.measureType === 'line') {
+            me.measureTooltipElement = null;
+            me.createMeasureTooltip();
+        }
     },
 
     /**
