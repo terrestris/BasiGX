@@ -75,28 +75,62 @@ Ext.define('BasiGX.util.Animate', {
                 var flashGeom = feature.getGeometry().clone();
                 var elapsed = frameState.time - start;
                 var elapsedRatio = elapsed / duration;
-             // radius will be 5 at start and 30 at end.
+                // radius will be 5 at start and 30 at end.
                 var radius = ol.easing.easeOut(elapsedRatio) * 25 + 5;
                 var opacity = ol.easing.easeOut(1 - elapsedRatio);
                 var flashStyle;
 
                 if (vectorContext.setStyle &amp;&amp; vectorContext.drawGeometry) {
-                 // for ol3 versions from v3.15.0
-                    flashStyle = new ol.style.Style({
-                        image: new ol.style.Circle({
-                            radius: radius,
-                            snapToPixel: false,
-                            stroke: new ol.style.Stroke({
-                                color: 'rgba(255, 0, 0, ' + opacity + ')',
-                                width: 4,
-                                opacity: opacity
+                    // for ol3 versions from v3.15.0
+                    var isPoint = flashGeom instanceof ol.geom.Point ||
+                        flashGeom instanceof ol.geom.MultiPoint;
+                    var isLine = flashGeom instanceof ol.geom.LineString ||
+                        flashGeom instanceof ol.geom.MultiLineString;
+                    var isPoly = flashGeom instanceof ol.geom.Polygon ||
+                        flashGeom instanceof ol.geom.MultiPolygon;
+
+                    var r = 255;
+                    var g = parseInt((200 * opacity), 10);
+                    var b = 0;
+                    var color = 'rgba(' +
+                        r + ',' +
+                        g + ',' +
+                        b + ',' +
+                        opacity +
+                    ')';
+                    if (isPoint) {
+                        flashStyle = new ol.style.Style({
+                            image: new ol.style.Circle({
+                                radius: radius,
+                                snapToPixel: false,
+                                stroke: new ol.style.Stroke({
+                                    color: color,
+                                    width: 4,
+                                    opacity: opacity
+                                })
                             })
-                        })
-                    });
+                        });
+                    } else if (isLine) {
+                        radius = ol.easing.easeOut(elapsedRatio) * 12;
+                        flashStyle = new ol.style.Style({
+                            stroke: new ol.style.Stroke({
+                                color: color,
+                                width: radius
+                            })
+                        });
+                    } else if (isPoly) {
+                        radius = ol.easing.easeOut(elapsedRatio) * 10;
+                        flashStyle = new ol.style.Style({
+                            stroke: new ol.style.Stroke({
+                                color: color,
+                                width: radius
+                            })
+                        });
+                    }
                     vectorContext.setStyle(flashStyle);
                     vectorContext.drawGeometry(flashGeom, null);
                 } else {
-                 // for ol3 versions older v3.15.0
+                    // for ol3 versions older v3.15.0
                     flashStyle = new ol.style.Circle({
                         radius: radius,
                         snapToPixel: false,
