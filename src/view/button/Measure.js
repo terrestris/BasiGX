@@ -30,9 +30,9 @@ Ext.define('BasiGX.view.button.Measure', {
         'Ext.app.ViewModel'
     ],
 
-   /**
-    *
-    */
+    /**
+     *
+     */
     viewModel: {
         data: {
             textline: 'Strecke messen',
@@ -473,7 +473,7 @@ Ext.define('BasiGX.view.button.Measure', {
         if (!Ext.isEmpty(me.sketch)) {
             var geom = me.sketch.getGeometry();
             var value = me.measureType === 'line' ? me.formatLength(geom) :
-                    me.formatArea(geom);
+                me.formatArea(geom);
             if (parseInt(value, 10) > 0) {
                 var div = Ext.dom.Helper.createDom('<div>');
                 div.className = CSS.TOOLTIP + ' ' + CSS.TOOLTIP_STATIC;
@@ -531,27 +531,24 @@ Ext.define('BasiGX.view.button.Measure', {
             ol.Observable.unByKey(me.eventKeys.click);
         }
 
-//        Left in for historic purposes, I cannot say what exactly the effects
-//        of this are.
-//
-//        var CSS = BasiGX.view.button.Measure.CSS_CLASSES;
-//        if (me.showMeasureInfoOnClickedPoints && me.measureType === 'line') {
-//            me.removeMeasureTooltip();
-//        } else {
-//            me.measureTooltipElement.className = CSS.TOOLTIP +
-//                ' ' + CSS.TOOLTIP_STATIC;
-//            me.measureTooltip.setOffset([0, -7]);
-//        }
+        // Fix doubled label for lastPoint of line
+        var CSS = BasiGX.view.button.Measure.CSS_CLASSES;
+        if (me.showMeasureInfoOnClickedPoints && me.measureType === 'line') {
+            me.removeMeasureTooltip();
+        } else {
+            me.measureTooltipElement.className = CSS.TOOLTIP +
+                ' ' + CSS.TOOLTIP_STATIC;
+            me.measureTooltip.setOffset([0, -7]);
+        }
 
         // unset sketch
         me.sketch = null;
 
-//        Left in for historic purposes, I cannot say what exactly the effects
-//        of this are.
-//
-//        // unset tooltip so that a new one can be created
-//        me.measureTooltipElement = null;
-//        me.createMeasureTooltip();
+        // Fix doubled label for lastPoint of line
+        if (me.showMeasureInfoOnClickedPoints && me.measureType === 'line') {
+            me.measureTooltipElement = null;
+            me.createMeasureTooltip();
+        }
     },
 
     /**
@@ -704,7 +701,7 @@ Ext.define('BasiGX.view.button.Measure', {
         var output;
         if (me.switchToKmOnLargeValues && length > 1000) {
             output = (Math.round(length / 1000 * decimalHelper) /
-               decimalHelper) + ' ' + 'km';
+                decimalHelper) + ' ' + 'km';
         } else {
             output = (Math.round(length * decimalHelper) / decimalHelper) +
                 ' m';
@@ -737,7 +734,7 @@ Ext.define('BasiGX.view.button.Measure', {
         var output;
         if (me.switchToKmOnLargeValues && area > 10000) {
             output = (Math.round(area / 1000000 * decimalHelper) /
-                    decimalHelper) + ' km<sup>2</sup>';
+                decimalHelper) + ' km<sup>2</sup>';
         } else {
             output = (Math.round(area * decimalHelper) / decimalHelper) +
                 ' ' + 'm<sup>2</sup>';
