@@ -550,7 +550,7 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
                     me.fireEvent('tagfinderResponse', tagArray);
                 } else {
                     BasiGX.util.MsgBox.info(me.getViewModel().get(
-                            'noMatchesFoundErrText'));
+                        'noMatchesFoundErrText'));
                 }
 
             },

@@ -19,7 +19,7 @@ describe('BasiGX.util.Application', function() {
 
         it('does not throw on getAppContext call', function() {
             expect(BasiGX.util.Application.getAppContext).
-            to.not.throwException();
+                to.not.throwException();
         });
         it('returns as expected on getAppContext call', function() {
             var retVal = BasiGX.util.Application.getAppContext();

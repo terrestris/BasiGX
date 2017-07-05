@@ -217,9 +217,9 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid', {
             var projection = olView.getProjection().getCode();
             var bbox = map.getView().calculateExtent(map.getSize());
             var transformedBbox = ol.proj.transformExtent(bbox, projection,
-                    'EPSG:4326');
+                'EPSG:4326');
             store.getProxy().setExtraParam('viewboxlbrt',
-                    transformedBbox.toString());
+                transformedBbox.toString());
         } else {
             store.getProxy().setExtraParam('viewboxlbrt', null);
         }

@@ -21,7 +21,7 @@ describe('BasiGX.util.Object', function() {
 
         it('does throw on empty getValue call', function() {
             expect(BasiGX.util.Object.getValue).
-            to.throwError();
+                to.throwError();
         });
         it('returns as expected on getValue call', function() {
 
@@ -29,11 +29,11 @@ describe('BasiGX.util.Object', function() {
             expect(retVal1).to.be('first');
 
             var retVal2 = BasiGX.util.Object.getValue('firstNested/level',
-                    testObject);
+                testObject);
             expect(retVal2).to.be('second');
 
             var retVal3 = BasiGX.util.Object.getValue('secondLevel',
-                    testObject);
+                testObject);
             expect(retVal3).to.be(true);
         });
     });

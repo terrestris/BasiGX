@@ -94,7 +94,7 @@ Ext.define('BasiGX.view.grid.GazetteerGrid', {
         },
         iconCls: 'fa fa-refresh fa-2x'
     },
-        '->',
+    '->',
     {
         xtype: 'button',
         name: 'directionsbutton',
@@ -246,7 +246,7 @@ Ext.define('BasiGX.view.grid.GazetteerGrid', {
      */
     showDirections: function() {
         var win = Ext.ComponentQuery.query(
-                'window[name="gazetteerdirections"]')[0];
+            'window[name="gazetteerdirections"]')[0];
         if (win) {
             if (win.isVisible()) {
                 BasiGX.util.Animate.shake(win);

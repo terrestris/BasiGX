@@ -99,13 +99,13 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
                 var rotate = ol.animation.rotate({
                     rotation: olView.getRotation()
                 });
-                // before we actually render, animate to the new values using the
-                // methods defined above
+                // before we actually render, animate to the new values using
+                // the methods defined above
                 olMap.beforeRender(pan, zoom, rotate);
 
-                // Next: trigger a view change by setting `center`, `rotation` and
-                // either `zoom` (tried first) or `resolution`. The animation
-                // methods will transition smoothly.
+                // Next: trigger a view change by setting `center`, `rotation`
+                // and either `zoom` (tried first) or `resolution`. The
+                // animation methods will transition smoothly.
                 olView.setCenter(targetCenter);
                 olView.setRotation(targetRotation);
                 if (targetZoom) {

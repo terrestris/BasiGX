@@ -131,14 +131,14 @@ Ext.define('BasiGX.util.Animate', {
                     ol.Observable.unByKey(listenerKey);
                     return;
                 }
-             // tell OL3 to continue postcompose animation
+                // tell OL3 to continue postcompose animation
                 frameState.animate = true;
             }
             listenerKey = map.on('postcompose', animate);
             return listenerKey;
         },
 
-       /**
+        /**
         * Moves / translates an `ol.Feature` to the given `pixel` delta in
         * in the end.
         * the given `duration` in ms, using the given style, calling a `doneFn`
@@ -183,7 +183,7 @@ Ext.define('BasiGX.util.Animate', {
                    vectorContext.setImageStyle &&
                    vectorContext.drawPointGeometry) {
                     vectorContext.setFillStrokeStyle(
-                               style.getFill(), style.getStroke());
+                        style.getFill(), style.getStroke());
                     vectorContext.setImageStyle(style.getImage());
                     if (geometry instanceof ol.geom.Point) {
                         vectorContext.drawPointGeometry(geometry, null);
@@ -202,7 +202,7 @@ Ext.define('BasiGX.util.Animate', {
                     doneFn(featureToMove);
                     return;
                 }
-               // tell OL3 to continue postcompose animation
+                // tell OL3 to continue postcompose animation
                 frameState.animate = true;
 
                 actualFrames++;

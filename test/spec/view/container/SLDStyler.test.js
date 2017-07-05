@@ -92,9 +92,9 @@ describe('BasiGX.view.container.SLDStyler', function() {
             expect(fieldsetName).to.eql('polygonstyle');
         });
         it('generates SLD from form values', function() {
-            var sld = styler.getSldFromFormValues();
-            expect(sld).to.not.be(undefined);
-            expect(sld).to.contain('<sld');
+            var got = styler.getSldFromFormValues();
+            expect(got).to.not.be(undefined);
+            expect(got).to.contain('<sld');
         });
         it('reflects form value changes in SLD', function() {
             var opacitySlider = styler.down('slider[name=graphic-opacity]');
@@ -106,8 +106,8 @@ describe('BasiGX.view.container.SLDStyler', function() {
             var strokeColor = styler.down('colorbutton[name=stroke]');
             strokeColor.setValue('#ff001100');
 
-            var sld = styler.getSldFromFormValues();
-            var obj = BasiGX.util.SLD.toSldObject(sld);
+            var got = styler.getSldFromFormValues();
+            var obj = BasiGX.util.SLD.toSldObject(got);
             var graphic = obj.value.namedLayerOrUserLayer[0]
                 .namedStyleOrUserStyle[0].featureTypeStyle[0].rule[0]
                 .symbolizer[0].value.fill.graphicFill.graphic;

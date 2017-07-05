@@ -167,7 +167,7 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
             this.cellHeight - 1
         );
         var glyph = this.font.glyphs.get(
-                glyphIndex);
+            glyphIndex);
         var glyphWidth = glyph.advanceWidth *
                 this.fontScale;
         var xmin = (this.cellWidth - glyphWidth) / 2;

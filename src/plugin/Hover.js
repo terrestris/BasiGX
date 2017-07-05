@@ -180,7 +180,7 @@ Ext.define('BasiGX.plugin.Hover', {
         }
     },
 
-   /**
+    /**
     * Bound to either a collection- or select-interaction-event, this method
     * fires the `hoverfeaturesclick` event on the map component.
     *
@@ -331,9 +331,9 @@ Ext.define('BasiGX.plugin.Hover', {
                     me.requestAsynchronously(url, function(resp) {
                         // TODO: replace evt/coords with real response geometry
                         var respFeatures = (new ol.format.GeoJSON())
-                                .readFeatures(resp.responseText);
+                            .readFeatures(resp.responseText);
                         var respProjection = (new ol.format.GeoJSON())
-                                .readProjection(resp.responseText);
+                            .readProjection(resp.responseText);
 
                         me.showHoverFeature(
                             layer, respFeatures, respProjection
@@ -342,7 +342,7 @@ Ext.define('BasiGX.plugin.Hover', {
                         Ext.each(respFeatures, function(feature) {
                             feature.set('layer', layer);
                             var featureStyle = me.highlightStyleFunction(
-                                    feature, resolution, pixelValues);
+                                feature, resolution, pixelValues);
                             feature.setStyle(featureStyle);
                             hoverFeatures.push(feature);
                         });
@@ -565,22 +565,22 @@ Ext.define('BasiGX.plugin.Hover', {
             new ol.style.Style({
                 fill: new ol.style.Fill({
                     color: dynamicHoverColor ?
-                            me.transparify(baseColor, 0.3) : hoverColor
+                        me.transparify(baseColor, 0.3) : hoverColor
                 }),
                 image: new ol.style.Circle({
                     radius: radius,
                     fill: new ol.style.Fill({
                         color: dynamicHoverColor ?
-                                me.transparify(baseColor, 0.4) : hoverColor
+                            me.transparify(baseColor, 0.4) : hoverColor
                     }),
                     stroke: new ol.style.Stroke({
                         color: dynamicHoverColor ?
-                                me.transparify(baseColor, 0.6) : hoverColor
+                            me.transparify(baseColor, 0.6) : hoverColor
                     })
                 }),
                 stroke: new ol.style.Stroke({
                     color: dynamicHoverColor ?
-                            me.transparify(baseColor, 0.5) : hoverColor,
+                        me.transparify(baseColor, 0.5) : hoverColor,
                     width: 5
                 }),
                 text: new ol.style.Text({
@@ -717,11 +717,11 @@ Ext.define('BasiGX.plugin.Hover', {
                         // Remove the suffixes and find the matching attribute
                         // column
                         var placeHolderPrefixLength = decodeURIComponent(
-                                placeHolderPrefix).length;
+                            placeHolderPrefix).length;
                         var placeHolderSuffixLength = decodeURIComponent(
-                                placeHolderSuffix).length;
+                            placeHolderSuffix).length;
                         var placeHolderName = res.slice(placeHolderPrefixLength,
-                                res.length - placeHolderSuffixLength);
+                            res.length - placeHolderSuffixLength);
                         if (placeHolderName === k) {
                             hoverTemplate = hoverTemplate.replace(res, v);
                             return false;

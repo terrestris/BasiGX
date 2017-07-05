@@ -119,28 +119,28 @@ describe('BasiGX.util.SLD', function() {
                 .symbolizer[0].value.graphic;
             expect(graphic.externalGraphicOrMark[0]
                 .fill.cssParameter[0].content[0]).to.equal(
-                    symbolizerObj.fillColor);
+                symbolizerObj.fillColor);
             expect(graphic.externalGraphicOrMark[0]
                 .fill.cssParameter[1].content[0]).to.equal(
-                    symbolizerObj.fillOpacity);
+                symbolizerObj.fillOpacity);
             expect(graphic.externalGraphicOrMark[0]
                 .wellKnownName.content[0]).to.equal(
-                    symbolizerObj.fontAndUniCode);
+                symbolizerObj.fontAndUniCode);
             expect(graphic.opacity.content[0]).to.equal(
                 symbolizerObj.graphicOpacity);
             expect(graphic.rotation.content[0]).to.equal(
-                    symbolizerObj.graphicRotation);
+                symbolizerObj.graphicRotation);
             expect(graphic.size.content[0]).to.equal(
-                    symbolizerObj.graphicSize);
+                symbolizerObj.graphicSize);
             expect(graphic.externalGraphicOrMark[0]
                 .stroke.cssParameter[0].content[0]).to.equal(
-                    symbolizerObj.strokeColor);
+                symbolizerObj.strokeColor);
             expect(graphic.externalGraphicOrMark[0]
                 .stroke.cssParameter[1].content[0]).to.equal(
-                  symbolizerObj.strokeWidth);
+                symbolizerObj.strokeWidth);
             expect(graphic.externalGraphicOrMark[0]
                 .stroke.cssParameter[2].content[0]).to.equal(
-                  symbolizerObj.strokeOpacity);
+                symbolizerObj.strokeOpacity);
         });
         it('updates a line symbolizer correctly', function() {
             var obj = BasiGX.util.SLD.toSldObject(sld);
@@ -158,11 +158,11 @@ describe('BasiGX.util.SLD', function() {
                 .namedStyleOrUserStyle[0].featureTypeStyle[0].rule[0]
                 .symbolizer[0].value.stroke;
             expect(stroke.cssParameter[0].content[0]).to.equal(
-                    symbolizerObj.strokeColor);
+                symbolizerObj.strokeColor);
             expect(stroke.cssParameter[1].content[0]).to.equal(
-                  symbolizerObj.strokeWidth);
+                symbolizerObj.strokeWidth);
             expect(stroke.cssParameter[2].content[0]).to.equal(
-                  symbolizerObj.strokeOpacity);
+                symbolizerObj.strokeOpacity);
         });
         it('updates a polygon symbolizer correctly', function() {
             var obj = BasiGX.util.SLD.toSldObject(sld);
@@ -182,13 +182,13 @@ describe('BasiGX.util.SLD', function() {
                 .symbolizer[0].value.fill.graphicFill.graphic;
             expect(graphic.externalGraphicOrMark[0]
                 .onlineResource.href).to.equal(
-                    symbolizerObj.externalGraphicSrc);
+                symbolizerObj.externalGraphicSrc);
             expect(graphic.opacity.content[0]).to.equal(
                 symbolizerObj.graphicOpacity);
             expect(graphic.rotation.content[0]).to.equal(
-                    symbolizerObj.graphicRotation);
+                symbolizerObj.graphicRotation);
             expect(graphic.size.content[0]).to.equal(
-                    symbolizerObj.graphicSize);
+                symbolizerObj.graphicSize);
         });
     });
 });
