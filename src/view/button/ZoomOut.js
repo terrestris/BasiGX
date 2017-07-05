@@ -71,6 +71,7 @@ Ext.define('BasiGX.view.button.ZoomOut', {
 
             olView = olMap.getView();
 
+            // This if is need for backwards comaptibility to ol3
             if (ol.animation) {
                 zoom = ol.animation.zoom({
                     resolution: olView.getResolution(),
