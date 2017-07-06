@@ -34,52 +34,52 @@
 </span> * Combo for changing the language of a BasiGX based application out of a list
  * of predefined languages on-the-fly.
  *
- * @example &lt;caption&gt;Basic usage:&lt;/caption&gt;
- * {
- *     xtype: 'basigx-combo-language'
- * }
+ * **Basic usage:**
+ *
+ *     {
+ *         xtype: 'basigx-combo-language'
+ *     }
  *
  * The config object of this component can be adapted to the surrounding
  * environment, where you want to set the preselected language, available
  * languages and the path template to the language files.
  *
- * * @example &lt;caption&gt;Real world usage:&lt;/caption&gt;
- * {
- *     xtype: 'basigx-combo-language',
- *     config: {
- *         defaultLanguage: 'en',
- *         languages: [{
- *             code: 'de',
- *             name: 'DE'
- *         }, {
- *             code: 'en',
- *             name: 'EN'
- *         }],
- *         appLocaleUrlTpl: './resources/locale/app-locale-{0}.json'
- *     }
- * }
+ * **Real world usage:**
  *
- * &lt;b&gt;Important:&lt;/b&gt; The language file must be a valid JSON file following the
+ *     {
+ *         xtype: 'basigx-combo-language',
+ *         config: {
+ *             defaultLanguage: 'en',
+ *             languages: [{
+ *                 code: 'de',
+ *                 name: 'DE'
+ *             }, {
+ *                 code: 'en',
+ *                 name: 'EN'
+ *             }],
+ *             appLocaleUrlTpl: './resources/locale/app-locale-{0}.json'
+ *         }
+ *     }
+ *
+ * **Important:** The language file must be a valid JSON file following the
  * syntax stated below (Remove the comments in your language file):
  *
- * &lt;code&gt;
- * {
- *     // full class name of the component
- *     &quot;BasiGX.view.button.AddWms&quot;: {
- *         &quot;config&quot;: {
- *             // the viewModel object containing the language strings
- *             &quot;data&quot;: {
- *                 &quot;tooltip&quot;: &quot;Open Add-WMS tool&quot;,
- *                 &quot;text&quot;: &quot;WMS&quot;,
- *                 &quot;windowTitle&quot;: &quot;Add WMS&quot;
+ *     {
+ *         // full class name of the component
+ *         &quot;BasiGX.view.button.AddWms&quot;: {
+ *             &quot;config&quot;: {
+ *                 // the viewModel object containing the language strings
+ *                 &quot;data&quot;: {
+ *                     &quot;tooltip&quot;: &quot;Open Add-WMS tool&quot;,
+ *                     &quot;text&quot;: &quot;WMS&quot;,
+ *                     &quot;windowTitle&quot;: &quot;Add WMS&quot;
+ *                 }
  *             }
  *         }
  *     }
- * }
- * &lt;/code&gt;
  *
  * The file must be named as configured in the appLocaleUrlTpl config, where
- * the placeholder {0} is to be replaced with the language code given in the
+ * the placeholder `{0}` is to be replaced with the language code given in the
  * languages config, e.g. app-locale-en.json.
  *
  * @class BasiGX.view.combo.Language
