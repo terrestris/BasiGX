@@ -45,5 +45,17 @@ describe('BasiGX.util.Accessibility', function() {
             });
         });
 
+        describe('#getHtmlLanguage', function() {
+            it('returns the empty string if attribute not set', function() {
+                var got = BasiGX.util.Accessibility.getHtmlLanguage();
+                expect(got).to.be('');
+            });
+            it('returns the lang attribute if that is set', function() {
+                htmlElement.setAttribute('lang', 'Barty');
+                var got = BasiGX.util.Accessibility.getHtmlLanguage();
+                expect(got).to.be('Barty');
+            });
+        });
+
     });
 });

@@ -47,6 +47,17 @@ Ext.define('BasiGX.util.Accessibility', {
             if (htmlElem) {
                 htmlElem.set({lang: language});
             }
+        },
+
+        /**
+         * Returns the `lang`-attribute of the top-level `<html>`-element.
+         *
+         * @return {String} The value of the lang attribute, e.g. 'en'.
+         */
+        getHtmlLanguage: function() {
+            var htmlElem = BasiGX.util.Accessibility.getHtmlElement();
+            var lang = htmlElem && htmlElem.getAttribute('lang');
+            return lang || '';
         }
 
     }
