@@ -52,6 +52,15 @@ Ext.define('BasiGX.view.container.WfsSearch', {
         }
     },
 
+    inheritableStatics: {
+        /**
+        * The name of the searchResultVectorLayer
+        *
+        * @type {String}
+        */
+        SEARCH_RESULT_VECTOR_LAYER_NAME: 'searchResultVectorLayer'
+    },
+
     /**
      *
      */
@@ -256,6 +265,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
      */
     initComponent: function() {
         var me = this;
+        var staticME = BasiGX.view.container.WfsSearch;
 
         //set map
         me.map = BasiGX.util.Map.getMapComponent().getMap();
@@ -268,7 +278,8 @@ Ext.define('BasiGX.view.container.WfsSearch', {
             me.searchResultVectorLayer = new ol.layer.Vector({
                 source: new ol.source.Vector(),
                 style: me.getSearchResultFeatureStyle(),
-                visible: !me.clusterResults
+                visible: !me.clusterResults,
+                name: staticME.SEARCH_RESULT_VECTOR_LAYER_NAME
             });
             me.map.addLayer(me.searchResultVectorLayer);
         }
