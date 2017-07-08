@@ -19,9 +19,9 @@
  * opentype.js is available on https://github.com/nodebox/opentype.js
  * under the MIT License.
  *
- * This Class renders the glyphs of a given ttf-font into a ExtJS Panel
+ * This class renders the glyphs of a given ttf-font into an ExtJS panel.
  *
- * @class this
+ * @class BasiGX.view.panel.TtfGlyphInspector
  */
 Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
     extend: 'Ext.panel.Panel',
@@ -335,4 +335,3 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
         }
     }
 });
-
