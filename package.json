@@ -56,6 +56,6 @@
         "istanbul": "0.4.5",
         "mocha": "3.4.2",
         "mocha-phantomjs": "4.1.0",
-        "sinon": "2.3.5"
+        "sinon": "2.3.6"
     }
 }
