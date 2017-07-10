@@ -159,47 +159,50 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
             });
         }
 
-        me.fbar = [
-            {
-                xtype: 'form',
-                border: true,
-                bodyStyle: {
-                    borderRightWidth: 0,
-                    borderBottomWidth: 0,
-                    borderLeftWidth: 0
-                },
-                bodyPadding: 2,
-                layout: 'hbox',
-                width: '100%',
-                items: me.formItems
-            }
-        ];
+        me.fbar = [{
+            xtype: 'form',
+            border: true,
+            bodyStyle: {
+                borderRightWidth: 0,
+                borderBottomWidth: 0,
+                borderLeftWidth: 0
+            },
+            bodyPadding: 2,
+            layout: 'hbox',
+            width: '100%',
+            items: me.formItems
+        }];
 
-        me.bbar = [
-            {
-                bind: {
-                    text: '{delButtonText}'
+        me.dockedItems = [{
+            xtype: 'toolbar',
+            dock: 'bottom',
+            ui: 'footer',
+            items: [
+                {
+                    bind: {
+                        text: '{delButtonText}'
+                    },
+                    scope: me,
+                    handler: me.onDelButtonClick
                 },
-                scope: me,
-                handler: me.onDelButtonClick
-            },
-            '->',
-            {
-                bind: {
-                    text: '{okBtnText}'
+                '->',
+                {
+                    bind: {
+                        text: '{okBtnText}'
+                    },
+                    scope: me,
+                    handler: me.onOkButtonClick
                 },
-                scope: me,
-                handler: me.onOkButtonClick
-            },
-            {
-                bind: {
-                    text: '{closeBtnText}'
-                },
-                scope: me,
-                handler: me.onCloseButtonClick,
-                hidden: !me.getUseCloseButton()
-            }
-        ];
+                {
+                    bind: {
+                        text: '{closeBtnText}'
+                    },
+                    scope: me,
+                    handler: me.onCloseButtonClick,
+                    hidden: !me.getUseCloseButton()
+                }
+            ]
+        }];
 
         me.callParent();
     },
