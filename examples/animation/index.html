@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>BasiGX.util.Animate examples</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/theme-neptune/resources/theme-neptune-all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/theme-neptune/resources/theme-neptune-all_1.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/theme-neptune/resources/theme-neptune-all_2.css">
+
+</head>
+<body>
+    <h1>BasiGX.util.Animate examples</h1>
+    <p>Click on a feature to see the current animation in effect.</p>
+    <p>Note that the js is not minified so it is readable. See <a href="animate.js">animate.js</a>.</p>
+    <div id="map"></div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/ext-all.js"></script>
+    <script src="http://openlayers.org/en/v3.20.1/build/ol.js"></script>
+    <script src="https://geoext.github.io/geoext3/master/GeoExt.js"></script>
+    <script>
+    Ext.Loader.setConfig({
+        enabled: true,
+        paths: {
+            'BasiGX': '../../src'
+        }
+    });
+    </script>
+    <script type="text/javascript" src="animate.js"></script>
+</body>
+</html>
