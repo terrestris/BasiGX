@@ -228,8 +228,8 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
      */
     toggleBtnVisibility: function(field) {
         var allBtns = Ext.ComponentQuery.query(
-                'basigx-form-coordinatetransform button[name=transform]'
-            );
+            'basigx-form-coordinatetransform button[name=transform]'
+        );
         var currentBtn = field.up('fieldset').down('button[name=transform]');
         Ext.each(allBtns, function(btn) {
             btn.setVisible(false);

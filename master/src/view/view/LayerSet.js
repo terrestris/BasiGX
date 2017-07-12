@@ -144,8 +144,8 @@ Ext.define('BasiGX.view.view.LayerSet', {
                 '<tpl for=".">',
                 '<div class="thumb-wrap">',
                 '<div class="thumb">',
-                 // if the thumb is a href to an online resource, we
-                 // dont need the defaultImagePath
+                // if the thumb is a href to an online resource, we
+                // dont need the defaultImagePath
                 '<tpl if="thumb.indexOf(\'http\') &gt;= 0">',
                 '<img src="{thumb}" />',
                 '<tpl else>',

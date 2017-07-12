@@ -127,12 +127,12 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                 strokeWidth = imageStyle.getStroke().getWidth();
                 strokeColor = imageStyle.getStroke().getColor();
                 strokeColor = strokeColor.indexOf('rgba') > -1 ?
-                        BasiGX.util.Color.rgbaToHex8(strokeColor) : strokeColor;
+                    BasiGX.util.Color.rgbaToHex8(strokeColor) : strokeColor;
             }
             if (imageStyle.getFill()) {
                 fillColor = imageStyle.getFill().getColor();
                 fillColor = fillColor.indexOf('rgba') > -1 ? BasiGX.util.Color.
-                        rgbaToHex8(fillColor) : fillColor;
+                    rgbaToHex8(fillColor) : fillColor;
             }
         }
 
@@ -203,7 +203,7 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                             listeners: {
                                 boxready: function() {
                                     var color = BasiGX.util.Color
-                                            .hex8ToRgba(this.getValue());
+                                        .hex8ToRgba(this.getValue());
                                     me.updateStyle({
                                         strokecolor: color
                                     });
@@ -211,7 +211,7 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                                 change: function(field, val, oldVal) {
                                     if (oldVal) {
                                         var color = BasiGX.util.Color
-                                                .hex8ToRgba(val);
+                                            .hex8ToRgba(val);
                                         me.updateStyle({
                                             strokecolor: color
                                         });
@@ -240,7 +240,7 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                             listeners: {
                                 boxready: function() {
                                     var color = BasiGX.util.Color
-                                            .hex8ToRgba(this.getValue());
+                                        .hex8ToRgba(this.getValue());
                                     me.updateStyle({
                                         fillcolor: color
                                     });
@@ -248,7 +248,7 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                                 change: function(field, val, oldVal) {
                                     if (oldVal) {
                                         var color = BasiGX.util.Color
-                                                .hex8ToRgba(val);
+                                            .hex8ToRgba(val);
                                         me.updateStyle({
                                             fillcolor: color
                                         });
@@ -358,8 +358,8 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
         }
         var styleStrokeColor = style.getStroke().getColor();
         var strokeColor = styleStrokeColor.indexOf('rgba') > -1 ?
-                BasiGX.util.Color.rgbaToHex8(styleStrokeColor) :
-                styleStrokeColor;
+            BasiGX.util.Color.rgbaToHex8(styleStrokeColor) :
+            styleStrokeColor;
 
         var fs = {
             xtype: 'fieldset',
@@ -457,11 +457,11 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
         }
         var styleFillColor = style.getFill().getColor();
         var fillColor = styleFillColor.indexOf('rgba') > -1 ?
-                BasiGX.util.Color.rgbaToHex8(styleFillColor) : styleFillColor;
+            BasiGX.util.Color.rgbaToHex8(styleFillColor) : styleFillColor;
         var styleStrokeColor = style.getStroke().getColor();
         var strokeColor = styleStrokeColor.indexOf('rgba') > -1 ?
-                BasiGX.util.Color.rgbaToHex8(styleStrokeColor) :
-                styleStrokeColor;
+            BasiGX.util.Color.rgbaToHex8(styleStrokeColor) :
+            styleStrokeColor;
 
         var fs = {
             xtype: 'fieldset',
@@ -666,19 +666,19 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
             image: pointStyle.radius || pointStyle.fillcolor ||
             pointStyle.fillopacity || pointStyle.strokewidth ||
             pointStyle.strokecolor ?
-            new ol.style.Circle({
-                radius: pointStyle.radius || fallBackRadius,
-                fill: new ol.style.Fill({
-                    color: pointStyle.fillcolor ? pointStyle.fillcolor :
-                        fallBackFillColor
-                }),
-                stroke: new ol.style.Stroke({
-                    color: pointStyle.strokecolor ? pointStyle.strokecolor :
-                        fallBackStrokeColor,
-                    width: pointStyle.strokewidth ? pointStyle.strokewidth :
-                        fallBackStrokeWidth
-                })
-            }) : oldImage,
+                new ol.style.Circle({
+                    radius: pointStyle.radius || fallBackRadius,
+                    fill: new ol.style.Fill({
+                        color: pointStyle.fillcolor ? pointStyle.fillcolor :
+                            fallBackFillColor
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: pointStyle.strokecolor ? pointStyle.strokecolor :
+                            fallBackStrokeColor,
+                        width: pointStyle.strokewidth ? pointStyle.strokewidth :
+                            fallBackStrokeWidth
+                    })
+                }) : oldImage,
             text: oldStyle.getText() || new ol.style.Text()
         });
 
@@ -699,12 +699,12 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
     generateLineStringStyle: function(oldStyle, lineStyle) {
         var style = new ol.style.Style({
             stroke: lineStyle.strokewidth || lineStyle.strokecolor ?
-            new ol.style.Stroke({
-                color: lineStyle.strokecolor ? lineStyle.strokecolor :
-                    oldStyle.getStroke().getColor(),
-                width: lineStyle.strokewidth ? lineStyle.strokewidth :
-                    oldStyle.getStroke().getWidth()
-            }) : oldStyle.getStroke(),
+                new ol.style.Stroke({
+                    color: lineStyle.strokecolor ? lineStyle.strokecolor :
+                        oldStyle.getStroke().getColor(),
+                    width: lineStyle.strokewidth ? lineStyle.strokewidth :
+                        oldStyle.getStroke().getWidth()
+                }) : oldStyle.getStroke(),
             text: oldStyle.getText() || new ol.style.Text()
         });
         return style;
@@ -724,16 +724,16 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
     generatePolygonStyle: function(oldStyle, polygonStyle) {
         var style = new ol.style.Style({
             fill: polygonStyle.fillcolor ?
-            new ol.style.Fill({
-                color: polygonStyle.fillcolor
-            }) : oldStyle.getFill(),
+                new ol.style.Fill({
+                    color: polygonStyle.fillcolor
+                }) : oldStyle.getFill(),
             stroke: polygonStyle.strokewidth || polygonStyle.strokecolor ?
-            new ol.style.Stroke({
-                color: polygonStyle.strokecolor ? polygonStyle.strokecolor :
-                    oldStyle.getStroke().getColor(),
-                width: polygonStyle.strokewidth ? polygonStyle.strokewidth :
-                    oldStyle.getStroke().getWidth()
-            }) : oldStyle.getStroke(),
+                new ol.style.Stroke({
+                    color: polygonStyle.strokecolor ? polygonStyle.strokecolor :
+                        oldStyle.getStroke().getColor(),
+                    width: polygonStyle.strokewidth ? polygonStyle.strokewidth :
+                        oldStyle.getStroke().getWidth()
+                }) : oldStyle.getStroke(),
             text: oldStyle.getText() || new ol.style.Text()
         });
         return style;

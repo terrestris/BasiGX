@@ -435,7 +435,7 @@ Ext.define('BasiGX.util.ConfigParser', {
             // TODO Refactor
             if (window.location.hash.indexOf('center') > 0) {
                 var centerString = location.hash.split('center/')[1].
-                split('|')[0];
+                    split('|')[0];
                 config.startCenter = centerString;
             }
 
@@ -443,14 +443,14 @@ Ext.define('BasiGX.util.ConfigParser', {
                 controls: [new ol.control.ScaleLine()], // TODO add attribution
                 view: new ol.View({
                     center: this.convertStringToNumericArray(
-                      'int', config.startCenter),
+                        'int', config.startCenter),
                     zoom: config.startZoom || 2,
                     maxResolution: config.maxResolution,
                     minResolution: config.minResolution,
                     projection: config.mapConfig.projection || 'EPSG:3857',
                     units: 'm',
                     resolutions: me.convertStringToNumericArray(
-                      'float', config.mapConfig.resolutions)
+                        'float', config.mapConfig.resolutions)
                 }),
                 logo: false
             });
@@ -594,7 +594,7 @@ Ext.define('BasiGX.util.ConfigParser', {
                     cfg.tileGrid = new ol.tilegrid.TileGrid({
                         extent: map.getView().getProjection().getExtent(),
                         resolutions: me.convertStringToNumericArray(
-                                'float', me.appContext.mapConfig.resolutions)
+                            'float', me.appContext.mapConfig.resolutions)
                     });
                 }
 
@@ -827,7 +827,7 @@ Ext.define('BasiGX.util.ConfigParser', {
                 } else {
 
                     // handling layers
-                     // get node from config by its id
+                    // get node from config by its id
                     var mergedNode = me.getNodeFromConfigById(
                         node.mapLayerId, layerCfg
                     );

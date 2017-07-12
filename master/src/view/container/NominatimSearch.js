@@ -557,15 +557,22 @@ Ext.define('BasiGX.view.container.NominatimSearch', {
     zoomToExtent: function(extent) {
         var me = this;
         var olView = me.map.getView();
-        var pan = ol.animation.pan({
-            source: olView.getCenter()
-        });
-        var zoom = ol.animation.zoom({
-            resolution: olView.getResolution()
-        });
-        me.map.beforeRender(pan, zoom);
 
-        olView.fit(extent, me.map.getSize());
+        // This if is need for backwards comaptibility to ol3
+        if (ol.animation) {
+            var pan = ol.animation.pan({
+                source: olView.getCenter()
+            });
+            var zoom = ol.animation.zoom({
+                resolution: olView.getResolution()
+            });
+            me.map.beforeRender(pan, zoom);
+            olView.fit(extent, me.map.getSize());
+        } else {
+            olView.fit(extent, {
+                duration: 500
+            });
+        }
     },
 
     /**

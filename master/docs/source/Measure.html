@@ -266,6 +266,7 @@ Ext.define('BasiGX.view.button.Measure', {
 
         if (Ext.isEmpty(measureLayer)) {
             measureLayer = me.createMeasureLayer();
+            measureLayer.set('bp_displayInLayerSwitcher', false);
             me.map.addLayer(measureLayer);
         }
 

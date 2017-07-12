@@ -158,6 +158,9 @@ Ext.define('BasiGX.util.Layer', {
          * @return {Array} An array of all Layers.
          */
         getAllLayers: function(map) {
+            if (!map) {
+                map = BasiGX.util.Map.getMapComponent().getMap();
+            }
             var layers = map.getLayers();
             var me = this;
             var allLayers = [];

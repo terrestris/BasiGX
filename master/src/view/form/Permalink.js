@@ -79,11 +79,11 @@ Ext.define('BasiGX.view.form.Permalink', {
         listeners: {
             boxready: function(btn) {
                 btn.setHidden(
-                        !BasiGX.util.CopyClipboard.copyToClipboardSupported);
+                    !BasiGX.util.CopyClipboard.copyToClipboardSupported);
             },
             initialize: function(btn) {
                 btn.setHidden(
-                        !BasiGX.util.CopyClipboard.copyToClipboardSupported);
+                    !BasiGX.util.CopyClipboard.copyToClipboardSupported);
             }
         },
         handler: function(btn) {

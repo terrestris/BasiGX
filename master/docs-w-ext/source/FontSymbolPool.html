@@ -187,15 +187,15 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
      * @param {String} fontName The name of the font that has been selected.
      */
     fontSelected: function(combo, fontName) {
-        var me = this.up('basigx-panel-fontsymbolpool');
+        var symbolPool = this.up('basigx-panel-fontsymbolpool');
         var selectedRecord = combo.getSelectedRecord();
         var ttfHref = selectedRecord.getData().link.href;
-        me.setSelectedFontName(fontName);
+        symbolPool.setSelectedFontName(fontName);
 
         if (ttfHref) {
             Ext.Ajax.request({
                 binary: true,
-                url: me.getGeoserverFontUrl(),
+                url: symbolPool.getGeoserverFontUrl(),
                 method: 'GET',
                 params: {
                     fontName: fontName
@@ -208,8 +208,8 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
                         {type: 'application/octet-stream'}
                     );
                     var url = window.URL.createObjectURL(blob);
-                    me.setFontBlobUrl(url);
-                    me.renderSymbols();
+                    symbolPool.setFontBlobUrl(url);
+                    symbolPool.renderSymbols();
                 },
                 failure: function() {
                     Ext.toast('Error retrieving the Graphic preview');

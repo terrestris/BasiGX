@@ -94,7 +94,7 @@ Ext.define('BasiGX.view.grid.GazetteerGrid', {
         },
         iconCls: 'fa fa-refresh fa-2x'
     },
-        '->',
+    '->',
     {
         xtype: 'button',
         name: 'directionsbutton',
@@ -227,7 +227,15 @@ Ext.define('BasiGX.view.grid.GazetteerGrid', {
         var wkt = record.get('geotext');
         var feature = format.readFeature(wkt);
         var geom = feature.getGeometry().transform('EPSG:4326', projection);
-        olView.fit(geom, map.getSize());
+
+        // This if is need for backwards comaptibility to ol3
+        if (ol.animation) {
+            olView.fit(geom, map.getSize());
+        } else {
+            olView.fit(geom, {
+                duration: 500
+            });
+        }
     },
 
     /**
@@ -246,7 +254,7 @@ Ext.define('BasiGX.view.grid.GazetteerGrid', {
      */
     showDirections: function() {
         var win = Ext.ComponentQuery.query(
-                'window[name="gazetteerdirections"]')[0];
+            'window[name="gazetteerdirections"]')[0];
         if (win) {
             if (win.isVisible()) {
                 BasiGX.util.Animate.shake(win);

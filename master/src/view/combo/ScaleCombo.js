@@ -86,18 +86,18 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
          *
          */
         scales: [
-                 {'scale': '1:2.000.000', 'resolution': 560},
-                 {'scale': '1:1.000.000', 'resolution': 280},
-                 {'scale': '1:500.000', 'resolution': 140},
-                 {'scale': '1:250.000', 'resolution': 70},
-                 {'scale': '1:100.000', 'resolution': 28},
-                 {'scale': '1:50.000', 'resolution': 14},
-                 {'scale': '1:25.000', 'resolution': 7},
-                 {'scale': '1:10.000', 'resolution': 2.8},
-                 {'scale': '1:5.000', 'resolution': 1.4},
-                 {'scale': '1:2.500', 'resolution': 0.7},
-                 {'scale': '1:1.000', 'resolution': 0.28},
-                 {'scale': '1:500', 'resolution': 0.14}
+            {'scale': '1:2.000.000', 'resolution': 560},
+            {'scale': '1:1.000.000', 'resolution': 280},
+            {'scale': '1:500.000', 'resolution': 140},
+            {'scale': '1:250.000', 'resolution': 70},
+            {'scale': '1:100.000', 'resolution': 28},
+            {'scale': '1:50.000', 'resolution': 14},
+            {'scale': '1:25.000', 'resolution': 7},
+            {'scale': '1:10.000', 'resolution': 2.8},
+            {'scale': '1:5.000', 'resolution': 1.4},
+            {'scale': '1:2.500', 'resolution': 0.7},
+            {'scale': '1:1.000', 'resolution': 0.28},
+            {'scale': '1:500', 'resolution': 0.14}
         ]
     },
 
@@ -151,14 +151,14 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
         var matchInStore = false;
 
         matchInStore = (store.findExact('resolution', resolution) >= 0) ?
-           true : false;
+            true : false;
 
         if (matchInStore) {
             this.setValue(resolution);
         } else {
             var rec = {
                 scale: '1:' + Math.round(
-                   this.getCurrentScale(resolution)).toLocaleString(),
+                    this.getCurrentScale(resolution)).toLocaleString(),
                 resolution: resolution
             };
             store.add(rec);

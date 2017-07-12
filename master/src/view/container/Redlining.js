@@ -135,15 +135,15 @@ Ext.define('BasiGX.view.container.Redlining', {
      */
     stateChangeActive: false,
 
-   /**
-    *
-    */
+    /**
+     *
+     */
     config: {
-       /**
-        * The url objects for images.
-        *
-        * Can contain url and method property
-        */
+        /**
+         * The url objects for images.
+         *
+         * Can contain url and method property
+         */
         backendUrls: {
             pictureList: null,
             pictureSrc: null,
@@ -254,9 +254,9 @@ Ext.define('BasiGX.view.container.Redlining', {
     initComponent: function() {
         var me = this;
         var displayInLayerSwitcherKey = BasiGX.util.Layer.
-           KEY_DISPLAY_IN_LAYERSWITCHER;
+            KEY_DISPLAY_IN_LAYERSWITCHER;
 
-       //set map
+        //set map
         me.map = BasiGX.util.Map.getMapComponent().getMap();
 
         if (!me.redliningVectorLayer) {
@@ -393,11 +393,11 @@ Ext.define('BasiGX.view.container.Redlining', {
                     if (pressed) {
                         me.drawPostitInteraction.setActive(true);
                         me.drawPostitInteraction.on('drawend',
-                           me.setDefaultPostitStyle, me);
+                            me.setDefaultPostitStyle, me);
                     } else {
                         me.drawPostitInteraction.setActive(false);
                         me.drawPostitInteraction.un('drawend',
-                           me.setDefaultPostitStyle, me);
+                            me.setDefaultPostitStyle, me);
                     }
                 }
             }
@@ -413,37 +413,37 @@ Ext.define('BasiGX.view.container.Redlining', {
                     if (!me.copySelectInteraction) {
                         me.copySelectInteraction =
                            new ol.interaction.Select({
-                               condition: function(evt) {
-                                   return ol.events.condition.pointerMove(
-                                       evt) || ol.events.condition.
-                                       click(evt);
-                               },
-                               addCondition: function(evt) {
-                                   if (evt.type === 'click') {
-                                       var features = me.
-                                           copySelectInteraction.
-                                           getFeatures().getArray();
+                                condition: function(evt) {
+                                    return ol.events.condition.pointerMove(
+                                        evt) || ol.events.condition.
+                                        click(evt);
+                                },
+                                addCondition: function(evt) {
+                                    if (evt.type === 'click') {
+                                        var features = me.
+                                            copySelectInteraction.
+                                            getFeatures().getArray();
 
-                                       if (features[0]) {
-                                           var copyFeature = features[0].
-                                               clone();
-                                           var doneFn = function(
-                                               finalFeature) {
-                                               me.redlineFeatures.push(
-                                                       finalFeature);
-                                           };
-                                           BasiGX.util.Animate.moveFeature(
-                                               copyFeature, 500,
-                                               100,
-                                               me.getRedlineStyleFunction(),
-                                               doneFn);
+                                        if (features[0]) {
+                                            var copyFeature = features[0].
+                                                clone();
+                                            var doneFn = function(
+                                                finalFeature) {
+                                                me.redlineFeatures.push(
+                                                    finalFeature);
+                                            };
+                                            BasiGX.util.Animate.moveFeature(
+                                                copyFeature, 500,
+                                                100,
+                                                me.getRedlineStyleFunction(),
+                                                doneFn);
 
-                                           me.copySelectInteraction.
-                                               getFeatures().clear();
-                                       }
-                                   }
-                               }
-                           });
+                                            me.copySelectInteraction.
+                                                getFeatures().clear();
+                                        }
+                                    }
+                                }
+                            });
                         me.map.addInteraction(me.copySelectInteraction);
                     }
                     if (pressed) {
@@ -465,57 +465,57 @@ Ext.define('BasiGX.view.container.Redlining', {
                     if (!me.translateInteraction) {
                         me.translateSelectInteraction =
                            new ol.interaction.Select({
-                               condition: ol.events.condition.pointerMove,
-                               addCondition: function() {
-                                   var selectedFeatures =
+                                condition: ol.events.condition.pointerMove,
+                                addCondition: function() {
+                                    var selectedFeatures =
                                        me.translateSelectInteraction.
-                                       getFeatures();
-                                   var firstFeature = selectedFeatures.
-                                       getArray()[0];
+                                           getFeatures();
+                                    var firstFeature = selectedFeatures.
+                                        getArray()[0];
 
-                                   if (firstFeature) {
-                                       var redlineFeature = me.
-                                           getRedlineFeatureFromClone(
-                                                   firstFeature);
+                                    if (firstFeature) {
+                                        var redlineFeature = me.
+                                            getRedlineFeatureFromClone(
+                                                firstFeature);
 
-                                       if (me.translateFeatureCollection.
-                                               getLength() === 0) {
-                                           me.translateFeatureCollection.
-                                               push(redlineFeature);
-                                       } else if (me.
-                                           translateFeatureCollection.
-                                           getLength() > 0 &&
+                                        if (me.translateFeatureCollection.
+                                            getLength() === 0) {
+                                            me.translateFeatureCollection.
+                                                push(redlineFeature);
+                                        } else if (me.
+                                            translateFeatureCollection.
+                                            getLength() > 0 &&
                                            redlineFeature !== me.
-                                           translateFeatureCollection.
-                                           getArray()[0]) {
-                                           me.
                                                translateFeatureCollection.
-                                               clear();
-                                           me.
-                                               translateFeatureCollection.
-                                               push(redlineFeature);
-                                       }
-                                   }
-                               }
-                           });
+                                               getArray()[0]) {
+                                            me.
+                                                translateFeatureCollection.
+                                                clear();
+                                            me.
+                                                translateFeatureCollection.
+                                                push(redlineFeature);
+                                        }
+                                    }
+                                }
+                            });
                         me.map.addInteraction(me.translateSelectInteraction);
                         me.translateFeatureCollection = new ol.Collection();
                         me.translateInteraction =
                            new ol.interaction.Translate({
-                               features: me.translateFeatureCollection
-                           });
+                                features: me.translateFeatureCollection
+                            });
                         me.map.addInteraction(me.translateInteraction);
                     }
                     if (pressed) {
                         me.translateInteraction.setActive(true);
                         me.translateSelectInteraction.setActive(true);
                         me.translateInteraction.on('translateend',
-                               me.fireRedliningChanged, me);
+                            me.fireRedliningChanged, me);
                     } else {
                         me.translateInteraction.setActive(false);
                         me.translateSelectInteraction.setActive(false);
                         me.translateInteraction.un('translateend',
-                               me.fireRedliningChanged, me);
+                            me.fireRedliningChanged, me);
                     }
                 }
             }
@@ -546,7 +546,7 @@ Ext.define('BasiGX.view.container.Redlining', {
                             pixelTolerance: 20,
                             deleteCondition: function(event) {
                                 return ol.events.condition
-                                   .singleClick(event);
+                                    .singleClick(event);
                             }
                         });
                         me.map.addInteraction(me.modifyInteraction);
@@ -555,12 +555,12 @@ Ext.define('BasiGX.view.container.Redlining', {
                         me.modifyInteraction.setActive(true);
                         me.modifySelectInteraction.setActive(true);
                         me.modifyInteraction.on('modifyend',
-                               me.fireRedliningChanged, me);
+                            me.fireRedliningChanged, me);
                     } else {
                         me.modifyInteraction.setActive(false);
                         me.modifySelectInteraction.setActive(false);
                         me.modifyInteraction.un('modifyend',
-                               me.fireRedliningChanged, me);
+                            me.fireRedliningChanged, me);
                     }
                 }
             }
@@ -637,15 +637,16 @@ Ext.define('BasiGX.view.container.Redlining', {
                             autoScroll: true,
                             closeAction: 'hide',
                             items: Ext.create(
-                               'BasiGX.view.container.RedlineStyler', {
-                                   redliningVectorLayer: redliningVectorLayer,
-                                   backendUrls: me.getBackendUrls(),
-                                   redlinePointStyle: me.getRedlinePointStyle(),
-                                   redlineLineStringStyle:
+                                'BasiGX.view.container.RedlineStyler', {
+                                    redliningVectorLayer: redliningVectorLayer,
+                                    backendUrls: me.getBackendUrls(),
+                                    redlinePointStyle:
+                                        me.getRedlinePointStyle(),
+                                    redlineLineStringStyle:
                                    me.getRedlineLineStringStyle(),
-                                   redlinePolygonStyle:
+                                    redlinePolygonStyle:
                                    me.getRedlinePolygonStyle()
-                               })
+                                })
                         });
                         me.stylerWindow.on('close', function() {
                             me.fireRedliningChanged();
@@ -682,7 +683,7 @@ Ext.define('BasiGX.view.container.Redlining', {
             var imageBaseSrc;
             if (classPath) {
                 imageBaseSrc = classPath.split(
-                   'src/view/container/Redlining.js')[0];
+                    'src/view/container/Redlining.js')[0];
             }
             return imageBaseSrc + 'resources/img/postit.png';
         }
@@ -728,17 +729,17 @@ Ext.define('BasiGX.view.container.Redlining', {
                 } else {
                     if (text.length > me.postitTextMaxLength) {
                         BasiGX.confirm(me.getViewModel().get(
-                           'postItInputTooLongText'), {
-                               fn: function(choice) {
-                                   if (choice === 'yes') {
-                                       text = me.stringDivider(text, 16, '\n');
-                                       me.setPostitStyleAndTextOnFeature(
-                                       text, feat);
-                                   } else {
-                                       me.handlePostitAdd(feat, text);
-                                   }
-                               }
-                           });
+                            'postItInputTooLongText'), {
+                            fn: function(choice) {
+                                if (choice === 'yes') {
+                                    text = me.stringDivider(text, 16, '\n');
+                                    me.setPostitStyleAndTextOnFeature(
+                                        text, feat);
+                                } else {
+                                    me.handlePostitAdd(feat, text);
+                                }
+                            }
+                        });
                     } else {
                         text = me.stringDivider(text, 16, '\n');
                         me.setPostitStyleAndTextOnFeature(text, feat);
@@ -766,17 +767,17 @@ Ext.define('BasiGX.view.container.Redlining', {
                 if (decision === 'ok') {
                     if (text.length > me.postitTextMaxLength) {
                         BasiGX.confirm(me.getViewModel().get(
-                           'postItInputTooLongText'), {
-                               fn: function(choice) {
-                                   if (choice === 'yes') {
-                                       text = me.stringDivider(text, 16, '\n');
-                                       me.setPostitStyleAndTextOnFeature(
-                                       text, feature);
-                                   } else {
-                                       me.modifyPostit(feature, text);
-                                   }
-                               }
-                           });
+                            'postItInputTooLongText'), {
+                            fn: function(choice) {
+                                if (choice === 'yes') {
+                                    text = me.stringDivider(text, 16, '\n');
+                                    me.setPostitStyleAndTextOnFeature(
+                                        text, feature);
+                                } else {
+                                    me.modifyPostit(feature, text);
+                                }
+                            }
+                        });
                     } else {
                         text = me.stringDivider(text, 16, '\n');
                         me.setPostitStyleAndTextOnFeature(text, feature);
@@ -860,15 +861,15 @@ Ext.define('BasiGX.view.container.Redlining', {
                 }
                 right = str.substring(p + 1);
                 return left + spaceReplacer + me.stringDivider(
-                     right, width, spaceReplacer);
+                    right, width, spaceReplacer);
             } else {
-               // no whitespace or - found, splitting hard on the width length
+                // no whitespace or - found, splitting hard on the width length
                 left = str.substring(startIndex, stopIndex + 1) + '-';
                 right = str.substring(stopIndex + 1);
                 startIndex = stopIndex;
                 stopIndex += width;
                 return left + spaceReplacer + me.stringDivider(
-                   right, width, spaceReplacer);
+                    right, width, spaceReplacer);
             }
         }
         return str;
@@ -950,6 +951,6 @@ Ext.define('BasiGX.view.container.Redlining', {
 
     fireRedliningChanged: function() {
         this.fireEvent('redliningchanged', this, this.getState(),
-                this.stateChangeActive);
+            this.stateChangeActive);
     }
 });

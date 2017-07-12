@@ -131,29 +131,29 @@ Ext.define('BasiGX.util.Animate', {
                     ol.Observable.unByKey(listenerKey);
                     return;
                 }
-             // tell OL3 to continue postcompose animation
+                // tell OL3 to continue postcompose animation
                 frameState.animate = true;
             }
             listenerKey = map.on('postcompose', animate);
             return listenerKey;
         },
 
-       /**
-        * Moves / translates an `ol.Feature` to the given `pixel` delta in
-        * in the end.
-        * the given `duration` in ms, using the given style, calling a `doneFn`
-        *
-        * Useful e.g. when hovering clustered features to show their children.
-        *
-        * @param {ol.Feature} featureToMove The feature to move.
-        * @param {Number} duration The duration in MS for the moving to to
-        *     complete.
-        * @param {Array<Number>} pixel Delta of pixels to move the feature.
-        * @param {ol.style.Style} style The style to use when moving the
-        *     `feature`.
-        * @param {Function} doneFn The function to call when done.
-        * @return {String} A listener key from a postcompose event.
-        */
+        /**
+         * Moves / translates an `ol.Feature` to the given `pixel` delta in
+         * in the end.
+         * the given `duration` in ms, using the given style, calling a `doneFn`
+         *
+         * Useful e.g. when hovering clustered features to show their children.
+         *
+         * @param {ol.Feature} featureToMove The feature to move.
+         * @param {Number} duration The duration in MS for the moving to to
+         *     complete.
+         * @param {Array<Number>} pixel Delta of pixels to move the feature.
+         * @param {ol.style.Style} style The style to use when moving the
+         *     `feature`.
+         * @param {Function} doneFn The function to call when done.
+         * @return {String} A listener key from a postcompose event.
+         */
         moveFeature: function(featureToMove, duration, pixel, style, doneFn) {
             var map = BasiGX.util.Map.getMapComponent().getMap();
             var listenerKey;
@@ -183,7 +183,7 @@ Ext.define('BasiGX.util.Animate', {
                    vectorContext.setImageStyle &&
                    vectorContext.drawPointGeometry) {
                     vectorContext.setFillStrokeStyle(
-                               style.getFill(), style.getStroke());
+                        style.getFill(), style.getStroke());
                     vectorContext.setImageStyle(style.getImage());
                     if (geometry instanceof ol.geom.Point) {
                         vectorContext.drawPointGeometry(geometry, null);
@@ -202,7 +202,7 @@ Ext.define('BasiGX.util.Animate', {
                     doneFn(featureToMove);
                     return;
                 }
-               // tell OL3 to continue postcompose animation
+                // tell OL3 to continue postcompose animation
                 frameState.animate = true;
 
                 actualFrames++;

@@ -88,29 +88,43 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
             var targetRotation = me.getRotation();
             var targetZoom = me.getZoom();
 
-            // Create the animation with their respective start values:
-            var pan = ol.animation.pan({
-                source: olView.getCenter()
-            });
-            var zoom = ol.animation.zoom({
-                resolution: olView.getResolution()
-            });
-            var rotate = ol.animation.rotate({
-                rotation: olView.getRotation()
-            });
-            // before we actually render, animate to the new values using the
-            // methods defined above
-            olMap.beforeRender(pan, zoom, rotate);
+            // This if is need for backwards comaptibility to ol3
+            if (ol.animation) {
+                // Create the animation with their respective start values:
+                var pan = ol.animation.pan({
+                    source: olView.getCenter()
+                });
+                var zoom = ol.animation.zoom({
+                    resolution: olView.getResolution()
+                });
+                var rotate = ol.animation.rotate({
+                    rotation: olView.getRotation()
+                });
+                // before we actually render, animate to the new values using
+                // the methods defined above
+                olMap.beforeRender(pan, zoom, rotate);
 
-            // Next: trigger a view change by setting `center`, `rotation` and
-            // either `zoom` (tried first) or `resolution`. The animation
-            // methods will transition smoothly.
-            olView.setCenter(targetCenter);
-            olView.setRotation(targetRotation);
-            if (targetZoom) {
-                olView.setZoom(targetZoom);
+                // Next: trigger a view change by setting `center`, `rotation`
+                // and either `zoom` (tried first) or `resolution`. The
+                // animation methods will transition smoothly.
+                olView.setCenter(targetCenter);
+                olView.setRotation(targetRotation);
+                if (targetZoom) {
+                    olView.setZoom(targetZoom);
+                } else {
+                    olView.setResolution(targetResolution);
+                }
             } else {
-                olView.setResolution(targetResolution);
+                var animationObj = {
+                    center: targetCenter,
+                    rotation: targetRotation
+                };
+                if (targetZoom) {
+                    animationObj.zoom = targetZoom;
+                } else {
+                    animationObj.resolution = targetResolution;
+                }
+                olView.animate(animationObj);
             }
         }
     },

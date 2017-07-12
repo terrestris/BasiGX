@@ -493,52 +493,52 @@ Ext.define('BasiGX.util.SLD', {
 
                 if (symbolizerObj.externalGraphicSrc) {
                     sldSymbolizer.value.fill.graphicFill.graphic.
-                    externalGraphicOrMark = [{
-                        TYPE_NAME: 'SLD_1_0_0.ExternalGraphic',
-                        onlineResource: {
-                            TYPE_NAME: 'SLD_1_0_0.OnlineResource',
-                            type: 'simple',
-                            href: symbolizerObj.externalGraphicSrc
-                        },
-                        format: 'image/png'
-                    }];
+                        externalGraphicOrMark = [{
+                            TYPE_NAME: 'SLD_1_0_0.ExternalGraphic',
+                            onlineResource: {
+                                TYPE_NAME: 'SLD_1_0_0.OnlineResource',
+                                type: 'simple',
+                                href: symbolizerObj.externalGraphicSrc
+                            },
+                            format: 'image/png'
+                        }];
                 } else if (symbolizerObj.fontAndUniCode) {
                     sldSymbolizer.value.fill.graphicFill.graphic.
-                    externalGraphicOrMark = [{
-                        TYPE_NAME: 'SLD_1_0_0.Mark',
-                        wellKnownName: {
-                            TYPE_NAME: 'SLD_1_0_0.WellKnownName',
-                            content: [symbolizerObj.fontAndUniCode]
-                        },
-                        fill: {
-                            TYPE_NAME: 'SLD_1_0_0.Fill',
-                            cssParameter: [{
-                                TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                                name: 'fill',
-                                content: [symbolizerObj.fillColor]
-                            }, {
-                                TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                                name: 'fill-opacity',
-                                content: [symbolizerObj.fillOpacity]
-                            }]
-                        },
-                        stroke: {
-                            TYPE_NAME: 'SLD_1_0_0.Stroke',
-                            cssParameter: [{
-                                TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                                name: 'stroke',
-                                content: [symbolizerObj.strokeColor]
-                            }, {
-                                TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                                name: 'stroke-width',
-                                content: [symbolizerObj.strokeWidth]
-                            }, {
-                                TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                                name: 'stroke-opacity',
-                                content: [symbolizerObj.strokeOpacity]
-                            }]
-                        }
-                    }];
+                        externalGraphicOrMark = [{
+                            TYPE_NAME: 'SLD_1_0_0.Mark',
+                            wellKnownName: {
+                                TYPE_NAME: 'SLD_1_0_0.WellKnownName',
+                                content: [symbolizerObj.fontAndUniCode]
+                            },
+                            fill: {
+                                TYPE_NAME: 'SLD_1_0_0.Fill',
+                                cssParameter: [{
+                                    TYPE_NAME: 'SLD_1_0_0.CssParameter',
+                                    name: 'fill',
+                                    content: [symbolizerObj.fillColor]
+                                }, {
+                                    TYPE_NAME: 'SLD_1_0_0.CssParameter',
+                                    name: 'fill-opacity',
+                                    content: [symbolizerObj.fillOpacity]
+                                }]
+                            },
+                            stroke: {
+                                TYPE_NAME: 'SLD_1_0_0.Stroke',
+                                cssParameter: [{
+                                    TYPE_NAME: 'SLD_1_0_0.CssParameter',
+                                    name: 'stroke',
+                                    content: [symbolizerObj.strokeColor]
+                                }, {
+                                    TYPE_NAME: 'SLD_1_0_0.CssParameter',
+                                    name: 'stroke-width',
+                                    content: [symbolizerObj.strokeWidth]
+                                }, {
+                                    TYPE_NAME: 'SLD_1_0_0.CssParameter',
+                                    name: 'stroke-opacity',
+                                    content: [symbolizerObj.strokeOpacity]
+                                }]
+                            }
+                        }];
                 }
 
                 sldSymbolizer.value.fill.graphicFill.graphic.size = {

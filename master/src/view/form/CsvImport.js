@@ -76,7 +76,7 @@ Ext.define('BasiGX.view.form.CsvImport', {
     items: [{
         xtype: 'filefield',
         name: 'csv_file',
-        fieldLabel: 'CSV-Datei',  // TODO i18n
+        fieldLabel: 'CSV-Datei', // TODO i18n
         labelWidth: 70,
         width: 400,
         msgTarget: 'side',
@@ -84,7 +84,7 @@ Ext.define('BasiGX.view.form.CsvImport', {
         buttonText: 'Datei auswählen …', // TODO i18n
         validator: function(val) {
             var fileName = /^.*\.(csv)$/i;
-             // TODO i18n
+            // TODO i18n
             var errMsg = 'Der Datenimport ist nur mit CSV-Dateien möglich.';
             return fileName.test(val) || errMsg;
         }
