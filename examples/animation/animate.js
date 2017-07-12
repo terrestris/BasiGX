@@ -75,20 +75,6 @@ Ext.onReady(function() {
     map.addInteraction(hoverSelect);
     hoverSelect.setActive(false);
 
-    clickSelect.on('select', function(e) {
-        animateFeature(e);
-        // remove selections immediately to allow reselect
-        var interactions = map.getInteractions().getArray();
-        interactions.forEach(function(i) {
-            if (i.getFeatures) {
-                i.getFeatures().clear();
-            }
-        });
-    });
-    hoverSelect.on('select', function(e) {
-        animateFeature(e);
-    });
-
     var animateFeature = function(e) {
         var feature = e.selected[0];
         if (!feature) {
@@ -105,4 +91,16 @@ Ext.onReady(function() {
             BasiGX.util.Animate.flashFeature(feature, 1000);
         }
     }
+
+    hoverSelect.on('select', animateFeature, this);
+    clickSelect.on('select', function(e) {
+        animateFeature(e);
+        // remove selections immediately to allow reselect
+        var interactions = map.getInteractions().getArray();
+        interactions.forEach(function(i) {
+            if (i.getFeatures) {
+                i.getFeatures().clear();
+            }
+        });
+    });
 });
