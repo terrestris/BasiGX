@@ -108,7 +108,7 @@ Ext.define('BasiGX.view.view.GraphicPool', {
 
         var store = Ext.create('Ext.data.Store', {
             sorters: 'fileName',
-//            TODO: add and make a model configurable?
+            //            TODO: add and make a model configurable?
             proxy: {
                 type: 'ajax',
                 url: BasiGX.util.Url.getWebProjectBaseUrl() +

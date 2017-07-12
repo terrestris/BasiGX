@@ -213,7 +213,7 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
     /**
      * Set default sketch style
      */
-    ol.interaction.Transform.prototype.setDefaultStyle = function() {   // Style
+    ol.interaction.Transform.prototype.setDefaultStyle = function() { // Style
         var stroke = new ol.style.Stroke({
             color: [255, 0, 0, 1],
             width: 1

@@ -202,7 +202,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
            (graphicOrMark[0].onlineResource ||
            (graphicOrMark[0].wellKnownName &&
             graphicOrMark[0].wellKnownName.content[0]
-            .indexOf('ttf://') > -1))) {
+                .indexOf('ttf://') > -1))) {
             usingExternalGraphic = true;
         }
         if (usingExternalGraphic) {
@@ -272,7 +272,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         }
 
         if (size) {
-            radius = parseInt(size.content[0]);
+            radius = parseInt(size.content[0], 10);
         }
 
         if (graphic) {
@@ -1146,4 +1146,3 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         graphicPoolWin.show();
     }
 });
-

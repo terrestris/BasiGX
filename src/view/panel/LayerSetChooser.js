@@ -140,7 +140,7 @@ Ext.define('BasiGX.view.panel.LayerSetChooser', {
         this.down('basigx-view-layerset').on(
             'selectionchange', this.onLayerSetSelectionchange);
         this.down('basigx-view-layerset').on(
-                'itemclick', this.onLayerSetClick);
+            'itemclick', this.onLayerSetClick);
         this.down('basigx-view-layerset').on(
             'itemdblclick', this.onLayerSetDblClick);
     },

@@ -11,12 +11,12 @@ describe('BasiGX.util.CopyClipboard', function() {
         describe('#copyToClipboardSupported', function() {
             it('is defined', function() {
                 expect(BasiGX.util.CopyClipboard
-                        .copyToClipboardSupported).to.not.be(undefined);
+                    .copyToClipboardSupported).to.not.be(undefined);
             });
 
             it('returns a bool', function() {
                 expect(BasiGX.util.CopyClipboard
-                        .copyToClipboardSupported).to.be.a('boolean');
+                    .copyToClipboardSupported).to.be.a('boolean');
             });
         });
     });

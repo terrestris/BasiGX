@@ -133,7 +133,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 
         Ext.each(allLayers, function(l) {
             if (l instanceof ol.layer.Tile && !Ext.Array.contains(blackList,
-                    l.get('name'))) {
+                l.get('name'))) {
                 me.allSearchLayers.push(l);
             }
         });

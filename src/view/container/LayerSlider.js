@@ -133,7 +133,7 @@ Ext.define('BasiGX.view.container.LayerSlider', {
 
         // set the colspan for slider
         me.config.colspan = me.addOffState ?
-                me.layerNames.length + 1 : me.layerNames.length;
+            me.layerNames.length + 1 : me.layerNames.length;
         var slider = Ext.create('Ext.slider.Single', me.sliderConfig);
 
         if (!Ext.isEmpty(me.topTitle)) {
@@ -293,7 +293,7 @@ Ext.define('BasiGX.view.container.LayerSlider', {
                 sliderContainer.layers[idx].set('opacity', Math.abs(1 -
                         (value * layers.length / 100)));
                 sliderContainer.layers[idx + 1].set('opacity',
-                        value * layers.length / 100);
+                    value * layers.length / 100);
 
                 sliderContainer.layers[idx].setVisible(true);
                 sliderContainer.layers[idx + 1].setVisible(true);
@@ -301,7 +301,7 @@ Ext.define('BasiGX.view.container.LayerSlider', {
                 sliderContainer.layers[idx - 1].set('opacity', Math.abs(1 -
                         (value * layers.length / 100)));
                 sliderContainer.layers[idx].set('opacity',
-                        value * layers.length / 100);
+                    value * layers.length / 100);
 
                 sliderContainer.layers[idx - 1].setVisible(true);
                 sliderContainer.layers[idx].setVisible(true);
@@ -310,7 +310,7 @@ Ext.define('BasiGX.view.container.LayerSlider', {
             // we are on the first slide part and have an offState,
             // just fade in the first layer
             sliderContainer.layers[idx].set('opacity',
-                    value * layers.length / 100);
+                value * layers.length / 100);
             sliderContainer.layers[idx].setVisible(true);
         }
     }

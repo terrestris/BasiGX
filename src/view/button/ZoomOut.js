@@ -70,13 +70,21 @@ Ext.define('BasiGX.view.button.ZoomOut', {
             }
 
             olView = olMap.getView();
-            zoom = ol.animation.zoom({
-                resolution: olView.getResolution(),
-                duration: 500
-            });
 
-            olMap.beforeRender(zoom);
-            olView.setResolution(olView.getResolution() * 2);
+            // This if is need for backwards comaptibility to ol3
+            if (ol.animation) {
+                zoom = ol.animation.zoom({
+                    resolution: olView.getResolution(),
+                    duration: 500
+                });
+                olMap.beforeRender(zoom);
+                olView.setResolution(olView.getResolution() * 2);
+            } else {
+                olView.animate({
+                    resolution: olView.getResolution() * 2,
+                    duration: 500
+                });
+            }
         }
     }
 });

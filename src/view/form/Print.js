@@ -890,8 +890,8 @@ Ext.define('BasiGX.view.form.Print', {
             if (this.getMapComponent() && me.extentLayer &&
                     fieldset.clientInfo) {
                 feat = GeoExt.data.MapfishPrintProvider.renderPrintExtent(
-                        this.getMapComponent(), me.extentLayer,
-                        fieldset.clientInfo
+                    this.getMapComponent(), me.extentLayer,
+                    fieldset.clientInfo
                 );
             }
             fieldset.extentFeature = feat;

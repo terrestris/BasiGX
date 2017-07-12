@@ -197,7 +197,7 @@ Ext.define('BasiGX.view.combo.Language', {
     requestLanguageFile: function(locale) {
         var me = this;
         var appLocaleUrl = Ext.util.Format.format(
-                me.getAppLocaleUrlTpl(), locale);
+            me.getAppLocaleUrlTpl(), locale);
 
         me.locale = locale;
 
@@ -305,8 +305,8 @@ Ext.define('BasiGX.view.combo.Language', {
                     if (!Ext.isEmpty(type) || Ext.isString(viewModel)) {
                         var viewName = type || viewModel;
                         var viewClassName = Ext.ClassManager.getName(
-                                Ext.ClassManager
-                                    .getByAlias('viewmodel.' + viewName));
+                            Ext.ClassManager
+                                .getByAlias('viewmodel.' + viewName));
                         baseLocaleObj.override = viewClassName;
                         Ext.define(viewClassName, baseLocaleObj);
                     } else if (!Ext.isEmpty(viewModel)) {
