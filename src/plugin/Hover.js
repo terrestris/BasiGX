@@ -181,12 +181,12 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
     /**
-    * Bound to either a collection- or select-interaction-event, this method
-    * fires the `hoverfeaturesclick` event on the map component.
-    *
-    * @param {ol.Collection.Event|ol.interaction.Select.Event} olEvt The event
-    *     we listen to. Is dependend on #selectEventOrigin.
-    */
+     * Bound to either a collection- or select-interaction-event, this method
+     * fires the `hoverfeaturesclick` event on the map component.
+     *
+     * @param {ol.Collection.Event|ol.interaction.Select.Event} olEvt The event
+     *     we listen to. Is dependend on #selectEventOrigin.
+     */
     onFeatureClicked: function(olEvt) {
         var me = this;
         var mapComponent = me.getCmp();

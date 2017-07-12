@@ -136,14 +136,14 @@ Ext.define('BasiGX.view.container.Redlining', {
     stateChangeActive: false,
 
     /**
-    *
-    */
+     *
+     */
     config: {
         /**
-        * The url objects for images.
-        *
-        * Can contain url and method property
-        */
+         * The url objects for images.
+         *
+         * Can contain url and method property
+         */
         backendUrls: {
             pictureList: null,
             pictureSrc: null,
