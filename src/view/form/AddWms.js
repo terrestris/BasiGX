@@ -723,11 +723,21 @@ Ext.define('BasiGX.view.form.AddWms', {
                 VERSION: version
             }
         });
+
+        var legendUrl = null;
+
+        if (Ext.isArray(style) && !Ext.isEmpty(style) &&
+            Ext.isArray(style[0].LegendURL) &&
+            !Ext.isEmpty(style[0].LegendURL) &&
+            style[0].LegendURL[0].OnlineResource) {
+            legendUrl = style[0].LegendURL[0].OnlineResource;
+        }
+
         var olLayer = new ol.layer.Tile({
             topic: true,
             name: capLayer.Title,
             source: olSource,
-            legendUrl: style ? style[0].LegendURL[0].OnlineResource : null
+            legendUrl: legendUrl
         });
         return olLayer;
     },
