@@ -95,7 +95,7 @@ Ext.define('BasiGX.view.form.AddWms', {
          * Whether layers shall start `checked` or `unchecked` in the available
          * layers fieldset.
          */
-        candidatesInitiallyChecked: true,
+        candidatesInitiallyChecked: false,
 
         /**
          * Whether to add a `Check all layers` button to the toolbar to interact
