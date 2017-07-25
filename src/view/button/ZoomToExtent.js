@@ -42,9 +42,24 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
     viewModel: {
         data: {
             tooltip: 'Auf Gesamtansicht zoomen',
-            text: null
+            text: null,
+            documentation: '<h2>Auf Gesamtansicht zoomen</h2>• Ein Klick auf ' +
+                'den Button zoomt die Karte auf die Gesamtansicht.'
         }
     },
+
+    /**
+     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: 'basigx-button-zoomtoextent'
+        },
+        {
+            clickOnButton: 'basigx-button-zoomtoextent'
+        }
+    ],
 
     /**
      *

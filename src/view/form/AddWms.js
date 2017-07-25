@@ -76,7 +76,10 @@ Ext.define('BasiGX.view.form.AddWms', {
             msgGatewayTimeOut: 'Der Server fungierte als Gateway und das ' +
                     'Originalziel hat zu langsam geantwortet',
             msgClientError: 'Ein unspezifizierter Clientfehler ist aufgetreten',
-            msgServerError: 'Ein unspezifizierter Serverfehler ist aufgetreten'
+            msgServerError: 'Ein unspezifizierter Serverfehler ist aufgetreten',
+            documentation: '<h2>WMS hinzufügen</h2>• In diesem Dialog ' +
+                'können Sie mit Hilfe einer WMS-URL ' +
+                'einen beliebigen Kartendienst der Karte hinzufügen.'
         }
     },
 

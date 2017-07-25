@@ -53,7 +53,10 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
             searchCriteriaOccurenceTag: 'Tag-Häufigkeit',
             searchResultGridTitle: 'Suchergebnisse',
             resetBtnText: 'Zurücksetzen',
-            noMatchesFoundErrText: 'Keine passenden Einträge gefunden'
+            noMatchesFoundErrText: 'Keine passenden Einträge gefunden',
+            documentation: '<h2>Overpass-Suche</h2>• Benutzen Sie die ' +
+                'Overpass Suche, um für ihren Suchbegriff passende Tags in ' +
+                'der OpenStreetMap Datenbank zu finden'
         }
     },
 

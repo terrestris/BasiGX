@@ -39,9 +39,33 @@ Ext.define('BasiGX.view.button.Permalink', {
         data: {
             tooltip: 'Permalink erzeugen',
             text: 'Permalink',
-            windowTitle: 'Link zur Anwendung'
+            windowTitle: 'Link zur Anwendung',
+            documentation: '<h2>Permalink erzeugen</h2>• Ein Klick auf ' +
+                'den Button öffnet ein Fenster, in dem ein Permalink erzeugt ' +
+                'werden kann. Dieser Link kann benutzt werden, um die ' +
+                'Applikation in einem vordefinierten Zustand, wie z.B. ' +
+                'Zentrum der Karte oder sichtbare Themen, zu öffnen.'
         }
     },
+
+    /**
+     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: 'basigx-button-permalink'
+        },
+        {
+            clickOnButton: 'basigx-button-permalink'
+        },
+        {
+            moveMouseTo: 'window[name=permalink-window]'
+        },
+        {
+            destroy: 'window[name=permalink-window]'
+        }
+    ],
 
     bind: {
         text: '{text}'
