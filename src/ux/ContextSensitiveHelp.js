@@ -148,7 +148,7 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
         var foundHelp;
         var parent;
         var xtypeHasHelp = Ext.Array.contains(
-            existingHelpKeys, component.getXType()
+            existingHelpKeys, component.xtype
         );
         var compHasHelpKey = Ext.Array.contains(
             existingHelpKeys, component.helpKey
