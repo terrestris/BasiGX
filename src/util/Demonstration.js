@@ -59,6 +59,12 @@ Ext.define('BasiGX.util.Demonstration', {
          * @param {Array} liveDemoConfig The configuration Array which holds
          *     Objects with information on how to demonstrate the functionality
          */
+
+        /*begin i18n*/
+        demoBrokenTitle: 'Error',
+        demoBrokenMsg: 'Sorry, the demo seems to be broken.',
+        /*end i18n*/
+
         demo: function(origin, liveDemoConfig) {
             // show an absolute positioned demo mouse cursor at the origin
             var imgBox = Ext.create('Ext.container.Container', {
@@ -78,8 +84,19 @@ Ext.define('BasiGX.util.Demonstration', {
             });
 
             var el = imgBox.el;
+            el.setZIndex(99998);
+
+            // create an invisible mask so that the user cannot inerfere the
+            // demonstration. All mouse interactions will get blocked by
+            // this until the demo is ended or cancelled.
+            var unclickableLayer = Ext.create('Ext.container.Container', {
+                name: 'demooverlay',
+                renderTo: Ext.getBody(),
+                height: Ext.getBody().getHeight(),
+                width: Ext.getBody().getWidth()
+            });
             // make sure we are always on top...
-            el.setZIndex(99999);
+            unclickableLayer.el.setZIndex(99999);
 
             // start the demonstration chain
             BasiGX.util.Demonstration.handleAnimationChain(
@@ -166,13 +183,14 @@ Ext.define('BasiGX.util.Demonstration', {
          */
         cancelDemo: function(el) {
             BasiGX.util.Demonstration.endDemo(el);
-            Ext.Msg.alert(
-                'Error', 'Sorry, the demo seems to be broken.');
+            Ext.Msg.alert(BasiGX.util.Demonstration.demoBrokenTitle,
+                BasiGX.util.Demonstration.demoBrokenMsg);
             return;
         },
 
         /**
-         * End the demo by removing the demo mouse cursor
+         * End the demo by removing the demo mouse cursor and the invisible
+         * overlay
          *
          * @param {Object} el The Ext.element which represents the demo
          *     mouse cursor
@@ -180,6 +198,11 @@ Ext.define('BasiGX.util.Demonstration', {
         endDemo: function(el) {
             var task = new Ext.util.DelayedTask(function() {
                 el.destroy();
+                var overlay = Ext.ComponentQuery.query(
+                    'container[name=demooverlay]')[0];
+                if (overlay) {
+                    overlay.destroy();
+                }
             });
             task.delay(1000);
         },
