@@ -26,7 +26,7 @@ Ext.define('BasiGX.util.Demonstration', {
 
         /**
          * Starts the live demonstration mode for a specific component.
-         @example:
+         * Example:
              BasiGX.util.Demonstration.demo(
                  someExtComponentLikeAButton,
                  [{
