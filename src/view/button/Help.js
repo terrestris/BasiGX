@@ -38,6 +38,11 @@ Ext.define('BasiGX.view.button.Help', {
     getHelpFromComponent: false,
 
     /**
+     * The URL to use for the help
+     */
+    helpUrl: '../help/index.html',
+
+    /**
      *
      */
     viewModel: {
@@ -73,7 +78,8 @@ Ext.define('BasiGX.view.button.Help', {
         additonalHelpKeys: null,
         handler: function(button) {
             var help = Ext.create('BasiGX.ux.ContextSensitiveHelp', {
-                getHelpFromComponent: this.getHelpFromComponent
+                getHelpFromComponent: this.getHelpFromComponent,
+                helpUrl: this.helpUrl
             });
             help.setContextHelp(button.getAdditonalHelpKeys());
         }

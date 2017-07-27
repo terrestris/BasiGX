@@ -86,7 +86,7 @@ Ext.define('BasiGX.util.Demonstration', {
             var el = imgBox.el;
             el.setZIndex(99998);
 
-            // create an invisible mask so that the user cannot inerfere the
+            // create an invisible mask so that the user cannot interfere the
             // demonstration. All mouse interactions will get blocked by
             // this until the demo is ended or cancelled.
             var unclickableLayer = Ext.create('Ext.container.Container', {
