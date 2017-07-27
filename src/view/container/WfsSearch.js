@@ -48,7 +48,11 @@ Ext.define('BasiGX.view.container.WfsSearch', {
         data: {
             searchTermTextFieldLabel: 'Suchbegriff',
             searchResultGridTitle: 'Suchergebnisse',
-            resetBtnText: 'Zurücksetzen'
+            resetBtnText: 'Zurücksetzen',
+            documentation: '<h2>WFS basierte Suche</h2>• Verwenden Sie die ' +
+                'WFS Suche, um auf Basis eines definierten Kartenthemas die ' +
+                'Attribute nach ihrem Suchbegriff zu durchsuchen und das ' +
+                'Ergbnis auf der Karte anzeigen zu lassen'
         }
     },
 

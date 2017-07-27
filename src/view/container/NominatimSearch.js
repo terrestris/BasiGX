@@ -47,7 +47,11 @@ Ext.define('BasiGX.view.container.NominatimSearch', {
         data: {
             searchTermTextFieldLabel: 'Suchbegriff',
             searchResultGridTitle: 'Suchergebnisse',
-            resetBtnText: 'Zurücksetzen'
+            resetBtnText: 'Zurücksetzen',
+            documentation: '<h2>Nominatim-Suche</h2>• Benutzen Sie die ' +
+                'Nominatim Suche, um nach Orten, Straßen, Koordinaten oder ' +
+                'anderen geographisch verortenen Daten aus dem Bestand von ' +
+                'OpenStreetMap zu suchen'
         }
     },
 

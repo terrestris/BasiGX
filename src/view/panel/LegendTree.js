@@ -31,6 +31,11 @@ Ext.define('BasiGX.view.panel.LegendTree', {
 
     viewModel: {
         data: {
+            documentation: '<h2>Themen Auswahl mit Legenden</h2>• In diesem ' +
+                'Fenster können Sie die verfügbaren Kartenthemen sehen und ' +
+                'deren Sichtbarkeit steuern. Ausserdem haben Sie die ' +
+                'Möglichkeit, sich die Legenden zu den einzelnen Themen ' +
+                'anzeigen zu lassen'
         }
     },
 

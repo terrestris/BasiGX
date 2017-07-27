@@ -34,7 +34,13 @@ Ext.define('BasiGX.view.button.Hsi', {
     viewModel: {
         data: {
             tooltip: 'Informationsabfrage',
-            text: null
+            text: null,
+            documentation: '<h2>Informationsabfrage</h2>• Ein Klick auf den ' +
+                'Button aktiviert bzw. deaktiviert die Informationsabfrage ' +
+                'in der Karte.<br>• Wenn Sie sich bei aktiviertem Werkzeug ' +
+                'mit der Maus über ein abfragbares Kartenthema befinden, ' +
+                'wird die Information zu diesem Objekt in einem Fenster ' +
+                'dargestellt'
         }
     },
 

@@ -47,7 +47,11 @@ Ext.define('BasiGX.view.container.MultiSearchSettings', {
             gazetteerLabel: 'Gazetteer Suche verwenden',
             objectSearchLabel: 'Objekt Suche verwenden',
             objectSearchLayersLabel: 'Layer für Objektsuche',
-            saveBtnText: 'Sucheinstellungen speichern'
+            saveBtnText: 'Sucheinstellungen speichern',
+            documentation: '<h2>Multi-Suche</h2>• Benutzen Sie die ' +
+                'Mutlisuche, um nach beliebigen Begriffen über mehrere ' +
+                'Datenquellen hinweg gleichzeitig zu suchen.<br>• Über ' +
+                'die Einstellungen können Sie das Suchverhalten genauer steuern'
         }
     },
 

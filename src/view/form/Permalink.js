@@ -35,7 +35,12 @@ Ext.define('BasiGX.view.form.Permalink', {
     viewModel: {
         data: {
             refreshBtnText: 'Erneuern',
-            copyToClipboardBtnText: 'In Zwischenablage kopieren'
+            copyToClipboardBtnText: 'In Zwischenablage kopieren',
+            documentation: '<h2>Permalink erzeugen</h2>• In diesem Dialog ' +
+                'kann ein Permalink erzeugt werden.<br>' +
+                '• Dieser Link kann benutzt werden, um die ' +
+                'Applikation in einem vordefinierten Zustand, wie z.B. ' +
+                'Zentrum der Karte oder sichtbare Themen, zu öffnen.'
         }
     },
 

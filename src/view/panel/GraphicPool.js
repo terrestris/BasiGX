@@ -50,7 +50,11 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
             msgConfirmDeletionTpl: 'Do you really want to delete this picture?',
             graphicDeleteInfoSuccess: 'Image successfully deleted',
             graphicDeleteInfoError: 'Image deletion failed',
-            msgDeletionCancelled: 'Deletion cancelled.'
+            msgDeletionCancelled: 'Deletion cancelled.',
+            documentation: '<h2>Grafik Sammlung</h2>• In diesem Dialog ' +
+                'können Sie vorhanden Bilder des Systems auswählen oder ' +
+                'auch mit Hilfe einer Upload-Funktion eigene Bilder dem ' +
+                'System hinzufügen, um diese anschließend weiterzuverwenden'
         }
     },
 

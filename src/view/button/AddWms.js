@@ -40,7 +40,11 @@ Ext.define('BasiGX.view.button.AddWms', {
             tooltip: 'WMS hinzufügen',
             text: 'WMS <span style="font-size: 1.7em; ' +
                 'font-weight: normal;">⊕</span>',
-            windowTitle: 'WMS hinzufügen'
+            windowTitle: 'WMS hinzufügen',
+            documentation: '<h2>WMS hinzufügen</h2>• Ein Klick auf den ' +
+                'Button öffnet ein Fenster, in dem Sie mit Hilfe einer ' +
+                'WMS-URL einen beliebigen Kartendienst der Karte hinzufügen ' +
+                'können.'
         }
     },
 
@@ -50,6 +54,63 @@ Ext.define('BasiGX.view.button.AddWms', {
     bind: {
         text: '{text}'
     },
+
+    /**
+     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: {
+                component: 'basigx-button-addwms',
+                moveDuration: 2000
+            }
+        },
+        {
+            clickOnButton: 'basigx-button-addwms'
+        },
+        {
+            moveMouseTo: {
+                component: 'window[name=add-wms-window] textfield[name=url]',
+                moveDuration: 2000
+            }
+        },
+        {
+            enterText: {
+                component: 'window[name=add-wms-window] textfield[name=url]',
+                text: 'https://ows.terrestris.de/osm/service',
+                waitAfter: 3500
+            }
+        },
+        {
+            moveMouseTo:
+                'window[name=add-wms-window] button[name=requestLayersBtn]'
+        },
+        {
+            clickOnButton: {
+                component:
+                    'window[name=add-wms-window] button[name=requestLayersBtn]',
+                waitAfter: 3000
+            }
+        },
+        {
+            scrollTo: {
+                component: 'window[name=add-wms-window] form',
+                target: {
+                    x: 0,
+                    y: 999,
+                    animate: true
+                }
+            }
+        },
+        {
+            moveMouseTo:
+                'window[name=add-wms-window] button[name=add-checked-layers]'
+        },
+        {
+            destroy: 'window[name=add-wms-window]'
+        }
+    ],
 
     /**
      *
