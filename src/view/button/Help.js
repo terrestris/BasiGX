@@ -83,5 +83,12 @@ Ext.define('BasiGX.view.button.Help', {
             });
             help.setContextHelp(button.getAdditonalHelpKeys());
         }
+    },
+
+    /**
+     * @param {String} url The URL to set
+     */
+    setHelpUrl: function(url) {
+        this.helpUrl = url;
     }
 });
