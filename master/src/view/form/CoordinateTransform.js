@@ -37,7 +37,13 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
             transformBtnText: 'Transformieren',
             resetFormBtnText: 'Zurücksetzen',
             transformBtnIconCls: '{transformButtonIconCls}',
-            transformBtnTooltip: '{transformButtonToolTip}'
+            transformBtnTooltip: '{transformButtonToolTip}',
+            documentation: '<h2>Koordinaten transformieren</h2>• In diesem ' +
+                'Dialog können Koordinaten transformiert werden.<br>' +
+                '• Geben Sie Koordinaten in die Eingabefelder ein, um sich ' +
+                'anschließend den Punkt in der Karte anzeigen zu lassen.<br>' +
+                '• Klicken Sie alternativ in die Karte, um sich die ' +
+                'jeweiligen Koordinaten anzeigen zu lassen'
         }
     },
 

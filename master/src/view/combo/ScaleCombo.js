@@ -28,7 +28,11 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
 
     viewModel: {
         data: {
-            fieldLabel: null
+            fieldLabel: null,
+            documentation: '<h2>Maßstabswahl</h2>• Wählen Sie mit Hilfe ' +
+                'dieser ComboBox den gewünschten Maßstab aus.<br>• Zoomen ' +
+                'Sie innerhalb der Karte, so aktualisiert sich die ComboBox ' +
+                'entsprechend mit dem aktuellen Maßstab'
         }
     },
 

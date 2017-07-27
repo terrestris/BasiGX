@@ -76,7 +76,11 @@ Ext.define('BasiGX.view.combo.Language', {
 
     viewModel: {
         data: {
-            fieldLabel: null
+            fieldLabel: null,
+            documentation: '<h2>Sprachauswahl</h2>• Wählen Sie mit Hilfe ' +
+                'dieser ComboBox die Sprache der Anwendung aus.<br>• Nachdem ' +
+                'Sie eine andere Sprache gewählt haben, wird die Anwendung ' +
+                'in der entsprechenden Sprache dargestellt'
         }
     },
 

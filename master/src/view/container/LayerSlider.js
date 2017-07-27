@@ -57,7 +57,10 @@ Ext.define('BasiGX.view.container.LayerSlider', {
      */
     viewModel: {
         data: {
-            disabeldLabelHtml: 'Aus'
+            disabeldLabelHtml: 'Aus',
+            documentation: '<h2>LayerSlider</h2>• Bewegen Sie den ' +
+                'Schieberegler, um die Darstellung von einem Kartenthem ' +
+                'zum nächsten in einem weichen Übergang darzustellen'
         }
     },
 

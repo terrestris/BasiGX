@@ -45,7 +45,11 @@ Ext.define('BasiGX.view.panel.LayerSetChooser', {
     viewModel: {
         data: {
             title: 'Themen Auswahl',
-            filterFieldLabel: 'Filter'
+            filterFieldLabel: 'Filter',
+            documentation: '<h2>Themen Auswahl</h2>• In diesem Dialog ' +
+                'können Sie auf vordefinierte Zusammenstellungen von ' +
+                'Kartenthemen zurückgreifen, um diese mit nur einem Klick in ' +
+                'der Karte darzustellen'
         }
     },
 

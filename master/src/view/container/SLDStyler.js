@@ -92,7 +92,12 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                 'Please reassign a new one.',
             pointGrapicDeletedSuccessMsgTitle: 'Deletion succesfull',
             graphicPoolWindowTitle: 'Graphic Pool',
-            fontSymbolPoolWindowTitle: 'Font symbol pool'
+            fontSymbolPoolWindowTitle: 'Font symbol pool',
+            documentation: '<h2>SLD Styler</h2>• Verwenden Sie den ' +
+                'SLD Styler, um Ihre Zeichenobjekte nach Wunsch zu gestalten.' +
+                '<br>• Neben Farben, Strichstärken und Schrifteigenschaften ' +
+                'können auch eigene Icons für die Symbolisierung verwendet ' +
+                'werden'
         }
     },
 

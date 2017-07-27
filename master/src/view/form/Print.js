@@ -52,7 +52,12 @@ Ext.define('BasiGX.view.form.Print', {
             formatComboLabel: 'Format',
             layoutComboLabel: 'Layout',
             attributesTitle: 'Eigenschaften',
-            mapTitleLabel: 'Kartentitel'
+            mapTitleLabel: 'Kartentitel',
+            documentation: '<h2>Karte drucken</h2>• In diesem Dialog ' +
+                'kann ein Kartenausdruck erzeugt werden.<br>' +
+                '• Füllen Sie das Formular aus und schicken den Druckauftrag ' +
+                'ab.<br>• Nach kurzer Wartezeit sollte der Druck in Form ' +
+                'einer PDF Datei zum Download bereitstehen'
         }
     },
 

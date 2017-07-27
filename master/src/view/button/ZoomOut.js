@@ -34,7 +34,9 @@ Ext.define('BasiGX.view.button.ZoomOut', {
     viewModel: {
         data: {
             tooltip: 'Herauszoomen',
-            text: null
+            text: null,
+            documentation: '<h2>Herauszoomen</h2>• Ein Klick auf den Button ' +
+                'verkleinert die Karte um eine Zoomstufe.'
         }
     },
 
@@ -56,6 +58,19 @@ Ext.define('BasiGX.view.button.ZoomOut', {
      */
     glyph: 'xf010@FontAwesome',
     html: '<i class="fa fa-search-minus fa-2x"></i>',
+
+    /**
+     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: 'basigx-button-zoomout'
+        },
+        {
+            clickOnButton: 'basigx-button-zoomout'
+        }
+    ],
 
     config: {
         handler: function() {

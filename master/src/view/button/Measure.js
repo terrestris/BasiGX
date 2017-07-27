@@ -41,7 +41,14 @@ Ext.define('BasiGX.view.button.Measure', {
             continuePolygonMsg: 'Klicken zum Zeichnen der Fläche',
             continueLineMsg: 'Klicken zum Zeichnen der Strecke',
             continueAngleMsg: 'Klicken zum Zeichnen des Winkels',
-            clickToDrawText: 'Klicken zum Messen'
+            clickToDrawText: 'Klicken zum Messen',
+            documentation: '<h2>Messwerkzeug</h2>• Ein Klick auf den Button ' +
+                'aktiviert das Messwerkzeug.<br>• Klicken Sie anschließend ' +
+                'mit der Maus in der Karte, um einen Messpunkt zu ' +
+                'erstellen.<br>• Wiederholen Sie den Vorgang mit beliebig ' +
+                'vielen Messpunkten.<br>• Um den Messvorgang abzuschließen ' +
+                'führen Sie einen Doppelklick aus.<br>• Das Messergebnis ' +
+                'wird ihnen in der Karte angezeigt.'
         }
     },
 

@@ -34,9 +34,24 @@ Ext.define('BasiGX.view.button.ToggleLegend', {
     viewModel: {
         data: {
             tooltip: 'Layerauswahl',
-            text: null
+            text: null,
+            documentation: '<h2>Layerauswahl</h2>• Ein Klick auf ' +
+                'den Button klappt die Legendenansicht ein oder aus.'
         }
     },
+
+    /**
+     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: 'basigx-button-togglelegend'
+        },
+        {
+            clickOnButton: 'basigx-button-togglelegend'
+        }
+    ],
 
     /**
      *

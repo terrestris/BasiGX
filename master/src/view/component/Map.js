@@ -38,6 +38,18 @@ Ext.define('BasiGX.view.component.Map', {
         }
     },
 
+    viewModel: {
+        data: {
+            documentation: '<h2>Karte</h2>• Die Karte wird zur Darstellung ' +
+                'der verschiedenen Kartenthemen verwendet.<br>• Mit Hilfe ' +
+                'des Themenbaums oder der Werkzeuge können Sie mit der ' +
+                'Karte interagieren.<br>• Standardmäßig können Sie den ' +
+                'Maßstab der Karte mit dem Mausrad oder einem Doppelklick ' +
+                'vergrößern und verkleinern.<br>• Für weitere Informationen ' +
+                'verwenden Sie die Hilfe für ein konkretes Werkzeug'
+        }
+    },
+
     /**
      * The app context
      */

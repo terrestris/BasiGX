@@ -39,7 +39,14 @@ Ext.define('BasiGX.view.button.CoordinateTransform', {
         data: {
             tooltip: 'Koordinaten transformieren und anzeigen',
             text: 'Koordinaten transformieren',
-            windowTitle: 'Koordinaten transformieren'
+            windowTitle: 'Koordinaten transformieren',
+            documentation: '<h2>Koordinaten transformieren</h2>• Ein Klick ' +
+                'auf den Button öffnet ein Fenster, in dem Koordinaten ' +
+                'transformiert werden können.<br>• Geben Sie Koordinaten in ' +
+                'die Eingabefelder ein, um sich anschließend den Punkt in ' +
+                'der Karte anzeigen zu lassen.<br>• Klicken Sie alternativ ' +
+                'in die Karte, um sich die jeweiligen Koordinaten anzeigen ' +
+                'zu lassen'
         }
     },
 

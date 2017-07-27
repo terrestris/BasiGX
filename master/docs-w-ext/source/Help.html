@@ -46,13 +46,31 @@ Ext.define('BasiGX.view.button.Help', {
         'Ext.app.ViewModel'
     ],
 
+<span id='BasiGX-view-button-Help-property-getHelpFromComponent'>    /**
+</span>     * Flag to enable the usage of the key `documentation`, which holds
+     * an explanation of the component in HTML notation.
+     * Useful, if you want to render a component specific help
+     * instead of opening the regular HTML anchor link
+     */
+    getHelpFromComponent: false,
+
+<span id='BasiGX-view-button-Help-property-helpUrl'>    /**
+</span>     * The URL to use for the help
+     */
+    helpUrl: '../help/index.html',
+
 <span id='BasiGX-view-button-Help-property-viewModel'>    /**
 </span>     *
      */
     viewModel: {
         data: {
             tooltip: 'Hilfe',
-            text: null
+            text: null,
+            documentation: '&lt;h2&gt;Hilfe&lt;/h2&gt;• Ein Klick auf den Button ' +
+                'aktiviert die kontextsensitive Hilfe.&lt;br&gt;• Sobald Sie ' +
+                'anschließend mit der Maus auf eine Komponente der Anwendung ' +
+                'klicken, erhalten Sie einen Hilfetext, der deren Benutzung ' +
+                'erläutert'
         }
     },
 
@@ -76,9 +94,19 @@ Ext.define('BasiGX.view.button.Help', {
     config: {
 <span id='BasiGX-view-button-Help-cfg-additonalHelpKeys'>        additonalHelpKeys: null,
 </span><span id='BasiGX-view-button-Help-cfg-handler'>        handler: function(button) {
-</span>            var help = Ext.create('BasiGX.ux.ContextSensitiveHelp');
+</span>            var help = Ext.create('BasiGX.ux.ContextSensitiveHelp', {
+                getHelpFromComponent: this.getHelpFromComponent,
+                helpUrl: this.helpUrl
+            });
             help.setContextHelp(button.getAdditonalHelpKeys());
         }
+    },
+
+<span id='BasiGX-view-button-Help-method-setHelpUrl'>    /**
+</span>     * @param {String} url The URL to set
+     */
+    setHelpUrl: function(url) {
+        this.helpUrl = url;
     }
 });
 </pre>

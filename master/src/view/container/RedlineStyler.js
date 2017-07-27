@@ -56,7 +56,12 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
             pointGrapicDeletedSuccessMsgText: 'The icon has been deleted. ' +
                 'Please reassign a new one.',
             pointGrapicDeletedSuccessMsgTitle: 'Deletion succesfull',
-            graphicPoolWindowTitle: 'Graphic Pool'
+            graphicPoolWindowTitle: 'Graphic Pool',
+            documentation: '<h2>Styler</h2>• Benutzen Sie den ' +
+                'Styler, um Ihre Zeichenobjekte nach Wunsch zu gestalten.' +
+                '<br>• Neben Farben, Strichstärken und Schrifteigenschaften ' +
+                'können auch eigene Icons für die Symbolisierung verwendet ' +
+                'werden'
         }
     },
 

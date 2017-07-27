@@ -51,7 +51,9 @@ Ext.define('BasiGX.view.button.ZoomIn', {
     viewModel: {
         data: {
             tooltip: 'Hineinzoomen',
-            text: null
+            text: null,
+            documentation: '&lt;h2&gt;Hineinzoomen&lt;/h2&gt;• Ein Klick auf den Button ' +
+                'vergrößert die Karte um eine Zoomstufe.'
         }
     },
 
@@ -71,6 +73,19 @@ Ext.define('BasiGX.view.button.ZoomIn', {
     glyph: 'xf00e@FontAwesome',
 <span id='BasiGX-view-button-ZoomIn-cfg-html'>    html: '&lt;i class=&quot;fa fa-search-plus fa-2x&quot;&gt;&lt;/i&gt;',
 </span>
+<span id='BasiGX-view-button-ZoomIn-property-liveDemoConfig'>    /**
+</span>     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: 'basigx-button-zoomin'
+        },
+        {
+            clickOnButton: 'basigx-button-zoomin'
+        }
+    ],
+
 <span id='BasiGX-view-button-ZoomIn-property-config'>    /**
 </span>     *
      */

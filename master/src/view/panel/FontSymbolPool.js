@@ -39,7 +39,13 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
     viewModel: {
         data: {
             closeBtnText: 'Close',
-            fontSelectLabel: 'Select a font'
+            fontSelectLabel: 'Select a font',
+            documentation: '<h2>Zeichensatz Sammlung</h2>• In diesem Dialog ' +
+                'kann für die Darstellung von Objekten ein Zeichen einer ' +
+                'Schriftart gewählt werden.<br>• Wählen Sie zunächst eine ' +
+                'Schriftart aus.<br>• Anschließend können Sie aus der ' +
+                'Zeichentabelle ein Symbol auswählen, dass zur Darstellung ' +
+                'verwendet werden soll'
         }
     },
 
