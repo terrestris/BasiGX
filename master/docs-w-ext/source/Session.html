@@ -45,7 +45,7 @@
  * ## Saving
  *
  * There are two basic ways to save the contents of a Session: `getChanges` and
- * `getSaveBatch`. We've already seen `getChanges`. The data contained in the CRUD object
+ * `getSaveBatch`. We&#39;ve already seen `getChanges`. The data contained in the CRUD object
  * can be translated into whatever shape is needed by the server.
  *
  * To leverage the `{@link Ext.data.Model#proxy proxy}` facilities defined by each Model
@@ -55,19 +55,19 @@
  * 
  * @since 5.0.0
  */
-Ext.define('Ext.data.Session', {
+Ext.define(&#39;Ext.data.Session&#39;, {
     requires: [
-        'Ext.data.schema.Schema',
-        'Ext.data.Batch',
-        'Ext.data.matrix.Matrix',
-        'Ext.data.session.ChangesVisitor',
-        'Ext.data.session.ChildChangesVisitor',
-        'Ext.data.session.BatchVisitor'
+        &#39;Ext.data.schema.Schema&#39;,
+        &#39;Ext.data.Batch&#39;,
+        &#39;Ext.data.matrix.Matrix&#39;,
+        &#39;Ext.data.session.ChangesVisitor&#39;,
+        &#39;Ext.data.session.ChildChangesVisitor&#39;,
+        &#39;Ext.data.session.BatchVisitor&#39;
     ],
 
     mixins: [
-        'Ext.mixin.Dirty',
-        'Ext.mixin.Observable'
+        &#39;Ext.mixin.Dirty&#39;,
+        &#39;Ext.mixin.Observable&#39;
     ],
 
 <span id='Ext-data-Session-property-isSession'>    isSession: true,
@@ -76,7 +76,7 @@ Ext.define('Ext.data.Session', {
 <span id='Ext-data-Session-cfg-schema'>        /**
 </span>         * @cfg {String/Ext.data.schema.Schema} schema
          */
-        schema: 'default',
+        schema: &#39;default&#39;,
 
 <span id='Ext-data-Session-cfg-parent'>        /**
 </span>         * @cfg {Ext.data.Session} parent
@@ -95,25 +95,25 @@ Ext.define('Ext.data.Session', {
         autoDestroy: true,
 
 <span id='Ext-data-Session-cfg-crudProperties'>        crudProperties: {
-</span>            create: 'C',
-            read:   'R',
-            update: 'U',
-            drop:   'D'
+</span>            create: &#39;C&#39;,
+            read:   &#39;R&#39;,
+            update: &#39;U&#39;,
+            drop:   &#39;D&#39;
         }
     },
 
 <span id='Ext-data-Session-property-crudOperations'>    crudOperations: [{
-</span>        type: 'R',
-        entityMethod: 'readEntities'
+</span>        type: &#39;R&#39;,
+        entityMethod: &#39;readEntities&#39;
     }, {
-        type: 'C',
-        entityMethod: 'createEntities'
+        type: &#39;C&#39;,
+        entityMethod: &#39;createEntities&#39;
     }, {
-        type: 'U',
-        entityMethod: 'updateEntities'
+        type: &#39;U&#39;,
+        entityMethod: &#39;updateEntities&#39;
     }, {
-        type: 'D',
-        entityMethod: 'dropEntities'
+        type: &#39;D&#39;,
+        entityMethod: &#39;dropEntities&#39;
     }],
 
 <span id='Ext-data-Session-property-crudKeys'>    crudKeys: {
@@ -160,7 +160,7 @@ Ext.define('Ext.data.Session', {
 
         me.identifierCache = {};
 
-        // Bind ourselves so we're always called in our own scope.
+        // Bind ourselves so we&#39;re always called in our own scope.
         me.recordCreator = me.recordCreator.bind(me);
 
         me.mixins.observable.constructor.call(me, config);
@@ -186,7 +186,7 @@ Ext.define('Ext.data.Session', {
                     // the session reference
                     record.$source = null;
 
-                    // While we don't actually call join() for the session, we need to
+                    // While we don&#39;t actually call join() for the session, we need to
                     // tell the records that they are being detached from the session in
                     // some way.
                     record.unjoin(me);
@@ -215,7 +215,7 @@ Ext.define('Ext.data.Session', {
         //&lt;debug&gt;
         me.checkModelType(record.self);
         if (record.session &amp;&amp; record.session !== me) {
-            Ext.raise('Record already belongs to an existing session');
+            Ext.raise(&#39;Record already belongs to an existing session&#39;);
         }
         //&lt;/debug&gt;
         if (record.session !== me) {
@@ -278,11 +278,11 @@ Ext.define('Ext.data.Session', {
             parent = this.getParent(),
             id;
 
-        // If we have no data, we're creating a phantom
+        // If we have no data, we&#39;re creating a phantom
         if (data &amp;&amp; parent) {
             id = Model.getIdFromData(data);
             if (parent.peekRecord(Model, id)) {
-                Ext.raise('A parent session already contains an entry for ' + Model.entityName + ': ' + id);
+                Ext.raise(&#39;A parent session already contains an entry for &#39; + Model.entityName + &#39;: &#39; + id);
             }
         }
         // By passing the session to the constructor, it will call session.add()
@@ -355,8 +355,8 @@ Ext.define('Ext.data.Session', {
             }
             if (parentRec) {
                 if (parentRec.isLoading()) {
-                    // If the parent is loading, it's as though it doesn't have
-                    // the record, so we can't copy it, but we don't want to
+                    // If the parent is loading, it&#39;s as though it doesn&#39;t have
+                    // the record, so we can&#39;t copy it, but we don&#39;t want to
                     // adopt it either.
                     wasInstance = false;
                 } else {
@@ -408,7 +408,7 @@ Ext.define('Ext.data.Session', {
      * @template
      */
     onInvalidAssociationEntity: function(entityType, id) {
-        Ext.raise('Unable to read association entity: ' + this.getModelIdentifier(entityType, id));
+        Ext.raise(&#39;Unable to read association entity: &#39; + this.getModelIdentifier(entityType, id));
     },
 
 <span id='Ext-data-Session-method-onInvalidEntityCreate'>    /**
@@ -421,7 +421,7 @@ Ext.define('Ext.data.Session', {
      * @template
      */
     onInvalidEntityCreate: function(entityType, id) {
-        Ext.raise('Cannot create, record already not exists: ' + this.getModelIdentifier(entityType, id));
+        Ext.raise(&#39;Cannot create, record already not exists: &#39; + this.getModelIdentifier(entityType, id));
     },
 
 <span id='Ext-data-Session-method-onInvalidEntityDrop'>    /**
@@ -434,7 +434,7 @@ Ext.define('Ext.data.Session', {
      * @template
      */
     onInvalidEntityDrop: function(entityType, id) {
-        Ext.raise('Cannot drop, record does not exist: ' + this.getModelIdentifier(entityType, id));
+        Ext.raise(&#39;Cannot drop, record does not exist: &#39; + this.getModelIdentifier(entityType, id));
     },
 
 <span id='Ext-data-Session-method-onInvalidEntityRead'>    /**
@@ -447,7 +447,7 @@ Ext.define('Ext.data.Session', {
      * @template
      */
     onInvalidEntityRead: function(entityType, id) {
-        Ext.raise('Cannot read, record already not exists: ' + this.getModelIdentifier(entityType, id));
+        Ext.raise(&#39;Cannot read, record already not exists: &#39; + this.getModelIdentifier(entityType, id));
     },
 
 <span id='Ext-data-Session-method-onInvalidEntityUpdate'>    /**
@@ -462,9 +462,9 @@ Ext.define('Ext.data.Session', {
      */
     onInvalidEntityUpdate: function(entityType, id, dropped) {
         if (dropped) {
-            Ext.raise('Cannot update, record dropped: ' + this.getModelIdentifier(entityType, id));
+            Ext.raise(&#39;Cannot update, record dropped: &#39; + this.getModelIdentifier(entityType, id));
         } else {
-            Ext.raise('Cannot update, record does not exist: ' + this.getModelIdentifier(entityType, id));
+            Ext.raise(&#39;Cannot update, record does not exist: &#39; + this.getModelIdentifier(entityType, id));
         }
     },
 
@@ -518,7 +518,7 @@ Ext.define('Ext.data.Session', {
         }
         //&lt;debug&gt;
         else {
-            Ext.raise('Cannot commit session, no parent exists');
+            Ext.raise(&#39;Cannot commit session, no parent exists&#39;);
         }
         //&lt;/debug&gt;
     },
@@ -555,7 +555,7 @@ Ext.define('Ext.data.Session', {
             entityType = schema.getEntity(entityName);
             //&lt;debug&gt;
             if (!entityType) {
-                Ext.raise('Invalid entity type: ' + entityName);
+                Ext.raise(&#39;Invalid entity type: &#39; + entityName);
             }
             //&lt;/debug&gt;
             entityInfo = data[entityName];
@@ -583,7 +583,7 @@ Ext.define('Ext.data.Session', {
                 role = associations[key];
                 //&lt;debug&gt;
                 if (!role) {
-                    Ext.raise('Invalid association key for ' + entityName + ', &quot;' + key + '&quot;');
+                    Ext.raise(&#39;Invalid association key for &#39; + entityName + &#39;, &quot;&#39; + key + &#39;&quot;&#39;);
                 }
                 //&lt;/debug&gt;
                 associationData = entityInfo[role.role];
@@ -608,7 +608,7 @@ Ext.define('Ext.data.Session', {
 
             //&lt;debug&gt;
             if (entry.record) {
-                Ext.raise('Duplicate id ' + record.id + ' for ' + record.entityName);
+                Ext.raise(&#39;Duplicate id &#39; + record.id + &#39; for &#39; + record.entityName);
             }
             //&lt;/debug&gt;
 
@@ -688,9 +688,9 @@ Ext.define('Ext.data.Session', {
             }
 
             if (!name) {
-                Ext.raise('Unable to use anonymous models in a Session');
+                Ext.raise(&#39;Unable to use anonymous models in a Session&#39;);
             } else if (!this.getSchema().getEntity(name)) {
-                Ext.raise('Unknown entity type ' + name);
+                Ext.raise(&#39;Unknown entity type &#39; + name);
             }
         },
         //&lt;/debug&gt;
@@ -766,7 +766,7 @@ Ext.define('Ext.data.Session', {
             if (entities &amp;&amp; entities[id]) {
                 me.untrackRecordState(record);
 
-                // While we don't actually call join() for the session, we need to
+                // While we don&#39;t actually call join() for the session, we need to
                 // tell the records that they are being detached from the session in
                 // some way.
                 record.unjoin(me);
@@ -841,7 +841,7 @@ Ext.define('Ext.data.Session', {
                     for (id in parentRefs) {
                         rec = parentRefs[id];
                         if ((!refs || !refs[id])) {
-                            // We don't know about this record but the parent does. We need to
+                            // We don&#39;t know about this record but the parent does. We need to
                             // pull it down so it may be edited as part of the collection
                             this.getRecord(rec.self, rec.id);
                         }
@@ -908,7 +908,7 @@ Ext.define('Ext.data.Session', {
          * @return {String} The identifier.
          */
         getModelIdentifier: function(entityType, id) {
-            return id + '@' + entityType.entityName;
+            return id + &#39;@&#39; + entityType.entityName;
         },
 
         onIdChanged: function (record, oldId, newId) {
@@ -925,8 +925,8 @@ Ext.define('Ext.data.Session', {
 
             //&lt;debug&gt;
             if (bucket[newId]) {
-                Ext.raise('Cannot change ' + entityName + ' id from ' + oldId +
-                                ' to ' + newId + ' id already exists');
+                Ext.raise(&#39;Cannot change &#39; + entityName + &#39; id from &#39; + oldId +
+                                &#39; to &#39; + newId + &#39; id already exists&#39;);
             }
             //&lt;/debug&gt;
 
@@ -994,7 +994,7 @@ Ext.define('Ext.data.Session', {
             if (store) {
                 store.setRecords(records);
             } else {
-                // We don't have a store. Create it and add the records.
+                // We don&#39;t have a store. Create it and add the records.
                 record[role.getterName](null, null, records);
             }
         },
@@ -1019,7 +1019,7 @@ Ext.define('Ext.data.Session', {
                 } else {
                     this.onInvalidEntityRead(entityType, id);
                 }
-                // We've been read from a &quot;server&quot;, so we aren't a phantom,
+                // We&#39;ve been read from a &quot;server&quot;, so we aren&#39;t a phantom,
                 // regardless of whether or not we have an id
                 rec.phantom = false;
             }
@@ -1030,7 +1030,7 @@ Ext.define('Ext.data.Session', {
                 id = Model.getIdFromData(data),
                 record = me.peekRecord(Model, id, true);
 
-            // It doesn't exist anywhere, create it
+            // It doesn&#39;t exist anywhere, create it
             if (!record) {
                 // We may have a stub that is loading the record (in fact this may be the
                 // call coming from that Reader), but the resolution is simple. By creating

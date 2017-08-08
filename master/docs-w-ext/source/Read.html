@@ -22,42 +22,42 @@
  * This class is instantiated by {@link Ext.data.Store stores} and {@link Ext.data.Model records} and should
  * not need to be instantiated in user code.
  */
-Ext.define('Ext.data.operation.Read', {
-    extend: 'Ext.data.operation.Operation',
-    alias: 'data.operation.read',
+Ext.define(&#39;Ext.data.operation.Read&#39;, {
+    extend: &#39;Ext.data.operation.Operation&#39;,
+    alias: &#39;data.operation.read&#39;,
     
-<span id='Ext-data-operation-Read-property-action'>    action: 'read',
+<span id='Ext-data-operation-Read-property-action'>    action: &#39;read&#39;,
 </span>
 <span id='Ext-data-operation-Read-property-isReadOperation'>    isReadOperation: true,
 </span>    
     config: {
 <span id='Ext-data-operation-Read-cfg-filters'>        /**
 </span>         * @cfg {Ext.util.Filter[]} filters
-         * Optional array of filter objects. Only applies to 'read' actions.
+         * Optional array of filter objects. Only applies to &#39;read&#39; actions.
          */
         filters: undefined,
     
 <span id='Ext-data-operation-Read-cfg-sorters'>        /**
 </span>         * @cfg {Ext.util.Sorter[]} sorters
-         * Optional array of sorter objects. Only applies to 'read' actions.
+         * Optional array of sorter objects. Only applies to &#39;read&#39; actions.
          */
         sorters: undefined,
     
 <span id='Ext-data-operation-Read-cfg-grouper'>        /**
 </span>         * @cfg {Ext.util.Grouper} grouper
-         * Optional grouping configuration. Only applies to 'read' actions where grouping is desired.
+         * Optional grouping configuration. Only applies to &#39;read&#39; actions where grouping is desired.
          */
         grouper: undefined,
     
 <span id='Ext-data-operation-Read-cfg-start'>        /**
 </span>         * @cfg {Number} start
-         * The start index (offset), used in paging when running a 'read' action.
+         * The start index (offset), used in paging when running a &#39;read&#39; action.
          */
         start: undefined,
     
 <span id='Ext-data-operation-Read-cfg-limit'>        /**
 </span>         * @cfg {Number} limit
-         * The number of records to load. Used on 'read' actions when paging is being used.
+         * The number of records to load. Used on &#39;read&#39; actions when paging is being used.
          */
         limit: undefined,
         

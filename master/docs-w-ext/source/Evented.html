@@ -18,12 +18,12 @@
   <pre class="prettyprint lang-js"><span id='Ext-Evented'>/**
 </span> * @private
  */
-Ext.define('Ext.Evented', {
+Ext.define(&#39;Ext.Evented&#39;, {
 
-    alternateClassName: 'Ext.EventedBase',
+    alternateClassName: &#39;Ext.EventedBase&#39;,
 
     mixins: [
-        'Ext.mixin.Observable'
+        &#39;Ext.mixin.Observable&#39;
     ],
 
 <span id='Ext-Evented-property-initialized'>    initialized: false,
@@ -34,7 +34,7 @@ Ext.define('Ext.Evented', {
     },
 
 <span id='Ext-Evented-method-onClassExtended'>    onClassExtended: function(cls, data) {
-</span>        if (!data.hasOwnProperty('eventedConfig')) {
+</span>        if (!data.hasOwnProperty(&#39;eventedConfig&#39;)) {
             return;
         }
 
@@ -56,8 +56,8 @@ Ext.define('Ext.Evented', {
          * (happens during initialization)
          *
          * This is helpful when we only want the event to be fired for subsequent changes.
-         * Also it's a major performance improvement for instantiation when fired events
-         * are mostly useless since there's no listeners
+         * Also it&#39;s a major performance improvement for instantiation when fired events
+         * are mostly useless since there&#39;s no listeners
          */
 
         //TODO: Move this into Observable

@@ -18,7 +18,7 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-CubicBezier'>/**
 </span> * @private
  */
-Ext.define('Ext.fx.CubicBezier', {
+Ext.define(&#39;Ext.fx.CubicBezier&#39;, {
 
     /* Begin Definitions */
 
@@ -84,7 +84,7 @@ Ext.define('Ext.fx.CubicBezier', {
             return Ext.fx.CubicBezier.cubicBezierAtTime(pos, x1, y1, x2, y2, 1);
         };
         fn.toCSS3 = function() {
-            return 'cubic-bezier(' + [x1, y1, x2, y2].join(',') + ')';
+            return &#39;cubic-bezier(&#39; + [x1, y1, x2, y2].join(&#39;,&#39;) + &#39;)&#39;;
         };
         fn.reverse = function() {
             return Ext.fx.CubicBezier.cubicBezier(1 - x2, 1 - y2, 1 - x1, 1 - y1);

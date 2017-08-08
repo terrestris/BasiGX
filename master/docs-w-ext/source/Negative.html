@@ -16,7 +16,7 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-data-identifier-Negative'>/**
-</span> * This class id generator produces successive negative numbers for id's. That is, -1, -2,
+</span> * This class id generator produces successive negative numbers for id&#39;s. That is, -1, -2,
  * etc..
  *
  * The advantage of this type of `identifier` is that these are seldom valid server-side
@@ -24,10 +24,10 @@
  * data type (integer). This means that these values can typically be deserialized by a
  * server and then recognized as provisionally generated.
  */
-Ext.define('Ext.data.identifier.Negative', {
-    extend: 'Ext.data.identifier.Sequential',
+Ext.define(&#39;Ext.data.identifier.Negative&#39;, {
+    extend: &#39;Ext.data.identifier.Sequential&#39;,
 
-    alias: 'data.identifier.negative',
+    alias: &#39;data.identifier.negative&#39;,
 
     config: {
 <span id='Ext-data-identifier-Negative-cfg-increment'>        increment: -1,

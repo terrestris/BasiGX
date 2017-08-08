@@ -20,11 +20,11 @@
  * positioning that all tip-based classes require. This class can be used directly for simple, statically-positioned
  * tips that are displayed programmatically, or it can be extended to provide custom tip implementations.
  */
-Ext.define('Ext.tip.Tip', {
-    extend: 'Ext.panel.Panel',
-    xtype: 'tip',
+Ext.define(&#39;Ext.tip.Tip&#39;, {
+    extend: &#39;Ext.panel.Panel&#39;,
+    xtype: &#39;tip&#39;,
 
-    alternateClassName: 'Ext.Tip',
+    alternateClassName: &#39;Ext.Tip&#39;,
 
 <span id='Ext-tip-Tip-cfg-closable'>    /**
 </span>     * @cfg {Boolean} [closable=false]
@@ -32,7 +32,7 @@ Ext.define('Ext.tip.Tip', {
      */
     
 <span id='Ext-tip-Tip-cfg-width'>    /**
-</span>     * @cfg {Number} [width='auto']
+</span>     * @cfg {Number} [width=&#39;auto&#39;]
      * Width in pixels of the tip.  Width will be ignored if it
      * exceeds the bounds of {@link #minWidth} or {@link #maxWidth}.
      */
@@ -63,7 +63,7 @@ Ext.define('Ext.tip.Tip', {
 
 <span id='Ext-tip-Tip-cfg-autoRender'>    autoRender: true,
 </span><span id='Ext-tip-Tip-cfg-hidden'>    hidden: true,
-</span><span id='Ext-tip-Tip-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'tip',
+</span><span id='Ext-tip-Tip-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;tip&#39;,
 </span><span id='Ext-tip-Tip-cfg-focusOnToFront'>    focusOnToFront: false,
 </span><span id='Ext-tip-Tip-property-maskOnDisable'>    maskOnDisable: false,
 </span>
@@ -82,7 +82,7 @@ Ext.define('Ext.tip.Tip', {
      * **Note:** This behavior has changed! setting *does* affect the {@link #method-close} method
      * which will invoke the approriate closeAction.
      */
-    closeAction: 'hide',
+    closeAction: &#39;hide&#39;,
 
 <span id='Ext-tip-Tip-property-alwaysFramed'>    // Flag to Renderable to always look up the framing styles for this Component
 </span>    alwaysFramed: true,
@@ -120,7 +120,7 @@ Ext.define('Ext.tip.Tip', {
             me.doAlignment(me.getRegion().alignTo({
                 target: new Ext.util.Point(xy[0], xy[1]),
                 inside: me.constrainPosition ? Ext.getBody().getRegion().adjust(5, -5, -5, 5) : null,
-                align: 'tl-tl',
+                align: &#39;tl-tl&#39;,
                 overlap: true                
             }));
         }
@@ -137,17 +137,17 @@ Ext.define('Ext.tip.Tip', {
         if (anchorEl) {
             anchorEl.removeCls(me.anchorCls);
             if (anchorRegion) {
-                me.anchorCls = Ext.baseCSSPrefix + 'tip-anchor-' + anchorRegion.position;
+                me.anchorCls = Ext.baseCSSPrefix + &#39;tip-anchor-&#39; + anchorRegion.position;
                 anchorEl.addCls(me.anchorCls);
                 anchorEl.show();
 
                 // The result is to the left or right of the target
                 if (anchorRegion.align &amp; 1) {
                     anchorEl.setTop(newRegion.anchor.y - newRegion.y);
-                    anchorEl.dom.style.left = '';
+                    anchorEl.dom.style.left = &#39;&#39;;
                 } else {
                     anchorEl.setLeft(newRegion.anchor.x - newRegion.x);
-                    anchorEl.dom.style.top = '';
+                    anchorEl.dom.style.top = &#39;&#39;;
                 }
             } else {
                 anchorEl.hide();
@@ -158,7 +158,7 @@ Ext.define('Ext.tip.Tip', {
 <span id='Ext-tip-Tip-property-privates'>    privates: {
 </span><span id='Ext-tip-Tip-method-initDraggable'>        /**
 </span>         * @private
-         * Set Tip draggable using base Component's draggability.
+         * Set Tip draggable using base Component&#39;s draggability.
          */
         initDraggable: function () {
             var me = this;
@@ -168,7 +168,7 @@ Ext.define('Ext.tip.Tip', {
                 constrain: me,
                 constrainTo: me.el.dom.parentNode
             };
-            // Important: Bypass Panel's initDraggable. Call direct to Component's implementation.
+            // Important: Bypass Panel&#39;s initDraggable. Call direct to Component&#39;s implementation.
             Ext.Component.prototype.initDraggable.call(me);
         }
     },

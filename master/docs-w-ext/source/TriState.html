@@ -23,13 +23,13 @@
  *
  * See {@link Ext.sparkline.Base the base class} for a simple example.
  */
-Ext.define('Ext.sparkline.TriState', {
-    extend: 'Ext.sparkline.BarBase',
+Ext.define(&#39;Ext.sparkline.TriState&#39;, {
+    extend: &#39;Ext.sparkline.BarBase&#39;,
     requires: [
-        'Ext.sparkline.RangeMap'
+        &#39;Ext.sparkline.RangeMap&#39;
     ],
 
-    alias: 'widget.sparklinetristate',
+    alias: &#39;widget.sparklinetristate&#39;,
 
     config: {
 
@@ -46,17 +46,17 @@ Ext.define('Ext.sparkline.TriState', {
 <span id='Ext-sparkline-TriState-cfg-posBarColor'>        /**
 </span>         * @cfg {String} [posBarColor=#6f6] The color for positive value bars.
          */
-        posBarColor: '#6f6',
+        posBarColor: &#39;#6f6&#39;,
         
 <span id='Ext-sparkline-TriState-cfg-negBarColor'>        /**
 </span>         * @cfg {String} [negBarColor=#f44] The color for negative value bars.
          */
-        negBarColor: '#f44',
+        negBarColor: &#39;#f44&#39;,
         
 <span id='Ext-sparkline-TriState-cfg-zeroBarColor'>        /**
 </span>         * @cfg {String} [zeroBarColor=#999] The color for zero value bars.
          */
-        zeroBarColor: '#999',
+        zeroBarColor: &#39;#999&#39;,
         
 <span id='Ext-sparkline-TriState-cfg-colorMap'>        /**
 </span>         * @cfg {Object} [colorMap] An object that uses range specifiers as keys to
@@ -78,17 +78,17 @@ Ext.define('Ext.sparkline.TriState', {
         colorMap: {}
     },
 
-<span id='Ext-sparkline-TriState-cfg-tipTpl'>    tipTpl: ['&amp;#9679; {value:this.states}', {
+<span id='Ext-sparkline-TriState-cfg-tipTpl'>    tipTpl: [&#39;&amp;#9679; {value:this.states}&#39;, {
 </span>        states: function(v) {
             var value = Number(v);
             if (value === -1) {
-                return 'Loss';
+                return &#39;Loss&#39;;
             }
             if (value === 0) {
-                return 'Draw';
+                return &#39;Draw&#39;;
             }
             if (value === 1) {
-                return 'Win';
+                return &#39;Win&#39;;
             }
             return v;
         }

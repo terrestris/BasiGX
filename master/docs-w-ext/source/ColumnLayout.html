@@ -18,25 +18,25 @@
   <pre class="prettyprint lang-js"><span id='Ext-grid-ColumnLayout'>/**
 </span> * @private
  *
- * This class is used only by the grid's HeaderContainer docked child.
+ * This class is used only by the grid&#39;s HeaderContainer docked child.
  *
  * It adds the ability to shrink the vertical size of the inner container element back if a grouped
  * column header has all its child columns dragged out, and the whole HeaderContainer needs to shrink back down.
  *
- * Also, after every layout, after all headers have attained their 'stretchmax' height, it goes through and calls
+ * Also, after every layout, after all headers have attained their &#39;stretchmax&#39; height, it goes through and calls
  * `setPadding` on the columns so that they lay out correctly.
  */
-Ext.define('Ext.grid.ColumnLayout', {
-    extend: 'Ext.layout.container.HBox',
-    alias: 'layout.gridcolumn',
-<span id='Ext-grid-ColumnLayout-property-type'>    type : 'gridcolumn',
+Ext.define(&#39;Ext.grid.ColumnLayout&#39;, {
+    extend: &#39;Ext.layout.container.HBox&#39;,
+    alias: &#39;layout.gridcolumn&#39;,
+<span id='Ext-grid-ColumnLayout-property-type'>    type : &#39;gridcolumn&#39;,
 </span>
     requires: [
-        'Ext.panel.Table'  
+        &#39;Ext.panel.Table&#39;  
     ],
 
-<span id='Ext-grid-ColumnLayout-property-firstHeaderCls'>    firstHeaderCls: Ext.baseCSSPrefix + 'column-header-first',
-</span><span id='Ext-grid-ColumnLayout-property-lastHeaderCls'>    lastHeaderCls: Ext.baseCSSPrefix + 'column-header-last',
+<span id='Ext-grid-ColumnLayout-property-firstHeaderCls'>    firstHeaderCls: Ext.baseCSSPrefix + &#39;column-header-first&#39;,
+</span><span id='Ext-grid-ColumnLayout-property-lastHeaderCls'>    lastHeaderCls: Ext.baseCSSPrefix + &#39;column-header-last&#39;,
 </span>
 <span id='Ext-grid-ColumnLayout-method-initLayout'>    initLayout: function() {
 </span>        this.callParent();
@@ -82,7 +82,7 @@ Ext.define('Ext.grid.ColumnLayout', {
         }
 
         // Start this at 0 and for the root headerCt call determineScrollbarWidth to get
-        // it set properly. Typically that amounts to a &quot;delete&quot; to expose the system's
+        // it set properly. Typically that amounts to a &quot;delete&quot; to expose the system&#39;s
         // scrollbar width stored on our prototype.
 
         me.scrollbarWidth = 0;
@@ -93,8 +93,8 @@ Ext.define('Ext.grid.ColumnLayout', {
         }
         if (!me.scrollbarWidth) {
             // By default Mac OS X has overlay scrollbars that do not take space, but also
-            // the RTL override may have set this to 0... so make sure we don't try to
-            // compensate for a scrollbar when there isn't one.
+            // the RTL override may have set this to 0... so make sure we don&#39;t try to
+            // compensate for a scrollbar when there isn&#39;t one.
             ownerContext.manageScrollbar = false;
         }
     },
@@ -110,7 +110,7 @@ Ext.define('Ext.grid.ColumnLayout', {
         // and inserting it.
         // When removing from previous container ensure the header is not destroyed
         // or removed from the DOM (which would destroy focus).
-        // The layout's moveItem method will preserve focus when it does the move.
+        // The layout&#39;s moveItem method will preserve focus when it does the move.
         if (item !== before &amp;&amp; prevOwner) {
             prevOwner.remove(item, {
                 destroy: false,
@@ -207,7 +207,7 @@ Ext.define('Ext.grid.ColumnLayout', {
 
                 state.columnsChanged = columnsChanged;
                 // This will trigger our TableLayout partner and allow it to proceed.
-                ownerContext.setProp('columnsChanged', columnsChanged);
+                ownerContext.setProp(&#39;columnsChanged&#39;, columnsChanged);
             }
 
             if (ownerContext.manageScrollbar) {
@@ -219,7 +219,7 @@ Ext.define('Ext.grid.ColumnLayout', {
                 if (scrollbarAdjustment) {
                     // Since we start with the assumption that we will need the scrollbar,
                     // we now need to wait to see if our guess was correct.
-                    viewOverflowY = viewContext.getProp('viewOverflowY');
+                    viewOverflowY = viewContext.getProp(&#39;viewOverflowY&#39;);
                     if (viewOverflowY === undefined) {
                         // The TableLayout has not determined this yet, so park it.
                         me.done = false;
@@ -243,7 +243,7 @@ Ext.define('Ext.grid.ColumnLayout', {
                                 // Pass a 0 adjustment on into our next life. If this is
                                 // the invalidate that resets ownerContext then this is
                                 // put onto the new state. If not, it will reset back to
-                                // undefined and we'll have to begin again (which is the
+                                // undefined and we&#39;ll have to begin again (which is the
                                 // correct thing to do in that case).
                                 scrollbarAdjustment: 0
                             }
@@ -260,8 +260,8 @@ Ext.define('Ext.grid.ColumnLayout', {
 
 <span id='Ext-grid-ColumnLayout-method-finishedLayout'>    finishedLayout: function(ownerContext) {
 </span>        this.callParent([ ownerContext ]);
-        if (this.owner.ariaRole === 'rowgroup') {
-            this.innerCt.dom.setAttribute('role', 'row');
+        if (this.owner.ariaRole === &#39;rowgroup&#39;) {
+            this.innerCt.dom.setAttribute(&#39;role&#39;, &#39;row&#39;);
         }
 
         // Wipe this array because it holds component references and gets cached on the object
@@ -284,7 +284,7 @@ Ext.define('Ext.grid.ColumnLayout', {
 
             totalWidth += childContext.props.width;
 
-            // Only allow to be flexed if it's a resizable column
+            // Only allow to be flexed if it&#39;s a resizable column
             if (!(item.fixed || item.resizable === false)) {
                 // For forceFit, just use allocated width as the flex value, and the proportions
                 // will end up the same whatever HeaderContainer width they are being forced into.
@@ -343,8 +343,8 @@ Ext.define('Ext.grid.ColumnLayout', {
             // account for borders in its odd way.
             if (!ownerContext.widthModel.shrinkWrap) {
                 ++needed;
-                width = ownerContext.getProp('innerWidth');
-                gotWidth = (typeof width === 'number');
+                width = ownerContext.getProp(&#39;innerWidth&#39;);
+                gotWidth = (typeof width === &#39;number&#39;);
                 if (gotWidth) {
                     ++got;
                     width -= padding.width;
@@ -356,8 +356,8 @@ Ext.define('Ext.grid.ColumnLayout', {
 
             if (!ownerContext.heightModel.shrinkWrap) {
                 ++needed;
-                height = ownerContext.getProp('innerHeight');
-                gotHeight = (typeof height === 'number');
+                height = ownerContext.getProp(&#39;innerHeight&#39;);
+                gotHeight = (typeof height === &#39;number&#39;);
                 if (gotHeight) {
                     ++got;
                     height -= padding.height;
@@ -384,10 +384,10 @@ Ext.define('Ext.grid.ColumnLayout', {
 <span id='Ext-grid-ColumnLayout-method-publishInnerCtSize'>    publishInnerCtSize: function(ownerContext) {
 </span>        var me = this,
             owner = me.owner,
-            cw = ownerContext.peek('contentWidth'),
+            cw = ownerContext.peek(&#39;contentWidth&#39;),
             adjustment = 0;
 
-        // Pass negative &quot;reservedSpace&quot;, so that the innerCt gets *extra* size to accommodate the view's vertical scrollbar
+        // Pass negative &quot;reservedSpace&quot;, so that the innerCt gets *extra* size to accommodate the view&#39;s vertical scrollbar
         if (cw != null &amp;&amp; owner.isRootHeader) {
             adjustment = -ownerContext.state.scrollbarAdjustment;
         }

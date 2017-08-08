@@ -16,7 +16,7 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-data-Connection'>/**
-</span> * The Connection class encapsulates a connection to the page's originating domain, allowing requests to be made either
+</span> * The Connection class encapsulates a connection to the page&#39;s originating domain, allowing requests to be made either
  * to a configured URL, or to a URL specified at request time.
  *
  * Requests made by this class are asynchronous, and will return immediately. No data from the server will be available
@@ -44,7 +44,7 @@
  * (notably JEE) may require some custom processing in order to retrieve parameter names and parameter values from the
  * packet content.
  *
- * Also note that it's not possible to check the response code of the hidden iframe, so the success handler will ALWAYS fire.
+ * Also note that it&#39;s not possible to check the response code of the hidden iframe, so the success handler will ALWAYS fire.
  *
  * # Binary Posts
  *
@@ -58,16 +58,16 @@
  * - Important: See note about packaing the flash plugin with the app in the documenetation of {@link Ext.data.flash.BinaryXhr BinaryXhr}.
  *
  */
-Ext.define('Ext.data.Connection', {
+Ext.define(&#39;Ext.data.Connection&#39;, {
     mixins: {
-        observable: 'Ext.mixin.Observable'
+        observable: &#39;Ext.mixin.Observable&#39;
     },
 
     requires: [
-        'Ext.data.request.Ajax',
-        'Ext.data.request.Form',
-        'Ext.data.flash.BinaryXhr',
-        'Ext.Deferred'
+        &#39;Ext.data.request.Ajax&#39;,
+        &#39;Ext.data.request.Form&#39;,
+        &#39;Ext.data.flash.BinaryXhr&#39;,
+        &#39;Ext.Deferred&#39;
     ],
 
     statics: {
@@ -86,7 +86,7 @@ Ext.define('Ext.data.Connection', {
 <span id='Ext-data-Connection-cfg-async'>        /**
 </span>         * @cfg {Boolean} async
          * `true` if this request should run asynchronously. Setting this to `false` should generally
-         * be avoided, since it will cause the UI to be blocked, the user won't be able to interact
+         * be avoided, since it will cause the UI to be blocked, the user won&#39;t be able to interact
          * with the browser until the request completes.
          */
         async: true,
@@ -95,13 +95,13 @@ Ext.define('Ext.data.Connection', {
 </span>         * @cfg {String} username
          * The username to pass when using {@link #withCredentials}.
          */
-        username: '',
+        username: &#39;&#39;,
 
 <span id='Ext-data-Connection-cfg-password'>        /**
 </span>         * @cfg {String} password
          * The password to pass when using {@link #withCredentials}.
          */
-        password: '',
+        password: &#39;&#39;,
 
 <span id='Ext-data-Connection-cfg-disableCaching'>        /**
 </span>         * @cfg {Boolean} disableCaching
@@ -131,13 +131,13 @@ Ext.define('Ext.data.Connection', {
 
 <span id='Ext-data-Connection-cfg-isXdr'>        isXdr: false,
 </span>
-<span id='Ext-data-Connection-cfg-defaultXdrContentType'>        defaultXdrContentType: 'text/plain',
+<span id='Ext-data-Connection-cfg-defaultXdrContentType'>        defaultXdrContentType: &#39;text/plain&#39;,
 </span>
 <span id='Ext-data-Connection-cfg-disableCachingParam'>        /**
 </span>         * @cfg {String} disableCachingParam
          * Change the parameter which is sent went disabling caching through a cache buster.
          */
-        disableCachingParam: '_dc',
+        disableCachingParam: &#39;_dc&#39;,
 
 <span id='Ext-data-Connection-cfg-timeout'>        /**
 </span>         * @cfg {Number} [timeout=30000] The timeout in milliseconds to be used for 
@@ -181,7 +181,7 @@ Ext.define('Ext.data.Connection', {
 </span>         * @cfg {String} defaultPostHeader
          * The default header to be sent out with any post request.
          */
-        defaultPostHeader : 'application/x-www-form-urlencoded; charset=UTF-8',
+        defaultPostHeader : &#39;application/x-www-form-urlencoded; charset=UTF-8&#39;,
 
 <span id='Ext-data-Connection-cfg-useDefaultXhrHeader'>        /**
 </span>         * @cfg {Boolean} useDefaultXhrHeader
@@ -193,7 +193,7 @@ Ext.define('Ext.data.Connection', {
 </span>         * @cfg {String}
          * The header to send with Ajax requests. Also see {@link #useDefaultXhrHeader}.
          */
-        defaultXhrHeader : 'XMLHttpRequest'
+        defaultXhrHeader : &#39;XMLHttpRequest&#39;
     },
 
 <span id='Ext-data-Connection-event-beforerequest'>    /**
@@ -241,19 +241,19 @@ Ext.define('Ext.data.Connection', {
      * Instead, process any returned data using a promise:
      *
      *      Ext.Ajax.request({
-     *          url: 'ajax_demo/sample.json'
+     *          url: &#39;ajax_demo/sample.json&#39;
      *      }).then(function(response, opts) {
      *          var obj = Ext.decode(response.responseText);
      *          console.dir(obj);
      *      },
      *      function(response, opts) {
-     *          console.log('server-side failure with status code ' + response.status);
+     *          console.log(&#39;server-side failure with status code &#39; + response.status);
      *      });
      *
      * Or in callback functions:
      *
      *      Ext.Ajax.request({
-     *          url: 'ajax_demo/sample.json',
+     *          url: &#39;ajax_demo/sample.json&#39;,
      *
      *          success: function(response, opts) {
      *              var obj = Ext.decode(response.responseText);
@@ -261,7 +261,7 @@ Ext.define('Ext.data.Connection', {
      *          },
      *
      *          failure: function(response, opts) {
-     *              console.log('server-side failure with status code ' + response.status);
+     *              console.log(&#39;server-side failure with status code &#39; + response.status);
      *          }
      *      });
      *
@@ -278,7 +278,7 @@ Ext.define('Ext.data.Connection', {
      *
      * @param {Boolean} options.async `true` if this request should run asynchronously.
      * Setting this to `false` should generally be avoided, since it will cause the UI to be
-     * blocked, the user won't be able to interact with the browser until the request completes.
+     * blocked, the user won&#39;t be able to interact with the browser until the request completes.
      * Defaults to `true`.
      *
      * @param {Object/String/Function} options.params An object containing properties which are
@@ -388,7 +388,7 @@ Ext.define('Ext.data.Connection', {
         var me = this,
             requestOptions, request;
         
-        if (me.fireEvent('beforerequest', me, options) !== false) {
+        if (me.fireEvent(&#39;beforerequest&#39;, me, options) !== false) {
             requestOptions = me.setOptions(options, options.scope || Ext.global);
             
             request = me.createRequest(options, requestOptions);
@@ -408,7 +408,7 @@ Ext.define('Ext.data.Connection', {
         
         // If request type is not specified we have to deduce it
         if (!type) {
-            type = me.isFormUpload(options) ? 'form' : 'ajax';
+            type = me.isFormUpload(options) ? &#39;form&#39; : &#39;ajax&#39;;
         }
         
         // if autoabort is set, cancel the current transactions
@@ -421,7 +421,7 @@ Ext.define('Ext.data.Connection', {
         // override would do a sensible thing and mutate outgoing requestOptions instead.
         // So we have to pass *both* to the Request constructor, along with the set
         // of defaults potentially set on the Connection instance.
-        // If it looks ridiculous, that's because it is; things we have to do for
+        // If it looks ridiculous, that&#39;s because it is; things we have to do for
         // backward compatibility...
         request = Ext.Factory.request({
             type: type,
@@ -445,7 +445,7 @@ Ext.define('Ext.data.Connection', {
         var form = this.getForm(options);
         
         if (form) {
-            return options.isUpload || this.enctypeRe.test(form.getAttribute('enctype'));
+            return options.isUpload || this.enctypeRe.test(form.getAttribute(&#39;enctype&#39;));
         }
         
         return false;
@@ -499,7 +499,7 @@ Ext.define('Ext.data.Connection', {
         if (!url) {
             Ext.raise({
                 options: options,
-                msg: 'No URL specified'
+                msg: &#39;No URL specified&#39;
             });
         }
         //&lt;/debug&gt;
@@ -519,7 +519,7 @@ Ext.define('Ext.data.Connection', {
             if (me.nativeBinaryPostSupport()) {
                 data = (new Uint8Array(options.binaryData));
                 if ((Ext.isChrome &amp;&amp; Ext.chromeVersion &lt; 22) || Ext.isSafari || Ext.isGecko) {
-                    data = data.buffer; //  send the underlying buffer, not the view, since that's not supported on versions of chrome older than 22
+                    data = data.buffer; //  send the underlying buffer, not the view, since that&#39;s not supported on versions of chrome older than 22
                 }
             }
         }
@@ -533,24 +533,24 @@ Ext.define('Ext.data.Connection', {
             extraParams = Ext.Object.toQueryString(extraParams);
         }
 
-        params = params + ((extraParams) ? ((params) ? '&amp;' : '') + extraParams : '');
+        params = params + ((extraParams) ? ((params) ? &#39;&amp;&#39; : &#39;&#39;) + extraParams : &#39;&#39;);
 
         urlParams = Ext.isObject(urlParams) ? Ext.Object.toQueryString(urlParams) : urlParams;
 
         params = this.setupParams(options, params);
 
         // decide the proper method for this request
-        method = (options.method || me.getMethod() || ((params || data) ? 'POST' : 'GET')).toUpperCase();
+        method = (options.method || me.getMethod() || ((params || data) ? &#39;POST&#39; : &#39;GET&#39;)).toUpperCase();
         this.setupMethod(options, method);
 
         disableCache = options.disableCaching !== false ? (options.disableCaching || me.getDisableCaching()) : false;
         // if the method is get append date to prevent caching
-        if (method === 'GET' &amp;&amp; disableCache) {
-            url = Ext.urlAppend(url, (options.disableCachingParam || me.getDisableCachingParam()) + '=' + (new Date().getTime()));
+        if (method === &#39;GET&#39; &amp;&amp; disableCache) {
+            url = Ext.urlAppend(url, (options.disableCachingParam || me.getDisableCachingParam()) + &#39;=&#39; + (new Date().getTime()));
         }
 
         // if the method is get or there is json/xml data append the params to the url
-        if ((method == 'GET' || data) &amp;&amp; params) {
+        if ((method == &#39;GET&#39; || data) &amp;&amp; params) {
             url = Ext.urlAppend(url, params);
             params = null;
         }
@@ -597,7 +597,7 @@ Ext.define('Ext.data.Connection', {
         
         if (form &amp;&amp; !this.isFormUpload(options)) {
             serializedForm = Ext.Element.serializeForm(form);
-            params = params ? (params + '&amp;' + serializedForm) : serializedForm;
+            params = params ? (params + &#39;&amp;&#39; + serializedForm) : serializedForm;
         }
         
         return params;
@@ -612,7 +612,7 @@ Ext.define('Ext.data.Connection', {
      */
     setupMethod: function(options, method) {
         if (this.isFormUpload(options)) {
-            return 'POST';
+            return &#39;POST&#39;;
         }
         
         return method;

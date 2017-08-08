@@ -18,14 +18,14 @@
   <pre class="prettyprint lang-js"><span id='Ext-view-DropZone'>/**
 </span> * @private
  */
-Ext.define('Ext.view.DropZone', {
-    extend: 'Ext.dd.DropZone',
+Ext.define(&#39;Ext.view.DropZone&#39;, {
+    extend: &#39;Ext.dd.DropZone&#39;,
 
-<span id='Ext-view-DropZone-property-indicatorCls'>    indicatorCls: Ext.baseCSSPrefix + 'grid-drop-indicator',
+<span id='Ext-view-DropZone-property-indicatorCls'>    indicatorCls: Ext.baseCSSPrefix + &#39;grid-drop-indicator&#39;,
 </span><span id='Ext-view-DropZone-property-indicatorHtml'>    indicatorHtml: [
-</span>        '&lt;div class=&quot;', Ext.baseCSSPrefix, 'grid-drop-indicator-left&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;',
-        '&lt;div class=&quot;' + Ext.baseCSSPrefix + 'grid-drop-indicator-right&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;'
-    ].join(''),
+</span>        &#39;&lt;div class=&quot;&#39;, Ext.baseCSSPrefix, &#39;grid-drop-indicator-left&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&#39;,
+        &#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-drop-indicator-right&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&#39;
+    ].join(&#39;&#39;),
 
 <span id='Ext-view-DropZone-method-constructor'>    constructor: function(config) {
 </span>        var me = this;
@@ -37,12 +37,12 @@ Ext.define('Ext.view.DropZone', {
         // based on the id of the View would isolate it and mean it can only
         // interact with a DragZone on the same View also using a generated ID.
         if (!me.ddGroup) {
-            me.ddGroup = 'view-dd-zone-' + me.view.id;
+            me.ddGroup = &#39;view-dd-zone-&#39; + me.view.id;
         }
 
-        // The DropZone's encapsulating element is the View's main element. It must be this because drop gestures
+        // The DropZone&#39;s encapsulating element is the View&#39;s main element. It must be this because drop gestures
         // may require scrolling on hover near a scrolling boundary. In Ext 4.x two DD instances may not use the
-        // same element, so a DragZone on this same View must use the View's parent element as its element.
+        // same element, so a DragZone on this same View must use the View&#39;s parent element as its element.
         me.callParent([me.view.el]);
     },
 
@@ -62,8 +62,8 @@ Ext.define('Ext.view.DropZone', {
 </span>        var node = e.getTarget(this.view.getItemSelector()),
             mouseY, nodeList, testNode, i, len, box;
 
-//      Not over a row node: The content may be narrower than the View's encapsulating element, so return the closest.
-//      If we fall through because the mouse is below the nodes (or there are no nodes), we'll get an onContainerOver call.
+//      Not over a row node: The content may be narrower than the View&#39;s encapsulating element, so return the closest.
+//      If we fall through because the mouse is below the nodes (or there are no nodes), we&#39;ll get an onContainerOver call.
         if (!node) {
             mouseY = e.getY();
             for (i = 0, nodeList = this.view.getNodes(), len = nodeList.length; i &lt; len; i++) {
@@ -82,7 +82,7 @@ Ext.define('Ext.view.DropZone', {
 
         if (!me.indicator) {
             me.indicator = new Ext.Component({
-                ariaRole: 'presentation',
+                ariaRole: &#39;presentation&#39;,
                 html: me.indicatorHtml,
                 cls: me.indicatorCls,
                 ownerCt: me.view,
@@ -137,21 +137,21 @@ Ext.define('Ext.view.DropZone', {
             indicatorY;
 
         if (!Ext.Array.contains(draggingRecords, overRecord) &amp;&amp; (
-            pos === 'before' &amp;&amp; !me.containsRecordAtOffset(draggingRecords, overRecord, -1) ||
-            pos === 'after' &amp;&amp; !me.containsRecordAtOffset(draggingRecords, overRecord, 1)
+            pos === &#39;before&#39; &amp;&amp; !me.containsRecordAtOffset(draggingRecords, overRecord, -1) ||
+            pos === &#39;after&#39; &amp;&amp; !me.containsRecordAtOffset(draggingRecords, overRecord, 1)
         )) {
             me.valid = true;
 
             if (me.overRecord !== overRecord || me.currentPosition !== pos) {
 
                 indicatorY = Ext.fly(node).getY() - view.el.getY() - 1;
-                if (pos === 'after') {
+                if (pos === &#39;after&#39;) {
                     indicatorY += Ext.fly(node).getHeight();
                 }
 
                 me.getIndicator().setWidth(Ext.fly(view.el).getWidth()).showAt(0, indicatorY);
 
-                // Cache the overRecord and the 'before' or 'after' indicator.
+                // Cache the overRecord and the &#39;before&#39; or &#39;after&#39; indicator.
                 me.overRecord = overRecord;
                 me.currentPosition = pos;
             }
@@ -229,7 +229,7 @@ Ext.define('Ext.view.DropZone', {
                     me.invalidateDrop();
                     me.handleNodeDrop(data, me.overRecord, me.currentPosition);
                     dropHandled = true;
-                    me.fireViewEvent('drop', targetNode, data, me.overRecord, me.currentPosition);
+                    me.fireViewEvent(&#39;drop&#39;, targetNode, data, me.overRecord, me.currentPosition);
                 },
  
                 cancelDrop: function() {
@@ -240,7 +240,7 @@ Ext.define('Ext.view.DropZone', {
             performOperation = false;
  
         if (me.valid) {
-            performOperation = me.fireViewEvent('beforedrop', targetNode, data, me.overRecord, me.currentPosition, dropHandlers);
+            performOperation = me.fireViewEvent(&#39;beforedrop&#39;, targetNode, data, me.overRecord, me.currentPosition, dropHandlers);
             if (dropHandlers.wait) {
                 return;
             }

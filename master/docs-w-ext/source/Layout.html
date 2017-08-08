@@ -19,20 +19,20 @@
 </span> * This class is the base for all layout types: component and container.
  * @protected
  */
-Ext.define('Ext.layout.Layout', {
+Ext.define(&#39;Ext.layout.Layout&#39;, {
     mixins: [
-        'Ext.mixin.Factoryable'
+        &#39;Ext.mixin.Factoryable&#39;
     ],
 
     requires: [
-        'Ext.XTemplate',
-        'Ext.layout.SizeModel'
+        &#39;Ext.XTemplate&#39;,
+        &#39;Ext.layout.SizeModel&#39;
     ],
 
-    uses: [ 'Ext.layout.Context' ],
+    uses: [ &#39;Ext.layout.Context&#39; ],
 
 <span id='Ext-layout-Layout-property-factoryConfig'>    factoryConfig: {
-</span>        type: 'layout'
+</span>        type: &#39;layout&#39;
     },
 
 <span id='Ext-layout-Layout-property-isLayout'>    /**
@@ -78,7 +78,7 @@ Ext.define('Ext.layout.Layout', {
 <span id='Ext-layout-Layout-method-constructor'>    constructor : function(config) {
 </span>        var me = this;
 
-        me.id = Ext.id(null, me.type + '-');
+        me.id = Ext.id(null, me.type + &#39;-&#39;);
 
         me.initConfig(config);
 
@@ -100,7 +100,7 @@ Ext.define('Ext.layout.Layout', {
      * This is a write phase and DOM reads should be strictly avoided when overridding
      * this method.
      * 
-     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout's owner
+     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout&#39;s owner
      * component.
      * @method beginLayout
      */
@@ -112,7 +112,7 @@ Ext.define('Ext.layout.Layout', {
      * This is a write phase and DOM reads should be strictly avoided when overridding
      * this method.
      * 
-     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout's owner
+     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout&#39;s owner
      * component.
      * @method beginLayoutCycle
      */
@@ -152,7 +152,7 @@ Ext.define('Ext.layout.Layout', {
      * Instead, DOM writes need to be written to {@link Ext.layout.ContextItem} objects to
      *  be flushed at the next opportunity.
      * 
-     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout's owner
+     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout&#39;s owner
      * component.
      * @method calculate
      * @abstract
@@ -173,7 +173,7 @@ Ext.define('Ext.layout.Layout', {
      * This method need not be implemented by derived classes and, in fact, should only be
      * implemented when needed.
      * 
-     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout's owner
+     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout&#39;s owner
      * component.
      * @method completeLayout
      */
@@ -194,7 +194,7 @@ Ext.define('Ext.layout.Layout', {
      * This method need not be implemented by derived classes and, in fact, should only be
      * implemented when needed.
      * 
-     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout's owner
+     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout&#39;s owner
      * component.
      * @method finalizeLayout
      */
@@ -210,7 +210,7 @@ Ext.define('Ext.layout.Layout', {
      * This method need not be implemented by derived classes and, in fact, should only be
      * implemented when needed.
      * 
-     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout's owner
+     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout&#39;s owner
      * component.
      */
     finishedLayout: function (ownerContext) {
@@ -233,7 +233,7 @@ Ext.define('Ext.layout.Layout', {
      * This method need not be implemented by derived classes and, in fact, should only be
      * implemented when needed.
      * 
-     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout's owner
+     * @param {Ext.layout.ContextItem} ownerContext The context item for the layout&#39;s owner
      * component.
      * @method notifyOwner
      */
@@ -300,7 +300,7 @@ Ext.define('Ext.layout.Layout', {
      * Clears any styles which must be cleared before layout can take place.
      * Only DOM WRITES must be performed at this stage.
      *
-     * An entry for the owner's element ID must be created in the layoutContext containing
+     * An entry for the owner&#39;s element ID must be created in the layoutContext containing
      * a reference to the target which must be sized/positioned/styled by the layout at
      * the flush stage:
      *
@@ -327,11 +327,11 @@ Ext.define('Ext.layout.Layout', {
                 item = items[i];
 
                 // If we are being asked to move an already rendered Component, we must not recalculate its renderTree
-                // and rerun its render process. The Layout's isValidParent check will ensure that the DOM is moved into place.
+                // and rerun its render process. The Layout&#39;s isValidParent check will ensure that the DOM is moved into place.
                 if (!item.rendered) {
 
-                    // If we've already calculated the item's element config, don't calculate it again.
-                    // This may happen if the rendering process mutates the owning Container's items
+                    // If we&#39;ve already calculated the item&#39;s element config, don&#39;t calculate it again.
+                    // This may happen if the rendering process mutates the owning Container&#39;s items
                     // collection, and Ext.layout.Container#getRenderTree runs through the collection again.
                     // Note that the config may be null if a beforerender listener vetoed the operation, so
                     // we must compare to undefined.
@@ -424,7 +424,7 @@ Ext.define('Ext.layout.Layout', {
 
         // Test DOM nodes for equality using &quot;===&quot; : http://jsperf.com/dom-equality-test
         if (itemDom &amp;&amp; targetDom) {
-            if (typeof position === 'number') {
+            if (typeof position === &#39;number&#39;) {
                 position = this.getPositionOffset(position);
                 return itemDom === targetDom.childNodes[position];
             }
@@ -436,7 +436,7 @@ Ext.define('Ext.layout.Layout', {
 
 <span id='Ext-layout-Layout-method-getItemLayoutEl'>    /**
 </span>     * For a given item, returns the element that participates in the childNodes array
-     * of the layout's target element.  This is usually the component's &quot;el&quot;, but can
+     * of the layout&#39;s target element.  This is usually the component&#39;s &quot;el&quot;, but can
      * also be a wrapper
      * @private
      * @param {Ext.Component} item
@@ -449,7 +449,7 @@ Ext.define('Ext.layout.Layout', {
 
         if (parentNode) {
             className = parentNode.className;
-            if (className &amp;&amp; className.indexOf(Ext.baseCSSPrefix + 'resizable-wrap') !== -1) {
+            if (className &amp;&amp; className.indexOf(Ext.baseCSSPrefix + &#39;resizable-wrap&#39;) !== -1) {
                 dom = dom.parentNode;
             }
         }
@@ -495,14 +495,14 @@ Ext.define('Ext.layout.Layout', {
         var activeEl = Ext.Element.getActiveElement(true);
 
         target = target.dom || target;
-        if (typeof position === 'number') {
+        if (typeof position === &#39;number&#39;) {
             position = target.childNodes[position];
         }
 
-        // If the element we are about to move contains focus, ensure we don't
+        // If the element we are about to move contains focus, ensure we don&#39;t
         // disturb application state when it blurs on remove.
         // 
-        // That's if it blurs on remove! Some browsers don't, which leaves
+        // That&#39;s if it blurs on remove! Some browsers don&#39;t, which leaves
         // focus &quot;stranded&quot; with framework and app state set, and rendition
         // set on an element while the element is in fact not focused.
         // By actively restoring focus afterwards we avoid an inconsistent state.
@@ -526,7 +526,7 @@ Ext.define('Ext.layout.Layout', {
 
 <span id='Ext-layout-Layout-method-onContentChange'>    /**
 </span>     * This method is called when a child item changes in some way. By default this calls
-     * {@link Ext.Component#updateLayout} on this layout's owner.
+     * {@link Ext.Component#updateLayout} on this layout&#39;s owner.
      * 
      * @param {Ext.Component} child The child item that has changed.
      * @return {Boolean} True if this layout has handled the content change.
@@ -568,7 +568,7 @@ Ext.define('Ext.layout.Layout', {
 </span><span id='Ext-layout-Layout-method-onDestroy'>    onDestroy : Ext.emptyFn,
 </span>
 <span id='Ext-layout-Layout-method-afterRemove'>    /**
-</span>     * Removes layout's itemCls and owning Container's itemCls.
+</span>     * Removes layout&#39;s itemCls and owning Container&#39;s itemCls.
      * Clears the managed dimensions flags
      * @protected
      */

@@ -23,7 +23,7 @@
  * contains these properties: {@link #hthresh}, {@link #vthresh}, {@link #increment} and {@link #frequency}. Example
  * usage:
  *
- *     var el = Ext.get('scroll-ct');
+ *     var el = Ext.get(&#39;scroll-ct&#39;);
  *     el.ddScrollConfig = {
  *         vthresh: 50,
  *         hthresh: -1,
@@ -34,10 +34,10 @@
  *
  * Note: This class is designed to be used in &quot;Point Mode
  */
-Ext.define('Ext.dd.ScrollManager', {
+Ext.define(&#39;Ext.dd.ScrollManager&#39;, {
     singleton: true,
     requires: [
-        'Ext.dd.DragDropManager'
+        &#39;Ext.dd.DragDropManager&#39;
     ],
 
 <span id='Ext-dd-ScrollManager-property-dirTrans'>    dirTrans: {
@@ -79,7 +79,7 @@ Ext.define('Ext.dd.ScrollManager', {
                 scrollComponent = proc.component,
                 ddScrollConfig = proc.el.ddScrollConfig,
                 distance = ddScrollConfig &amp;&amp; ddScrollConfig.increment    ? ddScrollConfig.increment : me.increment,
-                animate  = ddScrollConfig &amp;&amp; 'animate' in ddScrollConfig ? ddScrollConfig.animate   : me.animate,
+                animate  = ddScrollConfig &amp;&amp; &#39;animate&#39; in ddScrollConfig ? ddScrollConfig.animate   : me.animate,
                 afterScroll = function() {
                     me.triggerRefresh();
                 };
@@ -104,7 +104,7 @@ Ext.define('Ext.dd.ScrollManager', {
                 distance = distance * me.dirTrans[proc.dir];
 
                 // Pass X or Y params depending upon dimension being scrolled
-                if (proc.dir === 'up' || proc.dir === 'down') {
+                if (proc.dir === &#39;up&#39; || proc.dir === &#39;down&#39;) {
                     scrollComponent.scrollBy(0, distance, animate);
                 } else {
                     scrollComponent.scrollBy(distance, 0, animate);
@@ -278,7 +278,7 @@ Ext.define('Ext.dd.ScrollManager', {
         var els = this.els,
             id;
         for (id in els) {
-            if (typeof els[id] === 'object') { // for people extending the object prototype
+            if (typeof els[id] === &#39;object&#39;) { // for people extending the object prototype
                 els[id]._region = els[id].getRegion();
             }
         }

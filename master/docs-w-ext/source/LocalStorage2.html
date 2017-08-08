@@ -28,13 +28,13 @@
  * For example:
  * 
  *      var store = new Ext.util.LocalStorage({
- *              id: 'foo'
+ *              id: &#39;foo&#39;
  *          });
  * 
- *      store.setItem('bar', 'stuff');
+ *      store.setItem(&#39;bar&#39;, &#39;stuff&#39;);
  *      
  *      // Equivalent to:
- *      window.localStorage.setItem('foo-bar', 'stuff');
+ *      window.localStorage.setItem(&#39;foo-bar&#39;, &#39;stuff&#39;);
  * 
  * In all cases, the `id` property is only used by the underlying storage and should not
  * be needed in item access calls or appear when enumerating keys.
@@ -52,7 +52,7 @@
  * with the same `id`, use the `get` method and it will lazily create and share a single
  * instance. When you are done with the shared instance, call `release`.
  * 
- *      var storage = Ext.util.LocalStorage.get('id');
+ *      var storage = Ext.util.LocalStorage.get(&#39;id&#39;);
  *      
  *      ...
  *      
@@ -74,7 +74,7 @@
  *
  * @since 4.2.2
  */
-Ext.define('Ext.util.LocalStorage', {
+Ext.define(&#39;Ext.util.LocalStorage&#39;, {
 <span id='Ext-util-LocalStorage-cfg-id'>    /**
 </span>     * The unique identifier for this store. This config is required to scope this storage
      * distinctly from others. Ultimately, this is used to set a prefix on all keys.
@@ -83,7 +83,7 @@ Ext.define('Ext.util.LocalStorage', {
     id: null,
 
 <span id='Ext-util-LocalStorage-property-destroyed'>    /**
-</span>     * This property is set to `true` when the instance's `destroy` method is called.
+</span>     * This property is set to `true` when the instance&#39;s `destroy` method is called.
      * @property {Boolean} destroyed
      * @readonly
      */
@@ -107,7 +107,7 @@ Ext.define('Ext.util.LocalStorage', {
      * not provided, the `id` property initializes this value with `&quot;id-&quot;`.
      * @cfg {String} [prefix]
      */
-    prefix: '',
+    prefix: &#39;&#39;,
 
 <span id='Ext-util-LocalStorage-cfg-session'>    /**
 </span>     * Specify this as `true` to use `sessionStorage` instead of the default `localStoreage`.
@@ -149,7 +149,7 @@ Ext.define('Ext.util.LocalStorage', {
 </span>         * Returns a shared instance of the desired local store given its `id`. When you
          * are finished with the returned object call the `release` method:
          * 
-         *      var store = Ext.util.LocalStorage.get('foo');
+         *      var store = Ext.util.LocalStorage.get(&#39;foo&#39;);
          *      
          *      // .. use store
          *      
@@ -179,8 +179,8 @@ Ext.define('Ext.util.LocalStorage', {
             } else {
                 //&lt;debug&gt;
                 if (instance === true) {
-                    Ext.raise('Creating a shared instance of private local store &quot;' +
-                        me.id + '&quot;.');
+                    Ext.raise(&#39;Creating a shared instance of private local store &quot;&#39; +
+                        me.id + &#39;&quot;.&#39;);
                 }
                 //&lt;/debug&gt;
 
@@ -204,7 +204,7 @@ Ext.define('Ext.util.LocalStorage', {
         Ext.apply(me, config);
 
         //&lt;debug&gt;
-        if (!me.hasOwnProperty('id')) {
+        if (!me.hasOwnProperty(&#39;id&#39;)) {
             Ext.raise(&quot;No id was provided to the local store.&quot;);
         }
         //&lt;/debug&gt;
@@ -221,8 +221,8 @@ Ext.define('Ext.util.LocalStorage', {
             // cache ... that would be &quot;extraordinaly bad&quot;.
 
             if (Ext.util.LocalStorage.cache[me.id]) {
-                Ext.raise('Cannot create duplicate instance of local store &quot;' +
-                    me.id + '&quot;. Use Ext.util.LocalStorage.get() to share instances.');
+                Ext.raise(&#39;Cannot create duplicate instance of local store &quot;&#39; +
+                    me.id + &#39;&quot;. Use Ext.util.LocalStorage.get() to share instances.&#39;);
             }
 
             // We put true in the cache to be detectable by get() for diagnostic reasons
@@ -243,7 +243,7 @@ Ext.define('Ext.util.LocalStorage', {
             id = me.id;
 
         if (!me.prefix &amp;&amp; id) {
-            me.prefix = id + '-';
+            me.prefix = id + &#39;-&#39;;
         }
         me._store = (me.session ? window.sessionStorage : window.localStorage);
     },
@@ -262,7 +262,7 @@ Ext.define('Ext.util.LocalStorage', {
 
         //&lt;debug&gt;
         if (me._users) {
-            Ext.log.warn('LocalStorage(id=' + me.id + ') destroyed while in use');
+            Ext.log.warn(&#39;LocalStorage(id=&#39; + me.id + &#39;) destroyed while in use&#39;);
         }
         //&lt;/debug&gt;
 
@@ -409,7 +409,7 @@ Ext.define('Ext.util.LocalStorage', {
 }, function () {
     var LocalStorage = this;
 
-    if ('localStorage' in window) {
+    if (&#39;localStorage&#39; in window) {
         return;
     }
     if (!Ext.isIE) {
@@ -457,16 +457,16 @@ Ext.define('Ext.util.LocalStorage', {
                 data = me.data,
                 el;
 
-            me.el = el = document.createElement('div');
+            me.el = el = document.createElement(&#39;div&#39;);
 
-            el.id = (me.id || (me.id = 'extjs-localstore'));
-            el.addBehavior('#default#userdata');
+            el.id = (me.id || (me.id = &#39;extjs-localstore&#39;));
+            el.addBehavior(&#39;#default#userdata&#39;);
 
             // Add to &lt;head&gt; to ensure the div is invisible
             Ext.getHead().dom.appendChild(el);
 
             el.load(me.id);
-            data = el.getAttribute('xdata');
+            data = el.getAttribute(&#39;xdata&#39;);
 
             me.data = data = (data ? Ext.decode(data) : {});
 
@@ -519,7 +519,7 @@ Ext.define('Ext.util.LocalStorage', {
                     me._timer = null;
                 }
 
-                me.el.setAttribute('xdata', Ext.encode(me.data));
+                me.el.setAttribute(&#39;xdata&#39;, Ext.encode(me.data));
                 me.el.save(me.id);
             } else if (!me._timer) {
                 me._timer = Ext.defer(me._flushFn, delay);

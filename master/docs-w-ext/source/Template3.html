@@ -16,15 +16,15 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-grid-column-Template'>/**
-</span> * A Column definition class which renders a value by processing a {@link Ext.data.Model Model}'s
+</span> * A Column definition class which renders a value by processing a {@link Ext.data.Model Model}&#39;s
  * {@link Ext.data.Model#getData data} using a {@link #tpl configured}
  * {@link Ext.XTemplate XTemplate}.
  *
  *     @example
- *     Ext.create('Ext.data.Store', {
- *         storeId:'employeeStore',
- *         fields:['firstname', 'lastname', 'seniority', 'department'],
- *         groupField: 'department',
+ *     Ext.create(&#39;Ext.data.Store&#39;, {
+ *         storeId:&#39;employeeStore&#39;,
+ *         fields:[&#39;firstname&#39;, &#39;lastname&#39;, &#39;seniority&#39;, &#39;department&#39;],
+ *         groupField: &#39;department&#39;,
  *         data:[
  *             { firstname: &quot;Michael&quot;, lastname: &quot;Scott&quot;,   seniority: 7, department: &quot;Management&quot; },
  *             { firstname: &quot;Dwight&quot;,  lastname: &quot;Schrute&quot;, seniority: 2, department: &quot;Sales&quot; },
@@ -34,28 +34,28 @@
  *         ]
  *     });
  *
- *     Ext.create('Ext.grid.Panel', {
- *         title: 'Column Template Demo',
- *         store: Ext.data.StoreManager.lookup('employeeStore'),
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
+ *         title: &#39;Column Template Demo&#39;,
+ *         store: Ext.data.StoreManager.lookup(&#39;employeeStore&#39;),
  *         columns: [
- *             { text: 'Full Name',       xtype: 'templatecolumn', tpl: '{firstname} {lastname}', flex:1 },
- *             { text: 'Department (Yrs)', xtype: 'templatecolumn', tpl: '{department} ({seniority})' }
+ *             { text: &#39;Full Name&#39;,       xtype: &#39;templatecolumn&#39;, tpl: &#39;{firstname} {lastname}&#39;, flex:1 },
+ *             { text: &#39;Department (Yrs)&#39;, xtype: &#39;templatecolumn&#39;, tpl: &#39;{department} ({seniority})&#39; }
  *         ],
  *         height: 200,
  *         width: 300,
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.grid.column.Template', {
-    extend: 'Ext.grid.column.Column',
-    alias: ['widget.templatecolumn'],
-    requires: ['Ext.XTemplate'],
-    alternateClassName: 'Ext.grid.TemplateColumn',
+Ext.define(&#39;Ext.grid.column.Template&#39;, {
+    extend: &#39;Ext.grid.column.Column&#39;,
+    alias: [&#39;widget.templatecolumn&#39;],
+    requires: [&#39;Ext.XTemplate&#39;],
+    alternateClassName: &#39;Ext.grid.TemplateColumn&#39;,
 
 <span id='Ext-grid-column-Template-cfg-tpl'>    /**
 </span>     * @cfg {String/Ext.XTemplate} tpl
      * An {@link Ext.XTemplate XTemplate}, or an XTemplate *definition string* to use to process a
-     * {@link Ext.data.Model Model}'s data object to produce a cell's rendered value.
+     * {@link Ext.data.Model Model}&#39;s data object to produce a cell&#39;s rendered value.
      */
 
 <span id='Ext-grid-column-Template-cfg-renderer'>    /**

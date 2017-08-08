@@ -22,12 +22,12 @@
  * @protected
  * @since 6.2.0
  */
-Ext.define('Ext.mixin.Dirty', {
-<span id='Ext-mixin-Dirty-property-mixinId'>    mixinId: 'dirty',
+Ext.define(&#39;Ext.mixin.Dirty&#39;, {
+<span id='Ext-mixin-Dirty-property-mixinId'>    mixinId: &#39;dirty&#39;,
 </span>
 <span id='Ext-mixin-Dirty-event-dirtychange'>    /**
 </span>     * @event dirtychange
-     * Fires when a change in the object's {@link #cfg-dirty} state is detected.
+     * Fires when a change in the object&#39;s {@link #cfg-dirty} state is detected.
      *
      * **Note:** In order for this event to fire, the class that mixes in this mixin
      * must be `{@link Ext.mixin.Observable Observable}`.
@@ -40,7 +40,7 @@ Ext.define('Ext.mixin.Dirty', {
 <span id='Ext-mixin-Dirty-cfg-dirty'>        /**
 </span>         * @cfg {Boolean} dirty
          * This config property describes the modified state of this object. In most
-         * cases this config's value is maintained by the object and should be considered
+         * cases this config&#39;s value is maintained by the object and should be considered
          * readonly. The class implementor should be the only one to call the setter.
          */
         dirty: null
@@ -97,7 +97,7 @@ Ext.define('Ext.mixin.Dirty', {
         me.dirty = dirty;
 
         if (!me.ignoreDirty &amp;&amp; me.fireEvent) {
-            me.fireEvent('dirtychange', me, dirty);
+            me.fireEvent(&#39;dirtychange&#39;, me, dirty);
         }
     },
 

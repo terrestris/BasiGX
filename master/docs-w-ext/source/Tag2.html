@@ -15,12 +15,12 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.rtl.form.field.Tag', {
-    override: 'Ext.form.field.Tag',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.rtl.form.field.Tag&#39;, {
+    override: &#39;Ext.form.field.Tag&#39;,
 
     privates: {
         _getChildElCls: function() {
-            return this.getInherited().rtl ? (' ' + this._rtlCls) : '';
+            return this.getInherited().rtl ? (&#39; &#39; + this._rtlCls) : &#39;&#39;;
         }
     }
 });</pre>

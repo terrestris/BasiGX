@@ -33,18 +33,18 @@
  * used in this parser.
  * @private
  */
-Ext.define('Ext.parse.Parser', function () {
+Ext.define(&#39;Ext.parse.Parser&#39;, function () {
     var ITSELF = function () { return this; };
 
 return {
-    extend: 'Ext.util.Fly',
+    extend: &#39;Ext.util.Fly&#39;,
 
     requires: [
-        'Ext.parse.Tokenizer',
-        'Ext.parse.symbol.Constant',
-        'Ext.parse.symbol.InfixRight',
-        'Ext.parse.symbol.Paren',
-        'Ext.parse.symbol.Prefix'
+        &#39;Ext.parse.Tokenizer&#39;,
+        &#39;Ext.parse.symbol.Constant&#39;,
+        &#39;Ext.parse.symbol.InfixRight&#39;,
+        &#39;Ext.parse.symbol.Paren&#39;,
+        &#39;Ext.parse.symbol.Prefix&#39;
     ],
 
     isParser: true,
@@ -60,9 +60,9 @@ return {
          * `{@link Ext.parse.symbol.Constant constant}`.
          */
         constants: {
-            'null': null,
-            'false': false,
-            'true': true
+            &#39;null&#39;: null,
+            &#39;false&#39;: false,
+            &#39;true&#39;: true
         },
 
 <span id='Ext-parse-Parser-cfg-infix'>        /**
@@ -74,16 +74,16 @@ return {
          * `{@link Ext.parse.symbol.Infix operator}`.
          */
         infix: {
-            //'===': 40,
-            //'!==': 40,
-            //'&lt;': 40,
-            //'&lt;=': 40,
-            //'&gt;': 40,
-            //'&gt;=': 40,
-            '+': 50,
-            '-': 50,
-            '*': 60,
-            '/': 60
+            //&#39;===&#39;: 40,
+            //&#39;!==&#39;: 40,
+            //&#39;&lt;&#39;: 40,
+            //&#39;&lt;=&#39;: 40,
+            //&#39;&gt;&#39;: 40,
+            //&#39;&gt;=&#39;: 40,
+            &#39;+&#39;: 50,
+            &#39;-&#39;: 50,
+            &#39;*&#39;: 60,
+            &#39;/&#39;: 60
         },
 
 <span id='Ext-parse-Parser-cfg-infixRight'>        /**
@@ -95,8 +95,8 @@ return {
          * `{@link Ext.parse.symbol.InfixRight operator}`.
          */
         infixRight: {
-            '&amp;&amp;': 30,
-            '||': 30
+            &#39;&amp;&amp;&#39;: 30,
+            &#39;||&#39;: 30
         },
 
 <span id='Ext-parse-Parser-cfg-prefix'>        /**
@@ -107,9 +107,9 @@ return {
          * `{@link Ext.parse.symbol.Prefix operator}`.
          */
         prefix: {
-            '!': 0,
-            '-': 0,
-            '+': 0
+            &#39;!&#39;: 0,
+            &#39;-&#39;: 0,
+            &#39;+&#39;: 0
         },
 
 <span id='Ext-parse-Parser-cfg-symbols'>        /**
@@ -119,30 +119,30 @@ return {
          * configuration, use `0` for the value.
          */
         symbols: {
-            ':': 0,
-            ',': 0,
-            ')': 0,
-            '[': 0,
-            ']': 0,
-            '{': 0,
-            '}': 0,
+            &#39;:&#39;: 0,
+            &#39;,&#39;: 0,
+            &#39;)&#39;: 0,
+            &#39;[&#39;: 0,
+            &#39;]&#39;: 0,
+            &#39;{&#39;: 0,
+            &#39;}&#39;: 0,
 
-            '(end)': 0,
+            &#39;(end)&#39;: 0,
 
-            '(ident)': {
-                arity: 'ident',
+            &#39;(ident)&#39;: {
+                arity: &#39;ident&#39;,
                 isIdent: true,
                 nud: ITSELF
             },
 
-            '(literal)': {
-                arity: 'literal',
+            &#39;(literal)&#39;: {
+                arity: &#39;literal&#39;,
                 isLiteral: true,
                 nud: ITSELF
             },
 
-            '(': {
-                xclass: 'Ext.parse.symbol.Paren'
+            &#39;(&#39;: {
+                xclass: &#39;Ext.parse.symbol.Paren&#39;
             }
         },
 
@@ -151,7 +151,7 @@ return {
          * The tokenizer or a config object used to create one.
          */
         tokenizer: {
-            keywords: null  // we'll handle keywords here
+            keywords: null  // we&#39;ll handle keywords here
         }
     },
 
@@ -194,7 +194,7 @@ return {
         }
 
         if (!token) {
-            return me.token = symbols['(end)'];
+            return me.token = symbols[&#39;(end)&#39;];
         }
 
         tokenizer.next();
@@ -203,18 +203,18 @@ return {
         value = token.value;
 
         if (is.ident) {
-            symbol = symbols[value] || symbols['(ident)'];
+            symbol = symbols[value] || symbols[&#39;(ident)&#39;];
         }
         else if (is.operator) {
             if (!(symbol = symbols[value])) {
-                me.syntaxError(token.at, 'Unknown operator &quot;' + value + '&quot;');
+                me.syntaxError(token.at, &#39;Unknown operator &quot;&#39; + value + &#39;&quot;&#39;);
             }
         }
         else if (is.literal) {
-            symbol = symbols['(literal)'];
+            symbol = symbols[&#39;(literal)&#39;];
         }
         else {
-            me.syntaxError(token.at, 'Unexpected token');
+            me.syntaxError(token.at, &#39;Unexpected token&#39;);
         }
 
         me.token = symbol = Ext.Object.chain(symbol);
@@ -232,7 +232,7 @@ return {
         var token = this.token;
 
         if (expected !== token.id) {
-            this.syntaxError(token.at, 'Expected &quot;' + expected + '&quot;');
+            this.syntaxError(token.at, &#39;Expected &quot;&#39; + expected + &#39;&quot;&#39;);
         }
         return this;
     },
@@ -287,15 +287,15 @@ return {
      * @return {Object} The error token.
      */
     syntaxError: function (at, message) {
-        if (typeof at === 'string') {
+        if (typeof at === &#39;string&#39;) {
             message = at;
             at = this.pos;
         }
 
-        var suffix = (at == null) ? '' : (' (at index ' + at + ')'),
+        var suffix = (at == null) ? &#39;&#39; : (&#39; (at index &#39; + at + &#39;)&#39;),
             error = new Error(message + suffix);
 
-        error.type = 'error';
+        error.type = &#39;error&#39;;
 
         if (suffix) {
             error.at = at;
@@ -323,7 +323,7 @@ return {
                 // we either use the config provided in the symbol definition
                 // or we use the `update` param to build a config object.
                 // We usually need to update either `led` or `nud` function
-                if(typeof config === 'object'){
+                if(typeof config === &#39;object&#39;){
                     cfg = config;
                 }else if(update &amp;&amp; type){
                     update = Ext.Array.from(update);
@@ -357,19 +357,19 @@ return {
         },
 
         applyConstants: function (constants) {
-            this.addSymbols(constants, Ext.parse.symbol.Constant, 'nud');
+            this.addSymbols(constants, Ext.parse.symbol.Constant, &#39;nud&#39;);
         },
 
         applyInfix: function (operators) {
-            this.addSymbols(operators, Ext.parse.symbol.Infix, 'led');
+            this.addSymbols(operators, Ext.parse.symbol.Infix, &#39;led&#39;);
         },
 
         applyInfixRight: function (operators) {
-            this.addSymbols(operators, Ext.parse.symbol.InfixRight, 'led');
+            this.addSymbols(operators, Ext.parse.symbol.InfixRight, &#39;led&#39;);
         },
 
         applyPrefix: function (operators) {
-            this.addSymbols(operators, Ext.parse.symbol.Prefix, 'nud');
+            this.addSymbols(operators, Ext.parse.symbol.Prefix, &#39;nud&#39;);
         },
 
         applySymbols: function (symbols) {

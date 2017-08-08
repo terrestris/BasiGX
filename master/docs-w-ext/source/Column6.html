@@ -15,12 +15,12 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.rtl.tree.Column', {
-    override: 'Ext.tree.Column',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.rtl.tree.Column&#39;, {
+    override: &#39;Ext.tree.Column&#39;,
     
     getChildCls: function() {
         return this._childCls || (this._childCls =
-            (this.getInherited().rtl ? Ext.baseCSSPrefix + 'rtl' : ''));
+            (this.getInherited().rtl ? Ext.baseCSSPrefix + &#39;rtl&#39; : &#39;&#39;));
     }
 });
 </pre>

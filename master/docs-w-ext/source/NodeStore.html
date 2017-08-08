@@ -19,12 +19,12 @@
 </span> * Node Store
  * @private
  */
-Ext.define('Ext.data.NodeStore', {
-    extend: 'Ext.data.Store',
-    alias: 'store.node',
+Ext.define(&#39;Ext.data.NodeStore&#39;, {
+    extend: &#39;Ext.data.Store&#39;,
+    alias: &#39;store.node&#39;,
     requires: [
-        'Ext.data.TreeModel',
-        'Ext.data.NodeInterface'
+        &#39;Ext.data.TreeModel&#39;,
+        &#39;Ext.data.NodeInterface&#39;
     ],
 
 <span id='Ext-data-NodeStore-property-isNodeStore'>    /**
@@ -48,7 +48,7 @@ Ext.define('Ext.data.NodeStore', {
          * rendering a tree structure to a DataView and is being used internally by
          * the TreeView. Any records that are moved, removed, inserted or appended to the
          * node at any depth below the node this store is bound to will be automatically
-         * updated in this Store's internal flat data structure.
+         * updated in this Store&#39;s internal flat data structure.
          * @accessor
          */
         recursive: false,
@@ -66,7 +66,7 @@ Ext.define('Ext.data.NodeStore', {
         folderSort: false
     },
 
-<span id='Ext-data-NodeStore-property-implicitModel'>    implicitModel: 'Ext.data.TreeModel',
+<span id='Ext-data-NodeStore-property-implicitModel'>    implicitModel: &#39;Ext.data.TreeModel&#39;,
 </span>
 <span id='Ext-data-NodeStore-method-getTotalCount'>    // NodeStores are never buffered or paged. They are loaded from the TreeStore to reflect all visible
 </span>    // nodes.
@@ -101,7 +101,7 @@ Ext.define('Ext.data.NodeStore', {
         // Null will be treated as though all cells need updating.
         if (me.contains(record)) {
             me.onUpdate(record, Ext.data.Model.REJECT, null);
-            me.fireEvent('update', me, record, Ext.data.Model.REJECT, null);
+            me.fireEvent(&#39;update&#39;, me, record, Ext.data.Model.REJECT, null);
         }
     },
 
@@ -112,7 +112,7 @@ Ext.define('Ext.data.NodeStore', {
         }
         if (me.contains(record)) {
             me.onUpdate(record, Ext.data.Model.COMMIT, modifiedFieldNames);
-            me.fireEvent('update', me, record, Ext.data.Model.COMMIT, modifiedFieldNames);
+            me.fireEvent(&#39;update&#39;, me, record, Ext.data.Model.COMMIT, modifiedFieldNames);
         }
     },
 
@@ -162,9 +162,9 @@ Ext.define('Ext.data.NodeStore', {
 
         if (oldNode &amp;&amp; !oldNode.destroyed) {
             oldNode.un({
-                append  : 'onNodeAppend',
-                insert  : 'onNodeInsert',
-                remove  : 'onNodeRemove',
+                append  : &#39;onNodeAppend&#39;,
+                insert  : &#39;onNodeInsert&#39;,
+                remove  : &#39;onNodeRemove&#39;,
                 scope: me
             });
             oldNode.unjoin(me);
@@ -173,9 +173,9 @@ Ext.define('Ext.data.NodeStore', {
         if (node) {
             node.on({
                 scope   : me,
-                append  : 'onNodeAppend',
-                insert  : 'onNodeInsert',
-                remove  : 'onNodeRemove'
+                append  : &#39;onNodeAppend&#39;,
+                insert  : &#39;onNodeInsert&#39;,
+                remove  : &#39;onNodeRemove&#39;
             });
 
             node.join(me);
@@ -187,11 +187,11 @@ Ext.define('Ext.data.NodeStore', {
             if (me.getRootVisible()) {
                 data.push(node);
             } else if (node.isLoaded() || node.isLoading()) {
-                node.set('expanded', true);
+                node.set(&#39;expanded&#39;, true);
             }
 
             me.getData().clear();
-            me.fireEvent('clear', me);
+            me.fireEvent(&#39;clear&#39;, me);
 
             me.suspendEvents();
             if (me.isInitializing) {
@@ -205,7 +205,7 @@ Ext.define('Ext.data.NodeStore', {
                 me.loaded = node.loaded = true;
             }
 
-            me.fireEvent('refresh', me, me.data);
+            me.fireEvent(&#39;refresh&#39;, me, me.data);
         }
     },
 
@@ -226,7 +226,7 @@ Ext.define('Ext.data.NodeStore', {
             }
 
             //we need to check this because for a nodestore the node is not likely to be the root
-            //so we stop going up the chain when we hit the original node as we don't care about any
+            //so we stop going up the chain when we hit the original node as we don&#39;t care about any
             //ancestors above the configured node
             if (parent === this.getNode()) {
                 break;

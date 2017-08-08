@@ -27,7 +27,7 @@
 Ext.USE_NATIVE_JSON = false;
 
 <span id='Ext-JSON'>/**
-</span> * Modified version of [Douglas Crockford's JSON.js][dc] that doesn't
+</span> * Modified version of [Douglas Crockford&#39;s JSON.js][dc] that doesn&#39;t
  * mess with the Object prototype.
  *
  * [dc]: http://www.json.org/js.html
@@ -41,13 +41,13 @@ Ext.JSON = (new(function() {
 // @require Ext.Error
 
 var me = this,
-    hasNative = window.JSON &amp;&amp; JSON.toString() === '[object JSON]',
+    hasNative = window.JSON &amp;&amp; JSON.toString() === &#39;[object JSON]&#39;,
     useHasOwn = !! {}.hasOwnProperty,
     pad = function(n) {
         return n &lt; 10 ? &quot;0&quot; + n : n;
     },
     doDecode = function(json) {
-        return eval(&quot;(&quot; + json + ')'); // jshint ignore:line
+        return eval(&quot;(&quot; + json + &#39;)&#39;); // jshint ignore:line
     },
     doEncode = function(o, newline) {
         // http://jsperf.com/is-undefined
@@ -62,7 +62,7 @@ var me = this,
                 return me.encodeString(o);
             }
         } else if (typeof o === &quot;number&quot;) {
-            //don't use isNumber here, since finite checks happen inside isNumber
+            //don&#39;t use isNumber here, since finite checks happen inside isNumber
             return isFinite(o) ? String(o) : &quot;null&quot;;
         } else if (Ext.isBoolean(o)) {
             return String(o);
@@ -78,33 +78,33 @@ var me = this,
         } else if (typeof o === &quot;function&quot;) {
             return &quot;null&quot;;
         }
-        return 'undefined';
+        return &#39;undefined&#39;;
     },
     m = {
-        &quot;\b&quot;: '\\b',
-        &quot;\t&quot;: '\\t',
-        &quot;\n&quot;: '\\n',
-        &quot;\f&quot;: '\\f',
-        &quot;\r&quot;: '\\r',
-        '&quot;': '\\&quot;',
-        &quot;\\&quot;: '\\\\',
-        '\x0b': '\\u000b' //ie doesn't handle \v
+        &quot;\b&quot;: &#39;\\b&#39;,
+        &quot;\t&quot;: &#39;\\t&#39;,
+        &quot;\n&quot;: &#39;\\n&#39;,
+        &quot;\f&quot;: &#39;\\f&#39;,
+        &quot;\r&quot;: &#39;\\r&#39;,
+        &#39;&quot;&#39;: &#39;\\&quot;&#39;,
+        &quot;\\&quot;: &#39;\\\\&#39;,
+        &#39;\x0b&#39;: &#39;\\u000b&#39; //ie doesn&#39;t handle \v
     },
     charToReplace = /[\\\&quot;\x00-\x1f\x7f-\uffff]/g,
     encodeString = function(s) {
-        return '&quot;' + s.replace(charToReplace, function(a) {
+        return &#39;&quot;&#39; + s.replace(charToReplace, function(a) {
             var c = m[a];
-            return typeof c === 'string' ? c : '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
-        }) + '&quot;';
+            return typeof c === &#39;string&#39; ? c : &#39;\\u&#39; + (&#39;0000&#39; + a.charCodeAt(0).toString(16)).slice(-4);
+        }) + &#39;&quot;&#39;;
     },
     encodeMSDate = function(o) {
-        return '&quot;' + o + '&quot;';
+        return &#39;&quot;&#39; + o + &#39;&quot;&#39;;
     },
 
     encodeArrayPretty = function(o, newline) {
         var len = o.length,
-            cnewline = newline + '   ',
-            sep = ',' + cnewline,
+            cnewline = newline + &#39;   &#39;,
+            sep = &#39;,&#39; + cnewline,
             a = [&quot;[&quot;, cnewline], // Note newline in case there are no members
             i;
 
@@ -113,32 +113,32 @@ var me = this,
         }
 
         // Overwrite trailing comma (or empty string)
-        a[a.length - 1] = newline + ']';
+        a[a.length - 1] = newline + &#39;]&#39;;
 
-        return a.join('');
+        return a.join(&#39;&#39;);
     },
 
     encodeObjectPretty = function(o, newline) {
-        var cnewline = newline + '   ',
-            sep = ',' + cnewline,
+        var cnewline = newline + &#39;   &#39;,
+            sep = &#39;,&#39; + cnewline,
             a = [&quot;{&quot;, cnewline], // Note newline in case there are no members
             i, val;
 
         for (i in o) {
             val = o[i];
             if (!useHasOwn || o.hasOwnProperty(i)) {
-                // To match JSON.stringify, we shouldn't encode functions or undefined
-                if (typeof val === 'function' || val === undefined) {
+                // To match JSON.stringify, we shouldn&#39;t encode functions or undefined
+                if (typeof val === &#39;function&#39; || val === undefined) {
                     continue;
                 }
-                a.push(me.encodeValue(i) + ': ' + me.encodeValue(val, cnewline), sep);
+                a.push(me.encodeValue(i) + &#39;: &#39; + me.encodeValue(val, cnewline), sep);
             }
         }
 
         // Overwrite trailing comma (or empty string)
-        a[a.length - 1] = newline + '}';
+        a[a.length - 1] = newline + &#39;}&#39;;
 
-        return a.join('');
+        return a.join(&#39;&#39;);
     },
 
     encodeArray = function(o, newline) {
@@ -150,10 +150,10 @@ var me = this,
             len = o.length,
             i;
         for (i = 0; i &lt; len; i += 1) {
-            a.push(me.encodeValue(o[i]), ',');
+            a.push(me.encodeValue(o[i]), &#39;,&#39;);
         }
         // Overwrite trailing comma (or empty string)
-        a[a.length - 1] = ']';
+        a[a.length - 1] = &#39;]&#39;;
         return a.join(&quot;&quot;);
     },
 
@@ -167,16 +167,16 @@ var me = this,
         for (i in o) {
             val = o[i];
             if (!useHasOwn || o.hasOwnProperty(i)) {
-                // To match JSON.stringify, we shouldn't encode functions or undefined
-                if (typeof val === 'function' || val === undefined) {
+                // To match JSON.stringify, we shouldn&#39;t encode functions or undefined
+                if (typeof val === &#39;function&#39; || val === undefined) {
                     continue;
                 }
-                a.push(me.encodeValue(i), &quot;:&quot;, me.encodeValue(val), ',');
+                a.push(me.encodeValue(i), &quot;:&quot;, me.encodeValue(val), &#39;,&#39;);
                 
             }
         }
         // Overwrite trailing comma (or empty string)
-        a[a.length - 1] = '}';
+        a[a.length - 1] = &#39;}&#39;;
         return a.join(&quot;&quot;);
     };
     
@@ -187,7 +187,7 @@ var me = this,
      * To override this:
      *
      *     Ext.JSON.encodeString = function(s) {
-     *         return 'Foo' + s;
+     *         return &#39;Foo&#39; + s;
      *     };
      *
      * @param {String} s The String to encode
@@ -217,26 +217,26 @@ var me = this,
      * To override this:
      *
      *     Ext.JSON.encodeDate = function(d) {
-     *         return Ext.Date.format(d, '&quot;Y-m-d&quot;');
+     *         return Ext.Date.format(d, &#39;&quot;Y-m-d&quot;&#39;);
      *     };
      *
      * @param {Date} d The Date to encode
      * @return {String} The string literal to use in a JSON string.
      */
     me.encodeDate = function(o) {
-        return '&quot;' + o.getFullYear() + &quot;-&quot; +
+        return &#39;&quot;&#39; + o.getFullYear() + &quot;-&quot; +
             pad(o.getMonth() + 1) + &quot;-&quot; +
             pad(o.getDate()) + &quot;T&quot; +
             pad(o.getHours()) + &quot;:&quot; +
             pad(o.getMinutes()) + &quot;:&quot; +
-            pad(o.getSeconds()) + '&quot;';
+            pad(o.getSeconds()) + &#39;&quot;&#39;;
     };
 
 <span id='Ext-JSON-method-encode'>    /**
 </span>     * Encodes an Object, Array or other value.
      * 
-     * If the environment's native JSON encoding is not being used ({@link Ext#USE_NATIVE_JSON} is not set,
-     * or the environment does not support it), then ExtJS's encoding will be used. This allows the developer
+     * If the environment&#39;s native JSON encoding is not being used ({@link Ext#USE_NATIVE_JSON} is not set,
+     * or the environment does not support it), then ExtJS&#39;s encoding will be used. This allows the developer
      * to add a `toJSON` method to their classes which need serializing to return a valid JSON representation
      * of the object.
      * 
@@ -274,7 +274,7 @@ var me = this,
             Ext.raise({
                 sourceClass: &quot;Ext.JSON&quot;,
                 sourceMethod: &quot;decode&quot;,
-                msg: &quot;You're trying to decode an invalid JSON String: &quot; + json
+                msg: &quot;You&#39;re trying to decode an invalid JSON String: &quot; + json
             });
         }
     };

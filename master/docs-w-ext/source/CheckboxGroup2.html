@@ -17,12 +17,12 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-layout-container-CheckboxGroup'>/**
 </span> * This layout implements the column arrangement for {@link Ext.form.CheckboxGroup} and {@link Ext.form.RadioGroup}.
- * It groups the component's sub-items into columns based on the component's
+ * It groups the component&#39;s sub-items into columns based on the component&#39;s
  * {@link Ext.form.CheckboxGroup#columns columns} and {@link Ext.form.CheckboxGroup#vertical} config properties.
  */
-Ext.define('Ext.layout.container.CheckboxGroup', {
-    extend: 'Ext.layout.container.Container',
-    alias: ['layout.checkboxgroup'],
+Ext.define(&#39;Ext.layout.container.CheckboxGroup&#39;, {
+    extend: &#39;Ext.layout.container.Container&#39;,
+    alias: [&#39;layout.checkboxgroup&#39;],
 
 <span id='Ext-layout-container-CheckboxGroup-cfg-autoFlex'>    /**
 </span>     * @cfg {Boolean} [autoFlex=true]
@@ -33,27 +33,27 @@ Ext.define('Ext.layout.container.CheckboxGroup', {
      */
     autoFlex: true,
 
-<span id='Ext-layout-container-CheckboxGroup-property-type'>    type: 'checkboxgroup',
+<span id='Ext-layout-container-CheckboxGroup-property-type'>    type: &#39;checkboxgroup&#39;,
 </span>    
 <span id='Ext-layout-container-CheckboxGroup-property-createsInnerCt'>    createsInnerCt: true,
 </span>
 <span id='Ext-layout-container-CheckboxGroup-cfg-childEls'>    childEls: [
-</span>        'innerCt'
+</span>        &#39;innerCt&#39;
     ],
 
 <span id='Ext-layout-container-CheckboxGroup-property-renderTpl'>    renderTpl:
-</span>        '&lt;table id=&quot;{ownerId}-innerCt&quot; data-ref=&quot;innerCt&quot; class=&quot;' + Ext.baseCSSPrefix + 'table-plain&quot; cellpadding=&quot;0&quot;' +
-            'role=&quot;presentation&quot; style=&quot;{tableStyle}&quot;&gt;' +
-            '&lt;tbody role=&quot;presentation&quot;&gt;' +
-                '&lt;tr role=&quot;presentation&quot;&gt;' +
-                    '&lt;tpl for=&quot;columns&quot;&gt;' +
-                        '&lt;td class=&quot;{parent.colCls}&quot; valign=&quot;top&quot; style=&quot;{style}&quot; role=&quot;presentation&quot;&gt;' +
-                            '{% this.renderColumn(out,parent,xindex-1) %}' +
-                        '&lt;/td&gt;' +
-                    '&lt;/tpl&gt;' +
-                '&lt;/tr&gt;' +
-            '&lt;/tbody&gt;' +
-        '&lt;/table&gt;',
+</span>        &#39;&lt;table id=&quot;{ownerId}-innerCt&quot; data-ref=&quot;innerCt&quot; class=&quot;&#39; + Ext.baseCSSPrefix + &#39;table-plain&quot; cellpadding=&quot;0&quot;&#39; +
+            &#39;role=&quot;presentation&quot; style=&quot;{tableStyle}&quot;&gt;&#39; +
+            &#39;&lt;tbody role=&quot;presentation&quot;&gt;&#39; +
+                &#39;&lt;tr role=&quot;presentation&quot;&gt;&#39; +
+                    &#39;&lt;tpl for=&quot;columns&quot;&gt;&#39; +
+                        &#39;&lt;td class=&quot;{parent.colCls}&quot; valign=&quot;top&quot; style=&quot;{style}&quot; role=&quot;presentation&quot;&gt;&#39; +
+                            &#39;{% this.renderColumn(out,parent,xindex-1) %}&#39; +
+                        &#39;&lt;/td&gt;&#39; +
+                    &#39;&lt;/tpl&gt;&#39; +
+                &#39;&lt;/tr&gt;&#39; +
+            &#39;&lt;/tbody&gt;&#39; +
+        &#39;&lt;/table&gt;&#39;,
 
 <span id='Ext-layout-container-CheckboxGroup-property-lastOwnerItemsGeneration'>    lastOwnerItemsGeneration: null,
 </span>
@@ -62,7 +62,7 @@ Ext.define('Ext.layout.container.CheckboxGroup', {
             owner = me.owner;
 
         me.columnsArray = Ext.isArray(owner.columns);
-        me.autoColumns = !owner.columns || owner.columns === 'auto';
+        me.autoColumns = !owner.columns || owner.columns === &#39;auto&#39;;
         
         // Auto layout is always horizontal
         if (!me.autoColumns) {
@@ -86,7 +86,7 @@ Ext.define('Ext.layout.container.CheckboxGroup', {
         me.callParent(arguments);
 
         columns = me.rowNodes[0].children;
-        ownerContext.innerCtContext = ownerContext.getEl('innerCt', me);
+        ownerContext.innerCtContext = ownerContext.getEl(&#39;innerCt&#39;, me);
 
         // The columns config may be an array of widths. Any value &lt; 1 is taken to be a fraction:
         if (!ownerContext.widthModel.shrinkWrap) {
@@ -108,21 +108,21 @@ Ext.define('Ext.layout.container.CheckboxGroup', {
                 for (i = 0; i &lt; numCols; i++) {
                     width = me.owner.columns[i];
                     if (width &lt; 1) {
-                        cwidth = ((width / totalFlex) * 100) + '%';
+                        cwidth = ((width / totalFlex) * 100) + &#39;%&#39;;
                     } else {
-                        cwidth = width + 'px';
+                        cwidth = width + &#39;px&#39;;
                     }
                     columns[i].style.width = cwidth;
                 }
             }
 
-            // Otherwise it's the *number* of columns, so distributed the widths evenly
+            // Otherwise it&#39;s the *number* of columns, so distributed the widths evenly
             else {
                 for (i = 0; i &lt; numCols; i++) {
                     // autoFlex: true will automatically calculate % widths
                     // autoFlex: false allows the table to decide (shrinkWrap, in effect)
                     // on a per-column basis
-                    cwidth = autoFlex ? (1 / numCols * 100) + '%' : '';
+                    cwidth = autoFlex ? (1 / numCols * 100) + &#39;%&#39; : &#39;&#39;;
                     columns[i].style.width = cwidth;
                     flexedCols++;
                 }
@@ -130,26 +130,26 @@ Ext.define('Ext.layout.container.CheckboxGroup', {
 
             // no flexed cols -- all widths are fixed
             if (!flexedCols) {
-                innerCtStyle.tableLayout = 'fixed';
-                innerCtStyle.width = '';
+                innerCtStyle.tableLayout = &#39;fixed&#39;;
+                innerCtStyle.width = &#39;&#39;;
             // some flexed cols -- need to fix some
             } else if (flexedCols &lt; numCols) {
-                innerCtStyle.tableLayout = 'fixed';
-                innerCtStyle.width = '100%';
+                innerCtStyle.tableLayout = &#39;fixed&#39;;
+                innerCtStyle.width = &#39;100%&#39;;
             // let the table decide
             } else {
-                innerCtStyle.tableLayout = 'auto';
+                innerCtStyle.tableLayout = &#39;auto&#39;;
                 // if autoFlex, fill available space, else compact down
                 if (autoFlex) {
-                    innerCtStyle.width = '100%';
+                    innerCtStyle.width = &#39;100%&#39;;
                 } else {
-                    innerCtStyle.width = '';
+                    innerCtStyle.width = &#39;&#39;;
                 }
             }
 
         } else {
-            innerCtStyle.tableLayout = 'auto';
-            innerCtStyle.width = '';
+            innerCtStyle.tableLayout = &#39;auto&#39;;
+            innerCtStyle.width = &#39;&#39;;
         }
     },
 
@@ -159,7 +159,7 @@ Ext.define('Ext.layout.container.CheckboxGroup', {
         // Grab defined childEls
         me.callParent();
 
-        me.rowNodes = me.innerCt.query('tr', true);
+        me.rowNodes = me.innerCt.query(&#39;tr&#39;, true);
         
         // There always should be at least one row
         me.tBodyNode = me.rowNodes[0].parentNode;
@@ -175,7 +175,7 @@ Ext.define('Ext.layout.container.CheckboxGroup', {
 
         // The column nodes are widthed using their own width attributes, we just need to wait
         // for all children to have arranged themselves in that width, and then collect our height.
-        if (!ownerContext.getDomProp('containerChildrenSizeDone')) {
+        if (!ownerContext.getDomProp(&#39;containerChildrenSizeDone&#39;)) {
             me.done = false;
         } else {
             targetContext = ownerContext.innerCtContext;
@@ -211,7 +211,7 @@ Ext.define('Ext.layout.container.CheckboxGroup', {
         //      items.length = 10
 
         if (owner.vertical) {
-            //    For vertical layouts we're using only one row
+            //    For vertical layouts we&#39;re using only one row
             //    with items rendered &quot;vertically&quot; into table cells.
             //    This is to ensure proper DOM order for native
             //    keyboard navigation.
@@ -229,7 +229,7 @@ Ext.define('Ext.layout.container.CheckboxGroup', {
             itemCount = Math.min(itemCount, itemIndex + rowCount);
             increment = 1;
         } else {
-            //    For horizontal layouts we're using table with rows
+            //    For horizontal layouts we&#39;re using table with rows
             //    and cells, each cell holding one item.
             //
             //        0   1   2
@@ -310,22 +310,22 @@ Ext.define('Ext.layout.container.CheckboxGroup', {
             if (me.columnsArray) {
                 width = me.owner.columns[i];
                 if (width &lt; 1) {
-                    cwidth = ((width / totalFlex) * 100) + '%';
+                    cwidth = ((width / totalFlex) * 100) + &#39;%&#39;;
                 } else {
-                    cwidth = width + 'px';
+                    cwidth = width + &#39;px&#39;;
                 }
-                column.style = 'width:' + cwidth;
+                column.style = &#39;width:&#39; + cwidth;
             } else {
-                column.style = 'width:' + (1 / columns * 100) + '%';
+                column.style = &#39;width:&#39; + (1 / columns * 100) + &#39;%&#39;;
                 flexedCols++;
             }
         }
 
         // If the columns config was an array of column widths, allow table to auto width
         data.tableStyle =
-            !flexedCols ? 'table-layout:fixed;' :
-            (flexedCols &lt; columns) ? 'table-layout:fixed;width:100%' :
-            (autoFlex) ? 'table-layout:auto;width:100%' : 'table-layout:auto;';
+            !flexedCols ? &#39;table-layout:fixed;&#39; :
+            (flexedCols &lt; columns) ? &#39;table-layout:fixed;width:100%&#39; :
+            (autoFlex) ? &#39;table-layout:auto;width:100%&#39; : &#39;table-layout:auto;&#39;;
 
         return data;
     },
@@ -430,8 +430,8 @@ Ext.define('Ext.layout.container.CheckboxGroup', {
         row = me.rowNodes[rowIndex];
         
         if (!row) {
-            row = me.rowNodes[rowIndex] = document.createElement('tr');
-            row.role = 'presentation';
+            row = me.rowNodes[rowIndex] = document.createElement(&#39;tr&#39;);
+            row.role = &#39;presentation&#39;;
             me.tBodyNode.appendChild(row);
         }
         
@@ -446,10 +446,10 @@ Ext.define('Ext.layout.container.CheckboxGroup', {
         
         if (!column) {
             column = Ext.fly(row).appendChild({
-                tag: 'td',
+                tag: &#39;td&#39;,
                 cls: this.owner.groupCls,
-                vAlign: 'top',
-                role: 'presentation'
+                vAlign: &#39;top&#39;,
+                role: &#39;presentation&#39;
             }, true);
         }
         
@@ -486,7 +486,7 @@ Ext.define('Ext.layout.container.CheckboxGroup', {
                     
                     // We only need to test for the last cells that can be empty
                     // due to item removal. As soon as we reach a non-empty column
-                    // there's no point in continuing the loop.
+                    // there&#39;s no point in continuing the loop.
                     if (column.children.length === 0) {
                         row.removeChild(column);
                     }

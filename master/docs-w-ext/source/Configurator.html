@@ -20,7 +20,7 @@
  * This class manages the config properties for a class.
  * @private
  */
-(function () { // see end of file (and please don't indent the whole file)
+(function () { // see end of file (and please don&#39;t indent the whole file)
 
 var ExtConfig = Ext.Config,
     configPropMap = ExtConfig.map,
@@ -171,7 +171,7 @@ Ext.Configurator.prototype = {
         for (name in config) {
             value = config[name];
             isObject = value &amp;&amp; value.constructor === Object;
-            meta = isObject &amp;&amp; '$value' in value ? value : null;
+            meta = isObject &amp;&amp; &#39;$value&#39; in value ? value : null;
             isCached = false;
             if (meta) {
                 isCached = !!meta.cached;
@@ -189,17 +189,17 @@ Ext.Configurator.prototype = {
                     if (!merge) {
                         continue;
                     }
-                    // Don't want the mixin meta modifying our own
+                    // Don&#39;t want the mixin meta modifying our own
                     meta = null;
                 } else {
                     merge = merge || cfg.merge;
                 }
 
                 //&lt;debug&gt;
-                // This means that we've already declared this as a config in a superclass
-                // Let's not allow us to change it here.
+                // This means that we&#39;ve already declared this as a config in a superclass
+                // Let&#39;s not allow us to change it here.
                 if (!mixinClass &amp;&amp; isCached &amp;&amp; !cachedConfigs[name]) {
-                    Ext.raise('Redefining config as cached: ' + name + ' in class: ' + Cls.$className);
+                    Ext.raise(&#39;Redefining config as cached: &#39; + name + &#39; in class: &#39; + Cls.$className);
                 }
                 //&lt;/debug&gt;
 
@@ -227,7 +227,7 @@ Ext.Configurator.prototype = {
                 // In the majority of cases this value will not be overridden or need to
                 // be forked.
                 if (mixinConfigs) {
-                    // Since this is a config from a mixin, we don't want to apply its
+                    // Since this is a config from a mixin, we don&#39;t want to apply its
                     // meta-ness because it already has. Instead we want to use its cfg
                     // instance:
                     cfg = mixinConfigs[name];
@@ -243,7 +243,7 @@ Ext.Configurator.prototype = {
 
                 // Ensure that the new config has a getter and setter. Because this method
                 // is called during class creation as the &quot;config&quot; (or &quot;cachedConfig&quot;) is
-                // being processed, the user's methods will not be on the prototype yet.
+                // being processed, the user&#39;s methods will not be on the prototype yet.
                 // 
                 // This has the following trade-offs:
                 // 
@@ -312,7 +312,7 @@ Ext.Configurator.prototype = {
     addDeprecations: function (configs) {
         var me = this,
             deprecations = me.deprecations,
-            className = (me.cls.$className || '') + '#',
+            className = (me.cls.$className || &#39;&#39;) + &#39;#&#39;,
             message, newName, oldName;
 
         for (oldName in configs) {
@@ -321,27 +321,27 @@ Ext.Configurator.prototype = {
             //      configs: {
             //          dead: null,
             //
-            //          renamed: 'newName',
+            //          renamed: &#39;newName&#39;,
             //
             //          removed: {
-            //              message: 'This config was replaced by pixie dust'
+            //              message: &#39;This config was replaced by pixie dust&#39;
             //          }
             //      }
 
             if (!newName) {
-                message = 'This config has been removed.';
+                message = &#39;This config has been removed.&#39;;
             } else if (!(message = newName.message)) {
-                message = 'This config has been renamed to &quot;' + newName + '&quot;';
+                message = &#39;This config has been renamed to &quot;&#39; + newName + &#39;&quot;&#39;;
             }
 
-            deprecations[oldName] = className + oldName + ': ' + message;
+            deprecations[oldName] = className + oldName + &#39;: &#39; + message;
         }
     },
     //&lt;/debug&gt;
 
 <span id='Ext-Configurator-method-configure'>    /**
 </span>     * This method configures the given `instance` using the specified `instanceConfig`.
-     * The given `instance` should have been created by this object's `cls`.
+     * The given `instance` should have been created by this object&#39;s `cls`.
      * 
      * @param {Object} instance The instance to configure.
      * @param {Object} instanceConfig The configuration properties to apply to `instance`.
@@ -385,7 +385,7 @@ Ext.Configurator.prototype = {
 
                     if (!prototype[names.set].$isDefault ||
                                 prototype[names.apply] || prototype[names.update] ||
-                                typeof value === 'object') {
+                                typeof value === &#39;object&#39;) {
                         if (isCached) {
                             // This is a cachedConfig, so it needs to be initialized with
                             // the default value and placed on the prototype... but the
@@ -401,7 +401,7 @@ Ext.Configurator.prototype = {
                         }
 
                         // Point all getters to the initGetters. By doing this here we
-                        // avoid creating initGetters for configs that don't need them
+                        // avoid creating initGetters for configs that don&#39;t need them
                         // and we can easily pick up the cached fn to save the call.
                         instance[names.get] = cfg.initGetter || cfg.getInitGetter();
                     } else {
@@ -475,15 +475,15 @@ Ext.Configurator.prototype = {
         instance.config = values;
         
         // There are 2 possibilities here:
-        // 1) If it's the first time in this function, we may have had cachedConfigs running.
+        // 1) If it&#39;s the first time in this function, we may have had cachedConfigs running.
         //    these configs may have called the getters for any of the normal getters, which
-        //    means the initial getters have been clobbered on the instance and won't be able
+        //    means the initial getters have been clobbered on the instance and won&#39;t be able
         //    to be called below when we iterate over the initList. As such, we need to
-        //    reinitialize them here, even though we've done it up above.
+        //    reinitialize them here, even though we&#39;ve done it up above.
         //
-        // 2) If this the second time in this function, the cachedConfigs won't be processed,
-        //    so we don't need to worry about them clobbering config values. However, since
-        //    we've already done all our setup, we won't enter into the block that sets the
+        // 2) If this the second time in this function, the cachedConfigs won&#39;t be processed,
+        //    so we don&#39;t need to worry about them clobbering config values. However, since
+        //    we&#39;ve already done all our setup, we won&#39;t enter into the block that sets the
         //    initGetter, so we need to do it here anyway.
         //
         // Also note, that lazy configs will appear in the initList because we need
@@ -505,7 +505,7 @@ Ext.Configurator.prototype = {
         // a setter may have an updater/applier, it could potentially call another getter() to grab
         // the value for some other property, so this ensures they are all set on the config object.
         //
-        // 2) Ensure that the initGetter is set as the getter for any config that doesn't appear in
+        // 2) Ensure that the initGetter is set as the getter for any config that doesn&#39;t appear in
         // the initList. We need to ensure that the initGetter is pushed on for everything that we will
         // be setting during init time.
         //
@@ -522,7 +522,7 @@ Ext.Configurator.prototype = {
 
                     if (!cfg) {
                         // If there is a Config for this, perhaps the class is emulating
-                        // the old config... If there is not a Config we don't want to
+                        // the old config... If there is not a Config we don&#39;t want to
                         // proceed and put the property on the instance. That will likely
                         // hide the bug during development.
                         continue;
@@ -533,9 +533,9 @@ Ext.Configurator.prototype = {
                 if (!cfg) {
                     //&lt;debug&gt;
                     field = instance.self.prototype[name];
-                    if (instance.$configStrict &amp;&amp; (typeof field === 'function') &amp;&amp; !field.$nullFn) {
+                    if (instance.$configStrict &amp;&amp; (typeof field === &#39;function&#39;) &amp;&amp; !field.$nullFn) {
                         // In strict mode you cannot override functions
-                        Ext.raise('Cannot override method ' + name + ' on ' + instance.$className + ' instance.');
+                        Ext.raise(&#39;Cannot override method &#39; + name + &#39; on &#39; + instance.$className + &#39; instance.&#39;);
                     }
                     //&lt;/debug&gt;
 
@@ -584,7 +584,7 @@ Ext.Configurator.prototype = {
                 }
 
                 // We can ignore deprecated configs here because we warned about them
-                // above. Further, since we only process proper Config's here we would
+                // above. Further, since we only process proper Config&#39;s here we would
                 // not be skipping them anyway.
 
                 cfg = configs[name];
@@ -617,9 +617,9 @@ Ext.Configurator.prototype = {
             getter = names.get;
 
             if (!cfg.lazy &amp;&amp; instance.hasOwnProperty(getter)) {
-                // Since the instance still hasOwn the getter, that means we've set an initGetter
-                // and it hasn't been cleared by calling any setter. Since we've never set the value
-                // because it wasn't passed in the instance, we go and set it here, taking the value
+                // Since the instance still hasOwn the getter, that means we&#39;ve set an initGetter
+                // and it hasn&#39;t been cleared by calling any setter. Since we&#39;ve never set the value
+                // because it wasn&#39;t passed in the instance, we go and set it here, taking the value
                 // from our definition config and passing it through finally clear off the getter.
                 instance[names.set](values[cfg.name]);
                 delete instance[getter];
@@ -720,15 +720,15 @@ Ext.Configurator.prototype = {
                 // the first call may have set a function on the instance.
                 prop = instance.self.prototype[name];
                 if (strict) {
-                    if ((typeof prop === 'function') &amp;&amp; !prop.$nullFn) {
+                    if ((typeof prop === &#39;function&#39;) &amp;&amp; !prop.$nullFn) {
                         //&lt;debug&gt;
                         Ext.Error.raise(&quot;Cannot override method &quot; + name + &quot; on &quot; + instance.$className + &quot; instance.&quot;);
                         //&lt;/debug&gt;
                         continue;
                         //&lt;debug&gt;
                     } else {
-                        if (name !== 'type') {
-                            Ext.log.warn('No such config &quot;' + name + '&quot; for class ' +
+                        if (name !== &#39;type&#39;) {
+                            Ext.log.warn(&#39;No such config &quot;&#39; + name + &#39;&quot; for class &#39; +
                                 instance.$className);
                         }
                         //&lt;/debug&gt;
@@ -748,9 +748,9 @@ Ext.Configurator.prototype = {
                 getter = names.get;
 
                 if (instance.hasOwnProperty(getter)) {
-                    // Since the instance still hasOwn the getter, that means we've set an initGetter
-                    // and it hasn't been cleared by calling any setter. Since we've never set the value
-                    // because it wasn't passed in the instance, we go and set it here, taking the value
+                    // Since the instance still hasOwn the getter, that means we&#39;ve set an initGetter
+                    // and it hasn&#39;t been cleared by calling any setter. Since we&#39;ve never set the value
+                    // because it wasn&#39;t passed in the instance, we go and set it here, taking the value
                     // from our definition config and passing it through finally clear off the getter.
                     instance[names.set](instanceConfig[name]);
                     delete instance[getter];

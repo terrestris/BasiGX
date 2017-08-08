@@ -40,19 +40,19 @@
  * domain does not provide selectors at all.
  * -   {@link Ext.app.domain.Controller Controller domain}. This domain includes all classes
  * that extend {@link Ext.app.Controller}. Events fired by Controllers will be available
- * within this domain; selectors are either Controller's {@link Ext.app.Controller#id id} or
- * '*' wildcard for any Controller.
+ * within this domain; selectors are either Controller&#39;s {@link Ext.app.Controller#id id} or
+ * &#39;*&#39; wildcard for any Controller.
  * -   {@link Ext.app.domain.Store Store domain}. This domain is for classes extending
- * {@link Ext.data.AbstractStore}. Selectors are either Store's
- * {@link Ext.data.AbstractStore#storeId storeId} or '*' wildcard for any Store.
+ * {@link Ext.data.AbstractStore}. Selectors are either Store&#39;s
+ * {@link Ext.data.AbstractStore#storeId storeId} or &#39;*&#39; wildcard for any Store.
  * -   {@link Ext.app.domain.Direct Direct domain}. This domain includes all classes that extend
- * {@link Ext.direct.Provider}. Selectors are either Provider's {@link Ext.direct.Provider#id id}
- * or '*' wildcard for any Provider. This domain is optional and will be loaded only if
+ * {@link Ext.direct.Provider}. Selectors are either Provider&#39;s {@link Ext.direct.Provider#id id}
+ * or &#39;*&#39; wildcard for any Provider. This domain is optional and will be loaded only if
  * {@link Ext.direct.Manager} singleton is required in your application.
  */
-Ext.define('Ext.app.EventDomain', {
+Ext.define(&#39;Ext.app.EventDomain&#39;, {
     requires: [
-        'Ext.util.Event'
+        &#39;Ext.util.Event&#39;
     ],
 
     statics: {
@@ -89,7 +89,7 @@ Ext.define('Ext.app.EventDomain', {
      * @param {String} ev The event being fired.
      * @param {Array} args The arguments for the event. This array **does not** include the event name.
      * That has already been sliced off because this class intercepts the {@link Ext.util.Observable#fireEventArgs fireEventArgs}
-     * method which takes an array as the event's argument list.
+     * method which takes an array as the event&#39;s argument list.
      *
      * @return {Boolean} `false` if any listener returned `false`, otherwise `true`.
      *
@@ -111,7 +111,7 @@ Ext.define('Ext.app.EventDomain', {
         // Loop over all the selectors that are bound to this event
         for (selector in selectors) {
             // Check if the target matches the selector, note that we will only have
-            // me.controller when we're an instance of a domain.View attached to a view controller.
+            // me.controller when we&#39;re an instance of a domain.View attached to a view controller.
             if (selectors.hasOwnProperty(selector) &amp;&amp; me.match(target, selector, me.controller)) {
                 // Loop over all the controllers that are bound to this selector
                 controllers = selectors[selector];
@@ -148,11 +148,11 @@ Ext.define('Ext.app.EventDomain', {
      * keyed by event name. For example:
      * 
      *      domain.listen({
-     *          'some[selector]': {
+     *          &#39;some[selector]&#39;: {
      *              click: function() { ... }
      *          },
      *          
-     *          'other selector': {
+     *          &#39;other selector&#39;: {
      *              change: {
      *                  fn: function() { ... },
      *                  delay: 10
@@ -172,7 +172,7 @@ Ext.define('Ext.app.EventDomain', {
             monitoredClasses = me.monitoredClasses,
             monitoredClassesCount = monitoredClasses.length,
             controllerId = controller.getId(),
-            isComponentDomain = (me.type === 'component'),
+            isComponentDomain = (me.type === &#39;component&#39;),
             refMap = isComponentDomain ? controller.getRefMap() : null,
             i, tree, info, selector, options, listener, scope, event, listeners, ev,
             classHasListeners;
@@ -183,15 +183,15 @@ Ext.define('Ext.app.EventDomain', {
             if (isComponentDomain) {
                 // This allows ref names to be used as selectors, e.g.
                 //     refs: {
-                //         nav: '#navigationList
+                //         nav: &#39;#navigationList
                 //     },
                 //     control: {
                 //         nav: {
-                //             itemclick: 'onNavClick'
+                //             itemclick: &#39;onNavClick&#39;
                 //         }
                 //     }
                 //
-                // We process this here instead of in the controller so that we don't
+                // We process this here instead of in the controller so that we don&#39;t
                 // have to do multiple loops over the selectors
                 selector = refMap[selector] || selector;
             }
@@ -200,11 +200,11 @@ Ext.define('Ext.app.EventDomain', {
                 if (idProperty) {
                     //&lt;debug&gt;
                     if (!/^[*#]/.test(selector)) {
-                        Ext.raise('Selectors containing id should begin with #');
+                        Ext.raise(&#39;Selectors containing id should begin with #&#39;);
                     }
                     //&lt;/debug&gt;
                 
-                    selector = selector === '*' ? selector : selector.substring(1);
+                    selector = selector === &#39;*&#39; ? selector : selector.substring(1);
                 }
                 
                 for (ev in listeners) {
@@ -225,17 +225,17 @@ Ext.define('Ext.app.EventDomain', {
                     }
                     
                     //&lt;debug&gt;
-                    if ((!options || !options.scope) &amp;&amp; typeof listener === 'string') {
+                    if ((!options || !options.scope) &amp;&amp; typeof listener === &#39;string&#39;) {
                         // Allow this lookup to be dynamic in debug mode.
                         // Super useful for testing!
                         if (!scope[listener]) {
-                            Ext.raise('Cannot resolve &quot;' + listener + '&quot; on controller.');
+                            Ext.raise(&#39;Cannot resolve &quot;&#39; + listener + &#39;&quot; on controller.&#39;);
                         }
                         scope = null;    
                     } else
                     //&lt;/debug&gt;
 
-                    if (typeof listener === 'string') {
+                    if (typeof listener === &#39;string&#39;) {
                         listener = scope[listener];
                     }
                     event.addListener(listener, scope, options);
@@ -243,7 +243,7 @@ Ext.define('Ext.app.EventDomain', {
                     for (i = 0; i &lt; monitoredClassesCount; ++i) {
                         classHasListeners = monitoredClasses[i].hasListeners;
                         if (classHasListeners) {
-                            // Ext.mixin.Observable doesn't have hasListeners at class level
+                            // Ext.mixin.Observable doesn&#39;t have hasListeners at class level
                             classHasListeners._incr_(ev);
                         }
                     }
@@ -265,8 +265,8 @@ Ext.define('Ext.app.EventDomain', {
 
 <span id='Ext-app-EventDomain-method-match'>    /**
 </span>     * This method matches the firer of the event (the `target`) to the given `selector`.
-     * Default matching is very simple: a match is true when selector equals target's
-     * {@link #cfg-idProperty idProperty}, or when selector is '*' wildcard to match any
+     * Default matching is very simple: a match is true when selector equals target&#39;s
+     * {@link #cfg-idProperty idProperty}, or when selector is &#39;*&#39; wildcard to match any
      * target.
      * 
      * @param {Object} target The firer of the event.
@@ -280,7 +280,7 @@ Ext.define('Ext.app.EventDomain', {
         var idProperty = this.idProperty;
         
         if (idProperty) {
-            return selector === '*' || target[idProperty] === selector;
+            return selector === &#39;*&#39; || target[idProperty] === selector;
         }
         
         return false;
@@ -312,7 +312,7 @@ Ext.define('Ext.app.EventDomain', {
             ret = doFireEvent.apply(me, arguments);
 
             // Observable can be destroyed in the event handler above,
-            // in which case we can't proceed with dispatching domain event.
+            // in which case we can&#39;t proceed with dispatching domain event.
             if (ret !== false &amp;&amp; !me.destroyed &amp;&amp; !me.isSuspended(ev)) {
                 ret = domain.dispatch(me, ev, args);
             }
@@ -322,7 +322,7 @@ Ext.define('Ext.app.EventDomain', {
     },
 
 <span id='Ext-app-EventDomain-method-unlisten'>    /**
-</span>     * Removes all of a controller's attached listeners.
+</span>     * Removes all of a controller&#39;s attached listeners.
      *
      * @param {String} controllerId The id of the controller.
      *
@@ -355,7 +355,7 @@ Ext.define('Ext.app.EventDomain', {
                                 for (j = 0; j &lt; monitoredClassesCount; ++j) {
                                     classHasListeners = monitoredClasses[j].hasListeners;
                                     if (classHasListeners) {
-                                        // Ext.mixin.Observable doesn't have hasListeners
+                                        // Ext.mixin.Observable doesn&#39;t have hasListeners
                                         // at class level
                                         classHasListeners._decr_(item.name);
                                     }

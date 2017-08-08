@@ -22,16 +22,16 @@
  * 
  * @private
  */
-Ext.define('Ext.app.domain.Controller', {
-    extend: 'Ext.app.EventDomain',
+Ext.define(&#39;Ext.app.domain.Controller&#39;, {
+    extend: &#39;Ext.app.EventDomain&#39;,
     singleton: true,
 
     requires: [
-        'Ext.app.Controller'
+        &#39;Ext.app.Controller&#39;
     ],
 
-<span id='Ext-app-domain-Controller-property-type'>    type: 'controller',
-</span><span id='Ext-app-domain-Controller-property-prefix'>    prefix: 'controller.',
+<span id='Ext-app-domain-Controller-property-type'>    type: &#39;controller&#39;,
+</span><span id='Ext-app-domain-Controller-property-prefix'>    prefix: &#39;controller.&#39;,
 </span><span id='Ext-app-domain-Controller-property-idMatchRe'>    idMatchRe: /^\#/,
 </span>
 <span id='Ext-app-domain-Controller-method-constructor'>    constructor: function() {
@@ -45,9 +45,9 @@ Ext.define('Ext.app.domain.Controller', {
 </span>        var result = false,
             alias = target.alias;
         
-        if (selector === '*') {
+        if (selector === &#39;*&#39;) {
             result = true;
-        } else if (selector === '#') {
+        } else if (selector === &#39;#&#39;) {
             result = !!target.isApplication;
         } else if (this.idMatchRe.test(selector)) {
             result = target.getId() === selector.substring(1);

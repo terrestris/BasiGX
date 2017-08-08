@@ -18,18 +18,18 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-animation-Abstract'>/**
 </span> * @private
  */
-Ext.define('Ext.fx.animation.Abstract', {
+Ext.define(&#39;Ext.fx.animation.Abstract&#39;, {
 
-    extend: 'Ext.Evented',
+    extend: &#39;Ext.Evented&#39;,
 
 <span id='Ext-fx-animation-Abstract-property-isAnimation'>    isAnimation: true,
 </span>
     requires: [
-        'Ext.fx.State'
+        &#39;Ext.fx.State&#39;
     ],
 
     config: {
-<span id='Ext-fx-animation-Abstract-cfg-name'>        name: '',
+<span id='Ext-fx-animation-Abstract-cfg-name'>        name: &#39;&#39;,
 </span>
 <span id='Ext-fx-animation-Abstract-cfg-element'>        element: null,
 </span>
@@ -53,11 +53,11 @@ Ext.define('Ext.fx.animation.Abstract', {
 </span>         * @cfg
          * Easing type.
          */
-        easing: 'linear',
+        easing: &#39;linear&#39;,
 
 <span id='Ext-fx-animation-Abstract-cfg-iteration'>        iteration: 1,
 </span>
-<span id='Ext-fx-animation-Abstract-cfg-direction'>        direction: 'normal',
+<span id='Ext-fx-animation-Abstract-cfg-direction'>        direction: &#39;normal&#39;,
 </span>
 <span id='Ext-fx-animation-Abstract-cfg-delay'>        delay: 0,
 </span>
@@ -78,17 +78,17 @@ Ext.define('Ext.fx.animation.Abstract', {
 <span id='Ext-fx-animation-Abstract-cfg-replacePrevious'>        replacePrevious: true
 </span>    },
 
-<span id='Ext-fx-animation-Abstract-property-STATE_FROM'>    STATE_FROM: '0%',
+<span id='Ext-fx-animation-Abstract-property-STATE_FROM'>    STATE_FROM: &#39;0%&#39;,
 </span>
-<span id='Ext-fx-animation-Abstract-property-STATE_TO'>    STATE_TO: '100%',
+<span id='Ext-fx-animation-Abstract-property-STATE_TO'>    STATE_TO: &#39;100%&#39;,
 </span>
-<span id='Ext-fx-animation-Abstract-property-DIRECTION_UP'>    DIRECTION_UP: 'up',
+<span id='Ext-fx-animation-Abstract-property-DIRECTION_UP'>    DIRECTION_UP: &#39;up&#39;,
 </span>
-<span id='Ext-fx-animation-Abstract-property-DIRECTION_DOWN'>    DIRECTION_DOWN: 'down',
+<span id='Ext-fx-animation-Abstract-property-DIRECTION_DOWN'>    DIRECTION_DOWN: &#39;down&#39;,
 </span>
-<span id='Ext-fx-animation-Abstract-property-DIRECTION_LEFT'>    DIRECTION_LEFT: 'left',
+<span id='Ext-fx-animation-Abstract-property-DIRECTION_LEFT'>    DIRECTION_LEFT: &#39;left&#39;,
 </span>
-<span id='Ext-fx-animation-Abstract-property-DIRECTION_RIGHT'>    DIRECTION_RIGHT: 'right',
+<span id='Ext-fx-animation-Abstract-property-DIRECTION_RIGHT'>    DIRECTION_RIGHT: &#39;right&#39;,
 </span>
 <span id='Ext-fx-animation-Abstract-property-stateNameRegex'>    stateNameRegex: /^(?:[\d\.]+)%$/,
 </span>
@@ -162,7 +162,7 @@ Ext.define('Ext.fx.animation.Abstract', {
     },
 
 <span id='Ext-fx-animation-Abstract-method-stop'>    stop: function() {
-</span>        this.fireEvent('stop', this);
+</span>        this.fireEvent(&#39;stop&#39;, this);
     },
 
 <span id='Ext-fx-animation-Abstract-method-destroy'>    destroy: function() {
@@ -181,7 +181,7 @@ Ext.define('Ext.fx.animation.Abstract', {
         }
         //&lt;debug&gt;
         else if (name === this.STATE_TO) {
-            Ext.Logger.error(&quot;Setting and invalid '100%' / 'to' state of: &quot; + state);
+            Ext.Logger.error(&quot;Setting and invalid &#39;100%&#39; / &#39;to&#39; state of: &quot; + state);
         }
         //&lt;/debug&gt;
 

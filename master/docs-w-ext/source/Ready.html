@@ -93,7 +93,7 @@ Ext.env.Ready = {
 </span>     * @property {Number} blocks The number of Framework readiness blocks.
      * @private
      */
-    blocks: (location.search || '').indexOf('ext-pauseReadyFire') &gt; 0 ? 1 : 0,
+    blocks: (location.search || &#39;&#39;).indexOf(&#39;ext-pauseReadyFire&#39;) &gt; 0 ? 1 : 0,
 
 <span id='Ext-env-Ready-property-bound'>    /**
 </span>     * @property {Number} bound This property stores the state of event listeners bound
@@ -184,19 +184,19 @@ Ext.env.Ready = {
 
         if (!me.bound) {
             // Test scenario where load is dynamic AFTER window.load
-            if (doc.readyState === 'complete') {
+            if (doc.readyState === &#39;complete&#39;) {
                 // Firefox4+ got support for this state, others already do.
                 me.onReadyEvent({
-                    type: doc.readyState || 'body'
+                    type: doc.readyState || &#39;body&#39;
                 });
             } else {
                 me.bound = 1;
                 if (Ext.browser.is.PhoneGap &amp;&amp; !Ext.os.is.Desktop) {
                     me.bound = 2;
-                    doc.addEventListener('deviceready', me.onReadyEvent, false);
+                    doc.addEventListener(&#39;deviceready&#39;, me.onReadyEvent, false);
                 }
-                doc.addEventListener('DOMContentLoaded', me.onReadyEvent, false);
-                window.addEventListener('load', me.onReadyEvent, false);
+                doc.addEventListener(&#39;DOMContentLoaded&#39;, me.onReadyEvent, false);
+                window.addEventListener(&#39;load&#39;, me.onReadyEvent, false);
             }
         }
     },
@@ -409,7 +409,7 @@ Ext.env.Ready = {
 
             if (!me.bound) {
                 // If we have never bound then bind the ready event now. If we have unbound
-                // the event then me.bound == -1 and we don't want to rebind it as the DOM
+                // the event then me.bound == -1 and we don&#39;t want to rebind it as the DOM
                 // is ready.
                 me.bind();
             }
@@ -490,11 +490,11 @@ Ext.env.Ready = {
             doc = document;
 
         if (me.bound &gt; 1) {
-            doc.removeEventListener('deviceready', me.onReadyEvent, false);
+            doc.removeEventListener(&#39;deviceready&#39;, me.onReadyEvent, false);
         }
 
-        doc.removeEventListener('DOMContentLoaded', me.onReadyEvent, false);
-        window.removeEventListener('load', me.onReadyEvent, false);
+        doc.removeEventListener(&#39;DOMContentLoaded&#39;, me.onReadyEvent, false);
+        window.removeEventListener(&#39;load&#39;, me.onReadyEvent, false);
     }
 };
 
@@ -517,7 +517,7 @@ Ext.env.Ready = {
      */
     if (Ext.isIE9m) {
         /* Customized implementation for Legacy IE. The default implementation is 
-         * configured for use with all other 'standards compliant' agents.
+         * configured for use with all other &#39;standards compliant&#39; agents.
          * References: http://javascript.nwbox.com/IEContentLoaded/
          * licensed courtesy of http://developer.yahoo.com/yui/license.html
          */
@@ -539,7 +539,7 @@ Ext.env.Ready = {
              * pages (with image content and/or embedded frames) will benefit the most
              * from it. Browser timer resolution is too poor to ensure a doScroll check
              * more than once on a page loaded with minimal assets (the readystatechange
-             * event 'complete' usually beats the doScroll timer on a 'lightly-loaded'
+             * event &#39;complete&#39; usually beats the doScroll timer on a &#39;lightly-loaded&#39;
              * initial document).
              * @private
              */
@@ -547,7 +547,7 @@ Ext.env.Ready = {
                 var scrollable = true;
 
                 try {
-                    document.documentElement.doScroll('left');
+                    document.documentElement.doScroll(&#39;left&#39;);
                 } catch(e) {
                     scrollable = false;
                 }
@@ -556,11 +556,11 @@ Ext.env.Ready = {
                 // available
                 if (scrollable &amp;&amp; document.body) {
                     Ready.onReadyEvent({
-                        type: 'doScroll'
+                        type: &#39;doScroll&#39;
                     });
                 } else {
                      // Minimize thrashing --
-                     // adjusted for setTimeout's close-to-minimums (not too low),
+                     // adjusted for setTimeout&#39;s close-to-minimums (not too low),
                      // as this method SHOULD always be called once initially
                     Ready.scrollTimer = Ext.defer(Ready.pollScroll, 20);
                 }
@@ -580,8 +580,8 @@ Ext.env.Ready = {
                 try {
                     topContext = window.frameElement === undefined;
                 } catch(e) {
-                    // If we throw an exception, it means we're probably getting access
-                    // denied, which means we're in an iframe cross domain.
+                    // If we throw an exception, it means we&#39;re probably getting access
+                    // denied, which means we&#39;re in an iframe cross domain.
                 }
 
                 if (!topContext || !doc.documentElement.doScroll) {
@@ -591,21 +591,21 @@ Ext.env.Ready = {
                     return;
                 }
 
-                if (doc.readyState === 'complete')  {
+                if (doc.readyState === &#39;complete&#39;)  {
                     // Loaded AFTER initial document write/load...
                     Ready.onReadyEvent({
-                        type: 'already ' + (doc.readyState || 'body')
+                        type: &#39;already &#39; + (doc.readyState || &#39;body&#39;)
                     });
                 } else {
-                    doc.attachEvent('onreadystatechange', Ready.onReadyStateChange);
-                    window.attachEvent('onload', Ready.onReadyEvent);
+                    doc.attachEvent(&#39;onreadystatechange&#39;, Ready.onReadyStateChange);
+                    window.attachEvent(&#39;onload&#39;, Ready.onReadyEvent);
                     Ready.bound = 1;
                 }
             },
 
             unbind : function () {
-                document.detachEvent('onreadystatechange', Ready.onReadyStateChange);
-                window.detachEvent('onload', Ready.onReadyEvent);
+                document.detachEvent(&#39;onreadystatechange&#39;, Ready.onReadyStateChange);
+                window.detachEvent(&#39;onload&#39;, Ready.onReadyEvent);
 
                 if (Ext.isNumber(Ready.scrollTimer)) {
                     clearTimeout(Ready.scrollTimer);

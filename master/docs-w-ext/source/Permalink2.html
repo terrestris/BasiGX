@@ -37,44 +37,44 @@
  *
  * @class BasiGX.view.form.Permalink
  */
-Ext.define('BasiGX.view.form.Permalink', {
-    extend: 'Ext.form.Panel',
+Ext.define(&#39;BasiGX.view.form.Permalink&#39;, {
+    extend: &#39;Ext.form.Panel&#39;,
 
-    xtype: 'basigx-form-permalink',
+    xtype: &#39;basigx-form-permalink&#39;,
 
     requires: [
-        'Ext.button.Button',
-        'Ext.app.ViewModel',
+        &#39;Ext.button.Button&#39;,
+        &#39;Ext.app.ViewModel&#39;,
 
-        'BasiGX.util.CopyClipboard'
+        &#39;BasiGX.util.CopyClipboard&#39;
     ],
 
 <span id='BasiGX-view-form-Permalink-cfg-viewModel'>    viewModel: {
 </span>        data: {
-            refreshBtnText: 'Erneuern',
-            copyToClipboardBtnText: 'In Zwischenablage kopieren',
-            documentation: '&lt;h2&gt;Permalink erzeugen&lt;/h2&gt;• In diesem Dialog ' +
-                'kann ein Permalink erzeugt werden.&lt;br&gt;' +
-                '• Dieser Link kann benutzt werden, um die ' +
-                'Applikation in einem vordefinierten Zustand, wie z.B. ' +
-                'Zentrum der Karte oder sichtbare Themen, zu öffnen.'
+            refreshBtnText: &#39;Erneuern&#39;,
+            copyToClipboardBtnText: &#39;In Zwischenablage kopieren&#39;,
+            documentation: &#39;&lt;h2&gt;Permalink erzeugen&lt;/h2&gt;• In diesem Dialog &#39; +
+                &#39;kann ein Permalink erzeugt werden.&lt;br&gt;&#39; +
+                &#39;• Dieser Link kann benutzt werden, um die &#39; +
+                &#39;Applikation in einem vordefinierten Zustand, wie z.B. &#39; +
+                &#39;Zentrum der Karte oder sichtbare Themen, zu öffnen.&#39;
         }
     },
 
 <span id='BasiGX-view-form-Permalink-cfg-padding'>    padding: 5,
-</span><span id='BasiGX-view-form-Permalink-cfg-layout'>    layout: 'fit',
+</span><span id='BasiGX-view-form-Permalink-cfg-layout'>    layout: &#39;fit&#39;,
 </span><span id='BasiGX-view-form-Permalink-cfg-minWidth'>    minWidth: 320,
 </span><span id='BasiGX-view-form-Permalink-cfg-defaults'>    defaults: {
-</span>        anchor: '100%'
+</span>        anchor: &#39;100%&#39;
     },
 
 <span id='BasiGX-view-form-Permalink-property-items'>    items: [{
-</span>        xtype: 'textfield',
-        name: 'textfield-permalink',
+</span>        xtype: &#39;textfield&#39;,
+        name: &#39;textfield-permalink&#39;,
         editable: false,
         listeners: {
             afterrender: function(textfield) {
-                var permalink = textfield.up('form').getPermalink();
+                var permalink = textfield.up(&#39;form&#39;).getPermalink();
                 textfield.setValue(permalink);
             },
             change: function(textfield) {
@@ -87,16 +87,16 @@ Ext.define('BasiGX.view.form.Permalink', {
 
 <span id='BasiGX-view-form-Permalink-cfg-buttons'>    buttons: [{
 </span>        bind: {
-            text: '{refreshBtnText}'
+            text: &#39;{refreshBtnText}&#39;
         },
         handler: function(btn) {
-            var permalink = btn.up('form').getPermalink();
-            var textfield = btn.up('form').down('textfield');
+            var permalink = btn.up(&#39;form&#39;).getPermalink();
+            var textfield = btn.up(&#39;form&#39;).down(&#39;textfield&#39;);
             textfield.setValue(permalink);
         }
     }, {
         bind: {
-            text: '{copyToClipboardBtnText}'
+            text: &#39;{copyToClipboardBtnText}&#39;
         },
         listeners: {
             boxready: function(btn) {
@@ -109,7 +109,7 @@ Ext.define('BasiGX.view.form.Permalink', {
             }
         },
         handler: function(btn) {
-            var textfield = btn.up('form').down('textfield');
+            var textfield = btn.up(&#39;form&#39;).down(&#39;textfield&#39;);
             var value = textfield.getValue();
 
             BasiGX.util.CopyClipboard.copyTextToClipboard(value);
@@ -121,7 +121,7 @@ Ext.define('BasiGX.view.form.Permalink', {
         var hrefWithoutHash = window.location.origin +
             window.location.pathname +
             window.location.search;
-        var permalink = hrefWithoutHash + '#' + route;
+        var permalink = hrefWithoutHash + &#39;#&#39; + route;
         return permalink;
     }
 

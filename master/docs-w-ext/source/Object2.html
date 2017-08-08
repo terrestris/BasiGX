@@ -79,7 +79,7 @@ var TemplateClass = function(){},
      * @return {Object} The given object `obj`.
      */
     freeze: Object.freeze ? function (obj, deep) {
-        if (obj &amp;&amp; typeof obj === 'object' &amp;&amp; !Object.isFrozen(obj)) {
+        if (obj &amp;&amp; typeof obj === &#39;object&#39; &amp;&amp; !Object.isFrozen(obj)) {
             Object.freeze(obj);
 
             if (deep) {
@@ -95,16 +95,16 @@ var TemplateClass = function(){},
 </span>     * Converts a `name` - `value` pair to an array of objects with support for nested structures. Useful to construct
      * query strings. For example:
      *
-     *     var objects = Ext.Object.toQueryObjects('hobbies', ['reading', 'cooking', 'swimming']);
+     *     var objects = Ext.Object.toQueryObjects(&#39;hobbies&#39;, [&#39;reading&#39;, &#39;cooking&#39;, &#39;swimming&#39;]);
      *
      *     // objects then equals:
      *     [
-     *         { name: 'hobbies', value: 'reading' },
-     *         { name: 'hobbies', value: 'cooking' },
-     *         { name: 'hobbies', value: 'swimming' },
+     *         { name: &#39;hobbies&#39;, value: &#39;reading&#39; },
+     *         { name: &#39;hobbies&#39;, value: &#39;cooking&#39; },
+     *         { name: &#39;hobbies&#39;, value: &#39;swimming&#39; },
      *     ];
      *
-     *     var objects = Ext.Object.toQueryObjects('dateOfBirth', {
+     *     var objects = Ext.Object.toQueryObjects(&#39;dateOfBirth&#39;, {
      *         day: 3,
      *         month: 8,
      *         year: 1987,
@@ -116,11 +116,11 @@ var TemplateClass = function(){},
      *
      *     // objects then equals:
      *     [
-     *         { name: 'dateOfBirth[day]', value: 3 },
-     *         { name: 'dateOfBirth[month]', value: 8 },
-     *         { name: 'dateOfBirth[year]', value: 1987 },
-     *         { name: 'dateOfBirth[extra][hour]', value: 4 },
-     *         { name: 'dateOfBirth[extra][minute]', value: 30 },
+     *         { name: &#39;dateOfBirth[day]&#39;, value: 3 },
+     *         { name: &#39;dateOfBirth[month]&#39;, value: 8 },
+     *         { name: &#39;dateOfBirth[year]&#39;, value: 1987 },
+     *         { name: &#39;dateOfBirth[extra][hour]&#39;, value: 4 },
+     *         { name: &#39;dateOfBirth[extra][minute]&#39;, value: 30 },
      *     ];
      *
      * @param {String} name
@@ -136,7 +136,7 @@ var TemplateClass = function(){},
         if (Ext.isArray(value)) {
             for (i = 0, ln = value.length; i &lt; ln; i++) {
                 if (recursive) {
-                    objects = objects.concat(self(name + '[' + i + ']', value[i], true));
+                    objects = objects.concat(self(name + &#39;[&#39; + i + &#39;]&#39;, value[i], true));
                 }
                 else {
                     objects.push({
@@ -150,7 +150,7 @@ var TemplateClass = function(){},
             for (i in value) {
                 if (value.hasOwnProperty(i)) {
                     if (recursive) {
-                        objects = objects.concat(self(name + '[' + i + ']', value[i], true));
+                        objects = objects.concat(self(name + &#39;[&#39; + i + &#39;]&#39;, value[i], true));
                     }
                     else {
                         objects.push({
@@ -178,20 +178,20 @@ var TemplateClass = function(){},
      *
      *     Ext.Object.toQueryString({foo: 1, bar: 2}); // returns &quot;foo=1&amp;bar=2&quot;
      *     Ext.Object.toQueryString({foo: null, bar: 2}); // returns &quot;foo=&amp;bar=2&quot;
-     *     Ext.Object.toQueryString({'some price': '$300'}); // returns &quot;some%20price=%24300&quot;
+     *     Ext.Object.toQueryString({&#39;some price&#39;: &#39;$300&#39;}); // returns &quot;some%20price=%24300&quot;
      *     Ext.Object.toQueryString({date: new Date(2011, 0, 1)}); // returns &quot;date=%222011-01-01T00%3A00%3A00%22&quot;
-     *     Ext.Object.toQueryString({colors: ['red', 'green', 'blue']}); // returns &quot;colors=red&amp;colors=green&amp;colors=blue&quot;
+     *     Ext.Object.toQueryString({colors: [&#39;red&#39;, &#39;green&#39;, &#39;blue&#39;]}); // returns &quot;colors=red&amp;colors=green&amp;colors=blue&quot;
      *
      * Recursive:
      *
      *     Ext.Object.toQueryString({
-     *         username: 'Jacky',
+     *         username: &#39;Jacky&#39;,
      *         dateOfBirth: {
      *             day: 1,
      *             month: 2,
      *             year: 1911
      *         },
-     *         hobbies: ['coding', 'eating', 'sleeping', ['nested', 'stuff']]
+     *         hobbies: [&#39;coding&#39;, &#39;eating&#39;, &#39;sleeping&#39;, [&#39;nested&#39;, &#39;stuff&#39;]]
      *     }, true); // returns the following string (broken down and url-decoded for ease of reading purpose):
      *     // username=Jacky
      *     //    &amp;dateOfBirth[day]=1&amp;dateOfBirth[month]=2&amp;dateOfBirth[year]=1911
@@ -218,15 +218,15 @@ var TemplateClass = function(){},
             value = paramObject.value;
 
             if (Ext.isEmpty(value)) {
-                value = '';
+                value = &#39;&#39;;
             } else if (Ext.isDate(value)) {
                 value = Ext.Date.toString(value);
             }
 
-            params.push(encodeURIComponent(paramObject.name) + '=' + encodeURIComponent(String(value)));
+            params.push(encodeURIComponent(paramObject.name) + &#39;=&#39; + encodeURIComponent(String(value)));
         }
 
-        return params.join('&amp;');
+        return params.join(&#39;&amp;&#39;);
     },
 
 <span id='Ext-Object-method-fromQueryString'>    /**
@@ -234,10 +234,10 @@ var TemplateClass = function(){},
      *
      * Non-recursive:
      *
-     *     Ext.Object.fromQueryString(&quot;foo=1&amp;bar=2&quot;); // returns {foo: '1', bar: '2'}
-     *     Ext.Object.fromQueryString(&quot;foo=&amp;bar=2&quot;); // returns {foo: '', bar: '2'}
-     *     Ext.Object.fromQueryString(&quot;some%20price=%24300&quot;); // returns {'some price': '$300'}
-     *     Ext.Object.fromQueryString(&quot;colors=red&amp;colors=green&amp;colors=blue&quot;); // returns {colors: ['red', 'green', 'blue']}
+     *     Ext.Object.fromQueryString(&quot;foo=1&amp;bar=2&quot;); // returns {foo: &#39;1&#39;, bar: &#39;2&#39;}
+     *     Ext.Object.fromQueryString(&quot;foo=&amp;bar=2&quot;); // returns {foo: &#39;&#39;, bar: &#39;2&#39;}
+     *     Ext.Object.fromQueryString(&quot;some%20price=%24300&quot;); // returns {&#39;some price&#39;: &#39;$300&#39;}
+     *     Ext.Object.fromQueryString(&quot;colors=red&amp;colors=green&amp;colors=blue&quot;); // returns {colors: [&#39;red&#39;, &#39;green&#39;, &#39;blue&#39;]}
      *
      * Recursive:
      *
@@ -249,13 +249,13 @@ var TemplateClass = function(){},
      *
      *     // returns
      *     {
-     *         username: 'Jacky',
+     *         username: &#39;Jacky&#39;,
      *         dateOfBirth: {
-     *             day: '1',
-     *             month: '2',
-     *             year: '1911'
+     *             day: &#39;1&#39;,
+     *             month: &#39;2&#39;,
+     *             year: &#39;1911&#39;
      *         },
-     *         hobbies: ['coding', 'eating', 'sleeping', ['nested', 'stuff']]
+     *         hobbies: [&#39;coding&#39;, &#39;eating&#39;, &#39;sleeping&#39;, [&#39;nested&#39;, &#39;stuff&#39;]]
      *     }
      *
      * @param {String} queryString The query string to decode
@@ -264,7 +264,7 @@ var TemplateClass = function(){},
      * @return {Object}
      */
     fromQueryString: function(queryString, recursive) {
-        var parts = queryString.replace(queryRe, '').split('&amp;'),
+        var parts = queryString.replace(queryRe, &#39;&#39;).split(&#39;&amp;&#39;),
             object = {},
             temp, components, name, value, i, ln,
             part, j, subLn, matchedKeys, matchedName,
@@ -274,17 +274,17 @@ var TemplateClass = function(){},
             part = parts[i];
 
             if (part.length &gt; 0) {
-                components = part.split('=');
+                components = part.split(&#39;=&#39;);
                 name = components[0];
-                name = name.replace(plusRe, '%20');
+                name = name.replace(plusRe, &#39;%20&#39;);
                 name = decodeURIComponent(name);
 
                 value = components[1];
                 if (value !== undefined) {
-                    value = value.replace(plusRe, '%20');
+                    value = value.replace(plusRe, &#39;%20&#39;);
                     value = decodeURIComponent(value);
                 } else {
-                    value = '';
+                    value = &#39;&#39;;
                 }
 
                 if (!recursive) {
@@ -305,7 +305,7 @@ var TemplateClass = function(){},
 
                     //&lt;debug&gt;
                     if (!matchedName) {
-                        throw new Error('[Ext.Object.fromQueryString] Malformed query string given, failed parsing name from &quot;' + part + '&quot;');
+                        throw new Error(&#39;[Ext.Object.fromQueryString] Malformed query string given, failed parsing name from &quot;&#39; + part + &#39;&quot;&#39;);
                     }
                     //&lt;/debug&gt;
 
@@ -319,7 +319,7 @@ var TemplateClass = function(){},
 
                     for (j = 0, subLn = matchedKeys.length; j &lt; subLn; j++) {
                         key = matchedKeys[j];
-                        key = (key.length === 2) ? '' : key.substring(1, key.length - 1);
+                        key = (key.length === 2) ? &#39;&#39; : key.substring(1, key.length - 1);
                         keys.push(key);
                     }
 
@@ -331,7 +331,7 @@ var TemplateClass = function(){},
                         key = keys[j];
 
                         if (j === subLn - 1) {
-                            if (Ext.isArray(temp) &amp;&amp; key === '') {
+                            if (Ext.isArray(temp) &amp;&amp; key === &#39;&#39;) {
                                 temp.push(value);
                             }
                             else {
@@ -339,10 +339,10 @@ var TemplateClass = function(){},
                             }
                         }
                         else {
-                            if (temp[key] === undefined || typeof temp[key] === 'string') {
+                            if (temp[key] === undefined || typeof temp[key] === &#39;string&#39;) {
                                 nextKey = keys[j+1];
 
-                                temp[key] = (Ext.isNumeric(nextKey) || nextKey === '') ? [] : {};
+                                temp[key] = (Ext.isNumeric(nextKey) || nextKey === &#39;&#39;) ? [] : {};
                             }
 
                             temp = temp[key];
@@ -360,15 +360,15 @@ var TemplateClass = function(){},
      * The iteration can be stopped by returning `false` in the callback function. For example:
      *
      *     var person = {
-     *         name: 'Jacky'
-     *         hairColor: 'black'
-     *         loves: ['food', 'sleeping', 'wife']
+     *         name: &#39;Jacky&#39;
+     *         hairColor: &#39;black&#39;
+     *         loves: [&#39;food&#39;, &#39;sleeping&#39;, &#39;wife&#39;]
      *     };
      *
      *     Ext.Object.each(person, function(key, value, myself) {
      *         console.log(key + &quot;:&quot; + value);
      *
-     *         if (key === 'hairColor') {
+     *         if (key === &#39;hairColor&#39;) {
      *             return false; // stop the iteration
      *         }
      *     });
@@ -412,15 +412,15 @@ var TemplateClass = function(){},
      * The iteration can be stopped by returning `false` in the callback function. For example:
      *
      *     var items = {
-     *         1: 'Hello',
-     *         2: 'World'
+     *         1: &#39;Hello&#39;,
+     *         2: &#39;World&#39;
      *     };
      *
      *     Ext.Object.eachValue(items, function (value) {
      *         console.log(&quot;Value: &quot; + value);
      *     });
      *
-     * This will log 'Hello' and 'World' in no particular order. This method is useful
+     * This will log &#39;Hello&#39; and &#39;World&#39; in no particular order. This method is useful
      * in cases where the keys are not important to the processing, just the values.
      *
      * @param {Object} object The object to iterate
@@ -457,22 +457,22 @@ var TemplateClass = function(){},
 </span>     * Merges any number of objects recursively without referencing them or their children.
      *
      *     var extjs = {
-     *         companyName: 'Ext JS',
-     *         products: ['Ext JS', 'Ext GWT', 'Ext Designer'],
+     *         companyName: &#39;Ext JS&#39;,
+     *         products: [&#39;Ext JS&#39;, &#39;Ext GWT&#39;, &#39;Ext Designer&#39;],
      *         isSuperCool: true,
      *         office: {
      *             size: 2000,
-     *             location: 'Palo Alto',
+     *             location: &#39;Palo Alto&#39;,
      *             isFun: true
      *         }
      *     };
      *
      *     var newStuff = {
-     *         companyName: 'Sencha Inc.',
-     *         products: ['Ext JS', 'Ext GWT', 'Ext Designer', 'Sencha Touch', 'Sencha Animator'],
+     *         companyName: &#39;Sencha Inc.&#39;,
+     *         products: [&#39;Ext JS&#39;, &#39;Ext GWT&#39;, &#39;Ext Designer&#39;, &#39;Sencha Touch&#39;, &#39;Sencha Animator&#39;],
      *         office: {
      *             size: 40000,
-     *             location: 'Redwood City'
+     *             location: &#39;Redwood City&#39;
      *         }
      *     };
      *
@@ -480,12 +480,12 @@ var TemplateClass = function(){},
      *
      *     // extjs and sencha then equals to
      *     {
-     *         companyName: 'Sencha Inc.',
-     *         products: ['Ext JS', 'Ext GWT', 'Ext Designer', 'Sencha Touch', 'Sencha Animator'],
+     *         companyName: &#39;Sencha Inc.&#39;,
+     *         products: [&#39;Ext JS&#39;, &#39;Ext GWT&#39;, &#39;Ext Designer&#39;, &#39;Sencha Touch&#39;, &#39;Sencha Animator&#39;],
      *         isSuperCool: true,
      *         office: {
      *             size: 40000,
-     *             location: 'Redwood City',
+     *             location: &#39;Redwood City&#39;,
      *             isFun: true
      *         }
      *     }
@@ -575,11 +575,11 @@ var TemplateClass = function(){},
      * If no matching value is found, null is returned.
      *
      *     var person = {
-     *         name: 'Jacky',
-     *         loves: 'food'
+     *         name: &#39;Jacky&#39;,
+     *         loves: &#39;food&#39;
      *     };
      *
-     *     alert(Ext.Object.getKey(person, 'food')); // alerts 'loves'
+     *     alert(Ext.Object.getKey(person, &#39;food&#39;)); // alerts &#39;loves&#39;
      *
      * @param {Object} object
      * @param {Object} value The value to find
@@ -598,9 +598,9 @@ var TemplateClass = function(){},
 </span>     * Gets all values of the given object as an array.
      *
      *     var values = Ext.Object.getValues({
-     *         name: 'Jacky',
-     *         loves: 'food'
-     *     }); // ['Jacky', 'food']
+     *         name: &#39;Jacky&#39;,
+     *         loves: &#39;food&#39;
+     *     }); // [&#39;Jacky&#39;, &#39;food&#39;]
      *
      * @param {Object} object
      * @return {Array} An array of values from the object
@@ -622,15 +622,15 @@ var TemplateClass = function(){},
 </span>     * Returns the `hasOwnProperty` keys of the given object as an array.
      *
      *     var values = Ext.Object.getKeys({
-     *         name: 'Jacky',
-     *         loves: 'food'
-     *     }); // ['name', 'loves']
+     *         name: &#39;Jacky&#39;,
+     *         loves: &#39;food&#39;
+     *     }); // [&#39;name&#39;, &#39;loves&#39;]
      *
      * @param {Object} object
      * @return {String[]} An array of keys from the object
      * @method
      */
-    getKeys: (typeof Object.keys == 'function')
+    getKeys: (typeof Object.keys == &#39;function&#39;)
         ? function(object){
             if (!object) {
                 return [];
@@ -651,11 +651,11 @@ var TemplateClass = function(){},
         },
 
 <span id='Ext-Object-method-getSize'>    /**
-</span>     * Gets the total number of this object's own properties
+</span>     * Gets the total number of this object&#39;s own properties
      *
      *     var size = Ext.Object.getSize({
-     *         name: 'Jacky',
-     *         loves: 'food'
+     *         name: &#39;Jacky&#39;,
+     *         loves: &#39;food&#39;
      *     }); // size equals 2
      *
      * @param {Object} object
@@ -728,7 +728,7 @@ var TemplateClass = function(){},
                 return true;
             } if (object1 &amp;&amp; object2) {
                 // Do the second check because we could have extra keys in
-                // object2 that don't exist in object1.
+                // object2 that don&#39;t exist in object1.
                 return check(object1, object2) &amp;&amp; check(object2, object1);  
             } else if (!object1 &amp;&amp; !object2) {
                 return object1 === object2;
@@ -765,7 +765,7 @@ var TemplateClass = function(){},
         return ret;
     },
 
-    defineProperty: ('defineProperty' in Object) ? Object.defineProperty :
+    defineProperty: (&#39;defineProperty&#39; in Object) ? Object.defineProperty :
                 function(object, name, descriptor) {
                     if (!Object.prototype.__defineGetter__) {
                         return;

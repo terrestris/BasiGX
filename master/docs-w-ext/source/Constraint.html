@@ -18,15 +18,15 @@
   <pre class="prettyprint lang-js"><span id='Ext-drag-Constraint'>/**
 </span> * Provides constraining behavior for a {@link Ext.drag.Source}.
  */
-Ext.define('Ext.drag.Constraint', {
-    alias: 'drag.constraint.base',
+Ext.define(&#39;Ext.drag.Constraint&#39;, {
+    alias: &#39;drag.constraint.base&#39;,
     mixins: [
-        'Ext.mixin.Factoryable'
+        &#39;Ext.mixin.Factoryable&#39;
     ],
 
 <span id='Ext-drag-Constraint-property-factoryConfig'>    factoryConfig: {
-</span>        defaultType: 'base',
-        type: 'drag.constraint'
+</span>        defaultType: &#39;base&#39;,
+        type: &#39;drag.constraint&#39;
     },
 
     config: {
@@ -110,7 +110,7 @@ Ext.define('Ext.drag.Constraint', {
 
 <span id='Ext-drag-Constraint-method-applyElement'>    applyElement: function(element) {
 </span>        if (element) {
-            if (typeof element === 'boolean') {
+            if (typeof element === &#39;boolean&#39;) {
                 element = this.getSource().getElement().parent();
             } else {
                 element = Ext.get(element);
@@ -120,7 +120,7 @@ Ext.define('Ext.drag.Constraint', {
     },
 
 <span id='Ext-drag-Constraint-method-applySnap'>    applySnap: function(snap) {
-</span>        if (typeof snap === 'number') {
+</span>        if (typeof snap === &#39;number&#39;) {
             snap = {
                 x: snap,
                 y: snap
@@ -313,7 +313,7 @@ Ext.define('Ext.drag.Constraint', {
 
 
             // The following piece sets up the numeric values for our constraint.
-            // If there is an axis constraint, don't bother calculating the values since
+            // If there is an axis constraint, don&#39;t bother calculating the values since
             // it is already explicitly constrained so we can shortcut that portion.
             // 
             // Attempt to merge the appropriate min/max values (if needed). With:
@@ -348,9 +348,9 @@ Ext.define('Ext.drag.Constraint', {
             if (snap) {
                 snap = {
                     x: snap.x,
-                    xFn: typeof snap.x === 'function',
+                    xFn: typeof snap.x === &#39;function&#39;,
                     y: snap.y,
-                    yFn: typeof snap.y === 'function'
+                    yFn: typeof snap.y === &#39;function&#39;
                 };
             }
 

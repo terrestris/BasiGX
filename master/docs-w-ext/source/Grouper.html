@@ -24,8 +24,8 @@
  * All items with the same group value compare as equal. If the group values do not compare
  * equally, the sort can be controlled further by setting `sortProperty` or `sorterFn`.
  */
-Ext.define('Ext.util.Grouper', {
-    extend: 'Ext.util.Sorter',
+Ext.define(&#39;Ext.util.Grouper&#39;, {
+    extend: &#39;Ext.util.Sorter&#39;,
 
 <span id='Ext-util-Grouper-property-isGrouper'>    isGrouper: true,
 </span>
@@ -72,14 +72,14 @@ Ext.define('Ext.util.Grouper', {
      */
     getGroupString: function (item) {
         var group = this._groupFn(item);
-        return (group != null) ? String(group) : '';
+        return (group != null) ? String(group) : &#39;&#39;;
     },
 
 <span id='Ext-util-Grouper-method-sortFn'>    sortFn: function (item1, item2) {
 </span>        var me = this,
             lhs = me._groupFn(item1),
             rhs = me._groupFn(item2),
-            property = me._sortProperty, // Sorter's sortFn uses &quot;_property&quot;
+            property = me._sortProperty, // Sorter&#39;s sortFn uses &quot;_property&quot;
             root = me._root,
             sorterFn = me._sorterFn,
             transform = me._transform;
@@ -118,11 +118,11 @@ Ext.define('Ext.util.Grouper', {
     },
 
 <span id='Ext-util-Grouper-method-updateSorterFn'>    updateSorterFn: function () {
-</span>        // don't callParent here - we don't want to smash sortFn w/sorterFn
+</span>        // don&#39;t callParent here - we don&#39;t want to smash sortFn w/sorterFn
     },
 
 <span id='Ext-util-Grouper-method-updateProperty'>    updateProperty: function () {
-</span>        // we don't callParent since that is related to sorterFn smashing sortFn
+</span>        // we don&#39;t callParent since that is related to sorterFn smashing sortFn
         if (!this.getGroupFn()) {
             this.setGroupFn(this.standardGroupFn);
         }

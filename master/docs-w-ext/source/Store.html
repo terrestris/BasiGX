@@ -22,16 +22,16 @@
  *
  * @private
  */
-Ext.define('Ext.app.domain.Store', {
-    extend: 'Ext.app.EventDomain',
+Ext.define(&#39;Ext.app.domain.Store&#39;, {
+    extend: &#39;Ext.app.EventDomain&#39;,
     singleton: true,
     
     requires: [
-        'Ext.data.AbstractStore'
+        &#39;Ext.data.AbstractStore&#39;
     ],
     
-<span id='Ext-app-domain-Store-property-type'>    type: 'store',
-</span><span id='Ext-app-domain-Store-property-prefix'>    prefix: 'store.',
+<span id='Ext-app-domain-Store-property-type'>    type: &#39;store&#39;,
+</span><span id='Ext-app-domain-Store-property-prefix'>    prefix: &#39;store.&#39;,
 </span><span id='Ext-app-domain-Store-property-idMatchRe'>    idMatchRe: /^\#/,
 </span>    
 <span id='Ext-app-domain-Store-method-constructor'>    constructor: function() {
@@ -45,7 +45,7 @@ Ext.define('Ext.app.domain.Store', {
 </span>        var result = false,
             alias = target.alias;
         
-        if (selector === '*') {
+        if (selector === &#39;*&#39;) {
             result = true;
         } else if (this.idMatchRe.test(selector)) {
             result = target.getStoreId() === selector.substring(1);

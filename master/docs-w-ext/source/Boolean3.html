@@ -26,53 +26,53 @@
  * Example Boolean Filter Usage:
  * 
  *     @example
- *     var shows = Ext.create('Ext.data.Store', {
- *         fields: ['id','show', 'visible'],
+ *     var shows = Ext.create(&#39;Ext.data.Store&#39;, {
+ *         fields: [&#39;id&#39;,&#39;show&#39;, &#39;visible&#39;],
  *         data: [
- *             {id: 0, show: 'Battlestar Galactica', visible: true},
- *             {id: 1, show: 'Doctor Who', visible: true},
- *             {id: 2, show: 'Farscape', visible: false},
- *             {id: 3, show: 'Firefly', visible: true},
- *             {id: 4, show: 'Star Trek', visible: true},
- *             {id: 5, show: 'Star Wars: Christmas Special', visible: false}
+ *             {id: 0, show: &#39;Battlestar Galactica&#39;, visible: true},
+ *             {id: 1, show: &#39;Doctor Who&#39;, visible: true},
+ *             {id: 2, show: &#39;Farscape&#39;, visible: false},
+ *             {id: 3, show: &#39;Firefly&#39;, visible: true},
+ *             {id: 4, show: &#39;Star Trek&#39;, visible: true},
+ *             {id: 5, show: &#39;Star Wars: Christmas Special&#39;, visible: false}
  *         ]
  *     });
  *   
- *     Ext.create('Ext.grid.Panel', {
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
  *         renderTo: Ext.getBody(),
- *         title: 'Sci-Fi Television',
+ *         title: &#39;Sci-Fi Television&#39;,
  *         height: 250,
  *         width: 375,
  *         store: shows,
- *         plugins: 'gridfilters',
+ *         plugins: &#39;gridfilters&#39;,
  *         columns: [{
- *             dataIndex: 'id',
- *             text: 'ID',
+ *             dataIndex: &#39;id&#39;,
+ *             text: &#39;ID&#39;,
  *             width: 50
  *         },{
- *             dataIndex: 'show',
- *             text: 'Show',
+ *             dataIndex: &#39;show&#39;,
+ *             text: &#39;Show&#39;,
  *             flex: 1                  
  *         },{
- *             dataIndex: 'visible',
- *             text: 'Visibility',
+ *             dataIndex: &#39;visible&#39;,
+ *             text: &#39;Visibility&#39;,
  *             width: 125,
  *             filter: {
- *                 type: 'boolean',
- *                 value: 'true',
- *                 yesText: 'True',
- *                 noText: 'False'
+ *                 type: &#39;boolean&#39;,
+ *                 value: &#39;true&#39;,
+ *                 yesText: &#39;True&#39;,
+ *                 noText: &#39;False&#39;
  *             }
  *         }]
  *     });  
  */
-Ext.define('Ext.grid.filters.filter.Boolean', {
-    extend: 'Ext.grid.filters.filter.SingleFilter',
-    alias: 'grid.filter.boolean',
+Ext.define(&#39;Ext.grid.filters.filter.Boolean&#39;, {
+    extend: &#39;Ext.grid.filters.filter.SingleFilter&#39;,
+    alias: &#39;grid.filter.boolean&#39;,
 
-<span id='Ext-grid-filters-filter-Boolean-property-type'>    type: 'boolean',
+<span id='Ext-grid-filters-filter-Boolean-property-type'>    type: &#39;boolean&#39;,
 </span>
-<span id='Ext-grid-filters-filter-Boolean-property-operator'>    operator: '==',
+<span id='Ext-grid-filters-filter-Boolean-property-operator'>    operator: &#39;==&#39;,
 </span>
 <span id='Ext-grid-filters-filter-Boolean-cfg-defaultValue'>    /**
 </span>     * @cfg {Boolean} defaultValue
@@ -83,17 +83,17 @@ Ext.define('Ext.grid.filters.filter.Boolean', {
     //&lt;locale&gt;
 <span id='Ext-grid-filters-filter-Boolean-cfg-yesText'>    /**
 </span>     * @cfg {String} yesText
-     * Defaults to 'Yes'.
+     * Defaults to &#39;Yes&#39;.
      */
-    yesText: 'Yes',
+    yesText: &#39;Yes&#39;,
     //&lt;/locale&gt;
 
     //&lt;locale&gt;
 <span id='Ext-grid-filters-filter-Boolean-cfg-noText'>    /**
 </span>     * @cfg {String} noText
-     * Defaults to 'No'.
+     * Defaults to &#39;No&#39;.
      */
-    noText: 'No',
+    noText: &#39;No&#39;,
 <span id='Ext-grid-filters-filter-Boolean-cfg-updateBuffer'>    //&lt;/locale&gt;
 </span>
     updateBuffer: 0,

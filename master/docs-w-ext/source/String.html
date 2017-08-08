@@ -17,22 +17,22 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-data-field-String'>/**
 </span> */
-Ext.define('Ext.data.field.String', {
-    extend: 'Ext.data.field.Field',
+Ext.define(&#39;Ext.data.field.String&#39;, {
+    extend: &#39;Ext.data.field.Field&#39;,
 
-    alias: 'data.field.string',
+    alias: &#39;data.field.string&#39;,
 
-<span id='Ext-data-field-String-cfg-sortType'>    sortType: 'asUCString',
+<span id='Ext-data-field-String-cfg-sortType'>    sortType: &#39;asUCString&#39;,
 </span>
 <span id='Ext-data-field-String-property-isStringField'>    isStringField: true,
 </span>
 <span id='Ext-data-field-String-method-convert'>    convert: function(v) {
-</span>        var defaultValue = this.allowNull ? null : '';
+</span>        var defaultValue = this.allowNull ? null : &#39;&#39;;
         return (v === undefined || v === null) ? defaultValue : String(v);
     },
 
 <span id='Ext-data-field-String-method-getType'>    getType: function() {
-</span>        return 'string';
+</span>        return &#39;string&#39;;
     }
 });
 </pre>

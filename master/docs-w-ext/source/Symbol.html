@@ -19,7 +19,7 @@
 </span> * This class represents a symbol in the parser.
  * @private
  */
-Ext.define('Ext.parse.Symbol', {
+Ext.define(&#39;Ext.parse.Symbol&#39;, {
 <span id='Ext-parse-Symbol-property-priority'>    priority: 0,
 </span>
 <span id='Ext-parse-Symbol-property-defaultProperty'>    /**
@@ -32,7 +32,7 @@ Ext.define('Ext.parse.Symbol', {
         var me = this,
             defaultProperty = me.defaultProperty;
 
-        if (config &amp;&amp; typeof config === 'object') {
+        if (config &amp;&amp; typeof config === &#39;object&#39;) {
             Ext.apply(me, config);
         } else if (config !== undefined &amp;&amp; defaultProperty) {
             me[defaultProperty] = config;
@@ -50,7 +50,7 @@ Ext.define('Ext.parse.Symbol', {
             },
             i;
 
-        if ('value' in me) {
+        if (&#39;value&#39; in me) {
             ret.value = me.value;
         }
 
@@ -80,7 +80,7 @@ Ext.define('Ext.parse.Symbol', {
      * @param {Ext.parse.Symbol} left
      */
     led: function () {
-        this.parser.syntaxError(this.at, 'Missing operator');
+        this.parser.syntaxError(this.at, &#39;Missing operator&#39;);
     },
 
 <span id='Ext-parse-Symbol-method-nud'>    /**
@@ -89,7 +89,7 @@ Ext.define('Ext.parse.Symbol', {
      * is called. The name &quot;nud&quot; stands for &quot;null denotation&quot;.
      */
     nud: function () {
-        this.parser.syntaxError(this.at, 'Undefined');
+        this.parser.syntaxError(this.at, &#39;Undefined&#39;);
     },
 
 <span id='Ext-parse-Symbol-method-update'>    /**
@@ -101,7 +101,7 @@ Ext.define('Ext.parse.Symbol', {
      * @param {Object} config
      */
     update: function (config) {
-        if (config &amp;&amp; typeof config === 'object') {
+        if (config &amp;&amp; typeof config === &#39;object&#39;) {
             var me = this,
                 priority = config.priority,
                 led = config.led,

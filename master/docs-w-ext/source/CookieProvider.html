@@ -26,7 +26,7 @@
  *
  * Example:
  *
- *     var cp = Ext.create('Ext.state.CookieProvider', {
+ *     var cp = Ext.create(&#39;Ext.state.CookieProvider&#39;, {
  *         path: &quot;/cgi-bin/&quot;,
  *         expires: new Date(new Date().getTime()+(1000*60*60*24*30)), //30 days
  *         domain: &quot;sencha.com&quot;
@@ -35,12 +35,12 @@
  *     Ext.state.Manager.setProvider(cp);
  *
  */
-Ext.define('Ext.state.CookieProvider', {
-    extend: 'Ext.state.Provider',
+Ext.define(&#39;Ext.state.CookieProvider&#39;, {
+    extend: &#39;Ext.state.Provider&#39;,
 
 <span id='Ext-state-CookieProvider-cfg-path'>    /**
 </span>     * @cfg {String} path
-     * The path for which the cookie is active. Defaults to root '/' which makes it active for all pages in the site.
+     * The path for which the cookie is active. Defaults to root &#39;/&#39; which makes it active for all pages in the site.
      */
 
 <span id='Ext-state-CookieProvider-cfg-expires'>    /**
@@ -51,9 +51,9 @@ Ext.define('Ext.state.CookieProvider', {
 <span id='Ext-state-CookieProvider-cfg-domain'>    /**
 </span>     * @cfg {String} domain
      * The domain to save the cookie for. Note that you cannot specify a different domain than your page is on, but you can
-     * specify a sub-domain, or simply the domain itself like 'sencha.com' to include all sub-domains if you need to access
+     * specify a sub-domain, or simply the domain itself like &#39;sencha.com&#39; to include all sub-domains if you need to access
      * cookies across different sub-domains. Defaults to null which uses the same domain the page is running on including
-     * the 'www' like 'www.sencha.com'.
+     * the &#39;www&#39; like &#39;www.sencha.com&#39;.
      */
 
 <span id='Ext-state-CookieProvider-cfg-secure'>    /**

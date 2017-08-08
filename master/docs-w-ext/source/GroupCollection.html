@@ -19,18 +19,18 @@
 </span> * @private
  * A collection containing the result of applying grouping to the records in the store.
  */
-Ext.define('Ext.util.GroupCollection', {
-    extend: 'Ext.util.Collection',
+Ext.define(&#39;Ext.util.GroupCollection&#39;, {
+    extend: &#39;Ext.util.Collection&#39;,
     
     requires: [
-        'Ext.util.Group',
+        &#39;Ext.util.Group&#39;,
 
         // Since Collection uses sub-collections of various derived types we step up to
         // list all the requirements of Collection. The idea being that instead of a
         // &quot;requires&quot; of Ext.util.Collection (which cannot pull everything) you instead
         // do a &quot;requires&quot; of Ext.util.GroupCollection and it will.
-        'Ext.util.SorterCollection',
-        'Ext.util.FilterCollection'
+        &#39;Ext.util.SorterCollection&#39;,
+        &#39;Ext.util.FilterCollection&#39;
     ],
 
 <span id='Ext-util-GroupCollection-property-isGroupCollection'>    isGroupCollection: true,
@@ -44,7 +44,7 @@ Ext.define('Ext.util.GroupCollection', {
 </span>
 <span id='Ext-util-GroupCollection-method-constructor'>    constructor: function(config) {
 </span>        this.callParent([config]);
-        this.on('remove', 'onGroupRemove', this);
+        this.on(&#39;remove&#39;, &#39;onGroupRemove&#39;, this);
     },
 
 <span id='Ext-util-GroupCollection-method-onCollectionAdd'>    //-------------------------------------------------------------------------
@@ -71,7 +71,7 @@ Ext.define('Ext.util.GroupCollection', {
 
         // Check if the change to the item caused the item to move. If it did, the group ordering
         // will be handled by virtue of being removed/added to the collection. If not, check whether
-        // we're in the correct group and fix up if not.
+        // we&#39;re in the correct group and fix up if not.
         if (!details.indexChanged) {
             this.syncItemGrouping(source, item, source.getKey(item), details.oldKey, details.oldIndex);
         }
@@ -237,7 +237,7 @@ Ext.define('Ext.util.GroupCollection', {
         // Short optimization instead of calling contains since we already have the key here.
         if (group.get(findKey) !== item) {
             if (group.getCount() &gt; 0 &amp;&amp; source.getSorters().getCount() === 0) {
-                // We have items in the group &amp; it's not sorted, so find the
+                // We have items in the group &amp; it&#39;s not sorted, so find the
                 // correct position in the group to insert.
                 firstIndex = source.indexOf(group.items[0]);
                 if (itemIndex &lt; firstIndex) {

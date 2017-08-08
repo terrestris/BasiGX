@@ -16,11 +16,11 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-layout-container-Anchor'>/**
-</span> * This is a layout that enables anchoring of contained elements relative to the container's dimensions.
+</span> * This is a layout that enables anchoring of contained elements relative to the container&#39;s dimensions.
  * If the container is resized, all anchored items are automatically rerendered according to their
  * `{@link #anchor}` rules.
  *
- * This class is intended to be extended or created via the {@link Ext.container.Container#layout layout}: 'anchor'
+ * This class is intended to be extended or created via the {@link Ext.container.Container#layout layout}: &#39;anchor&#39;
  * config, and should generally not need to be created directly via the new keyword.
  * 
  * AnchorLayout does not have any direct config options (other than inherited ones). By default,
@@ -32,42 +32,42 @@
  * logic if necessary.
  *
  *     @example
- *     Ext.create('Ext.Panel', {
+ *     Ext.create(&#39;Ext.Panel&#39;, {
  *         width: 500,
  *         height: 400,
  *         title: &quot;AnchorLayout Panel&quot;,
- *         layout: 'anchor',
+ *         layout: &#39;anchor&#39;,
  *         renderTo: Ext.getBody(),
  *         items: [
  *             {
- *                 xtype: 'panel',
- *                 title: '75% Width and 20% Height',
- *                 anchor: '75% 20%'
+ *                 xtype: &#39;panel&#39;,
+ *                 title: &#39;75% Width and 20% Height&#39;,
+ *                 anchor: &#39;75% 20%&#39;
  *             },
  *             {
- *                 xtype: 'panel',
- *                 title: 'Offset -300 Width &amp; -200 Height',
- *                 anchor: '-300 -200'   
+ *                 xtype: &#39;panel&#39;,
+ *                 title: &#39;Offset -300 Width &amp; -200 Height&#39;,
+ *                 anchor: &#39;-300 -200&#39;   
  *             },
  *             {
- *                 xtype: 'panel',
- *                 title: 'Mixed Offset and Percent',
- *                 anchor: '-250 20%'
+ *                 xtype: &#39;panel&#39;,
+ *                 title: &#39;Mixed Offset and Percent&#39;,
+ *                 anchor: &#39;-250 20%&#39;
  *             }
  *         ]
  *     });
  */
-Ext.define('Ext.layout.container.Anchor', {
+Ext.define(&#39;Ext.layout.container.Anchor&#39;, {
 
     /* Begin Definitions */
 
-    alias: 'layout.anchor',
-    extend: 'Ext.layout.container.Auto',
-    alternateClassName: 'Ext.layout.AnchorLayout',
+    alias: &#39;layout.anchor&#39;,
+    extend: &#39;Ext.layout.container.Auto&#39;,
+    alternateClassName: &#39;Ext.layout.AnchorLayout&#39;,
 
 <span id='Ext-layout-container-Anchor-property-type'>    /* End Definitions */
 </span>
-    type: 'anchor',
+    type: &#39;anchor&#39;,
 
 <span id='Ext-layout-container-Anchor-cfg-anchor'>    /**
 </span>     * @cfg {String} anchor
@@ -77,7 +77,7 @@ Ext.define('Ext.layout.container.Anchor', {
      *
      * This value is what tells the layout how an item should be anchored to the container. `items`
      * added to an AnchorLayout accept an anchoring-specific config property of **anchor** which is a string
-     * containing two values: the horizontal anchor value and the vertical anchor value (for example, '100% 50%').
+     * containing two values: the horizontal anchor value and the vertical anchor value (for example, &#39;100% 50%&#39;).
      * The following types of anchor values are supported:
      *
      * - **Percentage** : Any value between 1 and 100, expressed as a percentage.
@@ -86,10 +86,10 @@ Ext.define('Ext.layout.container.Anchor', {
      *   second is the percentage height.  For example:
      *
      *       // two values specified
-     *       anchor: '100% 50%' // render item complete width of the container and
+     *       anchor: &#39;100% 50%&#39; // render item complete width of the container and
      *                          // 1/2 height of the container
      *       // one value specified
-     *       anchor: '100%'     // the width value; the height will default to auto
+     *       anchor: &#39;100%&#39;     // the width value; the height will default to auto
      *
      * - **Offsets** : Any positive or negative integer value.
      *
@@ -97,11 +97,11 @@ Ext.define('Ext.layout.container.Anchor', {
      *   and the second is the offset from the bottom edge. For example:
      *
      *       // two values specified
-     *       anchor: '-50 -100' // render item the complete width of the container
+     *       anchor: &#39;-50 -100&#39; // render item the complete width of the container
      *                          // minus 50 pixels and
      *                          // the complete height minus 100 pixels.
      *       // one value specified
-     *       anchor: '-50'      // anchor value is assumed to be the right offset value
+     *       anchor: &#39;-50&#39;      // anchor value is assumed to be the right offset value
      *                          // bottom offset will default to 0
      *
      * - **Sides** : Valid values are `right` (or `r`) and `bottom` (or `b`).
@@ -112,16 +112,16 @@ Ext.define('Ext.layout.container.Anchor', {
      * - **Mixed** :
      *
      *   Anchor values can also be mixed as needed.  For example, to render the width offset from the container
-     *   right edge by 50 pixels and 75% of the container's height use:
+     *   right edge by 50 pixels and 75% of the container&#39;s height use:
      *   
-     *       anchor:   '-50 75%'
+     *       anchor:   &#39;-50 75%&#39;
      */
 
 <span id='Ext-layout-container-Anchor-cfg-defaultAnchor'>    /**
 </span>     * @cfg {String} defaultAnchor
      * Default anchor for all child **container** items applied if no anchor or specific width is set on the child item.
      */
-    defaultAnchor: '100%',
+    defaultAnchor: &#39;100%&#39;,
 
 <span id='Ext-layout-container-Anchor-property-parseAnchorRE'>    parseAnchorRE: /^(r|right|b|bottom)$/i,
 </span>
@@ -209,7 +209,7 @@ Ext.define('Ext.layout.container.Anchor', {
             }
         }
 
-        // If all required dimensions are known, we're done
+        // If all required dimensions are known, we&#39;re done
         return (knownDimensions &amp; anchorDimensions) === anchorDimensions; // jshint ignore:line
     },
 
@@ -230,8 +230,8 @@ Ext.define('Ext.layout.container.Anchor', {
                 if (childContext.widthModel.calculated &amp;&amp; anchorSpec.right) {
                     if (shrinkWrapWidth) {
                         Ext.log({
-                            level: 'warn',
-                            msg: 'Right anchor on '+comp.id+' in shrinkWrap width container'
+                            level: &#39;warn&#39;,
+                            msg: &#39;Right anchor on &#39;+comp.id+&#39; in shrinkWrap width container&#39;
                         });
                     }
                 }
@@ -239,8 +239,8 @@ Ext.define('Ext.layout.container.Anchor', {
                 if (childContext.heightModel.calculated &amp;&amp; anchorSpec.bottom) {
                     if (shrinkWrapHeight) {
                         Ext.log({
-                            level: 'warn',
-                            msg: 'Bottom anchor on '+comp.id+' in shrinkWrap height container'
+                            level: &#39;warn&#39;,
+                            msg: &#39;Bottom anchor on &#39;+comp.id+&#39; in shrinkWrap height container&#39;
                         });
                     }
                 }
@@ -271,15 +271,15 @@ Ext.define('Ext.layout.container.Anchor', {
     },
 
 <span id='Ext-layout-container-Anchor-method-parseAnchor'>    parseAnchor: function(a, start, cstart) {
-</span>        if (a &amp;&amp; a !== 'none') {
+</span>        if (a &amp;&amp; a !== &#39;none&#39;) {
             var factory = this.anchorFactory,
                 delta;
 
             if (this.parseAnchorRE.test(a)) {
                 return factory.standard(cstart - start);
             }    
-            if (a.indexOf('%') !== -1) {
-                return factory.ratio(parseFloat(a.replace('%', '')) * 0.01);
+            if (a.indexOf(&#39;%&#39;) !== -1) {
+                return factory.ratio(parseFloat(a.replace(&#39;%&#39;, &#39;&#39;)) * 0.01);
             }    
             delta = parseInt(a, 10);
             if (!isNaN(delta)) {
@@ -324,7 +324,7 @@ Ext.define('Ext.layout.container.Anchor', {
          * @member Ext.container.Container
          */ 
         if (owner.anchorSize) {
-            if (typeof owner.anchorSize === 'number') {
+            if (typeof owner.anchorSize === &#39;number&#39;) {
                 anchorWidth = owner.anchorSize;
             } else {
                 anchorWidth = owner.anchorSize.width;
@@ -337,7 +337,7 @@ Ext.define('Ext.layout.container.Anchor', {
 
         if (anchor) {
             // cache all anchor values
-            anchorsArray = anchor.split(' ');
+            anchorsArray = anchor.split(&#39; &#39;);
             item.anchorSpec = {
                 right: me.parseAnchor(anchorsArray[0], item.initialConfig.width, anchorWidth),
                 bottom: me.parseAnchor(anchorsArray[1], item.initialConfig.height, anchorHeight)
@@ -376,7 +376,7 @@ Ext.define('Ext.layout.container.Anchor', {
 
 <span id='Ext-layout-container-Anchor-method-getItemSizePolicy'>    getItemSizePolicy: function (item) {
 </span>        var anchorSpec = item.anchorSpec,
-            key = '$',
+            key = &#39;$&#39;,
             policy = this.sizePolicy,
             sizeModel;
 
@@ -386,7 +386,7 @@ Ext.define('Ext.layout.container.Anchor', {
                 policy = policy.r;
             }
             if (anchorSpec.bottom &amp;&amp; !sizeModel.height.shrinkWrap) {
-                key = 'b';
+                key = &#39;b&#39;;
             }
         }
 

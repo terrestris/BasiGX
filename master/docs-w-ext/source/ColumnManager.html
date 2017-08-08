@@ -18,17 +18,17 @@
   <pre class="prettyprint lang-js"><span id='Ext-grid-ColumnManager'>/**
 </span> * @private
  *
- * Manages and provides information about a TablePanel's *visible leaf* columns.
+ * Manages and provides information about a TablePanel&#39;s *visible leaf* columns.
  */
-Ext.define('Ext.grid.ColumnManager', {
-    alternateClassName: ['Ext.grid.ColumnModel'],
+Ext.define(&#39;Ext.grid.ColumnManager&#39;, {
+    alternateClassName: [&#39;Ext.grid.ColumnModel&#39;],
 
 <span id='Ext-grid-ColumnManager-property-columns'>    columns: null,
 </span>
 <span id='Ext-grid-ColumnManager-method-constructor'>    constructor: function(visibleOnly, headerCt, secondHeaderCt) {
 </span>        //&lt;debug&gt;
         if (!headerCt.isRootHeader &amp;&amp; !headerCt.isGroupHeader) {
-            Ext.raise('ColumnManager must be passed an instantiated HeaderContainer or group header');
+            Ext.raise(&#39;ColumnManager must be passed an instantiated HeaderContainer or group header&#39;);
         }
         //&lt;/debug&gt;
         this.headerCt = headerCt;
@@ -37,7 +37,7 @@ Ext.define('Ext.grid.ColumnManager', {
         if (secondHeaderCt) {
             //&lt;debug&gt;
             if (!headerCt.isRootHeader &amp;&amp; !headerCt.isGroupHeader) {
-                Ext.raise('ColumnManager must be passed an instantiated HeaderContainer or group header');
+                Ext.raise(&#39;ColumnManager must be passed an instantiated HeaderContainer or group header&#39;);
             }
             //&lt;/debug&gt;
             this.secondHeaderCt = secondHeaderCt;
@@ -82,7 +82,7 @@ Ext.define('Ext.grid.ColumnManager', {
     getHeaderIndex: function (header) {
         if (header.isGroupHeader) {
             // Get the first header for the particular group header. The .getHeaderColumns API
-            // will sort out if it's to be just visible columns or all columns.
+            // will sort out if it&#39;s to be just visible columns or all columns.
             header = this.getHeaderColumns(header)[0];
         }
 
@@ -96,7 +96,7 @@ Ext.define('Ext.grid.ColumnManager', {
      * If called from a group header, returns the index of a leaf level header relative to the group header.
      *
      * @param {Number} index The column index for which to retrieve the column.
-     * @return {Ext.grid.column.Column} The header. `null` if it doesn't exist.
+     * @return {Ext.grid.column.Column} The header. `null` if it doesn&#39;t exist.
      */
     getHeaderAtIndex: function(index) {
         var columns = this.getColumns(),
@@ -127,7 +127,7 @@ Ext.define('Ext.grid.ColumnManager', {
     
 <span id='Ext-grid-ColumnManager-method-getFirst'>    /**
 </span>     * Get the first column.
-     * @return {Ext.grid.column.Column} The header. `null` if it doesn't exist
+     * @return {Ext.grid.column.Column} The header. `null` if it doesn&#39;t exist
      */
     getFirst: function() {
         var columns = this.getColumns();
@@ -136,7 +136,7 @@ Ext.define('Ext.grid.ColumnManager', {
     
 <span id='Ext-grid-ColumnManager-method-getLast'>    /**
 </span>     * Get the last column.
-     * @return {Ext.grid.column.Column} The header. `null` if it doesn't exist
+     * @return {Ext.grid.column.Column} The header. `null` if it doesn&#39;t exist
      */
     getLast: function(){
         var columns = this.getColumns(),
@@ -149,14 +149,14 @@ Ext.define('Ext.grid.ColumnManager', {
 </span>     * Get a leaf level header by data index regardless of what the nesting
      * structure is.
      * @param {String} dataIndex The data index
-     * @return {Ext.grid.column.Column} The header. `null` if it doesn't exist.
+     * @return {Ext.grid.column.Column} The header. `null` if it doesn&#39;t exist.
      */
     getHeaderByDataIndex: function (dataIndex) {
         var columns = this.getColumns(),
             len = columns.length,
             i, header;
             
-        // don't match on ambiguous empty or null values (e.g., template columns)
+        // don&#39;t match on ambiguous empty or null values (e.g., template columns)
         if (Ext.isEmpty(dataIndex)) {
             return null;
         }
@@ -174,7 +174,7 @@ Ext.define('Ext.grid.ColumnManager', {
 </span>     * Get a leaf level header by index regardless of what the nesting
      * structure is.
      * @param {String} id The id
-     * @return {Ext.grid.column.Column} The header. `null` if it doesn't exist.
+     * @return {Ext.grid.column.Column} The header. `null` if it doesn&#39;t exist.
      */
     getHeaderById: function(id) {
         var columns = this.getColumns(),
@@ -202,7 +202,7 @@ Ext.define('Ext.grid.ColumnManager', {
     getVisibleHeaderClosestToIndex: function(index) {
         var result = this.getHeaderAtIndex(index);
         if (result &amp;&amp; result.hidden) {
-            result = result.next(':not([hidden])') || result.prev(':not([hidden])');
+            result = result.next(&#39;:not([hidden])&#39;) || result.prev(&#39;:not([hidden])&#39;);
         }
         return result;
     },
@@ -237,7 +237,7 @@ Ext.define('Ext.grid.ColumnManager', {
         this.callParent();
     }
 }, function() {
-    this.createAlias('indexOf', 'getHeaderIndex');
+    this.createAlias(&#39;indexOf&#39;, &#39;getHeaderIndex&#39;);
 });
 </pre>
 </body>

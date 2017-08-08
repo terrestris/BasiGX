@@ -30,50 +30,50 @@
  * {@link Ext.container.Container Container}.
  *
  *     @example
- *     Ext.create('Ext.menu.Menu', {
+ *     Ext.create(&#39;Ext.menu.Menu&#39;, {
  *         width: 100,
- *         margin: '0 0 10 0',
+ *         margin: &#39;0 0 10 0&#39;,
  *         floating: false,  // usually you want this set to True (default)
- *         renderTo: Ext.getBody(),  // usually rendered by it's containing component
+ *         renderTo: Ext.getBody(),  // usually rendered by it&#39;s containing component
  *         items: [{
- *             text: 'regular item 1'
+ *             text: &#39;regular item 1&#39;
  *         },{
- *             text: 'regular item 2'
+ *             text: &#39;regular item 2&#39;
  *         },{
- *             text: 'regular item 3'
+ *             text: &#39;regular item 3&#39;
  *         }]
  *     });
  *
- *     Ext.create('Ext.menu.Menu', {
+ *     Ext.create(&#39;Ext.menu.Menu&#39;, {
  *         width: 100,
  *         plain: true,
  *         floating: false,  // usually you want this set to True (default)
- *         renderTo: Ext.getBody(),  // usually rendered by it's containing component
+ *         renderTo: Ext.getBody(),  // usually rendered by it&#39;s containing component
  *         items: [{
- *             text: 'plain item 1'
+ *             text: &#39;plain item 1&#39;
  *         },{
- *             text: 'plain item 2'
+ *             text: &#39;plain item 2&#39;
  *         },{
- *             text: 'plain item 3'
+ *             text: &#39;plain item 3&#39;
  *         }]
  *     });
  */
-Ext.define('Ext.menu.Menu', {
-    extend: 'Ext.panel.Panel',
-    alias: 'widget.menu',
+Ext.define(&#39;Ext.menu.Menu&#39;, {
+    extend: &#39;Ext.panel.Panel&#39;,
+    alias: &#39;widget.menu&#39;,
     requires: [
-        'Ext.layout.container.VBox',
-        'Ext.menu.CheckItem',
-        'Ext.menu.Item',
-        'Ext.menu.Manager',
-        'Ext.menu.Separator'
+        &#39;Ext.layout.container.VBox&#39;,
+        &#39;Ext.menu.CheckItem&#39;,
+        &#39;Ext.menu.Item&#39;,
+        &#39;Ext.menu.Manager&#39;,
+        &#39;Ext.menu.Separator&#39;
     ],
 
     mixins: [
-        'Ext.util.FocusableContainer'
+        &#39;Ext.util.FocusableContainer&#39;
     ],
 
-<span id='Ext-menu-Menu-cfg-defaultType'>    defaultType: 'menuitem',
+<span id='Ext-menu-Menu-cfg-defaultType'>    defaultType: &#39;menuitem&#39;,
 </span>
 <span id='Ext-menu-Menu-property-parentMenu'>    /**
 </span>     * @property {Ext.menu.Menu} parentMenu
@@ -96,7 +96,7 @@ Ext.define('Ext.menu.Menu', {
 </span>     * @cfg {String} ariaRole
      * @private
      */
-    ariaRole: 'menu',
+    ariaRole: &#39;menu&#39;,
 
 <span id='Ext-menu-Menu-cfg-autoRender'>    /**
 </span>     * @cfg {Boolean} autoRender
@@ -129,7 +129,7 @@ Ext.define('Ext.menu.Menu', {
      */
     hidden: true,
 
-<span id='Ext-menu-Menu-cfg-hideMode'>    hideMode: 'visibility',
+<span id='Ext-menu-Menu-cfg-hideMode'>    hideMode: &#39;visibility&#39;,
 </span>
 <span id='Ext-menu-Menu-cfg-ignoreParentClicks'>    /**
 </span>     * @cfg {Boolean} [ignoreParentClicks=false]
@@ -178,7 +178,7 @@ Ext.define('Ext.menu.Menu', {
      * The default {@link Ext.util.Positionable#getAlignToXY Ext.dom.Element#getAlignToXY} anchor position value for this menu
      * relative to its owner. Used in conjunction with {@link #showBy}.
      */
-    defaultAlign: 'tl-bl?',
+    defaultAlign: &#39;tl-bl?&#39;,
 
 <span id='Ext-menu-Menu-cfg-plain'>    /**
 </span>     * @cfg {Boolean} [plain=false]
@@ -208,7 +208,7 @@ Ext.define('Ext.menu.Menu', {
 <span id='Ext-menu-Menu-cfg-defaultFocus'>    // When a Menu is used as a carrier to float some focusable Component such as a DatePicker or ColorPicker
 </span>    // This will be used to delegate focus to its focusable child.
     // In normal usage, a Menu is a FocusableContainer, and this will not be consulted.
-    defaultFocus: ':focusable',
+    defaultFocus: &#39;:focusable&#39;,
     
 <span id='Ext-menu-Menu-cfg-allowFocusingDisabledChildren'>    // We need to focus disabled menu items when arrowing as per WAI-ARIA:
 </span>    // http://www.w3.org/TR/wai-aria-practices/#menu
@@ -218,9 +218,9 @@ Ext.define('Ext.menu.Menu', {
 </span>     * @private
      */
     menuClickBuffer: 0,
-<span id='Ext-menu-Menu-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'menu',
-</span><span id='Ext-menu-Menu-property-_iconSeparatorCls'>    _iconSeparatorCls: Ext.baseCSSPrefix + 'menu-icon-separator',
-</span><span id='Ext-menu-Menu-property-_itemCmpCls'>    _itemCmpCls: Ext.baseCSSPrefix + 'menu-item-cmp',
+<span id='Ext-menu-Menu-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;menu&#39;,
+</span><span id='Ext-menu-Menu-property-_iconSeparatorCls'>    _iconSeparatorCls: Ext.baseCSSPrefix + &#39;menu-icon-separator&#39;,
+</span><span id='Ext-menu-Menu-property-_itemCmpCls'>    _itemCmpCls: Ext.baseCSSPrefix + &#39;menu-item-cmp&#39;,
 </span>
 <span id='Ext-menu-Menu-event-click'>    /**
 </span>     * @event click
@@ -253,18 +253,18 @@ Ext.define('Ext.menu.Menu', {
      */
     
     layout: {
-        type: 'vbox',
-        align: 'stretchmax',
-        overflowHandler: 'Scroller'
+        type: &#39;vbox&#39;,
+        align: &#39;stretchmax&#39;,
+        overflowHandler: &#39;Scroller&#39;
     },
 
 <span id='Ext-menu-Menu-method-initComponent'>    initComponent: function() {
 </span>        var me = this,
-            cls = [Ext.baseCSSPrefix + 'menu'],
+            cls = [Ext.baseCSSPrefix + &#39;menu&#39;],
             bodyCls = me.bodyCls ? [me.bodyCls] : [],
             isFloating = me.floating !== false,
             listeners = {
-                element: 'el',
+                element: &#39;el&#39;,
                 click: me.onClick,
                 mouseover: me.onMouseOver,
                 scope: me
@@ -281,16 +281,16 @@ Ext.define('Ext.menu.Menu', {
 
         // Menu classes
         if (me.plain) {
-            cls.push(Ext.baseCSSPrefix + 'menu-plain');
+            cls.push(Ext.baseCSSPrefix + &#39;menu-plain&#39;);
         }
-        me.cls = cls.join(' ');
+        me.cls = cls.join(&#39; &#39;);
 
         // Menu body classes
-        bodyCls.push(Ext.baseCSSPrefix + 'menu-body', Ext.dom.Element.unselectableCls);
-        me.bodyCls = bodyCls.join(' ');
+        bodyCls.push(Ext.baseCSSPrefix + &#39;menu-body&#39;, Ext.dom.Element.unselectableCls);
+        me.bodyCls = bodyCls.join(&#39; &#39;);
 
         if (isFloating)  {
-            // only apply the minWidth when we're floating &amp; one hasn't already been set
+            // only apply the minWidth when we&#39;re floating &amp; one hasn&#39;t already been set
             if (me.minWidth === undefined) {
                 me.minWidth = me.defaultMinWidth;
             }
@@ -312,7 +312,7 @@ Ext.define('Ext.menu.Menu', {
     },
 
     // Private implementation for Menus. They are a special case, in that in the vast majority
-    // (nearly all?) of use cases they shouldn't be constrained to anything other than the viewport.
+    // (nearly all?) of use cases they shouldn&#39;t be constrained to anything other than the viewport.
     // See EXTJS-13596.
 <span id='Ext-menu-Menu-method-initFloatConstrain'>    /**
 </span>     * @method
@@ -321,7 +321,7 @@ Ext.define('Ext.menu.Menu', {
     initFloatConstrain: Ext.emptyFn,
 
 <span id='Ext-menu-Menu-method-getInherited'>    getInherited: function() {
-</span>        // As floating menus are never contained, a floating Menu's visibility only ever depends upon its own hidden state.
+</span>        // As floating menus are never contained, a floating Menu&#39;s visibility only ever depends upon its own hidden state.
         // Ignore hiddenness from the ancestor hierarchy, override it with local hidden state.
         var result = this.callParent();
         if (this.floating) {
@@ -338,12 +338,12 @@ Ext.define('Ext.menu.Menu', {
         // Menus are usually floating: true, which means they shrink wrap their items.
         // However, when they are contained, and not auto sized, we must stretch the items.
         if (!me.getSizeModel().width.shrinkWrap) {
-            me.layout.align = 'stretch';
+            me.layout.align = &#39;stretch&#39;;
         }
         
         if (me.floating) {
             me.ariaRenderAttributes = me.ariaRenderAttributes || {};
-            me.ariaRenderAttributes['aria-expanded'] = !!me.autoShow;
+            me.ariaRenderAttributes[&#39;aria-expanded&#39;] = !!me.autoShow;
         }
     },
 
@@ -386,7 +386,7 @@ Ext.define('Ext.menu.Menu', {
             // Even when FocusableContainer key event processing is disabled,
             // we still need to handle the Escape key!
             me.escapeKeyNav = new Ext.util.KeyNav(me.el, {
-                eventName: 'keydown',
+                eventName: &#39;keydown&#39;,
                 scope: me,
                 esc: me.onEscapeKey
             });
@@ -397,16 +397,16 @@ Ext.define('Ext.menu.Menu', {
         // TODO: Move this to a subTemplate When we support them in the future
         if (me.showSeparator) {
             me.iconSepEl = me.body.insertFirst({
-                role: 'presentation',
-                cls: iconSeparatorCls + ' ' + iconSeparatorCls + '-' + me.ui,
-                html: '&amp;#160;'
+                role: &#39;presentation&#39;,
+                cls: iconSeparatorCls + &#39; &#39; + iconSeparatorCls + &#39;-&#39; + me.ui,
+                html: &#39;&amp;#160;&#39;
             });
         }
 
         // Modern IE browsers have click events translated to PointerEvents, and b/c of this the
-        // event isn't being canceled like it needs to be. So, we need to add an extra listener.
+        // event isn&#39;t being canceled like it needs to be. So, we need to add an extra listener.
         // For devices that have touch support, the default click event may be a gesture that
-        // runs asynchronously, so by the time we try and prevent it, it's already happened
+        // runs asynchronously, so by the time we try and prevent it, it&#39;s already happened
         if (Ext.supports.Touch || Ext.supports.MSPointerEvents || Ext.supports.PointerEvents) {
             me.el.on({
                 scope: me,
@@ -466,7 +466,7 @@ Ext.define('Ext.menu.Menu', {
 
 <span id='Ext-menu-Menu-method-handleItemOver'>    handleItemOver: function(e, item) {
 </span>        // Only focus non-menuitem on real mouseover events.
-        if (!item.containsFocus &amp;&amp; (e.pointerType === 'mouse' || item.isMenuItem)) {
+        if (!item.containsFocus &amp;&amp; (e.pointerType === &#39;mouse&#39; || item.isMenuItem)) {
             item.focus();
         }
         if (item.expandMenu) {
@@ -516,8 +516,8 @@ Ext.define('Ext.menu.Menu', {
 <span id='Ext-menu-Menu-method-lookupComponent'>    lookupComponent: function(cmp) {
 </span>        var me = this;
 
-        if (typeof cmp === 'string') {
-            if (cmp[0] === '@') {
+        if (typeof cmp === &#39;string&#39;) {
+            if (cmp[0] === &#39;@&#39;) {
                 cmp = this.callParent([cmp]);
             } else {
                 cmp = me.lookupItemFromString(cmp);
@@ -527,7 +527,7 @@ Ext.define('Ext.menu.Menu', {
         }
 
         // Apply our minWidth to all of our non-docked child components (Menu extends Panel)
-        // so it's accounted for in our VBox layout
+        // so it&#39;s accounted for in our VBox layout
         if (!cmp.dock) {
             cmp.minWidth = cmp.minWidth || me.minWidth;
         }
@@ -543,7 +543,7 @@ Ext.define('Ext.menu.Menu', {
 
         if (!cmp.isComponent) {
             if (!cmp.xtype &amp;&amp; Ext.isBoolean(cmp.checked)) {
-                type = 'menucheckitem';
+                type = &#39;menucheckitem&#39;;
             }
             cmp = Ext.ComponentManager.create(cmp, type);    
         }
@@ -559,7 +559,7 @@ Ext.define('Ext.menu.Menu', {
 </span>     * @private
      */
     lookupItemFromString: function(cmp) {
-        return (cmp === 'separator' || cmp === '-') ?
+        return (cmp === &#39;separator&#39; || cmp === &#39;-&#39;) ?
             new Ext.menu.Separator()
             : new Ext.menu.Item({
                 canActivate: false,
@@ -569,7 +569,7 @@ Ext.define('Ext.menu.Menu', {
             });
     },
 
-<span id='Ext-menu-Menu-method-configureItem'>    // Override applied to the Menu's layout. Runs in the context of the layout.
+<span id='Ext-menu-Menu-method-configureItem'>    // Override applied to the Menu&#39;s layout. Runs in the context of the layout.
 </span>    // Add special classes to allow non MenuItem components to coexist with MenuItems.
     // If there is only *one* child, then this Menu is just a vehicle for floating
     // and aligning the component, so do not do this.
@@ -583,19 +583,19 @@ Ext.define('Ext.menu.Menu', {
             cmp.setUI(ui);
         } else if (me.items.getCount() &gt; 1 &amp;&amp; !cmp.rendered &amp;&amp; !cmp.dock) {
             cmpCls = me._itemCmpCls;
-            cls = [cmpCls + ' ' + cmpCls + '-' + ui];
+            cls = [cmpCls + &#39; &#39; + cmpCls + &#39;-&#39; + ui];
 
-            // The &quot;plain&quot; setting means that the menu does not look so much like a menu. It's more like a grey Panel.
+            // The &quot;plain&quot; setting means that the menu does not look so much like a menu. It&#39;s more like a grey Panel.
             // So it has no vertical separator.
             // Plain menus also will not indent non MenuItem components; there is nothing to indent them to the right of.
-            if (!me.plain &amp;&amp; (cmp.indent !== false || cmp.iconCls === 'no-icon')) {
-                cls.push(prefix + 'menu-item-indent-' + ui);
+            if (!me.plain &amp;&amp; (cmp.indent !== false || cmp.iconCls === &#39;no-icon&#39;)) {
+                cls.push(prefix + &#39;menu-item-indent-&#39; + ui);
             }
 
             if (cmp.rendered) {
                 cmp.el.addCls(cls);
             } else {
-                cmp.cls = (cmp.cls || '') + ' ' + cls.join(' ');
+                cmp.cls = (cmp.cls || &#39;&#39;) + &#39; &#39; + cls.join(&#39; &#39;);
             }
             // So we can clean the item if it gets removed.
             cmp.$extraMenuCls = cls;
@@ -619,7 +619,7 @@ Ext.define('Ext.menu.Menu', {
             type = e.type,
             item,
             clickResult,
-            iskeyEvent = type === 'keydown';
+            iskeyEvent = type === &#39;keydown&#39;;
 
         if (me.disabled) {
             e.stopEvent();
@@ -650,7 +650,7 @@ Ext.define('Ext.menu.Menu', {
             item = undefined;
         }
         
-        me.fireEvent('click', me, item, e);
+        me.fireEvent(&#39;click&#39;, me, item, e);
     },
 
 <span id='Ext-menu-Menu-method-doDestroy'>    doDestroy: function() {
@@ -685,7 +685,7 @@ Ext.define('Ext.menu.Menu', {
             return;
         }
         
-        me.fireEvent('mouseleave', me, e);
+        me.fireEvent(&#39;mouseleave&#39;, me, e);
     },
 
 <span id='Ext-menu-Menu-method-onMouseOver'>    onMouseOver: function(e) {
@@ -707,16 +707,16 @@ Ext.define('Ext.menu.Menu', {
             return;
         }
 
-        // Do not activate the item if the mouseover was within the item, and it's already active
+        // Do not activate the item if the mouseover was within the item, and it&#39;s already active
         if (item) {
             // Activate the item in time specified by mouseLeaveDelay.
             // If we mouseout, or move to another item this invocation will be canceled.
             me.itemOverTask.delay(me.mouseLeaveDelay, null, null, [e, item]);
         }
         if (mouseEnter) {
-            me.fireEvent('mouseenter', me, e);
+            me.fireEvent(&#39;mouseenter&#39;, me, e);
         }
-        me.fireEvent('mouseover', me, item, e);
+        me.fireEvent(&#39;mouseover&#39;, me, item, e);
     },
 
 <span id='Ext-menu-Menu-method-setActiveItem'>    setActiveItem: function(item) {
@@ -736,7 +736,7 @@ Ext.define('Ext.menu.Menu', {
 
 <span id='Ext-menu-Menu-method-onShortcutKey'>    onShortcutKey: function(keyCode, e) {
 </span>        var shortcutChar = String.fromCharCode(e.getCharCode()),
-            items = this.query('&gt;[text]'),
+            items = this.query(&#39;&gt;[text]&#39;),
             len = items.length,
             item = this.lastFocusedChild,
             focusIndex = Ext.Array.indexOf(items, item),
@@ -777,7 +777,7 @@ Ext.define('Ext.menu.Menu', {
 </span>        var me = this,
             parent;
 
-        // Constrain the height to the containing element's viewable area
+        // Constrain the height to the containing element&#39;s viewable area
         if (me.floating) {
             parent = me.hasFloatMenuParent();
             
@@ -797,7 +797,7 @@ Ext.define('Ext.menu.Menu', {
         Ext.menu.Manager.onShow(me);
         
         if (me.floating &amp;&amp; ariaDom) {
-            ariaDom.setAttribute('aria-expanded', true);
+            ariaDom.setAttribute(&#39;aria-expanded&#39;, true);
         }
         
         // Restore configured maxHeight
@@ -818,7 +818,7 @@ Ext.define('Ext.menu.Menu', {
         Ext.menu.Manager.onHide(me);
         
         if (me.floating &amp;&amp; ariaDom) {
-            ariaDom.setAttribute('aria-expanded', false);
+            ariaDom.setAttribute(&#39;aria-expanded&#39;, false);
         }
     },
 
@@ -854,11 +854,11 @@ Ext.define('Ext.menu.Menu', {
             
             // Floating menus always need to have focusable main el
             // so that mouse clicks within the menu would not close it.
-            // We're not checking focusable property here, Component
+            // We&#39;re not checking focusable property here, Component
             // will do that before we can reach this method.
             if (me.floating &amp;&amp; tabIndex != null &amp;&amp; el &amp;&amp; el.dom) {
-                el.dom.setAttribute('tabIndex', tabIndex);
-                el.dom.setAttribute('data-componentid', me.id);
+                el.dom.setAttribute(&#39;tabIndex&#39;, tabIndex);
+                el.dom.setAttribute(&#39;data-componentid&#39;, me.id);
             }
         },
         
@@ -870,7 +870,7 @@ Ext.define('Ext.menu.Menu', {
             if (me.floating) {
                 if (e.shiftKey) {
                     // We do not want TAB behaviour to proceed.
-                    // SHIFT+TAB reverts &quot;backwards&quot; to the menu's invoker
+                    // SHIFT+TAB reverts &quot;backwards&quot; to the menu&#39;s invoker
                     // which is the automatic behaviour.
                     e.preventDefault();
                 } else {
@@ -916,7 +916,7 @@ Ext.define('Ext.menu.Menu', {
         },
 
         hasFloatMenuParent: function() {
-            return this.parentMenu || this.up('menu[floating=true]');
+            return this.parentMenu || this.up(&#39;menu[floating=true]&#39;);
         },
         
         setOwnerCmp: function(comp, instanced) {

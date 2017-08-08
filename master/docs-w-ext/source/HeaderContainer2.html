@@ -19,35 +19,35 @@
 </span> * A custom HeaderContainer for the {@link Ext.grid.property.Grid}.
  * Generally it should not need to be used directly.
  */
-Ext.define('Ext.grid.property.HeaderContainer', {
+Ext.define(&#39;Ext.grid.property.HeaderContainer&#39;, {
 
-    extend: 'Ext.grid.header.Container',
+    extend: &#39;Ext.grid.header.Container&#39;,
 
-    alternateClassName: 'Ext.grid.PropertyColumnModel',
+    alternateClassName: &#39;Ext.grid.PropertyColumnModel&#39;,
 
 <span id='Ext-grid-property-HeaderContainer-property-nameWidth'>    nameWidth: 115,
 </span>
 <span id='Ext-grid-property-HeaderContainer-property-nameText'>    //&lt;locale&gt;
-</span>    nameText : 'Name',
+</span>    nameText : &#39;Name&#39;,
 <span id='Ext-grid-property-HeaderContainer-property-valueText'>    //&lt;/locale&gt;
 </span>    //&lt;locale&gt;
-    valueText : 'Value',
+    valueText : &#39;Value&#39;,
 <span id='Ext-grid-property-HeaderContainer-property-dateFormat'>    //&lt;/locale&gt;
 </span>    //&lt;locale&gt;
-    dateFormat : 'm/j/Y',
+    dateFormat : &#39;m/j/Y&#39;,
 <span id='Ext-grid-property-HeaderContainer-property-trueText'>    //&lt;/locale&gt;
 </span>    //&lt;locale&gt;
-    trueText: 'true',
+    trueText: &#39;true&#39;,
 <span id='Ext-grid-property-HeaderContainer-property-falseText'>    //&lt;/locale&gt;
 </span>    //&lt;locale&gt;
-    falseText: 'false',
+    falseText: &#39;false&#39;,
     //&lt;/locale&gt;
 
 <span id='Ext-grid-property-HeaderContainer-property-nameColumnCls'>    /**
 </span>     * @private
      */
-    nameColumnCls: Ext.baseCSSPrefix + 'grid-property-name',
-<span id='Ext-grid-property-HeaderContainer-property-nameColumnInnerCls'>    nameColumnInnerCls: Ext.baseCSSPrefix + 'grid-cell-inner-property-name',
+    nameColumnCls: Ext.baseCSSPrefix + &#39;grid-property-name&#39;,
+<span id='Ext-grid-property-HeaderContainer-property-nameColumnInnerCls'>    nameColumnInnerCls: Ext.baseCSSPrefix + &#39;grid-cell-inner-property-name&#39;,
 </span>
 <span id='Ext-grid-property-HeaderContainer-method-constructor'>    /**
 </span>     * Creates new HeaderContainer.
@@ -111,7 +111,7 @@ Ext.define('Ext.grid.property.HeaderContainer', {
     renderCell : function(val, meta, rec) {
         var me = this,
             grid = me.grid,
-            renderer = grid.getConfigProp(rec.get(grid.nameField), 'renderer'),
+            renderer = grid.getConfigProp(rec.get(grid.nameField), &#39;renderer&#39;),
             result = val;
 
         if (renderer) {
@@ -135,7 +135,7 @@ Ext.define('Ext.grid.property.HeaderContainer', {
 <span id='Ext-grid-property-HeaderContainer-method-renderBool'>    /**
 </span>     * @private
      */    renderBool : function(bVal) {
-        return this[bVal ? 'trueText' : 'falseText'];
+        return this[bVal ? &#39;trueText&#39; : &#39;falseText&#39;];
     },
 
 <span id='Ext-grid-property-HeaderContainer-method-getPropertyName'>    /**
@@ -143,7 +143,7 @@ Ext.define('Ext.grid.property.HeaderContainer', {
      * Renders custom property names instead of raw names if defined in the Grid
      */
     getPropertyName : function(name) {
-        return this.grid.getConfigProp(name, 'displayName', name);
+        return this.grid.getConfigProp(name, &#39;displayName&#39;, name);
     }
 });
 </pre>

@@ -26,7 +26,7 @@ Ext.Number = (new function() { // jshint ignore:line
 // @define Ext.Number
 // @require Ext
     var ExtNumber = this,
-        isToFixedBroken = (0.9).toFixed() !== '1',
+        isToFixedBroken = (0.9).toFixed() !== &#39;1&#39;,
         math = Math,
         ClipDefault = {
             count: false,
@@ -291,7 +291,7 @@ Ext.Number = (new function() { // jshint ignore:line
 </span>         * Returns the base 10 logarithm of a number.
          * This will use Math.log10, if available (ES6).
          * @param {Number} x The number.
-         * @return {Number} Base 10 logarithm of the number 'x'.
+         * @return {Number} Base 10 logarithm of the number &#39;x&#39;.
          * @method log10
          */
         log10: math.log10 || function (x) {
@@ -308,7 +308,7 @@ Ext.Number = (new function() { // jshint ignore:line
          */
         isEqual: function (n1, n2, epsilon) {
             //&lt;debug&gt;
-            if (!(typeof n1 === 'number' &amp;&amp; typeof n2 === 'number' &amp;&amp; typeof epsilon === 'number')) {
+            if (!(typeof n1 === &#39;number&#39; &amp;&amp; typeof n2 === &#39;number&#39; &amp;&amp; typeof epsilon === &#39;number&#39;)) {
                 Ext.raise(&quot;All parameters should be valid numbers.&quot;);
             }
             //&lt;/debug&gt;
@@ -318,13 +318,13 @@ Ext.Number = (new function() { // jshint ignore:line
 <span id='Ext-Number-method-isFinite'>        /**
 </span>         * Determines if the value passed is a number and also finite.
          * This a Polyfill version of Number.isFinite(),differently than 
-         * the isFinite() function, this method doesn't convert the parameter to a number.
+         * the isFinite() function, this method doesn&#39;t convert the parameter to a number.
          * @param {Number} value Number to be tested.
          * @returns {Boolean} `true`, if the parameter is a number and finite, `false` otherwise.
          * @since 6.2
          */
         isFinite: Number.isFinite || function (value) {
-            return typeof value === 'number' &amp;&amp; isFinite(value);
+            return typeof value === &#39;number&#39; &amp;&amp; isFinite(value);
         },
 
 <span id='Ext-Number-method-toFixed'>        /**
@@ -345,8 +345,8 @@ Ext.Number = (new function() { // jshint ignore:line
 </span>         * Validate that a value is numeric and convert it to a number if necessary. Returns the specified default value if
          * it is not.
 
-    Ext.Number.from('1.23', 1); // returns 1.23
-    Ext.Number.from('abc', 1); // returns 1
+    Ext.Number.from(&#39;1.23&#39;, 1); // returns 1.23
+    Ext.Number.from(&#39;abc&#39;, 1); // returns 1
 
          * @param {Object} value
          * @param {Number} defaultValue The value to return if the original value is non-numeric

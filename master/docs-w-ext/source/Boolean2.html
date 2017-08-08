@@ -20,29 +20,29 @@
  * config option of {@link Ext.grid.column.Column} for more details.
  *
  *     @example
- *     var store = Ext.create('Ext.data.Store', {
+ *     var store = Ext.create(&#39;Ext.data.Store&#39;, {
  *        fields: [
- *            {name: 'framework', type: 'string'},
- *            {name: 'rocks', type: 'boolean'}
+ *            {name: &#39;framework&#39;, type: &#39;string&#39;},
+ *            {name: &#39;rocks&#39;, type: &#39;boolean&#39;}
  *        ],
  *        data: [
- *            { framework: 'Ext JS 5', rocks: true },
- *            { framework: 'Ext GWT', rocks: true },
- *            { framework: 'Other Guys', rocks: false }
+ *            { framework: &#39;Ext JS 5&#39;, rocks: true },
+ *            { framework: &#39;Ext GWT&#39;, rocks: true },
+ *            { framework: &#39;Other Guys&#39;, rocks: false }
  *        ]
  *     });
  *
- *     Ext.create('Ext.grid.Panel', {
- *         title: 'Boolean Column Demo',
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
+ *         title: &#39;Boolean Column Demo&#39;,
  *         store: store,
  *         columns: [
- *             { text: 'Framework',  dataIndex: 'framework', flex: 1 },
+ *             { text: &#39;Framework&#39;,  dataIndex: &#39;framework&#39;, flex: 1 },
  *             {
- *                 xtype: 'booleancolumn',
- *                 text: 'Rocks',
- *                 trueText: 'Yes',
- *                 falseText: 'No',
- *                 dataIndex: 'rocks'
+ *                 xtype: &#39;booleancolumn&#39;,
+ *                 text: &#39;Rocks&#39;,
+ *                 trueText: &#39;Yes&#39;,
+ *                 falseText: &#39;No&#39;,
+ *                 dataIndex: &#39;rocks&#39;
  *             }
  *         ],
  *         height: 200,
@@ -50,17 +50,17 @@
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.grid.column.Boolean', {
-    extend: 'Ext.grid.column.Column',
-    alias: ['widget.booleancolumn'],
-    alternateClassName: 'Ext.grid.BooleanColumn',
+Ext.define(&#39;Ext.grid.column.Boolean&#39;, {
+    extend: &#39;Ext.grid.column.Column&#39;,
+    alias: [&#39;widget.booleancolumn&#39;],
+    alternateClassName: &#39;Ext.grid.BooleanColumn&#39;,
 
     //&lt;locale&gt;
 <span id='Ext-grid-column-Boolean-cfg-trueText'>    /**
 </span>     * @cfg {String} trueText
      * The string returned by the renderer when the column value is not falsey.
      */
-    trueText: 'true',
+    trueText: &#39;true&#39;,
     //&lt;/locale&gt;
 
     //&lt;locale&gt;
@@ -68,16 +68,16 @@ Ext.define('Ext.grid.column.Boolean', {
 </span>     * @cfg {String} falseText
      * The string returned by the renderer when the column value is falsey (but not undefined).
      */
-    falseText: 'false',
+    falseText: &#39;false&#39;,
     //&lt;/locale&gt;
 
 <span id='Ext-grid-column-Boolean-cfg-undefinedText'>    /**
 </span>     * @cfg {String} undefinedText
      * The string returned by the renderer when the column value is undefined.
      */
-    undefinedText: '&amp;#160;',
+    undefinedText: &#39;&amp;#160;&#39;,
 
-<span id='Ext-grid-column-Boolean-property-defaultFilterType'>    defaultFilterType: 'boolean',
+<span id='Ext-grid-column-Boolean-property-defaultFilterType'>    defaultFilterType: &#39;boolean&#39;,
 </span>
 <span id='Ext-grid-column-Boolean-cfg-renderer'>    /**
 </span>     * @cfg {Object} renderer
@@ -100,7 +100,7 @@ Ext.define('Ext.grid.column.Boolean', {
             return this.undefinedText;
         }
 
-        if (!value || value === 'false') {
+        if (!value || value === &#39;false&#39;) {
             return this.falseText;
         }
         return this.trueText;

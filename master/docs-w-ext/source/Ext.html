@@ -20,7 +20,7 @@
 </span> * @class Ext
  *
  * The Ext namespace (global object) encapsulates all classes, singletons, and
- * utility methods provided by Sencha's libraries.
+ * utility methods provided by Sencha&#39;s libraries.
  *
  * Most user interface Components are at a lower level of nesting in the namespace,
  * but many common utility functions are provided as direct properties of the Ext namespace.
@@ -34,10 +34,10 @@
  * dependency issues. For example:
  *
  *      Ext.application({
- *          name: 'MyApp',
+ *          name: &#39;MyApp&#39;,
  *
  *          launch: function () {
- *              Ext.Msg.alert(this.name, 'Ready to go!');
+ *              Ext.Msg.alert(this.name, &#39;Ready to go!&#39;);
  *          }
  *      });
  *
@@ -63,8 +63,8 @@ var Ext = Ext || {}; // jshint ignore:line
     var global = this,
         objectPrototype = Object.prototype,
         toString = objectPrototype.toString,
-        enumerables = [//'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable',
-                       'valueOf', 'toLocaleString', 'toString', 'constructor'],
+        enumerables = [//&#39;hasOwnProperty&#39;, &#39;isPrototypeOf&#39;, &#39;propertyIsEnumerable&#39;,
+                       &#39;valueOf&#39;, &#39;toLocaleString&#39;, &#39;toString&#39;, &#39;constructor&#39;],
         emptyFn = function () {},
         privateFn = function () {},
         identityFn = function(o) { return o; },
@@ -104,18 +104,18 @@ var Ext = Ext || {}; // jshint ignore:line
 
     Ext._startTime = Ext.ticks();
 
-    // Mark these special fn's for easy identification:
+    // Mark these special fn&#39;s for easy identification:
     emptyFn.$nullFn = identityFn.$nullFn = emptyFn.$emptyFn = identityFn.$identityFn =
         privateFn.$nullFn = true;
-    privateFn.$privacy = 'framework';
+    privateFn.$privacy = &#39;framework&#39;;
     
     // We also want to prevent these functions from being cleaned up on destroy
     emptyFn.$noClearOnDestroy = identityFn.$noClearOnDestroy = true;
     privateFn.$noClearOnDestroy = true;
 
-    // These are emptyFn's in core and are redefined only in Ext JS (we use this syntax
+    // These are emptyFn&#39;s in core and are redefined only in Ext JS (we use this syntax
     // so Cmd does not detect them):
-    Ext['suspendLayouts'] = Ext['resumeLayouts'] = emptyFn; // jshint ignore:line
+    Ext[&#39;suspendLayouts&#39;] = Ext[&#39;resumeLayouts&#39;] = emptyFn; // jshint ignore:line
 
     for (i in { toString: 1 }) {
         enumerables = null;
@@ -150,7 +150,7 @@ var Ext = Ext || {}; // jshint ignore:line
             Ext.apply(object, defaults);
         }
 
-        if (object &amp;&amp; config &amp;&amp; typeof config === 'object') {
+        if (object &amp;&amp; config &amp;&amp; typeof config === &#39;object&#39;) {
             var i, j, k;
 
             for (i in config) {
@@ -178,10 +178,10 @@ var Ext = Ext || {}; // jshint ignore:line
             if (overrides.hasOwnProperty(name)) {
                 value = overrides[name];
 
-                if (typeof value === 'function') {
+                if (typeof value === &#39;function&#39;) {
                     //&lt;debug&gt;
                     if (owner.$className) {
-                        value.name = owner.$className + '#' + name;
+                        value.name = owner.$className + &#39;#&#39; + name;
                     }
                     //&lt;/debug&gt;
 
@@ -199,7 +199,7 @@ var Ext = Ext || {}; // jshint ignore:line
     }
 
     Ext.buildSettings = Ext.apply({
-        baseCSSPrefix: 'x-'
+        baseCSSPrefix: &#39;x-&#39;
     }, Ext.buildSettings || {});
 
     Ext.apply(Ext, {
@@ -211,7 +211,7 @@ var Ext = Ext || {}; // jshint ignore:line
 <span id='Ext-property-idPrefix'>        /**
 </span>         * @private
          */
-        idPrefix: 'ext-',
+        idPrefix: &#39;ext-&#39;,
 
 <span id='Ext-property-isSecure'>        /**
 </span>         * @property {Boolean} isSecure
@@ -223,7 +223,7 @@ var Ext = Ext || {}; // jshint ignore:line
 <span id='Ext-property-enableGarbageCollector'>        /**
 </span>         * `true` to automatically uncache orphaned Ext.Elements periodically. If set to
          * `false`, the application will be required to clean up orphaned Ext.Elements and
-         * it's listeners as to not cause memory leakage.
+         * it&#39;s listeners as to not cause memory leakage.
          */
         enableGarbageCollector: false,
 
@@ -233,19 +233,19 @@ var Ext = Ext || {}; // jshint ignore:line
         enableListenerCollection: true,
 
 <span id='Ext-property-name'>        /**
-</span>         * @property {String} [name='Ext']
+</span>         * @property {String} [name=&#39;Ext&#39;]
          * &lt;p&gt;The name of the property in the global namespace (The &lt;code&gt;window&lt;/code&gt; in browser environments) which refers to the current instance of Ext.&lt;/p&gt;
          * &lt;p&gt;This is usually &lt;code&gt;&quot;Ext&quot;&lt;/code&gt;, but if a sandboxed build of ExtJS is being used, this will be an alternative name.&lt;/p&gt;
          * &lt;p&gt;If code is being generated for use by &lt;code&gt;eval&lt;/code&gt; or to create a &lt;code&gt;new Function&lt;/code&gt;, and the global instance
          * of Ext must be referenced, this is the name that should be built into the code.&lt;/p&gt;
          */
-        name: Ext.sandboxName || 'Ext',
+        name: Ext.sandboxName || &#39;Ext&#39;,
 
 <span id='Ext-property-privateFn'>        /**
 </span>         * @property {Function}
          * A reusable empty function for use as `privates` members.
          *
-         *      Ext.define('MyClass', {
+         *      Ext.define(&#39;MyClass&#39;, {
          *          nothing: Ext.emptyFn,
          *
          *          privates: {
@@ -280,7 +280,7 @@ var Ext = Ext || {}; // jshint ignore:line
          * Touch) and contains settings and other information describing the application.
          *
          * For applications built using Sencha Cmd, this is produced from the `&quot;app.json&quot;`
-         * file with information extracted from all of the required packages' `&quot;package.json&quot;`
+         * file with information extracted from all of the required packages&#39; `&quot;package.json&quot;`
          * files. This can be set to a string when your application is using the
          * (microloader)[#/guide/microloader]. In this case, the string of &quot;foo&quot; will be
          * requested as `&quot;foo.json&quot;` and the object in that JSON file will parsed and set
@@ -290,8 +290,8 @@ var Ext = Ext || {}; // jshint ignore:line
          *
          * @cfg {String/Object} manifest.compatibility An object keyed by package name with
          * the value being to desired compatibility level as a version number. If this is
-         * just a string, this version is assumed to apply to the framework ('ext' or
-         * 'touch'). Setting this value to less than 5 for 'ext' will enable the compatibility
+         * just a string, this version is assumed to apply to the framework (&#39;ext&#39; or
+         * &#39;touch&#39;). Setting this value to less than 5 for &#39;ext&#39; will enable the compatibility
          * layer to assist in the application upgrade process. For details on the upgrade
          * process, see the (Upgrade Guide)[#/guides/upgrade_50].
          *
@@ -299,7 +299,7 @@ var Ext = Ext || {}; // jshint ignore:line
          * of the framework. See `Ext.debugConfig` which is set to this value.
          *
          * @cfg {Object} manifest.packages An object keyed by package name with the value
-         * being a subset of the package's `&quot;package.json&quot;` descriptor.
+         * being a subset of the package&#39;s `&quot;package.json&quot;` descriptor.
          * @since 5.0.0
          */
         manifest: manifest,
@@ -312,7 +312,7 @@ var Ext = Ext || {}; // jshint ignore:line
          *
          *      Ext.debugConfig = {
          *          hooks: {
-         *              '*': true
+         *              &#39;*&#39;: true
          *          }
          *      };
          *
@@ -322,13 +322,13 @@ var Ext = Ext || {}; // jshint ignore:line
          *          &quot;debug&quot;: {
          *              &quot;hooks&quot;: {
          *                  // Default for all namespaces:
-         *                  '*': true,
+         *                  &#39;*&#39;: true,
          *
          *                  // Except for Ext namespace which is disabled
-         *                  'Ext': false,
+         *                  &#39;Ext&#39;: false,
          *
          *                  // Except for Ext.layout namespace which is enabled
-         *                  'Ext.layout': true
+         *                  &#39;Ext.layout&#39;: true
          *              }
          *          }
          *      }
@@ -347,14 +347,14 @@ var Ext = Ext || {}; // jshint ignore:line
          *      };
          *
          * For any class declared, the longest matching namespace specified determines if its
-         * `debugHooks` will be enabled. The default setting is specified by the '*' property.
+         * `debugHooks` will be enabled. The default setting is specified by the &#39;*&#39; property.
          *
          * **NOTE:** This option only applies to debug builds. All debugging is disabled in
          * production builds.
          */
         debugConfig: Ext.debugConfig || manifest.debug || {
             hooks: {
-                '*': true
+                &#39;*&#39;: true
             }
         },
         //&lt;/debug&gt;
@@ -406,10 +406,10 @@ var Ext = Ext || {}; // jshint ignore:line
          * URL to a 1x1 transparent gif image used by Ext to create inline icons with
          * CSS background images.
          */
-        BLANK_IMAGE_URL: 'data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
+        BLANK_IMAGE_URL: &#39;data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==&#39;,
 
 <span id='Ext-method-makeIdSelector'>        /**
-</span>         * Converts an id (`'foo'`) into an id selector (`'#foo'`).  This method is used
+</span>         * Converts an id (`&#39;foo&#39;`) into an id selector (`&#39;#foo&#39;`).  This method is used
          * internally by the framework whenever an id needs to be converted into a selector
          * and is provided as a hook for those that need to escape IDs selectors since,
          * as of Ext 5.0, the framework no longer escapes IDs by default.
@@ -420,10 +420,10 @@ var Ext = Ext || {}; // jshint ignore:line
         makeIdSelector: function(id) {
             //&lt;debug&gt;
             if (!Ext.validIdRe.test(id)) {
-                Ext.raise('Invalid id selector: &quot;' + id + '&quot;');
+                Ext.raise(&#39;Invalid id selector: &quot;&#39; + id + &#39;&quot;&#39;);
             }
             //&lt;/debug&gt;
-            return '#' + id;
+            return &#39;#&#39; + id;
         },
 
 <span id='Ext-method-id'>        /**
@@ -468,17 +468,17 @@ var Ext = Ext || {}; // jshint ignore:line
         emptyString: new String(), // jshint ignore:line
 
 <span id='Ext-property-baseCSSPrefix'>        /**
-</span>         * @property {String} [baseCSSPrefix='x-']
+</span>         * @property {String} [baseCSSPrefix=&#39;x-&#39;]
          * The base prefix to use for all `Ext` components. To configure this property, you should use the
          * Ext.buildSettings object before the framework is loaded:
          *
          *     Ext.buildSettings = {
-         *         baseCSSPrefix : 'abc-'
+         *         baseCSSPrefix : &#39;abc-&#39;
          *     };
          *
          * or you can change it before any components are rendered:
          *
-         *     Ext.baseCSSPrefix = Ext.buildSettings.baseCSSPrefix = 'abc-';
+         *     Ext.baseCSSPrefix = Ext.buildSettings.baseCSSPrefix = &#39;abc-&#39;;
          *
          * This will change what CSS classes components will use and you should
          * then recompile the SASS changing the `$prefix` SASS variable to match.
@@ -508,7 +508,7 @@ var Ext = Ext || {}; // jshint ignore:line
         },
 
 <span id='Ext-method-applyIf'>        /**
-</span>         * Copies all the properties of config to object if they don't already exist.
+</span>         * Copies all the properties of config to object if they don&#39;t already exist.
          * @param {Object} object The receiver of the properties
          * @param {Object} config The source of the properties
          * @return {Object} returns obj
@@ -558,7 +558,7 @@ var Ext = Ext || {}; // jshint ignore:line
 <span id='Ext-method-destroyMembers'>        /**
 </span>         * Destroys the specified named members of the given object using `Ext.destroy`. These
          * properties will be set to `null`.
-         * @param {Object} object The object who's properties you wish to destroy.
+         * @param {Object} object The object who&#39;s properties you wish to destroy.
          * @param {String...} args One or more names of the properties to destroy and remove from the object.
          */
         destroyMembers: function (object) {
@@ -609,13 +609,13 @@ var Ext = Ext || {}; // jshint ignore:line
         override: function (target, overrides) {
             if (target.$isClass) {
                 target.override(overrides);
-            } else if (typeof target === 'function') {
+            } else if (typeof target === &#39;function&#39;) {
                 Ext.apply(target.prototype, overrides);
             } else {
                 var owner = target.self,
                     privates;
 
-                if (owner &amp;&amp; owner.$isClass) { // if (instance of Ext.define'd class)
+                if (owner &amp;&amp; owner.$isClass) { // if (instance of Ext.define&#39;d class)
                     privates = overrides.privates;
                     if (privates) {
                         overrides = Ext.apply({}, overrides);
@@ -633,7 +633,7 @@ var Ext = Ext || {}; // jshint ignore:line
         },
 
 <span id='Ext-method-valueFrom'>        /**
-</span>         * Returns the given value itself if it's not empty, as described in {@link Ext#isEmpty}; returns the default
+</span>         * Returns the given value itself if it&#39;s not empty, as described in {@link Ext#isEmpty}; returns the default
          * value (second argument) otherwise.
          *
          * @param {Object} value The value to test.
@@ -658,7 +658,7 @@ var Ext = Ext || {}; // jshint ignore:line
          * @return {Boolean}
          */
         isEmpty: function(value, allowEmptyString) {
-            return (value == null) || (!allowEmptyString ? value === '' : false) || (Ext.isArray(value) &amp;&amp; value.length === 0);
+            return (value == null) || (!allowEmptyString ? value === &#39;&#39; : false) || (Ext.isArray(value) &amp;&amp; value.length === 0);
         },
 
 <span id='Ext-method-isArray'>        /**
@@ -668,8 +668,8 @@ var Ext = Ext || {}; // jshint ignore:line
          * @return {Boolean}
          * @method
          */
-        isArray: ('isArray' in Array) ? Array.isArray : function(value) {
-            return toString.call(value) === '[object Array]';
+        isArray: (&#39;isArray&#39; in Array) ? Array.isArray : function(value) {
+            return toString.call(value) === &#39;[object Array]&#39;;
         },
 
 <span id='Ext-method-isDate'>        /**
@@ -678,11 +678,11 @@ var Ext = Ext || {}; // jshint ignore:line
          * @return {Boolean}
          */
         isDate: function(value) {
-            return toString.call(value) === '[object Date]';
+            return toString.call(value) === &#39;[object Date]&#39;;
         },
 
 <span id='Ext-method-isMSDate'>        /**
-</span>         * Returns 'true' if the passed value is a String that matches the MS Date JSON
+</span>         * Returns &#39;true&#39; if the passed value is a String that matches the MS Date JSON
          * encoding format.
          * @param {String} value The string to test.
          * @return {Boolean}
@@ -700,13 +700,13 @@ var Ext = Ext || {}; // jshint ignore:line
          * @return {Boolean}
          * @method
          */
-        isObject: (toString.call(null) === '[object Object]') ?
+        isObject: (toString.call(null) === &#39;[object Object]&#39;) ?
         function(value) {
             // check ownerDocument here as well to exclude DOM nodes
-            return value !== null &amp;&amp; value !== undefined &amp;&amp; toString.call(value) === '[object Object]' &amp;&amp; value.ownerDocument === undefined;
+            return value !== null &amp;&amp; value !== undefined &amp;&amp; toString.call(value) === &#39;[object Object]&#39; &amp;&amp; value.ownerDocument === undefined;
         } :
         function(value) {
-            return toString.call(value) === '[object Object]';
+            return toString.call(value) === &#39;[object Object]&#39;;
         },
 
 <span id='Ext-method-isSimpleObject'>        /**
@@ -717,7 +717,7 @@ var Ext = Ext || {}; // jshint ignore:line
         },
 
 <span id='Ext-method-isPrimitive'>        /**
-</span>         * Returns `true` if the passed value is a JavaScript 'primitive', a string, number
+</span>         * Returns `true` if the passed value is a JavaScript &#39;primitive&#39;, a string, number
          * or boolean.
          * @param {Object} value The value to test.
          * @return {Boolean}
@@ -725,7 +725,7 @@ var Ext = Ext || {}; // jshint ignore:line
         isPrimitive: function(value) {
             var type = typeof value;
 
-            return type === 'string' || type === 'number' || type === 'boolean';
+            return type === &#39;string&#39; || type === &#39;number&#39; || type === &#39;boolean&#39;;
         },
 
 <span id='Ext-method-isFunction'>        /**
@@ -735,12 +735,12 @@ var Ext = Ext || {}; // jshint ignore:line
          * @method
          */
         isFunction:
-        // Safari 3.x and 4.x returns 'function' for typeof &lt;NodeList&gt;, hence we need to fall back to using
+        // Safari 3.x and 4.x returns &#39;function&#39; for typeof &lt;NodeList&gt;, hence we need to fall back to using
         // Object.prototype.toString (slower)
-        (typeof document !== 'undefined' &amp;&amp; typeof document.getElementsByTagName('body') === 'function') ? function(value) {
-            return !!value &amp;&amp; toString.call(value) === '[object Function]';
+        (typeof document !== &#39;undefined&#39; &amp;&amp; typeof document.getElementsByTagName(&#39;body&#39;) === &#39;function&#39;) ? function(value) {
+            return !!value &amp;&amp; toString.call(value) === &#39;[object Function]&#39;;
         } : function(value) {
-            return !!value &amp;&amp; typeof value === 'function';
+            return !!value &amp;&amp; typeof value === &#39;function&#39;;
         },
 
 <span id='Ext-method-isNumber'>        /**
@@ -749,12 +749,12 @@ var Ext = Ext || {}; // jshint ignore:line
          * @return {Boolean}
          */
         isNumber: function(value) {
-            return typeof value === 'number' &amp;&amp; isFinite(value);
+            return typeof value === &#39;number&#39; &amp;&amp; isFinite(value);
         },
 
 <span id='Ext-method-isNumeric'>        /**
 </span>         * Validates that a value is numeric.
-         * @param {Object} value Examples: 1, '1', '2.34'
+         * @param {Object} value Examples: 1, &#39;1&#39;, &#39;2.34&#39;
          * @return {Boolean} True if numeric, false otherwise
          */
         isNumeric: function(value) {
@@ -767,7 +767,7 @@ var Ext = Ext || {}; // jshint ignore:line
          * @return {Boolean}
          */
         isString: function(value) {
-            return typeof value === 'string';
+            return typeof value === &#39;string&#39;;
         },
 
 <span id='Ext-method-isBoolean'>        /**
@@ -777,7 +777,7 @@ var Ext = Ext || {}; // jshint ignore:line
          * @return {Boolean}
          */
         isBoolean: function(value) {
-            return typeof value === 'boolean';
+            return typeof value === &#39;boolean&#39;;
         },
 
 <span id='Ext-method-isElement'>        /**
@@ -804,14 +804,14 @@ var Ext = Ext || {}; // jshint ignore:line
          * @return {Boolean}
          */
         isDefined: function(value) {
-            return typeof value !== 'undefined';
+            return typeof value !== &#39;undefined&#39;;
         },
 
 <span id='Ext-method-isIterable'>        /**
 </span>         * Returns `true` if the passed value is iterable, that is, if elements of it are addressable using array
          * notation with numeric indices, `false` otherwise.
          *
-         * Arrays and function `arguments` objects are iterable. Also HTML collections such as `NodeList` and `HTMLCollection'
+         * Arrays and function `arguments` objects are iterable. Also HTML collections such as `NodeList` and `HTMLCollection&#39;
          * are iterable.
          *
          * @param {Object} value The value to test
@@ -819,7 +819,7 @@ var Ext = Ext || {}; // jshint ignore:line
          */
         isIterable: function(value) {
             // To be iterable, the object must have a numeric length property and must not be a string or function.
-            if (!value || typeof value.length !== 'number' || typeof value === 'string' || Ext.isFunction(value)) {
+            if (!value || typeof value.length !== &#39;number&#39; || typeof value === &#39;string&#39; || Ext.isFunction(value)) {
                 return false;
             }
 
@@ -831,8 +831,8 @@ var Ext = Ext || {}; // jshint ignore:line
             }
 
             // If it is a regular, interrogatable JS object (not an IE ActiveX object), then...
-            // If it has its own property called &quot;length&quot;, but not enumerable, it's iterable
-            if (value.hasOwnProperty('length') &amp;&amp; !value.propertyIsEnumerable('length')) {
+            // If it has its own property called &quot;length&quot;, but not enumerable, it&#39;s iterable
+            if (value.hasOwnProperty(&#39;length&#39;) &amp;&amp; !value.propertyIsEnumerable(&#39;length&#39;)) {
                 return true;
             }
 
@@ -856,7 +856,7 @@ var Ext = Ext || {}; // jshint ignore:line
                     return debugConfig[className];
                 }
 
-                var enabled = debugConfig['*'],
+                var enabled = debugConfig[&#39;*&#39;],
                     prefixLength = 0;
 
                 if (defaultEnabled !== undefined) {
@@ -869,8 +869,8 @@ var Ext = Ext || {}; // jshint ignore:line
                 for (var prefix in debugConfig) {
                     var value = debugConfig[prefix];
 
-                    // if prefix=='Ext' match 'Ext.foo.Bar' but not 'Ext4.foo.Bar'
-                    if (className.charAt(prefix.length) === '.') {
+                    // if prefix==&#39;Ext&#39; match &#39;Ext.foo.Bar&#39; but not &#39;Ext4.foo.Bar&#39;
+                    if (className.charAt(prefix.length) === &#39;.&#39;) {
                         if (className.substring(0, prefix.length) === prefix) {
                             if (prefixLength &lt; prefix.length) {
                                 prefixLength = prefix.length;
@@ -887,7 +887,7 @@ var Ext = Ext || {}; // jshint ignore:line
 
 <span id='Ext-method-clone'>        /**
 </span>         * Clone simple variables including array, {}-like objects, DOM nodes and Date without keeping the old reference.
-         * A reference for the object itself is returned if it's not a direct descendant of Object. For model cloning,
+         * A reference for the object itself is returned if it&#39;s not a direct descendant of Object. For model cloning,
          * see {@link Ext.data.Model#copy Model.copy}.
          *
          * @param {Object} item The variable to clone
@@ -910,12 +910,12 @@ var Ext = Ext || {}; // jshint ignore:line
                 i, j, k, clone, key;
 
             // Date
-            if (type === '[object Date]') {
+            if (type === &#39;[object Date]&#39;) {
                 return new Date(item.getTime());
             }
 
             // Array
-            if (type === '[object Array]') {
+            if (type === &#39;[object Array]&#39;) {
                 i = item.length;
 
                 clone = [];
@@ -925,7 +925,7 @@ var Ext = Ext || {}; // jshint ignore:line
                 }
             }
             // Object
-            else if (type === '[object Object]' &amp;&amp; item.constructor === Object) {
+            else if (type === &#39;[object Object]&#39; &amp;&amp; item.constructor === Object) {
                 clone = {};
 
                 for (key in item) {
@@ -957,7 +957,7 @@ var Ext = Ext || {}; // jshint ignore:line
                 i = 0;
 
                 do {
-                    uniqueGlobalNamespace = 'ExtBox' + (++i);
+                    uniqueGlobalNamespace = &#39;ExtBox&#39; + (++i);
                 } while (global[uniqueGlobalNamespace] !== undefined);
 
                 global[uniqueGlobalNamespace] = Ext;
@@ -982,10 +982,10 @@ var Ext = Ext || {}; // jshint ignore:line
                 ln = args.length;
                 if (ln &gt; 0) {
                     ln--;
-                    args[ln] = 'var Ext=window.' + Ext.name + ';' + args[ln];
+                    args[ln] = &#39;var Ext=window.&#39; + Ext.name + &#39;;&#39; + args[ln];
                 }
             }
-            idx = args.join('');
+            idx = args.join(&#39;&#39;);
             fn = cache[idx];
             if (!fn) {
                 fn = Function.prototype.constructor.apply(Function.prototype, args);
@@ -1003,7 +1003,7 @@ var Ext = Ext || {}; // jshint ignore:line
                 ln = args.length;
                 if (ln &gt; 0) {
                     ln--;
-                    args[ln] = 'var Ext=window.' + Ext.name + ';' + args[ln];
+                    args[ln] = &#39;var Ext=window.&#39; + Ext.name + &#39;;&#39; + args[ln];
                 }
             }
 
@@ -1018,26 +1018,26 @@ var Ext = Ext || {}; // jshint ignore:line
             log: function(message, priority) {
                 if (message &amp;&amp; global.console) {
                     if (!priority || !(priority in global.console)) {
-                        priority = 'log';
+                        priority = &#39;log&#39;;
                     }
-                    message = '[' + priority.toUpperCase() + '] ' + message;
+                    message = &#39;[&#39; + priority.toUpperCase() + &#39;] &#39; + message;
                     global.console[priority](message);
                 }
             },
             verbose: function(message) {
-                this.log(message, 'verbose');
+                this.log(message, &#39;verbose&#39;);
             },
             info: function(message) {
-                this.log(message, 'info');
+                this.log(message, &#39;info&#39;);
             },
             warn: function(message) {
-                this.log(message, 'warn');
+                this.log(message, &#39;warn&#39;);
             },
             error: function(message) {
                 throw new Error(message);
             },
             deprecate: function(message) {
-                this.log(message, 'warn');
+                this.log(message, &#39;warn&#39;);
             }
         } || {
         //&lt;/feature&gt;
@@ -1053,7 +1053,7 @@ var Ext = Ext || {}; // jshint ignore:line
         
         ariaWarn: function(target, msg) {
             // The checks still can be disabled by setting Ext.enableAria to false;
-            // this is for backwards compatibility. Also make sure we're not running
+            // this is for backwards compatibility. Also make sure we&#39;re not running
             // under the slicer, warnings are pointless in that case.
             if (Ext.enableAria &amp;&amp; !Ext.slicer) {
                 if (!Ext.ariaWarn.first) {
@@ -1092,7 +1092,7 @@ var Ext = Ext || {}; // jshint ignore:line
                     return [origin];
                 }
     
-                var replaceRe = cache[delimiter] || (cache[delimiter] = new RegExp('\\\\' + delimiter, 'g')),
+                var replaceRe = cache[delimiter] || (cache[delimiter] = new RegExp(&#39;\\\\&#39; + delimiter, &#39;g&#39;)),
                     result = [],
                     parts, part;
     
@@ -1101,7 +1101,7 @@ var Ext = Ext || {}; // jshint ignore:line
                 while ((part = parts.shift()) !== undefined) {
                     // If any of the parts ends with the delimiter that means
                     // the delimiter was escaped and the split was invalid. Roll back.
-                    while (part.charAt(part.length - 1) === '\\' &amp;&amp; parts.length &gt; 0) {
+                    while (part.charAt(part.length - 1) === &#39;\\&#39; &amp;&amp; parts.length &gt; 0) {
                         part = part + delimiter + parts.shift();
                     }
     

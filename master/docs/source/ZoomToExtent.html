@@ -43,14 +43,14 @@
  *
  * @class BasiGX.view.button.ZoomToExtent
  */
-Ext.define('BasiGX.view.button.ZoomToExtent', {
-    extend: 'BasiGX.view.button.Base',
-    xtype: 'basigx-button-zoomtoextent',
+Ext.define(&#39;BasiGX.view.button.ZoomToExtent&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-zoomtoextent&#39;,
 
     requires: [
-        'BasiGX.util.Application',
-        'BasiGX.util.Map',
-        'Ext.app.ViewModel'
+        &#39;BasiGX.util.Application&#39;,
+        &#39;BasiGX.util.Map&#39;,
+        &#39;Ext.app.ViewModel&#39;
     ],
 
 <span id='BasiGX-view-button-ZoomToExtent-property-viewModel'>    /**
@@ -58,10 +58,10 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
      */
     viewModel: {
         data: {
-            tooltip: 'Auf Gesamtansicht zoomen',
+            tooltip: &#39;Auf Gesamtansicht zoomen&#39;,
             text: null,
-            documentation: '&lt;h2&gt;Auf Gesamtansicht zoomen&lt;/h2&gt;• Ein Klick auf ' +
-                'den Button zoomt die Karte auf die Gesamtansicht.'
+            documentation: &#39;&lt;h2&gt;Auf Gesamtansicht zoomen&lt;/h2&gt;• Ein Klick auf &#39; +
+                &#39;den Button zoomt die Karte auf die Gesamtansicht.&#39;
         }
     },
 
@@ -71,10 +71,10 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
      */
     liveDemoConfig: [
         {
-            moveMouseTo: 'basigx-button-zoomtoextent'
+            moveMouseTo: &#39;basigx-button-zoomtoextent&#39;
         },
         {
-            clickOnButton: 'basigx-button-zoomtoextent'
+            clickOnButton: &#39;basigx-button-zoomtoextent&#39;
         }
     ],
 
@@ -82,7 +82,7 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
 </span>     *
      */
     bind: {
-        text: '{text}'
+        text: &#39;{text}&#39;
     },
 
 <span id='BasiGX-view-button-ZoomToExtent-property-olMap'>    /**
@@ -95,7 +95,7 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
 </span>     * The config option `center` is required on instantiation. Also required is
      * either `zoom` or `resolution`, when both are passed, `zoom` will win.
      *
-     * TODO Why can't we pass an extent? This is quite unexpected
+     * TODO Why can&#39;t we pass an extent? This is quite unexpected
      */
     config: {
 <span id='BasiGX-view-button-ZoomToExtent-cfg-center'>        center: null,
@@ -165,8 +165,8 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
 </span>     * The icons the button should use.
      * Classic Toolkit uses glyphs, modern toolkit uses html
      */
-    glyph: 'xf0b2@FontAwesome',
-<span id='BasiGX-view-button-ZoomToExtent-property-html'>    html: '&lt;i class=&quot;fa fa-arrows-alt fa-2x&quot;&gt;&lt;/i&gt;',
+    glyph: &#39;xf0b2@FontAwesome&#39;,
+<span id='BasiGX-view-button-ZoomToExtent-property-html'>    html: &#39;&lt;i class=&quot;fa fa-arrows-alt fa-2x&quot;&gt;&lt;/i&gt;&#39;,
 </span>
 <span id='BasiGX-view-button-ZoomToExtent-method-constructor'>    /**
 </span>     *
@@ -177,8 +177,8 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
 
         if (me.getZoom() !== null &amp;&amp; me.getResolution() !== null) {
             Ext.raise(
-                'Both zoom and resolution set for ZoomToExtent button. ' +
-                'Please choose one.'
+                &#39;Both zoom and resolution set for ZoomToExtent button. &#39; +
+                &#39;Please choose one.&#39;
             );
         }
 

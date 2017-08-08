@@ -48,102 +48,102 @@
  * ## Example Usage
  *
  *     @example
- *     Ext.define('TestResult', {
- *         extend: 'Ext.data.Model',
- *         fields: ['student', {
- *             name: 'mark',
- *             type: 'int'
+ *     Ext.define(&#39;TestResult&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;student&#39;, {
+ *             name: &#39;mark&#39;,
+ *             type: &#39;int&#39;
  *         }]
  *     });
  *
- *     Ext.create('Ext.grid.Panel', {
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
  *         width: 400,
  *         height: 200,
- *         title: 'Summary Test',
- *         style: 'padding: 20px',
+ *         title: &#39;Summary Test&#39;,
+ *         style: &#39;padding: 20px&#39;,
  *         renderTo: document.body,
  *         features: [{
- *             ftype: 'summary'
+ *             ftype: &#39;summary&#39;
  *         }],
  *         store: {
- *             model: 'TestResult',
+ *             model: &#39;TestResult&#39;,
  *             data: [{
- *                 student: 'Student 1',
+ *                 student: &#39;Student 1&#39;,
  *                 mark: 84
  *             },{
- *                 student: 'Student 2',
+ *                 student: &#39;Student 2&#39;,
  *                 mark: 72
  *             },{
- *                 student: 'Student 3',
+ *                 student: &#39;Student 3&#39;,
  *                 mark: 96
  *             },{
- *                 student: 'Student 4',
+ *                 student: &#39;Student 4&#39;,
  *                 mark: 68
  *             }]
  *         },
  *         columns: [{
- *             dataIndex: 'student',
- *             text: 'Name',
- *             summaryType: 'count',
+ *             dataIndex: &#39;student&#39;,
+ *             text: &#39;Name&#39;,
+ *             summaryType: &#39;count&#39;,
  *             summaryRenderer: function(value, summaryData, dataIndex) {
- *                 return Ext.String.format('{0} student{1}', value, value !== 1 ? 's' : '');
+ *                 return Ext.String.format(&#39;{0} student{1}&#39;, value, value !== 1 ? &#39;s&#39; : &#39;&#39;);
  *             }
  *         }, {
- *             dataIndex: 'mark',
- *             text: 'Mark',
- *             summaryType: 'average'
+ *             dataIndex: &#39;mark&#39;,
+ *             text: &#39;Mark&#39;,
+ *             summaryType: &#39;average&#39;
  *         }]
  *     });
  */
-Ext.define('Ext.grid.feature.Summary', {
+Ext.define(&#39;Ext.grid.feature.Summary&#39;, {
 
     /* Begin Definitions */
 
-    extend: 'Ext.grid.feature.AbstractSummary',
+    extend: &#39;Ext.grid.feature.AbstractSummary&#39;,
 
-    alias: 'feature.summary',
+    alias: &#39;feature.summary&#39;,
 
 <span id='Ext-grid-feature-Summary-cfg-dock'>    /**
 </span>     * @cfg {String} dock
-     * Configure `'top'` or `'bottom'` top create a fixed summary row either above or below the scrollable table.
+     * Configure `&#39;top&#39;` or `&#39;bottom&#39;` top create a fixed summary row either above or below the scrollable table.
      *
      */
     dock: undefined,
 
-<span id='Ext-grid-feature-Summary-property-summaryItemCls'>    summaryItemCls: Ext.baseCSSPrefix + 'grid-row-summary-item',
-</span><span id='Ext-grid-feature-Summary-property-dockedSummaryCls'>    dockedSummaryCls: Ext.baseCSSPrefix + 'docked-summary',
+<span id='Ext-grid-feature-Summary-property-summaryItemCls'>    summaryItemCls: Ext.baseCSSPrefix + &#39;grid-row-summary-item&#39;,
+</span><span id='Ext-grid-feature-Summary-property-dockedSummaryCls'>    dockedSummaryCls: Ext.baseCSSPrefix + &#39;docked-summary&#39;,
 </span>
-<span id='Ext-grid-feature-Summary-property-panelBodyCls'>    panelBodyCls: Ext.baseCSSPrefix + 'summary-',
+<span id='Ext-grid-feature-Summary-property-panelBodyCls'>    panelBodyCls: Ext.baseCSSPrefix + &#39;summary-&#39;,
 </span>
 <span id='Ext-grid-feature-Summary-property-hasFeatureEvent'>    // turn off feature events.
 </span>    hasFeatureEvent: false,
 
 <span id='Ext-grid-feature-Summary-property-fullSummaryTpl'>    fullSummaryTpl: [
-</span>        '{%',
-            'var me = this.summaryFeature,',
-            '    record = me.summaryRecord,',
-            '    view = values.view,',
-            '    bufferedRenderer = view.bufferedRenderer;',
+</span>        &#39;{%&#39;,
+            &#39;var me = this.summaryFeature,&#39;,
+            &#39;    record = me.summaryRecord,&#39;,
+            &#39;    view = values.view,&#39;,
+            &#39;    bufferedRenderer = view.bufferedRenderer;&#39;,
 
-            'this.nextTpl.applyOut(values, out, parent);',
+            &#39;this.nextTpl.applyOut(values, out, parent);&#39;,
             
-            'if (!me.disabled &amp;&amp; me.showSummaryRow &amp;&amp;',
-                '!view.addingRows &amp;&amp; view.store.isLast(values.record)) {',
-                'if (bufferedRenderer) {',
-                '    bufferedRenderer.variableRowHeight = true;',
-                '}',
-                'me.outputSummaryRecord((record &amp;&amp; record.isModel) ? record : me.createSummaryRecord(view), values, out, parent);',
-            '}',
-        '%}', {
+            &#39;if (!me.disabled &amp;&amp; me.showSummaryRow &amp;&amp;&#39;,
+                &#39;!view.addingRows &amp;&amp; view.store.isLast(values.record)) {&#39;,
+                &#39;if (bufferedRenderer) {&#39;,
+                &#39;    bufferedRenderer.variableRowHeight = true;&#39;,
+                &#39;}&#39;,
+                &#39;me.outputSummaryRecord((record &amp;&amp; record.isModel) ? record : me.createSummaryRecord(view), values, out, parent);&#39;,
+            &#39;}&#39;,
+        &#39;%}&#39;, {
             priority: 300,
 
             beginRowSync: function (rowSync) {
-                rowSync.add('fullSummary', this.summaryFeature.summaryRowSelector);
+                rowSync.add(&#39;fullSummary&#39;, this.summaryFeature.summaryRowSelector);
             },
 
             syncContent: function(destRow, sourceRow, columnsToUpdate) {
-                destRow = Ext.fly(destRow, 'syncDest');
-                sourceRow = Ext.fly(sourceRow, 'sycSrc');
+                destRow = Ext.fly(destRow, &#39;syncDest&#39;);
+                sourceRow = Ext.fly(sourceRow, &#39;sycSrc&#39;);
                 var summaryFeature = this.summaryFeature,
                     selector = summaryFeature.summaryRowSelector,
                     destSummaryRow = destRow.down(selector, true),
@@ -184,28 +184,28 @@ Ext.define('Ext.grid.feature.Summary', {
                         tableCls[tableCls.length] = view.ownerCt.colLinesCls;
                     }
                     me.summaryBar = grid.addDocked({
-                        childEls: ['innerCt', 'item'],
+                        childEls: [&#39;innerCt&#39;, &#39;item&#39;],
                         renderTpl: [
-                            '&lt;div id=&quot;{id}-innerCt&quot; data-ref=&quot;innerCt&quot; role=&quot;presentation&quot;&gt;',
-                                '&lt;table id=&quot;{id}-item&quot; data-ref=&quot;item&quot; cellPadding=&quot;0&quot; cellSpacing=&quot;0&quot; class=&quot;' + tableCls.join(' ') + '&quot;&gt;',
-                                    '&lt;tr class=&quot;' + me.summaryRowCls + '&quot;&gt;&lt;/tr&gt;',
-                                '&lt;/table&gt;',
-                            '&lt;/div&gt;'
+                            &#39;&lt;div id=&quot;{id}-innerCt&quot; data-ref=&quot;innerCt&quot; role=&quot;presentation&quot;&gt;&#39;,
+                                &#39;&lt;table id=&quot;{id}-item&quot; data-ref=&quot;item&quot; cellPadding=&quot;0&quot; cellSpacing=&quot;0&quot; class=&quot;&#39; + tableCls.join(&#39; &#39;) + &#39;&quot;&gt;&#39;,
+                                    &#39;&lt;tr class=&quot;&#39; + me.summaryRowCls + &#39;&quot;&gt;&lt;/tr&gt;&#39;,
+                                &#39;&lt;/table&gt;&#39;,
+                            &#39;&lt;/div&gt;&#39;
                         ],
                         scrollable: {
                             x: false,
                             y: false
                         },
                         hidden: !me.showSummaryRow,
-                        itemId: 'summaryBar',
-                        cls: [ me.dockedSummaryCls, me.dockedSummaryCls + '-' + dock ],
-                        xtype: 'component',
+                        itemId: &#39;summaryBar&#39;,
+                        cls: [ me.dockedSummaryCls, me.dockedSummaryCls + &#39;-&#39; + dock ],
+                        xtype: &#39;component&#39;,
                         dock: dock,
                         weight: 10000000
                     })[0];
                 },
                 afterrender: function() {
-                    grid.getView().getScrollable().addPartner(me.summaryBar.getScrollable(), 'x');
+                    grid.getView().getScrollable().addPartner(me.summaryBar.getScrollable(), &#39;x&#39;);
                     me.onStoreUpdate();
                 },
                 single: true
@@ -228,8 +228,8 @@ Ext.define('Ext.grid.feature.Summary', {
         } else {
             if (grid.bufferedRenderer) {
                 me.wrapsItem = true;
-                view.addRowTpl(Ext.XTemplate.getTpl(me, 'fullSummaryTpl')).summaryFeature = me;
-                view.on('refresh', me.onViewRefresh, me);
+                view.addRowTpl(Ext.XTemplate.getTpl(me, &#39;fullSummaryTpl&#39;)).summaryFeature = me;
+                view.on(&#39;refresh&#39;, me.onViewRefresh, me);
             } else {
                 me.wrapsItem = false;
                 me.view.addFooterFn(me.renderSummaryRow);
@@ -268,16 +268,16 @@ Ext.define('Ext.grid.feature.Summary', {
 
 <span id='Ext-grid-feature-Summary-method-renderSummaryRow'>    renderSummaryRow: function(values, out, parent) {
 </span>        var view = values.view,
-            me = view.findFeature('summary'),
+            me = view.findFeature(&#39;summary&#39;),
             record, rows;
 
-        // If we get to here we won't be buffered
+        // If we get to here we won&#39;t be buffered
         if (!me.disabled &amp;&amp; me.showSummaryRow &amp;&amp; !view.addingRows &amp;&amp; !view.updatingRows) {
             record = me.summaryRecord;
 
-            out.push('&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; class=&quot;' +  me.summaryItemCls + '&quot; style=&quot;table-layout: fixed; width: 100%;&quot;&gt;');
+            out.push(&#39;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; class=&quot;&#39; +  me.summaryItemCls + &#39;&quot; style=&quot;table-layout: fixed; width: 100%;&quot;&gt;&#39;);
             me.outputSummaryRecord((record &amp;&amp; record.isModel) ? record : me.createSummaryRecord(view), values, out, parent);
-            out.push('&lt;/table&gt;');
+            out.push(&#39;&lt;/table&gt;&#39;);
         }
     },
 
@@ -306,17 +306,17 @@ Ext.define('Ext.grid.feature.Summary', {
             return null;
         }
         
-        row = nodeContainer.down('.' + placeholderCls, true);
+        row = nodeContainer.down(&#39;.&#39; + placeholderCls, true);
         
         if (!row) {
             row = nodeContainer.createChild({
-                tag: 'table',
+                tag: &#39;table&#39;,
                 cellpadding: 0,
                 cellspacing: 0,
                 cls: placeholderCls,
-                style: 'table-layout: fixed; width: 100%',
+                style: &#39;table-layout: fixed; width: 100%&#39;,
                 children: [{
-                    tag: 'tbody' // Ensure tBodies property is present on the row
+                    tag: &#39;tbody&#39; // Ensure tBodies property is present on the row
                 }]
             }, false, true);
         }
@@ -337,7 +337,7 @@ Ext.define('Ext.grid.feature.Summary', {
             record, row;
 
         // Only add this listener if in buffered mode, if there are no rows then
-        // we won't have anything rendered, so we need to push the row in here
+        // we won&#39;t have anything rendered, so we need to push the row in here
         if (!me.disabled &amp;&amp; me.showSummaryRow &amp;&amp; !view.all.getCount()) {
             record = me.createSummaryRecord(view);
             row = me.getSummaryRowPlaceholder(view);
@@ -355,7 +355,7 @@ Ext.define('Ext.grid.feature.Summary', {
 
         if (!summaryRecord) {
             modelData = {
-                id: view.id + '-summary-record'
+                id: view.id + &#39;-summary-record&#39;
             };
             summaryRecord = me.summaryRecord = new Ext.data.Model(modelData);
         }
@@ -374,7 +374,7 @@ Ext.define('Ext.grid.feature.Summary', {
             for (i = 0; i &lt; colCount; i++) {
                 column = columns[i];
 
-                // In summary records, if there's no dataIndex, then the value in regular rows must come from a renderer.
+                // In summary records, if there&#39;s no dataIndex, then the value in regular rows must come from a renderer.
                 // We set the data value in using the column ID.
                 dataIndex = column.dataIndex || column.getItemId();
 
@@ -389,7 +389,7 @@ Ext.define('Ext.grid.feature.Summary', {
         }
 
         summaryRecord.endEdit(true);
-        // It's not dirty
+        // It&#39;s not dirty
         summaryRecord.commit(true);
         summaryRecord.isSummary = true;
 
@@ -422,11 +422,11 @@ Ext.define('Ext.grid.feature.Summary', {
             p.insertBefore(newRowDom, oldRowDom);
             p.removeChild(oldRowDom);
 
-            // If docked, the updated row will need sizing because it's outside the View
+            // If docked, the updated row will need sizing because it&#39;s outside the View
             me.onColumnHeaderLayout();
         }
         // Summary row is a regular row in a THEAD inside the View.
-        // Downlinked through the summary record's ID
+        // Downlinked through the summary record&#39;s ID
         else {
             oldRowDom = view.el.down(selector, true);
             p = oldRowDom &amp;&amp; oldRowDom.parentNode;
@@ -435,7 +435,7 @@ Ext.define('Ext.grid.feature.Summary', {
                 p.removeChild(oldRowDom);
             }
             
-            // We're always inserting the new summary row into the last rendered row,
+            // We&#39;re always inserting the new summary row into the last rendered row,
             // unless no rows exist. In that case we will be appending to the special
             // placeholder in the node container.
             p = view.getRow(view.all.last());

@@ -22,41 +22,41 @@
  *
  *     var myFormPanel = new Ext.form.Panel({
  *         // configs for FormPanel
- *         title: 'Basic Information',
+ *         title: &#39;Basic Information&#39;,
  *         renderTo: document.body,
  *         width: 300, height: 160,
  *         padding: 10,
  *
  *         // configs apply to child items
- *         defaults: {anchor: '100%'},
- *         defaultType: 'textfield',
+ *         defaults: {anchor: &#39;100%&#39;},
+ *         defaultType: &#39;textfield&#39;,
  *         items: [{
- *             fieldLabel: 'Name',
- *             name: 'name'
+ *             fieldLabel: &#39;Name&#39;,
+ *             name: &#39;name&#39;
  *         },{
- *             fieldLabel: 'Email',
- *             name: 'email'
+ *             fieldLabel: &#39;Email&#39;,
+ *             name: &#39;email&#39;
  *         },{
- *             fieldLabel: 'Company',
- *             name: 'company'
+ *             fieldLabel: &#39;Company&#39;,
+ *             name: &#39;company&#39;
  *         }],
  *
  *         // configs for BasicForm
  *         api: {
  *             // The server-side method to call for load() requests
- *             load: 'Profile.getBasicInfo',
- *             // The server-side must mark the submit handler as a 'formHandler'
- *             submit: 'Profile.updateBasicInfo'
+ *             load: &#39;Profile.getBasicInfo&#39;,
+ *             // The server-side must mark the submit handler as a &#39;formHandler&#39;
+ *             submit: &#39;Profile.updateBasicInfo&#39;
  *         },
  *         // specify the order for the passed params
- *         paramOrder: ['uid', 'foo']
+ *         paramOrder: [&#39;uid&#39;, &#39;foo&#39;]
  *     });
  *
  *     // load the form
  *     myFormPanel.getForm().load({
  *         // pass 2 arguments to server side getBasicInfo method (len=2)
  *         params: {
- *             foo: 'bar',
+ *             foo: &#39;bar&#39;,
  *             uid: 34
  *         }
  *     });
@@ -66,20 +66,20 @@
  *
  * For corresponding submit action, see {@link Ext.form.action.DirectSubmit}.
  */
-Ext.define('Ext.form.action.DirectLoad', {
-    extend:'Ext.form.action.Load',
-    alternateClassName: 'Ext.form.Action.DirectLoad',
-    alias: 'formaction.directload',
+Ext.define(&#39;Ext.form.action.DirectLoad&#39;, {
+    extend:&#39;Ext.form.action.Load&#39;,
+    alternateClassName: &#39;Ext.form.Action.DirectLoad&#39;,
+    alias: &#39;formaction.directload&#39;,
     
     requires: [
-        'Ext.direct.Manager'
+        &#39;Ext.direct.Manager&#39;
     ],
     
     mixins: [
-        'Ext.form.action.DirectAction'
+        &#39;Ext.form.action.DirectAction&#39;
     ],
 
-<span id='Ext-form-action-DirectLoad-property-type'>    type: 'directload',
+<span id='Ext-form-action-DirectLoad-property-type'>    type: &#39;directload&#39;,
 </span>
 <span id='Ext-form-action-DirectLoad-method-run'>    run: function() {
 </span>        var me = this,
@@ -88,7 +88,7 @@ Ext.define('Ext.form.action.DirectLoad', {
             timeout = me.timeout || form.timeout,
             args, fn;
         
-        fn = me.resolveMethod('load');
+        fn = me.resolveMethod(&#39;load&#39;);
         
         args = fn.directCfg.method.getArgs({
             params: me.getParams(),

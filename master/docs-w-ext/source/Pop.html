@@ -18,12 +18,12 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-animation-Pop'>/**
 </span> * @private
  */
-Ext.define('Ext.fx.animation.Pop', {
-    extend: 'Ext.fx.animation.Abstract',
+Ext.define(&#39;Ext.fx.animation.Pop&#39;, {
+    extend: &#39;Ext.fx.animation.Abstract&#39;,
 
-    alias: ['animation.pop', 'animation.popIn'],
+    alias: [&#39;animation.pop&#39;, &#39;animation.popIn&#39;],
 
-    alternateClassName: 'Ext.fx.animation.PopIn',
+    alternateClassName: &#39;Ext.fx.animation.PopIn&#39;,
 
     config: {
 <span id='Ext-fx-animation-Pop-cfg-out'>        /**
@@ -47,23 +47,23 @@ Ext.define('Ext.fx.animation.Pop', {
             out = this.getOut();
 
         if (out) {
-            from.set('opacity', 1);
+            from.set(&#39;opacity&#39;, 1);
             from.setTransform({
                 scale: 1
             });
 
-            to.set('opacity', 0);
+            to.set(&#39;opacity&#39;, 0);
             to.setTransform({
                 scale: 0
             });
         }
         else {
-            from.set('opacity', 0);
+            from.set(&#39;opacity&#39;, 0);
             from.setTransform({
                 scale: 0
             });
 
-            to.set('opacity', 1);
+            to.set(&#39;opacity&#39;, 1);
             to.setTransform({
                 scale: 1
             });

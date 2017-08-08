@@ -24,7 +24,7 @@
  * @private
  * @since 5.1.1
  */
-Ext.define('Ext.util.Bag', {
+Ext.define(&#39;Ext.util.Bag&#39;, {
 <span id='Ext-util-Bag-property-isBag'>    isBag: true,
 </span>
 <span id='Ext-util-Bag-method-constructor'>    constructor: function () {
@@ -232,16 +232,16 @@ Ext.define('Ext.util.Bag', {
             if (newKey in map &amp;&amp; me.getAt(map[newKey]) !== item) {
                 // There is a different item in the map with the newKey which is an
                 // error. To properly handle this, add the item instead.
-                Ext.raise('Duplicate newKey &quot;' + newKey +
-                                '&quot; for item with oldKey &quot;' + oldKey + '&quot;');
+                Ext.raise(&#39;Duplicate newKey &quot;&#39; + newKey +
+                                &#39;&quot; for item with oldKey &quot;&#39; + oldKey + &#39;&quot;&#39;);
             }
 
             if (oldKey in map &amp;&amp; me.getAt(map[oldKey]) !== item) {
                 // There is a different item in the map with the oldKey which is also
                 // an error. Do not call this method for items that are not part of
                 // the collection.
-                Ext.raise('Incorrect oldKey &quot;' + oldKey +
-                                '&quot; for item with newKey &quot;' + newKey + '&quot;');
+                Ext.raise(&#39;Incorrect oldKey &quot;&#39; + oldKey +
+                                &#39;&quot; for item with newKey &quot;&#39; + newKey + &#39;&quot;&#39;);
             }
         }
         //&lt;/debug&gt;

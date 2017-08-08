@@ -22,15 +22,15 @@
  *
  * Some examples: Toolbars, Tab bars, Panel headers, Menus
  */
-Ext.define('Ext.util.FocusableContainer', {
-    extend: 'Ext.Mixin',
+Ext.define(&#39;Ext.util.FocusableContainer&#39;, {
+    extend: &#39;Ext.Mixin&#39;,
     
     requires: [
-        'Ext.util.KeyNav'
+        &#39;Ext.util.KeyNav&#39;
     ],
     
 <span id='Ext-util-FocusableContainer-property-mixinConfig'>    mixinConfig: {
-</span>        id: 'focusablecontainer',
+</span>        id: &#39;focusablecontainer&#39;,
         
         // The methods listed below are injected into the parent class
         // via special mixin mechanism, which makes them hard to override
@@ -39,16 +39,16 @@ Ext.define('Ext.util.FocusableContainer', {
         // method that is not special in any way and can be easily overridden.
         // The actual logic should go into the second part.
         before: {
-            onAdd: 'onFocusableChildAdd',
-            onRemove: 'onFocusableChildRemove',
-            doDestroy: 'destroyFocusableContainer',
-            onFocusEnter: 'onFocusEnter'
+            onAdd: &#39;onFocusableChildAdd&#39;,
+            onRemove: &#39;onFocusableChildRemove&#39;,
+            doDestroy: &#39;destroyFocusableContainer&#39;,
+            onFocusEnter: &#39;onFocusEnter&#39;
         },
         
         after: {
-            afterRender: 'initFocusableContainer',
-            onFocusLeave: 'onFocusLeave',
-            afterShow: 'activateFocusableContainer'
+            afterRender: &#39;initFocusableContainer&#39;,
+            onFocusLeave: &#39;onFocusLeave&#39;,
+            afterShow: &#39;activateFocusableContainer&#39;
         }
     },
     
@@ -86,7 +86,7 @@ Ext.define('Ext.util.FocusableContainer', {
      * that FocusableContainer should bind its keyboard handler to. Similar to {@link #ariaEl},
      * this name is resolved to the {@link #Ext.dom.Element} instance after rendering.
      */
-    focusableContainerEl: 'el',
+    focusableContainerEl: &#39;el&#39;,
     
 <span id='Ext-util-FocusableContainer-property-tabGuard'>    tabGuard: true,
 </span>    
@@ -95,7 +95,7 @@ Ext.define('Ext.util.FocusableContainer', {
             var items, i, len;
             
             // Allow nested containers to optionally disable
-            // children containers' behavior
+            // children containers&#39; behavior
             if (this.enableFocusableContainer) {
                 clearChildren = clearChildren != null ? clearChildren : true;
                 this.doInitFocusableContainer(clearChildren);
@@ -104,7 +104,7 @@ Ext.define('Ext.util.FocusableContainer', {
             // A FocusableContainer instance such as a toolbar could have decided
             // to opt out of FC behavior for some reason; it could have happened
             // after all or almost all child items have been initialized with
-            // focusableContainer reference. We need to clean this up if we're not
+            // focusableContainer reference. We need to clean this up if we&#39;re not
             // going to behave like a FocusableContainer after all.
             else {
                 items = this.getFocusables();
@@ -123,7 +123,7 @@ Ext.define('Ext.util.FocusableContainer', {
             // This flag allows post factum initialization of the focusable container,
             // i.e. when container was empty initially and then some tabbable children
             // were added and we need to clear their tabIndices after priming our own
-            // tab guard elements' tabIndex.
+            // tab guard elements&#39; tabIndex.
             // This is useful for Panel and Window headers that might have tools
             // added dynamically.
             if (clearChildren) {
@@ -131,8 +131,8 @@ Ext.define('Ext.util.FocusableContainer', {
             }
             
             // If we have no potentially focusable children, or all potentially focusable
-            // children are presently disabled, don't init the container tab guards.
-            // There is no point in tabbing into container when it can't shift focus
+            // children are presently disabled, don&#39;t init the container tab guards.
+            // There is no point in tabbing into container when it can&#39;t shift focus
             // to a child.
             child = me.findNextFocusableChild({ step: 1, beforeRender: true });
             
@@ -149,13 +149,13 @@ Ext.define('Ext.util.FocusableContainer', {
                 me.activateFocusableContainer(false);
             }
 
-            // Resolve property name to the actual Element instance if it hasn't been
+            // Resolve property name to the actual Element instance if it hasn&#39;t been
             // resolved already; doInitFocusableContainer can be called more than once
             if (!el.isElement) {
                 el = me.focusableContainerEl = me[el];
             }
             
-            // Having keyNav doesn't hurt when container el is not focusable
+            // Having keyNav doesn&#39;t hurt when container el is not focusable
             me.focusableKeyNav = me.createFocusableContainerKeyNav(el);
         },
         
@@ -163,7 +163,7 @@ Ext.define('Ext.util.FocusableContainer', {
             var me = this;
             
             return new Ext.util.KeyNav(el, {
-                eventName: 'keydown',
+                eventName: &#39;keydown&#39;,
                 ignoreInputFields: true,
                 scope: me,
 
@@ -206,7 +206,7 @@ Ext.define('Ext.util.FocusableContainer', {
             }
 
             // Check if any child Focusable is already active.
-            // Note that we're not determining *which* focusable child
+            // Note that we&#39;re not determining *which* focusable child
             // to focus here, ONLY that we have some focusables.
             for (i = 0; i &lt; len; i++) {
                 item = items[i];
@@ -276,12 +276,12 @@ Ext.define('Ext.util.FocusableContainer', {
             activate = activate != null ? activate : true;
             
             if (activate) {
-                beforeGuard.dom.setAttribute('tabIndex', me.activeChildTabIndex);
-                afterGuard.dom.setAttribute('tabIndex', me.activeChildTabIndex);
+                beforeGuard.dom.setAttribute(&#39;tabIndex&#39;, me.activeChildTabIndex);
+                afterGuard.dom.setAttribute(&#39;tabIndex&#39;, me.activeChildTabIndex);
             }
             else {
-                beforeGuard.dom.removeAttribute('tabIndex');
-                afterGuard.dom.removeAttribute('tabIndex');
+                beforeGuard.dom.removeAttribute(&#39;tabIndex&#39;);
+                afterGuard.dom.removeAttribute(&#39;tabIndex&#39;);
             }
         },
 
@@ -373,15 +373,15 @@ Ext.define('Ext.util.FocusableContainer', {
             // the first focusable child from either end (depending on step)
             idx = Ext.Array.indexOf(items, child);
             
-            // It's often easier to pass a boolean for 1/-1
+            // It&#39;s often easier to pass a boolean for 1/-1
             step = step === true ? 1 : step === false ? -1 : step;
         
             len = items.length;
             i   = step &gt; 0 ? (idx &lt; len ? idx + step : 0) : (idx &gt; 0 ? idx + step : len - 1);
         
             for (;; i += step) {
-                // We're looking for the first or last focusable child
-                // and we've reached the end of the items, so punt
+                // We&#39;re looking for the first or last focusable child
+                // and we&#39;ve reached the end of the items, so punt
                 if (idx &lt; 0 &amp;&amp; (i &gt;= len || i &lt; 0)) {
                     return null;
                 }
@@ -411,11 +411,11 @@ Ext.define('Ext.util.FocusableContainer', {
                 
                 // This loop can be run either at FocusableContainer init time,
                 // or later when we need to navigate upon pressing an arrow key.
-                // When we're navigating, we have to know exactly if the child is
+                // When we&#39;re navigating, we have to know exactly if the child is
                 // focusable or not, hence only rendered children will make the cut.
                 // At the init time item.isFocusable() may return false incorrectly
                 // just because the item has not been rendered yet and its focusEl
-                // is not defined, so we don't bother to call isFocusable and return
+                // is not defined, so we don&#39;t bother to call isFocusable and return
                 // the first potentially focusable child.
                 if (beforeRender || (item.isFocusable &amp;&amp; item.isFocusable())) {
                     return item;
@@ -467,7 +467,7 @@ Ext.define('Ext.util.FocusableContainer', {
             // and it is possible that either the container gained focus or one
             // of its tab guards gained focus. In either case we need to focus
             // a child instead, if such a child can be found. However if a child
-            // is not found we don't want to disturb focus state by deactivating
+            // is not found we don&#39;t want to disturb focus state by deactivating
             // tab guards and potentially throwing focus to the document body.
             if (target === me) {
                 child = me.initDefaultFocusable();
@@ -564,7 +564,7 @@ Ext.define('Ext.util.FocusableContainer', {
                 // Some FocusableContainers such as Grid header containers and Tab bars
                 // need to be inactive and out of tab order when containing no children.
                 // When at least one child is added we need to activate the tab guards;
-                // we don't want to do that while bulk adding is done in initItems()
+                // we don&#39;t want to do that while bulk adding is done in initItems()
                 // because of performance reasons.
                 if (!me.$initingItems &amp;&amp; !me.isFocusableContainerActive()) {
                     me.activateFocusableContainer(true);
@@ -592,7 +592,7 @@ Ext.define('Ext.util.FocusableContainer', {
             }
             
             // If we have removed the last child we need to deactivate
-            // tab guards so that our FocusableContainer won't remain
+            // tab guards so that our FocusableContainer won&#39;t remain
             // in tab order.
             child = me.findNextFocusableChild({ step: 1, beforeRender: true });
             
@@ -614,7 +614,7 @@ Ext.define('Ext.util.FocusableContainer', {
             // when they start their lifecycle disabled, or remove tabIndex
             // if they get disabled later. Subsequently, such Components will
             // reset their tabIndex to default configured value upon enabling.
-            // We don't want these children to be tabbable so we reset their
+            // We don&#39;t want these children to be tabbable so we reset their
             // tabIndex yet again, unless this child is the last focused one.
             if (child !== me.lastFocusedChild) {
                 me.deactivateFocusable(child);
@@ -638,14 +638,14 @@ Ext.define('Ext.util.FocusableContainer', {
             // will remove tabIndex attribute upon disabling, which
             // in turn will throw focus to the document body and cause
             // onFocusLeave to fire on the FocusableContainer.
-            // We're focusing the next sibling to prevent that.
+            // We&#39;re focusing the next sibling to prevent that.
             if (child.hasFocus) {
                 nextTarget = me.findNextFocusableChild({ child: child }) ||
                              child.findFocusTarget();
                 
                 // Note that it is entirely possible not to find the nextTarget,
-                // e.g. when we're disabling the last button in a toolbar rendered
-                // directly into document body. We don't have a good way to handle
+                // e.g. when we&#39;re disabling the last button in a toolbar rendered
+                // directly into document body. We don&#39;t have a good way to handle
                 // such cases at present.
                 if (nextTarget) {
                     nextTarget.focus();

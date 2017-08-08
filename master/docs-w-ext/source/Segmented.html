@@ -17,40 +17,40 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-button-Segmented'>/**
 </span> * SegmentedButton is a container for a group of {@link Ext.button.Button Button}s.  You 
- * may populate the segmented button's children by adding buttons to the items config.  The segmented 
- * button's children enjoy the same customizations as regular buttons, such as 
+ * may populate the segmented button&#39;s children by adding buttons to the items config.  The segmented 
+ * button&#39;s children enjoy the same customizations as regular buttons, such as 
  * menu, tooltip, etc.  You can see usages of the various configuration
  * possibilities in the example below.
  *
  *     @example @preview 
- *     Ext.create('Ext.button.Segmented', {            
+ *     Ext.create(&#39;Ext.button.Segmented&#39;, {            
  *          renderTo: Ext.getBody(),
  *          allowMultiple: true,
  *          items: [{
- *               text: 'Segment Item 1',
+ *               text: &#39;Segment Item 1&#39;,
  *               menu: [{
- *                   text: 'Menu Item 1'
+ *                   text: &#39;Menu Item 1&#39;
  *               }]
  *          },{
- *               text: 'Segment Item 2',
- *               tooltip: 'My custom tooltip'
+ *               text: &#39;Segment Item 2&#39;,
+ *               tooltip: &#39;My custom tooltip&#39;
  *          },{
- *               text: 'Segment Item 3'
+ *               text: &#39;Segment Item 3&#39;
  *          }],
  *          listeners: {
  *               toggle: function(container, button, pressed) {
- *                    console.log(&quot;User toggled the '&quot; + button.text + &quot;' button: &quot; + (pressed ? 'on' : 'off'));
+ *                    console.log(&quot;User toggled the &#39;&quot; + button.text + &quot;&#39; button: &quot; + (pressed ? &#39;on&#39; : &#39;off&#39;));
  *               }
  *          }
  *     });
  * 
  */
-Ext.define('Ext.button.Segmented', {
-    extend: 'Ext.container.Container',
-    xtype: 'segmentedbutton',
+Ext.define(&#39;Ext.button.Segmented&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
+    xtype: &#39;segmentedbutton&#39;,
     requires: [ 
-        'Ext.button.Button',
-        'Ext.layout.container.SegmentedButton'
+        &#39;Ext.button.Button&#39;,
+        &#39;Ext.layout.container.SegmentedButton&#39;
     ],
 
     config: {
@@ -94,7 +94,7 @@ Ext.define('Ext.button.Segmented', {
          * Default {@link Ext.Component#ui ui} to use for buttons in this segmented button.
          * Buttons can override this default by specifying their own UI
          */
-        defaultUI: 'default'
+        defaultUI: &#39;default&#39;
     },
 
 <span id='Ext-button-Segmented-property-beforeRenderConfig'>    beforeRenderConfig: {
@@ -103,47 +103,47 @@ Ext.define('Ext.button.Segmented', {
          * @accessor
          * The value of this button.  When {@link #allowMultiple} is `false`, value is a
          * String or Number.  When {@link #allowMultiple is `true`, value is an array
-         * of values.  A value corresponds to a child button's {@link Ext.button.Button#value
+         * of values.  A value corresponds to a child button&#39;s {@link Ext.button.Button#value
          * value}, or its index if no child button values match the given value.
          *
          * Using the `value` config of the child buttons with single toggle:
          *
          *     @example
-         *     var button = Ext.create('Ext.button.Segmented', {
+         *     var button = Ext.create(&#39;Ext.button.Segmented&#39;, {
          *         renderTo: Ext.getBody(),
-         *         value: 'optTwo', // begin with &quot;Option Two&quot; selected
+         *         value: &#39;optTwo&#39;, // begin with &quot;Option Two&quot; selected
          *         items: [{
-         *             text: 'Option One',
-         *             value: 'optOne'
+         *             text: &#39;Option One&#39;,
+         *             value: &#39;optOne&#39;
          *         }, {
-         *             text: 'Option Two',
-         *             value: 'optTwo'
+         *             text: &#39;Option Two&#39;,
+         *             value: &#39;optTwo&#39;
          *         }, {
-         *             text: 'Option Three',
-         *             value:  'optThree'
+         *             text: &#39;Option Three&#39;,
+         *             value:  &#39;optThree&#39;
          *         }]
          *     });
          *
          *     console.log(button.getValue()); // optTwo
          *
          *     // Sets the value to optOne, and sets the pressed state of the &quot;Option One&quot; button
-         *     button.setValue('optOne');
+         *     button.setValue(&#39;optOne&#39;);
          *
          *     console.log(button.getValue()); // optOne
          *
          * Using multiple toggle, and index-based values:
          *
          *     @example
-         *     var button = Ext.create('Ext.button.Segmented', {
+         *     var button = Ext.create(&#39;Ext.button.Segmented&#39;, {
          *         renderTo: Ext.getBody(),
          *         allowMultiple: true
          *         value: [1, 2], // begin with &quot;Option Two&quot; and &quot;Option Three&quot; selected
          *         items: [{
-         *             text: 'Option One'
+         *             text: &#39;Option One&#39;
          *         }, {
-         *             text: 'Option Two'
+         *             text: &#39;Option Two&#39;
          *         }, {
-         *             text: 'Option Three'
+         *             text: &#39;Option Three&#39;
          *         }]
          *     });
          *
@@ -161,37 +161,37 @@ Ext.define('Ext.button.Segmented', {
 <span id='Ext-button-Segmented-property-defaultBindProperty'>    /**
 </span>     * @inheritdoc
      */
-    defaultBindProperty: 'value',
+    defaultBindProperty: &#39;value&#39;,
 
-<span id='Ext-button-Segmented-cfg-publishes'>    publishes: ['value'],
-</span><span id='Ext-button-Segmented-cfg-twoWayBindable'>    twoWayBindable: ['value'],
+<span id='Ext-button-Segmented-cfg-publishes'>    publishes: [&#39;value&#39;],
+</span><span id='Ext-button-Segmented-cfg-twoWayBindable'>    twoWayBindable: [&#39;value&#39;],
 </span>
-<span id='Ext-button-Segmented-cfg-layout'>    layout: 'segmentedbutton',
-</span><span id='Ext-button-Segmented-cfg-defaultType'>    defaultType: 'button',
+<span id='Ext-button-Segmented-cfg-layout'>    layout: &#39;segmentedbutton&#39;,
+</span><span id='Ext-button-Segmented-cfg-defaultType'>    defaultType: &#39;button&#39;,
 </span><span id='Ext-button-Segmented-property-maskOnDisable'>    maskOnDisable: false,
 </span><span id='Ext-button-Segmented-property-isSegmentedButton'>    isSegmentedButton: true,
 </span>
-<span id='Ext-button-Segmented-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'segmented-button',
-</span><span id='Ext-button-Segmented-property-itemCls'>    itemCls: Ext.baseCSSPrefix + 'segmented-button-item',
+<span id='Ext-button-Segmented-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;segmented-button&#39;,
+</span><span id='Ext-button-Segmented-property-itemCls'>    itemCls: Ext.baseCSSPrefix + &#39;segmented-button-item&#39;,
 </span>
 <span id='Ext-button-Segmented-property-_firstCls'>    /**
 </span>     * @private
      */
-    _firstCls: Ext.baseCSSPrefix + 'segmented-button-first',
+    _firstCls: Ext.baseCSSPrefix + &#39;segmented-button-first&#39;,
 
 <span id='Ext-button-Segmented-property-_lastCls'>    /**
 </span>     * @private
      */
-    _lastCls: Ext.baseCSSPrefix + 'segmented-button-last',
+    _lastCls: Ext.baseCSSPrefix + &#39;segmented-button-last&#39;,
 
 <span id='Ext-button-Segmented-property-_middleCls'>    /**
 </span>     * @private
      */
-    _middleCls: Ext.baseCSSPrefix + 'segmented-button-middle',
+    _middleCls: Ext.baseCSSPrefix + &#39;segmented-button-middle&#39;,
 
 <span id='Ext-button-Segmented-event-toggle'>    /**
 </span>     * @event toggle
-     * Fires when any child button's pressed state has changed.
+     * Fires when any child button&#39;s pressed state has changed.
      * @param {Ext.button.Segmented} this
      * @param {Ext.button.Button} button The toggled button.
      * @param {Boolean} isPressed `true` to indicate if the button was pressed.
@@ -199,7 +199,7 @@ Ext.define('Ext.button.Segmented', {
 
 <span id='Ext-button-Segmented-event-change'>    /**
 </span>     * @event change
-     * Fires when any child button's pressed state has changed and caused the value to change.
+     * Fires when any child button&#39;s pressed state has changed and caused the value to change.
      * @param {Ext.button.Segmented} this
      * @param {Array} newValue The new value.
      * @param {Array} oldValue The old value.
@@ -214,7 +214,7 @@ Ext.define('Ext.button.Segmented', {
         oldValues = (oldValue instanceof Array) ? oldValue :
                 (oldValue == null) ? [] : [oldValue];
 
-        // Set a flag to tell our toggle listener not to respond to the buttons' toggle
+        // Set a flag to tell our toggle listener not to respond to the buttons&#39; toggle
         // events while we are applying the value.
         me._isApplyingValue = true;
 
@@ -224,7 +224,7 @@ Ext.define('Ext.button.Segmented', {
             for (i = items.length - 1; i &gt;= 0; i--) {
                 button = items[i];
 
-                // If we've got back to zero with no pressed buttons and have forceSelection,
+                // If we&#39;ve got back to zero with no pressed buttons and have forceSelection,
                 // then make button zero pressed.
                 if (me.forceSelection &amp;&amp; !i &amp;&amp; !hasPressed) {
                     button.pressed = true;
@@ -236,7 +236,7 @@ Ext.define('Ext.button.Segmented', {
                         buttonValue = me.items.indexOf(button);
                     }
 
-                    // We're looping backwards, unshift the values into the front of the array
+                    // We&#39;re looping backwards, unshift the values into the front of the array
                     if (!Ext.Array.contains(values, buttonValue)) {
                         values.unshift(buttonValue);
                     }
@@ -248,7 +248,7 @@ Ext.define('Ext.button.Segmented', {
 
         //&lt;debug&gt;
         if (ln &gt; 1 &amp;&amp; !allowMultiple) {
-            Ext.raise('Cannot set multiple values when allowMultiple is false');
+            Ext.raise(&#39;Cannot set multiple values when allowMultiple is false&#39;);
         }
         //&lt;/debug&gt;
 
@@ -273,7 +273,7 @@ Ext.define('Ext.button.Segmented', {
             //&lt;debug&gt;
             else {
                 // no matched button. fail.
-                Ext.raise(&quot;Invalid value '&quot; + value + &quot;' for segmented button: '&quot; + me.id + &quot;'&quot;);
+                Ext.raise(&quot;Invalid value &#39;&quot; + value + &quot;&#39; for segmented button: &#39;&quot; + me.id + &quot;&#39;&quot;);
             }
             //&lt;/debug&gt;
         }
@@ -303,7 +303,7 @@ Ext.define('Ext.button.Segmented', {
             }
 
             if (!same) {
-                me.fireEvent('change', me, value, oldValue);
+                me.fireEvent(&#39;change&#39;, me, value, oldValue);
             }
         }
     },
@@ -318,7 +318,7 @@ Ext.define('Ext.button.Segmented', {
 
 <span id='Ext-button-Segmented-method-onAdd'>    onAdd: function(item) {
 </span>        var me = this,
-            syncItemClasses = '_syncItemClasses';
+            syncItemClasses = &#39;_syncItemClasses&#39;;
 
         //&lt;debug&gt;
         var items = me.items.items,
@@ -326,9 +326,9 @@ Ext.define('Ext.button.Segmented', {
             i = 0,
             value, defaultUI;
 
-        if (item.ui === 'default' &amp;&amp; !item.hasOwnProperty('ui')) {
+        if (item.ui === &#39;default&#39; &amp;&amp; !item.hasOwnProperty(&#39;ui&#39;)) {
             defaultUI = me.getDefaultUI();
-            if (defaultUI !== 'default') {
+            if (defaultUI !== &#39;default&#39;) {
                 item.ui = defaultUI;
             }
         }
@@ -337,8 +337,8 @@ Ext.define('Ext.button.Segmented', {
             if (items[i] !== item) {
                 value = items[i].value;
                 if (value != null &amp;&amp; value === item.value) {
-                    Ext.raise(&quot;Segmented button '&quot; + me.id +
-                        &quot;' cannot contain multiple items with value: '&quot; + value + &quot;'&quot;);
+                    Ext.raise(&quot;Segmented button &#39;&quot; + me.id +
+                        &quot;&#39; cannot contain multiple items with value: &#39;&quot; + value + &quot;&#39;&quot;);
                 }
             }
         }
@@ -347,8 +347,8 @@ Ext.define('Ext.button.Segmented', {
         me.mon(item, {
             hide: syncItemClasses,
             show: syncItemClasses,
-            beforetoggle: '_onBeforeItemToggle',
-            toggle: '_onItemToggle',
+            beforetoggle: &#39;_onBeforeItemToggle&#39;,
+            toggle: &#39;_onItemToggle&#39;,
             scope: me
         });
 
@@ -382,11 +382,11 @@ Ext.define('Ext.button.Segmented', {
             //
             //     Ext.create({
             //        renderTo: document.body,
-            //            xtype: 'toolbar',
+            //            xtype: &#39;toolbar&#39;,
             //            items: [{
-            //            xtype: 'segmentedbutton',
+            //            xtype: &#39;segmentedbutton&#39;,
             //            items: [{
-            //                text: 'Foo'
+            //                text: &#39;Foo&#39;
             //            }]
             //        }]
             //    });
@@ -409,7 +409,7 @@ Ext.define('Ext.button.Segmented', {
             }
             for (i = 0, ln = items.length; i &lt; ln; i++) {
                 item = items[i];
-                if (item.ui === 'default' &amp;&amp; defaultUI !== 'default' &amp;&amp; !item.hasOwnProperty('ui') ) {
+                if (item.ui === &#39;default&#39; &amp;&amp; defaultUI !== &#39;default&#39; &amp;&amp; !item.hasOwnProperty(&#39;ui&#39;) ) {
                     items[i].ui = defaultUI;
                 }
             }
@@ -444,7 +444,7 @@ Ext.define('Ext.button.Segmented', {
 </span>
     privates: {
         _getClsSuffix: function() {
-            return this.getVertical() ? '-vertical' : '-horizontal';
+            return this.getVertical() ? &#39;-vertical&#39; : &#39;-horizontal&#39;;
         },
 
         // rtl hook
@@ -460,7 +460,7 @@ Ext.define('Ext.button.Segmented', {
 <span id='Ext-button-Segmented-method-_lookupButtonByValue'>        /**
 </span>         * Looks up a child button by its value
          * @private
-         * @param {String/Number} value The button's value or index
+         * @param {String/Number} value The button&#39;s value or index
          * @return {Ext.button.Button}
          */
         _lookupButtonByValue: function(value) {
@@ -479,7 +479,7 @@ Ext.define('Ext.button.Segmented', {
                 }
             }
 
-            if (!button &amp;&amp; typeof value === 'number') {
+            if (!button &amp;&amp; typeof value === &#39;number&#39;) {
                 // no button matched by value, assume value is an index
                 button = items[value];
             }
@@ -541,7 +541,7 @@ Ext.define('Ext.button.Segmented', {
 
             me.setValue(value);
 
-            me.fireEvent('toggle', me, button, pressed);
+            me.fireEvent(&#39;toggle&#39;, me, button, pressed);
         },
 
 <span id='Ext-button-Segmented-method-_syncItemClasses'>        /**

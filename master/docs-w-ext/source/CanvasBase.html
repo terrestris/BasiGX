@@ -19,9 +19,9 @@
 </span> * @class Ext.sparkline.CanvasBase
  * @private
  */
-Ext.define('Ext.sparkline.CanvasBase', {
+Ext.define(&#39;Ext.sparkline.CanvasBase&#39;, {
     requires: [
-        'Ext.sparkline.Shape'
+        &#39;Ext.sparkline.Shape&#39;
     ],
 
 <span id='Ext-sparkline-CanvasBase-property-shapeCount'>    shapeCount: 0,
@@ -46,19 +46,19 @@ Ext.define('Ext.sparkline.CanvasBase', {
     },
 
 <span id='Ext-sparkline-CanvasBase-method-drawShape'>    drawShape: function (path, lineColor, fillColor, lineWidth) {
-</span>        return this._genShape('Shape', [path, lineColor, fillColor, lineWidth]);
+</span>        return this._genShape(&#39;Shape&#39;, [path, lineColor, fillColor, lineWidth]);
     },
 
 <span id='Ext-sparkline-CanvasBase-method-drawCircle'>    drawCircle: function (x, y, radius, lineColor, fillColor, lineWidth) {
-</span>        return this._genShape('Circle', [x, y, radius, lineColor, fillColor, lineWidth]);
+</span>        return this._genShape(&#39;Circle&#39;, [x, y, radius, lineColor, fillColor, lineWidth]);
     },
 
 <span id='Ext-sparkline-CanvasBase-method-drawPieSlice'>    drawPieSlice: function (x, y, radius, startAngle, endAngle, lineColor, fillColor) {
-</span>        return this._genShape('PieSlice', [x, y, radius, startAngle, endAngle, lineColor, fillColor]);
+</span>        return this._genShape(&#39;PieSlice&#39;, [x, y, radius, startAngle, endAngle, lineColor, fillColor]);
     },
 
 <span id='Ext-sparkline-CanvasBase-method-drawRect'>    drawRect: function (x, y, width, height, lineColor, fillColor) {
-</span>        return this._genShape('Rect', [x, y, width, height, lineColor, fillColor]);
+</span>        return this._genShape(&#39;Rect&#39;, [x, y, width, height, lineColor, fillColor]);
     },
 
 <span id='Ext-sparkline-CanvasBase-method-getElement'>    getElement: function () {
@@ -77,7 +77,7 @@ Ext.define('Ext.sparkline.CanvasBase', {
      */
     reset: function () {
         //&lt;debug&gt;
-        Ext.raise('reset not implemented');
+        Ext.raise(&#39;reset not implemented&#39;);
         //&lt;/debug&gt;
     },
 
@@ -95,7 +95,7 @@ Ext.define('Ext.sparkline.CanvasBase', {
      */
     appendShape: function (shape) {
         //&lt;debug&gt;
-        Ext.raise('appendShape not implemented');
+        Ext.raise(&#39;appendShape not implemented&#39;);
         //&lt;/debug&gt;
     },
 
@@ -104,7 +104,7 @@ Ext.define('Ext.sparkline.CanvasBase', {
      */
     replaceWithShape: function (shapeid, shape) {
         //&lt;debug&gt;
-        Ext.raise('replaceWithShape not implemented');
+        Ext.raise(&#39;replaceWithShape not implemented&#39;);
         //&lt;/debug&gt;
     },
 
@@ -113,7 +113,7 @@ Ext.define('Ext.sparkline.CanvasBase', {
      */
     insertAfterShape: function (shapeid, shape) {
         //&lt;debug&gt;
-        Ext.raise('insertAfterShape not implemented');
+        Ext.raise(&#39;insertAfterShape not implemented&#39;);
         //&lt;/debug&gt;
     },
 
@@ -122,7 +122,7 @@ Ext.define('Ext.sparkline.CanvasBase', {
      */
     removeShapeId: function (shapeid) {
         //&lt;debug&gt;
-        Ext.raise('removeShapeId not implemented');
+        Ext.raise(&#39;removeShapeId not implemented&#39;);
         //&lt;/debug&gt;
     },
 
@@ -131,7 +131,7 @@ Ext.define('Ext.sparkline.CanvasBase', {
      */
     getShapeAt: function (x, y) {
         //&lt;debug&gt;
-        Ext.raise('getShapeAt not implemented');
+        Ext.raise(&#39;getShapeAt not implemented&#39;);
         //&lt;/debug&gt;
     },
 
@@ -140,7 +140,7 @@ Ext.define('Ext.sparkline.CanvasBase', {
      */
     render: function () {
         //&lt;debug&gt;
-        Ext.raise('render not implemented');
+        Ext.raise(&#39;render not implemented&#39;);
         //&lt;/debug&gt;
     }
 });

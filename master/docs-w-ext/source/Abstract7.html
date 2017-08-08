@@ -19,12 +19,12 @@
 </span> * @private
  *
  * The abstract class. Sub-classes are expected, at the very least, to implement translation logics inside
- * the 'translate' method
+ * the &#39;translate&#39; method
  */
-Ext.define('Ext.util.translatable.Abstract', {
-    extend: 'Ext.Evented',
+Ext.define(&#39;Ext.util.translatable.Abstract&#39;, {
+    extend: &#39;Ext.Evented&#39;,
 
-    requires: ['Ext.fx.easing.Linear'],
+    requires: [&#39;Ext.fx.easing.Linear&#39;],
 
     config: {
 <span id='Ext-util-translatable-Abstract-cfg-useWrapper'>        useWrapper: null,
@@ -89,13 +89,13 @@ Ext.define('Ext.util.translatable.Abstract', {
 <span id='Ext-util-translatable-Abstract-method-constructor'>    constructor: function(config) {
 </span>        this.mixins.observable.constructor.call(this, config);
         // this.position is simply an internal reusable object for GC purposes and should
-        // not be accessed directly as it's values are not kept in sync.  always use
+        // not be accessed directly as it&#39;s values are not kept in sync.  always use
         // getPosition() to get the position
         this.position = { x: 0, y: 0};
     },
 
 <span id='Ext-util-translatable-Abstract-method-factoryEasing'>    factoryEasing: function(easing) {
-</span>        return Ext.factory(easing, Ext.fx.easing.Linear, null, 'easing');
+</span>        return Ext.factory(easing, Ext.fx.easing.Linear, null, &#39;easing&#39;);
     },
 
 <span id='Ext-util-translatable-Abstract-method-applyEasing'>    applyEasing: function(easing) {
@@ -118,7 +118,7 @@ Ext.define('Ext.util.translatable.Abstract', {
 
 <span id='Ext-util-translatable-Abstract-method-doTranslate'>    doTranslate: function(x, y) {
 </span>        if (this.hasListeners.translate) {
-            this.fireEvent('translate', this, x, y);
+            this.fireEvent(&#39;translate&#39;, this, x, y);
         }
     },
 
@@ -131,11 +131,11 @@ Ext.define('Ext.util.translatable.Abstract', {
             this.stopAnimation();
         }
 
-        if (!isNaN(x) &amp;&amp; typeof x == 'number') {
+        if (!isNaN(x) &amp;&amp; typeof x == &#39;number&#39;) {
             this.x = x;
         }
 
-        if (!isNaN(y) &amp;&amp; typeof y == 'number') {
+        if (!isNaN(y) &amp;&amp; typeof y == &#39;number&#39;) {
             this.y = y;
         }
         this.doTranslate(x, y);
@@ -144,7 +144,7 @@ Ext.define('Ext.util.translatable.Abstract', {
 <span id='Ext-util-translatable-Abstract-method-translateAxis'>    translateAxis: function(axis, value, animation) {
 </span>        var x, y;
 
-        if (axis == 'x') {
+        if (axis == &#39;x&#39;) {
             x = value;
         }
         else {
@@ -155,7 +155,7 @@ Ext.define('Ext.util.translatable.Abstract', {
     },
 
 <span id='Ext-util-translatable-Abstract-method-getPosition'>    /**
-</span>     * Returns the translatable object's current position.
+</span>     * Returns the translatable object&#39;s current position.
      * @return {Object} position An object with x and y properties
      */
     getPosition: function() {
@@ -178,7 +178,7 @@ Ext.define('Ext.util.translatable.Abstract', {
 
         Ext.AnimationQueue.start(this.doAnimationFrame, this);
 
-        this.fireEvent('animationstart', this, this.x, this.y);
+        this.fireEvent(&#39;animationstart&#39;, this, this.x, this.y);
         return this;
     },
 
@@ -199,8 +199,8 @@ Ext.define('Ext.util.translatable.Abstract', {
 
         var now = Ext.Date.now(),
             easing = animation.easing,
-            easingX = (typeof x == 'number') ? (animation.easingX || easing || me.getEasingX() || true) : null,
-            easingY = (typeof y == 'number') ? (animation.easingY || easing || me.getEasingY() || true) : null;
+            easingX = (typeof x == &#39;number&#39;) ? (animation.easingX || easing || me.getEasingX() || true) : null,
+            easingY = (typeof y == &#39;number&#39;) ? (animation.easingY || easing || me.getEasingY() || true) : null;
 
         if (easingX) {
             easingX = me.factoryEasing(easingX);
@@ -208,7 +208,7 @@ Ext.define('Ext.util.translatable.Abstract', {
             easingX.setStartValue(me.x);
             easingX.setEndValue(x);
 
-            if ('duration' in animation) {
+            if (&#39;duration&#39; in animation) {
                 easingX.setDuration(animation.duration);
             }
         }
@@ -219,7 +219,7 @@ Ext.define('Ext.util.translatable.Abstract', {
             easingY.setStartValue(me.y);
             easingY.setEndValue(y);
 
-            if ('duration' in animation) {
+            if (&#39;duration&#39; in animation) {
                 easingY.setDuration(animation.duration);
             }
         }
@@ -250,7 +250,7 @@ Ext.define('Ext.util.translatable.Abstract', {
 
             if (easingX.isEnded) {
                 me.activeEasingX = null;
-                me.fireEvent('axisanimationend', me, 'x', x);
+                me.fireEvent(&#39;axisanimationend&#39;, me, &#39;x&#39;, x);
             }
         }
         else {
@@ -262,7 +262,7 @@ Ext.define('Ext.util.translatable.Abstract', {
 
             if (easingY.isEnded) {
                 me.activeEasingY = null;
-                me.fireEvent('axisanimationend', me, 'y', y);
+                me.fireEvent(&#39;axisanimationend&#39;, me, &#39;y&#39;, y);
             }
         }
         else {
@@ -276,7 +276,7 @@ Ext.define('Ext.util.translatable.Abstract', {
             me.lastY = y;
         }
 
-        me.fireEvent('animationframe', me, x, y);
+        me.fireEvent(&#39;animationframe&#39;, me, x, y);
     },
 
 <span id='Ext-util-translatable-Abstract-method-stopAnimation'>    stopAnimation: function() {
@@ -294,7 +294,7 @@ Ext.define('Ext.util.translatable.Abstract', {
         Ext.AnimationQueue.stop(me.doAnimationFrame, me);
         
         if (!me.destroying) {
-            me.fireEvent('animationend', me, me.x, me.y);
+            me.fireEvent(&#39;animationend&#39;, me, me.x, me.y);
             
             if (me.callback) {
                 me.callback.call(me.callbackScope);

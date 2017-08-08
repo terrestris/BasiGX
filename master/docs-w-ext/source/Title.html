@@ -18,12 +18,12 @@
   <pre class="prettyprint lang-js"><span id='Ext-panel-Title'>/**
 </span> * A basic title component for a Panel Header
  */
-Ext.define('Ext.panel.Title', {
-    extend: 'Ext.Component',
-    xtype: 'title',
+Ext.define(&#39;Ext.panel.Title&#39;, {
+    extend: &#39;Ext.Component&#39;,
+    xtype: &#39;title&#39;,
 
     requires: [
-        'Ext.Glyph'
+        &#39;Ext.Glyph&#39;
     ],
 
 <span id='Ext-panel-Title-property-isTitle'>    isTitle: true,
@@ -35,14 +35,14 @@ Ext.define('Ext.panel.Title', {
 <span id='Ext-panel-Title-property-textAlign'>    // For performance reasons we give the following configs their default values on
 </span>    // the class body.  This prevents the updaters from running on initialization in the
     // default configuration scenario
-    textAlign: 'left',
-<span id='Ext-panel-Title-property-iconAlign'>    iconAlign: 'left',
+    textAlign: &#39;left&#39;,
+<span id='Ext-panel-Title-property-iconAlign'>    iconAlign: &#39;left&#39;,
 </span><span id='Ext-panel-Title-property-rotation'>    rotation: 0,
-</span><span id='Ext-panel-Title-property-text'>    text: '&amp;#160;',
+</span><span id='Ext-panel-Title-property-text'>    text: &#39;&amp;#160;&#39;,
 </span>
 <span id='Ext-panel-Title-property-beforeRenderConfig'>    beforeRenderConfig: {
 </span><span id='Ext-panel-Title-cfg-textAlign'>        /**
-</span>         * @cfg [textAlign='left']
+</span>         * @cfg [textAlign=&#39;left&#39;]
          * @inheritdoc Ext.panel.Header#cfg-titleAlign
          * @accessor
          */
@@ -50,7 +50,7 @@ Ext.define('Ext.panel.Title', {
 
 <span id='Ext-panel-Title-cfg-text'>        /**
 </span>         * @cfg {String}
-         * The title's text (can contain html tags/entities)
+         * The title&#39;s text (can contain html tags/entities)
          * @accessor
          */
         text: null,
@@ -70,7 +70,7 @@ Ext.define('Ext.panel.Title', {
         icon: null,
 
 <span id='Ext-panel-Title-cfg-iconAlign'>        /**
-</span>         * @cfg {'top'/'right'/'bottom'/'left'} [iconAlign='left']
+</span>         * @cfg {&#39;top&#39;/&#39;right&#39;/&#39;bottom&#39;/&#39;left&#39;} [iconAlign=&#39;left&#39;]
          * alignment of the icon
          * @accessor
          */
@@ -92,18 +92,18 @@ Ext.define('Ext.panel.Title', {
     },
 
 <span id='Ext-panel-Title-cfg-autoEl'>    autoEl: {
-</span>        role: 'presentation',
+</span>        role: &#39;presentation&#39;,
         // Required for Opera
-        unselectable: 'on'
+        unselectable: &#39;on&#39;
     },
     
 <span id='Ext-panel-Title-property-textElRole'>    // In most cases the panel header title is purely presentational
 </span>    // and does not have any structural significance wrt Assistive Technologies.
     // The only exception is when the panel participates in Accordion layout;
-    // in that case the title component has the role of 'tab' and its textEl
-    // should not have any role to expose the text as the tab's accessible name.
+    // in that case the title component has the role of &#39;tab&#39; and its textEl
+    // should not have any role to expose the text as the tab&#39;s accessible name.
     // Header component is aware of this participation and will reset textElRole.
-    textElRole: 'presentation',
+    textElRole: &#39;presentation&#39;,
     
 <span id='Ext-panel-Title-cfg-tabIndex'>    // By default, panel title is not focusable; this only happens in Accordion layout.
 </span>    // This config option is overridable, and it will prime tabIndex to be used
@@ -111,52 +111,52 @@ Ext.define('Ext.panel.Title', {
     tabIndex: 0,
 
 <span id='Ext-panel-Title-cfg-childEls'>    childEls: [
-</span>        'textEl',
-        'iconEl',
-        'iconWrapEl'
+</span>        &#39;textEl&#39;,
+        &#39;iconEl&#39;,
+        &#39;iconWrapEl&#39;
     ],
 
 <span id='Ext-panel-Title-cfg-renderTpl'>    renderTpl:
-</span>        '&lt;tpl if=&quot;iconMarkup &amp;&amp; iconBeforeTitle&quot;&gt;{iconMarkup}&lt;/tpl&gt;' +
+</span>        &#39;&lt;tpl if=&quot;iconMarkup &amp;&amp; iconBeforeTitle&quot;&gt;{iconMarkup}&lt;/tpl&gt;&#39; +
         // unselectable=&quot;on&quot; is required for Opera, other browsers
         // inherit unselectability from the header
-        '&lt;div id=&quot;{id}-textEl&quot; data-ref=&quot;textEl&quot;' +
-            ' class=&quot;{textCls} {textCls}-{ui} {itemCls}{childElCls}&quot; unselectable=&quot;on&quot;' +
-            '&lt;tpl if=&quot;textElRole&quot;&gt; role=&quot;{textElRole}&quot;&lt;/tpl&gt;' +
-        '&gt;' +
-            '{text}' +
-        '&lt;/div&gt;' +
-        '&lt;tpl if=&quot;iconMarkup &amp;&amp; !iconBeforeTitle&quot;&gt;{iconMarkup}&lt;/tpl&gt;',
+        &#39;&lt;div id=&quot;{id}-textEl&quot; data-ref=&quot;textEl&quot;&#39; +
+            &#39; class=&quot;{textCls} {textCls}-{ui} {itemCls}{childElCls}&quot; unselectable=&quot;on&quot;&#39; +
+            &#39;&lt;tpl if=&quot;textElRole&quot;&gt; role=&quot;{textElRole}&quot;&lt;/tpl&gt;&#39; +
+        &#39;&gt;&#39; +
+            &#39;{text}&#39; +
+        &#39;&lt;/div&gt;&#39; +
+        &#39;&lt;tpl if=&quot;iconMarkup &amp;&amp; !iconBeforeTitle&quot;&gt;{iconMarkup}&lt;/tpl&gt;&#39;,
 
 <span id='Ext-panel-Title-property-iconTpl'>    iconTpl:
-</span>        '&lt;div id=&quot;{id}-iconWrapEl&quot; data-ref=&quot;iconWrapEl&quot; role=&quot;presentation&quot; ' +
-                'class=&quot;{iconWrapCls} {iconWrapCls}-{ui} {iconAlignCls} {itemCls}{childElCls}&quot;' +
-                '&lt;tpl if=&quot;iconWrapStyle&quot;&gt; style=&quot;{iconWrapStyle}&quot;&lt;/tpl&gt;&gt;' +
-            '&lt;div id=&quot;{id}-iconEl&quot; data-ref=&quot;iconEl&quot; role=&quot;presentation&quot; unselectable=&quot;on&quot; ' +
-                        'class=&quot;{baseIconCls} {baseIconCls}-{ui} {iconCls} {glyphCls}&quot; style=&quot;' +
-                '&lt;tpl if=&quot;iconUrl&quot;&gt;background-image:url({iconUrl});&lt;/tpl&gt;' +
-                '&lt;tpl if=&quot;glyph &amp;&amp; glyphFontFamily&quot;&gt;font-family:{glyphFontFamily};&lt;/tpl&gt;&quot;&gt;' +
-                '&lt;tpl if=&quot;glyph&quot;&gt;{glyph}&lt;/tpl&gt;' +
-            '&lt;/div&gt;' +
-        '&lt;/div&gt;',
+</span>        &#39;&lt;div id=&quot;{id}-iconWrapEl&quot; data-ref=&quot;iconWrapEl&quot; role=&quot;presentation&quot; &#39; +
+                &#39;class=&quot;{iconWrapCls} {iconWrapCls}-{ui} {iconAlignCls} {itemCls}{childElCls}&quot;&#39; +
+                &#39;&lt;tpl if=&quot;iconWrapStyle&quot;&gt; style=&quot;{iconWrapStyle}&quot;&lt;/tpl&gt;&gt;&#39; +
+            &#39;&lt;div id=&quot;{id}-iconEl&quot; data-ref=&quot;iconEl&quot; role=&quot;presentation&quot; unselectable=&quot;on&quot; &#39; +
+                        &#39;class=&quot;{baseIconCls} {baseIconCls}-{ui} {iconCls} {glyphCls}&quot; style=&quot;&#39; +
+                &#39;&lt;tpl if=&quot;iconUrl&quot;&gt;background-image:url({iconUrl});&lt;/tpl&gt;&#39; +
+                &#39;&lt;tpl if=&quot;glyph &amp;&amp; glyphFontFamily&quot;&gt;font-family:{glyphFontFamily};&lt;/tpl&gt;&quot;&gt;&#39; +
+                &#39;&lt;tpl if=&quot;glyph&quot;&gt;{glyph}&lt;/tpl&gt;&#39; +
+            &#39;&lt;/div&gt;&#39; +
+        &#39;&lt;/div&gt;&#39;,
 
 <span id='Ext-panel-Title-property-_textAlignClasses'>    _textAlignClasses: {
-</span>        left: Ext.baseCSSPrefix + 'title-align-left',
-        center: Ext.baseCSSPrefix + 'title-align-center',
-        right: Ext.baseCSSPrefix + 'title-align-right'
+</span>        left: Ext.baseCSSPrefix + &#39;title-align-left&#39;,
+        center: Ext.baseCSSPrefix + &#39;title-align-center&#39;,
+        right: Ext.baseCSSPrefix + &#39;title-align-right&#39;
     },
 
 <span id='Ext-panel-Title-property-_iconAlignClasses'>    _iconAlignClasses: {
-</span>        top: Ext.baseCSSPrefix + 'title-icon-top',
-        right: Ext.baseCSSPrefix + 'title-icon-right',
-        bottom: Ext.baseCSSPrefix + 'title-icon-bottom',
-        left: Ext.baseCSSPrefix + 'title-icon-left'
+</span>        top: Ext.baseCSSPrefix + &#39;title-icon-top&#39;,
+        right: Ext.baseCSSPrefix + &#39;title-icon-right&#39;,
+        bottom: Ext.baseCSSPrefix + &#39;title-icon-bottom&#39;,
+        left: Ext.baseCSSPrefix + &#39;title-icon-left&#39;
     },
 
 <span id='Ext-panel-Title-property-_rotationClasses'>    _rotationClasses: {
-</span>        0: Ext.baseCSSPrefix + 'title-rotate-none',
-        1: Ext.baseCSSPrefix + 'title-rotate-right',
-        2: Ext.baseCSSPrefix + 'title-rotate-left'
+</span>        0: Ext.baseCSSPrefix + &#39;title-rotate-none&#39;,
+        1: Ext.baseCSSPrefix + &#39;title-rotate-right&#39;,
+        2: Ext.baseCSSPrefix + &#39;title-rotate-left&#39;
     },
 
 <span id='Ext-panel-Title-property-_rotationAngles'>    _rotationAngles: {
@@ -164,13 +164,13 @@ Ext.define('Ext.panel.Title', {
         2: 270
     },
 
-<span id='Ext-panel-Title-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'title',
-</span><span id='Ext-panel-Title-property-_titleSuffix'>    _titleSuffix: '-title',
-</span><span id='Ext-panel-Title-property-_glyphCls'>    _glyphCls: Ext.baseCSSPrefix + 'title-glyph',
-</span><span id='Ext-panel-Title-property-_iconWrapCls'>    _iconWrapCls: Ext.baseCSSPrefix + 'title-icon-wrap',
-</span><span id='Ext-panel-Title-property-_baseIconCls'>    _baseIconCls: Ext.baseCSSPrefix + 'title-icon',
-</span><span id='Ext-panel-Title-property-_itemCls'>    _itemCls: Ext.baseCSSPrefix + 'title-item',
-</span><span id='Ext-panel-Title-property-_textCls'>    _textCls: Ext.baseCSSPrefix + 'title-text',
+<span id='Ext-panel-Title-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;title&#39;,
+</span><span id='Ext-panel-Title-property-_titleSuffix'>    _titleSuffix: &#39;-title&#39;,
+</span><span id='Ext-panel-Title-property-_glyphCls'>    _glyphCls: Ext.baseCSSPrefix + &#39;title-glyph&#39;,
+</span><span id='Ext-panel-Title-property-_iconWrapCls'>    _iconWrapCls: Ext.baseCSSPrefix + &#39;title-icon-wrap&#39;,
+</span><span id='Ext-panel-Title-property-_baseIconCls'>    _baseIconCls: Ext.baseCSSPrefix + &#39;title-icon&#39;,
+</span><span id='Ext-panel-Title-property-_itemCls'>    _itemCls: Ext.baseCSSPrefix + &#39;title-item&#39;,
+</span><span id='Ext-panel-Title-property-_textCls'>    _textCls: Ext.baseCSSPrefix + &#39;title-text&#39;,
 </span>
 <span id='Ext-panel-Title-method-afterComponentLayout'>    afterComponentLayout: function() {
 </span>        var me = this,
@@ -198,7 +198,7 @@ Ext.define('Ext.panel.Title', {
             lastX = lastBox.x;
             el.setStyle(
                 me._getVerticalAdjustDirection(),
-                (lastX + ((rotation === 1) ? lastBox.width : -lastBox.height)) + 'px'
+                (lastX + ((rotation === 1) ? lastBox.width : -lastBox.height)) + &#39;px&#39;
             );
         }
         this.callParent();
@@ -225,7 +225,7 @@ Ext.define('Ext.panel.Title', {
 
 <span id='Ext-panel-Title-method-applyText'>    applyText: function(text) {
 </span>        if (!text) {
-            text = '&amp;#160;';
+            text = &#39;&amp;#160;&#39;;
         }
         return text;
     },
@@ -240,7 +240,7 @@ Ext.define('Ext.panel.Title', {
     },
 
 <span id='Ext-panel-Title-method-getIconMarkup'>    getIconMarkup: function() {
-</span>        return this.lookupTpl('iconTpl').apply(this.getIconRenderData());
+</span>        return this.lookupTpl(&#39;iconTpl&#39;).apply(this.getIconRenderData());
     },
 
 <span id='Ext-panel-Title-method-getIconRenderData'>    getIconRenderData: function() {
@@ -267,7 +267,7 @@ Ext.define('Ext.panel.Title', {
             baseIconCls: me._baseIconCls,
             iconAlignCls: me._iconAlignClasses[iconAlign],
             glyph: glyph,
-            glyphCls: glyph ? me._glyphCls : '',
+            glyphCls: glyph ? me._glyphCls : &#39;&#39;,
             glyphFontFamily: glyphFontFamily
         };
     },
@@ -290,7 +290,7 @@ Ext.define('Ext.panel.Title', {
         if (me._hasIcon()) {
             iconAlign = me.getIconAlign();
             renderData.iconMarkup = me.getIconMarkup();
-            renderData.iconBeforeTitle = (iconAlign === 'top' || iconAlign === 'left');
+            renderData.iconBeforeTitle = (iconAlign === &#39;top&#39; || iconAlign === &#39;left&#39;);
         }
         
         return renderData;
@@ -303,7 +303,7 @@ Ext.define('Ext.panel.Title', {
 
         me.addCls([
             baseCls + suffix,
-            baseCls + suffix + '-' + container.ui
+            baseCls + suffix + &#39;-&#39; + container.ui
         ]);
         
         me.callParent([container, pos, instanced]);
@@ -333,9 +333,9 @@ Ext.define('Ext.panel.Title', {
             if (glyph) {
                 iconEl.dom.innerHTML = glyph.character;
                 iconEl.addCls(glyphCls);
-                iconEl.setStyle('font-family', glyph.fontFamily);
+                iconEl.setStyle(&#39;font-family&#39;, glyph.fontFamily);
             } else if (oldGlyph !== glyph) {
-                iconEl.dom.innerHTML = '';
+                iconEl.dom.innerHTML = &#39;&#39;;
                 iconEl.removeCls(glyphCls);
             }
 
@@ -346,7 +346,7 @@ Ext.define('Ext.panel.Title', {
     },
 
 <span id='Ext-panel-Title-method-updateIcon'>    updateIcon: function(icon, oldIcon) {
-</span>        icon = icon || '';
+</span>        icon = icon || &#39;&#39;;
         var me = this,
             iconEl;
 
@@ -354,7 +354,7 @@ Ext.define('Ext.panel.Title', {
             me._syncIconVisibility();
             iconEl = me.iconEl;
             
-            iconEl.setStyle('background-image', icon ? 'url(' + icon + ')': '');
+            iconEl.setStyle(&#39;background-image&#39;, icon ? &#39;url(&#39; + icon + &#39;)&#39;: &#39;&#39;);
             if (me._didIconStateChange(oldIcon, icon)) {
                 me.updateLayout();
             }
@@ -377,7 +377,7 @@ Ext.define('Ext.panel.Title', {
 
             // here we move the iconWrap to the correct position in the dom - before the
             // title el for top/left alignments, and after the title el for right/bottom
-            if (align === 'top' || align === 'left') {
+            if (align === &#39;top&#39; || align === &#39;left&#39;) {
                 el.insertFirst(iconWrapEl);
             } else {
                 el.appendChild(iconWrapEl);
@@ -388,7 +388,7 @@ Ext.define('Ext.panel.Title', {
     },
 
 <span id='Ext-panel-Title-method-updateIconCls'>    updateIconCls: function(cls, oldCls) {
-</span>        cls = cls || '';
+</span>        cls = cls || &#39;&#39;;
         var me = this,
             iconEl;
 
@@ -426,11 +426,11 @@ Ext.define('Ext.panel.Title', {
             // set by last layout run (this prevents parallel size from becoming perpendicular
             // size after rotation)
             el.setStyle({
-                right: '',
-                left: '',
-                top: '',
-                height: '',
-                width: ''
+                right: &#39;&#39;,
+                left: &#39;&#39;,
+                top: &#39;&#39;,
+                height: &#39;&#39;,
+                width: &#39;&#39;
             });
     
             me.lastBox = null;
@@ -463,7 +463,7 @@ Ext.define('Ext.panel.Title', {
 <span id='Ext-panel-Title-property-privates'>    privates: {
 </span>        // rtl hook
         _getVerticalAdjustDirection: function() {
-            return 'left';
+            return &#39;left&#39;;
         },
 
         _didIconStateChange: function(old, current) {
@@ -486,14 +486,14 @@ Ext.define('Ext.panel.Title', {
                 // if an icon was configured, but we have not yet rendered an icon
                 // element, we need to render it now.
                 iconAlign = me.iconAlign;
-                isBefore = (iconAlign === 'left' || iconAlign === 'top');
+                isBefore = (iconAlign === &#39;left&#39; || iconAlign === &#39;top&#39;);
                 
                 el.dom.insertAdjacentHTML(
-                    isBefore ? 'afterbegin' : 'beforeend',
+                    isBefore ? &#39;afterbegin&#39; : &#39;beforeend&#39;,
                     me.getIconMarkup()
                 );
             
-                iconWrapEl = me.iconWrapEl = el[isBefore ? 'first' : 'last']();
+                iconWrapEl = me.iconWrapEl = el[isBefore ? &#39;first&#39; : &#39;last&#39;]();
                 me.iconEl = iconWrapEl.first();
             }
 

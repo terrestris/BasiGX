@@ -18,8 +18,8 @@
   <pre class="prettyprint lang-js"><span id='Ext-rtl-Component'>/**
 </span> * This override adds RTL support and the `rtl` config option to AbstactComponent.
  */
-Ext.define('Ext.rtl.Component', {
-    override: 'Ext.Component',
+Ext.define(&#39;Ext.rtl.Component&#39;, {
+    override: &#39;Ext.Component&#39;,
 
 <span id='Ext-Component-cfg-rtl'>    /**
 </span>     * @cfg {Boolean} rtl
@@ -106,11 +106,11 @@ Ext.define('Ext.rtl.Component', {
     },
 
 <span id='Ext-Component-method-isLocalRtl'>    /**
-</span>     * Returns true if this component's local coordinate system is rtl. For normal
+</span>     * Returns true if this component&#39;s local coordinate system is rtl. For normal
      * components this equates to the value of isParentRtl().  Floaters are a bit different
-     * because a floater's element can be a childNode of something other than its
-     * parent component's element.  For floaters we have to read the dom to see if the
-     * component's element's parentNode has a css direction value of &quot;rtl&quot;.
+     * because a floater&#39;s element can be a childNode of something other than its
+     * parent component&#39;s element.  For floaters we have to read the dom to see if the
+     * component&#39;s element&#39;s parentNode has a css direction value of &quot;rtl&quot;.
      * @return {Boolean}
      * @private
      */
@@ -125,7 +125,7 @@ Ext.define('Ext.rtl.Component', {
                 offsetParent = this.el.dom.offsetParent || this.el.dom.parentNode;
                 if (offsetParent) {
                     me._isOffsetParentRtl =
-                        Ext.fly(offsetParent, '_isLocalRtl').isStyle('direction', 'rtl');
+                        Ext.fly(offsetParent, &#39;_isLocalRtl&#39;).isStyle(&#39;direction&#39;, &#39;rtl&#39;);
                 }
             }
             rtl = !!me._isOffsetParentRtl;
@@ -137,7 +137,7 @@ Ext.define('Ext.rtl.Component', {
     },
 
 <span id='Ext-Component-method-isParentRtl'>    /**
-</span>     * Returns true if this component's parent container is rtl. Used by rtl positioning
+</span>     * Returns true if this component&#39;s parent container is rtl. Used by rtl positioning
      * methods to determine if the component should be positioned using a right-to-left
      * coordinate system.
      * @return {Boolean}
@@ -149,11 +149,11 @@ Ext.define('Ext.rtl.Component', {
             isRtl = false,
             myRtl;
 
-        if (inheritedState.hasOwnProperty('rtl')) {
-            // Temporarily remove this component's rtl property so we can see what the rtl
+        if (inheritedState.hasOwnProperty(&#39;rtl&#39;)) {
+            // Temporarily remove this component&#39;s rtl property so we can see what the rtl
             // value is on the prototype.  A component is only rtl positioned if it is
-            // inside of an rtl coordinate system (if one of it's ancestors is rtl). We
-            // can't just use ownerCt/floatParent inheritedState, because components may
+            // inside of an rtl coordinate system (if one of it&#39;s ancestors is rtl). We
+            // can&#39;t just use ownerCt/floatParent inheritedState, because components may
             // not have a container, but might still be part of a rtl coordinate system by
             // virtue of the Viewport. These components will inherit the correct rtl
             // value from the prototype because all hierarchy states inherit from
@@ -167,7 +167,7 @@ Ext.define('Ext.rtl.Component', {
         }
 
         if (myRtl !== undefined) {
-            // restore this component's original inheritedState rtl property
+            // restore this component&#39;s original inheritedState rtl property
             inheritedState.rtl = myRtl;
         }
 
@@ -189,7 +189,7 @@ Ext.define('Ext.rtl.Component', {
 <span id='Ext-rtl-Component-property-privates'>    privates: {
 </span>        initStyles: function(){
             if (this.getInherited().rtl) {
-                this.horizontalPosProp = 'right';
+                this.horizontalPosProp = &#39;right&#39;;
             }
             this.callParent(arguments);
         },
@@ -207,8 +207,8 @@ Ext.define('Ext.rtl.Component', {
         // If the document or body has &quot;direction:rtl&quot; then we set the rtl flag in the
         // root hierarchy state so that the page-level coordinate system will be
         // right-based (similar to using a Viewport with &quot;rtl: true&quot;).
-        if ((Ext.fly(document.documentElement).isStyle('direction', 'rtl')) ||
-            (Ext.getBody().isStyle('direction', 'rtl'))) {
+        if ((Ext.fly(document.documentElement).isStyle(&#39;direction&#39;, &#39;rtl&#39;)) ||
+            (Ext.getBody().isStyle(&#39;direction&#39;, &#39;rtl&#39;))) {
             Ext.rootInheritedState.rtl = true;
         }
     });

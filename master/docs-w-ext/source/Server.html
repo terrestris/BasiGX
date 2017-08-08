@@ -20,11 +20,11 @@
  * would not usually be used directly.
  * @protected
  */
-Ext.define('Ext.data.proxy.Server', {
-    extend: 'Ext.data.proxy.Proxy',
-    alias : 'proxy.server',
-    alternateClassName: 'Ext.data.ServerProxy',
-    uses  : ['Ext.data.Request'],
+Ext.define(&#39;Ext.data.proxy.Server&#39;, {
+    extend: &#39;Ext.data.proxy.Proxy&#39;,
+    alias : &#39;proxy.server&#39;,
+    alternateClassName: &#39;Ext.data.ServerProxy&#39;,
+    uses  : [&#39;Ext.data.Request&#39;],
     
 <span id='Ext-data-proxy-Server-property-isRemote'>    isRemote: true,
 </span>
@@ -33,83 +33,83 @@ Ext.define('Ext.data.proxy.Server', {
 </span>         * @cfg {String} url
          * The URL from which to request the data object.
          */
-        url: '',
+        url: &#39;&#39;,
     
 <span id='Ext-data-proxy-Server-cfg-pageParam'>        /**
 </span>         * @cfg {String} [pageParam=&quot;page&quot;]
-         * The name of the 'page' parameter to send in a request. Defaults to 'page'. Set this to `''` if you don't
+         * The name of the &#39;page&#39; parameter to send in a request. Defaults to &#39;page&#39;. Set this to `&#39;&#39;` if you don&#39;t
          * want to send a page parameter.
          */
-        pageParam: 'page',
+        pageParam: &#39;page&#39;,
     
 <span id='Ext-data-proxy-Server-cfg-startParam'>        /**
 </span>         * @cfg {String} [startParam=&quot;start&quot;]
-         * The name of the 'start' parameter to send in a request. Defaults to 'start'. Set this to `''` if you don't
+         * The name of the &#39;start&#39; parameter to send in a request. Defaults to &#39;start&#39;. Set this to `&#39;&#39;` if you don&#39;t
          * want to send a start parameter.
          */
-        startParam: 'start',
+        startParam: &#39;start&#39;,
     
 <span id='Ext-data-proxy-Server-cfg-limitParam'>        /**
 </span>         * @cfg {String} [limitParam=&quot;limit&quot;]
-         * The name of the 'limit' parameter to send in a request. Defaults to 'limit'. Set this to `''` if you don't
+         * The name of the &#39;limit&#39; parameter to send in a request. Defaults to &#39;limit&#39;. Set this to `&#39;&#39;` if you don&#39;t
          * want to send a limit parameter.
          */
-        limitParam: 'limit',
+        limitParam: &#39;limit&#39;,
     
 <span id='Ext-data-proxy-Server-cfg-groupParam'>        /**
 </span>         * @cfg {String} [groupParam=&quot;group&quot;]
-         * The name of the 'group' parameter to send in a request. Defaults to 'group'. Set this to `''` if you don't
+         * The name of the &#39;group&#39; parameter to send in a request. Defaults to &#39;group&#39;. Set this to `&#39;&#39;` if you don&#39;t
          * want to send a group parameter.
          */
-        groupParam: 'group',
+        groupParam: &#39;group&#39;,
     
 <span id='Ext-data-proxy-Server-cfg-groupDirectionParam'>        /**
 </span>         * @cfg {String} [groupDirectionParam=&quot;groupDir&quot;]
          * The name of the direction parameter to send in a request. **This is only used when simpleGroupMode is set to
          * true.**
          */
-        groupDirectionParam: 'groupDir',
+        groupDirectionParam: &#39;groupDir&#39;,
     
 <span id='Ext-data-proxy-Server-cfg-sortParam'>        /**
 </span>         * @cfg {String} [sortParam=&quot;sort&quot;]
-         * The name of the 'sort' parameter to send in a request. Defaults to 'sort'. Set this to `''` if you don't
+         * The name of the &#39;sort&#39; parameter to send in a request. Defaults to &#39;sort&#39;. Set this to `&#39;&#39;` if you don&#39;t
          * want to send a sort parameter.
          */
-        sortParam: 'sort',
+        sortParam: &#39;sort&#39;,
     
 <span id='Ext-data-proxy-Server-cfg-filterParam'>        /**
 </span>         * @cfg {String} [filterParam=&quot;filter&quot;]
-         * The name of the 'filter' parameter to send in a request. Defaults to 'filter'. Set this to `''` if you don't
+         * The name of the &#39;filter&#39; parameter to send in a request. Defaults to &#39;filter&#39;. Set this to `&#39;&#39;` if you don&#39;t
          * want to send a filter parameter.
          */
-        filterParam: 'filter',
+        filterParam: &#39;filter&#39;,
     
 <span id='Ext-data-proxy-Server-cfg-directionParam'>        /**
 </span>         * @cfg {String} [directionParam=&quot;dir&quot;]
          * The name of the direction parameter to send in a request. **This is only used when simpleSortMode is set to
          * true.**
          */
-        directionParam: 'dir',
+        directionParam: &#39;dir&#39;,
     
 <span id='Ext-data-proxy-Server-cfg-idParam'>        /**
 </span>         * @cfg {String} [idParam=&quot;id&quot;]
          * The name of the parameter which carries the id of the entity being operated upon.
          */
-        idParam: 'id',
+        idParam: &#39;id&#39;,
     
 <span id='Ext-data-proxy-Server-cfg-simpleSortMode'>        /**
 </span>         * @cfg {Boolean} [simpleSortMode=false]
          * Enabling simpleSortMode in conjunction with remoteSort will only send one sort property and a direction when a
          * remote sort is requested. The {@link #directionParam} and {@link #sortParam} will be sent with the property name
-         * and either 'ASC' or 'DESC'.
+         * and either &#39;ASC&#39; or &#39;DESC&#39;.
          */
         simpleSortMode: false,
     
 <span id='Ext-data-proxy-Server-cfg-simpleGroupMode'>        /**
 </span>         * @cfg {Boolean} [simpleGroupMode=false]
          * Enabling simpleGroupMode in conjunction with remoteGroup will only send one group property and a direction when a
-         * remote group is requested. The {@link #groupDirectionParam} and {@link #groupParam} will be sent with the property name and either 'ASC'
-         * or 'DESC'.
+         * remote group is requested. The {@link #groupDirectionParam} and {@link #groupParam} will be sent with the property name and either &#39;ASC&#39;
+         * or &#39;DESC&#39;.
          */
         simpleGroupMode: false,
     
@@ -149,10 +149,10 @@ Ext.define('Ext.data.proxy.Server', {
          * For example:
          *
          *     api: {
-         *         create  : '/controller/new',
-         *         read    : '/controller/load',
-         *         update  : '/controller/update',
-         *         destroy : '/controller/destroy_action'
+         *         create  : &#39;/controller/new&#39;,
+         *         read    : &#39;/controller/load&#39;,
+         *         update  : &#39;/controller/update&#39;,
+         *         destroy : &#39;/controller/destroy_action&#39;
          *     }
          *
          * If the specific URL for a given CRUD action is undefined, the CRUD action request will be directed to the
@@ -207,11 +207,11 @@ Ext.define('Ext.data.proxy.Server', {
     setExtraParam: function(name, value) {
         var extraParams = this.getExtraParams();
         extraParams[name] = value;
-        this.fireEvent('extraparamschanged', extraParams);
+        this.fireEvent(&#39;extraparamschanged&#39;, extraParams);
     },
 
 <span id='Ext-data-proxy-Server-method-updateExtraParams'>    updateExtraParams: function(newExtraParams, oldExtraParams) {
-</span>        this.fireEvent('extraparamschanged', newExtraParams);
+</span>        this.fireEvent(&#39;extraparamschanged&#39;, newExtraParams);
     },
 
 <span id='Ext-data-proxy-Server-method-buildRequest'>    /**
@@ -258,7 +258,7 @@ Ext.define('Ext.data.proxy.Server', {
         request.setUrl(me.buildUrl(request));
 
         /*
-         * Save the request on the Operation. Operations don't usually care about Request and Response data, but in the
+         * Save the request on the Operation. Operations don&#39;t usually care about Request and Response data, but in the
          * ServerProxy and any of its subclasses we add both request and response as they may be useful for further processing
          */
         operation.setRequest(request);
@@ -278,7 +278,7 @@ Ext.define('Ext.data.proxy.Server', {
             exception, reader, resultSet, meta;
         
         // Async callback could have landed at any time, including during and after
-        // destruction. We don't want to unravel the whole response chain in such case.
+        // destruction. We don&#39;t want to unravel the whole response chain in such case.
         if (me.destroying || me.destroyed) {
             return;
         }
@@ -290,7 +290,7 @@ Ext.define('Ext.data.proxy.Server', {
         // Bracketing the processing with this event gives owning stores the ability
         // to fire their own beginupdate/endupdate events which can be used by interested
         // views to suspend layouts.
-        me.fireEvent('beginprocessresponse', me, response, operation);
+        me.fireEvent(&#39;beginprocessresponse&#39;, me, response, operation);
 
         if (success === true) {
             reader = me.getReader();
@@ -299,7 +299,7 @@ Ext.define('Ext.data.proxy.Server', {
                 resultSet = reader.getNullResultSet();
             } else {
                 resultSet = reader.read(me.extractResponseData(response), {
-                    // If we're doing an update, we want to construct the models ourselves.
+                    // If we&#39;re doing an update, we want to construct the models ourselves.
                     recordCreator: operation.getRecordCreator()
                 });
             }
@@ -312,11 +312,11 @@ Ext.define('Ext.data.proxy.Server', {
         }
         
         if (exception) {
-            me.fireEvent('exception', me, response, operation);
+            me.fireEvent(&#39;exception&#39;, me, response, operation);
         }
 
         // If a JsonReader detected metadata, process it now.
-        // This will fire the 'metachange' event which the Store processes to fire its own 'metachange'
+        // This will fire the &#39;metachange&#39; event which the Store processes to fire its own &#39;metachange&#39;
         else {
             meta = resultSet.getMetadata();
             if (meta) {
@@ -329,7 +329,7 @@ Ext.define('Ext.data.proxy.Server', {
         // Tell owning store processing has finished.
         // It will fire its endupdate event which will cause interested views to 
         // resume layouts.
-        me.fireEvent('endprocessresponse', me, response, operation);
+        me.fireEvent(&#39;endprocessresponse&#39;, me, response, operation);
     },
     
 <span id='Ext-data-proxy-Server-method-setException'>    /**
@@ -400,7 +400,7 @@ Ext.define('Ext.data.proxy.Server', {
             filter = filters[i];
 
             // Filters with a custom filterFn cannot be serialized.  But since #getFilterFn()
-            // always returns a filterFn, we need to check if it's been generated by default.
+            // always returns a filterFn, we need to check if it&#39;s been generated by default.
             // If so, we know that the filter cannot have a custom filterFn defined, and it
             // is therefore okay to serialize.
             filter.getFilterFn();
@@ -487,7 +487,7 @@ Ext.define('Ext.data.proxy.Server', {
     },
 
 <span id='Ext-data-proxy-Server-method-buildUrl'>    /**
-</span>     * Generates a url based on a given Ext.data.Request object. By default, ServerProxy's buildUrl will add the
+</span>     * Generates a url based on a given Ext.data.Request object. By default, ServerProxy&#39;s buildUrl will add the
      * cache-buster param to the end of the url. Subclasses may need to perform additional modifications to the url.
      * @param {Ext.data.Request} request The request object
      * @return {String} The url
@@ -557,7 +557,7 @@ Ext.define('Ext.data.proxy.Server', {
         
         me.destroying = true;
         
-        // Don't force Reader and Writer creation if they weren't yet instantiated
+        // Don&#39;t force Reader and Writer creation if they weren&#39;t yet instantiated
         me.reader = me.writer = Ext.destroy(me.reader, me.writer);
         
         me.callParent();

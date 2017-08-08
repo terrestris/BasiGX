@@ -22,15 +22,15 @@
  * created directly, the {@link Ext.Component} will be passed to the animation and
  * and the appropriate target will be created.
  */
-Ext.define('Ext.fx.target.Component', {
+Ext.define(&#39;Ext.fx.target.Component&#39;, {
 
     /* Begin Definitions */
    
-    extend: 'Ext.fx.target.Target',
+    extend: &#39;Ext.fx.target.Target&#39;,
     
 <span id='Ext-fx-target-Component-property-type'>    /* End Definitions */
 </span>
-    type: 'component',
+    type: &#39;component&#39;,
 
 <span id='Ext-fx-target-Component-property-getPropMethod'>    // Methods to call to retrieve unspecified &quot;from&quot; values from a target Component
 </span>    getPropMethod: {
@@ -53,18 +53,18 @@ Ext.define('Ext.fx.target.Component', {
             return this.getWidth();
         },
         opacity: function() {
-            return this.el.getStyle('opacity');
+            return this.el.getStyle(&#39;opacity&#39;);
         }
     },
 
 <span id='Ext-fx-target-Component-property-setMethods'>    setMethods: {
-</span>        top:     'setPosition',
-        left:    'setPosition',
-        x:       'setPagePosition',
-        y:       'setPagePosition',
-        height:  'setSize',
-        width:   'setSize',
-        opacity: 'setOpacity'
+</span>        top:     &#39;setPosition&#39;,
+        left:    &#39;setPosition&#39;,
+        x:       &#39;setPagePosition&#39;,
+        y:       &#39;setPagePosition&#39;,
+        height:  &#39;setSize&#39;,
+        width:   &#39;setSize&#39;,
+        opacity: &#39;setOpacity&#39;
     },
 
 <span id='Ext-fx-target-Component-method-getAttr'>    // Read the named attribute from the target Component. Use the defined getter for the attribute
@@ -88,7 +88,7 @@ Ext.define('Ext.fx.target.Component', {
                     methodProps = methodsToCall[me.setMethods[attr]] || (methodsToCall[me.setMethods[attr]] = {});
                     methodProps.target = o[0];
                     methodProps[attr] = o[1];
-                    // debugging code: Ext.log('Setting ' + o[0].id + &quot;'s &quot; + attr + ' to ' + o[1]);
+                    // debugging code: Ext.log(&#39;Setting &#39; + o[0].id + &quot;&#39;s &quot; + attr + &#39; to &#39; + o[1]);
                 }
             }
             if (methodsToCall.setPosition) {
@@ -112,7 +112,7 @@ Ext.define('Ext.fx.target.Component', {
                 // In other cases, we just set the target element size.
                 // This will result in either clipping if animating a reduction in size, or the revealing of
                 // the inner elements of the Component if animating an increase in size.
-                // Component's animate function initially resizes to the larger size before resizing the
+                // Component&#39;s animate function initially resizes to the larger size before resizing the
                 // outer element to clip the contents.
                 o.target.el.setSize(w, h);
                 if (isLastFrame || me.dynamic) {
@@ -127,7 +127,7 @@ Ext.define('Ext.fx.target.Component', {
             }
             if (methodsToCall.setOpacity) {
                 o = methodsToCall.setOpacity;
-                o.target.el.setStyle('opacity', o.opacity);
+                o.target.el.setStyle(&#39;opacity&#39;, o.opacity);
             }
         }
     }

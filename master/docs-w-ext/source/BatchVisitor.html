@@ -22,7 +22,7 @@
  * @protected
  * @since 5.0.0
  */
-Ext.define('Ext.data.session.BatchVisitor', {
+Ext.define(&#39;Ext.data.session.BatchVisitor&#39;, {
 <span id='Ext-data-session-BatchVisitor-property-map'>    map: null,
 </span>
 <span id='Ext-data-session-BatchVisitor-method-constructor'>    constructor: function (batch) {
@@ -44,7 +44,7 @@ Ext.define('Ext.data.session.BatchVisitor', {
                 entity = bucket.entity; // the entity class
                 proxy = entity.getProxy();
 
-                delete bucket.entity; // so we don't think its an operation
+                delete bucket.entity; // so we don&#39;t think its an operation
                 for (operation in bucket) {
                     operation = proxy.createOperation(operation, {
                         records: bucket[operation]
@@ -65,8 +65,8 @@ Ext.define('Ext.data.session.BatchVisitor', {
 
 <span id='Ext-data-session-BatchVisitor-method-onDirtyRecord'>    onDirtyRecord: function (record) {
 </span>        var me = this,
-            operation = record.phantom ? 'create'
-                : (record.dropped ? 'destroy' : 'update'),
+            operation = record.phantom ? &#39;create&#39;
+                : (record.dropped ? &#39;destroy&#39; : &#39;update&#39;),
             name = record.$className,
             map = (me.map || (me.map = {})),
             bucket = (map[name] || (map[name] = {
@@ -76,7 +76,7 @@ Ext.define('Ext.data.session.BatchVisitor', {
         //  User: {
         //      entity: User,
         //      create: [
-        //          { id: 20, name: 'Don' }
+        //          { id: 20, name: &#39;Don&#39; }
         //      ]
         //  }
         bucket = bucket[operation] || (bucket[operation] = []);

@@ -20,13 +20,13 @@
  * headers ({@link Ext.grid.column.Column grid columns}) of a
  * {@link Ext.grid.Panel grid} or {@link Ext.tree.Panel tree}.  The headercontainer
  * handles resizing, moving, and hiding columns.  As columns are hidden, moved or
- * resized, the headercontainer triggers changes within the grid or tree's
+ * resized, the headercontainer triggers changes within the grid or tree&#39;s
  * {@link Ext.view.Table view}.  You will not generally need to instantiate this class
  * directly.
  *
  * You may use the
  * {@link Ext.panel.Table#method-getHeaderContainer getHeaderContainer()}
- * accessor method to access the tree or grid's headercontainer.
+ * accessor method to access the tree or grid&#39;s headercontainer.
  *
  * Grids and trees also have an alias to the two more useful headercontainer methods:
  *
@@ -35,33 +35,33 @@
  *  - **{@link Ext.panel.Table#method-getVisibleColumns getVisibleColumns}** - aliases
  * {@link Ext.grid.header.Container#getVisibleGridColumns}
  */
-Ext.define('Ext.grid.header.Container', {
-    extend: 'Ext.container.Container',
+Ext.define(&#39;Ext.grid.header.Container&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
     requires: [
-        'Ext.grid.ColumnLayout',
-        'Ext.grid.plugin.HeaderResizer',
-        'Ext.grid.plugin.HeaderReorderer',
-        'Ext.util.KeyNav'
+        &#39;Ext.grid.ColumnLayout&#39;,
+        &#39;Ext.grid.plugin.HeaderResizer&#39;,
+        &#39;Ext.grid.plugin.HeaderReorderer&#39;,
+        &#39;Ext.util.KeyNav&#39;
     ],
     uses: [
-        'Ext.grid.column.Column',
-        'Ext.grid.ColumnManager',
-        'Ext.menu.Menu',
-        'Ext.menu.CheckItem',
-        'Ext.menu.Separator'
+        &#39;Ext.grid.column.Column&#39;,
+        &#39;Ext.grid.ColumnManager&#39;,
+        &#39;Ext.menu.Menu&#39;,
+        &#39;Ext.menu.CheckItem&#39;,
+        &#39;Ext.menu.Separator&#39;
     ],
 
     mixins: [
-        'Ext.util.FocusableContainer'
+        &#39;Ext.util.FocusableContainer&#39;
     ],
 
 <span id='Ext-grid-header-Container-cfg-border'>    border: true,
 </span>
-    alias: 'widget.headercontainer',
+    alias: &#39;widget.headercontainer&#39;,
 
-<span id='Ext-grid-header-Container-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'grid-header-ct',
+<span id='Ext-grid-header-Container-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;grid-header-ct&#39;,
 </span>
-<span id='Ext-grid-header-Container-cfg-dock'>    dock: 'top',
+<span id='Ext-grid-header-Container-cfg-dock'>    dock: &#39;top&#39;,
 </span>
 <span id='Ext-grid-header-Container-cfg-weight'>    /**
 </span>     * @cfg {Number} weight
@@ -70,7 +70,7 @@ Ext.define('Ext.grid.header.Container', {
      */
     weight: 100,
 
-<span id='Ext-grid-header-Container-cfg-defaultType'>    defaultType: 'gridcolumn',
+<span id='Ext-grid-header-Container-cfg-defaultType'>    defaultType: &#39;gridcolumn&#39;,
 </span>
 <span id='Ext-grid-header-Container-cfg-defaultWidth'>    /**
 </span>     * @cfg {Number} defaultWidth
@@ -85,38 +85,38 @@ Ext.define('Ext.grid.header.Container', {
      * **Note that this config is only valid for column headers which contain child column headers, eg:**
      *     {
      *         sealed: true
-     *         text: 'ExtJS',
+     *         text: &#39;ExtJS&#39;,
      *         columns: [{
-     *             text: '3.0.4',
-     *             dataIndex: 'ext304'
+     *             text: &#39;3.0.4&#39;,
+     *             dataIndex: &#39;ext304&#39;
      *         }, {
-     *             text: '4.1.0',
-     *             dataIndex: 'ext410'
+     *             text: &#39;4.1.0&#39;,
+     *             dataIndex: &#39;ext410&#39;
      *         }
      *     }
      *
      */
 
 <span id='Ext-grid-header-Container-property-sortAscText'>    //&lt;locale&gt;
-</span>    sortAscText: 'Sort Ascending',
+</span>    sortAscText: &#39;Sort Ascending&#39;,
 <span id='Ext-grid-header-Container-property-sortDescText'>    //&lt;/locale&gt;
 </span>    //&lt;locale&gt;
-    sortDescText: 'Sort Descending',
+    sortDescText: &#39;Sort Descending&#39;,
 <span id='Ext-grid-header-Container-property-sortClearText'>    //&lt;/locale&gt;
 </span>    //&lt;locale&gt;
-    sortClearText: 'Clear Sort',
+    sortClearText: &#39;Clear Sort&#39;,
 <span id='Ext-grid-header-Container-property-columnsText'>    //&lt;/locale&gt;
 </span>    //&lt;locale&gt;
-    columnsText: 'Columns',
+    columnsText: &#39;Columns&#39;,
 <span id='Ext-grid-header-Container-property-headerOpenCls'>    //&lt;/locale&gt;
 </span>
-    headerOpenCls: Ext.baseCSSPrefix + 'column-header-open',
+    headerOpenCls: Ext.baseCSSPrefix + &#39;column-header-open&#39;,
 
-<span id='Ext-grid-header-Container-property-menuSortAscCls'>    menuSortAscCls: Ext.baseCSSPrefix + 'hmenu-sort-asc',
+<span id='Ext-grid-header-Container-property-menuSortAscCls'>    menuSortAscCls: Ext.baseCSSPrefix + &#39;hmenu-sort-asc&#39;,
 </span>
-<span id='Ext-grid-header-Container-property-menuSortDescCls'>    menuSortDescCls: Ext.baseCSSPrefix + 'hmenu-sort-desc',
+<span id='Ext-grid-header-Container-property-menuSortDescCls'>    menuSortDescCls: Ext.baseCSSPrefix + &#39;hmenu-sort-desc&#39;,
 </span>
-<span id='Ext-grid-header-Container-property-menuColsIcon'>    menuColsIcon: Ext.baseCSSPrefix + 'cols-icon',
+<span id='Ext-grid-header-Container-property-menuColsIcon'>    menuColsIcon: Ext.baseCSSPrefix + &#39;cols-icon&#39;,
 </span>
 <span id='Ext-grid-header-Container-property-blockEvents'>    blockEvents: false,
 </span>
@@ -126,7 +126,7 @@ Ext.define('Ext.grid.header.Container', {
 </span>    sortOnClick: true,
     
 <span id='Ext-grid-header-Container-cfg-enableFocusableContainer'>    // Disable FocusableContainer behavior by default, since we only want it
-</span>    // to be enabled for the root header container (we'll set the flag in initComponent)
+</span>    // to be enabled for the root header container (we&#39;ll set the flag in initComponent)
     enableFocusableContainer: false,
 
 <span id='Ext-grid-header-Container-property-childHideCount'>    childHideCount: 0,
@@ -153,14 +153,14 @@ Ext.define('Ext.grid.header.Container', {
 
 <span id='Ext-grid-header-Container-event-columnresize'>    /**
 </span>     * @event columnresize
-     * @param {Ext.grid.header.Container} ct The grid's header Container which encapsulates all column headers.
+     * @param {Ext.grid.header.Container} ct The grid&#39;s header Container which encapsulates all column headers.
      * @param {Ext.grid.column.Column} column The Column header Component which provides the column definition
      * @param {Number} width
      */
 
 <span id='Ext-grid-header-Container-event-headerclick'>    /**
 </span>     * @event headerclick
-     * @param {Ext.grid.header.Container} ct The grid's header Container which encapsulates all column headers.
+     * @param {Ext.grid.header.Container} ct The grid&#39;s header Container which encapsulates all column headers.
      * @param {Ext.grid.column.Column} column The Column header Component which provides the column definition
      * @param {Ext.event.Event} e
      * @param {HTMLElement} t
@@ -168,7 +168,7 @@ Ext.define('Ext.grid.header.Container', {
 
 <span id='Ext-grid-header-Container-event-headercontextmenu'>    /**
 </span>     * @event headercontextmenu
-     * @param {Ext.grid.header.Container} ct The grid's header Container which encapsulates all column headers.
+     * @param {Ext.grid.header.Container} ct The grid&#39;s header Container which encapsulates all column headers.
      * @param {Ext.grid.column.Column} column The Column header Component which provides the column definition
      * @param {Ext.event.Event} e
      * @param {HTMLElement} t
@@ -176,7 +176,7 @@ Ext.define('Ext.grid.header.Container', {
 
 <span id='Ext-grid-header-Container-event-headertriggerclick'>    /**
 </span>     * @event headertriggerclick
-     * @param {Ext.grid.header.Container} ct The grid's header Container which encapsulates all column headers.
+     * @param {Ext.grid.header.Container} ct The grid&#39;s header Container which encapsulates all column headers.
      * @param {Ext.grid.column.Column} column The Column header Component which provides the column definition
      * @param {Ext.event.Event} e
      * @param {HTMLElement} t
@@ -184,7 +184,7 @@ Ext.define('Ext.grid.header.Container', {
 
 <span id='Ext-grid-header-Container-event-columnmove'>    /**
 </span>     * @event columnmove
-     * @param {Ext.grid.header.Container} ct The grid's header Container which encapsulates all column headers.
+     * @param {Ext.grid.header.Container} ct The grid&#39;s header Container which encapsulates all column headers.
      * @param {Ext.grid.column.Column} column The Column header Component which provides the column definition
      * @param {Number} fromIdx
      * @param {Number} toIdx
@@ -192,13 +192,13 @@ Ext.define('Ext.grid.header.Container', {
 
 <span id='Ext-grid-header-Container-event-columnhide'>    /**
 </span>     * @event columnhide
-     * @param {Ext.grid.header.Container} ct The grid's header Container which encapsulates all column headers.
+     * @param {Ext.grid.header.Container} ct The grid&#39;s header Container which encapsulates all column headers.
      * @param {Ext.grid.column.Column} column The Column header Component which provides the column definition
      */
 
 <span id='Ext-grid-header-Container-event-columnshow'>    /**
 </span>     * @event columnshow
-     * @param {Ext.grid.header.Container} ct The grid's header Container which encapsulates all column headers.
+     * @param {Ext.grid.header.Container} ct The grid&#39;s header Container which encapsulates all column headers.
      * @param {Ext.grid.column.Column} column The Column header Component which provides the column definition
      */
 
@@ -206,12 +206,12 @@ Ext.define('Ext.grid.header.Container', {
 </span>     * @event columnschanged
      * Fired after the columns change in any way, when a column has been hidden or shown, or when a column
      * is added to or removed from this header container.
-     * @param {Ext.grid.header.Container} ct The grid's header Container which encapsulates all column headers.
+     * @param {Ext.grid.header.Container} ct The grid&#39;s header Container which encapsulates all column headers.
      */
 
 <span id='Ext-grid-header-Container-event-sortchange'>    /**
 </span>     * @event sortchange
-     * @param {Ext.grid.header.Container} ct The grid's header Container which encapsulates all column headers.
+     * @param {Ext.grid.header.Container} ct The grid&#39;s header Container which encapsulates all column headers.
      * @param {Ext.grid.column.Column} column The Column header Component which provides the column definition
      * @param {String} direction
      */
@@ -262,12 +262,12 @@ Ext.define('Ext.grid.header.Container', {
                 me.isContainer = me.isFocusableContainer = false;
                 
                 // Allow overriding via instance config
-                if (!me.hasOwnProperty('focusable')) {
+                if (!me.hasOwnProperty(&#39;focusable&#39;)) {
                     me.focusable = true;
                 }
                 
                 me.layout = {
-                    type: 'container',
+                    type: &#39;container&#39;,
                     calculate: Ext.emptyFn
                 };
             }
@@ -275,8 +275,8 @@ Ext.define('Ext.grid.header.Container', {
         // HeaderContainer and Group header needs a gridcolumn layout.
         else {
             me.layout = Ext.apply({
-                type: 'gridcolumn',
-                align: 'stretch'
+                type: &#39;gridcolumn&#39;,
+                align: &#39;stretch&#39;
             }, me.initialConfig.layout);
 
             // All HeaderContainers need to know this so that leaf Columns can adjust for cell border width if using content box model
@@ -285,10 +285,10 @@ Ext.define('Ext.grid.header.Container', {
             // Initialize the root header.
             if (me.isRootHeader) {
 
-                // The root header is a focusableContainer if it's not carrying hidden headers.
+                // The root header is a focusableContainer if it&#39;s not carrying hidden headers.
                 if (!me.hiddenHeaders) {
                     me.enableFocusableContainer = true;
-                    me.ariaRole = 'rowgroup';
+                    me.ariaRole = &#39;rowgroup&#39;;
                 }
 
                 // Create column managers for the root header.
@@ -317,13 +317,13 @@ Ext.define('Ext.grid.header.Container', {
     },
 
 <span id='Ext-grid-header-Container-method-isNested'>    isNested: function () {
-</span>        return !!this.getRootHeaderCt().down('[isNestedParent]');
+</span>        return !!this.getRootHeaderCt().down(&#39;[isNestedParent]&#39;);
     },
 
 <span id='Ext-grid-header-Container-method-isNestedGroupHeader'>    isNestedGroupHeader: function () {
-</span>        // The owner only has one item that isn't hidden and it's me; hide the owner.
+</span>        // The owner only has one item that isn&#39;t hidden and it&#39;s me; hide the owner.
         var header = this,
-            items = header.getRefOwner().query('&gt;:not([hidden])');
+            items = header.getRefOwner().query(&#39;&gt;:not([hidden])&#39;);
 
         return (items.length === 1 &amp;&amp; items[0] === header);
     },
@@ -365,11 +365,11 @@ Ext.define('Ext.grid.header.Container', {
         // in its collection. In this specific scenario, the group headers above it only have 1 item, which is its
         // child nested group header.
         //
-        // If we don't set this flag, then all of the grouped headers will be recursively removed all the way up to
-        // the root container b/c Ext.grid.header.Container#onRemove will remove all containers that don't contain
+        // If we don&#39;t set this flag, then all of the grouped headers will be recursively removed all the way up to
+        // the root container b/c Ext.grid.header.Container#onRemove will remove all containers that don&#39;t contain
         // any items.
         //
-        // Note that if an ownerCt only has one item, then we know that this item is the group header that we're
+        // Note that if an ownerCt only has one item, then we know that this item is the group header that we&#39;re
         // currently dragging.
         //
         // Also, note that we mark the owner as the target header because everything up to that should be removed.
@@ -424,24 +424,24 @@ Ext.define('Ext.grid.header.Container', {
             header = Ext.getCmp(headerEl.id);
             if (header) {
                 targetEl = header[header.clickTargetName];
-                // If there's no possibility that the mouseEvent was on child header items,
+                // If there&#39;s no possibility that the mouseEvent was on child header items,
                 // or it was definitely in our titleEl, then process it
                 if ((!header.isGroupHeader &amp;&amp; !header.isContainer) || e.within(targetEl)) {
-                    if (e.type === 'click' || e.type === 'tap') {
+                    if (e.type === &#39;click&#39; || e.type === &#39;tap&#39;) {
                         // The header decides which header to activate on click
                         // on Touch, anywhere in the splitter zone activates
                         // the left header.
                         activeHeader = header.onTitleElClick(e, targetEl, me.sortOnClick);
                         if (activeHeader) {
                             // If activated by touch, there is no trigger el to align with, so align to the header element.
-                            me.onHeaderTriggerClick(activeHeader, e, e.pointerType === 'touch' ? activeHeader.el : activeHeader.triggerEl);
+                            me.onHeaderTriggerClick(activeHeader, e, e.pointerType === &#39;touch&#39; ? activeHeader.el : activeHeader.triggerEl);
                         } else {
                             me.onHeaderClick(header, e, t);
                         }
                     }
-                    else if (e.type === 'contextmenu') {
+                    else if (e.type === &#39;contextmenu&#39;) {
                         me.onHeaderContextMenu(header, e, t);
-                    } else if (e.type === 'dblclick' &amp;&amp; header.resizable) {
+                    } else if (e.type === &#39;dblclick&#39; &amp;&amp; header.resizable) {
                         header.onTitleElDblClick(e, targetEl.dom);
                     }
                 }
@@ -490,7 +490,7 @@ Ext.define('Ext.grid.header.Container', {
         // Only proces the mouse entering this HeaderContainer.
         // From header to header, and exiting this HeaderContainer we track using mouseout events.
         if (!e.within(this.el, true)) {
-            headerEl = e.getTarget('.' + Ext.grid.column.Column.prototype.baseCls);
+            headerEl = e.getTarget(&#39;.&#39; + Ext.grid.column.Column.prototype.baseCls);
             header = headerEl &amp;&amp; Ext.getCmp(headerEl.id);
             if (header) {
                 targetEl = header[header.clickTargetName];
@@ -502,13 +502,13 @@ Ext.define('Ext.grid.header.Container', {
     },
 
 <span id='Ext-grid-header-Container-method-onHeaderCtMouseOut'>    onHeaderCtMouseOut: function(e, t) {
-</span>        var headerSelector = '.' + Ext.grid.column.Column.prototype.baseCls,
+</span>        var headerSelector = &#39;.&#39; + Ext.grid.column.Column.prototype.baseCls,
             outHeaderEl = e.getTarget(headerSelector),
             inHeaderEl = e.getRelatedTarget(headerSelector),
             header,
             targetEl;
 
-        // It's a mouseenter/leave, not an internal element change within a Header
+        // It&#39;s a mouseenter/leave, not an internal element change within a Header
         if (outHeaderEl !== inHeaderEl) {
             if (outHeaderEl) {
                 header = Ext.getCmp(outHeaderEl.id);
@@ -543,13 +543,13 @@ Ext.define('Ext.grid.header.Container', {
     },
 
 <span id='Ext-grid-header-Container-method-getHeaderElByEvent'>    getHeaderElByEvent: function(e) {
-</span>        return e.getTarget('.' + Ext.grid.column.Column.prototype.baseCls);
+</span>        return e.getTarget(&#39;.&#39; + Ext.grid.column.Column.prototype.baseCls);
     },
 
 <span id='Ext-grid-header-Container-method-isLayoutRoot'>    isLayoutRoot: function(){
-</span>        // Since we're docked, the width is always calculated
-        // If we're hidden, the height is explicitly 0, which
-        // means we'll be considered a layout root. However, we
+</span>        // Since we&#39;re docked, the width is always calculated
+        // If we&#39;re hidden, the height is explicitly 0, which
+        // means we&#39;ll be considered a layout root. However, we
         // still need the view to layout to update the underlying
         // table to match the size.
         if (this.hiddenHeaders) {
@@ -561,14 +561,14 @@ Ext.define('Ext.grid.header.Container', {
 <span id='Ext-grid-header-Container-method-getRootHeaderCt'>    // Find the topmost HeaderContainer
 </span>    getRootHeaderCt: function() {
         var me = this;
-        return me.isRootHeader ? me : me.up('[isRootHeader]');
+        return me.isRootHeader ? me : me.up(&#39;[isRootHeader]&#39;);
     },
 
 <span id='Ext-grid-header-Container-method-doDestroy'>    doDestroy: function() {
 </span>        var me = this;
 
         if (me.menu) {
-            me.menu.un('hide', me.onMenuHide, me);
+            me.menu.un(&#39;hide&#39;, me.onMenuHide, me);
         }
         
         me.menuTask.cancel();
@@ -597,7 +597,7 @@ Ext.define('Ext.grid.header.Container', {
             col = items[i];
             columnState = columnsState[col.getStateId()];
 
-            // There's a column state for this column.
+            // There&#39;s a column state for this column.
             // Add it to the newOrder array at the specified index
             if (columnState) {
                 index = columnState.index;
@@ -681,7 +681,7 @@ Ext.define('Ext.grid.header.Container', {
             }
             
             if (me._usedIDs[stateId] &amp;&amp; me._usedIDs[stateId] !== c) {
-                Ext.log.warn(this.$className + ' attempted to reuse an existing id: ' + stateId);
+                Ext.log.warn(this.$className + &#39; attempted to reuse an existing id: &#39; + stateId);
             }
             
             me._usedIDs[stateId] = c;
@@ -741,7 +741,7 @@ Ext.define('Ext.grid.header.Container', {
 </span>    maybeContinueRemove: function () {
         var me = this;
 
-        // Note that if the column is a group header and is the current target of a drag, we don't want to remove it
+        // Note that if the column is a group header and is the current target of a drag, we don&#39;t want to remove it
         // if it since it could be one of any number of (empty) nested group headers.
         // See #isNested.
         //
@@ -776,14 +776,14 @@ Ext.define('Ext.grid.header.Container', {
             }
 
             if (me.maybeContinueRemove()) {
-                // Detach the header from the DOM here. Since we're removing and destroying the container,
+                // Detach the header from the DOM here. Since we&#39;re removing and destroying the container,
                 // the inner DOM may get overwritten, since Container::deatchOnRemove gets processed after
                 // onRemove.
                 if (c.rendered) {
                     me.detachComponent(c);
                 }
                 
-                // If we don't have any items left and we're a group, remove ourselves.
+                // If we don&#39;t have any items left and we&#39;re a group, remove ourselves.
                 // This will cascade up if necessary. DO NOT destroy ourselves here,
                 // we have to defer that until all moves are done and events are fired.
                 me.destroyAfterRemoving = true;
@@ -797,7 +797,7 @@ Ext.define('Ext.grid.header.Container', {
 
 <span id='Ext-grid-header-Container-method-onHeadersChanged'>    // Private
 </span>    // Called to clear all caches of columns whenever columns are added, removed to just moved.
-    // We need to be informed if it's just a move operation so that we don't call the heavier
+    // We need to be informed if it&#39;s just a move operation so that we don&#39;t call the heavier
     // grid.onHeadersChanged which refreshes the view.
     // The onMove handler ensures that grid.inHeaderMove is called which just swaps cells.
     onHeadersChanged: function(c, isMove) {
@@ -830,12 +830,12 @@ Ext.define('Ext.grid.header.Container', {
             if (gridSection &amp;&amp; gridSection.onHeaderMove) {
                 gridSection.onHeaderMove(me, header, colsToMove, fromIdx, toIdx);
             }
-            me.fireEvent('columnmove', me, header, fromIdx, toIdx);
+            me.fireEvent(&#39;columnmove&#39;, me, header, fromIdx, toIdx);
         }
     },
 
 <span id='Ext-grid-header-Container-method-onColumnsChanged'>    // Private
-</span>    // Only called on the grid's headerCt.
+</span>    // Only called on the grid&#39;s headerCt.
     // Called whenever a column is added or removed or moved at any level below.
     // Ensures that the gridColumns caches are cleared.
     onColumnsChanged: function() {
@@ -845,13 +845,13 @@ Ext.define('Ext.grid.header.Container', {
             columnItem;
 
         if (me.rendered) {
-            me.fireEvent('columnschanged', me);
+            me.fireEvent(&#39;columnschanged&#39;, me);
 
             // Column item (and its associated menu) menu has to be destroyed (if it exits) when columns are changed.
             // It will be recreated just before the main container menu is next shown.
             if (menu) {
-                columnItemSeparator = menu.child('#columnItemSeparator');
-                columnItem = menu.child('#columnItem');
+                columnItemSeparator = menu.child(&#39;#columnItemSeparator&#39;);
+                columnItem = menu.child(&#39;#columnItem&#39;);
 
                 // Destroy the column visibility items
                 // They will be recreated before the next show
@@ -871,7 +871,7 @@ Ext.define('Ext.grid.header.Container', {
     lookupComponent: function(comp) {
         var result = this.callParent(arguments);
 
-        // Apply default width unless it's a group header (in which case it must be left to shrinkwrap), or it's flexed.
+        // Apply default width unless it&#39;s a group header (in which case it must be left to shrinkwrap), or it&#39;s flexed.
         // Test whether width is undefined so that width: null can be used to have the header shrinkwrap its text.
         if (!result.isGroupHeader &amp;&amp; result.width === undefined &amp;&amp; !result.flex) {
             result.width = this.defaultWidth;
@@ -881,10 +881,10 @@ Ext.define('Ext.grid.header.Container', {
 
 <span id='Ext-grid-header-Container-method-setSortState'>    /**
 </span>     * @private
-     * Synchronize column UI visible sort state with Store's sorters.
+     * Synchronize column UI visible sort state with Store&#39;s sorters.
      */
     setSortState: function() {
-        var store   = this.up('[store]').store,
+        var store   = this.up(&#39;[store]&#39;).store,
             columns = this.visibleColumnManager.getColumns(),
             len = columns.length, i,
             header, sorter;
@@ -892,11 +892,11 @@ Ext.define('Ext.grid.header.Container', {
         for (i = 0; i &lt; len; i++) {
             header = columns[i];
 
-            // Access the column's custom sorter in preference to one keyed on the data index.
+            // Access the column&#39;s custom sorter in preference to one keyed on the data index.
             sorter = header.getSorter();
             if (sorter) {
                 // If the column was configured with a sorter, we must check that the sorter
-                // is part of the store's sorter collection to update the UI to the correct state.
+                // is part of the store&#39;s sorter collection to update the UI to the correct state.
                 // The store may not actually BE sorted by that sorter.
                 if (!store.getSorters().contains(sorter)) {
                     sorter = null;
@@ -915,7 +915,7 @@ Ext.define('Ext.grid.header.Container', {
             item;
 
         if (menu) {
-            item = menu.child('#columnItem');
+            item = menu.child(&#39;#columnItem&#39;);
             if (item) {
                 return item.menu;
             }
@@ -937,7 +937,7 @@ Ext.define('Ext.grid.header.Container', {
             if (item) {
                 item.setChecked(visible, true);
             }
-            // delay this since the headers may fire a number of times if we're hiding/showing groups
+            // delay this since the headers may fire a number of times if we&#39;re hiding/showing groups
             if (menu.isVisible()) {
                 me.menuTask.delay(50);
             }
@@ -946,7 +946,7 @@ Ext.define('Ext.grid.header.Container', {
 
 <span id='Ext-grid-header-Container-method-updateMenuDisabledState'>    updateMenuDisabledState: function(menu) {
 </span>        var me = this,
-            columns = me.query('gridcolumn:not([hidden])'),
+            columns = me.query(&#39;gridcolumn:not([hidden])&#39;),
             i,
             len = columns.length,
             item,
@@ -962,9 +962,9 @@ Ext.define('Ext.grid.header.Container', {
             item = columns[i];
             checkItem = me.getMenuItemForHeader(menu, item);
             if (checkItem) {
-                method = item.isHideable() ? 'enable' : 'disable';
+                method = item.isHideable() ? &#39;enable&#39; : &#39;disable&#39;;
                 if (checkItem.menu) {
-                    method += 'CheckChange';
+                    method += &#39;CheckChange&#39;;
                 }
                 checkItem[method]();
             }
@@ -972,7 +972,7 @@ Ext.define('Ext.grid.header.Container', {
     },
 
 <span id='Ext-grid-header-Container-method-getMenuItemForHeader'>    getMenuItemForHeader: function(menu, header) {
-</span>        return header ? menu.down('menucheckitem[headerId=' + header.id + ']') : null;
+</span>        return header ? menu.down(&#39;menucheckitem[headerId=&#39; + header.id + &#39;]&#39;) : null;
     },
 
 <span id='Ext-grid-header-Container-method-onHeaderShow'>    onHeaderShow: function (header) {
@@ -990,7 +990,7 @@ Ext.define('Ext.grid.header.Container', {
 
         // If lastHiddenHeader exists we know that header is a groupHeader and if all its subheaders
         // are hidden then we need to show the last one that was hidden.
-        if (lastHiddenHeader &amp;&amp; !header.query('[hidden=false]').length) {
+        if (lastHiddenHeader &amp;&amp; !header.query(&#39;[hidden=false]&#39;).length) {
             lastHiddenHeader.show();
             header.lastHiddenHeader = null;
         }
@@ -998,8 +998,8 @@ Ext.define('Ext.grid.header.Container', {
         me.onHeaderVisibilityChange(header, true);
         ownerCt.onHeaderShow(me, header);
 
-        me.fireEvent('columnshow', me, header);
-        me.fireEvent('columnschanged', this);
+        me.fireEvent(&#39;columnshow&#39;, me, header);
+        me.fireEvent(&#39;columnschanged&#39;, this);
     },
 
 <span id='Ext-grid-header-Container-method-onHeaderHide'>    onHeaderHide: function (header) {
@@ -1013,8 +1013,8 @@ Ext.define('Ext.grid.header.Container', {
         me.onHeaderVisibilityChange(header, false);
         ownerCt.onHeaderHide(me, header);
 
-        me.fireEvent('columnhide', me, header);
-        me.fireEvent('columnschanged', this);
+        me.fireEvent(&#39;columnhide&#39;, me, header);
+        me.fireEvent(&#39;columnschanged&#39;, this);
     },
 
 <span id='Ext-grid-header-Container-method-onHeaderResize'>    onHeaderResize: function(header, w) {
@@ -1024,7 +1024,7 @@ Ext.define('Ext.grid.header.Container', {
         if (gridSection) {
             gridSection.onHeaderResize(me, header, w);
         }
-        me.fireEvent('columnresize', me, header, w);
+        me.fireEvent(&#39;columnresize&#39;, me, header, w);
     },
 
 <span id='Ext-grid-header-Container-method-onHeaderClick'>    onHeaderClick: function(header, e, t) {
@@ -1032,8 +1032,8 @@ Ext.define('Ext.grid.header.Container', {
             selModel = header.getView().getSelectionModel(),
             ret;
 
-        header.fireEvent('headerclick', me, header, e, t);
-        ret = me.fireEvent('headerclick', me, header, e, t);
+        header.fireEvent(&#39;headerclick&#39;, me, header, e, t);
+        ret = me.fireEvent(&#39;headerclick&#39;, me, header, e, t);
         if (ret !== false) {
             if (selModel.onHeaderClick) {
                 selModel.onHeaderClick(me, header, e);
@@ -1044,13 +1044,13 @@ Ext.define('Ext.grid.header.Container', {
     },
 
 <span id='Ext-grid-header-Container-method-onHeaderContextMenu'>    onHeaderContextMenu: function(header, e, t) {
-</span>        header.fireEvent('headercontextmenu', this, header, e, t);
-        this.fireEvent('headercontextmenu', this, header, e, t);
+</span>        header.fireEvent(&#39;headercontextmenu&#39;, this, header, e, t);
+        this.fireEvent(&#39;headercontextmenu&#39;, this, header, e, t);
     },
 
 <span id='Ext-grid-header-Container-method-onHeaderTriggerClick'>    onHeaderTriggerClick: function(header, e, t) {
 </span>        var me = this;
-        if (header.fireEvent('headertriggerclick', me, header, e, t) !== false &amp;&amp; me.fireEvent('headertriggerclick', me, header, e, t) !== false) {
+        if (header.fireEvent(&#39;headertriggerclick&#39;, me, header, e, t) !== false &amp;&amp; me.fireEvent(&#39;headertriggerclick&#39;, me, header, e, t) !== false) {
 
             // If menu is already active...
             if (header.activeMenu) {
@@ -1080,10 +1080,10 @@ Ext.define('Ext.grid.header.Container', {
      */
     showMenuBy: function(clickEvent, t, header) {
         var menu = this.getMenu(),
-            ascItem  = menu.down('#ascItem'),
-            descItem = menu.down('#descItem'),
+            ascItem  = menu.down(&#39;#ascItem&#39;),
+            descItem = menu.down(&#39;#descItem&#39;),
             sortableMth,
-            isTouch = clickEvent &amp;&amp; clickEvent.pointerType === 'touch';
+            isTouch = clickEvent &amp;&amp; clickEvent.pointerType === &#39;touch&#39;;
 
         // Use ownerCmp as the upward link. Menus *must have no ownerCt* - they are global floaters.
         // Upward navigation is done using the up() method.
@@ -1091,7 +1091,7 @@ Ext.define('Ext.grid.header.Container', {
         header.setMenuActive(menu);
 
         // enable or disable asc &amp; desc menu items based on header being sortable
-        sortableMth = header.sortable ? 'enable' : 'disable';
+        sortableMth = header.sortable ? &#39;enable&#39; : &#39;disable&#39;;
         if (ascItem) {
             ascItem[sortableMth]();
         }
@@ -1103,7 +1103,7 @@ Ext.define('Ext.grid.header.Container', {
         menu.autoFocus = !clickEvent || clickEvent.keyCode;
 
         // For longpress t is the header, for click/hover t is the trigger
-        menu.showBy(t, 'tl-bl?');
+        menu.showBy(t, &#39;tl-bl?&#39;);
 
         // Menu show was vetoed by event handler - clear context
         if (!menu.isVisible()) {
@@ -1148,7 +1148,7 @@ Ext.define('Ext.grid.header.Container', {
     },
 
 <span id='Ext-grid-header-Container-method-getMenu'>    /**
-</span>     * Gets the menu (and will create it if it doesn't already exist)
+</span>     * Gets the menu (and will create it if it doesn&#39;t already exist)
      * @private
      */
     getMenu: function() {
@@ -1165,9 +1165,9 @@ Ext.define('Ext.grid.header.Container', {
                     scope: me
                 }
             });
-            me.fireEvent('menucreate', me, me.menu);
+            me.fireEvent(&#39;menucreate&#39;, me, me.menu);
             if (grid) {
-                grid.fireEvent('headermenucreate', grid, me.menu, me);
+                grid.fireEvent(&#39;headermenucreate&#39;, grid, me.menu, me);
             }
         }
         return me.menu;
@@ -1176,7 +1176,7 @@ Ext.define('Ext.grid.header.Container', {
 <span id='Ext-grid-header-Container-method-beforeMenuShow'>    // Render our menus to the first enclosing scrolling element so that they scroll with the grid
 </span>    beforeMenuShow: function(menu) {
         var me = this,
-            columnItem = menu.child('#columnItem'),
+            columnItem = menu.child(&#39;#columnItem&#39;),
             hideableColumns,
             insertPoint;
 
@@ -1191,10 +1191,10 @@ Ext.define('Ext.grid.header.Container', {
 
             if (hideableColumns &amp;&amp; hideableColumns.length) {
                 menu.insert(insertPoint, [{
-                    itemId: 'columnItemSeparator',
-                    xtype: 'menuseparator'
+                    itemId: &#39;columnItemSeparator&#39;,
+                    xtype: &#39;menuseparator&#39;
                 }, {
-                    itemId: 'columnItem',
+                    itemId: &#39;columnItem&#39;,
                     text: me.columnsText,
                     iconCls: me.menuColsIcon,
                     menu: {
@@ -1209,7 +1209,7 @@ Ext.define('Ext.grid.header.Container', {
         // TODO: rendering the menu to the nearest overlfowing ancestor has been disabled
         // since DomQuery is no longer available by default in 5.0
 //        if (!menu.rendered) {
-//            menu.render(this.el.up('{overflow=auto}') || document.body);
+//            menu.render(this.el.up(&#39;{overflow=auto}&#39;) || document.body);
 //        }
     },
 
@@ -1225,13 +1225,13 @@ Ext.define('Ext.grid.header.Container', {
 
         if (me.sortable) {
             menuItems = [{
-                itemId: 'ascItem',
+                itemId: &#39;ascItem&#39;,
                 text: me.sortAscText,
                 iconCls: me.menuSortAscCls,
                 handler: me.onSortAscClick,
                 scope: me
             },{
-                itemId: 'descItem',
+                itemId: &#39;descItem&#39;,
                 text: me.sortDescText,
                 iconCls: me.menuSortDescCls,
                 handler: me.onSortDescClick,
@@ -1241,12 +1241,12 @@ Ext.define('Ext.grid.header.Container', {
         if (hideableColumns &amp;&amp; hideableColumns.length) {
             if (me.sortable) {
                 menuItems.push({
-                    itemId: 'columnItemSeparator',
-                    xtype: 'menuseparator'
+                    itemId: &#39;columnItemSeparator&#39;,
+                    xtype: &#39;menuseparator&#39;
                 });
             }
             menuItems.push({
-                itemId: 'columnItem',
+                itemId: &#39;columnItem&#39;,
                 text: me.columnsText,
                 iconCls: me.menuColsIcon,
                 menu: hideableColumns,
@@ -1261,7 +1261,7 @@ Ext.define('Ext.grid.header.Container', {
         var menu = this.getMenu(),
             activeHeader = menu.activeHeader;
 
-        activeHeader.sort('ASC');
+        activeHeader.sort(&#39;ASC&#39;);
     },
 
 <span id='Ext-grid-header-Container-method-onSortDescClick'>    // sort desc when clicking on item in menu
@@ -1269,7 +1269,7 @@ Ext.define('Ext.grid.header.Container', {
         var menu = this.getMenu(),
             activeHeader = menu.activeHeader;
 
-        activeHeader.sort('DESC');
+        activeHeader.sort(&#39;DESC&#39;);
     },
 
 <span id='Ext-grid-header-Container-method-getColumnMenu'>    /**
@@ -1280,7 +1280,7 @@ Ext.define('Ext.grid.header.Container', {
         var menuItems = [],
             i = 0,
             item,
-            items = headerContainer.query('&gt;gridcolumn[hideable]'),
+            items = headerContainer.query(&#39;&gt;gridcolumn[hideable]&#39;),
             itemsLn = items.length,
             menuItem;
 
@@ -1305,7 +1305,7 @@ Ext.define('Ext.grid.header.Container', {
 </span>        var header = Ext.getCmp(checkItem.headerId);
 
         if (header.rendered) {
-            header[checked ? 'show' : 'hide']();
+            header[checked ? &#39;show&#39; : &#39;hide&#39;]();
         } else {
             header.hidden = !checked;
         }
@@ -1385,7 +1385,7 @@ Ext.define('Ext.grid.header.Container', {
 
 <span id='Ext-grid-header-Container-method-getGridColumns'>    /**
 </span>     * @method getGridColumns
-     * Returns an array of all columns which exist in the grid's View, visible or not.
+     * Returns an array of all columns which exist in the grid&#39;s View, visible or not.
      * This goes down to the leaf column header level, and does not return **grouped**
      * headers which contain sub headers.
      *
@@ -1394,7 +1394,7 @@ Ext.define('Ext.grid.header.Container', {
      *
      * Headers which have a hidden ancestor have a `hiddenAncestor: true` property
      * injected so that descendants are known to be hidden without interrogating that
-     * header's ownerCt axis for a hidden ancestor.
+     * header&#39;s ownerCt axis for a hidden ancestor.
      *
      * See also {@link Ext.grid.header.Container#getVisibleGridColumns}
      * @return {Ext.grid.column.Column[]} columns An array of columns.  Returns an
@@ -1419,7 +1419,7 @@ Ext.define('Ext.grid.header.Container', {
                 for (i = 0, len = items.length; i &lt; len; i++) {
                     item = items[i];
                     if (item.isGroupHeader) {
-                        // Group headers will need a visibleIndex for if/when they're removed from their owner.
+                        // Group headers will need a visibleIndex for if/when they&#39;re removed from their owner.
                         // See Ext.layout.container.Container#moveItemBefore.
                         item.visibleIndex = result.length;
                         item.getGridColumns(result, hiddenAncestor);
@@ -1441,7 +1441,7 @@ Ext.define('Ext.grid.header.Container', {
                 item = result[i];
 
                 // The column index within all (visible AND hidden) leaf level columns.
-                // Used as the cellIndex in TableView's cell renderer call
+                // Used as the cellIndex in TableView&#39;s cell renderer call
                 item.fullColumnIndex = i;
                 item.isFirstVisible = item.isLastVisible = false;
                 if (!(item.hidden || item.hiddenAncestor)) {
@@ -1451,7 +1451,7 @@ Ext.define('Ext.grid.header.Container', {
                     lastVisibleColumn = item;
                 }
             }
-            // If we haven't hidden all columns, tag the last visible one encountered
+            // If we haven&#39;t hidden all columns, tag the last visible one encountered
             if (lastVisibleColumn) {
                 lastVisibleColumn.isLastVisible = true;
             }
@@ -1470,7 +1470,7 @@ Ext.define('Ext.grid.header.Container', {
             result = me.hideableColumns;
 
         if (!result) {
-            result = me.hideableColumns = me.query('[hideable]');
+            result = me.hideableColumns = me.query(&#39;[hideable]&#39;);
         }
         return result;
     },
@@ -1530,7 +1530,7 @@ Ext.define('Ext.grid.header.Container', {
 </span>        var me = this,
             view = me.view,
             minWidth = Ext.grid.plugin.HeaderResizer.prototype.minColWidth,
-            // Used when a column's max contents are larger than the available view width.
+            // Used when a column&#39;s max contents are larger than the available view width.
             useMinWidthForFlex = false,
             defaultWidth = Ext.grid.header.Container.prototype.defaultWidth,
             availFlex = me.el.dom.clientWidth - (view.el.dom.scrollHeight &gt; view.el.dom.clientHeight ? Ext.getScrollbarSize().width : 0),
@@ -1590,7 +1590,7 @@ Ext.define('Ext.grid.header.Container', {
         // Determine the max amount of flex that a single column can have.
         maxAvailFlexOneColumn = (availFlex - ((items.length + 1) * minWidth));
 
-        // First, remove the header's flex as it should always receive a set width
+        // First, remove the header&#39;s flex as it should always receive a set width
         // since it is the header being operated on.
         header.flex = null;
 
@@ -1609,8 +1609,8 @@ Ext.define('Ext.grid.header.Container', {
         } else {
             header.width = myWidth;
 
-            // Substract the current header's width from the available flex + some padding
-            // to ensure that the last column doesn't get nudged out of the view.
+            // Substract the current header&#39;s width from the available flex + some padding
+            // to ensure that the last column doesn&#39;t get nudged out of the view.
             availFlex -= myWidth + defaultWidth;
             getTotalFlex();
         }

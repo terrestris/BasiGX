@@ -47,40 +47,40 @@
  * Proxies also support batching of Operations via a {@link Ext.data.Batch batch} object, invoked by the {@link #batch}
  * method.
  */
-Ext.define('Ext.data.proxy.Proxy', {
+Ext.define(&#39;Ext.data.proxy.Proxy&#39;, {
     mixins: [
-        'Ext.mixin.Factoryable',
-        'Ext.mixin.Observable'
+        &#39;Ext.mixin.Factoryable&#39;,
+        &#39;Ext.mixin.Observable&#39;
     ],
 
 <span id='Ext-data-proxy-Proxy-property-S-configPrefixed'>    $configPrefixed: false,
 </span>
-    alias: 'proxy.proxy', // also configures Factoryable
+    alias: &#39;proxy.proxy&#39;, // also configures Factoryable
 
     alternateClassName: [
-        'Ext.data.DataProxy',
-        'Ext.data.Proxy'
+        &#39;Ext.data.DataProxy&#39;,
+        &#39;Ext.data.Proxy&#39;
     ],
 
     requires: [
-        'Ext.data.schema.Schema',
-        'Ext.data.reader.Reader',
-        'Ext.data.writer.Writer'
+        &#39;Ext.data.schema.Schema&#39;,
+        &#39;Ext.data.reader.Reader&#39;,
+        &#39;Ext.data.writer.Writer&#39;
     ],
 
     uses: [
-        'Ext.data.Batch',
-        'Ext.data.operation.*',
-        'Ext.data.Model'
+        &#39;Ext.data.Batch&#39;,
+        &#39;Ext.data.operation.*&#39;,
+        &#39;Ext.data.Model&#39;
     ],
 
     config: {
 <span id='Ext-data-proxy-Proxy-cfg-batchOrder'>        /**
 </span>         * @cfg {String} batchOrder
-         * Comma-separated ordering 'create', 'update' and 'destroy' actions when batching. Override this to set a different
-         * order for the batched CRUD actions to be executed in. Defaults to 'create,update,destroy'.
+         * Comma-separated ordering &#39;create&#39;, &#39;update&#39; and &#39;destroy&#39; actions when batching. Override this to set a different
+         * order for the batched CRUD actions to be executed in. Defaults to &#39;create,update,destroy&#39;.
          */
-        batchOrder: 'create,update,destroy',
+        batchOrder: &#39;create,update,destroy&#39;,
 
 <span id='Ext-data-proxy-Proxy-cfg-batchActions'>        /**
 </span>         * @cfg {Boolean} batchActions
@@ -98,12 +98,12 @@ Ext.define('Ext.data.proxy.Proxy', {
         // @cmd-auto-dependency {aliasPrefix : &quot;reader.&quot;, defaultPropertyName : &quot;defaultReaderType&quot;}
 <span id='Ext-data-proxy-Proxy-cfg-reader'>        /**
 </span>         * @cfg {Object/String/Ext.data.reader.Reader} reader
-         * The Ext.data.reader.Reader to use to decode the server's response or data read
+         * The Ext.data.reader.Reader to use to decode the server&#39;s response or data read
          * from client. This can either be a Reader instance, a config object or just a
-         * valid Reader type name (e.g. 'json', 'xml').
+         * valid Reader type name (e.g. &#39;json&#39;, &#39;xml&#39;).
          */
         reader: {
-            type: 'json'
+            type: &#39;json&#39;
         },
 
         // @cmd-auto-dependency {aliasPrefix : &quot;writer.&quot;, defaultPropertyName : &quot;defaultWriterType&quot;}
@@ -111,10 +111,10 @@ Ext.define('Ext.data.proxy.Proxy', {
 </span>         * @cfg {Object/String/Ext.data.writer.Writer} writer
          * The Ext.data.writer.Writer to use to encode any request sent to the server or
          * saved to client. This can either be a Writer instance, a config object or just
-         * a valid Writer type name (e.g. 'json', 'xml').
+         * a valid Writer type name (e.g. &#39;json&#39;, &#39;xml&#39;).
          */
         writer: {
-            type: 'json'
+            type: &#39;json&#39;
         }
     },
 
@@ -132,7 +132,7 @@ Ext.define('Ext.data.proxy.Proxy', {
      
 <span id='Ext-data-proxy-Proxy-event-metachange'>     /**
 </span>     * @event metachange
-     * Fires when this proxy's reader provides new metadata. Metadata usually consists
+     * Fires when this proxy&#39;s reader provides new metadata. Metadata usually consists
      * of new field definitions, but can include any configuration data required by an
      * application, and can be processed as needed in the event handler.
      * This event is currently only fired for JsonReaders. Note that this event is also
@@ -170,7 +170,7 @@ Ext.define('Ext.data.proxy.Proxy', {
 <span id='Ext-data-proxy-Proxy-method-applyReader'>    applyReader: function(reader) {
 </span>        // Synchronous proxies need to force keepRawData to allow Grid features
         // like Summary and Grouping access rawData after the Reader processed records.
-        // It doesn't do much harm since synchronous proxies are Client side ones,
+        // It doesn&#39;t do much harm since synchronous proxies are Client side ones,
         // which will keep their datasets in memory or local storage anyway.
         if (this.isSynchronous) {
             reader = reader || {};
@@ -202,7 +202,7 @@ Ext.define('Ext.data.proxy.Proxy', {
         writer = Ext.Factory.writer(writer);
 
         // XML Writers may have a record config to define the node name of each record tag.
-        // If not set, but the Reader has a record config, use the Reader's record config.
+        // If not set, but the Reader has a record config, use the Reader&#39;s record config.
         if (writer.getRecord &amp;&amp; !writer.getRecord() &amp;&amp; reader &amp;&amp; reader.getRecord) {
             reader = reader.getRecord();
             if (reader) {
@@ -216,10 +216,10 @@ Ext.define('Ext.data.proxy.Proxy', {
 </span>
 <span id='Ext-data-proxy-Proxy-method-onMetaChange'>    /**
 </span>     * @private
-     * Called each time the reader's onMetaChange is called so that the proxy can fire the metachange event
+     * Called each time the reader&#39;s onMetaChange is called so that the proxy can fire the metachange event
      */
     onMetaChange: function(meta) {
-        this.fireEvent('metachange', this, meta);
+        this.fireEvent(&#39;metachange&#39;, this, meta);
     },
 
 <span id='Ext-data-proxy-Proxy-method-create'>    /**
@@ -252,7 +252,7 @@ Ext.define('Ext.data.proxy.Proxy', {
 
 <span id='Ext-data-proxy-Proxy-method-batch'>    /**
 </span>     * Performs a batch of {@link Ext.data.operation.Operation Operations}, in the order specified by {@link #batchOrder}. Used
-     * internally by {@link Ext.data.Store}'s {@link Ext.data.Store#sync sync} method. Example usage:
+     * internally by {@link Ext.data.Store}&#39;s {@link Ext.data.Store#sync sync} method. Example usage:
      *
      *     myProxy.batch({
      *         create : [myModel1, myModel2],
@@ -294,7 +294,7 @@ Ext.define('Ext.data.proxy.Proxy', {
      * 
      * @param {Function} [options.failure] The function to be called upon unsuccessful completion of the batch. The 
      * failure function is called when one or more operations returns an exception during processing (even if some
-     * operations were also successful). In this case you can check the batch's {@link Ext.data.Batch#exceptions
+     * operations were also successful). In this case you can check the batch&#39;s {@link Ext.data.Batch#exceptions
      * exceptions} array to see exactly which operations had exceptions. The failure function is called with the 
      * following parameters:
      * @param {Ext.data.Batch} options.failure.batch The {@link Ext.data.Batch batch} that was processed,
@@ -340,9 +340,9 @@ Ext.define('Ext.data.proxy.Proxy', {
             batch = new Ext.data.Batch(options.batch);
         }
 
-        batch.on('complete', Ext.bind(me.onBatchComplete, me, [options], 0));
+        batch.on(&#39;complete&#39;, Ext.bind(me.onBatchComplete, me, [options], 0));
 
-        actions = me.getBatchOrder().split(',');
+        actions = me.getBatchOrder().split(&#39;,&#39;);
         aLen    = actions.length;
 
         for (a = 0; a &lt; aLen; a++) {
@@ -397,7 +397,7 @@ Ext.define('Ext.data.proxy.Proxy', {
     },
     
 <span id='Ext-data-proxy-Proxy-method-createOperation'>    createOperation: function(action, config) {
-</span>        var operation = Ext.createByAlias('data.operation.' + action, config);
+</span>        var operation = Ext.createByAlias(&#39;data.operation.&#39; + action, config);
         
         operation.setProxy(this);
         

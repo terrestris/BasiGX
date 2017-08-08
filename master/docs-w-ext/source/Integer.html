@@ -17,27 +17,27 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-data-field-Integer'>/**
 </span> */
-Ext.define('Ext.data.field.Integer', {
-    extend: 'Ext.data.field.Field',
+Ext.define(&#39;Ext.data.field.Integer&#39;, {
+    extend: &#39;Ext.data.field.Field&#39;,
 
     alias: [
-        'data.field.int',
-        'data.field.integer'
+        &#39;data.field.int&#39;,
+        &#39;data.field.integer&#39;
     ],
 
 <span id='Ext-data-field-Integer-property-isNumeric'>    isNumeric: true,
 </span><span id='Ext-data-field-Integer-property-isIntegerField'>    isIntegerField: true,
-</span><span id='Ext-data-field-Integer-property-numericType'>    numericType: 'int',
+</span><span id='Ext-data-field-Integer-property-numericType'>    numericType: &#39;int&#39;,
 </span>
 <span id='Ext-data-field-Integer-method-convert'>    convert: function(v) {
 </span>        // Handle values which are already numbers.
         // Value truncation behaviour of parseInt is historic and must be maintained.
         // parseInt(35.9)  and parseInt(&quot;35.9&quot;) returns 35
-        if (typeof v === 'number') {
+        if (typeof v === &#39;number&#39;) {
             return this.getNumber(v);
         }
 
-        var empty = v === undefined || v === null || v === '',
+        var empty = v === undefined || v === null || v === &#39;&#39;,
             allowNull = this.allowNull,
             out;
 
@@ -61,7 +61,7 @@ Ext.define('Ext.data.field.Integer', {
     },
 
 <span id='Ext-data-field-Integer-method-parse'>    parse: function(v) {
-</span>        return parseInt(String(v).replace(this.stripRe, ''), 10);
+</span>        return parseInt(String(v).replace(this.stripRe, &#39;&#39;), 10);
     },
 
 <span id='Ext-data-field-Integer-method-sortType'>    sortType: function (s) {

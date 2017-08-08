@@ -19,13 +19,13 @@
 </span> * This class represents a constant in the parser.
  * @private
  */
-Ext.define('Ext.parse.symbol.Constant', {
-    extend: 'Ext.parse.Symbol',
+Ext.define(&#39;Ext.parse.symbol.Constant&#39;, {
+    extend: &#39;Ext.parse.Symbol&#39;,
 
-<span id='Ext-parse-symbol-Constant-property-arity'>    arity: 'literal',
+<span id='Ext-parse-symbol-Constant-property-arity'>    arity: &#39;literal&#39;,
 </span><span id='Ext-parse-symbol-Constant-property-isLiteral'>    isLiteral: true,
 </span>
-<span id='Ext-parse-symbol-Constant-property-defaultProperty'>    defaultProperty: 'value',
+<span id='Ext-parse-symbol-Constant-property-defaultProperty'>    defaultProperty: &#39;value&#39;,
 </span>
 <span id='Ext-parse-symbol-Constant-method-constructor'>    constructor: function (id, config) {
 </span>        this.callParent([ id, config ]);
@@ -40,7 +40,7 @@ Ext.define('Ext.parse.symbol.Constant', {
         me.value = me._value;
         // the next line is here in case this symbol already exists in the symbols table
         // and this function overrides that symbol
-        me.arity = 'literal';
+        me.arity = &#39;literal&#39;;
         me.isLiteral = true;
 
         return me;

@@ -82,8 +82,8 @@ Ext.Inventory.prototype = {
                 if (toName[a] !== cls) {
                     //&lt;debug&gt;
                     if (!update &amp;&amp; toName[a]) {
-                        Ext.log.warn(&quot;Overriding existing mapping: '&quot; + a + &quot;' From '&quot; +
-                            toName[a] + &quot;' to '&quot; + cls + &quot;'. Is this intentional?&quot;);
+                        Ext.log.warn(&quot;Overriding existing mapping: &#39;&quot; + a + &quot;&#39; From &#39;&quot; +
+                            toName[a] + &quot;&#39; to &#39;&quot; + cls + &quot;&#39;. Is this intentional?&quot;);
                     }
                     //&lt;/debug&gt;
 
@@ -115,7 +115,7 @@ Ext.Inventory.prototype = {
      * @return {String} className
      */
     getNameByAlias: function(alias) {
-        return this.aliasToName[alias] || '';
+        return this.aliasToName[alias] || &#39;&#39;;
     },
 
 <span id='Ext-Inventory-method-getNameByAlternate'>    /**
@@ -125,21 +125,21 @@ Ext.Inventory.prototype = {
      * @return {String} className
      */
     getNameByAlternate: function (alternate) {
-        return this.alternateToName[alternate] || '';
+        return this.alternateToName[alternate] || &#39;&#39;;
     },
 
 <span id='Ext-Inventory-method-getNamesByExpression'>    /**
 </span>     * Converts a string expression to an array of matching class names. An expression can
      * either refers to class aliases or class names. Expressions support wildcards:
      *
-     *      // returns ['Ext.window.Window']
-     *     var window = Ext.ClassManager.getNamesByExpression('widget.window');
+     *      // returns [&#39;Ext.window.Window&#39;]
+     *     var window = Ext.ClassManager.getNamesByExpression(&#39;widget.window&#39;);
      *
-     *     // returns ['widget.panel', 'widget.window', ...]
-     *     var allWidgets = Ext.ClassManager.getNamesByExpression('widget.*');
+     *     // returns [&#39;widget.panel&#39;, &#39;widget.window&#39;, ...]
+     *     var allWidgets = Ext.ClassManager.getNamesByExpression(&#39;widget.*&#39;);
      *
-     *     // returns ['Ext.data.Store', 'Ext.data.ArrayProxy', ...]
-     *     var allData = Ext.ClassManager.getNamesByExpression('Ext.data.*');
+     *     // returns [&#39;Ext.data.Store&#39;, &#39;Ext.data.ArrayProxy&#39;, ...]
+     *     var allData = Ext.ClassManager.getNamesByExpression(&#39;Ext.data.*&#39;);
      *
      * @param {String/String[]} expression
      * @param {Object} [exclude=null] An object keyed by class name containing classes to
@@ -163,7 +163,7 @@ Ext.Inventory.prototype = {
             expr, i, list, match, n, name, regex;
 
         for (i = 0; i &lt; length; ++i) {
-            if ((expr = expressions[i]).indexOf('*') &lt; 0) {
+            if ((expr = expressions[i]).indexOf(&#39;*&#39;) &lt; 0) {
                 // No wildcard
                 if (!(name = aliasToName[expr])) {
                     if (!(name = alternateToName[expr])) {
@@ -176,7 +176,7 @@ Ext.Inventory.prototype = {
                     names.push(name);
                 }
             } else {
-                regex = new RegExp('^' + expr.replace(wildcardRe, '(.*?)') + '$');
+                regex = new RegExp(&#39;^&#39; + expr.replace(wildcardRe, &#39;(.*?)&#39;) + &#39;$&#39;);
 
                 for (name in nameToAliases) {
                     if (!(name in map) &amp;&amp; !(exclude &amp;&amp; (name in exclude))) {
@@ -210,7 +210,7 @@ Ext.Inventory.prototype = {
     getPath: function (className) {
         var me = this,
             paths = me.paths,
-            ret = '',
+            ret = &#39;&#39;,
             prefix;
 
         if (className in paths) {
@@ -224,11 +224,11 @@ Ext.Inventory.prototype = {
                 ret = paths[prefix];
                 
                 if (ret) {
-                    ret += '/';
+                    ret += &#39;/&#39;;
                 }
             }
 
-            ret += className.replace(me.dotRe, '/') + '.js';
+            ret += className.replace(me.dotRe, &#39;/&#39;) + &#39;.js&#39;;
         }
 
         return ret;
@@ -247,7 +247,7 @@ Ext.Inventory.prototype = {
             items, currChar, currSubstr, prefix, j, jlen;
         
         // Walk the prefixes backwards so we consider the longest ones first.
-        // Prefixes are kept in a sparse array grouped by length so we don't have to
+        // Prefixes are kept in a sparse array grouped by length so we don&#39;t have to
         // iterate over all of them, just the ones we need.
         while (length-- &gt; 0) {
             items = prefixes[length];
@@ -255,7 +255,7 @@ Ext.Inventory.prototype = {
             if (items) {
                 currChar = className.charAt(length);
                 
-                if (currChar !== '.') {
+                if (currChar !== &#39;.&#39;) {
                     continue;
                 }
                 
@@ -271,7 +271,7 @@ Ext.Inventory.prototype = {
             }
         }
 
-        return '';
+        return &#39;&#39;;
     },
 
     getPrefixes: function () {
@@ -363,11 +363,11 @@ Ext.Inventory.prototype = {
      * 
      *      var sel = inventory.select({
      *              require: function (classes) {
-     *                  console.log('Classes: ' + classes.join(','));
+     *                  console.log(&#39;Classes: &#39; + classes.join(&#39;,&#39;));
      *              }
      *          });
      * 
-     *      sel.exclude('Ext.chart.*').exclude('Ext.draw.*').require('*');
+     *      sel.exclude(&#39;Ext.chart.*&#39;).exclude(&#39;Ext.draw.*&#39;).require(&#39;*&#39;);
      *      
      *      // Logs all classes except those in the Ext.chart and Ext.draw namespaces.
      * 
@@ -411,9 +411,9 @@ Ext.Inventory.prototype = {
 </span>     * Sets the path of a namespace.
      * For Example:
      *
-     *      inventory.setPath('Ext', '.');
+     *      inventory.setPath(&#39;Ext&#39;, &#39;.&#39;);
      *      inventory.setPath({
-     *          Ext: '.'
+     *          Ext: &#39;.&#39;
      *      });
      *
      * @param {String/Object} name The name of a single mapping or an object of mappings.

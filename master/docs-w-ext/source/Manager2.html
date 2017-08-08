@@ -22,7 +22,7 @@
  *
  * @private
  */
-Ext.define('Ext.drag.Manager', {
+Ext.define(&#39;Ext.drag.Manager&#39;, {
     singleton: true,
 
 <span id='Ext-drag-Manager-property-dragCls'>    /**
@@ -31,12 +31,12 @@ Ext.define('Ext.drag.Manager', {
      *
      * @private
      */
-    dragCls: Ext.baseCSSPrefix + 'drag-body',
+    dragCls: Ext.baseCSSPrefix + &#39;drag-body&#39;,
 
 <span id='Ext-drag-Manager-property-pointerBug'>    // If we need to use the current mousemove target to find the over el,
 </span>    // but pointer-events is not supported, AND the delta position does not place the mouse outside of the dragEl,
     // temporarily move the dragEl away, and fake the mousemove target by using document.elementFromPoint
-    // while it's out of the way.
+    // while it&#39;s out of the way.
     // The pointer events implementation is bugged in IE9/10 and opera, so fallback even if they report that they support it.
     // IE8m do not support it so they will auto fall back
     pointerBug: Ext.isTouch || (!Ext.supports.CSSPointerEvents || Ext.isIE10m || Ext.isOpera),
@@ -61,11 +61,11 @@ Ext.define('Ext.drag.Manager', {
             scope: this,
             dragenter: {
                 capture: true,
-                fn: 'onNativeDragEnter'
+                fn: &#39;onNativeDragEnter&#39;
             },
-            dragleave: 'onNativeDragLeave',
-            dragover: 'onNativeDragOver',
-            drop: 'onNativeDrop'
+            dragleave: &#39;onNativeDragLeave&#39;,
+            dragover: &#39;onNativeDragOver&#39;,
+            drop: &#39;onNativeDrop&#39;
         });
     },
 
@@ -118,11 +118,11 @@ Ext.define('Ext.drag.Manager', {
                 target, el;
 
             if (proxyEl) {
-                proxyEl.style.visibility = 'hidden';
+                proxyEl.style.visibility = &#39;hidden&#39;;
             }
             el = this.elementFromPoint(current.x, current.y);
             if (proxyEl) {
-                proxyEl.style.visibility = 'visible';
+                proxyEl.style.visibility = &#39;visible&#39;;
             }
 
             while (el) {
@@ -212,8 +212,8 @@ Ext.define('Ext.drag.Manager', {
                 groupMap = Ext.Array.toMap(groups);
             }
 
-            // Exclude any invalid targets so they don't get used during
-            // a drag. This means targets that are locked or have groups that don't
+            // Exclude any invalid targets so they don&#39;t get used during
+            // a drag. This means targets that are locked or have groups that don&#39;t
             // match
             for (id in targets) {
                 target = targets[id];
@@ -225,7 +225,7 @@ Ext.define('Ext.drag.Manager', {
                     // If neither has groups, proceed. Otherwise, it
                     // can only be correct if both have groups, then we
                     // need to check if they intersect. If one has groups
-                    // and not the other it's not possible to intersect.
+                    // and not the other it&#39;s not possible to intersect.
                     if (!groupMap &amp;&amp; !targetGroups) {
                         groupOk = true;
                     } else if (groupMap &amp;&amp; targetGroups) {

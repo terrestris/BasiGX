@@ -16,7 +16,7 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-grid-feature-RowBody'>/**
-</span> * The rowbody feature enhances the grid's markup to have an additional
+</span> * The rowbody feature enhances the grid&#39;s markup to have an additional
  * tr -&gt; td -&gt; div which spans the entire width of the original row.
  *
  * This is useful to to associate additional information with a particular
@@ -30,54 +30,54 @@
  * # Example
  *
  *     @example
- *     Ext.define('Animal', {
- *         extend: 'Ext.data.Model',
- *         fields: ['name', 'latin', 'desc', 'lifespan']
+ *     Ext.define(&#39;Animal&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;name&#39;, &#39;latin&#39;, &#39;desc&#39;, &#39;lifespan&#39;]
  *     });
  *     
- *     Ext.create('Ext.grid.Panel', {
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
  *         width: 400,
  *         height: 300,
  *         renderTo: Ext.getBody(),
  *         store: {
- *             model: 'Animal',
+ *             model: &#39;Animal&#39;,
  *             data: [{
- *                 name: 'Tiger',
- *                 latin: 'Panthera tigris',
- *                 desc: 'The largest cat species, weighing up to 306 kg (670 lb).',
- *                 lifespan: '20 - 26 years (in captivity)'
+ *                 name: &#39;Tiger&#39;,
+ *                 latin: &#39;Panthera tigris&#39;,
+ *                 desc: &#39;The largest cat species, weighing up to 306 kg (670 lb).&#39;,
+ *                 lifespan: &#39;20 - 26 years (in captivity)&#39;
  *             }, {
- *                 name: 'Roman snail',
- *                 latin: 'Helix pomatia',
- *                 desc: 'A species of large, edible, air-breathing land snail.',
- *                 lifespan: '20 - 35 years'
+ *                 name: &#39;Roman snail&#39;,
+ *                 latin: &#39;Helix pomatia&#39;,
+ *                 desc: &#39;A species of large, edible, air-breathing land snail.&#39;,
+ *                 lifespan: &#39;20 - 35 years&#39;
  *             }, {
- *                 name: 'Yellow-winged darter',
- *                 latin: 'Sympetrum flaveolum',
- *                 desc: 'A dragonfly found in Europe and mid and Northern China.',
- *                 lifespan: '4 - 6 weeks'
+ *                 name: &#39;Yellow-winged darter&#39;,
+ *                 latin: &#39;Sympetrum flaveolum&#39;,
+ *                 desc: &#39;A dragonfly found in Europe and mid and Northern China.&#39;,
+ *                 lifespan: &#39;4 - 6 weeks&#39;
  *             }, {
- *                 name: 'Superb Fairy-wren',
- *                 latin: 'Malurus cyaneus',
- *                 desc: 'Common and familiar across south-eastern Australia.',
- *                 lifespan: '5 - 6 years'
+ *                 name: &#39;Superb Fairy-wren&#39;,
+ *                 latin: &#39;Malurus cyaneus&#39;,
+ *                 desc: &#39;Common and familiar across south-eastern Australia.&#39;,
+ *                 lifespan: &#39;5 - 6 years&#39;
  *             }]
  *         },
  *         columns: [{
- *             dataIndex: 'name',
- *             text: 'Common name',
+ *             dataIndex: &#39;name&#39;,
+ *             text: &#39;Common name&#39;,
  *             width: 125
  *         }, {
- *             dataIndex: 'latin',
- *             text: 'Scientific name',
+ *             dataIndex: &#39;latin&#39;,
+ *             text: &#39;Scientific name&#39;,
  *             flex: 1
  *         }],
  *         features: [{
- *             ftype: 'rowbody',
+ *             ftype: &#39;rowbody&#39;,
  *             getAdditionalData: function (data, idx, record, orig) {
  *                 // Usually you would style the my-body-class in a CSS file
  *                 return {
- *                     rowBody: '&lt;div style=&quot;padding: 1em&quot;&gt;' + record.get(&quot;desc&quot;) + '&lt;/div&gt;',
+ *                     rowBody: &#39;&lt;div style=&quot;padding: 1em&quot;&gt;&#39; + record.get(&quot;desc&quot;) + &#39;&lt;/div&gt;&#39;,
  *                     rowBodyCls: &quot;my-body-class&quot;
  *                 };
  *             }
@@ -87,7 +87,7 @@
  *                 var itemEl = Ext.get(rowEl).up(view.itemSelector),
  *                     rec = view.getRecord(itemEl);
  *                 
- *                 Ext.Msg.alert(rec.get('name') + ' life span', rec.get('lifespan'));
+ *                 Ext.Msg.alert(rec.get(&#39;name&#39;) + &#39; life span&#39;, rec.get(&#39;lifespan&#39;));
  *             }
  *         }
  *     });
@@ -101,16 +101,16 @@
  * **Note:** The {@link Ext.grid.plugin.RowExpander rowexpander} plugin and the rowbody
  * feature are exclusive and cannot both be set on the same grid / tree.
  */
-Ext.define('Ext.grid.feature.RowBody', {
-    extend: 'Ext.grid.feature.Feature',
-    alias: 'feature.rowbody',
+Ext.define(&#39;Ext.grid.feature.RowBody&#39;, {
+    extend: &#39;Ext.grid.feature.Feature&#39;,
+    alias: &#39;feature.rowbody&#39;,
 
-<span id='Ext-grid-feature-RowBody-property-rowBodyCls'>    rowBodyCls: Ext.baseCSSPrefix + 'grid-row-body',
-</span><span id='Ext-grid-feature-RowBody-property-innerSelector'>    innerSelector: '.' + Ext.baseCSSPrefix + 'grid-rowbody',
-</span><span id='Ext-grid-feature-RowBody-property-rowBodyHiddenCls'>    rowBodyHiddenCls: Ext.baseCSSPrefix + 'grid-row-body-hidden',
-</span><span id='Ext-grid-feature-RowBody-property-rowBodyTdSelector'>    rowBodyTdSelector: 'td.' + Ext.baseCSSPrefix + 'grid-cell-rowbody',
-</span><span id='Ext-grid-feature-RowBody-property-eventPrefix'>    eventPrefix: 'rowbody',
-</span><span id='Ext-grid-feature-RowBody-property-eventSelector'>    eventSelector: 'tr.' + Ext.baseCSSPrefix + 'grid-rowbody-tr',
+<span id='Ext-grid-feature-RowBody-property-rowBodyCls'>    rowBodyCls: Ext.baseCSSPrefix + &#39;grid-row-body&#39;,
+</span><span id='Ext-grid-feature-RowBody-property-innerSelector'>    innerSelector: &#39;.&#39; + Ext.baseCSSPrefix + &#39;grid-rowbody&#39;,
+</span><span id='Ext-grid-feature-RowBody-property-rowBodyHiddenCls'>    rowBodyHiddenCls: Ext.baseCSSPrefix + &#39;grid-row-body-hidden&#39;,
+</span><span id='Ext-grid-feature-RowBody-property-rowBodyTdSelector'>    rowBodyTdSelector: &#39;td.&#39; + Ext.baseCSSPrefix + &#39;grid-cell-rowbody&#39;,
+</span><span id='Ext-grid-feature-RowBody-property-eventPrefix'>    eventPrefix: &#39;rowbody&#39;,
+</span><span id='Ext-grid-feature-RowBody-property-eventSelector'>    eventSelector: &#39;tr.&#39; + Ext.baseCSSPrefix + &#39;grid-rowbody-tr&#39;,
 </span>
 <span id='Ext-grid-feature-RowBody-cfg-bodyBefore'>    /**
 </span>     * @cfg {Boolean} [bodyBefore=false]
@@ -131,12 +131,12 @@ Ext.define('Ext.grid.feature.RowBody', {
             rowValues.rowIdCls = me.rowIdCls;
             
             if (rowExpanderCol &amp;&amp; rowExpanderCol.getView() === view) {
-                view.grid.removeCls(Ext.baseCSSPrefix + 'grid-hide-row-expander-spacer');
+                view.grid.removeCls(Ext.baseCSSPrefix + &#39;grid-hide-row-expander-spacer&#39;);
                 rowValues.addSpacerCell = true;
                 rowValues.rowBodyColspan -= 1;
-                rowValues.spacerCellCls = Ext.baseCSSPrefix + 'grid-cell ' + Ext.baseCSSPrefix + 'grid-row-expander-spacer ' +  Ext.baseCSSPrefix + 'grid-cell-special';
+                rowValues.spacerCellCls = Ext.baseCSSPrefix + &#39;grid-cell &#39; + Ext.baseCSSPrefix + &#39;grid-row-expander-spacer &#39; +  Ext.baseCSSPrefix + &#39;grid-cell-special&#39;;
             } else {
-                view.grid.addCls(Ext.baseCSSPrefix + 'grid-hide-row-expander-spacer');
+                view.grid.addCls(Ext.baseCSSPrefix + &#39;grid-hide-row-expander-spacer&#39;);
                 rowValues.addSpacerCell = false;
             }
 
@@ -148,33 +148,33 @@ Ext.define('Ext.grid.feature.RowBody', {
     },
 
 <span id='Ext-grid-feature-RowBody-property-extraRowTpl'>    extraRowTpl: [
-</span>        '{%',
-            'if(this.rowBody.bodyBefore) {',
+</span>        &#39;{%&#39;,
+            &#39;if(this.rowBody.bodyBefore) {&#39;,
                 // MUST output column sizing elements because the first row in this table
                 // contains one colspanning TD, and that overrides subsequent column width settings.
-                'values.view.renderColumnSizer(values, out);',
-            '} else {',
-                'this.nextTpl.applyOut(values, out, parent);',
-            '}',
-            'values.view.rowBodyFeature.setupRowData(values.record, values.recordIndex, values);',
-        '%}',
-        '&lt;tr class=&quot;' + Ext.baseCSSPrefix + 'grid-rowbody-tr {rowBodyCls} {rowIdCls}&quot; {ariaRowAttr}&gt;',
-            '&lt;tpl if=&quot;addSpacerCell&quot;&gt;',
-                '&lt;td class=&quot;{spacerCellCls}&quot;&gt;&lt;/td&gt;',
-            '&lt;/tpl&gt;',
-            '&lt;td class=&quot;' + Ext.baseCSSPrefix + 'grid-td ' + Ext.baseCSSPrefix + 'grid-cell-rowbody&quot; colspan=&quot;{rowBodyColspan}&quot; {ariaCellAttr}&gt;',
-                '&lt;div class=&quot;' + Ext.baseCSSPrefix + 'grid-rowbody {rowBodyDivCls}&quot; {ariaCellInnerAttr}&gt;{rowBody}&lt;/div&gt;',
-            '&lt;/td&gt;',
-        '&lt;/tr&gt;',
-        '{%',
-            'if(this.rowBody.bodyBefore) {',
-                'this.nextTpl.applyOut(values, out, parent);',
-            '}',
-        '%}', {
+                &#39;values.view.renderColumnSizer(values, out);&#39;,
+            &#39;} else {&#39;,
+                &#39;this.nextTpl.applyOut(values, out, parent);&#39;,
+            &#39;}&#39;,
+            &#39;values.view.rowBodyFeature.setupRowData(values.record, values.recordIndex, values);&#39;,
+        &#39;%}&#39;,
+        &#39;&lt;tr class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-rowbody-tr {rowBodyCls} {rowIdCls}&quot; {ariaRowAttr}&gt;&#39;,
+            &#39;&lt;tpl if=&quot;addSpacerCell&quot;&gt;&#39;,
+                &#39;&lt;td class=&quot;{spacerCellCls}&quot;&gt;&lt;/td&gt;&#39;,
+            &#39;&lt;/tpl&gt;&#39;,
+            &#39;&lt;td class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-td &#39; + Ext.baseCSSPrefix + &#39;grid-cell-rowbody&quot; colspan=&quot;{rowBodyColspan}&quot; {ariaCellAttr}&gt;&#39;,
+                &#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-rowbody {rowBodyDivCls}&quot; {ariaCellInnerAttr}&gt;{rowBody}&lt;/div&gt;&#39;,
+            &#39;&lt;/td&gt;&#39;,
+        &#39;&lt;/tr&gt;&#39;,
+        &#39;{%&#39;,
+            &#39;if(this.rowBody.bodyBefore) {&#39;,
+                &#39;this.nextTpl.applyOut(values, out, parent);&#39;,
+            &#39;}&#39;,
+        &#39;%}&#39;, {
             priority: 100,
 
             beginRowSync: function (rowSync) {
-                rowSync.add('rowBody', this.owner.eventSelector);
+                rowSync.add(&#39;rowBody&#39;, this.owner.eventSelector);
             },
 
             syncContent: function(destRow, sourceRow, columnsToUpdate) {
@@ -195,8 +195,8 @@ Ext.define('Ext.grid.feature.RowBody', {
             view = me.view = grid.getView();
 
         // &lt;debug&gt;
-        if (!me.rowExpander &amp;&amp; grid.findPlugin('rowexpander')) {
-            Ext.raise('The RowBody feature shouldn\'t be manually added when the grid has a RowExpander.');
+        if (!me.rowExpander &amp;&amp; grid.findPlugin(&#39;rowexpander&#39;)) {
+            Ext.raise(&#39;The RowBody feature shouldn\&#39;t be manually added when the grid has a RowExpander.&#39;);
         }
         // &lt;/debug&gt;
 
@@ -209,7 +209,7 @@ Ext.define('Ext.grid.feature.RowBody', {
             scope: me
         });
         view.addTpl(me.outerTpl).rowBody = me;
-        view.addRowTpl(Ext.XTemplate.getTpl(this, 'extraRowTpl')).rowBody = me;
+        view.addRowTpl(Ext.XTemplate.getTpl(this, &#39;extraRowTpl&#39;)).rowBody = me;
         me.callParent(arguments);
     },
 
@@ -229,7 +229,7 @@ Ext.define('Ext.grid.feature.RowBody', {
             i;
 
         for (i = 0; i &lt; len; ++i) {
-            items[i].setAttribute('colSpan', colspan);
+            items[i].setAttribute(&#39;colSpan&#39;, colspan);
         }
     },
 
@@ -238,7 +238,7 @@ Ext.define('Ext.grid.feature.RowBody', {
      * @protected
      * @template
      * Provides additional data to the prepareData call within the grid view.
-     * The rowbody feature adds 3 additional variables into the grid view's template.
+     * The rowbody feature adds 3 additional variables into the grid view&#39;s template.
      * These are `rowBody`, `rowBodyCls`, and `rowBodyColspan`.
      * 
      *  - **rowBody:** *{String}* The HTML to display in the row body element.  Defaults 
@@ -254,7 +254,7 @@ Ext.define('Ext.grid.feature.RowBody', {
      * @param {Ext.data.Model} record The record instance
      * @param {Object} orig The original result from the prepareData call to massage.
      * @return {Object} An object containing additional variables for use in the grid 
-     * view's template
+     * view&#39;s template
      */
     
 <span id='Ext-grid-feature-RowBody-method-setupRowData'>    /*
@@ -276,8 +276,8 @@ Ext.define('Ext.grid.feature.RowBody', {
      * **Note:** This event is fired only when the Ext.grid.feature.RowBody feature is 
      * used.
      * 
-     * @param {Ext.view.View} view The rowbody's owning View
-     * @param {HTMLElement} rowBodyEl The row body's element
+     * @param {Ext.view.View} view The rowbody&#39;s owning View
+     * @param {HTMLElement} rowBodyEl The row body&#39;s element
      * @param {Ext.event.Event} e The raw event object
      */
 

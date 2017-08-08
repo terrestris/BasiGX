@@ -44,40 +44,40 @@
  * An example showing a classic application border layout:
  *
  *     @example
- *     Ext.create('Ext.container.Viewport', {
- *         layout: 'border',
+ *     Ext.create(&#39;Ext.container.Viewport&#39;, {
+ *         layout: &#39;border&#39;,
  *         items: [{
- *             region: 'north',
- *             html: '&lt;h1 class=&quot;x-panel-header&quot;&gt;Page Title&lt;/h1&gt;',
+ *             region: &#39;north&#39;,
+ *             html: &#39;&lt;h1 class=&quot;x-panel-header&quot;&gt;Page Title&lt;/h1&gt;&#39;,
  *             border: false,
- *             margin: '0 0 5 0'
+ *             margin: &#39;0 0 5 0&#39;
  *         }, {
- *             region: 'west',
+ *             region: &#39;west&#39;,
  *             collapsible: true,
- *             title: 'Navigation',
+ *             title: &#39;Navigation&#39;,
  *             width: 150
  *             // could use a TreePanel or AccordionLayout for navigational items
  *         }, {
- *             region: 'south',
- *             title: 'South Panel',
+ *             region: &#39;south&#39;,
+ *             title: &#39;South Panel&#39;,
  *             collapsible: true,
- *             html: 'Information goes here',
+ *             html: &#39;Information goes here&#39;,
  *             split: true,
  *             height: 100,
  *             minHeight: 100
  *         }, {
- *             region: 'east',
- *             title: 'East Panel',
+ *             region: &#39;east&#39;,
+ *             title: &#39;East Panel&#39;,
  *             collapsible: true,
  *             split: true,
  *             width: 150
  *         }, {
- *             region: 'center',
- *             xtype: 'tabpanel', // TabPanel itself has no title
+ *             region: &#39;center&#39;,
+ *             xtype: &#39;tabpanel&#39;, // TabPanel itself has no title
  *             activeTab: 0,      // First tab active by default
  *             items: {
- *                 title: 'Default Tab',
- *                 html: 'The first tab\'s content. Others may be added dynamically'
+ *                 title: &#39;Default Tab&#39;,
+ *                 html: &#39;The first tab\&#39;s content. Others may be added dynamically&#39;
  *             }
  *         }]
  *     });
@@ -85,19 +85,19 @@
  * Alternatively you can turn any normal Container (or Component) into a Viewport using
  * the `{@link Ext.plugin.Viewport viewport plugin}`.
  */
-Ext.define('Ext.container.Viewport', {
-    extend: 'Ext.container.Container',
+Ext.define(&#39;Ext.container.Viewport&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
 
     requires: [
-        'Ext.plugin.Viewport'
+        &#39;Ext.plugin.Viewport&#39;
     ],
 
     mixins: [
-        'Ext.mixin.Responsive'
+        &#39;Ext.mixin.Responsive&#39;
     ],
 
-    alias: 'widget.viewport',
-    alternateClassName: 'Ext.Viewport',
+    alias: &#39;widget.viewport&#39;,
+    alternateClassName: &#39;Ext.Viewport&#39;,
 
 <span id='Ext-container-Viewport-property-isViewport'>    /**
 </span>     * @property {Boolean} isViewport
@@ -138,7 +138,7 @@ Ext.define('Ext.container.Viewport', {
      * @private
      */
     
-    ariaRole: 'application',
+    ariaRole: &#39;application&#39;,
     
 <span id='Ext-container-Viewport-property-privates'>    privates: {
 </span>        updateResponsiveState: function () {

@@ -18,11 +18,11 @@
   <pre class="prettyprint lang-js"><span id='Ext-grid-ViewDropZone'>/**
 </span> * @private
  */
-Ext.define('Ext.grid.ViewDropZone', {
-    extend: 'Ext.view.DropZone',
+Ext.define(&#39;Ext.grid.ViewDropZone&#39;, {
+    extend: &#39;Ext.view.DropZone&#39;,
 
-<span id='Ext-grid-ViewDropZone-property-indicatorHtml'>    indicatorHtml: '&lt;div class=&quot;' + Ext.baseCSSPrefix + 'grid-drop-indicator-left&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&lt;div class=&quot;' + Ext.baseCSSPrefix + 'grid-drop-indicator-right&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;',
-</span><span id='Ext-grid-ViewDropZone-property-indicatorCls'>    indicatorCls: Ext.baseCSSPrefix + 'grid-drop-indicator',
+<span id='Ext-grid-ViewDropZone-property-indicatorHtml'>    indicatorHtml: &#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-drop-indicator-left&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-drop-indicator-right&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&#39;,
+</span><span id='Ext-grid-ViewDropZone-property-indicatorCls'>    indicatorCls: Ext.baseCSSPrefix + &#39;grid-drop-indicator&#39;,
 </span>
 <span id='Ext-grid-ViewDropZone-method-handleNodeDrop'>    handleNodeDrop : function(data, record, position) {
 </span>        var view = this.view,
@@ -46,8 +46,8 @@ Ext.define('Ext.grid.ViewDropZone', {
         if (record &amp;&amp; position) {
             index = store.indexOf(record);
 
-            // 'after', or undefined (meaning a drop at index -1 on an empty View)...
-            if (position !== 'before') {
+            // &#39;after&#39;, or undefined (meaning a drop at index -1 on an empty View)...
+            if (position !== &#39;before&#39;) {
                 index++;
             }
             store.insert(index, data.records);

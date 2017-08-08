@@ -20,8 +20,8 @@
  * descriptor and forward changes from there.
  * @private
  */
-Ext.define('Ext.app.bind.LinkStub', {
-    extend: 'Ext.app.bind.Stub',
+Ext.define(&#39;Ext.app.bind.LinkStub&#39;, {
+    extend: &#39;Ext.app.bind.Stub&#39;,
 
 <span id='Ext-app-bind-LinkStub-property-isLinkStub'>    isLinkStub: true,
 </span>
@@ -47,7 +47,7 @@ Ext.define('Ext.app.bind.LinkStub', {
 <span id='Ext-app-bind-LinkStub-method-getFullName'>    getFullName: function () {
 </span>        var me = this;
         return me.fullName ||
-              (me.fullName = '(' + me.callParent() + ' -&gt; ' + me.binding.getFullName() + ')');
+              (me.fullName = &#39;(&#39; + me.callParent() + &#39; -&gt; &#39; + me.binding.getFullName() + &#39;)&#39;);
     },
 
 <span id='Ext-app-bind-LinkStub-method-getDataObject'>    getDataObject: function () {

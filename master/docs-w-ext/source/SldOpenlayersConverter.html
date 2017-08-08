@@ -35,20 +35,20 @@
  *
  * @class BasiGX.util.SldOpenlayersConverter
  */
-Ext.define('BasiGX.util.SldOpenlayersConverter', {
+Ext.define(&#39;BasiGX.util.SldOpenlayersConverter&#39;, {
     statics: {
 <span id='BasiGX-util-SldOpenlayersConverter-static-property-jsonixContext'>        jsonixContext: null,
 </span><span id='BasiGX-util-SldOpenlayersConverter-static-property-marshaller'>        marshaller: null,
 </span><span id='BasiGX-util-SldOpenlayersConverter-static-property-unmarshaller'>        unmarshaller: null,
 </span><span id='BasiGX-util-SldOpenlayersConverter-static-property-neededGlobals'>        neededGlobals: [
-</span>            'Jsonix',
-            'SLD_1_0_0',
-            'Filter_1_0_0',
-            'GML_2_1_2',
-            'XLink_1_0'
+</span>            &#39;Jsonix&#39;,
+            &#39;SLD_1_0_0&#39;,
+            &#39;Filter_1_0_0&#39;,
+            &#39;GML_2_1_2&#39;,
+            &#39;XLink_1_0&#39;
         ],
 <span id='BasiGX-util-SldOpenlayersConverter-static-property-DEFAULT_STROKE_OPACITY'>        DEFAULT_STROKE_OPACITY: 1,
-</span><span id='BasiGX-util-SldOpenlayersConverter-static-property-DEFAULT_STROKE_COLOR'>        DEFAULT_STROKE_COLOR: '#000000',
+</span><span id='BasiGX-util-SldOpenlayersConverter-static-property-DEFAULT_STROKE_COLOR'>        DEFAULT_STROKE_COLOR: &#39;#000000&#39;,
 </span><span id='BasiGX-util-SldOpenlayersConverter-static-property-DEFAULT_STROKE_WIDTH'>        DEFAULT_STROKE_WIDTH: 0,
 </span>
 <span id='BasiGX-util-SldOpenlayersConverter-static-property-DEFAULT_FILL_OPACITY'>        DEFAULT_FILL_OPACITY: 1,
@@ -64,14 +64,14 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                     foundCnt += 1;
                 } else {
                     Ext.log.error(
-                        'Required global variable \'' + needed + '\'' +
-                        ' not found. Are Jsonix needed mappings loaded?'
+                        &#39;Required global variable \&#39;&#39; + needed + &#39;\&#39;&#39; +
+                        &#39; not found. Are Jsonix needed mappings loaded?&#39;
                     );
                 }
             });
             if (foundCnt !== staticMe.neededGlobals.length) {
-                var msg = 'This function is not functional as its' +
-                    ' requirements weren\'t met.';
+                var msg = &#39;This function is not functional as its&#39; +
+                    &#39; requirements weren\&#39;t met.&#39;;
                 staticMe.toSldObject = function() {
                     Ext.log.error(msg);
                 };
@@ -85,11 +85,11 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                 SLD_1_0_0, Filter_1_0_0, GML_2_1_2, XLink_1_0
             ], {
                 namespacePrefixes: {
-                    'http://www.opengis.net/sld': 'sld',
-                    'http://www.opengis.net/ogc': 'ogc',
-                    'http://www.opengis.net/gml': 'gml',
-                    'http://www.w3.org/2001/XMLSchema-instance': 'xsi',
-                    'http://www.w3.org/1999/xlink': 'xlink'
+                    &#39;http://www.opengis.net/sld&#39;: &#39;sld&#39;,
+                    &#39;http://www.opengis.net/ogc&#39;: &#39;ogc&#39;,
+                    &#39;http://www.opengis.net/gml&#39;: &#39;gml&#39;,
+                    &#39;http://www.w3.org/2001/XMLSchema-instance&#39;: &#39;xsi&#39;,
+                    &#39;http://www.w3.org/1999/xlink&#39;: &#39;xlink&#39;
                 }
             });
             var marshaller = context.createMarshaller();
@@ -143,14 +143,14 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
          * @return {String} The type of the geometry.
          */
         guessGeometryTypeFromSldString: function(sldString) {
-            if (sldString.indexOf('PointSymbolizer') &gt; 0) {
-                return 'Point';
+            if (sldString.indexOf(&#39;PointSymbolizer&#39;) &gt; 0) {
+                return &#39;Point&#39;;
             }
-            if (sldString.indexOf('PolygonSymbolizer') &gt; 0) {
-                return 'Polygon';
+            if (sldString.indexOf(&#39;PolygonSymbolizer&#39;) &gt; 0) {
+                return &#39;Polygon&#39;;
             }
-            if (sldString.indexOf('LineSymbolizer') &gt; 0) {
-                return 'Line';
+            if (sldString.indexOf(&#39;LineSymbolizer&#39;) &gt; 0) {
+                return &#39;Line&#39;;
             }
         },
 
@@ -202,7 +202,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
          * @return {boolean} True if filter is logical.
          */
         isLogicalFilter: function(filter) {
-            return 'logicOps' in filter;
+            return &#39;logicOps&#39; in filter;
         },
 
 <span id='BasiGX-util-SldOpenlayersConverter-static-method-isSpatialFilter'>        /**
@@ -210,7 +210,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
          * @return {boolean} True if filter is spatial.
          */
         isSpatialFilter: function(filter) {
-            return 'spatialOps' in filter;
+            return &#39;spatialOps&#39; in filter;
         },
 
 <span id='BasiGX-util-SldOpenlayersConverter-static-method-isComparisonFilter'>        /**
@@ -218,7 +218,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
          * @return {boolean} True if filter is comparable.
          */
         isComparisonFilter: function(filter) {
-            return 'comparisonOps' in filter;
+            return &#39;comparisonOps&#39; in filter;
         },
 
 <span id='BasiGX-util-SldOpenlayersConverter-static-method-getPropertyNameFromFilter'>        /**
@@ -229,15 +229,15 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
             var operator = filter.comparisonOps.name.localPart;
             var propertyName;
             switch (operator) {
-                case 'PropertyIsNull':
+                case &#39;PropertyIsNull&#39;:
                     propertyName = filter.comparisonOps.value.propertyName
                             .content[0];
                     break;
-                case 'PropertyIsLike':
+                case &#39;PropertyIsLike&#39;:
                     propertyName = filter.comparisonOps.value.propertyName
                             .content[0];
                     break;
-                case 'PropertyIsBetween':
+                case &#39;PropertyIsBetween&#39;:
                     propertyName = filter.comparisonOps.value.expression.value
                             .content[0];
                     break;
@@ -257,14 +257,14 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
             var operator = filter.comparisonOps.name.localPart;
             var literalValues = [];
             switch (operator) {
-                case 'PropertyIsNull':
+                case &#39;PropertyIsNull&#39;:
                     literalValues = null;
                     break;
-                case 'PropertyIsLike':
+                case &#39;PropertyIsLike&#39;:
                     literalValues.push(
                             filter.comparisonOps.value.literal.content[0]);
                     break;
-                case 'PropertyIsBetween':
+                case &#39;PropertyIsBetween&#39;:
                     literalValues.push(filter.comparisonOps.value.lowerBoundary
                             .expression.value.content[0]);
                     literalValues.push(filter.comparisonOps.value.upperBoundary
@@ -307,25 +307,25 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
 
             var style;
             switch (symbolType) {
-                case 'Point':
+                case &#39;Point&#39;:
                     style = sldUtil.pointStyleFromSymbolizer(symbolizer);
                     break;
-                case 'Line':
+                case &#39;Line&#39;:
                     style = sldUtil.lineStyleFromSymbolizer(symbolizer);
                     break;
-                case 'Polygon':
+                case &#39;Polygon&#39;:
                     style = sldUtil.polygonStyleFromSymbolizer(symbolizer);
                     break;
-                case 'Text':
+                case &#39;Text&#39;:
                     style = sldUtil.textStyleFromSymbolizer(symbolizer);
                     break;
-                case 'Raster':
+                case &#39;Raster&#39;:
                     // IDK…
-                    Ext.log.warn('Unimplemented symbolType \'Raster\'');
+                    Ext.log.warn(&#39;Unimplemented symbolType \&#39;Raster\&#39;&#39;);
                     break;
                 default:
                     Ext.log.warn(
-                        'Unexpected symbolType \'' + symbolType + '\''
+                        &#39;Unexpected symbolType \&#39;&#39; + symbolType + &#39;\&#39;&#39;
                     );
             }
             return style;
@@ -354,13 +354,13 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
         fillFromObj: function(mark) {
             var sldUtil = BasiGX.util.SldOpenlayersConverter;
             var fill;
-            if ('fill' in mark) {
+            if (&#39;fill&#39; in mark) {
                 // find the correct cssParameter
                 var fillColor = sldUtil.getFirstCssParameterContentByName(
-                        mark.fill.cssParameter, 'fill'
+                        mark.fill.cssParameter, &#39;fill&#39;
                     );
                 var fillOpacity = sldUtil.getFirstCssParameterContentByName(
-                        mark.fill.cssParameter, 'fill-opacity'
+                        mark.fill.cssParameter, &#39;fill-opacity&#39;
                     ) || sldUtil.DEFAULT_FILL_OPACITY;
 
                 fillColor = BasiGX.util.Color.hexToRgba(fillColor, fillOpacity);
@@ -378,15 +378,15 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
         strokeFromObj: function(mark) {
             var sldUtil = BasiGX.util.SldOpenlayersConverter;
             var stroke;
-            if ('stroke' in mark) {
+            if (&#39;stroke&#39; in mark) {
                 var strokeColor = sldUtil.getFirstCssParameterContentByName(
-                        mark.stroke.cssParameter, 'stroke'
+                        mark.stroke.cssParameter, &#39;stroke&#39;
                     ) || sldUtil.DEFAULT_STROKE_COLOR;
                 var strokeWidth = sldUtil.getFirstCssParameterContentByName(
-                        mark.stroke.cssParameter, 'stroke-width'
+                        mark.stroke.cssParameter, &#39;stroke-width&#39;
                     ) || sldUtil.DEFAULT_STROKE_WIDTH;
                 var strokeOpacity = sldUtil.getFirstCssParameterContentByName(
-                        mark.stroke.cssParameter, 'stroke-opacity'
+                        mark.stroke.cssParameter, &#39;stroke-opacity&#39;
                     ) || sldUtil.DEFAULT_STROKE_OPACITY;
 
                 strokeColor = BasiGX.util.Color.hexToRgba(strokeColor,
@@ -395,7 +395,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                     color: strokeColor,
                     width: strokeWidth
                     // TODO there are more… lineCap, lineJoin, lineDash,
-                    //      miterLimit, they'll all have an SLD equivalent
+                    //      miterLimit, they&#39;ll all have an SLD equivalent
                 });
             }
             return stroke;
@@ -425,7 +425,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                 var stroke = sldUtil.strokeFromObj(firstGraphicOrMark);
 
                 switch (wellKnownName) {
-                    case 'circle':
+                    case &#39;circle&#39;:
                         style = new ol.style.Style({
                             image: new ol.style.Circle({
                                 radius: size,
@@ -434,7 +434,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                             })
                         });
                         break;
-                    case 'square':
+                    case &#39;square&#39;:
                         style = new ol.style.Style({
                             image: new ol.style.RegularShape({
                                 fill: fill,
@@ -445,7 +445,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                             })
                         });
                         break;
-                    case 'triangle':
+                    case &#39;triangle&#39;:
                         style = new ol.style.Style({
                             image: new ol.style.RegularShape({
                                 fill: fill,
@@ -457,7 +457,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                             })
                         });
                         break;
-                    case 'star':
+                    case &#39;star&#39;:
                         style = new ol.style.Style({
                             image: new ol.style.RegularShape({
                                 fill: fill,
@@ -469,7 +469,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                             })
                         });
                         break;
-                    case 'cross':
+                    case &#39;cross&#39;:
                         style = new ol.style.Style({
                             image: new ol.style.RegularShape({
                                 fill: fill,
@@ -481,7 +481,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                             })
                         });
                         break;
-                    case 'x':
+                    case &#39;x&#39;:
                         style = new ol.style.Style({
                             image: new ol.style.RegularShape({
                                 fill: fill,
@@ -498,10 +498,10 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                             image: new ol.style.Circle({
                                 radius: 10,
                                 fill: new ol.style.Fill({
-                                    color: '#3399CC'
+                                    color: &#39;#3399CC&#39;
                                 }),
                                 stroke: new ol.style.Stroke({
-                                    color: '#FFFFFF',
+                                    color: &#39;#FFFFFF&#39;,
                                     width: 1.25
                                 })
                             })
@@ -517,7 +517,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                     image: new ol.style.Icon({
                         src: imageSrc,
                         // SLD size applies to height only if the image is
-                        // rectangular, we'll fix this at the call site with
+                        // rectangular, we&#39;ll fix this at the call site with
                         // a listener.
                         size: [size, size]
                     })
@@ -571,11 +571,11 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
 </span>         *
          */
         textStyleFromSymbolizer: function() {
-            Ext.log.warn('#textStyleFromSymbolizer: Not implemented yet');
+            Ext.log.warn(&#39;#textStyleFromSymbolizer: Not implemented yet&#39;);
         },
 
 <span id='BasiGX-util-SldOpenlayersConverter-static-method-symbolTypeFromSymbolizer'>        /**
-</span>         * returns 'Point', 'Line', 'Polygon', 'Text' or 'Raster'
+</span>         * returns &#39;Point&#39;, &#39;Line&#39;, &#39;Polygon&#39;, &#39;Text&#39; or &#39;Raster&#39;
          * @param {Array} symbolizers The symbolizers Array.
          * @return {String} The geometry type.
          */
@@ -594,7 +594,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                 // * PolygonSymbolizer
                 // * TextSymbolizer
                 // * RasterSymbolizer
-                symbolType = localPart.replace(/Symbolizer$/, '');
+                symbolType = localPart.replace(/Symbolizer$/, &#39;&#39;);
             }
             return symbolType;
         },
@@ -626,17 +626,17 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
         pointSymbolizerToSld: function(olSymbolizer) {
             var sldSymbolizer = {
                 name: {
-                    namespaceURI: 'http://www.opengis.net/sld',
-                    localPart: 'PointSymbolizer',
-                    prefix: 'sld',
-                    key: '{http://www.opengis.net/sld}PointSymbolizer',
-                    string: '{http://www.opengis.net/sld}sld:PointSymbolizer',
-                    CLASS_NAME: 'Jsonix.XML.QName'
+                    namespaceURI: &#39;http://www.opengis.net/sld&#39;,
+                    localPart: &#39;PointSymbolizer&#39;,
+                    prefix: &#39;sld&#39;,
+                    key: &#39;{http://www.opengis.net/sld}PointSymbolizer&#39;,
+                    string: &#39;{http://www.opengis.net/sld}sld:PointSymbolizer&#39;,
+                    CLASS_NAME: &#39;Jsonix.XML.QName&#39;
                 },
                 value: {
-                    TYPE_NAME: 'SLD_1_0_0.PointSymbolizer',
+                    TYPE_NAME: &#39;SLD_1_0_0.PointSymbolizer&#39;,
                     graphic: {
-                        TYPE_NAME: 'SLD_1_0_0.Graphic'
+                        TYPE_NAME: &#39;SLD_1_0_0.Graphic&#39;
                     }
                 }
             };
@@ -654,42 +654,42 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                         olSymbolizer.getImage().getStroke().getColor())[4];
 
                 sldSymbolizer.value.graphic.externalGraphicOrMark = [{
-                    TYPE_NAME: 'SLD_1_0_0.Mark',
+                    TYPE_NAME: &#39;SLD_1_0_0.Mark&#39;,
                     wellKnownName: {
-                        TYPE_NAME: 'SLD_1_0_0.WellKnownName',
-                        content: ['circle']
+                        TYPE_NAME: &#39;SLD_1_0_0.WellKnownName&#39;,
+                        content: [&#39;circle&#39;]
                     },
                     fill: {
-                        TYPE_NAME: 'SLD_1_0_0.Fill',
+                        TYPE_NAME: &#39;SLD_1_0_0.Fill&#39;,
                         cssParameter: [{
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'fill',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;fill&#39;,
                             content: [fillColor]
                         }, {
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'fill-opacity',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;fill-opacity&#39;,
                             content: [fillOpacity]
                         }]
                     },
                     stroke: {
-                        TYPE_NAME: 'SLD_1_0_0.Stroke',
+                        TYPE_NAME: &#39;SLD_1_0_0.Stroke&#39;,
                         cssParameter: [{
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke&#39;,
                             content: [strokeColor]
                         }, {
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke-width',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke-width&#39;,
                             content: [strokeWidth]
                         }, {
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke-opacity',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke-opacity&#39;,
                             content: [strokeOpacity]
                         }]
                     }
                 }];
                 sldSymbolizer.value.graphic.size = {
-                    TYPE_NAME: 'SLD_1_0_0.ParameterValueType',
+                    TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
                     content: [radius]
                 };
             }
@@ -697,16 +697,16 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                 var size = olSymbolizer.getImage().getSize()[1].toString();
                 var src = olSymbolizer.getImage().getSrc();
                 sldSymbolizer.value.graphic.externalGraphicOrMark = [{
-                    TYPE_NAME: 'SLD_1_0_0.ExternalGraphic',
+                    TYPE_NAME: &#39;SLD_1_0_0.ExternalGraphic&#39;,
                     onlineResource: {
-                        TYPE_NAME: 'SLD_1_0_0.OnlineResource',
-                        type: 'simple',
+                        TYPE_NAME: &#39;SLD_1_0_0.OnlineResource&#39;,
+                        type: &#39;simple&#39;,
                         href: src
                     },
-                    format: 'image/png'
+                    format: &#39;image/png&#39;
                 }];
                 sldSymbolizer.value.graphic.size = {
-                    TYPE_NAME: 'SLD_1_0_0.ParameterValueType',
+                    TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
                     content: [size]
                 };
             }
@@ -731,40 +731,40 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
 
             var sldSymbolizer = {
                 name: {
-                    namespaceURI: 'http://www.opengis.net/sld',
-                    localPart: 'PolygonSymbolizer',
-                    prefix: 'sld',
-                    key: '{http://www.opengis.net/sld}PolygonSymbolizer',
-                    string: '{http://www.opengis.net/sld}sld:PolygonSymbolizer',
-                    CLASS_NAME: 'Jsonix.XML.QName'
+                    namespaceURI: &#39;http://www.opengis.net/sld&#39;,
+                    localPart: &#39;PolygonSymbolizer&#39;,
+                    prefix: &#39;sld&#39;,
+                    key: &#39;{http://www.opengis.net/sld}PolygonSymbolizer&#39;,
+                    string: &#39;{http://www.opengis.net/sld}sld:PolygonSymbolizer&#39;,
+                    CLASS_NAME: &#39;Jsonix.XML.QName&#39;
                 },
                 value: {
-                    TYPE_NAME: 'SLD_1_0_0.PolygonSymbolizer',
+                    TYPE_NAME: &#39;SLD_1_0_0.PolygonSymbolizer&#39;,
                     fill: {
-                        TYPE_NAME: 'SLD_1_0_0.Fill',
+                        TYPE_NAME: &#39;SLD_1_0_0.Fill&#39;,
                         cssParameter: [{
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'fill',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;fill&#39;,
                             content: [fillColor]
                         }, {
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'fill-opacity',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;fill-opacity&#39;,
                             content: [fillOpacity]
                         }]
                     },
                     stroke: {
-                        TYPE_NAME: 'SLD_1_0_0.Stroke',
+                        TYPE_NAME: &#39;SLD_1_0_0.Stroke&#39;,
                         cssParameter: [{
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke&#39;,
                             content: [strokeColor]
                         }, {
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke-width',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke-width&#39;,
                             content: [strokeWidth]
                         }, {
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke-opacity',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke-opacity&#39;,
                             content: [strokeOpacity]
                         }]
                     }
@@ -787,28 +787,28 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
 
             var sldSymbolizer = {
                 name: {
-                    namespaceURI: 'http://www.opengis.net/sld',
-                    localPart: 'LineSymbolizer',
-                    prefix: 'sld',
-                    key: '{http://www.opengis.net/sld}LineSymbolizer',
-                    string: '{http://www.opengis.net/sld}sld:LineSymbolizer',
-                    CLASS_NAME: 'Jsonix.XML.QName'
+                    namespaceURI: &#39;http://www.opengis.net/sld&#39;,
+                    localPart: &#39;LineSymbolizer&#39;,
+                    prefix: &#39;sld&#39;,
+                    key: &#39;{http://www.opengis.net/sld}LineSymbolizer&#39;,
+                    string: &#39;{http://www.opengis.net/sld}sld:LineSymbolizer&#39;,
+                    CLASS_NAME: &#39;Jsonix.XML.QName&#39;
                 },
                 value: {
-                    TYPE_NAME: 'SLD_1_0_0.LineSymbolizer',
+                    TYPE_NAME: &#39;SLD_1_0_0.LineSymbolizer&#39;,
                     stroke: {
-                        TYPE_NAME: 'SLD_1_0_0.Stroke',
+                        TYPE_NAME: &#39;SLD_1_0_0.Stroke&#39;,
                         cssParameter: [{
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke&#39;,
                             content: [strokeColor]
                         }, {
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke-width',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke-width&#39;,
                             content: [strokeWidth]
                         }, {
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke-opacity',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke-opacity&#39;,
                             content: [strokeOpacity]
                         }]
                     }
@@ -823,46 +823,46 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
          */
         filterValuesToSldFilter: function(filterValues) {
             var sldFilter = {
-                TYPE_NAME: 'Filter_1_0_0.FilterType',
+                TYPE_NAME: &#39;Filter_1_0_0.FilterType&#39;,
                 comparisonOps: {
                     name: {
-                        namespaceURI: 'http://www.opengis.net/ogc',
+                        namespaceURI: &#39;http://www.opengis.net/ogc&#39;,
                         localPart: filterValues.operatorCombo,
-                        prefix: 'ogc',
-                        key: '{http://www.opengis.net/ogc}' +
+                        prefix: &#39;ogc&#39;,
+                        key: &#39;{http://www.opengis.net/ogc}&#39; +
                                 filterValues.operatorCombo,
-                        string: '{http://www.opengis.net/ogc}ogc:' +
+                        string: &#39;{http://www.opengis.net/ogc}ogc:&#39; +
                                 filterValues.operatorCombo,
-                        CLASS_NAME: 'Jsonix.XML.QName'
+                        CLASS_NAME: &#39;Jsonix.XML.QName&#39;
                     },
                     value: {
-                        TYPE_NAME: 'Filter_1_0_0.BinaryComparisonOpType',
+                        TYPE_NAME: &#39;Filter_1_0_0.BinaryComparisonOpType&#39;,
                         expression: [{
                             name: {
-                                namespaceURI: 'http://www.opengis.net/ogc',
-                                localPart: 'PropertyName',
-                                prefix: 'ogc',
-                                key: '{http://www.opengis.net/ogc}PropertyName',
-                                string: '{http://www.opengis.net/ogc}' +
-                                        'ogc:PropertyName',
-                                CLASS_NAME: 'Jsonix.XML.QName'
+                                namespaceURI: &#39;http://www.opengis.net/ogc&#39;,
+                                localPart: &#39;PropertyName&#39;,
+                                prefix: &#39;ogc&#39;,
+                                key: &#39;{http://www.opengis.net/ogc}PropertyName&#39;,
+                                string: &#39;{http://www.opengis.net/ogc}&#39; +
+                                        &#39;ogc:PropertyName&#39;,
+                                CLASS_NAME: &#39;Jsonix.XML.QName&#39;
                             },
                             value: {
-                                TYPE_NAME: 'Filter_1_0_0.PropertyNameType',
+                                TYPE_NAME: &#39;Filter_1_0_0.PropertyNameType&#39;,
                                 content: [filterValues.attributeCombo]
                             }
                         }, {
                             name: {
-                                namespaceURI: 'http://www.opengis.net/ogc',
-                                localPart: 'Literal',
-                                prefix: 'ogc',
-                                key: '{http://www.opengis.net/ogc}Literal',
-                                string: '{http://www.opengis.net/ogc}' +
-                                        'ogc:Literal',
-                                CLASS_NAME: 'Jsonix.XML.QName'
+                                namespaceURI: &#39;http://www.opengis.net/ogc&#39;,
+                                localPart: &#39;Literal&#39;,
+                                prefix: &#39;ogc&#39;,
+                                key: &#39;{http://www.opengis.net/ogc}Literal&#39;,
+                                string: &#39;{http://www.opengis.net/ogc}&#39; +
+                                        &#39;ogc:Literal&#39;,
+                                CLASS_NAME: &#39;Jsonix.XML.QName&#39;
                             },
                             value: {
-                                TYPE_NAME: 'Filter_1_0_0.LiteralType',
+                                TYPE_NAME: &#39;Filter_1_0_0.LiteralType&#39;,
                                 content: [filterValues.literalTextField]
                             }
                         }]
@@ -871,61 +871,61 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
             };
 
             switch (filterValues.operatorCombo) {
-                case 'PropertyIsEqualTo':
+                case &#39;PropertyIsEqualTo&#39;:
                     break;
-                case 'PropertyIsNotEqualTo':
+                case &#39;PropertyIsNotEqualTo&#39;:
                     break;
-                case 'PropertyIsBetween':
+                case &#39;PropertyIsBetween&#39;:
                     sldFilter.comparisonOps.value = {
-                        TYPE_NAME: 'Filter_1_0_0.PropertyIsBetweenType',
+                        TYPE_NAME: &#39;Filter_1_0_0.PropertyIsBetweenType&#39;,
                         expression: {
                             name: {
-                                namespaceURI: 'http://www.opengis.net/ogc',
-                                localPart: 'PropertyName',
-                                prefix: 'ogc',
-                                key: '{http://www.opengis.net/ogc}PropertyName',
-                                string: '{http://www.opengis.net/ogc}' +
-                                        'ogc:PropertyName',
-                                CLASS_NAME: 'Jsonix.XML.QName'
+                                namespaceURI: &#39;http://www.opengis.net/ogc&#39;,
+                                localPart: &#39;PropertyName&#39;,
+                                prefix: &#39;ogc&#39;,
+                                key: &#39;{http://www.opengis.net/ogc}PropertyName&#39;,
+                                string: &#39;{http://www.opengis.net/ogc}&#39; +
+                                        &#39;ogc:PropertyName&#39;,
+                                CLASS_NAME: &#39;Jsonix.XML.QName&#39;
                             },
                             value: {
-                                TYPE_NAME: 'Filter_1_0_0.PropertyNameType',
+                                TYPE_NAME: &#39;Filter_1_0_0.PropertyNameType&#39;,
                                 content: [filterValues.attributeCombo]
                             }
                         },
                         lowerBoundary: {
-                            TYPE_NAME: 'Filter_1_0_0.LowerBoundaryType',
+                            TYPE_NAME: &#39;Filter_1_0_0.LowerBoundaryType&#39;,
                             expression: {
                                 name: {
-                                    namespaceURI: 'http://www.opengis.net/ogc',
-                                    localPart: 'Literal',
-                                    prefix: 'ogc',
-                                    key: '{http://www.opengis.net/ogc}Literal',
-                                    string: '{http://www.opengis.net/ogc}' +
-                                            'ogc:Literal',
-                                    CLASS_NAME: 'Jsonix.XML.QName'
+                                    namespaceURI: &#39;http://www.opengis.net/ogc&#39;,
+                                    localPart: &#39;Literal&#39;,
+                                    prefix: &#39;ogc&#39;,
+                                    key: &#39;{http://www.opengis.net/ogc}Literal&#39;,
+                                    string: &#39;{http://www.opengis.net/ogc}&#39; +
+                                            &#39;ogc:Literal&#39;,
+                                    CLASS_NAME: &#39;Jsonix.XML.QName&#39;
                                 },
                                 value: {
-                                    TYPE_NAME: 'Filter_1_0_0.LiteralType',
+                                    TYPE_NAME: &#39;Filter_1_0_0.LiteralType&#39;,
                                     content: [filterValues.literalNumberField1
                                               .toString()]
                                 }
                             }
                         },
                         upperBoundary: {
-                            TYPE_NAME: 'Filter_1_0_0.UpperBoundaryType',
+                            TYPE_NAME: &#39;Filter_1_0_0.UpperBoundaryType&#39;,
                             expression: {
                                 name: {
-                                    namespaceURI: 'http://www.opengis.net/ogc',
-                                    localPart: 'Literal',
-                                    prefix: 'ogc',
-                                    key: '{http://www.opengis.net/ogc}Literal',
-                                    string: '{http://www.opengis.net/ogc}' +
-                                            'ogc:Literal',
-                                    CLASS_NAME: 'Jsonix.XML.QName'
+                                    namespaceURI: &#39;http://www.opengis.net/ogc&#39;,
+                                    localPart: &#39;Literal&#39;,
+                                    prefix: &#39;ogc&#39;,
+                                    key: &#39;{http://www.opengis.net/ogc}Literal&#39;,
+                                    string: &#39;{http://www.opengis.net/ogc}&#39; +
+                                            &#39;ogc:Literal&#39;,
+                                    CLASS_NAME: &#39;Jsonix.XML.QName&#39;
                                 },
                                 value: {
-                                    TYPE_NAME: 'Filter_1_0_0.LiteralType',
+                                    TYPE_NAME: &#39;Filter_1_0_0.LiteralType&#39;,
                                     content: [filterValues.literalNumberField2
                                             .toString()]
                                 }
@@ -933,46 +933,46 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                         }
                     };
                     break;
-                case 'PropertyIsLike':
+                case &#39;PropertyIsLike&#39;:
                     sldFilter.comparisonOps.value = {
-                        TYPE_NAME: 'Filter_1_0_0.PropertyIsLikeType',
-                        wildCard: '*',
-                        singleChar: '%',
-                        escape: '!',
+                        TYPE_NAME: &#39;Filter_1_0_0.PropertyIsLikeType&#39;,
+                        wildCard: &#39;*&#39;,
+                        singleChar: &#39;%&#39;,
+                        escape: &#39;!&#39;,
                         propertyName: {
-                            TYPE_NAME: 'Filter_1_0_0.PropertyNameType',
+                            TYPE_NAME: &#39;Filter_1_0_0.PropertyNameType&#39;,
                             content: [filterValues.attributeCombo]
                         },
                         literal: {
-                            TYPE_NAME: 'Filter_1_0_0.LiteralType',
+                            TYPE_NAME: &#39;Filter_1_0_0.LiteralType&#39;,
                             content: [filterValues.literalTextField]
                         }
                     };
                     break;
-                case 'PropertyIsNull':
+                case &#39;PropertyIsNull&#39;:
                     sldFilter.comparisonOps.value = {
-                        TYPE_NAME: 'Filter_1_0_0.PropertyIsNullType',
+                        TYPE_NAME: &#39;Filter_1_0_0.PropertyIsNullType&#39;,
                         propertyName: {
-                            TYPE_NAME: 'Filter_1_0_0.PropertyNameType',
-                            content: ['fid']
+                            TYPE_NAME: &#39;Filter_1_0_0.PropertyNameType&#39;,
+                            content: [&#39;fid&#39;]
                         }
                     };
                     break;
-                case 'PropertyIsLessThan':
-                case 'PropertyIsLessThanOrEqualTo':
-                case 'PropertyIsGreaterThan':
-                case 'PropertyIsGreaterThanOrEqualTo':
+                case &#39;PropertyIsLessThan&#39;:
+                case &#39;PropertyIsLessThanOrEqualTo&#39;:
+                case &#39;PropertyIsGreaterThan&#39;:
+                case &#39;PropertyIsGreaterThanOrEqualTo&#39;:
                     sldFilter.comparisonOps.value.expression[1] = {
                         name: {
-                            namespaceURI: 'http://www.opengis.net/ogc',
-                            localPart: 'Literal',
-                            prefix: 'ogc',
-                            key: '{http://www.opengis.net/ogc}Literal',
-                            string: '{http://www.opengis.net/ogc}ogc:Literal',
-                            CLASS_NAME: 'Jsonix.XML.QName'
+                            namespaceURI: &#39;http://www.opengis.net/ogc&#39;,
+                            localPart: &#39;Literal&#39;,
+                            prefix: &#39;ogc&#39;,
+                            key: &#39;{http://www.opengis.net/ogc}Literal&#39;,
+                            string: &#39;{http://www.opengis.net/ogc}ogc:Literal&#39;,
+                            CLASS_NAME: &#39;Jsonix.XML.QName&#39;
                         },
                         value: {
-                            TYPE_NAME: 'Filter_1_0_0.LiteralType',
+                            TYPE_NAME: &#39;Filter_1_0_0.LiteralType&#39;,
                             content: [filterValues
                                     .literalNumberField2.toString()]
                         }
@@ -993,11 +993,11 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
          * @return {String} The formatted SLD string.
          */
         prettifySld: function(xml) {
-            var formatted = '';
+            var formatted = &#39;&#39;;
             var reg = /(&gt;)(&lt;)(\/*)/g;
-            xml = xml.replace(reg, '$1\r\n$2$3');
+            xml = xml.replace(reg, &#39;$1\r\n$2$3&#39;);
             var pad = 0;
-            Ext.each(xml.split('\r\n'), function(node) {
+            Ext.each(xml.split(&#39;\r\n&#39;), function(node) {
                 var indent = 0;
                 if (node.match(/.+&lt;\/\w[^&gt;]*&gt;$/)) {
                     indent = 0;
@@ -1011,12 +1011,12 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                     indent = 0;
                 }
 
-                var padding = '';
+                var padding = &#39;&#39;;
                 for (var i = 0; i &lt; pad; i++) {
-                    padding += '    ';
+                    padding += &#39;    &#39;;
                 }
 
-                formatted += padding + node + '\r\n';
+                formatted += padding + node + &#39;\r\n&#39;;
                 pad += indent;
             });
             return formatted;

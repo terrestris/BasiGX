@@ -21,9 +21,9 @@
  *
  * For example:
  *
- *      Ext.define('ResponsiveClass', {
+ *      Ext.define(&#39;ResponsiveClass&#39;, {
  *          mixin: [
- *              'Ext.mixin.Responsive'
+ *              &#39;Ext.mixin.Responsive&#39;
  *          ],
  *
  *          responsiveConfig: {
@@ -39,19 +39,19 @@
  * the below example, a &quot;setRegion&quot; method must exist.
  *
  *      Ext.create({
- *          xtype: 'viewport',
- *          layout: 'border',
+ *          xtype: &#39;viewport&#39;,
+ *          layout: &#39;border&#39;,
  *
  *          items: [{
- *              title: 'Some Title',
- *              plugins: 'responsive',
+ *              title: &#39;Some Title&#39;,
+ *              plugins: &#39;responsive&#39;,
  *
  *              responsiveConfig: {
- *                  'width &lt; 800': {
- *                      region: 'north'
+ *                  &#39;width &lt; 800&#39;: {
+ *                      region: &#39;north&#39;
  *                  },
- *                  'width &gt;= 800': {
- *                      region: 'west'
+ *                  &#39;width &gt;= 800&#39;: {
+ *                      region: &#39;west&#39;
  *                  }
  *              }
  *          }]
@@ -59,20 +59,20 @@
  *
  * To use responsiveConfig the class must be defined using the Ext.mixin.Responsive mixin.
  *
- *      Ext.define('App.view.Foo', {
- *          extend: 'Ext.panel.Panel',
- *          xtype: 'foo',
+ *      Ext.define(&#39;App.view.Foo&#39;, {
+ *          extend: &#39;Ext.panel.Panel&#39;,
+ *          xtype: &#39;foo&#39;,
  *          mixins: [
- *               'Ext.mixin.Responsive'
+ *               &#39;Ext.mixin.Responsive&#39;
  *          ],
  *          ...
  *      });
  *
  * Otherwise, you will need to use the responsive plugin if the class is not one you authored.
  *
- *      Ext.create('Ext.panel.Panel', {
+ *      Ext.create(&#39;Ext.panel.Panel&#39;, {
  *          renderTo: document.body,
- *          plugins: 'responsive',
+ *          plugins: &#39;responsive&#39;,
  *          ...
  *      });
  * 
@@ -82,17 +82,17 @@
  * For details see `{@link #responsiveConfig}`.
  * @since 5.0.0
  */
-Ext.define('Ext.mixin.Responsive', function (Responsive) { return {
-    extend: 'Ext.Mixin',
+Ext.define(&#39;Ext.mixin.Responsive&#39;, function (Responsive) { return {
+    extend: &#39;Ext.Mixin&#39;,
     requires: [
-        'Ext.GlobalEvents'
+        &#39;Ext.GlobalEvents&#39;
     ],
 
     mixinConfig: {
-        id: 'responsive',
+        id: &#39;responsive&#39;,
 
         after: {
-            destroy: 'destroy'
+            destroy: &#39;destroy&#39;
         }
     },
 
@@ -104,10 +104,10 @@ Ext.define('Ext.mixin.Responsive', function (Responsive) { return {
          *
          *      responsiveConfig: {
          *          landscape: {
-         *              region: 'west'
+         *              region: &#39;west&#39;
          *          },
          *          portrait: {
-         *              region: 'north'
+         *              region: &#39;north&#39;
          *          }
          *      }
          *
@@ -137,19 +137,19 @@ Ext.define('Ext.mixin.Responsive', function (Responsive) { return {
          * A more complex example:
          *
          *      responsiveConfig: {
-         *          'desktop || width &gt; 800': {
-         *              region: 'west'
+         *          &#39;desktop || width &gt; 800&#39;: {
+         *              region: &#39;west&#39;
          *          },
          *
-         *          '!(desktop || width &gt; 800)': {
-         *              region: 'north'
+         *          &#39;!(desktop || width &gt; 800)&#39;: {
+         *              region: &#39;north&#39;
          *          }
          *      }
          *
          * **NOTE**: If multiple rules set a single config (like above), it is important
          * that the rules be mutually exclusive. That is, only one rule should set each
          * config. If multiple rules are actively setting a single config, the order of
-         * these (and therefore the config's value) is unspecified.
+         * these (and therefore the config&#39;s value) is unspecified.
          *
          * For a config to participate as a `responsiveConfig` it must have a &quot;setter&quot;
          * method. In the above example, a &quot;setRegion&quot; method must exist.
@@ -189,19 +189,19 @@ Ext.define('Ext.mixin.Responsive', function (Responsive) { return {
          *
          * For example:
          *
-         *      Ext.define('MyApp.view.main.Main', {
-         *          extend: 'Ext.container.Container',
+         *      Ext.define(&#39;MyApp.view.main.Main&#39;, {
+         *          extend: &#39;Ext.container.Container&#39;,
          *
          *          mixins: [
-         *              'Ext.mixin.Responsive'
+         *              &#39;Ext.mixin.Responsive&#39;
          *          ],
          *
          *          responsiveFormulas: {
-         *              small: 'width &lt; 600',
+         *              small: &#39;width &lt; 600&#39;,
          *
-         *              medium: 'width &gt;= 600 &amp;&amp; width &lt; 800',
+         *              medium: &#39;width &gt;= 600 &amp;&amp; width &lt; 800&#39;,
          *
-         *              large: 'width &gt;= 800',
+         *              large: &#39;width &gt;= 800&#39;,
          *
          *              tuesday: function (context) {
          *                  return (new Date()).getDay() === 2;
@@ -216,13 +216,13 @@ Ext.define('Ext.mixin.Responsive', function (Responsive) { return {
          *          small: {
          *              hidden: true
          *          },
-         *          'medium &amp;&amp; !tuesday': {
+         *          &#39;medium &amp;&amp; !tuesday&#39;: {
          *              hidden: false,
-         *              region: 'north'
+         *              region: &#39;north&#39;
          *          },
          *          large: {
          *              hidden: false,
-         *              region: 'west'
+         *              region: &#39;west&#39;
          *          }
          *      }
          *
@@ -243,7 +243,7 @@ Ext.define('Ext.mixin.Responsive', function (Responsive) { return {
     destroy: function () {
         Responsive.unregister(this);
         
-        // No callParent() here, it's a mixin
+        // No callParent() here, it&#39;s a mixin
     },
 
     privates: {
@@ -298,7 +298,7 @@ Ext.define('Ext.mixin.Responsive', function (Responsive) { return {
             activate: function () {
                 Responsive.active = true;
                 Responsive.updateContext();
-                Ext.on('resize', Responsive.onResize, Responsive);
+                Ext.on(&#39;resize&#39;, Responsive.onResize, Responsive);
             },
 
 <span id='Ext-mixin-Responsive-method-deactivate'>            /**
@@ -308,7 +308,7 @@ Ext.define('Ext.mixin.Responsive', function (Responsive) { return {
              */
             deactivate: function () {
                 Responsive.active = false;
-                Ext.un('resize', Responsive.onResize, Responsive);
+                Ext.un(&#39;resize&#39;, Responsive.onResize, Responsive);
             },
 
 <span id='Ext-mixin-Responsive-method-notify'>            /**
@@ -332,19 +332,19 @@ Ext.define('Ext.mixin.Responsive', function (Responsive) { return {
 
                 Ext.suspendLayouts();
 
-                globalEvents.fireEvent('beforeresponsiveupdate', context);
+                globalEvents.fireEvent(&#39;beforeresponsiveupdate&#39;, context);
 
                 for (id in all) {
                     all[id].setupResponsiveContext();
                 }
 
-                globalEvents.fireEvent('beginresponsiveupdate', context);
+                globalEvents.fireEvent(&#39;beginresponsiveupdate&#39;, context);
 
                 for (id in all) {
                     all[id].updateResponsiveState();
                 }
 
-                globalEvents.fireEvent('responsiveupdate', context);
+                globalEvents.fireEvent(&#39;responsiveupdate&#39;, context);
 
                 Ext.resumeLayouts(true);
             },
@@ -562,8 +562,8 @@ Ext.define('Ext.mixin.Responsive', function (Responsive) { return {
             // and still get all that merged goodness, so we have to do the merge here.
 
             if (instanceConfig) {
-                Responsive.processConfig(me, instanceConfig, 'responsiveConfig');
-                Responsive.processConfig(me, instanceConfig, 'responsiveFormulas');
+                Responsive.processConfig(me, instanceConfig, &#39;responsiveConfig&#39;);
+                Responsive.processConfig(me, instanceConfig, &#39;responsiveFormulas&#39;);
             }
 
             // For updates this is done in bulk prior to updating all of the responsive
@@ -577,7 +577,7 @@ Ext.define('Ext.mixin.Responsive', function (Responsive) { return {
             if (instanceConfig) {
                 ret = Ext.merge({}, instanceConfig, ret);
 
-                // We don't want these to remain since we've already handled them.
+                // We don&#39;t want these to remain since we&#39;ve already handled them.
                 delete ret.responsiveConfig;
                 delete ret.responsiveFormulas;
             }

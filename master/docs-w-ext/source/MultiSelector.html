@@ -23,15 +23,15 @@
  * While this component is a grid and so you can configure `columns`, it is best to leave
  * that to this class in its `initComponent` method. That allows this class to create the
  * extra column that allows the user to remove rows. Instead use `{@link #fieldName}` and
- * `{@link #fieldTitle}` to configure the primary column's `dataIndex` and column `text`,
+ * `{@link #fieldTitle}` to configure the primary column&#39;s `dataIndex` and column `text`,
  * respectively.
  *
  * @since 5.0.0
  */
-Ext.define('Ext.view.MultiSelector', {
-    extend: 'Ext.grid.Panel',
+Ext.define(&#39;Ext.view.MultiSelector&#39;, {
+    extend: &#39;Ext.grid.Panel&#39;,
 
-    xtype: 'multiselector',
+    xtype: &#39;multiselector&#39;,
 
     config: {
 <span id='Ext-view-MultiSelector-cfg-search'>        /**
@@ -41,7 +41,7 @@ Ext.define('Ext.view.MultiSelector', {
          * for its `store`.
          */
         search: {
-            xtype: 'multiselector-search',
+            xtype: &#39;multiselector-search&#39;,
             width: 200,
             height: 200,
             store: {
@@ -55,7 +55,7 @@ Ext.define('Ext.view.MultiSelector', {
      * The name of the data field to display in the primary column of the grid.
      * @since 5.0.0
      */
-    fieldName: 'name',
+    fieldName: &#39;name&#39;,
 
 <span id='Ext-view-MultiSelector-cfg-fieldTitle'>    /**
 </span>     * @cfg {String} [fieldTitle]
@@ -70,23 +70,23 @@ Ext.define('Ext.view.MultiSelector', {
      * &quot;X&quot; looking glyph.
      * @since 5.0.0
      */
-    removeRowText: '\u2716',
+    removeRowText: &#39;\u2716&#39;,
 
 <span id='Ext-view-MultiSelector-cfg-removeRowTip'>    /**
 </span>     * @cfg {String} removeRowTip
      * The tooltip to display when the user hovers over the remove cell.
      * @since 5.0.0
      */
-    removeRowTip: 'Remove this item',
+    removeRowTip: &#39;Remove this item&#39;,
 
-<span id='Ext-view-MultiSelector-cfg-emptyText'>    emptyText: 'Nothing selected',
+<span id='Ext-view-MultiSelector-cfg-emptyText'>    emptyText: &#39;Nothing selected&#39;,
 </span>
 <span id='Ext-view-MultiSelector-cfg-addToolText'>    /**
 </span>     * @cfg {String} addToolText
      * The tooltip to display when the user hovers over the &quot;+&quot; tool in the panel header.
      * @since 5.0.0
      */
-    addToolText: 'Search for items to add',
+    addToolText: &#39;Search for items to add&#39;,
 
 <span id='Ext-view-MultiSelector-method-initComponent'>    initComponent: function () {
 </span>        var me = this,
@@ -98,7 +98,7 @@ Ext.define('Ext.view.MultiSelector', {
 
         //&lt;debug&gt;
         if (!search) {
-            Ext.raise('The search configuration is required for the multi selector');
+            Ext.raise(&#39;The search configuration is required for the multi selector&#39;);
         }
         //&lt;/debug&gt;
 
@@ -137,9 +137,9 @@ Ext.define('Ext.view.MultiSelector', {
 </span>        var me = this;
 
         me.addTool({
-            type: 'plus',
+            type: &#39;plus&#39;,
             tooltip: me.addToolText,
-            callback: 'onShowSearch',
+            callback: &#39;onShowSearch&#39;,
             scope: me
         });
         me.searchTool = me.tools[me.tools.length - 1];
@@ -154,9 +154,9 @@ Ext.define('Ext.view.MultiSelector', {
 
         return {
             width: 32,
-            align: 'center',
+            align: &#39;center&#39;,
             menuDisabled: true,
-            tdCls: Ext.baseCSSPrefix + 'multiselector-remove',
+            tdCls: Ext.baseCSSPrefix + &#39;multiselector-remove&#39;,
             processEvent: me.processRowEvent.bind(me),
             renderer: me.renderRemoveRow,
             updater: Ext.emptyFn,
@@ -167,7 +167,7 @@ Ext.define('Ext.view.MultiSelector', {
 <span id='Ext-view-MultiSelector-method-processRowEvent'>    processRowEvent: function (type, view, cell, recordIndex, cellIndex, e, record, row) {
 </span>        var body = Ext.getBody();
 
-        if (e.type === 'click' || (e.type === 'keydown' &amp;&amp; (e.keyCode === e.SPACE || e.keyCode === e.ENTER))) {
+        if (e.type === &#39;click&#39; || (e.type === &#39;keydown&#39; &amp;&amp; (e.keyCode === e.SPACE || e.keyCode === e.ENTER))) {
 
             // Deleting the focused row will momentarily focusLeave
             // That would dismiss the popup, so disable that.
@@ -181,8 +181,8 @@ Ext.define('Ext.view.MultiSelector', {
     },
 
 <span id='Ext-view-MultiSelector-method-renderRemoveRow'>    renderRemoveRow: function () {
-</span>        return '&lt;span data-qtip=&quot;'+ this.removeRowTip + '&quot; role=&quot;button&quot; tabIndex=&quot;0&quot;&gt;' +
-            this.removeRowText + '&lt;/span&gt;';
+</span>        return &#39;&lt;span data-qtip=&quot;&#39;+ this.removeRowTip + &#39;&quot; role=&quot;button&quot; tabIndex=&quot;0&quot;&gt;&#39; +
+            this.removeRowText + &#39;&lt;/span&gt;&#39;;
     },
 
 <span id='Ext-view-MultiSelector-method-onFocusLeave'>    onFocusLeave: function(e) {
@@ -201,7 +201,7 @@ Ext.define('Ext.view.MultiSelector', {
     },
 
 <span id='Ext-view-MultiSelector-property-privates'>    privates: {
-</span>        popupAlign: 'tl-tr?',
+</span>        popupAlign: &#39;tl-tr?&#39;,
 
         onGlobalScroll: function (scroller) {
             // Collapse if the scroll is anywhere but inside this selector or the popup
@@ -244,13 +244,13 @@ Ext.define('Ext.view.MultiSelector', {
             searchPopup.showBy(me, me.popupAlign);
 
             // It only autofocuses its defaultFocus target if it was hidden.
-            // If they're reactivating the show tool, they'll expect to focus the search.
-            if (!event || event.pointerType !== 'touch') {
-                searchPopup.lookupReference('searchField').focus();
+            // If they&#39;re reactivating the show tool, they&#39;ll expect to focus the search.
+            if (!event || event.pointerType !== &#39;touch&#39;) {
+                searchPopup.lookupReference(&#39;searchField&#39;).focus();
             }
 
             me.scrollListeners = Ext.on({
-                scroll: 'onGlobalScroll',
+                scroll: &#39;onGlobalScroll&#39;,
                 scope: me,
                 destroyable: true
             });

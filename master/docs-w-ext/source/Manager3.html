@@ -18,10 +18,10 @@
   <pre class="prettyprint lang-js"><span id='Ext-button-Manager'>/**
 </span> * @private
  */
-Ext.define('Ext.button.Manager', {
+Ext.define(&#39;Ext.button.Manager&#39;, {
     singleton: true,
 
-    alternateClassName: 'Ext.ButtonToggleManager',
+    alternateClassName: &#39;Ext.ButtonToggleManager&#39;,
 
 <span id='Ext-button-Manager-property-groups'>    groups: {},
 </span>
@@ -88,7 +88,7 @@ Ext.define('Ext.button.Manager', {
             group = groups[btn.toggleGroup] = [];
         }
         group.push(btn);
-        btn.on('toggle', me.toggleGroup, me);
+        btn.on(&#39;toggle&#39;, me.toggleGroup, me);
     },
 
 <span id='Ext-button-Manager-method-unregister'>    unregister: function(btn) {
@@ -100,7 +100,7 @@ Ext.define('Ext.button.Manager', {
 
         if (group) {
             Ext.Array.remove(group, btn);
-            btn.un('toggle', me.toggleGroup, me);
+            btn.un(&#39;toggle&#39;, me.toggleGroup, me);
         }
     },
 

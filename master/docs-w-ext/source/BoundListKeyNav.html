@@ -18,12 +18,12 @@
   <pre class="prettyprint lang-js"><span id='Ext-view-BoundListKeyNav'>/**
 </span> * A specialized {@link Ext.util.KeyNav} implementation for navigating a {@link Ext.view.BoundList} using
  * the keyboard. The up, down, pageup, pagedown, home, and end keys move the active highlight
- * through the list. The enter key invokes the selection model's select action using the highlighted item.
+ * through the list. The enter key invokes the selection model&#39;s select action using the highlighted item.
  */
-Ext.define('Ext.view.BoundListKeyNav', {
-    extend: 'Ext.view.NavigationModel',
+Ext.define(&#39;Ext.view.BoundListKeyNav&#39;, {
+    extend: &#39;Ext.view.NavigationModel&#39;,
 
-    alias: 'view.navigation.boundlist',
+    alias: &#39;view.navigation.boundlist&#39;,
 
 <span id='Ext-view-BoundListKeyNav-cfg-boundList'>    /**
 </span>     * @cfg {Ext.view.BoundList} boundList (required)
@@ -37,11 +37,11 @@ Ext.define('Ext.view.BoundListKeyNav', {
             field = view.pickerField;
 
         // Add the regular KeyNav to the view.
-        // Unless it's already been done (we may have to defer a call until the field is rendered.
+        // Unless it&#39;s already been done (we may have to defer a call until the field is rendered.
         if (!me.keyNav) {
             me.callParent([view]);
 
-            // Add ESC handling to the View's KeyMap to collapse the field
+            // Add ESC handling to the View&#39;s KeyMap to collapse the field
             me.keyNav.map.addBinding({
                 key: Ext.event.Event.ESC,
                 fn: me.onKeyEsc,
@@ -55,7 +55,7 @@ Ext.define('Ext.view.BoundListKeyNav', {
         }
 
         if (!field.rendered) {
-            field.on('render', Ext.Function.bind(me.initKeyNav, me, [view], 0), me, {single: true});
+            field.on(&#39;render&#39;, Ext.Function.bind(me.initKeyNav, me, [view], 0), me, {single: true});
             return;
         }
 
@@ -77,12 +77,12 @@ Ext.define('Ext.view.BoundListKeyNav', {
             enter: me.onKeyEnter,
             A: {
                 ctrl: true,
-                // Need a separate function because we don't want the key
+                // Need a separate function because we don&#39;t want the key
                 // events passed on to selectAll (causes event suppression).
                 handler: me.onSelectAllKeyPress
             },
             // This object has to get its key processing in first.
-            // Specifically, before any Editor's key hyandling.
+            // Specifically, before any Editor&#39;s key hyandling.
             priority: 1001,
             scope: me
         });
@@ -95,8 +95,8 @@ Ext.define('Ext.view.BoundListKeyNav', {
             return event;
         }
 
-        // If not from within the list, we're only interested in ESC.
-        // Defeat the NavigationModel's ignoreInputFields for that.
+        // If not from within the list, we&#39;re only interested in ESC.
+        // Defeat the NavigationModel&#39;s ignoreInputFields for that.
         if (event.getKey() === event.ESC) {
             if (Ext.fly(event.target).isInputField()) {
                 event.target = event.target.parentNode;
@@ -119,10 +119,10 @@ Ext.define('Ext.view.BoundListKeyNav', {
 <span id='Ext-view-BoundListKeyNav-method-onItemMouseDown'>    onItemMouseDown: function(view, record, item, index, event) {
 </span>        this.callParent([view, record, item, index, event]);
         
-        if (event.pointerType === 'mouse') {
+        if (event.pointerType === &#39;mouse&#39;) {
             // Stop the mousedown from blurring the input field
-            // We can't do this for touch events otherwise scrolling
-            // won't work.
+            // We can&#39;t do this for touch events otherwise scrolling
+            // won&#39;t work.
             event.preventDefault();
         }
     },
@@ -189,7 +189,7 @@ Ext.define('Ext.view.BoundListKeyNav', {
         this.selectHighlighted(e);
 
         // Handle the case where the highlighted item is already selected
-        // In this case, the change event won't fire, so just collapse
+        // In this case, the change event won&#39;t fire, so just collapse
         if (!field.multiSelect &amp;&amp; count === selModel.getCount() &amp;&amp; field.collapse) {
             field.collapse();
         }
@@ -197,7 +197,7 @@ Ext.define('Ext.view.BoundListKeyNav', {
         // Stop propagation of the ENTER keydown event so that any Editor which owns the field
         // does not completeEdit, but we also need to still fire the specialkey event for ENTER, 
         // so lets add fromBoundList to eOpts, and this will be handled by CellEditor#onSpecialKey.
-        field.fireEvent('specialkey', field, e, {
+        field.fireEvent(&#39;specialkey&#39;, field, e, {
             fromBoundList: true
         });
         return false;
@@ -225,7 +225,7 @@ Ext.define('Ext.view.BoundListKeyNav', {
         var me = this,
             boundList = me.view;
 
-        if (typeof item === 'number') {
+        if (typeof item === &#39;number&#39;) {
             item = boundList.all.item(item);
         }
         if (item) {

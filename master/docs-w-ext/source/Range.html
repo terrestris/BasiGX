@@ -18,11 +18,11 @@
   <pre class="prettyprint lang-js"><span id='Ext-data-validator-Range'>/**
 </span> * Validates that the the value is between a {@link #min} and {@link #max}.
  */
-Ext.define('Ext.data.validator.Range', {
-    extend: 'Ext.data.validator.Bound',
-    alias: 'data.validator.range',
+Ext.define(&#39;Ext.data.validator.Range&#39;, {
+    extend: &#39;Ext.data.validator.Bound&#39;,
+    alias: &#39;data.validator.range&#39;,
     
-<span id='Ext-data-validator-Range-property-type'>    type: 'range',
+<span id='Ext-data-validator-Range-property-type'>    type: &#39;range&#39;,
 </span>    
     config: {
 <span id='Ext-data-validator-Range-cfg-min'>        /**
@@ -38,23 +38,23 @@ Ext.define('Ext.data.validator.Range', {
 <span id='Ext-data-validator-Range-cfg-minOnlyMessage'>        /**
 </span>         * @inheritdoc
          */
-        minOnlyMessage: 'Must be must be at least {0}',
+        minOnlyMessage: &#39;Must be must be at least {0}&#39;,
         
 <span id='Ext-data-validator-Range-cfg-maxOnlyMessage'>        /**
 </span>         * @inheritdoc
          */
-        maxOnlyMessage: 'Must be no more than than {0}',
+        maxOnlyMessage: &#39;Must be no more than than {0}&#39;,
         
 <span id='Ext-data-validator-Range-cfg-bothMessage'>        /**
 </span>         * @inheritdoc
          */
-        bothMessage: 'Must be between {0} and {1}',
+        bothMessage: &#39;Must be between {0} and {1}&#39;,
 
 <span id='Ext-data-validator-Range-cfg-nanMessage'>        /**
 </span>         * @cfg {String} nanMessage
          * The error message to return when the value is not numeric.
          */
-        nanMessage: 'Must be numeric'
+        nanMessage: &#39;Must be numeric&#39;
     },
 
 <span id='Ext-data-validator-Range-method-validateValue'>    validateValue: function(value) {

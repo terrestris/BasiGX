@@ -50,62 +50,62 @@
  * ## Example Usage
  *
  *     @example
- *     Ext.define('TestResult', {
- *         extend: 'Ext.data.Model',
- *         fields: ['student', 'subject', {
- *             name: 'mark',
- *             type: 'int'
+ *     Ext.define(&#39;TestResult&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;student&#39;, &#39;subject&#39;, {
+ *             name: &#39;mark&#39;,
+ *             type: &#39;int&#39;
  *         }]
  *     });
  *
- *     Ext.create('Ext.grid.Panel', {
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
  *         width: 200,
  *         height: 240,
  *         renderTo: document.body,
  *         features: [{
- *             groupHeaderTpl: 'Subject: {name}',
- *             ftype: 'groupingsummary'
+ *             groupHeaderTpl: &#39;Subject: {name}&#39;,
+ *             ftype: &#39;groupingsummary&#39;
  *         }],
  *         store: {
- *             model: 'TestResult',
- *             groupField: 'subject',
+ *             model: &#39;TestResult&#39;,
+ *             groupField: &#39;subject&#39;,
  *             data: [{
- *                 student: 'Student 1',
- *                 subject: 'Math',
+ *                 student: &#39;Student 1&#39;,
+ *                 subject: &#39;Math&#39;,
  *                 mark: 84
  *             },{
- *                 student: 'Student 1',
- *                 subject: 'Science',
+ *                 student: &#39;Student 1&#39;,
+ *                 subject: &#39;Science&#39;,
  *                 mark: 72
  *             },{
- *                 student: 'Student 2',
- *                 subject: 'Math',
+ *                 student: &#39;Student 2&#39;,
+ *                 subject: &#39;Math&#39;,
  *                 mark: 96
  *             },{
- *                 student: 'Student 2',
- *                 subject: 'Science',
+ *                 student: &#39;Student 2&#39;,
+ *                 subject: &#39;Science&#39;,
  *                 mark: 68
  *             }]
  *         },
  *         columns: [{
- *             dataIndex: 'student',
- *             text: 'Name',
- *             summaryType: 'count',
+ *             dataIndex: &#39;student&#39;,
+ *             text: &#39;Name&#39;,
+ *             summaryType: &#39;count&#39;,
  *             summaryRenderer: function(value){
- *                 return Ext.String.format('{0} student{1}', value, value !== 1 ? 's' : '');
+ *                 return Ext.String.format(&#39;{0} student{1}&#39;, value, value !== 1 ? &#39;s&#39; : &#39;&#39;);
  *             }
  *         }, {
- *             dataIndex: 'mark',
- *             text: 'Mark',
- *             summaryType: 'average'
+ *             dataIndex: &#39;mark&#39;,
+ *             text: &#39;Mark&#39;,
+ *             summaryType: &#39;average&#39;
  *         }]
  *     });
  */
-Ext.define('Ext.grid.feature.GroupingSummary', {
+Ext.define(&#39;Ext.grid.feature.GroupingSummary&#39;, {
 
-    extend: 'Ext.grid.feature.Grouping',
+    extend: &#39;Ext.grid.feature.Grouping&#39;,
 
-    alias: 'feature.groupingsummary',
+    alias: &#39;feature.groupingsummary&#39;,
 
 <span id='Ext-grid-feature-GroupingSummary-cfg-showSummaryRow'>    showSummaryRow: true,
 </span>

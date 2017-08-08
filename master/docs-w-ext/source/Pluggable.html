@@ -16,7 +16,7 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-mixin-Pluggable'>/**
-</span> * This mixin provides support for a `plugins` config and related API's.
+</span> * This mixin provides support for a `plugins` config and related API&#39;s.
  *
  * If this mixin is used for non-Components, the statements regarding the host being a
  * Component can be translated accordingly. The only requirement on the user of this class
@@ -30,7 +30,7 @@
  * @protected
  * @since 6.2.0
  */
-Ext.define('Ext.mixin.Pluggable', function (Pluggable) {
+Ext.define(&#39;Ext.mixin.Pluggable&#39;, function (Pluggable) {
     var EMPTY = [];
 
 return {
@@ -41,7 +41,7 @@ return {
          * component. If a string is provided or a string is one of the elements of the
          * array, that string is treated as the `type` alias. For example, &quot;listpaging&quot;
          * is the type alias for `Ext.plugin.ListPaging`. The full alias includes the
-         * &quot;plugin.&quot; prefix (i.e., 'plugin.listpaging').
+         * &quot;plugin.&quot; prefix (i.e., &#39;plugin.listpaging&#39;).
          *
          * Plugins should derive from `Ext.plugin.Abstract` but this is not required. The
          * only requirement for a valid plugin is that it contain an `init()` method that
@@ -57,32 +57,32 @@ return {
          * A plugin by alias:
          *
          *      var list = Ext.create({
-         *          xtype: 'list',
-         *          itemTpl: '&lt;div class=&quot;item&quot;&gt;{title}&lt;/div&gt;',
-         *          store: 'Items',
+         *          xtype: &#39;list&#39;,
+         *          itemTpl: &#39;&lt;div class=&quot;item&quot;&gt;{title}&lt;/div&gt;&#39;,
+         *          store: &#39;Items&#39;,
          *
-         *          plugins: 'listpaging'
+         *          plugins: &#39;listpaging&#39;
          *      });
          *
          * Multiple plugins by alias:
          *
          *      var list = Ext.create({
-         *          xtype: 'list',
-         *          itemTpl: '&lt;div class=&quot;item&quot;&gt;{title}&lt;/div&gt;',
-         *          store: 'Items',
+         *          xtype: &#39;list&#39;,
+         *          itemTpl: &#39;&lt;div class=&quot;item&quot;&gt;{title}&lt;/div&gt;&#39;,
+         *          store: &#39;Items&#39;,
          *
-         *          plugins: ['listpaging', 'pullrefresh']
+         *          plugins: [&#39;listpaging&#39;, &#39;pullrefresh&#39;]
          *      });
          *
          * Single plugin by class name with config options:
          *
          *      var list = Ext.create({
-         *          xtype: 'list',
-         *          itemTpl: '&lt;div class=&quot;item&quot;&gt;{title}&lt;/div&gt;',
-         *          store: 'Items',
+         *          xtype: &#39;list&#39;,
+         *          itemTpl: &#39;&lt;div class=&quot;item&quot;&gt;{title}&lt;/div&gt;&#39;,
+         *          store: &#39;Items&#39;,
          *
          *          plugins: {
-         *              type: 'listpaging',
+         *              type: &#39;listpaging&#39;,
          *              autoPaging: true
          *          }
          *      });
@@ -90,15 +90,15 @@ return {
          * Multiple plugins by type and class name with config options:
          *
          *      var list = Ext.create({
-         *          xtype: 'list',
-         *          itemTpl: '&lt;div class=&quot;item&quot;&gt;{title}&lt;/div&gt;',
-         *          store: 'Items',
+         *          xtype: &#39;list&#39;,
+         *          itemTpl: &#39;&lt;div class=&quot;item&quot;&gt;{title}&lt;/div&gt;&#39;,
+         *          store: &#39;Items&#39;,
          *
          *          plugins: [{
-         *              xclass: 'Ext.plugin.PullRefresh',
-         *              pullRefreshText: 'Pull to refresh...'
+         *              xclass: &#39;Ext.plugin.PullRefresh&#39;,
+         *              pullRefreshText: &#39;Pull to refresh...&#39;
          *          }, {
-         *              type: 'listpaging',
+         *              type: &#39;listpaging&#39;,
          *              autoPaging: true
          *          }]
          *      });
@@ -110,13 +110,13 @@ return {
 <span id='Ext-mixin-Pluggable-method-addPlugin'>    /**
 </span>     * Adds a plugin. For example:
      *
-     *      list.addPlugin('pullrefresh');
+     *      list.addPlugin(&#39;pullrefresh&#39;);
      *
      * Or:
      *
      *      list.addPlugin({
-     *          type: 'pullrefresh',
-     *          pullRefreshText: 'Pull to refresh...'
+     *          type: &#39;pullrefresh&#39;,
+     *          pullRefreshText: &#39;Pull to refresh...&#39;
      *      });
      *
      * @param {Object/String/Ext.plugin.Abstract} plugin The plugin or config object or
@@ -155,18 +155,18 @@ return {
 </span>     * Retrieves plugin by its `type` alias. For example:
      *
      *      var list = Ext.create({
-     *          xtype: 'list',
-     *          itemTpl: '&lt;div class=&quot;item&quot;&gt;{title}&lt;/div&gt;',
-     *          store: 'Items',
+     *          xtype: &#39;list&#39;,
+     *          itemTpl: &#39;&lt;div class=&quot;item&quot;&gt;{title}&lt;/div&gt;&#39;,
+     *          store: &#39;Items&#39;,
      *
-     *          plugins: ['listpaging', 'pullrefresh']
+     *          plugins: [&#39;listpaging&#39;, &#39;pullrefresh&#39;]
      *      });
      *
-     *      list.findPlugin('pullrefresh').setPullRefreshText('Pull to refresh...');
+     *      list.findPlugin(&#39;pullrefresh&#39;).setPullRefreshText(&#39;Pull to refresh...&#39;);
      *
      * **Note:** See also {@link #getPlugin}.
      *
-     * @param {String} type The Plugin's `type` as specified by the class's
+     * @param {String} type The Plugin&#39;s `type` as specified by the class&#39;s
      * {@link Ext.Class#cfg-alias alias} configuration.
      * @return {Ext.plugin.Abstract} plugin instance or `null` if not found.
      * @since 6.2.0
@@ -193,17 +193,17 @@ return {
 </span>     * Retrieves a plugin by its `id`.
      *
      *      var list = Ext.create({
-     *          xtype: 'list',
-     *          itemTpl: '&lt;div class=&quot;item&quot;&gt;{title}&lt;/div&gt;',
-     *          store: 'Items',
+     *          xtype: &#39;list&#39;,
+     *          itemTpl: &#39;&lt;div class=&quot;item&quot;&gt;{title}&lt;/div&gt;&#39;,
+     *          store: &#39;Items&#39;,
      *
      *          plugins: {
-     *              xclass: 'Ext.plugin.PullRefresh',
-     *              id: 'foo'
+     *              xclass: &#39;Ext.plugin.PullRefresh&#39;,
+     *              id: &#39;foo&#39;
      *          }
      *      });
      *
-     *      list.getPlugin('foo').setPullRefreshText('Pull to refresh...');
+     *      list.getPlugin(&#39;foo&#39;).setPullRefreshText(&#39;Pull to refresh...&#39;);
      *
      * **Note:** See also {@link #findPlugin}.
      *
@@ -325,7 +325,7 @@ return {
             plugins = plugins ? EMPTY.concat(plugins) : null;
             count = plugins &amp;&amp; plugins.length || 0;
 
-            // We need to destroy() old plugins that aren't being brought forward in
+            // We need to destroy() old plugins that aren&#39;t being brought forward in
             // the new array...
             //
             for (i = 0; i &lt; oldCount; ++i) {
@@ -347,13 +347,13 @@ return {
                 plugin = plugins[i];
 
                 if (plugin.$dead) { // if (it was in oldPlugins)
-                    delete plugin.$dead;  // unpaint it (it's a keeper)
+                    delete plugin.$dead;  // unpaint it (it&#39;s a keeper)
                 } else {
                     plugin.init(me);  // this one is new to the party
                 }
             }
 
-            // Now we can teardown any plugins that aren't coming back.
+            // Now we can teardown any plugins that aren&#39;t coming back.
             //
             for (i = 0; i &lt; oldCount; ++i) {
                 if ((plugin = oldPlugins[i]).$dead) {
@@ -373,7 +373,7 @@ return {
          * @private
          */
         createPlugin: function (config) {
-            if (typeof config === 'string') {
+            if (typeof config === &#39;string&#39;) {
                 config = {
                     type: config
                 };
@@ -382,12 +382,12 @@ return {
             var ret = config;
     
             if (!config.isInstance) {
-                // The owner may be needed by plugin's initConfig so provide it:
+                // The owner may be needed by plugin&#39;s initConfig so provide it:
                 config.cmp = this;
     
-                ret = Ext.factory(config, null, null, 'plugin');
+                ret = Ext.factory(config, null, null, &#39;plugin&#39;);
     
-                // Cleanup the user's config object:
+                // Cleanup the user&#39;s config object:
                 delete config.cmp;
             }
 

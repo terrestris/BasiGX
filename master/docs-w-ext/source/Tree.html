@@ -19,36 +19,36 @@
 </span> * A lightweight component to display data in a simple tree structure.
  * @since 6.0.0
  */
-Ext.define('Ext.list.Tree', {
-    extend: 'Ext.Widget',
-    xtype: 'treelist',
+Ext.define(&#39;Ext.list.Tree&#39;, {
+    extend: &#39;Ext.Widget&#39;,
+    xtype: &#39;treelist&#39;,
 
     requires: [
-        'Ext.list.RootTreeItem'
+        &#39;Ext.list.RootTreeItem&#39;
     ],
 
-<span id='Ext-list-Tree-property-expanderFirstCls'>    expanderFirstCls: Ext.baseCSSPrefix + 'treelist-expander-first',
-</span><span id='Ext-list-Tree-property-expanderOnlyCls'>    expanderOnlyCls: Ext.baseCSSPrefix + 'treelist-expander-only',
-</span><span id='Ext-list-Tree-property-highlightPathCls'>    highlightPathCls: Ext.baseCSSPrefix + 'treelist-highlight-path',
-</span><span id='Ext-list-Tree-property-microCls'>    microCls: Ext.baseCSSPrefix + 'treelist-micro',
+<span id='Ext-list-Tree-property-expanderFirstCls'>    expanderFirstCls: Ext.baseCSSPrefix + &#39;treelist-expander-first&#39;,
+</span><span id='Ext-list-Tree-property-expanderOnlyCls'>    expanderOnlyCls: Ext.baseCSSPrefix + &#39;treelist-expander-only&#39;,
+</span><span id='Ext-list-Tree-property-highlightPathCls'>    highlightPathCls: Ext.baseCSSPrefix + &#39;treelist-highlight-path&#39;,
+</span><span id='Ext-list-Tree-property-microCls'>    microCls: Ext.baseCSSPrefix + &#39;treelist-micro&#39;,
 </span>
-<span id='Ext-list-Tree-property-uiPrefix'>    uiPrefix: Ext.baseCSSPrefix + 'treelist-',
+<span id='Ext-list-Tree-property-uiPrefix'>    uiPrefix: Ext.baseCSSPrefix + &#39;treelist-&#39;,
 </span>
 <span id='Ext-list-Tree-property-element'>    element: {
-</span>        reference: 'element',
-        cls: Ext.baseCSSPrefix + 'treelist ' + Ext.baseCSSPrefix + 'unselectable',
+</span>        reference: &#39;element&#39;,
+        cls: Ext.baseCSSPrefix + &#39;treelist &#39; + Ext.baseCSSPrefix + &#39;unselectable&#39;,
         listeners: {
-            click: 'onClick',
-            mouseenter: 'onMouseEnter',
-            mouseleave: 'onMouseLeave',
-            mouseover: 'onMouseOver'
+            click: &#39;onClick&#39;,
+            mouseenter: &#39;onMouseEnter&#39;,
+            mouseleave: &#39;onMouseLeave&#39;,
+            mouseover: &#39;onMouseOver&#39;
         },
         children: [{
-            reference: 'toolsElement',
-            cls: Ext.baseCSSPrefix + 'treelist-toolstrip',
+            reference: &#39;toolsElement&#39;,
+            cls: Ext.baseCSSPrefix + &#39;treelist-toolstrip&#39;,
             listeners: {
-                click: 'onToolStripClick',
-                mouseover: 'onToolStripMouseOver'
+                click: &#39;onToolStripClick&#39;,
+                mouseover: &#39;onToolStripMouseOver&#39;
             }
         }]
     },
@@ -56,7 +56,7 @@ Ext.define('Ext.list.Tree', {
     cachedConfig: {
 <span id='Ext-list-Tree-cfg-animation'>        animation: {
 </span>            duration: 500,
-            easing: 'ease'
+            easing: &#39;ease&#39;
         },
 
 <span id='Ext-list-Tree-cfg-expanderFirst'>        expanderFirst: true,
@@ -80,7 +80,7 @@ Ext.define('Ext.list.Tree', {
          * ultimately derives from the `{@link Ext.list.AbstractTreeItem}` base class.
          */
         defaults: {
-            xtype: 'treelistitem'
+            xtype: &#39;treelistitem&#39;
         },
 
 <span id='Ext-list-Tree-cfg-highlightPath'>        highlightPath: null,
@@ -129,7 +129,7 @@ Ext.define('Ext.list.Tree', {
 </span>        selection: 1
     },
 
-<span id='Ext-list-Tree-property-defaultBindProperty'>    defaultBindProperty: 'store',
+<span id='Ext-list-Tree-property-defaultBindProperty'>    defaultBindProperty: &#39;store&#39;,
 </span>
 <span id='Ext-list-Tree-method-constructor'>    constructor: function(config) {
 </span>        var me = this;
@@ -137,7 +137,7 @@ Ext.define('Ext.list.Tree', {
         me.callParent([config]);
         // Important to publish the value here, so the vm can
         // will know our intial state.
-        me.publishState('selection', me.getSelection());
+        me.publishState(&#39;selection&#39;, me.getSelection());
 
         // Track size so that we can track the expanded size
         // for use by the floated state of items when in micro mode.
@@ -211,7 +211,7 @@ Ext.define('Ext.list.Tree', {
         if (!store) {
             selection = null;
         }
-        if (selection &amp;&amp; selection.get('selectable') === false) {
+        if (selection &amp;&amp; selection.get(&#39;selectable&#39;) === false) {
             selection = oldSelection;
         }
         return selection;
@@ -222,7 +222,7 @@ Ext.define('Ext.list.Tree', {
             item;
 
         if (!me.destroying) {
-            // getItem has guards around null, so we don't
+            // getItem has guards around null, so we don&#39;t
             // need to check for oldSelection/selection here
             item = me.getItem(oldSelection);
             if (item) {
@@ -233,12 +233,12 @@ Ext.define('Ext.list.Tree', {
             if (item) {
                 item.setSelected(true);
             }
-            me.fireEvent('selectionchange', me, selection);
+            me.fireEvent(&#39;selectionchange&#39;, me, selection);
         }
     },
 
 <span id='Ext-list-Tree-method-applyStore'>    applyStore: function (store) {
-</span>        return store &amp;&amp; Ext.StoreManager.lookup(store, 'tree');
+</span>        return store &amp;&amp; Ext.StoreManager.lookup(store, &#39;tree&#39;);
     },
 
 <span id='Ext-list-Tree-method-updateStore'>    updateStore: function (store, oldStore) {
@@ -263,14 +263,14 @@ Ext.define('Ext.list.Tree', {
             me.storeListeners = store.on({
                 destroyable: true,
                 scope: me,
-                filterchange: 'onFilterChange',
-                nodeappend: 'onNodeAppend',
-                nodecollapse: 'onNodeCollapse',
-                nodeexpand: 'onNodeExpand',
-                nodeinsert: 'onNodeInsert',
-                noderemove: 'onNodeRemove',
-                rootchange: 'onRootChange',
-                update: 'onNodeUpdate'
+                filterchange: &#39;onFilterChange&#39;,
+                nodeappend: &#39;onNodeAppend&#39;,
+                nodecollapse: &#39;onNodeCollapse&#39;,
+                nodeexpand: &#39;onNodeExpand&#39;,
+                nodeinsert: &#39;onNodeInsert&#39;,
+                noderemove: &#39;onNodeRemove&#39;,
+                rootchange: &#39;onRootChange&#39;,
+                update: &#39;onNodeUpdate&#39;
             });
         
             root = store.getRoot();
@@ -403,7 +403,7 @@ Ext.define('Ext.list.Tree', {
                         previousSibling = me.getItem(previousSibling);
                         toolEl.insertAfter(previousSibling.getToolElement());
                     }
-                    toolEl.dom.setAttribute('data-recordId', node.internalId);
+                    toolEl.dom.setAttribute(&#39;data-recordId&#39;, node.internalId);
                     toolEl.isTool = true;
                 }
             }
@@ -471,7 +471,7 @@ Ext.define('Ext.list.Tree', {
                 me.toolMouseListeners = item.getToolElement().monitorMouseLeave(300, me.checkForMouseLeave, me);
                 me.floaterMouseListeners = (item.floater || item).el.monitorMouseLeave(300, me.checkForMouseLeave, me);
             } else {
-                Ext.on('mousedown', 'checkForOutsideClick', me);
+                Ext.on(&#39;mousedown&#39;, &#39;checkForOutsideClick&#39;, me);
             }
         },
 
@@ -482,11 +482,11 @@ Ext.define('Ext.list.Tree', {
          * @private
          */
         onClick: function (e) {
-            var item = e.getTarget('[data-recordId]'),
+            var item = e.getTarget(&#39;[data-recordId]&#39;),
                 id;
 
             if (item) {
-                id = item.getAttribute('data-recordId');
+                id = item.getAttribute(&#39;data-recordId&#39;);
                 item = this.itemMap[id];
                 if (item) {
                     item.onClick(e);
@@ -520,7 +520,7 @@ Ext.define('Ext.list.Tree', {
         },
 
         onFilterChange: function(store) {
-            // Because the tree can use bottom up or top down filtering, don't try and figure out
+            // Because the tree can use bottom up or top down filtering, don&#39;t try and figure out
             // what changed here, just do a global refresh
             this.onRootChange(store.getRoot());
         },
@@ -533,7 +533,7 @@ Ext.define('Ext.list.Tree', {
          * @private
          */
         onNodeAppend: function (parentNode, node) {
-            // If it's a root we'll handle it on rootchange
+            // If it&#39;s a root we&#39;ll handle it on rootchange
             if (parentNode) {
                 var item = this.itemMap[parentNode.internalId];
 
@@ -611,9 +611,9 @@ Ext.define('Ext.list.Tree', {
          * @private
          */
         onNodeRemove: function (parentNode, node, isMove) {
-            // If it's a move we don't need to do anything, we won't process it
+            // If it&#39;s a move we don&#39;t need to do anything, we won&#39;t process it
             // as a removal, the addition will handle it all.
-            // Also if the node being removed is the root we'll handle it in rootchange
+            // Also if the node being removed is the root we&#39;ll handle it in rootchange
             if (parentNode &amp;&amp; !isMove) {
                 var item = this.itemMap[parentNode.internalId];
 
@@ -656,7 +656,7 @@ Ext.define('Ext.list.Tree', {
             }
 
             me.updateLayout();
-            me.fireEvent('refresh', me);
+            me.fireEvent(&#39;refresh&#39;, me);
         },
 
 <span id='Ext-list-Tree-method-removeItem'>        /**
@@ -672,7 +672,7 @@ Ext.define('Ext.list.Tree', {
 
             if (map) {
                 item = map[id];
-                // If it's null, it means it's a root level item
+                // If it&#39;s null, it means it&#39;s a root level item
                 if (item.getParentItem() === null) {
                     toolEl = item.getToolElement();
                     if (toolEl) {
@@ -700,11 +700,11 @@ Ext.define('Ext.list.Tree', {
          * @private
          */
         onToolStripClick: function(e) {
-            var item = e.getTarget('[data-recordId]'),
+            var item = e.getTarget(&#39;[data-recordId]&#39;),
                 id;
 
             if (item) {
-                id = item.getAttribute('data-recordId');
+                id = item.getAttribute(&#39;data-recordId&#39;);
                 item = this.itemMap[id];
                 if (item) {
                     if (item === this.activeFloater) {
@@ -723,11 +723,11 @@ Ext.define('Ext.list.Tree', {
          * @private
          */
         onToolStripMouseOver: function(e) {
-            var item = e.getTarget('[data-recordId]'),
+            var item = e.getTarget(&#39;[data-recordId]&#39;),
                 id;
 
             if (item) {
-                id = item.getAttribute('data-recordId');
+                id = item.getAttribute(&#39;data-recordId&#39;);
                 item = this.itemMap[id];
                 if (item) {
                     this.floatItem(item, true);
@@ -738,7 +738,7 @@ Ext.define('Ext.list.Tree', {
         syncIconSize: function() {
             var me = this,
                 size = me.iconSize ||
-                      (me.iconSize = parseInt(me.element.getStyle('background-position'), 10));
+                      (me.iconSize = parseInt(me.element.getStyle(&#39;background-position&#39;), 10));
 
             me.setIconSize(size);
         },
@@ -752,14 +752,14 @@ Ext.define('Ext.list.Tree', {
                 me.activeFloater = null;
 
                 if (me.floatedByHover) {
-                    floater.getToolElement().un('mouseleave', 'checkForMouseLeave', me);
+                    floater.getToolElement().un(&#39;mouseleave&#39;, &#39;checkForMouseLeave&#39;, me);
                     floater.element.un({
                         scope: me,
-                        mouseleave: 'checkForMouseLeave',
-                        mouseover: 'onMouseOver'
+                        mouseleave: &#39;checkForMouseLeave&#39;,
+                        mouseover: &#39;onMouseOver&#39;
                     });
                 } else {
-                    Ext.un('mousedown', 'checkForOutsideClick', me);
+                    Ext.un(&#39;mousedown&#39;, &#39;checkForOutsideClick&#39;, me);
                 }
             }
         },

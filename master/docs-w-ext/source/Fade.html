@@ -18,12 +18,12 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-animation-Fade'>/**
 </span> * @private
  */
-Ext.define('Ext.fx.animation.Fade', {
-    extend: 'Ext.fx.animation.Abstract',
+Ext.define(&#39;Ext.fx.animation.Fade&#39;, {
+    extend: &#39;Ext.fx.animation.Abstract&#39;,
 
-    alternateClassName: 'Ext.fx.animation.FadeIn',
+    alternateClassName: &#39;Ext.fx.animation.FadeIn&#39;,
 
-    alias: ['animation.fade', 'animation.fadeIn'],
+    alias: [&#39;animation.fade&#39;, &#39;animation.fadeIn&#39;],
 
     config: {
 <span id='Ext-fx-animation-Fade-cfg-out'>        /**
@@ -49,11 +49,11 @@ Ext.define('Ext.fx.animation.Fade', {
             from = this.getFrom();
 
         if (newOut) {
-            from.set('opacity', 1);
-            to.set('opacity',   0);
+            from.set(&#39;opacity&#39;, 1);
+            to.set(&#39;opacity&#39;,   0);
         } else {
-            from.set('opacity', 0);
-            to.set('opacity',   1);
+            from.set(&#39;opacity&#39;, 0);
+            to.set(&#39;opacity&#39;,   1);
         }
     }
 });

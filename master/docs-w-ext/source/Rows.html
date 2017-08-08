@@ -19,14 +19,14 @@
 </span> * A class which encapsulates a range of rows defining a selection in a grid.
  * @since 5.1.0
  */
-Ext.define('Ext.grid.selection.Rows', {
-    extend: 'Ext.grid.selection.Selection',
+Ext.define(&#39;Ext.grid.selection.Rows&#39;, {
+    extend: &#39;Ext.grid.selection.Selection&#39;,
 
     requires: [
-        'Ext.util.Collection'
+        &#39;Ext.util.Collection&#39;
     ],
 
-<span id='Ext-grid-selection-Rows-property-type'>    type: 'rows',
+<span id='Ext-grid-selection-Rows-property-type'>    type: &#39;rows&#39;,
 </span>
 <span id='Ext-grid-selection-Rows-property-isRows'>    /**
 </span>     * @property {Boolean} isRows
@@ -62,7 +62,7 @@ Ext.define('Ext.grid.selection.Rows', {
 
         //&lt;debug&gt;
         if (!(record.isModel)) {
-            Ext.raise('Row selection must be passed a record');
+            Ext.raise(&#39;Row selection must be passed a record&#39;);
         }
         //&lt;/debug&gt;
 
@@ -88,7 +88,7 @@ Ext.define('Ext.grid.selection.Rows', {
         }
         //&lt;debug&gt;
         else {
-            Ext.raise('add must be called with a record or array of records');
+            Ext.raise(&#39;add must be called with a record or array of records&#39;);
         }
         //&lt;/debug&gt;
     },
@@ -96,7 +96,7 @@ Ext.define('Ext.grid.selection.Rows', {
 <span id='Ext-grid-selection-Rows-method-removeOne'>    removeOne: function(record) {
 </span>        //&lt;debug&gt;
         if (!(record.isModel)) {
-            Ext.raise('Row selection must be passed a record');
+            Ext.raise(&#39;Row selection must be passed a record&#39;);
         }
         //&lt;/debug&gt;
 
@@ -130,7 +130,7 @@ Ext.define('Ext.grid.selection.Rows', {
         }
         //&lt;debug&gt;
         else {
-            Ext.raise('remove must be called with a record or array of records');
+            Ext.raise(&#39;remove must be called with a record or array of records&#39;);
         }
         //&lt;/debug&gt;
         return ret;
@@ -489,11 +489,11 @@ Ext.define('Ext.grid.selection.Rows', {
         createRecordCollection: function() {
             var store = this.view.dataSource,
                 result = new Ext.util.Collection({
-                    rootProperty: 'data',
+                    rootProperty: &#39;data&#39;,
                     extraKeys: {
                         byInternalId: {
                             rootProperty: false,
-                            property: 'internalId'
+                            property: &#39;internalId&#39;
                         }
                     },
                     sorters: [

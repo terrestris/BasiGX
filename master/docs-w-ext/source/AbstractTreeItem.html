@@ -19,8 +19,8 @@
 </span> * The base class for all items in the `{@link Ext.list.Tree treelist}`.
  * @since 6.0.0
  */
-Ext.define('Ext.list.AbstractTreeItem', {
-    extend: 'Ext.Widget',
+Ext.define(&#39;Ext.list.AbstractTreeItem&#39;, {
+    extend: &#39;Ext.Widget&#39;,
 
 <span id='Ext-list-AbstractTreeItem-property-isTreeListItem'>    isTreeListItem: true,
 </span>
@@ -89,7 +89,7 @@ Ext.define('Ext.list.AbstractTreeItem', {
          * @inheritdoc Ext.panel.Header#cfg-iconCls
          * @localdoc **Note:** This value is taken from the underlying {@link #node}.
          */
-        iconCls: '',
+        iconCls: &#39;&#39;,
 
 <span id='Ext-list-AbstractTreeItem-cfg-leaf'>        /**
 </span>         * @cfg {Boolean} leaf
@@ -123,7 +123,7 @@ Ext.define('Ext.list.AbstractTreeItem', {
 </span>         * @cfg {String} iconClsProperty
          * The property from the {@link #node} to map for the {@link #iconCls} config.
          */
-        iconClsProperty: 'iconCls',
+        iconClsProperty: &#39;iconCls&#39;,
 
 <span id='Ext-list-AbstractTreeItem-cfg-indent'>        indent: null,
 </span>
@@ -144,7 +144,7 @@ Ext.define('Ext.list.AbstractTreeItem', {
          * One of three possible values:
          *
          *   - 0 if mouse is not over this item or any of its descendants.
-         *   - 1 if mouse is not over this item but is over one of this item's descendants.
+         *   - 1 if mouse is not over this item but is over one of this item&#39;s descendants.
          *   - 2 if mouse is directly over this item.
          */
         over: null,
@@ -162,14 +162,14 @@ Ext.define('Ext.list.AbstractTreeItem', {
          */
         text: {
             lazy: true,
-            $value: ''
+            $value: &#39;&#39;
         },
 
 <span id='Ext-list-AbstractTreeItem-cfg-textProperty'>        /**
 </span>         * @cfg {String} textProperty
          * The property from the {@link #node} to map for the {@link #text} config.
          */
-        textProperty: 'text'
+        textProperty: &#39;text&#39;
     },
 
 <span id='Ext-list-AbstractTreeItem-method-updateNode'>    updateNode: function (node) {
@@ -178,7 +178,7 @@ Ext.define('Ext.list.AbstractTreeItem', {
                 map = me.itemMap,
                 childNodes, owner, len, i, item, child;
 
-            me.element.dom.setAttribute('data-recordId', node.internalId);
+            me.element.dom.setAttribute(&#39;data-recordId&#39;, node.internalId);
 
             if (!map) {
                 childNodes = node.childNodes;
@@ -300,7 +300,7 @@ Ext.define('Ext.list.AbstractTreeItem', {
 
         me.setExpanded(false);
 
-        owner.fireEvent('itemcollapse', owner, me);
+        owner.fireEvent(&#39;itemcollapse&#39;, owner, me);
     },
 
 <span id='Ext-list-AbstractTreeItem-method-nodeCollapseEnd'>    nodeCollapseEnd: function (collapsingForExpand) {
@@ -334,7 +334,7 @@ Ext.define('Ext.list.AbstractTreeItem', {
 
         me.setExpanded(true);
 
-        owner.fireEvent('itemexpand', owner, me);
+        owner.fireEvent(&#39;itemexpand&#39;, owner, me);
     },
 
 <span id='Ext-list-AbstractTreeItem-method-nodeExpandEnd'>    nodeExpandEnd: function () {
@@ -360,7 +360,7 @@ Ext.define('Ext.list.AbstractTreeItem', {
 
         if (item) {
             oldParent = item.getParentItem();
-            // May have some kind of custom removal processing, allow it to happen, even if it's us
+            // May have some kind of custom removal processing, allow it to happen, even if it&#39;s us
             oldParent.removeItem(item);
             if (oldParent !== me) {
                 oldParent.doUpdateExpandable();
@@ -378,7 +378,7 @@ Ext.define('Ext.list.AbstractTreeItem', {
         me.insertItem(item, refItem);
         me.doUpdateExpandable();
 
-        owner.fireEvent('iteminsert', owner, me, item, refItem);
+        owner.fireEvent(&#39;iteminsert&#39;, owner, me, item, refItem);
 
         owner.updateLayout();
     },
@@ -403,7 +403,7 @@ Ext.define('Ext.list.AbstractTreeItem', {
 
             me.doUpdateExpandable();
 
-            owner.fireEvent('itemremove', owner, me, item);
+            owner.fireEvent(&#39;itemremove&#39;, owner, me, item);
 
             owner.updateLayout();
         }
@@ -506,7 +506,7 @@ Ext.define('Ext.list.AbstractTreeItem', {
                     item: me,
                     node: node,
                     tree: owner,
-                    select: node.get('selectable') !== false &amp;&amp; me.isSelectionEvent(e),
+                    select: node.get(&#39;selectable&#39;) !== false &amp;&amp; me.isSelectionEvent(e),
                     toggle: me.isToggleEvent(e)
                 };
 
@@ -527,11 +527,11 @@ Ext.define('Ext.list.AbstractTreeItem', {
              * @param {Boolean} info.toggle On input this is value is the result of the
              *   {@link #isToggleEvent} method. On return from event handlers (assuming a
              *   `false` return does not cancel things) this property is used to determine
-             *   if the clicked node's expand/collapse state should be toggled.
+             *   if the clicked node&#39;s expand/collapse state should be toggled.
              *
              * @since 6.0.1
              */
-            if (owner.fireEvent('itemclick', owner, info) !== false) {
+            if (owner.fireEvent(&#39;itemclick&#39;, owner, info) !== false) {
                 if (info.toggle) {
                     me.toggleExpanded();
                     e.preventDefault();

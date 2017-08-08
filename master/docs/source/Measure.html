@@ -37,14 +37,14 @@
  *
  * @class BasiGX.view.button.Measure
  */
-Ext.define('BasiGX.view.button.Measure', {
-    extend: 'BasiGX.view.button.Base',
-    xtype: 'basigx-button-measure',
+Ext.define(&#39;BasiGX.view.button.Measure&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-measure&#39;,
 
     requires: [
-        'BasiGX.util.Layer',
-        'BasiGX.util.Map',
-        'Ext.app.ViewModel'
+        &#39;BasiGX.util.Layer&#39;,
+        &#39;BasiGX.util.Map&#39;,
+        &#39;Ext.app.ViewModel&#39;
     ],
 
 <span id='BasiGX-view-button-Measure-property-viewModel'>    /**
@@ -52,20 +52,23 @@ Ext.define('BasiGX.view.button.Measure', {
      */
     viewModel: {
         data: {
-            textline: 'Strecke messen',
-            textpoly: 'Fläche messen',
-            textangle: 'Winkel messen',
-            continuePolygonMsg: 'Klicken zum Zeichnen der Fläche',
-            continueLineMsg: 'Klicken zum Zeichnen der Strecke',
-            continueAngleMsg: 'Klicken zum Zeichnen des Winkels',
-            clickToDrawText: 'Klicken zum Messen',
-            documentation: '&lt;h2&gt;Messwerkzeug&lt;/h2&gt;• Ein Klick auf den Button ' +
-                'aktiviert das Messwerkzeug.&lt;br&gt;• Klicken Sie anschließend ' +
-                'mit der Maus in der Karte, um einen Messpunkt zu ' +
-                'erstellen.&lt;br&gt;• Wiederholen Sie den Vorgang mit beliebig ' +
-                'vielen Messpunkten.&lt;br&gt;• Um den Messvorgang abzuschließen ' +
-                'führen Sie einen Doppelklick aus.&lt;br&gt;• Das Messergebnis ' +
-                'wird ihnen in der Karte angezeigt.'
+            textline: &#39;Strecke messen&#39;,
+            textpoly: &#39;Fläche messen&#39;,
+            textangle: &#39;Winkel messen&#39;,
+            tooltipLine: &#39;Strecke messen&#39;,
+            tooltipPoly: &#39;Fläche messen&#39;,
+            tooltipAngle: &#39;Winkel messen&#39;,
+            continuePolygonMsg: &#39;Klicken zum Zeichnen der Fläche&#39;,
+            continueLineMsg: &#39;Klicken zum Zeichnen der Strecke&#39;,
+            continueAngleMsg: &#39;Klicken zum Zeichnen des Winkels&#39;,
+            clickToDrawText: &#39;Klicken zum Messen&#39;,
+            documentation: &#39;&lt;h2&gt;Messwerkzeug&lt;/h2&gt;• Ein Klick auf den Button &#39; +
+                &#39;aktiviert das Messwerkzeug.&lt;br&gt;• Klicken Sie anschließend &#39; +
+                &#39;mit der Maus in der Karte, um einen Messpunkt zu &#39; +
+                &#39;erstellen.&lt;br&gt;• Wiederholen Sie den Vorgang mit beliebig &#39; +
+                &#39;vielen Messpunkten.&lt;br&gt;• Um den Messvorgang abzuschließen &#39; +
+                &#39;führen Sie einen Doppelklick aus.&lt;br&gt;• Das Messergebnis &#39; +
+                &#39;wird ihnen in der Karte angezeigt.&#39;
         }
     },
 
@@ -92,7 +95,7 @@ Ext.define('BasiGX.view.button.Measure', {
 <span id='BasiGX-view-button-Measure-property-measureType'>    /**
 </span>     *
      */
-    measureType: 'line',
+    measureType: &#39;line&#39;,
 
 <span id='BasiGX-view-button-Measure-property-sketch'>    /**
 </span>     * Currently drawn feature.
@@ -137,12 +140,12 @@ Ext.define('BasiGX.view.button.Measure', {
 <span id='BasiGX-view-button-Measure-property-strokeColor'>    /**
 </span>     *
      */
-    strokeColor: 'rgba(255, 0, 0, 0.8)',
+    strokeColor: &#39;rgba(255, 0, 0, 0.8)&#39;,
 
 <span id='BasiGX-view-button-Measure-property-fillColor'>    /**
 </span>     *
      */
-    fillColor: 'rgba(255, 0, 0, 0.5)',
+    fillColor: &#39;rgba(255, 0, 0, 0.5)&#39;,
 
 <span id='BasiGX-view-button-Measure-property-decimalPlacesInToolTips'>    /**
 </span>     * how many decimal places will be allowed for the measure tooltips
@@ -200,51 +203,51 @@ Ext.define('BasiGX.view.button.Measure', {
     statics: {
 
 <span id='BasiGX-view-button-Measure-static-property-CSS_CLASSES'>        /**
-</span>         * CSS classes we'll assign to the popups from measuring. use these to
+</span>         * CSS classes we&#39;ll assign to the popups from measuring. use these to
          * style the text of the popups / overlays.
          */
         CSS_CLASSES: {
 
 <span id='BasiGX-view-button-Measure-property-TOOLTIP'>            /**
-</span>             * Every tooltip will have these classes. The unprefixed 'tooltip'
+</span>             * Every tooltip will have these classes. The unprefixed &#39;tooltip&#39;
              * is kept for backwards compatibility only and should not be used
              * anymore for styling.
              */
-            TOOLTIP: 'basigx-measure-tooltip tooltip',
+            TOOLTIP: &#39;basigx-measure-tooltip tooltip&#39;,
 
 <span id='BasiGX-view-button-Measure-property-TOOLTIP_DYNAMIC'>            /**
 </span>             * Measurement tooltips with the everchanging values will have these
-             * classes. The unprefixed 'tooltip-measure' is kept for backwards
+             * classes. The unprefixed &#39;tooltip-measure&#39; is kept for backwards
              * compatibility only and should not be used anymore for styling.
              */
-            TOOLTIP_DYNAMIC: 'basigx-measure-tooltip-dynamic tooltip-measure',
+            TOOLTIP_DYNAMIC: &#39;basigx-measure-tooltip-dynamic tooltip-measure&#39;,
 
 <span id='BasiGX-view-button-Measure-property-TOOLTIP_STATIC'>            /**
 </span>             * The tooltips for finished measurements will have these classes.
-             * The unprefixed 'tooltip-static' is kept for backwards
+             * The unprefixed &#39;tooltip-static&#39; is kept for backwards
              * compatibility only and should not be used anymore for styling.
              */
-            TOOLTIP_STATIC: 'basigx-measure-tooltip-static tooltip-static',
+            TOOLTIP_STATIC: &#39;basigx-measure-tooltip-static tooltip-static&#39;,
 
 <span id='BasiGX-view-button-Measure-method-toSelector'>            /**
 </span>             * A utility method that turns the passed space separated CSS class
              * names into a selector.
              *
-             *     BasiGX.view.button.Measure.CSS_CLASSES.toSelector('foo bar');
-             *     // returns '.foo.bar'
+             *     BasiGX.view.button.Measure.CSS_CLASSES.toSelector(&#39;foo bar&#39;);
+             *     // returns &#39;.foo.bar&#39;
              *
              * @param {String} classStr The space separated names of classes.
              * @return {String} A selector that can be used to query the DOM.
              */
             toSelector: function(classStr) {
                 if (!classStr) {
-                    Ext.raise('Cannot convert &quot;' + classStr + '&quot; to selector.');
+                    Ext.raise(&#39;Cannot convert &quot;&#39; + classStr + &#39;&quot; to selector.&#39;);
                 }
-                var dot = '.';
-                var space = ' ';
+                var dot = &#39;.&#39;;
+                var space = &#39; &#39;;
                 var trimmed = classStr
-                    .replace(/^\s+/, '') // leading whitespace
-                    .replace(/\s+$/, '') // trailing whitespace
+                    .replace(/^\s+/, &#39;&#39;) // leading whitespace
+                    .replace(/\s+$/, &#39;&#39;) // trailing whitespace
                     .replace(/\s+/g, space); // multiple spaces to one
                 return dot + trimmed.split(space).join(dot);
             }
@@ -263,9 +266,10 @@ Ext.define('BasiGX.view.button.Measure', {
         me.map = BasiGX.util.Map.getMapComponent().getMap();
 
         var btnText = me.btnTextByType();
+        var btnTooltip = me.btnTooltipByType();
         me.setBind({
             text: btnText,
-            tooltip: btnText
+            tooltip: btnTooltip
         });
 
         var nameMeasureLayer = LayerUtil.NAME_MEASURE_LAYER;
@@ -273,19 +277,19 @@ Ext.define('BasiGX.view.button.Measure', {
 
         if (Ext.isEmpty(measureLayer)) {
             measureLayer = me.createMeasureLayer();
-            measureLayer.set('bp_displayInLayerSwitcher', false);
+            measureLayer.set(&#39;bp_displayInLayerSwitcher&#39;, false);
             me.map.addLayer(measureLayer);
         }
 
         me.measureVectorLayer = measureLayer;
 
         me.drawAction = me.drawInteractionByMeasureType();
-        me.drawAction.on('change:active', me.onDrawInteractionActiveChange, me);
+        me.drawAction.on(&#39;change:active&#39;, me.onDrawInteractionActiveChange, me);
 
         me.drawAction.setActive(false);
         me.map.addInteraction(me.drawAction);
 
-        me.on('toggle', me.onBtnToggle, me);
+        me.on(&#39;toggle&#39;, me.onBtnToggle, me);
     },
 
 <span id='BasiGX-view-button-Measure-method-onDrawInteractionActiveChange'>    /**
@@ -314,16 +318,16 @@ Ext.define('BasiGX.view.button.Measure', {
         if (pressed) {
             btn.drawAction.setActive(true);
             btn.eventKeys.drawstart = btn.drawAction.on(
-                'drawstart', btn.drawStart, btn
+                &#39;drawstart&#39;, btn.drawStart, btn
             );
             btn.eventKeys.drawend = btn.drawAction.on(
-                'drawend', btn.drawEnd, btn
+                &#39;drawend&#39;, btn.drawEnd, btn
             );
             var throttledPointerMove = Ext.Function.createThrottled(
                 btn.pointerMoveHandler, 50, btn
             );
             btn.eventKeys.pointermove = btn.map.on(
-                'pointermove', throttledPointerMove
+                &#39;pointermove&#39;, throttledPointerMove
             );
         }
     },
@@ -338,9 +342,9 @@ Ext.define('BasiGX.view.button.Measure', {
     drawInteractionByMeasureType: function() {
         var me = this;
         var drawType = me.drawTypeByMeasureType();
-        var maxPoints = me.measureType === 'angle' ? 2 : undefined;
+        var maxPoints = me.measureType === &#39;angle&#39; ? 2 : undefined;
         var interaction = new ol.interaction.Draw({
-            name: 'drawaction',
+            name: &#39;drawaction&#39;,
             source: me.measureVectorLayer.getSource(),
             type: drawType,
             maxPoints: maxPoints,
@@ -412,15 +416,15 @@ Ext.define('BasiGX.view.button.Measure', {
 
 <span id='BasiGX-view-button-Measure-method-drawTypeByMeasureType'>    /**
 </span>     * Examines the #measureType property of the this button an returns the
-     * type to use for drawing vectors, either `'MultiLineString'` or
-     * `'MultiPolygon'`.
+     * type to use for drawing vectors, either `&#39;MultiLineString&#39;` or
+     * `&#39;MultiPolygon&#39;`.
      *
      * @return {String} The type to draw.
      */
     drawTypeByMeasureType: function() {
-        var drawType = 'MultiLineString';
-        if (this.measureType === 'polygon') {
-            drawType = 'MultiPolygon';
+        var drawType = &#39;MultiLineString&#39;;
+        if (this.measureType === &#39;polygon&#39;) {
+            drawType = &#39;MultiPolygon&#39;;
         }
         return drawType;
     },
@@ -434,19 +438,43 @@ Ext.define('BasiGX.view.button.Measure', {
     btnTextByType: function() {
         var btnText;
         switch (this.measureType) {
-            case 'line':
-                btnText = '{textline}';
+            case &#39;line&#39;:
+                btnText = &#39;{textline}&#39;;
                 break;
-            case 'polygon':
-                btnText = '{textpoly}';
+            case &#39;polygon&#39;:
+                btnText = &#39;{textpoly}&#39;;
                 break;
-            case 'angle':
-                btnText = '{textangle}';
+            case &#39;angle&#39;:
+                btnText = &#39;{textangle}&#39;;
                 break;
             default:
                 break;
         }
         return btnText;
+    },
+
+<span id='BasiGX-view-button-Measure-method-btnTooltipByType'>    /**
+</span>     * Determines a viewmodel template to use for button btnTooltips depending
+     * on the configured #measureType.
+     *
+     * @return {String} The viewmodel template to use.
+     */
+    btnTooltipByType: function() {
+        var btnTooltip;
+        switch (this.measureType) {
+            case &#39;line&#39;:
+                btnTooltip = &#39;{tooltipLine}&#39;;
+                break;
+            case &#39;polygon&#39;:
+                btnTooltip = &#39;{tooltipPoly}&#39;;
+                break;
+            case &#39;angle&#39;:
+                btnTooltip = &#39;{tooltipAngle}&#39;;
+                break;
+            default:
+                break;
+        }
+        return btnTooltip;
     },
 
 <span id='BasiGX-view-button-Measure-method-cleanUp'>    /**
@@ -497,16 +525,16 @@ Ext.define('BasiGX.view.button.Measure', {
 
         if (!Ext.isEmpty(me.sketch)) {
             var geom = me.sketch.getGeometry();
-            var value = me.measureType === 'line' ? me.formatLength(geom) :
+            var value = me.measureType === &#39;line&#39; ? me.formatLength(geom) :
                 me.formatArea(geom);
             if (parseInt(value, 10) &gt; 0) {
-                var div = Ext.dom.Helper.createDom('&lt;div&gt;');
-                div.className = CSS.TOOLTIP + ' ' + CSS.TOOLTIP_STATIC;
+                var div = Ext.dom.Helper.createDom(&#39;&lt;div&gt;&#39;);
+                div.className = CSS.TOOLTIP + &#39; &#39; + CSS.TOOLTIP_STATIC;
                 div.innerHTML = value;
                 var tooltip = new ol.Overlay({
                     element: div,
                     offset: [0, -15],
-                    positioning: 'bottom-center'
+                    positioning: &#39;bottom-center&#39;
                 });
                 me.map.addOverlay(tooltip);
                 tooltip.setPosition(evt.coordinate);
@@ -529,9 +557,9 @@ Ext.define('BasiGX.view.button.Measure', {
         var source = me.measureVectorLayer.getSource();
         me.sketch = evt.feature;
 
-        if (me.showMeasureInfoOnClickedPoints &amp;&amp; me.measureType === 'line') {
+        if (me.showMeasureInfoOnClickedPoints &amp;&amp; me.measureType === &#39;line&#39;) {
             me.eventKeys.click = me.map.on(
-                'click', me.addMeasureStopToolTip, me
+                &#39;click&#39;, me.addMeasureStopToolTip, me
             );
         }
 
@@ -558,11 +586,11 @@ Ext.define('BasiGX.view.button.Measure', {
 
         // Fix doubled label for lastPoint of line
         var CSS = BasiGX.view.button.Measure.CSS_CLASSES;
-        if (me.showMeasureInfoOnClickedPoints &amp;&amp; me.measureType === 'line') {
+        if (me.showMeasureInfoOnClickedPoints &amp;&amp; me.measureType === &#39;line&#39;) {
             me.removeMeasureTooltip();
         } else {
             me.measureTooltipElement.className = CSS.TOOLTIP +
-                ' ' + CSS.TOOLTIP_STATIC;
+                &#39; &#39; + CSS.TOOLTIP_STATIC;
             me.measureTooltip.setOffset([0, -7]);
         }
 
@@ -570,7 +598,7 @@ Ext.define('BasiGX.view.button.Measure', {
         me.sketch = null;
 
         // Fix doubled label for lastPoint of line
-        if (me.showMeasureInfoOnClickedPoints &amp;&amp; me.measureType === 'line') {
+        if (me.showMeasureInfoOnClickedPoints &amp;&amp; me.measureType === &#39;line&#39;) {
             me.measureTooltipElement = null;
             me.createMeasureTooltip();
         }
@@ -592,7 +620,7 @@ Ext.define('BasiGX.view.button.Measure', {
             return;
         }
 
-        var helpMsg = me.getViewModel().get('clickToDrawText');
+        var helpMsg = me.getViewModel().get(&#39;clickToDrawText&#39;);
         var helpTooltipCoord = evt.coordinate;
         var measureTooltipCoord = evt.coordinate;
 
@@ -602,18 +630,18 @@ Ext.define('BasiGX.view.button.Measure', {
             var output;
             var geom = me.sketch.getGeometry();
             measureTooltipCoord = geom.getLastCoordinate();
-            if (measureType === 'polygon') {
+            if (measureType === &#39;polygon&#39;) {
                 output = me.formatArea(geom);
-                helpMsg = me.getViewModel().get('continuePolygonMsg');
+                helpMsg = me.getViewModel().get(&#39;continuePolygonMsg&#39;);
                 // attach area at interior point
                 measureTooltipCoord = geom.getInteriorPoint().getCoordinates();
-            } else if (measureType === 'line') {
+            } else if (measureType === &#39;line&#39;) {
                 output = me.formatLength(geom);
-                helpMsg = me.getViewModel().get('continueLineMsg');
+                helpMsg = me.getViewModel().get(&#39;continueLineMsg&#39;);
                 measureTooltipCoord = geom.getLastCoordinate();
-            } else if (measureType === 'angle') {
+            } else if (measureType === &#39;angle&#39;) {
                 output = me.formatAngle(geom);
-                helpMsg = me.getViewModel().get('continueAngleMsg');
+                helpMsg = me.getViewModel().get(&#39;continueAngleMsg&#39;);
             }
             me.measureTooltipElement.innerHTML = output;
             me.measureTooltip.setPosition(measureTooltipCoord);
@@ -634,12 +662,12 @@ Ext.define('BasiGX.view.button.Measure', {
             return;
         }
 
-        me.helpTooltipElement = Ext.dom.Helper.createDom('&lt;div&gt;');
+        me.helpTooltipElement = Ext.dom.Helper.createDom(&#39;&lt;div&gt;&#39;);
         me.helpTooltipElement.className = CSS.TOOLTIP;
         me.helpTooltip = new ol.Overlay({
             element: me.helpTooltipElement,
             offset: [15, 0],
-            positioning: 'center-left'
+            positioning: &#39;center-left&#39;
         });
         me.map.addOverlay(me.helpTooltip);
     },
@@ -654,13 +682,13 @@ Ext.define('BasiGX.view.button.Measure', {
             return;
         }
 
-        me.measureTooltipElement = Ext.dom.Helper.createDom('&lt;div&gt;');
+        me.measureTooltipElement = Ext.dom.Helper.createDom(&#39;&lt;div&gt;&#39;);
         me.measureTooltipElement.className = CSS.TOOLTIP +
-            ' ' + CSS.TOOLTIP_DYNAMIC;
+            &#39; &#39; + CSS.TOOLTIP_DYNAMIC;
         me.measureTooltip = new ol.Overlay({
             element: me.measureTooltipElement,
             offset: [0, -15],
-            positioning: 'bottom-center'
+            positioning: &#39;bottom-center&#39;
         });
         me.map.addOverlay(me.measureTooltip);
     },
@@ -715,9 +743,9 @@ Ext.define('BasiGX.view.button.Measure', {
             var sourceProj = me.map.getView().getProjection();
             for (var i = 0, ii = coordinates.length - 1; i &lt; ii; ++i) {
                 var c1 = ol.proj.transform(
-                    coordinates[i], sourceProj, 'EPSG:4326');
+                    coordinates[i], sourceProj, &#39;EPSG:4326&#39;);
                 var c2 = ol.proj.transform(
-                    coordinates[i + 1], sourceProj, 'EPSG:4326');
+                    coordinates[i + 1], sourceProj, &#39;EPSG:4326&#39;);
                 length += wgs84Sphere.haversineDistance(c1, c2);
             }
         } else {
@@ -726,10 +754,10 @@ Ext.define('BasiGX.view.button.Measure', {
         var output;
         if (me.switchToKmOnLargeValues &amp;&amp; length &gt; 1000) {
             output = (Math.round(length / 1000 * decimalHelper) /
-                decimalHelper) + ' ' + 'km';
+                decimalHelper) + &#39; &#39; + &#39;km&#39;;
         } else {
             output = (Math.round(length * decimalHelper) / decimalHelper) +
-                ' m';
+                &#39; m&#39;;
         }
         return output;
     },
@@ -749,7 +777,7 @@ Ext.define('BasiGX.view.button.Measure', {
             var wgs84Sphere = new ol.Sphere(6378137);
             var sourceProj = me.map.getView().getProjection();
             var geom = (polygon.clone().transform(
-                sourceProj, 'EPSG:4326'));
+                sourceProj, &#39;EPSG:4326&#39;));
             var coordinates = geom.getLinearRing(0).getCoordinates();
             area = Math.abs(wgs84Sphere.geodesicArea(coordinates));
         } else {
@@ -759,10 +787,10 @@ Ext.define('BasiGX.view.button.Measure', {
         var output;
         if (me.switchToKmOnLargeValues &amp;&amp; area &gt; 10000) {
             output = (Math.round(area / 1000000 * decimalHelper) /
-                decimalHelper) + ' km&lt;sup&gt;2&lt;/sup&gt;';
+                decimalHelper) + &#39; km&lt;sup&gt;2&lt;/sup&gt;&#39;;
         } else {
             output = (Math.round(area * decimalHelper) / decimalHelper) +
-                ' ' + 'm&lt;sup&gt;2&lt;/sup&gt;';
+                &#39; &#39; + &#39;m&lt;sup&gt;2&lt;/sup&gt;&#39;;
         }
         return output;
     },
@@ -815,7 +843,7 @@ Ext.define('BasiGX.view.button.Measure', {
 
 <span id='BasiGX-view-button-Measure-method-makeClockwise'>    /**
 </span>     * Given an angle between 0° and 360° this angle returns the exact opposite
-     * of the angle, e.g. for 90° you'll get back 270°. This effectively turns
+     * of the angle, e.g. for 90° you&#39;ll get back 270°. This effectively turns
      * the direction of the angle from counter-clockwise to clockwise.
      *
      * @param {Number} angle360 The input angle obtained counter-clockwise.
@@ -842,7 +870,7 @@ Ext.define('BasiGX.view.button.Measure', {
     },
 
 <span id='BasiGX-view-button-Measure-method-formatAngle'>    /**
-</span>     * Returns the angle of the passed linestring in degrees, with 'N' being the
+</span>     * Returns the angle of the passed linestring in degrees, with &#39;N&#39; being the
      * 0°-line and the angle increases in clockwise direction.
      *
      * TODO The angle calculation assumes an unrotated view. We should enhance
@@ -859,7 +887,7 @@ Ext.define('BasiGX.view.button.Measure', {
         var coords = line.getCoordinates();
         var numCoords = coords.length;
         if (numCoords &lt; 2) {
-            return '';
+            return &#39;&#39;;
         }
 
         var lastPoint = coords[numCoords - 1];
@@ -870,7 +898,7 @@ Ext.define('BasiGX.view.button.Measure', {
         angle = me.makeClockwise(angle);
         angle = angle.toFixed(me.decimalPlacesInToolTips);
 
-        return angle + '°';
+        return angle + &#39;°&#39;;
     }
 });
 </pre>

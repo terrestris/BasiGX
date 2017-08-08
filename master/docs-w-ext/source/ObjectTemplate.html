@@ -23,19 +23,19 @@
  * For example:
  *
  *      var tpl = new Ext.util.ObjectTemplate({
- *          property: 'Hello {name}',
+ *          property: &#39;Hello {name}&#39;,
  *          data: {
- *              value: '{age}'
+ *              value: &#39;{age}&#39;
  *          }
  *      });
  *
  *      var obj = tpl.apply({
- *          name: 'Bill',
+ *          name: &#39;Bill&#39;,
  *          age: 42
  *      });
  *
  *      // obj = {
- *      //     property: 'Hello Bill',
+ *      //     property: &#39;Hello Bill&#39;,
  *      //     data: {
  *      //         value: 42
  *      //     }
@@ -43,9 +43,9 @@
  *
  * @since 5.0.0
  */
-Ext.define('Ext.util.ObjectTemplate', {
+Ext.define(&#39;Ext.util.ObjectTemplate&#39;, {
     requires: [
-        'Ext.XTemplate'
+        &#39;Ext.XTemplate&#39;
     ],
 
 <span id='Ext-util-ObjectTemplate-property-isObjectTemplate'>    isObjectTemplate: true,
@@ -65,7 +65,7 @@ Ext.define('Ext.util.ObjectTemplate', {
         create: function (template, options) {
             //&lt;debug&gt;
             if (!Ext.isObject(template)) {
-                Ext.raise('The template is not an Object');
+                Ext.raise(&#39;The template is not an Object&#39;);
             }
             //&lt;/debug&gt;
 
@@ -120,12 +120,12 @@ Ext.define('Ext.util.ObjectTemplate', {
             // TODO: loops over array or objects
 
             if (Ext.isString(template)) {
-                if (template.indexOf('{') &lt; 0) {
+                if (template.indexOf(&#39;{&#39;) &lt; 0) {
                     fn = function () {
                         return template;
                     };
                 } else if (me.valueRe.test(template)) {
-                    template = template.substring(1, template.length - 1).split('.');
+                    template = template.substring(1, template.length - 1).split(&#39;.&#39;);
 
                     fn = function (context) {
                         for (var v = context, i = 0; v &amp;&amp; i &lt; template.length; ++i) {

@@ -20,13 +20,13 @@
  * All this class does is standardize the representation of a Request as used by any ServerProxy subclass,
  * it does not contain any actual logic or perform the request itself.
  */
-Ext.define('Ext.data.Request', {
+Ext.define(&#39;Ext.data.Request&#39;, {
 <span id='Ext-data-Request-property-isDataRequest'>    isDataRequest: true,
 </span>    
     config: {
 <span id='Ext-data-Request-cfg-action'>        /**
 </span>         * @cfg {String} action
-         * The name of the action this Request represents. Usually one of 'create', 'read', 'update' or 'destroy'.
+         * The name of the action this Request represents. Usually one of &#39;create&#39;, &#39;read&#39;, &#39;update&#39; or &#39;destroy&#39;.
          */
         action: undefined,
 
@@ -38,9 +38,9 @@ Ext.define('Ext.data.Request', {
 
 <span id='Ext-data-Request-cfg-method'>        /**
 </span>         * @cfg {String} method
-         * The HTTP method to use on this Request. Should be one of 'GET', 'POST', 'PUT' or 'DELETE'.
+         * The HTTP method to use on this Request. Should be one of &#39;GET&#39;, &#39;POST&#39;, &#39;PUT&#39; or &#39;DELETE&#39;.
          */
-        method: 'GET',
+        method: &#39;GET&#39;,
 
 <span id='Ext-data-Request-cfg-url'>        /**
 </span>         * @cfg {String} url

@@ -23,9 +23,9 @@
  * to provide a map of record nodes and methods to manipulate the nodes.
  * @class Ext.view.NodeCache
  */
-Ext.define('Ext.view.NodeCache', {
+Ext.define(&#39;Ext.view.NodeCache&#39;, {
     requires: [
-        'Ext.dom.CompositeElementLite'
+        &#39;Ext.dom.CompositeElementLite&#39;
     ],
     statics: {
 <span id='Ext-view-NodeCache-static-property-range'>        range: document.createRange &amp;&amp; document.createRange()
@@ -110,7 +110,7 @@ Ext.define('Ext.view.NodeCache', {
         if (me.count) {
             //&lt;debug&gt;
             if (insertPoint &gt; me.endIndex + 1 || insertPoint + nodes.length &lt; me.startIndex) {
-                Ext.raise('Discontiguous range would result from inserting ' + nodes.length + ' nodes at ' + insertPoint);
+                Ext.raise(&#39;Discontiguous range would result from inserting &#39; + nodes.length + &#39; nodes at &#39; + insertPoint);
             }
             //&lt;/debug&gt;
 
@@ -118,7 +118,7 @@ Ext.define('Ext.view.NodeCache', {
             if (insertPoint &lt; me.count) {
                 for (i = me.endIndex + nodeCount; i &gt;= insertPoint + nodeCount; i--) {
                     elements[i] = elements[i - nodeCount];
-                    elements[i].setAttribute('data-recordIndex', i);
+                    elements[i].setAttribute(&#39;data-recordIndex&#39;, i);
                 }
             }
             me.endIndex = me.endIndex + nodeCount;
@@ -132,7 +132,7 @@ Ext.define('Ext.view.NodeCache', {
         // Insert new nodes into place
         for (i = 0; i &lt; nodeCount; i++, insertPoint++) {
             elements[insertPoint] = nodes[i];
-            elements[insertPoint].setAttribute('data-recordIndex', insertPoint);
+            elements[insertPoint].setAttribute(&#39;data-recordIndex&#39;, insertPoint);
         }
         me.count += nodeCount;
     },
@@ -204,7 +204,7 @@ Ext.define('Ext.view.NodeCache', {
         do {
             i += step;
             node = elements[i + increment] = elements[i];
-            node.setAttribute('data-recordIndex', i + increment);
+            node.setAttribute(&#39;data-recordIndex&#39;, i + increment);
 
             // &quot;from&quot; element is outside of the new range, then delete it.
             if (i &lt; me.startIndex || i &gt; me.endIndex) {
@@ -244,7 +244,7 @@ Ext.define('Ext.view.NodeCache', {
     */
     replaceElement: function(el, replacement, domReplace) {
         var elements = this.elements,
-            index = (typeof el === 'number') ? el : this.indexOf(el);
+            index = (typeof el === &#39;number&#39;) ? el : this.indexOf(el);
 
         if (index &gt; -1) {
             replacement = Ext.getDom(replacement);
@@ -252,7 +252,7 @@ Ext.define('Ext.view.NodeCache', {
                 el = elements[index];
                 el.parentNode.insertBefore(replacement, el);
                 Ext.removeNode(el);
-                replacement.setAttribute('data-recordIndex', index);
+                replacement.setAttribute(&#39;data-recordIndex&#39;, index);
             }
             this.elements[index] = replacement;
         }
@@ -302,7 +302,7 @@ Ext.define('Ext.view.NodeCache', {
             delete elements[i];
         }
         me.count -= removeCount;
-        me.view.fireItemMutationEvent('itemremove', me.view.dataSource.getRange(start, end), start, removed, me.view);
+        me.view.fireItemMutationEvent(&#39;itemremove&#39;, me.view.dataSource.getRange(start, end), start, removed, me.view);
     },
 
 <span id='Ext-view-NodeCache-method-removeRange'>    removeRange: function(start, end, removeDom) {
@@ -333,7 +333,7 @@ Ext.define('Ext.view.NodeCache', {
             // If the from position is occupied, shuffle that entry back into reference &quot;i&quot;
             if (fromPos &lt;= me.endIndex) {
                 el = elements[i] = elements[fromPos];
-                el.setAttribute('data-recordIndex', i);
+                el.setAttribute(&#39;data-recordIndex&#39;, i);
             }
             // The from position has walked off the end, so delete reference &quot;i&quot;
             else {
@@ -369,7 +369,7 @@ Ext.define('Ext.view.NodeCache', {
             deleteCount = inKeys.length;
             for (keyIndex = 0; keyIndex &lt; deleteCount; keyIndex++) {
                 key = inKeys[keyIndex];
-                if (typeof key !== 'number') {
+                if (typeof key !== &#39;number&#39;) {
                     key = me.indexOf(key);
                 }
                 // Could be asked to remove data above the start, or below the end of rendered zone in a buffer rendered view
@@ -407,7 +407,7 @@ Ext.define('Ext.view.NodeCache', {
             // Shuffle entries forward of the delete range back into contiguity.
             if (fromIndex &lt;= me.endIndex &amp;&amp; fromIndex &gt;= me.startIndex) {
                 el = elements[index] = elements[fromIndex];
-                el.setAttribute('data-recordIndex', index);
+                el.setAttribute(&#39;data-recordIndex&#39;, index);
             } else {
                 delete elements[index];
             }
@@ -419,7 +419,7 @@ Ext.define('Ext.view.NodeCache', {
 <span id='Ext-view-NodeCache-method-scroll'>    /**
 </span>     * Appends/prepends records depending on direction flag
      * @param {Ext.data.Model[]} newRecords Items to append/prepend
-     * @param {Number} direction `-1' = scroll up, `0` = scroll down.
+     * @param {Number} direction `-1&#39; = scroll up, `0` = scroll down.
      * @param {Number} removeCount The number of records to remove from the end. if scrolling
      * down, rows are removed from the top and the new rows are added at the bottom.
      * @return {HTMLElement[]} The view item nodes added either at the top or the bottom of the view.
@@ -453,7 +453,7 @@ Ext.define('Ext.view.NodeCache', {
                     for (i = removeStart; i &lt;= me.endIndex; i++) {
                         el = elements[i];
                         delete elements[i];
-                        removedRecords.push(store.getByInternalId(el.getAttribute('data-recordId')));
+                        removedRecords.push(store.getByInternalId(el.getAttribute(&#39;data-recordId&#39;)));
                         removedItems.push(el);
                     }
                 } else {
@@ -461,11 +461,11 @@ Ext.define('Ext.view.NodeCache', {
                         el = elements[i];
                         delete elements[i];
                         Ext.removeNode(el);
-                        removedRecords.push(store.getByInternalId(el.getAttribute('data-recordId')));
+                        removedRecords.push(store.getByInternalId(el.getAttribute(&#39;data-recordId&#39;)));
                         removedItems.push(el);
                     }
                 }
-                view.fireItemMutationEvent('itemremove', removedRecords, removeStart, removedItems, view);
+                view.fireItemMutationEvent(&#39;itemremove&#39;, removedRecords, removeStart, removedItems, view);
                 me.endIndex -= removeCount;
             }
 
@@ -482,7 +482,7 @@ Ext.define('Ext.view.NodeCache', {
                 nodeContainer.insertBefore(result.fragment, nodeContainer.firstChild);
 
                 // pass the new DOM to any interested parties
-                view.fireItemMutationEvent('itemadd', newRecords, me.startIndex, children, view);
+                view.fireItemMutationEvent(&#39;itemadd&#39;, newRecords, me.startIndex, children, view);
             }
         }
 
@@ -499,7 +499,7 @@ Ext.define('Ext.view.NodeCache', {
                     for (i = me.startIndex; i &lt; removeEnd; i++) {
                         el = elements[i];
                         delete elements[i];
-                        removedRecords.push(store.getByInternalId(el.getAttribute('data-recordId')));
+                        removedRecords.push(store.getByInternalId(el.getAttribute(&#39;data-recordId&#39;)));
                         removedItems.push(el);
                     }
                 } else {
@@ -507,11 +507,11 @@ Ext.define('Ext.view.NodeCache', {
                         el = elements[i];
                         delete elements[i];
                         Ext.removeNode(el);
-                        removedRecords.push(store.getByInternalId(el.getAttribute('data-recordId')));
+                        removedRecords.push(store.getByInternalId(el.getAttribute(&#39;data-recordId&#39;)));
                         removedItems.push(el);
                     }
                 }
-                view.fireItemMutationEvent('itemremove', removedRecords, me.startIndex, removedItems, view);
+                view.fireItemMutationEvent(&#39;itemremove&#39;, removedRecords, me.startIndex, removedItems, view);
                 me.startIndex = removeEnd;
             }
 
@@ -525,7 +525,7 @@ Ext.define('Ext.view.NodeCache', {
             nodeContainer.appendChild(result.fragment);
 
             // pass the new DOM to any interested parties
-            view.fireItemMutationEvent('itemadd', newRecords, me.endIndex + 1, children, view);
+            view.fireItemMutationEvent(&#39;itemadd&#39;, newRecords, me.endIndex + 1, children, view);
         }
         // Keep count consistent.
         me.count = me.endIndex - me.startIndex + 1;

@@ -22,16 +22,16 @@
  * This class is deprecated.  Please use the Ext.dom.Element api to attach listeners to
  * DOM Elements.  For example:
  * 
- *     var element = Ext.get('myId');
+ *     var element = Ext.get(&#39;myId&#39;);
  *     
- *     element.on('click', function(e) {
+ *     element.on(&#39;click&#39;, function(e) {
  *         // event handling logic here
  *     });
  *
  * @singleton
  * @deprecated 5.0.0
  */
-Ext.define('Ext.EventManager', {
+Ext.define(&#39;Ext.EventManager&#39;, {
     singleton: true,
 
 <span id='Ext-EventManager-property-mouseLeaveRe'>    mouseLeaveRe: /(mouseout|mouseleave)/,
@@ -47,7 +47,7 @@ Ext.define('Ext.EventManager', {
      * @param {String/Ext.dom.Element/HTMLElement/Window} el The html element or id to assign the event handler to.
      *
      * @param {String} eventName The name of the event to listen for.
-     * May also be an object who's property names are event names.
+     * May also be an object who&#39;s property names are event names.
      *
      * @param {Function/String} [handler] The handler function the event invokes. A String parameter
      * is assumed to be method name in `scope` object, or Element object if no scope is provided.
@@ -94,14 +94,14 @@ Ext.define('Ext.EventManager', {
      * @param {Function} fn      The handler function the window resize event invokes.
      * @param {Object}   scope   The scope (&lt;code&gt;this&lt;/code&gt; reference) in which the handler function executes. Defaults to the browser window.
      * @param {Boolean}  [options] Options object as passed to {@link Ext.dom.Element#addListener}
-     * @deprecated 5.0.0 Use {@link Ext#method-on Ext.on}('resize', fn) to attach a window resize listener.
+     * @deprecated 5.0.0 Use {@link Ext#method-on Ext.on}(&#39;resize&#39;, fn) to attach a window resize listener.
      */
     onWindowResize: function(fn, scope, options) {
         //&lt;debug&gt;
         Ext.log.warn(&quot;Ext.EventManager is deprecated. &quot; +
-            &quot;Use Ext.on('resize', fn) to attach a window resize listener.&quot;);
+            &quot;Use Ext.on(&#39;resize&#39;, fn) to attach a window resize listener.&quot;);
         //&lt;/debug&gt;
-        Ext.GlobalEvents.on('resize', fn, scope, options);
+        Ext.GlobalEvents.on(&#39;resize&#39;, fn, scope, options);
     },
 
 <span id='Ext-EventManager-method-onWindowUnload'>    /**
@@ -114,9 +114,9 @@ Ext.define('Ext.EventManager', {
     onWindowUnload: function(fn, scope, options) {
         //&lt;debug&gt;
         Ext.log.warn(&quot;Ext.EventManager is deprecated. &quot; +
-            &quot;Use Ext.getWin().on('unload', fn) to attach a window unload listener.&quot;);
+            &quot;Use Ext.getWin().on(&#39;unload&#39;, fn) to attach a window unload listener.&quot;);
         //&lt;/debug&gt;
-        Ext.getWin().on('unload', fn, scope, options);
+        Ext.getWin().on(&#39;unload&#39;, fn, scope, options);
     },
 
 <span id='Ext-EventManager-method-purgeElement'>    /**
@@ -181,9 +181,9 @@ Ext.define('Ext.EventManager', {
     removeResizeListener: function(fn, scope) {
         //&lt;debug&gt;
         Ext.log.warn(&quot;Ext.EventManager is deprecated. &quot; +
-            &quot;Use Ext.on('resize', fn) to detach a window resize listener.&quot;);
+            &quot;Use Ext.on(&#39;resize&#39;, fn) to detach a window resize listener.&quot;);
         //&lt;/debug&gt;
-        Ext.GlobalEvents.un('resize', fn, scope);
+        Ext.GlobalEvents.un(&#39;resize&#39;, fn, scope);
     },
 
 <span id='Ext-EventManager-method-removeUnloadListener'>    /**
@@ -195,9 +195,9 @@ Ext.define('Ext.EventManager', {
     removeUnloadListener: function(fn, scope) {
         //&lt;debug&gt;
         Ext.log.warn(&quot;Ext.EventManager is deprecated. &quot; +
-            &quot;Use Ext.getWin().un('unload', fn) to detach a window unload listener.&quot;);
+            &quot;Use Ext.getWin().un(&#39;unload&#39;, fn) to detach a window unload listener.&quot;);
         //&lt;/debug&gt;
-        Ext.getWin().un('unload', fn, scope);
+        Ext.getWin().un(&#39;unload&#39;, fn, scope);
     },
 
 <span id='Ext-EventManager-method-stopEvent'>    /**
@@ -381,7 +381,7 @@ Ext.define('Ext.EventManager', {
             if (node) {
                 // work around firefox bug, https://bugzilla.mozilla.org/show_bug.cgi?id=101197
                 var s = HTMLElement.prototype.toString.call(node);
-                if (s !== '[xpconnect wrapped native prototype]' &amp;&amp; s !== '[object XULElement]') {
+                if (s !== &#39;[xpconnect wrapped native prototype]&#39; &amp;&amp; s !== &#39;[object XULElement]&#39;) {
                     return node.nodeType === 3 ? node.parentNode: node;
                 }
             }

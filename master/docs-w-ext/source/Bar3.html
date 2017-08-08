@@ -21,8 +21,8 @@
  * @private
  * @abstract
  */
-Ext.define('Ext.panel.Bar', {
-    extend: 'Ext.container.Container',
+Ext.define(&#39;Ext.panel.Bar&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
 
 <span id='Ext-panel-Bar-property-vertical'>    vertical: false,
 </span>
@@ -35,16 +35,16 @@ Ext.define('Ext.panel.Bar', {
 </span>        var me = this,
             vertical = me.vertical;
 
-        me.dock = me.dock || (vertical ? 'left' : 'top');
+        me.dock = me.dock || (vertical ? &#39;left&#39; : &#39;top&#39;);
 
         me.layout = Ext.apply(vertical ? {
-            type: 'vbox',
-            align: 'middle',
-            alignRoundingMethod: 'ceil'
+            type: &#39;vbox&#39;,
+            align: &#39;middle&#39;,
+            alignRoundingMethod: &#39;ceil&#39;
         } : {
-            type: 'hbox',
-            align: 'middle',
-            alignRoundingMethod: 'floor'
+            type: &#39;hbox&#39;,
+            align: &#39;middle&#39;,
+            alignRoundingMethod: &#39;floor&#39;
         }, me.layout);
 
         this.callParent();
@@ -86,7 +86,7 @@ Ext.define('Ext.panel.Bar', {
             vertical = me.vertical;
             layout = me.layout;
             layout.setVertical(vertical);
-            layout.setAlignRoundingMethod(vertical ? 'ceil' : 'floor');
+            layout.setAlignRoundingMethod(vertical ? &#39;ceil&#39; : &#39;floor&#39;);
 
             Ext.resumeLayouts(true);
         }
@@ -95,7 +95,7 @@ Ext.define('Ext.panel.Bar', {
 <span id='Ext-panel-Bar-property-privates'>    privates: {
 </span>        clearOrientation: function() {
             this.removeClsWithUI([
-                this.vertical ? 'vertical' : 'horizontal',
+                this.vertical ? &#39;vertical&#39; : &#39;horizontal&#39;,
                 this.getDockName()
             ]);
         },
@@ -110,7 +110,7 @@ Ext.define('Ext.panel.Bar', {
                 vertical = (me.vertical = (dock ? dock in me._verticalSides : me.vertical));
 
             me.addClsWithUI([
-                vertical ? 'vertical' : 'horizontal',
+                vertical ? &#39;vertical&#39; : &#39;horizontal&#39;,
                 me.getDockName()
             ]);
         }

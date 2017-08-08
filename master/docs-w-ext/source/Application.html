@@ -37,11 +37,11 @@
  *
  * @class BasiGX.util.Application
  */
-Ext.define('BasiGX.util.Application', {
+Ext.define(&#39;BasiGX.util.Application&#39;, {
 
     requires: [
-        'BasiGX.util.Layer',
-        'BasiGX.util.Map'
+        &#39;BasiGX.util.Layer&#39;,
+        &#39;BasiGX.util.Map&#39;
     ],
 
     statics: {
@@ -85,12 +85,12 @@ Ext.define('BasiGX.util.Application', {
             var visibleLayerRoutingIds = [];
 
             Ext.each(visibleLayers, function(layer) {
-                visibleLayerRoutingIds.push(layer.get('routingId'));
+                visibleLayerRoutingIds.push(layer.get(&#39;routingId&#39;));
             });
 
-            var hash = 'center/' + center +
-                       '|zoom/' + zoom +
-                       '|layers/' + visibleLayerRoutingIds.toString();
+            var hash = &#39;center/&#39; + center +
+                       &#39;|zoom/&#39; + zoom +
+                       &#39;|layers/&#39; + visibleLayerRoutingIds.toString();
 
             return hash;
         }

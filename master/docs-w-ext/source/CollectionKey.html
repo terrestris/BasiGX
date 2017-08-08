@@ -17,14 +17,14 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-util-CollectionKey'>/**
 </span> * Maintains an additional key map for an `Ext.util.Collection`. Instances of this class
- * are seldom created manually. Rather they are created by the `Ext.util.Collection' when
+ * are seldom created manually. Rather they are created by the `Ext.util.Collection&#39; when
  * given an `extraKeys` config.
  *
  * @since 5.0.0
  */
-Ext.define('Ext.util.CollectionKey', {
+Ext.define(&#39;Ext.util.CollectionKey&#39;, {
     mixins: [
-        'Ext.mixin.Identifiable'
+        &#39;Ext.mixin.Identifiable&#39;
     ],
 <span id='Ext-util-CollectionKey-property-isCollectionKey'>    isCollectionKey: true,
 </span>
@@ -44,7 +44,7 @@ Ext.define('Ext.util.CollectionKey', {
          *      new Ext.util.Collection({
          *          keys: {
          *              byName: {
-         *                  keyFn: 'getName' // each item has a &quot;getName&quot; method
+         *                  keyFn: &#39;getName&#39; // each item has a &quot;getName&quot; method
          *              }
          *          }
          *      });
@@ -71,7 +71,7 @@ Ext.define('Ext.util.CollectionKey', {
          *
          *      new Ext.util.Collection({
          *          keys: {
-         *              byName: 'name'
+         *              byName: &#39;name&#39;
          *          }
          *      });
          *
@@ -80,12 +80,12 @@ Ext.define('Ext.util.CollectionKey', {
          *      new Ext.util.Collection({
          *          keys: {
          *              byName: {
-         *                  property: 'name'
+         *                  property: &#39;name&#39;
          *              }
          *          }
          *      });
          *
-         *      var item = collection.byName.get('fooname');
+         *      var item = collection.byName.get(&#39;fooname&#39;);
          */
         property: null,
 
@@ -97,13 +97,13 @@ Ext.define('Ext.util.CollectionKey', {
          *      new Ext.util.Collection({
          *          keys: {
          *              byName: {
-         *                  property: 'name',
-         *                  rootProperty: 'data'
+         *                  property: &#39;name&#39;,
+         *                  rootProperty: &#39;data&#39;
          *              }
          *          }
          *      });
          *
-         *      var item = collection.byName.get('fooname');
+         *      var item = collection.byName.get(&#39;fooname&#39;);
          */
         rootProperty: null,
 
@@ -146,7 +146,7 @@ Ext.define('Ext.util.CollectionKey', {
 
         //&lt;debug&gt;
         if (!Ext.isFunction(this.getKey)) {
-            Ext.raise('CollectionKey requires a keyFn or property config');
+            Ext.raise(&#39;CollectionKey requires a keyFn or property config&#39;);
         }
         //&lt;/debug&gt;
     },
@@ -187,9 +187,9 @@ Ext.define('Ext.util.CollectionKey', {
      *
      * To iterate the indices of all items with a matching (not `unique`) key:
      *
-     *      for (index = collection.byName.indexOf('foo');
+     *      for (index = collection.byName.indexOf(&#39;foo&#39;);
      *              index &gt;= 0;
-     *              index = collection.byName.indexOf('foo', index)) {
+     *              index = collection.byName.indexOf(&#39;foo&#39;, index)) {
      *          // process item at &quot;index&quot;
      *      }
      *
@@ -266,8 +266,8 @@ Ext.define('Ext.util.CollectionKey', {
             } else if (bucket) {
                 //&lt;debug&gt;
                 if (me.getUnique() &amp;&amp; bucket !== item) {
-                    Ext.raise('Incorrect oldKey &quot;' + oldKey +
-                                    '&quot; for item with newKey &quot;' + me.getKey(item) + '&quot;');
+                    Ext.raise(&#39;Incorrect oldKey &quot;&#39; + oldKey +
+                                    &#39;&quot; for item with newKey &quot;&#39; + me.getKey(item) + &#39;&quot;&#39;);
                 }
                 //&lt;/debug&gt;
 

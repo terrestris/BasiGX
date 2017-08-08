@@ -18,8 +18,8 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-runner-CssAnimation'>/**
 </span> * @private
  */
-Ext.define('Ext.fx.runner.CssAnimation', {
-    extend: 'Ext.fx.runner.Css',
+Ext.define(&#39;Ext.fx.runner.CssAnimation&#39;, {
+    extend: &#39;Ext.fx.runner.Css&#39;,
 
 <span id='Ext-fx-runner-CssAnimation-method-constructor'>    constructor: function() {
 </span>        this.runningAnimationsMap = {};
@@ -39,8 +39,8 @@ Ext.define('Ext.fx.runner.CssAnimation', {
 </span>        this.listenersAttached = true;
 
         Ext.getWin().on({
-            animationstart: 'onAnimationStart',
-            animationend: 'onAnimationEnd',
+            animationstart: &#39;onAnimationStart&#39;,
+            animationend: &#39;onAnimationEnd&#39;,
             scope: this
         });
     },
@@ -96,7 +96,7 @@ Ext.define('Ext.fx.runner.CssAnimation', {
     },
 
 <span id='Ext-fx-runner-CssAnimation-method-generateAnimationId'>    generateAnimationId: function() {
-</span>        return 'animation-' + (++this.uniqueId);
+</span>        return &#39;animation-&#39; + (++this.uniqueId);
     },
 
 <span id='Ext-fx-runner-CssAnimation-method-run'>    run: function(animations) {
@@ -158,18 +158,18 @@ Ext.define('Ext.fx.runner.CssAnimation', {
             }
 
             data[elementId] = {
-                'animation-name'            : names,
-                'animation-duration'        : durations,
-                'animation-timing-function' : easings,
-                'animation-delay'           : delays,
-                'animation-direction'       : directions,
-                'animation-iteration-count' : iterations
+                &#39;animation-name&#39;            : names,
+                &#39;animation-duration&#39;        : durations,
+                &#39;animation-timing-function&#39; : easings,
+                &#39;animation-delay&#39;           : delays,
+                &#39;animation-direction&#39;       : directions,
+                &#39;animation-iteration-count&#39; : iterations
             };
 
 //            Ext.apply(data[elementId], animation.origin);
 
             if (animation.preserveEndState) {
-                elementEndStates[elementId] = states['100%'];
+                elementEndStates[elementId] = states[&#39;100%&#39;];
             }
         }
 
@@ -184,7 +184,7 @@ Ext.define('Ext.fx.runner.CssAnimation', {
         styleSheet = this.getStyleSheet();
         rules = styleSheet.cssRules;
         rulesLength = rules.length;
-        styleSheet.insertRule('@' + this.vendorPrefix + 'keyframes ' + name + '{}', rulesLength);
+        styleSheet.insertRule(&#39;@&#39; + this.vendorPrefix + &#39;keyframes &#39; + name + &#39;{}&#39;, rulesLength);
 
         keyframesRule = rules[rulesLength];
 
@@ -200,10 +200,10 @@ Ext.define('Ext.fx.runner.CssAnimation', {
                 value = this.formatValue(properties[key], key);
                 key = this.formatName(key);
 
-                styles.push(key + ':' + value);
+                styles.push(key + &#39;:&#39; + value);
             }
 
-            keyframesRule.insertRule(percentage + '{' + styles.join(';') + '}', rulesLength);
+            keyframesRule.insertRule(percentage + &#39;{&#39; + styles.join(&#39;;&#39;) + &#39;}&#39;, rulesLength);
         }
 
         return this;

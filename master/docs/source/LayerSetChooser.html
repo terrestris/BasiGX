@@ -35,14 +35,14 @@
  *
  * Used to show different sets of layers to swap the thematic focus of the
  * application, e.g. by changing the visibility of layers.
- * The events fired ('itemclick' and 'itemdblclick') will hand over the
+ * The events fired (&#39;itemclick&#39; and &#39;itemdblclick&#39;) will hand over the
  * selected record
  *
  * Example:
  *
  *     {
- *         xtype: 'basigx-panel-layersetchooser',
- *         layerSetUrl: 'classic/resources/layerset.json',
+ *         xtype: &#39;basigx-panel-layersetchooser&#39;,
+ *         layerSetUrl: &#39;classic/resources/layerset.json&#39;,
  *         listeners: {
  *             itemclick: this.handleLayerSetClick
  *         }
@@ -50,39 +50,39 @@
  *
  * @class BasiGX.view.panel.LayerSetChooser
  */
-Ext.define('BasiGX.view.panel.LayerSetChooser', {
-    extend: 'Ext.panel.Panel',
-    xtype: 'basigx-panel-layersetchooser',
+Ext.define(&#39;BasiGX.view.panel.LayerSetChooser&#39;, {
+    extend: &#39;Ext.panel.Panel&#39;,
+    xtype: &#39;basigx-panel-layersetchooser&#39;,
 
     requires: [
-        'BasiGX.view.view.LayerSet',
-        'Ext.app.ViewModel'
+        &#39;BasiGX.view.view.LayerSet&#39;,
+        &#39;Ext.app.ViewModel&#39;
     ],
 
 <span id='BasiGX-view-panel-LayerSetChooser-property-viewModel'>    viewModel: {
 </span>        data: {
-            title: 'Themen Auswahl',
-            filterFieldLabel: 'Filter',
-            documentation: '&lt;h2&gt;Themen Auswahl&lt;/h2&gt;• In diesem Dialog ' +
-                'können Sie auf vordefinierte Zusammenstellungen von ' +
-                'Kartenthemen zurückgreifen, um diese mit nur einem Klick in ' +
-                'der Karte darzustellen'
+            title: &#39;Themen Auswahl&#39;,
+            filterFieldLabel: &#39;Filter&#39;,
+            documentation: &#39;&lt;h2&gt;Themen Auswahl&lt;/h2&gt;• In diesem Dialog &#39; +
+                &#39;können Sie auf vordefinierte Zusammenstellungen von &#39; +
+                &#39;Kartenthemen zurückgreifen, um diese mit nur einem Klick in &#39; +
+                &#39;der Karte darzustellen&#39;
         }
     },
 
 <span id='BasiGX-view-panel-LayerSetChooser-property-bind'>    bind: {
-</span>        title: '{title}'
+</span>        title: &#39;{title}&#39;
     },
 
 <span id='BasiGX-view-panel-LayerSetChooser-property-region'>    /**
 </span>     *
      */
-    region: 'center',
+    region: &#39;center&#39;,
 
 <span id='BasiGX-view-panel-LayerSetChooser-property-layout'>    /**
 </span>     *
      */
-    layout: 'fit',
+    layout: &#39;fit&#39;,
 
 <span id='BasiGX-view-panel-LayerSetChooser-property-minWidth'>    /**
 </span>     *
@@ -97,7 +97,7 @@ Ext.define('BasiGX.view.panel.LayerSetChooser', {
 <span id='BasiGX-view-panel-LayerSetChooser-property-cls'>    /**
 </span>     *
      */
-    cls: 'img-chooser-dlg',
+    cls: &#39;img-chooser-dlg&#39;,
 
 <span id='BasiGX-view-panel-LayerSetChooser-property-layerSetUrl'>    /**
 </span>     *
@@ -106,7 +106,7 @@ Ext.define('BasiGX.view.panel.LayerSetChooser', {
 
 <span id='BasiGX-view-panel-LayerSetChooser-property-layerSetData'>    /**
 </span>     * JSON-object to be passed to the automatically created
-     * 'basigx-view-layerset'.
+     * &#39;basigx-view-layerset&#39;.
      * Only has an effect if this.items is empty.
      */
     layerSetData: null,
@@ -119,19 +119,19 @@ Ext.define('BasiGX.view.panel.LayerSetChooser', {
 <span id='BasiGX-view-panel-LayerSetChooser-property-scrollable'>    /**
 </span>     *
      */
-    scrollable: 'y',
+    scrollable: &#39;y&#39;,
 
 <span id='BasiGX-view-panel-LayerSetChooser-property-bbar'>    /**
 </span>     *
      */
     bbar: [
         {
-            xtype: 'textfield',
-            name: 'filter',
+            xtype: &#39;textfield&#39;,
+            name: &#39;filter&#39;,
             bind: {
-                fieldLabel: '{filterFieldLabel}'
+                fieldLabel: &#39;{filterFieldLabel}&#39;
             },
-            labelAlign: 'left',
+            labelAlign: &#39;left&#39;,
             labelWidth: 45,
             flex: 1
         }
@@ -145,7 +145,7 @@ Ext.define('BasiGX.view.panel.LayerSetChooser', {
         if (Ext.isEmpty(this.items)) {
 
             this.items = [{
-                xtype: 'basigx-view-layerset',
+                xtype: &#39;basigx-view-layerset&#39;,
                 scrollable: true,
                 layerSetUrl: this.layerSetUrl,
                 layerSetData: this.layerSetData,
@@ -156,14 +156,14 @@ Ext.define('BasiGX.view.panel.LayerSetChooser', {
         this.callParent(arguments);
 
         // add listeners
-        this.down('basigx-view-layerset').on(
-            'select', this.onLayerSetSelect);
-        this.down('basigx-view-layerset').on(
-            'selectionchange', this.onLayerSetSelectionchange);
-        this.down('basigx-view-layerset').on(
-            'itemclick', this.onLayerSetClick);
-        this.down('basigx-view-layerset').on(
-            'itemdblclick', this.onLayerSetDblClick);
+        this.down(&#39;basigx-view-layerset&#39;).on(
+            &#39;select&#39;, this.onLayerSetSelect);
+        this.down(&#39;basigx-view-layerset&#39;).on(
+            &#39;selectionchange&#39;, this.onLayerSetSelectionchange);
+        this.down(&#39;basigx-view-layerset&#39;).on(
+            &#39;itemclick&#39;, this.onLayerSetClick);
+        this.down(&#39;basigx-view-layerset&#39;).on(
+            &#39;itemdblclick&#39;, this.onLayerSetDblClick);
     },
 
 
@@ -179,8 +179,8 @@ Ext.define('BasiGX.view.panel.LayerSetChooser', {
      *     was registered.
      */
     onLayerSetSelect: function(view, rec, index, opts) {
-        this.up('basigx-panel-layersetchooser').fireEvent(
-            'select', view, rec, index, opts);
+        this.up(&#39;basigx-panel-layersetchooser&#39;).fireEvent(
+            &#39;select&#39;, view, rec, index, opts);
     },
 
 <span id='BasiGX-view-panel-LayerSetChooser-method-onLayerSetSelectionchange'>    /**
@@ -194,8 +194,8 @@ Ext.define('BasiGX.view.panel.LayerSetChooser', {
      *     was registered.
      */
     onLayerSetSelectionchange: function(view, selected, eOpts) {
-        this.up('basigx-panel-layersetchooser').fireEvent(
-            'selectionchange', view, selected, eOpts);
+        this.up(&#39;basigx-panel-layersetchooser&#39;).fireEvent(
+            &#39;selectionchange&#39;, view, selected, eOpts);
     },
 
 <span id='BasiGX-view-panel-LayerSetChooser-method-onLayerSetClick'>    /**
@@ -205,15 +205,15 @@ Ext.define('BasiGX.view.panel.LayerSetChooser', {
      *
      * @param {BasiGX.view.view.LayerSet} view The LayerSet view.
      * @param {Ext.data.Model} rec The clicked record (layerset).
-     * @param {HTMLElement} item The item's element.
-     * @param {Number} index The item's index.
+     * @param {HTMLElement} item The item&#39;s element.
+     * @param {Number} index The item&#39;s index.
      * @param {Object} evt The raw event object.
      * @param {Object} opts The options object passed when the event handler
      *     was registered.
      */
     onLayerSetClick: function(view, rec, item, index, evt, opts) {
-        view.up('basigx-panel-layersetchooser').fireEvent(
-            'itemclick', view, rec, item, index, evt, opts);
+        view.up(&#39;basigx-panel-layersetchooser&#39;).fireEvent(
+            &#39;itemclick&#39;, view, rec, item, index, evt, opts);
     },
 
 <span id='BasiGX-view-panel-LayerSetChooser-method-onLayerSetDblClick'>    /**
@@ -223,15 +223,15 @@ Ext.define('BasiGX.view.panel.LayerSetChooser', {
      *
      * @param {BasiGX.view.view.LayerSet} view The LayerSet view.
      * @param {Ext.data.Model} rec The double-clicked record (layerset).
-     * @param {HTMLElement} item The item's element.
-     * @param {Number} index The item's index.
+     * @param {HTMLElement} item The item&#39;s element.
+     * @param {Number} index The item&#39;s index.
      * @param {Object} evt The raw event object.
      * @param {Object} opts The options object passed when the event handler
      *     was registered.
      */
     onLayerSetDblClick: function(view, rec, item, index, evt, opts) {
-        view.up('basigx-panel-layersetchooser').fireEvent(
-            'itemdblclick', view, rec, item, index, evt, opts);
+        view.up(&#39;basigx-panel-layersetchooser&#39;).fireEvent(
+            &#39;itemdblclick&#39;, view, rec, item, index, evt, opts);
     },
 
 <span id='BasiGX-view-panel-LayerSetChooser-method-filterLayerSetsByText'>    /**
@@ -245,10 +245,10 @@ Ext.define('BasiGX.view.panel.LayerSetChooser', {
      *     `Ext.util.Observable.addListener`.
      */
     filterLayerSetsByText: function(textfield, newVal, oldval, listener) {
-        var layerProfileView = listener.scope.down('basigx-view-layerset');
+        var layerProfileView = listener.scope.down(&#39;basigx-view-layerset&#39;);
         var store = layerProfileView.getStore();
         store.getFilters().replaceAll({
-            property: 'name',
+            property: &#39;name&#39;,
             anyMatch: true,
             value: newVal
         });

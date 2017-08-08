@@ -37,12 +37,12 @@
  *
  * @class BasiGX.view.button.ZoomIn
  */
-Ext.define('BasiGX.view.button.ZoomIn', {
-    extend: 'BasiGX.view.button.Base',
-    xtype: 'basigx-button-zoomin',
+Ext.define(&#39;BasiGX.view.button.ZoomIn&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-zoomin&#39;,
     requires: [
-        'Ext.app.ViewModel',
-        'BasiGX.util.Map'
+        &#39;Ext.app.ViewModel&#39;,
+        &#39;BasiGX.util.Map&#39;
     ],
 
 <span id='BasiGX-view-button-ZoomIn-property-viewModel'>    /**
@@ -50,15 +50,15 @@ Ext.define('BasiGX.view.button.ZoomIn', {
      */
     viewModel: {
         data: {
-            tooltip: 'Hineinzoomen',
+            tooltip: &#39;Hineinzoomen&#39;,
             text: null,
-            documentation: '&lt;h2&gt;Hineinzoomen&lt;/h2&gt;• Ein Klick auf den Button ' +
-                'vergrößert die Karte um eine Zoomstufe.'
+            documentation: &#39;&lt;h2&gt;Hineinzoomen&lt;/h2&gt;• Ein Klick auf den Button &#39; +
+                &#39;vergrößert die Karte um eine Zoomstufe.&#39;
         }
     },
 
 <span id='BasiGX-view-button-ZoomIn-cfg-bind'>    bind: {
-</span>        text: '{text}'
+</span>        text: &#39;{text}&#39;
     },
 
 <span id='BasiGX-view-button-ZoomIn-property-olMap'>    /**
@@ -70,8 +70,8 @@ Ext.define('BasiGX.view.button.ZoomIn', {
 </span>     * The icons the button should use.
      * Classic Toolkit uses glyphs, modern toolkit uses html
      */
-    glyph: 'xf00e@FontAwesome',
-<span id='BasiGX-view-button-ZoomIn-cfg-html'>    html: '&lt;i class=&quot;fa fa-search-plus fa-2x&quot;&gt;&lt;/i&gt;',
+    glyph: &#39;xf00e@FontAwesome&#39;,
+<span id='BasiGX-view-button-ZoomIn-cfg-html'>    html: &#39;&lt;i class=&quot;fa fa-search-plus fa-2x&quot;&gt;&lt;/i&gt;&#39;,
 </span>
 <span id='BasiGX-view-button-ZoomIn-property-liveDemoConfig'>    /**
 </span>     * A config object to show this tool in action (live demo) when using the
@@ -79,10 +79,10 @@ Ext.define('BasiGX.view.button.ZoomIn', {
      */
     liveDemoConfig: [
         {
-            moveMouseTo: 'basigx-button-zoomin'
+            moveMouseTo: &#39;basigx-button-zoomin&#39;
         },
         {
-            clickOnButton: 'basigx-button-zoomin'
+            clickOnButton: &#39;basigx-button-zoomin&#39;
         }
     ],
 

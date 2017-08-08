@@ -20,8 +20,8 @@
  * A mixin for providing query related methods for {@link Ext.ComponentQuery} for classes that
  * implement getRefItems.
  */
-Ext.define('Ext.mixin.Queryable', {
-<span id='Ext-mixin-Queryable-property-mixinId'>    mixinId: 'queryable',
+Ext.define(&#39;Ext.mixin.Queryable&#39;, {
+<span id='Ext-mixin-Queryable-property-mixinId'>    mixinId: &#39;queryable&#39;,
 </span>
 <span id='Ext-mixin-Queryable-property-isQueryable'>    isQueryable: true,
 </span>    
@@ -33,7 +33,7 @@ Ext.define('Ext.mixin.Queryable', {
      * @return {Ext.Component[]} Components which matched the selector
      */
     query : function(selector) {
-        selector = selector || '*';
+        selector = selector || &#39;*&#39;;
         return Ext.ComponentQuery.query(selector, this.getQueryRoot());
     },
     
@@ -65,7 +65,7 @@ Ext.define('Ext.mixin.Queryable', {
     
 <span id='Ext-mixin-Queryable-method-queryById'>    /**
 </span>     * Finds a component at any level under this container matching the id/itemId.
-     * This is a shorthand for calling ct.down('#' + id);
+     * This is a shorthand for calling ct.down(&#39;#&#39; + id);
      * @param {String} id The id to find
      * @return {Ext.Component} The matching id, null if not found
      */
@@ -111,7 +111,7 @@ Ext.define('Ext.mixin.Queryable', {
             return this.matchById(this.getRefItems(true), selector.getItemId());
         }
 
-        selector = selector || '';
+        selector = selector || &#39;&#39;;
         return this.query(selector)[0] || null;
     },
     
@@ -129,7 +129,7 @@ Ext.define('Ext.mixin.Queryable', {
      * @param {Function} fn The function to call. Return `false` to aborl the traverse.
      * @param {Object} fn.node The node being visited.
      * @param {Object} [scope] The context (`this` reference) in which the function is executed.
-     * @param {Array} [extraArgs] A set of arguments to be appended to the function's argument list to pass down extra data known to the caller
+     * @param {Array} [extraArgs] A set of arguments to be appended to the function&#39;s argument list to pass down extra data known to the caller
      * **after** the node being visited.
      */
     visitPreOrder: function(selector, fn, scope, extraArgs) {
@@ -150,7 +150,7 @@ Ext.define('Ext.mixin.Queryable', {
      * @param {Function} fn The function to call. Return `false` to aborl the traverse.
      * @param {Object} fn.node The node being visited.
      * @param {Object} [scope] The context (`this` reference) in which the function is executed.
-     * @param {Array} [extraArgs] A set of arguments to be appended to the function's argument list to pass down extra data known to the caller
+     * @param {Array} [extraArgs] A set of arguments to be appended to the function&#39;s argument list to pass down extra data known to the caller
      * **after** the node being visited.
      */
     visitPostOrder: function(selector, fn, scope, extraArgs) {

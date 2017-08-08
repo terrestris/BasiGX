@@ -18,10 +18,10 @@
   <pre class="prettyprint lang-js"><span id='Ext-grid-header-DragZone'>/**
 </span> * @private
  */
-Ext.define('Ext.grid.header.DragZone', {
-    extend: 'Ext.dd.DragZone',
-<span id='Ext-grid-header-DragZone-property-colHeaderSelector'>    colHeaderSelector: '.' + Ext.baseCSSPrefix + 'column-header',
-</span><span id='Ext-grid-header-DragZone-property-colInnerSelector'>    colInnerSelector: '.' + Ext.baseCSSPrefix + 'column-header-inner',
+Ext.define(&#39;Ext.grid.header.DragZone&#39;, {
+    extend: &#39;Ext.dd.DragZone&#39;,
+<span id='Ext-grid-header-DragZone-property-colHeaderSelector'>    colHeaderSelector: &#39;.&#39; + Ext.baseCSSPrefix + &#39;column-header&#39;,
+</span><span id='Ext-grid-header-DragZone-property-colInnerSelector'>    colInnerSelector: &#39;.&#39; + Ext.baseCSSPrefix + &#39;column-header-inner&#39;,
 </span><span id='Ext-grid-header-DragZone-property-maxProxyWidth'>    maxProxyWidth: 120,
 </span>
 <span id='Ext-grid-header-DragZone-method-constructor'>    constructor: function(headerCt) {
@@ -31,11 +31,11 @@ Ext.define('Ext.grid.header.DragZone', {
         me.ddGroup =  me.getDDGroup();
         me.autoGroup = true;
         me.callParent([headerCt.el]);
-        me.proxy.el.addCls(Ext.baseCSSPrefix + 'grid-col-dd');
+        me.proxy.el.addCls(Ext.baseCSSPrefix + &#39;grid-col-dd&#39;);
     },
     
 <span id='Ext-grid-header-DragZone-method-getDDGroup'>    getDDGroup: function() {
-</span>        return 'header-dd-zone-' + this.headerCt.up('[scrollerOwner]').id;
+</span>        return &#39;header-dd-zone-&#39; + this.headerCt.up(&#39;[scrollerOwner]&#39;).id;
     },
 
 <span id='Ext-grid-header-DragZone-method-getDragData'>    getDragData: function(e) {
@@ -47,8 +47,8 @@ Ext.define('Ext.grid.header.DragZone', {
             if (header) {
                 headerCmp = Ext.getCmp(header.id);
                 if (!this.headerCt.dragging &amp;&amp; headerCmp.draggable &amp;&amp; !(headerCmp.isAtStartEdge(e) || headerCmp.isAtEndEdge(e))) {
-                    ddel = document.createElement('div');
-                    ddel.role = 'presentation';
+                    ddel = document.createElement(&#39;div&#39;);
+                    ddel.role = &#39;presentation&#39;;
                     ddel.innerHTML = headerCmp.text;
                     return {
                         ddel: ddel,

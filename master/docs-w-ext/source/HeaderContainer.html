@@ -17,14 +17,14 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-grid-locking-HeaderContainer'>/**
 </span> * Private class which acts as a HeaderContainer for the Lockable which aggregates all columns
- * from both sides of the Lockable. It is never rendered, it's just used to interrogate the
+ * from both sides of the Lockable. It is never rendered, it&#39;s just used to interrogate the
  * column collection.
  * @private
  */
-Ext.define('Ext.grid.locking.HeaderContainer', {
-    extend: 'Ext.grid.header.Container',
+Ext.define(&#39;Ext.grid.locking.HeaderContainer&#39;, {
+    extend: &#39;Ext.grid.header.Container&#39;,
     requires: [
-        'Ext.grid.ColumnManager'
+        &#39;Ext.grid.ColumnManager&#39;
     ],
 
 <span id='Ext-grid-locking-HeaderContainer-property-headerCtRelayEvents'>    headerCtRelayEvents: [
@@ -161,8 +161,8 @@ Ext.define('Ext.grid.locking.HeaderContainer', {
         }
         lockedCount = lockedHeaderCt.items.items.length;
 
-        // We must now restore state in each side's HeaderContainer.
-        // This means passing the state down into each side's applyColumnState
+        // We must now restore state in each side&#39;s HeaderContainer.
+        // This means passing the state down into each side&#39;s applyColumnState
         // to get sortable, hidden and width states restored.
         // We must ensure that the index on the normal side is zero based.
         for (i = 0; i &lt; length; i++) {
@@ -173,7 +173,7 @@ Ext.define('Ext.grid.locking.HeaderContainer', {
             }
         }
 
-        // Each side must apply individual column's state
+        // Each side must apply individual column&#39;s state
         lockedHeaderCt.applyColumnsState(columnsState, storeState);
         normalHeaderCt.applyColumnsState(columnsState, storeState);
     },

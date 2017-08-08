@@ -19,11 +19,11 @@
 </span> * A mixin that provides common store methods for Ext.data.Store &amp; Ext.data.ChainedStore.
  * @private
  */
-Ext.define('Ext.data.LocalStore', {
-	extend: 'Ext.Mixin',
+Ext.define(&#39;Ext.data.LocalStore&#39;, {
+	extend: &#39;Ext.Mixin&#39;,
 
 <span id='Ext-data-LocalStore-property-mixinConfig'>    mixinConfig: {
-</span>        id: 'localstore'
+</span>        id: &#39;localstore&#39;
     },
 
     config: {
@@ -55,7 +55,7 @@ Ext.define('Ext.data.LocalStore', {
      *
      * Sample usage:
      *
-     *     myStore.add({some: 'data'}, {some: 'other data'});
+     *     myStore.add({some: &#39;data&#39;}, {some: &#39;other data&#39;});
      *
      * Note that if this Store is sorted, the new Model instances will be inserted
      * at the correct point in the Store to maintain the sort order.
@@ -70,7 +70,7 @@ Ext.define('Ext.data.LocalStore', {
 
 <span id='Ext-data-LocalStore-method-constructDataCollection'>    constructDataCollection: function() {
 </span>        var result = new Ext.util.Collection({
-            rootProperty: 'data'
+            rootProperty: &#39;data&#39;
         });
 
         // Add this store as an observer immediately so that we are informed of any
@@ -81,7 +81,7 @@ Ext.define('Ext.data.LocalStore', {
     },
 
 <span id='Ext-data-LocalStore-method-createModel'>    /**
-</span>     * Converts a literal to a model, if it's not a model already
+</span>     * Converts a literal to a model, if it&#39;s not a model already
      * @private
      * @param {Ext.data.Model/Object} record The record to create
      * @return {Ext.data.Model}
@@ -161,7 +161,7 @@ Ext.define('Ext.data.LocalStore', {
             len,
             record, i;
 
-        if (typeof bypassFilters === 'object') {
+        if (typeof bypassFilters === &#39;object&#39;) {
             bypassFilters = bypassFilters.filtered;
         }
 
@@ -185,18 +185,18 @@ Ext.define('Ext.data.LocalStore', {
      * Note that the `filtered` option can also be passed as a separate parameter for
      * compatibility with previous versions.
      *
-     *     var store = Ext.create('Ext.data.Store', {
-     *         fields: ['name'],
+     *     var store = Ext.create(&#39;Ext.data.Store&#39;, {
+     *         fields: [&#39;name&#39;],
      *         data: [{
-     *             name: 'Larry'
+     *             name: &#39;Larry&#39;
      *         }, {
-     *             name: 'Darryl'
+     *             name: &#39;Darryl&#39;
      *         }, {
-     *             name: 'Darryl'
+     *             name: &#39;Darryl&#39;
      *         }]
      *     });
      *
-     *     store.collect('name');
+     *     store.collect(&#39;name&#39;);
      *     // returns [&quot;Larry&quot;, &quot;Darryl&quot;]
      *
      * @param {String} property The property to collect
@@ -210,7 +210,7 @@ Ext.define('Ext.data.LocalStore', {
         var me = this,
             data = me.getData();
         
-        if (typeof allowNull === 'object') {
+        if (typeof allowNull === &#39;object&#39;) {
             bypassFilters = allowNull.filtered;
             allowNull = allowNull.allowNull;
         }
@@ -219,7 +219,7 @@ Ext.define('Ext.data.LocalStore', {
             data = data.getSource();
         }
 
-        return data.collect(dataIndex, 'data', allowNull);
+        return data.collect(dataIndex, &#39;data&#39;, allowNull);
     },
 
 <span id='Ext-data-LocalStore-method-getById'>    /**
@@ -579,7 +579,7 @@ Ext.define('Ext.data.LocalStore', {
             }
             for (i = 0, len = items.length; i &lt; len; ++i) {
                 item = items[i];
-                methodName = 'onSource' + action;
+                methodName = &#39;onSource&#39; + action;
                 if (item[methodName]) {
                     item[methodName].apply(item, args);
                 }
@@ -656,8 +656,8 @@ Ext.define('Ext.data.LocalStore', {
         makeInternalKeyCfg: function() {
             return {
                 byInternalId: {
-                    property: 'internalId',
-                    rootProperty: ''
+                    property: &#39;internalId&#39;,
+                    rootProperty: &#39;&#39;
                 }
             };
         }

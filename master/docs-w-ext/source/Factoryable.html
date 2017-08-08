@@ -23,18 +23,18 @@
  * are created either by directly calling `Ext.Factory.define` or by using the
  * `Ext.mixin.Factoryable` interface.
  *
- * To illustrate, consider the layout system's use of aliases. The `hbox` layout maps to
+ * To illustrate, consider the layout system&#39;s use of aliases. The `hbox` layout maps to
  * the `&quot;layout.hbox&quot;` alias that one typically provides via the `layout` config on a
  * Container.
  *
  * Under the covers this maps to a call like this:
  *
- *      Ext.Factory.layout('hbox');
+ *      Ext.Factory.layout(&#39;hbox&#39;);
  *
  * Or possibly:
  *
  *      Ext.Factory.layout({
- *          type: 'hbox'
+ *          type: &#39;hbox&#39;
  *      });
  *
  * The value of the `layout` config is passed to the `Ext.Factory.layout` function. The
@@ -42,14 +42,14 @@
  *
  * To define this factory directly, one could call `Ext.Factory.define` like so:
  *
- *      Ext.Factory.define('layout', 'auto');  // &quot;layout.auto&quot; is the default type
+ *      Ext.Factory.define(&#39;layout&#39;, &#39;auto&#39;);  // &quot;layout.auto&quot; is the default type
  *
  * @since 5.0.0
  */
 Ext.Factory = function (type) {
     var me = this;
 
-    me.aliasPrefix = type + '.';
+    me.aliasPrefix = type + &#39;.&#39;;
     me.cache = {};
     me.name = type.replace(me.fixNameRe, me.fixNameFn);
     me.type = type;
@@ -70,7 +70,7 @@ Ext.Factory.prototype = {
      *
      * @since 5.0.0
      */
-    defaultProperty: 'type',
+    defaultProperty: &#39;type&#39;,
 
 <span id='Ext-Factory-cfg-defaultType'>    /**
 </span>     * @cfg {String} [defaultType=null]
@@ -88,7 +88,7 @@ Ext.Factory.prototype = {
      *
      * @since 5.0.0
      */
-    instanceProp: 'isInstance',
+    instanceProp: &#39;isInstance&#39;,
 
 <span id='Ext-Factory-cfg-xclass'>    /**
 </span>     * @cfg {String} [xclass=null]
@@ -133,7 +133,7 @@ Ext.Factory.prototype = {
                 return config;
             }
 
-            if (typeof config === 'string') {
+            if (typeof config === &#39;string&#39;) {
                 suffix = config;
                 config = {};
                 config[me.defaultProperty] = suffix;
@@ -158,7 +158,7 @@ Ext.Factory.prototype = {
             }
             //&lt;debug&gt;
             if (!suffix &amp;&amp; !klass) {
-                Ext.raise('No type specified for ' + me.type + '.create');
+                Ext.raise(&#39;No type specified for &#39; + me.type + &#39;.create&#39;);
             }
             //&lt;/debug&gt;
 
@@ -190,15 +190,15 @@ Ext.Factory.prototype = {
 <span id='Ext-Factory-static-method-define'>/**
 </span> * For example, the layout alias family could be defined like this:
  *
- *      Ext.Factory.define('layout', {
- *          defaultType: 'auto'
+ *      Ext.Factory.define(&#39;layout&#39;, {
+ *          defaultType: &#39;auto&#39;
  *      });
  *
  * To define multiple families at once:
  *
  *      Ext.Factory.define({
  *          layout: {
- *              defaultType: 'auto'
+ *              defaultType: &#39;auto&#39;
  *          }
  *      });
  *
@@ -222,7 +222,7 @@ Ext.Factory.define = function (type, config) {
             if (config.constructor === Object) {
                 Ext.apply(factory, config);
 
-                if (typeof(defaultClass = factory.xclass) === 'string') {
+                if (typeof(defaultClass = factory.xclass) === &#39;string&#39;) {
                     factory.defaultClass = Ext.ClassManager.get(defaultClass);
                 }
             } else {
@@ -247,15 +247,15 @@ Ext.Factory.define = function (type, config) {
  *
  * Given a class declared like so:
  *
- *      Ext.define('App.bar.Thing', {
+ *      Ext.define(&#39;App.bar.Thing&#39;, {
  *          mixins: [
- *              'Ext.mixin.Factoryable'
+ *              &#39;Ext.mixin.Factoryable&#39;
  *          ],
  *
- *          alias: 'bar.thing',  // this is detected by Factoryable
+ *          alias: &#39;bar.thing&#39;,  // this is detected by Factoryable
  *
  *          factoryConfig: {
- *              defaultType: 'thing',  // this is the default deduced from the alias
+ *              defaultType: &#39;thing&#39;,  // this is the default deduced from the alias
  *              // other configs
  *          },
  *
@@ -267,14 +267,14 @@ Ext.Factory.define = function (type, config) {
  *
  *      var obj;
  *
- *      obj = App.bar.Thing.create('thing'); // same as &quot;new App.bar.Thing()&quot;
+ *      obj = App.bar.Thing.create(&#39;thing&#39;); // same as &quot;new App.bar.Thing()&quot;
  *
  *      obj = App.bar.Thing.create({
- *          type: 'thing'       // same as above
+ *          type: &#39;thing&#39;       // same as above
  *      });
  *
  *      obj = App.bar.Thing.create({
- *          xclass: 'App.bar.Thing'  // same as above
+ *          xclass: &#39;App.bar.Thing&#39;  // same as above
  *      });
  *
  *      var obj2 = App.bar.Thing.create(obj);
@@ -284,8 +284,8 @@ Ext.Factory.define = function (type, config) {
  *
  * @since 5.0.0
  */
-Ext.define('Ext.mixin.Factoryable', {
-<span id='Ext-mixin-Factoryable-property-mixinId'>    mixinId: 'factoryable',
+Ext.define(&#39;Ext.mixin.Factoryable&#39;, {
+<span id='Ext-mixin-Factoryable-property-mixinId'>    mixinId: &#39;factoryable&#39;,
 </span>
 <span id='Ext-mixin-Factoryable-method-onClassMixedIn'>    onClassMixedIn: function (targetClass) {
 </span>        var proto = targetClass.prototype,
@@ -295,7 +295,7 @@ Ext.define('Ext.mixin.Factoryable', {
             dot, createFn;
 
         alias = alias &amp;&amp; alias.length &amp;&amp; alias[0];
-        if (alias &amp;&amp; (dot = alias.lastIndexOf('.')) &gt; 0) {
+        if (alias &amp;&amp; (dot = alias.lastIndexOf(&#39;.&#39;)) &gt; 0) {
             config.type = alias.substring(0, dot);
             config.defaultType = alias.substring(dot+1);
         }

@@ -21,8 +21,8 @@
  * Private class for use by only Store when configured `buffered: true`.
  * @private
  */
-Ext.define('Ext.data.PageMap', {
-    extend: 'Ext.util.LruCache',
+Ext.define(&#39;Ext.data.PageMap&#39;, {
+    extend: &#39;Ext.util.LruCache&#39;,
 
     config: {
 <span id='Ext-data-PageMap-cfg-store'>        store: null,
@@ -40,7 +40,7 @@ Ext.define('Ext.data.PageMap', {
          * this config would likely be set to &quot;data&quot; so that property names are applied
          * to the fields of each record.
          */
-        rootProperty: ''
+        rootProperty: &#39;&#39;
     },
 
 <span id='Ext-data-PageMap-method-clear'>    // Maintain a generation counter, so that the Store can reject incoming pages destined for the previous generation
@@ -188,7 +188,7 @@ Ext.define('Ext.data.PageMap', {
 <span id='Ext-data-PageMap-method-addAll'>    addAll: function(records) {
 </span>        //&lt;debug&gt;
         if (this.getCount()) {
-            Ext.raise('Cannot addAll to a non-empty PageMap');
+            Ext.raise(&#39;Cannot addAll to a non-empty PageMap&#39;);
         }
         //&lt;/debug&gt;
         this.addPage(1, records);
@@ -212,7 +212,7 @@ Ext.define('Ext.data.PageMap', {
                 indexMap[page[i].internalId] = storeIndex++;
             }
             me.add(pageNumber, page);
-            me.fireEvent('pageadd', me, pageNumber, page);
+            me.fireEvent(&#39;pageadd&#39;, me, pageNumber, page);
         }
     },
 
@@ -244,19 +244,19 @@ Ext.define('Ext.data.PageMap', {
 
 <span id='Ext-data-PageMap-method-insert'>    insert: function() {
 </span>        //&lt;debug&gt;
-        Ext.raise('insert operation not suppported into buffered Store');
+        Ext.raise(&#39;insert operation not suppported into buffered Store&#39;);
         //&lt;/debug&gt;
     },
 
 <span id='Ext-data-PageMap-method-remove'>    remove: function() {
 </span>        //&lt;debug&gt;
-        Ext.raise('remove operation not suppported from buffered Store');
+        Ext.raise(&#39;remove operation not suppported from buffered Store&#39;);
         //&lt;/debug&gt;
     },
 
 <span id='Ext-data-PageMap-method-removeAt'>    removeAt: function() {
 </span>        //&lt;debug&gt;
-        Ext.raise('removeAt operation not suppported from buffered Store');
+        Ext.raise(&#39;removeAt operation not suppported from buffered Store&#39;);
         //&lt;/debug&gt;
     },
 
@@ -269,13 +269,13 @@ Ext.define('Ext.data.PageMap', {
             result;
 
         if (thePage) {
-            if (me.fireEvent('beforepageremove', me, page, thePage) !== false) {
+            if (me.fireEvent(&#39;beforepageremove&#39;, me, page, thePage) !== false) {
                 len = thePage.length;
                 for (i = 0; i &lt; len; i++) {
                     delete me.indexMap[thePage[i].internalId];
                 }
                 result = me.callParent(arguments);
-                me.fireEvent('pageremove', me, page, thePage);
+                me.fireEvent(&#39;pageremove&#39;, me, page, thePage);
 
                 // Empty the page array *after* informing observers that the records have exited.
                 thePage.length = 0;
@@ -316,12 +316,12 @@ Ext.define('Ext.data.PageMap', {
     },
 
 <span id='Ext-data-PageMap-method-getRange'>    getRange: function(start, end) {
-</span>        // Store's backing Collection now uses EXCLUSIVE endIndex
+</span>        // Store&#39;s backing Collection now uses EXCLUSIVE endIndex
         // So store will always pass the endIndex+1
         end--;
 
         if (!this.hasRange(start, end)) {
-            Ext.raise('PageMap asked for range which it does not have');
+            Ext.raise(&#39;PageMap asked for range which it does not have&#39;);
         }
         var me = this,
             Array = Ext.Array,

@@ -36,38 +36,38 @@
  * use a completely different layout by setting the {@link #cfg-layout} to one of the 
  * other supported layout types; for instance you may wish to use a custom arrangement 
  * of hbox and vbox containers. In that case the Radio components at any depth will 
- * still be managed by the RadioGroup's validation.
+ * still be managed by the RadioGroup&#39;s validation.
  *
  * # Example usage
  *
  *     @example
- *     Ext.create('Ext.form.Panel', {
- *         title: 'RadioGroup Example',
+ *     Ext.create(&#39;Ext.form.Panel&#39;, {
+ *         title: &#39;RadioGroup Example&#39;,
  *         width: 300,
  *         height: 125,
  *         bodyPadding: 10,
  *         renderTo: Ext.getBody(),
  *         items:[{
- *             xtype: 'radiogroup',
- *             fieldLabel: 'Two Columns',
+ *             xtype: &#39;radiogroup&#39;,
+ *             fieldLabel: &#39;Two Columns&#39;,
  *             // Arrange radio buttons into two columns, distributed vertically
  *             columns: 2,
  *             vertical: true,
  *             items: [
- *                 { boxLabel: 'Item 1', name: 'rb', inputValue: '1' },
- *                 { boxLabel: 'Item 2', name: 'rb', inputValue: '2', checked: true},
- *                 { boxLabel: 'Item 3', name: 'rb', inputValue: '3' },
- *                 { boxLabel: 'Item 4', name: 'rb', inputValue: '4' },
- *                 { boxLabel: 'Item 5', name: 'rb', inputValue: '5' },
- *                 { boxLabel: 'Item 6', name: 'rb', inputValue: '6' }
+ *                 { boxLabel: &#39;Item 1&#39;, name: &#39;rb&#39;, inputValue: &#39;1&#39; },
+ *                 { boxLabel: &#39;Item 2&#39;, name: &#39;rb&#39;, inputValue: &#39;2&#39;, checked: true},
+ *                 { boxLabel: &#39;Item 3&#39;, name: &#39;rb&#39;, inputValue: &#39;3&#39; },
+ *                 { boxLabel: &#39;Item 4&#39;, name: &#39;rb&#39;, inputValue: &#39;4&#39; },
+ *                 { boxLabel: &#39;Item 5&#39;, name: &#39;rb&#39;, inputValue: &#39;5&#39; },
+ *                 { boxLabel: &#39;Item 6&#39;, name: &#39;rb&#39;, inputValue: &#39;6&#39; }
  *             ]
  *         }]
  *     });
  *
  */
-Ext.define('Ext.form.RadioGroup', {
-    extend: 'Ext.form.CheckboxGroup',
-    xtype: 'radiogroup',
+Ext.define(&#39;Ext.form.RadioGroup&#39;, {
+    extend: &#39;Ext.form.CheckboxGroup&#39;,
+    xtype: &#39;radiogroup&#39;,
 
 <span id='Ext-form-RadioGroup-property-isRadioGroup'>    /**
 </span>     * @property {Boolean} isRadioGroup
@@ -78,7 +78,7 @@ Ext.define('Ext.form.RadioGroup', {
     isRadioGroup: true,
 
     requires: [
-        'Ext.form.field.Radio'
+        &#39;Ext.form.field.Radio&#39;
     ],
 
 <span id='Ext-form-RadioGroup-cfg-items'>    /**
@@ -100,10 +100,10 @@ Ext.define('Ext.form.RadioGroup', {
 </span>     * @cfg {String} blankText
      * Error text to display if the {@link #allowBlank} validation fails
      */
-    blankText : 'You must select one item in this group',
+    blankText : &#39;You must select one item in this group&#39;,
 <span id='Ext-form-RadioGroup-cfg-defaultType'>    //&lt;/locale&gt;
 </span>
-    defaultType: 'radiofield',
+    defaultType: &#39;radiofield&#39;,
 
 <span id='Ext-form-RadioGroup-cfg-local'>    /**
 </span>     * @cfg {Boolean} [local=false]
@@ -129,14 +129,14 @@ Ext.define('Ext.form.RadioGroup', {
      */
     simpleValue: false,
 
-<span id='Ext-form-RadioGroup-property-defaultBindProperty'>    defaultBindProperty: 'value',
+<span id='Ext-form-RadioGroup-property-defaultBindProperty'>    defaultBindProperty: &#39;value&#39;,
 </span>
 <span id='Ext-form-RadioGroup-property-groupCls'>    /**
 </span>     * @private
      */
-    groupCls : Ext.baseCSSPrefix + 'form-radio-group',
+    groupCls : Ext.baseCSSPrefix + &#39;form-radio-group&#39;,
     
-<span id='Ext-form-RadioGroup-property-ariaRole'>    ariaRole: 'radiogroup',
+<span id='Ext-form-RadioGroup-property-ariaRole'>    ariaRole: &#39;radiogroup&#39;,
 </span>    
 <span id='Ext-form-RadioGroup-method-initRenderData'>    initRenderData: function() {
 </span>        var me = this,
@@ -146,8 +146,8 @@ Ext.define('Ext.form.RadioGroup', {
         ariaAttr = data.ariaAttributes;
         
         if (ariaAttr) {
-            ariaAttr['aria-required'] = !me.allowBlank;
-            ariaAttr['aria-invalid']  = false;
+            ariaAttr[&#39;aria-required&#39;] = !me.allowBlank;
+            ariaAttr[&#39;aria-invalid&#39;]  = false;
         }
         
         return data;
@@ -166,7 +166,7 @@ Ext.define('Ext.form.RadioGroup', {
     },
     
 <span id='Ext-form-RadioGroup-method-getBoxes'>    getBoxes: function(query, root) {
-</span>        return (root || this).query('[isRadio]' + (query||''));
+</span>        return (root || this).query(&#39;[isRadio]&#39; + (query||&#39;&#39;));
     },
     
 <span id='Ext-form-RadioGroup-method-checkChange'>    checkChange: function() {
@@ -176,9 +176,9 @@ Ext.define('Ext.form.RadioGroup', {
         value = me.getValue();
 
         // Safari might throw an exception on trying to get the keys of a Number
-        key = typeof value === 'object' &amp;&amp; Ext.Object.getKeys(value)[0];
+        key = typeof value === &#39;object&#39; &amp;&amp; Ext.Object.getKeys(value)[0];
             
-        // If the value is an array we skip out here because it's during a change
+        // If the value is an array we skip out here because it&#39;s during a change
         // between multiple items, so we never want to fire a change
         if (me.simpleValue || (key &amp;&amp; !Ext.isArray(value[key]))) {
             me.callParent(arguments);
@@ -218,26 +218,26 @@ Ext.define('Ext.form.RadioGroup', {
      * This method is simpler than {@link Ext.form.CheckboxGroup#setValue} because only 1 value is allowed
      * for each name. You can use the setValue method as:
      *
-     *     var form = Ext.create('Ext.form.Panel', {
-     *         title       : 'RadioGroup Example',
+     *     var form = Ext.create(&#39;Ext.form.Panel&#39;, {
+     *         title       : &#39;RadioGroup Example&#39;,
      *         width       : 300,
      *         bodyPadding : 10,
      *         renderTo    : Ext.getBody(),
      *         items       : [
      *             {
-     *                 xtype      : 'radiogroup',
-     *                 fieldLabel : 'Group',
+     *                 xtype      : &#39;radiogroup&#39;,
+     *                 fieldLabel : &#39;Group&#39;,
      *                 items      : [
-     *                     { boxLabel : 'Item 1', name : 'rb', inputValue : 1 },
-     *                     { boxLabel : 'Item 2', name : 'rb', inputValue : 2 }
+     *                     { boxLabel : &#39;Item 1&#39;, name : &#39;rb&#39;, inputValue : 1 },
+     *                     { boxLabel : &#39;Item 2&#39;, name : &#39;rb&#39;, inputValue : 2 }
      *                 ]
      *             }
      *         ],
      *         tbar        : [
      *             {
-     *                 text    : 'setValue on RadioGroup',
+     *                 text    : &#39;setValue on RadioGroup&#39;,
      *                 handler : function () {
-     *                     form.child('radiogroup').setValue({
+     *                     form.child(&#39;radiogroup&#39;).setValue({
      *                         rb : 2
      *                     });
      *                 }
@@ -291,7 +291,7 @@ Ext.define('Ext.form.RadioGroup', {
         this.callParent([errors]);
         
         if (ariaDom){
-            ariaDom.setAttribute('aria-invalid', true);
+            ariaDom.setAttribute(&#39;aria-invalid&#39;, true);
         }
     },
     
@@ -301,7 +301,7 @@ Ext.define('Ext.form.RadioGroup', {
         this.callParent();
         
         if (ariaDom) {
-            ariaDom.setAttribute('aria-invalid', false);
+            ariaDom.setAttribute(&#39;aria-invalid&#39;, false);
         }
     }
 }, function() {

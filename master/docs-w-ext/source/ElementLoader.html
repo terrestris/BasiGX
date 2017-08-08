@@ -18,8 +18,8 @@
   <pre class="prettyprint lang-js"><span id='Ext-ElementLoader'>/**
 </span> * A class used to load remote content to an Element. Sample usage:
  *
- *     Ext.get('el').load({
- *         url: 'myPage.php',
+ *     Ext.get(&#39;el&#39;).load({
+ *         url: &#39;myPage.php&#39;,
  *         scripts: true,
  *         params: {
  *             id: 1
@@ -29,17 +29,17 @@
  * In general this class will not be instanced directly, rather the {@link Ext.dom.Element#method-load} method
  * will be used.
  */
-Ext.define('Ext.ElementLoader', {
+Ext.define(&#39;Ext.ElementLoader&#39;, {
 
     /* Begin Definitions */
 
     mixins: [
-        'Ext.util.Observable'
+        &#39;Ext.util.Observable&#39;
     ],
 
     uses: [
-        'Ext.data.Connection',
-        'Ext.Ajax'
+        &#39;Ext.data.Connection&#39;,
+        &#39;Ext.Ajax&#39;
     ],
 
     statics: {
@@ -272,7 +272,7 @@ Ext.define('Ext.ElementLoader', {
     load: function(options) {
         //&lt;debug&gt;
         if (!this.target) {
-            Ext.raise('A valid target is required when loading content');
+            Ext.raise(&#39;A valid target is required when loading content&#39;);
         }
         //&lt;/debug&gt;
 
@@ -297,7 +297,7 @@ Ext.define('Ext.ElementLoader', {
 
         //&lt;debug&gt;
         if (!options.url) {
-            Ext.raise('You must specify the URL from which content should be loaded');
+            Ext.raise(&#39;You must specify the URL from which content should be loaded&#39;);
         }
         //&lt;/debug&gt;
 
@@ -307,7 +307,7 @@ Ext.define('Ext.ElementLoader', {
             callback: me.onComplete
         });
 
-        if (me.fireEvent('beforeload', me, options) === false) {
+        if (me.fireEvent(&#39;beforeload&#39;, me, options) === false) {
             return;
         }
 
@@ -362,10 +362,10 @@ Ext.define('Ext.ElementLoader', {
 
             if (success) {
                 Ext.callback(active.success, scope, [me, response, options]);
-                me.fireEvent('load', me, response, options);
+                me.fireEvent(&#39;load&#39;, me, response, options);
             } else {
                 Ext.callback(active.failure, scope, [me, response, options]);
-                me.fireEvent('exception', me, response, options);
+                me.fireEvent(&#39;exception&#39;, me, response, options);
             }
             Ext.callback(active.callback, scope, [me, success, response, options]);
             if (active.mask) {

@@ -33,12 +33,12 @@
  * ## Usage
  * 
  *     var task = new Ext.util.DelayedTask(function(){
- *         alert(Ext.getDom('myInputField').value.length);
+ *         alert(Ext.getDom(&#39;myInputField&#39;).value.length);
  *     });
  *     
  *     // Wait 500ms before calling our function. If the user presses another key
- *     // during that 500ms, it will be cancelled and we'll wait another 500ms.
- *     Ext.get('myInputField').on('keypress', function() {
+ *     // during that 500ms, it will be cancelled and we&#39;ll wait another 500ms.
+ *     Ext.get(&#39;myInputField&#39;).on(&#39;keypress&#39;, function() {
  *         task.delay(500);
  *     });
  * 
@@ -67,11 +67,11 @@ Ext.util.DelayedTask = function(fn, scope, args, cancelOnDelay, fireIdleEvent) {
             me.id = null;
             fn.apply(scope, args || []);
             if (fireIdleEvent !== false &amp;&amp; globalEvents.hasListeners.idle) {
-                globalEvents.fireEvent('idle');
+                globalEvents.fireEvent(&#39;idle&#39;);
             }
         };
 
-    cancelOnDelay = typeof cancelOnDelay === 'boolean' ? cancelOnDelay : true;
+    cancelOnDelay = typeof cancelOnDelay === &#39;boolean&#39; ? cancelOnDelay : true;
 
 <span id='Ext-util-DelayedTask-property-id'>    /**
 </span>     * @property {Number} id
@@ -97,7 +97,7 @@ Ext.util.DelayedTask = function(fn, scope, args, cancelOnDelay, fireIdleEvent) {
         if (cancelOnDelay) {
             me.cancel();
         }
-        if (typeof newDelay === 'number') {
+        if (typeof newDelay === &#39;number&#39;) {
             delay = newDelay;
         }
         fn    = newFn    || fn;

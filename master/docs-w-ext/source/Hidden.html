@@ -20,7 +20,7 @@
  *
  * This creates an actual input element with type=&quot;hidden&quot; in the DOM. While its label is
  * {@link #hideLabel not rendered} by default, it is still a real component and may be sized according
- * to its owner container's layout.
+ * to its owner container&#39;s layout.
  *
  * Because of this, in most cases it is more convenient and less problematic to simply
  * {@link Ext.form.action.Action#params pass hidden parameters} directly when
@@ -30,24 +30,24 @@
  *
  *     @example
  *     new Ext.form.Panel({
- *         title: 'My Form',
+ *         title: &#39;My Form&#39;,
  *         items: [{
- *             xtype: 'textfield',
- *             fieldLabel: 'Text Field',
- *             name: 'text_field',
- *             value: 'value from text field'
+ *             xtype: &#39;textfield&#39;,
+ *             fieldLabel: &#39;Text Field&#39;,
+ *             name: &#39;text_field&#39;,
+ *             value: &#39;value from text field&#39;
  *         }, {
- *             xtype: 'hiddenfield',
- *             name: 'hidden_field_1',
- *             value: 'value from hidden field'
+ *             xtype: &#39;hiddenfield&#39;,
+ *             name: &#39;hidden_field_1&#39;,
+ *             value: &#39;value from hidden field&#39;
  *         }],
  *
  *         buttons: [{
- *             text: 'Submit',
+ *             text: &#39;Submit&#39;,
  *             handler: function() {
- *                 this.up('form').getForm().submit({
+ *                 this.up(&#39;form&#39;).getForm().submit({
  *                     params: {
- *                         hidden_field_2: 'value from submit call'
+ *                         hidden_field_2: &#39;value from submit call&#39;
  *                     }
  *                 });
  *             }
@@ -59,21 +59,21 @@
  *     text_field=value+from+text+field&amp;hidden;_field_1=value+from+hidden+field&amp;hidden_field_2=value+from+submit+call
  *
  */
-Ext.define('Ext.form.field.Hidden', {
-    extend:'Ext.form.field.Base',
-    alias: ['widget.hiddenfield', 'widget.hidden'],
-    alternateClassName: 'Ext.form.Hidden',
+Ext.define(&#39;Ext.form.field.Hidden&#39;, {
+    extend:&#39;Ext.form.field.Base&#39;,
+    alias: [&#39;widget.hiddenfield&#39;, &#39;widget.hidden&#39;],
+    alternateClassName: &#39;Ext.form.Hidden&#39;,
 
 <span id='Ext-form-field-Hidden-property-focusable'>    focusable: false,
-</span><span id='Ext-form-field-Hidden-cfg-inputType'>    inputType : 'hidden',
+</span><span id='Ext-form-field-Hidden-cfg-inputType'>    inputType : &#39;hidden&#39;,
 </span><span id='Ext-form-field-Hidden-cfg-isTextInput'>    isTextInput: false,
 </span><span id='Ext-form-field-Hidden-cfg-hideLabel'>    hideLabel: true,
 </span><span id='Ext-form-field-Hidden-cfg-hidden'>    hidden: true,
 </span>    
-<span id='Ext-form-field-Hidden-property-ariaRole'>    ariaRole: 'presentation',
+<span id='Ext-form-field-Hidden-property-ariaRole'>    ariaRole: &#39;presentation&#39;,
 </span>    
 <span id='Ext-form-field-Hidden-method-initComponent'>    initComponent: function() {
-</span>        this.formItemCls += '-hidden';
+</span>        this.formItemCls += &#39;-hidden&#39;;
         this.callParent();    
     },
     

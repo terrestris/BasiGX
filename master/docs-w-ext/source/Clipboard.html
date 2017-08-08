@@ -32,25 +32,25 @@
  * The `cell` format is not valid for the `{@link Ext.plugin.AbstractClipboard#system system}`
  * clipboard format.
  */
-Ext.define('Ext.grid.plugin.Clipboard', {
-    extend: 'Ext.plugin.AbstractClipboard',
+Ext.define(&#39;Ext.grid.plugin.Clipboard&#39;, {
+    extend: &#39;Ext.plugin.AbstractClipboard&#39;,
 
-    alias: 'plugin.clipboard',
+    alias: &#39;plugin.clipboard&#39;,
     requires: [
-        'Ext.util.Format',
-        'Ext.util.TSV'
+        &#39;Ext.util.Format&#39;,
+        &#39;Ext.util.TSV&#39;
     ],
 
 <span id='Ext-grid-plugin-Clipboard-cfg-formats'>    formats: {
 </span>        cell: {
-            get: 'getCells'
+            get: &#39;getCells&#39;
         },
         html: {
-            get: 'getCellData'
+            get: &#39;getCellData&#39;
         },
         raw: {
-            get: 'getCellData',
-            put: 'putCellData'
+            get: &#39;getCellData&#39;,
+            put: &#39;putCellData&#39;
         }
     },
 
@@ -58,8 +58,8 @@ Ext.define('Ext.grid.plugin.Clipboard', {
 </span>        var cmp = this.getCmp(),
             selModel = cmp.getSelectionModel(),
             ret = [],
-            isRaw = format === 'raw',
-            isText = format === 'text',
+            isRaw = format === &#39;raw&#39;,
+            isText = format === &#39;text&#39;,
             viewNode,
             cell, data, dataIndex, lastRecord, column, record, row, view;
 
@@ -85,7 +85,7 @@ Ext.define('Ext.grid.plugin.Clipboard', {
             } else {
                 // Try to access the view node.
                 viewNode = view.all.item(cellContext.rowIdx);
-                // If we could not, it's because it's outside of the rendered block - recreate it.
+                // If we could not, it&#39;s because it&#39;s outside of the rendered block - recreate it.
                 if (!viewNode) {
                     viewNode = Ext.fly(view.createRowElement(record, cellContext.rowIdx));
                 }
@@ -182,17 +182,17 @@ Ext.define('Ext.grid.plugin.Clipboard', {
                 if (dataIndex) {
                     switch (format) {
                         // Raw field values
-                        case 'raw':
+                        case &#39;raw&#39;:
                             dataObject[dataIndex] = row[sourceColIdx];
                             break;
 
                         // Textual data with HTML tags stripped    
-                        case 'text':
+                        case &#39;text&#39;:
                             dataObject[dataIndex] = row[sourceColIdx];
                             break;
 
                         // innerHTML from the cell inner
-                        case 'html':
+                        case &#39;html&#39;:
                             break;
                     }
                 }

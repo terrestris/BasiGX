@@ -16,32 +16,32 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-data-field-Field'>/**
-</span> * Fields are used to define the members of a Model. They aren't instantiated directly;
+</span> * Fields are used to define the members of a Model. They aren&#39;t instantiated directly;
  * instead, when we create a class that extends {@link Ext.data.Model}, it automatically
  * creates Field instances for each field configured in a {@link Ext.data.Model Model}.
  * For example, we might set up a model like this:
  *
- *     Ext.define('User', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;User&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         fields: [
- *             'name', 'email',
- *             { name: 'age', type: 'int' },
- *             { name: 'gender', type: 'string', defaultValue: 'Unknown' }
+ *             &#39;name&#39;, &#39;email&#39;,
+ *             { name: &#39;age&#39;, type: &#39;int&#39; },
+ *             { name: &#39;gender&#39;, type: &#39;string&#39;, defaultValue: &#39;Unknown&#39; }
  *         ]
  *     });
  *
  * Four fields will have been created for the User Model - name, email, age and gender.
  * Note that we specified a couple of different formats here; if we only pass in the string
- * name of the field (as with name and email), the field is set up with the 'auto' type.
- * It's as if we'd done this instead:
+ * name of the field (as with name and email), the field is set up with the &#39;auto&#39; type.
+ * It&#39;s as if we&#39;d done this instead:
  *
- *     Ext.define('User', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;User&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         fields: [
- *             { name: 'name', type: 'auto' },
- *             { name: 'email', type: 'auto' },
- *             { name: 'age', type: 'int' },
- *             { name: 'gender', type: 'string', defaultValue: 'Unknown' }
+ *             { name: &#39;name&#39;, type: &#39;auto&#39; },
+ *             { name: &#39;email&#39;, type: &#39;auto&#39; },
+ *             { name: &#39;age&#39;, type: &#39;int&#39; },
+ *             { name: &#39;gender&#39;, type: &#39;string&#39;, defaultValue: &#39;Unknown&#39; }
  *         ]
  *     });
  *
@@ -72,7 +72,7 @@
  * a `{@link #cfg-convert convert}` config when the field is defined like this:
  *
  *      {
- *          name: 'timestamp',
+ *          name: &#39;timestamp&#39;,
  *
  *          convert: function (value) {
  *              return new Date(value);
@@ -94,9 +94,9 @@
  *
  * Values produced by `{@link #cfg-calculate calculate}` and `{@link #method-convert convert}`
  * are stored in the record as with any other field. In fact, if we define a calculated
- * &quot;firstName&quot; field and log out all of the data, we'll see this:
+ * &quot;firstName&quot; field and log out all of the data, we&#39;ll see this:
  *
- *     var ed = Ext.create('User', { name: 'Ed Spencer' });
+ *     var ed = Ext.create(&#39;User&#39;, { name: &#39;Ed Spencer&#39; });
  *
  *     console.log(ed.data);
  *
@@ -112,10 +112,10 @@
  * ### Using `calculate`
  *
  *      {
- *          name: 'firstName',
+ *          name: &#39;firstName&#39;,
  *
  *          calculate: function (data) {
- *              return data.name.split(' ')[0];
+ *              return data.name.split(&#39; &#39;)[0];
  *          }
  *      }
  *
@@ -133,18 +133,18 @@
  * Following is the equivalent technique using `{@link #cfg-convert convert}`
  *
  *      {
- *          name: 'firstName',
+ *          name: &#39;firstName&#39;,
  *
  *          convert: function (value, record) {
- *              return record.get('name').split(' ')[0];
+ *              return record.get(&#39;name&#39;).split(&#39; &#39;)[0];
  *          },
  *
- *          depends: [ 'name' ]
+ *          depends: [ &#39;name&#39; ]
  *      }
  *
  * When a `{@link #method-convert convert}` function accepts a 2nd argument (a reference to
  * the record), it is considered a calculated field. If a `{@link #cfg-depends depends}`
- * config is not provided then this field's dependencies are unknown. In this case, the
+ * config is not provided then this field&#39;s dependencies are unknown. In this case, the
  * `{@link #cfg-depends depends}` are provided as would be automatically determined with
  * the `{@link #cfg-calculate calculate}` config.
  *
@@ -155,10 +155,10 @@
  * 
  * For example:
  *
- *     Ext.define('MyApp.model.Employee', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;MyApp.model.Employee&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         fields: [{
- *             name: 'salary',
+ *             name: &#39;salary&#39;,
  *             convert: function (val) {
  *                 var startingBonus = val * .1;
  *                 return val + startingBonus;
@@ -167,26 +167,26 @@
  *         convertOnSet: false
  *     });
  *     
- *     var tina = Ext.create('MyApp.model.Employee', {
+ *     var tina = Ext.create(&#39;MyApp.model.Employee&#39;, {
  *         salary: 50000
  *     });
  *     
- *     console.log(tina.get('salary')); // logs 55000
+ *     console.log(tina.get(&#39;salary&#39;)); // logs 55000
  *     
- *     tina.set('salary', 60000);
- *     console.log(tina.get('salary')); // logs 60000
+ *     tina.set(&#39;salary&#39;, 60000);
+ *     console.log(tina.get(&#39;salary&#39;)); // logs 60000
  * 
- * This default behavior can be disabled by setting the Model's 
+ * This default behavior can be disabled by setting the Model&#39;s 
  * `{@link Ext.data.Model#cfg-convertOnSet}` config to `false`.
  * 
  * **Note:** convertOnSet `false` only prevents the convert / calculate call when the 
- * set `fieldName` param matches the field's `{@link #name}`.  See 
+ * set `fieldName` param matches the field&#39;s `{@link #name}`.  See 
  * {@link Ext.data.Model#convertOnSet convertOnSet} for additional details.
  *
  * ### Dependencies
  *
- * When a field's `{@link #method-convert convert}` method processes values from the record
- * (vs. just the field's value), it is best to also provide a `depends` config as shown
+ * When a field&#39;s `{@link #method-convert convert}` method processes values from the record
+ * (vs. just the field&#39;s value), it is best to also provide a `depends` config as shown
  * above. Fields that provide a `{@link #cfg-calculate calculate}` method must follow the
  * proper form for using fields so that dependencies can be extracted.
  *
@@ -217,12 +217,12 @@
  * To illustrate, we define a &quot;time&quot; field type that stores a time-of-day represented as a
  * number of minutes since Midnight.
  *
- *      Ext.define('App.field.Time', {
- *          extend: 'Ext.data.field.Field',
+ *      Ext.define(&#39;App.field.Time&#39;, {
+ *          extend: &#39;Ext.data.field.Field&#39;,
  *
- *          alias: 'data.field.time',
+ *          alias: &#39;data.field.time&#39;,
  *
- *          timeFormat: 'g:i',
+ *          timeFormat: &#39;g:i&#39;,
  *
  *          convert: function (value) {
  *              if (value &amp;&amp; Ext.isString(value)) {
@@ -241,14 +241,14 @@
  * Custom field types can override the `{@link #method-validate validate}` method or
  * provide a set of `{@link #cfg-validators validators}`.
  *
- *      Ext.define('App.field.PhoneNumber', {
- *          extend: 'Ext.data.field.Field',
+ *      Ext.define(&#39;App.field.PhoneNumber&#39;, {
+ *          extend: &#39;Ext.data.field.Field&#39;,
  *
- *          alias: 'data.field.phonenumber',
+ *          alias: &#39;data.field.phonenumber&#39;,
  *
  *          // Match U.S. phone numbers for example purposes
  *          validators: {
- *              type: 'format',
+ *              type: &#39;format&#39;,
  *              matcher: /\d{3}\-\d{3}\-\d{4}/
  *          }
  *      });
@@ -256,33 +256,33 @@
  * Once the class is defined, fields can be declared using the new type (based on its
  * `alias`) like so:
  *
- *      Ext.define('App.model.PhoneCall', {
+ *      Ext.define(&#39;App.model.PhoneCall&#39;, {
  *          fields: [
- *              { name: 'startTime', type: 'time' },
- *              { name: 'phoneNumber', type: 'phonenumber' }
+ *              { name: &#39;startTime&#39;, type: &#39;time&#39; },
+ *              { name: &#39;phoneNumber&#39;, type: &#39;phonenumber&#39; }
  *          ]
  *      });
  */
-Ext.define('Ext.data.field.Field', {
+Ext.define(&#39;Ext.data.field.Field&#39;, {
     mixins: [
-        'Ext.mixin.Factoryable'
+        &#39;Ext.mixin.Factoryable&#39;
     ],
 
     requires: [
-        'Ext.data.SortTypes',
-        'Ext.data.validator.Validator'
+        &#39;Ext.data.SortTypes&#39;,
+        &#39;Ext.data.validator.Validator&#39;
     ],
 
-    alternateClassName: 'Ext.data.Field',
+    alternateClassName: &#39;Ext.data.Field&#39;,
 
-<span id='Ext-data-field-Field-property-aliasPrefix'>    alias: 'data.field.auto', // also configures Factoryable
+<span id='Ext-data-field-Field-property-aliasPrefix'>    alias: &#39;data.field.auto&#39;, // also configures Factoryable
 </span>
-    aliasPrefix: 'data.field.',
+    aliasPrefix: &#39;data.field.&#39;,
 
-<span id='Ext-data-field-Field-property-type'>    type: 'auto',
+<span id='Ext-data-field-Field-property-type'>    type: &#39;auto&#39;,
 </span>
 <span id='Ext-data-field-Field-property-factoryConfig'>    factoryConfig: {
-</span>        defaultProperty: 'name'
+</span>        defaultProperty: &#39;name&#39;
     },
 
 <span id='Ext-data-field-Field-property-isDataField'>    isDataField: true,
@@ -329,33 +329,33 @@ Ext.define('Ext.data.field.Field', {
      * parsing the `calculate` function. For example:
      *
      *      fields: [{
-     *          name: 'firstName',
-     *          type: 'string'
+     *          name: &#39;firstName&#39;,
+     *          type: &#39;string&#39;
      *      },{
-     *          name: 'lastName',
-     *          type: 'string'
+     *          name: &#39;lastName&#39;,
+     *          type: &#39;string&#39;
      *      },{
-     *          name: 'fullName',
+     *          name: &#39;fullName&#39;,
      *          calculate: function (data) {
-     *              return data.firstName + ' ' + data.lastName;
+     *              return data.firstName + &#39; &#39; + data.lastName;
      *          }
      *      }]
      *
-     * The above 'fullName' field is equivalent to:
+     * The above &#39;fullName&#39; field is equivalent to:
      *
      *      {
-     *          name: 'fullName',
+     *          name: &#39;fullName&#39;,
      *          convert: function (v, rec) {
-     *              return rec.get('firstName') + ' ' + rec.get('lastName');
+     *              return rec.get(&#39;firstName&#39;) + &#39; &#39; + rec.get(&#39;lastName&#39;);
      *          },
-     *          depends: ['firstName', 'lastName']
+     *          depends: [&#39;firstName&#39;, &#39;lastName&#39;]
      *      }
      *
      * The restrictions on form for a `calculate` method are that the accesses to field
      * values must match the following regular expression (case insensitive):
      *
      *      data.([a-z_][a-z0-9_]*)
-     *      // where 'data' is the param passed to the calculate method
+     *      // where &#39;data&#39; is the param passed to the calculate method
      *
      * The only advantage of a `calculate` method over a `convert` method is automatic
      * determination of `depends`.
@@ -394,7 +394,7 @@ Ext.define('Ext.data.field.Field', {
      * The default message to present for an invalid field.
      * @since 5.0.0
      */
-    defaultInvalidMessage: 'This field is invalid',
+    defaultInvalidMessage: &#39;This field is invalid&#39;,
 
 <span id='Ext-data-field-Field-cfg-defaultValue'>    /**
 </span>     * @cfg {Object} [defaultValue=undefined]
@@ -411,43 +411,43 @@ Ext.define('Ext.data.field.Field', {
 </span>     * @property {Ext.Class} definedBy
      * The class (derived from {@link Ext.data.Model}) that defined this field.
      *
-     *      Ext.define('MyApp.models.Foo', {
-     *          extend: 'Ext.data.Model',
+     *      Ext.define(&#39;MyApp.models.Foo&#39;, {
+     *          extend: &#39;Ext.data.Model&#39;,
      *
      *          fields: [
-     *              { name: 'bar' }
+     *              { name: &#39;bar&#39; }
      *          ],
      *          ...
      *      });
      *
-     *      var barField = MyApp.models.Foo.getField('bar');
+     *      var barField = MyApp.models.Foo.getField(&#39;bar&#39;);
      *
-     *      alert(barField.definedBy === MyApp.models.Foo); // alerts 'true'
+     *      alert(barField.definedBy === MyApp.models.Foo); // alerts &#39;true&#39;
      *
      * When a field is inherited, this value will reference the class that originally
      * defined the field.
      *
-     *      Ext.define('MyApp.models.Base', {
-     *          extend: 'Ext.data.Model',
+     *      Ext.define(&#39;MyApp.models.Base&#39;, {
+     *          extend: &#39;Ext.data.Model&#39;,
      *
      *          fields: [
-     *              { name: 'foo' }
+     *              { name: &#39;foo&#39; }
      *          ],
      *          ...
      *      });
      *
-     *      Ext.define('MyApp.models.Derived', {
-     *          extend: 'MyApp.models.Base',
+     *      Ext.define(&#39;MyApp.models.Derived&#39;, {
+     *          extend: &#39;MyApp.models.Base&#39;,
      *
      *          fields: [
-     *              { name: 'bar' }
+     *              { name: &#39;bar&#39; }
      *          ],
      *          ...
      *      });
      *
-     *      var fooField = MyApp.models.Derived.getField('foo');
+     *      var fooField = MyApp.models.Derived.getField(&#39;foo&#39;);
      *
-     *      alert(fooField.definedBy === MyApp.models.Base); // alerts 'true'
+     *      alert(fooField.definedBy === MyApp.models.Base); // alerts &#39;true&#39;
      */
     definedBy: null,
 
@@ -466,20 +466,20 @@ Ext.define('Ext.data.field.Field', {
      * {@link Ext.data.Model record} so that the dependent value can be calculated from
      * all fields which it needs.
      *
-     * For example, to display a person's full name, using two separate `firstName` and
+     * For example, to display a person&#39;s full name, using two separate `firstName` and
      * `lastName` fields, configure the name field like this:
      *
      *     {
-     *         name: 'name',
+     *         name: &#39;name&#39;,
      *     
      *         // Will be called whenever forename or surname fields are set
      *         convert: function (v, rec) {
-     *             return rec.get('firstName') + ' ' + rec.get('lastName');
+     *             return rec.get(&#39;firstName&#39;) + &#39; &#39; + rec.get(&#39;lastName&#39;);
      *         },
      *     
-     *         depends: [ 'firstName', 'lastName' ],
+     *         depends: [ &#39;firstName&#39;, &#39;lastName&#39; ],
      *     
-     *         // It should not be returned to the server - it's not a database field
+     *         // It should not be returned to the server - it&#39;s not a database field
      *         persist: false
      *     }
      *
@@ -512,7 +512,7 @@ Ext.define('Ext.data.field.Field', {
      * - {@link Ext.data.reader.Json}
      *
      *   The mapping is a string containing the javascript expression to reference the data from an element of the data
-     *   item's {@link Ext.data.reader.Json#cfg-rootProperty rootProperty} Array. Defaults to the field name. If a function is passed,
+     *   item&#39;s {@link Ext.data.reader.Json#cfg-rootProperty rootProperty} Array. Defaults to the field name. If a function is passed,
      *   a single argument is received which contains the raw json object:
      *
      *       // Server returns [{&quot;name&quot;: &quot;Foo&quot;, &quot;age&quot;: 1}, {&quot;name&quot;: &quot;Bar&quot;, &quot;age&quot;: 2}]
@@ -533,7 +533,7 @@ Ext.define('Ext.data.field.Field', {
      *
      * - {@link Ext.data.reader.Array}
      *
-     *   The mapping is a number indicating the Array index of the field's value. Defaults to the field specification's
+     *   The mapping is a number indicating the Array index of the field&#39;s value. Defaults to the field specification&#39;s
      *   Array position. If a function is passed, a single argument is received which contains the child array.
      *
      *       // Server returns [[&quot;Foo&quot;, 1], [&quot;Bar&quot;, 2]]
@@ -597,7 +597,7 @@ Ext.define('Ext.data.field.Field', {
 <span id='Ext-data-field-Field-cfg-sortType'>    /**
 </span>     * @cfg {Function/String} sortType
      *
-     * A function which converts a Field's value to a comparable value in order to ensure
+     * A function which converts a Field&#39;s value to a comparable value in order to ensure
      * correct sort ordering.
      *
      * Predefined functions are provided in {@link Ext.data.SortTypes}. A custom sort example:
@@ -612,8 +612,8 @@ Ext.define('Ext.data.field.Field', {
      *     sortType: function(value) {
      *        switch (value.toLowerCase()) // native toLowerCase():
      *        {
-     *           case 'first': return 1;
-     *           case 'second': return 2;
+     *           case &#39;first&#39;: return 1;
+     *           case &#39;second&#39;: return 2;
      *           default: return 3;
      *        }
      *     }
@@ -765,7 +765,7 @@ Ext.define('Ext.data.field.Field', {
                     calculate.$depends = depends = [];
 
                     match = me.argumentNamesRe.exec(str);
-                    dataProp = match ? match[1] : 'data';
+                    dataProp = match ? match[1] : &#39;data&#39;;
 
                     while ((match = calculateRe.exec(str))) {
                         if (dataProp === match[1] &amp;&amp; !map[fld = match[2]]) {
@@ -796,7 +796,7 @@ Ext.define('Ext.data.field.Field', {
             me.sortType = Ext.data.SortTypes[sortType];
         }
 
-        if (depends &amp;&amp; typeof depends === 'string') {
+        if (depends &amp;&amp; typeof depends === &#39;string&#39;) {
             me.depends = [depends];
         }
 
@@ -895,50 +895,50 @@ Ext.define('Ext.data.field.Field', {
      * Example of convert functions:
      *
      *     function fullName(v, record){
-     *         return record.data.last + ', ' + record.data.first;
+     *         return record.data.last + &#39;, &#39; + record.data.first;
      *     }
      *
      *     function location(v, record){
-     *         return !record.data.city ? '' : (record.data.city + ', ' + record.data.state);
+     *         return !record.data.city ? &#39;&#39; : (record.data.city + &#39;, &#39; + record.data.state);
      *     }
      *
-     *     Ext.define('Dude', {
-     *         extend: 'Ext.data.Model',
+     *     Ext.define(&#39;Dude&#39;, {
+     *         extend: &#39;Ext.data.Model&#39;,
      *         fields: [
-     *             {name: 'fullname',  convert: fullName},
-     *             {name: 'firstname', mapping: 'name.first'},
-     *             {name: 'lastname',  mapping: 'name.last'},
-     *             {name: 'city', defaultValue: 'unknown'},
-     *             'state',
-     *             {name: 'location',  convert: location}
+     *             {name: &#39;fullname&#39;,  convert: fullName},
+     *             {name: &#39;firstname&#39;, mapping: &#39;name.first&#39;},
+     *             {name: &#39;lastname&#39;,  mapping: &#39;name.last&#39;},
+     *             {name: &#39;city&#39;, defaultValue: &#39;unknown&#39;},
+     *             &#39;state&#39;,
+     *             {name: &#39;location&#39;,  convert: location}
      *         ]
      *     });
      *
      *     // create the data store
-     *     var store = Ext.create('Ext.data.Store', {
-     *         model: 'Dude',
+     *     var store = Ext.create(&#39;Ext.data.Store&#39;, {
+     *         model: &#39;Dude&#39;,
      *         proxy: {
-     *             type: 'memory',
+     *             type: &#39;memory&#39;,
      *             reader: {
-     *                 type: 'json',
-     *                 rootProperty: 'daRoot',
-     *                 totalProperty: 'total'
+     *                 type: &#39;json&#39;,
+     *                 rootProperty: &#39;daRoot&#39;,
+     *                 totalProperty: &#39;total&#39;
      *             }
      *         }
      *     });
      *
      *     var myData = [
      *         { key: 1,
-     *           name: { first: 'Fat',    last:  'Albert' }
+     *           name: { first: &#39;Fat&#39;,    last:  &#39;Albert&#39; }
      *           // notice no city, state provided in data object
      *         },
      *         { key: 2,
-     *           name: { first: 'Barney', last:  'Rubble' },
-     *           city: 'Bedrock', state: 'Stoneridge'
+     *           name: { first: &#39;Barney&#39;, last:  &#39;Rubble&#39; },
+     *           city: &#39;Bedrock&#39;, state: &#39;Stoneridge&#39;
      *         },
      *         { key: 3,
-     *           name: { first: 'Cliff',  last:  'Claven' },
-     *           city: 'Boston',  state: 'MA'
+     *           name: { first: &#39;Cliff&#39;,  last:  &#39;Claven&#39; },
+     *           city: &#39;Boston&#39;,  state: &#39;MA&#39;
      *         }
      *     ];
      *
@@ -954,13 +954,13 @@ Ext.define('Ext.data.field.Field', {
     convert: null,
 
 <span id='Ext-data-field-Field-method-serialize'>    /**
-</span>     * A function which converts the Model's value for this Field into a form which can be used by whatever {@link Ext.data.writer.Writer Writer}
+</span>     * A function which converts the Model&#39;s value for this Field into a form which can be used by whatever {@link Ext.data.writer.Writer Writer}
      * is being used to sync data with the server.
      *
      * @method
-     * @param {Mixed} value The Field's value - the value to be serialized.
+     * @param {Mixed} value The Field&#39;s value - the value to be serialized.
      * @param {Ext.data.Model} record The record being serialized.
-     * @return {String} The string that represents the Field's value.
+     * @return {String} The string that represents the Field&#39;s value.
      */
     serialize: null,
 
@@ -987,7 +987,7 @@ Ext.define('Ext.data.field.Field', {
      */
     validate: function(value, separator, errors, record) {
         var me = this,
-            ret = '',
+            ret = &#39;&#39;,
             result, validator, validators, length, i;
 
         if (!me._validators) {
@@ -1110,7 +1110,7 @@ Ext.define('Ext.data.field.Field', {
      * @return {String} type
      */
     getType: function() {
-        return 'auto';
+        return &#39;auto&#39;;
     },
 <span id='Ext-data-field-Field-property-deprecated'>    deprecated: {
 </span>        5.1: {

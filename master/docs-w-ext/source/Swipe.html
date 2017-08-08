@@ -18,12 +18,12 @@
   <pre class="prettyprint lang-js"><span id='Ext-event-gesture-Swipe'>/**
 </span> * A gesture recognizer for swipe events
  */
-Ext.define('Ext.event.gesture.Swipe', {
-    extend: 'Ext.event.gesture.SingleTouch',
+Ext.define(&#39;Ext.event.gesture.Swipe&#39;, {
+    extend: &#39;Ext.event.gesture.SingleTouch&#39;,
 
 <span id='Ext-event-gesture-Swipe-property-priority'>    priority: 600,
 </span>
-<span id='Ext-event-gesture-Swipe-property-handledEvents'>    handledEvents: ['swipestart', 'swipe', 'swipecancel'],
+<span id='Ext-event-gesture-Swipe-property-handledEvents'>    handledEvents: [&#39;swipestart&#39;, &#39;swipe&#39;, &#39;swipecancel&#39;],
 </span>
 <span id='Ext-dom-Element-event-swipe'>    /**
 </span>     * @member Ext.dom.Element
@@ -94,7 +94,7 @@ Ext.define('Ext.event.gesture.Swipe', {
             duration = e.time - me.startTime,
             minDistance, direction, distance;
 
-        // If delta is 0 on both axes that's not swipe
+        // If delta is 0 on both axes that&#39;s not swipe
         if ((absDeltaX === 0 &amp;&amp; absDeltaY === 0) || (duration &gt; me.getMaxDuration())) {
             return me.cancel(e);
         }
@@ -111,11 +111,11 @@ Ext.define('Ext.event.gesture.Swipe', {
             minDistance = me.getMinDistance();
 
             if (me.isHorizontal &amp;&amp; absDeltaX &lt; minDistance) {
-                direction = (deltaX &lt; 0) ? 'left' : 'right';
+                direction = (deltaX &lt; 0) ? &#39;left&#39; : &#39;right&#39;;
                 distance = absDeltaX;
             }
             else if (me.isVertical &amp;&amp; absDeltaY &lt; minDistance) {
-                direction = (deltaY &lt; 0) ? 'up' : 'down';
+                direction = (deltaY &lt; 0) ? &#39;up&#39; : &#39;down&#39;;
                 distance = absDeltaY;
             }
         }
@@ -127,7 +127,7 @@ Ext.define('Ext.event.gesture.Swipe', {
         if (direction &amp;&amp; !me.isStarted) {
             me.isStarted = true;
 
-            me.fire('swipestart', e, {
+            me.fire(&#39;swipestart&#39;, e, {
                 touch: touch,
                 direction: direction,
                 distance: distance,
@@ -161,14 +161,14 @@ Ext.define('Ext.event.gesture.Swipe', {
             }
 
             if (me.isHorizontal) {
-                direction = (deltaX &lt; 0) ? 'left' : 'right';
+                direction = (deltaX &lt; 0) ? &#39;left&#39; : &#39;right&#39;;
                 distance = absDeltaX;
             } else if (me.isVertical) {
-                direction = (deltaY &lt; 0) ? 'up' : 'down';
+                direction = (deltaY &lt; 0) ? &#39;up&#39; : &#39;down&#39;;
                 distance = absDeltaY;
             }
 
-            me.fire('swipe', e, {
+            me.fire(&#39;swipe&#39;, e, {
                 touch: touch,
                 direction: direction,
                 distance: distance,
@@ -180,7 +180,7 @@ Ext.define('Ext.event.gesture.Swipe', {
     },
 
 <span id='Ext-event-gesture-Swipe-method-onCancel'>    onCancel: function(e) {
-</span>        this.fire('swipecancel', e, null, true);
+</span>        this.fire(&#39;swipecancel&#39;, e, null, true);
     },
 
 <span id='Ext-event-gesture-Swipe-method-reset'>    reset: function() {

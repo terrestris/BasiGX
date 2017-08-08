@@ -40,17 +40,17 @@
  *
  * ## Example usage:
  *
- *     var win = Ext.widget('window', {
- *         title: &quot;It's a tiger!&quot;,
- *         layout: 'fit',
+ *     var win = Ext.widget(&#39;window&#39;, {
+ *         title: &quot;It&#39;s a tiger!&quot;,
+ *         layout: &#39;fit&#39;,
  *         width: 300,
  *         height: 300,
  *         x: 20,
  *         y: 20,
  *         resizable: true,
  *         items: {
- *             xtype: 'flash',
- *             url: 'tiger.swf'
+ *             xtype: &#39;flash&#39;,
+ *             url: &#39;tiger.swf&#39;
  *         }
  *     });
  *     win.show();
@@ -61,32 +61,32 @@
  * that offers users an easy way to upgrade their Flash player. If you wish to make use of this, you should set
  * the static EXPRESS\_INSTALL\_URL property to the location of your Express Install SWF file:
  *
- *     Ext.flash.Component.EXPRESS_INSTALL_URL = 'path/to/local/expressInstall.swf';
+ *     Ext.flash.Component.EXPRESS_INSTALL_URL = &#39;path/to/local/expressInstall.swf&#39;;
  */
-Ext.define('Ext.flash.Component', {
-    extend: 'Ext.Component',
-    alternateClassName: 'Ext.FlashComponent',
-    alias: 'widget.flash',
+Ext.define(&#39;Ext.flash.Component&#39;, {
+    extend: &#39;Ext.Component&#39;,
+    alternateClassName: &#39;Ext.FlashComponent&#39;,
+    alias: &#39;widget.flash&#39;,
 
 <span id='Ext-flash-Component-cfg-flashVersion'>    /**
 </span>     * @cfg {String} [flashVersion=&quot;9.0.115&quot;]
      * Indicates the version the flash content was published for.
      */
-    flashVersion : '9.0.115',
+    flashVersion : &#39;9.0.115&#39;,
 
 <span id='Ext-flash-Component-cfg-backgroundColor'>    /**
 </span>     * @cfg {String} [backgroundColor=&quot;#ffffff&quot;]
      * The background color of the SWF movie.
      */
-    backgroundColor: '#ffffff',
+    backgroundColor: &#39;#ffffff&#39;,
 
 <span id='Ext-flash-Component-cfg-wmode'>    /**
 </span>     * @cfg {String} [wmode=&quot;opaque&quot;]
      * The wmode of the flash object. This can be used to control layering.
-     * Set to 'transparent' to ignore the {@link #backgroundColor} and make the background of the Flash
+     * Set to &#39;transparent&#39; to ignore the {@link #backgroundColor} and make the background of the Flash
      * movie transparent.
      */
-    wmode: 'opaque',
+    wmode: &#39;opaque&#39;,
 
 <span id='Ext-flash-Component-cfg-flashVars'>    /**
 </span>     * @cfg {Object} flashVars
@@ -115,7 +115,7 @@ Ext.define('Ext.flash.Component', {
      *
      * Defaults to &quot;100%&quot; so that the movie matches the width of the component.
      */
-    swfWidth: '100%',
+    swfWidth: &#39;100%&#39;,
 
 <span id='Ext-flash-Component-cfg-swfHeight'>    /**
 </span>     * @cfg {String/Number} [swfHeight=&quot;100%&quot;]
@@ -123,7 +123,7 @@ Ext.define('Ext.flash.Component', {
      *
      * Defaults to &quot;100%&quot; so that the movie matches the height of the component.
      */
-    swfHeight: '100%',
+    swfHeight: &#39;100%&#39;,
 
 <span id='Ext-flash-Component-cfg-expressInstall'>    /**
 </span>     * @cfg {Boolean} [expressInstall=false]
@@ -139,7 +139,7 @@ Ext.define('Ext.flash.Component', {
      */
 
 <span id='Ext-flash-Component-cfg-renderTpl'>    // Have to create a placeholder div with the swfId, which SWFObject will replace with the object/embed element.
-</span>    renderTpl: ['&lt;div id=&quot;{swfId}&quot; role=&quot;application&quot;&gt;&lt;/div&gt;'],
+</span>    renderTpl: [&#39;&lt;div id=&quot;{swfId}&quot; role=&quot;application&quot;&gt;&lt;/div&gt;&#39;],
 
 <span id='Ext-flash-Component-event-success'>    /**
 </span>     * @event success
@@ -155,11 +155,11 @@ Ext.define('Ext.flash.Component', {
 
     initComponent: function() {
         // &lt;debug&gt;
-        if (!('swfobject' in window)) {
-            Ext.raise('The SWFObject library is not loaded. Ext.flash.Component requires SWFObject version 2.2 or later: http://code.google.com/p/swfobject/');
+        if (!(&#39;swfobject&#39; in window)) {
+            Ext.raise(&#39;The SWFObject library is not loaded. Ext.flash.Component requires SWFObject version 2.2 or later: http://code.google.com/p/swfobject/&#39;);
         }
         if (!this.url) {
-            Ext.raise('The &quot;url&quot; config is required for Ext.flash.Component');
+            Ext.raise(&#39;The &quot;url&quot; config is required for Ext.flash.Component&#39;);
         }
         // &lt;/debug&gt;
 
@@ -182,7 +182,7 @@ Ext.define('Ext.flash.Component', {
         me.callParent();
 
         flashParams = Ext.apply({
-            allowScriptAccess: 'always',
+            allowScriptAccess: &#39;always&#39;,
             bgcolor: me.backgroundColor,
             wmode: me.wmode
         }, flashParams);
@@ -215,10 +215,10 @@ Ext.define('Ext.flash.Component', {
         if (e.success) {
             me.swf = Ext.get(e.ref);
             me.onSuccess();
-            me.fireEvent('success', me);
+            me.fireEvent(&#39;success&#39;, me);
         } else {
             me.onFailure();
-            me.fireEvent('failure', me);
+            me.fireEvent(&#39;failure&#39;, me);
         }
     },
 
@@ -232,7 +232,7 @@ Ext.define('Ext.flash.Component', {
 <span id='Ext-flash-Component-method-onSuccess'>    onSuccess: function() {
 </span>        // swfobject forces visiblity:visible on the swf element, which prevents it 
         // from getting hidden when an ancestor is given visibility:hidden.
-        this.swf.setStyle('visibility', 'inherit');
+        this.swf.setStyle(&#39;visibility&#39;, &#39;inherit&#39;);
     },
 
 <span id='Ext-flash-Component-method-onFailure'>    onFailure: Ext.emptyFn,
@@ -252,11 +252,11 @@ Ext.define('Ext.flash.Component', {
     statics: {
 <span id='Ext-flash-Component-static-property-EXPRESS_INSTALL_URL'>        /**
 </span>         * @property {String}
-         * The url for installing flash if it doesn't exist. This should be set to a local resource.
+         * The url for installing flash if it doesn&#39;t exist. This should be set to a local resource.
          * See [http://get.adobe.com/flashplayer/](http://get.adobe.com/flashplayer/) for details.
          * @static
          */
-        EXPRESS_INSTALL_URL: 'http:/' + '/swfobject.googlecode.com/svn/trunk/swfobject/expressInstall.swf'
+        EXPRESS_INSTALL_URL: &#39;http:/&#39; + &#39;/swfobject.googlecode.com/svn/trunk/swfobject/expressInstall.swf&#39;
     }
 });
 </pre>

@@ -17,11 +17,11 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-LoadMask'>/**
 </span> * A modal, floating Component which may be shown above a specified {@link Ext.Component Component} while loading data.
- * When shown, the configured owning Component will be covered with a modality mask, and the LoadMask's {@link #msg} will be
+ * When shown, the configured owning Component will be covered with a modality mask, and the LoadMask&#39;s {@link #msg} will be
  * displayed centered, accompanied by a spinner image.
  *
  * If the {@link #store} config option is specified, the masking will be automatically shown and then hidden synchronized with
- * the Store's loading process.
+ * the Store&#39;s loading process.
  *
  * Because this is a floating Component, its z-index will be managed by the global {@link Ext.WindowManager ZIndexManager}
  * object, and upon show, it will place itsef at the top of the hierarchy.
@@ -33,29 +33,29 @@
  *         renderTo : document.body,
  *         height   : 100,
  *         width    : 200,
- *         title    : 'Foo'
+ *         title    : &#39;Foo&#39;
  *     });
  *
  *     var myMask = new Ext.LoadMask({
- *         msg    : 'Please wait...',
+ *         msg    : &#39;Please wait...&#39;,
  *         target : myPanel
  *     });
  *
  *     myMask.show();
  */
-Ext.define('Ext.LoadMask', {
+Ext.define(&#39;Ext.LoadMask&#39;, {
 
-    extend: 'Ext.Component',
+    extend: &#39;Ext.Component&#39;,
 
-    alias: 'widget.loadmask',
+    alias: &#39;widget.loadmask&#39;,
 
     /* Begin Definitions */
 
     mixins: [
-        'Ext.util.StoreHolder'
+        &#39;Ext.util.StoreHolder&#39;
     ],
 
-    uses: ['Ext.data.StoreManager'],
+    uses: [&#39;Ext.data.StoreManager&#39;],
 
     /* End Definitions */
     
@@ -81,12 +81,12 @@ Ext.define('Ext.LoadMask', {
 </span>     * @cfg {String} [msg=&quot;Loading...&quot;]
      * The text to display in a centered loading message box.
      */
-    msg: 'Loading...',
+    msg: &#39;Loading...&#39;,
 <span id='Ext-LoadMask-property-msgCls'>    //&lt;/locale&gt;
 </span>
-    msgCls: Ext.baseCSSPrefix + 'mask-loading',
+    msgCls: Ext.baseCSSPrefix + &#39;mask-loading&#39;,
 
-<span id='Ext-LoadMask-property-msgWrapCls'>    msgWrapCls: Ext.baseCSSPrefix + 'mask-msg',
+<span id='Ext-LoadMask-property-msgWrapCls'>    msgWrapCls: Ext.baseCSSPrefix + &#39;mask-msg&#39;,
 </span>
 <span id='Ext-LoadMask-cfg-useMsg'>    /**
 </span>     * @cfg {Boolean} [useMsg=true]
@@ -109,28 +109,28 @@ Ext.define('Ext.LoadMask', {
 <span id='Ext-LoadMask-property-cls'>    /**
 </span>     * @private
      */
-    cls: Ext.baseCSSPrefix + 'mask',
-<span id='Ext-LoadMask-cfg-componentCls'>    componentCls: Ext.baseCSSPrefix + 'border-box',
+    cls: Ext.baseCSSPrefix + &#39;mask&#39;,
+<span id='Ext-LoadMask-cfg-componentCls'>    componentCls: Ext.baseCSSPrefix + &#39;border-box&#39;,
 </span>    
-<span id='Ext-LoadMask-property-ariaRole'>    ariaRole: 'progressbar',
+<span id='Ext-LoadMask-property-ariaRole'>    ariaRole: &#39;progressbar&#39;,
 </span><span id='Ext-LoadMask-property-focusable'>    focusable: true,
 </span><span id='Ext-LoadMask-cfg-tabIndex'>    tabIndex: 0,
 </span>    
 <span id='Ext-LoadMask-cfg-childEls'>    childEls: [
-</span>        'msgWrapEl',
-        'msgEl',
-        'msgTextEl'
+</span>        &#39;msgWrapEl&#39;,
+        &#39;msgEl&#39;,
+        &#39;msgTextEl&#39;
     ],
 
 <span id='Ext-LoadMask-cfg-renderTpl'>    renderTpl: [
-</span>        '&lt;div id=&quot;{id}-msgWrapEl&quot; data-ref=&quot;msgWrapEl&quot; class=&quot;{[values.$comp.msgWrapCls]}&quot; role=&quot;presentation&quot;&gt;',
-            '&lt;div id=&quot;{id}-msgEl&quot; data-ref=&quot;msgEl&quot; class=&quot;{[values.$comp.msgCls]} ',
-                Ext.baseCSSPrefix, 'mask-msg-inner {childElCls}&quot; role=&quot;presentation&quot;&gt;',
-                '&lt;div id=&quot;{id}-msgTextEl&quot; data-ref=&quot;msgTextEl&quot; class=&quot;',
-                    Ext.baseCSSPrefix, 'mask-msg-text',
-                    '{childElCls}&quot; role=&quot;presentation&quot;&gt;{msg}&lt;/div&gt;',
-            '&lt;/div&gt;',
-        '&lt;/div&gt;'
+</span>        &#39;&lt;div id=&quot;{id}-msgWrapEl&quot; data-ref=&quot;msgWrapEl&quot; class=&quot;{[values.$comp.msgWrapCls]}&quot; role=&quot;presentation&quot;&gt;&#39;,
+            &#39;&lt;div id=&quot;{id}-msgEl&quot; data-ref=&quot;msgEl&quot; class=&quot;{[values.$comp.msgCls]} &#39;,
+                Ext.baseCSSPrefix, &#39;mask-msg-inner {childElCls}&quot; role=&quot;presentation&quot;&gt;&#39;,
+                &#39;&lt;div id=&quot;{id}-msgTextEl&quot; data-ref=&quot;msgTextEl&quot; class=&quot;&#39;,
+                    Ext.baseCSSPrefix, &#39;mask-msg-text&#39;,
+                    &#39;{childElCls}&quot; role=&quot;presentation&quot;&gt;{msg}&lt;/div&gt;&#39;,
+            &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;
     ],
 
 <span id='Ext-LoadMask-property-maskOnDisable'>    maskOnDisable: false,
@@ -151,7 +151,7 @@ Ext.define('Ext.LoadMask', {
         if (arguments.length === 2) {
             //&lt;debug&gt;
             if (Ext.isDefined(Ext.global.console)) {
-                Ext.global.console.warn('Ext.LoadMask: LoadMask now uses a standard 1 arg constructor: use the target config');
+                Ext.global.console.warn(&#39;Ext.LoadMask: LoadMask now uses a standard 1 arg constructor: use the target config&#39;);
             }
             //&lt;/debug&gt;
             comp = me.target = config;
@@ -162,7 +162,7 @@ Ext.define('Ext.LoadMask', {
         
         //&lt;debug&gt;
         if (config.maskCls) {
-            Ext.log.warn('Ext.LoadMask property maskCls is deprecated, use msgWrapCls instead');
+            Ext.log.warn(&#39;Ext.LoadMask property maskCls is deprecated, use msgWrapCls instead&#39;);
             config.msgWrapCls = config.msgWrapCls || config.maskCls;
         }
         //&lt;/debug&gt;
@@ -186,7 +186,7 @@ Ext.define('Ext.LoadMask', {
         else {
             //&lt;debug&gt;
             if (Ext.isDefined(Ext.global.console)) {
-                Ext.global.console.warn('Ext.LoadMask: LoadMask for elements has been deprecated, use Ext.dom.Element.mask &amp; Ext.dom.Element.unmask');
+                Ext.global.console.warn(&#39;Ext.LoadMask: LoadMask for elements has been deprecated, use Ext.dom.Element.mask &amp; Ext.dom.Element.unmask&#39;);
             }
             //&lt;/debug&gt;
             comp = Ext.get(comp);
@@ -201,7 +201,7 @@ Ext.define('Ext.LoadMask', {
 
 <span id='Ext-LoadMask-method-initRenderData'>    initRenderData: function() {
 </span>        var result = this.callParent(arguments);
-        result.msg = this.msg || '';
+        result.msg = this.msg || &#39;&#39;;
         return result;
     },
     
@@ -209,7 +209,7 @@ Ext.define('Ext.LoadMask', {
 </span>        this.callParent(arguments);
         
         // In versions prior to 5.1, maskEl was rendered outside of the
-        // LoadMask's main el and had a reference to it; we keep this
+        // LoadMask&#39;s main el and had a reference to it; we keep this
         // reference for backwards compatibility.
         this.maskEl = this.el;
     },
@@ -252,19 +252,19 @@ Ext.define('Ext.LoadMask', {
         delete me.activeOwner;
         me.floatParent = owner;
         if (!owner.floating) {
-            owner = owner.up('[floating]');
+            owner = owner.up(&#39;[floating]&#39;);
         }
         if (owner) {
             me.activeOwner = owner;
-            me.mon(owner, 'move', me.sizeMask, me);
-            me.mon(owner, 'tofront', me.onOwnerToFront, me);
+            me.mon(owner, &#39;move&#39;, me.sizeMask, me);
+            me.mon(owner, &#39;tofront&#39;, me.onOwnerToFront, me);
         } else {
             me.preventBringToFront = true;
         }
         owner = me.floatParent.ownerCt;
         if (me.rendered &amp;&amp; me.isVisible() &amp;&amp; owner) {
             me.floatOwner = owner;
-            me.mon(owner, 'afterlayout', me.sizeMask, me, {single: true});
+            me.mon(owner, &#39;afterlayout&#39;, me.sizeMask, me, {single: true});
         }
     },
 
@@ -274,11 +274,11 @@ Ext.define('Ext.LoadMask', {
             floatOwner = me.floatOwner;
 
         if (activeOwner) {
-            me.mun(activeOwner, 'move', me.sizeMask, me);
-            me.mun(activeOwner, 'tofront', me.onOwnerToFront, me);
+            me.mun(activeOwner, &#39;move&#39;, me.sizeMask, me);
+            me.mun(activeOwner, &#39;tofront&#39;, me.onOwnerToFront, me);
         }
         if (floatOwner) {
-            me.mun(floatOwner, 'afterlayout', me.sizeMask, me);
+            me.mun(floatOwner, &#39;afterlayout&#39;, me.sizeMask, me);
         }
         delete me.activeOwner;
         delete me.floatOwner;
@@ -293,10 +293,10 @@ Ext.define('Ext.LoadMask', {
         // it having no tabindex attribute and thus being canonically
         // non-focusable. Placing unselectable=&quot;on&quot; attribute will make
         // it unfocusable but will also prevent clicks from focusing
-        // the parent element. We want clicks within the mask's main el
+        // the parent element. We want clicks within the mask&#39;s main el
         // to focus it, hence the workaround.
         if (Ext.isIE) {
-            me.el.on('mousedown', me.onMouseDown, me);
+            me.el.on(&#39;mousedown&#39;, me.onMouseDown, me);
         }
 
         // This LoadMask shares the DOM and may be tipped out by the use of innerHTML
@@ -314,7 +314,7 @@ Ext.define('Ext.LoadMask', {
     },
 
 <span id='Ext-LoadMask-method-onOwnerToFront'>    onOwnerToFront: function(owner, zIndex) {
-</span>        this.el.setStyle('zIndex', zIndex + 1);
+</span>        this.el.setStyle(&#39;zIndex&#39;, zIndex + 1);
     },
 
 <span id='Ext-LoadMask-method-onContainerShow'>    // Only called if we are rendered external to the target.
@@ -367,7 +367,7 @@ Ext.define('Ext.LoadMask', {
 
 <span id='Ext-LoadMask-method-sizeMask'>    /**
 </span>     * @private
-     * Called when this LoadMask's Component is resized. The toFront method rebases and resizes the modal mask.
+     * Called when this LoadMask&#39;s Component is resized. The toFront method rebases and resizes the modal mask.
      */
     sizeMask: function() {
         var me = this,
@@ -388,7 +388,7 @@ Ext.define('Ext.LoadMask', {
                         me.onOwnerToFront(target, zIndex);
                     }
                 }
-                me.el.setSize(boxTarget.getSize()).alignTo(boxTarget, 'tl-tl');
+                me.el.setSize(boxTarget.getSize()).alignTo(boxTarget, &#39;tl-tl&#39;);
             }
             
             // Always need to center the message wrap
@@ -486,7 +486,7 @@ Ext.define('Ext.LoadMask', {
             if (owner.componentLayoutCounter) {
                 me.maybeShow();
             } else {
-                // The code below is a 'run-once' interceptor.
+                // The code below is a &#39;run-once&#39; interceptor.
                 origin = owner.afterComponentLayout;
                 owner.afterComponentLayout = function() {
                     owner.afterComponentLayout = origin;
@@ -520,7 +520,7 @@ Ext.define('Ext.LoadMask', {
         // Element support to be deprecated
         if (me.isElement) {
             ownerCt.unmask();
-            me.fireEvent('hide', this);
+            me.fireEvent(&#39;hide&#39;, this);
             
             return;
         }
@@ -540,8 +540,8 @@ Ext.define('Ext.LoadMask', {
 
         // Element support to be deprecated
         if (me.isElement) {
-            me.ownerCt.mask(this.useMsg ? this.msg : '', this.msgCls);
-            me.fireEvent('show', this);
+            me.ownerCt.mask(this.useMsg ? this.msg : &#39;&#39;, this.msgCls);
+            me.fireEvent(&#39;show&#39;, this);
             
             return;
         }
@@ -558,7 +558,7 @@ Ext.define('Ext.LoadMask', {
         
         ownerCt.updateMaskState(true, me);
         
-        // Owner's disabled tabbing will also make the mask
+        // Owner&#39;s disabled tabbing will also make the mask
         // untabbable since it is rendered within the target
         me.el.restoreTabbableState();
 
@@ -579,13 +579,13 @@ Ext.define('Ext.LoadMask', {
         if (me.isVisible()) {
 
             // Allow dynamic setting of msgWrapCls
-            if (me.hasOwnProperty('msgWrapCls')) {
+            if (me.hasOwnProperty(&#39;msgWrapCls&#39;)) {
                 el.dom.className = me.msgWrapCls;
             }
 
             if (me.useMsg) {
                 me.msgTextEl.setHtml(me.msg);
-                me.ariaEl.dom.setAttribute('aria-valuetext', me.msg);
+                me.ariaEl.dom.setAttribute(&#39;aria-valuetext&#39;, me.msg);
             }
             else {
                 // Only the mask is visible if useMsg is false
@@ -620,7 +620,7 @@ Ext.define('Ext.LoadMask', {
 <span id='Ext-LoadMask-method-doDestroy'>    doDestroy: function() {
 </span>        var me = this;
 
-        // We don't have a real ownerCt, so clear it out here to prevent
+        // We don&#39;t have a real ownerCt, so clear it out here to prevent
         // spurious warnings when we are destroyed
         me.ownerCt = null;
         me.bindStore(null);

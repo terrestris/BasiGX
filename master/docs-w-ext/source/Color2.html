@@ -19,19 +19,19 @@
 </span> * Represents an RGB color and provides helper functions on it e.g. to get
  * color components in HSL color space.
  */
-Ext.define('Ext.util.Color', {
-    alternateClassName: 'Ext.draw.Color',
+Ext.define(&#39;Ext.util.Color&#39;, {
+    alternateClassName: &#39;Ext.draw.Color&#39;,
     statics: {
 <span id='Ext-util-Color-static-property-colorToHexRe'>        colorToHexRe: /(.*?)rgb\((\d+),\s*(\d+),\s*(\d+)\)/,
 </span><span id='Ext-util-Color-static-property-rgbToHexRe'>        rgbToHexRe: /\s*rgb\((\d+),\s*(\d+),\s*(\d+)\)/,
 </span><span id='Ext-util-Color-static-property-rgbaToHexRe'>        rgbaToHexRe: /\s*rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\.\d]+)\)/,
 </span><span id='Ext-util-Color-static-property-hexRe'>        hexRe: /\s*#([0-9a-fA-F][0-9a-fA-F]?)([0-9a-fA-F][0-9a-fA-F]?)([0-9a-fA-F][0-9a-fA-F]?)\s*/,
 </span>
-<span id='Ext-util-Color-static-property-NONE'>        // Note that 'none' ia an invalid color string.
+<span id='Ext-util-Color-static-property-NONE'>        // Note that &#39;none&#39; ia an invalid color string.
 </span>        // When assigned to the fillStyle/strokeStyle/shadowColor properties
-        // of a Canvas context, those properties won't change their values.
-        NONE: 'none',
-<span id='Ext-util-Color-static-property-RGBA_NONE'>        RGBA_NONE: 'rgba(0, 0, 0, 0)'
+        // of a Canvas context, those properties won&#39;t change their values.
+        NONE: &#39;none&#39;,
+<span id='Ext-util-Color-static-property-RGBA_NONE'>        RGBA_NONE: &#39;rgba(0, 0, 0, 0)&#39;
 </span>    },
 
 <span id='Ext-util-Color-property-isColor'>    isColor: true,
@@ -324,8 +324,8 @@ Ext.define('Ext.util.Color', {
     },
 
 <span id='Ext-util-Color-method-toString'>    /**
-</span>     * toString() returns a color in hex format ('#rrggbb') if the alpha is 1. If the 
-     * alpha is less than one, toString() returns the color in RGBA format ('rgba(255,0,0,0.3)').
+</span>     * toString() returns a color in hex format (&#39;#rrggbb&#39;) if the alpha is 1. If the 
+     * alpha is less than one, toString() returns the color in RGBA format (&#39;rgba(255,0,0,0.3)&#39;).
      * 
      * @return {String}
      */
@@ -337,22 +337,22 @@ Ext.define('Ext.util.Color', {
             var r = round(me.r).toString(16),
                 g = round(me.g).toString(16),
                 b = round(me.b).toString(16);
-            r = (r.length === 1) ? '0' + r : r;
-            g = (g.length === 1) ? '0' + g : g;
-            b = (b.length === 1) ? '0' + b : b;
-            return ['#', r, g, b].join('');
+            r = (r.length === 1) ? &#39;0&#39; + r : r;
+            g = (g.length === 1) ? &#39;0&#39; + g : g;
+            b = (b.length === 1) ? &#39;0&#39; + b : b;
+            return [&#39;#&#39;, r, g, b].join(&#39;&#39;);
         } else {
-            return 'rgba(' + [
+            return &#39;rgba(&#39; + [
                 round(me.r),
                 round(me.g),
                 round(me.b),
                 me.a === 0 ? 0 : me.a.toFixed(15)
-            ].join(', ') + ')';
-            // Even though things like 'rgba(0,0,0,0)' will probably get converted to
-            // 'rgba(0, 0, 0, 0)' when assigned to ctx.fillStyle or ctx.strokeStyle,
-            // we can't be sure this is the case for every browser, so for consistency
+            ].join(&#39;, &#39;) + &#39;)&#39;;
+            // Even though things like &#39;rgba(0,0,0,0)&#39; will probably get converted to
+            // &#39;rgba(0, 0, 0, 0)&#39; when assigned to ctx.fillStyle or ctx.strokeStyle,
+            // we can&#39;t be sure this is the case for every browser, so for consistency
             // with the Ext.draw.Color.RGBA_NONE (which is used a lot for checks)
-            // we join using the ', ' and not ',' here.
+            // we join using the &#39;, &#39; and not &#39;,&#39; here.
         }
     },
 
@@ -366,7 +366,7 @@ Ext.define('Ext.util.Color', {
             b = this.b,
             rgb = b | (g &lt;&lt; 8) | (r &lt;&lt; 16);
 
-        return '#' + ('000000' + rgb.toString(16)).slice(-6);
+        return &#39;#&#39; + (&#39;000000&#39; + rgb.toString(16)).slice(-6);
     },
 
 <span id='Ext-util-Color-method-setFromString'>    /**
@@ -374,10 +374,10 @@ Ext.define('Ext.util.Color', {
      *
      * Supported formats: 
      * 
-     * + '#rrggbb'
-     * + '#rgb', 'rgb(r,g,b)'
-     * + 'rgba(r,g,b,a)'
-     * + supported CSS color names (e.g., 'black', 'white', etc).
+     * + &#39;#rrggbb&#39;
+     * + &#39;#rgb&#39;, &#39;rgb(r,g,b)&#39;
+     * + &#39;rgba(r,g,b,a)&#39;
+     * + supported CSS color names (e.g., &#39;black&#39;, &#39;white&#39;, etc).
      *
      * If the string is not recognized, setFromString returns rgba(0,0,0,0).
      *
@@ -393,7 +393,7 @@ Ext.define('Ext.util.Color', {
             return this;
         }
 
-        if ((str.length === 4 || str.length === 7) &amp;&amp; str.substr(0, 1) === '#') {
+        if ((str.length === 4 || str.length === 7) &amp;&amp; str.substr(0, 1) === &#39;#&#39;) {
             values = str.match(Ext.util.Color.hexRe);
             if (values) {
                 r = parse(values[1], 16) &gt;&gt; 0;
@@ -420,7 +420,7 @@ Ext.define('Ext.util.Color', {
                 return this.setFromString(Ext.util.Color.ColorList[str.toLowerCase()]);
             }
         }
-        if (typeof r === 'undefined') {
+        if (typeof r === &#39;undefined&#39;) {
             return this;
         }
         this.r = r;
@@ -462,147 +462,147 @@ Ext.define('Ext.util.Color', {
         },
 
         ColorList: {
-            aliceblue: '#f0f8ff',
-            antiquewhite: '#faebd7',
-            aqua: '#00ffff',
-            aquamarine: '#7fffd4',
-            azure: '#f0ffff',
-            beige: '#f5f5dc',
-            bisque: '#ffe4c4',
-            black: '#000000',
-            blanchedalmond: '#ffebcd',
-            blue: '#0000ff',
-            blueviolet: '#8a2be2',
-            brown: '#a52a2a',
-            burlywood: '#deb887',
-            cadetblue: '#5f9ea0',
-            chartreuse: '#7fff00',
-            chocolate: '#d2691e',
-            coral: '#ff7f50',
-            cornflowerblue: '#6495ed',
-            cornsilk: '#fff8dc',
-            crimson: '#dc143c',
-            cyan: '#00ffff',
-            darkblue: '#00008b',
-            darkcyan: '#008b8b',
-            darkgoldenrod: '#b8860b',
-            darkgray: '#a9a9a9',
-            darkgreen: '#006400',
-            darkkhaki: '#bdb76b',
-            darkmagenta: '#8b008b',
-            darkolivegreen: '#556b2f',
-            darkorange: '#ff8c00',
-            darkorchid: '#9932cc',
-            darkred: '#8b0000',
-            darksalmon: '#e9967a',
-            darkseagreen: '#8fbc8f',
-            darkslateblue: '#483d8b',
-            darkslategray: '#2f4f4f',
-            darkturquoise: '#00ced1',
-            darkviolet: '#9400d3',
-            deeppink: '#ff1493',
-            deepskyblue: '#00bfff',
-            dimgray: '#696969',
-            dodgerblue: '#1e90ff',
-            firebrick: '#b22222',
-            floralwhite: '#fffaf0',
-            forestgreen: '#228b22',
-            fuchsia: '#ff00ff',
-            gainsboro: '#dcdcdc',
-            ghostwhite: '#f8f8ff',
-            gold: '#ffd700',
-            goldenrod: '#daa520',
-            gray: '#808080',
-            green: '#008000',
-            greenyellow: '#adff2f',
-            honeydew: '#f0fff0',
-            hotpink: '#ff69b4',
-            indianred: '#cd5c5c',
-            indigo: '#4b0082',
-            ivory: '#fffff0',
-            khaki: '#f0e68c',
-            lavender: '#e6e6fa',
-            lavenderblush: '#fff0f5',
-            lawngreen: '#7cfc00',
-            lemonchiffon: '#fffacd',
-            lightblue: '#add8e6',
-            lightcoral: '#f08080',
-            lightcyan: '#e0ffff',
-            lightgoldenrodyellow: '#fafad2',
-            lightgray: '#d3d3d3',
-            lightgrey: '#d3d3d3',
-            lightgreen: '#90ee90',
-            lightpink: '#ffb6c1',
-            lightsalmon: '#ffa07a',
-            lightseagreen: '#20b2aa',
-            lightskyblue: '#87cefa',
-            lightslategray: '#778899',
-            lightsteelblue: '#b0c4de',
-            lightyellow: '#ffffe0',
-            lime: '#00ff00',
-            limegreen: '#32cd32',
-            linen: '#faf0e6',
-            magenta: '#ff00ff',
-            maroon: '#800000',
-            mediumaquamarine: '#66cdaa',
-            mediumblue: '#0000cd',
-            mediumorchid: '#ba55d3',
-            mediumpurple: '#9370d8',
-            mediumseagreen: '#3cb371',
-            mediumslateblue: '#7b68ee',
-            mediumspringgreen: '#00fa9a',
-            mediumturquoise: '#48d1cc',
-            mediumvioletred: '#c71585',
-            midnightblue: '#191970',
-            mintcream: '#f5fffa',
-            mistyrose: '#ffe4e1',
-            moccasin: '#ffe4b5',
-            navajowhite: '#ffdead',
-            navy: '#000080',
-            oldlace: '#fdf5e6',
-            olive: '#808000',
-            olivedrab: '#6b8e23',
-            orange: '#ffa500',
-            orangered: '#ff4500',
-            orchid: '#da70d6',
-            palegoldenrod: '#eee8aa',
-            palegreen: '#98fb98',
-            paleturquoise: '#afeeee',
-            palevioletred: '#d87093',
-            papayawhip: '#ffefd5',
-            peachpuff: '#ffdab9',
-            peru: '#cd853f',
-            pink: '#ffc0cb',
-            plum: '#dda0dd',
-            powderblue: '#b0e0e6',
-            purple: '#800080',
-            red: '#ff0000',
-            rosybrown: '#bc8f8f',
-            royalblue: '#4169e1',
-            saddlebrown: '#8b4513',
-            salmon: '#fa8072',
-            sandybrown: '#f4a460',
-            seagreen: '#2e8b57',
-            seashell: '#fff5ee',
-            sienna: '#a0522d',
-            silver: '#c0c0c0',
-            skyblue: '#87ceeb',
-            slateblue: '#6a5acd',
-            slategray: '#708090',
-            snow: '#fffafa',
-            springgreen: '#00ff7f',
-            steelblue: '#4682b4',
-            tan: '#d2b48c',
-            teal: '#008080',
-            thistle: '#d8bfd8',
-            tomato: '#ff6347',
-            turquoise: '#40e0d0',
-            violet: '#ee82ee',
-            wheat: '#f5deb3',
-            white: '#ffffff',
-            whitesmoke: '#f5f5f5',
-            yellow: '#ffff00',
-            yellowgreen: '#9acd32'
+            aliceblue: &#39;#f0f8ff&#39;,
+            antiquewhite: &#39;#faebd7&#39;,
+            aqua: &#39;#00ffff&#39;,
+            aquamarine: &#39;#7fffd4&#39;,
+            azure: &#39;#f0ffff&#39;,
+            beige: &#39;#f5f5dc&#39;,
+            bisque: &#39;#ffe4c4&#39;,
+            black: &#39;#000000&#39;,
+            blanchedalmond: &#39;#ffebcd&#39;,
+            blue: &#39;#0000ff&#39;,
+            blueviolet: &#39;#8a2be2&#39;,
+            brown: &#39;#a52a2a&#39;,
+            burlywood: &#39;#deb887&#39;,
+            cadetblue: &#39;#5f9ea0&#39;,
+            chartreuse: &#39;#7fff00&#39;,
+            chocolate: &#39;#d2691e&#39;,
+            coral: &#39;#ff7f50&#39;,
+            cornflowerblue: &#39;#6495ed&#39;,
+            cornsilk: &#39;#fff8dc&#39;,
+            crimson: &#39;#dc143c&#39;,
+            cyan: &#39;#00ffff&#39;,
+            darkblue: &#39;#00008b&#39;,
+            darkcyan: &#39;#008b8b&#39;,
+            darkgoldenrod: &#39;#b8860b&#39;,
+            darkgray: &#39;#a9a9a9&#39;,
+            darkgreen: &#39;#006400&#39;,
+            darkkhaki: &#39;#bdb76b&#39;,
+            darkmagenta: &#39;#8b008b&#39;,
+            darkolivegreen: &#39;#556b2f&#39;,
+            darkorange: &#39;#ff8c00&#39;,
+            darkorchid: &#39;#9932cc&#39;,
+            darkred: &#39;#8b0000&#39;,
+            darksalmon: &#39;#e9967a&#39;,
+            darkseagreen: &#39;#8fbc8f&#39;,
+            darkslateblue: &#39;#483d8b&#39;,
+            darkslategray: &#39;#2f4f4f&#39;,
+            darkturquoise: &#39;#00ced1&#39;,
+            darkviolet: &#39;#9400d3&#39;,
+            deeppink: &#39;#ff1493&#39;,
+            deepskyblue: &#39;#00bfff&#39;,
+            dimgray: &#39;#696969&#39;,
+            dodgerblue: &#39;#1e90ff&#39;,
+            firebrick: &#39;#b22222&#39;,
+            floralwhite: &#39;#fffaf0&#39;,
+            forestgreen: &#39;#228b22&#39;,
+            fuchsia: &#39;#ff00ff&#39;,
+            gainsboro: &#39;#dcdcdc&#39;,
+            ghostwhite: &#39;#f8f8ff&#39;,
+            gold: &#39;#ffd700&#39;,
+            goldenrod: &#39;#daa520&#39;,
+            gray: &#39;#808080&#39;,
+            green: &#39;#008000&#39;,
+            greenyellow: &#39;#adff2f&#39;,
+            honeydew: &#39;#f0fff0&#39;,
+            hotpink: &#39;#ff69b4&#39;,
+            indianred: &#39;#cd5c5c&#39;,
+            indigo: &#39;#4b0082&#39;,
+            ivory: &#39;#fffff0&#39;,
+            khaki: &#39;#f0e68c&#39;,
+            lavender: &#39;#e6e6fa&#39;,
+            lavenderblush: &#39;#fff0f5&#39;,
+            lawngreen: &#39;#7cfc00&#39;,
+            lemonchiffon: &#39;#fffacd&#39;,
+            lightblue: &#39;#add8e6&#39;,
+            lightcoral: &#39;#f08080&#39;,
+            lightcyan: &#39;#e0ffff&#39;,
+            lightgoldenrodyellow: &#39;#fafad2&#39;,
+            lightgray: &#39;#d3d3d3&#39;,
+            lightgrey: &#39;#d3d3d3&#39;,
+            lightgreen: &#39;#90ee90&#39;,
+            lightpink: &#39;#ffb6c1&#39;,
+            lightsalmon: &#39;#ffa07a&#39;,
+            lightseagreen: &#39;#20b2aa&#39;,
+            lightskyblue: &#39;#87cefa&#39;,
+            lightslategray: &#39;#778899&#39;,
+            lightsteelblue: &#39;#b0c4de&#39;,
+            lightyellow: &#39;#ffffe0&#39;,
+            lime: &#39;#00ff00&#39;,
+            limegreen: &#39;#32cd32&#39;,
+            linen: &#39;#faf0e6&#39;,
+            magenta: &#39;#ff00ff&#39;,
+            maroon: &#39;#800000&#39;,
+            mediumaquamarine: &#39;#66cdaa&#39;,
+            mediumblue: &#39;#0000cd&#39;,
+            mediumorchid: &#39;#ba55d3&#39;,
+            mediumpurple: &#39;#9370d8&#39;,
+            mediumseagreen: &#39;#3cb371&#39;,
+            mediumslateblue: &#39;#7b68ee&#39;,
+            mediumspringgreen: &#39;#00fa9a&#39;,
+            mediumturquoise: &#39;#48d1cc&#39;,
+            mediumvioletred: &#39;#c71585&#39;,
+            midnightblue: &#39;#191970&#39;,
+            mintcream: &#39;#f5fffa&#39;,
+            mistyrose: &#39;#ffe4e1&#39;,
+            moccasin: &#39;#ffe4b5&#39;,
+            navajowhite: &#39;#ffdead&#39;,
+            navy: &#39;#000080&#39;,
+            oldlace: &#39;#fdf5e6&#39;,
+            olive: &#39;#808000&#39;,
+            olivedrab: &#39;#6b8e23&#39;,
+            orange: &#39;#ffa500&#39;,
+            orangered: &#39;#ff4500&#39;,
+            orchid: &#39;#da70d6&#39;,
+            palegoldenrod: &#39;#eee8aa&#39;,
+            palegreen: &#39;#98fb98&#39;,
+            paleturquoise: &#39;#afeeee&#39;,
+            palevioletred: &#39;#d87093&#39;,
+            papayawhip: &#39;#ffefd5&#39;,
+            peachpuff: &#39;#ffdab9&#39;,
+            peru: &#39;#cd853f&#39;,
+            pink: &#39;#ffc0cb&#39;,
+            plum: &#39;#dda0dd&#39;,
+            powderblue: &#39;#b0e0e6&#39;,
+            purple: &#39;#800080&#39;,
+            red: &#39;#ff0000&#39;,
+            rosybrown: &#39;#bc8f8f&#39;,
+            royalblue: &#39;#4169e1&#39;,
+            saddlebrown: &#39;#8b4513&#39;,
+            salmon: &#39;#fa8072&#39;,
+            sandybrown: &#39;#f4a460&#39;,
+            seagreen: &#39;#2e8b57&#39;,
+            seashell: &#39;#fff5ee&#39;,
+            sienna: &#39;#a0522d&#39;,
+            silver: &#39;#c0c0c0&#39;,
+            skyblue: &#39;#87ceeb&#39;,
+            slateblue: &#39;#6a5acd&#39;,
+            slategray: &#39;#708090&#39;,
+            snow: &#39;#fffafa&#39;,
+            springgreen: &#39;#00ff7f&#39;,
+            steelblue: &#39;#4682b4&#39;,
+            tan: &#39;#d2b48c&#39;,
+            teal: &#39;#008080&#39;,
+            thistle: &#39;#d8bfd8&#39;,
+            tomato: &#39;#ff6347&#39;,
+            turquoise: &#39;#40e0d0&#39;,
+            violet: &#39;#ee82ee&#39;,
+            wheat: &#39;#f5deb3&#39;,
+            white: &#39;#ffffff&#39;,
+            whitesmoke: &#39;#f5f5f5&#39;,
+            yellow: &#39;#ffff00&#39;,
+            yellowgreen: &#39;#9acd32&#39;
         },
 
 <span id='Ext-util-Color-static-method-fromHSL'>        /**
@@ -636,10 +636,10 @@ Ext.define('Ext.util.Color', {
          *
          * Supported formats: 
          * 
-         * + '#rrggbb'
-         * + '#rgb', 'rgb(r,g,b)'
-         * + 'rgba(r,g,b,a)'
-         * + supported CSS color names (e.g., 'black', 'white', etc).
+         * + &#39;#rrggbb&#39;
+         * + &#39;#rgb&#39;, &#39;rgb(r,g,b)&#39;
+         * + &#39;rgba(r,g,b,a)&#39;
+         * + supported CSS color names (e.g., &#39;black&#39;, &#39;white&#39;, etc).
          *
          * If the string is not recognized, fromString returns rgba(0,0,0,0).
          *

@@ -24,10 +24,10 @@
  * Navigation and interactions are defined by http://www.w3.org/TR/2013/WD-wai-aria-practices-20130307/#TreeView
  * or, if there are multiple visible columns, by http://www.w3.org/TR/2013/WD-wai-aria-practices-20130307/#treegrid
  */
-Ext.define('Ext.tree.NavigationModel', {
-    extend: 'Ext.grid.NavigationModel',
+Ext.define(&#39;Ext.tree.NavigationModel&#39;, {
+    extend: &#39;Ext.grid.NavigationModel&#39;,
     
-    alias: 'view.navigation.tree',
+    alias: &#39;view.navigation.tree&#39;,
     
 <span id='Ext-tree-NavigationModel-method-initKeyNav'>    initKeyNav: function(view) {
 </span>        var me = this,
@@ -47,7 +47,7 @@ Ext.define('Ext.tree.NavigationModel', {
 </span>        var fn = this.onAsterisk;
 
         keyNav.map.addBinding([{
-            key: '8',
+            key: &#39;8&#39;,
             shift: true,
             handler: fn,
             scope: this
@@ -86,7 +86,7 @@ Ext.define('Ext.tree.NavigationModel', {
         if (keyEvent.position.column.isTreeColumn &amp;&amp; record.isExpanded()) {
             view.collapse(record);
         }
-        // Left arrow key on a closed or end node moves focus to the node's parent (don't attempt to focus hidden root).
+        // Left arrow key on a closed or end node moves focus to the node&#39;s parent (don&#39;t attempt to focus hidden root).
         else {
             record = record.parentNode;
             if (record &amp;&amp; !(record.isRoot() &amp;&amp; !view.rootVisible)) {

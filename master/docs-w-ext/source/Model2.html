@@ -25,23 +25,23 @@
  * The abstract method `onSelectChange` should be implemented in these
  * subclasses to update the UI widget.
  */
-Ext.define('Ext.selection.Model', {
-    extend: 'Ext.mixin.Observable',
-    alternateClassName: 'Ext.AbstractSelectionModel',
-    alias: 'selection.abstract',
+Ext.define(&#39;Ext.selection.Model&#39;, {
+    extend: &#39;Ext.mixin.Observable&#39;,
+    alternateClassName: &#39;Ext.AbstractSelectionModel&#39;,
+    alias: &#39;selection.abstract&#39;,
     
     requires: [
-        'Ext.util.Bag'
+        &#39;Ext.util.Bag&#39;
     ],
     
     mixins: [
-        'Ext.util.StoreHolder',
-        'Ext.mixin.Factoryable'
+        &#39;Ext.util.StoreHolder&#39;,
+        &#39;Ext.mixin.Factoryable&#39;
     ],
 
 <span id='Ext-selection-Model-property-factoryConfig'>    factoryConfig: {
 </span>        // Need to override the defaultType, otherwise this class would be the default, and it is an abstract base.
-        defaultType: 'dataviewmodel'
+        defaultType: &#39;dataviewmodel&#39;
     },
 
 <span id='Ext-selection-Model-property-S-configPrefixed'>    // We do not want &quot;_hidden&quot; style backing properties.
@@ -85,15 +85,15 @@ Ext.define('Ext.selection.Model', {
 <span id='Ext-selection-Model-cfg-allowDeselect'>    /**
 </span>     * @cfg {Boolean} allowDeselect
      * Allow users to deselect a record in a DataView, List or Grid.
-     * Only applicable when the {@link #mode} is 'SINGLE'.
+     * Only applicable when the {@link #mode} is &#39;SINGLE&#39;.
      */
     allowDeselect: undefined,
     
 <span id='Ext-selection-Model-cfg-toggleOnClick'>    /**
 </span>     * @cfg {Boolean} toggleOnClick
      * `true` to toggle the selection state of an item when clicked.
-     * Only applicable when the {@link #mode} is 'SINGLE'.
-     * Only applicable when the {@link #allowDeselect} is 'true'.
+     * Only applicable when the {@link #mode} is &#39;SINGLE&#39;.
+     * Only applicable when the {@link #allowDeselect} is &#39;true&#39;.
      */
     toggleOnClick: true,
 
@@ -119,12 +119,12 @@ Ext.define('Ext.selection.Model', {
      * Remove records from the selection when they are removed from the store.
      *
      * **Important:** When using {@link Ext.toolbar.Paging paging} or a {@link Ext.data.BufferedStore},
-     * records which are cached in the Store's {@link Ext.data.Store#property-data data collection} may be removed from the Store when pages change,
+     * records which are cached in the Store&#39;s {@link Ext.data.Store#property-data data collection} may be removed from the Store when pages change,
      * or when rows are scrolled out of view. For this reason `pruneRemoved` should be set to `false` when using a buffered Store.
      *
      * Also, when previously pruned pages are returned to the cache, the records objects in the page will be
-     * *new instances*, and will not match the instances in the selection model's collection. For this reason,
-     * you MUST ensure that the Model definition's {@link Ext.data.Model#idProperty idProperty} references a unique
+     * *new instances*, and will not match the instances in the selection model&#39;s collection. For this reason,
+     * you MUST ensure that the Model definition&#39;s {@link Ext.data.Model#idProperty idProperty} references a unique
      * key because in this situation, records in the Store have their **IDs** compared to records in the SelectionModel
      * in order to re-select a record which is scrolled back into view.
      */
@@ -168,7 +168,7 @@ Ext.define('Ext.selection.Model', {
 
         // sets this.selectionMode
         me.setSelectionMode(me.mode);
-        if (me.selectionMode !== 'SINGLE') {
+        if (me.selectionMode !== &#39;SINGLE&#39;) {
             me.allowDeselect = true;
         }
     },
@@ -179,8 +179,8 @@ Ext.define('Ext.selection.Model', {
 
 <span id='Ext-selection-Model-method-applySelected'>    applySelected: function(selected) {
 </span>        if (!selected.isBag &amp;&amp; !selected.isCollection) {
-            selected = new Ext.util[this.ordered ? 'Collection' : 'Bag'](Ext.apply({
-                rootProperty: 'data'
+            selected = new Ext.util[this.ordered ? &#39;Collection&#39; : &#39;Bag&#39;](Ext.apply({
+                rootProperty: &#39;data&#39;
             }, selected));
         }
         return selected;
@@ -253,9 +253,9 @@ Ext.define('Ext.selection.Model', {
             start = selections.length,
             i, l, rec;
 
-        // Cache selection records' indexes first to avoid
+        // Cache selection records&#39; indexes first to avoid
         // looking them up on every sort comparison below.
-        // We can't rely on store.indexOf being fast because
+        // We can&#39;t rely on store.indexOf being fast because
         // for whatever reason the Store in question may force
         // sequential index lookup, which will result in O(n^2)
         // sort performance below.
@@ -271,7 +271,7 @@ Ext.define('Ext.selection.Model', {
             var idx1 = selIndexes[r1.id],
                 idx2 = selIndexes[r2.id];
             
-            // Don't check for equality since indexes will be unique
+            // Don&#39;t check for equality since indexes will be unique
             return idx1 &lt; idx2 ? -1 : 1;
         });
         
@@ -305,13 +305,13 @@ Ext.define('Ext.selection.Model', {
             shift = e.shiftKey;
 
         switch (me.selectionMode) {
-            case 'MULTI':
+            case &#39;MULTI&#39;:
                 me.selectWithEventMulti(record, e, isSelected);
                 break;
-            case 'SIMPLE':
+            case &#39;SIMPLE&#39;:
                 me.selectWithEventSimple(record, e, isSelected);
                 break;
-            case 'SINGLE':
+            case &#39;SINGLE&#39;:
                 me.selectWithEventSingle(record, e, isSelected);
                 break;
         }
@@ -346,17 +346,17 @@ Ext.define('Ext.selection.Model', {
         // This is used by ActionColumn and CheckColumn to implement their stopSelection config
         if (e.stopSelection) {
             return true;
-        } else if (e.type !== 'keydown' &amp;&amp; e.button !== 0) {
+        } else if (e.type !== &#39;keydown&#39; &amp;&amp; e.button !== 0) {
             if (this.ignoreRightMouseSelection || this.isSelected(e.record)) {
                 return true;
             }
         } else {
-            return e.type === 'mousedown';
+            return e.type === &#39;mousedown&#39;;
         }
     },
 
 <span id='Ext-selection-Model-method-onNavigate'>    // Private
-</span>    // Called in response to a FocusModel's navigate event when a new record has been navigated to.
+</span>    // Called in response to a FocusModel&#39;s navigate event when a new record has been navigated to.
     // Event is passed so that shift and ctrl can be handled.
     onNavigate: function(e) {
         // Enforce the ignoreRightMouseSelection setting.
@@ -371,7 +371,7 @@ Ext.define('Ext.selection.Model', {
         var me = this,
             keyEvent = e.keyEvent,
             // ctrlKey may be set on the event if we want to treat it like a ctrlKey so
-            // we don't mutate the original event object
+            // we don&#39;t mutate the original event object
             ctrlKey = keyEvent.ctrlKey || e.ctrlKey,
             recIdx = e.recordIndex,
             record = e.record,
@@ -382,10 +382,10 @@ Ext.define('Ext.selection.Model', {
             key = keyEvent.getCharCode(),
             isSpace = key === keyEvent.SPACE,
             changedRec = e.record !== e.previousRecord,
-            direction = key === keyEvent.UP || key === keyEvent.PAGE_UP || key === keyEvent.HOME || (key === keyEvent.LEFT &amp;&amp; changedRec) ? 'up' : (key === keyEvent.DOWN || key === keyEvent.PAGE_DOWN || key === keyEvent.END || (key === keyEvent.RIGHT &amp;&amp; changedRec) ? 'down' : null);
+            direction = key === keyEvent.UP || key === keyEvent.PAGE_UP || key === keyEvent.HOME || (key === keyEvent.LEFT &amp;&amp; changedRec) ? &#39;up&#39; : (key === keyEvent.DOWN || key === keyEvent.PAGE_DOWN || key === keyEvent.END || (key === keyEvent.RIGHT &amp;&amp; changedRec) ? &#39;down&#39; : null);
 
         switch (me.selectionMode) {
-            case 'MULTI':
+            case &#39;MULTI&#39;:
                 me.setSelectionStart(e.selectionStart);
 
                 if (key === keyEvent.A &amp;&amp; ctrlKey) {
@@ -417,10 +417,10 @@ Ext.define('Ext.selection.Model', {
                 else if (keyEvent.shiftKey &amp;&amp; from) {
 
                     // If we are heading back TOWARDS the start rec - deselect skipped range...
-                    if (direction === 'up' &amp;&amp; fromIdx &lt;= recIdx) {
+                    if (direction === &#39;up&#39; &amp;&amp; fromIdx &lt;= recIdx) {
                         me.deselectRange(lastFocused, recIdx + 1);
                     }
-                    else if (direction === 'down' &amp;&amp; fromIdx &gt;= recIdx) {
+                    else if (direction === &#39;down&#39; &amp;&amp; fromIdx &gt;= recIdx) {
                         me.deselectRange(lastFocused, recIdx - 1);
                     }
 
@@ -439,7 +439,7 @@ Ext.define('Ext.selection.Model', {
                     me.selectWithEvent(record, keyEvent);
                 }
                 break;
-            case 'SIMPLE':
+            case &#39;SIMPLE&#39;:
                 if (key === keyEvent.A &amp;&amp; ctrlKey) {
                     // Listening to endUpdate on the Collection will be more efficient
                     me.selected.beginUpdate();
@@ -451,7 +451,7 @@ Ext.define('Ext.selection.Model', {
                     me.doSelect(record, true);
                 }
                 break;
-            case 'SINGLE':
+            case &#39;SINGLE&#39;:
                 // CTRL-navigation does not select
                 if (!ctrlKey) {
                     // Arrow movement
@@ -670,7 +670,7 @@ Ext.define('Ext.selection.Model', {
                 me.maybeFireSelectionChange(result[1] &gt; 0 &amp;&amp; !suppressEvent);
                 return;
             } else {
-                // Means something has been deselected, so we've had a change
+                // Means something has been deselected, so we&#39;ve had a change
                 change = result[1] &gt; 0;
             }
         }
@@ -796,7 +796,7 @@ Ext.define('Ext.selection.Model', {
         }
         me.resumeChanges();
 
-        // If we have been suppressing events, we've not been removing individual records
+        // If we have been suppressing events, we&#39;ve not been removing individual records
         // Remove them all in one shot.
         if (suppressEvent) {
             selected.remove(records);
@@ -857,7 +857,7 @@ Ext.define('Ext.selection.Model', {
     maybeFireSelectionChange: function(fireEvent) {
         var me = this;
         if (fireEvent &amp;&amp; !me.suspendChange) {
-            me.fireEvent('selectionchange', me, me.getSelection());
+            me.fireEvent(&#39;selectionchange&#39;, me, me.getSelection());
         }
     },
 
@@ -871,7 +871,7 @@ Ext.define('Ext.selection.Model', {
 
 <span id='Ext-selection-Model-method-getSelectionMode'>    /**
 </span>     * Returns the current selectionMode.
-     * @return {String} The selectionMode: 'SINGLE', 'MULTI' or 'SIMPLE'.
+     * @return {String} The selectionMode: &#39;SINGLE&#39;, &#39;MULTI&#39; or &#39;SIMPLE&#39;.
      */
     getSelectionMode: function() {
         return this.selectionMode;
@@ -879,13 +879,13 @@ Ext.define('Ext.selection.Model', {
 
 <span id='Ext-selection-Model-method-setSelectionMode'>    /**
 </span>     * Sets the current selectionMode.
-     * @param {String} selMode 'SINGLE', 'MULTI' or 'SIMPLE'.
+     * @param {String} selMode &#39;SINGLE&#39;, &#39;MULTI&#39; or &#39;SIMPLE&#39;.
      */
     setSelectionMode: function(selMode) {
-        selMode = selMode ? selMode.toUpperCase() : 'SINGLE';
+        selMode = selMode ? selMode.toUpperCase() : &#39;SINGLE&#39;;
         // set to mode specified unless it doesnt exist, in that case
         // use single.
-        this.selectionMode = this.modes[selMode] ? selMode : 'SINGLE';
+        this.selectionMode = this.modes[selMode] ? selMode : &#39;SINGLE&#39;;
     },
 
 <span id='Ext-selection-Model-method-isLocked'>    /**
@@ -997,7 +997,7 @@ Ext.define('Ext.selection.Model', {
             }
 
             // In single select mode, only one record may be selected
-            if (me.mode === 'SINGLE' &amp;&amp; toBeReAdded.length) {
+            if (me.mode === &#39;SINGLE&#39; &amp;&amp; toBeReAdded.length) {
                 break;
             }
         }
@@ -1217,7 +1217,7 @@ Ext.define('Ext.selection.Model', {
         me.maybeFireSelectionChange(removeCount &gt; 0);
         if (lastSelectedChanged) {
             // Private event for now
-            me.fireEvent('lastselectedchanged', me, me.getSelection(), lastSelected);
+            me.fireEvent(&#39;lastselectedchanged&#39;, me, me.getSelection(), lastSelected);
         }
     },
 
@@ -1242,9 +1242,9 @@ Ext.define('Ext.selection.Model', {
      */
     onSelectChange: function(record, isSelected, suppressEvent, commitFn) {
         var me = this,
-            eventName = isSelected ? 'select' : 'deselect';
+            eventName = isSelected ? &#39;select&#39; : &#39;deselect&#39;;
 
-        if ((suppressEvent || me.fireEvent('before' + eventName, me, record)) !== false &amp;&amp;
+        if ((suppressEvent || me.fireEvent(&#39;before&#39; + eventName, me, record)) !== false &amp;&amp;
            commitFn() !== false) {
 
             // Could be destroyed in the handler
@@ -1264,7 +1264,7 @@ Ext.define('Ext.selection.Model', {
 </span>     * @protected
      * @template
      * Allows multiple views to be controlled by one selection model.
-     * Called by AbstractView's beforeRender method.
+     * Called by AbstractView&#39;s beforeRender method.
      * @param {Ext.view.View} view The View passes itself
      */
     beforeViewRender: function(view) {
@@ -1275,7 +1275,7 @@ Ext.define('Ext.selection.Model', {
 </span>     * @method
      * @protected
      * @template
-     * Called by the owning grid's {@link Ext.grid.header.Container header container}
+     * Called by the owning grid&#39;s {@link Ext.grid.header.Container header container}
      * when a column header is activated by the UI (clicked, or receives a `SPACE` or `ENTER` key event).
      */
     onHeaderClick: Ext.emptyFn,

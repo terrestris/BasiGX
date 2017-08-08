@@ -26,15 +26,15 @@
  * This implementation does not provide a proxy element, so it can be used
  * for cursor tracking only.
  */
-Ext.define('Ext.drag.proxy.None', {
+Ext.define(&#39;Ext.drag.proxy.None&#39;, {
 
-    mixins: ['Ext.mixin.Factoryable'],
+    mixins: [&#39;Ext.mixin.Factoryable&#39;],
 
-    alias: 'drag.proxy.none',
+    alias: &#39;drag.proxy.none&#39;,
 
 <span id='Ext-drag-proxy-None-property-factoryConfig'>    factoryConfig: {
-</span>        aliasPrefix: 'drag.proxy.',
-        type: 'dragproxy'
+</span>        aliasPrefix: &#39;drag.proxy.&#39;,
+        type: &#39;dragproxy&#39;
     },
 
     config: {
@@ -44,7 +44,7 @@ Ext.define('Ext.drag.proxy.None', {
 <span id='Ext-drag-proxy-None-method-constructor'>    constructor: function(config) {
 </span>        var getElement = config &amp;&amp; config.getElement;
         if (getElement) {
-            // Don't mutate the object the user passed. Need to do this
+            // Don&#39;t mutate the object the user passed. Need to do this
             // here otherwise initConfig will complain about writing over
             // the method.
             this.getElement = getElement;

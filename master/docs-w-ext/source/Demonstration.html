@@ -37,7 +37,7 @@
  *
  * @class BasiGX.util.Demonstration
  */
-Ext.define('BasiGX.util.Demonstration', {
+Ext.define(&#39;BasiGX.util.Demonstration&#39;, {
 
     statics: {
 
@@ -48,27 +48,27 @@ Ext.define('BasiGX.util.Demonstration', {
                  someExtComponentLikeAButton,
                  [{
                       moveMouseTo: {
-                          component: 'basigx-button-addwms',
+                          component: &#39;basigx-button-addwms&#39;,
                           moveDuration: 2000
                       }
                   },
                   {
-                      clickOnButton: 'basigx-button-addwms'
+                      clickOnButton: &#39;basigx-button-addwms&#39;
                   },
                   {
                       moveMouseTo:
-                          'window[name=add-wms-window] textfield[name=url]'
+                          &#39;window[name=add-wms-window] textfield[name=url]&#39;
                   },
                   {
                       enterText: {
                           component:
-                              'window[name=add-wms-window] textfield[name=url]',
-                          text: 'https://ows.terrestris.de/osm/service',
+                              &#39;window[name=add-wms-window] textfield[name=url]&#39;,
+                          text: &#39;https://ows.terrestris.de/osm/service&#39;,
                           waitAfter: 3500
                       }
                   },
                   {
-                      destroy: 'window[name=add-wms-window]'
+                      destroy: &#39;window[name=add-wms-window]&#39;
                   }
               ]);
          *
@@ -78,20 +78,20 @@ Ext.define('BasiGX.util.Demonstration', {
          */
 
 <span id='BasiGX-util-Demonstration-static-property-demoBrokenTitle'>        /*begin i18n*/
-</span>        demoBrokenTitle: 'Error',
-<span id='BasiGX-util-Demonstration-static-property-demoBrokenMsg'>        demoBrokenMsg: 'Sorry, the demo seems to be broken.',
+</span>        demoBrokenTitle: &#39;Error&#39;,
+<span id='BasiGX-util-Demonstration-static-property-demoBrokenMsg'>        demoBrokenMsg: &#39;Sorry, the demo seems to be broken.&#39;,
 </span><span id='BasiGX-util-Demonstration-static-method-demo'>        /*end i18n*/
 </span>
         demo: function(origin, liveDemoConfig) {
             // show an absolute positioned demo mouse cursor at the origin
-            var imgBox = Ext.create('Ext.container.Container', {
+            var imgBox = Ext.create(&#39;Ext.container.Container&#39;, {
                 renderTo: Ext.getBody(),
                 height: 20,
                 width: 20,
                 items: [
                     {
-                        xtype: 'image',
-                        src: 'resources/img/cursor_30x52.png',
+                        xtype: &#39;image&#39;,
+                        src: &#39;resources/img/cursor_30x52.png&#39;,
                         width: 30,
                         height: 52
                     }
@@ -106,8 +106,8 @@ Ext.define('BasiGX.util.Demonstration', {
             // create an invisible mask so that the user cannot interfere the
             // demonstration. All mouse interactions will get blocked by
             // this until the demo is ended or cancelled.
-            var unclickableLayer = Ext.create('Ext.container.Container', {
-                name: 'demooverlay',
+            var unclickableLayer = Ext.create(&#39;Ext.container.Container&#39;, {
+                name: &#39;demooverlay&#39;,
                 renderTo: Ext.getBody(),
                 height: Ext.getBody().getHeight(),
                 width: Ext.getBody().getWidth()
@@ -138,8 +138,8 @@ Ext.define('BasiGX.util.Demonstration', {
             if (conf) {
                 Ext.iterate(conf, function(key, value) {
                     if (Ext.isDefined(
-                            window['BasiGX']['util']['Demonstration'][key])) {
-                        window['BasiGX']['util']['Demonstration'][key](
+                            window[&#39;BasiGX&#39;][&#39;util&#39;][&#39;Demonstration&#39;][key])) {
+                        window[&#39;BasiGX&#39;][&#39;util&#39;][&#39;Demonstration&#39;][key](
                             value, el, index, liveDemoConfig
                         );
                         if (next) {
@@ -216,7 +216,7 @@ Ext.define('BasiGX.util.Demonstration', {
             var task = new Ext.util.DelayedTask(function() {
                 el.destroy();
                 var overlay = Ext.ComponentQuery.query(
-                    'container[name=demooverlay]')[0];
+                    &#39;container[name=demooverlay]&#39;)[0];
                 if (overlay) {
                     overlay.destroy();
                 }
@@ -291,7 +291,7 @@ Ext.define('BasiGX.util.Demonstration', {
         enterText: function(value, el) {
             var component = BasiGX.util.Demonstration.getComponent(value, el);
             // first erase old values
-            component.setValue('');
+            component.setValue(&#39;&#39;);
             var runner = new Ext.util.TaskRunner();
             var i = 0;
 

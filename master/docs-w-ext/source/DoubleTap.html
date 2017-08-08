@@ -18,9 +18,9 @@
   <pre class="prettyprint lang-js"><span id='Ext-event-gesture-DoubleTap'>/**
 </span> * A simple event recognizer which knows when you double tap.
  */
-Ext.define('Ext.event.gesture.DoubleTap', {
+Ext.define(&#39;Ext.event.gesture.DoubleTap&#39;, {
 
-    extend: 'Ext.event.gesture.SingleTouch',
+    extend: &#39;Ext.event.gesture.SingleTouch&#39;,
 
 <span id='Ext-event-gesture-DoubleTap-property-priority'>    priority: 300,
 </span>
@@ -39,7 +39,7 @@ Ext.define('Ext.event.gesture.DoubleTap', {
 <span id='Ext-event-gesture-DoubleTap-cfg-maxDuration'>        maxDuration: 300
 </span>    },
 
-<span id='Ext-event-gesture-DoubleTap-property-handledEvents'>    handledEvents: ['singletap', 'doubletap'],
+<span id='Ext-event-gesture-DoubleTap-property-handledEvents'>    handledEvents: [&#39;singletap&#39;, &#39;doubletap&#39;],
 </span>
 <span id='Ext-dom-Element-event-singletap'>    /**
 </span>     * @member Ext.dom.Element
@@ -128,7 +128,7 @@ Ext.define('Ext.event.gesture.DoubleTap', {
                     me.lastTarget = null;
                     me.lastTapTime = 0;
 
-                    me.fire('doubletap', e, {
+                    me.fire(&#39;doubletap&#39;, e, {
                         touch: e.changedTouches[0],
                         duration: duration
                     });
@@ -139,7 +139,7 @@ Ext.define('Ext.event.gesture.DoubleTap', {
         }
 
         if (time - me.startTime &gt; maxDuration) {
-            me.fire('singletap', e);
+            me.fire(&#39;singletap&#39;, e);
             me.reset();
         } else {
             me.setSingleTapTimer(e);
@@ -150,7 +150,7 @@ Ext.define('Ext.event.gesture.DoubleTap', {
 </span>        var me = this;
 
         me.singleTapTimer = Ext.defer(function() {
-            me.fire('singletap', e);
+            me.fire(&#39;singletap&#39;, e);
             me.reset();
         }, me.getMaxDuration());
     },

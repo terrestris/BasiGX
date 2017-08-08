@@ -21,30 +21,30 @@
  * A common place for Sorters to be used are {@link Ext.data.Store Stores}. For example:
  *
  *      @example
- *      var store = Ext.create('Ext.data.Store', {
- *           fields: ['firstName', 'level'],
- *           sorters: 'level',
+ *      var store = Ext.create(&#39;Ext.data.Store&#39;, {
+ *           fields: [&#39;firstName&#39;, &#39;level&#39;],
+ *           sorters: &#39;level&#39;,
  *        
  *           data: [
- *               { firstName: 'Mitch',  level: 9000},
- *               { firstName: 'Seth',   level: 42},
- *               { firstName: 'Fred',   level: 510},
- *               { firstName: 'Israel', level: 690},
- *               { firstName: 'Greg',   level: 101},
- *               { firstName: 'Pat',    level: 0},              
- *               { firstName: 'Kevin',  level: 17},
- *               { firstName: 'Brandon',level: 690},
- *               { firstName: 'Gary',   level: 409},
- *               { firstName: 'Scott',  level: 789}
+ *               { firstName: &#39;Mitch&#39;,  level: 9000},
+ *               { firstName: &#39;Seth&#39;,   level: 42},
+ *               { firstName: &#39;Fred&#39;,   level: 510},
+ *               { firstName: &#39;Israel&#39;, level: 690},
+ *               { firstName: &#39;Greg&#39;,   level: 101},
+ *               { firstName: &#39;Pat&#39;,    level: 0},              
+ *               { firstName: &#39;Kevin&#39;,  level: 17},
+ *               { firstName: &#39;Brandon&#39;,level: 690},
+ *               { firstName: &#39;Gary&#39;,   level: 409},
+ *               { firstName: &#39;Scott&#39;,  level: 789}
  *           ]
  *        });
  *        
- *        Ext.create('Ext.grid.Panel', {
- *            title: 'Support',
+ *        Ext.create(&#39;Ext.grid.Panel&#39;, {
+ *            title: &#39;Support&#39;,
  *            store: store,
  *            columns: [
- *                { text: 'Name',  dataIndex: 'firstName' },
- *                { text: 'Level', dataIndex: 'level' }
+ *                { text: &#39;Name&#39;,  dataIndex: &#39;firstName&#39; },
+ *                { text: &#39;Level&#39;, dataIndex: &#39;level&#39; }
  *            ],
  *            height: 300,
  *            width: 200,
@@ -54,47 +54,47 @@
  * In the next example, we specify a custom sorter function:
  *
  *        @example
- *        var store = Ext.create('Ext.data.Store', {
- *           fields: ['firstName', 'spiritAnimal'],
+ *        var store = Ext.create(&#39;Ext.data.Store&#39;, {
+ *           fields: [&#39;firstName&#39;, &#39;spiritAnimal&#39;],
  *            sorters: [
  *                {
  *                    // Sort by first letter of second word of spirit animal, in descending order
  *                    sorterFn: function(record1, record2) {
- *                        var name1 = record1.data.spiritAnimal.split(' ')[1].substr(0,1),
- *                            name2 = record2.data.spiritAnimal.split(' ')[1].substr(0,1);
+ *                        var name1 = record1.data.spiritAnimal.split(&#39; &#39;)[1].substr(0,1),
+ *                            name2 = record2.data.spiritAnimal.split(&#39; &#39;)[1].substr(0,1);
  * 
  *                        return name1 &gt; name2 ? 1 : (name1 === name2) ? 0 : -1;
  *                    },
- *                    direction: 'DESC'
+ *                    direction: &#39;DESC&#39;
  *                }
  *            ],
  *         
  *           data: [
- *               { firstName: 'Mitch',  spiritAnimal: &quot;Panda Bear&quot;},
- *               { firstName: 'Seth',   spiritAnimal: &quot;Tina Belcher&quot;},
- *               { firstName: 'Fred',   spiritAnimal: &quot;Honey Badger&quot;},
- *               { firstName: 'Israel', spiritAnimal: &quot;Mysterious Capybara&quot;},
- *               { firstName: 'Greg',   spiritAnimal: &quot;Majestic Platypus&quot;},
- *               { firstName: 'Kevin',  spiritAnimal: &quot;Sparkling Unicorn&quot;},
- *               { firstName: 'Brandon',spiritAnimal: &quot;Pygmy Goat&quot;},
- *               { firstName: 'Gary',   spiritAnimal: &quot;Suri Alpaca&quot;},
- *               { firstName: 'Scott',  spiritAnimal: &quot;Ripe Armadillo&quot;},
- *               { firstName: 'Pat',    spiritAnimal: &quot;The Cougar&quot;}
+ *               { firstName: &#39;Mitch&#39;,  spiritAnimal: &quot;Panda Bear&quot;},
+ *               { firstName: &#39;Seth&#39;,   spiritAnimal: &quot;Tina Belcher&quot;},
+ *               { firstName: &#39;Fred&#39;,   spiritAnimal: &quot;Honey Badger&quot;},
+ *               { firstName: &#39;Israel&#39;, spiritAnimal: &quot;Mysterious Capybara&quot;},
+ *               { firstName: &#39;Greg&#39;,   spiritAnimal: &quot;Majestic Platypus&quot;},
+ *               { firstName: &#39;Kevin&#39;,  spiritAnimal: &quot;Sparkling Unicorn&quot;},
+ *               { firstName: &#39;Brandon&#39;,spiritAnimal: &quot;Pygmy Goat&quot;},
+ *               { firstName: &#39;Gary&#39;,   spiritAnimal: &quot;Suri Alpaca&quot;},
+ *               { firstName: &#39;Scott&#39;,  spiritAnimal: &quot;Ripe Armadillo&quot;},
+ *               { firstName: &#39;Pat&#39;,    spiritAnimal: &quot;The Cougar&quot;}
  *           ]
  *        });
  *        
- *        Ext.create('Ext.grid.Panel', {
- *            title: 'Support',
+ *        Ext.create(&#39;Ext.grid.Panel&#39;, {
+ *            title: &#39;Support&#39;,
  *            store: store,
  *            columns: [
- *                { text: 'Name',          dataIndex: 'firstName' },
- *                { text: 'Spirit Animal', dataIndex: 'spiritAnimal', flex: 1 }
+ *                { text: &#39;Name&#39;,          dataIndex: &#39;firstName&#39; },
+ *                { text: &#39;Spirit Animal&#39;, dataIndex: &#39;spiritAnimal&#39;, flex: 1 }
  *            ],
  *            height: 310,
  *            renderTo: Ext.getBody()
  *        });
  */
-Ext.define('Ext.util.Sorter', {
+Ext.define(&#39;Ext.util.Sorter&#39;, {
 <span id='Ext-util-Sorter-property-isSorter'>    isSorter: true,
 </span>
     config: {
@@ -116,7 +116,7 @@ Ext.define('Ext.util.Sorter', {
 
 <span id='Ext-util-Sorter-cfg-root'>        /**
 </span>         * @cfg {String} root Optional root property. This is mostly useful when sorting a Store, in which case we set the
-         * root to 'data' to make the filter pull the {@link #property} out of the data object of each item
+         * root to &#39;data&#39; to make the filter pull the {@link #property} out of the data object of each item
          */
         root: null,
 
@@ -202,7 +202,7 @@ Ext.define('Ext.util.Sorter', {
         if (!id) {
             id = this.getProperty();
             if (!id) {
-                id = Ext.id(null, 'ext-sorter-');
+                id = Ext.id(null, &#39;ext-sorter-&#39;);
             }
             this._id = id;
         }
@@ -243,7 +243,7 @@ Ext.define('Ext.util.Sorter', {
     },
     
 <span id='Ext-util-Sorter-method-applyDirection'>    applyDirection: function(direction) {
-</span>        return direction ? direction : 'ASC';
+</span>        return direction ? direction : &#39;ASC&#39;;
     },
 
 <span id='Ext-util-Sorter-method-updateDirection'>    updateDirection: function (direction) {
@@ -271,7 +271,7 @@ Ext.define('Ext.util.Sorter', {
     },
 
 <span id='Ext-util-Sorter-method-getState'>    /**
-</span>     * Returns this sorter's state.
+</span>     * Returns this sorter&#39;s state.
      * @return {Object}
      */
     getState: function() {
@@ -292,7 +292,7 @@ Ext.define('Ext.util.Sorter', {
     },
 
 <span id='Ext-util-Sorter-method-serialize'>    /**
-</span>     * Returns this sorter's serialized state. This is used when transmitting this sorter
+</span>     * Returns this sorter&#39;s serialized state. This is used when transmitting this sorter
      * to a server.
      * @return {Object}
      */

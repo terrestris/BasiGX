@@ -20,10 +20,10 @@
  * configuration property.  See {@link Ext.Component#componentLayout} for additional details.
  * @private
  */
-Ext.define('Ext.layout.component.Component', {
-    extend: 'Ext.layout.Layout',
+Ext.define(&#39;Ext.layout.component.Component&#39;, {
+    extend: &#39;Ext.layout.Layout&#39;,
 
-<span id='Ext-layout-component-Component-property-type'>    type: 'component',
+<span id='Ext-layout-component-Component-property-type'>    type: &#39;component&#39;,
 </span>
 <span id='Ext-layout-component-Component-property-isComponentLayout'>    isComponentLayout: true,
 </span>
@@ -84,8 +84,8 @@ Ext.define('Ext.layout.component.Component', {
         // a write phase...
 
         if (widthModel.configured) {
-            // If the owner.el is the body, owner.width is not dirty (we don't want to write
-            // it to the body el). For other el's, the width may already be correct in the
+            // If the owner.el is the body, owner.width is not dirty (we don&#39;t want to write
+            // it to the body el). For other el&#39;s, the width may already be correct in the
             // DOM (e.g., it is rendered in the markup initially). If the width is not
             // correct in the DOM, this is only going to be the case on the first cycle.
             width = owner[widthModel.names.width];
@@ -107,7 +107,7 @@ Ext.define('Ext.layout.component.Component', {
             }
 
             v = lastBox.x;
-            ownerContext.setProp('x', v, /*dirty=*/v !== lastSize.x);
+            ownerContext.setProp(&#39;x&#39;, v, /*dirty=*/v !== lastSize.x);
         }
 
         if (heightModel.configured) {
@@ -129,7 +129,7 @@ Ext.define('Ext.layout.component.Component', {
             }
 
             v = lastBox.y;
-            ownerContext.setProp('y', v, /*dirty=*/v !== lastSize.y);
+            ownerContext.setProp(&#39;y&#39;, v, /*dirty=*/v !== lastSize.y);
         }
     },
 
@@ -179,7 +179,7 @@ Ext.define('Ext.layout.component.Component', {
     },
 
 <span id='Ext-layout-component-Component-method-getTarget'>    /**
-</span>     * Returns the owner component's resize element.
+</span>     * Returns the owner component&#39;s resize element.
      * @return {Ext.dom.Element}
      */
     getTarget : function() {
@@ -187,7 +187,7 @@ Ext.define('Ext.layout.component.Component', {
     },
 
 <span id='Ext-layout-component-Component-method-getRenderTarget'>    /**
-</span>     * Returns the element into which rendering must take place. Defaults to the owner Component's encapsulating element.
+</span>     * Returns the element into which rendering must take place. Defaults to the owner Component&#39;s encapsulating element.
      *
      * May be overridden in Component layout managers which implement an inner element.
      * @return {Ext.dom.Element}
@@ -202,7 +202,7 @@ Ext.define('Ext.layout.component.Component', {
             target;
 
         if (!targetInfo) {
-            target = ownerContext.getEl('getTarget', me);
+            target = ownerContext.getEl(&#39;getTarget&#39;, me);
 
             me.targetInfo = targetInfo = {
                 padding: target.getPaddingInfo(),
@@ -216,8 +216,8 @@ Ext.define('Ext.layout.component.Component', {
 <span id='Ext-layout-component-Component-method-measureAutoDimensions'>    measureAutoDimensions: function (ownerContext, dimensions) {
 </span>        // Subtle But Important:
         // 
-        // We don't want to call getProp/hasProp et.al. unless we in fact need that value
-        // for our results! If we call it and don't need it, the layout manager will think
+        // We don&#39;t want to call getProp/hasProp et.al. unless we in fact need that value
+        // for our results! If we call it and don&#39;t need it, the layout manager will think
         // we depend on it and will schedule us again should it change.
 
         var me = this,
@@ -258,21 +258,21 @@ Ext.define('Ext.layout.component.Component', {
                     ret.contentWidth = 0;
                     ret.gotWidth = true;
                     ++got;
-                } else if ((ret.contentWidth = ownerContext.getProp('contentWidth')) !== undefined) {
+                } else if ((ret.contentWidth = ownerContext.getProp(&#39;contentWidth&#39;)) !== undefined) {
                     ret.gotWidth = true;
                     ++got;
                 }
             } else {
                 size = props.contentWidth;
 
-                if (typeof size === 'number') { // if (already determined)
+                if (typeof size === &#39;number&#39;) { // if (already determined)
                     ret.contentWidth = size;
                     ret.gotWidth = true;
                     ++got;
                 } else {
                     if (zeroWidth) {
                         ready = true;
-                    } else if (!ownerContext.hasDomProp('containerChildrenSizeDone')) {
+                    } else if (!ownerContext.hasDomProp(&#39;containerChildrenSizeDone&#39;)) {
                         ready = false;
                     } else if (isBoxParent || !boxParent || boxParent.widthModel.shrinkWrap) {
                         // if we have no boxParent, we are ready, but a shrinkWrap boxParent
@@ -283,7 +283,7 @@ Ext.define('Ext.layout.component.Component', {
                         // lastly, we have a boxParent that will be given a width, so we
                         // can wait for that width to be set in order to properly measure
                         // whatever is inside...
-                        ready = boxParent.hasDomProp('width');
+                        ready = boxParent.hasDomProp(&#39;width&#39;);
                     }
 
                     if (ready) {
@@ -297,7 +297,7 @@ Ext.define('Ext.layout.component.Component', {
                             if (target.cacheWidth) {
                                 // if all instances of a given xtype/UI are the same size, only read the DOM once
                                 // to measure the first instance.  Thereafter, retrieve the width from the cache.
-                                key = target.xtype + '-' + target.ui;
+                                key = target.xtype + &#39;-&#39; + target.ui;
                                 cache = me.widthCache;
                                 temp = cache[key] || (cache[key] = me.measureContentWidth(ownerContext));
                             } else {
@@ -318,7 +318,7 @@ Ext.define('Ext.layout.component.Component', {
             size = props.width;
             // zeroWidth does not apply
 
-            if (typeof size === 'number') { // if (already determined)
+            if (typeof size === &#39;number&#39;) { // if (already determined)
                 ret.width = size;
                 ret.gotWidth = true;
                 ++got;
@@ -329,7 +329,7 @@ Ext.define('Ext.layout.component.Component', {
                     // lastly, we have a boxParent that will be given a width, so we
                     // can wait for that width to be set in order to properly measure
                     // whatever is inside...
-                    ready = boxParent.hasDomProp('width');
+                    ready = boxParent.hasDomProp(&#39;width&#39;);
                 }
 
                 if (ready) {
@@ -350,32 +350,32 @@ Ext.define('Ext.layout.component.Component', {
             zeroHeight = !(hv &amp; 2); // jshint ignore:line
 
             if (isContainer) {
-                // don't ask unless we need to know...
+                // don&#39;t ask unless we need to know...
                 if (zeroHeight) {
                     ret.contentHeight = 0;
                     ret.gotHeight = true;
                     ++got;
-                } else if ((ret.contentHeight = ownerContext.getProp('contentHeight')) !== undefined) {
+                } else if ((ret.contentHeight = ownerContext.getProp(&#39;contentHeight&#39;)) !== undefined) {
                     ret.gotHeight = true;
                     ++got;
                 }
             } else {
                 size = props.contentHeight;
 
-                if (typeof size === 'number') { // if (already determined)
+                if (typeof size === &#39;number&#39;) { // if (already determined)
                     ret.contentHeight = size;
                     ret.gotHeight = true;
                     ++got;
                 } else {
                     if (zeroHeight) {
                         ready = true;
-                    } else if (!ownerContext.hasDomProp('containerChildrenSizeDone')) {
+                    } else if (!ownerContext.hasDomProp(&#39;containerChildrenSizeDone&#39;)) {
                         ready = false;
                     } else if (owner.noWrap) {
                         ready = true;
                     } else if (!widthModel.shrinkWrap) {
                         // fixed width, so we need the width to determine the height...
-                        ready = (ownerContext.bodyContext || ownerContext).hasDomProp('width');// &amp;&amp; (!ownerContext.bodyContext || ownerContext.bodyContext.hasDomProp('width'));
+                        ready = (ownerContext.bodyContext || ownerContext).hasDomProp(&#39;width&#39;);// &amp;&amp; (!ownerContext.bodyContext || ownerContext.bodyContext.hasDomProp(&#39;width&#39;));
                     } else if (isBoxParent || !boxParent || boxParent.widthModel.shrinkWrap) {
                         // if we have no boxParent, we are ready, but an autoWidth boxParent
                         // artificially provides width early in the measurement process so
@@ -385,7 +385,7 @@ Ext.define('Ext.layout.component.Component', {
                         // lastly, we have a boxParent that will be given a width, so we
                         // can wait for that width to be set in order to properly measure
                         // whatever is inside...
-                        ready = boxParent.hasDomProp('width');
+                        ready = boxParent.hasDomProp(&#39;width&#39;);
                     }
 
                     if (ready) {
@@ -399,7 +399,7 @@ Ext.define('Ext.layout.component.Component', {
                            if (target.cacheHeight) {
                                 // if all instances of a given xtype/UI are the same size, only read the DOM once
                                 // to measure the first instance.  Thereafter, retrieve the height from the cache.
-                                key = target.xtype + '-' + target.ui;
+                                key = target.xtype + &#39;-&#39; + target.ui;
                                 cache = me.heightCache;
                                 temp = cache[key] || (cache[key] = me.measureContentHeight(ownerContext));
                             } else {
@@ -420,7 +420,7 @@ Ext.define('Ext.layout.component.Component', {
             size = props.height;
             // zeroHeight does not apply
 
-            if (typeof size === 'number') { // if (already determined)
+            if (typeof size === &#39;number&#39;) { // if (already determined)
                 ret.height = size;
                 ret.gotHeight = true;
                 ++got;
@@ -431,7 +431,7 @@ Ext.define('Ext.layout.component.Component', {
                     // lastly, we have a boxParent that will be given a width, so we
                     // can wait for that width to be set in order to properly measure
                     // whatever is inside...
-                    ready = boxParent.hasDomProp('width');
+                    ready = boxParent.hasDomProp(&#39;width&#39;);
                 }
 
                 if (ready) {

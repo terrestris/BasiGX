@@ -23,37 +23,37 @@
  * {@link #sourceConfig} option. Example usage:
  *
  *     @example
- *     Ext.create('Ext.grid.property.Grid', {
- *         title: 'Properties Grid',
+ *     Ext.create(&#39;Ext.grid.property.Grid&#39;, {
+ *         title: &#39;Properties Grid&#39;,
  *         width: 300,
  *         renderTo: Ext.getBody(),
  *         source: {
  *             &quot;(name)&quot;: &quot;My Object&quot;,
- *             &quot;Created&quot;: Ext.Date.parse('10/15/2006', 'm/d/Y'),
+ *             &quot;Created&quot;: Ext.Date.parse(&#39;10/15/2006&#39;, &#39;m/d/Y&#39;),
  *             &quot;Available&quot;: false,
  *             &quot;Version&quot;: 0.01,
  *             &quot;Description&quot;: &quot;A test object&quot;
  *         }
  *     });
  */
-Ext.define('Ext.grid.property.Grid', {
+Ext.define(&#39;Ext.grid.property.Grid&#39;, {
 
-    extend: 'Ext.grid.Panel',
+    extend: &#39;Ext.grid.Panel&#39;,
 
-    alias: 'widget.propertygrid',
+    alias: &#39;widget.propertygrid&#39;,
 
-    alternateClassName: 'Ext.grid.PropertyGrid',
+    alternateClassName: &#39;Ext.grid.PropertyGrid&#39;,
 
     uses: [
-       'Ext.grid.plugin.CellEditing',
-       'Ext.grid.property.Store',
-       'Ext.grid.property.HeaderContainer',
-       'Ext.XTemplate',
-       'Ext.grid.CellEditor',
-       'Ext.form.field.Date',
-       'Ext.form.field.Text',
-       'Ext.form.field.Number',
-       'Ext.form.field.ComboBox'
+       &#39;Ext.grid.plugin.CellEditing&#39;,
+       &#39;Ext.grid.property.Store&#39;,
+       &#39;Ext.grid.property.HeaderContainer&#39;,
+       &#39;Ext.XTemplate&#39;,
+       &#39;Ext.grid.CellEditor&#39;,
+       &#39;Ext.form.field.Date&#39;,
+       &#39;Ext.form.field.Text&#39;,
+       &#39;Ext.form.field.Number&#39;,
+       &#39;Ext.form.field.ComboBox&#39;
     ],
 
 <span id='Ext-grid-property-Grid-cfg-sourceConfig'>    /**
@@ -72,7 +72,7 @@ Ext.define('Ext.grid.property.Grid', {
      *         sourceConfig: {
      *             clientIsAvailable: {
      *                 // Custom name different to the field
-     *                 displayName: 'Available'
+     *                 displayName: &#39;Available&#39;
      *             }
      *         }
      *     });
@@ -90,8 +90,8 @@ Ext.define('Ext.grid.property.Grid', {
      *             clientIsAvailable: {
      *                 // Custom renderer to change the color based on the value
      *                 renderer: function(v){
-     *                     var color = v ? 'green' : 'red';
-     *                     return '&lt;span style=&quot;color: ' + color + ';&quot;&gt;' + v + '&lt;/span&gt;';
+     *                     var color = v ? &#39;green&#39; : &#39;red&#39;;
+     *                     return &#39;&lt;span style=&quot;color: &#39; + color + &#39;;&quot;&gt;&#39; + v + &#39;&lt;/span&gt;&#39;;
      *                 }
      *             }
      *         }
@@ -101,10 +101,10 @@ Ext.define('Ext.grid.property.Grid', {
      * Used to explicitly specify the editor type for a particular value. By default, the type is
      * automatically inferred from the value. See {@link #inferTypes}. Accepted values are:
      *
-     * - 'date'
-     * - 'boolean'
-     * - 'number'
-     * - 'string'
+     * - &#39;date&#39;
+     * - &#39;boolean&#39;
+     * - &#39;number&#39;
+     * - &#39;string&#39;
      *
      * For more advanced control an editor configuration can be passed (see the next section).
      * Example usage:
@@ -116,7 +116,7 @@ Ext.define('Ext.grid.property.Grid', {
      *         sourceConfig: {
      *             attending: {
      *                 // Force the type to be a numberfield, a null value would otherwise default to a textfield
-     *                 type: 'number'
+     *                 type: &#39;number&#39;
      *             }
      *         }
      *     });
@@ -129,13 +129,13 @@ Ext.define('Ext.grid.property.Grid', {
      *     new Ext.grid.property.Grid({
      *         // Data object containing properties to edit
      *         source: {
-     *             evtStart: '10:00 AM'
+     *             evtStart: &#39;10:00 AM&#39;
      *         },
      *
      *         sourceConfig: {
      *             evtStart: {
-     *                 editor: Ext.create('Ext.form.field.Time', {selectOnFocus: true}),
-     *                 displayName: 'Start Time'
+     *                 editor: Ext.create(&#39;Ext.form.field.Time&#39;, {selectOnFocus: true}),
+     *                 displayName: &#39;Start Time&#39;
      *             }
      *         }
      *     });
@@ -165,17 +165,17 @@ Ext.define('Ext.grid.property.Grid', {
      *
      *         // Custom editors for certain property names
      *         customEditors: {
-     *             evtStart: Ext.create('Ext.form.TimeField', {selectOnFocus: true})
+     *             evtStart: Ext.create(&#39;Ext.form.TimeField&#39;, {selectOnFocus: true})
      *         },
      *
      *         // Displayed name for property names in the source
      *         propertyNames: {
-     *             evtStart: 'Start Time'
+     *             evtStart: &#39;Start Time&#39;
      *         },
      *
      *         // Data object containing properties to edit
      *         source: {
-     *             evtStart: '10:00 AM'
+     *             evtStart: &#39;10:00 AM&#39;
      *         }
      *     });
      * @deprecated See {@link #sourceConfig} editor
@@ -189,13 +189,13 @@ Ext.define('Ext.grid.property.Grid', {
      * associated with the type of the value.  The name of the renderer type should correspond with the name of the property
      * that it will render.  Example usage:
      *
-     *     var grid = Ext.create('Ext.grid.property.Grid', {
+     *     var grid = Ext.create(&#39;Ext.grid.property.Grid&#39;, {
      *         customRenderers: {
      *             Available: function(v){
      *                 if (v) {
-     *                     return '&lt;span style=&quot;color: green;&quot;&gt;Yes&lt;/span&gt;';
+     *                     return &#39;&lt;span style=&quot;color: green;&quot;&gt;Yes&lt;/span&gt;&#39;;
      *                 } else {
-     *                     return '&lt;span style=&quot;color: red;&quot;&gt;No&lt;/span&gt;';
+     *                     return &#39;&lt;span style=&quot;color: red;&quot;&gt;No&lt;/span&gt;&#39;;
      *                 }
      *             }
      *         },
@@ -211,14 +211,14 @@ Ext.define('Ext.grid.property.Grid', {
      * The name of the field from the property store to use as the value field name.
      * This may be useful if you do not configure the property Grid from an object, but use your own store configuration.
      */
-    valueField: 'value',
+    valueField: &#39;value&#39;,
 
 <span id='Ext-grid-property-Grid-cfg-nameField'>    /**
 </span>     * @cfg {String} nameField
      * The name of the field from the property store to use as the property field name.
      * This may be useful if you do not configure the property Grid from an object, but use your own store configuration.
      */
-    nameField: 'name',
+    nameField: &#39;name&#39;,
 
 <span id='Ext-grid-property-Grid-cfg-inferTypes'>    /**
 </span>     * @cfg {Boolean} inferTypes
@@ -241,15 +241,15 @@ Ext.define('Ext.grid.property.Grid', {
 </span><span id='Ext-grid-property-Grid-property-clicksToEdit'>    clicksToEdit: 1,
 </span><span id='Ext-grid-property-Grid-property-enableHdMenu'>    enableHdMenu: false,
 </span>
-<span id='Ext-grid-property-Grid-property-gridCls'>    gridCls: Ext.baseCSSPrefix + 'property-grid',
+<span id='Ext-grid-property-Grid-property-gridCls'>    gridCls: Ext.baseCSSPrefix + &#39;property-grid&#39;,
 </span>
 <span id='Ext-grid-property-Grid-event-beforepropertychange'>    /**
 </span>     * @event beforepropertychange
      * Fires before a property value changes.  Handlers can return false to cancel the property change
-     * (this will internally call {@link Ext.data.Model#reject} on the property's record).
+     * (this will internally call {@link Ext.data.Model#reject} on the property&#39;s record).
      * @param {Object} source The source data object for the grid (corresponds to the same object passed in
      * as the {@link #source} config property).
-     * @param {String} recordId The record's id in the data store
+     * @param {String} recordId The record&#39;s id in the data store
      * @param {Object} value The current edited property value
      * @param {Object} oldValue The original property value prior to editing
      */
@@ -259,7 +259,7 @@ Ext.define('Ext.grid.property.Grid', {
      * Fires after a property value has changed.
      * @param {Object} source The source data object for the grid (corresponds to the same object passed in
      * as the {@link #source} config property).
-     * @param {String} recordId The record's id in the data store
+     * @param {String} recordId The record&#39;s id in the data store
      * @param {Object} value The current edited property value
      * @param {Object} oldValue The original property value prior to editing
      */
@@ -267,7 +267,7 @@ Ext.define('Ext.grid.property.Grid', {
     initComponent: function() {
         var me = this,
             // selectOnFocus: true results in weird exceptions thrown when tabbing
-            // between cell editors in IE and there's no known cure at the moment
+            // between cell editors in IE and there&#39;s no known cure at the moment
             selectOnFocus = !Ext.isIE,
             view;
 
@@ -281,13 +281,13 @@ Ext.define('Ext.grid.property.Grid', {
 
             // Inject a startEdit which always edits the value column
             startEdit: function(record, column) {
-                // Maintainer: Do not change this 'this' to 'me'! It is the CellEditing object's own scope.
+                // Maintainer: Do not change this &#39;this&#39; to &#39;me&#39;! It is the CellEditing object&#39;s own scope.
                 return this.self.prototype.startEdit.call(this, record, me.valueColumn);
             }
         }));
 
         me.selModel = {
-            type: 'cellmodel',
+            type: &#39;cellmodel&#39;,
             onCellSelect: function(position) {
                 // We are only allowed to select the value column.
                 position.column = me.valueColumn;
@@ -305,7 +305,7 @@ Ext.define('Ext.grid.property.Grid', {
         me.configure(me.sourceConfig);
 
         if (me.sortableColumns) {
-            me.store.sort('name', 'ASC');
+            me.store.sort(&#39;name&#39;, &#39;ASC&#39;);
         }
         me.columns = new Ext.grid.property.HeaderContainer(me, me.store);
 
@@ -321,22 +321,22 @@ Ext.define('Ext.grid.property.Grid', {
 
         // Set up our default editor set for the 4 atomic data types
         me.editors = {
-            'date': new Ext.grid.CellEditor({
+            &#39;date&#39;: new Ext.grid.CellEditor({
                 field: new Ext.form.field.Date({
                     selectOnFocus: selectOnFocus
                 })
             }),
-            'string': new Ext.grid.CellEditor({
+            &#39;string&#39;: new Ext.grid.CellEditor({
                 field: new Ext.form.field.Text({
                     selectOnFocus: selectOnFocus
                 })
             }),
-            'number': new Ext.grid.CellEditor({
+            &#39;number&#39;: new Ext.grid.CellEditor({
                 field: new Ext.form.field.Number({
                     selectOnFocus: selectOnFocus
                 })
             }),
-            'boolean': new Ext.grid.CellEditor({
+            &#39;boolean&#39;: new Ext.grid.CellEditor({
                 field: new Ext.form.field.ComboBox({
                     editable: false,
                     store: [[ true, me.headerCt.trueText ], [false, me.headerCt.falseText ]]
@@ -345,7 +345,7 @@ Ext.define('Ext.grid.property.Grid', {
         };
 
         // Track changes to the data so we can fire our events.
-        me.store.on('update', me.onUpdate, me);
+        me.store.on(&#39;update&#39;, me.onUpdate, me);
     },
 
 <span id='Ext-grid-property-Grid-method-configure'>    configure: function(config){
@@ -363,18 +363,18 @@ Ext.define('Ext.grid.property.Grid', {
             for (; i &lt; len; ++i) {
                 rec = store.getAt(i);
                 name = rec.get(nameField);
-                if (!me.getConfigProp(name, 'type')) {
+                if (!me.getConfigProp(name, &#39;type&#39;)) {
                     value = rec.get(valueField);
                     if (Ext.isDate(value)) {
-                        type = 'date';
+                        type = &#39;date&#39;;
                     } else if (Ext.isNumber(value)) {
-                        type = 'number';
+                        type = &#39;number&#39;;
                     } else if (Ext.isBoolean(value)) {
-                        type = 'boolean';
+                        type = &#39;boolean&#39;;
                     } else {
-                        type = 'string';
+                        type = &#39;string&#39;;
                     }
-                    me.setConfigProp(name, 'type', type);
+                    me.setConfigProp(name, &#39;type&#39;, type);
                 }
             }
         }
@@ -412,15 +412,15 @@ Ext.define('Ext.grid.property.Grid', {
 </span>    configureLegacy: function(config){
         var me = this;
 
-        me.copyLegacyObject(config, me.customRenderers, 'renderer');
-        me.copyLegacyObject(config, me.customEditors, 'editor');
-        me.copyLegacyObject(config, me.propertyNames, 'displayName');
+        me.copyLegacyObject(config, me.customRenderers, &#39;renderer&#39;);
+        me.copyLegacyObject(config, me.customEditors, &#39;editor&#39;);
+        me.copyLegacyObject(config, me.propertyNames, &#39;displayName&#39;);
 
         //&lt;debug&gt;
-        // exclude types since it's new
+        // exclude types since it&#39;s new
         if (me.customRenderers || me.customEditors || me.propertyNames) {
             if (Ext.global.console &amp;&amp; Ext.global.console.warn) {
-                Ext.global.console.warn(this.$className, 'customRenderers, customEditors &amp; propertyNames have been consolidated into a new config, see &quot;sourceConfig&quot;. These configurations will be deprecated.');
+                Ext.global.console.warn(this.$className, &#39;customRenderers, customEditors &amp; propertyNames have been consolidated into a new config, see &quot;sourceConfig&quot;. These configurations will be deprecated.&#39;);
             }
         }
         //&lt;/debug&gt;
@@ -449,12 +449,12 @@ Ext.define('Ext.grid.property.Grid', {
         if (me.rendered &amp;&amp; operation === Ext.data.Model.EDIT) {
             v = record.get(me.valueField);
             oldValue = record.modified.value;
-            if (me.fireEvent('beforepropertychange', me.source, record.getId(), v, oldValue) !== false) {
+            if (me.fireEvent(&#39;beforepropertychange&#39;, me.source, record.getId(), v, oldValue) !== false) {
                 if (me.source) {
                     me.source[record.getId()] = v;
                 }
                 record.commit();
-                me.fireEvent('propertychange', me.source, record.getId(), v, oldValue);
+                me.fireEvent(&#39;propertychange&#39;, me.source, record.getId(), v, oldValue);
             } else {
                 record.reject();
             }
@@ -467,10 +467,10 @@ Ext.define('Ext.grid.property.Grid', {
         var me = this,
             valueColumn = me.ownerCt.valueColumn;
 
-        if (direction === 'left') {
-            direction = 'up';
-        } else if (direction === 'right') {
-            direction = 'down';
+        if (direction === &#39;left&#39;) {
+            direction = &#39;up&#39;;
+        } else if (direction === &#39;right&#39;) {
+            direction = &#39;down&#39;;
         }
         pos = Ext.view.Table.prototype.walkCells.call(me, pos, direction, e, preventWrap, verifierFn, scope);
 
@@ -497,31 +497,31 @@ Ext.define('Ext.grid.property.Grid', {
         var me = this,
             propName = record.get(me.nameField),
             val = record.get(me.valueField),
-            editor = me.getConfigProp(propName, 'editor'),
-            type = me.getConfigProp(propName, 'type'),
+            editor = me.getConfigProp(propName, &#39;editor&#39;),
+            type = me.getConfigProp(propName, &#39;type&#39;),
             editors = me.editors,
             field;
 
         // A custom editor was found. If not already wrapped with a CellEditor, wrap it, and stash it back
-        // If it's not even a Field, just a config object, instantiate it before wrapping it.
+        // If it&#39;s not even a Field, just a config object, instantiate it before wrapping it.
         if (editor) {
             if (!(editor instanceof Ext.grid.CellEditor)) {
                 if (!(editor instanceof Ext.form.field.Base)) {
-                    editor = Ext.ComponentManager.create(editor, 'textfield');
+                    editor = Ext.ComponentManager.create(editor, &#39;textfield&#39;);
                 }
-                editor = me.setConfigProp(propName, 'editor', new Ext.grid.CellEditor({ field: editor }));
+                editor = me.setConfigProp(propName, &#39;editor&#39;, new Ext.grid.CellEditor({ field: editor }));
             }
         } else if (type) {
             switch (type) {
-                case 'date':
+                case &#39;date&#39;:
                     editor = editors.date;
                     break;
-                case 'number':
+                case &#39;number&#39;:
                     editor = editors.number;
                     break;
-                case 'boolean':
+                case &#39;boolean&#39;:
                     // Cannot be &quot;.boolean&quot; - YUI hates using reserved words like that
-                    editor = me.editors['boolean']; // jshint ignore:line
+                    editor = me.editors[&#39;boolean&#39;]; // jshint ignore:line
                     break;
                 default:
                     editor = editors.string;
@@ -532,14 +532,14 @@ Ext.define('Ext.grid.property.Grid', {
             editor = editors.number;
         } else if (Ext.isBoolean(val)) {
             // Cannot be &quot;.boolean&quot; - YUI hates using reserved words like that
-            editor = editors['boolean']; // jshint ignore:line
+            editor = editors[&#39;boolean&#39;]; // jshint ignore:line
         } else {
             editor = editors.string;
         }
 
         field = editor.field;
 
-        if (field &amp;&amp; field.ui === 'default' &amp;&amp; !field.hasOwnProperty('ui')) {
+        if (field &amp;&amp; field.ui === &#39;default&#39; &amp;&amp; !field.hasOwnProperty(&#39;ui&#39;)) {
             field.ui = me.editingPlugin.defaultFieldUI;
         }
 
@@ -551,7 +551,7 @@ Ext.define('Ext.grid.property.Grid', {
             propName = Ext.String.htmlEncode(propName);
             
             if (field.rendered) {
-                field.inputEl.dom.setAttribute('aria-label', propName);
+                field.inputEl.dom.setAttribute(&#39;aria-label&#39;, propName);
             }
             else {
                 field.ariaLabel = propName;
@@ -581,13 +581,13 @@ Ext.define('Ext.grid.property.Grid', {
 <span id='Ext-grid-property-Grid-method-setSource'>    /**
 </span>     * Sets the source data object containing the property data.  The data object can contain one or more name/value
      * pairs representing all of the properties of an object to display in the grid, and this data will automatically
-     * be loaded into the grid's {@link #store}.  The values should be supplied in the proper data type if needed,
+     * be loaded into the grid&#39;s {@link #store}.  The values should be supplied in the proper data type if needed,
      * otherwise string type will be assumed.  If the grid already contains data, this method will replace any
      * existing data.  See also the {@link #source} config value.  Example usage:
      *
      *     grid.setSource({
      *         &quot;(name)&quot;: &quot;My Object&quot;,
-     *         &quot;Created&quot;: Ext.Date.parse('10/15/2006', 'm/d/Y'),  // date type
+     *         &quot;Created&quot;: Ext.Date.parse(&#39;10/15/2006&#39;, &#39;m/d/Y&#39;),  // date type
      *         &quot;Available&quot;: false,  // boolean type
      *         &quot;Version&quot;: .01,      // decimal type
      *         &quot;Description&quot;: &quot;A test object&quot;
@@ -632,7 +632,7 @@ Ext.define('Ext.grid.property.Grid', {
 </span>     * Sets the value of a property.
      * @param {String} prop The name of the property to set.
      * @param {Object} value The value to test.
-     * @param {Boolean} [create=false] `true` to create the property if it doesn't already exist.
+     * @param {Boolean} [create=false] `true` to create the property if it doesn&#39;t already exist.
      */
     setProperty: function(prop, value, create) {
         this.propStore.setValue(prop, value, create);

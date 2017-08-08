@@ -23,7 +23,7 @@
  * intervals to attempt to clean up orphaned Elements that may have slipped through the cracks.
  * @private
  */
-Ext.define('Ext.dom.GarbageCollector', {
+Ext.define(&#39;Ext.dom.GarbageCollector&#39;, {
     singleton: true,
 
 <span id='Ext-dom-GarbageCollector-property-interval'>    /**
@@ -77,7 +77,7 @@ Ext.define('Ext.dom.GarbageCollector', {
             //&lt;debug&gt;
             // Should always have a DOM node
             if (!dom) {
-                Ext.raise('Missing DOM node in element garbage collection: ' + eid);
+                Ext.raise(&#39;Missing DOM node in element garbage collection: &#39; + eid);
             }
             //&lt;/debug&gt;
             
@@ -91,11 +91,11 @@ Ext.define('Ext.dom.GarbageCollector', {
             } catch (e) {
                 // if an error was thrown in isGarbage it is most likely because we are
                 // dealing with an inaccessible window or documentElement inside an orphaned
-                // iframe in IE.  In this case we can't do anything except remove the
+                // iframe in IE.  In this case we can&#39;t do anything except remove the
                 // cache entry.
                 delete cache[eid];
                 //&lt;debug&gt;
-                collectedIds.push('#' + el.id);
+                collectedIds.push(&#39;#&#39; + el.id);
                 //&lt;/debug&gt;
                 continue;
             }
@@ -107,7 +107,7 @@ Ext.define('Ext.dom.GarbageCollector', {
                     //&lt;/debug&gt;
                     el.collect();
                     //&lt;debug&gt;
-                    collectedIds.push((tagName ? tagName : '') + '#' + el.id);
+                    collectedIds.push((tagName ? tagName : &#39;&#39;) + &#39;#&#39; + el.id);
                     //&lt;/debug&gt;
                 }
             }

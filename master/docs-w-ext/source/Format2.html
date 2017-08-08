@@ -42,20 +42,20 @@
  * grid renderers:
  *  
  *     columns: [{
- *         dataIndex: 'date',
- *         renderer: Ext.util.Format.dateRenderer('Y-m-d')
+ *         dataIndex: &#39;date&#39;,
+ *         renderer: Ext.util.Format.dateRenderer(&#39;Y-m-d&#39;)
  *     }, {
- *         dataIndex: 'time',
- *         renderer: Ext.util.Format.numberRenderer('0.000')
+ *         dataIndex: &#39;time&#39;,
+ *         renderer: Ext.util.Format.numberRenderer(&#39;0.000&#39;)
  *     }]
  *  
  * Functions that only take a single argument can also be passed directly:
  *
  *     columns: [{
- *         dataIndex: 'cost',
+ *         dataIndex: &#39;cost&#39;,
  *         renderer: Ext.util.Format.usMoney
  *     }, {
- *         dataIndex: 'productCode',
+ *         dataIndex: &#39;productCode&#39;,
  *         renderer: Ext.util.Format.uppercase
  *     }]
  *  
@@ -64,21 +64,21 @@
  * XTemplates can also directly use Ext.util.Format functions:
  *  
  *     new Ext.XTemplate([
- *         'Date: {startDate:date(&quot;Y-m-d&quot;)}',
- *         'Cost: {cost:usMoney}'
+ *         &#39;Date: {startDate:date(&quot;Y-m-d&quot;)}&#39;,
+ *         &#39;Cost: {cost:usMoney}&#39;
  *     ]);
  *
  * @singleton
  */
-Ext.define('Ext.util.Format', function () {
+Ext.define(&#39;Ext.util.Format&#39;, function () {
     var me; // holds our singleton instance
 
     return {
         requires: [
-            'Ext.Error',
-            'Ext.Number',
-            'Ext.String',
-            'Ext.Date'
+            &#39;Ext.Error&#39;,
+            &#39;Ext.Number&#39;,
+            &#39;Ext.String&#39;,
+            &#39;Ext.Date&#39;
         ],
 
         singleton: true,
@@ -86,7 +86,7 @@ Ext.define('Ext.util.Format', function () {
 <span id='Ext-util-Format-property-defaultDateFormat'>        /**
 </span>         * The global default date format.
          */
-        defaultDateFormat: 'm/d/Y',
+        defaultDateFormat: &#39;m/d/Y&#39;,
 
         //&lt;locale&gt;
 <span id='Ext-util-Format-property-thousandSeparator'>        /**
@@ -95,7 +95,7 @@ Ext.define('Ext.util.Format', function () {
          *
          * This may be overridden in a locale file.
          */
-        thousandSeparator: ',',
+        thousandSeparator: &#39;,&#39;,
         //&lt;/locale&gt;
 
         //&lt;locale&gt;
@@ -105,7 +105,7 @@ Ext.define('Ext.util.Format', function () {
          *
          * This may be overridden in a locale file.
          */
-        decimalSeparator: '.',
+        decimalSeparator: &#39;.&#39;,
         //&lt;/locale&gt;
 
         //&lt;locale&gt;
@@ -125,18 +125,18 @@ Ext.define('Ext.util.Format', function () {
          *
          * This may be overridden in a locale file.
          */
-        currencySign: '$',
+        currencySign: &#39;$&#39;,
         //&lt;/locale&gt;
 
         //&lt;locale&gt;
 <span id='Ext-util-Format-property-currencySpacer'>        /**
-</span>         * @property {String} [currencySpacer='']
+</span>         * @property {String} [currencySpacer=&#39;&#39;]
          * True to add a space between the currency and the value
          *
          * This may be overridden in a locale file.
          * @since 6.2.0
          */
-        currencySpacer: '',
+        currencySpacer: &#39;&#39;,
         //&lt;/locale&gt;
 
 <span id='Ext-util-Format-property-percentSign'>        /**
@@ -145,7 +145,7 @@ Ext.define('Ext.util.Format', function () {
          *
          * This may be overridden in a locale file.
          */
-        percentSign: '%',
+        percentSign: &#39;%&#39;,
 
         //&lt;locale&gt;
 <span id='Ext-util-Format-property-currencyAtEnd'>        /**
@@ -167,7 +167,7 @@ Ext.define('Ext.util.Format', function () {
         // Match a format string characters to be able to detect remaining &quot;literal&quot; characters
         formatPattern: /[\d,\.#]+/,
 
-        // A RegExp to remove from a number format string, all characters except digits and '.'
+        // A RegExp to remove from a number format string, all characters except digits and &#39;.&#39;
         formatCleanRe: /[^\d\.#]/g,
 
         // A RegExp to remove from a number format string, all characters except digits and the local decimal separator.
@@ -185,15 +185,15 @@ Ext.define('Ext.util.Format', function () {
 </span>         * Returns a non-breaking space (&quot;NBSP&quot;) for any &quot;blank&quot; value.
          * @param {Mixed} value
          * @param {Boolean} [strict=true] Pass `false` to convert all falsey values to an
-         * NBSP. By default, only '', `null` and `undefined` will be converted.
+         * NBSP. By default, only &#39;&#39;, `null` and `undefined` will be converted.
          * @return {Mixed}
          * @since 6.2.0
          */
         nbsp: function (value, strict) {
             strict = strict !== false;
 
-            if (strict ? value === '' || value == null : !value) {
-                value = '\xA0';
+            if (strict ? value === &#39;&#39; || value == null : !value) {
+                value = &#39;\xA0&#39;;
             }
 
             return value;
@@ -209,13 +209,13 @@ Ext.define('Ext.util.Format', function () {
         },
 
 <span id='Ext-util-Format-method-defaultValue'>        /**
-</span>         * Checks a reference and converts it to the default value if it's empty.
+</span>         * Checks a reference and converts it to the default value if it&#39;s empty.
          * @param {Object} value Reference to check
-         * @param {String} [defaultValue=&quot;&quot;] The value to insert of it's undefined.
+         * @param {String} [defaultValue=&quot;&quot;] The value to insert of it&#39;s undefined.
          * @return {String}
          */
         defaultValue : function(value, defaultValue) {
-            return value !== undefined &amp;&amp; value !== '' ? value : defaultValue;
+            return value !== undefined &amp;&amp; value !== &#39;&#39; ? value : defaultValue;
         },
 
 <span id='Ext-util-Format-method-substr'>        /**
@@ -226,7 +226,7 @@ Ext.define('Ext.util.Format', function () {
          * @return {String} The substring
          * @method
          */
-        substr : 'ab'.substr(-1) != 'b'
+        substr : &#39;ab&#39;.substr(-1) != &#39;b&#39;
         ? function (value, start, length) {
             var str = String(value);
             return (start &lt; 0)
@@ -261,7 +261,7 @@ Ext.define('Ext.util.Format', function () {
          * @return {String} The formatted currency string
          */
         usMoney : function(v) {
-            return me.currency(v, '$', 2);
+            return me.currency(v, &#39;$&#39;, 2);
         },
 
 <span id='Ext-util-Format-method-currency'>        /**
@@ -276,18 +276,18 @@ Ext.define('Ext.util.Format', function () {
          * @return {String} The formatted currency string
          */
         currency: function(v, currencySign, decimals, end, currencySpacer) {
-            var negativeSign = '',
+            var negativeSign = &#39;&#39;,
                 format = &quot;,0&quot;,
                 i = 0;
             v = v - 0;
             if (v &lt; 0) {
                 v = -v;
-                negativeSign = '-';
+                negativeSign = &#39;-&#39;;
             }
             decimals = Ext.isDefined(decimals) ? decimals : me.currencyPrecision;
-            format += (decimals &gt; 0 ? '.' : '');
+            format += (decimals &gt; 0 ? &#39;.&#39; : &#39;&#39;);
             for (; i &lt; decimals; i++) {
-                format += '0';
+                format += &#39;0&#39;;
             }
             v = me.number(v, format);
             
@@ -305,11 +305,11 @@ Ext.define('Ext.util.Format', function () {
 <span id='Ext-util-Format-method-date'>        /**
 </span>         * Formats the passed date using the specified format pattern.
          * Note that this uses the native Javascript Date.parse() method and is therefore subject to its idiosyncrasies.
-         * Most formats assume the local timezone unless specified. One notable exception is 'YYYY-MM-DD' (note the dashes)
+         * Most formats assume the local timezone unless specified. One notable exception is &#39;YYYY-MM-DD&#39; (note the dashes)
          * which is typically interpreted in UTC and can cause date shifting.
          * 
          * @param {String/Date} value The value to format. Strings must conform to the format
-         * expected by the JavaScript Date object's
+         * expected by the JavaScript Date object&#39;s
          * [parse() method](http://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Date/parse).
          * @param {String} [format] Any valid date format string. Defaults to {@link Ext.Date#defaultFormat}.
          * @return {String} The formatted date string.
@@ -337,14 +337,14 @@ Ext.define('Ext.util.Format', function () {
 
 <span id='Ext-util-Format-method-hex'>        /**
 </span>         * Returns the given number as a base 16 string at least `digits` in length. If
-         * the number is fewer digits, 0's are prepended as necessary. If `digits` is
+         * the number is fewer digits, 0&#39;s are prepended as necessary. If `digits` is
          * negative, the absolute value is the *exact* number of digits to return. In this
          * case, if then number has more digits, only the least significant digits are
          * returned.
          *
-         *      expect(Ext.util.Format.hex(0x12e4, 2)).toBe('12e4');
-         *      expect(Ext.util.Format.hex(0x12e4, -2)).toBe('e4');
-         *      expect(Ext.util.Format.hex(0x0e, 2)).toBe('0e');
+         *      expect(Ext.util.Format.hex(0x12e4, 2)).toBe(&#39;12e4&#39;);
+         *      expect(Ext.util.Format.hex(0x12e4, -2)).toBe(&#39;e4&#39;);
+         *      expect(Ext.util.Format.hex(0x0e, 2)).toBe(&#39;0e&#39;);
          *
          * @param {Number} value The number to format in hex.
          * @param {Number} digits
@@ -360,7 +360,7 @@ Ext.define('Ext.util.Format', function () {
                     }
                 }
                 while (s.length &lt; digits) {
-                    s = '0' + s;
+                    s = &#39;0&#39; + s;
                 }
             }
             return s;
@@ -385,16 +385,16 @@ Ext.define('Ext.util.Format', function () {
 <span id='Ext-util-Format-method-pick'>        /**
 </span>         * If `value` is a number, returns the argument from that index. For example
          *
-         *      var s = Ext.util.Format.pick(2, 'zero', 'one', 'two');
-         *      // s === 'two'
+         *      var s = Ext.util.Format.pick(2, &#39;zero&#39;, &#39;one&#39;, &#39;two&#39;);
+         *      // s === &#39;two&#39;
          *
          * Otherwise, `value` is treated in a truthy/falsey manner like so:
          *
-         *      var s = Ext.util.Format.pick(null, 'first', 'second');
-         *      // s === 'first'
+         *      var s = Ext.util.Format.pick(null, &#39;first&#39;, &#39;second&#39;);
+         *      // s === &#39;first&#39;
          *
-         *      s = Ext.util.Format.pick({}, 'first', 'second');
-         *      // s === 'second'
+         *      s = Ext.util.Format.pick({}, &#39;first&#39;, &#39;second&#39;);
+         *      // s === &#39;second&#39;
          *
          * The usefulness of this formatter method is in templates. For example:
          *
@@ -425,9 +425,9 @@ Ext.define('Ext.util.Format', function () {
          *
          * The usefulness of this formatter method is in templates. For example:
          *
-         *      {foo:lessThanElse(0, 'negative', 'positive')}
+         *      {foo:lessThanElse(0, &#39;negative&#39;, &#39;positive&#39;)}
          *
-         *      {bar:lessThanElse(200, 'lessThan200', 'greaterThan200', 'equalTo200')}
+         *      {bar:lessThanElse(200, &#39;lessThan200&#39;, &#39;greaterThan200&#39;, &#39;equalTo200&#39;)}
          *
          * @param {Number} value Value that will be checked
          * @param {Number} threshold Value to compare against
@@ -498,16 +498,16 @@ Ext.define('Ext.util.Format', function () {
                 var out;
                 if (size &lt; byteLimit) {
                     if (size === 1) {
-                        out = '1 byte';    
+                        out = &#39;1 byte&#39;;    
                     } else {
-                        out = size + ' bytes';
+                        out = size + &#39; bytes&#39;;
                     }
                 } else if (size &lt; kbLimit) {
-                    out = (Math.round(((size*10) / byteLimit))/10) + ' KB';
+                    out = (Math.round(((size*10) / byteLimit))/10) + &#39; KB&#39;;
                 } else if (size &lt; mbLimit) {
-                    out = (Math.round(((size*10) / kbLimit))/10) + ' MB';
+                    out = (Math.round(((size*10) / kbLimit))/10) + &#39; MB&#39;;
                 } else {
-                    out = (Math.round(((size*10) / mbLimit))/10) + ' GB';
+                    out = (Math.round(((size*10) / mbLimit))/10) + &#39; GB&#39;;
                 }
                 return out;
             };
@@ -516,7 +516,7 @@ Ext.define('Ext.util.Format', function () {
 <span id='Ext-util-Format-method-math'>        /**
 </span>         * It does simple math for use in a template, for example:
          *
-         *     var tpl = new Ext.Template('{value} * 10 = {value:math(&quot;* 10&quot;)}');
+         *     var tpl = new Ext.Template(&#39;{value} * 10 = {value:math(&quot;* 10&quot;)}&#39;);
          *
          * @return {Function} A function that operates on the passed value.
          * @method
@@ -526,7 +526,7 @@ Ext.define('Ext.util.Format', function () {
 
             return function(v, a){
                 if (!fns[a]) {
-                    fns[a] = Ext.functionFactory('v', 'return v ' + a + ';');
+                    fns[a] = Ext.functionFactory(&#39;v&#39;, &#39;return v &#39; + a + &#39;;&#39;);
                 }
                 return fns[a](v);
             };
@@ -536,13 +536,13 @@ Ext.define('Ext.util.Format', function () {
 </span>         * Rounds the passed number to the required decimal precision.
          * @param {Number/String} value The numeric value to round.
          * @param {Number} [precision] The number of decimal places to which to round the
-         * first parameter's value. If `undefined` the `value` is passed to `Math.round`
+         * first parameter&#39;s value. If `undefined` the `value` is passed to `Math.round`
          * otherwise the value is returned unmodified.
          * @return {Number} The rounded value.
          */
         round : function(value, precision) {
             var result = Number(value);
-            if (typeof precision === 'number') {
+            if (typeof precision === &#39;number&#39;) {
                 precision = Math.pow(10, precision);
                 result = Math.round(value * precision) / precision;
             } else if (precision === undefined) {
@@ -573,7 +573,7 @@ Ext.define('Ext.util.Format', function () {
          * To allow specification of format strings according to local conventions for separator characters, add
          * the string `/i` to the end of the format string. This format depends on the {@link #thousandSeparator} and
          * {@link #decimalSeparator} options. For example, if using European style separators, then the format string
-         * can be specified as `'0.000,00'`. This would be equivalent to using `'0,000.00'` when using US style formatting.
+         * can be specified as `&#39;0.000,00&#39;`. This would be equivalent to using `&#39;0,000.00&#39;` when using US style formatting.
          *
          * Examples (123456.789):
          * 
@@ -595,7 +595,7 @@ Ext.define('Ext.util.Format', function () {
                 return v;
             }
             if (isNaN(v)) {
-                return '';
+                return &#39;&#39;;
             }
             
             var formatFn = me.formatFns[formatString];
@@ -608,7 +608,7 @@ Ext.define('Ext.util.Format', function () {
                     comma = me.thousandSeparator,
                     decimalSeparator = me.decimalSeparator,
                     precision = 0,
-                    trimPart = '',
+                    trimPart = &#39;&#39;,
                     hasComma,
                     splitFormat,
                     extraChars,
@@ -619,21 +619,21 @@ Ext.define('Ext.util.Format', function () {
                 // Clean the format string by removing all but numerals and the decimal separator.
                 // Then split the format string into pre and post decimal segments according to *what* the
                 // decimal separator is. If they are specifying &quot;/i&quot;, they are using the local convention in the format string.
-                if (formatString.substr(formatString.length - 2) === '/i') {
+                if (formatString.substr(formatString.length - 2) === &#39;/i&#39;) {
                     // In a vast majority of cases, the separator will never change over the lifetime of the application.
-                    // So we'll only regenerate this if we really need to
+                    // So we&#39;ll only regenerate this if we really need to
                     if (!me.I18NFormatCleanRe || me.lastDecimalSeparator !== decimalSeparator) {
-                        me.I18NFormatCleanRe = new RegExp('[^\\d\\' + decimalSeparator + '#]','g');
+                        me.I18NFormatCleanRe = new RegExp(&#39;[^\\d\\&#39; + decimalSeparator + &#39;#]&#39;,&#39;g&#39;);
                         me.lastDecimalSeparator = decimalSeparator;
                     }
                     formatString = formatString.substr(0, formatString.length - 2);
                     hasComma = formatString.indexOf(comma) !== -1;
-                    splitFormat = formatString.replace(me.I18NFormatCleanRe, '').split(decimalSeparator);
+                    splitFormat = formatString.replace(me.I18NFormatCleanRe, &#39;&#39;).split(decimalSeparator);
                 } else {
-                    hasComma = formatString.indexOf(',') !== -1;
-                    splitFormat = formatString.replace(me.formatCleanRe, '').split('.');
+                    hasComma = formatString.indexOf(&#39;,&#39;) !== -1;
+                    splitFormat = formatString.replace(me.formatCleanRe, &#39;&#39;).split(&#39;.&#39;);
                 }
-                extraChars = formatString.replace(me.formatPattern, '');
+                extraChars = formatString.replace(me.formatPattern, &#39;&#39;);
 
                 if (splitFormat.length &gt; 2) {
                     //&lt;debug&gt;
@@ -652,23 +652,23 @@ Ext.define('Ext.util.Format', function () {
                     trimTrailingZeroes = splitFormat[1].match(me.hashRe);
                     if (trimTrailingZeroes) {
                         len = trimTrailingZeroes[0].length;
-                        // Need to escape, since this will be '.' by default
-                        trimPart = 'trailingZeroes=new RegExp(Ext.String.escapeRegex(utilFormat.decimalSeparator) + &quot;*0{0,' + len + '}$&quot;)';
+                        // Need to escape, since this will be &#39;.&#39; by default
+                        trimPart = &#39;trailingZeroes=new RegExp(Ext.String.escapeRegex(utilFormat.decimalSeparator) + &quot;*0{0,&#39; + len + &#39;}$&quot;)&#39;;
                     }
                 }
                 
                 // The function we create is called immediately and returns a closure which has access to vars and some fixed values; RegExes and the format string.
                 code = [
-                    'var utilFormat=Ext.util.Format,extNumber=Ext.Number,neg,absVal,fnum,parts' +
-                        (hasComma ? ',thousandSeparator,thousands=[],j,n,i' : '') +
-                        (extraChars  ? ',formatString=&quot;' + formatString + '&quot;,formatPattern=/[\\d,\\.#]+/' : '') +
-                        ',trailingZeroes;' +
-                    'return function(v){' +
-                    'if(typeof v!==&quot;number&quot;&amp;&amp;isNaN(v=extNumber.from(v,NaN)))return&quot;&quot;;' +
-                    'neg=v&lt;0;',
-                    'absVal=Math.abs(v);',
-                    'fnum=Ext.Number.toFixed(absVal, ' + precision + ');',
-                    trimPart, ';'
+                    &#39;var utilFormat=Ext.util.Format,extNumber=Ext.Number,neg,absVal,fnum,parts&#39; +
+                        (hasComma ? &#39;,thousandSeparator,thousands=[],j,n,i&#39; : &#39;&#39;) +
+                        (extraChars  ? &#39;,formatString=&quot;&#39; + formatString + &#39;&quot;,formatPattern=/[\\d,\\.#]+/&#39; : &#39;&#39;) +
+                        &#39;,trailingZeroes;&#39; +
+                    &#39;return function(v){&#39; +
+                    &#39;if(typeof v!==&quot;number&quot;&amp;&amp;isNaN(v=extNumber.from(v,NaN)))return&quot;&quot;;&#39; +
+                    &#39;neg=v&lt;0;&#39;,
+                    &#39;absVal=Math.abs(v);&#39;,
+                    &#39;fnum=Ext.Number.toFixed(absVal, &#39; + precision + &#39;);&#39;,
+                    trimPart, &#39;;&#39;
                 ];
 
                 if (hasComma) {
@@ -676,33 +676,33 @@ Ext.define('Ext.util.Format', function () {
                     
                     // split the string up into whole and decimal parts if there are decimals
                     if (precision) {
-                        code[code.length] = 'parts=fnum.split(&quot;.&quot;);';
-                        code[code.length] = 'fnum=parts[0];';
+                        code[code.length] = &#39;parts=fnum.split(&quot;.&quot;);&#39;;
+                        code[code.length] = &#39;fnum=parts[0];&#39;;
                     }
                     code[code.length] =
-                        'if(absVal&gt;=1000) {';
-                            code[code.length] = 'thousandSeparator=utilFormat.thousandSeparator;' +
-                            'thousands.length=0;' +
-                            'j=fnum.length;' +
-                            'n=fnum.length%3||3;' +
-                            'for(i=0;i&lt;j;i+=n){' +
-                                'if(i!==0){' +
-                                    'n=3;' +
-                                '}' +
-                                'thousands[thousands.length]=fnum.substr(i,n);' +
-                            '}' +
-                            'fnum=thousands.join(thousandSeparator);' + 
-                        '}';
+                        &#39;if(absVal&gt;=1000) {&#39;;
+                            code[code.length] = &#39;thousandSeparator=utilFormat.thousandSeparator;&#39; +
+                            &#39;thousands.length=0;&#39; +
+                            &#39;j=fnum.length;&#39; +
+                            &#39;n=fnum.length%3||3;&#39; +
+                            &#39;for(i=0;i&lt;j;i+=n){&#39; +
+                                &#39;if(i!==0){&#39; +
+                                    &#39;n=3;&#39; +
+                                &#39;}&#39; +
+                                &#39;thousands[thousands.length]=fnum.substr(i,n);&#39; +
+                            &#39;}&#39; +
+                            &#39;fnum=thousands.join(thousandSeparator);&#39; + 
+                        &#39;}&#39;;
                     if (precision) {
-                        code[code.length] = 'fnum += utilFormat.decimalSeparator+parts[1];';
+                        code[code.length] = &#39;fnum += utilFormat.decimalSeparator+parts[1];&#39;;
                     }
                     
                 } else if (precision) {
                     // If they are using a weird decimal separator, split and concat using it
-                    code[code.length] = 'if(utilFormat.decimalSeparator!==&quot;.&quot;){' +
-                        'parts=fnum.split(&quot;.&quot;);' +
-                        'fnum=parts[0]+utilFormat.decimalSeparator+parts[1];' +
-                    '}';
+                    code[code.length] = &#39;if(utilFormat.decimalSeparator!==&quot;.&quot;){&#39; +
+                        &#39;parts=fnum.split(&quot;.&quot;);&#39; +
+                        &#39;fnum=parts[0]+utilFormat.decimalSeparator+parts[1];&#39; +
+                    &#39;}&#39;;
                 }
 
                 /*
@@ -710,23 +710,23 @@ Ext.define('Ext.util.Format', function () {
                  * however the initial check at the top will still report as negative. Replace
                  * everything but 1-9 and check if the string is empty to determine a 0 value.
                  */
-                code[code.length] = 'if(neg&amp;&amp;fnum!==&quot;' + (precision ? '0.' + Ext.String.repeat('0', precision) : '0') + '&quot;) { fnum=&quot;-&quot;+fnum; }';
+                code[code.length] = &#39;if(neg&amp;&amp;fnum!==&quot;&#39; + (precision ? &#39;0.&#39; + Ext.String.repeat(&#39;0&#39;, precision) : &#39;0&#39;) + &#39;&quot;) { fnum=&quot;-&quot;+fnum; }&#39;;
 
                 if (trimTrailingZeroes) {
-                    code[code.length] = 'fnum=fnum.replace(trailingZeroes,&quot;&quot;);';
+                    code[code.length] = &#39;fnum=fnum.replace(trailingZeroes,&quot;&quot;);&#39;;
                 }
 
-                code[code.length] = 'return ';
+                code[code.length] = &#39;return &#39;;
 
                 // If there were extra characters around the formatting string, replace the format string part with the formatted number.
                 if (extraChars) {
-                    code[code.length] = 'formatString.replace(formatPattern, fnum);';
+                    code[code.length] = &#39;formatString.replace(formatPattern, fnum);&#39;;
                 } else {
-                    code[code.length] = 'fnum;';
+                    code[code.length] = &#39;fnum;&#39;;
                 }
-                code[code.length] = '};';
+                code[code.length] = &#39;};&#39;;
 
-                formatFn = me.formatFns[originalFormatString] = Ext.functionFactory('Ext', code.join(''))(Ext);
+                formatFn = me.formatFns[originalFormatString] = Ext.functionFactory(&#39;Ext&#39;, code.join(&#39;&#39;))(Ext);
             }
             return formatFn(v);
         },
@@ -753,28 +753,28 @@ Ext.define('Ext.util.Format', function () {
          * @return {String} The formatted percentage.
          */
         percent: function (value, formatString) {
-            return me.number(value * 100, formatString || '0') + me.percentSign;
+            return me.number(value * 100, formatString || &#39;0&#39;) + me.percentSign;
         },
 
 <span id='Ext-util-Format-method-attributes'>        /**
 </span>         * Formats an object of name value properties as HTML element attribute values suitable for using when creating textual markup.
-         * @param {Object} attributes An object containing the HTML attributes as properties eg: `{height:40, vAlign:'top'}`
+         * @param {Object} attributes An object containing the HTML attributes as properties eg: `{height:40, vAlign:&#39;top&#39;}`
          */
         attributes: function(attributes) {
-            if (typeof attributes === 'object') {
+            if (typeof attributes === &#39;object&#39;) {
                 var result = [],
                     name;
 
                 for (name in attributes) {
                     if (attributes.hasOwnProperty(name)) {
-                        result.push(name, '=&quot;', name === 'style' ? 
+                        result.push(name, &#39;=&quot;&#39;, name === &#39;style&#39; ? 
                                 Ext.DomHelper.generateStyles(attributes[name], null, true) :
-                                Ext.htmlEncode(attributes[name]), '&quot; ');
+                                Ext.htmlEncode(attributes[name]), &#39;&quot; &#39;);
                     }
                 }
-                attributes = result.join('');
+                attributes = result.join(&#39;&#39;);
             }
-            return attributes || '';
+            return attributes || &#39;&#39;;
         },
 
 <span id='Ext-util-Format-method-plural'>        /**
@@ -783,7 +783,7 @@ Ext.define('Ext.util.Format', function () {
          * For example, the following template would result in &quot;1 Comment&quot;.  If the 
          * value of `count` was 0 or greater than 1, the result would be &quot;x Comments&quot;.
          * 
-         *     var tpl = new Ext.XTemplate('{count:plural(&quot;Comment&quot;)}');
+         *     var tpl = new Ext.XTemplate(&#39;{count:plural(&quot;Comment&quot;)}&#39;);
          *     
          *     tpl.apply({
          *         count: 1
@@ -791,10 +791,10 @@ Ext.define('Ext.util.Format', function () {
          * 
          * Examples using the static `plural` method call:
          * 
-         *     Ext.util.Format.plural(2, 'Comment');
+         *     Ext.util.Format.plural(2, &#39;Comment&#39;);
          *     // returns &quot;2 Comments&quot;
          * 
-         *     Ext.util.Format.plural(4, 'person', 'people');
+         *     Ext.util.Format.plural(4, &#39;person&#39;, &#39;people&#39;);
          *     // returns &quot;4 people&quot;
          *
          * @param {Number} value The value to compare against
@@ -804,7 +804,7 @@ Ext.define('Ext.util.Format', function () {
          * @return {String} output The pluralized output of the passed singular form
          */
         plural : function(value, singular, plural) {
-            return value +' ' + (value === 1 ? singular : (plural ? plural : singular+'s'));
+            return value +&#39; &#39; + (value === 1 ? singular : (plural ? plural : singular+&#39;s&#39;));
         },
 
 <span id='Ext-util-Format-method-nl2br'>        /**
@@ -814,7 +814,7 @@ Ext.define('Ext.util.Format', function () {
          * @return {String} The string with embedded `&lt;br/&gt;` tags in place of newlines.
          */
         nl2br : function(v) {
-            return Ext.isEmpty(v) ? '' : v.replace(me.nl2brRe, '&lt;br/&gt;');
+            return Ext.isEmpty(v) ? &#39;&#39; : v.replace(me.nl2brRe, &#39;&lt;br/&gt;&#39;);
         },
 
 <span id='Ext-util-Format-method-capitalize'>        /**
@@ -898,7 +898,7 @@ Ext.define('Ext.util.Format', function () {
         parseBox : function(box) {
             box = box || 0;
 
-            if (typeof box === 'number') {
+            if (typeof box === &#39;number&#39;) {
                 return {
                     top   : box,
                     right : box,
@@ -907,7 +907,7 @@ Ext.define('Ext.util.Format', function () {
                 };
             }
 
-            var parts  = box.split(' '),
+            var parts  = box.split(&#39; &#39;),
                 ln = parts.length;
 
             if (ln === 1) {
@@ -955,8 +955,8 @@ Ext.define('Ext.util.Format', function () {
 </span>         * Returns the word at the given `index`. Spaces and punctuation are considered
          * as word separators by default. For example:
          *
-         *      console.log(Ext.util.Format.word('Hello, my name is Bob.', 2);
-         *      // == 'name'
+         *      console.log(Ext.util.Format.word(&#39;Hello, my name is Bob.&#39;, 2);
+         *      // == &#39;name&#39;
          *
          * @param {String} value The sentence to break into words.
          * @param {Number} index The 0-based word index.
@@ -964,10 +964,10 @@ Ext.define('Ext.util.Format', function () {
          * @return {String} The requested word or empty string.
          */
         word: function (value, index, sep) {
-            var re = sep ? (typeof sep === 'string' ? new RegExp(sep) : sep) : me.wordBreakRe,
-                parts = (value || '').split(re);
+            var re = sep ? (typeof sep === &#39;string&#39; ? new RegExp(sep) : sep) : me.wordBreakRe,
+                parts = (value || &#39;&#39;).split(re);
             
-            return parts[index || 0] || '';
+            return parts[index || 0] || &#39;&#39;;
         }
     };
 });

@@ -19,18 +19,18 @@
 </span> * In-memory proxy. This proxy simply uses a local variable for data storage/retrieval, so its contents are lost on
  * every page refresh.
  *
- * Usually this Proxy isn't used directly, serving instead as a helper to a {@link Ext.data.Store Store} where a reader
+ * Usually this Proxy isn&#39;t used directly, serving instead as a helper to a {@link Ext.data.Store Store} where a reader
  * is required to load data. For example, say we have a Store for a User model and have some inline data we want to
- * load, but this data isn't in quite the right format: we can use a MemoryProxy with a JsonReader to read it into our
+ * load, but this data isn&#39;t in quite the right format: we can use a MemoryProxy with a JsonReader to read it into our
  * Store:
  *
  *     //this is the model we will be using in the store
- *     Ext.define('User', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;User&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         fields: [
- *             {name: 'id',    type: 'int'},
- *             {name: 'name',  type: 'string'},
- *             {name: 'phone', type: 'string', mapping: 'phoneNumber'}
+ *             {name: &#39;id&#39;,    type: &#39;int&#39;},
+ *             {name: &#39;name&#39;,  type: &#39;string&#39;},
+ *             {name: &#39;phone&#39;, type: &#39;string&#39;, mapping: &#39;phoneNumber&#39;}
  *         ]
  *     });
  *
@@ -39,42 +39,42 @@
  *         users: [
  *             {
  *                 id: 1,
- *                 name: 'Ed Spencer',
- *                 phoneNumber: '555 1234'
+ *                 name: &#39;Ed Spencer&#39;,
+ *                 phoneNumber: &#39;555 1234&#39;
  *             },
  *             {
  *                 id: 2,
- *                 name: 'Abe Elias',
- *                 phoneNumber: '666 1234'
+ *                 name: &#39;Abe Elias&#39;,
+ *                 phoneNumber: &#39;666 1234&#39;
  *             }
  *         ]
  *     };
  *
- *     //note how we set the 'root' in the reader to match the data structure above
- *     var store = Ext.create('Ext.data.Store', {
+ *     //note how we set the &#39;root&#39; in the reader to match the data structure above
+ *     var store = Ext.create(&#39;Ext.data.Store&#39;, {
  *         autoLoad: true,
- *         model: 'User',
+ *         model: &#39;User&#39;,
  *         data : data,
  *         proxy: {
- *             type: 'memory',
+ *             type: &#39;memory&#39;,
  *             reader: {
- *                 type: 'json',
- *                 rootProperty: 'users'
+ *                 type: &#39;json&#39;,
+ *                 rootProperty: &#39;users&#39;
  *             }
  *         }
  *     });
  */
-Ext.define('Ext.data.proxy.Memory', {
-    extend: 'Ext.data.proxy.Client',
-    alias: 'proxy.memory',
-    alternateClassName: 'Ext.data.MemoryProxy',
+Ext.define(&#39;Ext.data.proxy.Memory&#39;, {
+    extend: &#39;Ext.data.proxy.Client&#39;,
+    alias: &#39;proxy.memory&#39;,
+    alternateClassName: &#39;Ext.data.MemoryProxy&#39;,
 
 <span id='Ext-data-proxy-Memory-property-isMemoryProxy'>    isMemoryProxy: true,
 </span>
     config: {
 <span id='Ext-data-proxy-Memory-cfg-enablePaging'>        /**
 </span>        * @cfg {Boolean} [enablePaging]
-        * Configure as `true` to enable this MemoryProxy to honour a read operation's `start` and `limit` options.
+        * Configure as `true` to enable this MemoryProxy to honour a read operation&#39;s `start` and `limit` options.
         *
         * When `true`, read operations will be able to read *pages* of records from the data object.
         */
@@ -86,7 +86,7 @@ Ext.define('Ext.data.proxy.Memory', {
         */
         data: {
             $value: null,
-            // Don't deeply clone the data object, just shallow copy the array
+            // Don&#39;t deeply clone the data object, just shallow copy the array
             merge: function(newValue, currentValue, target, mixinClass) {
                 if (Ext.isArray(newValue)) {
                     return Ext.Array.clone(newValue);
@@ -120,7 +120,7 @@ Ext.define('Ext.data.proxy.Memory', {
 <span id='Ext-data-proxy-Memory-method-create'>    /**
 </span>     * Currently this is a hard-coded method that simply commits any records and sets the operation to successful,
      * then calls the callback function, if provided. It is essentially mocking a server call in memory, but since
-     * there is no real back end in this case there's not much else to do. This method can be easily overridden to 
+     * there is no real back end in this case there&#39;s not much else to do. This method can be easily overridden to 
      * implement more complex logic if needed.
      * @param {Ext.data.operation.Operation} operation The Operation to perform
      * @method
@@ -132,7 +132,7 @@ Ext.define('Ext.data.proxy.Memory', {
 <span id='Ext-data-proxy-Memory-method-update'>    /**
 </span>     * Currently this is a hard-coded method that simply commits any records and sets the operation to successful,
      * then calls the callback function, if provided. It is essentially mocking a server call in memory, but since
-     * there is no real back end in this case there's not much else to do. This method can be easily overridden to 
+     * there is no real back end in this case there&#39;s not much else to do. This method can be easily overridden to 
      * implement more complex logic if needed.
      * @param {Ext.data.operation.Operation} operation The Operation to perform
      * @method
@@ -144,7 +144,7 @@ Ext.define('Ext.data.proxy.Memory', {
 <span id='Ext-data-proxy-Memory-method-erase'>    /**
 </span>     * Currently this is a hard-coded method that simply commits any records and sets the operation to successful,
      * then calls the callback function, if provided. It is essentially mocking a server call in memory, but since
-     * there is no real back end in this case there's not much else to do. This method can be easily overridden to 
+     * there is no real back end in this case there&#39;s not much else to do. This method can be easily overridden to 
      * implement more complex logic if needed.
      * @param {Ext.data.operation.Operation} operation The Operation to perform
      * @method
@@ -154,7 +154,7 @@ Ext.define('Ext.data.proxy.Memory', {
     },
 
 <span id='Ext-data-proxy-Memory-method-read'>    /**
-</span>     * Reads data from the configured {@link #data} object. Uses the Proxy's {@link #reader}, if present.
+</span>     * Reads data from the configured {@link #data} object. Uses the Proxy&#39;s {@link #reader}, if present.
      * @param {Ext.data.operation.Operation} operation The read Operation
      */
     read: function(operation) {
@@ -208,7 +208,7 @@ Ext.define('Ext.data.proxy.Memory', {
             operation.setCompleted();
 
             // If a JsonReader detected metadata, process it now.
-            // This will fire the 'metachange' event which the Store processes to fire its own 'metachange'
+            // This will fire the &#39;metachange&#39; event which the Store processes to fire its own &#39;metachange&#39;
             if (meta = resultSet.getMetadata()) {
                 me.onMetaChange(meta);
             }

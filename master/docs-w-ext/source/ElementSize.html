@@ -18,17 +18,17 @@
   <pre class="prettyprint lang-js"><span id='Ext-event-publisher-ElementSize'>/**
 </span> * @private
  */
-Ext.define('Ext.event.publisher.ElementSize', {
+Ext.define(&#39;Ext.event.publisher.ElementSize&#39;, {
 
-    extend: 'Ext.event.publisher.Publisher',
+    extend: &#39;Ext.event.publisher.Publisher&#39;,
 
     requires: [
-        'Ext.util.SizeMonitor'
+        &#39;Ext.util.SizeMonitor&#39;
     ],
 
-<span id='Ext-event-publisher-ElementSize-property-type'>    type: 'size',
+<span id='Ext-event-publisher-ElementSize-property-type'>    type: &#39;size&#39;,
 </span>
-<span id='Ext-event-publisher-ElementSize-property-handledEvents'>    handledEvents: ['resize'],
+<span id='Ext-event-publisher-ElementSize-property-handledEvents'>    handledEvents: [&#39;resize&#39;],
 </span>
 <span id='Ext-event-publisher-ElementSize-method-constructor'>    constructor: function() {
 </span>        this.monitors = {};
@@ -55,7 +55,7 @@ Ext.define('Ext.event.publisher.ElementSize', {
             });
         }
 
-        element.on('painted', 'forceRefresh', monitors[id]);
+        element.on(&#39;painted&#39;, &#39;forceRefresh&#39;, monitors[id]);
 
         return true;
     },
@@ -69,14 +69,14 @@ Ext.define('Ext.event.publisher.ElementSize', {
         if (subscribers[id] &amp;&amp; !--subscribers[id]) {
             delete subscribers[id];
             sizeMonitor = monitors[id];
-            element.un('painted', 'forceRefresh', sizeMonitor);
+            element.un(&#39;painted&#39;, &#39;forceRefresh&#39;, sizeMonitor);
             sizeMonitor.destroy();
             delete monitors[id];
         }
     },
 
 <span id='Ext-event-publisher-ElementSize-method-onElementResize'>    onElementResize: function(element, info) {
-</span>        Ext.TaskQueue.requestRead('fire', this, [element, 'resize', [element, info]]);
+</span>        Ext.TaskQueue.requestRead(&#39;fire&#39;, this, [element, &#39;resize&#39;, [element, info]]);
     }
 
 <span id='Ext-event-publisher-ElementSize-property-privates'>    //&lt;debug&gt;
@@ -92,7 +92,7 @@ Ext.define('Ext.event.publisher.ElementSize', {
 
             for (i = 0; i &lt; len; ++i) {
                 el = elements[i];
-                if (typeof el !== 'string') {
+                if (typeof el !== &#39;string&#39;) {
                     el = el.id;
                 }
                 monitor = this.monitors[el];

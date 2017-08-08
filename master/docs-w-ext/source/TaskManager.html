@@ -25,13 +25,13 @@
  *     var task, clock;
  *     
  *     clock = Ext.getBody().appendChild({
- *         id: 'clock'
+ *         id: &#39;clock&#39;
  *     });
  *     
  *     // Start a simple clock task that updates a div once per second 
  *     task = {
  *         run: function() {
- *             clock.setHtml(Ext.Date.format(new Date(), 'g:i:s A'));
+ *             clock.setHtml(Ext.Date.format(new Date(), &#39;g:i:s A&#39;));
  *         },
  *         interval: 1000
  *     };
@@ -40,11 +40,11 @@
  *
  * See the {@link #start} method for details about how to configure a task object.
  */
-Ext.define('Ext.util.TaskManager', {
-    extend: 'Ext.util.TaskRunner',
+Ext.define(&#39;Ext.util.TaskManager&#39;, {
+    extend: &#39;Ext.util.TaskRunner&#39;,
 
     alternateClassName: [
-        'Ext.TaskManager'
+        &#39;Ext.TaskManager&#39;
     ],
 
     singleton: true

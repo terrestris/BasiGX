@@ -35,19 +35,19 @@
  *
  * @class BasiGX.util.CopyClipboard
  */
-Ext.define('BasiGX.util.CopyClipboard', {
+Ext.define(&#39;BasiGX.util.CopyClipboard&#39;, {
 
     statics: {
 
 <span id='BasiGX-util-CopyClipboard-static-property-copyToClipboardSupported'>        /**
 </span>         * Property indicating the current browser support of the query command
-         * 'copy'.
+         * &#39;copy&#39;.
          *
          * @readonly
-         * @type {Boolean} isSupported Whether the 'copy' command is supported
+         * @type {Boolean} isSupported Whether the &#39;copy&#39; command is supported
          *                             or not.
          */
-        copyToClipboardSupported: document.queryCommandSupported('copy'),
+        copyToClipboardSupported: document.queryCommandSupported(&#39;copy&#39;),
 
 <span id='BasiGX-util-CopyClipboard-static-method-copyTextToClipboard'>        /**
 </span>         * Copies the given value to the clipboard.
@@ -64,15 +64,15 @@ Ext.define('BasiGX.util.CopyClipboard', {
             var staticMe = BasiGX.util.CopyClipboard;
 
             if (!staticMe.copyToClipboardSupported) {
-                Ext.Logger.warn('Copy to clipboard is not supported ' +
-                        'by the browser!');
+                Ext.Logger.warn(&#39;Copy to clipboard is not supported &#39; +
+                        &#39;by the browser!&#39;);
             }
 
             var dh = Ext.DomHelper;
             var spec = {
-                tag: 'input',
-                id: 'hidden-copy-paste-textarea',
-                style: 'height:0;'
+                tag: &#39;input&#39;,
+                id: &#39;hidden-copy-paste-textarea&#39;,
+                style: &#39;height:0;&#39;
             };
             var hiddenInputField = dh.append(
                 Ext.getBody(),
@@ -83,7 +83,7 @@ Ext.define('BasiGX.util.CopyClipboard', {
             hiddenInputField.select();
 
             try {
-                var success = document.execCommand('copy');
+                var success = document.execCommand(&#39;copy&#39;);
                 if (success) {
                     if (Ext.isFunction(cbSuccess)) {
                         cbSuccess.call(cbScope);

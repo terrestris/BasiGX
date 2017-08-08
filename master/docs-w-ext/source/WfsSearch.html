@@ -38,7 +38,7 @@
  * Example usage:
  *
  *     {
- *         xtype: 'basigx-search-wfs'
+ *         xtype: &#39;basigx-search-wfs&#39;
  *     }
  *
  * TODO This class has a lot in common with both #NominatimSearch and
@@ -46,16 +46,16 @@
  *
  * @class BasiGX.view.container.WfsSearch
  */
-Ext.define('BasiGX.view.container.WfsSearch', {
-    extend: 'Ext.container.Container',
-    xtype: 'basigx-search-wfs',
+Ext.define(&#39;BasiGX.view.container.WfsSearch&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
+    xtype: &#39;basigx-search-wfs&#39;,
 
     requires: [
-        'GeoExt.data.store.Features',
-        'GeoExt.component.FeatureRenderer',
+        &#39;GeoExt.data.store.Features&#39;,
+        &#39;GeoExt.component.FeatureRenderer&#39;,
 
-        'BasiGX.util.Animate',
-        'BasiGX.util.Map'
+        &#39;BasiGX.util.Animate&#39;,
+        &#39;BasiGX.util.Map&#39;
     ],
 
 <span id='BasiGX-view-container-WfsSearch-property-viewModel'>    /**
@@ -63,13 +63,13 @@ Ext.define('BasiGX.view.container.WfsSearch', {
      */
     viewModel: {
         data: {
-            searchTermTextFieldLabel: 'Suchbegriff',
-            searchResultGridTitle: 'Suchergebnisse',
-            resetBtnText: 'Zurücksetzen',
-            documentation: '&lt;h2&gt;WFS basierte Suche&lt;/h2&gt;• Verwenden Sie die ' +
-                'WFS Suche, um auf Basis eines definierten Kartenthemas die ' +
-                'Attribute nach ihrem Suchbegriff zu durchsuchen und das ' +
-                'Ergbnis auf der Karte anzeigen zu lassen'
+            searchTermTextFieldLabel: &#39;Suchbegriff&#39;,
+            searchResultGridTitle: &#39;Suchergebnisse&#39;,
+            resetBtnText: &#39;Zurücksetzen&#39;,
+            documentation: &#39;&lt;h2&gt;WFS basierte Suche&lt;/h2&gt;• Verwenden Sie die &#39; +
+                &#39;WFS Suche, um auf Basis eines definierten Kartenthemas die &#39; +
+                &#39;Attribute nach ihrem Suchbegriff zu durchsuchen und das &#39; +
+                &#39;Ergbnis auf der Karte anzeigen zu lassen&#39;
         }
     },
 
@@ -79,7 +79,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
          *
          * @type {String}
          */
-        SEARCH_RESULT_VECTOR_LAYER_NAME: 'searchResultVectorLayer'
+        SEARCH_RESULT_VECTOR_LAYER_NAME: &#39;searchResultVectorLayer&#39;
     },
 
 <span id='BasiGX-view-container-WfsSearch-property-config'>    /**
@@ -111,17 +111,17 @@ Ext.define('BasiGX.view.container.WfsSearch', {
          * response
          */
         allowedFeatureTypeDataTypes: [
-            'xsd:string'
+            &#39;xsd:string&#39;
         ],
 
 <span id='BasiGX-view-container-WfsSearch-cfg-groupHeaderTpl'>        /**
 </span>         * the template to change the groups titles
          */
-        groupHeaderTpl: '{name}',
+        groupHeaderTpl: &#39;{name}&#39;,
 
 <span id='BasiGX-view-container-WfsSearch-property-columns'>        /**
 </span>         * Optional Array of columns which will be displyed in the results grid.
-         * Leave empty to use default column with dataIndex 'displayfield'.
+         * Leave empty to use default column with dataIndex &#39;displayfield&#39;.
          * @type {Array}
          * @optional
          */
@@ -136,18 +136,18 @@ Ext.define('BasiGX.view.container.WfsSearch', {
             image: new ol.style.Circle({
                 radius: 6,
                 fill: new ol.style.Fill({
-                    color: '#8B0000'
+                    color: &#39;#8B0000&#39;
                 }),
                 stroke: new ol.style.Stroke({
-                    color: '#fff',
+                    color: &#39;#fff&#39;,
                     width: 2
                 })
             }),
             fill: new ol.style.Fill({
-                color: '#8B0000'
+                color: &#39;#8B0000&#39;
             }),
             stroke: new ol.style.Stroke({
-                color: '#8B0000',
+                color: &#39;#8B0000&#39;,
                 width: 4
             })
         }),
@@ -164,24 +164,24 @@ Ext.define('BasiGX.view.container.WfsSearch', {
                 image: new ol.style.Circle({
                     radius: radius,
                     fill: new ol.style.Fill({
-                        color: '#EE0000'
+                        color: &#39;#EE0000&#39;
                     }),
                     stroke: new ol.style.Stroke({
-                        color: 'gray',
+                        color: &#39;gray&#39;,
                         width: 3
                     })
                 }),
                 fill: new ol.style.Fill({
-                    color: '#EE0000'
+                    color: &#39;#EE0000&#39;
                 }),
                 stroke: new ol.style.Stroke({
-                    color: 'gray',
+                    color: &#39;gray&#39;,
                     width: 3
                 }),
                 text: text ? new ol.style.Text({
                     text: text.toString(),
                     fill: new ol.style.Fill({
-                        color: '#fff'
+                        color: &#39;#fff&#39;
                     })
                 }) : undefined
             });
@@ -196,18 +196,18 @@ Ext.define('BasiGX.view.container.WfsSearch', {
             image: new ol.style.Circle({
                 radius: 8,
                 fill: new ol.style.Fill({
-                    color: '#0099CC'
+                    color: &#39;#0099CC&#39;
                 }),
                 stroke: new ol.style.Stroke({
-                    color: '#fff',
+                    color: &#39;#fff&#39;,
                     width: 2
                 })
             }),
             fill: new ol.style.Fill({
-                color: '#0099CC'
+                color: &#39;#0099CC&#39;
             }),
             stroke: new ol.style.Stroke({
-                color: '#0099CC',
+                color: &#39;#0099CC&#39;,
                 width: 6
             })
         }),
@@ -232,16 +232,16 @@ Ext.define('BasiGX.view.container.WfsSearch', {
                 image: new ol.style.Circle({
                     radius: radius,
                     stroke: new ol.style.Stroke({
-                        color: '#fff'
+                        color: &#39;#fff&#39;
                     }),
                     fill: new ol.style.Fill({
-                        color: '#3399CC'
+                        color: &#39;#3399CC&#39;
                     })
                 }),
                 text: new ol.style.Text({
                     text: amount.toString(),
                     fill: new ol.style.Fill({
-                        color: '#fff'
+                        color: &#39;#fff&#39;
                     })
                 })
             })];
@@ -259,7 +259,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
 <span id='BasiGX-view-container-WfsSearch-property-layout'>    /**
 </span>     *
      */
-    layout: 'fit',
+    layout: &#39;fit&#39;,
 
 <span id='BasiGX-view-container-WfsSearch-property-typeDelayTask'>    /**
 </span>     *
@@ -307,7 +307,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
         me.map = BasiGX.util.Map.getMapComponent().getMap();
 
         if (Ext.isEmpty(me.getLayers())) {
-            Ext.log.error('No layers given to search component!');
+            Ext.log.error(&#39;No layers given to search component!&#39;);
         }
 
         if (!me.searchResultVectorLayer) {
@@ -329,7 +329,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
             me.clusterLayer = new ol.layer.Vector({
                 source: clusterSource,
                 style: function(feature) {
-                    var amount = feature.get('features').length;
+                    var amount = feature.get(&#39;features&#39;).length;
                     var style = me.styleCache[amount];
                     if (!style) {
                         style = me.clusterStyleFn(amount, amount + 10);
@@ -341,21 +341,21 @@ Ext.define('BasiGX.view.container.WfsSearch', {
             me.map.addLayer(me.clusterLayer);
 
             // correct the vectorlayerstyle for the grid symbolizer
-            me.searchResultVectorLayer.setStyle(me.clusterStyleFn('', 8));
+            me.searchResultVectorLayer.setStyle(me.clusterStyleFn(&#39;&#39;, 8));
 
         }
 
-        var searchResultStore = Ext.create('GeoExt.data.store.Features', {
+        var searchResultStore = Ext.create(&#39;GeoExt.data.store.Features&#39;, {
             map: me.map,
             layer: me.searchResultVectorLayer,
-            groupField: 'featuretype'
+            groupField: &#39;featuretype&#39;
         });
 
         var columns = [{
-            xtype: 'widgetcolumn',
+            xtype: &#39;widgetcolumn&#39;,
             flex: 1,
             widget: {
-                xtype: 'gx_renderer'
+                xtype: &#39;gx_renderer&#39;
             },
             onWidgetAttach: function(column, gxRenderer, record) {
                 // update the symbolizer with the related feature
@@ -372,21 +372,21 @@ Ext.define('BasiGX.view.container.WfsSearch', {
             columns = Ext.Array.merge(columns, me.getColumns());
         } else {
             columns.push({
-                dataIndex: 'displayfield',
+                dataIndex: &#39;displayfield&#39;,
                 flex: 7,
                 renderer: function(value) {
-                    return '&lt;span data-qtip=&quot;' + value + '&quot;&gt;' +
-                        value + '&lt;/span&gt;';
+                    return &#39;&lt;span data-qtip=&quot;&#39; + value + &#39;&quot;&gt;&#39; +
+                        value + &#39;&lt;/span&gt;&#39;;
                 }
             });
         }
 
         me.items = [
             {
-                xtype: 'textfield',
-                name: 'searchTerm',
+                xtype: &#39;textfield&#39;,
+                name: &#39;searchTerm&#39;,
                 bind: {
-                    fieldLabel: '{searchTermTextFieldLabel}'
+                    fieldLabel: &#39;{searchTermTextFieldLabel}&#39;
                 },
                 enableKeyEvents: true,
                 listeners: {
@@ -394,44 +394,44 @@ Ext.define('BasiGX.view.container.WfsSearch', {
                 }
             },
             {
-                xtype: 'grid',
-                name: 'searchresultgrid',
+                xtype: &#39;grid&#39;,
+                name: &#39;searchresultgrid&#39;,
                 hidden: true,
                 hideHeaders: true,
                 bind: {
-                    title: '{searchResultGridTitle}'
+                    title: &#39;{searchResultGridTitle}&#39;
                 },
                 store: searchResultStore,
                 columns: columns,
                 features: [{
-                    ftype: 'grouping',
+                    ftype: &#39;grouping&#39;,
                     groupHeaderTpl: me.getGroupHeaderTpl()
                 }],
                 width: 200,
                 height: 300
             }, {
-                xtype: 'button',
+                xtype: &#39;button&#39;,
                 bind: {
-                    text: '{resetBtnText}'
+                    text: &#39;{resetBtnText}&#39;
                 },
-                margin: '10 0 0 0',
+                margin: &#39;10 0 0 0&#39;,
                 handler: me.resetSearchGridAndText,
                 scope: me
             }
         ];
         me.callParent(arguments);
 
-        me.on('describeFeatureTypeResponse', me.getFeatures);
-        me.on('getFeatureResponse', me.showSearchResults);
-        me.on('show', me.down('textfield').focus);
+        me.on(&#39;describeFeatureTypeResponse&#39;, me.getFeatures);
+        me.on(&#39;getFeatureResponse&#39;, me.showSearchResults);
+        me.on(&#39;show&#39;, me.down(&#39;textfield&#39;).focus);
 
-        var grid = me.down('grid[name=searchresultgrid]');
+        var grid = me.down(&#39;grid[name=searchresultgrid]&#39;);
 
         if (me.getHighLightFeatureOnHoverInGrid()) {
-            grid.on('itemmouseenter', me.highlightFeature, me);
-            grid.on('itemmouseleave', me.unhighlightFeature, me);
+            grid.on(&#39;itemmouseenter&#39;, me.highlightFeature, me);
+            grid.on(&#39;itemmouseleave&#39;, me.unhighlightFeature, me);
         }
-        grid.on('itemclick', me.highlightSelectedFeature, me);
+        grid.on(&#39;itemclick&#39;, me.highlightSelectedFeature, me);
     },
 
 <span id='BasiGX-view-container-WfsSearch-method-handleKeyDown'>    /**
@@ -441,7 +441,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
      *     the query.
      */
     handleKeyDown: function(textfield) {
-        var wfsSearchCont = textfield.up('basigx-search-wfs');
+        var wfsSearchCont = textfield.up(&#39;basigx-search-wfs&#39;);
         var val = textfield.getValue();
 
         if (val.length &lt; wfsSearchCont.getMinSearchTextChars()) {
@@ -469,7 +469,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
      */
     resetSearchGridAndText: function() {
         var me = this;
-        me.down('textfield[name=searchTerm]').setValue('');
+        me.down(&#39;textfield[name=searchTerm]&#39;).setValue(&#39;&#39;);
         me.resetGrid();
     },
 
@@ -478,7 +478,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
      */
     resetGrid: function() {
         var me = this;
-        var searchresultgrid = me.down('grid[name=searchresultgrid]');
+        var searchresultgrid = me.down(&#39;grid[name=searchresultgrid]&#39;);
         me.searchResultVectorLayer.getSource().clear(true);
         searchresultgrid.hide();
         searchresultgrid.getStore().removeAll();
@@ -500,16 +500,16 @@ Ext.define('BasiGX.view.container.WfsSearch', {
         });
 
         var describeFeatureTypeParams = {
-            REQUEST: 'DescribeFeatureType',
-            SERVICE: 'WFS',
-            VERSION: '1.1.0',
-            OUTPUTFORMAT: 'application/json',
+            REQUEST: &#39;DescribeFeatureType&#39;,
+            SERVICE: &#39;WFS&#39;,
+            VERSION: &#39;1.1.0&#39;,
+            OUTPUTFORMAT: &#39;application/json&#39;,
             TYPENAME: typeNames.toString()
         };
 
-        var url = me.getWfsServerUrl() + '?';
+        var url = me.getWfsServerUrl() + &#39;?&#39;;
         Ext.iterate(describeFeatureTypeParams, function(k, v) {
-            url += k + '=' + v + '&amp;';
+            url += k + &#39;=&#39; + v + &#39;&amp;&#39;;
         });
 
         me.setLoading(true);
@@ -523,14 +523,14 @@ Ext.define('BasiGX.view.container.WfsSearch', {
                 } else if (Ext.isObject(response.responseText)) {
                     featureTypes = response.responseText;
                 } else {
-                    Ext.log.error('Error! Could not parse ' +
-                        'describe featuretype response!');
+                    Ext.log.error(&#39;Error! Could not parse &#39; +
+                        &#39;describe featuretype response!&#39;);
                 }
-                me.fireEvent('describeFeatureTypeResponse', featureTypes);
+                me.fireEvent(&#39;describeFeatureTypeResponse&#39;, featureTypes);
             },
             failure: function(response) {
                 me.setLoading(false);
-                Ext.log.error('Error on describe featuretype request:',
+                Ext.log.error(&#39;Error on describe featuretype request:&#39;,
                     response);
             }
         });
@@ -555,7 +555,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
 
         Ext.Ajax.request({
             url: url,
-            method: 'POST',
+            method: &#39;POST&#39;,
             xmlData: xml,
             success: function(response) {
                 me.setLoading(false);
@@ -564,14 +564,14 @@ Ext.define('BasiGX.view.container.WfsSearch', {
                 } else if (Ext.isObject(response.responseText)) {
                     featureCollection = response.responseText;
                 } else {
-                    Ext.log.error('Error! Could not parse ' +
-                        'GetFeature response!');
+                    Ext.log.error(&#39;Error! Could not parse &#39; +
+                        &#39;GetFeature response!&#39;);
                 }
-                me.fireEvent('getFeatureResponse', featureCollection);
+                me.fireEvent(&#39;getFeatureResponse&#39;, featureCollection);
             },
             failure: function(response) {
                 me.setLoading(false);
-                Ext.log.error('Error on GetFeature request:',
+                Ext.log.error(&#39;Error on GetFeature request:&#39;,
                     response);
             }
         });
@@ -595,7 +595,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
             Ext.each(ft.properties, function(prop) {
                 if (Ext.Array.contains(
                     me.getAllowedFeatureTypeDataTypes(), prop.type) &amp;&amp;
-                    prop.name.indexOf(' ') &lt; 0) {
+                    prop.name.indexOf(&#39; &#39;) &lt; 0) {
                     cleanedFeatureType[index].properties.push(prop);
                 }
             });
@@ -604,44 +604,44 @@ Ext.define('BasiGX.view.container.WfsSearch', {
     },
 
 <span id='BasiGX-view-container-WfsSearch-method-setupXmlPostBody'>    /**
-</span>     * Sets up a XML as string for a 'wfs:GetFeature'-operation.
+</span>     * Sets up a XML as string for a &#39;wfs:GetFeature&#39;-operation.
      *
      * @param {Array&lt;Object&gt;} featureTypes The featuretypes.
      * @return {String} The XML.
      */
     setupXmlPostBody: function(featureTypes) {
         var me = this;
-        var xml = '' +
-            '&lt;wfs:GetFeature' +
-            ' service=&quot;WFS&quot; version=&quot;1.1.0&quot;' +
-            ' outputFormat=&quot;application/json&quot;' +
-            ' xmlns:wfs=&quot;http://www.opengis.net/wfs&quot;' +
-            ' xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;' +
-            ' xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;' +
-            ' xsi:schemaLocation=&quot;http://www.opengis.net/wfs' +
-            ' http://schemas.opengis.net/wfs/1.0.0/WFS-basic.xsd&quot;&gt;';
+        var xml = &#39;&#39; +
+            &#39;&lt;wfs:GetFeature&#39; +
+            &#39; service=&quot;WFS&quot; version=&quot;1.1.0&quot;&#39; +
+            &#39; outputFormat=&quot;application/json&quot;&#39; +
+            &#39; xmlns:wfs=&quot;http://www.opengis.net/wfs&quot;&#39; +
+            &#39; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&#39; +
+            &#39; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#39; +
+            &#39; xsi:schemaLocation=&quot;http://www.opengis.net/wfs&#39; +
+            &#39; http://schemas.opengis.net/wfs/1.0.0/WFS-basic.xsd&quot;&gt;&#39;;
 
         Ext.each(featureTypes, function(ft) {
             Ext.each(ft.properties, function(prop) {
-                xml += '' +
-                    '&lt;wfs:Query typeName=&quot;' + ft.typeName + '&quot;&gt;' +
-                        '&lt;ogc:Filter&gt;' +
-                            '&lt;ogc:PropertyIsLike' +
-                            ' wildCard=&quot;*&quot; singleChar=&quot;.&quot; escape=&quot;\\&quot;' +
-                            ' matchCase=&quot;false&quot;&gt;' +
-                                '&lt;ogc:PropertyName&gt;' +
+                xml += &#39;&#39; +
+                    &#39;&lt;wfs:Query typeName=&quot;&#39; + ft.typeName + &#39;&quot;&gt;&#39; +
+                        &#39;&lt;ogc:Filter&gt;&#39; +
+                            &#39;&lt;ogc:PropertyIsLike&#39; +
+                            &#39; wildCard=&quot;*&quot; singleChar=&quot;.&quot; escape=&quot;\\&quot;&#39; +
+                            &#39; matchCase=&quot;false&quot;&gt;&#39; +
+                                &#39;&lt;ogc:PropertyName&gt;&#39; +
                                     prop.name +
-                                '&lt;/ogc:PropertyName&gt;' +
-                                '&lt;ogc:Literal&gt;' +
-                                    '*' + me.searchTerm + '*' +
-                                '&lt;/ogc:Literal&gt;' +
-                            '&lt;/ogc:PropertyIsLike&gt;' +
-                        '&lt;/ogc:Filter&gt;' +
-                    '&lt;/wfs:Query&gt;';
+                                &#39;&lt;/ogc:PropertyName&gt;&#39; +
+                                &#39;&lt;ogc:Literal&gt;&#39; +
+                                    &#39;*&#39; + me.searchTerm + &#39;*&#39; +
+                                &#39;&lt;/ogc:Literal&gt;&#39; +
+                            &#39;&lt;/ogc:PropertyIsLike&gt;&#39; +
+                        &#39;&lt;/ogc:Filter&gt;&#39; +
+                    &#39;&lt;/wfs:Query&gt;&#39;;
             });
         });
 
-        xml += '&lt;/wfs:GetFeature&gt;';
+        xml += &#39;&lt;/wfs:GetFeature&gt;&#39;;
 
         return xml;
     },
@@ -654,7 +654,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
      */
     showSearchResults: function(featureCollection) {
         var me = this;
-        var grid = me.down('grid[name=searchresultgrid]');
+        var grid = me.down(&#39;grid[name=searchresultgrid]&#39;);
         var features = featureCollection.features;
         var parser = new ol.format.GeoJSON();
 
@@ -664,7 +664,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
 
         var searchTerm = me.searchTerm;
         Ext.each(features, function(feature) {
-            var featuretype = feature.id.split('.')[0];
+            var featuretype = feature.id.split(&#39;.&#39;)[0];
             var displayfield;
 
             // find the matching value in order to display it
@@ -679,8 +679,8 @@ Ext.define('BasiGX.view.container.WfsSearch', {
             feature.properties.featuretype = featuretype;
 
             var olFeat = parser.readFeatures(feature, {
-                dataProjection: 'EPSG:31467',
-                featureProjection: 'EPSG:31467'
+                dataProjection: &#39;EPSG:31467&#39;,
+                featureProjection: &#39;EPSG:31467&#39;
             })[0];
             me.searchResultVectorLayer.getSource().addFeature(olFeat);
         });
@@ -726,7 +726,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
      */
     updateRenderer: function(item, style) {
         var renderer = Ext.getCmp(
-            Ext.query('div[id^=gx_renderer', true, item)[0].id);
+            Ext.query(&#39;div[id^=gx_renderer&#39;, true, item)[0].id);
         var src = renderer.map.getLayers().getArray()[0].getSource();
         src.getFeatures()[0].setStyle(style);
     },
@@ -738,7 +738,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
      *
      * @param {Ext.view.View} tableView The tableView / grid.
      * @param {Ext.data.Model} record The record that belongs to the item.
-     * @param {HTMLElement} item The item's element.
+     * @param {HTMLElement} item The item&#39;s element.
      */
     highlightFeature: function(tableView, record, item) {
         if (this.enterEventRec === record) {
@@ -784,7 +784,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
      *
      * @param {Ext.view.View} tableView The tableView / grid.
      * @param {Ext.data.Model} record The record that belongs to the item.
-     * @param {HTMLElement} item The item's element.
+     * @param {HTMLElement} item The item&#39;s element.
      */
     unhighlightFeature: function(tableView, record, item) {
         if (this.leaveEventRec === record) {
@@ -794,7 +794,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
         if (tableView.getSelection()[0] !== record) {
             record.olObject.setStyle(this.getSearchResultFeatureStyle());
             if (this.clusterResults) {
-                this.updateRenderer(item, this.clusterStyleFn('', 8));
+                this.updateRenderer(item, this.clusterStyleFn(&#39;&#39;, 8));
             } else {
                 this.updateRenderer(item, this.getSearchResultFeatureStyle());
             }
@@ -808,7 +808,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
      *
      * @param {Ext.view.View} tableView The tableView / grid.
      * @param {Ext.data.Model} record The record that belongs to the item.
-     * @param {HTMLElement} item The item's element.
+     * @param {HTMLElement} item The item&#39;s element.
      */
     highlightSelectedFeature: function(tableView, record, item) {
         record.olObject.setStyle(this.getSearchResultSelectFeatureStyle());
@@ -828,8 +828,8 @@ Ext.define('BasiGX.view.container.WfsSearch', {
         var clusterFeature;
         var clusterFeatures = me.clusterLayer.getSource().getFeatures();
         Ext.each(clusterFeatures, function(feat) {
-            if (!Ext.isEmpty(feat.get('features'))) {
-                Ext.each(feat.get('features'), function(f) {
+            if (!Ext.isEmpty(feat.get(&#39;features&#39;))) {
+                Ext.each(feat.get(&#39;features&#39;), function(f) {
                     if (f.getId() === feature.getId()) {
                         clusterFeature = feat;
                         return false;

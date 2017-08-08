@@ -18,7 +18,7 @@
   <pre class="prettyprint lang-js"><span id='Ext-layout-container-Table'>/**
 </span> * This layout allows you to easily render content into an HTML table. The total number of columns can be specified, and
  * rowspan and colspan can be used to create complex layouts within the table. This class is intended to be extended or
- * created via the `layout: {type: 'table'}` {@link Ext.container.Container#layout} config, and should generally not
+ * created via the `layout: {type: &#39;table&#39;}` {@link Ext.container.Container#layout} config, and should generally not
  * need to be created directly via the new keyword.
  *
  * Note that when creating a layout via config, the layout-specific config properties must be passed in via the {@link
@@ -36,45 +36,45 @@
  * creating and nesting rows and columns as you would in HTML, you simply specify the total column count in the
  * layout config and start adding panels in their natural order from left to right, top to bottom. The layout will
  * automatically figure out, based on the column count, rowspans and colspans, how to position each panel within the
- * table. Just like with HTML tables, your rowspans and colspans must add up correctly in your overall layout or you'll
+ * table. Just like with HTML tables, your rowspans and colspans must add up correctly in your overall layout or you&#39;ll
  * end up with missing and/or extra cells! Example usage:
  *
  *     @example
- *     Ext.create('Ext.panel.Panel', {
- *         title: 'Table Layout',
+ *     Ext.create(&#39;Ext.panel.Panel&#39;, {
+ *         title: &#39;Table Layout&#39;,
  *         width: 300,
  *         height: 150,
  *         layout: {
- *             type: 'table',
+ *             type: &#39;table&#39;,
  *             // The total column count must be specified here
  *             columns: 3
  *         },
  *         defaults: {
  *             // applied to each contained panel
- *             bodyStyle: 'padding:20px'
+ *             bodyStyle: &#39;padding:20px&#39;
  *         },
  *         items: [{
- *             html: 'Cell A content',
+ *             html: &#39;Cell A content&#39;,
  *             rowspan: 2
  *         },{
- *             html: 'Cell B content',
+ *             html: &#39;Cell B content&#39;,
  *             colspan: 2
  *         },{
- *             html: 'Cell C content',
- *             cellCls: 'highlight'
+ *             html: &#39;Cell C content&#39;,
+ *             cellCls: &#39;highlight&#39;
  *         },{
- *             html: 'Cell D content'
+ *             html: &#39;Cell D content&#39;
  *         }],
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.layout.container.Table', {
+Ext.define(&#39;Ext.layout.container.Table&#39;, {
 
     /* Begin Definitions */
 
-    alias: ['layout.table'],
-    extend: 'Ext.layout.container.Container',
-    alternateClassName: 'Ext.layout.TableLayout',
+    alias: [&#39;layout.table&#39;],
+    extend: &#39;Ext.layout.container.Container&#39;,
+    alternateClassName: &#39;Ext.layout.TableLayout&#39;,
 
     /* End Definitions */
 
@@ -84,29 +84,29 @@ Ext.define('Ext.layout.container.Table', {
      * this layout will be rendered into a single row using one column per Component.
      */
 
-    type: 'table',
+    type: &#39;table&#39;,
     
 <span id='Ext-layout-container-Table-property-createsInnerCt'>    createsInnerCt: true,
 </span>
-<span id='Ext-layout-container-Table-property-targetCls'>    targetCls: Ext.baseCSSPrefix + 'table-layout-ct',
-</span><span id='Ext-layout-container-Table-property-tableCls'>    tableCls: Ext.baseCSSPrefix + 'table-layout',
-</span><span id='Ext-layout-container-Table-property-cellCls'>    cellCls: Ext.baseCSSPrefix + 'table-layout-cell',
+<span id='Ext-layout-container-Table-property-targetCls'>    targetCls: Ext.baseCSSPrefix + &#39;table-layout-ct&#39;,
+</span><span id='Ext-layout-container-Table-property-tableCls'>    tableCls: Ext.baseCSSPrefix + &#39;table-layout&#39;,
+</span><span id='Ext-layout-container-Table-property-cellCls'>    cellCls: Ext.baseCSSPrefix + &#39;table-layout-cell&#39;,
 </span>    
-<span id='Ext-layout-container-Table-cfg-childEls'>    childEls: [ 'table', 'tbody' ],
+<span id='Ext-layout-container-Table-cfg-childEls'>    childEls: [ &#39;table&#39;, &#39;tbody&#39; ],
 </span>
 <span id='Ext-layout-container-Table-cfg-tableAttrs'>    /**
 </span>     * @cfg {Object} tableAttrs
      * An object containing properties which are added to the {@link Ext.dom.Helper DomHelper} specification used to
-     * create the layout's `&lt;table&gt;` element. Example:
+     * create the layout&#39;s `&lt;table&gt;` element. Example:
      *
      *     {
-     *         xtype: 'panel',
+     *         xtype: &#39;panel&#39;,
      *         layout: {
-     *             type: 'table',
+     *             type: &#39;table&#39;,
      *             columns: 3,
      *             tableAttrs: {
      *                 style: {
-     *                     width: '100%'
+     *                     width: &#39;100%&#39;
      *                 }
      *             }
      *         }
@@ -117,13 +117,13 @@ Ext.define('Ext.layout.container.Table', {
 <span id='Ext-layout-container-Table-cfg-trAttrs'>    /**
 </span>     * @cfg {Object} trAttrs
      * An object containing properties which are added to the {@link Ext.dom.Helper DomHelper} specification used to
-     * create the layout's `&lt;tr&gt;` elements.
+     * create the layout&#39;s `&lt;tr&gt;` elements.
      */
 
 <span id='Ext-layout-container-Table-cfg-tdAttrs'>    /**
 </span>     * @cfg {Object} tdAttrs
      * An object containing properties which are added to the {@link Ext.dom.Helper DomHelper} specification used to
-     * create the layout's `&lt;td&gt;` elements.
+     * create the layout&#39;s `&lt;td&gt;` elements.
      */
 
     getItemSizePolicy: function (item) {
@@ -220,7 +220,7 @@ Ext.define('Ext.layout.container.Table', {
             tdEl.set({
                 colSpan: item.colspan || 1,
                 rowSpan: item.rowspan || 1,
-                cls: me.cellCls + ' ' + (item.cellCls || '')
+                cls: me.cellCls + &#39; &#39; + (item.cellCls || &#39;&#39;)
             });
 
             // If at the end of a row, remove any extra cells
@@ -238,8 +238,8 @@ Ext.define('Ext.layout.container.Table', {
             tbody.deleteRow(rowIdx);
         }
         
-        // Check if we've removed any cells that contain a component, we need to move
-        // them so they don't get cleaned up by the gc
+        // Check if we&#39;ve removed any cells that contain a component, we need to move
+        // them so they don&#39;t get cleaned up by the gc
         for (i = 0, len = hiddenItems.length; i &lt; len; ++i) {
             me.ensureInDocument(hiddenItems[i].getEl());
         }
@@ -248,7 +248,7 @@ Ext.define('Ext.layout.container.Table', {
 <span id='Ext-layout-container-Table-method-ensureInDocument'>    ensureInDocument: function(el){
 </span>        var dom = el.dom.parentNode;
         while (dom) {
-            if (dom.tagName.toUpperCase() === 'BODY') {
+            if (dom.tagName.toUpperCase() === &#39;BODY&#39;) {
                 return;
             }
             dom = dom.parentNode;
@@ -258,7 +258,7 @@ Ext.define('Ext.layout.container.Table', {
     },
 
 <span id='Ext-layout-container-Table-method-calculate'>    calculate: function (ownerContext) {
-</span>        if (!ownerContext.hasDomProp('containerChildrenSizeDone')) {
+</span>        if (!ownerContext.hasDomProp(&#39;containerChildrenSizeDone&#39;)) {
             this.done = false;
         } else {
             var targetContext = ownerContext.targetContext,
@@ -281,7 +281,7 @@ Ext.define('Ext.layout.container.Table', {
 <span id='Ext-layout-container-Table-method-calculateCells'>    /**
 </span>     * @private
      * Determine the row and cell indexes for each component, taking into consideration
-     * the number of columns and each item's configured colspan/rowspan values.
+     * the number of columns and each item&#39;s configured colspan/rowspan values.
      * @param {Array} items The layout components
      * @return {Object[]} List of row and cell indexes for each of the components
      */
@@ -339,18 +339,18 @@ Ext.define('Ext.layout.container.Table', {
             items = me.getLayoutItems(),
             rows = [],
             result = Ext.apply({
-                tag: 'table',
-                id: me.owner.id + '-table',
-                &quot;data-ref&quot;: 'table',
-                role: 'presentation',
+                tag: &#39;table&#39;,
+                id: me.owner.id + &#39;-table&#39;,
+                &quot;data-ref&quot;: &#39;table&#39;,
+                role: &#39;presentation&#39;,
                 cls: me.tableCls,
                 cellspacing: 0,
                 cellpadding: 0,
                 cn: {
-                    tag: 'tbody',
-                    id: me.owner.id + '-tbody',
-                    &quot;data-ref&quot;: 'tbody',
-                    role: 'presentation',
+                    tag: &#39;tbody&#39;,
+                    id: me.owner.id + &#39;-tbody&#39;,
+                    &quot;data-ref&quot;: &#39;tbody&#39;,
+                    role: &#39;presentation&#39;,
                     cn: rows
                 }
             }, me.tableAttrs),
@@ -371,8 +371,8 @@ Ext.define('Ext.layout.container.Table', {
             tr = rows[rowIdx];
             if (!tr) {
                 tr = rows[rowIdx] = {
-                    tag: 'tr',
-                    role: 'presentation',
+                    tag: &#39;tr&#39;,
+                    role: &#39;presentation&#39;,
                     cn: []
                 };
                 if (me.trAttrs) {
@@ -382,8 +382,8 @@ Ext.define('Ext.layout.container.Table', {
 
             // If no cell present, create and insert one
             cell = tr.cn[cellIdx] = {
-                tag: 'td',
-                role: 'presentation'
+                tag: &#39;td&#39;,
+                role: &#39;presentation&#39;
             };
             if (tdAttrs) {
                 Ext.apply(cell, tdAttrs);
@@ -391,11 +391,11 @@ Ext.define('Ext.layout.container.Table', {
             Ext.apply(cell, {
                 colSpan: item.colspan || 1,
                 rowSpan: item.rowspan || 1,
-                cls: me.cellCls + ' ' + (item.cellCls || '')
+                cls: me.cellCls + &#39; &#39; + (item.cellCls || &#39;&#39;)
             });
 
             me.configureItem(item);
-            // The DomHelper config of the item is the cell's sole child
+            // The DomHelper config of the item is the cell&#39;s sole child
             cell.cn = item.getRenderTree();
         }
         return result;

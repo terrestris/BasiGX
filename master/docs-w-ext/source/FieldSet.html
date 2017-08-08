@@ -17,11 +17,11 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-form-FieldSet'>/**
 </span> * A container for grouping sets of fields, rendered as a HTML `fieldset` element. The {@link #title}
- * config will be rendered as the fieldset's `legend`.
+ * config will be rendered as the fieldset&#39;s `legend`.
  *
  * While FieldSets commonly contain simple groups of fields, they are general {@link Ext.container.Container Containers}
  * and may therefore contain any type of components in their {@link #cfg-items}, including other nested containers.
- * The default {@link #layout} for the FieldSet's items is `'anchor'`, but it can be configured to use any other
+ * The default {@link #layout} for the FieldSet&#39;s items is `&#39;anchor&#39;`, but it can be configured to use any other
  * layout type.
  *
  * FieldSets may also be collapsed if configured to do so; this can be done in two ways:
@@ -36,61 +36,61 @@
  * # Example usage
  *
  *     @example
- *     Ext.create('Ext.form.Panel', {
- *         title: 'Simple Form with FieldSets',
+ *     Ext.create(&#39;Ext.form.Panel&#39;, {
+ *         title: &#39;Simple Form with FieldSets&#39;,
  *         labelWidth: 75, // label settings here cascade unless overridden
- *         url: 'save-form.php',
+ *         url: &#39;save-form.php&#39;,
  *         frame: true,
- *         bodyStyle: 'padding:5px 5px 0',
+ *         bodyStyle: &#39;padding:5px 5px 0&#39;,
  *         width: 550,
  *         renderTo: Ext.getBody(),
- *         layout: 'column', // arrange fieldsets side by side
+ *         layout: &#39;column&#39;, // arrange fieldsets side by side
  *         items: [{
  *             // Fieldset in Column 1 - collapsible via toggle button
- *             xtype:'fieldset',
+ *             xtype:&#39;fieldset&#39;,
  *             columnWidth: 0.5,
- *             title: 'Fieldset 1',
+ *             title: &#39;Fieldset 1&#39;,
  *             collapsible: true,
- *             defaultType: 'textfield',
- *             defaults: {anchor: '100%'},
- *             layout: 'anchor',
+ *             defaultType: &#39;textfield&#39;,
+ *             defaults: {anchor: &#39;100%&#39;},
+ *             layout: &#39;anchor&#39;,
  *             items :[{
- *                 fieldLabel: 'Field 1',
- *                 name: 'field1'
+ *                 fieldLabel: &#39;Field 1&#39;,
+ *                 name: &#39;field1&#39;
  *             }, {
- *                 fieldLabel: 'Field 2',
- *                 name: 'field2'
+ *                 fieldLabel: &#39;Field 2&#39;,
+ *                 name: &#39;field2&#39;
  *             }]
  *         }, {
  *             // Fieldset in Column 2 - collapsible via checkbox, collapsed by default, contains a panel
- *             xtype:'fieldset',
- *             title: 'Show Panel', // title or checkboxToggle creates fieldset header
+ *             xtype:&#39;fieldset&#39;,
+ *             title: &#39;Show Panel&#39;, // title or checkboxToggle creates fieldset header
  *             columnWidth: 0.5,
  *             checkboxToggle: true,
  *             collapsed: true, // fieldset initially collapsed
- *             layout:'anchor',
+ *             layout:&#39;anchor&#39;,
  *             items :[{
- *                 xtype: 'panel',
- *                 anchor: '100%',
- *                 title: 'Panel inside a fieldset',
+ *                 xtype: &#39;panel&#39;,
+ *                 anchor: &#39;100%&#39;,
+ *                 title: &#39;Panel inside a fieldset&#39;,
  *                 frame: true,
  *                 height: 52
  *             }]
  *         }]
  *     });
  */
-Ext.define('Ext.form.FieldSet', {
-    extend: 'Ext.container.Container',
+Ext.define(&#39;Ext.form.FieldSet&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
     mixins: {
-        fieldAncestor: 'Ext.form.FieldAncestor'
+        fieldAncestor: &#39;Ext.form.FieldAncestor&#39;
     },
-    alias: 'widget.fieldset',
+    alias: &#39;widget.fieldset&#39;,
 
-    uses: ['Ext.form.field.Checkbox', 'Ext.panel.Tool', 'Ext.layout.container.Anchor', 'Ext.layout.component.FieldSet'],
+    uses: [&#39;Ext.form.field.Checkbox&#39;, &#39;Ext.panel.Tool&#39;, &#39;Ext.layout.container.Anchor&#39;, &#39;Ext.layout.component.FieldSet&#39;],
     
 <span id='Ext-form-FieldSet-cfg-title'>    /**
 </span>     * @cfg {String} title
-     * A title to be displayed in the fieldset's legend. May contain HTML markup.
+     * A title to be displayed in the fieldset&#39;s legend. May contain HTML markup.
      */
 
 <span id='Ext-form-FieldSet-cfg-checkboxToggle'>    /**
@@ -103,15 +103,15 @@ Ext.define('Ext.form.FieldSet', {
 <span id='Ext-form-FieldSet-cfg-checkboxName'>    /**
 </span>     * @cfg {String} checkboxName
      * @deprecated 6.2.0 Use the name property in {@link #checkbox} instead.
-     * The name to assign to the fieldset's checkbox if {@link #checkboxToggle} = true
-     * (defaults to '[fieldset id]-checkbox').
+     * The name to assign to the fieldset&#39;s checkbox if {@link #checkboxToggle} = true
+     * (defaults to &#39;[fieldset id]-checkbox&#39;).
      */
 
 <span id='Ext-form-FieldSet-cfg-checkboxUI'>    /**
 </span>     * @cfg {String} checkboxUI
-     * The ui to use for the fieldset's checkbox.
+     * The ui to use for the fieldset&#39;s checkbox.
      */
-    checkboxUI: 'default',
+    checkboxUI: &#39;default&#39;,
 
 <span id='Ext-form-FieldSet-cfg-collapsible'>    /**
 </span>     * @cfg {Boolean} [collapsible=false]
@@ -137,42 +137,42 @@ Ext.define('Ext.form.FieldSet', {
 
 <span id='Ext-form-FieldSet-property-legend'>    /**
 </span>     * @property {Ext.Component} legend
-     * The component for the fieldset's legend. Will only be defined if the configuration requires a legend to be
+     * The component for the fieldset&#39;s legend. Will only be defined if the configuration requires a legend to be
      * created, by setting the {@link #title} or {@link #checkboxToggle} options.
      */
 
 <span id='Ext-form-FieldSet-cfg-baseCls'>    /**
-</span>     * @cfg {String} [baseCls='x-fieldset']
+</span>     * @cfg {String} [baseCls=&#39;x-fieldset&#39;]
      * The base CSS class applied to the fieldset.
      */
-    baseCls: Ext.baseCSSPrefix + 'fieldset',
+    baseCls: Ext.baseCSSPrefix + &#39;fieldset&#39;,
 
 <span id='Ext-form-FieldSet-cfg-layout'>    /**
 </span>     * @cfg {Ext.enums.Layout/Object} layout
-     * The {@link Ext.container.Container#layout} for the fieldset's immediate child items.
+     * The {@link Ext.container.Container#layout} for the fieldset&#39;s immediate child items.
      */
-    layout: 'anchor',
+    layout: &#39;anchor&#39;,
     
     //&lt;locale&gt;
 <span id='Ext-form-FieldSet-cfg-descriptionText'>    /**
 </span>     * @cfg {String} descriptionText Fieldset description to be announced by screen readers.
      */
-    descriptionText: '{0} field set',
+    descriptionText: &#39;{0} field set&#39;,
     
 <span id='Ext-form-FieldSet-cfg-expandText'>    /**
 </span>     * @cfg {String} expandText Text to be announced by screen readers when toggle tool
      * or checkbox is focused.
      */
-    expandText: 'Expand field set',
+    expandText: &#39;Expand field set&#39;,
 <span id='Ext-form-FieldSet-cfg-componentLayout'>    //&lt;/locale&gt;
 </span>
-    componentLayout: 'fieldset',
+    componentLayout: &#39;fieldset&#39;,
     
-<span id='Ext-form-FieldSet-property-ariaRole'>    ariaRole: 'group',
+<span id='Ext-form-FieldSet-property-ariaRole'>    ariaRole: &#39;group&#39;,
 </span>
 <span id='Ext-form-FieldSet-property-focusable'>    focusable: false,
 </span>
-<span id='Ext-form-FieldSet-cfg-autoEl'>    autoEl: 'fieldset',
+<span id='Ext-form-FieldSet-cfg-autoEl'>    autoEl: &#39;fieldset&#39;,
 </span>
 <span id='Ext-form-FieldSet-cfg-checkbox'>    /**
 </span>     * @cfg {Object} checkbox
@@ -184,15 +184,15 @@ Ext.define('Ext.form.FieldSet', {
     checkbox: null,
 
 <span id='Ext-form-FieldSet-cfg-childEls'>    childEls: [
-</span>        'body'
+</span>        &#39;body&#39;
     ],
 
 <span id='Ext-form-FieldSet-cfg-renderTpl'>    renderTpl: [
-</span>        '{%this.renderLegend(out,values);%}',
-        '&lt;div id=&quot;{id}-body&quot; data-ref=&quot;body&quot; class=&quot;{baseCls}-body {baseCls}-body-{ui} {bodyTargetCls}&quot; ',
-                'role=&quot;presentation&quot;&lt;tpl if=&quot;bodyStyle&quot;&gt; style=&quot;{bodyStyle}&quot;&lt;/tpl&gt;&gt;',
-            '{%this.renderContainer(out,values);%}',
-        '&lt;/div&gt;'
+</span>        &#39;{%this.renderLegend(out,values);%}&#39;,
+        &#39;&lt;div id=&quot;{id}-body&quot; data-ref=&quot;body&quot; class=&quot;{baseCls}-body {baseCls}-body-{ui} {bodyTargetCls}&quot; &#39;,
+                &#39;role=&quot;presentation&quot;&lt;tpl if=&quot;bodyStyle&quot;&gt; style=&quot;{bodyStyle}&quot;&lt;/tpl&gt;&gt;&#39;,
+            &#39;{%this.renderContainer(out,values);%}&#39;,
+        &#39;&lt;/div&gt;&#39;
     ],
 
 <span id='Ext-form-FieldSet-cfg-stateEvents'>    /**
@@ -204,7 +204,7 @@ Ext.define('Ext.form.FieldSet', {
      *  - {@link #event-collapse}
      *  - {@link #event-expand}
      */
-    stateEvents : [ 'collapse', 'expand' ],
+    stateEvents : [ &#39;collapse&#39;, &#39;expand&#39; ],
 
 <span id='Ext-form-FieldSet-property-maskOnDisable'>    maskOnDisable: false,
 </span>
@@ -239,11 +239,11 @@ Ext.define('Ext.form.FieldSet', {
         // We need to render the aria-label attribute instead of relying on
         // aria-labelledby because the contents of these differ.
         if (me.ariaRole &amp;&amp; !me.ariaLabel) {
-            me.ariaLabel = Ext.String.formatEncode(me.descriptionText, me.title || '');
+            me.ariaLabel = Ext.String.formatEncode(me.descriptionText, me.title || &#39;&#39;);
         }
         
         me.ariaRenderAttributes = me.ariaRenderAttributes || {};
-        me.ariaRenderAttributes['aria-expanded'] = !me.collapsed;
+        me.ariaRenderAttributes[&#39;aria-expanded&#39;] = !me.collapsed;
         
         me.initFieldAncestor();
 
@@ -252,7 +252,7 @@ Ext.define('Ext.form.FieldSet', {
         // Fieldsets cannot support managePadding because the managePadding config causes
         // the paddding to be added to the innerCt instead of the fieldset element.  The
         // padding must be on the fieldset element because the horizontal position of the
-        // legend is determined by the fieldset element's padding
+        // legend is determined by the fieldset element&#39;s padding
         // 
         // As a consequence of the inability to support managePadding, manageOverflow
         // cannot be supported either because the correct overflow cannot be calculated
@@ -262,7 +262,7 @@ Ext.define('Ext.form.FieldSet', {
         me.layout.managePadding = me.layout.manageOverflow = false;
 
         if (me.collapsed) {
-            me.addCls(baseCls + '-collapsed');
+            me.addCls(baseCls + &#39;-collapsed&#39;);
             me.collapse();
         }
         if (me.title || me.checkboxToggle || me.collapsible) {
@@ -293,7 +293,7 @@ Ext.define('Ext.form.FieldSet', {
             legend = me.legend;
 
         if (legend) {
-            // get rid of the ownerCt since it's not a proper item
+            // get rid of the ownerCt since it&#39;s not a proper item
             delete legend.ownerCt;
             legend.destroy();
             me.legend = null;
@@ -305,7 +305,7 @@ Ext.define('Ext.form.FieldSet', {
 <span id='Ext-form-FieldSet-method-getState'>    getState: function () {
 </span>        var state = this.callParent();
 
-        state = this.addPropertyToState(state, 'collapsed');
+        state = this.addPropertyToState(state, &#39;collapsed&#39;);
 
         return state;
     },
@@ -325,12 +325,12 @@ Ext.define('Ext.form.FieldSet', {
 </span>        var me = this,
             items = [],
             legendCfg = {
-                baseCls: me.baseCls + '-header',
-                // use container layout so we don't get the auto layout innerCt/outerCt
-                layout: 'container',
+                baseCls: me.baseCls + &#39;-header&#39;,
+                // use container layout so we don&#39;t get the auto layout innerCt/outerCt
+                layout: &#39;container&#39;,
                 ui: me.ui,
-                id: me.id + '-legend',
-                autoEl: 'legend',
+                id: me.id + &#39;-legend&#39;,
+                autoEl: &#39;legend&#39;,
                 ariaRole: null,
                 items: items,
                 ownerCt: me,
@@ -367,20 +367,20 @@ Ext.define('Ext.form.FieldSet', {
             cfg = {
                 html: me.title,
                 ui: me.ui,
-                cls: me.baseCls + '-header-text',
-                id: me.id + '-legendTitle',
-                ariaRole: 'presentation'
+                cls: me.baseCls + &#39;-header-text&#39;,
+                id: me.id + &#39;-legendTitle&#39;,
+                ariaRole: &#39;presentation&#39;
             };
 
         if (me.collapsible &amp;&amp; me.toggleOnTitleClick) {
             cfg.listeners = {
                 click : {
-                    element: 'el',
+                    element: &#39;el&#39;,
                     scope : me,
                     fn : me.toggle
                 }
             };
-            cfg.cls += ' ' + me.baseCls + '-header-text-collapsible';
+            cfg.cls += &#39; &#39; + me.baseCls + &#39;-header-text-collapsible&#39;;
         }
         
         me.titleCmp = new Ext.Component(cfg);
@@ -396,26 +396,26 @@ Ext.define('Ext.form.FieldSet', {
 
 <span id='Ext-form-FieldSet-method-createCheckboxCmp'>    /**
 </span>     * Creates the checkbox component. This is only called internally, but could be overridden in subclasses to
-     * customize the checkbox's configuration or even return an entirely different component type.
+     * customize the checkbox&#39;s configuration or even return an entirely different component type.
      * @return {Ext.Component}
      * @protected
      */
     createCheckboxCmp: function() {
         var me = this,
-            suffix = '-checkbox',
-            cls = me.baseCls + '-header' + suffix,
+            suffix = &#39;-checkbox&#39;,
+            cls = me.baseCls + &#39;-header&#39; + suffix,
             checkboxCmp;
 
-        cls += ' ' + cls + '-' + me.ui;
+        cls += &#39; &#39; + cls + &#39;-&#39; + me.ui;
 
         me.checkboxCmp = checkboxCmp = new Ext.form.field.Checkbox(Ext.apply({
             hideEmptyLabel: true,
             name: me.checkboxName || me.id + suffix,
             cls: cls,
-            id: me.id + '-legendChk',
+            id: me.id + &#39;-legendChk&#39;,
             ui: me.checkboxUI,
             checked: !me.collapsed,
-            msgTarget: 'none',
+            msgTarget: &#39;none&#39;,
             listeners: {
                 change: me.onCheckChange,
                 scope: me
@@ -447,18 +447,18 @@ Ext.define('Ext.form.FieldSet', {
             // to tell the layout system not to cache the height if this tool happens
             // to be the first one through the layout system
             cacheHeight: false,
-            cls: me.baseCls + '-header-tool-' + me.ui,
-            type: 'toggle',
+            cls: me.baseCls + &#39;-header-tool-&#39; + me.ui,
+            type: &#39;toggle&#39;,
             handler: me.toggle,
-            id: me.id + '-legendToggle',
+            id: me.id + &#39;-legendToggle&#39;,
             scope: me,
             
             // This tool is akin to a checkbox; its is considered &quot;checked&quot;
             // when fieldset is expanded, and vice versa.
-            ariaRole: 'checkbox',
+            ariaRole: &#39;checkbox&#39;,
             ariaLabel: me.expandText,
             ariaRenderAttributes: {
-                'aria-checked': !me.collapsed
+                &#39;aria-checked&#39;: !me.collapsed
             }
         });
         
@@ -483,7 +483,7 @@ Ext.define('Ext.form.FieldSet', {
     },
 
 <span id='Ext-form-FieldSet-method-getCollapsed'>    getCollapsed: function () {
-</span>        return this.collapsed ? 'top' : false;
+</span>        return this.collapsed ? &#39;top&#39; : false;
     },
 
 <span id='Ext-form-FieldSet-method-getCollapsedDockedItems'>    getCollapsedDockedItems: function () {
@@ -502,7 +502,7 @@ Ext.define('Ext.form.FieldSet', {
             legend = me.legend;
             
         me.title = title;
-        me.ariaLabel = Ext.String.formatEncode(me.descriptionText, title || '');
+        me.ariaLabel = Ext.String.formatEncode(me.descriptionText, title || &#39;&#39;);
         
         if (me.rendered) {
             if (!legend) {
@@ -515,7 +515,7 @@ Ext.define('Ext.form.FieldSet', {
             me.titleCmp.update(title);
             
             // ariaLabel property was htmlEncoded in initComponent
-            me.ariaEl.dom.setAttribute('aria-label', me.ariaLabel);
+            me.ariaEl.dom.setAttribute(&#39;aria-label&#39;, me.ariaLabel);
         } else if (legend) {
             me.titleCmp.update(title);
         } else {
@@ -531,11 +531,11 @@ Ext.define('Ext.form.FieldSet', {
             baseCls = me.baseCls;
             
         if (title) {
-            me.addCls(baseCls + '-with-title');
+            me.addCls(baseCls + &#39;-with-title&#39;);
         }
         
         if (title || me.checkboxToggle || me.collapsible) {
-            me.addCls(baseCls + '-with-legend');
+            me.addCls(baseCls + &#39;-with-legend&#39;);
         }
     },
 
@@ -573,26 +573,26 @@ Ext.define('Ext.form.FieldSet', {
         var me = this,
             checkboxCmp = me.checkboxCmp,
             toggleCmp = me.toggleCmp,
-            operation = expanded ? 'expand' : 'collapse';
+            operation = expanded ? &#39;expand&#39; : &#39;collapse&#39;;
 
-        if (!me.rendered || me.fireEvent('before' + operation, me) !== false) {
+        if (!me.rendered || me.fireEvent(&#39;before&#39; + operation, me) !== false) {
             expanded = !!expanded;
 
             if (checkboxCmp) {
                 checkboxCmp.setValue(expanded);
             }
             else if (toggleCmp &amp;&amp; toggleCmp.ariaEl.dom) {
-                toggleCmp.ariaEl.dom.setAttribute('aria-checked', expanded);
+                toggleCmp.ariaEl.dom.setAttribute(&#39;aria-checked&#39;, expanded);
             }
 
             if (expanded) {
-                me.removeCls(me.baseCls + '-collapsed');
+                me.removeCls(me.baseCls + &#39;-collapsed&#39;);
             } else {
-                me.addCls(me.baseCls + '-collapsed');
+                me.addCls(me.baseCls + &#39;-collapsed&#39;);
             }
             
             if (me.ariaEl.dom) {
-                me.ariaEl.dom.setAttribute('aria-expanded', !!expanded);
+                me.ariaEl.dom.setAttribute(&#39;aria-expanded&#39;, !!expanded);
             }
             
             me.collapsed = !expanded;
@@ -603,8 +603,8 @@ Ext.define('Ext.form.FieldSet', {
             }
             if (me.rendered) {
                 // say explicitly we are not root because when we have a fixed/configured height
-                // our ownerLayout would say we are root and so would not have it's height
-                // updated since it's not included in the layout cycle
+                // our ownerLayout would say we are root and so would not have it&#39;s height
+                // updated since it&#39;s not included in the layout cycle
                 me.updateLayout({ isRoot: false });
                 me.fireEvent(operation, me);
             }
@@ -627,7 +627,7 @@ Ext.define('Ext.form.FieldSet', {
     },
 
 <span id='Ext-form-FieldSet-method-toggle'>    /**
-</span>     * Toggle the fieldset's collapsed state to the opposite of what it is currently.
+</span>     * Toggle the fieldset&#39;s collapsed state to the opposite of what it is currently.
      */
     toggle: function() {
         this.setExpanded(!!this.collapsed);
@@ -654,7 +654,7 @@ Ext.define('Ext.form.FieldSet', {
 
             if (!body) {
                 me.protoBody = body = new Ext.util.ProtoElement({
-                    styleProp: 'bodyStyle',
+                    styleProp: &#39;bodyStyle&#39;,
                     styleIsText: true
                 });
             }
@@ -684,10 +684,10 @@ Ext.define('Ext.form.FieldSet', {
                     bodyPadding = Ext.Element.parseBox(0);
                     bodyPadding.top = padding.top;
                     padding.top = 0;
-                    body.setStyle('padding', me.unitizeBox(bodyPadding));
+                    body.setStyle(&#39;padding&#39;, me.unitizeBox(bodyPadding));
                 }
 
-                targetEl.setStyle('padding', me.unitizeBox(padding));
+                targetEl.setStyle(&#39;padding&#39;, me.unitizeBox(padding));
             }
         },
 

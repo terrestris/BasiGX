@@ -16,35 +16,35 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-event-Event'>/**
-</span> * Just as {@link Ext.dom.Element} wraps around a native DOM node, {@link Ext.event.Event} wraps the browser's native
+</span> * Just as {@link Ext.dom.Element} wraps around a native DOM node, {@link Ext.event.Event} wraps the browser&#39;s native
  * event-object normalizing cross-browser differences such as mechanisms to stop event-propagation along with a method
  * to prevent default actions from taking place.
  *
  * Here is a simple example of how you use it:
  *
  *     @example preview
- *     var container = Ext.create('Ext.Container', {
- *         layout: 'fit',
+ *     var container = Ext.create(&#39;Ext.Container&#39;, {
+ *         layout: &#39;fit&#39;,
  *         renderTo: Ext.getBody(),
  *         items: [{
- *             id: 'logger',
+ *             id: &#39;logger&#39;,
  *             styleHtmlContent: true,
- *             html: 'Click somewhere!',
+ *             html: &#39;Click somewhere!&#39;,
  *             padding: 5
  *         }]
  *     });
  *
  *     container.getEl().on({
  *         click: function(e, node) {
- *             var string = '';
+ *             var string = &#39;&#39;;
  *
- *             string += 'You clicked at: &lt;strong&gt;{ x: ' + e.pageX + ', y: ' + e.pageY + ' }&lt;/strong&gt; &lt;i&gt;(e.pageX &amp; e.pageY)&lt;/i&gt;';
- *             string += '&lt;hr /&gt;';
- *             string += 'The HTMLElement you clicked has the className of: &lt;strong&gt;' + e.target.className + '&lt;/strong&gt; &lt;i&gt;(e.target)&lt;/i&gt;';
- *             string += '&lt;hr /&gt;';
- *             string += 'The HTMLElement which has the listener has a className of: &lt;strong&gt;' + e.currentTarget.className + '&lt;/strong&gt; &lt;i&gt;(e.currentTarget)&lt;/i&gt;';
+ *             string += &#39;You clicked at: &lt;strong&gt;{ x: &#39; + e.pageX + &#39;, y: &#39; + e.pageY + &#39; }&lt;/strong&gt; &lt;i&gt;(e.pageX &amp; e.pageY)&lt;/i&gt;&#39;;
+ *             string += &#39;&lt;hr /&gt;&#39;;
+ *             string += &#39;The HTMLElement you clicked has the className of: &lt;strong&gt;&#39; + e.target.className + &#39;&lt;/strong&gt; &lt;i&gt;(e.target)&lt;/i&gt;&#39;;
+ *             string += &#39;&lt;hr /&gt;&#39;;
+ *             string += &#39;The HTMLElement which has the listener has a className of: &lt;strong&gt;&#39; + e.currentTarget.className + &#39;&lt;/strong&gt; &lt;i&gt;(e.currentTarget)&lt;/i&gt;&#39;;
  *
- *             Ext.getCmp('logger').setHtml(string);
+ *             Ext.getCmp(&#39;logger&#39;).setHtml(string);
  *         }
  *     });
  *
@@ -66,11 +66,11 @@
  *         // tab key was pressed
  *     }
  */
-Ext.define('Ext.event.Event', {
-    alternateClassName: 'Ext.EventObjectImpl',
+Ext.define(&#39;Ext.event.Event&#39;, {
+    alternateClassName: &#39;Ext.EventObjectImpl&#39;,
 
     requires: [
-        'Ext.util.Point'
+        &#39;Ext.util.Point&#39;
     ],
 
 <span id='Ext-event-Event-property-distance'>    /**
@@ -256,51 +256,51 @@ Ext.define('Ext.event.Event', {
         // http://www.w3.org/TR/pointerevents/#widl-PointerEvent-pointerType
         // http://msdn.microsoft.com/en-us/library/ie/hh772359(v=vs.85).aspx
         pointerTypeMap: {
-            2: 'touch',
-            3: 'pen',
-            4: 'mouse',
-            touch: 'touch',
-            pen: 'pen',
-            mouse: 'mouse'
+            2: &#39;touch&#39;,
+            3: &#39;pen&#39;,
+            4: &#39;mouse&#39;,
+            touch: &#39;touch&#39;,
+            pen: &#39;pen&#39;,
+            mouse: &#39;mouse&#39;
         },
 
 <span id='Ext-event-Event-static-property-keyFlags'>        keyFlags: {
-</span>            CTRL: 'ctrlKey',
-            CONTROL: 'ctrlKey',
-            ALT: 'altKey',
-            SHIFT: 'shiftKey',
-            CMD: 'metaKey',
-            COMMAND: 'metaKey',
-            CMDORCTRL: Ext.isMac ? 'metaKey' : 'ctrlKey',
-            COMMANDORCONTROL: Ext.isMac ? 'metaKey' : 'ctrlKey',
-            META: 'metaKey'
+</span>            CTRL: &#39;ctrlKey&#39;,
+            CONTROL: &#39;ctrlKey&#39;,
+            ALT: &#39;altKey&#39;,
+            SHIFT: &#39;shiftKey&#39;,
+            CMD: &#39;metaKey&#39;,
+            COMMAND: &#39;metaKey&#39;,
+            CMDORCTRL: Ext.isMac ? &#39;metaKey&#39; : &#39;ctrlKey&#39;,
+            COMMANDORCONTROL: Ext.isMac ? &#39;metaKey&#39; : &#39;ctrlKey&#39;,
+            META: &#39;metaKey&#39;
         },
 
 <span id='Ext-event-Event-static-property-modifierGlyphs'>        modifierGlyphs: {
-</span>            ctrlKey: '\u2303',
-            altKey: '\u2325',
-            metaKey: Ext.isMac ? '\u2318' : '\u229e',
-            shiftKey: '\u21E7'
+</span>            ctrlKey: &#39;\u2303&#39;,
+            altKey: &#39;\u2325&#39;,
+            metaKey: Ext.isMac ? &#39;\u2318&#39; : &#39;\u229e&#39;,
+            shiftKey: &#39;\u21E7&#39;
         },
 
 <span id='Ext-event-Event-static-property-specialKeyGlyphs'>        specialKeyGlyphs: {
-</span>            BACKSPACE: '\u232B',
-            TAB: '\u21E5',
-            ENTER: '\u23CE',
-            RETURN: '\u23CE',
-            SPACE: '\u2423',
-            PAGE_UP: '\u21DE',
-            PAGE_DOWN: '\u21DF',
-            END: '\u21F2',
-            HOME: '\u2302',
-            LEFT: '\u2190',
-            UP: '\u2191',
-            RIGHT: '\u2192',
-            DOWN: '\u2193',
-            PRINT_SCREEN: '\u2399',
-            INSERT: '\u2380',
-            DELETE: '\u2326',
-            CONTEXT_MENU: '\u2630'
+</span>            BACKSPACE: &#39;\u232B&#39;,
+            TAB: &#39;\u21E5&#39;,
+            ENTER: &#39;\u23CE&#39;,
+            RETURN: &#39;\u23CE&#39;,
+            SPACE: &#39;\u2423&#39;,
+            PAGE_UP: &#39;\u21DE&#39;,
+            PAGE_DOWN: &#39;\u21DF&#39;,
+            END: &#39;\u21F2&#39;,
+            HOME: &#39;\u2302&#39;,
+            LEFT: &#39;\u2190&#39;,
+            UP: &#39;\u2191&#39;,
+            RIGHT: &#39;\u2192&#39;,
+            DOWN: &#39;\u2193&#39;,
+            PRINT_SCREEN: &#39;\u2399&#39;,
+            INSERT: &#39;\u2380&#39;,
+            DELETE: &#39;\u2326&#39;,
+            CONTEXT_MENU: &#39;\u2630&#39;
         },
 
 <span id='Ext-event-Event-static-method-getKeyId'>        /**
@@ -312,7 +312,7 @@ Ext.define('Ext.event.Event', {
             keyName = keyName.toUpperCase();
 
             var me = this,
-                parts = keyName.split('+'),
+                parts = keyName.split(&#39;+&#39;),
                 numModifiers = parts.length - 1,
                 rawKey = parts[numModifiers],
                 result = [],
@@ -320,7 +320,7 @@ Ext.define('Ext.event.Event', {
 
             //&lt;debug&gt;
             if (!Ext.event.Event[rawKey]) {
-                Ext.raise('Invalid key name: &quot;' + rawKey + '&quot;');
+                Ext.raise(&#39;Invalid key name: &quot;&#39; + rawKey + &#39;&quot;&#39;);
             }
             //&lt;/debug&gt;
 
@@ -328,7 +328,7 @@ Ext.define('Ext.event.Event', {
                 eventFlag = me.keyFlags[parts[i]];
                 //&lt;debug&gt;
                 if (!eventFlag) {
-                    Ext.raise('Invalid key modifier: &quot;' + parts[i] + '&quot;');
+                    Ext.raise(&#39;Invalid key modifier: &quot;&#39; + parts[i] + &#39;&quot;&#39;);
                 }
                 //&lt;/debug&gt;
                 result[eventFlag] = true;
@@ -346,7 +346,7 @@ Ext.define('Ext.event.Event', {
                 result.push(me.modifierGlyphs.metaKey)
             }
             result.push(this.specialKeyGlyphs[rawKey] || rawKey);
-            return result.join('');
+            return result.join(&#39;&#39;);
         }
     },
 
@@ -375,7 +375,7 @@ Ext.define('Ext.event.Event', {
         relatedTarget = event.relatedTarget;
         if (relatedTarget) {
             // When leaving the document, the relatedTarget can be incorrect in Gecko
-            if (Ext.isGecko &amp;&amp; type === 'dragenter' || type === 'dragleave') {
+            if (Ext.isGecko &amp;&amp; type === &#39;dragenter&#39; || type === &#39;dragleave&#39;) {
                 try {
                     me.relatedTarget = resolveTextNode(relatedTarget);
                 } catch(e) {
@@ -413,21 +413,21 @@ Ext.define('Ext.event.Event', {
                 me.forwardTab = self.forwardTab;
             }
         }
-        else if (type !== 'keydown') {
+        else if (type !== &#39;keydown&#39;) {
             // Normally this property should be cleaned up in keyup handler;
             // however that one might never come if something prevented default
-            // on the keydown. Make sure the property won't get stuck.
+            // on the keydown. Make sure the property won&#39;t get stuck.
             delete self.forwardTab;
         }
 
         if (self.mouseEvents[type]) {
-            pointerType = 'mouse';
+            pointerType = &#39;mouse&#39;;
         } else if (self.clickEvents[type]) {
-            pointerType = self.pointerTypeMap[event.pointerType] || 'mouse';
+            pointerType = self.pointerTypeMap[event.pointerType] || &#39;mouse&#39;;
         } else if (self.pointerEvents[type]) {
             pointerType = self.pointerTypeMap[event.pointerType];
         } else if (self.touchEvents[type]) {
-            pointerType = 'touch';
+            pointerType = &#39;touch&#39;;
         }
 
         if (pointerType) {
@@ -463,7 +463,7 @@ Ext.define('Ext.event.Event', {
             ret = Math.round(delta / scale);
 
         if (!ret &amp;&amp; delta) {
-            ret = (delta &lt; 0) ? -1 : 1; // don't allow non-zero deltas to go to zero!
+            ret = (delta &lt; 0) ? -1 : 1; // don&#39;t allow non-zero deltas to go to zero!
         }
 
         return ret;
@@ -586,7 +586,7 @@ Ext.define('Ext.event.Event', {
             dy = event.wheelDeltaY;
         } else if (event.wheelDelta) { // old WebKit and IE
             dy = event.wheelDelta;
-        } else if ('deltaX' in event) { // IE11
+        } else if (&#39;deltaX&#39; in event) { // IE11
             dx = event.deltaX;
             dy = -event.deltaY; // backwards
         } else if (event.detail) { // Gecko
@@ -696,7 +696,7 @@ Ext.define('Ext.event.Event', {
     isNavKeyPress: function(scrollableOnly) {
         var me = this,
             k = me.keyCode,
-            isKeyPress = me.type === 'keypress';
+            isKeyPress = me.type === &#39;keypress&#39;;
 
         // See specs for description of behaviour
         return ((!isKeyPress || Ext.isGecko) &amp;&amp; k &gt;= 33 &amp;&amp; k &lt;= 40) ||  // Page Up/Down, End, Home, Left, Up, Right, Down
@@ -737,7 +737,7 @@ Ext.define('Ext.event.Event', {
         var me = this,
             k = me.keyCode,
             isGecko = Ext.isGecko,
-            isKeyPress = me.type === 'keypress';
+            isKeyPress = me.type === &#39;keypress&#39;;
         
         // See specs for description of behaviour
         return (isGecko &amp;&amp; isKeyPress &amp;&amp; me.charCode === 0) ||
@@ -801,10 +801,10 @@ Ext.define('Ext.event.Event', {
         // if the event was created by prototype-chaining a new object to an existing event
         // instance, we need to make sure the parent event is stopped.  This feature most
         // likely comes into play when dealing with event translation.  For example on touch
-        // browsers addListener('mousedown') actually attaches a 'touchstart' listener behind
-        // the scenes.  When the 'touchstart' event is dispatched, the event system will
+        // browsers addListener(&#39;mousedown&#39;) actually attaches a &#39;touchstart&#39; listener behind
+        // the scenes.  When the &#39;touchstart&#39; event is dispatched, the event system will
         // create a &quot;chained&quot; copy of the event object before correcting its type back to
-        // 'mousedown' and calling the handler.  When propagating the event we look at the
+        // &#39;mousedown&#39; and calling the handler.  When propagating the event we look at the
         // original event, not the chained one to determine if propagation should continue,
         // so the stopped property must be set on the parentEvent or stopPropagation
         // will not work.
@@ -821,7 +821,7 @@ Ext.define('Ext.event.Event', {
         //&lt;/feature&gt;
 
         // For non-delegated event listeners (those that are directly attached to the
-        // DOM element) we need to call the browserEvent's stopPropagation() method.
+        // DOM element) we need to call the browserEvent&#39;s stopPropagation() method.
         browserEvent.stopPropagation();
 
         return me;
@@ -847,7 +847,7 @@ Ext.define('Ext.event.Event', {
 
         me.claimed = true;
 
-        if (parentEvent &amp;&amp; !me.hasOwnProperty('isGesture')) {
+        if (parentEvent &amp;&amp; !me.hasOwnProperty(&#39;isGesture&#39;)) {
             parentEvent.claimGesture();
         } else {
             // Claiming a gesture should also prevent default browser actions like pan/zoom
@@ -866,16 +866,16 @@ Ext.define('Ext.event.Event', {
      * Example usage:
      * 
      *     // Handle click on any child of an element
-     *     Ext.getBody().on('click', function(e){
-     *         if(e.within('some-el')){
-     *             alert('Clicked on a child of some-el!');
+     *     Ext.getBody().on(&#39;click&#39;, function(e){
+     *         if(e.within(&#39;some-el&#39;)){
+     *             alert(&#39;Clicked on a child of some-el!&#39;);
      *         }
      *     });
      * 
      *     // Handle click directly on an element, ignoring clicks on child nodes
-     *     Ext.getBody().on('click', function(e,t){
-     *         if((t.id == 'some-el') &amp;&amp; !e.within(t, true)){
-     *             alert('Clicked directly on some-el!');
+     *     Ext.getBody().on(&#39;click&#39;, function(e,t){
+     *         if((t.id == &#39;some-el&#39;) &amp;&amp; !e.within(t, true)){
+     *             alert(&#39;Clicked directly on some-el!&#39;);
      *         }
      *     });
      * 
@@ -896,7 +896,7 @@ Ext.define('Ext.event.Event', {
     },
 
 <span id='Ext-event-Event-property-deprecated'>    deprecated: {
-</span>        '4.0': {
+</span>        &#39;4.0&#39;: {
             methods: {
 
 <span id='Ext-event-Event-method-getPageX'>                /**
@@ -904,14 +904,14 @@ Ext.define('Ext.event.Event', {
                  * @return {Number}
                  * @deprecated 4.0 use {@link #getX} instead
                  */
-                getPageX: 'getX',
+                getPageX: &#39;getX&#39;,
                 
 <span id='Ext-event-Event-method-getPageY'>                /**
 </span>                 * Gets the y coordinate of the event.
                  * @return {Number}
                  * @deprecated 4.0 use {@link #getY} instead
                  */
-                getPageY: 'getY'
+                getPageY: &#39;getY&#39;
             }
         }
     }
@@ -1148,7 +1148,7 @@ Ext.define('Ext.event.Event', {
     Ext.apply(Event, constants);
     Ext.apply(prototype, constants);
     
-    // Don't need that
+    // Don&#39;t need that
     delete constants.WHEEL_SCALE;
     
     // ENTER and RETURN has the same keyCode, but since RETURN

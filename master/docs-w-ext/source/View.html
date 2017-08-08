@@ -18,10 +18,10 @@
   <pre class="prettyprint lang-js"><span id='Ext-app-domain-View'>/**
 </span> * @class Ext.app.domain.View
  */
-Ext.define('Ext.app.domain.View', {
-    extend: 'Ext.app.EventDomain',
+Ext.define(&#39;Ext.app.domain.View&#39;, {
+    extend: &#39;Ext.app.EventDomain&#39;,
 
-    requires: ['Ext.Widget'],
+    requires: [&#39;Ext.Widget&#39;],
     
 <span id='Ext-app-domain-View-property-isInstance'>    isInstance: true,
 </span>    
@@ -33,7 +33,7 @@ Ext.define('Ext.app.domain.View', {
     
 <span id='Ext-app-domain-View-method-match'>    match: function(target, selector, controller) {
 </span>        var out = false;
-        if (selector === '#') {
+        if (selector === &#39;#&#39;) {
             out = controller === target.getController();
         } else {
             out = target.is(selector);

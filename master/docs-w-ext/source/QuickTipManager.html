@@ -15,15 +15,15 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.rtl.tip.QuickTipManager', {
-    override: 'Ext.tip.QuickTipManager',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.rtl.tip.QuickTipManager&#39;, {
+    override: &#39;Ext.tip.QuickTipManager&#39;,
 
     init: function() {
         var me = this;
 
         // Will return false if not ready to proceed
         if (me.callParent(arguments) !== false) {
-            me.tip.on('beforeshow', me.onBeforeFirstShow, me, { single: true });
+            me.tip.on(&#39;beforeshow&#39;, me.onBeforeFirstShow, me, { single: true });
         }
     },
 

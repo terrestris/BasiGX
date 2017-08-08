@@ -18,13 +18,13 @@
   <pre class="prettyprint lang-js"><span id='Ext-layout-container-Column'>/**
 </span> * This is the layout style of choice for creating structural layouts in a multi-column format where the width of each
  * column can be specified as a percentage or fixed width, but the height is allowed to vary based on the content. This
- * class is intended to be extended or created via the layout:'column' {@link Ext.container.Container#layout} config,
+ * class is intended to be extended or created via the layout:&#39;column&#39; {@link Ext.container.Container#layout} config,
  * and should generally not need to be created directly via the new keyword.
  *
  * ColumnLayout does not have any direct config options (other than inherited ones), but it does support a specific
  * config property of `columnWidth` that can be included in the config of any panel added to it. The layout will use
  * the columnWidth (if present) or width of each panel during layout to determine how to size each panel. If width or
- * columnWidth is not specified for a given panel, its width will default to the panel's width (or auto).
+ * columnWidth is not specified for a given panel, its width will default to the panel&#39;s width (or auto).
  *
  * The width property is always evaluated as pixels, and must be a number greater than or equal to 1. The columnWidth
  * property is always evaluated as a percentage, and must be a decimal value greater than 0 and less than 1 (e.g., .25).
@@ -41,19 +41,19 @@
  *
  *     @example
  *     // All columns are percentages -- they must add up to 1
- *     Ext.create('Ext.panel.Panel', {
- *         title: 'Column Layout - Percentage Only',
+ *     Ext.create(&#39;Ext.panel.Panel&#39;, {
+ *         title: &#39;Column Layout - Percentage Only&#39;,
  *         width: 350,
  *         height: 250,
- *         layout:'column',
+ *         layout:&#39;column&#39;,
  *         items: [{
- *             title: 'Column 1',
+ *             title: &#39;Column 1&#39;,
  *             columnWidth: 0.25
  *         },{
- *             title: 'Column 2',
+ *             title: &#39;Column 2&#39;,
  *             columnWidth: 0.55
  *         },{
- *             title: 'Column 3',
+ *             title: &#39;Column 3&#39;,
  *             columnWidth: 0.20
  *         }],
  *         renderTo: Ext.getBody()
@@ -63,38 +63,38 @@
  *     // to 1. The first column will take up exactly 120px, and the last two
  *     // columns will fill the remaining container width.
  *
- *     Ext.create('Ext.Panel', {
- *         title: 'Column Layout - Mixed',
+ *     Ext.create(&#39;Ext.Panel&#39;, {
+ *         title: &#39;Column Layout - Mixed&#39;,
  *         width: 350,
  *         height: 250,
- *         layout:'column',
+ *         layout:&#39;column&#39;,
  *         items: [{
- *             title: 'Column 1',
+ *             title: &#39;Column 1&#39;,
  *             width: 120
  *         },{
- *             title: 'Column 2',
+ *             title: &#39;Column 2&#39;,
  *             columnWidth: 0.7
  *         },{
- *             title: 'Column 3',
+ *             title: &#39;Column 3&#39;,
  *             columnWidth: 0.3
  *         }],
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.layout.container.Column', {
+Ext.define(&#39;Ext.layout.container.Column&#39;, {
 
-    extend: 'Ext.layout.container.Auto',
-    alias: ['layout.column'],
-    alternateClassName: 'Ext.layout.ColumnLayout',
+    extend: &#39;Ext.layout.container.Auto&#39;,
+    alias: [&#39;layout.column&#39;],
+    alternateClassName: &#39;Ext.layout.ColumnLayout&#39;,
 
-<span id='Ext-layout-container-Column-property-type'>    type: 'column',
+<span id='Ext-layout-container-Column-property-type'>    type: &#39;column&#39;,
 </span>
-<span id='Ext-layout-container-Column-cfg-itemCls'>    itemCls: Ext.baseCSSPrefix + 'column',
+<span id='Ext-layout-container-Column-cfg-itemCls'>    itemCls: Ext.baseCSSPrefix + &#39;column&#39;,
 </span>
-<span id='Ext-layout-container-Column-property-targetCls'>    targetCls: Ext.baseCSSPrefix + 'column-layout-ct',
+<span id='Ext-layout-container-Column-property-targetCls'>    targetCls: Ext.baseCSSPrefix + &#39;column-layout-ct&#39;,
 </span>
 <span id='Ext-layout-container-Column-property-clearSide'>    // The clear value to force floats to wrap back to zero
-</span>    clearSide: 'left',
+</span>    clearSide: &#39;left&#39;,
 
 <span id='Ext-layout-container-Column-property-columnWidthSizePolicy'>    // Columns with a columnWidth have their width managed.
 </span>    columnWidthSizePolicy: {
@@ -143,17 +143,17 @@ Ext.define('Ext.layout.container.Column', {
         // No parallel measurement, cannot lay out boxes.
         if (gotWidth === false) { //\\ TODO: Deal with target padding width
             // TODO: only block if we have items with columnWidth
-            targetContext.domBlock(me, 'width');
+            targetContext.domBlock(me, &#39;width&#39;);
             blocked = true;
         } else if (gotWidth) {
             availableWidth = containerSize.width;
         } else {
             // gotWidth is undefined, which means we must be width shrink wrap.
-            // cannot calculate columnWidths if we're shrink wrapping.
+            // cannot calculate columnWidths if we&#39;re shrink wrapping.
             return true;
         }
 
-        // we need the widths of the columns we don't manage to proceed so we block on them
+        // we need the widths of the columns we don&#39;t manage to proceed so we block on them
         // if they are not ready...
         for (i = 0; i &lt; len; ++i) {
             itemContext = items[i];
@@ -174,9 +174,9 @@ Ext.define('Ext.layout.container.Column', {
             // +--------------------------------+
             if (columnCount) {
                 if (i % columnCount) {
-                    itemContext.setProp('clear', null);
+                    itemContext.setProp(&#39;clear&#39;, null);
                 } else {
-                    itemContext.setProp('clear', me.clearSide);
+                    itemContext.setProp(&#39;clear&#39;, me.clearSide);
                 }
             }
 
@@ -186,9 +186,9 @@ Ext.define('Ext.layout.container.Column', {
             itemMarginWidth = itemContext.getMarginInfo().width;
 
             if (!itemContext.widthModel.calculated) {
-                itemWidth = itemContext.getProp('width');
-                if (typeof itemWidth !== 'number') {
-                    itemContext.block(me, 'width');
+                itemWidth = itemContext.getProp(&#39;width&#39;);
+                if (typeof itemWidth !== &#39;number&#39;) {
+                    itemContext.block(me, &#39;width&#39;);
                     blocked = true;
                 }
                 contentWidth += itemWidth + itemMarginWidth;

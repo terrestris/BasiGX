@@ -19,30 +19,30 @@
 </span> * A Trigger that contains 2 clickable elements inside in the form of a &quot;up&quot; and a &quot;down&quot;
  * trigger.
  */
-Ext.define('Ext.form.trigger.Spinner', {
-    extend: 'Ext.form.trigger.Trigger',
-    alias: 'trigger.spinner',
+Ext.define(&#39;Ext.form.trigger.Spinner&#39;, {
+    extend: &#39;Ext.form.trigger.Trigger&#39;,
+    alias: &#39;trigger.spinner&#39;,
 
-<span id='Ext-form-trigger-Spinner-cfg-cls'>    cls: Ext.baseCSSPrefix + 'form-trigger-spinner',
-</span><span id='Ext-form-trigger-Spinner-property-spinnerCls'>    spinnerCls: Ext.baseCSSPrefix + 'form-spinner',
-</span><span id='Ext-form-trigger-Spinner-property-spinnerUpCls'>    spinnerUpCls: Ext.baseCSSPrefix + 'form-spinner-up',
-</span><span id='Ext-form-trigger-Spinner-property-spinnerDownCls'>    spinnerDownCls: Ext.baseCSSPrefix + 'form-spinner-down',
-</span><span id='Ext-form-trigger-Spinner-property-focusCls'>    focusCls: Ext.baseCSSPrefix + 'form-spinner-focus',
-</span><span id='Ext-form-trigger-Spinner-property-overCls'>    overCls: Ext.baseCSSPrefix + 'form-spinner-over',
-</span><span id='Ext-form-trigger-Spinner-property-clickCls'>    clickCls: Ext.baseCSSPrefix + 'form-spinner-click',
+<span id='Ext-form-trigger-Spinner-cfg-cls'>    cls: Ext.baseCSSPrefix + &#39;form-trigger-spinner&#39;,
+</span><span id='Ext-form-trigger-Spinner-property-spinnerCls'>    spinnerCls: Ext.baseCSSPrefix + &#39;form-spinner&#39;,
+</span><span id='Ext-form-trigger-Spinner-property-spinnerUpCls'>    spinnerUpCls: Ext.baseCSSPrefix + &#39;form-spinner-up&#39;,
+</span><span id='Ext-form-trigger-Spinner-property-spinnerDownCls'>    spinnerDownCls: Ext.baseCSSPrefix + &#39;form-spinner-down&#39;,
+</span><span id='Ext-form-trigger-Spinner-property-focusCls'>    focusCls: Ext.baseCSSPrefix + &#39;form-spinner-focus&#39;,
+</span><span id='Ext-form-trigger-Spinner-property-overCls'>    overCls: Ext.baseCSSPrefix + &#39;form-spinner-over&#39;,
+</span><span id='Ext-form-trigger-Spinner-property-clickCls'>    clickCls: Ext.baseCSSPrefix + &#39;form-spinner-click&#39;,
 </span>
 <span id='Ext-form-trigger-Spinner-property-focusFieldOnClick'>    // restore focus to the input element on spin end.
 </span>    focusFieldOnClick: true,
 
 <span id='Ext-form-trigger-Spinner-cfg-upHandler'>    /**
 </span>     * @cfg {Function/String} [upHandler=undefined]
-     * The handler for the 'up' button
+     * The handler for the &#39;up&#39; button
      * @controllable
      */
 
 <span id='Ext-form-trigger-Spinner-cfg-downHandler'>    /**
 </span>     * @cfg {Function/String} [downHandler=undefined]
-     * The handler for the 'down' button
+     * The handler for the &#39;down&#39; button
      * @controllable
      */
 
@@ -57,16 +57,16 @@ Ext.define('Ext.form.trigger.Spinner', {
     vertical: true,
 
 <span id='Ext-form-trigger-Spinner-property-bodyTpl'>    bodyTpl:
-</span>        '&lt;tpl if=&quot;vertical&quot;&gt;' +
-            '&lt;div class=&quot;{spinnerCls} {spinnerCls}-{ui} {spinnerUpCls} {spinnerUpCls}-{ui}' +
-                ' {childElCls} {upDisabledCls}&quot;&gt;&lt;/div&gt;' +
-        '&lt;/tpl&gt;' +
-        '&lt;div class=&quot;{spinnerCls} {spinnerCls}-{ui} {spinnerDownCls} {spinnerDownCls}-{ui}' +
-                ' {childElCls} {downDisabledCls}&quot;&gt;&lt;/div&gt;' +
-        '&lt;tpl if=&quot;!vertical&quot;&gt;' +
-            '&lt;div class=&quot;{spinnerCls} {spinnerCls}-{ui} {spinnerUpCls} {spinnerUpCls}-{ui}' +
-                ' {childElCls} {upDisabledCls}&quot;&gt;&lt;/div&gt;' +
-        '&lt;/tpl&gt;',
+</span>        &#39;&lt;tpl if=&quot;vertical&quot;&gt;&#39; +
+            &#39;&lt;div class=&quot;{spinnerCls} {spinnerCls}-{ui} {spinnerUpCls} {spinnerUpCls}-{ui}&#39; +
+                &#39; {childElCls} {upDisabledCls}&quot;&gt;&lt;/div&gt;&#39; +
+        &#39;&lt;/tpl&gt;&#39; +
+        &#39;&lt;div class=&quot;{spinnerCls} {spinnerCls}-{ui} {spinnerDownCls} {spinnerDownCls}-{ui}&#39; +
+                &#39; {childElCls} {downDisabledCls}&quot;&gt;&lt;/div&gt;&#39; +
+        &#39;&lt;tpl if=&quot;!vertical&quot;&gt;&#39; +
+            &#39;&lt;div class=&quot;{spinnerCls} {spinnerCls}-{ui} {spinnerUpCls} {spinnerUpCls}-{ui}&#39; +
+                &#39; {childElCls} {upDisabledCls}&quot;&gt;&lt;/div&gt;&#39; +
+        &#39;&lt;/tpl&gt;&#39;,
 
 <span id='Ext-form-trigger-Spinner-method-destroy'>    destroy: function() {
 </span>        var me = this;
@@ -84,8 +84,8 @@ Ext.define('Ext.form.trigger.Spinner', {
 
         return {
             vertical: me.vertical,
-            upDisabledCls: me.upEnabled ? '' : (me.spinnerUpCls + '-disabled'),
-            downDisabledCls: me.downEnabled ? '' : (me.spinnerDownCls + '-disabled'),
+            upDisabledCls: me.upEnabled ? &#39;&#39; : (me.spinnerUpCls + &#39;-disabled&#39;),
+            downDisabledCls: me.downEnabled ? &#39;&#39; : (me.spinnerDownCls + &#39;-disabled&#39;),
             spinnerCls: me.spinnerCls,
             spinnerUpCls: me.spinnerUpCls,
             spinnerDownCls: me.spinnerDownCls
@@ -125,7 +125,7 @@ Ext.define('Ext.form.trigger.Spinner', {
          * @private
          * The &quot;up&quot; spinner element
          */
-        spinnerEl = me.spinnerEl = me.el.select('.' + me.spinnerCls, true);
+        spinnerEl = me.spinnerEl = me.el.select(&#39;.&#39; + me.spinnerCls, true);
         elements = spinnerEl.elements;
 
         me.upEl = vertical ? elements[0] : elements[1];
@@ -136,14 +136,14 @@ Ext.define('Ext.form.trigger.Spinner', {
 </span>     * @private
      */
     setUpEnabled: function(enabled) {
-        this.upEl[enabled ? 'removeCls' : 'addCls'](this.spinnerUpCls + '-disabled');
+        this.upEl[enabled ? &#39;removeCls&#39; : &#39;addCls&#39;](this.spinnerUpCls + &#39;-disabled&#39;);
     },
 
 <span id='Ext-form-trigger-Spinner-method-setDownEnabled'>    /**
 </span>     * @private
      */
     setDownEnabled: function(enabled) {
-        this.downEl[enabled ? 'removeCls' : 'addCls'](this.spinnerDownCls + '-disabled');
+        this.downEl[enabled ? &#39;removeCls&#39; : &#39;addCls&#39;](this.spinnerDownCls + &#39;-disabled&#39;);
     }
 
 });

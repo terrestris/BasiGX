@@ -37,9 +37,9 @@
  *
  * @class BasiGX.view.grid.FeaturePropertyGrid
  */
-Ext.define('BasiGX.view.grid.FeaturePropertyGrid', {
-    xtype: 'basigx-grid-featurepropertygrid',
-    extend: 'Ext.grid.property.Grid',
+Ext.define(&#39;BasiGX.view.grid.FeaturePropertyGrid&#39;, {
+    xtype: &#39;basigx-grid-featurepropertygrid&#39;,
+    extend: &#39;Ext.grid.property.Grid&#39;,
     requires: [
     ],
 
@@ -58,13 +58,13 @@ Ext.define('BasiGX.view.grid.FeaturePropertyGrid', {
         var me = this;
 
         if (!me.getOlFeature()) {
-            Ext.Error.raise('No Feature set for FeaturePropertyGrid.');
+            Ext.Error.raise(&#39;No Feature set for FeaturePropertyGrid.&#39;);
         }
 
         me.callParent([arguments]);
-        me.on('afterrender', me.setUpFeatureValues, me);
+        me.on(&#39;afterrender&#39;, me.setUpFeatureValues, me);
         // Equal to editable: false. Which does not exist.
-        me.on('beforeedit', function() {
+        me.on(&#39;beforeedit&#39;, function() {
             return false;
         });
     },
@@ -79,7 +79,7 @@ Ext.define('BasiGX.view.grid.FeaturePropertyGrid', {
         // Enable tooltip
         var valueColumn = me.getColumns()[1];
         valueColumn.renderer = function(value, metadata) {
-            metadata.tdAttr = 'data-qtip=&quot;' + value + '&quot;';
+            metadata.tdAttr = &#39;data-qtip=&quot;&#39; + value + &#39;&quot;&#39;;
             return value;
         };
 
@@ -95,7 +95,7 @@ Ext.define('BasiGX.view.grid.FeaturePropertyGrid', {
         if (displayValues) {
             me.setSource(displayValues);
         } else {
-            Ext.Error.raise('Feature in FeaturePropertyGrid has no values.');
+            Ext.Error.raise(&#39;Feature in FeaturePropertyGrid has no values.&#39;);
         }
     },
 
@@ -110,16 +110,16 @@ Ext.define('BasiGX.view.grid.FeaturePropertyGrid', {
         if (!value || !value.indexOf) {
             return value;
         }
-        if (value.indexOf('http') === 0) {
-            value = '' +
-                '&lt;a href=\'' + value + '\' target=\'_blank\'&gt;' +
+        if (value.indexOf(&#39;http&#39;) === 0) {
+            value = &#39;&#39; +
+                &#39;&lt;a href=\&#39;&#39; + value + &#39;\&#39; target=\&#39;_blank\&#39;&gt;&#39; +
                 value +
-                '&lt;/a&gt;';
-        } else if (value.indexOf('www.') === 0) {
-            value = '' +
-                '&lt;a href=\'http://' + value + '\' target=\'_blank\'&gt;' +
+                &#39;&lt;/a&gt;&#39;;
+        } else if (value.indexOf(&#39;www.&#39;) === 0) {
+            value = &#39;&#39; +
+                &#39;&lt;a href=\&#39;http://&#39; + value + &#39;\&#39; target=\&#39;_blank\&#39;&gt;&#39; +
                 value +
-                '&lt;/a&gt;';
+                &#39;&lt;/a&gt;&#39;;
         }
         return value;
     }

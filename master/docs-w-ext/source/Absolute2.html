@@ -15,13 +15,13 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.rtl.layout.container.Absolute', {
-    override: 'Ext.layout.container.Absolute',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.rtl.layout.container.Absolute&#39;, {
+    override: &#39;Ext.layout.container.Absolute&#39;,
     
     adjustWidthAnchor: function(width, childContext) {
         if (this.owner.getInherited().rtl) {
             var padding = this.targetPadding,
-                x = childContext.getStyle('right');
+                x = childContext.getStyle(&#39;right&#39;);
 
             return width - x + padding.right;
         } else {

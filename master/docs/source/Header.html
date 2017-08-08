@@ -38,33 +38,33 @@
  *
  * @class BasiGX.view.panel.Header
  */
-Ext.define('BasiGX.view.panel.Header', {
-    extend: 'Ext.panel.Panel',
-    xtype: 'basigx-panel-header',
+Ext.define(&#39;BasiGX.view.panel.Header&#39;, {
+    extend: &#39;Ext.panel.Panel&#39;,
+    xtype: &#39;basigx-panel-header&#39;,
 
     requires: [
-        'Ext.Img'
+        &#39;Ext.Img&#39;
     ],
 
     config: {
 <span id='BasiGX-view-panel-Header-cfg-addLogo'>        addLogo: true,
-</span><span id='BasiGX-view-panel-Header-cfg-logoUrl'>        logoUrl: 'resources/images/logo.png',
+</span><span id='BasiGX-view-panel-Header-cfg-logoUrl'>        logoUrl: &#39;resources/images/logo.png&#39;,
 </span><span id='BasiGX-view-panel-Header-cfg-link'>        link: null,
-</span><span id='BasiGX-view-panel-Header-cfg-logoAltText'>        logoAltText: 'Logo',
+</span><span id='BasiGX-view-panel-Header-cfg-logoAltText'>        logoAltText: &#39;Logo&#39;,
 </span><span id='BasiGX-view-panel-Header-cfg-logoHeight'>        logoHeight: 80,
 </span><span id='BasiGX-view-panel-Header-cfg-logoWidth'>        logoWidth: 200,
-</span><span id='BasiGX-view-panel-Header-cfg-logoMargin'>        logoMargin: '0 50px',
+</span><span id='BasiGX-view-panel-Header-cfg-logoMargin'>        logoMargin: &#39;0 50px&#39;,
 </span><span id='BasiGX-view-panel-Header-cfg-additionalItems'>        additionalItems: []
 </span>    },
 
 <span id='BasiGX-view-panel-Header-property-layout'>    layout: {
-</span>        type: 'hbox',
-        align: 'stretch'
+</span>        type: &#39;hbox&#39;,
+        align: &#39;stretch&#39;
     },
 
 <span id='BasiGX-view-panel-Header-property-padding'>    padding: 5,
 </span>
-<span id='BasiGX-view-panel-Header-property-cls'>    cls: 'basigx-header',
+<span id='BasiGX-view-panel-Header-property-cls'>    cls: &#39;basigx-header&#39;,
 </span>
 
 <span id='BasiGX-view-panel-Header-property-items'>    items: [],
@@ -98,14 +98,14 @@ Ext.define('BasiGX.view.panel.Header', {
     addLogoItem: function() {
         var me = this;
         var logo = {
-            xtype: 'image',
+            xtype: &#39;image&#39;,
             margin: me.getLogoMargin(),
             alt: me.getLogoAltText(),
             src: me.getLogoUrl(),
             height: me.getLogoHeight(),
             width: me.getLogoWidth(),
             autoEl: {
-                tag: 'a',
+                tag: &#39;a&#39;,
                 href: me.getLink()
             }
         };
@@ -121,8 +121,8 @@ Ext.define('BasiGX.view.panel.Header', {
      */
     setBackgroundColor: function(color) {
         this.setStyle({
-            'background-color': color, //fallback for ie9 and lower
-            'background': 'linear-gradient(to right, white, ' + color + ')'
+            &#39;background-color&#39;: color, //fallback for ie9 and lower
+            &#39;background&#39;: &#39;linear-gradient(to right, white, &#39; + color + &#39;)&#39;
         });
     }
 });

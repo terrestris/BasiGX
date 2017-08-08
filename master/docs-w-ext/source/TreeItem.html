@@ -21,23 +21,23 @@
  * This class can only be used in conjunction with {@link Ext.list.Tree}.
  * @since 6.0.0
  */
-Ext.define('Ext.list.TreeItem', {
-    extend: 'Ext.list.AbstractTreeItem',
-    xtype: 'treelistitem',
+Ext.define(&#39;Ext.list.TreeItem&#39;, {
+    extend: &#39;Ext.list.AbstractTreeItem&#39;,
+    xtype: &#39;treelistitem&#39;,
 
-<span id='Ext-list-TreeItem-property-collapsedCls'>    collapsedCls: Ext.baseCSSPrefix + 'treelist-item-collapsed',
-</span><span id='Ext-list-TreeItem-property-expandedCls'>    expandedCls: Ext.baseCSSPrefix + 'treelist-item-expanded',
-</span><span id='Ext-list-TreeItem-property-floatedCls'>    floatedCls: [Ext.Widget.prototype.floatedCls, Ext.baseCSSPrefix + 'treelist-item-floated'],
-</span><span id='Ext-list-TreeItem-property-floatedToolCls'>    floatedToolCls: Ext.baseCSSPrefix + 'treelist-item-tool-floated',
-</span><span id='Ext-list-TreeItem-property-leafCls'>    leafCls: Ext.baseCSSPrefix + 'treelist-item-leaf',
-</span><span id='Ext-list-TreeItem-property-expandableCls'>    expandableCls: Ext.baseCSSPrefix + 'treelist-item-expandable',
-</span><span id='Ext-list-TreeItem-property-hideIconCls'>    hideIconCls: Ext.baseCSSPrefix + 'treelist-item-hide-icon',
-</span><span id='Ext-list-TreeItem-property-loadingCls'>    loadingCls: Ext.baseCSSPrefix + 'treelist-item-loading',
-</span><span id='Ext-list-TreeItem-property-selectedCls'>    selectedCls: Ext.baseCSSPrefix + 'treelist-item-selected',
-</span><span id='Ext-list-TreeItem-property-selectedParentCls'>    selectedParentCls: Ext.baseCSSPrefix + 'treelist-item-selected-parent',
-</span><span id='Ext-list-TreeItem-property-withIconCls'>    withIconCls: Ext.baseCSSPrefix + 'treelist-item-with-icon',
-</span><span id='Ext-list-TreeItem-property-hoverCls'>    hoverCls: Ext.baseCSSPrefix + 'treelist-item-over',
-</span><span id='Ext-list-TreeItem-property-rowHoverCls'>    rowHoverCls: Ext.baseCSSPrefix + 'treelist-row-over',
+<span id='Ext-list-TreeItem-property-collapsedCls'>    collapsedCls: Ext.baseCSSPrefix + &#39;treelist-item-collapsed&#39;,
+</span><span id='Ext-list-TreeItem-property-expandedCls'>    expandedCls: Ext.baseCSSPrefix + &#39;treelist-item-expanded&#39;,
+</span><span id='Ext-list-TreeItem-property-floatedCls'>    floatedCls: [Ext.Widget.prototype.floatedCls, Ext.baseCSSPrefix + &#39;treelist-item-floated&#39;],
+</span><span id='Ext-list-TreeItem-property-floatedToolCls'>    floatedToolCls: Ext.baseCSSPrefix + &#39;treelist-item-tool-floated&#39;,
+</span><span id='Ext-list-TreeItem-property-leafCls'>    leafCls: Ext.baseCSSPrefix + &#39;treelist-item-leaf&#39;,
+</span><span id='Ext-list-TreeItem-property-expandableCls'>    expandableCls: Ext.baseCSSPrefix + &#39;treelist-item-expandable&#39;,
+</span><span id='Ext-list-TreeItem-property-hideIconCls'>    hideIconCls: Ext.baseCSSPrefix + &#39;treelist-item-hide-icon&#39;,
+</span><span id='Ext-list-TreeItem-property-loadingCls'>    loadingCls: Ext.baseCSSPrefix + &#39;treelist-item-loading&#39;,
+</span><span id='Ext-list-TreeItem-property-selectedCls'>    selectedCls: Ext.baseCSSPrefix + &#39;treelist-item-selected&#39;,
+</span><span id='Ext-list-TreeItem-property-selectedParentCls'>    selectedParentCls: Ext.baseCSSPrefix + &#39;treelist-item-selected-parent&#39;,
+</span><span id='Ext-list-TreeItem-property-withIconCls'>    withIconCls: Ext.baseCSSPrefix + &#39;treelist-item-with-icon&#39;,
+</span><span id='Ext-list-TreeItem-property-hoverCls'>    hoverCls: Ext.baseCSSPrefix + &#39;treelist-item-over&#39;,
+</span><span id='Ext-list-TreeItem-property-rowHoverCls'>    rowHoverCls: Ext.baseCSSPrefix + &#39;treelist-row-over&#39;,
 </span>
 <span id='Ext-list-TreeItem-property-isTreeListItem'>    /**
 </span>     * This property is `true` to allow type checking for this or derived class.
@@ -49,7 +49,7 @@ Ext.define('Ext.list.TreeItem', {
     config: {
 <span id='Ext-list-TreeItem-cfg-rowCls'>        /**
 </span>         * @cfg {String} rowCls
-         * One or more CSS classes to add to the tree item's logical &quot;row&quot; element. This
+         * One or more CSS classes to add to the tree item&#39;s logical &quot;row&quot; element. This
          * element fills from left-to-right of the line.
          * @since 6.0.1
          */
@@ -58,41 +58,41 @@ Ext.define('Ext.list.TreeItem', {
 
 <span id='Ext-list-TreeItem-cfg-rowClsProperty'>    /**
 </span>     * @cfg {String} [rowClsProperty=&quot;rowCls&quot;]
-     * The name of the associated record's field to map to the {@link #rowCls} config.
+     * The name of the associated record&#39;s field to map to the {@link #rowCls} config.
      * @since 6.0.1
      */
-    rowClsProperty: 'rowCls',
+    rowClsProperty: &#39;rowCls&#39;,
 
 <span id='Ext-list-TreeItem-property-element'>    element: {
-</span>        reference: 'element',
-        tag: 'li',
-        cls: Ext.baseCSSPrefix + 'treelist-item',
+</span>        reference: &#39;element&#39;,
+        tag: &#39;li&#39;,
+        cls: Ext.baseCSSPrefix + &#39;treelist-item&#39;,
 
         children: [{
-            reference: 'rowElement',
-            cls: Ext.baseCSSPrefix + 'treelist-row',
+            reference: &#39;rowElement&#39;,
+            cls: Ext.baseCSSPrefix + &#39;treelist-row&#39;,
 
             children: [{
-                reference: 'wrapElement',
-                cls: Ext.baseCSSPrefix + 'treelist-item-wrap',
+                reference: &#39;wrapElement&#39;,
+                cls: Ext.baseCSSPrefix + &#39;treelist-item-wrap&#39;,
                 children: [{
-                    reference: 'iconElement',
-                    cls: Ext.baseCSSPrefix + 'treelist-item-icon'
+                    reference: &#39;iconElement&#39;,
+                    cls: Ext.baseCSSPrefix + &#39;treelist-item-icon&#39;
                 }, {
-                    reference: 'textElement',
-                    cls: Ext.baseCSSPrefix + 'treelist-item-text'
+                    reference: &#39;textElement&#39;,
+                    cls: Ext.baseCSSPrefix + &#39;treelist-item-text&#39;
                 }, {
-                    reference: 'expanderElement',
-                    cls: Ext.baseCSSPrefix + 'treelist-item-expander'
+                    reference: &#39;expanderElement&#39;,
+                    cls: Ext.baseCSSPrefix + &#39;treelist-item-expander&#39;
                 }]
             }]
         }, {
-            reference: 'itemContainer',
-            tag: 'ul',
-            cls: Ext.baseCSSPrefix + 'treelist-container'
+            reference: &#39;itemContainer&#39;,
+            tag: &#39;ul&#39;,
+            cls: Ext.baseCSSPrefix + &#39;treelist-container&#39;
         }, {
-            reference: 'toolElement',
-            cls: Ext.baseCSSPrefix + 'treelist-item-tool'
+            reference: &#39;toolElement&#39;,
+            cls: Ext.baseCSSPrefix + &#39;treelist-item-tool&#39;
         }]
     },
 
@@ -101,7 +101,7 @@ Ext.define('Ext.list.TreeItem', {
 
         var toolDom = this.toolElement.dom;
 
-        // We don't want the tool in the normal &lt;li&gt; structure but it is simpler to let
+        // We don&#39;t want the tool in the normal &lt;li&gt; structure but it is simpler to let
         // that process create the toolElement.
         toolDom.parentNode.removeChild(toolDom);
     },
@@ -153,7 +153,7 @@ Ext.define('Ext.list.TreeItem', {
 
         if (animation) {
             // The collapsed state is now in effect, so itemContainer is hidden.
-            itemContainer.dom.style.display = 'block';
+            itemContainer.dom.style.display = &#39;block&#39;;
 
             me.collapsingForExpand = collapsingForExpand;
             me.collapsing = this.runAnimation(Ext.merge({
@@ -174,7 +174,7 @@ Ext.define('Ext.list.TreeItem', {
             itemContainer = me.itemContainer;
 
         me.collapsing = null;
-        itemContainer.dom.style.display = '';
+        itemContainer.dom.style.display = &#39;&#39;;
         itemContainer.setHeight(null);
 
         me.nodeCollapseEnd(me.collapsingForExpand);
@@ -319,7 +319,7 @@ Ext.define('Ext.list.TreeItem', {
             if (node) {
                 depth = node.data.depth - 1;
 
-                me.wrapElement.dom.style.marginLeft = (depth * indent) + 'px';
+                me.wrapElement.dom.style.marginLeft = (depth * indent) + &#39;px&#39;;
             }
         },
 

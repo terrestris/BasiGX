@@ -37,12 +37,12 @@
  *
  * @class BasiGX.view.button.ZoomOut
  */
-Ext.define('BasiGX.view.button.ZoomOut', {
-    extend: 'BasiGX.view.button.Base',
-    xtype: 'basigx-button-zoomout',
+Ext.define(&#39;BasiGX.view.button.ZoomOut&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-zoomout&#39;,
     requires: [
-        'Ext.app.ViewModel',
-        'BasiGX.util.Map'
+        &#39;Ext.app.ViewModel&#39;,
+        &#39;BasiGX.util.Map&#39;
     ],
 
 <span id='BasiGX-view-button-ZoomOut-property-viewModel'>    /**
@@ -50,10 +50,10 @@ Ext.define('BasiGX.view.button.ZoomOut', {
      */
     viewModel: {
         data: {
-            tooltip: 'Herauszoomen',
+            tooltip: &#39;Herauszoomen&#39;,
             text: null,
-            documentation: '&lt;h2&gt;Herauszoomen&lt;/h2&gt;• Ein Klick auf den Button ' +
-                'verkleinert die Karte um eine Zoomstufe.'
+            documentation: &#39;&lt;h2&gt;Herauszoomen&lt;/h2&gt;• Ein Klick auf den Button &#39; +
+                &#39;verkleinert die Karte um eine Zoomstufe.&#39;
         }
     },
 
@@ -61,7 +61,7 @@ Ext.define('BasiGX.view.button.ZoomOut', {
 </span>     *
      */
     bind: {
-        text: '{text}'
+        text: &#39;{text}&#39;
     },
 
 <span id='BasiGX-view-button-ZoomOut-property-olMap'>    /**
@@ -73,8 +73,8 @@ Ext.define('BasiGX.view.button.ZoomOut', {
 </span>     * The icons the button should use.
      * Classic Toolkit uses glyphs, modern toolkit uses html
      */
-    glyph: 'xf010@FontAwesome',
-<span id='BasiGX-view-button-ZoomOut-property-html'>    html: '&lt;i class=&quot;fa fa-search-minus fa-2x&quot;&gt;&lt;/i&gt;',
+    glyph: &#39;xf010@FontAwesome&#39;,
+<span id='BasiGX-view-button-ZoomOut-property-html'>    html: &#39;&lt;i class=&quot;fa fa-search-minus fa-2x&quot;&gt;&lt;/i&gt;&#39;,
 </span>
 <span id='BasiGX-view-button-ZoomOut-property-liveDemoConfig'>    /**
 </span>     * A config object to show this tool in action (live demo) when using the
@@ -82,10 +82,10 @@ Ext.define('BasiGX.view.button.ZoomOut', {
      */
     liveDemoConfig: [
         {
-            moveMouseTo: 'basigx-button-zoomout'
+            moveMouseTo: &#39;basigx-button-zoomout&#39;
         },
         {
-            clickOnButton: 'basigx-button-zoomout'
+            clickOnButton: &#39;basigx-button-zoomout&#39;
         }
     ],
 

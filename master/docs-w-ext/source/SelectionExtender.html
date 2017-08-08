@@ -15,8 +15,8 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.grid.selection.SelectionExtender', {
-    extend: 'Ext.dd.DragTracker',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.grid.selection.SelectionExtender&#39;, {
+    extend: &#39;Ext.dd.DragTracker&#39;,
     
     maskBox: {},
     
@@ -43,8 +43,8 @@
         me.el = config.view.el;
 
         me.handle = config.view.ownerGrid.body.createChild({
-            cls: Ext.baseCSSPrefix + 'ssm-extender-drag-handle',
-            style: 'display:none'
+            cls: Ext.baseCSSPrefix + &#39;ssm-extender-drag-handle&#39;,
+            style: &#39;display:none&#39;
         }).setVisibilityMode(displayMode);
         me.handle.on({
             contextmenu: function(e) {
@@ -53,8 +53,8 @@
         });
         
         me.mask = me.el.createChild({
-            cls: Ext.baseCSSPrefix + 'ssm-extender-mask',
-            style: 'display:none'
+            cls: Ext.baseCSSPrefix + &#39;ssm-extender-mask&#39;,
+            style: &#39;display:none&#39;
         }).setVisibilityMode(displayMode);
 
         me.superclass.constructor.call(me, config);
@@ -92,8 +92,8 @@
         me.firstPos = firstPos;
         me.lastPos = lastPos;
 
-        // If we've done a &quot;select all rows&quot; and there is buffered rendering, then
-        // the cells might not be rendered, so we can't activate the replicator.
+        // If we&#39;ve done a &quot;select all rows&quot; and there is buffered rendering, then
+        // the cells might not be rendered, so we can&#39;t activate the replicator.
         if (firstPos &amp;&amp; lastPos &amp;&amp; firstPos.getCell() &amp;&amp; lastPos.getCell()) {
             if (me.curPos) {
                 me.curPos.setPosition(lastPos);
@@ -117,7 +117,7 @@
         // This will be called upon scroll
         if (firstCell &amp;&amp; lastCell) {
             me.enable();
-            me.handle.alignTo(lastCell, 'c-br');
+            me.handle.alignTo(lastCell, &#39;c-br&#39;);
         } else {
             me.disable();
         }
@@ -278,18 +278,18 @@
 
         // Reset border to default, which is the overall border setting from SASS
         // We disable the border which is contiguous to the selection.
-        me.mask.dom.style.borderTopWidth = me.mask.dom.style.borderRightWidth = me.mask.dom.style.borderBottomWidth = me.mask.dom.style.borderLeftWidth = '';
+        me.mask.dom.style.borderTopWidth = me.mask.dom.style.borderRightWidth = me.mask.dom.style.borderBottomWidth = me.mask.dom.style.borderLeftWidth = &#39;&#39;;
 
         // Dragged above the selection
         if (curPos.rowIdx &lt; me.firstPos.rowIdx &amp;&amp; me.extendY) {
             me.extensionDescriptor = {
-                type: 'rows',
+                type: &#39;rows&#39;,
                 start: extensionStart.setRow(curPos.rowIdx),
                 end: extensionEnd.setRow(me.firstPos.rowIdx - 1),
                 rows: curPos.rowIdx - me.firstPos.rowIdx,
                 mousePosition: me.lastXY
             };
-            me.mask.dom.style.borderBottomWidth = '0';
+            me.mask.dom.style.borderBottomWidth = &#39;0&#39;;
             maskBox.x = selRegion.x;
             maskBox.y = overCell.getY();
             maskBox.width = selRegion.right - selRegion.left;
@@ -299,13 +299,13 @@
         // Dragged below selection
         else if (curPos.rowIdx &gt; me.lastPos.rowIdx &amp;&amp; me.extendY) {
             me.extensionDescriptor = {
-                type: 'rows',
+                type: &#39;rows&#39;,
                 start: extensionStart.setRow(me.lastPos.rowIdx + 1),
                 end: extensionEnd.setRow(curPos.rowIdx),
                 rows: curPos.rowIdx - me.lastPos.rowIdx,
                 mousePosition: me.lastXY
             };
-            me.mask.dom.style.borderTopWidth = '0';
+            me.mask.dom.style.borderTopWidth = &#39;0&#39;;
             maskBox.x = selRegion.x;
             maskBox.y = selRegion.bottom;
             maskBox.width = selRegion.right - selRegion.left;
@@ -318,13 +318,13 @@
             // Dragged to left of selection
             if (curPos.colIdx &lt; me.firstPos.colIdx &amp;&amp; me.extendX) {
                 me.extensionDescriptor = {
-                    type: 'columns',
+                    type: &#39;columns&#39;,
                     start: extensionStart.setColumn(curPos.colIdx),
                     end: extensionEnd.setColumn(me.firstPos.colIdx - 1),
                     columns: curPos.colIdx - me.firstPos.colIdx,
                     mousePosition: me.lastXY
                 };
-                me.mask.dom.style.borderRightWidth = '0';
+                me.mask.dom.style.borderRightWidth = &#39;0&#39;;
                 maskBox.x = overCell.getX();
                 maskBox.y = selRegion.top;
                 maskBox.width = selRegion.left - overCell.getX();
@@ -334,13 +334,13 @@
             // Dragged to right of selection
             else if (curPos.colIdx &gt; me.lastPos.colIdx &amp;&amp; me.extendX) {
                 me.extensionDescriptor = {
-                    type: 'columns',
+                    type: &#39;columns&#39;,
                     start: extensionStart.setColumn(me.lastPos.colIdx + 1),
                     end: extensionEnd.setColumn(curPos.colIdx),
                     columns: curPos.colIdx - me.lastPos.colIdx,
                     mousePosition: me.lastXY
                 };
-                me.mask.dom.style.borderLeftWidth = '0';
+                me.mask.dom.style.borderLeftWidth = &#39;0&#39;;
                 maskBox.x = selRegion.right;
                 maskBox.y = selRegion.top;
                 maskBox.width = overCell.getRegion().right - selRegion.right;
@@ -351,7 +351,7 @@
         }
 
         if (view.ownerGrid.hasListeners.selectionextenderdrag) {
-            view.ownerGrid.fireEvent('selectionextenderdrag', view.ownerGrid, view.getSelectionModel().getSelected(), me.extensionDescriptor);
+            view.ownerGrid.fireEvent(&#39;selectionextenderdrag&#39;, view.ownerGrid, view.getSelectionModel().getSelected(), me.extensionDescriptor);
         }
         if (me.extensionDescriptor) {
             me.mask.show();

@@ -18,8 +18,8 @@
   <pre class="prettyprint lang-js"><span id='Ext-view-DragZone'>/**
 </span> * @private
  */
-Ext.define('Ext.view.DragZone', {
-    extend: 'Ext.dd.DragZone',
+Ext.define(&#39;Ext.view.DragZone&#39;, {
+    extend: &#39;Ext.dd.DragZone&#39;,
 <span id='Ext-view-DragZone-cfg-containerScroll'>    containerScroll: false,
 </span>
 <span id='Ext-view-DragZone-method-constructor'>    constructor: function(config) {
@@ -36,14 +36,14 @@ Ext.define('Ext.view.DragZone', {
         // based on the id of the View would isolate it and mean it can only
         // interact with a DropZone on the same View also using a generated ID.
         if (!me.ddGroup) {
-            me.ddGroup = 'view-dd-zone-' + me.view.id;
+            me.ddGroup = &#39;view-dd-zone-&#39; + me.view.id;
         }
 
         // Ext.dd.DragDrop instances are keyed by the ID of their encapsulating element.
-        // So a View's DragZone cannot use the View's main element because the DropZone must use that
-        // because the DropZone may need to scroll on hover at a scrolling boundary, and it is the View's
+        // So a View&#39;s DragZone cannot use the View&#39;s main element because the DropZone must use that
+        // because the DropZone may need to scroll on hover at a scrolling boundary, and it is the View&#39;s
         // main element which handles scrolling.
-        // We use the View's parent element to drag from. Ideally, we would use the internal structure, but that
+        // We use the View&#39;s parent element to drag from. Ideally, we would use the internal structure, but that
         // is transient; DataViews recreate the internal structure dynamically as data changes.
         // TODO: Ext 5.0 DragDrop must allow multiple DD objects to share the same element.
         view = me.view;
@@ -57,7 +57,7 @@ Ext.define('Ext.view.DragZone', {
         view.setItemsDraggable(true);
 
         ownerCt = view.ownerCt;
-        // We don't just grab the parent el, since the parent el may be
+        // We don&#39;t just grab the parent el, since the parent el may be
         // some el injected by the layout
         if (ownerCt) {
             el = ownerCt.getTargetEl().dom;
@@ -66,8 +66,8 @@ Ext.define('Ext.view.DragZone', {
         }
         me.callParent([el]);
 
-        me.ddel = document.createElement('div');
-        me.ddel.className = Ext.baseCSSPrefix + 'grid-dd-wrap';
+        me.ddel = document.createElement(&#39;div&#39;);
+        me.ddel.className = Ext.baseCSSPrefix + &#39;grid-dd-wrap&#39;;
     },
 
 <span id='Ext-view-DragZone-method-init'>    init: function(id, sGroup, config) {
@@ -85,7 +85,7 @@ Ext.define('Ext.view.DragZone', {
             // Longpress fires contextmenu in some touch platforms, so if we are using longpress
             // inhibit the contextmenu on this element
             eventSpec.contextmenu = {
-                element: 'el',
+                element: &#39;el&#39;,
                 fn: me.onViewContextMenu
             };
         }
@@ -102,7 +102,7 @@ Ext.define('Ext.view.DragZone', {
     },
 
 <span id='Ext-view-DragZone-method-onViewContextMenu'>    onViewContextMenu: function(e) {
-</span>        if (e.pointerType !== 'mouse') {
+</span>        if (e.pointerType !== &#39;mouse&#39;) {
             e.preventDefault();
         }
     },
@@ -110,7 +110,7 @@ Ext.define('Ext.view.DragZone', {
 <span id='Ext-view-DragZone-method-onItemMouseDown'>    onItemMouseDown: function(view, record, item, index, e) {
 </span>        // Ignore touchstart.
         // For touch events, we use longpress.
-        if (e.pointerType === 'mouse') {
+        if (e.pointerType === &#39;mouse&#39;) {
             this.onTriggerGesture(view, record, item, index, e);
         }
     },
@@ -119,7 +119,7 @@ Ext.define('Ext.view.DragZone', {
 </span>        // Ignore long mousedowns.
         // The initial mousedown started the drag.
         // For touch events, we use longpress.
-        if (e.pointerType !== 'mouse') {
+        if (e.pointerType !== &#39;mouse&#39;) {
             this.onTriggerGesture(view, record, item, index, e);
         }
     },
@@ -129,7 +129,7 @@ Ext.define('Ext.view.DragZone', {
 
         // Only respond to longpress for touch dragging.
         // Reject drag start if mousedown is on the actionable cell of a grid view
-        if ((e.pointerType === 'touch' &amp;&amp; e.type !== 'longpress') || (e.position &amp;&amp; e.position.isEqual(e.view.actionPosition))) {
+        if ((e.pointerType === &#39;touch&#39; &amp;&amp; e.type !== &#39;longpress&#39;) || (e.position &amp;&amp; e.position.isEqual(e.view.actionPosition))) {
             return;
         }
 
@@ -206,7 +206,7 @@ Ext.define('Ext.view.DragZone', {
 
 <span id='Ext-view-DragZone-method-getDragText'>    getDragText: function() {
 </span>        var count = this.dragData.records.length;
-        return Ext.String.format(this.dragText, count, count === 1 ? '' : 's');
+        return Ext.String.format(this.dragText, count, count === 1 ? &#39;&#39; : &#39;s&#39;);
     },
 
 <span id='Ext-view-DragZone-method-getRepairXY'>    getRepairXY : function(e, data){

@@ -37,12 +37,12 @@
  *
  * @class BasiGX.view.button.ToggleLegend
  */
-Ext.define('BasiGX.view.button.ToggleLegend', {
-    extend: 'BasiGX.view.button.Base',
-    xtype: 'basigx-button-togglelegend',
+Ext.define(&#39;BasiGX.view.button.ToggleLegend&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-togglelegend&#39;,
     requires: [
-        'Ext.app.ViewModel',
-        'BasiGX.util.Map'
+        &#39;Ext.app.ViewModel&#39;,
+        &#39;BasiGX.util.Map&#39;
     ],
 
 <span id='BasiGX-view-button-ToggleLegend-property-viewModel'>    /**
@@ -50,10 +50,10 @@ Ext.define('BasiGX.view.button.ToggleLegend', {
      */
     viewModel: {
         data: {
-            tooltip: 'Layerauswahl',
+            tooltip: &#39;Layerauswahl&#39;,
             text: null,
-            documentation: '&lt;h2&gt;Layerauswahl&lt;/h2&gt;• Ein Klick auf ' +
-                'den Button klappt die Legendenansicht ein oder aus.'
+            documentation: &#39;&lt;h2&gt;Layerauswahl&lt;/h2&gt;• Ein Klick auf &#39; +
+                &#39;den Button klappt die Legendenansicht ein oder aus.&#39;
         }
     },
 
@@ -63,10 +63,10 @@ Ext.define('BasiGX.view.button.ToggleLegend', {
      */
     liveDemoConfig: [
         {
-            moveMouseTo: 'basigx-button-togglelegend'
+            moveMouseTo: &#39;basigx-button-togglelegend&#39;
         },
         {
-            clickOnButton: 'basigx-button-togglelegend'
+            clickOnButton: &#39;basigx-button-togglelegend&#39;
         }
     ],
 
@@ -74,20 +74,20 @@ Ext.define('BasiGX.view.button.ToggleLegend', {
 </span>     *
      */
     bind: {
-        text: '{text}'
+        text: &#39;{text}&#39;
     },
 
 <span id='BasiGX-view-button-ToggleLegend-property-glyph'>    /**
 </span>     * The icons the button should use.
      * Classic Toolkit uses glyphs, modern toolkit uses html
      */
-    glyph: 'xf022@FontAwesome',
-<span id='BasiGX-view-button-ToggleLegend-property-html'>    html: '&lt;i class=&quot;fa fa-list-alt fa-2x&quot;&gt;&lt;/i&gt;',
+    glyph: &#39;xf022@FontAwesome&#39;,
+<span id='BasiGX-view-button-ToggleLegend-property-html'>    html: &#39;&lt;i class=&quot;fa fa-list-alt fa-2x&quot;&gt;&lt;/i&gt;&#39;,
 </span>
     config: {
 <span id='BasiGX-view-button-ToggleLegend-cfg-legendTreeXType'>        /**
 </span>         * Placeholder for the xtype of the legendtree panel component
-         * (e.g. 'basigx-panel-legendtree').
+         * (e.g. &#39;basigx-panel-legendtree&#39;).
          * Will be used to be able to determine the component dynamically.
          */
         legendTreeXType: null,

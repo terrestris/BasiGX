@@ -18,7 +18,7 @@
   <pre class="prettyprint lang-js"><span id='Ext-util-paintmonitor-Abstract'>/**
 </span> * @private
  */
-Ext.define('Ext.util.paintmonitor.Abstract', {
+Ext.define(&#39;Ext.util.paintmonitor.Abstract&#39;, {
 
     config: {
 <span id='Ext-util-paintmonitor-Abstract-cfg-element'>        element: null,
@@ -30,9 +30,9 @@ Ext.define('Ext.util.paintmonitor.Abstract', {
 <span id='Ext-util-paintmonitor-Abstract-cfg-args'>        args: []
 </span>    },
 
-<span id='Ext-util-paintmonitor-Abstract-property-eventName'>    eventName: '',
+<span id='Ext-util-paintmonitor-Abstract-property-eventName'>    eventName: &#39;&#39;,
 </span>
-<span id='Ext-util-paintmonitor-Abstract-property-monitorClass'>    monitorClass: '',
+<span id='Ext-util-paintmonitor-Abstract-property-monitorClass'>    monitorClass: &#39;&#39;,
 </span>
 <span id='Ext-util-paintmonitor-Abstract-method-constructor'>    constructor: function(config) {
 </span>        this.onElementPainted = Ext.Function.bind(this.onElementPainted, this);
@@ -41,7 +41,7 @@ Ext.define('Ext.util.paintmonitor.Abstract', {
     },
 
 <span id='Ext-util-paintmonitor-Abstract-method-bindListeners'>    bindListeners: function(bind) {
-</span>        this.monitorElement[bind ? 'addEventListener' : 'removeEventListener'](this.eventName, this.onElementPainted, true);
+</span>        this.monitorElement[bind ? &#39;addEventListener&#39; : &#39;removeEventListener&#39;](this.eventName, this.onElementPainted, true);
     },
 
 <span id='Ext-util-paintmonitor-Abstract-method-applyElement'>    applyElement: function(element) {
@@ -52,11 +52,11 @@ Ext.define('Ext.util.paintmonitor.Abstract', {
 
 <span id='Ext-util-paintmonitor-Abstract-method-updateElement'>    updateElement: function(element) {
 </span>        this.monitorElement = Ext.Element.create({
-            classList: [Ext.baseCSSPrefix + 'paint-monitor', this.monitorClass]
+            classList: [Ext.baseCSSPrefix + &#39;paint-monitor&#39;, this.monitorClass]
         }, true);
 
         element.appendChild(this.monitorElement);
-        element.addCls(Ext.baseCSSPrefix + 'paint-monitored');
+        element.addCls(Ext.baseCSSPrefix + &#39;paint-monitored&#39;);
         this.bindListeners(true);
     },
 
@@ -72,7 +72,7 @@ Ext.define('Ext.util.paintmonitor.Abstract', {
         delete me.monitorElement;
 
         if (element &amp;&amp; !element.destroyed) {
-            element.removeCls(Ext.baseCSSPrefix + 'paint-monitored');
+            element.removeCls(Ext.baseCSSPrefix + &#39;paint-monitored&#39;);
             delete me._element;
         }
 

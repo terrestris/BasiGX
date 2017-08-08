@@ -30,17 +30,17 @@
  *
  * VTypes can be applied to a {@link Ext.form.field.Text Text Field} using the `{@link Ext.form.field.Text#vtype vtype}` configuration:
  *
- *     Ext.create('Ext.form.field.Text', {
- *         fieldLabel: 'Email Address',
- *         name: 'email',
- *         vtype: 'email' // applies email validation rules to this field
+ *     Ext.create(&#39;Ext.form.field.Text&#39;, {
+ *         fieldLabel: &#39;Email Address&#39;,
+ *         name: &#39;email&#39;,
+ *         vtype: &#39;email&#39; // applies email validation rules to this field
  *     });
  *
  * To create custom VTypes:
  *
- *     // custom Vtype for vtype:'time'
- *     Ext.define('Override.form.field.VTypes', {
- *         override: 'Ext.form.field.VTypes',
+ *     // custom Vtype for vtype:&#39;time&#39;
+ *     Ext.define(&#39;Override.form.field.VTypes&#39;, {
+ *         override: &#39;Ext.form.field.VTypes&#39;,
  *
  *         // vtype validation function
  *         time: function(value) {
@@ -49,7 +49,7 @@
  *         // RegExp for the value to be tested against within the validation function
  *         timeRe: /^([1-9]|1[0-9]):([0-5][0-9])(\s[a|p]m)$/i,
  *         // vtype Text property: The error text to display when the validation function returns false
- *         timeText: 'Not a valid time.  Must be in the format &quot;12:34 PM&quot;.',
+ *         timeText: &#39;Not a valid time.  Must be in the format &quot;12:34 PM&quot;.&#39;,
  *         // vtype Mask property: The keystroke filter mask
  *         timeMask: /[\d\s:amp]/i
  *     });
@@ -61,31 +61,31 @@
  * Using a custom validator is the same as using one of the build-in validators - just use the name of the validator function
  * as the `{@link Ext.form.field.Text#vtype vtype}` configuration on a {@link Ext.form.field.Text Text Field}:
  *
- *     Ext.create('Ext.form.field.Text', {
- *         fieldLabel: 'Departure Time',
- *         name: 'departureTime',
- *         vtype: 'time' // applies custom time validation rules to this field
+ *     Ext.create(&#39;Ext.form.field.Text&#39;, {
+ *         fieldLabel: &#39;Departure Time&#39;,
+ *         name: &#39;departureTime&#39;,
+ *         vtype: &#39;time&#39; // applies custom time validation rules to this field
  *     });
  *
  * Another example of a custom validator:
  *
- *     // custom Vtype for vtype:'IPAddress'
- *     Ext.define('Override.form.field.VTypes', {
- *         override: 'Ext.form.field.VTypes',
+ *     // custom Vtype for vtype:&#39;IPAddress&#39;
+ *     Ext.define(&#39;Override.form.field.VTypes&#39;, {
+ *         override: &#39;Ext.form.field.VTypes&#39;,
  *
  *         IPAddress:  function(value) {
  *             return this.IPAddressRe.test(value);
  *         },
  *         IPAddressRe: /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/,
- *         IPAddressText: 'Must be a numeric IP address',
+ *         IPAddressText: &#39;Must be a numeric IP address&#39;,
  *         IPAddressMask: /[\d\.]/i
  *     });
  *
- * It's important to note that using {@link Ext#define Ext.define()} with the {@link Ext.Class#override override} property
+ * It&#39;s important to note that using {@link Ext#define Ext.define()} with the {@link Ext.Class#override override} property
  * means that the custom validator function as well as `Text` and `Mask` fields are added as properties
  * of the `Ext.form.field.VTypes` singleton.
  */
-Ext.define('Ext.form.field.VTypes', (function(){
+Ext.define(&#39;Ext.form.field.VTypes&#39;, (function(){
     // closure these in so they are only created once.
     var alpha = /^[a-zA-Z_]+$/,
         alphanum = /^[a-zA-Z0-9_]+$/,
@@ -100,16 +100,16 @@ Ext.define('Ext.form.field.VTypes', (function(){
         // 3. Can NOT END with a period.
         // 4. Can not have MORE THAN ONE period in a row.
         //
-        // Let's break this down:
+        // Let&#39;s break this down:
         //
         // ^(&quot;)?
         // The local part may begin with double-quotes, but only if it also ends with it.
         // See the back-reference.  Capturing.
         //
         // (?:[^\.&quot;])
-        // Here we've defined that the local part cannot begin with a period or a double-quote.  Non-capturing.
+        // Here we&#39;ve defined that the local part cannot begin with a period or a double-quote.  Non-capturing.
         //
-        // (?:(?:[\.])?(?:[\w\-!#$%&amp;'*+/=?^_`{|}~]))*
+        // (?:(?:[\.])?(?:[\w\-!#$%&amp;&#39;*+/=?^_`{|}~]))*
         // After the first character is matched, the regex ensures that there is not more than one period
         // in a row.  Then, this nested grouping allows for zero or more of the accepted characters.
         // NOTE that this also ensures that any character not defined in the character class
@@ -118,13 +118,13 @@ Ext.define('Ext.form.field.VTypes', (function(){
         // \1@
         // The local part of the address is a backreference to the first (and only) capturing group that allows
         // for a double-quote to wrap the local part of an email address.
-        email = /^(&quot;)?(?:[^\.&quot;\s])(?:(?:[\.])?(?:[\w\-!#$%&amp;'*+/=?^_`{|}~]))*\1@(\w[\-\w]*\.){1,5}([A-Za-z]){2,6}$/,
+        email = /^(&quot;)?(?:[^\.&quot;\s])(?:(?:[\.])?(?:[\w\-!#$%&amp;&#39;*+/=?^_`{|}~]))*\1@(\w[\-\w]*\.){1,5}([A-Za-z]){2,6}$/,
         url = /(((^https?)|(^ftp)):\/\/((([\-\w]+\.)+\w{2,3}(\/[%\-\w]+(\.\w{2,})?)*(([\w\-\.\?\\\/+@&amp;#;`~=%!]*)(\.\w{2,})?)*)|(localhost|LOCALHOST))\/?)/i;
 
     // All these messages and functions are configurable
     return {
         singleton: true,
-        alternateClassName: 'Ext.form.VTypes',
+        alternateClassName: &#39;Ext.form.VTypes&#39;,
 
 <span id='Ext-form-field-VTypes-method-email'>        /**
 </span>         * The function used to validate email addresses. Note that complete validation per the email RFC
@@ -137,7 +137,7 @@ Ext.define('Ext.form.field.VTypes', (function(){
          * - `barney.rubble@example.com`
          * - `barney-rubble@example.coop`
          * - `barney+rubble@example.com`
-         * - `barney'rubble@example.com`
+         * - `barney&#39;rubble@example.com`
          * - `b.arne.y_r.ubbl.e@example.com`
          * - `barney4rubble@example.com`
          * - `barney4rubble!@example.com`
@@ -149,39 +149,39 @@ Ext.define('Ext.form.field.VTypes', (function(){
          * @param {String} value The email address
          * @return {Boolean} true if the RegExp test passed, and false if not.
          */
-        'email' : function(value){
+        &#39;email&#39; : function(value){
             return email.test(value);
         },
         //&lt;locale&gt;
 <span id='Ext-form-field-VTypes-property-emailText'>        /**
 </span>         * @property {String} emailText
          * The error text to display when the email validation function returns false.
-         * Defaults to: 'This field should be an e-mail address in the format &quot;user@example.com&quot;'
+         * Defaults to: &#39;This field should be an e-mail address in the format &quot;user@example.com&quot;&#39;
          */
-        'emailText' : 'This field should be an e-mail address in the format &quot;user@example.com&quot;',
+        &#39;emailText&#39; : &#39;This field should be an e-mail address in the format &quot;user@example.com&quot;&#39;,
         //&lt;/locale&gt;
 <span id='Ext-form-field-VTypes-property-emailMask'>        /**
 </span>         * @property {RegExp} emailMask
          * The keystroke filter mask to be applied on email input. See the {@link #email} method for information about
          * more complex email validation. Defaults to: /[a-z0-9_\.\-@]/i
          */
-        'emailMask' : /[\w.\-@'&quot;!#$%&amp;'*+/=?^_`{|}~]/i,
+        &#39;emailMask&#39; : /[\w.\-@&#39;&quot;!#$%&amp;&#39;*+/=?^_`{|}~]/i,
 
 <span id='Ext-form-field-VTypes-method-url'>        /**
 </span>         * The function used to validate URLs
          * @param {String} value The URL
          * @return {Boolean} true if the RegExp test passed, and false if not.
          */
-        'url' : function(value){
+        &#39;url&#39; : function(value){
             return url.test(value);
         },
         //&lt;locale&gt;
 <span id='Ext-form-field-VTypes-property-urlText'>        /**
 </span>         * @property {String} urlText
          * The error text to display when the url validation function returns false.
-         * Defaults to: 'This field should be a URL in the format &quot;http:/'+'/www.example.com&quot;'
+         * Defaults to: &#39;This field should be a URL in the format &quot;http:/&#39;+&#39;/www.example.com&quot;&#39;
          */
-        'urlText' : 'This field should be a URL in the format &quot;http:/'+'/www.example.com&quot;',
+        &#39;urlText&#39; : &#39;This field should be a URL in the format &quot;http:/&#39;+&#39;/www.example.com&quot;&#39;,
         //&lt;/locale&gt;
 
 <span id='Ext-form-field-VTypes-method-alpha'>        /**
@@ -189,44 +189,44 @@ Ext.define('Ext.form.field.VTypes', (function(){
          * @param {String} value The value
          * @return {Boolean} true if the RegExp test passed, and false if not.
          */
-        'alpha' : function(value){
+        &#39;alpha&#39; : function(value){
             return alpha.test(value);
         },
         //&lt;locale&gt;
 <span id='Ext-form-field-VTypes-property-alphaText'>        /**
 </span>         * @property {String} alphaText
          * The error text to display when the alpha validation function returns false.
-         * Defaults to: 'This field should only contain letters and _'
+         * Defaults to: &#39;This field should only contain letters and _&#39;
          */
-        'alphaText' : 'This field should only contain letters and _',
+        &#39;alphaText&#39; : &#39;This field should only contain letters and _&#39;,
         //&lt;/locale&gt;
 <span id='Ext-form-field-VTypes-property-alphaMask'>        /**
 </span>         * @property {RegExp} alphaMask
          * The keystroke filter mask to be applied on alpha input. Defaults to: /[a-z_]/i
          */
-        'alphaMask' : /[a-z_]/i,
+        &#39;alphaMask&#39; : /[a-z_]/i,
 
 <span id='Ext-form-field-VTypes-method-alphanum'>        /**
 </span>         * The function used to validate alphanumeric values
          * @param {String} value The value
          * @return {Boolean} true if the RegExp test passed, and false if not.
          */
-        'alphanum' : function(value){
+        &#39;alphanum&#39; : function(value){
             return alphanum.test(value);
         },
         //&lt;locale&gt;
 <span id='Ext-form-field-VTypes-property-alphanumText'>        /**
 </span>         * @property {String} alphanumText
          * The error text to display when the alphanumeric validation function returns false.
-         * Defaults to: 'This field should only contain letters, numbers and _'
+         * Defaults to: &#39;This field should only contain letters, numbers and _&#39;
          */
-        'alphanumText' : 'This field should only contain letters, numbers and _',
+        &#39;alphanumText&#39; : &#39;This field should only contain letters, numbers and _&#39;,
         //&lt;/locale&gt;
 <span id='Ext-form-field-VTypes-property-alphanumMask'>        /**
 </span>         * @property {RegExp} alphanumMask
          * The keystroke filter mask to be applied on alphanumeric input. Defaults to: /[a-z0-9_]/i
          */
-        'alphanumMask' : /[a-z0-9_]/i
+        &#39;alphanumMask&#39; : /[a-z0-9_]/i
     };
 }()));
 </pre>

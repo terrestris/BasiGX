@@ -18,8 +18,8 @@
   <pre class="prettyprint lang-js"><span id='Ext-sparkline-CanvasCanvas'>/**
 </span> * @private
  */
-Ext.define('Ext.sparkline.CanvasCanvas', {
-    extend: 'Ext.sparkline.CanvasBase',
+Ext.define(&#39;Ext.sparkline.CanvasCanvas&#39;, {
+    extend: &#39;Ext.sparkline.CanvasBase&#39;,
 
     statics: {
 <span id='Ext-sparkline-CanvasCanvas-static-property-contextOverrides'>        contextOverrides: (function () {
@@ -78,13 +78,13 @@ Ext.define('Ext.sparkline.CanvasCanvas', {
     },
 
 <span id='Ext-sparkline-CanvasCanvas-method-_getContext'>    _getContext: function (lineColor, fillColor, lineWidth) {
-</span>        var context = this.el.dom.getContext('2d'),
+</span>        var context = this.el.dom.getContext(&#39;2d&#39;),
             overrides = Ext.sparkline.CanvasCanvas.contextOverrides,
             name;
 
         if (!this.context) {
             for (name in overrides) {
-                context['$' + name] = context[name];
+                context[&#39;$&#39; + name] = context[name];
             }
             Ext.apply(context, overrides);
             context.rtl = this.rtl;
@@ -257,7 +257,7 @@ Ext.define('Ext.sparkline.CanvasCanvas', {
         for (i = 0; i &lt; shapeCount; i++) {
             shapeid = shapeseq[i];
             shape = shapes[shapeid];
-            this['_draw' + shape.type].apply(this, shape.args);
+            this[&#39;_draw&#39; + shape.type].apply(this, shape.args);
         }
         if (!this.interact) {
             // not interactive so no need to keep the shapes array

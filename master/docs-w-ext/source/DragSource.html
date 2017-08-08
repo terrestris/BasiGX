@@ -18,11 +18,11 @@
   <pre class="prettyprint lang-js"><span id='Ext-dd-DragSource'>/**
 </span> * A simple class that provides the basic implementation needed to make any element draggable.
  */
-Ext.define('Ext.dd.DragSource', {
-    extend: 'Ext.dd.DDProxy',
+Ext.define(&#39;Ext.dd.DragSource&#39;, {
+    extend: &#39;Ext.dd.DDProxy&#39;,
     requires: [
-        'Ext.dd.StatusProxy',
-        'Ext.dd.DragDropManager'
+        &#39;Ext.dd.StatusProxy&#39;,
+        &#39;Ext.dd.DragDropManager&#39;
     ],
 
 <span id='Ext-dd-DragSource-cfg-ddGroup'>    /**
@@ -35,19 +35,19 @@ Ext.define('Ext.dd.DragSource', {
 </span>     * @property {Object} dragData
      * This property contains the data representing the dragged object. This data is set up by the implementation of the
      * {@link #getDragData} method. It must contain a ddel property, but can contain any other data according to the
-     * application's needs.
+     * application&#39;s needs.
      */
 
 <span id='Ext-dd-DragSource-cfg-dropAllowed'>    /**
 </span>     * @cfg {String} dropAllowed
      * The CSS class returned to the drag source when drop is allowed.
      */
-    dropAllowed : Ext.baseCSSPrefix + 'dd-drop-ok',
+    dropAllowed : Ext.baseCSSPrefix + &#39;dd-drop-ok&#39;,
 <span id='Ext-dd-DragSource-cfg-dropNotAllowed'>    /**
 </span>     * @cfg {String} dropNotAllowed
      * The CSS class returned to the drag source when drop is not allowed.
      */
-    dropNotAllowed : Ext.baseCSSPrefix + 'dd-drop-nodrop',
+    dropNotAllowed : Ext.baseCSSPrefix + &#39;dd-drop-nodrop&#39;,
 
 <span id='Ext-dd-DragSource-cfg-animRepair'>    /**
 </span>     * @cfg {Boolean} animRepair
@@ -59,9 +59,9 @@ Ext.define('Ext.dd.DragSource', {
 </span>     * @cfg {String} repairHighlightColor
      * The color to use when visually highlighting the drag source in the afterRepair
      * method after a failed drop (defaults to light blue). The color must be a 6 digit hex value, without
-     * a preceding '#'.
+     * a preceding &#39;#&#39;.
      */
-    repairHighlightColor: 'c3daf9',
+    repairHighlightColor: &#39;c3daf9&#39;,
 
 <span id='Ext-dd-DragSource-method-constructor'>    /**
 </span>     * Creates new drag-source.
@@ -78,7 +78,7 @@ Ext.define('Ext.dd.DragSource', {
 
         if(!this.proxy){
             this.proxy = new Ext.dd.StatusProxy({
-                id: this.el.id + '-drag-status-proxy',
+                id: this.el.id + &#39;-drag-status-proxy&#39;,
                 animRepair: this.animRepair
             });
         }
@@ -410,7 +410,7 @@ Ext.define('Ext.dd.DragSource', {
     },
 
 <span id='Ext-dd-DragSource-method-getProxy'>    /**
-</span>     * Returns the drag source's underlying {@link Ext.dd.StatusProxy}
+</span>     * Returns the drag source&#39;s underlying {@link Ext.dd.StatusProxy}
      * @return {Ext.dd.StatusProxy} proxy The StatusProxy
      */
     getProxy: function() {
@@ -418,7 +418,7 @@ Ext.define('Ext.dd.DragSource', {
     },
 
 <span id='Ext-dd-DragSource-method-hideProxy'>    /**
-</span>     * Hides the drag source's {@link Ext.dd.StatusProxy}
+</span>     * Hides the drag source&#39;s {@link Ext.dd.StatusProxy}
      */
     hideProxy: function() {
         this.proxy.hide();

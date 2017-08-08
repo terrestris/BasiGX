@@ -15,9 +15,9 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.scroll.LockingScroller', {
-    extend: 'Ext.scroll.Scroller',
-    alias: 'scroller.locking',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.scroll.LockingScroller&#39;, {
+    extend: &#39;Ext.scroll.Scroller&#39;,
+    alias: &#39;scroller.locking&#39;,
 
     config: {
         lockedScroller: null,
@@ -39,12 +39,12 @@
     },
 
     updateLockedScroller: function(lockedScroller) {
-        lockedScroller.on('scroll', 'onLockedScroll', this);
+        lockedScroller.on(&#39;scroll&#39;, &#39;onLockedScroll&#39;, this);
         lockedScroller.setLockingScroller(this);
     },
 
     updateNormalScroller: function(normalScroller) {
-        normalScroller.on('scroll', 'onNormalScroll', this);
+        normalScroller.on(&#39;scroll&#39;, &#39;onNormalScroll&#39;, this);
         normalScroller.setLockingScroller(this);
     },
 

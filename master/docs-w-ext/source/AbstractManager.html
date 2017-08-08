@@ -20,15 +20,15 @@
  * @private
  * @deprecated
  */
-Ext.define('Ext.AbstractManager', {
+Ext.define(&#39;Ext.AbstractManager&#39;, {
 
     /* Begin Definitions */
 
-    requires: ['Ext.util.HashMap'],
+    requires: [&#39;Ext.util.HashMap&#39;],
 
 <span id='Ext-AbstractManager-property-typeName'>    /* End Definitions */
 </span>
-    typeName: 'type',
+    typeName: &#39;type&#39;,
 
 <span id='Ext-AbstractManager-method-constructor'>    constructor: function(config) {
 </span>        Ext.apply(this, config || {});
@@ -60,10 +60,10 @@ Ext.define('Ext.AbstractManager', {
         //&lt;debug&gt;
         var key = this.all.getKey(item);
         if (key === undefined) {
-            Ext.raise('Key is undefined. Please ensure the item has a key before registering the item.');
+            Ext.raise(&#39;Key is undefined. Please ensure the item has a key before registering the item.&#39;);
         }
         if (this.all.containsKey(key)) {
-            Ext.raise('Registering duplicate id &quot;' + key + '&quot; with ' + this.$className);
+            Ext.raise(&#39;Registering duplicate id &quot;&#39; + key + &#39;&quot; with &#39; + this.$className);
         }
         //&lt;/debug&gt;
 
@@ -110,7 +110,7 @@ Ext.define('Ext.AbstractManager', {
 
         //&lt;debug&gt;
         if (Constructor === undefined) {
-            Ext.raise(&quot;The '&quot; + type + &quot;' type has not been registered with this manager&quot;);
+            Ext.raise(&quot;The &#39;&quot; + type + &quot;&#39; type has not been registered with this manager&quot;);
         }
         //&lt;/debug&gt;
 
@@ -137,10 +137,10 @@ Ext.define('Ext.AbstractManager', {
             callback = function(map, key, item){
                 if (key == id) {
                     fn.call(scope || item, item);
-                    all.un('add', callback);
+                    all.un(&#39;add&#39;, callback);
                 }
             }; 
-            all.on('add', callback);
+            all.on(&#39;add&#39;, callback);
         }
     },
     

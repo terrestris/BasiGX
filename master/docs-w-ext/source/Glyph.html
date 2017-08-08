@@ -21,7 +21,7 @@
  * A class which parses a `glyph` config and provides ways of creating the relevant DOM or yielding
  * information about the selected codepoint and font.
  */
-Ext.define('Ext.Glyph', {
+Ext.define(&#39;Ext.Glyph&#39;, {
 
 <span id='Ext-Glyph-property-isGlyph'>    /**
 </span>     * @property {Boolean} isGlyph
@@ -46,7 +46,7 @@ Ext.define('Ext.Glyph', {
      * The default font-family  for glyphs can be set globally using 
      * {@link Ext.app.Application#glyphFontFamily glyphFontFamily} application 
      * config or the {@link Ext#setGlyphFontFamily Ext.setGlyphFontFamily()} method.
-     * It is initially set to `'Pictos'`.
+     * It is initially set to `&#39;Pictos&#39;`.
      */
 
 <span id='Ext-Glyph-method-constructor'>    /**
@@ -55,13 +55,13 @@ Ext.define('Ext.Glyph', {
      * If a `string` is passed, it may be the character itself, or the unicode codepoint.
      * for example:
      *
-     *     new Ext.Glyph('H');      // the &quot;home&quot; icon in the default (Pictos) font.
-     *     new Ext.Glyph('x48');    // the &quot;home&quot; icon in the default (Pictos) font.
+     *     new Ext.Glyph(&#39;H&#39;);      // the &quot;home&quot; icon in the default (Pictos) font.
+     *     new Ext.Glyph(&#39;x48&#39;);    // the &quot;home&quot; icon in the default (Pictos) font.
      *     new Ext.Glyph(72);       // the &quot;home&quot; icon in the default (Pictos) font.
      *
      * An `@` separator may be used to denote the font:
      *
-     *     new Ext.Glyph('xf015@FontAwesome');  // The &quot;home&quot; icon in the FontAwesome font.
+     *     new Ext.Glyph(&#39;xf015@FontAwesome&#39;);  // The &quot;home&quot; icon in the FontAwesome font.
      */
     constructor: function(glyph) {
         glyph &amp;&amp; this.setGlyph(glyph);
@@ -73,27 +73,27 @@ Ext.define('Ext.Glyph', {
      * If a `string` is passed, it may be the character itself, or the unicode codepoint.
      * for example:
      *
-     *     myGlyph.setGlyph('H');      // the &quot;home&quot; icon in the default (Pictos) font.
-     *     myGlyph.setGlyph('x48');    // the &quot;home&quot; icon in the default (Pictos) font.
+     *     myGlyph.setGlyph(&#39;H&#39;);      // the &quot;home&quot; icon in the default (Pictos) font.
+     *     myGlyph.setGlyph(&#39;x48&#39;);    // the &quot;home&quot; icon in the default (Pictos) font.
      *     myGlyph.setGlyph(72);       // the &quot;home&quot; icon in the default (Pictos) font.
      *
      * An `@` separator may be used to denote the font:
      *
-     *     myGlyph.setGlyph('xf015@FontAwesome');  // The &quot;home&quot; icon in the FontAwesome font.
+     *     myGlyph.setGlyph(&#39;xf015@FontAwesome&#39;);  // The &quot;home&quot; icon in the FontAwesome font.
      *
      */
     setGlyph: function(glyph) {
         var glyphParts;
 
         this.glyphConfig = glyph;
-        if (typeof glyph === 'string') {
-            glyphParts = glyph.split('@');
+        if (typeof glyph === &#39;string&#39;) {
+            glyphParts = glyph.split(&#39;@&#39;);
 
             // If the glyph specification cannot be parsed as a number
             // we use the codepoint of the first character.
-            // If the raw string isNaN, we prepend '0' so that a possible 'xf005' will parse as hex,
+            // If the raw string isNaN, we prepend &#39;0&#39; so that a possible &#39;xf005&#39; will parse as hex,
             // otherwise parse it as decimal.
-            if (isNaN(glyph = isNaN(glyphParts[0]) ? parseInt('0' + glyphParts[0], 16) : parseInt(glyphParts[0], 10)) || !glyph) {
+            if (isNaN(glyph = isNaN(glyphParts[0]) ? parseInt(&#39;0&#39; + glyphParts[0], 16) : parseInt(glyphParts[0], 10)) || !glyph) {
                 glyph = glyphParts[0].charCodeAt(0);
             }
             this.fontFamily = glyphParts[1] || Ext._glyphFontFamily;
@@ -107,7 +107,7 @@ Ext.define('Ext.Glyph', {
 
 <span id='Ext-Glyph-method-getStyle'>    getStyle: function() {
 </span>        return {
-            'font-family': this.fontFamily
+            &#39;font-family&#39;: this.fontFamily
         };
     },
 
@@ -131,13 +131,13 @@ Ext.define('Ext.Glyph', {
              * If a `string` is passed, it may be the character itself, or the unicode codepoint.
              * for example:
              *
-             *     Ext.Glyph.fly('H');      // the &quot;home&quot; icon in the default (Pictos) font.
-             *     Ext.Glyph.fly('x48');    // the &quot;home&quot; icon in the default (Pictos) font.
+             *     Ext.Glyph.fly(&#39;H&#39;);      // the &quot;home&quot; icon in the default (Pictos) font.
+             *     Ext.Glyph.fly(&#39;x48&#39;);    // the &quot;home&quot; icon in the default (Pictos) font.
              *     Ext.Glyph.fly(72);       // the &quot;home&quot; icon in the default (Pictos) font.
              *
              * An `@` separator may be used to denote the font:
              *
-             *     Ext.Glyph.fly('xf015@FontAwesome');  // The &quot;home&quot; icon in the FontAwesome font.
+             *     Ext.Glyph.fly(&#39;xf015@FontAwesome&#39;);  // The &quot;home&quot; icon in the FontAwesome font.
              *
              * @returns {Ext.Glyph} A static `Glyph` instance encapsulating the passed configuration.
              */

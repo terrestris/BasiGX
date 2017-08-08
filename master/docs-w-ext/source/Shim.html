@@ -25,22 +25,22 @@
  * {@link Ext.Component Components} or set {@link Ext#useShims Ext.useShims}=true.
  * @private
  */
-Ext.define('Ext.dom.Shim', {
-    extend: 'Ext.dom.Underlay',
+Ext.define(&#39;Ext.dom.Shim&#39;, {
+    extend: &#39;Ext.dom.Underlay&#39;,
     
-<span id='Ext-dom-Shim-property-cls'>    cls: Ext.baseCSSPrefix + 'shim',
+<span id='Ext-dom-Shim-property-cls'>    cls: Ext.baseCSSPrefix + &#39;shim&#39;,
 </span>    
 <span id='Ext-dom-Shim-method-constructor'>    constructor: function(config) {
 </span>        this.callParent([config]);
 
         this.elementConfig = {
-            tag: 'iframe',
+            tag: &#39;iframe&#39;,
             cls: this.cls,
-            role: 'presentation',
-            frameBorder: '0',
+            role: &#39;presentation&#39;,
+            frameBorder: &#39;0&#39;,
             src: Ext.SSL_SECURE_URL,
             // tabIndex of -1 ensures that the iframe is not focusable by the user
-            tabindex: '-1'
+            tabindex: &#39;-1&#39;
         };
     },
 

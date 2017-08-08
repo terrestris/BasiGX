@@ -24,15 +24,15 @@
  * such as DataViews and Charts. It allows notification of mousenter events from 
  * child nodes witghout having to add  listeners to each child element.
  */
-Ext.define('Ext.plugin.MouseEnter', {
-    extend: 'Ext.plugin.Abstract',
-    alias: 'plugin.mouseenter',
+Ext.define(&#39;Ext.plugin.MouseEnter&#39;, {
+    extend: &#39;Ext.plugin.Abstract&#39;,
+    alias: &#39;plugin.mouseenter&#39;,
 
 <span id='Ext-plugin-MouseEnter-cfg-element'>    /**
 </span>     * @cfg {Ext.dom.Element/String} [element=&quot;el&quot;] The element, or component element reference
      * name to which to add the mouse listener.
      */
-    element: 'el',
+    element: &#39;el&#39;,
 
 <span id='Ext-plugin-MouseEnter-cfg-delegate'>    /**
 </span>     * @cfg {String} delegate A query selector string to identify descendant elements
@@ -60,10 +60,10 @@ Ext.define('Ext.plugin.MouseEnter', {
     init: function (component) {
         //&lt;debug&gt;
         if (!this.delegate) {
-            Ext.raise('mouseenter plugin must be configured with a delegate selector');
+            Ext.raise(&#39;mouseenter plugin must be configured with a delegate selector&#39;);
         }
         if (!this.handler) {
-            Ext.raise('mouseenter plugin must be configured with handler callback');
+            Ext.raise(&#39;mouseenter plugin must be configured with handler callback&#39;);
         }
         //&lt;/debug&gt;
         var me = this,
@@ -78,7 +78,7 @@ Ext.define('Ext.plugin.MouseEnter', {
         }
 
         // Element being a string means a referenced element name in the Component
-        if (typeof me.element === 'string') {
+        if (typeof me.element === &#39;string&#39;) {
             listeners.element = me.element;
             me.mouseListener = component.on(listeners);
         } else {

@@ -20,8 +20,8 @@
  * `Ext.layout.container.Border` class requires this override so that the added functions
  * are only included in a build when `border` layout is used.
  */
-Ext.define('Ext.layout.container.border.Region', {
-    override: 'Ext.Component',
+Ext.define(&#39;Ext.layout.container.border.Region&#39;, {
+    override: &#39;Ext.Component&#39;,
 
 <span id='Ext-Component-method-initBorderRegion'>    /**
 </span>     * This method is called by the `Ext.layout.container.Border` class when instances are
@@ -38,7 +38,7 @@ Ext.define('Ext.layout.container.border.Region', {
 
             // Now that border regions can have dynamic region/weight, these need to be
             // saved to state as they change:
-            me.addStateEvents(['changeregion', 'changeweight']);
+            me.addStateEvents([&#39;changeregion&#39;, &#39;changeweight&#39;]);
 
             // We override getState on the instance for a couple reasons. Firstly, since
             // there are very few border regions in an application, the overhead here is
@@ -50,8 +50,8 @@ Ext.define('Ext.layout.container.border.Region', {
 
                     // Now that border regions can have dynamic region/weight, these need to be saved
                     // to state:
-                    state = me.addPropertyToState(state, 'region');
-                    state = me.addPropertyToState(state, 'weight');
+                    state = me.addPropertyToState(state, &#39;region&#39;);
+                    state = me.addPropertyToState(state, &#39;weight&#39;);
 
                     return state;
                 }
@@ -95,10 +95,10 @@ Ext.define('Ext.layout.container.border.Region', {
             old = me.region;
 
         //&lt;debug&gt;
-        if (typeof region !== 'string') {
+        if (typeof region !== &#39;string&#39;) {
             // This method used to be basically the same as setBox, so check for an
             // accidental use of the old signature.
-            Ext.raise('Use setBox to set the size or position of a component.');
+            Ext.raise(&#39;Use setBox to set the size or position of a component.&#39;);
         }
         //&lt;/debug&gt;
 
@@ -113,7 +113,7 @@ Ext.define('Ext.layout.container.border.Region', {
                     collapsed = me.collapsed || me.floated,
                     delta, items, index;
 
-                if (me.fireEventArgs('beforechangeregion', [me, region]) === false) {
+                if (me.fireEventArgs(&#39;beforechangeregion&#39;, [me, region]) === false) {
                     return old;
                 }
                 Ext.suspendLayouts();
@@ -126,7 +126,7 @@ Ext.define('Ext.layout.container.border.Region', {
                 }
 
                 if (splitter) {
-                    // splitter.region = region; -- we don't set &quot;region&quot; on splitters!
+                    // splitter.region = region; -- we don&#39;t set &quot;region&quot; on splitters!
                     Ext.apply(splitter, regionFlags);
                     splitter.updateOrientation();
 
@@ -170,7 +170,7 @@ Ext.define('Ext.layout.container.border.Region', {
                 owner.updateLayout();
                 Ext.resumeLayouts(true);
 
-                me.fireEventArgs('changeregion', [me, old]);
+                me.fireEventArgs(&#39;changeregion&#39;, [me, old]);
             } else {
                 me.region = region; // maybe not added yet
             }
@@ -192,7 +192,7 @@ Ext.define('Ext.layout.container.border.Region', {
             old = me.weight;
 
         if (weight !== old) {
-            if (me.fireEventArgs('beforechangeweight', [me, weight]) !== false) {
+            if (me.fireEventArgs(&#39;beforechangeweight&#39;, [me, weight]) !== false) {
                 me.weight = weight;
                 if (placeholder) {
                     placeholder.weight = weight;
@@ -200,7 +200,7 @@ Ext.define('Ext.layout.container.border.Region', {
                 if (ownerCt) {
                     ownerCt.updateLayout();
                 }
-                me.fireEventArgs('changeweight', [me, old]);
+                me.fireEventArgs(&#39;changeweight&#39;, [me, old]);
             }
         }
 

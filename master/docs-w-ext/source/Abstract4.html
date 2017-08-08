@@ -30,8 +30,8 @@
  *     destruction time. Use this method to break links between the plugin and the
  *     Component and to free any allocated resources.
  */
-Ext.define('Ext.plugin.Abstract', {
-    alternateClassName: 'Ext.AbstractPlugin',
+Ext.define(&#39;Ext.plugin.Abstract&#39;, {
+    alternateClassName: &#39;Ext.AbstractPlugin&#39;,
 
 <span id='Ext-plugin-Abstract-property-isPlugin'>    /**
 </span>     * @property {Boolean} isPlugin
@@ -90,16 +90,16 @@ Ext.define('Ext.plugin.Abstract', {
      * plugin using the {@link #getPlugin getPlugin} method. For example:
      *
      *      var panel = Ext.create({
-     *          xtype: 'panel',
+     *          xtype: &#39;panel&#39;,
      *
      *          plugins: [{
-     *              id: 'foo',
+     *              id: &#39;foo&#39;,
      *              ...
      *          }]
      *      });
      *
      *      // later on:
-     *      var plugin = panel.getPlugin('foo');
+     *      var plugin = panel.getPlugin(&#39;foo&#39;);
      * @since 6.2.0
      */
 
@@ -140,7 +140,7 @@ Ext.define('Ext.plugin.Abstract', {
                 alias = alias[0];
             }
             
-            prototype.ptype = alias.split('plugin.')[1];
+            prototype.ptype = alias.split(&#39;plugin.&#39;)[1];
         }
     },
 

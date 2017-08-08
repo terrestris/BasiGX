@@ -15,13 +15,13 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.rtl.tab.Bar', {
-    override: 'Ext.tab.Bar',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.rtl.tab.Bar&#39;, {
+    override: &#39;Ext.tab.Bar&#39;,
 
     privates: {
         // rtl hook
         _getTabAdjustProp: function() {
-            return this.getInherited().rtl ? 'right' : 'left';
+            return this.getInherited().rtl ? &#39;right&#39; : &#39;left&#39;;
         },
 
         getCloseXY: function(closeEl, tabX, tabY, tabWidth, tabHeight, closeWidth, closeHeight, direction) {
@@ -29,7 +29,7 @@
 
             if (this.isOppositeRootDirection()) {
                 closeXY = closeEl.getXY();
-                if (direction === 'right') {
+                if (direction === &#39;right&#39;) {
                     closeX = tabX + closeXY[1] - tabY;
                     closeY = tabY + tabHeight - (closeXY[0] - (tabX + tabWidth - tabHeight)) - closeWidth;
                 } else {

@@ -22,14 +22,14 @@
  * see {@link Ext.dom.Element#enableShadow enableShadow} and
  * {@link Ext.dom.Element#enableShim enableShim}
  */
-Ext.define('Ext.dom.Layer', {
-    extend: 'Ext.Element',
-    alternateClassName: 'Ext.Layer',
+Ext.define(&#39;Ext.dom.Layer&#39;, {
+    extend: &#39;Ext.Element&#39;,
+    alternateClassName: &#39;Ext.Layer&#39;,
 
 <span id='Ext-dom-Layer-cfg-shadow'>    /**
 </span>     * @cfg {String/Boolean} [shadow=false]
      * True to automatically create an {@link Ext.Shadow}, or a string indicating the
-     * shadow's display {@link Ext.Shadow#mode}. False to disable the shadow.
+     * shadow&#39;s display {@link Ext.Shadow#mode}. False to disable the shadow.
      */
 
 <span id='Ext-dom-Layer-cfg-shim'>    /**
@@ -38,7 +38,7 @@ Ext.define('Ext.dom.Layer', {
      */
 
 <span id='Ext-dom-Layer-cfg-dh'>    /**
-</span>     * @cfg {Object} [dh={tag: 'div', cls: 'x-layer'}]
+</span>     * @cfg {Object} [dh={tag: &#39;div&#39;, cls: &#39;x-layer&#39;}]
      * DomHelper object config to create element with.
      */
 
@@ -65,13 +65,13 @@ Ext.define('Ext.dom.Layer', {
 <span id='Ext-dom-Layer-cfg-useDisplay'>    /**
 </span>     * @cfg {Boolean} [useDisplay=false]
      * Defaults to use css offsets to hide the Layer. Specify &lt;tt&gt;true&lt;/tt&gt;
-     * to use css style &lt;tt&gt;'display:none;'&lt;/tt&gt; to hide the Layer.
+     * to use css style &lt;tt&gt;&#39;display:none;&#39;&lt;/tt&gt; to hide the Layer.
      */
 
 <span id='Ext-dom-Layer-cfg-visibilityCls'>    /**
 </span>     * @cfg {String} visibilityCls
      * The CSS class name to add in order to hide this Layer if this layer
-     * is configured with &lt;code&gt;{@link #hideMode}: 'asclass'&lt;/code&gt;
+     * is configured with &lt;code&gt;{@link #hideMode}: &#39;asclass&#39;&lt;/code&gt;
      */
 
 <span id='Ext-dom-Layer-cfg-hideMode'>    /**
@@ -79,9 +79,9 @@ Ext.define('Ext.dom.Layer', {
      * A String which specifies how this Layer will be hidden.
      * Values may be:
      *
-     * - `'display'` : The Component will be hidden using the `display: none` style.
-     * - `'visibility'` : The Component will be hidden using the `visibility: hidden` style.
-     * - `'offsets'` : The Component will be hidden by absolutely positioning it out of the visible area
+     * - `&#39;display&#39;` : The Component will be hidden using the `display: none` style.
+     * - `&#39;visibility&#39;` : The Component will be hidden using the `visibility: hidden` style.
+     * - `&#39;offsets&#39;` : The Component will be hidden by absolutely positioning it out of the visible area
      *   of the document. This is useful when a hidden Component must maintain measurable dimensions.
      *   Hiding using `display` results in a Component having zero dimensions.
      */
@@ -101,7 +101,7 @@ Ext.define('Ext.dom.Layer', {
             cp = config.parentEl,
             pel = cp ? Ext.getDom(cp) : document.body,
             hm = config.hideMode,
-            cls = Ext.baseCSSPrefix + (config.fixed ? 'fixed-layer' : 'layer'),
+            cls = Ext.baseCSSPrefix + (config.fixed ? &#39;fixed-layer&#39; : &#39;layer&#39;),
             dom, id, element, shadowConfig;
 
         if (existingEl) {
@@ -113,8 +113,8 @@ Ext.define('Ext.dom.Layer', {
 
         if (!dom) {
             dom = dh.append(pel, config.dh || {
-                tag: 'div',
-                cls: cls // primarily to give el 'position:absolute' or, if fixed, 'position:fixed'
+                tag: &#39;div&#39;,
+                cls: cls // primarily to give el &#39;position:absolute&#39; or, if fixed, &#39;position:fixed&#39;
             });
         }
 
@@ -150,7 +150,7 @@ Ext.define('Ext.dom.Layer', {
 
         // Allow Components to pass their hide mode down to the Layer if they are floating.
         // Otherwise, allow useDisplay to override the default hiding method which is visibility.
-        // TODO: Have ExtJS's Element implement visibilityMode by using classes as in Mobile.
+        // TODO: Have ExtJS&#39;s Element implement visibilityMode by using classes as in Mobile.
         if (hm) {
             me.setVisibilityMode(Ext.Element[hm.toUpperCase()]);
         } else if (config.useDisplay) {
@@ -182,7 +182,7 @@ Ext.define('Ext.dom.Layer', {
         }
 
         // Keep the following only for cases where Ext.Layer would be instantiated
-        // directly.  We don't ever pass hidden in the config in the framework
+        // directly.  We don&#39;t ever pass hidden in the config in the framework
         // since this is handled by the Component lifecycle.
         if (config.hidden === true) {
             me.hide();

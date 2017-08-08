@@ -47,25 +47,25 @@
  * Example usage:
  *
  *     @example
- *     Ext.define('ActionsExampleController', {
- *         extend: 'Ext.app.ViewController',
- *         alias: 'controller.actionsexample',
+ *     Ext.define(&#39;ActionsExampleController&#39;, {
+ *         extend: &#39;Ext.app.ViewController&#39;,
+ *         alias: &#39;controller.actionsexample&#39;,
  *
  *         onOperationClick: function() {
- *             Ext.Msg.alert('Click', 'Perform the operation');
+ *             Ext.Msg.alert(&#39;Click&#39;, &#39;Perform the operation&#39;);
  *         },
  *
  *         onOperationToggle: function(btn, pressed) {
  *             // The action controls all UI components created from it.
- *             this.view.getAction('operation').setDisabled(pressed);
+ *             this.view.getAction(&#39;operation&#39;).setDisabled(pressed);
  *         }
  *     });
  *
- *     Ext.define('ActionsPanel', {
- *         extend: 'Ext.panel.Panel',
- *         controller: 'actionsexample',
+ *     Ext.define(&#39;ActionsPanel&#39;, {
+ *         extend: &#39;Ext.panel.Panel&#39;,
+ *         controller: &#39;actionsexample&#39;,
  *
- *         title: 'Actions',
+ *         title: &#39;Actions&#39;,
  *         width: 500,
  *         height: 300,
  *
@@ -74,49 +74,49 @@
  *         // same controller method on click.
  *         actions: {
  *             operation: {
- *                 text: 'Do operation',
- *                  handler: 'onOperationClick',
- *                 glyph: 'xf005@FontAwesome',
- *                 tooltip: 'Perform the operation'
+ *                 text: &#39;Do operation&#39;,
+ *                  handler: &#39;onOperationClick&#39;,
+ *                 glyph: &#39;xf005@FontAwesome&#39;,
+ *                 tooltip: &#39;Perform the operation&#39;
  *             },
  *             disableOperation: {
- *                 text: 'Disable operation',
+ *                 text: &#39;Disable operation&#39;,
  *                 enableToggle: true,
- *                 toggleHandler: 'onOperationToggle',
- *                 tooltip: 'Disable the operation'
+ *                 toggleHandler: &#39;onOperationToggle&#39;,
+ *                 tooltip: &#39;Disable the operation&#39;
  *             }
  *         },
  *
  *         // Actions are interpreted as Buttons by this view.
  *         // Other descendants such as Menus and Toolbars have
  *         // their own defaults.
- *         defaultActionType: 'button',
+ *         defaultActionType: &#39;button&#39;,
  *
  *         tools: [
- *             '@operation'
+ *             &#39;@operation&#39;
  *         ],
  *
  *         tbar: [
  *             // Add the Action directly to a toolbar as a menu button
- *             '@operation',
+ *             &#39;@operation&#39;,
  *             {
- *                 text: 'Action Menu',
+ *                 text: &#39;Action Menu&#39;,
  *                 menu: [
  *                     // Add the Action to a menu as a text item
- *                     '@operation'
+ *                     &#39;@operation&#39;
  *                 ]
- *             }, '@disableOperation'
+ *             }, &#39;@disableOperation&#39;
  *         ],
  *
  *         bodyPadding: 10,
  *         layout: {
- *             type: 'vbox',
- *             align: 'stretch'
+ *             type: &#39;vbox&#39;,
+ *             align: &#39;stretch&#39;
  *         },
  *         items: [
  *             // Add the Action to the panel body.
  *             // defaultActionType will ensure it is converted to a Button.
- *             '@operation'
+ *             &#39;@operation&#39;
  *         ]
  *     });
  *
@@ -125,10 +125,10 @@
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.Action', {
+Ext.define(&#39;Ext.Action&#39;, {
 
 <span id='Ext-Action-cfg-text'>    /**
-</span>     * @cfg {String} [text='']
+</span>     * @cfg {String} [text=&#39;&#39;]
      * The text to set for all components configured by this Action.
      */
 <span id='Ext-Action-cfg-glyph'>    /**
@@ -137,7 +137,7 @@ Ext.define('Ext.Action', {
      * @since 6.2.0
      */
 <span id='Ext-Action-cfg-iconCls'>    /**
-</span>     * @cfg {String} [iconCls='']
+</span>     * @cfg {String} [iconCls=&#39;&#39;]
      * @localdoc **Note:** The CSS class(es) specifying the background image will apply 
      * to all components configured by this Action.
      * @inheritdoc Ext.panel.Header#cfg-iconCls
@@ -153,7 +153,7 @@ Ext.define('Ext.Action', {
 <span id='Ext-Action-cfg-handler'>    /**
 </span>     * @cfg {String/Function} handler
      * The function that will be invoked by each component tied to this Action
-     * when the component's primary event is triggered.
+     * when the component&#39;s primary event is triggered.
      */
 <span id='Ext-Action-cfg-itemId'>    /**
 </span>     * @cfg {String} itemId
@@ -188,7 +188,7 @@ Ext.define('Ext.Action', {
      */
     setText : function(text){
         this.initialConfig.text = text;
-        this.callEach('setText', [text]);
+        this.callEach(&#39;setText&#39;, [text]);
     },
 
 <span id='Ext-Action-method-getText'>    /**
@@ -206,7 +206,7 @@ Ext.define('Ext.Action', {
      */
     setIconCls : function(cls){
         this.initialConfig.iconCls = cls;
-        this.callEach('setIconCls', [cls]);
+        this.callEach(&#39;setIconCls&#39;, [cls]);
     },
 
 <span id='Ext-Action-method-setGlyph'>    /**
@@ -216,7 +216,7 @@ Ext.define('Ext.Action', {
      */
     setGlyph : function(glyph){
         this.initialConfig.glyph = glyph;
-        this.callEach('setGlyph', [glyph]);
+        this.callEach(&#39;setGlyph&#39;, [glyph]);
     },
 
 <span id='Ext-Action-method-getIconCls'>    /**
@@ -233,7 +233,7 @@ Ext.define('Ext.Action', {
      */
     setDisabled : function(disabled){
         this.initialConfig.disabled = disabled;
-        this.callEach('setDisabled', [disabled]);
+        this.callEach(&#39;setDisabled&#39;, [disabled]);
     },
 
 <span id='Ext-Action-method-enable'>    /**
@@ -264,7 +264,7 @@ Ext.define('Ext.Action', {
      */
     setHidden : function(hidden){
         this.initialConfig.hidden = hidden;
-        this.callEach('setVisible', [!hidden]);
+        this.callEach(&#39;setVisible&#39;, [!hidden]);
     },
 
 <span id='Ext-Action-method-show'>    /**
@@ -291,7 +291,7 @@ Ext.define('Ext.Action', {
 <span id='Ext-Action-method-setHandler'>    /**
 </span>     * Sets the function that will be called by each Component using this action when its
      * primary event (usually a click or tap) is triggered.
-     * @param {String/Function} handler The function that will be invoked by the action's components when clicked.
+     * @param {String/Function} handler The function that will be invoked by the action&#39;s components when clicked.
      * See the `handler` config of the target component for the arguments passed.
      * @param {Object} [scope] The scope (this reference) in which the function is executed. Defaults to an
      * encapsulating {@link Ext.app.Controller Controller}, or the Component.
@@ -299,7 +299,7 @@ Ext.define('Ext.Action', {
     setHandler : function(handler, scope){
         this.initialConfig.handler = handler;
         this.initialConfig.scope = scope;
-        this.callEach('setHandler', [handler, scope]);
+        this.callEach(&#39;setHandler&#39;, [handler, scope]);
     },
 
 <span id='Ext-Action-method-each'>    /**
@@ -335,7 +335,7 @@ Ext.define('Ext.Action', {
      */
     addComponent : function(comp){
         this.items.push(comp);
-        comp.on('destroy', this.removeComponent, this);
+        comp.on(&#39;destroy&#39;, this.removeComponent, this);
     },
 
 <span id='Ext-Action-method-removeComponent'>    /**

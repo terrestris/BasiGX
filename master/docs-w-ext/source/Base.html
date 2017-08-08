@@ -35,9 +35,9 @@
  *
  * @class BasiGX.view.button.Base
  */
-Ext.define('BasiGX.view.button.Base', {
-    extend: 'Ext.Button',
-    xtype: 'basigx-button-base',
+Ext.define(&#39;BasiGX.view.button.Base&#39;, {
+    extend: &#39;Ext.Button&#39;,
+    xtype: &#39;basigx-button-base&#39;,
 <span id='BasiGX-view-button-Base-cfg-viewModel'>    viewModel: {
 </span>        data: {}
     },
@@ -50,7 +50,7 @@ Ext.define('BasiGX.view.button.Base', {
         me.callParent(arguments);
         if (me.setTooltip) {
             var bind = me.config.bind;
-            bind.tooltip = me.getViewModel().get('tooltip');
+            bind.tooltip = me.getViewModel().get(&#39;tooltip&#39;);
             me.setBind(bind);
         }
     }

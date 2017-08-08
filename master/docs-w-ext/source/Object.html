@@ -37,9 +37,9 @@
  *
  * @class BasiGX.util.Object
  */
-Ext.define('BasiGX.util.Object', {
+Ext.define(&#39;BasiGX.util.Object&#39;, {
 
-    requires: ['BasiGX.util.Application'],
+    requires: [&#39;BasiGX.util.Application&#39;],
 
     statics: {
 
@@ -57,13 +57,13 @@ Ext.define('BasiGX.util.Object', {
          *     provided the global application context (on root-level) will
          *     be used.
          *
-         * @return {*} The target value or `undefined` if the given couldn't be
+         * @return {*} The target value or `undefined` if the given couldn&#39;t be
          *     found.
          */
         getValue: function(queryKey, queryObject) {
             var queryMatch;
 
-            // if weren't called with an queryObject, get the global application
+            // if weren&#39;t called with an queryObject, get the global application
             // context as input value
             if (!queryObject) {
                 queryObject = BasiGX.util.Application.getAppContext() ||
@@ -74,25 +74,25 @@ Ext.define('BasiGX.util.Object', {
             }
 
             if (!Ext.isObject(queryObject)) {
-                Ext.Logger.error('Missing input parameter ' +
-                        'queryObject &lt;Object&gt;!');
+                Ext.Logger.error(&#39;Missing input parameter &#39; +
+                        &#39;queryObject &lt;Object&gt;!&#39;);
                 return false;
             }
 
             if (!Ext.isString(queryKey)) {
-                Ext.Logger.error('Missing input parameter queryKey &lt;String&gt;!');
+                Ext.Logger.error(&#39;Missing input parameter queryKey &lt;String&gt;!&#39;);
                 return false;
             }
 
             // if the queryKey contains backslashes we understand this as the
             // path in the object-hierarchy and will return the last matching
             // value
-            if (queryKey.split('\/').length &gt; 1) {
-                Ext.each(queryKey.split('\/'), function(key) {
+            if (queryKey.split(&#39;\/&#39;).length &gt; 1) {
+                Ext.each(queryKey.split(&#39;\/&#39;), function(key) {
                     if (queryObject[key]) {
                         queryObject = queryObject[key];
                     } else {
-                        // if the last entry wasn't found return the last match
+                        // if the last entry wasn&#39;t found return the last match
                         return queryObject;
                     }
                 });
@@ -106,13 +106,13 @@ Ext.define('BasiGX.util.Object', {
                 // get the current value
                 var value = queryObject[key];
 
-                // if the given key is the queryKey, let's return the
+                // if the given key is the queryKey, let&#39;s return the
                 // corresponding value
                 if (key === queryKey) {
                     return value;
                 }
 
-                // if the value is an object, let's call ourself recursively
+                // if the value is an object, let&#39;s call ourself recursively
                 if (Ext.isObject(value)) {
                     queryMatch = BasiGX.util.Object.getValue(queryKey, value);
                     if (queryMatch) {
@@ -121,7 +121,7 @@ Ext.define('BasiGX.util.Object', {
                 }
 
                 // if the value is an array and the array contains an object as
-                // well, let's call ourself recursively for this object
+                // well, let&#39;s call ourself recursively for this object
                 if (Ext.isArray(value)) {
                     for (var i = 0; i &lt; value.length; i++) {
                         var val = value[i];
@@ -136,7 +136,7 @@ Ext.define('BasiGX.util.Object', {
                 }
             }
 
-            // if we couldn't find any match, return undefined
+            // if we couldn&#39;t find any match, return undefined
             return undefined;
         }
     }

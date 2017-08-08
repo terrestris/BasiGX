@@ -24,29 +24,29 @@
  * at which you can update the control.
  *
  *     @example
- *     var store = Ext.create('Ext.data.Store', {
- *         fields: ['name', 'progress'],
+ *     var store = Ext.create(&#39;Ext.data.Store&#39;, {
+ *         fields: [&#39;name&#39;, &#39;progress&#39;],
  *         data: [
- *             { name: 'Lisa', progress: .159 },
- *             { name: 'Bart', progress: .216 },
- *             { name: 'Homer', progress: .55 },
- *             { name: 'Maggie', progress: .167 },
- *             { name: 'Marge', progress: .145 }
+ *             { name: &#39;Lisa&#39;, progress: .159 },
+ *             { name: &#39;Bart&#39;, progress: .216 },
+ *             { name: &#39;Homer&#39;, progress: .55 },
+ *             { name: &#39;Maggie&#39;, progress: .167 },
+ *             { name: &#39;Marge&#39;, progress: .145 }
  *         ]
  *     });
  *
- *     Ext.create('Ext.grid.Panel', {
- *         title: 'Simpsons',
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
+ *         title: &#39;Simpsons&#39;,
  *         store: store,
  *         columns: [
- *             { text: 'Name',  dataIndex: 'name' },
+ *             { text: &#39;Name&#39;,  dataIndex: &#39;name&#39; },
  *             {
- *                 text: 'Progress',
- *                 xtype: 'widgetcolumn',
+ *                 text: &#39;Progress&#39;,
+ *                 xtype: &#39;widgetcolumn&#39;,
  *                 width: 120,
- *                 dataIndex: 'progress',
+ *                 dataIndex: &#39;progress&#39;,
  *                 widget: {
- *                     xtype: 'progress'
+ *                     xtype: &#39;progress&#39;
  *                 }
  *             }
  *         ],
@@ -56,13 +56,13 @@
  *     });
  *
  */
-Ext.define('Ext.Progress', {
-    extend: 'Ext.Gadget',
-    xtype: ['progress', 'progressbarwidget'],
-    alternateClassName: 'Ext.ProgressBarWidget',
+Ext.define(&#39;Ext.Progress&#39;, {
+    extend: &#39;Ext.Gadget&#39;,
+    xtype: [&#39;progress&#39;, &#39;progressbarwidget&#39;],
+    alternateClassName: &#39;Ext.ProgressBarWidget&#39;,
 
     mixins: [
-        'Ext.ProgressBase'
+        &#39;Ext.ProgressBase&#39;
     ],
 
     config: {
@@ -81,26 +81,26 @@ Ext.define('Ext.Progress', {
 
     cachedConfig: {
 <span id='Ext-Progress-cfg-baseCls'>        /**
-</span>         * @cfg {String} [baseCls='x-progress']
-         * The base CSS class to apply to the progress bar's wrapper element.
+</span>         * @cfg {String} [baseCls=&#39;x-progress&#39;]
+         * The base CSS class to apply to the progress bar&#39;s wrapper element.
          */
-        baseCls: Ext.baseCSSPrefix + 'progress',
+        baseCls: Ext.baseCSSPrefix + &#39;progress&#39;,
 
-<span id='Ext-Progress-cfg-textCls'>        textCls: Ext.baseCSSPrefix + 'progress-text',
+<span id='Ext-Progress-cfg-textCls'>        textCls: Ext.baseCSSPrefix + &#39;progress-text&#39;,
 </span>
 <span id='Ext-Progress-cfg-cls'>        cls: null
 </span>    },
 
 <span id='Ext-Progress-property-template'>    template: [{
-</span>        reference: 'backgroundEl'
+</span>        reference: &#39;backgroundEl&#39;
     }, {
-        reference: 'barEl',
+        reference: &#39;barEl&#39;,
         children: [{
-            reference: 'textEl'
+            reference: &#39;textEl&#39;
         }]
     }],
 
-<span id='Ext-Progress-property-defaultBindProperty'>    defaultBindProperty: 'value',
+<span id='Ext-Progress-property-defaultBindProperty'>    defaultBindProperty: &#39;value&#39;,
 </span>
 <span id='Ext-Progress-method-updateCls'>    updateCls: function (cls, oldCls) {
 </span>        var el = this.element;
@@ -117,29 +117,29 @@ Ext.define('Ext.Progress', {
 <span id='Ext-Progress-method-updateUi'>    updateUi: function (ui, oldUi) {
 </span>        var element = this.element,
             barEl = this.barEl,
-            baseCls = this.getBaseCls() + '-';
+            baseCls = this.getBaseCls() + &#39;-&#39;;
 
         if (oldUi) {
             element.removeCls(baseCls + oldUi);
-            barEl.removeCls(baseCls + 'bar-' + oldUi);
+            barEl.removeCls(baseCls + &#39;bar-&#39; + oldUi);
         }
 
         element.addCls(baseCls + ui);
-        barEl.addCls(baseCls + 'bar-' + ui);
+        barEl.addCls(baseCls + &#39;bar-&#39; + ui);
     },
 
 <span id='Ext-Progress-method-updateBaseCls'>    updateBaseCls: function (baseCls, oldBaseCls) {
 </span>        //&lt;debug&gt;
         if (oldBaseCls) {
-            Ext.raise('You cannot configure baseCls - use a subclass');
+            Ext.raise(&#39;You cannot configure baseCls - use a subclass&#39;);
         }
         //&lt;/debug&gt;
         this.element.addCls(baseCls);
-        this.barEl.addCls(baseCls + '-bar');
+        this.barEl.addCls(baseCls + &#39;-bar&#39;);
     },
 
 <span id='Ext-Progress-method-updateTextCls'>    updateTextCls: function (textCls) {
-</span>        this.backgroundEl.addCls(textCls + ' ' + textCls + '-back');
+</span>        this.backgroundEl.addCls(textCls + &#39; &#39; + textCls + &#39;-back&#39;);
         this.textEl.addCls(textCls);
     },
 
@@ -158,14 +158,14 @@ Ext.define('Ext.Progress', {
             barEl.stopAnimation();
             barEl.animate(Ext.apply({
                 from: {
-                    width: (oldValue * 100) + '%'
+                    width: (oldValue * 100) + &#39;%&#39;
                 },
                 to: {
-                    width: (value * 100) + '%'
+                    width: (value * 100) + &#39;%&#39;
                 }
             }, me.animate));
         } else {
-            barEl.setStyle('width', (value * 100) + '%');
+            barEl.setStyle(&#39;width&#39;, (value * 100) + &#39;%&#39;);
         }
     },
 

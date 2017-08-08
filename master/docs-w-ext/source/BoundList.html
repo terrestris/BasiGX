@@ -19,11 +19,11 @@
 </span> * Component layout for {@link Ext.view.BoundList}.
  * @private
  */
-Ext.define('Ext.layout.component.BoundList', {
-    extend: 'Ext.layout.component.Auto',
-    alias: 'layout.boundlist',
+Ext.define(&#39;Ext.layout.component.BoundList&#39;, {
+    extend: &#39;Ext.layout.component.Auto&#39;,
+    alias: &#39;layout.boundlist&#39;,
 
-<span id='Ext-layout-component-BoundList-property-type'>    type: 'component',
+<span id='Ext-layout-component-BoundList-property-type'>    type: &#39;component&#39;,
 </span>
 <span id='Ext-layout-component-BoundList-method-beginLayout'>    beginLayout: function(ownerContext) {
 </span>        var me = this,
@@ -43,7 +43,7 @@ Ext.define('Ext.layout.component.BoundList', {
         if (toolbar) {
             ownerContext.toolbarContext = ownerContext.context.getCmp(toolbar);
         }
-        ownerContext.listContext = ownerContext.getEl('listWrap');
+        ownerContext.listContext = ownerContext.getEl(&#39;listWrap&#39;);
     },
 
 <span id='Ext-layout-component-BoundList-method-beginLayoutCycle'>    beginLayoutCycle: function(ownerContext){
@@ -54,8 +54,8 @@ Ext.define('Ext.layout.component.BoundList', {
             // Set the el/listWrap to be autoHeight since they may have been previously sized
             // by another layout process. If the el was at maxHeight first, the listWrap will
             // always size to the maxHeight regardless of the content.
-            owner.el.setHeight('auto');
-            owner.listWrap.setHeight('auto');
+            owner.el.setHeight(&#39;auto&#39;);
+            owner.listWrap.setHeight(&#39;auto&#39;);
         }
     },
 
@@ -65,7 +65,7 @@ Ext.define('Ext.layout.component.BoundList', {
     },
 
 <span id='Ext-layout-component-BoundList-method-isValidParent'>    isValidParent: function() {
-</span>        // this only ever gets called with the toolbar, since it's rendered inside we
+</span>        // this only ever gets called with the toolbar, since it&#39;s rendered inside we
         // know the parent is always valid
         return true;
     },
@@ -98,7 +98,7 @@ Ext.define('Ext.layout.component.BoundList', {
             toolbarHeight = 0;
 
         if (toolbar) {
-            toolbarHeight = toolbar.getProp('height');
+            toolbarHeight = toolbar.getProp(&#39;height&#39;);
         }
 
         if (toolbarHeight === undefined) {
@@ -113,7 +113,7 @@ Ext.define('Ext.layout.component.BoundList', {
             toolbar = ownerContext.toolbarContext;
 
         if (toolbar) {
-            height += toolbar.getProp('height');
+            height += toolbar.getProp(&#39;height&#39;);
         }
         return height;
     }

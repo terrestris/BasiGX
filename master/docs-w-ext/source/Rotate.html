@@ -18,12 +18,12 @@
   <pre class="prettyprint lang-js"><span id='Ext-event-gesture-Rotate'>/**
 </span> * A simple event recognizer which knows when you rotate.
  */
-Ext.define('Ext.event.gesture.Rotate', {
-    extend: 'Ext.event.gesture.MultiTouch',
+Ext.define(&#39;Ext.event.gesture.Rotate&#39;, {
+    extend: &#39;Ext.event.gesture.MultiTouch&#39;,
 
 <span id='Ext-event-gesture-Rotate-property-priority'>    priority: 800,
 </span>
-<span id='Ext-event-gesture-Rotate-property-handledEvents'>    handledEvents: ['rotatestart', 'rotate', 'rotateend', 'rotatecancel'],
+<span id='Ext-event-gesture-Rotate-property-handledEvents'>    handledEvents: [&#39;rotatestart&#39;, &#39;rotate&#39;, &#39;rotateend&#39;, &#39;rotatecancel&#39;],
 </span>
 <span id='Ext-dom-Element-event-rotatestart'>    /**
 </span>     * @member Ext.dom.Element
@@ -109,13 +109,13 @@ Ext.define('Ext.event.gesture.Rotate', {
 
                 me.startAngle = angle;
 
-                me.fire('rotatestart', e, {
+                me.fire(&#39;rotatestart&#39;, e, {
                     touches: touches,
                     angle: angle,
                     rotation: 0
                 });
             } else {
-                me.fire('rotate', e, {
+                me.fire(&#39;rotate&#39;, e, {
                     touches: touches,
                     angle: angle,
                     rotation: angle - me.startAngle
@@ -128,14 +128,14 @@ Ext.define('Ext.event.gesture.Rotate', {
 
 <span id='Ext-event-gesture-Rotate-method-onTouchEnd'>    onTouchEnd: function(e) {
 </span>        if (this.isStarted) {
-            this.fire('rotateend', e);
+            this.fire(&#39;rotateend&#39;, e);
         }
 
         return this.callParent([e]);
     },
 
 <span id='Ext-event-gesture-Rotate-method-onCancel'>    onCancel: function(e) {
-</span>        this.fire('rotatecancel', e, null, true);
+</span>        this.fire(&#39;rotatecancel&#39;, e, null, true);
     },
 
 <span id='Ext-event-gesture-Rotate-method-reset'>    reset: function() {

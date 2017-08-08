@@ -26,30 +26,30 @@
  * the {@link #pack} config.
  *
  *     @example
- *     Ext.create('Ext.Panel', {
+ *     Ext.create(&#39;Ext.Panel&#39;, {
  *         width: 500,
  *         height: 400,
  *         title: &quot;VBoxLayout Panel&quot;,
  *         layout: {
- *             type: 'vbox',
+ *             type: &#39;vbox&#39;,
  *         },
  *         renderTo: document.body,
  *         items: [{
- *             xtype: 'panel',
- *             title: 'Inner Panel One',
+ *             xtype: &#39;panel&#39;,
+ *             title: &#39;Inner Panel One&#39;,
  *             width: 250,
  *             flex: 2
  *         },
  *         {
- *             xtype: 'panel',
- *             title: 'Inner Panel Two',
+ *             xtype: &#39;panel&#39;,
+ *             title: &#39;Inner Panel Two&#39;,
  *             width: 250,
  *             flex: 4
  *         },
  *         {
- *             xtype: 'panel',
- *             title: 'Inner Panel Three',
- *             width: '50%',
+ *             xtype: &#39;panel&#39;,
+ *             title: &#39;Inner Panel Three&#39;,
+ *             width: &#39;50%&#39;,
  *             flex: 4
  *         }]
  *     });
@@ -59,70 +59,70 @@
  * 
  *     @example
  *     Ext.create({
- *         xtype: 'panel',
+ *         xtype: &#39;panel&#39;,
  *         renderTo: Ext.getBody(),
  *         height: 400,
  *         width: 520,
  *         defaultListenerScope: true,
- *         layout: 'vbox',
- *         defaultType: 'button',
+ *         layout: &#39;vbox&#39;,
+ *         defaultType: &#39;button&#39;,
  *         items: [{
- *             text: 'One'
+ *             text: &#39;One&#39;
  *         }, {
- *             text: 'Two'
+ *             text: &#39;Two&#39;
  *         }, {
- *             text: 'Three'
+ *             text: &#39;Three&#39;
  *         }],
  *         
  *         dockedItems: [{
- *             xtype: 'toolbar',
- *             dock: 'top',
+ *             xtype: &#39;toolbar&#39;,
+ *             dock: &#39;top&#39;,
  *             items: [{
- *                 xtype: 'buttongroup',
- *                 title: 'align',
- *                 layout: 'fit',
+ *                 xtype: &#39;buttongroup&#39;,
+ *                 title: &#39;align&#39;,
+ *                 layout: &#39;fit&#39;,
  *                 items: [{
- *                     xtype: 'segmentedbutton',
+ *                     xtype: &#39;segmentedbutton&#39;,
  *                     margin: 10,
  *                     allowDepress: true,
  *                     defaults: {
- *                         configType: 'align'  // custom config used in this example
+ *                         configType: &#39;align&#39;  // custom config used in this example
  *                     },
  *                     items: [{
- *                         text: 'begin'
+ *                         text: &#39;begin&#39;
  *                     }, {
- *                         text: 'middle'
+ *                         text: &#39;middle&#39;
  *                     }, {
- *                         text: 'end'
+ *                         text: &#39;end&#39;
  *                     }, {
- *                         text: 'stretch'
+ *                         text: &#39;stretch&#39;
  *                     }, {
- *                         text: 'stretchmax'
+ *                         text: &#39;stretchmax&#39;
  *                     }],
  *                     listeners: {
- *                         toggle: 'onToggle'
+ *                         toggle: &#39;onToggle&#39;
  *                     }
  *                 }]
- *             }, '-&gt;', {
- *                 xtype: 'buttongroup',
- *                 title: 'pack',
- *                 layout: 'fit',
+ *             }, &#39;-&gt;&#39;, {
+ *                 xtype: &#39;buttongroup&#39;,
+ *                 title: &#39;pack&#39;,
+ *                 layout: &#39;fit&#39;,
  *                 items: [{
- *                     xtype: 'segmentedbutton',
+ *                     xtype: &#39;segmentedbutton&#39;,
  *                     margin: 10,
  *                     allowDepress: true,
  *                     defaults: {
- *                         configType: 'pack'  // custom config used in this example
+ *                         configType: &#39;pack&#39;  // custom config used in this example
  *                     },
  *                     items: [{
- *                         text: 'start'
+ *                         text: &#39;start&#39;
  *                     }, {
- *                         text: 'center'
+ *                         text: &#39;center&#39;
  *                     }, {
- *                         text: 'end'
+ *                         text: &#39;end&#39;
  *                     }],
  *                     listeners: {
- *                         toggle: 'onToggle'
+ *                         toggle: &#39;onToggle&#39;
  *                     }
  *                 }]
  *             }]
@@ -136,14 +136,14 @@
  *         }
  *     });
  */
-Ext.define('Ext.layout.container.VBox', {
-    extend: 'Ext.layout.container.Box',
+Ext.define(&#39;Ext.layout.container.VBox&#39;, {
+    extend: &#39;Ext.layout.container.Box&#39;,
 
-    alias: 'layout.vbox',
+    alias: &#39;layout.vbox&#39;,
 
-    alternateClassName: 'Ext.layout.VBoxLayout',
+    alternateClassName: &#39;Ext.layout.VBoxLayout&#39;,
 
-<span id='Ext-layout-container-VBox-property-type'>    type: 'vbox',
+<span id='Ext-layout-container-VBox-property-type'>    type: &#39;vbox&#39;,
 </span>
 <span id='Ext-layout-container-VBox-cfg-vertical'>    vertical: true
 </span>});

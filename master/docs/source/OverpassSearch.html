@@ -38,9 +38,9 @@
  * Example of usage:
  *
  *     {
- *         xtype: 'basigx-search-overpass',
+ *         xtype: &#39;basigx-search-overpass&#39;,
  *         clusterResults: true,
- *         viewboxlbrt: '52.4677,6.9186,53.9642,11.2308'
+ *         viewboxlbrt: &#39;52.4677,6.9186,53.9642,11.2308&#39;
  *     }
  *
  * TODO This class has a lot in common with both #NominatimSearch and the
@@ -48,32 +48,32 @@
  *
  * @class BasiGX.view.container.OverpassSearch
  */
-Ext.define('BasiGX.view.container.OverpassSearch', {
-    extend: 'Ext.container.Container',
-    xtype: 'basigx-container-overpasssearch',
+Ext.define(&#39;BasiGX.view.container.OverpassSearch&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
+    xtype: &#39;basigx-container-overpasssearch&#39;,
 
     requires: [
-        'GeoExt.data.store.Features',
-        'GeoExt.component.FeatureRenderer',
+        &#39;GeoExt.data.store.Features&#39;,
+        &#39;GeoExt.component.FeatureRenderer&#39;,
 
-        'BasiGX.util.Animate',
-        'BasiGX.util.Map',
-        'BasiGX.util.MsgBox'
+        &#39;BasiGX.util.Animate&#39;,
+        &#39;BasiGX.util.Map&#39;,
+        &#39;BasiGX.util.MsgBox&#39;
     ],
 
 <span id='BasiGX-view-container-OverpassSearch-property-viewModel'>    viewModel: {
 </span>        data: {
-            searchTermTextFieldLabel: 'Suchbegriff',
-            searchCriteriaGridTitle: 'Suchkategorien',
-            searchCriteriaLabelTag: 'OSM-Tag',
-            searchCriteriaCategoryTag: 'Kategorie',
-            searchCriteriaOccurenceTag: 'Tag-Häufigkeit',
-            searchResultGridTitle: 'Suchergebnisse',
-            resetBtnText: 'Zurücksetzen',
-            noMatchesFoundErrText: 'Keine passenden Einträge gefunden',
-            documentation: '&lt;h2&gt;Overpass-Suche&lt;/h2&gt;• Benutzen Sie die ' +
-                'Overpass Suche, um für ihren Suchbegriff passende Tags in ' +
-                'der OpenStreetMap Datenbank zu finden'
+            searchTermTextFieldLabel: &#39;Suchbegriff&#39;,
+            searchCriteriaGridTitle: &#39;Suchkategorien&#39;,
+            searchCriteriaLabelTag: &#39;OSM-Tag&#39;,
+            searchCriteriaCategoryTag: &#39;Kategorie&#39;,
+            searchCriteriaOccurenceTag: &#39;Tag-Häufigkeit&#39;,
+            searchResultGridTitle: &#39;Suchergebnisse&#39;,
+            resetBtnText: &#39;Zurücksetzen&#39;,
+            noMatchesFoundErrText: &#39;Keine passenden Einträge gefunden&#39;,
+            documentation: &#39;&lt;h2&gt;Overpass-Suche&lt;/h2&gt;• Benutzen Sie die &#39; +
+                &#39;Overpass Suche, um für ihren Suchbegriff passende Tags in &#39; +
+                &#39;der OpenStreetMap Datenbank zu finden&#39;
         }
     },
 
@@ -81,17 +81,17 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
 <span id='BasiGX-view-container-OverpassSearch-cfg-overpassUrl'>        /**
 </span>         * The URL to the overpass service
          */
-        overpassUrl: 'http://overpass-api.de/api/interpreter',
+        overpassUrl: &#39;http://overpass-api.de/api/interpreter&#39;,
 
 <span id='BasiGX-view-container-OverpassSearch-cfg-tagFinderUrl'>        /**
 </span>         * The URL used to find tags for searchterms
          */
-        tagFinderUrl: 'http://tagfinder.herokuapp.com/api/search',
+        tagFinderUrl: &#39;http://tagfinder.herokuapp.com/api/search&#39;,
 
 <span id='BasiGX-view-container-OverpassSearch-cfg-format'>        /**
 </span>         *
          */
-        format: 'json',
+        format: &#39;json&#39;,
 
 <span id='BasiGX-view-container-OverpassSearch-cfg-limit'>        /**
 </span>         * limit the search results count
@@ -101,7 +101,7 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
 <span id='BasiGX-view-container-OverpassSearch-cfg-viewboxlbrt'>        /**
 </span>         * The lat-lon viewbox to limit the searchquery to
          */
-        viewboxlbrt: '90,-180,-90,180',
+        viewboxlbrt: &#39;90,-180,-90,180&#39;,
 
 <span id='BasiGX-view-container-OverpassSearch-cfg-minSearchTextChars'>        /**
 </span>         * minimum chars to trigger the search
@@ -116,7 +116,7 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
 <span id='BasiGX-view-container-OverpassSearch-cfg-groupHeaderTpl'>        /**
 </span>         * the template to change the groups titles
          */
-        groupHeaderTpl: '{type}',
+        groupHeaderTpl: &#39;{type}&#39;,
 
 <span id='BasiGX-view-container-OverpassSearch-property-searchResultFeatureStyle'>        /**
 </span>         * An `ol.style.Style` for search result features.
@@ -127,18 +127,18 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
             image: new ol.style.Circle({
                 radius: 6,
                 fill: new ol.style.Fill({
-                    color: '#8B0000'
+                    color: &#39;#8B0000&#39;
                 }),
                 stroke: new ol.style.Stroke({
-                    color: '#fff',
+                    color: &#39;#fff&#39;,
                     width: 2
                 })
             }),
             fill: new ol.style.Fill({
-                color: '#8B0000'
+                color: &#39;#8B0000&#39;
             }),
             stroke: new ol.style.Stroke({
-                color: '#8B0000',
+                color: &#39;#8B0000&#39;,
                 width: 4
             })
         }),
@@ -155,17 +155,17 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
                 image: new ol.style.Circle({
                     radius: radius,
                     fill: new ol.style.Fill({
-                        color: '#EE0000'
+                        color: &#39;#EE0000&#39;
                     }),
                     stroke: new ol.style.Stroke({
-                        color: 'gray',
+                        color: &#39;gray&#39;,
                         width: 3
                     })
                 }),
                 text: text ? new ol.style.Text({
                     text: text.toString(),
                     fill: new ol.style.Fill({
-                        color: '#fff'
+                        color: &#39;#fff&#39;
                     })
                 }) : undefined
             });
@@ -180,18 +180,18 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
             image: new ol.style.Circle({
                 radius: 8,
                 fill: new ol.style.Fill({
-                    color: '#0099CC'
+                    color: &#39;#0099CC&#39;
                 }),
                 stroke: new ol.style.Stroke({
-                    color: '#fff',
+                    color: &#39;#fff&#39;,
                     width: 2
                 })
             }),
             fill: new ol.style.Fill({
-                color: '#0099CC'
+                color: &#39;#0099CC&#39;
             }),
             stroke: new ol.style.Stroke({
-                color: '#0099CC',
+                color: &#39;#0099CC&#39;,
                 width: 6
             })
         }),
@@ -216,16 +216,16 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
                 image: new ol.style.Circle({
                     radius: radius,
                     stroke: new ol.style.Stroke({
-                        color: '#fff'
+                        color: &#39;#fff&#39;
                     }),
                     fill: new ol.style.Fill({
-                        color: '#3399CC'
+                        color: &#39;#3399CC&#39;
                     })
                 }),
                 text: new ol.style.Text({
                     text: amount.toString(),
                     fill: new ol.style.Fill({
-                        color: '#fff'
+                        color: &#39;#fff&#39;
                     })
                 })
             })];
@@ -243,7 +243,7 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
 <span id='BasiGX-view-container-OverpassSearch-property-layout'>    /**
 </span>     *
      */
-    layout: 'fit',
+    layout: &#39;fit&#39;,
 
 <span id='BasiGX-view-container-OverpassSearch-property-typeDelayTask'>    /**
 </span>     *
@@ -291,7 +291,7 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
 
         if (!me.searchResultVectorLayer) {
             me.searchResultVectorLayer = new ol.layer.Vector({
-                name: 'overpasssearchresult',
+                name: &#39;overpasssearchresult&#39;,
                 source: new ol.source.Vector(),
                 style: me.getSearchResultFeatureStyle(),
                 visible: !me.clusterResults
@@ -306,10 +306,10 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
             });
 
             me.clusterLayer = new ol.layer.Vector({
-                name: 'overpassclusterlayer',
+                name: &#39;overpassclusterlayer&#39;,
                 source: clusterSource,
                 style: function(feature) {
-                    var amount = feature.get('features').length;
+                    var amount = feature.get(&#39;features&#39;).length;
                     var style = me.styleCache[amount];
                     if (!style) {
                         style = me.clusterStyleFn(amount, amount + 10);
@@ -321,39 +321,39 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
             me.map.addLayer(me.clusterLayer);
 
             // correct the vectorlayerstyle for the grid symbolizer
-            me.searchResultVectorLayer.setStyle(me.clusterStyleFn('', 8));
+            me.searchResultVectorLayer.setStyle(me.clusterStyleFn(&#39;&#39;, 8));
         }
 
-        var tagFinderResultStore = Ext.create('Ext.data.Store', {
+        var tagFinderResultStore = Ext.create(&#39;Ext.data.Store&#39;, {
             sorters: [{
-                property: 'countAll',
-                direction: 'DESC'
+                property: &#39;countAll&#39;,
+                direction: &#39;DESC&#39;
             }],
             fields: [
-                'prefLabel',
+                &#39;prefLabel&#39;,
                 {
-                    name: 'termRelated',
-                    type: 'string',
+                    name: &#39;termRelated&#39;,
+                    type: &#39;string&#39;,
                     convert: function(val) {
-                        return val.de[0] ? val.de[0] : '-';
+                        return val.de[0] ? val.de[0] : &#39;-&#39;;
                     }
                 },
-                'countAll'
+                &#39;countAll&#39;
             ]
         });
 
-        var searchResultStore = Ext.create('GeoExt.data.store.Features', {
+        var searchResultStore = Ext.create(&#39;GeoExt.data.store.Features&#39;, {
             map: me.map,
             layer: me.searchResultVectorLayer,
-            groupField: 'type'
+            groupField: &#39;type&#39;
         });
 
         me.items = [
             {
-                xtype: 'textfield',
-                name: 'overpassSearchTerm',
+                xtype: &#39;textfield&#39;,
+                name: &#39;overpassSearchTerm&#39;,
                 bind: {
-                    fieldLabel: '{searchTermTextFieldLabel}'
+                    fieldLabel: &#39;{searchTermTextFieldLabel}&#39;
                 },
                 enableKeyEvents: true,
                 listeners: {
@@ -361,40 +361,40 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
                 }
             },
             {
-                xtype: 'grid',
-                name: 'tagfinderresultgrid',
+                xtype: &#39;grid&#39;,
+                name: &#39;tagfinderresultgrid&#39;,
                 hidden: true,
                 bind: {
-                    title: '{searchCriteriaGridTitle}'
+                    title: &#39;{searchCriteriaGridTitle}&#39;
                 },
                 store: tagFinderResultStore,
                 columns: [
                     {
-                        dataIndex: 'prefLabel',
+                        dataIndex: &#39;prefLabel&#39;,
                         bind: {
-                            text: '{searchCriteriaLabelTag}'
+                            text: &#39;{searchCriteriaLabelTag}&#39;
                         },
                         flex: 3,
                         renderer: function(value) {
-                            return '&lt;span data-qtip=&quot;' + value + '&quot;&gt;' +
-                                value + '&lt;/span&gt;';
+                            return &#39;&lt;span data-qtip=&quot;&#39; + value + &#39;&quot;&gt;&#39; +
+                                value + &#39;&lt;/span&gt;&#39;;
                         }
                     },
                     {
-                        dataIndex: 'termRelated',
+                        dataIndex: &#39;termRelated&#39;,
                         bind: {
-                            text: '{searchCriteriaCategoryTag}'
+                            text: &#39;{searchCriteriaCategoryTag}&#39;
                         },
                         flex: 3,
                         renderer: function(value) {
-                            return '&lt;span data-qtip=&quot;' + value + '&quot;&gt;' +
-                                value + '&lt;/span&gt;';
+                            return &#39;&lt;span data-qtip=&quot;&#39; + value + &#39;&quot;&gt;&#39; +
+                                value + &#39;&lt;/span&gt;&#39;;
                         }
                     },
                     {
-                        dataIndex: 'countAll',
+                        dataIndex: &#39;countAll&#39;,
                         bind: {
-                            text: '{searchCriteriaOccurenceTag}'
+                            text: &#39;{searchCriteriaOccurenceTag}&#39;
                         },
                         flex: 2
                     }
@@ -403,20 +403,20 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
                 height: 300
             },
             {
-                xtype: 'grid',
-                name: 'overpasssearchresultgrid',
+                xtype: &#39;grid&#39;,
+                name: &#39;overpasssearchresultgrid&#39;,
                 hidden: true,
                 hideHeaders: true,
                 bind: {
-                    title: '{searchResultGridTitle}'
+                    title: &#39;{searchResultGridTitle}&#39;
                 },
                 store: searchResultStore,
                 columns: [
                     {
-                        xtype: 'widgetcolumn',
+                        xtype: &#39;widgetcolumn&#39;,
                         flex: 1,
                         widget: {
-                            xtype: 'gx_renderer'
+                            xtype: &#39;gx_renderer&#39;
                         },
                         onWidgetAttach: function(column, gxRenderer, record) {
                             // update the symbolizer with the related feature
@@ -429,49 +429,49 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
                         }
                     },
                     {
-                        dataIndex: 'displayfield',
+                        dataIndex: &#39;displayfield&#39;,
                         flex: 7,
                         renderer: function(value) {
-                            return '&lt;span data-qtip=&quot;' + value + '&quot;&gt;' +
-                                value + '&lt;/span&gt;';
+                            return &#39;&lt;span data-qtip=&quot;&#39; + value + &#39;&quot;&gt;&#39; +
+                                value + &#39;&lt;/span&gt;&#39;;
                         }
                     }
                 ],
                 features: [{
-                    ftype: 'grouping',
+                    ftype: &#39;grouping&#39;,
                     groupHeaderTpl: me.getGroupHeaderTpl()
                 }],
                 width: 200,
                 height: 300
             }, {
-                xtype: 'button',
+                xtype: &#39;button&#39;,
                 bind: {
-                    text: '{resetBtnText}'
+                    text: &#39;{resetBtnText}&#39;
                 },
-                margin: '10 0 0 0',
+                margin: &#39;10 0 0 0&#39;,
                 handler: me.resetSearchGridAndText,
                 scope: me
             }
         ];
         me.callParent(arguments);
 
-        var grid = me.down('grid[name=overpasssearchresultgrid]');
-        var tagFinderGrid = me.down('grid[name=tagfinderresultgrid]');
+        var grid = me.down(&#39;grid[name=overpasssearchresultgrid]&#39;);
+        var tagFinderGrid = me.down(&#39;grid[name=tagfinderresultgrid]&#39;);
 
-        me.on('tagfinderResponse', function(res) {
+        me.on(&#39;tagfinderResponse&#39;, function(res) {
             tagFinderGrid.getStore().loadData(res);
             tagFinderGrid.show();
         });
-        me.on('overpassResponse', me.showSearchResults, me);
+        me.on(&#39;overpassResponse&#39;, me.showSearchResults, me);
 
-        me.on('show', me.down('textfield').focus);
+        me.on(&#39;show&#39;, me.down(&#39;textfield&#39;).focus);
 
         if (me.getHighLightFeatureOnHoverInGrid()) {
-            grid.on('itemmouseenter', me.highlightFeature, me);
-            grid.on('itemmouseleave', me.unhighlightFeature, me);
+            grid.on(&#39;itemmouseenter&#39;, me.highlightFeature, me);
+            grid.on(&#39;itemmouseleave&#39;, me.unhighlightFeature, me);
         }
-        grid.on('itemclick', me.highlightSelectedFeature, me);
-        tagFinderGrid.on('itemclick', me.triggerSearch, me);
+        grid.on(&#39;itemclick&#39;, me.highlightSelectedFeature, me);
+        tagFinderGrid.on(&#39;itemclick&#39;, me.triggerSearch, me);
     },
 
 <span id='BasiGX-view-container-OverpassSearch-method-handleKeyDown'>    /**
@@ -481,7 +481,7 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
      *     the query.
      */
     handleKeyDown: function(textfield) {
-        var overpassContainer = textfield.up('basigx-container-overpasssearch');
+        var overpassContainer = textfield.up(&#39;basigx-container-overpasssearch&#39;);
         var val = textfield.getValue();
 
         if (val.length &lt; overpassContainer.getMinSearchTextChars()) {
@@ -510,7 +510,7 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
      */
     resetSearchGridAndText: function() {
         var me = this;
-        me.down('textfield[name=overpassSearchTerm]').setValue('');
+        me.down(&#39;textfield[name=overpassSearchTerm]&#39;).setValue(&#39;&#39;);
         me.resetGrids();
     },
 
@@ -519,8 +519,8 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
      */
     resetGrids: function() {
         var me = this;
-        var overpassGrid = me.down('grid[name=overpasssearchresultgrid]');
-        var tagFinderGrid = me.down('grid[name=tagfinderresultgrid]');
+        var overpassGrid = me.down(&#39;grid[name=overpasssearchresultgrid]&#39;);
+        var tagFinderGrid = me.down(&#39;grid[name=tagfinderresultgrid]&#39;);
         me.searchResultVectorLayer.getSource().clear(true);
         overpassGrid.hide();
         overpassGrid.getStore().removeAll();
@@ -537,13 +537,13 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
 
         var requestParams = {
             query: me.searchTerm,
-            format: 'json',
-            lang: 'de'
+            format: &#39;json&#39;,
+            lang: &#39;de&#39;
         };
 
-        var url = me.getTagFinderUrl() + '?';
+        var url = me.getTagFinderUrl() + &#39;?&#39;;
         Ext.iterate(requestParams, function(k, v) {
-            url += k + '=' + encodeURIComponent(v) + '&amp;';
+            url += k + &#39;=&#39; + encodeURIComponent(v) + &#39;&amp;&#39;;
         });
 
         me.setLoading(true);
@@ -557,8 +557,8 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
                 } else if (Ext.isObject(response.responseText)) {
                     results = response.responseText;
                 } else {
-                    Ext.log.error('Error! Could not parse ' +
-                        'tagfinder response!');
+                    Ext.log.error(&#39;Error! Could not parse &#39; +
+                        &#39;tagfinder response!&#39;);
                 }
                 if (results.length &gt; 0) {
                     var tagArray = [];
@@ -567,16 +567,16 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
                             tagArray.push(res);
                         }
                     });
-                    me.fireEvent('tagfinderResponse', tagArray);
+                    me.fireEvent(&#39;tagfinderResponse&#39;, tagArray);
                 } else {
                     BasiGX.util.MsgBox.info(me.getViewModel().get(
-                        'noMatchesFoundErrText'));
+                        &#39;noMatchesFoundErrText&#39;));
                 }
 
             },
             failure: function(response) {
                 me.setLoading(false);
-                Ext.log.error('Error on tagfinder request:',
+                Ext.log.error(&#39;Error on tagfinder request:&#39;,
                     response);
             }
         });
@@ -590,21 +590,21 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
      */
     triggerSearch: function(grid, rec) {
         var me = this;
-        var tagFinderGrid = me.down('grid[name=tagfinderresultgrid]');
+        var tagFinderGrid = me.down(&#39;grid[name=tagfinderresultgrid]&#39;);
 
         if (tagFinderGrid.isVisible()) {
             tagFinderGrid.hide();
         }
 
         var requestParams = {
-            data: '[out:' + me.getFormat() + '];'
+            data: &#39;[out:&#39; + me.getFormat() + &#39;];&#39;
         };
 
-        requestParams.data += 'node[' + rec.data.prefLabel + ']';
-        requestParams.data += '(' + me.getViewboxlbrt() + ');';
-        requestParams.data += 'out ' + me.getLimit() + ' qt;';
+        requestParams.data += &#39;node[&#39; + rec.data.prefLabel + &#39;]&#39;;
+        requestParams.data += &#39;(&#39; + me.getViewboxlbrt() + &#39;);&#39;;
+        requestParams.data += &#39;out &#39; + me.getLimit() + &#39; qt;&#39;;
 
-        var url = me.getOverpassUrl() + '?';
+        var url = me.getOverpassUrl() + &#39;?&#39;;
 
         me.setLoading(true);
 
@@ -619,14 +619,14 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
                 } else if (Ext.isObject(response.responseText)) {
                     results = response.responseText;
                 } else {
-                    Ext.log.error('Error! Could not parse ' +
-                        'overpass response!');
+                    Ext.log.error(&#39;Error! Could not parse &#39; +
+                        &#39;overpass response!&#39;);
                 }
-                me.fireEvent('overpassResponse', results);
+                me.fireEvent(&#39;overpassResponse&#39;, results);
             },
             failure: function(response) {
                 me.setLoading(false);
-                Ext.log.error('Error on overpass request:',
+                Ext.log.error(&#39;Error on overpass request:&#39;,
                     response);
             }
         });
@@ -639,7 +639,7 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
      */
     showSearchResults: function(response) {
         var me = this;
-        var grid = me.down('grid[name=overpasssearchresultgrid]');
+        var grid = me.down(&#39;grid[name=overpasssearchresultgrid]&#39;);
         var features = response.elements;
 
         if (features.length &gt; 0) {
@@ -651,12 +651,12 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
             var olFeat = new ol.Feature({
                 geometry: new ol.geom.Point(ol.proj.transform(
                     [parseFloat(feature.lon), parseFloat(feature.lat)],
-                    'EPSG:4326', 'EPSG:3857'
+                    &#39;EPSG:4326&#39;, &#39;EPSG:3857&#39;
                 )),
                 properties: feature
             });
-            olFeat.set('displayfield',
-                feature.tags.name || 'Kein Name gefunden' // TODO i18n
+            olFeat.set(&#39;displayfield&#39;,
+                feature.tags.name || &#39;Kein Name gefunden&#39; // TODO i18n
             );
 
             me.searchResultVectorLayer.getSource().addFeature(olFeat);
@@ -705,7 +705,7 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
      */
     updateRenderer: function(item, style) {
         var renderer = Ext.getCmp(
-            Ext.query('div[id^=gx_renderer', true, item)[0].id);
+            Ext.query(&#39;div[id^=gx_renderer&#39;, true, item)[0].id);
         var src = renderer.map.getLayers().getArray()[0].getSource();
         src.getFeatures()[0].setStyle(style);
     },
@@ -717,7 +717,7 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
      *
      * @param {Ext.view.View} tableView The tableView / grid.
      * @param {Ext.data.Model} record The record that belongs to the item.
-     * @param {HTMLElement} item The item's element.
+     * @param {HTMLElement} item The item&#39;s element.
      */
     highlightFeature: function(tableView, record, item) {
         if (this.enterEventRec === record) {
@@ -762,7 +762,7 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
      *
      * @param {Ext.view.View} tableView The tableView / grid.
      * @param {Ext.data.Model} record The record that belongs to the item.
-     * @param {HTMLElement} item The item's element.
+     * @param {HTMLElement} item The item&#39;s element.
      */
     unhighlightFeature: function(tableView, record, item) {
         if (this.leaveEventRec === record) {
@@ -772,7 +772,7 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
         if (tableView.getSelection()[0] !== record) {
             record.olObject.setStyle(this.getSearchResultFeatureStyle());
             if (this.clusterResults) {
-                this.updateRenderer(item, this.clusterStyleFn('', 8));
+                this.updateRenderer(item, this.clusterStyleFn(&#39;&#39;, 8));
             } else {
                 this.updateRenderer(item, this.getSearchResultFeatureStyle());
             }
@@ -786,7 +786,7 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
      *
      * @param {Ext.view.View} tableView The tableView / grid.
      * @param {Ext.data.Model} record The record that belongs to the item.
-     * @param {HTMLElement} item The item's element.
+     * @param {HTMLElement} item The item&#39;s element.
      */
     highlightSelectedFeature: function(tableView, record, item) {
         record.olObject.setStyle(this.getSearchResultSelectFeatureStyle());
@@ -805,8 +805,8 @@ Ext.define('BasiGX.view.container.OverpassSearch', {
         var clusterFeature;
         var clusterFeatures = me.clusterLayer.getSource().getFeatures();
         Ext.each(clusterFeatures, function(feat) {
-            if (!Ext.isEmpty(feat.get('features'))) {
-                Ext.each(feat.get('features'), function(f) {
+            if (!Ext.isEmpty(feat.get(&#39;features&#39;))) {
+                Ext.each(feat.get(&#39;features&#39;), function(f) {
                     if (f.getProperties().properties.id &amp;&amp;
                         feature.getProperties().properties.id &amp;&amp;
                         f.getProperties().properties.id ===

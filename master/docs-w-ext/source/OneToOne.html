@@ -22,32 +22,32 @@
  * entity type and a single related entities. The relationship can be declared as a keyed or keyless relationship.
  *
  *     // Keyed
- *     Ext.define('User', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'name', {
- *             name: 'userInfoId',
+ *     Ext.define(&#39;User&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;name&#39;, {
+ *             name: &#39;userInfoId&#39;,
  *             reference: {
- *                 type: 'UserInfo',
+ *                 type: &#39;UserInfo&#39;,
  *                 unique: true
  *             }
  *         }]
  *     });
  *
- *     Ext.define('UserInfo', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'secretKey']
+ *     Ext.define(&#39;UserInfo&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;secretKey&#39;]
  *     });
  *
  *     // Keyless
- *     Ext.define('User', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'name'],
- *         hasOne: 'UserInfo'
+ *     Ext.define(&#39;User&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;name&#39;],
+ *         hasOne: &#39;UserInfo&#39;
  *     });
  *
- *     Ext.define('Ticket', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'secretKey']
+ *     Ext.define(&#39;Ticket&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;secretKey&#39;]
  *     });
  *
  *     // Generated methods
@@ -70,17 +70,17 @@
  * For available configuration options, see {@link Ext.data.schema.Reference}.
  * Each record type will have a {@link Ext.data.schema.Association#recordGetter getter} and {@link Ext.data.schema.Association#recordSetter setter}.
  */
-Ext.define('Ext.data.schema.OneToOne', {
-    extend: 'Ext.data.schema.Association',
+Ext.define(&#39;Ext.data.schema.OneToOne&#39;, {
+    extend: &#39;Ext.data.schema.Association&#39;,
 
 <span id='Ext-data-schema-OneToOne-property-isOneToOne'>    isOneToOne: true,
 </span>
 <span id='Ext-data-schema-OneToOne-property-isToOne'>    isToOne: true,
 </span>
-<span id='Ext-data-schema-OneToOne-property-kind'>    kind: 'one-to-one',
+<span id='Ext-data-schema-OneToOne-property-kind'>    kind: &#39;one-to-one&#39;,
 </span>
 <span id='Ext-data-schema-OneToOne-property-Left'>    Left: Ext.define(null, {
-</span>        extend: 'Ext.data.schema.Role',
+</span>        extend: &#39;Ext.data.schema.Role&#39;,
 
         onDrop: function(rightRecord, session) {
             var leftRecord = this.getAssociatedItem(rightRecord);
@@ -102,7 +102,7 @@ Ext.define('Ext.data.schema.OneToOne', {
         createGetter: function() {
             var me = this;
             return function () {
-                // 'this' refers to the Model instance inside this function
+                // &#39;this&#39; refers to the Model instance inside this function
                 return me.doGet(this);
             };
         },
@@ -110,14 +110,14 @@ Ext.define('Ext.data.schema.OneToOne', {
         createSetter: function () {
             var me = this;
             return function (value) {
-                // 'this' refers to the Model instance inside this function
+                // &#39;this&#39; refers to the Model instance inside this function
                 return me.doSet(this, value);
             };
         },
 
         doGet: function (rightRecord) {
             // Consider the Department entity with a managerId to a User entity. The
-            // Department is on the left (the FK holder's side) so we are implementing the
+            // Department is on the left (the FK holder&#39;s side) so we are implementing the
             // guts of the getManagerDepartment method we place on the User entity. Since
             // we represent the &quot;managerDepartment&quot; role and as such our goal is to get a
             // Department instance, we start that from the User (rightRecord). Sadly that
@@ -128,7 +128,7 @@ Ext.define('Ext.data.schema.OneToOne', {
                 session = rightRecord.session;
 
             if (!ret &amp;&amp; session) {
-                // @TODO: session - we'll cache the result on the record as always
+                // @TODO: session - we&#39;ll cache the result on the record as always
                 // but to get it we must ask the session
             }
 
@@ -149,8 +149,8 @@ Ext.define('Ext.data.schema.OneToOne', {
 
                 if (inverseSetter) {
                     // Because the FK is owned by the inverse record, we delegate the
-                    // majority of work to its setter. We've already locked in the only
-                    // thing we keep on this side so we won't recurse back-and-forth.
+                    // majority of work to its setter. We&#39;ve already locked in the only
+                    // thing we keep on this side so we won&#39;t recurse back-and-forth.
                     leftRecord[inverseSetter](rightRecord);
                 }
                 rightRecord.onAssociatedRecordSet(leftRecord, this);
@@ -178,10 +178,10 @@ Ext.define('Ext.data.schema.OneToOne', {
     }),
 
 <span id='Ext-data-schema-OneToOne-property-Right'>    Right: Ext.define(null, {
-</span>        extend: 'Ext.data.schema.Role',
+</span>        extend: &#39;Ext.data.schema.Role&#39;,
 
         left: false,
-        side: 'right',
+        side: &#39;right&#39;,
         
         createGetter: function() {
             // As the target of the FK (say &quot;manager&quot; for the Department entity) this
@@ -189,7 +189,7 @@ Ext.define('Ext.data.schema.OneToOne', {
             var me = this;
 
             return function (options, scope) {
-                // 'this' refers to the Model instance inside this function
+                // &#39;this&#39; refers to the Model instance inside this function
                 return me.doGetFK(this, options, scope);
             };
         },
@@ -198,7 +198,7 @@ Ext.define('Ext.data.schema.OneToOne', {
             var me = this;
 
             return function(value, options, scope) {
-                // 'this' refers to the Model instance inside this function
+                // &#39;this&#39; refers to the Model instance inside this function
                 return me.doSetFK(this, value, options, scope);
             };
         },
@@ -282,7 +282,7 @@ Ext.define('Ext.data.schema.OneToOne', {
 
                     if (session) {
                         refs = session.getRefs(rightRecord, this.inverse, true);
-                        // If we have an existing reference in the session, or we don't and the data is
+                        // If we have an existing reference in the session, or we don&#39;t and the data is
                         // undefined, allow the nested load to go ahead
                         setKey = (refs &amp;&amp; refs[leftRecord.id]) || (data[fieldName] === undefined);
                     } else {
@@ -291,7 +291,7 @@ Ext.define('Ext.data.schema.OneToOne', {
 
                     
                     if (setKey) {
-                        // We want to poke the inferred key onto record if it exists, but we don't
+                        // We want to poke the inferred key onto record if it exists, but we don&#39;t
                         // want to mess with the dirty or modified state of the record.
                         if (field) {
                             oldId = data[fieldName];

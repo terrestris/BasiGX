@@ -26,39 +26,39 @@
  * a value that is browser-dependent; some have just the file name, some have a full path, some use
  * a fake path.
  *
- * **IMPORTANT:** File uploads are not performed using normal 'Ajax' techniques; see the description for
+ * **IMPORTANT:** File uploads are not performed using normal &#39;Ajax&#39; techniques; see the description for
  * {@link Ext.form.Basic#hasUpload} for details.
  *
  * # Example Usage
  *
  *     @example
- *     Ext.create('Ext.form.Panel', {
- *         title: 'Upload a Photo',
+ *     Ext.create(&#39;Ext.form.Panel&#39;, {
+ *         title: &#39;Upload a Photo&#39;,
  *         width: 400,
  *         bodyPadding: 10,
  *         frame: true,
  *         renderTo: Ext.getBody(),
  *         items: [{
- *             xtype: 'filefield',
- *             name: 'photo',
- *             fieldLabel: 'Photo',
+ *             xtype: &#39;filefield&#39;,
+ *             name: &#39;photo&#39;,
+ *             fieldLabel: &#39;Photo&#39;,
  *             labelWidth: 50,
- *             msgTarget: 'side',
+ *             msgTarget: &#39;side&#39;,
  *             allowBlank: false,
- *             anchor: '100%',
- *             buttonText: 'Select Photo...'
+ *             anchor: &#39;100%&#39;,
+ *             buttonText: &#39;Select Photo...&#39;
  *         }],
  *
  *         buttons: [{
- *             text: 'Upload',
+ *             text: &#39;Upload&#39;,
  *             handler: function() {
- *                 var form = this.up('form').getForm();
+ *                 var form = this.up(&#39;form&#39;).getForm();
  *                 if(form.isValid()) {
  *                     form.submit({
- *                         url: 'photo-upload.php',
- *                         waitMsg: 'Uploading your photo...',
+ *                         url: &#39;photo-upload.php&#39;,
+ *                         waitMsg: &#39;Uploading your photo...&#39;,
  *                         success: function(fp, o) {
- *                             Ext.Msg.alert('Success', 'Your photo &quot;' + o.result.file + '&quot; has been uploaded.');
+ *                             Ext.Msg.alert(&#39;Success&#39;, &#39;Your photo &quot;&#39; + o.result.file + &#39;&quot; has been uploaded.&#39;);
  *                         }
  *                     });
  *                 }
@@ -66,13 +66,13 @@
  *         }]
  *     });
  */
-Ext.define('Ext.form.field.File', {
-    extend: 'Ext.form.field.Text',
-    alias: ['widget.filefield', 'widget.fileuploadfield'],
-    alternateClassName: ['Ext.form.FileUploadField', 'Ext.ux.form.FileUploadField', 'Ext.form.File'],
+Ext.define(&#39;Ext.form.field.File&#39;, {
+    extend: &#39;Ext.form.field.Text&#39;,
+    alias: [&#39;widget.filefield&#39;, &#39;widget.fileuploadfield&#39;],
+    alternateClassName: [&#39;Ext.form.FileUploadField&#39;, &#39;Ext.ux.form.FileUploadField&#39;, &#39;Ext.form.File&#39;],
     requires: [
-        'Ext.form.field.FileButton',
-        'Ext.form.trigger.Component'
+        &#39;Ext.form.field.FileButton&#39;,
+        &#39;Ext.form.trigger.Component&#39;
     ],
     
 <span id='Ext-form-field-File-cfg-accept'>    /**
@@ -85,7 +85,7 @@ Ext.define('Ext.form.field.File', {
 
 <span id='Ext-form-field-File-cfg-emptyText'>    /**
 </span>     * @cfg {String} emptyText
-     * Overridden to undefined as {@link #emptyText} is not supported with {@link #inputType inputType}:'file' and should be avoided.
+     * Overridden to undefined as {@link #emptyText} is not supported with {@link #inputType inputType}:&#39;file&#39; and should be avoided.
      * The default text to place into an empty field.
      */     
     emptyText: undefined,
@@ -94,14 +94,14 @@ Ext.define('Ext.form.field.File', {
 </span>
 <span id='Ext-form-field-File-cfg-triggers'>    triggers: {
 </span>        filebutton: {
-            type: 'component',
+            type: &#39;component&#39;,
             hideOnReadOnly: false,
             // Most form fields prevent the default browser action on mousedown of the trigger.
-            // This is intended to prevent the field's input element from losing focus when
+            // This is intended to prevent the field&#39;s input element from losing focus when
             // the trigger is clicked.  File fields disable this behavior because:
             // 1. The input element does not receive focus when the field is focused. The button does.
             // 2. Preventing the default action of touchstart (translated from mousedown
-            // on mobile browsers) prevents the browser's file dialog from opening.
+            // on mobile browsers) prevents the browser&#39;s file dialog from opening.
             preventMouseDown: false
         }
     },
@@ -112,7 +112,7 @@ Ext.define('Ext.form.field.File', {
      * The button text to display on the upload button. Note that if you supply a value for
      * {@link #buttonConfig}, the buttonConfig.text value will be used instead if available.
      */
-    buttonText: 'Browse...',
+    buttonText: &#39;Browse...&#39;,
     //&lt;/locale&gt;
 
 <span id='Ext-form-field-File-cfg-buttonOnly'>    /**
@@ -143,7 +143,7 @@ Ext.define('Ext.form.field.File', {
 
 <span id='Ext-form-field-File-event-change'>    /**
 </span>     * @event change
-     * Fires when the underlying file input field's value has changed from the user selecting a new file from the system
+     * Fires when the underlying file input field&#39;s value has changed from the user selecting a new file from the system
      * file selection dialog.
      * @param {Ext.ux.form.FileUploadField} this
      * @param {String} value The file value returned by the underlying file input field
@@ -165,12 +165,12 @@ Ext.define('Ext.form.field.File', {
 <span id='Ext-form-field-File-property-extraFieldBodyCls'>    /**
 </span>     * @private
      */
-    extraFieldBodyCls: Ext.baseCSSPrefix + 'form-file-wrap',
+    extraFieldBodyCls: Ext.baseCSSPrefix + &#39;form-file-wrap&#39;,
 
 <span id='Ext-form-field-File-property-inputCls'>    /**
 </span>     * @private
      */
-    inputCls: Ext.baseCSSPrefix + 'form-text-file',
+    inputCls: Ext.baseCSSPrefix + &#39;form-text-file&#39;,
 
 <span id='Ext-form-field-File-cfg-readOnly'>    /**
 </span>     * @cfg {Boolean} [readOnly=true]
@@ -190,13 +190,13 @@ Ext.define('Ext.form.field.File', {
 </span>     * Do not show hand pointer over text field since file choose dialog is only shown when clicking in the button
      * @private
      */
-    triggerNoEditCls: '',
+    triggerNoEditCls: &#39;&#39;,
 
 <span id='Ext-form-field-File-property-childEls'>    /**
 </span>     * @private
      * Extract the file element, button outer element, and button active element.
      */
-    childEls: ['browseButtonWrap'],
+    childEls: [&#39;browseButtonWrap&#39;],
 
 <span id='Ext-form-field-File-method-applyTriggers'>    /**
 </span>     * @private
@@ -207,14 +207,14 @@ Ext.define('Ext.form.field.File', {
 
         if (triggerCfg) {
             triggerCfg.component = Ext.apply({
-                xtype: 'filebutton',
+                xtype: &#39;filebutton&#39;,
                 ownerCt: me,
-                id: me.id + '-button',
+                id: me.id + &#39;-button&#39;,
                 ui: me.ui,
                 disabled: me.disabled,
                 tabIndex: me.tabIndex,
                 text: me.buttonText,
-                style: me.buttonOnly ? '' : me.getButtonMarginProp() + me.buttonMargin + 'px',
+                style: me.buttonOnly ? &#39;&#39; : me.getButtonMarginProp() + me.buttonMargin + &#39;px&#39;,
                 accept: me.accept,
                 inputName: me.getName(),
                 listeners: {
@@ -227,7 +227,7 @@ Ext.define('Ext.form.field.File', {
         }
         // &lt;debug&gt;
         else {
-            Ext.raise(me.$className + ' requires a valid trigger config containing &quot;filebutton&quot; specification');
+            Ext.raise(me.$className + &#39; requires a valid trigger config containing &quot;filebutton&quot; specification&#39;);
         }
         // &lt;/debug&gt;
     },
@@ -235,7 +235,7 @@ Ext.define('Ext.form.field.File', {
 <span id='Ext-form-field-File-method-getSubTplData'>    getSubTplData: function(fieldData) {
 </span>        var data = this.callParent([fieldData]);
         
-        // Input field itself should not be focusable since it's always decorative;
+        // Input field itself should not be focusable since it&#39;s always decorative;
         // however the input element is naturally focusable (and tabbable) so we have to
         // deactivate it by setting its tabIndex to -1.
         data.tabIdx = -1;
@@ -254,14 +254,14 @@ Ext.define('Ext.form.field.File', {
 
         inputEl = me.inputEl;
         //name goes on the fileInput, not the text input
-        inputEl.dom.name = ''; 
+        inputEl.dom.name = &#39;&#39;; 
         
-        // Some browsers will show a blinking cursor in the field, even if it's readonly.
+        // Some browsers will show a blinking cursor in the field, even if it&#39;s readonly.
         // If we do happen to receive focus, forward it on to our focusEl.
-        inputEl.on('focus', me.onInputFocus, me);
-        inputEl.on('mousedown', me.onInputMouseDown, me);
+        inputEl.on(&#39;focus&#39;, me.onInputFocus, me);
+        inputEl.on(&#39;mousedown&#39;, me.onInputMouseDown, me);
 
-        trigger = me.getTrigger('filebutton');
+        trigger = me.getTrigger(&#39;filebutton&#39;);
         button = me.button = trigger.component;
         me.fileInputEl = button.fileInputEl;
         buttonEl = button.el;
@@ -272,7 +272,7 @@ Ext.define('Ext.form.field.File', {
         }
 
         // Ensure the trigger element is sized correctly upon render
-        trigger.el.setWidth(buttonEl.getWidth() + buttonEl.getMargin('lr'));
+        trigger.el.setWidth(buttonEl.getWidth() + buttonEl.getMargin(&#39;lr&#39;));
         if (Ext.isIE) {
             me.button.getEl().repaint();
         }
@@ -282,7 +282,7 @@ Ext.define('Ext.form.field.File', {
 </span>     * Gets the markup to be inserted into the subTplMarkup.
      */
     getTriggerMarkup: function() {
-        return '&lt;td id=&quot;' + this.id + '-browseButtonWrap&quot; data-ref=&quot;browseButtonWrap&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;';
+        return &#39;&lt;td id=&quot;&#39; + this.id + &#39;-browseButtonWrap&quot; data-ref=&quot;browseButtonWrap&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&#39;;
     },
 
 <span id='Ext-form-field-File-method-onFileChange'>    /**
@@ -322,8 +322,8 @@ Ext.define('Ext.form.field.File', {
             me.button.reset(clear);
             me.fileInputEl = me.button.fileInputEl;
             if (clear) {
-                me.inputEl.dom.value = '';
-                // Reset the underlying value if we're clearing it
+                me.inputEl.dom.value = &#39;&#39;;
+                // Reset the underlying value if we&#39;re clearing it
                 Ext.form.field.File.superclass.setValue.call(this, null);
             }
         }
@@ -333,7 +333,7 @@ Ext.define('Ext.form.field.File', {
 <span id='Ext-form-field-File-method-onShow'>    onShow: function() {
 </span>        this.callParent();
         // If we started out hidden, the button may have a messed up layout
-        // since we don't act like a container
+        // since we don&#39;t act like a container
         this.button.updateLayout();    
     },
 
@@ -363,16 +363,16 @@ Ext.define('Ext.form.field.File', {
         } else {
             // Create a fake empty field here so it will still be submitted.
             // All other unrendered fields provide a value.
-            fileInput = document.createElement('input');
-            fileInput.type = 'file';
-            fileInput.className = Ext.baseCSSPrefix + 'hidden-display';
+            fileInput = document.createElement(&#39;input&#39;);
+            fileInput.type = &#39;file&#39;;
+            fileInput.className = Ext.baseCSSPrefix + &#39;hidden-display&#39;;
             fileInput.name = me.getName();
         }
         return fileInput;
     },
     
 <span id='Ext-form-field-File-method-restoreInput'>    restoreInput: function(el) {
-</span>        // If we're not rendered we don't need to do anything, it will be created
+</span>        // If we&#39;re not rendered we don&#39;t need to do anything, it will be created
         // when we get flushed to the DOM.
         if (this.rendered) {
             var button = this.button;
@@ -387,13 +387,13 @@ Ext.define('Ext.form.field.File', {
     },
 
 <span id='Ext-form-field-File-method-getButtonMarginProp'>    getButtonMarginProp: function() {
-</span>        return this.getInherited().rtl ? 'margin-right:' : 'margin-left:';
+</span>        return this.getInherited().rtl ? &#39;margin-right:&#39; : &#39;margin-left:&#39;;
     },
     
 <span id='Ext-form-field-File-method-onInputFocus'>    onInputFocus: function(e) {
 </span>        var me = this;
         
-        // Text field onFocus() won't call select() so we need to duplicate it here
+        // Text field onFocus() won&#39;t call select() so we need to duplicate it here
         if (me.selectOnFocus &amp;&amp; document.activeElement === me.inputEl.dom) {
             me.inputEl.dom.select();
         }
@@ -405,8 +405,8 @@ Ext.define('Ext.form.field.File', {
         // Adding and removing position: relative helps to fix that.
         // See https://sencha.jira.com/browse/EXTJS-18933
         if (Ext.isIE9m) {
-            me.fileInputEl.addCls(Ext.baseCSSPrefix + 'position-relative');
-            me.fileInputEl.removeCls(Ext.baseCSSPrefix + 'position-relative');
+            me.fileInputEl.addCls(Ext.baseCSSPrefix + &#39;position-relative&#39;);
+            me.fileInputEl.removeCls(Ext.baseCSSPrefix + &#39;position-relative&#39;);
         }
     },
     

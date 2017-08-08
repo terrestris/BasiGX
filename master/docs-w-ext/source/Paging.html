@@ -32,22 +32,22 @@
  *
  * {@img Ext.toolbar.Paging/Ext.toolbar.Paging.png Ext.toolbar.Paging component}
  *
- * Paging Toolbar is typically used as one of the Grid's toolbars:
+ * Paging Toolbar is typically used as one of the Grid&#39;s toolbars:
  *
  *     var itemsPerPage = 2; // set the number of items you want per page
  *
- *     Ext.create('Ext.data.Store', {
- *         id: 'simpsonsStore',
+ *     Ext.create(&#39;Ext.data.Store&#39;, {
+ *         id: &#39;simpsonsStore&#39;,
  *         autoLoad: false,
- *         fields: ['name', 'email', 'phone'],
+ *         fields: [&#39;name&#39;, &#39;email&#39;, &#39;phone&#39;],
  *         pageSize: itemsPerPage, // items per page
  *         proxy: {
- *             type: 'ajax',
- *             url: 'pagingstore.js', // url that will load data with respect to start and limit params
+ *             type: &#39;ajax&#39;,
+ *             url: &#39;pagingstore.js&#39;, // url that will load data with respect to start and limit params
  *             reader: {
- *                 type: 'json',
- *                 rootProperty: 'items',
- *                 totalProperty: 'total'
+ *                 type: &#39;json&#39;,
+ *                 rootProperty: &#39;items&#39;,
+ *                 totalProperty: &#39;total&#39;
  *             }
  *         }
  *     });
@@ -60,28 +60,28 @@
  *         }
  *     });
  *
- *     Ext.create('Ext.grid.Panel', {
- *         title: 'Simpsons',
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
+ *         title: &#39;Simpsons&#39;,
  *         width: 400,
  *         height: 125,
  *         renderTo: Ext.getBody(),
  *
- *         store: 'simpsonsStore',
+ *         store: &#39;simpsonsStore&#39;,
  *
  *         columns: [{
- *             text: 'Name',
- *             dataIndex: 'name'
+ *             text: &#39;Name&#39;,
+ *             dataIndex: &#39;name&#39;
  *         }, {
- *             text: 'Email',
- *             dataIndex: 'email',
+ *             text: &#39;Email&#39;,
+ *             dataIndex: &#39;email&#39;,
  *             flex: 1
  *         }, {
- *             text: 'Phone',
- *             dataIndex: 'phone'
+ *             text: &#39;Phone&#39;,
+ *             dataIndex: &#39;phone&#39;
  *         }],
  *
  *         bbar: {
- *             xtype: 'pagingtoolbar',
+ *             xtype: &#39;pagingtoolbar&#39;,
  *             displayInfo: true
  *         }
  *     });
@@ -95,13 +95,13 @@
  *             start: 0,
  *             limit: myPageSize,
  *             // other params
- *             foo:   'bar'
+ *             foo:   &#39;bar&#39;
  *         }
  *     });
  *
- * If using {@link Ext.data.Store#autoLoad store's autoLoad} configuration:
+ * If using {@link Ext.data.Store#autoLoad store&#39;s autoLoad} configuration:
  *
- *     var myStore = Ext.create('Ext.data.Store', {
+ *     var myStore = Ext.create(&#39;Ext.data.Store&#39;, {
  *         autoLoad: {start: 0, limit: 25},
  *         ...
  *     });
@@ -128,18 +128,18 @@
  *
  *    [1]: http://sencha.com/forum/showthread.php?t=71532
  */
-Ext.define('Ext.toolbar.Paging', {
-    extend: 'Ext.toolbar.Toolbar',
-    xtype: 'pagingtoolbar',
+Ext.define(&#39;Ext.toolbar.Paging&#39;, {
+    extend: &#39;Ext.toolbar.Toolbar&#39;,
+    xtype: &#39;pagingtoolbar&#39;,
 
-    alternateClassName: 'Ext.PagingToolbar',
+    alternateClassName: &#39;Ext.PagingToolbar&#39;,
     requires: [
-        'Ext.toolbar.TextItem',
-        'Ext.form.field.Number'
+        &#39;Ext.toolbar.TextItem&#39;,
+        &#39;Ext.form.field.Number&#39;
     ],
 
     mixins: [
-        'Ext.util.StoreHolder'
+        &#39;Ext.util.StoreHolder&#39;
     ],
 
 <span id='Ext-toolbar-Paging-cfg-store'>    /**
@@ -174,7 +174,7 @@ Ext.define('Ext.toolbar.Paging', {
      * formatted using the braced numbers {0}-{2} as tokens that are replaced by the values for start, end and total
      * respectively. These tokens should be preserved when overriding this string if showing those values is desired.
      */
-    displayMsg : 'Displaying {0} - {1} of {2}',
+    displayMsg : &#39;Displaying {0} - {1} of {2}&#39;,
     //&lt;/locale&gt;
 
     //&lt;locale&gt;
@@ -182,7 +182,7 @@ Ext.define('Ext.toolbar.Paging', {
 </span>     * @cfg {String} emptyMsg
      * The message to display when no records are found.
      */
-    emptyMsg : 'No data to display',
+    emptyMsg : &#39;No data to display&#39;,
     //&lt;/locale&gt;
 
     //&lt;locale&gt;
@@ -190,7 +190,7 @@ Ext.define('Ext.toolbar.Paging', {
 </span>     * @cfg {String} beforePageText
      * The text displayed before the input item.
      */
-    beforePageText : 'Page',
+    beforePageText : &#39;Page&#39;,
     //&lt;/locale&gt;
 
     //&lt;locale&gt;
@@ -200,7 +200,7 @@ Ext.define('Ext.toolbar.Paging', {
      * {0} as a token that is replaced by the number of total pages. This token should be preserved when overriding this
      * string if showing the total page count is desired.
      */
-    afterPageText : 'of {0}',
+    afterPageText : &#39;of {0}&#39;,
     //&lt;/locale&gt;
 
     //&lt;locale&gt;
@@ -209,7 +209,7 @@ Ext.define('Ext.toolbar.Paging', {
      * The quicktip text displayed for the first page button.
      * **Note**: quick tips must be initialized for the quicktip to show.
      */
-    firstText : 'First Page',
+    firstText : &#39;First Page&#39;,
     //&lt;/locale&gt;
 
     //&lt;locale&gt;
@@ -218,7 +218,7 @@ Ext.define('Ext.toolbar.Paging', {
      * The quicktip text displayed for the previous page button.
      * **Note**: quick tips must be initialized for the quicktip to show.
      */
-    prevText : 'Previous Page',
+    prevText : &#39;Previous Page&#39;,
     //&lt;/locale&gt;
 
     //&lt;locale&gt;
@@ -227,7 +227,7 @@ Ext.define('Ext.toolbar.Paging', {
      * The quicktip text displayed for the next page button.
      * **Note**: quick tips must be initialized for the quicktip to show.
      */
-    nextText : 'Next Page',
+    nextText : &#39;Next Page&#39;,
     //&lt;/locale&gt;
 
     //&lt;locale&gt;
@@ -236,7 +236,7 @@ Ext.define('Ext.toolbar.Paging', {
      * The quicktip text displayed for the last page button.
      * **Note**: quick tips must be initialized for the quicktip to show.
      */
-    lastText : 'Last Page',
+    lastText : &#39;Last Page&#39;,
     //&lt;/locale&gt;
 
     //&lt;locale&gt;
@@ -245,7 +245,7 @@ Ext.define('Ext.toolbar.Paging', {
      * The quicktip text displayed for the Refresh button.
      * **Note**: quick tips must be initialized for the quicktip to show.
      */
-    refreshText : 'Refresh',
+    refreshText : &#39;Refresh&#39;,
     //&lt;/locale&gt;
 
 <span id='Ext-toolbar-Paging-cfg-inputItemWidth'>    /**
@@ -300,7 +300,7 @@ Ext.define('Ext.toolbar.Paging', {
 <span id='Ext-toolbar-Paging-property-defaultBindProperty'>    /**
 </span>     * @inheritdoc
      */
-    defaultBindProperty: 'store',
+    defaultBindProperty: &#39;store&#39;,
 
 <span id='Ext-toolbar-Paging-method-getPagingItems'>    /**
 </span>     * Gets the standard paging items in the toolbar
@@ -313,32 +313,32 @@ Ext.define('Ext.toolbar.Paging', {
                 blur: me.onPagingBlur
             };
 
-        inputListeners[Ext.supports.SpecialKeyDownRepeat ? 'keydown' : 'keypress'] = me.onPagingKeyDown;
+        inputListeners[Ext.supports.SpecialKeyDownRepeat ? &#39;keydown&#39; : &#39;keypress&#39;] = me.onPagingKeyDown;
 
         return [{
-            itemId: 'first',
+            itemId: &#39;first&#39;,
             tooltip: me.firstText,
             overflowText: me.firstText,
-            iconCls: Ext.baseCSSPrefix + 'tbar-page-first',
+            iconCls: Ext.baseCSSPrefix + &#39;tbar-page-first&#39;,
             disabled: true,
             handler: me.moveFirst,
             scope: me
         },{
-            itemId: 'prev',
+            itemId: &#39;prev&#39;,
             tooltip: me.prevText,
             overflowText: me.prevText,
-            iconCls: Ext.baseCSSPrefix + 'tbar-page-prev',
+            iconCls: Ext.baseCSSPrefix + &#39;tbar-page-prev&#39;,
             disabled: true,
             handler: me.movePrevious,
             scope: me
         },
-        '-',
+        &#39;-&#39;,
         me.beforePageText,
         {
-            xtype: 'numberfield',
-            itemId: 'inputItem',
-            name: 'inputItem',
-            cls: Ext.baseCSSPrefix + 'tbar-page-number',
+            xtype: &#39;numberfield&#39;,
+            itemId: &#39;inputItem&#39;,
+            name: &#39;inputItem&#39;,
+            cls: Ext.baseCSSPrefix + &#39;tbar-page-number&#39;,
             allowDecimals: false,
             minValue: 1,
             hideTrigger: true,
@@ -349,37 +349,37 @@ Ext.define('Ext.toolbar.Paging', {
             // mark it as not a field so the form will not catch it when getting fields
             isFormField: false,
             width: me.inputItemWidth,
-            margin: '-1 2 3 2',
+            margin: &#39;-1 2 3 2&#39;,
             listeners: inputListeners
         },{
-            xtype: 'tbtext',
-            itemId: 'afterTextItem',
+            xtype: &#39;tbtext&#39;,
+            itemId: &#39;afterTextItem&#39;,
             html: Ext.String.format(me.afterPageText, 1)
         },
-        '-',
+        &#39;-&#39;,
         {
-            itemId: 'next',
+            itemId: &#39;next&#39;,
             tooltip: me.nextText,
             overflowText: me.nextText,
-            iconCls: Ext.baseCSSPrefix + 'tbar-page-next',
+            iconCls: Ext.baseCSSPrefix + &#39;tbar-page-next&#39;,
             disabled: true,
             handler: me.moveNext,
             scope: me
         },{
-            itemId: 'last',
+            itemId: &#39;last&#39;,
             tooltip: me.lastText,
             overflowText: me.lastText,
-            iconCls: Ext.baseCSSPrefix + 'tbar-page-last',
+            iconCls: Ext.baseCSSPrefix + &#39;tbar-page-last&#39;,
             disabled: true,
             handler: me.moveLast,
             scope: me
         },
-        '-',
+        &#39;-&#39;,
         {
-            itemId: 'refresh',
+            itemId: &#39;refresh&#39;,
             tooltip: me.refreshText,
             overflowText: me.refreshText,
-            iconCls: Ext.baseCSSPrefix + 'tbar-loading',
+            iconCls: Ext.baseCSSPrefix + &#39;tbar-loading&#39;,
             disabled: me.store.isLoading(),
             handler: me.doRefresh,
             scope: me
@@ -391,11 +391,11 @@ Ext.define('Ext.toolbar.Paging', {
             userItems = me.items || me.buttons || [],
             pagingItems;
 
-        me.bindStore(me.store || 'ext-empty-store', true);
+        me.bindStore(me.store || &#39;ext-empty-store&#39;, true);
 
         //&lt;debug&gt;
         if (me.store &amp;&amp; !me.store.nextPage) {
-            Ext.raise('Store is not compatible with this component (does not support paging)');
+            Ext.raise(&#39;Store is not compatible with this component (does not support paging)&#39;);
         }
         //&lt;/debug&gt;
 
@@ -410,10 +410,10 @@ Ext.define('Ext.toolbar.Paging', {
         delete me.buttons;
 
         if (me.displayInfo) {
-            me.items.push('-&gt;');
+            me.items.push(&#39;-&gt;&#39;);
             me.items.push({
-                xtype: 'tbtext',
-                itemId: 'displayItem'
+                xtype: &#39;tbtext&#39;,
+                itemId: &#39;displayItem&#39;
             });
         }
 
@@ -452,7 +452,7 @@ Ext.define('Ext.toolbar.Paging', {
                     destroyable: true,
                     scope: me,
 
-                    storechange: 'onOwnerStoreChange'
+                    storechange: &#39;onOwnerStoreChange&#39;
                 })
             }
 
@@ -464,7 +464,7 @@ Ext.define('Ext.toolbar.Paging', {
     },
 
 <span id='Ext-toolbar-Paging-method-onOwnerStoreChange'>    onOwnerStoreChange: function (owner, store) {
-</span>        this.setStore(store || Ext.getStore('ext-empty-store'));
+</span>        this.setStore(store || Ext.getStore(&#39;ext-empty-store&#39;));
     },
 
 <span id='Ext-toolbar-Paging-method-updateBarInfo'>    updateBarInfo: function() {
@@ -481,7 +481,7 @@ Ext.define('Ext.toolbar.Paging', {
      */
     updateInfo : function(){
         var me = this,
-            displayItem = me.child('#displayItem'),
+            displayItem = me.child(&#39;#displayItem&#39;),
             store = me.store,
             pageData = me.getPageData(),
             count, msg;
@@ -544,7 +544,7 @@ Ext.define('Ext.toolbar.Paging', {
         }
 
         Ext.suspendLayouts();
-        item = me.child('#afterTextItem');
+        item = me.child(&#39;#afterTextItem&#39;);
         if (item) {
             item.update(afterText);
         }
@@ -552,16 +552,16 @@ Ext.define('Ext.toolbar.Paging', {
         if (item) {
             item.setDisabled(isEmpty).setValue(currPage);
         }
-        me.setChildDisabled('#first', currPage === 1 || isEmpty);
-        me.setChildDisabled('#prev', currPage === 1 || isEmpty);
-        me.setChildDisabled('#next', currPage === pageCount  || isEmpty);
-        me.setChildDisabled('#last', currPage === pageCount  || isEmpty);
-        me.setChildDisabled('#refresh', false);
+        me.setChildDisabled(&#39;#first&#39;, currPage === 1 || isEmpty);
+        me.setChildDisabled(&#39;#prev&#39;, currPage === 1 || isEmpty);
+        me.setChildDisabled(&#39;#next&#39;, currPage === pageCount  || isEmpty);
+        me.setChildDisabled(&#39;#last&#39;, currPage === pageCount  || isEmpty);
+        me.setChildDisabled(&#39;#refresh&#39;, false);
         me.updateInfo();
         Ext.resumeLayouts(true);
 
         if (!me.calledInternal) {
-            me.fireEvent('change', me, pageData || me.emptyPageData);
+            me.fireEvent(&#39;change&#39;, me, pageData || me.emptyPageData);
         }
     },
 
@@ -594,11 +594,11 @@ Ext.define('Ext.toolbar.Paging', {
 </span>     * @private
      */
     onLoadError : function(){
-        this.setChildDisabled('#refresh', false);
+        this.setChildDisabled(&#39;#refresh&#39;, false);
     },
 
 <span id='Ext-toolbar-Paging-method-getInputItem'>    getInputItem: function(){
-</span>        return this.child('#inputItem');
+</span>        return this.child(&#39;#inputItem&#39;);
     },
 
 <span id='Ext-toolbar-Paging-method-readPageFromInput'>    /**
@@ -652,7 +652,7 @@ Ext.define('Ext.toolbar.Paging', {
             pageNum = me.readPageFromInput(pageData);
             if (pageNum !== false) {
                 pageNum = Math.min(Math.max(1, pageNum), pageData.pageCount);
-                if (pageNum !== pageData.currentPage &amp;&amp; me.fireEvent('beforechange', me, pageNum) !== false) {
+                if (pageNum !== pageData.currentPage &amp;&amp; me.fireEvent(&#39;beforechange&#39;, me, pageNum) !== false) {
                     me.store.loadPage(pageNum);
                 }
             }
@@ -679,17 +679,17 @@ Ext.define('Ext.toolbar.Paging', {
 </span>     * @private
      */
     beforeLoad : function() {
-        this.setChildDisabled('#refresh', true);
+        this.setChildDisabled(&#39;#refresh&#39;, true);
     },
 
 <span id='Ext-toolbar-Paging-method-moveFirst'>    /**
-</span>     * Move to the first page, has the same effect as clicking the 'first' button.
+</span>     * Move to the first page, has the same effect as clicking the &#39;first&#39; button.
      * Fires the {@link #beforechange} event. If the event returns `false`, then
      * the load will not be attempted.
      * @return {Boolean} `true` if the load was passed to the store.
      */
     moveFirst : function(){
-        if (this.fireEvent('beforechange', this, 1) !== false){
+        if (this.fireEvent(&#39;beforechange&#39;, this, 1) !== false){
             this.store.loadPage(1);
             return true;
         }
@@ -697,7 +697,7 @@ Ext.define('Ext.toolbar.Paging', {
     },
 
 <span id='Ext-toolbar-Paging-method-movePrevious'>    /**
-</span>     * Move to the previous page, has the same effect as clicking the 'previous' button.
+</span>     * Move to the previous page, has the same effect as clicking the &#39;previous&#39; button.
      * Fires the {@link #beforechange} event. If the event returns `false`, then
      * the load will not be attempted.
      * @return {Boolean} `true` if the load was passed to the store.
@@ -708,7 +708,7 @@ Ext.define('Ext.toolbar.Paging', {
             prev = store.currentPage - 1;
 
         if (prev &gt; 0) {
-            if (me.fireEvent('beforechange', me, prev) !== false) {
+            if (me.fireEvent(&#39;beforechange&#39;, me, prev) !== false) {
                 store.previousPage();
                 return true;
             }
@@ -717,7 +717,7 @@ Ext.define('Ext.toolbar.Paging', {
     },
 
 <span id='Ext-toolbar-Paging-method-moveNext'>    /**
-</span>     * Move to the next page, has the same effect as clicking the 'next' button.
+</span>     * Move to the next page, has the same effect as clicking the &#39;next&#39; button.
      * Fires the {@link #beforechange} event. If the event returns `false`, then
      * the load will not be attempted.
      * @return {Boolean} `true` if the load was passed to the store.
@@ -729,7 +729,7 @@ Ext.define('Ext.toolbar.Paging', {
             next = store.currentPage + 1;
 
         if (next &lt;= total) {
-            if (me.fireEvent('beforechange', me, next) !== false) {
+            if (me.fireEvent(&#39;beforechange&#39;, me, next) !== false) {
                 store.nextPage();
                 return true;
             }
@@ -738,7 +738,7 @@ Ext.define('Ext.toolbar.Paging', {
     },
 
 <span id='Ext-toolbar-Paging-method-moveLast'>    /**
-</span>     * Move to the last page, has the same effect as clicking the 'last' button.
+</span>     * Move to the last page, has the same effect as clicking the &#39;last&#39; button.
      * Fires the {@link #beforechange} event. If the event returns `false`, then
      * the load will not be attempted.
      * @return {Boolean} `true` if the load was passed to the store.
@@ -747,7 +747,7 @@ Ext.define('Ext.toolbar.Paging', {
         var me = this,
             last = me.getPageData().pageCount;
 
-        if (me.fireEvent('beforechange', me, last) !== false) {
+        if (me.fireEvent(&#39;beforechange&#39;, me, last) !== false) {
             me.store.loadPage(last);
             return true;
         }
@@ -755,7 +755,7 @@ Ext.define('Ext.toolbar.Paging', {
     },
 
 <span id='Ext-toolbar-Paging-method-doRefresh'>    /**
-</span>     * Refresh the current page, has the same effect as clicking the 'refresh' button.
+</span>     * Refresh the current page, has the same effect as clicking the &#39;refresh&#39; button.
      * Fires the {@link #beforechange} event. If the event returns `false`, then
      * the load will not be attempted.
      * @return {Boolean} `true` if the load was passed to the store.
@@ -765,7 +765,7 @@ Ext.define('Ext.toolbar.Paging', {
             store = me.store,
             current = store.currentPage;
 
-        if (me.fireEvent('beforechange', me, current) !== false) {
+        if (me.fireEvent(&#39;beforechange&#39;, me, current) !== false) {
             store.loadPage(current);
             return true;
         }

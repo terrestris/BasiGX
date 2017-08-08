@@ -18,11 +18,11 @@
   <pre class="prettyprint lang-js"><span id='Ext-container-DockingContainer'>/**
 </span> *
  */
-Ext.define('Ext.container.DockingContainer', {
+Ext.define(&#39;Ext.container.DockingContainer&#39;, {
 
     /* Begin Definitions */
 
-    requires: ['Ext.util.MixedCollection', 'Ext.Element' ],
+    requires: [&#39;Ext.util.MixedCollection&#39;, &#39;Ext.Element&#39; ],
 
 <span id='Ext-container-DockingContainer-property-isDockingContainer'>    /* End Definitions */
 </span>
@@ -57,7 +57,7 @@ Ext.define('Ext.container.DockingContainer', {
      * To change the defaults on a single panel, you should replace the entire object:
      *
      *      initComponent: function () {
-     *          // NOTE: Don't change members of defaultDockWeights since the object is shared.
+     *          // NOTE: Don&#39;t change members of defaultDockWeights since the object is shared.
      *          this.defaultDockWeights = { top: 1, bottom: 3, left: 5, right: 7 };
      *
      *          this.callParent();
@@ -66,7 +66,7 @@ Ext.define('Ext.container.DockingContainer', {
      * To change only one of the default values, you do this:
      *
      *      initComponent: function () {
-     *          // NOTE: Don't change members of defaultDockWeights since the object is shared.
+     *          // NOTE: Don&#39;t change members of defaultDockWeights since the object is shared.
      *          this.defaultDockWeights = Ext.applyIf({ top: 10 }, this.defaultDockWeights);
      * 
      *          this.callParent();
@@ -94,7 +94,7 @@ Ext.define('Ext.container.DockingContainer', {
 
 <span id='Ext-container-DockingContainer-property-horizontalDocks'>    /**
 </span>     * @private
-     * Number of dock 'left' and 'right' items.
+     * Number of dock &#39;left&#39; and &#39;right&#39; items.
      */
     horizontalDocks: 0,
 
@@ -102,8 +102,8 @@ Ext.define('Ext.container.DockingContainer', {
 </span>     * Adds docked item(s) to the container.
      *
      * @param {Object/Object[]} items The Component or array of components to add. The components
-     * must include a 'dock' parameter on each component to indicate where it should be docked
-     * ('top', 'right', 'bottom', 'left').
+     * must include a &#39;dock&#39; parameter on each component to indicate where it should be docked
+     * (&#39;top&#39;, &#39;right&#39;, &#39;bottom&#39;, &#39;left&#39;).
      * @param {Number} [pos] The index at which the Component will be added
      * @return {Ext.Component[]} The added components.
      */
@@ -131,8 +131,8 @@ Ext.define('Ext.container.DockingContainer', {
 
         for (; i &lt; length; i++) {
             item = items[i];
-            item.dock = item.dock || 'top';
-            if (item.dock === 'left' || item.dock === 'right') {
+            item.dock = item.dock || &#39;top&#39;;
+            if (item.dock === &#39;left&#39; || item.dock === &#39;right&#39;) {
                 me.horizontalDocks++;
             }
 
@@ -147,7 +147,7 @@ Ext.define('Ext.container.DockingContainer', {
                 me.onDockedAdd(item);
             }
             if (me.hasListeners.dockedadd) {
-                me.fireEvent('dockedadd', me, item, index);
+                me.fireEvent(&#39;dockedadd&#39;, me, item, index);
             }
         }
 
@@ -177,11 +177,11 @@ Ext.define('Ext.container.DockingContainer', {
 
         var me = renderData.$comp,
             layout = me.componentLayout,
-            tabGuard = me.tabGuard &amp;&amp; me.lookupTpl('tabGuardTpl'),
+            tabGuard = me.tabGuard &amp;&amp; me.lookupTpl(&#39;tabGuardTpl&#39;),
             items, tree;
 
         if (layout.getDockedItems) {
-            items = layout.getDockedItems('render', !after);
+            items = layout.getDockedItems(&#39;render&#39;, !after);
             tree = items &amp;&amp; layout.getItemsRenderTree(items);
 
             if (tree) {
@@ -207,7 +207,7 @@ Ext.define('Ext.container.DockingContainer', {
      *
      * For example to find a toolbar that has been docked at top:
      *
-     *     panel.getDockedItems('toolbar[dock=&quot;top&quot;]');
+     *     panel.getDockedItems(&#39;toolbar[dock=&quot;top&quot;]&#39;);
      *
      * @param {String} selector A {@link Ext.ComponentQuery ComponentQuery} selector string to filter the returned items.
      * @param {Boolean} beforeBody An optional flag to limit the set of items to only those
@@ -216,7 +216,7 @@ Ext.define('Ext.container.DockingContainer', {
      * @return {Ext.Component[]} The array of docked components meeting the specified criteria.
      */
     getDockedItems : function(selector, beforeBody) {
-        var dockedItems = this.getComponentLayout().getDockedItems('render', beforeBody);
+        var dockedItems = this.getComponentLayout().getDockedItems(&#39;render&#39;, beforeBody);
 
         if (selector &amp;&amp; dockedItems.length) {
             dockedItems = Ext.ComponentQuery.query(selector, dockedItems);
@@ -226,8 +226,8 @@ Ext.define('Ext.container.DockingContainer', {
     },
 
 <span id='Ext-container-DockingContainer-method-getDockingRefItems'>    getDockingRefItems: function(deep, containerItems) {
-</span>        // deep fetches the docked items and their descendants using '*' and then '* *'
-        var selector = deep &amp;&amp; '*,* *',
+</span>        // deep fetches the docked items and their descendants using &#39;*&#39; and then &#39;* *&#39;
+        var selector = deep &amp;&amp; &#39;*,* *&#39;,
             // start with only the top/left docked items (and maybe their children)
             dockedItems = this.getDockedItems(selector, true),
             items;
@@ -258,8 +258,8 @@ Ext.define('Ext.container.DockingContainer', {
 </span>     * Inserts docked item(s) to the panel at the indicated position.
      * @param {Number} pos The index at which the Component will be inserted
      * @param {Object/Object[]} items The Component or array of components to add. The components
-     * must include a 'dock' paramater on each component to indicate where it should be docked ('top', 'right',
-     * 'bottom', 'left').
+     * must include a &#39;dock&#39; paramater on each component to indicate where it should be docked (&#39;top&#39;, &#39;right&#39;,
+     * &#39;bottom&#39;, &#39;left&#39;).
      */
     insertDocked : function(pos, items) {
         this.addDocked(items, pos);
@@ -297,7 +297,7 @@ Ext.define('Ext.container.DockingContainer', {
         if (!me.dockedItems.contains(item)) {
             return item;
         }
-        if (item.dock === 'left' || item.dock === 'right') {
+        if (item.dock === &#39;left&#39; || item.dock === &#39;right&#39;) {
             me.horizontalDocks--;
         }
 
@@ -321,7 +321,7 @@ Ext.define('Ext.container.DockingContainer', {
         }
         
         if (me.hasListeners.dockedremove) {
-            me.fireEvent('dockedremove', me, item);
+            me.fireEvent(&#39;dockedremove&#39;, me, item);
         }
 
         if (!me.destroying) {
@@ -334,7 +334,7 @@ Ext.define('Ext.container.DockingContainer', {
 <span id='Ext-container-DockingContainer-method-moveDocked'>    /**
 </span>     * Moves a docked item to a different side.
      * @param {Ext.Component} item
-     * @param {'top'/'right'/'bottom'/'left'} side
+     * @param {&#39;top&#39;/&#39;right&#39;/&#39;bottom&#39;/&#39;left&#39;} side
      * @private
      */
     moveDocked: function(item, side) {
@@ -351,7 +351,7 @@ Ext.define('Ext.container.DockingContainer', {
         if (me.rendered) {
             if (item.frame) {
                 // temporarily append the item to the detached body while updating framing
-                // elements.  This is so the framing els won't get detected as garbage
+                // elements.  This is so the framing els won&#39;t get detected as garbage
                 // by element.getById
                 Ext.getDetachedBody().appendChild(item.el);
                 item.updateFrame();

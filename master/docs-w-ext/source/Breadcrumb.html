@@ -26,48 +26,48 @@
  * The selection can be set programmatically  using {@link #setSelection}, or retrieved
  * using {@link #getSelection}.
  */
-Ext.define('Ext.toolbar.Breadcrumb', {
-    extend: 'Ext.Container',
-    xtype: 'breadcrumb',
+Ext.define(&#39;Ext.toolbar.Breadcrumb&#39;, {
+    extend: &#39;Ext.Container&#39;,
+    xtype: &#39;breadcrumb&#39;,
     requires: [
-        'Ext.data.TreeStore',
-        'Ext.button.Split'
+        &#39;Ext.data.TreeStore&#39;,
+        &#39;Ext.button.Split&#39;
     ],
     
     mixins: [
-        'Ext.util.FocusableContainer'
+        &#39;Ext.util.FocusableContainer&#39;
     ],
 
 <span id='Ext-toolbar-Breadcrumb-property-isBreadcrumb'>    isBreadcrumb: true,
-</span><span id='Ext-toolbar-Breadcrumb-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'breadcrumb',
+</span><span id='Ext-toolbar-Breadcrumb-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;breadcrumb&#39;,
 </span>
 <span id='Ext-toolbar-Breadcrumb-cfg-layout'>    layout: {
-</span>        type: 'hbox',
-        align: 'middle'
+</span>        type: &#39;hbox&#39;,
+        align: &#39;middle&#39;
     },
 
     config: {
 <span id='Ext-toolbar-Breadcrumb-cfg-buttonUI'>        /**
-</span>         * @cfg {String} [buttonUI='plain-toolbar']
+</span>         * @cfg {String} [buttonUI=&#39;plain-toolbar&#39;]
          * Button UI to use for breadcrumb items.  Use {@link #extjs-breadcrumb-ui} to
          * add special styling to the breadcrumb arrows
          */
-        buttonUI: 'plain-toolbar',
+        buttonUI: &#39;plain-toolbar&#39;,
 
 <span id='Ext-toolbar-Breadcrumb-cfg-displayField'>        /**
 </span>         * @cfg {String}
          * The name of the field in the data model to display in the navigation items of
          * this breadcrumb toolbar
          */
-        displayField: 'text',
+        displayField: &#39;text&#39;,
 
 <span id='Ext-toolbar-Breadcrumb-cfg-overflowHandler'>        /**
 </span>         * @cfg {String} [overflowHandler=null]
          * The overflowHandler for this Breadcrumb:
          *
          * - `null` - hidden overflow
-         * - `'scroller'` to render left/right scroller buttons on either side of the breadcrumb
-         * - `'menu'` to render the overflowing buttons as items of an overflow menu.
+         * - `&#39;scroller&#39;` to render left/right scroller buttons on either side of the breadcrumb
+         * - `&#39;menu&#39;` to render the overflowing buttons as items of an overflow menu.
          */
         overflowHandler: null,
 
@@ -132,23 +132,23 @@ Ext.define('Ext.toolbar.Breadcrumb', {
          * The selected node, or `&quot;root&quot;` to select the root node
          * @accessor
          */
-        selection: 'root'
+        selection: &#39;root&#39;
     },
 
-<span id='Ext-toolbar-Breadcrumb-cfg-publishes'>    publishes: ['selection'],
-</span><span id='Ext-toolbar-Breadcrumb-cfg-twoWayBindable'>    twoWayBindable: ['selection'],
+<span id='Ext-toolbar-Breadcrumb-cfg-publishes'>    publishes: [&#39;selection&#39;],
+</span><span id='Ext-toolbar-Breadcrumb-cfg-twoWayBindable'>    twoWayBindable: [&#39;selection&#39;],
 </span>
-<span id='Ext-toolbar-Breadcrumb-property-_breadcrumbCls'>    _breadcrumbCls: Ext.baseCSSPrefix + 'breadcrumb',
-</span><span id='Ext-toolbar-Breadcrumb-property-_btnCls'>    _btnCls: Ext.baseCSSPrefix + 'breadcrumb-btn',
-</span><span id='Ext-toolbar-Breadcrumb-property-_folderIconCls'>    _folderIconCls: Ext.baseCSSPrefix + 'breadcrumb-icon-folder',
-</span><span id='Ext-toolbar-Breadcrumb-property-_leafIconCls'>    _leafIconCls: Ext.baseCSSPrefix + 'breadcrumb-icon-leaf',
+<span id='Ext-toolbar-Breadcrumb-property-_breadcrumbCls'>    _breadcrumbCls: Ext.baseCSSPrefix + &#39;breadcrumb&#39;,
+</span><span id='Ext-toolbar-Breadcrumb-property-_btnCls'>    _btnCls: Ext.baseCSSPrefix + &#39;breadcrumb-btn&#39;,
+</span><span id='Ext-toolbar-Breadcrumb-property-_folderIconCls'>    _folderIconCls: Ext.baseCSSPrefix + &#39;breadcrumb-icon-folder&#39;,
+</span><span id='Ext-toolbar-Breadcrumb-property-_leafIconCls'>    _leafIconCls: Ext.baseCSSPrefix + &#39;breadcrumb-icon-leaf&#39;,
 </span>
 <span id='Ext-toolbar-Breadcrumb-method-initComponent'>    initComponent: function() {
 </span>        var me = this,
             layout = me.layout,
             overflowHandler = me.getOverflowHandler();
 
-        if (typeof layout === 'string') {
+        if (typeof layout === &#39;string&#39;) {
             layout = {
                 type: layout
             };
@@ -171,7 +171,7 @@ Ext.define('Ext.toolbar.Breadcrumb', {
          */
         me._buttons = [];
 
-        me.addCls([me._breadcrumbCls, me._breadcrumbCls + '-' + me.ui]);
+        me.addCls([me._breadcrumbCls, me._breadcrumbCls + &#39;-&#39; + me.ui]);
 
         me.callParent();
     },
@@ -195,7 +195,7 @@ Ext.define('Ext.toolbar.Breadcrumb', {
         me.callParent(arguments);
 
         if (overflowHandler &amp;&amp; me.tooNarrow &amp;&amp; overflowHandler.scrollToItem) {
-            overflowHandler.scrollToItem(me.getSelection().get('depth'));
+            overflowHandler.scrollToItem(me.getSelection().get(&#39;depth&#39;));
         }
     },
 
@@ -217,7 +217,7 @@ Ext.define('Ext.toolbar.Breadcrumb', {
     applySelection: function(node) {
         var store = this.getStore();
         if (store) {
-            node = (node === 'root') ? this.getStore().getRoot() : node;
+            node = (node === &#39;root&#39;) ? this.getStore().getRoot() : node;
         } else {
             node = null;
         }
@@ -228,7 +228,7 @@ Ext.define('Ext.toolbar.Breadcrumb', {
 </span>        var me = this,
             buttons = me._buttons,
             items = [],
-            itemCount = Ext.ComponentQuery.query('[isCrumb]', me.getRefItems()).length,
+            itemCount = Ext.ComponentQuery.query(&#39;[isCrumb]&#39;, me.getRefItems()).length,
             needsSync = me._needsSync,
             displayField = me.getDisplayField(),
             showIcons, glyph, iconCls, icon, newItemCount, currentNode, text, button, id, depth, i;
@@ -237,7 +237,7 @@ Ext.define('Ext.toolbar.Breadcrumb', {
 
         if (node) {
             currentNode = node;
-            depth = node.get('depth');
+            depth = node.get(&#39;depth&#39;);
             newItemCount = depth + 1;
             i = depth;
 
@@ -260,20 +260,20 @@ Ext.define('Ext.toolbar.Breadcrumb', {
                     // no button in the cache - make one and add it to the cache
                     button = buttons[i] = Ext.create({
                         isCrumb: true,
-                        xtype: me.getUseSplitButtons() ? 'splitbutton' : 'button',
+                        xtype: me.getUseSplitButtons() ? &#39;splitbutton&#39; : &#39;button&#39;,
                         ui: me.getButtonUI(),
-                        cls: me._btnCls + ' ' + me._btnCls + '-' + me.ui,
+                        cls: me._btnCls + &#39; &#39; + me._btnCls + &#39;-&#39; + me.ui,
                         text: text,
                         showEmptyMenu: true,
                         // begin with an empty menu - items are populated on beforeshow
                         menu: {
                             listeners: {
-                                click: '_onMenuClick',
-                                beforeshow: '_onMenuBeforeShow',
+                                click: &#39;_onMenuClick&#39;,
+                                beforeshow: &#39;_onMenuBeforeShow&#39;,
                                 scope: this
                             }
                         },
-                        handler: '_onButtonClick',
+                        handler: &#39;_onButtonClick&#39;,
                         scope: me
                     });
                 }
@@ -281,9 +281,9 @@ Ext.define('Ext.toolbar.Breadcrumb', {
                 showIcons = this.getShowIcons();
 
                 if (showIcons !== false) {
-                    glyph = currentNode.get('glyph');
-                    icon = currentNode.get('icon');
-                    iconCls = currentNode.get('iconCls');
+                    glyph = currentNode.get(&#39;glyph&#39;);
+                    icon = currentNode.get(&#39;icon&#39;);
+                    iconCls = currentNode.get(&#39;iconCls&#39;);
 
                     if (glyph) {
                         button.setGlyph(glyph);
@@ -302,7 +302,7 @@ Ext.define('Ext.toolbar.Breadcrumb', {
                         button.setGlyph(null);
                         button.setIcon(null);
                         button.setIconCls(
-                            (currentNode.isLeaf() ? me._leafIconCls : me._folderIconCls) + '-' + me.ui
+                            (currentNode.isLeaf() ? me._leafIconCls : me._folderIconCls) + &#39;-&#39; + me.ui
                         );
                     } else {
                         // if showIcons is null do not show default icons
@@ -348,7 +348,7 @@ Ext.define('Ext.toolbar.Breadcrumb', {
          * @param {Ext.data.TreeModel} node The selected node.
          * @param {Ext.data.TreeModel} prevNode The previously selected node.
          */
-        me.fireEvent('selectionchange', me, node, prevNode);
+        me.fireEvent(&#39;selectionchange&#39;, me, node, prevNode);
         
         if (me._shouldFireChangeEvent) {
 <span id='Ext-toolbar-Breadcrumb-event-change'>            /**
@@ -359,7 +359,7 @@ Ext.define('Ext.toolbar.Breadcrumb', {
              * @param {Ext.data.TreeModel} node The selected node.
              * @param {Ext.data.TreeModel} prevNode The previously selected node.
              */
-            me.fireEvent('change', me, node, prevNode);
+            me.fireEvent(&#39;change&#39;, me, node, prevNode);
         }
         me._shouldFireChangeEvent = true;
 
@@ -368,7 +368,7 @@ Ext.define('Ext.toolbar.Breadcrumb', {
 
 <span id='Ext-toolbar-Breadcrumb-method-applyUseSplitButtons'>    applyUseSplitButtons: function(useSplitButtons, oldUseSplitButtons) {
 </span>        if (this.rendered &amp;&amp; useSplitButtons !== oldUseSplitButtons) {
-            Ext.raise(&quot;Cannot reconfigure 'useSplitButtons' config of Ext.toolbar.Breadcrumb after initial render&quot;);
+            Ext.raise(&quot;Cannot reconfigure &#39;useSplitButtons&#39; config of Ext.toolbar.Breadcrumb after initial render&quot;);
         }
         return useSplitButtons;
     },
@@ -390,7 +390,7 @@ Ext.define('Ext.toolbar.Breadcrumb', {
 
 <span id='Ext-toolbar-Breadcrumb-method-updateOverflowHandler'>    //&lt;debug&gt;
 </span>    updateOverflowHandler: function(overflowHandler) {
-        if (overflowHandler === 'menu') {
+        if (overflowHandler === &#39;menu&#39;) {
             Ext.raise(&quot;Using Menu overflow with breadcrumb is not currently supported.&quot;);
         }
     },
@@ -455,9 +455,9 @@ Ext.define('Ext.toolbar.Breadcrumb', {
                     };
 
                     if (showMenuIcons !== false) {
-                        glyph = child.get('glyph');
-                        icon = child.get('icon');
-                        iconCls = child.get('iconCls');
+                        glyph = child.get(&#39;glyph&#39;);
+                        icon = child.get(&#39;icon&#39;);
+                        iconCls = child.get(&#39;iconCls&#39;);
 
                         if (glyph) {
                             item.glyph = glyph;
@@ -470,7 +470,7 @@ Ext.define('Ext.toolbar.Breadcrumb', {
                             // only show default icons if showIcons === true
                             item.iconCls =
                                 (child.isLeaf() ? me._leafIconCls : me._folderIconCls) +
-                                '-' + me.ui;
+                                &#39;-&#39; + me.ui;
                         }
                     }
 

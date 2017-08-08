@@ -46,17 +46,17 @@
  * created by the {@link #getSubTplData} method. Override this template and/or method to create custom
  * field renderings.
  */
-Ext.define('Ext.form.field.Base', {
-    extend: 'Ext.Component',
+Ext.define(&#39;Ext.form.field.Base&#39;, {
+    extend: &#39;Ext.Component&#39;,
     mixins: [
-        'Ext.form.Labelable',
-        'Ext.form.field.Field'
+        &#39;Ext.form.Labelable&#39;,
+        &#39;Ext.form.field.Field&#39;
     ],
-    xtype: 'field',
-    alternateClassName: ['Ext.form.Field', 'Ext.form.BaseField'],
+    xtype: &#39;field&#39;,
+    alternateClassName: [&#39;Ext.form.Field&#39;, &#39;Ext.form.BaseField&#39;],
     requires: [
-        'Ext.util.DelayedTask',
-        'Ext.XTemplate'
+        &#39;Ext.util.DelayedTask&#39;,
+        &#39;Ext.XTemplate&#39;
     ],
     
 <span id='Ext-form-field-Base-property-focusable'>    focusable: true,
@@ -68,40 +68,40 @@ Ext.define('Ext.form.field.Base', {
      * @private
      */
     fieldSubTpl: [ // note: {id} here is really {inputId}, but {cmpId} is available
-        '&lt;input id=&quot;{id}&quot; data-ref=&quot;inputEl&quot; type=&quot;{type}&quot; {inputAttrTpl}',
-            ' size=&quot;1&quot;', // allows inputs to fully respect CSS widths across all browsers
-            '&lt;tpl if=&quot;name&quot;&gt; name=&quot;{name}&quot;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;value&quot;&gt; value=&quot;{[Ext.util.Format.htmlEncode(values.value)]}&quot;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;placeholder&quot;&gt; placeholder=&quot;{placeholder}&quot;&lt;/tpl&gt;',
-            '{%if (values.maxLength !== undefined){%} maxlength=&quot;{maxLength}&quot;{%}%}',
-            '&lt;tpl if=&quot;readOnly&quot;&gt; readonly=&quot;readonly&quot;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;disabled&quot;&gt; disabled=&quot;disabled&quot;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;tabIdx != null&quot;&gt; tabindex=&quot;{tabIdx}&quot;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;fieldStyle&quot;&gt; style=&quot;{fieldStyle}&quot;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;ariaEl == \'inputEl\'&quot;&gt;',
-                '&lt;tpl foreach=&quot;ariaElAttributes&quot;&gt; {$}=&quot;{.}&quot;&lt;/tpl&gt;',
-            '&lt;/tpl&gt;',
-            '&lt;tpl foreach=&quot;inputElAriaAttributes&quot;&gt; {$}=&quot;{.}&quot;&lt;/tpl&gt;',
-        ' class=&quot;{fieldCls} {typeCls} {typeCls}-{ui} {editableCls} {inputCls}&quot; autocomplete=&quot;off&quot;/&gt;',
+        &#39;&lt;input id=&quot;{id}&quot; data-ref=&quot;inputEl&quot; type=&quot;{type}&quot; {inputAttrTpl}&#39;,
+            &#39; size=&quot;1&quot;&#39;, // allows inputs to fully respect CSS widths across all browsers
+            &#39;&lt;tpl if=&quot;name&quot;&gt; name=&quot;{name}&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;value&quot;&gt; value=&quot;{[Ext.util.Format.htmlEncode(values.value)]}&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;placeholder&quot;&gt; placeholder=&quot;{placeholder}&quot;&lt;/tpl&gt;&#39;,
+            &#39;{%if (values.maxLength !== undefined){%} maxlength=&quot;{maxLength}&quot;{%}%}&#39;,
+            &#39;&lt;tpl if=&quot;readOnly&quot;&gt; readonly=&quot;readonly&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;disabled&quot;&gt; disabled=&quot;disabled&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;tabIdx != null&quot;&gt; tabindex=&quot;{tabIdx}&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;fieldStyle&quot;&gt; style=&quot;{fieldStyle}&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;ariaEl == \&#39;inputEl\&#39;&quot;&gt;&#39;,
+                &#39;&lt;tpl foreach=&quot;ariaElAttributes&quot;&gt; {$}=&quot;{.}&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl foreach=&quot;inputElAriaAttributes&quot;&gt; {$}=&quot;{.}&quot;&lt;/tpl&gt;&#39;,
+        &#39; class=&quot;{fieldCls} {typeCls} {typeCls}-{ui} {editableCls} {inputCls}&quot; autocomplete=&quot;off&quot;/&gt;&#39;,
         {
             disableFormats: true
         }
     ],
 
-<span id='Ext-form-field-Base-property-defaultBindProperty'>    defaultBindProperty: 'value',
+<span id='Ext-form-field-Base-property-defaultBindProperty'>    defaultBindProperty: &#39;value&#39;,
 </span>    
 <span id='Ext-form-field-Base-cfg-autoEl'>    autoEl: {
-</span>        role: 'presentation'
+</span>        role: &#39;presentation&#39;
     },
 
 <span id='Ext-form-field-Base-property-subTplInsertions'>    subTplInsertions: [
 </span><span id='Ext-form-field-Base-cfg-inputAttrTpl'>        /**
 </span>         * @cfg {String/Array/Ext.XTemplate} inputAttrTpl
          * An optional string or `XTemplate` configuration to insert in the field markup
-         * inside the input element (as attributes). If an `XTemplate` is used, the component's
+         * inside the input element (as attributes). If an `XTemplate` is used, the component&#39;s
          * {@link #getSubTplData subTpl data} serves as the context.
          */
-        'inputAttrTpl'
+        &#39;inputAttrTpl&#39;
     ],
 
 <span id='Ext-form-field-Base-cfg-childEls'>    childEls: [
@@ -109,7 +109,7 @@ Ext.define('Ext.form.field.Base', {
 </span>         * @property {Ext.dom.Element} inputEl
          * The input Element for this Field. Only available after the field has been rendered.
          */
-        'inputEl'
+        &#39;inputEl&#39;
     ],
 
 <span id='Ext-form-field-Base-cfg-name'>    /**
@@ -123,13 +123,13 @@ Ext.define('Ext.form.field.Base', {
 </span>     * @cfg {String} inputType
      * The type attribute for input fields -- e.g. radio, text, password, file. The extended types
      * supported by HTML5 inputs (url, email, etc.) may also be used, though using them will cause older browsers to
-     * fall back to 'text'.
+     * fall back to &#39;text&#39;.
      *
-     * The type 'password' must be used to render that field type currently -- there is no separate Ext component for
+     * The type &#39;password&#39; must be used to render that field type currently -- there is no separate Ext component for
      * that. You can use {@link Ext.form.field.File} which creates a custom-rendered file upload field, but if you want
-     * a plain unstyled file input you can use a Base with inputType:'file'.
+     * a plain unstyled file input you can use a Base with inputType:&#39;file&#39;.
      */
-    inputType: 'text',
+    inputType: &#39;text&#39;,
 
 <span id='Ext-form-field-Base-cfg-isTextInput'>    /**
 </span>     * @cfg {Boolean} isTextInput
@@ -155,14 +155,14 @@ Ext.define('Ext.form.field.Base', {
 </span>     * @cfg {String} invalidText
      * The error text to use when marking a field invalid and no message is provided
      */
-    invalidText : 'The value in this field is invalid',
+    invalidText : &#39;The value in this field is invalid&#39;,
     //&lt;/locale&gt;
 
 <span id='Ext-form-field-Base-cfg-fieldCls'>    /**
-</span>     * @cfg {String} [fieldCls='x-form-field']
+</span>     * @cfg {String} [fieldCls=&#39;x-form-field&#39;]
      * The default CSS class for the field input
      */
-    fieldCls : Ext.baseCSSPrefix + 'form-field',
+    fieldCls : Ext.baseCSSPrefix + &#39;form-field&#39;,
 
 <span id='Ext-form-field-Base-cfg-fieldStyle'>    /**
 </span>     * @cfg {String} fieldStyle
@@ -172,25 +172,25 @@ Ext.define('Ext.form.field.Base', {
      */
 
 <span id='Ext-form-field-Base-cfg-focusCls'>    /**
-</span>     * @cfg {String} [focusCls='x-form-focus']
+</span>     * @cfg {String} [focusCls=&#39;x-form-focus&#39;]
      * The CSS class to use when the field receives focus
      */
-    focusCls: 'form-focus',
+    focusCls: &#39;form-focus&#39;,
 
 <span id='Ext-form-field-Base-cfg-dirtyCls'>    /**
 </span>     * @cfg {String} dirtyCls
      * The CSS class to use when the field value {@link #isDirty is dirty}.
      */
-    dirtyCls : Ext.baseCSSPrefix + 'form-dirty',
+    dirtyCls : Ext.baseCSSPrefix + &#39;form-dirty&#39;,
 
 <span id='Ext-form-field-Base-cfg-checkChangeEvents'>    /**
 </span>     * @cfg {String[]} checkChangeEvents
-     * A list of event names that will be listened for on the field's {@link #inputEl input element}, which will cause
-     * the field's value to be checked for changes. If a change is detected, the {@link #change change event} will be
+     * A list of event names that will be listened for on the field&#39;s {@link #inputEl input element}, which will cause
+     * the field&#39;s value to be checked for changes. If a change is detected, the {@link #change change event} will be
      * fired, followed by validation if the {@link #validateOnChange} option is enabled.
      *
-     * Defaults to ['change', 'propertychange', 'keyup'] in Internet Explorer, and ['change', 'input', 'textInput', 'keyup',
-     * 'dragdrop'] in other browsers. This catches all the ways that field values can be changed in most supported
+     * Defaults to [&#39;change&#39;, &#39;propertychange&#39;, &#39;keyup&#39;] in Internet Explorer, and [&#39;change&#39;, &#39;input&#39;, &#39;textInput&#39;, &#39;keyup&#39;,
+     * &#39;dragdrop&#39;] in other browsers. This catches all the ways that field values can be changed in most supported
      * browsers; the only known exceptions at the time of writing are:
      *
      *   - Safari 3.2 and older: cut/paste in textareas via the context menu, and dragging text into textareas
@@ -200,12 +200,12 @@ Ext.define('Ext.form.field.Base', {
      *
      * If you need to guarantee on-the-fly change notifications including these edge cases, you can call the
      * {@link #checkChange} method on a repeating interval, e.g. using {@link Ext.TaskManager}, or if the field is within
-     * a {@link Ext.form.Panel}, you can use the FormPanel's {@link Ext.form.Panel#pollForChanges} configuration to set up
+     * a {@link Ext.form.Panel}, you can use the FormPanel&#39;s {@link Ext.form.Panel#pollForChanges} configuration to set up
      * such a task automatically.
      */
     checkChangeEvents: Ext.isIE &amp;&amp; (!document.documentMode || document.documentMode &lt;= 9) ?
-                        ['change', 'propertychange', 'keyup'] :
-                        ['change', 'input', 'textInput', 'keyup', 'dragdrop'],
+                        [&#39;change&#39;, &#39;propertychange&#39;, &#39;keyup&#39;] :
+                        [&#39;change&#39;, &#39;input&#39;, &#39;textInput&#39;, &#39;keyup&#39;, &#39;dragdrop&#39;],
 <span id='Ext-form-field-Base-property-ignoreChangeRe'>     // While input is supported in IE9, we use attachEvent for events, so we need to fall back here
 </span>                        
     ignoreChangeRe: /data\-errorqtip|style\.|className/,   
@@ -227,9 +227,9 @@ Ext.define('Ext.form.field.Base', {
 
 <span id='Ext-form-field-Base-cfg-readOnlyCls'>    /**
 </span>     * @cfg {String} readOnlyCls
-     * The CSS class applied to the component's main element when it is {@link #readOnly}.
+     * The CSS class applied to the component&#39;s main element when it is {@link #readOnly}.
      */
-    readOnlyCls: Ext.baseCSSPrefix + 'form-readonly',
+    readOnlyCls: Ext.baseCSSPrefix + &#39;form-readonly&#39;,
 
 <span id='Ext-form-field-Base-cfg-inputId'>    /**
 </span>     * @cfg {String} inputId
@@ -262,19 +262,19 @@ Ext.define('Ext.form.field.Base', {
      */
     hasFocus : false,
 
-<span id='Ext-form-field-Base-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'field',
+<span id='Ext-form-field-Base-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;field&#39;,
 </span>
-<span id='Ext-form-field-Base-cfg-fieldBodyCls'>    fieldBodyCls: Ext.baseCSSPrefix + 'field-body',
+<span id='Ext-form-field-Base-cfg-fieldBodyCls'>    fieldBodyCls: Ext.baseCSSPrefix + &#39;field-body&#39;,
 </span>
 <span id='Ext-form-field-Base-property-maskOnDisable'>    maskOnDisable: false,
 </span>    
 <span id='Ext-form-field-Base-property-stretchInputElFixed'>    // Instructs the layout to stretch the inputEl to 100% width when laying
 </span>    // out under fixed conditions. Defaults to true for all fields except check/radio
-    // Doesn't seem worth it to introduce a whole new layout class just for this flag
+    // Doesn&#39;t seem worth it to introduce a whole new layout class just for this flag
     stretchInputElFixed: true,
     
 <span id='Ext-form-field-Base-property-ariaEl'>    // Form fields render their ARIA attributes to the inputEl
-</span>    ariaEl: 'inputEl',
+</span>    ariaEl: &#39;inputEl&#39;,
 <span id='Ext-form-field-Base-property-renderAriaElements'>    renderAriaElements: true,
 </span>    
 <span id='Ext-form-field-Base-event-specialkey'>    /**
@@ -286,18 +286,18 @@ Ext.define('Ext.form.field.Base', {
      *     var form = new Ext.form.Panel({
      *         ...
      *         items: [{
-     *                 fieldLabel: 'Field 1',
-     *                 name: 'field1',
+     *                 fieldLabel: &#39;Field 1&#39;,
+     *                 name: &#39;field1&#39;,
      *                 allowBlank: false
      *             },{
-     *                 fieldLabel: 'Field 2',
-     *                 name: 'field2',
+     *                 fieldLabel: &#39;Field 2&#39;,
+     *                 name: &#39;field2&#39;,
      *                 listeners: {
      *                     specialkey: function(field, e){
      *                         // e.HOME, e.END, e.PAGE_UP, e.PAGE_DOWN,
      *                         // e.TAB, e.ESC, arrow keys: e.LEFT, e.RIGHT, e.UP, e.DOWN
      *                         if (e.getKey() == e.ENTER) {
-     *                             var form = field.up('form').getForm();
+     *                             var form = field.up(&#39;form&#39;).getForm();
      *                             form.submit();
      *                         }
      *                     }
@@ -335,7 +335,7 @@ Ext.define('Ext.form.field.Base', {
             me.addCls(me.readOnlyCls);
         }
         
-        me.addCls(Ext.baseCSSPrefix + 'form-type-' + me.inputType);
+        me.addCls(Ext.baseCSSPrefix + &#39;form-type-&#39; + me.inputType);
 
         // formatText is superseded by ariaHelp but we still apply it for compatibility
         if (me.format &amp;&amp; me.formatText &amp;&amp; !me.ariaHelp) {
@@ -360,7 +360,7 @@ Ext.define('Ext.form.field.Base', {
      * automatically generated.
      */
     getInputId: function() {
-        return this.inputId || (this.inputId = this.id + '-inputEl');
+        return this.inputId || (this.inputId = this.id + &#39;-inputEl&#39;);
     },
 
 <span id='Ext-form-field-Base-method-getSubTplData'>    /**
@@ -389,7 +389,7 @@ Ext.define('Ext.form.field.Base', {
             childElCls: fieldData.childElCls,
             tabIdx: me.tabIndex,
             inputCls: me.inputCls,
-            typeCls: Ext.baseCSSPrefix + 'form-' + (me.isTextInput ? 'text' : type),
+            typeCls: Ext.baseCSSPrefix + &#39;form-&#39; + (me.isTextInput ? &#39;text&#39; : type),
             ariaEl: me.ariaEl
         }, me.subTplData);
         
@@ -398,53 +398,53 @@ Ext.define('Ext.form.field.Base', {
             
             if (!me.ariaStaticRoles[me.ariaRole]) {
                 // When ARIA attributes are rendered they should always reflect
-                // component's state. This contrasts with the standard HTML attributes
+                // component&#39;s state. This contrasts with the standard HTML attributes
                 // like disabled and readonly, which are only present when enabled.
-                ariaAttr['aria-hidden'] = !!me.hidden;
-                ariaAttr['aria-disabled'] = !!me.disabled;
+                ariaAttr[&#39;aria-hidden&#39;] = !!me.hidden;
+                ariaAttr[&#39;aria-disabled&#39;] = !!me.disabled;
                 
                 // For most of the fields ariaEl === inputEl but certain types like Combo boxes
                 // and their descendants are compound widgets and need to have ARIA attributes
                 // on different elements.
                 inputElAttr = {
                     // Input fields start out as valid
-                    'aria-invalid': false,
-                    'aria-readonly': !!me.readOnly
+                    &#39;aria-invalid&#39;: false,
+                    &#39;aria-readonly&#39;: !!me.readOnly
                 };
                 
                 // aria-label is not present by default, and aria-labelledby
-                // generally should not be used for fields' inputEls since usually
+                // generally should not be used for fields&#39; inputEls since usually
                 // they are referenced by their respective &lt;label&gt; elements.
                 if (me.ariaLabel) {
-                    ariaAttr['aria-label'] = Ext.String.htmlEncode(me.ariaLabel);
+                    ariaAttr[&#39;aria-label&#39;] = Ext.String.htmlEncode(me.ariaLabel);
                 }
                 
                 ariaAttr = Ext.apply(ariaAttr, me.getAriaAttributes());
                 
-                // If aria-describedby was set explicitly, don't override. Note that
-                // describedby applies to inputEl since most often that's the focusable
+                // If aria-describedby was set explicitly, don&#39;t override. Note that
+                // describedby applies to inputEl since most often that&#39;s the focusable
                 // element.
-                if (!ariaAttr['aria-describedby']) {
+                if (!ariaAttr[&#39;aria-describedby&#39;]) {
                     if (me.ariaHelp) {
-                        inputElAttr['aria-describedby'] = id + '-ariaStatusEl ' + id + '-ariaHelpEl';
+                        inputElAttr[&#39;aria-describedby&#39;] = id + &#39;-ariaStatusEl &#39; + id + &#39;-ariaHelpEl&#39;;
                     }
                     else {
-                        inputElAttr['aria-describedby'] = id + '-ariaStatusEl';
+                        inputElAttr[&#39;aria-describedby&#39;] = id + &#39;-ariaStatusEl&#39;;
                     }
                 }
                 
                 data.inputElAriaAttributes = inputElAttr;
             }
             
-            if (me.ariaRole !== 'native') {
+            if (me.ariaRole !== &#39;native&#39;) {
                 ariaAttr.role = me.ariaRole;
             }
             
             // aria-label is not present by default, and aria-labelledby
-            // generally should not be used for fields' inputEls since usually
+            // generally should not be used for fields&#39; inputEls since usually
             // they are referenced by their respective &lt;label&gt; elements.
             if (me.ariaLabel) {
-                ariaAttr['aria-label'] = me.ariaLabel;
+                ariaAttr[&#39;aria-label&#39;] = me.ariaLabel;
             }
             
             if (me.format &amp;&amp; me.formatText &amp;&amp; !data.title) {
@@ -460,21 +460,21 @@ Ext.define('Ext.form.field.Base', {
     },
 
 <span id='Ext-form-field-Base-method-getSubTplMarkup'>    /**
-</span>     * Gets the markup to be inserted into the outer template's bodyEl. For fields this is the actual input element.
+</span>     * Gets the markup to be inserted into the outer template&#39;s bodyEl. For fields this is the actual input element.
      * @protected
      */
     getSubTplMarkup: function(fieldData) {
         var me = this,
             data = me.getSubTplData(fieldData),
-            preSubTpl = me.lookupTpl('preSubTpl'),
-            postSubTpl = me.lookupTpl('postSubTpl'),
-            markup = '';
+            preSubTpl = me.lookupTpl(&#39;preSubTpl&#39;),
+            postSubTpl = me.lookupTpl(&#39;postSubTpl&#39;),
+            markup = &#39;&#39;;
 
         if (preSubTpl) {
             markup += preSubTpl.apply(data);
         }
 
-        markup += me.lookupTpl('fieldSubTpl').apply(data);
+        markup += me.lookupTpl(&#39;fieldSubTpl&#39;).apply(data);
 
         if (postSubTpl) {
             markup += postSubTpl.apply(data);
@@ -503,7 +503,7 @@ Ext.define('Ext.form.field.Base', {
 
 <span id='Ext-form-field-Base-method-getFieldStyle'>    getFieldStyle: function() {
 </span>        var style = this.fieldStyle;
-        return Ext.isObject(style) ? Ext.DomHelper.generateStyles(style, null, true) : style || '';
+        return Ext.isObject(style) ? Ext.DomHelper.generateStyles(style, null, true) : style || &#39;&#39;;
     },
 
 <span id='Ext-form-field-Base-method-onRender'>    onRender: function() {
@@ -534,7 +534,7 @@ Ext.define('Ext.form.field.Base', {
     completeEdit: Ext.emptyFn,
 
 <span id='Ext-form-field-Base-method-isFileUpload'>    isFileUpload: function() {
-</span>        return this.inputType === 'file';
+</span>        return this.inputType === &#39;file&#39;;
     },
 
 <span id='Ext-form-field-Base-method-getSubmitData'>    /**
@@ -557,7 +557,7 @@ Ext.define('Ext.form.field.Base', {
 
 <span id='Ext-form-field-Base-method-getSubmitValue'>    /**
 </span>     * Returns the value that would be included in a standard form submit for this field. This will be combined with the
-     * field's name to form a name=value pair in the {@link #getSubmitData submitted parameters}. If an empty string is
+     * field&#39;s name to form a name=value pair in the {@link #getSubmitData submitted parameters}. If an empty string is
      * returned then just the name= will be submitted; if null is returned then nothing will be submitted.
      *
      * Note that the value returned will have been {@link #processRawValue processed} but may or may not have been
@@ -576,14 +576,14 @@ Ext.define('Ext.form.field.Base', {
      */
     getRawValue: function() {
         var me = this,
-            v = (me.inputEl ? me.inputEl.getValue() : Ext.valueFrom(me.rawValue, ''));
+            v = (me.inputEl ? me.inputEl.getValue() : Ext.valueFrom(me.rawValue, &#39;&#39;));
 
         me.rawValue = v;
         return v;
     },
 
 <span id='Ext-form-field-Base-method-setRawValue'>    /**
-</span>     * Sets the field's raw value directly, bypassing {@link #valueToRaw value conversion}, change detection, and
+</span>     * Sets the field&#39;s raw value directly, bypassing {@link #valueToRaw value conversion}, change detection, and
      * validation. To set the value with these additional inspections see {@link #setValue}.
      * @param {Object} value The value to set
      * @return {Object} value The field value that is set
@@ -596,7 +596,7 @@ Ext.define('Ext.form.field.Base', {
             value = me.transformRawValue(value);
         }
 
-        value = Ext.valueFrom(value, '');
+        value = Ext.valueFrom(value, &#39;&#39;);
 
         if (rawValue === undefined || rawValue !== value) {
             me.rawValue = value;
@@ -610,7 +610,7 @@ Ext.define('Ext.form.field.Base', {
         }
 
         if (me.rendered &amp;&amp; me.reference) {
-            me.publishState('rawValue', value);
+            me.publishState(&#39;rawValue&#39;, value);
         }
 
         return value;
@@ -640,7 +640,7 @@ Ext.define('Ext.form.field.Base', {
      * @return {Object} The converted raw value.
      */
     valueToRaw: function(value) {
-        return '' + Ext.valueFrom(value, '');
+        return &#39;&#39; + Ext.valueFrom(value, &#39;&#39;);
     },
 
 <span id='Ext-form-field-Base-method-rawToValue'>    /**
@@ -675,7 +675,7 @@ Ext.define('Ext.form.field.Base', {
 <span id='Ext-form-field-Base-method-getValue'>    /**
 </span>     * Returns the current data value of the field. The type of value returned is particular to the type of the
      * particular field (e.g. a Date object for {@link Ext.form.field.Date}), as the result of calling {@link #rawToValue} on
-     * the field's {@link #processRawValue processed} String value. To return the raw String value, see {@link #getRawValue}.
+     * the field&#39;s {@link #processRawValue processed} String value. To return the raw String value, see {@link #getRawValue}.
      * @return {Object} value The field value
      */
     getValue: function() {
@@ -761,18 +761,18 @@ Ext.define('Ext.form.field.Base', {
             old = me.readOnly;
 
         readOnly = !!readOnly;
-        me[readOnly ? 'addCls' : 'removeCls'](me.readOnlyCls);
+        me[readOnly ? &#39;addCls&#39; : &#39;removeCls&#39;](me.readOnlyCls);
         me.readOnly = readOnly;
         
         if (inputEl) {
             inputEl.dom.readOnly = readOnly;
-            inputEl.dom.setAttribute('aria-readonly', readOnly);
+            inputEl.dom.setAttribute(&#39;aria-readonly&#39;, readOnly);
         }
         else if (me.rendering) {
             me.setReadOnlyOnBoxReady = true;
         }
         if (readOnly !== old) {
-            me.fireEvent('writeablechange', me, readOnly);
+            me.fireEvent(&#39;writeablechange&#39;, me, readOnly);
         }
     },
 
@@ -781,7 +781,7 @@ Ext.define('Ext.form.field.Base', {
      */
     fireKey: function(e, eOpts){
         if(e.isSpecialKey()){
-            this.fireEvent('specialkey', this, e, eOpts);
+            this.fireEvent(&#39;specialkey&#39;, this, e, eOpts);
         }
     },
 
@@ -794,14 +794,14 @@ Ext.define('Ext.form.field.Base', {
             i, event;
 
         if (inputEl) {
-            me.mon(inputEl, Ext.supports.SpecialKeyDownRepeat ? 'keydown' : 'keypress', me.fireKey,  me);
+            me.mon(inputEl, Ext.supports.SpecialKeyDownRepeat ? &#39;keydown&#39; : &#39;keypress&#39;, me.fireKey,  me);
 
             for (i = 0; i &lt; len; ++i) {
                 event = events[i];
-                if (event === 'propertychange') {
+                if (event === &#39;propertychange&#39;) {
                     me.usesPropertychange = true;
                 }
-                if (event === 'textInput') {
+                if (event === &#39;textInput&#39;) {
                     me.usesTextInput = true;
                 }
                 me.mon(inputEl, event, onFieldMutation, me);
@@ -819,9 +819,9 @@ Ext.define('Ext.form.field.Base', {
      * before calling the checkChange method.
      */
     onFieldMutation: function(e) {
-        // When using propertychange, we want to skip out on various values, since they won't cause
+        // When using propertychange, we want to skip out on various values, since they won&#39;t cause
         // the underlying value to change.
-        if (!this.readOnly &amp;&amp; !(e.type === 'propertychange' &amp;&amp; this.ignoreChangeRe.test(e.browserEvent.propertyName))) {
+        if (!this.readOnly &amp;&amp; !(e.type === &#39;propertychange&#39; &amp;&amp; this.ignoreChangeRe.test(e.browserEvent.propertyName))) {
             this.startCheckChangeTask();
         }
     },
@@ -834,10 +834,10 @@ Ext.define('Ext.form.field.Base', {
             me.checkChangeTask = task = new Ext.util.DelayedTask(me.doCheckChangeTask, me);
         }
         if (!me.bindNotifyListener) {
-            // We continually create/destroy the listener as needed (see doCheckChangeTask) because we're listening
-            // to a global event, so we don't want the event to be triggered unless absolutely necessary. In this case,
+            // We continually create/destroy the listener as needed (see doCheckChangeTask) because we&#39;re listening
+            // to a global event, so we don&#39;t want the event to be triggered unless absolutely necessary. In this case,
             // we only need to fix the value when we have a pending change to check.
-            me.bindNotifyListener = Ext.on('beforebindnotify', me.onBeforeNotify, me, {destroyable: true});
+            me.bindNotifyListener = Ext.on(&#39;beforebindnotify&#39;, me.onBeforeNotify, me, {destroyable: true});
         }
         task.delay(me.checkChangeBuffer);
     },
@@ -856,22 +856,22 @@ Ext.define('Ext.form.field.Base', {
 </span>        var me = this;
 
         if (me.rendered &amp;&amp; !me.getErrors().length) {
-            me.publishState('value', me.getValue());
+            me.publishState(&#39;value&#39;, me.getValue());
         }
     },
 
 <span id='Ext-form-field-Base-method-onDirtyChange'>    /**
 </span>     * @private
-     * Called when the field's dirty state changes. Adds/removes the {@link #dirtyCls} on the main element.
+     * Called when the field&#39;s dirty state changes. Adds/removes the {@link #dirtyCls} on the main element.
      * @param {Boolean} isDirty
      */
     onDirtyChange: function (isDirty) {
         var me = this;
 
-        me[isDirty ? 'addCls' : 'removeCls'](me.dirtyCls);
+        me[isDirty ? &#39;addCls&#39; : &#39;removeCls&#39;](me.dirtyCls);
 
         if (me.rendered &amp;&amp; me.reference) {
-            me.publishState('dirty', isDirty);
+            me.publishState(&#39;dirty&#39;, isDirty);
         }
     },
 
@@ -920,7 +920,7 @@ Ext.define('Ext.form.field.Base', {
 </span>     * @inheritdoc Ext.form.field.Field#markInvalid
      */
     markInvalid: function(errors) {
-        // Save the message and fire the 'invalid' event
+        // Save the message and fire the &#39;invalid&#39; event
         var me = this,
             oldMsg = me.getActiveError(),
             active;
@@ -931,7 +931,7 @@ Ext.define('Ext.form.field.Base', {
             me.setError(active);
             
             if (!me.ariaStaticRoles[me.ariaRole] &amp;&amp; me.inputEl) {
-                me.inputEl.dom.setAttribute('aria-invalid', true);
+                me.inputEl.dom.setAttribute(&#39;aria-invalid&#39;, true);
             }
         }
     },
@@ -939,12 +939,12 @@ Ext.define('Ext.form.field.Base', {
 <span id='Ext-form-field-Base-method-clearInvalid'>    /**
 </span>     * Clear any invalid styles/messages for this field.
      *
-     * **Note**: this method does not cause the Field's {@link #validate} or {@link #isValid} methods to return `true`
-     * if the value does not _pass_ validation. So simply clearing a field's errors will not necessarily allow
+     * **Note**: this method does not cause the Field&#39;s {@link #validate} or {@link #isValid} methods to return `true`
+     * if the value does not _pass_ validation. So simply clearing a field&#39;s errors will not necessarily allow
      * submission of forms submitted with the {@link Ext.form.action.Submit#clientValidation} option set.
      */
     clearInvalid: function() {
-        // Clear the message and fire the 'valid' event
+        // Clear the message and fire the &#39;valid&#39; event
         var me = this,
             hadError = me.hasActiveError();
             
@@ -953,10 +953,10 @@ Ext.define('Ext.form.field.Base', {
         me.unsetActiveError();
         
         if (hadError) {
-            me.setError('');
+            me.setError(&#39;&#39;);
             
             if (!me.ariaStaticRoles[me.ariaRole] &amp;&amp; me.inputEl) {
-                me.inputEl.dom.setAttribute('aria-invalid', false);
+                me.inputEl.dom.setAttribute(&#39;aria-invalid&#39;, false);
             }
         }
     },
@@ -972,9 +972,9 @@ Ext.define('Ext.form.field.Base', {
             prop;
             
         if (me.rendered) {
-            if (msgTarget === 'title' || msgTarget === 'qtip') {
-                prop = msgTarget === 'qtip' ? 'data-errorqtip' : 'title';
-                me.getActionEl().dom.setAttribute(prop, error || '');
+            if (msgTarget === &#39;title&#39; || msgTarget === &#39;qtip&#39;) {
+                prop = msgTarget === &#39;qtip&#39; ? &#39;data-errorqtip&#39; : &#39;title&#39;;
+                me.getActionEl().dom.setAttribute(prop, error || &#39;&#39;);
             } else {
                 me.updateLayout();
             }
@@ -989,12 +989,12 @@ Ext.define('Ext.form.field.Base', {
     renderActiveError: function() {
         var me = this,
             hasError = me.hasActiveError(),
-            invalidCls = me.invalidCls + '-field';
+            invalidCls = me.invalidCls + &#39;-field&#39;;
 
         if (me.inputEl) {
             // Add/remove invalid class
-            me.inputEl[hasError ? 'addCls' : 'removeCls']([
-                invalidCls, invalidCls + '-' + me.ui
+            me.inputEl[hasError ? &#39;addCls&#39; : &#39;removeCls&#39;]([
+                invalidCls, invalidCls + &#39;-&#39; + me.ui
             ]);
         }
         me.mixins.labelable.renderActiveError.call(me);
@@ -1049,15 +1049,15 @@ Ext.define('Ext.form.field.Base', {
         // These 2 events trigger when setting the value programmatically in IE.
         // propertychange for older browsers, textInput for IE10+. Here we 
         bindChangeEvents: function(active) {
-            var method = active ? 'resumeEvent' : 'suspendEvent',
+            var method = active ? &#39;resumeEvent&#39; : &#39;suspendEvent&#39;,
                 inputEl = this.inputEl;
 
             if (this.usesPropertychange) {
-                inputEl[method]('propertychange');
+                inputEl[method](&#39;propertychange&#39;);
             }
 
             if (this.usesTextInput) {
-                inputEl[method]('textInput');
+                inputEl[method](&#39;textInput&#39;);
             }
         },
 
@@ -1071,8 +1071,8 @@ Ext.define('Ext.form.field.Base', {
 
         initRenderTpl: function() {
             var me = this;
-            if (!me.hasOwnProperty('renderTpl')) {
-                me.renderTpl = me.lookupTpl('labelableRenderTpl');
+            if (!me.hasOwnProperty(&#39;renderTpl&#39;)) {
+                me.renderTpl = me.lookupTpl(&#39;labelableRenderTpl&#39;);
             }
             return me.callParent();
         },
@@ -1098,7 +1098,7 @@ Ext.define('Ext.form.field.Base', {
             }
 
             if (newBinding &amp;&amp; newBinding.bindValidationField) {
-                me.fieldBinding = newBinding.bindValidationField('setValidationField', me);
+                me.fieldBinding = newBinding.bindValidationField(&#39;setValidationField&#39;, me);
             }
         }
     },

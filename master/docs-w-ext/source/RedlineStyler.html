@@ -35,50 +35,50 @@
  *
  * Used in combination with the Redline Tools Container and allows a user
  * to modify the styles the features are drawn with.
- * You need to require the 'ux' package in your app.json to make use of this
+ * You need to require the &#39;ux&#39; package in your app.json to make use of this
  * component.
  *
  * @class BasiGX.view.container.RedlineStyler
  */
-Ext.define('BasiGX.view.container.RedlineStyler', {
-    extend: 'Ext.container.Container',
-    xtype: 'basigx-container-redlinestyler',
+Ext.define(&#39;BasiGX.view.container.RedlineStyler&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
+    xtype: &#39;basigx-container-redlinestyler&#39;,
 
     requires: [
-        'Ext.ux.colorpick.Button',
-        'BasiGX.view.panel.GraphicPool',
-        'BasiGX.util.Color'
+        &#39;Ext.ux.colorpick.Button&#39;,
+        &#39;BasiGX.view.panel.GraphicPool&#39;,
+        &#39;BasiGX.util.Color&#39;
     ],
 
 <span id='BasiGX-view-container-RedlineStyler-cfg-viewModel'>    viewModel: {
 </span>        data: {
-            pointStyleFieldSetTitle: 'Point Style',
-            pointStyleSymbolPanelTitle: 'Symbol',
-            pointStyleRadiusNumberFieldLabel: 'Point Radius',
-            pointStyleStrokeNumberFieldLabel: 'Stroke Width',
-            pointStyleStrokeColorFieldLabel: 'Stroke Color',
-            pointStyleFillColorFieldLabel: 'Fill Color',
-            pointStyleGraphicPanelTitle: 'Graphic',
-            pointStyleChooseImgBtnText: 'Choose Image',
-            pointStyleImgOffsetXSliderLabel: 'Graphic Offset X',
-            pointStyleImgOffsetYSliderLabel: 'Graphic Offset Y',
-            pointStyleImgScaleSliderLabel: 'Scale',
-            lineStyleFieldSetTitle: 'LineString Style',
-            lineStyleStrokeNumberFieldLabel: 'Stroke Width',
-            lineStyleStrokeColorFieldLabel: 'Stroke Color',
-            polygonStyleFieldSetTitle: 'Polygon Style',
-            polygonStyleStrokeNumberFieldLabel: 'Stroke Width',
-            polygonStyleStrokeColorFieldLabel: 'Stroke Color',
-            polygonStyleFillColorFieldLabel: 'Fill Color',
-            pointGrapicDeletedSuccessMsgText: 'The icon has been deleted. ' +
-                'Please reassign a new one.',
-            pointGrapicDeletedSuccessMsgTitle: 'Deletion succesfull',
-            graphicPoolWindowTitle: 'Graphic Pool',
-            documentation: '&lt;h2&gt;Styler&lt;/h2&gt;• Benutzen Sie den ' +
-                'Styler, um Ihre Zeichenobjekte nach Wunsch zu gestalten.' +
-                '&lt;br&gt;• Neben Farben, Strichstärken und Schrifteigenschaften ' +
-                'können auch eigene Icons für die Symbolisierung verwendet ' +
-                'werden'
+            pointStyleFieldSetTitle: &#39;Point Style&#39;,
+            pointStyleSymbolPanelTitle: &#39;Symbol&#39;,
+            pointStyleRadiusNumberFieldLabel: &#39;Point Radius&#39;,
+            pointStyleStrokeNumberFieldLabel: &#39;Stroke Width&#39;,
+            pointStyleStrokeColorFieldLabel: &#39;Stroke Color&#39;,
+            pointStyleFillColorFieldLabel: &#39;Fill Color&#39;,
+            pointStyleGraphicPanelTitle: &#39;Graphic&#39;,
+            pointStyleChooseImgBtnText: &#39;Choose Image&#39;,
+            pointStyleImgOffsetXSliderLabel: &#39;Graphic Offset X&#39;,
+            pointStyleImgOffsetYSliderLabel: &#39;Graphic Offset Y&#39;,
+            pointStyleImgScaleSliderLabel: &#39;Scale&#39;,
+            lineStyleFieldSetTitle: &#39;LineString Style&#39;,
+            lineStyleStrokeNumberFieldLabel: &#39;Stroke Width&#39;,
+            lineStyleStrokeColorFieldLabel: &#39;Stroke Color&#39;,
+            polygonStyleFieldSetTitle: &#39;Polygon Style&#39;,
+            polygonStyleStrokeNumberFieldLabel: &#39;Stroke Width&#39;,
+            polygonStyleStrokeColorFieldLabel: &#39;Stroke Color&#39;,
+            polygonStyleFillColorFieldLabel: &#39;Fill Color&#39;,
+            pointGrapicDeletedSuccessMsgText: &#39;The icon has been deleted. &#39; +
+                &#39;Please reassign a new one.&#39;,
+            pointGrapicDeletedSuccessMsgTitle: &#39;Deletion succesfull&#39;,
+            graphicPoolWindowTitle: &#39;Graphic Pool&#39;,
+            documentation: &#39;&lt;h2&gt;Styler&lt;/h2&gt;• Benutzen Sie den &#39; +
+                &#39;Styler, um Ihre Zeichenobjekte nach Wunsch zu gestalten.&#39; +
+                &#39;&lt;br&gt;• Neben Farben, Strichstärken und Schrifteigenschaften &#39; +
+                &#39;können auch eigene Icons für die Symbolisierung verwendet &#39; +
+                &#39;werden&#39;
         }
     },
 
@@ -137,8 +137,8 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
         var imageScale;
         var radius = 10;
         var strokeWidth = 0;
-        var fillColor = '#008000';
-        var strokeColor = '#ffcc33';
+        var fillColor = &#39;#008000&#39;;
+        var strokeColor = &#39;#ffcc33&#39;;
 
         if (imageStyle instanceof ol.style.Icon) {
             imageAnchor = imageStyle.getAnchor();
@@ -148,40 +148,40 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
             if (imageStyle.getStroke()) {
                 strokeWidth = imageStyle.getStroke().getWidth();
                 strokeColor = imageStyle.getStroke().getColor();
-                strokeColor = strokeColor.indexOf('rgba') &gt; -1 ?
+                strokeColor = strokeColor.indexOf(&#39;rgba&#39;) &gt; -1 ?
                     BasiGX.util.Color.rgbaToHex8(strokeColor) : strokeColor;
             }
             if (imageStyle.getFill()) {
                 fillColor = imageStyle.getFill().getColor();
-                fillColor = fillColor.indexOf('rgba') &gt; -1 ? BasiGX.util.Color.
+                fillColor = fillColor.indexOf(&#39;rgba&#39;) &gt; -1 ? BasiGX.util.Color.
                     rgbaToHex8(fillColor) : fillColor;
             }
         }
 
         var fs = {
-            xtype: 'fieldset',
+            xtype: &#39;fieldset&#39;,
             bind: {
-                title: '{pointStyleFieldSetTitle}'
+                title: &#39;{pointStyleFieldSetTitle}&#39;
             },
-            name: 'pointstyle',
-            layout: 'hbox',
+            name: &#39;pointstyle&#39;,
+            layout: &#39;hbox&#39;,
             items: [{
-                xtype: 'tabpanel',
+                xtype: &#39;tabpanel&#39;,
                 items: [{
-                    xtype: 'panel',
+                    xtype: &#39;panel&#39;,
                     bind: {
-                        title: '{pointStyleSymbolPanelTitle}'
+                        title: &#39;{pointStyleSymbolPanelTitle}&#39;
                     },
                     defaults: {
                         margin: 3,
                         width: 220
                     },
                     items: [{
-                        xtype: 'numberfield',
+                        xtype: &#39;numberfield&#39;,
                         bind: {
-                            fieldLabel: '{pointStyleRadiusNumberFieldLabel}'
+                            fieldLabel: &#39;{pointStyleRadiusNumberFieldLabel}&#39;
                         },
-                        name: 'pointradius',
+                        name: &#39;pointradius&#39;,
                         value: radius,
                         minValue: 1,
                         maxValue: 50,
@@ -191,11 +191,11 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                             }
                         }
                     }, {
-                        xtype: 'numberfield',
+                        xtype: &#39;numberfield&#39;,
                         bind: {
-                            fieldLabel: '{pointStyleStrokeNumberFieldLabel}'
+                            fieldLabel: &#39;{pointStyleStrokeNumberFieldLabel}&#39;
                         },
-                        name: 'pointstrokewidth',
+                        name: &#39;pointstrokewidth&#39;,
                         value: strokeWidth,
                         minValue: 0,
                         maxValue: 50,
@@ -205,23 +205,23 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                             }
                         }
                     }, {
-                        xtype: 'container',
-                        layout: 'hbox',
+                        xtype: &#39;container&#39;,
+                        layout: &#39;hbox&#39;,
                         defaults: {
                             width: 100
                         },
                         items: [{
-                            xtype: 'displayfield',
+                            xtype: &#39;displayfield&#39;,
                             width: 100,
                             bind: {
-                                value: '{pointStyleStrokeColorFieldLabel}'
+                                value: &#39;{pointStyleStrokeColorFieldLabel}&#39;
                             }
                         }, {
-                            xtype: 'colorbutton',
-                            name: 'pointstrokecolor',
-                            format: 'hex8',
+                            xtype: &#39;colorbutton&#39;,
+                            name: &#39;pointstrokecolor&#39;,
+                            format: &#39;hex8&#39;,
                             value: strokeColor,
-                            margin: '5 0 0 10',
+                            margin: &#39;5 0 0 10&#39;,
                             listeners: {
                                 boxready: function() {
                                     var color = BasiGX.util.Color
@@ -242,22 +242,22 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                             }
                         }]
                     }, {
-                        xtype: 'container',
-                        layout: 'hbox',
+                        xtype: &#39;container&#39;,
+                        layout: &#39;hbox&#39;,
                         defaults: {
                             width: 100
                         },
                         items: [{
-                            xtype: 'displayfield',
+                            xtype: &#39;displayfield&#39;,
                             width: 100,
                             bind: {
-                                value: '{pointStyleFillColorFieldLabel}'
+                                value: &#39;{pointStyleFillColorFieldLabel}&#39;
                             }
                         }, {
-                            xtype: 'colorbutton',
-                            name: 'pointfillcolor',
-                            format: 'hex8',
-                            margin: '0 0 0 10',
+                            xtype: &#39;colorbutton&#39;,
+                            name: &#39;pointfillcolor&#39;,
+                            format: &#39;hex8&#39;,
+                            margin: &#39;0 0 0 10&#39;,
                             value: fillColor,
                             listeners: {
                                 boxready: function() {
@@ -280,28 +280,28 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                         }]
                     }]
                 }, {
-                    xtype: 'panel',
+                    xtype: &#39;panel&#39;,
                     bind: {
-                        title: '{pointStyleGraphicPanelTitle}'
+                        title: &#39;{pointStyleGraphicPanelTitle}&#39;
                     },
-                    name: 'pointgraphic',
+                    name: &#39;pointgraphic&#39;,
                     defaults: {
                         margin: 3,
                         width: 220
                     },
                     items: [{
-                        xtype: 'button',
+                        xtype: &#39;button&#39;,
                         bind: {
-                            text: '{pointStyleChooseImgBtnText}'
+                            text: &#39;{pointStyleChooseImgBtnText}&#39;
                         },
                         handler: me.onChooseGraphicClick,
                         scope: me
                     }, {
-                        xtype: 'slider',
+                        xtype: &#39;slider&#39;,
                         bind: {
-                            fieldLabel: '{pointStyleImgOffsetXSliderLabel}'
+                            fieldLabel: &#39;{pointStyleImgOffsetXSliderLabel}&#39;
                         },
-                        name: 'xoffset',
+                        name: &#39;xoffset&#39;,
                         value: imageAnchor ? imageAnchor[0] : 50,
                         minValue: 0,
                         maxValue: 100,
@@ -313,11 +313,11 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                             scope: me
                         }
                     }, {
-                        xtype: 'slider',
+                        xtype: &#39;slider&#39;,
                         bind: {
-                            fieldLabel: '{pointStyleImgOffsetYSliderLabel}'
+                            fieldLabel: &#39;{pointStyleImgOffsetYSliderLabel}&#39;
                         },
-                        name: 'yoffset',
+                        name: &#39;yoffset&#39;,
                         value: imageAnchor ? imageAnchor[1] : 50,
                         minValue: 0,
                         maxValue: 100,
@@ -329,11 +329,11 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                             scope: me
                         }
                     }, {
-                        xtype: 'slider',
+                        xtype: &#39;slider&#39;,
                         bind: {
-                            fieldLabel: '{pointStyleImgScaleSliderLabel}'
+                            fieldLabel: &#39;{pointStyleImgScaleSliderLabel}&#39;
                         },
-                        name: 'iconscale',
+                        name: &#39;iconscale&#39;,
                         value: imageScale ? imageScale : 100,
                         increment: 1,
                         minValue: 10,
@@ -348,17 +348,17 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                     }]
                 }]
             }, {
-                xtype: 'panel',
+                xtype: &#39;panel&#39;,
                 border: false,
-                layout: 'fit',
+                layout: &#39;fit&#39;,
                 items: [{
-                    xtype: 'gx_renderer',
+                    xtype: &#39;gx_renderer&#39;,
                     margin: 20,
                     width: 200,
                     height: 160,
-                    name: 'pointRenderPreview',
+                    name: &#39;pointRenderPreview&#39;,
                     symbolizers: style,
-                    symbolType: 'Point'
+                    symbolType: &#39;Point&#39;
                 }]
             }]
         };
@@ -379,29 +379,29 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
             return null;
         }
         var styleStrokeColor = style.getStroke().getColor();
-        var strokeColor = styleStrokeColor.indexOf('rgba') &gt; -1 ?
+        var strokeColor = styleStrokeColor.indexOf(&#39;rgba&#39;) &gt; -1 ?
             BasiGX.util.Color.rgbaToHex8(styleStrokeColor) :
             styleStrokeColor;
 
         var fs = {
-            xtype: 'fieldset',
+            xtype: &#39;fieldset&#39;,
             bind: {
-                title: '{lineStyleFieldSetTitle}'
+                title: &#39;{lineStyleFieldSetTitle}&#39;
             },
-            name: 'linestringstyle',
-            layout: 'hbox',
+            name: &#39;linestringstyle&#39;,
+            layout: &#39;hbox&#39;,
             items: [{
-                xtype: 'fieldset',
-                layout: 'vbox',
+                xtype: &#39;fieldset&#39;,
+                layout: &#39;vbox&#39;,
                 width: 220,
                 defaults: {
                     margin: 3,
                     width: 180
                 },
                 items: [{
-                    xtype: 'numberfield',
+                    xtype: &#39;numberfield&#39;,
                     bind: {
-                        fieldLabel: '{lineStyleStrokeNumberFieldLabel}'
+                        fieldLabel: &#39;{lineStyleStrokeNumberFieldLabel}&#39;
                     },
                     value: style.getStroke().getWidth(),
                     minValue: 0,
@@ -412,22 +412,22 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                         }
                     }
                 }, {
-                    xtype: 'container',
-                    layout: 'hbox',
+                    xtype: &#39;container&#39;,
+                    layout: &#39;hbox&#39;,
                     defaults: {
                         width: 70
                     },
                     items: [{
-                        xtype: 'displayfield',
+                        xtype: &#39;displayfield&#39;,
                         width: 100,
                         bind: {
-                            value: '{lineStyleStrokeColorFieldLabel}'
+                            value: &#39;{lineStyleStrokeColorFieldLabel}&#39;
                         }
                     }, {
-                        xtype: 'colorbutton',
-                        format: 'hex8',
+                        xtype: &#39;colorbutton&#39;,
+                        format: &#39;hex8&#39;,
                         value: strokeColor,
-                        margin: '5 0 0 10',
+                        margin: &#39;5 0 0 10&#39;,
                         listeners: {
                             boxready: function() {
                                 var color = BasiGX.util.Color
@@ -447,17 +447,17 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                     }]
                 }]
             }, {
-                xtype: 'panel',
+                xtype: &#39;panel&#39;,
                 border: false,
-                layout: 'fit',
+                layout: &#39;fit&#39;,
                 items: [{
-                    xtype: 'gx_renderer',
+                    xtype: &#39;gx_renderer&#39;,
                     margin: 20,
                     width: 200,
                     height: 60,
-                    name: 'lineRenderPreview',
+                    name: &#39;lineRenderPreview&#39;,
                     symbolizers: style,
-                    symbolType: 'Line'
+                    symbolType: &#39;Line&#39;
                 }]
             }]
         };
@@ -478,31 +478,31 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
             return null;
         }
         var styleFillColor = style.getFill().getColor();
-        var fillColor = styleFillColor.indexOf('rgba') &gt; -1 ?
+        var fillColor = styleFillColor.indexOf(&#39;rgba&#39;) &gt; -1 ?
             BasiGX.util.Color.rgbaToHex8(styleFillColor) : styleFillColor;
         var styleStrokeColor = style.getStroke().getColor();
-        var strokeColor = styleStrokeColor.indexOf('rgba') &gt; -1 ?
+        var strokeColor = styleStrokeColor.indexOf(&#39;rgba&#39;) &gt; -1 ?
             BasiGX.util.Color.rgbaToHex8(styleStrokeColor) :
             styleStrokeColor;
 
         var fs = {
-            xtype: 'fieldset',
+            xtype: &#39;fieldset&#39;,
             bind: {
-                title: '{polygonStyleFieldSetTitle}'
+                title: &#39;{polygonStyleFieldSetTitle}&#39;
             },
-            name: 'polygonstyle',
-            layout: 'hbox',
+            name: &#39;polygonstyle&#39;,
+            layout: &#39;hbox&#39;,
             items: [{
-                xtype: 'fieldset',
-                layout: 'vbox',
+                xtype: &#39;fieldset&#39;,
+                layout: &#39;vbox&#39;,
                 width: 220,
                 defaults: {
                     width: 180
                 },
                 items: [{
-                    xtype: 'numberfield',
+                    xtype: &#39;numberfield&#39;,
                     bind: {
-                        fieldLabel: '{polygonStyleStrokeNumberFieldLabel}'
+                        fieldLabel: &#39;{polygonStyleStrokeNumberFieldLabel}&#39;
                     },
                     value: style.getStroke().getWidth(),
                     minValue: 0,
@@ -515,22 +515,22 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                         }
                     }
                 }, {
-                    xtype: 'container',
-                    layout: 'hbox',
+                    xtype: &#39;container&#39;,
+                    layout: &#39;hbox&#39;,
                     defaults: {
                         width: 70
                     },
                     items: [{
-                        xtype: 'displayfield',
+                        xtype: &#39;displayfield&#39;,
                         width: 100,
                         bind: {
-                            value: '{polygonStyleStrokeColorFieldLabel}'
+                            value: &#39;{polygonStyleStrokeColorFieldLabel}&#39;
                         }
                     }, {
-                        xtype: 'colorbutton',
-                        format: 'hex8',
+                        xtype: &#39;colorbutton&#39;,
+                        format: &#39;hex8&#39;,
                         value: strokeColor,
-                        margin: '5 0 0 10',
+                        margin: &#39;5 0 0 10&#39;,
                         listeners: {
                             boxready: function() {
                                 var color = BasiGX.util.Color
@@ -549,21 +549,21 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                         }
                     }]
                 }, {
-                    xtype: 'container',
-                    layout: 'hbox',
+                    xtype: &#39;container&#39;,
+                    layout: &#39;hbox&#39;,
                     defaults: {
                         width: 100
                     },
                     items: [{
-                        xtype: 'displayfield',
+                        xtype: &#39;displayfield&#39;,
                         width: 100,
                         bind: {
-                            value: '{polygonStyleFillColorFieldLabel}'
+                            value: &#39;{polygonStyleFillColorFieldLabel}&#39;
                         }
                     }, {
-                        xtype: 'colorbutton',
-                        format: 'hex8',
-                        margin: '0 0 0 10',
+                        xtype: &#39;colorbutton&#39;,
+                        format: &#39;hex8&#39;,
+                        margin: &#39;0 0 0 10&#39;,
                         value: fillColor,
                         listeners: {
                             boxready: function() {
@@ -584,17 +584,17 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                     }]
                 }]
             }, {
-                xtype: 'panel',
+                xtype: &#39;panel&#39;,
                 border: false,
-                layout: 'fit',
+                layout: &#39;fit&#39;,
                 items: [{
-                    xtype: 'gx_renderer',
+                    xtype: &#39;gx_renderer&#39;,
                     margin: 20,
                     width: 200,
                     height: 100,
-                    name: 'polygonRenderPreview',
+                    name: &#39;polygonRenderPreview&#39;,
                     symbolizers: style,
-                    symbolType: 'Polygon'
+                    symbolType: &#39;Polygon&#39;
                 }]
             }]
         };
@@ -618,23 +618,23 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
         var style;
         var renderer;
         var redliningContainer = Ext.ComponentQuery.query(
-            'basigx-container-redlining')[0];
+            &#39;basigx-container-redlining&#39;)[0];
 
         if (pointStyle) {
             oldStyle = me.getRedlinePointStyle();
-            renderer = me.down('gx_renderer[name=pointRenderPreview]');
+            renderer = me.down(&#39;gx_renderer[name=pointRenderPreview]&#39;);
             style = me.generatePointStyle(oldStyle, pointStyle);
             me.setRedlinePointStyle(style);
             redliningContainer.setRedlinePointStyle(style);
         } else if (lineStyle) {
             oldStyle = me.getRedlineLineStringStyle();
-            renderer = me.down('gx_renderer[name=lineRenderPreview]');
+            renderer = me.down(&#39;gx_renderer[name=lineRenderPreview]&#39;);
             style = me.generateLineStringStyle(oldStyle, lineStyle);
             me.setRedlineLineStringStyle(style);
             redliningContainer.setRedlineLineStringStyle(style);
         } else {
             oldStyle = me.getRedlinePolygonStyle();
-            renderer = me.down('gx_renderer[name=polygonRenderPreview]');
+            renderer = me.down(&#39;gx_renderer[name=polygonRenderPreview]&#39;);
             style = me.generatePolygonStyle(oldStyle, polygonStyle);
             me.setRedlinePolygonStyle(style);
             redliningContainer.setRedlinePolygonStyle(style);
@@ -663,8 +663,8 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
      */
     generatePointStyle: function(oldStyle, pointStyle) {
         var fallBackRadius = 7;
-        var fallBackFillColor = '#008000';
-        var fallBackStrokeColor = '#ffcc33';
+        var fallBackFillColor = &#39;#008000&#39;;
+        var fallBackStrokeColor = &#39;#ffcc33&#39;;
         var fallBackStrokeWidth = 2;
         var oldImage = oldStyle.getImage();
 
@@ -769,13 +769,13 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
     onChooseGraphicClick: function() {
         var me = this;
         var redliningContainer = Ext.ComponentQuery.query(
-            'basigx-container-redlining')[0];
+            &#39;basigx-container-redlining&#39;)[0];
 
         var okClickCallbackFn = function(pictureRec) {
-            var renderer = me.down('gx_renderer[name=pointRenderPreview]');
+            var renderer = me.down(&#39;gx_renderer[name=pointRenderPreview]&#39;);
             var pictureUrl = BasiGX.util.Url.getWebProjectBaseUrl() +
                 me.getBackendUrls().pictureSrc.url +
-                pictureRec.get('id');
+                pictureRec.get(&#39;id&#39;);
             var imageValues = me.getImageAttributes();
             var imageStyle = new ol.style.Style({
                 image: new ol.style.Icon({
@@ -799,21 +799,21 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
 
         var deleteClickCallbackFn = function() {
             Ext.toast(
-                me.getViewModel().get('pointGrapicDeletedSuccessMsgText'),
-                me.getViewModel().get('pointGrapicDeletedSuccessMsgTitle'),
-                't'
+                me.getViewModel().get(&#39;pointGrapicDeletedSuccessMsgText&#39;),
+                me.getViewModel().get(&#39;pointGrapicDeletedSuccessMsgTitle&#39;),
+                &#39;t&#39;
             );
         };
 
-        var graphicPool = Ext.create('BasiGX.view.panel.GraphicPool', {
+        var graphicPool = Ext.create(&#39;BasiGX.view.panel.GraphicPool&#39;, {
             backendUrls: me.getBackendUrls(),
             okClickCallbackFn: okClickCallbackFn,
             deleteClickCallbackFn: deleteClickCallbackFn,
             useCsrfToken: true
         });
 
-        var graphicPoolWin = Ext.create('Ext.window.Window', {
-            title: me.getViewModel().get('graphicPoolWindowTitle'),
+        var graphicPoolWin = Ext.create(&#39;Ext.window.Window&#39;, {
+            title: me.getViewModel().get(&#39;graphicPoolWindowTitle&#39;),
             constrained: true,
             items: [graphicPool]
         });
@@ -837,8 +837,8 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
         var scale = imageProps[2];
 
         var redliningContainer = Ext.ComponentQuery.query(
-            'basigx-container-redlining')[0];
-        var renderer = me.down('gx_renderer[name=pointRenderPreview]');
+            &#39;basigx-container-redlining&#39;)[0];
+        var renderer = me.down(&#39;gx_renderer[name=pointRenderPreview]&#39;);
         var oldStyle = me.getRedlinePointStyle().getImage();
         // just set a new style if an icon style has already been set
         if (!(oldStyle instanceof ol.style.Icon)) {
@@ -847,8 +847,8 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
         var iconStyle = new ol.style.Style({
             image: new ol.style.Icon({
                 scale: scale,
-                anchorXUnits: 'fraction',
-                anchorYUnits: 'fraction',
+                anchorXUnits: &#39;fraction&#39;,
+                anchorYUnits: &#39;fraction&#39;,
                 anchor: [
                     offsetX,
                     offsetY
@@ -875,9 +875,9 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
      */
     getImageAttributes: function() {
         var me = this;
-        var fractionX = 1 - (me.down('slider[name=xoffset]').getValue() / 100);
-        var fractionY = me.down('slider[name=yoffset]').getValue() / 100;
-        var scale = me.down('slider[name=iconscale]').getValue() / 100;
+        var fractionX = 1 - (me.down(&#39;slider[name=xoffset]&#39;).getValue() / 100);
+        var fractionY = me.down(&#39;slider[name=yoffset]&#39;).getValue() / 100;
+        var scale = me.down(&#39;slider[name=iconscale]&#39;).getValue() / 100;
         return [fractionX, fractionY, scale];
     },
 
@@ -910,11 +910,11 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
     setState: function(state) {
         var me = this;
         var redliningContainer = Ext.ComponentQuery.query(
-            'basigx-container-redlining')[0];
+            &#39;basigx-container-redlining&#39;)[0];
         if (state.pointStyle) {
             me.setRedlinePointStyle(state.pointStyle);
             redliningContainer.setRedlinePointStyle(state.pointStyle);
-            var pointFieldSet = me.down('fieldset[name=pointstyle]');
+            var pointFieldSet = me.down(&#39;fieldset[name=pointstyle]&#39;);
             if (pointFieldSet) {
                 pointFieldSet.destroy();
                 var anotherPointFieldSet = this.getPointFieldset();
@@ -922,9 +922,9 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
                 var isIconStyle = state.pointStyle.getImage() instanceof
                     ol.style.Icon;
                 if (isIconStyle) {
-                    var iconTab = me.down('panel[name=pointgraphic]');
-                    var tabPanel = me.down('fieldset[name=pointstyle]').down(
-                        'tabpanel');
+                    var iconTab = me.down(&#39;panel[name=pointgraphic]&#39;);
+                    var tabPanel = me.down(&#39;fieldset[name=pointstyle]&#39;).down(
+                        &#39;tabpanel&#39;);
                     tabPanel.setActiveTab(iconTab);
                 }
             }
@@ -933,7 +933,7 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
         if (state.lineStyle) {
             me.setRedlineLineStringStyle(state.lineStyle);
             redliningContainer.setRedlineLineStringStyle(state.lineStyle);
-            var lineStringFieldSet = me.down('fieldset[name=linestringstyle]');
+            var lineStringFieldSet = me.down(&#39;fieldset[name=linestringstyle]&#39;);
             if (lineStringFieldSet) {
                 lineStringFieldSet.destroy();
                 me.insert(1, this.getLineStringFieldset());
@@ -943,7 +943,7 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
         if (state.polygonStyle) {
             me.setRedlinePolygonStyle(state.polygonStyle);
             redliningContainer.setRedlinePolygonStyle(state.polygonStyle);
-            var polygonFieldSet = me.down('fieldset[name=polygonstyle]');
+            var polygonFieldSet = me.down(&#39;fieldset[name=polygonstyle]&#39;);
             if (polygonFieldSet) {
                 polygonFieldSet.destroy();
                 me.insert(2, this.getPolygonFieldset());

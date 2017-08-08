@@ -21,8 +21,8 @@
  * @private
  * @since 5.0.0
  */
-Ext.define('Ext.mixin.Bindable', {
-<span id='Ext-mixin-Bindable-property-mixinId'>    mixinId: 'bindable',
+Ext.define(&#39;Ext.mixin.Bindable&#39;, {
+<span id='Ext-mixin-Bindable-property-mixinId'>    mixinId: &#39;bindable&#39;,
 </span>
     config: {
 <span id='Ext-mixin-Bindable-cfg-bind'>        /**
@@ -31,16 +31,16 @@ Ext.define('Ext.mixin.Bindable', {
          * For example, to bind the `title` config:
          *
          *      var panel = Ext.create({
-         *          xtype: 'panel',
+         *          xtype: &#39;panel&#39;,
          *          bind: {
-         *              title: 'Hello {user.name}'
+         *              title: &#39;Hello {user.name}&#39;
          *          }
          *      });
          *
          * To dynamically add bindings:
          *
          *      panel.setBind({
-         *          title: 'Greetings {user.name}!'
+         *          title: &#39;Greetings {user.name}!&#39;
          *      });
          *
          * To remove bindings:
@@ -57,25 +57,25 @@ Ext.define('Ext.mixin.Bindable', {
             lazy: true
         },
 
-        // @cmd-auto-dependency { aliasPrefix: 'controller.' }
+        // @cmd-auto-dependency { aliasPrefix: &#39;controller.&#39; }
 <span id='Ext-mixin-Bindable-cfg-controller'>        /**
 </span>         * @cfg {String/Object/Ext.app.ViewController} controller
          * A string alias, a configuration object or an instance of a `ViewController` for
          * this container. Sample usage:
          *
-         *     Ext.define('MyApp.UserController', {
-         *         alias: 'controller.user'
+         *     Ext.define(&#39;MyApp.UserController&#39;, {
+         *         alias: &#39;controller.user&#39;
          *     });
          *
-         *     Ext.define('UserContainer', {
-         *         extend: 'Ext.container.container',
-         *         controller: 'user'
+         *     Ext.define(&#39;UserContainer&#39;, {
+         *         extend: &#39;Ext.container.container&#39;,
+         *         controller: &#39;user&#39;
          *     });
          *     // Or
-         *     Ext.define('UserContainer', {
-         *         extend: 'Ext.container.container',
+         *     Ext.define(&#39;UserContainer&#39;, {
+         *         extend: &#39;Ext.container.container&#39;,
          *         controller: {
-         *             type: 'user',
+         *             type: &#39;user&#39;,
          *             someConfig: true
          *         }
          *     });
@@ -93,7 +93,7 @@ Ext.define('Ext.mixin.Bindable', {
 </span>         * @method getController
          * Returns the {@link Ext.app.ViewController} instance associated with this 
          * component via the {@link #controller} config or {@link #setController} method.
-         * @return {Ext.app.ViewController} Returns this component's ViewController or 
+         * @return {Ext.app.ViewController} Returns this component&#39;s ViewController or 
          * null if one was not configured
          */
 
@@ -121,7 +121,7 @@ Ext.define('Ext.mixin.Bindable', {
          * to the viewModel. Some components override this and publish their most useful 
          * configs by default. 
          * 
-         * **Note:** We'll discuss publishing properties **not** found in the config block below. 
+         * **Note:** We&#39;ll discuss publishing properties **not** found in the config block below. 
          * 
          * Values determined to be invalid by component (often form fields and model validations) 
          * will not be published to the ViewModel.
@@ -135,20 +135,20 @@ Ext.define('Ext.mixin.Bindable', {
          *
          *      ...
          *          items: [{
-         *              xtype: 'textfield',
-         *              reference: 'somefield',  // component's name in the ViewModel
-         *              publishes: 'value' // value is not published by default
+         *              xtype: &#39;textfield&#39;,
+         *              reference: &#39;somefield&#39;,  // component&#39;s name in the ViewModel
+         *              publishes: &#39;value&#39; // value is not published by default
          *          },{
          *              ...
          *          },{
-         *              xtype: 'displayfield',
-         *              bind: 'You have entered &quot;{somefield.value}&quot;'
+         *              xtype: &#39;displayfield&#39;,
+         *              bind: &#39;You have entered &quot;{somefield.value}&quot;&#39;
          *          }]
          *      ...
          *
          * Classes must provide this config as an Object:
          *
-         *      Ext.define('App.foo.Bar', {
+         *      Ext.define(&#39;App.foo.Bar&#39;, {
          *          publishes: {
          *              foo: true,
          *              bar: true
@@ -162,19 +162,19 @@ Ext.define('Ext.mixin.Bindable', {
          * or object as follows:
          *
          *      {
-         *          xtype: 'textfield',
-         *          reference: 'somefield',
+         *          xtype: &#39;textfield&#39;,
+         *          reference: &#39;somefield&#39;,
          *          publishes: [
-         *              'value',
-         *              'rawValue',
-         *              'dirty'
+         *              &#39;value&#39;,
+         *              &#39;rawValue&#39;,
+         *              &#39;dirty&#39;
          *          ]
          *      }
          *
          *      // This achieves the same result as the above array form.
          *      {
-         *          xtype: 'textfield',
-         *          reference: 'somefield',
+         *          xtype: &#39;textfield&#39;,
+         *          reference: &#39;somefield&#39;,
          *          publishes: {
          *              value: true,
          *              rawValue: true,
@@ -184,11 +184,11 @@ Ext.define('Ext.mixin.Bindable', {
          *
          * In some cases, users may want to publish a property to the viewModel that is not found in a class 
          * config block. In these situations, you may utilize {@link #publishState} if the property has a 
-         * setter method.  Let's use {@link Ext.form.Labelable#setFieldLabel setFieldLabel} as an example:
+         * setter method.  Let&#39;s use {@link Ext.form.Labelable#setFieldLabel setFieldLabel} as an example:
          *
          *       setFieldLabel: function(fieldLabel) {
          *           this.callParent(arguments);
-         *           this.publishState('fieldLabel', fieldLabel);
+         *           this.publishState(&#39;fieldLabel&#39;, fieldLabel);
          *       }        
          * 
          * With the above chunk of code, fieldLabel may now be published to the viewModel.
@@ -216,7 +216,7 @@ Ext.define('Ext.mixin.Bindable', {
          */
         reference: null,
 
-        // @cmd-auto-dependency { directRef: 'Ext.data.Session' }
+        // @cmd-auto-dependency { directRef: &#39;Ext.data.Session&#39; }
 <span id='Ext-mixin-Bindable-cfg-session'>        /**
 </span>         * @cfg {Boolean/Object/Ext.data.Session} [session=null]
          * If provided this creates a new `Session` instance for this component. If this
@@ -225,7 +225,7 @@ Ext.define('Ext.mixin.Bindable', {
          * To create a new session you can specify `true`:
          *
          *      Ext.create({
-         *          xtype: 'viewport',
+         *          xtype: &#39;viewport&#39;,
          *          session: true,
          *
          *          items: [{
@@ -236,7 +236,7 @@ Ext.define('Ext.mixin.Bindable', {
          * Alternatively, a config object can be provided:
          *
          *      Ext.create({
-         *          xtype: 'viewport',
+         *          xtype: &#39;viewport&#39;,
          *          session: {
          *              ...
          *          },
@@ -270,7 +270,7 @@ Ext.define('Ext.mixin.Bindable', {
             }
         },
 
-        // @cmd-auto-dependency { aliasPrefix: 'viewmodel.', defaultType: 'default' }
+        // @cmd-auto-dependency { aliasPrefix: &#39;viewmodel.&#39;, defaultType: &#39;default&#39; }
 <span id='Ext-mixin-Bindable-cfg-viewModel'>        /**
 </span>         * @cfg {String/Object/Ext.app.ViewModel} viewModel
          * The `ViewModel` is a data provider for this component and its children. The
@@ -283,7 +283,7 @@ Ext.define('Ext.mixin.Bindable', {
          * parent of a `ViewModel` cannot be changed on the fly.
          *
          * If this is a root-level `ViewModel`, the data model connection is made to this
-         * component's associated `{@link Ext.data.Session Data Session}`. This is
+         * component&#39;s associated `{@link Ext.data.Session Data Session}`. This is
          * determined by calling `getInheritedSession`.
          *
          */
@@ -299,12 +299,12 @@ Ext.define('Ext.mixin.Bindable', {
      * the value. For example, if `defaultBindProperty=&quot;value&quot;`, then this shorthand
      * `bind` config:
      *
-     *      bind: '{name}'
+     *      bind: &#39;{name}&#39;
      *
      * Is equivalent to this object form:
      *
      *      bind: {
-     *          value: '{name}'
+     *          value: &#39;{name}&#39;
      *      }
      *
      * The `defaultBindProperty` is set to &quot;value&quot; for form fields and to &quot;store&quot; for
@@ -329,10 +329,10 @@ Ext.define('Ext.mixin.Bindable', {
         var me = this,
             reference = me.getReference(),
             controller = me.getController(),
-            // Don't instantiate the view model here, we only need to know that
+            // Don&#39;t instantiate the view model here, we only need to know that
             // it exists
-            viewModel = me.getConfig('viewModel', true),
-            session = me.getConfig('session', true),
+            viewModel = me.getConfig(&#39;viewModel&#39;, true),
+            session = me.getConfig(&#39;session&#39;, true),
             defaultListenerScope = me.getDefaultListenerScope();
 
         if (controller) {
@@ -346,10 +346,10 @@ Ext.define('Ext.mixin.Bindable', {
         }
 
         if (viewModel) {
-            // If we're not configured with an instance, just stamp the current component as
+            // If we&#39;re not configured with an instance, just stamp the current component as
             // the thing that holds the view model. When we ask to get the inherited view model,
-            // we will know that it's not an instance yet so we need to spin it up on this component.
-            // We need to initialize them from top-down, but we don't want to do it up front.
+            // we will know that it&#39;s not an instance yet so we need to spin it up on this component.
+            // We need to initialize them from top-down, but we don&#39;t want to do it up front.
             if (!viewModel.isViewModel) {
                 viewModel = me;
             }
@@ -365,8 +365,8 @@ Ext.define('Ext.mixin.Bindable', {
         }
 
         if (reference) {
-            me.referenceKey = (inheritedState.referencePath || '') + reference;
-            me.viewModelKey = (inheritedState.viewModelPath || '') + reference;
+            me.referenceKey = (inheritedState.referencePath || &#39;&#39;) + reference;
+            me.viewModelKey = (inheritedState.viewModelPath || &#39;&#39;) + reference;
         }
     },
 
@@ -381,12 +381,12 @@ Ext.define('Ext.mixin.Bindable', {
      * @since 5.0.1
      */
     lookupController: function(skipThis) {
-        return this.getInheritedConfig('controller', skipThis) || null;
+        return this.getInheritedConfig(&#39;controller&#39;, skipThis) || null;
     },
 
 <span id='Ext-mixin-Bindable-method-lookupSession'>    /**
 </span>     * Returns the `Ext.data.Session` for this instance. This property may come
-     * from this instance's `{@link #session}` or be inherited from this object's parent.
+     * from this instance&#39;s `{@link #session}` or be inherited from this object&#39;s parent.
      * @param {Boolean} [skipThis=false] Pass `true` to ignore a `session` configured on
      * this instance and only consider an inherited session.
      * @return {Ext.data.Session}
@@ -396,7 +396,7 @@ Ext.define('Ext.mixin.Bindable', {
         // See lookupViewModel
         var ret = skipThis ? null : this.getSession(); // may be the initGetter!
         if (!ret) {
-            ret = this.getInheritedConfig('session', skipThis);
+            ret = this.getInheritedConfig(&#39;session&#39;, skipThis);
             if (ret &amp;&amp; !ret.isSession) {
                 ret = ret.getInherited().session = ret.getSession();
             }
@@ -407,7 +407,7 @@ Ext.define('Ext.mixin.Bindable', {
 
 <span id='Ext-mixin-Bindable-method-lookupViewModel'>    /**
 </span>     * Returns the `Ext.app.ViewModel` for this instance. This property may come from this
-     * this instance's `{@link #viewModel}` or be inherited from this object's parent.
+     * this instance&#39;s `{@link #viewModel}` or be inherited from this object&#39;s parent.
      * @param {Boolean} [skipThis=false] Pass `true` to ignore a `viewModel` configured on
      * this instance and only consider an inherited view model.
      * @return {Ext.app.ViewModel}
@@ -417,7 +417,7 @@ Ext.define('Ext.mixin.Bindable', {
         var ret = skipThis ? null : this.getViewModel(); // may be the initGetter!
 
         if (!ret) {
-            ret = this.getInheritedConfig('viewModel', skipThis);
+            ret = this.getInheritedConfig(&#39;viewModel&#39;, skipThis);
             // If what we get back is a component, it means the component was configured
             // with a view model, however the construction of it has been delayed until
             // we need it. As such, go and construct it and store it on the inherited state.
@@ -454,7 +454,7 @@ Ext.define('Ext.mixin.Bindable', {
             // a) undefined
             // b) null
             // c) The value we were initially configured with
-            // Then we don't want to publish it back to the view model. If we do, we'll be
+            // Then we don&#39;t want to publish it back to the view model. If we do, we&#39;ll be
             // overwriting whatever is in the viewmodel and it will never have a chance to fire.
             if (!(binding.calls === 0 &amp;&amp; (value == null || value === me.getInitialConfig()[property]))) {
                 binding.setValue(value);
@@ -470,7 +470,7 @@ Ext.define('Ext.mixin.Bindable', {
         }
 
         // Important to access path after lookupViewModel, which will kick off
-        // our inheritedState if we don't have one
+        // our inheritedState if we don&#39;t have one
         if (!(path = me.viewModelKey)) {
             return;
         }
@@ -487,7 +487,7 @@ Ext.define('Ext.mixin.Bindable', {
                     return;
                 }
             }
-            path += '.';
+            path += &#39;.&#39;;
             path += property;
         } else {
             state = state || (me.publishedState = {});
@@ -555,21 +555,21 @@ Ext.define('Ext.mixin.Bindable', {
                 b, property, descriptor, destroy;
 
             me.$hasBinds = true;
-            if (!currentBindings || typeof currentBindings === 'string') {
+            if (!currentBindings || typeof currentBindings === &#39;string&#39;) {
                 currentBindings = {};
             }
 
             //&lt;debug&gt;
             if (!viewModel) {
-                Ext.raise('Cannot use bind config without a viewModel');
+                Ext.raise(&#39;Cannot use bind config without a viewModel&#39;);
             }
             //&lt;/debug&gt;
 
             if (Ext.isString(binds)) {
                 //&lt;debug&gt;
                 if (!me.defaultBindProperty) {
-                    Ext.raise(me.$className + ' has no defaultBindProperty - '+
-                                    'Please specify a bind object');
+                    Ext.raise(me.$className + &#39; has no defaultBindProperty - &#39;+
+                                    &#39;Please specify a bind object&#39;);
                 }
                 //&lt;/debug&gt;
 
@@ -582,7 +582,7 @@ Ext.define('Ext.mixin.Bindable', {
                 descriptor = binds[property];
                 b = currentBindings[property];
 
-                if (b &amp;&amp; typeof b !== 'string') {
+                if (b &amp;&amp; typeof b !== &#39;string&#39;) {
                     b.destroy();
                     b = null;
                     destroy = true;
@@ -595,8 +595,8 @@ Ext.define('Ext.mixin.Bindable', {
 
                     //&lt;debug&gt;
                     if (!me[b._config.names.set]) {
-                        Ext.raise('Cannot bind ' + property + ' on ' + me.$className +
-                                        ' - missing a ' + b._config.names.set + ' method.');
+                        Ext.raise(&#39;Cannot bind &#39; + property + &#39; on &#39; + me.$className +
+                                        &#39; - missing a &#39; + b._config.names.set + &#39; method.&#39;);
                     }
                     //&lt;/debug&gt;
                 }
@@ -641,8 +641,8 @@ Ext.define('Ext.mixin.Bindable', {
         applyReference: function (reference) {
             var validIdRe = this.validRefRe || Ext.validIdRe;
             if (reference &amp;&amp; !validIdRe.test(reference)) {
-                Ext.raise('Invalid reference &quot;' + reference + '&quot; for ' + this.getId() +
-                                ' - not a valid identifier');
+                Ext.raise(&#39;Invalid reference &quot;&#39; + reference + &#39;&quot; for &#39; + this.getId() +
+                                &#39; - not a valid identifier&#39;);
             }
             return reference;
         },
@@ -669,7 +669,7 @@ Ext.define('Ext.mixin.Bindable', {
                 } else {
                     // Mask this use of Session from Cmd - the dependency is not ours but
                     // the caller
-                    session = new Ext.data['Session'](config);
+                    session = new Ext.data[&#39;Session&#39;](config);
                 }
             }
 
@@ -708,7 +708,7 @@ Ext.define('Ext.mixin.Bindable', {
                 if (viewModel) {
                     if (viewModel.constructor === Object) {
                         Ext.apply(config, viewModel);
-                    } else if (typeof viewModel === 'string') {
+                    } else if (typeof viewModel === &#39;string&#39;) {
                         config.type = viewModel;
                     }
                 }
@@ -739,8 +739,8 @@ Ext.define('Ext.mixin.Bindable', {
 
         destroyBindable: function() {
             var me = this,
-                viewModel = me.getConfig('viewModel', true),
-                session = me.getConfig('session', true),
+                viewModel = me.getConfig(&#39;viewModel&#39;, true),
+                session = me.getConfig(&#39;session&#39;, true),
                 controller = me.getController();
 
             if (viewModel &amp;&amp; viewModel.isViewModel) {
@@ -845,7 +845,7 @@ Ext.define('Ext.mixin.Bindable', {
 
             if (me.$hasBinds) {
                 bindings = me.getBind();
-                if (bindings &amp;&amp; typeof bindings !== 'string') {
+                if (bindings &amp;&amp; typeof bindings !== &#39;string&#39;) {
                     for (key in bindings) {
                         binding = bindings[key];
                         binding.destroy();

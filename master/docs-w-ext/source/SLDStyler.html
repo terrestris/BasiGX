@@ -38,83 +38,83 @@
  *
  * @example:
  * var styleEditor = {
- *     xtype: 'basigx-container-sldstyler',
+ *     xtype: &#39;basigx-container-sldstyler&#39;,
  *     backendUrls: {
  *        pictureList: {
- *            url: 'rest/images',
- *            method: 'GET'
+ *            url: &#39;rest/images&#39;,
+ *            method: &#39;GET&#39;
  *        },
  *        pictureSrc: {
- *            url: 'image/getThumbnail.action?id='
+ *            url: &#39;image/getThumbnail.action?id=&#39;
  *        },
  *        pictureUpload: {
- *            url: 'image/upload.action?'
+ *            url: &#39;image/upload.action?&#39;
  *        },
  *        graphicDelete: {
- *            url: 'rest/images/',
- *            method: 'DELETE'
+ *            url: &#39;rest/images/&#39;,
+ *            method: &#39;DELETE&#39;
  *        },
  *        geoServerUrl: BasiGX.util.Url.getWebProjectBaseUrl() +
- *            'geoserver.action'
+ *            &#39;geoserver.action&#39;
  *     },
- *     layer: 'namespace:layer',
- *     sld: '&lt;xml ...?&gt;',
- *     ruleName: 'rule1',
- *     mode: 'polygon'
+ *     layer: &#39;namespace:layer&#39;,
+ *     sld: &#39;&lt;xml ...?&gt;&#39;,
+ *     ruleName: &#39;rule1&#39;,
+ *     mode: &#39;polygon&#39;
  * };
  *
  * @author Johannes Weskamm
  * @class BasiGX.view.container.SLDStyler
  */
-Ext.define('BasiGX.view.container.SLDStyler', {
-    extend: 'Ext.container.Container',
-    xtype: 'basigx-container-sldstyler',
+Ext.define(&#39;BasiGX.view.container.SLDStyler&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
+    xtype: &#39;basigx-container-sldstyler&#39;,
 
     requires: [
-        'Ext.ux.colorpick.Button',
-        'BasiGX.view.panel.GraphicPool',
-        'BasiGX.view.panel.FontSymbolPool',
-        'BasiGX.util.Color',
-        'BasiGX.util.SLD',
-        'BasiGX.util.Object'
+        &#39;Ext.ux.colorpick.Button&#39;,
+        &#39;BasiGX.view.panel.GraphicPool&#39;,
+        &#39;BasiGX.view.panel.FontSymbolPool&#39;,
+        &#39;BasiGX.util.Color&#39;,
+        &#39;BasiGX.util.SLD&#39;,
+        &#39;BasiGX.util.Object&#39;
     ],
 
 <span id='BasiGX-view-container-SLDStyler-cfg-viewModel'>    viewModel: {
 </span>        data: {
-            pointStyleFieldSetTitle: 'Point Style',
-            pointStyleSymbolPanelTitle: 'Symbol',
-            pointStyleRadiusNumberFieldLabel: 'Point Radius',
-            pointStyleStrokeNumberFieldLabel: 'Stroke Width',
-            pointStyleStrokeColorFieldLabel: 'Stroke Color',
-            pointStyleFillColorFieldLabel: 'Fill Color',
-            pointStyleGraphicPanelTitle: 'Graphic',
-            pointStyleChooseImgBtnText: 'Choose Image',
-            pointStyleChooseFontBtnText: 'Choose Font Symbol',
-            pointStyleImgScaleSliderLabel: 'Scale',
-            pointStyleImgRotationSliderLabel: 'Rotation',
-            pointStyleImgOpacitySliderLabel: 'Opacity',
-            lineStyleFieldSetTitle: 'LineString Style',
-            lineStyleStrokeNumberFieldLabel: 'Stroke Width',
-            lineStyleStrokeColorFieldLabel: 'Stroke Color',
-            polygonStyleFieldSetTitle: 'Polygon Style',
-            polygonStyleSymbolPanelTitle: 'Symbol',
-            polygonStyleStrokeNumberFieldLabel: 'Stroke Width',
-            polygonStyleStrokeColorFieldLabel: 'Stroke Color',
-            polygonStyleFillColorFieldLabel: 'Fill Color',
-            polygonStyleGraphicPanelTitle: 'Graphic',
-            polygonStyleImgScaleSliderLabel: 'Scale',
-            polygonStyleImgRotationSliderLabel: 'Rotation',
-            polygonStyleImgOpacitySliderLabel: 'Opacity',
-            pointGrapicDeletedSuccessMsgText: 'The icon has been deleted. ' +
-                'Please reassign a new one.',
-            pointGrapicDeletedSuccessMsgTitle: 'Deletion succesfull',
-            graphicPoolWindowTitle: 'Graphic Pool',
-            fontSymbolPoolWindowTitle: 'Font symbol pool',
-            documentation: '&lt;h2&gt;SLD Styler&lt;/h2&gt;• Verwenden Sie den ' +
-                'SLD Styler, um Ihre Zeichenobjekte nach Wunsch zu gestalten.' +
-                '&lt;br&gt;• Neben Farben, Strichstärken und Schrifteigenschaften ' +
-                'können auch eigene Icons für die Symbolisierung verwendet ' +
-                'werden'
+            pointStyleFieldSetTitle: &#39;Point Style&#39;,
+            pointStyleSymbolPanelTitle: &#39;Symbol&#39;,
+            pointStyleRadiusNumberFieldLabel: &#39;Point Radius&#39;,
+            pointStyleStrokeNumberFieldLabel: &#39;Stroke Width&#39;,
+            pointStyleStrokeColorFieldLabel: &#39;Stroke Color&#39;,
+            pointStyleFillColorFieldLabel: &#39;Fill Color&#39;,
+            pointStyleGraphicPanelTitle: &#39;Graphic&#39;,
+            pointStyleChooseImgBtnText: &#39;Choose Image&#39;,
+            pointStyleChooseFontBtnText: &#39;Choose Font Symbol&#39;,
+            pointStyleImgScaleSliderLabel: &#39;Scale&#39;,
+            pointStyleImgRotationSliderLabel: &#39;Rotation&#39;,
+            pointStyleImgOpacitySliderLabel: &#39;Opacity&#39;,
+            lineStyleFieldSetTitle: &#39;LineString Style&#39;,
+            lineStyleStrokeNumberFieldLabel: &#39;Stroke Width&#39;,
+            lineStyleStrokeColorFieldLabel: &#39;Stroke Color&#39;,
+            polygonStyleFieldSetTitle: &#39;Polygon Style&#39;,
+            polygonStyleSymbolPanelTitle: &#39;Symbol&#39;,
+            polygonStyleStrokeNumberFieldLabel: &#39;Stroke Width&#39;,
+            polygonStyleStrokeColorFieldLabel: &#39;Stroke Color&#39;,
+            polygonStyleFillColorFieldLabel: &#39;Fill Color&#39;,
+            polygonStyleGraphicPanelTitle: &#39;Graphic&#39;,
+            polygonStyleImgScaleSliderLabel: &#39;Scale&#39;,
+            polygonStyleImgRotationSliderLabel: &#39;Rotation&#39;,
+            polygonStyleImgOpacitySliderLabel: &#39;Opacity&#39;,
+            pointGrapicDeletedSuccessMsgText: &#39;The icon has been deleted. &#39; +
+                &#39;Please reassign a new one.&#39;,
+            pointGrapicDeletedSuccessMsgTitle: &#39;Deletion succesfull&#39;,
+            graphicPoolWindowTitle: &#39;Graphic Pool&#39;,
+            fontSymbolPoolWindowTitle: &#39;Font symbol pool&#39;,
+            documentation: &#39;&lt;h2&gt;SLD Styler&lt;/h2&gt;• Verwenden Sie den &#39; +
+                &#39;SLD Styler, um Ihre Zeichenobjekte nach Wunsch zu gestalten.&#39; +
+                &#39;&lt;br&gt;• Neben Farben, Strichstärken und Schrifteigenschaften &#39; +
+                &#39;können auch eigene Icons für die Symbolisierung verwendet &#39; +
+                &#39;werden&#39;
         }
     },
 
@@ -168,7 +168,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
 <span id='BasiGX-view-container-SLDStyler-cfg-mode'>        /**
 </span>         * The mode indicates if we are styling a `point`, `line` or `polygon`
          */
-        mode: 'point',
+        mode: &#39;point&#39;,
 
 <span id='BasiGX-view-container-SLDStyler-cfg-layer'>        /**
 </span>         * The full qualified layerName of the layer in GeoServer
@@ -202,34 +202,34 @@ Ext.define('BasiGX.view.container.SLDStyler', {
     initComponent: function() {
         var sld = this.getSld();
         if (!sld) {
-            Ext.log.warn('Component needs to be configured with a valid SLD');
+            Ext.log.warn(&#39;Component needs to be configured with a valid SLD&#39;);
             return;
         }
         this.callParent();
         this.setSldObj(BasiGX.util.SLD.toSldObject(sld));
 
-        if (this.getMode() === 'point') {
+        if (this.getMode() === &#39;point&#39;) {
             this.add(this.getPointFieldset());
-        } else if (this.getMode() === 'line') {
+        } else if (this.getMode() === &#39;line&#39;) {
             this.add(this.getLineStringFieldset());
-        } else if (this.getMode() === 'polygon') {
+        } else if (this.getMode() === &#39;polygon&#39;) {
             this.add(this.getPolygonFieldset());
         }
 
         // activate the graphic tab if necessary
         var usingExternalGraphic = false;
         var graphicOrMark = BasiGX.util.Object.getValue(
-            'externalGraphicOrMark', this.getSldObj());
+            &#39;externalGraphicOrMark&#39;, this.getSldObj());
         if (graphicOrMark &amp;&amp; graphicOrMark[0] &amp;&amp;
            (graphicOrMark[0].onlineResource ||
            (graphicOrMark[0].wellKnownName &amp;&amp;
             graphicOrMark[0].wellKnownName.content[0]
-                .indexOf('ttf://') &gt; -1))) {
+                .indexOf(&#39;ttf://&#39;) &gt; -1))) {
             usingExternalGraphic = true;
         }
         if (usingExternalGraphic) {
-            var externalGrphicPanel = this.down('panel[name=graphic]');
-            this.down('tabpanel').setActiveItem(externalGrphicPanel);
+            var externalGrphicPanel = this.down(&#39;panel[name=graphic]&#39;);
+            this.down(&#39;tabpanel&#39;).setActiveItem(externalGrphicPanel);
         }
         this.updateSLDPreview();
     },
@@ -271,15 +271,15 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         var fontAndUniCode = null;
         var alpha;
 
-        var fill = getVal('fill', rule);
-        var stroke = getVal('stroke', rule);
-        var size = getVal('size', rule);
-        var graphic = getVal('graphic', rule);
+        var fill = getVal(&#39;fill&#39;, rule);
+        var stroke = getVal(&#39;stroke&#39;, rule);
+        var size = getVal(&#39;size&#39;, rule);
+        var graphic = getVal(&#39;graphic&#39;, rule);
 
         if (fill) {
             fillColor = BasiGX.util.SLD.fillFromObj(fill).fillColor;
             fillOpacity = BasiGX.util.SLD.fillFromObj(fill).fillOpacity;
-            alpha = BasiGX.util.Color.makeHex('' +
+            alpha = BasiGX.util.Color.makeHex(&#39;&#39; +
                 Math.round(parseFloat(fillOpacity) * 255));
             fillColor = fillColor + alpha;
         }
@@ -288,7 +288,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
             strokeWidth = BasiGX.util.SLD.strokeFromObj(stroke).strokeWidth;
             strokeOpacity = BasiGX.util.SLD.strokeFromObj(stroke).strokeOpacity;
             strokeColor = BasiGX.util.SLD.strokeFromObj(stroke).strokeColor;
-            alpha = BasiGX.util.Color.makeHex('' +
+            alpha = BasiGX.util.Color.makeHex(&#39;&#39; +
                 Math.round(parseFloat(strokeOpacity) * 255));
             strokeColor = strokeColor + alpha;
         }
@@ -298,139 +298,139 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         }
 
         if (graphic) {
-            if (getVal('size', graphic)) {
-                graphicSize = getVal('size', graphic).content[0];
+            if (getVal(&#39;size&#39;, graphic)) {
+                graphicSize = getVal(&#39;size&#39;, graphic).content[0];
             }
-            if (getVal('opacity', graphic)) {
-                graphicOpacity = getVal('opacity', graphic).content[0] * 100;
+            if (getVal(&#39;opacity&#39;, graphic)) {
+                graphicOpacity = getVal(&#39;opacity&#39;, graphic).content[0] * 100;
             }
-            if (getVal('rotation', graphic)) {
-                graphicRotation = getVal('rotation', graphic).content[0];
+            if (getVal(&#39;rotation&#39;, graphic)) {
+                graphicRotation = getVal(&#39;rotation&#39;, graphic).content[0];
             }
-            if (getVal('href', graphic)) {
-                externalGraphicSrc = getVal('href', graphic);
+            if (getVal(&#39;href&#39;, graphic)) {
+                externalGraphicSrc = getVal(&#39;href&#39;, graphic);
             }
-            if (getVal('wellKnownName', graphic)) {
-                var content = getVal('wellKnownName', graphic).content[0];
-                if (content.indexOf('ttf://') &gt; -1) {
-                    fontAndUniCode = getVal('wellKnownName', graphic)
+            if (getVal(&#39;wellKnownName&#39;, graphic)) {
+                var content = getVal(&#39;wellKnownName&#39;, graphic).content[0];
+                if (content.indexOf(&#39;ttf://&#39;) &gt; -1) {
+                    fontAndUniCode = getVal(&#39;wellKnownName&#39;, graphic)
                         .content[0];
                 }
             }
         }
 
         var fs = {
-            xtype: 'fieldset',
+            xtype: &#39;fieldset&#39;,
             bind: {
-                title: '{pointStyleFieldSetTitle}'
+                title: &#39;{pointStyleFieldSetTitle}&#39;
             },
-            name: 'pointstyle',
-            layout: 'hbox',
+            name: &#39;pointstyle&#39;,
+            layout: &#39;hbox&#39;,
             items: [{
-                xtype: 'tabpanel',
+                xtype: &#39;tabpanel&#39;,
                 items: [{
-                    xtype: 'panel',
+                    xtype: &#39;panel&#39;,
                     bind: {
-                        title: '{pointStyleSymbolPanelTitle}'
+                        title: &#39;{pointStyleSymbolPanelTitle}&#39;
                     },
                     defaults: {
                         margin: 3,
                         width: 220
                     },
                     items: [{
-                        xtype: 'numberfield',
+                        xtype: &#39;numberfield&#39;,
                         bind: {
-                            fieldLabel: '{pointStyleRadiusNumberFieldLabel}'
+                            fieldLabel: &#39;{pointStyleRadiusNumberFieldLabel}&#39;
                         },
-                        name: 'radius',
+                        name: &#39;radius&#39;,
                         value: radius,
                         minValue: 1,
                         maxValue: 50,
                         listeners: listenerConfig
                     }, {
-                        xtype: 'numberfield',
+                        xtype: &#39;numberfield&#39;,
                         bind: {
-                            fieldLabel: '{pointStyleStrokeNumberFieldLabel}'
+                            fieldLabel: &#39;{pointStyleStrokeNumberFieldLabel}&#39;
                         },
-                        name: 'stroke-width',
+                        name: &#39;stroke-width&#39;,
                         value: strokeWidth,
                         minValue: 0,
                         maxValue: 50,
                         listeners: listenerConfig
                     }, {
-                        xtype: 'container',
-                        layout: 'hbox',
+                        xtype: &#39;container&#39;,
+                        layout: &#39;hbox&#39;,
                         defaults: {
                             width: 100
                         },
                         items: [{
-                            xtype: 'displayfield',
+                            xtype: &#39;displayfield&#39;,
                             width: 100,
                             bind: {
-                                value: '{pointStyleStrokeColorFieldLabel}'
+                                value: &#39;{pointStyleStrokeColorFieldLabel}&#39;
                             }
                         }, {
-                            xtype: 'colorbutton',
-                            name: 'stroke',
-                            format: 'hex8',
+                            xtype: &#39;colorbutton&#39;,
+                            name: &#39;stroke&#39;,
+                            format: &#39;hex8&#39;,
                             value: strokeColor,
-                            margin: '5 0 0 10',
+                            margin: &#39;5 0 0 10&#39;,
                             listeners: listenerConfig
                         }]
                     }, {
-                        xtype: 'container',
-                        layout: 'hbox',
+                        xtype: &#39;container&#39;,
+                        layout: &#39;hbox&#39;,
                         defaults: {
                             width: 100
                         },
                         items: [{
-                            xtype: 'displayfield',
+                            xtype: &#39;displayfield&#39;,
                             width: 100,
                             bind: {
-                                value: '{pointStyleFillColorFieldLabel}'
+                                value: &#39;{pointStyleFillColorFieldLabel}&#39;
                             }
                         }, {
-                            xtype: 'colorbutton',
-                            name: 'fill',
-                            format: 'hex8',
-                            margin: '0 0 0 10',
+                            xtype: &#39;colorbutton&#39;,
+                            name: &#39;fill&#39;,
+                            format: &#39;hex8&#39;,
+                            margin: &#39;0 0 0 10&#39;,
                             value: fillColor,
                             listeners: listenerConfig
                         }]
                     }]
                 }, {
-                    xtype: 'panel',
+                    xtype: &#39;panel&#39;,
                     bind: {
-                        title: '{pointStyleGraphicPanelTitle}'
+                        title: &#39;{pointStyleGraphicPanelTitle}&#39;
                     },
-                    name: 'graphic',
+                    name: &#39;graphic&#39;,
                     externalGraphicSrc: externalGraphicSrc,
                     fontAndUniCode: fontAndUniCode,
                     defaults: {
                         margin: 3,
                         width: 220
                     },
-                    layout: 'vbox',
+                    layout: &#39;vbox&#39;,
                     items: [{
-                        xtype: 'button',
+                        xtype: &#39;button&#39;,
                         bind: {
-                            text: '{pointStyleChooseImgBtnText}'
+                            text: &#39;{pointStyleChooseImgBtnText}&#39;
                         },
                         handler: me.onChooseGraphicClick,
                         scope: me
                     }, {
-                        xtype: 'button',
+                        xtype: &#39;button&#39;,
                         bind: {
-                            text: '{pointStyleChooseFontBtnText}'
+                            text: &#39;{pointStyleChooseFontBtnText}&#39;
                         },
                         handler: me.onChooseFontClick,
                         scope: me
                     }, {
-                        xtype: 'slider',
+                        xtype: &#39;slider&#39;,
                         bind: {
-                            fieldLabel: '{pointStyleImgOpacitySliderLabel}'
+                            fieldLabel: &#39;{pointStyleImgOpacitySliderLabel}&#39;
                         },
-                        name: 'graphic-opacity',
+                        name: &#39;graphic-opacity&#39;,
                         value: graphicOpacity,
                         disabled: fontAndUniCode ? true : false,
                         minValue: 0,
@@ -438,79 +438,79 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         increment: 10,
                         listeners: listenerConfig
                     }, {
-                        xtype: 'slider',
+                        xtype: &#39;slider&#39;,
                         bind: {
-                            fieldLabel: '{pointStyleImgRotationSliderLabel}'
+                            fieldLabel: &#39;{pointStyleImgRotationSliderLabel}&#39;
                         },
-                        name: 'graphic-rotation',
+                        name: &#39;graphic-rotation&#39;,
                         value: graphicRotation,
                         minValue: 0,
                         maxValue: 360,
                         listeners: listenerConfig
                     }, {
-                        xtype: 'slider',
+                        xtype: &#39;slider&#39;,
                         bind: {
-                            fieldLabel: '{pointStyleImgScaleSliderLabel}'
+                            fieldLabel: &#39;{pointStyleImgScaleSliderLabel}&#39;
                         },
-                        name: 'graphic-scale',
+                        name: &#39;graphic-scale&#39;,
                         value: graphicSize,
                         increment: 1,
                         minValue: 1,
                         maxValue: 100,
                         listeners: listenerConfig
                     }, {
-                        xtype: 'slider',
+                        xtype: &#39;slider&#39;,
                         bind: {
-                            fieldLabel: '{pointStyleStrokeNumberFieldLabel}'
+                            fieldLabel: &#39;{pointStyleStrokeNumberFieldLabel}&#39;
                         },
-                        name: 'stroke-width',
+                        name: &#39;stroke-width&#39;,
                         value: strokeWidth,
                         disabled: externalGraphicSrc ? true : false,
                         minValue: 0,
                         maxValue: 50,
                         listeners: listenerConfig
                     }, {
-                        xtype: 'container',
-                        layout: 'hbox',
+                        xtype: &#39;container&#39;,
+                        layout: &#39;hbox&#39;,
                         defaults: {
                             width: 100
                         },
                         items: [{
-                            xtype: 'displayfield',
+                            xtype: &#39;displayfield&#39;,
                             disabled: externalGraphicSrc ? true : false,
                             width: 100,
                             bind: {
-                                value: '{pointStyleStrokeColorFieldLabel}'
+                                value: &#39;{pointStyleStrokeColorFieldLabel}&#39;
                             }
                         }, {
-                            xtype: 'colorbutton',
+                            xtype: &#39;colorbutton&#39;,
                             disabled: externalGraphicSrc ? true : false,
-                            name: 'stroke',
-                            format: 'hex8',
+                            name: &#39;stroke&#39;,
+                            format: &#39;hex8&#39;,
                             value: strokeColor,
-                            margin: '5 0 0 10',
+                            margin: &#39;5 0 0 10&#39;,
                             listeners: listenerConfig
                         }]
                     }, {
-                        xtype: 'container',
-                        layout: 'hbox',
+                        xtype: &#39;container&#39;,
+                        layout: &#39;hbox&#39;,
                         disabled: externalGraphicSrc ? true : false,
                         defaults: {
                             width: 100
                         },
                         items: [{
-                            xtype: 'displayfield',
+                            xtype: &#39;displayfield&#39;,
                             disabled: externalGraphicSrc ? true : false,
                             width: 100,
                             bind: {
-                                value: '{pointStyleFillColorFieldLabel}'
+                                value: &#39;{pointStyleFillColorFieldLabel}&#39;
                             }
                         }, {
-                            xtype: 'colorbutton',
+                            xtype: &#39;colorbutton&#39;,
                             disabled: externalGraphicSrc ? true : false,
-                            name: 'fill',
-                            format: 'hex8',
-                            margin: '0 0 0 10',
+                            name: &#39;fill&#39;,
+                            format: &#39;hex8&#39;,
+                            margin: &#39;0 0 0 10&#39;,
                             value: fillColor,
                             listeners: listenerConfig
                         }]
@@ -549,60 +549,60 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         var strokeOpacity = BasiGX.util.SLD.DEFAULT_STROKE_OPACITY;
         var strokeColor = BasiGX.util.SLD.DEFAULT_STROKE_COLOR;
 
-        var stroke = getVal('stroke', rule);
+        var stroke = getVal(&#39;stroke&#39;, rule);
 
         if (stroke) {
             strokeWidth = BasiGX.util.SLD.strokeFromObj(stroke).strokeWidth;
             strokeOpacity = BasiGX.util.SLD.strokeFromObj(stroke).strokeOpacity;
             strokeColor = BasiGX.util.SLD.strokeFromObj(stroke).strokeColor;
-            var alpha = BasiGX.util.Color.makeHex('' +
+            var alpha = BasiGX.util.Color.makeHex(&#39;&#39; +
                 Math.round(parseFloat(strokeOpacity) * 255));
             strokeColor = strokeColor + alpha;
         }
 
         var fs = {
-            xtype: 'fieldset',
+            xtype: &#39;fieldset&#39;,
             bind: {
-                title: '{lineStyleFieldSetTitle}'
+                title: &#39;{lineStyleFieldSetTitle}&#39;
             },
-            name: 'linestyle',
-            layout: 'hbox',
+            name: &#39;linestyle&#39;,
+            layout: &#39;hbox&#39;,
             items: [{
-                xtype: 'fieldset',
-                layout: 'vbox',
+                xtype: &#39;fieldset&#39;,
+                layout: &#39;vbox&#39;,
                 width: 220,
                 defaults: {
                     margin: 3,
                     width: 180
                 },
                 items: [{
-                    xtype: 'numberfield',
+                    xtype: &#39;numberfield&#39;,
                     bind: {
-                        fieldLabel: '{lineStyleStrokeNumberFieldLabel}'
+                        fieldLabel: &#39;{lineStyleStrokeNumberFieldLabel}&#39;
                     },
                     value: strokeWidth,
-                    name: 'stroke-width',
+                    name: &#39;stroke-width&#39;,
                     minValue: 0,
                     maxValue: 50,
                     listeners: listenerConfig
                 }, {
-                    xtype: 'container',
-                    layout: 'hbox',
+                    xtype: &#39;container&#39;,
+                    layout: &#39;hbox&#39;,
                     defaults: {
                         width: 100
                     },
                     items: [{
-                        xtype: 'displayfield',
+                        xtype: &#39;displayfield&#39;,
                         width: 100,
                         bind: {
-                            value: '{lineStyleStrokeColorFieldLabel}'
+                            value: &#39;{lineStyleStrokeColorFieldLabel}&#39;
                         }
                     }, {
-                        xtype: 'colorbutton',
-                        format: 'hex8',
+                        xtype: &#39;colorbutton&#39;,
+                        format: &#39;hex8&#39;,
                         value: strokeColor,
-                        name: 'stroke',
-                        margin: '5 0 0 10',
+                        name: &#39;stroke&#39;,
+                        margin: &#39;5 0 0 10&#39;,
                         listeners: listenerConfig
                     }]
                 }]
@@ -647,14 +647,14 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         var fontAndUniCode = null;
         var alpha;
 
-        var fill = getVal('fill', rule);
-        var stroke = getVal('stroke', rule);
-        var graphic = getVal('graphic', rule);
+        var fill = getVal(&#39;fill&#39;, rule);
+        var stroke = getVal(&#39;stroke&#39;, rule);
+        var graphic = getVal(&#39;graphic&#39;, rule);
 
         if (fill) {
             fillColor = BasiGX.util.SLD.fillFromObj(fill).fillColor;
             fillOpacity = BasiGX.util.SLD.fillFromObj(fill).fillOpacity;
-            alpha = BasiGX.util.Color.makeHex('' +
+            alpha = BasiGX.util.Color.makeHex(&#39;&#39; +
                 Math.round(parseFloat(fillOpacity) * 255));
             fillColor = fillColor + alpha;
         }
@@ -663,111 +663,111 @@ Ext.define('BasiGX.view.container.SLDStyler', {
             strokeWidth = BasiGX.util.SLD.strokeFromObj(stroke).strokeWidth;
             strokeOpacity = BasiGX.util.SLD.strokeFromObj(stroke).strokeOpacity;
             strokeColor = BasiGX.util.SLD.strokeFromObj(stroke).strokeColor;
-            alpha = BasiGX.util.Color.makeHex('' +
+            alpha = BasiGX.util.Color.makeHex(&#39;&#39; +
                 Math.round(parseFloat(strokeOpacity) * 255));
             strokeColor = strokeColor + alpha;
         }
 
         if (graphic) {
-            if (getVal('size', graphic)) {
-                graphicSize = getVal('size', graphic).content[0];
+            if (getVal(&#39;size&#39;, graphic)) {
+                graphicSize = getVal(&#39;size&#39;, graphic).content[0];
             }
-            if (getVal('opacity', graphic)) {
-                graphicOpacity = getVal('opacity', graphic).content[0] * 100;
+            if (getVal(&#39;opacity&#39;, graphic)) {
+                graphicOpacity = getVal(&#39;opacity&#39;, graphic).content[0] * 100;
             }
-            if (getVal('rotation', graphic)) {
-                graphicRotation = getVal('rotation', graphic).content[0];
+            if (getVal(&#39;rotation&#39;, graphic)) {
+                graphicRotation = getVal(&#39;rotation&#39;, graphic).content[0];
             }
-            if (getVal('href', graphic)) {
-                externalGraphicSrc = getVal('href', graphic);
+            if (getVal(&#39;href&#39;, graphic)) {
+                externalGraphicSrc = getVal(&#39;href&#39;, graphic);
             }
-            if (getVal('wellKnownName', graphic)) {
-                var content = getVal('wellKnownName', graphic).content[0];
-                if (content.indexOf('ttf://') &gt; -1) {
-                    fontAndUniCode = getVal('wellKnownName', graphic)
+            if (getVal(&#39;wellKnownName&#39;, graphic)) {
+                var content = getVal(&#39;wellKnownName&#39;, graphic).content[0];
+                if (content.indexOf(&#39;ttf://&#39;) &gt; -1) {
+                    fontAndUniCode = getVal(&#39;wellKnownName&#39;, graphic)
                         .content[0];
                 }
             }
         }
 
         var fs = {
-            xtype: 'fieldset',
+            xtype: &#39;fieldset&#39;,
             bind: {
-                title: '{polygonStyleFieldSetTitle}'
+                title: &#39;{polygonStyleFieldSetTitle}&#39;
             },
-            name: 'polygonstyle',
-            layout: 'hbox',
+            name: &#39;polygonstyle&#39;,
+            layout: &#39;hbox&#39;,
             items: [{
-                xtype: 'tabpanel',
+                xtype: &#39;tabpanel&#39;,
                 items: [{
-                    xtype: 'panel',
+                    xtype: &#39;panel&#39;,
                     bind: {
-                        title: '{polygonStyleSymbolPanelTitle}'
+                        title: &#39;{polygonStyleSymbolPanelTitle}&#39;
                     },
-                    layout: 'vbox',
+                    layout: &#39;vbox&#39;,
                     width: 220,
                     defaults: {
                         margin: 3,
                         width: 210
                     },
                     items: [{
-                        xtype: 'numberfield',
+                        xtype: &#39;numberfield&#39;,
                         bind: {
-                            fieldLabel: '{polygonStyleStrokeNumberFieldLabel}'
+                            fieldLabel: &#39;{polygonStyleStrokeNumberFieldLabel}&#39;
                         },
                         value: strokeWidth,
-                        name: 'stroke-width',
+                        name: &#39;stroke-width&#39;,
                         minValue: 0,
                         maxValue: 50,
                         listeners: listenerConfig
                     }, {
-                        xtype: 'container',
-                        layout: 'hbox',
+                        xtype: &#39;container&#39;,
+                        layout: &#39;hbox&#39;,
                         defaults: {
                             width: 100
                         },
                         items: [{
-                            xtype: 'displayfield',
+                            xtype: &#39;displayfield&#39;,
                             width: 100,
                             bind: {
-                                value: '{polygonStyleStrokeColorFieldLabel}'
+                                value: &#39;{polygonStyleStrokeColorFieldLabel}&#39;
                             }
                         }, {
-                            xtype: 'colorbutton',
-                            format: 'hex8',
+                            xtype: &#39;colorbutton&#39;,
+                            format: &#39;hex8&#39;,
                             value: strokeColor,
-                            name: 'stroke',
-                            margin: '5 0 0 10',
+                            name: &#39;stroke&#39;,
+                            margin: &#39;5 0 0 10&#39;,
                             listeners: listenerConfig
                         }]
                     }, {
-                        xtype: 'container',
-                        layout: 'hbox',
+                        xtype: &#39;container&#39;,
+                        layout: &#39;hbox&#39;,
                         defaults: {
                             width: 100
                         },
                         items: [{
-                            xtype: 'displayfield',
+                            xtype: &#39;displayfield&#39;,
                             width: 100,
                             bind: {
-                                value: '{polygonStyleFillColorFieldLabel}'
+                                value: &#39;{polygonStyleFillColorFieldLabel}&#39;
                             }
                         }, {
-                            xtype: 'colorbutton',
-                            format: 'hex8',
-                            margin: '0 0 0 10',
+                            xtype: &#39;colorbutton&#39;,
+                            format: &#39;hex8&#39;,
+                            margin: &#39;0 0 0 10&#39;,
                             value: fillColor,
-                            name: 'fill',
+                            name: &#39;fill&#39;,
                             listeners: listenerConfig
                         }]
                     }]
                 }, {
-                    xtype: 'panel',
+                    xtype: &#39;panel&#39;,
                     bind: {
-                        title: '{polygonStyleGraphicPanelTitle}'
+                        title: &#39;{polygonStyleGraphicPanelTitle}&#39;
                     },
-                    name: 'graphic',
-                    layout: 'vbox',
+                    name: &#39;graphic&#39;,
+                    layout: &#39;vbox&#39;,
                     externalGraphicSrc: externalGraphicSrc,
                     fontAndUniCode: fontAndUniCode,
                     defaults: {
@@ -775,16 +775,16 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         width: 210
                     },
                     items: [{
-                        xtype: 'button',
+                        xtype: &#39;button&#39;,
                         bind: {
-                            text: '{pointStyleChooseImgBtnText}'
+                            text: &#39;{pointStyleChooseImgBtnText}&#39;
                         },
                         handler: me.onChooseGraphicClick,
                         scope: me
                     }, {
-                        xtype: 'button',
+                        xtype: &#39;button&#39;,
                         bind: {
-                            text: '{pointStyleChooseFontBtnText}'
+                            text: &#39;{pointStyleChooseFontBtnText}&#39;
                         },
                         handler: me.onChooseFontClick,
                         scope: me
@@ -792,11 +792,11 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                     // opacity seems to be unsupported for external graphics /
                     // graphic fills, although its valid in SLD.
                     {
-                        xtype: 'slider',
+                        xtype: &#39;slider&#39;,
                         bind: {
-                            fieldLabel: '{polygonStyleImgOpacitySliderLabel}'
+                            fieldLabel: &#39;{polygonStyleImgOpacitySliderLabel}&#39;
                         },
-                        name: 'graphic-opacity',
+                        name: &#39;graphic-opacity&#39;,
                         value: graphicOpacity,
                         disabled: true,
                         minValue: 0,
@@ -805,79 +805,79 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         listeners: listenerConfig
                     },
                     {
-                        xtype: 'slider',
+                        xtype: &#39;slider&#39;,
                         bind: {
-                            fieldLabel: '{polygonStyleImgRotationSliderLabel}'
+                            fieldLabel: &#39;{polygonStyleImgRotationSliderLabel}&#39;
                         },
-                        name: 'graphic-rotation',
+                        name: &#39;graphic-rotation&#39;,
                         value: graphicRotation,
                         disabled: externalGraphicSrc ? true : false,
                         minValue: 0,
                         maxValue: 360,
                         listeners: listenerConfig
                     }, {
-                        xtype: 'slider',
+                        xtype: &#39;slider&#39;,
                         bind: {
-                            fieldLabel: '{polygonStyleImgScaleSliderLabel}'
+                            fieldLabel: &#39;{polygonStyleImgScaleSliderLabel}&#39;
                         },
-                        name: 'graphic-scale',
+                        name: &#39;graphic-scale&#39;,
                         value: graphicSize,
                         increment: 1,
                         minValue: 1,
                         maxValue: 200,
                         listeners: listenerConfig
                     }, {
-                        xtype: 'slider',
+                        xtype: &#39;slider&#39;,
                         bind: {
-                            fieldLabel: '{polygonStyleStrokeNumberFieldLabel}'
+                            fieldLabel: &#39;{polygonStyleStrokeNumberFieldLabel}&#39;
                         },
-                        name: 'stroke-width',
+                        name: &#39;stroke-width&#39;,
                         value: strokeWidth,
                         disabled: externalGraphicSrc ? true : false,
                         minValue: 0,
                         maxValue: 10,
                         listeners: listenerConfig
                     }, {
-                        xtype: 'container',
-                        layout: 'hbox',
+                        xtype: &#39;container&#39;,
+                        layout: &#39;hbox&#39;,
                         defaults: {
                             width: 100
                         },
                         items: [{
-                            xtype: 'displayfield',
+                            xtype: &#39;displayfield&#39;,
                             disabled: externalGraphicSrc ? true : false,
                             width: 100,
                             bind: {
-                                value: '{polygonStyleStrokeColorFieldLabel}'
+                                value: &#39;{polygonStyleStrokeColorFieldLabel}&#39;
                             }
                         }, {
-                            xtype: 'colorbutton',
+                            xtype: &#39;colorbutton&#39;,
                             disabled: externalGraphicSrc ? true : false,
-                            name: 'stroke',
-                            format: 'hex8',
+                            name: &#39;stroke&#39;,
+                            format: &#39;hex8&#39;,
                             value: strokeColor,
-                            margin: '5 0 0 10',
+                            margin: &#39;5 0 0 10&#39;,
                             listeners: listenerConfig
                         }]
                     }, {
-                        xtype: 'container',
-                        layout: 'hbox',
+                        xtype: &#39;container&#39;,
+                        layout: &#39;hbox&#39;,
                         defaults: {
                             width: 100
                         },
                         items: [{
-                            xtype: 'displayfield',
+                            xtype: &#39;displayfield&#39;,
                             disabled: externalGraphicSrc ? true : false,
                             width: 100,
                             bind: {
-                                value: '{polygonStyleFillColorFieldLabel}'
+                                value: &#39;{polygonStyleFillColorFieldLabel}&#39;
                             }
                         }, {
-                            xtype: 'colorbutton',
+                            xtype: &#39;colorbutton&#39;,
                             disabled: externalGraphicSrc ? true : false,
-                            name: 'fill',
-                            format: 'hex8',
-                            margin: '0 0 0 10',
+                            name: &#39;fill&#39;,
+                            format: &#39;hex8&#39;,
+                            margin: &#39;0 0 0 10&#39;,
                             value: fillColor,
                             listeners: listenerConfig
                         }]
@@ -895,8 +895,8 @@ Ext.define('BasiGX.view.container.SLDStyler', {
      */
     createSLDPreviewPanel: function() {
         var panel = {
-            xtype: 'image',
-            name: 'sldpreview-' + this.getMode(),
+            xtype: &#39;image&#39;,
+            name: &#39;sldpreview-&#39; + this.getMode(),
             src: null,
             width: 200,
             minHeight: 80
@@ -909,7 +909,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
      */
     updateSLDPreview: function() {
         var me = this;
-        var selector = 'image[name=sldpreview-' + this.getMode() + ']';
+        var selector = &#39;image[name=sldpreview-&#39; + this.getMode() + &#39;]&#39;;
         var imagePanel = Ext.ComponentQuery.query(selector)[0];
 
         var sld = me.getSldFromFormValues();
@@ -921,13 +921,13 @@ Ext.define('BasiGX.view.container.SLDStyler', {
             Ext.Ajax.request({
                 binary: true,
                 url: geoServerUrl,
-                method: 'POST',
+                method: &#39;POST&#39;,
                 params: {
-                    service: 'WMS',
-                    request: 'GetLegendGraphic',
+                    service: &#39;WMS&#39;,
+                    request: &#39;GetLegendGraphic&#39;,
                     layer: layer,
-                    version: '1.1.1',
-                    format: 'image/png',
+                    version: &#39;1.1.1&#39;,
+                    format: &#39;image/png&#39;,
                     width: 190,
                     height: 190,
                     rule: ruleName,
@@ -938,13 +938,13 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                 success: function(response) {
                     var blob = new Blob(
                         [response.responseBytes],
-                        {type: 'image/png'}
+                        {type: &#39;image/png&#39;}
                     );
                     var url = window.URL.createObjectURL(blob);
                     imagePanel.setSrc(url);
                 },
                 failure: function() {
-                    Ext.toast('Error retrieving the SLD-Graphic preview');
+                    Ext.toast(&#39;Error retrieving the SLD-Graphic preview&#39;);
                 }
             });
         }
@@ -960,43 +960,43 @@ Ext.define('BasiGX.view.container.SLDStyler', {
      */
     getSldFromFormValues: function() {
         var me = this;
-        var selector = 'fieldset[name=' + this.getMode() + 'style]';
+        var selector = &#39;fieldset[name=&#39; + this.getMode() + &#39;style]&#39;;
         var fs = Ext.ComponentQuery.query(selector)[0];
         var sldObj = this.getSldObj();
         var value;
         if (!fs || !sldObj) {
-            return '';
+            return &#39;&#39;;
         }
 
-        var radiusFs = fs.down('[name=radius]');
-        var graphicTab = fs.down('[name=graphic]');
+        var radiusFs = fs.down(&#39;[name=radius]&#39;);
+        var graphicTab = fs.down(&#39;[name=graphic]&#39;);
         var graphicTabActive = false;
 
         if (graphicTab) {
-            var activeTab = graphicTab.up('tabpanel').getActiveTab();
+            var activeTab = graphicTab.up(&#39;tabpanel&#39;).getActiveTab();
             if (activeTab === graphicTab) {
                 graphicTabActive = true;
             }
         }
 
-        var fillFs = graphicTabActive ? graphicTab.down('[name=fill]') :
-            fs.down('[name=fill]');
-        var strokeFs = graphicTabActive ? graphicTab.down('[name=stroke]') :
-            fs.down('[name=stroke]');
+        var fillFs = graphicTabActive ? graphicTab.down(&#39;[name=fill]&#39;) :
+            fs.down(&#39;[name=fill]&#39;);
+        var strokeFs = graphicTabActive ? graphicTab.down(&#39;[name=stroke]&#39;) :
+            fs.down(&#39;[name=stroke]&#39;);
         var strokeWidthFs = graphicTabActive ?
-            graphicTab.down('[name=stroke-width]') :
-            fs.down('[name=stroke-width]');
+            graphicTab.down(&#39;[name=stroke-width]&#39;) :
+            fs.down(&#39;[name=stroke-width]&#39;);
 
         var symbolizerObj = {};
 
         if (fillFs) {
-            symbolizerObj.fillColor = '#' + fillFs.getValue().substring(0, 6);
+            symbolizerObj.fillColor = &#39;#&#39; + fillFs.getValue().substring(0, 6);
             symbolizerObj.fillOpacity = BasiGX.util.Color.rgbaAsArray(
                 BasiGX.util.Color.hex8ToRgba(fillFs.getValue()))[4];
         }
 
         if (strokeFs) {
-            symbolizerObj.strokeColor = '#' + strokeFs.getValue()
+            symbolizerObj.strokeColor = &#39;#&#39; + strokeFs.getValue()
                 .substring(0, 6);
             symbolizerObj.strokeOpacity = BasiGX.util.Color.rgbaAsArray(
                 BasiGX.util.Color.hex8ToRgba(strokeFs.getValue()))[4];
@@ -1017,10 +1017,10 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         if (graphicTabActive) {
             // only write external graphic or font values when the graphic
             // tab is active
-            var scale = graphicTab.down('[name=graphic-scale]').getValue();
-            var opacity = graphicTab.down('[name=graphic-opacity]')
+            var scale = graphicTab.down(&#39;[name=graphic-scale]&#39;).getValue();
+            var opacity = graphicTab.down(&#39;[name=graphic-opacity]&#39;)
                 .getValue() / 100;
-            var rotation = graphicTab.down('[name=graphic-rotation]')
+            var rotation = graphicTab.down(&#39;[name=graphic-rotation]&#39;)
                 .getValue();
             if (graphicTab.externalGraphicSrc) {
                 symbolizerObj.externalGraphicSrc = graphicTab
@@ -1037,19 +1037,19 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                 BasiGX.util.SLD.DEFAULT_GRAPHIC_ROTATION.toString();
         }
 
-        if (this.getMode() === 'point') {
+        if (this.getMode() === &#39;point&#39;) {
             sldObj = BasiGX.util.SLD.setPointSymbolizerInRule(
                 symbolizerObj,
                 me.getRuleName(),
                 sldObj
             );
-        } else if (this.getMode() === 'line') {
+        } else if (this.getMode() === &#39;line&#39;) {
             sldObj = BasiGX.util.SLD.setLineSymbolizerInRule(
                 symbolizerObj,
                 me.getRuleName(),
                 sldObj
             );
-        } else if (this.getMode() === 'polygon') {
+        } else if (this.getMode() === &#39;polygon&#39;) {
             sldObj = BasiGX.util.SLD.setPolygonSymbolizerInRule(
                 symbolizerObj,
                 me.getRuleName(),
@@ -1076,41 +1076,41 @@ Ext.define('BasiGX.view.container.SLDStyler', {
     onChooseFontClick: function() {
         var me = this;
         var callbackFn = function(fullQualifiedGlyphName) {
-            var graphicFs = me.down('[name=graphic]');
+            var graphicFs = me.down(&#39;[name=graphic]&#39;);
             graphicFs.fontAndUniCode = fullQualifiedGlyphName;
             // unset an potential external graphic
             graphicFs.externalGraphicSrc = null;
             // set matching style options
-            if (me.getMode() === 'point') {
-                graphicFs.down('[name=graphic-opacity]').setDisabled(true);
+            if (me.getMode() === &#39;point&#39;) {
+                graphicFs.down(&#39;[name=graphic-opacity]&#39;).setDisabled(true);
             }
-            if (me.getMode() === 'polygon') {
-                graphicFs.down('[name=graphic-rotation]').setDisabled(false);
+            if (me.getMode() === &#39;polygon&#39;) {
+                graphicFs.down(&#39;[name=graphic-rotation]&#39;).setDisabled(false);
             }
-            graphicFs.down('[name=fill]').setDisabled(false);
-            graphicFs.down('[name=stroke]').setDisabled(false);
-            graphicFs.down('[name=stroke-width]').setDisabled(false);
-            graphicFs.down('[name=stroke-width]').setValue(1);
+            graphicFs.down(&#39;[name=fill]&#39;).setDisabled(false);
+            graphicFs.down(&#39;[name=stroke]&#39;).setDisabled(false);
+            graphicFs.down(&#39;[name=stroke-width]&#39;).setDisabled(false);
+            graphicFs.down(&#39;[name=stroke-width]&#39;).setValue(1);
             me.updateSLDPreview();
         };
 
         // cleanup
-        var selector = 'window[title=' +
-            me.getViewModel().get('fontSymbolPoolWindowTitle') + ']';
+        var selector = &#39;window[title=&#39; +
+            me.getViewModel().get(&#39;fontSymbolPoolWindowTitle&#39;) + &#39;]&#39;;
         var wins = Ext.ComponentQuery.query(selector);
         Ext.each(wins, function(win) {
             win.destroy();
         });
 
-        var fontSymbolPool = Ext.create('BasiGX.view.panel.FontSymbolPool', {
+        var fontSymbolPool = Ext.create(&#39;BasiGX.view.panel.FontSymbolPool&#39;, {
             geoserverFontListUrl: me.getBackendUrls().geoserverFontListUrl,
             geoserverFontUrl: me.getBackendUrls().geoserverFontUrl,
             useCsrfToken: true,
             onGlyphSelected: callbackFn
         });
 
-        var fontSymbolPoolWin = Ext.create('Ext.window.Window', {
-            title: me.getViewModel().get('fontSymbolPoolWindowTitle'),
+        var fontSymbolPoolWin = Ext.create(&#39;Ext.window.Window&#39;, {
+            title: me.getViewModel().get(&#39;fontSymbolPoolWindowTitle&#39;),
             constrained: true,
             items: [fontSymbolPool]
         });
@@ -1127,41 +1127,41 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         var okClickCallbackFn = function(pictureRec) {
             var pictureUrl = BasiGX.util.Url.getWebProjectBaseUrl() +
                 me.getBackendUrls().pictureSrc.url +
-                pictureRec.get('id');
-            var graphicFs = me.down('[name=graphic]');
+                pictureRec.get(&#39;id&#39;);
+            var graphicFs = me.down(&#39;[name=graphic]&#39;);
             graphicFs.externalGraphicSrc = pictureUrl;
             // unset an potential font and glyph
             graphicFs.fontAndUniCode = null;
             // set matching style options
-            if (me.getMode() === 'point') {
-                graphicFs.down('[name=graphic-opacity]').setDisabled(false);
+            if (me.getMode() === &#39;point&#39;) {
+                graphicFs.down(&#39;[name=graphic-opacity]&#39;).setDisabled(false);
             }
-            if (me.getMode() === 'polygon') {
-                graphicFs.down('[name=graphic-rotation]').setDisabled(true);
+            if (me.getMode() === &#39;polygon&#39;) {
+                graphicFs.down(&#39;[name=graphic-rotation]&#39;).setDisabled(true);
             }
-            graphicFs.down('[name=fill]').setDisabled(true);
-            graphicFs.down('[name=stroke]').setDisabled(true);
-            graphicFs.down('[name=stroke-width]').setDisabled(true);
+            graphicFs.down(&#39;[name=fill]&#39;).setDisabled(true);
+            graphicFs.down(&#39;[name=stroke]&#39;).setDisabled(true);
+            graphicFs.down(&#39;[name=stroke-width]&#39;).setDisabled(true);
             me.updateSLDPreview();
         };
 
         var deleteClickCallbackFn = function() {
             Ext.toast(
-                me.getViewModel().get('pointGrapicDeletedSuccessMsgText'),
-                me.getViewModel().get('pointGrapicDeletedSuccessMsgTitle'),
-                't'
+                me.getViewModel().get(&#39;pointGrapicDeletedSuccessMsgText&#39;),
+                me.getViewModel().get(&#39;pointGrapicDeletedSuccessMsgTitle&#39;),
+                &#39;t&#39;
             );
         };
 
-        var graphicPool = Ext.create('BasiGX.view.panel.GraphicPool', {
+        var graphicPool = Ext.create(&#39;BasiGX.view.panel.GraphicPool&#39;, {
             backendUrls: me.getBackendUrls(),
             okClickCallbackFn: okClickCallbackFn,
             deleteClickCallbackFn: deleteClickCallbackFn,
             useCsrfToken: true
         });
 
-        var graphicPoolWin = Ext.create('Ext.window.Window', {
-            title: me.getViewModel().get('graphicPoolWindowTitle'),
+        var graphicPoolWin = Ext.create(&#39;Ext.window.Window&#39;, {
+            title: me.getViewModel().get(&#39;graphicPoolWindowTitle&#39;),
             constrained: true,
             items: [graphicPool]
         });

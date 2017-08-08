@@ -21,16 +21,16 @@
  *
  * This class may be used to compare the document regions occupied by elements.
  */
-Ext.define('Ext.util.Region', function() {
+Ext.define(&#39;Ext.util.Region&#39;, function() {
     var ExtUtil = Ext.util,
         constrainRe = /([^\?!]*)(!|\?)?$/,
         alignRe = /^(?:(?:([trbl])(\d+))|(tl|t|tc|tr|l|c|r|bl|b|bc|br))(?:-(?:(?:([trbl])(\d+))|(tl|t|tc|tr|l|c|r|bl|b|bc|br)))?$/i,
         // Each side has the first letter as the main align side, so [tlbr]
         // The next optional component is a offset factor, so [tb] may be followed by [lr] and vice versa
         // The offset factor may also be a number along that edge from 0 to 100.
-        // So 'tl-br' is equal to 't0-b100'.
-        // The offset factor defaults to 'c' or 50 meaning the 't-b' is equivalent to
-        // 't50-b50' or 'tc-bc'
+        // So &#39;tl-br&#39; is equal to &#39;t0-b100&#39;.
+        // The offset factor defaults to &#39;c&#39; or 50 meaning the &#39;t-b&#39; is equivalent to
+        // &#39;t50-b50&#39; or &#39;tc-bc&#39;
         
         LTROffsetFactors =  {l:0, r:100, t:0, b: 100, c: 50},
         RTLOffsetFactors =  {l:100, r:0, t:0, b: 100, c: 50},
@@ -57,8 +57,8 @@ Ext.define('Ext.util.Region', function() {
                 return this.getRegion(box);
             }
 
-            if (type === 'string') {
-                box = box.split(' ');
+            if (type === &#39;string&#39;) {
+                box = box.split(&#39; &#39;);
 
                 switch (box.length) {
                     case 1:
@@ -77,14 +77,14 @@ Ext.define('Ext.util.Region', function() {
                 bottom = parseInt(box[2], 10) || 0;
                 left   = parseInt(box[3], 10) || 0;
             }
-            else if (type === 'number') {
+            else if (type === &#39;number&#39;) {
                 top = right = bottom = left = box;
             }
-            else if (typeof box.x === 'number') {
+            else if (typeof box.x === &#39;number&#39;) {
                 top = box.y;
                 left = box.x;
 
-                if (typeof box.right === 'number') {
+                if (typeof box.right === &#39;number&#39;) {
                     right = box.right;
                     bottom = box.bottom;
                 } else {
@@ -94,7 +94,7 @@ Ext.define('Ext.util.Region', function() {
             }
             //&lt;debug&gt;
             else {
-                Ext.raise('Not convertible to a Region: ' + box);
+                Ext.raise(&#39;Not convertible to a Region: &#39; + box);
             }
             //&lt;/debug&gt;
 
@@ -127,7 +127,7 @@ Ext.define('Ext.util.Region', function() {
                 beforeStart,
                 x, y;
 
-            // target is out of bounds. We can't show an anchor
+            // target is out of bounds. We can&#39;t show an anchor
             if (inside &amp;&amp; !inside.intersect(target)) {
                 return;
             }
@@ -180,10 +180,10 @@ Ext.define('Ext.util.Region', function() {
                     }
                     result.anchor = anchorPos.alignTo({
                         target: overlapLine,
-                        align: isBefore ? 'l-r' : 'r-l',
+                        align: isBefore ? &#39;l-r&#39; : &#39;r-l&#39;,
                         overlap: true
                     });
-                    result.anchor.position = isBefore ? 'right' : 'left';
+                    result.anchor.position = isBefore ? &#39;right&#39; : &#39;left&#39;;
                 }
                 // The result is above or below the target.
                 else {
@@ -232,10 +232,10 @@ Ext.define('Ext.util.Region', function() {
                     }
                     result.anchor = anchorPos.alignTo({
                         target: overlapLine,
-                        align: isBefore ? 't-b' : 'b-t',
+                        align: isBefore ? &#39;t-b&#39; : &#39;b-t&#39;,
                         overlap: true
                     });
-                    result.anchor.position = isBefore ? 'bottom' : 'top';
+                    result.anchor.position = isBefore ? &#39;bottom&#39; : &#39;top&#39;;
                 }
                 result.anchor.align = relativePosition;
             }
@@ -289,7 +289,7 @@ Ext.define('Ext.util.Region', function() {
         };
 
     return {
-    requires: ['Ext.util.Offset'],
+    requires: [&#39;Ext.util.Offset&#39;],
 
     isRegion: true,
 
@@ -315,11 +315,11 @@ Ext.define('Ext.util.Region', function() {
         },
 
 <span id='Ext-util-Region-method-getAlignInfo'>        /**
-</span>         * This function converts a legacy alignment string such as 't-b' into a
+</span>         * This function converts a legacy alignment string such as &#39;t-b&#39; into a
          * pair of edge, offset objects which describe the alignment points of
          * the two regions.
          *
-         * So tl-br becomes {myEdge:'t', offset:0}, {otherEdge:'b', offset:100}
+         * So tl-br becomes {myEdge:&#39;t&#39;, offset:0}, {otherEdge:&#39;b&#39;, offset:100}
          *
          * This not only allows more flexibility in the alignment possibilities,
          * but it also resolves any ambiguity as to chich two edges are desired
@@ -329,11 +329,11 @@ Ext.define('Ext.util.Region', function() {
          * @param {Boolean} [rtl] Pass `true` to use RTL calculations.
          */
         getAlignInfo: function(align, rtl) {
-            if (typeof align === 'object') {
+            if (typeof align === &#39;object&#39;) {
                 return align;
             }
 
-            align = align ? ((align.indexOf('-') &lt; 0) ? 'tl-' + align : align) : 'tl-bl';
+            align = align ? ((align.indexOf(&#39;-&#39;) &lt; 0) ? &#39;tl-&#39; + align : align) : &#39;tl-bl&#39;;
 
             // Snip any constraint modifier off so that we can match the alignMaps
             constrain = constrainRe.exec(align);
@@ -350,10 +350,10 @@ Ext.define('Ext.util.Region', function() {
             //&lt;debug&gt;
             if (!parts) {
                 Ext.raise({
-                    sourceClass: 'Ext.util.Region',
-                    sourceMethod: 'getAlignInfo',
+                    sourceClass: &#39;Ext.util.Region&#39;,
+                    sourceMethod: &#39;getAlignInfo&#39;,
                     position: align,
-                    msg: 'Attemmpted to align an element with an invalid position: &quot;' + align + '&quot;'
+                    msg: &#39;Attemmpted to align an element with an invalid position: &quot;&#39; + align + &#39;&quot;&#39;
                 });
             }
             //&lt;/debug&gt;
@@ -512,7 +512,7 @@ Ext.define('Ext.util.Region', function() {
      */
     getOutOfBoundOffset: function(axis, p) {
         if (!Ext.isObject(axis)) {
-            if (axis === 'x') {
+            if (axis === &#39;x&#39;) {
                 return this.getOutOfBoundOffsetX(p);
             } else {
                 return this.getOutOfBoundOffsetY(p);
@@ -564,7 +564,7 @@ Ext.define('Ext.util.Region', function() {
      */
     isOutOfBound: function(axis, p) {
         if (!Ext.isObject(axis)) {
-            if (axis === 'x') {
+            if (axis === &#39;x&#39;) {
                 return this.isOutOfBoundX(p);
             } else {
                 return this.isOutOfBoundY(p);
@@ -622,7 +622,7 @@ Ext.define('Ext.util.Region', function() {
             newP.y = this.restrictY(p.y, factor);
             return newP;
         } else {
-            if (axis === 'x') {
+            if (axis === &#39;x&#39;) {
                 return this.restrictX(p, factor);
             } else {
                 return this.restrictY(p, factor);
@@ -679,17 +679,17 @@ Ext.define('Ext.util.Region', function() {
      *
      * The `align` option can be one of these forms:
      *
-     * - **Blank**: Defaults to aligning the region's top-left corner to the target's
+     * - **Blank**: Defaults to aligning the region&#39;s top-left corner to the target&#39;s
      *   bottom-left corner (&quot;tl-bl&quot;).
      * - **Two anchors**: If two values from the table below are passed separated by a dash,
-     *   the first value is used as this region's anchor point, and the second value is
-     *   used as the target's anchor point.
-     * - **One anchor**: The passed anchor position is used as the target's anchor point.
+     *   the first value is used as this region&#39;s anchor point, and the second value is
+     *   used as the target&#39;s anchor point.
+     * - **One anchor**: The passed anchor position is used as the target&#39;s anchor point.
      *   This region will position its top-left corner (tl) to that point.
      * - **Two edge/offset descriptors:** An edge/offset descriptor is an edge initial
      *   (`t`/`r`/`b`/`l`) followed by a percentage along that side. This describes a
-     *   point to align with a similar point in the target. So `'t0-b0'` would be
-     *   the same as `'tl-bl'`, `'l0-r50'` would place the top left corner of this item
+     *   point to align with a similar point in the target. So `&#39;t0-b0&#39;` would be
+     *   the same as `&#39;tl-bl&#39;`, `&#39;l0-r50&#39;` would place the top left corner of this item
      *   halfway down the right edge of the target item. This allows more flexibility
      *   and also describes which two edges are considered adjacent when positioning an anchor. 
      *
@@ -714,7 +714,7 @@ Ext.define('Ext.util.Region', function() {
      * Example Usage:
      *
      *      var xy = comp.getRegion().alignTo({
-     *          align: 't-b',  // align comp's top/center to el's bottom/center
+     *          align: &#39;t-b&#39;,  // align comp&#39;s top/center to el&#39;s bottom/center
      *          target: el.getRegion(),
      *          anchorSize: new Ext.util.Point(10, 10),
      *          inside: new Ext.util.Region(0, Ext.Element.getViewportWidth(), Ext.Element.getViewportHeight(), 0)
@@ -739,7 +739,7 @@ Ext.define('Ext.util.Region', function() {
      * If this option is used, and the returned region successfully clears the 
      * bounds of the target, then the anchor region will be returned in the return value
      * as the `anchor` property. This will in turn have a `position` property which will
-     * be `'top'`, `'left`, `'right'`, or `'bottom'`.
+     * be `&#39;top&#39;`, `&#39;left`, `&#39;right&#39;`, or `&#39;bottom&#39;`.
      * @param {Boolean} [options.overlap] Pass `true` to allow this rectangle to overlap
      * the target.
      * @param {Boolean} [options.rtl] Pass `true` to swap left/right alignment.
@@ -777,7 +777,7 @@ Ext.define('Ext.util.Region', function() {
             offset = Offset.fromObject(offset);
             //&lt;debug&gt;
             if (!(offset instanceof Offset)) {
-                Ext.raise('offset option must be an Ext.util.Offset');
+                Ext.raise(&#39;offset option must be an Ext.util.Offset&#39;);
             }
             //&lt;/debug&gt;
         }
@@ -785,7 +785,7 @@ Ext.define('Ext.util.Region', function() {
             anchorSize = Offset.fromObject(anchorSize);
             //&lt;debug&gt;
             if (!(anchorSize instanceof Offset)) {
-                Ext.raise('anchorSize option must be an Ext.util.Offset');
+                Ext.raise(&#39;anchorSize option must be an Ext.util.Offset&#39;);
             }
             //&lt;/debug&gt;
         }
@@ -805,30 +805,30 @@ Ext.define('Ext.util.Region', function() {
             align = me.getAlignInfo(align, rtl);
 
             // target is out of bounds.
-            // Move it so that it's 1px inside to that the alignment points
+            // Move it so that it&#39;s 1px inside to that the alignment points
             if (inside) {
                 if (target.x &gt;= inside.right) {
                     target.setPosition(inside.right - 1, target.y);
                     if (align.position !== 3) {
-                        align = me.getAlignInfo('r-l', rtl);
+                        align = me.getAlignInfo(&#39;r-l&#39;, rtl);
                     }
                 }
                 else if (target.right &lt; inside.x) {
                     target.setPosition(inside.x - target.getWidth() + 1, target.y);
                     if (align.position !== 1) {
-                        align = me.getAlignInfo('l-r', rtl);
+                        align = me.getAlignInfo(&#39;l-r&#39;, rtl);
                     }
                 }
                 if (target.y &gt;= inside.bottom) {
                     target.setPosition(target.x, inside.bottom - 1);
                     if (align.position !== 0) {
-                        align = me.getAlignInfo('b-t', rtl);
+                        align = me.getAlignInfo(&#39;b-t&#39;, rtl);
                     }
                 }
                 else if (target.bottom &lt; inside.y) {
                     target.setPosition(target.x, inside.y - target.getHeight() + 1);
                     if (align.position !== 2) {
-                        align = me.getAlignInfo('t-b', rtl);
+                        align = me.getAlignInfo(&#39;t-b&#39;, rtl);
                     }
                 }
             }
@@ -876,7 +876,7 @@ Ext.define('Ext.util.Region', function() {
                 wasConstrained = true;
             }
 
-            // If we've budged the result to within the constrain bounds,
+            // If we&#39;ve budged the result to within the constrain bounds,
             // ensure the result region does not overlay the target
             if (wasConstrained &amp;&amp; !overlap) {
                 // Recalculate it. We must return null if anchoring is not possible.
@@ -885,7 +885,7 @@ Ext.define('Ext.util.Region', function() {
                 // axisLock means that only flipping in the align axis is allowed, not fallback
                 // to all other sides.
                 //
-                // That is, if align is l-r, and the result won't fit, it only
+                // That is, if align is l-r, and the result won&#39;t fit, it only
                 // falls back to r-l.
                 //
                 // This will be used for BoundLists which must only flip from t0-b0 to b0-t0
@@ -981,14 +981,14 @@ Ext.define('Ext.util.Region', function() {
         }
 
         if (allowY) {
-            translations.push([0, t = me.top - other.bottom - anchorHeight + offset.y, 'b-t', 0, Math.abs(t)]);
-            translations.push([0, t = me.bottom - other.top + anchorHeight + offset.y, 't-b', 2, Math.abs(t)]);
+            translations.push([0, t = me.top - other.bottom - anchorHeight + offset.y, &#39;b-t&#39;, 0, Math.abs(t)]);
+            translations.push([0, t = me.bottom - other.top + anchorHeight + offset.y, &#39;t-b&#39;, 2, Math.abs(t)]);
         } else {
             centerOnSideChange = false;
         }
         if (allowX) {
-            translations.push([t = me.left - other.right - anchorHeight + offset.x, 0, 'r-l', 3, Math.abs(t)]);
-            translations.push([t = me.right - other.left + anchorHeight + offset.x, 0, 'l-r', 1, Math.abs(t)]);
+            translations.push([t = me.left - other.right - anchorHeight + offset.x, 0, &#39;r-l&#39;, 3, Math.abs(t)]);
+            translations.push([t = me.right - other.left + anchorHeight + offset.x, 0, &#39;l-r&#39;, 1, Math.abs(t)]);
         } else {
             centerOnSideChange = false;
         }
@@ -1010,7 +1010,7 @@ Ext.define('Ext.util.Region', function() {
         });
 
         // We might have to fall back through the choices of direction
-        // until we find one which doesn't violate the constraints.
+        // until we find one which doesn&#39;t violate the constraints.
         if (inside) {
             for (i = 0; i &lt; translations.length; i++) {
                 t = translations[i];
@@ -1018,7 +1018,7 @@ Ext.define('Ext.util.Region', function() {
                 testRegion = ExtUtil.Region.from(other);
                 testRegion.translateBy.apply(testRegion, t);
 
-                // When we find a translation that satisfies the constraint, we're done
+                // When we find a translation that satisfies the constraint, we&#39;re done
                 if (inside.contains(testRegion)) {
                     other.copyFrom(testRegion);
                     result = {
@@ -1030,7 +1030,7 @@ Ext.define('Ext.util.Region', function() {
                 }
 
                 // If we are directly above or below and we are allowed to shrink the
-                // height, and it's too high, then calculate a height constrained solution
+                // height, and it&#39;s too high, then calculate a height constrained solution
                 // to which we can fall back if no translations are fully successful.
                 if (minHeight) {
                     checkMinHeight(minHeight, testRegion, me, inside);
@@ -1060,7 +1060,7 @@ Ext.define('Ext.util.Region', function() {
                 }
 
                 // If all else fails, keep track of the translation which yields the largest intersection
-                // with the &quot;inside&quot; region. If there's no translation which satisfies the constraint, 
+                // with the &quot;inside&quot; region. If there&#39;s no translation which satisfies the constraint, 
                 // use this least bad one.
                 intersection = inside.intersect(testRegion);
                 if (intersection) {
@@ -1133,16 +1133,16 @@ Ext.define('Ext.util.Region', function() {
     },
 
     getAnchorPoint: function(align, rtl) {
-        align = (typeof align === 'string') ? this.getAlignInfo(align + '-tl', rtl) : align;
+        align = (typeof align === &#39;string&#39;) ? this.getAlignInfo(align + &#39;-tl&#39;, rtl) : align;
 
-        return this['getAnchorPoint_' + align.myEdge](align.myOffset);
+        return this[&#39;getAnchorPoint_&#39; + align.myEdge](align.myOffset);
     },
 
     getAlignToVector: function(target, align, rtl) {
-        align = (typeof align === 'string') ? this.getAlignInfo(align, rtl) : align;
+        align = (typeof align === &#39;string&#39;) ? this.getAlignInfo(align, rtl) : align;
 
-        var myAnchorPoint = this['getAnchorPoint_' + align.myEdge](align.myOffset),
-            targetAnchorPoint = target['getAnchorPoint_' + align.otherEdge](align.otherOffset);
+        var myAnchorPoint = this[&#39;getAnchorPoint_&#39; + align.myEdge](align.myOffset),
+            targetAnchorPoint = target[&#39;getAnchorPoint_&#39; + align.otherEdge](align.otherOffset);
 
         return [
             targetAnchorPoint[0] - myAnchorPoint[0],

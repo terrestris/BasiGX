@@ -22,8 +22,8 @@
  *
  * Several Operations can be batched together in a {@link Ext.data.Batch batch}.
  */
-Ext.define('Ext.data.operation.Operation', {
-    alternateClassName: 'Ext.data.Operation',
+Ext.define(&#39;Ext.data.operation.Operation&#39;, {
+    alternateClassName: &#39;Ext.data.Operation&#39;,
     
 <span id='Ext-data-operation-Operation-property-isOperation'>    isOperation: true,
 </span>    
@@ -39,7 +39,7 @@ Ext.define('Ext.data.operation.Operation', {
 </span>         * @cfg {String} url
          * The url for this operation. Typically this will be provided by a proxy and not configured here.
          */
-        url: '',
+        url: &#39;&#39;,
         
 <span id='Ext-data-operation-Operation-cfg-params'>        /**
 </span>         * @cfg {Object} params
@@ -204,7 +204,7 @@ Ext.define('Ext.data.operation.Operation', {
      */
     error: undefined,
     
-<span id='Ext-data-operation-Operation-property-idPrefix'>    idPrefix: 'ext-operation-',
+<span id='Ext-data-operation-Operation-property-idPrefix'>    idPrefix: &#39;ext-operation-&#39;,
 </span>
 <span id='Ext-data-operation-Operation-method-constructor'>    /**
 </span>     * Creates new Operation object.
@@ -321,7 +321,7 @@ Ext.define('Ext.data.operation.Operation', {
 
         if (serverLen &amp;&amp; clientIdProperty) {
             // Linear pass over clientRecords to map them by their idProperty
-            clientMap = Ext.Array.toValueMap(clientRecords, 'id');
+            clientMap = Ext.Array.toValueMap(clientRecords, &#39;id&#39;);
 
             // Linear pass over serverRecords to match them by clientIdProperty to the
             // corresponding clientRecord (if one exists).
@@ -330,16 +330,16 @@ Ext.define('Ext.data.operation.Operation', {
                 clientRecord = clientMap[serverRecord[clientIdProperty]];
 
                 if (clientRecord) {
-                    // Remove this one so we don't commit() on it next
+                    // Remove this one so we don&#39;t commit() on it next
                     delete clientMap[clientRecord.id];
-                    // Remove the clientIdProperty value since we don't want to store it
+                    // Remove the clientIdProperty value since we don&#39;t want to store it
                     delete serverRecord[clientIdProperty];
 
                     clientRecord.set(serverRecord, commitSetOptions); // set &amp; commit
                 }
                 //&lt;debug&gt;
                 else {
-                    Ext.log.warn('Ignoring server record: ' + Ext.encode(serverRecord));
+                    Ext.log.warn(&#39;Ignoring server record: &#39; + Ext.encode(serverRecord));
                 }
                 //&lt;/debug&gt;
             }
@@ -420,14 +420,14 @@ Ext.define('Ext.data.operation.Operation', {
 </span>        var me = this,
             callback = me.getInternalCallback();
 
-        // Call internal callback first (usually the Store's onProxyLoad method)
+        // Call internal callback first (usually the Store&#39;s onProxyLoad method)
         if (callback) {
             callback.call(me.getInternalScope() || me, me);
             me.setInternalCallback(null);
             me.setInternalScope(null);
         }
 
-        // Call the user's callback as passed to Store's read/write
+        // Call the user&#39;s callback as passed to Store&#39;s read/write
         if (callback = me.getCallback()) {
             // Maintain the public API for callback
             callback.call(me.getScope() || me, me.getRecords(), me, me.wasSuccessful());
@@ -457,8 +457,8 @@ Ext.define('Ext.data.operation.Operation', {
      * operations the records as set by the {@link Ext.data.proxy.Proxy Proxy} will be
      * returned (returns `null` if the proxy has not yet set the records).
      *
-     * For create, update, and destroy operations the operation's initially configured
-     * records will be returned, although the proxy may modify these records' data at some
+     * For create, update, and destroy operations the operation&#39;s initially configured
+     * records will be returned, although the proxy may modify these records&#39; data at some
      * point after the operation is initialized.
      *
      * @return {Ext.data.Model[]}

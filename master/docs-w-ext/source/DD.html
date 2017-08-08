@@ -28,9 +28,9 @@
 </span> * A DragDrop implementation where the linked element follows the
  * mouse cursor during a drag.
  */
-Ext.define('Ext.dd.DD', {
-    extend: 'Ext.dd.DragDrop',
-    requires: ['Ext.dd.DragDropManager'],
+Ext.define(&#39;Ext.dd.DD&#39;, {
+    extend: &#39;Ext.dd.DragDrop&#39;,
+    requires: [&#39;Ext.dd.DragDropManager&#39;],
 
 <span id='Ext-dd-DD-method-constructor'>    /**
 </span>     * Creates new DD instance.
@@ -53,7 +53,7 @@ Ext.define('Ext.dd.DD', {
     scroll: true,
 
 <span id='Ext-dd-DD-method-autoOffset'>    /**
-</span>     * Sets the pointer offset to the distance between the linked element's top
+</span>     * Sets the pointer offset to the distance between the linked element&#39;s top
      * left corner and the location the element was clicked.
      * @param {Number} iPageX the X coordinate of the click
      * @param {Number} iPageY the Y coordinate of the click
@@ -103,7 +103,7 @@ Ext.define('Ext.dd.DD', {
      */
     alignElWithMouse: function(el, iPageX, iPageY) {
         var oCoord = this.getTargetCoord(iPageX, iPageY),
-            fly = el.dom ? el : Ext.fly(el, '_dd'),
+            fly = el.dom ? el : Ext.fly(el, &#39;_dd&#39;),
             elSize = fly.getSize(),
             EL = Ext.Element,
             vpSize,
@@ -141,9 +141,9 @@ Ext.define('Ext.dd.DD', {
      * number of pixels the element is offset from its original position.
      *
      * @param {Number} [iPageX] the current x position (this just makes it so we
-     * don't have to look it up again)
+     * don&#39;t have to look it up again)
      * @param {Number} [iPageY] the current y position (this just makes it so we
-     * don't have to look it up again)
+     * don&#39;t have to look it up again)
      */
     cachePosition: function(iPageX, iPageY) {
         if (iPageX) {
@@ -159,8 +159,8 @@ Ext.define('Ext.dd.DD', {
 <span id='Ext-dd-DD-method-autoScroll'>    /**
 </span>     * Auto-scroll the window if the dragged object has been moved beyond the
      * visible window boundary.
-     * @param {Number} x the drag element's x position
-     * @param {Number} y the drag element's y position
+     * @param {Number} x the drag element&#39;s x position
+     * @param {Number} y the drag element&#39;s y position
      * @param {Number} h the height of the drag element
      * @param {Number} w the width of the drag element
      * @private
@@ -181,7 +181,7 @@ Ext.define('Ext.dd.DD', {
                 // Location of the right of the element
                 right = w + x,
                 // The distance from the cursor to the bottom of the visible area,
-                // adjusted so that we don't scroll if the cursor is beyond the
+                // adjusted so that we don&#39;t scroll if the cursor is beyond the
                 // element drag constraints
                 toBot = (clientH + st - y - this.deltaY),
                 // The distance from the cursor to the right of the visible area

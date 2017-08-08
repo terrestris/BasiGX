@@ -21,24 +21,24 @@
  * to preserve potentially dynamic user sizing and collapsed states as well as order of
  * items in their columns.
  */
-Ext.define('Ext.dashboard.Dashboard', {
-    extend: 'Ext.panel.Panel',
-    xtype: 'dashboard',
+Ext.define(&#39;Ext.dashboard.Dashboard&#39;, {
+    extend: &#39;Ext.panel.Panel&#39;,
+    xtype: &#39;dashboard&#39;,
 
     requires: [
-        'Ext.layout.container.Dashboard',
-        'Ext.dashboard.DropZone',
-        'Ext.dashboard.Column',
-        'Ext.dashboard.Part'
+        &#39;Ext.layout.container.Dashboard&#39;,
+        &#39;Ext.dashboard.DropZone&#39;,
+        &#39;Ext.dashboard.Column&#39;,
+        &#39;Ext.dashboard.Part&#39;
     ],
 
 <span id='Ext-dashboard-Dashboard-property-isDashboard'>    isDashboard: true,
 </span>
-<span id='Ext-dashboard-Dashboard-cfg-cls'>    cls: Ext.baseCSSPrefix + 'dashboard',
+<span id='Ext-dashboard-Dashboard-cfg-cls'>    cls: Ext.baseCSSPrefix + &#39;dashboard&#39;,
 </span>
-<span id='Ext-dashboard-Dashboard-cfg-bodyCls'>    bodyCls: Ext.baseCSSPrefix + 'dashboard-body',
+<span id='Ext-dashboard-Dashboard-cfg-bodyCls'>    bodyCls: Ext.baseCSSPrefix + &#39;dashboard-body&#39;,
 </span>
-<span id='Ext-dashboard-Dashboard-cfg-defaultType'>    defaultType: 'dashboard-column',
+<span id='Ext-dashboard-Dashboard-cfg-defaultType'>    defaultType: &#39;dashboard-column&#39;,
 </span>
 <span id='Ext-dashboard-Dashboard-cfg-scrollable'>    scrollable: true,
 </span>
@@ -67,7 +67,7 @@ Ext.define('Ext.dashboard.Dashboard', {
 
 <span id='Ext-dashboard-Dashboard-cfg-columnWidths'>    /**
 </span>     * @cfg {Number[]} columnWidths
-     * An array designating the width of columns in your dashboard's default state as described
+     * An array designating the width of columns in your dashboard&#39;s default state as described
      * by the {@link #cfg-defaultContent} property. For example:
      *
      *    columnWidths: [
@@ -76,7 +76,7 @@ Ext.define('Ext.dashboard.Dashboard', {
      *       0.25
      *    ]
      *    
-     * As you can see, this array contains the default widths for the 3 columns in the dashboard's 
+     * As you can see, this array contains the default widths for the 3 columns in the dashboard&#39;s 
      * initial view. The column widths should total to an integer value, typically 1 as shown
      * above. When column widths exceed 1, they will be wrapped effectively creating &quot;rows&quot;. This
      * means that if your column widths add up to more than 1, you would still want the first few
@@ -89,7 +89,7 @@ Ext.define('Ext.dashboard.Dashboard', {
 
 <span id='Ext-dashboard-Dashboard-cfg-defaultContent'>    /**
 </span>     * @cfg {Object[]} defaultContent
-     * An array of {@link Ext.dashboard.Part part} configuration objects that define your dashboard's
+     * An array of {@link Ext.dashboard.Part part} configuration objects that define your dashboard&#39;s
      * default state. These should not be confused with component configurations.
      *
      * Each config object should also include:
@@ -98,26 +98,26 @@ Ext.define('Ext.dashboard.Dashboard', {
      * + `columnIndex` - The column position in which the {@link Ext.dashboard.Part part} should reside.
      * + `height` - The desired height of the {@link Ext.dashboard.Part part} to be generated.
      *
-     * The remaining properties are specific to your part's config object. For example:      
+     * The remaining properties are specific to your part&#39;s config object. For example:      
      *
      *       defaultContent: [{
-     *           type: 'rss',
+     *           type: &#39;rss&#39;,
      *           columnIndex: 0,
      *           height: 500,
-     *           feedUrl: 'http://feeds.feedburner.com/extblog'
+     *           feedUrl: &#39;http://feeds.feedburner.com/extblog&#39;
      *       }, {
-     *           type: 'stockTicker',
+     *           type: &#39;stockTicker&#39;,
      *           columnIndex: 1,
      *           height: 300
      *       }, {
-     *           type: 'stocks',
+     *           type: &#39;stocks&#39;,
      *           columnIndex: 1,
      *           height: 300
      *       }, {
-     *           type: 'rss',
+     *           type: &#39;rss&#39;,
      *           columnIndex: 2,
      *           height: 350,
-     *           feedUrl: 'http://rss.cnn.com/rss/edition.rss'
+     *           feedUrl: &#39;http://rss.cnn.com/rss/edition.rss&#39;
      *       }]
      *
      * Default column widths are defined by {@link #cfg-columnWidths} and not in these
@@ -152,7 +152,7 @@ Ext.define('Ext.dashboard.Dashboard', {
 
         if (!me.layout) {
             me.layout = {
-                type: 'dashboard'
+                type: &#39;dashboard&#39;
             };
         }
 
@@ -203,7 +203,7 @@ Ext.define('Ext.dashboard.Dashboard', {
 <span id='Ext-dashboard-Dashboard-method-addView'>    addView: function (instance, columnIndex, beforeAfter) {
 </span>        var me = this,
             // We are only concerned with columns (ignore splitters).
-            items = me.query('dashboard-column'),
+            items = me.query(&#39;dashboard-column&#39;),
             count = items.length,
             index = columnIndex || 0,
             view = instance.id ? instance : me.createView(instance),
@@ -257,7 +257,7 @@ Ext.define('Ext.dashboard.Dashboard', {
 </span>        var cycle = this.cycleLayout;
         return Ext.apply({
             items : [],
-            bubbleEvents : ['add', 'remove', 'childmove', 'resize'],
+            bubbleEvents : [&#39;add&#39;, &#39;remove&#39;, &#39;childmove&#39;, &#39;resize&#39;],
             listeners: {
                 remove: this.onRemoveItem,
                 expand  : cycle,
@@ -274,10 +274,10 @@ Ext.define('Ext.dashboard.Dashboard', {
             view = part.createView(config);
 
         if (!view.id) {
-            view.id = me.id + '_' + type + (me.idSeed++);
+            view.id = me.id + &#39;_&#39; + type + (me.idSeed++);
         }
 
-        view.bubbleEvents = Ext.Array.from(view.bubbleEvents).concat(['expand', 'collapse']);
+        view.bubbleEvents = Ext.Array.from(view.bubbleEvents).concat([&#39;expand&#39;, &#39;collapse&#39;]);
         view.stateful = me.stateful;
         return view;
     },

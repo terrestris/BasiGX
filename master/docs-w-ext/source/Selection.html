@@ -26,12 +26,12 @@
  *
  * @since 5.1.0
  */
-Ext.define('Ext.grid.selection.Selection', {
+Ext.define(&#39;Ext.grid.selection.Selection&#39;, {
 
 <span id='Ext-grid-selection-Selection-method-constructor'>    constructor: function(view) {
 </span>        //&lt;debug&gt;
         if (!view || !(view.isTableView || view.isLockingView)) {
-            Ext.raise('Selection must be created for a given TableView or LockingView');
+            Ext.raise(&#39;Selection must be created for a given TableView or LockingView&#39;);
         }
         //&lt;/debug&gt;
         // We use the topmost (possible Ext.locking.View) view

@@ -21,11 +21,11 @@
  *
  * @private
  */
-Ext.define('Ext.mixin.Accessible', {
-    extend: 'Ext.Mixin',
+Ext.define(&#39;Ext.mixin.Accessible&#39;, {
+    extend: &#39;Ext.Mixin&#39;,
     
 <span id='Ext-mixin-Accessible-property-mixinConfig'>    mixinConfig: {
-</span>        id: 'accessible'
+</span>        id: &#39;accessible&#39;
     },
     
 <span id='Ext-mixin-Accessible-cfg-ariaLabel'>    /**
@@ -54,8 +54,8 @@ Ext.define('Ext.mixin.Accessible', {
     config: {
 <span id='Ext-mixin-Accessible-cfg-ariaAttributes'>        /**
 </span>         * @cfg {Object} ariaAttributes An object containing ARIA attributes to be set
-         * on this Component's ARIA element. Use this to set the attributes that cannot be
-         * determined by the Component's state, such as `aria-live`, `aria-flowto`, etc.
+         * on this Component&#39;s ARIA element. Use this to set the attributes that cannot be
+         * determined by the Component&#39;s state, such as `aria-live`, `aria-flowto`, etc.
          *
          * **Note** that this config is only meaningful at the Component rendering time,
          * and setting it after that will do nothing.
@@ -75,7 +75,7 @@ Ext.define('Ext.mixin.Accessible', {
     
 <span id='Ext-mixin-Accessible-property-ariaRenderAttributes'>    /**
 </span>     * @property {Object} [ariaRenderAttributes] **Instance specific** ARIA attributes
-     * to render into Component's ariaEl. This object is only used during rendering,
+     * to render into Component&#39;s ariaEl. This object is only used during rendering,
      * and is discarded afterwards.
      *
      * @private
@@ -121,7 +121,7 @@ Ext.define('Ext.mixin.Accessible', {
                 }
             }
         
-            return ids.length ? ids.join(' ') : null;
+            return ids.length ? ids.join(&#39; &#39;) : null;
         }
     }
 });

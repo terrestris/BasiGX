@@ -52,21 +52,21 @@
  * # Example usage
  *
  *     @example
- *     Ext.create('Ext.form.Panel', {
- *         title: 'Contact Info',
+ *     Ext.create(&#39;Ext.form.Panel&#39;, {
+ *         title: &#39;Contact Info&#39;,
  *         width: 300,
  *         bodyPadding: 10,
  *         renderTo: Ext.getBody(),
  *         items: [{
- *             xtype: 'textfield',
- *             name: 'name',
- *             fieldLabel: 'Name',
+ *             xtype: &#39;textfield&#39;,
+ *             name: &#39;name&#39;,
+ *             fieldLabel: &#39;Name&#39;,
  *             allowBlank: false  // requires a non-empty value
  *         }, {
- *             xtype: 'textfield',
- *             name: 'email',
- *             fieldLabel: 'Email Address',
- *             vtype: 'email'  // requires value to be a valid email address format
+ *             xtype: &#39;textfield&#39;,
+ *             name: &#39;email&#39;,
+ *             fieldLabel: &#39;Email Address&#39;,
+ *             vtype: &#39;email&#39;  // requires value to be a valid email address format
  *         }]
  *     });
  *
@@ -78,19 +78,19 @@
  *     @example
  *     // A simple subclass of Base that creates a HTML5 search field. Redirects to the
  *     // searchUrl when the Enter key is pressed.
- *     Ext.define('Ext.form.SearchField', {
- *         extend: 'Ext.form.field.Text',
- *         alias: 'widget.searchfield',
+ *     Ext.define(&#39;Ext.form.SearchField&#39;, {
+ *         extend: &#39;Ext.form.field.Text&#39;,
+ *         alias: &#39;widget.searchfield&#39;,
  *     
- *         inputType: 'search',
+ *         inputType: &#39;search&#39;,
  *     
  *         // Config defining the search URL
- *         searchUrl: 'http://www.google.com/search?q={0}',
+ *         searchUrl: &#39;http://www.google.com/search?q={0}&#39;,
  *     
  *         // Add specialkey listener
  *         initComponent: function() {
  *             this.callParent();
- *             this.on('specialkey', this.checkEnterKey, this);
+ *             this.on(&#39;specialkey&#39;, this.checkEnterKey, this);
  *         },
  *     
  *         // Handle enter key presses, execute the search if the field has a value
@@ -102,33 +102,33 @@
  *         }
  *     });
  *     
- *     Ext.create('Ext.form.Panel', {
- *         title: 'Base Example',
+ *     Ext.create(&#39;Ext.form.Panel&#39;, {
+ *         title: &#39;Base Example&#39;,
  *         bodyPadding: 5,
  *         width: 250,
  *     
  *         // Fields will be arranged vertically, stretched to full width
- *         layout: 'anchor',
+ *         layout: &#39;anchor&#39;,
  *         defaults: {
- *             anchor: '100%'
+ *             anchor: &#39;100%&#39;
  *         },
  *         items: [{
- *             xtype: 'searchfield',
- *             fieldLabel: 'Search',
- *             name: 'query'
+ *             xtype: &#39;searchfield&#39;,
+ *             fieldLabel: &#39;Search&#39;,
+ *             name: &#39;query&#39;
  *         }],
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.form.field.Text', {
-    extend:'Ext.form.field.Base',
-    alias: 'widget.textfield',
+Ext.define(&#39;Ext.form.field.Text&#39;, {
+    extend:&#39;Ext.form.field.Base&#39;,
+    alias: &#39;widget.textfield&#39;,
     requires: [
-        'Ext.form.field.VTypes',
-        'Ext.form.trigger.Trigger',
-        'Ext.util.TextMetrics'
+        &#39;Ext.form.field.VTypes&#39;,
+        &#39;Ext.form.trigger.Trigger&#39;,
+        &#39;Ext.util.TextMetrics&#39;
     ],
-    alternateClassName: ['Ext.form.TextField', 'Ext.form.Text'],
+    alternateClassName: [&#39;Ext.form.TextField&#39;, &#39;Ext.form.Text&#39;],
 
     config: {
 <span id='Ext-form-field-Text-cfg-hideTrigger'>        /**
@@ -144,20 +144,20 @@ Ext.define('Ext.form.field.Text', {
          * this object are unique identifiers for the triggers. The values in this object
          * are {@link Ext.form.trigger.Trigger Trigger} configuration objects.
          *
-         *     Ext.create('Ext.form.field.Text', {
+         *     Ext.create(&#39;Ext.form.field.Text&#39;, {
          *         renderTo: document.body,
-         *         fieldLabel: 'My Custom Field',
+         *         fieldLabel: &#39;My Custom Field&#39;,
          *         triggers: {
          *             foo: {
-         *                 cls: 'my-foo-trigger',
+         *                 cls: &#39;my-foo-trigger&#39;,
          *                 handler: function() {
-         *                     console.log('foo trigger clicked');
+         *                     console.log(&#39;foo trigger clicked&#39;);
          *                 }
          *             },
          *             bar: {
-         *                 cls: 'my-bar-trigger',
+         *                 cls: &#39;my-bar-trigger&#39;,
          *                 handler: function() {
-         *                     console.log('bar trigger clicked');
+         *                     console.log(&#39;bar trigger clicked&#39;);
          *                 }
          *             }
          *         }
@@ -166,22 +166,22 @@ Ext.define('Ext.form.field.Text', {
          * The weight value may be a negative value in order to position custom triggers 
          * ahead of default triggers like that of ComboBox.
          * 
-         *     Ext.create('Ext.form.field.ComboBox', {
+         *     Ext.create(&#39;Ext.form.field.ComboBox&#39;, {
          *         renderTo: Ext.getBody(),
-         *         fieldLabel: 'My Custom Field',
+         *         fieldLabel: &#39;My Custom Field&#39;,
          *         triggers: {
          *             foo: {
-         *                 cls: 'my-foo-trigger',
+         *                 cls: &#39;my-foo-trigger&#39;,
          *                 weight: -2, // negative to place before default triggers
          *                 handler: function() {
-         *                     console.log('foo trigger clicked');
+         *                     console.log(&#39;foo trigger clicked&#39;);
          *                 }
          *             },
          *             bar: {
-         *                 cls: 'my-bar-trigger',
+         *                 cls: &#39;my-bar-trigger&#39;,
          *                 weight: -1, 
          *                 handler: function() {
-         *                     console.log('bar trigger clicked');
+         *                     console.log(&#39;bar trigger clicked&#39;);
          *                 }
          *             }
          *         }
@@ -214,9 +214,9 @@ Ext.define('Ext.form.field.Text', {
 
 <span id='Ext-form-field-Text-cfg-size'>    /**
 </span>     * @cfg {Number} size
-     * An initial value for the 'size' attribute on the text input element. This is only
+     * An initial value for the &#39;size&#39; attribute on the text input element. This is only
      * used if the field has no configured {@link #width} and is not given a width by its
-     * container's layout. Defaults to 20.
+     * container&#39;s layout. Defaults to 20.
      * @deprecated use {@link #width} instead.
      */
 
@@ -240,12 +240,12 @@ Ext.define('Ext.form.field.Text', {
     //&lt;locale&gt;
 <span id='Ext-form-field-Text-cfg-growAppend'>    /**
 </span>     * @cfg {String} growAppend
-     * A string that will be appended to the field's current value for the purposes of calculating the target field
+     * A string that will be appended to the field&#39;s current value for the purposes of calculating the target field
      * size. Only used when the {@link #grow} config is true. Defaults to a single capital &quot;W&quot; (the widest character in
      * common fonts) to leave enough space for the next typed character and avoid the field value shifting before the
      * width is adjusted.
      */
-    growAppend: 'W',
+    growAppend: &#39;W&#39;,
     //&lt;/locale&gt;
 
 <span id='Ext-form-field-Text-cfg-vtype'>    /**
@@ -266,7 +266,7 @@ Ext.define('Ext.form.field.Text', {
 
 <span id='Ext-form-field-Text-cfg-allowBlank'>    /**
 </span>     * @cfg {Boolean} [allowBlank=true]
-     * Specify false to validate that the value's length must be &gt; 0. If `true`, then a blank value is **always** taken to be valid regardless of any {@link #vtype}
+     * Specify false to validate that the value&#39;s length must be &gt; 0. If `true`, then a blank value is **always** taken to be valid regardless of any {@link #vtype}
      * validation that may be applied.
      *
      * If {@link #vtype} validation must still be applied to blank values, configure {@link #validateBlank} as `true`;
@@ -314,7 +314,7 @@ Ext.define('Ext.form.field.Text', {
 </span>     * @cfg {String} minLengthText
      * Error text to display if the **{@link #minLength minimum length}** validation fails.
      */
-    minLengthText : 'The minimum length for this field is {0}',
+    minLengthText : &#39;The minimum length for this field is {0}&#39;,
     //&lt;/locale&gt;
 
     //&lt;locale&gt;
@@ -322,7 +322,7 @@ Ext.define('Ext.form.field.Text', {
 </span>     * @cfg {String} maxLengthText
      * Error text to display if the **{@link #maxLength maximum length}** validation fails
      */
-    maxLengthText : 'The maximum length for this field is {0}',
+    maxLengthText : &#39;The maximum length for this field is {0}&#39;,
     //&lt;/locale&gt;
 
 <span id='Ext-form-field-Text-cfg-selectOnFocus'>    /**
@@ -336,7 +336,7 @@ Ext.define('Ext.form.field.Text', {
 </span>     * @cfg {String} blankText
      * The error text to display if the **{@link #allowBlank}** validation fails
      */
-    blankText : 'This field is required',
+    blankText : &#39;This field is required&#39;,
     //&lt;/locale&gt;
 
 <span id='Ext-form-field-Text-cfg-validator'>    /**
@@ -345,13 +345,13 @@ Ext.define('Ext.form.field.Text', {
      * If specified, this function will be called first, allowing the developer to override the default validation
      * process.
      * 
-     *     Ext.create('Ext.form.field.Text', {
+     *     Ext.create(&#39;Ext.form.field.Text&#39;, {
      *         renderTo: document.body,
-     *         name: 'phone',
-     *         fieldLabel: 'Phone Number',
+     *         name: &#39;phone&#39;,
+     *         fieldLabel: &#39;Phone Number&#39;,
      *         validator: function (val) {
      *             // remove non-numeric characters
-     *             var tn = val.replace(/[^0-9]/g,''),
+     *             var tn = val.replace(/[^0-9]/g,&#39;&#39;),
      *                 errMsg = &quot;Must be a 10 digit telephone number&quot;;
      *             // if the numeric value is not 10 digits return an error message
      *             return (tn.length === 10) ? true : errMsg;
@@ -376,7 +376,7 @@ Ext.define('Ext.form.field.Text', {
 </span>     * @cfg {String} regexText
      * The error text to display if **{@link #regex}** is used and the test fails during validation
      */
-    regexText : '',
+    regexText : &#39;&#39;,
 
 <span id='Ext-form-field-Text-cfg-emptyText'>    /**
 </span>     * @cfg {String} emptyText
@@ -386,48 +386,48 @@ Ext.define('Ext.form.field.Text', {
      * set the {@link Ext.form.action.Action#submitEmptyText submitEmptyText} option of {@link Ext.form.Basic#submit} to
      * false.
      *
-     * Also note that if you use {@link #inputType inputType}:'file', {@link #emptyText} is not supported and should be
+     * Also note that if you use {@link #inputType inputType}:&#39;file&#39;, {@link #emptyText} is not supported and should be
      * avoided.
      *
      * Note that for browsers that support it, setting this property will use the HTML 5 placeholder attribute, and for
-     * older browsers that don't support the HTML 5 placeholder attribute the value will be placed directly into the input
+     * older browsers that don&#39;t support the HTML 5 placeholder attribute the value will be placed directly into the input
      * element itself as the raw value. This means that older browsers will obfuscate the {@link #emptyText} value for
      * password input fields.
      */
-    emptyText : '',
+    emptyText : &#39;&#39;,
 
 <span id='Ext-form-field-Text-cfg-emptyCls'>    /**
-</span>     * @cfg {String} [emptyCls='x-form-empty-field']
+</span>     * @cfg {String} [emptyCls=&#39;x-form-empty-field&#39;]
      * The CSS class to apply to an empty field to style the **{@link #emptyText}**.
      * This class is automatically added and removed as needed depending on the current field value.
      */
-    emptyCls : Ext.baseCSSPrefix + 'form-empty-field',
+    emptyCls : Ext.baseCSSPrefix + &#39;form-empty-field&#39;,
 
 <span id='Ext-form-field-Text-property-placeholderCoverCls'>    /**
 </span>     * @private
      * The default CSS class for the placeholder label cover need when the browser
      * does not support a Placeholder.
      */
-     placeholderCoverCls: Ext.baseCSSPrefix + 'placeholder-label',
+     placeholderCoverCls: Ext.baseCSSPrefix + &#39;placeholder-label&#39;,
 
 <span id='Ext-form-field-Text-cfg-requiredCls'>    /**
-</span>     * @cfg {String} [requiredCls='x-form-required-field']
+</span>     * @cfg {String} [requiredCls=&#39;x-form-required-field&#39;]
      * The CSS class to apply to a required field, i.e. a field where **{@link #allowBlank}** is false.
      */
-    requiredCls : Ext.baseCSSPrefix + 'form-required-field',
+    requiredCls : Ext.baseCSSPrefix + &#39;form-required-field&#39;,
 
 <span id='Ext-form-field-Text-cfg-enableKeyEvents'>    /**
 </span>     * @cfg {Boolean} [enableKeyEvents=false]
      * true to enable the proxying of key events for the HTML input field
      */
 
-    ariaRole: 'textbox',
+    ariaRole: &#39;textbox&#39;,
 
 <span id='Ext-form-field-Text-cfg-repeatTriggerClick'>    /**
 </span>     * @cfg {Boolean} repeatTriggerClick
      * `true` to attach a {@link Ext.util.ClickRepeater click repeater} to the trigger(s).
      * Click repeating behavior can also be configured on the individual {@link #triggers
-     * trigger instances using the trigger's {@link {Ext.form.trigger.Trigger#repeatClick
+     * trigger instances using the trigger&#39;s {@link {Ext.form.trigger.Trigger#repeatClick
      * repeatClick} config.
      */
     repeatTriggerClick: false,
@@ -450,22 +450,22 @@ Ext.define('Ext.form.field.Text', {
 </span>     * @cfg {String}
      * The CSS class that is added to the div wrapping the input element and trigger button(s).
      */
-    triggerWrapCls: Ext.baseCSSPrefix + 'form-trigger-wrap',
+    triggerWrapCls: Ext.baseCSSPrefix + &#39;form-trigger-wrap&#39;,
 
-<span id='Ext-form-field-Text-property-triggerWrapFocusCls'>    triggerWrapFocusCls: Ext.baseCSSPrefix + 'form-trigger-wrap-focus',
-</span><span id='Ext-form-field-Text-property-triggerWrapInvalidCls'>    triggerWrapInvalidCls: Ext.baseCSSPrefix + 'form-trigger-wrap-invalid',
+<span id='Ext-form-field-Text-property-triggerWrapFocusCls'>    triggerWrapFocusCls: Ext.baseCSSPrefix + &#39;form-trigger-wrap-focus&#39;,
+</span><span id='Ext-form-field-Text-property-triggerWrapInvalidCls'>    triggerWrapInvalidCls: Ext.baseCSSPrefix + &#39;form-trigger-wrap-invalid&#39;,
 </span>
-<span id='Ext-form-field-Text-cfg-fieldBodyCls'>    fieldBodyCls: Ext.baseCSSPrefix + 'form-text-field-body',
+<span id='Ext-form-field-Text-cfg-fieldBodyCls'>    fieldBodyCls: Ext.baseCSSPrefix + &#39;form-text-field-body&#39;,
 </span>
 <span id='Ext-form-field-Text-cfg-inputWrapCls'>    /**
 </span>     * @cfg {String}
      * The CSS class that is added to the element wrapping the input element
      */
-    inputWrapCls: Ext.baseCSSPrefix + 'form-text-wrap',
+    inputWrapCls: Ext.baseCSSPrefix + &#39;form-text-wrap&#39;,
 
-<span id='Ext-form-field-Text-property-inputWrapFocusCls'>    inputWrapFocusCls: Ext.baseCSSPrefix + 'form-text-wrap-focus',
-</span><span id='Ext-form-field-Text-property-inputWrapInvalidCls'>    inputWrapInvalidCls: Ext.baseCSSPrefix + 'form-text-wrap-invalid',
-</span><span id='Ext-form-field-Text-property-growCls'>    growCls: Ext.baseCSSPrefix + 'form-text-grow',
+<span id='Ext-form-field-Text-property-inputWrapFocusCls'>    inputWrapFocusCls: Ext.baseCSSPrefix + &#39;form-text-wrap-focus&#39;,
+</span><span id='Ext-form-field-Text-property-inputWrapInvalidCls'>    inputWrapInvalidCls: Ext.baseCSSPrefix + &#39;form-text-wrap-invalid&#39;,
+</span><span id='Ext-form-field-Text-property-growCls'>    growCls: Ext.baseCSSPrefix + &#39;form-text-grow&#39;,
 </span>
 <span id='Ext-form-field-Text-property-emptyClsElements'>    /* 
 </span>     * @private
@@ -495,37 +495,37 @@ Ext.define('Ext.form.field.Text', {
          * A reference to the element which encapsulates the input field and all
          * trigger button(s). Only set after the field has been rendered.
          */
-        'triggerWrap',
+        &#39;triggerWrap&#39;,
 
 <span id='Ext-form-field-Text-property-inputWrap'>        /**
 </span>         * @property {Ext.dom.Element} inputWrap
          * A reference to the element that wraps the input element. Only set after the
          * field has been rendered.
          */
-        'inputWrap',
+        &#39;inputWrap&#39;,
 
-        'placeholderLabel'
+        &#39;placeholderLabel&#39;
     ],
 
 <span id='Ext-form-field-Text-property-preSubTpl'>    preSubTpl: [
-</span>        '&lt;div id=&quot;{cmpId}-triggerWrap&quot; data-ref=&quot;triggerWrap&quot;',
-                '&lt;tpl if=&quot;ariaEl == \'triggerWrap\'&quot;&gt;',
-                    '&lt;tpl foreach=&quot;ariaElAttributes&quot;&gt; {$}=&quot;{.}&quot;&lt;/tpl&gt;',
-                '&lt;tpl else&gt;',
-                    ' role=&quot;presentation&quot;',
-                '&lt;/tpl&gt;',
-                ' class=&quot;{triggerWrapCls} {triggerWrapCls}-{ui}&quot;&gt;',
-            '&lt;div id={cmpId}-inputWrap data-ref=&quot;inputWrap&quot;',
-                ' role=&quot;presentation&quot; class=&quot;{inputWrapCls} {inputWrapCls}-{ui}&quot;&gt;'
+</span>        &#39;&lt;div id=&quot;{cmpId}-triggerWrap&quot; data-ref=&quot;triggerWrap&quot;&#39;,
+                &#39;&lt;tpl if=&quot;ariaEl == \&#39;triggerWrap\&#39;&quot;&gt;&#39;,
+                    &#39;&lt;tpl foreach=&quot;ariaElAttributes&quot;&gt; {$}=&quot;{.}&quot;&lt;/tpl&gt;&#39;,
+                &#39;&lt;tpl else&gt;&#39;,
+                    &#39; role=&quot;presentation&quot;&#39;,
+                &#39;&lt;/tpl&gt;&#39;,
+                &#39; class=&quot;{triggerWrapCls} {triggerWrapCls}-{ui}&quot;&gt;&#39;,
+            &#39;&lt;div id={cmpId}-inputWrap data-ref=&quot;inputWrap&quot;&#39;,
+                &#39; role=&quot;presentation&quot; class=&quot;{inputWrapCls} {inputWrapCls}-{ui}&quot;&gt;&#39;
     ],
 
 <span id='Ext-form-field-Text-property-postSubTpl'>    postSubTpl: [
-</span>            '&lt;tpl if=&quot;!Ext.supports.Placeholder&quot;&gt;',
-            '&lt;label id=&quot;{cmpId}-placeholderLabel&quot; data-ref=&quot;placeholderLabel&quot; for=&quot;{id}&quot; class=&quot;{placeholderCoverCls} {placeholderCoverCls}-{ui}&quot;&gt;{placeholder}&lt;/label&gt;',
-            '&lt;/tpl&gt;',
-            '&lt;/div&gt;', // end inputWrap
-            '&lt;tpl for=&quot;triggers&quot;&gt;{[values.renderTrigger(parent)]}&lt;/tpl&gt;',
-        '&lt;/div&gt;' // end triggerWrap
+</span>            &#39;&lt;tpl if=&quot;!Ext.supports.Placeholder&quot;&gt;&#39;,
+            &#39;&lt;label id=&quot;{cmpId}-placeholderLabel&quot; data-ref=&quot;placeholderLabel&quot; for=&quot;{id}&quot; class=&quot;{placeholderCoverCls} {placeholderCoverCls}-{ui}&quot;&gt;{placeholder}&lt;/label&gt;&#39;,
+            &#39;&lt;/tpl&gt;&#39;,
+            &#39;&lt;/div&gt;&#39;, // end inputWrap
+            &#39;&lt;tpl for=&quot;triggers&quot;&gt;{[values.renderTrigger(parent)]}&lt;/tpl&gt;&#39;,
+        &#39;&lt;/div&gt;&#39; // end triggerWrap
     ],
 
 <span id='Ext-form-field-Text-event-autosize'>    /**
@@ -568,7 +568,7 @@ Ext.define('Ext.form.field.Text', {
 
         //&lt;debug&gt;
         if (me.size) {
-            Ext.log.warn('Ext.form.field.Text &quot;size&quot; config was deprecated in Ext 5.0. Please specify a &quot;width&quot; or use a layout instead.');
+            Ext.log.warn(&#39;Ext.form.field.Text &quot;size&quot; config was deprecated in Ext 5.0. Please specify a &quot;width&quot; or use a layout instead.&#39;);
         }
         //&lt;/debug&gt;
         // In Ext JS 4.x the layout system used the following magic formula for converting
@@ -587,9 +587,9 @@ Ext.define('Ext.form.field.Text', {
         if (me.readOnly) {
             me.setReadOnly(me.readOnly);
         }
-        me.fieldFocusCls = me.baseCls + '-focus';
-        me.emptyUICls = emptyCls + ' ' + emptyCls + '-' + me.ui;
-        me.addStateEvents('change');
+        me.fieldFocusCls = me.baseCls + &#39;-focus&#39;;
+        me.emptyUICls = emptyCls + &#39; &#39; + emptyCls + &#39;-&#39; + me.ui;
+        me.addStateEvents(&#39;change&#39;);
     },
 
 <span id='Ext-form-field-Text-method-initEvents'>    initEvents: function(){
@@ -602,10 +602,10 @@ Ext.define('Ext.form.field.Text', {
         // On mousedown, add a single: true mouseup listener which prevents default.
         // That will prevent deselection of the text that was selected in the onFocus method.
         if (me.selectOnFocus || me.emptyText) {
-            me.mon(el, 'mousedown', me.onMouseDown, me);
+            me.mon(el, &#39;mousedown&#39;, me.onMouseDown, me);
         }
-        if (me.maskRe || (me.vtype &amp;&amp; me.disableKeyFilter !== true &amp;&amp; (me.maskRe = Ext.form.field.VTypes[me.vtype+'Mask']))){
-            me.mon(el, 'keypress', me.filterKeys, me);
+        if (me.maskRe || (me.vtype &amp;&amp; me.disableKeyFilter !== true &amp;&amp; (me.maskRe = Ext.form.field.VTypes[me.vtype+&#39;Mask&#39;]))){
+            me.mon(el, &#39;keypress&#39;, me.filterKeys, me);
         }
 
         if (me.enableKeyEvents) {
@@ -628,7 +628,7 @@ Ext.define('Ext.form.field.Text', {
 
 <span id='Ext-form-field-Text-method-onChange'>    /**
 </span>     * @private
-     * If grow=true, invoke the autoSize method when the field's value is changed.
+     * If grow=true, invoke the autoSize method when the field&#39;s value is changed.
      */
     onChange: function(newVal, oldVal) {
         this.callParent([newVal, oldVal]);
@@ -642,7 +642,7 @@ Ext.define('Ext.form.field.Text', {
             maxLength = me.maxLength,
             placeholder, data, inputElAttr;
 
-        // We can't just dump the value here, since MAX_VALUE ends up
+        // We can&#39;t just dump the value here, since MAX_VALUE ends up
         // being something like 1.xxxxe+300, which gets interpreted as 1
         // in the markup
         if (me.enforceMaxLength) {
@@ -666,13 +666,13 @@ Ext.define('Ext.form.field.Text', {
             readOnly: !me.editable || me.readOnly,
             placeholder: placeholder,
             value: value,
-            fieldCls: me.fieldCls + (me.allowBlank ? '' :  ' ' + me.requiredCls) + (isEmpty ? ' ' + me.emptyUICls : '')
+            fieldCls: me.fieldCls + (me.allowBlank ? &#39;&#39; :  &#39; &#39; + me.requiredCls) + (isEmpty ? &#39; &#39; + me.emptyUICls : &#39;&#39;)
         });
         
         inputElAttr = data.inputElAriaAttributes;
         
         if (inputElAttr) {
-            inputElAttr['aria-required'] = !me.allowBlank;
+            inputElAttr[&#39;aria-required&#39;] = !me.allowBlank;
         }
         
         return data;
@@ -694,7 +694,7 @@ Ext.define('Ext.form.field.Text', {
         me.callParent();
 
         if (triggers) {
-            this.invokeTriggers('onFieldRender');
+            this.invokeTriggers(&#39;onFieldRender&#39;);
 
 <span id='Ext-form-field-Text-property-triggerEl'>            /**
 </span>             * @property {Ext.CompositeElement} triggerEl
@@ -723,7 +723,7 @@ Ext.define('Ext.form.field.Text', {
 
         me.autoSize();
         me.callParent();
-        me.invokeTriggers('afterFieldRender');
+        me.invokeTriggers(&#39;afterFieldRender&#39;);
         me.emptyClsElements = [me.inputEl];
     },
 
@@ -751,11 +751,11 @@ Ext.define('Ext.form.field.Text', {
             Ext.raise(&quot;Cannot set triggers after field has already been rendered.&quot;);
         }
 
-        // don't warn if we have both triggerCls and triggers, because picker field
+        // don&#39;t warn if we have both triggerCls and triggers, because picker field
         // uses triggerCls to style the &quot;picker&quot; trigger.
         if ((me.triggerCls &amp;&amp; !triggers) || me.trigger1Cls) {
-            Ext.log.warn(&quot;Ext.form.field.Text: 'triggerCls' and 'trigger&lt;n&gt;Cls'&quot; +
-                &quot; are deprecated.  Use 'triggers' instead.&quot;);
+            Ext.log.warn(&quot;Ext.form.field.Text: &#39;triggerCls&#39; and &#39;trigger&lt;n&gt;Cls&#39;&quot; +
+                &quot; are deprecated.  Use &#39;triggers&#39; instead.&quot;);
         }
         //&lt;/debug&gt;
 
@@ -769,11 +769,11 @@ Ext.define('Ext.form.field.Text', {
             }
 
             // Assignment in conditional test is deliberate here
-            for (i = 1; (triggerCls = me['trigger' + i + 'Cls']); i++) { // jshint ignore:line
-                triggers['trigger' + i] = {
+            for (i = 1; (triggerCls = me[&#39;trigger&#39; + i + &#39;Cls&#39;]); i++) { // jshint ignore:line
+                triggers[&#39;trigger&#39; + i] = {
                     cls: triggerCls,
-                    extraCls: Ext.baseCSSPrefix + 'trigger-index-' + i,
-                    handler: 'onTrigger' + i + 'Click',
+                    extraCls: Ext.baseCSSPrefix + &#39;trigger-index-&#39; + i,
+                    handler: &#39;onTrigger&#39; + i + &#39;Click&#39;,
                     compat4Mode: true,
                     scope: me
                 };
@@ -787,7 +787,7 @@ Ext.define('Ext.form.field.Text', {
                 triggerCfg.id = id;
 
                 /*
-                 * An explicitly-configured 'triggerConfig.hideOnReadOnly : false' allows {@link #hideTrigger} analysis
+                 * An explicitly-configured &#39;triggerConfig.hideOnReadOnly : false&#39; allows {@link #hideTrigger} analysis
                  */
                 if ((readOnly &amp;&amp; triggerCfg.hideOnReadOnly !== false) || (hideAllTriggers &amp;&amp; triggerCfg.hidden !== false)) {
                     triggerCfg.hidden = true;
@@ -837,7 +837,7 @@ Ext.define('Ext.form.field.Text', {
     },
 
 <span id='Ext-form-field-Text-method-updateHideTrigger'>    updateHideTrigger: function(hideTrigger) {
-</span>        this.invokeTriggers(hideTrigger ? 'hide' : 'show');
+</span>        this.invokeTriggers(hideTrigger ? &#39;hide&#39; : &#39;show&#39;);
     },
 
 <span id='Ext-form-field-Text-method-updateEditable'>    updateEditable: function(editable, oldEditable) {
@@ -868,11 +868,11 @@ Ext.define('Ext.form.field.Text', {
             for (id in triggers) {
                 trigger = triggers[id];
                 /*
-                 * Controlled trigger visibility state is only managed fully when 'hideOnReadOnly' is falsy.
+                 * Controlled trigger visibility state is only managed fully when &#39;hideOnReadOnly&#39; is falsy.
                  * Truth table:
-                 *   - If the trigger is configured/defaulted as 'hideOnReadOnly : true', it's readOnly-visibility
+                 *   - If the trigger is configured/defaulted as &#39;hideOnReadOnly : true&#39;, it&#39;s readOnly-visibility
                  *     is determined solely by readOnly state of the Field.
-                 *   - If 'hideOnReadOnly : false/undefined', the Fields.{link #hideTrigger hideTrigger} is honored.
+                 *   - If &#39;hideOnReadOnly : false/undefined&#39;, the Fields.{link #hideTrigger hideTrigger} is honored.
                  */
                 if (trigger.hideOnReadOnly === true || (trigger.hideOnReadOnly !== false &amp;&amp; !hideTriggers)) {
                     trigger.setVisible(!readOnly);
@@ -887,7 +887,7 @@ Ext.define('Ext.form.field.Text', {
      */
     setReadOnlyAttr: function(readOnly) {
         var me = this,
-            readOnlyName = 'readonly',
+            readOnlyName = &#39;readonly&#39;,
             inputEl = me.inputEl.dom;
 
         if (readOnly) {
@@ -897,7 +897,7 @@ Ext.define('Ext.form.field.Text', {
         }
         
         if (!me.ariaStaticRoles[me.ariaRole]) {
-            me.inputEl.dom.setAttribute('aria-readonly', !!readOnly);
+            me.inputEl.dom.setAttribute(&#39;aria-readonly&#39;, !!readOnly);
         }
     },
 
@@ -917,13 +917,13 @@ Ext.define('Ext.form.field.Text', {
             // This will force all instances that match stripRe to be removed
             // in case the user tries to add it with copy and paste EXTJS-18621
             if (!stripRe.global) {
-                mod = 'g';
-                mod += (stripRe.ignoreCase) ? 'i' : '';
-                mod += (stripRe.multiline) ? 'm' : '';
+                mod = &#39;g&#39;;
+                mod += (stripRe.ignoreCase) ? &#39;i&#39; : &#39;&#39;;
+                mod += (stripRe.multiline) ? &#39;m&#39; : &#39;&#39;;
                 stripRe = new RegExp(stripRe.source, mod);
             }
 
-            newValue = value.replace(stripRe, '');
+            newValue = value.replace(stripRe, &#39;&#39;);
             if (newValue !== value) {
                 me.setRawValue(newValue);
                 // Some components change lastValue as you type, so we need to verify
@@ -940,32 +940,32 @@ Ext.define('Ext.form.field.Text', {
 <span id='Ext-form-field-Text-method-onDisable'>    onDisable: function(){
 </span>        this.callParent();
         if (Ext.isIE) {
-            this.inputEl.dom.unselectable = 'on';
+            this.inputEl.dom.unselectable = &#39;on&#39;;
         }
     },
 
 <span id='Ext-form-field-Text-method-onEnable'>    onEnable: function(){
 </span>        this.callParent();
         if (Ext.isIE) {
-            this.inputEl.dom.unselectable = '';
+            this.inputEl.dom.unselectable = &#39;&#39;;
         }
     },
 
 <span id='Ext-form-field-Text-method-onKeyDown'>    onKeyDown: function(e) {
-</span>        this.fireEvent('keydown', this, e);
+</span>        this.fireEvent(&#39;keydown&#39;, this, e);
     },
 
 <span id='Ext-form-field-Text-method-onKeyUp'>    onKeyUp: function(e) {
-</span>        this.fireEvent('keyup', this, e);
+</span>        this.fireEvent(&#39;keyup&#39;, this, e);
     },
 
 <span id='Ext-form-field-Text-method-onKeyPress'>    onKeyPress: function(e) {
-</span>        this.fireEvent('keypress', this, e);
+</span>        this.fireEvent(&#39;keypress&#39;, this, e);
     },
 
 <span id='Ext-form-field-Text-method-getEmptyText'>    /**
-</span>     * Returns the value of this field's {@link #cfg-emptyText}
-     * @return {String} The value of this field's emptyText
+</span>     * Returns the value of this field&#39;s {@link #cfg-emptyText}
+     * @return {String} The value of this field&#39;s emptyText
      */
     getEmptyText: function() {
         return this.emptyText;
@@ -980,16 +980,16 @@ Ext.define('Ext.form.field.Text', {
         var me = this,
             inputEl = me.inputEl;
 
-        value = value || '';
+        value = value || &#39;&#39;;
 
         me.emptyText = value;
 
         if (me.rendered) {
             if (Ext.supports.Placeholder &amp;&amp; !me.simulatePlaceholder) {
                 if (value) {
-                    inputEl.dom.setAttribute('placeholder', value);
+                    inputEl.dom.setAttribute(&#39;placeholder&#39;, value);
                 } else  {
-                    inputEl.dom.removeAttribute('placeholder');
+                    inputEl.dom.removeAttribute(&#39;placeholder&#39;);
                 }
             } else {
                 me.placeholderLabel.setHtml(value);
@@ -1005,7 +1005,7 @@ Ext.define('Ext.form.field.Text', {
         if (Ext.isIE &amp;&amp; this.disabled) {
             var el = this.inputEl;
             if (el) {
-                el.dom.unselectable = 'on';
+                el.dom.unselectable = &#39;on&#39;;
             }
         }
     },
@@ -1014,7 +1014,7 @@ Ext.define('Ext.form.field.Text', {
 </span>     * @private
      */
     toggleInvalidCls: function(hasError) {
-        var method = hasError ? 'addCls' : 'removeCls';
+        var method = hasError ? &#39;addCls&#39; : &#39;removeCls&#39;;
 
         this.callParent([hasError]);
 
@@ -1081,7 +1081,7 @@ Ext.define('Ext.form.field.Text', {
         me.addCls(me.fieldFocusCls);
         me.triggerWrap.addCls(me.triggerWrapFocusCls);
         me.inputWrap.addCls(me.inputWrapFocusCls);
-        me.invokeTriggers('onFieldFocus', [e]);
+        me.invokeTriggers(&#39;onFieldFocus&#39;, [e]);
     },
 
 <span id='Ext-form-field-Text-method-onBlur'>    /**
@@ -1095,7 +1095,7 @@ Ext.define('Ext.form.field.Text', {
         me.removeCls(me.fieldFocusCls);
         me.triggerWrap.removeCls(me.triggerWrapFocusCls);
         me.inputWrap.removeCls(me.inputWrapFocusCls);
-        me.invokeTriggers('onFieldBlur', [e]);
+        me.invokeTriggers(&#39;onFieldBlur&#39;, [e]);
     },
 
 <span id='Ext-form-field-Text-method-filterKeys'>    /**
@@ -1106,7 +1106,7 @@ Ext.define('Ext.form.field.Text', {
          * Current only FF will fire keypress events for special keys.
          * 
          * On European keyboards, the right alt key, Alt Gr, is used to type certain special characters.
-         * JS detects a keypress of this as ctrlKey &amp; altKey. As such, we check that alt isn't pressed
+         * JS detects a keypress of this as ctrlKey &amp; altKey. As such, we check that alt isn&#39;t pressed
          * so we can still process these special characters.
          */
         if ((e.ctrlKey &amp;&amp; !e.altKey) || e.isSpecialKey()) {
@@ -1119,18 +1119,18 @@ Ext.define('Ext.form.field.Text', {
     },
 
 <span id='Ext-form-field-Text-method-getState'>    getState: function() {
-</span>        return this.addPropertyToState(this.callParent(), 'value');
+</span>        return this.addPropertyToState(this.callParent(), &#39;value&#39;);
     },
 
 <span id='Ext-form-field-Text-method-applyState'>    applyState: function(state) {
 </span>        this.callParent([state]);
-        if (state.hasOwnProperty('value')) {
+        if (state.hasOwnProperty(&#39;value&#39;)) {
             this.setValue(state.value);
         }
     },
 
 <span id='Ext-form-field-Text-method-getErrors'>    /**
-</span>     * Validates a value according to the field's validation rules and returns an array of errors
+</span>     * Validates a value according to the field&#39;s validation rules and returns an array of errors
      * for any failing validations. Validation rules are processed in the following order:
      *
      * 1. **Field specific validator**
@@ -1169,14 +1169,14 @@ Ext.define('Ext.form.field.Text', {
      *     If none of the prior validation steps halts validation, a field
      *     configured with a `{@link #vtype}` will utilize the
      *     corresponding {@link Ext.form.field.VTypes VTypes} validation function.
-     *     If invalid, either the field's `{@link #vtypeText}` or
+     *     If invalid, either the field&#39;s `{@link #vtypeText}` or
      *     the VTypes vtype Text property will be used for the invalid message.
      *     Keystrokes on the field will be filtered according to the VTypes
      *     vtype Mask property.
      *
      * 4. **Field specific regex test**
      *
-     *     If none of the prior validation steps halts validation, a field's
+     *     If none of the prior validation steps halts validation, a field&#39;s
      *     configured `{@link #regex}` test will be processed.
      *     The invalid message for this test is configured with `{@link #regexText}`
      *
@@ -1184,7 +1184,7 @@ Ext.define('Ext.form.field.Text', {
      * @return {String[]} Array of any validation errors
      */
     getErrors: function(value) {
-        value = arguments.length ? (value == null ? '' : value) : this.processRawValue(this.getRawValue());
+        value = arguments.length ? (value == null ? &#39;&#39; : value) : this.processRawValue(this.getRawValue());
 
         var me = this,
             errors = me.callParent([value]),
@@ -1227,7 +1227,7 @@ Ext.define('Ext.form.field.Text', {
 
         if (vtype) {
             if (!vtypes[vtype](value, me)) {
-                errors.push(me.vtypeText || vtypes[vtype +'Text']);
+                errors.push(me.vtypeText || vtypes[vtype +&#39;Text&#39;]);
             }
         }
 
@@ -1258,8 +1258,8 @@ Ext.define('Ext.form.field.Text', {
                 el.setSelectionRange(start, end);
             } else if (el.createTextRange) {
                 range = el.createTextRange();
-                range.moveStart('character', start);
-                range.moveEnd('character', end - len);
+                range.moveStart(&#39;character&#39;, start);
+                range.moveEnd(&#39;character&#39;, end - len);
                 range.select();
             }
         }
@@ -1287,7 +1287,7 @@ Ext.define('Ext.form.field.Text', {
             triggerWidth = 0;
 
             value = Ext.util.Format.htmlEncode(
-                me.getGrowWidth() || (me.hasFocus ? '' : me.emptyText) || ''
+                me.getGrowWidth() || (me.hasFocus ? &#39;&#39; : me.emptyText) || &#39;&#39;
             );
             value += me.growAppend;
 
@@ -1298,7 +1298,7 @@ Ext.define('Ext.form.field.Text', {
             width = inputEl.getTextWidth(value) +  triggerWidth +
                 // The element that has the border depends on theme - inputWrap (classic)
                 // or triggerWrap (neptune)
-                me.inputWrap.getBorderWidth('lr') + me.triggerWrap.getBorderWidth('lr');
+                me.inputWrap.getBorderWidth(&#39;lr&#39;) + me.triggerWrap.getBorderWidth(&#39;lr&#39;);
 
             width = Math.min(Math.max(width, me.growMin), me.growMax);
 
@@ -1306,14 +1306,14 @@ Ext.define('Ext.form.field.Text', {
 
             me.updateLayout();
 
-            me.fireEvent('autosize', me, width);
+            me.fireEvent(&#39;autosize&#39;, me, width);
         }
     },
 
 <span id='Ext-form-field-Text-method-doDestroy'>    doDestroy: function() {
 </span>        var me = this;
 
-        me.invokeTriggers('destroy');
+        me.invokeTriggers(&#39;destroy&#39;);
         Ext.destroy(me.triggerRepeater);
 
         me.callParent();
@@ -1326,7 +1326,7 @@ Ext.define('Ext.form.field.Text', {
 </span>         * @private
          */
         getTdType: function () {
-            return 'textfield';
+            return &#39;textfield&#39;;
         }
     },
 

@@ -19,36 +19,36 @@
 </span> * The XML Reader is used by a Proxy to read a server response that is sent back in XML format. This usually happens as
  * a result of loading a Store - for example we might create something like this:
  *
- *     Ext.define('User', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'name', 'email']
+ *     Ext.define(&#39;User&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;name&#39;, &#39;email&#39;]
  *     });
  *
- *     var store = Ext.create('Ext.data.Store', {
- *         model: 'User',
+ *     var store = Ext.create(&#39;Ext.data.Store&#39;, {
+ *         model: &#39;User&#39;,
  *         proxy: {
- *             type: 'ajax',
- *             url : 'users.xml',
+ *             type: &#39;ajax&#39;,
+ *             url : &#39;users.xml&#39;,
  *             reader: {
- *                 type: 'xml',
- *                 record: 'user',
- *                 rootProperty: 'users'
+ *                 type: &#39;xml&#39;,
+ *                 record: &#39;user&#39;,
+ *                 rootProperty: &#39;users&#39;
  *             }
  *         }
  *     });
  *
- * The example above creates a 'User' model. Models are explained in the {@link Ext.data.Model Model} docs if you're not
+ * The example above creates a &#39;User&#39; model. Models are explained in the {@link Ext.data.Model Model} docs if you&#39;re not
  * already familiar with them.
  *
- * We created the simplest type of XML Reader possible by simply telling our {@link Ext.data.Store Store}'s {@link
+ * We created the simplest type of XML Reader possible by simply telling our {@link Ext.data.Store Store}&#39;s {@link
  * Ext.data.proxy.Proxy Proxy} that we want a XML Reader. The Store automatically passes the configured model to the
  * Store, so it is as if we passed this instead:
  *
  *     reader: {
- *         type : 'xml',
- *         model: 'User',
- *         record: 'user',
- *         rootProperty: 'users'
+ *         type : &#39;xml&#39;,
+ *         model: &#39;User&#39;,
+ *         record: &#39;user&#39;,
+ *         rootProperty: &#39;users&#39;
  *     }
  *
  * The reader we set up is ready to read data from our server - at the moment it will accept a response like this:
@@ -67,11 +67,11 @@
  *         &lt;/user&gt;
  *     &lt;/users&gt;
  *
- * First off there's {@link #rootProperty} option to define the root node `&lt;users&gt;` (there should be only one in a well-formed
+ * First off there&#39;s {@link #rootProperty} option to define the root node `&lt;users&gt;` (there should be only one in a well-formed
  * XML document). Then the XML Reader uses the configured {@link #record} option to pull out the data for each record -
- * in this case we set record to 'user', so each `&lt;user&gt;` above will be converted into a User model.
+ * in this case we set record to &#39;user&#39;, so each `&lt;user&gt;` above will be converted into a User model.
  *
- * Note that XmlReader doesn't care whether your {@link #rootProperty} and {@link #record} elements are nested deep inside a
+ * Note that XmlReader doesn&#39;t care whether your {@link #rootProperty} and {@link #record} elements are nested deep inside a
  * larger structure, so a response like this will still work:
  *
  *     &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
@@ -98,7 +98,7 @@
  * are nested as descendant nodes of other records, then this lenient behaviour must be overridden by using a more specific
  * child node selector as your {@link #record} selector which will not select all descendants, such as:
  *
- *    record: '&gt;user'
+ *    record: &#39;&gt;user&#39;
  *
  * # Response metadata
  *
@@ -126,10 +126,10 @@
  * that loaded it. We can set up the names of these properties by specifying a final pair of configuration options:
  *
  *     reader: {
- *         type: 'xml',
- *         rootProperty: 'users',
- *         totalProperty  : 'total',
- *         successProperty: 'success'
+ *         type: &#39;xml&#39;,
+ *         rootProperty: &#39;users&#39;,
+ *         totalProperty  : &#39;total&#39;,
+ *         successProperty: &#39;success&#39;
  *     }
  *
  * These final options are not necessary to make the Reader work, but can be useful when the server needs to report an
@@ -142,13 +142,13 @@
  * must be set to &quot;text/xml&quot; or &quot;application/xml&quot;. This is very important - the XmlReader will not work correctly
  * otherwise.
  */
-Ext.define('Ext.data.reader.Xml', {
-    extend: 'Ext.data.reader.Reader',
+Ext.define(&#39;Ext.data.reader.Xml&#39;, {
+    extend: &#39;Ext.data.reader.Reader&#39;,
     requires: [
-        'Ext.dom.Query'
+        &#39;Ext.dom.Query&#39;
     ],
-    alternateClassName: 'Ext.data.XmlReader',
-    alias : 'reader.xml',
+    alternateClassName: &#39;Ext.data.XmlReader&#39;,
+    alias : &#39;reader.xml&#39;,
 
     config: {
 <span id='Ext-data-reader-Xml-cfg-record'>        /**
@@ -162,22 +162,22 @@ Ext.define('Ext.data.reader.Xml', {
         * then only first generation child nodes of the root element must be selected, so the record selector must be
         * specified with a more specific selector which will not select all descendants. For example:
         *
-        *    record: '&gt;node'
+        *    record: &#39;&gt;node&#39;
         *
         */
-        record: '',
+        record: &#39;&#39;,
 
 <span id='Ext-data-reader-Xml-cfg-namespace'>        /**
 </span>        * @cfg {String} namespace
         * A namespace prefix that will be prepended to the field name when reading a
         * field from an XML node.  Take, for example, the following Model:
         * 
-        *     Ext.define('Foo', {
-        *         extend: 'Ext.data.Model',
-        *         fields: ['bar', 'baz']
+        *     Ext.define(&#39;Foo&#39;, {
+        *         extend: &#39;Ext.data.Model&#39;,
+        *         fields: [&#39;bar&#39;, &#39;baz&#39;]
         *     });
         *     
-        * The reader would need to be configured with a namespace of 'n' in order to read XML
+        * The reader would need to be configured with a namespace of &#39;n&#39; in order to read XML
         * data in the following format:
         * 
         *     &lt;foo&gt;
@@ -185,7 +185,7 @@ Ext.define('Ext.data.reader.Xml', {
         *         &lt;n:baz&gt;baz&lt;/n:baz&gt;
         *     &lt;/foo&gt;
         */
-        namespace: ''
+        namespace: &#39;&#39;
     },
 
 <span id='Ext-data-reader-Xml-method-createAccessor'>    /**
@@ -214,7 +214,7 @@ Ext.define('Ext.data.reader.Xml', {
             // overcome a limitation of maximum textnode size
             // http://reference.sitepoint.com/javascript/Node/normalize
             // https://developer.mozilla.org/En/DOM/Node.normalize
-            if (typeof node.normalize === 'function') {
+            if (typeof node.normalize === &#39;function&#39;) {
                 node.normalize();
             }
             node = node.firstChild;
@@ -227,7 +227,7 @@ Ext.define('Ext.data.reader.Xml', {
 
 <span id='Ext-data-reader-Xml-method-getResponseData'>    getResponseData: function(response) {
 </span>        var xml = response.responseXML,
-            error = 'XML data not found in the response'; 
+            error = &#39;XML data not found in the response&#39;; 
 
         if (!xml) {
             Ext.Logger.warn(error);
@@ -248,7 +248,7 @@ Ext.define('Ext.data.reader.Xml', {
 
 <span id='Ext-data-reader-Xml-method-getRoot'>    /**
 </span>     * @private
-     * Given an XML object, returns the Element that represents the root as configured by the Reader's meta data.
+     * Given an XML object, returns the Element that represents the root as configured by the Reader&#39;s meta data.
      * @param {Object} data The XML data object
      * @return {XMLElement} The root node element
      */
@@ -260,7 +260,7 @@ Ext.define('Ext.data.reader.Xml', {
             return data;
         } else if (Ext.DomQuery.isXml(data)) {
             // This fix ensures we have XML data
-            // Related to TreeStore calling getRoot with the root node, which isn't XML
+            // Related to TreeStore calling getRoot with the root node, which isn&#39;t XML
             // Probably should be resolved in TreeStore at some point
             return Ext.DomQuery.selectNode(root, data);
         }
@@ -268,7 +268,7 @@ Ext.define('Ext.data.reader.Xml', {
 
 <span id='Ext-data-reader-Xml-method-extractData'>    /**
 </span>     * @private
-     * We're just preparing the data for the superclass by pulling out the record nodes we want.
+     * We&#39;re just preparing the data for the superclass by pulling out the record nodes we want.
      * @param {XMLElement} root The XML root node
      * @param {Object} [readOptions] See {@link #read} for details.
      * @return {Ext.data.Model[]} The records
@@ -278,7 +278,7 @@ Ext.define('Ext.data.reader.Xml', {
 
         //&lt;debug&gt;
         if (!recordName) {
-            Ext.raise('Record is a required parameter');
+            Ext.raise(&#39;Record is a required parameter&#39;);
         }
         //&lt;/debug&gt;
 
@@ -297,7 +297,7 @@ Ext.define('Ext.data.reader.Xml', {
      * @return {Ext.data.ResultSet} The parsed result set
      */
     readRecords: function(doc, readOptions, /* private */ internalReadOptions) {
-        // it's possible that we get passed an array here by associations.
+        // it&#39;s possible that we get passed an array here by associations.
         // Make sure we strip that out (see Ext.data.reader.Reader#readAssociated)
         if (Ext.isArray(doc)) {
             doc = doc[0];
@@ -308,7 +308,7 @@ Ext.define('Ext.data.reader.Xml', {
 
 <span id='Ext-data-reader-Xml-method-createFieldAccessor'>    /**
 </span>     * @private
-     * Returns an accessor function for the passed Field from an XML element using either the Field's mapping, or
+     * Returns an accessor function for the passed Field from an XML element using either the Field&#39;s mapping, or
      * its ordinal position in the fields collection as the index.
      * This is used by buildExtractors to create optimized on extractor function which converts raw data into model instances.
      */
@@ -317,9 +317,9 @@ Ext.define('Ext.data.reader.Xml', {
             namespace = me.getNamespace(),
             selector, result;
 
-        selector = field.mapping || ((namespace ? namespace + '|' : '') + field.name); 
+        selector = field.mapping || ((namespace ? namespace + &#39;|&#39; : &#39;&#39;) + field.name); 
 
-        if (typeof selector === 'function') {
+        if (typeof selector === &#39;function&#39;) {
             result = function(raw) {
                 return field.mapping(raw, me);
             };
@@ -332,7 +332,7 @@ Ext.define('Ext.data.reader.Xml', {
     },
     
 <span id='Ext-data-reader-Xml-property-deprecated'>    deprecated: {
-</span>        '5.1.1': {
+</span>        &#39;5.1.1&#39;: {
             properties: {
 <span id='Ext-data-reader-Xml-property-xmlData'>                /**
 </span>                 * @property {Object} xmlData

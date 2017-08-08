@@ -19,16 +19,16 @@
 </span> * The subclasses of this class provide actions to perform upon {@link Ext.form.Basic Form}s.
  *
  * Instances of this class are only created by a {@link Ext.form.Basic Form} when the Form needs to perform an action
- * such as submit or load. The Configuration options listed for this class are set through the Form's action methods:
+ * such as submit or load. The Configuration options listed for this class are set through the Form&#39;s action methods:
  * {@link Ext.form.Basic#submit submit}, {@link Ext.form.Basic#load load} and {@link Ext.form.Basic#doAction doAction}
  *
- * The instance of Action which performed the action is passed to the success and failure callbacks of the Form's action
+ * The instance of Action which performed the action is passed to the success and failure callbacks of the Form&#39;s action
  * methods ({@link Ext.form.Basic#submit submit}, {@link Ext.form.Basic#load load} and
  * {@link Ext.form.Basic#doAction doAction}), and to the {@link Ext.form.Basic#actioncomplete actioncomplete} and
  * {@link Ext.form.Basic#actionfailed actionfailed} event handlers.
  */
-Ext.define('Ext.form.action.Action', {
-    alternateClassName: 'Ext.form.Action',
+Ext.define(&#39;Ext.form.action.Action&#39;, {
+    alternateClassName: &#39;Ext.form.Action&#39;,
 
 <span id='Ext-form-action-Action-cfg-form'>    /**
 </span>     * @cfg {Ext.form.Basic} form
@@ -44,20 +44,20 @@ Ext.define('Ext.form.action.Action', {
 <span id='Ext-form-action-Action-cfg-reset'>    /**
 </span>     * @cfg {Boolean} reset
      * When set to **true**, causes the Form to be {@link Ext.form.Basic#reset reset} on Action success. If specified,
-     * this happens before the {@link #success} callback is called and before the Form's
+     * this happens before the {@link #success} callback is called and before the Form&#39;s
      * {@link Ext.form.Basic#actioncomplete actioncomplete} event fires.
      */
 
 <span id='Ext-form-action-Action-cfg-method'>    /**
 </span>     * @cfg {String} method
      * The HTTP method to use to access the requested URL.
-     * Defaults to the {@link Ext.form.Basic#method BasicForm's method}, or 'POST' if not specified.
+     * Defaults to the {@link Ext.form.Basic#method BasicForm&#39;s method}, or &#39;POST&#39; if not specified.
      */
 
 <span id='Ext-form-action-Action-cfg-params'>    /**
 </span>     * @cfg {Object/String} params
-     * Extra parameter values to pass. These are added to the Form's {@link Ext.form.Basic#baseParams} and passed to the
-     * specified URL along with the Form's input fields.
+     * Extra parameter values to pass. These are added to the Form&#39;s {@link Ext.form.Basic#baseParams} and passed to the
+     * specified URL along with the Form&#39;s input fields.
      *
      * Parameters are encoded as standard HTTP parameters using {@link Ext#urlEncode Ext.Object.toQueryString}.
      */
@@ -138,33 +138,33 @@ Ext.define('Ext.form.action.Action', {
      *     var fp = new Ext.form.Panel({
      *     ...
      *     buttons: [{
-     *         text: 'Save',
+     *         text: &#39;Save&#39;,
      *         formBind: true,
      *         handler: function(){
      *             if(fp.getForm().isValid()){
      *                 fp.getForm().submit({
-     *                     url: 'form-submit.php',
-     *                     waitMsg: 'Submitting your data...',
+     *                     url: &#39;form-submit.php&#39;,
+     *                     waitMsg: &#39;Submitting your data...&#39;,
      *                     success: function(form, action){
      *                         // server responded with success = true
      *                         var result = action.result;
      *                     },
      *                     failure: function(form, action){
      *                         if (action.{@link #failureType} === Ext.form.action.Action.CONNECT_FAILURE) {
-     *                             Ext.Msg.alert('Error',
-     *                                 'Status:'+action.response.status+': '+
+     *                             Ext.Msg.alert(&#39;Error&#39;,
+     *                                 &#39;Status:&#39;+action.response.status+&#39;: &#39;+
      *                                 action.response.statusText);
      *                         }
      *                         if (action.failureType === Ext.form.action.Action.SERVER_INVALID){
      *                             // server responded with success = false
-     *                             Ext.Msg.alert('Invalid', action.result.errormsg);
+     *                             Ext.Msg.alert(&#39;Invalid&#39;, action.result.errormsg);
      *                         }
      *                     }
      *                 });
      *             }
      *         }
      *     },{
-     *         text: 'Reset',
+     *         text: &#39;Reset&#39;,
      *         handler: function(){
      *             fp.getForm().reset();
      *         }
@@ -265,12 +265,12 @@ Ext.define('Ext.form.action.Action', {
      * @return {String} The HTTP method
      */
     getMethod: function() {
-        return (this.method || this.form.method || 'POST').toUpperCase();
+        return (this.method || this.form.method || &#39;POST&#39;).toUpperCase();
     },
 
 <span id='Ext-form-action-Action-method-getParams'>    /**
 </span>     * @private
-     * Get the set of parameters specified in the BasicForm's baseParams and/or the params option.
+     * Get the set of parameters specified in the BasicForm&#39;s baseParams and/or the params option.
      * Items in params override items of the same name in baseParams.
      * @return {Object} the full set of parameters
      */
@@ -301,18 +301,18 @@ Ext.define('Ext.form.action.Action', {
          * false.
          * @static
          */
-        CLIENT_INVALID: 'client',
+        CLIENT_INVALID: &#39;client&#39;,
 
 <span id='Ext-form-action-Action-static-property-SERVER_INVALID'>        /**
 </span>         * @property
-         * Failure type returned when server side processing fails and the {@link #result}'s `success` property is set to
+         * Failure type returned when server side processing fails and the {@link #result}&#39;s `success` property is set to
          * false.
          *
-         * In the case of a form submission, field-specific error messages may be returned in the {@link #result}'s
+         * In the case of a form submission, field-specific error messages may be returned in the {@link #result}&#39;s
          * errors property.
          * @static
          */
-        SERVER_INVALID: 'server',
+        SERVER_INVALID: &#39;server&#39;,
 
 <span id='Ext-form-action-Action-static-property-CONNECT_FAILURE'>        /**
 </span>         * @property
@@ -320,15 +320,15 @@ Ext.define('Ext.form.action.Action', {
          * server. The {@link #response} may be examined to provide further information.
          * @static
          */
-        CONNECT_FAILURE: 'connect',
+        CONNECT_FAILURE: &#39;connect&#39;,
 
 <span id='Ext-form-action-Action-static-property-LOAD_FAILURE'>        /**
 </span>         * @property
-         * Failure type returned when the response's `success` property is set to false, or no field values are returned
-         * in the response's data property.
+         * Failure type returned when the response&#39;s `success` property is set to false, or no field values are returned
+         * in the response&#39;s data property.
          * @static
          */
-        LOAD_FAILURE: 'load'
+        LOAD_FAILURE: &#39;load&#39;
 
 
     }

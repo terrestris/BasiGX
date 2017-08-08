@@ -23,8 +23,8 @@
  * that it lines up nicely with other fields. A common use is for grouping a set of related fields under
  * a single label in a form.
  * 
- * The container's configured {@link #cfg-items} will be layed out within the field body area according to the
- * configured {@link #layout} type. The default layout is `'autocontainer'`.
+ * The container&#39;s configured {@link #cfg-items} will be layed out within the field body area according to the
+ * configured {@link #layout} type. The default layout is `&#39;autocontainer&#39;`.
  * 
  * Like regular fields, FieldContainer can inherit its decoration configuration from the
  * {@link Ext.form.Panel#fieldDefaults fieldDefaults} of an enclosing FormPanel. In addition,
@@ -38,31 +38,31 @@
  * # Example
  * 
  *     @example
- *     Ext.create('Ext.form.Panel', {
- *         title: 'FieldContainer Example',
+ *     Ext.create(&#39;Ext.form.Panel&#39;, {
+ *         title: &#39;FieldContainer Example&#39;,
  *         width: 550,
  *         bodyPadding: 10,
  * 
  *         items: [{
- *             xtype: 'fieldcontainer',
- *             fieldLabel: 'Last Three Jobs',
+ *             xtype: &#39;fieldcontainer&#39;,
+ *             fieldLabel: &#39;Last Three Jobs&#39;,
  *             labelWidth: 100,
  * 
  *             // The body area will contain three text fields, arranged
  *             // horizontally, separated by draggable splitters.
- *             layout: 'hbox',
+ *             layout: &#39;hbox&#39;,
  *             items: [{
- *                 xtype: 'textfield',
+ *                 xtype: &#39;textfield&#39;,
  *                 flex: 1
  *             }, {
- *                 xtype: 'splitter'
+ *                 xtype: &#39;splitter&#39;
  *             }, {
- *                 xtype: 'textfield',
+ *                 xtype: &#39;textfield&#39;,
  *                 flex: 1
  *             }, {
- *                 xtype: 'splitter'
+ *                 xtype: &#39;splitter&#39;
  *             }, {
- *                 xtype: 'textfield',
+ *                 xtype: &#39;textfield&#39;,
  *                 flex: 1
  *             }]
  *         }],
@@ -72,65 +72,65 @@
  * # Usage of fieldDefaults
  *
  *     @example
- *     Ext.create('Ext.form.Panel', {
- *         title: 'FieldContainer Example',
+ *     Ext.create(&#39;Ext.form.Panel&#39;, {
+ *         title: &#39;FieldContainer Example&#39;,
  *         width: 350,
  *         bodyPadding: 10,
  * 
  *         items: [{
- *             xtype: 'fieldcontainer',
- *             fieldLabel: 'Your Name',
+ *             xtype: &#39;fieldcontainer&#39;,
+ *             fieldLabel: &#39;Your Name&#39;,
  *             labelWidth: 75,
- *             defaultType: 'textfield',
+ *             defaultType: &#39;textfield&#39;,
  * 
  *             // Arrange fields vertically, stretched to full width
- *             layout: 'anchor',
+ *             layout: &#39;anchor&#39;,
  *             defaults: {
- *                 layout: '100%'
+ *                 layout: &#39;100%&#39;
  *             },
  * 
  *             // These config values will be applied to both sub-fields, except
  *             // for Last Name which will use its own msgTarget.
  *             fieldDefaults: {
- *                 msgTarget: 'under',
- *                 labelAlign: 'top'
+ *                 msgTarget: &#39;under&#39;,
+ *                 labelAlign: &#39;top&#39;
  *             },
  * 
  *             items: [{
- *                 fieldLabel: 'First Name',
- *                 name: 'firstName'
+ *                 fieldLabel: &#39;First Name&#39;,
+ *                 name: &#39;firstName&#39;
  *             }, {
- *                 fieldLabel: 'Last Name',
- *                 name: 'lastName',
- *                 msgTarget: 'under'
+ *                 fieldLabel: &#39;Last Name&#39;,
+ *                 name: &#39;lastName&#39;,
+ *                 msgTarget: &#39;under&#39;
  *             }]
  *         }],
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.form.FieldContainer', {
-    extend: 'Ext.container.Container',
+Ext.define(&#39;Ext.form.FieldContainer&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
     mixins: {
-        labelable: 'Ext.form.Labelable',
-        fieldAncestor: 'Ext.form.FieldAncestor'
+        labelable: &#39;Ext.form.Labelable&#39;,
+        fieldAncestor: &#39;Ext.form.FieldAncestor&#39;
     },
-    requires: 'Ext.layout.component.field.FieldContainer',
+    requires: &#39;Ext.layout.component.field.FieldContainer&#39;,
 
-    alias: 'widget.fieldcontainer',
+    alias: &#39;widget.fieldcontainer&#39;,
 
-<span id='Ext-form-FieldContainer-cfg-componentLayout'>    componentLayout: 'fieldcontainer',
+<span id='Ext-form-FieldContainer-cfg-componentLayout'>    componentLayout: &#39;fieldcontainer&#39;,
 </span>
-<span id='Ext-form-FieldContainer-cfg-componentCls'>    componentCls: Ext.baseCSSPrefix + 'form-fieldcontainer',
+<span id='Ext-form-FieldContainer-cfg-componentCls'>    componentCls: Ext.baseCSSPrefix + &#39;form-fieldcontainer&#39;,
 </span>
 <span id='Ext-form-FieldContainer-cfg-shrinkWrap'>    shrinkWrap: true,
 </span>    
 <span id='Ext-form-FieldContainer-cfg-autoEl'>    autoEl: {
-</span>        tag: 'div',
-        role: 'presentation'
+</span>        tag: &#39;div&#39;,
+        role: &#39;presentation&#39;
     },
 
 <span id='Ext-form-FieldContainer-cfg-childEls'>    childEls: [
-</span>        'containerEl'
+</span>        &#39;containerEl&#39;
     ],
 
 <span id='Ext-form-FieldContainer-cfg-combineLabels'>    /**
@@ -144,9 +144,9 @@ Ext.define('Ext.form.FieldContainer', {
 <span id='Ext-form-FieldContainer-cfg-labelConnector'>    /**
 </span>     * @cfg {String} labelConnector
      * The string to use when joining the labels of individual sub-fields, when {@link #combineLabels} is
-     * set to true. Defaults to ', '.
+     * set to true. Defaults to &#39;, &#39;.
      */
-    labelConnector: ', ',
+    labelConnector: &#39;, &#39;,
     //&lt;/locale&gt;
 
 <span id='Ext-form-FieldContainer-cfg-combineErrors'>    /**
@@ -160,18 +160,18 @@ Ext.define('Ext.form.FieldContainer', {
 <span id='Ext-form-FieldContainer-property-maskOnDisable'>    maskOnDisable: false,
 </span><span id='Ext-form-FieldContainer-cfg-invalidCls'>    // If we allow this to mark with the invalidCls it will cascade to all
 </span>    // child fields, let them handle themselves
-    invalidCls: '',
+    invalidCls: &#39;&#39;,
 
 <span id='Ext-form-FieldContainer-property-fieldSubTpl'>    fieldSubTpl: [
-</span>        '&lt;div id=&quot;{id}-containerEl&quot; data-ref=&quot;containerEl&quot; class=&quot;{containerElCls}&quot;',
-            '&lt;tpl if=&quot;ariaAttributes&quot;&gt;',
-                '&lt;tpl foreach=&quot;ariaAttributes&quot;&gt; {$}=&quot;{.}&quot;&lt;/tpl&gt;',
-            '&lt;tpl else&gt;',
-                ' role=&quot;presentation&quot;',
-            '&lt;/tpl&gt;',
-        '&gt;',
-            '{%this.renderContainer(out,values)%}',
-        '&lt;/div&gt;'
+</span>        &#39;&lt;div id=&quot;{id}-containerEl&quot; data-ref=&quot;containerEl&quot; class=&quot;{containerElCls}&quot;&#39;,
+            &#39;&lt;tpl if=&quot;ariaAttributes&quot;&gt;&#39;,
+                &#39;&lt;tpl foreach=&quot;ariaAttributes&quot;&gt; {$}=&quot;{.}&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl else&gt;&#39;,
+                &#39; role=&quot;presentation&quot;&#39;,
+            &#39;&lt;/tpl&gt;&#39;,
+        &#39;&gt;&#39;,
+            &#39;{%this.renderContainer(out,values)%}&#39;,
+        &#39;&lt;/div&gt;&#39;
     ],
 
 <span id='Ext-form-FieldContainer-method-initComponent'>    initComponent: function() {
@@ -187,7 +187,7 @@ Ext.define('Ext.form.FieldContainer', {
     
 <span id='Ext-form-FieldContainer-method-onAdd'>    /**
 </span>     * @protected
-     * Called when a {@link Ext.form.Labelable} instance is added to the container's subtree.
+     * Called when a {@link Ext.form.Labelable} instance is added to the container&#39;s subtree.
      * @param {Ext.form.Labelable} labelItem The instance that was added
      */
     onAdd: function(labelItem) {
@@ -196,7 +196,7 @@ Ext.define('Ext.form.FieldContainer', {
         // Fix for https://sencha.jira.com/browse/EXTJSIV-6424 Which was *sneakily* fixed fixed in version 37
         // In FF &lt; 37, positioning absolutely within a TD positions relative to the TR!
         // So we must add the width of a visible, left-aligned label cell to the x coordinate.
-        if (labelItem.isLabelable &amp;&amp; Ext.isGecko &amp;&amp; Ext.firefoxVersion &lt; 37 &amp;&amp; me.layout.type === 'absolute' &amp;&amp; !me.hideLabel &amp;&amp; me.labelAlign !== 'top') {
+        if (labelItem.isLabelable &amp;&amp; Ext.isGecko &amp;&amp; Ext.firefoxVersion &lt; 37 &amp;&amp; me.layout.type === &#39;absolute&#39; &amp;&amp; !me.hideLabel &amp;&amp; me.labelAlign !== &#39;top&#39;) {
             labelItem.x += (me.labelWidth + me.labelPad);
         }
         me.callParent(arguments);
@@ -209,7 +209,7 @@ Ext.define('Ext.form.FieldContainer', {
 
 <span id='Ext-form-FieldContainer-method-onRemove'>    /**
 </span>     * @protected
-     * Called when a {@link Ext.form.Labelable} instance is removed from the container's subtree.
+     * Called when a {@link Ext.form.Labelable} instance is removed from the container&#39;s subtree.
      * @param {Ext.form.Labelable} labelItem The instance that was removed
      */
     onRemove: function(labelItem, isDestroying) {
@@ -229,10 +229,10 @@ Ext.define('Ext.form.FieldContainer', {
 
         data.containerElCls = me.containerElCls;
         data = Ext.applyIf(data, me.getLabelableRenderData());
-        if (me.labelAlign === 'top' || me.msgTarget === 'under') {
-            data.extraFieldBodyCls += ' ' + Ext.baseCSSPrefix + 'field-container-body-vertical';
+        if (me.labelAlign === &#39;top&#39; || me.msgTarget === &#39;under&#39;) {
+            data.extraFieldBodyCls += &#39; &#39; + Ext.baseCSSPrefix + &#39;field-container-body-vertical&#39;;
         }
-        data.tipAnchorTarget = me.id + '-containerEl';
+        data.tipAnchorTarget = me.id + &#39;-containerEl&#39;;
         return data;
     },
 
@@ -244,9 +244,9 @@ Ext.define('Ext.form.FieldContainer', {
      * @return {String} The label, or empty string if none.
      */
     getFieldLabel: function() {
-        var label = this.fieldLabel || '';
+        var label = this.fieldLabel || &#39;&#39;;
         if (!label &amp;&amp; this.combineLabels) {
-            label = Ext.Array.map(this.query('[isFieldLabelable]'), function(field) {
+            label = Ext.Array.map(this.query(&#39;[isFieldLabelable]&#39;), function(field) {
                 return field.getFieldLabel();
             }).join(this.labelConnector);
         }
@@ -262,7 +262,7 @@ Ext.define('Ext.form.FieldContainer', {
 
 <span id='Ext-form-FieldContainer-method-getSubTplMarkup'>    getSubTplMarkup: function(fieldData) {
 </span>        var me = this,
-            tpl = me.lookupTpl('fieldSubTpl'),
+            tpl = me.lookupTpl(&#39;fieldSubTpl&#39;),
             html;
 
         if (!tpl.renderContent) {
@@ -296,7 +296,7 @@ Ext.define('Ext.form.FieldContainer', {
         if (this.combineErrors) {
             var me = this,
                 oldError = me.getActiveError(),
-                invalidFields = Ext.Array.filter(me.query('[isFormField]'), function(field) {
+                invalidFields = Ext.Array.filter(me.query(&#39;[isFormField]&#39;), function(field) {
                     return field.hasActiveError();
                 }),
                 newErrors = me.getCombinedErrors(invalidFields);
@@ -338,7 +338,7 @@ Ext.define('Ext.form.FieldContainer', {
                 error = activeErrors[a];
                 label = field.getFieldLabel();
 
-                errors.push((label ? label + ': ' : '') + error);
+                errors.push((label ? label + &#39;: &#39; : &#39;&#39;) + error);
             }
         }
 
@@ -349,7 +349,7 @@ Ext.define('Ext.form.FieldContainer', {
 </span>        applyTargetCls: function(targetCls) {
             var containerElCls = this.containerElCls;
 
-            this.containerElCls = containerElCls ? containerElCls + ' ' + targetCls : targetCls;
+            this.containerElCls = containerElCls ? containerElCls + &#39; &#39; + targetCls : targetCls;
         },
 
         getTargetEl: function() {
@@ -358,8 +358,8 @@ Ext.define('Ext.form.FieldContainer', {
 
         initRenderTpl: function() {
             var me = this;
-            if (!me.hasOwnProperty('renderTpl')) {
-                me.renderTpl = me.lookupTpl('labelableRenderTpl');
+            if (!me.hasOwnProperty(&#39;renderTpl&#39;)) {
+                me.renderTpl = me.lookupTpl(&#39;labelableRenderTpl&#39;);
             }
             return me.callParent();
         }

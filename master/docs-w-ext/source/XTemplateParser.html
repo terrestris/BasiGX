@@ -19,10 +19,10 @@
 </span> * This class parses the XTemplate syntax and calls abstract methods to process the parts.
  * @private
  */
-Ext.define('Ext.util.XTemplateParser', {
+Ext.define(&#39;Ext.util.XTemplateParser&#39;, {
     
     requires: [
-        'Ext.String'
+        &#39;Ext.String&#39;
     ],
 
 <span id='Ext-util-XTemplateParser-method-constructor'>    constructor: function (config) {
@@ -30,7 +30,7 @@ Ext.define('Ext.util.XTemplateParser', {
     },
 
 <span id='Ext-util-XTemplateParser-property-level'>    /**
-</span>     * @property {Number} level The 'for' or 'foreach' loop context level. This is adjusted
+</span>     * @property {Number} level The &#39;for&#39; or &#39;foreach&#39; loop context level. This is adjusted
      * up by one prior to calling {@link #doFor} or {@link #doForEach} and down by one after
      * calling the corresponding {@link #doEnd} that closes the loop. This will be 1 on the
      * first {@link #doFor} or {@link #doForEach} call.
@@ -73,7 +73,7 @@ Ext.define('Ext.util.XTemplateParser', {
 </span>     * This method is called to process `&lt;tpl if=&quot;action&quot;&gt;`. If there are other attributes,
      * these are passed in the actions object.
      * @param {String} action
-     * @param {Object} actions Other actions keyed by the attribute name (such as 'exec').
+     * @param {Object} actions Other actions keyed by the attribute name (such as &#39;exec&#39;).
      * @method doIf
      */
     // doIf: function (action, actions)
@@ -82,7 +82,7 @@ Ext.define('Ext.util.XTemplateParser', {
 </span>     * This method is called to process `&lt;tpl elseif=&quot;action&quot;&gt;`. If there are other attributes,
      * these are passed in the actions object.
      * @param {String} action
-     * @param {Object} actions Other actions keyed by the attribute name (such as 'exec').
+     * @param {Object} actions Other actions keyed by the attribute name (such as &#39;exec&#39;).
      * @method doElseIf
      */
     // doElseIf: function (action, actions)
@@ -91,7 +91,7 @@ Ext.define('Ext.util.XTemplateParser', {
 </span>     * This method is called to process `&lt;tpl switch=&quot;action&quot;&gt;`. If there are other attributes,
      * these are passed in the actions object.
      * @param {String} action
-     * @param {Object} actions Other actions keyed by the attribute name (such as 'exec').
+     * @param {Object} actions Other actions keyed by the attribute name (such as &#39;exec&#39;).
      * @method doSwitch
      */
     // doSwitch: function (action, actions)
@@ -100,7 +100,7 @@ Ext.define('Ext.util.XTemplateParser', {
 </span>     * This method is called to process `&lt;tpl case=&quot;action&quot;&gt;`. If there are other attributes,
      * these are passed in the actions object.
      * @param {String} action
-     * @param {Object} actions Other actions keyed by the attribute name (such as 'exec').
+     * @param {Object} actions Other actions keyed by the attribute name (such as &#39;exec&#39;).
      * @method doCase
      */
     // doCase: function (action, actions)
@@ -115,7 +115,7 @@ Ext.define('Ext.util.XTemplateParser', {
 </span>     * This method is called to process `&lt;/tpl&gt;`. It is given the action type that started
      * the tpl and the set of additional actions.
      * @param {String} type The type of action that is being ended.
-     * @param {Object} actions The other actions keyed by the attribute name (such as 'exec').
+     * @param {Object} actions The other actions keyed by the attribute name (such as &#39;exec&#39;).
      * @method doEnd
      */
     // doEnd: function (type, actions) 
@@ -124,7 +124,7 @@ Ext.define('Ext.util.XTemplateParser', {
 </span>     * This method is called to process `&lt;tpl for=&quot;action&quot;&gt;`. If there are other attributes,
      * these are passed in the actions object.
      * @param {String} action
-     * @param {Object} actions Other actions keyed by the attribute name (such as 'exec').
+     * @param {Object} actions Other actions keyed by the attribute name (such as &#39;exec&#39;).
      * @method doFor
      */
     // doFor: function (action, actions)
@@ -133,7 +133,7 @@ Ext.define('Ext.util.XTemplateParser', {
 </span>     * This method is called to process `&lt;tpl foreach=&quot;action&quot;&gt;`. If there are other
      * attributes, these are passed in the actions object.
      * @param {String} action
-     * @param {Object} actions Other actions keyed by the attribute name (such as 'exec').
+     * @param {Object} actions Other actions keyed by the attribute name (such as &#39;exec&#39;).
      * @method doForEach
      */
     // doForEach: function (action, actions)
@@ -157,7 +157,7 @@ Ext.define('Ext.util.XTemplateParser', {
 <span id='Ext-util-XTemplateParser-method-parse'>    parse: function (str) {
 </span>        var me = this,
             len = str.length,
-            aliases = { elseif: 'elif' },
+            aliases = { elseif: &#39;elif&#39; },
             topRe = me.topRe,
             actionsRe = me.actionsRe,
             index, stack, s, m, t, prev, frame, subMatch, begin, end, actions,
@@ -183,7 +183,7 @@ Ext.define('Ext.util.XTemplateParser', {
                 // However, if we have spaces they will get matched as plaintext, so
                 // we want to skip over them here.
                 s = str.substring(index, begin);
-                if (!(expectTplNext &amp;&amp; Ext.String.trim(s) === '')) {
+                if (!(expectTplNext &amp;&amp; Ext.String.trim(s) === &#39;&#39;)) {
                     me.doText(s);
                 }
             }
@@ -191,14 +191,14 @@ Ext.define('Ext.util.XTemplateParser', {
             expectTplNext = false;
 
             if (m[1]) {
-                end = str.indexOf('%}', begin+2);
+                end = str.indexOf(&#39;%}&#39;, begin+2);
                 me.doEval(str.substring(begin+2, end));
                 end += 2;
             } else if (m[2]) {
-                end = str.indexOf(']}', begin+2);
+                end = str.indexOf(&#39;]}&#39;, begin+2);
                 me.doExpr(str.substring(begin+2, end));
                 end += 2;
-            } else if (m[3]) { // if ('{' token)
+            } else if (m[3]) { // if (&#39;{&#39; token)
                 me.doTag(m[3]);
             } else if (m[4]) { // content of a &lt;tpl xxxxxx xxx&gt; tag
                 actions = null;
@@ -211,7 +211,7 @@ Ext.define('Ext.util.XTemplateParser', {
                         actions = actions || {};
                         prev = actions[t];
 
-                        if (typeof prev == 'string') {
+                        if (typeof prev == &#39;string&#39;) {
                             actions[t] = [prev, s];
                         } else if (prev) {
                             actions[t].push(s);
@@ -228,47 +228,47 @@ Ext.define('Ext.util.XTemplateParser', {
                         me.doDefault();
                     } else {
                         me.doTpl();
-                        stack.push({ type: 'tpl' });
+                        stack.push({ type: &#39;tpl&#39; });
                     }
                 }
-                else if (actions['if']) {
-                    me.doIf(actions['if'], actions);
-                    stack.push({ type: 'if' });
+                else if (actions[&#39;if&#39;]) {
+                    me.doIf(actions[&#39;if&#39;], actions);
+                    stack.push({ type: &#39;if&#39; });
                 }
-                else if (actions['switch']) {
-                    me.doSwitch(actions['switch'], actions);
-                    stack.push({ type: 'switch' });
+                else if (actions[&#39;switch&#39;]) {
+                    me.doSwitch(actions[&#39;switch&#39;], actions);
+                    stack.push({ type: &#39;switch&#39; });
                     expectTplNext = true;
                 }
-                else if (actions['case']) {
-                    me.doCase(actions['case'], actions);
+                else if (actions[&#39;case&#39;]) {
+                    me.doCase(actions[&#39;case&#39;], actions);
                 }
-                else if (actions['elif']) {
-                    me.doElseIf(actions['elif'], actions);
+                else if (actions[&#39;elif&#39;]) {
+                    me.doElseIf(actions[&#39;elif&#39;], actions);
                 }
-                else if (actions['for']) {
+                else if (actions[&#39;for&#39;]) {
                     ++me.level;
 
                     // Extract property name to use from indexed item
                     if (prop = me.propRe.exec(m[4])) {
                         actions.propName = prop[1] || prop[2];
                     }
-                    me.doFor(actions['for'], actions);
-                    stack.push({ type: 'for', actions: actions });
+                    me.doFor(actions[&#39;for&#39;], actions);
+                    stack.push({ type: &#39;for&#39;, actions: actions });
                 }
-                else if (actions['foreach']) {
+                else if (actions[&#39;foreach&#39;]) {
                     ++me.level;
 
                     // Extract property name to use from indexed item
                     if (prop = me.propRe.exec(m[4])) {
                         actions.propName = prop[1] || prop[2];
                     }
-                    me.doForEach(actions['foreach'], actions);
-                    stack.push({ type: 'foreach', actions: actions });
+                    me.doForEach(actions[&#39;foreach&#39;], actions);
+                    stack.push({ type: &#39;foreach&#39;, actions: actions });
                 }
                 else if (actions.exec) {
                     me.doExec(actions.exec, actions);
-                    stack.push({ type: 'exec', actions: actions });
+                    stack.push({ type: &#39;exec&#39;, actions: actions });
                 }
                 /*
                 else {
@@ -276,13 +276,13 @@ Ext.define('Ext.util.XTemplateParser', {
                 }
                 */
             } else if (m[0].length === 5) {
-                // if the length of m[0] is 5, assume that we're dealing with an opening tpl tag with no attributes (e.g. &lt;tpl&gt;...&lt;/tpl&gt;)
+                // if the length of m[0] is 5, assume that we&#39;re dealing with an opening tpl tag with no attributes (e.g. &lt;tpl&gt;...&lt;/tpl&gt;)
                 // in this case no action is needed other than pushing it on to the stack
-                stack.push({ type: 'tpl' });
+                stack.push({ type: &#39;tpl&#39; });
             } else {
                 frame = stack.pop();
                 me.doEnd(frame.type, frame.actions);
-                if (frame.type == 'for' || frame.type == 'foreach') {
+                if (frame.type == &#39;for&#39; || frame.type == &#39;foreach&#39;) {
                     --me.level;
                 }
             }
@@ -292,8 +292,8 @@ Ext.define('Ext.util.XTemplateParser', {
 <span id='Ext-util-XTemplateParser-property-topRe'>    // Internal regexes
 </span>    
     topRe:     /(?:(\{\%)|(\{\[)|\{([^{}]+)\})|(?:&lt;tpl([^&gt;]*)\&gt;)|(?:&lt;\/tpl&gt;)/g,
-<span id='Ext-util-XTemplateParser-property-actionsRe'>    actionsRe: /\s*(elif|elseif|if|for|foreach|exec|switch|case|eval|between)\s*\=\s*(?:(?:&quot;([^&quot;]*)&quot;)|(?:'([^']*)'))\s*/g,
-</span><span id='Ext-util-XTemplateParser-property-propRe'>    propRe:    /prop=(?:(?:&quot;([^&quot;]*)&quot;)|(?:'([^']*)'))/,
+<span id='Ext-util-XTemplateParser-property-actionsRe'>    actionsRe: /\s*(elif|elseif|if|for|foreach|exec|switch|case|eval|between)\s*\=\s*(?:(?:&quot;([^&quot;]*)&quot;)|(?:&#39;([^&#39;]*)&#39;))\s*/g,
+</span><span id='Ext-util-XTemplateParser-property-propRe'>    propRe:    /prop=(?:(?:&quot;([^&quot;]*)&quot;)|(?:&#39;([^&#39;]*)&#39;))/,
 </span><span id='Ext-util-XTemplateParser-property-defaultRe'>    defaultRe: /^\s*default\s*$/,
 </span><span id='Ext-util-XTemplateParser-property-elseRe'>    elseRe:    /^\s*else\s*$/
 </span>});

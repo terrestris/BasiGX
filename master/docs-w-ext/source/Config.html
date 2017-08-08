@@ -21,7 +21,7 @@
  * classes declare their config properties. One instance of this class is created per
  * config property name.
  *
- *      Ext.define('MyClass', {
+ *      Ext.define(&#39;MyClass&#39;, {
  *          config: {
  *              foo: 42
  *          }
@@ -32,7 +32,7 @@
  * When config properties apply options to config properties a prototype chained object is
  * created from the cached instance. For example:
  *
- *      Ext.define('MyClass', {
+ *      Ext.define(&#39;MyClass&#39;, {
  *          config: {
  *              foo: {
  *                  $value: 42,
@@ -90,14 +90,14 @@ Ext.Config = function (name) {
      * @since 5.0.0
      */
     me.names = {
-        internal: '_' + name,
-        initializing: 'is' + capitalizedName + 'Initializing',
-        apply: 'apply' + capitalizedName,
-        update: 'update' + capitalizedName,
-        get: 'get' + capitalizedName,
-        set: 'set' + capitalizedName,
-        initGet: 'initGet' + capitalizedName,
-        changeEvent: name.toLowerCase() + 'change'
+        internal: &#39;_&#39; + name,
+        initializing: &#39;is&#39; + capitalizedName + &#39;Initializing&#39;,
+        apply: &#39;apply&#39; + capitalizedName,
+        update: &#39;update&#39; + capitalizedName,
+        get: &#39;get&#39; + capitalizedName,
+        set: &#39;set&#39; + capitalizedName,
+        initGet: &#39;initGet&#39; + capitalizedName,
+        changeEvent: name.toLowerCase() + &#39;change&#39;
     };
 
     // This allows folks to prototype chain on top of these objects and yet still cache
@@ -216,7 +216,7 @@ Ext.Config.prototype = {
      *
      * The merge process converts arrays like the following into the above:
      *
-     *      [ 'foo', 'bar' ]
+     *      [ &#39;foo&#39;, &#39;bar&#39; ]
      *
      * @param {String/String[]/Object} newValue
      * @param {Object} oldValue

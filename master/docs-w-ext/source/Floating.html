@@ -18,10 +18,10 @@
   <pre class="prettyprint lang-js"><span id='Ext-util-Floating'>/**
 </span> * A mixin to add floating capability to a Component.
  */
-Ext.define('Ext.util.Floating', {
-<span id='Ext-util-Floating-property-mixinId'>    mixinId: 'floating',
+Ext.define(&#39;Ext.util.Floating&#39;, {
+<span id='Ext-util-Floating-property-mixinId'>    mixinId: &#39;floating&#39;,
 </span>
-    uses: ['Ext.ZIndexManager'],
+    uses: [&#39;Ext.ZIndexManager&#39;],
 
 <span id='Ext-util-Floating-cfg-focusOnToFront'>    /**
 </span>     * @cfg {Boolean} focusOnToFront
@@ -39,10 +39,10 @@ Ext.define('Ext.util.Floating', {
 <span id='Ext-util-Floating-cfg-shadow'>    /**
 </span>     * @cfg {String/Boolean} shadow
      * Specifies whether the floating component should be given a shadow. Set to true to automatically create an
-     * {@link Ext.Shadow}, or a string indicating the shadow's display {@link Ext.Shadow#mode}. Set to false to
+     * {@link Ext.Shadow}, or a string indicating the shadow&#39;s display {@link Ext.Shadow#mode}. Set to false to
      * disable the shadow.
      */
-    shadow: 'sides',
+    shadow: &#39;sides&#39;,
 
 <span id='Ext-util-Floating-cfg-animateShadow'>    /**
 </span>     * @cfg {Boolean} [animateShadow=false]
@@ -96,7 +96,7 @@ Ext.define('Ext.util.Floating', {
      * Only present for {@link Ext.Component#cfg-floating floating} Components after 
      * they have been rendered.
      *
-     * A reference to the ZIndexManager which is managing this Component's z-index.
+     * A reference to the ZIndexManager which is managing this Component&#39;s z-index.
      *
      * The {@link Ext.ZIndexManager ZIndexManager} maintains a stack of floating Component z-indices, and also provides
      * a single modal mask which is insert just beneath the topmost visible modal floating Component.
@@ -173,7 +173,7 @@ Ext.define('Ext.util.Floating', {
 
         if (shadow) {
             shadowConfig = {
-                mode: (shadow === true) ? 'sides' : shadow
+                mode: (shadow === true) ? &#39;sides&#39; : shadow
             };
             shadowOffset = me.shadowOffset;
             if (shadowOffset) {
@@ -243,7 +243,7 @@ Ext.define('Ext.util.Floating', {
         anchorXY = alignTarget.getXY();
         me.alignVector = [myXY[0] - anchorXY[0], myXY[1] - anchorXY[1]];
 
-        // Let's stash these on the component/element in case it's aligned to something else
+        // Let&#39;s stash these on the component/element in case it&#39;s aligned to something else
         // in its little lifetime.
         me._lastAlignTarget = alignTarget;
         me._lastAlignToPos = position;
@@ -290,7 +290,7 @@ Ext.define('Ext.util.Floating', {
             floatParent = me.floatParent;
 
         // If a floating Component is configured to be constrained, but has no configured
-        // constrainTo setting, set its constrainTo to be it's ownerCt before rendering.
+        // constrainTo setting, set its constrainTo to be it&#39;s ownerCt before rendering.
         if ((me.constrain || me.constrainHeader) &amp;&amp; !me.constrainTo) {
             me.constrainTo = floatParent ? floatParent.getTargetEl() : me.container;
         }
@@ -324,7 +324,7 @@ Ext.define('Ext.util.Floating', {
 
         // Acquire a zIndexParent by traversing the ownerCt axis for the nearest floating ancestor.
         // This is to find a base which can allocate relative z-index values
-        zip = me.zIndexParent = me.up('[floating]');
+        zip = me.zIndexParent = me.up(&#39;[floating]&#39;);
 
         // Set the floatParent to the ownertCt if one has been provided.
         // Otherwise use the zIndexParent.
@@ -352,7 +352,7 @@ Ext.define('Ext.util.Floating', {
             
             // Do not autofocus the Component (which delegates onto the getFocusEl() descendant)
             // for touch events.
-            preventFocus = e.pointerType === 'touch',
+            preventFocus = e.pointerType === &#39;touch&#39;,
             target, dom, skipFronting;
 
         if (me.floating &amp;&amp;
@@ -369,10 +369,10 @@ Ext.define('Ext.util.Floating', {
             target = e.target;
             dom = me.el.dom;
             
-            // loop the target's ancestors to see if we clicked on a focusable element
-            // or a descendant of a focusable element,  If so we don't want to focus
+            // loop the target&#39;s ancestors to see if we clicked on a focusable element
+            // or a descendant of a focusable element,  If so we don&#39;t want to focus
             // this floating component. If we end up with no target, it probably means
-            // it's been removed from the DOM, so we should attempt to bring ourselves
+            // it&#39;s been removed from the DOM, so we should attempt to bring ourselves
             // to front anyway
             while (!preventFocus &amp;&amp; target &amp;&amp; target !== dom) {
                 if (Ext.fly(target).isFocusable()) {
@@ -381,7 +381,7 @@ Ext.define('Ext.util.Floating', {
                 target = target.parentNode;
             }
             
-            // We can skip toFront() if we're already active and the click was
+            // We can skip toFront() if we&#39;re already active and the click was
             // within our element but not on something focusable.
             skipFronting = Ext.WindowManager.getActive() === me &amp;&amp;
                            (target === dom || preventFocus);
@@ -407,10 +407,10 @@ Ext.define('Ext.util.Floating', {
 </span>        var el = this.el;
 
         if (el.shadow || el.shim) {
-            // An element's underlays (shadow and shim) are automatically synced in response
-            // to any calls to Ext.Element APIs that change the element's size or position
+            // An element&#39;s underlays (shadow and shim) are automatically synced in response
+            // to any calls to Ext.Element APIs that change the element&#39;s size or position
             // (setXY, setWidth, etc).  Since the layout system bypasses these APIs and
-            // sets the element's styles directly, we need to trigger a sync now.
+            // sets the element&#39;s styles directly, we need to trigger a sync now.
             el.setUnderlaysVisible(true);
             el.syncUnderlays();
         }
@@ -530,7 +530,7 @@ Ext.define('Ext.util.Floating', {
         // That will focus it if we have been requested to do so.
         if (me.zIndexManager.bringToFront(me, preventFocus || !me.focusOnToFront)) {
             if (me.hasListeners.tofront) {
-                me.fireEvent('tofront', me, me.el.getZIndex());
+                me.fireEvent(&#39;tofront&#39;, me, me.el.getZIndex());
             }
         }
         return me;
@@ -556,7 +556,7 @@ Ext.define('Ext.util.Floating', {
             activeCmp;
 
         if (active) {
-            // Check the element's visible state. Might be clipped to hide but
+            // Check the element&#39;s visible state. Might be clipped to hide but
             // be accessible. Do not show a shadow.
             if (me.el.shadow &amp;&amp; me.el.getData().isVisible !== false &amp;&amp; !me.maximized) {
                 me.el.enableShadow(null, true);
@@ -571,13 +571,13 @@ Ext.define('Ext.util.Floating', {
                     me.focus();
                 }
             }            
-            me.fireEvent('activate', me);
+            me.fireEvent(&#39;activate&#39;, me);
         }
         // Deactivate carries no operations. It may be that this component has just moved down and another
         // component has been brought to the top, so that will automatically receive focus.
         // If we have been hidden, Component#onHide handles reverting focus to the previousExternalFocus element.
         else {
-            me.fireEvent('deactivate', me);
+            me.fireEvent(&#39;deactivate&#39;, me);
         }
     },
 
@@ -599,7 +599,7 @@ Ext.define('Ext.util.Floating', {
             xy;
 
         if (me.isVisible()) {
-            xy = me.getAlignToXY(me.container, 'c-c');
+            xy = me.getAlignToXY(me.container, &#39;c-c&#39;);
             me.setPagePosition(xy);
         } else {
             me.needsCenter = true;
@@ -660,9 +660,9 @@ Ext.define('Ext.util.Floating', {
                 if (result.isFloating()) {
                     next = result._lastAlignTarget;
                 }
-                // If a static component, see if it's owned by a floater and try its alignTarget if so.
+                // If a static component, see if it&#39;s owned by a floater and try its alignTarget if so.
                 else {
-                    next = result.up('{isFloating()}');
+                    next = result.up(&#39;{isFloating()}&#39;);
                     next = next &amp;&amp; next._lastAlignTarget;
                 }
             }
@@ -674,7 +674,7 @@ Ext.define('Ext.util.Floating', {
 
             if (me._lastAlignTarget) {
                 me.alignListeners = Ext.destroy(me.alignListeners);
-                Ext.un('scroll', me.doRealign, me);
+                Ext.un(&#39;scroll&#39;, me.doRealign, me);
                 me._lastAlignToPos = me._lastAlignTarget = me._lastAlignToOffsets = me._topAlignTarget = null;
             }
         },

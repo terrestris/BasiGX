@@ -15,8 +15,8 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.rtl.grid.plugin.HeaderResizer', {
-    override: 'Ext.grid.plugin.HeaderResizer',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.rtl.grid.plugin.HeaderResizer&#39;, {
+    override: &#39;Ext.grid.plugin.HeaderResizer&#39;,
 
     onBeforeStart : function(e) {
         var me = this;
@@ -55,7 +55,7 @@
 
     calculateDragX: function(gridSection) {
         var gridX = gridSection.getX(),
-            mouseX = this.tracker.getXY('point')[0];
+            mouseX = this.tracker.getXY(&#39;point&#39;)[0];
         
         if (this.headerCt.isOppositeRootDirection()) {
             return mouseX - gridX + this.xDelta;    

@@ -25,35 +25,35 @@
  * Example usage:
  *
  *     @example
- *     Ext.create('Ext.form.FormPanel', {
- *         title      : 'Sample TextArea',
+ *     Ext.create(&#39;Ext.form.FormPanel&#39;, {
+ *         title      : &#39;Sample TextArea&#39;,
  *         width      : 400,
  *         bodyPadding: 10,
  *         renderTo   : Ext.getBody(),
  *         items: [{
- *             xtype     : 'textareafield',
+ *             xtype     : &#39;textareafield&#39;,
  *             grow      : true,
- *             name      : 'message',
- *             fieldLabel: 'Message',
- *             anchor    : '100%'
+ *             name      : &#39;message&#39;,
+ *             fieldLabel: &#39;Message&#39;,
+ *             anchor    : &#39;100%&#39;
  *         }]
  *     });
  *
  * Some other useful configuration options when using {@link #grow} are {@link #growMin} and {@link #growMax}.
  * These allow you to set the minimum and maximum grow heights for the textarea.
  * 
- * **NOTE:** In some browsers, carriage returns ('\r', not to be confused with new lines)
+ * **NOTE:** In some browsers, carriage returns (&#39;\r&#39;, not to be confused with new lines)
  * will be automatically stripped out the value is set to the textarea. Since we cannot
  * use any reasonable method to attempt to re-insert these, they will automatically be
  * stripped out to ensure the behaviour is consistent across browser.
  */
-Ext.define('Ext.form.field.TextArea', {
-    extend:'Ext.form.field.Text',
-    alias: ['widget.textareafield', 'widget.textarea'],
-    alternateClassName: 'Ext.form.TextArea',
+Ext.define(&#39;Ext.form.field.TextArea&#39;, {
+    extend:&#39;Ext.form.field.Text&#39;,
+    alias: [&#39;widget.textareafield&#39;, &#39;widget.textarea&#39;],
+    alternateClassName: &#39;Ext.form.TextArea&#39;,
     requires: [
-        'Ext.XTemplate', 
-        'Ext.util.DelayedTask'
+        &#39;Ext.XTemplate&#39;, 
+        &#39;Ext.util.DelayedTask&#39;
     ],
 
 <span id='Ext-form-field-TextArea-cfg-fieldSubTpl'>    // This template includes a `\n` after `&lt;textarea&gt;` opening tag so that an
@@ -67,20 +67,20 @@ Ext.define('Ext.form.field.TextArea', {
     //     &lt;/textarea&gt;
     //
     fieldSubTpl: [
-        '&lt;textarea id=&quot;{id}&quot; data-ref=&quot;inputEl&quot; {inputAttrTpl}',
-            '&lt;tpl if=&quot;name&quot;&gt; name=&quot;{name}&quot;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;placeholder&quot;&gt; placeholder=&quot;{placeholder}&quot;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;maxLength !== undefined&quot;&gt; maxlength=&quot;{maxLength}&quot;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;readOnly&quot;&gt; readonly=&quot;readonly&quot;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;disabled&quot;&gt; disabled=&quot;disabled&quot;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;tabIdx != null&quot;&gt; tabindex=&quot;{tabIdx}&quot;&lt;/tpl&gt;',
-            ' class=&quot;{fieldCls} {typeCls} {typeCls}-{ui} {inputCls}&quot; ',
-            '&lt;tpl if=&quot;fieldStyle&quot;&gt; style=&quot;{fieldStyle}&quot;&lt;/tpl&gt;',
-            '&lt;tpl foreach=&quot;ariaElAttributes&quot;&gt; {$}=&quot;{.}&quot;&lt;/tpl&gt;',
-            '&lt;tpl foreach=&quot;inputElAriaAttributes&quot;&gt; {$}=&quot;{.}&quot;&lt;/tpl&gt;',
-            ' autocomplete=&quot;off&quot;&gt;\n',
-            '&lt;tpl if=&quot;value&quot;&gt;{[Ext.util.Format.htmlEncode(values.value)]}&lt;/tpl&gt;',
-        '&lt;/textarea&gt;',
+        &#39;&lt;textarea id=&quot;{id}&quot; data-ref=&quot;inputEl&quot; {inputAttrTpl}&#39;,
+            &#39;&lt;tpl if=&quot;name&quot;&gt; name=&quot;{name}&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;placeholder&quot;&gt; placeholder=&quot;{placeholder}&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;maxLength !== undefined&quot;&gt; maxlength=&quot;{maxLength}&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;readOnly&quot;&gt; readonly=&quot;readonly&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;disabled&quot;&gt; disabled=&quot;disabled&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;tabIdx != null&quot;&gt; tabindex=&quot;{tabIdx}&quot;&lt;/tpl&gt;&#39;,
+            &#39; class=&quot;{fieldCls} {typeCls} {typeCls}-{ui} {inputCls}&quot; &#39;,
+            &#39;&lt;tpl if=&quot;fieldStyle&quot;&gt; style=&quot;{fieldStyle}&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl foreach=&quot;ariaElAttributes&quot;&gt; {$}=&quot;{.}&quot;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl foreach=&quot;inputElAriaAttributes&quot;&gt; {$}=&quot;{.}&quot;&lt;/tpl&gt;&#39;,
+            &#39; autocomplete=&quot;off&quot;&gt;\n&#39;,
+            &#39;&lt;tpl if=&quot;value&quot;&gt;{[Ext.util.Format.htmlEncode(values.value)]}&lt;/tpl&gt;&#39;,
+        &#39;&lt;/textarea&gt;&#39;,
         {
             disableFormats: true
         }
@@ -100,11 +100,11 @@ Ext.define('Ext.form.field.TextArea', {
 
 <span id='Ext-form-field-TextArea-cfg-growAppend'>    /**
 </span>     * @cfg {String} growAppend
-     * A string that will be appended to the field's current value for the purposes of calculating the target field
+     * A string that will be appended to the field&#39;s current value for the purposes of calculating the target field
      * size. Only used when the {@link #grow} config is true. Defaults to a newline for TextArea to ensure there is
      * always a space below the current line.
      */
-    growAppend: '\n-',
+    growAppend: &#39;\n-&#39;,
 
 <span id='Ext-form-field-TextArea-cfg-enterIsSpecial'>    /**
 </span>     * @cfg {Boolean} enterIsSpecial
@@ -122,23 +122,23 @@ Ext.define('Ext.form.field.TextArea', {
     
 <span id='Ext-form-field-TextArea-property-returnRe'>    returnRe: /\r/g,
 </span>
-<span id='Ext-form-field-TextArea-property-inputCls'>    inputCls: Ext.baseCSSPrefix + 'form-textarea',
+<span id='Ext-form-field-TextArea-property-inputCls'>    inputCls: Ext.baseCSSPrefix + &#39;form-textarea&#39;,
 </span>
-<span id='Ext-form-field-TextArea-property-extraFieldBodyCls'>    extraFieldBodyCls: Ext.baseCSSPrefix + 'form-textarea-body',
+<span id='Ext-form-field-TextArea-property-extraFieldBodyCls'>    extraFieldBodyCls: Ext.baseCSSPrefix + &#39;form-textarea-body&#39;,
 </span>    
 <span id='Ext-form-field-TextArea-cfg-ariaAttributes'>    ariaAttributes: {
-</span>        'aria-multiline': true
+</span>        &#39;aria-multiline&#39;: true
     },
 
 <span id='Ext-form-field-TextArea-method-constructor'>    //&lt;debug&gt;
 </span>    constructor: function(config) {
         this.callParent([config]);
         if (this.cols) {
-            Ext.log.warn('Ext.form.field.TextArea &quot;cols&quot; config was removed in Ext 5.0. Please specify a &quot;width&quot; or use a layout instead.');
+            Ext.log.warn(&#39;Ext.form.field.TextArea &quot;cols&quot; config was removed in Ext 5.0. Please specify a &quot;width&quot; or use a layout instead.&#39;);
         }
 
         if (this.rows) {
-            Ext.log.warn('Ext.form.field.TextArea &quot;rows&quot; config was removed in Ext 5.0. Please specify a &quot;height&quot; or use a layout instead.');
+            Ext.log.warn(&#39;Ext.form.field.TextArea &quot;rows&quot; config was removed in Ext 5.0. Please specify a &quot;height&quot; or use a layout instead.&#39;);
         }
     },
 <span id='Ext-form-field-TextArea-method-getSubTplData'>    //&lt;/debug&gt;
@@ -150,7 +150,7 @@ Ext.define('Ext.form.field.TextArea', {
 
         if (me.grow) {
             if (me.preventScrollbars) {
-                ret.fieldStyle = (fieldStyle||'') + ';overflow:hidden;height:' + me.growMin + 'px';
+                ret.fieldStyle = (fieldStyle||&#39;&#39;) + &#39;;overflow:hidden;height:&#39; + me.growMin + &#39;px&#39;;
             }
         }
 
@@ -164,13 +164,13 @@ Ext.define('Ext.form.field.TextArea', {
 
         me.needsMaxCheck = me.enforceMaxLength &amp;&amp; me.maxLength !== Number.MAX_VALUE &amp;&amp; !Ext.supports.TextAreaMaxLength;
         if (me.needsMaxCheck) {
-            me.inputEl.on('paste', me.onPaste, me);
+            me.inputEl.on(&#39;paste&#39;, me.onPaste, me);
         }
     },
     
 <span id='Ext-form-field-TextArea-method-transformRawValue'>    // The following overrides deal with an issue whereby some browsers
 </span>    // will strip carriage returns from the textarea input, while others
-    // will not. Since there's no way to be sure where to insert returns,
+    // will not. Since there&#39;s no way to be sure where to insert returns,
     // the best solution is to strip them out in all cases to ensure that
     // the behaviour is consistent in a cross browser fashion. As such,
     // we override in all cases when setting the value to control this.
@@ -188,8 +188,8 @@ Ext.define('Ext.form.field.TextArea', {
     },
     
 <span id='Ext-form-field-TextArea-method-stripReturns'>    stripReturns: function(value){
-</span>        if (value &amp;&amp; typeof value === 'string') {
-            value = value.replace(this.returnRe, '');
+</span>        if (value &amp;&amp; typeof value === &#39;string&#39;) {
+            value = value.replace(this.returnRe, &#39;&#39;);
         }
         return value;
     },
@@ -199,7 +199,7 @@ Ext.define('Ext.form.field.TextArea', {
         if (!me.pasteTask) {
             me.pasteTask = new Ext.util.DelayedTask(me.pasteCheck, me);
         }
-        // since we can't get the paste data, we'll give the area a chance to populate
+        // since we can&#39;t get the paste data, we&#39;ll give the area a chance to populate
         me.pasteTask.delay(1);
     },
     
@@ -223,7 +223,7 @@ Ext.define('Ext.form.field.TextArea', {
             value;
             
         if (e.isSpecialKey() &amp;&amp; (me.enterIsSpecial || (key !== e.ENTER || e.hasModifier()))) {
-            me.fireEvent('specialkey', me, e);
+            me.fireEvent(&#39;specialkey&#39;, me, e);
         }
         
         // Enter key must not bubble up where it can trigger defaultButton action
@@ -260,17 +260,17 @@ Ext.define('Ext.form.field.TextArea', {
             //subtract border/padding to get the available width for the text
             curWidth = inputEl.getWidth(true);
 
-            value = Ext.util.Format.htmlEncode(inputEl.dom.value) || '&amp;#160;';
+            value = Ext.util.Format.htmlEncode(inputEl.dom.value) || &#39;&amp;#160;&#39;;
             value += me.growAppend;
 
             // Translate newlines to &lt;br&gt; tags
-            value = value.replace(/\n/g, '&lt;br/&gt;');
+            value = value.replace(/\n/g, &#39;&lt;br/&gt;&#39;);
 
             height = Ext.util.TextMetrics.measure(inputEl, value, curWidth).height +
-                inputEl.getPadding('tb') +
+                inputEl.getPadding(&#39;tb&#39;) +
                 // The element that has the border depends on theme - inputWrap (classic)
                 // or triggerWrap (neptune)
-                me.inputWrap.getBorderWidth('tb') + me.triggerWrap.getBorderWidth('tb');
+                me.inputWrap.getBorderWidth(&#39;tb&#39;) + me.triggerWrap.getBorderWidth(&#39;tb&#39;);
 
             height = Math.min(Math.max(height, me.growMin), me.growMax);
 
@@ -278,7 +278,7 @@ Ext.define('Ext.form.field.TextArea', {
 
             me.updateLayout();
 
-            me.fireEvent('autosize', me, height);
+            me.fireEvent(&#39;autosize&#39;, me, height);
         }
     },
 

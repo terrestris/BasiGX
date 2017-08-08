@@ -21,9 +21,9 @@
  * @private
  */
 
-Ext.define('Ext.fx.Queue', {
+Ext.define(&#39;Ext.fx.Queue&#39;, {
 
-    requires: ['Ext.util.HashMap'],
+    requires: [&#39;Ext.util.HashMap&#39;],
 
 <span id='Ext-fx-Queue-method-constructor'>    constructor: function() {
 </span>        this.targets = new Ext.util.HashMap();
@@ -108,9 +108,9 @@ Ext.define('Ext.fx.Queue', {
         if (!queue) {
             me.fxQueue[targetId] = fxQueue[targetId] = [];
             
-            // GarbageCollector will need to clean up Elements since they aren't currently observable
-            if (target.type !== 'element') {
-                target.target.on('destroy', function() {
+            // GarbageCollector will need to clean up Elements since they aren&#39;t currently observable
+            if (target.type !== &#39;element&#39;) {
+                target.target.on(&#39;destroy&#39;, function() {
                     fxQueue[targetId] = null;
                     delete fxQueue[targetId];
                 });
@@ -140,7 +140,7 @@ Ext.define('Ext.fx.Queue', {
                 anim.paused = false;
             }
             else {
-                queue[ln - 1].on('afteranimate', function() {
+                queue[ln - 1].on(&#39;afteranimate&#39;, function() {
                     anim.paused = false;
                 });
             }
@@ -149,7 +149,7 @@ Ext.define('Ext.fx.Queue', {
             anim.paused = false;
         }
         
-        anim.on('afteranimate', function() {
+        anim.on(&#39;afteranimate&#39;, function() {
             Ext.Array.remove(queue, anim);
             
             if (queue.length === 0) {
@@ -159,7 +159,7 @@ Ext.define('Ext.fx.Queue', {
             }
             
             if (anim.remove) {
-                if (target.type === 'element') {
+                if (target.type === &#39;element&#39;) {
                     var el = Ext.get(targetId);
                     
                     if (el) {

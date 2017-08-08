@@ -23,21 +23,21 @@
  * &lt;p&gt;A store configuration would be something like:&lt;pre&gt;&lt;code&gt;
 var store = new Ext.data.JsonPStore({
     // store configs
-    storeId: 'myStore',
+    storeId: &#39;myStore&#39;,
 
     // proxy configs
-    url: 'get-images.php',
+    url: &#39;get-images.php&#39;,
 
     // reader configs
-    root: 'images',
-    fields: ['name', 'url', {name:'size', type: 'float'}, {name:'lastmod', type:'date'}]
+    root: &#39;images&#39;,
+    fields: [&#39;name&#39;, &#39;url&#39;, {name:&#39;size&#39;, type: &#39;float&#39;}, {name:&#39;lastmod&#39;, type:&#39;date&#39;}]
 });
  * &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
  * &lt;p&gt;This store is configured to consume a returned object of the form:&lt;pre&gt;&lt;code&gt;
 stcCallback({
     images: [
-        {name: 'Image one', url:'/GetImage.php?id=1', size:46.5, lastmod: new Date(2007, 10, 29)},
-        {name: 'Image Two', url:'/GetImage.php?id=2', size:43.2, lastmod: new Date(2007, 10, 30)}
+        {name: &#39;Image one&#39;, url:&#39;/GetImage.php?id=1&#39;, size:46.5, lastmod: new Date(2007, 10, 29)},
+        {name: &#39;Image Two&#39;, url:&#39;/GetImage.php?id=2&#39;, size:43.2, lastmod: new Date(2007, 10, 30)}
     ]
 })
  * &lt;/code&gt;&lt;/pre&gt;
@@ -46,19 +46,19 @@ stcCallback({
  * An object literal of this form could also be used as the {@link #cfg-data} config option.&lt;/p&gt;
  * @xtype jsonpstore
  */
-Ext.define('Ext.data.JsonPStore', {
-    extend: 'Ext.data.Store',
-    alias : 'store.jsonp',
+Ext.define(&#39;Ext.data.JsonPStore&#39;, {
+    extend: &#39;Ext.data.Store&#39;,
+    alias : &#39;store.jsonp&#39;,
     requires: [
-        'Ext.data.proxy.JsonP',
-        'Ext.data.reader.Json'
+        &#39;Ext.data.proxy.JsonP&#39;,
+        &#39;Ext.data.reader.Json&#39;
     ],
 
 <span id='Ext-data-JsonPStore-method-constructor'>    constructor: function(config) {
 </span>        config = Ext.apply({
             proxy: {
-                type: 'jsonp',
-                reader: 'json'
+                type: &#39;jsonp&#39;,
+                reader: &#39;json&#39;
             }
         }, config);
         this.callParent([config]);

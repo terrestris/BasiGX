@@ -21,17 +21,17 @@
  * Base class for Controllers.
  * 
  */
-Ext.define('Ext.app.BaseController', {
+Ext.define(&#39;Ext.app.BaseController&#39;, {
     requires: [
-        'Ext.app.EventBus',
-        'Ext.app.domain.Global'
+        &#39;Ext.app.EventBus&#39;,
+        &#39;Ext.app.domain.Global&#39;
     ],
     
     uses: [
-        'Ext.app.domain.Controller'
+        &#39;Ext.app.domain.Controller&#39;
     ],
 
-    mixins: ['Ext.mixin.Observable'],
+    mixins: [&#39;Ext.mixin.Observable&#39;],
 
 <span id='Ext-app-BaseController-property-isController'>    isController: true,
 </span>
@@ -42,7 +42,7 @@ Ext.define('Ext.app.BaseController', {
          * For an example of dispatching, see the examples under the 
          * {@link Ext.app.Controller#cfg-listen listen} config.
          *
-         * If an id is not explicitly set, it will default to the controller's full classname.
+         * If an id is not explicitly set, it will default to the controller&#39;s full classname.
          * 
          * @accessor
          */
@@ -60,17 +60,17 @@ Ext.define('Ext.app.BaseController', {
          * In the following example the `updateUser` function is mapped to to the `click`
          * event on a button component, which is a child of the `useredit` component.
          *
-         *      Ext.define('MyApp.controller.Users', {
-         *          extend: 'Ext.app.Controller',
+         *      Ext.define(&#39;MyApp.controller.Users&#39;, {
+         *          extend: &#39;Ext.app.Controller&#39;,
          *
          *          control: {
-         *              'useredit button[action=save]': {
-         *                  click: 'updateUser'
+         *              &#39;useredit button[action=save]&#39;: {
+         *                  click: &#39;updateUser&#39;
          *              }
          *          },
          *
          *          updateUser: function(button) {
-         *              console.log('clicked the Save button');
+         *              console.log(&#39;clicked the Save button&#39;);
          *          }
          *      });
          *
@@ -98,13 +98,13 @@ Ext.define('Ext.app.BaseController', {
          *
          * To listen to &quot;bar&quot; events fired by a controller with id=&quot;foo&quot;:
          *
-         *      Ext.define('AM.controller.Users', {
-         *          extend: 'Ext.app.Controller',
+         *      Ext.define(&#39;AM.controller.Users&#39;, {
+         *          extend: &#39;Ext.app.Controller&#39;,
          *
          *          listen: {
          *              controller: {
-         *                  '#foo': {
-         *                      bar: 'onFooBar'
+         *                  &#39;#foo&#39;: {
+         *                      bar: &#39;onFooBar&#39;
          *                  }
          *              }
          *          }
@@ -113,18 +113,18 @@ Ext.define('Ext.app.BaseController', {
          * To listen to &quot;bar&quot; events fired by any controller, and &quot;baz&quot; events
          * fired by Store with storeId=&quot;baz&quot;:
          *
-         *      Ext.define('AM.controller.Users', {
-         *          extend: 'Ext.app.Controller',
+         *      Ext.define(&#39;AM.controller.Users&#39;, {
+         *          extend: &#39;Ext.app.Controller&#39;,
          *
          *          listen: {
          *              controller: {
-         *                  '*': {
-         *                      bar: 'onAnyControllerBar'
+         *                  &#39;*&#39;: {
+         *                      bar: &#39;onAnyControllerBar&#39;
          *                  }
          *              },
          *              store: {
-         *                  '#baz': {
-         *                      baz: 'onStoreBaz'
+         *                  &#39;#baz&#39;: {
+         *                      baz: &#39;onStoreBaz&#39;
          *                  }
          *              }
          *          }
@@ -133,25 +133,25 @@ Ext.define('Ext.app.BaseController', {
          * To listen to &quot;idle&quot; events fired by {@link Ext.GlobalEvents} when other event
          * processing is complete and Ext JS is about to return control to the browser:
          *
-         *      Ext.define('AM.controller.Users', {
-         *          extend: 'Ext.app.Controller',
+         *      Ext.define(&#39;AM.controller.Users&#39;, {
+         *          extend: &#39;Ext.app.Controller&#39;,
          *
          *          listen: {
          *              global: {            // Global events are always fired
-         *                  idle: 'onIdle'   // from the same object, so there
+         *                  idle: &#39;onIdle&#39;   // from the same object, so there
          *              }                    // are no selectors
          *          }
          *      });
          *
          * As this relates to components, the following example:
          *
-         *      Ext.define('AM.controller.Users', {
-         *          extend: 'Ext.app.Controller',
+         *      Ext.define(&#39;AM.controller.Users&#39;, {
+         *          extend: &#39;Ext.app.Controller&#39;,
          *
          *          listen: {
          *              component: {
-         *                  'useredit button[action=save]': {
-         *                      click: 'updateUser'
+         *                  &#39;useredit button[action=save]&#39;: {
+         *                      click: &#39;updateUser&#39;
          *                  }
          *              }
          *          }
@@ -159,12 +159,12 @@ Ext.define('Ext.app.BaseController', {
          *
          * Is equivalent to:
          *
-         *      Ext.define('AM.controller.Users', {
-         *          extend: 'Ext.app.Controller',
+         *      Ext.define(&#39;AM.controller.Users&#39;, {
+         *          extend: &#39;Ext.app.Controller&#39;,
          *
          *          control: {
-         *              'useredit button[action=save]': {
-         *                  click: 'updateUser'
+         *              &#39;useredit button[action=save]&#39;: {
+         *                  click: &#39;updateUser&#39;
          *              }
          *          }
          *      });
@@ -172,29 +172,29 @@ Ext.define('Ext.app.BaseController', {
          * Of course, these can all be combined in a single call and used instead of
          * `control`, like so:
          *
-         *      Ext.define('AM.controller.Users', {
-         *          extend: 'Ext.app.Controller',
+         *      Ext.define(&#39;AM.controller.Users&#39;, {
+         *          extend: &#39;Ext.app.Controller&#39;,
          *
          *          listen: {
          *              global: {
-         *                  idle: 'onIdle'
+         *                  idle: &#39;onIdle&#39;
          *              },
          *              controller: {
-         *                  '*': {
-         *                      foobar: 'onAnyFooBar'
+         *                  &#39;*&#39;: {
+         *                      foobar: &#39;onAnyFooBar&#39;
          *                  },
-         *                  '#foo': {
-         *                      bar: 'onFooBar'
+         *                  &#39;#foo&#39;: {
+         *                      bar: &#39;onFooBar&#39;
          *                  }
          *              },
          *              component: {
-         *                  'useredit button[action=save]': {
-         *                      click: 'updateUser'
+         *                  &#39;useredit button[action=save]&#39;: {
+         *                      click: &#39;updateUser&#39;
          *                  }
          *              },
          *              store: {
-         *                  '#qux': {
-         *                      load: 'onQuxLoad'
+         *                  &#39;#qux&#39;: {
+         *                      load: &#39;onQuxLoad&#39;
          *                  }
          *              }
          *          }
@@ -209,8 +209,8 @@ Ext.define('Ext.app.BaseController', {
          * An object of routes to handle hash changes. A route can be defined in a simple way:
          *
          *     routes : {
-         *         'foo/bar'  : 'handleFoo',
-         *         'user/:id' : 'showUser'
+         *         &#39;foo/bar&#39;  : &#39;handleFoo&#39;,
+         *         &#39;user/:id&#39; : &#39;showUser&#39;
          *     }
          *
          * Where the property is the hash (which can accept a parameter defined by a colon) and the value
@@ -220,17 +220,17 @@ Ext.define('Ext.app.BaseController', {
          * routes are found.
          *
          *     Ext.application({
-         *         name: 'MyApp',
+         *         name: &#39;MyApp&#39;,
          *         listen: {
          *             controller: {
-         *                 '#': {
-         *                     unmatchedroute: 'onUnmatchedRoute'
+         *                 &#39;#&#39;: {
+         *                     unmatchedroute: &#39;onUnmatchedRoute&#39;
          *                 }
          *             }
          *         },
          *
          *         onUnmatchedRoute: function(hash) {
-         *             console.log('Unmatched', hash);
+         *             console.log(&#39;Unmatched&#39;, hash);
          *             // Do something...
          *         }
          *     });
@@ -239,15 +239,15 @@ Ext.define('Ext.app.BaseController', {
          * specify your own RegEx for the parameter:
          *
          *     routes : {
-         *         'foo/bar'  : {
-         *             action  : 'handleFoo',
-         *             before  : 'beforeHandleFoo'
+         *         &#39;foo/bar&#39;  : {
+         *             action  : &#39;handleFoo&#39;,
+         *             before  : &#39;beforeHandleFoo&#39;
          *         },
-         *         'user/:id' : {
-         *             action     : 'showUser',
-         *             before     : 'beforeShowUser',
+         *         &#39;user/:id&#39; : {
+         *             action     : &#39;showUser&#39;,
+         *             before     : &#39;beforeShowUser&#39;,
          *             conditions : {
-         *                 ':id' : '([0-9]+)'
+         *                 &#39;:id&#39; : &#39;([0-9]+)&#39;
          *             }
          *         }
          *     }
@@ -269,7 +269,7 @@ Ext.define('Ext.app.BaseController', {
          *     beforeShowUser : function(id, action) {
          *         //allows for async process like an Ajax
          *         Ext.Ajax.request({
-         *             url     : 'foo.php',
+         *             url     : &#39;foo.php&#39;,
          *             success : function() {
          *                 //will not allow the showUser method to be executed but will continue other queued actions.
          *                 action.stop();
@@ -293,11 +293,11 @@ Ext.define('Ext.app.BaseController', {
          * a parameter optional and case-insensitive:
          *
          *     routes : {
-         *         'user:id' : {
-         *             action     : 'showUser',
-         *             before     : 'beforeShowUser',
+         *         &#39;user:id&#39; : {
+         *             action     : &#39;showUser&#39;,
+         *             before     : &#39;beforeShowUser&#39;,
          *             conditions : {
-         *                 ':id' : '(?:(?:\/){1}([%a-z0-9_,\s\-]+))?'
+         *                 &#39;:id&#39; : &#39;(?:(?:\/){1}([%a-z0-9_,\s\-]+))?&#39;
          *             }
          *         }
          *     }
@@ -400,8 +400,8 @@ Ext.define('Ext.app.BaseController', {
                 }
                 //&lt;debug&gt;
                 else if (befores[method]) {
-                    Ext.log.warn('You have a before method configured on a route (&quot;' + url + '&quot;) and in the before object property also in the &quot;' +
-                        me.self.getName() + '&quot; controller. Will use the before method in the route and disregard the one in the before property.');
+                    Ext.log.warn(&#39;You have a before method configured on a route (&quot;&#39; + url + &#39;&quot;) and in the before object property also in the &quot;&#39; +
+                        me.self.getName() + &#39;&quot; controller. Will use the before method in the route and disregard the one in the before property.&#39;);
                 }
                 //&lt;/debug&gt;
 
@@ -422,23 +422,23 @@ Ext.define('Ext.app.BaseController', {
      * In the following example the `updateUser` function is mapped to to the `click`
      * event on a button component, which is a child of the `useredit` component.
      *
-     *      Ext.define('AM.controller.Users', {
+     *      Ext.define(&#39;AM.controller.Users&#39;, {
      *          init: function() {
      *              this.control({
-     *                  'useredit button[action=save]': {
+     *                  &#39;useredit button[action=save]&#39;: {
      *                      click: this.updateUser
      *                  }
      *              });
      *          },
      *          
      *          updateUser: function(button) {
-     *              console.log('clicked the Save button');
+     *              console.log(&#39;clicked the Save button&#39;);
      *          }
      *      });
      *
      * Or alternatively one call `control` with two arguments:
      *
-     *      this.control('useredit button[action=save]', {
+     *      this.control(&#39;useredit button[action=save]&#39;, {
      *          click: this.updateUser
      *      });
      *
@@ -477,11 +477,11 @@ Ext.define('Ext.app.BaseController', {
      * 
      * To listen to &quot;bar&quot; events fired by a controller with id=&quot;foo&quot;:
      *
-     *      Ext.define('AM.controller.Users', {
+     *      Ext.define(&#39;AM.controller.Users&#39;, {
      *          init: function() {
      *              this.listen({
      *                  controller: {
-     *                      '#foo': {
+     *                      &#39;#foo&#39;: {
      *                         bar: this.onFooBar
      *                      }
      *                  }
@@ -493,16 +493,16 @@ Ext.define('Ext.app.BaseController', {
      * To listen to &quot;bar&quot; events fired by any controller, and &quot;baz&quot; events
      * fired by Store with storeId=&quot;baz&quot;:
      *
-     *      Ext.define('AM.controller.Users', {
+     *      Ext.define(&#39;AM.controller.Users&#39;, {
      *          init: function() {
      *              this.listen({
      *                  controller: {
-     *                      '*': {
+     *                      &#39;*&#39;: {
      *                         bar: this.onAnyControllerBar
      *                      }
      *                  },
      *                  store: {
-     *                      '#baz': {
+     *                      &#39;#baz&#39;: {
      *                          baz: this.onStoreBaz
      *                      }
      *                  }
@@ -514,7 +514,7 @@ Ext.define('Ext.app.BaseController', {
      * To listen to &quot;idle&quot; events fired by {@link Ext.GlobalEvents} when other event
      * processing is complete and Ext JS is about to return control to the browser:
      *
-     *      Ext.define('AM.controller.Users', {
+     *      Ext.define(&#39;AM.controller.Users&#39;, {
      *          init: function() {
      *              this.listen({
      *                  global: {               // Global events are always fired
@@ -526,11 +526,11 @@ Ext.define('Ext.app.BaseController', {
      * 
      * As this relates to components, the following example:
      *
-     *      Ext.define('AM.controller.Users', {
+     *      Ext.define(&#39;AM.controller.Users&#39;, {
      *          init: function() {
      *              this.listen({
      *                  component: {
-     *                      'useredit button[action=save]': {
+     *                      &#39;useredit button[action=save]&#39;: {
      *                         click: this.updateUser
      *                      }
      *                  }
@@ -541,10 +541,10 @@ Ext.define('Ext.app.BaseController', {
      * 
      * Is equivalent to:
      *
-     *      Ext.define('AM.controller.Users', {
+     *      Ext.define(&#39;AM.controller.Users&#39;, {
      *          init: function() {
      *              this.control({
-     *                  'useredit button[action=save]': {
+     *                  &#39;useredit button[action=save]&#39;: {
      *                     click: this.updateUser
      *                  }
      *              });
@@ -555,27 +555,27 @@ Ext.define('Ext.app.BaseController', {
      * Of course, these can all be combined in a single call and used instead of
      * `control`, like so:
      *
-     *      Ext.define('AM.controller.Users', {
+     *      Ext.define(&#39;AM.controller.Users&#39;, {
      *          init: function() {
      *              this.listen({
      *                  global: {
      *                      idle: this.onIdle
      *                  },
      *                  controller: {
-     *                      '*': {
+     *                      &#39;*&#39;: {
      *                         foobar: this.onAnyFooBar
      *                      },
-     *                      '#foo': {
+     *                      &#39;#foo&#39;: {
      *                         bar: this.onFooBar
      *                      }
      *                  },
      *                  component: {
-     *                      'useredit button[action=save]': {
+     *                      &#39;useredit button[action=save]&#39;: {
      *                         click: this.updateUser
      *                      }
      *                  },
      *                  store: {
-     *                      '#qux': {
+     *                      &#39;#qux&#39;: {
      *                          load: this.onQuxLoad
      *                      }
      *                  }
@@ -610,7 +610,7 @@ Ext.define('Ext.app.BaseController', {
      * 
      * @param {String/Ext.data.Model} token The token to redirect to.  Can be either a String
      * or a {@link Ext.data.Model Model} instance - if a Model instance is passed it will
-     * internally be converted into a String token by calling the Model's
+     * internally be converted into a String token by calling the Model&#39;s
      * {@link Ext.data.Model#toUrl toUrl} function.
      *
      * @param {Boolean} force Force the update of the hash regardless of the current token.

@@ -24,9 +24,9 @@
  * 
  * @private
  */
-Ext.define('Ext.dom.Shadow', {
-    extend: 'Ext.dom.Underlay',
-    alternateClassName: 'Ext.Shadow',
+Ext.define(&#39;Ext.dom.Shadow&#39;, {
+    extend: &#39;Ext.dom.Underlay&#39;,
+    alternateClassName: &#39;Ext.Shadow&#39;,
 
 <span id='Ext-dom-Shadow-cfg-mode'>    /**
 </span>     * @cfg {String} mode
@@ -36,7 +36,7 @@ Ext.define('Ext.dom.Shadow', {
      * - frame : Shadow displays equally on all four sides
      * - drop : Traditional bottom-right drop shadow
      */
-    mode: 'drop',
+    mode: &#39;drop&#39;,
 
 <span id='Ext-dom-Shadow-cfg-offset'>    /**
 </span>     * @cfg {Number} offset
@@ -44,7 +44,7 @@ Ext.define('Ext.dom.Shadow', {
      */
     offset: 4,
 
-<span id='Ext-dom-Shadow-property-cls'>    cls: Ext.baseCSSPrefix + (!Ext.supports.CSS3BoxShadow ? 'ie' : 'css') + '-shadow',
+<span id='Ext-dom-Shadow-property-cls'>    cls: Ext.baseCSSPrefix + (!Ext.supports.CSS3BoxShadow ? &#39;ie&#39; : &#39;css&#39;) + &#39;-shadow&#39;,
 </span>
 <span id='Ext-dom-Shadow-method-constructor'>    /**
 </span>     * Creates new Shadow.
@@ -58,7 +58,7 @@ Ext.define('Ext.dom.Shadow', {
 
         me.elementConfig = {
             cls: me.cls,
-            role: 'presentation'
+            role: &#39;presentation&#39;
         };
 
         offset = me.offset;
@@ -189,9 +189,9 @@ Ext.define('Ext.dom.Shadow', {
             mode = me.mode.toLowerCase();
 
         // There are only offsets if the shadow element is present.
-        if (me.el &amp;&amp; mode !== 'frame') {
+        if (me.el &amp;&amp; mode !== &#39;frame&#39;) {
             result[0] = 0;
-            if (mode == 'drop') {
+            if (mode == &#39;drop&#39;) {
                 result[3] = 0;
             }
         }
@@ -204,17 +204,17 @@ Ext.define('Ext.dom.Shadow', {
      * CSS property used to set the box shadow.
      */
     boxShadowProperty: (function() {
-        var property = 'boxShadow',
+        var property = &#39;boxShadow&#39;,
             style = document.documentElement.style;
 
-        if (!('boxShadow' in style)) {
-            if ('WebkitBoxShadow' in style) {
+        if (!(&#39;boxShadow&#39; in style)) {
+            if (&#39;WebkitBoxShadow&#39; in style) {
                 // Safari prior to version 5.1 and Chrome prior to version 10
-                property = 'WebkitBoxShadow';
+                property = &#39;WebkitBoxShadow&#39;;
             }
-            else if ('MozBoxShadow' in style) {
+            else if (&#39;MozBoxShadow&#39; in style) {
                 // FF 3.5 &amp; 3.6
-                property = 'MozBoxShadow';
+                property = &#39;MozBoxShadow&#39;;
             }
         }
 
@@ -227,7 +227,7 @@ Ext.define('Ext.dom.Shadow', {
             shim = me.shim;
 
         if (Ext.supports.CSS3BoxShadow) {
-            style[me.boxShadowProperty] = '0 0 ' + (me.offset + 2) + 'px #888';
+            style[me.boxShadowProperty] = &#39;0 0 &#39; + (me.offset + 2) + &#39;px #888&#39;;
         } else {
             style.filter = &quot;progid:DXImageTransform.Microsoft.alpha(opacity=&quot; + me.opacity + &quot;) progid:DXImageTransform.Microsoft.Blur(pixelradius=&quot; + (me.offset) + &quot;)&quot;;
         }

@@ -18,16 +18,16 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-easing-BoundMomentum'>/**
 </span> * @private
  *
- * This easing is typically used for {@link Ext.scroll.Scroller}. It's a combination of
+ * This easing is typically used for {@link Ext.scroll.Scroller}. It&#39;s a combination of
  * {@link Ext.fx.easing.Momentum} and {@link Ext.fx.easing.Bounce}, which emulates deceleration when the animated element
- * is still within its boundary, then bouncing back (snapping) when it's out-of-bound.
+ * is still within its boundary, then bouncing back (snapping) when it&#39;s out-of-bound.
  */
-Ext.define('Ext.fx.easing.BoundMomentum', {
-    extend: 'Ext.fx.easing.Abstract',
+Ext.define(&#39;Ext.fx.easing.BoundMomentum&#39;, {
+    extend: &#39;Ext.fx.easing.Abstract&#39;,
 
     requires: [
-        'Ext.fx.easing.Momentum',
-        'Ext.fx.easing.Bounce'
+        &#39;Ext.fx.easing.Momentum&#39;,
+        &#39;Ext.fx.easing.Bounce&#39;
     ],
 
     config: {

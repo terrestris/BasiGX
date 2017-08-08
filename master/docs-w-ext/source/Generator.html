@@ -53,35 +53,35 @@
  * to share one {@link Ext.data.identifier.Sequential sequential} id generator, you simply
  * assign them the same id:
  *
- *     Ext.define('MyApp.data.MyModelA', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;MyApp.data.MyModelA&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         identifier: {
- *             type: 'sequential',
- *             id: 'foo'
+ *             type: &#39;sequential&#39;,
+ *             id: &#39;foo&#39;
  *         }
  *     });
  *
- *     Ext.define('MyApp.data.MyModelB', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;MyApp.data.MyModelB&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         identifier: {
- *             type: 'sequential',
- *             id: 'foo'
+ *             type: &#39;sequential&#39;,
+ *             id: &#39;foo&#39;
  *         }
  *     });
  *
  * To make this as simple as possible for generator types that are shared by many (or all)
- * Models, the Generator types (such as 'sequential' or 'uuid') are also reserved as
+ * Models, the Generator types (such as &#39;sequential&#39; or &#39;uuid&#39;) are also reserved as
  * generator ids. This is used by the {@link Ext.data.identifier.Uuid} which has an id equal
- * to its type ('uuid'). In other words, the following Models share the same generator:
+ * to its type (&#39;uuid&#39;). In other words, the following Models share the same generator:
  *
- *     Ext.define('MyApp.data.MyModelX', {
- *         extend: 'Ext.data.Model',
- *         identifier: 'uuid'
+ *     Ext.define(&#39;MyApp.data.MyModelX&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         identifier: &#39;uuid&#39;
  *     });
  *
- *     Ext.define('MyApp.data.MyModelY', {
- *         extend: 'Ext.data.Model',
- *         identifier: 'uuid'
+ *     Ext.define(&#39;MyApp.data.MyModelY&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         identifier: &#39;uuid&#39;
  *     });
  *
  * This can be overridden (by specifying the id explicitly), but there is no particularly
@@ -93,9 +93,9 @@
  *
  * To register an id generator type, a derived class should provide an `alias` like so:
  *
- *     Ext.define('MyApp.data.identifier.Custom', {
- *         extend: 'Ext.data.identifier.Generator',
- *         alias: 'data.identifier.custom',
+ *     Ext.define(&#39;MyApp.data.identifier.Custom&#39;, {
+ *         extend: &#39;Ext.data.identifier.Generator&#39;,
+ *         alias: &#39;data.identifier.custom&#39;,
  *         config: {
  *             configProp: 42 // some config property w/default value
  *         }
@@ -107,16 +107,16 @@
  *
  * Using the custom id generator is then straightforward:
  *
- *     Ext.define('MyApp.data.MyModel', {
- *         extend: 'Ext.data.Model',
- *         identifier: 'custom'
+ *     Ext.define(&#39;MyApp.data.MyModel&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         identifier: &#39;custom&#39;
  *     });
  *     // or...
  *
- *     Ext.define('MyApp.data.MyModel', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;MyApp.data.MyModel&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         identifier: {
- *             type: 'custom',
+ *             type: &#39;custom&#39;,
  *             configProp: value
  *         }
  *     });
@@ -125,41 +125,41 @@
  * to unpredictable results unless all configurations match (which is also redundant). In
  * such cases, a custom generator with a default id is the best approach.
  *
- *     Ext.define('MyApp.data.identifier.Custom', {
- *         extend: 'Ext.data.identifier.Sequential',
- *         alias: 'data.identifier.custom',
+ *     Ext.define(&#39;MyApp.data.identifier.Custom&#39;, {
+ *         extend: &#39;Ext.data.identifier.Sequential&#39;,
+ *         alias: &#39;data.identifier.custom&#39;,
  *         
  *         config: {
- *             id: 'custom',
- *             prefix: 'ID_',
+ *             id: &#39;custom&#39;,
+ *             prefix: &#39;ID_&#39;,
  *             seed: 1000
  *         }
  *     });
  *
- *     Ext.define('MyApp.data.MyModelX', {
- *         extend: 'Ext.data.Model',
- *         identifier: 'custom'
+ *     Ext.define(&#39;MyApp.data.MyModelX&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         identifier: &#39;custom&#39;
  *     });
  *
- *     Ext.define('MyApp.data.MyModelY', {
- *         extend: 'Ext.data.Model',
- *         identifier: 'custom'
+ *     Ext.define(&#39;MyApp.data.MyModelY&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         identifier: &#39;custom&#39;
  *     });
  *
  *     // the above models share a generator that produces ID_1000, ID_1001, etc..
  *
  */
-Ext.define('Ext.data.identifier.Generator', {
-<span id='Ext-data-identifier-Generator-property-abstract'>    'abstract': true,
+Ext.define(&#39;Ext.data.identifier.Generator&#39;, {
+<span id='Ext-data-identifier-Generator-property-abstract'>    &#39;abstract&#39;: true,
 </span>
     mixins: [
-        'Ext.mixin.Factoryable'
+        &#39;Ext.mixin.Factoryable&#39;
     ],
 
-<span id='Ext-data-identifier-Generator-property-factoryConfig'>    alias: 'data.identifier.default',  // this is used by Factoryable
+<span id='Ext-data-identifier-Generator-property-factoryConfig'>    alias: &#39;data.identifier.default&#39;,  // this is used by Factoryable
 </span>
     factoryConfig: {
-        defaultType: 'sequential'  // this is not a suitable type to create
+        defaultType: &#39;sequential&#39;  // this is not a suitable type to create
     },
 
 <span id='Ext-data-identifier-Generator-property-isGenerator'>    /**

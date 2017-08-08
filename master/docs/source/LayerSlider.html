@@ -34,23 +34,23 @@
 </span> * Layer Slider
  *
  * Used to change opacity on multiple layers by fading them in and out
- * one by one. Can be useful e.g. to slide 'through the time'
+ * one by one. Can be useful e.g. to slide &#39;through the time&#39;
  *
  * Example usage:
  *
  * {
- *      xtype: 'basigx-slider-layer',
+ *      xtype: &#39;basigx-slider-layer&#39;,
  *      layerNames: [
- *           'Luftbilder 1936',
- *           'Luftbilder 1971',
- *           'Luftbilder 1999'
+ *           &#39;Luftbilder 1936&#39;,
+ *           &#39;Luftbilder 1971&#39;,
+ *           &#39;Luftbilder 1999&#39;
  *      ],
  *      sliderTitles: [
- *           '1936',
- *           '1971',
- *           '1999'
+ *           &#39;1936&#39;,
+ *           &#39;1971&#39;,
+ *           &#39;1999&#39;
  *      ],
- *      topTitle: 'Luftbilder',
+ *      topTitle: &#39;Luftbilder&#39;,
  *      addOffState: false
  * }
  *
@@ -61,12 +61,12 @@
  *
  * @class BasiGX.view.container.LayerSlider
  */
-Ext.define('BasiGX.view.container.LayerSlider', {
-    extend: 'Ext.container.Container',
-    xtype: 'basigx-slider-layer',
+Ext.define(&#39;BasiGX.view.container.LayerSlider&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
+    xtype: &#39;basigx-slider-layer&#39;,
 
     requires: [
-        'Ext.slider.Single'
+        &#39;Ext.slider.Single&#39;
     ],
 
 <span id='BasiGX-view-container-LayerSlider-property-viewModel'>    /**
@@ -74,10 +74,10 @@ Ext.define('BasiGX.view.container.LayerSlider', {
      */
     viewModel: {
         data: {
-            disabeldLabelHtml: 'Aus',
-            documentation: '&lt;h2&gt;LayerSlider&lt;/h2&gt;• Bewegen Sie den ' +
-                'Schieberegler, um die Darstellung von einem Kartenthem ' +
-                'zum nächsten in einem weichen Übergang darzustellen'
+            disabeldLabelHtml: &#39;Aus&#39;,
+            documentation: &#39;&lt;h2&gt;LayerSlider&lt;/h2&gt;• Bewegen Sie den &#39; +
+                &#39;Schieberegler, um die Darstellung von einem Kartenthem &#39; +
+                &#39;zum nächsten in einem weichen Übergang darzustellen&#39;
         }
     },
 
@@ -127,7 +127,7 @@ Ext.define('BasiGX.view.container.LayerSlider', {
 <span id='BasiGX-view-container-LayerSlider-property-cls'>    /**
 </span>     * the cls
      */
-    cls: 'layerSlider',
+    cls: &#39;layerSlider&#39;,
 
 <span id='BasiGX-view-container-LayerSlider-method-initComponent'>    /**
 </span>     *
@@ -141,54 +141,54 @@ Ext.define('BasiGX.view.container.LayerSlider', {
         me.layers = [];
 
         if (Ext.isEmpty(me.layerNames) || me.layerNames.length &lt; 2) {
-            Ext.log.error('Not enough layers given to slider!');
+            Ext.log.error(&#39;Not enough layers given to slider!&#39;);
         } else {
             Ext.each(me.layerNames, function(ln) {
                 me.addLayerByName(map.getLayers().getArray(), ln);
             });
         }
         if (me.layerNames.length !== me.layers.length) {
-            Ext.log.error('Could not detect all layers by name!');
+            Ext.log.error(&#39;Could not detect all layers by name!&#39;);
         }
 
         // set the colspan for slider
         me.config.colspan = me.addOffState ?
             me.layerNames.length + 1 : me.layerNames.length;
-        var slider = Ext.create('Ext.slider.Single', me.sliderConfig);
+        var slider = Ext.create(&#39;Ext.slider.Single&#39;, me.sliderConfig);
 
         if (!Ext.isEmpty(me.topTitle)) {
             var titleContainer = {
-                xtype: 'container',
-                cls: 'sliderTopTitle',
+                xtype: &#39;container&#39;,
+                cls: &#39;sliderTopTitle&#39;,
                 html: me.topTitle
             };
             items.push(titleContainer);
         }
 
         var labelContainer = {
-            xtype: 'container',
+            xtype: &#39;container&#39;,
             layout: {
-                type: 'hbox',
-                align: 'stretch'
+                type: &#39;hbox&#39;,
+                align: &#39;stretch&#39;
             },
             items: labelItems
         };
         items.push(labelContainer);
 
         var sliderContainer = {
-            xtype: 'container',
+            xtype: &#39;container&#39;,
             layout: {
-                type: 'hbox',
-                align: 'stretch'
+                type: &#39;hbox&#39;,
+                align: &#39;stretch&#39;
             },
             items: [
                 {
-                    xtype: 'container',
+                    xtype: &#39;container&#39;,
                     flex: 1
                 },
                 slider,
                 {
-                    xtype: 'container',
+                    xtype: &#39;container&#39;,
                     flex: 1
                 }
             ]
@@ -199,14 +199,14 @@ Ext.define('BasiGX.view.container.LayerSlider', {
 
         me.callParent();
 
-        slider.on('change', me.changeHandler);
+        slider.on(&#39;change&#39;, me.changeHandler);
 
         if (me.initialActiveLayerIdx &gt; 0) {
             var sliderVal = slider.maxValue / (
                 me.addOffState ? me.layers.length : me.layers.length - 1) *
                 me.initialActiveLayerIdx;
             slider.setValue(sliderVal);
-            slider.fireEvent('change', slider, sliderVal);
+            slider.fireEvent(&#39;change&#39;, slider, sliderVal);
         }
     },
 
@@ -223,22 +223,22 @@ Ext.define('BasiGX.view.container.LayerSlider', {
             // add the starter
             labelItems.push(
                 {
-                    xtype: 'container',
+                    xtype: &#39;container&#39;,
                     bind: {
-                        html: '{disabeldLabelHtml}'
+                        html: &#39;{disabeldLabelHtml}&#39;
                     },
                     flex: 1,
-                    cls: 'sliderLabel'
+                    cls: &#39;sliderLabel&#39;
                 }
             );
         }
 
         Ext.each(me.sliderTitles, function(title) {
             labelItems.push({
-                xtype: 'container',
+                xtype: &#39;container&#39;,
                 html: title,
                 flex: 1,
-                cls: 'sliderLabel'
+                cls: &#39;sliderLabel&#39;
             });
         });
         return labelItems;
@@ -255,17 +255,17 @@ Ext.define('BasiGX.view.container.LayerSlider', {
     addLayerByName: function(collection, ln) {
         var me = this;
         Ext.each(collection, function(layer, idx) {
-            if (layer.get('name') === ln) {
+            if (layer.get(&#39;name&#39;) === ln) {
                 if (!me.addOffState &amp;&amp; idx === 0) {
                     // we have to set the first layer initially full visible
-                    layer.set('opacity', 1);
+                    layer.set(&#39;opacity&#39;, 1);
                     layer.setVisible(true);
                 } else {
                     // with addOffState, first layer must be opaque
-                    layer.set('opacity', 0);
+                    layer.set(&#39;opacity&#39;, 0);
                     layer.setVisible(false);
                 }
-                layer.set('isSliderLayer', true);
+                layer.set(&#39;isSliderLayer&#39;, true);
                 me.layers.push(layer);
                 return false;
             }
@@ -285,7 +285,7 @@ Ext.define('BasiGX.view.container.LayerSlider', {
      *     `minValue` and `maxValue` of the slider.
      */
     changeHandler: function(slider, value) {
-        var sliderContainer = this.up('basigx-slider-layer');
+        var sliderContainer = this.up(&#39;basigx-slider-layer&#39;);
         var layers = sliderContainer.layers;
         var numLayers = layers.length;
         var swapRange = slider.maxValue / (
@@ -310,17 +310,17 @@ Ext.define('BasiGX.view.container.LayerSlider', {
             value = value - swapRange * idx;
 
             if (!sliderContainer.addOffState) {
-                sliderContainer.layers[idx].set('opacity', Math.abs(1 -
+                sliderContainer.layers[idx].set(&#39;opacity&#39;, Math.abs(1 -
                         (value * layers.length / 100)));
-                sliderContainer.layers[idx + 1].set('opacity',
+                sliderContainer.layers[idx + 1].set(&#39;opacity&#39;,
                     value * layers.length / 100);
 
                 sliderContainer.layers[idx].setVisible(true);
                 sliderContainer.layers[idx + 1].setVisible(true);
             } else {
-                sliderContainer.layers[idx - 1].set('opacity', Math.abs(1 -
+                sliderContainer.layers[idx - 1].set(&#39;opacity&#39;, Math.abs(1 -
                         (value * layers.length / 100)));
-                sliderContainer.layers[idx].set('opacity',
+                sliderContainer.layers[idx].set(&#39;opacity&#39;,
                     value * layers.length / 100);
 
                 sliderContainer.layers[idx - 1].setVisible(true);
@@ -329,7 +329,7 @@ Ext.define('BasiGX.view.container.LayerSlider', {
         } else {
             // we are on the first slide part and have an offState,
             // just fade in the first layer
-            sliderContainer.layers[idx].set('opacity',
+            sliderContainer.layers[idx].set(&#39;opacity&#39;,
                 value * layers.length / 100);
             sliderContainer.layers[idx].setVisible(true);
         }

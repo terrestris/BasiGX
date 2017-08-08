@@ -19,16 +19,16 @@
 </span> * Given a component hierarchy of this:
  *
  *      {
- *          xtype: 'panel',
- *          id: 'ContainerA',
- *          layout: 'hbox',
+ *          xtype: &#39;panel&#39;,
+ *          id: &#39;ContainerA&#39;,
+ *          layout: &#39;hbox&#39;,
  *          renderTo: Ext.getBody(),
  *          items: [
  *              {
- *                  id: 'ContainerB',
- *                  xtype: 'container',
+ *                  id: &#39;ContainerB&#39;,
+ *                  xtype: &#39;container&#39;,
  *                  items: [
- *                      { id: 'ComponentA' }
+ *                      { id: &#39;ComponentA&#39; }
  *                  ]
  *              }
  *          ]
@@ -36,7 +36,7 @@
  *
  * The rendering of the above proceeds roughly like this:
  *
- *  - ContainerA's initComponent calls #render passing the `renderTo` property as the
+ *  - ContainerA&#39;s initComponent calls #render passing the `renderTo` property as the
  *    container argument.
  *  - `render` calls the `getRenderTree` method to get a complete {@link Ext.dom.Helper} spec.
  *  - `getRenderTree` fires the &quot;beforerender&quot; event and calls the #beforeRender
@@ -52,89 +52,89 @@
  *  - The #setupRenderTpl calls traverse from components to their {@link Ext.layout.Layout}
  *    object.
  *  - When a container is rendered, it also has a `renderTpl`. This is processed when the
- *    `renderContainer` method is called in the component's `renderTpl`. This call goes to
+ *    `renderContainer` method is called in the component&#39;s `renderTpl`. This call goes to
  *    Ext.layout.container.Container#doRenderContainer. This method repeats this
  *    process for all components in the container.
- *  - After the top-most component's markup is generated and placed in to the DOM, the next
+ *  - After the top-most component&#39;s markup is generated and placed in to the DOM, the next
  *    step is to link elements to their components and finish calling the component methods
  *    `onRender` and `afterRender` as well as fire the corresponding events.
  *  - The first step in this is to call #finishRender. This method descends the
  *    component hierarchy and calls `onRender` and fires the `render` event. These calls
  *    are delivered top-down to approximate the timing of these calls/events from previous
  *    versions.
- *  - During the pass, the component's `el` is set. Likewise, the `renderSelectors` and
- *    `childEls` are applied to capture references to the component's elements.
+ *  - During the pass, the component&#39;s `el` is set. Likewise, the `renderSelectors` and
+ *    `childEls` are applied to capture references to the component&#39;s elements.
  *  - These calls are also made on the {@link Ext.layout.container.Container} layout to
  *    capture its elements. Both of these classes use {@link Ext.util.ElementContainer} to
  *    handle `childEls` processing.
  *
  * @private
  */
-Ext.define('Ext.util.Renderable', {
-<span id='Ext-util-Renderable-property-mixinId'>    mixinId: 'renderable',
+Ext.define(&#39;Ext.util.Renderable&#39;, {
+<span id='Ext-util-Renderable-property-mixinId'>    mixinId: &#39;renderable&#39;,
 </span>
     requires: [
-        'Ext.dom.Element'
+        &#39;Ext.dom.Element&#39;
     ],
 
-<span id='Ext-util-Renderable-property-frameCls'>    frameCls: Ext.baseCSSPrefix + 'frame',
+<span id='Ext-util-Renderable-property-frameCls'>    frameCls: Ext.baseCSSPrefix + &#39;frame&#39;,
 </span>
 <span id='Ext-util-Renderable-property-frameIdRegex'>    frameIdRegex: /[\-]frame\d+[TMB][LCR]$/,
 </span>    
-<span id='Ext-util-Renderable-property-frameElNames'>    frameElNames: ['TL','TC','TR','ML','MC','MR','BL','BC','BR','Table'],
+<span id='Ext-util-Renderable-property-frameElNames'>    frameElNames: [&#39;TL&#39;,&#39;TC&#39;,&#39;TR&#39;,&#39;ML&#39;,&#39;MC&#39;,&#39;MR&#39;,&#39;BL&#39;,&#39;BC&#39;,&#39;BR&#39;,&#39;Table&#39;],
 </span>
 <span id='Ext-util-Renderable-property-frameTpl'>    frameTpl: [
-</span>        '&lt;tpl if=&quot;hasTabGuard&quot;&gt;{% this.renderTabGuard(out, values, \'before\'); %}&lt;/tpl&gt;',
-        '&lt;tpl if=&quot;top&quot;&gt;',
-            '&lt;tpl if=&quot;left&quot;&gt;&lt;div id=&quot;{fgid}TL&quot; data-ref=&quot;frameTL&quot; class=&quot;{frameCls}-tl {baseCls}-tl {baseCls}-{ui}-tl&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-tl&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/tpl&gt;',
-                '&lt;tpl if=&quot;right&quot;&gt;&lt;div id=&quot;{fgid}TR&quot; data-ref=&quot;frameTR&quot; class=&quot;{frameCls}-tr {baseCls}-tr {baseCls}-{ui}-tr&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-tr&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/tpl&gt;',
-                    '&lt;div id=&quot;{fgid}TC&quot; data-ref=&quot;frameTC&quot; class=&quot;{frameCls}-tc {baseCls}-tc {baseCls}-{ui}-tc&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-tc&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;',
-                '&lt;tpl if=&quot;right&quot;&gt;&lt;/div&gt;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;left&quot;&gt;&lt;/div&gt;&lt;/tpl&gt;',
-        '&lt;/tpl&gt;',
-        '&lt;tpl if=&quot;left&quot;&gt;&lt;div id=&quot;{fgid}ML&quot; data-ref=&quot;frameML&quot; class=&quot;{frameCls}-ml {baseCls}-ml {baseCls}-{ui}-ml&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-ml&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;right&quot;&gt;&lt;div id=&quot;{fgid}MR&quot; data-ref=&quot;frameMR&quot; class=&quot;{frameCls}-mr {baseCls}-mr {baseCls}-{ui}-mr&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-mr&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/tpl&gt;',
-                '&lt;div id=&quot;{fgid}Body&quot; data-ref=&quot;frameBody&quot; class=&quot;{frameBodyCls} {frameCls}-mc {baseCls}-mc {baseCls}-{ui}-mc&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-mc&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;',
-                    '{%this.applyRenderTpl(out, values)%}',
-                '&lt;/div&gt;',
-            '&lt;tpl if=&quot;right&quot;&gt;&lt;/div&gt;&lt;/tpl&gt;',
-        '&lt;tpl if=&quot;left&quot;&gt;&lt;/div&gt;&lt;/tpl&gt;',
-        '&lt;tpl if=&quot;bottom&quot;&gt;',
-            '&lt;tpl if=&quot;left&quot;&gt;&lt;div id=&quot;{fgid}BL&quot; data-ref=&quot;frameBL&quot; class=&quot;{frameCls}-bl {baseCls}-bl {baseCls}-{ui}-bl&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-bl&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/tpl&gt;',
-                '&lt;tpl if=&quot;right&quot;&gt;&lt;div id=&quot;{fgid}BR&quot; data-ref=&quot;frameBR&quot; class=&quot;{frameCls}-br {baseCls}-br {baseCls}-{ui}-br&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-br&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/tpl&gt;',
-                    '&lt;div id=&quot;{fgid}BC&quot; data-ref=&quot;frameBC&quot; class=&quot;{frameCls}-bc {baseCls}-bc {baseCls}-{ui}-bc&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-bc&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;',
-                '&lt;tpl if=&quot;right&quot;&gt;&lt;/div&gt;&lt;/tpl&gt;',
-            '&lt;tpl if=&quot;left&quot;&gt;&lt;/div&gt;&lt;/tpl&gt;',
-        '&lt;/tpl&gt;',
-        '&lt;tpl if=&quot;hasTabGuard&quot;&gt;{% this.renderTabGuard(out, values, \'after\'); %}&lt;/tpl&gt;'
+</span>        &#39;&lt;tpl if=&quot;hasTabGuard&quot;&gt;{% this.renderTabGuard(out, values, \&#39;before\&#39;); %}&lt;/tpl&gt;&#39;,
+        &#39;&lt;tpl if=&quot;top&quot;&gt;&#39;,
+            &#39;&lt;tpl if=&quot;left&quot;&gt;&lt;div id=&quot;{fgid}TL&quot; data-ref=&quot;frameTL&quot; class=&quot;{frameCls}-tl {baseCls}-tl {baseCls}-{ui}-tl&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-tl&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/tpl&gt;&#39;,
+                &#39;&lt;tpl if=&quot;right&quot;&gt;&lt;div id=&quot;{fgid}TR&quot; data-ref=&quot;frameTR&quot; class=&quot;{frameCls}-tr {baseCls}-tr {baseCls}-{ui}-tr&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-tr&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/tpl&gt;&#39;,
+                    &#39;&lt;div id=&quot;{fgid}TC&quot; data-ref=&quot;frameTC&quot; class=&quot;{frameCls}-tc {baseCls}-tc {baseCls}-{ui}-tc&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-tc&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&#39;,
+                &#39;&lt;tpl if=&quot;right&quot;&gt;&lt;/div&gt;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;left&quot;&gt;&lt;/div&gt;&lt;/tpl&gt;&#39;,
+        &#39;&lt;/tpl&gt;&#39;,
+        &#39;&lt;tpl if=&quot;left&quot;&gt;&lt;div id=&quot;{fgid}ML&quot; data-ref=&quot;frameML&quot; class=&quot;{frameCls}-ml {baseCls}-ml {baseCls}-{ui}-ml&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-ml&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;right&quot;&gt;&lt;div id=&quot;{fgid}MR&quot; data-ref=&quot;frameMR&quot; class=&quot;{frameCls}-mr {baseCls}-mr {baseCls}-{ui}-mr&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-mr&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/tpl&gt;&#39;,
+                &#39;&lt;div id=&quot;{fgid}Body&quot; data-ref=&quot;frameBody&quot; class=&quot;{frameBodyCls} {frameCls}-mc {baseCls}-mc {baseCls}-{ui}-mc&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-mc&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&#39;,
+                    &#39;{%this.applyRenderTpl(out, values)%}&#39;,
+                &#39;&lt;/div&gt;&#39;,
+            &#39;&lt;tpl if=&quot;right&quot;&gt;&lt;/div&gt;&lt;/tpl&gt;&#39;,
+        &#39;&lt;tpl if=&quot;left&quot;&gt;&lt;/div&gt;&lt;/tpl&gt;&#39;,
+        &#39;&lt;tpl if=&quot;bottom&quot;&gt;&#39;,
+            &#39;&lt;tpl if=&quot;left&quot;&gt;&lt;div id=&quot;{fgid}BL&quot; data-ref=&quot;frameBL&quot; class=&quot;{frameCls}-bl {baseCls}-bl {baseCls}-{ui}-bl&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-bl&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/tpl&gt;&#39;,
+                &#39;&lt;tpl if=&quot;right&quot;&gt;&lt;div id=&quot;{fgid}BR&quot; data-ref=&quot;frameBR&quot; class=&quot;{frameCls}-br {baseCls}-br {baseCls}-{ui}-br&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-br&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/tpl&gt;&#39;,
+                    &#39;&lt;div id=&quot;{fgid}BC&quot; data-ref=&quot;frameBC&quot; class=&quot;{frameCls}-bc {baseCls}-bc {baseCls}-{ui}-bc&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-bc&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&#39;,
+                &#39;&lt;tpl if=&quot;right&quot;&gt;&lt;/div&gt;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;left&quot;&gt;&lt;/div&gt;&lt;/tpl&gt;&#39;,
+        &#39;&lt;/tpl&gt;&#39;,
+        &#39;&lt;tpl if=&quot;hasTabGuard&quot;&gt;{% this.renderTabGuard(out, values, \&#39;after\&#39;); %}&lt;/tpl&gt;&#39;
     ],
 
 <span id='Ext-util-Renderable-property-frameTableTpl'>    frameTableTpl: [
-</span>        '&lt;tpl if=&quot;hasTabGuard&quot;&gt;{% this.renderTabGuard(out, values, \'before\'); %}&lt;/tpl&gt;',
-        '&lt;table id=&quot;{fgid}Table&quot; data-ref=&quot;frameTable&quot; class=&quot;{frameCls} ', Ext.baseCSSPrefix + 'table-plain&quot; cellpadding=&quot;0&quot; role=&quot;presentation&quot;&gt;',
-            '&lt;tpl if=&quot;top&quot;&gt;',
-                '&lt;tr role=&quot;presentation&quot;&gt;',
-                    '&lt;tpl if=&quot;left&quot;&gt;&lt;td id=&quot;{fgid}TL&quot; data-ref=&quot;frameTL&quot; class=&quot;{frameCls}-tl {baseCls}-tl {baseCls}-{ui}-tl&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-tl&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&lt;/tpl&gt;',
-                    '&lt;td id=&quot;{fgid}TC&quot; data-ref=&quot;frameTC&quot; class=&quot;{frameCls}-tc {baseCls}-tc {baseCls}-{ui}-tc&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-tc&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;',
-                    '&lt;tpl if=&quot;right&quot;&gt;&lt;td id=&quot;{fgid}TR&quot; data-ref=&quot;frameTR&quot; class=&quot;{frameCls}-tr {baseCls}-tr {baseCls}-{ui}-tr&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-tr&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&lt;/tpl&gt;',
-                '&lt;/tr&gt;',
-            '&lt;/tpl&gt;',
-            '&lt;tr role=&quot;presentation&quot;&gt;',
-                '&lt;tpl if=&quot;left&quot;&gt;&lt;td id=&quot;{fgid}ML&quot; data-ref=&quot;frameML&quot; class=&quot;{frameCls}-ml {baseCls}-ml {baseCls}-{ui}-ml&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-ml&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&lt;/tpl&gt;',
-                '&lt;td id=&quot;{fgid}Body&quot; data-ref=&quot;frameBody&quot; class=&quot;{frameBodyCls} {frameCls}-mc {baseCls}-mc {baseCls}-{ui}-mc&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-mc&lt;/tpl&gt;{frameElCls}&quot; style=&quot;{mcStyle}&quot; role=&quot;presentation&quot;&gt;',
-                    '{%this.applyRenderTpl(out, values)%}',
-                '&lt;/td&gt;',
-                '&lt;tpl if=&quot;right&quot;&gt;&lt;td id=&quot;{fgid}MR&quot; data-ref=&quot;frameMR&quot; class=&quot;{frameCls}-mr {baseCls}-mr {baseCls}-{ui}-mr&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-mr&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&lt;/tpl&gt;',
-            '&lt;/tr&gt;',
-            '&lt;tpl if=&quot;bottom&quot;&gt;',
-                '&lt;tr role=&quot;presentation&quot;&gt;',
-                    '&lt;tpl if=&quot;left&quot;&gt;&lt;td id=&quot;{fgid}BL&quot; data-ref=&quot;frameBL&quot; class=&quot;{frameCls}-bl {baseCls}-bl {baseCls}-{ui}-bl&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-bl&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&lt;/tpl&gt;',
-                    '&lt;td id=&quot;{fgid}BC&quot; data-ref=&quot;frameBC&quot; class=&quot;{frameCls}-bc {baseCls}-bc {baseCls}-{ui}-bc&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-bc&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;',
-                    '&lt;tpl if=&quot;right&quot;&gt;&lt;td id=&quot;{fgid}BR&quot; data-ref=&quot;frameBR&quot; class=&quot;{frameCls}-br {baseCls}-br {baseCls}-{ui}-br&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-br&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&lt;/tpl&gt;',
-                '&lt;/tr&gt;',
-            '&lt;/tpl&gt;',
-        '&lt;/table&gt;',
-        '&lt;tpl if=&quot;hasTabGuard&quot;&gt;{% this.renderTabGuard(out, values, \'after\'); %}&lt;/tpl&gt;'
+</span>        &#39;&lt;tpl if=&quot;hasTabGuard&quot;&gt;{% this.renderTabGuard(out, values, \&#39;before\&#39;); %}&lt;/tpl&gt;&#39;,
+        &#39;&lt;table id=&quot;{fgid}Table&quot; data-ref=&quot;frameTable&quot; class=&quot;{frameCls} &#39;, Ext.baseCSSPrefix + &#39;table-plain&quot; cellpadding=&quot;0&quot; role=&quot;presentation&quot;&gt;&#39;,
+            &#39;&lt;tpl if=&quot;top&quot;&gt;&#39;,
+                &#39;&lt;tr role=&quot;presentation&quot;&gt;&#39;,
+                    &#39;&lt;tpl if=&quot;left&quot;&gt;&lt;td id=&quot;{fgid}TL&quot; data-ref=&quot;frameTL&quot; class=&quot;{frameCls}-tl {baseCls}-tl {baseCls}-{ui}-tl&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-tl&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&lt;/tpl&gt;&#39;,
+                    &#39;&lt;td id=&quot;{fgid}TC&quot; data-ref=&quot;frameTC&quot; class=&quot;{frameCls}-tc {baseCls}-tc {baseCls}-{ui}-tc&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-tc&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&#39;,
+                    &#39;&lt;tpl if=&quot;right&quot;&gt;&lt;td id=&quot;{fgid}TR&quot; data-ref=&quot;frameTR&quot; class=&quot;{frameCls}-tr {baseCls}-tr {baseCls}-{ui}-tr&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-tr&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&lt;/tpl&gt;&#39;,
+                &#39;&lt;/tr&gt;&#39;,
+            &#39;&lt;/tpl&gt;&#39;,
+            &#39;&lt;tr role=&quot;presentation&quot;&gt;&#39;,
+                &#39;&lt;tpl if=&quot;left&quot;&gt;&lt;td id=&quot;{fgid}ML&quot; data-ref=&quot;frameML&quot; class=&quot;{frameCls}-ml {baseCls}-ml {baseCls}-{ui}-ml&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-ml&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&lt;/tpl&gt;&#39;,
+                &#39;&lt;td id=&quot;{fgid}Body&quot; data-ref=&quot;frameBody&quot; class=&quot;{frameBodyCls} {frameCls}-mc {baseCls}-mc {baseCls}-{ui}-mc&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-mc&lt;/tpl&gt;{frameElCls}&quot; style=&quot;{mcStyle}&quot; role=&quot;presentation&quot;&gt;&#39;,
+                    &#39;{%this.applyRenderTpl(out, values)%}&#39;,
+                &#39;&lt;/td&gt;&#39;,
+                &#39;&lt;tpl if=&quot;right&quot;&gt;&lt;td id=&quot;{fgid}MR&quot; data-ref=&quot;frameMR&quot; class=&quot;{frameCls}-mr {baseCls}-mr {baseCls}-{ui}-mr&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-mr&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&lt;/tpl&gt;&#39;,
+            &#39;&lt;/tr&gt;&#39;,
+            &#39;&lt;tpl if=&quot;bottom&quot;&gt;&#39;,
+                &#39;&lt;tr role=&quot;presentation&quot;&gt;&#39;,
+                    &#39;&lt;tpl if=&quot;left&quot;&gt;&lt;td id=&quot;{fgid}BL&quot; data-ref=&quot;frameBL&quot; class=&quot;{frameCls}-bl {baseCls}-bl {baseCls}-{ui}-bl&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-bl&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&lt;/tpl&gt;&#39;,
+                    &#39;&lt;td id=&quot;{fgid}BC&quot; data-ref=&quot;frameBC&quot; class=&quot;{frameCls}-bc {baseCls}-bc {baseCls}-{ui}-bc&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-bc&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&#39;,
+                    &#39;&lt;tpl if=&quot;right&quot;&gt;&lt;td id=&quot;{fgid}BR&quot; data-ref=&quot;frameBR&quot; class=&quot;{frameCls}-br {baseCls}-br {baseCls}-{ui}-br&lt;tpl for=&quot;uiCls&quot;&gt; {parent.baseCls}-{parent.ui}-{.}-br&lt;/tpl&gt;{frameElCls}&quot; role=&quot;presentation&quot;&gt;&lt;/td&gt;&lt;/tpl&gt;&#39;,
+                &#39;&lt;/tr&gt;&#39;,
+            &#39;&lt;/tpl&gt;&#39;,
+        &#39;&lt;/table&gt;&#39;,
+        &#39;&lt;tpl if=&quot;hasTabGuard&quot;&gt;{% this.renderTabGuard(out, values, \&#39;after\&#39;); %}&lt;/tpl&gt;&#39;
     ],
 
 <span id='Ext-util-Renderable-property-_renderState'>    /**
@@ -157,8 +157,8 @@ Ext.define('Ext.util.Renderable', {
     _renderState: 0,
     
 <span id='Ext-util-Renderable-property-ariaEl'>    /**
-</span>     * @property {String} [ariaEl='el'] The name of the Component property that holds
-     * a reference to the Element that serves as that Component's ARIA element.
+</span>     * @property {String} [ariaEl=&#39;el&#39;] The name of the Component property that holds
+     * a reference to the Element that serves as that Component&#39;s ARIA element.
      * This property will be replaced with the actual Element reference after rendering.
      *
      * Most of the simple Components will have their main element as ariaEl.
@@ -167,10 +167,10 @@ Ext.define('Ext.util.Renderable', {
      * @readonly
      * @since 6.0.0
      */
-    ariaEl: 'el',
+    ariaEl: &#39;el&#39;,
 
-<span id='Ext-util-Renderable-property-_layerCls'>    _layerCls: Ext.baseCSSPrefix + 'layer',
-</span><span id='Ext-util-Renderable-property-_fixedLayerCls'>    _fixedLayerCls: Ext.baseCSSPrefix + 'fixed-layer',
+<span id='Ext-util-Renderable-property-_layerCls'>    _layerCls: Ext.baseCSSPrefix + &#39;layer&#39;,
+</span><span id='Ext-util-Renderable-property-_fixedLayerCls'>    _fixedLayerCls: Ext.baseCSSPrefix + &#39;fixed-layer&#39;,
 </span>    
 <span id='Ext-util-Renderable-property-ariaStaticRoles'>    // Some components will have such roles that do not actively participate
 </span>    // in user interaction, and thus do not need their ARIA attributes updated
@@ -191,8 +191,8 @@ Ext.define('Ext.util.Renderable', {
         search: true,
         
         // When a role is not defined it is akin to static
-        'undefined': true,
-        'null': true
+        &#39;undefined&#39;: true,
+        &#39;null&#39;: true
     },
     
     statics: {
@@ -252,10 +252,10 @@ Ext.define('Ext.util.Renderable', {
             processRenderConfig = this.processRenderConfig,
             processOverride = function (body) {
                 if (body.beforeRenderConfig) {
-                    this.processRenderConfig(body, 'beforeRenderConfig', 1);
+                    this.processRenderConfig(body, &#39;beforeRenderConfig&#39;, 1);
                 }
                 if (body.renderConfig) {
-                    this.processRenderConfig(body, 'renderConfig', 3);
+                    this.processRenderConfig(body, &#39;renderConfig&#39;, 3);
                 }
                 override.call(this, body);
             },
@@ -267,10 +267,10 @@ Ext.define('Ext.util.Renderable', {
                 theClass.processRenderConfig = processRenderConfig;
 
                 if (classBody.beforeRenderConfig) {
-                    theClass.processRenderConfig(classBody, 'beforeRenderConfig', 1);
+                    theClass.processRenderConfig(classBody, &#39;beforeRenderConfig&#39;, 1);
                 }
                 if (classBody.renderConfig) {
-                    theClass.processRenderConfig(classBody, 'renderConfig', 3);
+                    theClass.processRenderConfig(classBody, &#39;renderConfig&#39;, 3);
                 }
             };
 
@@ -283,7 +283,7 @@ Ext.define('Ext.util.Renderable', {
 
 <span id='Ext-util-Renderable-method-afterRender'>    /**
 </span>     * Allows additional behavior after rendering is complete. At this stage, the 
-     * {@link Ext.Component Component's} {@link Ext.Component#getEl Element} will have 
+     * {@link Ext.Component Component&#39;s} {@link Ext.Component#getEl Element} will have 
      * been styled according to the configuration, will have had any configured CSS 
      * class names added, and will be in the configured visibility and configured enable 
      * state.
@@ -309,10 +309,10 @@ Ext.define('Ext.util.Renderable', {
         // to be rendered before we can put it in
         if (me.contentEl) {
             pre = Ext.baseCSSPrefix;
-            hidden = pre + 'hidden-';
+            hidden = pre + &#39;hidden-&#39;;
             contentEl = me.contentEl = Ext.get(me.contentEl);
             contentEl.component = me;
-            contentEl.removeCls([ pre + 'hidden', hidden + 'display', hidden + 'offsets' ]);
+            contentEl.removeCls([ pre + &#39;hidden&#39;, hidden + &#39;display&#39;, hidden + &#39;offsets&#39; ]);
             me.getContentTarget().appendChild(contentEl.dom);
         }
 
@@ -375,7 +375,7 @@ Ext.define('Ext.util.Renderable', {
             hasY = y !== undefined;
         }
 
-        // For floaters, calculate x and y if they aren't defined by aligning
+        // For floaters, calculate x and y if they aren&#39;t defined by aligning
         // the sized element to the center of either the container or the ownerCt
         if (me.floating &amp;&amp; !me.preventDefaultAlign &amp;&amp; (!hasX || !hasY)) {
             if (me.floatParent) {
@@ -423,7 +423,7 @@ Ext.define('Ext.util.Renderable', {
 
         me._renderState = 1;
         
-        me.ariaUsesMainElement = me.ariaEl === 'el';
+        me.ariaUsesMainElement = me.ariaEl === &#39;el&#39;;
 
         controller = me.controller;
         if (controller &amp;&amp; controller.beforeRender) {
@@ -473,7 +473,7 @@ Ext.define('Ext.util.Renderable', {
 
 <span id='Ext-util-Renderable-method-doApplyRenderTpl'>    /**
 </span>     * @private
-     * Called from the selected frame generation template to insert this Component's inner structure inside the framing structure.
+     * Called from the selected frame generation template to insert this Component&#39;s inner structure inside the framing structure.
      *
      * When framing is used, a selected frame generation template is used as the primary template of the #getElConfig instead
      * of the configured {@link Ext.Component#renderTpl renderTpl}. The renderTpl is invoked by this method which is injected into the framing template.
@@ -485,7 +485,7 @@ Ext.define('Ext.util.Renderable', {
         var me = values.$comp,
             tpl;
 
-        // Don't do this if the component is already rendered:
+        // Don&#39;t do this if the component is already rendered:
         if (!me.rendered) {
             tpl = me.initRenderTpl();
             tpl.applyOut(values.renderData, out);
@@ -497,7 +497,7 @@ Ext.define('Ext.util.Renderable', {
             autoEl = me.autoEl,
             frameInfo = me.getFrameInfo(),
             config = {
-                tag: 'div',
+                tag: &#39;div&#39;,
                 tpl: frameInfo ? me.initFramingTpl(frameInfo.table) : me.initRenderTpl()
             },
             layoutTargetCls = me.layoutTargetCls,
@@ -506,8 +506,8 @@ Ext.define('Ext.util.Renderable', {
             frameData;
 
         me.initStyles(protoEl);
-        // If we're not framing, then just add to the element, otherwise we need to add
-        // it to the frameBody, since it's our targetEl, but we don't have a handle on it yet.
+        // If we&#39;re not framing, then just add to the element, otherwise we need to add
+        // it to the frameBody, since it&#39;s our targetEl, but we don&#39;t have a handle on it yet.
         if (layoutTargetCls &amp;&amp; !frameInfo) {
             protoEl.addCls(layoutTargetCls);
         }
@@ -527,24 +527,24 @@ Ext.define('Ext.util.Renderable', {
             config.role = ariaRole;
             
             if (!me.ariaStaticRoles[ariaRole]) {
-                config['aria-hidden']   = !!me.hidden;
-                config['aria-disabled'] = !!me.disabled;
+                config[&#39;aria-hidden&#39;]   = !!me.hidden;
+                config[&#39;aria-disabled&#39;] = !!me.disabled;
                 
                 // ariaLabelledBy takes precedence
                 if (me.ariaLabel &amp;&amp; !me.ariaLabelledBy) {
-                    config['aria-label'] = me.ariaLabel;
+                    config[&#39;aria-label&#39;] = me.ariaLabel;
                 }
                 
-                // We don't want to handle collapsibleness in subclasses
+                // We don&#39;t want to handle collapsibleness in subclasses
                 if (me.collapsible) {
-                    config['aria-expanded'] = !me.collapsed;
+                    config[&#39;aria-expanded&#39;] = !me.collapsed;
                 }
                 
                 // In some cases we need to force some ARIA attributes
                 // to be rendered on the ariaEl upfront, e.g. certain
                 // state and decorator attributes. It is not semantically
                 // correct to set these in ariaAttributes config, so
-                // we're using ariaRenderAttributes instance config
+                // we&#39;re using ariaRenderAttributes instance config
                 // when available.
                 if (me.ariaRenderAttributes) {
                     Ext.apply(config, me.ariaRenderAttributes);
@@ -556,7 +556,7 @@ Ext.define('Ext.util.Renderable', {
             }
         }
 
-        // It's important to assign the id here as an autoEl.id could have been (wrongly) applied and this would get things out of sync
+        // It&#39;s important to assign the id here as an autoEl.id could have been (wrongly) applied and this would get things out of sync
         config.id = me.id;
 
         if (config.tpl) {
@@ -600,12 +600,12 @@ Ext.define('Ext.util.Renderable', {
 </span>        var me = this,
             ret = null;
 
-        if (!me.hasListeners.beforerender || me.fireEvent('beforerender', me) !== false) {
+        if (!me.hasListeners.beforerender || me.fireEvent(&#39;beforerender&#39;, me) !== false) {
             me._renderState = 1;
 
             me.beforeRender();
 
-            // Flag to let the layout's finishRenderItems and afterFinishRenderItems
+            // Flag to let the layout&#39;s finishRenderItems and afterFinishRenderItems
             // know which items to process
             me.rendering = true;
             me._renderState = 2;
@@ -619,7 +619,7 @@ Ext.define('Ext.util.Renderable', {
                 ret.id = me.$pid = Ext.id(null, me.el.identifiablePrefix);
             }
 
-            //ret['data-cmp'] = me.id;
+            //ret[&#39;data-cmp&#39;] = me.id;
         }
 
         return ret;
@@ -645,7 +645,7 @@ Ext.define('Ext.util.Renderable', {
             frame: me.frame,
             hasTabGuard: !!me.tabGuard,
             scrollerCls: me.scrollerCls,
-            childElCls: '', // overridden in RTL
+            childElCls: &#39;&#39;, // overridden in RTL
             ariaEl: me.ariaEl
         }, me.renderData);
         
@@ -657,17 +657,17 @@ Ext.define('Ext.util.Renderable', {
             };
             
             if (!me.ariaStaticRoles[ariaRole]) {
-                ariaAttr['aria-hidden'] = !!me.hidden;
-                ariaAttr['aria-disabled'] = !!me.disabled;
+                ariaAttr[&#39;aria-hidden&#39;] = !!me.hidden;
+                ariaAttr[&#39;aria-disabled&#39;] = !!me.disabled;
                 
                 // ariaLabelledBy takes precedence
                 if (me.ariaLabel &amp;&amp; !me.ariaLabelledBy) {
-                    ariaAttr['aria-label'] = me.ariaLabel;
+                    ariaAttr[&#39;aria-label&#39;] = me.ariaLabel;
                 }
                 
-                // We don't want to handle collapsibleness in subclasses
+                // We don&#39;t want to handle collapsibleness in subclasses
                 if (me.collapsible) {
-                    ariaAttr['aria-expanded'] = !me.collapsed;
+                    ariaAttr[&#39;aria-expanded&#39;] = !me.collapsed;
                 }
                 
                 if (me.ariaRenderAttributes) {
@@ -686,16 +686,16 @@ Ext.define('Ext.util.Renderable', {
     },
 
 <span id='Ext-util-Renderable-method-onRender'>    /**
-</span>     * Template method called when this Component's DOM structure is created.
+</span>     * Template method called when this Component&#39;s DOM structure is created.
      *
-     * At this point, this Component's (and all descendants') DOM structure *exists* but it has not
+     * At this point, this Component&#39;s (and all descendants&#39;) DOM structure *exists* but it has not
      * been layed out (positioned and sized).
      *
      * Subclasses which override this to gain access to the structure at render time should
-     * call the parent class's method before attempting to access any child elements of the Component.
+     * call the parent class&#39;s method before attempting to access any child elements of the Component.
      *
-     * @param {Ext.dom.Element} parentNode The parent Element in which this Component's encapsulating element is contained.
-     * @param {Number} containerIdx The index within the parent Container's child collection of this Component.
+     * @param {Ext.dom.Element} parentNode The parent Element in which this Component&#39;s encapsulating element is contained.
+     * @param {Number} containerIdx The index within the parent Container&#39;s child collection of this Component.
      *
      * @template
      * @protected
@@ -712,21 +712,21 @@ Ext.define('Ext.util.Renderable', {
         me.applyRenderSelectors();
 
         // Update the scroller very early in first layout so that it has the overflow element
-        // before any 'boxready', onResize, or 'resize' code gets to run.
+        // before any &#39;boxready&#39;, onResize, or &#39;resize&#39; code gets to run.
         if (scroller &amp;&amp; scroller.isScroller) {
             scroller.setElement(me.getOverflowEl());
 
-            // IE browsers don't restore scroll position if the component was scrolled and
+            // IE browsers don&#39;t restore scroll position if the component was scrolled and
             // then hidden and shown again, so we must do it manually.
             // See EXTJS-16233.
             if (Ext.isIE) {
-                me.showListenerIE = Ext.on('show', me.onGlobalShow, me, {
+                me.showListenerIE = Ext.on(&#39;show&#39;, me.onGlobalShow, me, {
                     destroyable: true
                 });
             }
         }
 
-        // Flag set on getRenderTree to flag to the layout's postprocessing routine that
+        // Flag set on getRenderTree to flag to the layout&#39;s postprocessing routine that
         // the Component is in the process of being rendered and needs postprocessing.
         me.rendering = null;
 
@@ -750,11 +750,11 @@ Ext.define('Ext.util.Renderable', {
             width = me.width;
             height = me.height;
 
-            if (typeof width === 'number') {
+            if (typeof width === &#39;number&#39;) {
                 lastBox = lastBox || {};
                 lastBox.width = width;
             }
-            if (typeof height === 'number') {
+            if (typeof height === &#39;number&#39;) {
                 lastBox = lastBox || {};
                 lastBox.height = height;
             }
@@ -769,16 +769,16 @@ Ext.define('Ext.util.Renderable', {
      * **If you are using a {@link Ext.container.Container Container} object to house this
      * Component, then do not use the render method.**
      *
-     * A Container's child Components are rendered by that Container's
+     * A Container&#39;s child Components are rendered by that Container&#39;s
      * {@link Ext.container.Container#layout layout} manager when the Container is first rendered.
      *
      * When creating complex UIs, it is important to remember that sizing and positioning
-     * of child items is the responsibility of the Container's {@link Ext.container.Container#layout layout}
+     * of child items is the responsibility of the Container&#39;s {@link Ext.container.Container#layout layout}
      * manager.  If you expect child items to be sized in response to user interactions, you must
      * configure the Container with a layout manager which creates and manages the type of layout you
      * have in mind.
      *
-     * **Omitting the Container's {@link Ext.Container#layout layout} config means that a basic
+     * **Omitting the Container&#39;s {@link Ext.Container#layout layout} config means that a basic
      * layout manager is used which does nothing but render child components sequentially into the
      * Container. No sizing or positioning will be performed in this situation.**
      *
@@ -827,14 +827,14 @@ Ext.define('Ext.util.Renderable', {
                 me.cacheRefEls(el);
             }
         } else {
-            if (!me.hasListeners.beforerender || me.fireEvent('beforerender', me) !== false) {
+            if (!me.hasListeners.beforerender || me.fireEvent(&#39;beforerender&#39;, me) !== false) {
                 me.beforeRender();
-                // We're simulating the above block here as much as possible, but we're already
-                // given an el, so we don't need to create it. We still need to initialize the renderTpl later.
+                // We&#39;re simulating the above block here as much as possible, but we&#39;re already
+                // given an el, so we don&#39;t need to create it. We still need to initialize the renderTpl later.
                 me.needsRenderTpl = me.rendering = true;
                 me._renderState = 2;
 
-                // Set configured styles on pre-rendered Component's element
+                // Set configured styles on pre-rendered Component&#39;s element
                 me.initStyles(el);
                 if (me.allowDomMove !== false) {
                     if (nextSibling) {
@@ -861,7 +861,7 @@ Ext.define('Ext.util.Renderable', {
 </span>     * Ensures that this component is attached to `document.body`. If the component was
      * rendered to {@link Ext#getDetachedBody}, then it will be appended to `document.body`.
      * Any configured position is also restored.
-     * @param {Boolean} [runLayout=false] True to run the component's layout.
+     * @param {Boolean} [runLayout=false] True to run the component&#39;s layout.
      */
     ensureAttachedToBody: function (runLayout) {
         var comp = this,
@@ -877,7 +877,7 @@ Ext.define('Ext.util.Renderable', {
             if (runLayout) {
                 comp.updateLayout();
             }
-            if (typeof comp.x === 'number' || typeof comp.y === 'number') {
+            if (typeof comp.x === &#39;number&#39; || typeof comp.y === &#39;number&#39;) {
                 comp.setPosition(comp.x, comp.y);
             }
         }
@@ -928,7 +928,7 @@ Ext.define('Ext.util.Renderable', {
             var cache = Ext.cache,
                 El = Ext.dom.Element,
                 dom = el.isElement ? el.dom : el,
-                refs = dom.querySelectorAll('[data-ref]'),
+                refs = dom.querySelectorAll(&#39;[data-ref]&#39;),
                 len = refs.length,
                 ref, i;
 
@@ -990,7 +990,7 @@ Ext.define('Ext.util.Renderable', {
             // Container layout implements doRenderTabGuard(), *not* Component itself!
             var layout = renderData.$comp.layout;
             
-            // The &quot;renderData&quot; property is placed in scope for the renderTpl, but we don't
+            // The &quot;renderData&quot; property is placed in scope for the renderTpl, but we don&#39;t
             // want to render tab guards at that level in addition to the framing level:
             renderData.renderData.$skipTabGuards = true;
             
@@ -1074,10 +1074,10 @@ Ext.define('Ext.util.Renderable', {
 
                     // We need to transplant rendered content from the proxy to the
                     // configured el. This would included the renderTpl of the component
-                    // and its layout (innerCt's and such) as well as all child items.
+                    // and its layout (innerCt&#39;s and such) as well as all child items.
                     //
                     proxy = dom; // hold on to the rendered DOM
-                    dom = me.el.dom; // we'll be using the configured el though
+                    dom = me.el.dom; // we&#39;ll be using the configured el though
                     first = dom.firstChild; // rendered content in proxy goes first
 
                     while (proxy.firstChild) {
@@ -1135,18 +1135,18 @@ Ext.define('Ext.util.Renderable', {
             }
 
             if (me.hasListeners.render) {
-                me.fireEvent('render', me);
+                me.fireEvent(&#39;render&#39;, me);
             }
 
             me.afterRender(); // this can cause a layout
             if (me.hasListeners.afterrender) {
-                me.fireEvent('afterrender', me);
+                me.fireEvent(&#39;afterrender&#39;, me);
             }
             me.initEvents();
 
             if (me.hidden) {
                 // Hiding during the render process should not perform any ancillary
-                // actions that the full hide process does; It is not hiding, it begins in a hidden state.'
+                // actions that the full hide process does; It is not hiding, it begins in a hidden state.&#39;
                 // So just make the element hidden according to the configured hideMode
                 me.el.hide();
             }
@@ -1162,24 +1162,24 @@ Ext.define('Ext.util.Renderable', {
             var me = this,
                 // we are only called if framing so this has already been determined:
                 frameInfo = me.frameSize,
-                mcStyle = '';
+                mcStyle = &#39;&#39;;
 
             //&lt;feature legacyBrowser&gt;
             if (me._syncFrameHeight &amp;&amp; me.height) {
-                // Buttons need their frame's MC element to have an explicit height in order
+                // Buttons need their frame&#39;s MC element to have an explicit height in order
                 // for percentage heights to work on elements inside the frame
-                mcStyle = 'height:' + (me.height - frameInfo.height) + 'px';
+                mcStyle = &#39;height:&#39; + (me.height - frameInfo.height) + &#39;px&#39;;
             }
             //&lt;/feature&gt;
 
             return {
                 $comp:        me,
                 id:           me.id,
-                fgid:         me.id + '-frame',
+                fgid:         me.id + &#39;-frame&#39;,
                 ui:           me.ui,
                 uiCls:        me.uiCls,
                 frameCls:     me.frameCls,
-                frameBodyCls: me.layoutTargetCls || '',
+                frameBodyCls: me.layoutTargetCls || &#39;&#39;,
                 baseCls:      me.baseCls,
                 hasTabGuard:  me.tabGuard,
                 top:          !!frameInfo.top,
@@ -1189,16 +1189,16 @@ Ext.define('Ext.util.Renderable', {
                 mcStyle:      mcStyle,
                 // can be optionally set by a subclass or override to be an extra class to
                 // be applied to all framing elements (used by RTL)
-                frameElCls:   ''
+                frameElCls:   &#39;&#39;
             };
         },
 
 <span id='Ext-util-Renderable-method-getFrameInfo'>        /**
 </span>         * @private
-         * On render, reads an encoded style attribute, &quot;filter&quot; from the style of this Component's element.
-         * This information is memoized based upon the CSS class name of this Component's element.
+         * On render, reads an encoded style attribute, &quot;filter&quot; from the style of this Component&#39;s element.
+         * This information is memoized based upon the CSS class name of this Component&#39;s element.
          * Because child Components are rendered as textual HTML as part of the topmost Container, a dummy div is inserted
-         * into the document to receive the document element's CSS class name, and therefore style attributes.
+         * into the document to receive the document element&#39;s CSS class name, and therefore style attributes.
          */
         getFrameInfo: function() {
             // If native framing can be used, or this component is not going to be framed, then do not attempt to read CSS framing info.
@@ -1208,7 +1208,7 @@ Ext.define('Ext.util.Renderable', {
 
             var me = this,
                 frameInfoCache = me.frameInfoCache,
-                cls = me.getFramingInfoCls() + '-frameInfo',
+                cls = me.getFramingInfoCls() + &#39;-frameInfo&#39;,
                 frameInfo = frameInfoCache[cls],
                 styleEl, info, frameTop, frameRight, frameBottom, frameLeft,
                 borderTopWidth, borderRightWidth, borderBottomWidth, borderLeftWidth,
@@ -1216,8 +1216,8 @@ Ext.define('Ext.util.Renderable', {
 
             if (frameInfo == null) {
                 // Get the singleton frame style proxy with our el class name stamped into it.
-                styleEl = Ext.fly(me.getStyleProxy(cls), 'frame-style-el');
-                info = styleEl.getStyle('font-family');
+                styleEl = Ext.fly(me.getStyleProxy(cls), &#39;frame-style-el&#39;);
+                info = styleEl.getStyle(&#39;font-family&#39;);
 
                 if (info) {
                     // The framing data is encoded as
@@ -1237,7 +1237,7 @@ Ext.define('Ext.util.Renderable', {
                     // The 3 sets of TRBL 4-tuples are the CSS3 values for border-radius,
                     // border-width and padding, respectively.
                     //
-                    info = info.split('-');
+                    info = info.split(&#39;-&#39;);
 
                     frameTop          = parseInt(info[1], 10);
                     frameRight        = parseInt(info[2], 10);
@@ -1254,8 +1254,8 @@ Ext.define('Ext.util.Renderable', {
                     paddingLeft       = parseInt(info[12], 10);
 
                     frameInfo = {
-                        table: info[0].charAt(0) === 't',
-                        vertical: info[0].charAt(1) === 'v',
+                        table: info[0].charAt(0) === &#39;t&#39;,
+                        vertical: info[0].charAt(1) === &#39;v&#39;,
 
                         top: frameTop,
                         right: frameRight,
@@ -1290,11 +1290,11 @@ Ext.define('Ext.util.Renderable', {
 
                 //&lt;debug&gt;
                 // This happens when you set frame: true explicitly without using the x-frame mixin in sass.
-                // This way IE can't figure out what sizes to use and thus framing can't work.
+                // This way IE can&#39;t figure out what sizes to use and thus framing can&#39;t work.
                 if (me.frame === true &amp;&amp; !frameInfo) {
-                    Ext.log.error('You have set frame: true explicity on this component (' + me.getXType() + ') and it ' +
-                            'does not have any framing defined in the CSS template. In this case IE cannot figure out ' +
-                            'what sizes to use and thus framing on this component will be disabled.');
+                    Ext.log.error(&#39;You have set frame: true explicity on this component (&#39; + me.getXType() + &#39;) and it &#39; +
+                            &#39;does not have any framing defined in the CSS template. In this case IE cannot figure out &#39; +
+                            &#39;what sizes to use and thus framing on this component will be disabled.&#39;);
                 }
                 //&lt;/debug&gt;
 
@@ -1308,7 +1308,7 @@ Ext.define('Ext.util.Renderable', {
         },
 
         getFramingInfoCls: function(){
-            return this.baseCls + '-' + this.ui;
+            return this.baseCls + &#39;-&#39; + this.ui;
         },
 
 <span id='Ext-util-Renderable-method-getStyleProxy'>        /**
@@ -1321,12 +1321,12 @@ Ext.define('Ext.util.Renderable', {
             var result = this.styleProxyEl || (Ext.Component.prototype.styleProxyEl = Ext.getBody().createChild({
                     //&lt;debug&gt;
                     // tell the spec runner to ignore this element when checking if the dom is clean
-                    'data-sticky': true,
+                    &#39;data-sticky&#39;: true,
                     //&lt;/debug&gt;
-                    role: 'presentation',
+                    role: &#39;presentation&#39;,
                     style: {
-                        position: 'absolute',
-                        top: '-10000px'
+                        position: &#39;absolute&#39;,
+                        top: &#39;-10000px&#39;
                     }
                 }, null, true));
 
@@ -1338,7 +1338,7 @@ Ext.define('Ext.util.Renderable', {
 </span>         * @private
          */
         getFrameTpl: function(table) {
-            return this.lookupTpl(table ? 'frameTableTpl' : 'frameTpl');
+            return this.lookupTpl(table ? &#39;frameTableTpl&#39; : &#39;frameTpl&#39;);
         },
 
         initContainer: function(container) {
@@ -1392,7 +1392,7 @@ Ext.define('Ext.util.Renderable', {
          * @private
          */
         initRenderTpl: function() {
-            var tpl = this.lookupTpl('renderTpl');
+            var tpl = this.lookupTpl(&#39;renderTpl&#39;);
 
             if (tpl &amp;&amp; !tpl.renderContent) {
                 this.setupRenderTpl(tpl);
@@ -1438,12 +1438,12 @@ Ext.define('Ext.util.Renderable', {
                 newBody, newFrameEls;
 
             // This is a bit tricky because we will be generating elements with the same
-            // id's (mostly) as our current frame. We have to do most of this work with
-            // the raw DOM nodes due to the duplicate id's (which prevents us from using
+            // id&#39;s (mostly) as our current frame. We have to do most of this work with
+            // the raw DOM nodes due to the duplicate id&#39;s (which prevents us from using
             // an Element wrapper until we resolve the duplicates).
 
             // First off, render the new frameTpl to an off-document element.
-            div = document.createElement('div');
+            div = document.createElement(&#39;div&#39;);
             frameData = me.getFrameRenderData();
             
             // If the container was configured with tab guards, they were already rendered.
@@ -1452,10 +1452,10 @@ Ext.define('Ext.util.Renderable', {
             frameTpl = me.getFrameTpl(frameInfo.table);
             frameTpl.insertFirst(div, frameData);
 
-            // Capture the new frameEls (we'll need to update our childEls to these later
-            // once we've destroyed the old ones).
-            newFrameEls = div.querySelectorAll('[data-ref]');
-            newBody = div.querySelector('[data-ref=&quot;frameBody&quot;]');
+            // Capture the new frameEls (we&#39;ll need to update our childEls to these later
+            // once we&#39;ve destroyed the old ones).
+            newFrameEls = div.querySelectorAll(&#39;[data-ref]&#39;);
+            newBody = div.querySelector(&#39;[data-ref=&quot;frameBody&quot;]&#39;);
 
             // Now we can insert the new frameEls before the current frameBody.
             for (first = oldFrameBodyDom; first.parentNode !== dom; ) {
@@ -1488,8 +1488,8 @@ Ext.define('Ext.util.Renderable', {
 
             // Now we are free to acquire the childEls to the new elements:
             for (i = newFrameEls.length; i--; ) {
-                childElName = (frameDom = newFrameEls[i]).getAttribute('data-ref');
-                if (childElName !== 'frameBody') {
+                childElName = (frameDom = newFrameEls[i]).getAttribute(&#39;data-ref&#39;);
+                if (childElName !== &#39;frameBody&#39;) {
                     me[childElName] = new Ext.dom.Element(frameDom);
                 }
             }

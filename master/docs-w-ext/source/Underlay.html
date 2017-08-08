@@ -24,8 +24,8 @@
  * @private
  * @abstract
  */
-Ext.define('Ext.dom.Underlay', {
-    requires: [ 'Ext.dom.UnderlayPool' ],
+Ext.define(&#39;Ext.dom.Underlay&#39;, {
+    requires: [ &#39;Ext.dom.UnderlayPool&#39; ],
 
 <span id='Ext-dom-Underlay-cfg-target'>    /**
 </span>     * @cfg {Ext.dom.Element} target
@@ -174,7 +174,7 @@ Ext.define('Ext.dom.Underlay', {
         }
 
         // Overlay elements are shared, so fix position to match current owner
-        el.setStyle('position', me.fixed ? 'fixed' : '');
+        el.setStyle(&#39;position&#39;, me.fixed ? &#39;fixed&#39; : &#39;&#39;);
 
         dom = el.dom;
         if (dom.nextSibling !== insertionTarget) {

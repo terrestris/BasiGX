@@ -17,55 +17,55 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-layout-component-Dock'>/**
 </span> * This ComponentLayout handles docking for Panels. It takes care of panels that are
- * part of a ContainerLayout that sets this Panel's size and Panels that are part of
+ * part of a ContainerLayout that sets this Panel&#39;s size and Panels that are part of
  * an AutoContainerLayout in which this panel get his height based of the CSS or
  * its content.
  * @private
  */
-Ext.define('Ext.layout.component.Dock', {
+Ext.define(&#39;Ext.layout.component.Dock&#39;, {
 
     /* Begin Definitions */
 
-    extend: 'Ext.layout.component.Component',
+    extend: &#39;Ext.layout.component.Component&#39;,
 
-    alias: 'layout.dock',
+    alias: &#39;layout.dock&#39;,
 
-    alternateClassName: 'Ext.layout.component.AbstractDock',
+    alternateClassName: &#39;Ext.layout.component.AbstractDock&#39;,
 
 <span id='Ext-layout-component-Dock-property-type'>    /* End Definitions */
 </span>
-    type: 'dock',
+    type: &#39;dock&#39;,
     
 <span id='Ext-layout-component-Dock-property-horzAxisProps'>    horzAxisProps: {
-</span>        name: 'horz',
-        oppositeName: 'vert',
-        dockBegin: 'left',
-        dockEnd: 'right',
+</span>        name: &#39;horz&#39;,
+        oppositeName: &#39;vert&#39;,
+        dockBegin: &#39;left&#39;,
+        dockEnd: &#39;right&#39;,
         horizontal: true,
-        marginBegin: 'margin-left',
-        maxSize: 'maxWidth',
-        minSize: 'minWidth',
-        pos: 'x',
-        setSize: 'setWidth',
-        shrinkWrapDock: 'shrinkWrapDockWidth',
-        size: 'width',
-        sizeModel: 'widthModel'
+        marginBegin: &#39;margin-left&#39;,
+        maxSize: &#39;maxWidth&#39;,
+        minSize: &#39;minWidth&#39;,
+        pos: &#39;x&#39;,
+        setSize: &#39;setWidth&#39;,
+        shrinkWrapDock: &#39;shrinkWrapDockWidth&#39;,
+        size: &#39;width&#39;,
+        sizeModel: &#39;widthModel&#39;
     },
 
 <span id='Ext-layout-component-Dock-property-vertAxisProps'>    vertAxisProps: {
-</span>        name: 'vert',
-        oppositeName: 'horz',
-        dockBegin: 'top',
-        dockEnd: 'bottom',
+</span>        name: &#39;vert&#39;,
+        oppositeName: &#39;horz&#39;,
+        dockBegin: &#39;top&#39;,
+        dockEnd: &#39;bottom&#39;,
         horizontal: false,
-        marginBegin: 'margin-top',
-        maxSize: 'maxHeight',
-        minSize: 'minHeight',
-        pos: 'y',
-        setSize: 'setHeight',
-        shrinkWrapDock: 'shrinkWrapDockHeight',
-        size: 'height',
-        sizeModel: 'heightModel'
+        marginBegin: &#39;margin-top&#39;,
+        maxSize: &#39;maxHeight&#39;,
+        minSize: &#39;minHeight&#39;,
+        pos: &#39;y&#39;,
+        setSize: &#39;setHeight&#39;,
+        shrinkWrapDock: &#39;shrinkWrapDockHeight&#39;,
+        size: &#39;height&#39;,
+        sizeModel: &#39;heightModel&#39;
     },
 
 <span id='Ext-layout-component-Dock-property-initializedBorders'>    initializedBorders: -1,
@@ -95,27 +95,27 @@ Ext.define('Ext.layout.component.Dock', {
     },
 
 <span id='Ext-layout-component-Dock-property-noBorderClasses'>    noBorderClasses: [
-</span>        Ext.baseCSSPrefix + 'docked-noborder-top',
-        Ext.baseCSSPrefix + 'docked-noborder-right',
-        Ext.baseCSSPrefix + 'docked-noborder-bottom',
-        Ext.baseCSSPrefix + 'docked-noborder-left'
+</span>        Ext.baseCSSPrefix + &#39;docked-noborder-top&#39;,
+        Ext.baseCSSPrefix + &#39;docked-noborder-right&#39;,
+        Ext.baseCSSPrefix + &#39;docked-noborder-bottom&#39;,
+        Ext.baseCSSPrefix + &#39;docked-noborder-left&#39;
     ],
 
 <span id='Ext-layout-component-Dock-property-noBorderClassesSides'>    noBorderClassesSides: {
-</span>        top: Ext.baseCSSPrefix + 'docked-noborder-top',
-        right: Ext.baseCSSPrefix + 'docked-noborder-right',
-        bottom: Ext.baseCSSPrefix + 'docked-noborder-bottom',
-        left: Ext.baseCSSPrefix + 'docked-noborder-left'
+</span>        top: Ext.baseCSSPrefix + &#39;docked-noborder-top&#39;,
+        right: Ext.baseCSSPrefix + &#39;docked-noborder-right&#39;,
+        bottom: Ext.baseCSSPrefix + &#39;docked-noborder-bottom&#39;,
+        left: Ext.baseCSSPrefix + &#39;docked-noborder-left&#39;
     },
 
 <span id='Ext-layout-component-Dock-property-borderWidthProps'>    borderWidthProps: {
-</span>        top: 'border-top-width',
-        right: 'border-right-width',
-        bottom: 'border-bottom-width',
-        left: 'border-left-width'
+</span>        top: &#39;border-top-width&#39;,
+        right: &#39;border-right-width&#39;,
+        bottom: &#39;border-bottom-width&#39;,
+        left: &#39;border-left-width&#39;
     },
 
-<span id='Ext-layout-component-Dock-property-_itemCls'>    _itemCls: Ext.baseCSSPrefix + 'docked',
+<span id='Ext-layout-component-Dock-property-_itemCls'>    _itemCls: Ext.baseCSSPrefix + &#39;docked&#39;,
 </span>
 <span id='Ext-layout-component-Dock-method-handleItemBorders'>    handleItemBorders: function() {
 </span>        var me = this,
@@ -129,7 +129,7 @@ Ext.define('Ext.layout.component.Dock', {
             i, ln, item, dock, side,
             collapsed = me.collapsed;
 
-        if (me.initializedBorders === currentGeneration || (owner.border &amp;&amp; !owner.manageBodyBorders) || (owner.collapsed &amp;&amp; owner.collapseMode === 'mini')) {
+        if (me.initializedBorders === currentGeneration || (owner.border &amp;&amp; !owner.manageBodyBorders) || (owner.collapsed &amp;&amp; owner.collapseMode === &#39;mini&#39;)) {
             return;
         }
 
@@ -155,16 +155,16 @@ Ext.define('Ext.layout.component.Dock', {
                 borders[dock].satisfied = true;
             }
 
-            if (!borders.top.satisfied &amp;&amp; dock !== 'bottom') {
+            if (!borders.top.satisfied &amp;&amp; dock !== &#39;bottom&#39;) {
                 borders.top.push(item);
             }
-            if (!borders.right.satisfied &amp;&amp; dock !== 'left') {
+            if (!borders.right.satisfied &amp;&amp; dock !== &#39;left&#39;) {
                 borders.right.push(item);
             }
-            if (!borders.bottom.satisfied &amp;&amp; dock !== 'top') {
+            if (!borders.bottom.satisfied &amp;&amp; dock !== &#39;top&#39;) {
                 borders.bottom.push(item);
             }
-            if (!borders.left.satisfied &amp;&amp; dock !== 'right') {
+            if (!borders.left.satisfied &amp;&amp; dock !== &#39;right&#39;) {
                 borders.left.push(item);
             }
         }
@@ -181,7 +181,7 @@ Ext.define('Ext.layout.component.Dock', {
         if (oldBorders) {
             for (side in oldBorders) {
                 if (owner.manageBodyBorders &amp;&amp; oldBorders[side].satisfied) {
-                    owner.setBodyStyle(borderWidthProps[side], '');
+                    owner.setBodyStyle(borderWidthProps[side], &#39;&#39;);
                 }
             }
         }
@@ -199,7 +199,7 @@ Ext.define('Ext.layout.component.Dock', {
                 }
             }
             else if (borders[side].satisfied) {
-                owner.setBodyStyle(borderWidthProps[side], '1px');
+                owner.setBodyStyle(borderWidthProps[side], &#39;1px&#39;);
             }
         }
 
@@ -282,14 +282,14 @@ Ext.define('Ext.layout.component.Dock', {
                 itemContext = layoutContext.getCmp(item);
                 itemContext.dockedAt = { x: 0, y: 0 };
                 itemContext.offsets = offsets = Ext.Element.parseBox(item.offsets || 0);
-                itemContext.horizontal = dock === 'top' || dock === 'bottom';
+                itemContext.horizontal = dock === &#39;top&#39; || dock === &#39;bottom&#39;;
                 offsets.width = offsets.left + offsets.right;
                 offsets.height = offsets.top + offsets.bottom;
                 dockedItems.push(itemContext);
             }
         }
 
-        ownerContext.bodyContext = ownerContext.getEl('body');
+        ownerContext.bodyContext = ownerContext.getEl(&#39;body&#39;);
     },
 
 <span id='Ext-layout-component-Dock-method-beginLayoutCycle'>    beginLayoutCycle: function(ownerContext) {
@@ -307,19 +307,19 @@ Ext.define('Ext.layout.component.Dock', {
             // Reset in case manageHeight gets turned on during lifecycle.
             // See below for why display could be set to non-default value.
             if (me.lastBodyDisplay) {
-                owner.body.dom.style.display = me.lastBodyDisplay = '';
+                owner.body.dom.style.display = me.lastBodyDisplay = &#39;&#39;;
             }
         } else {
             // When manageHeight is false, the body stretches the outer el by using wide margins to force it to
             // accommodate the docked items. When overflow is visible (when panel is resizable and has embedded handles),
             // the body must be inline-block so as not to collapse its margins
-            if (me.lastBodyDisplay !== 'inline-block') {
-                owner.body.dom.style.display = me.lastBodyDisplay = 'inline-block';
+            if (me.lastBodyDisplay !== &#39;inline-block&#39;) {
+                owner.body.dom.style.display = me.lastBodyDisplay = &#39;inline-block&#39;;
             }
 
             if (lastHeightModel &amp;&amp; lastHeightModel.shrinkWrap &amp;&amp;
                         !ownerContext.heightModel.shrinkWrap) {
-                owner.body.dom.style.marginBottom = '';
+                owner.body.dom.style.marginBottom = &#39;&#39;;
             }
         }
 
@@ -348,15 +348,15 @@ Ext.define('Ext.layout.component.Dock', {
             ownerContext.setContentWidth(0);
         }
 
-        // dock: 'right' items, when a panel gets narrower get &quot;squished&quot;. Moving them to
+        // dock: &#39;right&#39; items, when a panel gets narrower get &quot;squished&quot;. Moving them to
         // left:0px avoids this!
         for (i = 0; i &lt; len; i++) {
             item = docked[i].target;
             dock = item.dock;
 
-            if (dock === 'right') {
+            if (dock === &#39;right&#39;) {
                 item.setLocalX(0);
-            } else if (dock !== 'left') {
+            } else if (dock !== &#39;left&#39;) {
                 continue;
             }
 
@@ -563,10 +563,10 @@ Ext.define('Ext.layout.component.Dock', {
             minSize: minSize,
             maxSize: hasMaxSize ? maxSize : 1e9,
             bodyPosProp: me.owner.manageHeight ? posProp : axisProps.marginBegin,
-            dockBegin: dockBegin,    // 'left' or 'top'
-            dockEnd: dockEnd,        // 'right' or 'end'
-            posProp: posProp,        // 'x' or 'y'
-            sizeProp: sizeProp,      // 'width' or 'height'
+            dockBegin: dockBegin,    // &#39;left&#39; or &#39;top&#39;
+            dockEnd: dockEnd,        // &#39;right&#39; or &#39;end&#39;
+            posProp: posProp,        // &#39;x&#39; or &#39;y&#39;
+            sizeProp: sizeProp,      // &#39;width&#39; or &#39;height&#39;
             setSize: axisProps.setSize,
             shrinkWrapDock: ownerContext[axisProps.shrinkWrapDock],
             sizeModelName: axisProps.sizeModel,
@@ -757,13 +757,13 @@ Ext.define('Ext.layout.component.Dock', {
      */
     dockStretch: function (ownerContext, itemContext, item, axis) {
         var dock = item.dock, // left/top/right/bottom (also used to index padding/border)
-            sizeProp = axis.sizeProp, // 'width' or 'height'
-            horizontal = dock === 'top' || dock === 'bottom',
+            sizeProp = axis.sizeProp, // &#39;width&#39; or &#39;height&#39;
+            horizontal = dock === &#39;top&#39; || dock === &#39;bottom&#39;,
             border = ownerContext.frameBorder,
             offsets = itemContext.offsets,
             padding = ownerContext.framePadding,
-            endProp = horizontal ? 'right' : 'bottom',
-            startProp = horizontal ? 'left' : 'top',
+            endProp = horizontal ? &#39;right&#39; : &#39;bottom&#39;,
+            startProp = horizontal ? &#39;left&#39; : &#39;top&#39;,
             pos = axis.begin + offsets[startProp],
             margin, size;
 
@@ -795,7 +795,7 @@ Ext.define('Ext.layout.component.Dock', {
      */
     finishAxis: function (ownerContext, axis) {
         // If the maxChildSize is NaN it means at some point we tried to determine
-        // The size of a docked item but we couldn't, so just jump out straight
+        // The size of a docked item but we couldn&#39;t, so just jump out straight
         // away before doing any other processing
         if (isNaN(axis.maxChildSize)) {
             return false;
@@ -883,12 +883,12 @@ Ext.define('Ext.layout.component.Dock', {
 
             if (!axis.horizontal &amp;&amp; !this.owner.manageHeight) {
                 // the height of the bodyEl will give the proper height to the outerEl so
-                // we don't need to set heights in the DOM
+                // we don&#39;t need to set heights in the DOM
                 dirty = false;
             }
         } else {
             // For a fixed-size axis, we started at the outer box and already have the
-            // proper origin... almost... except for the owner's border.
+            // proper origin... almost... except for the owner&#39;s border.
             if (framing) {
                 // since dockedItems are rendered outside the framing, they have the
                 // proper origin already:
@@ -994,7 +994,7 @@ Ext.define('Ext.layout.component.Dock', {
                     dirty = false;
 
                     // so long as we set top and bottom margins on the bodyEl!
-                    ownerContext.bodyContext.setProp('margin-bottom', vert.dockedPixelsEnd);
+                    ownerContext.bodyContext.setProp(&#39;margin-bottom&#39;, vert.dockedPixelsEnd);
                 }
 
                 height = size;
@@ -1026,8 +1026,8 @@ Ext.define('Ext.layout.component.Dock', {
             // allow the ownerLayout to invalidate us with its contribution to our final
             // size...
         } else {
-            // We're not invalidating, the ownerContext, so if we're shrink wrapping we'll need to
-            // tell any docked items to invalidate themselves if necessary.'
+            // We&#39;re not invalidating, the ownerContext, so if we&#39;re shrink wrapping we&#39;ll need to
+            // tell any docked items to invalidate themselves if necessary.&#39;
             me.invalidateAxes(ownerContext, horz, vert);
             
         }
@@ -1142,8 +1142,8 @@ Ext.define('Ext.layout.component.Dock', {
         for (index = 0; index &lt; length; ++index) {
             itemContext = dockedItems[index];
 
-            itemContext.setProp('x', deltaX + itemContext.dockedAt.x);
-            itemContext.setProp('y', deltaY + itemContext.dockedAt.y);
+            itemContext.setProp(&#39;x&#39;, deltaX + itemContext.dockedAt.x);
+            itemContext.setProp(&#39;y&#39;, deltaY + itemContext.dockedAt.y);
         }
     },
 
@@ -1172,9 +1172,9 @@ Ext.define('Ext.layout.component.Dock', {
             lastCollapsedState = ownerContext.lastCollapsedState;
         }
 
-        if (lastCollapsedState === 'left' || lastCollapsedState === 'right') {
+        if (lastCollapsedState === &#39;left&#39; || lastCollapsedState === &#39;right&#39;) {
             policy = me.horizontalCollapsePolicy;
-        } else if (lastCollapsedState === 'top' || lastCollapsedState === 'bottom') {
+        } else if (lastCollapsedState === &#39;top&#39; || lastCollapsedState === &#39;bottom&#39;) {
             policy = me.verticalCollapsePolicy;
         }
 
@@ -1183,7 +1183,7 @@ Ext.define('Ext.layout.component.Dock', {
 
 <span id='Ext-layout-component-Dock-method-getDockedItems'>    /**
 </span>     * Retrieve an ordered and/or filtered array of all docked Components.
-     * @param {String} [order='render'] The desired ordering of the items ('render' or 'visual').
+     * @param {String} [order=&#39;render&#39;] The desired ordering of the items (&#39;render&#39; or &#39;visual&#39;).
      * @param {Boolean} [beforeBody] An optional flag to limit the set of items to only those
      *  before the body (true) or after the body (false). All components are returned by
      *  default.
@@ -1192,8 +1192,8 @@ Ext.define('Ext.layout.component.Dock', {
      */
     getDockedItems: function(order, beforeBody) {
         var me = this,
-            renderedOnly = (order === 'visual'),
-            all = renderedOnly ? Ext.ComponentQuery.query('[rendered]', me.owner.dockedItems.items) : me.owner.dockedItems.items,
+            renderedOnly = (order === &#39;visual&#39;),
+            all = renderedOnly ? Ext.ComponentQuery.query(&#39;[rendered]&#39;, me.owner.dockedItems.items) : me.owner.dockedItems.items,
             sort = all &amp;&amp; all.length &amp;&amp; order !== false,
             renderOrder,
             dock, dockedItems, i, isBefore, length;
@@ -1205,7 +1205,7 @@ Ext.define('Ext.layout.component.Dock', {
 
             for (i = 0, length = all.length; i &lt; length; ++i) {
                 dock = all[i].dock;
-                isBefore = (dock === 'top' || dock === 'left');
+                isBefore = (dock === &#39;top&#39; || dock === &#39;left&#39;);
                 if (beforeBody ? isBefore : !isBefore) {
                     dockedItems.push(all[i]);
                 }
@@ -1215,7 +1215,7 @@ Ext.define('Ext.layout.component.Dock', {
         }
 
         if (sort) {
-            renderOrder = (order = order || 'render') === 'render';
+            renderOrder = (order = order || &#39;render&#39;) === &#39;render&#39;;
             Ext.Array.sort(dockedItems, function(a, b) {
                 var aw,
                     bw;
@@ -1249,7 +1249,7 @@ Ext.define('Ext.layout.component.Dock', {
 
 <span id='Ext-layout-component-Dock-method-getLayoutItems'>    /**
 </span>     * @protected
-     * Returns an array containing all the **visible** docked items inside this layout's owner Panel
+     * Returns an array containing all the **visible** docked items inside this layout&#39;s owner Panel
      * @return {Array} An array containing all the **visible** docked items of the Panel
      */
     getLayoutItems : function() {
@@ -1263,7 +1263,7 @@ Ext.define('Ext.layout.component.Dock', {
         if (me.owner.collapsed) {
             result = me.owner.getCollapsedDockedItems();
         } else {
-            items = me.getDockedItems('visual');
+            items = me.getDockedItems(&#39;visual&#39;);
             itemCount = items.length;
             result = [];
             for (i = 0; i &lt; itemCount; i++) {
@@ -1371,7 +1371,7 @@ Ext.define('Ext.layout.component.Dock', {
             gap = 0;
 
             // Our childNodes may contain non-item elements as well as the bodyEl. We
-            // want to find the bodyEl's index and count the number of dockedItems that
+            // want to find the bodyEl&#39;s index and count the number of dockedItems that
             // are already rendered before it.
             //
             for (i = 0; i &lt; childNodeCount; ++i) {
@@ -1383,7 +1383,7 @@ Ext.define('Ext.layout.component.Dock', {
                 
                 if (elFound) {
                     // We want top/left dockedItems to be inserted before the body, so
-                    // use the bodyEl's index as the base.
+                    // use the bodyEl&#39;s index as the base.
                     bodyBaseIndex = i;
                     break;
                 }
@@ -1395,11 +1395,11 @@ Ext.define('Ext.layout.component.Dock', {
             
             //&lt;debug&gt;
             if (!elFound) {
-                Ext.log.error('Dock layout error for ' + owner.id + ': bodyEl not found!');
+                Ext.log.error(&#39;Dock layout error for &#39; + owner.id + &#39;: bodyEl not found!&#39;);
             }
             //&lt;/debug&gt;
 
-            // Subtract the number of rendered dockedItems from the bodyEl's index to get
+            // Subtract the number of rendered dockedItems from the bodyEl&#39;s index to get
             // the actual base.
             //
             bodyBaseIndex -= gap;
@@ -1446,7 +1446,7 @@ Ext.define('Ext.layout.component.Dock', {
 
                 //&lt;debug&gt;
                 if (!elFound) {
-                    Ext.log.error('Dock layout error for ' + owner.id + ': bodyWrapEl not found!');
+                    Ext.log.error(&#39;Dock layout error for &#39; + owner.id + &#39;: bodyWrapEl not found!&#39;);
                 }
                 //&lt;/debug&gt;
                 
@@ -1459,7 +1459,7 @@ Ext.define('Ext.layout.component.Dock', {
             
             // Finally loop over the dockedItems again and ensure that the top/left and
             // bottom/right items are at the proper DOM offset, immediately surrounding
-            // the bodyEl or bodyWrap if they're docked to the main el.
+            // the bodyEl or bodyWrap if they&#39;re docked to the main el.
             // Presently only Panel header does that.
             //
             for (i = 0; i &lt; dockedItemCount; i++) {
@@ -1470,7 +1470,7 @@ Ext.define('Ext.layout.component.Dock', {
                     insertTarget = owner.el;
                     insertPosition = wrapBaseIndex + wrapDockIndex++;
                     
-                    if (item.dock === 'right' || item.dock === 'bottom') {
+                    if (item.dock === &#39;right&#39; || item.dock === &#39;bottom&#39;) {
                         insertPosition++; // skip over the bodyWrap
                         
                         // frameBody consists of 3 elements, wrapBaseIndex points
@@ -1488,7 +1488,7 @@ Ext.define('Ext.layout.component.Dock', {
                     insertTarget = target;
                     insertPosition = bodyBaseIndex + bodyDockIndex++;
                     
-                    if (item.dock === 'right' || item.dock === 'bottom') {
+                    if (item.dock === &#39;right&#39; || item.dock === &#39;bottom&#39;) {
                         insertPosition++; // skip over the bodyEl or frameBody
                     }
                 }
@@ -1572,11 +1572,11 @@ Ext.define('Ext.layout.component.Dock', {
         // the body height.
         //
         // This same pattern occurs with autoHeight panels with autoWidth docked items on
-        // left or right. If the panel is fully auto or fully fixed, these problems don't
+        // left or right. If the panel is fully auto or fully fixed, these problems don&#39;t
         // come up because there is no dependency between the dimensions.
         //
         // Cutting the Gordian Knot: In these cases, we have to allow something to measure
-        // itself without full context. This is OK as long as the managed dimension doesn't
+        // itself without full context. This is OK as long as the managed dimension doesn&#39;t
         // effect the auto-dimension, which is often the case for things like toolbars. The
         // managed dimension only effects overflow handlers and such and does not change the
         // auto-dimension. To encourage the item to measure itself without waiting for the
@@ -1606,7 +1606,7 @@ Ext.define('Ext.layout.component.Dock', {
         }
 
         dock = item.dock;
-        vertical = (dock === 'left' || dock === 'right');
+        vertical = (dock === &#39;left&#39; || dock === &#39;right&#39;);
 
         shrinkWrapDock = shrinkWrapDock === true ? 3 : (shrinkWrapDock || 0);
         if (vertical) {
@@ -1622,7 +1622,7 @@ Ext.define('Ext.layout.component.Dock', {
             if (!ownerSizeModel) {
                 ownerSizeModel = me.owner.getSizeModel();
             }
-            if (ownerSizeModel[vertical ? 'height' : 'width'].shrinkWrap) {
+            if (ownerSizeModel[vertical ? &#39;height&#39; : &#39;width&#39;].shrinkWrap) {
                 return policy.shrinkWrap;
             }
         }
@@ -1648,13 +1648,13 @@ Ext.define('Ext.layout.component.Dock', {
     },
 
 <span id='Ext-layout-component-Dock-method-getDockCls'>    /**
-</span>     * Get's the css class name for a given dock position.
+</span>     * Get&#39;s the css class name for a given dock position.
      * @param {String} dock `top`, `right`, `bottom`, or `left`
      * @return {String}
      * @private 
      */
     getDockCls: function(dock) {
-        return 'docked-' + dock;
+        return &#39;docked-&#39; + dock;
     },
 
 <span id='Ext-layout-component-Dock-method-afterRemove'>    afterRemove: function(item) {
@@ -1676,17 +1676,17 @@ Ext.define('Ext.layout.component.Dock', {
     },
 
 <span id='Ext-layout-component-Dock-property-borderCollapseMap'>    /**
-</span>     * This object is indexed by a component's `baseCls` to yield another object which
-     * is then indexed by the component's `ui` to produce an array of CSS class names.
+</span>     * This object is indexed by a component&#39;s `baseCls` to yield another object which
+     * is then indexed by the component&#39;s `ui` to produce an array of CSS class names.
      * This array is indexed in the same manner as the `noBorderClassTable` and indicates
      * the a particular edge of a docked item or the body element is actually &quot;collapsed&quot;
-     * with the component's outer border.
+     * with the component&#39;s outer border.
      * @private
      */
     borderCollapseMap: {
         /*
-        'x-panel': {
-            'default': []
+        &#39;x-panel&#39;: {
+            &#39;default&#39;: []
         }
         */
     },
@@ -1694,7 +1694,7 @@ Ext.define('Ext.layout.component.Dock', {
 <span id='Ext-layout-component-Dock-method-getBorderCollapseTable'>    /**
 </span>     * Returns the array of class names to add to a docked item or body element when for
      * the edges that should collapse with the outer component border. Basically, the
-     * panel's outer border must look visually like a contiguous border but may need to
+     * panel&#39;s outer border must look visually like a contiguous border but may need to
      * be realized by using the border of docked items and/or the body. This class name
      * allows the border color and width to be controlled accordingly and distinctly from
      * the border of the docked item or body element when it is not having its border
@@ -1713,24 +1713,24 @@ Ext.define('Ext.layout.component.Dock', {
         table = map[ui];
 
         if (!table) {
-            baseCls += '-' + ui + '-outer-border-';
+            baseCls += &#39;-&#39; + ui + &#39;-outer-border-&#39;;
             map[ui] = table = [
                 0,                  // TRBL
-                baseCls + 'l',      // 0001 = 1
-                baseCls + 'b',      // 0010 = 2
-                baseCls + 'bl',     // 0011 = 3
-                baseCls + 'r',      // 0100 = 4
-                baseCls + 'rl',     // 0101 = 5
-                baseCls + 'rb',     // 0110 = 6
-                baseCls + 'rbl',    // 0111 = 7
-                baseCls + 't',      // 1000 = 8
-                baseCls + 'tl',     // 1001 = 9
-                baseCls + 'tb',     // 1010 = 10
-                baseCls + 'tbl',    // 1011 = 11
-                baseCls + 'tr',     // 1100 = 12
-                baseCls + 'trl',    // 1101 = 13
-                baseCls + 'trb',    // 1110 = 14
-                baseCls + 'trbl'    // 1111 = 15
+                baseCls + &#39;l&#39;,      // 0001 = 1
+                baseCls + &#39;b&#39;,      // 0010 = 2
+                baseCls + &#39;bl&#39;,     // 0011 = 3
+                baseCls + &#39;r&#39;,      // 0100 = 4
+                baseCls + &#39;rl&#39;,     // 0101 = 5
+                baseCls + &#39;rb&#39;,     // 0110 = 6
+                baseCls + &#39;rbl&#39;,    // 0111 = 7
+                baseCls + &#39;t&#39;,      // 1000 = 8
+                baseCls + &#39;tl&#39;,     // 1001 = 9
+                baseCls + &#39;tb&#39;,     // 1010 = 10
+                baseCls + &#39;tbl&#39;,    // 1011 = 11
+                baseCls + &#39;tr&#39;,     // 1100 = 12
+                baseCls + &#39;trl&#39;,    // 1101 = 13
+                baseCls + &#39;trb&#39;,    // 1110 = 14
+                baseCls + &#39;trbl&#39;    // 1111 = 15
             ];
         }
 

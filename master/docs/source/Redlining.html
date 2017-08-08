@@ -35,40 +35,40 @@
  *
  * @class BasiGX.view.container.Redlining
  */
-Ext.define('BasiGX.view.container.Redlining', {
-    extend: 'Ext.container.Container',
-    xtype: 'basigx-container-redlining',
+Ext.define(&#39;BasiGX.view.container.Redlining&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
+    xtype: &#39;basigx-container-redlining&#39;,
 
     requires: [
-        'BasiGX.view.container.RedlineStyler'
+        &#39;BasiGX.view.container.RedlineStyler&#39;
     ],
 
-<span id='BasiGX-view-container-Redlining-property-layout'>    layout: 'hbox',
+<span id='BasiGX-view-container-Redlining-property-layout'>    layout: &#39;hbox&#39;,
 </span>
 <span id='BasiGX-view-container-Redlining-property-viewModel'>    /**
 </span>     *
      */
     viewModel: {
         data: {
-            drawPointsBtnText: 'Draw Points',
-            drawLinesBtnText: 'Draw Lines',
-            drawPolygonsBtnText: 'Draw Polygons',
-            drawPostItBtnText: 'Draw Post-it',
-            copyObjectBtnText: 'Copy Object',
-            moveObjectBtnText: 'Move Object',
-            modifyObjectBtnText: 'Modify Object',
-            deleteObjectBtnText: 'Delete Object',
-            openStyleBtnText: 'Styler',
-            stylerWindowTitle: 'Styler',
-            postItWindowTitle: 'Enter the Post-its text',
-            postItWindowCreatePostItBtnText: 'Create Post-it',
-            postItInputTooLongText: 'The text you have entered is too long. ' +
-                'Do you want to continue anyway?',
-            documentation: '&lt;h2&gt;Redlining&lt;/h2&gt;• Verwenden Sie das ' +
-                'Redlining, um mit verschiedenen Werkzeugen auf der Karte ' +
-                'zu zeichnen.&lt;br&gt;• Neben Punkten, Linien und Flächen können ' +
-                'auch Notizzettel mit eigenem Text der Karte hinzugefügt ' +
-                'werden'
+            drawPointsBtnText: &#39;Draw Points&#39;,
+            drawLinesBtnText: &#39;Draw Lines&#39;,
+            drawPolygonsBtnText: &#39;Draw Polygons&#39;,
+            drawPostItBtnText: &#39;Draw Post-it&#39;,
+            copyObjectBtnText: &#39;Copy Object&#39;,
+            moveObjectBtnText: &#39;Move Object&#39;,
+            modifyObjectBtnText: &#39;Modify Object&#39;,
+            deleteObjectBtnText: &#39;Delete Object&#39;,
+            openStyleBtnText: &#39;Styler&#39;,
+            stylerWindowTitle: &#39;Styler&#39;,
+            postItWindowTitle: &#39;Enter the Post-its text&#39;,
+            postItWindowCreatePostItBtnText: &#39;Create Post-it&#39;,
+            postItInputTooLongText: &#39;The text you have entered is too long. &#39; +
+                &#39;Do you want to continue anyway?&#39;,
+            documentation: &#39;&lt;h2&gt;Redlining&lt;/h2&gt;• Verwenden Sie das &#39; +
+                &#39;Redlining, um mit verschiedenen Werkzeugen auf der Karte &#39; +
+                &#39;zu zeichnen.&lt;br&gt;• Neben Punkten, Linien und Flächen können &#39; +
+                &#39;auch Notizzettel mit eigenem Text der Karte hinzugefügt &#39; +
+                &#39;werden&#39;
         }
     },
 
@@ -194,10 +194,10 @@ Ext.define('BasiGX.view.container.Redlining', {
             image: new ol.style.Circle({
                 radius: 7,
                 fill: new ol.style.Fill({
-                    color: 'green'
+                    color: &#39;green&#39;
                 }),
                 stroke: new ol.style.Stroke({
-                    color: '#ffcc33',
+                    color: &#39;#ffcc33&#39;,
                     width: 2
                 })
             })
@@ -210,7 +210,7 @@ Ext.define('BasiGX.view.container.Redlining', {
          */
         redlineLineStringStyle: new ol.style.Style({
             stroke: new ol.style.Stroke({
-                color: '#ffcc33',
+                color: &#39;#ffcc33&#39;,
                 width: 2
             })
         }),
@@ -222,11 +222,11 @@ Ext.define('BasiGX.view.container.Redlining', {
          */
         redlinePolygonStyle: new ol.style.Style({
             stroke: new ol.style.Stroke({
-                color: '#ffcc33',
+                color: &#39;#ffcc33&#39;,
                 width: 2
             }),
             fill: new ol.style.Fill({
-                color: 'green'
+                color: &#39;green&#39;
             })
         }),
 
@@ -241,7 +241,7 @@ Ext.define('BasiGX.view.container.Redlining', {
          */
         redlineStyleFunction: function(feature) {
             var redliningContainer = Ext.ComponentQuery.query(
-                'basigx-container-redlining'
+                &#39;basigx-container-redlining&#39;
             )[0];
 
             if (!(feature instanceof ol.Feature)) {
@@ -284,7 +284,7 @@ Ext.define('BasiGX.view.container.Redlining', {
         if (!me.redliningVectorLayer) {
             me.redlineFeatures = new ol.Collection();
             me.redlineFeatures.on(
-                'propertychange', me.fireRedliningChanged, me
+                &#39;propertychange&#39;, me.fireRedliningChanged, me
             );
             me.redliningVectorLayer = new ol.layer.Vector({
                 source: new ol.source.Vector({features: me.redlineFeatures}),
@@ -301,7 +301,7 @@ Ext.define('BasiGX.view.container.Redlining', {
 <span id='BasiGX-view-container-Redlining-property-listeners'>    listeners: {
 </span>        beforedestroy: function() {
             if (this.redlineFeatures) {
-                this.redlineFeatures.un('propertychange',
+                this.redlineFeatures.un(&#39;propertychange&#39;,
                     this.fireRedliningChanged, this);
             }
         }
@@ -318,18 +318,18 @@ Ext.define('BasiGX.view.container.Redlining', {
     getRedlineItems: function() {
         var me = this;
         return [{
-            xtype: 'button',
+            xtype: &#39;button&#39;,
             bind: {
-                text: '{drawPointsBtnText}'
+                text: &#39;{drawPointsBtnText}&#39;
             },
-            name: 'drawPointsBtn',
-            toggleGroup: 'draw',
+            name: &#39;drawPointsBtn&#39;,
+            toggleGroup: &#39;draw&#39;,
             listeners: {
                 toggle: function(btn, pressed) {
                     if (!me.drawPointInteraction) {
                         me.drawPointInteraction = new ol.interaction.Draw({
                             features: me.redlineFeatures,
-                            type: 'Point'
+                            type: &#39;Point&#39;
                         });
                         me.map.addInteraction(me.drawPointInteraction);
                     }
@@ -341,18 +341,18 @@ Ext.define('BasiGX.view.container.Redlining', {
                 }
             }
         }, {
-            xtype: 'button',
+            xtype: &#39;button&#39;,
             bind: {
-                text: '{drawLinesBtnText}'
+                text: &#39;{drawLinesBtnText}&#39;
             },
-            name: 'drawLinesBtn',
-            toggleGroup: 'draw',
+            name: &#39;drawLinesBtn&#39;,
+            toggleGroup: &#39;draw&#39;,
             listeners: {
                 toggle: function(btn, pressed) {
                     if (!me.drawLineInteraction) {
                         me.drawLineInteraction = new ol.interaction.Draw({
                             features: me.redlineFeatures,
-                            type: 'LineString'
+                            type: &#39;LineString&#39;
                         });
                         me.map.addInteraction(me.drawLineInteraction);
                     }
@@ -364,18 +364,18 @@ Ext.define('BasiGX.view.container.Redlining', {
                 }
             }
         }, {
-            xtype: 'button',
+            xtype: &#39;button&#39;,
             bind: {
-                text: '{drawPolygonsBtnText}'
+                text: &#39;{drawPolygonsBtnText}&#39;
             },
-            name: 'drawPolygonsBtn',
-            toggleGroup: 'draw',
+            name: &#39;drawPolygonsBtn&#39;,
+            toggleGroup: &#39;draw&#39;,
             listeners: {
                 toggle: function(btn, pressed) {
                     if (!me.drawPolygonInteraction) {
                         me.drawPolygonInteraction = new ol.interaction.Draw({
                             features: me.redlineFeatures,
-                            type: 'Polygon'
+                            type: &#39;Polygon&#39;
                         });
                         me.map.addInteraction(me.drawPolygonInteraction);
                     }
@@ -387,12 +387,12 @@ Ext.define('BasiGX.view.container.Redlining', {
                 }
             }
         }, {
-            xtype: 'button',
+            xtype: &#39;button&#39;,
             bind: {
-                text: '{drawPostItBtnText}'
+                text: &#39;{drawPostItBtnText}&#39;
             },
-            name: 'postitbutton',
-            toggleGroup: 'draw',
+            name: &#39;postitbutton&#39;,
+            toggleGroup: &#39;draw&#39;,
             listeners: {
                 toggle: function(btn, pressed) {
                     if (!me.drawPostitInteraction) {
@@ -400,11 +400,11 @@ Ext.define('BasiGX.view.container.Redlining', {
 
                         me.drawPostitInteraction = new ol.interaction.Draw({
                             features: new ol.Collection(),
-                            type: 'Point',
+                            type: &#39;Point&#39;,
                             style: new ol.style.Style({
                                 image: new ol.style.Icon({
-                                    anchorXUnits: 'fraction',
-                                    anchorYUnits: 'pixels',
+                                    anchorXUnits: &#39;fraction&#39;,
+                                    anchorYUnits: &#39;pixels&#39;,
                                     opacity: 0.75,
                                     src: src
                                 })
@@ -414,22 +414,22 @@ Ext.define('BasiGX.view.container.Redlining', {
                     }
                     if (pressed) {
                         me.drawPostitInteraction.setActive(true);
-                        me.drawPostitInteraction.on('drawend',
+                        me.drawPostitInteraction.on(&#39;drawend&#39;,
                             me.setDefaultPostitStyle, me);
                     } else {
                         me.drawPostitInteraction.setActive(false);
-                        me.drawPostitInteraction.un('drawend',
+                        me.drawPostitInteraction.un(&#39;drawend&#39;,
                             me.setDefaultPostitStyle, me);
                     }
                 }
             }
         }, {
-            xtype: 'button',
+            xtype: &#39;button&#39;,
             bind: {
-                text: '{copyObjectBtnText}'
+                text: &#39;{copyObjectBtnText}&#39;
             },
-            name: 'copyObjectBtn',
-            toggleGroup: 'draw',
+            name: &#39;copyObjectBtn&#39;,
+            toggleGroup: &#39;draw&#39;,
             listeners: {
                 toggle: function(btn, pressed) {
                     if (!me.copySelectInteraction) {
@@ -441,7 +441,7 @@ Ext.define('BasiGX.view.container.Redlining', {
                                        click(evt);
                                },
                                addCondition: function(evt) {
-                                   if (evt.type === 'click') {
+                                   if (evt.type === &#39;click&#39;) {
                                        var features = me.
                                            copySelectInteraction.
                                            getFeatures().getArray();
@@ -475,12 +475,12 @@ Ext.define('BasiGX.view.container.Redlining', {
                 }
             }
         }, {
-            xtype: 'button',
+            xtype: &#39;button&#39;,
             bind: {
-                text: '{moveObjectBtnText}'
+                text: &#39;{moveObjectBtnText}&#39;
             },
-            name: 'moveObjectBtn',
-            toggleGroup: 'draw',
+            name: &#39;moveObjectBtn&#39;,
+            toggleGroup: &#39;draw&#39;,
             listeners: {
                 toggle: function(btn, pressed) {
                     if (!me.translateInteraction) {
@@ -530,32 +530,32 @@ Ext.define('BasiGX.view.container.Redlining', {
                     if (pressed) {
                         me.translateInteraction.setActive(true);
                         me.translateSelectInteraction.setActive(true);
-                        me.translateInteraction.on('translateend',
+                        me.translateInteraction.on(&#39;translateend&#39;,
                             me.fireRedliningChanged, me);
                     } else {
                         me.translateInteraction.setActive(false);
                         me.translateSelectInteraction.setActive(false);
-                        me.translateInteraction.un('translateend',
+                        me.translateInteraction.un(&#39;translateend&#39;,
                             me.fireRedliningChanged, me);
                     }
                 }
             }
         }, {
-            xtype: 'button',
+            xtype: &#39;button&#39;,
             bind: {
-                text: '{modifyObjectBtnText}'
+                text: &#39;{modifyObjectBtnText}&#39;
             },
-            name: 'modifyObjectBtn',
-            toggleGroup: 'draw',
+            name: &#39;modifyObjectBtn&#39;,
+            toggleGroup: &#39;draw&#39;,
             listeners: {
                 toggle: function(btn, pressed) {
                     if (!me.modifyInteraction) {
                         me.modifySelectInteraction =
                            new ol.interaction.Select();
-                        me.modifySelectInteraction.on('select', function(evt) {
+                        me.modifySelectInteraction.on(&#39;select&#39;, function(evt) {
                             if (evt.selected &amp;&amp; evt.selected[0]) {
                                 var feature = evt.selected[0];
-                                if (feature.get('isPostit')) {
+                                if (feature.get(&#39;isPostit&#39;)) {
                                     me.modifyPostit(feature);
                                 }
                             }
@@ -575,23 +575,23 @@ Ext.define('BasiGX.view.container.Redlining', {
                     if (pressed) {
                         me.modifyInteraction.setActive(true);
                         me.modifySelectInteraction.setActive(true);
-                        me.modifyInteraction.on('modifyend',
+                        me.modifyInteraction.on(&#39;modifyend&#39;,
                             me.fireRedliningChanged, me);
                     } else {
                         me.modifyInteraction.setActive(false);
                         me.modifySelectInteraction.setActive(false);
-                        me.modifyInteraction.un('modifyend',
+                        me.modifyInteraction.un(&#39;modifyend&#39;,
                             me.fireRedliningChanged, me);
                     }
                 }
             }
         }, {
-            xtype: 'button',
+            xtype: &#39;button&#39;,
             bind: {
-                text: '{deleteObjectBtnText}'
+                text: &#39;{deleteObjectBtnText}&#39;
             },
-            name: 'deleteObjectBtn',
-            toggleGroup: 'draw',
+            name: &#39;deleteObjectBtn&#39;,
+            toggleGroup: &#39;draw&#39;,
             listeners: {
                 toggle: function(btn, pressed) {
                     if (!me.deleteSelectInteraction) {
@@ -615,7 +615,7 @@ Ext.define('BasiGX.view.container.Redlining', {
                                         ol.events.condition.click(evt);
                             },
                             addCondition: function(evt) {
-                                if (evt.type === 'click') {
+                                if (evt.type === &#39;click&#39;) {
                                     var selectedFeatures =
                                         me.deleteSelectInteraction.
                                             getFeatures();
@@ -640,25 +640,25 @@ Ext.define('BasiGX.view.container.Redlining', {
                 }
             }
         }, {
-            xtype: 'button',
+            xtype: &#39;button&#39;,
             bind: {
-                text: '{openStyleBtnText}'
+                text: &#39;{openStyleBtnText}&#39;
             },
-            name: 'openStyleBtn',
-            toggleGroup: 'draw',
+            name: &#39;openStyleBtn&#39;,
+            toggleGroup: &#39;draw&#39;,
             listeners: {
                 toggle: function(btn, pressed) {
                     if (!me.stylerWindow) {
                         var redliningVectorLayer = me.redliningVectorLayer;
-                        me.stylerWindow = Ext.create('Ext.window.Window', {
-                            title: me.getViewModel().get('stylerWindowTitle'),
+                        me.stylerWindow = Ext.create(&#39;Ext.window.Window&#39;, {
+                            title: me.getViewModel().get(&#39;stylerWindowTitle&#39;),
                             width: 500,
-                            layout: 'fit',
+                            layout: &#39;fit&#39;,
                             constrainHeader: true,
                             autoScroll: true,
-                            closeAction: 'hide',
+                            closeAction: &#39;hide&#39;,
                             items: Ext.create(
-                                'BasiGX.view.container.RedlineStyler', {
+                                &#39;BasiGX.view.container.RedlineStyler&#39;, {
                                     redliningVectorLayer: redliningVectorLayer,
                                     backendUrls: me.getBackendUrls(),
                                     redlinePointStyle:
@@ -669,7 +669,7 @@ Ext.define('BasiGX.view.container.Redlining', {
                                    me.getRedlinePolygonStyle()
                                 })
                         });
-                        me.stylerWindow.on('close', function() {
+                        me.stylerWindow.on(&#39;close&#39;, function() {
                             me.fireRedliningChanged();
                             btn.toggle();
                         });
@@ -699,14 +699,14 @@ Ext.define('BasiGX.view.container.Redlining', {
             return this.getPostitPictureUrl();
         } else {
             var classPath = Ext.Loader.getPath(
-                'BasiGX.view.container.Redlining'
+                &#39;BasiGX.view.container.Redlining&#39;
             );
             var imageBaseSrc;
             if (classPath) {
                 imageBaseSrc = classPath.split(
-                    'src/view/container/Redlining.js')[0];
+                    &#39;src/view/container/Redlining.js&#39;)[0];
             }
-            return imageBaseSrc + 'resources/img/postit.png';
+            return imageBaseSrc + &#39;resources/img/postit.png&#39;;
         }
     },
 
@@ -721,8 +721,8 @@ Ext.define('BasiGX.view.container.Redlining', {
         if (feature) {
             feature.setStyle(new ol.style.Style({
                 image: new ol.style.Icon({
-                    anchorXUnits: 'fraction',
-                    anchorYUnits: 'pixels',
+                    anchorXUnits: &#39;fraction&#39;,
+                    anchorYUnits: &#39;pixels&#39;,
                     opacity: 0.75,
                     src: me.getPostitImgSrc()
                 })
@@ -741,19 +741,19 @@ Ext.define('BasiGX.view.container.Redlining', {
     handlePostitAdd: function(feat, oldText) {
         var me = this;
 
-        feat.set('isPostit', true);
+        feat.set(&#39;isPostit&#39;, true);
 
-        BasiGX.prompt(me.getViewModel().get('postItWindowTitle'), {
+        BasiGX.prompt(me.getViewModel().get(&#39;postItWindowTitle&#39;), {
             fn: function(decision, text) {
-                if (decision === 'cancel') {
+                if (decision === &#39;cancel&#39;) {
                     me.redlineFeatures.remove(feat);
                 } else {
                     if (text.length &gt; me.postitTextMaxLength) {
                         BasiGX.confirm(me.getViewModel().get(
-                            'postItInputTooLongText'), {
+                            &#39;postItInputTooLongText&#39;), {
                                 fn: function(choice) {
-                                    if (choice === 'yes') {
-                                        text = me.stringDivider(text, 16, '\n');
+                                    if (choice === &#39;yes&#39;) {
+                                        text = me.stringDivider(text, 16, &#39;\n&#39;);
                                         me.setPostitStyleAndTextOnFeature(
                                             text, feat);
                                     } else {
@@ -763,7 +763,7 @@ Ext.define('BasiGX.view.container.Redlining', {
                             }
                         );
                     } else {
-                        text = me.stringDivider(text, 16, '\n');
+                        text = me.stringDivider(text, 16, &#39;\n&#39;);
                         me.setPostitStyleAndTextOnFeature(text, feat);
                     }
                 }
@@ -772,7 +772,7 @@ Ext.define('BasiGX.view.container.Redlining', {
             value: oldText
         });
 
-        var button = Ext.ComponentQuery.query('button[name=postitbutton]')[0];
+        var button = Ext.ComponentQuery.query(&#39;button[name=postitbutton]&#39;)[0];
         button.toggle(false);
     },
 
@@ -784,15 +784,15 @@ Ext.define('BasiGX.view.container.Redlining', {
      */
     modifyPostit: function(feature, oldText) {
         var me = this;
-        BasiGX.prompt(me.getViewModel().get('postItWindowTitle'), {
+        BasiGX.prompt(me.getViewModel().get(&#39;postItWindowTitle&#39;), {
             fn: function(decision, text) {
-                if (decision === 'ok') {
+                if (decision === &#39;ok&#39;) {
                     if (text.length &gt; me.postitTextMaxLength) {
                         BasiGX.confirm(me.getViewModel().get(
-                            'postItInputTooLongText'), {
+                            &#39;postItInputTooLongText&#39;), {
                                 fn: function(choice) {
-                                    if (choice === 'yes') {
-                                        text = me.stringDivider(text, 16, '\n');
+                                    if (choice === &#39;yes&#39;) {
+                                        text = me.stringDivider(text, 16, &#39;\n&#39;);
                                         me.setPostitStyleAndTextOnFeature(
                                             text, feature);
                                     } else {
@@ -802,7 +802,7 @@ Ext.define('BasiGX.view.container.Redlining', {
                             }
                         );
                     } else {
-                        text = me.stringDivider(text, 16, '\n');
+                        text = me.stringDivider(text, 16, &#39;\n&#39;);
                         me.setPostitStyleAndTextOnFeature(text, feature);
                     }
                 }
@@ -822,8 +822,8 @@ Ext.define('BasiGX.view.container.Redlining', {
         var me = this;
         feat.setStyle(new ol.style.Style({
             image: new ol.style.Icon({
-                anchorXUnits: 'fraction',
-                anchorYUnits: 'pixels',
+                anchorXUnits: &#39;fraction&#39;,
+                anchorYUnits: &#39;pixels&#39;,
                 opacity: 0.75,
                 src: me.getPostitImgSrc()
             }),
@@ -863,7 +863,7 @@ Ext.define('BasiGX.view.container.Redlining', {
      * @param {String} str The string to wrap.
      * @param {Number} width The width of a line (number of characters).
      * @param {String} spaceReplacer The string to replace spaces with.
-     * @return {String} The 'wrapped' string.
+     * @return {String} The &#39;wrapped&#39; string.
      */
     stringDivider: function(str, width, spaceReplacer) {
         var me = this;
@@ -873,11 +873,11 @@ Ext.define('BasiGX.view.container.Redlining', {
             var p = width;
             var left;
             var right;
-            while (p &gt; 0 &amp;&amp; (str[p] !== ' ' &amp;&amp; str[p] !== '-')) {
+            while (p &gt; 0 &amp;&amp; (str[p] !== &#39; &#39; &amp;&amp; str[p] !== &#39;-&#39;)) {
                 p--;
             }
             if (p &gt; 0) {
-                if (str.substring(p, p + 1) === '-') {
+                if (str.substring(p, p + 1) === &#39;-&#39;) {
                     left = str.substring(0, p + 1);
                 } else {
                     left = str.substring(0, p);
@@ -887,7 +887,7 @@ Ext.define('BasiGX.view.container.Redlining', {
                     right, width, spaceReplacer);
             } else {
                 // no whitespace or - found, splitting hard on the width length
-                left = str.substring(startIndex, stopIndex + 1) + '-';
+                left = str.substring(startIndex, stopIndex + 1) + &#39;-&#39;;
                 right = str.substring(stopIndex + 1);
                 startIndex = stopIndex;
                 stopIndex += width;
@@ -938,7 +938,7 @@ Ext.define('BasiGX.view.container.Redlining', {
         me.stateChangeActive = true;
 
         var styler = Ext.ComponentQuery.query(
-            'basigx-container-redlinestyler')[0];
+            &#39;basigx-container-redlinestyler&#39;)[0];
 
         if (state.features) {
             me.redliningVectorLayer.getSource().clear();
@@ -973,7 +973,7 @@ Ext.define('BasiGX.view.container.Redlining', {
     },
 
 <span id='BasiGX-view-container-Redlining-method-fireRedliningChanged'>    fireRedliningChanged: function() {
-</span>        this.fireEvent('redliningchanged', this, this.getState(),
+</span>        this.fireEvent(&#39;redliningchanged&#39;, this, this.getState(),
             this.stateChangeActive);
     }
 });

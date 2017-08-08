@@ -37,30 +37,30 @@
  *
  * @class BasiGX.view.combo.ScaleCombo
  */
-Ext.define('BasiGX.view.combo.ScaleCombo', {
-    xtype: 'basigx-combo-scale',
-    extend: 'Ext.form.field.ComboBox',
+Ext.define(&#39;BasiGX.view.combo.ScaleCombo&#39;, {
+    xtype: &#39;basigx-combo-scale&#39;,
+    extend: &#39;Ext.form.field.ComboBox&#39;,
     requires: [
     ],
 
 <span id='BasiGX-view-combo-ScaleCombo-cfg-viewModel'>    viewModel: {
 </span>        data: {
             fieldLabel: null,
-            documentation: '&lt;h2&gt;Maßstabswahl&lt;/h2&gt;• Wählen Sie mit Hilfe ' +
-                'dieser ComboBox den gewünschten Maßstab aus.&lt;br&gt;• Zoomen ' +
-                'Sie innerhalb der Karte, so aktualisiert sich die ComboBox ' +
-                'entsprechend mit dem aktuellen Maßstab'
+            documentation: &#39;&lt;h2&gt;Maßstabswahl&lt;/h2&gt;• Wählen Sie mit Hilfe &#39; +
+                &#39;dieser ComboBox den gewünschten Maßstab aus.&lt;br&gt;• Zoomen &#39; +
+                &#39;Sie innerhalb der Karte, so aktualisiert sich die ComboBox &#39; +
+                &#39;entsprechend mit dem aktuellen Maßstab&#39;
         }
     },
 
 <span id='BasiGX-view-combo-ScaleCombo-cfg-bind'>    bind: {
-</span>        fieldLabel: '{fieldLabel}'
+</span>        fieldLabel: &#39;{fieldLabel}&#39;
     },
 
 <span id='BasiGX-view-combo-ScaleCombo-property-queryMode'>    /**
 </span>     *
      */
-    queryMode: 'local',
+    queryMode: &#39;local&#39;,
 
 <span id='BasiGX-view-combo-ScaleCombo-property-forceSelection'>    /**
 </span>     *
@@ -85,17 +85,17 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
 <span id='BasiGX-view-combo-ScaleCombo-property-displayField'>    /**
 </span>     *
      */
-    displayField: 'scale',
+    displayField: &#39;scale&#39;,
 
 <span id='BasiGX-view-combo-ScaleCombo-property-valueField'>    /**
 </span>     *
      */
-    valueField: 'resolution',
+    valueField: &#39;resolution&#39;,
 
 <span id='BasiGX-view-combo-ScaleCombo-property-fields'>    /**
 </span>     *
      */
-    fields: ['scale', 'resolution'],
+    fields: [&#39;scale&#39;, &#39;resolution&#39;],
 
 <span id='BasiGX-view-combo-ScaleCombo-property-map'>    /**
 </span>     *
@@ -107,18 +107,18 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
 </span>         *
          */
         scales: [
-            {'scale': '1:2.000.000', 'resolution': 560},
-            {'scale': '1:1.000.000', 'resolution': 280},
-            {'scale': '1:500.000', 'resolution': 140},
-            {'scale': '1:250.000', 'resolution': 70},
-            {'scale': '1:100.000', 'resolution': 28},
-            {'scale': '1:50.000', 'resolution': 14},
-            {'scale': '1:25.000', 'resolution': 7},
-            {'scale': '1:10.000', 'resolution': 2.8},
-            {'scale': '1:5.000', 'resolution': 1.4},
-            {'scale': '1:2.500', 'resolution': 0.7},
-            {'scale': '1:1.000', 'resolution': 0.28},
-            {'scale': '1:500', 'resolution': 0.14}
+            {&#39;scale&#39;: &#39;1:2.000.000&#39;, &#39;resolution&#39;: 560},
+            {&#39;scale&#39;: &#39;1:1.000.000&#39;, &#39;resolution&#39;: 280},
+            {&#39;scale&#39;: &#39;1:500.000&#39;, &#39;resolution&#39;: 140},
+            {&#39;scale&#39;: &#39;1:250.000&#39;, &#39;resolution&#39;: 70},
+            {&#39;scale&#39;: &#39;1:100.000&#39;, &#39;resolution&#39;: 28},
+            {&#39;scale&#39;: &#39;1:50.000&#39;, &#39;resolution&#39;: 14},
+            {&#39;scale&#39;: &#39;1:25.000&#39;, &#39;resolution&#39;: 7},
+            {&#39;scale&#39;: &#39;1:10.000&#39;, &#39;resolution&#39;: 2.8},
+            {&#39;scale&#39;: &#39;1:5.000&#39;, &#39;resolution&#39;: 1.4},
+            {&#39;scale&#39;: &#39;1:2.500&#39;, &#39;resolution&#39;: 0.7},
+            {&#39;scale&#39;: &#39;1:1.000&#39;, &#39;resolution&#39;: 0.28},
+            {&#39;scale&#39;: &#39;1:500&#39;, &#39;resolution&#39;: 0.14}
         ]
     },
 
@@ -134,10 +134,10 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
 
         // using hard scales here as there is no way currently known to
         // retrieve all resolutions from the map
-        var scaleStore = Ext.create('Ext.data.Store', {
+        var scaleStore = Ext.create(&#39;Ext.data.Store&#39;, {
             sorters: [{
-                property: 'resolution',
-                direction: 'DESC'
+                property: &#39;resolution&#39;,
+                direction: &#39;DESC&#39;
             }],
             data: me.getScales()
         });
@@ -150,10 +150,10 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
         me.setValue(me.map.getView().getResolution());
 
         // register listeners to update combo and map
-        me.on('select', function(combo, rec) {
-            me.map.getView().setResolution(rec.get('resolution'));
+        me.on(&#39;select&#39;, function(combo, rec) {
+            me.map.getView().setResolution(rec.get(&#39;resolution&#39;));
         });
-        me.map.getView().on('change:resolution', me.updateComboOnMapChange, me);
+        me.map.getView().on(&#39;change:resolution&#39;, me.updateComboOnMapChange, me);
     },
 
 <span id='BasiGX-view-combo-ScaleCombo-method-updateComboOnMapChange'>    /**
@@ -167,18 +167,18 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
      *     event.
      */
     updateComboOnMapChange: function(evt) {
-        var resolution = evt.target.get(evt.key); // map.get('resolution')
+        var resolution = evt.target.get(evt.key); // map.get(&#39;resolution&#39;)
         var store = this.getStore();
         var matchInStore = false;
 
-        matchInStore = (store.findExact('resolution', resolution) &gt;= 0) ?
+        matchInStore = (store.findExact(&#39;resolution&#39;, resolution) &gt;= 0) ?
             true : false;
 
         if (matchInStore) {
             this.setValue(resolution);
         } else {
             var rec = {
-                scale: '1:' + Math.round(
+                scale: &#39;1:&#39; + Math.round(
                     this.getCurrentScale(resolution)).toLocaleString(),
                 resolution: resolution
             };

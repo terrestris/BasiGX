@@ -22,37 +22,37 @@
  *
  * The template is parsed and stored in a representation like this:
  *
- *      me.text = 'Hey {foo.bar}! Test {bar} and {foo.bar} with {abc} over {bar:number}'
+ *      me.text = &#39;Hey {foo.bar}! Test {bar} and {foo.bar} with {abc} over {bar:number}&#39;
  *
- *      me.tokens = [ 'foo.bar', 'bar', 'abc' ]
+ *      me.tokens = [ &#39;foo.bar&#39;, &#39;bar&#39;, &#39;abc&#39; ]
  *
  *      me.buffer = [           me.slots = [
- *          'Hey ',                 undefined,
- *          undefined,              { token: 'foo.bar', pos: 0 },
- *          '! Test ',              undefined,
- *          undefined,              { token: 'bar', pos: 1 },
- *          ' and ',                undefined,
- *          undefined,              { token: 'foo.bar', pos: 0 },
- *          ' with ',               undefined,
- *          undefined,              { token: 'abc', pos: 2 },
- *          ' over ',               undefined,
- *          undefined               { token: 'bar', fmt: 'number', pos: 1 }
+ *          &#39;Hey &#39;,                 undefined,
+ *          undefined,              { token: &#39;foo.bar&#39;, pos: 0 },
+ *          &#39;! Test &#39;,              undefined,
+ *          undefined,              { token: &#39;bar&#39;, pos: 1 },
+ *          &#39; and &#39;,                undefined,
+ *          undefined,              { token: &#39;foo.bar&#39;, pos: 0 },
+ *          &#39; with &#39;,               undefined,
+ *          undefined,              { token: &#39;abc&#39;, pos: 2 },
+ *          &#39; over &#39;,               undefined,
+ *          undefined               { token: &#39;bar&#39;, fmt: &#39;number&#39;, pos: 1 }
  *      ]                       ]
  *
  * @private
  * @since 5.0.0
  */
-Ext.define('Ext.app.bind.Template', {
+Ext.define(&#39;Ext.app.bind.Template&#39;, {
     requires: [
-        'Ext.util.Format',
-        'Ext.app.bind.Parser'
+        &#39;Ext.util.Format&#39;,
+        &#39;Ext.app.bind.Parser&#39;
     ],
 
 <span id='Ext-app-bind-Template-property-buffer'>    /**
 </span>     * @property {String[]} buffer
      * Initially this is just the array of string fragments with `null` between each
      * to hold the place of a substitution token. On first use these slots are filled
-     * with the token's value and this array is joined to form the output.
+     * with the token&#39;s value and this array is joined to form the output.
      * @private
      */
     buffer: null,
@@ -164,7 +164,7 @@ Ext.define('Ext.app.bind.Template', {
             return buffer[0];
         }
 
-        return buffer.join('');
+        return buffer.join(&#39;&#39;);
     },
 
 <span id='Ext-app-bind-Template-method-getTokens'>    /**
@@ -208,7 +208,7 @@ Ext.define('Ext.app.bind.Template', {
                 pos = 0,
                 i;
 
-            // Remove the initters so that we don't get called here again.
+            // Remove the initters so that we don&#39;t get called here again.
             for (i in me._initters) {
                 delete me[i];
             }
@@ -216,10 +216,10 @@ Ext.define('Ext.app.bind.Template', {
             me.tokens = [];
             me.tokensMap = {};
 
-            // text = 'Hello {foo:this.fmt(2,4)} World {bar} - {1}'
+            // text = &#39;Hello {foo:this.fmt(2,4)} World {bar} - {1}&#39;
             for (i = 0; i &lt; length;) {
                 last = i;
-                if ((i = text.indexOf('{', last)) &lt; 0) {
+                if ((i = text.indexOf(&#39;{&#39;, last)) &lt; 0) {
                     buffer[pos++] = text.substring(last);
                     break;
                 }
@@ -232,7 +232,7 @@ Ext.define('Ext.app.bind.Template', {
                 slots[pos++] = parser.compileExpression(me.tokens, me.tokensMap);
 
                 i = parser.token.at + 1;  // skip over the &quot;}&quot; token
-                parser.expect('}');      // ensure the next token is &quot;}&quot;
+                parser.expect(&#39;}&#39;);      // ensure the next token is &quot;}&quot;
             }
 
             parser.release();

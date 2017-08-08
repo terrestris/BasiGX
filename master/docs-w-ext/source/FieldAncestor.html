@@ -29,20 +29,20 @@
  * This mixin is primarily for internal use by {@link Ext.form.Panel} and {@link Ext.form.FieldContainer},
  * and should not normally need to be used directly.
  */
-Ext.define('Ext.form.FieldAncestor', {
-    extend: 'Ext.Mixin',
+Ext.define(&#39;Ext.form.FieldAncestor&#39;, {
+    extend: &#39;Ext.Mixin&#39;,
 
     requires: [
-        'Ext.container.Monitor'
+        &#39;Ext.container.Monitor&#39;
     ],
 
 <span id='Ext-form-FieldAncestor-property-mixinConfig'>    mixinConfig: {
-</span>        id: 'fieldAncestor',
+</span>        id: &#39;fieldAncestor&#39;,
         after: {
-            initInheritedState: 'initFieldInheritedState'
+            initInheritedState: &#39;initFieldInheritedState&#39;
         },
         before: {
-            doDestroy: 'onBeforeDestroy'
+            doDestroy: &#39;onBeforeDestroy&#39;
         }
     },
 
@@ -50,7 +50,7 @@ Ext.define('Ext.form.FieldAncestor', {
 </span>     * @cfg {Object} fieldDefaults
      * If specified, the properties in this object are used as default config values for each {@link Ext.form.Labelable}
      * instance (e.g. {@link Ext.form.field.Base} or {@link Ext.form.FieldContainer}) that is added as a descendant of
-     * this container. Corresponding values specified in an individual field's own configuration, or from the {@link
+     * this container. Corresponding values specified in an individual field&#39;s own configuration, or from the {@link
      * Ext.container.Container#defaults defaults config} of its parent container, will take precedence. See the
      * documentation for {@link Ext.form.Labelable} to see what config options may be specified in the fieldDefaults.
      *
@@ -58,32 +58,32 @@ Ext.define('Ext.form.FieldAncestor', {
      *
      *     new Ext.form.Panel({
      *         fieldDefaults: {
-     *             labelAlign: 'left',
+     *             labelAlign: &#39;left&#39;,
      *             labelWidth: 100
      *         },
      *         items: [{
-     *             xtype: 'fieldset',
+     *             xtype: &#39;fieldset&#39;,
      *             defaults: {
-     *                 labelAlign: 'top'
+     *                 labelAlign: &#39;top&#39;
      *             },
      *             items: [{
-     *                 name: 'field1'
+     *                 name: &#39;field1&#39;
      *             }, {
-     *                 name: 'field2'
+     *                 name: &#39;field2&#39;
      *             }]
      *         }, {
-     *             xtype: 'fieldset',
+     *             xtype: &#39;fieldset&#39;,
      *             items: [{
-     *                 name: 'field3',
+     *                 name: &#39;field3&#39;,
      *                 labelWidth: 150
      *             }, {
-     *                 name: 'field4'
+     *                 name: &#39;field4&#39;
      *             }]
      *         }]
      *     });
      *
-     * In this example, field1 and field2 will get labelAlign:'top' (from the fieldset's defaults) and labelWidth:100
-     * (from fieldDefaults), field3 and field4 will both get labelAlign:'left' (from fieldDefaults and field3 will use
+     * In this example, field1 and field2 will get labelAlign:&#39;top&#39; (from the fieldset&#39;s defaults) and labelWidth:100
+     * (from fieldDefaults), field3 and field4 will both get labelAlign:&#39;left&#39; (from fieldDefaults and field3 will use
      * the labelWidth:150 from its own config.
      */
 
@@ -93,7 +93,7 @@ Ext.define('Ext.form.FieldAncestor', {
      * container changes.
      * @param {Ext.form.FieldAncestor} this
      * @param {Ext.form.Labelable} field The Field instance whose validity changed
-     * @param {String} isValid The field's new validity state
+     * @param {String} isValid The field&#39;s new validity state
      */
 
 <span id='Ext-form-FieldAncestor-event-fielderrorchange'>    /**
@@ -106,19 +106,19 @@ Ext.define('Ext.form.FieldAncestor', {
      */
 
 <span id='Ext-form-FieldAncestor-method-initFieldAncestor'>    /**
-</span>     * Initializes the FieldAncestor's state; this must be called from the initComponent method of any components
+</span>     * Initializes the FieldAncestor&#39;s state; this must be called from the initComponent method of any components
      * importing this mixin.
      * @protected
      */
     initFieldAncestor: function() {
         var me = this;
 
-        // We use the monitor here as opposed to event bubbling. The problem with bubbling is it doesn't
+        // We use the monitor here as opposed to event bubbling. The problem with bubbling is it doesn&#39;t
         // let us react to items being added/remove at different places in the hierarchy which may have an
         // impact on the error/valid state.
         me.monitor = new Ext.container.Monitor({
             scope: me,
-            selector: '[isFormField]:not([excludeForm])',
+            selector: &#39;[isFormField]:not([excludeForm])&#39;,
             addHandler: me.onChildFieldAdd,
             removeHandler: me.onChildFieldRemove
         });
@@ -145,14 +145,14 @@ Ext.define('Ext.form.FieldAncestor', {
 
 <span id='Ext-form-FieldAncestor-method-onChildFieldAdd'>    onChildFieldAdd: function(field) {
 </span>        var me = this;
-        me.mon(field, 'errorchange', me.handleFieldErrorChange, me);
-        me.mon(field, 'validitychange', me.handleFieldValidityChange, me);
+        me.mon(field, &#39;errorchange&#39;, me.handleFieldErrorChange, me);
+        me.mon(field, &#39;validitychange&#39;, me.handleFieldValidityChange, me);
     },
     
 <span id='Ext-form-FieldAncestor-method-onChildFieldRemove'>    onChildFieldRemove: function(field) {
 </span>        var me = this;
-        me.mun(field, 'errorchange', me.handleFieldErrorChange, me);
-        me.mun(field, 'validitychange', me.handleFieldValidityChange, me);
+        me.mun(field, &#39;errorchange&#39;, me.handleFieldErrorChange, me);
+        me.mun(field, &#39;validitychange&#39;, me.handleFieldValidityChange, me);
     },
 
 <span id='Ext-form-FieldAncestor-method-initFieldDefaults'>    /**
@@ -172,7 +172,7 @@ Ext.define('Ext.form.FieldAncestor', {
     handleFieldValidityChange: function(field, isValid) {
         var me = this;
         if (field !== me) {
-            me.fireEvent('fieldvaliditychange', me, field, isValid);
+            me.fireEvent(&#39;fieldvaliditychange&#39;, me, field, isValid);
             me.onFieldValidityChange(field, isValid);
         }
     },
@@ -184,7 +184,7 @@ Ext.define('Ext.form.FieldAncestor', {
     handleFieldErrorChange: function(labelable, activeError) {
         var me = this;
         if (labelable !== me) {
-            me.fireEvent('fielderrorchange', me, labelable, activeError);
+            me.fireEvent(&#39;fielderrorchange&#39;, me, labelable, activeError);
             me.onFieldErrorChange(labelable, activeError);
         }
     },

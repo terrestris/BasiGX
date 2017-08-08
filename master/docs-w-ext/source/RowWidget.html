@@ -16,23 +16,23 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-grid-plugin-RowWidget'>/**
-</span> * Plugin (ptype = 'rowwidget') that adds the ability to second row body in a grid which expands/contracts.
+</span> * Plugin (ptype = &#39;rowwidget&#39;) that adds the ability to second row body in a grid which expands/contracts.
  *
  * The expand/contract behavior is configurable to react on clicking of the column, double click of the row, and/or hitting enter while a row is selected.
  *
  * The expansion row may contain a {@link #cfg-widget} which is primed with the record of the corresponding grid row.
- * The widget's {@link Ext.Component#cfg-defaultBindProperty defaultBindProperty} property is set to the record.
+ * The widget&#39;s {@link Ext.Component#cfg-defaultBindProperty defaultBindProperty} property is set to the record.
  */
-Ext.define('Ext.grid.plugin.RowWidget', {
-    extend: 'Ext.grid.plugin.RowExpander',
+Ext.define(&#39;Ext.grid.plugin.RowWidget&#39;, {
+    extend: &#39;Ext.grid.plugin.RowExpander&#39;,
     mixins: [
-        'Ext.mixin.Identifiable',
-        'Ext.mixin.StyleCacher'
+        &#39;Ext.mixin.Identifiable&#39;,
+        &#39;Ext.mixin.StyleCacher&#39;
     ],
 
-<span id='Ext-grid-plugin-RowWidget-property-lockableScope'>    lockableScope: 'top',
+<span id='Ext-grid-plugin-RowWidget-property-lockableScope'>    lockableScope: &#39;top&#39;,
 </span>
-    alias: 'plugin.rowwidget',
+    alias: &#39;plugin.rowwidget&#39;,
 
     config: {
 <span id='Ext-grid-plugin-RowWidget-cfg-defaultWidgetUI'>        /**
@@ -48,7 +48,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
      *
      * This is used to create the widgets or components which are rendered into the expansion row.
      *
-     * The associated grid row's record is used to update the widget/component's {@link Ext.Component#defaultBindProperty defaultBindProperty}.
+     * The associated grid row&#39;s record is used to update the widget/component&#39;s {@link Ext.Component#defaultBindProperty defaultBindProperty}.
      *
      * Note that if this plugin is applied to a lockable grid, the widget applies to the normal (unlocked) side.
      * See {@link #lockedWidget}
@@ -84,7 +84,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
             widget;
 
         // Generate a unique class name so we can identify our row element.
-        me.rowIdCls = Ext.id(null, Ext.baseCSSPrefix + 'rowwidget-');
+        me.rowIdCls = Ext.id(null, Ext.baseCSSPrefix + &#39;rowwidget-&#39;);
 
         // Keep track of which record internalIds are expanded.
         me.recordsExpanded = {};
@@ -94,23 +94,23 @@ Ext.define('Ext.grid.plugin.RowWidget', {
         widget = me.widget;
         //&lt;debug&gt;
         if (!widget || widget.isComponent) {
-            Ext.raise('RowWidget requires a widget configuration.');
+            Ext.raise(&#39;RowWidget requires a widget configuration.&#39;);
         }
         //&lt;/debug&gt;
         me.widget = widget = Ext.apply({}, widget);
 
-        // Apply the default UI for the xtype which is going to feature in the normal side's expansion row.
+        // Apply the default UI for the xtype which is going to feature in the normal side&#39;s expansion row.
         if (!widget.ui) {
-            widget.ui = me.getDefaultWidgetUI()[widget.xtype] || 'default';
+            widget.ui = me.getDefaultWidgetUI()[widget.xtype] || &#39;default&#39;;
         }
 
         // If the grid is a lockable assembly, we have to track locked widgets.
         if (grid.enableLocking &amp;&amp; me.lockedWidget) {
             me.lockedWidget = widget = Ext.apply({}, me.lockedWidget);
 
-            // Apply the default UI for the xtype which is going to feature in the locked side's expansion row.
+            // Apply the default UI for the xtype which is going to feature in the locked side&#39;s expansion row.
             if (!widget.ui) {
-                widget.ui = me.getDefaultWidgetUI()[widget.xtype] || 'default';
+                widget.ui = me.getDefaultWidgetUI()[widget.xtype] || &#39;default&#39;;
             }
         }
 
@@ -134,7 +134,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
         var me = this,
             features = [],
             featuresCfg = {
-                ftype: 'rowbody',
+                ftype: &#39;rowbody&#39;,
                 rowExpander: me,
                 rowIdCls: me.rowIdCls,
                 bodyBefore: me.bodyBefore,
@@ -144,12 +144,12 @@ Ext.define('Ext.grid.plugin.RowWidget', {
                 setupRowData: me.setupRowData,
                 setup: me.setup,
 
-                // Do not relay click events into the client grid's row
+                // Do not relay click events into the client grid&#39;s row
                 onClick: Ext.emptyFn
             };
 
         features.push(Ext.apply({
-            lockableScope: 'normal'
+            lockableScope: &#39;normal&#39;
         }, featuresCfg));
 
         // Locked side will need a copy to keep the two DOM structures symmetrical.
@@ -157,7 +157,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
         // The enableLocking flag is set early in Ext.panel.Table#initComponent if any columns are locked.
         if (grid.enableLocking) {
             features.push(Ext.apply({
-                lockableScope: 'locked'
+                lockableScope: &#39;locked&#39;
             }, featuresCfg));
         }
 
@@ -168,7 +168,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
 </span>        var me = this.rowExpander;
         
         me.rowBodyFeature = this;
-        rowValues.rowBodyCls = me.recordsExpanded[record.internalId] ? '' : me.rowBodyHiddenCls;
+        rowValues.rowBodyCls = me.recordsExpanded[record.internalId] ? &#39;&#39; : me.rowBodyHiddenCls;
     },
 
 <span id='Ext-grid-plugin-RowWidget-method-bindView'>    bindView: function(view) {
@@ -190,10 +190,10 @@ Ext.define('Ext.grid.plugin.RowWidget', {
         me.viewListeners.destroy();
         
         if (me.grid.lockable) {
-            me.grid.destroyManagedWidgets(id + '-' + me.lockedView.getId());
-            me.grid.destroyManagedWidgets(id + '-' + me.normalView.getId());
+            me.grid.destroyManagedWidgets(id + &#39;-&#39; + me.lockedView.getId());
+            me.grid.destroyManagedWidgets(id + &#39;-&#39; + me.normalView.getId());
         } else {
-            me.grid.destroyManagedWidgets(id + '-' + me.view.getId());
+            me.grid.destroyManagedWidgets(id + &#39;-&#39; + me.view.getId());
         }
         
         me.callParent();
@@ -204,7 +204,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
             handleEvent: function(e) {
                 // An override applied to the client view so that it ignores events from within the expander row
                 // Ignore all events from within our rowwidget
-                if (e.getTarget('.' + this.rowExpander.rowIdCls, this.body)) {
+                if (e.getTarget(&#39;.&#39; + this.rowExpander.rowIdCls, this.body)) {
                     return;
                 }
 
@@ -213,7 +213,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
 
             onFocusEnter: function(e) {
                 // An override applied to the client view so that it ignores focus moving into the expander row
-                if (e.event.getTarget('.' + this.rowExpander.rowIdCls, this.body)) {
+                if (e.event.getTarget(&#39;.&#39; + this.rowExpander.rowIdCls, this.body)) {
                     return;
                 }
 
@@ -293,7 +293,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
         // An injectable resolveListenerScope function for use by the widgets to
         // link them to the owning view.
         listenerScopeDecorator: function (defaultScope) {
-            if (defaultScope === 'this') {
+            if (defaultScope === &#39;this&#39;) {
                 return this;
             }
             return this.ownerCt.resolveListenerScope(defaultScope);
@@ -316,7 +316,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
             if (record) {
                 widget = me.grid.lockable &amp;&amp; view === me.lockedView ? me.lockedWidget : me.widget;
                 if (widget) {
-                    result = me.grid.createManagedWidget(me.getId() + '-' + view.getId(), widget, record);
+                    result = me.grid.createManagedWidget(me.getId() + &#39;-&#39; + view.getId(), widget, record);
                     result.resolveListenerScope = me.listenerScopeDecorator;
                     result.measurer = me;
                     result.ownerCt = view;
@@ -342,7 +342,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
             }
 
             target = Ext.fly(view.getNode(record)).down(me.rowBodyFeature.innerSelector);
-            width = target.getWidth(true) - target.getPadding('lr');
+            width = target.getWidth(true) - target.getPadding(&#39;lr&#39;);
             widget = me.getWidget(view, record);
 
             // Might be no widget if we are handling a lockable grid
@@ -388,7 +388,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
                 lockedRow,
                 nextBd = normalRow.down(me.rowBodyTrSelector, true),
                 wasCollapsed = normalRow.hasCls(me.rowCollapsedCls),
-                addOrRemoveCls = wasCollapsed ? 'removeCls' : 'addCls',
+                addOrRemoveCls = wasCollapsed ? &#39;removeCls&#39; : &#39;addCls&#39;,
                 ownerLockable = me.grid.lockable &amp;&amp; me.grid,
                 widget;
 
@@ -400,7 +400,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
             // to sync row height on the next layout.
             Ext.suspendLayouts();
 
-            // We're expanding
+            // We&#39;re expanding
             if (wasCollapsed) {
                 me.recordsExpanded[record.internalId] = true;
                 widget = me.addWidget(view, record);
@@ -419,7 +419,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
 
                     // Process the locked side.
                     lockedRow = Ext.fly(view.getNode(rowIdx));
-                    // Just because the grid is locked, doesn't mean we'll necessarily have a locked row.
+                    // Just because the grid is locked, doesn&#39;t mean we&#39;ll necessarily have a locked row.
                     if (lockedRow) {
                         lockedRow[addOrRemoveCls](me.rowCollapsedCls);
 
@@ -427,7 +427,7 @@ Ext.define('Ext.grid.plugin.RowWidget', {
                         nextBd = lockedRow.down(me.rowBodyTrSelector, true);
                         Ext.fly(nextBd)[addOrRemoveCls](me.rowBodyHiddenCls);
 
-                        // Pass an array if we're in a lockable assembly.
+                        // Pass an array if we&#39;re in a lockable assembly.
                         if (wasCollapsed &amp;&amp; me.lockedWidget) {
                             widget = [widget, me.addWidget(view, record)];
                         } else {
@@ -436,12 +436,12 @@ Ext.define('Ext.grid.plugin.RowWidget', {
 
                     }
 
-                    // We're going to need a layout run to synchronize row heights
+                    // We&#39;re going to need a layout run to synchronize row heights
                     ownerLockable.syncRowHeightOnNextLayout = true;
                 }
             }
 
-            me.view.fireEvent(wasCollapsed ? 'expandbody' : 'collapsebody', rowNode, record, nextBd, widget);
+            me.view.fireEvent(wasCollapsed ? &#39;expandbody&#39; : &#39;collapsebody&#39;, rowNode, record, nextBd, widget);
             view.updateLayout();
             Ext.resumeLayouts(true);
 

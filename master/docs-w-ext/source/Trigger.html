@@ -25,18 +25,18 @@
  * triggers} config instead.  This class is provided for compatibility reasons but is
  * not used internally by the framework.
  */
-Ext.define('Ext.form.field.Trigger', {
-    extend:'Ext.form.field.Text',
-    alias: ['widget.triggerfield', 'widget.trigger'],
-    requires: ['Ext.dom.Helper', 'Ext.util.ClickRepeater'],
-    alternateClassName: ['Ext.form.TriggerField', 'Ext.form.TwinTriggerField', 'Ext.form.Trigger'],
+Ext.define(&#39;Ext.form.field.Trigger&#39;, {
+    extend:&#39;Ext.form.field.Text&#39;,
+    alias: [&#39;widget.triggerfield&#39;, &#39;widget.trigger&#39;],
+    requires: [&#39;Ext.dom.Helper&#39;, &#39;Ext.util.ClickRepeater&#39;],
+    alternateClassName: [&#39;Ext.form.TriggerField&#39;, &#39;Ext.form.TwinTriggerField&#39;, &#39;Ext.form.Trigger&#39;],
 
 <span id='Ext-form-field-Trigger-cfg-triggerCls'>    /**
 </span>     * @cfg {String} triggerCls
      * An additional CSS class used to style the trigger button. The trigger will always get the {@link Ext.form.trigger.Trigger#baseCls}
      * by default and triggerCls will be **appended** if specified.
      */
-    triggerCls: Ext.baseCSSPrefix + 'form-arrow-trigger',
+    triggerCls: Ext.baseCSSPrefix + &#39;form-arrow-trigger&#39;,
 
     inheritableStatics: {
 <span id='Ext-form-field-Trigger-static-method-warnDeprecated'>        /**
@@ -47,7 +47,7 @@ Ext.define('Ext.form.field.Trigger', {
         warnDeprecated: function() {
             //&lt;debug&gt;
             // TODO: can we make this warning depend on compat level?
-            Ext.log.warn('Ext.form.field.Trigger is deprecated. Use Ext.form.field.Text instead.');
+            Ext.log.warn(&#39;Ext.form.field.Trigger is deprecated. Use Ext.form.field.Text instead.&#39;);
             //&lt;/debug&gt;
         }
     },

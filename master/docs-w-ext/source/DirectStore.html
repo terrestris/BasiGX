@@ -37,14 +37,14 @@
  *   - **{@link Ext.data.proxy.Direct#paramsAsHash paramsAsHash}**
  *
  */
-Ext.define('Ext.data.DirectStore', {
+Ext.define(&#39;Ext.data.DirectStore&#39;, {
     /* Begin Definitions */
     
-    extend: 'Ext.data.Store',
+    extend: &#39;Ext.data.Store&#39;,
     
-    alias: 'store.direct',
+    alias: &#39;store.direct&#39;,
     
-    requires: ['Ext.data.proxy.Direct'],
+    requires: [&#39;Ext.data.proxy.Direct&#39;],
    
 <span id='Ext-data-DirectStore-method-constructor'>    /* End Definitions */
 </span>
@@ -52,13 +52,13 @@ Ext.define('Ext.data.DirectStore', {
         config = Ext.apply({}, config);
         if (!config.proxy) {
             var proxy = {
-                type: 'direct',
+                type: &#39;direct&#39;,
                 reader: {
-                    type: 'json'
+                    type: &#39;json&#39;
                 }
             };
-            Ext.copyTo(proxy, config, 'paramOrder,paramsAsHash,directFn,api,simpleSortMode,extraParams');
-            Ext.copyTo(proxy.reader, config, 'totalProperty,root,rootProperty,idProperty');
+            Ext.copyTo(proxy, config, &#39;paramOrder,paramsAsHash,directFn,api,simpleSortMode,extraParams&#39;);
+            Ext.copyTo(proxy.reader, config, &#39;totalProperty,root,rootProperty,idProperty&#39;);
             config.proxy = proxy;
         }
         this.callParent([config]);

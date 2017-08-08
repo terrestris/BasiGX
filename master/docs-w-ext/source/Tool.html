@@ -29,28 +29,28 @@
  * {@link Ext.panel.Panel#tools} configuration on the Panel itself.
  *
  *     @example
- *     Ext.create('Ext.panel.Panel', {
+ *     Ext.create(&#39;Ext.panel.Panel&#39;, {
  *         width: 200,
  *         height: 200,
  *         renderTo: document.body,
- *         title: 'A Panel',
+ *         title: &#39;A Panel&#39;,
  *         tools: [{
- *             type: 'help',
+ *             type: &#39;help&#39;,
  *             callback: function() {
  *                 // show help here
  *             }
  *         }, {
- *             itemId: 'reply',
- *             glyph: 'xf112@FontAwesome', // Reply icon
+ *             itemId: &#39;reply&#39;,
+ *             glyph: &#39;xf112@FontAwesome&#39;, // Reply icon
  *             hidden: true,
  *             callback: function() {
  *                 // do reply
  *             }
  *         }, {
- *             type: 'search',
+ *             type: &#39;search&#39;,
  *             callback: function (panel) {
  *                 // do search
- *                 panel.down('#refresh').show();
+ *                 panel.down(&#39;#refresh&#39;).show();
  *             }
  *         }]
  *     });
@@ -60,8 +60,8 @@
  * pass a method name instead of a direct function:
  * 
  *      tools: [{
- *          type: 'help',
- *          callback: 'onHelp',
+ *          type: &#39;help&#39;,
+ *          callback: &#39;onHelp&#39;,
  *          scope: this
  *      },
  *      ...
@@ -69,13 +69,13 @@
  * The `callback` (or `handler`) name is looked up on the `scope` which will also be the
  * `this` reference when the method is called.
  */
-Ext.define('Ext.panel.Tool', {
-    extend: 'Ext.Component',
-    uses: ['Ext.tip.QuickTipManager'],
-    xtype: 'tool',
+Ext.define(&#39;Ext.panel.Tool&#39;, {
+    extend: &#39;Ext.Component&#39;,
+    uses: [&#39;Ext.tip.QuickTipManager&#39;],
+    xtype: &#39;tool&#39;,
 
     requires: [
-        'Ext.Glyph'
+        &#39;Ext.Glyph&#39;
     ],
 
     config: {
@@ -92,46 +92,46 @@ Ext.define('Ext.panel.Tool', {
      */
     isTool: true,
     
-<span id='Ext-panel-Tool-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'tool',
-</span><span id='Ext-panel-Tool-cfg-disabledCls'>    disabledCls: Ext.baseCSSPrefix + 'tool-disabled',
+<span id='Ext-panel-Tool-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;tool&#39;,
+</span><span id='Ext-panel-Tool-cfg-disabledCls'>    disabledCls: Ext.baseCSSPrefix + &#39;tool-disabled&#39;,
 </span>    
 <span id='Ext-panel-Tool-cfg-toolPressedCls'>    /**
 </span>     * @cfg
      * @private
      */
-    toolPressedCls: Ext.baseCSSPrefix + 'tool-pressed',
+    toolPressedCls: Ext.baseCSSPrefix + &#39;tool-pressed&#39;,
 <span id='Ext-panel-Tool-cfg-toolOverCls'>    /**
 </span>     * @cfg
      * @private
      */
-    toolOverCls: Ext.baseCSSPrefix + 'tool-over',
+    toolOverCls: Ext.baseCSSPrefix + &#39;tool-over&#39;,
 <span id='Ext-panel-Tool-cfg-iconCls'>    /**
 </span>     * @cfg {String} iconCls
      * @inheritdoc Ext.panel.Header#cfg-iconCls
      */
 
     childEls: [
-        'toolEl'
+        &#39;toolEl&#39;
     ],
 
 <span id='Ext-panel-Tool-cfg-renderTpl'>    renderTpl: [
-</span>        '&lt;div id=&quot;{id}-toolEl&quot; data-ref=&quot;toolEl&quot; class=&quot;{className} {childElCls}&quot; role=&quot;presentation&quot;' +
-        '&lt;tpl if=&quot;glyph&quot;&gt;' +
-            '&lt;tpl if=&quot;glyphFontFamily&quot;&gt;' +
-                ' style=&quot;font-family:{glyphFontFamily};&quot;&gt;' +
-            '&lt;/tpl&gt;' +
-            '{glyph}' +
-        '&lt;tpl else&gt;' +
-            '&gt;' +
-        '&lt;/tpl&gt;' +
-        '&lt;/div&gt;'
+</span>        &#39;&lt;div id=&quot;{id}-toolEl&quot; data-ref=&quot;toolEl&quot; class=&quot;{className} {childElCls}&quot; role=&quot;presentation&quot;&#39; +
+        &#39;&lt;tpl if=&quot;glyph&quot;&gt;&#39; +
+            &#39;&lt;tpl if=&quot;glyphFontFamily&quot;&gt;&#39; +
+                &#39; style=&quot;font-family:{glyphFontFamily};&quot;&gt;&#39; +
+            &#39;&lt;/tpl&gt;&#39; +
+            &#39;{glyph}&#39; +
+        &#39;&lt;tpl else&gt;&#39; +
+            &#39;&gt;&#39; +
+        &#39;&lt;/tpl&gt;&#39; +
+        &#39;&lt;/div&gt;&#39;
     ],
 
 <span id='Ext-panel-Tool-cfg-toolOwner'>    /**
 </span>     * @cfg {Ext.Component} toolOwner
      * The owner to report to the `callback` method. Default is `null` for the `ownerCt`.
      * This is automatically set to the owning `Ext.panel.Panel` when a tool is created as
-     * a member of a panel's `tools`.
+     * a member of a panel&#39;s `tools`.
      * @since 4.2
      */
     toolOwner: null,
@@ -255,9 +255,9 @@ Ext.define('Ext.panel.Tool', {
 
 <span id='Ext-panel-Tool-cfg-tooltipType'>     /**
 </span>     * @cfg {String} tooltipType
-     * The type of tooltip to use. Either 'qtip' (default) for QuickTips or 'title' for title attribute.
+     * The type of tooltip to use. Either &#39;qtip&#39; (default) for QuickTips or &#39;title&#39; for title attribute.
      */
-    tooltipType: 'qtip',
+    tooltipType: &#39;qtip&#39;,
 
 <span id='Ext-panel-Tool-cfg-stopEvent'>    /**
 </span>     * @cfg {Boolean} stopEvent
@@ -265,14 +265,14 @@ Ext.define('Ext.panel.Tool', {
      */
     stopEvent: true,
     
-<span id='Ext-panel-Tool-property-ariaRole'>    ariaRole: 'button',
+<span id='Ext-panel-Tool-property-ariaRole'>    ariaRole: &#39;button&#39;,
 </span><span id='Ext-panel-Tool-property-focusable'>    focusable: true,
 </span><span id='Ext-panel-Tool-cfg-tabIndex'>    tabIndex: 0,
 </span>    
 <span id='Ext-panel-Tool-cfg-keyMap'>    keyMap: {
-</span>        scope: 'this',
-        SPACE: 'onClick',
-        ENTER: 'onClick'
+</span>        scope: &#39;this&#39;,
+        SPACE: &#39;onClick&#39;,
+        ENTER: &#39;onClick&#39;
     },
 
 <span id='Ext-panel-Tool-property-cacheHeight'>    cacheHeight: true,
@@ -313,11 +313,11 @@ Ext.define('Ext.panel.Tool', {
 
         //&lt;debug&gt;
         if (me.id &amp;&amp; me._toolTypes[me.id]) {
-            Ext.raise('When specifying a tool you should use the type option, the id can conflict now that tool is a Component');
+            Ext.raise(&#39;When specifying a tool you should use the type option, the id can conflict now that tool is a Component&#39;);
         }
         //&lt;/debug&gt;
 
-        // alias qtip, should use tooltip since it's what we have in the docs
+        // alias qtip, should use tooltip since it&#39;s what we have in the docs
         me.tooltip = me.tooltip || me.qtip;
         me.callParent();
     },
@@ -345,10 +345,10 @@ Ext.define('Ext.panel.Tool', {
     
 <span id='Ext-panel-Tool-method-calculateClassName'>    calculateClassName: function() {
 </span>        var me = this,
-            result = me.baseCls + '-tool-el ';
+            result = me.baseCls + &#39;-tool-el &#39;;
 
         if (me.type) {
-            result += me.baseCls + '-img ' + me.baseCls + '-' + me.type;
+            result += me.baseCls + &#39;-img &#39; + me.baseCls + &#39;-&#39; + me.type;
         } else if (me.iconCls) {
             result += me.iconCls; // do not add x-tool-img to allow iconCls full sway
         }
@@ -381,7 +381,7 @@ Ext.define('Ext.panel.Tool', {
     },
 
 <span id='Ext-panel-Tool-property-tipAttrs'>    tipAttrs: {
-</span>        qtip: 'data-qtip'
+</span>        qtip: &#39;data-qtip&#39;
     },
 
 <span id='Ext-panel-Tool-method-setTooltip'>    setTooltip: function (tooltip, type) {
@@ -408,21 +408,21 @@ Ext.define('Ext.panel.Tool', {
                 }, tooltip));
             } else if (el) {
                 if (type &amp;&amp; oldType &amp;&amp; type !== oldType) {
-                    attr = me.tipAttrs[oldType] || 'title';
+                    attr = me.tipAttrs[oldType] || &#39;title&#39;;
                     el.dom.removeAttribute(attr);
                 }
 
-                attr = me.tipAttrs[type || oldType] || 'title';
+                attr = me.tipAttrs[type || oldType] || &#39;title&#39;;
                 el.dom.setAttribute(attr, tooltip);
             }
             
-            if (attr !== 'title' &amp;&amp; me.ariaRole &amp;&amp; me.ariaRole !== 'presentation') {
+            if (attr !== &#39;title&#39; &amp;&amp; me.ariaRole &amp;&amp; me.ariaRole !== &#39;presentation&#39;) {
                 if (el) {
-                    el.dom.setAttribute('aria-label', tooltip);
+                    el.dom.setAttribute(&#39;aria-label&#39;, tooltip);
                 }
                 else {
                     me.ariaRenderAttributes = me.ariaRenderAttributes || {};
-                    me.ariaRenderAttributes['aria-label'] = tooltip;
+                    me.ariaRenderAttributes[&#39;aria-label&#39;] = tooltip;
                 }
             }
         }
@@ -529,7 +529,7 @@ Ext.define('Ext.panel.Tool', {
                 toolEl.dom.innerHTML = glyph.character;
                 toolEl.setStyle(glyph.getStyle());
             } else {
-                toolEl.dom.innerHTML = '';
+                toolEl.dom.innerHTML = &#39;&#39;;
             }
         }
 
@@ -554,8 +554,8 @@ Ext.define('Ext.panel.Tool', {
             }
 
             //remove the pressed + over class if it was a pointer event
-            if (e.type !== 'keydown') {
-                me.el.removeCls(me.toolPressedCls + ' ' + me.toolOverCls);
+            if (e.type !== &#39;keydown&#39;) {
+                me.el.removeCls(me.toolPressedCls + &#39; &#39; + me.toolOverCls);
             }
 
             if (me.stopEvent !== false) {
@@ -586,7 +586,7 @@ Ext.define('Ext.panel.Tool', {
              * will not fire.
              * @since 5.0.0
              */
-            me.fireEvent('click', me, e, me.toolOwner || me.ownerCt);
+            me.fireEvent(&#39;click&#39;, me, e, me.toolOwner || me.ownerCt);
 
             return true;
         },

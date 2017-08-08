@@ -22,11 +22,11 @@
  * This class is instantiated by {@link Ext.data.Store stores} and {@link Ext.data.Model records} and should
  * not need to be instantiated in user code.
  */
-Ext.define('Ext.data.operation.Destroy', {
-    extend: 'Ext.data.operation.Operation',
-    alias: 'data.operation.destroy',
+Ext.define(&#39;Ext.data.operation.Destroy&#39;, {
+    extend: &#39;Ext.data.operation.Operation&#39;,
+    alias: &#39;data.operation.destroy&#39;,
     
-<span id='Ext-data-operation-Destroy-property-action'>    action: 'destroy',
+<span id='Ext-data-operation-Destroy-property-action'>    action: &#39;destroy&#39;,
 </span>
 <span id='Ext-data-operation-Destroy-property-isDestroyOperation'>    isDestroyOperation: true,
 </span>
@@ -51,7 +51,7 @@ Ext.define('Ext.data.operation.Destroy', {
 <span id='Ext-data-operation-Destroy-method-getRecordData'>    getRecordData: function (record, operation) {
 </span>        var data = {},
             idField = record.idField,
-            nameProperty = this.getNameProperty() || 'name';
+            nameProperty = this.getNameProperty() || &#39;name&#39;;
 
         data[idField[nameProperty]] = record.id;
 

@@ -37,12 +37,12 @@
  *
  * @class BasiGX.view.view.LayerSet
  */
-Ext.define('BasiGX.view.view.LayerSet', {
-    extend: 'Ext.view.View',
-    xtype: 'basigx-view-layerset',
+Ext.define(&#39;BasiGX.view.view.LayerSet&#39;, {
+    extend: &#39;Ext.view.View&#39;,
+    xtype: &#39;basigx-view-layerset&#39;,
 
     requires: [
-        'Ext.data.Store'
+        &#39;Ext.data.Store&#39;
     ],
 
 <span id='BasiGX-view-view-LayerSet-property-layerSetUrl'>    /**
@@ -61,13 +61,13 @@ Ext.define('BasiGX.view.view.LayerSet', {
 <span id='BasiGX-view-view-LayerSet-property-defaultImagePath'>    /**
 </span>     * the default path to request the images from
      */
-    defaultImagePath: 'classic/resources/img/themes/',
+    defaultImagePath: &#39;classic/resources/img/themes/&#39;,
 
 <span id='BasiGX-view-view-LayerSet-property-demoThumb'>    /**
 </span>     * the demo image to use
      */
-    demoThumb: 'https://www.terrestris.de/wp-content/uploads/2014/03/' +
-        'logo_terrestris_small3.png',
+    demoThumb: &#39;https://www.terrestris.de/wp-content/uploads/2014/03/&#39; +
+        &#39;logo_terrestris_small3.png&#39;,
 
 <span id='BasiGX-view-view-LayerSet-property-width'>    /**
 </span>     *
@@ -87,17 +87,17 @@ Ext.define('BasiGX.view.view.LayerSet', {
 <span id='BasiGX-view-view-LayerSet-property-cls'>    /**
 </span>     *
      */
-    cls: 'img-chooser-view',
+    cls: &#39;img-chooser-view&#39;,
 
 <span id='BasiGX-view-view-LayerSet-property-overItemCls'>    /**
 </span>     *
      */
-    overItemCls: 'x-view-over',
+    overItemCls: &#39;x-view-over&#39;,
 
 <span id='BasiGX-view-view-LayerSet-property-itemSelector'>    /**
 </span>     *
      */
-    itemSelector: 'div.thumb-wrap',
+    itemSelector: &#39;div.thumb-wrap&#39;,
 
 <span id='BasiGX-view-view-LayerSet-property-tpl'>    /**
 </span>     *
@@ -116,40 +116,40 @@ Ext.define('BasiGX.view.view.LayerSet', {
             // use given local data or demo data
             var data = me.layerSetData || [
                 {
-                    'title': 'Stadtkarte',
-                    'name': 'stadtkarte',
-                    'thumb': me.demoThumb
+                    &#39;title&#39;: &#39;Stadtkarte&#39;,
+                    &#39;name&#39;: &#39;stadtkarte&#39;,
+                    &#39;thumb&#39;: me.demoThumb
                 },
                 {
-                    'title': 'Verkehr',
-                    'name': 'verkehr',
-                    'thumb': me.demoThumb
+                    &#39;title&#39;: &#39;Verkehr&#39;,
+                    &#39;name&#39;: &#39;verkehr&#39;,
+                    &#39;thumb&#39;: me.demoThumb
                 },
                 {
-                    'title': 'Umwelt',
-                    'name': 'umwelt',
-                    'thumb': me.demoThumb
+                    &#39;title&#39;: &#39;Umwelt&#39;,
+                    &#39;name&#39;: &#39;umwelt&#39;,
+                    &#39;thumb&#39;: me.demoThumb
                 }
             ];
 
             // setup local content
-            store = Ext.create('Ext.data.Store', {
-                fields: ['name', 'thumb', 'url', 'type'],
-                sorters: 'type',
+            store = Ext.create(&#39;Ext.data.Store&#39;, {
+                fields: [&#39;name&#39;, &#39;thumb&#39;, &#39;url&#39;, &#39;type&#39;],
+                sorters: &#39;type&#39;,
                 data: data
             });
 
         } else {
-            store = Ext.create('Ext.data.Store', {
+            store = Ext.create(&#39;Ext.data.Store&#39;, {
                 autoLoad: true,
-                fields: ['name', 'title', 'thumb'],
+                fields: [&#39;name&#39;, &#39;title&#39;, &#39;thumb&#39;],
                 remoteSort: false,
-                sorters: 'type',
+                sorters: &#39;type&#39;,
                 proxy: {
-                    type: 'ajax',
+                    type: &#39;ajax&#39;,
                     url: me.layerSetUrl,
                     reader: {
-                        type: 'json'
+                        type: &#39;json&#39;
                     }
                 }
             });
@@ -158,21 +158,21 @@ Ext.define('BasiGX.view.view.LayerSet', {
         // setup default template if none given
         if (Ext.isEmpty(me.tpl)) {
             me.tpl = [
-                '&lt;tpl for=&quot;.&quot;&gt;',
-                '&lt;div class=&quot;thumb-wrap&quot;&gt;',
-                '&lt;div class=&quot;thumb&quot;&gt;',
+                &#39;&lt;tpl for=&quot;.&quot;&gt;&#39;,
+                &#39;&lt;div class=&quot;thumb-wrap&quot;&gt;&#39;,
+                &#39;&lt;div class=&quot;thumb&quot;&gt;&#39;,
                 // if the thumb is a href to an online resource, we
                 // dont need the defaultImagePath
-                '&lt;tpl if=&quot;thumb.indexOf(\'http\') &amp;gt;= 0&quot;&gt;',
-                '&lt;img src=&quot;{thumb}&quot; /&gt;',
-                '&lt;tpl else&gt;',
-                '&lt;img src=&quot;' + me.defaultImagePath,
-                '{thumb}&quot; /&gt;',
-                '&lt;/tpl&gt;',
-                '&lt;/div&gt;',
-                '&lt;span&gt;{title}&lt;/span&gt;',
-                '&lt;/div&gt;',
-                '&lt;/tpl&gt;'
+                &#39;&lt;tpl if=&quot;thumb.indexOf(\&#39;http\&#39;) &amp;gt;= 0&quot;&gt;&#39;,
+                &#39;&lt;img src=&quot;{thumb}&quot; /&gt;&#39;,
+                &#39;&lt;tpl else&gt;&#39;,
+                &#39;&lt;img src=&quot;&#39; + me.defaultImagePath,
+                &#39;{thumb}&quot; /&gt;&#39;,
+                &#39;&lt;/tpl&gt;&#39;,
+                &#39;&lt;/div&gt;&#39;,
+                &#39;&lt;span&gt;{title}&lt;/span&gt;&#39;,
+                &#39;&lt;/div&gt;&#39;,
+                &#39;&lt;/tpl&gt;&#39;
             ];
         }
 

@@ -22,97 +22,97 @@
  *
  *     @example
  *     Ext.create({
- *         xtype: 'monthpicker',
+ *         xtype: &#39;monthpicker&#39;,
  *         renderTo: document.body,
  *         value: new Date(),
  *         onSelect: function() {
- *             Ext.Msg.alert('Selected', this.getValue());
+ *             Ext.Msg.alert(&#39;Selected&#39;, this.getValue());
  *         },
  *         listeners: {
- *             okclick: 'onSelect',
- *             monthdblclick: 'onSelect',
- *             yeardblclick: 'onSelect',
+ *             okclick: &#39;onSelect&#39;,
+ *             monthdblclick: &#39;onSelect&#39;,
+ *             yeardblclick: &#39;onSelect&#39;,
  *             cancelclick: function () {
  *                 this.setValue(new Date());
  *             }
  *         }
  *     });
  */
-Ext.define('Ext.picker.Month', {
-    extend: 'Ext.Component',
+Ext.define(&#39;Ext.picker.Month&#39;, {
+    extend: &#39;Ext.Component&#39;,
     requires: [
-        'Ext.XTemplate', 
-        'Ext.util.ClickRepeater', 
-        'Ext.Date',
-        'Ext.button.Button'
+        &#39;Ext.XTemplate&#39;, 
+        &#39;Ext.util.ClickRepeater&#39;, 
+        &#39;Ext.Date&#39;,
+        &#39;Ext.button.Button&#39;
     ],
-    alias: 'widget.monthpicker',
-    alternateClassName: 'Ext.MonthPicker',
+    alias: &#39;widget.monthpicker&#39;,
+    alternateClassName: &#39;Ext.MonthPicker&#39;,
     
 <span id='Ext-picker-Month-property-isMonthPicker'>    isMonthPicker: true,
 </span>    
 <span id='Ext-picker-Month-property-focusable'>    focusable: true,
 </span>
 <span id='Ext-picker-Month-cfg-childEls'>    childEls: [
-</span>        'bodyEl', 'prevEl', 'nextEl', 'monthEl', 'yearEl'
+</span>        &#39;bodyEl&#39;, &#39;prevEl&#39;, &#39;nextEl&#39;, &#39;monthEl&#39;, &#39;yearEl&#39;
     ],
 
 <span id='Ext-picker-Month-cfg-renderTpl'>    renderTpl: [
-</span>        '&lt;div id=&quot;{id}-bodyEl&quot; data-ref=&quot;bodyEl&quot; class=&quot;{baseCls}-body&quot;&gt;',
-          '&lt;div id=&quot;{id}-monthEl&quot; data-ref=&quot;monthEl&quot; class=&quot;{baseCls}-months&quot;&gt;',
-              '&lt;tpl for=&quot;months&quot;&gt;',
-                  '&lt;div class=&quot;{parent.baseCls}-item {parent.baseCls}-month&quot;&gt;',
-                      '&lt;a style=&quot;{parent.monthStyle}&quot; role=&quot;button&quot; hidefocus=&quot;on&quot; class=&quot;{parent.baseCls}-item-inner&quot;&gt;{.}&lt;/a&gt;',
-                  '&lt;/div&gt;',
-              '&lt;/tpl&gt;',
-          '&lt;/div&gt;',
-          '&lt;div id=&quot;{id}-yearEl&quot; data-ref=&quot;yearEl&quot; class=&quot;{baseCls}-years&quot;&gt;',
-              '&lt;div class=&quot;{baseCls}-yearnav&quot;&gt;',
-                  '&lt;div class=&quot;{baseCls}-yearnav-button-ct&quot;&gt;',
-                      '&lt;a id=&quot;{id}-prevEl&quot; data-ref=&quot;prevEl&quot; class=&quot;{baseCls}-yearnav-button {baseCls}-yearnav-prev&quot; hidefocus=&quot;on&quot; role=&quot;button&quot;&gt;&lt;/a&gt;',
-                  '&lt;/div&gt;',
-                  '&lt;div class=&quot;{baseCls}-yearnav-button-ct&quot;&gt;',
-                      '&lt;a id=&quot;{id}-nextEl&quot; data-ref=&quot;nextEl&quot; class=&quot;{baseCls}-yearnav-button {baseCls}-yearnav-next&quot; hidefocus=&quot;on&quot; role=&quot;button&quot;&gt;&lt;/a&gt;',
-                  '&lt;/div&gt;',
-              '&lt;/div&gt;',
-              '&lt;tpl for=&quot;years&quot;&gt;',
-                  '&lt;div class=&quot;{parent.baseCls}-item {parent.baseCls}-year&quot;&gt;',
-                      '&lt;a hidefocus=&quot;on&quot; class=&quot;{parent.baseCls}-item-inner&quot; role=&quot;button&quot;&gt;{.}&lt;/a&gt;',
-                  '&lt;/div&gt;',
-              '&lt;/tpl&gt;',
-          '&lt;/div&gt;',
-          '&lt;div class=&quot;' + Ext.baseCSSPrefix + 'clear&quot;&gt;&lt;/div&gt;',
-          '&lt;tpl if=&quot;showButtons&quot;&gt;',
-              '&lt;div class=&quot;{baseCls}-buttons&quot;&gt;{%',
-                  'var me=values.$comp, okBtn=me.okBtn, cancelBtn=me.cancelBtn;',
-                  'okBtn.ownerLayout = cancelBtn.ownerLayout = me.componentLayout;',
-                  'okBtn.ownerCt = cancelBtn.ownerCt = me;',
-                  'Ext.DomHelper.generateMarkup(okBtn.getRenderTree(), out);',
-                  'Ext.DomHelper.generateMarkup(cancelBtn.getRenderTree(), out);',
-              '%}&lt;/div&gt;',
-          '&lt;/tpl&gt;',
-        '&lt;/div&gt;'
+</span>        &#39;&lt;div id=&quot;{id}-bodyEl&quot; data-ref=&quot;bodyEl&quot; class=&quot;{baseCls}-body&quot;&gt;&#39;,
+          &#39;&lt;div id=&quot;{id}-monthEl&quot; data-ref=&quot;monthEl&quot; class=&quot;{baseCls}-months&quot;&gt;&#39;,
+              &#39;&lt;tpl for=&quot;months&quot;&gt;&#39;,
+                  &#39;&lt;div class=&quot;{parent.baseCls}-item {parent.baseCls}-month&quot;&gt;&#39;,
+                      &#39;&lt;a style=&quot;{parent.monthStyle}&quot; role=&quot;button&quot; hidefocus=&quot;on&quot; class=&quot;{parent.baseCls}-item-inner&quot;&gt;{.}&lt;/a&gt;&#39;,
+                  &#39;&lt;/div&gt;&#39;,
+              &#39;&lt;/tpl&gt;&#39;,
+          &#39;&lt;/div&gt;&#39;,
+          &#39;&lt;div id=&quot;{id}-yearEl&quot; data-ref=&quot;yearEl&quot; class=&quot;{baseCls}-years&quot;&gt;&#39;,
+              &#39;&lt;div class=&quot;{baseCls}-yearnav&quot;&gt;&#39;,
+                  &#39;&lt;div class=&quot;{baseCls}-yearnav-button-ct&quot;&gt;&#39;,
+                      &#39;&lt;a id=&quot;{id}-prevEl&quot; data-ref=&quot;prevEl&quot; class=&quot;{baseCls}-yearnav-button {baseCls}-yearnav-prev&quot; hidefocus=&quot;on&quot; role=&quot;button&quot;&gt;&lt;/a&gt;&#39;,
+                  &#39;&lt;/div&gt;&#39;,
+                  &#39;&lt;div class=&quot;{baseCls}-yearnav-button-ct&quot;&gt;&#39;,
+                      &#39;&lt;a id=&quot;{id}-nextEl&quot; data-ref=&quot;nextEl&quot; class=&quot;{baseCls}-yearnav-button {baseCls}-yearnav-next&quot; hidefocus=&quot;on&quot; role=&quot;button&quot;&gt;&lt;/a&gt;&#39;,
+                  &#39;&lt;/div&gt;&#39;,
+              &#39;&lt;/div&gt;&#39;,
+              &#39;&lt;tpl for=&quot;years&quot;&gt;&#39;,
+                  &#39;&lt;div class=&quot;{parent.baseCls}-item {parent.baseCls}-year&quot;&gt;&#39;,
+                      &#39;&lt;a hidefocus=&quot;on&quot; class=&quot;{parent.baseCls}-item-inner&quot; role=&quot;button&quot;&gt;{.}&lt;/a&gt;&#39;,
+                  &#39;&lt;/div&gt;&#39;,
+              &#39;&lt;/tpl&gt;&#39;,
+          &#39;&lt;/div&gt;&#39;,
+          &#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;clear&quot;&gt;&lt;/div&gt;&#39;,
+          &#39;&lt;tpl if=&quot;showButtons&quot;&gt;&#39;,
+              &#39;&lt;div class=&quot;{baseCls}-buttons&quot;&gt;{%&#39;,
+                  &#39;var me=values.$comp, okBtn=me.okBtn, cancelBtn=me.cancelBtn;&#39;,
+                  &#39;okBtn.ownerLayout = cancelBtn.ownerLayout = me.componentLayout;&#39;,
+                  &#39;okBtn.ownerCt = cancelBtn.ownerCt = me;&#39;,
+                  &#39;Ext.DomHelper.generateMarkup(okBtn.getRenderTree(), out);&#39;,
+                  &#39;Ext.DomHelper.generateMarkup(cancelBtn.getRenderTree(), out);&#39;,
+              &#39;%}&lt;/div&gt;&#39;,
+          &#39;&lt;/tpl&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;
     ],
 
     //&lt;locale&gt;
 <span id='Ext-picker-Month-cfg-okText'>    /**
 </span>     * @cfg {String} okText The text to display on the ok button.
      */
-    okText: 'OK',
+    okText: &#39;OK&#39;,
     //&lt;/locale&gt;
 
     //&lt;locale&gt;
 <span id='Ext-picker-Month-cfg-cancelText'>    /**
 </span>     * @cfg {String} cancelText The text to display on the cancel button.
      */
-    cancelText: 'Cancel',
+    cancelText: &#39;Cancel&#39;,
     //&lt;/locale&gt;
 
 <span id='Ext-picker-Month-cfg-baseCls'>    /**
-</span>     * @cfg {String} [baseCls='x-monthpicker']
+</span>     * @cfg {String} [baseCls=&#39;x-monthpicker&#39;]
      *  The base CSS class to apply to the picker element.
      */
-    baseCls: Ext.baseCSSPrefix + 'monthpicker',
+    baseCls: Ext.baseCSSPrefix + &#39;monthpicker&#39;,
 
 <span id='Ext-picker-Month-cfg-showButtons'>    /**
 </span>     * @cfg {Boolean} showButtons True to show ok and cancel buttons below the picker.
@@ -120,7 +120,7 @@ Ext.define('Ext.picker.Month', {
     showButtons: true,
 
 <span id='Ext-picker-Month-cfg-selectedCls'>    /**
-</span>     * @cfg {String} [selectedCls='x-monthpicker-selected'] The class to be added to selected items in the picker.
+</span>     * @cfg {String} [selectedCls=&#39;x-monthpicker-selected&#39;] The class to be added to selected items in the picker.
      */
 
 <span id='Ext-picker-Month-cfg-value'>    /**
@@ -129,15 +129,15 @@ Ext.define('Ext.picker.Month', {
 
 <span id='Ext-picker-Month-cfg-footerButtonUI'>    /**
 </span>     * @cfg {String}
-     * The {@link Ext.button.Button#ui} to use for the month picker's footer buttons.
+     * The {@link Ext.button.Button#ui} to use for the month picker&#39;s footer buttons.
      */
-    footerButtonUI: 'default',
+    footerButtonUI: &#39;default&#39;,
 
 <span id='Ext-picker-Month-property-measureWidth'>    measureWidth: 35,
 </span><span id='Ext-picker-Month-property-measureMaxHeight'>    measureMaxHeight: 20,
 </span>
 <span id='Ext-picker-Month-property-smallCls'>    // used when attached to date picker which isnt showing buttons
-</span>    smallCls: Ext.baseCSSPrefix + 'monthpicker-small',
+</span>    smallCls: Ext.baseCSSPrefix + &#39;monthpicker-small&#39;,
 
 <span id='Ext-picker-Month-property-totalYears'>    /**
 </span>     * @private
@@ -202,7 +202,7 @@ Ext.define('Ext.picker.Month', {
     initComponent: function(){
         var me = this;
 
-        me.selectedCls = me.baseCls + '-selected';
+        me.selectedCls = me.baseCls + &#39;-selected&#39;;
 
         if (me.small) {
             me.addCls(me.smallCls);
@@ -239,7 +239,7 @@ Ext.define('Ext.picker.Month', {
             shortName = Ext.Date.getShortMonthName,
             monthLen = me.monthOffset,
             margin = me.monthMargin,
-            style = '';
+            style = &#39;&#39;;
 
         if (me.padding &amp;&amp; !me.width) {
             me.cacheWidth();
@@ -252,7 +252,7 @@ Ext.define('Ext.picker.Month', {
         }
         
         if (Ext.isDefined(margin)) {
-            style = 'margin: 0 ' + margin + 'px;';
+            style = &#39;margin: 0 &#39; + margin + &#39;px;&#39;;
         }
 
         Ext.apply(me.renderData, {
@@ -267,9 +267,9 @@ Ext.define('Ext.picker.Month', {
 </span>        var me = this,
             padding = me.parseBox(me.padding),
             widthEl = Ext.getBody().createChild({
-                cls: me.baseCls + ' ' + me.borderBoxCls,
-                style: 'position:absolute;top:-1000px;left:-1000px;',
-                html: '&amp;nbsp;' // required for opera 11.64 to measure a width
+                cls: me.baseCls + &#39; &#39; + me.borderBoxCls,
+                style: &#39;position:absolute;top:-1000px;left:-1000px;&#39;,
+                html: &#39;&amp;nbsp;&#39; // required for opera 11.64 to measure a width
             });
 
         me.self.prototype.width = widthEl.getWidth() + padding.left + padding.right;
@@ -290,29 +290,29 @@ Ext.define('Ext.picker.Month', {
         // Clicking on it will focus the document body, which may disrupt the state
         // of the floating parent such as Date picker or a menu, and cause it to hide.
         // To work around that, we stop the mousedown events completely.
-        if (me.up('[floating=true]')) {
-            me.el.on('mousedown', me.onElClick, me, {translate: false});
+        if (me.up(&#39;[floating=true]&#39;)) {
+            me.el.on(&#39;mousedown&#39;, me.onElClick, me, {translate: false});
         }
 
         body.on({
             scope: me,
-            click: 'onBodyClick',
-            dblclick: 'onBodyClick'
+            click: &#39;onBodyClick&#39;,
+            dblclick: &#39;onBodyClick&#39;
         });
 
-        // keep a reference to the year/month elements since we'll be re-using them
-        me.years = body.select('.' + me.baseCls + '-year a');
-        me.months = body.select('.' + me.baseCls + '-month a');
+        // keep a reference to the year/month elements since we&#39;ll be re-using them
+        me.years = body.select(&#39;.&#39; + me.baseCls + &#39;-year a&#39;);
+        me.months = body.select(&#39;.&#39; + me.baseCls + &#39;-month a&#39;);
 
         me.backRepeater = new Ext.util.ClickRepeater(me.prevEl, {
             handler: Ext.Function.bind(me.adjustYear, me, [-me.totalYears])
         });
 
-        me.prevEl.addClsOnOver(me.baseCls + '-yearnav-prev-over');
+        me.prevEl.addClsOnOver(me.baseCls + &#39;-yearnav-prev-over&#39;);
         me.nextRepeater = new Ext.util.ClickRepeater(me.nextEl, {
             handler: Ext.Function.bind(me.adjustYear, me, [me.totalYears])
         });
-        me.nextEl.addClsOnOver(me.baseCls + '-yearnav-next-over');
+        me.nextEl.addClsOnOver(me.baseCls + &#39;-yearnav-next-over&#39;);
         me.updateBody();
         
         if (!Ext.isDefined(me.monthMargin)) {
@@ -328,11 +328,11 @@ Ext.define('Ext.picker.Month', {
         var me = this,
             months = me.months,
             first = months.first(),
-            itemMargin = first.getMargin('l');
+            itemMargin = first.getMargin(&#39;l&#39;);
             
         while (itemMargin &amp;&amp; me.getLargest() &gt; me.measureMaxHeight) {
             --itemMargin;
-            months.setStyle('margin', '0 ' + itemMargin + 'px');
+            months.setStyle(&#39;margin&#39;, &#39;0 &#39; + itemMargin + &#39;px&#39;);
         }
         return itemMargin;
     },
@@ -487,12 +487,12 @@ Ext.define('Ext.picker.Month', {
      */
     onBodyClick: function(e, t) {
         var me = this,
-            isDouble = e.type === 'dblclick';
+            isDouble = e.type === &#39;dblclick&#39;;
 
-        if (e.getTarget('.' + me.baseCls + '-month')) {
+        if (e.getTarget(&#39;.&#39; + me.baseCls + &#39;-month&#39;)) {
             e.stopEvent();
             me.onMonthClick(t, isDouble);
-        } else if (e.getTarget('.' + me.baseCls + '-year')) {
+        } else if (e.getTarget(&#39;.&#39; + me.baseCls + &#39;-year&#39;)) {
             e.stopEvent();
             me.onYearClick(t, isDouble);
         }
@@ -503,7 +503,7 @@ Ext.define('Ext.picker.Month', {
      * @param {Number} [offset=10] The offset to move by.
      */
     adjustYear: function(offset){
-        if (typeof offset !== 'number') {
+        if (typeof offset !== &#39;number&#39;) {
             offset = this.totalYears;
         }
         this.activeYear += offset;
@@ -515,7 +515,7 @@ Ext.define('Ext.picker.Month', {
      * @private
      */
     onOkClick: function(){
-        this.fireEvent('okclick', this, this.value);
+        this.fireEvent(&#39;okclick&#39;, this, this.value);
     },
 
 <span id='Ext-picker-Month-method-onCancelClick'>    /**
@@ -523,7 +523,7 @@ Ext.define('Ext.picker.Month', {
      * @private
      */
     onCancelClick: function(){
-        this.fireEvent('cancelclick', this);
+        this.fireEvent(&#39;cancelclick&#39;, this);
     },
 
 <span id='Ext-picker-Month-method-onMonthClick'>    /**
@@ -536,8 +536,8 @@ Ext.define('Ext.picker.Month', {
         var me = this;
         me.value[0] = me.resolveOffset(me.months.indexOf(target), me.monthOffset);
         me.updateBody();
-        me.fireEvent('month' + (isDouble ? 'dbl' : '') + 'click', me, me.value);
-        me.fireEvent('select', me, me.value);
+        me.fireEvent(&#39;month&#39; + (isDouble ? &#39;dbl&#39; : &#39;&#39;) + &#39;click&#39;, me, me.value);
+        me.fireEvent(&#39;select&#39;, me, me.value);
     },
 
 <span id='Ext-picker-Month-method-onYearClick'>    /**
@@ -550,13 +550,13 @@ Ext.define('Ext.picker.Month', {
         var me = this;
         me.value[1] = me.activeYear + me.resolveOffset(me.years.indexOf(target), me.yearOffset);
         me.updateBody();
-        me.fireEvent('year' + (isDouble ? 'dbl' : '') + 'click', me, me.value);
-        me.fireEvent('select', me, me.value);
+        me.fireEvent(&#39;year&#39; + (isDouble ? &#39;dbl&#39; : &#39;&#39;) + &#39;click&#39;, me, me.value);
+        me.fireEvent(&#39;select&#39;, me, me.value);
 
     },
 
 <span id='Ext-picker-Month-method-resolveOffset'>    /**
-</span>     * Returns an offsetted number based on the position in the collection. Since our collections aren't
+</span>     * Returns an offsetted number based on the position in the collection. Since our collections aren&#39;t
      * numerically ordered, this function helps to normalize those differences.
      * @private
      * @param {Object} index

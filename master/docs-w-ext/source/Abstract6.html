@@ -18,12 +18,12 @@
   <pre class="prettyprint lang-js"><span id='Ext-util-sizemonitor-Abstract'>/**
 </span> * @private
  */
-Ext.define('Ext.util.sizemonitor.Abstract', {
+Ext.define(&#39;Ext.util.sizemonitor.Abstract&#39;, {
 
-    mixins: ['Ext.mixin.Templatable'],
+    mixins: [&#39;Ext.mixin.Templatable&#39;],
 
     requires: [
-        'Ext.TaskQueue'
+        &#39;Ext.TaskQueue&#39;
     ],
 
     config: {
@@ -72,7 +72,7 @@ Ext.define('Ext.util.sizemonitor.Abstract', {
 
 <span id='Ext-util-sizemonitor-Abstract-method-updateElement'>    updateElement: function(element) {
 </span>        element.append(this.detectorsContainer);
-        element.addCls(Ext.baseCSSPrefix + 'size-monitored');
+        element.addCls(Ext.baseCSSPrefix + &#39;size-monitored&#39;);
     },
 
 <span id='Ext-util-sizemonitor-Abstract-method-applyArgs'>    applyArgs: function(args) {
@@ -82,7 +82,7 @@ Ext.define('Ext.util.sizemonitor.Abstract', {
 <span id='Ext-util-sizemonitor-Abstract-method-refreshMonitors'>    refreshMonitors: Ext.emptyFn,
 </span>
 <span id='Ext-util-sizemonitor-Abstract-method-forceRefresh'>    forceRefresh: function() {
-</span>        Ext.TaskQueue.requestRead('refresh', this);
+</span>        Ext.TaskQueue.requestRead(&#39;refresh&#39;, this);
     },
 
 <span id='Ext-util-sizemonitor-Abstract-method-getContentBounds'>    getContentBounds: function() {
@@ -141,7 +141,7 @@ Ext.define('Ext.util.sizemonitor.Abstract', {
         }
         
         if (this.refreshSize() || force) {
-            Ext.TaskQueue.requestWrite('refreshMonitors', this);
+            Ext.TaskQueue.requestWrite(&#39;refreshMonitors&#39;, this);
         }
     },
 
@@ -152,12 +152,12 @@ Ext.define('Ext.util.sizemonitor.Abstract', {
         me.bindListeners(false);
 
         if (element &amp;&amp; !element.destroyed) {
-            element.removeCls(Ext.baseCSSPrefix + 'size-monitored');
+            element.removeCls(Ext.baseCSSPrefix + &#39;size-monitored&#39;);
         }
 
         delete me._element;
         
-        // This is a closure so Base destructor won't null it
+        // This is a closure so Base destructor won&#39;t null it
         me.refresh = null;
 
         me.callParent();

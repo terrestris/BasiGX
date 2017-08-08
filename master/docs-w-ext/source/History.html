@@ -26,11 +26,11 @@
  * The {@link #init} method of the History object must be called before using History. This sets up the internal
  * state and must be the first thing called before using History.
  */
-Ext.define('Ext.util.History', {
+Ext.define(&#39;Ext.util.History&#39;, {
     singleton: true,
-    alternateClassName: 'Ext.History',
+    alternateClassName: &#39;Ext.History&#39;,
     mixins: {
-        observable: 'Ext.util.Observable'
+        observable: &#39;Ext.util.Observable&#39;
     },
 
 <span id='Ext-util-History-property-useTopWindow'>    /**
@@ -53,7 +53,7 @@ Ext.define('Ext.util.History', {
 
 <span id='Ext-util-History-event-change'>    /**
 </span>     * @event change
-     * Fires when navigation back or forwards within the local page's history occurs.
+     * Fires when navigation back or forwards within the local page&#39;s history occurs.
      * @param {String} token An identifier associated with the page state at that point in its history.
      */
 
@@ -67,7 +67,7 @@ Ext.define('Ext.util.History', {
     },
 
 <span id='Ext-util-History-method-getHash'>    /**
-</span>     * Gets the actual hash from the url. This shouldn't need to be used directly but use the
+</span>     * Gets the actual hash from the url. This shouldn&#39;t need to be used directly but use the
      * {@link #getToken} method instead.
      *
      * @return {String} The hash from the window object.
@@ -78,7 +78,7 @@ Ext.define('Ext.util.History', {
     },
 
 <span id='Ext-util-History-method-setHash'>    /**
-</span>     * Updates the hash on the window. This shouldn't need to be used directly but use the
+</span>     * Updates the hash on the window. This shouldn&#39;t need to be used directly but use the
      * {@link #add} method instead.
      *
      * @param {String} hash The hash to use
@@ -101,7 +101,7 @@ Ext.define('Ext.util.History', {
      */
     handleStateChange: function(token) {
         this.currentToken = token;
-        this.fireEvent('change', token);
+        this.fireEvent(&#39;change&#39;, token);
     },
 
 <span id='Ext-util-History-method-startUp'>    /**
@@ -115,7 +115,7 @@ Ext.define('Ext.util.History', {
         me.currentToken = me.getHash();
 
         if (Ext.supports.Hashchange) {
-            Ext.get(me.win).on('hashchange', me.onHashChange, me);
+            Ext.get(me.win).on(&#39;hashchange&#39;, me.onHashChange, me);
         } else {
             Ext.TaskManager.start({
                 fireIdleEvent: false,
@@ -125,7 +125,7 @@ Ext.define('Ext.util.History', {
             });
         }
         me.ready = true;
-        me.fireEvent('ready', me);
+        me.fireEvent(&#39;ready&#39;, me);
     },
 
 <span id='Ext-util-History-method-onHashChange'>    onHashChange: function () {
@@ -164,7 +164,7 @@ Ext.define('Ext.util.History', {
         me.hash = me.getHash();
 
         if (onReady) {
-            me.on('ready', onReady, scope, {single: true});
+            me.on(&#39;ready&#39;, onReady, scope, {single: true});
         }
         me.startUp();
     },
@@ -175,8 +175,8 @@ Ext.define('Ext.util.History', {
      * state of that component. Example usage:
      *
      *     // Handle tab changes on a TabPanel
-     *     tabPanel.on('tabchange', function(tabPanel, tab){
-     *          Ext.History.add(tabPanel.id + ':' + tab.id);
+     *     tabPanel.on(&#39;tabchange&#39;, function(tabPanel, tab){
+     *          Ext.History.add(tabPanel.id + &#39;:&#39; + tab.id);
      *     });
      *
      * @param {String} token The value that defines a particular application-specific history state

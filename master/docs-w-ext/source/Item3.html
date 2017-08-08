@@ -19,13 +19,13 @@
 </span> * The base class that other non-interacting Toolbar Item classes should extend in order to
  * get some basic common toolbar item functionality.
  */
-Ext.define('Ext.toolbar.Item', {
-    extend: 'Ext.Component',
-    // Toolbar required here because we'll try to decorate it's alternateClassName
-    // with this class' alternate name
-    requires: ['Ext.toolbar.Toolbar'],
-    alias: 'widget.tbitem',
-    alternateClassName: 'Ext.Toolbar.Item',
+Ext.define(&#39;Ext.toolbar.Item&#39;, {
+    extend: &#39;Ext.Component&#39;,
+    // Toolbar required here because we&#39;ll try to decorate it&#39;s alternateClassName
+    // with this class&#39; alternate name
+    requires: [&#39;Ext.toolbar.Toolbar&#39;],
+    alias: &#39;widget.tbitem&#39;,
+    alternateClassName: &#39;Ext.Toolbar.Item&#39;,
 <span id='Ext-toolbar-Item-method-enable'>    enable:Ext.emptyFn,
 </span><span id='Ext-toolbar-Item-method-disable'>    disable:Ext.emptyFn,
 </span><span id='Ext-toolbar-Item-method-focus'>    focus:Ext.emptyFn

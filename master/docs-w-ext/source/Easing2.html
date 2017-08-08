@@ -41,7 +41,7 @@
  *
  * @singleton
  */
-Ext.define('Ext.fx.Easing', function () {
+Ext.define(&#39;Ext.fx.Easing&#39;, function () {
     var math = Math,
         pi = math.PI,
         pow = math.pow,
@@ -52,7 +52,7 @@ Ext.define('Ext.fx.Easing', function () {
         
     return {
         requires: [
-            'Ext.fx.CubicBezier'
+            &#39;Ext.fx.CubicBezier&#39;
         ],
 
         singleton: true,
@@ -146,15 +146,15 @@ function (me) {
         proto = Easing.prototype;
 
     Easing.addMembers({
-        'back-in': proto.backIn,
-        'back-out': proto.backOut,
-        'ease-in': proto.easeIn,
-        'ease-out': proto.easeOut,
-        'elastic-in': proto.elasticIn,
-        'elastic-out': proto.elasticOut,
-        'bounce-in': proto.bounceIn,
-        'bounce-out': proto.bounceOut,
-        'ease-in-out': proto.easeInOut
+        &#39;back-in&#39;: proto.backIn,
+        &#39;back-out&#39;: proto.backOut,
+        &#39;ease-in&#39;: proto.easeIn,
+        &#39;ease-out&#39;: proto.easeOut,
+        &#39;elastic-in&#39;: proto.elasticIn,
+        &#39;elastic-out&#39;: proto.elasticOut,
+        &#39;bounce-in&#39;: proto.bounceIn,
+        &#39;bounce-out&#39;: proto.bounceOut,
+        &#39;ease-in-out&#39;: proto.easeInOut
     });
 });
 </pre>

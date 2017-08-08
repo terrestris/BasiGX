@@ -18,14 +18,14 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-layout-card-Scroll'>/**
 </span> * @private
  */
-Ext.define('Ext.fx.layout.card.Scroll', {
-    extend: 'Ext.fx.layout.card.Abstract',
+Ext.define(&#39;Ext.fx.layout.card.Scroll&#39;, {
+    extend: &#39;Ext.fx.layout.card.Abstract&#39;,
 
     requires: [
-        'Ext.fx.easing.Linear'
+        &#39;Ext.fx.easing.Linear&#39;
     ],
 
-    alias: 'fx.layout.card.scroll',
+    alias: &#39;fx.layout.card.scroll&#39;,
 
     config: {
 <span id='Ext-fx-layout-card-Scroll-cfg-duration'>        duration: 150
@@ -59,8 +59,8 @@ Ext.define('Ext.fx.layout.card.Scroll', {
                 this.stopAnimation();
             }
 
-            newItem.setWidth('100%');
-            newItem.setHeight('100%');
+            newItem.setWidth(&#39;100%&#39;);
+            newItem.setHeight(&#39;100%&#39;);
 
             containerElement = this.getLayout().container.innerElement;
             containerWidth = containerElement.getWidth();
@@ -77,16 +77,16 @@ Ext.define('Ext.fx.layout.card.Scroll', {
 
             newItem.show();
 
-            if (direction == 'right') {
-                direction = 'left';
+            if (direction == &#39;right&#39;) {
+                direction = &#39;left&#39;;
                 this.isReverse = reverse = !reverse;
             }
-            else if (direction == 'down') {
-                direction = 'up';
+            else if (direction == &#39;down&#39;) {
+                direction = &#39;up&#39;;
                 this.isReverse = reverse = !reverse;
             }
 
-            if (direction == 'left') {
+            if (direction == &#39;left&#39;) {
                 if (reverse) {
                     easing.setConfig({
                         startValue: containerWidth,
@@ -139,11 +139,11 @@ Ext.define('Ext.fx.layout.card.Scroll', {
 <span id='Ext-fx-layout-card-Scroll-method-doAnimationFrame'>    doAnimationFrame: function() {
 </span>        var easing = this.getEasing(),
             direction = this.getDirection(),
-            scroll = 'scrollTop',
+            scroll = &#39;scrollTop&#39;,
             value;
 
-        if (direction == 'left' || direction == 'right') {
-            scroll = 'scrollLeft';
+        if (direction == &#39;left&#39; || direction == &#39;right&#39;) {
+            scroll = &#39;scrollLeft&#39;;
         }
 
         if (easing.isEnded) {
@@ -158,12 +158,12 @@ Ext.define('Ext.fx.layout.card.Scroll', {
 <span id='Ext-fx-layout-card-Scroll-method-stopAnimation'>    stopAnimation: function() {
 </span>        var me = this,
             direction = me.getDirection(),
-            scroll = 'setTop',
+            scroll = &#39;setTop&#39;,
             oldItem = me.oldItem,
             newItem = me.newItem;
 
-        if (direction == 'left' || direction == 'right') {
-            scroll = 'setLeft';
+        if (direction == &#39;left&#39; || direction == &#39;right&#39;) {
+            scroll = &#39;setLeft&#39;;
         }
 
         me.currentEventController.resume();
@@ -177,7 +177,7 @@ Ext.define('Ext.fx.layout.card.Scroll', {
 
         Ext.AnimationQueue.stop(this.doAnimationFrame, this);
         me.isAnimating = false;
-        me.fireEvent('animationend', me);
+        me.fireEvent(&#39;animationend&#39;, me);
     }
 });
 </pre>

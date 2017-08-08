@@ -24,7 +24,7 @@
  * Quicktips can be configured via tag attributes directly in markup, or by
  * registering quick tips programmatically via the {@link #register} method.
  *
- * The singleton's instance of {@link Ext.tip.QuickTip} is available via
+ * The singleton&#39;s instance of {@link Ext.tip.QuickTip} is available via
  * {@link #getQuickTip}, and supports all the methods and configuration properties
  * of Ext.tip.QuickTip. These settings will apply to all tooltips shown by the
  * singleton.
@@ -66,12 +66,12 @@
  *     });
  *
  *     // Create a small panel to add a quick tip to
- *     Ext.create('Ext.container.Container', {
- *         id: 'quickTipContainer',
+ *     Ext.create(&#39;Ext.container.Container&#39;, {
+ *         id: &#39;quickTipContainer&#39;,
  *         width: 200,
  *         height: 150,
  *         style: {
- *             backgroundColor:'#000000'
+ *             backgroundColor:&#39;#000000&#39;
  *         },
  *         renderTo: Ext.getBody()
  *     });
@@ -79,9 +79,9 @@
  *
  *     // Manually register a quick tip for a specific element
  *     Ext.tip.QuickTipManager.register({
- *         target: 'quickTipContainer',
- *         title: 'My Tooltip',
- *         text: 'This tooltip was added in code',
+ *         target: &#39;quickTipContainer&#39;,
+ *         title: &#39;My Tooltip&#39;,
+ *         text: &#39;This tooltip was added in code&#39;,
  *         width: 100,
  *         dismissDelay: 10000 // Hide after 10 seconds hover
  *     });
@@ -94,10 +94,10 @@
  *  - `hide`: Specifying &quot;user&quot; is equivalent to setting autoHide = false.
  *     Any other value will be the same as autoHide = true.
  *  - `qclass`: A CSS class to be applied to the quick tip
- *     (equivalent to the 'cls' target element config).
- *  - `qtip (required)`: The quick tip text (equivalent to the 'text' target element config).
- *  - `qtitle`: The quick tip title (equivalent to the 'title' target element config).
- *  - `qwidth`: The quick tip width (equivalent to the 'width' target element config).
+ *     (equivalent to the &#39;cls&#39; target element config).
+ *  - `qtip (required)`: The quick tip text (equivalent to the &#39;text&#39; target element config).
+ *  - `qtitle`: The quick tip title (equivalent to the &#39;title&#39; target element config).
+ *  - `qwidth`: The quick tip width (equivalent to the &#39;width&#39; target element config).
  *
  * Here is an example of configuring an HTML element to display a tooltip from markup:
  *
@@ -107,10 +107,10 @@
  *
  * @singleton
  */
-Ext.define('Ext.tip.QuickTipManager', {
-    requires: ['Ext.tip.QuickTip'],
+Ext.define(&#39;Ext.tip.QuickTipManager&#39;, {
+    requires: [&#39;Ext.tip.QuickTip&#39;],
     singleton: true,
-    alternateClassName: 'Ext.QuickTips',
+    alternateClassName: &#39;Ext.QuickTips&#39;,
 <span id='Ext-tip-QuickTipManager-property-disabled'>    disabled: false,
 </span>
 <span id='Ext-tip-QuickTipManager-method-init'>    /**
@@ -139,7 +139,7 @@ Ext.define('Ext.tip.QuickTipManager', {
                 sticky: true,
                 //&lt;/debug&gt;
                 disabled: me.disabled,
-                id: 'ext-quicktips-tip'
+                id: &#39;ext-quicktips-tip&#39;
             }, config),
                 className = tipConfig.className,
                 xtype = tipConfig.xtype;
@@ -147,7 +147,7 @@ Ext.define('Ext.tip.QuickTipManager', {
             if (className) {
                 delete tipConfig.className;
             } else if (xtype) {
-                className = 'widget.' + xtype;
+                className = &#39;widget.&#39; + xtype;
                 delete tipConfig.xtype;
             }
 
@@ -155,17 +155,17 @@ Ext.define('Ext.tip.QuickTipManager', {
                 tipConfig.renderTo = document.body;
 
                 //&lt;debug&gt;
-                if (tipConfig.renderTo.tagName.toUpperCase() !== 'BODY') { // e.g., == 'FRAMESET'
+                if (tipConfig.renderTo.tagName.toUpperCase() !== &#39;BODY&#39;) { // e.g., == &#39;FRAMESET&#39;
                     Ext.raise({
-                        sourceClass: 'Ext.tip.QuickTipManager',
-                        sourceMethod: 'init',
-                        msg: 'Cannot init QuickTipManager: no document body'
+                        sourceClass: &#39;Ext.tip.QuickTipManager&#39;,
+                        sourceMethod: &#39;init&#39;,
+                        msg: &#39;Cannot init QuickTipManager: no document body&#39;
                     });
                 }
                 //&lt;/debug&gt;
             }
 
-            me.tip = Ext.create(className || 'Ext.tip.QuickTip', tipConfig);
+            me.tip = Ext.create(className || &#39;Ext.tip.QuickTip&#39;, tipConfig);
             
             // Prevent the tip from being accidentally destroyed.
             // It should stick around pretty much forever.
@@ -193,7 +193,7 @@ Ext.define('Ext.tip.QuickTipManager', {
         
         Ext.quickTipsActive = false;
 
-        // Don't callparent here, we're a singleton
+        // Don&#39;t callparent here, we&#39;re a singleton
     },
 
 <span id='Ext-tip-QuickTipManager-method-ddDisable'>    // Protected method called by the dd classes
@@ -201,7 +201,7 @@ Ext.define('Ext.tip.QuickTipManager', {
         var me = this,
             tip = me.tip;
 
-        // don't disable it if we don't need to
+        // don&#39;t disable it if we don&#39;t need to
         if (tip &amp;&amp; !me.disabled) {
             tip.disable();
         }
@@ -212,7 +212,7 @@ Ext.define('Ext.tip.QuickTipManager', {
         var me = this,
             tip = me.tip;
 
-        // only enable it if it hasn't been disabled
+        // only enable it if it hasn&#39;t been disabled
         if (tip &amp;&amp; !me.disabled) {
             tip.enable();
         }

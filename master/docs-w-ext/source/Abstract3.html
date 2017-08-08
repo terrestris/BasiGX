@@ -18,12 +18,12 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-layout-card-Abstract'>/**
 </span> * @private
  */
-Ext.define('Ext.fx.layout.card.Abstract', {
-    extend: 'Ext.Evented',
+Ext.define(&#39;Ext.fx.layout.card.Abstract&#39;, {
+    extend: &#39;Ext.Evented&#39;,
 <span id='Ext-fx-layout-card-Abstract-property-isAnimation'>    isAnimation: true,
 </span>
     config: {
-<span id='Ext-fx-layout-card-Abstract-cfg-direction'>        direction: 'left',
+<span id='Ext-fx-layout-card-Abstract-cfg-direction'>        direction: &#39;left&#39;,
 </span>
 <span id='Ext-fx-layout-card-Abstract-cfg-duration'>        duration: null,
 </span>
@@ -42,7 +42,7 @@ Ext.define('Ext.fx.layout.card.Abstract', {
 </span>        var layout = this.getLayout();
 
         if (layout) {
-            layout.on('beforeactiveitemchange', 'onActiveItemChange', this);
+            layout.on(&#39;beforeactiveitemchange&#39;, &#39;onActiveItemChange&#39;, this);
         }
     },
 
@@ -54,7 +54,7 @@ Ext.define('Ext.fx.layout.card.Abstract', {
         }
 
         if (layout) {
-            layout.un('beforeactiveitemchange', 'onActiveItemChange', this);
+            layout.un(&#39;beforeactiveitemchange&#39;, &#39;onActiveItemChange&#39;, this);
         }
     },
 
@@ -69,12 +69,12 @@ Ext.define('Ext.fx.layout.card.Abstract', {
         }
 
         if (layout) {
-            layout.un('beforeactiveitemchange', 'onActiveItemChange', this);
+            layout.un(&#39;beforeactiveitemchange&#39;, &#39;onActiveItemChange&#39;, this);
         }
         me.setLayout(null);
 
         if (me.observableId) {
-            me.fireEvent('destroy', this);
+            me.fireEvent(&#39;destroy&#39;, this);
         }
         me.callParent();
     }

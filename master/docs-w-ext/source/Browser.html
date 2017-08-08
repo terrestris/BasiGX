@@ -34,15 +34,15 @@
         browserNames = Ext.Boot.browserNames,
         enginePrefixes = me.enginePrefixes,
         engineNames = me.engineNames,
-        browserMatch = userAgent.match(new RegExp('((?:' +
-                Ext.Object.getValues(browserPrefixes).join(')|(?:') + '))([\\w\\._]+)')),
-        engineMatch = userAgent.match(new RegExp('((?:' +
-                Ext.Object.getValues(enginePrefixes).join(')|(?:') + '))([\\w\\._]+)')),
+        browserMatch = userAgent.match(new RegExp(&#39;((?:&#39; +
+                Ext.Object.getValues(browserPrefixes).join(&#39;)|(?:&#39;) + &#39;))([\\w\\._]+)&#39;)),
+        engineMatch = userAgent.match(new RegExp(&#39;((?:&#39; +
+                Ext.Object.getValues(enginePrefixes).join(&#39;)|(?:&#39;) + &#39;))([\\w\\._]+)&#39;)),
         browserName = browserNames.other,
         engineName = engineNames.other,
-        browserVersion = '',
-        engineVersion = '',
-        majorVer = '',
+        browserVersion = &#39;&#39;,
+        engineVersion = &#39;&#39;,
+        majorVer = &#39;&#39;,
         isWebView = false,
         i, prefix, mode, name, maxIEVersion;
 
@@ -55,7 +55,7 @@
 <span id='Ext-env-Browser-method-is'>    /**
 </span>     * A &quot;hybrid&quot; property, can be either accessed as a method call, for example:
      *
-     *     if (Ext.browser.is('IE')) {
+     *     if (Ext.browser.is(&#39;IE&#39;)) {
      *         // ...
      *     }
      *
@@ -106,9 +106,9 @@
     if (browserMatch) {
         browserName = browserNames[Ext.Object.getKey(browserPrefixes, browserMatch[1])];
         //&lt;feature legacyBrowser&gt;
-        if (browserName === 'Safari' &amp;&amp; /^Opera/.test(userAgent)) {
+        if (browserName === &#39;Safari&#39; &amp;&amp; /^Opera/.test(userAgent)) {
             // Prevent Opera 12 and earlier from being incorrectly reported as Safari
-            browserName = 'Opera';
+            browserName = &#39;Opera&#39;;
         }
         //&lt;/feature&gt;
         browserVersion = new Ext.Version(browserMatch[2]);
@@ -119,8 +119,8 @@
         engineVersion = new Ext.Version(engineMatch[2]);
     }
 
-    if (engineName === 'Trident' &amp;&amp; browserName !== 'IE') {
-        browserName = 'IE';
+    if (engineName === &#39;Trident&#39; &amp;&amp; browserName !== &#39;IE&#39;) {
+        browserName = &#39;IE&#39;;
         var version = userAgent.match(/.*rv:(\d+.\d+)/);
         if (version &amp;&amp; version.length) {
             version = version[1];
@@ -369,11 +369,11 @@
     }
 
     if (userAgent.match(/Android.*Chrome/g)) {
-        browserName = 'ChromeMobile';
+        browserName = &#39;ChromeMobile&#39;;
     }
 
     if (userAgent.match(/OPR/)) {
-        browserName = 'Opera';
+        browserName = &#39;Opera&#39;;
         browserMatch = userAgent.match(/OPR\/(\d+.\d+)/);
         browserVersion = new Ext.Version(browserMatch[1]);
     }
@@ -388,13 +388,13 @@
     this.setFlag(browserName, true, publish); // e.g., Ext.isIE
 
     if (browserVersion) {
-        majorVer = browserVersion.getMajor() || '';
+        majorVer = browserVersion.getMajor() || &#39;&#39;;
         //&lt;feature legacyBrowser&gt;
         if (me.is.IE) {
             majorVer = parseInt(majorVer, 10);
             mode = document.documentMode;
 
-            // IE's Developer Tools allows switching of Browser Mode (userAgent) and
+            // IE&#39;s Developer Tools allows switching of Browser Mode (userAgent) and
             // Document Mode (actual behavior) independently. While this makes no real
             // sense, the bottom line is that document.documentMode holds the key to
             // getting the proper &quot;version&quot; determined. That value is always 5 when in
@@ -414,9 +414,9 @@
 
             maxIEVersion = Math.max(majorVer, Ext.Boot.maxIEVersion);
             for (i = 7; i &lt;= maxIEVersion; ++i) {
-                prefix = 'isIE' + i; 
+                prefix = &#39;isIE&#39; + i; 
                 if (majorVer &lt;= i) {
-                    Ext[prefix + 'm'] = true;
+                    Ext[prefix + &#39;m&#39;] = true;
                 }
 
                 if (majorVer === i) {
@@ -424,7 +424,7 @@
                 }
 
                 if (majorVer &gt;= i) {
-                    Ext[prefix + 'p'] = true;
+                    Ext[prefix + &#39;p&#39;] = true;
                 }
             }
         }
@@ -456,7 +456,7 @@
     this.setFlag(name);
 
     if (engineVersion) {
-        this.setFlag(engineName + (engineVersion.getMajor() || ''));
+        this.setFlag(engineName + (engineVersion.getMajor() || &#39;&#39;));
         this.setFlag(engineName + engineVersion.getShortVersion());
     }
 
@@ -468,15 +468,15 @@
         }
     }
 
-    this.setFlag('Standalone', !!navigator.standalone);
+    this.setFlag(&#39;Standalone&#39;, !!navigator.standalone);
 
-    this.setFlag('Ripple', !!document.getElementById(&quot;tinyhippos-injected&quot;) &amp;&amp; !Ext.isEmpty(window.top.ripple));
-    this.setFlag('WebWorks', !!window.blackberry);
+    this.setFlag(&#39;Ripple&#39;, !!document.getElementById(&quot;tinyhippos-injected&quot;) &amp;&amp; !Ext.isEmpty(window.top.ripple));
+    this.setFlag(&#39;WebWorks&#39;, !!window.blackberry);
 
     if (window.PhoneGap !== undefined || window.Cordova !== undefined || window.cordova !== undefined) {
         isWebView = true;
-        this.setFlag('PhoneGap');
-        this.setFlag('Cordova');
+        this.setFlag(&#39;PhoneGap&#39;);
+        this.setFlag(&#39;Cordova&#39;);
     }
 
     // Check if running in UIWebView
@@ -485,7 +485,7 @@
     }
 
     // Flag to check if it we are in the WebView
-    this.setFlag('WebView', isWebView);
+    this.setFlag(&#39;WebView&#39;, isWebView);
 
 <span id='Ext-env-Browser-property-isStrict'>    /**
 </span>     * @property {Boolean}
@@ -500,49 +500,49 @@
     this.isSecure = Ext.isSecure;
 
     // IE10Quirks, Chrome26Strict, etc.
-    this.identity = browserName + majorVer + (this.isStrict ? 'Strict' : 'Quirks');
+    this.identity = browserName + majorVer + (this.isStrict ? &#39;Strict&#39; : &#39;Quirks&#39;);
 };
 
 Ext.env.Browser.prototype = {
     constructor: Ext.env.Browser,
 
     engineNames: {
-        webkit: 'WebKit',
-        gecko: 'Gecko',
-        presto: 'Presto',
-        trident: 'Trident',
-        other: 'Other'
+        webkit: &#39;WebKit&#39;,
+        gecko: &#39;Gecko&#39;,
+        presto: &#39;Presto&#39;,
+        trident: &#39;Trident&#39;,
+        other: &#39;Other&#39;
     },
 
     enginePrefixes: {
-        webkit: 'AppleWebKit/',
-        gecko: 'Gecko/',
-        presto: 'Presto/',
-        trident: 'Trident/'
+        webkit: &#39;AppleWebKit/&#39;,
+        gecko: &#39;Gecko/&#39;,
+        presto: &#39;Presto/&#39;,
+        trident: &#39;Trident/&#39;
     },
 
     styleDashPrefixes: {
-        WebKit: '-webkit-',
-        Gecko: '-moz-',
-        Trident: '-ms-',
-        Presto: '-o-',
-        Other: ''
+        WebKit: &#39;-webkit-&#39;,
+        Gecko: &#39;-moz-&#39;,
+        Trident: &#39;-ms-&#39;,
+        Presto: &#39;-o-&#39;,
+        Other: &#39;&#39;
     },
 
     stylePrefixes: {
-        WebKit: 'Webkit',
-        Gecko: 'Moz',
-        Trident: 'ms',
-        Presto: 'O',
-        Other: ''
+        WebKit: &#39;Webkit&#39;,
+        Gecko: &#39;Moz&#39;,
+        Trident: &#39;ms&#39;,
+        Presto: &#39;O&#39;,
+        Other: &#39;&#39;
     },
 
     propertyPrefixes: {
-        WebKit: 'webkit',
-        Gecko: 'moz',
-        Trident: 'ms',
-        Presto: 'o',
-        Other: ''
+        WebKit: &#39;webkit&#39;,
+        Gecko: &#39;moz&#39;,
+        Trident: &#39;ms&#39;,
+        Presto: &#39;o&#39;,
+        Other: &#39;&#39;
     },
 
     // scope: Ext.env.Browser.prototype
@@ -570,7 +570,7 @@ Ext.env.Browser.prototype = {
     version: null,
 
 <span id='Ext-env-Browser-property-engineName'>    /**
-</span>     * The full name of the current browser's engine.
+</span>     * The full name of the current browser&#39;s engine.
      * Possible values are:
      *
      * - WebKit
@@ -598,7 +598,7 @@ Ext.env.Browser.prototype = {
         this.is[name] = value;
         this.is[name.toLowerCase()] = value;
         if (publish) {
-            Ext['is' + name] = value;
+            Ext[&#39;is&#39; + name] = value;
         }
 
         return this;
@@ -623,10 +623,10 @@ Ext.env.Browser.prototype = {
     },
 
     getPreferredTranslationMethod: function(config) {
-        if (typeof config === 'object' &amp;&amp; 'translationMethod' in config &amp;&amp; config.translationMethod !== 'auto') {
+        if (typeof config === &#39;object&#39; &amp;&amp; &#39;translationMethod&#39; in config &amp;&amp; config.translationMethod !== &#39;auto&#39;) {
             return config.translationMethod;
         } else {
-            return 'csstransform';
+            return &#39;csstransform&#39;;
         }
     }
 
@@ -660,11 +660,11 @@ Ext.env.Browser.prototype = {
 <span id='Ext-property-SSL_SECURE_URL'>    /**
 </span>     * @property {String} SSL_SECURE_URL
      * URL to a blank file used by Ext when in secure mode for iframe src and onReady src
-     * to prevent the IE insecure content warning (`'about:blank'`, except for IE
-     * in secure mode, which is `'javascript:&quot;&quot;'`).
+     * to prevent the IE insecure content warning (`&#39;about:blank&#39;`, except for IE
+     * in secure mode, which is `&#39;javascript:&quot;&quot;&#39;`).
      * @member Ext
      */
-    Ext.SSL_SECURE_URL = Ext.isSecure &amp;&amp; Ext.isIE ? 'javascript:\'\'' : 'about:blank'; // jshint ignore:line
+    Ext.SSL_SECURE_URL = Ext.isSecure &amp;&amp; Ext.isIE ? &#39;javascript:\&#39;\&#39;&#39; : &#39;about:blank&#39;; // jshint ignore:line
 }(Ext.global.navigator.userAgent));
 </pre>
 </body>

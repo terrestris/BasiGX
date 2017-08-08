@@ -19,29 +19,29 @@
 </span> * Provides indentation and folder structure markup for a Tree taking into account
  * depth and position within the tree hierarchy.
  */
-Ext.define('Ext.tree.Column', {
-    extend: 'Ext.grid.column.Column',
-    alias: 'widget.treecolumn',
+Ext.define(&#39;Ext.tree.Column&#39;, {
+    extend: &#39;Ext.grid.column.Column&#39;,
+    alias: &#39;widget.treecolumn&#39;,
 
-<span id='Ext-tree-Column-cfg-tdCls'>    tdCls: Ext.baseCSSPrefix + 'grid-cell-treecolumn',
+<span id='Ext-tree-Column-cfg-tdCls'>    tdCls: Ext.baseCSSPrefix + &#39;grid-cell-treecolumn&#39;,
 </span>
 <span id='Ext-tree-Column-property-autoLock'>    autoLock: true,
 </span><span id='Ext-tree-Column-cfg-lockable'>    lockable: false,
 </span><span id='Ext-tree-Column-cfg-draggable'>    draggable: false,
 </span><span id='Ext-tree-Column-cfg-hideable'>    hideable: false,
 </span>
-<span id='Ext-tree-Column-property-iconCls'>    iconCls: Ext.baseCSSPrefix + 'tree-icon',
-</span><span id='Ext-tree-Column-property-checkboxCls'>    checkboxCls: Ext.baseCSSPrefix + 'tree-checkbox',
-</span><span id='Ext-tree-Column-property-elbowCls'>    elbowCls: Ext.baseCSSPrefix + 'tree-elbow',
-</span><span id='Ext-tree-Column-property-expanderCls'>    expanderCls: Ext.baseCSSPrefix + 'tree-expander',
-</span><span id='Ext-tree-Column-property-textCls'>    textCls: Ext.baseCSSPrefix + 'tree-node-text',
-</span><span id='Ext-tree-Column-property-innerCls'>    innerCls: Ext.baseCSSPrefix + 'grid-cell-inner-treecolumn',
-</span><span id='Ext-tree-Column-property-customIconCls'>    customIconCls: Ext.baseCSSPrefix + 'tree-icon-custom',
+<span id='Ext-tree-Column-property-iconCls'>    iconCls: Ext.baseCSSPrefix + &#39;tree-icon&#39;,
+</span><span id='Ext-tree-Column-property-checkboxCls'>    checkboxCls: Ext.baseCSSPrefix + &#39;tree-checkbox&#39;,
+</span><span id='Ext-tree-Column-property-elbowCls'>    elbowCls: Ext.baseCSSPrefix + &#39;tree-elbow&#39;,
+</span><span id='Ext-tree-Column-property-expanderCls'>    expanderCls: Ext.baseCSSPrefix + &#39;tree-expander&#39;,
+</span><span id='Ext-tree-Column-property-textCls'>    textCls: Ext.baseCSSPrefix + &#39;tree-node-text&#39;,
+</span><span id='Ext-tree-Column-property-innerCls'>    innerCls: Ext.baseCSSPrefix + &#39;grid-cell-inner-treecolumn&#39;,
+</span><span id='Ext-tree-Column-property-customIconCls'>    customIconCls: Ext.baseCSSPrefix + &#39;tree-icon-custom&#39;,
 </span><span id='Ext-tree-Column-property-isTreeColumn'>    isTreeColumn: true,
 </span>
 <span id='Ext-tree-Column-cfg-renderer'>    /**
 </span>     * @cfg {Function/String} renderer
-     * A renderer is an 'interceptor' method which can be used to transform data (value, 
+     * A renderer is an &#39;interceptor&#39; method which can be used to transform data (value, 
      * appearance, etc.) before it is rendered. Note that a *tree column* renderer yields
      * the *text* of the node. The lines and icons are produced by configurations. See
      * below for more information.
@@ -52,8 +52,8 @@ Ext.define('Ext.tree.Column', {
      * @param {Object} value The data value for the current cell
      * 
      *     renderer: function(value){
-     *         // evaluates `value` to append either `person' or `people`
-     *         return Ext.util.Format.plural(value, 'person', 'people');
+     *         // evaluates `value` to append either `person&#39; or `people`
+     *         return Ext.util.Format.plural(value, &#39;person&#39;, &#39;people&#39;);
      *     }
      * 
      * @param {Object} metaData A collection of metadata about the current cell; can be 
@@ -81,10 +81,10 @@ Ext.define('Ext.tree.Column', {
      * @param {Ext.data.Model} record The record for the current row
      *
      *     renderer: function (value, metaData, record) {
-     *         // evaluate the record's `updated` field and if truthy return the value 
+     *         // evaluate the record&#39;s `updated` field and if truthy return the value 
      *         // from the `newVal` field, else return value
-     *         var updated = record.get('updated');
-     *         return updated ? record.get('newVal') : value;
+     *         var updated = record.get(&#39;updated&#39;);
+     *         return updated ? record.get(&#39;newVal&#39;) : value;
      *     }
      * 
      * @param {Number} rowIndex The index of the current row
@@ -92,14 +92,14 @@ Ext.define('Ext.tree.Column', {
      *     renderer: function (value, metaData, record, rowIndex) {
      *         // style the cell differently for even / odd values
      *         var odd = (rowIndex % 2 === 0);
-     *         metaData.tdStyle = 'color:' + (odd ? 'gray' : 'red');
+     *         metaData.tdStyle = &#39;color:&#39; + (odd ? &#39;gray&#39; : &#39;red&#39;);
      *     }
      * 
      * @param {Number} colIndex The index of the current column
      * 
      *     var myRenderer = function(value, metaData, record, rowIndex, colIndex) {
      *         if (colIndex === 0) {
-     *             metaData.tdAttr = 'data-qtip=' + value;
+     *             metaData.tdAttr = &#39;data-qtip=&#39; + value;
      *         }
      *         // additional logic to apply to values in all columns
      *         return value;
@@ -116,8 +116,8 @@ Ext.define('Ext.tree.Column', {
      *     renderer: function (value, metaData, record, rowIndex, colIndex, store) {
      *         // style the cell differently depending on how the value relates to the 
      *         // average of all values
-     *         var average = store.average('grades');
-     *         metaData.tdCls = (value &lt; average) ? 'needsImprovement' : 'satisfactory';
+     *         var average = store.average(&#39;grades&#39;);
+     *         metaData.tdCls = (value &lt; average) ? &#39;needsImprovement&#39; : &#39;satisfactory&#39;;
      *         return value;
      *     }
      * 
@@ -128,7 +128,7 @@ Ext.define('Ext.tree.Column', {
      *         var headerCt = this.getHeaderContainer(),
      *             column = headerCt.getHeaderAtIndex(colIndex);
      * 
-     *         metaData.tdCls = 'app-' + column.dataIndex;
+     *         metaData.tdCls = &#39;app-&#39; + column.dataIndex;
      *         return value;
      *     }
      * 
@@ -138,40 +138,40 @@ Ext.define('Ext.tree.Column', {
      */
 
     cellTpl: [
-        '&lt;tpl for=&quot;lines&quot;&gt;',
-            '&lt;div class=&quot;{parent.childCls} {parent.elbowCls}-img ',
-            '{parent.elbowCls}-&lt;tpl if=&quot;.&quot;&gt;line&lt;tpl else&gt;empty&lt;/tpl&gt;&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;',
-        '&lt;/tpl&gt;',
-        '&lt;div class=&quot;{childCls} {elbowCls}-img {elbowCls}',
-            '&lt;tpl if=&quot;isLast&quot;&gt;-end&lt;/tpl&gt;&lt;tpl if=&quot;expandable&quot;&gt;-plus {expanderCls}&lt;/tpl&gt;&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;',
-        '&lt;tpl if=&quot;checked !== null&quot;&gt;',
-            '&lt;div role=&quot;button&quot; {ariaCellCheckboxAttr}',
-                ' class=&quot;{childCls} {checkboxCls}&lt;tpl if=&quot;checked&quot;&gt; {checkboxCls}-checked&lt;/tpl&gt;&quot;&gt;&lt;/div&gt;',
-        '&lt;/tpl&gt;',
-        '&lt;tpl if=&quot;glyph&quot;&gt;',
-            '&lt;span class=&quot;{baseIconCls}&quot; ',
-            '&lt;tpl if=&quot;glyphFontFamily&quot;&gt;',
-                'style=&quot;font-family:{glyphFontFamily}&quot;',
-            '&lt;/tpl&gt;',
-            '&gt;{glyph}&lt;/span&gt;',
-        '&lt;tpl else&gt;',
-            '&lt;tpl if=&quot;icon&quot;&gt;',
-                '&lt;img src=&quot;{blankUrl}&quot;',
-            '&lt;tpl else&gt;',
-                '&lt;div',
-            '&lt;/tpl&gt;',
-            ' role=&quot;presentation&quot; class=&quot;{childCls} {baseIconCls} {customIconCls} ',
-            '{baseIconCls}-&lt;tpl if=&quot;leaf&quot;&gt;leaf&lt;tpl else&gt;&lt;tpl if=&quot;expanded&quot;&gt;parent-expanded&lt;tpl else&gt;parent&lt;/tpl&gt;&lt;/tpl&gt; {iconCls}&quot; ',
-            '&lt;tpl if=&quot;icon&quot;&gt;style=&quot;background-image:url({icon})&quot;/&gt;&lt;tpl else&gt;&gt;&lt;/div&gt;&lt;/tpl&gt;',
-        '&lt;/tpl&gt;',
-        '&lt;tpl if=&quot;href&quot;&gt;',
-            '&lt;a href=&quot;{href}&quot; role=&quot;link&quot; target=&quot;{hrefTarget}&quot; class=&quot;{textCls} {childCls}&quot;&gt;{value}&lt;/a&gt;',
-        '&lt;tpl else&gt;',
-            '&lt;span class=&quot;{textCls} {childCls}&quot;&gt;{value}&lt;/span&gt;',
-        '&lt;/tpl&gt;'
+        &#39;&lt;tpl for=&quot;lines&quot;&gt;&#39;,
+            &#39;&lt;div class=&quot;{parent.childCls} {parent.elbowCls}-img &#39;,
+            &#39;{parent.elbowCls}-&lt;tpl if=&quot;.&quot;&gt;line&lt;tpl else&gt;empty&lt;/tpl&gt;&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&#39;,
+        &#39;&lt;/tpl&gt;&#39;,
+        &#39;&lt;div class=&quot;{childCls} {elbowCls}-img {elbowCls}&#39;,
+            &#39;&lt;tpl if=&quot;isLast&quot;&gt;-end&lt;/tpl&gt;&lt;tpl if=&quot;expandable&quot;&gt;-plus {expanderCls}&lt;/tpl&gt;&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&#39;,
+        &#39;&lt;tpl if=&quot;checked !== null&quot;&gt;&#39;,
+            &#39;&lt;div role=&quot;button&quot; {ariaCellCheckboxAttr}&#39;,
+                &#39; class=&quot;{childCls} {checkboxCls}&lt;tpl if=&quot;checked&quot;&gt; {checkboxCls}-checked&lt;/tpl&gt;&quot;&gt;&lt;/div&gt;&#39;,
+        &#39;&lt;/tpl&gt;&#39;,
+        &#39;&lt;tpl if=&quot;glyph&quot;&gt;&#39;,
+            &#39;&lt;span class=&quot;{baseIconCls}&quot; &#39;,
+            &#39;&lt;tpl if=&quot;glyphFontFamily&quot;&gt;&#39;,
+                &#39;style=&quot;font-family:{glyphFontFamily}&quot;&#39;,
+            &#39;&lt;/tpl&gt;&#39;,
+            &#39;&gt;{glyph}&lt;/span&gt;&#39;,
+        &#39;&lt;tpl else&gt;&#39;,
+            &#39;&lt;tpl if=&quot;icon&quot;&gt;&#39;,
+                &#39;&lt;img src=&quot;{blankUrl}&quot;&#39;,
+            &#39;&lt;tpl else&gt;&#39;,
+                &#39;&lt;div&#39;,
+            &#39;&lt;/tpl&gt;&#39;,
+            &#39; role=&quot;presentation&quot; class=&quot;{childCls} {baseIconCls} {customIconCls} &#39;,
+            &#39;{baseIconCls}-&lt;tpl if=&quot;leaf&quot;&gt;leaf&lt;tpl else&gt;&lt;tpl if=&quot;expanded&quot;&gt;parent-expanded&lt;tpl else&gt;parent&lt;/tpl&gt;&lt;/tpl&gt; {iconCls}&quot; &#39;,
+            &#39;&lt;tpl if=&quot;icon&quot;&gt;style=&quot;background-image:url({icon})&quot;/&gt;&lt;tpl else&gt;&gt;&lt;/div&gt;&lt;/tpl&gt;&#39;,
+        &#39;&lt;/tpl&gt;&#39;,
+        &#39;&lt;tpl if=&quot;href&quot;&gt;&#39;,
+            &#39;&lt;a href=&quot;{href}&quot; role=&quot;link&quot; target=&quot;{hrefTarget}&quot; class=&quot;{textCls} {childCls}&quot;&gt;{value}&lt;/a&gt;&#39;,
+        &#39;&lt;tpl else&gt;&#39;,
+            &#39;&lt;span class=&quot;{textCls} {childCls}&quot;&gt;{value}&lt;/span&gt;&#39;,
+        &#39;&lt;/tpl&gt;&#39;
     ],
 
-<span id='Ext-tree-Column-property-uiFields'>    // fields that will trigger a change in the ui that aren't likely to be bound to a column
+<span id='Ext-tree-Column-property-uiFields'>    // fields that will trigger a change in the ui that aren&#39;t likely to be bound to a column
 </span>    uiFields: {
         checked: 1,
         icon: 1,
@@ -211,18 +211,18 @@ Ext.define('Ext.tree.Column', {
 
 <span id='Ext-tree-Column-method-treeRenderer'>    treeRenderer: function(value, metaData, record, rowIdx, colIdx, store, view){
 </span>        var me = this,
-            cls = record.get('cls'),
+            cls = record.get(&#39;cls&#39;),
             rendererData;
 
-        // The initial render will inject the cls into the TD's attributes.
+        // The initial render will inject the cls into the TD&#39;s attributes.
         // If cls is ever *changed*, then the full rendering path is followed.
         if (metaData &amp;&amp; cls) {
-            metaData.tdCls += ' ' + cls;
+            metaData.tdCls += &#39; &#39; + cls;
         }
 
         rendererData = me.initTemplateRendererData(value, metaData, record, rowIdx, colIdx, store, view);
         
-        return me.lookupTpl('cellTpl').apply(rendererData);
+        return me.lookupTpl(&#39;cellTpl&#39;).apply(rendererData);
     },
 
 <span id='Ext-tree-Column-method-initTemplateRendererData'>    initTemplateRendererData: function(value, metaData, record, rowIdx, colIdx, store, view) {
@@ -269,7 +269,7 @@ Ext.define('Ext.tree.Column', {
         return {
             record: record,
             baseIconCls: me.iconCls,
-            customIconCls: (data.icon || data.iconCls) ? me.customIconCls : '',
+            customIconCls: (data.icon || data.iconCls) ? me.customIconCls : &#39;&#39;,
             glyph: glyph,
             glyphFontFamily: glyphFontFamily,
             iconCls: metaData.iconCls || data.iconCls,
@@ -289,10 +289,10 @@ Ext.define('Ext.tree.Column', {
             lines: lines,
             metaData: metaData,
             // subclasses or overrides can implement a getChildCls() method, which can
-            // return an extra class to add to all of the cell's child elements (icon,
+            // return an extra class to add to all of the cell&#39;s child elements (icon,
             // expander, elbow, checkbox).  This is used by the rtl override to add the
             // &quot;x-rtl&quot; class to these elements.
-            childCls: me.getChildCls ? me.getChildCls() + ' ' : '',
+            childCls: me.getChildCls ? me.getChildCls() + &#39; &#39; : &#39;&#39;,
             value: value
         };
     },
@@ -321,7 +321,7 @@ Ext.define('Ext.tree.Column', {
                 }
 
                 // Check for fields which require this column to be updated.
-                // The TreeColumn's treeRenderer is not a custom renderer.
+                // The TreeColumn&#39;s treeRenderer is not a custom renderer.
                 if (me.uiFields[field]) {
                     return 2;
                 }

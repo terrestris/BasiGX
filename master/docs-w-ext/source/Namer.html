@@ -24,9 +24,9 @@
  * results can be cached. This is handled by the `apply` method by giving it the name of
  * the method to call. For example:
  * 
- *      var str = namer.capitalize('foo'); //  = &quot;Foo&quot;
+ *      var str = namer.capitalize(&#39;foo&#39;); //  = &quot;Foo&quot;
  *      
- *      var str = namer.apply('capitalize', 'foo');
+ *      var str = namer.apply(&#39;capitalize&#39;, &#39;foo&#39;);
  * 
  * The return value of the second call (using `apply`) is the same as the first, however,
  * the results of `capitalize` are cached. This allows repeated calls to `apply` given the
@@ -40,16 +40,16 @@
  * 
  * @protected
  */
-Ext.define('Ext.data.schema.Namer', {
+Ext.define(&#39;Ext.data.schema.Namer&#39;, {
     mixins: [
-        'Ext.mixin.Factoryable'
+        &#39;Ext.mixin.Factoryable&#39;
     ],
 
     requires: [
-        'Ext.util.Inflector'
+        &#39;Ext.util.Inflector&#39;
     ],
 
-<span id='Ext-data-schema-Namer-property-isNamer'>    alias: 'namer.default', // also configures Factoryable
+<span id='Ext-data-schema-Namer-property-isNamer'>    alias: &#39;namer.default&#39;, // also configures Factoryable
 </span>
     isNamer: true,
 
@@ -66,24 +66,24 @@ Ext.define('Ext.data.schema.Namer', {
      * @template
      */
     fieldRole: function (name) {
-        var match = name.match(this.endsWithIdRe, '');
+        var match = name.match(this.endsWithIdRe, &#39;&#39;);
         if (match) {
             name = name.substr(0, name.length - (match[1] || match[2]).length);
         }
-        return this.apply('uncapitalize', name);
+        return this.apply(&#39;uncapitalize&#39;, name);
     },
 
 <span id='Ext-data-schema-Namer-method-idField'>    idField: function (name) {
 </span>        // ex: User ==&gt; userId
-        return this.apply('uncapitalize,singularize', name) + 'Id';
+        return this.apply(&#39;uncapitalize,singularize&#39;, name) + &#39;Id&#39;;
     },
 
 <span id='Ext-data-schema-Namer-method-instanceName'>    instanceName: function(roleName) {
-</span>        return this.apply('underscore', roleName);
+</span>        return this.apply(&#39;underscore&#39;, roleName);
     },
 
 <span id='Ext-data-schema-Namer-method-multiRole'>    multiRole: function (name) {
-</span>        return this.apply('undotted,uncapitalize,pluralize', name);
+</span>        return this.apply(&#39;undotted,uncapitalize,pluralize&#39;, name);
     },
 
 <span id='Ext-data-schema-Namer-method-pluralize'>    pluralize: function (name) {
@@ -91,7 +91,7 @@ Ext.define('Ext.data.schema.Namer', {
     },
     
 <span id='Ext-data-schema-Namer-method-readerRoot'>    readerRoot: function (roleName) {
-</span>        return this.apply('uncapitalize', roleName);
+</span>        return this.apply(&#39;uncapitalize&#39;, roleName);
     },
 
 <span id='Ext-data-schema-Namer-method-singularize'>    singularize: function (name) {
@@ -99,7 +99,7 @@ Ext.define('Ext.data.schema.Namer', {
     },
 
 <span id='Ext-data-schema-Namer-method-storeName'>    storeName: function (roleName) {
-</span>        return this.apply('underscore', roleName);
+</span>        return this.apply(&#39;underscore&#39;, roleName);
     },
 
 <span id='Ext-data-schema-Namer-method-uncapitalize'>    uncapitalize: function (name) {
@@ -107,26 +107,26 @@ Ext.define('Ext.data.schema.Namer', {
     },
 
 <span id='Ext-data-schema-Namer-method-underscore'>    underscore: function (name) {
-</span>        return '_' + name;
+</span>        return &#39;_&#39; + name;
     },
 
 <span id='Ext-data-schema-Namer-method-uniRole'>    uniRole: function (name) {
-</span>        return this.apply('undotted,uncapitalize,singularize', name);
+</span>        return this.apply(&#39;undotted,uncapitalize,singularize&#39;, name);
     },
 
 <span id='Ext-data-schema-Namer-method-undotted'>    undotted: function (name) {
-</span>        if (name.indexOf('.') &lt; 0) {
+</span>        if (name.indexOf(&#39;.&#39;) &lt; 0) {
             return name;
         }
 
-        var parts = name.split('.'),
+        var parts = name.split(&#39;.&#39;),
             index = parts.length;
 
         while (index-- &gt; 1) {
-            parts[index] = this.apply('capitalize', parts[index]);
+            parts[index] = this.apply(&#39;capitalize&#39;, parts[index]);
         }
 
-        return parts.join('');
+        return parts.join(&#39;&#39;);
     },
 
 <span id='Ext-data-schema-Namer-method-getterName'>    //-------------------------------------------------------------------------
@@ -136,29 +136,29 @@ Ext.define('Ext.data.schema.Namer', {
         var name = role.role;
 
         if (role &amp;&amp; role.isMany) {
-            //return this.apply('uncapitalize,pluralize', name);
+            //return this.apply(&#39;uncapitalize,pluralize&#39;, name);
             return name;
         }
 
-        //return this.apply('capitalize,singularize', name);
-        return 'get' + this.apply('capitalize', name);
+        //return this.apply(&#39;capitalize,singularize&#39;, name);
+        return &#39;get&#39; + this.apply(&#39;capitalize&#39;, name);
     },
 
 <span id='Ext-data-schema-Namer-method-inverseFieldRole'>    inverseFieldRole: function (leftType, unique, rightRole, rightType) {
 </span>        // In a FK association, the left side may be unique in which case we have a
         // one-to-one otherwise we have a one-to-many. If the FK field is just the
-        // name of the right side class (e.g., if it is &quot;order&quot;), then we don't want
+        // name of the right side class (e.g., if it is &quot;order&quot;), then we don&#39;t want
         // to include the field name in the left role.
         var me = this,
-            leftRole = me.apply(unique ? 'uniRole' : 'multiRole', leftType),
-            s1 = me.apply('pluralize', rightRole),
-            s2 = me.apply('undotted,pluralize', rightType);
+            leftRole = me.apply(unique ? &#39;uniRole&#39; : &#39;multiRole&#39;, leftType),
+            s1 = me.apply(&#39;pluralize&#39;, rightRole),
+            s2 = me.apply(&#39;undotted,pluralize&#39;, rightType);
 
         if (s1.toLowerCase() !== s2.toLowerCase()) {
             // Otherwise, we have something like &quot;creatorId&quot; on Ticket that holds a
             // reference to User. This makes the right role &quot;creator&quot; so rather than
             // make the left role &quot;tickets&quot; we make it &quot;creatorTickets&quot;.
-            leftRole = rightRole + me.apply('capitalize', leftRole);
+            leftRole = rightRole + me.apply(&#39;capitalize&#39;, leftRole);
         }
 
         return leftRole;
@@ -167,11 +167,11 @@ Ext.define('Ext.data.schema.Namer', {
 <span id='Ext-data-schema-Namer-method-manyToMany'>    manyToMany: function (relation, leftType, rightType) {
 </span>        var me = this,
             // ex: UserGroups
-            ret = me.apply('undotted,capitalize,singularize', leftType) +
-                  me.apply('undotted,capitalize,pluralize', rightType);
+            ret = me.apply(&#39;undotted,capitalize,singularize&#39;, leftType) +
+                  me.apply(&#39;undotted,capitalize,pluralize&#39;, rightType);
 
         if (relation) {
-            ret = me.apply('capitalize', relation + ret);
+            ret = me.apply(&#39;capitalize&#39;, relation + ret);
         }
 
         return ret;
@@ -193,22 +193,22 @@ Ext.define('Ext.data.schema.Namer', {
     manyToOne: function (leftType, leftRole, rightType, rightRole) {
         // ex: OrderItem -&gt; Order  ==&gt; OrderOrderItems
         //  Ticket (creator) -&gt; User ==&gt; UserCreatorTickets
-        return this.apply('capitalize,singularize', rightType) +
-               this.apply('capitalize', leftRole);
+        return this.apply(&#39;capitalize,singularize&#39;, rightType) +
+               this.apply(&#39;capitalize&#39;, leftRole);
     },
 
 <span id='Ext-data-schema-Namer-method-matrixRole'>    matrixRole: function (relation, entityType) {
-</span>        var ret = this.apply(relation ? 'multiRole,capitalize' : 'multiRole', entityType);
+</span>        var ret = this.apply(relation ? &#39;multiRole,capitalize&#39; : &#39;multiRole&#39;, entityType);
         return relation ? relation + ret : ret;
     },
 
 <span id='Ext-data-schema-Namer-method-oneToOne'>    oneToOne: function (leftType, leftRole, rightType, rightRole) {
-</span>        return this.apply('undotted,capitalize,singularize', rightType) +
-               this.apply('capitalize', leftRole);
+</span>        return this.apply(&#39;undotted,capitalize,singularize&#39;, rightType) +
+               this.apply(&#39;capitalize&#39;, leftRole);
     },
 
 <span id='Ext-data-schema-Namer-method-setterName'>    setterName: function (role) {
-</span>        return 'set' + this.apply('capitalize', role.role);
+</span>        return &#39;set&#39; + this.apply(&#39;capitalize&#39;, role.role);
     },
     
 <span id='Ext-data-schema-Namer-property-endsWithIdRe'>    //-------------------------------------------------------------------------
@@ -226,10 +226,10 @@ Ext.define('Ext.data.schema.Namer', {
             i, length, operations;
 
         if (!ret) {
-            if (operation.indexOf(',') &lt; 0) {
+            if (operation.indexOf(&#39;,&#39;) &lt; 0) {
                 ret = me[operation](name);
             } else {
-                length = (operations = operation.split(',')).length;
+                length = (operations = operation.split(&#39;,&#39;)).length;
                 ret = name;
                 for (i = 0; i &lt; length; ++i) {
                     ret = me.apply(operations[i], ret);

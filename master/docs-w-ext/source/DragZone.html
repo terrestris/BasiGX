@@ -29,20 +29,20 @@
  * By default, this class requires that draggable child nodes are registered with {@link Ext.dd.Registry}. However a
  * simpler way to allow a DragZone to manage any number of draggable elements is to configure the DragZone with an
  * implementation of the {@link #getDragData} method which interrogates the passed mouse event to see if it has taken
- * place within an element, or class of elements. This is easily done by using the event's {@link
+ * place within an element, or class of elements. This is easily done by using the event&#39;s {@link
  * Ext.event.Event#getTarget getTarget} method to identify a node based on a CSS selector. For example,
  * to make the nodes of a DataView draggable, use the following technique. Knowledge of the use of the DataView is
  * required:
  *
- *     myDataView.on('render', function(v) {
+ *     myDataView.on(&#39;render&#39;, function(v) {
  *         myDataView.dragZone = new Ext.dd.DragZone(v.getEl(), {
  *
  *     //      On receipt of a mousedown event, see if it is within a DataView node.
  *     //      Return a drag data object if so.
  *             getDragData: function(e) {
  *
- *     //          Use the DataView's own itemSelector (a mandatory property) to
- *     //          test if the mousedown is within one of the DataView's nodes.
+ *     //          Use the DataView&#39;s own itemSelector (a mandatory property) to
+ *     //          test if the mousedown is within one of the DataView&#39;s nodes.
  *                 var sourceEl = e.getTarget(v.itemSelector, 10);
  *
  *     //          If the mousedown is within a DataView node, clone the node to produce
@@ -73,8 +73,8 @@
  * See the {@link Ext.dd.DropZone DropZone} documentation for details about building a DropZone which cooperates with
  * this DragZone.
  */
-Ext.define('Ext.dd.DragZone', {
-    extend: 'Ext.dd.DragSource',
+Ext.define(&#39;Ext.dd.DragZone&#39;, {
+    extend: &#39;Ext.dd.DragSource&#39;,
 
 <span id='Ext-dd-DragZone-method-constructor'>    /**
 </span>     * Creates new DragZone.

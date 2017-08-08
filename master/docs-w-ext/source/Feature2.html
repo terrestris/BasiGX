@@ -30,8 +30,8 @@
  * ## Using Features
  * A feature is added to the grid by specifying it an array of features in the configuration:
  *
- *     var groupingFeature = Ext.create('Ext.grid.feature.Grouping');
- *     Ext.create('Ext.grid.Panel', {
+ *     var groupingFeature = Ext.create(&#39;Ext.grid.feature.Grouping&#39;);
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
  *         // other options
  *         features: [groupingFeature]
  *     });
@@ -46,7 +46,7 @@
  * A {@link Ext.view.Table TableView} uses its `tpl` to emit the item encapsulating HTML tags into its output stream.
  * To render the rows, it invokes {@link Ext.view.Table#renderRows} passing the `rows` member of its data object and the `columns` member of its data object.
  *
- * The `tpl`'s data object Looks like this:
+ * The `tpl`&#39;s data object Looks like this:
  *     {
  *         view: owningTableView,
  *         rows: recordsToRender,
@@ -57,7 +57,7 @@
  * * A {@link Ext.view.Table TableView} uses its `rowTpl` to emit a `&lt;tr&gt;` HTML tag to its output stream. To render cells,
  * it invokes {@link Ext.view.Table#renderCell} passing the `rows` member of its data object.
  *
- * The `itemTpl` and `rowTpl`'s data object looks like this:
+ * The `itemTpl` and `rowTpl`&#39;s data object looks like this:
  *
  *     {
  *         view:        owningTableView,
@@ -72,7 +72,7 @@
  *
  * * A {@link Ext.view.Table TableView} uses its `cellTpl` to emit a `&lt;td&gt;` HTML tag to its output stream.
  *
- * The `cellTpl's` data object looks like this:
+ * The `cellTpl&#39;s` data object looks like this:
  *
  *     {
  *         record: recordToRender
@@ -84,11 +84,11 @@
  *         tdCls: classForCell
  *     }
  *
- * A Feature may inject its own tpl or rowTpl or cellTpl into the {@link Ext.view.Table TableView}'s rendering by
+ * A Feature may inject its own tpl or rowTpl or cellTpl into the {@link Ext.view.Table TableView}&#39;s rendering by
  * calling {@link Ext.view.Table#addTpl} or {@link Ext.view.Table#addRowTpl} or {@link Ext.view.Table#addCellTpl}.
  *
  * The passed XTemplate is added *upstream* of the default template for the table element in a link list of XTemplates which contribute
- * to the element's HTML. It may emit appropriate HTML strings into the output stream *around* a call to
+ * to the element&#39;s HTML. It may emit appropriate HTML strings into the output stream *around* a call to
  *
  *     this.nextTpl.apply(values, out, parent);
  *
@@ -96,9 +96,9 @@
  *
  * @abstract
  */
-Ext.define('Ext.grid.feature.Feature', {
-    extend: 'Ext.util.Observable',
-    alias: 'feature.feature',
+Ext.define(&#39;Ext.grid.feature.Feature&#39;, {
+    extend: &#39;Ext.util.Observable&#39;,
+    alias: &#39;feature.feature&#39;,
 
 <span id='Ext-grid-feature-Feature-property-wrapsItem'>    wrapsItem: false,
 </span>
@@ -157,9 +157,9 @@ Ext.define('Ext.grid.feature.Feature', {
 <span id='Ext-grid-feature-Feature-method-init'>    /**
 </span>     * Protected method called during {@link Ext.view.Table View} construction.  The 
      * owning {@link Ext.grid.Panel Grid} is passed as a param.
-     * @param {Ext.grid.Panel} grid The View's owning Grid.  **Note** that in a 
+     * @param {Ext.grid.Panel} grid The View&#39;s owning Grid.  **Note** that in a 
      * {@link Ext.grid.Panel#cfg-enableLocking locking Grid} the passed grid will be 
-     * either the normal grid or the locked grid, which is the view's direct owner.
+     * either the normal grid or the locked grid, which is the view&#39;s direct owner.
      * @method
      * @protected
      */

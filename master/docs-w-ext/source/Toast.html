@@ -33,7 +33,7 @@
 </span> * This class provides for lightweight, auto-dismissing pop-up notifications called &quot;toasts&quot;.
  * At the base level, you can display a toast message by calling `Ext.toast` like so:
  *
- *      Ext.toast('Data saved');
+ *      Ext.toast(&#39;Data saved&#39;);
  *
  * This will result in a toast message, which displays in the default location of bottom right in your viewport.
  *
@@ -42,32 +42,32 @@
  *      Ext.toast(message, title, align, iconCls);
  *
  * For example, the following toast will appear top-middle in your viewport.  It will display 
- * the 'Data Saved' message with a title of 'Title'  
+ * the &#39;Data Saved&#39; message with a title of &#39;Title&#39;  
  *
- *      Ext.toast('Data Saved', 'Title', 't')
+ *      Ext.toast(&#39;Data Saved&#39;, &#39;Title&#39;, &#39;t&#39;)
  *
- * It should be noted that the toast's width is determined by the message's width. 
+ * It should be noted that the toast&#39;s width is determined by the message&#39;s width. 
  * If you need to set a specific width, or any of the other available configurations for your toast, 
  * you can create the toast object as seen below:
  *
  *      Ext.toast({
- *          html: 'Data Saved',
- *          title: 'My Title',
+ *          html: &#39;Data Saved&#39;,
+ *          title: &#39;My Title&#39;,
  *          width: 200,
- *          align: 't'
+ *          align: &#39;t&#39;
  *      });
  *
  * This component is derived from the excellent work of a Sencha community member, Eirik
  * Lorentsen.
  */
-Ext.define('Ext.window.Toast', {
-    extend: 'Ext.window.Window',
+Ext.define(&#39;Ext.window.Toast&#39;, {
+    extend: &#39;Ext.window.Window&#39;,
 
-    xtype: 'toast',
+    xtype: &#39;toast&#39;,
     
 <span id='Ext-window-Toast-property-isToast'>    isToast: true,
 </span>
-<span id='Ext-window-Toast-cfg-cls'>    cls: Ext.baseCSSPrefix + 'toast',
+<span id='Ext-window-Toast-cfg-cls'>    cls: Ext.baseCSSPrefix + &#39;toast&#39;,
 </span>
 <span id='Ext-window-Toast-cfg-bodyPadding'>    bodyPadding: 10,
 </span><span id='Ext-window-Toast-property-autoClose'>    autoClose: true,
@@ -109,7 +109,7 @@ Ext.define('Ext.window.Toast', {
      *  - b  - bottom
      *  - r  - right
      */
-    align: 't',
+    align: &#39;t&#39;,
 
 <span id='Ext-window-Toast-cfg-alwaysOnTop'>    alwaysOnTop: true,
 </span>
@@ -124,21 +124,21 @@ Ext.define('Ext.window.Toast', {
 <span id='Ext-window-Toast-cfg-animate'>    /**
 </span>     * @cfg {Boolean} [animate=true]
      * Set this to `false` to make toasts appear and disappear without animation.
-     * This is helpful with applications' unit and integration testing.
+     * This is helpful with applications&#39; unit and integration testing.
      */
 
 <span id='Ext-window-Toast-property-spacing'>    // Pixels between each notification
 </span>    spacing: 6,
 
     //TODO There should be a way to control from and to positions for the introduction.
-    //TODO The align/anchorAlign configs don't actually work as expected.
+    //TODO The align/anchorAlign configs don&#39;t actually work as expected.
 
-<span id='Ext-window-Toast-property-paddingX'>    // Pixels from the anchor's borders to start the first notification
+<span id='Ext-window-Toast-property-paddingX'>    // Pixels from the anchor&#39;s borders to start the first notification
 </span>    paddingX: 30,
 <span id='Ext-window-Toast-property-paddingY'>    paddingY: 10,
 </span>
-<span id='Ext-window-Toast-property-slideInAnimation'>    slideInAnimation: 'easeIn',
-</span><span id='Ext-window-Toast-property-slideBackAnimation'>    slideBackAnimation: 'bounceOut',
+<span id='Ext-window-Toast-property-slideInAnimation'>    slideInAnimation: &#39;easeIn&#39;,
+</span><span id='Ext-window-Toast-property-slideBackAnimation'>    slideBackAnimation: &#39;bounceOut&#39;,
 </span><span id='Ext-window-Toast-property-slideInDuration'>    slideInDuration: 500,
 </span><span id='Ext-window-Toast-property-slideBackDuration'>    slideBackDuration: 500,
 </span><span id='Ext-window-Toast-property-hideDuration'>    hideDuration: 500,
@@ -181,7 +181,7 @@ Ext.define('Ext.window.Toast', {
 
         // Close tool is not really helpful to sight impaired users
         // when Toast window is set to auto-close on timeout; however
-        // if it's forced, respect that.
+        // if it&#39;s forced, respect that.
         if (me.autoClose &amp;&amp; me.closable == null) {
             me.closable = false;
         }
@@ -200,7 +200,7 @@ Ext.define('Ext.window.Toast', {
 
         // Mousedown outside of this, when visible, hides it immediately
         if (me.closeOnMouseDown) {
-            Ext.getDoc().on('mousedown', me.onDocumentMousedown, me);
+            Ext.getDoc().on(&#39;mousedown&#39;, me.onDocumentMousedown, me);
         }
     },
 
@@ -312,11 +312,11 @@ Ext.define('Ext.window.Toast', {
             }
             // Using getAnchorXY instead of getTop/getBottom should give a correct placement when document is used
             // as the anchor but is still 0 px high. Before rendering the viewport.
-            else if (align === 'br' || align === 'tr' || align === 'r') {
-                xPos += anchorEl.getAnchorXY('r')[0];
+            else if (align === &#39;br&#39; || align === &#39;tr&#39; || align === &#39;r&#39;) {
+                xPos += anchorEl.getAnchorXY(&#39;r&#39;)[0];
                 xPos -= (el.getWidth() + me.paddingX);
             } else {
-                xPos += anchorEl.getAnchorXY('l')[0];
+                xPos += anchorEl.getAnchorXY(&#39;l&#39;)[0];
                 xPos += me.paddingX;
             }
         }
@@ -340,11 +340,11 @@ Ext.define('Ext.window.Toast', {
             }
             // Using getAnchorXY instead of getTop/getBottom should give a correct placement when document is used
             // as the anchor but is still 0 px high. Before rendering the viewport.
-            else if (align === 'br' || align === 'bl' || align === 'b') {
-                yPos += anchorEl.getAnchorXY('b')[1];
+            else if (align === &#39;br&#39; || align === &#39;bl&#39; || align === &#39;b&#39;) {
+                yPos += anchorEl.getAnchorXY(&#39;b&#39;)[1];
                 yPos -= (el.getHeight() + me.paddingY);
             } else {
-                yPos += anchorEl.getAnchorXY('t')[1];
+                yPos += anchorEl.getAnchorXY(&#39;t&#39;)[1];
                 yPos += me.paddingY;
             }
         }
@@ -360,8 +360,8 @@ Ext.define('Ext.window.Toast', {
 
         if (!me.useXAxis) {
             xPos = el.getLeft();
-        } else if (align === 'tl' || align === 'bl' || align === 'l') {
-            // Using sibling's width when adding
+        } else if (align === &#39;tl&#39; || align === &#39;bl&#39; || align === &#39;l&#39;) {
+            // Using sibling&#39;s width when adding
             xPos = (sibling.xPos + sibling.el.getWidth() + sibling.spacing);
         } else {
             // Using own width when subtracting
@@ -379,8 +379,8 @@ Ext.define('Ext.window.Toast', {
 
         if (me.useXAxis) {
             yPos = el.getTop();
-        } else if (align === 'tr' || align === 'tl' || align === 't') {
-            // Using sibling's width when adding
+        } else if (align === &#39;tr&#39; || align === &#39;tl&#39; || align === &#39;t&#39;) {
+            // Using sibling&#39;s width when adding
             yPos = (sibling.yPos + sibling.el.getHeight() + sibling.spacing);
         } else {
             // Using own width when subtracting
@@ -402,7 +402,7 @@ Ext.define('Ext.window.Toast', {
 </span>        var me = this,
             Toast;
 
-        me.anchor = anchor = ((typeof anchor === 'string') ? Ext.getCmp(anchor) : anchor);
+        me.anchor = anchor = ((typeof anchor === &#39;string&#39;) ? Ext.getCmp(anchor) : anchor);
 
         // If no anchor is provided or found, then the static object is used and the el
         // property pointed to the body document.
@@ -419,7 +419,7 @@ Ext.define('Ext.window.Toast', {
 </span>        var me = this;
 
         if (me.stickOnClick) {
-            me.body.on('click', function () {
+            me.body.on(&#39;click&#39;, function () {
                 me.cancelAutoClose();
             });
         }
@@ -639,7 +639,7 @@ Ext.define('Ext.window.Toast', {
                 if (me.enableAnimations &amp;&amp; !me.destroying &amp;&amp; !me.destroyed) {
                     el.fadeOut({
                         opacity: 0,
-                        easing: 'easeIn',
+                        easing: &#39;easeIn&#39;,
                         duration: me.hideDuration,
                         listeners: {
                             scope: me,

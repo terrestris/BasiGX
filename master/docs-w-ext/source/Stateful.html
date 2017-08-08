@@ -20,12 +20,12 @@
  * A mixin for being able to save the state of an object to an underlying
  * {@link Ext.state.Provider}.
  */
-Ext.define('Ext.state.Stateful', {
-<span id='Ext-state-Stateful-property-mixinId'>    mixinId: 'state',
+Ext.define(&#39;Ext.state.Stateful&#39;, {
+<span id='Ext-state-Stateful-property-mixinId'>    mixinId: &#39;state&#39;,
 </span>
     requires: [
-        'Ext.state.Manager',
-        'Ext.util.TaskRunner'
+        &#39;Ext.state.Manager&#39;,
+        &#39;Ext.util.TaskRunner&#39;
     ],
 
     config: {
@@ -38,7 +38,7 @@ Ext.define('Ext.state.Stateful', {
          * Auto-generated ids are not guaranteed to be stable across page loads and
          * cannot be relied upon to save and restore the same state for a object.
          *
-         * For state saving to work, the state manager's provider must have been
+         * For state saving to work, the state manager&#39;s provider must have been
          * set to an implementation of {@link Ext.state.Provider} which overrides the
          * {@link Ext.state.Provider#set set} and {@link Ext.state.Provider#get get}
          * methods to save and recall name/value pairs. A built-in implementation,
@@ -117,7 +117,7 @@ Ext.define('Ext.state.Stateful', {
      * An array of events that, when fired, should trigger this object to
      * save its state. Defaults to none. `stateEvents` may be any type
      * of event supported by this object, including browser or custom events
-     * (e.g., `['click', 'customerchange']`).
+     * (e.g., `[&#39;click&#39;, &#39;customerchange&#39;]`).
      *
      * See `{@link #stateful}` for an explanation of saving and
      * restoring object state.
@@ -175,7 +175,7 @@ Ext.define('Ext.state.Stateful', {
             me.stateEvents = [];
         }
 
-        // NOTE: The stateful config will be initConfig'd before we get here, so the
+        // NOTE: The stateful config will be initConfig&#39;d before we get here, so the
         // stateful property will be correct...
         if (me.stateful) {
             me.addStateEvents(me.stateEvents);
@@ -196,7 +196,7 @@ Ext.define('Ext.state.Stateful', {
             eventArray;
 
         if (me.stateful &amp;&amp; me.getStateId()) {
-            eventArray =  (typeof events === 'string') ? arguments : events;
+            eventArray =  (typeof events === &#39;string&#39;) ? arguments : events;
 
             stateEventsByName = me.stateEventsByName || (me.stateEventsByName = {});
 
@@ -291,10 +291,10 @@ Ext.define('Ext.state.Stateful', {
                 }
             }
 
-            if (!hasListeners.beforestatesave || me.fireEvent('beforestatesave', me, state) !== false) {
+            if (!hasListeners.beforestatesave || me.fireEvent(&#39;beforestatesave&#39;, me, state) !== false) {
                 Ext.state.Manager.set(id, state);
                 if (hasListeners.statesave) {
-                    me.fireEvent('statesave', me, state);
+                    me.fireEvent(&#39;statesave&#39;, me, state);
                 }
             }
         }
@@ -323,7 +323,7 @@ Ext.define('Ext.state.Stateful', {
 
 <span id='Ext-state-Stateful-method-getStateId'>    /**
 </span>     * Gets the state id for this object.
-     * @return {String} The 'stateId' or the implicit 'id' specified by component configuration.
+     * @return {String} The &#39;stateId&#39; or the implicit &#39;id&#39; specified by component configuration.
      * @private
      */
     getStateId: function() {
@@ -350,7 +350,7 @@ Ext.define('Ext.state.Stateful', {
             combinedState = Ext.state.Manager.get(id);
             if (combinedState) {
                 state = Ext.apply({}, combinedState);
-                if (!hasListeners.beforestaterestore || me.fireEvent('beforestaterestore', me, combinedState) !== false) {
+                if (!hasListeners.beforestaterestore || me.fireEvent(&#39;beforestaterestore&#39;, me, combinedState) !== false) {
 
                     //Notify all plugins FIRST (if interested) in new state
                     plugins = me.getPlugins() || [];
@@ -367,7 +367,7 @@ Ext.define('Ext.state.Stateful', {
 
                     me.applyState(state);
                     if (hasListeners.staterestore) {
-                        me.fireEvent('staterestore', me, combinedState);
+                        me.fireEvent(&#39;staterestore&#39;, me, combinedState);
                     }
                 }
             }
@@ -412,7 +412,7 @@ Ext.define('Ext.state.Stateful', {
         var me = this,
             i, n;
 
-        if (typeof propNames === 'string') {
+        if (typeof propNames === &#39;string&#39;) {
             me.savePropToState(propNames, state);
         } else {
             for (i = 0, n = propNames.length; i &lt; n; ++i) {
@@ -434,7 +434,7 @@ Ext.define('Ext.state.Stateful', {
             this.stateTask = null;
         }
         
-        // No callParent() here, it's a mixin.
+        // No callParent() here, it&#39;s a mixin.
     }
 });
 </pre>

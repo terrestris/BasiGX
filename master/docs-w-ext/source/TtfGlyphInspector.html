@@ -40,9 +40,9 @@
  *
  * @class BasiGX.view.panel.TtfGlyphInspector
  */
-Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
-    extend: 'Ext.panel.Panel',
-    xtype: 'basigx-panel-ttfglyphinspector',
+Ext.define(&#39;BasiGX.view.panel.TtfGlyphInspector&#39;, {
+    extend: &#39;Ext.panel.Panel&#39;,
+    xtype: &#39;basigx-panel-ttfglyphinspector&#39;,
 
 <span id='BasiGX-view-panel-TtfGlyphInspector-property-width'>    /**
 </span>     * The initial width of the panel
@@ -68,11 +68,11 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
 </span>     * The html elements used to render the glyphs
      */
     html:
-        '&lt;div&gt;' +
-            'Glyphs: &lt;span id=&quot;pagination&quot;&gt;&lt;/span&gt;' +
-            '&lt;br&gt;' +
-            '&lt;div id=&quot;glyph-list-end&quot;&gt;&lt;/div&gt;' +
-        '&lt;/div&gt;',
+        &#39;&lt;div&gt;&#39; +
+            &#39;Glyphs: &lt;span id=&quot;pagination&quot;&gt;&lt;/span&gt;&#39; +
+            &#39;&lt;br&gt;&#39; +
+            &#39;&lt;div id=&quot;glyph-list-end&quot;&gt;&lt;/div&gt;&#39; +
+        &#39;&lt;/div&gt;&#39;,
 
 <span id='BasiGX-view-panel-TtfGlyphInspector-property-cellCount'>    /**
 </span>     * Render specific variables
@@ -91,30 +91,30 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
 </span>
 <span id='BasiGX-view-panel-TtfGlyphInspector-method-initComponent'>    /**
 </span>     * Method called with an (blob)-url to a ttf font to render.
-     * Will create and return an 'Ext.panel.Panel' to show the fonts glyphs.
+     * Will create and return an &#39;Ext.panel.Panel&#39; to show the fonts glyphs.
      */
     initComponent: function() {
         var me = this;
         if (!window.opentype) {
-            Ext.log.error('Required global variable &quot;opentype&quot;' +
-                ' not found. Is opentype.js loaded?');
+            Ext.log.error(&#39;Required global variable &quot;opentype&quot;&#39; +
+                &#39; not found. Is opentype.js loaded?&#39;);
             return;
         }
 
         if (!me.fontSrc) {
-            Ext.log.error('Required parameter &quot;fontSrc&quot; not set! ' +
-                'Did you pass this parameter?');
+            Ext.log.error(&#39;Required parameter &quot;fontSrc&quot; not set! &#39; +
+                &#39;Did you pass this parameter?&#39;);
             return;
         }
 
-        me.on('afterrender', function() {
-            me.enableHighDPICanvas('glyph-bg');
-            me.enableHighDPICanvas('glyph');
+        me.on(&#39;afterrender&#39;, function() {
+            me.enableHighDPICanvas(&#39;glyph-bg&#39;);
+            me.enableHighDPICanvas(&#39;glyph&#39;);
             me.prepareGlyphList();
             opentype.load(me.fontSrc, function(err, font) {
                 if (err) {
-                    Ext.log.error('Could not load the given font, ' +
-                        'aborting...');
+                    Ext.log.error(&#39;Could not load the given font, &#39; +
+                        &#39;aborting...&#39;);
                     return;
                 }
                 me.onFontLoaded(font);
@@ -127,7 +127,7 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
 </span>     * @param {String} canvas The canvas id or canvas element
      */
     enableHighDPICanvas: function(canvas) {
-        if (typeof canvas === 'string') {
+        if (typeof canvas === &#39;string&#39;) {
             canvas = document.getElementById(canvas);
         }
         if (this.pixelRatio === 1) {
@@ -138,9 +138,9 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
         canvas.width = oldWidth * this.pixelRatio;
         canvas.height = oldHeight *
             this.pixelRatio;
-        canvas.style.width = oldWidth + 'px';
-        canvas.style.height = oldHeight + 'px';
-        canvas.getContext('2d').scale(
+        canvas.style.width = oldWidth + &#39;px&#39;;
+        canvas.style.height = oldHeight + &#39;px&#39;;
+        canvas.getContext(&#39;2d&#39;).scale(
             this.pixelRatio,
             this.pixelRatio
         );
@@ -153,9 +153,9 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
     formatUnicode: function(unicode) {
         unicode = unicode.toString(16);
         if (unicode.length &gt; 4) {
-            return ('000000' + unicode.toUpperCase()).substr(-6);
+            return (&#39;000000&#39; + unicode.toUpperCase()).substr(-6);
         } else {
-            return ('0000' + unicode.toUpperCase()).substr(-4);
+            return (&#39;0000&#39; + unicode.toUpperCase()).substr(-4);
         }
     },
 
@@ -165,7 +165,7 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
      */
     renderGlyphItem: function(canvas, glyphIndex) {
         var cellMarkSize = 4;
-        var ctx = canvas.getContext('2d');
+        var ctx = canvas.getContext(&#39;2d&#39;);
         ctx.clearRect(
             0,
             0,
@@ -176,8 +176,8 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
             return;
         }
 
-        ctx.fillStyle = '#606060';
-        ctx.font = '9px sans-serif';
+        ctx.fillStyle = &#39;#606060&#39;;
+        ctx.font = &#39;9px sans-serif&#39;;
         ctx.fillText(
             glyphIndex,
             1,
@@ -191,7 +191,7 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
         var xmax = (this.cellWidth + glyphWidth) / 2;
         var x0 = xmin;
 
-        ctx.fillStyle = '#a0a0a0';
+        ctx.fillStyle = &#39;#a0a0a0&#39;;
         ctx.fillRect(
             xmin - cellMarkSize + 1,
             this.fontSize,
@@ -217,7 +217,7 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
             cellMarkSize
         );
 
-        ctx.fillStyle = '#000000';
+        ctx.fillStyle = &#39;#000000&#39;;
         glyph.draw(
             ctx,
             x0,
@@ -231,11 +231,11 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
      */
     displayGlyphPage: function(pageNum) {
         this.pageSelected = pageNum;
-        document.getElementById('p' + pageNum).className = 'page-selected';
+        document.getElementById(&#39;p&#39; + pageNum).className = &#39;page-selected&#39;;
         var firstGlyph = pageNum * this.cellCount;
         for (var i = 0; i &lt; this.cellCount; i++) {
             this.renderGlyphItem(
-                document.getElementById('g' + i), firstGlyph + i
+                document.getElementById(&#39;g&#39; + i), firstGlyph + i
             );
         }
     },
@@ -244,7 +244,7 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
 </span>     * @param {Event} event The event that triggered this function
      */
     pageSelect: function(event) {
-        document.getElementsByClassName('page-selected')[0].className = '';
+        document.getElementsByClassName(&#39;page-selected&#39;)[0].className = &#39;&#39;;
         this.displayGlyphPage(
             +event.target.id.substr(1));
     },
@@ -276,32 +276,32 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
             this.cellMarginTop +
             h * head.yMax / maxHeight;
 
-        var pagination = document.getElementById('pagination');
-        pagination.innerHTML = '';
+        var pagination = document.getElementById(&#39;pagination&#39;);
+        pagination.innerHTML = &#39;&#39;;
         var fragment = document.createDocumentFragment();
         var numPages = Math.ceil(
             this.font.numGlyphs /
             this.cellCount
         );
         for (var i = 0; i &lt; numPages; i++) {
-            var link = document.createElement('span');
+            var link = document.createElement(&#39;span&#39;);
             var lastIndex = Math.min(
                 this.font.numGlyphs - 1,
                 (i + 1) * this.cellCount - 1
             );
             link.textContent = i * this.cellCount +
-                '-' + lastIndex;
-            link.id = 'p' + i;
-            link.style.cursor = 'pointer';
-            link.style.padding = '0 10px 5px 10px';
-            link.style.textDecoration = 'underline';
-            link.addEventListener('click',
+                &#39;-&#39; + lastIndex;
+            link.id = &#39;p&#39; + i;
+            link.style.cursor = &#39;pointer&#39;;
+            link.style.padding = &#39;0 10px 5px 10px&#39;;
+            link.style.textDecoration = &#39;underline&#39;;
+            link.addEventListener(&#39;click&#39;,
                 this.pageSelect.bind(this), false
             );
             fragment.appendChild(link);
             // A white space allows to break very long lines into multiple
             // lines. This is needed for fonts with thousands of glyphs.
-            fragment.appendChild(document.createTextNode(' '));
+            fragment.appendChild(document.createTextNode(&#39; &#39;));
         }
         pagination.appendChild(fragment);
         this.displayGlyphPage(0);
@@ -326,9 +326,9 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
             var unicode = this.formatUnicode(
                 glyph.unicode
             );
-            var fullQualifiedGlypName = 'ttf://' +
-                this.fontFamilyName + '#0x' + unicode;
-            this.fireEvent('glyphSelected', fullQualifiedGlypName);
+            var fullQualifiedGlypName = &#39;ttf://&#39; +
+                this.fontFamilyName + &#39;#0x&#39; + unicode;
+            this.fireEvent(&#39;glyphSelected&#39;, fullQualifiedGlypName);
         }
     },
 
@@ -336,15 +336,15 @@ Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
 </span>     * Prepare the list of glyphs
      */
     prepareGlyphList: function() {
-        var marker = document.getElementById('glyph-list-end');
+        var marker = document.getElementById(&#39;glyph-list-end&#39;);
         var parent = marker.parentElement;
         for (var i = 0; i &lt; this.cellCount; i++) {
-            var canvas = document.createElement('canvas');
+            var canvas = document.createElement(&#39;canvas&#39;);
             canvas.width = this.cellWidth;
             canvas.height = this.cellHeight;
-            canvas.className = 'item';
-            canvas.id = 'g' + i;
-            canvas.addEventListener('click',
+            canvas.className = &#39;item&#39;;
+            canvas.id = &#39;g&#39; + i;
+            canvas.addEventListener(&#39;click&#39;,
                 this.cellSelect.bind(this), false
             );
             this.enableHighDPICanvas(canvas);

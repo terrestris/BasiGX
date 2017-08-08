@@ -23,68 +23,68 @@
  * configuration property.  See {@link Ext.container.Container#layout} for additional details.
  *
  *     @example
- *     Ext.create('Ext.form.Panel', {
- *         title: 'Absolute Layout',
+ *     Ext.create(&#39;Ext.form.Panel&#39;, {
+ *         title: &#39;Absolute Layout&#39;,
  *         width: 300,
  *         height: 275,
  *         layout: {
- *             type: 'absolute'
+ *             type: &#39;absolute&#39;
  *             // layout-specific configs go here
- *             //itemCls: 'x-abs-layout-item',
+ *             //itemCls: &#39;x-abs-layout-item&#39;,
  *         },
- *         url:'save-form.php',
- *         defaultType: 'textfield',
+ *         url:&#39;save-form.php&#39;,
+ *         defaultType: &#39;textfield&#39;,
  *         items: [{
  *             x: 10,
  *             y: 10,
- *             xtype:'label',
- *             text: 'Send To:'
+ *             xtype:&#39;label&#39;,
+ *             text: &#39;Send To:&#39;
  *         },{
  *             x: 80,
  *             y: 10,
- *             name: 'to',
- *             anchor:'90%'  // anchor width by percentage
+ *             name: &#39;to&#39;,
+ *             anchor:&#39;90%&#39;  // anchor width by percentage
  *         },{
  *             x: 10,
  *             y: 40,
- *             xtype:'label',
- *             text: 'Subject:'
+ *             xtype:&#39;label&#39;,
+ *             text: &#39;Subject:&#39;
  *         },{
  *             x: 80,
  *             y: 40,
- *             name: 'subject',
- *             anchor: '90%'  // anchor width by percentage
+ *             name: &#39;subject&#39;,
+ *             anchor: &#39;90%&#39;  // anchor width by percentage
  *         },{
  *             x:0,
  *             y: 80,
- *             xtype: 'textareafield',
- *             name: 'msg',
- *             anchor: '100% 100%'  // anchor width and height
+ *             xtype: &#39;textareafield&#39;,
+ *             name: &#39;msg&#39;,
+ *             anchor: &#39;100% 100%&#39;  // anchor width and height
  *         }],
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.layout.container.Absolute', {
+Ext.define(&#39;Ext.layout.container.Absolute&#39;, {
 
     /* Begin Definitions */
 
-    alias: 'layout.absolute',
-    extend: 'Ext.layout.container.Anchor',
-    alternateClassName: 'Ext.layout.AbsoluteLayout',
+    alias: &#39;layout.absolute&#39;,
+    extend: &#39;Ext.layout.container.Anchor&#39;,
+    alternateClassName: &#39;Ext.layout.AbsoluteLayout&#39;,
 
 <span id='Ext-layout-container-Absolute-property-targetCls'>    /* End Definitions */
 </span>
-    targetCls: Ext.baseCSSPrefix + 'abs-layout-ct',
-<span id='Ext-layout-container-Absolute-cfg-itemCls'>    itemCls: Ext.baseCSSPrefix + 'abs-layout-item',
+    targetCls: Ext.baseCSSPrefix + &#39;abs-layout-ct&#39;,
+<span id='Ext-layout-container-Absolute-cfg-itemCls'>    itemCls: Ext.baseCSSPrefix + &#39;abs-layout-item&#39;,
 </span>
-<span id='Ext-layout-container-Absolute-property-type'>    type: 'absolute',
+<span id='Ext-layout-container-Absolute-property-type'>    type: &#39;absolute&#39;,
 </span>
 <span id='Ext-layout-container-Absolute-method-adjustWidthAnchor'>    /**
 </span>     * @private
      */
     adjustWidthAnchor: function(width, childContext) {
         var padding = this.targetPadding,
-            x = childContext.getStyle('left');
+            x = childContext.getStyle(&#39;left&#39;);
 
         return width - x + padding.left;
     },
@@ -94,7 +94,7 @@ Ext.define('Ext.layout.container.Absolute', {
      */
     adjustHeightAnchor: function(height, childContext) {
         var padding = this.targetPadding,
-            y = childContext.getStyle('top');
+            y = childContext.getStyle(&#39;top&#39;);
 
         return height - y + padding.top;
     },
@@ -105,7 +105,7 @@ Ext.define('Ext.layout.container.Absolute', {
 
 <span id='Ext-layout-container-Absolute-method-onContentChange'>    onContentChange: function (comp, context) {
 </span>        var ret = false;
-        // In a vast majority of cases we don't need to run the layout
+        // In a vast majority of cases we don&#39;t need to run the layout
         // when the content changes.
         if (comp.anchor &amp;&amp; context &amp;&amp; context.show) {
             ret = this.callParent([comp, context]);
@@ -165,8 +165,8 @@ Ext.define('Ext.layout.container.Absolute', {
             for (i = 0; i &lt; length; ++i) {
                 childContext = childItems[i];
                 child = childContext.target;
-                height = calcHeight &amp;&amp; childContext.getProp('height');
-                width = calcWidth &amp;&amp; childContext.getProp('width');
+                height = calcHeight &amp;&amp; childContext.getProp(&#39;height&#39;);
+                width = calcWidth &amp;&amp; childContext.getProp(&#39;width&#39;);
                 margins = childContext.getMarginInfo();
 
                 height += margins.bottom;

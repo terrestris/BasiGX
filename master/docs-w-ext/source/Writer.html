@@ -21,7 +21,7 @@
  * {@link Ext.data.Request} object and modifying that request based on the Operations.
  *
  * For example a Ext.data.writer.Json would format the Operations and their
- * {@link Ext.data.Model} instances based on the config options passed to the JsonWriter's
+ * {@link Ext.data.Model} instances based on the config options passed to the JsonWriter&#39;s
  * constructor.
  *
  * Writers are not needed for any kind of local storage - whether via a
@@ -40,24 +40,24 @@
  *   highest precedence.
  * - {@link Ext.data.field.Date#dateWriteFormat} The `dateWriteFormat` given to the field
  *   instance. This is handled by {@link Ext.data.field.Date#method-serialize}.
- * - {@link Ext.data.field.Date#dateFormat Field.dateFormat} This is handled by the field's
+ * - {@link Ext.data.field.Date#dateFormat Field.dateFormat} This is handled by the field&#39;s
  *   `serialize` method.
  * - {@link Ext.data.field.Date#dateReadFormat Field.dateReadFormat} Also handled by the
- *   field's `serialize` method.
+ *   field&#39;s `serialize` method.
  */
-Ext.define('Ext.data.writer.Writer', {
+Ext.define(&#39;Ext.data.writer.Writer&#39;, {
     mixins: [
-        'Ext.mixin.Factoryable'
+        &#39;Ext.mixin.Factoryable&#39;
     ],
 
-    alias: 'writer.base',
+    alias: &#39;writer.base&#39;,
 <span id='Ext-data-writer-Writer-property-factoryConfig'>    factoryConfig: {
 </span>        defaultType: null
     },
 
     alternateClassName: [
-        'Ext.data.DataWriter',
-        'Ext.data.Writer'
+        &#39;Ext.data.DataWriter&#39;,
+        &#39;Ext.data.Writer&#39;
     ],
 
     config: {
@@ -69,51 +69,51 @@ Ext.define('Ext.data.writer.Writer', {
          *
          * For example, by default, the following code:
          *
-         *      Ext.define('Person', {
-         *          idProperty: 'id',  // this is the default value (for clarity)
+         *      Ext.define(&#39;Person&#39;, {
+         *          idProperty: &#39;id&#39;,  // this is the default value (for clarity)
          *
-         *          fields: [ 'name' ]
+         *          fields: [ &#39;name&#39; ]
          *      });
          *
          *      var person = new Person({
          *          // no id provided, so one is generated
-         *          name: 'Clark Kent'
+         *          name: &#39;Clark Kent&#39;
          *      });
          *
          * Will send this to the server:
          *
          *      {
-         *          id: 'Person-1',
-         *          name: 'Clark Kent'
+         *          id: &#39;Person-1&#39;,
+         *          name: &#39;Clark Kent&#39;
          *      }
          *
          * This can be an issue if the server expects an integer for the &quot;id&quot; property.
          * You can use `{@link Ext.data.Model#identifier}` to produce identifiers that
-         * the server would recognize or use this config to send the client's id in a
+         * the server would recognize or use this config to send the client&#39;s id in a
          * different property.
          *
-         *      Ext.define('Person', {
-         *          idProperty: 'id',  // this is the default value (for clarity)
+         *      Ext.define(&#39;Person&#39;, {
+         *          idProperty: &#39;id&#39;,  // this is the default value (for clarity)
          *
          *          proxy: {
          *              writer: {
-         *                  clientIdProperty: 'clientId'
+         *                  clientIdProperty: &#39;clientId&#39;
          *              }
          *          },
          *
-         *          fields: [ 'name' ]
+         *          fields: [ &#39;name&#39; ]
          *      });
          *
          * Given the above, the server is sent this data now:
          *
          *      {
-         *          clientId: 'Person-1',
-         *          name: 'Clark Kent'
+         *          clientId: &#39;Person-1&#39;,
+         *          name: &#39;Clark Kent&#39;
          *      }
          *
          * While this config provides the behavior of `{@link Ext.data.Model#clientIdProperty}`
          * from previous releases, this property is not as useful as a suitable
-         * `{@link Ext.data.Model#identifier}` due to id's appearing in foreign-key fields
+         * `{@link Ext.data.Model#identifier}` due to id&#39;s appearing in foreign-key fields
          * and in `{@link Ext.data.Model#manyToMany}` associations.
          *
          * See `{@link Ext.data.Model#identifier}` for more on id generation.
@@ -178,37 +178,37 @@ Ext.define('Ext.data.writer.Writer', {
          *
          * For example:
          *
-         *     Ext.define('Person', {
-         *         extend: 'Ext.data.Model',
+         *     Ext.define(&#39;Person&#39;, {
+         *         extend: &#39;Ext.data.Model&#39;,
          *         fields: [{
-         *             name: 'first',
-         *             mapping: 'firstName'
+         *             name: &#39;first&#39;,
+         *             mapping: &#39;firstName&#39;
          *         }, {
-         *             name: 'last',
-         *             mapping: 'lastName'
+         *             name: &#39;last&#39;,
+         *             mapping: &#39;lastName&#39;
          *         }, {
-         *             name: 'age'
+         *             name: &#39;age&#39;
          *         }]
          *     });
          *
          *     new Ext.data.writer.Writer({
-         *         nameProperty: 'mapping'
+         *         nameProperty: &#39;mapping&#39;
          *     });
          *
          *     // This will be sent to the server
          *     {
-         *         firstName: 'first name value',
-         *         lastName: 'last name value',
+         *         firstName: &#39;first name value&#39;,
+         *         lastName: &#39;last name value&#39;,
          *         age: 1
          *     }
          *
          * If the value is not present, the field name will always be used.
          */
-        nameProperty: 'name',
+        nameProperty: &#39;name&#39;,
     
 <span id='Ext-data-writer-Writer-cfg-writeRecordId'>        /**
 </span>         * @cfg {Boolean} [writeRecordId]
-         * By default, each record's id is always included in the output for non-phantom
+         * By default, each record&#39;s id is always included in the output for non-phantom
          * records since in most cases the id will be required on the server to process
          * the record action. This is helpful since the id will normally not be modified,
          * and so would not be sent to the server unless {@link #writeAllFields} was
@@ -226,15 +226,15 @@ Ext.define('Ext.data.writer.Writer', {
          * executes. It is passed the unserialized data object and the {@link Ext.data.Request request}
          * object. The transform function returns a data object, which can be a modified version of the original 
          * data object, or a completely new data object. The transform can be a function, or an object 
-         * with a 'fn' key and an optional 'scope' key. Example usage:
+         * with a &#39;fn&#39; key and an optional &#39;scope&#39; key. Example usage:
          *
-         *     Ext.create('Ext.data.Store', {
-         *         model: 'User',
+         *     Ext.create(&#39;Ext.data.Store&#39;, {
+         *         model: &#39;User&#39;,
          *         proxy: {
-         *             type: 'ajax',
-         *             url : 'users.json',
+         *             type: &#39;ajax&#39;,
+         *             url : &#39;users.json&#39;,
          *             writer: {
-         *                 type: 'json',
+         *                 type: &#39;json&#39;,
          *                 transform: {
          *                     fn: function(data, request) {
          *                         // do some manipulation of the unserialized data object
@@ -275,7 +275,7 @@ Ext.define('Ext.data.writer.Writer', {
     },
 
 <span id='Ext-data-writer-Writer-method-write'>    /**
-</span>     * Prepares a Proxy's Ext.data.Request object.
+</span>     * Prepares a Proxy&#39;s Ext.data.Request object.
      * @param {Ext.data.Request} request The request object.
      * @return {Ext.data.Request} The modified request object.
      */
@@ -316,7 +316,7 @@ Ext.define('Ext.data.writer.Writer', {
     getRecordData: function (record, operation) {
         var me = this,
             nameProperty = me.getNameProperty(),
-            mapping = nameProperty !== 'name',
+            mapping = nameProperty !== &#39;name&#39;,
             idField = record.self.idField,
             key = idField[nameProperty] || idField.name, // setup for idField first
             value = record.id,

@@ -25,37 +25,37 @@
  *
  * | Shortcut | xtype         | Class                         | Description
  * |:---------|:--------------|:------------------------------|:---------------------------------------------------
- * | '-&gt;'     | `tbfill`      | {@link Ext.toolbar.Fill}      | begin using the right-justified button container
- * | '-'      | `tbseparator` | {@link Ext.toolbar.Separator} | add a vertical separator bar between toolbar items
- * | ' '      | `tbspacer`    | {@link Ext.toolbar.Spacer}    | add horizontal space between elements
+ * | &#39;-&gt;&#39;     | `tbfill`      | {@link Ext.toolbar.Fill}      | begin using the right-justified button container
+ * | &#39;-&#39;      | `tbseparator` | {@link Ext.toolbar.Separator} | add a vertical separator bar between toolbar items
+ * | &#39; &#39;      | `tbspacer`    | {@link Ext.toolbar.Spacer}    | add horizontal space between elements
  *
  *     @example
- *     Ext.create('Ext.toolbar.Toolbar', {
+ *     Ext.create(&#39;Ext.toolbar.Toolbar&#39;, {
  *         renderTo: document.body,
  *         width   : 500,
  *         items: [
  *             {
- *                 // xtype: 'button', // default for Toolbars
- *                 text: 'Button'
+ *                 // xtype: &#39;button&#39;, // default for Toolbars
+ *                 text: &#39;Button&#39;
  *             },
  *             {
- *                 xtype: 'splitbutton',
- *                 text : 'Split Button'
+ *                 xtype: &#39;splitbutton&#39;,
+ *                 text : &#39;Split Button&#39;
  *             },
  *             // begin using the right-justified button container
- *             '-&gt;', // same as { xtype: 'tbfill' }
+ *             &#39;-&gt;&#39;, // same as { xtype: &#39;tbfill&#39; }
  *             {
- *                 xtype    : 'textfield',
- *                 name     : 'field1',
- *                 emptyText: 'enter search term'
+ *                 xtype    : &#39;textfield&#39;,
+ *                 name     : &#39;field1&#39;,
+ *                 emptyText: &#39;enter search term&#39;
  *             },
  *             // add a vertical separator bar between toolbar items
- *             '-', // same as {xtype: 'tbseparator'} to create Ext.toolbar.Separator
- *             'text 1', // same as {xtype: 'tbtext', text: 'text1'} to create Ext.toolbar.TextItem
- *             { xtype: 'tbspacer' },// same as ' ' to create Ext.toolbar.Spacer
- *             'text 2',
- *             { xtype: 'tbspacer', width: 50 }, // add a 50px space
- *             'text 3'
+ *             &#39;-&#39;, // same as {xtype: &#39;tbseparator&#39;} to create Ext.toolbar.Separator
+ *             &#39;text 1&#39;, // same as {xtype: &#39;tbtext&#39;, text: &#39;text1&#39;} to create Ext.toolbar.TextItem
+ *             { xtype: &#39;tbspacer&#39; },// same as &#39; &#39; to create Ext.toolbar.Spacer
+ *             &#39;text 2&#39;,
+ *             { xtype: &#39;tbspacer&#39;, width: 50 }, // add a 50px space
+ *             &#39;text 3&#39;
  *         ]
  *     });
  *
@@ -63,22 +63,22 @@
  * enable/disable all items within your toolbar.
  *
  *     @example
- *     Ext.create('Ext.toolbar.Toolbar', {
+ *     Ext.create(&#39;Ext.toolbar.Toolbar&#39;, {
  *         renderTo: document.body,
  *         width   : 400,
  *         items: [
  *             {
- *                 text: 'Button'
+ *                 text: &#39;Button&#39;
  *             },
  *             {
- *                 xtype: 'splitbutton',
- *                 text : 'Split Button'
+ *                 xtype: &#39;splitbutton&#39;,
+ *                 text : &#39;Split Button&#39;
  *             },
- *             '-&gt;',
+ *             &#39;-&gt;&#39;,
  *             {
- *                 xtype    : 'textfield',
- *                 name     : 'field1',
- *                 emptyText: 'enter search term'
+ *                 xtype    : &#39;textfield&#39;,
+ *                 name     : &#39;field1&#39;,
+ *                 emptyText: &#39;enter search term&#39;
  *             }
  *         ]
  *     });
@@ -86,8 +86,8 @@
  * Example
  *
  *     @example
- *     var enableBtn = Ext.create('Ext.button.Button', {
- *         text    : 'Enable All Items',
+ *     var enableBtn = Ext.create(&#39;Ext.button.Button&#39;, {
+ *         text    : &#39;Enable All Items&#39;,
  *         disabled: true,
  *         scope   : this,
  *         handler : function() {
@@ -100,8 +100,8 @@
  *         }
  *     });
  *
- *     var disableBtn = Ext.create('Ext.button.Button', {
- *         text    : 'Disable All Items',
+ *     var disableBtn = Ext.create(&#39;Ext.button.Button&#39;, {
+ *         text    : &#39;Disable All Items&#39;,
  *         scope   : this,
  *         handler : function() {
  *             //enable the enable button and disable button
@@ -113,10 +113,10 @@
  *         }
  *     });
  *
- *     var toolbar = Ext.create('Ext.toolbar.Toolbar', {
+ *     var toolbar = Ext.create(&#39;Ext.toolbar.Toolbar&#39;, {
  *         renderTo: document.body,
  *         width   : 400,
- *         margin  : '5 0 0 0',
+ *         margin  : &#39;5 0 0 0&#39;,
  *         items   : [enableBtn, disableBtn]
  *     });
  *
@@ -125,58 +125,58 @@
  * which remove all items within the toolbar.
  *
  *     @example
- *     var toolbar = Ext.create('Ext.toolbar.Toolbar', {
+ *     var toolbar = Ext.create(&#39;Ext.toolbar.Toolbar&#39;, {
  *         renderTo: document.body,
  *         width   : 700,
  *         items: [
  *             {
- *                 text: 'Example Button'
+ *                 text: &#39;Example Button&#39;
  *             }
  *         ]
  *     });
  *
  *     var addedItems = [];
  *
- *     Ext.create('Ext.toolbar.Toolbar', {
+ *     Ext.create(&#39;Ext.toolbar.Toolbar&#39;, {
  *         renderTo: document.body,
  *         width   : 700,
- *         margin  : '5 0 0 0',
+ *         margin  : &#39;5 0 0 0&#39;,
  *         items   : [
  *             {
- *                 text   : 'Add a button',
+ *                 text   : &#39;Add a button&#39;,
  *                 scope  : this,
  *                 handler: function() {
- *                     var text = prompt('Please enter the text for your button:');
+ *                     var text = prompt(&#39;Please enter the text for your button:&#39;);
  *                     addedItems.push(toolbar.add({
  *                         text: text
  *                     }));
  *                 }
  *             },
  *             {
- *                 text   : 'Add a text item',
+ *                 text   : &#39;Add a text item&#39;,
  *                 scope  : this,
  *                 handler: function() {
- *                     var text = prompt('Please enter the text for your item:');
+ *                     var text = prompt(&#39;Please enter the text for your item:&#39;);
  *                     addedItems.push(toolbar.add(text));
  *                 }
  *             },
  *             {
- *                 text   : 'Add a toolbar separator',
+ *                 text   : &#39;Add a toolbar separator&#39;,
  *                 scope  : this,
  *                 handler: function() {
- *                     addedItems.push(toolbar.add('-'));
+ *                     addedItems.push(toolbar.add(&#39;-&#39;));
  *                 }
  *             },
  *             {
- *                 text   : 'Add a toolbar spacer',
+ *                 text   : &#39;Add a toolbar spacer&#39;,
  *                 scope  : this,
  *                 handler: function() {
- *                     addedItems.push(toolbar.add('-&gt;'));
+ *                     addedItems.push(toolbar.add(&#39;-&gt;&#39;));
  *                 }
  *             },
- *             '-&gt;',
+ *             &#39;-&gt;&#39;,
  *             {
- *                 text   : 'Remove last inserted item',
+ *                 text   : &#39;Remove last inserted item&#39;,
  *                 scope  : this,
  *                 handler: function() {
  *                     if (addedItems.length) {
@@ -184,12 +184,12 @@
  *                     } else if (toolbar.items.length) {
  *                         toolbar.remove(toolbar.items.last());
  *                     } else {
- *                         alert('No items in the toolbar');
+ *                         alert(&#39;No items in the toolbar&#39;);
  *                     }
  *                 }
  *             },
  *             {
- *                 text   : 'Remove all items',
+ *                 text   : &#39;Remove all items&#39;,
  *                 scope  : this,
  *                 handler: function() {
  *                     toolbar.removeAll();
@@ -202,22 +202,22 @@
  * Creates a new Toolbar
  * @param {Object/Object[]} config A config object or an array of buttons to {@link #method-add}
  */
-Ext.define('Ext.toolbar.Toolbar', {
-    extend: 'Ext.container.Container',
+Ext.define(&#39;Ext.toolbar.Toolbar&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
     requires: [
-        'Ext.layout.container.HBox',
-        'Ext.layout.container.VBox'
+        &#39;Ext.layout.container.HBox&#39;,
+        &#39;Ext.layout.container.VBox&#39;
     ],
     uses: [
-        'Ext.toolbar.Fill',
-        'Ext.toolbar.Separator',
-        'Ext.toolbar.Spacer'
+        &#39;Ext.toolbar.Fill&#39;,
+        &#39;Ext.toolbar.Separator&#39;,
+        &#39;Ext.toolbar.Spacer&#39;
     ],
-    alias: 'widget.toolbar',
-    alternateClassName: 'Ext.Toolbar',
+    alias: &#39;widget.toolbar&#39;,
+    alternateClassName: &#39;Ext.Toolbar&#39;,
     
     mixins: [
-        'Ext.util.FocusableContainer'
+        &#39;Ext.util.FocusableContainer&#39;
     ],
 
 <span id='Ext-toolbar-Toolbar-property-isToolbar'>    /**
@@ -225,14 +225,14 @@ Ext.define('Ext.toolbar.Toolbar', {
      * `true` in this class to identify an object as an instantiated Toolbar, or subclass thereof.
      */
     isToolbar: true,
-<span id='Ext-toolbar-Toolbar-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'toolbar',
-</span><span id='Ext-toolbar-Toolbar-property-ariaRole'>    ariaRole: 'toolbar',
+<span id='Ext-toolbar-Toolbar-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;toolbar&#39;,
+</span><span id='Ext-toolbar-Toolbar-property-ariaRole'>    ariaRole: &#39;toolbar&#39;,
 </span>
-<span id='Ext-toolbar-Toolbar-cfg-defaultType'>    defaultType: 'button',
+<span id='Ext-toolbar-Toolbar-cfg-defaultType'>    defaultType: &#39;button&#39;,
 </span>
 <span id='Ext-toolbar-Toolbar-cfg-layout'>    /**
 </span>     * @cfg {Ext.enums.Layout/Object} layout
-     * This class assigns a default layout (`layout: 'hbox'` or `layout: 'vbox'` depending upon orientation).
+     * This class assigns a default layout (`layout: &#39;hbox&#39;` or `layout: &#39;vbox&#39;` depending upon orientation).
      *
      * Developers _may_ override this configuration option if another layout is required.
      * See {@link Ext.container.Container#layout} for additional information.
@@ -245,22 +245,22 @@ Ext.define('Ext.toolbar.Toolbar', {
      */
     vertical: undefined,
 
-    // @cmd-auto-dependency { directRef: 'Ext.layout.container.boxOverflow.Menu' }
+    // @cmd-auto-dependency { directRef: &#39;Ext.layout.container.boxOverflow.Menu&#39; }
 <span id='Ext-toolbar-Toolbar-cfg-enableOverflow'>    /**
 </span>     * @cfg {Boolean} enableOverflow
      * Configure true to make the toolbar provide a button which activates a dropdown Menu to show
-     * items which overflow the Toolbar's width.  Setting this too true is the equivalent
-     * of setting `{@link #overflowHandler}:'menu'`.
+     * items which overflow the Toolbar&#39;s width.  Setting this too true is the equivalent
+     * of setting `{@link #overflowHandler}:&#39;menu&#39;`.
      */
     enableOverflow: false,
 
-    // @cmd-auto-dependency { aliasPrefix: 'box.overflow.' }
+    // @cmd-auto-dependency { aliasPrefix: &#39;box.overflow.&#39; }
 <span id='Ext-toolbar-Toolbar-cfg-overflowHandler'>    /**
 </span>     * @cfg {String} overflowHandler
      *
      * - `null` - hidden overflow
-     * - `'scroller'` to render left/right scroller buttons on either side of the breadcrumb
-     * - `'menu'` to render the overflowing buttons as items of an overflow menu.
+     * - `&#39;scroller&#39;` to render left/right scroller buttons on either side of the breadcrumb
+     * - `&#39;menu&#39;` to render the overflowing buttons as items of an overflow menu.
      */
     overflowHandler: null,
 
@@ -269,58 +269,58 @@ Ext.define('Ext.toolbar.Toolbar', {
      * A default {@link Ext.Component#ui ui} to use for {@link Ext.button.Button Button} items. This is a quick and simple
      * way to change the look of all child {@link Ext.button.Button Buttons}.
      *
-     * If there is no value for defaultButtonUI, the button's {@link Ext.Component#ui ui} value will get `-toolbar`
-     * appended so the {@link Ext.button.Button Button} has a different look when it's a child of a {@link Ext.toolbar.Toolbar Toolbar}.
+     * If there is no value for defaultButtonUI, the button&#39;s {@link Ext.Component#ui ui} value will get `-toolbar`
+     * appended so the {@link Ext.button.Button Button} has a different look when it&#39;s a child of a {@link Ext.toolbar.Toolbar Toolbar}.
      * To prevent this and have the same look as buttons outside of a toolbar, you can provide a string value to the defaultButtonUI:
      *
-     *     Ext.create('Ext.panel.Panel', {
+     *     Ext.create(&#39;Ext.panel.Panel&#39;, {
      *         renderTo    : document.body,
      *         width       : 300,
-     *         title       : 'Panel',
-     *         html        : 'Some Body',
+     *         title       : &#39;Panel&#39;,
+     *         html        : &#39;Some Body&#39;,
      *         dockedItems : [
      *             {
-     *                 xtype           : 'toolbar',
-     *                 dock            : 'top',
-     *                 defaultButtonUI : 'default',
+     *                 xtype           : &#39;toolbar&#39;,
+     *                 dock            : &#39;top&#39;,
+     *                 defaultButtonUI : &#39;default&#39;,
      *                 items           : [
      *                     {
-     *                         text : 'Save'
+     *                         text : &#39;Save&#39;
      *                     },
      *                     {
-     *                         text : 'Remove'
+     *                         text : &#39;Remove&#39;
      *                     }
      *                 ]
      *             }
      *         ]
      *     });
      */
-    defaultButtonUI: 'default-toolbar',
+    defaultButtonUI: &#39;default-toolbar&#39;,
 
 <span id='Ext-toolbar-Toolbar-cfg-defaultFieldUI'>    /**
 </span>     * @cfg {String}
      * Default UI for form field items.
      */
-    defaultFieldUI: 'default',
+    defaultFieldUI: &#39;default&#39;,
 
 <span id='Ext-toolbar-Toolbar-cfg-defaultFooterButtonUI'>    /**
 </span>     * @cfg {String}
-     * Default UI for Buttons if the toolbar has a UI of 'footer'
+     * Default UI for Buttons if the toolbar has a UI of &#39;footer&#39;
      */
-    defaultFooterButtonUI: 'default',
+    defaultFooterButtonUI: &#39;default&#39;,
 
 <span id='Ext-toolbar-Toolbar-cfg-defaultFooterFieldUI'>    /**
 </span>     * @cfg {String}
-     * Default UI for Form Fields if the toolbar has a UI of 'footer'
+     * Default UI for Form Fields if the toolbar has a UI of &#39;footer&#39;
      */
-    defaultFooterFieldUI: 'default',
+    defaultFooterFieldUI: &#39;default&#39;,
 
 <span id='Ext-toolbar-Toolbar-property-trackMenus'>    /**
 </span>     * @private
      */
     trackMenus: true,
 
-<span id='Ext-toolbar-Toolbar-property-itemCls'>    itemCls: Ext.baseCSSPrefix + 'toolbar-item',
+<span id='Ext-toolbar-Toolbar-property-itemCls'>    itemCls: Ext.baseCSSPrefix + &#39;toolbar-item&#39;,
 </span>
 <span id='Ext-toolbar-Toolbar-event-overflowchange'>    /**
 </span>     * @event overflowchange
@@ -333,18 +333,18 @@ Ext.define('Ext.toolbar.Toolbar', {
 
     statics: {
 <span id='Ext-toolbar-Toolbar-static-property-shortcuts'>        shortcuts: {
-</span>            '-': 'tbseparator',
-            ' ': 'tbspacer'
+</span>            &#39;-&#39;: &#39;tbseparator&#39;,
+            &#39; &#39;: &#39;tbspacer&#39;
         },
 
 <span id='Ext-toolbar-Toolbar-static-property-shortcutsHV'>        shortcutsHV: {
 </span>            // horizontal
             0: {
-                '-&gt;': { xtype: 'tbfill', height: 0 }
+                &#39;-&gt;&#39;: { xtype: &#39;tbfill&#39;, height: 0 }
             },
             // vertical
             1: {
-                '-&gt;': { xtype: 'tbfill', width: 0 }
+                &#39;-&gt;&#39;: { xtype: &#39;tbfill&#39;, width: 0 }
             }
         }
     },
@@ -355,28 +355,28 @@ Ext.define('Ext.toolbar.Toolbar', {
             vertical = me.vertical;
 
         if (vertical === undefined) {
-            me.vertical = vertical = me.dock === 'right' || me.dock === 'left';
+            me.vertical = vertical = me.dock === &#39;right&#39; || me.dock === &#39;left&#39;;
         }
 
         me.layout = layout = Ext.applyIf(Ext.isString(layout) ? {
             type: layout
         } : layout || {}, {
-            type: vertical ? 'vbox' : 'hbox',
-            align: vertical ? 'stretchmax' : 'middle'
+            type: vertical ? &#39;vbox&#39; : &#39;hbox&#39;,
+            align: vertical ? &#39;stretchmax&#39; : &#39;middle&#39;
         });
 
         if (me.overflowHandler) {
             layout.overflowHandler = me.overflowHandler;
         } else if (me.enableOverflow) {
-            layout.overflowHandler = 'menu';
+            layout.overflowHandler = &#39;menu&#39;;
         }
 
         if (vertical) {
-            me.addClsWithUI('vertical');
+            me.addClsWithUI(&#39;vertical&#39;);
         }
 
         // @TODO: remove this hack and implement a more general solution
-        if (me.ui === 'footer') {
+        if (me.ui === &#39;footer&#39;) {
             me.ignoreBorderManagement = true;
         }
 
@@ -389,7 +389,7 @@ Ext.define('Ext.toolbar.Toolbar', {
             layout = me.layout,
             handler;
 
-        if (deep &amp;&amp; (me.enableOverflow || (me.overflowHandler === 'menu'))) {
+        if (deep &amp;&amp; (me.enableOverflow || (me.overflowHandler === &#39;menu&#39;))) {
             handler = layout.overflowHandler;
             if (handler &amp;&amp; handler.menu) {
                 items = items.concat(handler.menu.getRefItems(deep));
@@ -414,9 +414,9 @@ Ext.define('Ext.toolbar.Toolbar', {
      *
      *    Note that there are a few special strings that are treated differently as explained next:
      *
-     *      - `'-'`: Creates a separator element
-     *      - `' '`: Creates a spacer element
-     *      - `'-&gt;'`: Creates a fill element
+     *      - `&#39;-&#39;`: Creates a separator element
+     *      - `&#39; &#39;`: Creates a spacer element
+     *      - `&#39;-&gt;&#39;`: Creates a fill element
      *
      * @return {Ext.Component[]/Ext.Component} The Components that were added.
      *
@@ -440,11 +440,11 @@ Ext.define('Ext.toolbar.Toolbar', {
         var args = arguments,
             shortcut, T;
 
-        if (typeof c === 'string' &amp;&amp; c[0] !== '@') {
+        if (typeof c === &#39;string&#39; &amp;&amp; c[0] !== &#39;@&#39;) {
             T = Ext.toolbar.Toolbar;
             shortcut = T.shortcutsHV[this.vertical ? 1 : 0][c] || T.shortcuts[c];
 
-            if (typeof shortcut === 'string') {
+            if (typeof shortcut === &#39;string&#39;) {
                 c = {
                     xtype: shortcut
                 };
@@ -452,7 +452,7 @@ Ext.define('Ext.toolbar.Toolbar', {
                 c = Ext.apply({}, shortcut);
             } else {
                 c = {
-                    xtype: 'tbtext',
+                    xtype: &#39;tbtext&#39;,
                     text: c
                 };
             }
@@ -468,14 +468,14 @@ Ext.define('Ext.toolbar.Toolbar', {
 
 <span id='Ext-toolbar-Toolbar-method-onBeforeAdd'>    onBeforeAdd: function (component) {
 </span>        var me = this,
-            isFooter = me.ui === 'footer',
+            isFooter = me.ui === &#39;footer&#39;,
             defaultButtonUI = isFooter ? me.defaultFooterButtonUI : me.defaultButtonUI;
 
         if (component.isSegmentedButton) {
-            if (component.getDefaultUI() === 'default' &amp;&amp; !component.config.hasOwnProperty('defaultUI')) {
+            if (component.getDefaultUI() === &#39;default&#39; &amp;&amp; !component.config.hasOwnProperty(&#39;defaultUI&#39;)) {
                 component.setDefaultUI(defaultButtonUI);
             }
-        } else if (component.ui === 'default' &amp;&amp; !component.hasOwnProperty('ui')) {
+        } else if (component.ui === &#39;default&#39; &amp;&amp; !component.hasOwnProperty(&#39;ui&#39;)) {
             if (component.isButton) {
                 component.ui = defaultButtonUI;
             } else if (component.isFormField) {
@@ -485,7 +485,7 @@ Ext.define('Ext.toolbar.Toolbar', {
 
         // Any separators needs to know if is vertical or not
         if (component instanceof Ext.toolbar.Separator) {
-            component.setUI(me.vertical ? 'vertical' : 'horizontal');
+            component.setUI(me.vertical ? &#39;vertical&#39; : &#39;horizontal&#39;);
         }
 
         me.callParent(arguments);
@@ -504,7 +504,7 @@ Ext.define('Ext.toolbar.Toolbar', {
         // hearing.
         if (component.needArrowKeys &amp;&amp; me.enableFocusableContainer) {
             me.enableFocusableContainer = false;
-            me.ariaRole = 'group';
+            me.ariaRole = &#39;group&#39;;
         }
         
         me.callParent(arguments);
@@ -534,7 +534,7 @@ Ext.define('Ext.toolbar.Toolbar', {
             var me = this;
 
             if (me.trackMenus &amp;&amp; item.menu) {
-                item[remove ? 'un' : 'on']({
+                item[remove ? &#39;un&#39; : &#39;on&#39;]({
                     mouseover: me.onButtonOver,
                     menushow: me.onButtonMenuShow,
                     menuhide: me.onButtonMenuHide,

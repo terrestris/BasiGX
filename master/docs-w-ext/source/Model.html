@@ -26,41 +26,41 @@
  * Models are defined as a set of fields and any arbitrary methods and properties relevant
  * to the model. For example:
  *
- *     Ext.define('User', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;User&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         fields: [
- *             {name: 'name',  type: 'string'},
- *             {name: 'age',   type: 'int', convert: null},
- *             {name: 'phone', type: 'string'},
- *             {name: 'alive', type: 'boolean', defaultValue: true, convert: null}
+ *             {name: &#39;name&#39;,  type: &#39;string&#39;},
+ *             {name: &#39;age&#39;,   type: &#39;int&#39;, convert: null},
+ *             {name: &#39;phone&#39;, type: &#39;string&#39;},
+ *             {name: &#39;alive&#39;, type: &#39;boolean&#39;, defaultValue: true, convert: null}
  *         ],
  *
  *         changeName: function() {
- *             var oldName = this.get('name'),
+ *             var oldName = this.get(&#39;name&#39;),
  *                 newName = oldName + &quot; The Barbarian&quot;;
  *
- *             this.set('name', newName);
+ *             this.set(&#39;name&#39;, newName);
  *         }
  *     });
  *
  * Now we can create instances of our User model and call any model logic we defined:
  *
- *     var user = Ext.create('User', {
- *         id   : 'ABCD12345',
- *         name : 'Conan',
+ *     var user = Ext.create(&#39;User&#39;, {
+ *         id   : &#39;ABCD12345&#39;,
+ *         name : &#39;Conan&#39;,
  *         age  : 24,
- *         phone: '555-555-5555'
+ *         phone: &#39;555-555-5555&#39;
  *     });
  *
  *     user.changeName();
- *     user.get('name'); //returns &quot;Conan The Barbarian&quot;
+ *     user.get(&#39;name&#39;); //returns &quot;Conan The Barbarian&quot;
  *
  * By default, the built in field types such as number and boolean coerce string values
  * in the raw data by virtue of their {@link Ext.data.field.Field#method-convert} method.
  * When the server can be relied upon to send data in a format that does not need to be
  * converted, disabling this can improve performance. The {@link Ext.data.reader.Json Json}
  * and {@link Ext.data.reader.Array Array} readers are likely candidates for this
- * optimization. To disable field conversions you simply specify `null` for the field's
+ * optimization. To disable field conversions you simply specify `null` for the field&#39;s
  * {@link Ext.data.field.Field#cfg-convert convert config}.
  *
  * ## The &quot;id&quot; Field and `idProperty`
@@ -77,24 +77,24 @@
  * Models have built-in support for field validators. Validators are added to models as in
  * the follow example:
  *
- *     Ext.define('User', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;User&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         fields: [
- *             { name: 'name',     type: 'string' },
- *             { name: 'age',      type: 'int' },
- *             { name: 'phone',    type: 'string' },
- *             { name: 'gender',   type: 'string' },
- *             { name: 'username', type: 'string' },
- *             { name: 'alive',    type: 'boolean', defaultValue: true }
+ *             { name: &#39;name&#39;,     type: &#39;string&#39; },
+ *             { name: &#39;age&#39;,      type: &#39;int&#39; },
+ *             { name: &#39;phone&#39;,    type: &#39;string&#39; },
+ *             { name: &#39;gender&#39;,   type: &#39;string&#39; },
+ *             { name: &#39;username&#39;, type: &#39;string&#39; },
+ *             { name: &#39;alive&#39;,    type: &#39;boolean&#39;, defaultValue: true }
  *         ],
  *
  *         validators: {
- *             age: 'presence',
- *             name: { type: 'length', min: 2 },
- *             gender: { type: 'inclusion', list: ['Male', 'Female'] },
+ *             age: &#39;presence&#39;,
+ *             name: { type: &#39;length&#39;, min: 2 },
+ *             gender: { type: &#39;inclusion&#39;, list: [&#39;Male&#39;, &#39;Female&#39;] },
  *             username: [
- *                 { type: 'exclusion', list: ['Admin', 'Operator'] },
- *                 { type: 'format', matcher: /([a-z]+)[0-9]{2,3}/i }
+ *                 { type: &#39;exclusion&#39;, list: [&#39;Admin&#39;, &#39;Operator&#39;] },
+ *                 { type: &#39;format&#39;, matcher: /([a-z]+)[0-9]{2,3}/i }
  *             ]
  *         }
  *     });
@@ -106,10 +106,10 @@
  *
  * The results of the validators can be retrieved via the &quot;associated&quot; validation record:
  *
- *     var instance = Ext.create('User', {
- *         name: 'Ed',
- *         gender: 'Male',
- *         username: 'edspencer'
+ *     var instance = Ext.create(&#39;User&#39;, {
+ *         name: &#39;Ed&#39;,
+ *         gender: &#39;Male&#39;,
+ *         username: &#39;edspencer&#39;
  *     });
  *
  *     var validation = instance.getValidation();
@@ -135,29 +135,29 @@
  *
  * # Using a Proxy
  *
- * Models are great for representing types of data and relationships, but sooner or later we're going to want to load or
+ * Models are great for representing types of data and relationships, but sooner or later we&#39;re going to want to load or
  * save that data somewhere. All loading and saving of data is handled via a {@link Ext.data.proxy.Proxy Proxy}, which
  * can be set directly on the Model:
  *
- *     Ext.define('User', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'name', 'email'],
+ *     Ext.define(&#39;User&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;name&#39;, &#39;email&#39;],
  *
  *         proxy: {
- *             type: 'rest',
- *             url : '/users'
+ *             type: &#39;rest&#39;,
+ *             url : &#39;/users&#39;
  *         }
  *     });
  *
- * Here we've set up a {@link Ext.data.proxy.Rest Rest Proxy}, which knows how to load and save data to and from a
- * RESTful backend. Let's see how this works:
+ * Here we&#39;ve set up a {@link Ext.data.proxy.Rest Rest Proxy}, which knows how to load and save data to and from a
+ * RESTful backend. Let&#39;s see how this works:
  *
- *     var user = Ext.create('User', {name: 'Ed Spencer', email: 'ed@sencha.com'});
+ *     var user = Ext.create(&#39;User&#39;, {name: &#39;Ed Spencer&#39;, email: &#39;ed@sencha.com&#39;});
  *
  *     user.save(); //POST /users
  *
- * Calling {@link #save} on the new Model instance tells the configured RestProxy that we wish to persist this Model's
- * data onto our server. RestProxy figures out that this Model hasn't been saved before because it doesn't have an id,
+ * Calling {@link #save} on the new Model instance tells the configured RestProxy that we wish to persist this Model&#39;s
+ * data onto our server. RestProxy figures out that this Model hasn&#39;t been saved before because it doesn&#39;t have an id,
  * and performs the appropriate action - in this case issuing a POST request to the url we configured (/users). We
  * configure any Proxy on any Model and always follow this API - see {@link Ext.data.proxy.Proxy} for a full list.
  *
@@ -173,26 +173,26 @@
  * Models can also be updated and destroyed easily:
  *
  *     //the user Model we loaded in the last snippet:
- *     user.set('name', 'Edward Spencer');
+ *     user.set(&#39;name&#39;, &#39;Edward Spencer&#39;);
  *
  *     //tells the Proxy to save the Model. In this case it will perform a PUT request to /users/123 as this Model already has an id
  *     user.save({
  *         success: function() {
- *             console.log('The User was updated');
+ *             console.log(&#39;The User was updated&#39;);
  *         }
  *     });
  *
  *     //tells the Proxy to destroy the Model. Performs a DELETE request to /users/123
  *     user.erase({
  *         success: function() {
- *             console.log('The User was destroyed!');
+ *             console.log(&#39;The User was destroyed!&#39;);
  *         }
  *     });
  * 
  * # HTTP Parameter names when using a {@link Ext.data.proxy.Ajax Ajax proxy}
  *
  * By default, the model ID is specified in an HTTP parameter named `id`. To change the
- * name of this parameter use the Proxy's {@link Ext.data.proxy.Ajax#idParam idParam}
+ * name of this parameter use the Proxy&#39;s {@link Ext.data.proxy.Ajax#idParam idParam}
  * configuration.
  *
  * Parameters for other commonly passed values such as
@@ -204,8 +204,8 @@
  * It is very common to want to load a set of Model instances to be displayed and manipulated in the UI. We do this by
  * creating a {@link Ext.data.Store Store}:
  *
- *     var store = Ext.create('Ext.data.Store', {
- *         model: 'User'
+ *     var store = Ext.create(&#39;Ext.data.Store&#39;, {
+ *         model: &#39;User&#39;
  *     });
  *
  *     //uses the Proxy we set up on Model to load the Store data
@@ -215,20 +215,20 @@
  * set of added, updated and removed Model instances to be synchronized with the server via the Proxy. See the {@link
  * Ext.data.Store Store docs} for more information on Stores.
  */
-Ext.define('Ext.data.Model', {
-    alternateClassName: 'Ext.data.Record',
+Ext.define(&#39;Ext.data.Model&#39;, {
+    alternateClassName: &#39;Ext.data.Record&#39;,
 
     requires: [
-        'Ext.data.ErrorCollection',
-        'Ext.data.operation.*',
-        'Ext.data.field.*',
-        'Ext.data.validator.Validator',
-        'Ext.data.schema.Schema',
-        'Ext.data.identifier.Generator',
-        'Ext.data.identifier.Sequential'
+        &#39;Ext.data.ErrorCollection&#39;,
+        &#39;Ext.data.operation.*&#39;,
+        &#39;Ext.data.field.*&#39;,
+        &#39;Ext.data.validator.Validator&#39;,
+        &#39;Ext.data.schema.Schema&#39;,
+        &#39;Ext.data.identifier.Generator&#39;,
+        &#39;Ext.data.identifier.Sequential&#39;
     ],
     uses: [
-        'Ext.data.Validation'
+        &#39;Ext.data.Validation&#39;
     ],
 
 <span id='Ext-data-Model-property-isEntity'>    /**
@@ -250,7 +250,7 @@ Ext.define('Ext.data.Model', {
 
 <span id='Ext-data-Model-property-erasing'>    erasing: false,
 </span>
-<span id='Ext-data-Model-property-observableType'>    observableType: 'record',
+<span id='Ext-data-Model-property-observableType'>    observableType: &#39;record&#39;,
 </span>
 <span id='Ext-data-Model-property-crudState'>    /**
 </span>     * @property {&quot;C&quot;/&quot;R&quot;/&quot;U&quot;/&quot;D&quot;} crudState
@@ -272,7 +272,7 @@ Ext.define('Ext.data.Model', {
      * @protected
      * @since 6.2.0
      */
-    crudState: 'R',
+    crudState: &#39;R&#39;,
 
 <span id='Ext-data-Model-property-crudStateWas'>    /**
 </span>     * @property {&quot;C&quot;/&quot;R&quot;/&quot;U&quot;/&quot;D&quot;} crudStateWas
@@ -312,7 +312,7 @@ Ext.define('Ext.data.Model', {
         //&lt;debug&gt;
         var dataId = data[idProperty];
         if (session &amp;&amp; !session.isSession) {
-            Ext.raise('Bad Model constructor argument 2 - &quot;session&quot; is not a Session');
+            Ext.raise(&#39;Bad Model constructor argument 2 - &quot;session&quot; is not a Session&#39;);
         }
         //&lt;/debug&gt;
 
@@ -336,7 +336,7 @@ Ext.define('Ext.data.Model', {
         if (!(me.id = id = data[idProperty]) &amp;&amp; id !== 0) {
             //&lt;debug&gt;
             if (dataId) {
-                Ext.raise('The model ID configured in data (&quot;' + dataId + '&quot;) has been rejected by the ' + me.fieldsMap[idProperty].type + ' field converter for the ' + idProperty + ' field');
+                Ext.raise(&#39;The model ID configured in data (&quot;&#39; + dataId + &#39;&quot;) has been rejected by the &#39; + me.fieldsMap[idProperty].type + &#39; field converter for the &#39; + idProperty + &#39; field&#39;);
             }
             //&lt;/debug&gt;
             if (session) {
@@ -350,7 +350,7 @@ Ext.define('Ext.data.Model', {
 
             data[idProperty] = me.id = id;
             me.phantom = true;
-            me.crudState = 'C';
+            me.crudState = &#39;C&#39;;
         }
 
         if (session) {
@@ -419,26 +419,26 @@ Ext.define('Ext.data.Model', {
      *
      * For example:
      *
-     *      Ext.define('Person', {
-     *          idProperty: 'id',  // this is the default value (for clarity)
+     *      Ext.define(&#39;Person&#39;, {
+     *          idProperty: &#39;id&#39;,  // this is the default value (for clarity)
      *
-     *          clientIdProperty: 'clientId',
+     *          clientIdProperty: &#39;clientId&#39;,
      *
-     *          identifier: 'negative', // to generate -1, -2 etc on the client
+     *          identifier: &#39;negative&#39;, // to generate -1, -2 etc on the client
      *
-     *          fields: [ 'name' ]
+     *          fields: [ &#39;name&#39; ]
      *      });
      *
      *      var person = new Person({
      *          // no id provided, so -1 is generated
-     *          name: 'Clark Kent'
+     *          name: &#39;Clark Kent&#39;
      *      });
      *
      * The server is given this data during the `create`:
      *
      *      {
      *          id: -1,
-     *          name: 'Clark Kent'
+     *          name: &#39;Clark Kent&#39;
      *      }
      *
      * The server allocates a real id and responds like so:
@@ -455,9 +455,9 @@ Ext.define('Ext.data.Model', {
      *
      * For example the client could send a `create` with this data:
      *
-     *      [ { id: -1, name: 'Clark Kent' },
-     *        { id: -2, name: 'Peter Parker' },
-     *        { id: -3, name: 'Bruce Banner' } ]
+     *      [ { id: -1, name: &#39;Clark Kent&#39; },
+     *        { id: -2, name: &#39;Peter Parker&#39; },
+     *        { id: -3, name: &#39;Bruce Banner&#39; } ]
      *
      * And the server could respond in the same order:
      *
@@ -485,25 +485,25 @@ Ext.define('Ext.data.Model', {
 <span id='Ext-data-Model-property-phantom'>    /**
 </span>     * @property {Boolean} phantom
      * True when the record does not yet exist in a server-side database. Any record which
-     * has a real database identity set as its `idProperty` is NOT a phantom -- it's real.
+     * has a real database identity set as its `idProperty` is NOT a phantom -- it&#39;s real.
      */
     phantom: false,
 
 <span id='Ext-data-Model-cfg-idProperty'>    /**
-</span>     * @cfg {String} [idProperty='id']
-     * The name of the field treated as this Model's unique id.
+</span>     * @cfg {String} [idProperty=&#39;id&#39;]
+     * The name of the field treated as this Model&#39;s unique id.
      *
      * If changing the idProperty in a subclass, the generated id field will replace the one
      * generated by the superclass, for example;
      *
-     *      Ext.define('Super', {
-     *          extend: 'Ext.data.Model',
-     *          fields: ['name']
+     *      Ext.define(&#39;Super&#39;, {
+     *          extend: &#39;Ext.data.Model&#39;,
+     *          fields: [&#39;name&#39;]
      *      });
      *
-     *      Ext.define('Sub', {
-     *          extend: 'Super',
-     *          idProperty: 'customId'
+     *      Ext.define(&#39;Sub&#39;, {
+     *          extend: &#39;Super&#39;,
+     *          idProperty: &#39;customId&#39;
      *      });
      *
      *      var fields = Super.getFields();
@@ -517,7 +517,7 @@ Ext.define('Ext.data.Model', {
      * The data values for this field must be unique or there will be id value collisions
      * in the {@link Ext.data.Store Store}.
      */
-    idProperty: 'id',
+    idProperty: &#39;id&#39;,
 
 <span id='Ext-data-Model-cfg-manyToMany'>    /**
 </span>     * @cfg {Object} manyToMany
@@ -537,53 +537,53 @@ Ext.define('Ext.data.Model', {
      * This can be overridden at the model level to provide a custom generator for a model.
      * The simplest form of this would be:
      *
-     *      Ext.define('MyApp.data.MyModel', {
-     *          extend: 'Ext.data.Model',
-     *          requires: ['Ext.data.identifier.Sequential'],
-     *          identifier: 'sequential',
+     *      Ext.define(&#39;MyApp.data.MyModel&#39;, {
+     *          extend: &#39;Ext.data.Model&#39;,
+     *          requires: [&#39;Ext.data.identifier.Sequential&#39;],
+     *          identifier: &#39;sequential&#39;,
      *          ...
      *      });
      *
-     * The above would generate {@link Ext.data.identifier.Sequential sequential} id's such
+     * The above would generate {@link Ext.data.identifier.Sequential sequential} id&#39;s such
      * as 1, 2, 3 etc..
      *
      * Another useful id generator is {@link Ext.data.identifier.Uuid}:
      *
-     *      Ext.define('MyApp.data.MyModel', {
-     *          extend: 'Ext.data.Model',
-     *          requires: ['Ext.data.identifier.Uuid'],
-     *          identifier: 'uuid',
+     *      Ext.define(&#39;MyApp.data.MyModel&#39;, {
+     *          extend: &#39;Ext.data.Model&#39;,
+     *          requires: [&#39;Ext.data.identifier.Uuid&#39;],
+     *          identifier: &#39;uuid&#39;,
      *          ...
      *      });
      *
      * An id generator can also be further configured:
      *
-     *      Ext.define('MyApp.data.MyModel', {
-     *          extend: 'Ext.data.Model',
+     *      Ext.define(&#39;MyApp.data.MyModel&#39;, {
+     *          extend: &#39;Ext.data.Model&#39;,
      *          identifier: {
-     *              type: 'sequential',
+     *              type: &#39;sequential&#39;,
      *              seed: 1000,
-     *              prefix: 'ID_'
+     *              prefix: &#39;ID_&#39;
      *          }
      *      });
      *
-     * The above would generate id's such as ID_1000, ID_1001, ID_1002 etc..
+     * The above would generate id&#39;s such as ID_1000, ID_1001, ID_1002 etc..
      *
      * If multiple models share an id space, a single generator can be shared:
      *
-     *      Ext.define('MyApp.data.MyModelX', {
-     *          extend: 'Ext.data.Model',
+     *      Ext.define(&#39;MyApp.data.MyModelX&#39;, {
+     *          extend: &#39;Ext.data.Model&#39;,
      *          identifier: {
-     *              type: 'sequential',
-     *              id: 'xy'
+     *              type: &#39;sequential&#39;,
+     *              id: &#39;xy&#39;
      *          }
      *      });
      *
-     *      Ext.define('MyApp.data.MyModelY', {
-     *          extend: 'Ext.data.Model',
+     *      Ext.define(&#39;MyApp.data.MyModelY&#39;, {
+     *          extend: &#39;Ext.data.Model&#39;,
      *          identifier: {
-     *              type: 'sequential',
-     *              id: 'xy'
+     *              type: &#39;sequential&#39;,
+     *              id: &#39;xy&#39;
      *          }
      *      });
      *
@@ -604,15 +604,15 @@ Ext.define('Ext.data.Model', {
      * the `Ext.data.field.*` type using the `type` config option.
      * 
      *     // two fields are set:
-     *     // - an 'auto' field with a name of 'firstName'
-     *     // - and an Ext.data.field.Integer field with a name of 'age'
-     *     fields: ['firstName', {
-     *         type: 'int',
-     *         name: 'age'
+     *     // - an &#39;auto&#39; field with a name of &#39;firstName&#39;
+     *     // - and an Ext.data.field.Integer field with a name of &#39;age&#39;
+     *     fields: [&#39;firstName&#39;, {
+     *         type: &#39;int&#39;,
+     *         name: &#39;age&#39;
      *     }]
      * 
      * Fields will automatically be created at read time for any for any keys in the 
-     * data passed to the Model's {@link #proxy proxy's} 
+     * data passed to the Model&#39;s {@link #proxy proxy&#39;s} 
      * {@link Ext.data.reader.Reader reader} whose name is not explicitly configured in 
      * the `fields` config.
      * 
@@ -635,11 +635,11 @@ Ext.define('Ext.data.Model', {
      * 
      * This can be used like so:
      * 
-     *      Ext.define('MyApp.models.User', {
-     *          extend: 'Ext.data.Model',
+     *      Ext.define(&#39;MyApp.models.User&#39;, {
+     *          extend: &#39;Ext.data.Model&#39;,
      *
      *          fields: [
-     *              { name: 'name' }
+     *              { name: &#39;name&#39; }
      *          ]
      *      });
      * 
@@ -677,7 +677,7 @@ Ext.define('Ext.data.Model', {
     proxy: undefined,
 
 <span id='Ext-data-Model-cfg-schema'>    /**
-</span>     * @cfg {String/Object} [schema='default']
+</span>     * @cfg {String/Object} [schema=&#39;default&#39;]
      * The name of the {@link Ext.data.schema.Schema schema} to which this entity and its
      * associations belong. For details on custom schemas see `Ext.data.schema.Schema`.
      */
@@ -686,7 +686,7 @@ Ext.define('Ext.data.Model', {
      * The `Ext.data.schema.Schema` to which this entity and its associations belong.
      * @readonly
      */
-    schema: 'default',
+    schema: &#39;default&#39;,
 
 <span id='Ext-data-Model-cfg-versionProperty'>    /**
 </span>     * @cfg {String} [versionProperty]
@@ -732,45 +732,45 @@ Ext.define('Ext.data.Model', {
      * a {@link Ext.data.Model#set set} operation.
      * 
      * **Note:** Setting the config to `false` will only prevent the convert / calculate 
-     * call when the set `fieldName` param matches the field's `{@link #name}`.  In the 
+     * call when the set `fieldName` param matches the field&#39;s `{@link #name}`.  In the 
      * following example the calls to set `salary` will not execute the convert method 
      * on `set` while the calls to set `vested` will execute the convert method on the 
      * initial read as well as on `set`.
      * 
      * Example model definition:
      * 
-     *     Ext.define('MyApp.model.Employee', {
-     *         extend: 'Ext.data.Model',
-     *         fields: ['yearsOfService', {
-     *             name: 'salary',
+     *     Ext.define(&#39;MyApp.model.Employee&#39;, {
+     *         extend: &#39;Ext.data.Model&#39;,
+     *         fields: [&#39;yearsOfService&#39;, {
+     *             name: &#39;salary&#39;,
      *             convert: function (val) {
      *                 var startingBonus = val * .1;
      *                 return val + startingBonus;
      *             }
      *         }, {
-     *             name: 'vested',
+     *             name: &#39;vested&#39;,
      *             convert: function (val, record) {
-     *                 return record.get('yearsOfService') &gt;= 4;
+     *                 return record.get(&#39;yearsOfService&#39;) &gt;= 4;
      *             },
-     *             depends: 'yearsOfService'
+     *             depends: &#39;yearsOfService&#39;
      *         }],
      *         convertOnSet: false
      *     });
      *     
-     *     var tina = Ext.create('MyApp.model.Employee', {
+     *     var tina = Ext.create(&#39;MyApp.model.Employee&#39;, {
      *         salary: 50000,
      *         yearsOfService: 3
      *     });
      *     
-     *     console.log(tina.get('salary')); // logs 55000
-     *     console.log(tina.get('vested')); // logs false
+     *     console.log(tina.get(&#39;salary&#39;)); // logs 55000
+     *     console.log(tina.get(&#39;vested&#39;)); // logs false
      *     
      *     tina.set({
      *         salary: 60000,
      *         yearsOfService: 4
      *     });
-     *     console.log(tina.get('salary')); // logs 60000
-     *     console.log(tina.get('vested')); // logs true
+     *     console.log(tina.get(&#39;salary&#39;)); // logs 60000
+     *     console.log(tina.get(&#39;vested&#39;)); // logs true
      */
      convertOnSet: true,
 
@@ -840,7 +840,7 @@ Ext.define('Ext.data.Model', {
 
 <span id='Ext-data-Model-method-endEdit'>    /**
 </span>     * Ends an edit. If any data was modified, the containing store is notified
-     * (ie, the store's `update` event will fire).
+     * (ie, the store&#39;s `update` event will fire).
      * @param {Boolean} [silent] True to not notify any stores of the change.
      * @param {String[]} [modifiedFieldNames] Array of field names changed during edit.
      */
@@ -862,7 +862,7 @@ Ext.define('Ext.data.Model', {
                 }
 
                 if (me.dirty || (modifiedFieldNames &amp;&amp; modifiedFieldNames.length)) {
-                    me.callJoined('afterEdit', [modifiedFieldNames]);
+                    me.callJoined(&#39;afterEdit&#39;, [modifiedFieldNames]);
                 }
             }
         }
@@ -910,7 +910,7 @@ Ext.define('Ext.data.Model', {
     },
 
 <span id='Ext-data-Model-method-setId'>    /**
-</span>     * Sets the model instance's id field to the given id.
+</span>     * Sets the model instance&#39;s id field to the given id.
      * @param {Number/String} id The new id.
      * @param {Object} [options] See {@link #set}.
      */
@@ -921,7 +921,7 @@ Ext.define('Ext.data.Model', {
 <span id='Ext-data-Model-method-getPrevious'>    /**
 </span>     * This method returns the value of a field given its name prior to its most recent
      * change.
-     * @param {String} fieldName The field's {@link Ext.data.field.Field#name name}.
+     * @param {String} fieldName The field&#39;s {@link Ext.data.field.Field#name name}.
      * @return {Object} The value of the given field prior to its current value. `undefined`
      * if there is no previous value;
      */
@@ -932,7 +932,7 @@ Ext.define('Ext.data.Model', {
 
 <span id='Ext-data-Model-method-isModified'>    /**
 </span>     * Returns true if the passed field name has been `{@link #modified}` since the load or last commit.
-     * @param {String} fieldName The field's {@link Ext.data.field.Field#name name}.
+     * @param {String} fieldName The field&#39;s {@link Ext.data.field.Field#name name}.
      * @return {Boolean}
      */
     isModified: function (fieldName) {
@@ -976,13 +976,13 @@ Ext.define('Ext.data.Model', {
 <span id='Ext-data-Model-method-set'>    /**
 </span>     * Sets the given field to the given value. For example:
      * 
-     *      record.set('name', 'value');
+     *      record.set(&#39;name&#39;, &#39;value&#39;);
      * 
      * This method can also be passed an object containing multiple values to set at once.
      * For example:
      * 
      *      record.set({
-     *          name: 'value',
+     *          name: &#39;value&#39;,
      *          age: 42
      *      });
      * 
@@ -1023,7 +1023,7 @@ Ext.define('Ext.data.Model', {
             silent = opt &amp;&amp; opt.silent,
             commit = opt &amp;&amp; opt.commit,
             updateRefs = !(opt &amp;&amp; opt.refs === false) &amp;&amp; session,
-            // Don't need to do dirty processing with commit, since we'll always
+            // Don&#39;t need to do dirty processing with commit, since we&#39;ll always
             // end up with nothing modified and not dirty
             dirty = !(opt &amp;&amp; opt.dirty === false &amp;&amp; !commit),
             modifiedFieldNames = null,
@@ -1083,7 +1083,7 @@ Ext.define('Ext.data.Model', {
                 i = (dependents = field &amp;&amp; field.dependents) &amp;&amp; dependents.length;
                 while (i-- &gt; 0) {
                     // we use the field instance to hold the dirty bit to avoid any
-                    // extra allocations... we'll clear this before we depart. We do
+                    // extra allocations... we&#39;ll clear this before we depart. We do
                     // this so we can perform the fewest recalculations possible as
                     // each dependent field only needs to be recalculated once.
                     (dep = dependents[i]).dirty = true;
@@ -1130,7 +1130,7 @@ Ext.define('Ext.data.Model', {
             // those following this field in rankedFields can possibly be among them.
 
             field = rankedFields[dirtyRank - 1]; // dirtyRank is 1-based
-            field.dirty = false; // clear just this field's dirty state
+            field.dirty = false; // clear just this field&#39;s dirty state
 
             if (single) {
                 delete values[fieldName]; // cleanup last value
@@ -1142,7 +1142,7 @@ Ext.define('Ext.data.Model', {
             fieldName = field.name;
             values[fieldName] = data[fieldName];
             // We are now processing a dependent field, so we want to force a
-            // convert to occur because it's the only way it will get a value
+            // convert to occur because it&#39;s the only way it will get a value
             convertOnSet = true;
 
             // Since dirtyRank is 1-based and refers to the field we need to handle
@@ -1189,7 +1189,7 @@ Ext.define('Ext.data.Model', {
         if (idChanged) {
             me.id = newId;
             me.onIdChanged(newId, oldId);
-            me.callJoined('onIdChanged', [oldId, newId]);
+            me.callJoined(&#39;onIdChanged&#39;, [oldId, newId]);
             if (associations) {
                 for (roleName in associations) {
                     associations[roleName].onIdChanged(me, oldId, newId);
@@ -1200,7 +1200,7 @@ Ext.define('Ext.data.Model', {
         if (commit) {
             me.commit(silent, modifiedFieldNames);
         } else if (!silent &amp;&amp; !me.editing &amp;&amp; modifiedFieldNames) {
-            me.callJoined('afterEdit', [modifiedFieldNames]);
+            me.callJoined(&#39;afterEdit&#39;, [modifiedFieldNames]);
         }
 
         return modifiedFieldNames;
@@ -1222,7 +1222,7 @@ Ext.define('Ext.data.Model', {
 
         //&lt;debug&gt;
         if (me.erased) {
-            Ext.raise('Cannot reject once a record has been erased.');
+            Ext.raise(&#39;Cannot reject once a record has been erased.&#39;);
         }
         //&lt;/debug&gt;
 
@@ -1234,7 +1234,7 @@ Ext.define('Ext.data.Model', {
         me.clearState();
 
         if (!silent) {
-            me.callJoined('afterReject');
+            me.callJoined(&#39;afterReject&#39;);
         }
     },
     
@@ -1248,7 +1248,7 @@ Ext.define('Ext.data.Model', {
      * @param {Boolean} [silent=false] Pass `true` to skip notification of the owning store of the change.
      * @param {String[]} [modifiedFieldNames] Array of field names changed during sync with server if known.
      * Omit or pass `null` if unknown. An empty array means that it is known that no fields were modified
-     * by the server's response.
+     * by the server&#39;s response.
      * Defaults to false.
      */
     commit: function (silent, modifiedFieldNames) {
@@ -1269,9 +1269,9 @@ Ext.define('Ext.data.Model', {
 
         if (!silent) {
             if (erased) {
-                me.callJoined('afterErase');
+                me.callJoined(&#39;afterErase&#39;);
             } else {
-                me.callJoined('afterCommit', [modifiedFieldNames]);
+                me.callJoined(&#39;afterCommit&#39;, [modifiedFieldNames]);
             }
         }
     },
@@ -1309,7 +1309,7 @@ Ext.define('Ext.data.Model', {
                 associations[roleName].onDrop(me, session);
             }
         }
-        me.callJoined('afterDrop');
+        me.callJoined(&#39;afterDrop&#39;);
         if (me.phantom) {
             me.setErased();
         }
@@ -1354,7 +1354,7 @@ Ext.define('Ext.data.Model', {
             joined = me.joined,
             
             // TreeModels are never joined to their TreeStore.
-            // But unjoin is called by the base class's onCollectionRemove, so joined may be undefined.
+            // But unjoin is called by the base class&#39;s onCollectionRemove, so joined may be undefined.
             len = joined &amp;&amp; joined.length,
             store = me.store,
             i;
@@ -1448,7 +1448,7 @@ Ext.define('Ext.data.Model', {
     },
 
 <span id='Ext-data-Model-method-getValidation'>    /**
-</span>     * Returns the `Ext.data.Validation` record holding the results of this record's
+</span>     * Returns the `Ext.data.Validation` record holding the results of this record&#39;s
      * `validators`. This record is lazily created on first request and is then kept on
      * this record to be updated later.
      *
@@ -1498,34 +1498,34 @@ Ext.define('Ext.data.Model', {
 
 <span id='Ext-data-Model-method-toUrl'>    /**
 </span>     * Returns a url-suitable string for this model instance. By default this just returns the name of the Model class
-     * followed by the instance ID - for example an instance of MyApp.model.User with ID 123 will return 'user/123'.
+     * followed by the instance ID - for example an instance of MyApp.model.User with ID 123 will return &#39;user/123&#39;.
      * @return {String} The url string for this model instance.
      */
     toUrl: function() {
-        var pieces = this.$className.split('.'),
+        var pieces = this.$className.split(&#39;.&#39;),
             name   = pieces[pieces.length - 1].toLowerCase();
 
-        return name + '/' + this.getId();
+        return name + &#39;/&#39; + this.getId();
     },
 
 <span id='Ext-data-Model-method-erase'>    /**
 </span>     * @localdoc Destroys the model using the configured proxy.  The erase action is
      * asynchronous.  Any processing of the erased record should be done in a callback.
      *
-     *     Ext.define('MyApp.model.User', {
-     *         extend: 'Ext.data.Model',
+     *     Ext.define(&#39;MyApp.model.User&#39;, {
+     *         extend: &#39;Ext.data.Model&#39;,
      *         fields: [
-     *             {name: 'id', type: 'int'},
-     *             {name: 'name', type: 'string'}
+     *             {name: &#39;id&#39;, type: &#39;int&#39;},
+     *             {name: &#39;name&#39;, type: &#39;string&#39;}
      *         ],
      *         proxy: {
-     *             type: 'ajax',
-     *             url: 'server.url'
+     *             type: &#39;ajax&#39;,
+     *             url: &#39;server.url&#39;
      *         }
      *     });
      *
      *     var user = new MyApp.model.User({
-     *         name: 'Foo'
+     *         name: &#39;Foo&#39;
      *     });
      *
      *     // pass the phantom record data to the server to be saved
@@ -1562,7 +1562,7 @@ Ext.define('Ext.data.Model', {
         me.erasing = true;
 
         // Drop causes a removal from the backing Collection.
-        // The store's onCollectionRemove will respond to this by adding the record to its &quot;to remove&quot; stack and setting its needsSync
+        // The store&#39;s onCollectionRemove will respond to this by adding the record to its &quot;to remove&quot; stack and setting its needsSync
         // flag unless the above &quot;erasing&quot; flag is set.
         me.drop();
 
@@ -1572,7 +1572,7 @@ Ext.define('Ext.data.Model', {
     
 <span id='Ext-data-Model-method-setErased'>    setErased: function() {
 </span>        this.erased = true;
-        this.callJoined('afterErase');
+        this.callJoined(&#39;afterErase&#39;);
     },
 
 <span id='Ext-data-Model-method-getChanges'>    /**
@@ -1622,7 +1622,7 @@ Ext.define('Ext.data.Model', {
      *         orders: [
      *             {
      *                 id: 123,
-     *                 status: 'shipped',
+     *                 status: &#39;shipped&#39;,
      *                 orderItems: [
      *                     ...
      *                 ]
@@ -1648,7 +1648,7 @@ Ext.define('Ext.data.Model', {
      * This is implied when `options.changes` is set to `true`.
      * @param {Boolean} [options.serialize=false] Pass `true` to invoke the `serialize`
      * method on the returned fields.
-     * @return {Object} The nested data set for the Model's loaded associations.
+     * @return {Object} The nested data set for the Model&#39;s loaded associations.
      */
     getAssociatedData: function (result, options) {
         var me = this,
@@ -1679,7 +1679,7 @@ Ext.define('Ext.data.Model', {
                 itemData = [];
 
                 for (i = 0; i &lt; length; ++i) {
-                    // NOTE - we don't check whether the record is gathering here because
+                    // NOTE - we don&#39;t check whether the record is gathering here because
                     // we cannot remove it from the store (it would invalidate the index
                     // values and misrepresent the content). Instead we tell getData to
                     // only get the fields vs descend further.
@@ -1763,7 +1763,7 @@ Ext.define('Ext.data.Model', {
             serialize = opts.serialize,
             criticalFields, field, n, name, value;
 
-        // DON'T use &quot;opts&quot; from here on...
+        // DON&#39;T use &quot;opts&quot; from here on...
 
         // Keep in mind the two legacy use cases:
         //  - getData() ==&gt; Ext.apply({}, me.data)
@@ -1849,15 +1849,15 @@ Ext.define('Ext.data.Model', {
      * is asynchronous.  Any processing of the loaded record should be done in a
      * callback.
      *
-     *     Ext.define('MyApp.model.User', {
-     *         extend: 'Ext.data.Model',
+     *     Ext.define(&#39;MyApp.model.User&#39;, {
+     *         extend: &#39;Ext.data.Model&#39;,
      *         fields: [
-     *             {name: 'id', type: 'int'},
-     *             {name: 'name', type: 'string'}
+     *             {name: &#39;id&#39;, type: &#39;int&#39;},
+     *             {name: &#39;name&#39;, type: &#39;string&#39;}
      *         ],
      *         proxy: {
-     *             type: 'ajax',
-     *             url: 'server.url'
+     *             type: &#39;ajax&#39;,
+     *             url: &#39;server.url&#39;
      *         }
      *     });
      *
@@ -1933,8 +1933,8 @@ Ext.define('Ext.data.Model', {
 
         options.id = id;
 
-        // Always set the recordCreator. If we have a session, we're already
-        // part of said session, so we don't need to handle that.
+        // Always set the recordCreator. If we have a session, we&#39;re already
+        // part of said session, so we don&#39;t need to handle that.
         options.recordCreator = function(data, type, readOptions) {
             // Important to change this here, because we might be loading associations,
             // so we do not want this to propagate down. If we have a session, use that
@@ -1947,7 +1947,7 @@ Ext.define('Ext.data.Model', {
             //&lt;debug&gt;
             // Do the id check after set since converters may have run
             if (doIdCheck &amp;&amp; me.getId() !== id) {
-                Ext.raise('Invalid record id returned for ' + id + '@' + me.entityName);
+                Ext.raise(&#39;Invalid record id returned for &#39; + id + &#39;@&#39; + me.entityName);
             }
             //&lt;/debug&gt;
             return me;
@@ -1971,7 +1971,7 @@ Ext.define('Ext.data.Model', {
             Ext.callback(callback, scope, callbackArgs);
 
             // Some code repetition here, however in a vast majority of cases
-            // we'll only have a single callback, so optimize for that case rather
+            // we&#39;ll only have a single callback, so optimize for that case rather
             // than setup arrays for all the callback options
             if (extras) {
                 for (i = 0, len = extras.length; i &lt; len; ++i) {
@@ -1984,11 +1984,11 @@ Ext.define('Ext.data.Model', {
                     Ext.callback(options.callback, scope, callbackArgs);
                 }
             }
-            me.callJoined('afterLoad');
+            me.callJoined(&#39;afterLoad&#39;);
         };
         delete options.callback;
 
-        me.loadOperation = operation = proxy.createOperation('read', options);
+        me.loadOperation = operation = proxy.createOperation(&#39;read&#39;, options);
         operation.execute();
 
         return operation;
@@ -2000,20 +2000,20 @@ Ext.define('Ext.data.Model', {
      *
      * Create example:
      *
-     *     Ext.define('MyApp.model.User', {
-     *         extend: 'Ext.data.Model',
+     *     Ext.define(&#39;MyApp.model.User&#39;, {
+     *         extend: &#39;Ext.data.Model&#39;,
      *         fields: [
-     *             {name: 'id', type: 'int'},
-     *             {name: 'name', type: 'string'}
+     *             {name: &#39;id&#39;, type: &#39;int&#39;},
+     *             {name: &#39;name&#39;, type: &#39;string&#39;}
      *         ],
      *         proxy: {
-     *             type: 'ajax',
-     *             url: 'server.url'
+     *             type: &#39;ajax&#39;,
+     *             url: &#39;server.url&#39;
      *         }
      *     });
      *
      *     var user = new MyApp.model.User({
-     *         name: 'Foo'
+     *         name: &#39;Foo&#39;
      *     });
      *
      *     // pass the phantom record data to the server to be saved
@@ -2038,15 +2038,15 @@ Ext.define('Ext.data.Model', {
      *         id: 1
      *     }
      *
-     *     // the id may be nested if the proxy's reader has a rootProperty config
-     *     Ext.define('MyApp.model.User', {
-     *         extend: 'Ext.data.Model',
+     *     // the id may be nested if the proxy&#39;s reader has a rootProperty config
+     *     Ext.define(&#39;MyApp.model.User&#39;, {
+     *         extend: &#39;Ext.data.Model&#39;,
      *         proxy: {
-     *             type: 'ajax',
-     *             url: 'server.url',
+     *             type: &#39;ajax&#39;,
+     *             url: &#39;server.url&#39;,
      *             reader: {
-     *                 type: 'ajax',
-     *                 rootProperty: 'data'
+     *                 type: &#39;ajax&#39;,
+     *                 rootProperty: &#39;data&#39;
      *             }
      *         }
      *     });
@@ -2061,24 +2061,24 @@ Ext.define('Ext.data.Model', {
      *
      * (Create + ) Update example:
      *
-     *     Ext.define('MyApp.model.User', {
-     *         extend: 'Ext.data.Model',
+     *     Ext.define(&#39;MyApp.model.User&#39;, {
+     *         extend: &#39;Ext.data.Model&#39;,
      *         fields: [
-     *             {name: 'id', type: 'int'},
-     *             {name: 'name', type: 'string'}
+     *             {name: &#39;id&#39;, type: &#39;int&#39;},
+     *             {name: &#39;name&#39;, type: &#39;string&#39;}
      *         ],
      *         proxy: {
-     *             type: 'ajax',
-     *             url: 'server.url'
+     *             type: &#39;ajax&#39;,
+     *             url: &#39;server.url&#39;
      *         }
      *     });
      *
      *     var user = new MyApp.model.User({
-     *         name: 'Foo'
+     *         name: &#39;Foo&#39;
      *     });
      *     user.save({
      *         success: function(record, operation) {
-     *             record.set('name', 'Bar');
+     *             record.set(&#39;name&#39;, &#39;Bar&#39;);
      *             // updates the remote record via the proxy
      *             record.save();
      *         }
@@ -2086,20 +2086,20 @@ Ext.define('Ext.data.Model', {
      *
      * (Create + ) Destroy example - see also {@link #erase}:
      *
-     *     Ext.define('MyApp.model.User', {
-     *         extend: 'Ext.data.Model',
+     *     Ext.define(&#39;MyApp.model.User&#39;, {
+     *         extend: &#39;Ext.data.Model&#39;,
      *         fields: [
-     *             {name: 'id', type: 'int'},
-     *             {name: 'name', type: 'string'}
+     *             {name: &#39;id&#39;, type: &#39;int&#39;},
+     *             {name: &#39;name&#39;, type: &#39;string&#39;}
      *         ],
      *         proxy: {
-     *             type: 'ajax',
-     *             url: 'server.url'
+     *             type: &#39;ajax&#39;,
+     *             url: &#39;server.url&#39;
      *         }
      *     });
      *
      *     var user = new MyApp.model.User({
-     *         name: 'Foo'
+     *         name: &#39;Foo&#39;
      *     });
      *     user.save({
      *         success: function(record, operation) {
@@ -2136,7 +2136,7 @@ Ext.define('Ext.data.Model', {
         var me = this,
             phantom = me.phantom,
             dropped = me.dropped,
-            action = dropped ? 'destroy' : (phantom ? 'create' : 'update'),
+            action = dropped ? &#39;destroy&#39; : (phantom ? &#39;create&#39; : &#39;update&#39;),
             scope  = options.scope || me,
             callback = options.callback,
             proxy = me.getProxy(),
@@ -2162,7 +2162,7 @@ Ext.define('Ext.data.Model', {
         // Not a phantom, then we must perform this operation on the remote datasource.
         // Record will be removed from the store in the callback upon a success response
         if (dropped &amp;&amp; phantom) {
-            // If it's a phantom, then call the callback directly with a dummy successful ResultSet
+            // If it&#39;s a phantom, then call the callback directly with a dummy successful ResultSet
             operation.setResultSet(Ext.data.reader.Reader.prototype.nullResultSet);
             me.setErased();
             operation.setSuccessful(true);
@@ -2242,7 +2242,7 @@ Ext.define('Ext.data.Model', {
                         fields.splice(i, 1);
                         --i;
                         --len;
-                        // we need to do this forwards so that ordinals don't become
+                        // we need to do this forwards so that ordinals don&#39;t become
                         // invalid due to a splice
                     }
                 }
@@ -2266,7 +2266,7 @@ Ext.define('Ext.data.Model', {
             idField.allowNull = idField.critical = idField.identifier = true;
             idField.defaultValue = null;
 
-            // In case we've created the initializer we need to zap it so we recreate it
+            // In case we&#39;ve created the initializer we need to zap it so we recreate it
             // next time. Likewise with field ranking.
             me.initializeFn = me.rankedFields = me.transientFields = me.criticalFields = null;
         },
@@ -2371,13 +2371,13 @@ Ext.define('Ext.data.Model', {
                 }
 
                 if (!proxy || !proxy.isProxy) {
-                    if (typeof proxy === 'string') {
+                    if (typeof proxy === &#39;string&#39;) {
                         proxy = {
                             type: proxy
                         };
                     }
                     // We have nothing or a config for the proxy. Get some defaults from
-                    // the Schema and smash anything we've provided over the top.
+                    // the Schema and smash anything we&#39;ve provided over the top.
                     defaults = me.schema.constructProxy(me);
                     proxy = proxy ? Ext.merge(defaults, proxy) : defaults;
                 }
@@ -2422,11 +2422,11 @@ Ext.define('Ext.data.Model', {
          *
          * Sample usage:
          *
-         *     Ext.define('MyApp.User', {
-         *         extend: 'Ext.data.Model',
+         *     Ext.define(&#39;MyApp.User&#39;, {
+         *         extend: &#39;Ext.data.Model&#39;,
          *         fields: [
-         *             {name: 'id', type: 'int'},
-         *             {name: 'name', type: 'string'}
+         *             {name: &#39;id&#39;, type: &#39;int&#39;},
+         *             {name: &#39;name&#39;, type: &#39;string&#39;}
          *         ]
          *     });
          *
@@ -2611,7 +2611,7 @@ Ext.define('Ext.data.Model', {
                     // Converters have already been called because new Records
                     // have been created to copy from.
                     // This is a direct record-to-record value copy operation.
-                    // don't copy the id, we'll do it at the end
+                    // don&#39;t copy the id, we&#39;ll do it at the end
                     if (name !== idProperty) {
                         value = sourceData[name];
 
@@ -2652,7 +2652,7 @@ Ext.define('Ext.data.Model', {
             var me = this,
                 joined = me.joined,
                 session = me.session,
-                state = me.dropped ? 'D' : (me.phantom ? 'C' : (me.dirty ? 'U' : 'R')),
+                state = me.dropped ? &#39;D&#39; : (me.phantom ? &#39;C&#39; : (me.dirty ? &#39;U&#39; : &#39;R&#39;)),
                 i, len, fn, item;
 
             me.crudState = state;
@@ -2690,7 +2690,7 @@ Ext.define('Ext.data.Model', {
          * @private
          */
         onAssociatedRecordSet: function(record, role) {
-            this.callJoined('afterAssociatedRecordSet', [record, role]);
+            this.callJoined(&#39;afterAssociatedRecordSet&#39;, [record, role]);
         },
 
 <span id='Ext-data-Model-method-onIdChanged'>        /**
@@ -2708,10 +2708,10 @@ Ext.define('Ext.data.Model', {
             //&lt;debug&gt;
             if (session) {
                 if (this.session) {
-                    Ext.raise('This model already belongs to a session.');
+                    Ext.raise(&#39;This model already belongs to a session.&#39;);
                 }
                 if (!this.id) {
-                    Ext.raise('The model must have an id to participate in a session.');
+                    Ext.raise(&#39;The model must have an id to participate in a session.&#39;);
                 }
             }
             //&lt;/debug&gt;
@@ -2778,27 +2778,27 @@ Ext.define('Ext.data.Model', {
              * @private
              * @readonly
              * @deprecated
-             * The update operation of type 'edit'. Used by {@link Ext.data.Store#event-update Store.update} event.
+             * The update operation of type &#39;edit&#39;. Used by {@link Ext.data.Store#event-update Store.update} event.
              */
-            EDIT   : 'edit',
+            EDIT   : &#39;edit&#39;,
 <span id='Ext-data-Model-static-property-REJECT'>            /**
 </span>             * @property
              * @static
              * @private
              * @readonly
              * @deprecated
-             * The update operation of type 'reject'. Used by {@link Ext.data.Store#event-update Store.update} event.
+             * The update operation of type &#39;reject&#39;. Used by {@link Ext.data.Store#event-update Store.update} event.
              */
-            REJECT : 'reject',
+            REJECT : &#39;reject&#39;,
 <span id='Ext-data-Model-static-property-COMMIT'>            /**
 </span>             * @property
              * @static
              * @private
              * @readonly
              * @deprecated
-             * The update operation of type 'commit'. Used by {@link Ext.data.Store#event-update Store.update} event.
+             * The update operation of type &#39;commit&#39;. Used by {@link Ext.data.Store#event-update Store.update} event.
              */
-            COMMIT : 'commit',
+            COMMIT : &#39;commit&#39;,
 
 <span id='Ext-data-Model-static-property-defaultProxy'>            /**
 </span>             * @property {String/Object}
@@ -2812,7 +2812,7 @@ Ext.define('Ext.data.Model', {
              *
              * This proxy is not inherited by subclasses.
              */
-            defaultProxy: 'memory',
+            defaultProxy: &#39;memory&#39;,
 
             rankFields: function () {
                 var cls = this,
@@ -2949,7 +2949,7 @@ Ext.define('Ext.data.Model', {
                         fieldOrdinals[name = field.name] = i;
                         fieldsMap[name] = field;
                         // Clear the rank because it needs to be set on the first pass through
-                        // the fields in the subclass, don't inherit it from the parent
+                        // the fields in the subclass, don&#39;t inherit it from the parent
                         field.rank = null;
 
                         if (field.generated) {
@@ -2965,9 +2965,9 @@ Ext.define('Ext.data.Model', {
                     for (i = 0, length = fieldDefs.length; i &lt; length; ++i) {
                         field = fieldDefs[i];
                         reference = field.reference;
-                        // Create a copy of the reference since we'll modify
+                        // Create a copy of the reference since we&#39;ll modify
                         // the reference on the field. Needed for subclasses
-                        if (reference &amp;&amp; typeof reference !== 'string') {
+                        if (reference &amp;&amp; typeof reference !== &#39;string&#39;) {
                             // Can have child objects, so merge it deeply
                             reference = Ext.merge({}, reference);
                         }
@@ -2992,7 +2992,7 @@ Ext.define('Ext.data.Model', {
                 }
 
                 // Lookup the idProperty in the ordinals map and create a synthetic field if
-                // we don't have one.
+                // we don&#39;t have one.
                 idField = fieldsMap[idProperty];
                 if (!idField) {
                     if (superIdField &amp;&amp; superIdField.generated) {
@@ -3010,9 +3010,9 @@ Ext.define('Ext.data.Model', {
                     idField.ordinal = ordinal;
                     idField.generated = true;
                 } else if (idDeclared &amp;&amp; superIdField &amp;&amp; superIdField.generated) {
-                    // If we're declaring the id as a field in our fields array and it's different to
+                    // If we&#39;re declaring the id as a field in our fields array and it&#39;s different to
                     // the super id field that has been generated, pull it out and fix up the ordinals. This
-                    // likely won't happen often, to do it earlier we would need to know the contents of the fields
+                    // likely won&#39;t happen often, to do it earlier we would need to know the contents of the fields
                     // which would mean iterating over them twice.
                     Ext.Array.remove(fields, superIdField);
                     delete fieldsMap[superIdFieldName];
@@ -3036,7 +3036,7 @@ Ext.define('Ext.data.Model', {
                         ordinal = fields.length;
                         field = new Field({
                             name: versionProperty,
-                            type: 'int'
+                            type: &#39;int&#39;
                         });
                         fields[ordinal] = field;
                         fieldOrdinals[versionProperty] = ordinal;
@@ -3069,8 +3069,8 @@ Ext.define('Ext.data.Model', {
                 //&lt;debug&gt;
                 if (data.validations) {
                     delete data.validations;
-                    Ext.log.warn((cls.$className || 'Ext.data.Model' ) +
-                          ': validations has been deprecated. Please use validators instead.');
+                    Ext.log.warn((cls.$className || &#39;Ext.data.Model&#39; ) +
+                          &#39;: validations has been deprecated. Please use validators instead.&#39;);
                 }
                 //&lt;/debug&gt;
                 if (validatorDefs) {
@@ -3126,7 +3126,7 @@ Ext.define('Ext.data.Model', {
                     belongsTo = data.belongsTo,
                     hasMany = data.hasMany,
                     hasOne = data.hasOne,
-                    // manyToMany can't be declared via reference
+                    // manyToMany can&#39;t be declared via reference
                     matrices = data.manyToMany,
                     i, length, assoc, o;
 
@@ -3147,19 +3147,19 @@ Ext.define('Ext.data.Model', {
                         o = Ext.apply({}, assoc);
                         delete o.type;
                         switch (assoc.type) {
-                            case 'belongsTo':
+                            case &#39;belongsTo&#39;:
                                 schema.addBelongsTo(cls, o);
                                 break;
-                            case 'hasMany':
+                            case &#39;hasMany&#39;:
                                 schema.addHasMany(cls, o);
                                 break;
-                            case 'hasOne':
+                            case &#39;hasOne&#39;:
                                 schema.addHasOne(cls, o);
                                 break;
 
                             //&lt;debug&gt;
                             default:
-                                Ext.raise('Invalid association type: &quot;' + assoc.type + '&quot;');
+                                Ext.raise(&#39;Invalid association type: &quot;&#39; + assoc.type + &#39;&quot;&#39;);
                             //&lt;/debug&gt;
                         }
                     }
@@ -3195,7 +3195,7 @@ Ext.define('Ext.data.Model', {
 
                 //&lt;debug&gt;
                 if (data.idgen) {
-                    Ext.log.warn('Ext.data.Model: idgen has been deprecated. Please use identifier instead.');
+                    Ext.log.warn(&#39;Ext.data.Model: idgen has been deprecated. Please use identifier instead.&#39;);
                 }
                 //&lt;/debug&gt;
 
@@ -3206,9 +3206,9 @@ Ext.define('Ext.data.Model', {
                     // An idgen was specified on the definition, use it explicitly.
                     identifier = Ext.Factory.dataIdentifier(identifier);
                 } else if (superIdent) {
-                    // If we have a cloneable instance, and we don't have an id
+                    // If we have a cloneable instance, and we don&#39;t have an id
                     // clone it. If we have an id, then we should use the same
-                    // instance since it's the same as looking it up via id.
+                    // instance since it&#39;s the same as looking it up via id.
                     if (superIdent.clone &amp;&amp; !superIdent.getId()) {
                         identifier = superIdent.clone();
                     } else if (superIdent.isGenerator) {
@@ -3221,17 +3221,17 @@ Ext.define('Ext.data.Model', {
                 cls.identifier = proto.identifier = identifier;
 
                 if (!identifier) {
-                    // If we didn't find one, create it and push it onto the class.
-                    // Don't put it on the prototype, so a subclass will create
-                    // it's own generator. If we have an anonymous model, go ahead and
+                    // If we didn&#39;t find one, create it and push it onto the class.
+                    // Don&#39;t put it on the prototype, so a subclass will create
+                    // it&#39;s own generator. If we have an anonymous model, go ahead and
                     // generate a unique prefix for it.
                     generatorPrefix = cls.entityName;
                     if (!generatorPrefix) {
-                        generatorPrefix = Ext.id(null, 'extModel');
+                        generatorPrefix = Ext.id(null, &#39;extModel&#39;);
                     }
                     cls.identifier = Ext.Factory.dataIdentifier({
-                        type: 'sequential',
-                        prefix: generatorPrefix + '-'
+                        type: &#39;sequential&#39;,
+                        prefix: generatorPrefix + &#39;-&#39;
                     });
                 }
             },
@@ -3261,8 +3261,8 @@ Ext.define('Ext.data.Model', {
              * @private
              */
             makeInitializeFn: function (cls) {
-                var code = ['var '],
-                    body = ['\nreturn function (e) {\n    var data = e.data, v;\n'],
+                var code = [&#39;var &#39;],
+                    body = [&#39;\nreturn function (e) {\n    var data = e.data, v;\n&#39;],
                     work = 0,
                     bc, ec, // == beginClone, endClone
                     convert, expr, factory, field, fields, fs, hasDefValue, i, length;
@@ -3274,24 +3274,24 @@ Ext.define('Ext.data.Model', {
                 }
 
                 for (i = 0, length = fields.length; i &lt; length; ++i) {
-                    // The generated method declares vars for each field using &quot;f0&quot;..&quot;fN' as the
+                    // The generated method declares vars for each field using &quot;f0&quot;..&quot;fN&#39; as the
                     // name. These are used to access properties of the field (e.g., the convert
                     // method or defaultValue).
                     field = fields[i];
-                    fs = 'f' + i;
+                    fs = &#39;f&#39; + i;
                     convert = field.convert;
 
                     if (i) {
-                        code.push(',  \n    ');
+                        code.push(&#39;,  \n    &#39;);
                     }
-                    code.push(fs, ' = $fields[' + i + ']');
+                    code.push(fs, &#39; = $fields[&#39; + i + &#39;]&#39;);
                     //&lt;debug&gt;
                     // this can be helpful when debugging (at least in Chrome):
-                    code.push('  /*  ', field.name, '  */');
+                    code.push(&#39;  /*  &#39;, field.name, &#39;  */&#39;);
                     //&lt;/debug&gt;
 
                     // NOTE: added string literals are &quot;folded&quot; by the compiler so we
-                    // are better off doing an &quot;'foo' + 'bar'&quot; then &quot;'foo', 'bar'&quot;. But
+                    // are better off doing an &quot;&#39;foo&#39; + &#39;bar&#39;&quot; then &quot;&#39;foo&#39;, &#39;bar&#39;&quot;. But
                     // for variables we are better off pushing them into the array for
                     // the final join.
 
@@ -3300,16 +3300,16 @@ Ext.define('Ext.data.Model', {
                         // and/or defaultValue), generate a chunk of logic appropriate for the
                         // field.
                         //expr = data[&quot;fieldName&quot;];
-                        expr = 'data[&quot;' + field.name + '&quot;]';
+                        expr = &#39;data[&quot;&#39; + field.name + &#39;&quot;]&#39;;
                         ++work;
 
-                        bc = ec = '';
+                        bc = ec = &#39;&#39;;
                         if (field.cloneDefaultValue) {
-                            bc = 'Ext.clone(';
-                            ec = ')';
+                            bc = &#39;Ext.clone(&#39;;
+                            ec = &#39;)&#39;;
                         }
 
-                        body.push('\n');
+                        body.push(&#39;\n&#39;);
                         if (convert &amp;&amp; hasDefValue) {
                             // v = data.fieldName;
                             // if (v !== undefined) {
@@ -3322,24 +3322,24 @@ Ext.define('Ext.data.Model', {
                             // }
                             // data.fieldName = v;
                             //
-                            body.push('    v = ', expr, ';\n' +
-                                      '    if (v !== undefined) {\n' +
-                                      '        v = ', fs, '.convert(v, e);\n' +
-                                      '    }\n' +
-                                      '    if (v === undefined) {\n' +
-                                      '        v = ', bc, fs, '.defaultValue',ec,';\n' +
-                                      '    }\n' +
-                                      '    ', expr, ' = v;');
+                            body.push(&#39;    v = &#39;, expr, &#39;;\n&#39; +
+                                      &#39;    if (v !== undefined) {\n&#39; +
+                                      &#39;        v = &#39;, fs, &#39;.convert(v, e);\n&#39; +
+                                      &#39;    }\n&#39; +
+                                      &#39;    if (v === undefined) {\n&#39; +
+                                      &#39;        v = &#39;, bc, fs, &#39;.defaultValue&#39;,ec,&#39;;\n&#39; +
+                                      &#39;    }\n&#39; +
+                                      &#39;    &#39;, expr, &#39; = v;&#39;);
                         } else if (convert) { // no defaultValue
                             // v = f2.convert(data.fieldName,e);
                             // if (v !== undefined) {
                             //     data.fieldName = v;
                             // }
                             //
-                            body.push('    v = ', fs, '.convert(', expr, ',e);\n' +
-                                      '    if (v !== undefined) {\n' +
-                                      '        ', expr, ' = v;\n' +
-                                      '    }\n');
+                            body.push(&#39;    v = &#39;, fs, &#39;.convert(&#39;, expr, &#39;,e);\n&#39; +
+                                      &#39;    if (v !== undefined) {\n&#39; +
+                                      &#39;        &#39;, expr, &#39; = v;\n&#39; +
+                                      &#39;    }\n&#39;);
                         } else if (hasDefValue) { // no convert
                             // if (data.fieldName === undefined) {
                             //     data.fieldName = f2.defaultValue;
@@ -3347,9 +3347,9 @@ Ext.define('Ext.data.Model', {
                             //     data.fieldName = Ext.clone(f2.defaultValue);
                             // }
                             //
-                            body.push('    if (', expr, ' === undefined) {\n' +
-                                      '        ', expr, ' = ',bc,fs,'.defaultValue',ec,';\n' +
-                                      '    }\n');
+                            body.push(&#39;    if (&#39;, expr, &#39; === undefined) {\n&#39; +
+                                      &#39;        &#39;, expr, &#39; = &#39;,bc,fs,&#39;.defaultValue&#39;,ec,&#39;;\n&#39; +
+                                      &#39;    }\n&#39;);
                         }
                     }
                 }
@@ -3359,14 +3359,14 @@ Ext.define('Ext.data.Model', {
                     return Ext.emptyFn;
                 }
 
-                code.push(';\n');
+                code.push(&#39;;\n&#39;);
                 code.push.apply(code, body);
-                code.push('}');
-                code = code.join('');
+                code.push(&#39;}&#39;);
+                code = code.join(&#39;&#39;);
 
                 // Ensure that Ext in the function code refers to the same Ext that we are using here.
                 // If we are in a sandbox, global.Ext might be different.
-                factory = new Function('$fields', 'Ext', code);
+                factory = new Function(&#39;$fields&#39;, &#39;Ext&#39;, code);
 
                 return factory(fields, Ext);
             }
@@ -3404,7 +3404,7 @@ function () {
             delete data.schema;
             schema = Schema.get(schemaName);
         } else if (!(schema = proto.schema)) {
-            schema = defaultSchema || (defaultSchema = Schema.get('default'));
+            schema = defaultSchema || (defaultSchema = Schema.get(&#39;default&#39;));
         }
 
         // These are in &quot;privates&quot; so we manually make them inherited:
@@ -3422,19 +3422,19 @@ function () {
             //&lt;debug&gt;
             if (!entityName) {
                 if (data.associations) {
-                    Ext.raise('Anonymous entities cannot specify &quot;associations&quot;');
+                    Ext.raise(&#39;Anonymous entities cannot specify &quot;associations&quot;&#39;);
                 }
                 if (data.belongsTo) {
-                    Ext.raise('Anonymous entities cannot specify &quot;belongsTo&quot;');
+                    Ext.raise(&#39;Anonymous entities cannot specify &quot;belongsTo&quot;&#39;);
                 }
                 if (data.hasMany) {
-                    Ext.raise('Anonymous entities cannot specify &quot;hasMany&quot;');
+                    Ext.raise(&#39;Anonymous entities cannot specify &quot;hasMany&quot;&#39;);
                 }
                 if (data.hasOne) {
-                    Ext.raise('Anonymous entities cannot specify &quot;hasOne&quot;');
+                    Ext.raise(&#39;Anonymous entities cannot specify &quot;hasOne&quot;&#39;);
                 }
                 if (data.matrices) {
-                    Ext.raise('Anonymous entities cannot specify &quot;manyToMany&quot;');
+                    Ext.raise(&#39;Anonymous entities cannot specify &quot;manyToMany&quot;&#39;);
                 }
             }
             //&lt;/debug&gt;

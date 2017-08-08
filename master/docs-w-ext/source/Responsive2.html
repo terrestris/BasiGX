@@ -20,20 +20,20 @@
  * example:
  *
  *      Ext.create({
- *          xtype: 'viewport',
- *          layout: 'border',
+ *          xtype: &#39;viewport&#39;,
+ *          layout: &#39;border&#39;,
  *
  *          items: [{
- *              title: 'Some Title',
- *              plugins: 'responsive',
+ *              title: &#39;Some Title&#39;,
+ *              plugins: &#39;responsive&#39;,
  *
  *              responsiveConfig: {
- *                  'width &lt; 800': {
- *                      region: 'north'
+ *                  &#39;width &lt; 800&#39;: {
+ *                      region: &#39;north&#39;
  *                  },
  *
- *                  'width &gt;= 800': {
- *                      region: 'west'
+ *                  &#39;width &gt;= 800&#39;: {
+ *                      region: &#39;west&#39;
  *                  }
  *              }
  *          }]
@@ -41,11 +41,11 @@
  *
  * For details see `{@link Ext.mixin.Responsive#responsiveConfig responsiveConfig}`.
  */
-Ext.define('Ext.plugin.Responsive', {
-    extend: 'Ext.mixin.Responsive',
+Ext.define(&#39;Ext.plugin.Responsive&#39;, {
+    extend: &#39;Ext.mixin.Responsive&#39;,
 
-    alias: 'plugin.responsive',
-<span id='Ext-plugin-Responsive-property-id'>    id: 'responsive',
+    alias: &#39;plugin.responsive&#39;,
+<span id='Ext-plugin-Responsive-property-id'>    id: &#39;responsive&#39;,
 </span>
 <span id='Ext-plugin-Responsive-property-isPlugin'>    isPlugin: true,
 </span>
@@ -62,7 +62,7 @@ Ext.define('Ext.plugin.Responsive', {
         me.cmp = cmp;
         //&lt;debug&gt;
         if (!cmp) {
-            Ext.raise('Responsive plugin must be constructed by Component');
+            Ext.raise(&#39;Responsive plugin must be constructed by Component&#39;);
         }
         //&lt;/debug&gt;
 

@@ -23,32 +23,32 @@
  * to equal their pixel size. The actual numerical `flex` property in the Components will change, but the **ratio** to the total flex value will be preserved.
  *
  * A Splitter may be configured to show a centered mini-collapse tool orientated to collapse the {@link #collapseTarget}.
- * The Splitter will then call that sibling Panel's {@link Ext.panel.Panel#method-collapse collapse} or {@link Ext.panel.Panel#method-expand expand} method
+ * The Splitter will then call that sibling Panel&#39;s {@link Ext.panel.Panel#method-collapse collapse} or {@link Ext.panel.Panel#method-expand expand} method
  * to perform the appropriate operation (depending on the sibling collapse state). To create the mini-collapse tool but take care
  * of collapsing yourself, configure the splitter with `{@link #performCollapse}: false`.
  */
-Ext.define('Ext.resizer.Splitter', {
-    extend: 'Ext.Component',
-    requires: ['Ext.XTemplate'],
-    uses: ['Ext.resizer.SplitterTracker'],
-    xtype: 'splitter',
+Ext.define(&#39;Ext.resizer.Splitter&#39;, {
+    extend: &#39;Ext.Component&#39;,
+    requires: [&#39;Ext.XTemplate&#39;],
+    uses: [&#39;Ext.resizer.SplitterTracker&#39;],
+    xtype: &#39;splitter&#39;,
 
 <span id='Ext-resizer-Splitter-cfg-childEls'>    childEls: [
-</span>        'collapseEl'
+</span>        &#39;collapseEl&#39;
     ],
 
 <span id='Ext-resizer-Splitter-cfg-renderTpl'>    renderTpl: [
-</span>        '&lt;tpl if=&quot;collapsible===true&quot;&gt;',
-            '&lt;div id=&quot;{id}-collapseEl&quot; data-ref=&quot;collapseEl&quot; role=&quot;presentation&quot; class=&quot;', Ext.baseCSSPrefix, 'collapse-el ',
-                Ext.baseCSSPrefix, 'layout-split-{collapseDir}{childElCls}&quot;&gt;',
-            '&lt;/div&gt;',
-        '&lt;/tpl&gt;'
+</span>        &#39;&lt;tpl if=&quot;collapsible===true&quot;&gt;&#39;,
+            &#39;&lt;div id=&quot;{id}-collapseEl&quot; data-ref=&quot;collapseEl&quot; role=&quot;presentation&quot; class=&quot;&#39;, Ext.baseCSSPrefix, &#39;collapse-el &#39;,
+                Ext.baseCSSPrefix, &#39;layout-split-{collapseDir}{childElCls}&quot;&gt;&#39;,
+            &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;/tpl&gt;&#39;
     ],
 
 <span id='Ext-resizer-Splitter-property-isSplitter'>    isSplitter: true,
 </span>
-<span id='Ext-resizer-Splitter-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'splitter',
-</span><span id='Ext-resizer-Splitter-property-collapsedClsInternal'>    collapsedClsInternal: Ext.baseCSSPrefix + 'splitter-collapsed',
+<span id='Ext-resizer-Splitter-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;splitter&#39;,
+</span><span id='Ext-resizer-Splitter-property-collapsedClsInternal'>    collapsedClsInternal: Ext.baseCSSPrefix + &#39;splitter-collapsed&#39;,
 </span>    
 <span id='Ext-resizer-Splitter-property-canResize'>    // Default to tree, allow internal classes to disable resizing
 </span>    canResize: true,
@@ -62,7 +62,7 @@ Ext.define('Ext.resizer.Splitter', {
 
 <span id='Ext-resizer-Splitter-cfg-performCollapse'>    /**
 </span>     * @cfg {Boolean} performCollapse
-     * Set to false to prevent this Splitter's mini-collapse tool from managing the collapse
+     * Set to false to prevent this Splitter&#39;s mini-collapse tool from managing the collapse
      * state of the {@link #collapseTarget}.
      */
 
@@ -93,7 +93,7 @@ Ext.define('Ext.resizer.Splitter', {
 
 <span id='Ext-resizer-Splitter-cfg-collapseTarget'>    /**
 </span>     * @cfg {String/Ext.panel.Panel} collapseTarget
-     * A string describing the relative position of the immediate sibling Panel to collapse. May be 'prev' or 'next'.
+     * A string describing the relative position of the immediate sibling Panel to collapse. May be &#39;prev&#39; or &#39;next&#39;.
      *
      * Or the immediate sibling Panel to collapse.
      *
@@ -101,11 +101,11 @@ Ext.define('Ext.resizer.Splitter', {
      *
      * **Note that only Panels may be collapsed.**
      */
-    collapseTarget: 'next',
+    collapseTarget: &#39;next&#39;,
 
 <span id='Ext-resizer-Splitter-property-orientation'>    /**
 </span>     * @property {String} orientation
-     * Orientation of this Splitter. `'vertical'` when used in an hbox layout, `'horizontal'`
+     * Orientation of this Splitter. `&#39;vertical&#39;` when used in an hbox layout, `&#39;horizontal&#39;`
      * when used in a vbox layout.
      */
 
@@ -127,7 +127,7 @@ Ext.define('Ext.resizer.Splitter', {
      */
     tracker: null,
     
-<span id='Ext-resizer-Splitter-property-ariaRole'>    ariaRole: 'separator',
+<span id='Ext-resizer-Splitter-property-ariaRole'>    ariaRole: &#39;separator&#39;,
 </span>    
 <span id='Ext-resizer-Splitter-property-focusable'>    focusable: true,
 </span>    
@@ -149,7 +149,7 @@ Ext.define('Ext.resizer.Splitter', {
      */
     getTrackerConfig: function () {
         return Ext.apply({
-            xclass: 'Ext.resizer.SplitterTracker',
+            xclass: &#39;Ext.resizer.SplitterTracker&#39;,
             el: this.el,
             splitter: this
         }, this.tracker);
@@ -167,7 +167,7 @@ Ext.define('Ext.resizer.Splitter', {
             me.addCls(me.collapsedClsInternal);
         }
         if (!me.canResize) {
-            me.addCls(me.baseCls + '-noresize');
+            me.addCls(me.baseCls + &#39;-noresize&#39;);
         }
 
         Ext.applyIf(me.renderData, {
@@ -178,7 +178,7 @@ Ext.define('Ext.resizer.Splitter', {
         me.ariaRenderAttributes = me.ariaRenderAttributes || {};
         
         // Calling getCollapseDirection() above will set the orientation property
-        me.ariaRenderAttributes['aria-orientation'] = me.orientation;
+        me.ariaRenderAttributes[&#39;aria-orientation&#39;] = me.orientation;
 
         me.protoEl.unselectable();
     },
@@ -192,16 +192,16 @@ Ext.define('Ext.resizer.Splitter', {
         // Add listeners on the mini-collapse tool unless performCollapse is set to false
         if (me.performCollapse !== false) {
             if (me.renderData.collapsible) {
-                me.mon(me.collapseEl, 'click', me.toggleTargetCmp, me);
+                me.mon(me.collapseEl, &#39;click&#39;, me.toggleTargetCmp, me);
             }
             if (me.collapseOnDblClick) {
-                me.mon(me.el, 'dblclick', me.toggleTargetCmp, me);
+                me.mon(me.el, &#39;dblclick&#39;, me.toggleTargetCmp, me);
             }
         }
 
         // Ensure the mini collapse icon is set to the correct direction
         // when the target is collapsed/expanded by any means.
-        // Make sure we're only listening to collapse/expand events on Panels!
+        // Make sure we&#39;re only listening to collapse/expand events on Panels!
         target = me.getCollapseTarget();
         
         if (target &amp;&amp; target.isPanel) {
@@ -217,7 +217,7 @@ Ext.define('Ext.resizer.Splitter', {
         if (me.canResize) {
             me.tracker = Ext.create(me.getTrackerConfig());
             // Relay the most important events to our owner (could open wider later):
-            me.relayEvents(me.tracker, [ 'beforedragstart', 'dragstart', 'dragend' ]);
+            me.relayEvents(me.tracker, [ &#39;beforedragstart&#39;, &#39;dragstart&#39;, &#39;dragend&#39; ]);
         }
 
         collapseEl = me.collapseEl;
@@ -248,19 +248,19 @@ Ext.define('Ext.resizer.Splitter', {
                 type = me.ownerCt.layout.type;
                 if (collapseTarget.isComponent) {
                     items = me.ownerCt.items;
-                    idx = Number(items.indexOf(collapseTarget) === items.indexOf(me) - 1) &lt;&lt; 1 | Number(type === 'hbox');
+                    idx = Number(items.indexOf(collapseTarget) === items.indexOf(me) - 1) &lt;&lt; 1 | Number(type === &#39;hbox&#39;);
                 } else {
-                    idx = Number(me.collapseTarget === 'prev') &lt;&lt; 1 | Number(type === 'hbox');
+                    idx = Number(me.collapseTarget === &#39;prev&#39;) &lt;&lt; 1 | Number(type === &#39;hbox&#39;);
                 }
 
                 // Read the data out the truth table
-                dir = ['bottom', 'right', 'top', 'left'][idx];
+                dir = [&#39;bottom&#39;, &#39;right&#39;, &#39;top&#39;, &#39;left&#39;][idx];
             }
 
             me.collapseDirection = dir;
         }
 
-        me.setOrientation((dir === 'top' || dir === 'bottom') ? 'horizontal' : 'vertical');
+        me.setOrientation((dir === &#39;top&#39; || dir === &#39;bottom&#39;) ? &#39;horizontal&#39; : &#39;vertical&#39;);
 
         return dir;
     },
@@ -269,7 +269,7 @@ Ext.define('Ext.resizer.Splitter', {
 </span>        var me = this;
 
         return me.collapseTarget.isComponent ? me.collapseTarget
-                    : me.collapseTarget === 'prev' ? me.previousSibling() : me.nextSibling();
+                    : me.collapseTarget === &#39;prev&#39; ? me.previousSibling() : me.nextSibling();
     },
     
 <span id='Ext-resizer-Splitter-method-setCollapseEl'>    setCollapseEl: function(display){
@@ -280,11 +280,11 @@ Ext.define('Ext.resizer.Splitter', {
     },
     
 <span id='Ext-resizer-Splitter-method-onBeforeTargetExpand'>    onBeforeTargetExpand: function(target) {
-</span>        this.setCollapseEl('none');
+</span>        this.setCollapseEl(&#39;none&#39;);
     },
     
 <span id='Ext-resizer-Splitter-method-onBeforeTargetCollapse'>    onBeforeTargetCollapse: function(){
-</span>        this.setCollapseEl('none');
+</span>        this.setCollapseEl(&#39;none&#39;);
     },
 
 <span id='Ext-resizer-Splitter-method-onTargetCollapse'>    onTargetCollapse: function(target) {
@@ -292,44 +292,44 @@ Ext.define('Ext.resizer.Splitter', {
 
         // Only add the collapsed class if the collapse was from our target (not bubbled from below as in a Dashboard Column)
         // and was in the dimension which this Splitter controls.
-        if (target === me.getCollapseTarget() &amp;&amp; target[me.orientation === 'vertical' ? 'collapsedHorizontal' : 'collapsedVertical']()) {
-            me.el.addCls(me.collapsedClsInternal + ' ' + (me.collapsedCls || ''));
+        if (target === me.getCollapseTarget() &amp;&amp; target[me.orientation === &#39;vertical&#39; ? &#39;collapsedHorizontal&#39; : &#39;collapsedVertical&#39;]()) {
+            me.el.addCls(me.collapsedClsInternal + &#39; &#39; + (me.collapsedCls || &#39;&#39;));
         }
-        me.setCollapseEl('');
+        me.setCollapseEl(&#39;&#39;);
     },
 
 <span id='Ext-resizer-Splitter-method-onTargetExpand'>    onTargetExpand: function(target) {
 </span>        var me = this;
         
-        me.el.removeCls(me.collapsedClsInternal + ' ' + (me.collapsedCls || ''));
-        me.setCollapseEl('');
+        me.el.removeCls(me.collapsedClsInternal + &#39; &#39; + (me.collapsedCls || &#39;&#39;));
+        me.setCollapseEl(&#39;&#39;);
     },
 
 <span id='Ext-resizer-Splitter-property-collapseDirProps'>    collapseDirProps: {
 </span>        top: {
-            cls: Ext.baseCSSPrefix + 'layout-split-top'
+            cls: Ext.baseCSSPrefix + &#39;layout-split-top&#39;
         },
         right: {
-            cls: Ext.baseCSSPrefix + 'layout-split-right'
+            cls: Ext.baseCSSPrefix + &#39;layout-split-right&#39;
         },
         bottom: {
-            cls: Ext.baseCSSPrefix + 'layout-split-bottom'
+            cls: Ext.baseCSSPrefix + &#39;layout-split-bottom&#39;
         },
         left: {
-            cls: Ext.baseCSSPrefix + 'layout-split-left'
+            cls: Ext.baseCSSPrefix + &#39;layout-split-left&#39;
         }
     },
 
 <span id='Ext-resizer-Splitter-property-orientationProps'>    orientationProps: {
 </span>        horizontal: {
-            opposite: 'vertical',
-            fixedAxis: 'height',
-            stretchedAxis: 'width'
+            opposite: &#39;vertical&#39;,
+            fixedAxis: &#39;height&#39;,
+            stretchedAxis: &#39;width&#39;
         },
         vertical: {
-            opposite: 'horizontal',
-            fixedAxis: 'width',
-            stretchedAxis: 'height'
+            opposite: &#39;horizontal&#39;,
+            fixedAxis: &#39;width&#39;,
+            stretchedAxis: &#39;height&#39;
         }
     },
 
@@ -356,16 +356,16 @@ Ext.define('Ext.resizer.Splitter', {
             defaultSize = me.size,
             fixedSizeProp = orientationProps.fixedAxis,
             stretchSizeProp = orientationProps.stretchedAxis,
-            cls = me.baseCls + '-';
+            cls = me.baseCls + &#39;-&#39;;
 
         me[orientation] = true;
         me[orientationProps.opposite] = false;
 
-        if (!me.hasOwnProperty(fixedSizeProp) || me[fixedSizeProp] === '100%') {
+        if (!me.hasOwnProperty(fixedSizeProp) || me[fixedSizeProp] === &#39;100%&#39;) {
             me[fixedSizeProp] = defaultSize;
         }
         if (!me.hasOwnProperty(stretchSizeProp) || me[stretchSizeProp] === defaultSize) {
-            me[stretchSizeProp] = '100%';
+            me[stretchSizeProp] = &#39;100%&#39;;
         }
 
         me.removeCls(cls + orientationProps.opposite);

@@ -20,18 +20,18 @@
  * {@link Ext.data.Store#cfg-filters store filter}.
  * @protected
  */
-Ext.define('Ext.grid.filters.filter.TriFilter', {
-    extend: 'Ext.grid.filters.filter.Base',
+Ext.define(&#39;Ext.grid.filters.filter.TriFilter&#39;, {
+    extend: &#39;Ext.grid.filters.filter.Base&#39;,
 
 <span id='Ext-grid-filters-filter-TriFilter-property-menuItems'>    /**
 </span>     * @property {String[]} menuItems
      * The items to be shown in this menu.  Items are added to the menu
      * according to their position within this array.
      * Defaults to:
-     *      menuItems : ['lt', 'gt', '-', 'eq']
+     *      menuItems : [&#39;lt&#39;, &#39;gt&#39;, &#39;-&#39;, &#39;eq&#39;]
      * @private
      */
-    menuItems: ['lt', 'gt', '-', 'eq'],
+    menuItems: [&#39;lt&#39;, &#39;gt&#39;, &#39;-&#39;, &#39;eq&#39;],
 
 <span id='Ext-grid-filters-filter-TriFilter-method-constructor'>    constructor: function (config) {
 </span>        var me = this,
@@ -43,9 +43,9 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
 
         value = me.value;
 
-        filterLt = me.getStoreFilter('lt');
-        filterGt = me.getStoreFilter('gt');
-        filterEq = me.getStoreFilter('eq');
+        filterLt = me.getStoreFilter(&#39;lt&#39;);
+        filterGt = me.getStoreFilter(&#39;gt&#39;);
+        filterEq = me.getStoreFilter(&#39;eq&#39;);
 
         if (filterLt || filterGt || filterEq) {
             // This filter was restored from stateful filters on the store so enforce it as active.
@@ -60,7 +60,7 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
                 me.onStateRestore(filterEq);
             }
         } else {
-            // Once we've reached this block, we know that this grid filter doesn't have a stateful filter, so if our
+            // Once we&#39;ve reached this block, we know that this grid filter doesn&#39;t have a stateful filter, so if our
             // flag to begin saving future filter mutations is set we know that any configured filter must be nulled
             // out or it will replace our stateful filter.
             if (me.grid.stateful &amp;&amp; me.getGridStore().saveStatefulFilters) {
@@ -71,30 +71,30 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
             me.active = me.getActiveState(config, value);
         }
 
-        // Note that stateful filters will have already been gotten above. If not, or if all filters aren't stateful, we
+        // Note that stateful filters will have already been gotten above. If not, or if all filters aren&#39;t stateful, we
         // need to make sure that there is an actual filter instance created, with or without a value.
         //
-        // Note use the alpha alias for the operators ('gt', 'lt', 'eq') so they map in Filters.onFilterRemove().
+        // Note use the alpha alias for the operators (&#39;gt&#39;, &#39;lt&#39;, &#39;eq&#39;) so they map in Filters.onFilterRemove().
         filter.lt = filterLt || me.createFilter({
-            operator: 'lt',
+            operator: &#39;lt&#39;,
             value: (!stateful &amp;&amp; value &amp;&amp; Ext.isDefined(value.lt)) ?
                 value.lt :
                 null
-        }, 'lt');
+        }, &#39;lt&#39;);
 
         filter.gt = filterGt || me.createFilter({
-            operator: 'gt',
+            operator: &#39;gt&#39;,
             value: (!stateful &amp;&amp; value &amp;&amp; Ext.isDefined(value.gt)) ?
                 value.gt :
                 null
-        }, 'gt');
+        }, &#39;gt&#39;);
 
         filter.eq = filterEq || me.createFilter({
-            operator: 'eq',
+            operator: &#39;eq&#39;,
             value: (!stateful &amp;&amp; value &amp;&amp; Ext.isDefined(value.eq)) ?
                 value.eq :
                 null
-        }, 'eq');
+        }, &#39;eq&#39;);
 
         me.filter = filter;
 
@@ -111,7 +111,7 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
 
 <span id='Ext-grid-filters-filter-TriFilter-method-activate'>    /**
 </span>     * @private
-     * This method will be called when a column's menu trigger is clicked as well as when a filter is
+     * This method will be called when a column&#39;s menu trigger is clicked as well as when a filter is
      * activated. Depending on the caller, the UI and the store will be synced.
      */
     activate: function (showingMenu) {
@@ -139,18 +139,18 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
                     //
                     // In other words, if the ancestor is not the rootMenuItem, check it.
                     if (isRootMenuItem === undefined) {
-                        isRootMenuItem = me.owner.activeFilterMenuItem === field.up('menuitem');
+                        isRootMenuItem = me.owner.activeFilterMenuItem === field.up(&#39;menuitem&#39;);
                     }
 
                     if (!isRootMenuItem) {
-                        field.up('menuitem').setChecked(true, /*suppressEvents*/ true);
+                        field.up(&#39;menuitem&#39;).setChecked(true, /*suppressEvents*/ true);
                     }
                 } else {
                     field.value = value;
                 }
 
-                // Note that we only want to add store filters when they've been removed, which means that when Filter.showMenu() is called
-                // we DO NOT want to add a filter as they've already been added!
+                // Note that we only want to add store filters when they&#39;ve been removed, which means that when Filter.showMenu() is called
+                // we DO NOT want to add a filter as they&#39;ve already been added!
                 if (!showingMenu) {
                     me.addStoreFilter(filter);
                 }
@@ -194,7 +194,7 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
 
         if (filterCollection.length) {
             for (filter in filters) {
-                if (filterCollection.get(prefix + '-' + filter)) {
+                if (filterCollection.get(prefix + &#39;-&#39; + filter)) {
                     i++;
                 }
             }
@@ -207,7 +207,7 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
 </span>        var me = this,
             value;
 
-        // Filters can be removed at any time, even before a column filter's menu has been created (i.e.,
+        // Filters can be removed at any time, even before a column filter&#39;s menu has been created (i.e.,
         // store.clearFilter()). So, only call setValue() if the menu has been created since that method
         // assumes that menu fields exist.
         if (!me.menu &amp;&amp; me.countActiveFilters()) {
@@ -236,7 +236,7 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
 
         me.preventFilterRemoval = true;
 
-        if ('eq' in value) {
+        if (&#39;eq&#39; in value) {
             v = filters.lt.getValue();
             if (v || v === 0) {
                 remove.push(filters.lt);
@@ -260,7 +260,7 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
                 remove.push(filters.eq);
             }
 
-            if ('lt' in value) {
+            if (&#39;lt&#39; in value) {
                 v = value.lt;
                 if (v || v === 0) {
                     add.push(filters.lt);
@@ -270,7 +270,7 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
                 }
             }
 
-            if ('gt' in value) {
+            if (&#39;gt&#39; in value) {
                 v = value.gt;
                 if (v || v === 0) {
                     add.push(filters.gt);
@@ -281,8 +281,8 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
             }
         }
 
-        // Note that we don't want to update the filter collection unnecessarily, so we must know the
-        // current number of active filters that this TriFilter has +/- the number of filters we're
+        // Note that we don&#39;t want to update the filter collection unnecessarily, so we must know the
+        // current number of active filters that this TriFilter has +/- the number of filters we&#39;re
         // adding and removing, respectively. This will determine the present active state of the
         // TriFilter which we can use to not only help determine if the condition below should pass
         // but (if it does) how the active state should then be updated.

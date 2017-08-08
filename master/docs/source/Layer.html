@@ -36,9 +36,9 @@
  *
  * @class BasiGX.util.Layer
  */
-Ext.define('BasiGX.util.Layer', {
+Ext.define(&#39;BasiGX.util.Layer&#39;, {
     requires: [
-        'BasiGX.util.Map'
+        &#39;BasiGX.util.Map&#39;
     ],
     statics: {
 <span id='BasiGX-util-Layer-static-property-KEY_DISPLAY_IN_LAYERSWITCHER'>        /**
@@ -48,16 +48,16 @@ Ext.define('BasiGX.util.Layer', {
          * for the particular layer in question.
          *
          * TODO It should be safe to change the property to e.g.
-         *     `'basigx-displayInLayerSwitcher'`, but we'll keep it as is for
+         *     `&#39;basigx-displayInLayerSwitcher&#39;`, but we&#39;ll keep it as is for
          *     backwards compatibility for now.
          */
-        KEY_DISPLAY_IN_LAYERSWITCHER: 'bp_displayInLayerSwitcher',
+        KEY_DISPLAY_IN_LAYERSWITCHER: &#39;bp_displayInLayerSwitcher&#39;,
 
 <span id='BasiGX-util-Layer-static-property-NAME_MEASURE_LAYER'>        /**
 </span>         * The name of a layer used for drawing measurements on. Can be used to
          * dynamically determine that particular layer.
          */
-        NAME_MEASURE_LAYER: 'basigx-measure-layer',
+        NAME_MEASURE_LAYER: &#39;basigx-measure-layer&#39;,
 
 <span id='BasiGX-util-Layer-static-method-getLayerBy'>        /**
 </span>         * Get an ol3-layer by the given key-value constellation.
@@ -103,7 +103,7 @@ Ext.define('BasiGX.util.Layer', {
          * @return {ol.Layer} matchingLayer - the ol3-layer
          */
         getLayerByName: function(layername, collection) {
-            return this.getLayerBy('name', layername, collection);
+            return this.getLayerBy(&#39;name&#39;, layername, collection);
         },
 
 <span id='BasiGX-util-Layer-static-method-getLayerByFeatureType'>        /**
@@ -130,8 +130,8 @@ Ext.define('BasiGX.util.Layer', {
                 if (matchingLayer) {
                     return false;
                 }
-                if (layer.get('featureType') &amp;&amp;
-                   layer.get('featureType') === featureType) {
+                if (layer.get(&#39;featureType&#39;) &amp;&amp;
+                   layer.get(&#39;featureType&#39;) === featureType) {
                     matchingLayer = layer;
 
                     return false;
@@ -190,9 +190,9 @@ Ext.define('BasiGX.util.Layer', {
             var visibleLayers = [];
 
             Ext.each(layers, function(layer) {
-                if (layer.get('visible') &amp;&amp;
-                    layer.get('routingId') &amp;&amp;
-                    !layer.get('isSliderLayer')) {
+                if (layer.get(&#39;visible&#39;) &amp;&amp;
+                    layer.get(&#39;routingId&#39;) &amp;&amp;
+                    !layer.get(&#39;isSliderLayer&#39;)) {
                     visibleLayers.push(layer);
                 }
             });

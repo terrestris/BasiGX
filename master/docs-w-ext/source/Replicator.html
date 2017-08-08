@@ -28,9 +28,9 @@
  * difference, and that difference is used to calculate the sequence of values all the way into the extension area.
  *
  */
-Ext.define('Ext.grid.selection.Replicator', {
-    extend: 'Ext.plugin.Abstract',
-    alias: 'plugin.selectionreplicator',
+Ext.define(&#39;Ext.grid.selection.Replicator&#39;, {
+    extend: &#39;Ext.plugin.Abstract&#39;,
+    alias: &#39;plugin.selectionreplicator&#39;,
 
 <span id='Ext-grid-selection-Replicator-property-columns'>    /**
 </span>     * 
@@ -57,7 +57,7 @@ Ext.define('Ext.grid.selection.Replicator', {
     },
 
 <span id='Ext-grid-selection-Replicator-method-replicateSelection'>    /**
-</span>     * This is the method which is called when the {@link Ext.grid.selection.SpreadsheetModel spreadsheet} selection model's
+</span>     * This is the method which is called when the {@link Ext.grid.selection.SpreadsheetModel spreadsheet} selection model&#39;s
      * extender handle is dragged and released.
      *
      * It is passed contextual information about the selection and the extension area.
@@ -198,7 +198,7 @@ Ext.define('Ext.grid.selection.Replicator', {
         for (i = 0; i &lt; len; i++) {
             column = columns[i];
 
-            // If there's a dataIndex, get the value
+            // If there&#39;s a dataIndex, get the value
             if (column.dataIndex) {
                 result[i] = record.get(column.dataIndex);
             }

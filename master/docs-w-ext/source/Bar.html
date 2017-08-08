@@ -22,31 +22,31 @@
  *
  * See {@link Ext.sparkline.Base the base class} for a simple example.
  */
-Ext.define('Ext.sparkline.Bar', {
-    extend: 'Ext.sparkline.BarBase',
+Ext.define(&#39;Ext.sparkline.Bar&#39;, {
+    extend: &#39;Ext.sparkline.BarBase&#39;,
     requires: [
-        'Ext.sparkline.RangeMap'
+        &#39;Ext.sparkline.RangeMap&#39;
     ],
 
-    alias: 'widget.sparklinebar',
+    alias: &#39;widget.sparklinebar&#39;,
 
     config: {
 
 <span id='Ext-sparkline-Bar-cfg-barColor'>        /**
 </span>         * @cfg {String} [barColor=#3366cc] The bar color for positive values.
          */
-        barColor: '#3366cc',
+        barColor: &#39;#3366cc&#39;,
         
 <span id='Ext-sparkline-Bar-cfg-negBarColor'>        /**
 </span>         * @cfg {String} [negBarColor=#f44] The bar color for negative values.
          */
-        negBarColor: '#f44',
+        negBarColor: &#39;#f44&#39;,
         
 <span id='Ext-sparkline-Bar-cfg-stackedBarColor'>        /**
 </span>         * @cfg {String[]} [stackedBarColor] An array of colours to use for stacked bar charts.
          * The first series will use the first value in the array, the second series will use the second, etc. 
          */
-        stackedBarColor: ['#3366cc', '#dc3912', '#ff9900', '#109618', '#66aa00', '#dd4477', '#0099c6', '#990099'],
+        stackedBarColor: [&#39;#3366cc&#39;, &#39;#dc3912&#39;, &#39;#ff9900&#39;, &#39;#109618&#39;, &#39;#66aa00&#39;, &#39;#dd4477&#39;, &#39;#0099c6&#39;, &#39;#990099&#39;],
         
 <span id='Ext-sparkline-Bar-cfg-zeroColor'>        /**
 </span>         * @cfg {String} [zeroColor] The bar color for zero values.
@@ -97,7 +97,7 @@ Ext.define('Ext.sparkline.Bar', {
         colorMap: null
     },
 
-<span id='Ext-sparkline-Bar-cfg-tipTpl'>    tipTpl: '&amp;#9679; {prefix}{value}{suffix}',
+<span id='Ext-sparkline-Bar-cfg-tipTpl'>    tipTpl: &#39;&amp;#9679; {prefix}{value}{suffix}&#39;,
 </span>
 <span id='Ext-sparkline-Bar-method-remove'>    remove: function (vals, filter) {
 </span>        var i, vl, result = [];
@@ -160,11 +160,11 @@ Ext.define('Ext.sparkline.Bar', {
         // scan values to determine whether to stack bars
         for (i = 0, vlen = values.length; i &lt; vlen; i++) {
             val = values[i];
-            isStackString = typeof(val) === 'string' &amp;&amp; val.indexOf(':') &gt; -1;
+            isStackString = typeof(val) === &#39;string&#39; &amp;&amp; val.indexOf(&#39;:&#39;) &gt; -1;
             if (isStackString || Ext.isArray(val)) {
                 stacked = true;
                 if (isStackString) {
-                    val = values[i] = me.normalizeValues(val.split(':'));
+                    val = values[i] = me.normalizeValues(val.split(&#39;:&#39;));
                 }
                 val = me.remove(val, null); // min/max will treat null as zero
                 groupMin = Math.min.apply(Math, val);

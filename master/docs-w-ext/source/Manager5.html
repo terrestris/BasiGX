@@ -22,12 +22,12 @@
  * To access all menus, use {@link Ext.ComponentQuery ComponentQuery}.
  * @singleton
  */
-Ext.define('Ext.menu.Manager', {
+Ext.define(&#39;Ext.menu.Manager&#39;, {
     singleton: true,
 
-    alternateClassName: 'Ext.menu.MenuMgr',
+    alternateClassName: &#39;Ext.menu.MenuMgr&#39;,
 
-    uses: ['Ext.menu.Menu'],
+    uses: [&#39;Ext.menu.Menu&#39;],
 
 <span id='Ext-menu-Manager-property-groups'>    groups: {},
 </span>
@@ -142,7 +142,7 @@ Ext.define('Ext.menu.Manager', {
     get: function(menu, config) {
         var result;
         
-        if (typeof menu === 'string') { // menu id
+        if (typeof menu === &#39;string&#39;) { // menu id
             result = Ext.getCmp(menu);
             if (result instanceof Ext.menu.Menu) {
                 menu = result;
@@ -152,7 +152,7 @@ Ext.define('Ext.menu.Manager', {
             menu = new Ext.menu.Menu(config);
         } else if (!menu.isComponent) { // otherwise, must be a config
             config = Ext.apply({}, menu, config);
-            menu = Ext.ComponentManager.create(config, 'menu');
+            menu = Ext.ComponentManager.create(config, &#39;menu&#39;);
         }
         return menu;
     },

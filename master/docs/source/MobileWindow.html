@@ -38,12 +38,12 @@
  *
  * Usage Example:
  *
- * win = Ext.create('BasiGX.view.panel.MobileWindow', {
- *     panelTitle: 'Objektinformation',
- *     name: 'hsi-panel',
+ * win = Ext.create(&#39;BasiGX.view.panel.MobileWindow&#39;, {
+ *     panelTitle: &#39;Objektinformation&#39;,
+ *     name: &#39;hsi-panel&#39;,
  *     additionalItems: [
  *         {
- *             xtype: 'tabpanel',
+ *             xtype: &#39;tabpanel&#39;,
  *             items: tabArray,
  *             flex: 7
  *         }
@@ -54,27 +54,27 @@
  *
  * @class BasiGX.view.panel.MobileWindow
  */
-Ext.define('BasiGX.view.panel.MobileWindow', {
-    extend: 'Ext.Panel',
-    xtype: 'basigx-panel-mobilewindow',
+Ext.define(&#39;BasiGX.view.panel.MobileWindow&#39;, {
+    extend: &#39;Ext.Panel&#39;,
+    xtype: &#39;basigx-panel-mobilewindow&#39;,
 
     requires: [
-        'Ext.Container'
+        &#39;Ext.Container&#39;
     ],
 
     config: {
-<span id='BasiGX-view-panel-MobileWindow-cfg-panelTitle'>        panelTitle: '',
+<span id='BasiGX-view-panel-MobileWindow-cfg-panelTitle'>        panelTitle: &#39;&#39;,
 </span><span id='BasiGX-view-panel-MobileWindow-cfg-scrollable'>        scrollable: true,
 </span><span id='BasiGX-view-panel-MobileWindow-cfg-centered'>        centered: true,
-</span><span id='BasiGX-view-panel-MobileWindow-cfg-minWidth'>        minWidth: '50%',
-</span><span id='BasiGX-view-panel-MobileWindow-cfg-maxWidth'>        maxWidth: '80%',
-</span><span id='BasiGX-view-panel-MobileWindow-cfg-minHeight'>        minHeight: '50%',
-</span><span id='BasiGX-view-panel-MobileWindow-cfg-maxHeight'>        maxHeight: '80%',
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-minWidth'>        minWidth: &#39;50%&#39;,
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-maxWidth'>        maxWidth: &#39;80%&#39;,
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-minHeight'>        minHeight: &#39;50%&#39;,
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-maxHeight'>        maxHeight: &#39;80%&#39;,
 </span><span id='BasiGX-view-panel-MobileWindow-cfg-width'>        width: 200,
 </span><span id='BasiGX-view-panel-MobileWindow-cfg-height'>        height: 200,
-</span><span id='BasiGX-view-panel-MobileWindow-cfg-padding'>        padding: '10 10 10 10',
-</span><span id='BasiGX-view-panel-MobileWindow-cfg-layout'>        layout: 'vbox',
-</span><span id='BasiGX-view-panel-MobileWindow-cfg-name'>        name: '',
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-padding'>        padding: &#39;10 10 10 10&#39;,
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-layout'>        layout: &#39;vbox&#39;,
+</span><span id='BasiGX-view-panel-MobileWindow-cfg-name'>        name: &#39;&#39;,
 </span><span id='BasiGX-view-panel-MobileWindow-cfg-additionalItems'>        additionalItems: []
 </span>    },
 
@@ -87,28 +87,28 @@ Ext.define('BasiGX.view.panel.MobileWindow', {
         var me = this;
         me.callParent([config]);
 
-        var headerPanel = Ext.create('Ext.Container', {
+        var headerPanel = Ext.create(&#39;Ext.Container&#39;, {
             styleHtmlContent: true,
-            padding: '10 10 10 10',
-            html: '&lt;b&gt;' + me.getPanelTitle() + '&lt;/b&gt;' +
-                '&lt;i class=&quot;fa fa-times-circle-o fa-2x&quot; ' +
-                'style=&quot;position:absolute;right:10px;top:5px;&quot; ' +
-                'onclick=&quot;Ext.ComponentQuery.query(' +
-                '\'basigx-panel-mobilewindow[name=' + me.getName() + ']\')' +
-                '[0].hide();&quot;&gt;' +
-                '&lt;/i&gt;',
+            padding: &#39;10 10 10 10&#39;,
+            html: &#39;&lt;b&gt;&#39; + me.getPanelTitle() + &#39;&lt;/b&gt;&#39; +
+                &#39;&lt;i class=&quot;fa fa-times-circle-o fa-2x&quot; &#39; +
+                &#39;style=&quot;position:absolute;right:10px;top:5px;&quot; &#39; +
+                &#39;onclick=&quot;Ext.ComponentQuery.query(&#39; +
+                &#39;\&#39;basigx-panel-mobilewindow[name=&#39; + me.getName() + &#39;]\&#39;)&#39; +
+                &#39;[0].hide();&quot;&gt;&#39; +
+                &#39;&lt;/i&gt;&#39;,
             height: 40,
-            docked: 'top',
+            docked: &#39;top&#39;,
             style: {
-                'background-color': 'white'
+                &#39;background-color&#39;: &#39;white&#39;
             }
         });
         me.add(headerPanel);
 
         if (me.getAdditionalItems().length &gt; 0) {
             me.add({
-                xtype: 'panel',
-                layout: 'vbox',
+                xtype: &#39;panel&#39;,
+                layout: &#39;vbox&#39;,
                 items: me.getAdditionalItems()
             });
         }

@@ -23,58 +23,58 @@
  * Note: Only Ext Panels and all subclasses of Ext.panel.Panel may be used in an accordion layout Container.
  *
  *     @example
- *     Ext.create('Ext.panel.Panel', {
- *         title: 'Accordion Layout',
+ *     Ext.create(&#39;Ext.panel.Panel&#39;, {
+ *         title: &#39;Accordion Layout&#39;,
  *         width: 300,
  *         height: 300,
  *         defaults: {
  *             // applied to each contained panel
- *             bodyStyle: 'padding:15px'
+ *             bodyStyle: &#39;padding:15px&#39;
  *         },
  *         layout: {
  *             // layout-specific configs go here
- *             type: 'accordion',
+ *             type: &#39;accordion&#39;,
  *             titleCollapse: false,
  *             animate: true,
  *             activeOnTop: true
  *         },
  *         items: [{
- *             title: 'Panel 1',
- *             html: 'Panel content!'
+ *             title: &#39;Panel 1&#39;,
+ *             html: &#39;Panel content!&#39;
  *         },{
- *             title: 'Panel 2',
- *             html: 'Panel content!'
+ *             title: &#39;Panel 2&#39;,
+ *             html: &#39;Panel content!&#39;
  *         },{
- *             title: 'Panel 3',
- *             html: 'Panel content!'
+ *             title: &#39;Panel 3&#39;,
+ *             html: &#39;Panel content!&#39;
  *         }],
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.layout.container.Accordion', {
-    extend: 'Ext.layout.container.VBox',
-    alias: 'layout.accordion',
-<span id='Ext-layout-container-Accordion-property-type'>    type: 'accordion',
+Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
+    extend: &#39;Ext.layout.container.VBox&#39;,
+    alias: &#39;layout.accordion&#39;,
+<span id='Ext-layout-container-Accordion-property-type'>    type: &#39;accordion&#39;,
 </span>
-    alternateClassName: 'Ext.layout.AccordionLayout',
+    alternateClassName: &#39;Ext.layout.AccordionLayout&#39;,
 
-<span id='Ext-layout-container-Accordion-property-targetCls'>    targetCls: Ext.baseCSSPrefix + 'accordion-layout-ct',
-</span><span id='Ext-layout-container-Accordion-cfg-itemCls'>    itemCls: [Ext.baseCSSPrefix + 'box-item', Ext.baseCSSPrefix + 'accordion-item'],
+<span id='Ext-layout-container-Accordion-property-targetCls'>    targetCls: Ext.baseCSSPrefix + &#39;accordion-layout-ct&#39;,
+</span><span id='Ext-layout-container-Accordion-cfg-itemCls'>    itemCls: [Ext.baseCSSPrefix + &#39;box-item&#39;, Ext.baseCSSPrefix + &#39;accordion-item&#39;],
 </span>
-<span id='Ext-layout-container-Accordion-cfg-align'>    align: 'stretch',
+<span id='Ext-layout-container-Accordion-cfg-align'>    align: &#39;stretch&#39;,
 </span>
 <span id='Ext-layout-container-Accordion-cfg-enableSplitters'>    enableSplitters: false,
 </span>
 <span id='Ext-layout-container-Accordion-cfg-fill'>    /**
 </span>     * @cfg {Boolean} fill
-     * True to adjust the active item's height to fill the available space in the container, false to use the
-     * item's current height, or auto height if not explicitly set.
+     * True to adjust the active item&#39;s height to fill the available space in the container, false to use the
+     * item&#39;s current height, or auto height if not explicitly set.
      */
     fill: true,
 
 <span id='Ext-layout-container-Accordion-cfg-autoWidth'>    /**
 </span>     * @cfg {Boolean} autoWidth
-     * Child Panels have their width actively managed to fit within the accordion's width.
+     * Child Panels have their width actively managed to fit within the accordion&#39;s width.
      * @removed This config is ignored in ExtJS 4
      */
 
@@ -89,7 +89,7 @@ Ext.define('Ext.layout.container.Accordion', {
 
 <span id='Ext-layout-container-Accordion-cfg-hideCollapseTool'>    /**
 </span>     * @cfg {Boolean} hideCollapseTool
-     * True to hide the contained Panels' collapse/expand toggle buttons, false to display them.
+     * True to hide the contained Panels&#39; collapse/expand toggle buttons, false to display them.
      * When set to true, {@link #titleCollapse} is automatically set to true.
      */
     hideCollapseTool: false,
@@ -97,7 +97,7 @@ Ext.define('Ext.layout.container.Accordion', {
 <span id='Ext-layout-container-Accordion-cfg-collapseFirst'>    /**
 </span>     * @cfg {Boolean} collapseFirst
      * True to make sure the collapse/expand toggle button always renders first (to the left of) any other tools
-     * in the contained Panels' title bars, false to render it last. By default, this will use the
+     * in the contained Panels&#39; title bars, false to render it last. By default, this will use the
      * {@link Ext.panel.Panel#collapseFirst} setting on the panel. If the config option is specified on the layout,
      * it will override the panel value.
      */
@@ -135,7 +135,7 @@ Ext.define('Ext.layout.container.Accordion', {
      */
     wrapOver: true,
 
-<span id='Ext-layout-container-Accordion-property-panelCollapseMode'>    panelCollapseMode: 'header',
+<span id='Ext-layout-container-Accordion-property-panelCollapseMode'>    panelCollapseMode: &#39;header&#39;,
 </span>
 <span id='Ext-layout-container-Accordion-property-defaultAnimatePolicy'>    defaultAnimatePolicy: {
 </span>        y: true,
@@ -180,7 +180,7 @@ Ext.define('Ext.layout.container.Accordion', {
             if (!comp.rendered) {
                 // Set up initial properties for Panels in an accordion.
                 comp.isAccordionPanel = true;
-                comp.bodyAriaRole = 'tabpanel';
+                comp.bodyAriaRole = &#39;tabpanel&#39;;
                 comp.accordionWrapOver = me.wrapOver;
                 
                 if (!multi || comp.collapsible !== false) {
@@ -195,38 +195,38 @@ Ext.define('Ext.layout.container.Accordion', {
                         comp.hideCollapseTool = me.hideCollapseTool;
                         comp.titleCollapse = true;
                     } else if (me.titleCollapse &amp;&amp; comp.titleCollapse === undefined) {
-                        // Only force titleCollapse if we don't explicitly
+                        // Only force titleCollapse if we don&#39;t explicitly
                         // set one on the child panel
                         comp.titleCollapse = me.titleCollapse;
                     }
                 }
 
                 comp.hideHeader = comp.width = null;
-                comp.title = comp.title || '&amp;#160;';
-                comp.addBodyCls(Ext.baseCSSPrefix + 'accordion-body');
+                comp.title = comp.title || &#39;&amp;#160;&#39;;
+                comp.addBodyCls(Ext.baseCSSPrefix + &#39;accordion-body&#39;);
 
                 // If only one child Panel is allowed to be expanded
                 // then collapse all except the first one found with collapsed:false
-                // If we have hasExpanded set, we've already done this
+                // If we have hasExpanded set, we&#39;ve already done this
                 if (!multi) {
                     if (expandedItem) {
                         comp.collapsed = expandedItem !== comp;
-                    } else if (comp.hasOwnProperty('collapsed') &amp;&amp; comp.collapsed === false) {
+                    } else if (comp.hasOwnProperty(&#39;collapsed&#39;) &amp;&amp; comp.collapsed === false) {
                         expandedItem = comp;
                     } else {
                         comp.collapsed = true;
                     }
 
                     // If only one child Panel may be expanded, then intercept expand/show requests.
-                    owner.mon(comp, 'show', me.onComponentShow, me);
+                    owner.mon(comp, &#39;show&#39;, me.onComponentShow, me);
                 }
-                // Need to still check this outside multi because we don't want
+                // Need to still check this outside multi because we don&#39;t want
                 // a single item to be able to collapse
-                comp.headerOverCls = Ext.baseCSSPrefix + 'accordion-hd-over';
+                comp.headerOverCls = Ext.baseCSSPrefix + &#39;accordion-hd-over&#39;;
             }
         }
 
-        // If no collapsed:false Panels found, make the first one expanded, only if we're
+        // If no collapsed:false Panels found, make the first one expanded, only if we&#39;re
         // not during an expand/collapse
         if (!me.processing &amp;&amp; !multi) {
             if (!expandedItem) {
@@ -257,7 +257,7 @@ Ext.define('Ext.layout.container.Accordion', {
 <span id='Ext-layout-container-Accordion-method-configureItem'>    configureItem: function(item) {
 </span>        this.callParent(arguments);
 
-        // Accordion headers are immune to dock layout's border-management rules
+        // Accordion headers are immune to dock layout&#39;s border-management rules
         item.ignoreHeaderBorderManagement = true;
 
         // We handle animations for the expand/collapse of items.
@@ -274,16 +274,16 @@ Ext.define('Ext.layout.container.Accordion', {
 </span>        this.callParent(arguments);
         
         // Accordion widgets have the role of tablist along with the attribute
-        // aria-multiselectable=&quot;true&quot; to indicate that it's an accordion
+        // aria-multiselectable=&quot;true&quot; to indicate that it&#39;s an accordion
         // and not just a simple tab panel.
-        // We can't set this role on the panel's main el as this panel may be
+        // We can&#39;t set this role on the panel&#39;s main el as this panel may be
         // a region in a border layout which yields its own set of ARIA attributes.
-        // We also can't set this role on panel's body el, because the panel could be
+        // We also can&#39;t set this role on panel&#39;s body el, because the panel could be
         // a FormPanel that would have role=&quot;form&quot; on the body el, and the tablist
         // needs to be contained within it.
         // innerCt seems to be the most logical choice here.
-        this.innerCt.dom.setAttribute('role', 'tablist');
-        this.innerCt.dom.setAttribute('aria-multiselectable', true);
+        this.innerCt.dom.setAttribute(&#39;role&#39;, &#39;tablist&#39;);
+        this.innerCt.dom.setAttribute(&#39;aria-multiselectable&#39;, true);
         
         this.updatePanelClasses(ownerContext);
     },
@@ -297,18 +297,18 @@ Ext.define('Ext.layout.container.Accordion', {
         for (i = 0; i &lt; ln; i++) {
             child = children[i];
             header = child.header;
-            header.addCls(Ext.baseCSSPrefix + 'accordion-hd');
+            header.addCls(Ext.baseCSSPrefix + &#39;accordion-hd&#39;);
 
             if (siblingCollapsed) {
-                header.removeCls(Ext.baseCSSPrefix + 'accordion-hd-sibling-expanded');
+                header.removeCls(Ext.baseCSSPrefix + &#39;accordion-hd-sibling-expanded&#39;);
             } else {
-                header.addCls(Ext.baseCSSPrefix + 'accordion-hd-sibling-expanded');
+                header.addCls(Ext.baseCSSPrefix + &#39;accordion-hd-sibling-expanded&#39;);
             }
 
             if (i + 1 === ln &amp;&amp; child.collapsed) {
-                header.addCls(Ext.baseCSSPrefix + 'accordion-hd-last-collapsed');
+                header.addCls(Ext.baseCSSPrefix + &#39;accordion-hd-last-collapsed&#39;);
             } else {
-                header.removeCls(Ext.baseCSSPrefix + 'accordion-hd-last-collapsed');
+                header.removeCls(Ext.baseCSSPrefix + &#39;accordion-hd-last-collapsed&#39;);
             }
 
             siblingCollapsed = child.collapsed;
@@ -401,7 +401,7 @@ Ext.define('Ext.layout.container.Accordion', {
 
         me.callParent(arguments);
 
-        if (item.collapseMode === 'placeholder') {
+        if (item.collapseMode === &#39;placeholder&#39;) {
             item.collapseMode = me.panelCollapseMode;
         }
 
@@ -411,7 +411,7 @@ Ext.define('Ext.layout.container.Accordion', {
         // new items are collapsed on entry. The item is also in the collection now,
         // so only collapse it if we have more than 1.
         if (me.layoutCount &amp;&amp; !me.multi &amp;&amp; me.owner.items.getCount() &gt; 1) {
-            // If we get here, we must already have something expanded, so we don't
+            // If we get here, we must already have something expanded, so we don&#39;t
             // want to react here.
             me.processing = true;
             item.collapse();
@@ -446,7 +446,7 @@ Ext.define('Ext.layout.container.Accordion', {
 
             if (!item.hidden) {
                 if (explicitCheck) {
-                    add = item.hasOwnProperty('collapsed') &amp;&amp; item.collapsed === false;
+                    add = item.hasOwnProperty(&#39;collapsed&#39;) &amp;&amp; item.collapsed === false;
                 } else {
                     add = !item.collapsed;
                 }

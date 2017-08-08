@@ -20,7 +20,7 @@
  * and animation. Can be added as an item to any container.
  *
  *     @example
- *     Ext.create('Ext.slider.Single', {
+ *     Ext.create(&#39;Ext.slider.Single&#39;, {
  *         width: 200,
  *         value: 50,
  *         increment: 10,
@@ -31,24 +31,24 @@
  *
  * The class Ext.slider.Single is aliased to Ext.Slider for backwards compatibility.
  */
-Ext.define('Ext.slider.Single', {
-    extend: 'Ext.slider.Multi',
-    alias: ['widget.slider', 'widget.sliderfield'],
+Ext.define(&#39;Ext.slider.Single&#39;, {
+    extend: &#39;Ext.slider.Multi&#39;,
+    alias: [&#39;widget.slider&#39;, &#39;widget.sliderfield&#39;],
     alternateClassName: [
-        'Ext.Slider',
-        'Ext.form.SliderField',
-        'Ext.slider.SingleSlider',
-        'Ext.slider.Slider'
+        &#39;Ext.Slider&#39;,
+        &#39;Ext.form.SliderField&#39;,
+        &#39;Ext.slider.SingleSlider&#39;,
+        &#39;Ext.slider.Slider&#39;
     ],
 
 <span id='Ext-slider-Single-property-defaultBindProperty'>    /**
 </span>     * @inheritdoc
      */
-    defaultBindProperty: 'value',
+    defaultBindProperty: &#39;value&#39;,
 
 <span id='Ext-slider-Single-method-initComponent'>    initComponent: function() {
 </span>        if (this.publishOnComplete) {
-            this.valuePublishEvent = 'changecomplete';
+            this.valuePublishEvent = &#39;changecomplete&#39;;
         }
         this.callParent();
     },
@@ -87,7 +87,7 @@ Ext.define('Ext.slider.Single', {
         // this is to maintain backwards compatibility for sliders with only one thumb. Usually you must pass the thumb
         // index to setValue, but if we only have one thumb we inject the index here first if given the multi-slider
         // signature without the required index. The index will always be 0 for a single slider
-        if (len === 1 || (len &lt;= 3 &amp;&amp; typeof args[1] !== 'number')) {
+        if (len === 1 || (len &lt;= 3 &amp;&amp; typeof args[1] !== &#39;number&#39;)) {
             args = Ext.toArray(args);
             args.unshift(0);
         }
@@ -99,7 +99,7 @@ Ext.define('Ext.slider.Single', {
 </span>     * @private
      */
     getNearest : function(){
-        // Since there's only 1 thumb, it's always the nearest
+        // Since there&#39;s only 1 thumb, it&#39;s always the nearest
         return this.thumbs[0];
     }
 });

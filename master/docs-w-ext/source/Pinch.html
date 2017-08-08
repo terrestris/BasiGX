@@ -18,12 +18,12 @@
   <pre class="prettyprint lang-js"><span id='Ext-event-gesture-Pinch'>/**
 </span> * A event recognizer which knows when you pinch.
  */
-Ext.define('Ext.event.gesture.Pinch', {
-    extend: 'Ext.event.gesture.MultiTouch',
+Ext.define(&#39;Ext.event.gesture.Pinch&#39;, {
+    extend: &#39;Ext.event.gesture.MultiTouch&#39;,
 
 <span id='Ext-event-gesture-Pinch-property-priority'>    priority: 700,
 </span>
-<span id='Ext-event-gesture-Pinch-property-handledEvents'>    handledEvents: ['pinchstart', 'pinch', 'pinchend', 'pinchcancel'],
+<span id='Ext-event-gesture-Pinch-property-handledEvents'>    handledEvents: [&#39;pinchstart&#39;, &#39;pinch&#39;, &#39;pinchend&#39;, &#39;pinchcancel&#39;],
 </span>
 <span id='Ext-dom-Element-event-pinchstart'>    /**
 </span>     * @member Ext.dom.Element
@@ -86,13 +86,13 @@ Ext.define('Ext.event.gesture.Pinch', {
 
                 me.startDistance = distance;
 
-                me.fire('pinchstart', e, {
+                me.fire(&#39;pinchstart&#39;, e, {
                     touches: touches,
                     distance: distance,
                     scale: 1
                 });
             } else {
-                me.fire('pinch', e, {
+                me.fire(&#39;pinch&#39;, e, {
                     touches: touches,
                     distance: distance,
                     scale: distance / me.startDistance
@@ -103,14 +103,14 @@ Ext.define('Ext.event.gesture.Pinch', {
 
 <span id='Ext-event-gesture-Pinch-method-onTouchEnd'>    onTouchEnd: function(e) {
 </span>        if (this.isStarted) {
-            this.fire('pinchend', e);
+            this.fire(&#39;pinchend&#39;, e);
         }
 
         return this.callParent([e]);
     },
 
 <span id='Ext-event-gesture-Pinch-method-onCancel'>    onCancel: function(e) {
-</span>        this.fire('pinchcancel', e, null, true);
+</span>        this.fire(&#39;pinchcancel&#39;, e, null, true);
     },
 
 <span id='Ext-event-gesture-Pinch-method-reset'>    reset: function() {

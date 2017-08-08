@@ -16,7 +16,7 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-data-Validation'>/**
-</span> * This class is used to hold validation errors for a record. The results of the record's
+</span> * This class is used to hold validation errors for a record. The results of the record&#39;s
  * `{@link Ext.data.Model#validators validators}` are stored as the field values of this
  * record. The first failed validation is all that is stored per field unless the Model
  * class has defined a `validationSeparator` config.
@@ -26,8 +26,8 @@
  * @private
  * @since 5.0.0
  */
-Ext.define('Ext.data.Validation', {
-    extend: 'Ext.data.Model',
+Ext.define(&#39;Ext.data.Validation&#39;, {
+    extend: &#39;Ext.data.Model&#39;,
 
 <span id='Ext-data-Validation-property-isValidation'>    isValidation: true,
 </span>
@@ -90,7 +90,7 @@ Ext.define('Ext.data.Validation', {
      * @since 5.0.0
      */
     refresh: function (force) {
-        // If it's an Ext.data.Model instance directly, we can't
+        // If it&#39;s an Ext.data.Model instance directly, we can&#39;t
         // validate it because there can be no fields/validators.
         if (this.isBase) {
             return;

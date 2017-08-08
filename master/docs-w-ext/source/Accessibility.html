@@ -37,8 +37,8 @@
  *
  * @class BasiGX.util.Accessibility
  */
-Ext.define('BasiGX.util.Accessibility', {
-    alternateClassName: 'BasiGX.util.A11y',
+Ext.define(&#39;BasiGX.util.Accessibility&#39;, {
+    alternateClassName: &#39;BasiGX.util.A11y&#39;,
     statics: {
 
 <span id='BasiGX-util-Accessibility-static-method-getHtmlElement'>        /**
@@ -48,16 +48,16 @@ Ext.define('BasiGX.util.Accessibility', {
          *     top-level `&lt;html&gt;`-element.
          */
         getHtmlElement: function() {
-            return Ext.get(Ext.DomQuery.select('html')[0]);
+            return Ext.get(Ext.DomQuery.select(&#39;html&#39;)[0]);
         },
 
 <span id='BasiGX-util-Accessibility-static-method-setHtmlLanguage'>        /**
-</span>         * Sets the 'lang'-attribute of the top-level `&lt;html&gt;`-element to the
+</span>         * Sets the &#39;lang&#39;-attribute of the top-level `&lt;html&gt;`-element to the
          * passed value. This enables screenreaders to pronounce the content
          * of a page better.
          *
          * @param {String} language The language to set. Should be an ISO 639-1
-         *     language code, e.g. `'en'` or `'de'`.
+         *     language code, e.g. `&#39;en&#39;` or `&#39;de&#39;`.
          */
         setHtmlLanguage: function(language) {
             var htmlElem = BasiGX.util.Accessibility.getHtmlElement();
@@ -69,12 +69,12 @@ Ext.define('BasiGX.util.Accessibility', {
 <span id='BasiGX-util-Accessibility-static-method-getHtmlLanguage'>        /**
 </span>         * Returns the `lang`-attribute of the top-level `&lt;html&gt;`-element.
          *
-         * @return {String} The value of the lang attribute, e.g. 'en'.
+         * @return {String} The value of the lang attribute, e.g. &#39;en&#39;.
          */
         getHtmlLanguage: function() {
             var htmlElem = BasiGX.util.Accessibility.getHtmlElement();
-            var lang = htmlElem &amp;&amp; htmlElem.getAttribute('lang');
-            return lang || '';
+            var lang = htmlElem &amp;&amp; htmlElem.getAttribute(&#39;lang&#39;);
+            return lang || &#39;&#39;;
         }
 
     }

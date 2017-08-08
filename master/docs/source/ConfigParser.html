@@ -415,7 +415,7 @@
  *       }
  *     }
  */
-Ext.define('BasiGX.util.ConfigParser', {
+Ext.define(&#39;BasiGX.util.ConfigParser&#39;, {
 
     autocreateLegends: false,
 
@@ -442,7 +442,7 @@ Ext.define('BasiGX.util.ConfigParser', {
 
             if (!context || !context.data || !context.data.merge ||
                 !context.data.merge.mapConfig) {
-                Ext.log.warn('Invalid context given to configParser!');
+                Ext.log.warn(&#39;Invalid context given to configParser!&#39;);
                 return null;
             }
 
@@ -450,9 +450,9 @@ Ext.define('BasiGX.util.ConfigParser', {
             me.appContext = config;
 
             // TODO Refactor
-            if (window.location.hash.indexOf('center') &gt; 0) {
-                var centerString = location.hash.split('center/')[1].
-                    split('|')[0];
+            if (window.location.hash.indexOf(&#39;center&#39;) &gt; 0) {
+                var centerString = location.hash.split(&#39;center/&#39;)[1].
+                    split(&#39;|&#39;)[0];
                 config.startCenter = centerString;
             }
 
@@ -460,14 +460,14 @@ Ext.define('BasiGX.util.ConfigParser', {
                 controls: [new ol.control.ScaleLine()], // TODO add attribution
                 view: new ol.View({
                     center: this.convertStringToNumericArray(
-                        'int', config.startCenter),
+                        &#39;int&#39;, config.startCenter),
                     zoom: config.startZoom || 2,
                     maxResolution: config.maxResolution,
                     minResolution: config.minResolution,
-                    projection: config.mapConfig.projection || 'EPSG:3857',
-                    units: 'm',
+                    projection: config.mapConfig.projection || &#39;EPSG:3857&#39;,
+                    units: &#39;m&#39;,
                     resolutions: me.convertStringToNumericArray(
-                        'float', config.mapConfig.resolutions)
+                        &#39;float&#39;, config.mapConfig.resolutions)
                 }),
                 logo: false
             });
@@ -490,21 +490,21 @@ Ext.define('BasiGX.util.ConfigParser', {
          */
         createLayer: function(layer) {
             var me = this;
-            var layerType = 'Image';
-            var sourceType = 'ImageWMS';
+            var layerType = &#39;Image&#39;;
+            var sourceType = &#39;ImageWMS&#39;;
 
-            if (layer.type === 'TileWMS' || layer.type === 'WMS') {
-                layerType = 'Tile';
-                sourceType = 'TileWMS';
-            } else if (layer.type === 'XYZ') {
-                layerType = 'Tile';
-                sourceType = 'XYZ';
-            } else if (layer.type === 'WFSCluster' || layer.type === 'WFS') {
-                layerType = 'Vector';
-                sourceType = 'Vector';
-            } else if (layer.type === 'WMTS') {
-                layerType = 'WMTS';
-                sourceType = 'WMTS';
+            if (layer.type === &#39;TileWMS&#39; || layer.type === &#39;WMS&#39;) {
+                layerType = &#39;Tile&#39;;
+                sourceType = &#39;TileWMS&#39;;
+            } else if (layer.type === &#39;XYZ&#39;) {
+                layerType = &#39;Tile&#39;;
+                sourceType = &#39;XYZ&#39;;
+            } else if (layer.type === &#39;WFSCluster&#39; || layer.type === &#39;WFS&#39;) {
+                layerType = &#39;Vector&#39;;
+                sourceType = &#39;Vector&#39;;
+            } else if (layer.type === &#39;WMTS&#39;) {
+                layerType = &#39;WMTS&#39;;
+                sourceType = &#39;WMTS&#39;;
             }
 
             var source = me.getSourceForType(layer, sourceType);
@@ -529,7 +529,7 @@ Ext.define('BasiGX.util.ConfigParser', {
             var attributions = config.attribution ?
                 [new ol.Attribution({html: config.attribution})] : undefined;
 
-            if (sourceType === 'Vector') {
+            if (sourceType === &#39;Vector&#39;) {
 
                 // The wfscluster type expects a geoserver view similar
                 // as described on https://wiki.intranet.terrestris.de/doku.php
@@ -538,7 +538,7 @@ Ext.define('BasiGX.util.ConfigParser', {
                 // There is currently no way in ol3 to request features on
                 // every extent change, so we need to handle it ourselves with
                 // map listeners, which happens in the cluster plugin
-                if (config.type === 'WFSCluster') {
+                if (config.type === &#39;WFSCluster&#39;) {
                     cfg = {
                         attributions: attributions
                     };
@@ -551,18 +551,18 @@ Ext.define('BasiGX.util.ConfigParser', {
                             var extraParams = {};
 
                             var finalParams = Ext.apply({
-                                service: 'WFS',
-                                version: '1.1.0',
-                                request: 'GetFeature',
-                                outputFormat: 'application/json',
+                                service: &#39;WFS&#39;,
+                                version: &#39;1.1.0&#39;,
+                                request: &#39;GetFeature&#39;,
+                                outputFormat: &#39;application/json&#39;,
                                 typeName: config.layers,
                                 srsname: projCode,
-                                bbox: extent.join(',') + ',' + projCode
+                                bbox: extent.join(&#39;,&#39;) + &#39;,&#39; + projCode
                             }, extraParams || {});
 
                             Ext.Ajax.request({
                                 url: config.url,
-                                method: 'GET',
+                                method: &#39;GET&#39;,
                                 params: finalParams,
                                 success: function(response) {
                                     var format = new ol.format.GeoJSON();
@@ -572,8 +572,8 @@ Ext.define('BasiGX.util.ConfigParser', {
                                     vectorSource.addFeatures(features);
                                 },
                                 failure: function(response) {
-                                    var msg = 'server-side failure with ' +
-                                        'status code ' + response.status;
+                                    var msg = &#39;server-side failure with &#39; +
+                                        &#39;status code &#39; + response.status;
                                     Ext.log.info(msg);
                                 }
                             });
@@ -586,10 +586,10 @@ Ext.define('BasiGX.util.ConfigParser', {
                         )
                     };
                 }
-            } else if (sourceType === 'TileWMS' ||
-                       sourceType === 'WMS' ||
-                       sourceType === 'ImageWMS' ||
-                       sourceType === 'XYZ') {
+            } else if (sourceType === &#39;TileWMS&#39; ||
+                       sourceType === &#39;WMS&#39; ||
+                       sourceType === &#39;ImageWMS&#39; ||
+                       sourceType === &#39;XYZ&#39;) {
 
                 cfg = {
                     url: config.url,
@@ -598,7 +598,7 @@ Ext.define('BasiGX.util.ConfigParser', {
                     params: {
                         LAYERS: config.layers,
                         TRANSPARENT: config.transparent || true,
-                        VERSION: config.version || '1.1.1'
+                        VERSION: config.version || &#39;1.1.1&#39;
                     }
                 };
 
@@ -606,22 +606,22 @@ Ext.define('BasiGX.util.ConfigParser', {
                 if (me.appContext &amp;&amp;
                     me.appContext.mapConfig &amp;&amp;
                     me.appContext.mapConfig.resolutions &amp;&amp;
-                    (config.type === 'TileWMS' || config.type === 'XYZ') &amp;&amp;
+                    (config.type === &#39;TileWMS&#39; || config.type === &#39;XYZ&#39;) &amp;&amp;
                     config.tileGrid === undefined) {
                     cfg.tileGrid = new ol.tilegrid.TileGrid({
                         extent: map.getView().getProjection().getExtent(),
                         resolutions: me.convertStringToNumericArray(
-                            'float', me.appContext.mapConfig.resolutions)
+                            &#39;float&#39;, me.appContext.mapConfig.resolutions)
                     });
                 }
 
-                if ((config.type === 'TileWMS' ||
-                     config.type === 'WMS' ||
-                     config.type === 'XYZ') &amp;&amp; config.tiled) {
+                if ((config.type === &#39;TileWMS&#39; ||
+                     config.type === &#39;WMS&#39; ||
+                     config.type === &#39;XYZ&#39;) &amp;&amp; config.tiled) {
                     cfg.params.TILED = true;
                 }
 
-            } else if (sourceType === 'WMTS') {
+            } else if (sourceType === &#39;WMTS&#39;) {
                 var tileGrid;
                 // we simply assume it is a worldwide layer
                 var origin = ol.extent.getTopLeft(projection.getExtent());
@@ -669,7 +669,7 @@ Ext.define('BasiGX.util.ConfigParser', {
         getLayerForType: function(layer, layerType, source) {
 
             var olLayerConfig = {
-                name: layer.name || 'No Name given',
+                name: layer.name || &#39;No Name given&#39;,
                 legendUrl: layer.legendUrl || (this.autocreateLegends ?
                     this.generateLegendUrl(layer) : null),
                 legendHeight: layer.legendHeight || null,
@@ -687,9 +687,9 @@ Ext.define('BasiGX.util.ConfigParser', {
                 featureType: layer.layers
             };
 
-            // We don't require the hover plugin class to allow for smaller
+            // We don&#39;t require the hover plugin class to allow for smaller
             // builds
-            if ('plugin' in BasiGX &amp;&amp; 'Hover' in BasiGX.plugin) {
+            if (&#39;plugin&#39; in BasiGX &amp;&amp; &#39;Hover&#39; in BasiGX.plugin) {
                 var hoverCls = BasiGX.plugin.Hover;
                 var hoverableProp = hoverCls.LAYER_HOVERABLE_PROPERTY_NAME;
                 var hoverfieldProp = hoverCls.LAYER_HOVERFIELD_PROPERTY_NAME;
@@ -704,13 +704,13 @@ Ext.define('BasiGX.util.ConfigParser', {
             }
 
             // TODO Refactor ... Do we need an icon or a color...
-            if (layer.type === 'WFSCluster') {
+            if (layer.type === &#39;WFSCluster&#39;) {
                 if (!layer.clusterColorString) {
                     var r = Math.round(Math.random() * 255, 10).toString();
                     var g = Math.round(Math.random() * 255, 10).toString();
                     var b = Math.round(Math.random() * 255, 10).toString();
                     olLayerConfig.clusterColorString =
-                        'rgba(' + r + ',' + g + ',' + b + ',0.5)';
+                        &#39;rgba(&#39; + r + &#39;,&#39; + g + &#39;,&#39; + b + &#39;,0.5)&#39;;
                 } else {
                     olLayerConfig.clusterColorString = layer.clusterColorString;
                 }
@@ -751,7 +751,7 @@ Ext.define('BasiGX.util.ConfigParser', {
 
             if (!context || !context.data || !context.data.merge ||
                 !context.data.merge.mapLayers) {
-                Ext.log.warn('Invalid context given to configParser!');
+                Ext.log.warn(&#39;Invalid context given to configParser!&#39;);
                 return;
             }
 
@@ -781,7 +781,7 @@ Ext.define('BasiGX.util.ConfigParser', {
 
             Ext.each(layerConfig, function(node) {
 
-                if (node.type === 'Folder') {
+                if (node.type === &#39;Folder&#39;) {
                     var folder = me.createFolder(node);
 
                     if (parent) {
@@ -826,11 +826,11 @@ Ext.define('BasiGX.util.ConfigParser', {
                 } else if (node.leaf === false) {
                     // handling folders
                     var folder = me.createFolder(node);
-                    folder.set('expanded', node.expanded);
+                    folder.set(&#39;expanded&#39;, node.expanded);
 
                     if (group) {
                         group.getLayers().push(folder);
-                        folder.set('parentFolder', parent);
+                        folder.set(&#39;parentFolder&#39;, parent);
                     } else {
                         me.layerArray.push(folder);
                     }
@@ -858,11 +858,11 @@ Ext.define('BasiGX.util.ConfigParser', {
                             me.createLayer(mergedNode)
                         );
                         if (node.checked) {
-                            group.set('visible', true);
-                            var nextParent = parent.get('parentFolder');
+                            group.set(&#39;visible&#39;, true);
+                            var nextParent = parent.get(&#39;parentFolder&#39;);
                             while (nextParent) {
-                                nextParent.set('visible', true);
-                                nextParent = nextParent.get('parentFolder');
+                                nextParent.set(&#39;visible&#39;, true);
+                                nextParent = nextParent.get(&#39;parentFolder&#39;);
                             }
                         }
                     } else {
@@ -900,20 +900,20 @@ Ext.define('BasiGX.util.ConfigParser', {
          */
         convertStringToNumericArray: function(type, string) {
             if (Ext.isEmpty(string) || Ext.isEmpty(type)) {
-                Ext.log.warn('Cannot convert string to numeric array. Passed ' +
-                    'type was: ' + type + '; Passed string was: ' + string);
+                Ext.log.warn(&#39;Cannot convert string to numeric array. Passed &#39; +
+                    &#39;type was: &#39; + type + &#39;; Passed string was: &#39; + string);
                 return string;
             }
             if (Ext.isArray(string)) {
-                Ext.log.warn('Passed array instead of string to convert to ' +
-                    ' array of ' + type + '. Returning input array unchanged.');
+                Ext.log.warn(&#39;Passed array instead of string to convert to &#39; +
+                    &#39; array of &#39; + type + &#39;. Returning input array unchanged.&#39;);
                 return string;
             }
             var arr = [];
-            Ext.each(string.split(','), function(part) {
-                if (type === 'int') {
+            Ext.each(string.split(&#39;,&#39;), function(part) {
+                if (type === &#39;int&#39;) {
                     arr.push(parseInt(part, 10));
-                } else if (type === 'float') {
+                } else if (type === &#39;float&#39;) {
                     arr.push(parseFloat(part, 10));
                 }
             });
@@ -929,9 +929,9 @@ Ext.define('BasiGX.util.ConfigParser', {
          */
         generateLegendUrl: function(layer) {
             var url = layer.url;
-            url += '?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;';
-            url += 'FORMAT=image%2Fpng&amp;TRANSPARENT=TRUE&amp;';
-            url += 'LAYER=' + layer.layers;
+            url += &#39;?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;&#39;;
+            url += &#39;FORMAT=image%2Fpng&amp;TRANSPARENT=TRUE&amp;&#39;;
+            url += &#39;LAYER=&#39; + layer.layers;
             // HEIGHT=128&amp;WIDTH=40&amp; could be added.
             return url;
         }

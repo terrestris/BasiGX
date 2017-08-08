@@ -18,20 +18,20 @@
   <pre class="prettyprint lang-js"><span id='Ext-app-domain-Direct'>/**
 </span> * This class implements the Ext Direct event domain. All classes extending from
  * {@link Ext.direct.Provider} are included in this domain. The selectors are simply provider
- * id's or the wildcard &quot;*&quot; to match any provider.
+ * id&#39;s or the wildcard &quot;*&quot; to match any provider.
  *
  * @private
  */
-Ext.define('Ext.app.domain.Direct', {
-    extend: 'Ext.app.EventDomain',
+Ext.define(&#39;Ext.app.domain.Direct&#39;, {
+    extend: &#39;Ext.app.EventDomain&#39;,
     singleton: true,
     
     requires: [
-        'Ext.direct.Provider'
+        &#39;Ext.direct.Provider&#39;
     ],
     
-<span id='Ext-app-domain-Direct-property-type'>    type: 'direct',
-</span><span id='Ext-app-domain-Direct-cfg-idProperty'>    idProperty: 'id',
+<span id='Ext-app-domain-Direct-property-type'>    type: &#39;direct&#39;,
+</span><span id='Ext-app-domain-Direct-cfg-idProperty'>    idProperty: &#39;id&#39;,
 </span>    
 <span id='Ext-app-domain-Direct-method-constructor'>    constructor: function() {
 </span>        var me = this;

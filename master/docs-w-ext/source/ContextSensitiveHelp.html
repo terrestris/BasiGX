@@ -52,18 +52,18 @@
  *
  * @class BasiGX.ux.ContextSensitiveHelp
  */
-Ext.define('BasiGX.ux.ContextSensitiveHelp', {
+Ext.define(&#39;BasiGX.ux.ContextSensitiveHelp&#39;, {
 
-    extend: 'Ext.Component',
+    extend: &#39;Ext.Component&#39;,
 
     requires: [
-        'BasiGX.util.Demonstration'
+        &#39;BasiGX.util.Demonstration&#39;
     ],
 
 <span id='BasiGX-ux-ContextSensitiveHelp-cfg-viewModel'>    viewModel: {
 </span>        data: {
-            title: 'Help',
-            demoButtonText: 'Demo'
+            title: &#39;Help&#39;,
+            demoButtonText: &#39;Demo&#39;
         }
     },
 
@@ -71,7 +71,7 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
 </span>     * The base URL of the help HTML which contains named anchors as defined
      * in #existingHelpKeys.
      */
-    helpUrl: '../help/index.html',
+    helpUrl: &#39;../help/index.html&#39;,
 
 <span id='BasiGX-ux-ContextSensitiveHelp-property-getHelpFromComponent'>    /**
 </span>     * Flag to enable the usage of the key `documentation`, which holds
@@ -86,22 +86,22 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
      * to add all existing keys to this list.
      */
     existingHelpKeys: [
-        'basigx-button-help',
-        'basigx-button-zoomin',
-        'basigx-button-zoomout',
-        'basigx-button-zoomtoextent',
-        'basigx-button-togglelegend',
-        'basigx-overview-map-button',
-        'basigx-button-addwms',
-        'basigx-button-measure',
-        'basigx-button-coordinatetransform',
-        'basigx-button-permalink',
-        'basigx-combo-scale',
-        'basigx-button-hsi',
-        'basigx-overview-map-button',
-        'basigx-panel-layersetchooser',
-        'basigx-form-print',
-        'basigx-container-overpasssearch'
+        &#39;basigx-button-help&#39;,
+        &#39;basigx-button-zoomin&#39;,
+        &#39;basigx-button-zoomout&#39;,
+        &#39;basigx-button-zoomtoextent&#39;,
+        &#39;basigx-button-togglelegend&#39;,
+        &#39;basigx-overview-map-button&#39;,
+        &#39;basigx-button-addwms&#39;,
+        &#39;basigx-button-measure&#39;,
+        &#39;basigx-button-coordinatetransform&#39;,
+        &#39;basigx-button-permalink&#39;,
+        &#39;basigx-combo-scale&#39;,
+        &#39;basigx-button-hsi&#39;,
+        &#39;basigx-overview-map-button&#39;,
+        &#39;basigx-panel-layersetchooser&#39;,
+        &#39;basigx-form-print&#39;,
+        &#39;basigx-container-overpasssearch&#39;
     ],
 
     /* begin i18n */
@@ -109,13 +109,13 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
 <span id='BasiGX-ux-ContextSensitiveHelp-property-warnPopupBlockerTitle'>    /**
 </span>     * Title for the warning when a popup blocker is active.
      */
-    warnPopupBlockerTitle: 'Warnung',
+    warnPopupBlockerTitle: &#39;Warnung&#39;,
 
 <span id='BasiGX-ux-ContextSensitiveHelp-property-warnPopupBlockerContent'>    /**
 </span>     * Content of the warning when a popup blocker is active.
      */
-    warnPopupBlockerContent: 'Bitte deaktivieren Sie etwaige ' +
-        'Popup-Blocker,um die Hilfe anzuzeigen.',
+    warnPopupBlockerContent: &#39;Bitte deaktivieren Sie etwaige &#39; +
+        &#39;Popup-Blocker,um die Hilfe anzuzeigen.&#39;,
 
     /* end i18n */
 
@@ -156,7 +156,7 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
 </span>     * Bubbles up the component hierarchy until it finds one component for
      * which we have a help.
      *
-     * @param {Ext.component} component The component from which we'll
+     * @param {Ext.component} component The component from which we&#39;ll
      *     bubble up until we find one that we have help for.
      * @return {Ext.component} The found component.
      */
@@ -202,20 +202,20 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
             // If a liveDemoConfig is given, we will render a demo button
             // to demonstrate the usage of the component
             if (component.getViewModel &amp;&amp; component.getViewModel()) {
-                var doc = component.getViewModel().get('documentation');
+                var doc = component.getViewModel().get(&#39;documentation&#39;);
                 if (!Ext.isEmpty(doc)) {
                     var exisitingWin = Ext.ComponentQuery.query(
-                            'window[name=contextsensitivehelp]')[0];
+                            &#39;window[name=contextsensitivehelp]&#39;)[0];
                     if (exisitingWin) {
                         exisitingWin.setHtml(doc);
-                        exisitingWin.setTitle(me.getViewModel().get('title'));
-                        exisitingWin.down('button[name=demo]').setHidden(
+                        exisitingWin.setTitle(me.getViewModel().get(&#39;title&#39;));
+                        exisitingWin.down(&#39;button[name=demo]&#39;).setHidden(
                             !component.liveDemoConfig);
                         exisitingWin.liveDemoConfig = component.liveDemoConfig;
                     } else {
-                        Ext.create('Ext.window.Window', {
-                            title: me.getViewModel().get('title'),
-                            name: 'contextsensitivehelp',
+                        Ext.create(&#39;Ext.window.Window&#39;, {
+                            title: me.getViewModel().get(&#39;title&#39;),
+                            name: &#39;contextsensitivehelp&#39;,
                             width: 500,
                             height: 400,
                             scrollable: true,
@@ -223,9 +223,9 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
                             html: doc,
                             liveDemoConfig: component.liveDemoConfig,
                             items: [{
-                                xtype: 'button',
-                                name: 'demo',
-                                text: me.getViewModel().get('demoButtonText'),
+                                xtype: &#39;button&#39;,
+                                name: &#39;demo&#39;,
+                                text: me.getViewModel().get(&#39;demoButtonText&#39;),
                                 hidden: component.liveDemoConfig ? false : true,
                                 handler: function(btn) {
                                     BasiGX.util.Demonstration.demo(
@@ -244,12 +244,12 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
             var win;
 
             if (helpKey) {
-                helpUrl += '#' + helpKey;
+                helpUrl += &#39;#&#39; + helpKey;
             }
-            win = window.open(helpUrl, 'ContextSensitiveHelp',
-                'width=800,height=550,scrollbars=yes,left=200,top=150,' +
-                'resizable=yes,location=yes,menubar=no,status=no,' +
-                'dependent=yes');
+            win = window.open(helpUrl, &#39;ContextSensitiveHelp&#39;,
+                &#39;width=800,height=550,scrollbars=yes,left=200,top=150,&#39; +
+                &#39;resizable=yes,location=yes,menubar=no,status=no,&#39; +
+                &#39;dependent=yes&#39;);
 
             if (win) {
                 win.focus();
@@ -272,7 +272,7 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
     setContextHelp: function(additionalHelpKeys) {
         var me = this;
         var size = Ext.getBody().getSize();
-        var helpDom = document.createElement('div');
+        var helpDom = document.createElement(&#39;div&#39;);
         var helpLayer = Ext.get(helpDom);
 
         if (additionalHelpKeys) {
@@ -286,12 +286,12 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
 
         helpLayer.setSize(size);
         helpLayer.setStyle({
-            'cursor': 'help',
-            'position': 'absolute'
+            &#39;cursor&#39;: &#39;help&#39;,
+            &#39;position&#39;: &#39;absolute&#39;
         });
         helpLayer.setZIndex(20000);
 
-        helpLayer.on('click', function(clickEvent) {
+        helpLayer.on(&#39;click&#39;, function(clickEvent) {
             var point = Ext.util.Point.fromEvent(clickEvent);
             me.helpLayer.destroy();
             me.displayHelpForCoordinates(point);

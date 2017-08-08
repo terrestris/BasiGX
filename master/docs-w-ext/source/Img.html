@@ -23,33 +23,33 @@
  *
  * ## Example usage:
  *
- *     var changingImage = Ext.create('Ext.Img', {
- *         src: 'http://www.sencha.com/img/20110215-feat-html5.png',
+ *     var changingImage = Ext.create(&#39;Ext.Img&#39;, {
+ *         src: &#39;http://www.sencha.com/img/20110215-feat-html5.png&#39;,
  *         width: 184,
  *         height: 90,
  *         renderTo: Ext.getBody()
  *     });
  *
  *     // change the src of the image programmatically
- *     changingImage.setSrc('http://www.sencha.com/img/20110215-feat-perf.png');
+ *     changingImage.setSrc(&#39;http://www.sencha.com/img/20110215-feat-perf.png&#39;);
  *
- * By default, only an img element is rendered and that is this component's primary
+ * By default, only an img element is rendered and that is this component&#39;s primary
  * {@link Ext.Component#getEl element}. If the {@link Ext.Component#autoEl} property
- * is other than 'img' (the default), the a child img element will be added to the primary
+ * is other than &#39;img&#39; (the default), the a child img element will be added to the primary
  * element. This can be used to create a wrapper element around the img.
  *
  * ## Wrapping the img in a div:
  *
- *     var wrappedImage = Ext.create('Ext.Img', {
- *         src: 'http://www.sencha.com/img/20110215-feat-html5.png',
- *         autoEl: 'div', // wrap in a div
+ *     var wrappedImage = Ext.create(&#39;Ext.Img&#39;, {
+ *         src: &#39;http://www.sencha.com/img/20110215-feat-html5.png&#39;,
+ *         autoEl: &#39;div&#39;, // wrap in a div
  *         renderTo: Ext.getBody()
  *     });
  *
  * ## Using a glyph
  *
- *     var glyphImage = Ext.create('Ext.Img', {
- *         glyph: 'xf015@FontAwesome',     // the &quot;home&quot; icon
+ *     var glyphImage = Ext.create(&#39;Ext.Img&#39;, {
+ *         glyph: &#39;xf015@FontAwesome&#39;,     // the &quot;home&quot; icon
  *         renderTo: Ext.getBody()
  *     });
  *
@@ -59,16 +59,16 @@
  * container.  By omitting dimensions, an owning container will not know how to 
  * size and position the image in the initial layout.
  */
-Ext.define('Ext.Img', {
-    extend: 'Ext.Component',
-    alias: ['widget.image', 'widget.imagecomponent'],
+Ext.define(&#39;Ext.Img&#39;, {
+    extend: &#39;Ext.Component&#39;,
+    alias: [&#39;widget.image&#39;, &#39;widget.imagecomponent&#39;],
     requires: [
-        'Ext.Glyph'
+        &#39;Ext.Glyph&#39;
     ],
 
-<span id='Ext-Img-cfg-autoEl'>    autoEl: 'img',
+<span id='Ext-Img-cfg-autoEl'>    autoEl: &#39;img&#39;,
 </span>
-<span id='Ext-Img-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'img',
+<span id='Ext-Img-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;img&#39;,
 </span>
     config: {
 <span id='Ext-Img-cfg-src'>        /**
@@ -89,19 +89,19 @@ Ext.define('Ext.Img', {
 </span>     * @cfg {String} alt
      * The descriptive text for non-visual UI description.
      */
-    alt: '',
+    alt: &#39;&#39;,
 
 <span id='Ext-Img-cfg-title'>    /**
 </span>     * @cfg {String} title
      * Specifies addtional information about the image.
      */
-    title: '',
+    title: &#39;&#39;,
 
 <span id='Ext-Img-cfg-imgCls'>    /**
 </span>     * @cfg {String} imgCls
      * Optional CSS classes to add to the img element.
      */
-    imgCls: '',
+    imgCls: &#39;&#39;,
 
 <span id='Ext-Img-cfg-glyph'>    /**
 </span>     * @cfg {Number/String} glyph
@@ -110,7 +110,7 @@ Ext.define('Ext.Img', {
      * for the given character code.  The default font-family for glyphs can be set
      * globally using {@link Ext#setGlyphFontFamily Ext.setGlyphFontFamily()}. Alternatively,
      * this config option accepts a string with the charCode and font-family separated by
-     * the `@` symbol. For example '65@My Font Family'.
+     * the `@` symbol. For example &#39;65@My Font Family&#39;.
      */
     
     maskOnDisable: false,
@@ -128,31 +128,31 @@ Ext.define('Ext.Img', {
 
         // We were configured with a glyph, then this is a div with a single char content
         if (glyph) {
-            config.tag = 'div';
+            config.tag = &#39;div&#39;;
             config.html = glyph.character;
             config.style = config.style || {};
             config.style.fontFamily = glyph.fontFamily;
             
             // A glyph is a graphic which is not an &lt;img&gt; tag so it should have
             // the corresponding role for Accessibility interface to recognize
-            config.role = 'img';
+            config.role = &#39;img&#39;;
         }
         // The default; an img element
-        else if (autoEl === 'img' || (Ext.isObject(autoEl) &amp;&amp; autoEl.tag === 'img')) {
+        else if (autoEl === &#39;img&#39; || (Ext.isObject(autoEl) &amp;&amp; autoEl.tag === &#39;img&#39;)) {
             img = config;
         }
         // It is sometimes helpful (like in a panel header icon) to have the img wrapped
-        // by a div. If our autoEl is not 'img' then we just add an img child to the el.
+        // by a div. If our autoEl is not &#39;img&#39; then we just add an img child to the el.
         else {
             config.cn = [img = {
-                tag: 'img',
-                id: me.id + '-img'
+                tag: &#39;img&#39;,
+                id: me.id + &#39;-img&#39;
             }];
         }
 
         if (img) {
             if (me.imgCls) {
-                img.cls = (img.cls ? img.cls + ' ' : '') + me.imgCls;
+                img.cls = (img.cls ? img.cls + &#39; &#39; : &#39;&#39;) + me.imgCls;
             }
 
             img.src = me.src || Ext.BLANK_IMAGE_URL;
@@ -162,15 +162,15 @@ Ext.define('Ext.Img', {
             (img || config).alt = me.alt;
         }
         else {
-            // Images that do not have alt attribute can't be properly announced
+            // Images that do not have alt attribute can&#39;t be properly announced
             // by screen readers. In best case they will be silently skipped;
             // in worst case screen reader will announce data url. Yes, that very long
             // base-64 encoded string. :/
             // That will make the application totally unusable for blind people.
-            (img || config).alt = '';
+            (img || config).alt = &#39;&#39;;
             
             //&lt;debug&gt;
-            Ext.log.warn('For WAI-ARIA compliance, IMG elements SHOULD have an alt attribute.');
+            Ext.log.warn(&#39;For WAI-ARIA compliance, IMG elements SHOULD have an alt attribute.&#39;);
             //&lt;/debug&gt;
         }
 
@@ -190,10 +190,10 @@ Ext.define('Ext.Img', {
 
         el = me.el;
         
-        if (autoEl === 'img' || (Ext.isObject(autoEl) &amp;&amp; autoEl.tag === 'img')) {
+        if (autoEl === &#39;img&#39; || (Ext.isObject(autoEl) &amp;&amp; autoEl.tag === &#39;img&#39;)) {
             me.imgEl = el;
         } else {
-            me.imgEl = el.getById(me.id + '-img');
+            me.imgEl = el.getById(me.id + &#39;-img&#39;);
         }
     },
 
@@ -223,10 +223,10 @@ Ext.define('Ext.Img', {
         var me = this,
             imgEl = me.imgEl;
 
-        me.title = title || '';
+        me.title = title || &#39;&#39;;
 
         if (imgEl) {
-            imgEl.dom.title = title || '';
+            imgEl.dom.title = title || &#39;&#39;;
         }
     },
 
@@ -236,10 +236,10 @@ Ext.define('Ext.Img', {
                 
         // If we have our height set, then size the glyph as requested to make image scalable.
         if ((heightModel.calculated || heightModel.configured) &amp;&amp; height &amp;&amp; this.glyph) {
-            h = height + 'px';
+            h = height + &#39;px&#39;;
             this.setStyle({
-                'line-height': h,
-                'font-size': h
+                &#39;line-height&#39;: h,
+                &#39;font-size&#39;: h
             });
         }
         this.callParent([width, height, oldWidth, oldHeight]);
@@ -257,10 +257,10 @@ Ext.define('Ext.Img', {
         var me = this,
             imgEl = me.imgEl;
 
-        me.alt = alt || '';
+        me.alt = alt || &#39;&#39;;
 
         if (imgEl) {
-            imgEl.dom.alt = alt || '';
+            imgEl.dom.alt = alt || &#39;&#39;;
         }
     },
 
@@ -296,7 +296,7 @@ Ext.define('Ext.Img', {
 
                 // As long as the width/height styles are &quot;auto&quot;, the IMG dom element
                 // will have &quot;width&quot; and &quot;height&quot; properties that are the natural size.
-                style.width = style.height = 'auto';
+                style.width = style.height = &#39;auto&#39;;
 
                 naturalSize.width = img.width;
                 naturalSize.height = img.height;

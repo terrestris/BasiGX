@@ -18,16 +18,16 @@
   <pre class="prettyprint lang-js"><span id='Ext-drag-proxy-Placeholder'>/**
 </span> * A drag proxy that creates a new element to follow the cursor.
  */
-Ext.define('Ext.drag.proxy.Placeholder', {
-    extend: 'Ext.drag.proxy.None',
-    alias: 'drag.proxy.placeholder',
+Ext.define(&#39;Ext.drag.proxy.Placeholder&#39;, {
+    extend: &#39;Ext.drag.proxy.None&#39;,
+    alias: &#39;drag.proxy.placeholder&#39;,
 
     config: {
 <span id='Ext-drag-proxy-Placeholder-cfg-cls'>        /**
 </span>         * @cfg {String} cls
          * A class for this proxy.
          */
-        cls: '',
+        cls: &#39;&#39;,
 
 <span id='Ext-drag-proxy-Placeholder-cfg-cursorOffset'>        /**
 </span>         * @cfg {Number[]} cursorOffset
@@ -47,17 +47,17 @@ Ext.define('Ext.drag.proxy.Placeholder', {
          * A class to add to this proxy when over an
          * invalid {@link Ext.drag.Target target}.
          */
-        invalidCls: '',
+        invalidCls: &#39;&#39;,
 
 <span id='Ext-drag-proxy-Placeholder-cfg-validCls'>        /**
 </span>         * @cfg {String} validCls
          * A class to add to this proxy when over a
          * valid {@link Ext.drag.Target target}.
          */
-        validCls: ''
+        validCls: &#39;&#39;
     },
 
-<span id='Ext-drag-proxy-Placeholder-property-placeholderCls'>    placeholderCls: Ext.baseCSSPrefix + 'drag-proxy-placeholder',
+<span id='Ext-drag-proxy-Placeholder-property-placeholderCls'>    placeholderCls: Ext.baseCSSPrefix + &#39;drag-proxy-placeholder&#39;,
 </span>
 <span id='Ext-drag-proxy-Placeholder-method-cleanup'>    /**
 </span>     * @inheritdoc
@@ -128,7 +128,7 @@ Ext.define('Ext.drag.proxy.Placeholder', {
 <span id='Ext-drag-proxy-Placeholder-method-updateHtml'>    updateHtml: function(html) {
 </span>        var el = this.element;
         if (el) {
-            el.setHtml(html || '');
+            el.setHtml(html || &#39;&#39;);
         }
     },
 

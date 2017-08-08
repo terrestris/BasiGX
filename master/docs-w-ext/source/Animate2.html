@@ -33,7 +33,7 @@
  * You may use the defaults for easing and duration, but you must always set a
  * {@link Ext.fx.Anim#to to} property which is the end value for all animations.
  *
- * Popular element 'to' configurations are:
+ * Popular element &#39;to&#39; configurations are:
  *
  *  - opacity
  *  - x
@@ -42,7 +42,7 @@
  *  - height
  *  - width
  *
- * Popular sprite 'to' configurations are:
+ * Popular sprite &#39;to&#39; configurations are:
  *
  *  - translation
  *  - path
@@ -52,11 +52,11 @@
  *
  * The default duration for animations is 250 (which is a 1/4 of a second).  Duration is denoted in
  * milliseconds.  Therefore 1 second is 1000, 1 minute would be 60000, and so on. The default easing curve
- * used for all animations is 'ease'.  Popular easing functions are included and can be found in {@link Ext.fx.Anim#easing Easing}.
+ * used for all animations is &#39;ease&#39;.  Popular easing functions are included and can be found in {@link Ext.fx.Anim#easing Easing}.
  *
  * For example, a simple animation to fade out an element with a default easing and duration:
  *
- *     var p1 = Ext.get('myElementId');
+ *     var p1 = Ext.get(&#39;myElementId&#39;);
  *
  *     p1.animate({
  *         to: {
@@ -66,7 +66,7 @@
  *
  * To make this animation fade out in a tenth of a second:
  *
- *     var p1 = Ext.get('myElementId');
+ *     var p1 = Ext.get(&#39;myElementId&#39;);
  *
  *     p1.animate({
  *        duration: 100,
@@ -90,7 +90,7 @@
  *         }
  *     }).animate({
  *         to: {
- *             backgroundColor: '#f00'  //red
+ *             backgroundColor: &#39;#f00&#39;  //red
  *         }
  *     }).animate({
  *         to: {
@@ -113,7 +113,7 @@
  *         }
  *     }).animate({
  *         to: {
- *             backgroundColor: '#f00'  //red
+ *             backgroundColor: &#39;#f00&#39;  //red
  *         }
  *     }).animate({
  *         to: {
@@ -127,7 +127,7 @@
  *         to: {
  *             x: 500,
  *             y: 150,
- *             backgroundColor: '#f00'  //red
+ *             backgroundColor: &#39;#f00&#39;  //red
  *             opacity: 0
  *         }
  *     });
@@ -151,7 +151,7 @@
  *                 y: 0
  *             },
  *             75: {  //from 500ms to 750ms (75%)
- *                 backgroundColor: '#f00'  //red
+ *                 backgroundColor: &#39;#f00&#39;  //red
  *             },
  *             100: {  //from 750ms to 1sec
  *                 opacity: 0
@@ -169,7 +169,7 @@
  * All animations support the {@link Ext.util.Observable#listeners listeners} configuration to attact functions to these events.
  *
  *     startAnimate: function() {
- *         var p1 = Ext.get('myElementId');
+ *         var p1 = Ext.get(&#39;myElementId&#39;);
  *         p1.animate({
  *            duration: 100,
  *             to: {
@@ -199,12 +199,12 @@
  * method.  This method will return false if there are no active animations or return the currently
  * running {@link Ext.fx.Anim} instance.
  *
- * In this example, we're going to wait for the current animation to finish, then stop any other
- * queued animations before we fade our element's opacity to 0:
+ * In this example, we&#39;re going to wait for the current animation to finish, then stop any other
+ * queued animations before we fade our element&#39;s opacity to 0:
  *
  *     var curAnim = p1.getActiveAnimation();
  *     if (curAnim) {
- *         curAnim.on('afteranimate', function() {
+ *         curAnim.on(&#39;afteranimate&#39;, function() {
  *             p1.stopAnimation();
  *             p1.animate({
  *                 to: {
@@ -214,12 +214,12 @@
  *         });
  *     }
  */
-Ext.define('Ext.util.Animate', {
-<span id='Ext-util-Animate-property-mixinId'>    mixinId: 'animate',
+Ext.define(&#39;Ext.util.Animate&#39;, {
+<span id='Ext-util-Animate-property-mixinId'>    mixinId: &#39;animate&#39;,
 </span>
     requires: [
-        'Ext.fx.Manager',
-        'Ext.fx.Anim'
+        &#39;Ext.fx.Manager&#39;,
+        &#39;Ext.fx.Anim&#39;
     ],
 
 <span id='Ext-util-Animate-property-isAnimate'>    isAnimate: true,
@@ -234,45 +234,45 @@ Ext.define('Ext.util.Animate', {
      *
      * When animating a Component, the following properties may be specified in `from`, `to`, and `keyframe` objects:
      *
-     *   - `x` - The Component's page X position in pixels.
+     *   - `x` - The Component&#39;s page X position in pixels.
      *
-     *   - `y` - The Component's page Y position in pixels
+     *   - `y` - The Component&#39;s page Y position in pixels
      *
-     *   - `left` - The Component's `left` value in pixels.
+     *   - `left` - The Component&#39;s `left` value in pixels.
      *
-     *   - `top` - The Component's `top` value in pixels.
+     *   - `top` - The Component&#39;s `top` value in pixels.
      *
-     *   - `width` - The Component's `width` value in pixels.
+     *   - `width` - The Component&#39;s `width` value in pixels.
      *
-     *   - `height` - The Component's `height` value in pixels.
+     *   - `height` - The Component&#39;s `height` value in pixels.
      *
      * The following property may be set on the animation config root:
      *
-     *   - `dynamic` - Specify as true to update the Component's layout (if it is a Container) at every frame of the animation.
+     *   - `dynamic` - Specify as true to update the Component&#39;s layout (if it is a Container) at every frame of the animation.
      *     *Use sparingly as laying out on every intermediate size change is an expensive operation.*
      *
      * For example, to animate a Window to a new size, ensuring that its internal layout and any shadow is correct:
      *
-     *     myWindow = Ext.create('Ext.window.Window', {
-     *         title: 'Test Component animation',
+     *     myWindow = Ext.create(&#39;Ext.window.Window&#39;, {
+     *         title: &#39;Test Component animation&#39;,
      *         width: 500,
      *         height: 300,
      *         layout: {
-     *             type: 'hbox',
-     *             align: 'stretch'
+     *             type: &#39;hbox&#39;,
+     *             align: &#39;stretch&#39;
      *         },
      *         items: [{
-     *             title: 'Left: 33%',
-     *             margin: '5 0 5 5',
+     *             title: &#39;Left: 33%&#39;,
+     *             margin: &#39;5 0 5 5&#39;,
      *             flex: 1
      *         }, {
-     *             title: 'Left: 66%',
-     *             margin: '5 5 5 5',
+     *             title: &#39;Left: 66%&#39;,
+     *             margin: &#39;5 5 5 5&#39;,
      *             flex: 2
      *         }]
      *     });
      *     myWindow.show();
-     *     myWindow.header.el.on('click', function() {
+     *     myWindow.header.el.on(&#39;click&#39;, function() {
      *         myWindow.animate({
      *             to: {
      *                 width: (myWindow.getWidth() == 500) ? 700 : 500,
@@ -282,7 +282,7 @@ Ext.define('Ext.util.Animate', {
      *     });
      *
      * For performance reasons, by default, the internal layout is only updated when the Window reaches its final `&quot;to&quot;`
-     * size. If dynamic updating of the Window's child Components is required, then configure the animation with
+     * size. If dynamic updating of the Window&#39;s child Components is required, then configure the animation with
      * `dynamic: true` and the two child items will maintain their proportions during the animation.
      *
      * @param {Object} config  Configuration for {@link Ext.fx.Anim}.
@@ -333,17 +333,17 @@ Ext.define('Ext.util.Animate', {
     },
 
 <span id='Ext-util-Animate-method-stopFx'>    /**
-</span>     * Stops any running effects and clears this object's internal effects queue if it contains any additional effects
-     * that haven't started yet.
+</span>     * Stops any running effects and clears this object&#39;s internal effects queue if it contains any additional effects
+     * that haven&#39;t started yet.
      * @deprecated 4.0 Replaced by {@link #stopAnimation}
      * @return {Ext.dom.Element} The Element
      * @method
      */
-    stopFx: Ext.Function.alias(Ext.util.Animate, 'stopAnimation'),
+    stopFx: Ext.Function.alias(Ext.util.Animate, &#39;stopAnimation&#39;),
 
 <span id='Ext-util-Animate-method-stopAnimation'>    /**
-</span>     * Stops any running effects and clears this object's internal effects queue if it contains any additional effects
-     * that haven't started yet.
+</span>     * Stops any running effects and clears this object&#39;s internal effects queue if it contains any additional effects
+     * that haven&#39;t started yet.
      * @return {Ext.dom.Element} The Element
      */
     stopAnimation: function(/* private */ suppressEvent) {
@@ -380,7 +380,7 @@ Ext.define('Ext.util.Animate', {
      * @inheritdoc Ext.util.Animate#getActiveAnimation
      * @method
      */
-    hasActiveFx: Ext.Function.alias(Ext.util.Animate, 'getActiveAnimation'),
+    hasActiveFx: Ext.Function.alias(Ext.util.Animate, &#39;getActiveAnimation&#39;),
 
 <span id='Ext-util-Animate-method-getActiveAnimation'>    /**
 </span>     * Returns the current animation if this object has any effects actively running or queued, else returns false.

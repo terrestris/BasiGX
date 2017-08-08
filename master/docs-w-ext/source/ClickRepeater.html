@@ -22,8 +22,8 @@
  *
  * Optionally, a CSS class may be applied to the element during the time it is pressed.
  */
-Ext.define('Ext.util.ClickRepeater', {
-    extend: 'Ext.util.Observable',
+Ext.define(&#39;Ext.util.ClickRepeater&#39;, {
+    extend: &#39;Ext.util.Observable&#39;,
 
 <span id='Ext-util-ClickRepeater-event-mousedown'>    /**
 </span>     * @event mousedown
@@ -120,14 +120,14 @@ Ext.define('Ext.util.ClickRepeater', {
      */
     enable: function(){
         if(this.disabled){
-            this.el.on('mousedown', this.handleMouseDown, this);
+            this.el.on(&#39;mousedown&#39;, this.handleMouseDown, this);
             // IE versions will detect clicks as in sequence as dblclicks
             // if they happen in quick succession
             if (Ext.isIE8){
-                this.el.on('dblclick', this.handleDblClick, this);
+                this.el.on(&#39;dblclick&#39;, this.handleDblClick, this);
             }
             if(this.preventDefault || this.stopDefault){
-                this.el.on('click', this.eventOptions, this);
+                this.el.on(&#39;click&#39;, this.eventOptions, this);
             }
         }
         this.disabled = false;
@@ -142,7 +142,7 @@ Ext.define('Ext.util.ClickRepeater', {
             if(this.pressedCls){
                 this.el.removeCls(this.pressedCls);
             }
-            Ext.getDoc().un('mouseup', this.handleMouseUp, this);
+            Ext.getDoc().un(&#39;mouseup&#39;, this.handleMouseUp, this);
             this.el.clearListeners();
         }
         this.disabled = true;
@@ -153,7 +153,7 @@ Ext.define('Ext.util.ClickRepeater', {
      * @param {Boolean} disabled
      */
     setDisabled: function(disabled){
-        this[disabled ? 'disable' : 'enable']();
+        this[disabled ? &#39;disable&#39; : &#39;enable&#39;]();
     },
 
 <span id='Ext-util-ClickRepeater-method-eventOptions'>    eventOptions: function(e){

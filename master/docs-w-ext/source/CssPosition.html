@@ -20,18 +20,18 @@
  * @private
  */
 
-Ext.define('Ext.util.translatable.CssPosition', {
-    extend: 'Ext.util.translatable.Dom',
+Ext.define(&#39;Ext.util.translatable.CssPosition&#39;, {
+    extend: &#39;Ext.util.translatable.Dom&#39;,
 
 <span id='Ext-util-translatable-CssPosition-method-doTranslate'>    doTranslate: function(x, y) {
 </span>        var domStyle = this.getElement().dom.style;
 
-        if (typeof x == 'number') {
-            domStyle.left = x + 'px';
+        if (typeof x == &#39;number&#39;) {
+            domStyle.left = x + &#39;px&#39;;
         }
 
-        if (typeof y == 'number') {
-            domStyle.top = y + 'px';
+        if (typeof y == &#39;number&#39;) {
+            domStyle.top = y + &#39;px&#39;;
         }
 
         this.callParent([x, y]);

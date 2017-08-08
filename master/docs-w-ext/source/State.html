@@ -18,59 +18,59 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-State'>/**
 </span> * @private
  */
-Ext.define('Ext.fx.State', {
+Ext.define(&#39;Ext.fx.State&#39;, {
 
 <span id='Ext-fx-State-property-isAnimatable'>    isAnimatable: {
-</span>        'background-color'   : true,
-        'background-image'   : true,
-        'background-position': true,
-        'border-bottom-color': true,
-        'border-bottom-width': true,
-        'border-color'       : true,
-        'border-left-color'  : true,
-        'border-left-width'  : true,
-        'border-right-color' : true,
-        'border-right-width' : true,
-        'border-spacing'     : true,
-        'border-top-color'   : true,
-        'border-top-width'   : true,
-        'border-width'       : true,
-        'bottom'             : true,
-        'color'              : true,
-        'crop'               : true,
-        'font-size'          : true,
-        'font-weight'        : true,
-        'height'             : true,
-        'left'               : true,
-        'letter-spacing'     : true,
-        'line-height'        : true,
-        'margin-bottom'      : true,
-        'margin-left'        : true,
-        'margin-right'       : true,
-        'margin-top'         : true,
-        'max-height'         : true,
-        'max-width'          : true,
-        'min-height'         : true,
-        'min-width'          : true,
-        'opacity'            : true,
-        'outline-color'      : true,
-        'outline-offset'     : true,
-        'outline-width'      : true,
-        'padding-bottom'     : true,
-        'padding-left'       : true,
-        'padding-right'      : true,
-        'padding-top'        : true,
-        'right'              : true,
-        'text-indent'        : true,
-        'text-shadow'        : true,
-        'top'                : true,
-        'vertical-align'     : true,
-        'visibility'         : true,
-        'width'              : true,
-        'word-spacing'       : true,
-        'z-index'            : true,
-        'zoom'               : true,
-        'transform'          : true
+</span>        &#39;background-color&#39;   : true,
+        &#39;background-image&#39;   : true,
+        &#39;background-position&#39;: true,
+        &#39;border-bottom-color&#39;: true,
+        &#39;border-bottom-width&#39;: true,
+        &#39;border-color&#39;       : true,
+        &#39;border-left-color&#39;  : true,
+        &#39;border-left-width&#39;  : true,
+        &#39;border-right-color&#39; : true,
+        &#39;border-right-width&#39; : true,
+        &#39;border-spacing&#39;     : true,
+        &#39;border-top-color&#39;   : true,
+        &#39;border-top-width&#39;   : true,
+        &#39;border-width&#39;       : true,
+        &#39;bottom&#39;             : true,
+        &#39;color&#39;              : true,
+        &#39;crop&#39;               : true,
+        &#39;font-size&#39;          : true,
+        &#39;font-weight&#39;        : true,
+        &#39;height&#39;             : true,
+        &#39;left&#39;               : true,
+        &#39;letter-spacing&#39;     : true,
+        &#39;line-height&#39;        : true,
+        &#39;margin-bottom&#39;      : true,
+        &#39;margin-left&#39;        : true,
+        &#39;margin-right&#39;       : true,
+        &#39;margin-top&#39;         : true,
+        &#39;max-height&#39;         : true,
+        &#39;max-width&#39;          : true,
+        &#39;min-height&#39;         : true,
+        &#39;min-width&#39;          : true,
+        &#39;opacity&#39;            : true,
+        &#39;outline-color&#39;      : true,
+        &#39;outline-offset&#39;     : true,
+        &#39;outline-width&#39;      : true,
+        &#39;padding-bottom&#39;     : true,
+        &#39;padding-left&#39;       : true,
+        &#39;padding-right&#39;      : true,
+        &#39;padding-top&#39;        : true,
+        &#39;right&#39;              : true,
+        &#39;text-indent&#39;        : true,
+        &#39;text-shadow&#39;        : true,
+        &#39;top&#39;                : true,
+        &#39;vertical-align&#39;     : true,
+        &#39;visibility&#39;         : true,
+        &#39;width&#39;              : true,
+        &#39;word-spacing&#39;       : true,
+        &#39;z-index&#39;            : true,
+        &#39;zoom&#39;               : true,
+        &#39;transform&#39;          : true
     },
 
 <span id='Ext-fx-State-method-constructor'>    constructor: function(data) {
@@ -118,9 +118,9 @@ Ext.define('Ext.fx.State', {
             };
         }
 
-        if (typeof name == 'string') {
+        if (typeof name == &#39;string&#39;) {
             switch (name) {
-                case 'translate':
+                case &#39;translate&#39;:
                     if (isArray) {
                         ln = value.length;
 
@@ -141,7 +141,7 @@ Ext.define('Ext.fx.State', {
                     }
                     break;
 
-                case 'rotate':
+                case &#39;rotate&#39;:
                     if (isArray) {
                         ln = value.length;
 
@@ -163,7 +163,7 @@ Ext.define('Ext.fx.State', {
                     break;
 
 
-                case 'scale':
+                case &#39;scale&#39;:
                     if (isArray) {
                         ln = value.length;
 
@@ -185,7 +185,7 @@ Ext.define('Ext.fx.State', {
                     }
                     break;
 
-                case 'skew':
+                case &#39;skew&#39;:
                     if (isArray) {
                         ln = value.length;
 
@@ -221,11 +221,11 @@ Ext.define('Ext.fx.State', {
 </span>        var data = this.data,
             key;
 
-        if (typeof name != 'string') {
+        if (typeof name != &#39;string&#39;) {
             for (key in name) {
                 value = name[key];
 
-                if (key === 'transform') {
+                if (key === &#39;transform&#39;) {
                     this.setTransform(value);
                 }
                 else {
@@ -234,7 +234,7 @@ Ext.define('Ext.fx.State', {
             }
         }
         else {
-            if (name === 'transform') {
+            if (name === &#39;transform&#39;) {
                 this.setTransform(value);
             }
             else {

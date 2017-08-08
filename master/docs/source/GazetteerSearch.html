@@ -35,13 +35,13 @@
  *
  * @class BasiGX.store.GazetteerSearch
  */
-Ext.define('BasiGX.store.GazetteerSearch', {
-    extend: 'Ext.data.Store',
+Ext.define(&#39;BasiGX.store.GazetteerSearch&#39;, {
+    extend: &#39;Ext.data.Store&#39;,
 
-    alias: 'store.basigx-gazetteersearch',
+    alias: &#39;store.basigx-gazetteersearch&#39;,
 
     requires: [
-        'BasiGX.util.Layer'
+        &#39;BasiGX.util.Layer&#39;
     ],
 
 <span id='BasiGX-store-GazetteerSearch-property-_lastRequest'>    /**
@@ -51,63 +51,63 @@ Ext.define('BasiGX.store.GazetteerSearch', {
     _lastRequest: null,
 
 <span id='BasiGX-store-GazetteerSearch-property-proxy'>    proxy: {
-</span>        url: 'http://nominatim.openstreetmap.org',
-        method: 'GET',
-        type: 'ajax',
+</span>        url: &#39;http://nominatim.openstreetmap.org&#39;,
+        method: &#39;GET&#39;,
+        type: &#39;ajax&#39;,
         extraParams: {
             q: null,
-            format: 'json',
+            format: &#39;json&#39;,
             limit: 100,
-            viewboxlbrt: '-180,90,180,-90',
+            viewboxlbrt: &#39;-180,90,180,-90&#39;,
             bounded: 1,
             polygon_text: 1
         },
-        limitParam: 'maxFeatures',
+        limitParam: &#39;maxFeatures&#39;,
         reader: {
-            type: 'json',
-            rootProperty: 'features'
+            type: &#39;json&#39;,
+            rootProperty: &#39;features&#39;
         }
     },
 
 <span id='BasiGX-store-GazetteerSearch-property-fields'>    fields: [{
-</span>        name: 'place_id',
-        type: 'string'
+</span>        name: &#39;place_id&#39;,
+        type: &#39;string&#39;
     }, {
-        name: 'licence',
-        type: 'string'
+        name: &#39;licence&#39;,
+        type: &#39;string&#39;
     }, {
-        name: 'osm_type',
-        type: 'string'
+        name: &#39;osm_type&#39;,
+        type: &#39;string&#39;
     }, {
-        name: 'osm_id',
-        type: 'number'
+        name: &#39;osm_id&#39;,
+        type: &#39;number&#39;
     }, {
-        name: 'boundingbox',
-        type: 'auto'
+        name: &#39;boundingbox&#39;,
+        type: &#39;auto&#39;
     }, {
-        name: 'lat',
-        type: 'number'
+        name: &#39;lat&#39;,
+        type: &#39;number&#39;
     }, {
-        name: 'lon',
-        type: 'number'
+        name: &#39;lon&#39;,
+        type: &#39;number&#39;
     }, {
-        name: 'geotext',
-        type: 'auto'
+        name: &#39;geotext&#39;,
+        type: &#39;auto&#39;
     }, {
-        name: 'icon',
-        type: 'string'
+        name: &#39;icon&#39;,
+        type: &#39;string&#39;
     }, {
-        name: 'class',
-        type: 'string'
+        name: &#39;class&#39;,
+        type: &#39;string&#39;
     }, {
-        name: 'type',
-        type: 'string'
+        name: &#39;type&#39;,
+        type: &#39;string&#39;
     }, {
-        name: 'importance',
-        type: 'number'
+        name: &#39;importance&#39;,
+        type: &#39;number&#39;
     }, {
-        name: 'icon',
-        type: 'string'
+        name: &#39;icon&#39;,
+        type: &#39;string&#39;
     }]
 });
 </pre>

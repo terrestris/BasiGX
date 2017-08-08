@@ -36,13 +36,13 @@
  * @class BasiGX.view.form.field.GazetteerCombo
  *
  */
-Ext.define('BasiGX.view.form.field.GazetteerCombo', {
-    extend: 'Ext.form.field.ComboBox',
+Ext.define(&#39;BasiGX.view.form.field.GazetteerCombo&#39;, {
+    extend: &#39;Ext.form.field.ComboBox&#39;,
 
-    xtype: 'basigx_form_field_gazetteercombo',
+    xtype: &#39;basigx_form_field_gazetteercombo&#39;,
 
     requires: [
-        'BasiGX.util.Map'
+        &#39;BasiGX.util.Map&#39;
     ],
 
 <span id='BasiGX-view-form-field-GazetteerCombo-property-store'>    store: [],
@@ -55,8 +55,8 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo', {
 
         me.callParent(arguments);
 
-        me.on('boxready', me.onBoxReady, me);
-        me.on('change', me.onComboValueChange, me);
+        me.on(&#39;boxready&#39;, me.onBoxReady, me);
+        me.on(&#39;change&#39;, me.onComboValueChange, me);
     },
 
 <span id='BasiGX-view-form-field-GazetteerCombo-method-onBoxReady'>    /**
@@ -64,7 +64,7 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo', {
      */
     onBoxReady: function() {
         var me = this;
-        me.nav = Ext.create('Ext.util.KeyNav', me.el, {
+        me.nav = Ext.create(&#39;Ext.util.KeyNav&#39;, me.el, {
             esc: me.clearValue,
             scope: me
         });
@@ -79,7 +79,7 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo', {
     onComboValueChange: function(combo, newValue) {
         var me = this;
         var gazetteerGrid =
-            Ext.ComponentQuery.query('basigx_grid_gazetteergrid')[0];
+            Ext.ComponentQuery.query(&#39;basigx_grid_gazetteergrid&#39;)[0];
 
         if (newValue) {
             if (gazetteerGrid) {
@@ -88,7 +88,7 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo', {
             me.doGazetteerSearch(newValue);
         } else {
             if (gazetteerGrid) {
-                gazetteerGrid.getEl().slideOut('t', {
+                gazetteerGrid.getEl().slideOut(&#39;t&#39;, {
                     duration: 250,
                     callback: gazetteerGrid.onGazetteerGridSlideOut,
                     scope: gazetteerGrid
@@ -104,17 +104,17 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo', {
      */
     doGazetteerSearch: function(value) {
         var gazetteerGrid = Ext.ComponentQuery.query(
-            'basigx_grid_gazetteergrid'
+            &#39;basigx_grid_gazetteergrid&#39;
         )[0];
         var gazetteerStore = gazetteerGrid.getStore();
-        var checkbox = gazetteerGrid.down('checkbox[name=limitcheckbox]');
+        var checkbox = gazetteerGrid.down(&#39;checkbox[name=limitcheckbox]&#39;);
         var limitToBBox = checkbox.getValue();
 
         gazetteerGrid.show();
 
         Ext.Ajax.abort(gazetteerStore._lastRequest);
 
-        gazetteerStore.getProxy().setExtraParam('q', value);
+        gazetteerStore.getProxy().setExtraParam(&#39;q&#39;, value);
 
         if (limitToBBox) {
             var map = BasiGX.util.Map.getMapComponent().getMap();
@@ -122,11 +122,11 @@ Ext.define('BasiGX.view.form.field.GazetteerCombo', {
             var projection = olView.getProjection().getCode();
             var bbox = map.getView().calculateExtent(map.getSize());
             var transformedBbox = ol.proj.transformExtent(bbox, projection,
-                'EPSG:4326');
-            gazetteerStore.getProxy().setExtraParam('viewboxlbrt',
+                &#39;EPSG:4326&#39;);
+            gazetteerStore.getProxy().setExtraParam(&#39;viewboxlbrt&#39;,
                 transformedBbox.toString());
         } else {
-            gazetteerStore.getProxy().setExtraParam('viewboxlbrt', null);
+            gazetteerStore.getProxy().setExtraParam(&#39;viewboxlbrt&#39;, null);
         }
         gazetteerStore.load();
         gazetteerStore._lastRequest = Ext.Ajax.getLatest();

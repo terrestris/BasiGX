@@ -16,7 +16,7 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-grid-CellContext'>/**
-</span> * Instances of this class encapsulate a position in a grid's row/column coordinate system.
+</span> * Instances of this class encapsulate a position in a grid&#39;s row/column coordinate system.
  *
  * Cells are addressed using the owning {@link #record} and {@link #column} for robustness. 
  * the column may be moved, the store may be sorted, and the CellContext will still reference
@@ -31,7 +31,7 @@
  * Freshly created context objects, such as those exposed by events from the {@link Ext.grid.selection.SpreadsheetModel spreadsheet selection model}
  * are safe to use until your application mutates the store, or changes the column set.
  */
-Ext.define('Ext.grid.CellContext', {
+Ext.define(&#39;Ext.grid.CellContext&#39;, {
 
 <span id='Ext-grid-CellContext-property-isCellContext'>    /**
 </span>     * @property {Boolean} isCellContext
@@ -63,7 +63,7 @@ Ext.define('Ext.grid.CellContext', {
 <span id='Ext-grid-CellContext-property-colIdx'>    /**
 </span>     * @readonly
      * @property {Number} colIdx
-     * The column index in the owning View's leaf column set of the referenced cell.
+     * The column index in the owning View&#39;s leaf column set of the referenced cell.
      *
      * *Be aware that after the initial call to {@link #setPosition}, this value may become stale due to subsequent column mutation.*
      */
@@ -84,7 +84,7 @@ Ext.define('Ext.grid.CellContext', {
 </span>     * Binds this cell context to a logical cell defined by the {@link #record} and {@link #column}.
      *
      * @param {Number/Ext.data.Model} row The row index or record which owns the required cell.
-     * @param {Number/Ext.grid.column.Column} col The column index (In the owning View's leaf column set), or the owning {@link Ext.grid.column.Column column}.
+     * @param {Number/Ext.grid.column.Column} col The column index (In the owning View&#39;s leaf column set), or the owning {@link Ext.grid.column.Column column}.
      *
      * A one argument form may be used in the form of an array:
      *
@@ -142,7 +142,7 @@ Ext.define('Ext.grid.CellContext', {
         
         if (row !== undefined) {
             // Row index passed, &lt; 0 meaning count from the tail (-1 is the last, etc)
-            if (typeof row === 'number') {
+            if (typeof row === &#39;number&#39;) {
                 count = dataSource.getCount();
                 row = row &lt; 0 ? Math.max(count + row, 0) : Math.max(Math.min(row, count - 1), 0);
                 
@@ -172,16 +172,16 @@ Ext.define('Ext.grid.CellContext', {
             oldColumn = me.column;
 
         // Maintainer:
-        // We MUST NOT update the context view with the column's view because this context
+        // We MUST NOT update the context view with the column&#39;s view because this context
         // may be for an Ext.locking.View which spans two grid views, and a column references
         // its local grid view.
         if (col !== undefined) {
-            if (typeof col === 'number') {
+            if (typeof col === &#39;number&#39;) {
                 me.colIdx = col;
                 me.column = colMgr.getHeaderAtIndex(col);
             } else if (col.isHeader) {
                 me.column = col;
-                // Must use the Manager's indexOf because view may be a locking view
+                // Must use the Manager&#39;s indexOf because view may be a locking view
                 // And Column#getVisibleIndex returns the index of the column within its own header.
                 me.colIdx = colMgr.indexOf(col);
             }

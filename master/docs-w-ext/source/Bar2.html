@@ -23,25 +23,25 @@
  *          renderTo: Ext.getBody(),
  *          width: 200,
  *          items: [{
- *              text: 'File',
+ *              text: &#39;File&#39;,
  *              menu: [
- *                  { text: 'Open...' },
- *                  '-',
- *                  { text: 'Close' }
+ *                  { text: &#39;Open...&#39; },
+ *                  &#39;-&#39;,
+ *                  { text: &#39;Close&#39; }
  *              ]
  *          }, {
- *              text: 'Edit',
+ *              text: &#39;Edit&#39;,
  *              menu: [
- *                  { text: 'Cut' },
- *                  { text: 'Copy' }
- *                  { text: 'Paste' }
+ *                  { text: &#39;Cut&#39; },
+ *                  { text: &#39;Copy&#39; }
+ *                  { text: &#39;Paste&#39; }
  *              ]
  *          }]
  *      });
  */
-Ext.define('Ext.menu.Bar', {
-    extend: 'Ext.menu.Menu',
-    xtype: 'menubar',
+Ext.define(&#39;Ext.menu.Bar&#39;, {
+    extend: &#39;Ext.menu.Menu&#39;,
+    xtype: &#39;menubar&#39;,
     
 <span id='Ext-menu-Bar-property-isMenuBar'>    isMenuBar: true,
 </span>    
@@ -49,22 +49,22 @@ Ext.define('Ext.menu.Bar', {
 </span>     * @config {String} defaultMenuAlign The default {@link Ext.menu.Item#menuAlign} config
      * for direct child items of this Menu bar.
      */
-    defaultMenuAlign: 'tl-bl?',
+    defaultMenuAlign: &#39;tl-bl?&#39;,
     
 <span id='Ext-menu-Bar-property-floating'>    floating: false,
 </span><span id='Ext-menu-Bar-cfg-constrain'>    constrain: false,
 </span><span id='Ext-menu-Bar-cfg-showSeparator'>    showSeparator: false,
 </span><span id='Ext-menu-Bar-cfg-allowOtherMenus'>    allowOtherMenus: true,
 </span>    
-<span id='Ext-menu-Bar-property-ariaRole'>    ariaRole: 'menubar',
+<span id='Ext-menu-Bar-property-ariaRole'>    ariaRole: &#39;menubar&#39;,
 </span>    
-<span id='Ext-menu-Bar-cfg-ui'>    ui: 'default-menubar',
+<span id='Ext-menu-Bar-cfg-ui'>    ui: &#39;default-menubar&#39;,
 </span>    
 <span id='Ext-menu-Bar-cfg-layout'>    layout: {
-</span>        type: 'hbox',
-        align: 'stretchmax',
-        pack: 'start',
-        overflowHandler: 'menu'
+</span>        type: &#39;hbox&#39;,
+        align: &#39;stretchmax&#39;,
+        pack: &#39;start&#39;,
+        overflowHandler: &#39;menu&#39;
     },
     
 <span id='Ext-menu-Bar-method-lookupComponent'>    lookupComponent: function(comp) {

@@ -20,19 +20,19 @@
  * columns allowing the user to resize them.
  * @private
  */
-Ext.define('Ext.layout.container.Dashboard', {
-    extend: 'Ext.layout.container.Column',
-    alias: 'layout.dashboard',
+Ext.define(&#39;Ext.layout.container.Dashboard&#39;, {
+    extend: &#39;Ext.layout.container.Column&#39;,
+    alias: &#39;layout.dashboard&#39;,
 
     requires: [
-        'Ext.layout.container.ColumnSplitter'
+        &#39;Ext.layout.container.ColumnSplitter&#39;
     ],
 
-<span id='Ext-layout-container-Dashboard-property-type'>    type: 'dashboard',
+<span id='Ext-layout-container-Dashboard-property-type'>    type: &#39;dashboard&#39;,
 </span>
-<span id='Ext-layout-container-Dashboard-property-firstColumnCls'>    firstColumnCls: Ext.baseCSSPrefix + 'dashboard-column-first',
+<span id='Ext-layout-container-Dashboard-property-firstColumnCls'>    firstColumnCls: Ext.baseCSSPrefix + &#39;dashboard-column-first&#39;,
 </span>
-<span id='Ext-layout-container-Dashboard-property-lastColumnCls'>    lastColumnCls: Ext.baseCSSPrefix + 'dashboard-column-last',
+<span id='Ext-layout-container-Dashboard-property-lastColumnCls'>    lastColumnCls: Ext.baseCSSPrefix + &#39;dashboard-column-last&#39;,
 </span>
 <span id='Ext-layout-container-Dashboard-method-getSplitterConfig'>    /*
 </span>     * The geometry of a Column layout with splitters between respective items:
@@ -65,7 +65,7 @@ Ext.define('Ext.layout.container.Dashboard', {
 
     getSplitterConfig: function () {
         return {
-           xtype: 'columnsplitter'
+           xtype: &#39;columnsplitter&#39;
         };
     },
 
@@ -86,7 +86,7 @@ Ext.define('Ext.layout.container.Dashboard', {
 </span>        var me = this;
         me.callParent([ownerContext]);
 
-        // We need to reset the heights of the splitters so that they don't influence the
+        // We need to reset the heights of the splitters so that they don&#39;t influence the
         // layout (mostly overflow management).
         var childItems = ownerContext.childItems,
             rows = (ownerContext.rows = []),

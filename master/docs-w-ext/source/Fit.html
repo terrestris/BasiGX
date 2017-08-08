@@ -16,22 +16,22 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-layout-container-Fit'>/**
-</span> * This is a base class for layouts that contain a single item that automatically expands to fill the layout's
- * container. This class is intended to be extended or created via the layout:'fit'
+</span> * This is a base class for layouts that contain a single item that automatically expands to fill the layout&#39;s
+ * container. This class is intended to be extended or created via the layout:&#39;fit&#39;
  * {@link Ext.container.Container#layout} config, and should generally not need to be created directly via the new keyword.
  *
  * Fit layout does not have any direct config options (other than inherited ones). To fit a panel to a container using
- * Fit layout, simply set `layout: 'fit'` on the container and add a single panel to it.
+ * Fit layout, simply set `layout: &#39;fit&#39;` on the container and add a single panel to it.
  *
  *     @example
- *     Ext.create('Ext.panel.Panel', {
- *         title: 'Fit Layout',
+ *     Ext.create(&#39;Ext.panel.Panel&#39;, {
+ *         title: &#39;Fit Layout&#39;,
  *         width: 300,
  *         height: 150,
- *         layout:'fit',
+ *         layout:&#39;fit&#39;,
  *         items: {
- *             title: 'Inner Panel',
- *             html: 'This is the inner panel content',
+ *             title: &#39;Inner Panel&#39;,
+ *             html: &#39;This is the inner panel content&#39;,
  *             bodyPadding: 20,
  *             border: false
  *         },
@@ -43,21 +43,21 @@
  * can be used to provide a background {@link Ext.Img image} that is &quot;behind&quot; another item
  * such as a {@link Ext.view.View dataview} if you also absolutely position the items.
  */
-Ext.define('Ext.layout.container.Fit', {
+Ext.define(&#39;Ext.layout.container.Fit&#39;, {
 
     /* Begin Definitions */
-    extend: 'Ext.layout.container.Container',
-    alternateClassName: 'Ext.layout.FitLayout',
+    extend: &#39;Ext.layout.container.Container&#39;,
+    alternateClassName: &#39;Ext.layout.FitLayout&#39;,
 
-    alias: 'layout.fit',
+    alias: &#39;layout.fit&#39;,
 
     /* End Definitions */
 
 <span id='Ext-layout-container-Fit-property-itemCls'>    /**
 </span>     * @inheritdoc Ext.layout.container.Container#cfg-itemCls
      */
-    itemCls: Ext.baseCSSPrefix + 'fit-item',
-<span id='Ext-layout-container-Fit-property-type'>    type: 'fit',
+    itemCls: Ext.baseCSSPrefix + &#39;fit-item&#39;,
+<span id='Ext-layout-container-Fit-property-type'>    type: &#39;fit&#39;,
 </span>   
 <span id='Ext-layout-container-Fit-property-manageMargins'>    manageMargins: true,
 </span>
@@ -69,7 +69,7 @@ Ext.define('Ext.layout.container.Fit', {
     ],
 
 <span id='Ext-layout-container-Fit-method-getItemSizePolicy'>    getItemSizePolicy: function (item, ownerSizeModel) {
-</span>        // this layout's sizePolicy is derived from its owner's sizeModel:
+</span>        // this layout&#39;s sizePolicy is derived from its owner&#39;s sizeModel:
         var sizeModel = ownerSizeModel || this.owner.getSizeModel(),
             mode = (sizeModel.width.shrinkWrap ? 0 : 1) | // jshint ignore:line
                    (sizeModel.height.shrinkWrap ? 0 : 2);
@@ -92,7 +92,7 @@ Ext.define('Ext.layout.container.Fit', {
         // settings affect the available size. This particularly effects self-sizing
         // containers such as fields, in which the target element is naturally sized,
         // and should not be stretched by a sized child item.
-        if (resetSizes &amp;&amp; ownerContext.targetContext.el.dom.tagName.toUpperCase() !== 'TD') {
+        if (resetSizes &amp;&amp; ownerContext.targetContext.el.dom.tagName.toUpperCase() !== &#39;TD&#39;) {
             resetSizes = resetWidth = resetHeight = false;
         }
 
@@ -132,10 +132,10 @@ Ext.define('Ext.layout.container.Fit', {
                 style = item.el.dom.style;
 
                 if (resetHeight) {
-                    style.height = '';
+                    style.height = &#39;&#39;;
                 }
                 if (resetWidth) {
-                    style.width = '';
+                    style.width = &#39;&#39;;
                 }
             }
         }
@@ -146,7 +146,7 @@ Ext.define('Ext.layout.container.Fit', {
         }
 
         // Cache the overflowX/Y flags, but make them false in shrinkWrap mode (since we
-        // won't be triggering overflow in that case) and false if we have no minSize (so
+        // won&#39;t be triggering overflow in that case) and false if we have no minSize (so
         // no child to trigger an overflow).
         c = ownerContext.target;
         ownerContext.overflowX = (!ownerContext.widthModel.shrinkWrap &amp;&amp; 
@@ -212,8 +212,8 @@ Ext.define('Ext.layout.container.Fit', {
             
             if (shrinkWrapWidth) {
                 if (overflowY &amp;&amp; !containerSize.gotHeight) {
-                    // if we might overflow vertically and don't have the container height,
-                    // we don't know if we will need a vscrollbar or not, so we must wait
+                    // if we might overflow vertically and don&#39;t have the container height,
+                    // we don&#39;t know if we will need a vscrollbar or not, so we must wait
                     // for that height so that we can determine the contentWidth...
                     me.done = false;
                 } else {
@@ -233,8 +233,8 @@ Ext.define('Ext.layout.container.Fit', {
 
             if (shrinkWrapHeight) {
                 if (overflowX &amp;&amp; !containerSize.gotWidth) {
-                    // if we might overflow horizontally and don't have the container width,
-                    // we don't know if we will need a hscrollbar or not, so we must wait
+                    // if we might overflow horizontally and don&#39;t have the container width,
+                    // we don&#39;t know if we will need a hscrollbar or not, so we must wait
                     // for that width so that we can determine the contentHeight...
                     me.done = false;
                 } else {
@@ -268,7 +268,7 @@ Ext.define('Ext.layout.container.Fit', {
         me.fitItemWidth(itemContext, info);
         me.fitItemHeight(itemContext, info);
 
-        // If not all required dimensions have been satisfied, we're not done.
+        // If not all required dimensions have been satisfied, we&#39;re not done.
         if (info.got !== info.needed) {
             me.done = false;
         }
@@ -279,7 +279,7 @@ Ext.define('Ext.layout.container.Fit', {
         // Attempt to set only dimensions that are being controlled, not shrinkWrap dimensions
         if (info.ownerContext.widthModel.shrinkWrap) {
             // contentWidth must include the margins to be consistent with setItemWidth
-            width = itemContext.getProp('width') + info.margins.width;
+            width = itemContext.getProp(&#39;width&#39;) + info.margins.width;
             // because we add margins, width will be NaN or a number (not undefined)
 
             contentWidth = info.contentWidth;
@@ -306,7 +306,7 @@ Ext.define('Ext.layout.container.Fit', {
 </span>        var contentHeight, height;
         if (info.ownerContext.heightModel.shrinkWrap) {
             // contentHeight must include the margins to be consistent with setItemHeight
-            height = itemContext.getProp('height') + info.margins.height;
+            height = itemContext.getProp(&#39;height&#39;) + info.margins.height;
             // because we add margins, height will be NaN or a number (not undefined)
 
             contentHeight = info.contentHeight;
@@ -335,12 +335,12 @@ Ext.define('Ext.layout.container.Fit', {
         // Adjust position to account for configured margins or if we have multiple items
         // (all items should overlap):
         if (info.index || margins.left) {
-            itemContext.setProp('x', margins.left);
+            itemContext.setProp(&#39;x&#39;, margins.left);
         }
 
         if (margins.width &amp;&amp; info.ownerContext.widthModel.shrinkWrap) {
             // Need the margins for shrink-wrapping but old IE sometimes collapses the left margin into the padding
-            itemContext.setProp('margin-right', margins.width);
+            itemContext.setProp(&#39;margin-right&#39;, margins.width);
         }
     },
 
@@ -348,12 +348,12 @@ Ext.define('Ext.layout.container.Fit', {
 </span>        var margins = info.margins;
 
         if (info.index || margins.top) {
-            itemContext.setProp('y', margins.top);
+            itemContext.setProp(&#39;y&#39;, margins.top);
         }
 
         if (margins.height &amp;&amp; info.ownerContext.heightModel.shrinkWrap) {
             // Need the margins for shrink-wrapping but old IE sometimes collapses the top margin into the padding
-            itemContext.setProp('margin-bottom', margins.height);
+            itemContext.setProp(&#39;margin-bottom&#39;, margins.height);
         }
     },
 

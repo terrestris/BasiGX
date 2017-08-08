@@ -26,8 +26,8 @@
  *
  *     var els = Ext.select(&quot;#some-el div.some-class&quot;);
  *     // or select directly from an existing element
- *     var el = Ext.get('some-el');
- *     el.select('div.some-class');
+ *     var el = Ext.get(&#39;some-el&#39;);
+ *     el.select(&#39;div.some-class&#39;);
  *
  *     els.setWidth(100); // all elements become 100 width
  *     els.hide(true); // all elements fade out and hide
@@ -36,10 +36,10 @@
  *
  * @mixins Ext.dom.Element
  */
-Ext.define('Ext.dom.CompositeElementLite', {
-    alternateClassName: ['Ext.CompositeElementLite'],
+Ext.define(&#39;Ext.dom.CompositeElementLite&#39;, {
+    alternateClassName: [&#39;Ext.CompositeElementLite&#39;],
 
-    requires: ['Ext.dom.Fly'],
+    requires: [&#39;Ext.dom.Fly&#39;],
 
 <span id='Ext-dom-CompositeElementLite-property-isComposite'>    /**
 </span>     * @property {Boolean} isComposite
@@ -54,7 +54,7 @@ Ext.define('Ext.dom.CompositeElementLite', {
 
     // We use the @mixins tag above to document that CompositeElement has
     // all the same methods as Element, but the @mixins tag also pulls in
-    // configs and properties which we don't want, so hide them explicitly:
+    // configs and properties which we don&#39;t want, so hide them explicitly:
 
 <span id='Ext-dom-CompositeElementLite-cfg-bubbleEvents'>    /**
 </span>     * @cfg bubbleEvents
@@ -85,7 +85,7 @@ Ext.define('Ext.dom.CompositeElementLite', {
                 prototype = this.prototype;
 
             Ext.Object.each(Element.prototype, function(name, member) {
-                if (typeof member === 'function' &amp;&amp; !prototype[name]){
+                if (typeof member === &#39;function&#39; &amp;&amp; !prototype[name]){
                     prototype[name] = function() {
                         return this.invoke(name, arguments);
                     };
@@ -100,7 +100,7 @@ Ext.define('Ext.dom.CompositeElementLite', {
          * @readonly
          * The Array of DOM elements which this CompositeElement encapsulates.
          *
-         * This will not *usually* be accessed in developers' code, but developers wishing to augment the capabilities
+         * This will not *usually* be accessed in developers&#39; code, but developers wishing to augment the capabilities
          * of the CompositeElementLite class may use it when adding methods to the class.
          *
          * For example to add the `nextAll` method to the class to **add** all following siblings of selected elements,
@@ -125,7 +125,7 @@ Ext.define('Ext.dom.CompositeElementLite', {
          */
         if (skipValidation) {
             // if the caller told us that they are passing a valid elements array
-            // let's take their word for it.  This is the fast path for performance-
+            // let&#39;s take their word for it.  This is the fast path for performance-
             // critical pieces such as Ext.dom.Element.select(), this allows us to 
             // skip all the transformElement() and getDom()/Ext.get() calls.
             this.elements = elements || [];
@@ -162,7 +162,7 @@ Ext.define('Ext.dom.CompositeElementLite', {
 <span id='Ext-dom-CompositeElementLite-method-add'>    /**
 </span>     * Adds elements to this Composite object.
      * @param {HTMLElement[]/Ext.dom.CompositeElementLite} els Either an Array of DOM elements to add, or another Composite
-     * object who's elements should be added.
+     * object who&#39;s elements should be added.
      * @param {HTMLElement/String} [root] The root element of the query or id of the root.
      * @return {Ext.dom.CompositeElementLite} This Composite object.
      */
@@ -298,7 +298,7 @@ Ext.define('Ext.dom.CompositeElementLite', {
             len = els.length,
             out = [],
             i = 0,
-            isFunc = typeof selector == 'function',
+            isFunc = typeof selector == &#39;function&#39;,
             add,
             el;
 
@@ -455,7 +455,7 @@ Ext.define('Ext.dom.CompositeElementLite', {
 
 <span id='Ext-dom-CompositeElementLite-method-destroy'>    destroy: function() {
 </span>        // TOUCH-4761: ensure Element#destroy() gets called and not Base#destroy()
-        return this.invoke('destroy', arguments);
+        return this.invoke(&#39;destroy&#39;, arguments);
         this.callParent();
     }
 

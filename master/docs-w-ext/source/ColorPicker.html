@@ -25,34 +25,34 @@
  *   - If subclassing ColorMenu, any configuration options for the ColorPicker must be
  *     applied to the **initialConfig** property of the ColorMenu. Applying
  *     {@link Ext.picker.Color ColorPicker} configuration settings to `this` will **not**
- *     affect the ColorPicker's configuration.
+ *     affect the ColorPicker&#39;s configuration.
  *
  * Example:
  *
  *     @example
- *     var colorPicker = Ext.create('Ext.menu.ColorPicker', {
- *         value: '000000'
+ *     var colorPicker = Ext.create(&#39;Ext.menu.ColorPicker&#39;, {
+ *         value: &#39;000000&#39;
  *     });
  *
- *     Ext.create('Ext.menu.Menu', {
+ *     Ext.create(&#39;Ext.menu.Menu&#39;, {
  *         items: [{
- *             text: 'Choose a color',
+ *             text: &#39;Choose a color&#39;,
  *             menu: colorPicker
  *         },{
- *             iconCls: 'add16',
- *             text: 'Icon item'
+ *             iconCls: &#39;add16&#39;,
+ *             text: &#39;Icon item&#39;
  *         },{
- *             text: 'Regular item'
+ *             text: &#39;Regular item&#39;
  *         }]
  *     }).showAt([5, 5]);
  */
- Ext.define('Ext.menu.ColorPicker', {
-     extend: 'Ext.menu.Menu',
+ Ext.define(&#39;Ext.menu.ColorPicker&#39;, {
+     extend: &#39;Ext.menu.Menu&#39;,
 
-     alias: 'widget.colormenu',
+     alias: &#39;widget.colormenu&#39;,
 
      requires: [
-        'Ext.picker.Color'
+        &#39;Ext.picker.Color&#39;
      ],
 
 <span id='Ext-menu-ColorPicker-cfg-hideOnClick'>    /**
@@ -86,32 +86,32 @@
         var me = this,
             cfg = Ext.apply({}, me.initialConfig);
 
-        // Ensure we don't get duplicate listeners
+        // Ensure we don&#39;t get duplicate listeners
         delete cfg.listeners;
         Ext.apply(me, {
             plain: true,
             showSeparator: false,
             bodyPadding: 0,
             items: Ext.applyIf({
-                cls: Ext.baseCSSPrefix + 'menu-color-item',
+                cls: Ext.baseCSSPrefix + &#39;menu-color-item&#39;,
                 margin: 0,
                 id: me.pickerId,
-                xtype: 'colorpicker'
+                xtype: &#39;colorpicker&#39;
             }, cfg)
         });
 
         me.callParent(arguments);
 
-        me.picker = me.down('colorpicker');
+        me.picker = me.down(&#39;colorpicker&#39;);
 
 <span id='Ext-menu-ColorPicker-event-select'>        /**
 </span>         * @event select
          * @inheritdoc Ext.picker.Color#select
          */
-        me.relayEvents(me.picker, ['select']);
+        me.relayEvents(me.picker, [&#39;select&#39;]);
 
         if (me.hideOnClick) {
-            me.on('select', me.hidePickerOnSelect, me);
+            me.on(&#39;select&#39;, me.hidePickerOnSelect, me);
         }
     },
 

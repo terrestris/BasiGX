@@ -20,19 +20,19 @@
  * not support those events natively
  * @private
  */
-Ext.define('Ext.event.publisher.MouseEnterLeave', {
-    extend: 'Ext.event.publisher.Dom',
-<span id='Ext-event-publisher-MouseEnterLeave-property-type'>    type: 'mouseEnterLeave'
+Ext.define(&#39;Ext.event.publisher.MouseEnterLeave&#39;, {
+    extend: &#39;Ext.event.publisher.Dom&#39;,
+<span id='Ext-event-publisher-MouseEnterLeave-property-type'>    type: &#39;mouseEnterLeave&#39;
 </span>}, function(MouseEnterLeave) {
     var eventMap = {
-        mouseover: 'mouseenter',
-        mouseout: 'mouseleave'
+        mouseover: &#39;mouseenter&#39;,
+        mouseout: &#39;mouseleave&#39;
     };
 
     if (!Ext.supports.MouseEnterLeave) {
         MouseEnterLeave.override({
-            handledDomEvents: ['mouseover', 'mouseout'],
-            handledEvents: ['mouseenter', 'mouseleave'],
+            handledDomEvents: [&#39;mouseover&#39;, &#39;mouseout&#39;],
+            handledEvents: [&#39;mouseenter&#39;, &#39;mouseleave&#39;],
 
             publishDelegatedDomEvent: function(e) {
                 var target, relatedTarget, id, el, type, event;

@@ -18,12 +18,12 @@
   <pre class="prettyprint lang-js"><span id='Ext-perf-Accumulator'>/**
 </span> * @private
  */
-Ext.define('Ext.perf.Accumulator', function () {
+Ext.define(&#39;Ext.perf.Accumulator&#39;, function () {
     var currentFrame = null,
-        khrome = Ext.global['chrome'], // jshint ignore:line
+        khrome = Ext.global[&#39;chrome&#39;], // jshint ignore:line
         formatTpl,
         // lazy init on first request for timestamp (avoids infobar in IE until needed)
-        // Also avoids kicking off Chrome's microsecond timer until first needed
+        // Also avoids kicking off Chrome&#39;s microsecond timer until first needed
         getTimestamp = function () {
             getTimestamp = Ext.now;
             
@@ -39,7 +39,7 @@ Ext.define('Ext.perf.Accumulator', function () {
             } else if (window.ActiveXObject) {
                 try {
                     // the above technique is not very accurate for small intervals...
-                    toolbox = new ActiveXObject('SenchaToolbox.Toolbox'); // jshint ignore:line
+                    toolbox = new ActiveXObject(&#39;SenchaToolbox.Toolbox&#39;); // jshint ignore:line
                     Ext.senchaToolbox = toolbox; // export for other uses
                     getTimestamp = function () {
                         return toolbox.milliseconds;
@@ -107,7 +107,7 @@ Ext.define('Ext.perf.Accumulator', function () {
             calibration = calibration || 0;
             data.sum = set.sum - childCount * calibration;
             data.avg = data.sum / count;
-            // min and max cannot be easily corrected since we don't know the number of
+            // min and max cannot be easily corrected since we don&#39;t know the number of
             // child calls for them.
         }
 
@@ -116,8 +116,8 @@ Ext.define('Ext.perf.Accumulator', function () {
 
     return {
         requires: [
-            'Ext.XTemplate',
-            'Ext.ClassManager'
+            &#39;Ext.XTemplate&#39;,
+            &#39;Ext.ClassManager&#39;
         ],
 
         constructor: function (name) {
@@ -136,23 +136,23 @@ Ext.define('Ext.perf.Accumulator', function () {
         format: function (calibration) {
             if (!formatTpl) {
                 formatTpl = new Ext.XTemplate([
-                        '{name} - {count} call(s)',
-                        '&lt;tpl if=&quot;count&quot;&gt;',
-                            '&lt;tpl if=&quot;childCount&quot;&gt;',
-                                ' ({childCount} children)',
-                            '&lt;/tpl&gt;',
-                            '&lt;tpl if=&quot;depth - 1&quot;&gt;',
-                                ' ({depth} deep)',
-                            '&lt;/tpl&gt;',
-                            '&lt;tpl for=&quot;times&quot;&gt;',
-                                ', {type}: {[this.time(values.sum)]} msec (',
-                                     //'min={[this.time(values.min)]}, ',
-                                     'avg={[this.time(values.sum / parent.count)]}',
-                                     //', max={[this.time(values.max)]}',
-                                     ')',
-                            '&lt;/tpl&gt;',
-                        '&lt;/tpl&gt;'
-                    ].join(''), {
+                        &#39;{name} - {count} call(s)&#39;,
+                        &#39;&lt;tpl if=&quot;count&quot;&gt;&#39;,
+                            &#39;&lt;tpl if=&quot;childCount&quot;&gt;&#39;,
+                                &#39; ({childCount} children)&#39;,
+                            &#39;&lt;/tpl&gt;&#39;,
+                            &#39;&lt;tpl if=&quot;depth - 1&quot;&gt;&#39;,
+                                &#39; ({depth} deep)&#39;,
+                            &#39;&lt;/tpl&gt;&#39;,
+                            &#39;&lt;tpl for=&quot;times&quot;&gt;&#39;,
+                                &#39;, {type}: {[this.time(values.sum)]} msec (&#39;,
+                                     //&#39;min={[this.time(values.min)]}, &#39;,
+                                     &#39;avg={[this.time(values.sum / parent.count)]}&#39;,
+                                     //&#39;, max={[this.time(values.max)]}&#39;,
+                                     &#39;)&#39;,
+                            &#39;&lt;/tpl&gt;&#39;,
+                        &#39;&lt;/tpl&gt;&#39;
+                    ].join(&#39;&#39;), {
                         time: function (t) {
                             return Math.round(t * 100) / 100;
                         }
@@ -161,8 +161,8 @@ Ext.define('Ext.perf.Accumulator', function () {
 
             var data = this.getData(calibration);
             data.name = this.name;
-            data.pure.type = 'Pure';
-            data.total.type = 'Total';
+            data.pure.type = &#39;Pure&#39;;
+            data.total.type = &#39;Total&#39;;
             data.times = [data.pure, data.total];
             return formatTpl.apply(data);
         },
@@ -214,14 +214,14 @@ Ext.define('Ext.perf.Accumulator', function () {
 
         tap: function (className, methodName) {
             var me = this,
-                methods = typeof methodName === 'string' ? [methodName] : methodName,
+                methods = typeof methodName === &#39;string&#39; ? [methodName] : methodName,
                 klass, statik, i, parts, length, name, src,
                 tapFunc;
 
             tapFunc = function(){
-                if (typeof className === 'string') {
+                if (typeof className === &#39;string&#39;) {
                     klass = Ext.global;
-                    parts = className.split('.');
+                    parts = className.split(&#39;.&#39;);
                     for (i = 0, length = parts.length; i &lt; length; ++i) {
                         klass = klass[parts[i]];
                     }
@@ -231,7 +231,7 @@ Ext.define('Ext.perf.Accumulator', function () {
 
                 for (i = 0, length = methods.length; i &lt; length; ++i) {
                     name = methods[i];
-                    statik = name.charAt(0) === '!';
+                    statik = name.charAt(0) === &#39;!&#39;;
 
                     if (statik) {
                         name = name.substring(1);

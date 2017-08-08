@@ -18,18 +18,18 @@
   <pre class="prettyprint lang-js"><span id='Ext-dd-DragTracker'>/**
 </span> * A DragTracker listens for drag events on an Element and fires events at the start and end of the drag,
  * as well as during the drag. This is useful for components such as {@link Ext.slider.Multi}, where there is
- * an element that can be dragged around to change the Slider's value.
+ * an element that can be dragged around to change the Slider&#39;s value.
  *
  * DragTracker provides a series of template methods that should be overridden to provide functionality
  * in response to detected drag operations. These are onBeforeStart, onStart, onDrag, onCancel and onEnd.
- * See {@link Ext.slider.Multi}'s initEvents function for an example implementation.
+ * See {@link Ext.slider.Multi}&#39;s initEvents function for an example implementation.
  */
-Ext.define('Ext.dd.DragTracker', {
+Ext.define(&#39;Ext.dd.DragTracker&#39;, {
 
-    uses: ['Ext.util.Region'],
+    uses: [&#39;Ext.util.Region&#39;],
 
     mixins: {
-        observable: 'Ext.util.Observable'
+        observable: &#39;Ext.util.Observable&#39;
     },
 
 <span id='Ext-dd-DragTracker-property-active'>    /**
@@ -61,7 +61,7 @@ Ext.define('Ext.dd.DragTracker', {
 
 <span id='Ext-dd-DragTracker-cfg-overCls'>    /**
 </span>     * @cfg {String} overCls
-     * A CSS class to add to the DragTracker's target element when the element (or, if the {@link #delegate}
+     * A CSS class to add to the DragTracker&#39;s target element when the element (or, if the {@link #delegate}
      * option is used, when a delegate element) is mouseovered.
      *
      * If the {@link #delegate} option is used, these events fire only when a delegate element is entered of left.
@@ -72,7 +72,7 @@ Ext.define('Ext.dd.DragTracker', {
      * A {@link Ext.util.Region Region} (Or an element from which a Region measurement will be read)
      * which is used to constrain the result of the {@link #getOffset} call.
      *
-     * This may be set any time during the DragTracker's lifecycle to set a dynamic constraining region.
+     * This may be set any time during the DragTracker&#39;s lifecycle to set a dynamic constraining region.
      */
 
 <span id='Ext-dd-DragTracker-cfg-tolerance'>    /**
@@ -96,10 +96,10 @@ Ext.define('Ext.dd.DragTracker', {
 
 <span id='Ext-dd-DragTracker-cfg-delegate'>    /**
 </span>     * @cfg {String} delegate
-     * A CSS selector which identifies child elements within the DragTracker's encapsulating
+     * A CSS selector which identifies child elements within the DragTracker&#39;s encapsulating
      * Element which are the tracked elements. This limits tracking to only begin when the matching elements are mousedowned.
      *
-     * This may also be a specific child element within the DragTracker's encapsulating element to use as the tracked element.
+     * This may also be a specific child element within the DragTracker&#39;s encapsulating element to use as the tracked element.
      */
 
 <span id='Ext-dd-DragTracker-cfg-preventDefault'>    /**
@@ -114,7 +114,7 @@ Ext.define('Ext.dd.DragTracker', {
 
 <span id='Ext-dd-DragTracker-event-mouseover'>    /**
 </span>     * @event mouseover
-     * Fires when the mouse enters the DragTracker's target element (or if {@link #delegate} is
+     * Fires when the mouse enters the DragTracker&#39;s target element (or if {@link #delegate} is
      * used, when the mouse enters a delegate element).
      *
      * **Only available when {@link #trackOver} is `true`**
@@ -126,7 +126,7 @@ Ext.define('Ext.dd.DragTracker', {
 
 <span id='Ext-dd-DragTracker-event-mouseout'>    /**
 </span>     * @event mouseout
-     * Fires when the mouse exits the DragTracker's target element (or if {@link #delegate} is
+     * Fires when the mouse exits the DragTracker&#39;s target element (or if {@link #delegate} is
      * used, when the mouse exits a delegate element).
      * 
      * **Only available when {@link #trackOver} is `true`**
@@ -194,7 +194,7 @@ Ext.define('Ext.dd.DragTracker', {
             me.initEl(me.el);
         }
 
-        // Dont pass the config so that it is not applied to 'this' again
+        // Dont pass the config so that it is not applied to &#39;this&#39; again
         me.mixins.observable.constructor.call(me);
         if (me.disabled) {
             me.disable();
@@ -202,7 +202,7 @@ Ext.define('Ext.dd.DragTracker', {
 
         if (Ext.supports.Touch) {
             Ext.getWin().on({
-                touchstart: 'onWindowTouchStart',
+                touchstart: &#39;onWindowTouchStart&#39;,
                 scope: me,
                 capture: true
             });
@@ -222,7 +222,7 @@ Ext.define('Ext.dd.DragTracker', {
         me.el = el = Ext.get(el);
 
         // Disable drag to select. We must take over any drag selecting gestures.
-        el.addCls(Ext.baseCSSPrefix + 'unselectable');
+        el.addCls(Ext.baseCSSPrefix + &#39;unselectable&#39;);
 
         // The delegate option may also be an element on which to listen
         if (delegate &amp;&amp; delegate.isElement) {
@@ -333,8 +333,8 @@ Ext.define('Ext.dd.DragTracker', {
             handleCls, el, i, len, cls;
 
         if (!me.disabled) {
-            // Note that usually `delegate` is the same as `handleCls` just with a preceding '.'
-            // Also, we're now adding the classes directly to the resizer el rather than to an ancestor since this
+            // Note that usually `delegate` is the same as `handleCls` just with a preceding &#39;.&#39;
+            // Also, we&#39;re now adding the classes directly to the resizer el rather than to an ancestor since this
             // caused unwanted scrollbar flickering in IE 9 and less (both quirks and standards) when the panel
             // contained a textarea with auto overflow.  It would cause an unwanted recalc as the ancestor had classes
             // added and removed. See EXTJS-11673.
@@ -348,14 +348,14 @@ Ext.define('Ext.dd.DragTracker', {
                         cls = el.delegateCls;
 
                         if (!cls) {
-                            cls = el.delegateCls = [handleCls, '-', el.region, '-over'].join('');
+                            cls = el.delegateCls = [handleCls, &#39;-&#39;, el.region, &#39;-over&#39;].join(&#39;&#39;);
                         }
 
                         el.addCls([cls, me.overCls]);
                     }
                 }
 
-                me.fireEvent('mouseover', me, e, me.delegate ? e.getTarget(me.delegate, target) : me.handle);
+                me.fireEvent(&#39;mouseover&#39;, me, e, me.delegate ? e.getTarget(me.delegate, target) : me.handle);
             }
         }
     },
@@ -376,7 +376,7 @@ Ext.define('Ext.dd.DragTracker', {
                 }
             }
 
-            me.fireEvent('mouseout', me, e);
+            me.fireEvent(&#39;mouseout&#39;, me, e);
         }
     },
 
@@ -396,8 +396,8 @@ Ext.define('Ext.dd.DragTracker', {
         me.startXY = me.lastXY = e.getXY();
         me.startRegion = Ext.fly(me.dragTarget).getRegion();
 
-        if (me.fireEvent('mousedown', me, e) === false ||
-            me.fireEvent('beforedragstart', me, e) === false ||
+        if (me.fireEvent(&#39;mousedown&#39;, me, e) === false ||
+            me.fireEvent(&#39;beforedragstart&#39;, me, e) === false ||
             me.onBeforeStart(e) === false) {
             return;
         }
@@ -415,7 +415,7 @@ Ext.define('Ext.dd.DragTracker', {
         //&lt;/feature&gt;
 
         e.stopPropagation();
-        if (me.preventDefault !== false || e.pointerType === 'touch') {
+        if (me.preventDefault !== false || e.pointerType === &#39;touch&#39;) {
             e.preventDefault();
         }
         Ext.getDoc().on({
@@ -465,11 +465,11 @@ Ext.define('Ext.dd.DragTracker', {
         }
 
         // Returning false from a mousemove listener deactivates
-        if (me.fireEvent('mousemove', me, e) === false) {
+        if (me.fireEvent(&#39;mousemove&#39;, me, e) === false) {
             me.onMouseUp(e);
         } else {
             me.onDrag(e);
-            me.fireEvent('drag', me, e);
+            me.fireEvent(&#39;drag&#39;, me, e);
         }
     },
 
@@ -494,7 +494,7 @@ Ext.define('Ext.dd.DragTracker', {
             document.releaseCapture();
         }
 
-        me.fireEvent('mouseup', me, e);
+        me.fireEvent(&#39;mouseup&#39;, me, e);
         me.endDrag(e);
     },
 
@@ -518,7 +518,7 @@ Ext.define('Ext.dd.DragTracker', {
         me.dragEnded = true;
         if (wasActive) {
             me.onEnd(e);
-            me.fireEvent('dragend', me, e);
+            me.fireEvent(&#39;dragend&#39;, me, e);
         } else {
             me.onCancel(e);
         }
@@ -531,7 +531,7 @@ Ext.define('Ext.dd.DragTracker', {
         me.clearStart();
         me.active = true;
         me.onStart(e);
-        me.fireEvent('dragstart', me, e);
+        me.fireEvent(&#39;dragstart&#39;, me, e);
     },
 
 <span id='Ext-dd-DragTracker-method-clearStart'>    clearStart : function() {
@@ -597,7 +597,7 @@ Ext.define('Ext.dd.DragTracker', {
     },
 
 <span id='Ext-dd-DragTracker-method-getDragTarget'>    /**
-</span>     * Returns the drag target. This is usually the DragTracker's encapsulating element.
+</span>     * Returns the drag target. This is usually the DragTracker&#39;s encapsulating element.
      *
      * If the {@link #delegate} option is being used, this may be a child element which matches the
      * {@link #delegate} selector.
@@ -610,7 +610,7 @@ Ext.define('Ext.dd.DragTracker', {
 
 <span id='Ext-dd-DragTracker-method-getDragCt'>    /**
 </span>     * @private
-     * @return {Ext.dom.Element} The DragTracker's encapsulating element.
+     * @return {Ext.dom.Element} The DragTracker&#39;s encapsulating element.
      */
     getDragCt : function(){
         return this.el;

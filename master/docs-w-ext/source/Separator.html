@@ -20,26 +20,26 @@
  * add one of these by using &quot;-&quot; in your call to add() or in your items config rather than creating one directly.
  *
  *     @example
- *     Ext.create('Ext.menu.Menu', {
+ *     Ext.create(&#39;Ext.menu.Menu&#39;, {
  *         width: 100,
  *         height: 100,
  *         floating: false,  // usually you want this set to True (default)
- *         renderTo: Ext.getBody(),  // usually rendered by it's containing component
+ *         renderTo: Ext.getBody(),  // usually rendered by it&#39;s containing component
  *         items: [{
- *             text: 'icon item',
- *             iconCls: 'add16'
+ *             text: &#39;icon item&#39;,
+ *             iconCls: &#39;add16&#39;
  *         },{
- *             xtype: 'menuseparator'
+ *             xtype: &#39;menuseparator&#39;
  *         },{
- *            text: 'separator above'
+ *            text: &#39;separator above&#39;
  *         },{
- *            text: 'regular item'
+ *            text: &#39;regular item&#39;
  *         }]
  *     });
  */
-Ext.define('Ext.menu.Separator', {
-    extend: 'Ext.menu.Item',
-    alias: 'widget.menuseparator',
+Ext.define(&#39;Ext.menu.Separator&#39;, {
+    extend: &#39;Ext.menu.Item&#39;,
+    alias: &#39;widget.menuseparator&#39;,
     
 <span id='Ext-menu-Separator-property-focusable'>    focusable: false,
 </span>
@@ -125,15 +125,15 @@ Ext.define('Ext.menu.Separator', {
 </span>     * @cfg {String} separatorCls
      * The CSS class used by the separator item to show the incised line.
      */
-    separatorCls: Ext.baseCSSPrefix + 'menu-item-separator',
+    separatorCls: Ext.baseCSSPrefix + &#39;menu-item-separator&#39;,
 
 <span id='Ext-menu-Separator-cfg-text'>    /**
 </span>     * @cfg {String} text
      * @private
      */
-    text: '&amp;#160;',
+    text: &#39;&amp;#160;&#39;,
     
-<span id='Ext-menu-Separator-property-ariaRole'>    ariaRole: 'separator',
+<span id='Ext-menu-Separator-property-ariaRole'>    ariaRole: &#39;separator&#39;,
 </span>
 <span id='Ext-menu-Separator-method-beforeRender'>    beforeRender: function() {
 </span>        this.addCls(this.separatorCls);

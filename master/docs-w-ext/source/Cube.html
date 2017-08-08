@@ -18,10 +18,10 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-animation-Cube'>/**
 </span> * @private
  */
-Ext.define('Ext.fx.animation.Cube', {
-    extend: 'Ext.fx.animation.Abstract',
+Ext.define(&#39;Ext.fx.animation.Cube&#39;, {
+    extend: &#39;Ext.fx.animation.Abstract&#39;,
 
-    alias: 'animation.cube',
+    alias: &#39;animation.cube&#39;,
 
     config: {
 <span id='Ext-fx-animation-Cube-cfg-before'>        /**
@@ -29,7 +29,7 @@ Ext.define('Ext.fx.animation.Cube', {
          * @inheritdoc
          */
         before: {
-//            'transform-style': 'preserve-3d'
+//            &#39;transform-style&#39;: &#39;preserve-3d&#39;
         },
 
 <span id='Ext-fx-animation-Cube-cfg-after'>        after: {},
@@ -38,7 +38,7 @@ Ext.define('Ext.fx.animation.Cube', {
 </span>         * @cfg {String} direction The direction of which the slide animates
          * @accessor
          */
-        direction: 'right',
+        direction: &#39;right&#39;,
 
 <span id='Ext-fx-animation-Cube-cfg-out'>        out: false
 </span>    },
@@ -88,7 +88,7 @@ Ext.define('Ext.fx.animation.Cube', {
 //                fromTransform.translateX *= -1;
 //            }
 //
-//            if (direction === 'right') {
+//            if (direction === &#39;right&#39;) {
 //                tempTransform = fromTransform;
 //                fromTransform = toTransform;
 //                toTransform = tempTransform;
@@ -119,8 +119,8 @@ Ext.define('Ext.fx.animation.Cube', {
 //            }
 //        }
 //
-//        from.set('transform', fromTransform);
-//        to.set('transform', toTransform);
+//        from.set(&#39;transform&#39;, fromTransform);
+//        to.set(&#39;transform&#39;, toTransform);
 //
 //        return this.callParent(arguments);
 //    },
@@ -135,7 +135,7 @@ Ext.define('Ext.fx.animation.Cube', {
             el = this.getElement(),
             elW = el.getWidth(),
             elH = el.getHeight(),
-            origin = out ? '100% 100%' : '0% 0%',
+            origin = out ? &#39;100% 100%&#39; : &#39;0% 0%&#39;,
             fromOpacity = 1,
             toOpacity = 1,
             transformFrom = {
@@ -159,14 +159,14 @@ Ext.define('Ext.fx.animation.Cube', {
             }
         }
 
-        before['transform-origin'] = origin;
-        after['transform-origin'] = null;
+        before[&#39;transform-origin&#39;] = origin;
+        after[&#39;transform-origin&#39;] = null;
 
-        to.set('transform', transformTo);
-        from.set('transform', transformFrom);
+        to.set(&#39;transform&#39;, transformTo);
+        from.set(&#39;transform&#39;, transformFrom);
 
-        from.set('opacity', fromOpacity);
-        to.set('opacity', toOpacity);
+        from.set(&#39;opacity&#39;, fromOpacity);
+        to.set(&#39;opacity&#39;, toOpacity);
 
         return this.callParent(arguments);
     }

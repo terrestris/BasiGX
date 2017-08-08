@@ -19,45 +19,45 @@
 </span> * Filter type for {@link Ext.grid.column.Number number columns}.
  *
  *     @example
- *     var shows = Ext.create('Ext.data.Store', {
- *           fields: ['id','show'],
+ *     var shows = Ext.create(&#39;Ext.data.Store&#39;, {
+ *           fields: [&#39;id&#39;,&#39;show&#39;],
  *           data: [
- *               {id: 0, show: 'Battlestar Galactica'},
- *               {id: 1, show: 'Doctor Who'},
- *               {id: 2, show: 'Farscape'},
- *               {id: 3, show: 'Firefly'},
- *               {id: 4, show: 'Star Trek'},
- *               {id: 5, show: 'Star Wars: Christmas Special'}
+ *               {id: 0, show: &#39;Battlestar Galactica&#39;},
+ *               {id: 1, show: &#39;Doctor Who&#39;},
+ *               {id: 2, show: &#39;Farscape&#39;},
+ *               {id: 3, show: &#39;Firefly&#39;},
+ *               {id: 4, show: &#39;Star Trek&#39;},
+ *               {id: 5, show: &#39;Star Wars: Christmas Special&#39;}
  *           ]
  *        });
  *       
- *       Ext.create('Ext.grid.Panel', {
+ *       Ext.create(&#39;Ext.grid.Panel&#39;, {
  *           renderTo: Ext.getBody(),
- *           title: 'Sci-Fi Television',
+ *           title: &#39;Sci-Fi Television&#39;,
  *           height: 250,
  *           width: 250,
  *           store: shows,
- *           plugins: 'gridfilters',
+ *           plugins: &#39;gridfilters&#39;,
  *           columns: [{
- *               dataIndex: 'id',
- *               text: 'ID',
+ *               dataIndex: &#39;id&#39;,
+ *               text: &#39;ID&#39;,
  *               width: 50,
- *               filter: 'number' // May also be 'numeric'
+ *               filter: &#39;number&#39; // May also be &#39;numeric&#39;
  *           },{
- *               dataIndex: 'show',
- *               text: 'Show',
+ *               dataIndex: &#39;show&#39;,
+ *               text: &#39;Show&#39;,
  *               flex: 1                  
  *           }]
  *       });
  * 
  */
-Ext.define('Ext.grid.filters.filter.Number', {
-    extend: 'Ext.grid.filters.filter.TriFilter',
-    alias: ['grid.filter.number', 'grid.filter.numeric'],
+Ext.define(&#39;Ext.grid.filters.filter.Number&#39;, {
+    extend: &#39;Ext.grid.filters.filter.TriFilter&#39;,
+    alias: [&#39;grid.filter.number&#39;, &#39;grid.filter.numeric&#39;],
 
-    uses: ['Ext.form.field.Number'],
+    uses: [&#39;Ext.form.field.Number&#39;],
 
-<span id='Ext-grid-filters-filter-Number-property-type'>    type: 'number',
+<span id='Ext-grid-filters-filter-Number-property-type'>    type: &#39;number&#39;,
 </span>
     config: {
 <span id='Ext-grid-filters-filter-Number-cfg-fields'>        /**
@@ -78,15 +78,15 @@ Ext.define('Ext.grid.filters.filter.Number', {
          */
         fields: {
             gt: {
-                iconCls: Ext.baseCSSPrefix + 'grid-filters-gt',
-                margin: '0 0 3px 0'
+                iconCls: Ext.baseCSSPrefix + &#39;grid-filters-gt&#39;,
+                margin: &#39;0 0 3px 0&#39;
             },
             lt: {
-                iconCls: Ext.baseCSSPrefix + 'grid-filters-lt',
-                margin: '0 0 3px 0'
+                iconCls: Ext.baseCSSPrefix + &#39;grid-filters-lt&#39;,
+                margin: &#39;0 0 3px 0&#39;
             },
             eq: {
-                iconCls: Ext.baseCSSPrefix + 'grid-filters-eq',
+                iconCls: Ext.baseCSSPrefix + &#39;grid-filters-eq&#39;,
                 margin: 0
             }
         }
@@ -97,14 +97,14 @@ Ext.define('Ext.grid.filters.filter.Number', {
 </span>     * @cfg {String} emptyText
      * The empty text to show for each field.
      */
-    emptyText: 'Enter Number...',
+    emptyText: &#39;Enter Number...&#39;,
 <span id='Ext-grid-filters-filter-Number-cfg-itemDefaults'>    //&lt;/locale&gt;
 </span>
     itemDefaults: {
-        xtype: 'numberfield',
+        xtype: &#39;numberfield&#39;,
         enableKeyEvents: true,
         hideEmptyLabel: false,
-        labelSeparator: '',
+        labelSeparator: &#39;&#39;,
         labelWidth: 29,
         selectOnFocus: false
     },
@@ -140,11 +140,11 @@ Ext.define('Ext.grid.filters.filter.Number', {
 
         for (i = 0, len = menuItems.length; i &lt; len; i++) {
             key = menuItems[i];
-            if (key !== '-') {
+            if (key !== &#39;-&#39;) {
                 field = fields[key];
 
                 cfg = {
-                    labelClsExtra: Ext.baseCSSPrefix + 'grid-filters-icon ' + field.iconCls
+                    labelClsExtra: Ext.baseCSSPrefix + &#39;grid-filters-icon &#39; + field.iconCls
                 };
 
                 if (itemDefaults) {

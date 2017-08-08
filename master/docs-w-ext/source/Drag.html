@@ -18,8 +18,8 @@
   <pre class="prettyprint lang-js"><span id='Ext-event-gesture-Drag'>/**
 </span> *
  */
-Ext.define('Ext.event.gesture.Drag', {
-    extend: 'Ext.event.gesture.SingleTouch',
+Ext.define(&#39;Ext.event.gesture.Drag&#39;, {
+    extend: &#39;Ext.event.gesture.SingleTouch&#39;,
 
 <span id='Ext-event-gesture-Drag-property-priority'>    priority: 100,
 </span>
@@ -29,7 +29,7 @@ Ext.define('Ext.event.gesture.Drag', {
 </span>
 <span id='Ext-event-gesture-Drag-property-lastPoint'>    lastPoint: null,
 </span>
-<span id='Ext-event-gesture-Drag-property-handledEvents'>    handledEvents: ['dragstart', 'drag', 'dragend', 'dragcancel'],
+<span id='Ext-event-gesture-Drag-property-handledEvents'>    handledEvents: [&#39;dragstart&#39;, &#39;drag&#39;, &#39;dragend&#39;, &#39;dragcancel&#39;],
 </span>
     config: {
 <span id='Ext-event-gesture-Drag-cfg-minDistance'>        /**
@@ -126,12 +126,12 @@ Ext.define('Ext.event.gesture.Drag', {
 
         me.previousPoint = me.lastPoint = point;
 
-        me.resetInfo('x', e, touch);
-        me.resetInfo('y', e, touch);
+        me.resetInfo(&#39;x&#39;, e, touch);
+        me.resetInfo(&#39;y&#39;, e, touch);
 
         info.time = time;
 
-        me.fire('dragstart', e, info);
+        me.fire(&#39;dragstart&#39;, e, info);
     },
 
 <span id='Ext-event-gesture-Drag-method-onTouchMove'>    onTouchMove: function(e) {
@@ -160,12 +160,12 @@ Ext.define('Ext.event.gesture.Drag', {
         me.lastPoint = point;
         me.lastMoveEvent = e;
 
-        me.updateInfo('x', e, touch);
-        me.updateInfo('y', e, touch);
+        me.updateInfo(&#39;x&#39;, e, touch);
+        me.updateInfo(&#39;y&#39;, e, touch);
 
         me.info.time = e.time;
 
-        me.fire('drag', e, me.info);
+        me.fire(&#39;drag&#39;, e, me.info);
     },
 
 <span id='Ext-event-gesture-Drag-method-onAxisDragEnd'>    onAxisDragEnd: function(axis, info) {
@@ -194,12 +194,12 @@ Ext.define('Ext.event.gesture.Drag', {
         info[axis] = value;
         info.direction[axis] = 0;
 
-        info['start' + capAxis] = me.startPoint[axis];
-        info['previous' + capAxis] = info.previous[axis];
-        info['page' + capAxis] = info[axis];
-        info['delta' + capAxis] = info.delta[axis];
-        info['absDelta' + capAxis] = info.absDelta[axis];
-        info['previousDelta' + capAxis] = 0;
+        info[&#39;start&#39; + capAxis] = me.startPoint[axis];
+        info[&#39;previous&#39; + capAxis] = info.previous[axis];
+        info[&#39;page&#39; + capAxis] = info[axis];
+        info[&#39;delta&#39; + capAxis] = info.delta[axis];
+        info[&#39;absDelta&#39; + capAxis] = info.absDelta[axis];
+        info[&#39;previousDelta&#39; + capAxis] = 0;
         info.startTime = me.startTime;
     },
 
@@ -232,12 +232,12 @@ Ext.define('Ext.event.gesture.Drag', {
             direction[axis] = -1;
         }
 
-        info['start' + capAxis] = startValue;
-        info['previous' + capAxis] = info.previous[axis];
-        info['page' + capAxis] = info[axis];
-        info['delta' + capAxis] = info.delta[axis];
-        info['absDelta' + capAxis] = info.absDelta[axis];
-        info['previousDelta' + capAxis] = info.previous[axis] - startValue;
+        info[&#39;start&#39; + capAxis] = startValue;
+        info[&#39;previous&#39; + capAxis] = info.previous[axis];
+        info[&#39;page&#39; + capAxis] = info[axis];
+        info[&#39;delta&#39; + capAxis] = info.delta[axis];
+        info[&#39;absDelta&#39; + capAxis] = info.absDelta[axis];
+        info[&#39;previousDelta&#39; + capAxis] = info.previous[axis] - startValue;
         info.startTime = me.startTime;
     },
 
@@ -252,15 +252,15 @@ Ext.define('Ext.event.gesture.Drag', {
 
             me.lastPoint = point;
 
-            me.updateInfo('x', e, touch);
-            me.updateInfo('y', e, touch);
+            me.updateInfo(&#39;x&#39;, e, touch);
+            me.updateInfo(&#39;y&#39;, e, touch);
 
             info.time = e.time;
 
-            me.onAxisDragEnd('x', info);
-            me.onAxisDragEnd('y', info);
+            me.onAxisDragEnd(&#39;x&#39;, info);
+            me.onAxisDragEnd(&#39;y&#39;, info);
 
-            me.fire('dragend', e, info);
+            me.fire(&#39;dragend&#39;, e, info);
         }
 
         return this.callParent([e]);
@@ -280,12 +280,12 @@ Ext.define('Ext.event.gesture.Drag', {
             me.lastPoint = touch.point;
         }
 
-        me.updateInfo('x', e, touch);
-        me.updateInfo('y', e, touch);
+        me.updateInfo(&#39;x&#39;, e, touch);
+        me.updateInfo(&#39;y&#39;, e, touch);
 
         info.time = e.time;
 
-        me.fire('dragcancel', e, info, true);
+        me.fire(&#39;dragcancel&#39;, e, info, true);
     },
 
 <span id='Ext-event-gesture-Drag-method-reset'>    reset: function() {

@@ -18,26 +18,26 @@
   <pre class="prettyprint lang-js"><span id='Ext-event-publisher-Focus'>/**
 </span> * @private
  */
-Ext.define('Ext.event.publisher.Focus', {
-    extend: 'Ext.event.publisher.Dom',
+Ext.define(&#39;Ext.event.publisher.Focus&#39;, {
+    extend: &#39;Ext.event.publisher.Dom&#39;,
     requires: [
-        'Ext.dom.Element',
-        'Ext.GlobalEvents'
+        &#39;Ext.dom.Element&#39;,
+        &#39;Ext.GlobalEvents&#39;
     ],
 
-<span id='Ext-event-publisher-Focus-property-type'>    type: 'focus',
+<span id='Ext-event-publisher-Focus-property-type'>    type: &#39;focus&#39;,
 </span>
-<span id='Ext-event-publisher-Focus-property-handledEvents'>    handledEvents: ['focusenter', 'focusleave', 'focusmove'],
+<span id='Ext-event-publisher-Focus-property-handledEvents'>    handledEvents: [&#39;focusenter&#39;, &#39;focusleave&#39;, &#39;focusmove&#39;],
 </span>
 <span id='Ext-event-publisher-Focus-property-handledDomEvents'>    // At this point only Firefox does not support focusin/focusout, see this bug:
 </span>    // https://bugzilla.mozilla.org/show_bug.cgi?id=687787
-    handledDomEvents: ['focusin', 'focusout'],
+    handledDomEvents: [&#39;focusin&#39;, &#39;focusout&#39;],
 
 <span id='Ext-event-publisher-Focus-method-publishDelegatedDomEvent'>    publishDelegatedDomEvent: function(e) {
 </span>        var me = this,
             relatedTarget = e.relatedTarget;
 
-        if (e.type === 'focusout') {
+        if (e.type === &#39;focusout&#39;) {
             // If focus is departing to the document, there will be no forthcoming focusin event
             // to trigger a focusleave, to fire a focusleave now.
             if (relatedTarget == null) {
@@ -80,7 +80,7 @@ Ext.define('Ext.event.publisher.Focus', {
 
         // Publish the focusleave event for the bubble hierarchy
         if (targets.length) {
-            event = me.createSyntheticEvent('focusleave', e, fromElement, toElement);
+            event = me.createSyntheticEvent(&#39;focusleave&#39;, e, fromElement, toElement);
             me.publish(event, targets);
             if (event.stopped) {
                 return;
@@ -94,7 +94,7 @@ Ext.define('Ext.event.publisher.Focus', {
         }
 
         // We always need this event; this is what we pass to the global focus event
-        focusEnterEvent = me.createSyntheticEvent('focusenter', e, toElement, fromElement);
+        focusEnterEvent = me.createSyntheticEvent(&#39;focusenter&#39;, e, toElement, fromElement);
 
         // Publish the focusleave event for the bubble hierarchy
         if (targets.length) {
@@ -109,14 +109,14 @@ Ext.define('Ext.event.publisher.Focus', {
 
         // Publish the focusleave event for the bubble hierarchy
         if (targets.length) {
-            event = me.createSyntheticEvent('focusmove', e, toElement, fromElement);
+            event = me.createSyntheticEvent(&#39;focusmove&#39;, e, toElement, fromElement);
             me.publish(event, targets);
             if (event.stopped) {
                 return;
             }
         }
 
-        Ext.GlobalEvents.fireEvent('focus', {
+        Ext.GlobalEvents.fireEvent(&#39;focus&#39;, {
             event: focusEnterEvent,
             toElement: toElement,
             fromElement: fromElement
@@ -146,7 +146,7 @@ function(Focus) {
         // When focusin/focusout are not available we capture focus event instead,
         // and fire both focusenter *and* focusleave in the focus handler.
         this.override({
-            handledDomEvents: ['focus', 'blur'],
+            handledDomEvents: [&#39;focus&#39;, &#39;blur&#39;],
             
             publishDelegatedDomEvent: function(e) {
                 var me = this,
@@ -159,7 +159,7 @@ function(Focus) {
 
                 // There might be an upcoming focus event, but if none happens
                 // within a minimal timeout, then we treat this as a focus of the body
-                if (e.type === 'blur') {
+                if (e.type === &#39;blur&#39;) {
                     if (!targetIsElement) {
                         // Apparently when focus goes outside of the document, Firefox
                         // will fire blur on the currently focused element, then on the document,
@@ -181,7 +181,7 @@ function(Focus) {
                     else {
                         // If event target is a valid element, blur could have been caused
                         // by removing previously focused element from the DOM, or some
-                        // other happening that doesn't involve &lt;strike&gt;Elvis&lt;/strike&gt;focus
+                        // other happening that doesn&#39;t involve &lt;strike&gt;Elvis&lt;/strike&gt;focus
                         // completely leaving the building.
                         focusTimeout = setTimeout(function() {
                             focusTimeout = 0;

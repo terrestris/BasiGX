@@ -21,19 +21,19 @@
  * (either an HBox or a VBox) has child items that are either too wide (for HBox) or too tall (for VBox)
  * for its container.
  */
-Ext.define('Ext.layout.container.boxOverflow.None', {
-    alternateClassName: 'Ext.layout.boxOverflow.None',
+Ext.define(&#39;Ext.layout.container.boxOverflow.None&#39;, {
+    alternateClassName: &#39;Ext.layout.boxOverflow.None&#39;,
     alias: [
-        'box.overflow.none',
-        'box.overflow.None' // capitalized for 4.x compat
+        &#39;box.overflow.none&#39;,
+        &#39;box.overflow.None&#39; // capitalized for 4.x compat
     ],
 
     mixins: [
-        'Ext.mixin.Factoryable'
+        &#39;Ext.mixin.Factoryable&#39;
     ],
 
 <span id='Ext-layout-container-boxOverflow-None-property-factoryConfig'>    factoryConfig: {
-</span>        defaultType: 'none'
+</span>        defaultType: &#39;none&#39;
     },
 
 <span id='Ext-layout-container-boxOverflow-None-property-isBoxOverflowHandler'>    isBoxOverflowHandler: true,
@@ -91,10 +91,10 @@ Ext.define('Ext.layout.container.boxOverflow.None', {
 
         // Only count hidden children if someone is interested when the overflow state changes
         if (owner.hasListeners.overflowchange) {
-            hiddens = owner.query('&gt;[hidden]');
+            hiddens = owner.query(&#39;&gt;[hidden]&#39;);
             hiddenCount = hiddens.length;
             if (hiddenCount !== me.lastHiddenCount) {
-                owner.fireEvent('overflowchange', me.lastHiddenCount, hiddenCount, hiddens);
+                owner.fireEvent(&#39;overflowchange&#39;, me.lastHiddenCount, hiddenCount, hiddens);
                 me.lastHiddenCount = hiddenCount;
             }
         }
@@ -115,13 +115,13 @@ Ext.define('Ext.layout.container.boxOverflow.None', {
 <span id='Ext-layout-container-boxOverflow-None-method-getOwnerType'>    getOwnerType: function(owner){
 </span>        var type;
         if (owner.isToolbar) {
-            type = 'toolbar';
+            type = &#39;toolbar&#39;;
         } else if (owner.isTabBar) {
-            type = 'tab-bar';
+            type = &#39;tab-bar&#39;;
         } else if (owner.isMenu) {
-            type = 'menu';
+            type = &#39;menu&#39;;
         } else if (owner.isBreadcrumb) {
-            type = 'breadcrumb';
+            type = &#39;breadcrumb&#39;;
         } else {
             type = owner.getXType();
         }
@@ -132,7 +132,7 @@ Ext.define('Ext.layout.container.boxOverflow.None', {
 <span id='Ext-layout-container-boxOverflow-None-method-getPrefixConfig'>    getPrefixConfig: Ext.emptyFn,
 </span><span id='Ext-layout-container-boxOverflow-None-method-getSuffixConfig'>    getSuffixConfig: Ext.emptyFn,
 </span><span id='Ext-layout-container-boxOverflow-None-method-getOverflowCls'>    getOverflowCls: function() {
-</span>        return '';
+</span>        return &#39;&#39;;
     },
 
 <span id='Ext-layout-container-boxOverflow-None-method-setVertical'>    setVertical: function() {

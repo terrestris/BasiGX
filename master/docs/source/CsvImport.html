@@ -44,10 +44,10 @@
  *
  * @class BasiGX.view.form.CsvImport
  */
-Ext.define('BasiGX.view.form.CsvImport', {
-    extend: 'Ext.form.Panel',
+Ext.define(&#39;BasiGX.view.form.CsvImport&#39;, {
+    extend: &#39;Ext.form.Panel&#39;,
 
-    xtype: 'form-csvimport',
+    xtype: &#39;form-csvimport&#39;,
 
     config: {
 <span id='BasiGX-view-form-CsvImport-cfg-grid'>        grid: null,
@@ -63,7 +63,7 @@ Ext.define('BasiGX.view.form.CsvImport', {
         var me = this;
         me.callParent(conf);
         if (!me.getGrid()) {
-            Ext.Error.raise('No grid defined for csv-importer.');
+            Ext.Error.raise(&#39;No grid defined for csv-importer.&#39;);
         }
     },
 
@@ -91,37 +91,37 @@ Ext.define('BasiGX.view.form.CsvImport', {
 <span id='BasiGX-view-form-CsvImport-property-bodyPadding'>    bodyPadding: 10,
 </span>
 <span id='BasiGX-view-form-CsvImport-property-items'>    items: [{
-</span>        xtype: 'filefield',
-        name: 'csv_file',
-        fieldLabel: 'CSV-Datei', // TODO i18n
+</span>        xtype: &#39;filefield&#39;,
+        name: &#39;csv_file&#39;,
+        fieldLabel: &#39;CSV-Datei&#39;, // TODO i18n
         labelWidth: 70,
         width: 400,
-        msgTarget: 'side',
+        msgTarget: &#39;side&#39;,
         allowBlank: false,
-        buttonText: 'Datei auswählen …', // TODO i18n
+        buttonText: &#39;Datei auswählen …&#39;, // TODO i18n
         validator: function(val) {
             var fileName = /^.*\.(csv)$/i;
             // TODO i18n
-            var errMsg = 'Der Datenimport ist nur mit CSV-Dateien möglich.';
+            var errMsg = &#39;Der Datenimport ist nur mit CSV-Dateien möglich.&#39;;
             return fileName.test(val) || errMsg;
         }
     }],
 
 <span id='BasiGX-view-form-CsvImport-property-buttons'>    buttons: [{
-</span>        xtype: 'button',
-        name: 'importBtn',
-        text: 'Importieren', // TODO i18n
+</span>        xtype: &#39;button&#39;,
+        name: &#39;importBtn&#39;,
+        text: &#39;Importieren&#39;, // TODO i18n
         handler: function(btn) {
-            var csvImportForm = this.up('form');
+            var csvImportForm = this.up(&#39;form&#39;);
             csvImportForm.startImport(btn);
         },
         disabled: true
     }, {
-        text: 'Datei einlesen', // TODO i18n
+        text: &#39;Datei einlesen&#39;, // TODO i18n
         handler: function() {
             if (window.FileReader) {
-                var csvImportForm = this.up('form');
-                var fileField = csvImportForm.down('filefield');
+                var csvImportForm = this.up(&#39;form&#39;);
+                var fileField = csvImportForm.down(&#39;filefield&#39;);
                 var file = fileField.extractFileInput().files[0];
                 var reader = new FileReader();
 
@@ -130,7 +130,7 @@ Ext.define('BasiGX.view.form.CsvImport', {
                 reader.onerror = csvImportForm.onError;
             } else {
                 // TODO i18n
-                Ext.Toast('FileReader are not supported in this browser.');
+                Ext.Toast(&#39;FileReader are not supported in this browser.&#39;);
             }
         }
     }],
@@ -142,7 +142,7 @@ Ext.define('BasiGX.view.form.CsvImport', {
      * @param {Object} event The event from the FileReader.
      */
     onLoad: function(event) {
-        var csvImportForm = Ext.ComponentQuery.query('form-csvimport')[0];
+        var csvImportForm = Ext.ComponentQuery.query(&#39;form-csvimport&#39;)[0];
         var csv = event.target.result;
         var dataArray = Ext.util.CSV.decode(csv);
         csvImportForm.setDataArray(dataArray);
@@ -158,9 +158,9 @@ Ext.define('BasiGX.view.form.CsvImport', {
      * @param {Object} evt The event from the FileReader.
      */
     onError: function(evt) {
-        if (evt.target.error.name === 'NotReadableError') {
+        if (evt.target.error.name === &#39;NotReadableError&#39;) {
             // TODO i18n
-            Ext.toast('Canno\'t read file !');
+            Ext.toast(&#39;Canno\&#39;t read file !&#39;);
         }
     },
 
@@ -172,17 +172,17 @@ Ext.define('BasiGX.view.form.CsvImport', {
      */
     setupAssociations: function(titleRow, csvImportForm) {
         var dataModelColumns = csvImportForm.getGrid().query(
-            'gridcolumn[hidden=false]'
+            &#39;gridcolumn[hidden=false]&#39;
         );
         var columnTitles = [];
-        var assoFieldset = Ext.create('Ext.form.FieldSet', {
-            title: 'Felder assoziieren', // TODO i18n
-            name: 'assoFieldset',
-            layout: 'form',
-            scrollable: 'y',
+        var assoFieldset = Ext.create(&#39;Ext.form.FieldSet&#39;, {
+            title: &#39;Felder assoziieren&#39;, // TODO i18n
+            name: &#39;assoFieldset&#39;,
+            layout: &#39;form&#39;,
+            scrollable: &#39;y&#39;,
             maxHeight: 300,
             collapsible: true,
-            margin: '0 0 30 0'
+            margin: &#39;0 0 30 0&#39;
         });
 
         Ext.each(dataModelColumns, function(column) {
@@ -191,16 +191,16 @@ Ext.define('BasiGX.view.form.CsvImport', {
 
         Ext.each(titleRow, function(columnName) {
             assoFieldset.add({
-                xtype: 'combobox',
+                xtype: &#39;combobox&#39;,
                 name: columnName,
                 fieldLabel: columnName,
                 store: columnTitles,
                 value: csvImportForm.associatonObject[columnName],
-                msgTarget: 'side'
+                msgTarget: &#39;side&#39;
             });
         }, csvImportForm);
 
-        csvImportForm.down('button[name=importBtn]').enable();
+        csvImportForm.down(&#39;button[name=importBtn]&#39;).enable();
 
         csvImportForm.add(assoFieldset);
     },
@@ -239,14 +239,14 @@ Ext.define('BasiGX.view.form.CsvImport', {
                 me.getDataArray()[0][rowIdx]];
             if (!Ext.isEmpty(csvColumn) &amp;&amp; !Ext.isEmpty(gridColumText)) {
                 var gridColumn = me.getGrid()
-                    .down('gridcolumn[text=' + gridColumText + ']');
+                    .down(&#39;gridcolumn[text=&#39; + gridColumText + &#39;]&#39;);
                 if (gridColumn) {
                     var dataIndex = gridColumn.dataIndex;
                     data[dataIndex] = csvColumn;
                 } else {
                     // TODO i18n
                     Ext.Error.raise(gridColumText,
-                        ' does not exist. Please check you associationObject.');
+                        &#39; does not exist. Please check you associationObject.&#39;);
                 }
             }
         });
@@ -261,8 +261,8 @@ Ext.define('BasiGX.view.form.CsvImport', {
      */
     startImport: function(btn) {
         var me = this;
-        var combos = btn.up('form').down('fieldset[name=assoFieldset]').
-            query('combo');
+        var combos = btn.up(&#39;form&#39;).down(&#39;fieldset[name=assoFieldset]&#39;).
+            query(&#39;combo&#39;);
         var comboValues = [];
         var formValid = true;
 
@@ -271,8 +271,8 @@ Ext.define('BasiGX.view.form.CsvImport', {
             if (Ext.Array.contains(comboValues, comboVal) &amp;&amp;
                 !Ext.isEmpty(comboVal)) {
                 // TODO i18n
-                combo.markInvalid('Diese Feld wurde bereits mit einer anderen' +
-                    'Spalte asoziert');
+                combo.markInvalid(&#39;Diese Feld wurde bereits mit einer anderen&#39; +
+                    &#39;Spalte asoziert&#39;);
                 formValid = false;
             } else {
                 this.associatonObject[combo.getFieldLabel()] = comboVal;
@@ -284,7 +284,7 @@ Ext.define('BasiGX.view.form.CsvImport', {
             me.addToGrid(me.getDataArray());
         }
 
-        me.fireEvent('importcomplete', me);
+        me.fireEvent(&#39;importcomplete&#39;, me);
     }
 });
 </pre>

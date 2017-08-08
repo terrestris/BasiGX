@@ -19,11 +19,11 @@
 </span> * Component layout for Ext.form.FieldSet components
  * @private
  */
-Ext.define('Ext.layout.component.FieldSet', {
-    extend: 'Ext.layout.component.Body',
-    alias: ['layout.fieldset'],
+Ext.define(&#39;Ext.layout.component.FieldSet&#39;, {
+    extend: &#39;Ext.layout.component.Body&#39;,
+    alias: [&#39;layout.fieldset&#39;],
 
-<span id='Ext-layout-component-FieldSet-property-type'>    type: 'fieldset',
+<span id='Ext-layout-component-FieldSet-property-type'>    type: &#39;fieldset&#39;,
 </span>    
 <span id='Ext-layout-component-FieldSet-property-defaultCollapsedWidth'>    defaultCollapsedWidth: 100,
 </span>
@@ -52,7 +52,7 @@ Ext.define('Ext.layout.component.FieldSet', {
         //
         if (target.collapsed) {
             ownerContext.setContentHeight(0);
-            // if we're collapsed, ignore a minHeight because it's likely going to
+            // if we&#39;re collapsed, ignore a minHeight because it&#39;s likely going to
             // be greater than the collapsed height
             ownerContext.restoreMinHeight = target.minHeight;
             delete target.minHeight;
@@ -80,7 +80,7 @@ Ext.define('Ext.layout.component.FieldSet', {
 <span id='Ext-layout-component-FieldSet-method-calculateOwnerWidthFromContentWidth'>    calculateOwnerWidthFromContentWidth: function(ownerContext, contentWidth) {
 </span>        var legendContext = ownerContext.legendContext;
         if (legendContext) {
-            contentWidth = Math.max(contentWidth, legendContext.getProp('width'));
+            contentWidth = Math.max(contentWidth, legendContext.getProp(&#39;width&#39;));
         }
         return this.callParent([ownerContext, contentWidth]);
     },
@@ -91,24 +91,24 @@ Ext.define('Ext.layout.component.FieldSet', {
             
         // Height of fieldset is content height plus top border width (which is either the
         // legend height or top border width) plus bottom border width
-        return ownerContext.getProp('contentHeight') +
+        return ownerContext.getProp(&#39;contentHeight&#39;) +
                ownerContext.getPaddingInfo().height +
                // In IE8m the top padding is on the body el
                (Ext.isIE8 ?
                    ownerContext.bodyContext.getPaddingInfo().top : 0) +
-               (legendContext ? legendContext.getProp('height') : border.top) +
+               (legendContext ? legendContext.getProp(&#39;height&#39;) : border.top) +
                border.bottom;
     },
 
 <span id='Ext-layout-component-FieldSet-method-publishInnerHeight'>    publishInnerHeight: function (ownerContext, height) {
 </span>        // Subtract the legend off here and pass it up to the body
-        // We do this because we don't want to set an incorrect body height
+        // We do this because we don&#39;t want to set an incorrect body height
         // and then setting it again with the correct value
         var legendContext = ownerContext.legendContext,
             legendHeight = 0;
 
         if (legendContext) {
-            legendHeight = legendContext.getProp('height');
+            legendHeight = legendContext.getProp(&#39;height&#39;);
         }
         if (legendHeight === undefined) {
             this.done = false;

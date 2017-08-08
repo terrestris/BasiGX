@@ -20,10 +20,10 @@
  *
  * @abstract
  */
-Ext.define('Ext.drag.Item', {
+Ext.define(&#39;Ext.drag.Item&#39;, {
     mixins: [
-        'Ext.mixin.Observable',
-        'Ext.mixin.Identifiable'
+        &#39;Ext.mixin.Observable&#39;,
+        &#39;Ext.mixin.Identifiable&#39;
     ],
 
     config: {
@@ -85,7 +85,7 @@ Ext.define('Ext.drag.Item', {
     },
 
 <span id='Ext-drag-Item-method-applyGroups'>    applyGroups: function(group) {
-</span>        if (typeof group === 'string') {
+</span>        if (typeof group === &#39;string&#39;) {
             group = [group];
         }
         return group;

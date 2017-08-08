@@ -37,22 +37,22 @@
  *
  * @class BasiGX.view.panel.LegendTree
  */
-Ext.define('BasiGX.view.panel.LegendTree', {
-    extend: 'Ext.tree.Panel',
-    xtype: 'basigx-panel-legendtree',
+Ext.define(&#39;BasiGX.view.panel.LegendTree&#39;, {
+    extend: &#39;Ext.tree.Panel&#39;,
+    xtype: &#39;basigx-panel-legendtree&#39;,
 
     requires: [
-        'BasiGX.ux.RowExpanderWithComponents',
-        'Ext.app.ViewModel'
+        &#39;BasiGX.ux.RowExpanderWithComponents&#39;,
+        &#39;Ext.app.ViewModel&#39;
     ],
 
 <span id='BasiGX-view-panel-LegendTree-property-viewModel'>    viewModel: {
 </span>        data: {
-            documentation: '&lt;h2&gt;Themen Auswahl mit Legenden&lt;/h2&gt;• In diesem ' +
-                'Fenster können Sie die verfügbaren Kartenthemen sehen und ' +
-                'deren Sichtbarkeit steuern. Ausserdem haben Sie die ' +
-                'Möglichkeit, sich die Legenden zu den einzelnen Themen ' +
-                'anzeigen zu lassen'
+            documentation: &#39;&lt;h2&gt;Themen Auswahl mit Legenden&lt;/h2&gt;• In diesem &#39; +
+                &#39;Fenster können Sie die verfügbaren Kartenthemen sehen und &#39; +
+                &#39;deren Sichtbarkeit steuern. Ausserdem haben Sie die &#39; +
+                &#39;Möglichkeit, sich die Legenden zu den einzelnen Themen &#39; +
+                &#39;anzeigen zu lassen&#39;
         }
     },
 
@@ -60,13 +60,13 @@ Ext.define('BasiGX.view.panel.LegendTree', {
 </span>     * adding custom method to get access to row styles
      */
     viewConfig: {
-        plugins: {ptype: 'treeviewdragdrop'},
+        plugins: {ptype: &#39;treeviewdragdrop&#39;},
         getRowClass: function(record) {
             return this.up().getCssForRow(record);
         }
     },
 
-<span id='BasiGX-view-panel-LegendTree-property-layout'>    layout: 'fit',
+<span id='BasiGX-view-panel-LegendTree-property-layout'>    layout: &#39;fit&#39;,
 </span>
 <span id='BasiGX-view-panel-LegendTree-property-width'>    width: 250,
 </span>
@@ -78,21 +78,21 @@ Ext.define('BasiGX.view.panel.LegendTree', {
 </span>
 <span id='BasiGX-view-panel-LegendTree-property-hideCollapseTool'>    hideCollapseTool: true,
 </span>
-<span id='BasiGX-view-panel-LegendTree-property-collapseDirection'>    collapseDirection: 'bottom',
+<span id='BasiGX-view-panel-LegendTree-property-collapseDirection'>    collapseDirection: &#39;bottom&#39;,
 </span>
 <span id='BasiGX-view-panel-LegendTree-property-titleCollapse'>    titleCollapse: true,
 </span>
-<span id='BasiGX-view-panel-LegendTree-property-titleAlign'>    titleAlign: 'center',
+<span id='BasiGX-view-panel-LegendTree-property-titleAlign'>    titleAlign: &#39;center&#39;,
 </span>
 <span id='BasiGX-view-panel-LegendTree-property-rootVisible'>    rootVisible: false,
 </span>
 <span id='BasiGX-view-panel-LegendTree-property-allowDeselect'>    allowDeselect: true,
 </span>
 <span id='BasiGX-view-panel-LegendTree-property-selModel'>    selModel: {
-</span>        mode: 'MULTI'
+</span>        mode: &#39;MULTI&#39;
     },
 
-<span id='BasiGX-view-panel-LegendTree-property-cls'>    cls: 'basigx-legend-panel',
+<span id='BasiGX-view-panel-LegendTree-property-cls'>    cls: &#39;basigx-legend-panel&#39;,
 </span>
 <span id='BasiGX-view-panel-LegendTree-property-initiallyCollapsed'>    /**
 </span>     * @private
@@ -120,20 +120,20 @@ Ext.define('BasiGX.view.panel.LegendTree', {
             if (me.collapsed &amp;&amp; me.hideCollapseTool) {
                 me.collapsed = false;
                 me.initiallyCollapsed = true;
-                Ext.log.info('Ignoring configuration &quot;collapsed&quot; and instead' +
-                        ' setup a one-time afterlayout listener that will' +
-                        ' collapse the panel (this is possibly due to a bug' +
-                        ' in ExtJS 6)');
+                Ext.log.info(&#39;Ignoring configuration &quot;collapsed&quot; and instead&#39; +
+                        &#39; setup a one-time afterlayout listener that will&#39; +
+                        &#39; collapse the panel (this is possibly due to a bug&#39; +
+                        &#39; in ExtJS 6)&#39;);
             }
         }
         me.hideHeaders = true;
 
         me.lines = false;
         me.plugins = [{
-            ptype: 'rowexpanderwithcomponents',
+            ptype: &#39;rowexpanderwithcomponents&#39;,
             hideExpandColumn: true,
             rowBodyCompTemplate: me.rowBodyCompTemplate,
-            pluginId: 'rowexpanderwithcomponents'
+            pluginId: &#39;rowexpanderwithcomponents&#39;
         }];
 
         // call parent
@@ -144,7 +144,7 @@ Ext.define('BasiGX.view.panel.LegendTree', {
         if (me.isExtVersionLowerThan62()) {
             // See the comment above the constructor why we need this.
             if (me.initiallyCollapsed) {
-                me.on('afterlayout', function() {
+                me.on(&#39;afterlayout&#39;, function() {
                     this.collapse();
                 }, me, {single: true, delay: 100});
                 me.initiallyCollapsed = null;
@@ -157,12 +157,12 @@ Ext.define('BasiGX.view.panel.LegendTree', {
      * Ext JS Components. Text in &quot;{{ }}&quot; will be executed as JavaScript.
      */
     rowBodyCompTemplate: {
-        xtype: 'container',
+        xtype: &#39;container&#39;,
         items: [{
-            xtype: 'image',
-            src: '{{record.getOlLayer().get(&quot;legendUrl&quot;)}}',
-            height: '{{record.getOlLayer().get(&quot;legendHeight&quot;)}}',
-            alt: '{{record.getOlLayer().get(&quot;legendUrl&quot;)}}'
+            xtype: &#39;image&#39;,
+            src: &#39;{{record.getOlLayer().get(&quot;legendUrl&quot;)}}&#39;,
+            height: &#39;{{record.getOlLayer().get(&quot;legendHeight&quot;)}}&#39;,
+            alt: &#39;{{record.getOlLayer().get(&quot;legendUrl&quot;)}}&#39;
         }]
     },
 
@@ -175,26 +175,26 @@ Ext.define('BasiGX.view.panel.LegendTree', {
      * @protected
      */
     setModeAllBodies: function(mode) {
-        var toggle = mode === 'toggle';
-        var expand = mode === 'expand';
-        var collapse = mode === 'collapse';
+        var toggle = mode === &#39;toggle&#39;;
+        var expand = mode === &#39;expand&#39;;
+        var collapse = mode === &#39;collapse&#39;;
         if (!toggle &amp;&amp; !expand &amp;&amp; !collapse) {
-            Ext.log.warn('Illegal mode, expected &quot;' + mode + '&quot;' +
-                ' to be bei either &quot;toggle&quot;, &quot;expand&quot; or &quot;collapse&quot;.');
+            Ext.log.warn(&#39;Illegal mode, expected &quot;&#39; + mode + &#39;&quot;&#39; +
+                &#39; to be bei either &quot;toggle&quot;, &quot;expand&quot; or &quot;collapse&quot;.&#39;);
             return;
         }
         var me = this;
-        var plugin = me.getPlugin('rowexpanderwithcomponents');
+        var plugin = me.getPlugin(&#39;rowexpanderwithcomponents&#39;);
         var collapsedClass = me.plugins[0].rowCollapsedCls;
 
         if (me.initiallyCollapsed) {
-            Ext.log.warn('Cannot set mode of all bodies, the view is still ' +
-                'collapsed');
+            Ext.log.warn(&#39;Cannot set mode of all bodies, the view is still &#39; +
+                &#39;collapsed&#39;);
             return;
         }
         if (!plugin) {
-            Ext.log.warn('Cannot set mode of all bodies, Failed to determine ' +
-                'the row expander-plugin');
+            Ext.log.warn(&#39;Cannot set mode of all bodies, Failed to determine &#39; +
+                &#39;the row expander-plugin&#39;);
             return;
         }
 
@@ -220,7 +220,7 @@ Ext.define('BasiGX.view.panel.LegendTree', {
      * previously hidden legends.
      */
     expandAllBodies: function() {
-        this.setModeAllBodies('expand');
+        this.setModeAllBodies(&#39;expand&#39;);
     },
 
 <span id='BasiGX-view-panel-LegendTree-method-collapseAllBodies'>    /**
@@ -228,7 +228,7 @@ Ext.define('BasiGX.view.panel.LegendTree', {
      * previously shown legends.
      */
     collapseAllBodies: function() {
-        this.setModeAllBodies('collapse');
+        this.setModeAllBodies(&#39;collapse&#39;);
     },
 
 <span id='BasiGX-view-panel-LegendTree-method-toggleAllBodies'>    /**
@@ -236,7 +236,7 @@ Ext.define('BasiGX.view.panel.LegendTree', {
      * previously hidden legends and hiding previously shown legends.
      */
     toggleAllBodies: function() {
-        this.setModeAllBodies('toggle');
+        this.setModeAllBodies(&#39;toggle&#39;);
     },
 
 <span id='BasiGX-view-panel-LegendTree-method-getColorFromRow'>    /**
@@ -248,7 +248,7 @@ Ext.define('BasiGX.view.panel.LegendTree', {
      */
     getColorFromRow: function(rec) {
         var me = this;
-        var color = rec.getData().get('treeColor');
+        var color = rec.getData().get(&#39;treeColor&#39;);
 
         // detect if we have a folder and apply color from childNode
         if (!Ext.isDefined(color) &amp;&amp;
@@ -267,7 +267,7 @@ Ext.define('BasiGX.view.panel.LegendTree', {
 <span id='BasiGX-view-panel-LegendTree-method-getCssForRow'>    /**
 </span>     * Method gives access to the rows style.
      *
-     * If a layer is configured with property 'treeColor', the color will
+     * If a layer is configured with property &#39;treeColor&#39;, the color will
      * get applied here. Folders will inherit the color
      *
      * @param {Ext.data.Model} rec The tree node record of the row.
@@ -279,18 +279,18 @@ Ext.define('BasiGX.view.panel.LegendTree', {
 
         // if color is still not defined, return old default
         if (!Ext.isDefined(color)) {
-            return 'my-body-class';
+            return &#39;my-body-class&#39;;
         }
 
         var elemenIdAndCssClass;
         if (color === null) {
-            elemenIdAndCssClass = 'stylesheet-null';
+            elemenIdAndCssClass = &#39;stylesheet-null&#39;;
         } else {
-            elemenIdAndCssClass = 'stylesheet-' +
-                color.replace(/[\(\),\. ]+/g, '-');
+            elemenIdAndCssClass = &#39;stylesheet-&#39; +
+                color.replace(/[\(\),\. ]+/g, &#39;-&#39;);
         }
 
-        var sheet = Ext.DomQuery.selectNode('#' + elemenIdAndCssClass);
+        var sheet = Ext.DomQuery.selectNode(&#39;#&#39; + elemenIdAndCssClass);
         if (sheet) {
             // already create once before
             return elemenIdAndCssClass;
@@ -298,12 +298,12 @@ Ext.define('BasiGX.view.panel.LegendTree', {
             // again: see below
             // sheet.parentNode.removeChild(sheet);
         } else {
-            var css = '' +
-                '.' + elemenIdAndCssClass + ' { ' +
-                ' background-color: ' + color + ';' +
-                ' background:linear-gradient(to right, white, ' + color + ');' +
-                ' filter: alpha(opacity=50)\10;' +//IE9 fallback
-                '}';
+            var css = &#39;&#39; +
+                &#39;.&#39; + elemenIdAndCssClass + &#39; { &#39; +
+                &#39; background-color: &#39; + color + &#39;;&#39; +
+                &#39; background:linear-gradient(to right, white, &#39; + color + &#39;);&#39; +
+                &#39; filter: alpha(opacity=50)\10;&#39; +//IE9 fallback
+                &#39;}&#39;;
             Ext.util.CSS.createStyleSheet(css, elemenIdAndCssClass);
 
             return elemenIdAndCssClass;

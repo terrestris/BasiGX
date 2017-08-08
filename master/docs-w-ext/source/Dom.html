@@ -18,13 +18,13 @@
   <pre class="prettyprint lang-js"><span id='Ext-event-publisher-Dom'>/**
 </span> * @private
  */
-Ext.define('Ext.event.publisher.Dom', {
-    extend: 'Ext.event.publisher.Publisher',
+Ext.define(&#39;Ext.event.publisher.Dom&#39;, {
+    extend: &#39;Ext.event.publisher.Publisher&#39;,
     requires: [
-        'Ext.event.Event'
+        &#39;Ext.event.Event&#39;
     ],
 
-<span id='Ext-event-publisher-Dom-property-type'>    type: 'dom',
+<span id='Ext-event-publisher-Dom-property-type'>    type: &#39;dom&#39;,
 </span>
 <span id='Ext-event-publisher-Dom-property-handledDomEvents'>    /**
 </span>     * @property {Array} handledDomEvents
@@ -76,7 +76,7 @@ Ext.define('Ext.event.publisher.Dom', {
      * experience on touch-screens we block pointerover, pointerout, pointerenter, and
      * pointerleave when triggered by touch input, since in most cases pointerover/pointerenter
      * behavior is not desired when touching the screen.  Note: this should only affect
-     * events with pointerType === 'touch' or pointerType === 'pen', we do NOT want to
+     * events with pointerType === &#39;touch&#39; or pointerType === &#39;pen&#39;, we do NOT want to
      * block these events when triggered using a mouse.
      * See also:
      *     http://www.w3.org/TR/pointerevents/#the-pointerdown-event
@@ -103,7 +103,7 @@ Ext.define('Ext.event.publisher.Dom', {
      * via &quot;blockedPointerEvents&quot;.  The only scenario where this breaks down is in IE10
      * with mouseenter/mouseleave, since MSPointerEnter/MSPointerLeave were not implemented
      * in IE10.  For these 2 events we have to resort to a different method - capturing
-     * the timestamp of the last pointer event that has pointerType == 'touch', and if the
+     * the timestamp of the last pointer event that has pointerType == &#39;touch&#39;, and if the
      * mouse event occurred within a certain threshold we can reasonably assume it occurred
      * because of a touch on the screen (see isEventBlocked)
      * @private
@@ -166,7 +166,7 @@ Ext.define('Ext.event.publisher.Dom', {
             }
         }
 
-        Ext.getWin().on('unload', me.destroy, me);
+        Ext.getWin().on(&#39;unload&#39;, me.destroy, me);
     },
 
 <span id='Ext-event-publisher-Dom-method-initHandlers'>    initHandlers: function() {
@@ -215,7 +215,7 @@ Ext.define('Ext.event.publisher.Dom', {
             // delegated listeners
             subscribers = capture ? me.captureSubscribers : me.bubbleSubscribers;
             if (!me.handles[eventName] &amp;&amp; !me.delegatedListeners[eventName]) {
-                // First time we've attached a listener for this eventName - need to begin
+                // First time we&#39;ve attached a listener for this eventName - need to begin
                 // listening at the dom level
                 me.addDelegatedListener(eventName);
             }
@@ -502,7 +502,7 @@ Ext.define('Ext.event.publisher.Dom', {
         }
     },
 
-<span id='Ext-event-publisher-Dom-method-onDirectCaptureEvent'>    // When eventPhase is AT_TARGET there's no way to know if we are handling a capture
+<span id='Ext-event-publisher-Dom-method-onDirectCaptureEvent'>    // When eventPhase is AT_TARGET there&#39;s no way to know if we are handling a capture
 </span>    // or bubble listener, hence the need for this separate handler fn
     onDirectCaptureEvent: function(e) {
         if (Ext.elevateFunction) {
@@ -555,7 +555,7 @@ Ext.define('Ext.event.publisher.Dom', {
             self = Ext.event.publisher.Dom,
             touches, touch;
 
-        if (browserEvent.type === 'touchstart') {
+        if (browserEvent.type === &#39;touchstart&#39;) {
             touches = browserEvent.touches;
 
             if (touches.length === 1) {
@@ -583,16 +583,16 @@ Ext.define('Ext.event.publisher.Dom', {
         // We set these flags on &quot;this.self&quot; so that they can be shared between Dom
         // publisher and subclasses
 
-        if (e.self.pointerEvents[type] &amp;&amp; e.pointerType !== 'mouse') {
+        if (e.self.pointerEvents[type] &amp;&amp; e.pointerType !== &#39;mouse&#39;) {
             // track the last time a pointer event was fired as a result of interaction
-            // with the screen, pointerType === 'touch' most likely but could also be
-            // pointerType === 'pen' hence the reason we use !== 'mouse', This is used
+            // with the screen, pointerType === &#39;touch&#39; most likely but could also be
+            // pointerType === &#39;pen&#39; hence the reason we use !== &#39;mouse&#39;, This is used
             // to eliminate potential duplicate &quot;compatibility&quot; mouse events
             // (see isEventBlocked)
             self.lastScreenPointerEventTime = Ext.now();
         }
 
-        if (type === 'touchend') {
+        if (type === &#39;touchend&#39;) {
             // Capture a time stamp so we can use it to eliminate potential duplicate
             // emulated mouse events on multi-input devices that have touch events,
             // e.g. Chrome on Window8 with touch-screen (see isEventBlocked).
@@ -600,7 +600,7 @@ Ext.define('Ext.event.publisher.Dom', {
         }
 
         if (!this.reEnterCount &amp;&amp; GlobalEvents.hasListeners.idle &amp;&amp; !GlobalEvents.idleEventMask[type]) {
-            GlobalEvents.fireEvent('idle');
+            GlobalEvents.fireEvent(&#39;idle&#39;);
         }
     },
 
@@ -624,13 +624,13 @@ Ext.define('Ext.event.publisher.Dom', {
         // object like we do by default for delegated events.
         // This is not possible to feature detect using synthetic events.
         // Ticket logged: https://bugzilla.mozilla.org/show_bug.cgi?id=1156023
-        if (Ext.isGecko &amp;&amp; e.type === 'click' &amp;&amp; e.button === 2) {
+        if (Ext.isGecko &amp;&amp; e.type === &#39;click&#39; &amp;&amp; e.button === 2) {
             return true;
         }
 
         // prevent emulated pointerover, pointerout, pointerenter, and pointerleave
         // events from firing when triggered by touching the screen.
-        return (me.blockedPointerEvents[type] &amp;&amp; e.pointerType !== 'mouse') ||
+        return (me.blockedPointerEvents[type] &amp;&amp; e.pointerType !== &#39;mouse&#39;) ||
             // prevent compatibility mouse events from firing on devices with pointer
             // events - see comment on blockedCompatibilityMouseEvents for more details
             // The time from when the last pointer event fired until when compatibility
@@ -655,9 +655,9 @@ Ext.define('Ext.event.publisher.Dom', {
             // mouse events, since we may be on a multi-input device that supports both
             // touch and mouse events and we want gestures to respond to both kinds of
             // events.  Instead we have to detect if the mouse event is a &quot;dupe&quot; by
-            // checking if its coordinates are near the last touchstart's coordinates,
-            // and if it's timestamp is within a certain threshold of the last touchend
-            // event's timestamp.  This is because when dealing with multi-touch events,
+            // checking if its coordinates are near the last touchstart&#39;s coordinates,
+            // and if it&#39;s timestamp is within a certain threshold of the last touchend
+            // event&#39;s timestamp.  This is because when dealing with multi-touch events,
             // the emulated mousedown event (when it does fire) will fire with approximately
             // the same coordinates as the first touchstart, but within a short time after
             // the last touchend.  We use 15px as the distance threshold, to be on the safe
@@ -675,7 +675,7 @@ Ext.define('Ext.event.publisher.Dom', {
     },
 
 <span id='Ext-event-publisher-Dom-method-destroy'>    destroy: function() {
-</span>        var GC = Ext.dom['GarbageCollector'],
+</span>        var GC = Ext.dom[&#39;GarbageCollector&#39;],
             eventName;
 
         for (eventName in this.delegatedListeners) {

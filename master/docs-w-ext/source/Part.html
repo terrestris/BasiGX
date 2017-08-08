@@ -30,25 +30,25 @@
  *
  * To implement this a derived class provides a `displayForm` method:
  *
- *      Ext.define('App.parts.RSS', {
- *          extend: 'Ext.dashboard.Part',
- *          alias: 'part.rss',
+ *      Ext.define(&#39;App.parts.RSS&#39;, {
+ *          extend: &#39;Ext.dashboard.Part&#39;,
+ *          alias: &#39;part.rss&#39;,
  *
  *          displayForm: function (instance, currentConfig, callback, scope) {
  *              var me = this,
- *                  title = instance ? 'Edit RSS Feed' : 'Add RSS Feed';
+ *                  title = instance ? &#39;Edit RSS Feed&#39; : &#39;Add RSS Feed&#39;;
  *
  *              // Display a prompt using current URL as default text.
  *              //
- *              Ext.Msg.prompt(title, 'RSS Feed URL', function (btn, text) {
- *                  if (btn === 'ok') {
+ *              Ext.Msg.prompt(title, &#39;RSS Feed URL&#39;, function (btn, text) {
+ *                  if (btn === &#39;ok&#39;) {
  *                      var config = {
  *                          feedUrl: text
  *                      };
  *
  *                      callback.call(scope || me, config);
  *                  }
- *              }, me, false, currentConfig ? currentConfig.feedUrl : '');
+ *              }, me, false, currentConfig ? currentConfig.feedUrl : &#39;&#39;);
  *          }
  *      });
  *
@@ -60,9 +60,9 @@
  * The next step is to define the view (the components) appropriate for the part. To
  * continue with the above example.
  *
- *      Ext.define('App.parts.RSS', {
- *          extend: 'Ext.dashboard.Part',
- *          alias: 'part.rss',
+ *      Ext.define(&#39;App.parts.RSS&#39;, {
+ *          extend: &#39;Ext.dashboard.Part&#39;,
+ *          alias: &#39;part.rss&#39;,
  *
  *          // The viewTemplate is &quot;component template&quot; that is evaluated against the
  *          // configuration (as returned by displayForm). The top-most component is
@@ -70,10 +70,10 @@
  *          // not be replaced. Instead, fit an appropriate component to the panel.
  *          //
  *          viewTemplate: {
- *              layout: 'fit',
+ *              layout: &#39;fit&#39;,
  *              items: [{
- *                  xtype: 'feedpanel',
- *                  feedUrl: '{feedUrl}'  // from the configuration object
+ *                  xtype: &#39;feedpanel&#39;,
+ *                  feedUrl: &#39;{feedUrl}&#39;  // from the configuration object
  *              }]
  *          },
  *
@@ -87,20 +87,20 @@
  *
  * @since 5.0.0
  */
-Ext.define('Ext.dashboard.Part', {
+Ext.define(&#39;Ext.dashboard.Part&#39;, {
     mixins: [
-        'Ext.mixin.Factoryable',
-        'Ext.mixin.Identifiable'
+        &#39;Ext.mixin.Factoryable&#39;,
+        &#39;Ext.mixin.Identifiable&#39;
     ],
 
     requires: [
-        'Ext.util.ObjectTemplate'
+        &#39;Ext.util.ObjectTemplate&#39;
     ],
 
-    alias: 'part.part',
+    alias: &#39;part.part&#39;,
 
 <span id='Ext-dashboard-Part-property-factoryConfig'>    factoryConfig: {
-</span>        type: 'part'
+</span>        type: &#39;part&#39;
     },
 
 <span id='Ext-dashboard-Part-property-isPart'>    isPart: true,
@@ -127,11 +127,11 @@ Ext.define('Ext.dashboard.Part', {
          * used by the `createView` method to create views.
          */
         viewTemplate: {
-            collapsed: '{collapsed}',
-            columnIndex: '{columnIndex}',
-            id: '{id}',
-            title: '{title}',
-            height: '{height}'
+            collapsed: &#39;{collapsed}&#39;,
+            columnIndex: &#39;{columnIndex}&#39;,
+            id: &#39;{id}&#39;,
+            title: &#39;{title}&#39;,
+            height: &#39;{height}&#39;
         }
     },
 
@@ -150,7 +150,7 @@ Ext.define('Ext.dashboard.Part', {
 <span id='Ext-dashboard-Part-method-applyViewTemplate'>    applyViewTemplate: function (template) {
 </span>        //&lt;debug&gt;
         if (!Ext.isObject(template)) {
-            Ext.raise('The viewTemplate for ' + this.$className + ' is not an Object');
+            Ext.raise(&#39;The viewTemplate for &#39; + this.$className + &#39; is not an Object&#39;);
         }
         //&lt;/debug&gt;
 

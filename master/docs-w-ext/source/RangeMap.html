@@ -18,15 +18,15 @@
   <pre class="prettyprint lang-js"><span id='Ext-sparkline-RangeMap'>/**
 </span> * Base class for Range Map
  */
-Ext.define('Ext.sparkline.RangeMap', {
+Ext.define(&#39;Ext.sparkline.RangeMap&#39;, {
 <span id='Ext-sparkline-RangeMap-method-constructor'>    constructor: function (map) {
 </span>        var key,
             range,
             rangelist = [];
 
         for (key in map) {
-            if (map.hasOwnProperty(key) &amp;&amp; typeof key === 'string' &amp;&amp; key.indexOf(':') &gt; -1) {
-                range = key.split(':');
+            if (map.hasOwnProperty(key) &amp;&amp; typeof key === &#39;string&#39; &amp;&amp; key.indexOf(&#39;:&#39;) &gt; -1) {
+                range = key.split(&#39;:&#39;);
                 range[0] = range[0].length === 0 ? -Infinity : parseFloat(range[0]);
                 range[1] = range[1].length === 0 ? Infinity : parseFloat(range[1]);
                 range[2] = map[key];

@@ -47,11 +47,11 @@
  *
  * @class BasiGX.util.CSRF
  */
-Ext.define('BasiGX.util.CSRF', {
+Ext.define(&#39;BasiGX.util.CSRF&#39;, {
 
     requires: [
-        'Ext.String',
-        'Ext.DomQuery'
+        &#39;Ext.String&#39;,
+        &#39;Ext.DomQuery&#39;
     ],
 
     statics: {
@@ -66,17 +66,17 @@ Ext.define('BasiGX.util.CSRF', {
          * @private
          */
         getContentFromMetaTagByName: function(name) {
-            var selector = Ext.String.format('meta[name=&quot;{0}&quot;]', name);
+            var selector = Ext.String.format(&#39;meta[name=&quot;{0}&quot;]&#39;, name);
             var element = Ext.DomQuery.select(selector)[0];
             var content;
             if (element) {
-                content = element.content || '';
+                content = element.content || &#39;&#39;;
             } else {
-                var tpl = 'Failed to find tag &lt;meta name=&quot;{0}&quot; /&gt;. Is it ' +
-                    ' present in the page DOM?';
+                var tpl = &#39;Failed to find tag &lt;meta name=&quot;{0}&quot; /&gt;. Is it &#39; +
+                    &#39; present in the page DOM?&#39;;
                 var msg = Ext.String.format(tpl, name);
                 Ext.log.warn(msg);
-                content = '';
+                content = &#39;&#39;;
             }
             return content;
         },
@@ -93,7 +93,7 @@ Ext.define('BasiGX.util.CSRF', {
          *     empty string if the meta tag cannot be found.
          */
         getValue: function() {
-            var metaName = '_csrf';
+            var metaName = &#39;_csrf&#39;;
             return BasiGX.util.CSRF.getContentFromMetaTagByName(metaName);
         },
 
@@ -111,7 +111,7 @@ Ext.define('BasiGX.util.CSRF', {
          *     string if the meta tag cannot be found.
          */
         getKey: function() {
-            var metaName = '_csrf_header';
+            var metaName = &#39;_csrf_header&#39;;
             return BasiGX.util.CSRF.getContentFromMetaTagByName(metaName);
         },
 
@@ -130,7 +130,7 @@ Ext.define('BasiGX.util.CSRF', {
          *     tag cannot be found.
          */
         getParamName: function() {
-            var metaName = '_csrf_parameter_name';
+            var metaName = &#39;_csrf_parameter_name&#39;;
             return BasiGX.util.CSRF.getContentFromMetaTagByName(metaName);
         },
 
@@ -169,8 +169,8 @@ Ext.define('BasiGX.util.CSRF', {
             var name = staticMe.getParamName();
             var value = staticMe.getValue();
             var field = {
-                tag: 'input',
-                type: 'hidden'
+                tag: &#39;input&#39;,
+                type: &#39;hidden&#39;
             };
             if (name &amp;&amp; value) {
                 field = Ext.apply(field, {

@@ -45,13 +45,13 @@
  *
  * @class BasiGX.view.list.FocusableTreeItem
  */
-Ext.define('BasiGX.view.list.FocusableTreeItem', {
-    extend: 'Ext.list.TreeItem',
-    xtype: 'focusable-tree-item',
+Ext.define(&#39;BasiGX.view.list.FocusableTreeItem&#39;, {
+    extend: &#39;Ext.list.TreeItem&#39;,
+    xtype: &#39;focusable-tree-item&#39;,
 
 <span id='BasiGX-view-list-FocusableTreeItem-method-makeFocusableElement'>    /**
 </span>     * Changes the `element` specification to add the `tabIndex`-attribute to
-     * the topmost container, but only if it didn't have it already.
+     * the topmost container, but only if it didn&#39;t have it already.
      */
     makeFocusableElement: function() {
         var me = this;
@@ -71,7 +71,7 @@ Ext.define('BasiGX.view.list.FocusableTreeItem', {
      */
     bindFocusKeyPressHandler: function() {
         var me = this;
-        me.getEl().on('keypress', me.onKeyPress, me);
+        me.getEl().on(&#39;keypress&#39;, me.onKeyPress, me);
     },
 
 <span id='BasiGX-view-list-FocusableTreeItem-method-onKeyPress'>    /**
@@ -88,9 +88,9 @@ Ext.define('BasiGX.view.list.FocusableTreeItem', {
         var enter = Ext.event.Event.ENTER;
         var space = Ext.event.Event.SPACE;
         var pressedKey = evt.getKey();
-        var list = me.up('treelist');
+        var list = me.up(&#39;treelist&#39;);
         if (list &amp;&amp; (pressedKey === enter || pressedKey === space)) {
-            list.fireEvent('selectionchange', list, me.getNode(), {});
+            list.fireEvent(&#39;selectionchange&#39;, list, me.getNode(), {});
         }
     },
 

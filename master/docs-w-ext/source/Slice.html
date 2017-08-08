@@ -19,7 +19,7 @@
 </span> * This class manages one side of a `Matrix`.
  * @private
  */
-Ext.define('Ext.data.matrix.Slice', {
+Ext.define(&#39;Ext.data.matrix.Slice&#39;, {
 <span id='Ext-data-matrix-Slice-method-constructor'>    constructor: function (side, id) {
 </span><span id='Ext-data-matrix-Slice-property-id'>        /**
 </span>         * @property {String/Number} id
@@ -45,13 +45,13 @@ Ext.define('Ext.data.matrix.Slice', {
 </span>        var me = this;
         
         //&lt;debug&gt;
-        Ext.Assert.falsey(me.store, 'Store is already attached');
+        Ext.Assert.falsey(me.store, &#39;Store is already attached&#39;);
         //&lt;/debug&gt;
 
         me.store = store;
         store.matrix = me;
 
-        store.on('load', me.onStoreLoad, me, {single: true});
+        store.on(&#39;load&#39;, me.onStoreLoad, me, {single: true});
     },
 
 <span id='Ext-data-matrix-Slice-method-commit'>    commit: function() {
@@ -70,7 +70,7 @@ Ext.define('Ext.data.matrix.Slice', {
 <span id='Ext-data-matrix-Slice-method-update'>    update: function (recordsOrIds, state) {
 </span>        //&lt;debug&gt;
         if (!(recordsOrIds instanceof Array)) {
-            Ext.raise('Only array of records or record ids are supported');
+            Ext.raise(&#39;Only array of records or record ids are supported&#39;);
         }
         //&lt;/debug&gt;
 
@@ -91,7 +91,7 @@ Ext.define('Ext.data.matrix.Slice', {
             otherId = item.isEntity ? (record = item).id : item;
             assoc = members[otherId];
 
-            // If we're in a created state and we're asking to remove it, don't move it to
+            // If we&#39;re in a created state and we&#39;re asking to remove it, don&#39;t move it to
             // removed state, just blow it away completely.
             if (state &lt; 0 &amp;&amp; assoc &amp;&amp; assoc[2] === 1) {
                 delete members[otherId];
@@ -116,7 +116,7 @@ Ext.define('Ext.data.matrix.Slice', {
                     otherSlice.members[id] =  assoc;
                     call = 1;
                 } else if (state !== assoc[2] &amp;&amp; state !== 0) {
-                    // If they aren't equal and we're setting it to 0, favour the current state
+                    // If they aren&#39;t equal and we&#39;re setting it to 0, favour the current state
                     assoc[2] = state;
                     otherSlice = otherSlices[otherId];
                     // because the assoc exists the other side will have a slice
@@ -166,7 +166,7 @@ Ext.define('Ext.data.matrix.Slice', {
 
         if (store) {
             store.matrix = null;
-            store.un('load', me.onStoreLoad, me);
+            store.un(&#39;load&#39;, me.onStoreLoad, me);
         }
 
         me.notify = me.scope = me.store = me.side = me.members = null;

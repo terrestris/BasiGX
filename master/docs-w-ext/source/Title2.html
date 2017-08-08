@@ -15,8 +15,8 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.rtl.panel.Title', {
-    override: 'Ext.panel.Title',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.rtl.panel.Title&#39;, {
+    override: &#39;Ext.panel.Title&#39;,
 
     getIconRenderData: function() {
         var me = this,
@@ -24,7 +24,7 @@
             header = me.ownerCt;
 
         if (header &amp;&amp; header.isParentRtl()) {
-            data.childElCls = ' ' + me._rtlCls;
+            data.childElCls = &#39; &#39; + me._rtlCls;
         }
 
         return data;
@@ -33,7 +33,7 @@
     privates: {
         _getVerticalAdjustDirection: function() {
             var header = this.ownerCt;
-            return (header &amp;&amp; header.isParentRtl()) ? 'right' : 'left';
+            return (header &amp;&amp; header.isParentRtl()) ? &#39;right&#39; : &#39;left&#39;;
         }
     }
 });

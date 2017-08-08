@@ -18,7 +18,7 @@
   <pre class="prettyprint lang-js"><span id='Ext-grid-locking-RowSynchronizer'>/**
 </span> * @private
  */
-Ext.define('Ext.grid.locking.RowSynchronizer', {
+Ext.define(&#39;Ext.grid.locking.RowSynchronizer&#39;, {
 <span id='Ext-grid-locking-RowSynchronizer-method-constructor'>    constructor: function (view, rowEl) {
 </span>        var me = this,
             rowTpl;
@@ -27,7 +27,7 @@ Ext.define('Ext.grid.locking.RowSynchronizer', {
         me.rowEl = rowEl;
         me.els = {};
 
-        me.add('data', view.rowSelector);
+        me.add(&#39;data&#39;, view.rowSelector);
 
         for (rowTpl = view.rowTpl; rowTpl; rowTpl = rowTpl.nextTpl) {
             if (rowTpl.beginRowSync) {
@@ -102,10 +102,10 @@ Ext.define('Ext.grid.locking.RowSynchronizer', {
 </span>        var els = this.els,
             name;
 
-        this.rowEl.style.height = '';
+        this.rowEl.style.height = &#39;&#39;;
 
         for (name in els) {
-            els[name].el.style.height = '';
+            els[name].el.style.height = &#39;&#39;;
         }
     }
 });

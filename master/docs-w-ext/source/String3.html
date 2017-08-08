@@ -24,38 +24,38 @@
  * Example String Filter Usage:
  *
  *     @example
- *     var shows = Ext.create('Ext.data.Store', {
- *         fields: ['id','show'],
+ *     var shows = Ext.create(&#39;Ext.data.Store&#39;, {
+ *         fields: [&#39;id&#39;,&#39;show&#39;],
  *         data: [
- *             {id: 0, show: 'Battlestar Galactica'},
- *             {id: 1, show: 'Doctor Who'},
- *             {id: 2, show: 'Farscape'},
- *             {id: 3, show: 'Firefly'},
- *             {id: 4, show: 'Star Trek'},
- *             {id: 5, show: 'Star Wars: Christmas Special'}
+ *             {id: 0, show: &#39;Battlestar Galactica&#39;},
+ *             {id: 1, show: &#39;Doctor Who&#39;},
+ *             {id: 2, show: &#39;Farscape&#39;},
+ *             {id: 3, show: &#39;Firefly&#39;},
+ *             {id: 4, show: &#39;Star Trek&#39;},
+ *             {id: 5, show: &#39;Star Wars: Christmas Special&#39;}
  *         ]
  *     });
  *   
- *     Ext.create('Ext.grid.Panel', {
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
  *         renderTo: Ext.getBody(),
- *         title: 'Sci-Fi Television',
+ *         title: &#39;Sci-Fi Television&#39;,
  *         height: 250,
  *         width: 250,
  *         store: shows,
- *         plugins: 'gridfilters',
+ *         plugins: &#39;gridfilters&#39;,
  *         columns: [{
- *             dataIndex: 'id',
- *             text: 'ID',
+ *             dataIndex: &#39;id&#39;,
+ *             text: &#39;ID&#39;,
  *             width: 50
  *         },{
- *             dataIndex: 'show',
- *             text: 'Show',
+ *             dataIndex: &#39;show&#39;,
+ *             text: &#39;Show&#39;,
  *             flex: 1,
  *             filter: {
  *                 // required configs
- *                 type: 'string',
+ *                 type: &#39;string&#39;,
  *                 // optional configs
- *                 value: 'star',  // setting a value makes the filter active. 
+ *                 value: &#39;star&#39;,  // setting a value makes the filter active. 
  *                 itemDefaults: {
  *                     // any Ext.form.field.Text configs accepted
  *                 }
@@ -63,28 +63,28 @@
  *         }]
  *     }); 
  */
-Ext.define('Ext.grid.filters.filter.String', {
-    extend: 'Ext.grid.filters.filter.SingleFilter',
-    alias: 'grid.filter.string',
+Ext.define(&#39;Ext.grid.filters.filter.String&#39;, {
+    extend: &#39;Ext.grid.filters.filter.SingleFilter&#39;,
+    alias: &#39;grid.filter.string&#39;,
 
-<span id='Ext-grid-filters-filter-String-property-type'>    type: 'string',
+<span id='Ext-grid-filters-filter-String-property-type'>    type: &#39;string&#39;,
 </span>
-<span id='Ext-grid-filters-filter-String-property-operator'>    operator: 'like',
+<span id='Ext-grid-filters-filter-String-property-operator'>    operator: &#39;like&#39;,
 </span>
     //&lt;locale&gt;
 <span id='Ext-grid-filters-filter-String-cfg-emptyText'>    /**
 </span>     * @cfg {String} emptyText
      * The empty text to show for each field.
      */
-    emptyText: 'Enter Filter Text...',
+    emptyText: &#39;Enter Filter Text...&#39;,
 <span id='Ext-grid-filters-filter-String-cfg-itemDefaults'>    //&lt;/locale&gt;
 </span>
     itemDefaults: {
-        xtype: 'textfield',
+        xtype: &#39;textfield&#39;,
         enableKeyEvents: true,
         hideEmptyLabel: false,
-        iconCls: Ext.baseCSSPrefix + 'grid-filters-find',
-        labelSeparator: '',
+        iconCls: Ext.baseCSSPrefix + &#39;grid-filters-find&#39;,
+        labelSeparator: &#39;&#39;,
         labelWidth: 29,
         margin: 0,
         selectOnFocus: true
@@ -108,8 +108,8 @@ Ext.define('Ext.grid.filters.filter.String', {
         me.callParent();
 
         config = Ext.apply({}, me.getItemDefaults());
-        if (config.iconCls &amp;&amp; !('labelClsExtra' in config)) {
-            config.labelClsExtra = Ext.baseCSSPrefix + 'grid-filters-icon ' + config.iconCls;
+        if (config.iconCls &amp;&amp; !(&#39;labelClsExtra&#39; in config)) {
+            config.labelClsExtra = Ext.baseCSSPrefix + &#39;grid-filters-icon &#39; + config.iconCls;
         }
         delete config.iconCls;
 

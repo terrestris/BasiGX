@@ -17,7 +17,7 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-state-Manager'>/**
 </span> * This is the global state manager. By default all components that are &quot;state aware&quot; check this class
- * for state information if you don't pass them a custom state provider. In order for this class
+ * for state information if you don&#39;t pass them a custom state provider. In order for this class
  * to be useful, it must be initialized with a provider when your application initializes. Example usage:
  *
  *      // in your initialization function
@@ -29,10 +29,10 @@
  * there is a common interface that can be used without needing to refer to a specific provider instance
  * in every component.
  */
-Ext.define('Ext.state.Manager', {
+Ext.define(&#39;Ext.state.Manager&#39;, {
     singleton: true,
 
-    requires: ['Ext.state.Provider'],
+    requires: [&#39;Ext.state.Provider&#39;],
 
 <span id='Ext-state-Manager-method-constructor'>    constructor: function() {
 </span>        this.provider = new Ext.state.Provider();

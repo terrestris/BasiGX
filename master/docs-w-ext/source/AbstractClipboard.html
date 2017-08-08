@@ -55,10 +55,10 @@
  * @protected
  * @since 5.1.0
  */
-Ext.define('Ext.plugin.AbstractClipboard', {
-    extend: 'Ext.plugin.Abstract',
+Ext.define(&#39;Ext.plugin.AbstractClipboard&#39;, {
+    extend: &#39;Ext.plugin.Abstract&#39;,
     requires: [
-        'Ext.util.KeyMap'
+        &#39;Ext.util.KeyMap&#39;
     ],
 
     cachedConfig: {
@@ -73,8 +73,8 @@ Ext.define('Ext.plugin.AbstractClipboard', {
          *
          *      formats: {
          *          html: {
-         *              get: 'getHtmlData',
-         *              put: 'putHtmlData'
+         *              get: &#39;getHtmlData&#39;,
+         *              put: &#39;putHtmlData&#39;
          *          }
          *      }
          *
@@ -86,8 +86,8 @@ Ext.define('Ext.plugin.AbstractClipboard', {
          *
          *      formats: {
          *          text: {
-         *              get: 'getTextData',
-         *              put: 'putTextData'
+         *              get: &#39;getTextData&#39;,
+         *              put: &#39;putTextData&#39;
          *          }
          *      }
          *
@@ -100,8 +100,8 @@ Ext.define('Ext.plugin.AbstractClipboard', {
          */
         formats: {
             text: {
-                get: 'getTextData',
-                put: 'putTextData'
+                get: &#39;getTextData&#39;,
+                put: &#39;putTextData&#39;
             }
         }
     },
@@ -125,7 +125,7 @@ Ext.define('Ext.plugin.AbstractClipboard', {
          * the list, whatever data is available on the system clipboard is chosen. At
          * that point, no further source formats will be considered.
          */
-        source: 'system',
+        source: &#39;system&#39;,
 
 <span id='Ext-plugin-AbstractClipboard-cfg-system'>        /**
 </span>         * @cfg {String} [system=&quot;text&quot;]
@@ -133,7 +133,7 @@ Ext.define('Ext.plugin.AbstractClipboard', {
          * format is used. Based on the type of derived class, other formats may be
          * possible.
          */
-        system: 'text'
+        system: &#39;text&#39;
     },
 
 <span id='Ext-plugin-AbstractClipboard-method-destroy'>    destroy: function () {
@@ -151,8 +151,8 @@ Ext.define('Ext.plugin.AbstractClipboard', {
                 shared.textArea = Ext.destroy(shared.textArea);
             }
         } else {
-            // If we don't have a keyMap it is because we are waiting for the render
-            // event and haven't connected to the shared context.
+            // If we don&#39;t have a keyMap it is because we are waiting for the render
+            // event and haven&#39;t connected to the shared context.
             me.renderListener = Ext.destroy(me.renderListener);
         }
 
@@ -228,8 +228,8 @@ Ext.define('Ext.plugin.AbstractClipboard', {
             //&lt;debug&gt;
             if (value) {
                 for (var i = value.length; i-- &gt; 0; ) {
-                    if (value[i] === 'system') {
-                        Ext.raise('Invalid clipboard format &quot;' + value[i] + '&quot;');
+                    if (value[i] === &#39;system&#39;) {
+                        Ext.raise(&#39;Invalid clipboard format &quot;&#39; + value[i] + &#39;&quot;&#39;);
                     }
                 }
             }
@@ -253,8 +253,8 @@ Ext.define('Ext.plugin.AbstractClipboard', {
                 var formats = this.getFormats();
 
                 for (var i = value.length; i-- &gt; 0; ) {
-                    if (value[i] !== 'system' &amp;&amp; !formats[value[i]]) {
-                        Ext.raise('Invalid clipboard format &quot;' + value[i] + '&quot;');
+                    if (value[i] !== &#39;system&#39; &amp;&amp; !formats[value[i]]) {
+                        Ext.raise(&#39;Invalid clipboard format &quot;&#39; + value[i] + &#39;&quot;&#39;);
                     }
                 }
             }
@@ -268,7 +268,7 @@ Ext.define('Ext.plugin.AbstractClipboard', {
             var formats = this.getFormats();
 
             if (!formats[value]) {
-                Ext.raise('Invalid clipboard format &quot;' + value + '&quot;');
+                Ext.raise(&#39;Invalid clipboard format &quot;&#39; + value + &#39;&quot;&#39;);
             }
 
             return value;
@@ -311,11 +311,11 @@ Ext.define('Ext.plugin.AbstractClipboard', {
                 target: me.getTarget(comp),
                 ignoreInputFields: true,
                 binding: [{
-                    ctrl: true, key: 'x', fn: me.onCut, scope: me
+                    ctrl: true, key: &#39;x&#39;, fn: me.onCut, scope: me
                 }, {
-                    ctrl: true, key: 'c', fn: me.onCopy, scope: me
+                    ctrl: true, key: &#39;c&#39;, fn: me.onCopy, scope: me
                 }, {
-                    ctrl: true, key: 'v', fn: me.onPaste, scope: me
+                    ctrl: true, key: &#39;v&#39;, fn: me.onPaste, scope: me
                 }]
             });
 
@@ -323,7 +323,7 @@ Ext.define('Ext.plugin.AbstractClipboard', {
 
             me.destroyListener = comp.on({
                 destroyable: true,
-                destroy: 'destroy',
+                destroy: &#39;destroy&#39;,
                 scope: me
             });
         },
@@ -336,7 +336,7 @@ Ext.define('Ext.plugin.AbstractClipboard', {
             if (Ext.isString(format)) {
                 //&lt;debug&gt;
                 if (!formats[format]) {
-                    Ext.raise('Invalid clipboard format &quot;' + format + '&quot;');
+                    Ext.raise(&#39;Invalid clipboard format &quot;&#39; + format + &#39;&quot;&#39;);
                 }
                 //&lt;/debug&gt;
                 data = me[formats[format].get](format, erase);
@@ -348,7 +348,7 @@ Ext.define('Ext.plugin.AbstractClipboard', {
                     for (name in format) {
                         //&lt;debug&gt;
                         if (!formats[name]) {
-                            Ext.raise('Invalid clipboard format &quot;' + name + '&quot;');
+                            Ext.raise(&#39;Invalid clipboard format &quot;&#39; + name + &#39;&quot;&#39;);
                         }
                         //&lt;/debug&gt;
                         names.push(name);
@@ -377,17 +377,17 @@ Ext.define('Ext.plugin.AbstractClipboard', {
             
             if (!el) {
                 el = shared.textArea = Ext.getBody().createChild({
-                    tag: 'textarea',
-                    tabIndex: -1, // don't tab through this fellow
+                    tag: &#39;textarea&#39;,
+                    tabIndex: -1, // don&#39;t tab through this fellow
                     style: {
-                        position: 'absolute',
-                        top: '-1000px',
-                        width: '1px',
-                        height: '1px'
+                        position: &#39;absolute&#39;,
+                        top: &#39;-1000px&#39;,
+                        width: &#39;1px&#39;,
+                        height: &#39;1px&#39;
                     }
                 });
                 
-                // We don't want this element to fire focus events ever
+                // We don&#39;t want this element to fire focus events ever
                 el.suspendFocusEvents();
             }
             
@@ -416,7 +416,7 @@ Ext.define('Ext.plugin.AbstractClipboard', {
                 for (i = 0, n = source.length; i &lt; n; ++i) {
                     s = source[i];
 
-                    if (s === 'system') {
+                    if (s === &#39;system&#39;) {
                         // get the format used by the system clipboard.
                         s = me.getSystem();
                         me.pasteClipboardData(s);
@@ -440,7 +440,7 @@ Ext.define('Ext.plugin.AbstractClipboard', {
             else {
                 focusEl = Ext.Element.getActiveElement(true);
                 area = me.getHiddenTextArea().dom;
-                area.value = '';
+                area.value = &#39;&#39;;
 
                 // We must not disturb application state by doing this focus
                 if (focusEl) {
@@ -462,7 +462,7 @@ Ext.define('Ext.plugin.AbstractClipboard', {
                     }
                     
                     me.doPaste(format, area.value);
-                    area.value = '';
+                    area.value = &#39;&#39;;
                 }, 100, me);
             }
         },
@@ -492,7 +492,7 @@ Ext.define('Ext.plugin.AbstractClipboard', {
                 // its default action processed which will update the clipboard from the
                 // textarea.
                 Ext.defer(function() {
-                    area.value = '';
+                    area.value = &#39;&#39;;
                     
                     if (focusEl) {
                         focusEl.focus();

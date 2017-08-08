@@ -62,8 +62,8 @@
  *     }
  *
  */
-Ext.define('Ext.dd.DragDrop', {
-    requires: ['Ext.dd.DragDropManager'],
+Ext.define(&#39;Ext.dd.DragDrop&#39;, {
+    requires: [&#39;Ext.dd.DragDropManager&#39;],
 
 <span id='Ext-dd-DragDrop-method-constructor'>    /**
 </span>     * Creates new DragDrop.
@@ -126,7 +126,7 @@ Ext.define('Ext.dd.DragDrop', {
 
 <span id='Ext-dd-DragDrop-property-invalidHandleTypes'>    /**
 </span>     * @property {Object} invalidHandleTypes
-     * An object who's property names identify HTML tags to be considered invalid as drag handles.
+     * An object who&#39;s property names identify HTML tags to be considered invalid as drag handles.
      * A non-null property value identifies the tag as invalid. Defaults to the
      * following value which prevents drag operations from being initiated by `&lt;a&gt;` elements:
      *
@@ -138,7 +138,7 @@ Ext.define('Ext.dd.DragDrop', {
 
 <span id='Ext-dd-DragDrop-property-invalidHandleIds'>    /**
 </span>     * @property {Object} invalidHandleIds
-     * An object who's property names identify the IDs of elements to be considered invalid as drag handles.
+     * An object who&#39;s property names identify the IDs of elements to be considered invalid as drag handles.
      * A non-null property value identifies the ID as invalid. For example, to prevent
      * dragging from being initiated on element ID &quot;foo&quot;, use:
      *
@@ -156,7 +156,7 @@ Ext.define('Ext.dd.DragDrop', {
 
 <span id='Ext-dd-DragDrop-property-startPageX'>    /**
 </span>     * @property {Number} startPageX
-     * The linked element's absolute X position at the time the drag was
+     * The linked element&#39;s absolute X position at the time the drag was
      * started
      * @private
      */
@@ -164,7 +164,7 @@ Ext.define('Ext.dd.DragDrop', {
 
 <span id='Ext-dd-DragDrop-property-startPageY'>    /**
 </span>     * @property {Number} startPageY
-     * The linked element's absolute X position at the time the drag was
+     * The linked element&#39;s absolute X position at the time the drag was
      * started
      * @private
      */
@@ -177,7 +177,7 @@ Ext.define('Ext.dd.DragDrop', {
      * DragDrop object in the same group.  This lets us define multiple
      * groups using a single DragDrop subclass if we want.
      *
-     * An object in the format {'group1':true, 'group2':true}
+     * An object in the format {&#39;group1&#39;:true, &#39;group2&#39;:true}
      */
     groups: null,
 
@@ -330,7 +330,7 @@ Ext.define('Ext.dd.DragDrop', {
      */
     hasOuterHandles: false,
 
-<span id='Ext-dd-DragDrop-property-triggerEvent'>    triggerEvent: 'mousedown',
+<span id='Ext-dd-DragDrop-property-triggerEvent'>    triggerEvent: &#39;mousedown&#39;,
 </span>
 <span id='Ext-dd-DragDrop-method-b4StartDrag'>    /**
 </span>     * Code that executes immediately before the startDrag event
@@ -473,7 +473,7 @@ Ext.define('Ext.dd.DragDrop', {
     },
 
 <span id='Ext-dd-DragDrop-method-constrainTo'>    /**
-</span>     * Initializes the drag drop object's constraints to restrict movement to a certain element.
+</span>     * Initializes the drag drop object&#39;s constraints to restrict movement to a certain element.
      *
      * Usage:
      *
@@ -581,8 +581,8 @@ Ext.define('Ext.dd.DragDrop', {
 
         // Longpress fires contextmenu in some touch platforms, so if we are using longpress
         // inhibit the contextmenu on this element
-        if (Ext.supports.Touch &amp;&amp; me.triggerEvent === 'longpress') {
-            Ext.get(me.id).swallowEvent('contextmenu', true);
+        if (Ext.supports.Touch &amp;&amp; me.triggerEvent === &#39;longpress&#39;) {
+            Ext.get(me.id).swallowEvent(&#39;contextmenu&#39;, true);
         }
     },
 
@@ -614,7 +614,7 @@ Ext.define('Ext.dd.DragDrop', {
         // add to an interaction group
         this.addToGroup((sGroup) ? sGroup : &quot;default&quot;);
 
-        // We don't want to register this as the handle with the manager
+        // We don&#39;t want to register this as the handle with the manager
         // so we just set the id rather than calling the setter.
         this.handleElId = id;
 
@@ -1034,7 +1034,7 @@ Ext.define('Ext.dd.DragDrop', {
 
 <span id='Ext-dd-DragDrop-method-clearConstraints'>    /**
 </span>     * Clears any constraints applied to this instance.  Also clears ticks
-     * since they can't exist independent of a constraint at this time.
+     * since they can&#39;t exist independent of a constraint at this time.
      */
     clearConstraints: function() {
         this.constrainX = false;
@@ -1086,7 +1086,7 @@ Ext.define('Ext.dd.DragDrop', {
 
             this.setInitPosition(dx, dy);
 
-        // This is the first time we have detected the element's position
+        // This is the first time we have detected the element&#39;s position
         } else {
             this.setInitPosition();
         }

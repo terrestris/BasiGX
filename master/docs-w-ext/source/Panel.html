@@ -20,16 +20,16 @@
  * `anchor` layout by default and provides resizing on the bottom edge only.
  * @protected
  */
-Ext.define('Ext.dashboard.Panel', {
-    extend: 'Ext.panel.Panel',
+Ext.define(&#39;Ext.dashboard.Panel&#39;, {
+    extend: &#39;Ext.panel.Panel&#39;,
 
-    xtype: 'dashboard-panel',
+    xtype: &#39;dashboard-panel&#39;,
 
-<span id='Ext-dashboard-Panel-cfg-cls'>    cls: Ext.baseCSSPrefix + 'dashboard-panel',
+<span id='Ext-dashboard-Panel-cfg-cls'>    cls: Ext.baseCSSPrefix + &#39;dashboard-panel&#39;,
 </span>
-<span id='Ext-dashboard-Panel-cfg-anchor'>    anchor: '100%',
+<span id='Ext-dashboard-Panel-cfg-anchor'>    anchor: &#39;100%&#39;,
 </span>
-<span id='Ext-dashboard-Panel-cfg-layout'>    layout  : 'fit',
+<span id='Ext-dashboard-Panel-cfg-layout'>    layout  : &#39;fit&#39;,
 </span>
 <span id='Ext-dashboard-Panel-cfg-frame'>    frame: true,
 </span><span id='Ext-dashboard-Panel-cfg-closable'>    closable: true,
@@ -46,14 +46,14 @@ Ext.define('Ext.dashboard.Panel', {
 <span id='Ext-dashboard-Panel-property-animateClose'>    animateClose: true,
 </span>
 <span id='Ext-dashboard-Panel-property-loadMask'>    loadMask: true,
-</span><span id='Ext-dashboard-Panel-property-loadMessage'>    loadMessage: 'Loading...',
+</span><span id='Ext-dashboard-Panel-property-loadMessage'>    loadMessage: &#39;Loading...&#39;,
 </span>
 <span id='Ext-dashboard-Panel-cfg-minHeight'>    minHeight: 90,
 </span>
 <span id='Ext-dashboard-Panel-cfg-resizable'>    resizable: true,
-</span><span id='Ext-dashboard-Panel-cfg-resizeHandles'>    resizeHandles: 's',
+</span><span id='Ext-dashboard-Panel-cfg-resizeHandles'>    resizeHandles: &#39;s&#39;,
 </span>
-<span id='Ext-dashboard-Panel-method-doClose'>    // Override Panel's default doClose to provide a custom fade out effect
+<span id='Ext-dashboard-Panel-method-doClose'>    // Override Panel&#39;s default doClose to provide a custom fade out effect
 </span>    // when a portlet is removed from the portal
     doClose: function() {
         var me = this;
@@ -77,7 +77,7 @@ Ext.define('Ext.dashboard.Panel', {
             closeAction = me.closeAction;
 
         me.closing = false;
-        me.fireEvent('close', me);
+        me.fireEvent(&#39;close&#39;, me);
 
         // The close of the last portlet within a column results in removal of both the column and its splitter.
         // So coalesce any layouts resulting from this operation.
@@ -85,7 +85,7 @@ Ext.define('Ext.dashboard.Panel', {
         me[closeAction]();
         Ext.resumeLayouts(true);
 
-        if (closeAction === 'hide') {
+        if (closeAction === &#39;hide&#39;) {
             // Restore the opacity from doClose
             me.el.setOpacity(1);
         }
@@ -115,7 +115,7 @@ Ext.define('Ext.dashboard.Panel', {
                 Ext.apply(config, loadMask);
             }
 
-            me.loadMask = loadMask = Ext.ComponentManager.create(config, 'loadmask');
+            me.loadMask = loadMask = Ext.ComponentManager.create(config, &#39;loadmask&#39;);
         }
 
         return loadMask || null;
@@ -125,8 +125,8 @@ Ext.define('Ext.dashboard.Panel', {
 </span>        this.callParent(arguments);
 
         view.on({
-            beforeload: 'onViewBeforeLoad',
-            load: 'onViewLoaded',
+            beforeload: &#39;onViewBeforeLoad&#39;,
+            load: &#39;onViewLoaded&#39;,
             scope: this
         });
     },
@@ -169,7 +169,7 @@ Ext.define('Ext.dashboard.Panel', {
             state = me.callParent() || {};
 
         if (!state.collapsed) {
-            me.addPropertyToState(state, 'height', me.rendered ? me.getHeight() : me.height || me.minHeight || 100);
+            me.addPropertyToState(state, &#39;height&#39;, me.rendered ? me.getHeight() : me.height || me.minHeight || 100);
         }
 
         return state;

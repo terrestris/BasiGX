@@ -19,22 +19,22 @@
 </span> * A specialized floating Component that supports a drop status icon and auto-repair.
  * This is the default drag proxy used by all Ext.dd components.
  */
-Ext.define('Ext.dd.StatusProxy', {
-    extend: 'Ext.Component',
+Ext.define(&#39;Ext.dd.StatusProxy&#39;, {
+    extend: &#39;Ext.Component&#39;,
 <span id='Ext-dd-StatusProxy-property-animRepair'>    animRepair: false,
 </span>
 <span id='Ext-dd-StatusProxy-cfg-childEls'>    childEls: [
-</span>        'ghost'
+</span>        &#39;ghost&#39;
     ],
 
 <span id='Ext-dd-StatusProxy-cfg-renderTpl'>    renderTpl: [
-</span>        '&lt;div class=&quot;' + Ext.baseCSSPrefix + 'dd-drop-icon&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;' +
-        '&lt;div id=&quot;{id}-ghost&quot; data-ref=&quot;ghost&quot; class=&quot;' + Ext.baseCSSPrefix + 'dd-drag-ghost&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;'
+</span>        &#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dd-drop-icon&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&#39; +
+        &#39;&lt;div id=&quot;{id}-ghost&quot; data-ref=&quot;ghost&quot; class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dd-drag-ghost&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&#39;
     ],
     
-<span id='Ext-dd-StatusProxy-property-repairCls'>    repairCls: Ext.baseCSSPrefix + 'dd-drag-repair',
+<span id='Ext-dd-StatusProxy-property-repairCls'>    repairCls: Ext.baseCSSPrefix + &#39;dd-drag-repair&#39;,
 </span>    
-<span id='Ext-dd-StatusProxy-property-ariaRole'>    ariaRole: 'presentation',
+<span id='Ext-dd-StatusProxy-property-ariaRole'>    ariaRole: &#39;presentation&#39;,
 </span>    
 <span id='Ext-dd-StatusProxy-property-skipLayout'>    skipLayout: true,
 </span><span id='Ext-dd-StatusProxy-cfg-alignOnScroll'>    alignOnScroll: false,
@@ -49,11 +49,11 @@ Ext.define('Ext.dd.StatusProxy', {
         config = config || {};
 
         Ext.apply(me, {
-            hideMode: 'visibility',
+            hideMode: &#39;visibility&#39;,
             hidden: true,
             floating: true,
             id: me.id || Ext.id(),
-            cls: Ext.baseCSSPrefix + 'dd-drag-proxy ' + this.dropNotAllowed,
+            cls: Ext.baseCSSPrefix + &#39;dd-drag-proxy &#39; + this.dropNotAllowed,
             shadow: config.shadow || false,
             renderTo: Ext.getDetachedBody()
         });
@@ -65,16 +65,16 @@ Ext.define('Ext.dd.StatusProxy', {
 </span>     * @cfg {String} dropAllowed
      * The CSS class to apply to the status element when drop is allowed.
      */
-    dropAllowed : Ext.baseCSSPrefix + 'dd-drop-ok',
+    dropAllowed : Ext.baseCSSPrefix + &#39;dd-drop-ok&#39;,
 
 <span id='Ext-dd-StatusProxy-cfg-dropNotAllowed'>    /**
 </span>     * @cfg {String} dropNotAllowed
      * The CSS class to apply to the status element when drop is not allowed.
      */
-    dropNotAllowed : Ext.baseCSSPrefix + 'dd-drop-nodrop',
+    dropNotAllowed : Ext.baseCSSPrefix + &#39;dd-drop-nodrop&#39;,
 
 <span id='Ext-dd-StatusProxy-method-setStatus'>    /**
-</span>     * Updates the proxy's visual element to indicate the status of whether or not drop is allowed
+</span>     * Updates the proxy&#39;s visual element to indicate the status of whether or not drop is allowed
      * over the current target element.
      * @param {String} cssClass The css class for the new drop status indicator image
      */
@@ -92,12 +92,12 @@ Ext.define('Ext.dd.StatusProxy', {
      */
     reset : function(clearGhost){
         var me = this,
-            clsPrefix = Ext.baseCSSPrefix + 'dd-drag-proxy ';
+            clsPrefix = Ext.baseCSSPrefix + &#39;dd-drag-proxy &#39;;
 
         me.el.replaceCls(clsPrefix + me.dropAllowed, clsPrefix + me.dropNotAllowed);
         me.dropStatus = me.dropNotAllowed;
         if (clearGhost) {
-            me.ghost.setHtml('');
+            me.ghost.setHtml(&#39;&#39;);
         }
     },
 
@@ -110,13 +110,13 @@ Ext.define('Ext.dd.StatusProxy', {
         if (typeof html === &quot;string&quot;) {
             this.ghost.setHtml(html);
         } else {
-            this.ghost.setHtml('');
+            this.ghost.setHtml(&#39;&#39;);
             html.style.margin = &quot;0&quot;;
             this.ghost.dom.appendChild(html);
         }
         var el = this.ghost.dom.firstChild;
         if (el) {
-            Ext.fly(el).setStyle('float', 'none');
+            Ext.fly(el).setStyle(&#39;float&#39;, &#39;none&#39;);
         }
     },
 
@@ -141,7 +141,7 @@ Ext.define('Ext.dd.StatusProxy', {
     },
 
 <span id='Ext-dd-StatusProxy-method-stop'>    /**
-</span>     * Stops the repair animation if it's currently running
+</span>     * Stops the repair animation if it&#39;s currently running
      */
     stop : function(){
         if (this.anim &amp;&amp; this.anim.isAnimated &amp;&amp; this.anim.isAnimated()) {
@@ -174,7 +174,7 @@ Ext.define('Ext.dd.StatusProxy', {
             me.el.setUnderlaysVisible(false);
             me.anim = me.el.animate({
                 duration: me.repairDuration || 500,
-                easing: 'ease-out',
+                easing: &#39;ease-out&#39;,
                 to: {
                     x: xy[0],
                     y: xy[1]

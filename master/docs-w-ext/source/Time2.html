@@ -27,17 +27,17 @@
  * To handle when the user selects a time from the list, you can subscribe to the {@link #selectionchange} event.
  *
  *     @example
- *     Ext.create('Ext.picker.Time', {
+ *     Ext.create(&#39;Ext.picker.Time&#39;, {
  *        width: 60,
- *        minValue: Ext.Date.parse('04:30:00 AM', 'h:i:s A'),
- *        maxValue: Ext.Date.parse('08:00:00 AM', 'h:i:s A'),
+ *        minValue: Ext.Date.parse(&#39;04:30:00 AM&#39;, &#39;h:i:s A&#39;),
+ *        maxValue: Ext.Date.parse(&#39;08:00:00 AM&#39;, &#39;h:i:s A&#39;),
  *        renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.picker.Time', {
-    extend: 'Ext.view.BoundList',
-    alias: 'widget.timepicker',
-    requires: ['Ext.data.Store', 'Ext.Date'],
+Ext.define(&#39;Ext.picker.Time&#39;, {
+    extend: &#39;Ext.view.BoundList&#39;,
+    alias: &#39;widget.timepicker&#39;,
+    requires: [&#39;Ext.data.Store&#39;, &#39;Ext.Date&#39;],
 
     config: {
 <span id='Ext-picker-Time-cfg-store'>        /**
@@ -60,14 +60,14 @@ Ext.define('Ext.picker.Time', {
                 initDate = this.prototype.initDate,
                 times = [],
                 min = clearTime(new Date(initDate[0], initDate[1], initDate[2])),
-                max = dateUtil.add(clearTime(new Date(initDate[0], initDate[1], initDate[2])), 'mi', (24 * 60) - 1);
+                max = dateUtil.add(clearTime(new Date(initDate[0], initDate[1], initDate[2])), &#39;mi&#39;, (24 * 60) - 1);
 
             while(min &lt;= max){
                 times.push({
                     disp: dateUtil.dateFormat(min, format),
                     date: min
                 });
-                min = dateUtil.add(min, 'mi', increment);
+                min = dateUtil.add(min, &#39;mi&#39;, increment);
             }
 
             return new Ext.data.Store({
@@ -101,7 +101,7 @@ Ext.define('Ext.picker.Time', {
      * The default time format string which can be overriden for localization support. The format must be valid
      * according to {@link Ext.Date#parse}.
      *
-     * Defaults to `'g:i A'`, e.g., `'3:15 PM'`. For 24-hour time format try `'H:i'` instead.
+     * Defaults to `&#39;g:i A&#39;`, e.g., `&#39;3:15 PM&#39;`. For 24-hour time format try `&#39;H:i&#39;` instead.
      */
     format : &quot;g:i A&quot;,
     //&lt;/locale&gt;
@@ -111,7 +111,7 @@ Ext.define('Ext.picker.Time', {
      * The field in the implicitly-generated Model objects that gets displayed in the list. This is
      * an internal field name only and is not useful to change via config.
      */
-    displayField: 'disp',
+    displayField: &#39;disp&#39;,
 
 <span id='Ext-picker-Time-property-initDate'>    /**
 </span>     * @private
@@ -119,7 +119,7 @@ Ext.define('Ext.picker.Time', {
      */
     initDate: [2008,0,1],
 
-<span id='Ext-picker-Time-cfg-componentCls'>    componentCls: Ext.baseCSSPrefix + 'timepicker',
+<span id='Ext-picker-Time-cfg-componentCls'>    componentCls: Ext.baseCSSPrefix + &#39;timepicker&#39;,
 </span>
 <span id='Ext-picker-Time-cfg-alignOnScroll'>    alignOnScroll: false,
 </span>
@@ -137,9 +137,9 @@ Ext.define('Ext.picker.Time', {
 
         // Set up absolute min and max for the entire day
         me.absMin = clearTime(new Date(initDate[0], initDate[1], initDate[2]));
-        me.absMax = dateUtil.add(clearTime(new Date(initDate[0], initDate[1], initDate[2])), 'mi', (24 * 60) - 1);
+        me.absMax = dateUtil.add(clearTime(new Date(initDate[0], initDate[1], initDate[2])), &#39;mi&#39;, (24 * 60) - 1);
 
-        // Updates the range filter's filterFn according to our configured min and max
+        // Updates the range filter&#39;s filterFn according to our configured min and max
         me.updateList();
 
         me.callParent();
@@ -202,7 +202,7 @@ Ext.define('Ext.picker.Time', {
         }
         filter = me.rangeFilter = new Ext.util.Filter({
             filterFn: function(record) {
-                var date = record.get('date');
+                var date = record.get(&#39;date&#39;);
                 return date &gt;= min &amp;&amp; date &lt;= max;
             }
         });
@@ -211,8 +211,8 @@ Ext.define('Ext.picker.Time', {
     }
 }, function() {
     this.prototype.modelType = Ext.define(null, {
-        extend: 'Ext.data.Model',
-        fields: ['disp', 'date']
+        extend: &#39;Ext.data.Model&#39;,
+        fields: [&#39;disp&#39;, &#39;date&#39;]
     });
 });
 

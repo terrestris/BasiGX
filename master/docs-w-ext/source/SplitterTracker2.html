@@ -15,8 +15,8 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.rtl.resizer.SplitterTracker', {
-    override: 'Ext.resizer.SplitterTracker',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.rtl.resizer.SplitterTracker&#39;, {
+    override: &#39;Ext.resizer.SplitterTracker&#39;,
 
     getVertPrevConstrainLeft: function(o) {
         return (!this.splitter.getInherited().rtl !== !Ext.rootInheritedState.rtl) ? // jshint ignore:line
@@ -46,7 +46,7 @@
     },
 
     getResizeOffset: function() {
-        var offset = this.getOffset('dragTarget');
+        var offset = this.getOffset(&#39;dragTarget&#39;);
         if (!this.splitter.getInherited().rtl !== !Ext.rootInheritedState.rtl) { // jshint ignore:line
             offset[0] = -offset[0];
         }

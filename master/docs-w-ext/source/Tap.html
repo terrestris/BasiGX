@@ -18,12 +18,12 @@
   <pre class="prettyprint lang-js"><span id='Ext-event-gesture-Tap'>/**
 </span> * A simple event recogniser which knows when you tap.
  */
-Ext.define('Ext.event.gesture.Tap', {
-    extend: 'Ext.event.gesture.SingleTouch',
+Ext.define(&#39;Ext.event.gesture.Tap&#39;, {
+    extend: &#39;Ext.event.gesture.SingleTouch&#39;,
 
 <span id='Ext-event-gesture-Tap-property-priority'>    priority: 200,
 </span>
-<span id='Ext-event-gesture-Tap-property-handledEvents'>    handledEvents: ['tap', 'tapcancel'],
+<span id='Ext-event-gesture-Tap-property-handledEvents'>    handledEvents: [&#39;tap&#39;, &#39;tapcancel&#39;],
 </span>
     config: {
 <span id='Ext-event-gesture-Tap-cfg-moveDistance'>        /**
@@ -59,7 +59,7 @@ Ext.define('Ext.event.gesture.Tap', {
     },
 
 <span id='Ext-event-gesture-Tap-method-onTouchEnd'>    onTouchEnd: function(e) {
-</span>        this.fire('tap', e, {
+</span>        this.fire(&#39;tap&#39;, e, {
             touch: e.changedTouches[0]
         });
 
@@ -67,7 +67,7 @@ Ext.define('Ext.event.gesture.Tap', {
     },
 
 <span id='Ext-event-gesture-Tap-method-onCancel'>    onCancel: function(e) {
-</span>        this.fire('tapcancel', e, {
+</span>        this.fire(&#39;tapcancel&#39;, e, {
             touch: e.changedTouches[0]
         }, true);
     },

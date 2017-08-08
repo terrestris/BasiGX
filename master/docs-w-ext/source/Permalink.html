@@ -37,16 +37,16 @@
  *
  * @class BasiGX.view.button.Permalink
  */
-Ext.define('BasiGX.view.button.Permalink', {
-    extend: 'BasiGX.view.button.Base',
-    xtype: 'basigx-button-permalink',
+Ext.define(&#39;BasiGX.view.button.Permalink&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-permalink&#39;,
 
     requires: [
-        'Ext.window.Window',
-        'Ext.app.ViewModel',
-        'BasiGX.view.form.Permalink',
-        'BasiGX.util.Animate',
-        'BasiGX.util.Application'
+        &#39;Ext.window.Window&#39;,
+        &#39;Ext.app.ViewModel&#39;,
+        &#39;BasiGX.view.form.Permalink&#39;,
+        &#39;BasiGX.util.Animate&#39;,
+        &#39;BasiGX.util.Application&#39;
     ],
 
 <span id='BasiGX-view-button-Permalink-property-viewModel'>    /**
@@ -54,14 +54,14 @@ Ext.define('BasiGX.view.button.Permalink', {
      */
     viewModel: {
         data: {
-            tooltip: 'Permalink erzeugen',
-            text: 'Permalink',
-            windowTitle: 'Link zur Anwendung',
-            documentation: '&lt;h2&gt;Permalink erzeugen&lt;/h2&gt;• Ein Klick auf ' +
-                'den Button öffnet ein Fenster, in dem ein Permalink erzeugt ' +
-                'werden kann. Dieser Link kann benutzt werden, um die ' +
-                'Applikation in einem vordefinierten Zustand, wie z.B. ' +
-                'Zentrum der Karte oder sichtbare Themen, zu öffnen.'
+            tooltip: &#39;Permalink erzeugen&#39;,
+            text: &#39;Permalink&#39;,
+            windowTitle: &#39;Link zur Anwendung&#39;,
+            documentation: &#39;&lt;h2&gt;Permalink erzeugen&lt;/h2&gt;• Ein Klick auf &#39; +
+                &#39;den Button öffnet ein Fenster, in dem ein Permalink erzeugt &#39; +
+                &#39;werden kann. Dieser Link kann benutzt werden, um die &#39; +
+                &#39;Applikation in einem vordefinierten Zustand, wie z.B. &#39; +
+                &#39;Zentrum der Karte oder sichtbare Themen, zu öffnen.&#39;
         }
     },
 
@@ -71,33 +71,33 @@ Ext.define('BasiGX.view.button.Permalink', {
      */
     liveDemoConfig: [
         {
-            moveMouseTo: 'basigx-button-permalink'
+            moveMouseTo: &#39;basigx-button-permalink&#39;
         },
         {
-            clickOnButton: 'basigx-button-permalink'
+            clickOnButton: &#39;basigx-button-permalink&#39;
         },
         {
-            moveMouseTo: 'window[name=permalink-window]'
+            moveMouseTo: &#39;window[name=permalink-window]&#39;
         },
         {
-            destroy: 'window[name=permalink-window]'
+            destroy: &#39;window[name=permalink-window]&#39;
         }
     ],
 
 <span id='BasiGX-view-button-Permalink-cfg-bind'>    bind: {
-</span>        text: '{text}'
+</span>        text: &#39;{text}&#39;
     },
 
     config: {
 <span id='BasiGX-view-button-Permalink-cfg-handler'>        handler: function() {
-</span>            var win = Ext.ComponentQuery.query('[name=permalink-window]')[0];
+</span>            var win = Ext.ComponentQuery.query(&#39;[name=permalink-window]&#39;)[0];
             if (!win) {
-                Ext.create('Ext.window.Window', {
-                    name: 'permalink-window',
-                    title: this.getViewModel().get('windowTitle'),
-                    layout: 'fit',
+                Ext.create(&#39;Ext.window.Window&#39;, {
+                    name: &#39;permalink-window&#39;,
+                    title: this.getViewModel().get(&#39;windowTitle&#39;),
+                    layout: &#39;fit&#39;,
                     items: [{
-                        xtype: 'basigx-form-permalink'
+                        xtype: &#39;basigx-form-permalink&#39;
                     }]
                 }).show();
             } else {

@@ -18,18 +18,18 @@
   <pre class="prettyprint lang-js"><span id='Ext-util-SorterCollection'>/**
 </span> * @private
  */
-Ext.define('Ext.util.SorterCollection', {
-    extend: 'Ext.util.Collection',
+Ext.define(&#39;Ext.util.SorterCollection&#39;, {
+    extend: &#39;Ext.util.Collection&#39;,
 
     requires: [
-        'Ext.util.Sorter'
+        &#39;Ext.util.Sorter&#39;
     ],
 
 <span id='Ext-util-SorterCollection-property-isSorterCollection'>    isSorterCollection: true,
 </span>
 <span id='Ext-util-SorterCollection-property-sortable'>    /**
 </span>     * @property {Ext.util.Sortable} sortable
-     * The owning sortable instance. The sortable's configuration governs this
+     * The owning sortable instance. The sortable&#39;s configuration governs this
      * collection.
      * @private
      * @readonly
@@ -101,7 +101,7 @@ Ext.define('Ext.util.SorterCollection', {
             } else {
                 //&lt;debug&gt;
                 if (!Ext.isObject(property)) {
-                    Ext.raise('Invalid sort descriptor: ' + property);
+                    Ext.raise(&#39;Invalid sort descriptor: &#39; + property);
                 }
                 //&lt;/debug&gt;
 
@@ -113,11 +113,11 @@ Ext.define('Ext.util.SorterCollection', {
             //&lt;debug&gt;
             if (mode &amp;&amp; !me._sortModes[mode]) {
                 Ext.raise(
-                    'Sort mode should be &quot;multi&quot;, &quot;append&quot;, &quot;prepend&quot; or &quot;replace&quot;, not &quot;' +
-                                mode + '&quot;');
+                    &#39;Sort mode should be &quot;multi&quot;, &quot;append&quot;, &quot;prepend&quot; or &quot;replace&quot;, not &quot;&#39; +
+                                mode + &#39;&quot;&#39;);
             }
             //&lt;/debug&gt;
-            mode = me._sortModes[mode || 'replace'];
+            mode = me._sortModes[mode || &#39;replace&#39;];
 
             primary = me.getAt(0);
             count = me.length;
@@ -217,7 +217,7 @@ Ext.define('Ext.util.SorterCollection', {
             type = typeof sorter;
 
             // If we are dealing with a string we assume it is a property they want to sort on.
-            if (type === 'string') {
+            if (type === &#39;string&#39;) {
                 currentSorter = me.get(sorter);
                 if (currentSorter) {
                     return currentSorter;
@@ -226,7 +226,7 @@ Ext.define('Ext.util.SorterCollection', {
                 sorterConfig.property = sorter;
             }
             // If it is a function, we assume its a sorting function.
-            else if (type === 'function') {
+            else if (type === &#39;function&#39;) {
                 sorterConfig.sorterFn = sorter;
             }
             // If we are dealing with an object, we assume its a Sorter configuration. In
@@ -235,7 +235,7 @@ Ext.define('Ext.util.SorterCollection', {
                 // Finally we get to the point where it has to be invalid
                 // &lt;debug&gt;
                 if (!Ext.isObject(sorter)) {
-                    Ext.raise('Invalid sorter specified: ' + sorter);
+                    Ext.raise(&#39;Invalid sorter specified: &#39; + sorter);
                 }
                 // &lt;/debug&gt;
 
@@ -248,7 +248,7 @@ Ext.define('Ext.util.SorterCollection', {
             }
 
             // If a sorter config was created, make it an instance
-            sorter = Ext.create(xclass || 'Ext.util.Sorter', sorterConfig);
+            sorter = Ext.create(xclass || &#39;Ext.util.Sorter&#39;, sorterConfig);
         }
 
         if (sorterOptionsFn) {
@@ -285,13 +285,13 @@ Ext.define('Ext.util.SorterCollection', {
                 } else {
                     type = typeof sorter;
 
-                    if (type === 'string') {
+                    if (type === &#39;string&#39;) {
                         sorter = me.get(sorter);
                         if (sorter) {
                             remove.push(sorter);
                         }
                     }
-                    else if (type === 'function') {
+                    else if (type === &#39;function&#39;) {
                         for (n = currentSorters.length; n-- &gt; 0; ) {
                             item = currentSorters[n];
                             if (item.getSorterFn() === sorter) {
@@ -301,7 +301,7 @@ Ext.define('Ext.util.SorterCollection', {
                     }
                     //&lt;debug&gt;
                     else {
-                        Ext.raise('Invalid sorter specification: ' + sorter);
+                        Ext.raise(&#39;Invalid sorter specification: &#39; + sorter);
                     }
                     //&lt;/debug&gt;
                 }
@@ -318,7 +318,7 @@ Ext.define('Ext.util.SorterCollection', {
 </span>        // Odd thing this. We need a Sortable to know how to manage our collection, but
         // we may not have one. Of course as a Collection, we *are* one as well... just
         // that is not really useful to sort the sorters themselves, but we do have the
-        // default options for Sortables baked in, so we'll do.
+        // default options for Sortables baked in, so we&#39;ll do.
         return this.$sortable || this;
     }
 });

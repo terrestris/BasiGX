@@ -22,29 +22,29 @@
  * and the appropriate target will be created.
  */
 
-Ext.define('Ext.fx.target.Sprite', {
+Ext.define(&#39;Ext.fx.target.Sprite&#39;, {
 
     /* Begin Definitions */
 
-    extend: 'Ext.fx.target.Target',
+    extend: &#39;Ext.fx.target.Target&#39;,
 
 <span id='Ext-fx-target-Sprite-property-type'>    /* End Definitions */
 </span>
-    type: 'draw',
+    type: &#39;draw&#39;,
 
 <span id='Ext-fx-target-Sprite-method-getFromPrim'>    getFromPrim: function (sprite, attr) {
 </span>        var obj;
         switch (attr) {
-            case 'rotate':
-            case 'rotation':
+            case &#39;rotate&#39;:
+            case &#39;rotation&#39;:
                 obj = sprite.attr.rotation;
                 return {
                     x: obj.x || 0,
                     y: obj.y || 0,
                     degrees: obj.degrees || 0
                 };
-            case 'scale':
-            case 'scaling':
+            case &#39;scale&#39;:
+            case &#39;scaling&#39;:
                 obj = sprite.attr.scaling;
                 return {
                     x: obj.x || 1,
@@ -52,8 +52,8 @@ Ext.define('Ext.fx.target.Sprite', {
                     cx: obj.cx || 0,
                     cy: obj.cy || 0
                 };
-            case 'translate':
-            case 'translation':
+            case &#39;translate&#39;:
+            case &#39;translation&#39;:
                 obj = sprite.attr.translation;
                 return {
                     x: obj.x || 0,
@@ -82,13 +82,13 @@ Ext.define('Ext.fx.target.Sprite', {
                 for (j = 0; j &lt; ln2; j++) {
                     sprite = attrArr[j][0];
                     attrs = attrArr[j][1];
-                    if (attr === 'translate' || attr === 'translation') {
+                    if (attr === &#39;translate&#39; || attr === &#39;translation&#39;) {
                         value = {
                             x: attrs.x,
                             y: attrs.y
                         };
                     }
-                    else if (attr === 'rotate' || attr === 'rotation') {
+                    else if (attr === &#39;rotate&#39; || attr === &#39;rotation&#39;) {
                         x = attrs.x;
                         if (isNaN(x)) {
                             x = null;
@@ -102,7 +102,7 @@ Ext.define('Ext.fx.target.Sprite', {
                             x: x,
                             y: y
                         };
-                    } else if (attr === 'scale' || attr === 'scaling') {
+                    } else if (attr === &#39;scale&#39; || attr === &#39;scaling&#39;) {
                         x = attrs.x;
                         if (isNaN(x)) {
                             x = null;
@@ -118,7 +118,7 @@ Ext.define('Ext.fx.target.Sprite', {
                             cy: attrs.cy
                         };
                     }
-                    else if (attr === 'width' || attr === 'height' || attr === 'x' || attr === 'y') {
+                    else if (attr === &#39;width&#39; || attr === &#39;height&#39; || attr === &#39;x&#39; || attr === &#39;y&#39;) {
                         value = parseFloat(attrs);
                     }
                     else {

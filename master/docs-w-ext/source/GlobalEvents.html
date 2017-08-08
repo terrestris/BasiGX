@@ -21,19 +21,19 @@
  * Ext.on() and Ext.un() are shorthand for {@link #addListener} and {@link #removeListener}
  * on this Observable.  For example, to listen for the idle event:
  * 
- *     Ext.on('idle', function() {
+ *     Ext.on(&#39;idle&#39;, function() {
  *         // do something
  *     });
  */
-Ext.define('Ext.GlobalEvents', {
-    extend: 'Ext.mixin.Observable',
-    alternateClassName: 'Ext.globalEvents', // for compat with Ext JS 4.2 and earlier
+Ext.define(&#39;Ext.GlobalEvents&#39;, {
+    extend: &#39;Ext.mixin.Observable&#39;,
+    alternateClassName: &#39;Ext.globalEvents&#39;, // for compat with Ext JS 4.2 and earlier
     
     requires: [
-        'Ext.dom.Element'
+        &#39;Ext.dom.Element&#39;
     ],
 
-<span id='Ext-GlobalEvents-property-observableType'>    observableType: 'global',
+<span id='Ext-GlobalEvents-property-observableType'>    observableType: &#39;global&#39;,
 </span>
     singleton: true,
 
@@ -176,14 +176,14 @@ Ext.define('Ext.GlobalEvents', {
     },
 
 <span id='Ext-GlobalEvents-method-attachListeners'>    attachListeners: function() {
-</span>        Ext.get(window).on('resize', this.fireResize, this, {
+</span>        Ext.get(window).on(&#39;resize&#39;, this.fireResize, this, {
             buffer: this.resizeBuffer
         });
-        Ext.getDoc().on('mousedown', this.fireMouseDown, this);
+        Ext.getDoc().on(&#39;mousedown&#39;, this.fireMouseDown, this);
     },
 
 <span id='Ext-GlobalEvents-method-fireMouseDown'>    fireMouseDown: function(e) {
-</span>        this.fireEvent('mousedown', e);
+</span>        this.fireEvent(&#39;mousedown&#39;, e);
     },
 
 <span id='Ext-GlobalEvents-method-fireResize'>    fireResize: function() {
@@ -196,7 +196,7 @@ Ext.define('Ext.GlobalEvents', {
          if (me.curHeight !== h || me.curWidth !== w) {
              me.curHeight = h;
              me.curWidth = w;
-             me.fireEvent('resize', w, h);
+             me.fireEvent(&#39;resize&#39;, w, h);
          }
     }
 

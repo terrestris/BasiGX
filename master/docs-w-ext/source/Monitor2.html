@@ -21,9 +21,9 @@
  * which can add a large perf cost when implemented globally
  * @private
  */
-Ext.define('Ext.container.Monitor', {
+Ext.define(&#39;Ext.container.Monitor&#39;, {
 <span id='Ext-container-Monitor-property-target'>    target: null,
-</span><span id='Ext-container-Monitor-property-selector'>    selector: '',
+</span><span id='Ext-container-Monitor-property-selector'>    selector: &#39;&#39;,
 </span>    
 <span id='Ext-container-Monitor-property-scope'>    scope: null,
 </span><span id='Ext-container-Monitor-property-addHandler'>    addHandler: null,
@@ -49,7 +49,7 @@ Ext.define('Ext.container.Monitor', {
 </span>        var me = this;
         
         me.target = target;
-        target.on('beforedestroy', me.disable, me);
+        target.on(&#39;beforedestroy&#39;, me.disable, me);
         me.onContainerAdd(target);
     },
     
@@ -59,7 +59,7 @@ Ext.define('Ext.container.Monitor', {
         
         if (target &amp;&amp; !target.destroyed) {
             me.onContainerRemove(target, target);
-            target.un('beforedestroy', me.disable, me);
+            target.un(&#39;beforedestroy&#39;, me.disable, me);
         }
         
         me.items = Ext.destroy(me.items);
@@ -137,7 +137,7 @@ Ext.define('Ext.container.Monitor', {
             });
         }
         
-        // Means we've been called by a parent container so the selector
+        // Means we&#39;ve been called by a parent container so the selector
         // matchers have already been processed
         if (preventChildren !== true) {
             items = ct.query(me.selector);
@@ -147,7 +147,7 @@ Ext.define('Ext.container.Monitor', {
             }
         }
          
-        items = ct.query('&gt;container');
+        items = ct.query(&#39;&gt;container&#39;);
         for (i = 0, len = items.length; i &lt; len; ++i) {
             me.onContainerAdd(items[i], true);
         }
@@ -160,8 +160,8 @@ Ext.define('Ext.container.Monitor', {
 <span id='Ext-container-Monitor-method-handleRemove'>    handleRemove: function(ct, comp) {
 </span>        var me = this;
             
-        // During a destroy we don't want to maintain any of this information,
-        // so typically we'll be disabled here
+        // During a destroy we don&#39;t want to maintain any of this information,
+        // so typically we&#39;ll be disabled here
         if (!me.disabled) {
             if (Ext.ComponentQuery.is(comp, me.selector)) {
                 me.onItemRemove(ct, comp);
@@ -177,7 +177,7 @@ Ext.define('Ext.container.Monitor', {
 </span>        var me = this,
             items, i, len, item;
          
-        // If it's not a container, it means it's a queryable that isn't a container.
+        // If it&#39;s not a container, it means it&#39;s a queryable that isn&#39;t a container.
         // For example a button with a menu
         if (!comp.destroyed &amp;&amp; comp.isContainer) {
             me.removeCtListeners(comp);
@@ -189,7 +189,7 @@ Ext.define('Ext.container.Monitor', {
                     me.onItemRemove(item.ownerCt, item);
                 }
                 
-                items = comp.query('container');
+                items = comp.query(&#39;container&#39;);
                 for (i = 0, len = items.length; i &lt; len; ++i) {
                     me.removeCtListeners(items[i]);
                 }

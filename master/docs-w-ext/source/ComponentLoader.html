@@ -50,12 +50,12 @@
  *
  * ## Example Usage
  *
- *     var cmp = Ext.create('Ext.Component', {
+ *     var cmp = Ext.create(&#39;Ext.Component&#39;, {
  *         renderTo: Ext.getBody(),
- *         tpl: '{firstName} - {lastName}',
+ *         tpl: &#39;{firstName} - {lastName}&#39;,
  *         loader: {
- *             url: 'myPage.php',
- *             renderer: 'data',
+ *             url: &#39;myPage.php&#39;,
+ *             renderer: &#39;data&#39;,
  *             params: {
  *                 userId: 1
  *             }
@@ -65,11 +65,11 @@
  *     // call the loader manually (or use autoLoad:true instead)
  *     cmp.getLoader().load();
  */
-Ext.define('Ext.ComponentLoader', {
+Ext.define(&#39;Ext.ComponentLoader&#39;, {
 
     /* Begin Definitions */
 
-    extend: 'Ext.ElementLoader',
+    extend: &#39;Ext.ElementLoader&#39;,
 
     statics: {
 <span id='Ext-ComponentLoader-static-property-Renderer'>        Renderer: {
@@ -92,7 +92,7 @@ Ext.define('Ext.ComponentLoader', {
                 if (!target.isContainer) {
                     Ext.raise({
                         target: target,
-                        msg: 'Components can only be loaded into a container'
+                        msg: &#39;Components can only be loaded into a container&#39;
                     });
                 }
                 //&lt;/debug&gt;
@@ -168,16 +168,16 @@ The function must return false is loading is not successful. Below is a sample o
 
     new Ext.Component({
         loader: {
-            url: 'myPage.php',
+            url: &#39;myPage.php&#39;,
             renderer: function(loader, response, active) {
                 var text = response.responseText;
-                loader.getTarget().setHtml('The response is ' + text);
+                loader.getTarget().setHtml(&#39;The response is &#39; + text);
                 return true;
             }
         }
     });
      */
-    renderer: 'html',
+    renderer: &#39;html&#39;,
 
 <span id='Ext-ComponentLoader-method-setTarget'>    /**
 </span>     * Set a {Ext.Component} as the target of this loader. Note that if the target is changed,
@@ -200,7 +200,7 @@ The function must return false is loading is not successful. Below is a sample o
             if (target.rendered) {
                 me.doLoadOnRender();
             } else {
-                me.mon(target, 'render', me.doLoadOnRender, me);
+                me.mon(target, &#39;render&#39;, me.doLoadOnRender, me);
             }
         }
     },
@@ -242,9 +242,9 @@ The function must return false is loading is not successful. Below is a sample o
 
         var renderers = this.statics().Renderer;
         switch (renderer) {
-            case 'component':
+            case &#39;component&#39;:
                 return renderers.Component;
-            case 'data':
+            case &#39;data&#39;:
                 return renderers.Data;
             default:
                 return Ext.ElementLoader.Renderer.Html;

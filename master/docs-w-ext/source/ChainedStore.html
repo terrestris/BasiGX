@@ -20,9 +20,9 @@
  * {@link #source}, however this view of the store may be sorted &amp; filtered independently without
  * having any impact on the {@link #source} store.
  */
-Ext.define('Ext.data.ChainedStore', {
-    extend: 'Ext.data.AbstractStore',
-    alias: 'store.chained',
+Ext.define(&#39;Ext.data.ChainedStore&#39;, {
+    extend: &#39;Ext.data.AbstractStore&#39;,
+    alias: &#39;store.chained&#39;,
     
     config: {
 <span id='Ext-data-ChainedStore-cfg-source'>        /**
@@ -38,20 +38,20 @@ Ext.define('Ext.data.ChainedStore', {
 </span>    },
 
     mixins: [
-        'Ext.data.LocalStore'
+        &#39;Ext.data.LocalStore&#39;
     ],
     
 <span id='Ext-data-ChainedStore-method-updateRemoteFilter'>    //&lt;debug&gt;
 </span>    updateRemoteFilter: function(remoteFilter, oldRemoteFilter) {
         if (remoteFilter) {
-            Ext.raise('Remote filtering cannot be used with chained stores.');
+            Ext.raise(&#39;Remote filtering cannot be used with chained stores.&#39;);
         }
         this.callParent([remoteFilter, oldRemoteFilter]);
     },
 
 <span id='Ext-data-ChainedStore-method-updateRemoteSort'>    updateRemoteSort: function(remoteSort, oldRemoteSort) {
 </span>        if (remoteSort) {
-            Ext.raise('Remote sorting cannot be used with chained stores.');
+            Ext.raise(&#39;Remote sorting cannot be used with chained stores.&#39;);
         }
         this.callParent([remoteSort, oldRemoteSort]);
     },
@@ -94,8 +94,8 @@ Ext.define('Ext.data.ChainedStore', {
             source = Ext.data.StoreManager.lookup(source);
             //&lt;debug&gt;
             if (!source) {
-                s = 'Invalid source {0}specified for Ext.data.ChainedStore';
-                s = Ext.String.format(s, typeof original === 'string' ? '&quot;' + original + '&quot; ' : '');
+                s = &#39;Invalid source {0}specified for Ext.data.ChainedStore&#39;;
+                s = Ext.String.format(s, typeof original === &#39;string&#39; ? &#39;&quot;&#39; + original + &#39;&quot; &#39; : &#39;&#39;);
                 Ext.raise(s);
             }
             //&lt;/debug&gt;
@@ -115,8 +115,8 @@ Ext.define('Ext.data.ChainedStore', {
             data = me.getData();
             data.setSource(source.getData());
             if (!me.isInitializing) {
-                me.fireEvent('refresh', me);
-                me.fireEvent('datachanged', me);
+                me.fireEvent(&#39;refresh&#39;, me);
+                me.fireEvent(&#39;datachanged&#39;, me);
             }
             source.addObserver(me);
         }
@@ -143,12 +143,12 @@ Ext.define('Ext.data.ChainedStore', {
             return;
         }
         
-        me.fireEvent('add', me, records, info.at);
+        me.fireEvent(&#39;add&#39;, me, records, info.at);
         // If there is a next property, that means there is another range that needs
         // to be removed after this. Wait until everything is gone before firign datachanged
         // since it should be a bulk operation
         if (lastChunk) {
-            me.fireEvent('datachanged', me);
+            me.fireEvent(&#39;datachanged&#39;, me);
         }
     },
 
@@ -163,12 +163,12 @@ Ext.define('Ext.data.ChainedStore', {
         // This will be invoked on TreeStores in which the invoking record
         // is an descendant of a collapsed node, and so *will not be contained by this store
         me.onUpdate(record, type, modifiedFieldNames, info);
-        me.fireEvent('update', me, record, type, modifiedFieldNames, info);
+        me.fireEvent(&#39;update&#39;, me, record, type, modifiedFieldNames, info);
     },
     
 <span id='Ext-data-ChainedStore-method-onCollectionUpdateKey'>    onCollectionUpdateKey: function(source, details) {
 </span>        // Must react to upstream Collection key update by firing idchanged event
-        this.fireEvent('idchanged', this, details.item, details.oldKey, details.newKey);
+        this.fireEvent(&#39;idchanged&#39;, this, details.item, details.oldKey, details.newKey);
     },
 
 <span id='Ext-data-ChainedStore-method-onUpdate'>    onUpdate: Ext.emptyFn,
@@ -182,70 +182,70 @@ Ext.define('Ext.data.ChainedStore', {
             return;
         }
         
-        me.fireEvent('remove', me, records, info.at, false);
+        me.fireEvent(&#39;remove&#39;, me, records, info.at, false);
         // If there is a next property, that means there is another range that needs
         // to be removed after this. Wait until everything is gone before firign datachanged
         // since it should be a bulk operation
         if (lastChunk) {
-            me.fireEvent('datachanged', me);
+            me.fireEvent(&#39;datachanged&#39;, me);
         }
     },
 
 <span id='Ext-data-ChainedStore-method-onSourceBeforeLoad'>    onSourceBeforeLoad: function(source, operation) {
-</span>        this.fireEvent('beforeload', this, operation);
+</span>        this.fireEvent(&#39;beforeload&#39;, this, operation);
     },
 
 <span id='Ext-data-ChainedStore-method-onSourceAfterLoad'>    onSourceAfterLoad: function(source, records, successful, operation) {
-</span>        this.fireEvent('load', this, records, successful, operation);
+</span>        this.fireEvent(&#39;load&#39;, this, records, successful, operation);
     },
 
 <span id='Ext-data-ChainedStore-method-onFilterEndUpdate'>    onFilterEndUpdate: function() {
 </span>        this.callParent(arguments);
-        this.callObservers('Filter');
+        this.callObservers(&#39;Filter&#39;);
     },
     
 <span id='Ext-data-ChainedStore-method-onSourceBeforePopulate'>    onSourceBeforePopulate: function() {
 </span>        this.ignoreCollectionAdd = true;
-        this.callObservers('BeforePopulate');
+        this.callObservers(&#39;BeforePopulate&#39;);
     },
     
 <span id='Ext-data-ChainedStore-method-onSourceAfterPopulate'>    onSourceAfterPopulate: function() {
 </span>        var me = this;
         me.ignoreCollectionAdd = false;
-        me.fireEvent('datachanged', me);
-        me.fireEvent('refresh', me);
-        this.callObservers('AfterPopulate');
+        me.fireEvent(&#39;datachanged&#39;, me);
+        me.fireEvent(&#39;refresh&#39;, me);
+        this.callObservers(&#39;AfterPopulate&#39;);
     },
     
 <span id='Ext-data-ChainedStore-method-onSourceBeforeClear'>    onSourceBeforeClear: function() {
 </span>        this.ignoreCollectionRemove = true;
-        this.callObservers('BeforeClear');
+        this.callObservers(&#39;BeforeClear&#39;);
     },
     
 <span id='Ext-data-ChainedStore-method-onSourceAfterClear'>    onSourceAfterClear: function() {
 </span>        this.ignoreCollectionRemove = false;
-        this.callObservers('AfterClear');
+        this.callObservers(&#39;AfterClear&#39;);
     },
     
 <span id='Ext-data-ChainedStore-method-onSourceBeforeRemoveAll'>    onSourceBeforeRemoveAll: function() {
 </span>        this.ignoreCollectionRemove = true;
-        this.callObservers('BeforeRemoveAll');
+        this.callObservers(&#39;BeforeRemoveAll&#39;);
     },
     
 <span id='Ext-data-ChainedStore-method-onSourceAfterRemoveAll'>    onSourceAfterRemoveAll: function(source, silent) {
 </span>        var me = this;
         me.ignoreCollectionRemove = false;
         if (!silent) {
-            me.fireEvent('clear', me);
-            me.fireEvent('datachanged', me);
+            me.fireEvent(&#39;clear&#39;, me);
+            me.fireEvent(&#39;datachanged&#39;, me);
         }
-        this.callObservers('AfterRemoveAll', [silent]);
+        this.callObservers(&#39;AfterRemoveAll&#39;, [silent]);
     },
 
 <span id='Ext-data-ChainedStore-method-onSourceFilter'>    onSourceFilter: function() {
 </span>        var me = this;
-        me.fireEvent('refresh', me);
-        me.fireEvent('datachanged', me);
+        me.fireEvent(&#39;refresh&#39;, me);
+        me.fireEvent(&#39;datachanged&#39;, me);
     },
     
 <span id='Ext-data-ChainedStore-method-hasPendingLoad'>    hasPendingLoad: function() {

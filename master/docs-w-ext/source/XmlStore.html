@@ -21,17 +21,17 @@
  * &lt;p&gt;A store configuration would be something like:&lt;pre&gt;&lt;code&gt;
 var store = new Ext.data.XmlStore({
     // store configs
-    storeId: 'myStore',
-    url: 'sheldon.xml', // automatically configures a HttpProxy
+    storeId: &#39;myStore&#39;,
+    url: &#39;sheldon.xml&#39;, // automatically configures a HttpProxy
     // reader configs
-    record: 'Item', // records will have an &quot;Item&quot; tag
-    idPath: 'ASIN',
-    totalRecords: '@TotalResults'
+    record: &#39;Item&#39;, // records will have an &quot;Item&quot; tag
+    idPath: &#39;ASIN&#39;,
+    totalRecords: &#39;@TotalResults&#39;
     fields: [
         // set up the fields mapping into the xml doc
         // The first needs mapping, the others are very basic
-        {name: 'Author', mapping: 'ItemAttributes &gt; Author'},
-        'Title', 'Manufacturer', 'ProductGroup'
+        {name: &#39;Author&#39;, mapping: &#39;ItemAttributes &gt; Author&#39;},
+        &#39;Title&#39;, &#39;Manufacturer&#39;, &#39;ProductGroup&#39;
     ]
 });
  * &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
@@ -67,22 +67,22 @@ var store = new Ext.data.XmlStore({
  * &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; This class accepts all of the configuration options of
  * &lt;b&gt;{@link Ext.data.reader.Xml XmlReader}&lt;/b&gt;.&lt;/p&gt;
  */
-Ext.define('Ext.data.XmlStore', {
-    extend: 'Ext.data.Store',
-    alias: 'store.xml',
+Ext.define(&#39;Ext.data.XmlStore&#39;, {
+    extend: &#39;Ext.data.Store&#39;,
+    alias: &#39;store.xml&#39;,
 
     requires: [
-        'Ext.data.proxy.Ajax',
-        'Ext.data.reader.Xml',
-        'Ext.data.writer.Xml'
+        &#39;Ext.data.proxy.Ajax&#39;,
+        &#39;Ext.data.reader.Xml&#39;,
+        &#39;Ext.data.writer.Xml&#39;
     ],
     
 <span id='Ext-data-XmlStore-method-constructor'>    constructor: function(config){
 </span>        config = Ext.apply({
             proxy: {
-                type: 'ajax',
-                reader: 'xml',
-                writer: 'xml'
+                type: &#39;ajax&#39;,
+                reader: &#39;xml&#39;,
+                writer: &#39;xml&#39;
             }
         }, config);
 

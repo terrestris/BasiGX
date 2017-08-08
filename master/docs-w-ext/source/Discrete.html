@@ -22,17 +22,17 @@
  *
  * See {@link Ext.sparkline.Base the base class} for a simple example.
  */
-Ext.define('Ext.sparkline.Discrete', {
-    extend: 'Ext.sparkline.BarBase',
+Ext.define(&#39;Ext.sparkline.Discrete&#39;, {
+    extend: &#39;Ext.sparkline.BarBase&#39;,
 
-    alias: 'widget.sparklinediscrete',
+    alias: &#39;widget.sparklinediscrete&#39;,
 
     config: {
 
 <span id='Ext-sparkline-Discrete-cfg-lineHeight'>        /**
 </span>         * @cfg {Number} lineHeight Height of each line in pixels - Defaults to 30% of the graph height.
          */
-        lineHeight: 'auto',
+        lineHeight: &#39;auto&#39;,
         
 <span id='Ext-sparkline-Discrete-cfg-thresholdColor'>        /**
 </span>         * @cfg {String} thresholdColor Colour to use in combination with {@link #thresholdValue}
@@ -62,7 +62,7 @@ Ext.define('Ext.sparkline.Discrete', {
         chartRangeClip: false
     },
 
-<span id='Ext-sparkline-Discrete-cfg-tipTpl'>    tipTpl: '{prefix}{value}{suffix}',
+<span id='Ext-sparkline-Discrete-cfg-tipTpl'>    tipTpl: &#39;{prefix}{value}{suffix}&#39;,
 </span>
 <span id='Ext-sparkline-Discrete-method-applyValues'>    // Ensure values is an array of numbers
 </span>    applyValues: function(newValues) {
@@ -95,7 +95,7 @@ Ext.define('Ext.sparkline.Discrete', {
             me.max = chartRangeMax;
         }
         if (me.canvas) {
-            if (me.getLineHeight() === 'auto') {
+            if (me.getLineHeight() === &#39;auto&#39;) {
                 me.setLineHeight(Math.round(me.getHeight() * 0.3));
             }
         }

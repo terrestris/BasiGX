@@ -22,15 +22,15 @@
  * 
  * @private
  */
-Ext.define('Ext.app.domain.Component', {
-    extend: 'Ext.app.EventDomain',
+Ext.define(&#39;Ext.app.domain.Component&#39;, {
+    extend: &#39;Ext.app.EventDomain&#39;,
     singleton: true,
 
     requires: [
-        'Ext.Widget'
+        &#39;Ext.Widget&#39;
     ],
 
-<span id='Ext-app-domain-Component-property-type'>    type: 'component',
+<span id='Ext-app-domain-Component-property-type'>    type: &#39;component&#39;,
 </span>
 <span id='Ext-app-domain-Component-method-constructor'>    constructor: function() {
 </span>        this.callParent();
@@ -39,7 +39,7 @@ Ext.define('Ext.app.domain.Component', {
     },
     
 <span id='Ext-app-domain-Component-method-dispatch'>    dispatch: function(target, ev, args) {
-</span>        var controller = target.lookupController(false), // don't skip target
+</span>        var controller = target.lookupController(false), // don&#39;t skip target
             domain, view;
            
          

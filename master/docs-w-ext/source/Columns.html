@@ -19,10 +19,10 @@
 </span> * A class which encapsulates a range of columns defining a selection in a grid.
  * @since 5.1.0
  */
-Ext.define('Ext.grid.selection.Columns', {
-    extend: 'Ext.grid.selection.Selection',
+Ext.define(&#39;Ext.grid.selection.Columns&#39;, {
+    extend: &#39;Ext.grid.selection.Selection&#39;,
 
-<span id='Ext-grid-selection-Columns-property-type'>    type: 'columns',
+<span id='Ext-grid-selection-Columns-property-type'>    type: &#39;columns&#39;,
 </span>
 <span id='Ext-grid-selection-Columns-property-isColumns'>    /**
 </span>     * @property {Boolean} isColumns
@@ -142,7 +142,7 @@ Ext.define('Ext.grid.selection.Columns', {
         add: function(column) {
             //&lt;debug&gt;
             if (!column.isColumn) {
-                Ext.raise('Column selection must be passed a grid Column header object');
+                Ext.raise(&#39;Column selection must be passed a grid Column header object&#39;);
             }
             //&lt;/debug&gt;
 
@@ -230,7 +230,7 @@ Ext.define('Ext.grid.selection.Columns', {
                 for (rowIdx = rows.startIndex; rowIdx &lt;= rows.endIndex; rowIdx++) {
                     cellContext.setRow(rowIdx);
                     for (colIdx = 0; colIdx &lt; len; colIdx++) {
-                        // Note colIdx is not the column's visible index. setColumn must be passed the column object
+                        // Note colIdx is not the column&#39;s visible index. setColumn must be passed the column object
                         cellContext.setColumn(columns[colIdx]);
                         if (selected[colIdx]) {
                             view.onCellSelect(cellContext);
@@ -250,7 +250,7 @@ Ext.define('Ext.grid.selection.Columns', {
         remove: function(column) {
             //&lt;debug&gt;
             if (!column.isColumn) {
-                Ext.raise('Column selection must be passed a grid Column header object');
+                Ext.raise(&#39;Column selection must be passed a grid Column header object&#39;);
             }
             //&lt;/debug&gt;
 

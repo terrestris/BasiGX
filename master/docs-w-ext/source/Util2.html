@@ -27,12 +27,12 @@ Ext.apply(Ext, {
 
     // shortcut for the special named scopes for listener scope resolution
     _namedScopes: {
-        'this': { isThis: 1 },
+        &#39;this&#39;: { isThis: 1 },
         controller: { isController: 1 },
         // these two are private, used to indicate that listeners were declared on the
-        // class body with either an unspecified scope, or scope:'controller'
+        // class body with either an unspecified scope, or scope:&#39;controller&#39;
         self: { isSelf: 1 },
-        'self.controller': { isSelf: 1, isController: 1 }
+        &#39;self.controller&#39;: { isSelf: 1, isController: 1 }
     },
 
     escapeId: (function(){
@@ -43,12 +43,12 @@ Ext.apply(Ext, {
                 return &quot;\\&quot; + capture;
             },
             numEscapeFn = function(match, capture){
-                return '\\00' + capture.charCodeAt(0).toString(16) + ' ';
+                return &#39;\\00&#39; + capture.charCodeAt(0).toString(16) + &#39; &#39;;
             };
 
         return function(id) {
             return validIdRe.test(id) ? id :
-                // replace the number portion last to keep the trailing ' '
+                // replace the number portion last to keep the trailing &#39; &#39;
                 // from being escaped
                 id.replace(escapeRx, escapeFn).replace(leadingNumRx, numEscapeFn);
         };
@@ -66,7 +66,7 @@ Ext.apply(Ext, {
      *
      *      var myFunc = this.myFunc;
      *
-     *      Ext.callback('myFunc', this, [arg1, arg2]);
+     *      Ext.callback(&#39;myFunc&#39;, this, [arg1, arg2]);
      *      Ext.callback(myFunc, this, [arg1, arg2]);
      *
      *      Ext.isFunction(myFunc) &amp;&amp; this.myFunc(arg1, arg2);
@@ -98,11 +98,11 @@ Ext.apply(Ext, {
             }
             //&lt;debug&gt;
             if (!scope || !Ext.isObject(scope)) {
-                Ext.raise('Named method &quot;' + callback + '&quot; requires a scope object');
+                Ext.raise(&#39;Named method &quot;&#39; + callback + &#39;&quot; requires a scope object&#39;);
             }
             if (!Ext.isFunction(scope[callback])) {
-                Ext.raise('No method named &quot;' + callback + '&quot; on ' +
-                                (scope.$className || 'scope object'));
+                Ext.raise(&#39;No method named &quot;&#39; + callback + &#39;&quot; on &#39; +
+                                (scope.$className || &#39;scope object&#39;));
             }
             //&lt;/debug&gt;
 
@@ -144,7 +144,7 @@ Ext.apply(Ext, {
      *
      * For example
      *
-     *     Ext.coerce('false', true);
+     *     Ext.coerce(&#39;false&#39;, true);
      *
      * returns the boolean value `false` because the second parameter is of type `Boolean`.
      *
@@ -155,23 +155,23 @@ Ext.apply(Ext, {
     coerce: function (from, to) {
         var fromType = Ext.typeOf(from),
             toType = Ext.typeOf(to),
-            isString = typeof from === 'string';
+            isString = typeof from === &#39;string&#39;;
 
         if (fromType !== toType) {
             switch (toType) {
-                case 'string':
+                case &#39;string&#39;:
                     return String(from);
-                case 'number':
+                case &#39;number&#39;:
                     return Number(from);
-                case 'boolean':
-                    // See http://ecma262-5.com/ELS5_HTML.htm#Section_11.9.3 as to why '0'.
-                    // TL;DR =&gt; ('0' == 0), so if given string '0', we must return boolean false.
-                    return isString &amp;&amp; (!from || from === 'false' || from === '0') ? false : Boolean(from);
-                case 'null':
-                    return isString &amp;&amp; (!from || from === 'null') ? null : false;
-                case 'undefined':
-                    return isString &amp;&amp; (!from || from === 'undefined') ? undefined : false;
-                case 'date':
+                case &#39;boolean&#39;:
+                    // See http://ecma262-5.com/ELS5_HTML.htm#Section_11.9.3 as to why &#39;0&#39;.
+                    // TL;DR =&gt; (&#39;0&#39; == 0), so if given string &#39;0&#39;, we must return boolean false.
+                    return isString &amp;&amp; (!from || from === &#39;false&#39; || from === &#39;0&#39;) ? false : Boolean(from);
+                case &#39;null&#39;:
+                    return isString &amp;&amp; (!from || from === &#39;null&#39;) ? null : false;
+                case &#39;undefined&#39;:
+                    return isString &amp;&amp; (!from || from === &#39;undefined&#39;) ? undefined : false;
+                case &#39;date&#39;:
                     return isString &amp;&amp; isNaN(from) ? Ext.Date.parse(from, Ext.Date.defaultFormat) : Date(Number(from));
             }
         }
@@ -187,7 +187,7 @@ Ext.apply(Ext, {
      *
      *     var foo = { a: 1, b: 2, c: 3 };
      *
-     *     var bar = Ext.copyTo({}, foo, 'a,c');
+     *     var bar = Ext.copyTo({}, foo, &#39;a,c&#39;);
      *     // bar = { a: 1, c: 3 };
      *
      * Important note: To borrow class prototype methods, use {@link Ext.Base#borrow} instead.
@@ -204,7 +204,7 @@ Ext.apply(Ext, {
      * could produce `undefined` values in the destination.
      */
     copyTo: function (dest, source, names, usePrototypeKeys) {
-        if (typeof names === 'string') {
+        if (typeof names === &#39;string&#39;) {
             names = names.split(Ext.propertyNameSplitRe);
         }
 
@@ -227,7 +227,7 @@ Ext.apply(Ext, {
      *
      *     var foo = { a: 1, b: 2, c: 3 };
      *
-     *     var bar = Ext.copy({}, foo, 'a,c');
+     *     var bar = Ext.copy({}, foo, &#39;a,c&#39;);
      *     // bar = { a: 1, c: 3 };
      *
      * Important note: To borrow class prototype methods, use {@link Ext.Base#borrow} instead.
@@ -241,7 +241,7 @@ Ext.apply(Ext, {
      * @return {Object} The `dest` object.
      */
     copy: function (dest, source, names, usePrototypeKeys) {
-        if (typeof names === 'string') {
+        if (typeof names === &#39;string&#39;) {
             names = names.split(Ext.propertyNameSplitRe);
         }
 
@@ -250,7 +250,7 @@ Ext.apply(Ext, {
 
             // Only copy a property if the source actually *has* that property.
             // If we are including prototype properties, then ensure that a property of
-            // that name can be found *somewhere* in the prototype chain (otherwise we'd be copying undefined in which may break things)
+            // that name can be found *somewhere* in the prototype chain (otherwise we&#39;d be copying undefined in which may break things)
             if (source.hasOwnProperty(name) || (usePrototypeKeys &amp;&amp; name in source)) {
                 dest[name] = source[name];
             }
@@ -271,7 +271,7 @@ Ext.apply(Ext, {
      *
      *     var foo = { a: 1, b: 2, c: 3 };
      *
-     *     var bar = Ext.copyToIf({ a:42 }, foo, 'a,c');
+     *     var bar = Ext.copyToIf({ a:42 }, foo, &#39;a,c&#39;);
      *     // bar = { a: 42, c: 3 };
      *
      * @param {Object} destination The destination object.
@@ -284,7 +284,7 @@ Ext.apply(Ext, {
      * could produce `undefined` values in the destination.
      */
     copyToIf: function (destination, source, names) {
-        if (typeof names === 'string') {
+        if (typeof names === &#39;string&#39;) {
             names = names.split(Ext.propertyNameSplitRe);
         }
 
@@ -309,7 +309,7 @@ Ext.apply(Ext, {
      *
      *     var foo = { a: 1, b: 2, c: 3 };
      *
-     *     var bar = Ext.copyIf({ a:42 }, foo, 'a,c');
+     *     var bar = Ext.copyIf({ a:42 }, foo, &#39;a,c&#39;);
      *     // bar = { a: 42, c: 3 };
      *
      * @param {Object} destination The destination object.
@@ -319,7 +319,7 @@ Ext.apply(Ext, {
      * @return {Object} The `dest` object.
      */
     copyIf: function (destination, source, names) {
-        if (typeof names === 'string') {
+        if (typeof names === &#39;string&#39;) {
             names = names.split(Ext.propertyNameSplitRe);
         }
 
@@ -371,9 +371,9 @@ Ext.apply(Ext, {
             //&lt;debug&gt;
             if (!superclass) {
                 Ext.raise({
-                    sourceClass: 'Ext',
-                    sourceMethod: 'extend',
-                    msg: 'Attempting to extend from a class which has not been loaded on the page.'
+                    sourceClass: &#39;Ext&#39;,
+                    sourceMethod: &#39;extend&#39;,
+                    msg: &#39;Attempting to extend from a class which has not been loaded on the page.&#39;
                 });
             }
             //&lt;/debug&gt;
@@ -451,14 +451,14 @@ Ext.apply(Ext, {
      * For example:
      *
      *      [{
-     *          xtype: 'image',
-     *          src: '&lt;shared&gt;images/foo.png'
+     *          xtype: &#39;image&#39;,
+     *          src: &#39;&lt;shared&gt;images/foo.png&#39;
      *      },{
-     *          xtype: 'image',
-     *          src: '&lt;@package&gt;images/foo.png'
+     *          xtype: &#39;image&#39;,
+     *          src: &#39;&lt;@package&gt;images/foo.png&#39;
      *      },{
-     *          xtype: 'image',
-     *          src: '&lt;shared@package&gt;images/foo.png'
+     *          xtype: &#39;image&#39;,
+     *          src: &#39;&lt;shared@package&gt;images/foo.png&#39;
      *      }]
      *
      * In the above example, &quot;shared&quot; is the name of a Sencha Cmd resource pool and
@@ -472,7 +472,7 @@ Ext.apply(Ext, {
         var ret = url,
             m;
 
-        if (url &amp;&amp; url.charAt(0) === '&lt;') {
+        if (url &amp;&amp; url.charAt(0) === &#39;&lt;&#39;) {
             m = Ext._resourcePoolRe.exec(url);
             if (m) {
                 ret = Ext.getResourcePath(m[3], m[1], m[2]);
@@ -491,11 +491,11 @@ Ext.apply(Ext, {
      */
     urlEncode: function () {
         var args = Ext.Array.from(arguments),
-            prefix = '';
+            prefix = &#39;&#39;;
 
         // Support for the old `pre` argument
         if (Ext.isString(args[1])) {
-            prefix = args[1] + '&amp;';
+            prefix = args[1] + &#39;&amp;&#39;;
             args[1] = false;
         }
 
@@ -535,11 +535,11 @@ Ext.apply(Ext, {
 
         if (force || !scrollbarSize) {
             var db = document.body,
-                div = document.createElement('div');
+                div = document.createElement(&#39;div&#39;);
 
-            div.style.width = div.style.height = '100px';
-            div.style.overflow = 'scroll';
-            div.style.position = 'absolute';
+            div.style.width = div.style.height = &#39;100px&#39;;
+            div.style.overflow = &#39;scroll&#39;;
+            div.style.position = &#39;absolute&#39;;
 
             db.appendChild(div); // now we can measure the div...
 
@@ -583,20 +583,20 @@ Ext.apply(Ext, {
             typeofTypes = {
                 number: 1,
                 string: 1,
-                'boolean': 1,
-                'undefined': 1
+                &#39;boolean&#39;: 1,
+                &#39;undefined&#39;: 1
             },
             toStringTypes = {
-                '[object Array]'  : 'array',
-                '[object Date]'   : 'date',
-                '[object Boolean]': 'boolean',
-                '[object Number]' : 'number',
-                '[object RegExp]' : 'regexp'
+                &#39;[object Array]&#39;  : &#39;array&#39;,
+                &#39;[object Date]&#39;   : &#39;date&#39;,
+                &#39;[object Boolean]&#39;: &#39;boolean&#39;,
+                &#39;[object Number]&#39; : &#39;number&#39;,
+                &#39;[object RegExp]&#39; : &#39;regexp&#39;
             };
 
         return function(value) {
             if (value === null) {
-                return 'null';
+                return &#39;null&#39;;
             }
 
             var type = typeof value,
@@ -611,28 +611,28 @@ Ext.apply(Ext, {
                 return ret;
             }
 
-            if (type === 'function') {
-                return 'function';
+            if (type === &#39;function&#39;) {
+                return &#39;function&#39;;
             }
 
-            if (type === 'object') {
+            if (type === &#39;object&#39;) {
                 if (value.nodeType !== undefined) {
                     if (value.nodeType === 3) {
-                        return nonWhitespaceRe.test(value.nodeValue) ? 'textnode' : 'whitespace';
+                        return nonWhitespaceRe.test(value.nodeValue) ? &#39;textnode&#39; : &#39;whitespace&#39;;
                     }
                     else {
-                        return 'element';
+                        return &#39;element&#39;;
                     }
                 }
 
-                return 'object';
+                return &#39;object&#39;;
             }
 
             //&lt;debug&gt;
             Ext.raise({
-                sourceClass: 'Ext',
-                sourceMethod: 'typeOf',
-                msg: 'Failed to determine the type of &quot;' + value + '&quot;.'
+                sourceClass: &#39;Ext&#39;,
+                sourceMethod: &#39;typeOf&#39;,
+                msg: &#39;Failed to determine the type of &quot;&#39; + value + &#39;&quot;.&#39;
             });
             //&lt;/debug&gt;
 
@@ -644,15 +644,15 @@ Ext.apply(Ext, {
 </span>     * A global factory method to instantiate a class from a config object. For example,
      * these two calls are equivalent:
      *
-     *     Ext.factory({ text: 'My Button' }, 'Ext.Button');
-     *     Ext.create('Ext.Button', { text: 'My Button' });
+     *     Ext.factory({ text: &#39;My Button&#39; }, &#39;Ext.Button&#39;);
+     *     Ext.create(&#39;Ext.Button&#39;, { text: &#39;My Button&#39; });
      *
      * If an existing instance is also specified, it will be updated with the supplied config object. This is useful
      * if you need to either create or update an object, depending on if an instance already exists. For example:
      *
      *     var button;
-     *     button = Ext.factory({ text: 'New Button' }, 'Ext.Button', button);     // Button created
-     *     button = Ext.factory({ text: 'Updated Button' }, 'Ext.Button', button); // Button updated
+     *     button = Ext.factory({ text: &#39;New Button&#39; }, &#39;Ext.Button&#39;, button);     // Button created
+     *     button = Ext.factory({ text: &#39;Updated Button&#39; }, &#39;Ext.Button&#39;, button); // Button updated
      *
      * @param {Object} config  The config object to instantiate or update an instance with.
      * @param {String} [classReference]  The class to instantiate from (if there is a default).
@@ -676,19 +676,19 @@ Ext.apply(Ext, {
 
         if (aliasNamespace) {
              // If config is a string value, treat it as an alias
-            if (typeof config === 'string') {
-                return manager.instantiateByAlias(aliasNamespace + '.' + config);
+            if (typeof config === &#39;string&#39;) {
+                return manager.instantiateByAlias(aliasNamespace + &#39;.&#39; + config);
             }
-            // Same if 'type' is given in config
-            else if (Ext.isObject(config) &amp;&amp; 'type' in config) {
-                return manager.instantiateByAlias(aliasNamespace + '.' + config.type, config);
+            // Same if &#39;type&#39; is given in config
+            else if (Ext.isObject(config) &amp;&amp; &#39;type&#39; in config) {
+                return manager.instantiateByAlias(aliasNamespace + &#39;.&#39; + config.type, config);
             }
         }
 
         if (config === true) {
             //&lt;debug&gt;
             if (!instance &amp;&amp; !classReference) {
-                Ext.raise('[Ext.factory] Cannot determine type of class to create');
+                Ext.raise(&#39;[Ext.factory] Cannot determine type of class to create&#39;);
             }
             //&lt;/debug&gt;
             return instance || Ext.create(classReference);
@@ -700,10 +700,10 @@ Ext.apply(Ext, {
         }
         //&lt;/debug&gt;
 
-        if ('xtype' in config) {
-            newInstance = manager.instantiateByAlias('widget.' + config.xtype, config);
+        if (&#39;xtype&#39; in config) {
+            newInstance = manager.instantiateByAlias(&#39;widget.&#39; + config.xtype, config);
         }
-        else if ('xclass' in config) {
+        else if (&#39;xclass&#39; in config) {
             newInstance = Ext.create(config.xclass, config);
         }
 
@@ -734,12 +734,12 @@ Ext.apply(Ext, {
      * A technique for tracing entry and exit of a function is this:
      *
      *     function foo () {
-     *         Ext.log({ indent: 1 }, '&gt;&gt; foo');
+     *         Ext.log({ indent: 1 }, &#39;&gt;&gt; foo&#39;);
      *
      *         // log statements in here or methods called from here will be indented
      *         // by one step
      *
-     *         Ext.log({ outdent: 1 }, '&lt;&lt; foo');
+     *         Ext.log({ outdent: 1 }, &#39;&lt;&lt; foo&#39;);
      *     }
      *
      * This method does nothing in a release build.
@@ -795,21 +795,21 @@ Ext.apply(Ext, {
                     members = [];
 
                 if (Ext.isArray(object)) {
-                    prefix = '[';
-                    suffix = ']';
+                    prefix = &#39;[&#39;;
+                    suffix = &#39;]&#39;;
                 } else if (Ext.isObject(object)) {
-                    prefix = '{';
-                    suffix = '}';
+                    prefix = &#39;{&#39;;
+                    suffix = &#39;}&#39;;
                 }
                 if (!maxLevel) {
                     maxLevel = 3;
                 }
                 if (level &gt; maxLevel) {
-                    return prefix+'...'+suffix;
+                    return prefix+&#39;...&#39;+suffix;
                 }
 
                 level = level || 1;
-                var spacer = (new Array(level)).join('    ');
+                var spacer = (new Array(level)).join(&#39;    &#39;);
 
                 // Cannot use Ext.encode since it can recurse endlessly
                 for (name in object) {
@@ -817,12 +817,12 @@ Ext.apply(Ext, {
                         value = object[name];
 
                         type = typeof value;
-                        if (type === 'function') {
+                        if (type === &#39;function&#39;) {
                             if (!withFunctions) {
                                 continue;
                             }
                             member = type;
-                        } else if (type === 'undefined') {
+                        } else if (type === &#39;undefined&#39;) {
                             member = type;
                         } else if (value === null || primitiveRe.test(type) || Ext.isDate(value)) {
                             member = Ext.encode(value);
@@ -833,11 +833,11 @@ Ext.apply(Ext, {
                         } else {
                             member = type;
                         }
-                        members.push(spacer + name + ': ' + member);    // or Ext.encode(name)
+                        members.push(spacer + name + &#39;: &#39; + member);    // or Ext.encode(name)
                     }
                 }
                 if (members.length) {
-                    return prefix + '\n    '+ members.join(',\n    ') + '\n'+spacer+suffix;
+                    return prefix + &#39;\n    &#39;+ members.join(&#39;,\n    &#39;) + &#39;\n&#39;+spacer+suffix;
                 }
                 return prefix+suffix;
             }
@@ -845,15 +845,15 @@ Ext.apply(Ext, {
             function log (message) {
                 var options, dump,
                     con = Ext.global.console,
-                    level = 'log',
+                    level = &#39;log&#39;,
                     indent = log.indent || 0,
                     prefix, stack, fn, out, max;
 
                 log.indent = indent;
 
-                if (typeof message !== 'string') {
+                if (typeof message !== &#39;string&#39;) {
                     options = message;
-                    message = options.msg || '';
+                    message = options.msg || &#39;&#39;;
                     level = options.level || level;
                     dump = options.dump;
                     stack = options.stack;
@@ -873,24 +873,24 @@ Ext.apply(Ext, {
                 }
 
                 if (arguments.length &gt; 1) {
-                    message += Array.prototype.slice.call(arguments, 1).join('');
+                    message += Array.prototype.slice.call(arguments, 1).join(&#39;&#39;);
                 }
 
                 if (prefix) {
-                    message = prefix + ' - ' + message;
+                    message = prefix + &#39; - &#39; + message;
                 }
 
-                message = indent ? Ext.String.repeat(' ', log.indentSize * indent) + message : message;
+                message = indent ? Ext.String.repeat(&#39; &#39;, log.indentSize * indent) + message : message;
                 // w/o console, all messages are equal, so munge the level into the message:
-                if (level !== 'log') {
-                    message = '[' + level.charAt(0).toUpperCase() + '] ' + message;
+                if (level !== &#39;log&#39;) {
+                    message = &#39;[&#39; + level.charAt(0).toUpperCase() + &#39;] &#39; + message;
                 }
 
                 if (fn) {
-                    message += '\nCaller: ' + fn.toString();
+                    message += &#39;\nCaller: &#39; + fn.toString();
                 }
 
-                // Not obvious, but 'console' comes and goes when Firebug is turned on/off, so
+                // Not obvious, but &#39;console&#39; comes and goes when Firebug is turned on/off, so
                 // an early test may fail either direction if Firebug is toggled.
                 //
                 if (con) { // if (Firebug-like console)
@@ -905,8 +905,8 @@ Ext.apply(Ext, {
                     }
 
                     if (stack &amp;&amp; con.trace) {
-                        // Firebug's console.error() includes a trace already...
-                        if (!con.firebug || level !== 'error') {
+                        // Firebug&#39;s console.error() includes a trace already...
+                        if (!con.firebug || level !== &#39;error&#39;) {
                             con.trace();
                         }
                     }
@@ -931,7 +931,7 @@ Ext.apply(Ext, {
             }
 
             function logx (level, args) {
-                if (typeof args[0] === 'string') {
+                if (typeof args[0] === &#39;string&#39;) {
                     args.unshift({});
                 }
                 args[0].level = level;
@@ -939,13 +939,13 @@ Ext.apply(Ext, {
             }
 
             log.error = function () {
-                logx('error', Array.prototype.slice.call(arguments));
+                logx(&#39;error&#39;, Array.prototype.slice.call(arguments));
             };
             log.info = function () {
-                logx('info', Array.prototype.slice.call(arguments));
+                logx(&#39;info&#39;, Array.prototype.slice.call(arguments));
             };
             log.warn = function () {
-                logx('warn', Array.prototype.slice.call(arguments));
+                logx(&#39;warn&#39;, Array.prototype.slice.call(arguments));
             };
 
             log.count = 0;

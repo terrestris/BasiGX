@@ -22,8 +22,8 @@
  *
  * @since 6.0.0
  */
-Ext.define('Ext.list.RootTreeItem', {
-    extend: 'Ext.list.AbstractTreeItem',
+Ext.define(&#39;Ext.list.RootTreeItem&#39;, {
+    extend: &#39;Ext.list.AbstractTreeItem&#39;,
 
 <span id='Ext-list-RootTreeItem-property-isRootListItem'>    /**
 </span>     * This property is `true` to allow type checking for this or derived class.
@@ -33,9 +33,9 @@ Ext.define('Ext.list.RootTreeItem', {
     isRootListItem: true,
 
 <span id='Ext-list-RootTreeItem-property-element'>    element: {
-</span>        reference: 'element',
-        tag: 'ul',
-        cls: Ext.baseCSSPrefix + 'treelist-root-container'
+</span>        reference: &#39;element&#39;,
+        tag: &#39;ul&#39;,
+        cls: Ext.baseCSSPrefix + &#39;treelist-root-container&#39;
     },
 
 <span id='Ext-list-RootTreeItem-method-insertItem'>    insertItem: function (item, refItem) {

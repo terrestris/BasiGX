@@ -21,22 +21,22 @@
  * rid of empty columns.
  * @protected
  */
-Ext.define('Ext.dashboard.Column', {
-    extend: 'Ext.container.Container',
-    xtype: 'dashboard-column',
+Ext.define(&#39;Ext.dashboard.Column&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
+    xtype: &#39;dashboard-column&#39;,
 
     requires: [
-        'Ext.layout.container.Anchor',
-        'Ext.dashboard.Panel'
+        &#39;Ext.layout.container.Anchor&#39;,
+        &#39;Ext.dashboard.Panel&#39;
     ],
 
-<span id='Ext-dashboard-Column-cfg-layout'>    layout: 'anchor',
+<span id='Ext-dashboard-Column-cfg-layout'>    layout: &#39;anchor&#39;,
 </span>
 <span id='Ext-dashboard-Column-property-isDashboardColumn'>    isDashboardColumn : true,
 </span>
-<span id='Ext-dashboard-Column-cfg-defaultType'>    defaultType: 'dashboard-panel',
+<span id='Ext-dashboard-Column-cfg-defaultType'>    defaultType: &#39;dashboard-panel&#39;,
 </span>
-<span id='Ext-dashboard-Column-cfg-cls'>    cls: Ext.baseCSSPrefix + 'dashboard-column',
+<span id='Ext-dashboard-Column-cfg-cls'>    cls: Ext.baseCSSPrefix + &#39;dashboard-column&#39;,
 </span>
 <span id='Ext-dashboard-Column-method-onRemove'><span id='Ext-dashboard-Column-property-synthetic'>    synthetic: true, // not user-defined
 </span></span>
@@ -49,10 +49,10 @@ Ext.define('Ext.dashboard.Column', {
             totalColumnWidth = 0,
             i;
 
-        // If we've just emptied this column.
+        // If we&#39;ve just emptied this column.
         if (ownerCt &amp;&amp; me.items.getCount() === 0) {
             // Collect remaining column siblings of the same row, when this one has gone.
-            remainingSiblings = Ext.Array.filter(ownerCt.query('&gt;' + me.xtype+ '[rowIndex=' + me.rowIndex + ']'), function(c){
+            remainingSiblings = Ext.Array.filter(ownerCt.query(&#39;&gt;&#39; + me.xtype+ &#39;[rowIndex=&#39; + me.rowIndex + &#39;]&#39;), function(c){
                 return c !== me;
             });
             numRemaining = remainingSiblings.length;

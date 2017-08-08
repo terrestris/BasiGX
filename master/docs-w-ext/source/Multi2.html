@@ -15,19 +15,19 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.rtl.slider.Multi', {
-    override: 'Ext.slider.Multi',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.rtl.slider.Multi&#39;, {
+    override: &#39;Ext.slider.Multi&#39;,
     
     initComponent: function(){
         if (this.getInherited().rtl) {
-            this.horizontalProp = 'right';
+            this.horizontalProp = &#39;right&#39;;
         }    
         this.callParent();
     },
     
     onDragStart: function(){
         this.callParent(arguments);
-        // Cache the width so we don't recalculate it during the drag
+        // Cache the width so we don&#39;t recalculate it during the drag
         this._rtlInnerWidth = this.innerEl.getWidth();
     },
     
@@ -60,7 +60,7 @@
             left = pos.left;
             delete pos.left;
             
-            innerWidth = typeof this._rtlInnerWidth !== 'undefined' ? this._rtlInnerWidth : this.innerEl.getWidth();
+            innerWidth = typeof this._rtlInnerWidth !== &#39;undefined&#39; ? this._rtlInnerWidth : this.innerEl.getWidth();
             pos.right = innerWidth - left;
             
             return pos;

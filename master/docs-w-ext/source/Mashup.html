@@ -22,11 +22,11 @@
  *
  * For example:
  *
- *      Ext.define('Feed', {
- *          mixins: 'Ext.mixin.Mashup',
+ *      Ext.define(&#39;Feed&#39;, {
+ *          mixins: &#39;Ext.mixin.Mashup&#39;,
  *
  *          requiredScripts: [
- *              'http://www.foo.com/code/bar.js'
+ *              &#39;http://www.foo.com/code/bar.js&#39;
  *          ],
  *
  *          // The code in &quot;bar.js&quot; will be available at application launch
@@ -35,11 +35,11 @@
  * @since 5.0.0
  * @cmd.optimizer.requires.async
  */
-Ext.define('Ext.mixin.Mashup', function (Mashup) { return {
-    extend: 'Ext.Mixin',
+Ext.define(&#39;Ext.mixin.Mashup&#39;, function (Mashup) { return {
+    extend: &#39;Ext.Mixin&#39;,
 
     mixinConfig: {
-        id: 'mashup',
+        id: &#39;mashup&#39;,
 
         extended: function (baseClass, derivedClass) {
             Mashup.process(derivedClass);

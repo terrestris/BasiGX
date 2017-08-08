@@ -19,11 +19,11 @@
 </span> * This class manages bindings for a `Session` or `ViewModel`.
  * @private
  */
-Ext.define('Ext.app.bind.AbstractStub', {
-    extend: 'Ext.util.Schedulable',
+Ext.define(&#39;Ext.app.bind.AbstractStub&#39;, {
+    extend: &#39;Ext.util.Schedulable&#39;,
 
     requires: [
-        'Ext.app.bind.Binding'
+        &#39;Ext.app.bind.Binding&#39;
     ],
 
 <span id='Ext-app-bind-AbstractStub-property-children'>    children: null,
@@ -83,7 +83,7 @@ Ext.define('Ext.app.bind.AbstractStub', {
     },
 
 <span id='Ext-app-bind-AbstractStub-method-getChild'>    getChild: function (path) {
-</span>        var pathArray = Ext.isString(path) ? path.split('.') : path;
+</span>        var pathArray = Ext.isString(path) ? path.split(&#39;.&#39;) : path;
 
         if (pathArray &amp;&amp; pathArray.length) {
             return this.descend(pathArray, 0);
@@ -101,7 +101,7 @@ Ext.define('Ext.app.bind.AbstractStub', {
         if (!name) {
             name = me.name || me.id;
             if (parent &amp;&amp; (s = parent.getFullName())) {
-                name = ((s.charAt(s.length-1) !== ':') ? s + '.' : s) + name;
+                name = ((s.charAt(s.length-1) !== &#39;:&#39;) ? s + &#39;.&#39; : s) + name;
             }
             me.fullName = name;
         }
@@ -136,7 +136,7 @@ Ext.define('Ext.app.bind.AbstractStub', {
             name = me.name,
             i;
 
-        // Clear these so that when we call destroy we won't damage anything:
+        // Clear these so that when we call destroy we won&#39;t damage anything:
         me.parent = me.bindings = null;
         me.destroy(); // we may be scheduled
 

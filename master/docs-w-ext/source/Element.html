@@ -23,7 +23,7 @@
  *
  * Encapsulates a DOM element, adding simple DOM manipulation facilities, normalizing for browser differences.
  *
- * **Note:** The events included in this Class are the ones we've found to be the most commonly used. Many events are
+ * **Note:** The events included in this Class are the ones we&#39;ve found to be the most commonly used. Many events are
  * not listed here due to the expedient rate of change across browsers. For a more comprehensive list, please visit the
  * following resources:
  *
@@ -55,24 +55,24 @@
  * [querySelectorAll](http://www.w3.org/TR/css3-selectors/) under the hood. The primary
  * difference between these three methods is their return type:
  *
- * To get an array of HTMLElement instances matching the selector '.foo' use the query
+ * To get an array of HTMLElement instances matching the selector &#39;.foo&#39; use the query
  * method:
  *
- *     element.query('.foo');
+ *     element.query(&#39;.foo&#39;);
  *
  * This can easily be transformed into an array of Ext.dom.Element instances by setting
  * the `asDom` parameter to `false`:
  *
- *     element.query('.foo', false);
+ *     element.query(&#39;.foo&#39;, false);
  *
  * If the desired result is only the first matching HTMLElement use the selectNode method:
  *
- *     element.selectNode('.foo');
+ *     element.selectNode(&#39;.foo&#39;);
  *
  * Once again, the dom node can be wrapped in an Ext.dom.Element by setting the `asDom`
  * parameter to `false`:
  *
- *     element.selectNode('.foo', false);
+ *     element.selectNode(&#39;.foo&#39;, false);
  *
  * The `select` method is used when the desired return type is a {@link
  * Ext.CompositeElementLite CompositeElementLite} or a {@link Ext.CompositeElement
@@ -80,21 +80,21 @@
  * group using any of the methods of Ext.dom.Element.  The only difference between the two
  * is that CompositeElementLite is a collection of HTMLElement instances, while
  * CompositeElement is a collection of Ext.dom.Element instances.  To retrieve a
- * CompositeElementLite that represents a collection of HTMLElements for selector '.foo':
+ * CompositeElementLite that represents a collection of HTMLElements for selector &#39;.foo&#39;:
  *
- *     element.select('.foo');
+ *     element.select(&#39;.foo&#39;);
  *
  * For a {@link Ext.CompositeElement CompositeElement} simply pass `true` as the
  * `composite` parameter:
  *
- *     element.select('.foo', true);
+ *     element.select(&#39;.foo&#39;, true);
  *
- * The query selection methods can be used even if you don't have a Ext.dom.Element to
+ * The query selection methods can be used even if you don&#39;t have a Ext.dom.Element to
  * start with For example to select an array of all HTMLElements in the document that match the
- * selector '.foo', simply wrap the document object in an Ext.dom.Element instance using
+ * selector &#39;.foo&#39;, simply wrap the document object in an Ext.dom.Element instance using
  * {@link Ext#fly}:
  *
- *     Ext.fly(document).query('.foo');
+ *     Ext.fly(document).query(&#39;.foo&#39;);
  *
  * # Animations
  *
@@ -127,7 +127,7 @@
  *     // Element animation options object
  *     var opt = {
  *         duration: 1000,
- *         easing: 'elasticIn',
+ *         easing: &#39;elasticIn&#39;,
  *         callback: this.foo,
  *         scope: this
  *     };
@@ -142,7 +142,7 @@
  *         opt.anim.stop();
  *     }
  */
-Ext.define('Ext.dom.Element', function(Element) {
+Ext.define(&#39;Ext.dom.Element&#39;, function(Element) {
     var WIN = window,
         DOC = document,
         docEl = DOC.documentElement,
@@ -150,25 +150,25 @@ Ext.define('Ext.dom.Element', function(Element) {
         elementIdCounter,
         windowId,
         documentId,
-        WIDTH = 'width',
-        HEIGHT = 'height',
-        MIN_WIDTH = 'min-width',
-        MIN_HEIGHT = 'min-height',
-        MAX_WIDTH = 'max-width',
-        MAX_HEIGHT = 'max-height',
-        TOP = 'top',
-        RIGHT = 'right',
-        BOTTOM = 'bottom',
-        LEFT = 'left',
-        VISIBILITY = 'visibility',
-        HIDDEN = 'hidden',
+        WIDTH = &#39;width&#39;,
+        HEIGHT = &#39;height&#39;,
+        MIN_WIDTH = &#39;min-width&#39;,
+        MIN_HEIGHT = &#39;min-height&#39;,
+        MAX_WIDTH = &#39;max-width&#39;,
+        MAX_HEIGHT = &#39;max-height&#39;,
+        TOP = &#39;top&#39;,
+        RIGHT = &#39;right&#39;,
+        BOTTOM = &#39;bottom&#39;,
+        LEFT = &#39;left&#39;,
+        VISIBILITY = &#39;visibility&#39;,
+        HIDDEN = &#39;hidden&#39;,
         DISPLAY = &quot;display&quot;,
         NONE = &quot;none&quot;,
         ZINDEX = &quot;z-index&quot;,
         POSITION = &quot;position&quot;,
         RELATIVE = &quot;relative&quot;,
         STATIC = &quot;static&quot;,
-        SEPARATOR = '-',
+        SEPARATOR = &#39;-&#39;,
         wordsRe = /\w/g,
         spacesRe = /\s+/,
         classNameSplitRegex = /[\s]+/,
@@ -176,33 +176,33 @@ Ext.define('Ext.dom.Element', function(Element) {
         adjustDirect2DTableRe = /table-row|table-.*-group/,
         topRe = /top/i,
         borders = {
-            t: 'border-top-width',
-            r: 'border-right-width',
-            b: 'border-bottom-width',
-            l: 'border-left-width'
+            t: &#39;border-top-width&#39;,
+            r: &#39;border-right-width&#39;,
+            b: &#39;border-bottom-width&#39;,
+            l: &#39;border-left-width&#39;
         },
         paddings = {
-            t: 'padding-top',
-            r: 'padding-right',
-            b: 'padding-bottom',
-            l: 'padding-left'
+            t: &#39;padding-top&#39;,
+            r: &#39;padding-right&#39;,
+            b: &#39;padding-bottom&#39;,
+            l: &#39;padding-left&#39;
         },
         margins = {
-            t: 'margin-top',
-            r: 'margin-right',
-            b: 'margin-bottom',
-            l: 'margin-left'
+            t: &#39;margin-top&#39;,
+            r: &#39;margin-right&#39;,
+            b: &#39;margin-bottom&#39;,
+            l: &#39;margin-left&#39;
         },
         paddingsTLRB = [paddings.l, paddings.r, paddings.t, paddings.b],
         bordersTLRB = [borders.l,  borders.r,  borders.t,  borders.b],
         numberRe = /\d+$/,
         unitRe = /\d+(px|em|%|en|ex|pt|in|cm|mm|pc)$/i,
-        defaultUnit = 'px',
+        defaultUnit = &#39;px&#39;,
         camelRe = /(-[a-z])/gi,
         cssRe = /([a-z0-9\-]+)\s*:\s*([^;\s]+(?:\s*[^;\s]+)*);?/gi,
         pxRe = /^\d+(?:\.\d*)?px$/i,
         propertyCache = {},
-        ORIGINALDISPLAY = 'originalDisplay',
+        ORIGINALDISPLAY = &#39;originalDisplay&#39;,
         camelReplaceFn = function(m, a) {
             return a.charAt(1).toUpperCase();
         },
@@ -223,22 +223,22 @@ Ext.define('Ext.dom.Element', function(Element) {
             }
         },
 
-        visibilityCls = Ext.baseCSSPrefix + 'hidden-visibility',
-        displayCls = Ext.baseCSSPrefix + 'hidden-display',
-        offsetsCls = Ext.baseCSSPrefix + 'hidden-offsets',
-        clipCls = Ext.baseCSSPrefix + 'hidden-clip',
-        sizedCls = Ext.baseCSSPrefix + 'sized',
-        unsizedCls = Ext.baseCSSPrefix + 'unsized',
-        stretchedCls = Ext.baseCSSPrefix + 'stretched',
+        visibilityCls = Ext.baseCSSPrefix + &#39;hidden-visibility&#39;,
+        displayCls = Ext.baseCSSPrefix + &#39;hidden-display&#39;,
+        offsetsCls = Ext.baseCSSPrefix + &#39;hidden-offsets&#39;,
+        clipCls = Ext.baseCSSPrefix + &#39;hidden-clip&#39;,
+        sizedCls = Ext.baseCSSPrefix + &#39;sized&#39;,
+        unsizedCls = Ext.baseCSSPrefix + &#39;unsized&#39;,
+        stretchedCls = Ext.baseCSSPrefix + &#39;stretched&#39;,
         CREATE_ATTRIBUTES = {
-            style: 'style',
-            className: 'className',
-            cls: 'cls',
-            classList: 'classList',
-            text: 'text',
-            hidden: 'hidden',
-            html: 'html',
-            children: 'children'
+            style: &#39;style&#39;,
+            className: &#39;className&#39;,
+            cls: &#39;cls&#39;,
+            classList: &#39;classList&#39;,
+            text: &#39;text&#39;,
+            hidden: &#39;hidden&#39;,
+            html: &#39;html&#39;,
+            children: &#39;children&#39;
         },
         lastFocusChange = 0,
         lastKeyboardClose = 0,
@@ -255,36 +255,36 @@ Ext.define('Ext.dom.Element', function(Element) {
     }
 
     TOP.__elementIdCounter = elementIdCounter = (TOP.__elementIdCounter__ || 0) + 1;
-    windowId = 'ext-window-' + elementIdCounter;
-    documentId = 'ext-document-' + elementIdCounter;
+    windowId = &#39;ext-window-&#39; + elementIdCounter;
+    documentId = &#39;ext-document-&#39; + elementIdCounter;
 
     return {
-        alternateClassName: [ 'Ext.Element' ],
+        alternateClassName: [ &#39;Ext.Element&#39; ],
 
         mixins: [
-            'Ext.util.Positionable',
-            'Ext.mixin.Observable'
+            &#39;Ext.util.Positionable&#39;,
+            &#39;Ext.mixin.Observable&#39;
         ],
 
         requires: [
-            'Ext.dom.Shadow',
-            'Ext.dom.Shim',
-            'Ext.dom.ElementEvent',
-            'Ext.event.publisher.Dom',
-            'Ext.event.publisher.Gesture',
-            'Ext.event.publisher.ElementSize',
-            'Ext.event.publisher.ElementPaint'
+            &#39;Ext.dom.Shadow&#39;,
+            &#39;Ext.dom.Shim&#39;,
+            &#39;Ext.dom.ElementEvent&#39;,
+            &#39;Ext.event.publisher.Dom&#39;,
+            &#39;Ext.event.publisher.Gesture&#39;,
+            &#39;Ext.event.publisher.ElementSize&#39;,
+            &#39;Ext.event.publisher.ElementPaint&#39;
         ],
 
         uses: [
-            'Ext.dom.Helper',
-            'Ext.dom.CompositeElement',
-            'Ext.dom.Fly',
-            'Ext.dom.TouchAction',
-            'Ext.event.publisher.Focus'
+            &#39;Ext.dom.Helper&#39;,
+            &#39;Ext.dom.CompositeElement&#39;,
+            &#39;Ext.dom.Fly&#39;,
+            &#39;Ext.dom.TouchAction&#39;,
+            &#39;Ext.event.publisher.Focus&#39;
         ],
 
-        observableType: 'element',
+        observableType: &#39;element&#39;,
 
         isElement: true,
 
@@ -292,7 +292,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
         $applyConfigs: true,
 
-        identifiablePrefix: 'ext-element-',
+        identifiablePrefix: &#39;ext-element-&#39;,
 
         styleHooks: {},
 
@@ -430,7 +430,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 <span id='Ext-dom-Element-event-painted'>        /**
 </span>         * @event painted
          * Fires whenever this Element actually becomes visible (painted) on the screen. This is useful when you need to
-         * perform 'read' operations on the DOM element, i.e: calculating natural sizes and positioning.
+         * perform &#39;read&#39; operations on the DOM element, i.e: calculating natural sizes and positioning.
          *
          * __Note:__ This event is not available to be used with event delegation. Instead `painted` only fires if you explicitly
          * add at least one listener to it, for performance reasons.
@@ -440,7 +440,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 <span id='Ext-dom-Element-event-resize'>        /**
 </span>         * @event resize
          * Important note: For the best performance on mobile devices, use this only when you absolutely need to monitor
-         * a Element's size.
+         * a Element&#39;s size.
          *
          * __Note:__ This event is not available to be used with event delegation. Instead `resize` only fires if you explicitly
          * add at least one listener to it, for performance reasons.
@@ -579,19 +579,19 @@ Ext.define('Ext.dom.Element', function(Element) {
          *
          * Correct way of creating a new Ext.dom.Element (or retrieving it from the cache):
          *
-         *     var el = Ext.get('foo'); // by id
+         *     var el = Ext.get(&#39;foo&#39;); // by id
          *
-         *     var el = Ext.get(document.getElementById('foo')); // by DOM reference
+         *     var el = Ext.get(document.getElementById(&#39;foo&#39;)); // by DOM reference
          *
          * Incorrect way of creating a new Ext.dom.Element
          *
-         *     var el = new Ext.dom.Element('foo');
+         *     var el = new Ext.dom.Element(&#39;foo&#39;);
          *
          * For quick and easy access to Ext.dom.Element methods use a flyweight:
          *
-         *     Ext.fly('foo').addCls('foo-hovered');
+         *     Ext.fly(&#39;foo&#39;).addCls(&#39;foo-hovered&#39;);
          *
-         * This simply attaches the DOM node with id='foo' to the global flyweight Element
+         * This simply attaches the DOM node with id=&#39;foo&#39; to the global flyweight Element
          * instance to avoid allocating an extra Ext.dom.Element instance.  If, however,
          * the Element instance has already been cached by a previous call to Ext.get(),
          * then Ext.fly() will return the cached Element instance.  For more info see
@@ -604,7 +604,7 @@ Ext.define('Ext.dom.Element', function(Element) {
             var me = this,
                 id;
 
-            if (typeof dom === 'string') {
+            if (typeof dom === &#39;string&#39;) {
                 dom = DOC.getElementById(dom);
             }
 
@@ -616,8 +616,8 @@ Ext.define('Ext.dom.Element', function(Element) {
             }
             //&lt;debug&gt;
             if (Ext.cache[dom.id]) {
-                Ext.raise(&quot;Element cache already contains an entry for id '&quot; +
-                    dom.id + &quot;'.  Use Ext.get() to create or retrieve Element instances.&quot;);
+                Ext.raise(&quot;Element cache already contains an entry for id &#39;&quot; +
+                    dom.id + &quot;&#39;.  Use Ext.get() to create or retrieve Element instances.&quot;);
             }
             //&lt;/debug&gt;
 
@@ -638,7 +638,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             //&lt;debug&gt;
             if (!me.validIdRe.test(me.id)) {
-                Ext.raise('Invalid Element &quot;id&quot;: &quot;' + me.id + '&quot;');
+                Ext.raise(&#39;Invalid Element &quot;id&quot;: &quot;&#39; + me.id + &#39;&quot;&#39;);
             }
             //&lt;/debug&gt;
 
@@ -668,12 +668,12 @@ Ext.define('Ext.dom.Element', function(Element) {
              * @private
              * @inheritable
              */
-            editableSelector: 'input,textarea,[contenteditable=&quot;true&quot;]',
+            editableSelector: &#39;input,textarea,[contenteditable=&quot;true&quot;]&#39;,
 
 <span id='Ext-dom-Element-static-property-VISIBILITY'>            /**
 </span>             * @property {Number}
              * Visibility mode constant for use with {@link Ext.dom.Element#setVisibilityMode}.
-             * Use the CSS 'visibility' property to hide the element.
+             * Use the CSS &#39;visibility&#39; property to hide the element.
              *
              * Note that in this mode, {@link Ext.dom.Element#isVisible isVisible} may return true
              * for an element even though it actually has a parent element that is hidden. For this
@@ -686,7 +686,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 <span id='Ext-dom-Element-static-property-DISPLAY'>            /**
 </span>             * @property {Number}
              * Visibility mode constant for use with {@link Ext.dom.Element#setVisibilityMode}.
-             * Use the CSS 'display' property to hide the element.
+             * Use the CSS &#39;display&#39; property to hide the element.
              * @static
              * @inheritable
              */
@@ -704,7 +704,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 <span id='Ext-dom-Element-static-property-CLIP'>            /**
 </span>             * @property {Number}
              * Visibility mode constant for use with {@link Ext.dom.Element#setVisibilityMode}.
-             * Use CSS `clip` property to reduce element's dimensions to 0px by 0px, effectively
+             * Use CSS `clip` property to reduce element&#39;s dimensions to 0px by 0px, effectively
              * making it hidden while not being truly invisible. This is useful when an element
              * needs to be published to the Assistive Technologies such as screen readers.
              * @static
@@ -766,7 +766,7 @@ Ext.define('Ext.dom.Element', function(Element) {
              */
             addUnits: function(size, units) {
                 // Most common case first: Size is set to a number
-                if (typeof size === 'number') {
+                if (typeof size === &#39;number&#39;) {
                     return size + (units || defaultUnit);
                 }
 
@@ -776,7 +776,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 // - undefined
                 // - null
                 if (size === &quot;&quot; || size === &quot;auto&quot; || size == null) {
-                    return size || '';
+                    return size || &#39;&#39;;
                 }
 
                 // less common use case: number formatted as a string.  save this case until
@@ -785,12 +785,12 @@ Ext.define('Ext.dom.Element', function(Element) {
                     return size + (units || defaultUnit);
                 }
 
-                // Warn if it's not a valid CSS measurement
+                // Warn if it&#39;s not a valid CSS measurement
                 if (!unitRe.test(size)) {
                     //&lt;debug&gt;
                     Ext.Logger.warn(&quot;Warning, size detected (&quot; + size + &quot;) not a valid property value on Element.addUnits.&quot;);
                     //&lt;/debug&gt;
-                    return size || '';
+                    return size || &#39;&#39;;
                 }
 
                 return size;
@@ -821,18 +821,18 @@ Ext.define('Ext.dom.Element', function(Element) {
                 attributes = attributes || {};
                 if (attributes.isElement) {
                     return domNode ? attributes.dom : attributes;
-                } else if ('nodeType' in attributes) {
+                } else if (&#39;nodeType&#39; in attributes) {
                     return domNode ? attributes : Ext.get(attributes);
                 }
 
-                if (typeof attributes === 'string') {
+                if (typeof attributes === &#39;string&#39;) {
                     return DOC.createTextNode(attributes);
                 }
 
                 tag = attributes.tag;
 
                 if (!tag) {
-                    tag = 'div';
+                    tag = &#39;div&#39;;
                 }
 
                 if (attributes.namespace) {
@@ -844,12 +844,12 @@ Ext.define('Ext.dom.Element', function(Element) {
                 elementStyle = element.style;
 
                 for (name in attributes) {
-                    if (name !== 'tag') {
+                    if (name !== &#39;tag&#39;) {
                         value = attributes[name];
 
                         switch (name) {
                             case CREATE_ATTRIBUTES.style:
-                                if (typeof value === 'string') {
+                                if (typeof value === &#39;string&#39;) {
                                     element.setAttribute(name, value);
                                 }
                                 else {
@@ -904,7 +904,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 }
 
                 if (classes) {
-                    element.className = classes.join(' ');
+                    element.className = classes.join(&#39; &#39;);
                 }
 
                 if (domNode) {
@@ -922,7 +922,7 @@ Ext.define('Ext.dom.Element', function(Element) {
             detach: function() {
                 var dom = this.dom;
 
-                if (dom &amp;&amp; dom.parentNode &amp;&amp; dom.tagName !== 'BODY') {
+                if (dom &amp;&amp; dom.parentNode &amp;&amp; dom.tagName !== &#39;BODY&#39;) {
                     dom.parentNode.removeChild(dom);
                 }
 
@@ -995,9 +995,9 @@ Ext.define('Ext.dom.Element', function(Element) {
              *
              * When passing an id, it should not include the `#` character that is used for a css selector.
              *
-             *     // For an element with id 'foo'
-             *     Ext.get('foo'); // Correct
-             *     Ext.get('#foo'); // Incorrect
+             *     // For an element with id &#39;foo&#39;
+             *     Ext.get(&#39;foo&#39;); // Correct
+             *     Ext.get(&#39;#foo&#39;); // Incorrect
              *
              * Uses simple caching to consistently return the same object. Automatically fixes if an object was recreated with
              * the same id via AJAX or DOM.
@@ -1029,7 +1029,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                     el = el.dom;
                 }
 
-                if (typeof el === 'string') {
+                if (typeof el === &#39;string&#39;) {
                     id = el;
                     if (cache.hasOwnProperty(id)) {
                         entry = cache[id];
@@ -1146,7 +1146,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
                 // The activeElement can be null, however there also appears to be a very odd
                 // and inconsistent bug in IE where the activeElement is simply an empty object
-                // literal. Test if the returned active element has focus, if not, we've hit the bug
+                // literal. Test if the returned active element has focus, if not, we&#39;ve hit the bug
                 // so just default back to the document body.
                 if (!active || !active.focus) {
                     active = DOC.body;
@@ -1180,14 +1180,14 @@ Ext.define('Ext.dom.Element', function(Element) {
              * determining if the height is greater than the width.
              * @static
              * @inheritable
-             * @return {String} Orientation of window: 'portrait' or 'landscape'
+             * @return {String} Orientation of window: &#39;portrait&#39; or &#39;landscape&#39;
              */
             getOrientation: function() {
                 if (Ext.supports.OrientationChange) {
-                    return (WIN.orientation == 0) ? 'portrait' : 'landscape';
+                    return (WIN.orientation == 0) ? &#39;portrait&#39; : &#39;landscape&#39;;
                 }
 
-                return (WIN.innerHeight &gt; WIN.innerWidth) ? 'portrait' : 'landscape';
+                return (WIN.innerHeight &gt; WIN.innerWidth) ? &#39;portrait&#39; : &#39;landscape&#39;;
             },
 
 <span id='Ext-dom-Element-static-method-getViewportHeight'>            /**
@@ -1257,7 +1257,7 @@ Ext.define('Ext.dom.Element', function(Element) {
              */
             getViewportTouchScale: function(forceRead) {
                 var scale = 1,
-                    hidden = 'hidden',
+                    hidden = &#39;hidden&#39;,
                     top = WIN.top,
                     cachedScale;
 
@@ -1296,13 +1296,13 @@ Ext.define('Ext.dom.Element', function(Element) {
              * @private
              */
             maskIframes: function() {
-                var iframes = document.getElementsByTagName('iframe');
+                var iframes = document.getElementsByTagName(&#39;iframe&#39;);
 
                 Ext.each(iframes, function(iframe) {
                     var myMask;
 
                     myMask = Ext.fly(iframe.parentNode).mask();
-                    myMask.setStyle('background-color','transparent');
+                    myMask.setStyle(&#39;background-color&#39;,&#39;transparent&#39;);
                 });
             },
 
@@ -1335,7 +1335,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 // see _onWindowResize for more details
                 if (Ext.fly(e.target).is(Element.editableSelector)) {
                     lastFocusChange = new Date();
-                    editableHasFocus = (e.type === 'focusin' || e.type === 'pointerup');
+                    editableHasFocus = (e.type === &#39;focusin&#39; || e.type === &#39;pointerup&#39;);
                 }
             },
 
@@ -1359,7 +1359,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
                 // If the focus entered or left an editable element within a brief threshold
                 // of time, then this resize event MAY be due to a virtual keyboard being
-                // shown or hidden.  Let's do some additional checking to find out.
+                // shown or hidden.  Let&#39;s do some additional checking to find out.
                 if (((now - lastFocusChange) &lt; threshold) || ((now - lastKeyboardClose) &lt; threshold)) {
                     // If the resize is ONLY in the vertical direction, and an editable
                     // element has the focus, and the vertical movement was significant,
@@ -1406,19 +1406,19 @@ Ext.define('Ext.dom.Element', function(Element) {
                     parts,
                     ln;
 
-                if (type === 'number') {
+                if (type === &#39;number&#39;) {
                     return {
                         top: box,
                         right: box,
                         bottom: box,
                         left: box
                     };
-                } else if (type !== 'string') {
-                    // If not a number or a string, assume we've been given a box config.
+                } else if (type !== &#39;string&#39;) {
+                    // If not a number or a string, assume we&#39;ve been given a box config.
                     return box;
                 }
 
-                parts  = box.split(' ');
+                parts  = box.split(&#39; &#39;);
                 ln = parts.length;
 
                 if (ln === 1) {
@@ -1444,7 +1444,7 @@ Ext.define('Ext.dom.Element', function(Element) {
              * The sample code below would return an object with 2 properties, one
              * for background-color and one for color.
              *
-             *     var css = 'background-color: red; color: blue;';
+             *     var css = &#39;background-color: red; color: blue;&#39;;
              *     console.log(Ext.dom.Element.parseStyles(css));
              *
              * @static
@@ -1457,13 +1457,13 @@ Ext.define('Ext.dom.Element', function(Element) {
                     matches;
 
                 if (styles) {
-                    // Since we're using the g flag on the regex, we need to set the lastIndex.
+                    // Since we&#39;re using the g flag on the regex, we need to set the lastIndex.
                     // This automatically happens on some implementations, but not others, see:
                     // http://stackoverflow.com/questions/2645273/javascript-regular-expression-literal-persists-between-function-calls
                     // http://blog.stevenlevithan.com/archives/fixing-javascript-regexp
                     cssRe.lastIndex = 0;
                     while ((matches = cssRe.exec(styles))) {
-                        out[matches[1]] = matches[2] || '';
+                        out[matches[1]] = matches[2] || &#39;&#39;;
                     }
                 }
                 return out;
@@ -1516,9 +1516,9 @@ Ext.define('Ext.dom.Element', function(Element) {
                 var me = this;
                 box = me.parseBox(box);
 
-                return me.addUnits(box.top, units) + ' ' +
-                    me.addUnits(box.right, units) + ' ' +
-                    me.addUnits(box.bottom, units) + ' ' +
+                return me.addUnits(box.top, units) + &#39; &#39; +
+                    me.addUnits(box.right, units) + &#39; &#39; +
+                    me.addUnits(box.bottom, units) + &#39; &#39; +
                     me.addUnits(box.left, units);
             },
 
@@ -1527,7 +1527,7 @@ Ext.define('Ext.dom.Element', function(Element) {
              * @private
              */
             unmaskIframes: function() {
-                var iframes = document.getElementsByTagName('iframe');
+                var iframes = document.getElementsByTagName(&#39;iframe&#39;);
 
                 Ext.each(iframes, function(iframe) {
                     Ext.fly(iframe.parentNode).unmask();
@@ -1545,7 +1545,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 var fElements = form.elements || (DOC.forms[form] || Ext.getDom(form)).elements,
                     hasSubmit = false,
                     encoder = encodeURIComponent,
-                    data = '',
+                    data = &#39;&#39;,
                     eLen = fElements.length,
                     element, name, type, options, hasValue, e,
                     o, oLen, opt;
@@ -1562,13 +1562,13 @@ Ext.define('Ext.dom.Element', function(Element) {
                             for (o = 0; o &lt; oLen; o++) {
                                 opt = options[o];
                                 if (opt.selected) {
-                                    hasValue = opt.hasAttribute('value');
-                                    data += Ext.String.format('{0}={1}&amp;', encoder(name), encoder(hasValue ? opt.value : opt.text));
+                                    hasValue = opt.hasAttribute(&#39;value&#39;);
+                                    data += Ext.String.format(&#39;{0}={1}&amp;&#39;, encoder(name), encoder(hasValue ? opt.value : opt.text));
                                 }
                             }
                         } else if (!(/file|undefined|reset|button/i.test(type))) {
-                            if (!(/radio|checkbox/i.test(type) &amp;&amp; !element.checked) &amp;&amp; !(type == 'submit' &amp;&amp; hasSubmit)) {
-                                data += encoder(name) + '=' + encoder(element.value) + '&amp;';
+                            if (!(/radio|checkbox/i.test(type) &amp;&amp; !element.checked) &amp;&amp; !(type == &#39;submit&#39; &amp;&amp; hasSubmit)) {
+                                data += encoder(name) + &#39;=&#39; + encoder(element.value) + &#39;&amp;&#39;;
                                 hasSubmit = /submit/i.test(type);
                             }
                         }
@@ -1631,10 +1631,10 @@ Ext.define('Ext.dom.Element', function(Element) {
             map = elementData.classMap;
             classList = elementData.classList;
 
-            prefix = prefix ? prefix + SEPARATOR : '';
-            suffix = suffix ? SEPARATOR + suffix : '';
+            prefix = prefix ? prefix + SEPARATOR : &#39;&#39;;
+            suffix = suffix ? SEPARATOR + suffix : &#39;&#39;;
 
-            if (typeof names === 'string') {
+            if (typeof names === &#39;string&#39;) {
                 names = names.split(spacesRe);
             }
 
@@ -1653,7 +1653,7 @@ Ext.define('Ext.dom.Element', function(Element) {
             }
 
             if (hasNewCls) {
-                dom.className = classList.join(' ');
+                dom.className = classList.join(&#39; &#39;);
             }
 
             return me;
@@ -1741,7 +1741,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
         addStyles: function(sides, styles){
             var totalSize = 0,
-                sidesArr = (sides || '').match(wordsRe),
+                sidesArr = (sides || &#39;&#39;).match(wordsRe),
                 i,
                 len = sidesArr.length,
                 side,
@@ -1772,36 +1772,36 @@ Ext.define('Ext.dom.Element', function(Element) {
 
 <span id='Ext-dom-Element-method-adjustDirect2DDimension'>        /**
 </span>         * @private
-         * Returns the fractional portion of this element's measurement in the given dimension.
+         * Returns the fractional portion of this element&#39;s measurement in the given dimension.
          * (IE9+ only)
          * @return {Number}
          */
         adjustDirect2DDimension: function(dimension) {
             var me = this,
                 dom = me.dom,
-                display = me.getStyle('display'),
+                display = me.getStyle(&#39;display&#39;),
                 inlineDisplay = dom.style.display,
                 inlinePosition = dom.style.position,
                 originIndex = dimension === WIDTH ? 0 : 1,
                 currentStyle = dom.currentStyle,
                 floating;
 
-            if (display === 'inline') {
-                dom.style.display = 'inline-block';
+            if (display === &#39;inline&#39;) {
+                dom.style.display = &#39;inline-block&#39;;
             }
 
-            dom.style.position = display.match(adjustDirect2DTableRe) ? 'absolute' : 'static';
+            dom.style.position = display.match(adjustDirect2DTableRe) ? &#39;absolute&#39; : &#39;static&#39;;
 
             // floating will contain digits that appears after the decimal point
             // if height or width are set to auto we fallback to msTransformOrigin calculation
 
             // Use currentStyle here instead of getStyle. In some difficult to reproduce 
             // instances it resets the scrollWidth of the element
-            floating = (parseFloat(currentStyle[dimension]) || parseFloat(currentStyle.msTransformOrigin.split(' ')[originIndex]) * 2) % 1;
+            floating = (parseFloat(currentStyle[dimension]) || parseFloat(currentStyle.msTransformOrigin.split(&#39; &#39;)[originIndex]) * 2) % 1;
 
             dom.style.position = inlinePosition;
 
-            if (display === 'inline') {
+            if (display === &#39;inline&#39;) {
                 dom.style.display = inlineDisplay;
             }
 
@@ -1849,7 +1849,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 insertEl,
                 eLen, e;
 
-            if (el.nodeType || el.dom || typeof el === 'string') { // element
+            if (el.nodeType || el.dom || typeof el === &#39;string&#39;) { // element
                 el = Ext.getDom(el);
                 me.dom.appendChild(el);
                 return !returnDom ? Ext.get(el) : el;
@@ -1890,20 +1890,20 @@ Ext.define('Ext.dom.Element', function(Element) {
          * 
          *     // &lt;div id=&quot;my-el&quot;&gt;Phineas Flynn&lt;/div&gt;
          *     
-         *     var el = Ext.get('my-el');
+         *     var el = Ext.get(&#39;my-el&#39;);
          *     
-         *     el.applyStyles('color: white;');
+         *     el.applyStyles(&#39;color: white;&#39;);
          *     
          *     el.applyStyles({
-         *         fontWeight: 'bold',
-         *         backgroundColor: 'gray',
-         *         padding: '10px'
+         *         fontWeight: &#39;bold&#39;,
+         *         backgroundColor: &#39;gray&#39;,
+         *         padding: &#39;10px&#39;
          *     });
          *     
          *     el.applyStyles(function () {
-         *         if (name.initialConfig.html === 'Phineas Flynn') {
-         *             return 'font-style: italic;';
-         *             // OR return { fontStyle: 'italic' };
+         *         if (name.initialConfig.html === &#39;Phineas Flynn&#39;) {
+         *             return &#39;font-style: italic;&#39;;
+         *             // OR return { fontStyle: &#39;italic&#39; };
          *         }
          *     });
          * 
@@ -1970,7 +1970,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             scrollFly = scrollFly || new Ext.dom.Fly();
 
-            descendants = me.query('*');
+            descendants = me.query(&#39;*&#39;);
             for (i = 0, len = descendants.length; i &lt; len; i++) {
                 descendant = descendants[i];
                 // use !== 0 for scrollLeft because it can be a negative number
@@ -2002,7 +2002,7 @@ Ext.define('Ext.dom.Element', function(Element) {
          * @chainable
          */
         center: function(centerIn){
-            return this.alignTo(centerIn || DOC, 'c-c');
+            return this.alignTo(centerIn || DOC, &#39;c-c&#39;);
         },
 
 <span id='Ext-dom-Element-method-child'>        /**
@@ -2048,7 +2048,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 </span>         * Creates the passed DomHelper config and appends it to this element or optionally
          * inserts it before the passed child element.
          * @param {Object} config DomHelper element config object.  If no tag is specified
-         * (e.g., {tag:'input'}) then a div will be automatically generated with the specified
+         * (e.g., {tag:&#39;input&#39;}) then a div will be automatically generated with the specified
          * attributes.
          * @param {HTMLElement} [insertBefore] a child element of this element
          * @param {Boolean} [returnDom=false] true to return the dom node instead of creating
@@ -2057,7 +2057,7 @@ Ext.define('Ext.dom.Element', function(Element) {
          * _returnDom_ is _true_)
          */
         createChild: function(config, insertBefore, returnDom) {
-            config = config || {tag:'div'};
+            config = config || {tag:&#39;div&#39;};
             if (insertBefore) {
                 return Ext.DomHelper.insertBefore(insertBefore, config, returnDom !== true);
             }
@@ -2121,7 +2121,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         detach: function() {
             var dom = this.dom;
 
-            if (dom &amp;&amp; dom.parentNode &amp;&amp; dom.tagName !== 'BODY') {
+            if (dom &amp;&amp; dom.parentNode &amp;&amp; dom.tagName !== &#39;BODY&#39;) {
                 dom.parentNode.removeChild(dom);
             }
 
@@ -2194,11 +2194,11 @@ Ext.define('Ext.dom.Element', function(Element) {
             }
 
             if (newScrollY !== scrollY) {
-                scrollFly.attach(container).scrollTo('top', newScrollY, animate);
+                scrollFly.attach(container).scrollTo(&#39;top&#39;, newScrollY, animate);
             }
 
             if (hscroll !== false  &amp;&amp; (newScrollX !== scrollX)) {
-                scrollFly.attach(container)[scrollTo]('left', newScrollX, animate);
+                scrollFly.attach(container)[scrollTo](&#39;left&#39;, newScrollX, animate);
             }
             return me;
         },
@@ -2217,13 +2217,13 @@ Ext.define('Ext.dom.Element', function(Element) {
 </span>         * Enables a shadow element that will always display behind this element
          * @param {Object} [options] Configuration options for the shadow
          * @param {Number} [options.offset=4] Number of pixels to offset the shadow
-         * @param {String} [options.mode='sides'] The shadow display mode.  Supports the following
+         * @param {String} [options.mode=&#39;sides&#39;] The shadow display mode.  Supports the following
          * options:
          *
-         *     - `'sides'`: Shadow displays on both sides and bottom only
-         *     - `'frame'`: Shadow displays equally on all four sides
-         *     - `'drop'`: Traditional bottom-right drop shadow
-         *     - `'bottom'`: Shadow is offset to the bottom
+         *     - `&#39;sides&#39;`: Shadow displays on both sides and bottom only
+         *     - `&#39;frame&#39;`: Shadow displays equally on all four sides
+         *     - `&#39;drop&#39;`: Traditional bottom-right drop shadow
+         *     - `&#39;bottom&#39;`: Shadow is offset to the bottom
          *
          * @param {Boolean} [options.animate=false] `true` to animate the shadow while
          * the element is animating.  By default the shadow will be hidden during animation.
@@ -2308,7 +2308,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 depth = 0;
 
             if (limit || limit === 0) {
-                if (typeof limit !== 'number') {
+                if (typeof limit !== &#39;number&#39;) {
                     topmost = Ext.getDom(limit);
                     limit = Number.MAX_VALUE;
                 }
@@ -2350,7 +2350,7 @@ Ext.define('Ext.dom.Element', function(Element) {
          * @return {Ext.dom.Element/HTMLElement} The first child or null
          */
         first: function(selector, returnDom) {
-            return this.matchNode('nextSibling', 'firstChild', selector, returnDom);
+            return this.matchNode(&#39;nextSibling&#39;, &#39;firstChild&#39;, selector, returnDom);
         },
 
 <span id='Ext-dom-Element-method-focus'>        /**
@@ -2370,7 +2370,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 Ext.defer(me.focus, defer, me, [null, dom]);
             }
             else {
-                Ext.GlobalEvents.fireEvent('beforefocus', dom);
+                Ext.GlobalEvents.fireEvent(&#39;beforefocus&#39;, dom);
                 dom.focus();
             }
             
@@ -2390,7 +2390,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 shadow = me.shadow,
                 shim = me.shim;
 
-            // The parent destroy sets the destroy to emptyFn, which we don't
+            // The parent destroy sets the destroy to emptyFn, which we don&#39;t
             // want on a shared fly
             if (!me.isFly) {
                 me.mixins.observable.destroy.call(me);
@@ -2420,7 +2420,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
 <span id='Ext-dom-Element-method-getAttribute'>        /**
-</span>         * Returns the value of an attribute from the element's underlying DOM node.
+</span>         * Returns the value of an attribute from the element&#39;s underlying DOM node.
          * @param {String} name The attribute name.
          * @param {String} [namespace] The namespace in which to look for the attribute.
          * @return {String} The attribute value.
@@ -2434,7 +2434,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
         
 <span id='Ext-dom-Element-method-getAttributes'>        /**
-</span>         * Returns an object containing a map of all attributes of this element's DOM node.
+</span>         * Returns an object containing a map of all attributes of this element&#39;s DOM node.
          * 
          * @return {Object} Key/value pairs of attribute names and their values.
          */
@@ -2507,7 +2507,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 <span id='Ext-dom-Element-method-getBorderWidth'>        /**
 </span>         * Gets the width of the border(s) for the specified side(s)
          * @param {String} side Can be t, l, r, b or any combination of those to add
-         * multiple values. For example, passing `'lr'` would get the border **l**eft
+         * multiple values. For example, passing `&#39;lr&#39;` would get the border **l**eft
          * width + the border **r**ight width.
          * @return {Number} The width of the sides passed added together
          */
@@ -2535,12 +2535,12 @@ Ext.define('Ext.dom.Element', function(Element) {
 <span id='Ext-dom-Element-method-getHeight'>        /**
 </span>         * Returns the offset height of the element.
          * @param {Boolean} [contentHeight] `true` to get the height minus borders and padding.
-         * @return {Number} The element's height.
+         * @return {Number} The element&#39;s height.
          */
         getHeight: function(contentHeight, preciseHeight) {
             var me = this,
                 dom = me.dom,
-                hidden = me.isStyle('display', 'none'),
+                hidden = me.isStyle(&#39;display&#39;, &#39;none&#39;),
                 height,
                 floating;
 
@@ -2549,7 +2549,7 @@ Ext.define('Ext.dom.Element', function(Element) {
             }
 
             // Use the viewport height if they are asking for body height
-            if (dom.nodeName === 'BODY') {
+            if (dom.nodeName === &#39;BODY&#39;) {
                 height = Element.getViewportHeight();
             } else {
                 height = dom.offsetHeight;
@@ -2579,12 +2579,12 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
 <span id='Ext-dom-Element-method-getHtml'>        /**
-</span>         * Returns the `innerHTML` of an Element or an empty string if the element's
+</span>         * Returns the `innerHTML` of an Element or an empty string if the element&#39;s
          * dom no longer exists.
          * @return {String}
          */
         getHtml: function() {
-            return this.dom ? this.dom.innerHTML : '';
+            return this.dom ? this.dom.innerHTML : &#39;&#39;;
         },
 
 <span id='Ext-dom-Element-method-getLeft'>        /**
@@ -2600,9 +2600,9 @@ Ext.define('Ext.dom.Element', function(Element) {
         getLocalX: function() {
             var me = this,
                 offsetParent,
-                x = me.getStyle('left');
+                x = me.getStyle(&#39;left&#39;);
 
-            if (!x || x === 'auto') {
+            if (!x || x === &#39;auto&#39;) {
                 x = 0;
             } else if (pxRe.test(x)) {
                 x = parseFloat(x);
@@ -2623,11 +2623,11 @@ Ext.define('Ext.dom.Element', function(Element) {
         getLocalXY: function() {
             var me = this,
                 offsetParent,
-                style = me.getStyle(['left', 'top']),
+                style = me.getStyle([&#39;left&#39;, &#39;top&#39;]),
                 x = style.left,
                 y = style.top;
 
-            if (!x || x === 'auto') {
+            if (!x || x === &#39;auto&#39;) {
                 x = 0;
             } else if (pxRe.test(x)) {
                 x = parseFloat(x);
@@ -2642,7 +2642,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 }
             }
 
-            if (!y || y === 'auto') {
+            if (!y || y === &#39;auto&#39;) {
                 y = 0;
             } else if (pxRe.test(y)) {
                 y = parseFloat(y);
@@ -2663,9 +2663,9 @@ Ext.define('Ext.dom.Element', function(Element) {
         getLocalY: function() {
             var me = this,
                 offsetParent,
-                y = me.getStyle('top');
+                y = me.getStyle(&#39;top&#39;);
 
-            if (!y || y === 'auto') {
+            if (!y || y === &#39;auto&#39;) {
                 y = 0;
             } else if (pxRe.test(y)) {
                 y = parseFloat(y);
@@ -2688,12 +2688,12 @@ Ext.define('Ext.dom.Element', function(Element) {
          *
          * Returns an object with properties top, left, right and bottom representing the margins of this element unless sides is passed,
          * then it returns the calculated width of the sides (see {@link #getPadding}).
-         * @param {String} [sides] Any combination of 'l', 'r', 't', 'b' to get the sum of those sides.
+         * @param {String} [sides] Any combination of &#39;l&#39;, &#39;r&#39;, &#39;t&#39;, &#39;b&#39; to get the sum of those sides.
          * @return {Object/Number}
          */
         getMargin: (function() {
             var hash = {t: &quot;top&quot;, l: &quot;left&quot;, r: &quot;right&quot;, b: &quot;bottom&quot;},
-                allMargins = ['margin-top', 'margin-left', 'margin-right', 'margin-bottom'];
+                allMargins = [&#39;margin-top&#39;, &#39;margin-left&#39;, &#39;margin-right&#39;, &#39;margin-bottom&#39;];
 
             return function(side) {
                 var me = this,    
@@ -2702,7 +2702,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 if (!side) {
                     style = me.getStyle(allMargins);
                     o = {};
-                    if (style &amp;&amp; typeof style === 'object') {
+                    if (style &amp;&amp; typeof style === &#39;object&#39;) {
                         o = {};
                         for (key in margins) {
                             o[key] = o[hash[key]] = parseFloat(style[margins[key]]) || 0;
@@ -2718,7 +2718,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 <span id='Ext-dom-Element-method-getPadding'>        /**
 </span>         * Gets the width of the padding(s) for the specified side(s).
          * @param {String} side Can be t, l, r, b or any combination of those to add
-         * multiple values. For example, passing `'lr'` would get the padding **l**eft +
+         * multiple values. For example, passing `&#39;lr&#39;` would get the padding **l**eft +
          * the padding **r**ight.
          * @return {Number} The padding of the sides passed added together.
          */
@@ -2760,7 +2760,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 // rtl. (e.g. pageXOffset can be an offset from the right, while scrollLeft
                 // is offset from the left, one can be positive and the other negative, etc.)
                 // To avoid adding an extra layer of feature detection in rtl mode to deal with
-                // these differences, it's best just to always use scrollLeft/scrollTop
+                // these differences, it&#39;s best just to always use scrollLeft/scrollTop
                 left = docElement.scrollLeft || (body ? body.scrollLeft : 0);
                 top = docElement.scrollTop || (body ? body.scrollTop : 0);
             } else {
@@ -2780,8 +2780,8 @@ Ext.define('Ext.dom.Element', function(Element) {
          * positions that will need to be set on an ancestor of the element in order to make
          * this element visible within its container.
          * @param {String/HTMLElement/Ext.Element} container The container
-         * @param {Number} scrollX The container's current scroll position on the x axis
-         * @param {Number} scrollY The container's current scroll position on the y axis
+         * @param {Number} scrollX The container&#39;s current scroll position on the x axis
+         * @param {Number} scrollY The container&#39;s current scroll position on the y axis
          * @return {Object} An object with &quot;x&quot; and &quot;y&quot; properties
          * @private
          */
@@ -2854,7 +2854,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 <span id='Ext-dom-Element-method-getSize'>        /**
 </span>         * Returns the size of the element.
          * @param {Boolean} [contentSize] `true` to get the width/size minus borders and padding.
-         * @return {Object} An object containing the element's size:
+         * @return {Object} An object containing the element&#39;s size:
          * @return {Number} return.width
          * @return {Number} return.height
          */
@@ -2876,7 +2876,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         getStyle: function (property, inline) {
             var me = this,
                 dom = me.dom,
-                multiple = typeof property !== 'string',
+                multiple = typeof property !== &#39;string&#39;,
                 hooks = me.styleHooks,
                 prop = property,
                 props = prop,
@@ -2893,7 +2893,7 @@ Ext.define('Ext.dom.Element', function(Element) {
             }
 
             if (!dom || dom.documentElement) {
-                return values || '';
+                return values || &#39;&#39;;
             }
 
             domStyle = dom.style;
@@ -2954,7 +2954,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
 <span id='Ext-dom-Element-method-getTouchAction'>        /**
-</span>         * Returns this element's touch action.  (see {@link #setTouchAction})
+</span>         * Returns this element&#39;s touch action.  (see {@link #setTouchAction})
          *
          * The returned object is shared and should not be mutated.
          *
@@ -2978,7 +2978,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 <span id='Ext-dom-Element-method-getViewSize'>        /**
 </span>         * Returns the dimensions of the element available to lay content out in.  For
          * most elements this is the clientHeight/clientWidth.  If the element is
-         * the document/document.body the window's innerHeight/innerWidth is returned
+         * the document/document.body the window&#39;s innerHeight/innerWidth is returned
          *
          * If the element (or any ancestor element) has CSS style `display: none`, the
          * dimensions will be zero.
@@ -3019,12 +3019,12 @@ Ext.define('Ext.dom.Element', function(Element) {
 <span id='Ext-dom-Element-method-getWidth'>        /**
 </span>         * Returns the offset width of the element.
          * @param {Boolean} [contentWidth] `true` to get the width minus borders and padding.
-         * @return {Number} The element's width.
+         * @return {Number} The element&#39;s width.
          */
         getWidth: function(contentWidth, preciseWidth) {
             var me = this,
                 dom = me.dom,
-                hidden = me.isStyle('display', 'none'),
+                hidden = me.isStyle(&#39;display&#39;, &#39;none&#39;),
                 rect, width, floating;
 
             if (hidden) {
@@ -3050,7 +3050,7 @@ Ext.define('Ext.dom.Element', function(Element) {
             // there is no need make adjustments for this bug when the element is vertically
             // rotated because the width of a vertical element is its rotated height
             if (Ext.supports.Direct2DBug &amp;&amp; !me.vertical) {
-                // get the fractional portion of the sub-pixel precision width of the element's text contents
+                // get the fractional portion of the sub-pixel precision width of the element&#39;s text contents
                 floating = me.adjustDirect2DDimension(WIDTH);
                 if (preciseWidth) {
                     width += floating;
@@ -3117,15 +3117,15 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
 <span id='Ext-dom-Element-method-getZIndex'>        /**
-</span>         * Returns this element's z-index
+</span>         * Returns this element&#39;s z-index
          * @return {Number}
          */
         getZIndex: function() {
-            return parseInt(this.getStyle('z-index'), 10);
+            return parseInt(this.getStyle(&#39;z-index&#39;), 10);
         },
 
 <span id='Ext-dom-Element-method-hasCls'>        /**
-</span>         * Checks if the specified CSS class exists on this element's DOM node.
+</span>         * Checks if the specified CSS class exists on this element&#39;s DOM node.
          * @param {String} name The CSS class to check for.
          * @return {Boolean} `true` if the class exists, else `false`.
          */
@@ -3184,7 +3184,7 @@ Ext.define('Ext.dom.Element', function(Element) {
          */
         insertFirst: function(el, returnDom) {
             el = el || {};
-            if (el.nodeType || el.dom || typeof el === 'string') { // element
+            if (el.nodeType || el.dom || typeof el === &#39;string&#39;) { // element
                 el = Ext.getDom(el);
                 this.dom.insertBefore(el, this.dom.firstChild);
                 return !returnDom ? Ext.get(el) : el;
@@ -3211,7 +3211,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 </span>         * Inserts (or creates) the passed element (or DomHelper config) as a sibling of this element
          * @param {String/HTMLElement/Ext.dom.Element/Object/Array} el The id, element to insert or a DomHelper config
          * to create and insert *or* an array of any of those.
-         * @param {String} [where='before'] 'before' or 'after'
+         * @param {String} [where=&#39;before&#39;] &#39;before&#39; or &#39;after&#39;
          * @param {Boolean} [returnDom=false] True to return the raw DOM element instead of Ext.dom.Element
          * @return {Ext.dom.Element/HTMLElement} The inserted Ext.dom.Element (or 
          * HTMLElement if _returnDom_ is _true_). If an array is passed, the last 
@@ -3220,7 +3220,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         insertSibling: function(el, where, returnDom) {
             var me        = this,
                 DomHelper = Ext.DomHelper,
-                isAfter   = (where || 'before').toLowerCase() === 'after',
+                isAfter   = (where || &#39;before&#39;).toLowerCase() === &#39;after&#39;,
                 rt, insertEl, eLen, e;
 
             if (Ext.isIterable(el)) {
@@ -3260,7 +3260,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 if (isAfter &amp;&amp; !me.dom.nextSibling) {
                     rt = DomHelper.append(me.dom.parentNode, el, !returnDom);
                 } else {
-                    rt = DomHelper[isAfter ? 'insertAfter' : 'insertBefore'](me.dom, el, !returnDom);
+                    rt = DomHelper[isAfter ? &#39;insertAfter&#39; : &#39;insertBefore&#39;](me.dom, el, !returnDom);
                 }
             }
             return rt;
@@ -3268,7 +3268,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
 <span id='Ext-dom-Element-method-is'>        /**
 </span>         * Returns `true` if this element matches the passed simple selector
-         * (e.g. 'div.some-class' or 'span:first-child').
+         * (e.g. &#39;div.some-class&#39; or &#39;span:first-child&#39;).
          * @param {String/Function} selector The simple selector to test or a function which is passed
          * candidate nodes, and should return `true` for nodes which match.
          * @return {Boolean} `true` if this element matches the selector, else `false`.
@@ -3279,11 +3279,11 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             if (!selector) {
                 // In Ext 4 is() called through to DomQuery methods, and would always
-                // return true if the selector was ''.  The new query() method in v5 uses
-                // querySelector/querySelectorAll() which consider '' to be an invalid
+                // return true if the selector was &#39;&#39;.  The new query() method in v5 uses
+                // querySelector/querySelectorAll() which consider &#39;&#39; to be an invalid
                 // selector and throw an error as a result.  To maintain compatibility
                 // with the various users of is() we have to return true if the selector
-                // is an empty string.  For example: el.up('') should return the element's
+                // is an empty string.  For example: el.up(&#39;&#39;) should return the element&#39;s
                 // direct parent.
                 is = true;
             } else if (!dom.tagName) {
@@ -3371,7 +3371,7 @@ Ext.define('Ext.dom.Element', function(Element) {
             }
 
             for (end = dom.ownerDocument.documentElement; dom !== end; dom = dom.parentNode) {
-                // We're invisible if we hit a nonexistent parentNode or a document
+                // We&#39;re invisible if we hit a nonexistent parentNode or a document
                 // fragment or computed style visibility:hidden or display:none
                 if (!dom || dom.nodeType === 11 || (visFly.attach(dom)).isStyle(VISIBILITY, HIDDEN) || visFly.isStyle(DISPLAY, NONE)) {
                     return false;
@@ -3394,7 +3394,7 @@ Ext.define('Ext.dom.Element', function(Element) {
          * HTMLElement if _returnDom_ is _true_).  Or null if no match is found.
          */
         last: function(selector, returnDom) {
-            return this.matchNode('previousSibling', 'lastChild', selector, returnDom);
+            return this.matchNode(&#39;previousSibling&#39;, &#39;lastChild&#39;, selector, returnDom);
         },
 
 <span id='Ext-dom-Element-cfg-listeners'>        /**
@@ -3411,7 +3411,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             n = dom[start];
             while (n) {
-                if (n.nodeType === 1 &amp;&amp; (!selector || Ext.fly(n, '_matchNode').is(selector))) {
+                if (n.nodeType === 1 &amp;&amp; (!selector || Ext.fly(n, &#39;_matchNode&#39;).is(selector))) {
                     return !returnDom ? Ext.get(n) : n;
                 }
                 n = n[dir];
@@ -3469,7 +3469,7 @@ Ext.define('Ext.dom.Element', function(Element) {
          * HTMLElement if _asDom_ is _true_).  Or null if no match is found.
          */
         next: function(selector, returnDom) {
-            return this.matchNode('nextSibling', 'nextSibling', selector, returnDom);
+            return this.matchNode(&#39;nextSibling&#39;, &#39;nextSibling&#39;, selector, returnDom);
         },
 
 <span id='Ext-dom-Element-method-parent'>        /**
@@ -3481,7 +3481,7 @@ Ext.define('Ext.dom.Element', function(Element) {
          * HTMLElement if _returnDom_ is _true_).  Or null if no match is found.
          */
         parent: function(selector, returnDom) {
-            return this.matchNode('parentNode', 'parentNode', selector, returnDom);
+            return this.matchNode(&#39;parentNode&#39;, &#39;parentNode&#39;, selector, returnDom);
         },
 
 <span id='Ext-dom-Element-method-position'>        /**
@@ -3495,7 +3495,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         position: function(pos, zIndex, x, y) {
             var me = this;
 
-            if (me.dom.tagName !== 'BODY') {
+            if (me.dom.tagName !== &#39;BODY&#39;) {
                 if (!pos &amp;&amp; me.isStyle(POSITION, STATIC)) {
                     me.setStyle(POSITION, RELATIVE);
                 } else if (pos) {
@@ -3519,7 +3519,7 @@ Ext.define('Ext.dom.Element', function(Element) {
          * HTMLElement if _returnDom_ is _true_).  Or null if no match is found.
          */
         prev: function(selector, returnDom) {
-            return this.matchNode('previousSibling', 'previousSibling', selector, returnDom);
+            return this.matchNode(&#39;previousSibling&#39;, &#39;previousSibling&#39;, selector, returnDom);
         },
 
 <span id='Ext-dom-Element-method-query'>        /**
@@ -3542,7 +3542,7 @@ Ext.define('Ext.dom.Element', function(Element) {
          *
          * ## Attribute Selectors:
          *
-         * The use of @ and quotes are optional. For example, div[@foo='bar'] is also a valid attribute selector.
+         * The use of @ and quotes are optional. For example, div[@foo=&#39;bar&#39;] is also a valid attribute selector.
          *
          * * E[foo] has an attribute &quot;foo&quot;
          * * E[foo=bar] has an attribute &quot;foo&quot; that equals &quot;bar&quot;
@@ -3601,12 +3601,12 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             if (!single) {
                 // only allocate the results array if the full result set is being
-                // requested.  selectNode() uses the 'single' param.
+                // requested.  selectNode() uses the &#39;single&#39; param.
                 results = [];
             }
 
             for (i = 0, len = selector.length; i &lt;  len; i++) {
-                if (typeof selector[i] === 'string') {
+                if (typeof selector[i] === &#39;string&#39;) {
                     if (single) {
                         // take the &quot;fast path&quot; if single was requested (selectNode)
                         node = dom.querySelector(selector[i]);
@@ -3647,9 +3647,9 @@ Ext.define('Ext.dom.Element', function(Element) {
             var dom = this.dom,
                 domStyle = dom.style;
 
-            domStyle.display = 'none';
+            domStyle.display = &#39;none&#39;;
             dom.offsetHeight;
-            domStyle.display = '';
+            domStyle.display = &#39;&#39;;
         },
 
 <span id='Ext-dom-Element-method-remove'>        /**
@@ -3693,10 +3693,10 @@ Ext.define('Ext.dom.Element', function(Element) {
             map = elementData.classMap;
             classList = elementData.classList;
 
-            prefix = prefix ? prefix + SEPARATOR : '';
-            suffix = suffix ? SEPARATOR + suffix : '';
+            prefix = prefix ? prefix + SEPARATOR : &#39;&#39;;
+            suffix = suffix ? SEPARATOR + suffix : &#39;&#39;;
 
-            if (typeof names === 'string') {
+            if (typeof names === &#39;string&#39;) {
                 names = names.split(spacesRe);
             }
 
@@ -3714,7 +3714,7 @@ Ext.define('Ext.dom.Element', function(Element) {
             }
 
             if (hasNewCls) {
-                dom.className = classList.join(' ');
+                dom.className = classList.join(&#39; &#39;);
             }
 
             return me;
@@ -3726,10 +3726,10 @@ Ext.define('Ext.dom.Element', function(Element) {
          */
         repaint: function() {
             var me = this;
-            me.addCls(Ext.baseCSSPrefix + 'repaint');
+            me.addCls(Ext.baseCSSPrefix + &#39;repaint&#39;);
             Ext.defer(function() {
                 if(me.dom) {  //may have been removed already on slower UAs
-                    Ext.fly(me.dom).removeCls(Ext.baseCSSPrefix + 'repaint');
+                    Ext.fly(me.dom).removeCls(Ext.baseCSSPrefix + &#39;repaint&#39;);
                 }
             }, 1);
             return me;
@@ -3751,8 +3751,8 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             //&lt;debug&gt;
             if (!parentNode) {
-                Ext.raise('Cannot replace element &quot;' + id +
-                    '&quot;. It is not attached to a parent node.');
+                Ext.raise(&#39;Cannot replace element &quot;&#39; + id +
+                    &#39;&quot;. It is not attached to a parent node.&#39;);
             }
             //&lt;/debug&gt;
 
@@ -3771,8 +3771,8 @@ Ext.define('Ext.dom.Element', function(Element) {
          * If the old name does not exist, the new name will simply be added.
          * @param {String} oldName The CSS class to replace.
          * @param {String} newName The replacement CSS class.
-         * @param {String} [prefix=''] Prefix to prepend to each class to be replaced.
-         * @param {String} [suffix=''] Suffix to append to each class to be replaced.
+         * @param {String} [prefix=&#39;&#39;] Prefix to prepend to each class to be replaced.
+         * @param {String} [suffix=&#39;&#39;] Suffix to append to each class to be replaced.
          * @return {Ext.dom.Element} this
          */
         replaceCls: function(oldName, newName, prefix, suffix) {
@@ -3793,20 +3793,20 @@ Ext.define('Ext.dom.Element', function(Element) {
             }
 
             if (!suffix) {
-                suffix = '';
+                suffix = &#39;&#39;;
             }
 
             dom = me.dom;
             map = elementData.classMap;
             classList = elementData.classList;
 
-            prefix = prefix ? prefix + SEPARATOR : '';
-            suffix = suffix ? SEPARATOR + suffix : '';
+            prefix = prefix ? prefix + SEPARATOR : &#39;&#39;;
+            suffix = suffix ? SEPARATOR + suffix : &#39;&#39;;
 
-            if (typeof oldName === 'string') {
+            if (typeof oldName === &#39;string&#39;) {
                 oldName = oldName.split(spacesRe);
             }
-            if (typeof newName === 'string') {
+            if (typeof newName === &#39;string&#39;) {
                 newName = newName.split(spacesRe);
             }
 
@@ -3830,7 +3830,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             if (change) {
                 elementData.classList = classList = Ext.Object.getKeys(map);
-                dom.className = classList.join(' ');
+                dom.className = classList.join(&#39; &#39;);
             }
 
             return me;
@@ -3851,7 +3851,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             me.clearListeners();
 
-            if (el.nodeType || el.dom || typeof el === 'string') {
+            if (el.nodeType || el.dom || typeof el === &#39;string&#39;) {
                 el = Ext.get(el);
                 newDom = parent.insertBefore(el.dom, dom);
             } else {
@@ -3877,7 +3877,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
 <span id='Ext-dom-Element-method-scroll'>        /**
 </span>         * Scrolls this element the specified direction. Does bounds checking to make sure the scroll is
-         * within this element's scrollable range.
+         * within this element&#39;s scrollable range.
          * @param {String} direction Possible values are:
          *
          * - `&quot;l&quot;` (or `&quot;left&quot;`)
@@ -3901,15 +3901,15 @@ Ext.define('Ext.dom.Element', function(Element) {
             direction = direction.charAt(0);
             var me = this,
                 dom = me.dom,
-                side = direction === 'r' || direction === 'l' ? 'left' : 'top',
+                side = direction === &#39;r&#39; || direction === &#39;l&#39; ? &#39;left&#39; : &#39;top&#39;,
                 scrolled = false,
                 currentScroll, constrainedScroll;
 
-            if (direction === 'l' || direction === 't' || direction === 'u') {
+            if (direction === &#39;l&#39; || direction === &#39;t&#39; || direction === &#39;u&#39;) {
                 distance = -distance;
             }
 
-            if (side === 'left') {
+            if (side === &#39;left&#39;) {
                 currentScroll = dom.scrollLeft;
                 constrainedScroll = me.constrainScrollLeft(currentScroll + distance);
             } else {
@@ -3949,17 +3949,17 @@ Ext.define('Ext.dom.Element', function(Element) {
                 animate = deltaY;
                 deltaY = deltaX[1];
                 deltaX = deltaX[0];
-            } else if (typeof deltaX != 'number') { // or an object
+            } else if (typeof deltaX != &#39;number&#39;) { // or an object
                 animate = deltaY;
                 deltaY = deltaX.y;
                 deltaX = deltaX.x;
             }
 
             if (deltaX) {
-                me.scrollTo('left', me.constrainScrollLeft(dom.scrollLeft + deltaX), animate);
+                me.scrollTo(&#39;left&#39;, me.constrainScrollLeft(dom.scrollLeft + deltaX), animate);
             }
             if (deltaY) {
-                me.scrollTo('top', me.constrainScrollTop(dom.scrollTop + deltaY), animate);
+                me.scrollTo(&#39;top&#39;, me.constrainScrollTop(dom.scrollTop + deltaY), animate);
             }
 
             return me;
@@ -3976,41 +3976,41 @@ Ext.define('Ext.dom.Element', function(Element) {
 <span id='Ext-dom-Element-method-scrollIntoView'>        /**
 </span>         * Scrolls this element into view within the passed container.
          *
-         *       Ext.create('Ext.data.Store', {
-         *           storeId:'simpsonsStore',
-         *           fields:['name', 'email', 'phone'],
-         *           data:{'items':[
-         *               { 'name': 'Lisa',  &quot;email&quot;:&quot;lisa@simpsons.com&quot;,  &quot;phone&quot;:&quot;555-111-1224&quot;  },
-         *               { 'name': 'Bart',  &quot;email&quot;:&quot;bart@simpsons.com&quot;,  &quot;phone&quot;:&quot;555-222-1234&quot; },
-         *               { 'name': 'Homer', &quot;email&quot;:&quot;homer@simpsons.com&quot;,  &quot;phone&quot;:&quot;555-222-1244&quot;  },
-         *               { 'name': 'Marge', &quot;email&quot;:&quot;marge@simpsons.com&quot;, &quot;phone&quot;:&quot;555-222-1254&quot;  },
-         *               { 'name': 'Milhouse', &quot;email&quot;:&quot;milhouse@simpsons.com&quot;,  &quot;phone&quot;:&quot;555-222-1244&quot;  },
-         *               { 'name': 'Willy', &quot;email&quot;:&quot;willy@simpsons.com&quot;, &quot;phone&quot;:&quot;555-222-1254&quot;  },
-         *               { 'name': 'Skinner', &quot;email&quot;:&quot;skinner@simpsons.com&quot;,  &quot;phone&quot;:&quot;555-222-1244&quot;  },
-         *               { 'name': 'Hank (last row)', &quot;email&quot;:&quot;hank@simpsons.com&quot;, &quot;phone&quot;:&quot;555-222-1254&quot;  }
+         *       Ext.create(&#39;Ext.data.Store&#39;, {
+         *           storeId:&#39;simpsonsStore&#39;,
+         *           fields:[&#39;name&#39;, &#39;email&#39;, &#39;phone&#39;],
+         *           data:{&#39;items&#39;:[
+         *               { &#39;name&#39;: &#39;Lisa&#39;,  &quot;email&quot;:&quot;lisa@simpsons.com&quot;,  &quot;phone&quot;:&quot;555-111-1224&quot;  },
+         *               { &#39;name&#39;: &#39;Bart&#39;,  &quot;email&quot;:&quot;bart@simpsons.com&quot;,  &quot;phone&quot;:&quot;555-222-1234&quot; },
+         *               { &#39;name&#39;: &#39;Homer&#39;, &quot;email&quot;:&quot;homer@simpsons.com&quot;,  &quot;phone&quot;:&quot;555-222-1244&quot;  },
+         *               { &#39;name&#39;: &#39;Marge&#39;, &quot;email&quot;:&quot;marge@simpsons.com&quot;, &quot;phone&quot;:&quot;555-222-1254&quot;  },
+         *               { &#39;name&#39;: &#39;Milhouse&#39;, &quot;email&quot;:&quot;milhouse@simpsons.com&quot;,  &quot;phone&quot;:&quot;555-222-1244&quot;  },
+         *               { &#39;name&#39;: &#39;Willy&#39;, &quot;email&quot;:&quot;willy@simpsons.com&quot;, &quot;phone&quot;:&quot;555-222-1254&quot;  },
+         *               { &#39;name&#39;: &#39;Skinner&#39;, &quot;email&quot;:&quot;skinner@simpsons.com&quot;,  &quot;phone&quot;:&quot;555-222-1244&quot;  },
+         *               { &#39;name&#39;: &#39;Hank (last row)&#39;, &quot;email&quot;:&quot;hank@simpsons.com&quot;, &quot;phone&quot;:&quot;555-222-1254&quot;  }
          *           ]},
          *           proxy: {
-         *               type: 'memory',
+         *               type: &#39;memory&#39;,
          *               reader: {
-         *                   type: 'json',
-         *                   rootProperty: 'items'
+         *                   type: &#39;json&#39;,
+         *                   rootProperty: &#39;items&#39;
          *               }
          *           }
          *       });
          *
-         *       var grid = Ext.create('Ext.grid.Panel', {
-         *           title: 'Simpsons',
-         *           store: Ext.data.StoreManager.lookup('simpsonsStore'),
+         *       var grid = Ext.create(&#39;Ext.grid.Panel&#39;, {
+         *           title: &#39;Simpsons&#39;,
+         *           store: Ext.data.StoreManager.lookup(&#39;simpsonsStore&#39;),
          *           columns: [
-         *               { text: 'Name',  dataIndex: 'name', width: 125 },
-         *               { text: 'Email', dataIndex: 'email', flex: 1 },
-         *               { text: 'Phone', dataIndex: 'phone' }
+         *               { text: &#39;Name&#39;,  dataIndex: &#39;name&#39;, width: 125 },
+         *               { text: &#39;Email&#39;, dataIndex: &#39;email&#39;, flex: 1 },
+         *               { text: &#39;Phone&#39;, dataIndex: &#39;phone&#39; }
          *           ],
          *           height: 190,
          *           width: 400,
          *           renderTo: Ext.getBody(),
          *           tbar: [{
-         *               text: 'Scroll row 7 into view',
+         *               text: &#39;Scroll row 7 into view&#39;,
          *               handler: function () {
          *                   var view = grid.getView();
          *
@@ -4035,8 +4035,8 @@ Ext.define('Ext.dom.Element', function(Element) {
                 hscroll,
                 animate,
                 highlight,
-                'getScrollLeft',
-                'scrollTo'
+                &#39;getScrollLeft&#39;,
+                &#39;scrollTo&#39;
             );
         },
 
@@ -4050,10 +4050,10 @@ Ext.define('Ext.dom.Element', function(Element) {
          * @return {Ext.dom.Element} this
          */
         scrollTo: function(side, value, animate) {
-            //check if we're scrolling top or left
+            //check if we&#39;re scrolling top or left
             var top = topRe.test(side),
                 me = this,
-                prop = top ? 'scrollTop' : 'scrollLeft',
+                prop = top ? &#39;scrollTop&#39; : &#39;scrollLeft&#39;,
                 dom = me.dom,
                 animCfg;
 
@@ -4133,8 +4133,8 @@ Ext.define('Ext.dom.Element', function(Element) {
          * Example component (though any Ext.dom.Element would suffice):
          * 
          *     var cmp = Ext.create({
-         *         xtype: 'component',
-         *         html: 'test',
+         *         xtype: &#39;component&#39;,
+         *         html: &#39;test&#39;,
          *         renderTo: Ext.getBody()
          *     });
          * 
@@ -4142,7 +4142,7 @@ Ext.define('Ext.dom.Element', function(Element) {
          * element to use `set`:
          * 
          *     cmp.el.set({
-         *         foo: 'bar'
+         *         foo: &#39;bar&#39;
          *     });
          * 
          * This sets an attribute on the element of **foo=&quot;bar&quot;**:
@@ -4161,7 +4161,7 @@ Ext.define('Ext.dom.Element', function(Element) {
          * `expandos` param is set to **false**.
          *  - Passing an attribute of `style` results in the request being handed off to 
          * {@link #method-applyStyles}.
-         *  - Passing an attribute of `cls` results in the element's dom's 
+         *  - Passing an attribute of `cls` results in the element&#39;s dom&#39;s 
          * [className](http://www.w3schools.com/jsref/prop_html_classname.asp) property 
          * being set directly.  For additional flexibility when setting / removing 
          * classes see: 
@@ -4185,10 +4185,10 @@ Ext.define('Ext.dom.Element', function(Element) {
                 if (attributes.hasOwnProperty(attribute)) {
                     value = attributes[attribute];
 
-                    if (attribute === 'style') {
+                    if (attribute === &#39;style&#39;) {
                         me.applyStyles(value);
                     }
-                    else if (attribute === 'cls') {
+                    else if (attribute === &#39;cls&#39;) {
                         dom.className = value;
                     }
                     else if (useSet !== false) {
@@ -4208,7 +4208,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
 <span id='Ext-dom-Element-method-setBottom'>        /**
-</span>         * Sets the element's CSS bottom style.
+</span>         * Sets the element&#39;s CSS bottom style.
          * @param {Number/String} bottom Number of pixels or CSS string value to set as
          * the bottom CSS property value
          * @return {Ext.dom.Element} this
@@ -4219,7 +4219,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
 <span id='Ext-dom-Element-method-setCls'>        /**
-</span>         * Sets the specified CSS class on this element's DOM node.
+</span>         * Sets the specified CSS class on this element&#39;s DOM node.
          * @param {String/String[]} className The CSS class to set on this element.
          */
         setCls: function(className) {
@@ -4231,7 +4231,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 me.synchronize();
             }
 
-            if (typeof className === 'string') {
+            if (typeof className === &#39;string&#39;) {
                 className = className.split(spacesRe);
             }
 
@@ -4241,7 +4241,7 @@ Ext.define('Ext.dom.Element', function(Element) {
             for (i = 0, ln = classList.length; i &lt; ln; i++) {
                 map[classList[i]] = true;
             }
-            me.dom.className = classList.join(' ');
+            me.dom.className = classList.join(&#39; &#39;);
         },
 
 <span id='Ext-dom-Element-method-setDisplayed'>        /**
@@ -4319,7 +4319,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
 <span id='Ext-dom-Element-method-setLeft'>        /**
-</span>         * Sets the element's left position directly using CSS style
+</span>         * Sets the element&#39;s left position directly using CSS style
          * (instead of {@link #setX}).
          * @param {Number/String} left Number of pixels or CSS string value to
          * set as the left CSS property value
@@ -4342,8 +4342,8 @@ Ext.define('Ext.dom.Element', function(Element) {
                 style = me.dom.style;
 
             // clear right style just in case it was previously set by rtlSetLocalXY
-            style.right = 'auto';
-            style.left = (x === null) ? 'auto' : x + 'px';
+            style.right = &#39;auto&#39;;
+            style.left = (x === null) ? &#39;auto&#39; : x + &#39;px&#39;;
 
             if (me.shadow || me.shim) {
                 me.syncUnderlays();
@@ -4357,7 +4357,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 style = me.dom.style;
 
             // clear right style just in case it was previously set by rtlSetLocalXY
-            style.right = 'auto';
+            style.right = &#39;auto&#39;;
 
             if (x &amp;&amp; x.length) {
                 y = x[1];
@@ -4365,15 +4365,15 @@ Ext.define('Ext.dom.Element', function(Element) {
             }
 
             if (x === null) {
-                style.left = 'auto';
+                style.left = &#39;auto&#39;;
             } else if (x !== undefined) {
-                style.left = x + 'px';
+                style.left = x + &#39;px&#39;;
             }
 
             if (y === null) {
-                style.top = 'auto';
+                style.top = &#39;auto&#39;;
             } else if (y !== undefined) {
-                style.top = y + 'px';
+                style.top = y + &#39;px&#39;;
             }
 
             if (me.shadow || me.shim) {
@@ -4386,7 +4386,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         setLocalY: function(y) {
             var me = this;
 
-            me.dom.style.top = (y === null) ? 'auto' : y + 'px';
+            me.dom.style.top = (y === null) ? &#39;auto&#39; : y + &#39;px&#39;;
 
             if (me.shadow || me.shim) {
                 me.syncUnderlays();
@@ -4401,13 +4401,13 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             if (margin || margin === 0) {
                 margin = me.self.unitizeBox((margin === true) ? 5 : margin);
-                domStyle.setProperty('margin', margin, 'important');
+                domStyle.setProperty(&#39;margin&#39;, margin, &#39;important&#39;);
             }
             else {
-                domStyle.removeProperty('margin-top');
-                domStyle.removeProperty('margin-right');
-                domStyle.removeProperty('margin-bottom');
-                domStyle.removeProperty('margin-left');
+                domStyle.removeProperty(&#39;margin-top&#39;);
+                domStyle.removeProperty(&#39;margin-right&#39;);
+                domStyle.removeProperty(&#39;margin-bottom&#39;);
+                domStyle.removeProperty(&#39;margin-left&#39;);
             }
         },
 
@@ -4460,7 +4460,7 @@ Ext.define('Ext.dom.Element', function(Element) {
             var me = this;
 
             if (me.dom) {
-                me.setStyle('opacity', opacity);
+                me.setStyle(&#39;opacity&#39;, opacity);
             }
 
             return me;
@@ -4472,18 +4472,18 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             if (padding || padding === 0) {
                 padding = me.self.unitizeBox((padding === true) ? 5 : padding);
-                domStyle.setProperty('padding', padding, 'important');
+                domStyle.setProperty(&#39;padding&#39;, padding, &#39;important&#39;);
             }
             else {
-                domStyle.removeProperty('padding-top');
-                domStyle.removeProperty('padding-right');
-                domStyle.removeProperty('padding-bottom');
-                domStyle.removeProperty('padding-left');
+                domStyle.removeProperty(&#39;padding-top&#39;);
+                domStyle.removeProperty(&#39;padding-right&#39;);
+                domStyle.removeProperty(&#39;padding-bottom&#39;);
+                domStyle.removeProperty(&#39;padding-left&#39;);
             }
         },
 
 <span id='Ext-dom-Element-method-setRight'>        /**
-</span>         * Sets the element's CSS right style.
+</span>         * Sets the element&#39;s CSS right style.
          * @param {Number/String} right Number of pixels or CSS string value to
          * set as the right CSS property value
          * @return {Ext.dom.Element} this
@@ -4582,16 +4582,16 @@ Ext.define('Ext.dom.Element', function(Element) {
          * 
          *     // &lt;div id=&quot;my-el&quot;&gt;Phineas Flynn&lt;/div&gt;
          *     
-         *     var el = Ext.get('my-el');
+         *     var el = Ext.get(&#39;my-el&#39;);
          *     
          *     // two-param syntax
-         *     el.setStyle('color', 'white');
+         *     el.setStyle(&#39;color&#39;, &#39;white&#39;);
          *     
          *     // single-param syntax
          *     el.setStyle({
-         *         fontWeight: 'bold',
-         *         backgroundColor: 'gray',
-         *         padding: '10px'
+         *         fontWeight: &#39;bold&#39;,
+         *         backgroundColor: &#39;gray&#39;,
+         *         padding: &#39;10px&#39;
          *     });
          * 
          * @param {String/Object} property The style property to be set, or an object of 
@@ -4608,13 +4608,13 @@ Ext.define('Ext.dom.Element', function(Element) {
                 name = prop,
                 hook;
 
-            // we don't promote the 2-arg form to object-form to avoid the overhead...
-            if (typeof name === 'string') {
+            // we don&#39;t promote the 2-arg form to object-form to avoid the overhead...
+            if (typeof name === &#39;string&#39;) {
                 hook = hooks[name];
                 if (!hook) {
                     hooks[name] = hook = { name: Element.normalize(name) };
                 }
-                value = (value == null) ? '' : value; // map null &amp;&amp; undefined to ''
+                value = (value == null) ? &#39;&#39; : value; // map null &amp;&amp; undefined to &#39;&#39;
                 if (hook.set) {
                     hook.set(dom, value, me);
                 } else {
@@ -4631,7 +4631,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                             hooks[name] = hook = { name: Element.normalize(name) };
                         }
                         value = prop[name];
-                        value = (value == null) ? '' : value; // map null &amp;&amp; undefined to ''
+                        value = (value == null) ? &#39;&#39; : value; // map null &amp;&amp; undefined to &#39;&#39;
                         if (hook.set) {
                             hook.set(dom, value, me);
                         } else {
@@ -4652,7 +4652,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
 <span id='Ext-dom-Element-method-setTop'>        /**
-</span>         * Sets the element's top position directly using CSS style
+</span>         * Sets the element&#39;s top position directly using CSS style
          * (instead of {@link #setY}).
          * @param {Number/String} top Number of pixels or CSS string value to
          * set as the top CSS property value
@@ -4726,10 +4726,10 @@ Ext.define('Ext.dom.Element', function(Element) {
             var domStyle = this.dom.style;
 
             if (isVisible) {
-                domStyle.removeProperty('visibility');
+                domStyle.removeProperty(&#39;visibility&#39;);
             }
             else {
-                domStyle.setProperty('visibility', 'hidden', 'important');
+                domStyle.setProperty(&#39;visibility&#39;, &#39;hidden&#39;, &#39;important&#39;);
             }
         },
 
@@ -4771,7 +4771,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         setVisible: function(visible) {
             var me = this,
                 mode = me.getVisibilityMode(),
-                addOrRemove = visible ? 'removeCls' : 'addCls';
+                addOrRemove = visible ? &#39;removeCls&#39; : &#39;addCls&#39;;
 
             switch (mode) {
                 case Element.DISPLAY:
@@ -4820,7 +4820,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
 <span id='Ext-dom-Element-method-setX'>        /**
-</span>         * Sets this Element's page-level x coordinate
+</span>         * Sets this Element&#39;s page-level x coordinate
          * @param {Number} x
          * @return {Ext.dom.Element} this
          */
@@ -4829,7 +4829,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
 <span id='Ext-dom-Element-method-setXY'>        /**
-</span>         * Sets this Element's page-level x and y coordinates
+</span>         * Sets this Element&#39;s page-level x and y coordinates
          * @param {Number[]} xy
          * @return {Ext.dom.Element} this
          */
@@ -4843,10 +4843,10 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             // right position may have been previously set by rtlSetLocalXY 
             // so clear it here just in case.
-            style.right = 'auto';
+            style.right = &#39;auto&#39;;
             for (pos in pts) {
                 if (!isNaN(pts[pos])) {
-                    style[pos] = pts[pos] + 'px';
+                    style[pos] = pts[pos] + &#39;px&#39;;
                 }
             }
 
@@ -4858,7 +4858,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
 <span id='Ext-dom-Element-method-setY'>        /**
-</span>         * Sets this Element's page-level y coordinate
+</span>         * Sets this Element&#39;s page-level y coordinate
          * @param {Number} y
          * @return {Ext.dom.Element} this
          */
@@ -4884,7 +4884,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 me.shim.setZIndex(zindex);
             }
 
-            return me.setStyle('z-index', zindex);
+            return me.setStyle(&#39;z-index&#39;, zindex);
         },
 
 <span id='Ext-dom-Element-method-show'>        /**
@@ -4916,11 +4916,11 @@ Ext.define('Ext.dom.Element', function(Element) {
                 removedClass = flag ? secondClass : firstClass;
 
             if (removedClass) {
-                me.removeCls(prefix ? prefix + '-' + removedClass : removedClass);
+                me.removeCls(prefix ? prefix + &#39;-&#39; + removedClass : removedClass);
             }
 
             if (addedClass) {
-                me.addCls(prefix ? prefix + '-' + addedClass : addedClass);
+                me.addCls(prefix ? prefix + &#39;-&#39; + addedClass : addedClass);
             }
 
             return me;
@@ -4991,7 +4991,7 @@ Ext.define('Ext.dom.Element', function(Element) {
          * @return {Ext.dom.Element} this
          */
         toggleCls: function(className, state){
-            if (typeof state !== 'boolean') {
+            if (typeof state !== &#39;boolean&#39;) {
                 state = !this.hasCls(className);
             }
 
@@ -4999,7 +4999,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
 <span id='Ext-dom-Element-method-toggle'>        /**
-</span>         * Toggles the element's visibility, depending on visibility mode.
+</span>         * Toggles the element&#39;s visibility, depending on visibility mode.
          * @return {Ext.dom.Element} this
          */
         toggle: function() {
@@ -5008,14 +5008,14 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
         translate: function() {
-            var transformStyleName = 'webkitTransform' in DOC.createElement('div').style ? 'webkitTransform' : 'transform';
+            var transformStyleName = &#39;webkitTransform&#39; in DOC.createElement(&#39;div&#39;).style ? &#39;webkitTransform&#39; : &#39;transform&#39;;
 
             return function(x, y, z) {
 
                 x = Math.round(x);
                 y = Math.round(y);
                 z = Math.round(z);
-                this.dom.style[transformStyleName] = 'translate3d(' + (x || 0) + 'px, ' + (y || 0) + 'px, ' + (z || 0) + 'px)';
+                this.dom.style[transformStyleName] = &#39;translate3d(&#39; + (x || 0) + &#39;px, &#39; + (y || 0) + &#39;px, &#39; + (z || 0) + &#39;px)&#39;;
             };
         }(),
 
@@ -5032,8 +5032,8 @@ Ext.define('Ext.dom.Element', function(Element) {
             cached = Ext.cache[activeElement.id];
             
             // If the element is in the cache, we need to get the instance so
-            // we can suspend events on it. If it's not in the cache, it can't
-            // have any events so we don't need to suspend on it.
+            // we can suspend events on it. If it&#39;s not in the cache, it can&#39;t
+            // have any events so we don&#39;t need to suspend on it.
             if (cached) {
                 activeElement = cached;
             }
@@ -5051,7 +5051,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 
                 // See wrap() for the explanation of this jiggery-trickery
                 if (resumeFocus) {
-                    tabIndex = grandparentNode.getAttribute('tabIndex');
+                    tabIndex = grandparentNode.getAttribute(&#39;tabIndex&#39;);
                     
                     grannyFly = Ext.fly(grandparentNode);
                     grannyFly.set({ tabIndex: -1 });
@@ -5086,7 +5086,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
 <span id='Ext-dom-Element-method-up'>        /**.
-</span>         * Walks up the dom looking for a parent node that matches the passed simple selector (e.g. 'div.some-class' or 'span:first-child').
+</span>         * Walks up the dom looking for a parent node that matches the passed simple selector (e.g. &#39;div.some-class&#39; or &#39;span:first-child&#39;).
          * This is a shortcut for findParentNode() that always returns an Ext.dom.Element.
          * @param {String} selector The simple selector to test. See {@link Ext.dom.Query} for information about simple selectors.
          * @param {Number/String/HTMLElement/Ext.dom.Element} [limit]
@@ -5127,8 +5127,8 @@ Ext.define('Ext.dom.Element', function(Element) {
             cached = Ext.cache[activeElement.id];
             
             // If the element is in the cache, we need to get the instance so
-            // we can suspend events on it. If it's not in the cache, it can't
-            // have any events so we don't need to suspend on it.
+            // we can suspend events on it. If it&#39;s not in the cache, it can&#39;t
+            // have any events so we don&#39;t need to suspend on it.
             if (cached) {
                 activeElement = cached;
             }
@@ -5146,7 +5146,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 // DOM nodes that contain focus. When this happens, focus will fall back
                 // to the document body *after* the present code execution path finishes,
                 // with no way to control this. Instead of trying to refocus the element
-                // asynchronously in a callback, we're focusing the wrapper instead,
+                // asynchronously in a callback, we&#39;re focusing the wrapper instead,
                 // adding the dom to the wrapper, and then refocusing the dom;
                 // all synchronous and dandy.
                 // The only side effect of all this focus juggling is that focus/blur
@@ -5155,8 +5155,8 @@ Ext.define('Ext.dom.Element', function(Element) {
                 // Focus event publisher will look for focus suspension flag on the element,
                 // and since the flag is cleared asynchronously in the immediate callback,
                 // we have enough cycles to ignore unwanted events to get away with it
-                // but not too many to step on someone else's toes (hopefully).
-                tabIndex = newEl.dom.getAttribute('tabIndex');
+                // but not too many to step on someone else&#39;s toes (hopefully).
+                tabIndex = newEl.dom.getAttribute(&#39;tabIndex&#39;);
                 newEl.set({ tabIndex: -1 });
                 
                 newEl.suspendFocusEvents();
@@ -5178,7 +5178,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 
                 newEl.resumeFocusEvents();
                 
-                // Most often tabIndex will be undefined, and we don't want to
+                // Most often tabIndex will be undefined, and we don&#39;t want to
                 // make the wrapper focusable by accident.
                 newEl.set({ tabIndex: tabIndex });
             }
@@ -5239,7 +5239,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
                     if (observableDoAddListener.call(me, eventName, fn, scope, options, order, caller, manager)) {
                         if (me.longpressEvents[eventName] &amp;&amp; (++me.longpressListenerCount === 1)) {
-                            me.on('MSHoldVisual', 'preventMsHoldVisual', me);
+                            me.on(&#39;MSHoldVisual&#39;, &#39;preventMsHoldVisual&#39;, me);
                         }
                     }
 
@@ -5247,7 +5247,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                         delete options.managedName;
                     }
 
-                    // after the listener has been added to the ListenerStack, it's original
+                    // after the listener has been added to the ListenerStack, it&#39;s original
                     // &quot;type&quot; (for translated events) will be stored on the listener object in
                     // the ListenerStack.  We can now delete type from the options object
                     // since it is not a user-supplied option
@@ -5297,7 +5297,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
                     if (removed) {
                         if (me.longpressEvents[eventName] &amp;&amp; !--me.longpressListenerCount) {
-                            me.un('MSHoldVisual', 'preventMsHoldVisual', me);
+                            me.un(&#39;MSHoldVisual&#39;, &#39;preventMsHoldVisual&#39;, me);
                         }
                     }
                 }
@@ -5312,7 +5312,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                     display = data[ORIGINALDISPLAY];
 
                 if (display === undefined) {
-                    data[ORIGINALDISPLAY] = display = '';
+                    data[ORIGINALDISPLAY] = display = &#39;&#39;;
                 }
                 return display;
             },
@@ -5329,9 +5329,9 @@ Ext.define('Ext.dom.Element', function(Element) {
 
                 // Dom publisher acts as the default publisher for all events that are
                 // not explicitly handled by another publisher.
-                // ElementSize handles the 'resize' event, except on the window
+                // ElementSize handles the &#39;resize&#39; event, except on the window
                 // object, where it is handled by Dom publisher.
-                if (!publisher || (this.dom === window &amp;&amp; eventName === 'resize')) {
+                if (!publisher || (this.dom === window &amp;&amp; eventName === &#39;resize&#39;)) {
                     publisher = Publisher.publishers.dom;
                 }
 
@@ -5348,7 +5348,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             suspendFocusEvents: function() {
                 if (!this.isFly) {
-                    this.suspendEvent('focus', 'blur');
+                    this.suspendEvent(&#39;focus&#39;, &#39;blur&#39;);
                 }
                 
                 this.getData().suspendFocusEvents = true;
@@ -5366,7 +5366,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                         }
                         
                         if (!this.isFly) {
-                            this.resumeEvent('focus', 'blur');
+                            this.resumeEvent(&#39;focus&#39;, &#39;blur&#39;);
                         }
                     }
                 }
@@ -5383,7 +5383,7 @@ Ext.define('Ext.dom.Element', function(Element) {
         },
 
         deprecated: {
-            '5.0': {
+            &#39;5.0&#39;: {
                 methods: {
 <span id='Ext-dom-Element-method-cssTranslate'>                    /**
 </span>                     * @method cssTranslate
@@ -5397,7 +5397,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                      * @inheritdoc Ext.dom.Element#getHtml
                      * @deprecated 5.0.0 Please use {@link #getHtml} instead.
                      */
-                    getHTML: 'getHtml',
+                    getHTML: &#39;getHtml&#39;,
 
 <span id='Ext-dom-Element-method-getOuterHeight'>                    /**
 </span>                     * @method getOuterHeight
@@ -5415,18 +5415,18 @@ Ext.define('Ext.dom.Element', function(Element) {
 
 <span id='Ext-dom-Element-method-getPageBox'>                    /**
 </span>                     * Returns an object defining the area of this Element which can be passed to
-                     * {@link Ext.util.Positionable#setBox} to set another Element's size/location to match this element.
+                     * {@link Ext.util.Positionable#setBox} to set another Element&#39;s size/location to match this element.
                      *
                      * @param {Boolean} [asRegion] If true an Ext.util.Region will be returned
                      * @return {Object/Ext.util.Region} box An object in the following format:
                      *
                      *     {
-                     *         left: &lt;Element's X position&gt;,
-                     *         top: &lt;Element's Y position&gt;,
-                     *         width: &lt;Element's width&gt;,
-                     *         height: &lt;Element's height&gt;,
-                     *         bottom: &lt;Element's lower bound&gt;,
-                     *         right: &lt;Element's rightmost bound&gt;
+                     *         left: &lt;Element&#39;s X position&gt;,
+                     *         top: &lt;Element&#39;s Y position&gt;,
+                     *         width: &lt;Element&#39;s width&gt;,
+                     *         height: &lt;Element&#39;s height&gt;,
+                     *         bottom: &lt;Element&#39;s lower bound&gt;,
+                     *         right: &lt;Element&#39;s rightmost bound&gt;
                      *     }
                      *
                      * The returned object may also be addressed as an Array where index 0 contains
@@ -5438,7 +5438,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                     getPageBox: function(getRegion) {
                         var me = this,
                             dom = me.dom,
-                            isDoc = dom.nodeName === 'BODY',
+                            isDoc = dom.nodeName === &#39;BODY&#39;,
                             w = isDoc ? Element.getViewportWidth() : dom.offsetWidth,
                             h = isDoc ? Element.getViewportHeight() : dom.offsetHeight,
                             xy = me.getXY(),
@@ -5478,7 +5478,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
 <span id='Ext-dom-Element-method-isTransparent'>                    /**
 </span>                     * Returns `true` if the value of the given property is visually transparent. This
-                     * may be due to a 'transparent' style value or an rgba value with 0 in the alpha
+                     * may be due to a &#39;transparent&#39; style value or an rgba value with 0 in the alpha
                      * component.
                      * @param {String} prop The style property whose value is to be tested.
                      * @return {Boolean} `true` if the style property is visually transparent.
@@ -5495,25 +5495,25 @@ Ext.define('Ext.dom.Element', function(Element) {
                      * @inheritdoc Ext.dom.Element#clearListeners
                      * @deprecated 5.0.0 Please use {@link #clearListeners} instead.
                      */
-                    purgeAllListeners: 'clearListeners',
+                    purgeAllListeners: &#39;clearListeners&#39;,
 
 <span id='Ext-dom-Element-method-removeAllListeners'>                    /**
 </span>                     * @method removeAllListeners
                      * @inheritdoc Ext.dom.Element#clearListeners
                      * @deprecated 5.0.0 Please use {@link #clearListeners} instead.
                      */
-                    removeAllListeners: 'clearListeners',
+                    removeAllListeners: &#39;clearListeners&#39;,
 
 <span id='Ext-dom-Element-method-setHTML'>                    /**
 </span>                     * @method setHTML
                      * @inheritdoc Ext.dom.Element#setHtml
                      * @deprecated 5.0.0 Please use {@link #setHtml} instead.
                      */
-                    setHTML: 'setHtml',
+                    setHTML: &#39;setHtml&#39;,
 
 <span id='Ext-dom-Element-method-setTopLeft'>                    /**
 </span>                     * @method setTopLeft
-                     * Sets the element's top and left positions directly using CSS style.
+                     * Sets the element&#39;s top and left positions directly using CSS style.
                      * @removed 5.0.0
                      */
                     setTopLeft: null
@@ -5526,29 +5526,29 @@ Ext.define('Ext.dom.Element', function(Element) {
         docEl = DOC.documentElement,
         prototype = Element.prototype,
         supports = Ext.supports,
-        pointerdown = 'pointerdown',
-        pointermove = 'pointermove',
-        pointerup = 'pointerup',
-        pointercancel = 'pointercancel',
-        MSPointerDown = 'MSPointerDown',
-        MSPointerMove = 'MSPointerMove',
-        MSPointerUp = 'MSPointerUp',
-        MSPointerCancel = 'MSPointerCancel',
-        mousedown = 'mousedown',
-        mousemove = 'mousemove',
-        mouseup = 'mouseup',
-        mouseover = 'mouseover',
-        mouseout = 'mouseout',
-        mouseenter = 'mouseenter',
-        mouseleave = 'mouseleave',
-        touchstart = 'touchstart',
-        touchmove = 'touchmove',
-        touchend = 'touchend',
-        touchcancel = 'touchcancel',
-        click = 'click',
-        dblclick = 'dblclick',
-        tap = 'tap',
-        doubletap = 'doubletap',
+        pointerdown = &#39;pointerdown&#39;,
+        pointermove = &#39;pointermove&#39;,
+        pointerup = &#39;pointerup&#39;,
+        pointercancel = &#39;pointercancel&#39;,
+        MSPointerDown = &#39;MSPointerDown&#39;,
+        MSPointerMove = &#39;MSPointerMove&#39;,
+        MSPointerUp = &#39;MSPointerUp&#39;,
+        MSPointerCancel = &#39;MSPointerCancel&#39;,
+        mousedown = &#39;mousedown&#39;,
+        mousemove = &#39;mousemove&#39;,
+        mouseup = &#39;mouseup&#39;,
+        mouseover = &#39;mouseover&#39;,
+        mouseout = &#39;mouseout&#39;,
+        mouseenter = &#39;mouseenter&#39;,
+        mouseleave = &#39;mouseleave&#39;,
+        touchstart = &#39;touchstart&#39;,
+        touchmove = &#39;touchmove&#39;,
+        touchend = &#39;touchend&#39;,
+        touchcancel = &#39;touchcancel&#39;,
+        click = &#39;click&#39;,
+        dblclick = &#39;dblclick&#39;,
+        tap = &#39;tap&#39;,
+        doubletap = &#39;doubletap&#39;,
         eventMap = prototype.eventMap = {},
         additiveEvents = prototype.additiveEvents = {},
         oldId = Ext.id,
@@ -5572,7 +5572,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             if (Ext.isSandboxed) {
                 sandboxPrefix = Ext.sandboxPrefix ||
-                    (Ext.sandboxPrefix = Ext.sandboxName.toLowerCase() + '-');
+                    (Ext.sandboxPrefix = Ext.sandboxName.toLowerCase() + &#39;-&#39;);
                 id = sandboxPrefix + id;
             }
 
@@ -5598,16 +5598,16 @@ Ext.define('Ext.dom.Element', function(Element) {
         // use case where user code requested a pointer event, however mouseover/mouseout
         // events are not cancellable, period.
         // http://www.w3.org/TR/pointerevents/#mapping-for-devices-that-do-not-support-hover
-        // To ensure mouseover/out handlers don't fire when touching the screen, we need
+        // To ensure mouseover/out handlers don&#39;t fire when touching the screen, we need
         // to translate them to their pointer equivalents
-        eventMap[mouseover] = 'pointerover';
-        eventMap[mouseout] = 'pointerout';
-        eventMap[mouseenter] = 'pointerenter';
+        eventMap[mouseover] = &#39;pointerover&#39;;
+        eventMap[mouseout] = &#39;pointerout&#39;;
+        eventMap[mouseenter] = &#39;pointerenter&#39;;
         // No decent way to feature detect this, pointerleave relatedTarget is
         // incorrect on IE11, so force it to use mouseleave here.
         // See: https://connect.microsoft.com/IE/feedback/details/851111/ev-relatedtarget-in-pointerleave-indicates-departure-element-not-destination-element
         if (!Ext.isIE11) {
-            eventMap[mouseleave] = 'pointerleave';
+            eventMap[mouseleave] = &#39;pointerleave&#39;;
         }
     } else if (supports.MSPointerEvents) {
         // IE10
@@ -5625,8 +5625,8 @@ Ext.define('Ext.dom.Element', function(Element) {
 
         // translate mouseover/out so they can be prevented on touch screens.
         // (see above comment in the PointerEvents section)
-        eventMap[mouseover] = 'MSPointerOver';
-        eventMap[mouseout] = 'MSPointerOut';
+        eventMap[mouseover] = &#39;MSPointerOver&#39;;
+        eventMap[mouseout] = &#39;MSPointerOut&#39;;
     } else if (supports.TouchEvents) {
         eventMap[pointerdown] = touchstart;
         eventMap[pointermove] = touchmove;
@@ -5684,13 +5684,13 @@ Ext.define('Ext.dom.Element', function(Element) {
     if (Ext.isWebKit) {
         // These properties were carried forward from touch-2.x. This translation used
         // do be done by DomPublisher.  TODO: do we still need this?
-        eventMap.transitionend = Ext.browser.getVendorProperyName('transitionEnd');
-        eventMap.animationstart = Ext.browser.getVendorProperyName('animationStart');
-        eventMap.animationend = Ext.browser.getVendorProperyName('animationEnd');
+        eventMap.transitionend = Ext.browser.getVendorProperyName(&#39;transitionEnd&#39;);
+        eventMap.animationstart = Ext.browser.getVendorProperyName(&#39;animationStart&#39;);
+        eventMap.animationend = Ext.browser.getVendorProperyName(&#39;animationEnd&#39;);
     }
 
     if (!Ext.supports.MouseWheel &amp;&amp; !Ext.isOpera) {
-        eventMap.mousewheel = 'DOMMouseScroll';
+        eventMap.mousewheel = &#39;DOMMouseScroll&#39;;
     }
 
     eventOptions = prototype.$eventOptions = Ext.Object.chain(prototype.$eventOptions);
@@ -5699,13 +5699,13 @@ Ext.define('Ext.dom.Element', function(Element) {
             // Ext.Element also needs &quot;element&quot; as one of its event options.  Even though
             // it does not directly process an element option, it may receive a listeners
             // object that was passed through from a Component with the &quot;element&quot; option
-            // included. Including &quot;element&quot; in the event options ensures we don't attempt
+            // included. Including &quot;element&quot; in the event options ensures we don&#39;t attempt
             // to process &quot;element&quot; as an event name.
             eventOptions.element = 1;
 
 
     prototype.styleHooks.opacity = {
-        name: 'opacity',
+        name: &#39;opacity&#39;,
         afterSet: function(dom, value, el) {
             var shadow = el.shadow;
             if (shadow) {
@@ -5749,12 +5749,12 @@ Ext.define('Ext.dom.Element', function(Element) {
          * Here are some examples:
          *
          *     // gets dom node based on id
-         *     var elDom = Ext.getDom('elId');
+         *     var elDom = Ext.getDom(&#39;elId&#39;);
          *
          *     // gets dom node based on the dom node
          *     var elDom1 = Ext.getDom(elDom);
          *
-         *     // If we don't know if we are working with an
+         *     // If we don&#39;t know if we are working with an
          *     // Ext.Element or a dom node use Ext.getDom
          *     function(el){
          *         var dom = Ext.getDom(el);
@@ -5772,8 +5772,8 @@ Ext.define('Ext.dom.Element', function(Element) {
                 return null;
             }
 
-            // We could be passed an Element whos dom has been nulled on destruction; use 'dom' in rather than truthiness.
-            return typeof el === 'string' ? Ext.getElementById(el) : 'dom' in el ? el.dom : el;
+            // We could be passed an Element whos dom has been nulled on destruction; use &#39;dom&#39; in rather than truthiness.
+            return typeof el === &#39;string&#39; ? Ext.getElementById(el) : &#39;dom&#39; in el ? el.dom : el;
         },
 
 <span id='Ext-method-getBody'>        /**
@@ -5800,7 +5800,7 @@ Ext.define('Ext.dom.Element', function(Element) {
          */
         getHead: function() {
             if (!Ext._headEl) {
-                Ext._headEl = Ext.get(DOC.head || DOC.getElementsByTagName('head')[0]);
+                Ext._headEl = Ext.get(DOC.head || DOC.getElementsByTagName(&#39;head&#39;)[0]);
             }
 
             return Ext._headEl;
@@ -5858,7 +5858,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             if (el) {
                 el.destroy();
-            } else if(node &amp;&amp; (node.nodeType === 3 || node.tagName.toUpperCase() !== 'BODY')) {
+            } else if(node &amp;&amp; (node.nodeType === 3 || node.tagName.toUpperCase() !== &#39;BODY&#39;)) {
                 parent = node.parentNode;
                 if (parent) {
                     parent.removeChild(node);
@@ -5874,13 +5874,13 @@ Ext.define('Ext.dom.Element', function(Element) {
         // use by collectGarbage and Ext.get()
         return dom &amp;&amp;
             // window, document, documentElement, and body can never be garbage.
-            dom.nodeType === 1 &amp;&amp; dom.tagName !== 'BODY' &amp;&amp; dom.tagName !== 'HTML' &amp;&amp;
+            dom.nodeType === 1 &amp;&amp; dom.tagName !== &#39;BODY&#39; &amp;&amp; dom.tagName !== &#39;HTML&#39; &amp;&amp;
             // if the element does not have a parent node, it is definitely not in the
             // DOM - we can exit immediately
             (!dom.parentNode ||
             // If the element has an offsetParent we can bail right away, it is
             // definitely in the DOM. If offsetParent is null, the element is detached.
-            // If offsetParent is undefined, the element doesn't support offsetParent
+            // If offsetParent is undefined, the element doesn&#39;t support offsetParent
             // (e.g. SVGElement) and is not necessarily garbage; parentNode check above
             // should be sufficient in this case.
             (dom.offsetParent === null &amp;&amp;
@@ -5915,8 +5915,8 @@ Ext.define('Ext.dom.Element', function(Element) {
                 // the proximity of the last focus change relative to window resize events
                 // alowing us to guess with reasonable certainty that a virtual keyboard
                 // is being shown.
-                focusin: '_onWindowFocusChange',
-                focusout: '_onWindowFocusChange',
+                focusin: &#39;_onWindowFocusChange&#39;,
+                focusout: &#39;_onWindowFocusChange&#39;,
                 // This pointerup listener is needed because in windowsthe virtual keyboard
                 // can be hidden manually while the editable element retains focus by tapping
                 // a hide button on the virtual keyboard itself. The virtual keyboard can then
@@ -5924,7 +5924,7 @@ Ext.define('Ext.dom.Element', function(Element) {
                 // element does not fire a focusin event since it already has the focus, but
                 // we still need to track that an event occurred which will cause the virtual
                 // keyboard to show momentarily.
-                pointerup: '_onWindowFocusChange',
+                pointerup: &#39;_onWindowFocusChange&#39;,
                 capture: true,
                 delegated: false,
                 delay: 1,
@@ -5933,7 +5933,7 @@ Ext.define('Ext.dom.Element', function(Element) {
 
             win.on({
                 // Resize listener for tracking virtual keyboard state.
-                resize: '_onWindowResize',
+                resize: &#39;_onWindowResize&#39;,
                 priority: 2000,
                 scope: Element
             });

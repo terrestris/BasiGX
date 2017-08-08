@@ -38,10 +38,10 @@
  *
  * @class BasiGX.util.MsgBox
  */
-Ext.define('BasiGX.util.MsgBox', {
+Ext.define(&#39;BasiGX.util.MsgBox&#39;, {
     requires: [
-        'Ext.util.DelayedTask',
-        'Ext.window.MessageBox'
+        &#39;Ext.util.DelayedTask&#39;,
+        &#39;Ext.window.MessageBox&#39;
     ],
     statics: {
 
@@ -54,10 +54,10 @@ Ext.define('BasiGX.util.MsgBox', {
         toFrontDelayMS: 50,
 
 <span id='BasiGX-util-MsgBox-static-property-msgBoxTitleInfo'>        /*begin i18n*/
-</span>        msgBoxTitleInfo: 'Info',
-<span id='BasiGX-util-MsgBox-static-property-msgBoxTitleWarn'>        msgBoxTitleWarn: 'Warn',
-</span><span id='BasiGX-util-MsgBox-static-property-msgBoxTitleError'>        msgBoxTitleError: 'Error',
-</span><span id='BasiGX-util-MsgBox-static-property-msgBoxTitlePrompt'>        msgBoxTitlePrompt: 'Question',
+</span>        msgBoxTitleInfo: &#39;Info&#39;,
+<span id='BasiGX-util-MsgBox-static-property-msgBoxTitleWarn'>        msgBoxTitleWarn: &#39;Warn&#39;,
+</span><span id='BasiGX-util-MsgBox-static-property-msgBoxTitleError'>        msgBoxTitleError: &#39;Error&#39;,
+</span><span id='BasiGX-util-MsgBox-static-property-msgBoxTitlePrompt'>        msgBoxTitlePrompt: &#39;Question&#39;,
 </span>        /*end i18n*/
 
 <span id='BasiGX-util-MsgBox-static-method-bringToFront'>        /**
@@ -92,7 +92,7 @@ Ext.define('BasiGX.util.MsgBox', {
 <span id='BasiGX-util-MsgBox-static-method-show'>        /**
 </span>         * Basic show method used by the various specific implementations.
          *
-         * @param {String} msg The message that we'll show.
+         * @param {String} msg The message that we&#39;ll show.
          * @param {Object} [defaultConf] The specific configuration default as
          *     described in the {@link Ext.MessageBox#method-show show-method}
          *     of the Ext.MessageBox. Will be set from the public methods.
@@ -115,7 +115,7 @@ Ext.define('BasiGX.util.MsgBox', {
          * Can be further configured with the options specified in the {@link
          * Ext.MessageBox#method-show show-method of the Ext.MessageBox-class}.
          *
-         * @param {String} msg The message that we'll show.
+         * @param {String} msg The message that we&#39;ll show.
          * @param {Object} [userConf] Optional configuration as described in the
          *     {@link Ext.MessageBox#method-show show-method of the
          *     Ext.MessageBox}.
@@ -136,7 +136,7 @@ Ext.define('BasiGX.util.MsgBox', {
          * Can be further configured with the options specified in the {@link
          * Ext.MessageBox#method-show show-method of the Ext.MessageBox-class}.
          *
-         * @param {String} msg The message that we'll show.
+         * @param {String} msg The message that we&#39;ll show.
          * @param {Object} [userConf] Optional configuration as described in the
          *     {@link Ext.MessageBox#method-show show-method of the
          *     Ext.MessageBox}.
@@ -157,7 +157,7 @@ Ext.define('BasiGX.util.MsgBox', {
          * Can be further configured with the options specified in the {@link
          * Ext.MessageBox#method-show show-method of the Ext.MessageBox-class}.
          *
-         * @param {String} msg The message that we'll show.
+         * @param {String} msg The message that we&#39;ll show.
          * @param {Object} [userConf] Optional configuration as described in the
          *     {@link Ext.MessageBox#method-show show-method of the
          *     Ext.MessageBox}.
@@ -178,7 +178,7 @@ Ext.define('BasiGX.util.MsgBox', {
          * Can be further configured with the options specified in the {@link
          * Ext.MessageBox#method-show show-method of the Ext.MessageBox-class}.
          *
-         * @param {String} msg The message that we'll show.
+         * @param {String} msg The message that we&#39;ll show.
          * @param {Object} [userConf] Optional configuration as described in the
          *     {@link Ext.MessageBox#method-show show-method of the
          *     Ext.MessageBox}.
@@ -201,7 +201,7 @@ Ext.define('BasiGX.util.MsgBox', {
          * Can be further configured with the options specified in the {@link
          * Ext.MessageBox#method-show show-method of the Ext.MessageBox-class}.
          *
-         * @param {String} msg The message that we'll show.
+         * @param {String} msg The message that we&#39;ll show.
          * @param {Object} [userConf] Optional configuration as described in the
          *     {@link Ext.MessageBox#method-show show-method of the
          *     Ext.MessageBox}.
@@ -265,13 +265,13 @@ Ext.define('BasiGX.util.MsgBox', {
          *
          *     BasiGX.prompt(&quot;Please enter name for whatever&quot;, {
          *         fn: function(decision, text){
-         *             if (decision === 'ok') {
+         *             if (decision === &#39;ok&#39;) {
          *                 alert(&quot;You entered &quot; + text);
          *             } else {
          *                 alert(&quot;Action cancelled.&quot;);
          *             }
          *         },
-         *         value: 'prefilled value'
+         *         value: &#39;prefilled value&#39;
          *     });
          *
          * @member BasiGX
@@ -287,7 +287,7 @@ Ext.define('BasiGX.util.MsgBox', {
          *
          *     BasiGX.confirm(&quot;Please enter name for whatever&quot;, {
          *         fn: function(decision){
-         *             if (decision === 'yes') {
+         *             if (decision === &#39;yes&#39;) {
          *                 alert(&quot;You chose yes&quot;);
          *             } else {
          *                 alert(&quot;Action cancelled.&quot;);

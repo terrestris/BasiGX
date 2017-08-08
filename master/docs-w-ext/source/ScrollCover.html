@@ -18,10 +18,10 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-layout-card-ScrollCover'>/**
 </span> * @private
  */
-Ext.define('Ext.fx.layout.card.ScrollCover', {
-    extend: 'Ext.fx.layout.card.Scroll',
+Ext.define(&#39;Ext.fx.layout.card.ScrollCover&#39;, {
+    extend: &#39;Ext.fx.layout.card.Scroll&#39;,
 
-    alias: 'fx.layout.card.scrollcover',
+    alias: &#39;fx.layout.card.scrollcover&#39;,
 
 <span id='Ext-fx-layout-card-ScrollCover-method-onActiveItemChange'>    onActiveItemChange: function(cardLayout, inItem, outItem, controller) {
 </span>        var containerElement, containerSize, xy, animConfig,
@@ -40,18 +40,18 @@ Ext.define('Ext.fx.layout.card.ScrollCover', {
                 duration: this.getDuration()
             };
 
-            inItem.renderElement.dom.style.setProperty('visibility', 'hidden', 'important');
+            inItem.renderElement.dom.style.setProperty(&#39;visibility&#39;, &#39;hidden&#39;, &#39;important&#39;);
             inTranslate = inItem.setTranslatable(true).getTranslatable();
             outTranslate = outItem.setTranslatable(true).getTranslatable();
 
             outTranslate.translate({ x: 0, y: 0});
             inTranslate.translate({ x: xy.left, y: xy.top});
-            inTranslate.getWrapper().dom.style.setProperty('z-index', '100', 'important');
+            inTranslate.getWrapper().dom.style.setProperty(&#39;z-index&#39;, &#39;100&#39;, &#39;important&#39;);
             inItem.show();
 
             inTranslate.on({
-                animationstart: 'onInAnimationStart',
-                animationend: 'onInAnimationEnd',
+                animationstart: &#39;onInAnimationStart&#39;,
+                animationend: &#39;onInAnimationEnd&#39;,
                 scope: this
             });
             inTranslate.translateAnimated({ x: 0, y: 0}, animConfig);
@@ -61,11 +61,11 @@ Ext.define('Ext.fx.layout.card.ScrollCover', {
     },
 
 <span id='Ext-fx-layout-card-ScrollCover-method-onInAnimationStart'>    onInAnimationStart: function() {
-</span>        this.inItem.renderElement.dom.style.removeProperty('visibility');
+</span>        this.inItem.renderElement.dom.style.removeProperty(&#39;visibility&#39;);
     },
 
 <span id='Ext-fx-layout-card-ScrollCover-method-onInAnimationEnd'>    onInAnimationEnd: function() {
-</span>        this.inItem.getTranslatable().getWrapper().dom.style.removeProperty('z-index'); // Remove this when we can remove translatable
+</span>        this.inItem.getTranslatable().getWrapper().dom.style.removeProperty(&#39;z-index&#39;); // Remove this when we can remove translatable
         this.currentEventController.resume();
     }
 });

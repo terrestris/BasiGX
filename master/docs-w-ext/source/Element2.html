@@ -22,29 +22,29 @@
  * created directly, the {@link Ext.dom.Element} will be passed to the animation and
  * and the appropriate target will be created.
  */
-Ext.define('Ext.fx.target.Element', {
+Ext.define(&#39;Ext.fx.target.Element&#39;, {
 
     /* Begin Definitions */
     
-    extend: 'Ext.fx.target.Target',
+    extend: &#39;Ext.fx.target.Target&#39;,
     
 <span id='Ext-fx-target-Element-property-type'>    /* End Definitions */
 </span>
-    type: 'element',
+    type: &#39;element&#39;,
 
 <span id='Ext-fx-target-Element-method-getElVal'>    getElVal: function(el, attr, val) {
 </span>        if (val === undefined) {
-            if (attr === 'x') {
+            if (attr === &#39;x&#39;) {
                 val = el.getX();
-            } else if (attr === 'y') {
+            } else if (attr === &#39;y&#39;) {
                 val = el.getY();
-            } else if (attr === 'scrollTop') {
+            } else if (attr === &#39;scrollTop&#39;) {
                 val = el.getScroll().top;
-            } else if (attr === 'scrollLeft') {
+            } else if (attr === &#39;scrollLeft&#39;) {
                 val = el.getScroll().left;
-            } else if (attr === 'height') {
+            } else if (attr === &#39;height&#39;) {
                 val = el.getHeight();
-            } else if (attr === 'width') {
+            } else if (attr === &#39;width&#39;) {
                 val = el.getWidth();
             } else {
                 val = el.getStyle(attr);
@@ -77,17 +77,17 @@ Ext.define('Ext.fx.target.Element', {
     },
     
 <span id='Ext-fx-target-Element-method-setElVal'>    setElVal: function(element, attr, value){
-</span>        if (attr === 'x') {
+</span>        if (attr === &#39;x&#39;) {
             element.setX(value);
-        } else if (attr === 'y') {
+        } else if (attr === &#39;y&#39;) {
             element.setY(value);
-        } else if (attr === 'scrollTop') {
-            element.scrollTo('top', value);
-        } else if (attr === 'scrollLeft') {
-            element.scrollTo('left',value);
-        } else if (attr === 'width') {
+        } else if (attr === &#39;scrollTop&#39;) {
+            element.scrollTo(&#39;top&#39;, value);
+        } else if (attr === &#39;scrollLeft&#39;) {
+            element.scrollTo(&#39;left&#39;,value);
+        } else if (attr === &#39;width&#39;) {
             element.setWidth(value);
-        } else if (attr === 'height') {
+        } else if (attr === &#39;height&#39;) {
             element.setHeight(value);
         } else {
             element.setStyle(attr, value);

@@ -37,12 +37,12 @@
  *
  * @class BasiGX.view.button.Hsi
  */
-Ext.define('BasiGX.view.button.Hsi', {
-    extend: 'BasiGX.view.button.Base',
-    xtype: 'basigx-button-hsi',
+Ext.define(&#39;BasiGX.view.button.Hsi&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-hsi&#39;,
     requires: [
-        'Ext.app.ViewModel',
-        'BasiGX.util.Map'
+        &#39;Ext.app.ViewModel&#39;,
+        &#39;BasiGX.util.Map&#39;
     ],
 
 <span id='BasiGX-view-button-Hsi-property-viewModel'>    /**
@@ -50,14 +50,14 @@ Ext.define('BasiGX.view.button.Hsi', {
      */
     viewModel: {
         data: {
-            tooltip: 'Informationsabfrage',
+            tooltip: &#39;Informationsabfrage&#39;,
             text: null,
-            documentation: '&lt;h2&gt;Informationsabfrage&lt;/h2&gt;• Ein Klick auf den ' +
-                'Button aktiviert bzw. deaktiviert die Informationsabfrage ' +
-                'in der Karte.&lt;br&gt;• Wenn Sie sich bei aktiviertem Werkzeug ' +
-                'mit der Maus über ein abfragbares Kartenthema befinden, ' +
-                'wird die Information zu diesem Objekt in einem Fenster ' +
-                'dargestellt'
+            documentation: &#39;&lt;h2&gt;Informationsabfrage&lt;/h2&gt;• Ein Klick auf den &#39; +
+                &#39;Button aktiviert bzw. deaktiviert die Informationsabfrage &#39; +
+                &#39;in der Karte.&lt;br&gt;• Wenn Sie sich bei aktiviertem Werkzeug &#39; +
+                &#39;mit der Maus über ein abfragbares Kartenthema befinden, &#39; +
+                &#39;wird die Information zu diesem Objekt in einem Fenster &#39; +
+                &#39;dargestellt&#39;
         }
     },
 
@@ -65,15 +65,15 @@ Ext.define('BasiGX.view.button.Hsi', {
 </span>     *
      */
     bind: {
-        text: '{text}'
+        text: &#39;{text}&#39;
     },
 
 <span id='BasiGX-view-button-Hsi-property-glyph'>    /**
 </span>     * The icons the button should use.
      * Classic Toolkit uses glyphs, modern toolkit uses html
      */
-    glyph: 'xf05a@FontAwesome',
-<span id='BasiGX-view-button-Hsi-property-html'>    html: '&lt;i class=&quot;fa fa-info-circle fa-2x&quot;&gt;&lt;/i&gt;',
+    glyph: &#39;xf05a@FontAwesome&#39;,
+<span id='BasiGX-view-button-Hsi-property-html'>    html: &#39;&lt;i class=&quot;fa fa-info-circle fa-2x&quot;&gt;&lt;/i&gt;&#39;,
 </span>
 <span id='BasiGX-view-button-Hsi-property-enableToggle'>    /**
 </span>     *
@@ -91,7 +91,7 @@ Ext.define('BasiGX.view.button.Hsi', {
     config: {
 <span id='BasiGX-view-button-Hsi-cfg-mapPanelXType'>        /**
 </span>         * Placeholder for the xtype of the map component (e.g.
-         * 'basigx-component-map'). Will be used to be able to determine the map
+         * &#39;basigx-component-map&#39;). Will be used to be able to determine the map
          * component dynamically
          */
         mapPanelXType: null,
@@ -117,7 +117,7 @@ Ext.define('BasiGX.view.button.Hsi', {
             this.setPressed(this.buttonPressed);
         } else {
             this.setCls(this.buttonPressed ? this.getPressedCls() :
-                'basigx-map-tool-button');
+                &#39;basigx-map-tool-button&#39;);
         }
         this.setControlStatus(this.buttonPressed);
     },

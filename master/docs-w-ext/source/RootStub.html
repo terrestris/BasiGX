@@ -19,11 +19,11 @@
 </span> * This class is the root stub for managing a `ViewModel`.
  * @private
  */
-Ext.define('Ext.app.bind.RootStub', {
-    extend: 'Ext.app.bind.AbstractStub',
+Ext.define(&#39;Ext.app.bind.RootStub&#39;, {
+    extend: &#39;Ext.app.bind.AbstractStub&#39;,
     requires: [
-        'Ext.app.bind.LinkStub',
-        'Ext.app.bind.Stub'
+        &#39;Ext.app.bind.LinkStub&#39;,
+        &#39;Ext.app.bind.Stub&#39;
     ],
 
 <span id='Ext-app-bind-RootStub-property-isRootStub'>    isRootStub: true,
@@ -43,7 +43,7 @@ Ext.define('Ext.app.bind.RootStub', {
             stub = new Ext.app.bind.Stub(owner, name, parentStub);
         } else {
             stub = new Ext.app.bind.LinkStub(owner, name, previous ? null : parentStub);
-            stub.link('{' + name + '}', parentVM);
+            stub.link(&#39;{&#39; + name + &#39;}&#39;, parentVM);
         }
 
         if (previous) {
@@ -72,10 +72,10 @@ Ext.define('Ext.app.bind.RootStub', {
     },
 
 <span id='Ext-app-bind-RootStub-method-getFullName'>    getFullName: function () {
-</span>        return this.fullName || (this.fullName = this.owner.id + ':');
+</span>        return this.fullName || (this.fullName = this.owner.id + &#39;:&#39;);
     },
 
-<span id='Ext-app-bind-RootStub-method-getDataObject'>    // The root Stub is associated with the owner's &quot;data&quot; object
+<span id='Ext-app-bind-RootStub-method-getDataObject'>    // The root Stub is associated with the owner&#39;s &quot;data&quot; object
 </span>
     getDataObject: function () {
         return this.owner.data;
@@ -100,7 +100,7 @@ Ext.define('Ext.app.bind.RootStub', {
 <span id='Ext-app-bind-RootStub-method-set'>    set: function (value) {
 </span>        //&lt;debug&gt;
         if (!value || value.constructor !== Object) {
-            Ext.raise('Only an object can be set at the root');
+            Ext.raise(&#39;Only an object can be set at the root&#39;);
         }
         //&lt;/debug&gt;
 
@@ -113,8 +113,8 @@ Ext.define('Ext.app.bind.RootStub', {
 
         for (key in value) {
             //&lt;debug&gt;
-            if (key.indexOf('.') &gt;= 0) {
-                Ext.raise('Value names cannot contain dots');
+            if (key.indexOf(&#39;.&#39;) &gt;= 0) {
+                Ext.raise(&#39;Value names cannot contain dots&#39;);
             }
             //&lt;/debug&gt;
 

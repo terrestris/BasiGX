@@ -42,13 +42,13 @@
  *              break;
  *          }
  *
- *          var is = token.is;  // the token's classification object
+ *          var is = token.is;  // the token&#39;s classification object
  *
  *          if (is.error) {
  *              // Once an error is encountered, it will always be returned by
  *              // peek or next. The error is cleared by calling reset().
  *
- *              console.log('Syntax error', token.message);
+ *              console.log(&#39;Syntax error&#39;, token.message);
  *              break;
  *          }
  *
@@ -56,10 +56,10 @@
  *              // an identifier...
  *              // use token.value to access the name or dot-path
  *
- *              var t = tokenizer.peek();  // don't consume next token (yet)
+ *              var t = tokenizer.peek();  // don&#39;t consume next token (yet)
  *
  *              if (t &amp;&amp; t.is.parenOpen) {
- *                  tokenizer.next();  // we'll take this one
+ *                  tokenizer.next();  // we&#39;ll take this one
  *
  *                  parseThingsInParens();
  *
@@ -81,7 +81,7 @@
  *
  * There is a pool of flyweight instances to reduce memory allocation.
  *
- *      var tokenizer = Ext.parse.Tokenizer.fly('some.thing:foo()');
+ *      var tokenizer = Ext.parse.Tokenizer.fly(&#39;some.thing:foo()&#39;);
  *
  *      // use tokenizer (see above)
  *
@@ -98,7 +98,7 @@
  *
  *      // Later...
  *
- *      this.tokenizer.reset('some.thing:foo()');
+ *      this.tokenizer.reset(&#39;some.thing:foo()&#39;);
  *
  *      // use tokenizer (see above)
  *
@@ -109,7 +109,7 @@
  *
  * @private
  */
-Ext.define('Ext.parse.Tokenizer', function (Tokenizer) {
+Ext.define(&#39;Ext.parse.Tokenizer&#39;, function (Tokenizer) {
     var flyweights = (Tokenizer.flyweights = []),
         BOOLEAN = { literal: true, boolean: true },
         ERROR = { error: true },
@@ -120,7 +120,7 @@ Ext.define('Ext.parse.Tokenizer', function (Tokenizer) {
         STRING = { literal: true, string: true };
 
 return {
-    extend: 'Ext.util.Fly',
+    extend: &#39;Ext.util.Fly&#39;,
 
     isTokenizer: true,
 
@@ -142,30 +142,30 @@ return {
          * value tokens.
          */
         keywords: {
-            'null':  { type: 'literal', is: NULL,    value: null },
-            'false': { type: 'literal', is: BOOLEAN, value: false },
-            'true':  { type: 'literal', is: BOOLEAN, value: true }
+            &#39;null&#39;:  { type: &#39;literal&#39;, is: NULL,    value: null },
+            &#39;false&#39;: { type: &#39;literal&#39;, is: BOOLEAN, value: false },
+            &#39;true&#39;:  { type: &#39;literal&#39;, is: BOOLEAN, value: true }
         },
 
 <span id='Ext-parse-Tokenizer-cfg-operators'>        /**
 </span>         * @cfg {Object} operators
          * A map of operators and their names. The keys are the operator text and the
-         * name (the values) are placed in the token's `is` object as `true`.
+         * name (the values) are placed in the token&#39;s `is` object as `true`.
          */
         operators: {
-            '+': 'plus',
-            '-': 'minus',
-            '*': 'multiply',
-            '/': 'divide',
-            '!': 'bang',
-            ',': 'comma',
-            ':': 'colon',
-            '[': 'arrayOpen',
-            ']': 'arrayClose',
-            '{': 'curlyOpen',
-            '}': 'curlyClose',
-            '(': 'parenOpen',
-            ')': 'parenClose'
+            &#39;+&#39;: &#39;plus&#39;,
+            &#39;-&#39;: &#39;minus&#39;,
+            &#39;*&#39;: &#39;multiply&#39;,
+            &#39;/&#39;: &#39;divide&#39;,
+            &#39;!&#39;: &#39;bang&#39;,
+            &#39;,&#39;: &#39;comma&#39;,
+            &#39;:&#39;: &#39;colon&#39;,
+            &#39;[&#39;: &#39;arrayOpen&#39;,
+            &#39;]&#39;: &#39;arrayClose&#39;,
+            &#39;{&#39;: &#39;curlyOpen&#39;,
+            &#39;}&#39;: &#39;curlyClose&#39;,
+            &#39;(&#39;: &#39;parenOpen&#39;,
+            &#39;)&#39;: &#39;parenClose&#39;
         }
     },
 
@@ -218,7 +218,7 @@ return {
      *
      * If a syntax error is encountered, the returned token will be an `Error` object. It
      * has the standard `message` property and also additional properties to make it more
-     * like a standard token: `error: true`, `type: 'error'` and `at` (the index in the
+     * like a standard token: `error: true`, `type: &#39;error&#39;` and `at` (the index in the
      * string where the syntax error started.
      *
      * @return {Object} The next token in the stream (not yet consumed).
@@ -336,8 +336,8 @@ return {
              Builds a map one character at a time (i.e., a &quot;trie&quot;):
 
                 operators: {
-                    '=': {
-                        '=': {
+                    &#39;=&#39;: {
+                        &#39;=&#39;: {
                             token: // the &quot;==&quot; token
                         },
 
@@ -357,7 +357,7 @@ return {
 
                 if (name) {
                     block.token = def = {
-                        type: 'operator',
+                        type: &#39;operator&#39;,
                         value: op,
                         is: { operator: true }
                     };
@@ -409,7 +409,7 @@ return {
                 ret;
 
             // Handle &quot;.123&quot;
-            if ( c === '.' &amp;&amp; me.pos+1 &lt; length) {
+            if ( c === &#39;.&#39; &amp;&amp; me.pos+1 &lt; length) {
                 if (digitRe.test(text.charAt(me.pos+1))) {
                     ret = me.parseNumber();
                 }
@@ -420,7 +420,7 @@ return {
             }
 
             if (!ret) {
-                if (c === '&quot;' || c === &quot;'&quot;) {
+                if (c === &#39;&quot;&#39; || c === &quot;&#39;&quot;) {
                     ret = me.parseString();
                 }
                 else if (digitRe.test(c)) {
@@ -430,7 +430,7 @@ return {
                     ret = me.parseIdent();
                 }
                 else {
-                    ret = me.syntaxError('Unexpected character');
+                    ret = me.syntaxError(&#39;Unexpected character&#39;);
                 }
             }
 
@@ -445,7 +445,7 @@ return {
             var me = this,
                 identRe = me.identRe,
                 keywords = me.getKeywords(),
-                includeDots = !me.operators['.'],
+                includeDots = !me.operators[&#39;.&#39;],
                 text = me.text,
                 start = me.pos,
                 end = start,
@@ -456,9 +456,9 @@ return {
             while (end &lt; length) {
                 c = text.charAt(end);
 
-                if (includeDots &amp;&amp; c === '.') {
-                    if (prev === '.') {
-                        return me.syntaxError(end, 'Unexpected dot operator');
+                if (includeDots &amp;&amp; c === &#39;.&#39;) {
+                    if (prev === &#39;.&#39;) {
+                        return me.syntaxError(end, &#39;Unexpected dot operator&#39;);
                     }
                     ++end;
                 }
@@ -472,14 +472,14 @@ return {
                 prev = c;
             }
 
-            if (prev === '.') {
-                return me.syntaxError(end - 1, 'Unexpected dot operator');
+            if (prev === &#39;.&#39;) {
+                return me.syntaxError(end - 1, &#39;Unexpected dot operator&#39;);
             }
 
             value = text.substring(start, me.pos = end);
 
             return (keywords &amp;&amp; keywords[value]) || {
-                type: 'ident',
+                type: &#39;ident&#39;,
                 is: IDENT,
                 value: value
             };
@@ -500,20 +500,20 @@ return {
             while (me.pos &lt; length) {
                 c = text.charAt(me.pos);
 
-                if (c === '-' || c === '+') {
+                if (c === &#39;-&#39; || c === &#39;+&#39;) {
                     if (me.pos !== start) {
-                        return me.syntaxError(start, 'Invalid number');
+                        return me.syntaxError(start, &#39;Invalid number&#39;);
                     }
                     ++me.pos;
                 }
-                else if (c === '.') {
+                else if (c === &#39;.&#39;) {
                     if (decimal) {
                         break;
                     }
                     decimal = true;
                     ++me.pos;
                 }
-                else if (c === 'e' || c === 'E') {
+                else if (c === &#39;e&#39; || c === &#39;E&#39;) {
                     if (exp) {
                         break;
                     }
@@ -522,7 +522,7 @@ return {
 
                     c = text.charAt(++me.pos); // consume E and peek ahead
 
-                    if (c === '-' || c === '+') {
+                    if (c === &#39;-&#39; || c === &#39;+&#39;) {
                         ++me.pos;  // keep the exp sign
                     }
                 }
@@ -535,15 +535,15 @@ return {
             }
 
             token = {
-                type: 'literal',
+                type: &#39;literal&#39;,
                 is: NUMBER,
                 // Beware parseFloat as it will stop parsing and return what it could
-                // parse. For example parseFloat('1x') == 1 whereas +'1x' == NaN.
+                // parse. For example parseFloat(&#39;1x&#39;) == 1 whereas +&#39;1x&#39; == NaN.
                 value: +text.substring(start, me.pos)
             };
 
             if (!isFinite(token.value)) {
-                token = me.syntaxError(start, 'Invalid number');
+                token = me.syntaxError(start, &#39;Invalid number&#39;);
             }
 
             return token;
@@ -591,7 +591,7 @@ return {
                 pos = me.pos,
                 start = pos,
                 length = me.end,
-                str = '',
+                str = &#39;&#39;,
                 c, closed, quote;
 
             quote = text.charAt(pos++);
@@ -603,7 +603,7 @@ return {
                     closed = true;
                     break;
                 }
-                if (c === '\\' &amp;&amp; pos &lt; length) {
+                if (c === &#39;\\&#39; &amp;&amp; pos &lt; length) {
                     c = text.charAt(pos++);
                 }
 
@@ -615,11 +615,11 @@ return {
             me.pos = pos;
             
             if (!closed) {
-                return me.syntaxError(start, 'Unterminated string');
+                return me.syntaxError(start, &#39;Unterminated string&#39;);
             }
 
             return {
-                type: 'literal',
+                type: &#39;literal&#39;,
                 is: STRING,
                 value: str
             };
@@ -633,15 +633,15 @@ return {
          * @return {Object} The error token.
          */
         syntaxError: function (at, message) {
-            if (typeof at === 'string') {
+            if (typeof at === &#39;string&#39;) {
                 message = at;
                 at = this.pos;
             }
 
-            var suffix = (at == null) ? '' : (' (at index ' + at + ')'),
+            var suffix = (at == null) ? &#39;&#39; : (&#39; (at index &#39; + at + &#39;)&#39;),
                 error = new Error(message + suffix);
 
-            error.type = 'error';
+            error.type = &#39;error&#39;;
             error.is = ERROR;
 
             if (suffix) {

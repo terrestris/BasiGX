@@ -24,15 +24,15 @@
  * This class provides help value testing methods useful for diagnostics. These are often
  * used in `debugHooks`:
  * 
- *      Ext.define('Foo.bar.Class', {
+ *      Ext.define(&#39;Foo.bar.Class&#39;, {
  *
  *          debugHooks: {
  *              method: function (a) {
- *                  Ext.Assert.truthy(a, 'Expected &quot;a&quot; to be truthy');
+ *                  Ext.Assert.truthy(a, &#39;Expected &quot;a&quot; to be truthy&#39;);
  *              },
  *
  *              foo: function (object) {
- *                  Ext.Assert.isFunctionProp(object, 'doSomething');
+ *                  Ext.Assert.isFunctionProp(object, &#39;doSomething&#39;);
  *              }
  *          }
  *      });
@@ -64,7 +64,7 @@
  * 
  *      Ext.Assert.isFunction(object.foo);
  *
- *      Ext.Assert.isFunctionProp(object, 'foo');
+ *      Ext.Assert.isFunctionProp(object, &#39;foo&#39;);
  *
  * The difference is the default error message generated is better in the second use case
  * than the first.
@@ -94,7 +94,7 @@ Ext.Assert = {
      */
     falsey: function (b, msg) {
         if (b) {
-            Ext.raise(msg || ('Expected a falsey value but was ' + b));
+            Ext.raise(msg || (&#39;Expected a falsey value but was &#39; + b));
         }
     },
 
@@ -106,10 +106,10 @@ Ext.Assert = {
         var b = object[property];
         if (b) {
             if (object.$className) {
-                property = object.$className + '#' + property;
+                property = object.$className + &#39;#&#39; + property;
             }
-            Ext.raise('Expected a falsey value for ' + property +
-                            ' but was ' + b);
+            Ext.raise(&#39;Expected a falsey value for &#39; + property +
+                            &#39; but was &#39; + b);
         }
     },
 
@@ -118,7 +118,7 @@ Ext.Assert = {
      */
     truthy: function (b, msg) {
         if (!b) {
-            Ext.raise(msg || ('Expected a truthy value but was ' + typeof b));
+            Ext.raise(msg || (&#39;Expected a truthy value but was &#39; + typeof b));
         }
     },
 
@@ -130,10 +130,10 @@ Ext.Assert = {
         var b = object[property];
         if (!b) {
             if (object.$className) {
-                property = object.$className + '#' + property;
+                property = object.$className + &#39;#&#39; + property;
             }
-            Ext.raise('Expected a truthy value for ' + property +
-                            ' but was ' + typeof b);
+            Ext.raise(&#39;Expected a truthy value for &#39; + property +
+                            &#39; but was &#39; + typeof b);
         }
     }
 };
@@ -145,7 +145,7 @@ Ext.Assert = {
         return function (value, msg) {
             if (!testFn(value)) {
                 Ext.raise(msg || def ||
-                    (def = 'Expected value to be ' + kind));
+                    (def = &#39;Expected value to be &#39; + kind));
             }
         };
     }
@@ -156,9 +156,9 @@ Ext.Assert = {
         return function (object, prop) {
             Ext.Assert.truthy(object);
             if (!testFn(object[prop])) {
-                Ext.raise(def || (def = 'Expected ' +
-                        (object.$className ? object.$className + '#' : '') +
-                        prop + ' to be ' + kind));
+                Ext.raise(def || (def = &#39;Expected &#39; +
+                        (object.$className ? object.$className + &#39;#&#39; : &#39;&#39;) +
+                        prop + &#39; to be &#39; + kind));
             }
         };
     }
@@ -169,7 +169,7 @@ Ext.Assert = {
         return function (value, msg) {
             if (testFn(value)) {
                 Ext.raise(msg || def ||
-                    (def = 'Expected value to NOT be ' + kind));
+                    (def = &#39;Expected value to NOT be &#39; + kind));
             }
         };
     }
@@ -180,9 +180,9 @@ Ext.Assert = {
         return function (object, prop) {
             Ext.Assert.truthy(object);
             if (testFn(object[prop])) {
-                Ext.raise(def || (def = 'Expected ' +
-                        (object.$className ? object.$className + '#' : '') +
-                        prop + ' to NOT be ' + kind));
+                Ext.raise(def || (def = &#39;Expected &#39; +
+                        (object.$className ? object.$className + &#39;#&#39; : &#39;&#39;) +
+                        prop + &#39; to NOT be &#39; + kind));
             }
         };
     }
@@ -191,9 +191,9 @@ Ext.Assert = {
         if (name.substring(0,2) == &quot;is&quot; &amp;&amp; Ext.isFunction(Ext[name])) {
             var kind = name.substring(2);
             Ext.Assert[name] = makeAssert(name, kind);
-            Ext.Assert[name + 'Prop'] = makeAssertProp(name, kind);
-            Ext.Assert['isNot' + kind] = makeNotAssert(name, kind);
-            Ext.Assert['isNot' + kind + 'Prop'] = makeNotAssertProp(name, kind);
+            Ext.Assert[name + &#39;Prop&#39;] = makeAssertProp(name, kind);
+            Ext.Assert[&#39;isNot&#39; + kind] = makeNotAssert(name, kind);
+            Ext.Assert[&#39;isNot&#39; + kind + &#39;Prop&#39;] = makeNotAssertProp(name, kind);
         }
     }
 }());

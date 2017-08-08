@@ -41,12 +41,12 @@
  * operation fails, the Deferred should be rejected.
  *
  * Each Deferred has an associated Promise. A Promise delegates `then` calls to its
- * Deferred's `then` method. In this way, access to Deferred operations are divided between
+ * Deferred&#39;s `then` method. In this way, access to Deferred operations are divided between
  * producer (Deferred) and consumer (Promise) roles.
  *
  * ## Basic Usage
  *
- * In it's most common form, a method will create and return a Promise like this:
+ * In it&#39;s most common form, a method will create and return a Promise like this:
  *
  *      // A method in a service class which uses a Store and returns a Promise
  *      //
@@ -74,35 +74,35 @@
  * callback, it resolves the `deferred` object if the call was successful, and rejects the
  * `deferred` if the call failed.
  *
- * When a Deferred's `resolve` method is called, it fulfills with the optionally specified
+ * When a Deferred&#39;s `resolve` method is called, it fulfills with the optionally specified
  * value. If `resolve` is called with a then-able (i.e.a Function or Object with a `then`
- * function, such as another Promise) it assimilates the then-able's result; the Deferred
+ * function, such as another Promise) it assimilates the then-able&#39;s result; the Deferred
  * provides its own `resolve` and `reject` methods as the onFulfilled or onRejected
- * arguments in a call to that then-able's `then` function. If an error is thrown while
- * calling the then-able's `then` function (prior to any call back to the specified
- * `resolve` or `reject` methods), the Deferred rejects with that error. If a Deferred's
+ * arguments in a call to that then-able&#39;s `then` function. If an error is thrown while
+ * calling the then-able&#39;s `then` function (prior to any call back to the specified
+ * `resolve` or `reject` methods), the Deferred rejects with that error. If a Deferred&#39;s
  * `resolve` method is called with its own Promise, it rejects with a TypeError.
  *
- * When a Deferred's `reject` method is called, it rejects with the optionally specified
+ * When a Deferred&#39;s `reject` method is called, it rejects with the optionally specified
  * reason.
  *
- * Each time a Deferred's `then` method is called, it captures a pair of optional
- * onFulfilled and onRejected callbacks and returns a Promise of the Deferred's future
+ * Each time a Deferred&#39;s `then` method is called, it captures a pair of optional
+ * onFulfilled and onRejected callbacks and returns a Promise of the Deferred&#39;s future
  * value as transformed by those callbacks.
  *
  * See `{@link Ext.promise.Promise}` for an example of using the returned Promise.
  *
  * @since 6.0.0
  */
-Ext.define('Ext.Deferred', function (Deferred) {
+Ext.define(&#39;Ext.Deferred&#39;, function (Deferred) {
     var ExtPromise,
         when;
 
 return {
-    extend: 'Ext.promise.Deferred',
+    extend: &#39;Ext.promise.Deferred&#39;,
 
     requires: [
-        'Ext.Promise'
+        &#39;Ext.Promise&#39;
     ],
 
     statics: {
@@ -143,7 +143,7 @@ return {
         any: function (promisesOrValues) {
             //&lt;debug&gt;
             if (!(Ext.isArray(promisesOrValues) || ExtPromise.is(promisesOrValues))) {
-                Ext.raise('Invalid parameter: expected an Array or Promise of an Array.');
+                Ext.raise(&#39;Invalid parameter: expected an Array or Promise of an Array.&#39;);
             }
             //&lt;/debug&gt;
 
@@ -151,8 +151,8 @@ return {
                 return array[0];
             }, function (error) {
                 if (error instanceof Error &amp;&amp;
-                    error.message === 'Too few Promises were resolved.') {
-                    Ext.raise('No Promises were resolved.');
+                    error.message === &#39;Too few Promises were resolved.&#39;) {
+                    Ext.raise(&#39;No Promises were resolved.&#39;);
                 }
                 else {
                     throw error;
@@ -206,11 +206,11 @@ return {
         map: function (promisesOrValues, mapFn) {
             //&lt;debug&gt;
             if (!(Ext.isArray(promisesOrValues) || ExtPromise.is(promisesOrValues))) {
-                Ext.raise('Invalid parameter: expected an Array or Promise of an Array.');
+                Ext.raise(&#39;Invalid parameter: expected an Array or Promise of an Array.&#39;);
             }
 
             if (!Ext.isFunction(mapFn)) {
-                Ext.raise('Invalid parameter: expected a function.');
+                Ext.raise(&#39;Invalid parameter: expected a function.&#39;);
             }
             //&lt;/debug&gt;
 
@@ -301,7 +301,7 @@ return {
 
             return Deferred.map(fns, function (fn) {
                 if (!Ext.isFunction(fn)) {
-                    throw new Error('Invalid parameter: expected a function.');
+                    throw new Error(&#39;Invalid parameter: expected a function.&#39;);
                 }
 
                 return fn.apply(scope, args);
@@ -310,7 +310,7 @@ return {
 
 <span id='Ext-Deferred-static-method-pipeline'>        /**
 </span>         * Execute an Array (or {@link Ext.promise.Promise Promise} of an Array) of
-         * functions as a pipeline, where each function's result is passed to the
+         * functions as a pipeline, where each function&#39;s result is passed to the
          * subsequent function as input.
          *
          * The specified functions may optionally return their results as
@@ -332,7 +332,7 @@ return {
 
             return Deferred.reduce(fns, function (value, fn) {
                 if (!Ext.isFunction(fn)) {
-                    throw new Error('Invalid parameter: expected a function.');
+                    throw new Error(&#39;Invalid parameter: expected a function.&#39;);
                 }
 
                 return fn.call(scope, value);
@@ -354,11 +354,11 @@ return {
         reduce: function (values, reduceFn, initialValue) {
             //&lt;debug&gt;
             if (!(Ext.isArray(values) || ExtPromise.is(values))) {
-                Ext.raise('Invalid parameter: expected an Array or Promise of an Array.');
+                Ext.raise(&#39;Invalid parameter: expected an Array or Promise of an Array.&#39;);
             }
 
             if (!Ext.isFunction(reduceFn)) {
-                Ext.raise('Invalid parameter: expected a function.');
+                Ext.raise(&#39;Invalid parameter: expected a function.&#39;);
             }
             //&lt;/debug&gt;
 
@@ -443,7 +443,7 @@ return {
 
             return Deferred.reduce(fns, function (results, fn) {
                 if (!Ext.isFunction(fn)) {
-                    throw new Error('Invalid parameter: expected a function.');
+                    throw new Error(&#39;Invalid parameter: expected a function.&#39;);
                 }
 
                 return Deferred.resolved(fn.apply(scope, args)).then(function (result) {
@@ -472,11 +472,11 @@ return {
         some: function (promisesOrValues, howMany) {
             //&lt;debug&gt;
             if (!(Ext.isArray(promisesOrValues) || ExtPromise.is(promisesOrValues))) {
-                Ext.raise('Invalid parameter: expected an Array or Promise of an Array.');
+                Ext.raise(&#39;Invalid parameter: expected an Array or Promise of an Array.&#39;);
             }
 
             if (!Ext.isNumeric(howMany) || howMany &lt;= 0) {
-                Ext.raise('Invalid parameter: expected a positive integer.');
+                Ext.raise(&#39;Invalid parameter: expected a positive integer.&#39;);
             }
             //&lt;/debug&gt;
 
@@ -490,7 +490,7 @@ return {
                 deferred = new Deferred();
 
                 if (promisesOrValues.length &lt; howMany) {
-                    deferred.reject(new Error('Too few Promises were resolved.'));
+                    deferred.reject(new Error(&#39;Too few Promises were resolved.&#39;));
                 }
                 else {
                     onResolve = function (value) {
@@ -511,7 +511,7 @@ return {
                         remainingToReject--;
 
                         if (remainingToReject === 0) {
-                            deferred.reject(new Error('Too few Promises were resolved.'));
+                            deferred.reject(new Error(&#39;Too few Promises were resolved.&#39;));
                         }
 
                         return reason;
@@ -547,7 +547,7 @@ return {
 
             timeoutId = setTimeout(function () {
                 if (timeoutId) {
-                    deferred.reject(new Error('Promise timed out.'));
+                    deferred.reject(new Error(&#39;Promise timed out.&#39;));
                 }
             }, milliseconds);
 

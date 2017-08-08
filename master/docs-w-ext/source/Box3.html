@@ -15,8 +15,8 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.rtl.layout.container.Box', {
-    override: 'Ext.layout.container.Box',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.rtl.layout.container.Box&#39;, {
+    override: &#39;Ext.layout.container.Box&#39;,
 
     initLayout: function() {
         var me = this;
@@ -34,7 +34,7 @@
 
         if (this.owner.getInherited().rtl) {
             renderData.targetElCls =
-                (renderData.targetElCls || '') + ' ' + Ext.baseCSSPrefix + 'rtl';
+                (renderData.targetElCls || &#39;&#39;) + &#39; &#39; + Ext.baseCSSPrefix + &#39;rtl&#39;;
         }
         
         return renderData;

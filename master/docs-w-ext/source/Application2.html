@@ -27,14 +27,14 @@
  * ultimately instantiated by an instance of this (or a derived) class.
  *
  *     Ext.application({
- *         name: 'MyApp',
+ *         name: &#39;MyApp&#39;,
  *
  *         // An instance of this view is created and set as the Viewport:
- *         autoCreateViewport: 'MyApp.view.Main'
+ *         autoCreateViewport: &#39;MyApp.view.Main&#39;
  *     });
  *
- * This does several things. First it creates a global variable called 'MyApp' - all of
- * your Application's classes (such as its Models, Views and Controllers) will reside under
+ * This does several things. First it creates a global variable called &#39;MyApp&#39; - all of
+ * your Application&#39;s classes (such as its Models, Views and Controllers) will reside under
  * this single namespace, which drastically lowers the chances of colliding global variables.
  *
  * The MyApp global will also have a getApplication method to get a reference to the current
@@ -45,38 +45,38 @@
  * # Telling Application about the rest of the app
  *
  * Because an Ext.app.Application represents an entire app, we should tell it about the other
- * parts of the app - namely the Models, Views and Controllers that are bundled with the application. Let's say we have a blog management app; we
+ * parts of the app - namely the Models, Views and Controllers that are bundled with the application. Let&#39;s say we have a blog management app; we
  * might have Models and Controllers for Posts and Comments, and Views for listing, adding and editing Posts and Comments.
- * Here's how we'd tell our Application about all these things:
+ * Here&#39;s how we&#39;d tell our Application about all these things:
  *
  *     Ext.application({
- *         name: 'Blog',
+ *         name: &#39;Blog&#39;,
  *
- *         models: ['Post', 'Comment'],
+ *         models: [&#39;Post&#39;, &#39;Comment&#39;],
  *
- *         controllers: ['Posts', 'Comments'],
+ *         controllers: [&#39;Posts&#39;, &#39;Comments&#39;],
  *
  *         launch: function() {
  *             ...
  *         }
  *     });
  *
- * Note that we didn't actually list the Views directly in the Application itself. This is because Views are managed by
+ * Note that we didn&#39;t actually list the Views directly in the Application itself. This is because Views are managed by
  * Controllers, so it makes sense to keep those dependencies there. The Application will load each of the specified
  * Controllers using the pathing conventions laid out in the [application architecture guide](../application_architecture/application_architecture.html) - in this case
  * expecting the controllers to reside in app/controller/Posts.js and app/controller/Comments.js. In turn, each
- * Controller simply needs to list the Views it uses and they will be automatically loaded. Here's how our Posts
+ * Controller simply needs to list the Views it uses and they will be automatically loaded. Here&#39;s how our Posts
  * controller like be defined:
  *
- *     Ext.define('MyApp.controller.Posts', {
- *         extend: 'Ext.app.Controller',
- *         views: ['posts.List', 'posts.Edit'],
+ *     Ext.define(&#39;MyApp.controller.Posts&#39;, {
+ *         extend: &#39;Ext.app.Controller&#39;,
+ *         views: [&#39;posts.List&#39;, &#39;posts.Edit&#39;],
  *
  *         //the rest of the Controller here
  *     });
  *
  * Because we told our Application about our Models and Controllers, and our Controllers about their Views, Ext JS will
- * automatically load all of our app files for us. This means we don't have to manually add script tags into our html
+ * automatically load all of our app files for us. This means we don&#39;t have to manually add script tags into our html
  * files whenever we add a new class, but more importantly it enables us to create a minimized build of our entire
  * application using Sencha Cmd.
  *
@@ -90,22 +90,22 @@
  * Derivation works as you would expect, but using the derived class should still be the
  * job of the `Ext.application` method.
  *
- *     Ext.define('MyApp.Application', {
- *         extend: 'Ext.app.Application',
- *         name: 'MyApp',
+ *     Ext.define(&#39;MyApp.Application&#39;, {
+ *         extend: &#39;Ext.app.Application&#39;,
+ *         name: &#39;MyApp&#39;,
  *         ...
  *     });
  *
- *     Ext.application('MyApp.Application');
+ *     Ext.application(&#39;MyApp.Application&#39;);
  *
  * For more information about writing Ext JS applications, please see the [application architecture guide](../../../application_architecture/application_architecture.html).
  */
-Ext.define('Ext.app.Application', {
-    extend: 'Ext.app.Controller',
+Ext.define(&#39;Ext.app.Application&#39;, {
+    extend: &#39;Ext.app.Controller&#39;,
 
     requires: [
-        'Ext.util.History',
-        'Ext.util.MixedCollection'
+        &#39;Ext.util.History&#39;,
+        &#39;Ext.util.MixedCollection&#39;
     ],
     
 <span id='Ext-app-Application-property-isApplication'>    isApplication: true,
@@ -113,8 +113,8 @@ Ext.define('Ext.app.Application', {
 <span id='Ext-app-Application-cfg-extend'>    /**
 </span>     * @cfg {String} extend A class name to use with the `Ext.application` call. The class must also extend {@link Ext.app.Application}.
      *
-     *     Ext.define('MyApp.Application', {
-     *         extend: 'Ext.app.Application',
+     *     Ext.define(&#39;MyApp.Application&#39;, {
+     *         extend: &#39;Ext.app.Application&#39;,
      *
      *         launch: function() {
      *             Ext.direct.Manager.addProvider(Ext.REMOTING_API);
@@ -122,7 +122,7 @@ Ext.define('Ext.app.Application', {
      *     });
      *
      *     Ext.application({
-     *         extend: 'MyApp.Application'
+     *         extend: &#39;MyApp.Application&#39;
      *     });
      */
 
@@ -136,15 +136,15 @@ Ext.define('Ext.app.Application', {
      * 
      *     // by default, the following controller class would be located at:
      *     // app/controller/Main.js
-     *     controllers: '.Main' // or 'MyApp.controller.Main'
+     *     controllers: &#39;.Main&#39; // or &#39;MyApp.controller.Main&#39;
      * 
      *     // while the following would be located at:
      *     // app/controller/customer/Main.js
-     *     controllers: 'customer.Main' // or 'MyApp.controller.customer.Main'
+     *     controllers: &#39;customer.Main&#39; // or &#39;MyApp.controller.customer.Main&#39;
      * 
      * **Note:** If the controller has a different namespace than that of the 
      * application you will need to specify the full class name as well as define a path 
-     * in the {@link Ext.Loader#cfg-paths Loader's paths} config or 
+     * in the {@link Ext.Loader#cfg-paths Loader&#39;s paths} config or 
      * {@link Ext.Loader#method-setPath setPath} method.
      */
 
@@ -161,28 +161,28 @@ Ext.define('Ext.app.Application', {
      * like Views and Stores:
      *
      *      Ext.application({
-     *          name: 'MyApp',
+     *          name: &#39;MyApp&#39;,
      *
-     *          namespaces: ['Common.code'],
+     *          namespaces: [&#39;Common.code&#39;],
      *
-     *          controllers: [ 'Common.code.controller.Foo', 'Bar' ]
+     *          controllers: [ &#39;Common.code.controller.Foo&#39;, &#39;Bar&#39; ]
      *      });
      *
-     *      Ext.define('Common.code.controller.Foo', {
-     *          extend: 'Ext.app.Controller',
+     *      Ext.define(&#39;Common.code.controller.Foo&#39;, {
+     *          extend: &#39;Ext.app.Controller&#39;,
      *
-     *          models: ['Foo'],    // Loads Common.code.model.Foo
-     *          views:  ['Bar']     // Loads Common.code.view.Bar
+     *          models: [&#39;Foo&#39;],    // Loads Common.code.model.Foo
+     *          views:  [&#39;Bar&#39;]     // Loads Common.code.view.Bar
      *      });
      *
-     *      Ext.define('MyApp.controller.Bar', {
-     *          extend: 'Ext.app.Controller',
+     *      Ext.define(&#39;MyApp.controller.Bar&#39;, {
+     *          extend: &#39;Ext.app.Controller&#39;,
      *
-     *          models: ['Foo'],    // Loads MyApp.model.Foo
-     *          views:  ['Bar']     // Loads MyApp.view.Bar
+     *          models: [&#39;Foo&#39;],    // Loads MyApp.model.Foo
+     *          views:  [&#39;Bar&#39;]     // Loads MyApp.view.Bar
      *      });
      *
-     * You don't need to include main namespace (MyApp), it will be added to the list
+     * You don&#39;t need to include main namespace (MyApp), it will be added to the list
      * automatically.
      */
     namespaces: [],
@@ -196,7 +196,7 @@ Ext.define('Ext.app.Application', {
     
 <span id='Ext-app-Application-cfg-appFolder'>    /**
 </span>     * @cfg {String} [appFolder=&quot;app&quot;]
-     * The path to the directory which contains all application's classes.
+     * The path to the directory which contains all application&#39;s classes.
      * This path will be registered via {@link Ext.Loader#setPath} for the namespace specified
      * in the {@link #name name} config.
      */
@@ -207,10 +207,10 @@ Ext.define('Ext.app.Application', {
 <span id='Ext-app-Application-cfg-name'>        /**
 </span>         * @cfg {String} name
          * The name of your application. This will also be the namespace for your views, controllers
-         * models and stores. Don't use spaces or special characters in the name. **Application name
+         * models and stores. Don&#39;t use spaces or special characters in the name. **Application name
          * is mandatory**.
          */
-        name: '',
+        name: &#39;&#39;,
        
 <span id='Ext-app-Application-cfg-appProperty'>        /**
 </span>         * @cfg {String} appProperty
@@ -219,15 +219,15 @@ Ext.define('Ext.app.Application', {
          * being created
          *
          *     Ext.application({
-         *         name: 'MyApp',
-         *         appProperty: 'myProp',
+         *         name: &#39;MyApp&#39;,
+         *         appProperty: &#39;myProp&#39;,
          *
          *         launch: function() {
          *             console.log(MyApp.myProp === this);
          *         }
          *     });
          */
-        appProperty: 'app',
+        appProperty: &#39;app&#39;,
 
         // @cmd-auto-dependency { aliasPrefix: &quot;profile.&quot;, mvc: true, blame: &quot;all&quot; }
 <span id='Ext-app-Application-cfg-profiles'>        /**
@@ -248,7 +248,7 @@ Ext.define('Ext.app.Application', {
          * application.  The view will be configured with the
          * {@link Ext.plugin.Viewport viewport plugin} to ensure the view takes up all
          * available space in the browser viewport.  The main view will be created after
-         * the application's {@link #init} method is called and before the
+         * the application&#39;s {@link #init} method is called and before the
          * {@link #launch} method.  The main view should be an application class type and
          * not a class from the framework.
          *
@@ -257,23 +257,23 @@ Ext.define('Ext.app.Application', {
          *  - config object for the main view
          *  - main view class instance
          *
-         *     Ext.define('MyApp.view.main.Main', {
-         *         extend: 'Ext.panel.Panel',
-         *         xtype: 'mainview',
-         *         title: 'Main Viewport View'
+         *     Ext.define(&#39;MyApp.view.main.Main&#39;, {
+         *         extend: &#39;Ext.panel.Panel&#39;,
+         *         xtype: &#39;mainview&#39;,
+         *         title: &#39;Main Viewport View&#39;
          *     });
          *
          *     Ext.application({
-         *         name : 'MyApp',
+         *         name : &#39;MyApp&#39;,
          *
-         *         mainView: 'MyApp.view.main.Main'
-         *         // mainView: 'main.Main'
+         *         mainView: &#39;MyApp.view.main.Main&#39;
+         *         // mainView: &#39;main.Main&#39;
          *         // mainView: new MyApp.view.main.Main()
-         *         // mainView: { xtype: 'mainview' }
+         *         // mainView: { xtype: &#39;mainview&#39; }
          *     });
          *
          * **Note:** You may also call {@link #setMainView} at runtime if you require
-         * logic within the application's {@link #launch} method to be processed prior to
+         * logic within the application&#39;s {@link #launch} method to be processed prior to
          * the creation of the main view.
          */
         mainView: {
@@ -283,7 +283,7 @@ Ext.define('Ext.app.Application', {
 
 <span id='Ext-app-Application-cfg-defaultToken'>        /**
 </span>         * @cfg {String} [defaultToken=null] The default token to be used at application launch
-         * if one is not present. Often this is set to something like `'home'`.
+         * if one is not present. Often this is set to something like `&#39;home&#39;`.
          */
         defaultToken: null,
 
@@ -317,16 +317,16 @@ Ext.define('Ext.app.Application', {
             Ext.app.addNamespaces(data.namespaces);
         }
 
-        if (data['paths processed']) {
-            delete data['paths processed'];
+        if (data[&#39;paths processed&#39;]) {
+            delete data[&#39;paths processed&#39;];
         } else {
             Ext.app.setupPaths(namespace,
-                ('appFolder' in data) ? data.appFolder : cls.superclass.appFolder,
+                (&#39;appFolder&#39; in data) ? data.appFolder : cls.superclass.appFolder,
                 data.paths);
         }
 
         // Require all profiles
-        Controller.processDependencies(proto, requires, namespace, 'profile', data.profiles);
+        Controller.processDependencies(proto, requires, namespace, &#39;profile&#39;, data.profiles);
 
         // This hook is used in the classic toolkit to process other configs that need to
         // require classes (like tooltips and viewport plugin).
@@ -341,7 +341,7 @@ Ext.define('Ext.app.Application', {
 
                 //&lt;debug&gt;
                 // This hook is to allow unit tests to come in and control the
-                // requires so we don't have to get into the internals of the Loader.
+                // requires so we don&#39;t have to get into the internals of the Loader.
                 // Not intended to be used for any other purpose.
                 if (data.__handleRequires) {
                     data.__handleRequires.call(this, requires, Ext.bind(function() {
@@ -381,7 +381,7 @@ Ext.define('Ext.app.Application', {
 
         me.initNamespace();
 
-        Ext.on('appupdate', me.onAppUpdate, me, {single:true});
+        Ext.on(&#39;appupdate&#39;, me.onAppUpdate, me, {single:true});
         
         //&lt;debug&gt;
         Ext.Loader.setConfig({ enabled: true });
@@ -447,8 +447,8 @@ Ext.define('Ext.app.Application', {
                 }
                 //&lt;debug&gt;
                 else if (ns[appProperty] !== me) {
-                    Ext.log.warn('An existing reference is being overwritten for ' + name + '.' + appProperty +
-                        '. See the appProperty config.'
+                    Ext.log.warn(&#39;An existing reference is being overwritten for &#39; + name + &#39;.&#39; + appProperty +
+                        &#39;. See the appProperty config.&#39;
                     );
                 }
                 //&lt;/debug&gt;
@@ -519,7 +519,7 @@ Ext.define('Ext.app.Application', {
 
         me.launch.call(me.scope || me);
         me.launched = true;
-        me.fireEvent('launch', me);
+        me.fireEvent(&#39;launch&#39;, me);
 
         controllers = me.controllers.items;
         cLen        = controllers.length;
@@ -596,14 +596,14 @@ Ext.define('Ext.app.Application', {
      * @param {String/Ext.app.Controller} controller The controller
      */
     destroyController: function(controller) {
-        if (typeof controller === 'string') {
+        if (typeof controller === &#39;string&#39;) {
             controller = this.getController(controller, true);
         }
         Ext.destroy(controller);
     },
 
 <span id='Ext-app-Application-method-getController'>    /**
-</span>     * Get an application's controller based on name or id.  Generally, the controller id will be the same as the name
+</span>     * Get an application&#39;s controller based on name or id.  Generally, the controller id will be the same as the name
      * unless otherwise specified.
      * @param {String} name The name or id of the controller you are trying to retrieve
      * @param {Boolean} preventCreate (private)
@@ -618,7 +618,7 @@ Ext.define('Ext.app.Application', {
         
         // In a majority of cases, the controller id will be the same as the name.
         // However, when a controller is manually given an id, it will be keyed
-        // in the collection that way. So if we don't find it, we attempt to loop
+        // in the collection that way. So if we don&#39;t find it, we attempt to loop
         // over the existing controllers and find it by classname
         if (!controller) {
             all = controllers.items;
@@ -633,7 +633,7 @@ Ext.define('Ext.app.Application', {
         }
 
         if (!controller &amp;&amp; !preventCreate) {
-            className  = me.getModuleClassName(name, 'controller');
+            className  = me.getModuleClassName(name, &#39;controller&#39;);
             
             controller = Ext.create(className, {
                 application: me,
@@ -669,7 +669,7 @@ Ext.define('Ext.app.Application', {
             ns = Ext.namespace(me.getName()),
             appProp = me.getAppProperty();
         
-        Ext.un('appupdate', me.onAppUpdate, me);
+        Ext.un(&#39;appupdate&#39;, me.onAppUpdate, me);
          
         Ext.destroy(me.viewport);
            
@@ -701,8 +701,8 @@ Ext.define('Ext.app.Application', {
     },
 
 <span id='Ext-app-Application-method-applyProfiles'>    /**
-</span>     * As a convenience developers can locally qualify profile names (e.g. 'MyProfile' vs
-     * 'MyApp.profile.MyProfile'). This just makes sure everything ends up fully qualified.
+</span>     * As a convenience developers can locally qualify profile names (e.g. &#39;MyProfile&#39; vs
+     * &#39;MyApp.profile.MyProfile&#39;). This just makes sure everything ends up fully qualified.
      * @private
      */
     applyProfiles: function(profiles) {

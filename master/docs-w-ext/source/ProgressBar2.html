@@ -28,7 +28,7 @@
  * for indicating intermediate progress.
  *
  *     @example
- *     var p = Ext.create('Ext.ProgressBar', {
+ *     var p = Ext.create(&#39;Ext.ProgressBar&#39;, {
  *        renderTo: Ext.getBody(),
  *        width: 300
  *     });
@@ -38,44 +38,44 @@
  *         interval: 500, //bar will move fast!
  *         duration: 50000,
  *         increment: 15,
- *         text: 'Updating...',
+ *         text: &#39;Updating...&#39;,
  *         scope: this,
  *         fn: function(){
- *             p.updateText('Done!');
+ *             p.updateText(&#39;Done!&#39;);
  *         }
  *     });
  */
-Ext.define('Ext.ProgressBar', {
-    extend: 'Ext.Component',
-    xtype: 'progressbar',
+Ext.define(&#39;Ext.ProgressBar&#39;, {
+    extend: &#39;Ext.Component&#39;,
+    xtype: &#39;progressbar&#39;,
     mixins: [
-        'Ext.ProgressBase'
+        &#39;Ext.ProgressBase&#39;
     ],
 
     requires: [
-        'Ext.Template',
-        'Ext.CompositeElement',
-        'Ext.TaskManager',
-        'Ext.layout.component.ProgressBar'
+        &#39;Ext.Template&#39;,
+        &#39;Ext.CompositeElement&#39;,
+        &#39;Ext.TaskManager&#39;,
+        &#39;Ext.layout.component.ProgressBar&#39;
     ],
 
-    uses: ['Ext.fx.Anim'],
+    uses: [&#39;Ext.fx.Anim&#39;],
 
 <span id='Ext-ProgressBar-cfg-textEl'>    /**
 </span>     * @cfg {String/HTMLElement/Ext.dom.Element} textEl
-     * The element to render the progress text to (defaults to the progress bar's internal text element)
+     * The element to render the progress text to (defaults to the progress bar&#39;s internal text element)
      */
 
 <span id='Ext-ProgressBar-cfg-id'>    /**
 </span>     * @cfg {String} id
-     * The progress bar element's id (defaults to an auto-generated id)
+     * The progress bar element&#39;s id (defaults to an auto-generated id)
      */
 
 <span id='Ext-ProgressBar-cfg-baseCls'>    /**
-</span>     * @cfg {String} [baseCls='x-progress']
-     * The base CSS class to apply to the progress bar's wrapper element.
+</span>     * @cfg {String} [baseCls=&#39;x-progress&#39;]
+     * The base CSS class to apply to the progress bar&#39;s wrapper element.
      */
-    baseCls: Ext.baseCSSPrefix + 'progress',
+    baseCls: Ext.baseCSSPrefix + &#39;progress&#39;,
 
 <span id='Ext-ProgressBar-cfg-animate'>    /**
 </span>     * @cfg {Boolean/Object} animate
@@ -88,7 +88,7 @@ Ext.define('Ext.ProgressBar', {
 </span>     * @cfg {String} text
      * The text shown in the progress bar.
      */
-    text: '',
+    text: &#39;&#39;,
 
 <span id='Ext-ProgressBar-property-waitTimer'>    /**
 </span>     * @private
@@ -96,34 +96,34 @@ Ext.define('Ext.ProgressBar', {
     waitTimer: null,
 
 <span id='Ext-ProgressBar-cfg-childEls'>    childEls: [
-</span>        'bar'
+</span>        &#39;bar&#39;
     ],
 
-<span id='Ext-ProgressBar-property-defaultBindProperty'>    defaultBindProperty: 'value',
+<span id='Ext-ProgressBar-property-defaultBindProperty'>    defaultBindProperty: &#39;value&#39;,
 </span>
 <span id='Ext-ProgressBar-cfg-renderTpl'>    renderTpl: [
-</span>        '&lt;tpl if=&quot;internalText&quot;&gt;',
-            '&lt;div class=&quot;{baseCls}-text {baseCls}-text-back&quot; role=&quot;presentation&quot;&gt;{text}&lt;/div&gt;',
-        '&lt;/tpl&gt;',
-        '&lt;div id=&quot;{id}-bar&quot; data-ref=&quot;bar&quot; class=&quot;{baseCls}-bar {baseCls}-bar-{ui}&quot; role=&quot;presentation&quot; style=&quot;width:{percentage}%&quot;&gt;',
-            '&lt;tpl if=&quot;internalText&quot;&gt;',
-                '&lt;div class=&quot;{baseCls}-text&quot; role=&quot;presentation&quot;&gt;',
-                    '&lt;div role=&quot;presentation&quot;&gt;{text}&lt;/div&gt;',
-                '&lt;/div&gt;',
-            '&lt;/tpl&gt;',
-        '&lt;/div&gt;'
+</span>        &#39;&lt;tpl if=&quot;internalText&quot;&gt;&#39;,
+            &#39;&lt;div class=&quot;{baseCls}-text {baseCls}-text-back&quot; role=&quot;presentation&quot;&gt;{text}&lt;/div&gt;&#39;,
+        &#39;&lt;/tpl&gt;&#39;,
+        &#39;&lt;div id=&quot;{id}-bar&quot; data-ref=&quot;bar&quot; class=&quot;{baseCls}-bar {baseCls}-bar-{ui}&quot; role=&quot;presentation&quot; style=&quot;width:{percentage}%&quot;&gt;&#39;,
+            &#39;&lt;tpl if=&quot;internalText&quot;&gt;&#39;,
+                &#39;&lt;div class=&quot;{baseCls}-text&quot; role=&quot;presentation&quot;&gt;&#39;,
+                    &#39;&lt;div role=&quot;presentation&quot;&gt;{text}&lt;/div&gt;&#39;,
+                &#39;&lt;/div&gt;&#39;,
+            &#39;&lt;/tpl&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;
     ],
 
-<span id='Ext-ProgressBar-cfg-componentLayout'>    componentLayout: 'progressbar',
+<span id='Ext-ProgressBar-cfg-componentLayout'>    componentLayout: &#39;progressbar&#39;,
 </span>    
-<span id='Ext-ProgressBar-property-ariaRole'>    ariaRole: 'progressbar',
+<span id='Ext-ProgressBar-property-ariaRole'>    ariaRole: &#39;progressbar&#39;,
 </span><span id='Ext-ProgressBar-property-focusable'>    focusable: true,
 </span><span id='Ext-ProgressBar-cfg-tabIndex'>    tabIndex: 0,
 </span>    
 <span id='Ext-ProgressBar-cfg-autoEl'>    autoEl: {
-</span>        'aria-valuemin': '0',
-        'aria-valuenow': '0',
-        'aria-valuemax': '100'
+</span>        &#39;aria-valuemin&#39;: &#39;0&#39;,
+        &#39;aria-valuenow&#39;: &#39;0&#39;,
+        &#39;aria-valuemax&#39;: &#39;100&#39;
     },
 
 <span id='Ext-ProgressBar-event-update'>    /**
@@ -142,8 +142,8 @@ Ext.define('Ext.ProgressBar', {
         data = me.callParent();
         
         return Ext.apply(data, {
-            internalText: !me.hasOwnProperty('textEl'),
-            text: me.text || Math.round(value * 100) + '%',
+            internalText: !me.hasOwnProperty(&#39;textEl&#39;),
+            text: me.text || Math.round(value * 100) + &#39;%&#39;,
             percentage: value * 100
         });
     },
@@ -160,9 +160,9 @@ Ext.define('Ext.ProgressBar', {
         }
         // Inline text display
         else {
-            // This produces a composite w/2 el's (which is why we cannot use childEls or
+            // This produces a composite w/2 el&#39;s (which is why we cannot use childEls or
             // renderSelectors):
-            me.textEl = me.el.select('.' + me.baseCls + '-text');
+            me.textEl = me.el.select(&#39;.&#39; + me.baseCls + &#39;-text&#39;);
         }
     },
     
@@ -172,7 +172,7 @@ Ext.define('Ext.ProgressBar', {
         me.callParent(arguments);
         
         if (me.text) {
-            me.ariaEl.dom.setAttribute('aria-valuetext', me.text);
+            me.ariaEl.dom.setAttribute(&#39;aria-valuetext&#39;, me.text);
         }
     },
 
@@ -190,7 +190,7 @@ Ext.define('Ext.ProgressBar', {
      * you are responsible for determining when the progress is complete and
      * calling {@link #reset} to clear and/or hide the control.
      * @param {Number} [value=0] A floating point value between 0 and 1 (e.g., .5)
-     * @param {String} [text=''] The string to display in the progress text element
+     * @param {String} [text=&#39;&#39;] The string to display in the progress text element
      * @param {Boolean} [animate=false] Whether to animate the transition of the progress bar. If this value is not
      * specified, the default for the class is used
      * @return {Ext.ProgressBar} this
@@ -220,13 +220,13 @@ Ext.define('Ext.ProgressBar', {
         }
         else if (!me.text &amp;&amp; me.autoText !== false) {
             me.autoText = true;
-            me.updateText(Math.round(value * 100) + '%');
+            me.updateText(Math.round(value * 100) + &#39;%&#39;);
         }
-        // Text was set the previous time but not this time. We can't
+        // Text was set the previous time but not this time. We can&#39;t
         // deduce what it should be just from the value so need to
         // reset aria-valuetext because it is no longer valid.
         else if (me.text &amp;&amp; me.ariaEl.dom) {
-            me.ariaEl.dom.removeAttribute('aria-valuetext');
+            me.ariaEl.dom.removeAttribute(&#39;aria-valuetext&#39;);
         }
         
         if (me.rendered &amp;&amp; !me.destroyed) {
@@ -234,20 +234,20 @@ Ext.define('Ext.ProgressBar', {
                 me.bar.stopAnimation();
                 me.bar.animate(Ext.apply({
                     from: {
-                        width: (oldValue * 100) + '%'
+                        width: (oldValue * 100) + &#39;%&#39;
                     },
                     to: {
-                        width: (value * 100) + '%'
+                        width: (value * 100) + &#39;%&#39;
                     }
                 }, me.animate));
             } else {
-                me.bar.setStyle('width', (value * 100) + '%');
+                me.bar.setStyle(&#39;width&#39;, (value * 100) + &#39;%&#39;);
             }
             
-            me.ariaEl.dom.setAttribute('aria-valuenow', Math.round(value * 100));
+            me.ariaEl.dom.setAttribute(&#39;aria-valuenow&#39;, Math.round(value * 100));
         }
         
-        me.fireEvent('update', me, value, text);
+        me.fireEvent(&#39;update&#39;, me, value, text);
         
         return me;
     },
@@ -255,7 +255,7 @@ Ext.define('Ext.ProgressBar', {
 <span id='Ext-ProgressBar-method-updateText'>    /**
 </span>     * Updates the progress bar text. If specified, textEl will be updated, otherwise the progress bar itself will
      * display the updated text.
-     * @param {String} [text=''] The string to display in the progress text element
+     * @param {String} [text=&#39;&#39;] The string to display in the progress text element
      * @return {Ext.ProgressBar} this
      */
     updateText: function(text) {
@@ -269,10 +269,10 @@ Ext.define('Ext.ProgressBar', {
             me.textEl.setHtml(text);
             
             if (!me.autoText) {
-                me.ariaEl.dom.setAttribute('aria-valuetext', text);
+                me.ariaEl.dom.setAttribute(&#39;aria-valuetext&#39;, text);
             }
             else {
-                me.ariaEl.dom.removeAttribute('aria-valuetext');
+                me.ariaEl.dom.removeAttribute(&#39;aria-valuetext&#39;);
             }
         }
         
@@ -296,11 +296,11 @@ Ext.define('Ext.ProgressBar', {
      * Example usage:
      *
      *     var p = new Ext.ProgressBar({
-     *        renderTo: 'my-el'
+     *        renderTo: &#39;my-el&#39;
      *     });
      *
      *     //Wait for 5 seconds, then update the status el (progress bar will auto-reset)
-     *     var p = Ext.create('Ext.ProgressBar', {
+     *     var p = Ext.create(&#39;Ext.ProgressBar&#39;, {
      *        renderTo: Ext.getBody(),
      *        width: 300
      *     });
@@ -310,18 +310,18 @@ Ext.define('Ext.ProgressBar', {
      *        interval: 500, //bar will move fast!
      *        duration: 50000,
      *        increment: 15,
-     *        text: 'Updating...',
+     *        text: &#39;Updating...&#39;,
      *        scope: this,
      *        fn: function(){
-     *           p.updateText('Done!');
+     *           p.updateText(&#39;Done!&#39;);
      *        }
      *     });
      *
      *     //Or update indefinitely until some async action completes, then reset manually
      *     p.wait();
-     *     myAction.on('complete', function(){
+     *     myAction.on(&#39;complete&#39;, function(){
      *         p.reset();
-     *         p.updateText('Done!');
+     *         p.updateText(&#39;Done!&#39;);
      *     });
      *
      * @param {Object} config (optional) Configuration options
@@ -335,7 +335,7 @@ Ext.define('Ext.ProgressBar', {
      * @param {Number} config.increment The number of progress update segments to display within the
      * progress bar (defaults to 10).  If the bar reaches the end and is still updating, it will
      * automatically wrap back to the beginning.
-     * @param {String} config.text Optional text to display in the progress bar element (defaults to '').
+     * @param {String} config.text Optional text to display in the progress bar element (defaults to &#39;&#39;).
      * @param {Function} config.fn A callback function to execute after the progress bar finishes auto-
      * updating.  The function will be called with no arguments.  This function will be ignored if
      * duration is not specified since in that case the progress bar can only be stopped programmatically,
@@ -399,7 +399,7 @@ Ext.define('Ext.ProgressBar', {
         }
         
         if (me.rendered) {
-            me.ariaEl.dom.removeAttribute('aria-valuetext');
+            me.ariaEl.dom.removeAttribute(&#39;aria-valuetext&#39;);
         }
         
         return me;
@@ -429,7 +429,7 @@ Ext.define('Ext.ProgressBar', {
                 me.textEl.clear();
             }
             
-            Ext.destroyMembers(me, 'textEl', 'progressBar');
+            Ext.destroyMembers(me, &#39;textEl&#39;, &#39;progressBar&#39;);
             
             if (bar &amp;&amp; me.animate) {
                 bar.stopAnimation();

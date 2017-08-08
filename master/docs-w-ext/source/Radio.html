@@ -32,9 +32,9 @@
  * The following values will check the radio:
  *
  * - `true`
- * - `'true'`
- * - `'1'`
- * - `'on'`
+ * - `&#39;true&#39;`
+ * - `&#39;1&#39;`
+ * - `&#39;on&#39;`
  *
  * Any other value will uncheck it.
  *
@@ -45,74 +45,74 @@
  * # Example usage
  *
  *     @example
- *     Ext.create('Ext.form.Panel', {
- *         title      : 'Order Form',
+ *     Ext.create(&#39;Ext.form.Panel&#39;, {
+ *         title      : &#39;Order Form&#39;,
  *         width      : 300,
  *         bodyPadding: 10,
  *         renderTo   : Ext.getBody(),
  *         items: [
  *             {
- *                 xtype      : 'fieldcontainer',
- *                 fieldLabel : 'Size',
- *                 defaultType: 'radiofield',
+ *                 xtype      : &#39;fieldcontainer&#39;,
+ *                 fieldLabel : &#39;Size&#39;,
+ *                 defaultType: &#39;radiofield&#39;,
  *                 defaults: {
  *                     flex: 1
  *                 },
- *                 layout: 'hbox',
+ *                 layout: &#39;hbox&#39;,
  *                 items: [
  *                     {
- *                         boxLabel  : 'M',
- *                         name      : 'size',
- *                         inputValue: 'm',
- *                         id        : 'radio1'
+ *                         boxLabel  : &#39;M&#39;,
+ *                         name      : &#39;size&#39;,
+ *                         inputValue: &#39;m&#39;,
+ *                         id        : &#39;radio1&#39;
  *                     }, {
- *                         boxLabel  : 'L',
- *                         name      : 'size',
- *                         inputValue: 'l',
- *                         id        : 'radio2'
+ *                         boxLabel  : &#39;L&#39;,
+ *                         name      : &#39;size&#39;,
+ *                         inputValue: &#39;l&#39;,
+ *                         id        : &#39;radio2&#39;
  *                     }, {
- *                         boxLabel  : 'XL',
- *                         name      : 'size',
- *                         inputValue: 'xl',
- *                         id        : 'radio3'
+ *                         boxLabel  : &#39;XL&#39;,
+ *                         name      : &#39;size&#39;,
+ *                         inputValue: &#39;xl&#39;,
+ *                         id        : &#39;radio3&#39;
  *                     }
  *                 ]
  *             },
  *             {
- *                 xtype      : 'fieldcontainer',
- *                 fieldLabel : 'Color',
- *                 defaultType: 'radiofield',
+ *                 xtype      : &#39;fieldcontainer&#39;,
+ *                 fieldLabel : &#39;Color&#39;,
+ *                 defaultType: &#39;radiofield&#39;,
  *                 defaults: {
  *                     flex: 1
  *                 },
- *                 layout: 'hbox',
+ *                 layout: &#39;hbox&#39;,
  *                 items: [
  *                     {
- *                         boxLabel  : 'Blue',
- *                         name      : 'color',
- *                         inputValue: 'blue',
- *                         id        : 'radio4'
+ *                         boxLabel  : &#39;Blue&#39;,
+ *                         name      : &#39;color&#39;,
+ *                         inputValue: &#39;blue&#39;,
+ *                         id        : &#39;radio4&#39;
  *                     }, {
- *                         boxLabel  : 'Grey',
- *                         name      : 'color',
- *                         inputValue: 'grey',
- *                         id        : 'radio5'
+ *                         boxLabel  : &#39;Grey&#39;,
+ *                         name      : &#39;color&#39;,
+ *                         inputValue: &#39;grey&#39;,
+ *                         id        : &#39;radio5&#39;
  *                     }, {
- *                         boxLabel  : 'Black',
- *                         name      : 'color',
- *                         inputValue: 'black',
- *                         id        : 'radio6'
+ *                         boxLabel  : &#39;Black&#39;,
+ *                         name      : &#39;color&#39;,
+ *                         inputValue: &#39;black&#39;,
+ *                         id        : &#39;radio6&#39;
  *                     }
  *                 ]
  *             }
  *         ],
  *         bbar: [
  *             {
- *                 text: 'Smaller Size',
+ *                 text: &#39;Smaller Size&#39;,
  *                 handler: function() {
- *                     var radio1 = Ext.getCmp('radio1'),
- *                         radio2 = Ext.getCmp('radio2'),
- *                         radio3 = Ext.getCmp('radio3');
+ *                     var radio1 = Ext.getCmp(&#39;radio1&#39;),
+ *                         radio2 = Ext.getCmp(&#39;radio2&#39;),
+ *                         radio3 = Ext.getCmp(&#39;radio3&#39;);
  *
  *                     //if L is selected, change to M
  *                     if (radio2.getValue()) {
@@ -131,11 +131,11 @@
  *                 }
  *             },
  *             {
- *                 text: 'Larger Size',
+ *                 text: &#39;Larger Size&#39;,
  *                 handler: function() {
- *                     var radio1 = Ext.getCmp('radio1'),
- *                         radio2 = Ext.getCmp('radio2'),
- *                         radio3 = Ext.getCmp('radio3');
+ *                     var radio1 = Ext.getCmp(&#39;radio1&#39;),
+ *                         radio2 = Ext.getCmp(&#39;radio2&#39;),
+ *                         radio3 = Ext.getCmp(&#39;radio3&#39;);
  *
  *                     //if M is selected, change to L
  *                     if (radio1.getValue()) {
@@ -153,30 +153,30 @@
  *                     radio3.setValue(true);
  *                 }
  *             },
- *             '-',
+ *             &#39;-&#39;,
  *             {
- *                 text: 'Select color',
+ *                 text: &#39;Select color&#39;,
  *                 menu: {
  *                     indent: false,
  *                     items: [
  *                         {
- *                             text: 'Blue',
+ *                             text: &#39;Blue&#39;,
  *                             handler: function() {
- *                                 var radio = Ext.getCmp('radio4');
+ *                                 var radio = Ext.getCmp(&#39;radio4&#39;);
  *                                 radio.setValue(true);
  *                             }
  *                         },
  *                         {
- *                             text: 'Grey',
+ *                             text: &#39;Grey&#39;,
  *                             handler: function() {
- *                                 var radio = Ext.getCmp('radio5');
+ *                                 var radio = Ext.getCmp(&#39;radio5&#39;);
  *                                 radio.setValue(true);
  *                             }
  *                         },
  *                         {
- *                             text: 'Black',
+ *                             text: &#39;Black&#39;,
  *                             handler: function() {
- *                                 var radio = Ext.getCmp('radio6');
+ *                                 var radio = Ext.getCmp(&#39;radio6&#39;);
  *                                 radio.setValue(true);
  *                             }
  *                         }
@@ -186,11 +186,11 @@
  *         ]
  *     });
  */
-Ext.define('Ext.form.field.Radio', {
-    extend:'Ext.form.field.Checkbox',
-    alias: ['widget.radiofield', 'widget.radio'],
-    alternateClassName: 'Ext.form.Radio',
-    requires: ['Ext.form.RadioManager'],
+Ext.define(&#39;Ext.form.field.Radio&#39;, {
+    extend:&#39;Ext.form.field.Checkbox&#39;,
+    alias: [&#39;widget.radiofield&#39;, &#39;widget.radio&#39;],
+    alternateClassName: &#39;Ext.form.Radio&#39;,
+    requires: [&#39;Ext.form.RadioManager&#39;],
 
 <span id='Ext-form-field-Radio-property-isRadio'>    /**
 </span>     * @property {Boolean} isRadio
@@ -204,7 +204,7 @@ Ext.define('Ext.form.field.Radio', {
      * @private
      */
 
-    inputType: 'radio',
+    inputType: &#39;radio&#39;,
     
 <span id='Ext-form-field-Radio-property-formId'>    formId: null,
 </span>

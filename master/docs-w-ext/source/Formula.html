@@ -23,7 +23,7 @@
  * Formulas in a `ViewModel` can be defined as simply as just a function:
  *
  *      formulas: {
- *          xy: function (get) { return get('x') * get('y'); }
+ *          xy: function (get) { return get(&#39;x&#39;) * get(&#39;y&#39;); }
  *      }
  *
  * When you need to be more explicit, &quot;xy&quot; can become an object. The following means the
@@ -31,7 +31,7 @@
  *
  *      formulas: {
  *          xy: {
- *              get: function (get) { return get('x') * get('y'); }
+ *              get: function (get) { return get(&#39;x&#39;) * get(&#39;y&#39;); }
  *          }
  *      }
  *
@@ -53,11 +53,11 @@
  *
  *      formulas: {
  *          xy: function (get) {  // &quot;get&quot; is arbitrary but a good convention
- *              return get('x') * get('y');
+ *              return get(&#39;x&#39;) * get(&#39;y&#39;);
  *          },
  *
  *          xyz: function (get) {
- *              return get('xy') * get('z');
+ *              return get(&#39;xy&#39;) * get(&#39;z&#39;);
  *          }
  *      }
  *
@@ -70,7 +70,7 @@
  *
  *      formulas: {
  *          foo: function (get) {
- *              return get('theUser.address.city');
+ *              return get(&#39;theUser.address.city&#39;);
  *          }
  *      }
  *
@@ -84,9 +84,9 @@
  *
  *      formulas: {
  *          x2y2: function (get) {
- *              // These are still &quot;visible&quot; as &quot;get('x')&quot; and &quot;get('y')&quot; so this is OK:
- *              var x = get('x'),
- *                  y = get('y');
+ *              // These are still &quot;visible&quot; as &quot;get(&#39;x&#39;)&quot; and &quot;get(&#39;y&#39;)&quot; so this is OK:
+ *              var x = get(&#39;x&#39;),
+ *                  y = get(&#39;y&#39;);
  *
  *              return x * x * y * y;
  *          }
@@ -100,7 +100,7 @@
  *
  *      formulas: {
  *          zip: {
- *              bind: '{foo.bar.zip}',
+ *              bind: &#39;{foo.bar.zip}&#39;,
  *
  *              get: function (zip) {
  *                  // NOTE: the only thing we get is what our bind produces.
@@ -122,17 +122,17 @@
  *      formulas: {
  *             fullName: {
  *                 get: function (get) {
- *                     var ret = get('firstName') || '';
+ *                     var ret = get(&#39;firstName&#39;) || &#39;&#39;;
  *
- *                     if (get('lastName')) {
- *                         ret += ' ' +  get('lastName');
+ *                     if (get(&#39;lastName&#39;)) {
+ *                         ret += &#39; &#39; +  get(&#39;lastName&#39;);
  *                     }
  *
  *                     return ret;
  *                 },
  *
  *                 set: function (value) {
- *                     var space = value.indexOf(' '),
+ *                     var space = value.indexOf(&#39; &#39;),
  *                         split = (space &lt; 0) ? value.length : space;
  *
  *                     this.set({
@@ -155,7 +155,7 @@
  *              single: true,
  *
  *              get: function (get) {
- *                  return get('x') * get('y');
+ *                  return get(&#39;x&#39;) * get(&#39;y&#39;);
  *              }
  *          }
  *      }
@@ -164,11 +164,11 @@
  * to these properties will be destroyed. This means the `get` method (and hence the value
  * of `xy`) will only be executed/calculated once.
  */
-Ext.define('Ext.app.bind.Formula', {
-    extend: 'Ext.util.Schedulable',
+Ext.define(&#39;Ext.app.bind.Formula&#39;, {
+    extend: &#39;Ext.util.Schedulable&#39;,
 
     requires: [
-        'Ext.util.LruCache'
+        &#39;Ext.util.LruCache&#39;
     ],
 
     statics: {
@@ -184,9 +184,9 @@ Ext.define('Ext.app.bind.Formula', {
 
             parser = cache.get(name);
             if (!parser) {
-                // Unescaped: [^\.a-z0-9_]NAMEHERE\(\s*(['&quot;])(.*?)\1\s*\)
-                s = '[^\\.a-z0-9_]' + name + '\\(\\s*([\'&quot;])(.*?)\\1\\s*\\)';
-                parser = new RegExp(s, 'gi');
+                // Unescaped: [^\.a-z0-9_]NAMEHERE\(\s*([&#39;&quot;])(.*?)\1\s*\)
+                s = &#39;[^\\.a-z0-9_]&#39; + name + &#39;\\(\\s*([\&#39;&quot;])(.*?)\\1\\s*\\)&#39;;
+                parser = new RegExp(s, &#39;gi&#39;);
                 cache.add(name, parser);
             }
             return parser;
@@ -210,7 +210,7 @@ Ext.define('Ext.app.bind.Formula', {
 
 <span id='Ext-app-bind-Formula-cfg-get'>    /**
 </span>     * @cfg {Function} get
-     * The function to call to calculate the formula's value. The `get` method executes
+     * The function to call to calculate the formula&#39;s value. The `get` method executes
      * with a `this` pointer of the `ViewModel` and receives a getter function or the result of a configured `bind`.
      * @since 5.0.0
      */
@@ -269,7 +269,7 @@ Ext.define('Ext.app.bind.Formula', {
 
         //&lt;debug&gt;
         if (!getter) {
-            Ext.raise('Must specify a getter method for a formula');
+            Ext.raise(&#39;Must specify a getter method for a formula&#39;);
         }
         //&lt;/debug&gt;
 
@@ -304,7 +304,7 @@ Ext.define('Ext.app.bind.Formula', {
 
 <span id='Ext-app-bind-Formula-method-getFullName'>    getFullName: function () {
 </span>        return this.fullName ||
-              (this.fullName = this.stub.getFullName() + '=' + this.callParent() + ')');
+              (this.fullName = this.stub.getFullName() + &#39;=&#39; + this.callParent() + &#39;)&#39;);
     },
 
 <span id='Ext-app-bind-Formula-method-getRawValue'>    getRawValue: function () {
@@ -325,7 +325,7 @@ Ext.define('Ext.app.bind.Formula', {
             match, getterProp, formulaRe, expr;
 
         match = this.argumentNamesRe.exec(str);
-        getterProp = match ? match[1] : 'get';
+        getterProp = match ? match[1] : &#39;get&#39;;
         formulaRe = Ext.app.bind.Formula.getFormulaParser(getterProp);
 
         while ((match = formulaRe.exec(str))) {

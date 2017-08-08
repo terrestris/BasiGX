@@ -18,17 +18,17 @@
   <pre class="prettyprint lang-js"><span id='Ext-panel-Header'>/**
 </span> * Simple header class which is used for on {@link Ext.panel.Panel} and {@link Ext.window.Window}.
  */
-Ext.define('Ext.panel.Header', {
-    extend: 'Ext.panel.Bar',
-    xtype: 'header',
+Ext.define(&#39;Ext.panel.Header&#39;, {
+    extend: &#39;Ext.panel.Bar&#39;,
+    xtype: &#39;header&#39;,
     
     requires: [
-        'Ext.panel.Title',
-        'Ext.panel.Tool'
+        &#39;Ext.panel.Title&#39;,
+        &#39;Ext.panel.Tool&#39;
     ],
     
     mixins: [
-        'Ext.util.FocusableContainer'
+        &#39;Ext.util.FocusableContainer&#39;
     ],
 
 <span id='Ext-panel-Header-property-isHeader'>    /**
@@ -37,7 +37,7 @@ Ext.define('Ext.panel.Header', {
      */
     isHeader: true,
 
-<span id='Ext-panel-Header-cfg-defaultType'>    defaultType: 'tool',
+<span id='Ext-panel-Header-cfg-defaultType'>    defaultType: &#39;tool&#39;,
 </span><span id='Ext-panel-Header-property-indicateDrag'>    indicateDrag: false,
 </span><span id='Ext-panel-Header-cfg-weight'>    weight: -1,
 </span><span id='Ext-panel-Header-cfg-shrinkWrap'>    shrinkWrap: 3,
@@ -45,13 +45,13 @@ Ext.define('Ext.panel.Header', {
 <span id='Ext-panel-Header-property-iconAlign'>    // For performance reasons we give the following configs their default values on
 </span>    // the class body.  This prevents the updaters from running on initialization in the
     // default configuration scenario
-    iconAlign: 'left',
-<span id='Ext-panel-Header-property-titleAlign'>    titleAlign: 'left',
+    iconAlign: &#39;left&#39;,
+<span id='Ext-panel-Header-property-titleAlign'>    titleAlign: &#39;left&#39;,
 </span><span id='Ext-panel-Header-property-titlePosition'>    titlePosition: 0,
-</span><span id='Ext-panel-Header-property-titleRotation'>    titleRotation: 'default',
+</span><span id='Ext-panel-Header-property-titleRotation'>    titleRotation: &#39;default&#39;,
 </span>    
 <span id='Ext-panel-Header-cfg-autoEl'>    autoEl: {
-</span>        role: 'presentation'
+</span>        role: &#39;presentation&#39;
     },
 
 <span id='Ext-panel-Header-property-beforeRenderConfig'>    beforeRenderConfig: {
@@ -62,30 +62,30 @@ Ext.define('Ext.panel.Header', {
          * for glyphs can be set globally using 
          * {@link Ext.app.Application#glyphFontFamily glyphFontFamily} application 
          * config or the {@link Ext#setGlyphFontFamily Ext.setGlyphFontFamily()} method.
-         * It is initially set to `'Pictos'`.
+         * It is initially set to `&#39;Pictos&#39;`.
          * 
          * The following shows how to set the glyph using the font icons provided in the 
          * SDK (assuming the font-family has been configured globally):
          *
          *     // assumes the glyphFontFamily is &quot;Pictos&quot;
-         *     glyph: 'x48'       // the &quot;home&quot; icon (H character)
+         *     glyph: &#39;x48&#39;       // the &quot;home&quot; icon (H character)
          *
          *     // assumes the glyphFontFamily is &quot;Pictos&quot;
          *     glyph: 72          // The &quot;home&quot; icon (H character)
          *
          *     // assumes the glyphFontFamily is &quot;Pictos&quot;
-         *     glyph: 'H'         // the &quot;home&quot; icon
+         *     glyph: &#39;H&#39;         // the &quot;home&quot; icon
          * 
          * Alternatively, this config option accepts a string with the charCode and 
          * font-family separated by the `@` symbol.
          * 
          *     // using Font Awesome
-         *     glyph: 'xf015@FontAwesome'     // the &quot;home&quot; icon
+         *     glyph: &#39;xf015@FontAwesome&#39;     // the &quot;home&quot; icon
          * 
          *     // using Pictos
-         *     glyph: 'H@Pictos'              // the &quot;home&quot; icon
+         *     glyph: &#39;H@Pictos&#39;              // the &quot;home&quot; icon
          * 
-         * Depending on the theme you're using, you may need include the font icon 
+         * Depending on the theme you&#39;re using, you may need include the font icon 
          * packages in your application in order to use the icons included in the 
          * SDK.  For more information see:
          * 
@@ -115,7 +115,7 @@ Ext.define('Ext.panel.Header', {
          * An example of specifying a custom icon class would be something like:
          *
          *     // specify the property in the config for the class:
-         *     iconCls: 'my-home-icon'
+         *     iconCls: &#39;my-home-icon&#39;
          *
          *     // css rule specifying the background image to be used as the icon image:
          *     .my-home-icon {
@@ -126,12 +126,12 @@ Ext.define('Ext.panel.Header', {
          * provided in the SDK using the following syntax:
          * 
          *     // using Font Awesome
-         *     iconCls: 'x-fa fa-home'
+         *     iconCls: &#39;x-fa fa-home&#39;
          * 
          *     // using Pictos
-         *     iconCls: 'pictos pictos-home'
+         *     iconCls: &#39;pictos pictos-home&#39;
          * 
-         * Depending on the theme you're using, you may need include the font icon 
+         * Depending on the theme you&#39;re using, you may need include the font icon 
          * packages in your application in order to use the icons included in the 
          * SDK.  For more information see:
          * 
@@ -142,7 +142,7 @@ Ext.define('Ext.panel.Header', {
         iconCls: null,
 
 <span id='Ext-panel-Header-cfg-iconAlign'>        /**
-</span>         * @cfg {'top'/'right'/'bottom'/'left'} [iconAlign='left']
+</span>         * @cfg {&#39;top&#39;/&#39;right&#39;/&#39;bottom&#39;/&#39;left&#39;} [iconAlign=&#39;left&#39;]
          * The side of the title to render the icon.
          * @accessor
          */
@@ -155,11 +155,11 @@ Ext.define('Ext.panel.Header', {
          */
         title: {
             $value: {
-                xtype: 'title',
+                xtype: &#39;title&#39;,
                 flex: 1
             },
             merge: function(newValue, oldValue) {
-                if (typeof newValue !== 'object') {
+                if (typeof newValue !== &#39;object&#39;) {
                     newValue = {
                         text: newValue
                     };
@@ -170,7 +170,7 @@ Ext.define('Ext.panel.Header', {
         },
 
 <span id='Ext-panel-Header-cfg-titleAlign'>        /**
-</span>         * @cfg {'left'/'center'/'right'} [titleAlign='left']
+</span>         * @cfg {&#39;left&#39;/&#39;center&#39;/&#39;right&#39;} [titleAlign=&#39;left&#39;]
          * The alignment of the title text within the available space between the
          * icon and the tools.
          * @accessor
@@ -180,7 +180,7 @@ Ext.define('Ext.panel.Header', {
 <span id='Ext-panel-Header-cfg-titlePosition'>        /**
 </span>         * @cfg {Number} [titlePosition=0]
          * The ordinal position among the header items (tools and other components specified using the {@link #cfg-items} config)
-         * at which the title component is inserted. See {@link Ext.panel.Panel#cfg-header Panel's header config}.
+         * at which the title component is inserted. See {@link Ext.panel.Panel#cfg-header Panel&#39;s header config}.
          *
          * If not specified, the title is inserted after any {@link #cfg-items}, but *before* any {@link Ext.panel.Panel#tools}.
          *
@@ -191,26 +191,26 @@ Ext.define('Ext.panel.Header', {
         titlePosition: null,
         
 <span id='Ext-panel-Header-cfg-titleRotation'>        /**
-</span>         * @cfg {'default'/0/1/2} [titleRotation='default']
+</span>         * @cfg {&#39;default&#39;/0/1/2} [titleRotation=&#39;default&#39;]
          * @accessor
-         * The rotation of the header's title text.  Can be one of the following values:
+         * The rotation of the header&#39;s title text.  Can be one of the following values:
          *
-         * - `'default'` - use the default rotation, depending on the dock position of the header
+         * - `&#39;default&#39;` - use the default rotation, depending on the dock position of the header
          * - `0` - no rotation
          * - `1` - rotate 90deg clockwise
          * - `2` - rotate 90deg counter-clockwise
          *
          * The default behavior of this config depends on the dock position of the header:
          *
-         * - `'top'` or `'bottom'` - `0`
-         * - `'right'` - `1`
-         * - `'left'` - `1`
+         * - `&#39;top&#39;` or `&#39;bottom&#39;` - `0`
+         * - `&#39;right&#39;` - `1`
+         * - `&#39;left&#39;` - `1`
          */
         titleRotation: null
     },
 
 <span id='Ext-panel-Header-property-headerCls'>    // a class for styling that is shared between panel and window headers
-</span>    headerCls: Ext.baseCSSPrefix + 'header',
+</span>    headerCls: Ext.baseCSSPrefix + &#39;header&#39;,
 
 <span id='Ext-panel-Header-event-click'>    /**
 </span>     * @event click
@@ -230,27 +230,27 @@ Ext.define('Ext.panel.Header', {
 
 <span id='Ext-panel-Header-cfg-itemPosition'>    /**
 </span>     * @cfg {Number} [itemPosition]
-     * The index at which the any {@link #cfg-items} will be inserted into the Header's
+     * The index at which the any {@link #cfg-items} will be inserted into the Header&#39;s
      * items collection.  By default this will effectively be the `1` position
      * placing the items following the panel {@link Ext.panel.Panel#title title}.
      *
      * Set to `0` to have the items {@link #insert inserted} before the panel title.
      *
-     *     Ext.create('Ext.panel.Panel', {
-     *         title: 'Hello',
+     *     Ext.create(&#39;Ext.panel.Panel&#39;, {
+     *         title: &#39;Hello&#39;,
      *         width: 200,
-     *         html: '&lt;p&gt;World!&lt;/p&gt;',
+     *         html: &#39;&lt;p&gt;World!&lt;/p&gt;&#39;,
      *         renderTo: Ext.getBody(),
      *         tools: [{
-     *             type: 'pin'
+     *             type: &#39;pin&#39;
      *         }],
      *         header: {
      *             //itemPosition: 0,	// before panel title
      *             //itemPosition: 1, // after panel title
      *             //itemPosition: 2, // after pin tool
      *             items: [{
-     *                 xtype: 'button',
-     *                 text: 'Header Button'
+     *                 xtype: &#39;button&#39;,
+     *                 text: &#39;Header Button&#39;
      *             }]
      *         }
      *     });
@@ -270,7 +270,7 @@ Ext.define('Ext.panel.Header', {
             me.items = items = [];
         }
 
-        me.indicateDragCls = me.headerCls + '-draggable';
+        me.indicateDragCls = me.headerCls + &#39;-draggable&#39;;
         if (me.indicateDrag) {
             cls.push(me.indicateDragCls);
         }
@@ -289,7 +289,7 @@ Ext.define('Ext.panel.Header', {
         me.on({
             dblclick: me.onDblClick,
             click: me.onClick,
-            element: 'el',
+            element: &#39;el&#39;,
             scope: me
         });
     },
@@ -302,8 +302,8 @@ Ext.define('Ext.panel.Header', {
         var me = this;
         
         // Even though the defaultType is tool, it may be changed,
-        // so let's be safe and forcibly specify tool
-        me.add(Ext.ComponentManager.create(tool, 'tool'));
+        // so let&#39;s be safe and forcibly specify tool
+        me.add(Ext.ComponentManager.create(tool, &#39;tool&#39;));
         
         me.checkFocusableTools();
     },
@@ -315,15 +315,15 @@ Ext.define('Ext.panel.Header', {
         if (me.vertical) {
             frameTR = me.frameTR;
             if (frameTR) {
-                // The corners sprite currently requires knowledge of the vertical header's
+                // The corners sprite currently requires knowledge of the vertical header&#39;s
                 // width to correctly set the background position of the bottom right corner.
                 // TODO: rearrange the sprite so that this can be done with pure css.
                 frameBR = me.frameBR;
                 frameTL = me.frameTL;
-                xPos = (me.getWidth() - frameTR.getPadding('r') -
-                    ((frameTL) ? frameTL.getPadding('l') : me.el.getBorderWidth('l'))) + 'px';
-                frameBR.setStyle('background-position-x', xPos);
-                frameTR.setStyle('background-position-x', xPos);
+                xPos = (me.getWidth() - frameTR.getPadding(&#39;r&#39;) -
+                    ((frameTL) ? frameTL.getPadding(&#39;l&#39;) : me.el.getBorderWidth(&#39;l&#39;))) + &#39;px&#39;;
+                frameBR.setStyle(&#39;background-position-x&#39;, xPos);
+                frameTR.setStyle(&#39;background-position-x&#39;, xPos);
             }
         }
         this.callParent();
@@ -333,7 +333,7 @@ Ext.define('Ext.panel.Header', {
 </span>        var me = this,
             isString, configHasRotation;
 
-        title = title || '';
+        title = title || &#39;&#39;;
 
         isString = Ext.isString(title);
 
@@ -352,24 +352,24 @@ Ext.define('Ext.panel.Header', {
             title = oldTitle;
         } else {
             if (isString) {
-                title.xtype = 'title';
+                title.xtype = &#39;title&#39;;
             }
             title.ui = me.ui;
-            configHasRotation = ('rotation' in title);
+            configHasRotation = (&#39;rotation&#39; in title);
             
             // Important Panel attribute aria-labelledby depends on title textEl id
-            title.id = me.id + '-title';
+            title.id = me.id + &#39;-title&#39;;
             
             if (me.isAccordionHeader) {
-                title.ariaRole = 'tab';
+                title.ariaRole = &#39;tab&#39;;
                 title.textElRole = null;
                 title.focusable = true;
             }
 
             title = Ext.create(title);
             
-            // avoid calling the title's rotation updater on initial startup in the default scenario
-            if (!configHasRotation &amp;&amp; me.vertical &amp;&amp; me.titleRotation === 'default') {
+            // avoid calling the title&#39;s rotation updater on initial startup in the default scenario
+            if (!configHasRotation &amp;&amp; me.vertical &amp;&amp; me.titleRotation === &#39;default&#39;) {
                 title.rotation = 1;
             }
         }
@@ -427,23 +427,23 @@ Ext.define('Ext.panel.Header', {
         }
         
         if (haveFocusableTool) {
-            if (!me.initialConfig.hasOwnProperty('enableFocusableContainer') ||
+            if (!me.initialConfig.hasOwnProperty(&#39;enableFocusableContainer&#39;) ||
                 me.enableFocusableContainer) {
-                me.ariaRole = 'toolbar';
+                me.ariaRole = &#39;toolbar&#39;;
                 me.enableFocusableContainer = true;
                 
                 if (me.rendered) {
-                    me.ariaEl.dom.setAttribute('role', 'toolbar');
+                    me.ariaEl.dom.setAttribute(&#39;role&#39;, &#39;toolbar&#39;);
                     me.initFocusableContainer(true);
                 }
             }
         }
         else {
-            me.ariaRole = 'presentation';
+            me.ariaRole = &#39;presentation&#39;;
             me.enableFocusableContainer = false;
             
             if (me.rendered) {
-                me.ariaEl.dom.setAttribute('role', 'presentation');
+                me.ariaEl.dom.setAttribute(&#39;role&#39;, &#39;presentation&#39;);
                 me.initFocusableContainer(true);
             }
         }
@@ -486,7 +486,7 @@ Ext.define('Ext.panel.Header', {
 
         me.callParent([dock]);
 
-        if (rotation === 'default') {
+        if (rotation === &#39;default&#39;) {
             rotation = (me.vertical ? 1 : 0);
 
             if (rotation !== titleRotation) {
@@ -537,7 +537,7 @@ Ext.define('Ext.panel.Header', {
     },
 
 <span id='Ext-panel-Header-method-updateTitleRotation'>    updateTitleRotation: function(rotation) {
-</span>        if (rotation === 'default') {
+</span>        if (rotation === &#39;default&#39;) {
             rotation = (this.vertical ? 1 : 0);
         }
         this.getTitle().setRotation(rotation);
@@ -545,7 +545,7 @@ Ext.define('Ext.panel.Header', {
 
 <span id='Ext-panel-Header-property-privates'>    privates: {
 </span>        fireClickEvent: function(type, e){
-            var toolCls = '.' + Ext.panel.Tool.prototype.baseCls;
+            var toolCls = &#39;.&#39; + Ext.panel.Tool.prototype.baseCls;
             if (!e.getTarget(toolCls)) {
                 this.fireEvent(type, this, e);
             }
@@ -557,17 +557,17 @@ Ext.define('Ext.panel.Header', {
                 owner = me.ownerCt;
 
             if (!me.expanding &amp;&amp; owner &amp;&amp; (owner.collapsed || me.isCollapsedExpander)) {
-                cls += '-' + owner.collapsedCls;
+                cls += &#39;-&#39; + owner.collapsedCls;
             }
-            return cls + '-' + me.dock;
+            return cls + &#39;-&#39; + me.dock;
         },
 
         onClick: function(e) {
-            this.fireClickEvent('click', e);
+            this.fireClickEvent(&#39;click&#39;, e);
         },
 
         onDblClick: function(e){
-            this.fireClickEvent('dblclick', e);
+            this.fireClickEvent(&#39;dblclick&#39;, e);
         },
 
         syncBeforeAfterTitleClasses: function(force) {
@@ -588,13 +588,13 @@ Ext.define('Ext.panel.Header', {
             for (i = 0; i &lt; itemCount; ++i) {
                 item = childItems[i];
 
-                afterCls  = item.afterTitleCls  || (item.afterTitleCls  = item.baseCls + '-after-title');
-                beforeCls = item.beforeTitleCls || (item.beforeTitleCls = item.baseCls + '-before-title');
+                afterCls  = item.afterTitleCls  || (item.afterTitleCls  = item.baseCls + &#39;-after-title&#39;);
+                beforeCls = item.beforeTitleCls || (item.beforeTitleCls = item.baseCls + &#39;-before-title&#39;);
 
                 if (!me.title || i &lt; titlePosition) {
                     if (syncGen) {
                         item.removeCls(afterCls);
-                    } // else first time we won't need to remove anything...
+                    } // else first time we won&#39;t need to remove anything...
                     item.addCls(beforeCls);
                 } else if (i &gt; titlePosition) {
                     if (syncGen) {
@@ -608,7 +608,7 @@ Ext.define('Ext.panel.Header', {
         syncNoBorderCls: function() {
             var me = this,
                 ownerCt = this.ownerCt,
-                noBorderCls = me.headerCls + '-noborder';
+                noBorderCls = me.headerCls + &#39;-noborder&#39;;
 
             // test for border === false is needed because undefined is the same as true
             if (ownerCt ? (ownerCt.border === false &amp;&amp; !ownerCt.frame) : me.border === false) {

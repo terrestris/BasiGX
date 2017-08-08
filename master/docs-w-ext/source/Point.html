@@ -21,8 +21,8 @@
  *
  *     var point = Ext.util.Point.fromEvent(e);
  */
-Ext.define('Ext.util.Point', {
-    extend: 'Ext.util.Region',
+Ext.define(&#39;Ext.util.Point&#39;, {
+    extend: &#39;Ext.util.Region&#39;,
 
 <span id='Ext-util-Point-property-isPoint'>    isPoint: true,
 </span>
@@ -146,7 +146,7 @@ Ext.define('Ext.util.Point', {
      * @return {Boolean}
      */
     isCloseTo: function(point, threshold) {
-        if (typeof threshold == 'number') {
+        if (typeof threshold == &#39;number&#39;) {
             return this.getDistanceTo(point) &lt;= threshold;
         }
 
@@ -189,7 +189,7 @@ Ext.define('Ext.util.Point', {
      * @return {Boolean}
      */
     roundedEquals: function(point) {
-        if (!point || typeof point !== 'object') {
+        if (!point || typeof point !== &#39;object&#39;) {
             point = this.origin;
         }
 
@@ -198,7 +198,7 @@ Ext.define('Ext.util.Point', {
     },
 
 <span id='Ext-util-Point-method-getDistanceTo'>    getDistanceTo: function(point) {
-</span>        if (!point || typeof point !== 'object') {
+</span>        if (!point || typeof point !== &#39;object&#39;) {
             point = this.origin;
         }
 
@@ -209,7 +209,7 @@ Ext.define('Ext.util.Point', {
     },
 
 <span id='Ext-util-Point-method-getAngleTo'>    getAngleTo: function(point) {
-</span>        if (!point || typeof point !== 'object') {
+</span>        if (!point || typeof point !== &#39;object&#39;) {
             point = this.origin;
         }
 

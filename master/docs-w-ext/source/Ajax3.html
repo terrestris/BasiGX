@@ -20,7 +20,7 @@
  * communicate with your server side code. It can be used as follows:
  *
  *      Ext.Ajax.request({
- *          url: 'ajax_demo/sample.json',
+ *          url: &#39;ajax_demo/sample.json&#39;,
  *
  *          success: function(response, opts) {
  *              var obj = Ext.decode(response.responseText);
@@ -28,7 +28,7 @@
  *          },
  *
  *          failure: function(response, opts) {
- *              console.log('server-side failure with status code ' + response.status);
+ *              console.log(&#39;server-side failure with status code &#39; + response.status);
  *          }
  *      });
  *
@@ -43,7 +43,7 @@
  *      Ext.Ajax.setTimeout(120000); // 120 seconds
  *
  *      Ext.Ajax.request({
- *          url: 'page.aspx',
+ *          url: &#39;page.aspx&#39;,
  *          timeout: 60000
  *      });
  *
@@ -52,8 +52,8 @@
  * requests that share common settings that are different to all other requests in the
  * application.
  */
-Ext.define('Ext.Ajax', {
-    extend: 'Ext.data.Connection',
+Ext.define(&#39;Ext.Ajax&#39;, {
+    extend: &#39;Ext.data.Connection&#39;,
     singleton: true,
 
 <span id='Ext-Ajax-cfg-extraParams'>    /**

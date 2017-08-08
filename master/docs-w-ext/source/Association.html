@@ -23,23 +23,23 @@
  * one user can have many orders (including 0 orders). Here is what a sample implementation of this association
  * could look like. This example will be referred to in the following sections.
  *
- *     Ext.define('User', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;User&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         fields: [{
- *             name: 'id',
- *             type: 'int'
- *         }, 'name']
+ *             name: &#39;id&#39;,
+ *             type: &#39;int&#39;
+ *         }, &#39;name&#39;]
  *     });
  *
- *     Ext.define('Order', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;Order&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         fields: [{
- *             name: 'id',
- *             type: 'int'
+ *             name: &#39;id&#39;,
+ *             type: &#39;int&#39;
  *         }, {
- *             name: 'userId',
- *             type: 'int',
- *             reference: 'User'
+ *             name: &#39;userId&#39;,
+ *             type: &#39;int&#39;,
+ *             reference: &#39;User&#39;
  *         }]
  *     });
  *
@@ -91,20 +91,20 @@
  * contained by another entity. This type of relationship is common with NoSQL databases.
  * formats. A simple example definition using `User/Order`:
  *
- *     Ext.define('User', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;User&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         fields: [{
- *             name: 'id',
- *             type: 'int'
- *         }, 'name'],
- *         hasMany: 'Order'
+ *             name: &#39;id&#39;,
+ *             type: &#39;int&#39;
+ *         }, &#39;name&#39;],
+ *         hasMany: &#39;Order&#39;
  *     });
  *
- *     Ext.define('Order', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;Order&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         fields: [{
- *             name: 'id',
- *             type: 'int'
+ *             name: &#39;id&#39;,
+ *             type: &#39;int&#39;
  *         }]
  *     });
  *
@@ -156,10 +156,10 @@
  *
  *     // Application code
  *     var users = new Ext.data.Store({
- *         model: 'User',
+ *         model: &#39;User&#39;,
  *         proxy: {
- *             type: 'ajax',
- *             url: '/Users'
+ *             type: &#39;ajax&#39;,
+ *             url: &#39;/Users&#39;
  *         }
  *     });
  *     users.load(function() {
@@ -190,19 +190,19 @@
  * either the field name (in a keyed association) or the model name. This naming follows a pattern defined by
  * the `Ext.data.schema.Namer`. To change a specific instance, an explicit role can be specified:
  *
- *     Ext.define('Thread', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'title']
+ *     Ext.define(&#39;Thread&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;title&#39;]
  *     });
  *
- *     Ext.define('Post', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'content', {
- *             name: 'threadId',
+ *     Ext.define(&#39;Post&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;content&#39;, {
+ *             name: &#39;threadId&#39;,
  *             reference: {
- *                 type: 'Thread',
- *                 role: 'discussion',
- *                 inverse: 'comments'
+ *                 type: &#39;Thread&#39;,
+ *                 role: &#39;discussion&#39;,
+ *                 inverse: &#39;comments&#39;
  *                 
  *             }
  *         }]
@@ -225,16 +225,16 @@
  * the example below, there is no code in the `Thread` entity regarding the association, however by virtue of the
  * declaration in post, `Thread` is decorated with the appropriate infrastructure to participate in the association.
  *
- *     Ext.define('Thread', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'title']
+ *     Ext.define(&#39;Thread&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;title&#39;]
  *     });
  *
- *     Ext.define('Post', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'content', {
- *             name: 'threadId',
- *             reference: 'Thread'
+ *     Ext.define(&#39;Post&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;content&#39;, {
+ *             name: &#39;threadId&#39;,
+ *             reference: &#39;Thread&#39;
  *         }]
  *     });
  *
@@ -243,9 +243,9 @@
  * Referring to model names in associations depends on their {@link Ext.data.Model#entityName}. See
  * the &quot;Relative Naming&quot; section in the `Ext.data.schema.Schema` documentation.
  */
-Ext.define('Ext.data.schema.Association', {
+Ext.define(&#39;Ext.data.schema.Association&#39;, {
     requires: [
-        'Ext.data.schema.Role'
+        &#39;Ext.data.schema.Role&#39;
     ],
 
 <span id='Ext-data-schema-Association-property-isOneToOne'>    isOneToOne: false,
@@ -400,7 +400,7 @@ Ext.define('Ext.data.schema.Association', {
     
 <span id='Ext-data-schema-Association-method-getFieldName'>    getFieldName: function() {
 </span>        var field = this.field;
-        return field ? field.name : '';
+        return field ? field.name : &#39;&#39;;
     }
 });
 </pre>

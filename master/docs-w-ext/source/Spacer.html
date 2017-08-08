@@ -26,31 +26,31 @@
  * Example:
  *
  *     @example
- *     Ext.create('Ext.panel.Panel', {
- *         title: 'Toolbar Spacer Example',
+ *     Ext.create(&#39;Ext.panel.Panel&#39;, {
+ *         title: &#39;Toolbar Spacer Example&#39;,
  *         width: 300,
  *         height: 200,
  *         tbar : [
- *             'Item 1',
- *             { xtype: 'tbspacer' }, // or ' '
- *             'Item 2',
+ *             &#39;Item 1&#39;,
+ *             { xtype: &#39;tbspacer&#39; }, // or &#39; &#39;
+ *             &#39;Item 2&#39;,
  *             // space width is also configurable via javascript
- *             { xtype: 'tbspacer', width: 50 }, // add a 50px space
- *             'Item 3'
+ *             { xtype: &#39;tbspacer&#39;, width: 50 }, // add a 50px space
+ *             &#39;Item 3&#39;
  *         ],
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.toolbar.Spacer', {
-    extend: 'Ext.Component',
-    // Toolbar required here because we'll try to decorate it's alternateClassName
-    // with this class' alternate name
-    requires: ['Ext.toolbar.Toolbar'],
-    alias: 'widget.tbspacer',
-    alternateClassName: 'Ext.Toolbar.Spacer',
-<span id='Ext-toolbar-Spacer-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'toolbar-spacer',
+Ext.define(&#39;Ext.toolbar.Spacer&#39;, {
+    extend: &#39;Ext.Component&#39;,
+    // Toolbar required here because we&#39;ll try to decorate it&#39;s alternateClassName
+    // with this class&#39; alternate name
+    requires: [&#39;Ext.toolbar.Toolbar&#39;],
+    alias: &#39;widget.tbspacer&#39;,
+    alternateClassName: &#39;Ext.Toolbar.Spacer&#39;,
+<span id='Ext-toolbar-Spacer-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;toolbar-spacer&#39;,
 </span>    
-<span id='Ext-toolbar-Spacer-property-ariaRole'>    ariaRole: 'presentation'
+<span id='Ext-toolbar-Spacer-property-ariaRole'>    ariaRole: &#39;presentation&#39;
 </span>});</pre>
 </body>
 </html>

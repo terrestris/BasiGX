@@ -19,7 +19,7 @@
 </span> * Utility class for manipulating CSS rules
  * @singleton
  */
-Ext.define('Ext.util.CSS', function() {
+Ext.define(&#39;Ext.util.CSS&#39;, function() {
     var CSS,
         rules = null,
         doc = document,
@@ -51,13 +51,13 @@ Ext.define('Ext.util.CSS', function() {
          */
         createStyleSheet: function (cssText, id) {
             var ss,
-                head = doc.getElementsByTagName('head')[0],
-                styleEl = doc.createElement('style');
+                head = doc.getElementsByTagName(&#39;head&#39;)[0],
+                styleEl = doc.createElement(&#39;style&#39;);
 
-            styleEl.setAttribute('type', 'text/css');
+            styleEl.setAttribute(&#39;type&#39;, &#39;text/css&#39;);
 
             if (id) {
-               styleEl.setAttribute('id', id);
+               styleEl.setAttribute(&#39;id&#39;, id);
             }
 
             // Feature detect old IE
@@ -81,7 +81,7 @@ Ext.define('Ext.util.CSS', function() {
          * reference to remove
          */
         removeStyleSheet: function(stylesheet) {
-            var styleEl = (typeof stylesheet === 'string') ?
+            var styleEl = (typeof stylesheet === &#39;string&#39;) ?
                 doc.getElementById(stylesheet) : stylesheet.ownerNode;
 
             if (styleEl) {
@@ -126,7 +126,7 @@ Ext.define('Ext.util.CSS', function() {
 
                 for (; i &gt;= 0; --i) {
                     rule = ssRules[i];
-                    // If it's an @import rule, import its stylesheet
+                    // If it&#39;s an @import rule, import its stylesheet
                     if (rule.styleSheet) {
                         CSS.cacheStyleSheet(rule.styleSheet);
                     }
@@ -136,7 +136,7 @@ Ext.define('Ext.util.CSS', function() {
         },
 
         cacheRule: function(cssRule, styleSheet) {
-            // If it's an @import rule, import its stylesheet
+            // If it&#39;s an @import rule, import its stylesheet
             if (cssRule.styleSheet) {
                 return CSS.cacheStyleSheet(cssRule.styleSheet);
             }
@@ -147,7 +147,7 @@ Ext.define('Ext.util.CSS', function() {
             if (selectorText) {
 
                 // Split in case there are multiple, comma-delimited selectors
-                selectorText = selectorText.split(',');
+                selectorText = selectorText.split(&#39;,&#39;);
                 selectorCount = selectorText.length;
                 for (j = 0; j &lt; selectorCount; j++) {
                     // IE&lt;8 does not keep a reference to parentStyleSheet in the rule, so we
@@ -237,9 +237,9 @@ Ext.define('Ext.util.CSS', function() {
                 index = ruleSet.length;
 
             if (styleSheet.insertRule) {
-                styleSheet.insertRule(selector + ' {' + cssText + '}', index);
+                styleSheet.insertRule(selector + &#39; {&#39; + cssText + &#39;}&#39;, index);
             } else {
-                styleSheet.addRule(selector, cssText||' ');
+                styleSheet.addRule(selector, cssText||&#39; &#39;);
             }
             CSS.cacheRule(result = ruleSet[index], styleSheet);
             return result;
@@ -247,7 +247,7 @@ Ext.define('Ext.util.CSS', function() {
 
 <span id='Ext-util-CSS-method-updateRule'>        /**
 </span>         * Updates a rule property
-         * @param {String/String[]} selector If it's an array it tries each selector until it finds one. Stops immediately once one is found.
+         * @param {String/String[]} selector If it&#39;s an array it tries each selector until it finds one. Stops immediately once one is found.
          * @param {String} property The css property or a cssText specification eg `&quot;color:red;font-weight:bold;text-decoration:underline&quot;`
          * @param {String} value The new value for the property
          * @return {Boolean} true If a rule was found and updated

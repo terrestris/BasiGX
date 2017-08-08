@@ -18,17 +18,17 @@
   <pre class="prettyprint lang-js"><span id='Ext-layout-component-ProgressBar'>/**
 </span> * @private
  */
-Ext.define('Ext.layout.component.ProgressBar', {
+Ext.define(&#39;Ext.layout.component.ProgressBar&#39;, {
 
     /* Begin Definitions */
 
-    alias: ['layout.progressbar'],
+    alias: [&#39;layout.progressbar&#39;],
 
-    extend: 'Ext.layout.component.Auto',
+    extend: &#39;Ext.layout.component.Auto&#39;,
 
 <span id='Ext-layout-component-ProgressBar-property-type'>    /* End Definitions */
 </span>
-    type: 'progressbar',
+    type: &#39;progressbar&#39;,
 
 <span id='Ext-layout-component-ProgressBar-method-beginLayout'>    beginLayout: function (ownerContext) {
 </span>        var me = this,
@@ -37,7 +37,7 @@ Ext.define('Ext.layout.component.ProgressBar', {
         me.callParent(arguments);
 
         if (!ownerContext.textEls) {
-            textEls = me.owner.textEl; // an Ext.Element or CompositeList (raw DOM el's)
+            textEls = me.owner.textEl; // an Ext.Element or CompositeList (raw DOM el&#39;s)
 
             if (textEls.isComposite) {
                 ownerContext.textEls = [];
@@ -46,7 +46,7 @@ Ext.define('Ext.layout.component.ProgressBar', {
                     ownerContext.textEls[i] = ownerContext.getEl(Ext.get(textEls[i]));
                 }
             } else {
-                ownerContext.textEls = [ ownerContext.getEl('textEl') ];
+                ownerContext.textEls = [ ownerContext.getEl(&#39;textEl&#39;) ];
             }
         }
     },
@@ -57,7 +57,7 @@ Ext.define('Ext.layout.component.ProgressBar', {
 
         me.callParent(arguments);
 
-        if (Ext.isNumber(width = ownerContext.getProp('width'))) {
+        if (Ext.isNumber(width = ownerContext.getProp(&#39;width&#39;))) {
             width -= ownerContext.getBorderInfo().width;
             textEls = ownerContext.textEls;
 

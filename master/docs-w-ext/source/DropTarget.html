@@ -19,9 +19,9 @@
 </span> * A simple class that provides the basic implementation needed to make any element a drop target that can have
  * draggable items dropped onto it.  The drop has no effect until an implementation of notifyDrop is provided.
  */
-Ext.define('Ext.dd.DropTarget', {
-    extend: 'Ext.dd.DDTarget',
-    requires: ['Ext.dd.ScrollManager'],
+Ext.define(&#39;Ext.dd.DropTarget&#39;, {
+    extend: &#39;Ext.dd.DDTarget&#39;,
+    requires: [&#39;Ext.dd.ScrollManager&#39;],
 
 <span id='Ext-dd-DropTarget-method-constructor'>    /**
 </span>     * Creates new DropTarget.
@@ -61,12 +61,12 @@ Ext.define('Ext.dd.DropTarget', {
 </span>     * @cfg {String} dropAllowed
      * The CSS class returned to the drag source when drop is allowed.
      */
-    dropAllowed : Ext.baseCSSPrefix + 'dd-drop-ok',
+    dropAllowed : Ext.baseCSSPrefix + &#39;dd-drop-ok&#39;,
 <span id='Ext-dd-DropTarget-cfg-dropNotAllowed'>    /**
 </span>     * @cfg {String} dropNotAllowed
      * The CSS class returned to the drag source when drop is not allowed.
      */
-    dropNotAllowed : Ext.baseCSSPrefix + 'dd-drop-nodrop',
+    dropNotAllowed : Ext.baseCSSPrefix + &#39;dd-drop-nodrop&#39;,
 
 <span id='Ext-dd-DropTarget-property-isTarget'>    /**
 </span>     * @private
@@ -129,7 +129,7 @@ Ext.define('Ext.dd.DropTarget', {
 <span id='Ext-dd-DropTarget-method-notifyDrop'>    /**
 </span>     * The function a {@link Ext.dd.DragSource} calls once to notify this drop target that the dragged item has
      * been dropped on it. This method removes any `overClass` and returns false, so you must provide an
-     * implementation that does something to process the drop event and returns true so that the drag source's
+     * implementation that does something to process the drop event and returns true so that the drag source&#39;s
      * repair action does not run.
      *
      * You should `callParent` from an override of this method to ensure proper cleanup is

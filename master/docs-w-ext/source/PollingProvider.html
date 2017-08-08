@@ -24,34 +24,34 @@
  * API portion of the Ext Direct stack.
  *
  * An instance of PollingProvider may be created directly via the new keyword or by simply
- * specifying `type = 'polling'`. For example:
+ * specifying `type = &#39;polling&#39;`. For example:
  *
  *      var pollA = new Ext.direct.PollingProvider({
- *          type:'polling',
- *          url: 'php/pollA.php',
+ *          type:&#39;polling&#39;,
+ *          url: &#39;php/pollA.php&#39;,
  *      });
  *      Ext.direct.Manager.addProvider(pollA);
  *      pollA.disconnect();
  *      
  *      Ext.direct.Manager.addProvider({
- *          type:'polling',
- *          url: 'php/pollB.php',
- *          id: 'pollB-provider'
+ *          type:&#39;polling&#39;,
+ *          url: &#39;php/pollB.php&#39;,
+ *          id: &#39;pollB-provider&#39;
  *      });
- *      var pollB = Ext.direct.Manager.getProvider('pollB-provider');
+ *      var pollB = Ext.direct.Manager.getProvider(&#39;pollB-provider&#39;);
  *
  */
-Ext.define('Ext.direct.PollingProvider', {
-    extend: 'Ext.direct.JsonProvider',
-    alias:  'direct.pollingprovider',
+Ext.define(&#39;Ext.direct.PollingProvider&#39;, {
+    extend: &#39;Ext.direct.JsonProvider&#39;,
+    alias:  &#39;direct.pollingprovider&#39;,
     
     requires: [
-        'Ext.Ajax',
-        'Ext.util.TaskRunner',
-        'Ext.direct.ExceptionEvent'
+        &#39;Ext.Ajax&#39;,
+        &#39;Ext.util.TaskRunner&#39;,
+        &#39;Ext.direct.ExceptionEvent&#39;
     ],
     
-<span id='Ext-direct-PollingProvider-property-type'>    type: 'polling',
+<span id='Ext-direct-PollingProvider-property-type'>    type: &#39;polling&#39;,
 </span>    
 <span id='Ext-direct-PollingProvider-cfg-interval'>    /**
 </span>     * @cfg {Number} [interval=3000]
@@ -150,7 +150,7 @@ Ext.define('Ext.direct.PollingProvider', {
         }
         else if (Ext.isFunction(url)) {
             //&lt;debug&gt;
-            Ext.log.warn('Using a function for url is deprecated, use pollFn instead.');
+            Ext.log.warn(&#39;Using a function for url is deprecated, use pollFn instead.&#39;);
             //&lt;/debug&gt;
             
             me.pollFn = pollFn = url;
@@ -203,7 +203,7 @@ Ext.define('Ext.direct.PollingProvider', {
             baseParams = me.baseParams,
             args, request;
         
-        if (me.fireEvent('beforepoll', me) !== false) {
+        if (me.fireEvent(&#39;beforepoll&#39;, me) !== false) {
             if (pollFn) {
                 args = pollFn.directCfg.method.getArgs({
                     params: baseParams !== undefined ? baseParams : {},
@@ -229,7 +229,7 @@ Ext.define('Ext.direct.PollingProvider', {
                 me.sendAjaxRequest(request);
             }
             
-            me.fireEvent('poll', me);
+            me.fireEvent(&#39;poll&#39;, me);
         }
     },
 
@@ -246,10 +246,10 @@ Ext.define('Ext.direct.PollingProvider', {
             for (i = 0, len = events.length; i &lt; len; ++i) {
                 event = events[i];
                 
-                me.fireEvent('data', me, event);
+                me.fireEvent(&#39;data&#39;, me, event);
                 
                 if (!event.status) {
-                    me.fireEvent('exception', me, event);
+                    me.fireEvent(&#39;exception&#39;, me, event);
                 }
             }
         }
@@ -257,12 +257,12 @@ Ext.define('Ext.direct.PollingProvider', {
             event = new Ext.direct.ExceptionEvent({
                 data: null,
                 code: Ext.direct.Manager.exceptions.TRANSPORT,
-                message: 'Unable to connect to the server.',
+                message: &#39;Unable to connect to the server.&#39;,
                 xhr: response
             });
             
-            me.fireEvent('data', me, event);
-            me.fireEvent('exception', me, event);
+            me.fireEvent(&#39;data&#39;, me, event);
+            me.fireEvent(&#39;exception&#39;, me, event);
         }
         
         me.callParent([opt, success, response]);
@@ -283,7 +283,7 @@ Ext.define('Ext.direct.PollingProvider', {
          */
         checkConfig: function(config) {
             // Polling provider needs either URI or pollFn
-            return config &amp;&amp; config.type === 'polling' &amp;&amp;
+            return config &amp;&amp; config.type === &#39;polling&#39; &amp;&amp;
                    (config.url || config.pollFn);
         }
     }

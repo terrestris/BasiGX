@@ -19,7 +19,7 @@
 </span> * The Router is an ordered set of {@link Ext.app.route.Route} definitions that decode a
  * url into a controller function to execute. Each `route` defines a type of url to match,
  * along with the controller function to call if it is matched. The Router uses the
- * {@link Ext.util.History} singleton to find out when the browser's url has changed.
+ * {@link Ext.util.History} singleton to find out when the browser&#39;s url has changed.
  *
  * Routes are almost always defined inside a {@link Ext.app.Controller Controller}, as
  * opposed to on the Router itself. End-developers should not usually need to interact
@@ -29,19 +29,19 @@
  *
  * @private
  */
-Ext.define('Ext.app.route.Router', {
+Ext.define(&#39;Ext.app.route.Router&#39;, {
     singleton : true,
 
     requires : [
-        'Ext.app.route.Queue',
-        'Ext.app.route.Route',
-        'Ext.util.History'
+        &#39;Ext.app.route.Queue&#39;,
+        &#39;Ext.app.route.Route&#39;,
+        &#39;Ext.util.History&#39;
     ],
 
 <span id='Ext-app-route-Router-property-multipleToken'>    /**
 </span>     * @property {String} [multipleToken=|] The token to split the routes to support multiple routes.
      */
-    multipleToken: '|',
+    multipleToken: &#39;|&#39;,
 
 <span id='Ext-app-route-Router-property-queueRoutes'>    /**
 </span>     * @property {Boolean} queueRoutes True to queue routes to be executed one after the
@@ -61,7 +61,7 @@ Ext.define('Ext.app.route.Router', {
             History.init();
         }
 
-        History.on('change', this.onStateChange, this);
+        History.on(&#39;change&#39;, this.onStateChange, this);
         this.clear();
     },
 
@@ -113,7 +113,7 @@ Ext.define('Ext.app.route.Router', {
             }
             
             if (!matched &amp;&amp; app) {
-                app.fireEvent('unmatchedroute', token);
+                app.fireEvent(&#39;unmatchedroute&#39;, token);
             }
         }
     },
@@ -195,8 +195,8 @@ Ext.define('Ext.app.route.Router', {
      * {@link Ext.app.route.Router} singleton. Example usage:
      *
      *     Ext.app.route.Router.draw(function(map) {
-     *         map.connect('activate/:token', {controller: 'users', action: 'activate'});
-     *         map.connect('home',            {controller: 'index', action: 'home'});
+     *         map.connect(&#39;activate/:token&#39;, {controller: &#39;users&#39;, action: &#39;activate&#39;});
+     *         map.connect(&#39;home&#39;,            {controller: &#39;index&#39;, action: &#39;home&#39;});
      *     });
      *
      * @param {Function} fn The function to call

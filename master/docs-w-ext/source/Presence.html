@@ -16,24 +16,24 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-data-validator-Presence'>/**
-</span> * Validates that the passed value is not `null` or `undefined` or `''`.
+</span> * Validates that the passed value is not `null` or `undefined` or `&#39;&#39;`.
  */
-Ext.define('Ext.data.validator.Presence', {
-    extend: 'Ext.data.validator.Validator',
-    alias: 'data.validator.presence',
+Ext.define(&#39;Ext.data.validator.Presence&#39;, {
+    extend: &#39;Ext.data.validator.Validator&#39;,
+    alias: &#39;data.validator.presence&#39;,
 
-<span id='Ext-data-validator-Presence-property-type'>    type: 'presence',
+<span id='Ext-data-validator-Presence-property-type'>    type: &#39;presence&#39;,
 </span>    
     config: {
 <span id='Ext-data-validator-Presence-cfg-message'>        /**
 </span>         * @cfg {String} message
          * The error message to return when the value is not specified.
          */
-        message: 'Must be present',
+        message: &#39;Must be present&#39;,
 
 <span id='Ext-data-validator-Presence-cfg-allowEmpty'>        /**
 </span>         * @cfg {Boolean} allowEmpty
-         * `true` to allow `''` as a valid value.
+         * `true` to allow `&#39;&#39;` as a valid value.
          */
         allowEmpty: false
     },
@@ -41,7 +41,7 @@ Ext.define('Ext.data.validator.Presence', {
 <span id='Ext-data-validator-Presence-method-validate'>    validate: function(value) {
 </span>        var valid = !(value === undefined || value === null);
         if (valid &amp;&amp; !this.getAllowEmpty()) {
-            valid = !(value === '');
+            valid = !(value === &#39;&#39;);
         }
         return valid ? true : this.getMessage();
     }

@@ -32,31 +32,31 @@
  * operation fails, the Deferred should be rejected.
  *
  * Each Deferred has an associated Promise. A Promise delegates `then` calls to its
- * Deferred's `then` method. In this way, access to Deferred operations are divided between
+ * Deferred&#39;s `then` method. In this way, access to Deferred operations are divided between
  * producer (Deferred) and consumer (Promise) roles.
  *
- * When a Deferred's `resolve` method is called, it fulfills with the optionally specified
+ * When a Deferred&#39;s `resolve` method is called, it fulfills with the optionally specified
  * value. If `resolve` is called with a then-able (i.e.a Function or Object with a `then`
- * function, such as another Promise) it assimilates the then-able's result; the Deferred
+ * function, such as another Promise) it assimilates the then-able&#39;s result; the Deferred
  * provides its own `resolve` and `reject` methods as the onFulfilled or onRejected
- * arguments in a call to that then-able's `then` function. If an error is thrown while
- * calling the then-able's `then` function (prior to any call back to the specified
- * `resolve` or `reject` methods), the Deferred rejects with that error. If a Deferred's
+ * arguments in a call to that then-able&#39;s `then` function. If an error is thrown while
+ * calling the then-able&#39;s `then` function (prior to any call back to the specified
+ * `resolve` or `reject` methods), the Deferred rejects with that error. If a Deferred&#39;s
  * `resolve` method is called with its own Promise, it rejects with a TypeError.
  *
- * When a Deferred's `reject` method is called, it rejects with the optionally specified
+ * When a Deferred&#39;s `reject` method is called, it rejects with the optionally specified
  * reason.
  *
- * Each time a Deferred's `then` method is called, it captures a pair of optional
- * onFulfilled and onRejected callbacks and returns a Promise of the Deferred's future
+ * Each time a Deferred&#39;s `then` method is called, it captures a pair of optional
+ * onFulfilled and onRejected callbacks and returns a Promise of the Deferred&#39;s future
  * value as transformed by those callbacks.
  *
  * @private
  * @since 6.0.0
  */
-Ext.define('Ext.promise.Deferred', {
+Ext.define(&#39;Ext.promise.Deferred&#39;, {
     requires: [
-        'Ext.promise.Consequence'
+        &#39;Ext.promise.Consequence&#39;
     ],
 
 <span id='Ext-promise-Deferred-property-promise'>    /**
@@ -79,7 +79,7 @@ Ext.define('Ext.promise.Deferred', {
     completed: false,
 
 <span id='Ext-promise-Deferred-property-completeAction'>    /**
-</span>     * @property {String} completeAction The completion action (i.e. 'fulfill' or 'reject').
+</span>     * @property {String} completeAction The completion action (i.e. &#39;fulfill&#39; or &#39;reject&#39;).
      *
      * @private
      */
@@ -137,13 +137,13 @@ Ext.define('Ext.promise.Deferred', {
 </span>     * Resolve this Deferred with the (optional) specified value.
      *
      * If called with a then-able (i.e.a Function or Object with a `then`
-     * function, such as another Promise) it assimilates the then-able's
+     * function, such as another Promise) it assimilates the then-able&#39;s
      * result; the Deferred provides its own `resolve` and `reject` methods
      * as the onFulfilled or onRejected arguments in a call to that
-     * then-able's `then` function.  If an error is thrown while calling
-     * the then-able's `then` function (prior to any call back to the
+     * then-able&#39;s `then` function.  If an error is thrown while calling
+     * the then-able&#39;s `then` function (prior to any call back to the
      * specified `resolve` or `reject` methods), the Deferred rejects with
-     * that error. If a Deferred's `resolve` method is called with its own
+     * that error. If a Deferred&#39;s `resolve` method is called with its own
      * Promise, it rejects with a TypeError.
      *
      * Once a Deferred has been fulfilled or rejected, it is considered to be complete
@@ -162,10 +162,10 @@ Ext.define('Ext.promise.Deferred', {
 
         try {
             if (value === me.promise) {
-                throw new TypeError('A Promise cannot be resolved with itself.');
+                throw new TypeError(&#39;A Promise cannot be resolved with itself.&#39;);
             }
 
-            if (value != null &amp;&amp; (typeof value === 'object' || Ext.isFunction(value)) &amp;&amp;
+            if (value != null &amp;&amp; (typeof value === &#39;object&#39; || Ext.isFunction(value)) &amp;&amp;
                         Ext.isFunction(thenFn = value.then)) {
                 isHandled = false;
 
@@ -189,7 +189,7 @@ Ext.define('Ext.promise.Deferred', {
                 }
             }
             else {
-                me.complete('fulfill', value);
+                me.complete(&#39;fulfill&#39;, value);
             }
         }
         catch (e2) {
@@ -210,7 +210,7 @@ Ext.define('Ext.promise.Deferred', {
             return;
         }
         
-        this.complete('reject', reason);
+        this.complete(&#39;reject&#39;, reason);
     },
 
 <span id='Ext-promise-Deferred-method-update'>    /**
@@ -237,7 +237,7 @@ Ext.define('Ext.promise.Deferred', {
 <span id='Ext-promise-Deferred-method-complete'>    /**
 </span>     * Complete this Deferred with the specified action and value.
      *
-     * @param {String} action Completion action (i.e. 'fufill' or 'reject').
+     * @param {String} action Completion action (i.e. &#39;fufill&#39; or &#39;reject&#39;).
      * @param {Mixed} value Fulfillment value or rejection reason.
      *
      * @private

@@ -17,22 +17,22 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-data-field-Number'>/**
 </span> */
-Ext.define('Ext.data.field.Number', {
-    extend: 'Ext.data.field.Integer',
+Ext.define(&#39;Ext.data.field.Number&#39;, {
+    extend: &#39;Ext.data.field.Integer&#39;,
 
     alias: [
-        'data.field.float',
-        'data.field.number'
+        &#39;data.field.float&#39;,
+        &#39;data.field.number&#39;
     ],
 
 <span id='Ext-data-field-Number-property-isIntegerField'>    isIntegerField: false,
 </span><span id='Ext-data-field-Number-property-isNumberField'>    isNumberField: true,
-</span><span id='Ext-data-field-Number-property-numericType'>    numericType: 'float',
+</span><span id='Ext-data-field-Number-property-numericType'>    numericType: &#39;float&#39;,
 </span>
 <span id='Ext-data-field-Number-property-getNumber'>    getNumber: Ext.identityFn,
 </span>
 <span id='Ext-data-field-Number-method-parse'>    parse: function(v) {
-</span>        return parseFloat(String(v).replace(this.stripRe, ''));
+</span>        return parseFloat(String(v).replace(this.stripRe, &#39;&#39;));
     }
 });
 </pre>

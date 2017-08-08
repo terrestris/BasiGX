@@ -41,7 +41,7 @@ var noArgs = [],
             cfg = Ext.Config.map[name];
             //&lt;debug&gt;
             if (!cfg) {
-                Ext.Logger.error(&quot;Invalid property name for getter: '&quot; + name + &quot;' for '&quot; + me.$className + &quot;'.&quot;);
+                Ext.Logger.error(&quot;Invalid property name for getter: &#39;&quot; + name + &quot;&#39; for &#39;&quot; + me.$className + &quot;&#39;.&quot;);
             }
             //&lt;/debug&gt;
             getterName = cfg.names.get;
@@ -57,12 +57,12 @@ var noArgs = [],
     },
     //&lt;debug&gt;
     makeDeprecatedMethod = function (oldName, newName, msg) {
-        var message = '&quot;'+ oldName +'&quot; is deprecated.';
+        var message = &#39;&quot;&#39;+ oldName +&#39;&quot; is deprecated.&#39;;
 
         if (msg) {
-            message += ' ' + msg;
+            message += &#39; &#39; + msg;
         } else if (newName) {
-            message += ' Please use &quot;'+ newName +'&quot; instead.';
+            message += &#39; Please use &quot;&#39;+ newName +&#39;&quot; instead.&#39;;
         }
 
         return function () {
@@ -71,10 +71,10 @@ var noArgs = [],
     },
     addDeprecatedProperty = function (object, oldName, newName, message) {
         if (!message) {
-            message = '&quot;' + oldName + '&quot; is deprecated.';
+            message = &#39;&quot;&#39; + oldName + &#39;&quot; is deprecated.&#39;;
         }
         if (newName) {
-            message += ' Please use &quot;' + newName + '&quot; instead.';
+            message += &#39; Please use &quot;&#39; + newName + &#39;&quot; instead.&#39;;
         }
 
         if (message) {
@@ -145,14 +145,14 @@ var noArgs = [],
 
     // These static properties will be copied to every newly created class with {@link Ext#define}
     Ext.apply(Base, {
-        $className: 'Ext.Base',
+        $className: &#39;Ext.Base&#39;,
 
         $isClass: true,
 
 <span id='Ext-Base-static-method-create'>        /**
 </span>         * Create a new instance of this Class.
          *
-         *     Ext.define('My.cool.Class', {
+         *     Ext.define(&#39;My.cool.Class&#39;, {
          *         ...
          *     });
          *
@@ -181,7 +181,7 @@ var noArgs = [],
                 compatVersion = Ext.getCompatVersion(deprecations.name),
                 //&lt;debug&gt;
                 configurator = me.getConfigurator(),
-                displayName = (me.$className || '') + '#',
+                displayName = (me.$className || &#39;&#39;) + &#39;#&#39;,
                 //&lt;/debug&gt;
                 deprecate, versionSpec, index, message, target,
                 enabled, existing, fn, names, oldName, newName, member, statics, version;
@@ -213,7 +213,7 @@ var noArgs = [],
                 if (!enabled) {} else
                 //&lt;/debug&gt;
                 if (!enabled) {
-                    // we won't get here in dev mode when !enabled
+                    // we won&#39;t get here in dev mode when !enabled
                     break;
                 }
 
@@ -228,7 +228,7 @@ var noArgs = [],
                                 /*
                                  * Something like:
                                  *
-                                 *      '5.1': {
+                                 *      &#39;5.1&#39;: {
                                  *          methods: {
                                  *              removedMethod: null
                                  *          }
@@ -248,9 +248,9 @@ var noArgs = [],
                                 /*
                                  * Something like:
                                  *
-                                 *      '5.1': {
+                                 *      &#39;5.1&#39;: {
                                  *          methods: {
-                                 *              oldName: 'newName'
+                                 *              oldName: &#39;newName&#39;
                                  *          }
                                  *      }
                                  *
@@ -278,7 +278,7 @@ var noArgs = [],
                                 /*
                                  * Something like:
                                  *
-                                 *      '5.1': {
+                                 *      &#39;5.1&#39;: {
                                  *          methods: {
                                  *              foo: function () { ... }
                                  *          }
@@ -286,21 +286,21 @@ var noArgs = [],
                                  *
                                  * Or this:
                                  *
-                                 *      '5.1': {
+                                 *      &#39;5.1&#39;: {
                                  *          methods: {
                                  *              foo: {
                                  *                  fn: function () { ... },
-                                 *                  message: 'Please use &quot;bar&quot; instead.'
+                                 *                  message: &#39;Please use &quot;bar&quot; instead.&#39;
                                  *              }
                                  *          }
                                  *      }
                                  *
                                  * Or just this:
                                  *
-                                 *      '5.1': {
+                                 *      &#39;5.1&#39;: {
                                  *          methods: {
                                  *              foo: {
-                                 *                  message: 'Use something else instead.'
+                                 *                  message: &#39;Use something else instead.&#39;
                                  *              }
                                  *          }
                                  *      }
@@ -313,7 +313,7 @@ var noArgs = [],
                                  * method by that name, than we add a shim to prevent
                                  * abuse.
                                  */
-                                message = '';
+                                message = &#39;&#39;;
                                 if (member.message || member.fn) {
                                     //&lt;debug&gt;
                                     message = member.message;
@@ -356,14 +356,14 @@ var noArgs = [],
                     names = deprecate.configs;
                     if (names) {
                         //
-                        //  '6.0': {
+                        //  &#39;6.0&#39;: {
                         //      configs: {
                         //          dead: null,
                         //
-                        //          renamed: 'newName',
+                        //          renamed: &#39;newName&#39;,
                         //
                         //          removed: {
-                        //              message: 'This config was replaced by pixie dust'
+                        //              message: &#39;This config was replaced by pixie dust&#39;
                         //          }
                         //      }
                         //  }
@@ -375,7 +375,7 @@ var noArgs = [],
                     if (names &amp;&amp; !enabled) {
                         // For properties about the only thing we can do is (on Good
                         // Browsers), add warning shims for accessing them. So if the
-                        // block is enabled, we don't want those.
+                        // block is enabled, we don&#39;t want those.
                         for (oldName in names) {
                             newName = names[oldName];
 
@@ -461,7 +461,7 @@ var noArgs = [],
          */
         triggerExtended: function() {
             //&lt;debug&gt;
-            Ext.classSystemMonitor &amp;&amp; Ext.classSystemMonitor(this, 'Ext.Base#triggerExtended', arguments);
+            Ext.classSystemMonitor &amp;&amp; Ext.classSystemMonitor(this, &#39;Ext.Base#triggerExtended&#39;, arguments);
             //&lt;/debug&gt;
 
             var callbacks = this.$onExtended,
@@ -493,12 +493,12 @@ var noArgs = [],
 <span id='Ext-Base-static-method-addStatics'>        /**
 </span>         * Add / override static properties of this class.
          *
-         *     Ext.define('My.cool.Class', {
+         *     Ext.define(&#39;My.cool.Class&#39;, {
          *         ...
          *     });
          *
          *     My.cool.Class.addStatics({
-         *         someProperty: 'someValue',      // My.cool.Class.someProperty = 'someValue'
+         *         someProperty: &#39;someValue&#39;,      // My.cool.Class.someProperty = &#39;someValue&#39;
          *         method1: function() { ... },    // My.cool.Class.method1 = function() { ... };
          *         method2: function() { ... }     // My.cool.Class.method2 = function() { ... };
          *     });
@@ -531,7 +531,7 @@ var noArgs = [],
             }
 
             //&lt;debug&gt;
-            var className = Ext.getClassName(me) + '.';
+            var className = Ext.getClassName(me) + &#39;.&#39;;
             //&lt;/debug&gt;
 
             for (name in members) {
@@ -539,11 +539,11 @@ var noArgs = [],
                     member = members[name];
                     current = me[name];
                     //&lt;debug&gt;
-                    if (typeof member == 'function') {
+                    if (typeof member == &#39;function&#39;) {
                         member.name = className + name;
                     }
                     //&lt;/debug&gt;
-                    if (typeof current === 'function' &amp;&amp; !current.$isClass &amp;&amp; !current.$nullFn) {
+                    if (typeof current === &#39;function&#39; &amp;&amp; !current.$isClass &amp;&amp; !current.$nullFn) {
                         member.$previous = current;
                     }
                     me[name] = member;
@@ -557,7 +557,7 @@ var noArgs = [],
 <span id='Ext-Base-static-method-addMembers'>        /**
 </span>         * Add methods / properties to the prototype of this class.
          *
-         *     Ext.define('My.awesome.Cat', {
+         *     Ext.define(&#39;My.awesome.Cat&#39;, {
          *         constructor: function() {
          *             ...
          *         }
@@ -565,7 +565,7 @@ var noArgs = [],
          *
          *      My.awesome.Cat.addMembers({
          *          meow: function() {
-         *             alert('Meowww...');
+         *             alert(&#39;Meowww...&#39;);
          *          }
          *      });
          *
@@ -589,11 +589,11 @@ var noArgs = [],
                 configs, i, ln, member, name, subPrivacy, privateStatics;
 
             //&lt;debug&gt;
-            var displayName = (me.$className || '') + '#';
+            var displayName = (me.$className || &#39;&#39;) + &#39;#&#39;;
             //&lt;/debug&gt;
 
             if (privates) {
-                // This won't run for normal class private members but will pick up all
+                // This won&#39;t run for normal class private members but will pick up all
                 // others (statics, overrides, etc).
                 delete members.privates;
                 if (!isStatic) {
@@ -602,7 +602,7 @@ var noArgs = [],
                 }
 
                 //&lt;debug&gt;
-                subPrivacy = privates.privacy || privacy || 'framework';
+                subPrivacy = privates.privacy || privacy || &#39;framework&#39;;
                 //&lt;/debug&gt;
 
                 me.addMembers(privates, isStatic, subPrivacy);
@@ -617,15 +617,15 @@ var noArgs = [],
 
                     //&lt;debug&gt;
                     if (privacy === true) {
-                        privacy = 'framework';
+                        privacy = &#39;framework&#39;;
                     }
                     if (member &amp;&amp; member.$nullFn &amp;&amp; privacy !== member.$privacy) {
-                        Ext.raise('Cannot use stock function for private method ' +
-                            (me.$className ? me.$className + '#' : '') + name);
+                        Ext.raise(&#39;Cannot use stock function for private method &#39; +
+                            (me.$className ? me.$className + &#39;#&#39; : &#39;&#39;) + name);
                     }
                     //&lt;/debug&gt;
 
-                    if (typeof member === 'function' &amp;&amp; !member.$isClass &amp;&amp; !member.$nullFn) {
+                    if (typeof member === &#39;function&#39; &amp;&amp; !member.$isClass &amp;&amp; !member.$nullFn) {
                         if (member.$owner) {
                             member = cloneFunction(member);
                         }
@@ -723,25 +723,25 @@ var noArgs = [],
         },
 
 <span id='Ext-Base-static-method-borrow'>        /**
-</span>         * Borrow another class' members to the prototype of this class.
+</span>         * Borrow another class&#39; members to the prototype of this class.
          *
-         *     Ext.define('Bank', {
-         *         money: '$$$',
+         *     Ext.define(&#39;Bank&#39;, {
+         *         money: &#39;$$$&#39;,
          *         printMoney: function() {
-         *             alert('$$$$$$$');
+         *             alert(&#39;$$$$$$$&#39;);
          *         }
          *     });
          *
-         *     Ext.define('Thief', {
+         *     Ext.define(&#39;Thief&#39;, {
          *         ...
          *     });
          *
-         *     Thief.borrow(Bank, ['money', 'printMoney']);
+         *     Thief.borrow(Bank, [&#39;money&#39;, &#39;printMoney&#39;]);
          *
          *     var steve = new Thief();
          *
-         *     alert(steve.money); // alerts '$$$'
-         *     steve.printMoney(); // alerts '$$$$$$$'
+         *     alert(steve.money); // alerts &#39;$$$&#39;
+         *     steve.printMoney(); // alerts &#39;$$$$$$$&#39;
          *
          * @param {Ext.Base} fromClass The class to borrow members from
          * @param {Array/String} members The names of the members to borrow
@@ -752,7 +752,7 @@ var noArgs = [],
          */
         borrow: function(fromClass, members) {
             //&lt;debug&gt;
-            Ext.classSystemMonitor &amp;&amp; Ext.classSystemMonitor(this, 'Ext.Base#borrow', arguments);
+            Ext.classSystemMonitor &amp;&amp; Ext.classSystemMonitor(this, &#39;Ext.Base#borrow&#39;, arguments);
             //&lt;/debug&gt;
 
             var prototype = fromClass.prototype,
@@ -773,15 +773,15 @@ var noArgs = [],
 </span>         * Override members of this class. Overridden methods can be invoked via
          * {@link Ext.Base#callParent}.
          *
-         *     Ext.define('My.Cat', {
+         *     Ext.define(&#39;My.Cat&#39;, {
          *         constructor: function() {
-         *             alert(&quot;I'm a cat!&quot;);
+         *             alert(&quot;I&#39;m a cat!&quot;);
          *         }
          *     });
          *
          *     My.Cat.override({
          *         constructor: function() {
-         *             alert(&quot;I'm going to be a cat!&quot;);
+         *             alert(&quot;I&#39;m going to be a cat!&quot;);
          *
          *             this.callParent(arguments);
          *
@@ -789,17 +789,17 @@ var noArgs = [],
          *         }
          *     });
          *
-         *     var kitty = new My.Cat(); // alerts &quot;I'm going to be a cat!&quot;
-         *                               // alerts &quot;I'm a cat!&quot;
+         *     var kitty = new My.Cat(); // alerts &quot;I&#39;m going to be a cat!&quot;
+         *                               // alerts &quot;I&#39;m a cat!&quot;
          *                               // alerts &quot;Meeeeoooowwww&quot;
          *
          * Direct use of this method should be rare. Use {@link Ext#define Ext.define}
          * instead:
          *
-         *     Ext.define('My.CatOverride', {
-         *         override: 'My.Cat',
+         *     Ext.define(&#39;My.CatOverride&#39;, {
+         *         override: &#39;My.Cat&#39;,
          *         constructor: function() {
-         *             alert(&quot;I'm going to be a cat!&quot;);
+         *             alert(&quot;I&#39;m going to be a cat!&quot;);
          *
          *             this.callParent(arguments);
          *
@@ -875,7 +875,7 @@ var noArgs = [],
 
             //&lt;debug&gt;
             if (platformConfigs instanceof Array) {
-                throw new Error('platformConfigs must be specified as an object.');
+                throw new Error(&#39;platformConfigs must be specified as an object.&#39;);
             }
             //&lt;/debug&gt;
 
@@ -889,7 +889,7 @@ var noArgs = [],
             // two objects to pass in: &quot;added&quot; and &quot;hoisted&quot;. For any properties in an
             // active platformConfig rule that set proper Configs in the base class, we
             // need to put them in &quot;added&quot;. If instead of the proper Config coming from
-            // a base class, it comes from this class's config block, we still need to
+            // a base class, it comes from this class&#39;s config block, we still need to
             // put that config in &quot;added&quot; but we also need move the class-level config
             // out of &quot;config&quot; and into &quot;hoisted&quot;.
             //
@@ -971,7 +971,7 @@ var noArgs = [],
                 mixinName, name, mixinValue, mixins,
                 mixinStatics;
 
-            if (typeof name !== 'string') {
+            if (typeof name !== &#39;string&#39;) {
                 mixins = name;
                 if (mixins instanceof Array) {
                     for (i = 0,ln = mixins.length; i &lt; ln; i++) {
@@ -997,8 +997,8 @@ var noArgs = [],
                 mixin.onClassMixedIn.call(mixinClass, me);
             }
 
-            if (!prototype.hasOwnProperty('mixins')) {
-                if ('mixins' in prototype) {
+            if (!prototype.hasOwnProperty(&#39;mixins&#39;)) {
+                if (&#39;mixins&#39; in prototype) {
                     prototype.mixins = Ext.Object.chain(prototype.mixins);
                 }
                 else {
@@ -1008,20 +1008,20 @@ var noArgs = [],
 
             for (key in mixin) {
                 mixinValue = mixin[key];
-                if (key === 'mixins') {
+                if (key === &#39;mixins&#39;) {
                     // if 2 superclasses (e.g. a base class and a mixin) of this class both
                     // have a mixin with the same id, the first one wins, that is to say,
-                    // the first mixin's methods to be applied to the prototype will not
+                    // the first mixin&#39;s methods to be applied to the prototype will not
                     // be overwritten by the second one.  Since this is the case we also
-                    // want to make sure we use the first mixin's prototype as the mixin
+                    // want to make sure we use the first mixin&#39;s prototype as the mixin
                     // reference, hence the &quot;applyIf&quot; below.  A real world example of this
                     // is Ext.Widget which mixes in Ext.mixin.Observable.  Ext.Widget can
                     // be mixed into subclasses of Ext.Component, which mixes in
                     // Ext.util.Observable.  In this example, since the first &quot;observable&quot;
-                    // mixin's methods win, we also want its reference to be preserved.
+                    // mixin&#39;s methods win, we also want its reference to be preserved.
                     Ext.applyIf(prototype.mixins, mixinValue);
                 }
-                else if (!(key === 'mixinId' || key === 'config' || key === '$inheritableStatics') &amp;&amp; (prototype[key] === undefined)) {
+                else if (!(key === &#39;mixinId&#39; || key === &#39;config&#39; || key === &#39;$inheritableStatics&#39;) &amp;&amp; (prototype[key] === undefined)) {
                     prototype[key] = mixinValue;
                 }
             }
@@ -1042,7 +1042,7 @@ var noArgs = [],
             //&lt;/feature&gt;
 
             //&lt;feature classSystem.config&gt;
-            if ('config' in mixin) {
+            if (&#39;config&#39; in mixin) {
                 me.addConfig(mixin.config, mixinClass);
             }
             //&lt;/feature&gt;
@@ -1102,15 +1102,15 @@ var noArgs = [],
         //&lt;/feature&gt;
 
 <span id='Ext-Base-static-method-getName'>        /**
-</span>         * Get the current class' name in string format.
+</span>         * Get the current class&#39; name in string format.
          *
-         *     Ext.define('My.cool.Class', {
+         *     Ext.define(&#39;My.cool.Class&#39;, {
          *         constructor: function() {
-         *             alert(this.self.getName()); // alerts 'My.cool.Class'
+         *             alert(this.self.getName()); // alerts &#39;My.cool.Class&#39;
          *         }
          *     });
          *
-         *     My.cool.Class.getName(); // 'My.cool.Class'
+         *     My.cool.Class.getName(); // &#39;My.cool.Class&#39;
          *
          * @return {String} className
          * @static
@@ -1123,7 +1123,7 @@ var noArgs = [],
 <span id='Ext-Base-static-method-createAlias'>        /**
 </span>         * Create aliases for existing prototype methods. Example:
          *
-         *     Ext.define('My.cool.Class', {
+         *     Ext.define(&#39;My.cool.Class&#39;, {
          *         method1: function() { ... },
          *         method2: function() { ... }
          *     });
@@ -1131,13 +1131,13 @@ var noArgs = [],
          *     var test = new My.cool.Class();
          *
          *     My.cool.Class.createAlias({
-         *         method3: 'method1',
-         *         method4: 'method2'
+         *         method3: &#39;method1&#39;,
+         *         method4: &#39;method2&#39;
          *     });
          *
          *     test.method3(); // test.method1()
          *
-         *     My.cool.Class.createAlias('method5', 'method3');
+         *     My.cool.Class.createAlias(&#39;method5&#39;, &#39;method3&#39;);
          *
          *     test.method5(); // test.method3() -&gt; test.method1()
          *
@@ -1173,7 +1173,7 @@ var noArgs = [],
 
     Base.addMembers({
 <span id='Ext-Base-property-S-className'>        /** @private */
-</span>        $className: 'Ext.Base',
+</span>        $className: &#39;Ext.Base&#39;,
 
 <span id='Ext-Base-property-isInstance'>        /**
 </span>         * @property {Boolean} isInstance
@@ -1241,7 +1241,7 @@ var noArgs = [],
         
 <span id='Ext-Base-property-clearPrototypeOnDestroy'>        /**
 </span>         * @property {Boolean} [clearPrototypeOnDestroy=false]
-         * Setting this property to `true` will result in setting the object's
+         * Setting this property to `true` will result in setting the object&#39;s
          * prototype to `null` after the destruction sequence is fully completed.
          * After that, most attempts at calling methods on the object instance
          * will result in &quot;method not defined&quot; exception. This can be very helpful
@@ -1260,25 +1260,25 @@ var noArgs = [],
          * `this.statics()` is scope-independent and it always returns the class from which it was called, regardless of what
          * `this` points to during run-time
          *
-         *     Ext.define('My.Cat', {
+         *     Ext.define(&#39;My.Cat&#39;, {
          *         statics: {
          *             totalCreated: 0,
-         *             speciesName: 'Cat' // My.Cat.speciesName = 'Cat'
+         *             speciesName: &#39;Cat&#39; // My.Cat.speciesName = &#39;Cat&#39;
          *         },
          *
          *         constructor: function() {
          *             var statics = this.statics();
          *
-         *             alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to
+         *             alert(statics.speciesName);     // always equals to &#39;Cat&#39; no matter what &#39;this&#39; refers to
          *                                             // equivalent to: My.Cat.speciesName
          *
-         *             alert(this.self.speciesName);   // dependent on 'this'
+         *             alert(this.self.speciesName);   // dependent on &#39;this&#39;
          *
          *             statics.totalCreated++;
          *         },
          *
          *         clone: function() {
-         *             var cloned = new this.self();   // dependent on 'this'
+         *             var cloned = new this.self();   // dependent on &#39;this&#39;
          *
          *             cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName
          *
@@ -1287,11 +1287,11 @@ var noArgs = [],
          *     });
          *
          *
-         *     Ext.define('My.SnowLeopard', {
-         *         extend: 'My.Cat',
+         *     Ext.define(&#39;My.SnowLeopard&#39;, {
+         *         extend: &#39;My.Cat&#39;,
          *
          *         statics: {
-         *             speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'
+         *             speciesName: &#39;Snow Leopard&#39;     // My.SnowLeopard.speciesName = &#39;Snow Leopard&#39;
          *         },
          *
          *         constructor: function() {
@@ -1299,13 +1299,13 @@ var noArgs = [],
          *         }
          *     });
          *
-         *     var cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'
+         *     var cat = new My.Cat();                 // alerts &#39;Cat&#39;, then alerts &#39;Cat&#39;
          *
-         *     var snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'
+         *     var snowLeopard = new My.SnowLeopard(); // alerts &#39;Cat&#39;, then alerts &#39;Snow Leopard&#39;
          *
          *     var clone = snowLeopard.clone();
-         *     alert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'
-         *     alert(clone.groupName);                 // alerts 'Cat'
+         *     alert(Ext.getClassName(clone));         // alerts &#39;My.SnowLeopard&#39;
+         *     alert(clone.groupName);                 // alerts &#39;Cat&#39;
          *
          *     alert(My.Cat.totalCreated);             // alerts 3
          *
@@ -1327,7 +1327,7 @@ var noArgs = [],
 </span>         * Call the &quot;parent&quot; method of the current method. That is the method previously
          * overridden by derivation or by an override (see {@link Ext#define}).
          *
-         *      Ext.define('My.Base', {
+         *      Ext.define(&#39;My.Base&#39;, {
          *          constructor: function (x) {
          *              this.x = x;
          *          },
@@ -1339,8 +1339,8 @@ var noArgs = [],
          *          }
          *      });
          *
-         *      Ext.define('My.Derived', {
-         *          extend: 'My.Base',
+         *      Ext.define(&#39;My.Derived&#39;, {
+         *          extend: &#39;My.Base&#39;,
          *
          *          constructor: function () {
          *              this.callParent([21]);
@@ -1353,8 +1353,8 @@ var noArgs = [],
          *
          * This can be used with an override as follows:
          *
-         *      Ext.define('My.DerivedOverride', {
-         *          override: 'My.Derived',
+         *      Ext.define(&#39;My.DerivedOverride&#39;, {
+         *          override: &#39;My.Derived&#39;,
          *
          *          constructor: function (x) {
          *              this.callParent([x*2]); // calls original My.Derived constructor
@@ -1367,8 +1367,8 @@ var noArgs = [],
          *
          * This also works with static and private methods.
          *
-         *      Ext.define('My.Derived2', {
-         *          extend: 'My.Base',
+         *      Ext.define(&#39;My.Derived2&#39;, {
+         *          extend: &#39;My.Base&#39;,
          *
          *          // privates: {
          *          statics: {
@@ -1383,8 +1383,8 @@ var noArgs = [],
          *
          * Lastly, it also works with overridden static methods.
          *
-         *      Ext.define('My.Derived2Override', {
-         *          override: 'My.Derived2',
+         *      Ext.define(&#39;My.Derived2Override&#39;, {
+         *          override: &#39;My.Derived2&#39;,
          *
          *          // privates: {
          *          statics: {
@@ -1431,8 +1431,8 @@ var noArgs = [],
                 methodName = method.$name;
 
                 if (!(methodName in parentClass)) {
-                    throw new Error(&quot;this.callParent() was called but there's no such method (&quot; + methodName +
-                                &quot;) found in the parent class (&quot; + (Ext.getClassName(parentClass) || 'Object') + &quot;)&quot;);
+                    throw new Error(&quot;this.callParent() was called but there&#39;s no such method (&quot; + methodName +
+                                &quot;) found in the parent class (&quot; + (Ext.getClassName(parentClass) || &#39;Object&#39;) + &quot;)&quot;);
                 }
             }
             //&lt;/debug&gt;
@@ -1447,17 +1447,17 @@ var noArgs = [],
          *
          * Consider:
          *
-         *      Ext.define('Ext.some.Class', {
+         *      Ext.define(&#39;Ext.some.Class&#39;, {
          *          method: function () {
-         *              console.log('Good');
+         *              console.log(&#39;Good&#39;);
          *          }
          *      });
          *
-         *      Ext.define('Ext.some.DerivedClass', {
-         *          extend: 'Ext.some.Class',
+         *      Ext.define(&#39;Ext.some.DerivedClass&#39;, {
+         *          extend: &#39;Ext.some.Class&#39;,
          *          
          *          method: function () {
-         *              console.log('Bad');
+         *              console.log(&#39;Bad&#39;);
          * 
          *              // ... logic but with a bug ...
          *              
@@ -1468,11 +1468,11 @@ var noArgs = [],
          * To patch the bug in `Ext.some.DerivedClass.method`, the typical solution is to create an
          * override:
          *
-         *      Ext.define('App.patches.DerivedClass', {
-         *          override: 'Ext.some.DerivedClass',
+         *      Ext.define(&#39;App.patches.DerivedClass&#39;, {
+         *          override: &#39;Ext.some.DerivedClass&#39;,
          *          
          *          method: function () {
-         *              console.log('Fixed');
+         *              console.log(&#39;Fixed&#39;);
          * 
          *              // ... logic but with bug fixed ...
          *
@@ -1518,8 +1518,8 @@ var noArgs = [],
                 methodName = method.$name;
 
                 if (!(methodName in parentClass)) {
-                    throw new Error(&quot;this.callSuper() was called but there's no such method (&quot; + methodName +
-                                &quot;) found in the parent class (&quot; + (Ext.getClassName(parentClass) || 'Object') + &quot;)&quot;);
+                    throw new Error(&quot;this.callSuper() was called but there&#39;s no such method (&quot; + methodName +
+                                &quot;) found in the parent class (&quot; + (Ext.getClassName(parentClass) || &#39;Object&#39;) + &quot;)&quot;);
                 }
             }
             //&lt;/debug&gt;
@@ -1531,16 +1531,16 @@ var noArgs = [],
 </span>         * @property {Ext.Class} self
          *
          * Get the reference to the current class from which this object was instantiated. Unlike {@link Ext.Base#statics},
-         * `this.self` is scope-dependent and it's meant to be used for dynamic inheritance. See {@link Ext.Base#statics}
+         * `this.self` is scope-dependent and it&#39;s meant to be used for dynamic inheritance. See {@link Ext.Base#statics}
          * for a detailed comparison
          *
-         *     Ext.define('My.Cat', {
+         *     Ext.define(&#39;My.Cat&#39;, {
          *         statics: {
-         *             speciesName: 'Cat' // My.Cat.speciesName = 'Cat'
+         *             speciesName: &#39;Cat&#39; // My.Cat.speciesName = &#39;Cat&#39;
          *         },
          *
          *         constructor: function() {
-         *             alert(this.self.speciesName); // dependent on 'this'
+         *             alert(this.self.speciesName); // dependent on &#39;this&#39;
          *         },
          *
          *         clone: function() {
@@ -1549,18 +1549,18 @@ var noArgs = [],
          *     });
          *
          *
-         *     Ext.define('My.SnowLeopard', {
-         *         extend: 'My.Cat',
+         *     Ext.define(&#39;My.SnowLeopard&#39;, {
+         *         extend: &#39;My.Cat&#39;,
          *         statics: {
-         *             speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'
+         *             speciesName: &#39;Snow Leopard&#39;         // My.SnowLeopard.speciesName = &#39;Snow Leopard&#39;
          *         }
          *     });
          *
-         *     var cat = new My.Cat();                     // alerts 'Cat'
-         *     var snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'
+         *     var cat = new My.Cat();                     // alerts &#39;Cat&#39;
+         *     var snowLeopard = new My.SnowLeopard();     // alerts &#39;Snow Leopard&#39;
          *
          *     var clone = snowLeopard.clone();
-         *     alert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'
+         *     alert(Ext.getClassName(clone));             // alerts &#39;My.SnowLeopard&#39;
          *
          * @protected
          */
@@ -1575,10 +1575,10 @@ var noArgs = [],
 <span id='Ext-Base-method-initConfig'>        /**
 </span>         * Initialize configuration for this class. a typical example:
          *
-         *     Ext.define('My.awesome.Class', {
+         *     Ext.define(&#39;My.awesome.Class&#39;, {
          *         // The default config
          *         config: {
-         *             name: 'Awesome',
+         *             name: &#39;Awesome&#39;,
          *             isAwesome: true
          *         },
          *
@@ -1588,10 +1588,10 @@ var noArgs = [],
          *     });
          *
          *     var awesome = new My.awesome.Class({
-         *         name: 'Super Awesome'
+         *         name: &#39;Super Awesome&#39;
          *     });
          *
-         *     alert(awesome.getName()); // 'Super Awesome'
+         *     alert(awesome.getName()); // &#39;Super Awesome&#39;
          *
          * @protected
          * @param {Object} config
@@ -1637,7 +1637,7 @@ var noArgs = [],
                 config;
 
             if (name) {
-                if (typeof name === 'string') {
+                if (typeof name === &#39;string&#39;) {
                     config = {};
                     config[name] = value;
                 } else {
@@ -1673,28 +1673,28 @@ var noArgs = [],
          *
          * Given this example Ext.button.Button definition and instance:
          *
-         *     Ext.define('MyApp.view.Button', {
-         *         extend: 'Ext.button.Button',
-         *         xtype: 'mybutton',
+         *     Ext.define(&#39;MyApp.view.Button&#39;, {
+         *         extend: &#39;Ext.button.Button&#39;,
+         *         xtype: &#39;mybutton&#39;,
          *     
-         *         scale: 'large',
+         *         scale: &#39;large&#39;,
          *         enableToggle: true
          *     });
          *
          *     var btn = Ext.create({
-         *         xtype: 'mybutton',
+         *         xtype: &#39;mybutton&#39;,
          *         renderTo: Ext.getBody(),
-         *         text: 'Test Button'
+         *         text: &#39;Test Button&#39;
          *     });
          *
          * Calling `btn.getInitialConfig()` would return an object including the config
          * options passed to the `create` method:
          *
-         *     xtype: 'mybutton',
+         *     xtype: &#39;mybutton&#39;,
          *     renderTo: // The document body itself
-         *     text: 'Test Button'
+         *     text: &#39;Test Button&#39;
          *
-         * Calling `btn.getInitialConfig('text')`returns **'Test Button'**.
+         * Calling `btn.getInitialConfig(&#39;text&#39;)`returns **&#39;Test Button&#39;**.
          *
          * @param {String} [name] Name of the config option to return.
          * @return {Object/Mixed} The full config object or a single config value
@@ -1744,7 +1744,7 @@ var noArgs = [],
 
             //&lt;debug&gt;
             if (!Ext.isArray(names)) {
-                Ext.raise('Invalid argument - expected array of strings');
+                Ext.raise(&#39;Invalid argument - expected array of strings&#39;);
             }
             //&lt;/debug&gt;
 
@@ -1756,7 +1756,7 @@ var noArgs = [],
                     if (value.isInstance &amp;&amp; !value.destroyed) {
                         value.destroy();
                     }
-                    else if (value.parentNode &amp;&amp; 'nodeType' in value) {
+                    else if (value.parentNode &amp;&amp; &#39;nodeType&#39; in value) {
                         value.parentNode.removeChild(value);
                     }
                 }
@@ -1780,8 +1780,8 @@ var noArgs = [],
                     // Object may retain references to other objects. Functions can do too
                     // if they are closures, and most of the *own* function properties
                     // are closures indeed. We skip Ext.emptyFn and the like though,
-                    // they're mostly harmless.
-                    if (type === 'object' || (type === 'function' &amp;&amp; !value.$noClearOnDestroy)) {
+                    // they&#39;re mostly harmless.
+                    if (type === &#39;object&#39; || (type === &#39;function&#39; &amp;&amp; !value.$noClearOnDestroy)) {
                         me[prop] = null;
                     }
                 }
@@ -1828,8 +1828,8 @@ var noArgs = [],
             }
             else if (clearPropertiesOnDestroy) {
                 //&lt;debug&gt;
-                if (clearPropertiesOnDestroy !== 'async') {
-                    Ext.raise('Invalid value for clearPropertiesOnDestroy');
+                if (clearPropertiesOnDestroy !== &#39;async&#39;) {
+                    Ext.raise(&#39;Invalid value for clearPropertiesOnDestroy&#39;);
                 }
                 //&lt;/debug&gt;
 
@@ -1841,15 +1841,15 @@ var noArgs = [],
 <span id='Ext-Base-method-callOverridden'>    /**
 </span>     * Call the original method that was previously overridden with {@link Ext.Base#override}
      *
-     *     Ext.define('My.Cat', {
+     *     Ext.define(&#39;My.Cat&#39;, {
      *         constructor: function() {
-     *             alert(&quot;I'm a cat!&quot;);
+     *             alert(&quot;I&#39;m a cat!&quot;);
      *         }
      *     });
      *
      *     My.Cat.override({
      *         constructor: function() {
-     *             alert(&quot;I'm going to be a cat!&quot;);
+     *             alert(&quot;I&#39;m going to be a cat!&quot;);
      *
      *             this.callOverridden();
      *
@@ -1857,8 +1857,8 @@ var noArgs = [],
      *         }
      *     });
      *
-     *     var kitty = new My.Cat(); // alerts &quot;I'm going to be a cat!&quot;
-     *                               // alerts &quot;I'm a cat!&quot;
+     *     var kitty = new My.Cat(); // alerts &quot;I&#39;m going to be a cat!&quot;
+     *                               // alerts &quot;I&#39;m a cat!&quot;
      *                               // alerts &quot;Meeeeoooowwww&quot;
      *
      * @param {Array/Arguments} args The arguments, either an array or the `arguments` object
@@ -1873,24 +1873,24 @@ var noArgs = [],
     Ext.privacyViolation = function (cls, existing, member, isStatic) {
         var name = member.$name,
             conflictCls = existing.$owner &amp;&amp; existing.$owner.$className,
-            s = isStatic ? 'static ' : '',
+            s = isStatic ? &#39;static &#39; : &#39;&#39;,
             msg = member.$privacy
-                ? 'Private ' + s + member.$privacy + ' method &quot;' + name + '&quot;'
-                : 'Public ' + s + 'method &quot;' + name + '&quot;';
+                ? &#39;Private &#39; + s + member.$privacy + &#39; method &quot;&#39; + name + &#39;&quot;&#39;
+                : &#39;Public &#39; + s + &#39;method &quot;&#39; + name + &#39;&quot;&#39;;
 
         if (cls.$className) {
-            msg = cls.$className + ': ' + msg;
+            msg = cls.$className + &#39;: &#39; + msg;
         }
 
         if (!existing.$privacy) {
             msg += conflictCls
-                ? ' hides public method inherited from ' + conflictCls
-                : ' hides inherited public method.';
+                ? &#39; hides public method inherited from &#39; + conflictCls
+                : &#39; hides inherited public method.&#39;;
         } else {
             msg += conflictCls
-                ? ' conflicts with private ' + existing.$privacy +
-                  ' method declared by ' + conflictCls
-                : ' conflicts with inherited private ' + existing.$privacy + ' method.';
+                ? &#39; conflicts with private &#39; + existing.$privacy +
+                  &#39; method declared by &#39; + conflictCls
+                : &#39; conflicts with inherited private &#39; + existing.$privacy + &#39; method.&#39;;
         }
 
         var compat = Ext.getCompatVersion();

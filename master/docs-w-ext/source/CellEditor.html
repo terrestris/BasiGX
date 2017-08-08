@@ -19,8 +19,8 @@
 </span> * Internal utility class that provides default configuration for cell editing.
  * @private
  */
-Ext.define('Ext.grid.CellEditor', {
-    extend: 'Ext.Editor',
+Ext.define(&#39;Ext.grid.CellEditor&#39;, {
+    extend: &#39;Ext.Editor&#39;,
 
 <span id='Ext-grid-CellEditor-property-isCellEditor'>    /**
 </span>     * @property {Boolean} isCellEditor
@@ -29,15 +29,15 @@ Ext.define('Ext.grid.CellEditor', {
      */
     isCellEditor: true,
     
-<span id='Ext-grid-CellEditor-cfg-alignment'>    alignment: 'l-l!',
+<span id='Ext-grid-CellEditor-cfg-alignment'>    alignment: &#39;l-l!&#39;,
 </span>
 <span id='Ext-grid-CellEditor-cfg-hideEl'>    hideEl : false,
 </span>
-<span id='Ext-grid-CellEditor-cfg-cls'>    cls: Ext.baseCSSPrefix + 'small-editor ' +
-</span>        Ext.baseCSSPrefix + 'grid-editor ' +
-        Ext.baseCSSPrefix + 'grid-cell-editor',
+<span id='Ext-grid-CellEditor-cfg-cls'>    cls: Ext.baseCSSPrefix + &#39;small-editor &#39; +
+</span>        Ext.baseCSSPrefix + &#39;grid-editor &#39; +
+        Ext.baseCSSPrefix + &#39;grid-cell-editor&#39;,
 
-<span id='Ext-grid-CellEditor-property-treeNodeSelector'>    treeNodeSelector: '.' + Ext.baseCSSPrefix + 'tree-node-text',
+<span id='Ext-grid-CellEditor-property-treeNodeSelector'>    treeNodeSelector: &#39;.&#39; + Ext.baseCSSPrefix + &#39;tree-node-text&#39;,
 </span>
 <span id='Ext-grid-CellEditor-cfg-shim'>    shim: false,
 </span>
@@ -45,7 +45,7 @@ Ext.define('Ext.grid.CellEditor', {
 </span><span id='Ext-grid-CellEditor-property-floating'>    floating: true,
 </span><span id='Ext-grid-CellEditor-cfg-alignOnScroll'>    alignOnScroll: false,
 </span><span id='Ext-grid-CellEditor-property-useBoundValue'>    useBoundValue: false,
-</span><span id='Ext-grid-CellEditor-property-focusLeaveAction'>    focusLeaveAction: 'completeEdit',
+</span><span id='Ext-grid-CellEditor-property-focusLeaveAction'>    focusLeaveAction: &#39;completeEdit&#39;,
 </span>
 <span id='Ext-grid-CellEditor-method-setGrid'>    // Set the grid that owns this editor.
 </span>    // Called by CellEditing#getEditor
@@ -118,7 +118,7 @@ Ext.define('Ext.grid.CellEditor', {
         }
 
         me.cacheElement();
-        // Bypass Editor's onFocusLeave
+        // Bypass Editor&#39;s onFocusLeave
         Ext.container.Container.prototype.onFocusLeave.apply(me, arguments);
     },
 
@@ -198,14 +198,14 @@ Ext.define('Ext.grid.CellEditor', {
             view = me.editingPlugin.view;
 
         if (complete || cancel) {
-            // Do not let the key event bubble into the NavigationModel after we're don processing it.
+            // Do not let the key event bubble into the NavigationModel after we&#39;re don processing it.
             // We control the navigation action here; we focus the cell.
             event.stopEvent();
 
-            // Maintain visibility so that focus doesn't leak.
+            // Maintain visibility so that focus doesn&#39;t leak.
             // We need to direct focusback to the owning cell.
             if (cancel) {
-                me.focusLeaveAction = 'cancelEdit';
+                me.focusLeaveAction = &#39;cancelEdit&#39;;
             }
 
             view.ownerGrid.setActionableMode(false);
@@ -278,14 +278,14 @@ Ext.define('Ext.grid.CellEditor', {
             offsets = Ext.Array.clone(me.offsets),
             grid = me.grid,
             xOffset,
-            v = '',
+            v = &#39;&#39;,
 
             // innerCell is empty if there are no children, or there is one text node, and it contains whitespace
             isEmpty = !innerCellTextNode || (innerCellTextNode.nodeType === 3 &amp;&amp; !(Ext.String.trim(v = innerCellTextNode.data).length));
 
         if (me.isForTree) {
             // When editing a tree, adjust the width and offsets of the editor to line
-            // up with the tree cell's text element
+            // up with the tree cell&#39;s text element
             xOffset = me.getTreeNodeOffset(innerCell);
             width -= Math.abs(xOffset);
             offsets[0] += xOffset;
@@ -295,7 +295,7 @@ Ext.define('Ext.grid.CellEditor', {
             // Subtract the column border width so that the editor displays inside the
             // borders. The column border could be either on the left or the right depending
             // on whether the grid is RTL - using the sum of both borders works in both modes.
-            width -= boundEl.getBorderWidth('rl');
+            width -= boundEl.getBorderWidth(&#39;rl&#39;);
         }
 
         if (autoSize === true) {
@@ -304,7 +304,7 @@ Ext.define('Ext.grid.CellEditor', {
 
         // https://sencha.jira.com/browse/EXTJSIV-10871 Ensure the data bearing element has a height from text.
         if (isEmpty) {
-            innerCell.dom.innerHTML = 'X';
+            innerCell.dom.innerHTML = &#39;X&#39;;
         }
 
         me.alignTo(boundEl, me.alignment, offsets);

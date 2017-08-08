@@ -31,7 +31,7 @@
  * not be used by `Ext.Promise`. This class will always be used by `Ext.Deferred` in order
  * to provide enhanced capabilities beyond standard promises.
  *
- * A Promise's `{@link #then then()}` method is used to specify onFulfilled and onRejected
+ * A Promise&#39;s `{@link #then then()}` method is used to specify onFulfilled and onRejected
  * callbacks that will be notified when the future value becomes available. Those callbacks
  * can subsequently transform the value that was resolved or the reason that was rejected.
  * Each call to `then` returns a new Promise of that transformed value; i.e., a Promise
@@ -62,12 +62,12 @@
  *
  * @since 6.0.0
  */
-Ext.define('Ext.promise.Promise', function (ExtPromise) {
+Ext.define(&#39;Ext.promise.Promise&#39;, function (ExtPromise) {
     var Deferred;
 
 return {
     requires: [
-        'Ext.promise.Deferred'
+        &#39;Ext.promise.Deferred&#39;
     ],
 
     statics: {
@@ -92,7 +92,7 @@ return {
          * The resolution value will be an Array containing the resolution value of each
          * of the `promisesOrValues`.
          *
-         * The public API's to use instead of this method are `{@link Ext.Promise#all}`
+         * The public API&#39;s to use instead of this method are `{@link Ext.Promise#all}`
          * and `{@link Ext.Deferred#all}`.
          *
          * @param {Mixed[]/Ext.promise.Promise[]/Ext.promise.Promise} promisesOrValues An
@@ -105,7 +105,7 @@ return {
         all: function (promisesOrValues) {
             //&lt;debug&gt;
             if (!(Ext.isArray(promisesOrValues) || ExtPromise.is(promisesOrValues))) {
-                Ext.raise('Invalid parameter: expected an Array or Promise of an Array.');
+                Ext.raise(&#39;Invalid parameter: expected an Array or Promise of an Array.&#39;);
             }
             //&lt;/debug&gt;
 
@@ -160,7 +160,7 @@ return {
          * @private
          */
         is: function (value) {
-            return value != null &amp;&amp; (typeof value === 'object' || Ext.isFunction(value)) &amp;&amp;
+            return value != null &amp;&amp; (typeof value === &#39;object&#39; || Ext.isFunction(value)) &amp;&amp;
                 Ext.isFunction(value.then);
         },
 
@@ -182,7 +182,7 @@ return {
          *  * Resolves or rejects when the specified promise (or third-party Promise or
          *    then()-able) is resolved or rejected.
          *
-         * The public API's to use instead of this method are `{@link Ext.Promise#resolve}`
+         * The public API&#39;s to use instead of this method are `{@link Ext.Promise#resolve}`
          * and `{@link Ext.Deferred#resolved}`.
          *
          * @param {Mixed} promiseOrValue A Promise (or third-party Promise or then()-able)
@@ -202,7 +202,7 @@ return {
     },
 
 <span id='Ext-promise-Promise-property-Reference'>    /**
-</span>     * @property {Ext.promise.Deferred} Reference to this promise's
+</span>     * @property {Ext.promise.Deferred} Reference to this promise&#39;s
      * `{@link Ext.promise.Deferred Deferred}` instance.
      *
      * @readonly
@@ -301,7 +301,7 @@ return {
      *
      * Similar to `finally` in `try... catch... finally`.
      *
-     * NOTE: The specified callback does not affect the resulting Promise's outcome; any
+     * NOTE: The specified callback does not affect the resulting Promise&#39;s outcome; any
      * return value is ignored and any Error is rethrown.
      *
      * @param {Function} onCompleted Callback to execute when the Promise is resolved or
@@ -409,15 +409,15 @@ return {
      */
     log: function (identifier) {
         if (identifier == null) {
-            identifier = '';
+            identifier = &#39;&#39;;
         }
         
         return this.owner.then(function (value) {
-            Ext.log(&quot;&quot; + (identifier || 'Promise') + &quot; resolved with value: &quot; + value);
+            Ext.log(&quot;&quot; + (identifier || &#39;Promise&#39;) + &quot; resolved with value: &quot; + value);
             
             return value;
         }, function (reason) {
-            Ext.log(&quot;&quot; + (identifier || 'Promise') + &quot; rejected with reason: &quot; + reason);
+            Ext.log(&quot;&quot; + (identifier || &#39;Promise&#39;) + &quot; rejected with reason: &quot; + reason);
             
             throw reason;
         });

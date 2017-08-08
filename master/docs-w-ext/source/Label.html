@@ -29,59 +29,59 @@
  * you should make sure the {@link #forId} is set to the same value as the {@link Ext.form.field.Base#inputId inputId}
  * of that field.
  * 
- * The label's text can be set using either the {@link #text} or {@link #html} configuration properties; the
+ * The label&#39;s text can be set using either the {@link #text} or {@link #html} configuration properties; the
  * difference between the two is that the former will automatically escape HTML characters when rendering, while
  * the latter will not.
  *
  * # Example
  * 
  * This example creates a Label after its associated Text field, an arrangement that cannot currently
- * be achieved using the standard Field layout's labelAlign.
+ * be achieved using the standard Field layout&#39;s labelAlign.
  * 
  *     @example
- *     Ext.create('Ext.form.Panel', {
- *         title: 'Field with Label',
+ *     Ext.create(&#39;Ext.form.Panel&#39;, {
+ *         title: &#39;Field with Label&#39;,
  *         width: 400,
  *         bodyPadding: 10,
  *         renderTo: Ext.getBody(),
  *         layout: {
- *             type: 'hbox',
- *             align: 'middle'
+ *             type: &#39;hbox&#39;,
+ *             align: &#39;middle&#39;
  *         },
  *         items: [{
- *             xtype: 'textfield',
+ *             xtype: &#39;textfield&#39;,
  *             hideLabel: true,
  *             flex: 1
  *         }, {
- *             xtype: 'label',
- *             forId: 'myFieldId',
- *             text: 'My Awesome Field',
- *             margin: '0 0 0 10'
+ *             xtype: &#39;label&#39;,
+ *             forId: &#39;myFieldId&#39;,
+ *             text: &#39;My Awesome Field&#39;,
+ *             margin: &#39;0 0 0 10&#39;
  *         }]
  *     });
  */
-Ext.define('Ext.form.Label', {
-    extend:'Ext.Component',
-    alias: 'widget.label',
-    requires: ['Ext.util.Format'],
+Ext.define(&#39;Ext.form.Label&#39;, {
+    extend:&#39;Ext.Component&#39;,
+    alias: &#39;widget.label&#39;,
+    requires: [&#39;Ext.util.Format&#39;],
 
-<span id='Ext-form-Label-cfg-autoEl'>    autoEl: 'label',
+<span id='Ext-form-Label-cfg-autoEl'>    autoEl: &#39;label&#39;,
 </span>
 <span id='Ext-form-Label-cfg-text'>    /**
-</span>     * @cfg {String} [text='']
+</span>     * @cfg {String} [text=&#39;&#39;]
      * The plain text to display within the label. If you need to include HTML
-     * tags within the label's innerHTML, use the {@link #html} config instead.
+     * tags within the label&#39;s innerHTML, use the {@link #html} config instead.
      */
 <span id='Ext-form-Label-cfg-forId'>    /**
 </span>     * @cfg {String} forId
-     * The id of the input element to which this label will be bound via the standard HTML 'for'
+     * The id of the input element to which this label will be bound via the standard HTML &#39;for&#39;
      * attribute. If not specified, the attribute will not be added to the label. In most cases you will be
      * associating the label with a {@link Ext.form.field.Base} component, so you should make sure this matches
      * the {@link Ext.form.field.Base#inputId inputId} of that field.
      */
 <span id='Ext-form-Label-cfg-html'>    /**
-</span>     * @cfg {String} [html='']
-     * An HTML fragment that will be used as the label's innerHTML.
+</span>     * @cfg {String} [html=&#39;&#39;]
+     * An HTML fragment that will be used as the label&#39;s innerHTML.
      * Note that if {@link #text} is specified it will take precedence and this value will be ignored.
      */
     
@@ -90,17 +90,17 @@ Ext.define('Ext.form.Label', {
 <span id='Ext-form-Label-method-getElConfig'>    getElConfig: function(){
 </span>        var me = this;
 
-        me.html = me.text ? Ext.util.Format.htmlEncode(me.text) : (me.html || '');
+        me.html = me.text ? Ext.util.Format.htmlEncode(me.text) : (me.html || &#39;&#39;);
         return Ext.apply(me.callParent(), {
-            htmlFor: me.forId || ''
+            htmlFor: me.forId || &#39;&#39;
         });
     },
 
 <span id='Ext-form-Label-method-setText'>    /**
-</span>     * Updates the label's innerHTML with the specified string.
+</span>     * Updates the label&#39;s innerHTML with the specified string.
      * @param {String} text The new label text
      * @param {Boolean} [encode=true] False to skip HTML-encoding the text when rendering it
-     * to the label. This might be useful if you want to include tags in the label's innerHTML rather
+     * to the label. This might be useful if you want to include tags in the label&#39;s innerHTML rather
      * than rendering them as string literals per the default logic.
      * @return {Ext.form.Label} this
      */

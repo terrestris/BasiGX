@@ -39,14 +39,14 @@
  *
  * @class BasiGX.view.component.Map
  */
-Ext.define('BasiGX.view.component.Map', {
-    extend: 'GeoExt.component.Map',
-    xtype: 'basigx-component-map',
+Ext.define(&#39;BasiGX.view.component.Map&#39;, {
+    extend: &#39;GeoExt.component.Map&#39;,
+    xtype: &#39;basigx-component-map&#39;,
 
     requires: [
-        'BasiGX.util.ConfigParser',
-        'BasiGX.util.Map',
-        'BasiGX.util.Layer'
+        &#39;BasiGX.util.ConfigParser&#39;,
+        &#39;BasiGX.util.Map&#39;,
+        &#39;BasiGX.util.Layer&#39;
     ],
 
     inheritableStatics: {
@@ -57,13 +57,13 @@ Ext.define('BasiGX.view.component.Map', {
 
 <span id='BasiGX-view-component-Map-property-viewModel'>    viewModel: {
 </span>        data: {
-            documentation: '&lt;h2&gt;Karte&lt;/h2&gt;• Die Karte wird zur Darstellung ' +
-                'der verschiedenen Kartenthemen verwendet.&lt;br&gt;• Mit Hilfe ' +
-                'des Themenbaums oder der Werkzeuge können Sie mit der ' +
-                'Karte interagieren.&lt;br&gt;• Standardmäßig können Sie den ' +
-                'Maßstab der Karte mit dem Mausrad oder einem Doppelklick ' +
-                'vergrößern und verkleinern.&lt;br&gt;• Für weitere Informationen ' +
-                'verwenden Sie die Hilfe für ein konkretes Werkzeug'
+            documentation: &#39;&lt;h2&gt;Karte&lt;/h2&gt;• Die Karte wird zur Darstellung &#39; +
+                &#39;der verschiedenen Kartenthemen verwendet.&lt;br&gt;• Mit Hilfe &#39; +
+                &#39;des Themenbaums oder der Werkzeuge können Sie mit der &#39; +
+                &#39;Karte interagieren.&lt;br&gt;• Standardmäßig können Sie den &#39; +
+                &#39;Maßstab der Karte mit dem Mausrad oder einem Doppelklick &#39; +
+                &#39;vergrößern und verkleinern.&lt;br&gt;• Für weitere Informationen &#39; +
+                &#39;verwenden Sie die Hilfe für ein konkretes Werkzeug&#39;
         }
     },
 
@@ -76,28 +76,28 @@ Ext.define('BasiGX.view.component.Map', {
 </span>     * The URL to the app Context resource.
      * Gets requested via AJAX, can be a local file or an webinterface
      */
-    appContextPath: 'resources/appContext.json',
+    appContextPath: &#39;resources/appContext.json&#39;,
 
 <span id='BasiGX-view-component-Map-property-fallbackAppContext'>    /**
 </span>     * The appContext to use when no real context could be retrieved
      */
     fallbackAppContext: {
-        'data': {
-            'merge': {
-                'startCenter': [1163261, 6648489],
-                'startZoom': 5,
-                'mapLayers': [
+        &#39;data&#39;: {
+            &#39;merge&#39;: {
+                &#39;startCenter&#39;: [1163261, 6648489],
+                &#39;startZoom&#39;: 5,
+                &#39;mapLayers&#39;: [
                     {
-                        'name': 'OSM WMS',
-                        'type': 'TileWMS',
-                        'url': 'http://ows.terrestris.de/osm/service?',
-                        'layers': 'OSM-WMS',
-                        'topic': false
+                        &#39;name&#39;: &#39;OSM WMS&#39;,
+                        &#39;type&#39;: &#39;TileWMS&#39;,
+                        &#39;url&#39;: &#39;http://ows.terrestris.de/osm/service?&#39;,
+                        &#39;layers&#39;: &#39;OSM-WMS&#39;,
+                        &#39;topic&#39;: false
                     }
                 ],
-                'mapConfig': {
-                    'projection': 'EPSG:3857',
-                    'resolutions': [
+                &#39;mapConfig&#39;: {
+                    &#39;projection&#39;: &#39;EPSG:3857&#39;,
+                    &#39;resolutions&#39;: [
                         156543.03390625,
                         78271.516953125,
                         39135.7584765625,
@@ -118,7 +118,7 @@ Ext.define('BasiGX.view.component.Map', {
                         1.194328566789627,
                         0.5971642833948135
                     ],
-                    'zoom': 0
+                    &#39;zoom&#39;: 0
                 }
             }
         }
@@ -161,12 +161,12 @@ Ext.define('BasiGX.view.component.Map', {
                     } else if (Ext.isObject(response.responseText)) {
                         me.appContext = response.responseText;
                     } else {
-                        Ext.log.error('Error! Could not parse appContext!');
+                        Ext.log.error(&#39;Error! Could not parse appContext!&#39;);
                     }
                 },
                 failure: function(response) {
-                    Ext.log.error('Error! No application ' +
-                        'context found, example loaded', response);
+                    Ext.log.error(&#39;Error! No application &#39; +
+                        &#39;context found, example loaded&#39;, response);
                     me.appContext = me.fallbackAppContext;
                 }
             });

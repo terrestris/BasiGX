@@ -19,9 +19,9 @@
 </span> * This class manages a many-to-many matrix for a `Session`.
  * @private
  */
-Ext.define('Ext.data.matrix.Matrix', {
+Ext.define(&#39;Ext.data.matrix.Matrix&#39;, {
     requires: [
-        'Ext.data.matrix.Side'
+        &#39;Ext.data.matrix.Side&#39;
     ],
 
 <span id='Ext-data-matrix-Matrix-property-association'>    /**
@@ -82,7 +82,7 @@ Ext.define('Ext.data.matrix.Matrix', {
             right = new Side(me, 1, association.right);
 
         //&lt;debug&gt;
-        Ext.Assert.truthy(association.isManyToMany, 'Association is not many-to-many');
+        Ext.Assert.truthy(association.isManyToMany, &#39;Association is not many-to-many&#39;);
         //&lt;/debug&gt;
 
         me.association = association;

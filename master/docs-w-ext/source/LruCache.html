@@ -23,8 +23,8 @@
  * items at the end of the list, and purges the cache down to the most recently accessed {@link #maxSize} items
  * upon add.
  */
-Ext.define('Ext.util.LruCache', {
-    extend: 'Ext.util.HashMap',
+Ext.define(&#39;Ext.util.LruCache&#39;, {
+    extend: &#39;Ext.util.HashMap&#39;,
 
     config: {
 <span id='Ext-util-LruCache-cfg-maxSize'>        /** 
@@ -101,7 +101,7 @@ Ext.define('Ext.util.LruCache', {
             me.prune();
             return newValue;
         }
-        // No following sibling, it's just an add.
+        // No following sibling, it&#39;s just an add.
         else {
             return me.add(key, newValue);
         }
@@ -114,7 +114,7 @@ Ext.define('Ext.util.LruCache', {
         var entry = this.map[key];
         if (entry) {
 
-            // If it's not the end, move to end of list on get
+            // If it&#39;s not the end, move to end of list on get
             if (entry.next) {
                 this.moveToEnd(entry);
             }

@@ -23,7 +23,7 @@
  * measure text that includes HTML may return inaccurate results.
  *
  * This measurement works by copying the relevant font-related CSS styles from the element  
- * param to the TextMetrics' cached measurement element.  This returns the dimensions of the cached
+ * param to the TextMetrics&#39; cached measurement element.  This returns the dimensions of the cached
  * element wrapping the text.  By default, the wrapping element is auto-sized.  
  * You must provide a **fixed width** if the passed text is multi-lined.
  *
@@ -39,9 +39,9 @@
  * {@link Ext.form.Labelable#labelClsExtra labelClsExtra} and 
  * {@link Ext.form.Labelable#labelStyle labelStyle} configs.
  *
- *     Ext.define('MyApp.view.MyTextField', {
- *         extend: 'Ext.form.field.Text',
- *         xtype: 'mytextfield',
+ *     Ext.define(&#39;MyApp.view.MyTextField&#39;, {
+ *         extend: &#39;Ext.form.field.Text&#39;,
+ *         xtype: &#39;mytextfield&#39;,
  *     
  *         initComponent: function () {
  *             var me = this,
@@ -61,7 +61,7 @@
  *     
  *             if (!tm) {
  *                 el = Ext.getBody().createChild();
- *                 el.addCls(me.labelCls + ' ' + me.labelClsExtra).
+ *                 el.addCls(me.labelCls + &#39; &#39; + me.labelClsExtra).
  *                     applyStyles(me.labelStyle);
  *     
  *                 cls.measurer = tm = new Ext.util.TextMetrics(el);
@@ -71,19 +71,19 @@
  *         }
  *     });
  *
- *     Ext.create('Ext.form.Panel', {
- *         title: 'Contact Info',
+ *     Ext.create(&#39;Ext.form.Panel&#39;, {
+ *         title: &#39;Contact Info&#39;,
  *         width: 600,
  *         bodyPadding: 10,
  *         renderTo: Ext.getBody(),
  *         items: [{
- *             xtype: 'mytextfield',
- *             fieldLabel: 'Name',
- *             labelStyle: 'font-size: 10px;'
+ *             xtype: &#39;mytextfield&#39;,
+ *             fieldLabel: &#39;Name&#39;,
+ *             labelStyle: &#39;font-size: 10px;&#39;
  *         }, {
- *             xtype: 'mytextfield',
- *             fieldLabel: 'Email Address',
- *             labelStyle: 'font-size: 10px;'
+ *             xtype: &#39;mytextfield&#39;,
+ *             fieldLabel: &#39;Email Address&#39;,
+ *             labelStyle: &#39;font-size: 10px;&#39;
  *         }]
  *     });
  *
@@ -92,9 +92,9 @@
  * textfield instance uses the static TextMetrics measure method which will copy the 
  * label styles repeatedly, thus being less efficient but more versatile.
  *
- *     Ext.define('MyApp.view.MyTextField2', {
- *         extend: 'Ext.form.field.Text',
- *         xtype: 'mytextfield2',
+ *     Ext.define(&#39;MyApp.view.MyTextField2&#39;, {
+ *         extend: &#39;Ext.form.field.Text&#39;,
+ *         xtype: &#39;mytextfield2&#39;,
  *     
  *         initComponent: function () {
  *             var me = this,
@@ -114,36 +114,36 @@
  *                 cls.measureEl = el = Ext.getBody().createChild();
  *             }
  *     
- *             el.dom.removeAttribute('style');
+ *             el.dom.removeAttribute(&#39;style&#39;);
  *             el.removeCls(el.dom.className).
- *                 addCls(me.labelCls + ' ' + me.labelClsExtra).
+ *                 addCls(me.labelCls + &#39; &#39; + me.labelClsExtra).
  *                 applyStyles(me.labelStyle);
  *     
  *             return el;
  *         }
  *     });
  *     
- *     Ext.create('Ext.form.Panel', {
- *         title: 'Contact Info',
+ *     Ext.create(&#39;Ext.form.Panel&#39;, {
+ *         title: &#39;Contact Info&#39;,
  *         width: 600,
  *         bodyPadding: 10,
  *         renderTo: Ext.getBody(),
  *         items: [{
- *             xtype: 'mytextfield2',
- *             fieldLabel: 'Name',
- *             labelStyle: 'font-size: 14px;font-weight: bold;',
- *             labelClsExtra: 'nameLabel'
+ *             xtype: &#39;mytextfield2&#39;,
+ *             fieldLabel: &#39;Name&#39;,
+ *             labelStyle: &#39;font-size: 14px;font-weight: bold;&#39;,
+ *             labelClsExtra: &#39;nameLabel&#39;
  *         }, {
- *             xtype: 'mytextfield2',
- *             fieldLabel: 'Email Address',
- *             labelStyle: 'font-size: 10px;',
- *             labelClsExtra: 'emailLabel'
+ *             xtype: &#39;mytextfield2&#39;,
+ *             fieldLabel: &#39;Email Address&#39;,
+ *             labelStyle: &#39;font-size: 10px;&#39;,
+ *             labelClsExtra: &#39;emailLabel&#39;
  *         }]
  *     });
  */
- Ext.define('Ext.util.TextMetrics', {
+ Ext.define(&#39;Ext.util.TextMetrics&#39;, {
     requires: [
-        'Ext.dom.Element'
+        &#39;Ext.dom.Element&#39;
     ],
 
     statics: {
@@ -155,7 +155,7 @@
          * @param {String} text The text to measure
          * @param {Number} fixedWidth (optional) If the text will be multiline, you have to set a fixed width
          * in order to accurately measure the text height
-         * @return {Object} An object containing the text's size `{width: (width), height: (height)}`
+         * @return {Object} An object containing the text&#39;s size `{width: (width), height: (height)}`
          * @static
          */
         measure: function(el, text, fixedWidth){
@@ -166,7 +166,7 @@
                 shared = me.shared = new me(el, fixedWidth);
             }
             shared.bind(el);
-            shared.setFixedWidth(fixedWidth || 'auto');
+            shared.setFixedWidth(fixedWidth || &#39;auto&#39;);
             return shared.getSize(text);
         },
         
@@ -191,10 +191,10 @@
             measure = Ext.getBody().createChild({
                 //&lt;debug&gt;
                 // tell the spec runner to ignore this element when checking if the dom is clean 
-                'data-sticky': true,
+                &#39;data-sticky&#39;: true,
                 //&lt;/debug&gt;
-                role: 'presentation',
-                cls: Ext.baseCSSPrefix + 'textmetrics'
+                role: &#39;presentation&#39;,
+                cls: Ext.baseCSSPrefix + &#39;textmetrics&#39;
             });
 
         measure.setVisibilityMode(1);
@@ -204,7 +204,7 @@
             me.bind(bindTo);
         }
         
-        measure.position('absolute');
+        measure.position(&#39;absolute&#39;);
         measure.setLocalXY(-1000, -1000);
         measure.hide();
 
@@ -214,9 +214,9 @@
     },
     
 <span id='Ext-util-TextMetrics-method-getSize'>    /**
-</span>     * Returns the size of the specified text based on the internal element's style and width properties
+</span>     * Returns the size of the specified text based on the internal element&#39;s style and width properties
      * @param {String} text The text to measure
-     * @return {Object} An object containing the text's size `{width: (width), height: (height)}`
+     * @return {Object} An object containing the text&#39;s size `{width: (width), height: (height)}`
      */
     getSize: function(text){
         var measure = this.measure,
@@ -224,7 +224,7 @@
         
         measure.setHtml(text);
         size = measure.getSize();
-        measure.setHtml('');
+        measure.setHtml(&#39;&#39;);
         return size;
     },
     
@@ -237,7 +237,7 @@
         
         me.el = Ext.get(el);
         me.measure.setStyle(
-            me.el.getStyle(['font-size','font-style', 'font-weight', 'font-family','line-height', 'text-transform', 'letter-spacing', 'word-break'])
+            me.el.getStyle([&#39;font-size&#39;,&#39;font-style&#39;, &#39;font-weight&#39;, &#39;font-family&#39;,&#39;line-height&#39;, &#39;text-transform&#39;, &#39;letter-spacing&#39;, &#39;word-break&#39;])
         );
     },
     
@@ -256,7 +256,7 @@
       * @return {Number} width The width in pixels
       */
      getWidth : function(text){
-         this.measure.dom.style.width = 'auto';
+         this.measure.dom.style.width = &#39;auto&#39;;
          return this.getSize(text).width;
      },
      

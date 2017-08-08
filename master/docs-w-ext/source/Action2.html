@@ -23,9 +23,9 @@
  *     // Init the singleton.  Any tag-based quick tips will start working.
  *     Ext.tip.QuickTipManager.init();
  *
- *     Ext.create('Ext.data.Store', {
- *         storeId:'employeeStore',
- *         fields:['firstname', 'lastname', 'seniority', 'dep', 'hired'],
+ *     Ext.create(&#39;Ext.data.Store&#39;, {
+ *         storeId:&#39;employeeStore&#39;,
+ *         fields:[&#39;firstname&#39;, &#39;lastname&#39;, &#39;seniority&#39;, &#39;dep&#39;, &#39;hired&#39;],
  *         data:[
  *             {firstname:&quot;Michael&quot;, lastname:&quot;Scott&quot;},
  *             {firstname:&quot;Dwight&quot;, lastname:&quot;Schrute&quot;},
@@ -35,28 +35,28 @@
  *         ]
  *     });
  *
- *     Ext.create('Ext.grid.Panel', {
- *         title: 'Action Column Demo',
- *         store: Ext.data.StoreManager.lookup('employeeStore'),
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
+ *         title: &#39;Action Column Demo&#39;,
+ *         store: Ext.data.StoreManager.lookup(&#39;employeeStore&#39;),
  *         columns: [
- *             {text: 'First Name',  dataIndex:'firstname'},
- *             {text: 'Last Name',  dataIndex:'lastname'},
+ *             {text: &#39;First Name&#39;,  dataIndex:&#39;firstname&#39;},
+ *             {text: &#39;Last Name&#39;,  dataIndex:&#39;lastname&#39;},
  *             {
- *                 xtype:'actioncolumn',
+ *                 xtype:&#39;actioncolumn&#39;,
  *                 width:50,
  *                 items: [{
- *                     icon: 'extjs-build/examples/shared/icons/fam/cog_edit.png',  // Use a URL in the icon config
- *                     tooltip: 'Edit',
+ *                     icon: &#39;extjs-build/examples/shared/icons/fam/cog_edit.png&#39;,  // Use a URL in the icon config
+ *                     tooltip: &#39;Edit&#39;,
  *                     handler: function(grid, rowIndex, colIndex) {
  *                         var rec = grid.getStore().getAt(rowIndex);
- *                         alert(&quot;Edit &quot; + rec.get('firstname'));
+ *                         alert(&quot;Edit &quot; + rec.get(&#39;firstname&#39;));
  *                     }
  *                 },{
- *                     icon: 'extjs-build/examples/restful/images/delete.png',
- *                     tooltip: 'Delete',
+ *                     icon: &#39;extjs-build/examples/restful/images/delete.png&#39;,
+ *                     tooltip: &#39;Delete&#39;,
  *                     handler: function(grid, rowIndex, colIndex) {
  *                         var rec = grid.getStore().getAt(rowIndex);
- *                         alert(&quot;Terminate &quot; + rec.get('firstname'));
+ *                         alert(&quot;Terminate &quot; + rec.get(&#39;firstname&#39;));
  *                     }
  *                 }]
  *             }
@@ -68,14 +68,14 @@
  * The action column can be at any index in the columns array, and a grid can have any number of
  * action columns.
  */
-Ext.define('Ext.grid.column.Action', {
-    extend: 'Ext.grid.column.Column',
-    alias: ['widget.actioncolumn'],
-    alternateClassName: 'Ext.grid.ActionColumn',
+Ext.define(&#39;Ext.grid.column.Action&#39;, {
+    extend: &#39;Ext.grid.column.Column&#39;,
+    alias: [&#39;widget.actioncolumn&#39;],
+    alternateClassName: &#39;Ext.grid.ActionColumn&#39;,
 
     requires: [
-        'Ext.grid.column.ActionProxy',
-        'Ext.Glyph'
+        &#39;Ext.grid.column.ActionProxy&#39;,
+        &#39;Ext.Glyph&#39;
     ],
 
 <span id='Ext-grid-column-Action-cfg-glyph'>    /**
@@ -139,11 +139,11 @@ Ext.define('Ext.grid.column.Action', {
      * A function which returns the CSS class to apply to the icon image.
      * 
      * For information on using the icons provided in the SDK see {@link #iconCls}.
-     * @cfg {Object} getClass.v The value of the column's configured field (if any).
+     * @cfg {Object} getClass.v The value of the column&#39;s configured field (if any).
      * @cfg {Object} getClass.metadata An object in which you may set the following attributes:
-     * @cfg {String} getClass.metadata.css A CSS class name to add to the cell's TD element.
+     * @cfg {String} getClass.metadata.css A CSS class name to add to the cell&#39;s TD element.
      * @cfg {String} getClass.metadata.attr An HTML attribute definition string to apply to the data container
-     * element *within* the table cell (e.g. 'style=&quot;color:red;&quot;').
+     * element *within* the table cell (e.g. &#39;style=&quot;color:red;&quot;&#39;).
      * @cfg {Ext.data.Model} getClass.r The Record providing the data.
      * @cfg {Number} getClass.rowIndex The row index.
      * @cfg {Number} getClass.colIndex The column index.
@@ -167,9 +167,9 @@ Ext.define('Ext.grid.column.Action', {
      * 
      *     Ext.tip.QuickTipManager.init();
      *     
-     *     Ext.create('Ext.data.Store', {
-     *         storeId: 'employeeStore',
-     *         fields: ['firstname', 'grade'],
+     *     Ext.create(&#39;Ext.data.Store&#39;, {
+     *         storeId: &#39;employeeStore&#39;,
+     *         fields: [&#39;firstname&#39;, &#39;grade&#39;],
      *         data: [{
      *             firstname: &quot;Michael&quot;,
      *             grade: 50
@@ -179,41 +179,41 @@ Ext.define('Ext.grid.column.Action', {
      *         }]
      *     });
      *     
-     *     Ext.create('Ext.grid.Panel', {
-     *         title: 'Action Column Demo',
-     *         store: Ext.data.StoreManager.lookup('employeeStore'),
+     *     Ext.create(&#39;Ext.grid.Panel&#39;, {
+     *         title: &#39;Action Column Demo&#39;,
+     *         store: Ext.data.StoreManager.lookup(&#39;employeeStore&#39;),
      *         columns: [{
-     *             text: 'First Name',
-     *             dataIndex: 'firstname'
+     *             text: &#39;First Name&#39;,
+     *             dataIndex: &#39;firstname&#39;
      *         }, {
-     *             text: 'Last Name',
-     *             dataIndex: 'grade'
+     *             text: &#39;Last Name&#39;,
+     *             dataIndex: &#39;grade&#39;
      *         }, {
-     *             xtype: 'actioncolumn',
+     *             xtype: &#39;actioncolumn&#39;,
      *             width: 50,
-     *             icon: 'sample/icons/action-icons.png',
+     *             icon: &#39;sample/icons/action-icons.png&#39;,
      *             getTip: function(value, metadata, record, row, col, store) {
-     *                 var avg = store.average('grade'),
-     *                     grade = record.get('grade');
+     *                 var avg = store.average(&#39;grade&#39;),
+     *                     grade = record.get(&#39;grade&#39;);
      *     
      *                 if (grade &lt; avg) {
      *                     metadata.tdCls = &quot;below-average&quot;;
      *                 }
      *     
-     *                 return grade &gt; 70 ? 'Pass' : 'Fail';
+     *                 return grade &gt; 70 ? &#39;Pass&#39; : &#39;Fail&#39;;
      *             },
      *             handler: function(grid, rowIndex, colIndex) {
      *                 var rec = grid.getStore().getAt(rowIndex);
-     *                 alert(&quot;Edit &quot; + rec.get('firstname'));
+     *                 alert(&quot;Edit &quot; + rec.get(&#39;firstname&#39;));
      *             }
      *         }],
      *         width: 250,
      *         renderTo: document.body
      *     });
      * 
-     * @param {Object} value The value of the column's configured field (if any).
+     * @param {Object} value The value of the column&#39;s configured field (if any).
      * @param {Object} metadata An object in which you may set the following attributes:
-     * @param {String} metadata.tdCls A CSS class name to add to the cell's TD element.
+     * @param {String} metadata.tdCls A CSS class name to add to the cell&#39;s TD element.
      * 
      *     metadata.tdCls = &quot;custom-cell-cls&quot;;
      * 
@@ -254,11 +254,11 @@ Ext.define('Ext.grid.column.Action', {
      * For information on using the icons provided in the SDK see {@link #iconCls}.
      *
      * @cfg {Function} items.getClass A function which returns the CSS class to apply to the icon image.
-     * @cfg {Object} items.getClass.v The value of the column's configured field (if any).
+     * @cfg {Object} items.getClass.v The value of the column&#39;s configured field (if any).
      * @cfg {Object} items.getClass.metadata An object in which you may set the following attributes:
-     * @cfg {String} items.getClass.metadata.css A CSS class name to add to the cell's TD element.
+     * @cfg {String} items.getClass.metadata.css A CSS class name to add to the cell&#39;s TD element.
      * @cfg {String} items.getClass.metadata.attr An HTML attribute definition string to apply to the data
-     * container element _within_ the table cell (e.g. 'style=&quot;color:red;&quot;').
+     * container element _within_ the table cell (e.g. &#39;style=&quot;color:red;&quot;&#39;).
      * @cfg {Ext.data.Model} items.getClass.r The Record providing the data.
      * @cfg {Number} items.getClass.rowIndex The row index.
      * @cfg {Number} items.getClass.colIndex The column index.
@@ -281,18 +281,18 @@ Ext.define('Ext.grid.column.Action', {
      * @cfg {Ext.data.Model} items.isDisabled.record The Record underlying the row.
      *
      * @cfg {Function} items.getTip A function which returns the tooltip string for any row.
-     * @cfg {Object} items.getTip.v The value of the column's configured field (if any).
+     * @cfg {Object} items.getTip.v The value of the column&#39;s configured field (if any).
      * @cfg {Object} items.getTip.metadata An object in which you may set the following attributes:
-     * @cfg {String} items.getTip.metadata.css A CSS class name to add to the cell's TD element.
+     * @cfg {String} items.getTip.metadata.css A CSS class name to add to the cell&#39;s TD element.
      * @cfg {String} items.getTip.metadata.attr An HTML attribute definition string to apply to the data
-     * container element _within_ the table cell (e.g. 'style=&quot;color:red;&quot;').
+     * container element _within_ the table cell (e.g. &#39;style=&quot;color:red;&quot;&#39;).
      * @cfg {Ext.data.Model} items.getTip.r The Record providing the data.
      * @cfg {Number} items.getTip.rowIndex The row index.
      * @cfg {Number} items.getTip.colIndex The column index.
      * @cfg {Ext.data.Store} items.getTip.store The Store which is providing the data Model.
      *
      * @cfg {Object} items.scope The scope (`this` reference) in which the `handler`, `getClass`, `isDisabled` and `getTip` functions
-     * are executed. Fallback defaults are this Column's configured scope, then this Column.
+     * are executed. Fallback defaults are this Column&#39;s configured scope, then this Column.
      *
      * @cfg {String} items.tooltip A tooltip message to be displayed on hover.
      * {@link Ext.tip.QuickTipManager#init Ext.tip.QuickTipManager} must have been initialized.
@@ -310,19 +310,19 @@ Ext.define('Ext.grid.column.Action', {
      * update the displayed icon accordingly.
      */
 
-    actionIdRe: new RegExp(Ext.baseCSSPrefix + 'action-col-(\\d+)'),
+    actionIdRe: new RegExp(Ext.baseCSSPrefix + &#39;action-col-(\\d+)&#39;),
 
 <span id='Ext-grid-column-Action-cfg-altText'>    /**
 </span>     * @cfg {String} altText
      * The alt text to use for the image element.
      */
-    altText: '',
+    altText: &#39;&#39;,
 
 <span id='Ext-grid-column-Action-cfg-menuText'>    /**
 </span>     * @cfg {String} [menuText=&lt;i&gt;Actions&lt;/i&gt;]
-     * Text to display in this column's menu item if no {@link #text} was specified as a header.
+     * Text to display in this column&#39;s menu item if no {@link #text} was specified as a header.
      */
-    menuText: '&lt;i&gt;Actions&lt;/i&gt;',
+    menuText: &#39;&lt;i&gt;Actions&lt;/i&gt;&#39;,
     
 <span id='Ext-grid-column-Action-cfg-itemTabIndex'>    /**
 </span>     * @cfg {Number} [itemTabIndex=0] Default tabIndex attribute value for each action item.
@@ -332,7 +332,7 @@ Ext.define('Ext.grid.column.Action', {
 <span id='Ext-grid-column-Action-cfg-itemAriaRole'>    /**
 </span>     * @cfg {String} [itemAriaRole=&quot;button&quot;] Default ARIA role for each action item.
      */
-    itemAriaRole: 'button',
+    itemAriaRole: &#39;button&#39;,
 
 <span id='Ext-grid-column-Action-cfg-ignoreExport'><span id='Ext-grid-column-Action-property-maskOnDisable'>    maskOnDisable: false, // Disable means the action(s)
 </span></span>
@@ -340,9 +340,9 @@ Ext.define('Ext.grid.column.Action', {
 
 <span id='Ext-grid-column-Action-cfg-sortable'>    sortable: false,
 </span>
-<span id='Ext-grid-column-Action-property-innerCls'>    innerCls: Ext.baseCSSPrefix + 'grid-cell-inner-action-col',
+<span id='Ext-grid-column-Action-property-innerCls'>    innerCls: Ext.baseCSSPrefix + &#39;grid-cell-inner-action-col&#39;,
 </span>
-<span id='Ext-grid-column-Action-property-actionIconCls'>    actionIconCls: Ext.baseCSSPrefix + 'action-col-icon',
+<span id='Ext-grid-column-Action-property-actionIconCls'>    actionIconCls: Ext.baseCSSPrefix + &#39;action-col-icon&#39;,
 </span>
 <span id='Ext-grid-column-Action-method-constructor'>    constructor: function(config) {
 </span>        var me = this,
@@ -366,7 +366,7 @@ Ext.define('Ext.grid.column.Action', {
 
         for (i = 0, len = items.length; i &lt; len; ++i) {
             item = items[i];
-            if (item.substr &amp;&amp; item[0] === '@') {
+            if (item.substr &amp;&amp; item[0] === &#39;@&#39;) {
                 item = me.getAction(item.substr(1));
             }
             if (item.isAction) {
@@ -407,9 +407,9 @@ Ext.define('Ext.grid.column.Action', {
         // Allow a configured renderer to create initial value (And set the other values in the &quot;metadata&quot; argument!)
         // Assign a new variable here, since if we modify &quot;v&quot; it will also modify the arguments collection, meaning
         // we will pass an incorrect value to getClass/getTip
-        ret = Ext.isFunction(me.origRenderer) ? me.origRenderer.apply(scope, arguments) || '' : '';
+        ret = Ext.isFunction(me.origRenderer) ? me.origRenderer.apply(scope, arguments) || &#39;&#39; : &#39;&#39;;
 
-        cellValues.tdCls += ' ' + Ext.baseCSSPrefix + 'action-col-cell';
+        cellValues.tdCls += &#39; &#39; + Ext.baseCSSPrefix + &#39;action-col-cell&#39;;
         for (i = 0; i &lt; len; i++) {
             item = items[i];
             icon = item.icon;
@@ -438,15 +438,15 @@ Ext.define('Ext.grid.column.Action', {
             tabIndex = (item !== me &amp;&amp; item.tabIndex !== undefined) ? item.tabIndex : me.itemTabIndex;
             ariaRole = (item !== me &amp;&amp; item.ariaRole !== undefined) ? item.ariaRole : me.itemAriaRole;
 
-            ret += '&lt;' + (icon ? 'img' : 'div') + 
-                (typeof tabIndex === 'number' ? ' tabIndex=&quot;' + tabIndex + '&quot;' : '') +
-                (ariaRole ? ' role=&quot;' + ariaRole + '&quot;' : ' role=&quot;presentation&quot;') +
-                (icon ? (' alt=&quot;' + altText + '&quot; src=&quot;' + item.icon + '&quot;') : '') +
-                ' class=&quot;' + me.actionIconCls + ' ' + Ext.baseCSSPrefix + 'action-col-' + String(i) + ' ' +
-                (disabled ? me.disabledCls + ' ' : ' ') +
-                (item.hidden ? Ext.baseCSSPrefix + 'hidden-display ' : '') +
-                (item.getClass ? Ext.callback(item.getClass, item.scope || me.origScope, arguments, undefined, me) : (item.iconCls || me.iconCls || '')) + '&quot;' +
-                (tooltip ? ' data-qtip=&quot;' + tooltip + '&quot;' : '') + (icon ? '/&gt;' : glyph ? (' style=&quot;font-family:' + glyph.fontFamily + '&quot;&gt;' + glyph.character + '&lt;/div&gt;') : '&gt;&lt;/div&gt;');
+            ret += &#39;&lt;&#39; + (icon ? &#39;img&#39; : &#39;div&#39;) + 
+                (typeof tabIndex === &#39;number&#39; ? &#39; tabIndex=&quot;&#39; + tabIndex + &#39;&quot;&#39; : &#39;&#39;) +
+                (ariaRole ? &#39; role=&quot;&#39; + ariaRole + &#39;&quot;&#39; : &#39; role=&quot;presentation&quot;&#39;) +
+                (icon ? (&#39; alt=&quot;&#39; + altText + &#39;&quot; src=&quot;&#39; + item.icon + &#39;&quot;&#39;) : &#39;&#39;) +
+                &#39; class=&quot;&#39; + me.actionIconCls + &#39; &#39; + Ext.baseCSSPrefix + &#39;action-col-&#39; + String(i) + &#39; &#39; +
+                (disabled ? me.disabledCls + &#39; &#39; : &#39; &#39;) +
+                (item.hidden ? Ext.baseCSSPrefix + &#39;hidden-display &#39; : &#39;&#39;) +
+                (item.getClass ? Ext.callback(item.getClass, item.scope || me.origScope, arguments, undefined, me) : (item.iconCls || me.iconCls || &#39;&#39;)) + &#39;&quot;&#39; +
+                (tooltip ? &#39; data-qtip=&quot;&#39; + tooltip + &#39;&quot;&#39; : &#39;&#39;) + (icon ? &#39;/&gt;&#39; : glyph ? (&#39; style=&quot;font-family:&#39; + glyph.fontFamily + &#39;&quot;&gt;&#39; + glyph.character + &#39;&lt;/div&gt;&#39;) : &#39;&gt;&lt;/div&gt;&#39;);
         }
         
         return ret;
@@ -458,7 +458,7 @@ Ext.define('Ext.grid.column.Action', {
     },
 
 <span id='Ext-grid-column-Action-method-enableAction'>    /**
-</span>     * Enables this ActionColumn's action at the specified index.
+</span>     * Enables this ActionColumn&#39;s action at the specified index.
      * @param {Number/Ext.grid.column.Action} index
      * @param {Boolean} [silent=false]
      */
@@ -471,14 +471,14 @@ Ext.define('Ext.grid.column.Action', {
             index = Ext.Array.indexOf(me.items, index);
         }
         me.items[index].disabled = false;
-        me.up('tablepanel').el.select('.' + Ext.baseCSSPrefix + 'action-col-' + index).removeCls(me.disabledCls);
+        me.up(&#39;tablepanel&#39;).el.select(&#39;.&#39; + Ext.baseCSSPrefix + &#39;action-col-&#39; + index).removeCls(me.disabledCls);
         if (!silent) {
-            me.fireEvent('enable', me);
+            me.fireEvent(&#39;enable&#39;, me);
         }
     },
 
 <span id='Ext-grid-column-Action-method-disableAction'>    /**
-</span>     * Disables this ActionColumn's action at the specified index.
+</span>     * Disables this ActionColumn&#39;s action at the specified index.
      * @param {Number/Ext.grid.column.Action} index
      * @param {Boolean} [silent=false]
      */
@@ -491,15 +491,15 @@ Ext.define('Ext.grid.column.Action', {
             index = Ext.Array.indexOf(me.items, index);
         }
         me.items[index].disabled = true;
-        me.up('tablepanel').el.select('.' + Ext.baseCSSPrefix + 'action-col-' + index).addCls(me.disabledCls);
+        me.up(&#39;tablepanel&#39;).el.select(&#39;.&#39; + Ext.baseCSSPrefix + &#39;action-col-&#39; + index).addCls(me.disabledCls);
         if (!silent) {
-            me.fireEvent('disable', me);
+            me.fireEvent(&#39;disable&#39;, me);
         }
     },
 
 <span id='Ext-grid-column-Action-method-doDestroy'>    doDestroy: function() {
-</span>        // Action column items property is an array, unlike the normal Container's MixedCollection.
-        // If we don't null it here, parent doDestroy() can blow up.
+</span>        // Action column items property is an array, unlike the normal Container&#39;s MixedCollection.
+        // If we don&#39;t null it here, parent doDestroy() can blow up.
         this.renderer = this.items = null;
         
         return this.callParent();
@@ -507,14 +507,14 @@ Ext.define('Ext.grid.column.Action', {
 
 <span id='Ext-grid-column-Action-method-processEvent'>    /**
 </span>     * @private
-     * Process and re-fire events routed from the Ext.panel.Table's processEvent method.
+     * Process and re-fire events routed from the Ext.panel.Table&#39;s processEvent method.
      * Also fires any configured click handlers. By default, cancels the mousedown event to prevent selection.
-     * Returns the event handler's status to allow canceling of GridView's bubbling process.
+     * Returns the event handler&#39;s status to allow canceling of GridView&#39;s bubbling process.
      */
     processEvent: function(type, view, cell, recordIndex, cellIndex, e, record, row) {
         var me = this,
             target = e.getTarget(),
-            key = type === 'keydown' &amp;&amp; e.getKey(),
+            key = type === &#39;keydown&#39; &amp;&amp; e.getKey(),
             match,
             item,
             disabled,
@@ -523,11 +523,11 @@ Ext.define('Ext.grid.column.Action', {
         // Flag event to tell SelectionModel not to process it.
         e.stopSelection = !key &amp;&amp; me.stopSelection;
 
-        // If the target was not within a cell (ie it's a keydown event from the View), then
-        // IF there's only one action icon, action it. If there is more than one, the user must
+        // If the target was not within a cell (ie it&#39;s a keydown event from the View), then
+        // IF there&#39;s only one action icon, action it. If there is more than one, the user must
         // invoke actionable mode to navigate into the cell.
         if (key &amp;&amp; (target === cell || !cellFly.contains(target))) {
-            target = cellFly.query('.' + me.actionIconCls, true);
+            target = cellFly.query(&#39;.&#39; + me.actionIconCls, true);
             if (target.length === 1) {
                 target = target[0];
             } else {
@@ -544,14 +544,14 @@ Ext.define('Ext.grid.column.Action', {
 
             if (item &amp;&amp; !disabled) {
                 // Do not allow focus to follow from this mousedown unless the grid is already in actionable mode
-                if (type === 'mousedown' &amp;&amp; !me.getView().actionableMode) {
+                if (type === &#39;mousedown&#39; &amp;&amp; !me.getView().actionableMode) {
                     e.preventDefault();
                 }
 
-                else if (type === 'click' || (key === e.ENTER || key === e.SPACE)) {
+                else if (type === &#39;click&#39; || (key === e.ENTER || key === e.SPACE)) {
                     Ext.callback(item.handler || me.handler, item.scope || me.origScope, [view, recordIndex, cellIndex, item, e, record, row], undefined, me);
 
-                    // Handler could possibly destroy the grid, so check we're still available.
+                    // Handler could possibly destroy the grid, so check we&#39;re still available.
                     // 
                     // If the handler moved focus outside of the view, do not allow this event to propagate
                     // to cause any navigation.
@@ -590,7 +590,7 @@ Ext.define('Ext.grid.column.Action', {
             return [];
         },
 
-        // Overriden method to always return a bitwise value that will result in a call to this column's updater.
+        // Overriden method to always return a bitwise value that will result in a call to this column&#39;s updater.
         shouldUpdateCell: function() {
             return 2;
         }

@@ -38,25 +38,25 @@
  *
  * @class BasiGX.view.panel.Menu
  */
-Ext.define('BasiGX.view.panel.Menu', {
-    extend: 'Ext.panel.Panel',
-    xtype: 'basigx-panel-menu',
+Ext.define(&#39;BasiGX.view.panel.Menu&#39;, {
+    extend: &#39;Ext.panel.Panel&#39;,
+    xtype: &#39;basigx-panel-menu&#39;,
 
     requires: [
-        'Ext.layout.container.Accordion',
-        'Ext.app.ViewModel'
+        &#39;Ext.layout.container.Accordion&#39;,
+        &#39;Ext.app.ViewModel&#39;
     ],
 
 <span id='BasiGX-view-panel-Menu-cfg-viewModel'>    viewModel: {
 </span>        data: {
-            closedMenuTitle: 'Menu schließen',
-            openedMenuTitle: 'Menu anzeigen'
+            closedMenuTitle: &#39;Menu schließen&#39;,
+            openedMenuTitle: &#39;Menu anzeigen&#39;
         }
     },
 
 <span id='BasiGX-view-panel-Menu-cfg-defaultListenerScope'>    defaultListenerScope: true,
 </span>
-<span id='BasiGX-view-panel-Menu-property-headerPosition'>    headerPosition: 'bottom',
+<span id='BasiGX-view-panel-Menu-property-headerPosition'>    headerPosition: &#39;bottom&#39;,
 </span>
 <span id='BasiGX-view-panel-Menu-cfg-collapsible'>    collapsible: true,
 </span>
@@ -64,7 +64,7 @@ Ext.define('BasiGX.view.panel.Menu', {
 </span>
 <span id='BasiGX-view-panel-Menu-cfg-titleCollapse'>    titleCollapse: true,
 </span>
-<span id='BasiGX-view-panel-Menu-property-titleAlign'>    titleAlign: 'center',
+<span id='BasiGX-view-panel-Menu-property-titleAlign'>    titleAlign: &#39;center&#39;,
 </span>
 <span id='BasiGX-view-panel-Menu-cfg-activeItem'>    activeItem: 1,
 </span>
@@ -76,7 +76,7 @@ Ext.define('BasiGX.view.panel.Menu', {
 
 <span id='BasiGX-view-panel-Menu-cfg-layout'>    layout: {
 </span>        // layout-specific configs go here
-        type: 'accordion',
+        type: &#39;accordion&#39;,
         titleCollapse: false,
         animate: true
     },
@@ -84,19 +84,19 @@ Ext.define('BasiGX.view.panel.Menu', {
 <span id='BasiGX-view-panel-Menu-property-items'>    items: [],
 </span>
 <span id='BasiGX-view-panel-Menu-cfg-listeners'>    listeners: {
-</span>        collapse: 'setTitleAccordingToCollapsedState',
-        expand: 'setTitleAccordingToCollapsedState',
-        afterrender: 'setTitleAccordingToCollapsedState'
+</span>        collapse: &#39;setTitleAccordingToCollapsedState&#39;,
+        expand: &#39;setTitleAccordingToCollapsedState&#39;,
+        afterrender: &#39;setTitleAccordingToCollapsedState&#39;
     },
 
 <span id='BasiGX-view-panel-Menu-method-setTitleAccordingToCollapsedState'>    setTitleAccordingToCollapsedState: function(menu) {
 </span>        if (menu.getCollapsed() === false) {
             menu.setBind({
-                title: '{closedMenuTitle}'
+                title: &#39;{closedMenuTitle}&#39;
             });
         } else {
             menu.setBind({
-                title: '{openedMenuTitle}'
+                title: &#39;{openedMenuTitle}&#39;
             });
         }
     }

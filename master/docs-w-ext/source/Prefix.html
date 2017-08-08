@@ -19,10 +19,10 @@
 </span> * This class represents a prefix (unary) operator.
  * @private
  */
-Ext.define('Ext.parse.symbol.Prefix', {
-    extend: 'Ext.parse.Symbol',
+Ext.define(&#39;Ext.parse.symbol.Prefix&#39;, {
+    extend: &#39;Ext.parse.Symbol&#39;,
 
-<span id='Ext-parse-symbol-Prefix-property-arity'>    arity: 'unary',
+<span id='Ext-parse-symbol-Prefix-property-arity'>    arity: &#39;unary&#39;,
 </span><span id='Ext-parse-symbol-Prefix-property-isUnary'>    isUnary: true,
 </span>
 <span id='Ext-parse-symbol-Prefix-property-priority'>    priority: 70,
@@ -33,7 +33,7 @@ Ext.define('Ext.parse.symbol.Prefix', {
         me.operand = me.parser.parseExpression(me.priority);
         // the next line is here in case this symbol already exists in the symbols table
         // and this function overrides that symbol
-        me.arity = 'unary';
+        me.arity = &#39;unary&#39;;
         me.isUnary = true;
 
         return me;

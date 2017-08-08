@@ -18,15 +18,15 @@
   <pre class="prettyprint lang-js"><span id='Ext-resizer-Handle'>/**
 </span> * Provides a handle for 9-point resizing of Elements or Components.
  */
-Ext.define('Ext.resizer.Handle', {
-    extend: 'Ext.Component',
-<span id='Ext-resizer-Handle-property-handleCls'>    handleCls: '',
-</span><span id='Ext-resizer-Handle-property-baseHandleCls'>    baseHandleCls: Ext.baseCSSPrefix + 'resizable-handle',
+Ext.define(&#39;Ext.resizer.Handle&#39;, {
+    extend: &#39;Ext.Component&#39;,
+<span id='Ext-resizer-Handle-property-handleCls'>    handleCls: &#39;&#39;,
+</span><span id='Ext-resizer-Handle-property-baseHandleCls'>    baseHandleCls: Ext.baseCSSPrefix + &#39;resizable-handle&#39;,
 </span><span id='Ext-resizer-Handle-cfg-region'>    // Ext.resizer.Resizer.prototype.possiblePositions define the regions
 </span>    // which will be passed in as a region configuration.
-    region: '',
+    region: &#39;&#39;,
     
-<span id='Ext-resizer-Handle-property-ariaRole'>    ariaRole: 'presentation',
+<span id='Ext-resizer-Handle-property-ariaRole'>    ariaRole: &#39;presentation&#39;,
 </span>
 <span id='Ext-resizer-Handle-method-beforeRender'>    beforeRender: function() {
 </span>        var me = this;
@@ -37,7 +37,7 @@ Ext.define('Ext.resizer.Handle', {
 
         me.addCls(
             me.baseHandleCls,
-            me.baseHandleCls + '-' + me.region,
+            me.baseHandleCls + &#39;-&#39; + me.region,
             me.handleCls
         );
     }

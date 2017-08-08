@@ -22,12 +22,12 @@
  *
  * The bindings to provide the data needed by the template are managed here.
  */
-Ext.define('Ext.app.bind.TemplateBinding', {
-    extend: 'Ext.app.bind.BaseBinding',
+Ext.define(&#39;Ext.app.bind.TemplateBinding&#39;, {
+    extend: &#39;Ext.app.bind.BaseBinding&#39;,
 
     requires: [
-        'Ext.app.bind.Multi',
-        'Ext.app.bind.Template'
+        &#39;Ext.app.bind.Multi&#39;,
+        &#39;Ext.app.bind.Template&#39;
     ],
 
 <span id='Ext-app-bind-TemplateBinding-property-isTemplateBinding'>    isTemplateBinding: true,
@@ -47,7 +47,7 @@ Ext.define('Ext.app.bind.TemplateBinding', {
         me.tokens = tokens;
         tokens.$literal = true;
 
-        // If we don't have any tokens, then we've just got a static string.
+        // If we don&#39;t have any tokens, then we&#39;ve just got a static string.
         if (!tpl.isStatic()) {
             me.multiBinding = new Ext.app.bind.Multi(tokens, owner, me.onBindData, me);
         } else {
@@ -65,7 +65,7 @@ Ext.define('Ext.app.bind.TemplateBinding', {
 
 <span id='Ext-app-bind-TemplateBinding-method-getFullName'>    getFullName: function () {
 </span>        var multi = this.multiBinding;
-        return this.fullName || (this.fullName = '$' + (multi ? multi.getFullName() : this.callParent()));
+        return this.fullName || (this.fullName = &#39;$&#39; + (multi ? multi.getFullName() : this.callParent()));
     },
 
 <span id='Ext-app-bind-TemplateBinding-method-getRawValue'>    getRawValue: function () {

@@ -20,16 +20,16 @@
  * touch-screen devices, and defines a set of useful methods for manipulating the scroll
  * position and controlling the scrolling behavior.
  */
-Ext.define('Ext.scroll.Scroller', {
-    extend: 'Ext.Evented',
-    alias: 'scroller.scroller',
+Ext.define(&#39;Ext.scroll.Scroller&#39;, {
+    extend: &#39;Ext.Evented&#39;,
+    alias: &#39;scroller.scroller&#39;,
 
-    mixins: [ 'Ext.mixin.Factoryable' ],
+    mixins: [ &#39;Ext.mixin.Factoryable&#39; ],
 
-    requires: ['Ext.util.CSS', 'Ext.util.translatable.ScrollPosition'],
+    requires: [&#39;Ext.util.CSS&#39;, &#39;Ext.util.translatable.ScrollPosition&#39;],
 
 <span id='Ext-scroll-Scroller-property-factoryConfig'>    factoryConfig: {
-</span>        defaultType: 'scroller'
+</span>        defaultType: &#39;scroller&#39;
     },
 
 <span id='Ext-scroll-Scroller-property-isScroller'>    isScroller: true,
@@ -66,7 +66,7 @@ Ext.define('Ext.scroll.Scroller', {
 
     config: {
 <span id='Ext-scroll-Scroller-cfg-direction'>        /**
-</span>         * @cfg {'auto'/'vertical'/'horizontal'/'both'} [direction='auto']
+</span>         * @cfg {&#39;auto&#39;/&#39;vertical&#39;/&#39;horizontal&#39;/&#39;both&#39;} [direction=&#39;auto&#39;]
          * @deprecated 5.1.0 use {@link #x} and {@link #y} instead
          */
         direction: undefined, // undefined because we need the updater to always run
@@ -122,19 +122,19 @@ Ext.define('Ext.scroll.Scroller', {
 
 <span id='Ext-scroll-Scroller-cfg-x'>        /**
 </span>         * @cfg {Boolean/String}
-         * - `true` or `'auto'` to enable horizontal auto-scrolling. In auto-scrolling mode
+         * - `true` or `&#39;auto&#39;` to enable horizontal auto-scrolling. In auto-scrolling mode
          * scrolling is only enabled when the {@link #element} has overflowing content.
          * - `false` to disable horizontal scrolling
-         * - `'scroll'` to always enable horizontal scrolling regardless of content size.
+         * - `&#39;scroll&#39;` to always enable horizontal scrolling regardless of content size.
          */
         x: true,
 
 <span id='Ext-scroll-Scroller-cfg-y'>        /**
 </span>         * @cfg {Boolean/String}
-         * - `true` or `'auto'` to enable vertical auto-scrolling. In auto-scrolling mode
+         * - `true` or `&#39;auto&#39;` to enable vertical auto-scrolling. In auto-scrolling mode
          * scrolling is only enabled when the {@link #element} has overflowing content.
          * - `false` to disable vertical scrolling
-         * - `'scroll'` to always enable vertical scrolling regardless of content size.
+         * - `&#39;scroll&#39;` to always enable vertical scrolling regardless of content size.
          */
         y: true,
 
@@ -163,10 +163,10 @@ Ext.define('Ext.scroll.Scroller', {
 <span id='Ext-scroll-Scroller-cfg-spacerXY'>        spacerXY: null
 </span>    },
 
-<span id='Ext-scroll-Scroller-property-snappableCls'>    snappableCls: Ext.baseCSSPrefix + 'scroller-snappable',
-</span><span id='Ext-scroll-Scroller-property-elementCls'>    elementCls: Ext.baseCSSPrefix + 'scroller',
-</span><span id='Ext-scroll-Scroller-property-spacerCls'>    spacerCls: Ext.baseCSSPrefix + 'scroller-spacer',
-</span><span id='Ext-scroll-Scroller-property-noScrollbarsCls'>    noScrollbarsCls: Ext.baseCSSPrefix + 'no-scrollbars',
+<span id='Ext-scroll-Scroller-property-snappableCls'>    snappableCls: Ext.baseCSSPrefix + &#39;scroller-snappable&#39;,
+</span><span id='Ext-scroll-Scroller-property-elementCls'>    elementCls: Ext.baseCSSPrefix + &#39;scroller&#39;,
+</span><span id='Ext-scroll-Scroller-property-spacerCls'>    spacerCls: Ext.baseCSSPrefix + &#39;scroller-spacer&#39;,
+</span><span id='Ext-scroll-Scroller-property-noScrollbarsCls'>    noScrollbarsCls: Ext.baseCSSPrefix + &#39;no-scrollbars&#39;,
 </span>
     statics: {
 <span id='Ext-scroll-Scroller-static-method-create'>        /**
@@ -199,15 +199,15 @@ Ext.define('Ext.scroll.Scroller', {
                 return el;
             }
 
-            // The newer standard doesn't exist, let the scroller
+            // The newer standard doesn&#39;t exist, let the scroller
             // decide via feature detection.
             if (standard === undefined) {
-                iframe = document.createElement('iframe');
+                iframe = document.createElement(&#39;iframe&#39;);
 
-                iframe.style.height = '1px';
+                iframe.style.height = &#39;1px&#39;;
                 document.body.appendChild(iframe);
                 frameDoc = iframe.contentWindow.document;
-                frameDoc.write('&lt;!DOCTYPE html&gt;&lt;div style=&quot;height:9999em&quot;&gt;x&lt;/div&gt;');
+                frameDoc.write(&#39;&lt;!DOCTYPE html&gt;&lt;div style=&quot;height:9999em&quot;&gt;x&lt;/div&gt;&#39;);
                 frameDoc.close();
                 standard = frameDoc.documentElement.scrollHeight &gt; frameDoc.body.scrollHeight;
                 iframe.parentNode.removeChild(iframe);
@@ -251,14 +251,14 @@ Ext.define('Ext.scroll.Scroller', {
     },
 
 <span id='Ext-scroll-Scroller-method-addPartner'>    /**
-</span>     * Adds a &quot;partner&quot; scroller.  Partner scrollers reflect each other's scroll position
+</span>     * Adds a &quot;partner&quot; scroller.  Partner scrollers reflect each other&#39;s scroll position
      * at all times - if either scroller is scrolled, the scroll position of its partner
      * will be be automatically synchronized.
      *
      * A scroller may have multiple partners.
      *
      * @param {Ext.scroll.Scroller} partner
-     * @param {String} [axis='both'] The axis to synchronize (`'x'`, '`y`', or '`both`')
+     * @param {String} [axis=&#39;both&#39;] The axis to synchronize (`&#39;x&#39;`, &#39;`y`&#39;, or &#39;`both`&#39;)
      */
     addPartner: function(partner, axis) {
         var me = this,
@@ -292,9 +292,9 @@ Ext.define('Ext.scroll.Scroller', {
                 el = Ext.get(element);
 
                 //&lt;debug&gt;
-                if (!el &amp;&amp; (typeof element === 'string')) {
+                if (!el &amp;&amp; (typeof element === &#39;string&#39;)) {
                     Ext.raise(&quot;Cannot create Ext.scroll.Scroller instance. &quot; +
-                        &quot;Element with id '&quot; + element + &quot;' not found.&quot;);
+                        &quot;Element with id &#39;&quot; + element + &quot;&#39; not found.&quot;);
                 }
                 //&lt;/debug&gt;
             }
@@ -321,7 +321,7 @@ Ext.define('Ext.scroll.Scroller', {
 <span id='Ext-scroll-Scroller-method-applySize'>    applySize: function (size, oldSize) {
 </span>        var x, y;
 
-        if (size === null || typeof size === 'number') {
+        if (size === null || typeof size === &#39;number&#39;) {
             x = y = size;
         } else if (size) {
             x = size.x;
@@ -377,13 +377,13 @@ Ext.define('Ext.scroll.Scroller', {
                 scrollbarSize = Ext.getScrollbarSize();
             }
 
-            if (x === 'scroll') {
+            if (x === &#39;scroll&#39;) {
                 hasXScroll = true;
             } else if (x) {
                 hasXScroll = dom.scrollWidth &gt; dom.clientWidth;
             }
 
-            if (y === 'scroll') {
+            if (y === &#39;scroll&#39;) {
                 hasYScroll = true;
             } else if (y) {
                 hasYScroll = dom.scrollHeight &gt; dom.clientHeight;
@@ -517,7 +517,7 @@ Ext.define('Ext.scroll.Scroller', {
         // Our position property may need refreshing from the DOM
         this.positionDirty = true;
 
-        this.fireEvent('refresh', this);
+        this.fireEvent(&#39;refresh&#39;, this);
         return this;
     },
 
@@ -570,15 +570,15 @@ Ext.define('Ext.scroll.Scroller', {
                 animate = deltaY;
                 deltaY = deltaX[1];
                 deltaX = deltaX[0];
-            } else if (typeof deltaX !== 'number') { // object
+            } else if (typeof deltaX !== &#39;number&#39;) { // object
                 animate = deltaY;
                 deltaY = deltaX.y;
                 deltaX = deltaX.x;
             }
         }
 
-        deltaX = (typeof deltaX === 'number') ? deltaX + position.x : null;
-        deltaY = (typeof deltaY === 'number') ? deltaY + position.y : null;
+        deltaX = (typeof deltaX === &#39;number&#39;) ? deltaX + position.x : null;
+        deltaY = (typeof deltaY === &#39;number&#39;) ? deltaY + position.y : null;
 
         return this.doScrollTo(deltaX, deltaY, animate);
     },
@@ -591,7 +591,7 @@ Ext.define('Ext.scroll.Scroller', {
      * animation config object
      * @param {Boolean/String} [highlight=false] true to
      * {@link Ext.dom.Element#highlight} the element when it is in view. Can also be a
-     * hex color to use for highlighting (defaults to yellow = '#ffff9c')
+     * hex color to use for highlighting (defaults to yellow = &#39;#ffff9c&#39;)
      * @private
      */
     scrollIntoView: function(el, hscroll, animate, highlight) {
@@ -606,11 +606,11 @@ Ext.define('Ext.scroll.Scroller', {
             newX = (hscroll === false) ? position.x : newPosition.x;
             newY = newPosition.y;
 
-            // Only attempt to scroll if it's needed.
+            // Only attempt to scroll if it&#39;s needed.
             if (newY !== position.y || newX !== position.x) {
                 if (highlight) {
                     me.on({
-                        scrollend: 'doHighlight',
+                        scrollend: &#39;doHighlight&#39;,
                         scope: me,
                         single: true,
                         args: [el, highlight]
@@ -681,7 +681,7 @@ Ext.define('Ext.scroll.Scroller', {
                 animation = y;
                 y = x[1];
                 x = x[0];
-            } else if (typeof x !== 'number') { // object
+            } else if (typeof x !== &#39;number&#39;) { // object
                 animation = y;
                 y = x.y;
                 x = x.x;
@@ -713,28 +713,28 @@ Ext.define('Ext.scroll.Scroller', {
             x = me.getX();
             y = me.getY();
             if (x &amp;&amp; y) {
-                direction = (y === 'scroll' &amp;&amp; x === 'scroll') ? 'both' : 'auto';
+                direction = (y === &#39;scroll&#39; &amp;&amp; x === &#39;scroll&#39;) ? &#39;both&#39; : &#39;auto&#39;;
             } else if (y) {
-                direction = 'vertical';
+                direction = &#39;vertical&#39;;
             } else if (x) {
-                direction = 'horizontal';
+                direction = &#39;horizontal&#39;;
             }
             // set the _direction property directly to avoid the updater being called
             // and triggering setX/setY calls
             me._direction = direction;
         } else {
-            if (direction === 'auto') {
+            if (direction === &#39;auto&#39;) {
                 x = true;
                 y = true;
-            } else if (direction === 'vertical') {
+            } else if (direction === &#39;vertical&#39;) {
                 x = false;
                 y = true;
-            } else if (direction === 'horizontal') {
+            } else if (direction === &#39;horizontal&#39;) {
                 x = true;
                 y = false;
-            } else if (direction === 'both') {
-                x = 'scroll';
-                y = 'scroll';
+            } else if (direction === &#39;both&#39;) {
+                x = &#39;scroll&#39;;
+                y = &#39;scroll&#39;;
             }
 
             me.setX(x);
@@ -813,19 +813,19 @@ Ext.define('Ext.scroll.Scroller', {
     },
 
 <span id='Ext-scroll-Scroller-property-deprecated'>    deprecated: {
-</span>        '5': {
+</span>        &#39;5&#39;: {
             methods: {
 <span id='Ext-scroll-Scroller-method-getScroller'>                /**
 </span>                 * Returns this scroller.
                  *
-                 * In Sencha Touch 2, access to a Component's Scroller was provided via
-                 * a Ext.scroll.View class that was returned from the Component's getScrollable()
+                 * In Sencha Touch 2, access to a Component&#39;s Scroller was provided via
+                 * a Ext.scroll.View class that was returned from the Component&#39;s getScrollable()
                  * method:
                  *
                  *     component.getScrollable().getScroller();
                  *
                  * in 5.0 all the functionality of Ext.scroll.View has been rolled into
-                 * Ext.scroll.Scroller, and Ext.scroll.View has been removed.  Component's
+                 * Ext.scroll.Scroller, and Ext.scroll.View has been removed.  Component&#39;s
                  * getScrollable() method now returns a Ext.scroll.Scroller.  This method is
                  * provided for compatibility.
                  * @deprecated 5.0
@@ -835,7 +835,7 @@ Ext.define('Ext.scroll.Scroller', {
                 }
             }
         },
-        '5.1.0': {
+        &#39;5.1.0&#39;: {
             methods: {
 <span id='Ext-scroll-Scroller-method-scrollToTop'>                /**
 </span>                 * Scrolls to 0 on both axes
@@ -872,21 +872,21 @@ Ext.define('Ext.scroll.Scroller', {
 
             // In some cases (e.g. infinite lists) we need to be able to tell the scroller
             // to have a specific size, regardless of its contents.  This creates a spacer
-            // element which can then be absolutely positioned to affect the element's
+            // element which can then be absolutely positioned to affect the element&#39;s
             // scroll size. Must be first element, so it is not translated due to being after
             // the element contrainer el.
             if (!spacer) {
                 element = me.getElement();
                 spacer = me._spacer = element.createChild({
                     cls: me.spacerCls,
-                    role: 'presentation'
+                    role: &#39;presentation&#39;
                 }, element.dom.firstChild);
 
-                spacer.setVisibilityMode(2); // 'display' visibilityMode
+                spacer.setVisibilityMode(2); // &#39;display&#39; visibilityMode
                 spacer.hide();
 
                 // make sure the element is positioned if it is not already.  This ensures
-                // that the spacer's position will affect the element's scroll size
+                // that the spacer&#39;s position will affect the element&#39;s scroll size
                 element.position();
             }
 
@@ -908,17 +908,17 @@ Ext.define('Ext.scroll.Scroller', {
                 scrollHeight = pos.y,
                 shortfall;
 
-            sStyle.marginTop = '';
+            sStyle.marginTop = &#39;&#39;;
             me.translateSpacer(pos.x, me.constrainScrollRange(scrollHeight));
 
             // Force a synchronous layout to update the scrollHeight.
             // This flip-flops between 0px and 1px
-            sStyle.lineHeight = Number(!parseInt(sStyle.lineHeight, 10)) + 'px';
+            sStyle.lineHeight = Number(!parseInt(sStyle.lineHeight, 10)) + &#39;px&#39;;
 
             // See if we can get any more scrollHeight from a margin-top
             shortfall = scrollHeight - me.getElement().dom.scrollHeight;
             if (shortfall &gt; 0) {
-                sStyle.marginTop = Math.min(shortfall, me.maxSpacerMargin || 0) + 'px';
+                sStyle.marginTop = Math.min(shortfall, me.maxSpacerMargin || 0) + &#39;px&#39;;
             }
         },
 
@@ -968,11 +968,11 @@ Ext.define('Ext.scroll.Scroller', {
                     tooLow = 500,
                     scrollTest = Ext.getBody().createChild({
                         style: {
-                            position: 'absolute',
-                            left: '-10000px',
-                            top: '0',
-                            width: '500px',
-                            height: '500px'
+                            position: &#39;absolute&#39;,
+                            left: &#39;-10000px&#39;,
+                            top: &#39;0&#39;,
+                            width: &#39;500px&#39;,
+                            height: &#39;500px&#39;
                         },
                         cn: {
                             cls: this.spacerCls
@@ -982,7 +982,7 @@ Ext.define('Ext.scroll.Scroller', {
                     sStyle = stretcher.dom.style;
 
                 stretcher.translate(0, maxScrollHeight - 1);
-                sStyle.lineHeight = Number(!parseInt(sStyle.lineHeight, 10)) + 'px';
+                sStyle.lineHeight = Number(!parseInt(sStyle.lineHeight, 10)) + &#39;px&#39;;
 
                 // See what the max translateY is which still stretches the scrollHeight
                 while (tooHigh !== tooLow + 1) {
@@ -990,7 +990,7 @@ Ext.define('Ext.scroll.Scroller', {
 
                     // Force a synchronous layout to update the scrollHeight.
                     // This flip-flops between 0px and 1px
-                    sStyle.lineHeight = Number(!parseInt(sStyle.lineHeight, 10)) + 'px';
+                    sStyle.lineHeight = Number(!parseInt(sStyle.lineHeight, 10)) + &#39;px&#39;;
 
                     if (scrollTest.scrollHeight &lt; maxScrollHeight) {
                         tooHigh = maxScrollHeight;
@@ -1003,11 +1003,11 @@ Ext.define('Ext.scroll.Scroller', {
                 // Go through the same steps seeing how far we can push it with margin-top
                 tooHigh = tooLow * 2;
                 while (tooHigh !== tooLow + 1) {
-                    stretcher.dom.style.marginTop = ((maxScrollHeight = tooLow + Math.floor((tooHigh - tooLow) / 2))) + 'px';
+                    stretcher.dom.style.marginTop = ((maxScrollHeight = tooLow + Math.floor((tooHigh - tooLow) / 2))) + &#39;px&#39;;
 
                     // Force a synchronous layout to update the scrollHeight.
                     // This flip-flops between 0px and 1px
-                    sStyle.lineHeight = Number(!parseInt(sStyle.lineHeight, 10)) + 'px';
+                    sStyle.lineHeight = Number(!parseInt(sStyle.lineHeight, 10)) + &#39;px&#39;;
 
                     if (scrollTest.scrollHeight &lt; maxScrollHeight) {
                         tooHigh = maxScrollHeight;
@@ -1041,7 +1041,7 @@ Ext.define('Ext.scroll.Scroller', {
 
         doScrollTo: function(x, y, animate) {
             // There is an IE8 override of this method; when making changes here
-            // don't forget to update the override as well
+            // don&#39;t forget to update the override as well
             var me = this,
                 element = me.getScrollElement(),
                 maxPosition, dom, xInf, yInf,
@@ -1096,51 +1096,51 @@ Ext.define('Ext.scroll.Scroller', {
             var me = this,
                 component = me.component;
 
-            me.invokePartners('onPartnerScrollStart', x, y);
+            me.invokePartners(&#39;onPartnerScrollStart&#39;, x, y);
 
             if (me.hasListeners.scrollstart) {
-                me.fireEvent('scrollstart', me, x, y);
+                me.fireEvent(&#39;scrollstart&#39;, me, x, y);
             }
 
             if (component &amp;&amp; component.onScrollStart) {
                 component.onScrollStart(x, y);
             }
 
-            Ext.GlobalEvents.fireEvent('scrollstart', me, x, y);
+            Ext.GlobalEvents.fireEvent(&#39;scrollstart&#39;, me, x, y);
         },
 
         fireScroll: function(x, y) {
             var me = this,
                 component = me.component;
 
-            me.invokePartners('onPartnerScroll', x, y);
+            me.invokePartners(&#39;onPartnerScroll&#39;, x, y);
 
             if (me.hasListeners.scroll) {
-                me.fireEvent('scroll', me, x, y);
+                me.fireEvent(&#39;scroll&#39;, me, x, y);
             }
 
             if (component &amp;&amp; component.onScrollMove) {
                 component.onScrollMove(x, y);
             }
 
-            Ext.GlobalEvents.fireEvent('scroll', me, x, y);
+            Ext.GlobalEvents.fireEvent(&#39;scroll&#39;, me, x, y);
         },
 
         fireScrollEnd: function(x, y) {
             var me = this,
                 component = me.component;
 
-            me.invokePartners('onPartnerScrollEnd', x, y);
+            me.invokePartners(&#39;onPartnerScrollEnd&#39;, x, y);
 
             if (me.hasListeners.scrollend) {
-                me.fireEvent('scrollend', me, x, y);
+                me.fireEvent(&#39;scrollend&#39;, me, x, y);
             }
 
             if (component &amp;&amp; component.onScrollEnd) {
                 component.onScrollEnd(x, y);
             }
 
-            Ext.GlobalEvents.fireEvent('scrollend', me, x, y);
+            Ext.GlobalEvents.fireEvent(&#39;scrollend&#39;, me, x, y);
         },
 
         // rtl hook
@@ -1165,20 +1165,20 @@ Ext.define('Ext.scroll.Scroller', {
                     offsetY = snapOffset.y || 0;
 
                     if (offsetX) {
-                        offsetX = -offsetX + 'px';
+                        offsetX = -offsetX + &#39;px&#39;;
                     }
 
                     if (offsetY) {
-                        offsetY = -offsetY + 'px';
+                        offsetY = -offsetY + &#39;px&#39;;
                     }
                 }
 
-                snapCoordinate = offsetX + ' ' + offsetY + ';';
+                snapCoordinate = offsetX + &#39; &#39; + offsetY + &#39;;&#39;;
 
                 me.snapStylesheet = Ext.util.CSS.createStyleSheet(
-                    '#' + element.id + ' ' + snapSelector +
-                    '{-webkit-scroll-snap-coordinate:' + snapCoordinate +
-                    'scroll-snap-coordinate:' + snapCoordinate + '}'
+                    &#39;#&#39; + element.id + &#39; &#39; + snapSelector +
+                    &#39;{-webkit-scroll-snap-coordinate:&#39; + snapCoordinate +
+                    &#39;scroll-snap-coordinate:&#39; + snapCoordinate + &#39;}&#39;
                 );
             }
         },
@@ -1196,11 +1196,11 @@ Ext.define('Ext.scroll.Scroller', {
                     style = element.dom.style;
 
                     if (x) {
-                        style['-ms-scroll-snap-points-x'] = 'snapInterval(0px, ' + x + 'px)';
+                        style[&#39;-ms-scroll-snap-points-x&#39;] = &#39;snapInterval(0px, &#39; + x + &#39;px)&#39;;
                     }
 
                     if (y) {
-                        style['-ms-scroll-snap-points-y'] = 'snapInterval(0px, ' + y + 'px)';
+                        style[&#39;-ms-scroll-snap-points-y&#39;] = &#39;snapInterval(0px, &#39; + y + &#39;px)&#39;;
                     }
                 }
             }
@@ -1213,12 +1213,12 @@ Ext.define('Ext.scroll.Scroller', {
             // Check that element exists and is not destroyed
             if (element &amp;&amp; element.dom) {
                 if (!x) {
-                    x = 'hidden';
+                    x = &#39;hidden&#39;;
                 } else if (x === true) {
-                    x = 'auto';
+                    x = &#39;auto&#39;;
                 }
 
-                element.setStyle('overflow-x', x);
+                element.setStyle(&#39;overflow-x&#39;, x);
             }
         },
 
@@ -1229,12 +1229,12 @@ Ext.define('Ext.scroll.Scroller', {
             // Check that element exists and is not destroyed
             if (element &amp;&amp; element.dom) {
                 if (!y) {
-                    y = 'hidden';
+                    y = &#39;hidden&#39;;
                 } else if (y === true) {
-                    y = 'auto';
+                    y = &#39;auto&#39;;
                 }
 
-                element.setStyle('overflow-y', y);
+                element.setStyle(&#39;overflow-y&#39;, y);
             }
         },
 
@@ -1243,16 +1243,16 @@ Ext.define('Ext.scroll.Scroller', {
                 partners = me._partners,
                 partner,
                 id,
-                isEnd = method ==='onPartnerScrollEnd';
+                isEnd = method ===&#39;onPartnerScrollEnd&#39;;
 
-            // Do not invoke partners if we ar ealready reflecting a partner's scroll
+            // Do not invoke partners if we ar ealready reflecting a partner&#39;s scroll
             if (!me.suspendSync &amp; !me.isReflecting) {
                 for (id in partners) {
                     partner = partners[id].scroller;
                     partner.isReflecting = true;
                     partner[method](me, x, y);
 
-                    // End a partner's reflecting status only when we are ending our scroll.
+                    // End a partner&#39;s reflecting status only when we are ending our scroll.
                     if (isEnd) {
                         partner.isReflecting = false;
                     }
@@ -1277,8 +1277,8 @@ Ext.define('Ext.scroll.Scroller', {
             }
             if (!me.suspendSync &amp;&amp; syncNow) {
                 position = me.getPosition();
-                me.invokePartners('onPartnerScroll', position.x, position.y);
-                me.invokePartners('onPartnerScrollEnd', position.x, position.y);
+                me.invokePartners(&#39;onPartnerScroll&#39;, position.x, position.y);
+                me.invokePartners(&#39;onPartnerScrollEnd&#39;, position.x, position.y);
             }
         },
 
@@ -1376,9 +1376,9 @@ Ext.define('Ext.scroll.Scroller', {
             var axis = partner._partners[this.getId()].axis;
 
             if (axis) {
-                if (axis === 'x') {
+                if (axis === &#39;x&#39;) {
                     y = null;
-                } else if (axis === 'y') {
+                } else if (axis === &#39;y&#39;) {
                     x = null;
                 }
             }
@@ -1407,7 +1407,7 @@ Ext.define('Ext.scroll.Scroller', {
                 // Only restore state if has been previously captured! For example,
                 // floaters probably have not been hidden before initially shown.
                 if (me.trackingScrollTop !== undefined) {
-                    // If we're restoring the scroll position, we don't want to publish
+                    // If we&#39;re restoring the scroll position, we don&#39;t want to publish
                     // scroll events since the scroll position should not have changed
                     // at all as far as the user is concerned, so just do it silently
                     // while ensuring we maintain the correct internal state. 50ms is

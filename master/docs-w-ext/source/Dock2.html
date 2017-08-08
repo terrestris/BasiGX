@@ -19,14 +19,14 @@
 </span> * @override Ext.rtl.layout.component.Dock
  * This override adds RTL support to Ext.layout.component.Dock.
  */
-Ext.define('Ext.rtl.layout.component.Dock', {
-    override: 'Ext.layout.component.Dock',
+Ext.define(&#39;Ext.rtl.layout.component.Dock&#39;, {
+    override: &#39;Ext.layout.component.Dock&#39;,
 
 <span id='Ext-rtl-layout-component-Dock-property-rtlPositions'>    rtlPositions: {
-</span>        top: 'top',
-        right: 'left',
-        bottom: 'bottom',
-        left: 'right'
+</span>        top: &#39;top&#39;,
+        right: &#39;left&#39;,
+        bottom: &#39;bottom&#39;,
+        left: &#39;right&#39;
     },
 
 <span id='Ext-rtl-layout-component-Dock-method-getDockCls'>    getDockCls: function(dock) {
@@ -34,7 +34,7 @@ Ext.define('Ext.rtl.layout.component.Dock', {
         // We have to do it this way (as opposed to using css overrides) because of the
         // !important border-width rules, e.g.:
         // .x-docked-left { border-right-width: 0 !important; }
-        return 'docked-' +
+        return &#39;docked-&#39; +
             (this.owner.getInherited().rtl ? this.rtlPositions[dock] : dock);
     },
 

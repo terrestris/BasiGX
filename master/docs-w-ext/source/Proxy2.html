@@ -17,13 +17,13 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-panel-Proxy'>/**
 </span> * A custom drag proxy implementation specific to {@link Ext.panel.Panel}s. This class
- * is primarily used internally for the Panel's drag drop implementation, and
+ * is primarily used internally for the Panel&#39;s drag drop implementation, and
  * should never need to be created directly.
  * @private
  */
-Ext.define('Ext.panel.Proxy', {
+Ext.define(&#39;Ext.panel.Proxy&#39;, {
 
-    alternateClassName: 'Ext.dd.PanelProxy',
+    alternateClassName: &#39;Ext.dd.PanelProxy&#39;,
     
 <span id='Ext-panel-Proxy-cfg-moveOnDrag'>    /**
 </span>     * @cfg {Boolean} [moveOnDrag=true]
@@ -44,7 +44,7 @@ Ext.define('Ext.panel.Proxy', {
          * @type Ext.panel.Panel
          */
         me.panel = panel;
-        me.id = me.panel.id +'-ddproxy';
+        me.id = me.panel.id +&#39;-ddproxy&#39;;
         Ext.apply(me, config);
     },
 
@@ -62,16 +62,16 @@ Ext.define('Ext.panel.Proxy', {
 </span><span id='Ext-panel-Proxy-method-sync'>    sync: Ext.emptyFn,
 </span>
 <span id='Ext-panel-Proxy-method-getEl'>    /**
-</span>     * Gets the proxy's element
-     * @return {Ext.dom.Element} The proxy's element
+</span>     * Gets the proxy&#39;s element
+     * @return {Ext.dom.Element} The proxy&#39;s element
      */
     getEl: function(){
         return this.ghost.el;
     },
 
 <span id='Ext-panel-Proxy-method-getGhost'>    /**
-</span>     * Gets the proxy's ghost Panel
-     * @return {Ext.panel.Panel} The proxy's ghost Panel
+</span>     * Gets the proxy&#39;s ghost Panel
+     * @return {Ext.panel.Panel} The proxy&#39;s ghost Panel
      */
     getGhost: function(){
         return this.ghost;
@@ -80,7 +80,7 @@ Ext.define('Ext.panel.Proxy', {
 <span id='Ext-panel-Proxy-method-getProxy'>    /**
 </span>     * Gets the proxy element. This is the element that represents where the
      * Panel was before we started the drag operation.
-     * @return {Ext.dom.Element} The proxy's element
+     * @return {Ext.dom.Element} The proxy&#39;s element
      */
     getProxy: function(){
         return this.proxy;
@@ -116,11 +116,11 @@ Ext.define('Ext.panel.Proxy', {
             me.panel.el.setVisibilityMode(Ext.Element.DISPLAY);
             me.ghost = me.panel.ghost();
             if (me.insertProxy) {
-                // bc Panels aren't absolute positioned we need to take up the space
+                // bc Panels aren&#39;t absolute positioned we need to take up the space
                 // of where the panel previously was
                 me.proxy = me.panel.el.insertSibling({
-                    role: 'presentation',
-                    cls: Ext.baseCSSPrefix + 'panel-dd-spacer'
+                    role: &#39;presentation&#39;,
+                    cls: Ext.baseCSSPrefix + &#39;panel-dd-spacer&#39;
                 });
                 me.proxy.setSize(panelSize);
             }
@@ -137,11 +137,11 @@ Ext.define('Ext.panel.Proxy', {
 
 <span id='Ext-panel-Proxy-method-moveProxy'>    /**
 </span>     * Moves the proxy to a different position in the DOM.  This is typically
-     * called while dragging the Panel to keep the proxy sync'd to the Panel's
+     * called while dragging the Panel to keep the proxy sync&#39;d to the Panel&#39;s
      * location.
-     * @param {HTMLElement} parentNode The proxy's parent DOM node
+     * @param {HTMLElement} parentNode The proxy&#39;s parent DOM node
      * @param {HTMLElement} [before] The sibling node before which the
-     * proxy should be inserted. Defaults to the parent's last child if not
+     * proxy should be inserted. Defaults to the parent&#39;s last child if not
      * specified.
      */
     moveProxy : function(parentNode, before){

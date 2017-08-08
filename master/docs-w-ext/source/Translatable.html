@@ -21,25 +21,25 @@
  *
  * @private
  */
-Ext.define('Ext.util.Translatable', {
+Ext.define(&#39;Ext.util.Translatable&#39;, {
     requires: [
-        'Ext.util.translatable.CssTransform',
-        'Ext.util.translatable.ScrollPosition',
-        'Ext.util.translatable.ScrollParent',
-        'Ext.util.translatable.CssPosition'
+        &#39;Ext.util.translatable.CssTransform&#39;,
+        &#39;Ext.util.translatable.ScrollPosition&#39;,
+        &#39;Ext.util.translatable.ScrollParent&#39;,
+        &#39;Ext.util.translatable.CssPosition&#39;
     ],
 
 <span id='Ext-util-Translatable-method-constructor'>    constructor: function(config) {
 </span>        var namespace = Ext.util.translatable;
 
         switch (Ext.browser.getPreferredTranslationMethod(config)) {
-        case 'scrollposition':
+        case &#39;scrollposition&#39;:
             return new namespace.ScrollPosition(config);
-        case 'scrollparent':
+        case &#39;scrollparent&#39;:
             return new namespace.ScrollParent(config);
-        case 'csstransform':
+        case &#39;csstransform&#39;:
             return new namespace.CssTransform(config);
-        case 'cssposition':
+        case &#39;cssposition&#39;:
             return new namespace.CssPosition(config);
         }
     }

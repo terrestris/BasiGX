@@ -23,7 +23,7 @@
  *
  * Key names may key name as documented in `Ext.event.Event`, numbers (which are treated
  * as `keyCode` values), single characters (for those that are not defined in
- * `Ext.event.Event`) or `charCode` values prefixed by '#' (e.g., &quot;#65&quot; for `charCode=65`).
+ * `Ext.event.Event`) or `charCode` values prefixed by &#39;#&#39; (e.g., &quot;#65&quot; for `charCode=65`).
  *
  * Entries that use a `keyCode` will be processed in a `keydown` event listener, while
  * those that use a `charCode` will be processed in `keypress`. This can be overridden
@@ -44,24 +44,24 @@
  *
  * For example:
  *
- *      Ext.define('MyChartPanel', {
- *          extend: 'Ext.panel.Panel',
- *          controller: 'mycontroller',
+ *      Ext.define(&#39;MyChartPanel&#39;, {
+ *          extend: &#39;Ext.panel.Panel&#39;,
+ *          controller: &#39;mycontroller&#39;,
  *
  *          // Map keys to methods (typically in a ViewController):
  *          keyMap: {
- *              ENTER: 'onEnterKey',
+ *              ENTER: &#39;onEnterKey&#39;,
  *
- *              &quot;ALT+PRINT_SCREEN&quot;: 'doScreenshot',
+ *              &quot;ALT+PRINT_SCREEN&quot;: &#39;doScreenshot&#39;,
  *
  *              // Cmd on Mac OS X, Ctrl on Windows/Linux.
- *              &quot;CmdOrCtrl+C&quot;: 'doCopy',
+ *              &quot;CmdOrCtrl+C&quot;: &#39;doCopy&#39;,
  *
  *              // This one is handled by a class method.
  *              ESC: {
- *                  handler: 'destroy',
- *                  scope: 'this',
- *                  event: 'keypress'  // default would be keydown
+ *                  handler: &#39;destroy&#39;,
+ *                  scope: &#39;this&#39;,
+ *                  event: &#39;keypress&#39;  // default would be keydown
  *              }
  *          }
  *      });
@@ -71,11 +71,11 @@
  *
  * @since 6.2.0
  */
-Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
-    extend: 'Ext.Mixin',
+Ext.define(&#39;Ext.mixin.Keyboard&#39;, function (Keyboard) { return {
+    extend: &#39;Ext.Mixin&#39;,
     
     mixinConfig: {
-        id: 'keyboard'
+        id: &#39;keyboard&#39;
     },
 
     config: {
@@ -99,7 +99,7 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
          *
          * @cfg {String} [keyMap.scope] The default scope to apply to key handlers
          * which do not specify a scope. This is processed the same way as the scope of
-         * {@link #cfg-listeners}. It defaults to the `&quot;controller&quot;`, but using `'this'`
+         * {@link #cfg-listeners}. It defaults to the `&quot;controller&quot;`, but using `&#39;this&#39;`
          * means that an instance method will be used.
          */
         keyMap: {
@@ -114,19 +114,19 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
 
                 // We promote all values into objects but these objects do not get
                 // merged with base class values. Further, the keys get toUpperCased
-                // to normalize this aspect ('esc' vs 'ESC' vs 'Esc').
+                // to normalize this aspect (&#39;esc&#39; vs &#39;ESC&#39; vs &#39;Esc&#39;).
                 var ret = baseValue ? Ext.Object.chain(baseValue) : {},
                     key, ucKey, v, vs;
                 
                 for (key in value) {
-                    if (key !== 'scope') {
+                    if (key !== &#39;scope&#39;) {
                         ucKey = key.toUpperCase();
 
                         if (!mixin || ret[ucKey] === undefined) {
                             // Promote to an object so we can always store the scope.
                             v = value[key];
                             if (v) {
-                                if (typeof v === 'string' || typeof v === 'function') {
+                                if (typeof v === &#39;string&#39; || typeof v === &#39;function&#39;) {
                                     v = {
                                         handler: v
                                     };
@@ -136,9 +136,9 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
                                     }, v);
                                 }
 
-                                vs = v.scope || value.scope || 'self';
+                                vs = v.scope || value.scope || &#39;self&#39;;
 
-                                v.scope = (vs === 'controller') ? 'self.controller' : vs;
+                                v.scope = (vs === &#39;controller&#39;) ? &#39;self.controller&#39; : vs;
                             }
 
                             ret[ucKey] = v;
@@ -166,7 +166,7 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
      * This is intended to be controlled at the class level not per instance.
      * @protected
      */
-    keyMapTarget: 'el',
+    keyMapTarget: &#39;el&#39;,
 
     applyKeyMap: function (keyMap, existingKeyMap) {
         var me = this,
@@ -179,17 +179,17 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
                 existingKeyMap = Ext.apply({}, existingKeyMap);
             }
 
-            defaultScope = keyMap.scope || 'controller';
+            defaultScope = keyMap.scope || &#39;controller&#39;;
 
             for (key in keyMap) {
-                if (key === 'scope') {
+                if (key === &#39;scope&#39;) {
                     continue;
                 }
 
                 if (!(mapping = keyMap[key])) {
                     //&lt;debug&gt;
                     if (mapping === undefined) {
-                        Ext.raise('keyMap entry &quot;' + key + '&quot; is undefined');
+                        Ext.raise(&#39;keyMap entry &quot;&#39; + key + &#39;&quot; is undefined&#39;);
                     }
                     //&lt;/debug&gt;
 
@@ -199,7 +199,7 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
                         continue;
                     }
                 } else {
-                    if (typeof mapping === 'string' || typeof mapping === 'function') {
+                    if (typeof mapping === &#39;string&#39; || typeof mapping === &#39;function&#39;) {
                         // Direct calls to setKeyMap() can get here because instance and
                         // class configs go through merge
                         mapping = {
@@ -214,15 +214,15 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
                         }, mapping);
                     }
 
-                    existingKeyMap = existingKeyMap || {}; // we'll need a keyMap
+                    existingKeyMap = existingKeyMap || {}; // we&#39;ll need a keyMap
                 }
 
                 if (Keyboard.parseEntry(key, entry = mapping || {})) {
                     // So we end up with an object like this:
                     //
                     //  &quot;ALT+PRINT_SCREEN&quot;: {
-                    //      handler: 'doSummat',
-                    //      scope: 'controller',
+                    //      handler: &#39;doSummat&#39;,
+                    //      scope: &#39;controller&#39;,
                     //      altKey: true
                     //  }
                     //
@@ -230,7 +230,7 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
                 }
                 //&lt;debug&gt;
                 else {
-                    Ext.raise('Invalid keyMap key specification &quot;' + key + '&quot;');
+                    Ext.raise(&#39;Invalid keyMap key specification &quot;&#39; + key + &#39;&quot;&#39;);
                 }
                 //&lt;/debug&gt;
             }
@@ -286,8 +286,8 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
             if (keyMap) {
                 for (key in keyMap) {
                     // If the key code and the modifier flags match, call the handler
-                    // Cast the mapping's flag because they will be undefined if not
-                    // true. Case metaKey because it's undefined on some platforms.
+                    // Cast the mapping&#39;s flag because they will be undefined if not
+                    // true. Case metaKey because it&#39;s undefined on some platforms.
                     if (Keyboard.matchEntry(key, entry = keyMap[key], e)) {
                         return entry;
                     }
@@ -322,15 +322,15 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
 
             if (enabled) {
                 eventSource = me[me.keyMapTarget];
-                if (typeof eventSource === 'function') {
-                    eventSource = eventSource.call(me); // eg, 'getFocusEl'
+                if (typeof eventSource === &#39;function&#39;) {
+                    eventSource = eventSource.call(me); // eg, &#39;getFocusEl&#39;
                 }
 
                 listener = eventSource.on({
                     destroyable: true,
                     scope: me,
-                    keydown: 'onKeyMapEvent',
-                    keypress: 'onKeyMapEvent'
+                    keydown: &#39;onKeyMapEvent&#39;,
+                    keypress: &#39;onKeyMapEvent&#39;
                 });
             }
 
@@ -342,8 +342,8 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
             _hyphenRe: /^[a-z]+\-/i,  // eg &quot;Ctrl-&quot; (instead of &quot;Ctrl+&quot;)
     
             _keyMapEvents: {
-                charCode: 'keypress',
-                keyCode: 'keydown'
+                charCode: &#39;keypress&#39;,
+                keyCode: &#39;keydown&#39;
             },
 
             matchEntry: function (key, entry, e) {
@@ -377,12 +377,12 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
                 var me = this,
                     Event = Ext.event.Event,
                     keyFlags = Event.keyFlags,
-                    delim = me._hyphenRe.test(key) ? '-' : '+',
+                    delim = me._hyphenRe.test(key) ? &#39;-&#39; : &#39;+&#39;,
                     keySpec = (key === delim) ? [delim] : key.split(delim),
                     n = keySpec.length - 1,
                     k = keySpec[n],
                     name = k,
-                    type = 'keyCode',
+                    type = &#39;keyCode&#39;,
                     code, i, match;
     
                 // Set the ctrlKey, altKey, metaKey, shiftKey flags
@@ -398,17 +398,17 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
     
                 // Produce the canonical name of the key:
                 if (n) { // if (we have modifiers)
-                    name = entry.ctrlKey ? 'CTRL+' : '';
-                    name += entry.altKey ? 'ALT+' : '';
-                    name += entry.metaKey ? 'META+' : '';
-                    name += entry.shiftKey ? 'SHIFT+' : '';
+                    name = entry.ctrlKey ? &#39;CTRL+&#39; : &#39;&#39;;
+                    name += entry.altKey ? &#39;ALT+&#39; : &#39;&#39;;
+                    name += entry.metaKey ? &#39;META+&#39; : &#39;&#39;;
+                    name += entry.shiftKey ? &#39;SHIFT+&#39; : &#39;&#39;;
                     name += k;
                 }
                 entry.name = name;
     
-                // Set the keyCode from the 'PRINT_SCREEN' key name.
+                // Set the keyCode from the &#39;PRINT_SCREEN&#39; key name.
                 if (isNaN(code = Event[k])) {
-                    // Support charCode from a single letter or '#65' format.
+                    // Support charCode from a single letter or &#39;#65&#39; format.
                     if (!(match = me._charCodeRe.exec(k))) {
                         if (k.length === 1) {
                             code = k.charCodeAt(0);
@@ -418,9 +418,9 @@ Ext.define('Ext.mixin.Keyboard', function (Keyboard) { return {
                     }
     
                     if (code) {
-                        type = 'charCode';
+                        type = &#39;charCode&#39;;
                     } else {
-                        // Last chance! Is it just a number (a keyCode) like &quot;27: 'onEscape'&quot;?
+                        // Last chance! Is it just a number (a keyCode) like &quot;27: &#39;onEscape&#39;&quot;?
                         code = +k;
                     }
                 }

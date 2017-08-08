@@ -21,9 +21,9 @@
  * the key only. Sample usage:
  *
  *     var map = new Ext.util.HashMap();
- *     map.add('key1', 1);
- *     map.add('key2', 2);
- *     map.add('key3', 3);
+ *     map.add(&#39;key1&#39;, 1);
+ *     map.add(&#39;key2&#39;, 2);
+ *     map.add(&#39;key3&#39;, 3);
  *
  *     map.each(function(key, value, length){
  *         console.log(key, value, length);
@@ -33,9 +33,9 @@
  * there is no guarantee when iterating over the items that they will be in any particular
  * order. If this is required, then use a {@link Ext.util.MixedCollection}.
  */
-Ext.define('Ext.util.HashMap', {
+Ext.define(&#39;Ext.util.HashMap&#39;, {
     mixins: [
-        'Ext.mixin.Observable'
+        &#39;Ext.mixin.Observable&#39;
     ],
 
 <span id='Ext-util-HashMap-property-generation'>    /**
@@ -155,7 +155,7 @@ Ext.define('Ext.util.HashMap', {
         var me = this;
 
         // Need to check arguments length here, since we could have called:
-        // map.add('foo', undefined);
+        // map.add(&#39;foo&#39;, undefined);
         if (arguments.length === 1) {
             value = key;
             key = me.getKey(value);
@@ -169,13 +169,13 @@ Ext.define('Ext.util.HashMap', {
         ++me.length;
         me.generation++;
         if (me.hasListeners.add) {
-            me.fireEvent('add', me, key, value);
+            me.fireEvent(&#39;add&#39;, me, key, value);
         }
         return value;
     },
 
 <span id='Ext-util-HashMap-method-replace'>    /**
-</span>     * Replaces an item in the hash. If the key doesn't exist, the
+</span>     * Replaces an item in the hash. If the key doesn&#39;t exist, the
      * {@link #method-add} method will be used.
      * @param {String} key The key of the item.
      * @param {Object} value The new value for the item.
@@ -187,7 +187,7 @@ Ext.define('Ext.util.HashMap', {
             old;
 
         // Need to check arguments length here, since we could have called:
-        // map.replace('foo', undefined);
+        // map.replace(&#39;foo&#39;, undefined);
         if (arguments.length === 1) {
             value = key;
             key = me.getKey(value);
@@ -200,7 +200,7 @@ Ext.define('Ext.util.HashMap', {
         map[key] = value;
         me.generation++;
         if (me.hasListeners.replace) {
-            me.fireEvent('replace', me, key, value, old);
+            me.fireEvent(&#39;replace&#39;, me, key, value, old);
         }
         return value;
     },
@@ -233,7 +233,7 @@ Ext.define('Ext.util.HashMap', {
             --me.length;
             me.generation++;
             if (me.hasListeners.remove) {
-                me.fireEvent('remove', me, key, value);
+                me.fireEvent(&#39;remove&#39;, me, key, value);
             }
             return true;
         }
@@ -243,7 +243,7 @@ Ext.define('Ext.util.HashMap', {
 <span id='Ext-util-HashMap-method-get'>    /**
 </span>     * Retrieves an item with a particular key.
      * @param {String} key The key to lookup.
-     * @return {Object} The value at that key. If it doesn't exist, `undefined` is returned.
+     * @return {Object} The value at that key. If it doesn&#39;t exist, `undefined` is returned.
      */
     get: function(key) {
         var map = this.map;
@@ -254,7 +254,7 @@ Ext.define('Ext.util.HashMap', {
 </span>     * @ignore
      */
     clear: function(initial) {
-        // We use the above syntax because we don't want the initial param to be part of the public API
+        // We use the above syntax because we don&#39;t want the initial param to be part of the public API
 
         var me = this;
 
@@ -265,7 +265,7 @@ Ext.define('Ext.util.HashMap', {
             me.generation = initial ? 0 : me.generation + 1;
         }
         if (initial !== true &amp;&amp; me.hasListeners.clear) {
-            me.fireEvent('clear', me);
+            me.fireEvent(&#39;clear&#39;, me);
         }
         return me;
     },

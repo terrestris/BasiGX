@@ -18,16 +18,16 @@
   <pre class="prettyprint lang-js"><span id='Ext-util-paintmonitor-CssAnimation'>/**
 </span> * @private
  */
-Ext.define('Ext.util.paintmonitor.CssAnimation', {
+Ext.define(&#39;Ext.util.paintmonitor.CssAnimation&#39;, {
 
-    extend: 'Ext.util.paintmonitor.Abstract',
+    extend: &#39;Ext.util.paintmonitor.Abstract&#39;,
 
-<span id='Ext-util-paintmonitor-CssAnimation-property-eventName'>    eventName: Ext.browser.is.WebKit ? 'webkitAnimationEnd' : 'animationend',
+<span id='Ext-util-paintmonitor-CssAnimation-property-eventName'>    eventName: Ext.browser.is.WebKit ? &#39;webkitAnimationEnd&#39; : &#39;animationend&#39;,
 </span>
-<span id='Ext-util-paintmonitor-CssAnimation-property-monitorClass'>    monitorClass: 'cssanimation',
+<span id='Ext-util-paintmonitor-CssAnimation-property-monitorClass'>    monitorClass: &#39;cssanimation&#39;,
 </span>
 <span id='Ext-util-paintmonitor-CssAnimation-method-onElementPainted'>    onElementPainted: function(e) {
-</span>        if (e.animationName === Ext.baseCSSPrefix + 'paint-monitor-helper') {
+</span>        if (e.animationName === Ext.baseCSSPrefix + &#39;paint-monitor-helper&#39;) {
             this.getCallback().apply(this.getScope(), this.getArgs());
         }
     }

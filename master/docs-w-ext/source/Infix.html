@@ -19,13 +19,13 @@
 </span> * This class represents an infix (binary) operator.
  * @private
  */
-Ext.define('Ext.parse.symbol.Infix', {
-    extend: 'Ext.parse.Symbol',
+Ext.define(&#39;Ext.parse.symbol.Infix&#39;, {
+    extend: &#39;Ext.parse.Symbol&#39;,
 
-<span id='Ext-parse-symbol-Infix-property-arity'>    arity: 'binary',
+<span id='Ext-parse-symbol-Infix-property-arity'>    arity: &#39;binary&#39;,
 </span><span id='Ext-parse-symbol-Infix-property-isBinary'>    isBinary: true,
 </span>
-<span id='Ext-parse-symbol-Infix-property-defaultProperty'>    defaultProperty: 'priority',
+<span id='Ext-parse-symbol-Infix-property-defaultProperty'>    defaultProperty: &#39;priority&#39;,
 </span>
 <span id='Ext-parse-symbol-Infix-method-led'>    led: function (left) {
 </span>        var me = this;
@@ -34,7 +34,7 @@ Ext.define('Ext.parse.symbol.Infix', {
         me.rhs = me.parser.parseExpression(me.priority);
         // the next line is here in case this symbol already exists in the symbols table
         // and this function overrides that symbol
-        me.arity = 'binary';
+        me.arity = &#39;binary&#39;;
         me.isBinary = true;
 
         return me;

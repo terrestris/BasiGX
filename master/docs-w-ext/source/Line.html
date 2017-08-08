@@ -22,35 +22,35 @@
  *
  * See {@link Ext.sparkline.Base the base class} for a simple example.
  */
-Ext.define('Ext.sparkline.Line', {
-    extend: 'Ext.sparkline.Base',
+Ext.define(&#39;Ext.sparkline.Line&#39;, {
+    extend: &#39;Ext.sparkline.Base&#39;,
     requires: [
-        'Ext.sparkline.RangeMap'
+        &#39;Ext.sparkline.RangeMap&#39;
     ],
 
-    alias: 'widget.sparklineline',
+    alias: &#39;widget.sparklineline&#39;,
 
     config: {
 
 <span id='Ext-sparkline-Line-cfg-fillColor'>        /**
 </span>         * @cfg {String} [fillColor=#def] The hex value for fill color.
          */
-        fillColor: '#def',
+        fillColor: &#39;#def&#39;,
 
 <span id='Ext-sparkline-Line-cfg-spotColor'>        /**
 </span>         * @cfg {String} [spotColor=#f80] The colour of the final value marker. Set to false or an empty string to hide it.
          */
-        spotColor: '#f80',
+        spotColor: &#39;#f80&#39;,
         
 <span id='Ext-sparkline-Line-cfg-highlightSpotColor'>        /**
 </span>         * @cfg {String} [highlightSpotColor=#5f5] The colour of value marker spots when mouseovered.
          */
-        highlightSpotColor: '#5f5',
+        highlightSpotColor: &#39;#5f5&#39;,
         
 <span id='Ext-sparkline-Line-cfg-highlightLineColor'>        /**
 </span>         * @cfg {String} [highlightLineColor=#f22] The colour of value line shown when the graph is mouseovered.
          */
-        highlightLineColor: '#f22',
+        highlightLineColor: &#39;#f22&#39;,
         
 <span id='Ext-sparkline-Line-cfg-spotRadius'>        /**
 </span>         * @cfg {Number} [spotRadius=1.5] The pixel radius of min, max and final value dots.
@@ -60,12 +60,12 @@ Ext.define('Ext.sparkline.Line', {
 <span id='Ext-sparkline-Line-cfg-minSpotColor'>        /**
 </span>         * @cfg {String} [minSpotColor=#f80] The colour of the mimimum value marker. Set to false or an empty string to hide it.
          */
-        minSpotColor: '#f80',
+        minSpotColor: &#39;#f80&#39;,
         
 <span id='Ext-sparkline-Line-cfg-maxSpotColor'>        /**
 </span>         * @cfg {String} [maxSpotColor=#f80] The colour of the maximum value marker. Set to false or an empty string to hide it.
          */
-        maxSpotColor: '#f80',
+        maxSpotColor: &#39;#f80&#39;,
         
 <span id='Ext-sparkline-Line-cfg-lineWidth'>        /**
 </span>         * @cfg {Number} [lineWidth=1] The pixel width of the line plotted.
@@ -85,7 +85,7 @@ Ext.define('Ext.sparkline.Line', {
 <span id='Ext-sparkline-Line-cfg-normalRangeColor'>        /**
 </span>         * @cfg {String} [normalRangeColor=#ccc] See {@link #normalRangeMin} and {@link #normalRangeMax} The color of the undererlayed &quot;normal range bar&quot;.
          */
-        normalRangeColor: '#ccc',
+        normalRangeColor: &#39;#ccc&#39;,
         
 <span id='Ext-sparkline-Line-cfg-drawNormalOnTop'>        /**
 </span>         * @cfg {Boolean} [drawNormalOnTop=false] Configure as `true` to draw the normal range overlaying the chart.
@@ -129,7 +129,7 @@ Ext.define('Ext.sparkline.Line', {
         valueSpots: null
     },
 
-<span id='Ext-sparkline-Line-cfg-tipTpl'>    tipTpl: '&amp;#9679; {prefix}{y}{suffix}',
+<span id='Ext-sparkline-Line-cfg-tipTpl'>    tipTpl: &#39;&amp;#9679; {prefix}{y}{suffix}&#39;,
 </span>
 <span id='Ext-sparkline-Line-method-applyValueSpots'>    applyValueSpots: function(valueSpots) {
 </span>        if (valueSpots &amp;&amp; !valueSpots.get) {
@@ -200,9 +200,9 @@ Ext.define('Ext.sparkline.Line', {
 
         for (i = 0; i &lt; valcount; i++) {
             val = values[i];
-            isStr = typeof(values[i]) === 'string';
-            isArray = typeof(values[i]) === 'object' &amp;&amp; values[i] instanceof Array;
-            sp = isStr &amp;&amp; values[i].split(':');
+            isStr = typeof(values[i]) === &#39;string&#39;;
+            isArray = typeof(values[i]) === &#39;object&#39; &amp;&amp; values[i] instanceof Array;
+            sp = isStr &amp;&amp; values[i].split(&#39;:&#39;);
 
             if (isStr &amp;&amp; sp.length === 2) { // x:y
                 xvalues.push(Number(sp[0]));
@@ -214,7 +214,7 @@ Ext.define('Ext.sparkline.Line', {
                 yminmax.push(val[1]);
             } else {
                 xvalues.push(i);
-                if (values[i] === null || values[i] === 'null') {
+                if (values[i] === null || values[i] === &#39;null&#39;) {
                     yvalues.push(null);
                 } else {
                     yvalues.push(Number(val));
@@ -397,7 +397,7 @@ Ext.define('Ext.sparkline.Line', {
                     fillShapes.push(path.slice(0));
                     path.pop();
                 }
-                // if there's only a single point in this path, then we want to display it
+                // if there&#39;s only a single point in this path, then we want to display it
                 // as a vertical line which means we keep path[0]  as is
                 if (path.length &gt; 2) {
                     // else we want the first value

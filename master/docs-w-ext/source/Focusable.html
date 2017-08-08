@@ -18,8 +18,8 @@
   <pre class="prettyprint lang-js"><span id='Ext-util-Focusable'>/**
 </span> * A mixin for individually focusable things (Components, Widgets, etc)
  */
-Ext.define('Ext.util.Focusable', {
-<span id='Ext-util-Focusable-property-mixinId'>    mixinId: 'focusable',
+Ext.define(&#39;Ext.util.Focusable&#39;, {
+<span id='Ext-util-Focusable-property-mixinId'>    mixinId: &#39;focusable&#39;,
 </span>
 <span id='Ext-util-Focusable-property-hasFocus'>    /**
 </span>     * @property {Boolean} hasFocus
@@ -41,21 +41,21 @@ Ext.define('Ext.util.Focusable', {
     focusable: false,
     
 <span id='Ext-util-Focusable-property-focusEl'>    /**
-</span>     * @property {Ext.dom.Element} focusEl The component's focusEl.
+</span>     * @property {Ext.dom.Element} focusEl The component&#39;s focusEl.
      * Available after rendering.
      * @private
      */
     
 <span id='Ext-util-Focusable-cfg-tabIndex'>    /**
-</span>     * @cfg {Number} [tabIndex] DOM tabIndex attribute for this Focusable's
+</span>     * @cfg {Number} [tabIndex] DOM tabIndex attribute for this Focusable&#39;s
      * focusEl.
      */
     
 <span id='Ext-util-Focusable-cfg-focusCls'>    /**
-</span>     * @cfg {String} [focusCls='x-focus'] CSS class that will be added to focused
+</span>     * @cfg {String} [focusCls=&#39;x-focus&#39;] CSS class that will be added to focused
      * Component, and removed when Component blurs.
      */
-    focusCls: 'focus',
+    focusCls: &#39;focus&#39;,
     
 <span id='Ext-util-Focusable-event-focus'>    /**
 </span>     * @event focus
@@ -73,14 +73,14 @@ Ext.define('Ext.util.Focusable', {
     
 <span id='Ext-util-Focusable-event-focusenter'>    /**
 </span>     * @event focusenter
-     * Fires when focus enters this Component's hierarchy.
+     * Fires when focus enters this Component&#39;s hierarchy.
      * @param {Ext.Component} this
      * @param {Ext.event.Event} event The focusenter event.
      */
     
 <span id='Ext-util-Focusable-event-focusleave'>    /**
 </span>     * @event focusleave
-     * Fires when focus leaves this Component's hierarchy.
+     * Fires when focus leaves this Component&#39;s hierarchy.
      * @param {Ext.Component} this
      * @param {Ext.event.Event} event The focusleave event.
      */
@@ -172,7 +172,7 @@ Ext.define('Ext.util.Focusable', {
      * {@link Ext.container.Container #defaultFocus} for more information.
      *
      * @param {Boolean} [deep=false] Optionally determine if the container itself
-     * is focusable, or if container's focus is delegated to a child component
+     * is focusable, or if container&#39;s focus is delegated to a child component
      * and that child is focusable.
      *
      * @return {Boolean} True if component is focusable, false if not.
@@ -356,7 +356,7 @@ Ext.define('Ext.util.Focusable', {
             focusClsEl.removeCls(me.removeClsWithUI(focusCls, true));
         }
         
-        me.fireEvent('blur', me, e);
+        me.fireEvent(&#39;blur&#39;, me, e);
         me.postBlur(e);
         
         if (container) {
@@ -408,7 +408,7 @@ Ext.define('Ext.util.Focusable', {
             
             if (!me.hasFocus) {
                 me.hasFocus = true;
-                me.fireEvent('focus', me, e);
+                me.fireEvent(&#39;focus&#39;, me, e);
             }
             
             me.postFocus(e);
@@ -448,13 +448,13 @@ Ext.define('Ext.util.Focusable', {
                 index = el.getTabIndex();
             }
             
-            // We can't query el.dom.tabIndex because IE8 will return 0
+            // We can&#39;t query el.dom.tabIndex because IE8 will return 0
             // when tabIndex attribute is not present.
             else if (el.isElement) {
-                index = el.getAttribute('tabIndex');
+                index = el.getAttribute(&#39;tabIndex&#39;);
             }
             
-            // A component can be configured with el: '#id' to look up
+            // A component can be configured with el: &#39;#id&#39; to look up
             // its main element from the DOM rather than render it; in
             // such case getTabIndex() may happen to be called before
             // said lookup has happened; indeterminate result follows.
@@ -499,7 +499,7 @@ Ext.define('Ext.util.Focusable', {
                 el.setTabIndex(newTabIndex);
             }
             
-            // Or if a component is configured with el: '#id', it may
+            // Or if a component is configured with el: &#39;#id&#39;, it may
             // still be a string by the time setTabIndex is called from
             // FocusableContainer.
             else if (el.isElement) {
@@ -511,7 +511,7 @@ Ext.define('Ext.util.Focusable', {
 <span id='Ext-util-Focusable-method-onFocusEnter'>    /**
 </span>     * @template
      * @protected
-     * Called when focus enters this Component's hierarchy
+     * Called when focus enters this Component&#39;s hierarchy
      * @param {Object} e
      * @param {Ext.event.Event} e.event The underlying DOM event.
      * @param {HTMLElement} e.target The element gaining focus.
@@ -527,7 +527,7 @@ Ext.define('Ext.util.Focusable', {
         }
 
         // Focusing must being a floating component to the front.
-        // Only bring to front if this component is not the manager's
+        // Only bring to front if this component is not the manager&#39;s
         // topmost component (may be a result of focusOnToFront).
         if (me.floating &amp;&amp; me !== me.zIndexManager.getActive()) {
             me.toFront(true);
@@ -537,13 +537,13 @@ Ext.define('Ext.util.Focusable', {
         // we can do appropriate things when asked to revertFocus
         me.focusEnterEvent = e;
         me.containsFocus = true;
-        me.fireEvent('focusenter', me, e);
+        me.fireEvent(&#39;focusenter&#39;, me, e);
     },
 
 <span id='Ext-util-Focusable-method-onFocusLeave'>    /**
 </span>     * @template
      * @protected
-     * Called when focus exits from this Component's hierarchy
+     * Called when focus exits from this Component&#39;s hierarchy
      * @param {Ext.event.Event} e
      * @param {Ext.event.Event} e.event The underlying DOM event.
      * @param {HTMLElement} e.target The element gaining focus.
@@ -560,7 +560,7 @@ Ext.define('Ext.util.Focusable', {
 
         me.focusEnterEvent = null;
         me.containsFocus = false;
-        me.fireEvent('focusleave', me, e);
+        me.fireEvent(&#39;focusleave&#39;, me, e);
     },
 
 <span id='Ext-util-Focusable-property-privates'>    privates: {
@@ -579,7 +579,7 @@ Ext.define('Ext.util.Focusable', {
                 focusTarget;
                         
             // Before hiding, restore focus to what was focused when we were shown
-            // unless we're explicitly told not to (think Panel collapse/expand).
+            // unless we&#39;re explicitly told not to (think Panel collapse/expand).
             if (me.preventRefocus || !me.el.contains(Ext.Element.getActiveElement()) || !focusEvent) {
                 return;
             }
@@ -591,7 +591,7 @@ Ext.define('Ext.util.Focusable', {
             // Likewise an input field must handle its field acquiring focus.
             focusTarget = focusEvent &amp;&amp; focusEvent.relatedTarget;
 
-            // If the element is in the document and focusable, then we're good. The owning component will handle it.
+            // If the element is in the document and focusable, then we&#39;re good. The owning component will handle it.
             if (Ext.getDoc().contains(focusTarget) &amp;&amp; Ext.fly(focusTarget).isFocusable()) {
                 focusTarget.focus();
             }
@@ -628,14 +628,14 @@ Ext.define('Ext.util.Focusable', {
                 focusTargets,
                 focusIndex;
 
-            for (owner = me.up(':visible(true):not([disabled]):not([destroying])'); owner; owner = owner.up(':visible(true):not([disabled]):not([destroying])')) {
+            for (owner = me.up(&#39;:visible(true):not([disabled]):not([destroying])&#39;); owner; owner = owner.up(&#39;:visible(true):not([disabled]):not([destroying])&#39;)) {
                 // Use CQ to find a target that is fully focusable (:canfocus, NOT the theoretical :focusable)
                 // Cannot use :focusable(true) because that consults findFocusTarget and would cause infinite recursion.
                 // Exclude the component which currently has focus.
                 // Cannot use owner.child() because the parent might not be a Container.
                 // Non-Container Components may still have ownership relationships with
                 // other Components. eg: BoundList with PagingToolbar
-                focusTargets = Ext.ComponentQuery.query(':canfocus()', owner);
+                focusTargets = Ext.ComponentQuery.query(&#39;:canfocus()&#39;, owner);
                 if (focusTargets.length) {
                     focusIndex = Ext.Array.indexOf(focusTargets, Ext.ComponentManager.getActiveComponent());
 
@@ -653,11 +653,11 @@ Ext.define('Ext.util.Focusable', {
         },
     
 <span id='Ext-util-Focusable-method-initFocusableElement'>        /**
-</span>         * Sets up the focus listener on this Component's {@link #getFocusEl focusEl} if it has one.
+</span>         * Sets up the focus listener on this Component&#39;s {@link #getFocusEl focusEl} if it has one.
          *
          * Form Components which must implicitly participate in tabbing order usually have a naturally
          * focusable element as their {@link #getFocusEl focusEl}, and it is the DOM event of that
-         * receiving focus which drives the Component's `onFocus` handling, and the DOM event of it
+         * receiving focus which drives the Component&#39;s `onFocus` handling, and the DOM event of it
          * being blurred which drives the `onBlur` handling.
          * @private
          */
@@ -671,7 +671,7 @@ Ext.define('Ext.util.Focusable', {
                 me.focusEl = focusEl;
                 
                 // focusEl is not available until after rendering, and rendering tabIndex
-                // into focusEl is not always convenient. So we apply it here if Component's
+                // into focusEl is not always convenient. So we apply it here if Component&#39;s
                 // tabIndex property is set and Component is otherwise focusable.
                 if (tabIndex != null &amp;&amp; me.canFocus(true)) {
                     me.setTabIndex(tabIndex, focusEl);
@@ -679,7 +679,7 @@ Ext.define('Ext.util.Focusable', {
                 
                 // This attribute is a shortcut to look up a Component by its Elements
                 // It only makes sense on focusable elements, so we set it here
-                focusEl.dom.setAttribute('data-componentid', me.id);
+                focusEl.dom.setAttribute(&#39;data-componentid&#39;, me.id);
             }
         },
 
@@ -704,11 +704,11 @@ Ext.define('Ext.util.Focusable', {
             // passing the normalized element event that might or might not cause
             // component focus or blur. The component itself makes the decision
             // whether focus/blur happens or not. This is necessary for components
-            // that might have more than one focusable element within the component's
+            // that might have more than one focusable element within the component&#39;s
             // DOM structure, like Ext.button.Split.
             if (this.isFocusing(e)) {
                 event = new Ext.event.Event(e.event);
-                event.type = 'focus';
+                event.type = &#39;focus&#39;;
                 event.relatedTarget = e.fromElement;
                 event.target = e.toElement;
                 
@@ -724,7 +724,7 @@ Ext.define('Ext.util.Focusable', {
             
             if (this.isBlurring(e)) {
                 event = new Ext.event.Event(e.event);
-                event.type = 'blur';
+                event.type = &#39;blur&#39;;
                 event.target = e.fromElement;
                 event.relatedTarget = e.toElement;
                 
@@ -855,17 +855,17 @@ Ext.define('Ext.util.Focusable', {
                 me.setMasked(true);
                 
                 if (ariaEl) {
-                    ariaEl.setAttribute('aria-busy', 'true');
+                    ariaEl.setAttribute(&#39;aria-busy&#39;, &#39;true&#39;);
                     
                     // It is possible that ariaEl already has aria-describedby attribute;
                     // in that case we need to save it to restore later.
-                    value = ariaEl.getAttribute('aria-describedby');
+                    value = ariaEl.getAttribute(&#39;aria-describedby&#39;);
                     
                     if (value) {
                         me._savedAriaDescribedBy = value;
                     }
                     
-                    ariaEl.setAttribute('aria-describedby', mask.ariaEl.id);
+                    ariaEl.setAttribute(&#39;aria-describedby&#39;, mask.ariaEl.id);
                 }
             }
             else {
@@ -873,13 +873,13 @@ Ext.define('Ext.util.Focusable', {
                 me.setMasked(false);
                 
                 if (ariaEl) {
-                    ariaEl.removeAttribute('aria-busy');
+                    ariaEl.removeAttribute(&#39;aria-busy&#39;);
                     
-                    value = ariaEl.getAttribute('aria-describedby');
-                    ariaEl.removeAttribute('aria-describedby');
+                    value = ariaEl.getAttribute(&#39;aria-describedby&#39;);
+                    ariaEl.removeAttribute(&#39;aria-describedby&#39;);
                     
                     if (value === mask.ariaEl.id &amp;&amp; me._savedAriaDescribedBy) {
-                        ariaEl.setAttribute('aria-describedby', me._savedAriaDescribedBy);
+                        ariaEl.setAttribute(&#39;aria-describedby&#39;, me._savedAriaDescribedBy);
                         delete me._savedAriaDescribedBy;
                     }
                 }

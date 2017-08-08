@@ -30,15 +30,15 @@
  *
  * @abstract
  */
-Ext.define('Ext.direct.Provider', {
-   alias: 'direct.provider',
+Ext.define(&#39;Ext.direct.Provider&#39;, {
+   alias: &#39;direct.provider&#39;,
 
     mixins: [
-        'Ext.mixin.Observable'
+        &#39;Ext.mixin.Observable&#39;
     ],
     
     requires: [
-        'Ext.direct.Manager'
+        &#39;Ext.direct.Manager&#39;
     ],
     
 <span id='Ext-direct-Provider-property-isProvider'>    isProvider: true,
@@ -52,11 +52,11 @@ Ext.define('Ext.direct.Provider', {
      * not have an object reference available, for example:
      *
      *      Ext.direct.Manager.addProvider({
-     *          type: 'polling',
-     *          url:  'php/poll.php',
-     *          id:   'poll-provider'
+     *          type: &#39;polling&#39;,
+     *          url:  &#39;php/poll.php&#39;,
+     *          id:   &#39;poll-provider&#39;
      *      });
-     *      var p = {@link Ext.direct.Manager}.{@link Ext.direct.Manager#getProvider getProvider}('poll-provider');
+     *      var p = {@link Ext.direct.Manager}.{@link Ext.direct.Manager#getProvider getProvider}(&#39;poll-provider&#39;);
      *     p.disconnect();
      *
      */
@@ -64,7 +64,7 @@ Ext.define('Ext.direct.Provider', {
 <span id='Ext-direct-Provider-cfg-relayedEvents'>    /**
 </span>     * @cfg {String[]} relayedEvents
      * List of Provider events that should be relayed by {@link Ext.direct.Manager}.
-     * 'data' event is always relayed.
+     * &#39;data&#39; event is always relayed.
      */
     
     config: {
@@ -117,7 +117,7 @@ Ext.define('Ext.direct.Provider', {
         me.requests = {};
 
         Ext.applyIf(me, {
-            id: Ext.id(null, 'provider-')
+            id: Ext.id(null, &#39;provider-&#39;)
         });
     },
     
@@ -144,7 +144,7 @@ Ext.define('Ext.direct.Provider', {
         
         if (me.subscribers === 0) {
             me.doConnect();
-            me.fireEventArgs('connect', [me]);
+            me.fireEventArgs(&#39;connect&#39;, [me]);
         }
         
         me.subscribers++;
@@ -176,7 +176,7 @@ Ext.define('Ext.direct.Provider', {
             
             if (me.subscribers === 0) {
                 me.doDisconnect();
-                me.fireEventArgs('disconnect', [me]);
+                me.fireEventArgs(&#39;disconnect&#39;, [me]);
             }
         }
     },

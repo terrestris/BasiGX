@@ -37,7 +37,7 @@
  * **Basic usage:**
  *
  *     {
- *         xtype: 'basigx-combo-language'
+ *         xtype: &#39;basigx-combo-language&#39;
  *     }
  *
  * The config object of this component can be adapted to the surrounding
@@ -47,17 +47,17 @@
  * **Real world usage:**
  *
  *     {
- *         xtype: 'basigx-combo-language',
+ *         xtype: &#39;basigx-combo-language&#39;,
  *         config: {
- *             defaultLanguage: 'en',
+ *             defaultLanguage: &#39;en&#39;,
  *             languages: [{
- *                 code: 'de',
- *                 name: 'DE'
+ *                 code: &#39;de&#39;,
+ *                 name: &#39;DE&#39;
  *             }, {
- *                 code: 'en',
- *                 name: 'EN'
+ *                 code: &#39;en&#39;,
+ *                 name: &#39;EN&#39;
  *             }],
- *             appLocaleUrlTpl: './resources/locale/app-locale-{0}.json'
+ *             appLocaleUrlTpl: &#39;./resources/locale/app-locale-{0}.json&#39;
  *         }
  *     }
  *
@@ -84,46 +84,46 @@
  *
  * @class BasiGX.view.combo.Language
  */
-Ext.define('BasiGX.view.combo.Language', {
-    extend: 'Ext.form.field.ComboBox',
-    xtype: 'basigx-combo-language',
+Ext.define(&#39;BasiGX.view.combo.Language&#39;, {
+    extend: &#39;Ext.form.field.ComboBox&#39;,
+    xtype: &#39;basigx-combo-language&#39;,
     requires: [
-        'BasiGX.util.Accessibility'
+        &#39;BasiGX.util.Accessibility&#39;
     ],
 
 <span id='BasiGX-view-combo-Language-property-viewModel'>    viewModel: {
 </span>        data: {
             fieldLabel: null,
-            documentation: '&lt;h2&gt;Sprachauswahl&lt;/h2&gt;• Wählen Sie mit Hilfe ' +
-                'dieser ComboBox die Sprache der Anwendung aus.&lt;br&gt;• Nachdem ' +
-                'Sie eine andere Sprache gewählt haben, wird die Anwendung ' +
-                'in der entsprechenden Sprache dargestellt'
+            documentation: &#39;&lt;h2&gt;Sprachauswahl&lt;/h2&gt;• Wählen Sie mit Hilfe &#39; +
+                &#39;dieser ComboBox die Sprache der Anwendung aus.&lt;br&gt;• Nachdem &#39; +
+                &#39;Sie eine andere Sprache gewählt haben, wird die Anwendung &#39; +
+                &#39;in der entsprechenden Sprache dargestellt&#39;
         }
     },
 
 <span id='BasiGX-view-combo-Language-property-bind'>    bind: {
-</span>        fieldLabel: '{fieldLabel}'
+</span>        fieldLabel: &#39;{fieldLabel}&#39;
     },
 
 <span id='BasiGX-view-combo-Language-property-fields'>    /**
 </span>     *
      */
-    fields: ['code', 'name'],
+    fields: [&#39;code&#39;, &#39;name&#39;],
 
 <span id='BasiGX-view-combo-Language-property-queryMode'>    /**
 </span>     *
      */
-    queryMode: 'local',
+    queryMode: &#39;local&#39;,
 
 <span id='BasiGX-view-combo-Language-property-displayField'>    /**
 </span>     *
      */
-    displayField: 'name',
+    displayField: &#39;name&#39;,
 
 <span id='BasiGX-view-combo-Language-property-valueField'>    /**
 </span>     *
      */
-    valueField: 'code',
+    valueField: &#39;code&#39;,
 
 <span id='BasiGX-view-combo-Language-property-autoSelect'>    /**
 </span>     *
@@ -156,18 +156,18 @@ Ext.define('BasiGX.view.combo.Language', {
 </span>     *
      */
     config: {
-<span id='BasiGX-view-combo-Language-cfg-defaultLanguage'>        defaultLanguage: 'de',
+<span id='BasiGX-view-combo-Language-cfg-defaultLanguage'>        defaultLanguage: &#39;de&#39;,
 </span><span id='BasiGX-view-combo-Language-cfg-languages'>        languages: [{
-</span>            code: 'de',
-            name: 'DE'
+</span>            code: &#39;de&#39;,
+            name: &#39;DE&#39;
         }, {
-            code: 'en',
-            name: 'EN'
+            code: &#39;en&#39;,
+            name: &#39;EN&#39;
         }, {
-            code: 'fr',
-            name: 'FR'
+            code: &#39;fr&#39;,
+            name: &#39;FR&#39;
         }],
-<span id='BasiGX-view-combo-Language-cfg-appLocaleUrlTpl'>        appLocaleUrlTpl: './resources/locale/app-locale-{0}.json'
+<span id='BasiGX-view-combo-Language-cfg-appLocaleUrlTpl'>        appLocaleUrlTpl: &#39;./resources/locale/app-locale-{0}.json&#39;
 </span>    },
 
 <span id='BasiGX-view-combo-Language-method-initComponent'>    /**
@@ -179,10 +179,10 @@ Ext.define('BasiGX.view.combo.Language', {
         // set the the config according to any given config option
         me.setConfig(me.config);
 
-        me.store = Ext.create('Ext.data.Store', {
+        me.store = Ext.create(&#39;Ext.data.Store&#39;, {
             sorters: [{
-                property: 'code',
-                direction: 'DESC'
+                property: &#39;code&#39;,
+                direction: &#39;DESC&#39;
             }],
             data: me.getLanguages()
         });
@@ -223,7 +223,7 @@ Ext.define('BasiGX.view.combo.Language', {
         me.locale = locale;
 
         Ext.Ajax.request({
-            method: 'GET',
+            method: &#39;GET&#39;,
             url: appLocaleUrl,
             success: me.onLoadAppLocaleSuccess,
             failure: me.onLoadAppLocaleFailure,
@@ -248,7 +248,7 @@ Ext.define('BasiGX.view.combo.Language', {
             // try to parse the given string as JSON
             try {
                 respObj = Ext.decode(resp.responseText);
-                Ext.Logger.info('Succesfully loaded i18n file: ' + me.locale);
+                Ext.Logger.info(&#39;Succesfully loaded i18n file: &#39; + me.locale);
             } catch (err) {
                 me.onLoadAppLocaleFailure();
                 return false;
@@ -275,14 +275,14 @@ Ext.define('BasiGX.view.combo.Language', {
 
         // load default language, but try only once to prevent killswitch
         if (!me.erroneousTryToLoadDefaultLanguage) {
-            Ext.Logger.warn('Error on loading the selected i18n file! Will ' +
-                    'try to load the default language ' + defaultLanguage +
-                    ' instead.');
+            Ext.Logger.warn(&#39;Error on loading the selected i18n file! Will &#39; +
+                    &#39;try to load the default language &#39; + defaultLanguage +
+                    &#39; instead.&#39;);
             me.requestLanguageFile(defaultLanguage);
         } else {
-            Ext.Logger.error('٩(͡๏̯͡๏)۶ Could neither load the selected nor ' +
-                    'the fallback i18n file! Bad front-end behaviour is to ' +
-                    'be expected.');
+            Ext.Logger.error(&#39;٩(͡๏̯͡๏)۶ Could neither load the selected nor &#39; +
+                    &#39;the fallback i18n file! Bad front-end behaviour is to &#39; +
+                    &#39;be expected.&#39;);
         }
     },
 
@@ -291,12 +291,12 @@ Ext.define('BasiGX.view.combo.Language', {
      *
      * @param {Object} localeObj An object with locale data. The key is usually
      *     class name, and the value is an object which we can use for
-     *     `Ext.define({override: 'classname'});`
+     *     `Ext.define({override: &#39;classname&#39;});`
      */
     setAppLanguage: function(localeObj) {
         var me = this;
         var cq = Ext.ComponentQuery.query;
-        var cqTpl = '{self.getName() === &quot;{0}&quot;}{getViewModel()}';
+        var cqTpl = &#39;{self.getName() === &quot;{0}&quot;}{getViewModel()}&#39;;
         var instantiatedClasses;
         var baseLocaleObj;
 
@@ -310,7 +310,7 @@ Ext.define('BasiGX.view.combo.Language', {
             });
 
             // 1. override the class itself
-            Ext.define(className + '.locale.' + me.locale, baseLocaleObj);
+            Ext.define(className + &#39;.locale.&#39; + me.locale, baseLocaleObj);
 
             // 2. Now we will handle the classes viewmodel, if exisiting.
             // The override has to be based on the unmodified classname in
@@ -327,7 +327,7 @@ Ext.define('BasiGX.view.combo.Language', {
                         var viewName = type || viewModel;
                         var viewClassName = Ext.ClassManager.getName(
                             Ext.ClassManager
-                                .getByAlias('viewmodel.' + viewName));
+                                .getByAlias(&#39;viewmodel.&#39; + viewName));
                         baseLocaleObj.override = viewClassName;
                         Ext.define(viewClassName, baseLocaleObj);
                     } else if (!Ext.isEmpty(viewModel)) {
@@ -343,19 +343,19 @@ Ext.define('BasiGX.view.combo.Language', {
             // set the locale for each class
             Ext.each(instantiatedClasses, function(clazz) {
                 // Check if the locale contains an expected structure…
-                if ('config' in locale &amp;&amp; 'data' in locale.config) {
+                if (&#39;config&#39; in locale &amp;&amp; &#39;data&#39; in locale.config) {
                     clazz.getViewModel().setData(locale.config.data);
                 }
-                // … and don't do anything if it doesn't. This is not
+                // … and don&#39;t do anything if it doesn&#39;t. This is not
                 // technically an error, or sth. we should warn the user about.
                 // Consider the following: A specific button class (with a
                 // viewModel and a controller) opens an `Ext.window.Window`, and
                 // wants to have the title come from the `viewModel` of the
                 // button:
-                // Ext.create('Ext.window.Window', {
+                // Ext.create(&#39;Ext.window.Window&#39;, {
                 //     viewModel: myBtnViewModel, // a real instance of the vm
                 //     bind: {
-                //         title: '{myWinTitle}' // defined key in btn viewmodel
+                //         title: &#39;{myWinTitle}&#39; // defined key in btn viewmodel
                 //     }
                 //     // other win properties
                 // });

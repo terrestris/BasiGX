@@ -19,27 +19,27 @@
 </span> * This relationship describes the case where any one entity of one type may relate to any
  * number of entities of another type, and also in the reverse.
  * 
- * This form of association cannot store id's in the related entities since that would
+ * This form of association cannot store id&#39;s in the related entities since that would
  * limit the number of related entities to one for the entity with the foreign key. Instead,
  * these relationships are typically implemented using a so-called &quot;matrix&quot; table. This
- * table typically has two columns to hold the id's of a pair of related entities. This
- * pair of id's is unique in the matrix table.
+ * table typically has two columns to hold the id&#39;s of a pair of related entities. This
+ * pair of id&#39;s is unique in the matrix table.
  * 
  * # Declaration Forms
  * 
  *      // Fully spelled out - all properties are their defaults:
  *      
- *      Ext.define('App.models.Group', {
- *          extend: 'Ext.data.Model',
+ *      Ext.define(&#39;App.models.Group&#39;, {
+ *          extend: &#39;Ext.data.Model&#39;,
  *          
  *          manyToMany: {
  *              UserGroups: {
- *                  type: 'User',
- *                  role: 'users',
- *                  field: 'userId',
+ *                  type: &#39;User&#39;,
+ *                  role: &#39;users&#39;,
+ *                  field: &#39;userId&#39;,
  *                  right: {
- *                      field: 'groupId',
- *                      role: 'groups'
+ *                      field: &#39;groupId&#39;,
+ *                      role: &#39;groups&#39;
  *                  }
  *              }
  *          }
@@ -48,14 +48,14 @@
  *      // Eliminate &quot;right&quot; object and use boolean to indicate Group is on the
  *      // right. By default, left/right is determined by alphabetic order.
  *      
- *      Ext.define('App.models.Group', {
- *          extend: 'Ext.data.Model',
+ *      Ext.define(&#39;App.models.Group&#39;, {
+ *          extend: &#39;Ext.data.Model&#39;,
  *          
  *          manyToMany: {
  *              UserGroups: {
- *                  type: 'User',
- *                  role: 'users',
- *                  field: 'userId',
+ *                  type: &#39;User&#39;,
+ *                  role: &#39;users&#39;,
+ *                  field: &#39;userId&#39;,
  *                  right: true
  *              }
  *          }
@@ -64,47 +64,47 @@
  *      // Eliminate object completely and rely on string to name the other type. Still
  *      // keep Group on the &quot;right&quot;.
  *      
- *      Ext.define('App.models.Group', {
- *          extend: 'Ext.data.Model',
+ *      Ext.define(&#39;App.models.Group&#39;, {
+ *          extend: &#39;Ext.data.Model&#39;,
  *          
  *          manyToMany: {
- *              UserGroups: 'User#'   // '#' is on the side (left or right) of Group
+ *              UserGroups: &#39;User#&#39;   // &#39;#&#39; is on the side (left or right) of Group
  *          }
  *      });
  *
  *      // Remove explicit matrix name and keep Group on the &quot;right&quot;. Generated matrixName
  *      // remains &quot;UserGroups&quot;.
  *      
- *      Ext.define('App.models.Group', {
- *          extend: 'Ext.data.Model',
+ *      Ext.define(&#39;App.models.Group&#39;, {
+ *          extend: &#39;Ext.data.Model&#39;,
  *          
  *          manyToMany: [
- *              'User#'
+ *              &#39;User#&#39;
  *          ]
  *      });
  *
  *      // Minimal definition but now Group is on the &quot;left&quot; since &quot;Group&quot; sorts before
  *      // &quot;User&quot;. Generated matrixName is now &quot;GroupUsers&quot;.
  *      
- *      Ext.define('App.models.Group', {
- *          extend: 'Ext.data.Model',
+ *      Ext.define(&#39;App.models.Group&#39;, {
+ *          extend: &#39;Ext.data.Model&#39;,
  *          
  *          manyToMany: [
- *              'User'
+ *              &#39;User&#39;
  *          ]
  *      });
  */
-Ext.define('Ext.data.schema.ManyToMany', {
-    extend: 'Ext.data.schema.Association',
+Ext.define(&#39;Ext.data.schema.ManyToMany&#39;, {
+    extend: &#39;Ext.data.schema.Association&#39;,
     
 <span id='Ext-data-schema-ManyToMany-property-isManyToMany'>    isManyToMany: true,
 </span>
 <span id='Ext-data-schema-ManyToMany-property-isToMany'>    isToMany: true,
 </span>
-<span id='Ext-data-schema-ManyToMany-property-kind'>    kind: 'many-to-many',
+<span id='Ext-data-schema-ManyToMany-property-kind'>    kind: &#39;many-to-many&#39;,
 </span>
 <span id='Ext-data-schema-ManyToMany-property-Left'>    Left: Ext.define(null, {
-</span>        extend: 'Ext.data.schema.Role',
+</span>        extend: &#39;Ext.data.schema.Role&#39;,
 
         isMany: true,
 
@@ -178,7 +178,7 @@ Ext.define('Ext.data.schema.ManyToMany', {
                             store.loadData(leftRecords);
                             store.complete = true;
                         } else {
-                            // We don't have a store. Create it and add the records.
+                            // We don&#39;t have a store. Create it and add the records.
                             rightRecord[me.getterName](null, null, leftRecords);
                         }
                     } else {
@@ -268,7 +268,7 @@ Ext.define('Ext.data.schema.ManyToMany', {
             var me = this;
 
             return function (options, scope, leftRecords) {
-                // 'this' refers to the Model instance inside this function
+                // &#39;this&#39; refers to the Model instance inside this function
                 return me.getAssociatedStore(this, options, scope, leftRecords, false);
             };
         },
@@ -283,7 +283,7 @@ Ext.define('Ext.data.schema.ManyToMany', {
             if (!store.matrixUpdate) {
                 store.matrixUpdate = 1;
                 // By default the &quot;load&quot; param is really the index, but we call this manually in a few
-                // spots to indicate it's a default load
+                // spots to indicate it&#39;s a default load
                 store.matrix.update(leftRecords, load === true ? 0 : 1);
                 store.matrixUpdate = 0;
             }
@@ -361,9 +361,9 @@ Ext.define('Ext.data.schema.ManyToMany', {
             Ext.data.schema.ManyToMany.prototype.Right = Ext.define(null, {
                 extend: Left,
                 left: false,
-                side: 'right'
+                side: &#39;right&#39;
             });
-        }, null, 'Ext.data.schema.ManyToMany');
+        }, null, &#39;Ext.data.schema.ManyToMany&#39;);
     })
 });
 </pre>

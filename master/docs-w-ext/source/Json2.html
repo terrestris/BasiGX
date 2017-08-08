@@ -20,10 +20,10 @@
  * The {@link #allowSingle} configuration can be set to false to force the records to always
  * be encoded in an array, even if there is only a single record being sent.
  */
-Ext.define('Ext.data.writer.Json', {
-    extend: 'Ext.data.writer.Writer',
-    alternateClassName: 'Ext.data.JsonWriter',
-    alias: 'writer.json',
+Ext.define(&#39;Ext.data.writer.Json&#39;, {
+    extend: &#39;Ext.data.writer.Writer&#39;,
+    alternateClassName: &#39;Ext.data.JsonWriter&#39;,
+    alias: &#39;writer.json&#39;,
     
     config: {
 <span id='Ext-data-writer-Json-cfg-rootProperty'>        /**
@@ -50,12 +50,12 @@ Ext.define('Ext.data.writer.Json', {
     
 <span id='Ext-data-writer-Json-cfg-expandData'>        /**
 </span>        * @cfg {Boolean} [expandData=false] By default, when dot-delimited field {@link #nameProperty mappings} are
-        * used (e.g. `name: 'myProperty', mapping: 'my.nested.property'`) the writer will simply output a flat data
-        * object containing the mapping string literal as the property name (e.g. `{ 'my.nested.property': 'foo' }`).
+        * used (e.g. `name: &#39;myProperty&#39;, mapping: &#39;my.nested.property&#39;`) the writer will simply output a flat data
+        * object containing the mapping string literal as the property name (e.g. `{ &#39;my.nested.property&#39;: &#39;foo&#39; }`).
         * 
         * Mappings are used to map incoming nested JSON to flat Ext models. In many case, the data output by the
         * writer should preferrably match the original nested data format. Setting this config to `true` will ensure
-        * that the output will instead look like `{ my: { nested: { property: 'foo' }}}`. The output is generated
+        * that the output will instead look like `{ my: { nested: { property: &#39;foo&#39; }}}`. The output is generated
         * by {@link #getExpandedData}, which can optionally be overridden to apply more customized logic.
         */
         expandData: false
@@ -63,11 +63,11 @@ Ext.define('Ext.data.writer.Json', {
     
 <span id='Ext-data-writer-Json-method-constructor'>    //&lt;debug&gt;
 </span>    constructor: function(config) {
-        if (config &amp;&amp; config.hasOwnProperty('root')) {
+        if (config &amp;&amp; config.hasOwnProperty(&#39;root&#39;)) {
             config = Ext.apply({}, config);
             config.rootProperty = config.root;
             delete config.root;
-            Ext.log.warn('Ext.data.writer.Json: Using the deprecated &quot;root&quot; configuration. Use &quot;rootProperty&quot; instead.');
+            Ext.log.warn(&#39;Ext.data.writer.Json: Using the deprecated &quot;root&quot; configuration. Use &quot;rootProperty&quot; instead.&#39;);
         }
         this.callParent([config]);
     },
@@ -80,16 +80,16 @@ Ext.define('Ext.data.writer.Json', {
      * format. Using the same mappings when available, the Writer will simply split each delimiter into a nested
      * object in the output, which should exactly match the input format. For example, record data like this:
      * 
-     *     my.nested.property: 'foo',
-     *     my.nested.another: 'bar',
+     *     my.nested.property: &#39;foo&#39;,
+     *     my.nested.another: &#39;bar&#39;,
      *     my.somethingElse: 123
      * 
      * should write out as...
      * 
      *     my: {
      *         nested: {
-     *             property: 'foo',
-     *             another: 'bar
+     *             property: &#39;foo&#39;,
+     *             another: &#39;bar
      *         },
      *         somethingElse: 123
      *     }
@@ -119,13 +119,13 @@ Ext.define('Ext.data.writer.Json', {
             
             for (prop in item) {
                 if (item.hasOwnProperty(prop)) {
-                    // e.g. my.nested.property: 'foo'
-                    nameParts = prop.split('.');
+                    // e.g. my.nested.property: &#39;foo&#39;
+                    nameParts = prop.split(&#39;.&#39;);
                     j = nameParts.length - 1;
                     
                     if (j &gt; 0) {
-                        // Initially this will be the value 'foo'.
-                        // Equivalent to rec['my.nested.property']
+                        // Initially this will be the value &#39;foo&#39;.
+                        // Equivalent to rec[&#39;my.nested.property&#39;]
                         tempObj = item[prop];
                         
                         for (; j &gt; 0; j--) {
@@ -135,9 +135,9 @@ Ext.define('Ext.data.writer.Json', {
                             tempObj = toObject(nameParts[j], tempObj);
                         }
                         
-                        // At this point we'll have all child properties rolled up into a single
-                        // object like `{ nested: { property: 'foo' }}`. Now add the root name
-                        // (e.g. 'my') to the record data if needed (do not overwrite existing):
+                        // At this point we&#39;ll have all child properties rolled up into a single
+                        // object like `{ nested: { property: &#39;foo&#39; }}`. Now add the root name
+                        // (e.g. &#39;my&#39;) to the record data if needed (do not overwrite existing):
                         item[nameParts[0]] = item[nameParts[0]] || {};
                         // Since there could be duplicate names at any level of the nesting be sure
                         // to merge rather than assign when setting the object as the value:
@@ -177,7 +177,7 @@ Ext.define('Ext.data.writer.Json', {
                 request.setParam(root, Ext.encode(data));
             } else {
                 //&lt;debug&gt;
-                Ext.raise('Must specify a root when using encode');
+                Ext.raise(&#39;Must specify a root when using encode&#39;);
                 //&lt;/debug&gt;
             }
         } else if (single || (data &amp;&amp; data.length)) {

@@ -19,11 +19,11 @@
 </span> * @class Ext.util.AbstractMixedCollection
  * @private
  */
-Ext.define('Ext.util.AbstractMixedCollection', {
-    requires: ['Ext.util.Filter'],
+Ext.define(&#39;Ext.util.AbstractMixedCollection&#39;, {
+    requires: [&#39;Ext.util.Filter&#39;],
 
     mixins: {
-        observable: 'Ext.util.Observable'
+        observable: &#39;Ext.util.Observable&#39;
     },
 
 <span id='Ext-util-AbstractMixedCollection-property-isMixedCollection'>    /**
@@ -40,7 +40,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
     generation: 0,
 
 <span id='Ext-util-AbstractMixedCollection-property-indexGeneration'>    /**
-</span>     * Mutation counter for the index map which is synchronized with the collection's mutation counter
+</span>     * Mutation counter for the index map which is synchronized with the collection&#39;s mutation counter
      * when the index map is interrogated and found to be out of sync and needed a rebuild.
      *
      * @private
@@ -166,7 +166,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
      * If no key is yielded, then the object will be added, but it
      * cannot be accessed or removed quickly. Finding it in this
      * collection for interrogation or removal will require a linear
-     * scan of this collection's items.
+     * scan of this collection&#39;s items.
      *
      * The default implementation simply returns `item.id` but you can
      * provide your own implementation to return a different value as
@@ -220,7 +220,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
             key = me.getKey(o);
         }
         old = me.map[key];
-        if (typeof key == 'undefined' || key === null || typeof old == 'undefined') {
+        if (typeof key == &#39;undefined&#39; || key === null || typeof old == &#39;undefined&#39;) {
              return me.add(key, o);
         }
         me.generation++;
@@ -228,14 +228,14 @@ Ext.define('Ext.util.AbstractMixedCollection', {
         me.items[index] = o;
         me.map[key] = o;
         if (me.hasListeners.replace) {
-            me.fireEvent('replace', key, old, o);
+            me.fireEvent(&#39;replace&#39;, key, old, o);
         }
         return o;
     },
 
 <span id='Ext-util-AbstractMixedCollection-method-reorder'>    /**
 </span>     * Reorders each of the items based on a mapping from old index to new index. Internally this
-     * just translates into a sort. The 'sort' event is fired whenever reordering has
+     * just translates into a sort. The &#39;sort&#39; event is fired whenever reordering has
      * occurred.
      * @param {Object} mapping Mapping from old item index to new item index
      *
@@ -327,7 +327,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
         } else {
             for (key in objs) {
                 if (objs.hasOwnProperty(key)) {
-                    if (me.allowFunctions || typeof objs[key] != 'function') {
+                    if (me.allowFunctions || typeof objs[key] != &#39;function&#39;) {
                         me.add(key, objs[key]);
                     }
                 }
@@ -420,7 +420,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
      */
     find : function() {
         if (Ext.isDefined(Ext.global.console)) {
-            Ext.global.console.warn('Ext.util.MixedCollection: find has been deprecated. Use findBy instead.');
+            Ext.global.console.warn(&#39;Ext.util.MixedCollection: find has been deprecated. Use findBy instead.&#39;);
         }
         return this.findBy.apply(this, arguments);
     },
@@ -464,7 +464,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
             passedDuplicates,
             oldKeys, oldObjects;
 
-        // External key(s) passed. We cannot reliably find an object's index using the key extraction fn.
+        // External key(s) passed. We cannot reliably find an object&#39;s index using the key extraction fn.
         // Set a flag for use by contains, indexOf and remove
         if (objects != null) {
             me.useLinearSearch = true;
@@ -543,7 +543,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
                 }
             }
             if (fireAdd) {
-                me.fireEvent('add', index, objects[i], itemKey);
+                me.fireEvent(&#39;add&#39;, index, objects[i], itemKey);
             }
         }
         return objects;
@@ -588,7 +588,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
             i;
 
         if (items || me.hasListeners.remove) {
-            // Only perform expensive item-by-item removal if there's a listener or specific items
+            // Only perform expensive item-by-item removal if there&#39;s a listener or specific items
             if (items) {
                 for (i = items.length - 1; i &gt;= 0; --i) {
                     me.remove(items[i]);
@@ -623,12 +623,12 @@ Ext.define('Ext.util.AbstractMixedCollection', {
             o = me.items[index];
             Ext.Array.erase(me.items, index, 1);
             key = me.keys[index];
-            if (typeof key != 'undefined') {
+            if (typeof key != &#39;undefined&#39;) {
                 delete me.map[key];
             }
             Ext.Array.erase(me.keys, index, 1);
             if (me.hasListeners.remove) {
-                me.fireEvent('remove', o, key);
+                me.fireEvent(&#39;remove&#39;, o, key);
             }
             me.generation++;
             return o;
@@ -802,8 +802,8 @@ Ext.define('Ext.util.AbstractMixedCollection', {
     get : function(key) {
         var me = this,
             mk = me.map[key],
-            item = mk !== undefined ? mk : (typeof key == 'number') ? me.items[key] : undefined;
-        return typeof item != 'function' || me.allowFunctions ? item : null; // for prototype!
+            item = mk !== undefined ? mk : (typeof key == &#39;number&#39;) ? me.items[key] : undefined;
+        return typeof item != &#39;function&#39; || me.allowFunctions ? item : null; // for prototype!
     },
 
 <span id='Ext-util-AbstractMixedCollection-method-getAt'>    /**
@@ -880,7 +880,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
             me.indexGeneration = me.generation;
         }
         if (me.hasListeners.clear) {
-            me.fireEvent('clear');
+            me.fireEvent(&#39;clear&#39;);
         }
     },
 
@@ -905,8 +905,8 @@ Ext.define('Ext.util.AbstractMixedCollection', {
 <span id='Ext-util-AbstractMixedCollection-method-sum'>    /**
 </span>     * Collects all of the values of the given property and returns their sum
      * @param {String} property The property to sum by
-     * @param {String} [root] 'root' property to extract the first argument from. This is used mainly when
-     * summing fields in records, where the fields are all stored inside the 'data' object
+     * @param {String} [root] &#39;root&#39; property to extract the first argument from. This is used mainly when
+     * summing fields in records, where the fields are all stored inside the &#39;data&#39; object
      * @param {Number} [start=0] The record index to start at
      * @param {Number} [end=-1] The record index to end at
      * @return {Number} The total
@@ -930,8 +930,8 @@ Ext.define('Ext.util.AbstractMixedCollection', {
 <span id='Ext-util-AbstractMixedCollection-method-collect'>    /**
 </span>     * Collects unique values of a particular property in this MixedCollection
      * @param {String} property The property to collect on
-     * @param {String} root (optional) 'root' property to extract the first argument from. This is used mainly when
-     * summing fields in records, where the fields are all stored inside the 'data' object
+     * @param {String} root (optional) &#39;root&#39; property to extract the first argument from. This is used mainly when
+     * summing fields in records, where the fields are all stored inside the &#39;data&#39; object
      * @param {Boolean} allowBlank (optional) Pass true to allow null, undefined or empty string values
      * @return {Array} The unique values
      */
@@ -960,8 +960,8 @@ Ext.define('Ext.util.AbstractMixedCollection', {
      * Extracts all of the given property values from the items in the MC. Mainly used as a supporting method for
      * functions like sum and collect.
      * @param {String} property The property to extract
-     * @param {String} root (optional) 'root' property to extract the first argument from. This is used mainly when
-     * extracting field data from Model instances, where the fields are stored inside the 'data' object
+     * @param {String} root (optional) &#39;root&#39; property to extract the first argument from. This is used mainly when
+     * extracting field data from Model instances, where the fields are stored inside the &#39;data&#39; object
      * @return {Array} The extracted values
      */
     extractValues: function(property, root) {
@@ -976,7 +976,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
 
 <span id='Ext-util-AbstractMixedCollection-method-hasRange'>    /**
 </span>     * @private
-     * For API parity with Store's PageMap class. Buffered rendering checks if the Store has the range
+     * For API parity with Store&#39;s PageMap class. Buffered rendering checks if the Store has the range
      * required to render. The Store delegates this question to its backing data object which may be an instance
      * of its private PageMap class, or a MixedCollection.
      */
@@ -1033,14 +1033,14 @@ Ext.define('Ext.util.AbstractMixedCollection', {
      *     //create a simple store with a few people defined
      *     var people = new Ext.util.MixedCollection();
      *     people.addAll([
-     *         {id: 1, age: 25, name: 'Ed'},
-     *         {id: 2, age: 24, name: 'Tommy'},
-     *         {id: 3, age: 24, name: 'Arne'},
-     *         {id: 4, age: 26, name: 'Aaron'}
+     *         {id: 1, age: 25, name: &#39;Ed&#39;},
+     *         {id: 2, age: 24, name: &#39;Tommy&#39;},
+     *         {id: 3, age: 24, name: &#39;Arne&#39;},
+     *         {id: 4, age: 26, name: &#39;Aaron&#39;}
      *     ]);
      *
      *     //a new MixedCollection containing only the items where age == 24
-     *     var middleAged = people.filter('age', 24);
+     *     var middleAged = people.filter(&#39;age&#39;, 24);
      *
      * @param {Ext.util.Filter[]/String} property A property on your objects, or an array of {@link Ext.util.Filter Filter} objects
      * @param {String/RegExp} value Either string that the property values
@@ -1159,7 +1159,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
      * @private
      * @param {String} value The value to create the regex for. This is escaped using Ext.escapeRe
      * @param {Boolean} anyMatch True to allow any match - no regex start/end line anchors will be added. Defaults to false
-     * @param {Boolean} caseSensitive True to make the regex case sensitive (adds 'i' switch to regex). Defaults to false.
+     * @param {Boolean} caseSensitive True to make the regex case sensitive (adds &#39;i&#39; switch to regex). Defaults to false.
      * @param {Boolean} exactMatch True to force exact match (^ and $ characters added to the regex). Defaults to false. Ignored if anyMatch is true.
      * @since 3.4.0
      */
@@ -1171,12 +1171,12 @@ Ext.define('Ext.util.AbstractMixedCollection', {
             if (anyMatch === true) {
                 value = er(value);
             } else {
-                value = '^' + er(value);
+                value = &#39;^&#39; + er(value);
                 if (exactMatch === true) {
-                    value += '$';
+                    value += &#39;$&#39;;
                 }
             }
-            value = new RegExp(value, caseSensitive ? '' : 'i');
+            value = new RegExp(value, caseSensitive ? &#39;&#39; : &#39;i&#39;);
         }
         return value;
     },

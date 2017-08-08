@@ -20,22 +20,22 @@
  * Component size.
  * @private
  */
-Ext.define('Ext.layout.component.Body', {
+Ext.define(&#39;Ext.layout.component.Body&#39;, {
 
     /* Begin Definitions */
 
-    alias: ['layout.body'],
+    alias: [&#39;layout.body&#39;],
 
-    extend: 'Ext.layout.component.Auto',
+    extend: &#39;Ext.layout.component.Auto&#39;,
 
 <span id='Ext-layout-component-Body-property-type'>    /* End Definitions */
 </span>
-    type: 'body',
+    type: &#39;body&#39;,
 
 <span id='Ext-layout-component-Body-method-beginLayout'>    beginLayout: function (ownerContext) {
 </span>        this.callParent(arguments);
 
-        ownerContext.bodyContext = ownerContext.getEl('body');
+        ownerContext.bodyContext = ownerContext.getEl(&#39;body&#39;);
     },
 
 <span id='Ext-layout-component-Body-method-beginLayoutCycle'>    beginLayoutCycle: function(ownerContext, firstCycle){
@@ -55,11 +55,11 @@ Ext.define('Ext.layout.component.Body', {
         }
     },
 
-<span id='Ext-layout-component-Body-method-calculateOwnerHeightFromContentHeight'>    // Padding is exciting here because we have 2 el's: owner.el and owner.body. Content
+<span id='Ext-layout-component-Body-method-calculateOwnerHeightFromContentHeight'>    // Padding is exciting here because we have 2 el&#39;s: owner.el and owner.body. Content
 </span>    // size always includes the padding of the targetEl, which should be owner.body. But
     // it is common to have padding on owner.el also (such as a panel header), so we need
     // to do some more padding work if targetContext is not owner.el. The base class has
-    // already handled the ownerContext's frameInfo (border+framing) so all that is left
+    // already handled the ownerContext&#39;s frameInfo (border+framing) so all that is left
     // is padding.
 
     calculateOwnerHeightFromContentHeight: function (ownerContext, contentHeight) {

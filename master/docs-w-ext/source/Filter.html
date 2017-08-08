@@ -24,14 +24,14 @@
  *     // Set up a fictional MixedCollection containing a few people to filter on
  *     var allNames = new Ext.util.MixedCollection();
  *     allNames.addAll([
- *         { id: 1, name: 'Peter',  age: 25 },
- *         { id: 2, name: 'Egon',   age: 37 },
- *         { id: 3, name: 'Ray',    age: 32 },
- *         { id: 4, name: 'Winston',age: 26 }
+ *         { id: 1, name: &#39;Peter&#39;,  age: 25 },
+ *         { id: 2, name: &#39;Egon&#39;,   age: 37 },
+ *         { id: 3, name: &#39;Ray&#39;,    age: 32 },
+ *         { id: 4, name: &#39;Winston&#39;,age: 26 }
  *     ]);
  *
  *     var ageFilter = new Ext.util.Filter({
- *         property: 'age',
+ *         property: &#39;age&#39;,
  *         value   : 32
  *     });
  *
@@ -47,7 +47,7 @@
  *     // a new MixedCollection with the 2 people of age 32:
  *     var youngFolk = allNames.filter(ageFilter);
  */
-Ext.define('Ext.util.Filter', {
+Ext.define(&#39;Ext.util.Filter&#39;, {
 <span id='Ext-util-Filter-property-isFilter'>    isFilter: true,
 </span>
     config: {
@@ -76,9 +76,9 @@ Ext.define('Ext.util.Filter', {
 
 <span id='Ext-util-Filter-cfg-id'>        /**
 </span>         * @cfg {String} [id]
-         * An identifier by which this Filter is indexed in a {@link Ext.data.Store#cfg-filters Store's filters collection}
+         * An identifier by which this Filter is indexed in a {@link Ext.data.Store#cfg-filters Store&#39;s filters collection}
          *
-         * Identified Filters may be individually removed from a Store's filter set by using {@link Ext.data.Store#removeFilter}.
+         * Identified Filters may be individually removed from a Store&#39;s filter set by using {@link Ext.data.Store#removeFilter}.
          *
          * Anonymous Filters may be removed en masse by passing `null` to {@link Ext.data.Store#removeFilter}.
          */
@@ -98,13 +98,13 @@ Ext.define('Ext.util.Filter', {
 
 <span id='Ext-util-Filter-cfg-caseSensitive'>        /**
 </span>         * @cfg {Boolean} [caseSensitive=false]
-         * True to make the regex case sensitive (adds 'i' switch to regex).
+         * True to make the regex case sensitive (adds &#39;i&#39; switch to regex).
          */
         caseSensitive: false,
 
 <span id='Ext-util-Filter-cfg-disabled'>        /**
 </span>         * @cfg {Boolean} disabled
-         * Setting this property to `true` disables this individual Filter so that it no longer contributes to a {@link Ext.data.Store#cfg-filters Store's filter set}
+         * Setting this property to `true` disables this individual Filter so that it no longer contributes to a {@link Ext.data.Store#cfg-filters Store&#39;s filter set}
          *
          * When disabled, the next time the store is filtered, the Filter plays no part in filtering and records eliminated by it may rejoin the dataset.
          *
@@ -122,7 +122,7 @@ Ext.define('Ext.util.Filter', {
 
 <span id='Ext-util-Filter-cfg-operator'>        /**
 </span>         * @cfg {String} [operator]
-         * The operator to use to compare the {@link #cfg-property} to this Filter's {@link #cfg-value}
+         * The operator to use to compare the {@link #cfg-property} to this Filter&#39;s {@link #cfg-value}
          *
          * Possible values are:
          *
@@ -137,20 +137,20 @@ Ext.define('Ext.util.Filter', {
          *    * `like`
          *    * /=
          *
-         * The `in` and `notin` operator expects this filter's {@link #cfg-value} to be an array and matches
+         * The `in` and `notin` operator expects this filter&#39;s {@link #cfg-value} to be an array and matches
          * values that are present in that array.
          * 
-         * The `like` operator matches values that contain this filter's {@link #cfg-value} as a
+         * The `like` operator matches values that contain this filter&#39;s {@link #cfg-value} as a
          * substring.
          *
-         * The `'*='` operator uses the {@link #cfg-value} as the source for a `RegExp` and tests whether the
+         * The `&#39;*=&#39;` operator uses the {@link #cfg-value} as the source for a `RegExp` and tests whether the
          * candidate value matches the regular expression.
          */
         operator: null,
 
 <span id='Ext-util-Filter-cfg-root'>        /**
 </span>         * @cfg {String} [root=null]
-         * Optional root property. This is mostly useful when filtering a Store, in which case we set the root to 'data' to
+         * Optional root property. This is mostly useful when filtering a Store, in which case we set the root to &#39;data&#39; to
          * make the filter pull the {@link #property} out of the data object of each item
          */
         root: null,
@@ -257,13 +257,13 @@ Ext.define('Ext.util.Filter', {
          */
         isInvalid: function(cfg) {
             if (!cfg.filterFn) {
-                // If we don't have a filterFn, we must have a property
+                // If we don&#39;t have a filterFn, we must have a property
                 if (!cfg.property) {
-                    return 'A Filter requires either a property or a filterFn to be set';
+                    return &#39;A Filter requires either a property or a filterFn to be set&#39;;
                 }
                 
-                if (!cfg.hasOwnProperty('value') &amp;&amp; !cfg.operator) {
-                    return 'A Filter requires either a property and value, or a filterFn to be set';
+                if (!cfg.hasOwnProperty(&#39;value&#39;) &amp;&amp; !cfg.operator) {
+                    return &#39;A Filter requires either a property and value, or a filterFn to be set&#39;;
                 }
                 
             }
@@ -286,7 +286,7 @@ Ext.define('Ext.util.Filter', {
     },
 
 <span id='Ext-util-Filter-property-preventConvert'>    preventConvert: {
-</span>        'in': 1,
+</span>        &#39;in&#39;: 1,
         notin: 1
     },
 
@@ -314,7 +314,7 @@ Ext.define('Ext.util.Filter', {
         if (!id) {
             id = this.getProperty();
             if (!id) {
-                id = Ext.id(null, 'ext-filter-');
+                id = Ext.id(null, &#39;ext-filter-&#39;);
             }
             this._id = id;
         }
@@ -385,7 +385,7 @@ Ext.define('Ext.util.Filter', {
     },
 
 <span id='Ext-util-Filter-method-getState'>    /**
-</span>     * Returns this filter's state.
+</span>     * Returns this filter&#39;s state.
      * @return {Object}
      */
     getState: function () {
@@ -411,7 +411,7 @@ Ext.define('Ext.util.Filter', {
     },
 
 <span id='Ext-util-Filter-method-serialize'>    /**
-</span>     * Returns this filter's serialized state. This is used when transmitting this filter
+</span>     * Returns this filter&#39;s serialized state. This is used when transmitting this filter
      * to a server.
      * @return {Object}
      */
@@ -454,7 +454,7 @@ Ext.define('Ext.util.Filter', {
     },
 
 <span id='Ext-util-Filter-method-updateDisableOnEmpty'>    updateDisableOnEmpty: function(disableOnEmpty) {
-</span>        // Only poke disabled if true because otherwise we'll smash the disabled
+</span>        // Only poke disabled if true because otherwise we&#39;ll smash the disabled
         // config that may also be getting set.
         if (disableOnEmpty) {
             this.setDisabled(Ext.isEmpty(this.getValue()));
@@ -564,7 +564,7 @@ Ext.define('Ext.util.Filter', {
                 if (v !== me.lastRegExpSource) {
                     me.lastRegExpSource = v;
                     try {
-                        me.regex = new RegExp(v, 'i');
+                        me.regex = new RegExp(v, &#39;i&#39;);
                     } catch (e) {
                         me.regex = null;
                     }
@@ -573,17 +573,17 @@ Ext.define('Ext.util.Filter', {
             }
         });
 
-    // Operator type '==' is the same as operator type '='
-    operatorFns['=='] = operatorFns['='];
+    // Operator type &#39;==&#39; is the same as operator type &#39;=&#39;
+    operatorFns[&#39;==&#39;] = operatorFns[&#39;=&#39;];
 
-    operatorFns.gt = operatorFns['&gt;'];
-    operatorFns.ge = operatorFns['&gt;='];
+    operatorFns.gt = operatorFns[&#39;&gt;&#39;];
+    operatorFns.ge = operatorFns[&#39;&gt;=&#39;];
 
-    operatorFns.lt = operatorFns['&lt;'];
-    operatorFns.le = operatorFns['&lt;='];
+    operatorFns.lt = operatorFns[&#39;&lt;&#39;];
+    operatorFns.le = operatorFns[&#39;&lt;=&#39;];
 
-    operatorFns.eq = operatorFns['='];
-    operatorFns.ne = operatorFns['!='];
+    operatorFns.eq = operatorFns[&#39;=&#39;];
+    operatorFns.ne = operatorFns[&#39;!=&#39;];
 });
 
 </pre>

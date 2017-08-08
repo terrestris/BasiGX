@@ -18,25 +18,25 @@
   <pre class="prettyprint lang-js"><span id='Ext-tree-ViewDragZone'>/**
 </span> * @private
  */
-Ext.define('Ext.tree.ViewDragZone', {
-    extend: 'Ext.view.DragZone',
+Ext.define(&#39;Ext.tree.ViewDragZone&#39;, {
+    extend: &#39;Ext.view.DragZone&#39;,
 
 <span id='Ext-tree-ViewDragZone-method-isPreventDrag'>    isPreventDrag: function(e, record) {
-</span>        return (record.get('allowDrag') === false) || !!e.getTarget(this.view.expanderSelector);
+</span>        return (record.get(&#39;allowDrag&#39;) === false) || !!e.getTarget(this.view.expanderSelector);
     },
 
 <span id='Ext-tree-ViewDragZone-method-getDragText'>    getDragText: function() {
 </span>        var records = this.dragData.records,
             count = records.length,
             text = records[0].get(this.displayField),
-            suffix = 's',
+            suffix = &#39;s&#39;,
             formatRe = /\{\d+\}/,
             dragText = this.dragText;
 
         if (formatRe.test(dragText) &amp;&amp; count === 1 &amp;&amp; text) {
             return text;
         } else if (!text) {
-            suffix = '';
+            suffix = &#39;&#39;;
         }
         return Ext.String.format(dragText, count, suffix);
     },
@@ -54,7 +54,7 @@ Ext.define('Ext.tree.ViewDragZone', {
         if (Ext.enableFx &amp;&amp; me.repairHighlight) {
             // Roll through all records and highlight all the ones we attempted to drag.
             for (r = 0; r &lt; rLen; r++) {
-                // anonymous fns below, don't hoist up unless below is wrapped in
+                // anonymous fns below, don&#39;t hoist up unless below is wrapped in
                 // a self-executing function passing in item.
                 item = view.getNode(records[r]);
 

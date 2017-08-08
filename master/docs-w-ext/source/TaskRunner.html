@@ -30,12 +30,12 @@
  *         clock, updateClock, task;
  *     
  *     clock = Ext.getBody().appendChild({
- *         id: 'clock'
+ *         id: &#39;clock&#39;
  *     });
  *     
  *     // Start a simple clock task that updates a div once per second
  *     updateClock = function() {
- *         clock.setHtml(Ext.Date.format(new Date(), 'g:i:s A'));
+ *         clock.setHtml(Ext.Date.format(new Date(), &#39;g:i:s A&#39;));
  *     };
  *     
  *     task = runner.start({
@@ -49,12 +49,12 @@
  *     var clock, updateClock, task;
  *     
  *     clock = Ext.getBody().appendChild({
- *         id: 'clock'
+ *         id: &#39;clock&#39;
  *     });
  *     
  *     // Start a simple clock task that updates a div once per second
  *     updateClock = function() {
- *         clock.setHtml(Ext.Date.format(new Date(), 'g:i:s A'));
+ *         clock.setHtml(Ext.Date.format(new Date(), &#39;g:i:s A&#39;));
  *     };
  *     
  *     var task = Ext.TaskManager.start({
@@ -120,7 +120,7 @@
  * @param {Number/Object} [interval=10] The minimum precision in milliseconds supported by 
  * this TaskRunner instance. Alternatively, a config object to apply to the new instance.
  */
-Ext.define('Ext.util.TaskRunner', {
+Ext.define(&#39;Ext.util.TaskRunner&#39;, {
 // @require Ext.Function
 
 <span id='Ext-util-TaskRunner-cfg-fireIdleEvent'>    /**
@@ -145,7 +145,7 @@ Ext.define('Ext.util.TaskRunner', {
     constructor: function (interval) {
         var me = this;
 
-        if (typeof interval == 'number') {
+        if (typeof interval == &#39;number&#39;) {
             me.interval = interval;
         } else if (interval) {
             Ext.apply(me, interval);
@@ -211,13 +211,13 @@ Ext.define('Ext.util.TaskRunner', {
      * @param {Number} [task.repeat] The number of times to invoke the task before stopping
      * automatically (defaults to indefinite).
      *
-     * @param {Number} [task.fireIdleEvent=true] If all tasks in a TaskRunner's execution 
+     * @param {Number} [task.fireIdleEvent=true] If all tasks in a TaskRunner&#39;s execution 
      * sweep are configured with `fireIdleEvent: false`, then the 
-     * {@link Ext.GlobalEvents#idle idleEvent} is not fired when the TaskRunner's execution 
+     * {@link Ext.GlobalEvents#idle idleEvent} is not fired when the TaskRunner&#39;s execution 
      * sweep finishes.
      *
      * @param {Boolean} [task.fireOnStart=false] True to run the task immediately instead of 
-     * waiting for the _interval's_ initial pass to call the _run_ function.
+     * waiting for the _interval&#39;s_ initial pass to call the _run_ function.
      */
      start: function(task) {
         var me = this,
@@ -225,7 +225,7 @@ Ext.define('Ext.util.TaskRunner', {
 
         if (!task.pending) {
             me.tasks.push(task);
-            task.pending = true; // don't allow the task to be added to me.tasks again
+            task.pending = true; // don&#39;t allow the task to be added to me.tasks again
         }
 
         task.stopped = false; // might have been previously stopped...
@@ -250,7 +250,7 @@ Ext.define('Ext.util.TaskRunner', {
      * @return {Object} The task
      */
     stop: function(task) {
-        // NOTE: we don't attempt to remove the task from me.tasks at this point because
+        // NOTE: we don&#39;t attempt to remove the task from me.tasks at this point because
         // this could be called from inside a task which would then corrupt the state of
         // the loop in onTick
         if (!task.stopped) {
@@ -292,7 +292,7 @@ Ext.define('Ext.util.TaskRunner', {
             expires, newTasks, i, task, rt, remove, args;
 
         me.timerId = null;
-        me.firing = true; // ensure we don't startTimer during this loop...
+        me.firing = true; // ensure we don&#39;t startTimer during this loop...
 
         // tasks.length can be &gt; len if start is called during a task.run call... so we
         // first check len to avoid tasks.length reference but eventually we need to also
@@ -307,8 +307,8 @@ Ext.define('Ext.util.TaskRunner', {
                 if (expires &lt;= now) {
                     rt = 1; // otherwise we have a stale &quot;rt&quot;
 
-                    // If all tasks left specify fireIdleEvent as false, then don't do it
-                    if (task.hasOwnProperty('fireIdleEvent')) {
+                    // If all tasks left specify fireIdleEvent as false, then don&#39;t do it
+                    if (task.hasOwnProperty(&#39;fireIdleEvent&#39;)) {
                         fireIdleEvent = task.fireIdleEvent;
                     } else {
                         fireIdleEvent = me.fireIdleEvent;
@@ -337,10 +337,10 @@ Ext.define('Ext.util.TaskRunner', {
                                 // &lt;debug&gt;
                                 Ext.log({
                                     fn: task.run,
-                                    prefix: 'Error while running task',
+                                    prefix: &#39;Error while running task&#39;,
                                     stack: taskError.stack,
                                     msg: taskError,
-                                    level: 'error'
+                                    level: &#39;error&#39;
                                 });
                                 // &lt;/debug&gt;
                                 if (task.onError) {
@@ -381,13 +381,13 @@ Ext.define('Ext.util.TaskRunner', {
                 // going into the next wave.
                 if (!newTasks) {
                     newTasks = tasks.slice(0, i);
-                    // we don't set me.tasks here because callbacks can also start tasks,
+                    // we don&#39;t set me.tasks here because callbacks can also start tasks,
                     // which get added to me.tasks... so we will visit them in this loop
                     // and account for their expirations in nextExpires...
                 }
             } else {
                 if (newTasks) {
-                    newTasks.push(task); // we've cloned the tasks[], so keep this one...
+                    newTasks.push(task); // we&#39;ve cloned the tasks[], so keep this one...
                 }
 
                 if (nextExpires &gt; expires) {
@@ -402,7 +402,7 @@ Ext.define('Ext.util.TaskRunner', {
             me.tasks = newTasks;
         }
 
-        me.firing = false; // we're done, so allow startTimer afterwards
+        me.firing = false; // we&#39;re done, so allow startTimer afterwards
 
         if (me.tasks.length) {
             // we create a new Date here because all the callbacks could have taken a long
@@ -413,7 +413,7 @@ Ext.define('Ext.util.TaskRunner', {
         
         // After a tick
         if (fireIdleEvent !== false &amp;&amp; globalEvents.hasListeners.idle) {
-            globalEvents.fireEvent('idle');
+            globalEvents.fireEvent(&#39;idle&#39;);
         }
    },
 
@@ -475,7 +475,7 @@ function () {
 
 <span id='Ext-util-TaskRunner-Task-method-restart'>        /**
 </span>         * Restarts this task, clearing it duration, expiration and run count.
-         * @param {Number} [interval] Optionally reset this task's interval.
+         * @param {Number} [interval] Optionally reset this task&#39;s interval.
          */
         restart: function (interval) {
             if (interval !== undefined) {
@@ -487,7 +487,7 @@ function () {
 
 <span id='Ext-util-TaskRunner-Task-method-start'>        /**
 </span>         * Starts this task if it is not already started.
-         * @param {Number} [interval] Optionally reset this task's interval.
+         * @param {Number} [interval] Optionally reset this task&#39;s interval.
          */
         start: function (interval) {
             if (this.stopped) {
@@ -506,7 +506,7 @@ function () {
     proto = me.Task.prototype;
 
 <span id='Ext-util-TaskRunner-Task-method-destroy'>    /**
-</span>     * Destroys this instance, stopping this task's execution.
+</span>     * Destroys this instance, stopping this task&#39;s execution.
      * @method destroy
      * @member Ext.util.TaskRunner.Task
      */

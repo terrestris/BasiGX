@@ -21,11 +21,11 @@
  * save {@link Ext.data.Model model instances} for offline use.
  * @private
  */
-Ext.define('Ext.data.proxy.WebStorage', {
-    extend: 'Ext.data.proxy.Client',
-    alternateClassName: 'Ext.data.WebStorageProxy',
+Ext.define(&#39;Ext.data.proxy.WebStorage&#39;, {
+    extend: &#39;Ext.data.proxy.Client&#39;,
+    alternateClassName: &#39;Ext.data.WebStorageProxy&#39;,
     requires: [
-        'Ext.data.identifier.Sequential'
+        &#39;Ext.data.identifier.Sequential&#39;
     ],
 
     config: {
@@ -201,7 +201,7 @@ Ext.define('Ext.data.proxy.WebStorage', {
             }));
             operation.setSuccessful(true);
         } else {
-            operation.setException('Unable to load records');
+            operation.setException(&#39;Unable to load records&#39;);
         }
     },
 
@@ -219,8 +219,8 @@ Ext.define('Ext.data.proxy.WebStorage', {
             this.setRecord(record);
             record.commit();
 
-            //we need to update the set of ids here because it's possible that a non-phantom record was added
-            //to this proxy - in which case the record's id would never have been added via the normal 'create' call
+            //we need to update the set of ids here because it&#39;s possible that a non-phantom record was added
+            //to this proxy - in which case the record&#39;s id would never have been added via the normal &#39;create&#39; call
             id = record.getId();
             if (id !== undefined &amp;&amp; Ext.Array.indexOf(ids, id) === -1) {
                 ids.push(id);
@@ -261,7 +261,7 @@ Ext.define('Ext.data.proxy.WebStorage', {
 <span id='Ext-data-proxy-WebStorage-method-getRecord'>    /**
 </span>     * @private
      * Fetches record data from the Proxy by ID.
-     * @param {String} id The record's unique ID
+     * @param {String} id The record&#39;s unique ID
      * @return {Object} The record data
      */
     getRecord: function(id) {
@@ -284,11 +284,11 @@ Ext.define('Ext.data.proxy.WebStorage', {
 <span id='Ext-data-proxy-WebStorage-method-setRecord'>    /**
 </span>     * Saves the given record in the Proxy.
      * @param {Ext.data.Model} record The model instance
-     * @param {String} [id] The id to save the record under (defaults to the value of the record's getId() function)
+     * @param {String} [id] The id to save the record under (defaults to the value of the record&#39;s getId() function)
      */
     setRecord: function(record, id) {
         if (id) {
-            record.set('id', id, {
+            record.set(&#39;id&#39;, id, {
                 commit: true
             });
         } else {
@@ -322,8 +322,8 @@ Ext.define('Ext.data.proxy.WebStorage', {
         // no need to store the id in the data, since it is already stored in the record key
         delete data[model.prototype.idProperty];
 
-        // if the record is a tree node and it's a direct child of the root node, do not store the parentId
-        if(record.isNode &amp;&amp; record.get('depth') === 1) {
+        // if the record is a tree node and it&#39;s a direct child of the root node, do not store the parentId
+        if(record.isNode &amp;&amp; record.get(&#39;depth&#39;) === 1) {
             delete data.parentId;
         }
 
@@ -460,7 +460,7 @@ Ext.define('Ext.data.proxy.WebStorage', {
         obj.setItem(key, id);
 
         if(isString) {
-            id = id + '';
+            id = id + &#39;&#39;;
         }
 
         return id;
@@ -512,14 +512,14 @@ Ext.define('Ext.data.proxy.WebStorage', {
                 parent.children = children = [];
             }
 
-            // push the record onto its parent's children array
+            // push the record onto its parent&#39;s children array
             children.push(record);
         }
 
         for(i = length; i--;) {
             record = records[i];
             if (!record.children &amp;&amp; !record.leaf) {
-                // set non-leaf nodes with no children to loaded so the proxy won't try to dynamically load their contents when they are expanded
+                // set non-leaf nodes with no children to loaded so the proxy won&#39;t try to dynamically load their contents when they are expanded
                 record.loaded = true;
             }
         }

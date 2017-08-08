@@ -18,11 +18,11 @@
   <pre class="prettyprint lang-js"><span id='Ext-mixin-Hookable'>/**
 </span> * @private
  */
-Ext.define('Ext.mixin.Hookable', {
-    extend: 'Ext.Mixin',
+Ext.define(&#39;Ext.mixin.Hookable&#39;, {
+    extend: &#39;Ext.Mixin&#39;,
 
 <span id='Ext-mixin-Hookable-property-mixinConfig'>    mixinConfig: {
-</span>        id: 'hookable'
+</span>        id: &#39;hookable&#39;
     },
 
 <span id='Ext-mixin-Hookable-method-bindHook'>    bindHook: function(instance, boundMethod, bindingMethod, preventDefault, extraArgs) {
@@ -33,7 +33,7 @@ Ext.define('Ext.mixin.Hookable', {
         var boundFn = instance[boundMethod],
             fn, binding;
 
-        if (boundFn &amp;&amp; boundFn.hasOwnProperty('$binding')) {
+        if (boundFn &amp;&amp; boundFn.hasOwnProperty(&#39;$binding&#39;)) {
             binding = boundFn.$binding;
             if (binding.bindingMethod === bindingMethod &amp;&amp; binding.bindingScope === this) {
                 return this;

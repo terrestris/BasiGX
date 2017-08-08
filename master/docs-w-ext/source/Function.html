@@ -63,7 +63,7 @@ Ext.Function = (function() {
                 }
             }
 
-            // Clear all fired animation frame handlers, don't forget that new handlers
+            // Clear all fired animation frame handlers, don&#39;t forget that new handlers
             // could have been created in user handler functions called in the loop above
             animFrameHandlers = animFrameHandlers.slice(len);
         },
@@ -88,13 +88,13 @@ Ext.Function = (function() {
          *
          *     // Afterwards
          *     // Setting a single name - value
-         *     setValue('name1', 'value1');
+         *     setValue(&#39;name1&#39;, &#39;value1&#39;);
          *
          *     // Settings multiple name - value pairs
          *     setValue({
-         *         name1: 'value1',
-         *         name2: 'value2',
-         *         name3: 'value3'
+         *         name1: &#39;value1&#39;,
+         *         name2: &#39;value2&#39;,
+         *         name3: &#39;value3&#39;
          *     });
          *
          * @param {Function} setter The single value setter method.
@@ -107,7 +107,7 @@ Ext.Function = (function() {
                 var k, i;
 
                 if (name !== null) {
-                    if (typeof name !== 'string') {
+                    if (typeof name !== &#39;string&#39;) {
                         for (k in name) {
                             if (name.hasOwnProperty(k)) {
                                 setter.call(this, k, name[k]);
@@ -176,7 +176,7 @@ Ext.Function = (function() {
                     callArgs = slice.call(arguments, 0);
                     callArgs = callArgs.concat(args);
                 }
-                else if (typeof appendArgs === 'number') {
+                else if (typeof appendArgs === &#39;number&#39;) {
                     callArgs = slice.call(arguments, 0); // copy arguments first
                     Ext.Array.insert(callArgs, appendArgs, args);
                 }
@@ -206,19 +206,19 @@ Ext.Function = (function() {
 
 <span id='Ext-Function-method-pass'>        /**
 </span>         * Create a new function from the provided `fn`, the arguments of which are pre-set to `args`.
-         * New arguments passed to the newly created callback when it's invoked are appended after the pre-set ones.
+         * New arguments passed to the newly created callback when it&#39;s invoked are appended after the pre-set ones.
          * This is especially useful when creating callbacks.
          *
          * For example:
          *
          *     var originalFunction = function(){
-         *         alert(Ext.Array.from(arguments).join(' '));
+         *         alert(Ext.Array.from(arguments).join(&#39; &#39;));
          *     };
          *
-         *     var callback = Ext.Function.pass(originalFunction, ['Hello', 'World']);
+         *     var callback = Ext.Function.pass(originalFunction, [&#39;Hello&#39;, &#39;World&#39;]);
          *
-         *     callback(); // alerts 'Hello World'
-         *     callback('by Me'); // alerts 'Hello World by Me'
+         *     callback(); // alerts &#39;Hello World&#39;
+         *     callback(&#39;by Me&#39;); // alerts &#39;Hello World by Me&#39;
          *
          * {@link Ext#pass Ext.pass} is alias for {@link Ext.Function#pass Ext.Function.pass}
          *
@@ -276,19 +276,19 @@ Ext.Function = (function() {
          * The passed function is called with the parameters of the original function. Example usage:
          *
          *     var sayHi = function(name){
-         *         alert('Hi, ' + name);
+         *         alert(&#39;Hi, &#39; + name);
          *     };
          *
-         *     sayHi('Fred'); // alerts &quot;Hi, Fred&quot;
+         *     sayHi(&#39;Fred&#39;); // alerts &quot;Hi, Fred&quot;
          *
          *     // create a new function that validates input without
          *     // directly modifying the original function:
          *     var sayHiToFriend = Ext.Function.createInterceptor(sayHi, function(name){
-         *         return name === 'Brian';
+         *         return name === &#39;Brian&#39;;
          *     });
          *
-         *     sayHiToFriend('Fred');  // no alert
-         *     sayHiToFriend('Brian'); // alerts &quot;Hi, Brian&quot;
+         *     sayHiToFriend(&#39;Fred&#39;);  // no alert
+         *     sayHiToFriend(&#39;Brian&#39;); // alerts &quot;Hi, Brian&quot;
          *
          * @param {Function} origFn The original function.
          * @param {Function} newFn The function to call before the original.
@@ -348,19 +348,19 @@ Ext.Function = (function() {
 </span>         * Calls this function after the number of milliseconds specified, optionally in a specific scope. Example usage:
          *
          *     var sayHi = function(name){
-         *         alert('Hi, ' + name);
+         *         alert(&#39;Hi, &#39; + name);
          *     }
          *
          *     // executes immediately:
-         *     sayHi('Fred');
+         *     sayHi(&#39;Fred&#39;);
          *
          *     // executes after 2 seconds:
-         *     Ext.Function.defer(sayHi, 2000, this, ['Fred']);
+         *     Ext.Function.defer(sayHi, 2000, this, [&#39;Fred&#39;]);
          *
          *     // this syntax is sometimes useful for deferring
          *     // execution of an anonymous function:
          *     Ext.Function.defer(function(){
-         *         alert('Anonymous');
+         *         alert(&#39;Anonymous&#39;);
          *     }, 100);
          *
          * {@link Ext#defer Ext.defer} is alias for {@link Ext.Function#defer Ext.Function.defer}
@@ -421,16 +421,16 @@ Ext.Function = (function() {
          * The passed function is called with the parameters of the original function. Example usage:
          *
          *     var sayHi = function(name){
-         *         alert('Hi, ' + name);
+         *         alert(&#39;Hi, &#39; + name);
          *     };
          *
-         *     sayHi('Fred'); // alerts &quot;Hi, Fred&quot;
+         *     sayHi(&#39;Fred&#39;); // alerts &quot;Hi, Fred&quot;
          *
          *     var sayGoodbye = Ext.Function.createSequence(sayHi, function(name){
-         *         alert('Bye, ' + name);
+         *         alert(&#39;Bye, &#39; + name);
          *     });
          *
-         *     sayGoodbye('Fred'); // both alerts show
+         *     sayGoodbye(&#39;Fred&#39;); // both alerts show
          *
          * @param {Function} originalFn The original function.
          * @param {Function} newFn The function to sequence.
@@ -554,7 +554,7 @@ Ext.Function = (function() {
         },
 
         cancelAnimationFrame: function(id) {
-            // Don't remove any handlers from animFrameHandlers array, because
+            // Don&#39;t remove any handlers from animFrameHandlers array, because
             // the might be in use at the moment (when cancelAnimationFrame is called).
             // Just remove the handler id from the map so it will not be executed
             delete animFrameMap[id];
@@ -728,9 +728,9 @@ Ext.Function = (function() {
             //&lt;debug&gt;
             if (!scope[callback]) {
                 if (scope.$className) {
-                    Ext.raise('No method &quot;' + callback + '&quot; on ' + scope.$className);
+                    Ext.raise(&#39;No method &quot;&#39; + callback + &#39;&quot; on &#39; + scope.$className);
                 }
-                Ext.raise('No method &quot;' + callback + '&quot;');
+                Ext.raise(&#39;No method &quot;&#39; + callback + &#39;&quot;&#39;);
             }
             //&lt;/debug&gt;
 
@@ -774,7 +774,7 @@ Ext.Function = (function() {
          *      }
          *
          *      permutation = Ext.Function.memoize(permutation, null, function (n, k) {
-         *          n + '-' + k;
+         *          n + &#39;-&#39; + k;
          *      });
          *
          * In this case, the `memoize` of `factorial` is sufficient optimization, but the
@@ -812,7 +812,7 @@ Ext.Function = (function() {
 </span>     * @member Ext
      * @method asap
      * Schedules the specified callback function to be executed on the next turn of the
-     * event loop. Where available, this method uses the browser's `setImmediate` API. If
+     * event loop. Where available, this method uses the browser&#39;s `setImmediate` API. If
      * not available, this method substitutes `setTimeout(0)`. Though not a perfect
      * replacement for `setImmediate` it is sufficient for many use cases.
      *

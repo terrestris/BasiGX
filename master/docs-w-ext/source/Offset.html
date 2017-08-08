@@ -18,7 +18,7 @@
   <pre class="prettyprint lang-js"><span id='Ext-util-Offset'>/**
 </span> * @private
  */
-Ext.define('Ext.util.Offset', {
+Ext.define(&#39;Ext.util.Offset&#39;, {
 
     /* Begin Definitions */
 
@@ -27,7 +27,7 @@ Ext.define('Ext.util.Offset', {
 </span>            if (obj instanceof this) {
                 return obj;
             }
-            if (typeof obj === 'number') {
+            if (typeof obj === &#39;number&#39;) {
                 return new this(obj, obj);
             }
             if (obj.length) {
@@ -62,7 +62,7 @@ Ext.define('Ext.util.Offset', {
 <span id='Ext-util-Offset-method-equals'>    equals: function(offset) {
 </span>        //&lt;debug&gt;
         if(!(offset instanceof this.statics())) {
-            Ext.raise('Offset must be an instance of Ext.util.Offset');
+            Ext.raise(&#39;Offset must be an instance of Ext.util.Offset&#39;);
         }
         //&lt;/debug&gt;
 
@@ -72,7 +72,7 @@ Ext.define('Ext.util.Offset', {
 <span id='Ext-util-Offset-method-add'>    add: function(offset) {
 </span>        //&lt;debug&gt;
         if(!(offset instanceof this.statics())) {
-            Ext.raise('Offset must be an instance of Ext.util.Offset');
+            Ext.raise(&#39;Offset must be an instance of Ext.util.Offset&#39;);
         }
         //&lt;/debug&gt;
 

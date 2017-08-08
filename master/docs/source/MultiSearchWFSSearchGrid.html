@@ -46,31 +46,31 @@
  * @requires BasiGX.util.Animate
  *
  */
-Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
-    extend: 'Ext.grid.Panel',
-    xtype: 'basigx-grid-multisearchwfssearchgrid',
+Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
+    extend: &#39;Ext.grid.Panel&#39;,
+    xtype: &#39;basigx-grid-multisearchwfssearchgrid&#39;,
 
     requires: [
-        'GeoExt.component.FeatureRenderer',
-        'GeoExt.data.store.Features',
-        'BasiGX.util.Map',
-        'BasiGX.util.Layer',
-        'BasiGX.util.Animate'
+        &#39;GeoExt.component.FeatureRenderer&#39;,
+        &#39;GeoExt.data.store.Features&#39;,
+        &#39;BasiGX.util.Map&#39;,
+        &#39;BasiGX.util.Layer&#39;,
+        &#39;BasiGX.util.Animate&#39;
     ],
 
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-viewModel'>    viewModel: {
 </span>        data: {
-            title: 'Objektsuche'
+            title: &#39;Objektsuche&#39;
         }
     },
 
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-bind'>    bind: {
-</span>        title: '{title}'
+</span>        title: &#39;{title}&#39;
     },
 
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-store'>    store: null,
 </span>
-<span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-cls'>    cls: 'search-result-grid',
+<span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-cls'>    cls: &#39;search-result-grid&#39;,
 </span>
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-searchResultVectorLayer'>    searchResultVectorLayer: null,
 </span>
@@ -78,9 +78,9 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
 </span>
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-titleCollapse'>    titleCollapse: true,
 </span>
-<span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-collapseDirection'>    collapseDirection: 'top',
+<span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-collapseDirection'>    collapseDirection: &#39;top&#39;,
 </span>
-<span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-headerPosition'>    headerPosition: 'left',
+<span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-headerPosition'>    headerPosition: &#39;left&#39;,
 </span>
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-hideHeaders'>    hideHeaders: true,
 </span>
@@ -95,7 +95,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-cfg-typeDelay'>        typeDelay: 300,
 </span>
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-cfg-allowedFeatureTypeDataTypes'>        allowedFeatureTypeDataTypes: [
-</span>            'xsd:string'
+</span>            &#39;xsd:string&#39;
         ],
 
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-cfg-searchTerm'>        searchTerm: null,
@@ -108,15 +108,15 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
 </span>            image: new ol.style.Circle({
                 radius: 6,
                 fill: new ol.style.Fill({
-                    color: '#4990D1'
+                    color: &#39;#4990D1&#39;
                 }),
                 stroke: new ol.style.Stroke({
-                    color: '#fff',
+                    color: &#39;#fff&#39;,
                     width: 2
                 })
             }),
             stroke: new ol.style.Stroke({
-                color: '#4990D1',
+                color: &#39;#4990D1&#39;,
                 width: 4
             })
         }),
@@ -125,15 +125,15 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
 </span>            image: new ol.style.Circle({
                 radius: 8,
                 fill: new ol.style.Fill({
-                    color: '#EE0000'
+                    color: &#39;#EE0000&#39;
                 }),
                 stroke: new ol.style.Stroke({
-                    color: '#fff',
+                    color: &#39;#fff&#39;,
                     width: 2
                 })
             }),
             stroke: new ol.style.Stroke({
-                color: '#EE0000',
+                color: &#39;#EE0000&#39;,
                 width: 6
             })
         }),
@@ -145,15 +145,15 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
             image: new ol.style.Circle({
                 radius: 10,
                 fill: new ol.style.Fill({
-                    color: '#EE0000'
+                    color: &#39;#EE0000&#39;
                 }),
                 stroke: new ol.style.Stroke({
-                    color: '#fff',
+                    color: &#39;#fff&#39;,
                     width: 2
                 })
             }),
             stroke: new ol.style.Stroke({
-                color: '#EE0000',
+                color: &#39;#EE0000&#39;,
                 width: 8
             })
         }),
@@ -173,8 +173,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
 </span>    *
     */
     features: [{
-        ftype: 'grouping',
-        groupHeaderTpl: 'Layer: {name}'
+        ftype: &#39;grouping&#39;,
+        groupHeaderTpl: &#39;Layer: {name}&#39;
     }],
 
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-columns'>    /**
@@ -182,30 +182,30 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
     */
     columns: [
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-'>        /**
-</span>               * @todo gx_renderer doesn't render all features every time
+</span>               * @todo gx_renderer doesn&#39;t render all features every time
                */
     //    {
-    //        xtype: 'widgetcolumn',
+    //        xtype: &#39;widgetcolumn&#39;,
     //        flex: 1,
     //        widget: {
-    //            xtype: 'gx_renderer'
+    //            xtype: &#39;gx_renderer&#39;
     //        },
     //        onWidgetAttach: function(column, gxRenderer, record) {
     //            // update the symbolizer with the related feature
     //            var feature = record.getFeature();
     //            gxRenderer.update({
     //                feature: feature,
-    //                symbolizers: this.up('grid').getSearchResultFeatureStyle()
+    //                symbolizers: this.up(&#39;grid&#39;).getSearchResultFeatureStyle()
     //            });
     //        }
     //    },
         {
-            text: 'Feature',
-            dataIndex: 'displayfield',
+            text: &#39;Feature&#39;,
+            dataIndex: &#39;displayfield&#39;,
             flex: 5,
             renderer: function(value) {
-                return '&lt;span data-qtip=&quot;' + value + '&quot;&gt;' +
-                value + '&lt;/span&gt;';
+                return &#39;&lt;span data-qtip=&quot;&#39; + value + &#39;&quot;&gt;&#39; +
+                value + &#39;&lt;/span&gt;&#39;;
             }
         }
     ],
@@ -222,7 +222,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
 
         if (!me.searchResultVectorLayer) {
             me.searchResultVectorLayer = new ol.layer.Vector({
-                name: 'Object Search Results',
+                name: &#39;Object Search Results&#39;,
                 source: new ol.source.Vector(),
                 style: me.getSearchResultFeatureStyle(),
                 hoverable: false
@@ -234,25 +234,25 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
             me.map.addLayer(me.searchResultVectorLayer);
         }
 
-        var searchResultStore = Ext.create('GeoExt.data.store.Features', {
+        var searchResultStore = Ext.create(&#39;GeoExt.data.store.Features&#39;, {
             map: me.map,
             layer: me.searchResultVectorLayer,
-            groupField: 'featuretype'
+            groupField: &#39;featuretype&#39;
         });
 
         me.setStore(searchResultStore);
 
 
-        me.on('describeFeatureTypeResponse', me.getFeatures);
-        me.on('getFeatureResponse', me.showSearchResults);
+        me.on(&#39;describeFeatureTypeResponse&#39;, me.getFeatures);
+        me.on(&#39;getFeatureResponse&#39;, me.showSearchResults);
 
         // add listeners
-        me.on('boxready', me.onBoxReady, me);
-        me.on('itemmouseenter', me.highlightFeature, me);
-        me.on('itemmouseleave', me.unhighlightFeature, me);
-        me.on('itemclick', me.highlightSelectedFeature, me);
+        me.on(&#39;boxready&#39;, me.onBoxReady, me);
+        me.on(&#39;itemmouseenter&#39;, me.highlightFeature, me);
+        me.on(&#39;itemmouseleave&#39;, me.unhighlightFeature, me);
+        me.on(&#39;itemclick&#39;, me.highlightSelectedFeature, me);
         // unregister listeners on grid hide
-        me.on('hide', me.unregisterListeners, me);
+        me.on(&#39;hide&#39;, me.unregisterListeners, me);
 
     },
 
@@ -286,10 +286,10 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         });
 
         var describeFeatureTypeParams = {
-            REQUEST: 'DescribeFeatureType',
-            SERVICE: 'WFS',
-            VERSION: '1.1.0',
-            OUTPUTFORMAT: 'application/json',
+            REQUEST: &#39;DescribeFeatureType&#39;,
+            SERVICE: &#39;WFS&#39;,
+            VERSION: &#39;1.1.0&#39;,
+            OUTPUTFORMAT: &#39;application/json&#39;,
             TYPENAME: typeNames.toString()
         };
 
@@ -298,7 +298,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         Ext.Ajax.request({
             url: combo.getWfsServerUrl(),
             params: describeFeatureTypeParams,
-            method: 'GET',
+            method: &#39;GET&#39;,
             success: function(response) {
                 me.setLoading(false);
                 if (Ext.isString(response.responseText)) {
@@ -306,14 +306,14 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                 } else if (Ext.isObject(response.responseText)) {
                     featureTypes = response.responseText;
                 } else {
-                    Ext.log.error('Error! Could not parse ' +
-                        'describe featuretype response!');
+                    Ext.log.error(&#39;Error! Could not parse &#39; +
+                        &#39;describe featuretype response!&#39;);
                 }
-                me.fireEvent('describeFeatureTypeResponse', featureTypes);
+                me.fireEvent(&#39;describeFeatureTypeResponse&#39;, featureTypes);
             },
             failure: function(response) {
                 me.setLoading(false);
-                Ext.log.error('Error on describe featuretype request:',
+                Ext.log.error(&#39;Error on describe featuretype request:&#39;,
                     response);
             }
         });
@@ -339,7 +339,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
 
         Ext.Ajax.request({
             url: url,
-            method: 'POST',
+            method: &#39;POST&#39;,
             headers: BasiGX.util.CSRF.getHeader(),
             xmlData: xml,
             success: function(response) {
@@ -349,14 +349,14 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                 } else if (Ext.isObject(response.responseText)) {
                     features = response.responseText.features;
                 } else {
-                    Ext.log.error('Error! Could not parse ' +
-                        'GetFeature response!');
+                    Ext.log.error(&#39;Error! Could not parse &#39; +
+                        &#39;GetFeature response!&#39;);
                 }
-                me.fireEvent('getFeatureResponse', features);
+                me.fireEvent(&#39;getFeatureResponse&#39;, features);
             },
             failure: function(response) {
                 me.setLoading(false);
-                Ext.log.error('Error on GetFeature request:',
+                Ext.log.error(&#39;Error on GetFeature request:&#39;,
                     response);
             }
         });
@@ -382,7 +382,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
             Ext.each(ft.properties, function(prop) {
                 if (Ext.Array.contains(
                     me.getAllowedFeatureTypeDataTypes(), prop.type) &amp;&amp;
-                    prop.name.indexOf(' ') &lt; 0) {
+                    prop.name.indexOf(&#39; &#39;) &lt; 0) {
                     cleanedFeatureType[index].properties.push(prop);
                 }
             });
@@ -391,7 +391,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
     },
 
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-method-setupXmlPostBody'>    /**
-</span>     * Sets up a XML as string for a 'wfs:GetFeature'-operation.
+</span>     * Sets up a XML as string for a &#39;wfs:GetFeature&#39;-operation.
      *
      * Called by #getFeatures to build the POST Body. It decides if the search
      * should be done in the visible extent only.
@@ -416,48 +416,48 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
             bbox = totalExtent;
         }
 
-        var bboxll = bbox[0] + ' ' + bbox[1];
-        var bboxur = bbox[2] + ' ' + bbox[3];
+        var bboxll = bbox[0] + &#39; &#39; + bbox[1];
+        var bboxur = bbox[2] + &#39; &#39; + bbox[3];
 
         var xml =
-            '&lt;wfs:GetFeature service=&quot;WFS&quot; version=&quot;1.1.0&quot; ' +
-              'outputFormat=&quot;application/json&quot; ' +
-              'xmlns:wfs=&quot;http://www.opengis.net/wfs&quot; ' +
-              'xmlns:ogc=&quot;http://www.opengis.net/ogc&quot; ' +
-              'xmlns:gml=&quot;http://www.opengis.net/gml&quot; ' +
-              'xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; ' +
-              'xsi:schemaLocation=&quot;http://www.opengis.net/wfs ' +
-              'http://schemas.opengis.net/wfs/1.1.0/WFS-basic.xsd&quot;&gt;';
+            &#39;&lt;wfs:GetFeature service=&quot;WFS&quot; version=&quot;1.1.0&quot; &#39; +
+              &#39;outputFormat=&quot;application/json&quot; &#39; +
+              &#39;xmlns:wfs=&quot;http://www.opengis.net/wfs&quot; &#39; +
+              &#39;xmlns:ogc=&quot;http://www.opengis.net/ogc&quot; &#39; +
+              &#39;xmlns:gml=&quot;http://www.opengis.net/gml&quot; &#39; +
+              &#39;xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; &#39; +
+              &#39;xsi:schemaLocation=&quot;http://www.opengis.net/wfs &#39; +
+              &#39;http://schemas.opengis.net/wfs/1.1.0/WFS-basic.xsd&quot;&gt;&#39;;
 
         Ext.each(featureTypes, function(ft) {
             Ext.each(ft.properties, function(prop) {
                 xml +=
-                    '&lt;wfs:Query typeName=&quot;' + me.getCombo().getWfsPrefix() +
-                           ft.typeName + '&quot;&gt;' +
-                     '&lt;ogc:Filter&gt;' +
-                      '&lt;ogc:And&gt;' +
-                       '&lt;ogc:BBOX&gt;' +
-                        '&lt;gml:Envelope srsName=&quot;' + projection + '&quot;&gt;' +
-                         '&lt;gml:lowerCorner&gt;' + bboxll + '&lt;/gml:lowerCorner&gt;' +
-                         '&lt;gml:upperCorner&gt;' + bboxur + '&lt;/gml:upperCorner&gt;' +
-                        '&lt;/gml:Envelope&gt;' +
-                       '&lt;/ogc:BBOX&gt;' +
-                       '&lt;ogc:PropertyIsLike wildCard=&quot;*&quot; singleChar=&quot;.&quot;' +
-                        ' escape=&quot;\\&quot; matchCase=&quot;false&quot;&gt;' +
-                        '&lt;ogc:PropertyName&gt;' +
+                    &#39;&lt;wfs:Query typeName=&quot;&#39; + me.getCombo().getWfsPrefix() +
+                           ft.typeName + &#39;&quot;&gt;&#39; +
+                     &#39;&lt;ogc:Filter&gt;&#39; +
+                      &#39;&lt;ogc:And&gt;&#39; +
+                       &#39;&lt;ogc:BBOX&gt;&#39; +
+                        &#39;&lt;gml:Envelope srsName=&quot;&#39; + projection + &#39;&quot;&gt;&#39; +
+                         &#39;&lt;gml:lowerCorner&gt;&#39; + bboxll + &#39;&lt;/gml:lowerCorner&gt;&#39; +
+                         &#39;&lt;gml:upperCorner&gt;&#39; + bboxur + &#39;&lt;/gml:upperCorner&gt;&#39; +
+                        &#39;&lt;/gml:Envelope&gt;&#39; +
+                       &#39;&lt;/ogc:BBOX&gt;&#39; +
+                       &#39;&lt;ogc:PropertyIsLike wildCard=&quot;*&quot; singleChar=&quot;.&quot;&#39; +
+                        &#39; escape=&quot;\\&quot; matchCase=&quot;false&quot;&gt;&#39; +
+                        &#39;&lt;ogc:PropertyName&gt;&#39; +
                          prop.name +
-                        '&lt;/ogc:PropertyName&gt;' +
-                        '&lt;ogc:Literal&gt;' +
-                         '*' + me.searchTerm + '*' +
-                         '&lt;/ogc:Literal&gt;' +
-                       '&lt;/ogc:PropertyIsLike&gt;' +
-                      '&lt;/ogc:And&gt;' +
-                     '&lt;/ogc:Filter&gt;' +
-                   '&lt;/wfs:Query&gt;';
+                        &#39;&lt;/ogc:PropertyName&gt;&#39; +
+                        &#39;&lt;ogc:Literal&gt;&#39; +
+                         &#39;*&#39; + me.searchTerm + &#39;*&#39; +
+                         &#39;&lt;/ogc:Literal&gt;&#39; +
+                       &#39;&lt;/ogc:PropertyIsLike&gt;&#39; +
+                      &#39;&lt;/ogc:And&gt;&#39; +
+                     &#39;&lt;/ogc:Filter&gt;&#39; +
+                   &#39;&lt;/wfs:Query&gt;&#39;;
             });
         });
 
-        xml += '&lt;/wfs:GetFeature&gt;';
+        xml += &#39;&lt;/wfs:GetFeature&gt;&#39;;
 
         return xml;
     },
@@ -477,7 +477,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         var parser = new ol.format.GeoJSON();
 
         if (!features) {
-            Ext.log.error('No feature found');
+            Ext.log.error(&#39;No feature found&#39;);
         } else {
             if (features.length &gt; 0) {
                 me.show();
@@ -485,7 +485,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
 
             var searchTerm = me.searchTerm;
             Ext.each(features, function(feature) {
-                var featuretype = feature.id.split('.')[0];
+                var featuretype = feature.id.split(&#39;.&#39;)[0];
                 var displayfield;
 
                 // find the matching value in order to display it
@@ -538,10 +538,10 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
     unregisterListeners: function() {
         var me = this;
 
-        me.un('boxready', me.onBoxReady, me);
-        me.un('itemmouseenter', me.highlightFeature, me);
-        me.un('itemmouseleave', me.unhighlightFeature, me);
-        me.un('itemclick', me.highlightSelectedFeature, me);
+        me.un(&#39;boxready&#39;, me.onBoxReady, me);
+        me.un(&#39;itemmouseenter&#39;, me.highlightFeature, me);
+        me.un(&#39;itemmouseleave&#39;, me.unhighlightFeature, me);
+        me.un(&#39;itemclick&#39;, me.highlightSelectedFeature, me);
 
     },
 

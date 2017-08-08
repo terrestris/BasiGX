@@ -17,12 +17,12 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-data-field-Boolean'>/**
 </span> */
-Ext.define('Ext.data.field.Boolean', {
-    extend: 'Ext.data.field.Field',
+Ext.define(&#39;Ext.data.field.Boolean&#39;, {
+    extend: &#39;Ext.data.field.Field&#39;,
 
     alias: [
-        'data.field.bool',
-        'data.field.boolean'
+        &#39;data.field.bool&#39;,
+        &#39;data.field.boolean&#39;
     ],
 
 <span id='Ext-data-field-Boolean-property-isBooleanField'>    isBooleanField: true,
@@ -34,17 +34,17 @@ Ext.define('Ext.data.field.Boolean', {
     trueRe: /^\s*(?:true|yes|on|1)\s*$/i,
 
 <span id='Ext-data-field-Boolean-method-convert'>    convert: function (v) {
-</span>        if (typeof v === 'boolean') {
+</span>        if (typeof v === &#39;boolean&#39;) {
             return v;
         }
-        if (this.allowNull &amp;&amp; (v === undefined || v === null || v === '')) {
+        if (this.allowNull &amp;&amp; (v === undefined || v === null || v === &#39;&#39;)) {
             return null;
         }
         return this.trueRe.test(String(v));
     },
     
 <span id='Ext-data-field-Boolean-method-getType'>    getType: function() {
-</span>        return 'bool';
+</span>        return &#39;bool&#39;;
     }
 });
 </pre>

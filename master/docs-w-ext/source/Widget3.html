@@ -15,14 +15,14 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.rtl.slider.Widget', {
-    override: 'Ext.slider.Widget',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.rtl.slider.Widget&#39;, {
+    override: &#39;Ext.slider.Widget&#39;,
     
     constructor: function(config) {
         this.callParent([config]);
         
         if (this.getInherited().rtl) {
-            this.horizontalProp = 'right';
+            this.horizontalProp = &#39;right&#39;;
         }
     }
 });

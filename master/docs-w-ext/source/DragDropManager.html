@@ -30,15 +30,15 @@
  * this class directly, but it does have helper methods that could
  * be useful in your DragDrop implementations.
  */
-Ext.define('Ext.dd.DragDropManager', {
+Ext.define(&#39;Ext.dd.DragDropManager&#39;, {
     singleton: true,
 
-    requires: ['Ext.util.Region'],
+    requires: [&#39;Ext.util.Region&#39;],
 
-    uses: ['Ext.tip.QuickTipManager'],
+    uses: [&#39;Ext.tip.QuickTipManager&#39;],
 
     // shorter ClassName, to save bytes and use internally
-    alternateClassName: ['Ext.dd.DragDropMgr', 'Ext.dd.DDM'],
+    alternateClassName: [&#39;Ext.dd.DragDropMgr&#39;, &#39;Ext.dd.DDM&#39;],
 
 <span id='Ext-dd-DragDropManager-property-ids'>    /**
 </span>     * @property {String[]} ids
@@ -167,7 +167,7 @@ Ext.define('Ext.dd.DragDropManager', {
      * @readonly
      * Class to add to the {@link Ext.dd.DragDrop#getDragEl dragged element} of a DragDrop instance.
      */
-    dragCls: Ext.baseCSSPrefix + 'dd-drag-current',
+    dragCls: Ext.baseCSSPrefix + &#39;dd-drag-current&#39;,
     
 <span id='Ext-dd-DragDropManager-property-currentPoint'>    currentPoint: new Ext.util.Point(),
 </span>
@@ -307,7 +307,7 @@ Ext.define('Ext.dd.DragDropManager', {
 
 <span id='Ext-dd-DragDropManager-method-removeDDFromGroup'>    /**
 </span>     * Removes the supplied dd instance from the supplied group. Executed
-     * by DragDrop.removeFromGroup, so don't call this function directly.
+     * by DragDrop.removeFromGroup, so don&#39;t call this function directly.
      * @private
      */
     removeDDFromGroup: function(oDD, sGroup) {
@@ -332,7 +332,7 @@ Ext.define('Ext.dd.DragDropManager', {
             groups = oDD.groups,
             g;
 
-        // If we're clearing everything, we'll just end up wiping
+        // If we&#39;re clearing everything, we&#39;ll just end up wiping
         // this.ids &amp; this.handleIds
         if (me.clearingAll) {
             return;
@@ -486,7 +486,7 @@ Ext.define('Ext.dd.DragDropManager', {
                 priority: -1000
             },
             // Mousemove events do not need to be captured because they do not contend
-            // with scroll events - they're only processed when a drag has begun.
+            // with scroll events - they&#39;re only processed when a drag has begun.
             // Capturing was causing https://sencha.jira.com/browse/EXTJS-13952
             pointermove = {
                 translate: false,
@@ -513,7 +513,7 @@ Ext.define('Ext.dd.DragDropManager', {
             // Spurious pointer events from -ms-pointer-events devices
             listeners.mouseup = pointerup;
             listeners.mousemove = pointermove;
-        } else if (e.pointerType === 'mouse') {      
+        } else if (e.pointerType === &#39;mouse&#39;) {      
             listeners.mouseup = pointerup;
             listeners.mousemove = pointermove;
         } else {
@@ -532,7 +532,7 @@ Ext.define('Ext.dd.DragDropManager', {
         me.currentPoint.setPosition(xy);
 
         if (me.dragCurrent){
-            // the original browser mouseup wasn't handled (e.g. outside FF browser window)
+            // the original browser mouseup wasn&#39;t handled (e.g. outside FF browser window)
             // so clean up first to avoid breaking the next drag
             me.handleMouseUp(e);
         }
@@ -644,7 +644,7 @@ Ext.define('Ext.dd.DragDropManager', {
             e.stopPropagation();
         }
 
-        if (this.preventDefault &amp;&amp; e.pointerType === 'touch') {
+        if (this.preventDefault &amp;&amp; e.pointerType === &#39;touch&#39;) {
             e.preventDefault();
         }
     },
@@ -692,7 +692,7 @@ Ext.define('Ext.dd.DragDropManager', {
      * TODO: figure out what we can do about mouse events lost when the
      * user drags objects beyond the window boundary.  Currently we can
      * detect this in internet explorer by verifying that the mouse is
-     * down during the mousemove event.  Firefox doesn't give us the
+     * down during the mousemove event.  Firefox doesn&#39;t give us the
      * button state on the mousemove event.
      *
      * @param {Event} e the event
@@ -764,13 +764,13 @@ Ext.define('Ext.dd.DragDropManager', {
             return;
         }
 
-        // Touch's delegated event system means that the mousemove (which will be a touchmove really) target will be the element that the listener was requested for, NOT the actual lowest
+        // Touch&#39;s delegated event system means that the mousemove (which will be a touchmove really) target will be the element that the listener was requested for, NOT the actual lowest
         // level target . So we have to use elementFromPoint to find the target which we are currently over.
         //
         // If we need to use the current mousemove target to find the over el,
         // but pointer-events is not supported, AND the delta position does not place the mouse outside of the dragEl,
         // temporarily move the dragEl away, and fake the mousemove target by using document.elementFromPoint
-        // while it's out of the way.
+        // while it&#39;s out of the way.
         // The pointer events implementation is bugged in IE9/10 and opera, so fallback even if they report that they support it.
         // IE8m do not support it so they will auto fall back
         overDragEl = !(dragCurrent.deltaX &lt; 0 || dragCurrent.deltaY &lt; 0);
@@ -779,7 +779,7 @@ Ext.define('Ext.dd.DragDropManager', {
             // Temporarily hide the dragEl instead of moving it off the page. Moving the el off the page can cause
             // problems when in an iframe with IE8 standards. See EXTJSIV-11728.
             if (overDragEl) {
-                dragEl.style.visibility = 'hidden';
+                dragEl.style.visibility = &#39;hidden&#39;;
             }
             // In Win10, dragging outside the browser window will cause elementFromPoint to
             // return null. In these cases, default to the document.
@@ -790,7 +790,7 @@ Ext.define('Ext.dd.DragDropManager', {
                 target: me.elementFromPoint(e.clientX, e.clientY) || document.documentElement
             });
             if (overDragEl) {
-                dragEl.style.visibility = 'visible';
+                dragEl.style.visibility = &#39;visible&#39;;
             }
         }
 
@@ -801,7 +801,7 @@ Ext.define('Ext.dd.DragDropManager', {
             overTarget = me.dragOvers[i];
             delete me.dragOvers[i];
 
-            // Check to make sure that the component hasn't been destroyed in the middle of a drag operation.
+            // Check to make sure that the component hasn&#39;t been destroyed in the middle of a drag operation.
             if (!me.isTypeOfDD(overTarget) || overTarget.destroyed) {
                 continue;
             }
@@ -843,11 +843,11 @@ Ext.define('Ext.dd.DragDropManager', {
                 overTarget = me.ids[sGroup][i];
 
                 // The target is valid if it is a DD type
-                // And it's got a DOM element
-                // And it's configured to be a drop target
-                // And it's not locked
+                // And it&#39;s got a DOM element
+                // And it&#39;s configured to be a drop target
+                // And it&#39;s not locked
                 // And the DOM element is fully visible with no hidden ancestors
-                // And it's either not the dragCurrent, or, if it is, tha dragCurrent is configured to not ignore itself.
+                // And it&#39;s either not the dragCurrent, or, if it is, tha dragCurrent is configured to not ignore itself.
                 if (me.isTypeOfDD(overTarget) &amp;&amp;
                     (overTargetEl = overTarget.getEl()) &amp;&amp;
                     (overTarget.isTarget) &amp;&amp;
@@ -999,7 +999,7 @@ Ext.define('Ext.dd.DragDropManager', {
 
         element = Ext.getDom(element);
         while (element !== body) {
-            if (!isNaN(z = Number(Ext.fly(element).getStyle('zIndex')))) {
+            if (!isNaN(z = Number(Ext.fly(element).getStyle(&#39;zIndex&#39;)))) {
                 zIndex = z;
             }
             element = element.parentNode;
@@ -1115,7 +1115,7 @@ Ext.define('Ext.dd.DragDropManager', {
     },
 
 <span id='Ext-dd-DragDropManager-method-getLocation'>    /**
-</span>     * Returns a Region object containing the drag and drop element's position
+</span>     * Returns a Region object containing the drag and drop element&#39;s position
      * and size, including the padding configured for it
      * @param {Ext.dd.DragDrop} oDD the drag and drop object to get the location for.
      * @return {Ext.util.Region} a Region object representing the total area
@@ -1266,7 +1266,7 @@ Ext.define('Ext.dd.DragDropManager', {
      * @param {String} id the id of the element to get
      * @return {Ext.dd.DragDropManager.ElementWrapper} the wrapped element
      * @private
-     * @deprecated This wrapper isn't that useful
+     * @deprecated This wrapper isn&#39;t that useful
      */
     getElWrapper: function(id) {
         var oWrapper = this.elementCache[id];
@@ -1302,7 +1302,7 @@ Ext.define('Ext.dd.DragDropManager', {
 </span>     * @class Ext.dd.DragDropManager.ElementWrapper
      * Deprecated inner class for cached elements.
      * @private
-     * @deprecated This wrapper isn't that useful
+     * @deprecated This wrapper isn&#39;t that useful
      */
     ElementWrapper: function(el) {
 <span id='Ext-dd-DragDropManager-ElementWrapper-property-el'>        /** The element */
@@ -1395,7 +1395,7 @@ Ext.define('Ext.dd.DragDropManager', {
 
 <span id='Ext-dd-DragDropElement-method-getScrollTop'>    /**
 </span>     * Gets the scrollTop
-     * @return {Number} the document's scrollTop
+     * @return {Number} the document&#39;s scrollTop
      */
     getScrollTop: function () {
         return this.getScroll().top;
@@ -1403,7 +1403,7 @@ Ext.define('Ext.dd.DragDropManager', {
 
 <span id='Ext-dd-DragDropElement-method-getScrollLeft'>    /**
 </span>     * Gets the scrollLeft
-     * @return {Number} the document's scrollTop
+     * @return {Number} the document&#39;s scrollTop
      */
     getScrollLeft: function () {
         return this.getScroll().left;

@@ -23,19 +23,19 @@
  *      @example     
  *      Ext.tip.QuickTipManager.init(); // Instantiate the QuickTipManager 
  *
- *      Ext.create('Ext.Button', {
+ *      Ext.create(&#39;Ext.Button&#39;, {
  *
  *          renderTo: Ext.getBody(),
- *          text: 'My Button',
+ *          text: &#39;My Button&#39;,
  *          listeners: {
  *
  *              afterrender: function(me) {
  *
- *                  // Register the new tip with an element's ID
+ *                  // Register the new tip with an element&#39;s ID
  *                  Ext.tip.QuickTipManager.register({
- *                      target: me.getId(), // Target button's ID
- *                      title : 'My Tooltip',  // QuickTip Header
- *                      text  : 'My Button has a QuickTip' // Tip content  
+ *                      target: me.getId(), // Target button&#39;s ID
+ *                      title : &#39;My Tooltip&#39;,  // QuickTip Header
+ *                      text  : &#39;My Button has a QuickTip&#39; // Tip content  
  *                  });
  *
  *              }
@@ -43,10 +43,10 @@
  *      });
  *
  */
-Ext.define('Ext.tip.QuickTip', {
-    extend: 'Ext.tip.ToolTip',
-    alias: 'widget.quicktip',
-    alternateClassName: 'Ext.QuickTip',
+Ext.define(&#39;Ext.tip.QuickTip&#39;, {
+    extend: &#39;Ext.tip.ToolTip&#39;,
+    alias: &#39;widget.quicktip&#39;,
+    alternateClassName: &#39;Ext.QuickTip&#39;,
 
 <span id='Ext-tip-QuickTip-cfg-target'>    /**
 </span>     * @cfg {String/HTMLElement/Ext.dom.Element} target
@@ -57,7 +57,7 @@ Ext.define('Ext.tip.QuickTip', {
 
 <span id='Ext-tip-QuickTip-cfg-interceptTitles'>    /**
 </span>     * @cfg {Boolean} interceptTitles
-     * `true` to automatically use the element's DOM title value if available.
+     * `true` to automatically use the element&#39;s DOM title value if available.
      */
     interceptTitles : false,
 
@@ -66,24 +66,24 @@ Ext.define('Ext.tip.QuickTip', {
      * The title text to be used to display in the Tip header.  May be a string 
      * (including HTML tags) or an {@link Ext.panel.Title} config object.
      */
-    title: '&amp;#160;',
+    title: &#39;&amp;#160;&#39;,
 
 <span id='Ext-tip-QuickTip-property-tagConfig'>    /**
 </span>     * @private
      */
     tagConfig : {
-        namespace : 'data-',
-        attribute : 'qtip',
-        width : 'qwidth',
-        target : 'target',
-        title : 'qtitle',
-        hide : 'hide',
-        cls : 'qclass',
-        align : 'qalign',
-        anchor : 'anchor',
-        showDelay: 'qshowDelay',
-        hideAction: 'hideAction',
-        anchorTarget: 'anchorTarget'
+        namespace : &#39;data-&#39;,
+        attribute : &#39;qtip&#39;,
+        width : &#39;qwidth&#39;,
+        target : &#39;target&#39;,
+        title : &#39;qtitle&#39;,
+        hide : &#39;hide&#39;,
+        cls : &#39;qclass&#39;,
+        align : &#39;qalign&#39;,
+        anchor : &#39;anchor&#39;,
+        showDelay: &#39;qshowDelay&#39;,
+        hideAction: &#39;hideAction&#39;,
+        anchorTarget: &#39;anchorTarget&#39;
     },
     
 <span id='Ext-tip-QuickTip-property-isQuickTip'>    isQuickTip: true,
@@ -185,7 +185,7 @@ Ext.define('Ext.tip.QuickTip', {
                 me.hide();
             }
         } else if (currentTarget.dom === el) {
-            me.clearTimer('show');
+            me.clearTimer(&#39;show&#39;);
         }
     },
     
@@ -212,7 +212,7 @@ Ext.define('Ext.tip.QuickTip', {
 
         if (this.interceptTitles &amp;&amp; titleText) {
             target.setAttribute(attr, titleText);
-            target.removeAttribute('title');
+            target.removeAttribute(&#39;title&#39;);
             return titleText;
         }
         else {
@@ -274,7 +274,7 @@ Ext.define('Ext.tip.QuickTip', {
                 el: currentTarget,
                 text: tipText,
                 width: +currentTarget.getAttribute(ns + cfg.width) || null,
-                autoHide: autoHide !== &quot;user&quot; &amp;&amp; autoHide !== 'false',
+                autoHide: autoHide !== &quot;user&quot; &amp;&amp; autoHide !== &#39;false&#39;,
                 title: currentTarget.getAttribute(ns + cfg.title),
                 cls: currentTarget.getAttribute(ns + cfg.cls),
                 align: currentTarget.getAttribute(ns + cfg.align),
@@ -283,13 +283,13 @@ Ext.define('Ext.tip.QuickTip', {
                 alignTarget: currentTarget.getAttribute(ns + cfg.anchorTarget)
             };
 
-            // If we were not configured with an anchor, allow it to be set by the target's properties
-            if (!me.initialConfig.hasOwnProperty('anchor')) {
+            // If we were not configured with an anchor, allow it to be set by the target&#39;s properties
+            if (!me.initialConfig.hasOwnProperty(&#39;anchor&#39;)) {
                 me.anchor = currentTarget.getAttribute(ns + cfg.anchor);
             }
 
-            // If we are anchored, and not configured with an anchorTarget, anchor to the target element, or whatever its 'data-anchortarget' points to
-            if (me.anchor &amp;&amp; !me.initialConfig.hasOwnProperty('anchorTarget')) {
+            // If we are anchored, and not configured with an anchorTarget, anchor to the target element, or whatever its &#39;data-anchortarget&#39; points to
+            if (me.anchor &amp;&amp; !me.initialConfig.hasOwnProperty(&#39;anchorTarget&#39;)) {
                 me.alignTarget = me.activeTarget.alignTarget || target;
             }
 
@@ -336,8 +336,8 @@ Ext.define('Ext.tip.QuickTip', {
             currentTargetDom = me.currentTarget.dom,
             result;
 
-        // If we are anchored, and not configured with an anchorTarget, align to the target element, or whatever its 'data-anchortarget' points to
-        if (activeTarget &amp;&amp; activeTarget.alignTarget &amp;&amp; me.anchor &amp;&amp; !me.initialConfig.hasOwnProperty('anchorTarget')) {
+        // If we are anchored, and not configured with an anchorTarget, align to the target element, or whatever its &#39;data-anchortarget&#39; points to
+        if (activeTarget &amp;&amp; activeTarget.alignTarget &amp;&amp; me.anchor &amp;&amp; !me.initialConfig.hasOwnProperty(&#39;anchorTarget&#39;)) {
             me.currentTarget.attach(Ext.getDom(activeTarget.alignTarget));
         }
 
@@ -382,7 +382,7 @@ Ext.define('Ext.tip.QuickTip', {
              if (el) {
                  text = el.getAttribute(cfg.namespace + cfg.attribute);
                  // Note that the quicktip could also have been registered with the QuickTipManager.
-                 // If this was the case, then we don't want to veto showing it.
+                 // If this was the case, then we don&#39;t want to veto showing it.
                  // Simply do a lookup in the registered targets collection.
                  if (!text &amp;&amp; !me.targets[Ext.id(target.el.dom)]) {
                      return true;
@@ -396,7 +396,7 @@ Ext.define('Ext.tip.QuickTip', {
 </span>        var me = this,
             fromDelay = me.fromDelayShow;
 
-        // We're coming from a delayed show, so check whether
+        // We&#39;re coming from a delayed show, so check whether
         // the attribute has been removed before we show it
         if (fromDelay &amp;&amp; me.targetTextEmpty()) {
             me.activeTarget = null;

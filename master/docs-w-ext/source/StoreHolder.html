@@ -25,11 +25,11 @@
  * manage a Store.
  * @private
  */
-Ext.define('Ext.util.StoreHolder', {
+Ext.define(&#39;Ext.util.StoreHolder&#39;, {
     requires: [
-        'Ext.data.StoreManager'
+        &#39;Ext.data.StoreManager&#39;
     ],
-<span id='Ext-util-StoreHolder-property-mixinId'>    mixinId: 'storeholder',
+<span id='Ext-util-StoreHolder-property-mixinId'>    mixinId: &#39;storeholder&#39;,
 </span>
 <span id='Ext-util-StoreHolder-property-autoDestroyBoundStore'>    /**
 </span>     * @property {Boolean} [autoDestroyBoundStore] This property allows the object
@@ -47,7 +47,7 @@ Ext.define('Ext.util.StoreHolder', {
         // Private params
         // @param {Boolean} [initial=false] True to not remove listeners from existing store.
         // @param {String} [propertyName=&quot;store&quot;] The property in this object under which to cache the passed Store.
-        propertyName = propertyName || 'store';
+        propertyName = propertyName || &#39;store&#39;;
 
         var me = this,
             oldStore = initial ? null : me[propertyName];
@@ -63,7 +63,7 @@ Ext.define('Ext.util.StoreHolder', {
                 // autoDestroy is only intended for when it is unbound from a component,
                 // and the store could have been already destroyed upstream
                 if (!oldStore.destroyed) {
-                    if (me.autoDestroyBoundStore &amp;&amp; propertyName === 'store' &amp;&amp; oldStore.autoDestroy) {
+                    if (me.autoDestroyBoundStore &amp;&amp; propertyName === &#39;store&#39; &amp;&amp; oldStore.autoDestroy) {
                         oldStore.destroy();
                     }
                     else {
@@ -85,7 +85,7 @@ Ext.define('Ext.util.StoreHolder', {
             }
 
             if (me.fireEvent) {
-                me.fireEvent('storechange', me, store, oldStore);
+                me.fireEvent(&#39;storechange&#39;, me, store, oldStore);
             }
         }
 

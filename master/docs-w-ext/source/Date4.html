@@ -20,47 +20,47 @@
  * {@link #format}.
  *
  *     @example
- *     Ext.create('Ext.data.Store', {
- *         storeId:'sampleStore',
+ *     Ext.create(&#39;Ext.data.Store&#39;, {
+ *         storeId:&#39;sampleStore&#39;,
  *         fields:[
- *             { name: 'symbol', type: 'string' },
- *             { name: 'date',   type: 'date' },
- *             { name: 'change', type: 'number' },
- *             { name: 'volume', type: 'number' },
- *             { name: 'topday', type: 'date' }
+ *             { name: &#39;symbol&#39;, type: &#39;string&#39; },
+ *             { name: &#39;date&#39;,   type: &#39;date&#39; },
+ *             { name: &#39;change&#39;, type: &#39;number&#39; },
+ *             { name: &#39;volume&#39;, type: &#39;number&#39; },
+ *             { name: &#39;topday&#39;, type: &#39;date&#39; }
  *         ],
  *         data:[
- *             { symbol: &quot;msft&quot;,   date: '2011/04/22', change: 2.43, volume: 61606325, topday: '04/01/2010' },
- *             { symbol: &quot;goog&quot;,   date: '2011/04/22', change: 0.81, volume: 3053782,  topday: '04/11/2010' },
- *             { symbol: &quot;apple&quot;,  date: '2011/04/22', change: 1.35, volume: 24484858, topday: '04/28/2010' },
- *             { symbol: &quot;sencha&quot;, date: '2011/04/22', change: 8.85, volume: 5556351,  topday: '04/22/2010' }
+ *             { symbol: &quot;msft&quot;,   date: &#39;2011/04/22&#39;, change: 2.43, volume: 61606325, topday: &#39;04/01/2010&#39; },
+ *             { symbol: &quot;goog&quot;,   date: &#39;2011/04/22&#39;, change: 0.81, volume: 3053782,  topday: &#39;04/11/2010&#39; },
+ *             { symbol: &quot;apple&quot;,  date: &#39;2011/04/22&#39;, change: 1.35, volume: 24484858, topday: &#39;04/28/2010&#39; },
+ *             { symbol: &quot;sencha&quot;, date: &#39;2011/04/22&#39;, change: 8.85, volume: 5556351,  topday: &#39;04/22/2010&#39; }
  *         ]
  *     });
  *
- *     Ext.create('Ext.grid.Panel', {
- *         title: 'Date Column Demo',
- *         store: Ext.data.StoreManager.lookup('sampleStore'),
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
+ *         title: &#39;Date Column Demo&#39;,
+ *         store: Ext.data.StoreManager.lookup(&#39;sampleStore&#39;),
  *         columns: [
- *             { text: 'Symbol',   dataIndex: 'symbol', flex: 1 },
- *             { text: 'Date',     dataIndex: 'date',   xtype: 'datecolumn',   format:'Y-m-d' },
- *             { text: 'Change',   dataIndex: 'change', xtype: 'numbercolumn', format:'0.00' },
- *             { text: 'Volume',   dataIndex: 'volume', xtype: 'numbercolumn', format:'0,000' },
- *             { text: 'Top Day',  dataIndex: 'topday', xtype: 'datecolumn',   format:'l' }
+ *             { text: &#39;Symbol&#39;,   dataIndex: &#39;symbol&#39;, flex: 1 },
+ *             { text: &#39;Date&#39;,     dataIndex: &#39;date&#39;,   xtype: &#39;datecolumn&#39;,   format:&#39;Y-m-d&#39; },
+ *             { text: &#39;Change&#39;,   dataIndex: &#39;change&#39;, xtype: &#39;numbercolumn&#39;, format:&#39;0.00&#39; },
+ *             { text: &#39;Volume&#39;,   dataIndex: &#39;volume&#39;, xtype: &#39;numbercolumn&#39;, format:&#39;0,000&#39; },
+ *             { text: &#39;Top Day&#39;,  dataIndex: &#39;topday&#39;, xtype: &#39;datecolumn&#39;,   format:&#39;l&#39; }
  *         ],
  *         height: 200,
  *         width: 450,
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.grid.column.Date', {
-    extend: 'Ext.grid.column.Column',
-    alias: ['widget.datecolumn'],
-    requires: ['Ext.Date'],
-    alternateClassName: 'Ext.grid.DateColumn',
+Ext.define(&#39;Ext.grid.column.Date&#39;, {
+    extend: &#39;Ext.grid.column.Column&#39;,
+    alias: [&#39;widget.datecolumn&#39;],
+    requires: [&#39;Ext.Date&#39;],
+    alternateClassName: &#39;Ext.grid.DateColumn&#39;,
 
 <span id='Ext-grid-column-Date-property-isDateColumn'>    isDateColumn: true,
 </span>
-<span id='Ext-grid-column-Date-property-defaultFilterType'>    defaultFilterType: 'date',
+<span id='Ext-grid-column-Date-property-defaultFilterType'>    defaultFilterType: &#39;date&#39;,
 </span>
 <span id='Ext-grid-column-Date-cfg-format'>    /**
 </span>     * @cfg {String} format

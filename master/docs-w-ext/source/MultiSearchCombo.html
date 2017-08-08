@@ -42,7 +42,7 @@
  * `BasiGX.util.Map.getMapComponent().getMap()`.
  *
  *     {
- *         xtype: 'basigx-form-field-multisearch',
+ *         xtype: &#39;basigx-form-field-multisearch&#39;,
  *         config: {
  *             wfsServerUrl: &quot;yourdomain/geoserver/ows?&quot;,
  *             searchLayerBlackList: [
@@ -61,31 +61,31 @@
  * @requires BasiGX.view.grid.MultiSearchGazetteerGrid
  *
  */
-Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
-    extend: 'Ext.form.field.ComboBox',
-    xtype: 'basigx-form-field-multisearch',
+Ext.define(&#39;BasiGX.view.form.field.MultiSearchCombo&#39;, {
+    extend: &#39;Ext.form.field.ComboBox&#39;,
+    xtype: &#39;basigx-form-field-multisearch&#39;,
 
     requires: [
-        'BasiGX.util.Map',
-        'BasiGX.view.container.MultiSearchSettings',
-        'BasiGX.view.grid.MultiSearchWFSSearchGrid',
-        'BasiGX.view.grid.MultiSearchGazetteerGrid'
+        &#39;BasiGX.util.Map&#39;,
+        &#39;BasiGX.view.container.MultiSearchSettings&#39;,
+        &#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;,
+        &#39;BasiGX.view.grid.MultiSearchGazetteerGrid&#39;
     ],
 
 <span id='BasiGX-view-form-field-MultiSearchCombo-cfg-viewModel'>    viewModel: {
 </span>        data: {
-            emptyText: 'Suche ...',
-            settingsWindowTitle: 'Sucheinstellungen'
+            emptyText: &#39;Suche ...&#39;,
+            settingsWindowTitle: &#39;Sucheinstellungen&#39;
         }
     },
 
     config: {
 
-<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-gazetteerGrid'>        gazetteerGrid: 'basigx-grid-multisearchgazetteergrid',
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-gazetteerGrid'>        gazetteerGrid: &#39;basigx-grid-multisearchgazetteergrid&#39;,
 </span>
-<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-wfsSearchGrid'>        wfsSearchGrid: 'basigx-grid-multisearchwfssearchgrid',
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-wfsSearchGrid'>        wfsSearchGrid: &#39;basigx-grid-multisearchwfssearchgrid&#39;,
 </span>
-<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-searchSettings'>        searchSettings: 'basigx-container-multisearchsettings',
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-searchSettings'>        searchSettings: &#39;basigx-container-multisearchsettings&#39;,
 </span>
 <span id='BasiGX-view-form-field-MultiSearchCombo-cfg-wfsServerUrl'>        wfsServerUrl: null,
 </span>
@@ -116,20 +116,20 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 <span id='BasiGX-view-form-field-MultiSearchCombo-property-settingsWindow'>    settingsWindow: null,
 </span>
 <span id='BasiGX-view-form-field-MultiSearchCombo-cfg-bind'>    bind: {
-</span>        emptyText: '{emptyText}'
+</span>        emptyText: &#39;{emptyText}&#39;
     },
 
-<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-triggerCls'>    triggerCls: 'default-trigger',
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-triggerCls'>    triggerCls: &#39;default-trigger&#39;,
 </span>
 <span id='BasiGX-view-form-field-MultiSearchCombo-cfg-triggers'>    triggers: {
 </span>        refresh: {
-            cls: 'multisearch-refresh-trigger',
+            cls: &#39;multisearch-refresh-trigger&#39;,
             handler: function() {
                 this.refreshSearchResults();
             }
         },
         settings: {
-            cls: 'multisearch-settings-trigger',
+            cls: &#39;multisearch-settings-trigger&#39;,
             handler: function() {
                 this.showSettingsWindow();
             }
@@ -150,7 +150,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 
         Ext.each(allLayers, function(l) {
             if (l instanceof ol.layer.Tile &amp;&amp; !Ext.Array.contains(blackList,
-                l.get('name'))) {
+                l.get(&#39;name&#39;))) {
                 me.allSearchLayers.push(l);
             }
         });
@@ -162,8 +162,8 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
             });
         }
 
-        me.on('boxready', me.onBoxReady, me);
-        me.on('change', me.onComboValueChange, me);
+        me.on(&#39;boxready&#39;, me.onBoxReady, me);
+        me.on(&#39;change&#39;, me.onComboValueChange, me);
 
     },
 
@@ -172,7 +172,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
      */
     onBoxReady: function() {
         var me = this;
-        me.nav = Ext.create('Ext.util.KeyNav', me.el, {
+        me.nav = Ext.create(&#39;Ext.util.KeyNav&#39;, me.el, {
             esc: me.clearValue,
             scope: me
         });
@@ -210,7 +210,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
             }
 
             if (me.searchContainer) {
-                me.searchContainer.getEl().slideOut('t', {
+                me.searchContainer.getEl().slideOut(&#39;t&#39;, {
                     duration: 250,
                     callback: function() {
                         me.searchContainer.hide();
@@ -244,7 +244,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
                 gazetteerGrid.getStore().removeAll();
             }
         } else {
-            Ext.log.error('Gazetteer SearchGrid not found');
+            Ext.log.error(&#39;Gazetteer SearchGrid not found&#39;);
         }
 
     },
@@ -270,7 +270,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
                 objectSearchGrid.getStore().removeAll();
             }
         } else {
-            Ext.log.error('ObjectSearchGrid not found');
+            Ext.log.error(&#39;ObjectSearchGrid not found&#39;);
         }
 
     },
@@ -293,9 +293,9 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
             parentRegion = parentItem.getClientRegion();
 
             position = {
-                top: parentRegion.bottom + 'px',
-                left: parentRegion.left + 'px',
-                width: parentItem.getWidth() + 'px'
+                top: parentRegion.bottom + &#39;px&#39;,
+                left: parentRegion.left + &#39;px&#39;,
+                width: parentItem.getWidth() + &#39;px&#39;
             };
 
             searchContainer = Ext.create(Ext.container.Container, {
@@ -336,7 +336,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
             me.doGazetteerSearch(value);
             me.doObjectSearch(value);
         } else {
-            Ext.log.error('No value to search for');
+            Ext.log.error(&#39;No value to search for&#39;);
         }
     },
 
@@ -355,13 +355,13 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
                 BasiGX.util.Animate.shake(me.settingsWindow);
             }
         } else {
-            settingsWindow = Ext.create('Ext.window.Window', {
+            settingsWindow = Ext.create(&#39;Ext.window.Window&#39;, {
                 items: [{
                     xtype: me.getSearchSettings(),
                     combo: me
                 }],
-                title: me.getViewModel().get('settingsWindowTitle'),
-                closeAction: 'hide',
+                title: me.getViewModel().get(&#39;settingsWindowTitle&#39;),
+                closeAction: &#39;hide&#39;,
                 autoShow: true
             });
             me.settingsWindow = settingsWindow;

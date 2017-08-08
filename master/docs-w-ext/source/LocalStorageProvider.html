@@ -22,13 +22,13 @@
  * If the browser does not support local storage, there will be no attempt to read the state.
  * Before creating this class, check {@link Ext.util.LocalStorage#supported}.
  */
-Ext.define('Ext.state.LocalStorageProvider', {
-    extend: 'Ext.state.Provider',
+Ext.define(&#39;Ext.state.LocalStorageProvider&#39;, {
+    extend: &#39;Ext.state.Provider&#39;,
     requires: [
-        'Ext.util.LocalStorage'
+        &#39;Ext.util.LocalStorage&#39;
     ],
     
-    alias: 'state.localstorage',
+    alias: &#39;state.localstorage&#39;,
    
 <span id='Ext-state-LocalStorageProvider-method-constructor'>    constructor: function () {
 </span>        var me = this;
@@ -81,7 +81,7 @@ Ext.define('Ext.state.LocalStorageProvider', {
             id = prefix,
             n = id.length - 1;
 
-        if (id.charAt(n) === '-') {
+        if (id.charAt(n) === &#39;-&#39;) {
             id = id.substring(0, n);
         }
 

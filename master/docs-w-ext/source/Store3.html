@@ -20,18 +20,18 @@
  * between the custom data source objects supported by the grid and the {@link Ext.grid.property.Property} format
  * used by the {@link Ext.data.Store} base class.
  */
-Ext.define('Ext.grid.property.Store', {
+Ext.define(&#39;Ext.grid.property.Store&#39;, {
 
-    extend: 'Ext.data.Store',
+    extend: &#39;Ext.data.Store&#39;,
 
-    alternateClassName: 'Ext.grid.PropertyStore',
+    alternateClassName: &#39;Ext.grid.PropertyStore&#39;,
 
 <span id='Ext-grid-property-Store-cfg-remoteSort'>    remoteSort: true,
 </span>
     requires: [
-        'Ext.grid.property.Reader', 
-        'Ext.data.proxy.Memory', 
-        'Ext.grid.property.Property'
+        &#39;Ext.grid.property.Reader&#39;, 
+        &#39;Ext.data.proxy.Memory&#39;, 
+        &#39;Ext.grid.property.Property&#39;
     ],
 
 <span id='Ext-grid-property-Store-method-constructor'>    /**
@@ -85,8 +85,8 @@ Ext.define('Ext.grid.property.Store', {
         me.getProxy().setData(dataObject);
         me.load();
         me.resumeEvents();
-        me.fireEvent('datachanged', me);
-        me.fireEvent('refresh', me);
+        me.fireEvent(&#39;datachanged&#39;, me);
+        me.fireEvent(&#39;refresh&#39;, me);
     },
 
 <span id='Ext-grid-property-Store-method-getProperty'>    /**
@@ -97,7 +97,7 @@ Ext.define('Ext.grid.property.Store', {
             ret = null;
 
         if (rec) {
-            ret = rec.get('value');
+            ret = rec.get(&#39;value&#39;);
         }
         return ret;
     },
@@ -110,7 +110,7 @@ Ext.define('Ext.grid.property.Store', {
             rec = me.getRec(prop);
             
         if (rec) {
-            rec.set('value', value);
+            rec.set(&#39;value&#39;, value);
             me.source[prop] = value;
         } else if (create) {
             // only create if specified.

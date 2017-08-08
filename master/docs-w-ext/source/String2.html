@@ -27,7 +27,7 @@ Ext.String = (function() {
 // @require Ext
 // @require Ext.lang.Array
     var trimRegex     = /^[\x09\x0a\x0b\x0c\x0d\x20\xa0\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000]+|[\x09\x0a\x0b\x0c\x0d\x20\xa0\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000]+$/g,
-        escapeRe      = /('|\\)/g,
+        escapeRe      = /(&#39;|\\)/g,
         escapeRegexRe = /([-.*+?\^${}()|\[\]\/\\])/g,
         basicTrimRe   = /^\s+|\s+$/g,
         whitespaceRe  = /\s+/,
@@ -61,7 +61,7 @@ Ext.String = (function() {
          */
         fromCodePoint: String.fromCodePoint || function() {
             var codePoint,
-                result = '',
+                result = &#39;&#39;,
                 codeUnits = [],
                 index = -1,
                 length = arguments.length;
@@ -74,7 +74,7 @@ Ext.String = (function() {
                     codePoint &gt; 0x10FFFF ||       // not a valid Unicode code point
                     Math.floor(codePoint) !== codePoint // not an integer
                 ) {
-                    Ext.raise('Invalid code point: ' + codePoint);
+                    Ext.raise(&#39;Invalid code point: &#39; + codePoint);
                 }
                 if (codePoint &lt;= 0xFFFF) { // BMP code point
                     codeUnits.push(codePoint);
@@ -183,11 +183,11 @@ Ext.String = (function() {
          * @return {String} A legal JavaScript `var` name.
          */
         createVarName: function(s) {
-            return s.replace(varReplace, '');
+            return s.replace(varReplace, &#39;&#39;);
         },
 
 <span id='Ext-String-method-htmlEncode'>        /**
-</span>         * Convert certain characters (&amp;, &lt;, &gt;, ', and &quot;) to their HTML character equivalents for literal display in web pages.
+</span>         * Convert certain characters (&amp;, &lt;, &gt;, &#39;, and &quot;) to their HTML character equivalents for literal display in web pages.
          * @param {String} value The string to encode.
          * @return {String} The encoded text.
          * @method
@@ -197,7 +197,7 @@ Ext.String = (function() {
         },
 
 <span id='Ext-String-method-htmlDecode'>        /**
-</span>         * Convert certain characters (&amp;, &lt;, &gt;, ', and &quot;) from their HTML character equivalents.
+</span>         * Convert certain characters (&amp;, &lt;, &gt;, &#39;, and &quot;) from their HTML character equivalents.
          * @param {String} value The string to decode.
          * @return {String} The decoded text.
          * @method
@@ -224,10 +224,10 @@ Ext.String = (function() {
          * with the value being the textual representation of the entity.
          *
          *      Ext.String.addCharacterEntities({
-         *          '&amp;amp;Uuml;':'Ü',
-         *          '&amp;amp;ccedil;':'ç',
-         *          '&amp;amp;ntilde;':'ñ',
-         *          '&amp;amp;egrave;':'è'
+         *          &#39;&amp;amp;Uuml;&#39;:&#39;Ü&#39;,
+         *          &#39;&amp;amp;ccedil;&#39;:&#39;ç&#39;,
+         *          &#39;&amp;amp;ntilde;&#39;:&#39;ñ&#39;,
+         *          &#39;&amp;amp;egrave;&#39;:&#39;è&#39;
          *      });
          *      var s = Ext.String.htmlEncode(&quot;A string with entities: èÜçñ&quot;);
          *
@@ -235,7 +235,7 @@ Ext.String = (function() {
          * to be single character values.  As such, the actual values represented by the
          * characters are sensitive to the character encoding of the JavaScript source
          * file when defined in string literal form. Script tags referencing server
-         * resources with character entities must ensure that the 'charset' attribute
+         * resources with character entities must ensure that the &#39;charset&#39; attribute
          * of the script node is consistent with the actual character encoding of the
          * server resource.
          *
@@ -256,8 +256,8 @@ Ext.String = (function() {
                 charKeys.push(echar);
                 entityKeys.push(key);
             }
-            charToEntityRegex = new RegExp('(' + charKeys.join('|') + ')', 'g');
-            entityToCharRegex = new RegExp('(' + entityKeys.join('|') + '|&amp;#[0-9]{1,5};' + ')', 'g');
+            charToEntityRegex = new RegExp(&#39;(&#39; + charKeys.join(&#39;|&#39;) + &#39;)&#39;, &#39;g&#39;);
+            entityToCharRegex = new RegExp(&#39;(&#39; + entityKeys.join(&#39;|&#39;) + &#39;|&amp;#[0-9]{1,5};&#39; + &#39;)&#39;, &#39;g&#39;);
         },
 
 <span id='Ext-String-method-resetCharacterEntities'>        /**
@@ -270,11 +270,11 @@ Ext.String = (function() {
             entityToChar = {};
             // add the default set
             this.addCharacterEntities({
-                '&amp;amp;'     :   '&amp;',
-                '&amp;gt;'      :   '&gt;',
-                '&amp;lt;'      :   '&lt;',
-                '&amp;quot;'    :   '&quot;',
-                '&amp;#39;'     :   &quot;'&quot;
+                &#39;&amp;amp;&#39;     :   &#39;&amp;&#39;,
+                &#39;&amp;gt;&#39;      :   &#39;&gt;&#39;,
+                &#39;&amp;lt;&#39;      :   &#39;&lt;&#39;,
+                &#39;&amp;quot;&#39;    :   &#39;&quot;&#39;,
+                &#39;&amp;#39;&#39;     :   &quot;&#39;&quot;
             });
         },
 
@@ -287,7 +287,7 @@ Ext.String = (function() {
          */
         urlAppend : function(url, string) {
             if (!Ext.isEmpty(string)) {
-                return url + (url.indexOf('?') === -1 ? '?' : '&amp;') + string;
+                return url + (url.indexOf(&#39;?&#39;) === -1 ? &#39;?&#39; : &#39;&amp;&#39;) + string;
             }
 
             return url;
@@ -296,9 +296,9 @@ Ext.String = (function() {
 <span id='Ext-String-method-trim'>        /**
 </span>         * Trims whitespace from either end of a string, leaving spaces within the string intact.  Example:
          *
-         *     var s = '  foo bar  ';
-         *     alert('-' + s + '-');                   //alerts &quot;- foo bar -&quot;
-         *     alert('-' + Ext.String.trim(s) + '-');  //alerts &quot;-foo bar-&quot;
+         *     var s = &#39;  foo bar  &#39;;
+         *     alert(&#39;-&#39; + s + &#39;-&#39;);                   //alerts &quot;- foo bar -&quot;
+         *     alert(&#39;-&#39; + Ext.String.trim(s) + &#39;-&#39;);  //alerts &quot;-foo bar-&quot;
          *
          * @param {String} string The string to trim.
          * @return {String} The trimmed string.
@@ -307,7 +307,7 @@ Ext.String = (function() {
             if (string) {
                 string = string.replace(trimRegex, &quot;&quot;);
             }
-            return string || '';
+            return string || &#39;&#39;;
         },
 
 <span id='Ext-String-method-capitalize'>        /**
@@ -319,7 +319,7 @@ Ext.String = (function() {
             if (string) {
                 string = string.charAt(0).toUpperCase() + string.substr(1);
             }
-            return string || '';
+            return string || &#39;&#39;;
         },
 
 <span id='Ext-String-method-uncapitalize'>        /**
@@ -331,11 +331,11 @@ Ext.String = (function() {
             if (string) {
                 string = string.charAt(0).toLowerCase() + string.substr(1);
             }
-            return string || '';
+            return string || &#39;&#39;;
         },
 
 <span id='Ext-String-method-ellipsis'>        /**
-</span>         * Truncate a string and add an ellipsis ('...') to the end if it exceeds the specified length.
+</span>         * Truncate a string and add an ellipsis (&#39;...&#39;) to the end if it exceeds the specified length.
          * @param {String} value The string to truncate.
          * @param {Number} length The maximum length to allow before truncating.
          * @param {Boolean} [word=false] `true` to try to find a common word break.
@@ -345,7 +345,7 @@ Ext.String = (function() {
             if (value &amp;&amp; value.length &gt; length) {
                 if (word) {
                     var vs = value.substr(0, length - 2),
-                    index = Math.max(vs.lastIndexOf(' '), vs.lastIndexOf('.'), vs.lastIndexOf('!'), vs.lastIndexOf('?'));
+                    index = Math.max(vs.lastIndexOf(&#39; &#39;), vs.lastIndexOf(&#39;.&#39;), vs.lastIndexOf(&#39;!&#39;), vs.lastIndexOf(&#39;?&#39;));
                     if (index !== -1 &amp;&amp; index &gt;= (length - 15)) {
                         return vs.substr(0, index) + &quot;...&quot;;
                     }
@@ -368,13 +368,13 @@ Ext.String = (function() {
 </span>         * Creates a `RegExp` given a string `value` and optional flags. For example, the
          * following two regular expressions are equivalent.
          *
-         *      var regex1 = Ext.String.createRegex('hello');
+         *      var regex1 = Ext.String.createRegex(&#39;hello&#39;);
          *
          *      var regex2 = /^hello$/i;
          *
          * The following two regular expressions are also equivalent:
          *
-         *      var regex1 = Ext.String.createRegex('world', false, false, false);
+         *      var regex1 = Ext.String.createRegex(&#39;world&#39;, false, false, false);
          *
          *      var regex2 = /world/;
          *
@@ -386,7 +386,7 @@ Ext.String = (function() {
          * the end of the string. By default the `value` will match only at the end of the
          * string.
          * @param {Boolean} [ignoreCase=true] Pass `false` to make the `RegExp` case
-         * sensitive (removes the 'i' flag).
+         * sensitive (removes the &#39;i&#39; flag).
          * @since 5.0.0
          * @return {RegExp}
          */
@@ -397,20 +397,20 @@ Ext.String = (function() {
                 ret = ExtString.escapeRegex(String(value));
 
                 if (startsWith !== false) {
-                    ret = '^' + ret;
+                    ret = &#39;^&#39; + ret;
                 }
                 if (endsWith !== false) {
-                    ret += '$';
+                    ret += &#39;$&#39;;
                 }
 
-                ret = new RegExp(ret, (ignoreCase !== false) ? 'i' : '');
+                ret = new RegExp(ret, (ignoreCase !== false) ? &#39;i&#39; : &#39;&#39;);
             }
 
             return ret;
         },
 
 <span id='Ext-String-method-escape'>        /**
-</span>         * Escapes the passed string for ' and \.
+</span>         * Escapes the passed string for &#39; and \.
          * @param {String} string The string to escape.
          * @return {String} The escaped string.
          */
@@ -425,10 +425,10 @@ Ext.String = (function() {
          * but does not change the current string.
          *
          *     // alternate sort directions
-         *     sort = Ext.String.toggle(sort, 'ASC', 'DESC');
+         *     sort = Ext.String.toggle(sort, &#39;ASC&#39;, &#39;DESC&#39;);
          *
          *     // instead of conditional logic:
-         *     sort = (sort === 'ASC' ? 'DESC' : 'ASC');
+         *     sort = (sort === &#39;ASC&#39; ? &#39;DESC&#39; : &#39;ASC&#39;);
          *
          * @param {String} string The current string.
          * @param {String} value The value to compare to the current string.
@@ -443,12 +443,12 @@ Ext.String = (function() {
 </span>         * Pads the left side of a string with a specified character.  This is especially useful
          * for normalizing number and date strings.  Example usage:
          *
-         *     var s = Ext.String.leftPad('123', 5, '0');
-         *     // s now contains the string: '00123'
+         *     var s = Ext.String.leftPad(&#39;123&#39;, 5, &#39;0&#39;);
+         *     // s now contains the string: &#39;00123&#39;
          *
          * @param {String} string The original string.
          * @param {Number} size The total length of the output string.
-         * @param {String} [character=' '] (optional) The character with which to pad the original string.
+         * @param {String} [character=&#39; &#39;] (optional) The character with which to pad the original string.
          * @return {String} The padded string.
          */
         leftPad: function(string, size, character) {
@@ -464,8 +464,8 @@ Ext.String = (function() {
 </span>         * Returns a string with a specified number of repetitions a given string pattern.
          * The pattern be separated by a different string.
          *
-         *      var s = Ext.String.repeat('---', 4); // = '------------'
-         *      var t = Ext.String.repeat('--', 3, '/'); // = '--/--/--'
+         *      var s = Ext.String.repeat(&#39;---&#39;, 4); // = &#39;------------&#39;
+         *      var t = Ext.String.repeat(&#39;--&#39;, 3, &#39;/&#39;); // = &#39;--/--/--&#39;
          *
          * @param {String} pattern The pattern to repeat.
          * @param {Number} count The number of times to repeat the pattern (may be 0).
@@ -478,7 +478,7 @@ Ext.String = (function() {
             for (var buf = [], i = count; i--; ) {
                 buf.push(pattern);
             }
-            return buf.join(sep || '');
+            return buf.join(sep || &#39;&#39;);
         },
 
 <span id='Ext-String-method-splitWords'>        /**
@@ -488,8 +488,8 @@ Ext.String = (function() {
          * @param {String/Array} words
          */
         splitWords: function (words) {
-            if (words &amp;&amp; typeof words == 'string') {
-                return words.replace(basicTrimRe, '').split(whitespaceRe);
+            if (words &amp;&amp; typeof words == &#39;string&#39;) {
+                return words.replace(basicTrimRe, &#39;&#39;).split(whitespaceRe);
             }
             return words || [];
         }

@@ -18,30 +18,30 @@
   <pre class="prettyprint lang-js"><span id='Ext-data-identifier-Sequential'>/**
 </span> * This class is a sequential id generator. A simple use of this class would be like so:
  *
- *     Ext.define('MyApp.data.MyModel', {
- *         extend: 'Ext.data.Model',
- *         identifier: 'sequential'
+ *     Ext.define(&#39;MyApp.data.MyModel&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         identifier: &#39;sequential&#39;
  *     });
- *     // assign id's of 1, 2, 3, etc.
+ *     // assign id&#39;s of 1, 2, 3, etc.
  *
  * An example of a configured generator would be:
  *
- *     Ext.define('MyApp.data.MyModel', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;MyApp.data.MyModel&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         identifier: {
- *             type: 'sequential',
- *             prefix: 'ID_',
+ *             type: &#39;sequential&#39;,
+ *             prefix: &#39;ID_&#39;,
  *             seed: 1000,
  *             increment: 10
  *         }
  *     });
- *     // assign id's of ID_1000, ID_1010, ID_1020, etc.
+ *     // assign id&#39;s of ID_1000, ID_1010, ID_1020, etc.
  *
  */
-Ext.define('Ext.data.identifier.Sequential', {
-    extend: 'Ext.data.identifier.Generator',
+Ext.define(&#39;Ext.data.identifier.Sequential&#39;, {
+    extend: &#39;Ext.data.identifier.Generator&#39;,
 
-    alias: 'data.identifier.sequential',
+    alias: &#39;data.identifier.sequential&#39;,
 
     config: {
 <span id='Ext-data-identifier-Sequential-cfg-increment'>        /**
@@ -58,7 +58,7 @@ Ext.define('Ext.data.identifier.Sequential', {
 
 <span id='Ext-data-identifier-Sequential-cfg-seed'>        /**
 </span>         * @cfg {Number} seed
-         * The number at which to start generating sequential id's.
+         * The number at which to start generating sequential id&#39;s.
          */
         seed: 1
     },

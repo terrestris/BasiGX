@@ -21,48 +21,48 @@
  *
  * A store configuration would be something like:
  *
- *     var store = Ext.create('Ext.data.ArrayStore', {
+ *     var store = Ext.create(&#39;Ext.data.ArrayStore&#39;, {
  *         // store configs
- *         storeId: 'myStore',
+ *         storeId: &#39;myStore&#39;,
  *         // reader configs
  *         fields: [
- *            'company',
- *            {name: 'price', type: 'float'},
- *            {name: 'change', type: 'float'},
- *            {name: 'pctChange', type: 'float'},
- *            {name: 'lastChange', type: 'date', dateFormat: 'n/j h:ia'}
+ *            &#39;company&#39;,
+ *            {name: &#39;price&#39;, type: &#39;float&#39;},
+ *            {name: &#39;change&#39;, type: &#39;float&#39;},
+ *            {name: &#39;pctChange&#39;, type: &#39;float&#39;},
+ *            {name: &#39;lastChange&#39;, type: &#39;date&#39;, dateFormat: &#39;n/j h:ia&#39;}
  *         ]
  *     });
  *
  * This store is configured to consume a returned object of the form:
  *
  *     var myData = [
- *         ['3m Co',71.72,0.02,0.03,'9/1 12:00am'],
- *         ['Alcoa Inc',29.01,0.42,1.47,'9/1 12:00am'],
- *         ['Boeing Co.',75.43,0.53,0.71,'9/1 12:00am'],
- *         ['Hewlett-Packard Co.',36.53,-0.03,-0.08,'9/1 12:00am'],
- *         ['Wal-Mart Stores, Inc.',45.45,0.73,1.63,'9/1 12:00am']
+ *         [&#39;3m Co&#39;,71.72,0.02,0.03,&#39;9/1 12:00am&#39;],
+ *         [&#39;Alcoa Inc&#39;,29.01,0.42,1.47,&#39;9/1 12:00am&#39;],
+ *         [&#39;Boeing Co.&#39;,75.43,0.53,0.71,&#39;9/1 12:00am&#39;],
+ *         [&#39;Hewlett-Packard Co.&#39;,36.53,-0.03,-0.08,&#39;9/1 12:00am&#39;],
+ *         [&#39;Wal-Mart Stores, Inc.&#39;,45.45,0.73,1.63,&#39;9/1 12:00am&#39;]
  *     ];
  *
  * An object literal of this form could also be used as the {@link #cfg-data} config option.
  */
-Ext.define('Ext.data.ArrayStore', {
-    extend: 'Ext.data.Store',
-    alias: 'store.array',
+Ext.define(&#39;Ext.data.ArrayStore&#39;, {
+    extend: &#39;Ext.data.Store&#39;,
+    alias: &#39;store.array&#39;,
 
     alternateClassName: [
-        'Ext.data.SimpleStore'
+        &#39;Ext.data.SimpleStore&#39;
     ],
 
     requires: [
-        'Ext.data.proxy.Memory',
-        'Ext.data.reader.Array'
+        &#39;Ext.data.proxy.Memory&#39;,
+        &#39;Ext.data.reader.Array&#39;
     ],
 
     config: {
 <span id='Ext-data-ArrayStore-cfg-proxy'>        proxy: {
-</span>            type: 'memory',
-            reader: 'array'
+</span>            type: &#39;memory&#39;,
+            reader: &#39;array&#39;
         }
     },
 

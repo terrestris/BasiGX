@@ -23,11 +23,11 @@
  * created directly, the {@link Ext.CompositeElement} will be passed to the animation and
  * and the appropriate target will be created.
  */
-Ext.define('Ext.fx.target.CompositeElement', {
+Ext.define(&#39;Ext.fx.target.CompositeElement&#39;, {
 
     /* Begin Definitions */
 
-    extend: 'Ext.fx.target.Element',
+    extend: &#39;Ext.fx.target.Element&#39;,
 
     /* End Definitions */
 
@@ -38,7 +38,7 @@ Ext.define('Ext.fx.target.CompositeElement', {
     isComposite: true,
     
 <span id='Ext-fx-target-CompositeElement-method-constructor'>    constructor: function(target) {
-</span>        target.id = target.id || Ext.id(null, 'ext-composite-');
+</span>        target.id = target.id || Ext.id(null, &#39;ext-composite-&#39;);
         this.callParent([target]);
     },
 

@@ -28,46 +28,46 @@
  * The example below binds a View to a {@link Ext.data.Store} and renders it into an {@link Ext.panel.Panel}.
  *
  *     @example
- *     Ext.define('Image', {
- *         extend: 'Ext.data.Model',
+ *     Ext.define(&#39;Image&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
  *         fields: [
- *             { name:'src', type:'string' },
- *             { name:'caption', type:'string' }
+ *             { name:&#39;src&#39;, type:&#39;string&#39; },
+ *             { name:&#39;caption&#39;, type:&#39;string&#39; }
  *         ]
  *     });
  *
- *     Ext.create('Ext.data.Store', {
- *         id:'imagesStore',
- *         model: 'Image',
+ *     Ext.create(&#39;Ext.data.Store&#39;, {
+ *         id:&#39;imagesStore&#39;,
+ *         model: &#39;Image&#39;,
  *         data: [
- *             { src:'http://www.sencha.com/img/20110215-feat-drawing.png', caption:'Drawing &amp; Charts' },
- *             { src:'http://www.sencha.com/img/20110215-feat-data.png', caption:'Advanced Data' },
- *             { src:'http://www.sencha.com/img/20110215-feat-html5.png', caption:'Overhauled Theme' },
- *             { src:'http://www.sencha.com/img/20110215-feat-perf.png', caption:'Performance Tuned' }
+ *             { src:&#39;http://www.sencha.com/img/20110215-feat-drawing.png&#39;, caption:&#39;Drawing &amp; Charts&#39; },
+ *             { src:&#39;http://www.sencha.com/img/20110215-feat-data.png&#39;, caption:&#39;Advanced Data&#39; },
+ *             { src:&#39;http://www.sencha.com/img/20110215-feat-html5.png&#39;, caption:&#39;Overhauled Theme&#39; },
+ *             { src:&#39;http://www.sencha.com/img/20110215-feat-perf.png&#39;, caption:&#39;Performance Tuned&#39; }
  *         ]
  *     });
  *
  *     var imageTpl = new Ext.XTemplate(
- *         '&lt;tpl for=&quot;.&quot;&gt;',
- *             '&lt;div style=&quot;margin-bottom: 10px;&quot; class=&quot;thumb-wrap&quot;&gt;',
- *               '&lt;img src=&quot;{src}&quot; /&gt;',
- *               '&lt;br/&gt;&lt;span&gt;{caption}&lt;/span&gt;',
- *             '&lt;/div&gt;',
- *         '&lt;/tpl&gt;'
+ *         &#39;&lt;tpl for=&quot;.&quot;&gt;&#39;,
+ *             &#39;&lt;div style=&quot;margin-bottom: 10px;&quot; class=&quot;thumb-wrap&quot;&gt;&#39;,
+ *               &#39;&lt;img src=&quot;{src}&quot; /&gt;&#39;,
+ *               &#39;&lt;br/&gt;&lt;span&gt;{caption}&lt;/span&gt;&#39;,
+ *             &#39;&lt;/div&gt;&#39;,
+ *         &#39;&lt;/tpl&gt;&#39;
  *     );
  *
- *     Ext.create('Ext.view.View', {
- *         store: Ext.data.StoreManager.lookup('imagesStore'),
+ *     Ext.create(&#39;Ext.view.View&#39;, {
+ *         store: Ext.data.StoreManager.lookup(&#39;imagesStore&#39;),
  *         tpl: imageTpl,
- *         itemSelector: 'div.thumb-wrap',
- *         emptyText: 'No images available',
+ *         itemSelector: &#39;div.thumb-wrap&#39;,
+ *         emptyText: &#39;No images available&#39;,
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.view.View', {
-    extend: 'Ext.view.AbstractView',
-    alternateClassName: 'Ext.DataView',
-    alias: 'widget.dataview',
+Ext.define(&#39;Ext.view.View&#39;, {
+    extend: &#39;Ext.view.AbstractView&#39;,
+    alternateClassName: &#39;Ext.DataView&#39;,
+    alias: &#39;widget.dataview&#39;,
 
 <span id='Ext-view-View-property-inputTagRe'>    inputTagRe: /^textarea$|^input$/i,
 </span><span id='Ext-view-View-property-keyEventRe'>    keyEventRe: /^key/,
@@ -81,20 +81,20 @@ Ext.define('Ext.view.View', {
          * @inheritable
          */
         EventMap: {
-            longpress: 'LongPress',
-            mousedown: 'MouseDown',
-            mouseup: 'MouseUp',
-            click: 'Click',
-            dblclick: 'DblClick',
-            contextmenu: 'ContextMenu',
-            mouseover: 'MouseOver',
-            mouseout: 'MouseOut',
-            mouseenter: 'MouseEnter',
-            mouseleave: 'MouseLeave',
-            keydown: 'KeyDown',
-            keyup: 'KeyUp',
-            keypress: 'KeyPress',
-            focus: 'Focus'
+            longpress: &#39;LongPress&#39;,
+            mousedown: &#39;MouseDown&#39;,
+            mouseup: &#39;MouseUp&#39;,
+            click: &#39;Click&#39;,
+            dblclick: &#39;DblClick&#39;,
+            contextmenu: &#39;ContextMenu&#39;,
+            mouseover: &#39;MouseOver&#39;,
+            mouseout: &#39;MouseOut&#39;,
+            mouseenter: &#39;MouseEnter&#39;,
+            mouseleave: &#39;MouseLeave&#39;,
+            keydown: &#39;KeyDown&#39;,
+            keyup: &#39;KeyUp&#39;,
+            keypress: &#39;KeyPress&#39;,
+            focus: &#39;Focus&#39;
         },
 <span id='Ext-view-View-static-property-TouchEventMap'>        /**
 </span>         * @private
@@ -102,10 +102,10 @@ Ext.define('Ext.view.View', {
          * @inheritable
          */
         TouchEventMap: {
-            touchstart: 'mousedown',
-            touchend: 'mouseup',
-            tap: 'click',
-            doubletap: 'dblclick'
+            touchstart: &#39;mousedown&#39;,
+            touchend: &#39;mouseup&#39;,
+            tap: &#39;click&#39;,
+            doubletap: &#39;dblclick&#39;
         }
     },
 
@@ -116,8 +116,8 @@ Ext.define('Ext.view.View', {
      * the default action.
      * @param {Ext.view.View} this
      * @param {Ext.data.Model} record The record that belongs to the item
-     * @param {HTMLElement} item The item's element
-     * @param {Number} index The item's index
+     * @param {HTMLElement} item The item&#39;s element
+     * @param {Number} index The item&#39;s index
      * @param {Ext.event.Event} e The raw event object
      */
 
@@ -487,11 +487,11 @@ Ext.define('Ext.view.View', {
             if (item) {
                 if (me.mouseOverItem !== item &amp;&amp; me.el.contains(item)) {
                     me.mouseOverItem = e.item = item;
-                    e.newType = 'mouseenter';
+                    e.newType = &#39;mouseenter&#39;;
                     me.handleEvent(e);
                 }
             } else {
-                // We're not over an item, so handle a container event.
+                // We&#39;re not over an item, so handle a container event.
                 me.handleEvent(e);
             }
         }
@@ -504,8 +504,8 @@ Ext.define('Ext.view.View', {
             computedRelatedTarget = e.getRelatedTarget(itemSelector),
             sourceView;
 
-        // We can only exit early when mousing within the same row, but we can't simply do an equality check
-        // since it's valid for both item and computedRelatedTarget to be null!
+        // We can only exit early when mousing within the same row, but we can&#39;t simply do an equality check
+        // since it&#39;s valid for both item and computedRelatedTarget to be null!
         if ((item === computedRelatedTarget) &amp;&amp; !(item === null &amp;&amp; computedRelatedTarget === null)) {
             return;
         }
@@ -516,11 +516,11 @@ Ext.define('Ext.view.View', {
             // Yes, this is an assignment.
             if (item &amp;&amp; (sourceView = me.self.getBoundView(item))) {
                 e.item = item;
-                e.newType = 'mouseleave';
+                e.newType = &#39;mouseleave&#39;;
                 sourceView.handleEvent(e);
                 sourceView.mouseOverItem = null;
             } else {
-                // We're not over an item, so handle a container event.
+                // We&#39;re not over an item, so handle a container event.
                 me.handleEvent(e);
             }
         }
@@ -531,7 +531,7 @@ Ext.define('Ext.view.View', {
             isKeyEvent = me.keyEventRe.test(e.type);
         
         // We need to know if the event target is an input field to block
-        // drag n' drop plugin(s) from stopping pointer events as this makes
+        // drag n&#39; drop plugin(s) from stopping pointer events as this makes
         // input fields unfocusable and unselectable. We also need to know
         // this for key events to prevent scrolling, see below.
         e.isInputFieldEvent = Ext.fly(e.target).isInputField();
@@ -551,7 +551,7 @@ Ext.define('Ext.view.View', {
         
         // We need to prevent default action on navigation keys
         // that can cause View element scroll unless the event is from an input field.
-        // We MUST prevent browser's default action on SPACE which is to focus the event's target element.
+        // We MUST prevent browser&#39;s default action on SPACE which is to focus the event&#39;s target element.
         // Focusing causes the browser to attempt to scroll the element into view.
         if (isKeyEvent &amp;&amp; !e.isInputFieldEvent) {
             if (e.getKey() === e.SPACE || e.isNavKeyPress(true)) {
@@ -606,27 +606,27 @@ Ext.define('Ext.view.View', {
             }
 
             if (
-                (me['onBeforeItem' + map[newType]](record, item, index, e) === false) ||
-                (me.fireEvent('beforeitem' + newType, me, record, item, index, e) === false) ||
-                (me['onItem' + map[newType]](record, item, index, e) === false)
+                (me[&#39;onBeforeItem&#39; + map[newType]](record, item, index, e) === false) ||
+                (me.fireEvent(&#39;beforeitem&#39; + newType, me, record, item, index, e) === false) ||
+                (me[&#39;onItem&#39; + map[newType]](record, item, index, e) === false)
             ) {
                 return false;
             }
 
-            me.fireEvent('item' + newType, me, record, item, index, e);
+            me.fireEvent(&#39;item&#39; + newType, me, record, item, index, e);
         }
         else {
             type = touchMap[type] || type;
             if (
                 (me.processContainerEvent(e) === false) ||
-                (me['onBeforeContainer' + map[type]](e) === false) ||
-                (me.fireEvent('beforecontainer' + type, me, e) === false) ||
-                (me['onContainer' + map[type]](e) === false)
+                (me[&#39;onBeforeContainer&#39; + map[type]](e) === false) ||
+                (me.fireEvent(&#39;beforecontainer&#39; + type, me, e) === false) ||
+                (me[&#39;onContainer&#39; + map[type]](e) === false)
             ) {
                 return false;
             }
 
-            me.fireEvent('container' + type, me, e);
+            me.fireEvent(&#39;container&#39; + type, me, e);
         }
 
         return true;
@@ -722,7 +722,7 @@ Ext.define('Ext.view.View', {
                 }
                 //&lt;/feature&gt;
                 if (me.hasListeners.unhighlightitem) {
-                    me.fireEvent('unhighlightitem', me, highlighted);
+                    me.fireEvent(&#39;unhighlightitem&#39;, me, highlighted);
                 }
             }
 
@@ -738,7 +738,7 @@ Ext.define('Ext.view.View', {
                 }
                 //&lt;/feature&gt;
                 if (me.hasListeners.highlightitem) {
-                    me.fireEvent('highlightitem', me, item);
+                    me.fireEvent(&#39;highlightitem&#39;, me, item);
                 }
             }
         }

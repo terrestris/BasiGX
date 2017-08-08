@@ -34,7 +34,7 @@ Ext.env.OS = function(userAgent, platform, browserScope) {
         names = Ext.Boot.osNames,
         prefixes = Ext.Boot.osPrefixes,
         name,
-        version = '',
+        version = &#39;&#39;,
         is = me.is,
         i, prefix, match, item, match1;
 
@@ -44,14 +44,14 @@ Ext.env.OS = function(userAgent, platform, browserScope) {
         if (prefixes.hasOwnProperty(i)) {
             prefix = prefixes[i];
 
-            match = userAgent.match(new RegExp('(?:'+prefix+')([^\\s;]+)'));
+            match = userAgent.match(new RegExp(&#39;(?:&#39;+prefix+&#39;)([^\\s;]+)&#39;));
 
             if (match) {
                 name = names[i];
                 match1 = match[1];
 
                 // This is here because some HTC android devices show an OSX Snow Leopard userAgent by default.
-                // And the Kindle Fire doesn't have any indicator of Android as the OS in its User Agent
+                // And the Kindle Fire doesn&#39;t have any indicator of Android as the OS in its User Agent
                 if (match1 &amp;&amp; match1 === &quot;HTC_&quot;) {
                     version = new Ext.Version(&quot;2.3&quot;);
                 }
@@ -68,8 +68,8 @@ Ext.env.OS = function(userAgent, platform, browserScope) {
     }
 
     if (!name) {
-        name = names[(userAgent.toLowerCase().match(/mac|win|linux/) || ['other'])[0]];
-        version = new Ext.Version('');
+        name = names[(userAgent.toLowerCase().match(/mac|win|linux/) || [&#39;other&#39;])[0]];
+        version = new Ext.Version(&#39;&#39;);
     }
 
     this.name = name;
@@ -79,17 +79,17 @@ Ext.env.OS = function(userAgent, platform, browserScope) {
     // it will report the platform of the machine (MacIntel, Win32, etc) instead
     // of an emulated platform
     if (userAgent.match(/ipad/i)) {
-        platform = 'iPad';
+        platform = &#39;iPad&#39;;
     }
 
     if (platform) {
-        this.setFlag(platform.replace(/ simulator$/i, ''));
+        this.setFlag(platform.replace(/ simulator$/i, &#39;&#39;));
     }
 
     this.setFlag(name);
 
     if (version) {
-        this.setFlag(name + (version.getMajor() || ''));
+        this.setFlag(name + (version.getMajor() || &#39;&#39;));
         this.setFlag(name + version.getShortVersion());
     }
 
@@ -105,7 +105,7 @@ Ext.env.OS = function(userAgent, platform, browserScope) {
 
     // Detect if the device is the iPhone 5.
     if (this.name === &quot;iOS&quot; &amp;&amp; window.screen.height === 568) {
-        this.setFlag('iPhone5');
+        this.setFlag(&#39;iPhone5&#39;);
     }
 
     if (browserScope.is.Safari || browserScope.is.Silk) {
@@ -126,7 +126,7 @@ Ext.env.OS.prototype = {
 <span id='Ext-os-method-is'>    /**
 </span>     * A &quot;hybrid&quot; property, can be either accessed as a method call, i.e:
      *
-     *     if (Ext.os.is('Android')) {
+     *     if (Ext.os.is(&#39;Android&#39;)) {
      *         // ...
      *     }
      *
@@ -245,7 +245,7 @@ Ext.env.OS.prototype = {
     osName = osEnv.name;
 
     // A couple compatible flavors:
-    Ext['is' + osName] = true; // e.g., Ext.isWindows
+    Ext[&#39;is&#39; + osName] = true; // e.g., Ext.isWindows
     Ext.isMac = is.Mac = is.MacOS;
 
     var search = window.location.search.match(/deviceType=(Tablet|Phone)/),
@@ -256,15 +256,15 @@ Ext.env.OS.prototype = {
     if (search &amp;&amp; search[1]) {
         deviceType = search[1];
     }
-    else if (nativeDeviceType === 'iPhone') {
-        deviceType = 'Phone';
+    else if (nativeDeviceType === &#39;iPhone&#39;) {
+        deviceType = &#39;Phone&#39;;
     }
-    else if (nativeDeviceType === 'iPad') {
-        deviceType = 'Tablet';
+    else if (nativeDeviceType === &#39;iPad&#39;) {
+        deviceType = &#39;Tablet&#39;;
     }
     else {
         if (!osEnv.is.Android &amp;&amp; !osEnv.is.iOS &amp;&amp; !osEnv.is.WindowsPhone &amp;&amp; /Windows|Linux|MacOS/.test(osName)) {
-            deviceType = 'Desktop';
+            deviceType = &#39;Desktop&#39;;
 
             // always set it to false when you are on a desktop not using Ripple Emulation
             Ext.browser.is.WebView = !!Ext.browser.is.Ripple;
@@ -272,10 +272,10 @@ Ext.env.OS.prototype = {
         else if (osEnv.is.iPad || osEnv.is.RIMTablet || osEnv.is.Android3 ||
                  Ext.browser.is.Silk ||
                 (osEnv.is.Android &amp;&amp; userAgent.search(/mobile/i) === -1)) {
-            deviceType = 'Tablet';
+            deviceType = &#39;Tablet&#39;;
         }
         else {
-            deviceType = 'Phone';
+            deviceType = &#39;Phone&#39;;
         }
     }
 

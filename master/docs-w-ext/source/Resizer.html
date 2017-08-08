@@ -17,7 +17,7 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-resizer-Resizer'>/**
 </span> * Applies drag handles to an element or component to make it resizable. The drag handles are inserted into the element
- * (or component's element) and positioned absolute.
+ * (or component&#39;s element) and positioned absolute.
  *
  * Textarea and img elements will be wrapped with an additional div because these elements do not support child nodes.
  * The original element can be accessed through the originalTarget property.
@@ -26,23 +26,23 @@
  *
  *     Value   Description
  *     ------  -------------------
- *      'n'     north
- *      's'     south
- *      'e'     east
- *      'w'     west
- *      'nw'    northwest
- *      'sw'    southwest
- *      'se'    southeast
- *      'ne'    northeast
- *      'all'   all
+ *      &#39;n&#39;     north
+ *      &#39;s&#39;     south
+ *      &#39;e&#39;     east
+ *      &#39;w&#39;     west
+ *      &#39;nw&#39;    northwest
+ *      &#39;sw&#39;    southwest
+ *      &#39;se&#39;    southeast
+ *      &#39;ne&#39;    northeast
+ *      &#39;all&#39;   all
  *
  * {@img Ext.resizer.Resizer/Ext.resizer.Resizer.png Ext.resizer.Resizer component}
  *
- * Here's an example showing the creation of a typical Resizer:
+ * Here&#39;s an example showing the creation of a typical Resizer:
  *
- *     Ext.create('Ext.resizer.Resizer', {
- *         target: 'elToResize',
- *         handles: 'all',
+ *     Ext.create(&#39;Ext.resizer.Resizer&#39;, {
+ *         target: &#39;elToResize&#39;,
+ *         handles: &#39;all&#39;,
  *         minWidth: 200,
  *         minHeight: 100,
  *         maxWidth: 500,
@@ -50,19 +50,19 @@
  *         pinned: true
  *     });
  */
-Ext.define('Ext.resizer.Resizer', {
+Ext.define(&#39;Ext.resizer.Resizer&#39;, {
     mixins: {
-        observable: 'Ext.util.Observable'
+        observable: &#39;Ext.util.Observable&#39;
     },
-    uses: ['Ext.resizer.ResizeTracker', 'Ext.Component'],
+    uses: [&#39;Ext.resizer.ResizeTracker&#39;, &#39;Ext.Component&#39;],
 
-    alternateClassName: 'Ext.Resizable',
+    alternateClassName: &#39;Ext.Resizable&#39;,
 
-<span id='Ext-resizer-Resizer-property-handleCls'>    handleCls:  Ext.baseCSSPrefix + 'resizable-handle',
-</span><span id='Ext-resizer-Resizer-property-overCls'>    overCls:  Ext.baseCSSPrefix + 'resizable-handle-over',
-</span><span id='Ext-resizer-Resizer-property-pinnedCls'>    pinnedCls:  Ext.baseCSSPrefix + 'resizable-pinned',
-</span><span id='Ext-resizer-Resizer-property-wrapCls'>    wrapCls:    Ext.baseCSSPrefix + 'resizable-wrap',
-</span><span id='Ext-resizer-Resizer-property-wrappedCls'>    wrappedCls: Ext.baseCSSPrefix + 'resizable-wrapped',
+<span id='Ext-resizer-Resizer-property-handleCls'>    handleCls:  Ext.baseCSSPrefix + &#39;resizable-handle&#39;,
+</span><span id='Ext-resizer-Resizer-property-overCls'>    overCls:  Ext.baseCSSPrefix + &#39;resizable-handle-over&#39;,
+</span><span id='Ext-resizer-Resizer-property-pinnedCls'>    pinnedCls:  Ext.baseCSSPrefix + &#39;resizable-pinned&#39;,
+</span><span id='Ext-resizer-Resizer-property-wrapCls'>    wrapCls:    Ext.baseCSSPrefix + &#39;resizable-wrap&#39;,
+</span><span id='Ext-resizer-Resizer-property-wrappedCls'>    wrappedCls: Ext.baseCSSPrefix + &#39;resizable-wrapped&#39;,
 </span><span id='Ext-resizer-Resizer-property-delimiterRe'>    delimiterRe: /(?:\s*[,;]\s*)|\s+/,
 </span>
 <span id='Ext-resizer-Resizer-cfg-dynamic'>    /**
@@ -78,11 +78,11 @@ Ext.define('Ext.resizer.Resizer', {
 
 <span id='Ext-resizer-Resizer-cfg-handles'>    /**
 </span>     * @cfg {String} handles
-     * String consisting of the resize handles to display. Defaults to 's e se' for Elements and fixed position
-     * Components. Defaults to 8 point resizing for floating Components (such as Windows). Specify either `'all'` or any
-     * of `'n s e w ne nw se sw'`.
+     * String consisting of the resize handles to display. Defaults to &#39;s e se&#39; for Elements and fixed position
+     * Components. Defaults to 8 point resizing for floating Components (such as Windows). Specify either `&#39;all&#39;` or any
+     * of `&#39;n s e w ne nw se sw&#39;`.
      */
-    handles: 's e se',
+    handles: &#39;s e se&#39;,
 
 <span id='Ext-resizer-Resizer-cfg-height'>    /**
 </span>     * @cfg {Number} height
@@ -156,14 +156,14 @@ Ext.define('Ext.resizer.Resizer', {
      */
 
     possiblePositions: {
-        n:  'north',
-        s:  'south',
-        e:  'east',
-        w:  'west',
-        se: 'southeast',
-        sw: 'southwest',
-        nw: 'northwest',
-        ne: 'northeast'
+        n:  &#39;north&#39;,
+        s:  &#39;south&#39;,
+        e:  &#39;east&#39;,
+        w:  &#39;west&#39;,
+        se: &#39;southeast&#39;,
+        sw: &#39;southwest&#39;,
+        nw: &#39;northwest&#39;,
+        ne: &#39;northeast&#39;
     },
 
 <span id='Ext-resizer-Resizer-property-touchActionMap'>    /**
@@ -190,7 +190,7 @@ Ext.define('Ext.resizer.Resizer', {
      * Outer element for resizing behavior.
      */
 
-    ariaRole: 'presentation',
+    ariaRole: &#39;presentation&#39;,
 
 <span id='Ext-resizer-Resizer-event-beforeresize'>    /**
 </span>     * @event beforeresize
@@ -245,7 +245,7 @@ Ext.define('Ext.resizer.Resizer', {
                 // Resizable Components get a new UI class on them which makes them overflow:visible
                 // if the border width is non-zero and therefore the SASS has embedded the handles
                 // in the borders using -ve position.
-                resizeTarget.addClsWithUI('resizable');
+                resizeTarget.addClsWithUI(&#39;resizable&#39;);
 
                 if (resizeTarget.minWidth) {
                     me.minWidth = resizeTarget.minWidth;
@@ -260,8 +260,8 @@ Ext.define('Ext.resizer.Resizer', {
                     me.maxHeight = resizeTarget.maxHeight;
                 }
                 if (resizeTarget.floating) {
-                    if (!me.hasOwnProperty('handles')) {
-                        me.handles = 'n ne e se s sw w nw';
+                    if (!me.hasOwnProperty(&#39;handles&#39;)) {
+                        me.handles = &#39;n ne e se s sw w nw&#39;;
                     }
                 }
                 me.el = resizeTarget.getEl();
@@ -269,7 +269,7 @@ Ext.define('Ext.resizer.Resizer', {
                 resizeTarget = me.el = me.target = Ext.get(resizeTarget);
             }
         }
-        // Backwards compatibility with Ext3.x's Resizable which used el as a config.
+        // Backwards compatibility with Ext3.x&#39;s Resizable which used el as a config.
         else {
             resizeTarget = me.target = me.el = Ext.get(me.el);
         }
@@ -295,7 +295,7 @@ Ext.define('Ext.resizer.Resizer', {
         // have children and therefore must
         // be wrapped
         tag = me.el.dom.tagName.toUpperCase();
-        if (tag === 'TEXTAREA' || tag === 'IMG' || tag === 'TABLE') {
+        if (tag === &#39;TEXTAREA&#39; || tag === &#39;IMG&#39; || tag === &#39;TABLE&#39;) {
 <span id='Ext-resizer-Resizer-property-originalTarget'>            /**
 </span>             * @property {Ext.dom.Element/Ext.Component} originalTarget
              * Reference to the original resize target if the element of the original resize target was a
@@ -309,22 +309,22 @@ Ext.define('Ext.resizer.Resizer', {
             me.el.addCls(me.wrappedCls);
 
             me.target = me.el = me.el.wrap({
-                role: 'presentation',
+                role: &#39;presentation&#39;,
                 cls: me.wrapCls,
-                id: me.el.id + '-rzwrap',
-                style: wrapTarget.getStyle(['margin-top', 'margin-bottom'])
+                id: me.el.id + &#39;-rzwrap&#39;,
+                style: wrapTarget.getStyle([&#39;margin-top&#39;, &#39;margin-bottom&#39;])
             });
 
             positioning = wrapTarget.getPositioning();
 
-            // Transfer originalTarget's positioning+sizing+margins
+            // Transfer originalTarget&#39;s positioning+sizing+margins
             me.el.setPositioning(positioning);
 
             wrapTarget.clearPositioning();
 
             box = wrapTarget.getBox();
 
-            if (positioning.position !== 'absolute'){
+            if (positioning.position !== &#39;absolute&#39;){
                 //reset coordinates
                 box.x = 0;
                 box.y = 0;
@@ -333,7 +333,7 @@ Ext.define('Ext.resizer.Resizer', {
             me.el.setBox(box);
 
             // Position the wrapped element absolute so that it does not stretch the wrapper
-            wrapTarget.setStyle('position', 'absolute');
+            wrapTarget.setStyle(&#39;position&#39;, &#39;absolute&#39;);
 
             me.isTargetWrapped = true;
         }
@@ -363,7 +363,7 @@ Ext.define('Ext.resizer.Resizer', {
             dynamic: me.originalTarget ? true : me.dynamic,
 
             originalTarget: me.originalTarget,
-            delegate: '.' + me.handleCls,
+            delegate: &#39;.&#39; + me.handleCls,
             preserveRatio: me.preserveRatio,
             heightIncrement: me.heightIncrement,
             widthIncrement: me.widthIncrement,
@@ -373,7 +373,7 @@ Ext.define('Ext.resizer.Resizer', {
             maxWidth: me.maxWidth
         });
 
-        // Relay the ResizeTracker's superclass events as our own resize events
+        // Relay the ResizeTracker&#39;s superclass events as our own resize events
         me.resizeTracker.on({
             mousedown: me.onBeforeResize,
             drag: me.onResize,
@@ -381,20 +381,20 @@ Ext.define('Ext.resizer.Resizer', {
             scope: me
         });
 
-        if (me.handles === 'all') {
-            me.handles = 'n s e w ne nw se sw';
+        if (me.handles === &#39;all&#39;) {
+            me.handles = &#39;n s e w ne nw se sw&#39;;
         }
 
         handles = me.handles = me.handles.split(me.delimiterRe);
         possibles = me.possiblePositions;
         len = handles.length;
 
-        handleCls = me.handleCls + ' ' + me.handleCls + '-{0}';
+        handleCls = me.handleCls + &#39; &#39; + me.handleCls + &#39;-{0}&#39;;
         if (me.target.isComponent) {
             targetBaseCls = me.target.baseCls;
-            handleCls += ' ' + targetBaseCls + '-handle ' + targetBaseCls + '-handle-{0}';
+            handleCls += &#39; &#39; + targetBaseCls + &#39;-handle &#39; + targetBaseCls + &#39;-handle-{0}&#39;;
             if (Ext.supports.CSS3BorderRadius) {
-                handleCls += ' ' + targetBaseCls + '-handle-{0}-br';
+                handleCls += &#39; &#39; + targetBaseCls + &#39;-handle-{0}-br&#39;;
             }
         }
 
@@ -405,10 +405,10 @@ Ext.define('Ext.resizer.Resizer', {
                 pos = possibles[handle];
 
                 handleEl = me[pos] = me.el.createChild({
-                    id: me.el.id + '-' + pos + '-handle',
-                    cls: Ext.String.format(handleCls, pos) + ' ' + unselectableCls,
-                    unselectable: 'on',
-                    role: 'presentation'
+                    id: me.el.id + &#39;-&#39; + pos + &#39;-handle&#39;,
+                    cls: Ext.String.format(handleCls, pos) + &#39; &#39; + unselectableCls,
+                    unselectable: &#39;on&#39;,
+                    role: &#39;presentation&#39;
                 });
 
                 handleEl.region = pos;
@@ -438,32 +438,32 @@ Ext.define('Ext.resizer.Resizer', {
 
 <span id='Ext-resizer-Resizer-method-onBeforeResize'>    /**
 </span>     * @private
-     * Relay the Tracker's mousedown event as beforeresize
+     * Relay the Tracker&#39;s mousedown event as beforeresize
      * @param {Ext.resizer.ResizeTracker} tracker
      * @param {Ext.event.Event} e The event
      */
     onBeforeResize: function(tracker, e) {
-        return this.fireResizeEvent('beforeresize', tracker, e);
+        return this.fireResizeEvent(&#39;beforeresize&#39;, tracker, e);
     },
 
 <span id='Ext-resizer-Resizer-method-onResize'>    /**
 </span>     * @private
-     * Relay the Tracker's drag event as resizedrag
+     * Relay the Tracker&#39;s drag event as resizedrag
      * @param {Ext.resizer.ResizeTracker} tracker
      * @param {Ext.event.Event} e The event
      */
     onResize: function(tracker, e) {
-        return this.fireResizeEvent('resizedrag', tracker, e);
+        return this.fireResizeEvent(&#39;resizedrag&#39;, tracker, e);
     },
 
 <span id='Ext-resizer-Resizer-method-onResizeEnd'>    /**
 </span>     * @private
-     * Relay the Tracker's dragend event as resize
+     * Relay the Tracker&#39;s dragend event as resize
      * @param {Ext.resizer.ResizeTracker} tracker
      * @param {Ext.event.Event} e The event
      */
     onResizeEnd: function(tracker, e) {
-        return this.fireResizeEvent('resize', tracker, e);
+        return this.fireResizeEvent(&#39;resize&#39;, tracker, e);
     },
 
 <span id='Ext-resizer-Resizer-method-fireResizeEvent'>    /**
@@ -484,14 +484,14 @@ Ext.define('Ext.resizer.Resizer', {
     },
 
 <span id='Ext-resizer-Resizer-method-resizeTo'>    /**
-</span>     * Perform a manual resize and fires the 'resize' event.
+</span>     * Perform a manual resize and fires the &#39;resize&#39; event.
      * @param {Number} width
      * @param {Number} height
      */
     resizeTo : function(width, height) {
         var me = this;
         me.target.setSize(width, height);
-        me.fireEvent('resize', me, width, height, null);
+        me.fireEvent(&#39;resize&#39;, me, width, height, null);
     },
 
 <span id='Ext-resizer-Resizer-method-getEl'>    /**
@@ -526,7 +526,7 @@ Ext.define('Ext.resizer.Resizer', {
 
         me.resizeTracker.destroy();
 
-        // The target is redefined as an element when it's wrapped so we must destroy it.
+        // The target is redefined as an element when it&#39;s wrapped so we must destroy it.
         if (me.isTargetWrapped) {
             me.target.destroy();
         }

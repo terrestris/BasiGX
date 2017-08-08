@@ -65,33 +65,33 @@
  *
  *      var data = [{
  *          id: 1,
- *          name: 'Adam'
+ *          name: &#39;Adam&#39;
  *      }, {
  *          id: 2,
- *          name: 'Barbara'
+ *          name: &#39;Barbara&#39;
  *      }, {
  *          id: 3,
- *          name: 'Charlie'
+ *          name: &#39;Charlie&#39;
  *      }];
  *
  *      var tpl = new Ext.XTemplate(
- *          '&lt;div class=&quot;container&quot;&gt;',
- *              '&lt;tpl for=&quot;.&quot;&gt;',
- *                  '&lt;div class=&quot;child&quot; data-id=&quot;{id}&quot;&gt;{name}&lt;/div&gt;',
- *              '&lt;/tpl&gt;',
- *          '&lt;/div&gt;'
+ *          &#39;&lt;div class=&quot;container&quot;&gt;&#39;,
+ *              &#39;&lt;tpl for=&quot;.&quot;&gt;&#39;,
+ *                  &#39;&lt;div class=&quot;child&quot; data-id=&quot;{id}&quot;&gt;{name}&lt;/div&gt;&#39;,
+ *              &#39;&lt;/tpl&gt;&#39;,
+ *          &#39;&lt;/div&gt;&#39;
  *      );
  *
  *      var el = tpl.append(Ext.getBody(), data);
  *
  *      new Ext.drag.Source({
  *          element: el,
- *          handle: '.child',
+ *          handle: &#39;.child&#39;,
  *          proxy: {
- *              type: 'placeholder',
+ *              type: &#39;placeholder&#39;,
  *              getElement: function(info) {
  *                  return Ext.getBody().createChild({
- *                      cls: 'foo',
+ *                      cls: &#39;foo&#39;,
  *                      html: info.eventTarget.innerHTML
  *                  });
  *              }
@@ -112,42 +112,42 @@
  *
  *      var data = [{
  *          id: 1,
- *          name: 'Adam'
+ *          name: &#39;Adam&#39;
  *      }, {
  *          id: 2,
- *          name: 'Barbara'
+ *          name: &#39;Barbara&#39;
  *      }, {
  *          id: 3,
- *          name: 'Charlie'
+ *          name: &#39;Charlie&#39;
  *      }];
  *
  *      var tpl = new Ext.XTemplate(
- *          '&lt;div class=&quot;container&quot;&gt;',
- *              '&lt;tpl for=&quot;.&quot;&gt;',
- *                  '&lt;div class=&quot;child&quot; data-id=&quot;{id}&quot;&gt;{name}&lt;/div&gt;',
- *              '&lt;/tpl&gt;',
- *          '&lt;/div&gt;'
+ *          &#39;&lt;div class=&quot;container&quot;&gt;&#39;,
+ *              &#39;&lt;tpl for=&quot;.&quot;&gt;&#39;,
+ *                  &#39;&lt;div class=&quot;child&quot; data-id=&quot;{id}&quot;&gt;{name}&lt;/div&gt;&#39;,
+ *              &#39;&lt;/tpl&gt;&#39;,
+ *          &#39;&lt;/div&gt;&#39;
  *      );
  *
  *      var el = tpl.append(Ext.getBody(), data);
  *
  *      new Ext.drag.Source({
  *          element: el,
- *          handle: '.child',
+ *          handle: &#39;.child&#39;,
  *          describe: function(info) {
- *              info.setData('item', Ext.fly(info.eventTarget).getAttribute('data-id'));
+ *              info.setData(&#39;item&#39;, Ext.fly(info.eventTarget).getAttribute(&#39;data-id&#39;));
  *          }
  *      });
  *  
  */
-Ext.define('Ext.drag.Source', {
-    extend: 'Ext.drag.Item',
+Ext.define(&#39;Ext.drag.Source&#39;, {
+    extend: &#39;Ext.drag.Item&#39;,
 
-<span id='Ext-drag-Source-property-defaultIdPrefix'>    defaultIdPrefix: 'source-',
+<span id='Ext-drag-Source-property-defaultIdPrefix'>    defaultIdPrefix: &#39;source-&#39;,
 </span>
     requires: [
-        'Ext.GlobalEvents',
-        'Ext.drag.Constraint'
+        &#39;Ext.GlobalEvents&#39;,
+        &#39;Ext.drag.Constraint&#39;
     ],
 
     config: {
@@ -194,7 +194,7 @@ Ext.define('Ext.drag.Source', {
          * See {@link Ext.drag.proxy.None None}, {@link Ext.drag.proxy.Original Original}, 
          * {@link Ext.drag.proxy.Status Status}.
          */
-        proxy: 'original',
+        proxy: &#39;original&#39;,
 
 <span id='Ext-drag-Source-cfg-revert'>        /**
 </span>         * @cfg {Boolean/Object} revert
@@ -268,7 +268,7 @@ Ext.define('Ext.drag.Source', {
         if (describe) {
             this.describe = describe;
 
-            // Don't mutate the object the user passed. Need to do this
+            // Don&#39;t mutate the object the user passed. Need to do this
             // here otherwise initConfig will complain about writing over
             // the method.
             config = Ext.apply({}, config);
@@ -279,7 +279,7 @@ Ext.define('Ext.drag.Source', {
         // Use bracket syntax to prevent Cmd from creating an
         // auto dependency. Will be pulled in by the target if
         // required.
-        this.manager = Ext.drag['Manager'];
+        this.manager = Ext.drag[&#39;Manager&#39;];
     },
 
 <span id='Ext-drag-Source-method-describe'>    /**
@@ -356,7 +356,7 @@ Ext.define('Ext.drag.Source', {
     onDragStart: Ext.emptyFn,
 
 <span id='Ext-drag-Source-method-applyActivateOnLongPress'>    applyActivateOnLongPress: function(activateOnLongPress) {
-</span>        if (typeof activateOnLongPress === 'string') {
+</span>        if (typeof activateOnLongPress === &#39;string&#39;) {
             activateOnLongPress = [activateOnLongPress];
         }
         return activateOnLongPress;
@@ -448,7 +448,7 @@ Ext.define('Ext.drag.Source', {
          *
          * @private
          */
-        draggingCls: Ext.baseCSSPrefix + 'drag-dragging',
+        draggingCls: Ext.baseCSSPrefix + &#39;drag-dragging&#39;,
 
 <span id='Ext-drag-Source-property-info'>        /**
 </span>         * @property {Ext.drag.Info} info
@@ -464,7 +464,7 @@ Ext.define('Ext.drag.Source', {
          *
          * @private
          */
-        revertCls: Ext.baseCSSPrefix + 'drag-revert',
+        revertCls: Ext.baseCSSPrefix + &#39;drag-revert&#39;,
 
         canActivateOnLongPress: function(e) {
             var activate = this.getActivateOnLongPress();
@@ -500,18 +500,18 @@ Ext.define('Ext.drag.Source', {
          */
         getElListeners: function() {
             var o = {
-                touchstart: 'handleTouchStart',
-                dragstart: 'handleDragStart',
-                drag: 'handleDragMove',
-                dragend: 'handleDragEnd',
-                dragcancel: 'handleDragCancel'
+                touchstart: &#39;handleTouchStart&#39;,
+                dragstart: &#39;handleDragStart&#39;,
+                drag: &#39;handleDragMove&#39;,
+                dragend: &#39;handleDragEnd&#39;,
+                dragcancel: &#39;handleDragCancel&#39;
             }, handle = this.getHandle();
 
             if (handle) {
                 o.delegate = handle;
             }
             if (this.getActivateOnLongPress()) {
-                o.longpress = 'handleLongPress';
+                o.longpress = &#39;handleLongPress&#39;;
             }
             return o;
         },
@@ -532,10 +532,10 @@ Ext.define('Ext.drag.Source', {
             }
             me.onDragCancel(info);
             if (me.hasListeners.dragcancel) {
-                me.fireEvent('dragcancel', me, info, e);
+                me.fireEvent(&#39;dragcancel&#39;, me, info, e);
             }
 
-            Ext.fireEvent('dragcancel', me, info, e);
+            Ext.fireEvent(&#39;dragcancel&#39;, me, info, e);
 
             me.dragCleanup(info);
         },
@@ -565,9 +565,9 @@ Ext.define('Ext.drag.Source', {
             }
             me.onDragEnd(info);
             if (me.hasListeners.dragend) {
-                me.fireEvent('dragend', me, info, e);
+                me.fireEvent(&#39;dragend&#39;, me, info, e);
             }
-            Ext.fireEvent('dragend', me, info, e);
+            Ext.fireEvent(&#39;dragend&#39;, me, info, e);
 
             if (revert &amp;&amp; proxyEl) {
                 proxyEl.addCls(me.revertCls);
@@ -606,7 +606,7 @@ Ext.define('Ext.drag.Source', {
             }
             me.onDragMove(info);
             if (me.hasListeners.dragmove) {
-                me.fireEvent('dragmove', me, info, e);
+                me.fireEvent(&#39;dragmove&#39;, me, info, e);
             }
         },
 
@@ -641,7 +641,7 @@ Ext.define('Ext.drag.Source', {
             cancel = me.beforeDragStart(info) === false;
 
             if (!cancel &amp;&amp; hasListeners.beforedragstart) {
-                cancel = me.fireEvent('beforedragstart', me, info, e) === false;
+                cancel = me.fireEvent(&#39;beforedragstart&#39;, me, info, e) === false;
             }
 
             if (cancel) {
@@ -668,9 +668,9 @@ Ext.define('Ext.drag.Source', {
             }
             me.onDragStart(info);
             if (hasListeners.dragstart) {
-                me.fireEvent('dragstart', me, info, e);
+                me.fireEvent(&#39;dragstart&#39;, me, info, e);
             }
-            Ext.fireEvent('dragstart', me, info, e);
+            Ext.fireEvent(&#39;dragstart&#39;, me, info, e);
         },
 
 <span id='Ext-drag-Source-method-handleLongPress'>        /**

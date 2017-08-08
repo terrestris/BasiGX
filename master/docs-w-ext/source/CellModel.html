@@ -21,34 +21,34 @@
  * Implements cell based navigation via keyboard.
  *
  *     @example
- *     var store = Ext.create('Ext.data.Store', {
- *         fields: ['name', 'email', 'phone'],
+ *     var store = Ext.create(&#39;Ext.data.Store&#39;, {
+ *         fields: [&#39;name&#39;, &#39;email&#39;, &#39;phone&#39;],
  *         data: [
- *             { name: 'Lisa', email: 'lisa@simpsons.com',  phone: '555-111-1224' },
- *             { name: 'Bart', email: 'bart@simpsons.com',  phone: '555-222-1234' },
- *             { name: 'Homer', email: 'homer@simpsons.com', phone: '555-222-1244' },
- *             { name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
+ *             { name: &#39;Lisa&#39;, email: &#39;lisa@simpsons.com&#39;,  phone: &#39;555-111-1224&#39; },
+ *             { name: &#39;Bart&#39;, email: &#39;bart@simpsons.com&#39;,  phone: &#39;555-222-1234&#39; },
+ *             { name: &#39;Homer&#39;, email: &#39;homer@simpsons.com&#39;, phone: &#39;555-222-1244&#39; },
+ *             { name: &#39;Marge&#39;, email: &#39;marge@simpsons.com&#39;, phone: &#39;555-222-1254&#39; }
  *         ]
  *     });
  *
- *     Ext.create('Ext.grid.Panel', {
- *         title: 'Simpsons',
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
+ *         title: &#39;Simpsons&#39;,
  *         store: store,
  *         width: 400,
  *         renderTo: Ext.getBody(),
  *         columns: [
- *             { text: 'Name',  dataIndex: 'name' },
- *             { text: 'Email', dataIndex: 'email', flex: 1 },
- *             { text: 'Phone', dataIndex: 'phone' }
+ *             { text: &#39;Name&#39;,  dataIndex: &#39;name&#39; },
+ *             { text: &#39;Email&#39;, dataIndex: &#39;email&#39;, flex: 1 },
+ *             { text: &#39;Phone&#39;, dataIndex: &#39;phone&#39; }
  *         ],
- *         selModel: 'cellmodel'
+ *         selModel: &#39;cellmodel&#39;
  *     });
  */
-Ext.define('Ext.selection.CellModel', {
-    extend: 'Ext.selection.DataViewModel',
-    alias: 'selection.cellmodel',
+Ext.define(&#39;Ext.selection.CellModel&#39;, {
+    extend: &#39;Ext.selection.DataViewModel&#39;,
+    alias: &#39;selection.cellmodel&#39;,
     requires: [
-        'Ext.grid.CellContext'
+        &#39;Ext.grid.CellContext&#39;
     ],
 
 <span id='Ext-selection-CellModel-cfg-mode'>    /**
@@ -106,7 +106,7 @@ Ext.define('Ext.selection.CellModel', {
             me.gridListeners.destroy();
         }
 
-        // DataViewModel's bindComponent
+        // DataViewModel&#39;s bindComponent
         me.callParent([view]);
 
         if (view) {
@@ -155,10 +155,10 @@ Ext.define('Ext.selection.CellModel', {
 <span id='Ext-selection-CellModel-method-select'>    /** 
 </span>     * Selects a cell by row / column.
      *
-     *     var grid = Ext.create('Ext.grid.Panel', {
-     *         title: 'Simpsons',
+     *     var grid = Ext.create(&#39;Ext.grid.Panel&#39;, {
+     *         title: &#39;Simpsons&#39;,
      *         store: {
-     *             fields: ['name', 'email', 'phone'],
+     *             fields: [&#39;name&#39;, &#39;email&#39;, &#39;phone&#39;],
      *             data: [{
      *                 name: &quot;Lisa&quot;,
      *                 email: &quot;lisa@simpsons.com&quot;,
@@ -166,31 +166,31 @@ Ext.define('Ext.selection.CellModel', {
      *             }]
      *         },
      *         columns: [{
-     *             text: 'Name',
-     *             dataIndex: 'name'
+     *             text: &#39;Name&#39;,
+     *             dataIndex: &#39;name&#39;
      *         }, {
-     *             text: 'Email',
-     *             dataIndex: 'email',
+     *             text: &#39;Email&#39;,
+     *             dataIndex: &#39;email&#39;,
      *             hidden: true
      *         }, {
-     *             text: 'Phone',
-     *             dataIndex: 'phone',
+     *             text: &#39;Phone&#39;,
+     *             dataIndex: &#39;phone&#39;,
      *             flex: 1
      *         }],
      *         height: 200,
      *         width: 400,
      *         renderTo: Ext.getBody(),
-     *         selType: 'cellmodel',
+     *         selType: &#39;cellmodel&#39;,
      *         tbar: [{
-     *             text: 'Select position Object',
+     *             text: &#39;Select position Object&#39;,
      *             handler: function() {
      *                 grid.getSelectionModel().select({
      *                     row: grid.getStore().getAt(0),
-     *                     column: grid.down('gridcolumn[dataIndex=name]')
+     *                     column: grid.down(&#39;gridcolumn[dataIndex=name]&#39;)
      *                 });
      *             }
      *         }, {
-     *             text: 'Select position by Number',
+     *             text: &#39;Select position by Number&#39;,
      *             handler: function() {
      *                 grid.getSelectionModel().select({
      *                     row: 0,
@@ -225,7 +225,7 @@ Ext.define('Ext.selection.CellModel', {
                 } else {
                     pos = null;
                 } 
-            } else if (typeof pos === 'number') {
+            } else if (typeof pos === &#39;number&#39;) {
                 pos = {
                     row: pos,
                     column: 0
@@ -245,7 +245,7 @@ Ext.define('Ext.selection.CellModel', {
      * @deprecated 5.0.1 This API uses column indices which include hidden columns in the count. Use {@link #getPosition} instead.
      */
     getCurrentPosition: function() {
-        // If it's during a select, return nextSelection since we buffer
+        // If it&#39;s during a select, return nextSelection since we buffer
         // the real selection until after the event fires
         var position = this.selecting ? this.nextSelection : this.selection;
 
@@ -283,7 +283,7 @@ Ext.define('Ext.selection.CellModel', {
                 row: pos.row,
                 // IMPORTANT: The historic API for columns has been to include hidden columns
                 // in the index. So we must index into the &quot;all&quot; ColumnManager.
-                column: typeof pos.column === 'number' ? this.view.getColumnManager().getColumns()[pos.column] : pos.column
+                column: typeof pos.column === &#39;number&#39; ? this.view.getColumnManager().getColumns()[pos.column] : pos.column
             });
         }
         return this.setPosition(pos, suppressEvent, preventCheck);
@@ -306,7 +306,7 @@ Ext.define('Ext.selection.CellModel', {
             pos = pos.isCellContext ? pos.clone() : new Ext.grid.CellContext(me.view).setPosition(pos);
         }
         if (!preventCheck &amp;&amp; last) {
-            // If the position is the same, jump out &amp; don't fire the event
+            // If the position is the same, jump out &amp; don&#39;t fire the event
             if (pos &amp;&amp; (pos.record === last.record &amp;&amp; pos.column === last.column &amp;&amp; pos.view === last.view)) {
                 pos = null;
             } else {
@@ -340,7 +340,7 @@ Ext.define('Ext.selection.CellModel', {
                 row: row,
                 // IMPORTANT: The historic API for columns has been to include hidden columns
                 // in the index. So we must index into the &quot;all&quot; ColumnManager.
-                column: typeof column === 'number' ? view.getColumnManager().getColumns()[column] : column
+                column: typeof column === &#39;number&#39; ? view.getColumnManager().getColumns()[column] : column
             });
             return (testPos.record === pos.record) &amp;&amp; (testPos.column === pos.column);
         }
@@ -433,10 +433,10 @@ Ext.define('Ext.selection.CellModel', {
 
         if (isSelected) {
             pos = me.nextSelection;
-            eventName = 'select';
+            eventName = &#39;select&#39;;
         } else {
             pos = me.selection;
-            eventName = 'deselect';
+            eventName = &#39;deselect&#39;;
         }
 
         // CellModel may be shared between two sides of a Lockable.
@@ -444,7 +444,7 @@ Ext.define('Ext.selection.CellModel', {
         // Ensure we use the view specified by the position.
         view = pos.view || me.primaryView;
 
-        if ((suppressEvent || me.fireEvent('before' + eventName, me, record, pos.rowIdx, pos.colIdx)) !== false &amp;&amp;
+        if ((suppressEvent || me.fireEvent(&#39;before&#39; + eventName, me, record, pos.rowIdx, pos.colIdx)) !== false &amp;&amp;
                 commitFn() !== false) {
 
             if (isSelected) {
@@ -464,7 +464,7 @@ Ext.define('Ext.selection.CellModel', {
 </span>        var pos = this.getPosition(),
             selRowIdx;
 
-        // Synchronize the current position's row with the row of the last selected record.
+        // Synchronize the current position&#39;s row with the row of the last selected record.
         if (pos &amp;&amp; (selRowIdx = this.store.indexOf(this.selected.last())) !== -1) {
             pos.rowIdx = selRowIdx;
         }
@@ -480,7 +480,7 @@ Ext.define('Ext.selection.CellModel', {
      * so this is not added as a handler because the selected column.
      */
     onColumnMove: function(headerCt, header, fromIdx, toIdx) {
-        var grid = headerCt.up('tablepanel');
+        var grid = headerCt.up(&#39;tablepanel&#39;);
         if (grid) {
             this.onViewRefresh(grid.view);
         }
@@ -515,8 +515,8 @@ Ext.define('Ext.selection.CellModel', {
                 // this happens when the grid is reconfigured with new columns
                 // make a best effor to select something by matching on id, then text, then dataIndex
                 column = headerCt.queryById(column.id) || 
-                               headerCt.down('[text=&quot;' + column.text + '&quot;]') ||
-                               headerCt.down('[dataIndex=&quot;' + column.dataIndex + '&quot;]');
+                               headerCt.down(&#39;[text=&quot;&#39; + column.text + &#39;&quot;]&#39;) ||
+                               headerCt.down(&#39;[dataIndex=&quot;&#39; + column.dataIndex + &#39;&quot;]&#39;);
             }
 
             // If we have a columnHeader (either the column header that already exists in

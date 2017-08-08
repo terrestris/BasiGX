@@ -32,7 +32,7 @@
  * Deferred is transformed by the corresponding callback before being applied to the
  * second Deferred.
  *
- * Each time a Deferred's `then` method is called, it creates a new Consequence that will
+ * Each time a Deferred&#39;s `then` method is called, it creates a new Consequence that will
  * be triggered once its originating Deferred has been fulfilled or rejected. A Consequence
  * captures a pair of optional onFulfilled and onRejected callbacks.
  *
@@ -45,7 +45,7 @@
  * @since 6.0.0
  * @private
  */
-Ext.define('Ext.promise.Consequence', function(Consequence) { return {
+Ext.define(&#39;Ext.promise.Consequence&#39;, function(Consequence) { return {
 <span id='Ext-promise-Consequence-property-promise'>    /**
 </span>     * @property {Ext.promise.Promise}
      * Promise of the future value of this Consequence.
@@ -108,11 +108,11 @@ Ext.define('Ext.promise.Consequence', function(Consequence) { return {
             deferred = me.deferred;
 
         switch (action) {
-            case 'fulfill':
+            case &#39;fulfill&#39;:
                 me.propagate(value, me.onFulfilled, deferred, deferred.resolve);
                 break;
 
-            case 'reject':
+            case &#39;reject&#39;:
                 me.propagate(value, me.onRejected, deferred, deferred.reject);
                 break;
         }

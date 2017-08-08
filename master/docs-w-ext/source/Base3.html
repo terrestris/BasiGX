@@ -20,20 +20,20 @@
  * `{@link Ext.data.Connection#request}` method.
  * @since 6.0.0
  */
-Ext.define('Ext.data.request.Base', {
+Ext.define(&#39;Ext.data.request.Base&#39;, {
     requires: [
-        'Ext.Deferred'
+        &#39;Ext.Deferred&#39;
     ],
 
     mixins: [
-        'Ext.mixin.Factoryable'
+        &#39;Ext.mixin.Factoryable&#39;
     ],
 
-<span id='Ext-data-request-Base-property-factoryConfig'>    // Since this class is abstract, we don't have an alias of our own for Factoryable
+<span id='Ext-data-request-Base-property-factoryConfig'>    // Since this class is abstract, we don&#39;t have an alias of our own for Factoryable
 </span>    // to use.
     factoryConfig: {
-        type: 'request',
-        defaultType: 'ajax'  // this is the default deduced from the alias
+        type: &#39;request&#39;,
+        defaultType: &#39;ajax&#39;  // this is the default deduced from the alias
     },
 
 <span id='Ext-data-request-Base-property-result'>    result: null,
@@ -48,7 +48,7 @@ Ext.define('Ext.data.request.Base', {
         // ownerConfig contains default values for config options
         // applicable to every Request spawned by that owner;
         // however the values can be overridden in the options
-        // object passed to owner's request() method.
+        // object passed to owner&#39;s request() method.
         Ext.apply(me, config.options || {}, config.ownerConfig);
         
         me.id = ++Ext.data.Connection.requestId;
@@ -169,7 +169,7 @@ Ext.define('Ext.data.request.Base', {
                 request: me,
                 requestId: me.id,
                 status: me.aborted ? -1 : 0,
-                statusText: me.aborted ? 'transaction aborted' : 'communication failure',
+                statusText: me.aborted ? &#39;transaction aborted&#39; : &#39;communication failure&#39;,
                 getResponseHeader: me._getHeader,
                 getAllResponseHeaders: me._getHeaders
             };

@@ -19,9 +19,9 @@
 </span> * DD implementation for Panels.
  * @private
  */
-Ext.define('Ext.panel.DD', {
-    extend: 'Ext.dd.DragSource',
-    requires: ['Ext.panel.Proxy'],
+Ext.define(&#39;Ext.panel.DD&#39;, {
+    extend: &#39;Ext.dd.DragSource&#39;,
+    requires: [&#39;Ext.panel.Proxy&#39;],
 
 <span id='Ext-panel-DD-method-constructor'>    constructor : function(panel, cfg){
 </span>        var me = this;
@@ -45,11 +45,11 @@ Ext.define('Ext.panel.DD', {
             el = header.el;
         }
         if (el) {
-            el.setStyle('cursor', 'move');
+            el.setStyle(&#39;cursor&#39;, &#39;move&#39;);
             me.scroll = false;
         } else {
-            // boxready fires after first layout, so we'll definitely be rendered
-            panel.on('boxready', me.setupEl, me, {single: true});
+            // boxready fires after first layout, so we&#39;ll definitely be rendered
+            panel.on(&#39;boxready&#39;, me.setupEl, me, {single: true});
         }
     },
 
@@ -93,8 +93,8 @@ Ext.define('Ext.panel.DD', {
         this.setDelta(x, y);
     },
     
-<span id='Ext-panel-DD-method-onInvalidDrop'>    // Override this, we don't want to repair on an &quot;invalid&quot; drop, the panel
-</span>    // should main it's position
+<span id='Ext-panel-DD-method-onInvalidDrop'>    // Override this, we don&#39;t want to repair on an &quot;invalid&quot; drop, the panel
+</span>    // should main it&#39;s position
     onInvalidDrop: function(target, e, id) {
         var me = this;
         

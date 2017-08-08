@@ -24,7 +24,7 @@
  *
  * @private
  */
-Ext.define('Ext.app.route.Route', {
+Ext.define(&#39;Ext.app.route.Route&#39;, {
 <span id='Ext-app-route-Route-cfg-action'>    /**
 </span>     * @cfg {String} action The name of the action that will be called on the
      * {@link #controller} if this route is matched.
@@ -40,7 +40,7 @@ Ext.define('Ext.app.route.Route', {
      * containing a period (&quot;.&quot;):
      *
      *     conditions: {
-     *         ':fileName': &quot;[0-9a-zA-Z\.]+&quot;
+     *         &#39;:fileName&#39;: &quot;[0-9a-zA-Z\.]+&quot;
      *     }
      */
     conditions: null,
@@ -165,7 +165,7 @@ Ext.define('Ext.app.route.Route', {
      *
      * @private
      * @param {String} token The hash to execute with.
-     * @param {Object} argConfig The object from the {@link Ext.app.route.Route}'s
+     * @param {Object} argConfig The object from the {@link Ext.app.route.Route}&#39;s
      * recognize method call.
      * @param {Function} callback An optional callback function to execute after the
      * {@link #action} is executed.
@@ -191,8 +191,8 @@ Ext.define('Ext.app.route.Route', {
             }
             //&lt;debug&gt;
             else {
-                Ext.log.warn('The before action: ' + this.before +
-                    ' was not found on the controller. The action method will not be executed.');
+                Ext.log.warn(&#39;The before action: &#39; + this.before +
+                    &#39; was not found on the controller. The action method will not be executed.&#39;);
             }
             //&lt;/debug&gt;
         } else {
@@ -219,7 +219,7 @@ Ext.define('Ext.app.route.Route', {
         values.shift();
 
         for (; i &lt; len; i++) {
-            params[keys[i].replace(':', '')] = values[i];
+            params[keys[i].replace(&#39;:&#39;, &#39;&#39;)] = values[i];
         }
 
         return params;
@@ -235,33 +235,33 @@ Ext.define('Ext.app.route.Route', {
      */
     createMatcherRegex : function (url) {
         // Converts a route string into an array of symbols starting with a colon. e.g.
-        // &quot;:controller/:action/:id&quot; =&gt; [':controller', ':action', ':id']
+        // &quot;:controller/:action/:id&quot; =&gt; [&#39;:controller&#39;, &#39;:action&#39;, &#39;:id&#39;]
         //
         var paramsInMatchString = this.paramsInMatchString,
             conditions          = this.conditions,
             i                   = 0,
             len                 = paramsInMatchString.length,
             format              = Ext.util.Format.format,
-            modifiers           = this.caseInsensitive ? 'i' : '',
+            modifiers           = this.caseInsensitive ? &#39;i&#39; : &#39;&#39;,
             params, cond, matcher;
 
         for (; i &lt; len; i++) {
             params  = paramsInMatchString[i];
             cond    = conditions[params];
-            matcher = format('{0}', cond || '([%a-zA-Z0-9\\-\\_\\s,]+)');
+            matcher = format(&#39;{0}&#39;, cond || &#39;([%a-zA-Z0-9\\-\\_\\s,]+)&#39;);
 
             url = url.replace(new RegExp(params), matcher);
         }
 
         //we want to match the whole string, so include the anchors
-        return new RegExp('^' + url + '$', modifiers);
+        return new RegExp(&#39;^&#39; + url + &#39;$&#39;, modifiers);
     },
 
 <span id='Ext-app-route-Route-method-createCallback'>    /**
 </span>     * Creates the callback function to execute in the configured {@link #before} function.
      *
      * @private
-     * @param {Object} args The arguments found from the {@link Ext.app.route.Route}'s
+     * @param {Object} args The arguments found from the {@link Ext.app.route.Route}&#39;s
      * recognize call.
      * @param {Function} callback The function to be executed after the {@link #action}
      * has been executed.
@@ -305,7 +305,7 @@ Ext.define('Ext.app.route.Route', {
                 }
                 //&lt;debug&gt;
                 else {
-                    Ext.log.warn('The action: ' + me.action + ' was not found on the controller.');
+                    Ext.log.warn(&#39;The action: &#39; + me.action + &#39; was not found on the controller.&#39;);
                 }
                 //&lt;/debug&gt;
 

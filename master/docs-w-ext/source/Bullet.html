@@ -24,17 +24,17 @@
  *
  * See {@link Ext.sparkline.Base the base class} for a simple example.
  */
-Ext.define('Ext.sparkline.Bullet', {
-    extend: 'Ext.sparkline.Base',
+Ext.define(&#39;Ext.sparkline.Bullet&#39;, {
+    extend: &#39;Ext.sparkline.Base&#39;,
 
-    alias: 'widget.sparklinebullet',
+    alias: &#39;widget.sparklinebullet&#39;,
 
     config: {
 
 <span id='Ext-sparkline-Bullet-cfg-targetColor'>        /**
 </span>         * @cfg {String} [targetColor=#f33] The colour of the vertical target marker.
          */
-        targetColor: '#f33',
+        targetColor: &#39;#f33&#39;,
         
 <span id='Ext-sparkline-Bullet-cfg-targetWidth'>        /**
 </span>         * @cfg {Number} [targetWidth=3] Width of the target bar in pixels.
@@ -44,12 +44,12 @@ Ext.define('Ext.sparkline.Bullet', {
 <span id='Ext-sparkline-Bullet-cfg-performanceColor'>        /**
 </span>         * @cfg {String} [performanceColor=#33f] The color of the performance measure horizontal bar.
          */
-        performanceColor: '#33f',
+        performanceColor: &#39;#33f&#39;,
         
 <span id='Ext-sparkline-Bullet-cfg-rangeColors'>        /**
 </span>         * @cfg {String[]} [rangeColors] An array of colors to use for each qualitative range background color.
          */
-        rangeColors: ['#d3dafe', '#a8b6ff', '#7f94ff'],
+        rangeColors: [&#39;#d3dafe&#39;, &#39;#a8b6ff&#39;, &#39;#7f94ff&#39;],
         
 <span id='Ext-sparkline-Bullet-cfg-base'>        /**
 </span>         * @cfg {Number} [base] Set this to a number to change the base start number.
@@ -57,16 +57,16 @@ Ext.define('Ext.sparkline.Bullet', {
         base: null
     },
 
-<span id='Ext-sparkline-Bullet-cfg-tipTpl'>    tipTpl: ['{fieldkey:this.fields} - {value}', {
+<span id='Ext-sparkline-Bullet-cfg-tipTpl'>    tipTpl: [&#39;{fieldkey:this.fields} - {value}&#39;, {
 </span>        fields: function(v) {
-            if (v === 'r') {
-                return 'Range';
+            if (v === &#39;r&#39;) {
+                return &#39;Range&#39;;
             }
-            if (v === 'p') {
-                return 'Performance';
+            if (v === &#39;p&#39;) {
+                return &#39;Performance&#39;;
             }
-            if (v === 't') {
-                return 'Target';
+            if (v === &#39;t&#39;) {
+                return &#39;Target&#39;;
             }
         }
     }],
@@ -132,13 +132,13 @@ Ext.define('Ext.sparkline.Bullet', {
         delete shapes[shapeId];
 
         switch (region.substr(0, 1)) {
-            case 'r':
+            case &#39;r&#39;:
                 shape = me.renderRange(region.substr(1), true);
                 break;
-            case 'p':
+            case &#39;p&#39;:
                 shape = me.renderPerformance(true);
                 break;
-            case 't':
+            case &#39;t&#39;:
                 shape = me.renderTarget(true);
                 break;
         }
@@ -196,17 +196,17 @@ Ext.define('Ext.sparkline.Bullet', {
         }
         for (i = 2; i &lt; vlen; i++) {
             shape = me.renderRange(i).append();
-            shapes[shape.id] = 'r' + i;
-            valueShapes['r' + i] = shape.id;
+            shapes[shape.id] = &#39;r&#39; + i;
+            valueShapes[&#39;r&#39; + i] = shape.id;
         }
         if (me.values[1] !== null) {
             shape = me.renderPerformance().append();
-            shapes[shape.id] = 'p1';
+            shapes[shape.id] = &#39;p1&#39;;
             valueShapes.p1 = shape.id;
         }
         if (me.values[0] !== null) {
             shape = this.renderTarget().append();
-            shapes[shape.id] = 't0';
+            shapes[shape.id] = &#39;t0&#39;;
             valueShapes.t0 = shape.id;
         }
 

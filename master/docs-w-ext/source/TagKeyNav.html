@@ -15,16 +15,16 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.view.TagKeyNav', {
-    extend: 'Ext.view.BoundListKeyNav',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.view.TagKeyNav&#39;, {
+    extend: &#39;Ext.view.BoundListKeyNav&#39;,
     
-    alias: 'view.navigation.tagfield',
+    alias: &#39;view.navigation.tagfield&#39;,
     
     onKeySpace: function(e) {
         var me = this,
             field = me.view.pickerField;
         
-        if (field.isExpanded &amp;&amp; field.inputEl.dom.value === '') {
+        if (field.isExpanded &amp;&amp; field.inputEl.dom.value === &#39;&#39;) {
             field.preventKeyUpEvent = true;
             
             me.navigateOnSpace = true;

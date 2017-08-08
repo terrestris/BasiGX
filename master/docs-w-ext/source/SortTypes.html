@@ -41,20 +41,20 @@
  *          }
  *      });
  *
- *      Ext.define('Employee', {
- *          extend: 'Ext.data.Model',
+ *      Ext.define(&#39;Employee&#39;, {
+ *          extend: &#39;Ext.data.Model&#39;,
  *          fields: [{
- *              name: 'person',
- *              sortType: 'asPerson'
+ *              name: &#39;person&#39;,
+ *              sortType: &#39;asPerson&#39;
  *          }, {
- *              name: 'salary',
- *              type: 'float' // sortType set to asFloat
+ *              name: &#39;salary&#39;,
+ *              type: &#39;float&#39; // sortType set to asFloat
  *          }]
  *      });
  *
  * @singleton
  */
-Ext.define('Ext.data.SortTypes', {
+Ext.define(&#39;Ext.data.SortTypes&#39;, {
 
     singleton: true,
 
@@ -85,7 +85,7 @@ Ext.define('Ext.data.SortTypes', {
      */
     asText: function (s) {
         // If allowNull, return the Unicode null character.
-        return (s != null) ? String(s).replace(this.stripTagsRe, '') : '\u0000';
+        return (s != null) ? String(s).replace(this.stripTagsRe, &#39;&#39;) : &#39;\u0000&#39;;
     },
 
 <span id='Ext-data-SortTypes-method-asUCText'>    /**
@@ -95,7 +95,7 @@ Ext.define('Ext.data.SortTypes', {
      */
     asUCText: function (s) {
         // If allowNull, return the Unicode null character.
-        return (s != null) ? String(s).toUpperCase().replace(this.stripTagsRe, '') : '\u0000';
+        return (s != null) ? String(s).toUpperCase().replace(this.stripTagsRe, &#39;&#39;) : &#39;\u0000&#39;;
     },
 
 <span id='Ext-data-SortTypes-method-asUCString'>    /**
@@ -105,7 +105,7 @@ Ext.define('Ext.data.SortTypes', {
      */
     asUCString: function (s) {
         // If allowNull, return the Unicode null character.
-        return (s != null) ? String(s).toUpperCase() : '\u0000';
+        return (s != null) ? String(s).toUpperCase() : &#39;\u0000&#39;;
     },
 
 <span id='Ext-data-SortTypes-method-asDate'>    /**
@@ -131,7 +131,7 @@ Ext.define('Ext.data.SortTypes', {
      * @return {Number} The comparison value
      */
     asFloat: function (s) {
-        var val = parseFloat(String(s).replace(this.stripCommasRe, ''));
+        var val = parseFloat(String(s).replace(this.stripCommasRe, &#39;&#39;));
         return isNaN(val) ? 0 : val;
     },
 
@@ -141,7 +141,7 @@ Ext.define('Ext.data.SortTypes', {
      * @return {Number} The comparison value
      */
     asInt: function (s) {
-        var val = parseInt(String(s).replace(this.stripCommasRe, ''), 10);
+        var val = parseInt(String(s).replace(this.stripCommasRe, &#39;&#39;), 10);
         return isNaN(val) ? 0 : val;
     }
 });

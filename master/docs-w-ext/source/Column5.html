@@ -15,8 +15,8 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.rtl.layout.container.Column', {
-    override: 'Ext.layout.container.Column',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.rtl.layout.container.Column&#39;, {
+    override: &#39;Ext.layout.container.Column&#39;,
 
     // Override to put the RTL class onto the innerCt so that columns can have a rule which switches float direction
     getRenderData: function () {
@@ -39,9 +39,9 @@
             // |           |        |           |
             // |           +--------+           |
             // +--------------------------------+
-            this.clearSide = 'right';
+            this.clearSide = &#39;right&#39;;
             renderData.innerCtCls =
-                (renderData.innerCtCls || '') + ' ' + Ext.baseCSSPrefix + 'rtl';
+                (renderData.innerCtCls || &#39;&#39;) + &#39; &#39; + Ext.baseCSSPrefix + &#39;rtl&#39;;
         }
         
         return renderData;

@@ -19,8 +19,8 @@
 </span> * Private utility class for Ext.resizer.Resizer.
  * @private
  */
-Ext.define('Ext.resizer.ResizeTracker', {
-    extend: 'Ext.dd.DragTracker',
+Ext.define(&#39;Ext.resizer.ResizeTracker&#39;, {
+    extend: &#39;Ext.dd.DragTracker&#39;,
 <span id='Ext-resizer-ResizeTracker-property-dynamic'>    dynamic: true,
 </span><span id='Ext-resizer-ResizeTracker-property-preserveRatio'>    preserveRatio: false,
 </span>
@@ -30,7 +30,7 @@ Ext.define('Ext.resizer.ResizeTracker', {
 <span id='Ext-resizer-ResizeTracker-cfg-constrainTo'>    // Default to no constraint
 </span>    constrainTo: null,
     
-<span id='Ext-resizer-ResizeTracker-property-proxyCls'>    proxyCls:  Ext.baseCSSPrefix + 'resizable-proxy',
+<span id='Ext-resizer-ResizeTracker-property-proxyCls'>    proxyCls:  Ext.baseCSSPrefix + &#39;resizable-proxy&#39;,
 </span>
 <span id='Ext-resizer-ResizeTracker-method-constructor'>    constructor: function(config) {
 </span>        var me = this,
@@ -117,13 +117,13 @@ Ext.define('Ext.resizer.ResizeTracker', {
             proxy = target.getProxy().addCls(cls);
         } else {
             proxy = target.createProxy({
-                tag: 'div',
-                role: 'presentation',
+                tag: &#39;div&#39;,
+                role: &#39;presentation&#39;,
                 cls: cls,
-                id: target.id + '-rzproxy'
+                id: target.id + &#39;-rzproxy&#39;
             }, Ext.getBody());
         }
-        proxy.removeCls(Ext.baseCSSPrefix + 'proxy-el');
+        proxy.removeCls(Ext.baseCSSPrefix + &#39;proxy-el&#39;);
         return proxy;
     },
 
@@ -141,7 +141,7 @@ Ext.define('Ext.resizer.ResizeTracker', {
 </span>        // Logic to resize components on top of iframes or handle resizers bound to iframes.
         // To properly handle iframes &quot;below&quot; the resizable component, we cannot wait for 
         // triggerStart or onStart because if the cursor moves out of the component and over the 
-        // iframe we won't detect that the drag has started. We cannot do this in
+        // iframe we won&#39;t detect that the drag has started. We cannot do this in
         // general because other draggable things cannot assume that mouseDown is safe
         // for this purpose. In particular ComponentDragger on a maximizable window will
         // get tricked by the maximize button onMouseDown and mask everything but will
@@ -165,7 +165,7 @@ Ext.define('Ext.resizer.ResizeTracker', {
 <span id='Ext-resizer-ResizeTracker-method-updateDimensions'>    updateDimensions: function(e, atEnd) {
 </span>        var me = this,
             region = me.activeResizeHandle.region,
-            offset = me.getOffset(me.constrainTo ? 'dragTarget' : null),
+            offset = me.getOffset(me.constrainTo ? &#39;dragTarget&#39; : null),
             box = me.startBox,
             ratio,
             widthAdjust = 0,
@@ -183,45 +183,45 @@ Ext.define('Ext.resizer.ResizeTracker', {
         region = me.convertRegionName(region);
 
         switch (region) {
-            case 'south':
+            case &#39;south&#39;:
                 heightAdjust = offset[1];
                 axis = 2;
                 break;
-            case 'north':
+            case &#39;north&#39;:
                 heightAdjust = -offset[1];
                 adjustY = -heightAdjust;
                 axis = 2;
                 break;
-            case 'east':
+            case &#39;east&#39;:
                 widthAdjust = offset[0];
                 axis = 1;
                 break;
-            case 'west':
+            case &#39;west&#39;:
                 widthAdjust = -offset[0];
                 adjustX = -widthAdjust;
                 axis = 1;
                 break;
-            case 'northeast':
+            case &#39;northeast&#39;:
                 heightAdjust = -offset[1];
                 adjustY = -heightAdjust;
                 widthAdjust = offset[0];
                 oppositeCorner = [box.x, box.y + box.height];
                 axis = 3;
                 break;
-            case 'southeast':
+            case &#39;southeast&#39;:
                 heightAdjust = offset[1];
                 widthAdjust = offset[0];
                 oppositeCorner = [box.x, box.y];
                 axis = 3;
                 break;
-            case 'southwest':
+            case &#39;southwest&#39;:
                 widthAdjust = -offset[0];
                 adjustX = -widthAdjust;
                 heightAdjust = offset[1];
                 oppositeCorner = [box.x + box.width, box.y];
                 axis = 3;
                 break;
-            case 'northwest':
+            case &#39;northwest&#39;:
                 heightAdjust = -offset[1];
                 adjustY = -heightAdjust;
                 widthAdjust = -offset[0];
@@ -243,19 +243,19 @@ Ext.define('Ext.resizer.ResizeTracker', {
         snappedHeight = Ext.Number.snap(newBox.height, me.heightIncrement);
         if (snappedWidth !== newBox.width || snappedHeight !== newBox.height){
             switch (region) {
-                case 'northeast':
+                case &#39;northeast&#39;:
                     newBox.y -= snappedHeight - newBox.height;
                     break;
-                case 'north':
+                case &#39;north&#39;:
                     newBox.y -= snappedHeight - newBox.height;
                     break;
-                case 'southwest':
+                case &#39;southwest&#39;:
                     newBox.x -= snappedWidth - newBox.width;
                     break;
-                case 'west':
+                case &#39;west&#39;:
                     newBox.x -= snappedWidth - newBox.width;
                     break;
-                case 'northwest':
+                case &#39;northwest&#39;:
                     newBox.x -= snappedWidth - newBox.width;
                     newBox.y -= snappedHeight - newBox.height;
             }
@@ -317,12 +317,12 @@ Ext.define('Ext.resizer.ResizeTracker', {
                 }
 
                 // Handle dragging start coordinates
-                if (region === 'northeast') {
+                if (region === &#39;northeast&#39;) {
                     newBox.y = box.y - (newBox.height - box.height);
-                } else if (region === 'northwest') {
+                } else if (region === &#39;northwest&#39;) {
                     newBox.y = box.y - (newBox.height - box.height);
                     newBox.x = box.x - (newBox.width - box.width);
-                } else if (region === 'southwest') {
+                } else if (region === &#39;southwest&#39;) {
                     newBox.x = box.x - (newBox.width - box.width);
                 }
             }

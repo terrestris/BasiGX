@@ -23,7 +23,7 @@
  * @protected
  * @since 5.0.0
  */
-Ext.define('Ext.data.session.ChangesVisitor', {
+Ext.define(&#39;Ext.data.session.ChangesVisitor&#39;, {
 <span id='Ext-data-session-ChangesVisitor-method-constructor'>    constructor: function (session) {
 </span>        var me = this,
             crud;
@@ -64,7 +64,7 @@ Ext.define('Ext.data.session.ChangesVisitor', {
             dropped = record.dropped,
             updated = !created &amp;&amp; !dropped,
             type = record.$className,
-            prop = (created || dropped) ? 'allDataOptions' : 'partialDataOptions',
+            prop = (created || dropped) ? &#39;allDataOptions&#39; : &#39;partialDataOptions&#39;,
             writerOptions = me.writerOptions,
             name = record.entityName,
             options, bucket, entry, result;
@@ -87,12 +87,12 @@ Ext.define('Ext.data.session.ChangesVisitor', {
             if (!options.all) {
                 entry = record.id;
             }
-            // else entry is unset so we'll ask for the prop and call record.getData
+            // else entry is unset so we&#39;ll ask for the prop and call record.getData
         }
 
         if (!entry) {
             // Consult the Writer for the entity to determine its preferences for writing
-            // complete or partial data. We rely on the serialization of the record's
+            // complete or partial data. We rely on the serialization of the record&#39;s
             // getData method whereas the Writer has its own ideas on the matter.
             if (!(options = writerOptions[prop])) {
                 options = record.getProxy().getWriter().getConfig(prop);
@@ -105,10 +105,10 @@ Ext.define('Ext.data.session.ChangesVisitor', {
 
         //  User: {
         //      C: [
-        //          { id: 20, name: 'Don' }
+        //          { id: 20, name: &#39;Don&#39; }
         //      ],
         //      U: [
-        //          { id: 30, name: 'Don' }
+        //          { id: 30, name: &#39;Don&#39; }
         //      ],
         //      D: [ 40, 50 ]
         //  }

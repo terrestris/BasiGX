@@ -20,7 +20,7 @@
  * @class Ext.util.Operators
  * @private
  */
-Ext.ns('Ext.util').Operators = {
+Ext.ns(&#39;Ext.util&#39;).Operators = {
 <span id='Ext-util-Operators-method-='>// @define Ext.util.Operators
 </span>    &quot;=&quot;: function(a, v) {
         return a == v;
@@ -41,10 +41,10 @@ Ext.ns('Ext.util').Operators = {
 </span>        return (a % v) === 0;
     },
 <span id='Ext-util-Operators-method-|='>    &quot;|=&quot;: function(a, v) {
-</span>        return a &amp;&amp; (a == v || a.substr(0, v.length + 1) == v + '-');
+</span>        return a &amp;&amp; (a == v || a.substr(0, v.length + 1) == v + &#39;-&#39;);
     },
 <span id='Ext-util-Operators-method-~='>    &quot;~=&quot;: function(a, v) {
-</span>        return a &amp;&amp; (' ' + a + ' ').indexOf(' ' + v + ' ') != -1;
+</span>        return a &amp;&amp; (&#39; &#39; + a + &#39; &#39;).indexOf(&#39; &#39; + v + &#39; &#39;) != -1;
     }
 };</pre>
 </body>

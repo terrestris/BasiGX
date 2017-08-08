@@ -33,7 +33,7 @@
 <span id='BasiGX-util-Geometry'>/**
 </span> * @class BasiGX.util.Geometry
  */
-Ext.define('BasiGX.util.Geometry', {
+Ext.define(&#39;BasiGX.util.Geometry&#39;, {
 
     statics: {
 
@@ -49,7 +49,7 @@ Ext.define('BasiGX.util.Geometry', {
         equals: function(geometry1, geometry2) {
             if (!(geometry1 instanceof ol.geom.SimpleGeometry) ||
                     !(geometry2 instanceof ol.geom.SimpleGeometry)) {
-                Ext.log.warn('Can only handle ol.geom.SimpleGeometry');
+                Ext.log.warn(&#39;Can only handle ol.geom.SimpleGeometry&#39;);
                 return undefined;
             }
             var formatWKT = new ol.format.WKT();

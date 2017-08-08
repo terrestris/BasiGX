@@ -25,7 +25,7 @@
  * If you have a request such as:
  *
  *     Ext.data.JsonP.request({
- *         url : 'foo.php'
+ *         url : &#39;foo.php&#39;
  *     });
  *
  * Ext.data.JsonP will create a `&lt;script&gt;` node in the `&lt;head&gt;` with the `src` attribute pointing to
@@ -38,24 +38,24 @@
  *
  *     &lt;?php
  *
- *     $data = array('foo' =&gt; 'bar');
+ *     $data = array(&#39;foo&#39; =&gt; &#39;bar&#39;);
  *
- *     if (!empty($_REQUEST['callback'])) {
- *         header('Content-Type: application/javascript');
- *         echo $_REQUEST['callback'] . '(';
+ *     if (!empty($_REQUEST[&#39;callback&#39;])) {
+ *         header(&#39;Content-Type: application/javascript&#39;);
+ *         echo $_REQUEST[&#39;callback&#39;] . &#39;(&#39;;
  *     }
  *
  *     echo json_encode($data);
  *
- *     if (!empty($_REQUEST['callback']) {
- *         echo ');';
+ *     if (!empty($_REQUEST[&#39;callback&#39;]) {
+ *         echo &#39;);&#39;;
  *     }
  *
  *     ?&gt;
  *
  * More information is available &lt;a href=&quot;http://en.wikipedia.org/wiki/JSONP&quot;&gt;here&lt;/a&gt;. You can also use &lt;a href=&quot;http://www.jsonplint.com&quot;&gt;JSONPLint&lt;/a&gt; to test your JSONP.
  */
-Ext.define('Ext.data.JsonP', {
+Ext.define(&#39;Ext.data.JsonP&#39;, {
 
     /* Begin Definitions */
 
@@ -93,9 +93,9 @@ Ext.define('Ext.data.JsonP', {
 <span id='Ext-data-JsonP-property-disableCachingParam'>    /**
 </span>     * @property disableCachingParam
      * @type String
-     * Change the parameter which is sent went disabling caching through a cache buster. Defaults to &lt;tt&gt;'_dc'&lt;/tt&gt;.
+     * Change the parameter which is sent went disabling caching through a cache buster. Defaults to &lt;tt&gt;&#39;_dc&#39;&lt;/tt&gt;.
      */
-    disableCachingParam: '_dc',
+    disableCachingParam: &#39;_dc&#39;,
 
 <span id='Ext-data-JsonP-property-callbackKey'>    /**
 </span>     * @property callbackKey
@@ -104,7 +104,7 @@ Ext.define('Ext.data.JsonP', {
      * the request completes. Defaults to &lt;tt&gt;callback&lt;/tt&gt;. Thus, a common request will be in the form of
      * url?callback=Ext.data.JsonP.callback1
      */
-    callbackKey: 'callback',
+    callbackKey: &#39;callback&#39;,
 
 <span id='Ext-data-JsonP-method-request'>    /**
 </span>     * Makes a JSONP request.
@@ -137,7 +137,7 @@ Ext.define('Ext.data.JsonP', {
 
         //&lt;debug&gt;
         if (!options.url) {
-            Ext.raise('A url must be specified for a JSONP request.');
+            Ext.raise(&#39;A url must be specified for a JSONP request.&#39;);
         }
         //&lt;/debug&gt;
 
@@ -145,7 +145,7 @@ Ext.define('Ext.data.JsonP', {
             disableCaching = Ext.isDefined(options.disableCaching) ? options.disableCaching : me.disableCaching,
             cacheParam = options.disableCachingParam || me.disableCachingParam,
             id = ++me.requestCount,
-            callbackName = options.callbackName || 'callback' + id,
+            callbackName = options.callbackName || &#39;callback&#39; + id,
             callbackKey = options.callbackKey || me.callbackKey,
             timeout = Ext.isDefined(options.timeout) ? options.timeout : me.timeout,
             params = Ext.apply({}, options.params),
@@ -161,7 +161,7 @@ Ext.define('Ext.data.JsonP', {
         }
         options.params = params;
 
-        params[callbackKey] = name + '.data.JsonP.' + callbackName;
+        params[callbackKey] = name + &#39;.data.JsonP.&#39; + callbackName;
         script = me.createScript(url, params, options);
 
         me.requests[id] = request = {
@@ -226,7 +226,7 @@ Ext.define('Ext.data.JsonP', {
      * @param {Object} request The request
      */
     handleAbort: function(request){
-        request.errorType = 'abort';
+        request.errorType = &#39;abort&#39;;
         this.handleResponse(null, request);
     },
 
@@ -236,7 +236,7 @@ Ext.define('Ext.data.JsonP', {
      * @param {Object} request The request
      */
     handleError: function(request){
-        request.errorType = 'error';
+        request.errorType = &#39;error&#39;;
         this.handleResponse(null, request);
     },
 
@@ -255,7 +255,7 @@ Ext.define('Ext.data.JsonP', {
      * @param {Object} request The request
      */
     handleTimeout: function(request){
-        request.errorType = 'timeout';
+        request.errorType = &#39;timeout&#39;;
         this.handleResponse(null, request);
     },
 
@@ -286,7 +286,7 @@ Ext.define('Ext.data.JsonP', {
         }
         Ext.callback(request.callback, request.scope, [success, result, request.errorType]);
         if (globalEvents.hasListeners.idle) {
-            globalEvents.fireEvent('idle');
+            globalEvents.fireEvent(&#39;idle&#39;);
         }
 
     },
@@ -300,7 +300,7 @@ Ext.define('Ext.data.JsonP', {
      * @param {Object} options The object passed to {@link #request}.
      */
     createScript: function(url, params, options) {
-        var script = document.createElement('script');
+        var script = document.createElement(&#39;script&#39;);
         script.setAttribute(&quot;src&quot;, Ext.urlAppend(url, Ext.Object.toQueryString(params)));
         script.setAttribute(&quot;async&quot;, true);
         script.setAttribute(&quot;type&quot;, &quot;text/javascript&quot;);

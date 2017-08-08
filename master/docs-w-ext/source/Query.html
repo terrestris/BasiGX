@@ -37,16 +37,16 @@
  * 
  * Some examples of valid simple selectors:
  * 
- *     var simple = '.foo'; // Only asking for the class name on the element
- *     var simple = 'div.bar'; // Only asking for the tag/class name on the element
- *     var simple = '[href];' // Asking for an attribute on the element.
- *     var simple = ':not(.foo)'; // Only asking for the non-matches against the class name
- *     var simple = 'span:first-child'; // Doesn't require any contextual information about the parent node
+ *     var simple = &#39;.foo&#39;; // Only asking for the class name on the element
+ *     var simple = &#39;div.bar&#39;; // Only asking for the tag/class name on the element
+ *     var simple = &#39;[href];&#39; // Asking for an attribute on the element.
+ *     var simple = &#39;:not(.foo)&#39;; // Only asking for the non-matches against the class name
+ *     var simple = &#39;span:first-child&#39;; // Doesn&#39;t require any contextual information about the parent node
  * 
  * Simple examples of invalid simple selectors:
  * 
- *     var notSimple = 'div.foo div.bar'; // Requires matching a parent node by class name
- *     var notSimple = 'span + div'; //  Requires matching a sibling by tag name
+ *     var notSimple = &#39;div.foo div.bar&#39;; // Requires matching a parent node by class name
+ *     var notSimple = &#39;span + div&#39;; //  Requires matching a sibling by tag name
  *
  * ## Element Selectors:
  *
@@ -59,7 +59,7 @@
  *
  * ## Attribute Selectors:
  *
- * The use of `@` and quotes are optional. For example, `div[@foo='bar']` is also a valid attribute selector.
+ * The use of `@` and quotes are optional. For example, `div[@foo=&#39;bar&#39;]` is also a valid attribute selector.
  *
  *   - **`E[foo]`** has an attribute &quot;foo&quot;
  *   - **`E[foo=bar]`** has an attribute &quot;foo&quot; that equals &quot;bar&quot;
@@ -83,7 +83,7 @@
  *   - **`E:nth(_n_)`** the _n_th E in the resultset (1 based)
  *   - **`E:odd`** shortcut for :nth-child(odd)
  *   - **`E:even`** shortcut for :nth-child(even)
- *   - **`E:contains(foo)`** E's innerHTML contains the substring &quot;foo&quot;
+ *   - **`E:contains(foo)`** E&#39;s innerHTML contains the substring &quot;foo&quot;
  *   - **`E:nodeValue(foo)`** E contains a textNode with a nodeValue that equals &quot;foo&quot;
  *   - **`E:not(S)`** an E element that does not match simple selector S
  *   - **`E:has(S)`** an E element that has a descendent that matches simple selector S
@@ -106,15 +106,15 @@
  *
  * [1]: http://www.w3.org/TR/2005/WD-css3-selectors-20051215/#selectors
  */
-Ext.define('Ext.dom.Query', function() {
+Ext.define(&#39;Ext.dom.Query&#39;, function() {
     var DQ,
         doc = document,
         cache, simpleCache, valueCache,
         useClassList = !!doc.documentElement.classList,
         useElementPointer = !!doc.documentElement.firstElementChild,
         useChildrenCollection = (function() {
-            var d = doc.createElement('div');
-            d.innerHTML = '&lt;!-- --&gt;text&lt;!-- --&gt;';
+            var d = doc.createElement(&#39;div&#39;);
+            d.innerHTML = &#39;&lt;!-- --&gt;text&lt;!-- --&gt;&#39;;
             return d.children &amp;&amp; (d.children.length === 0);
         })(),
         nonSpace = /\S/,
@@ -136,10 +136,10 @@ Ext.define('Ext.dom.Query', function() {
         escapes = /\\/g,
         num, hasEscapes,
         // True if the browser supports the following syntax:
-        // document.getElementsByTagName('namespacePrefix:tagName')
+        // document.getElementsByTagName(&#39;namespacePrefix:tagName&#39;)
         supportsColonNsSeparator = (function () {
             var xmlDoc,
-                xmlString = '&lt;r&gt;&lt;a:b xmlns:a=&quot;n&quot;&gt;&lt;/a:b&gt;&lt;/r&gt;';
+                xmlString = &#39;&lt;r&gt;&lt;a:b xmlns:a=&quot;n&quot;&gt;&lt;/a:b&gt;&lt;/r&gt;&#39;;
 
             if (window.DOMParser) {
                 xmlDoc = (new DOMParser()).parseFromString(xmlString, &quot;application/xml&quot;);
@@ -148,7 +148,7 @@ Ext.define('Ext.dom.Query', function() {
                 xmlDoc.loadXML(xmlString);
             }
 
-            return !!xmlDoc.getElementsByTagName('a:b').length;
+            return !!xmlDoc.getElementsByTagName(&#39;a:b&#39;).length;
         })(),
 
         // replaces a long hex regex match group with the appropriate ascii value
@@ -160,22 +160,22 @@ Ext.define('Ext.dom.Query', function() {
         // converts a shortHex regex match to the long form
         shortToLongHex = function($0, $1) {
             while ($1.length &lt; 6) {
-                $1 = '0' + $1;
+                $1 = &#39;0&#39; + $1;
             }
-            return '\\' + $1;
+            return &#39;\\&#39; + $1;
         },
 
         // converts a single char escape to long escape form
         charToLongHex = function($0, $1) {
             num = $1.charCodeAt(0).toString(16);
             if (num.length === 1) {
-                num = '0' + num;
+                num = &#39;0&#39; + num;
             }
-            return '\\0000' + num;
+            return &#39;\\0000&#39; + num;
         },
 
         // Un-escapes an input selector string.  Assumes all escape sequences have been
-        // normalized to the css '\\0000##' 6-hex-digit style escape sequence :
+        // normalized to the css &#39;\\0000##&#39; 6-hex-digit style escape sequence :
         // will not handle any other escape formats
         unescapeCssSelector = function(selector) {
             return (hasEscapes) ? selector.replace(longHex, longHexToChar) : selector;
@@ -183,12 +183,12 @@ Ext.define('Ext.dom.Query', function() {
 
         // checks if the path has escaping &amp; does any appropriate replacements
         setupEscapes = function(path) {
-            hasEscapes = (path.indexOf('\\') &gt; -1);
+            hasEscapes = (path.indexOf(&#39;\\&#39;) &gt; -1);
             if (hasEscapes) {
                 path = path
                     .replace(shortHex, shortToLongHex)
                     .replace(nonHex, charToLongHex)
-                    .replace(escapes, '\\\\');  // double the '\' for js compilation
+                    .replace(escapes, &#39;\\\\&#39;);  // double the &#39;\&#39; for js compilation
             }
             return path;
         };
@@ -275,7 +275,7 @@ Ext.define('Ext.dom.Query', function() {
                     if (classList.contains(cls)) {
                         result[++ri] = ci;
                     }
-                } else if ((' ' + ci.className + ' ').indexOf(cls) !== -1) {
+                } else if ((&#39; &#39; + ci.className + &#39; &#39;).indexOf(cls) !== -1) {
                     // Some elements types (SVG) may not always have a classList
                     // in some browsers, so fallback to the old style here
                     result[++ri] = ci;
@@ -292,7 +292,7 @@ Ext.define('Ext.dom.Query', function() {
                 i, ci;
 
             for (i = 0; ci = nodeSet[i]; i++) {
-                if ((' ' + ci.className + ' ').indexOf(cls) !== -1) {
+                if ((&#39; &#39; + ci.className + &#39; &#39;).indexOf(cls) !== -1) {
                     result[++ri] = ci;
                 }
             }
@@ -327,7 +327,7 @@ Ext.define('Ext.dom.Query', function() {
         if (!ns) {
             return result;
         }
-        tagName = tagName.replace('|', ':') || &quot;*&quot;;
+        tagName = tagName.replace(&#39;|&#39;, &#39;:&#39;) || &quot;*&quot;;
         // convert to array
         if (typeof ns.getElementsByTagName != &quot;undefined&quot;) {
             ns = [ns];
@@ -338,15 +338,15 @@ Ext.define('Ext.dom.Query', function() {
         if (!mode) {
             tagName = unescapeCssSelector(tagName);
             if (!supportsColonNsSeparator &amp;&amp; DQ.isXml(ns[0]) &amp;&amp;
-                tagName.indexOf(':') !== -1) {
+                tagName.indexOf(&#39;:&#39;) !== -1) {
                 // Some browsers (e.g. WebKit and Opera do not support the following syntax
-                // in xml documents: getElementsByTagName('ns:tagName'). To work around
+                // in xml documents: getElementsByTagName(&#39;ns:tagName&#39;). To work around
                 // this, we remove the namespace prefix from the tagName, get the elements
-                // by tag name only, and then compare each element's tagName property to
+                // by tag name only, and then compare each element&#39;s tagName property to
                 // the tagName with namespace prefix attached to ensure that the tag is in
                 // the proper namespace.
                 for (i = 0; ni = ns[i]; i++) {
-                    cs = ni.getElementsByTagName(tagName.split(':').pop());
+                    cs = ni.getElementsByTagName(tagName.split(&#39;:&#39;).pop());
                     for (j = 0; ci = cs[j]; j++) {
                         if (ci.tagName === tagName) {
                             result[++ri] = ci;
@@ -368,7 +368,7 @@ Ext.define('Ext.dom.Query', function() {
             for (i = 0; ni = ns[i]; i++) {
                 cn = ni.childNodes;
                 for (j = 0; cj = cn[j]; j++) {
-                    if (cj.nodeName == utag || cj.nodeName == tagName || tagName == '*') {
+                    if (cj.nodeName == utag || cj.nodeName == tagName || tagName == &#39;*&#39;) {
                         result[++ri] = cj;
                     }
                 }
@@ -379,7 +379,7 @@ Ext.define('Ext.dom.Query', function() {
             utag = tagName.toUpperCase();
             for (i = 0; n = ns[i]; i++) {
                 while ((n = n.nextSibling) &amp;&amp; n.nodeType != 1);
-                if (n &amp;&amp; (n.nodeName == utag || n.nodeName == tagName || tagName == '*')) {
+                if (n &amp;&amp; (n.nodeName == utag || n.nodeName == tagName || tagName == &#39;*&#39;)) {
                     result[++ri] = n;
                 }
             }
@@ -389,7 +389,7 @@ Ext.define('Ext.dom.Query', function() {
             utag = tagName.toUpperCase();
             for (i = 0; n = ns[i]; i++) {
                 while ((n = n.nextSibling)) {
-                    if (n.nodeName == utag || n.nodeName == tagName || tagName == '*') {
+                    if (n.nodeName == utag || n.nodeName == tagName || tagName == &#39;*&#39;) {
                         result[++ri] = n;
                     }
                 }
@@ -463,7 +463,7 @@ Ext.define('Ext.dom.Query', function() {
                     hasXml = true;
                 }
 
-                // we only need to change the property names if we're dealing with html nodes, not XML
+                // we only need to change the property names if we&#39;re dealing with html nodes, not XML
                 if (!xml) {
                     if (useGetStyle) {
                         a = DQ.getStyle(ci, attr);
@@ -600,13 +600,13 @@ Ext.define('Ext.dom.Query', function() {
         singleton: true,
 
         alternateClassName: [
-            'Ext.core.DomQuery',
-            'Ext.DomQuery'
+            &#39;Ext.core.DomQuery&#39;,
+            &#39;Ext.DomQuery&#39;
         ],
 
         requires: [
-            'Ext.dom.Helper',
-            'Ext.util.Operators'
+            &#39;Ext.dom.Helper&#39;,
+            &#39;Ext.util.Operators&#39;
         ],
 
         _init: function() {
@@ -630,7 +630,7 @@ Ext.define('Ext.dom.Query', function() {
         },
 
         getStyle: function(el, name) {
-            return Ext.fly(el, '_DomQuery').getStyle(name);
+            return Ext.fly(el, &#39;_DomQuery&#39;).getStyle(name);
         },
 
 <span id='Ext-dom-Query-method-compile'>        /**
@@ -656,7 +656,7 @@ Ext.define('Ext.dom.Query', function() {
             path = setupEscapes(path);
 
             if (lmode &amp;&amp; lmode[1]) {
-                fn[fn.length] = 'mode=&quot;' + lmode[1].replace(trimRe, &quot;&quot;) + '&quot;;';
+                fn[fn.length] = &#39;mode=&quot;&#39; + lmode[1].replace(trimRe, &quot;&quot;) + &#39;&quot;;&#39;;
                 path = path.replace(lmode[1], &quot;&quot;);
             }
 
@@ -672,21 +672,21 @@ Ext.define('Ext.dom.Query', function() {
                     if (tokenMatch) {
                         // ID Selector
                         if (tokenMatch[1] == &quot;#&quot;) {
-                            fn[fn.length] = 'n = quickId(n, mode, root, &quot;' + tokenMatch[2] + '&quot;);';
+                            fn[fn.length] = &#39;n = quickId(n, mode, root, &quot;&#39; + tokenMatch[2] + &#39;&quot;);&#39;;
                         } else {
-                            fn[fn.length] = 'n = getNodes(n, mode, &quot;' + tokenMatch[2] + '&quot;);';
+                            fn[fn.length] = &#39;n = getNodes(n, mode, &quot;&#39; + tokenMatch[2] + &#39;&quot;);&#39;;
                         }
                         path = path.replace(tokenMatch[0], &quot;&quot;);
-                    } else if (path.substr(0, 1) != '@') {
-                        fn[fn.length] = 'n = getNodes(n, mode, &quot;*&quot;);';
+                    } else if (path.substr(0, 1) != &#39;@&#39;) {
+                        fn[fn.length] = &#39;n = getNodes(n, mode, &quot;*&quot;);&#39;;
                     }
                     // type of &quot;simple&quot;
                 } else {
                     if (tokenMatch) {
                         if (tokenMatch[1] == &quot;#&quot;) {
-                            fn[fn.length] = 'n = byId(n, &quot;' + tokenMatch[2] + '&quot;);';
+                            fn[fn.length] = &#39;n = byId(n, &quot;&#39; + tokenMatch[2] + &#39;&quot;);&#39;;
                         } else {
-                            fn[fn.length] = 'n = byTag(n, &quot;' + tokenMatch[2] + '&quot;);';
+                            fn[fn.length] = &#39;n = byTag(n, &quot;&#39; + tokenMatch[2] + &#39;&quot;);&#39;;
                         }
                         path = path.replace(tokenMatch[0], &quot;&quot;);
                     }
@@ -708,14 +708,14 @@ Ext.define('Ext.dom.Query', function() {
                     // prevent infinite loop on bad selector
                     if (!matched) {
                         Ext.raise({
-                            sourceClass:'Ext.DomQuery',
-                            sourceMethod:'compile',
-                            msg:'Error parsing selector. Parsing failed at &quot;' + path + '&quot;'
+                            sourceClass:&#39;Ext.DomQuery&#39;,
+                            sourceMethod:&#39;compile&#39;,
+                            msg:&#39;Error parsing selector. Parsing failed at &quot;&#39; + path + &#39;&quot;&#39;
                         });
                     }
                 }
                 if (modeMatch[1]) {
-                    fn[fn.length] = 'mode=&quot;' + modeMatch[1].replace(trimRe, &quot;&quot;) + '&quot;;';
+                    fn[fn.length] = &#39;mode=&quot;&#39; + modeMatch[1].replace(trimRe, &quot;&quot;) + &#39;&quot;;&#39;;
                     path = path.replace(modeMatch[1], &quot;&quot;);
                 }
             }
@@ -757,14 +757,14 @@ Ext.define('Ext.dom.Query', function() {
                     query = DQ.compile(subPath, type);
                     if (!query) {
                         Ext.raise({
-                            sourceClass:'Ext.DomQuery',
-                            sourceMethod:'jsSelect',
-                            msg:subPath + ' is not a valid selector'
+                            sourceClass:&#39;Ext.DomQuery&#39;,
+                            sourceMethod:&#39;jsSelect&#39;,
+                            msg:subPath + &#39; is not a valid selector&#39;
                         });
                     }
                     cache.add(subPath, query);
                 } else {
-                    // If we've already compiled, we still need to check if the
+                    // If we&#39;ve already compiled, we still need to check if the
                     // selector has escaping and setup the appropriate flags
                     setupEscapes(subPath);
                 }
@@ -810,17 +810,17 @@ Ext.define('Ext.dom.Query', function() {
                     /*
                      * This checking here is to &quot;fix&quot; the behaviour of querySelectorAll
                      * for non root document queries. The way qsa works is intentional,
-                     * however it's definitely not the expected way it should work.
+                     * however it&#39;s definitely not the expected way it should work.
                      * When descendant selectors are used, only the lowest selector must be inside the root!
                      * More info: http://ejohn.org/blog/thoughts-on-queryselectorall/
-                     * So we create a descendant selector by prepending the root's ID, and query the parent node.
+                     * So we create a descendant selector by prepending the root&#39;s ID, and query the parent node.
                      * UNLESS the root has no parent in which qsa will work perfectly.
                      *
                      * We only modify the path for single selectors (ie, no multiples),
                      * without a full parser it makes it difficult to do this correctly.
                      */
-                    if (root.parentNode &amp;&amp; (root.nodeType !== 9) &amp;&amp; path.indexOf(',') === -1 &amp;&amp; !startIdRe.test(path)) {
-                        path = Ext.makeIdSelector(Ext.id(root)) + ' ' + path;
+                    if (root.parentNode &amp;&amp; (root.nodeType !== 9) &amp;&amp; path.indexOf(&#39;,&#39;) === -1 &amp;&amp; !startIdRe.test(path)) {
+                        path = Ext.makeIdSelector(Ext.id(root)) + &#39; &#39; + path;
                         root = root.parentNode;
                     }
                     return single ? [ root.querySelector(path) ]
@@ -878,17 +878,17 @@ Ext.define('Ext.dom.Query', function() {
             // Rumored to potentially crash IE6 but has not been confirmed.
             // http://reference.sitepoint.com/javascript/Node/normalize
             // https://developer.mozilla.org/En/DOM/Node.normalize
-            if (typeof node.normalize == 'function') {
+            if (typeof node.normalize == &#39;function&#39;) {
                 node.normalize();
             }
 
             var firstChild = node &amp;&amp; node.firstChild,
                 v = firstChild ? firstChild.nodeValue : null;
 
-            // If we have a defaultValue, and v is null, undefined or '', use that
+            // If we have a defaultValue, and v is null, undefined or &#39;&#39;, use that
             // value instead.
             //
-            if (defaultValue !== undefined &amp;&amp; (v == null || v === '')) {
+            if (defaultValue !== undefined &amp;&amp; (v == null || v === &#39;&#39;)) {
                 v = defaultValue;
             }
 
@@ -927,7 +927,7 @@ Ext.define('Ext.dom.Query', function() {
 </span>         * Filters an array of elements to only include matches of a simple selector
          * @param {HTMLElement[]} el An array of elements to filter
          * @param {String} selector The simple selector to test
-         * @param {Boolean} nonMatches If true, it returns the elements that DON'T match the selector instead of the
+         * @param {Boolean} nonMatches If true, it returns the elements that DON&#39;T match the selector instead of the
          * ones that match
          * @return {HTMLElement[]} An Array of DOM elements which match the selector. If there are no matches, and empty
          * Array is returned.
@@ -955,19 +955,19 @@ Ext.define('Ext.dom.Query', function() {
          */
         matchers: [{
             re: /^\.([\w\-\\]+)/,
-            select: useClassList ? 'n = byClassName(n, &quot;{1}&quot;);' : 'n = byClassName(n, &quot; {1} &quot;);'
+            select: useClassList ? &#39;n = byClassName(n, &quot;{1}&quot;);&#39; : &#39;n = byClassName(n, &quot; {1} &quot;);&#39;
         }, {
             re: /^\:([\w\-]+)(?:\(((?:[^\s&gt;\/]*|.*?))\))?/,
-            select: 'n = byPseudo(n, &quot;{1}&quot;, &quot;{2}&quot;);'
+            select: &#39;n = byPseudo(n, &quot;{1}&quot;, &quot;{2}&quot;);&#39;
         },  {
-            re: /^(?:([\[\{])(?:@)?([\w\-]+)\s?(?:(=|.=)\s?['&quot;]?(.*?)[&quot;']?)?[\]\}])/,
-            select: 'n = byAttribute(n, &quot;{2}&quot;, &quot;{4}&quot;, &quot;{3}&quot;, &quot;{1}&quot;);'
+            re: /^(?:([\[\{])(?:@)?([\w\-]+)\s?(?:(=|.=)\s?[&#39;&quot;]?(.*?)[&quot;&#39;]?)?[\]\}])/,
+            select: &#39;n = byAttribute(n, &quot;{2}&quot;, &quot;{4}&quot;, &quot;{3}&quot;, &quot;{1}&quot;);&#39;
         }, {
             re: /^#([\w\-\\]+)/,
-            select: 'n = byId(n, &quot;{1}&quot;);'
+            select: &#39;n = byId(n, &quot;{1}&quot;);&#39;
         }, {
             re: /^@([\w\-\.]+)/,
-            select: 'return {firstChild:{nodeValue:attrValue(n, &quot;{1}&quot;)}};'
+            select: &#39;return {firstChild:{nodeValue:attrValue(n, &quot;{1}&quot;)}};&#39;
         }],
 
 <span id='Ext-dom-Query-property-operators'>        /**
@@ -1004,7 +1004,7 @@ Ext.define('Ext.dom.Query', function() {
          *     Ext.DomQuery.pseudos.external = function(c, v) {
          *         var r = [], ri = -1;
          *         for(var i = 0, ci; ci = c[i]; i++) {
-         *             // Include in result set only if it's a link to an external resource
+         *             // Include in result set only if it&#39;s a link to an external resource
          *             if (ci.hostname != location.hostname) {
          *                 r[++ri] = ci;
          *             }
@@ -1105,7 +1105,7 @@ Ext.define('Ext.dom.Query', function() {
                 var r = [], ri = -1,
                     i, ci;
                 for (i = 0; ci = c[i]; i++) {
-                    if ((ci.textContent || ci.innerText || ci.text || '').indexOf(v) != -1) {
+                    if ((ci.textContent || ci.innerText || ci.text || &#39;&#39;).indexOf(v) != -1) {
                         r[++ri] = ci;
                     }
                 }
@@ -1139,7 +1139,7 @@ Ext.define('Ext.dom.Query', function() {
             },
 
             &quot;any&quot;: function(c, selectors) {
-                var ss = selectors.split('|'),
+                var ss = selectors.split(&#39;|&#39;),
                     r = [], ri = -1, s,
                     i, ci, j;
                 for (i = 0; ci = c[i]; i++) {
@@ -1219,7 +1219,7 @@ Ext.define('Ext.dom.Query', function() {
 
                 for (; i &lt; len; i++) {
                     c = candidates[i];
-                    if (Ext.fly(c, '_DomQuery').isFocusable()) {
+                    if (Ext.fly(c, &#39;_DomQuery&#39;).isFocusable()) {
                         results.push(c);
                     }
                 }
@@ -1235,7 +1235,7 @@ Ext.define('Ext.dom.Query', function() {
 
                 for (; i &lt; len; i++) {
                     c = candidates[i];
-                    if (Ext.fly(c, '_DomQuery').isVisible(deep)) {
+                    if (Ext.fly(c, &#39;_DomQuery&#39;).isVisible(deep)) {
                         results.push(c);
                     }
                 }
@@ -1247,7 +1247,7 @@ Ext.define('Ext.dom.Query', function() {
                 var r = [], ri = -1,
                     i, ci, s;
                 for (i = 0; ci = c[i]; i++) {
-                    s = Ext.fly(ci, '_DomQuery').getScroll();
+                    s = Ext.fly(ci, &#39;_DomQuery&#39;).getScroll();
                     if (s.top &gt; 0 || s.left &gt; 0) {
                         r[++ri] = ci;
                     }

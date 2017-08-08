@@ -32,7 +32,7 @@
  * On these platforms, a two finger drag gesture will scroll the content, or a single
  * finger drag on an empty area of the view will scroll the content.
  *
- * During the drop operation a data object is passed to a participating DropZone's drop 
+ * During the drop operation a data object is passed to a participating DropZone&#39;s drop 
  * handlers.  The drag data object has the following properties:
  *
  * - **copy:** {@link Boolean} &lt;br&gt; The value of {@link #copy}.  Or `true` if 
@@ -54,8 +54,8 @@
  * grid view as well as its owning Grid: `{@link #beforedrop}` and `{@link #drop}`.
  *
  *     @example
- *     var store = Ext.create('Ext.data.Store', {
- *         fields: ['name'],
+ *     var store = Ext.create(&#39;Ext.data.Store&#39;, {
+ *         fields: [&#39;name&#39;],
  *         data: [
  *             [&quot;Lisa&quot;],
  *             [&quot;Bart&quot;],
@@ -63,23 +63,23 @@
  *             [&quot;Marge&quot;]
  *         ],
  *         proxy: {
- *             type: 'memory',
- *             reader: 'array'
+ *             type: &#39;memory&#39;,
+ *             reader: &#39;array&#39;
  *         }
  *     });
  *     
- *     Ext.create('Ext.grid.Panel', {
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
  *         store: store,
  *         enableLocking: true,
  *         columns: [{
- *             header: 'Name',
- *             dataIndex: 'name',
+ *             header: &#39;Name&#39;,
+ *             dataIndex: &#39;name&#39;,
  *             flex: true
  *         }],
  *         viewConfig: {
  *             plugins: {
- *                 ptype: 'gridviewdragdrop',
- *                 dragText: 'Drag and drop to reorganize'
+ *                 ptype: &#39;gridviewdragdrop&#39;,
+ *                 dragText: &#39;Drag and drop to reorganize&#39;
  *             }
  *         },
  *         height: 200,
@@ -87,13 +87,13 @@
  *         renderTo: Ext.getBody()
  *     });
  */
-Ext.define('Ext.grid.plugin.DragDrop', {
-    extend: 'Ext.plugin.Abstract',
-    alias: 'plugin.gridviewdragdrop',
+Ext.define(&#39;Ext.grid.plugin.DragDrop&#39;, {
+    extend: &#39;Ext.plugin.Abstract&#39;,
+    alias: &#39;plugin.gridviewdragdrop&#39;,
 
     uses: [
-        'Ext.view.DragZone',
-        'Ext.grid.ViewDropZone'
+        &#39;Ext.view.DragZone&#39;,
+        &#39;Ext.grid.ViewDropZone&#39;
     ],
 
 <span id='Ext-grid-plugin-DragDrop-event-beforedrop'>    /**
@@ -113,11 +113,11 @@ Ext.define('Ext.grid.plugin.DragDrop', {
      * confirmation or an asynchronous server call (_see the details of the dropHandlers 
      * property for more information_).
      *  
-     *     grid.on('beforedrop', function(node, data, overModel, dropPosition, dropHandlers) {
+     *     grid.on(&#39;beforedrop&#39;, function(node, data, overModel, dropPosition, dropHandlers) {
      *         // Defer the handling
      *         dropHandlers.wait = true;
-     *         Ext.MessageBox.confirm('Drop', 'Are you sure', function(btn){
-     *             if (btn === 'yes') {
+     *         Ext.MessageBox.confirm(&#39;Drop&#39;, &#39;Are you sure&#39;, function(btn){
+     *             if (btn === &#39;yes&#39;) {
      *                 dropHandlers.processDrop();
      *             } else {
      *                 dropHandlers.cancelDrop();
@@ -132,7 +132,7 @@ Ext.define('Ext.grid.plugin.DragDrop', {
      * which the cursor was positioned.
      *
      * @param {Object} data The data object gathered at mousedown time by the 
-     * cooperating {@link Ext.dd.DragZone DragZone}'s {@link Ext.dd.DragZone#getDragData 
+     * cooperating {@link Ext.dd.DragZone DragZone}&#39;s {@link Ext.dd.DragZone#getDragData 
      * getDragData} method.  It contains the following properties:
      * @param {Boolean} data.copy The value of {@link #copy}.  Or `true` if 
      * {@link #allowCopy} is true **and** the control key was pressed as the drag 
@@ -176,7 +176,7 @@ Ext.define('Ext.grid.plugin.DragDrop', {
      * which the cursor was positioned.
      *
      * @param {Object} data The data object gathered at mousedown time by the 
-     * cooperating {@link Ext.dd.DragZone DragZone}'s {@link Ext.dd.DragZone#getDragData 
+     * cooperating {@link Ext.dd.DragZone DragZone}&#39;s {@link Ext.dd.DragZone#getDragData 
      * getDragData} method.  It contains the following properties:
      * @param {Boolean} data.copy The value of {@link #copy}.  Or `true` if 
      * {@link #allowCopy} is true **and** the control key was pressed as the drag 
@@ -227,9 +227,9 @@ Ext.define('Ext.grid.plugin.DragDrop', {
      * Two placeholders can be used in the text:
      *
      * - `{0}` The number of selected items.
-     * - `{1}` 's' when more than 1 items (only useful for English).
+     * - `{1}` &#39;s&#39; when more than 1 items (only useful for English).
      */
-    dragText : '{0} selected row{1}',
+    dragText : &#39;{0} selected row{1}&#39;,
     //&lt;/locale&gt;
 
 <span id='Ext-grid-plugin-DragDrop-cfg-ddGroup'>    /**
@@ -303,7 +303,7 @@ Ext.define('Ext.grid.plugin.DragDrop', {
             copy: this.copy,
             allowCopy: this.allowCopy
         });
-        view.on('render', this.onViewRender, this, {single: true});
+        view.on(&#39;render&#39;, this.onViewRender, this, {single: true});
     },
 
 <span id='Ext-grid-plugin-DragDrop-method-destroy'>    /**
@@ -344,7 +344,7 @@ Ext.define('Ext.grid.plugin.DragDrop', {
             ownerGrid = view.ownerCt.ownerGrid || view.ownerCt,
             scrollEl;
 
-        ownerGrid.relayEvents(view, ['beforedrop', 'drop']);
+        ownerGrid.relayEvents(view, [&#39;beforedrop&#39;, &#39;drop&#39;]);
         
         if (me.enableDrag) {
             if (me.containerScroll) {

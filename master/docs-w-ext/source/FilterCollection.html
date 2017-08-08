@@ -18,18 +18,18 @@
   <pre class="prettyprint lang-js"><span id='Ext-util-FilterCollection'>/**
 </span> * @private
  */
-Ext.define('Ext.util.FilterCollection', {
-    extend: 'Ext.util.Collection',
+Ext.define(&#39;Ext.util.FilterCollection&#39;, {
+    extend: &#39;Ext.util.Collection&#39;,
 
     requires: [
-        'Ext.util.Filter'
+        &#39;Ext.util.Filter&#39;
     ],
 
 <span id='Ext-util-FilterCollection-property-isFilterCollection'>    isFilterCollection: true,
 </span>
 <span id='Ext-util-FilterCollection-property-S-filterable'>    /**
 </span>     * @property {Ext.util.Collection} $filterable
-     * The owning filterable instance. The filterable's configuration governs this
+     * The owning filterable instance. The filterable&#39;s configuration governs this
      * collection.
      * @private
      * @readonly
@@ -101,7 +101,7 @@ Ext.define('Ext.util.FilterCollection', {
                 // Finally we get to the point where it has to be invalid
                 // &lt;debug&gt;
                 if (!Ext.isObject(filter))  {
-                    Ext.raise('Invalid filter specified: ' + filter);
+                    Ext.raise(&#39;Invalid filter specified: &#39; + filter);
                 }
                 // &lt;/debug&gt;
 
@@ -145,13 +145,13 @@ Ext.define('Ext.util.FilterCollection', {
                 } else {
                     type = typeof filter;
 
-                    isFunction = type === 'function';
+                    isFunction = type === &#39;function&#39;;
                     isProp = filter.property !== undefined &amp;&amp; filter.value !== undefined;
-                    isString = type === 'string';
+                    isString = type === &#39;string&#39;;
 
                     //&lt;debug&gt;
                     if (!isFunction &amp;&amp; !isProp &amp;&amp; !isString) {
-                        Ext.raise('Invalid filter specification: ' + filter);
+                        Ext.raise(&#39;Invalid filter specification: &#39; + filter);
                     }
                     //&lt;/debug&gt;
 
@@ -188,7 +188,7 @@ Ext.define('Ext.util.FilterCollection', {
 </span>        // Odd thing this. We need a Filterable to know how to manage our collection, but
         // we may not have one. Of course as a Collection, we *are* one as well... just
         // that is not really useful to filter the filters themselves, but we do have the
-        // default options for Filterable baked in, so we'll do.
+        // default options for Filterable baked in, so we&#39;ll do.
         return this.$filterable || this;
     }
 });

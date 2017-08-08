@@ -39,15 +39,15 @@
  *
  * @class BasiGX.view.panel.FontSymbolPool
  */
-Ext.define('BasiGX.view.panel.FontSymbolPool', {
-    extend: 'Ext.panel.Panel',
-    xtype: 'basigx-panel-fontsymbolpool',
+Ext.define(&#39;BasiGX.view.panel.FontSymbolPool&#39;, {
+    extend: &#39;Ext.panel.Panel&#39;,
+    xtype: &#39;basigx-panel-fontsymbolpool&#39;,
 
     requires: [
-        'BasiGX.util.Url',
-        'BasiGX.util.CSRF',
-        'BasiGX.util.MsgBox',
-        'BasiGX.view.panel.TtfGlyphInspector'
+        &#39;BasiGX.util.Url&#39;,
+        &#39;BasiGX.util.CSRF&#39;,
+        &#39;BasiGX.util.MsgBox&#39;,
+        &#39;BasiGX.view.panel.TtfGlyphInspector&#39;
     ],
 
 <span id='BasiGX-view-panel-FontSymbolPool-property-viewModel'>    /**
@@ -55,14 +55,14 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
      */
     viewModel: {
         data: {
-            closeBtnText: 'Close',
-            fontSelectLabel: 'Select a font',
-            documentation: '&lt;h2&gt;Zeichensatz Sammlung&lt;/h2&gt;• In diesem Dialog ' +
-                'kann für die Darstellung von Objekten ein Zeichen einer ' +
-                'Schriftart gewählt werden.&lt;br&gt;• Wählen Sie zunächst eine ' +
-                'Schriftart aus.&lt;br&gt;• Anschließend können Sie aus der ' +
-                'Zeichentabelle ein Symbol auswählen, dass zur Darstellung ' +
-                'verwendet werden soll'
+            closeBtnText: &#39;Close&#39;,
+            fontSelectLabel: &#39;Select a font&#39;,
+            documentation: &#39;&lt;h2&gt;Zeichensatz Sammlung&lt;/h2&gt;• In diesem Dialog &#39; +
+                &#39;kann für die Darstellung von Objekten ein Zeichen einer &#39; +
+                &#39;Schriftart gewählt werden.&lt;br&gt;• Wählen Sie zunächst eine &#39; +
+                &#39;Schriftart aus.&lt;br&gt;• Anschließend können Sie aus der &#39; +
+                &#39;Zeichentabelle ein Symbol auswählen, dass zur Darstellung &#39; +
+                &#39;verwendet werden soll&#39;
         }
     },
 
@@ -84,7 +84,7 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
 <span id='BasiGX-view-panel-FontSymbolPool-property-layout'>    /**
 </span>     * the layout to use
      */
-    layout: 'vbox',
+    layout: &#39;vbox&#39;,
 
 <span id='BasiGX-view-panel-FontSymbolPool-property-config'>    /**
 </span>     *
@@ -140,41 +140,41 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
         var me = this;
 
         // retrieve the available fonts from GeoServer via REST
-        var store = Ext.create('Ext.data.Store', {
-            sorters: 'fontName',
+        var store = Ext.create(&#39;Ext.data.Store&#39;, {
+            sorters: &#39;fontName&#39;,
             fields: [
-                'name'
+                &#39;name&#39;
             ],
             proxy: {
-                type: 'ajax',
+                type: &#39;ajax&#39;,
                 url: me.getGeoserverFontListUrl(),
                 reader: {
-                    type: 'json',
-                    rootProperty: 'ResourceDirectory.children.child'
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;ResourceDirectory.children.child&#39;
                 }
             }
         });
         store.load();
 
         me.items = [{
-            xtype: 'combo',
+            xtype: &#39;combo&#39;,
             width: 400,
             store: store,
             bind: {
-                fieldLabel: '{fontSelectLabel}'
+                fieldLabel: &#39;{fontSelectLabel}&#39;
             },
-            displayField: 'name',
-            queryMode: 'local',
+            displayField: &#39;name&#39;,
+            queryMode: &#39;local&#39;,
             listeners: {
                 change: me.fontSelected
             }
         }];
 
         me.bbar = [
-            '-&gt;',
+            &#39;-&gt;&#39;,
             {
                 bind: {
-                    text: '{closeBtnText}'
+                    text: &#39;{closeBtnText}&#39;
                 },
                 scope: me,
                 handler: me.onCloseButtonClick,
@@ -193,7 +193,7 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
      * @param {String} fontName The name of the font that has been selected.
      */
     fontSelected: function(combo, fontName) {
-        var symbolPool = this.up('basigx-panel-fontsymbolpool');
+        var symbolPool = this.up(&#39;basigx-panel-fontsymbolpool&#39;);
         var selectedRecord = combo.getSelectedRecord();
         var ttfHref = selectedRecord.getData().link.href;
         symbolPool.setSelectedFontName(fontName);
@@ -202,7 +202,7 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
             Ext.Ajax.request({
                 binary: true,
                 url: symbolPool.getGeoserverFontUrl(),
-                method: 'GET',
+                method: &#39;GET&#39;,
                 params: {
                     fontName: fontName
                 },
@@ -211,14 +211,14 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
                 success: function(response) {
                     var blob = new Blob(
                         [response.responseBytes],
-                        {type: 'application/octet-stream'}
+                        {type: &#39;application/octet-stream&#39;}
                     );
                     var url = window.URL.createObjectURL(blob);
                     symbolPool.setFontBlobUrl(url);
                     symbolPool.renderSymbols();
                 },
                 failure: function() {
-                    Ext.toast('Error retrieving the Graphic preview');
+                    Ext.toast(&#39;Error retrieving the Graphic preview&#39;);
                 }
             });
         }
@@ -226,21 +226,21 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
 
 <span id='BasiGX-view-panel-FontSymbolPool-method-renderSymbols'>    /**
 </span>     * Method renders the available glyphs of a TrueTypeFont by instantiating
-     * 'BasiGX.view.panel.TtfGlyphInspector' with the font-blob. If a glyph
+     * &#39;BasiGX.view.panel.TtfGlyphInspector&#39; with the font-blob. If a glyph
      * has been clicked by the user, the given callBack function will be called.
      */
     renderSymbols: function() {
         var me = this;
         // cleanup
-        var panels = me.query('basigx-panel-ttfglyphinspector');
+        var panels = me.query(&#39;basigx-panel-ttfglyphinspector&#39;);
         Ext.each(panels, function(panel) {
             panel.destroy();
         });
-        var glyphPanel = Ext.create('BasiGX.view.panel.TtfGlyphInspector', {
+        var glyphPanel = Ext.create(&#39;BasiGX.view.panel.TtfGlyphInspector&#39;, {
             fontSrc: this.getFontBlobUrl()
         });
         this.add(glyphPanel);
-        glyphPanel.on('glyphSelected', function(fullQualifiedGlyphName) {
+        glyphPanel.on(&#39;glyphSelected&#39;, function(fullQualifiedGlyphName) {
             me.getOnGlyphSelected().call(me, fullQualifiedGlyphName);
         });
     },
@@ -250,8 +250,8 @@ Ext.define('BasiGX.view.panel.FontSymbolPool', {
      */
     onCloseButtonClick: function() {
         var me = this;
-        if (me.up('window')) {
-            me.up('window').close();
+        if (me.up(&#39;window&#39;)) {
+            me.up(&#39;window&#39;).close();
         }
     }
 });

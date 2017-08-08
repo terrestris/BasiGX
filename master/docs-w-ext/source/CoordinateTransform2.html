@@ -37,37 +37,37 @@
  *
  * @class BasiGX.view.form.CoordinateTransform
  */
-Ext.define('BasiGX.view.form.CoordinateTransform', {
-    extend: 'Ext.form.Panel',
-    xtype: 'basigx-form-coordinatetransform',
+Ext.define(&#39;BasiGX.view.form.CoordinateTransform&#39;, {
+    extend: &#39;Ext.form.Panel&#39;,
+    xtype: &#39;basigx-form-coordinatetransform&#39;,
 
     requires: [
-        'Ext.button.Button',
-        'Ext.app.ViewModel'
+        &#39;Ext.button.Button&#39;,
+        &#39;Ext.app.ViewModel&#39;
     ],
 
 <span id='BasiGX-view-form-CoordinateTransform-cfg-viewModel'>    viewModel: {
 </span>        data: {
-            coordFieldSetTitle: 'Koordinaten',
-            coordXFieldLabel: 'X-Koordinate',
-            coordYFieldLabel: 'Y-Koordinate',
-            transformBtnText: 'Transformieren',
-            resetFormBtnText: 'Zurücksetzen',
-            transformBtnIconCls: '{transformButtonIconCls}',
-            transformBtnTooltip: '{transformButtonToolTip}',
-            documentation: '&lt;h2&gt;Koordinaten transformieren&lt;/h2&gt;• In diesem ' +
-                'Dialog können Koordinaten transformiert werden.&lt;br&gt;' +
-                '• Geben Sie Koordinaten in die Eingabefelder ein, um sich ' +
-                'anschließend den Punkt in der Karte anzeigen zu lassen.&lt;br&gt;' +
-                '• Klicken Sie alternativ in die Karte, um sich die ' +
-                'jeweiligen Koordinaten anzeigen zu lassen'
+            coordFieldSetTitle: &#39;Koordinaten&#39;,
+            coordXFieldLabel: &#39;X-Koordinate&#39;,
+            coordYFieldLabel: &#39;Y-Koordinate&#39;,
+            transformBtnText: &#39;Transformieren&#39;,
+            resetFormBtnText: &#39;Zurücksetzen&#39;,
+            transformBtnIconCls: &#39;{transformButtonIconCls}&#39;,
+            transformBtnTooltip: &#39;{transformButtonToolTip}&#39;,
+            documentation: &#39;&lt;h2&gt;Koordinaten transformieren&lt;/h2&gt;• In diesem &#39; +
+                &#39;Dialog können Koordinaten transformiert werden.&lt;br&gt;&#39; +
+                &#39;• Geben Sie Koordinaten in die Eingabefelder ein, um sich &#39; +
+                &#39;anschließend den Punkt in der Karte anzeigen zu lassen.&lt;br&gt;&#39; +
+                &#39;• Klicken Sie alternativ in die Karte, um sich die &#39; +
+                &#39;jeweiligen Koordinaten anzeigen zu lassen&#39;
         }
     },
 
 <span id='BasiGX-view-form-CoordinateTransform-cfg-padding'>    padding: 5,
-</span><span id='BasiGX-view-form-CoordinateTransform-cfg-layout'>    layout: 'form',
+</span><span id='BasiGX-view-form-CoordinateTransform-cfg-layout'>    layout: &#39;form&#39;,
 </span>
-<span id='BasiGX-view-form-CoordinateTransform-cfg-scrollable'>    scrollable: 'y',
+<span id='BasiGX-view-form-CoordinateTransform-cfg-scrollable'>    scrollable: &#39;y&#39;,
 </span>
 <span id='BasiGX-view-form-CoordinateTransform-property-map'>    /**
 </span>     *
@@ -78,7 +78,7 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
 <span id='BasiGX-view-form-CoordinateTransform-cfg-coordinateSystemsToUse'>        /**
 </span>         * Array of Objects containing code in EPSG notation and Name to display
          * that should be used:
-         * {code: 'EPSG:4326', name: 'WGS84'}
+         * {code: &#39;EPSG:4326&#39;, name: &#39;WGS84&#39;}
          */
         coordinateSystemsToUse: [],
 
@@ -99,7 +99,7 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
         me.map = BasiGX.util.Map.getMapComponent().getMap();
 
         if (Ext.isEmpty(me.getCoordinateSystemsToUse())) {
-            Ext.log.warn('No coordinatesystems given to Component');
+            Ext.log.warn(&#39;No coordinatesystems given to Component&#39;);
             return;
         }
 
@@ -107,64 +107,64 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
             var targetCrs = ol.proj.get(crs.code);
             // first we check if the crs can be used at all
             if (!Ext.isDefined(targetCrs)) {
-                Ext.log.warn('The CRS ' + crs.code + ' is not defined, did ' +
-                   'you require it?');
+                Ext.log.warn(&#39;The CRS &#39; + crs.code + &#39; is not defined, did &#39; +
+                   &#39;you require it?&#39;);
                 return;
             }
 
             var fs = {
-                xtype: 'fieldset',
+                xtype: &#39;fieldset&#39;,
                 title: crs.name,
                 crs: crs.code,
                 items: [
                     {
-                        xtype: 'numberfield',
-                        name: 'xcoord',
-                        decimalSeparator: ',',
+                        xtype: &#39;numberfield&#39;,
+                        name: &#39;xcoord&#39;,
+                        decimalSeparator: &#39;,&#39;,
                         decimalPrecision: 7,
                         bind: {
-                            fieldLabel: '{coordXFieldLabel}'
+                            fieldLabel: &#39;{coordXFieldLabel}&#39;
                         },
-                        value: '',
+                        value: &#39;&#39;,
                         // Remove spinner buttons, and arrow key and mouse wheel
                         // listeners
                         hideTrigger: true,
                         keyNavEnabled: false,
                         mouseWheelEnabled: false,
                         listeners: {
-                            'focus': me.toggleBtnVisibility
+                            &#39;focus&#39;: me.toggleBtnVisibility
                         }
                     },
                     {
-                        xtype: 'container',
-                        layout: 'hbox',
-                        margin: '0 0 5 0',
+                        xtype: &#39;container&#39;,
+                        layout: &#39;hbox&#39;,
+                        margin: &#39;0 0 5 0&#39;,
                         items: [{
-                            xtype: 'numberfield',
-                            name: 'ycoord',
-                            decimalSeparator: ',',
+                            xtype: &#39;numberfield&#39;,
+                            name: &#39;ycoord&#39;,
+                            decimalSeparator: &#39;,&#39;,
                             decimalPrecision: 7,
                             bind: {
-                                fieldLabel: '{coordYFieldLabel}'
+                                fieldLabel: &#39;{coordYFieldLabel}&#39;
                             },
-                            value: '',
+                            value: &#39;&#39;,
                             // Remove spinner buttons, and arrow key and mouse
                             // wheel listeners
                             hideTrigger: true,
                             keyNavEnabled: false,
                             mouseWheelEnabled: false,
                             listeners: {
-                                'focus': me.toggleBtnVisibility
+                                &#39;focus&#39;: me.toggleBtnVisibility
                             }
                         }, {
-                            xtype: 'button',
-                            name: 'transform',
-                            margin: '0 0 0 30',
+                            xtype: &#39;button&#39;,
+                            name: &#39;transform&#39;,
+                            margin: &#39;0 0 0 30&#39;,
                             width: 110,
                             bind: {
-                                text: '{transformBtnText}',
-                                iconCls: '{transformButtonIconCls}',
-                                tooltip: '{transformButtonToolTip}'
+                                text: &#39;{transformBtnText}&#39;,
+                                iconCls: &#39;{transformButtonIconCls}&#39;,
+                                tooltip: &#39;{transformButtonToolTip}&#39;
                             },
                             hidden: true,
                             handler: me.transform
@@ -177,10 +177,10 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
 
         me.items = [
             {
-                xtype: 'fieldset',
-                layout: 'form',
+                xtype: &#39;fieldset&#39;,
+                layout: &#39;form&#39;,
                 bind: {
-                    title: '{coordFieldSetTitle}'
+                    title: &#39;{coordFieldSetTitle}&#39;
                 },
                 items: crsFieldsets
             }
@@ -189,9 +189,9 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
         me.callParent();
 
         // set the initial values
-        me.on('afterrender', function() {
+        me.on(&#39;afterrender&#39;, function() {
             var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
-                'transformvectorlayer');
+                &#39;transformvectorlayer&#39;);
             if (transformvectorlayer) {
                 transformvectorlayer.setVisible(true);
             }
@@ -202,26 +202,26 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
             }
         });
 
-        me.map.on('click', me.transform);
+        me.map.on(&#39;click&#39;, me.transform);
 
-        me.on('beforedestroy', function() {
+        me.on(&#39;beforedestroy&#39;, function() {
             var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
-                'transformvectorlayer');
+                &#39;transformvectorlayer&#39;);
             transformvectorlayer.getSource().clear();
-            me.map.un('click', me.transform);
+            me.map.un(&#39;click&#39;, me.transform);
         });
     },
 
 <span id='BasiGX-view-form-CoordinateTransform-cfg-buttons'>    // Reset and Submit buttons
 </span>    buttons: [{
         bind: {
-            text: '{resetFormBtnText}'
+            text: &#39;{resetFormBtnText}&#39;
         },
         handler: function(btn) {
-            var view = btn.up('basigx-form-coordinatetransform');
+            var view = btn.up(&#39;basigx-form-coordinatetransform&#39;);
             view.reset();
             var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
-                'transformvectorlayer');
+                &#39;transformvectorlayer&#39;);
             transformvectorlayer.getSource().clear();
         }
     }],
@@ -234,9 +234,9 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
      */
     toggleBtnVisibility: function(field) {
         var allBtns = Ext.ComponentQuery.query(
-            'basigx-form-coordinatetransform button[name=transform]'
+            &#39;basigx-form-coordinatetransform button[name=transform]&#39;
         );
-        var currentBtn = field.up('fieldset').down('button[name=transform]');
+        var currentBtn = field.up(&#39;fieldset&#39;).down(&#39;button[name=transform]&#39;);
         Ext.each(allBtns, function(btn) {
             btn.setVisible(false);
         });
@@ -256,7 +256,7 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
         var transformedCoords = ol.proj.transform(coordToTransform,
             mapProjection, targetCrs);
 
-        if (targetCrs.getUnits() === 'm') {
+        if (targetCrs.getUnits() === &#39;m&#39;) {
             // round metric crs coords to decimeters
             transformedCoords[0] = Math.round(
                 transformedCoords[0] * 100) / 100;
@@ -279,12 +279,12 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
      */
     transform: function(evtOrBtnOrArray) {
         var coordTransformForm = Ext.ComponentQuery.query(
-            'basigx-form-coordinatetransform'
+            &#39;basigx-form-coordinatetransform&#39;
         )[0];
         var mapProjection = coordTransformForm.map.getView().getProjection();
-        var fieldSets = coordTransformForm.query('fieldset');
+        var fieldSets = coordTransformForm.query(&#39;fieldset&#39;);
         var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
-            'transformvectorlayer'
+            &#39;transformvectorlayer&#39;
         );
         var isOlEvt = Ext.isArray(evtOrBtnOrArray.coordinate) &amp;&amp;
             evtOrBtnOrArray.coordinate.length === 2;
@@ -299,9 +299,9 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
         } else if (isCoordArray) {
             coords = evtOrBtnOrArray;
         } else {
-            var fieldset = evtOrBtnOrArray.up('fieldset');
-            coords[0] = fieldset.down('numberfield[name=xcoord]').getValue();
-            coords[1] = fieldset.down('numberfield[name=ycoord]').getValue();
+            var fieldset = evtOrBtnOrArray.up(&#39;fieldset&#39;);
+            coords[0] = fieldset.down(&#39;numberfield[name=xcoord]&#39;).getValue();
+            coords[1] = fieldset.down(&#39;numberfield[name=ycoord]&#39;).getValue();
             coordsSrs = ol.proj.get(fieldset.crs);
         }
 
@@ -315,10 +315,10 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
                         coords, mapProjection, ol.proj.get(fs.crs));
                 }
 
-                fs.down('numberfield[name=xcoord]').setValue(
+                fs.down(&#39;numberfield[name=xcoord]&#39;).setValue(
                     transformedCoords[0]
                 );
-                fs.down('numberfield[name=ycoord]').setValue(
+                fs.down(&#39;numberfield[name=ycoord]&#39;).setValue(
                     transformedCoords[1]
                 );
             }
@@ -330,16 +330,16 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
                 BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
 
             transformvectorlayer = new ol.layer.Vector({
-                name: 'transformvectorlayer',
+                name: &#39;transformvectorlayer&#39;,
                 source: new ol.source.Vector(),
                 style: new ol.style.Style({
                     image: new ol.style.Circle({
                         radius: 8,
                         fill: new ol.style.Fill({
-                            color: 'rgba(255, 0, 0, 0.7)'
+                            color: &#39;rgba(255, 0, 0, 0.7)&#39;
                         }),
                         stroke: new ol.style.Stroke({
-                            color: 'rgba(255, 0, 0, 0.7)'
+                            color: &#39;rgba(255, 0, 0, 0.7)&#39;
                         })
                     })
                 })

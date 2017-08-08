@@ -19,11 +19,11 @@
 </span> * @private
  * Common methods for both classic &amp; modern containers
  */
-Ext.define('Ext.mixin.Container', {
-    extend: 'Ext.Mixin',
+Ext.define(&#39;Ext.mixin.Container&#39;, {
+    extend: &#39;Ext.Mixin&#39;,
 
 <span id='Ext-mixin-Container-property-mixinConfig'>    mixinConfig: {
-</span>        id: 'container'
+</span>        id: &#39;container&#39;
     },
 
 <span id='Ext-mixin-Container-property-isContainer'>    /**
@@ -122,7 +122,7 @@ Ext.define('Ext.mixin.Container', {
             key = component.referenceKey;
             //&lt;debug&gt;
             if (refs[key] &amp;&amp; refs[key] !== component) {
-                Ext.log.warn('Duplicate reference: &quot;' + key + '&quot; on ' + me.id);
+                Ext.log.warn(&#39;Duplicate reference: &quot;&#39; + key + &#39;&quot; on &#39; + me.id);
             }
             //&lt;/debug&gt;
             refs[key] = component;
@@ -139,7 +139,7 @@ Ext.define('Ext.mixin.Container', {
 
             if (refs &amp;&amp; key) {
                 // viewModelKey would be better placed in app.Container however
-                // it's not really worth introducing a second method call to clear
+                // it&#39;s not really worth introducing a second method call to clear
                 // a single property.
                 component.viewModelKey = component.referenceKey = refs[key] = null;
             }
@@ -157,13 +157,13 @@ Ext.define('Ext.mixin.Container', {
         containerOnRemoved: function(destroying) {
             var refHolder;
         
-            // If we're destroying this will get cleaned up anyway
+            // If we&#39;re destroying this will get cleaned up anyway
             if (!destroying) {
                 refHolder = this.lookupReferenceHolder();
                 if (refHolder) {
                     // Clear any references here, they will be reset after the 
                     // next call to lookupReference after being marked dirty.
-                    // It's easier to wipe &amp; re-establish them than attempt to 
+                    // It&#39;s easier to wipe &amp; re-establish them than attempt to 
                     // track what changed and prune the collection
                     
                     Ext.ComponentManager.markReferencesDirty();
@@ -174,7 +174,7 @@ Ext.define('Ext.mixin.Container', {
 
 <span id='Ext-mixin-Container-method-clearReferences'>        /**
 </span>         * Invalidates the references collection. Typically called when
-         * removing a container from this container, since it's difficult
+         * removing a container from this container, since it&#39;s difficult
          * to know what references got removed.
          *
          * @private
@@ -187,9 +187,9 @@ Ext.define('Ext.mixin.Container', {
             var me = this,
                 controller = me.getController(),
                 session = me.getSession(),
-                // Don't instantiate it here, we just want to know whether we
+                // Don&#39;t instantiate it here, we just want to know whether we
                 // were configured with a VM
-                viewModel = me.getConfig('viewModel', true),
+                viewModel = me.getConfig(&#39;viewModel&#39;, true),
                 reference = me.getReference(),
                 referenceHolder = me.getReferenceHolder();
 
@@ -203,9 +203,9 @@ Ext.define('Ext.mixin.Container', {
             }
 
             if (referenceHolder) {
-                inheritedState.referencePath = '';
+                inheritedState.referencePath = &#39;&#39;;
             } else if (reference &amp;&amp; me.isParentReference) {
-                inheritedState.referencePath = me.referenceKey + '.';
+                inheritedState.referencePath = me.referenceKey + &#39;.&#39;;
             }
 
             if (session) {
@@ -213,24 +213,24 @@ Ext.define('Ext.mixin.Container', {
             }
 
             if (viewModel) {
-                inheritedState.viewModelPath = '';
+                inheritedState.viewModelPath = &#39;&#39;;
             } else if (reference &amp;&amp; me.isParentReference) {
-                inheritedState.viewModelPath = me.viewModelKey + '.';
+                inheritedState.viewModelPath = me.viewModelKey + &#39;.&#39;;
             }
         },
         
         setupReference: function(reference) {
             var len;
 
-            if (reference &amp;&amp; reference.charAt(len = reference.length - 1) === '&gt;') {
+            if (reference &amp;&amp; reference.charAt(len = reference.length - 1) === &#39;&gt;&#39;) {
                 this.isParentReference = true;
                 reference = reference.substring(0, len);
             }
 
             //&lt;debug&gt;
             if (reference &amp;&amp; !Ext.validIdRe.test(reference)) {
-                Ext.Error.raise('Invalid reference &quot;' + reference + '&quot; for ' + this.getId() +
-                    ' - not a valid identifier');
+                Ext.Error.raise(&#39;Invalid reference &quot;&#39; + reference + &#39;&quot; for &#39; + this.getId() +
+                    &#39; - not a valid identifier&#39;);
             }
             //&lt;/debug&gt;
 

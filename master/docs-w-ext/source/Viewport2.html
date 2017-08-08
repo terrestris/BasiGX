@@ -24,11 +24,11 @@
  * viewport with a container that derives from another class (e.g., `Ext.tab.Panel`). Prior
  * to this plugin, you would have to do this:
  *
- *      Ext.create('Ext.container.Viewport', {
- *          layout: 'fit', // full the viewport with the tab panel
+ *      Ext.create(&#39;Ext.container.Viewport&#39;, {
+ *          layout: &#39;fit&#39;, // full the viewport with the tab panel
  *
  *          items: [{
- *              xtype: 'tabpanel',
+ *              xtype: &#39;tabpanel&#39;,
  *              items: [{
  *                  ...
  *              }]
@@ -37,8 +37,8 @@
  *
  * With this plugin you can create the `tabpanel` as the viewport:
  *
- *      Ext.create('Ext.tab.Panel', {
- *          plugins: 'viewport',
+ *      Ext.create(&#39;Ext.tab.Panel&#39;, {
+ *          plugins: &#39;viewport&#39;,
  *
  *          items: [{
  *              ...
@@ -58,10 +58,10 @@
  *
  * @since 5.0.0
  */
-Ext.define('Ext.plugin.Viewport', {
-    extend: 'Ext.plugin.Responsive',
+Ext.define(&#39;Ext.plugin.Viewport&#39;, {
+    extend: &#39;Ext.plugin.Responsive&#39;,
 
-    alias: 'plugin.viewport',
+    alias: &#39;plugin.viewport&#39;,
 
 <span id='Ext-plugin-Viewport-method-setCmp'>    setCmp: function (cmp) {
 </span>        this.cmp = cmp;
@@ -78,9 +78,9 @@ Ext.define('Ext.plugin.Viewport', {
     statics: {
 <span id='Ext-plugin-Viewport-static-method-decorate'>        decorate: function (target) {
 </span>            Ext.applyIf(target.prototype || target, {
-                ariaRole: 'application',
+                ariaRole: &#39;application&#39;,
 
-                viewportCls: Ext.baseCSSPrefix + 'viewport'
+                viewportCls: Ext.baseCSSPrefix + &#39;viewport&#39;
             });
 
             Ext.override(target, {
@@ -93,8 +93,8 @@ Ext.define('Ext.plugin.Viewport', {
                     this.setupViewport();
                 },
 
-                // Because we don't stamp the size until onRender, our size model
-                // won't return correctly. As we're always going to be configured,
+                // Because we don&#39;t stamp the size until onRender, our size model
+                // won&#39;t return correctly. As we&#39;re always going to be configured,
                 // just return the value here
                 getSizeModel: function() {
                     var configured = Ext.layout.SizeModel.configured;
@@ -116,36 +116,36 @@ Ext.define('Ext.plugin.Viewport', {
                     var me = this,
                         el = document.body;
 
-                    // Here in the (perhaps unlikely) case that the body dom el doesn't yet have an id,
+                    // Here in the (perhaps unlikely) case that the body dom el doesn&#39;t yet have an id,
                     // we want to give it the same id as the viewport component so getCmp lookups will
                     // be able to find the owner component.
                     //
                     // Note that nothing says that components that use configured elements have to have
-                    // matching ids (they probably won't), but this is at least making the attempt so that
-                    // getCmp *may* be able to find the component. However, in these cases, it's really
+                    // matching ids (they probably won&#39;t), but this is at least making the attempt so that
+                    // getCmp *may* be able to find the component. However, in these cases, it&#39;s really
                     // better to use Component#fromElement to find the owner component.
                     if (!el.id) {
                         el.id = me.id;
                     }
 
-                    // In addition, stamp on the data-componentid so lookups using Component's
+                    // In addition, stamp on the data-componentid so lookups using Component&#39;s
                     // fromElement will work.
-                    el.setAttribute('data-componentid', me.id);
+                    el.setAttribute(&#39;data-componentid&#39;, me.id);
                     
                     if (!me.ariaStaticRoles[me.ariaRole]) {
-                        el.setAttribute('role', me.ariaRole);
+                        el.setAttribute(&#39;role&#39;, me.ariaRole);
                     }
 
                     el = me.el = Ext.getBody();
 
                     Ext.fly(document.documentElement).addCls(me.viewportCls);
                     el.setHeight = el.setWidth = Ext.emptyFn;
-                    el.dom.scroll = 'no';
+                    el.dom.scroll = &#39;no&#39;;
                     me.allowDomMove = false;
                     me.renderTo = el;
 
                     if (Ext.supports.Touch) {
-                        me.addMeta('apple-mobile-web-app-capable', 'yes');
+                        me.addMeta(&#39;apple-mobile-web-app-capable&#39;, &#39;yes&#39;);
                     }
 
                     // Get the DOM disruption over with before the Viewport renders and begins a layout
@@ -186,7 +186,7 @@ Ext.define('Ext.plugin.Viewport', {
 
                     // If we are not scrolling the body, the body has to be overflow:hidden
                     if (me.getOverflowEl() !== body) {
-                        body.setStyle('overflow', 'hidden');
+                        body.setStyle(&#39;overflow&#39;, &#39;hidden&#39;);
                     }
 
                     // Important to start life as the proper size (to avoid extra layouts)
@@ -218,11 +218,11 @@ Ext.define('Ext.plugin.Viewport', {
                         root = Ext.rootInheritedState,
                         key;
 
-                    // Clear any properties from the inheritedState so we don't pollute the
-                    // global namespace. If we have a rtl flag set, leave it alone because it's
-                    // likely we didn't write it
+                    // Clear any properties from the inheritedState so we don&#39;t pollute the
+                    // global namespace. If we have a rtl flag set, leave it alone because it&#39;s
+                    // likely we didn&#39;t write it
                     for (key in root) {
-                        if (key !== 'rtl') {
+                        if (key !== &#39;rtl&#39;) {
                             delete root[key];
                         }
                     }
@@ -235,10 +235,10 @@ Ext.define('Ext.plugin.Viewport', {
                 },
 
                 addMeta: function(name, content) {
-                    var meta = document.createElement('meta');
+                    var meta = document.createElement(&#39;meta&#39;);
 
-                    meta.setAttribute('name', name);
-                    meta.setAttribute('content', content);
+                    meta.setAttribute(&#39;name&#39;, name);
+                    meta.setAttribute(&#39;content&#39;, content);
                     Ext.getHead().appendChild(meta);
                 },
 

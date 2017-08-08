@@ -40,30 +40,30 @@
  * @author Marc Jansen
  * @author Kai Volland
  */
-Ext.define('BasiGX.util.SLD', {
-    requires: ['BasiGX.util.Object'],
+Ext.define(&#39;BasiGX.util.SLD&#39;, {
+    requires: [&#39;BasiGX.util.Object&#39;],
     statics: {
 <span id='BasiGX-util-SLD-static-property-jsonixContext'>        jsonixContext: null,
 </span><span id='BasiGX-util-SLD-static-property-marshaller'>        marshaller: null,
 </span><span id='BasiGX-util-SLD-static-property-unmarshaller'>        unmarshaller: null,
 </span><span id='BasiGX-util-SLD-static-property-neededGlobals'>        neededGlobals: [
-</span>            'Jsonix',
-            'SLD_1_0_0',
-            'Filter_1_0_0',
-            'GML_2_1_2',
-            'XLink_1_0'
+</span>            &#39;Jsonix&#39;,
+            &#39;SLD_1_0_0&#39;,
+            &#39;Filter_1_0_0&#39;,
+            &#39;GML_2_1_2&#39;,
+            &#39;XLink_1_0&#39;
         ],
-<span id='BasiGX-util-SLD-static-property-DEFAULT_STROKE_OPACITY'>        DEFAULT_STROKE_OPACITY: '1',
-</span><span id='BasiGX-util-SLD-static-property-DEFAULT_STROKE_COLOR'>        DEFAULT_STROKE_COLOR: '#000000',
-</span><span id='BasiGX-util-SLD-static-property-DEFAULT_STROKE_WIDTH'>        DEFAULT_STROKE_WIDTH: '0',
+<span id='BasiGX-util-SLD-static-property-DEFAULT_STROKE_OPACITY'>        DEFAULT_STROKE_OPACITY: &#39;1&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_STROKE_COLOR'>        DEFAULT_STROKE_COLOR: &#39;#000000&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_STROKE_WIDTH'>        DEFAULT_STROKE_WIDTH: &#39;0&#39;,
 </span>
-<span id='BasiGX-util-SLD-static-property-DEFAULT_FILL_COLOR'>        DEFAULT_FILL_COLOR: '#FF0000',
-</span><span id='BasiGX-util-SLD-static-property-DEFAULT_FILL_OPACITY'>        DEFAULT_FILL_OPACITY: '1',
+<span id='BasiGX-util-SLD-static-property-DEFAULT_FILL_COLOR'>        DEFAULT_FILL_COLOR: &#39;#FF0000&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_FILL_OPACITY'>        DEFAULT_FILL_OPACITY: &#39;1&#39;,
 </span>
-<span id='BasiGX-util-SLD-static-property-DEFAULT_POINT_RADIUS'>        DEFAULT_POINT_RADIUS: '5',
-</span><span id='BasiGX-util-SLD-static-property-DEFAULT_GRAPHIC_SIZE'>        DEFAULT_GRAPHIC_SIZE: '50',
-</span><span id='BasiGX-util-SLD-static-property-DEFAULT_GRAPHIC_OPACITY'>        DEFAULT_GRAPHIC_OPACITY: '1',
-</span><span id='BasiGX-util-SLD-static-property-DEFAULT_GRAPHIC_ROTATION'>        DEFAULT_GRAPHIC_ROTATION: '0',
+<span id='BasiGX-util-SLD-static-property-DEFAULT_POINT_RADIUS'>        DEFAULT_POINT_RADIUS: &#39;5&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_GRAPHIC_SIZE'>        DEFAULT_GRAPHIC_SIZE: &#39;50&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_GRAPHIC_OPACITY'>        DEFAULT_GRAPHIC_OPACITY: &#39;1&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_GRAPHIC_ROTATION'>        DEFAULT_GRAPHIC_ROTATION: &#39;0&#39;,
 </span>
 <span id='BasiGX-util-SLD-static-method-setStaticJsonixReferences'>        /**
 </span>         * Method cares about the inital setup and checks if Jsonix is
@@ -76,13 +76,13 @@ Ext.define('BasiGX.util.SLD', {
                 if (needed in window) {
                     foundCnt += 1;
                 } else {
-                    Ext.log.error('Required global variable &quot;' + needed + '&quot;' +
-                    ' not found. Are Jsonix needed mappings loaded?');
+                    Ext.log.error(&#39;Required global variable &quot;&#39; + needed + &#39;&quot;&#39; +
+                    &#39; not found. Are Jsonix needed mappings loaded?&#39;);
                 }
             });
             if (foundCnt !== staticMe.neededGlobals.length) {
-                var msg = 'This function is not functional as its' +
-                    ' requirements weren\'t met.';
+                var msg = &#39;This function is not functional as its&#39; +
+                    &#39; requirements weren\&#39;t met.&#39;;
                 staticMe.toSldObject = function() {
                     Ext.log.error(msg);
                 };
@@ -96,11 +96,11 @@ Ext.define('BasiGX.util.SLD', {
                 SLD_1_0_0, Filter_1_0_0, GML_2_1_2, XLink_1_0
             ], {
                 namespacePrefixes: {
-                    'http://www.opengis.net/sld': 'sld',
-                    'http://www.opengis.net/ogc': 'ogc',
-                    'http://www.opengis.net/gml': 'gml',
-                    'http://www.w3.org/2001/XMLSchema-instance': 'xsi',
-                    'http://www.w3.org/1999/xlink': 'xlink'
+                    &#39;http://www.opengis.net/sld&#39;: &#39;sld&#39;,
+                    &#39;http://www.opengis.net/ogc&#39;: &#39;ogc&#39;,
+                    &#39;http://www.opengis.net/gml&#39;: &#39;gml&#39;,
+                    &#39;http://www.w3.org/2001/XMLSchema-instance&#39;: &#39;xsi&#39;,
+                    &#39;http://www.w3.org/1999/xlink&#39;: &#39;xlink&#39;
                 }
             });
             var marshaller = context.createMarshaller();
@@ -122,7 +122,7 @@ Ext.define('BasiGX.util.SLD', {
             try {
                 return BasiGX.util.SLD.unmarshaller.unmarshalString(sldStr);
             } catch (e) {
-                Ext.log.warn('Could not unmarshal the SLD string!');
+                Ext.log.warn(&#39;Could not unmarshal the SLD string!&#39;);
                 return null;
             }
         },
@@ -146,7 +146,7 @@ Ext.define('BasiGX.util.SLD', {
          * @param {Object} sldObject The SLD object to get the rules from.
          */
         rulesFromSldObject: function(sldObject) {
-            return BasiGX.util.Object.getValue('rule', sldObject);
+            return BasiGX.util.Object.getValue(&#39;rule&#39;, sldObject);
         },
 
 <span id='BasiGX-util-SLD-static-method-getRuleByName'>        /**
@@ -199,7 +199,7 @@ Ext.define('BasiGX.util.SLD', {
             if (!Ext.isNumeric(ruleMatchIdx)) {
                 // create a new rule for the symbolizer
                 var newRule = {
-                    TYPE_NAME: 'SLD_1_0_0.Rule',
+                    TYPE_NAME: &#39;SLD_1_0_0.Rule&#39;,
                     name: ruleName,
                     symbolizer: []
                 };
@@ -221,7 +221,7 @@ Ext.define('BasiGX.util.SLD', {
          * @param {Array} rules An Array of SLD rules.
          */
         setRulesOfSldObject: function(sldObject, rules) {
-            var ruleFromObject = BasiGX.util.Object.getValue('rule', sldObject);
+            var ruleFromObject = BasiGX.util.Object.getValue(&#39;rule&#39;, sldObject);
             if (ruleFromObject) {
                 ruleFromObject = rules;
             }
@@ -243,10 +243,10 @@ Ext.define('BasiGX.util.SLD', {
             };
             var fillParams = fillObj.cssParameter;
             Ext.each(fillParams, function(param) {
-                if (param.name === 'fill') {
+                if (param.name === &#39;fill&#39;) {
                     fill.fillColor = param.content[0];
                 }
-                if (param.name === 'fill-opacity') {
+                if (param.name === &#39;fill-opacity&#39;) {
                     fill.fillOpacity = param.content[0];
                 }
             });
@@ -268,13 +268,13 @@ Ext.define('BasiGX.util.SLD', {
             };
             var strokeParams = strokeObj.cssParameter;
             Ext.each(strokeParams, function(param) {
-                if (param.name === 'stroke') {
+                if (param.name === &#39;stroke&#39;) {
                     stroke.strokeColor = param.content[0];
                 }
-                if (param.name === 'stroke-width') {
+                if (param.name === &#39;stroke-width&#39;) {
                     stroke.strokeWidth = param.content[0];
                 }
-                if (param.name === 'stroke-opacity') {
+                if (param.name === &#39;stroke-opacity&#39;) {
                     stroke.strokeOpacity = param.content[0];
                 }
             });
@@ -292,53 +292,53 @@ Ext.define('BasiGX.util.SLD', {
         setPointSymbolizerInRule: function(symbolizerObj, ruleName, sldObj) {
             var sldSymbolizer = {
                 name: {
-                    namespaceURI: 'http://www.opengis.net/sld',
-                    localPart: 'PointSymbolizer',
-                    prefix: 'sld',
-                    key: '{http://www.opengis.net/sld}PointSymbolizer',
-                    string: '{http://www.opengis.net/sld}sld:PointSymbolizer',
-                    CLASS_NAME: 'Jsonix.XML.QName'
+                    namespaceURI: &#39;http://www.opengis.net/sld&#39;,
+                    localPart: &#39;PointSymbolizer&#39;,
+                    prefix: &#39;sld&#39;,
+                    key: &#39;{http://www.opengis.net/sld}PointSymbolizer&#39;,
+                    string: &#39;{http://www.opengis.net/sld}sld:PointSymbolizer&#39;,
+                    CLASS_NAME: &#39;Jsonix.XML.QName&#39;
                 },
                 value: {
-                    TYPE_NAME: 'SLD_1_0_0.PointSymbolizer',
+                    TYPE_NAME: &#39;SLD_1_0_0.PointSymbolizer&#39;,
                     graphic: {
-                        TYPE_NAME: 'SLD_1_0_0.Graphic'
+                        TYPE_NAME: &#39;SLD_1_0_0.Graphic&#39;
                     }
                 }
             };
 
             sldSymbolizer.value.graphic.externalGraphicOrMark = [{
-                TYPE_NAME: 'SLD_1_0_0.Mark',
+                TYPE_NAME: &#39;SLD_1_0_0.Mark&#39;,
                 wellKnownName: {
-                    TYPE_NAME: 'SLD_1_0_0.WellKnownName',
+                    TYPE_NAME: &#39;SLD_1_0_0.WellKnownName&#39;,
                     content: symbolizerObj.fontAndUniCode ?
-                        [symbolizerObj.fontAndUniCode] : ['circle']
+                        [symbolizerObj.fontAndUniCode] : [&#39;circle&#39;]
                 },
                 fill: {
-                    TYPE_NAME: 'SLD_1_0_0.Fill',
+                    TYPE_NAME: &#39;SLD_1_0_0.Fill&#39;,
                     cssParameter: [{
-                        TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                        name: 'fill',
+                        TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                        name: &#39;fill&#39;,
                         content: [symbolizerObj.fillColor]
                     }, {
-                        TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                        name: 'fill-opacity',
+                        TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                        name: &#39;fill-opacity&#39;,
                         content: [symbolizerObj.fillOpacity]
                     }]
                 },
                 stroke: {
-                    TYPE_NAME: 'SLD_1_0_0.Stroke',
+                    TYPE_NAME: &#39;SLD_1_0_0.Stroke&#39;,
                     cssParameter: [{
-                        TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                        name: 'stroke',
+                        TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                        name: &#39;stroke&#39;,
                         content: [symbolizerObj.strokeColor]
                     }, {
-                        TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                        name: 'stroke-width',
+                        TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                        name: &#39;stroke-width&#39;,
                         content: [symbolizerObj.strokeWidth]
                     }, {
-                        TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                        name: 'stroke-opacity',
+                        TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                        name: &#39;stroke-opacity&#39;,
                         content: [symbolizerObj.strokeOpacity]
                     }]
                 }
@@ -352,28 +352,28 @@ Ext.define('BasiGX.util.SLD', {
                 SLD.DEFAULT_GRAPHIC_ROTATION;
 
             sldSymbolizer.value.graphic.size = {
-                TYPE_NAME: 'SLD_1_0_0.ParameterValueType',
+                TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
                 content: [size]
             };
             sldSymbolizer.value.graphic.opacity = {
-                TYPE_NAME: 'SLD_1_0_0.ParameterValueType',
+                TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
                 content: [opacity]
             };
             sldSymbolizer.value.graphic.rotation = {
-                TYPE_NAME: 'SLD_1_0_0.ParameterValueType',
+                TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
                 content: [rotation]
             };
 
             if (symbolizerObj.externalGraphicSrc) {
                 var src = symbolizerObj.externalGraphicSrc;
                 sldSymbolizer.value.graphic.externalGraphicOrMark = [{
-                    TYPE_NAME: 'SLD_1_0_0.ExternalGraphic',
+                    TYPE_NAME: &#39;SLD_1_0_0.ExternalGraphic&#39;,
                     onlineResource: {
-                        TYPE_NAME: 'SLD_1_0_0.OnlineResource',
-                        type: 'simple',
+                        TYPE_NAME: &#39;SLD_1_0_0.OnlineResource&#39;,
+                        type: &#39;simple&#39;,
                         href: src
                     },
-                    format: 'image/png'
+                    format: &#39;image/png&#39;
                 }];
             }
             sldObj = BasiGX.util.SLD.setRuleByName(
@@ -395,28 +395,28 @@ Ext.define('BasiGX.util.SLD', {
         setLineSymbolizerInRule: function(symbolizerObj, ruleName, sldObj) {
             var sldSymbolizer = {
                 name: {
-                    namespaceURI: 'http://www.opengis.net/sld',
-                    localPart: 'LineSymbolizer',
-                    prefix: 'sld',
-                    key: '{http://www.opengis.net/sld}LineSymbolizer',
-                    string: '{http://www.opengis.net/sld}sld:LineSymbolizer',
-                    CLASS_NAME: 'Jsonix.XML.QName'
+                    namespaceURI: &#39;http://www.opengis.net/sld&#39;,
+                    localPart: &#39;LineSymbolizer&#39;,
+                    prefix: &#39;sld&#39;,
+                    key: &#39;{http://www.opengis.net/sld}LineSymbolizer&#39;,
+                    string: &#39;{http://www.opengis.net/sld}sld:LineSymbolizer&#39;,
+                    CLASS_NAME: &#39;Jsonix.XML.QName&#39;
                 },
                 value: {
-                    TYPE_NAME: 'SLD_1_0_0.LineSymbolizer',
+                    TYPE_NAME: &#39;SLD_1_0_0.LineSymbolizer&#39;,
                     stroke: {
-                        TYPE_NAME: 'SLD_1_0_0.Stroke',
+                        TYPE_NAME: &#39;SLD_1_0_0.Stroke&#39;,
                         cssParameter: [{
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke&#39;,
                             content: [symbolizerObj.strokeColor]
                         }, {
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke-width',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke-width&#39;,
                             content: [symbolizerObj.strokeWidth]
                         }, {
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke-opacity',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke-opacity&#39;,
                             content: [symbolizerObj.strokeOpacity]
                         }]
                     }
@@ -441,40 +441,40 @@ Ext.define('BasiGX.util.SLD', {
         setPolygonSymbolizerInRule: function(symbolizerObj, ruleName, sldObj) {
             var sldSymbolizer = {
                 name: {
-                    namespaceURI: 'http://www.opengis.net/sld',
-                    localPart: 'PolygonSymbolizer',
-                    prefix: 'sld',
-                    key: '{http://www.opengis.net/sld}PolygonSymbolizer',
-                    string: '{http://www.opengis.net/sld}sld:PolygonSymbolizer',
-                    CLASS_NAME: 'Jsonix.XML.QName'
+                    namespaceURI: &#39;http://www.opengis.net/sld&#39;,
+                    localPart: &#39;PolygonSymbolizer&#39;,
+                    prefix: &#39;sld&#39;,
+                    key: &#39;{http://www.opengis.net/sld}PolygonSymbolizer&#39;,
+                    string: &#39;{http://www.opengis.net/sld}sld:PolygonSymbolizer&#39;,
+                    CLASS_NAME: &#39;Jsonix.XML.QName&#39;
                 },
                 value: {
-                    TYPE_NAME: 'SLD_1_0_0.PolygonSymbolizer',
+                    TYPE_NAME: &#39;SLD_1_0_0.PolygonSymbolizer&#39;,
                     fill: {
-                        TYPE_NAME: 'SLD_1_0_0.Fill',
+                        TYPE_NAME: &#39;SLD_1_0_0.Fill&#39;,
                         cssParameter: [{
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'fill',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;fill&#39;,
                             content: [symbolizerObj.fillColor]
                         }, {
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'fill-opacity',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;fill-opacity&#39;,
                             content: [symbolizerObj.fillOpacity]
                         }]
                     },
                     stroke: {
-                        TYPE_NAME: 'SLD_1_0_0.Stroke',
+                        TYPE_NAME: &#39;SLD_1_0_0.Stroke&#39;,
                         cssParameter: [{
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke&#39;,
                             content: [symbolizerObj.strokeColor]
                         }, {
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke-width',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke-width&#39;,
                             content: [symbolizerObj.strokeWidth]
                         }, {
-                            TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                            name: 'stroke-opacity',
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;stroke-opacity&#39;,
                             content: [symbolizerObj.strokeOpacity]
                         }]
                     }
@@ -494,47 +494,47 @@ Ext.define('BasiGX.util.SLD', {
                 if (symbolizerObj.externalGraphicSrc) {
                     sldSymbolizer.value.fill.graphicFill.graphic.
                         externalGraphicOrMark = [{
-                            TYPE_NAME: 'SLD_1_0_0.ExternalGraphic',
+                            TYPE_NAME: &#39;SLD_1_0_0.ExternalGraphic&#39;,
                             onlineResource: {
-                                TYPE_NAME: 'SLD_1_0_0.OnlineResource',
-                                type: 'simple',
+                                TYPE_NAME: &#39;SLD_1_0_0.OnlineResource&#39;,
+                                type: &#39;simple&#39;,
                                 href: symbolizerObj.externalGraphicSrc
                             },
-                            format: 'image/png'
+                            format: &#39;image/png&#39;
                         }];
                 } else if (symbolizerObj.fontAndUniCode) {
                     sldSymbolizer.value.fill.graphicFill.graphic.
                         externalGraphicOrMark = [{
-                            TYPE_NAME: 'SLD_1_0_0.Mark',
+                            TYPE_NAME: &#39;SLD_1_0_0.Mark&#39;,
                             wellKnownName: {
-                                TYPE_NAME: 'SLD_1_0_0.WellKnownName',
+                                TYPE_NAME: &#39;SLD_1_0_0.WellKnownName&#39;,
                                 content: [symbolizerObj.fontAndUniCode]
                             },
                             fill: {
-                                TYPE_NAME: 'SLD_1_0_0.Fill',
+                                TYPE_NAME: &#39;SLD_1_0_0.Fill&#39;,
                                 cssParameter: [{
-                                    TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                                    name: 'fill',
+                                    TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                                    name: &#39;fill&#39;,
                                     content: [symbolizerObj.fillColor]
                                 }, {
-                                    TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                                    name: 'fill-opacity',
+                                    TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                                    name: &#39;fill-opacity&#39;,
                                     content: [symbolizerObj.fillOpacity]
                                 }]
                             },
                             stroke: {
-                                TYPE_NAME: 'SLD_1_0_0.Stroke',
+                                TYPE_NAME: &#39;SLD_1_0_0.Stroke&#39;,
                                 cssParameter: [{
-                                    TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                                    name: 'stroke',
+                                    TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                                    name: &#39;stroke&#39;,
                                     content: [symbolizerObj.strokeColor]
                                 }, {
-                                    TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                                    name: 'stroke-width',
+                                    TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                                    name: &#39;stroke-width&#39;,
                                     content: [symbolizerObj.strokeWidth]
                                 }, {
-                                    TYPE_NAME: 'SLD_1_0_0.CssParameter',
-                                    name: 'stroke-opacity',
+                                    TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                                    name: &#39;stroke-opacity&#39;,
                                     content: [symbolizerObj.strokeOpacity]
                                 }]
                             }
@@ -542,15 +542,15 @@ Ext.define('BasiGX.util.SLD', {
                 }
 
                 sldSymbolizer.value.fill.graphicFill.graphic.size = {
-                    TYPE_NAME: 'SLD_1_0_0.ParameterValueType',
+                    TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
                     content: [size]
                 };
                 sldSymbolizer.value.fill.graphicFill.graphic.opacity = {
-                    TYPE_NAME: 'SLD_1_0_0.ParameterValueType',
+                    TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
                     content: [opacity]
                 };
                 sldSymbolizer.value.fill.graphicFill.graphic.rotation = {
-                    TYPE_NAME: 'SLD_1_0_0.ParameterValueType',
+                    TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
                     content: [rotation]
                 };
             }

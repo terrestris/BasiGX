@@ -36,7 +36,7 @@
  *
  * @private
  */
-Ext.define('Ext.layout.SizeModel', {
+Ext.define(&#39;Ext.layout.SizeModel&#39;, {
 <span id='Ext-layout-SizeModel-method-constructor'>    constructor: function (config) {
 </span>        var me = this,
             SizeModel = me.self,
@@ -165,8 +165,8 @@ Ext.define('Ext.layout.SizeModel', {
 <span id='Ext-layout-SizeModel-property-names'>    /**
 </span>     * @property {Object} names An object with the config property names that determine the
      * size.
-     * @property {String} names.width The width property name (e.g., 'width').
-     * @property {String} names.height The height property name (e.g., 'minHeight').
+     * @property {String} names.width The width property name (e.g., &#39;width&#39;).
+     * @property {String} names.height The height property name (e.g., &#39;minHeight&#39;).
      * @readonly
      */
     names: null
@@ -180,20 +180,20 @@ function () {
     // These are the 4 fundamental size models.
 
     new SizeModel({ // jshint ignore:line
-        name: 'calculated'
+        name: &#39;calculated&#39;
     });
 
     new SizeModel({ // jshint ignore:line
-        name: 'configured',
-        names: { width: 'width', height: 'height' }
+        name: &#39;configured&#39;,
+        names: { width: &#39;width&#39;, height: &#39;height&#39; }
     });
 
     new SizeModel({ // jshint ignore:line
-        name: 'natural'
+        name: &#39;natural&#39;
     });
 
     new SizeModel({ // jshint ignore:line
-        name: 'shrinkWrap'
+        name: &#39;shrinkWrap&#39;
     });
 
     //-------------------------------------------------------------------------------
@@ -201,44 +201,44 @@ function () {
     // about their dynamic use.
 
     new SizeModel({ // jshint ignore:line
-        name: 'calculatedFromConfigured',
+        name: &#39;calculatedFromConfigured&#39;,
         configured: true,
         calculatedFrom: true,
-        names: { width: 'width', height: 'height' }
+        names: { width: &#39;width&#39;, height: &#39;height&#39; }
     });
 
     new SizeModel({ // jshint ignore:line
-        name: 'calculatedFromNatural',
+        name: &#39;calculatedFromNatural&#39;,
         natural: true,
         calculatedFrom: true
     });
 
     new SizeModel({ // jshint ignore:line
-        name: 'calculatedFromShrinkWrap',
+        name: &#39;calculatedFromShrinkWrap&#39;,
         shrinkWrap: true,
         calculatedFrom: true
     });
 
     new SizeModel({ // jshint ignore:line
-        name: 'constrainedMax',
+        name: &#39;constrainedMax&#39;,
         configured: true,
         constrained: true,
-        names: { width: 'maxWidth', height: 'maxHeight' }
+        names: { width: &#39;maxWidth&#39;, height: &#39;maxHeight&#39; }
     });
 
     new SizeModel({ // jshint ignore:line
-        name: 'constrainedMin',
+        name: &#39;constrainedMin&#39;,
         configured: true,
         constrained: true,
-        names: { width: 'minWidth', height: 'minHeight' }
+        names: { width: &#39;minWidth&#39;, height: &#39;minHeight&#39; }
     });
 
     new SizeModel({ // jshint ignore:line
-        name: 'constrainedDock',
+        name: &#39;constrainedDock&#39;,
         configured: true,
         constrained: true,
         constrainedByMin: true,
-        names: { width: 'dockConstrainedWidth', height: 'dockConstrainedHeight' }
+        names: { width: &#39;dockConstrainedWidth&#39;, height: &#39;dockConstrainedHeight&#39; }
     });
 
     for (i = 0, n = sizeModelsArray.length; i &lt; n; ++i) {

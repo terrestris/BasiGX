@@ -19,8 +19,8 @@
 </span> * This class is created to manage a direct bind.  `Ext.app.ViewModel` returns this from 
  * its {@link Ext.app.ViewModel#method-bind bind} method.
  */
-Ext.define('Ext.app.bind.Binding', {
-    extend: 'Ext.app.bind.BaseBinding',
+Ext.define(&#39;Ext.app.bind.Binding&#39;, {
+    extend: &#39;Ext.app.bind.BaseBinding&#39;,
 
 <span id='Ext-app-bind-Binding-cfg-deep'>    /**
 </span>     * @cfg {Boolean} [deep=false]
@@ -68,7 +68,7 @@ Ext.define('Ext.app.bind.Binding', {
 </span>     * Binds to the `validation` association for the bound property. For example, when a
      * binding is bound to something like this:
      *
-     *      var binding = viewModel.bind('{theUser.name}', ...);
+     *      var binding = viewModel.bind(&#39;{theUser.name}&#39;, ...);
      *
      * The validation status for the &quot;name&quot; property can be requested like so:
      *
@@ -76,7 +76,7 @@ Ext.define('Ext.app.bind.Binding', {
      *
      * Calling this method in the above example would be equivalent to the following bind:
      *
-     *      var validationBinding = viewModel.bind('{theUser.validation.name}', fn, scope);
+     *      var validationBinding = viewModel.bind(&#39;{theUser.validation.name}&#39;, fn, scope);
      *
      * The primary reason to use this method is in cases where the original bind expression
      * is not known.
@@ -114,7 +114,7 @@ Ext.define('Ext.app.bind.Binding', {
      * @since 5.0.0
      */
     getFullName: function () {
-        return this.fullName || (this.fullName = '@(' + this.stub.getFullName() + ')');
+        return this.fullName || (this.fullName = &#39;@(&#39; + this.stub.getFullName() + &#39;)&#39;);
     },
 
 <span id='Ext-app-bind-Binding-method-getValue'>    /**
@@ -185,7 +185,7 @@ Ext.define('Ext.app.bind.Binding', {
     setValue: function (value) {
         //&lt;debug&gt;
         if (this.isReadOnly()) {
-            Ext.raise('Cannot setValue on a readonly binding');
+            Ext.raise(&#39;Cannot setValue on a readonly binding&#39;);
         }
         //&lt;/debug&gt;
         this.stub.set(value);

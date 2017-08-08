@@ -18,12 +18,12 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-layout-card-Style'>/**
 </span> * @private
  */
-Ext.define('Ext.fx.layout.card.Style', {
+Ext.define(&#39;Ext.fx.layout.card.Style&#39;, {
 
-    extend: 'Ext.fx.layout.card.Abstract',
+    extend: &#39;Ext.fx.layout.card.Abstract&#39;,
 
     requires: [
-        'Ext.fx.Animation'
+        &#39;Ext.fx.Animation&#39;
     ],
 
     config: {
@@ -51,8 +51,8 @@ Ext.define('Ext.fx.layout.card.Style', {
         inAnimation = this.getInAnimation();
         outAnimation = this.getOutAnimation();
 
-        inAnimation.on('animationend', 'incrementEnd', this);
-        outAnimation.on('animationend', 'incrementEnd', this);
+        inAnimation.on(&#39;animationend&#39;, &#39;incrementEnd&#39;, this);
+        outAnimation.on(&#39;animationend&#39;, &#39;incrementEnd&#39;, this);
     },
 
 <span id='Ext-fx-layout-card-Style-method-updateDirection'>    updateDirection: function(direction) {
@@ -75,7 +75,7 @@ Ext.define('Ext.fx.layout.card.Style', {
 
         if (this.endAnimationCounter &gt; 1) {
             this.endAnimationCounter = 0;
-            this.fireEvent('animationend', this);
+            this.fireEvent(&#39;animationend&#39;, this);
         }
     },
 
@@ -113,7 +113,7 @@ Ext.define('Ext.fx.layout.card.Style', {
                 controller.resume();
             });
 
-            inElement.dom.style.setProperty('visibility', 'hidden', 'important');
+            inElement.dom.style.setProperty(&#39;visibility&#39;, &#39;hidden&#39;, &#39;important&#39;);
             newItem.show();
 
             Ext.Animator.run([outAnimation, inAnimation]);

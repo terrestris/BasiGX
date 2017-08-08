@@ -18,25 +18,25 @@
   <pre class="prettyprint lang-js"><span id='Ext-panel-Pinnable'>/**
 </span> * This mixin is applied to panels that want to manage a Pin state and corresponding tool.
  */
-Ext.define('Ext.panel.Pinnable', {
-    extend: 'Ext.Mixin',
+Ext.define(&#39;Ext.panel.Pinnable&#39;, {
+    extend: &#39;Ext.Mixin&#39;,
 
-<span id='Ext-panel-Pinnable-property-mixinId'>    mixinId: 'pinnable',
+<span id='Ext-panel-Pinnable-property-mixinId'>    mixinId: &#39;pinnable&#39;,
 </span>
 <span id='Ext-panel-Pinnable-property-pinnable'>    pinnable: true,
 </span>
-<span id='Ext-panel-Pinnable-property-pinnedTip'>    pinnedTip: 'Unpin this item',
+<span id='Ext-panel-Pinnable-property-pinnedTip'>    pinnedTip: &#39;Unpin this item&#39;,
 </span>
-<span id='Ext-panel-Pinnable-property-unpinnedTip'>    unpinnedTip: 'Pin this item',
+<span id='Ext-panel-Pinnable-property-unpinnedTip'>    unpinnedTip: &#39;Pin this item&#39;,
 </span>
 <span id='Ext-panel-Pinnable-method-initPinnable'>    initPinnable: function () {
 </span>        var me = this,
             pinned = me.isPinned();
 
         me.addTool(me.pinTool = Ext.widget({
-            xtype: 'tool',
-            type: pinned ? 'unpin' : 'pin',
-            callback: 'togglePin',
+            xtype: &#39;tool&#39;,
+            type: pinned ? &#39;unpin&#39; : &#39;pin&#39;,
+            callback: &#39;togglePin&#39;,
             scope: me,
             tooltip: pinned ? me.pinnedTip : me.unpinnedTip
         }));
@@ -52,9 +52,9 @@ Ext.define('Ext.panel.Pinnable', {
 
         if (pinned !== me.isPinned()) {
             args = [me, pinned];
-            if (me.fireEventArgs('beforepinchange', args) !== false) {
+            if (me.fireEventArgs(&#39;beforepinchange&#39;, args) !== false) {
                 me.updatePinned(pinned);
-                me.fireEventArgs('pinchange', args);
+                me.fireEventArgs(&#39;pinchange&#39;, args);
             }
         }
     },
@@ -68,7 +68,7 @@ Ext.define('Ext.panel.Pinnable', {
             tool = me.pinTool;
 
         tool.setTooltip(pinned ? me.pinnedTip : me.unpinnedTip);
-        tool.setType(pinned ? 'unpin' : 'pin');
+        tool.setType(pinned ? &#39;unpin&#39; : &#39;pin&#39;);
     }
 });
 </pre>

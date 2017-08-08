@@ -38,7 +38,7 @@
  *
  * @class BasiGX.util.Map
  */
-Ext.define('BasiGX.util.Map', {
+Ext.define(&#39;BasiGX.util.Map&#39;, {
 
     statics: {
 <span id='BasiGX-util-Map-static-property-dpi'>        /**
@@ -64,7 +64,7 @@ Ext.define('BasiGX.util.Map', {
          * @param {Number} scale The scale ypu wish to have the resolution for.
          * @param {String} units The units to get the resoultuion for, typically
          *     the unit of the projection odf the map view. Allowed values are
-         *     `'degrees'`, `'ft'`, `'m'` or `'us-ft'`
+         *     `&#39;degrees&#39;`, `&#39;ft&#39;`, `&#39;m&#39;` or `&#39;us-ft&#39;`
          * @return {Number} The calculated resolution.
          */
         getResolutionForScale: function(scale, units) {
@@ -81,7 +81,7 @@ Ext.define('BasiGX.util.Map', {
          *     for.
          * @param {String} units The units to get the resoultuion for, typically
          *     the unit of the projection odf the map view. Allowed values are
-         *     `'degrees'`, `'ft'`, `'m'` or `'us-ft'`
+         *     `&#39;degrees&#39;`, `&#39;ft&#39;`, `&#39;m&#39;` or `&#39;us-ft&#39;`
          * @return {Number} The calculated scale.
          */
         getScaleForResolution: function(resolution, units) {
@@ -92,7 +92,7 @@ Ext.define('BasiGX.util.Map', {
         },
 
 <span id='BasiGX-util-Map-static-method-getResolution'>        /**
-</span>         * Returns the resolution of the passed map's view.
+</span>         * Returns the resolution of the passed map&#39;s view.
          *
          * @param {ol.Map} map The map to get the resolution from.
          * @return {Number} The resolution of the view of the passed map.
@@ -137,13 +137,13 @@ Ext.define('BasiGX.util.Map', {
             //fallback to basigx map component
             if (Ext.isEmpty(mapComponent)) {
                 mapComponent = Ext.ComponentQuery.query(
-                    'basigx-component-map'
+                    &#39;basigx-component-map&#39;
                 )[0];
             }
 
             //fallback to the most common GeoExt map component
             if (Ext.isEmpty(mapComponent)) {
-                mapComponent = Ext.ComponentQuery.query('gx_map')[0];
+                mapComponent = Ext.ComponentQuery.query(&#39;gx_map&#39;)[0];
             }
 
             return mapComponent;
@@ -165,7 +165,7 @@ Ext.define('BasiGX.util.Map', {
             //fallback to basigx legendtree panel component
             if (Ext.isEmpty(legendComponent)) {
                 legendComponent = Ext.ComponentQuery.query(
-                    'basigx-panel-legendtree'
+                    &#39;basigx-panel-legendtree&#39;
                 )[0];
             }
             return legendComponent;

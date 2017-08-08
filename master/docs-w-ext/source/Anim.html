@@ -41,14 +41,14 @@
  * ## Example Code
  *
  *     @example
- *     var myComponent = Ext.create('Ext.Component', {
+ *     var myComponent = Ext.create(&#39;Ext.Component&#39;, {
  *         renderTo: document.body,
  *         width: 200,
  *         height: 200,
- *         style: 'border: 1px solid red;'
+ *         style: &#39;border: 1px solid red;&#39;
  *     });
  *
- *     Ext.create('Ext.fx.Anim', {
+ *     Ext.create(&#39;Ext.fx.Anim&#39;, {
  *         target: myComponent,
  *         duration: 1000,
  *         from: {
@@ -60,15 +60,15 @@
  *         }
  *     });
  */
-Ext.define('Ext.fx.Anim', {
+Ext.define(&#39;Ext.fx.Anim&#39;, {
 
     /* Begin Definitions */
 
     mixins: {
-        observable: 'Ext.util.Observable'
+        observable: &#39;Ext.util.Observable&#39;
     },
 
-    requires: ['Ext.fx.Manager', 'Ext.fx.Animator', 'Ext.fx.Easing', 'Ext.fx.CubicBezier', 'Ext.fx.PropertyHandler'],
+    requires: [&#39;Ext.fx.Manager&#39;, &#39;Ext.fx.Animator&#39;, &#39;Ext.fx.Easing&#39;, &#39;Ext.fx.CubicBezier&#39;, &#39;Ext.fx.PropertyHandler&#39;],
 
     /* End Definitions */
 
@@ -116,7 +116,7 @@ Ext.define('Ext.fx.Anim', {
 
 <span id='Ext-fx-Anim-cfg-dynamic'>    /**
 </span>     * @cfg {Boolean} dynamic
-     * Currently only for Component Animation: Only set a component's outer element size bypassing layouts.
+     * Currently only for Component Animation: Only set a component&#39;s outer element size bypassing layouts.
      * Set to true to do full layouts for every frame of the animation.
      */
     dynamic: false,
@@ -144,27 +144,27 @@ Ext.define('Ext.fx.Anim', {
      *
      * [0]: http://www.w3.org/TR/css3-transitions/#transition-timing-function_tag
      */
-    easing: 'ease',
+    easing: &#39;ease&#39;,
 
 <span id='Ext-fx-Anim-cfg-keyframes'>    /**
 </span>     * @cfg {Object} keyframes
-     * Animation keyframes follow the CSS3 Animation configuration pattern. 'from' is always considered '0%' and 'to'
-     * is considered '100%'. **Every keyframe declaration must have a keyframe rule for 0% and 100%, possibly defined using
+     * Animation keyframes follow the CSS3 Animation configuration pattern. &#39;from&#39; is always considered &#39;0%&#39; and &#39;to&#39;
+     * is considered &#39;100%&#39;. **Every keyframe declaration must have a keyframe rule for 0% and 100%, possibly defined using
      * &quot;from&quot; or &quot;to&quot;.**  A keyframe declaration without these keyframe selectors is invalid and will not be available for
      * animation.  The keyframe declaration for a keyframe rule consists of properties and values. Properties that are unable to
-     * be animated are ignored in these rules, with the exception of 'easing' which can be changed at each keyframe. For example:
+     * be animated are ignored in these rules, with the exception of &#39;easing&#39; which can be changed at each keyframe. For example:
      *
      *     keyframes : {
-     *         '0%': {
+     *         &#39;0%&#39;: {
      *             left: 100
      *         },
-     *         '40%': {
+     *         &#39;40%&#39;: {
      *             left: 150
      *         },
-     *         '60%': {
+     *         &#39;60%&#39;: {
      *             left: 75
      *         },
-     *         '100%': {
+     *         &#39;100%&#39;: {
      *             left: 100
      *         }
      *     }
@@ -258,7 +258,7 @@ Ext.define('Ext.fx.Anim', {
      *
      *     from: {
      *         opacity: 0,       // Transparent
-     *         color: '#ffffff', // White
+     *         color: &#39;#ffffff&#39;, // White
      *         left: 0
      *     }
      *
@@ -270,7 +270,7 @@ Ext.define('Ext.fx.Anim', {
      *
      *     to: {
      *         opacity: 1,       // Opaque
-     *         color: '#00ff00', // Green
+     *         color: &#39;#00ff00&#39;, // Green
      *         left: 500
      *     }
      *
@@ -296,7 +296,7 @@ Ext.define('Ext.fx.Anim', {
 
 <span id='Ext-fx-Anim-event-lastframe'>     /**
 </span>      * @event lastframe
-      * Fires when the animation's last frame has been set.
+      * Fires when the animation&#39;s last frame has been set.
       * @param {Ext.fx.Anim} this
       * @param {Date} startTime
       */
@@ -331,7 +331,7 @@ Ext.define('Ext.fx.Anim', {
                 me.easingFn = Ext.fx.CubicBezier.cubicBezier(+curve[1], +curve[2], +curve[3], +curve[4]);
             }
         }
-        me.id = Ext.id(null, 'ext-anim-');
+        me.id = Ext.id(null, &#39;ext-anim-&#39;);
 
         me.mixins.observable.constructor.call(me);
         Ext.fx.Manager.addAnim(me);
@@ -409,7 +409,7 @@ Ext.define('Ext.fx.Anim', {
                 }
             }
         }
-        if (me.fireEvent('beforeanimate', me) !== false) {
+        if (me.fireEvent(&#39;beforeanimate&#39;, me) !== false) {
             me.startTime = startTime;
             if (!me.paused &amp;&amp; !me.currentAttrs) {
                 me.initAttrs();
@@ -491,7 +491,7 @@ Ext.define('Ext.fx.Anim', {
         else {
             me.currentIteration = 0;
             me.end();
-            me.fireEvent('lastframe', me, me.startTime);
+            me.fireEvent(&#39;lastframe&#39;, me, me.startTime);
         }
     },
 
@@ -514,7 +514,7 @@ Ext.define('Ext.fx.Anim', {
         Ext.fx.Manager.removeAnim(me);
         
         if (!suppressEvent) {
-            me.fireEvent('afteranimate', me, me.startTime);
+            me.fireEvent(&#39;afteranimate&#39;, me, me.startTime);
             Ext.callback(me.callback, me.scope, [me, me.startTime]);
         }
         

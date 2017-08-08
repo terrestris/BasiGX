@@ -24,19 +24,19 @@
  *
  * For example:
  *
- *      Ext.define('MyWidget', {
- *          extend: 'Ext.Widget',
+ *      Ext.define(&#39;MyWidget&#39;, {
+ *          extend: &#39;Ext.Widget&#39;,
  *
  *          // The element template passed to Ext.Element.create()
  *          element: {
- *              reference: 'element',
+ *              reference: &#39;element&#39;,
  *              listeners: {
- *                  click: 'onClick'
+ *                  click: &#39;onClick&#39;
  *              },
  *              children: [{
- *                  reference: 'innerElement',
+ *                  reference: &#39;innerElement&#39;,
  *                  listeners: {
- *                      click: 'onInnerClick'
+ *                      click: &#39;onInnerClick&#39;
  *                  }
  *              }]
  *          },
@@ -56,32 +56,32 @@
  *
  *          onClick: function() {
  *              // listeners use this Widget instance as their scope
- *              console.log('element clicked', this);
+ *              console.log(&#39;element clicked&#39;, this);
  *          },
  *
  *          onInnerClick: function() {
  *              // access the innerElement reference by name
- *              console.log('inner element clicked', this.innerElement);
+ *              console.log(&#39;inner element clicked&#39;, this.innerElement);
  *          }
  *      });
  *
  * @since 5.0.0
  */
-Ext.define('Ext.Widget', {
-    extend: 'Ext.Evented',
-    xtype: 'widget',
+Ext.define(&#39;Ext.Widget&#39;, {
+    extend: &#39;Ext.Evented&#39;,
+    xtype: &#39;widget&#39;,
 
-    alternateClassName: 'Ext.Gadget',
+    alternateClassName: &#39;Ext.Gadget&#39;,
 
     requires: [
-        'Ext.dom.Element'
+        &#39;Ext.dom.Element&#39;
     ],
 
     mixins: [
-        'Ext.mixin.Inheritable',
-        'Ext.mixin.Bindable',
-        'Ext.mixin.ComponentDelegation',
-        'Ext.mixin.Pluggable'
+        &#39;Ext.mixin.Inheritable&#39;,
+        &#39;Ext.mixin.Bindable&#39;,
+        &#39;Ext.mixin.ComponentDelegation&#39;,
+        &#39;Ext.mixin.Pluggable&#39;
     ],
 
 <span id='Ext-Widget-property-isWidget'>    isWidget: true,
@@ -97,9 +97,9 @@ Ext.define('Ext.Widget', {
      * instances that were created using the template:
      *
      *     element: {
-     *         reference: 'element',
+     *         reference: &#39;element&#39;,
      *         children: [{
-     *             reference: 'innerElement'
+     *             reference: &#39;innerElement&#39;
      *         }]
      *     }
      *
@@ -108,20 +108,20 @@ Ext.define('Ext.Widget', {
      *     var foo = new FooWidget(),
      *         innerEl = foo.innerElement; // an Ext.Element that wraps the innerElement
      *
-     * The reference attribute is optional, but all Widgets must have a `'element'`
+     * The reference attribute is optional, but all Widgets must have a `&#39;element&#39;`
      * reference on some element within the template (usually the outermost one).
      *
      * 2. `listeners` - a standard listeners object as specified by {@link Ext.mixin.Observable}.
      *
      *     element: {
-     *         reference: 'element',
+     *         reference: &#39;element&#39;,
      *         listeners: {
-     *             click: 'onClick'
+     *             click: &#39;onClick&#39;
      *         },
      *         children: [{
-     *             reference: 'innerElement',
+     *             reference: &#39;innerElement&#39;,
      *             listeners: {
-     *                 click: 'onInnerClick'
+     *                 click: &#39;onInnerClick&#39;
      *             }
      *         }]
      *     }
@@ -135,15 +135,15 @@ Ext.define('Ext.Widget', {
      * @protected
      */
     element: {
-        reference: 'element'
+        reference: &#39;element&#39;
     },
 
-<span id='Ext-Widget-property-observableType'>    observableType: 'component',
+<span id='Ext-Widget-property-observableType'>    observableType: &#39;component&#39;,
 </span>
     cachedConfig: {
 <span id='Ext-Widget-cfg-baseCls'>        /**
 </span>         * @cfg {String/Boolean} [baseCls=true]
-         * The base CSS class to apply to this widget's element.
+         * The base CSS class to apply to this widget&#39;s element.
          * Used as the prefix for {@link #ui}-specific class names.
          * When set to `true` the {@link #classCls} will be used as the baseCls
          * @accessor
@@ -152,7 +152,7 @@ Ext.define('Ext.Widget', {
         baseCls: true,
 
 <span id='Ext-Widget-cfg-cls'>        /**
-</span>         * @cfg {String/String[]} cls The CSS class to add to this widget's element, in
+</span>         * @cfg {String/String[]} cls The CSS class to add to this widget&#39;s element, in
          * addition to the {@link #baseCls}. In many cases, this property will be specified
          * by the derived widget class. See {@link #userCls} for adding additional CSS
          * classes to widget instances (such as items in a {@link Ext.Container}).
@@ -167,18 +167,18 @@ Ext.define('Ext.Widget', {
          *
          * You can pass either a string syntax:
          *
-         *     style: 'background:red'
+         *     style: &#39;background:red&#39;
          *
          * Or by using an object:
          *
          *     style: {
-         *         background: 'red'
+         *         background: &#39;red&#39;
          *     }
          *
          * When using the object syntax, you can define CSS Properties by using a string:
          *
          *     style: {
-         *         'border-left': '1px solid red'
+         *         &#39;border-left&#39;: &#39;1px solid red&#39;
          *     }
          *
          * Although the object syntax is much easier to read, we suggest you to use the
@@ -206,7 +206,7 @@ Ext.define('Ext.Widget', {
          *         width: 100,
          *         height: 100,
          *
-         *         style: 'border: 1px solid blue;'
+         *         style: &#39;border: 1px solid blue;&#39;
          *         // ...
          *     });
          *
@@ -217,7 +217,7 @@ Ext.define('Ext.Widget', {
          *         width: 100,
          *         height: 100,
          *
-         *         cls: 'my-component'
+         *         cls: &#39;my-component&#39;
          *         // ...
          *     });
          *
@@ -248,7 +248,7 @@ Ext.define('Ext.Widget', {
          *
          * All touch actions are enabled (`true`) by default, so it is usually only necessary
          * to specify which touch actions to disable.  For example, the following disables
-         * only horizontal scrolling and pinch-to-zoom on the component's main element:
+         * only horizontal scrolling and pinch-to-zoom on the component&#39;s main element:
          *
          *     touchAction: {
          *         panX: false,
@@ -268,13 +268,13 @@ Ext.define('Ext.Widget', {
          *     }
          *
          * The primary motivation for setting the touch-action of an element is to prevent
-         * the browser's default handling of a gesture such as pinch-to-zoom, or
+         * the browser&#39;s default handling of a gesture such as pinch-to-zoom, or
          * drag-to-scroll, so that the application can implement its own handling of that
          * gesture on the element.  Suppose, for example, a component has a custom drag
          * handler on its element and wishes to prevent horizontal scrolling of its container
          * while it is being dragged:
          *
-         *     Ext.create('Ext.Widget', {
+         *     Ext.create(&#39;Ext.Widget&#39;, {
          *         touchAction: {
          *             panX: false
          *         },
@@ -299,15 +299,15 @@ Ext.define('Ext.Widget', {
 
 <span id='Ext-Widget-cfg-userCls'>        /**
 </span>         * @cfg {String/String[]} userCls
-         * One or more CSS classes to add to the component's primary element. This config
+         * One or more CSS classes to add to the component&#39;s primary element. This config
          * is intended solely for use by the component instantiator (the &quot;user&quot;), not by
          * derived classes.
          *
          * For example:
          *
          *      items: [{
-         *          xtype: 'button',
-         *          userCls: 'my-button'
+         *          xtype: &#39;button&#39;,
+         *          userCls: &#39;my-button&#39;
          *      ...
          *      }]
          */
@@ -318,7 +318,7 @@ Ext.define('Ext.Widget', {
 <span id='Ext-Widget-cfg-width'>        /**
 </span>         * @cfg {Number/String} width
          * The width of this Component; must be a valid CSS length value, e.g: `300`, `100px`, `30%`, etc.
-         * By default, if this is not explicitly set, this Component's element will simply have its own natural size.
+         * By default, if this is not explicitly set, this Component&#39;s element will simply have its own natural size.
          * If set to `auto`, it will set the width to `null` meaning it will have its own natural size.
          * @accessor
          * @evented
@@ -328,7 +328,7 @@ Ext.define('Ext.Widget', {
 <span id='Ext-Widget-cfg-height'>        /**
 </span>         * @cfg {Number/String} height
          * The height of this Component; must be a valid CSS length value, e.g: `300`, `100px`, `30%`, etc.
-         * By default, if this is not explicitly set, this Component's element will simply have its own natural size.
+         * By default, if this is not explicitly set, this Component&#39;s element will simply have its own natural size.
          * If set to `auto`, it will set the width to `null` meaning it will have its own natural size.
          * @accessor
          * @evented
@@ -361,19 +361,19 @@ Ext.define('Ext.Widget', {
      * own CSS class in addition to the CSS classes inherited from ancestor classes via
      * the prototype chain.  For example
      *
-     *     Ext.define('Foo', {
-     *         extend: 'Ext.Widget',
-     *         classCls: 'foo'
+     *     Ext.define(&#39;Foo&#39;, {
+     *         extend: &#39;Ext.Widget&#39;,
+     *         classCls: &#39;foo&#39;
      *     });
      *
-     *     Ext.define('Bar', {
-     *         extend: 'Foo',
-     *         classCls: 'bar'
+     *     Ext.define(&#39;Bar&#39;, {
+     *         extend: &#39;Foo&#39;,
+     *         classCls: &#39;bar&#39;
      *     });
      *
      *     var bar = new Bar();
      *
-     *     console.log(bar.element.className); // outputs 'foo bar'
+     *     console.log(bar.element.className); // outputs &#39;foo bar&#39;
      *
      * @protected
      * @property
@@ -389,14 +389,14 @@ Ext.define('Ext.Widget', {
      */
     classClsRoot: true,
 
-<span id='Ext-Widget-property-clearPropertiesOnDestroy'>    clearPropertiesOnDestroy: 'async',
+<span id='Ext-Widget-property-clearPropertiesOnDestroy'>    clearPropertiesOnDestroy: &#39;async&#39;,
 </span>
 <span id='Ext-Widget-property-noBorderCls'>    /**
 </span>     * @property {String} [noBorderCls] The CSS class to add to this component should not have a border.
      * @private
      * @readonly
      */
-    noBorderCls: Ext.baseCSSPrefix + 'noborder-trbl',
+    noBorderCls: Ext.baseCSSPrefix + &#39;noborder-trbl&#39;,
 
 <span id='Ext-Widget-method-constructor'>    constructor: function(config) {
 </span>        var me = this,
@@ -427,25 +427,25 @@ Ext.define('Ext.Widget', {
             renderElement = me.renderElement,
             renderTemplate, element, i, ln, reference, elements;
 
-        // This is where we take the first instance's DOM and clone it as the template
+        // This is where we take the first instance&#39;s DOM and clone it as the template
         // for future instances
         prototype.renderTemplate = renderTemplate = document.createDocumentFragment();
         renderTemplate.appendChild(renderElement.clone(true, true));
 
-        elements = renderTemplate.querySelectorAll('[id]');
+        elements = renderTemplate.querySelectorAll(&#39;[id]&#39;);
 
         for (i = 0, ln = elements.length; i &lt; ln; i++) {
             element = elements[i];
-            element.removeAttribute('id');
+            element.removeAttribute(&#39;id&#39;);
         }
 
         // initElement skips removal of reference attributes for the first instance so that
         // the reference attributes will be present in the cached element when it is cloned.
-        // Now that we're done cloning and caching the template element, it is safe to
-        // remove the reference attributes from this instance's elements
+        // Now that we&#39;re done cloning and caching the template element, it is safe to
+        // remove the reference attributes from this instance&#39;s elements
         for (i = 0, ln = referenceList.length; i &lt; ln; i++) {
             reference = referenceList[i];
-            me[reference].dom.removeAttribute('reference');
+            me[reference].dom.removeAttribute(&#39;reference&#39;);
         }
     },
 
@@ -601,7 +601,7 @@ Ext.define('Ext.Widget', {
         var me = this,
             el = me.element;
 
-        if (!('children' in el)) {
+        if (!(&#39;children&#39; in el)) {
             el = Ext.apply({
                 children: me.getTemplate()
             }, el);
@@ -648,7 +648,7 @@ Ext.define('Ext.Widget', {
                 }
             }
 
-            if (prototype.classClsRoot &amp;&amp; prototype.hasOwnProperty('classClsRoot')) {
+            if (prototype.classClsRoot &amp;&amp; prototype.hasOwnProperty(&#39;classClsRoot&#39;)) {
                 break;
             }
 
@@ -683,7 +683,7 @@ Ext.define('Ext.Widget', {
             // iPads and lower, possibly other older iOS devices. See EXTJS-16494.
             referenceList = me.referenceList = me.referenceList = [],
             cleanAttributes = true,
-            isFirstInstance = !prototype.hasOwnProperty('renderTemplate'),
+            isFirstInstance = !prototype.hasOwnProperty(&#39;renderTemplate&#39;),
             renderTemplate, renderElement, element, referenceNodes, i, ln, referenceNode,
             reference, classCls;
 
@@ -703,29 +703,29 @@ Ext.define('Ext.Widget', {
             renderElement = renderTemplate.firstChild;
         }
 
-        referenceNodes = renderTemplate.querySelectorAll('[reference]');
+        referenceNodes = renderTemplate.querySelectorAll(&#39;[reference]&#39;);
 
         for (i = 0, ln = referenceNodes.length; i &lt; ln; i++) {
             referenceNode = referenceNodes[i];
-            reference = referenceNode.getAttribute('reference');
+            reference = referenceNode.getAttribute(&#39;reference&#39;);
 
             if (cleanAttributes) {
                 // on first instantiation we do not clean the reference attributes here.
-                // This is because this instance's element will be used as the template
+                // This is because this instance&#39;s element will be used as the template
                 // for future instances, and we need the reference attributes to be
                 // present in the template so that future instances can resolve their
                 // references.  afterCachedConfig is responsible for removing the
                 // reference attributes from the DOM for the first instance after the
                 // Element has been cloned and cached as the template.
-                referenceNode.removeAttribute('reference');
+                referenceNode.removeAttribute(&#39;reference&#39;);
             }
 
-            if (reference === 'element') {
+            if (reference === &#39;element&#39;) {
                 //&lt;debug&gt;
                 if (element) {
-                    // already resolved a reference named element - can't have two
-                    Ext.raise(&quot;Duplicate 'element' reference detected in '&quot; +
-                        me.$className + &quot;' template.&quot;);
+                    // already resolved a reference named element - can&#39;t have two
+                    Ext.raise(&quot;Duplicate &#39;element&#39; reference detected in &#39;&quot; +
+                        me.$className + &quot;&#39; template.&quot;);
                 }
                 //&lt;/debug&gt;
                 referenceNode.id = id;
@@ -734,7 +734,7 @@ Ext.define('Ext.Widget', {
                 element = me.el = me.addElementReference(reference, referenceNode);
 
                 // Poke our id in our magic attribute to enable Component#fromElement
-                element.dom.setAttribute('data-componentid', id);
+                element.dom.setAttribute(&#39;data-componentid&#39;, id);
 
                 if (isFirstInstance) {
                     classCls = me.getClassCls();
@@ -751,8 +751,8 @@ Ext.define('Ext.Widget', {
 
         //&lt;debug&gt;
         if (!element) {
-            Ext.raise(&quot;No 'element' reference found in '&quot; + me.$className +
-                &quot;' template.&quot;);
+            Ext.raise(&quot;No &#39;element&#39; reference found in &#39;&quot; + me.$className +
+                &quot;&#39; template.&quot;);
         }
         //&lt;/debug&gt;
 
@@ -760,7 +760,7 @@ Ext.define('Ext.Widget', {
             me.renderElement = element;
         }
         else {
-            me.addElementReferenceOnDemand('renderElement', renderElement);
+            me.addElementReferenceOnDemand(&#39;renderElement&#39;, renderElement);
         }
     },
 
@@ -819,9 +819,9 @@ Ext.define('Ext.Widget', {
      * Example usage:
      *
      *     var t = new Ext.field.Text();
-     *     var isText = t.isXType('textfield'); // true
-     *     var isBoxSubclass = t.isXType('field'); // true, descended from Ext.field.Field
-     *     var isBoxInstance = t.isXType('field', true); // false, not a direct Ext.field.Field instance
+     *     var isText = t.isXType(&#39;textfield&#39;); // true
+     *     var isBoxSubclass = t.isXType(&#39;field&#39;); // true, descended from Ext.field.Field
+     *     var isBoxInstance = t.isXType(&#39;field&#39;, true); // false, not a direct Ext.field.Field instance
      *
      * @param {String} xtype The xtype to check for this Component.
      * @param {Boolean} shallow (optional) `false` to check whether this Component is descended from the xtype (this is
@@ -871,7 +871,7 @@ Ext.define('Ext.Widget', {
      */
     setSize: function(width, height) {
         // Allow setSize to be called with a result from getSize.
-        if (width &amp;&amp; typeof width === 'object') {
+        if (width &amp;&amp; typeof width === &#39;object&#39;) {
             return this.setSize(width.width, width.height);
         }
         if (width !== undefined) {
@@ -927,11 +927,11 @@ Ext.define('Ext.Widget', {
 </span>     * @protected
      */
     applyStyle: function(style, oldStyle) {
-        // If we're doing something with data binding, say:
+        // If we&#39;re doing something with data binding, say:
         // style: {
-        //     backgroundColor: 'rgba({r}, {g}, {b}, 1)'
+        //     backgroundColor: &#39;rgba({r}, {g}, {b}, 1)&#39;
         // }
-        // The inner values will change, but the object won't, so force
+        // The inner values will change, but the object won&#39;t, so force
         // a copy to be created here if necessary
         if (oldStyle &amp;&amp; style === oldStyle &amp;&amp; Ext.isObject(oldStyle)) {
             style = Ext.apply({}, style);
@@ -991,7 +991,7 @@ Ext.define('Ext.Widget', {
      *
      * Example:
      *
-     *     var owningTabPanel = grid.up('tabpanel');
+     *     var owningTabPanel = grid.up(&#39;tabpanel&#39;);
      *
      * @param {String} selector (optional) The simple selector to test.
      * @param {String/Number/Ext.Component} [limit] This may be a selector upon which to stop the upward scan, or a limit of the number of steps, or Component reference to stop on.
@@ -999,8 +999,8 @@ Ext.define('Ext.Widget', {
      */
     up: function(selector, limit) {
         var result = this.getRefOwner(),
-            limitSelector = typeof limit === 'string',
-            limitCount = typeof limit === 'number',
+            limitSelector = typeof limit === &#39;string&#39;,
+            limitCount = typeof limit === &#39;number&#39;,
             limitComponent = limit &amp;&amp; limit.isComponent,
             steps = 0;
 
@@ -1094,14 +1094,14 @@ Ext.define('Ext.Widget', {
 
             if (listeners) {
                 // TODO: These references will be needed when we use delegation to listen
-                // for element events, but for now, we'll just attach the listeners directly
+                // for element events, but for now, we&#39;ll just attach the listeners directly
                 // referenceEl.reference = name;
                 // referenceEl.component = me;
                 // referenceEl.listeners = listeners;
 
                 // At this point &quot;listeners&quot; exists on the class prototype.  We need to clone
                 // it before poking the scope reference onto it, because it is used as the
-                // options object by Observable and so can't be safely shared.
+                // options object by Observable and so can&#39;t be safely shared.
                 //
                 listeners = Ext.clone(listeners);
 
@@ -1110,14 +1110,14 @@ Ext.define('Ext.Widget', {
                 //
                 //    {
                 //        click: {
-                //            fn: 'onClick',
+                //            fn: &#39;onClick&#39;,
                 //            scope: this
                 //        }
                 //    }
                 //
                 for (eventName in listeners) {
                     listener = listeners[eventName];
-                    if (typeof listener === 'object') {
+                    if (typeof listener === &#39;object&#39;) {
                         listener.scope = me;
                     }
                 }
@@ -1126,7 +1126,7 @@ Ext.define('Ext.Widget', {
                 // a listeners object with the following shape:
                 //
                 //    {
-                //        click: 'onClick'
+                //        click: &#39;onClick&#39;
                 //        scope: this
                 //    }
                 //
@@ -1160,8 +1160,8 @@ Ext.define('Ext.Widget', {
             if (elementName) {
                 //&lt;debug&gt;
                 if (Ext.Array.indexOf(me.referenceList, elementName) === -1) {
-                    Ext.Logger.error(&quot;Adding event listener with an invalid element reference of '&quot; + elementName +
-                        &quot;' for this component. Available values are: '&quot; + me.referenceList.join(&quot;', '&quot;) + &quot;'&quot;, me);
+                    Ext.Logger.error(&quot;Adding event listener with an invalid element reference of &#39;&quot; + elementName +
+                        &quot;&#39; for this component. Available values are: &#39;&quot; + me.referenceList.join(&quot;&#39;, &#39;&quot;) + &quot;&#39;&quot;, me);
                 }
                 //&lt;/debug&gt;
 
@@ -1195,7 +1195,7 @@ Ext.define('Ext.Widget', {
         },
 
         filterLengthValue: function(value) {
-            if (value === 'auto' || (!value &amp;&amp; value !== 0)) {
+            if (value === &#39;auto&#39; || (!value &amp;&amp; value !== 0)) {
                 return null;
             }
 
@@ -1213,7 +1213,7 @@ Ext.define('Ext.Widget', {
          *
          *     _elementListeners: {
          *         element: {
-         *             click: 'onClick',
+         *             click: &#39;onClick&#39;,
          *             scope: this
          *         },
          *         fooReference: {
@@ -1241,7 +1241,7 @@ Ext.define('Ext.Widget', {
                 children = elementConfig.children,
                 elementListeners, listeners, superListeners, ln, i;
 
-            if (prototype.hasOwnProperty('_elementListeners')) {
+            if (prototype.hasOwnProperty(&#39;_elementListeners&#39;)) {
                 elementListeners = prototype._elementListeners;
             } else {
                 elementListeners = prototype._elementListeners =
@@ -1261,7 +1261,7 @@ Ext.define('Ext.Widget', {
 
                     elementListeners[reference] = listeners;
                     // null out the listeners on the elementConfig, since we are going to pass
-                    // it to Element.create(), and don't want &quot;listeners&quot; to be treated as an
+                    // it to Element.create(), and don&#39;t want &quot;listeners&quot; to be treated as an
                     // attribute
                     elementConfig.listeners = null;
                 }
@@ -1303,7 +1303,7 @@ Ext.define('Ext.Widget', {
                 superPrototype = prototype.self.superclass,
                 elementConfig;
 
-            if (prototype.hasOwnProperty('_elementConfig')) {
+            if (prototype.hasOwnProperty(&#39;_elementConfig&#39;)) {
                 elementConfig = prototype._elementConfig;
             } else {
                 // cache the elementConfig on the prototype, since we may end up here multiple
@@ -1337,10 +1337,10 @@ Ext.define('Ext.Widget', {
                 i, singleUI, len;
 
             if (ui) {
-                ui = ui.split(' ');
+                ui = ui.split(&#39; &#39;);
                 len = ui.length;
 
-                currentUI = (currentUI &amp;&amp; currentUI.split(' ')) || [];
+                currentUI = (currentUI &amp;&amp; currentUI.split(&#39; &#39;)) || [];
 
                 for (i = 0; i &lt; len; i++) {
                     singleUI = ui[i];
@@ -1349,7 +1349,7 @@ Ext.define('Ext.Widget', {
                     }
                 }
 
-                me.setUi(currentUI.join(' '));
+                me.setUi(currentUI.join(&#39; &#39;));
             }
         },
 
@@ -1359,10 +1359,10 @@ Ext.define('Ext.Widget', {
                 i, singleUI, index, len;
 
             if (ui) {
-                ui = ui.split(' ');
+                ui = ui.split(&#39; &#39;);
                 len = ui.length;
 
-                currentUI = (currentUI &amp;&amp; currentUI.split(' ')) || [];
+                currentUI = (currentUI &amp;&amp; currentUI.split(&#39; &#39;)) || [];
 
                 for (i = 0; i &lt; len; i++) {
                     singleUI = ui[i];
@@ -1372,7 +1372,7 @@ Ext.define('Ext.Widget', {
                     }
                 }
 
-                me.setUi(currentUI.join(' '));
+                me.setUi(currentUI.join(&#39; &#39;));
             }
         },
 
@@ -1391,10 +1391,10 @@ Ext.define('Ext.Widget', {
             }
 
             if (ui) {
-                ui = ui.split(' ');
+                ui = ui.split(&#39; &#39;);
 
                 for (i = 0, ln = ui.length; i &lt; ln; i++) {
-                    uiSuffix = '-' + ui[i];
+                    uiSuffix = &#39;-&#39; + ui[i];
 
                     if (baseCls &amp;&amp; (baseCls !== me.classCls)) {
                         uiCls.push(baseCls + uiSuffix);

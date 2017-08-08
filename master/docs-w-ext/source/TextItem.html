@@ -19,24 +19,24 @@
 </span> * A simple class that renders text directly into a toolbar.
  *
  *     @example
- *     Ext.create('Ext.panel.Panel', {
- *         title: 'Panel with TextItem',
+ *     Ext.create(&#39;Ext.panel.Panel&#39;, {
+ *         title: &#39;Panel with TextItem&#39;,
  *         width: 300,
  *         height: 200,
  *         tbar: [
- *             { xtype: 'tbtext', html: 'Sample Text Item' }
+ *             { xtype: &#39;tbtext&#39;, html: &#39;Sample Text Item&#39; }
  *         ],
  *         renderTo: Ext.getBody()
  *     });
  *
  */
-Ext.define('Ext.toolbar.TextItem', {
-    extend: 'Ext.toolbar.Item',
-    // Toolbar required here because we'll try to decorate it's alternateClassName
-    // with this class' alternate name
-    requires: ['Ext.toolbar.Toolbar', 'Ext.XTemplate'],
-    alias: 'widget.tbtext',
-    alternateClassName: 'Ext.Toolbar.TextItem',
+Ext.define(&#39;Ext.toolbar.TextItem&#39;, {
+    extend: &#39;Ext.toolbar.Item&#39;,
+    // Toolbar required here because we&#39;ll try to decorate it&#39;s alternateClassName
+    // with this class&#39; alternate name
+    requires: [&#39;Ext.toolbar.Toolbar&#39;, &#39;Ext.XTemplate&#39;],
+    alias: &#39;widget.tbtext&#39;,
+    alternateClassName: &#39;Ext.Toolbar.TextItem&#39;,
 
 <span id='Ext-toolbar-TextItem-cfg-text'>    /**
 </span>     * @cfg {String} text
@@ -44,9 +44,9 @@ Ext.define('Ext.toolbar.TextItem', {
      *
      * @deprecated 5.1.0 Use {@link #html}
      */
-    text: '',
+    text: &#39;&#39;,
 
-<span id='Ext-toolbar-TextItem-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'toolbar-text',
+<span id='Ext-toolbar-TextItem-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;toolbar-text&#39;,
 </span>    
 <span id='Ext-toolbar-TextItem-property-ariaRole'>    ariaRole: null,
 </span>
@@ -61,7 +61,7 @@ Ext.define('Ext.toolbar.TextItem', {
     },
 
 <span id='Ext-toolbar-TextItem-method-setText'>    /**
-</span>     * Updates this item's text, setting the text to be used as innerHTML.
+</span>     * Updates this item&#39;s text, setting the text to be used as innerHTML.
      * @param {String} text The text to display (html accepted).
      *
      * @deprecated 5.1.0 Use {@link #update}

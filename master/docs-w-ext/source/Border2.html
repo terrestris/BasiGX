@@ -15,16 +15,16 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define('Ext.rtl.layout.container.Border', {
-    override: 'Ext.layout.container.Border',
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.rtl.layout.container.Border&#39;, {
+    override: &#39;Ext.layout.container.Border&#39;,
     
     initLayout: function(){
         var me = this;
         
         if (me.owner.getInherited().rtl) {
-            me.padOnContainerProp = 'right';
-            me.padNotOnContainerProp = 'left';  
-            me.horzPositionProp = 'right';
+            me.padOnContainerProp = &#39;right&#39;;
+            me.padNotOnContainerProp = &#39;left&#39;;  
+            me.horzPositionProp = &#39;right&#39;;
         }
         me.callParent(arguments);    
     }

@@ -19,22 +19,22 @@
 </span> * A field with a pair of up/down spinner buttons. This class is not normally instantiated directly,
  * instead it is subclassed and the {@link #onSpinUp} and {@link #onSpinDown} methods are implemented
  * to handle when the buttons are clicked. A good example of this is the {@link Ext.form.field.Number}
- * field which uses the spinner to increment and decrement the field's value by its
+ * field which uses the spinner to increment and decrement the field&#39;s value by its
  * {@link Ext.form.field.Number#step step} config value.
  *
  * For example:
  *
  *     @example
- *     Ext.define('Ext.ux.CustomSpinner', {
- *         extend: 'Ext.form.field.Spinner',
- *         alias: 'widget.customspinner',
+ *     Ext.define(&#39;Ext.ux.CustomSpinner&#39;, {
+ *         extend: &#39;Ext.form.field.Spinner&#39;,
+ *         alias: &#39;widget.customspinner&#39;,
  *
- *         // override onSpinUp (using step isn't neccessary)
+ *         // override onSpinUp (using step isn&#39;t neccessary)
  *         onSpinUp: function() {
  *             var me = this;
  *             if (!me.readOnly) {
- *                 var val = parseInt(me.getValue().split(' '), 10)||0; // gets rid of &quot; Pack&quot;, defaults to zero on parse failure
- *                 me.setValue((val + me.step) + ' Pack');
+ *                 var val = parseInt(me.getValue().split(&#39; &#39;), 10)||0; // gets rid of &quot; Pack&quot;, defaults to zero on parse failure
+ *                 me.setValue((val + me.step) + &#39; Pack&#39;);
  *             }
  *         },
  *
@@ -42,24 +42,24 @@
  *         onSpinDown: function() {
  *             var me = this;
  *             if (!me.readOnly) {
- *                var val = parseInt(me.getValue().split(' '), 10)||0; // gets rid of &quot; Pack&quot;, defaults to zero on parse failure
+ *                var val = parseInt(me.getValue().split(&#39; &#39;), 10)||0; // gets rid of &quot; Pack&quot;, defaults to zero on parse failure
  *                if (val &lt;= me.step) {
- *                    me.setValue('Dry!');
+ *                    me.setValue(&#39;Dry!&#39;);
  *                } else {
- *                    me.setValue((val - me.step) + ' Pack');
+ *                    me.setValue((val - me.step) + &#39; Pack&#39;);
  *                }
  *             }
  *         }
  *     });
  *
- *     Ext.create('Ext.form.FormPanel', {
- *         title: 'Form with SpinnerField',
+ *     Ext.create(&#39;Ext.form.FormPanel&#39;, {
+ *         title: &#39;Form with SpinnerField&#39;,
  *         bodyPadding: 5,
  *         width: 350,
  *         renderTo: Ext.getBody(),
  *         items:[{
- *             xtype: 'customspinner',
- *             fieldLabel: 'How Much Beer?',
+ *             xtype: &#39;customspinner&#39;,
+ *             fieldLabel: &#39;How Much Beer?&#39;,
  *             step: 6
  *         }]
  *     });
@@ -67,23 +67,23 @@
  * By default, pressing the up and down arrow keys will also trigger the onSpinUp and onSpinDown methods;
  * to prevent this, set `{@link #keyNavEnabled} = false`.
  */
-Ext.define('Ext.form.field.Spinner', {
-    extend: 'Ext.form.field.Text',
-    alias: 'widget.spinnerfield',
-    alternateClassName: 'Ext.form.Spinner',
+Ext.define(&#39;Ext.form.field.Spinner&#39;, {
+    extend: &#39;Ext.form.field.Text&#39;,
+    alias: &#39;widget.spinnerfield&#39;,
+    alternateClassName: &#39;Ext.form.Spinner&#39;,
     requires: [
-        'Ext.form.trigger.Spinner',
-        'Ext.util.KeyNav'
+        &#39;Ext.form.trigger.Spinner&#39;,
+        &#39;Ext.util.KeyNav&#39;
     ],
 
     config: {
 <span id='Ext-form-field-Spinner-cfg-triggers'>        triggers: {
 </span>            spinner: {
-                type: 'spinner',
-                upHandler: 'onSpinnerUpClick',
-                downHandler: 'onSpinnerDownClick',
-                endHandler: 'onSpinEnd',
-                scope: 'this'
+                type: &#39;spinner&#39;,
+                upHandler: &#39;onSpinnerUpClick&#39;,
+                downHandler: &#39;onSpinnerDownClick&#39;,
+                endHandler: &#39;onSpinEnd&#39;,
+                scope: &#39;this&#39;
             }
         }
     },
@@ -138,13 +138,13 @@ Ext.define('Ext.form.field.Spinner', {
      */
     onSpinDown: Ext.emptyFn,
     
-<span id='Ext-form-field-Spinner-property-ariaRole'>    ariaRole: 'spinbutton',
+<span id='Ext-form-field-Spinner-property-ariaRole'>    ariaRole: &#39;spinbutton&#39;,
 </span>
 <span id='Ext-form-field-Spinner-event-spin'>    /**
 </span>     * @event spin
      * Fires when the spinner is made to spin up or down.
      * @param {Ext.form.field.Spinner} this
-     * @param {String} direction Either 'up' if spinning up, or 'down' if spinning down.
+     * @param {String} direction Either &#39;up&#39; if spinning up, or &#39;down&#39; if spinning down.
      */
 
 <span id='Ext-form-field-Spinner-event-spinup'>    /**
@@ -165,7 +165,7 @@ Ext.define('Ext.form.field.Spinner', {
      * on the spin buttons, when an `UP` or `DOWN` arrow key is released
      * of when a mousewheel stops spinning.
      *
-     * When this event fires, the field's value has stabilized.
+     * When this event fires, the field&#39;s value has stabilized.
      * @param {Ext.form.field.Spinner} this
      * @since 6.2.0
      */
@@ -185,7 +185,7 @@ Ext.define('Ext.form.field.Spinner', {
      */
     onRender: function() {
         var me = this,
-            spinnerTrigger = me.getTrigger('spinner');
+            spinnerTrigger = me.getTrigger(&#39;spinner&#39;);
 
         me.callParent();
 
@@ -204,7 +204,7 @@ Ext.define('Ext.form.field.Spinner', {
 
         // Init mouse wheel
         if (me.mouseWheelEnabled) {
-            me.mon(me.bodyEl, 'mousewheel', me.onMouseWheel, me);
+            me.mon(me.bodyEl, &#39;mousewheel&#39;, me.onMouseWheel, me);
         }
 
         // in v4 spinUpEl/spinDownEl were childEls, now they are children of the trigger.
@@ -237,8 +237,8 @@ Ext.define('Ext.form.field.Spinner', {
     spinUp: function() {
         var me = this;
         if (me.spinUpEnabled &amp;&amp; !me.disabled) {
-            me.fireEvent('spin', me, 'up');
-            me.fireEvent('spinup', me);
+            me.fireEvent(&#39;spin&#39;, me, &#39;up&#39;);
+            me.fireEvent(&#39;spinup&#39;, me);
             me.onSpinUp();
         }
     },
@@ -251,8 +251,8 @@ Ext.define('Ext.form.field.Spinner', {
     spinDown: function() {
         var me = this;
         if (me.spinDownEnabled &amp;&amp; !me.disabled) {
-            me.fireEvent('spin', me, 'down');
-            me.fireEvent('spindown', me);
+            me.fireEvent(&#39;spin&#39;, me, &#39;down&#39;);
+            me.fireEvent(&#39;spindown&#39;, me);
             me.onSpinDown();
         }
     },
@@ -266,7 +266,7 @@ Ext.define('Ext.form.field.Spinner', {
             wasEnabled = me.spinUpEnabled;
         me.spinUpEnabled = enabled;
         if (wasEnabled !== enabled &amp;&amp; me.rendered) {
-            me.getTrigger('spinner').setUpEnabled(enabled);
+            me.getTrigger(&#39;spinner&#39;).setUpEnabled(enabled);
         }
     },
 
@@ -279,7 +279,7 @@ Ext.define('Ext.form.field.Spinner', {
             wasEnabled = me.spinDownEnabled;
         me.spinDownEnabled = enabled;
         if (wasEnabled !== enabled &amp;&amp; me.rendered) {
-            me.getTrigger('spinner').setDownEnabled(enabled);
+            me.getTrigger(&#39;spinner&#39;).setDownEnabled(enabled);
         }
     },
 
@@ -309,14 +309,14 @@ Ext.define('Ext.form.field.Spinner', {
     },
 
 <span id='Ext-form-field-Spinner-method-doDestroy'>    doDestroy: function() {
-</span>        Ext.destroyMembers(this, 'spinnerKeyNav');
+</span>        Ext.destroyMembers(this, &#39;spinnerKeyNav&#39;);
         
         this.callParent();
     }
 
 }, function(Spinner) {
     Spinner.prototype.onSpinEnd = Ext.Function.createBuffered(function() {
-        this.fireEvent('spinend', this);
+        this.fireEvent(&#39;spinend&#39;, this);
     }, 100);
 });</pre>
 </body>

@@ -20,19 +20,19 @@
  * DataViewModel is the default dataview selection model and generally will not need to 
  * be specified.
  */
-Ext.define('Ext.selection.DataViewModel', {
-    extend: 'Ext.selection.Model',
+Ext.define(&#39;Ext.selection.DataViewModel&#39;, {
+    extend: &#39;Ext.selection.Model&#39;,
 
-    alias: 'selection.dataviewmodel',
+    alias: &#39;selection.dataviewmodel&#39;,
 
-    requires: ['Ext.util.KeyNav'],
+    requires: [&#39;Ext.util.KeyNav&#39;],
 
 <span id='Ext-selection-DataViewModel-property-deselectOnContainerClick'>    deselectOnContainerClick: true,
 </span>
 <span id='Ext-selection-DataViewModel-cfg-enableKeyNav'>    /**
 </span>     * @cfg {Boolean} [enableKeyNav=true]
      *
-     * @deprecated 5.1.0 Keyboard navigation is a function of the view's 
+     * @deprecated 5.1.0 Keyboard navigation is a function of the view&#39;s 
      * {@link Ext.view.NavigationModel navigation model}, and is enabled for 
      * accessibility purposes.
      */
@@ -120,10 +120,10 @@ Ext.define('Ext.selection.DataViewModel', {
 </span>    onSelectChange: function(record, isSelected, suppressEvent, commitFn) {
         var me = this,
             view = me.view,
-            eventName = isSelected ? 'select' : 'deselect',
+            eventName = isSelected ? &#39;select&#39; : &#39;deselect&#39;,
             recordIndex = me.store.indexOf(record);
 
-        if ((suppressEvent || me.fireEvent('before' + eventName, me, record, recordIndex)) !== false &amp;&amp;
+        if ((suppressEvent || me.fireEvent(&#39;before&#39; + eventName, me, record, recordIndex)) !== false &amp;&amp;
                 commitFn() !== false) {
             
             // Event handler could have destroyed the view...

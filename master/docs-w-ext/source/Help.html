@@ -37,13 +37,13 @@
  *
  * @class BasiGX.view.button.Help
  */
-Ext.define('BasiGX.view.button.Help', {
-    extend: 'BasiGX.view.button.Base',
-    xtype: 'basigx-button-help',
+Ext.define(&#39;BasiGX.view.button.Help&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-help&#39;,
 
     requires: [
-        'BasiGX.ux.ContextSensitiveHelp',
-        'Ext.app.ViewModel'
+        &#39;BasiGX.ux.ContextSensitiveHelp&#39;,
+        &#39;Ext.app.ViewModel&#39;
     ],
 
 <span id='BasiGX-view-button-Help-property-getHelpFromComponent'>    /**
@@ -57,20 +57,20 @@ Ext.define('BasiGX.view.button.Help', {
 <span id='BasiGX-view-button-Help-property-helpUrl'>    /**
 </span>     * The URL to use for the help
      */
-    helpUrl: '../help/index.html',
+    helpUrl: &#39;../help/index.html&#39;,
 
 <span id='BasiGX-view-button-Help-property-viewModel'>    /**
 </span>     *
      */
     viewModel: {
         data: {
-            tooltip: 'Hilfe',
+            tooltip: &#39;Hilfe&#39;,
             text: null,
-            documentation: '&lt;h2&gt;Hilfe&lt;/h2&gt;• Ein Klick auf den Button ' +
-                'aktiviert die kontextsensitive Hilfe.&lt;br&gt;• Sobald Sie ' +
-                'anschließend mit der Maus auf eine Komponente der Anwendung ' +
-                'klicken, erhalten Sie einen Hilfetext, der deren Benutzung ' +
-                'erläutert'
+            documentation: &#39;&lt;h2&gt;Hilfe&lt;/h2&gt;• Ein Klick auf den Button &#39; +
+                &#39;aktiviert die kontextsensitive Hilfe.&lt;br&gt;• Sobald Sie &#39; +
+                &#39;anschließend mit der Maus auf eine Komponente der Anwendung &#39; +
+                &#39;klicken, erhalten Sie einen Hilfetext, der deren Benutzung &#39; +
+                &#39;erläutert&#39;
         }
     },
 
@@ -78,15 +78,15 @@ Ext.define('BasiGX.view.button.Help', {
 </span>     *
      */
     bind: {
-        text: '{text}'
+        text: &#39;{text}&#39;
     },
 
 <span id='BasiGX-view-button-Help-property-glyph'>    /**
 </span>     * The icons the button should use.
      * Classic Toolkit uses glyphs, modern toolkit uses html
      */
-    glyph: 'xf059@FontAwesome',
-<span id='BasiGX-view-button-Help-cfg-html'>    html: '&lt;i class=&quot;fa fa-question-circle fa-2x&quot;&gt;&lt;/i&gt;',
+    glyph: &#39;xf059@FontAwesome&#39;,
+<span id='BasiGX-view-button-Help-cfg-html'>    html: &#39;&lt;i class=&quot;fa fa-question-circle fa-2x&quot;&gt;&lt;/i&gt;&#39;,
 </span>
 <span id='BasiGX-view-button-Help-property-config'>    /**
 </span>     *
@@ -94,7 +94,7 @@ Ext.define('BasiGX.view.button.Help', {
     config: {
 <span id='BasiGX-view-button-Help-cfg-additonalHelpKeys'>        additonalHelpKeys: null,
 </span><span id='BasiGX-view-button-Help-cfg-handler'>        handler: function(button) {
-</span>            var help = Ext.create('BasiGX.ux.ContextSensitiveHelp', {
+</span>            var help = Ext.create(&#39;BasiGX.ux.ContextSensitiveHelp&#39;, {
                 getHelpFromComponent: this.getHelpFromComponent,
                 helpUrl: this.helpUrl
             });

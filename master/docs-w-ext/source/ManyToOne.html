@@ -22,29 +22,29 @@
  * be declared as a keyed or keyless relationship.
  *
  *     // Keyed
- *     Ext.define('Customer', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'name']
+ *     Ext.define(&#39;Customer&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;name&#39;]
  *     });
  *
- *     Ext.define('Ticket', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'title', {
- *             name: 'customerId',
- *             reference: 'Customer'
+ *     Ext.define(&#39;Ticket&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;title&#39;, {
+ *             name: &#39;customerId&#39;,
+ *             reference: &#39;Customer&#39;
  *         }]
  *     });
  *
  *     // Keyless
- *     Ext.define('Customer', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'name'],
- *         hasMany: 'Ticket'
+ *     Ext.define(&#39;Customer&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;name&#39;],
+ *         hasMany: &#39;Ticket&#39;
  *     });
  *
- *     Ext.define('Ticket', {
- *         extend: 'Ext.data.Model',
- *         fields: ['id', 'title']
+ *     Ext.define(&#39;Ticket&#39;, {
+ *         extend: &#39;Ext.data.Model&#39;,
+ *         fields: [&#39;id&#39;, &#39;title&#39;]
  *     });
  *
  *     // Generated methods
@@ -62,17 +62,17 @@
  * The &quot;one&quot; record type will have a generated {@link Ext.data.schema.Association#storeGetter}. The &quot;many&quot; record type
  * will have a {@link Ext.data.schema.Association#recordGetter getter} and {@link Ext.data.schema.Association#recordSetter setter}.
  */
-Ext.define('Ext.data.schema.ManyToOne', {
-    extend: 'Ext.data.schema.Association',
+Ext.define(&#39;Ext.data.schema.ManyToOne&#39;, {
+    extend: &#39;Ext.data.schema.Association&#39;,
 
 <span id='Ext-data-schema-ManyToOne-property-isManyToOne'>    isManyToOne: true,
 </span>
 <span id='Ext-data-schema-ManyToOne-property-isToOne'>    isToOne: true,
 </span>
-<span id='Ext-data-schema-ManyToOne-property-kind'>    kind: 'many-to-one',
+<span id='Ext-data-schema-ManyToOne-property-kind'>    kind: &#39;many-to-one&#39;,
 </span>
 <span id='Ext-data-schema-ManyToOne-property-Left'>    Left: Ext.define(null, {
-</span>        extend: 'Ext.data.schema.Role',
+</span>        extend: &#39;Ext.data.schema.Role&#39;,
 
         isMany: true,
 
@@ -85,7 +85,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
                 // Removing will cause the foreign key to be set to null.
                 leftRecords = store.removeAll();
                 if (leftRecords &amp;&amp; me.inverse.owner) {
-                    // If we're a child, we need to destroy all the &quot;tickets&quot;
+                    // If we&#39;re a child, we need to destroy all the &quot;tickets&quot;
                     for (i = 0, len = leftRecords.length; i &lt; len; ++i) {
                         leftRecords[i].drop();
                     }
@@ -113,8 +113,8 @@ Ext.define('Ext.data.schema.ManyToOne', {
                 if (filter) {
                     filter.setValue(newId);
                 }
-                // A session will automatically handle this updating. If we don't have a field
-                // then there's nothing to do here.
+                // A session will automatically handle this updating. If we don&#39;t have a field
+                // then there&#39;s nothing to do here.
                 if (!rightRecord.session &amp;&amp; fieldName) {
                     leftRecords = store.getDataSource().items;
                     for (i = 0, len = leftRecords.length; i &lt; len; ++i) {
@@ -140,7 +140,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
                             store.loadData(leftRecords);
                             store.complete = true;
                         } else {
-                            // We don't have a store. Create it and add the records.
+                            // We don&#39;t have a store. Create it and add the records.
                             rightRecord[me.getterName](null, null, leftRecords);
                         }
                     } else {
@@ -163,8 +163,8 @@ Ext.define('Ext.data.schema.ManyToOne', {
                 if (leftRecords) {
                     seen = {};
                     // Loop over the records returned by the server and
-                    // check they all still belong. If the session doesn't have any prior knowledge
-                    // and we're allowed to infer the parent id (via nested loading), only do so if
+                    // check they all still belong. If the session doesn&#39;t have any prior knowledge
+                    // and we&#39;re allowed to infer the parent id (via nested loading), only do so if
                     // we explicitly have an id specified
                     for (i = 0, len = leftRecords.length; i &lt; len; ++i) {
                         leftRecord = leftRecords[i];
@@ -219,7 +219,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
         createGetter: function() {
             var me = this;
             return function (options, scope, leftRecords) {
-                // 'this' refers to the Model instance inside this function
+                // &#39;this&#39; refers to the Model instance inside this function
                 return me.getAssociatedStore(this, options, scope, leftRecords, true);
             };
         },
@@ -261,7 +261,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
 
         read: function(rightRecord, node, fromReader, readOptions) {
             var me = this,
-                // We use the inverse role here since we're setting ourselves
+                // We use the inverse role here since we&#39;re setting ourselves
                 // on the other record
                 instanceName = me.inverse.getInstanceName(),
                 leftRecords = me.callParent([rightRecord, node, fromReader, readOptions]),
@@ -321,10 +321,10 @@ Ext.define('Ext.data.schema.ManyToOne', {
     }),
 
 <span id='Ext-data-schema-ManyToOne-property-Right'>    Right: Ext.define(null, {
-</span>        extend: 'Ext.data.schema.Role',
+</span>        extend: &#39;Ext.data.schema.Role&#39;,
 
         left: false,
-        side: 'right',
+        side: &#39;right&#39;,
 
         onDrop: function(leftRecord, session) {
             // By virtue of being dropped, this record will be removed
@@ -344,7 +344,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
             var me = this;
 
             return function (options, scope) {
-                // 'this' refers to the Comment instance inside this function
+                // &#39;this&#39; refers to the Comment instance inside this function
                 return me.doGetFK(this, options, scope);
             };
         },
@@ -353,7 +353,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
             var me = this;
 
             return function (rightRecord, options, scope) {
-                // 'this' refers to the Comment instance inside this function
+                // &#39;this&#39; refers to the Comment instance inside this function
                 return me.doSetFK(this, rightRecord, options, scope);
             };
         },
@@ -364,7 +364,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
 
             if (field) {
                 store = this.getSessionStore(session, leftRecord.get(field.name));
-                // Check we're not in the middle of an add to the store.
+                // Check we&#39;re not in the middle of an add to the store.
                 if (store &amp;&amp; !store.contains(leftRecord)) {
                     store.add(leftRecord);
                 }

@@ -19,22 +19,22 @@
 </span> * This class is intended to be extended or created via the {@link Ext.container.Container#layout layout}
  * configuration property.  See {@link Ext.container.Container#layout} for additional details.
  */
-Ext.define('Ext.layout.container.Container', {
-    extend: 'Ext.layout.Layout',
+Ext.define(&#39;Ext.layout.container.Container&#39;, {
+    extend: &#39;Ext.layout.Layout&#39;,
 
-    alias: 'layout.container',
+    alias: &#39;layout.container&#39;,
 
-    alternateClassName: 'Ext.layout.ContainerLayout',
+    alternateClassName: &#39;Ext.layout.ContainerLayout&#39;,
 
     mixins: [
-        'Ext.util.ElementContainer'
+        &#39;Ext.util.ElementContainer&#39;
     ],
 
     requires: [
-        'Ext.XTemplate'
+        &#39;Ext.XTemplate&#39;
     ],
 
-<span id='Ext-layout-container-Container-property-type'>    type: 'container',
+<span id='Ext-layout-container-Container-property-type'>    type: &#39;container&#39;,
 </span>
     /* End Definitions */
 
@@ -80,7 +80,7 @@ Ext.define('Ext.layout.container.Container', {
     activeItemCount: 0,
 
 <span id='Ext-layout-container-Container-property-renderTpl'>    renderTpl: [
-</span>        '{%this.renderBody(out,values)%}'
+</span>        &#39;{%this.renderBody(out,values)%}&#39;
     ],
 
 <span id='Ext-layout-container-Container-property-usesContainerHeight'>    usesContainerHeight: true,
@@ -109,7 +109,7 @@ Ext.define('Ext.layout.container.Container', {
     beginLayout: function (ownerContext) {
         this.callParent(arguments);
 
-        ownerContext.targetContext = ownerContext.paddingContext = ownerContext.getEl('getTarget', this);
+        ownerContext.targetContext = ownerContext.paddingContext = ownerContext.getEl(&#39;getTarget&#39;, this);
 
         this.cacheChildItems(ownerContext);
     },
@@ -167,7 +167,7 @@ Ext.define('Ext.layout.container.Container', {
     },
 
 <span id='Ext-layout-container-Container-method-configureItem'>    /**
-</span>     * Adds layout's itemCls and owning Container's itemCls
+</span>     * Adds layout&#39;s itemCls and owning Container&#39;s itemCls
      * @protected
      */
     configureItem: function(item) {
@@ -182,7 +182,7 @@ Ext.define('Ext.layout.container.Container', {
 
         if (itemCls) {
             // itemCls can be a single class or an array
-            if (typeof itemCls === 'string') {
+            if (typeof itemCls === &#39;string&#39;) {
                 addClasses = [itemCls];
             } else {
                 addClasses = itemCls;
@@ -190,7 +190,7 @@ Ext.define('Ext.layout.container.Container', {
             }
         }
         if (ownerItemCls) {
-            // Add some extra logic so we don't clone the array unnecessarily
+            // Add some extra logic so we don&#39;t clone the array unnecessarily
             if (needsCopy) {
                 addClasses = Ext.Array.clone(addClasses);
             }
@@ -241,10 +241,10 @@ Ext.define('Ext.layout.container.Container', {
         
         // Due to framing, we will be called in two different ways: in the frameTpl or in
         // the renderTpl. The frameTpl version enters via doRenderFramingTabGuard which
-        // sets &quot;$skipTabGuards&quot; on the renderTpl's renderData.
+        // sets &quot;$skipTabGuards&quot; on the renderTpl&#39;s renderData.
         //
         if (cmp.tabGuard &amp;&amp; !renderData.$skipTabGuards) {
-            tabGuardTpl = cmp.lookupTpl('tabGuardTpl');
+            tabGuardTpl = cmp.lookupTpl(&#39;tabGuardTpl&#39;);
             
             if (tabGuardTpl) {
                 renderData.tabGuard = position;
@@ -282,7 +282,7 @@ Ext.define('Ext.layout.container.Container', {
         //&lt;debug&gt;
         if (!this._hasTargetWarning &amp;&amp; this.targetCls &amp;&amp; !this.getTarget().hasCls(this.targetCls)) {
             this._hasTargetWarning = true;
-            Ext.log.warn('targetCls is missing. This may mean that getTargetEl() is being overridden but not applyTargetCls(). ' + this.owner.id);
+            Ext.log.warn(&#39;targetCls is missing. This may mean that getTargetEl() is being overridden but not applyTargetCls(). &#39; + this.owner.id);
         }
         //&lt;/debug&gt;
         this.owner.afterLayout(this);
@@ -293,7 +293,7 @@ Ext.define('Ext.layout.container.Container', {
      * be returned because the shrinkWrap dimensions are based on the contentWidth/Height
      * as determined by the container layout.
      *
-     * @param {Ext.layout.ContextItem} ownerContext The owner's context item.
+     * @param {Ext.layout.ContextItem} ownerContext The owner&#39;s context item.
      * @param {Boolean} [inDom=false] True if the container size must be in the DOM.
      * @return {Object} The size
      * @return {Number} return.width The width
@@ -303,8 +303,8 @@ Ext.define('Ext.layout.container.Container', {
     getContainerSize : function(ownerContext, inDom) {
         // Subtle But Important:
         //
-        // We don't want to call getProp/hasProp et.al. unless we in fact need that value
-        // for our results! If we call it and don't need it, the layout manager will think
+        // We don&#39;t want to call getProp/hasProp et.al. unless we in fact need that value
+        // for our results! If we call it and don&#39;t need it, the layout manager will think
         // we depend on it and will schedule us again should it change.
 
         var targetContext = ownerContext.targetContext,
@@ -318,14 +318,14 @@ Ext.define('Ext.layout.container.Container', {
         // because they will be determined by contentWidth/Height which is calculated by
         // this layout...
 
-        // Fit/Card layouts are able to set just the width of children, allowing child's
+        // Fit/Card layouts are able to set just the width of children, allowing child&#39;s
         // resulting height to autosize the Container.
         // See examples/tabs/tabs.html for an example of this.
 
         if (!ownerContext.widthModel.shrinkWrap) {
             ++needed;
-            width = inDom ? targetContext.getDomProp('width') : targetContext.getProp('width');
-            gotWidth = (typeof width === 'number');
+            width = inDom ? targetContext.getDomProp(&#39;width&#39;) : targetContext.getProp(&#39;width&#39;);
+            gotWidth = (typeof width === &#39;number&#39;);
             if (gotWidth) {
                 ++got;
                 width -= frameInfo.width + padding.width;
@@ -337,8 +337,8 @@ Ext.define('Ext.layout.container.Container', {
 
         if (!ownerContext.heightModel.shrinkWrap) {
             ++needed;
-            height = inDom ? targetContext.getDomProp('height') : targetContext.getProp('height');
-            gotHeight = (typeof height === 'number');
+            height = inDom ? targetContext.getDomProp(&#39;height&#39;) : targetContext.getProp(&#39;height&#39;);
+            gotHeight = (typeof height === &#39;number&#39;);
             if (gotHeight) {
                 ++got;
                 height -= frameInfo.height + padding.height;
@@ -362,7 +362,7 @@ Ext.define('Ext.layout.container.Container', {
 <span id='Ext-layout-container-Container-method-getPositionOffset'>    // This method is used to offset the DOM position when checking
 </span>    // whether the element is a certain child of the target. This is
     // required in cases where the extra elements prepended to the target
-    // before any of the items. An example of this is when using labelAlign: 'top'
+    // before any of the items. An example of this is when using labelAlign: &#39;top&#39;
     // on a field. The label appears first in the DOM before any child items are
     // created, so when we check the position we need to add an extra offset.
     // Containers that create an innerCt are exempt because this new element
@@ -379,7 +379,7 @@ Ext.define('Ext.layout.container.Container', {
 
 <span id='Ext-layout-container-Container-method-getLayoutItems'>    /**
 </span>     * Returns an array of child components either for a render phase (Performed in the beforeLayout
-     * method of the layout's base class), or the layout phase (onLayout).
+     * method of the layout&#39;s base class), or the layout phase (onLayout).
      * @return {Ext.Component[]} of child components
      */
     getLayoutItems: function() {
@@ -430,7 +430,7 @@ Ext.define('Ext.layout.container.Container', {
     },
 
 <span id='Ext-layout-container-Container-method-getRenderTarget'>    /**
-</span>     * Returns the element into which rendering must take place. Defaults to the owner Container's
+</span>     * Returns the element into which rendering must take place. Defaults to the owner Container&#39;s
      * target element.
      *
      * May be overridden in layout managers which implement an inner element.
@@ -442,7 +442,7 @@ Ext.define('Ext.layout.container.Container', {
     },
 
 <span id='Ext-layout-container-Container-method-getElementTarget'>    /**
-</span>     * Returns the element into which extra functional DOM elements can be inserted. Defaults to the owner Component's encapsulating element.
+</span>     * Returns the element into which extra functional DOM elements can be inserted. Defaults to the owner Component&#39;s encapsulating element.
      *
      * May be overridden in Component layout managers which implement a {@link #getRenderTarget component render target} which must only
      * contain child components.
@@ -454,7 +454,7 @@ Ext.define('Ext.layout.container.Container', {
 
 <span id='Ext-layout-container-Container-method-getRenderTpl'>    getRenderTpl: function () {
 </span>        var me = this,
-            renderTpl = Ext.XTemplate.getTpl(this, 'renderTpl');
+            renderTpl = Ext.XTemplate.getTpl(this, &#39;renderTpl&#39;);
 
         // Make sure all standard callout methods for the owner component are placed on the
         // XTemplate instance (but only once please):
@@ -496,8 +496,8 @@ Ext.define('Ext.layout.container.Container', {
 
 <span id='Ext-layout-container-Container-method-getScrollbarsNeeded'>    getScrollbarsNeeded: function (width, height, contentWidth, contentHeight) {
 </span>        var scrollbarSize = Ext.getScrollbarSize(),
-            hasWidth = typeof width === 'number',
-            hasHeight = typeof height === 'number',
+            hasWidth = typeof width === &#39;number&#39;,
+            hasHeight = typeof height === &#39;number&#39;,
             needHorz = 0,
             needVert = 0;
 
@@ -524,7 +524,7 @@ Ext.define('Ext.layout.container.Container', {
     },
 
 <span id='Ext-layout-container-Container-method-getTarget'>    /**
-</span>     * Returns the owner component's resize element.
+</span>     * Returns the owner component&#39;s resize element.
      * @return {Ext.dom.Element}
      */
     getTarget: function() {

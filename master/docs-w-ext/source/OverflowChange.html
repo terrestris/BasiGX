@@ -18,13 +18,13 @@
   <pre class="prettyprint lang-js"><span id='Ext-util-paintmonitor-OverflowChange'>/**
 </span> * @private
  */
-Ext.define('Ext.util.paintmonitor.OverflowChange', {
+Ext.define(&#39;Ext.util.paintmonitor.OverflowChange&#39;, {
 
-    extend: 'Ext.util.paintmonitor.Abstract',
+    extend: &#39;Ext.util.paintmonitor.Abstract&#39;,
 
-<span id='Ext-util-paintmonitor-OverflowChange-property-eventName'>    eventName: Ext.browser.is.Firefox ? 'overflow' : 'overflowchanged',
+<span id='Ext-util-paintmonitor-OverflowChange-property-eventName'>    eventName: Ext.browser.is.Firefox ? &#39;overflow&#39; : &#39;overflowchanged&#39;,
 </span>
-<span id='Ext-util-paintmonitor-OverflowChange-property-monitorClass'>    monitorClass: 'overflowchange',
+<span id='Ext-util-paintmonitor-OverflowChange-property-monitorClass'>    monitorClass: &#39;overflowchange&#39;,
 </span>
 <span id='Ext-util-paintmonitor-OverflowChange-method-onElementPainted'>    onElementPainted: function(e) {
 </span>        this.getCallback().apply(this.getScope(), this.getArgs());

@@ -22,11 +22,11 @@
  * based animation. In general this class will not be created directly, the {@link Ext.dom.Element} 
  * will be passed to the animation and the appropriate target will be created.
  */
-Ext.define('Ext.fx.target.ElementCSS', {
+Ext.define(&#39;Ext.fx.target.ElementCSS&#39;, {
 
     /* Begin Definitions */
 
-    extend: 'Ext.fx.target.Element',
+    extend: &#39;Ext.fx.target.Element&#39;,
 
 <span id='Ext-fx-target-ElementCSS-method-setAttr'>    /* End Definitions */
 </span>
@@ -38,9 +38,9 @@ Ext.define('Ext.fx.target.ElementCSS', {
             },
             ln = targetData.length,
             cleanerFn = function() {
-                this.setStyle(Ext.supports.CSS3Prefix + 'TransitionProperty', null);
-                this.setStyle(Ext.supports.CSS3Prefix + 'TransitionDuration', null);
-                this.setStyle(Ext.supports.CSS3Prefix + 'TransitionTimingFunction', null);
+                this.setStyle(Ext.supports.CSS3Prefix + &#39;TransitionProperty&#39;, null);
+                this.setStyle(Ext.supports.CSS3Prefix + &#39;TransitionDuration&#39;, null);
+                this.setStyle(Ext.supports.CSS3Prefix + &#39;TransitionTimingFunction&#39;, null);
             },
             single = { single: true },
             attributes, attrs, attr, easing, duration, o, i, j, ln2;
@@ -53,17 +53,17 @@ Ext.define('Ext.fx.target.ElementCSS', {
             for (attr in attrs) {
                 if (Ext.Array.indexOf(cssArr.attrs, attr) == -1) {
                     cssArr.attrs.push(attr.replace(/[A-Z]/g, function(v) {
-                        return '-' + v.toLowerCase();
+                        return &#39;-&#39; + v.toLowerCase();
                     }));
-                    cssArr.duration.push(duration + 'ms');
+                    cssArr.duration.push(duration + &#39;ms&#39;);
                     cssArr.easing.push(easing);
                 }
             }
         }
 
-        attributes = cssArr.attrs.join(',');
-        duration = cssArr.duration.join(',');
-        easing = cssArr.easing.join(', ');
+        attributes = cssArr.attrs.join(&#39;,&#39;);
+        duration = cssArr.duration.join(&#39;,&#39;);
+        easing = cssArr.easing.join(&#39;, &#39;);
 
         for (i = 0; i &lt; ln; i++) {
             attrs = targetData[i].attrs;
@@ -71,9 +71,9 @@ Ext.define('Ext.fx.target.ElementCSS', {
                 ln2 = attrs[attr].length;
                 for (j = 0; j &lt; ln2; j++) {
                     o = attrs[attr][j];
-                    o[0].setStyle(Ext.supports.CSS3Prefix + 'TransitionProperty', isFirstFrame ? '' : attributes);
-                    o[0].setStyle(Ext.supports.CSS3Prefix + 'TransitionDuration', isFirstFrame ? '' : duration);
-                    o[0].setStyle(Ext.supports.CSS3Prefix + 'TransitionTimingFunction', isFirstFrame ? '' : easing);
+                    o[0].setStyle(Ext.supports.CSS3Prefix + &#39;TransitionProperty&#39;, isFirstFrame ? &#39;&#39; : attributes);
+                    o[0].setStyle(Ext.supports.CSS3Prefix + &#39;TransitionDuration&#39;, isFirstFrame ? &#39;&#39; : duration);
+                    o[0].setStyle(Ext.supports.CSS3Prefix + &#39;TransitionTimingFunction&#39;, isFirstFrame ? &#39;&#39; : easing);
                     o[0].setStyle(attr, o[1]);
 
                     // Must trigger reflow to make this get used as the start point for the transition that follows

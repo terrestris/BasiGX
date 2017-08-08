@@ -33,7 +33,7 @@
 <span id='BasiGX-util-Color'>/**
 </span> * @class BasiGX.util.Color
  */
-Ext.define('BasiGX.util.Color', {
+Ext.define(&#39;BasiGX.util.Color&#39;, {
 
     statics: {
 
@@ -51,16 +51,16 @@ Ext.define('BasiGX.util.Color', {
          * @return {String} A `rgba(r,g,b,a)` color string.
          */
         hexToRgba: function(hex, opacity) {
-            hex = hex.replace('#', '');
+            hex = hex.replace(&#39;#&#39;, &#39;&#39;);
             var r = parseInt(hex.substring(0, 2), 16);
             var g = parseInt(hex.substring(2, 4), 16);
             var b = parseInt(hex.substring(4, 6), 16);
             var a = opacity;
 
             if (opacity) {
-                return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+                return &#39;rgba(&#39; + r + &#39;,&#39; + g + &#39;,&#39; + b + &#39;,&#39; + a + &#39;)&#39;;
             }
-            return 'rgba(' + r + ',' + g + ',' + b + ',1)';
+            return &#39;rgba(&#39; + r + &#39;,&#39; + g + &#39;,&#39; + b + &#39;,1)&#39;;
         },
 
 <span id='BasiGX-util-Color-static-method-hex8ToRgba'>        /**
@@ -75,13 +75,13 @@ Ext.define('BasiGX.util.Color', {
          * @return {String} A `rgba(r,g,b,a)` color string.
          */
         hex8ToRgba: function(hex8) {
-            hex8 = hex8.replace('#', '');
+            hex8 = hex8.replace(&#39;#&#39;, &#39;&#39;);
             var r = parseInt(hex8.substring(0, 2), 16);
             var g = parseInt(hex8.substring(2, 4), 16);
             var b = parseInt(hex8.substring(4, 6), 16);
             var a = (parseInt(hex8.substring(6, 8), 16) / 255).toFixed(2) * 1;
 
-            var result = 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+            var result = &#39;rgba(&#39; + r + &#39;,&#39; + g + &#39;,&#39; + b + &#39;,&#39; + a + &#39;)&#39;;
             return result;
         },
 
@@ -99,16 +99,16 @@ Ext.define('BasiGX.util.Color', {
          */
         rgbaToHex: function(rgba) {
             if (!rgba) {
-                return '';
+                return &#39;&#39;;
             }
             // TODO we should have a utility rgbAsArray, just like we have
             // rgbaAsArray, or not?
-            var regex = new RegExp('^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?,' +
-                '[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?', 'i');
+            var regex = new RegExp(&#39;^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?,&#39; +
+                &#39;[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?&#39;, &#39;i&#39;);
             rgba = rgba.match(regex);
 
             if (!rgba || rgba.length !== 4) {
-                return '';
+                return &#39;&#39;;
             }
 
             var makeHex = BasiGX.util.Color.makeHex;
@@ -116,7 +116,7 @@ Ext.define('BasiGX.util.Color', {
             var g = makeHex(rgba[2]);
             var b = makeHex(rgba[3]);
 
-            return '#' + r + g + b;
+            return &#39;#&#39; + r + g + b;
         },
 
 <span id='BasiGX-util-Color-static-method-rgbaToHex8'>        /**
@@ -131,33 +131,33 @@ Ext.define('BasiGX.util.Color', {
          */
         rgbaToHex8: function(rgba) {
             if (!rgba) {
-                return '';
+                return &#39;&#39;;
             }
             rgba = BasiGX.util.Color.rgbaAsArray(rgba);
 
             if (!rgba || rgba.length !== 5) {
-                return '';
+                return &#39;&#39;;
             }
 
             var makeHex = BasiGX.util.Color.makeHex;
             var r = makeHex(rgba[1]);
             var g = makeHex(rgba[2]);
             var b = makeHex(rgba[3]);
-            var a = makeHex('' + Math.round(parseFloat(rgba[4]) * 255));
+            var a = makeHex(&#39;&#39; + Math.round(parseFloat(rgba[4]) * 255));
 
-            return '#' + r + g + b + a;
+            return &#39;#&#39; + r + g + b + a;
         },
 
 <span id='BasiGX-util-Color-static-method-makeHex'>        /**
 </span>         * Returns the two digit hexadecimal value of the passed number string
-         * (between `'0'` and `'255'`).
+         * (between `&#39;0&#39;` and `&#39;255&#39;`).
          *
          * @param {String} numStr The number to convert as a string.
          * @return {String} The hexadecimal number.
          */
         makeHex: function(numStr) {
             var hex = parseInt(numStr, 10).toString(16);
-            return ('0' + hex).slice(-2);
+            return (&#39;0&#39; + hex).slice(-2);
         },
 
 <span id='BasiGX-util-Color-static-method-rgbaAsArray'>        /**
@@ -169,9 +169,9 @@ Ext.define('BasiGX.util.Color', {
          * @return {Array} An array with the parts of the rgba-string.
          */
         rgbaAsArray: function(rgba) {
-            var regex = new RegExp('^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?,' +
-                '[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?,' +
-                '[\\s+]?(\\d+(?:\\.\\d+|))[\\s+]?', 'i');
+            var regex = new RegExp(&#39;^rgba?[\\s+]?\\([\\s+]?(\\d+)[\\s+]?,&#39; +
+                &#39;[\\s+]?(\\d+)[\\s+]?,[\\s+]?(\\d+)[\\s+]?,&#39; +
+                &#39;[\\s+]?(\\d+(?:\\.\\d+|))[\\s+]?&#39;, &#39;i&#39;);
             rgba = rgba.match(regex);
             return rgba;
         }

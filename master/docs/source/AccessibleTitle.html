@@ -36,11 +36,11 @@
  *
  * @class BasiGX.plugin.AccessibleTitle
  */
-Ext.define('BasiGX.plugin.AccessibleTitle', {
-    extend: 'Ext.plugin.Abstract',
+Ext.define(&#39;BasiGX.plugin.AccessibleTitle&#39;, {
+    extend: &#39;Ext.plugin.Abstract&#39;,
 
-    alias: 'plugin.a11ytitle',
-<span id='BasiGX-plugin-AccessibleTitle-property-pluginId'>    pluginId: 'a11ytitle',
+    alias: &#39;plugin.a11ytitle&#39;,
+<span id='BasiGX-plugin-AccessibleTitle-property-pluginId'>    pluginId: &#39;a11ytitle&#39;,
 </span>
     config: {
 <span id='BasiGX-plugin-AccessibleTitle-cfg-The'>        /**
@@ -66,7 +66,7 @@ Ext.define('BasiGX.plugin.AccessibleTitle', {
      */
     init: function(cmp) {
         var me = this;
-        cmp.on('afterrender', me.addA11yMarkup, me);
+        cmp.on(&#39;afterrender&#39;, me.addA11yMarkup, me);
         Ext.override(cmp, {
             setTitle: function() {
                 var overridenReturnVal = this.callParent(arguments);
@@ -172,8 +172,8 @@ Ext.define('BasiGX.plugin.AccessibleTitle', {
         var me = this;
         var cmp = me.getCmp();
         var spec = {
-            tag: 'h' + level,
-            style: 'display: none;',
+            tag: &#39;h&#39; + level,
+            style: &#39;display: none;&#39;,
             html: cmp.getTitle() // will be updated later, in updateA11yMarkup
         };
         return spec;

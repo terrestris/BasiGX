@@ -26,26 +26,26 @@
  * child items may be set using the {@link #pack} config.
  * 
  *     @example
- *     Ext.create('Ext.Panel', {
+ *     Ext.create(&#39;Ext.Panel&#39;, {
  *         width: 500,
  *         height: 300,
  *         title: &quot;HBoxLayout Panel&quot;,
  *         layout: {
- *             type: 'hbox',
- *             align: 'stretch'
+ *             type: &#39;hbox&#39;,
+ *             align: &#39;stretch&#39;
  *         },
  *         renderTo: document.body,
  *         items: [{
- *             xtype: 'panel',
- *             title: 'Inner Panel One',
+ *             xtype: &#39;panel&#39;,
+ *             title: &#39;Inner Panel One&#39;,
  *             flex: 2
  *         },{
- *             xtype: 'panel',
- *             title: 'Inner Panel Two',
+ *             xtype: &#39;panel&#39;,
+ *             title: &#39;Inner Panel Two&#39;,
  *             flex: 1
  *         },{
- *             xtype: 'panel',
- *             title: 'Inner Panel Three',
+ *             xtype: &#39;panel&#39;,
+ *             title: &#39;Inner Panel Three&#39;,
  *             flex: 1
  *         }]
  *     });
@@ -55,69 +55,69 @@
  * 
  *     @example
  *     Ext.create({
- *         xtype: 'panel',
+ *         xtype: &#39;panel&#39;,
  *         renderTo: Ext.getBody(),
  *         height: 400,
  *         width: 520,
  *         defaultListenerScope: true,
- *         layout: 'hbox',
- *         defaultType: 'button',
+ *         layout: &#39;hbox&#39;,
+ *         defaultType: &#39;button&#39;,
  *         items: [{
- *             text: 'One'
+ *             text: &#39;One&#39;
  *         }, {
- *             text: 'Two'
+ *             text: &#39;Two&#39;
  *         }, {
- *             text: 'Three'
+ *             text: &#39;Three&#39;
  *         }],
  *         dockedItems: [{
- *             xtype: 'toolbar',
- *             dock: 'top',
+ *             xtype: &#39;toolbar&#39;,
+ *             dock: &#39;top&#39;,
  *             items: [{
- *                 xtype: 'buttongroup',
- *                 title: 'align',
- *                 layout: 'fit',
+ *                 xtype: &#39;buttongroup&#39;,
+ *                 title: &#39;align&#39;,
+ *                 layout: &#39;fit&#39;,
  *                 items: [{
- *                     xtype: 'segmentedbutton',
+ *                     xtype: &#39;segmentedbutton&#39;,
  *                     margin: 10,
  *                     allowDepress: true,
  *                     defaults: {
- *                         configType: 'align'  // custom config used in this example
+ *                         configType: &#39;align&#39;  // custom config used in this example
  *                     },
  *                     items: [{
- *                         text: 'begin'
+ *                         text: &#39;begin&#39;
  *                     }, {
- *                         text: 'middle'
+ *                         text: &#39;middle&#39;
  *                     }, {
- *                         text: 'end'
+ *                         text: &#39;end&#39;
  *                     }, {
- *                         text: 'stretch'
+ *                         text: &#39;stretch&#39;
  *                     }, {
- *                         text: 'stretchmax'
+ *                         text: &#39;stretchmax&#39;
  *                     }],
  *                     listeners: {
- *                         toggle: 'onToggle'
+ *                         toggle: &#39;onToggle&#39;
  *                     }
  *                 }]
- *             }, '-&gt;', {
- *                 xtype: 'buttongroup',
- *                 title: 'pack',
- *     			   layout: 'fit',
+ *             }, &#39;-&gt;&#39;, {
+ *                 xtype: &#39;buttongroup&#39;,
+ *                 title: &#39;pack&#39;,
+ *     			   layout: &#39;fit&#39;,
  *                 items: [{
- *                     xtype: 'segmentedbutton',
+ *                     xtype: &#39;segmentedbutton&#39;,
  *                     margin: 10,
  *                     allowDepress: true,
  *                     defaults: {
- *                         configType: 'pack'  // custom config used in this example
+ *                         configType: &#39;pack&#39;  // custom config used in this example
  *                     },
  *                     items: [{
- *                         text: 'start'
+ *                         text: &#39;start&#39;
  *                     }, {
- *                         text: 'center'
+ *                         text: &#39;center&#39;
  *                     }, {
- *                         text: 'end'
+ *                         text: &#39;end&#39;
  *                     }],
  *                     listeners: {
- *                         toggle: 'onToggle'
+ *                         toggle: &#39;onToggle&#39;
  *                     }
  *                 }]
  *             }]
@@ -131,14 +131,14 @@
  *         }
  *     });
  */
-Ext.define('Ext.layout.container.HBox', {
-    extend: 'Ext.layout.container.Box',
+Ext.define(&#39;Ext.layout.container.HBox&#39;, {
+    extend: &#39;Ext.layout.container.Box&#39;,
 
-    alias: 'layout.hbox',
+    alias: &#39;layout.hbox&#39;,
 
-    alternateClassName: 'Ext.layout.HBoxLayout',
+    alternateClassName: &#39;Ext.layout.HBoxLayout&#39;,
 
-<span id='Ext-layout-container-HBox-property-type'>    type: 'hbox',
+<span id='Ext-layout-container-HBox-property-type'>    type: &#39;hbox&#39;,
 </span>
 <span id='Ext-layout-container-HBox-cfg-vertical'>    vertical: false
 </span>});

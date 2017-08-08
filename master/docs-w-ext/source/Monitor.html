@@ -19,12 +19,12 @@
 </span> * @singleton
  * @private
  */
-Ext.define('Ext.perf.Monitor', {
+Ext.define(&#39;Ext.perf.Monitor&#39;, {
     singleton: true,
-    alternateClassName: 'Ext.Perf',
+    alternateClassName: &#39;Ext.Perf&#39;,
 
     requires: [
-        'Ext.perf.Accumulator'
+        &#39;Ext.perf.Accumulator&#39;
     ],
 
 <span id='Ext-perf-Monitor-method-constructor'>    constructor: function () {
@@ -33,7 +33,7 @@ Ext.define('Ext.perf.Monitor', {
     },
 
 <span id='Ext-perf-Monitor-method-calibrate'>    calibrate: function () {
-</span>        var accum = new Ext.perf.Accumulator('$'),
+</span>        var accum = new Ext.perf.Accumulator(&#39;$&#39;),
             total = accum.total,
             getTimestamp = Ext.perf.Accumulator.getTimestamp,
             count = 0,
@@ -85,7 +85,7 @@ Ext.define('Ext.perf.Monitor', {
 
         me.updateGC();
 
-        Ext.log('Calibration: ' + Math.round(calibration * 100) / 100 + ' msec/sample');
+        Ext.log(&#39;Calibration: &#39; + Math.round(calibration * 100) / 100 + &#39; msec/sample&#39;);
         Ext.each(accumulators, function (accum) {
             Ext.log(accum.format(calibration));
         });
@@ -154,55 +154,55 @@ Ext.define('Ext.perf.Monitor', {
 </span>        if (!config) {
             config = {
                 /*insertHtml: {
-                    'Ext.dom.Helper': 'insertHtml'
+                    &#39;Ext.dom.Helper&#39;: &#39;insertHtml&#39;
                 },*/
                 /*xtplCompile: {
-                    'Ext.XTemplateCompiler': 'compile'
+                    &#39;Ext.XTemplateCompiler&#39;: &#39;compile&#39;
                 },*/
 //                doInsert: {
-//                    'Ext.Template': 'doInsert'
+//                    &#39;Ext.Template&#39;: &#39;doInsert&#39;
 //                },
 //                applyOut: {
-//                    'Ext.XTemplate': 'applyOut'
+//                    &#39;Ext.XTemplate&#39;: &#39;applyOut&#39;
 //                },
                 render: {
-                    'Ext.Component': 'render'
+                    &#39;Ext.Component&#39;: &#39;render&#39;
                 },
 //                fnishRender: {
-//                    'Ext.Component': 'finishRender'
+//                    &#39;Ext.Component&#39;: &#39;finishRender&#39;
 //                },
 //                renderSelectors: {
-//                    'Ext.Component': 'applyRenderSelectors'
+//                    &#39;Ext.Component&#39;: &#39;applyRenderSelectors&#39;
 //                },
 //                compAddCls: {
-//                    'Ext.Component': 'addCls'
+//                    &#39;Ext.Component&#39;: &#39;addCls&#39;
 //                },
 //                compRemoveCls: {
-//                    'Ext.Component': 'removeCls'
+//                    &#39;Ext.Component&#39;: &#39;removeCls&#39;
 //                },
 //                getStyle: {
-//                    'Ext.core.Element': 'getStyle'
+//                    &#39;Ext.core.Element&#39;: &#39;getStyle&#39;
 //                },
 //                setStyle: {
-//                    'Ext.core.Element': 'setStyle'
+//                    &#39;Ext.core.Element&#39;: &#39;setStyle&#39;
 //                },
 //                addCls: {
-//                    'Ext.core.Element': 'addCls'
+//                    &#39;Ext.core.Element&#39;: &#39;addCls&#39;
 //                },
 //                removeCls: {
-//                    'Ext.core.Element': 'removeCls'
+//                    &#39;Ext.core.Element&#39;: &#39;removeCls&#39;
 //                },
 //                measure: {
-//                    'Ext.layout.component.Component': 'measureAutoDimensions'
+//                    &#39;Ext.layout.component.Component&#39;: &#39;measureAutoDimensions&#39;
 //                },
 //                moveItem: {
-//                    'Ext.layout.Layout': 'moveItem'
+//                    &#39;Ext.layout.Layout&#39;: &#39;moveItem&#39;
 //                },
 //                layoutFlush: {
-//                    'Ext.layout.Context': 'flush'
+//                    &#39;Ext.layout.Context&#39;: &#39;flush&#39;
 //                },
                 layout: {
-                    'Ext.layout.Context': 'run'
+                    &#39;Ext.layout.Context&#39;: &#39;run&#39;
                 }
             };
         }
@@ -251,9 +251,9 @@ Ext.define('Ext.perf.Monitor', {
                                 diff = +Date.now() - before;
                                 
                                 if (window.console &amp;&amp; diff &gt; 0) {
-                                    idHolder = idProp === 'this'          ? this
-                                             : typeof idProp === 'string' ? this[idProp]
-                                             : typeof idProp === 'number' ? arguments[idProp]
+                                    idHolder = idProp === &#39;this&#39;          ? this
+                                             : typeof idProp === &#39;string&#39; ? this[idProp]
+                                             : typeof idProp === &#39;number&#39; ? arguments[idProp]
                                              :                             null
                                              ;
                                     
@@ -262,10 +262,10 @@ Ext.define('Ext.perf.Monitor', {
                                     }
                                     
                                     if (id != null) {
-                                        console.log(methodName + ' for ' + id + ': ' + diff + 'ms');
+                                        console.log(methodName + &#39; for &#39; + id + &#39;: &#39; + diff + &#39;ms&#39;);
                                     }
                                     else {
-                                        console.log(methodName + ' for unknown: ' + diff + 'ms');
+                                        console.log(methodName + &#39; for unknown: &#39; + diff + &#39;ms&#39;);
                                     }
                                     
                                     if (console.trace) {

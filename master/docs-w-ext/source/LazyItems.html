@@ -26,27 +26,27 @@
  * Add the items to the plugin:
  *
  *     {
- *         xtype: 'tabpanel',
+ *         xtype: &#39;tabpanel&#39;,
  *         items: [{
- *             title: 'Tab One',
+ *             title: &#39;Tab One&#39;,
  *             plugins: {
- *                 ptype: 'lazyitems',
+ *                 ptype: &#39;lazyitems&#39;,
  *                 items: [... tab child items...]
  *             }
  *         }, {
- *             title: 'Tab One',
+ *             title: &#39;Tab One&#39;,
  *             plugins: {
- *                 ptype: 'lazyitems',
+ *                 ptype: &#39;lazyitems&#39;,
  *                 items: [... tab child items...]
  *             }
  *         }]
  *     }
  *
  */
-Ext.define('Ext.plugin.LazyItems', {
-    extend: 'Ext.plugin.Abstract',
+Ext.define(&#39;Ext.plugin.LazyItems&#39;, {
+    extend: &#39;Ext.plugin.Abstract&#39;,
  
-    alias: 'plugin.lazyitems',
+    alias: &#39;plugin.lazyitems&#39;,
  
 <span id='Ext-plugin-LazyItems-method-init'>    init: function(comp) {
 </span>        this.callParent(arguments);

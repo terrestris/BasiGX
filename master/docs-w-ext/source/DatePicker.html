@@ -24,45 +24,45 @@
  *   configuration options of **{@link Ext.picker.Date}**.
  * - If subclassing DateMenu, any configuration options for the DatePicker must be applied
  *   to the **initialConfig** property of the DateMenu. Applying {@link Ext.picker.Date Date Picker}
- *   configuration settings to **this** will **not** affect the Date Picker's configuration.
+ *   configuration settings to **this** will **not** affect the Date Picker&#39;s configuration.
  *
  * Example:
  *
  *     @example
- *     var dateMenu = Ext.create('Ext.menu.DatePicker', {
+ *     var dateMenu = Ext.create(&#39;Ext.menu.DatePicker&#39;, {
  *         handler: function(dp, date){
- *             Ext.Msg.alert('Date Selected', 'You selected ' + Ext.Date.format(date, 'M j, Y'));
+ *             Ext.Msg.alert(&#39;Date Selected&#39;, &#39;You selected &#39; + Ext.Date.format(date, &#39;M j, Y&#39;));
  *         }
  *     });
  *
- *     Ext.create('Ext.menu.Menu', {
+ *     Ext.create(&#39;Ext.menu.Menu&#39;, {
  *         items: [{
- *             text: 'Choose a date',
+ *             text: &#39;Choose a date&#39;,
  *             menu: dateMenu
  *         },{
- *             iconCls: 'add16',
- *             text: 'Icon item'
+ *             iconCls: &#39;add16&#39;,
+ *             text: &#39;Icon item&#39;
  *         },{
- *             text: 'Regular item'
+ *             text: &#39;Regular item&#39;
  *         }]
  *     }).showAt([5, 5]);
  */
- Ext.define('Ext.menu.DatePicker', {
-     extend: 'Ext.menu.Menu',
+ Ext.define(&#39;Ext.menu.DatePicker&#39;, {
+     extend: &#39;Ext.menu.Menu&#39;,
 
-     alias: 'widget.datemenu',
+     alias: &#39;widget.datemenu&#39;,
 
      requires: [
-        'Ext.picker.Date'
+        &#39;Ext.picker.Date&#39;
      ],
      
-<span id='Ext-menu-DatePicker-property-ariaRole'>    ariaRole: 'dialog',
+<span id='Ext-menu-DatePicker-property-ariaRole'>    ariaRole: &#39;dialog&#39;,
 </span>    
     //&lt;locale&gt;
 <span id='Ext-menu-DatePicker-cfg-ariaLabel'>    /**
 </span>     * @cfg {String} ariaLabel ARIA label for the Date Picker menu
      */
-    ariaLabel: 'Date picker',
+    ariaLabel: &#39;Date picker&#39;,
     //&lt;/locale&gt;
 
 <span id='Ext-menu-DatePicker-cfg-hideOnClick'>    /**
@@ -101,26 +101,26 @@
             
         if (me.pickerCfg) {
             pickerConfig = Ext.apply({
-                cls: Ext.baseCSSPrefix + 'menu-date-item',
+                cls: Ext.baseCSSPrefix + &#39;menu-date-item&#39;,
                 margin: 0,
                 border: false,
                 id: me.pickerId,
-                xtype: 'datepicker'
+                xtype: &#39;datepicker&#39;
             }, me.pickerCfg);
         }
         else {
             // Need to keep this insanity for backwards compat :(
             cfg = Ext.apply({}, me.initialConfig);
             
-            // Ensure we clear any listeners so they aren't duplicated
+            // Ensure we clear any listeners so they aren&#39;t duplicated
             delete cfg.listeners;
             
             pickerConfig = Ext.applyIf({
-                cls: Ext.baseCSSPrefix + 'menu-date-item',
+                cls: Ext.baseCSSPrefix + &#39;menu-date-item&#39;,
                 margin: 0,
                 border: false,
                 id: me.pickerId,
-                xtype: 'datepicker'
+                xtype: &#39;datepicker&#39;
             }, cfg);
         }
         
@@ -133,16 +133,16 @@
 
         me.callParent();
 
-        me.picker = me.down('datepicker');
+        me.picker = me.down(&#39;datepicker&#39;);
         
 <span id='Ext-menu-DatePicker-event-select'>        /**
 </span>         * @event select
          * @inheritdoc Ext.picker.Date#select
          */
-        me.relayEvents(me.picker, ['select']);
+        me.relayEvents(me.picker, [&#39;select&#39;]);
 
         if (me.hideOnClick) {
-            me.on('select', me.hidePickerOnSelect, me);
+            me.on(&#39;select&#39;, me.hidePickerOnSelect, me);
         }
     },
     

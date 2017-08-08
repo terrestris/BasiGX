@@ -39,25 +39,25 @@
  *
  * @class BasiGX.view.panel.MapContainer
  */
-Ext.define('BasiGX.view.panel.MapContainer', {
-    extend: 'Ext.panel.Panel',
-    xtype: 'basigx-panel-mapcontainer',
+Ext.define(&#39;BasiGX.view.panel.MapContainer&#39;, {
+    extend: &#39;Ext.panel.Panel&#39;,
+    xtype: &#39;basigx-panel-mapcontainer&#39;,
 
     requires: [
-        'Ext.dom.Query',
-        'Ext.app.ViewModel',
-        'GeoExt.data.store.LayersTree',
-        'GeoExt.component.OverviewMap',
+        &#39;Ext.dom.Query&#39;,
+        &#39;Ext.app.ViewModel&#39;,
+        &#39;GeoExt.data.store.LayersTree&#39;,
+        &#39;GeoExt.component.OverviewMap&#39;,
 
-        'BasiGX.util.Layer',
-        'BasiGX.view.component.Map',
-        'BasiGX.view.panel.LegendTree',
-        'BasiGX.view.panel.Menu',
+        &#39;BasiGX.util.Layer&#39;,
+        &#39;BasiGX.view.component.Map&#39;,
+        &#39;BasiGX.view.panel.LegendTree&#39;,
+        &#39;BasiGX.view.panel.Menu&#39;,
 
-        'BasiGX.view.button.ZoomIn',
-        'BasiGX.view.button.ZoomOut',
-        'BasiGX.view.button.ZoomToExtent',
-        'BasiGX.view.button.ToggleLegend'
+        &#39;BasiGX.view.button.ZoomIn&#39;,
+        &#39;BasiGX.view.button.ZoomOut&#39;,
+        &#39;BasiGX.view.button.ZoomToExtent&#39;,
+        &#39;BasiGX.view.button.ToggleLegend&#39;
     ],
 
 <span id='BasiGX-view-panel-MapContainer-property-viewModel'>    /**
@@ -65,21 +65,21 @@ Ext.define('BasiGX.view.panel.MapContainer', {
      */
     viewModel: {
         data: {
-            titleLegendPanel: 'Legende',
-            documentation: '&lt;h2&gt;Karte&lt;/h2&gt;• Die Karte wird zur Darstellung ' +
-                'der verschiedenen Kartenthemen verwendet.&lt;br&gt;• Mit Hilfe ' +
-                'des Themenbaums oder der Werkzeuge können Sie mit der ' +
-                'Karte interagieren.&lt;br&gt;• Standardmäßig können Sie den ' +
-                'Maßstab der Karte mit dem Mausrad oder einem Doppelklick ' +
-                'vergrößern und verkleinern.&lt;br&gt;• Für weitere Informationen ' +
-                'verwenden Sie die Hilfe für ein konkretes Werkzeug'
+            titleLegendPanel: &#39;Legende&#39;,
+            documentation: &#39;&lt;h2&gt;Karte&lt;/h2&gt;• Die Karte wird zur Darstellung &#39; +
+                &#39;der verschiedenen Kartenthemen verwendet.&lt;br&gt;• Mit Hilfe &#39; +
+                &#39;des Themenbaums oder der Werkzeuge können Sie mit der &#39; +
+                &#39;Karte interagieren.&lt;br&gt;• Standardmäßig können Sie den &#39; +
+                &#39;Maßstab der Karte mit dem Mausrad oder einem Doppelklick &#39; +
+                &#39;vergrößern und verkleinern.&lt;br&gt;• Für weitere Informationen &#39; +
+                &#39;verwenden Sie die Hilfe für ein konkretes Werkzeug&#39;
         }
     },
 
 <span id='BasiGX-view-panel-MapContainer-property-layout'>    /**
 </span>     *
      */
-    layout: 'absolute',
+    layout: &#39;absolute&#39;,
 
 <span id='BasiGX-view-panel-MapContainer-property-header'>    /**
 </span>     *
@@ -96,64 +96,64 @@ Ext.define('BasiGX.view.panel.MapContainer', {
      */
     config: {
 <span id='BasiGX-view-panel-MapContainer-cfg-mapComponentConfig'>        mapComponentConfig: {
-</span>            xtype: 'basigx-component-map',
-            anchor: '100% 100%'
+</span>            xtype: &#39;basigx-component-map&#39;,
+            anchor: &#39;100% 100%&#39;
         },
 <span id='BasiGX-view-panel-MapContainer-cfg-menuConfig'>        menuConfig: {
-</span>            xtype: 'basigx-panel-menu',
+</span>            xtype: &#39;basigx-panel-menu&#39;,
             width: 300,
             items: []
         },
 <span id='BasiGX-view-panel-MapContainer-cfg-toolbarConfig'>        toolbarConfig: {
-</span>            xtype: 'toolbar',
+</span>            xtype: &#39;toolbar&#39;,
             vertical: true,
             width: 50,
-            cls: 'basigx-map-tools',
+            cls: &#39;basigx-map-tools&#39;,
             x: 0,
             y: 0,
             defaults: {
-                scale: 'large'
+                scale: &#39;large&#39;
             }
         },
 <span id='BasiGX-view-panel-MapContainer-cfg-overviewMapConfig'>        overviewMapConfig: {
-</span>            xtype: 'gx_overviewmap',
+</span>            xtype: &#39;gx_overviewmap&#39;,
             magnification: 10,
             width: 400,
             height: 150,
             padding: 5,
-            cls: 'basigx-overview-map',
+            cls: &#39;basigx-overview-map&#39;,
             hidden: true,
             layers: [
                 new ol.layer.Tile({
                     source: new ol.source.TileWMS({
-                        url: 'http://ows.terrestris.de/osm/service?',
-                        params: {'layers': 'OSM-WMS', 'TILED': true}
+                        url: &#39;http://ows.terrestris.de/osm/service?&#39;,
+                        params: {&#39;layers&#39;: &#39;OSM-WMS&#39;, &#39;TILED&#39;: true}
                     })
                 })
             ]
         },
 <span id='BasiGX-view-panel-MapContainer-cfg-overviewMapToggleButtonConfig'>        overviewMapToggleButtonConfig: {
-</span>            xtype: 'button',
-            scale: 'large',
-            helpKey: 'basigx-overview-map-button',
-            cls: 'basigx-overview-map-button',
-            glyph: 'xf0ac@FontAwesome',
+</span>            xtype: &#39;button&#39;,
+            scale: &#39;large&#39;,
+            helpKey: &#39;basigx-overview-map-button&#39;,
+            cls: &#39;basigx-overview-map-button&#39;,
+            glyph: &#39;xf0ac@FontAwesome&#39;,
             enableToggle: true
         },
 <span id='BasiGX-view-panel-MapContainer-cfg-legendPanelConfig'>        legendPanelConfig: {
-</span>            xtype: 'basigx-panel-legendtree',
+</span>            xtype: &#39;basigx-panel-legendtree&#39;,
             width: 250,
             height: 300,
-            layout: 'fit',
+            layout: &#39;fit&#39;,
             collapsible: true,
             collapsed: true,
             hideCollapseTool: true,
-            collapseDirection: 'bottom',
+            collapseDirection: &#39;bottom&#39;,
             titleCollapse: true,
-            titleAlign: 'center',
+            titleAlign: &#39;center&#39;,
             rootVisible: false,
             bind: {
-                title: '{titleLegendPanel}'
+                title: &#39;{titleLegendPanel}&#39;
             }
         },
 <span id='BasiGX-view-panel-MapContainer-cfg-additionalItems'>        /* use this property for additional items that can not be added
@@ -202,7 +202,7 @@ Ext.define('BasiGX.view.panel.MapContainer', {
         me.addAdditionalItems();
 
         // TODO make optional based on config
-        me.on('afterrender', me.addLegendPanel, me, {single: true});
+        me.on(&#39;afterrender&#39;, me.addLegendPanel, me, {single: true});
     },
 
 <span id='BasiGX-view-panel-MapContainer-method-addMapComponent'>    /**
@@ -304,7 +304,7 @@ Ext.define('BasiGX.view.panel.MapContainer', {
 
         // set the store if not configured
         if (!legendTreeConfig.store &amp;&amp; me.mapPanel) {
-            var treeStore = Ext.create('GeoExt.data.store.LayersTree', {
+            var treeStore = Ext.create(&#39;GeoExt.data.store.LayersTree&#39;, {
                 layerGroup: me.mapPanel.getMap().getLayerGroup()
             });
             treeStore.addFilter(function(rec) {
@@ -333,13 +333,13 @@ Ext.define('BasiGX.view.panel.MapContainer', {
      */
     buildToolbarItems: function() {
         var toolbarItems = [{
-            xtype: 'basigx-button-zoomin'
+            xtype: &#39;basigx-button-zoomin&#39;
         }, {
-            xtype: 'basigx-button-zoomout'
+            xtype: &#39;basigx-button-zoomout&#39;
         }, {
-            xtype: 'basigx-button-zoomtoextent'
+            xtype: &#39;basigx-button-zoomtoextent&#39;
         }, {
-            xtype: 'basigx-button-togglelegend'
+            xtype: &#39;basigx-button-togglelegend&#39;
         }];
 
         return toolbarItems;
@@ -352,8 +352,8 @@ Ext.define('BasiGX.view.panel.MapContainer', {
      * @param {Boolean} pressed Whether the butten is currently pressed or not.
      */
     toggleOverviewMap: function(button, pressed) {
-        var ovm = button.up('basigx-panel-mapcontainer')
-            .down('gx_overviewmap');
+        var ovm = button.up(&#39;basigx-panel-mapcontainer&#39;)
+            .down(&#39;gx_overviewmap&#39;);
         if (pressed) {
             ovm.show(button);
         } else {
@@ -362,7 +362,7 @@ Ext.define('BasiGX.view.panel.MapContainer', {
         button.blur();
         this.toggleScalelineAdjustment();
         this.toggleScalecomboAdjustment();
-        this.fireEvent('overviewmapToggle', ovm);
+        this.fireEvent(&#39;overviewmapToggle&#39;, ovm);
     },
 
 <span id='BasiGX-view-panel-MapContainer-method-toggleScalelineAdjustment'>    /**
@@ -370,13 +370,13 @@ Ext.define('BasiGX.view.panel.MapContainer', {
      * the Openlayers scaleline HTML element.
      */
     toggleScalelineAdjustment: function() {
-        var scaleline = Ext.dom.Query.select('.ol-scale-line')[0];
+        var scaleline = Ext.dom.Query.select(&#39;.ol-scale-line&#39;)[0];
         var scalelineElem;
         if (scaleline) {
             scalelineElem = Ext.get(scaleline);
         }
         if (scalelineElem) {
-            scalelineElem.toggleCls('basigx-scaline-adjusted');
+            scalelineElem.toggleCls(&#39;basigx-scaline-adjusted&#39;);
         }
     },
 
@@ -385,13 +385,13 @@ Ext.define('BasiGX.view.panel.MapContainer', {
      * the BasiGX scale combo HTML element.
      */
     toggleScalecomboAdjustment: function() {
-        var scaleCombo = Ext.ComponentQuery.query('basigx-combo-scale')[0];
+        var scaleCombo = Ext.ComponentQuery.query(&#39;basigx-combo-scale&#39;)[0];
         var scaleComboEl;
         if (scaleCombo) {
             scaleComboEl = scaleCombo.getEl();
         }
         if (scaleComboEl) {
-            scaleComboEl.toggleCls('basigx-combo-scale-adjusted');
+            scaleComboEl.toggleCls(&#39;basigx-combo-scale-adjusted&#39;);
         }
     }
 });

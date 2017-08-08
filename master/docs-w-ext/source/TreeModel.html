@@ -18,14 +18,14 @@
   <pre class="prettyprint lang-js"><span id='Ext-data-TreeModel'>/**
 </span> * This class is used as a base class from which to derive Models used in Trees.
  */
-Ext.define('Ext.data.TreeModel', {
-    extend: 'Ext.data.Model',
+Ext.define(&#39;Ext.data.TreeModel&#39;, {
+    extend: &#39;Ext.data.Model&#39;,
     requires: [
-        'Ext.data.NodeInterface'
+        &#39;Ext.data.NodeInterface&#39;
     ],
 
     mixins: [
-        'Ext.mixin.Queryable'
+        &#39;Ext.mixin.Queryable&#39;
     ],
 
 <span id='Ext-data-TreeModel-cfg-childType'>    /**
@@ -37,7 +37,7 @@ Ext.define('Ext.data.TreeModel', {
      *
      * To do this through data types passed from the server, use the {@link Ext.data.reader.Reader#typeProperty}.
      *
-     * for example in the case of a hidden root node, you'd use the default type at level zero. See {@link Ext.tree.Panel TreePanel}'s
+     * for example in the case of a hidden root node, you&#39;d use the default type at level zero. See {@link Ext.tree.Panel TreePanel}&#39;s
      * documentation for an example.
      *
      * *Important*
@@ -49,20 +49,20 @@ Ext.define('Ext.data.TreeModel', {
      *
      * Example:
      *
-     *    Ext.define('myApp.World', {
-     *        childType: 'Territory'
+     *    Ext.define(&#39;myApp.World&#39;, {
+     *        childType: &#39;Territory&#39;
      *    });
      *
      *    ...
      *
      *    store: {
-     *        id: 'myTreeStore',
-     *        model: 'myApp.World' // The hidden root will know to create 'Territory' type children.
+     *        id: &#39;myTreeStore&#39;,
+     *        model: &#39;myApp.World&#39; // The hidden root will know to create &#39;Territory&#39; type children.
      *    }
      *
      * If the root is hidden, and the first level of visible nodes are going to be the `myApp.Territory` class,
      * then the hidden root must not be of the `myApp.Territory` class. Otherwise, it would try to read in the
-     * territory data as its childType - most likely 'Country'.
+     * territory data as its childType - most likely &#39;Country&#39;.
      *
      */
 
@@ -75,7 +75,7 @@ Ext.define('Ext.data.TreeModel', {
      },
 
     statics: {
-<span id='Ext-data-TreeModel-static-property-defaultProxy'>        defaultProxy: 'memory'
+<span id='Ext-data-TreeModel-static-property-defaultProxy'>        defaultProxy: &#39;memory&#39;
 </span>    }
 },
 function () {

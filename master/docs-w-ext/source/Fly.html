@@ -20,9 +20,9 @@
  * In general this class should not be instantiated directly.  Use {@link Ext#fly}
  * to create and retrieve Fly instances.
  */
-Ext.define('Ext.dom.Fly', {
-    extend: 'Ext.dom.Element',
-    alternateClassName: 'Ext.dom.Element.Fly',
+Ext.define(&#39;Ext.dom.Fly&#39;, {
+    extend: &#39;Ext.dom.Element&#39;,
+    alternateClassName: &#39;Ext.dom.Element.Fly&#39;,
 
 <span id='Ext-dom-Fly-property-validNodeTypes'>    // This adds the ability to wrap DOCUMENT_FRAGMENT_NODE
 </span>    // Document Fragments cannot have event listeners and therefore do not
@@ -113,7 +113,7 @@ Ext.define('Ext.dom.Fly', {
      * by other code. {@link Ext#fly} is alias for {@link Ext.dom.Element#fly}.
      *
      * Use this to make one-time references to DOM elements which are not going to be
-     * accessed again either by application code, or by Ext's classes. If accessing an
+     * accessed again either by application code, or by Ext&#39;s classes. If accessing an
      * element which will be processed regularly, then {@link Ext#get Ext.get} will be
      * more appropriate to take advantage of the caching provided by the
      * {@link Ext.dom.Element} class.
@@ -134,7 +134,7 @@ Ext.define('Ext.dom.Fly', {
             nodeType, data;
 
         // name the flyweight after the calling method name if possible.
-        named = named || (fn.caller &amp;&amp; fn.caller.$name) || '_global';
+        named = named || (fn.caller &amp;&amp; fn.caller.$name) || &#39;_global&#39;;
 
         dom = Ext.getDom(dom);
 
@@ -143,13 +143,13 @@ Ext.define('Ext.dom.Fly', {
             // check if we have a valid node type or if the el is a window object before
             // proceeding. This allows elements, document fragments, and document/window
             // objects (even those inside iframes) to be wrapped.
-            // Note: a window object can be detected by comparing it's window property to
+            // Note: a window object can be detected by comparing it&#39;s window property to
             // itself, but we must use == for the comparison because === will return false
             // in IE8 even though the 2 window objects are the same
             if (Fly.prototype.validNodeTypes[nodeType] || (!nodeType &amp;&amp; (dom.window == dom))) {
                 fly = Ext.cache[dom.id];
 
-                // If there's no Element cached, or the element cached is for another DOM node, return a Fly
+                // If there&#39;s no Element cached, or the element cached is for another DOM node, return a Fly
                 if (!fly || fly.dom !== dom) {
                     fly = flyweights[named] || (flyweights[named] = new Fly());
                     fly.dom = dom;
@@ -173,7 +173,7 @@ Ext.define('Ext.dom.Fly', {
      */
     Ext.getDetachedBody = function () {
         if (!detachedBodyEl) {
-            Ext.detachedBodyEl = detachedBodyEl = new Fly(document.createElement('div'));
+            Ext.detachedBodyEl = detachedBodyEl = new Fly(document.createElement(&#39;div&#39;));
             detachedBodyEl.isDetachedBody = true;
         }
 

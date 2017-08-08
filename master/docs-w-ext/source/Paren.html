@@ -19,10 +19,10 @@
 </span> * This class implements the parenthesis operator.
  * @private
  */
-Ext.define('Ext.parse.symbol.Paren', {
-    extend: 'Ext.parse.Symbol',
+Ext.define(&#39;Ext.parse.symbol.Paren&#39;, {
+    extend: &#39;Ext.parse.Symbol&#39;,
 
-<span id='Ext-parse-symbol-Paren-property-arity'>    arity: 'binary',
+<span id='Ext-parse-symbol-Paren-property-arity'>    arity: &#39;binary&#39;,
 </span><span id='Ext-parse-symbol-Paren-property-isBinary'>    isBinary: true,
 </span>
 <span id='Ext-parse-symbol-Paren-property-priority'>    priority: 80,
@@ -35,7 +35,7 @@ Ext.define('Ext.parse.symbol.Paren', {
             id = left.id,
             type = left.arity;
 
-        if (id !== '.' &amp;&amp; id !== '[') {
+        if (id !== &#39;.&#39; &amp;&amp; id !== &#39;[&#39;) {
             if ((type !== &quot;unary&quot; || id !== &quot;function&quot;) &amp;&amp;
                  type !== &quot;ident&quot; &amp;&amp; id !== &quot;(&quot; &amp;&amp;
                  id !== &quot;&amp;&amp;&quot; &amp;&amp; id !== &quot;||&quot; &amp;&amp; id !== &quot;?&quot;) {
@@ -43,20 +43,20 @@ Ext.define('Ext.parse.symbol.Paren', {
             }
         }
 
-        me.arity = 'invoke';
+        me.arity = &#39;invoke&#39;;
         me.isInvoke = true;
         me.operand = left;
         me.args = args;
 
-        while (parser.token.id !== ')') {
+        while (parser.token.id !== &#39;)&#39;) {
             if (args.length) {
-                parser.advance(',');
+                parser.advance(&#39;,&#39;);
             }
 
             args.push(parser.parseExpression());
         }
 
-        parser.advance(')');
+        parser.advance(&#39;)&#39;);
         return me;
     },
 

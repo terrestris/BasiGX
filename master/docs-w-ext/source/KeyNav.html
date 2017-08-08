@@ -56,10 +56,10 @@
  *         scope : this
  *     });
  */
-Ext.define('Ext.util.KeyNav', {
-    alternateClassName: 'Ext.KeyNav',
+Ext.define(&#39;Ext.util.KeyNav&#39;, {
+    alternateClassName: &#39;Ext.KeyNav&#39;,
 
-    requires: ['Ext.util.KeyMap'],
+    requires: [&#39;Ext.util.KeyMap&#39;],
 
 <span id='Ext-util-KeyNav-cfg-disabled'>    /**
 </span>     * @cfg {Boolean} disabled
@@ -94,7 +94,7 @@ Ext.define('Ext.util.KeyNav', {
 </span>     * @cfg {String} eventName
      * The event to listen for to pick up key events.
      */
-    eventName: 'keypress',
+    eventName: &#39;keypress&#39;,
 
 <span id='Ext-util-KeyNav-cfg-processEvent'>    /**
 </span>     * @cfg {Function} processEvent
@@ -129,7 +129,7 @@ Ext.define('Ext.util.KeyNav', {
 
 <span id='Ext-util-KeyNav-cfg-priority'>    /**
 </span>     * @cfg {Number} [priority]
-     * The priority to set on this KeyNav's listener. Listeners with a higher priority are fired before those with
+     * The priority to set on this KeyNav&#39;s listener. Listeners with a higher priority are fired before those with
      * lower priority.
      */
 
@@ -183,7 +183,7 @@ Ext.define('Ext.util.KeyNav', {
             keymapCfg = {
                 target: config.target,
                 ignoreInputFields: config.ignoreInputFields,
-                eventName: me.getKeyEvent('forceKeyDown' in config ? config.forceKeyDown : me.forceKeyDown, config.eventName),
+                eventName: me.getKeyEvent(&#39;forceKeyDown&#39; in config ? config.forceKeyDown : me.forceKeyDown, config.eventName),
                 capture: config.capture
             },
             map;
@@ -241,7 +241,7 @@ Ext.define('Ext.util.KeyNav', {
                 keyName = keyCode;
             }
             if (binding &amp;&amp; (keyName.length === 1 || !isNaN(keyName = parseInt(keyName, 10)))) {
-                if (typeof binding === 'function') {
+                if (typeof binding === &#39;function&#39;) {
                     binding = {
                         handler: binding,
                         defaultEventAction: (bindings.defaultEventAction !== undefined) ? bindings.defaultEventAction : me.defaultEventAction
@@ -326,7 +326,7 @@ Ext.define('Ext.util.KeyNav', {
      */
     getKeyEvent: function(forceKeyDown, configuredEventName) {
         if (forceKeyDown || (Ext.supports.SpecialKeyDownRepeat &amp;&amp; !configuredEventName)) {
-            return 'keydown';
+            return &#39;keydown&#39;;
         } else {
             return configuredEventName||this.eventName;
         }

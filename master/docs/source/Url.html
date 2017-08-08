@@ -40,7 +40,7 @@
  *
  * @class BasiGX.util.Url
  */
-Ext.define('BasiGX.util.Url', {
+Ext.define(&#39;BasiGX.util.Url&#39;, {
     statics: {
 
 <span id='BasiGX-util-Url-static-method-getParamValue'>        /**
@@ -52,7 +52,7 @@ Ext.define('BasiGX.util.Url', {
          * @return {String} The value of the `key`-parameter inside of `url`.
          */
         getParamValue: function(key, url) {
-            var re = new RegExp('[\\?&amp;]' + (key + '') + '=([^&amp;#]*)');
+            var re = new RegExp(&#39;[\\?&amp;]&#39; + (key + &#39;&#39;) + &#39;=([^&amp;#]*)&#39;);
             var regexResult = re.exec(url || window.location.href);
             var value;
             if (regexResult) {
@@ -72,7 +72,7 @@ Ext.define('BasiGX.util.Url', {
          */
         getCurrentAppUrl: function() {
             var loc = window.location;
-            return loc.protocol + '//' + loc.host + loc.pathname + '?';
+            return loc.protocol + &#39;//&#39; + loc.host + loc.pathname + &#39;?&#39;;
         },
 
 <span id='BasiGX-util-Url-static-method-getWebProjectBaseUrl'>        /**
@@ -82,11 +82,11 @@ Ext.define('BasiGX.util.Url', {
          *      assumed herein?
          *
          * @return {String} The base URL including the webproject name (first
-         *     'folder').
+         *     &#39;folder&#39;).
          */
         getWebProjectBaseUrl: function() {
             var loc = window.location;
-            var url = loc.protocol + '//' + loc.host;
+            var url = loc.protocol + &#39;//&#39; + loc.host;
             var webProjectName = window.location.pathname.match(
                 /^\/[\w\-]*\/?/
             )[0];
@@ -102,7 +102,7 @@ Ext.define('BasiGX.util.Url', {
          */
         getProjectBaseUrl: function() {
             var loc = window.location;
-            var baseUrl = loc.protocol + '//' + loc.host + '/';
+            var baseUrl = loc.protocol + &#39;//&#39; + loc.host + &#39;/&#39;;
             return baseUrl;
         }
 

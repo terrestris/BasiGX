@@ -22,10 +22,10 @@
  *
  * See {@link Ext.sparkline.Base the base class} for a simple example.
  */
-Ext.define('Ext.sparkline.Pie', {
-    extend: 'Ext.sparkline.Base',
+Ext.define(&#39;Ext.sparkline.Pie&#39;, {
+    extend: &#39;Ext.sparkline.Base&#39;,
 
-    alias: 'widget.sparklinepie',
+    alias: &#39;widget.sparklinepie&#39;,
 
     config: {
 
@@ -37,7 +37,7 @@ Ext.define('Ext.sparkline.Pie', {
 <span id='Ext-sparkline-Pie-cfg-sliceColors'>        /**
 </span>         * @cfg {String[]} [sliceColors] An array of CSS colro values to apply to the chart slices.
          */
-        sliceColors: ['#3366cc', '#dc3912', '#ff9900', '#109618', '#66aa00', '#dd4477', '#0099c6', '#990099'],
+        sliceColors: [&#39;#3366cc&#39;, &#39;#dc3912&#39;, &#39;#ff9900&#39;, &#39;#109618&#39;, &#39;#66aa00&#39;, &#39;#dd4477&#39;, &#39;#0099c6&#39;, &#39;#990099&#39;],
         
 <span id='Ext-sparkline-Pie-cfg-borderWidth'>        /**
 </span>         * @cfg {Number} [borderWidth=0] Border width in pixels of line round slices.
@@ -47,10 +47,10 @@ Ext.define('Ext.sparkline.Pie', {
 <span id='Ext-sparkline-Pie-cfg-borderColor'>        /**
 </span>         * @cfg {String} [borderColor=#000] Border color of line round slices.
          */
-        borderColor: '#000'
+        borderColor: &#39;#000&#39;
     },
 
-<span id='Ext-sparkline-Pie-cfg-tipTpl'>    tipTpl: '&amp;#9679; {value} ({percent:number(&quot;0.0&quot;)}%)',
+<span id='Ext-sparkline-Pie-cfg-tipTpl'>    tipTpl: &#39;&amp;#9679; {value} ({percent:number(&quot;0.0&quot;)}%)&#39;,
 </span>
 <span id='Ext-sparkline-Pie-method-applyValues'>    // Ensure values is an array of numbers
 </span>    applyValues: function(newValues) {
@@ -151,7 +151,7 @@ Ext.define('Ext.sparkline.Pie', {
                 me.getBorderColor(), null, borderWidth).append();
         }
         for (i = values.length; i--;) {
-            if (values[i]) { // don't render zero values
+            if (values[i]) { // don&#39;t render zero values
                 shape = me.renderSlice(i).append();
                 valueShapes[i] = shape.id; // store just the shapeid
                 shapes[shape.id] = i;

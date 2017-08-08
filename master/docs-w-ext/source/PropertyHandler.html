@@ -18,11 +18,11 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-PropertyHandler'>/**
 </span> * @private
  */
-Ext.define('Ext.fx.PropertyHandler', {
+Ext.define(&#39;Ext.fx.PropertyHandler&#39;, {
 
     /* Begin Definitions */
 
-    requires: ['Ext.fx.DrawPath'],
+    requires: [&#39;Ext.fx.DrawPath&#39;],
 
     statics: {
 <span id='Ext-fx-PropertyHandler-static-property-defaultHandler'>        defaultHandler: {
@@ -31,7 +31,7 @@ Ext.define('Ext.fx.PropertyHandler', {
             scrollRE: /^scroll/i,
 
             computeDelta: function(from, end, damper, initial, attr) {
-                damper = (typeof damper == 'number') ? damper : 1;
+                damper = (typeof damper == &#39;number&#39;) ? damper : 1;
                 var unitRE = this.unitRE,
                     match = unitRE.exec(from),
                     start, units;
@@ -39,7 +39,7 @@ Ext.define('Ext.fx.PropertyHandler', {
                     from = match[1];
                     units = match[2];
                     if (!this.scrollRE.test(attr) &amp;&amp; !units &amp;&amp; this.pixelDefaultsRE.test(attr)) {
-                        units = 'px';
+                        units = &#39;px&#39;;
                     }
                 }
                 from = +from || 0;
@@ -143,7 +143,7 @@ Ext.define('Ext.fx.PropertyHandler', {
             hex3RE: /^#?([0-9A-F]{1})([0-9A-F]{1})([0-9A-F]{1})$/i,
 
             parseColor : function(color, damper) {
-                damper = (typeof damper == 'number') ? damper : 1;
+                damper = (typeof damper == &#39;number&#39;) ? damper : 1;
                 var out    = false,
                     reList = [this.hexRE, this.rgbRE, this.hex3RE],
                     length = reList.length,
@@ -181,8 +181,8 @@ Ext.define('Ext.fx.PropertyHandler', {
                     tend = typeof end;
 
                 //Extra check for when the color string is not recognized.
-                if (tfrom === 'string' || tfrom === 'undefined' ||
-                    tend === 'string' || tend === 'undefined') {
+                if (tfrom === &#39;string&#39; || tfrom === &#39;undefined&#39; ||
+                    tend === &#39;string&#39; || tend === &#39;undefined&#39;) {
                     return end || start;
                 }
 
@@ -218,19 +218,19 @@ Ext.define('Ext.fx.PropertyHandler', {
                     if (val) {
                         from = val.from;
                         delta = val.delta;
-                        //multiple checks to reformat the color if it can't recognized by computeDelta.
-                        val = (typeof val === 'object' &amp;&amp; 'red' in val) ?
-                                'rgb(' + val.red + ', ' + val.green + ', ' + val.blue + ')' : val;
-                        val = (typeof val === 'object' &amp;&amp; val.length)? val[0] : val;
-                        if (typeof val === 'undefined') {
+                        //multiple checks to reformat the color if it can&#39;t recognized by computeDelta.
+                        val = (typeof val === &#39;object&#39; &amp;&amp; &#39;red&#39; in val) ?
+                                &#39;rgb(&#39; + val.red + &#39;, &#39; + val.green + &#39;, &#39; + val.blue + &#39;)&#39; : val;
+                        val = (typeof val === &#39;object&#39; &amp;&amp; val.length)? val[0] : val;
+                        if (typeof val === &#39;undefined&#39;) {
                             return [];
                         }
-                        parsedString = typeof val === 'string'? val :
-                            'rgb(' + [
+                        parsedString = typeof val === &#39;string&#39;? val :
+                            &#39;rgb(&#39; + [
                                   (from.red + Math.round(delta.red * easing)) % 256,
                                   (from.green + Math.round(delta.green * easing)) % 256,
                                   (from.blue + Math.round(delta.blue * easing)) % 256
-                              ].join(',') + ')';
+                              ].join(&#39;,&#39;) + &#39;)&#39;;
                         out.push([
                             values[i][0],
                             parsedString
@@ -242,7 +242,7 @@ Ext.define('Ext.fx.PropertyHandler', {
         },
 <span id='Ext-fx-PropertyHandler-static-property-object'>        object: {
 </span>            interpolate: function(prop, damper) {
-                damper = (typeof damper === 'number') ? damper : 1;
+                damper = (typeof damper === &#39;number&#39;) ? damper : 1;
                 var out = {},
                     p;
                 for(p in prop) {
@@ -303,7 +303,7 @@ Ext.define('Ext.fx.PropertyHandler', {
 
 <span id='Ext-fx-PropertyHandler-static-property-path'>        path: {
 </span>            computeDelta: function(from, end, damper, initial) {
-                damper = (typeof damper === 'number') ? damper : 1;
+                damper = (typeof damper === &#39;number&#39;) ? damper : 1;
                 var start;
                 from = +from || 0;
                 end = +end || 0;
@@ -363,9 +363,9 @@ Ext.define('Ext.fx.PropertyHandler', {
                         for (k = 1; k &lt; pointsLn; k++) {
                             calcPath.push(deltaPath[j][k].from + deltaPath[j][k].delta * easing);
                         }
-                        newPath.push(calcPath.join(','));
+                        newPath.push(calcPath.join(&#39;,&#39;));
                     }
-                    out.push([values[i][0], newPath.join(',')]);
+                    out.push([values[i][0], newPath.join(&#39;,&#39;)]);
                 }
                 return out;
             }
@@ -375,15 +375,15 @@ Ext.define('Ext.fx.PropertyHandler', {
 }, function() {
     //set color properties to color interpolator
     var props  = [
-            'outlineColor',
-            'backgroundColor',
-            'borderColor',
-            'borderTopColor',
-            'borderRightColor',
-            'borderBottomColor',
-            'borderLeftColor',
-            'fill',
-            'stroke'
+            &#39;outlineColor&#39;,
+            &#39;backgroundColor&#39;,
+            &#39;borderColor&#39;,
+            &#39;borderTopColor&#39;,
+            &#39;borderRightColor&#39;,
+            &#39;borderBottomColor&#39;,
+            &#39;borderLeftColor&#39;,
+            &#39;fill&#39;,
+            &#39;stroke&#39;
         ],
         length = props.length,
         i      = 0,
@@ -395,7 +395,7 @@ Ext.define('Ext.fx.PropertyHandler', {
     }
     
     //set string properties to string
-    props  = ['cursor'];
+    props  = [&#39;cursor&#39;];
     length = props.length;
     i      = 0;
 

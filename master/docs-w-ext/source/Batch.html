@@ -23,9 +23,9 @@
  *
  * Usually these are only used internally by {@link Ext.data.proxy.Proxy} classes.
  */
-Ext.define('Ext.data.Batch', {
+Ext.define(&#39;Ext.data.Batch&#39;, {
     mixins: {
-        observable: 'Ext.mixin.Observable'
+        observable: &#39;Ext.mixin.Observable&#39;
     },
 
     config: {    
@@ -34,7 +34,7 @@ Ext.define('Ext.data.Batch', {
         * True to pause the execution of the batch if any operation encounters an exception
         * (defaults to false). If you set this to true you are responsible for implementing the appropriate
         * handling logic and restarting or discarding the batch as needed. There are different ways you could 
-        * do this, e.g. by handling the batch's {@link #event-exception} event directly, or perhaps by overriding
+        * do this, e.g. by handling the batch&#39;s {@link #event-exception} event directly, or perhaps by overriding
         * {@link Ext.data.ProxyStore#onBatchException onBatchException} at the store level. If you do pause
         * and attempt to handle the exception you can call {@link #retry} to process the same operation again. 
         * 
@@ -214,7 +214,7 @@ Ext.define('Ext.data.Batch', {
      * unsuccessful operation.
      * 
      * To retry processing the current operation before continuing to the rest of the batch (e.g.
-     * because you explicitly handled the operation's exception), call {@link #retry} instead.
+     * because you explicitly handled the operation&#39;s exception), call {@link #retry} instead.
      * 
      * Note that if the batch is already running any call to start will be ignored.
      * 
@@ -349,7 +349,7 @@ Ext.define('Ext.data.Batch', {
         if (operation === undefined) {
             me.running = false;
             me.complete = true;
-            me.fireEvent('complete', me, operations[operations.length - 1]);
+            me.fireEvent(&#39;complete&#39;, me, operations[operations.length - 1]);
         } else {
             me.current = index;
             operation.setInternalCallback(me.onOperationComplete);
@@ -366,13 +366,13 @@ Ext.define('Ext.data.Batch', {
         if (exception) {
             me.exception = true;
             me.exceptions.push(operation);
-            me.fireEvent('exception', me, operation);
+            me.fireEvent(&#39;exception&#39;, me, operation);
         }
 
         if (exception &amp;&amp; me.getPauseOnException()) {
             me.pause();
         } else {
-            me.fireEvent('operationcomplete', me, operation);
+            me.fireEvent(&#39;operationcomplete&#39;, me, operation);
             me.runNextOperation();
         }
     }

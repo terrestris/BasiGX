@@ -20,10 +20,10 @@
  * event option.
  * @private
  */
-Ext.define('Ext.mixin.ComponentDelegation', {
-    extend: 'Ext.Mixin',
+Ext.define(&#39;Ext.mixin.ComponentDelegation&#39;, {
+    extend: &#39;Ext.Mixin&#39;,
 <span id='Ext-mixin-ComponentDelegation-property-mixinConfig'>    mixinConfig: {
-</span>        id: 'componentDelegation'
+</span>        id: &#39;componentDelegation&#39;
     },
 
 <span id='Ext-mixin-ComponentDelegation-property-privates'>    privates: {
@@ -49,7 +49,7 @@ Ext.define('Ext.mixin.ComponentDelegation', {
                 priority = (options &amp;&amp; options.priority);
 
                 if (!priority) { // priority option takes precedence over order
-                    // do not mutate the user's options
+                    // do not mutate the user&#39;s options
                     options = options ? Ext.Object.chain(options) : {};
                     options.priority = me.$orderToPriority[order];
                 }
@@ -57,8 +57,8 @@ Ext.define('Ext.mixin.ComponentDelegation', {
 
             //&lt;debug&gt;
             if (options.target) {
-                Ext.raise(&quot;Cannot add '&quot; + eventName + &quot;' listener to component: '&quot;
-                + me.id + &quot;' - 'delegate' and 'target' event options are incompatible.&quot;);
+                Ext.raise(&quot;Cannot add &#39;&quot; + eventName + &quot;&#39; listener to component: &#39;&quot;
+                + me.id + &quot;&#39; - &#39;delegate&#39; and &#39;target&#39; event options are incompatible.&quot;);
             }
             //&lt;/debug&gt;
 

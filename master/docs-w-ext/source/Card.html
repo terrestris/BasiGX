@@ -18,16 +18,16 @@
   <pre class="prettyprint lang-js"><span id='Ext-fx-layout-Card'>/**
 </span> * @private
  */
-Ext.define('Ext.fx.layout.Card', {
+Ext.define(&#39;Ext.fx.layout.Card&#39;, {
     requires: [
-        'Ext.fx.layout.card.Slide',
-        'Ext.fx.layout.card.Cover',
-        'Ext.fx.layout.card.Reveal',
-        'Ext.fx.layout.card.Fade',
-        'Ext.fx.layout.card.Flip',
-        'Ext.fx.layout.card.Pop',
-//        'Ext.fx.layout.card.Cube',
-        'Ext.fx.layout.card.Scroll'
+        &#39;Ext.fx.layout.card.Slide&#39;,
+        &#39;Ext.fx.layout.card.Cover&#39;,
+        &#39;Ext.fx.layout.card.Reveal&#39;,
+        &#39;Ext.fx.layout.card.Fade&#39;,
+        &#39;Ext.fx.layout.card.Flip&#39;,
+        &#39;Ext.fx.layout.card.Pop&#39;,
+//        &#39;Ext.fx.layout.card.Cube&#39;,
+        &#39;Ext.fx.layout.card.Scroll&#39;
     ],
 
 <span id='Ext-fx-layout-Card-method-constructor'>    constructor: function(config) {
@@ -38,7 +38,7 @@ Ext.define('Ext.fx.layout.Card', {
             return null;
         }
 
-        if (typeof config == 'string') {
+        if (typeof config == &#39;string&#39;) {
             type = config;
 
             config = {};
@@ -51,11 +51,11 @@ Ext.define('Ext.fx.layout.Card', {
 
         if (type) {
 
-            defaultClass = Ext.ClassManager.getByAlias('fx.layout.card.' + type);
+            defaultClass = Ext.ClassManager.getByAlias(&#39;fx.layout.card.&#39; + type);
 
             //&lt;debug&gt;
             if (!defaultClass) {
-                Ext.Logger.error(&quot;Unknown card animation type: '&quot; + type + &quot;'&quot;);
+                Ext.Logger.error(&quot;Unknown card animation type: &#39;&quot; + type + &quot;&#39;&quot;);
             }
             //&lt;/debug&gt;
         }

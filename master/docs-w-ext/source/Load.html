@@ -28,31 +28,31 @@
  *   - **`data`** property : Object
  *
  * The `data` property contains the values of Fields to load. The individual value object for each Field is passed to
- * the Field's {@link Ext.form.field.Field#setValue setValue} method.
+ * the Field&#39;s {@link Ext.form.field.Field#setValue setValue} method.
  *
  * ## JSON Packets
  *
  * By default, response packets are assumed to be JSON, so for the following form load call:
  *
  *     var myFormPanel = new Ext.form.Panel({
- *         title: 'Client and routing info',
+ *         title: &#39;Client and routing info&#39;,
  *         renderTo: Ext.getBody(),
  *         defaults: {
- *             xtype: 'textfield'
+ *             xtype: &#39;textfield&#39;
  *         },
  *         items: [{
- *             fieldLabel: 'Client',
- *             name: 'clientName'
+ *             fieldLabel: &#39;Client&#39;,
+ *             name: &#39;clientName&#39;
  *         }, {
- *             fieldLabel: 'Port of loading',
- *             name: 'portOfLoading'
+ *             fieldLabel: &#39;Port of loading&#39;,
+ *             name: &#39;portOfLoading&#39;
  *         }, {
- *             fieldLabel: 'Port of discharge',
- *             name: 'portOfDischarge'
+ *             fieldLabel: &#39;Port of discharge&#39;,
+ *             name: &#39;portOfDischarge&#39;
  *         }]
  *     });
  *     myFormPanel.getForm().load({
- *         url: '/getRoutingInfo.php',
+ *         url: &#39;/getRoutingInfo.php&#39;,
  *         params: {
  *             consignmentRef: myConsignmentRef
  *         },
@@ -79,16 +79,16 @@
  *         errorMessage: &quot;Consignment reference not found&quot;
  *     }
  *
- * Other data may be placed into the response for processing the {@link Ext.form.Basic Form}'s callback or event handler
+ * Other data may be placed into the response for processing the {@link Ext.form.Basic Form}&#39;s callback or event handler
  * methods. The object decoded from this JSON is available in the {@link Ext.form.action.Action#result result} property.
  */
-Ext.define('Ext.form.action.Load', {
-    extend:'Ext.form.action.Action',
-    requires: ['Ext.data.Connection'],
-    alternateClassName: 'Ext.form.Action.Load',
-    alias: 'formaction.load',
+Ext.define(&#39;Ext.form.action.Load&#39;, {
+    extend:&#39;Ext.form.action.Action&#39;,
+    requires: [&#39;Ext.data.Connection&#39;],
+    alternateClassName: &#39;Ext.form.Action.Load&#39;,
+    alias: &#39;formaction.load&#39;,
 
-<span id='Ext-form-action-Load-property-type'>    type: 'load',
+<span id='Ext-form-action-Load-property-type'>    type: &#39;load&#39;,
 </span>
 <span id='Ext-form-action-Load-method-run'>    /**
 </span>     * @private

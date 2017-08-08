@@ -22,9 +22,9 @@
  *
  *     @example
  *     // display a dropdown menu:
- *     Ext.create('Ext.button.Split', {
+ *     Ext.create(&#39;Ext.button.Split&#39;, {
  *         renderTo: Ext.getBody(),
- *         text: 'Options',
+ *         text: &#39;Options&#39;,
  *         // handle a click on the button itself
  *         handler: function() {
  *             alert(&quot;The button was clicked&quot;);
@@ -32,8 +32,8 @@
  *         menu: new Ext.menu.Menu({
  *             items: [
  *                 // these will render as dropdown menu items when the arrow is clicked:
- *                 {text: 'Item 1', handler: function(){ alert(&quot;Item 1 clicked&quot;); }},
- *                 {text: 'Item 2', handler: function(){ alert(&quot;Item 2 clicked&quot;); }}
+ *                 {text: &#39;Item 1&#39;, handler: function(){ alert(&quot;Item 1 clicked&quot;); }},
+ *                 {text: &#39;Item 2&#39;, handler: function(){ alert(&quot;Item 2 clicked&quot;); }}
  *             ]
  *         })
  *     });
@@ -41,18 +41,18 @@
  * Instead of showing a menu, you can provide any type of custom functionality you want when the dropdown
  * arrow is clicked:
  *
- *     Ext.create('Ext.button.Split', {
- *         renderTo: 'button-ct',
- *         text: 'Options',
+ *     Ext.create(&#39;Ext.button.Split&#39;, {
+ *         renderTo: &#39;button-ct&#39;,
+ *         text: &#39;Options&#39;,
  *         handler: optionsHandler,
  *         arrowHandler: myCustomHandler
  *     });
  *
  */
-Ext.define('Ext.button.Split', {
-    extend: 'Ext.button.Button',
-    alternateClassName: 'Ext.SplitButton',
-    alias: 'widget.splitbutton',
+Ext.define(&#39;Ext.button.Split&#39;, {
+    extend: &#39;Ext.button.Button&#39;,
+    alternateClassName: &#39;Ext.SplitButton&#39;,
+    alias: &#39;widget.splitbutton&#39;,
 
 <span id='Ext-button-Split-property-isSplitButton'>    isSplitButton: true,
 </span>    
@@ -72,28 +72,28 @@ Ext.define('Ext.button.Split', {
 <span id='Ext-button-Split-property-arrowCls'>    /**
 </span>     * @private
      */
-    arrowCls: 'split',
+    arrowCls: &#39;split&#39;,
 <span id='Ext-button-Split-property-split'>    split: true,
 </span>
 <span id='Ext-button-Split-event-arrowclick'>    /**
 </span>     * @event arrowclick
-     * Fires when this button's arrow is clicked.
+     * Fires when this button&#39;s arrow is clicked.
      * @param {Ext.button.Split} this
      * @param {Event} e The click event.
      */
 
 <span id='Ext-button-Split-method-initComponent'>    // It is possible to use both menu and arrowHandler with a Split button, which is confusing
 </span>    // and will clash with WAI-ARIA requirements. So we check that and warn if need be.
-    // Unfortunately this won't work with arrowclick event that can be subscribed to
-    // dynamically but we don't want to run these checks at run time so there's a limit
+    // Unfortunately this won&#39;t work with arrowclick event that can be subscribed to
+    // dynamically but we don&#39;t want to run these checks at run time so there&#39;s a limit
     // to what we can do about it.
     //&lt;debug&gt;
     initComponent: function() {
         var me = this;
         
-        // Don't warn if we're under the slicer. Only check hasListeners of the component
+        // Don&#39;t warn if we&#39;re under the slicer. Only check hasListeners of the component
         // instance; there could be listeners on the EventBus inherited via prototype.
-        if (me.menu &amp;&amp; (me.arrowHandler || me.hasListeners.hasOwnProperty('arrowclick'))) {
+        if (me.menu &amp;&amp; (me.arrowHandler || me.hasListeners.hasOwnProperty(&#39;arrowclick&#39;))) {
             Ext.ariaWarn(me,
                 &quot;Using both menu and arrowHandler config options in Split buttons &quot; +
                 &quot;leads to confusing user experience and conflicts with accessibility &quot; +
@@ -118,14 +118,14 @@ Ext.define('Ext.button.Split', {
         
         ariaAttr = me.ariaArrowElAttributes || {};
         
-        ariaAttr['aria-hidden']   = !!me.hidden;
-        ariaAttr['aria-disabled'] = !!me.disabled;
+        ariaAttr[&#39;aria-hidden&#39;]   = !!me.hidden;
+        ariaAttr[&#39;aria-disabled&#39;] = !!me.disabled;
         
         if (me.arrowTooltip) {
-            ariaAttr['aria-label'] = me.arrowTooltip;
+            ariaAttr[&#39;aria-label&#39;] = me.arrowTooltip;
         }
         else {
-            ariaAttr['aria-labelledby'] = me.id;
+            ariaAttr[&#39;aria-labelledby&#39;] = me.id;
         }
         
         data.arrowElAttributes = ariaAttr;
@@ -152,7 +152,7 @@ Ext.define('Ext.button.Split', {
         el = me.arrowEl;
         
         if (el) {
-            el.dom.setAttribute('data-componentid', me.id);
+            el.dom.setAttribute(&#39;data-componentid&#39;, me.id);
             el.setVisibilityMode(Ext.dom.Element.DISPLAY);
             
             el.on({
@@ -164,7 +164,7 @@ Ext.define('Ext.button.Split', {
     },
 
 <span id='Ext-button-Split-method-setArrowHandler'>    /**
-</span>     * Sets this button's arrow click handler.
+</span>     * Sets this button&#39;s arrow click handler.
      * @param {Function} handler The function to call when the arrow is clicked.
      * @param {Object} scope (optional) Scope for the function passed above.
      */
@@ -178,7 +178,7 @@ Ext.define('Ext.button.Split', {
      */
     onClick: function(e) {
         var me = this,
-            arrowKeydown = e.type === 'keydown' &amp;&amp; e.target === me.arrowEl.dom;
+            arrowKeydown = e.type === &#39;keydown&#39; &amp;&amp; e.target === me.arrowEl.dom;
 
         me.doPreventDefault(e);
         
@@ -207,8 +207,8 @@ Ext.define('Ext.button.Split', {
         
         // May not be rendered yet
         if (arrowEl) {
-            arrowEl.dom.setAttribute('tabIndex', me.tabIndex);
-            arrowEl.dom.setAttribute('aria-disabled', 'false');
+            arrowEl.dom.setAttribute(&#39;tabIndex&#39;, me.tabIndex);
+            arrowEl.dom.setAttribute(&#39;aria-disabled&#39;, &#39;false&#39;);
         }
     },
     
@@ -220,19 +220,19 @@ Ext.define('Ext.button.Split', {
         
         // May not be rendered yet
         if (arrowEl) {
-            arrowEl.dom.removeAttribute('tabIndex');
-            arrowEl.dom.setAttribute('aria-disabled', 'true');
+            arrowEl.dom.removeAttribute(&#39;tabIndex&#39;);
+            arrowEl.dom.setAttribute(&#39;aria-disabled&#39;, &#39;true&#39;);
         }
     },
     
 <span id='Ext-button-Split-method-afterHide'>    afterHide: function(cb, scope) {
 </span>        this.callParent([cb, scope]);
-        this.arrowEl.dom.setAttribute('aria-hidden', 'true');
+        this.arrowEl.dom.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);
     },
     
 <span id='Ext-button-Split-method-afterShow'>    afterShow: function(animateTarget, cb, scope) {
 </span>        this.callParent([animateTarget, cb, scope]);
-        this.arrowEl.dom.setAttribute('aria-hidden', 'false');
+        this.arrowEl.dom.setAttribute(&#39;aria-hidden&#39;, &#39;false&#39;);
     },
     
 <span id='Ext-button-Split-property-privates'>    privates: {
@@ -312,7 +312,7 @@ Ext.define('Ext.button.Split', {
             
             this.callParent();
             
-            arrowEl.dom.setAttribute('tabIndex', this.tabIndex);
+            arrowEl.dom.setAttribute(&#39;tabIndex&#39;, this.tabIndex);
             arrowEl.setVisible(true);
         },
         
@@ -321,7 +321,7 @@ Ext.define('Ext.button.Split', {
             
             this.callParent();
             
-            arrowEl.dom.removeAttribute('tabIndex');
+            arrowEl.dom.removeAttribute(&#39;tabIndex&#39;);
             arrowEl.setVisible(false);
         }
     }

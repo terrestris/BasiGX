@@ -28,31 +28,31 @@
  *
  *     @example
  *     // Explicitly create a Container
- *     Ext.create('Ext.container.Container', {
+ *     Ext.create(&#39;Ext.container.Container&#39;, {
  *         layout: {
- *             type: 'hbox'
+ *             type: &#39;hbox&#39;
  *         },
  *         width: 400,
  *         renderTo: Ext.getBody(),
  *         border: 1,
- *         style: {borderColor:'#000000', borderStyle:'solid', borderWidth:'1px'},
+ *         style: {borderColor:&#39;#000000&#39;, borderStyle:&#39;solid&#39;, borderWidth:&#39;1px&#39;},
  *         defaults: {
  *             labelWidth: 80,
  *             // implicitly create Container by specifying xtype
- *             xtype: 'datefield',
+ *             xtype: &#39;datefield&#39;,
  *             flex: 1,
  *             style: {
- *                 padding: '10px'
+ *                 padding: &#39;10px&#39;
  *             }
  *         },
  *         items: [{
- *             xtype: 'datefield',
- *             name: 'startDate',
- *             fieldLabel: 'Start date'
+ *             xtype: &#39;datefield&#39;,
+ *             name: &#39;startDate&#39;,
+ *             fieldLabel: &#39;Start date&#39;
  *         },{
- *             xtype: 'datefield',
- *             name: 'endDate',
- *             fieldLabel: 'End date'
+ *             xtype: &#39;datefield&#39;,
+ *             name: &#39;endDate&#39;,
+ *             fieldLabel: &#39;End date&#39;
  *         }]
  *     });
  *
@@ -63,7 +63,7 @@
  *
  * When either specifying child `{@link #cfg-items}` of a Container, or dynamically {@link #method-add adding} Components to a
  * Container, remember to consider how you wish the Container to arrange those child elements, and whether those child
- * elements need to be sized using one of Ext's built-in `{@link #layout}` schemes. By default, Containers use the
+ * elements need to be sized using one of Ext&#39;s built-in `{@link #layout}` schemes. By default, Containers use the
  * {@link Ext.layout.container.Auto Auto} scheme which only renders child components, appending them one after the other
  * inside the Container, and **does not apply any sizing** at all.
  *
@@ -77,10 +77,10 @@
  * Ext.layout.container.HBox, and Ext.layout.container.Table. For example:
  *
  *     //  Create the GridPanel.
- *     var myNewGrid = Ext.create('Ext.grid.Panel', {
+ *     var myNewGrid = Ext.create(&#39;Ext.grid.Panel&#39;, {
  *         store: myStore,
  *         headers: myHeaders,
- *         title: 'Results', // the title becomes the title of the tab
+ *         title: &#39;Results&#39;, // the title becomes the title of the tab
  *     });
  *
  *     myTabPanel.add(myNewGrid); // Ext.tab.Panel implicitly uses Ext.layout.container.Card
@@ -103,8 +103,8 @@
  * This functionality allows the connection of encapsulated references between containers
  * and their child components declaratively. Simple usage:
  * 
- *     Ext.define('Login', {
- *         extend: 'Ext.window.Window',
+ *     Ext.define(&#39;Login&#39;, {
+ *         extend: &#39;Ext.window.Window&#39;,
  *
  *         // This config is not compatible with the more common &quot;controller&quot; config
  *         // used to specify a ViewController for the view. When a ViewController is
@@ -113,24 +113,24 @@
  *         // demonstration purposes.
  *         referenceHolder: true,
  *
- *         title: 'Login',
+ *         title: &#39;Login&#39;,
  *         items: [{
- *             xtype: 'form',
+ *             xtype: &#39;form&#39;,
  *             items: [{
- *                 xtype: 'textfield',
- *                 reference: 'username', // A named reference to be held on the referenceHolder
- *                 name: 'username',
- *                 fieldLabel: 'Username'
+ *                 xtype: &#39;textfield&#39;,
+ *                 reference: &#39;username&#39;, // A named reference to be held on the referenceHolder
+ *                 name: &#39;username&#39;,
+ *                 fieldLabel: &#39;Username&#39;
  *             }, {
- *                 xtype: 'textfield',
- *                 reference: 'password', // A named reference to be held on the referenceHolder
- *                 name: 'password',
- *                 fieldLabel: 'Password'
+ *                 xtype: &#39;textfield&#39;,
+ *                 reference: &#39;password&#39;, // A named reference to be held on the referenceHolder
+ *                 name: &#39;password&#39;,
+ *                 fieldLabel: &#39;Password&#39;
  *             }] 
  *         }] 
  *     });
  *     var w = new Login();
- *     console.log(w.lookupReference('password')); // The password field
+ *     console.log(w.lookupReference(&#39;password&#39;)); // The password field
  * 
  * Reference holders are also encapsulated, so a reference will only be put on the closest
  * reference holder above it in the component hierarchy:
@@ -138,60 +138,60 @@
  *     var ct = new Ext.container.Container({
  *         referenceHolder: true,
  *         items: [{
- *             xtype: 'container',
+ *             xtype: &#39;container&#39;,
  *             referenceHolder: true,
- *             reference: 'innerCt1',
+ *             reference: &#39;innerCt1&#39;,
  *             items: [{
- *                 xtype: 'component',
- *                 reference: 'a',
- *                 id: 'a1'
+ *                 xtype: &#39;component&#39;,
+ *                 reference: &#39;a&#39;,
+ *                 id: &#39;a1&#39;
  *             }, {
- *                 xtype: 'component',
- *                 reference: 'b',
- *                 id: 'b1'
+ *                 xtype: &#39;component&#39;,
+ *                 reference: &#39;b&#39;,
+ *                 id: &#39;b1&#39;
  *             }]
  *         }, {
- *             xtype: 'container',
+ *             xtype: &#39;container&#39;,
  *             referenceHolder: true,
- *             reference: 'innerCt2',
+ *             reference: &#39;innerCt2&#39;,
  *             items: [{
- *                 xtype: 'component',
- *                 reference: 'a',
- *                 id: 'a2'
+ *                 xtype: &#39;component&#39;,
+ *                 reference: &#39;a&#39;,
+ *                 id: &#39;a2&#39;
  *             }, {
- *                 xtype: 'component',
- *                 reference: 'b',
- *                 id: 'b2'
+ *                 xtype: &#39;component&#39;,
+ *                 reference: &#39;b&#39;,
+ *                 id: &#39;b2&#39;
  *             }]
  *         }]
  *     });
  *     // The main container will not have references to a/b, each innerCt will
- *     console.log(ct.lookupReference('a'), ct.lookupReference('b'));
- *     var inner1 = ct.lookupReference('innerCt1');
- *     var inner2 = ct.lookupReference('innerCt2');
+ *     console.log(ct.lookupReference(&#39;a&#39;), ct.lookupReference(&#39;b&#39;));
+ *     var inner1 = ct.lookupReference(&#39;innerCt1&#39;);
+ *     var inner2 = ct.lookupReference(&#39;innerCt2&#39;);
  * 
- *     console.log(inner1.lookupReference('a').id, inner1.lookupReference('b').id);
- *     console.log(inner2.lookupReference('a').id, inner2.lookupReference('b').id);
+ *     console.log(inner1.lookupReference(&#39;a&#39;).id, inner1.lookupReference(&#39;b&#39;).id);
+ *     console.log(inner2.lookupReference(&#39;a&#39;).id, inner2.lookupReference(&#39;b&#39;).id);
  *     
  * If the view has a controller attached, it will automatically become a {@link #referenceHolder}.
  * References will be available in both the view and the controller:
  * 
- *     Ext.define('ProfileController', {
- *         extend: 'Ext.app.ViewController',
- *         alias: 'controller.profile',
+ *     Ext.define(&#39;ProfileController&#39;, {
+ *         extend: &#39;Ext.app.ViewController&#39;,
+ *         alias: &#39;controller.profile&#39;,
  *   
  *         init: function() {
- *             console.log(this.lookupReference('firstName'));
+ *             console.log(this.lookupReference(&#39;firstName&#39;));
  *         }
  *     });
  *
- *     Ext.define('Profile', {
- *         extend: 'Ext.form.Panel',
- *         controller: 'profile',
+ *     Ext.define(&#39;Profile&#39;, {
+ *         extend: &#39;Ext.form.Panel&#39;,
+ *         controller: &#39;profile&#39;,
  *         items: [{
- *             xtype: 'textfield',
- *             reference: 'firstName',
- *             fieldLabel: 'First Name'
+ *             xtype: &#39;textfield&#39;,
+ *             reference: &#39;firstName&#39;,
+ *             fieldLabel: &#39;First Name&#39;
  *         }]
  *     });
  * 
@@ -202,33 +202,33 @@
  * Events can use the default listener scope to determine at runtime the appropriate place
  * to fire. This allows for declarative binding of events in a useful way:
  * 
- *     Ext.define('MyView', {
- *         extend: 'Ext.container.Container',
+ *     Ext.define(&#39;MyView&#39;, {
+ *         extend: &#39;Ext.container.Container&#39;,
  *         defaultListenerScope: true,
  *         referenceHolder: true,
  *         items: [{
- *             xtype: 'textfield',
- *             reference: 'myfield'
+ *             xtype: &#39;textfield&#39;,
+ *             reference: &#39;myfield&#39;
  *         }, {
- *             xtype: 'button',
- *             text: 'Set to A',
+ *             xtype: &#39;button&#39;,
+ *             text: &#39;Set to A&#39;,
  *             listeners: {
- *                 click: 'onButtonAClick'
+ *                 click: &#39;onButtonAClick&#39;
  *             }
  *         }, {
- *             xtype: 'button',
- *             text: 'Set to B',
+ *             xtype: &#39;button&#39;,
+ *             text: &#39;Set to B&#39;,
  *             listeners: {
- *                 click: 'onButtonBClick'
+ *                 click: &#39;onButtonBClick&#39;
  *             }
  *         }],
  * 
  *         onButtonAClick: function() {
- *             this.lookupReference('myfield').setValue('A');
+ *             this.lookupReference(&#39;myfield&#39;).setValue(&#39;A&#39;);
  *         },
  * 
  *         onButtonBClick: function() {
- *             this.lookupReference('myfield').setValue('B');
+ *             this.lookupReference(&#39;myfield&#39;).setValue(&#39;B&#39;);
  *         }
  *     });
  *     
@@ -238,38 +238,38 @@
  *     var ct = new Ext.container.Container({
  *         defaultListenerScope: true,
  *         onCustomEvent: function() {
- *             console.log('Outer called'); // Will NOT be called
+ *             console.log(&#39;Outer called&#39;); // Will NOT be called
  *         },
  *         items: [{
- *             xtype: 'container',
+ *             xtype: &#39;container&#39;,
  *             defaultListenerScope: true,
  *             onCustomEvent: function() {
- *                 console.log('Inner called'); // Will be called
+ *                 console.log(&#39;Inner called&#39;); // Will be called
  *             },
  *             items: [{
- *                 xtype: 'component',
- *                 itemId: 'child',
+ *                 xtype: &#39;component&#39;,
+ *                 itemId: &#39;child&#39;,
  *                 listeners: {
- *                     customevent: 'onCustomEvent'
+ *                     customevent: &#39;onCustomEvent&#39;
  *                 }
  *             }]
  *         }]
  *     });
  *     // The main container will not have references to a/b, each innerCt will
- *     console.log(ct.lookupReference('a'), ct.lookupReference('b'));
- *     var inner1 = ct.lookupReference('innerCt1');
- *     var inner2 = ct.lookupReference('innerCt2');
+ *     console.log(ct.lookupReference(&#39;a&#39;), ct.lookupReference(&#39;b&#39;));
+ *     var inner1 = ct.lookupReference(&#39;innerCt1&#39;);
+ *     var inner2 = ct.lookupReference(&#39;innerCt2&#39;);
  * 
- *     console.log(inner1.lookupReference('a').id, inner1.lookupReference('b').id);
- *     console.log(inner2.lookupReference('a').id, inner2.lookupReference('b').id);
+ *     console.log(inner1.lookupReference(&#39;a&#39;).id, inner1.lookupReference(&#39;b&#39;).id);
+ *     console.log(inner2.lookupReference(&#39;a&#39;).id, inner2.lookupReference(&#39;b&#39;).id);
  * 
  * Similar to references, if a {@link Ext.app.ViewController} is attached to this view, it becomes
  * the {@link #defaultListenerScope}, which means un-scoped, late bound events will be directed to the
  * controller. This is powerful as it allows views to be totally declarative:
  * 
- *     Ext.define('MyApp.controller.Login', {
- *         extend : 'Ext.app.ViewController',
- *         alias : 'controller.login',
+ *     Ext.define(&#39;MyApp.controller.Login&#39;, {
+ *         extend : &#39;Ext.app.ViewController&#39;,
+ *         alias : &#39;controller.login&#39;,
  *   
  *         init: function() {
  *             this.sendCount = 0;    
@@ -286,10 +286,10 @@
  *         },
  *
  *         login : function() {
- *            var form = this.lookupReference('form');
- *             this.lookupReference('error').hide();
+ *            var form = this.lookupReference(&#39;form&#39;);
+ *             this.lookupReference(&#39;error&#39;).hide();
  *             if (form.isValid()) {
- *                 console.log('Do the login!');
+ *                 console.log(&#39;Do the login!&#39;);
  *                 // Server responded...
  *                 if (++this.sendCount % 2 === 0) {
  *                     this.onServerSuccess();
@@ -301,62 +301,62 @@
  *   
  *         onServerSuccess: function() {
  *             // Proceed   
- *             console.log('All good');
+ *             console.log(&#39;All good&#39;);
  *         },
  *   
  *         onServerFailure: function() {
- *             var error = this.lookupReference('error');
- *             error.update('Invalid username/password');
+ *             var error = this.lookupReference(&#39;error&#39;);
+ *             error.update(&#39;Invalid username/password&#39;);
  *             error.show();
  *         }
  *     });
  *
- *     Ext.define('MyApp.view.Login', {
- *         extend : 'Ext.window.Window',
- *         controller : 'login',
+ *     Ext.define(&#39;MyApp.view.Login&#39;, {
+ *         extend : &#39;Ext.window.Window&#39;,
+ *         controller : &#39;login&#39;,
  *         referenceHolder: true,
  *
- *         title : 'Login',
+ *         title : &#39;Login&#39;,
  *         width : 400,
  *
  *         items : [{
- *             xtype : 'form',
- *             reference : 'form',
+ *             xtype : &#39;form&#39;,
+ *             reference : &#39;form&#39;,
  *             border : false,
  *             bodyPadding : 10,
- *             defaultType : 'textfield',
+ *             defaultType : &#39;textfield&#39;,
  *             defaults : {
- *                 anchor : '90%',
+ *                 anchor : &#39;90%&#39;,
  *                 allowBlank : false,
  *                 enableKeyEvents : true
  *             },
  *             items : [{
- *                 xtype: 'component',
- *                 reference: 'error',
+ *                 xtype: &#39;component&#39;,
+ *                 reference: &#39;error&#39;,
  *                 hidden: true,
- *                 margin: '0 0 10 0',
- *                 style: 'color: red;'
+ *                 margin: &#39;0 0 10 0&#39;,
+ *                 style: &#39;color: red;&#39;
  *             }, {
- *                 name : 'username',
- *                 fieldLabel : 'Username',
- *                 reference : 'username',
+ *                 name : &#39;username&#39;,
+ *                 fieldLabel : &#39;Username&#39;,
+ *                 reference : &#39;username&#39;,
  *                 listeners : {
- *                     specialkey : 'onFieldSpecialKey'
+ *                     specialkey : &#39;onFieldSpecialKey&#39;
  *                 }
  *             }, {
- *                 name : 'password',
- *                 fieldLabel : 'Password',
- *                 reference : 'password',
- *                 inputType : 'password',
+ *                 name : &#39;password&#39;,
+ *                 fieldLabel : &#39;Password&#39;,
+ *                 reference : &#39;password&#39;,
+ *                 inputType : &#39;password&#39;,
  *                 listeners : {
- *                     specialkey : 'onFieldSpecialKey'
+ *                     specialkey : &#39;onFieldSpecialKey&#39;
  *                 }
  *             }]
  *         }],
- *         buttons : ['-&gt;', {
- *             text : 'Login',
+ *         buttons : [&#39;-&gt;&#39;, {
+ *             text : &#39;Login&#39;,
  *             listeners : {
- *                 click : 'onLoginClick'
+ *                 click : &#39;onLoginClick&#39;
  *             }
  *         }]
  *     });
@@ -368,11 +368,11 @@
  *
  *     // execute an Ajax request to invoke server side script:
  *     Ext.Ajax.request({
- *         url: 'gen-invoice-grid.php',
+ *         url: &#39;gen-invoice-grid.php&#39;,
  *         // send additional parameters to instruct server script
  *         params: {
- *             startDate: Ext.getCmp('start-date').getValue(),
- *             endDate: Ext.getCmp('end-date').getValue()
+ *             startDate: Ext.getCmp(&#39;start-date&#39;).getValue(),
+ *             endDate: Ext.getCmp(&#39;end-date&#39;).getValue()
  *         },
  *         // process the response object to add it to the TabPanel:
  *         success: function(xhr) {
@@ -389,32 +389,32 @@
  * config object with an {@link Ext.Component#xtype xtype}. The server might return the following JSON:
  *
  *     {
- *         &quot;xtype&quot;: 'grid',
- *         &quot;title&quot;: 'Invoice Report',
+ *         &quot;xtype&quot;: &#39;grid&#39;,
+ *         &quot;title&quot;: &#39;Invoice Report&#39;,
  *         &quot;store&quot;: {
- *             &quot;model&quot;: 'Invoice',
+ *             &quot;model&quot;: &#39;Invoice&#39;,
  *             &quot;proxy&quot;: {
- *                 &quot;type&quot;: 'ajax',
- *                 &quot;url&quot;: 'get-invoice-data.php',
+ *                 &quot;type&quot;: &#39;ajax&#39;,
+ *                 &quot;url&quot;: &#39;get-invoice-data.php&#39;,
  *                 &quot;reader&quot;: {
- *                     &quot;type&quot;: 'json'
- *                     &quot;record&quot;: 'transaction',
- *                     &quot;idProperty&quot;: 'id',
- *                     &quot;totalRecords&quot;: 'total'
+ *                     &quot;type&quot;: &#39;json&#39;
+ *                     &quot;record&quot;: &#39;transaction&#39;,
+ *                     &quot;idProperty&quot;: &#39;id&#39;,
+ *                     &quot;totalRecords&quot;: &#39;total&#39;
  *                 })
  *             },
  *             &quot;autoLoad&quot;: {
  *                 &quot;params&quot;: {
- *                     &quot;startDate&quot;: '01/01/2008',
- *                     &quot;endDate&quot;: '01/31/2008'
+ *                     &quot;startDate&quot;: &#39;01/01/2008&#39;,
+ *                     &quot;endDate&quot;: &#39;01/31/2008&#39;
  *                 }
  *             }
  *         },
  *         &quot;headers&quot;: [
- *             {&quot;header&quot;: &quot;Customer&quot;, &quot;width&quot;: 250, &quot;dataIndex&quot;: 'customer', &quot;sortable&quot;: true},
- *             {&quot;header&quot;: &quot;Invoice Number&quot;, &quot;width&quot;: 120, &quot;dataIndex&quot;: 'invNo', &quot;sortable&quot;: true},
- *             {&quot;header&quot;: &quot;Invoice Date&quot;, &quot;width&quot;: 100, &quot;dataIndex&quot;: 'date', &quot;renderer&quot;: Ext.util.Format.dateRenderer('M d, y'), &quot;sortable&quot;: true},
- *             {&quot;header&quot;: &quot;Value&quot;, &quot;width&quot;: 120, &quot;dataIndex&quot;: 'value', &quot;renderer&quot;: 'usMoney', &quot;sortable&quot;: true}
+ *             {&quot;header&quot;: &quot;Customer&quot;, &quot;width&quot;: 250, &quot;dataIndex&quot;: &#39;customer&#39;, &quot;sortable&quot;: true},
+ *             {&quot;header&quot;: &quot;Invoice Number&quot;, &quot;width&quot;: 120, &quot;dataIndex&quot;: &#39;invNo&#39;, &quot;sortable&quot;: true},
+ *             {&quot;header&quot;: &quot;Invoice Date&quot;, &quot;width&quot;: 100, &quot;dataIndex&quot;: &#39;date&#39;, &quot;renderer&quot;: Ext.util.Format.dateRenderer(&#39;M d, y&#39;), &quot;sortable&quot;: true},
+ *             {&quot;header&quot;: &quot;Value&quot;, &quot;width&quot;: 120, &quot;dataIndex&quot;: &#39;value&#39;, &quot;renderer&quot;: &#39;usMoney&#39;, &quot;sortable&quot;: true}
  *         ]
  *     }
  *
@@ -422,37 +422,37 @@
  * result will be a config object which, when added to a Container, will cause instantiation of a GridPanel. **Be sure
  * that the Container is configured with a layout which sizes and positions the child items to your requirements.**
  *
- * **Note:** since the code above is _generated_ by a server script, the `autoLoad` params for the Store, the user's
+ * **Note:** since the code above is _generated_ by a server script, the `autoLoad` params for the Store, the user&#39;s
  * preferred date format, the metadata to allow generation of the Model layout, and the ColumnModel can all be generated
  * into the code since these are all known on the server.
  */
-Ext.define('Ext.container.Container', {
-    extend: 'Ext.Component',
+Ext.define(&#39;Ext.container.Container&#39;, {
+    extend: &#39;Ext.Component&#39;,
 
-    xtype: 'container',
+    xtype: &#39;container&#39;,
 
     alternateClassName: [
-        'Ext.Container',
-        'Ext.AbstractContainer'
+        &#39;Ext.Container&#39;,
+        &#39;Ext.AbstractContainer&#39;
     ],
 
     requires: [
-        'Ext.Action',
-        'Ext.util.MixedCollection',
-        'Ext.layout.container.Auto',
-        'Ext.ZIndexManager',
-        'Ext.util.ItemCollection'
+        &#39;Ext.Action&#39;,
+        &#39;Ext.util.MixedCollection&#39;,
+        &#39;Ext.layout.container.Auto&#39;,
+        &#39;Ext.ZIndexManager&#39;,
+        &#39;Ext.util.ItemCollection&#39;
     ],
 
     mixins: [
-        'Ext.mixin.Queryable',
-        'Ext.mixin.Container'
+        &#39;Ext.mixin.Queryable&#39;,
+        &#39;Ext.mixin.Container&#39;
     ],
 
 <span id='Ext-container-Container-cfg-renderTpl'>    renderTpl:
-</span>        '&lt;tpl if=&quot;hasTabGuard&quot;&gt;{% this.renderTabGuard(out, values, \'before\'); %}&lt;/tpl&gt;' +
-        '{% this.renderContainer(out,values) %}' +
-        '&lt;tpl if=&quot;hasTabGuard&quot;&gt;{% this.renderTabGuard(out, values, \'after\'); %}&lt;/tpl&gt;',
+</span>        &#39;&lt;tpl if=&quot;hasTabGuard&quot;&gt;{% this.renderTabGuard(out, values, \&#39;before\&#39;); %}&lt;/tpl&gt;&#39; +
+        &#39;{% this.renderContainer(out,values) %}&#39; +
+        &#39;&lt;tpl if=&quot;hasTabGuard&quot;&gt;{% this.renderTabGuard(out, values, \&#39;after\&#39;); %}&lt;/tpl&gt;&#39;,
 
     // &lt;editor-fold desc=&quot;Config&quot;&gt;
     // ***********************************************************************************
@@ -469,7 +469,7 @@ Ext.define('Ext.container.Container', {
          * {@link Ext.menu.Item menu item}, or {@link Ext.panel.Panel#tools panel header tool},
          * or an {@link Ext.grid.column.Action ActionColumn item}
          *
-         * An Action, or more conveniently, the *name* of an action prefixed with `'@'`
+         * An Action, or more conveniently, the *name* of an action prefixed with `&#39;@&#39;`
          * may be used as a config object for creating child components which use a `handler`
          * config property to reference a Controller method to invoke when the component is
          * clicked.
@@ -490,9 +490,9 @@ Ext.define('Ext.container.Container', {
 <span id='Ext-container-Container-cfg-activeItem'>    /**
 </span>     * @cfg {String/Number} activeItem
      * A string component id or the numeric index of the component that should be
-     * initially activated within the container's layout on render.  For example,
-     * activeItem: 'item-1' or activeItem: 0 (index 0 = the first item in the
-     * container's collection).  activeItem only applies to layout styles that can
+     * initially activated within the container&#39;s layout on render.  For example,
+     * activeItem: &#39;item-1&#39; or activeItem: 0 (index 0 = the first item in the
+     * container&#39;s collection).  activeItem only applies to layout styles that can
      * display items one at a time (like {@link Ext.layout.container.Card} and
      * {@link Ext.layout.container.Fit}).
      *
@@ -529,7 +529,7 @@ Ext.define('Ext.container.Container', {
      *
      * For example, to automatically apply padding to the body of each of a set of
      * contained {@link Ext.panel.Panel} items, you could pass:
-     * `defaults: {bodyStyle:'padding:15px'}`.
+     * `defaults: {bodyStyle:&#39;padding:15px&#39;}`.
      *
      * Usage:
      *
@@ -539,13 +539,13 @@ Ext.define('Ext.container.Container', {
      *     items: [
      *         // default will not be applied here, panel1 will be scrollable: false
      *         {
-     *             xtype: 'panel',
-     *             id: 'panel1',
+     *             xtype: &#39;panel&#39;,
+     *             id: &#39;panel1&#39;,
      *             scrollable: false
      *         },
      *         // this component will have scrollable: true
      *         new Ext.panel.Panel({
-     *             id: 'panel2'
+     *             id: &#39;panel2&#39;
      *         })
      *     ]
      *
@@ -558,7 +558,7 @@ Ext.define('Ext.container.Container', {
       * a child item is specified as a raw configuration object, rather than as an instantiated Component.
       * @since 2.3.0
       */
-    defaultType: 'panel',
+    defaultType: &#39;panel&#39;,
 
 <span id='Ext-container-Container-cfg-detachOnRemove'>    /**
 </span>     * @cfg {Boolean} [detachOnRemove=true]
@@ -582,11 +582,11 @@ Ext.define('Ext.container.Container', {
      *
      *     // specifying a single item
      *     items: {...},
-     *     layout: 'fit',    // The single items is sized to fit
+     *     layout: &#39;fit&#39;,    // The single items is sized to fit
      *
      *     // specifying multiple items
      *     items: [{...}, {...}],
-     *     layout: 'hbox', // The items are arranged horizontally
+     *     layout: &#39;hbox&#39;, // The items are arranged horizontally
      *
      * Each item may be:
      *
@@ -622,7 +622,7 @@ Ext.define('Ext.container.Container', {
      * the `layout` configuration option.
      *
      * The sizing and positioning of child {@link #cfg-items} is the responsibility of
-     * the Container's layout manager which creates and manages the type of layout
+     * the Container&#39;s layout manager which creates and manages the type of layout
      * you have in mind.  For example:
      *
      * If the layout configuration is not explicitly specified for
@@ -638,8 +638,8 @@ Ext.define('Ext.container.Container', {
      * Example usage:
      *
      *     layout: {
-     *         type: 'vbox',
-     *         align: 'left'
+     *         type: &#39;vbox&#39;,
+     *         align: &#39;left&#39;
      *     }
      *
      *   - **type**
@@ -660,7 +660,7 @@ Ext.define('Ext.container.Container', {
      *
      * Example usage:
      *
-     *     layout: 'vbox'
+     *     layout: &#39;vbox&#39;
      *
      *   - **layout**
      *
@@ -678,15 +678,15 @@ Ext.define('Ext.container.Container', {
      * use an object, but without the `type` property:
      *
      *
-     *     xtype: 'toolbar',
+     *     xtype: &#39;toolbar&#39;,
      *     layout: {
-     *         pack: 'center'
+     *         pack: &#39;center&#39;
      *     }
      *
      * @since 2.3.0
      * 
      */
-    layout: 'auto',
+    layout: &#39;auto&#39;,
 
 <span id='Ext-container-Container-cfg-suspendLayout'>    /**
 </span>     * @cfg {Boolean} suspendLayout
@@ -698,12 +698,12 @@ Ext.define('Ext.container.Container', {
 <span id='Ext-container-Container-cfg-defaultFocus'>    /**
 </span>     * @cfg {String} defaultFocus
      *
-     * Specifies a child Component to receive focus when this Container's {@link #method-focus}
+     * Specifies a child Component to receive focus when this Container&#39;s {@link #method-focus}
      * method is called. Should be a valid {@link Ext.ComponentQuery query} selector.
      */
     
 <span id='Ext-container-Container-cfg-tabGuard'>    /**
-</span>     * When set to `true`, two elements are added to the container's element. These are the
+</span>     * When set to `true`, two elements are added to the container&#39;s element. These are the
      * `{@link #tabGuardBeforeEl}` and `{@link #tabGuardAfterEl}`.
      * @cfg {Boolean} tabGuard
      * @private
@@ -730,12 +730,12 @@ Ext.define('Ext.container.Container', {
     tabGuardTpl:
         // We use span instead of div because of IE bug/misfeature: it will focus
         // block elements upon clicking or calling node.focus() regardless of
-        // tabIndex attribute. It doesn't do that with inline elements, hence span.
-        '&lt;span id=&quot;{id}-{tabGuardEl}&quot; data-ref=&quot;{tabGuardEl}&quot; aria-hidden=&quot;true&quot;' +
-            ' class=&quot;' + Ext.baseCSSPrefix + 'tab-guard ' +
-                         Ext.baseCSSPrefix + 'tab-guard-{tabGuardPosition}&quot;' +
-            ' style=&quot;width:0px;height:0px;&quot;&gt;' +
-        '&lt;/span&gt;',
+        // tabIndex attribute. It doesn&#39;t do that with inline elements, hence span.
+        &#39;&lt;span id=&quot;{id}-{tabGuardEl}&quot; data-ref=&quot;{tabGuardEl}&quot; aria-hidden=&quot;true&quot;&#39; +
+            &#39; class=&quot;&#39; + Ext.baseCSSPrefix + &#39;tab-guard &#39; +
+                         Ext.baseCSSPrefix + &#39;tab-guard-{tabGuardPosition}&quot;&#39; +
+            &#39; style=&quot;width:0px;height:0px;&quot;&gt;&#39; +
+        &#39;&lt;/span&gt;&#39;,
     
 <span id='Ext-container-Container-property-tabGuardElements'>    /**
 </span>     * @property {Object} tabGuardElements
@@ -744,8 +744,8 @@ Ext.define('Ext.container.Container', {
      * @since 6.2.0
      */
     tabGuardElements: {
-        before: 'tabGuardBeforeEl',
-        after: 'tabGuardAfterEl'
+        before: &#39;tabGuardBeforeEl&#39;,
+        after: &#39;tabGuardAfterEl&#39;
     },
     
 <span id='Ext-container-Container-property-tabGuardBeforeIndex'>    /**
@@ -788,9 +788,9 @@ Ext.define('Ext.container.Container', {
         strict: false
     },
 
-<span id='Ext-container-Container-property-ariaRole'>    ariaRole: 'presentation',
+<span id='Ext-container-Container-property-ariaRole'>    ariaRole: &#39;presentation&#39;,
 </span>    
-<span id='Ext-container-Container-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + 'container',
+<span id='Ext-container-Container-cfg-baseCls'>    baseCls: Ext.baseCSSPrefix + &#39;container&#39;,
 </span>
 <span id='Ext-container-Container-property-layoutCounter'>    /**
 </span>     * @property {Number} layoutCounter
@@ -814,7 +814,7 @@ Ext.define('Ext.container.Container', {
      * Fires after any {@link Ext.Component} is added or inserted into the container.
      * @param {Ext.container.Container} this
      * @param {Ext.Component} component The component that was added
-     * @param {Number} index The index at which the component was added to the container's items collection
+     * @param {Number} index The index at which the component was added to the container&#39;s items collection
      * @since 2.3.0
      */
 
@@ -832,7 +832,7 @@ Ext.define('Ext.container.Container', {
      * A handler can return false to cancel the add.
      * @param {Ext.container.Container} this
      * @param {Ext.Component} component The component being added
-     * @param {Number} index The index at which the component will be added to the container's items collection
+     * @param {Number} index The index at which the component will be added to the container&#39;s items collection
      * @since 2.3.0
      */
 
@@ -878,7 +878,7 @@ Ext.define('Ext.container.Container', {
      * ## Description:
      *
      * - Fires the {@link #beforeadd} event before adding.
-     * - The Container's {@link #defaults default config values} will be applied
+     * - The Container&#39;s {@link #defaults default config values} will be applied
      *   accordingly (see `{@link #defaults}` for details).
      * - Fires the `{@link #event-add}` event after the component has been added.
      *
@@ -900,8 +900,8 @@ Ext.define('Ext.container.Container', {
      *         renderTo: document.body
      *     });  // toolbar is rendered
      *     // add multiple items.
-     *     // default type for Toolbar is 'button')
-     *     tb.add([{text:'Button 1'}, {text:'Button 2'}]);
+     *     // default type for Toolbar is &#39;button&#39;)
+     *     tb.add([{text:&#39;Button 1&#39;}, {text:&#39;Button 2&#39;}]);
      *
      * To inject components between existing ones, use the {@link #insert} method.
      *
@@ -922,7 +922,7 @@ Ext.define('Ext.container.Container', {
     add: function() {
         var me = this,
             args = Ext.Array.slice(arguments),
-            index = (typeof args[0] === 'number') ? args.shift() : -1,
+            index = (typeof args[0] === &#39;number&#39;) ? args.shift() : -1,
             layout = me.getLayout(),
             needsLayout = false,
             addingArray, items, i, length, item, pos, ret, instanced;
@@ -955,7 +955,7 @@ Ext.define('Ext.container.Container', {
             }
 
             if (item.destroyed) {
-                Ext.raise(&quot;Cannot add destroyed item '&quot; + item.getId() + &quot;' to Container '&quot; + me.getId() + &quot;'&quot;);
+                Ext.raise(&quot;Cannot add destroyed item &#39;&quot; + item.getId() + &quot;&#39; to Container &#39;&quot; + me.getId() + &quot;&#39;&quot;);
             }
             //&lt;/debug&gt;
 
@@ -968,9 +968,9 @@ Ext.define('Ext.container.Container', {
                 item.onAdded(me, pos, instanced);
                 delete item.$initParent;
                 if (me.hasListeners.add) {
-                    me.fireEvent('add', me, item, pos);
+                    me.fireEvent(&#39;add&#39;, me, item, pos);
                 }
-            } else if ((!me.hasListeners.beforeadd || me.fireEvent('beforeadd', me, item, pos) !== false) &amp;&amp; me.onBeforeAdd(item) !== false) {
+            } else if ((!me.hasListeners.beforeadd || me.fireEvent(&#39;beforeadd&#39;, me, item, pos) !== false) &amp;&amp; me.onBeforeAdd(item) !== false) {
                 me.items.insert(pos, item);
                 item.onAdded(me, pos, instanced);
                 delete item.$initParent;
@@ -979,7 +979,7 @@ Ext.define('Ext.container.Container', {
 
                 needsLayout = true;
                 if (me.hasListeners.add) {
-                    me.fireEvent('add', me, item, pos);
+                    me.fireEvent(&#39;add&#39;, me, item, pos);
                 }
             }
         }
@@ -1046,7 +1046,7 @@ Ext.define('Ext.container.Container', {
         ++me.layoutCounter;
 
         if (me.hasListeners.afterlayout) {
-            me.fireEvent('afterlayout', me, layout);
+            me.fireEvent(&#39;afterlayout&#39;, me, layout);
         }
     },
 
@@ -1235,7 +1235,7 @@ Ext.define('Ext.container.Container', {
     },
 
 <span id='Ext-container-Container-method-getComponent'>    /**
-</span>     * Examines this container's {@link #property-items} **property** and gets a direct child
+</span>     * Examines this container&#39;s {@link #property-items} **property** and gets a direct child
      * component of this container.
      *
      * @param {String/Number} comp This parameter may be any of the following:
@@ -1260,7 +1260,7 @@ Ext.define('Ext.container.Container', {
             floaters = this.floatingItems;
 
         // Only allow finding by index on the main items container
-        if (!c &amp;&amp; floaters &amp;&amp; typeof comp !== 'number') {
+        if (!c &amp;&amp; floaters &amp;&amp; typeof comp !== &#39;number&#39;) {
             c = floaters.get(comp);
         }
 
@@ -1270,7 +1270,7 @@ Ext.define('Ext.container.Container', {
 <span id='Ext-container-Container-method-getFocusEl'>    /**
 </span>     * @protected
      * Returns the focus holder element associated with this Container.
-     * By default, this is the Container's target element; however if {@link #defaultFocus}
+     * By default, this is the Container&#39;s target element; however if {@link #defaultFocus}
      * is defined, the child component referenced by that property will be found
      * and returned instead.
      *
@@ -1316,7 +1316,7 @@ Ext.define('Ext.container.Container', {
      *
      * NOTE: IMPORTANT note for maintainers:
      * Items are returned in tree traversal order. Each item is appended to the result array
-     * followed by the results of that child's getRefItems call.
+     * followed by the results of that child&#39;s getRefItems call.
      * Floating child items are appended after internal child items.
      */
     getRefItems: function(deep) {
@@ -1372,7 +1372,7 @@ Ext.define('Ext.container.Container', {
         me.callParent();
 
         me.getLayout();
-        // Set a flag to say we're constructing children, can be useful
+        // Set a flag to say we&#39;re constructing children, can be useful
         // to know during construction time to save work
         me.constructing = true;
 
@@ -1436,7 +1436,7 @@ Ext.define('Ext.container.Container', {
             controller = me.controller,
             layout = me.layout,
             session = me.session,
-            // Don't instantiate it here, we just want to know whether we
+            // Don&#39;t instantiate it here, we just want to know whether we
             // were configured with a VM
             viewModel = me.viewModel,
             reference = me.reference,
@@ -1461,7 +1461,7 @@ Ext.define('Ext.container.Container', {
      * event after the Component has been inserted.
      *
      * @param {Number} index The index at which the Component will be inserted
-     * into the Container's items collection
+     * into the Container&#39;s items collection
      *
      * @param {Ext.Component/Object/Ext.Component[]/Object[]} component The child Component or config object to insert.
      *
@@ -1471,7 +1471,7 @@ Ext.define('Ext.container.Container', {
      * A Component config object may be passed in order to avoid the overhead of
      * constructing a real Component object if lazy rendering might mean that the
      * inserted Component will not be rendered immediately. To take advantage of
-     * this 'lazy instantiation', set the {@link Ext.Component#xtype} config
+     * this &#39;lazy instantiation&#39;, set the {@link Ext.Component#xtype} config
      * property to the registered type of the Component wanted.
      *
      * You can pass an array of Component instances and config objects.
@@ -1479,7 +1479,7 @@ Ext.define('Ext.container.Container', {
      * For a list of all available xtypes, see {@link Ext.enums.Widget}.
      *
      * @return {Ext.Component} component The Component (or config object) that was
-     * inserted with the Container's default config values applied.
+     * inserted with the Container&#39;s default config values applied.
      *
      * @since 2.3.0
      */
@@ -1512,11 +1512,11 @@ Ext.define('Ext.container.Container', {
             wasAction;
 
         if (!comp.isComponent) {
-            if (typeof comp === 'string') {
-                // First char '@' means its an Action name.
+            if (typeof comp === &#39;string&#39;) {
+                // First char &#39;@&#39; means its an Action name.
                 // Search this and all ancestors for a matching named Action
                 // with which to create the Component.
-                if (!(wasAction = (comp[0] === '@'))) {
+                if (!(wasAction = (comp[0] === &#39;@&#39;))) {
                     // String used as a global component ID. Deprecated practice!
                     return Ext.ComponentManager.get(comp);
                 }
@@ -1530,7 +1530,7 @@ Ext.define('Ext.container.Container', {
             // We need the inherited state to be invalidated upon add
             // because the create will have been performed outside of the
             // ownership hierarchy. The Action has no owner view (Actions are shareable).
-            // This flag indicates to the new item's onAdded-&gt;onInheritedAdded machinery
+            // This flag indicates to the new item&#39;s onAdded-&gt;onInheritedAdded machinery
             // that the inherited state must be invalidated.
             if (wasAction) {
                 comp.instancedCmp = true;
@@ -1567,7 +1567,7 @@ Ext.define('Ext.container.Container', {
             items.insert(toIdx, item);
             me.onMove(item, fromIdx, toIdx);
             if (me.hasListeners.childmove) {
-                me.fireEvent('childmove', me, item, fromIdx, toIdx);
+                me.fireEvent(&#39;childmove&#39;, me, item, fromIdx, toIdx);
             }
             me.updateLayout();
         }
@@ -1581,16 +1581,16 @@ Ext.define('Ext.container.Container', {
      * `item` will be the last item in this container.
      * 
      *     var tb = Ext.create({
-     *         xtype: 'toolbar',
+     *         xtype: &#39;toolbar&#39;,
      *         renderTo: Ext.getBody(),
      *         items: [{
-     *             text: 'one'
+     *             text: &#39;one&#39;
      *         }, {
-     *             text: 'two'
+     *             text: &#39;two&#39;
      *         }]
      *     });
      *
-     *     // moves the 'two' button before the 'one' button
+     *     // moves the &#39;two&#39; button before the &#39;one&#39; button
      *     tb.moveBefore(tb.getComponent(1), tb.getComponent(0));
      * 
      * @param {Ext.Component/Ext.Component[]} item The item to move. May be a component, 
@@ -1631,16 +1631,16 @@ Ext.define('Ext.container.Container', {
      * first item in this container.
      * 
      *     var tb = Ext.create({
-     *         xtype: 'toolbar',
+     *         xtype: &#39;toolbar&#39;,
      *         renderTo: Ext.getBody(),
      *         items: [{
-     *             text: 'one'
+     *             text: &#39;one&#39;
      *         }, {
-     *             text: 'two'
+     *             text: &#39;two&#39;
      *         }]
      *     });
      *
-     *     // moves the 'one' button after the 'two' button
+     *     // moves the &#39;one&#39; button after the &#39;two&#39; button
      *     tb.moveAfter(tb.getComponent(0), tb.getComponent(1));
      * 
      * @param {Ext.Component/Ext.Component[]} item The item to move. May be a component, 
@@ -1719,7 +1719,7 @@ Ext.define('Ext.container.Container', {
      * @protected
      */
     onBeforeAdd: function(item) {
-        // Remove from current container if it's not us.
+        // Remove from current container if it&#39;s not us.
         var owner = item.ownerCt;
         if (owner &amp;&amp; owner !== this) {
             owner.remove(item, false);
@@ -1799,10 +1799,10 @@ Ext.define('Ext.container.Container', {
      *
      * @param {Object} [disposition] Flags to determine what to do with the removed component.
      * (May also be specified as a boolean `autoDestroy` flag for backward compatibility).
-     * @param {Boolean} [disposition.destroy] Defaults to this Container's {@link #autoDestroy} config.
+     * @param {Boolean} [disposition.destroy] Defaults to this Container&#39;s {@link #autoDestroy} config.
      * Specifies whether to destroy the component being removed.
      * @param [disposition.detach] Defaults to the {@link #detachOnRemove} configuration
-     * Specifies whether to remove the component's DOM from the container and into
+     * Specifies whether to remove the component&#39;s DOM from the container and into
      * the {@link Ext#getDetachedBody detached body element}
      *
      * @return {Ext.Component} component The Component that was removed.
@@ -1812,7 +1812,7 @@ Ext.define('Ext.container.Container', {
         var me = this,
             c;
 
-        // After destroying, items is nulled so we can't proceed
+        // After destroying, items is nulled so we can&#39;t proceed
         if (me.destroyed || me.destroying) {
             return;
         }
@@ -1825,11 +1825,11 @@ Ext.define('Ext.container.Container', {
         }
         //&lt;/debug&gt;
 
-        if (c &amp;&amp; (!me.hasListeners.beforeremove || me.fireEvent('beforeremove', me, c) !== false)) {
+        if (c &amp;&amp; (!me.hasListeners.beforeremove || me.fireEvent(&#39;beforeremove&#39;, me, c) !== false)) {
             me.doRemove(c, autoDestroy);
 
             if (me.hasListeners.remove) {
-                me.fireEvent('remove', me, c);
+                me.fireEvent(&#39;remove&#39;, me, c);
             }
 
             if (!me.destroying &amp;&amp; !me.destroyAfterRemoving &amp;&amp; !c.floating) {
@@ -1847,8 +1847,8 @@ Ext.define('Ext.container.Container', {
 <span id='Ext-container-Container-method-removeAll'>    /**
 </span>     * Removes all components from this container.
      * @param {Boolean} [autoDestroy] True to automatically invoke the removed
-     * Component's {@link Ext.Component#method-destroy} function.
-     * Defaults to the value of this Container's {@link #autoDestroy} config.
+     * Component&#39;s {@link Ext.Component#method-destroy} function.
+     * Defaults to the value of this Container&#39;s {@link #autoDestroy} config.
      * @return {Ext.Component[]} Array of the removed components
      * @since 2.3.0
      */
@@ -1890,7 +1890,7 @@ Ext.define('Ext.container.Container', {
      *
      * NOTE: this method cannot be used to change the &quot;type&quot; of layout after the component
      * has been rendered to the DOM. After rendering, this method can only modify the
-     * existing layout's configuration properties. The reason for this restriction is that
+     * existing layout&#39;s configuration properties. The reason for this restriction is that
      * many container layouts insert special wrapping elements into the dom, and the
      * framework does not currently support dynamically changing these elements once
      * rendered.
@@ -1902,7 +1902,7 @@ Ext.define('Ext.container.Container', {
             currentIsLayout = currentLayout &amp;&amp; currentLayout.isLayout,
             protoLayout, type;
 
-        if (typeof layout === 'string') {
+        if (typeof layout === &#39;string&#39;) {
             layout = {
                 type: layout
             };
@@ -1922,7 +1922,7 @@ Ext.define('Ext.container.Container', {
 
             protoLayout = me.self.prototype.layout;
 
-            if (typeof protoLayout === 'string') {
+            if (typeof protoLayout === &#39;string&#39;) {
                 layout.type = type || protoLayout;
             } else {
                 // use protoLayout as default values
@@ -1942,15 +1942,15 @@ Ext.define('Ext.container.Container', {
 </span>     * Sets a component as the active layout item. This only applies when using
      * a {@link Ext.layout.container.Card} layout.
      *
-     *     var card1 = Ext.create('Ext.panel.Panel', {itemId: 'card-1'});
-     *     var card2 = Ext.create('Ext.panel.Panel', {itemId: 'card-2'});
-     *     var panel = Ext.create('Ext.panel.Panel', {
-     *         layout: 'card',
+     *     var card1 = Ext.create(&#39;Ext.panel.Panel&#39;, {itemId: &#39;card-1&#39;});
+     *     var card2 = Ext.create(&#39;Ext.panel.Panel&#39;, {itemId: &#39;card-2&#39;});
+     *     var panel = Ext.create(&#39;Ext.panel.Panel&#39;, {
+     *         layout: &#39;card&#39;,
      *         items: [card1, card2]
      *     });
      *     // These are all equivalent
      *     panel.getLayout().setActiveItem(card2);
-     *     panel.getLayout().setActiveItem('card-2');
+     *     panel.getLayout().setActiveItem(&#39;card-2&#39;);
      *     panel.getLayout().setActiveItem(1);
      *
      * @param {Ext.Component/Number/String} item  The component, component {@link Ext.Component#id id},
@@ -2019,7 +2019,7 @@ Ext.define('Ext.container.Container', {
                 } else {
                     // If we have a config object (not a component instance) we can do a
                     // full (deep) merge of the config with the defaults object.
-                    // Fork the defaults object first so that we don't modify the original
+                    // Fork the defaults object first so that we don&#39;t modify the original
                     config = me.self.getConfigurator().merge(me, Ext.Object.fork(defaults), config);
                 }
             }
@@ -2031,7 +2031,7 @@ Ext.define('Ext.container.Container', {
             return this.setupReference(reference);
         },
 
-        // The targetCls is a CSS class that the layout needs added to the targetEl. The targetEl is where the container's
+        // The targetCls is a CSS class that the layout needs added to the targetEl. The targetEl is where the container&#39;s
         // children are rendered and is usually just the main el. Some containers (e.g. panels) use a body instead.
         //
         // In general, if a class overrides getTargetEl it will also need to override this method. This is necessary to
@@ -2060,11 +2060,11 @@ Ext.define('Ext.container.Container', {
             // Ensure the flags are set correctly
             if (flags === undefined) {
                 doDestroy = me.autoDestroy;
-            } else if (typeof flags === 'boolean') {
+            } else if (typeof flags === &#39;boolean&#39;) {
                 doDestroy = flags;
             } else {
-                doDestroy = ('destroy' in flags) &amp;&amp; flags.destroy;
-                doDetach = ('detach' in flags) &amp;&amp; flags.detach;
+                doDestroy = (&#39;destroy&#39; in flags) &amp;&amp; flags.destroy;
+                doDetach = (&#39;detach&#39; in flags) &amp;&amp; flags.detach;
             }
 
             // isDestroying flag is true if the removal is taking place as part of destruction, OR if removal is intended to *cause* destruction
@@ -2092,9 +2092,9 @@ Ext.define('Ext.container.Container', {
 
             me.onRemove(component, isDestroying);
 
-            // Destroy if we were explicitly told to, or we're defaulting to our autoDestroy
+            // Destroy if we were explicitly told to, or we&#39;re defaulting to our autoDestroy
             // configuration. If the component is already destroyed, calling destroy() again
-            // won't blow up.
+            // won&#39;t blow up.
             if (doDestroy) {
                 component.destroy();
             }
@@ -2127,7 +2127,7 @@ Ext.define('Ext.container.Container', {
          * @return {Ext.Component[]} Items to be enabled/disabled
          */
         getChildItemsToDisable: function() {
-            return this.query('[isFormField],[isFocusableContainer],button');
+            return this.query(&#39;[isFormField],[isFocusableContainer],button&#39;);
         },
 
 <span id='Ext-container-Container-method-getContentTarget'>        /**
@@ -2149,7 +2149,7 @@ Ext.define('Ext.container.Container', {
          */
         prepareItems: function(items, applyDefaults) {
             // Create an Array which does not refer to the passed array.
-            // The passed array is a reference to a user's config object and MUST NOT be mutated.
+            // The passed array is a reference to a user&#39;s config object and MUST NOT be mutated.
             if (Ext.isArray(items)) {
                 items = items.slice();
             } else {
@@ -2173,16 +2173,16 @@ Ext.define('Ext.container.Container', {
                         item = this.applyDefaults(item);
                     }
 
-                    // Tell the item we're in a container during construction
+                    // Tell the item we&#39;re in a container during construction
                     item.$initParent = me;
                     if (item.isComponent) {
-                        // When this was passed to us, it's an already constructed component
+                        // When this was passed to us, it&#39;s an already constructed component
                         // This is useful to know because we can make decisions regarding the
-                        // state of the component if it's newly created
+                        // state of the component if it&#39;s newly created
                         item.instancedCmp = true;
                     }
                     items[i] = me.lookupComponent(item);
-                    // delete here because item may have been a config, so we don't
+                    // delete here because item may have been a config, so we don&#39;t
                     // want to mutate it
                     delete item.$initParent;
                 }
@@ -2236,15 +2236,15 @@ Ext.define('Ext.container.Container', {
             
             if (nodes &amp;&amp; nodes.length) {
                 // In some cases it might be desirable to configure before and after
-                // guard elements' tabIndex explicitly but if it is missing we try to
-                // infer it from the DOM. If we don't and there are elements with
+                // guard elements&#39; tabIndex explicitly but if it is missing we try to
+                // infer it from the DOM. If we don&#39;t and there are elements with
                 // tabIndex &gt; 0 within the container then tab order will be very
                 // unintuitive.
                 if (minTabIndex == null || maxTabIndex == null) {
                     for (i = 0; i &lt; nodes.length; i++) {
-                        // Can't use node.tabIndex property here, IE8 will report 0
+                        // Can&#39;t use node.tabIndex property here, IE8 will report 0
                         // even if tabIndex attribute is missing.
-                        tabIndex = +nodes[i].getAttribute('tabIndex');
+                        tabIndex = +nodes[i].getAttribute(&#39;tabIndex&#39;);
                         
                         if (tabIndex &gt; 0) {
                             minTabIndex = Math.min(minTabIndex, tabIndex);
@@ -2253,32 +2253,32 @@ Ext.define('Ext.container.Container', {
                     }
                 }
                 
-                beforeGuard.dom.setAttribute('tabIndex', minTabIndex);
-                afterGuard.dom.setAttribute('tabIndex', maxTabIndex);
+                beforeGuard.dom.setAttribute(&#39;tabIndex&#39;, minTabIndex);
+                afterGuard.dom.setAttribute(&#39;tabIndex&#39;, maxTabIndex);
             }
             else {
-                // We don't want the guards to participate in tab flow
+                // We don&#39;t want the guards to participate in tab flow
                 // if there are no tabbable children in the container
-                beforeGuard.dom.removeAttribute('tabIndex');
-                afterGuard.dom.removeAttribute('tabIndex');
+                beforeGuard.dom.removeAttribute(&#39;tabIndex&#39;);
+                afterGuard.dom.removeAttribute(&#39;tabIndex&#39;);
             }
             
             if (me.onTabGuardFocusEnter) {
                 if (!beforeGuard.hasListeners.focusenter) {
-                    beforeGuard.on('focusenter', me.onTabGuardFocusEnter, me);
+                    beforeGuard.on(&#39;focusenter&#39;, me.onTabGuardFocusEnter, me);
                 }
                 
                 if (!afterGuard.hasListeners.focusenter) {
-                    afterGuard.on('focusenter',  me.onTabGuardFocusEnter, me);
+                    afterGuard.on(&#39;focusenter&#39;,  me.onTabGuardFocusEnter, me);
                 }
             }
         },
 
         _noMargin: {
-            'margin-top': '',
-            'margin-right': '',
-            'margin-bottom': '',
-            'margin-left': ''
+            &#39;margin-top&#39;: &#39;&#39;,
+            &#39;margin-right&#39;: &#39;&#39;,
+            &#39;margin-bottom&#39;: &#39;&#39;,
+            &#39;margin-left&#39;: &#39;&#39;
         },
 
         // Removes inline margins set by the layout system (see ContextItem#getMarginInfo)

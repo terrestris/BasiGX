@@ -38,11 +38,11 @@ Ext.define(&quot;Ext.util.Sortable&quot;, {
          * The initial set of {@link Ext.util.Sorter Sorters}.
          *
          *     sorters: [{
-         *         property: 'age',
-         *         direction: 'DESC'
+         *         property: &#39;age&#39;,
+         *         direction: &#39;DESC&#39;
          *     }, {
-         *         property: 'firstName',
-         *         direction: 'ASC'
+         *         property: &#39;firstName&#39;,
+         *         direction: &#39;ASC&#39;
          *     }]
          */
         sorters: null
@@ -55,7 +55,7 @@ Ext.define(&quot;Ext.util.Sortable&quot;, {
     defaultSortDirection: &quot;ASC&quot;,
 
     requires: [
-        'Ext.util.Sorter'
+        &#39;Ext.util.Sorter&#39;
     ],
 
 <span id='Ext-util-Sortable-event-beforesort'>    /**
@@ -123,15 +123,15 @@ Ext.define(&quot;Ext.util.Sortable&quot;, {
 </span>     * Updates the sorters collection and triggers sorting of this Sortable. Example usage:
      *
      *     //sort by a single field
-     *     myStore.sort('myField', 'DESC');
+     *     myStore.sort(&#39;myField&#39;, &#39;DESC&#39;);
      *
      *     //sorting by multiple fields
      *     myStore.sort([{
-     *         property : 'age',
-     *         direction: 'ASC'
+     *         property : &#39;age&#39;,
+     *         direction: &#39;ASC&#39;
      *     }, {
-     *         property : 'name',
-     *         direction: 'DESC'
+     *         property : &#39;name&#39;,
+     *         direction: &#39;DESC&#39;
      *     }]);
      *
      * Classes which use this mixin must implement a **`soSort`** method which accepts a comparator function computed from
@@ -139,15 +139,15 @@ Ext.define(&quot;Ext.util.Sortable&quot;, {
      *
      * When passing a single string argument to sort, Store maintains a ASC/DESC toggler per field, so this code:
      *
-     *     store.sort('myField');
-     *     store.sort('myField');
+     *     store.sort(&#39;myField&#39;);
+     *     store.sort(&#39;myField&#39;);
      *
      * Is equivalent to this code, because Store handles the toggling automatically:
      *
-     *     store.sort('myField', 'ASC');
-     *     store.sort('myField', 'DESC');
+     *     store.sort(&#39;myField&#39;, &#39;ASC&#39;);
+     *     store.sort(&#39;myField&#39;, &#39;DESC&#39;);
      *
-     * @param {String/Ext.util.Sorter[]} [sorters] Either a string name of one of the fields in this Store's configured {@link Ext.data.Model Model}, or an array of sorter configurations.
+     * @param {String/Ext.util.Sorter[]} [sorters] Either a string name of one of the fields in this Store&#39;s configured {@link Ext.data.Model Model}, or an array of sorter configurations.
      * @param {String} [direction=&quot;ASC&quot;] The overall direction to sort the data by.
      * @param {String} [insertionPosition=&quot;replace&quot;] Where to put the new sorter in the collection of sorters.
      * This may take the following values:
@@ -157,7 +157,7 @@ Ext.define(&quot;Ext.util.Sortable&quot;, {
      *
      * * `prepend` : This means that the new sorters are inserted as the primary sorters, unchanged, and the sorter list length must be controlled by the developer.
      *
-     * * `multi` :  This is mainly useful for implementing intuitive &quot;Sort by this&quot; user interfaces such as the {@link Ext.grid.Panel GridPanel}'s column sorting UI.
+     * * `multi` :  This is mainly useful for implementing intuitive &quot;Sort by this&quot; user interfaces such as the {@link Ext.grid.Panel GridPanel}&#39;s column sorting UI.
      *
      *     This mode is only supported when passing a property name and a direction.
      *
@@ -239,13 +239,13 @@ Ext.define(&quot;Ext.util.Sortable&quot;, {
                     break;
                 default:
                     //&lt;debug&gt;
-                    Ext.raise('Sorter insertion point must be &quot;multi&quot;, &quot;prepend&quot;, &quot;append&quot; or &quot;replace&quot;');
+                    Ext.raise(&#39;Sorter insertion point must be &quot;multi&quot;, &quot;prepend&quot;, &quot;append&quot; or &quot;replace&quot;&#39;);
                     //&lt;/debug&gt;
             }
         }
 
         if (doSort !== false) {
-            me.fireEvent('beforesort', me, sorters);
+            me.fireEvent(&#39;beforesort&#39;, me, sorters);
             me.onBeforeSort(sorters);
             if (me.getSorterCount()) {
                 // Sort using a generated sorter function which combines all of the Sorters passed
@@ -321,13 +321,13 @@ Ext.define(&quot;Ext.util.Sortable&quot;, {
                     direction: &quot;ASC&quot;
                 });
 
-                //support for 3.x style sorters where a function can be defined as 'fn'
+                //support for 3.x style sorters where a function can be defined as &#39;fn&#39;
                 if (config.fn) {
                     config.sorterFn = config.fn;
                 }
 
                 //support a function to be passed as a sorter definition
-                if (typeof config == 'function') {
+                if (typeof config == &#39;function&#39;) {
                     config = {
                         sorterFn: config
                     };

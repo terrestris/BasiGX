@@ -18,9 +18,9 @@
   <pre class="prettyprint lang-js"><span id='Ext-data-Types'>/**
 </span> * @deprecated Please use {@link Ext.data.field.Field field types} instead.
  */
-Ext.define('Ext.data.Types', {
+Ext.define(&#39;Ext.data.Types&#39;, {
     singleton: true,
-    requires: ['Ext.data.SortTypes']
+    requires: [&#39;Ext.data.SortTypes&#39;]
 }, function(Types) {
     var SortTypes = Ext.data.SortTypes;
 
@@ -38,7 +38,7 @@ Ext.define('Ext.data.Types', {
          */
         AUTO: {
             sortType: SortTypes.none,
-            type: 'auto'
+            type: &#39;auto&#39;
         },
 
 <span id='Ext-data-Types-property-STRING'>        /**
@@ -47,11 +47,11 @@ Ext.define('Ext.data.Types', {
          */
         STRING: {
             convert: function(v) {
-                var defaultValue = this.getAllowNull() ? null : '';
+                var defaultValue = this.getAllowNull() ? null : &#39;&#39;;
                 return (v === undefined || v === null) ? defaultValue : String(v);
             },
             sortType: SortTypes.asUCString,
-            type: 'string'
+            type: &#39;string&#39;
         },
 
 <span id='Ext-data-Types-property-INT'>        /**
@@ -65,14 +65,14 @@ Ext.define('Ext.data.Types', {
                 // Handle values which are already numbers.
                 // Value truncation behaviour of parseInt is historic and must be maintained.
                 // parseInt(35.9)  and parseInt(&quot;35.9&quot;) returns 35
-                if (typeof v === 'number') {
+                if (typeof v === &#39;number&#39;) {
                     return parseInt(v, 10);
                 }
-                return v !== undefined &amp;&amp; v !== null &amp;&amp; v !== '' ?
-                    parseInt(String(v).replace(Types.stripRe, ''), 10) : (this.getAllowNull() ? null : 0);
+                return v !== undefined &amp;&amp; v !== null &amp;&amp; v !== &#39;&#39; ?
+                    parseInt(String(v).replace(Types.stripRe, &#39;&#39;), 10) : (this.getAllowNull() ? null : 0);
             },
             sortType: SortTypes.none,
-            type: 'int'
+            type: &#39;int&#39;
         },
 
 <span id='Ext-data-Types-property-FLOAT'>        /**
@@ -83,14 +83,14 @@ Ext.define('Ext.data.Types', {
          */
         FLOAT: {
             convert: function(v) {
-                if (typeof v === 'number') {
+                if (typeof v === &#39;number&#39;) {
                     return v;
                 }
-                return v !== undefined &amp;&amp; v !== null &amp;&amp; v !== '' ?
-                    parseFloat(String(v).replace(Types.stripRe, ''), 10) : (this.getAllowNull() ? null : 0);
+                return v !== undefined &amp;&amp; v !== null &amp;&amp; v !== &#39;&#39; ?
+                    parseFloat(String(v).replace(Types.stripRe, &#39;&#39;), 10) : (this.getAllowNull() ? null : 0);
             },
             sortType: SortTypes.none,
-            type: 'float'
+            type: &#39;float&#39;
         },
 
 <span id='Ext-data-Types-property-BOOL'>        /**
@@ -102,16 +102,16 @@ Ext.define('Ext.data.Types', {
          */
         BOOL: {
             convert: function(v) {
-                if (typeof v === 'boolean') {
+                if (typeof v === &#39;boolean&#39;) {
                     return v;
                 }
-                if (this.getAllowNull() &amp;&amp; (v === undefined || v === null || v === '')) {
+                if (this.getAllowNull() &amp;&amp; (v === undefined || v === null || v === &#39;&#39;)) {
                     return null;
                 }
-                return v === 'true' || v == 1;
+                return v === &#39;true&#39; || v == 1;
             },
             sortType: SortTypes.none,
-            type: 'bool'
+            type: &#39;bool&#39;
         },
 
 <span id='Ext-data-Types-property-DATE'>        /**
@@ -140,7 +140,7 @@ Ext.define('Ext.data.Types', {
                 return parsed ? new Date(parsed) : null;
             },
             sortType: SortTypes.asDate,
-            type: 'date'
+            type: &#39;date&#39;
         }
     });
 

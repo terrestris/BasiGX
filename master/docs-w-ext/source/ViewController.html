@@ -24,14 +24,14 @@
  * so it will receive inline events declared on the view. Sample usage:
  * 
  *     @example
- *     Ext.define('User', {
- *        extend: 'Ext.data.Model',
- *        fields: ['name', 'phone']    
+ *     Ext.define(&#39;User&#39;, {
+ *        extend: &#39;Ext.data.Model&#39;,
+ *        fields: [&#39;name&#39;, &#39;phone&#39;]    
  *     });
  *
- *     Ext.define('UserListController', {
- *         extend : 'Ext.app.ViewController',
- *         alias: 'controller.userlist',
+ *     Ext.define(&#39;UserListController&#39;, {
+ *         extend : &#39;Ext.app.ViewController&#39;,
+ *         alias: &#39;controller.userlist&#39;,
  *       
  *         init: function(view) {
  *             this.userCount = 0;
@@ -57,13 +57,13 @@
  *         },
  *       
  *         onSelectionChange: function(selModel, selections) {
- *             this.lookupReference('delete').setDisabled(selections.length === 0);
+ *             this.lookupReference(&#39;delete&#39;).setDisabled(selections.length === 0);
  *         },
  *       
  *         getUser: function() {
  *             ++this.userCount;
  *             return {
- *                 name: 'User ' + this.userCount,
+ *                 name: &#39;User &#39; + this.userCount,
  *                 phone: this.generatePhone()
  *             };
  *         },
@@ -73,52 +73,52 @@
  *         },
  *       
  *         generatePhone: function() {
- *             var num = '',
+ *             var num = &#39;&#39;,
  *                 i;
  *               
  *             for (i = 0; i &lt; 7; ++i) {
  *                 num += Ext.Number.randomInt(0, 9);
  *                 if (num.length === 3) {
- *                     num += '-';
+ *                     num += &#39;-&#39;;
  *                 }
  *             }    
  *             return num;
  *         }
  *     });
  *   
- *     Ext.define('UserList', {
- *         extend: 'Ext.grid.Panel',
- *         controller: 'userlist',
+ *     Ext.define(&#39;UserList&#39;, {
+ *         extend: &#39;Ext.grid.Panel&#39;,
+ *         controller: &#39;userlist&#39;,
  *       
  *         tbar: [{
- *             text: 'Add',
+ *             text: &#39;Add&#39;,
  *             listeners: {
- *                 click: 'onAddClick'
+ *                 click: &#39;onAddClick&#39;
  *             }    
  *         }, {
- *             text: 'Delete',
- *             reference: 'delete',
+ *             text: &#39;Delete&#39;,
+ *             reference: &#39;delete&#39;,
  *             listeners: {
- *                 click: 'onDeleteClick'
+ *                 click: &#39;onDeleteClick&#39;
  *             }
  *         }],
  *         store: {
- *             model: 'User'
+ *             model: &#39;User&#39;
  *         },
  *         selModel: {
- *             type: 'rowmodel',
+ *             type: &#39;rowmodel&#39;,
  *             listeners: {
- *                 selectionchange: 'onSelectionChange'
+ *                 selectionchange: &#39;onSelectionChange&#39;
  *             }    
  *         },
  *         columns: [{
  *             flex: 1,
- *             dataIndex: 'name',
- *             text: 'Name'
+ *             dataIndex: &#39;name&#39;,
+ *             text: &#39;Name&#39;
  *         }, {
  *             flex: 1,
- *             dataIndex: 'phone',
- *             text: 'Phone'
+ *             dataIndex: &#39;phone&#39;,
+ *             text: &#39;Phone&#39;
  *         }]
  *     });
  *   
@@ -130,26 +130,26 @@
  *         });
  *     }); 
  */
-Ext.define('Ext.app.ViewController', {
-    extend: 'Ext.app.BaseController',
-    alias: 'controller.controller',
+Ext.define(&#39;Ext.app.ViewController&#39;, {
+    extend: &#39;Ext.app.BaseController&#39;,
+    alias: &#39;controller.controller&#39;,
     
     requires: [
-        'Ext.app.domain.View'
+        &#39;Ext.app.domain.View&#39;
     ],
     
     mixins: [
-        'Ext.mixin.Factoryable'
+        &#39;Ext.mixin.Factoryable&#39;
     ],
     
 <span id='Ext-app-ViewController-property-isViewController'>    isViewController: true,
 </span>
 <span id='Ext-app-ViewController-property-factoryConfig'>    factoryConfig: { // configure Factoryable
-</span>        type: 'controller'
+</span>        type: &#39;controller&#39;
     },
 
     config: {
-<span id='Ext-app-ViewController-cfg-closeViewAction'>        closeViewAction: 'destroy'
+<span id='Ext-app-ViewController-cfg-closeViewAction'>        closeViewAction: &#39;destroy&#39;
 </span>    },
 
 <span id='Ext-app-ViewController-property-view'>    view: null,
@@ -162,7 +162,7 @@ Ext.define('Ext.app.ViewController', {
 <span id='Ext-app-ViewController-method-beforeInit'>    /**
 </span>     * @method
      *
-     * Called before the view initializes. This is called before the view's
+     * Called before the view initializes. This is called before the view&#39;s
      * initComponent method has been called.
      * @param {Ext.Component} view The view
      * @protected
@@ -172,7 +172,7 @@ Ext.define('Ext.app.ViewController', {
 <span id='Ext-app-ViewController-method-init'>    /**
 </span>     * @method
      *
-     * Called when the view initializes. This is called after the view's initComponent
+     * Called when the view initializes. This is called after the view&#39;s initComponent
      * method has been called.
      * @param {Ext.Component} view The view
      * @protected
@@ -242,7 +242,7 @@ Ext.define('Ext.app.ViewController', {
 
 <span id='Ext-app-ViewController-method-applyId'>    applyId: function(id) {
 </span>        if (!id) {
-            id = Ext.id(null, 'controller-');
+            id = Ext.id(null, &#39;controller-&#39;);
         }
         return id;
     },
@@ -271,7 +271,7 @@ Ext.define('Ext.app.ViewController', {
      * The method is a short-hand for the {@link #lookupReference} method.
      *
      * @param {String} key The name of the reference to lookup.
-     * @return {Ext.Component} The component, `null` if the reference doesn't exist.
+     * @return {Ext.Component} The component, `null` if the reference doesn&#39;t exist.
      * @since 6.0.1
      */
     lookup: function (key) {
@@ -286,7 +286,7 @@ Ext.define('Ext.app.ViewController', {
      * The {@link #lookup} method is a short-hand version of this method.
      *
      * @param {String} key The name of the reference to lookup.
-     * @return {Ext.Component} The component, `null` if the reference doesn't exist.
+     * @return {Ext.Component} The component, `null` if the reference doesn&#39;t exist.
      * @since 5.0.0
      */
     lookupReference: function (key) {
@@ -389,7 +389,7 @@ Ext.define('Ext.app.ViewController', {
 
 <span id='Ext-app-ViewController-method-clearReferences'>        /**
 </span>         * Invalidates the references collection. Typically called when
-         * removing a container from this container, since it's difficult
+         * removing a container from this container, since it&#39;s difficult
          * to know what references got removed.
          *
          * @private

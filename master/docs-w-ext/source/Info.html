@@ -22,9 +22,9 @@
  *
  * It is not expected that this class will be created by user code.
  */
-Ext.define('Ext.drag.Info', {
+Ext.define(&#39;Ext.drag.Info&#39;, {
 
-    requires: ['Ext.Promise'],
+    requires: [&#39;Ext.Promise&#39;],
 
 <span id='Ext-drag-Info-method-constructor'>    constructor: function(source, e) {
 </span>        // Internally we will call the constructor empty when we want to clone.
@@ -115,7 +115,7 @@ Ext.define('Ext.drag.Info', {
         }
 
         if (proxy.isElement) {
-            // If they are the same we don't need to keep track of both
+            // If they are the same we don&#39;t need to keep track of both
             el = me.element;
             el.current = proxy.current;
             el.delta = proxy.delta;
@@ -355,16 +355,16 @@ Ext.define('Ext.drag.Info', {
         } else {
             //&lt;debug&gt;
             if (!me.finalized) {
-                Ext.raise('Unable to call getData until the drop is complete');
+                Ext.raise(&#39;Unable to call getData until the drop is complete&#39;);
             }
             //&lt;/debug&gt;
             ret = data[type];
-            if (typeof ret === 'function') {
+            if (typeof ret === &#39;function&#39;) {
                 data[type] = ret = ret.call(me.source, me);
             }
 
             if (!ret &amp;&amp; ret !== 0) {
-                ret = '';
+                ret = &#39;&#39;;
             }
         }
         return Ext.Promise.resolve(ret);

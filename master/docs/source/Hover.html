@@ -33,15 +33,15 @@
 <span id='BasiGX-plugin-Hover'>/**
 </span> * @class BasiGX.plugin.Hover
  */
-Ext.define('BasiGX.plugin.Hover', {
-    extend: 'Ext.plugin.Abstract',
+Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
+    extend: &#39;Ext.plugin.Abstract&#39;,
 
-    alias: 'plugin.hover',
-<span id='BasiGX-plugin-Hover-property-pluginId'>    pluginId: 'hover',
+    alias: &#39;plugin.hover&#39;,
+<span id='BasiGX-plugin-Hover-property-pluginId'>    pluginId: &#39;hover&#39;,
 </span>
     inheritableStatics: {
-<span id='BasiGX-plugin-Hover-static-property-HOVER_OVERLAY_IDENTIFIER_KEY'>        HOVER_OVERLAY_IDENTIFIER_KEY: 'name',
-</span><span id='BasiGX-plugin-Hover-static-property-HOVER_OVERLAY_IDENTIFIER_VALUE'>        HOVER_OVERLAY_IDENTIFIER_VALUE: 'featureinfooverlay',
+<span id='BasiGX-plugin-Hover-static-property-HOVER_OVERLAY_IDENTIFIER_KEY'>        HOVER_OVERLAY_IDENTIFIER_KEY: &#39;name&#39;,
+</span><span id='BasiGX-plugin-Hover-static-property-HOVER_OVERLAY_IDENTIFIER_VALUE'>        HOVER_OVERLAY_IDENTIFIER_VALUE: &#39;featureinfooverlay&#39;,
 </span>
 <span id='BasiGX-plugin-Hover-static-property-LAYER_HOVERABLE_PROPERTY_NAME'>        /**
 </span>         * The property of a layer that holds a boolean value which indicates
@@ -49,7 +49,7 @@ Ext.define('BasiGX.plugin.Hover', {
          *
          * @type {String}
          */
-        LAYER_HOVERABLE_PROPERTY_NAME: 'hoverable',
+        LAYER_HOVERABLE_PROPERTY_NAME: &#39;hoverable&#39;,
 
 <span id='BasiGX-plugin-Hover-static-property-LAYER_HOVERFIELD_PROPERTY_NAME'>        /**
 </span>         * The property of a layer that holds a string value which indicates,
@@ -57,7 +57,7 @@ Ext.define('BasiGX.plugin.Hover', {
          *
          * @type {String}
          */
-        LAYER_HOVERFIELD_PROPERTY_NAME: 'hoverField',
+        LAYER_HOVERFIELD_PROPERTY_NAME: &#39;hoverField&#39;,
 
 <span id='BasiGX-plugin-Hover-static-property-HOVER_TEMPLATE_PLACEHOLDER_PREFIX'>        /**
 </span>         * The prefix used in a regular expression to match any placeholder
@@ -65,7 +65,7 @@ Ext.define('BasiGX.plugin.Hover', {
          *
          * @type {String}
          */
-        HOVER_TEMPLATE_PLACEHOLDER_PREFIX: '\{\{',
+        HOVER_TEMPLATE_PLACEHOLDER_PREFIX: &#39;\{\{&#39;,
 
 <span id='BasiGX-plugin-Hover-static-property-HOVER_TEMPLATE_PLACEHOLDER_SUFFIX'>        /**
 </span>         * The suffix used in a regular expression to match any placeholder
@@ -73,14 +73,14 @@ Ext.define('BasiGX.plugin.Hover', {
          *
          * @type {String}
          */
-        HOVER_TEMPLATE_PLACEHOLDER_SUFFIX: '\}\}'
+        HOVER_TEMPLATE_PLACEHOLDER_SUFFIX: &#39;\}\}&#39;
     },
 
     config: {
 <span id='BasiGX-plugin-Hover-cfg-pointerRest'>        pointerRest: true,
 </span><span id='BasiGX-plugin-Hover-cfg-pointerRestInterval'>        pointerRestInterval: 300,
 </span><span id='BasiGX-plugin-Hover-cfg-pointerRestPixelTolerance'>        pointerRestPixelTolerance: 5,
-</span><span id='BasiGX-plugin-Hover-cfg-featureInfoEpsg'>        featureInfoEpsg: 'EPSG:3857',
+</span><span id='BasiGX-plugin-Hover-cfg-featureInfoEpsg'>        featureInfoEpsg: &#39;EPSG:3857&#39;,
 </span><span id='BasiGX-plugin-Hover-cfg-hoverVectorLayerSource'>        hoverVectorLayerSource: null,
 </span><span id='BasiGX-plugin-Hover-cfg-hoverVectorLayer'>        hoverVectorLayer: null,
 </span><span id='BasiGX-plugin-Hover-cfg-hoverVectorLayerInteraction'>        hoverVectorLayerInteraction: null,
@@ -100,18 +100,18 @@ Ext.define('BasiGX.plugin.Hover', {
 <span id='BasiGX-plugin-Hover-cfg-selectEventOrigin'>    /**
 </span>     * The origin of the select event. We support two origins:
      *
-     * * `'collection'` (the current default), which fires whenever an `add`
+     * * `&#39;collection&#39;` (the current default), which fires whenever an `add`
      *   event of the collection of selected features is fired, and
-     * * `'interaction'` which fires when the select interaction fires the
+     * * `&#39;interaction&#39;` which fires when the select interaction fires the
      *   select event.
      *
      * Older versions of ol3 did not expose / have the latter event, and
-     * therefore the 'workaround' with the collection events was chosen.
+     * therefore the &#39;workaround&#39; with the collection events was chosen.
      *
      * @property {string}
      * @cfg
      */
-    selectEventOrigin: 'collection',
+    selectEventOrigin: &#39;collection&#39;,
 
 <span id='BasiGX-plugin-Hover-property-currentHoverTarget'>    currentHoverTarget: null,
 </span>
@@ -136,23 +136,23 @@ Ext.define('BasiGX.plugin.Hover', {
         cmp.setPointerRestInterval(this.getPointerRestInterval());
         cmp.setPointerRestPixelTolerance(this.getPointerRestPixelTolerance());
 
-        cmp.on('pointerrest', me.onPointerRest, me);
-        cmp.on('pointerrestout', me.cleanupHoverArtifacts, me);
+        cmp.on(&#39;pointerrest&#39;, me.onPointerRest, me);
+        cmp.on(&#39;pointerrestout&#39;, me.cleanupHoverArtifacts, me);
     },
 
 <span id='BasiGX-plugin-Hover-method-checkSelectEventOrigin'>    /**
 </span>     * Called during the initialisation phase, this methdo ensures that the
      * configuration option #selectEventOrigin has a valid value; e.g. either
-     * is `'collection'` (historical default) or `'interaction'`.
+     * is `&#39;collection&#39;` (historical default) or `&#39;interaction&#39;`.
      */
     checkSelectEventOrigin: function() {
         var me = this;
-        var allowedOrigins = ['collection', 'interaction'];
+        var allowedOrigins = [&#39;collection&#39;, &#39;interaction&#39;];
         var defaultOrigin = allowedOrigins[0];
         var selOrigin = me.selectEventOrigin;
         if (!Ext.Array.contains(allowedOrigins, selOrigin)) {
-            Ext.log.warn('Unexpected selectEventOrigin &quot;' + selOrigin + '&quot;,' +
-                ' correcting to &quot;' + defaultOrigin + '&quot;.');
+            Ext.log.warn(&#39;Unexpected selectEventOrigin &quot;&#39; + selOrigin + &#39;&quot;,&#39; +
+                &#39; correcting to &quot;&#39; + defaultOrigin + &#39;&quot;.&#39;);
             me.selectEventOrigin = defaultOrigin;
         }
     },
@@ -169,7 +169,7 @@ Ext.define('BasiGX.plugin.Hover', {
         var mapComponent = me.getCmp();
         var map = mapComponent.getMap();
         // whenever the layergroup changes, we need to cleanup hover artifacts
-        map.on('change:layerGroup', me.cleanupHoverArtifacts, me);
+        map.on(&#39;change:layerGroup&#39;, me.cleanupHoverArtifacts, me);
     },
 
 <span id='BasiGX-plugin-Hover-method-addHoverVectorLayerInteraction'>    /**
@@ -186,11 +186,11 @@ Ext.define('BasiGX.plugin.Hover', {
                 style: me.selectStyleFunction,
                 layers: [me.getHoverVectorLayer()]
             });
-            if (me.selectEventOrigin === 'collection') {
+            if (me.selectEventOrigin === &#39;collection&#39;) {
                 var featureCollection = interaction.getFeatures();
-                featureCollection.on('add', me.onFeatureClicked, me);
+                featureCollection.on(&#39;add&#39;, me.onFeatureClicked, me);
             } else {
-                interaction.on('select', me.onFeatureClicked, me);
+                interaction.on(&#39;select&#39;, me.onFeatureClicked, me);
             }
             map.addInteraction(interaction);
             me.setHoverVectorLayerInteraction(interaction);
@@ -208,12 +208,12 @@ Ext.define('BasiGX.plugin.Hover', {
         var me = this;
         var mapComponent = me.getCmp();
         var olFeatures;
-        if (me.selectEventOrigin === 'collection') {
+        if (me.selectEventOrigin === &#39;collection&#39;) {
             olFeatures = olEvt.target.getArray();
         } else {
             olFeatures = olEvt.selected;
         }
-        mapComponent.fireEvent('hoverfeaturesclick', olFeatures);
+        mapComponent.fireEvent(&#39;hoverfeaturesclick&#39;, olFeatures);
     },
 
 <span id='BasiGX-plugin-Hover-method-addHoverVectorLayerSource'>    /**
@@ -238,7 +238,7 @@ Ext.define('BasiGX.plugin.Hover', {
 
         if (!hoverVectorLayer) {
             hoverVectorLayer = new ol.layer.Vector({
-                name: 'hoverVectorLayer',
+                name: &#39;hoverVectorLayer&#39;,
                 source: me.getHoverVectorLayerSource(),
                 visible: true,
                 zIndex: 1000
@@ -279,7 +279,7 @@ Ext.define('BasiGX.plugin.Hover', {
             success: cb,
             failure: function(resp) {
                 if (!resp.aborted) {
-                    Ext.log.error('Couldn\'t get FeatureInfo', resp);
+                    Ext.log.error(&#39;Couldn\&#39;t get FeatureInfo&#39;, resp);
                 }
             }
         });
@@ -340,8 +340,8 @@ Ext.define('BasiGX.plugin.Hover', {
                         resolution,
                         projCode,
                         {
-                            'INFO_FORMAT': 'application/json',
-                            'FEATURE_COUNT': 50
+                            &#39;INFO_FORMAT&#39;: &#39;application/json&#39;,
+                            &#39;FEATURE_COUNT&#39;: 50
                         }
                     );
 
@@ -357,7 +357,7 @@ Ext.define('BasiGX.plugin.Hover', {
                         );
 
                         Ext.each(respFeatures, function(feature) {
-                            feature.set('layer', layer);
+                            feature.set(&#39;layer&#39;, layer);
                             var featureStyle = me.highlightStyleFunction(
                                 feature, resolution, pixelValues);
                             feature.setStyle(featureStyle);
@@ -371,15 +371,15 @@ Ext.define('BasiGX.plugin.Hover', {
                 } else if (source instanceof ol.source.Vector) {
                     // VECTOR!
                     map.forEachFeatureAtPixel(pixel, function(feat) {
-                        if (layer.get('type') === 'WFS' ||
-                                layer.get('type') === 'WFSCluster') {
+                        if (layer.get(&#39;type&#39;) === &#39;WFS&#39; ||
+                                layer.get(&#39;type&#39;) === &#39;WFSCluster&#39;) {
                             var hvl = me.getHoverVectorLayer();
                             // TODO This should be dynamically generated
                             // from the clusterStyle
                             hvl.setStyle(me.highlightStyleFunction);
                         }
                         var featureClone = feat.clone();
-                        featureClone.set('layer', layer);
+                        featureClone.set(&#39;layer&#39;, layer);
                         hoverLayers.push(layer);
                         hoverFeatures.push(featureClone);
                         me.showHoverFeature(layer, hoverFeatures);
@@ -402,7 +402,7 @@ Ext.define('BasiGX.plugin.Hover', {
         var me = this;
         var hoverableProp = me.self.LAYER_HOVERABLE_PROPERTY_NAME;
         if (candidate.get(hoverableProp) ||
-                candidate.get('type') === 'WFSCluster') {
+                candidate.get(&#39;type&#39;) === &#39;WFSCluster&#39;) {
             return true;
         } else {
             return false;
@@ -462,8 +462,8 @@ Ext.define('BasiGX.plugin.Hover', {
                 }
             });
 
-            var div = Ext.dom.Helper.createDom('&lt;div&gt;');
-            div.className = 'feature-hover-popup';
+            var div = Ext.dom.Helper.createDom(&#39;&lt;div&gt;&#39;);
+            div.className = &#39;feature-hover-popup&#39;;
             div.innerHTML = this.getToolTipHtml(layers, features);
             var overlay = new ol.Overlay({
                 position: coords,
@@ -487,26 +487,26 @@ Ext.define('BasiGX.plugin.Hover', {
      */
     getToolTipHtml: function(layers, features) {
         var me = this;
-        var innerHtml = '';
+        var innerHtml = &#39;&#39;;
         var hoverfieldProp = me.self.LAYER_HOVERFIELD_PROPERTY_NAME;
 
         Ext.each(features, function(feat) {
-            var layer = feat.get('layer');
+            var layer = feat.get(&#39;layer&#39;);
             var hoverFieldProp = layer.get(hoverfieldProp);
 
             var hoverText = me.getHoverTextFromTemplate(feat, hoverFieldProp);
 
-            innerHtml += '&lt;b&gt;' + layer.get('name') + '&lt;/b&gt;';
+            innerHtml += &#39;&lt;b&gt;&#39; + layer.get(&#39;name&#39;) + &#39;&lt;/b&gt;&#39;;
 
             // we check for existing feature here as there maybe strange
             // situations (e.g. when zooming in unfavorable situations) where
             // feat is undefined
             if (feat) {
-                if (layer.get('type') === 'WFSCluster') {
-                    var count = feat.get('count');
-                    innerHtml += '&lt;br /&gt;' + count + '&lt;br /&gt;';
+                if (layer.get(&#39;type&#39;) === &#39;WFSCluster&#39;) {
+                    var count = feat.get(&#39;count&#39;);
+                    innerHtml += &#39;&lt;br /&gt;&#39; + count + &#39;&lt;br /&gt;&#39;;
                 } else {
-                    innerHtml += '&lt;br /&gt;' + hoverText + '&lt;br /&gt;';
+                    innerHtml += &#39;&lt;br /&gt;&#39; + hoverText + &#39;&lt;br /&gt;&#39;;
                 }
             }
         });
@@ -530,7 +530,7 @@ Ext.define('BasiGX.plugin.Hover', {
      * @return {String} The new color as string, in `rgba(r, g, b, a)`-format.
      */
     transparify: function(baseColor, alpha) {
-        var rgbaTemplate = 'rgba({0}, {1}, {2}, {3})';
+        var rgbaTemplate = &#39;rgba({0}, {1}, {2}, {3})&#39;;
         var fallbackBaseColor = [255, 0, 0];
         var red;
         var green;
@@ -561,8 +561,8 @@ Ext.define('BasiGX.plugin.Hover', {
      */
     highlightStyleFunction: function(feature, resolution, baseColor) {
         var me = this;
-        var count = feature.get('count');
-        var hoverColor = 'rgba(255, 0, 0, 0.6)';
+        var count = feature.get(&#39;count&#39;);
+        var hoverColor = &#39;rgba(255, 0, 0, 0.6)&#39;;
         var dynamicHoverColor = me.getDynamicHoverColor();
         var radius = 14;
         var fontSize = 10;
@@ -601,14 +601,14 @@ Ext.define('BasiGX.plugin.Hover', {
                     width: 5
                 }),
                 text: new ol.style.Text({
-                    text: count &gt; 1 ? count.toString() : '',
-                    font: 'bold ' + fontSize * 2 + 'px Arial',
+                    text: count &gt; 1 ? count.toString() : &#39;&#39;,
+                    font: &#39;bold &#39; + fontSize * 2 + &#39;px Arial&#39;,
                     stroke: new ol.style.Stroke({
-                        color: 'black',
+                        color: &#39;black&#39;,
                         width: 1
                     }),
                     fill: new ol.style.Fill({
-                        color: 'white'
+                        color: &#39;white&#39;
                     })
                 })
             })
@@ -622,7 +622,7 @@ Ext.define('BasiGX.plugin.Hover', {
      * @return {Array&lt;ol.style.Style&gt;} The styles to use to style the feature.
      */
     selectStyleFunction: function(feature) {
-        var count = feature.get('count');
+        var count = feature.get(&#39;count&#39;);
         var radius = 14;
         var fontSize = 10;
 
@@ -640,26 +640,26 @@ Ext.define('BasiGX.plugin.Hover', {
         return [
             new ol.style.Style({
                 fill: new ol.style.Fill({
-                    color: 'rgba(0, 0, 255, 0.6)'
+                    color: &#39;rgba(0, 0, 255, 0.6)&#39;
                 }),
                 image: new ol.style.Circle({
                     radius: radius,
                     fill: new ol.style.Fill({
-                        color: 'rgba(0, 0, 255, 0.6)'
+                        color: &#39;rgba(0, 0, 255, 0.6)&#39;
                     }),
                     stroke: new ol.style.Stroke({
-                        color: 'gray'
+                        color: &#39;gray&#39;
                     })
                 }),
                 text: new ol.style.Text({
-                    text: count &gt; 1 ? count.toString() : '',
-                    font: 'bold ' + fontSize * 2 + 'px Arial',
+                    text: count &gt; 1 ? count.toString() : &#39;&#39;,
+                    font: &#39;bold &#39; + fontSize * 2 + &#39;px Arial&#39;,
                     stroke: new ol.style.Stroke({
-                        color: 'black',
+                        color: &#39;black&#39;,
                         width: 1
                     }),
                     fill: new ol.style.Fill({
-                        color: 'white'
+                        color: &#39;white&#39;
                     })
                 })
             })
@@ -676,7 +676,7 @@ Ext.define('BasiGX.plugin.Hover', {
         var me = this;
         var mapComponent = me.getCmp();
         var map = mapComponent.getMap();
-        var wmsHoverPlugin = mapComponent.getPlugin('wmshover');
+        var wmsHoverPlugin = mapComponent.getPlugin(&#39;wmshover&#39;);
 
         var feature = map.forEachFeatureAtPixel(pixel, function(feat) {
             return feat;
@@ -707,14 +707,14 @@ Ext.define('BasiGX.plugin.Hover', {
         var me = this;
         var placeHolderPrefix = me.self.HOVER_TEMPLATE_PLACEHOLDER_PREFIX;
         var placeHolderSuffix = me.self.HOVER_TEMPLATE_PLACEHOLDER_SUFFIX;
-        var hoverText = '';
+        var hoverText = &#39;&#39;;
 
         // Set the hoverfield for the popup, if set
         if (feature &amp;&amp; hoverTemplate) {
             // Find any character between two braces (including the braces in
             // the result)
-            var regExp = new RegExp(placeHolderPrefix + '(.*?)' +
-                    placeHolderSuffix, 'g');
+            var regExp = new RegExp(placeHolderPrefix + &#39;(.*?)&#39; +
+                    placeHolderSuffix, &#39;g&#39;);
             var regExpRes = hoverTemplate.match(regExp);
 
             // If we have a regex result, it means we found a placeholder in
@@ -750,11 +750,11 @@ Ext.define('BasiGX.plugin.Hover', {
                     // No key match found for this feature (e.g. if key not
                     // present or value is null)
                     if (noMatchCnt === Ext.Object.getSize(feature.attributes)) {
-                        hoverTemplate = hoverTemplate.replace(res, '');
+                        hoverTemplate = hoverTemplate.replace(res, &#39;&#39;);
                     }
                 });
             } else if (!Ext.isEmpty(feature.get(hoverTemplate))) {
-                // If we couldn't find any match, the hoverTemplate could be a
+                // If we couldn&#39;t find any match, the hoverTemplate could be a
                 // simple string containing the &quot;hoverField&quot;. To obtain
                 // backwards-compatibility, we check if this field is present
                 // and set the hoverText accordingly
@@ -762,7 +762,7 @@ Ext.define('BasiGX.plugin.Hover', {
             } else {
                 // Try to use &quot;id&quot; as fallback. If &quot;id&quot; is not available, the
                 // value will be &quot;undefined&quot;
-                hoverText = feature.get('id');
+                hoverText = feature.get(&#39;id&#39;);
             }
 
             hoverText = hoverTemplate;
@@ -770,7 +770,7 @@ Ext.define('BasiGX.plugin.Hover', {
 
         // Replace all newline breaks with a html &lt;br&gt; tag
         if (Ext.isString(hoverText)) {
-            hoverText = hoverText.replace(/\n/g, '&lt;br&gt;');
+            hoverText = hoverText.replace(/\n/g, &#39;&lt;br&gt;&#39;);
         }
 
         return hoverText;

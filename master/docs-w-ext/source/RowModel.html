@@ -27,40 +27,40 @@
  * + {@link #ignoreRightMouseSelection} - Specifies whether user may ignore right clicks
  * for selection purposes
  *
- * In the example below, we've enabled MULTI mode. This means that multiple rows can be selected.
+ * In the example below, we&#39;ve enabled MULTI mode. This means that multiple rows can be selected.
  *
  *     @example
- *     var store = Ext.create('Ext.data.Store', {
- *         fields: ['name', 'email', 'phone'],
+ *     var store = Ext.create(&#39;Ext.data.Store&#39;, {
+ *         fields: [&#39;name&#39;, &#39;email&#39;, &#39;phone&#39;],
  *         data: [
- *             { name: 'Lisa', email: 'lisa@simpsons.com', phone: '555-111-1224' },
- *             { name: 'Bart', email: 'bart@simpsons.com', phone: '555-222-1234' },
- *             { name: 'Homer', email: 'homer@simpsons.com', phone: '555-222-1244' },
- *             { name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
+ *             { name: &#39;Lisa&#39;, email: &#39;lisa@simpsons.com&#39;, phone: &#39;555-111-1224&#39; },
+ *             { name: &#39;Bart&#39;, email: &#39;bart@simpsons.com&#39;, phone: &#39;555-222-1234&#39; },
+ *             { name: &#39;Homer&#39;, email: &#39;homer@simpsons.com&#39;, phone: &#39;555-222-1244&#39; },
+ *             { name: &#39;Marge&#39;, email: &#39;marge@simpsons.com&#39;, phone: &#39;555-222-1254&#39; }
  *         ]
  *     });
  *
- *     Ext.create('Ext.grid.Panel', {
- *         title: 'Simpsons',
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
+ *         title: &#39;Simpsons&#39;,
  *         store: store,
  *         width: 400,
  *         renderTo: Ext.getBody(),
  *         selModel: {
- *            selType: 'rowmodel', // rowmodel is the default selection model
- *            mode: 'MULTI' // Allows selection of multiple rows
+ *            selType: &#39;rowmodel&#39;, // rowmodel is the default selection model
+ *            mode: &#39;MULTI&#39; // Allows selection of multiple rows
  *         },
  *         columns: [
- *             { text: 'Name',  dataIndex: 'name'  },
- *             { text: 'Email', dataIndex: 'email', flex: 1 },
- *             { text: 'Phone', dataIndex: 'phone' }
+ *             { text: &#39;Name&#39;,  dataIndex: &#39;name&#39;  },
+ *             { text: &#39;Email&#39;, dataIndex: &#39;email&#39;, flex: 1 },
+ *             { text: &#39;Phone&#39;, dataIndex: &#39;phone&#39; }
  *         ]
  *     });
  */
-Ext.define('Ext.selection.RowModel', {
-    extend: 'Ext.selection.DataViewModel',
-    alias: 'selection.rowmodel',
+Ext.define(&#39;Ext.selection.RowModel&#39;, {
+    extend: &#39;Ext.selection.DataViewModel&#39;,
+    alias: &#39;selection.rowmodel&#39;,
     requires: [
-        'Ext.grid.CellContext'
+        &#39;Ext.grid.CellContext&#39;
     ],
 
 
@@ -133,10 +133,10 @@ Ext.define('Ext.selection.RowModel', {
             views   = me.views || [me.view],
             viewsLn = views.length,
             recordIndex = me.store.indexOf(record),
-            eventName = isSelected ? 'select' : 'deselect',
+            eventName = isSelected ? &#39;select&#39; : &#39;deselect&#39;,
             i, view;
 
-        if ((suppressEvent || me.fireEvent('before' + eventName, me, record, recordIndex)) !== false &amp;&amp;
+        if ((suppressEvent || me.fireEvent(&#39;before&#39; + eventName, me, record, recordIndex)) !== false &amp;&amp;
                 commitFn() !== false) {
 
             // Selection models can handle more than one view
