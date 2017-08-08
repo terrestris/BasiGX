@@ -38,6 +38,9 @@ Ext.define('BasiGX.view.button.Measure', {
             textline: 'Strecke messen',
             textpoly: 'Fläche messen',
             textangle: 'Winkel messen',
+            tooltipLine: 'Strecke messen',
+            tooltipPoly: 'Fläche messen',
+            tooltipAngle: 'Winkel messen',
             continuePolygonMsg: 'Klicken zum Zeichnen der Fläche',
             continueLineMsg: 'Klicken zum Zeichnen der Strecke',
             continueAngleMsg: 'Klicken zum Zeichnen des Winkels',
@@ -246,9 +249,10 @@ Ext.define('BasiGX.view.button.Measure', {
         me.map = BasiGX.util.Map.getMapComponent().getMap();
 
         var btnText = me.btnTextByType();
+        var btnTooltip = me.btnTooltipByType();
         me.setBind({
             text: btnText,
-            tooltip: btnText
+            tooltip: btnTooltip
         });
 
         var nameMeasureLayer = LayerUtil.NAME_MEASURE_LAYER;
@@ -430,6 +434,30 @@ Ext.define('BasiGX.view.button.Measure', {
                 break;
         }
         return btnText;
+    },
+
+    /**
+     * Determines a viewmodel template to use for button btnTooltips depending
+     * on the configured #measureType.
+     *
+     * @return {String} The viewmodel template to use.
+     */
+    btnTooltipByType: function() {
+        var btnTooltip;
+        switch (this.measureType) {
+            case 'line':
+                btnTooltip = '{tooltipLine}';
+                break;
+            case 'polygon':
+                btnTooltip = '{tooltipPoly}';
+                break;
+            case 'angle':
+                btnTooltip = '{tooltipAngle}';
+                break;
+            default:
+                break;
+        }
+        return btnTooltip;
     },
 
     /**
