@@ -449,20 +449,15 @@ Ext.define('BasiGX.view.form.Print', {
             rotate: false
         });
 
-        me.transformInteraction.on('translateend',
-            function(event) {
-                me.currentExtent = event.feature;
-                me.renderAllClientInfos();
-                var newFeat = me.extentLayer.getSource().getFeatures()[0];
-                me.transformInteraction.select(newFeat);
-            });
-        me.transformInteraction.on('scaleend',
-            function(event) {
-                me.currentExtent = event.feature;
-                me.renderAllClientInfos();
-                var newFeat = me.extentLayer.getSource().getFeatures()[0];
-                me.transformInteraction.select(newFeat);
-            });
+        function transformCallback(event) {
+            me.currentExtent = event.feature;
+            me.renderAllClientInfos();
+            var newFeat = me.extentLayer.getSource().getFeatures()[0];
+            me.transformInteraction.select(newFeat);
+        }
+
+        me.transformInteraction.on('translateend', transformCallback);
+        me.transformInteraction.on('scaleend', transformCallback);
 
         me.transformInteraction.setActive(true);
         targetMap.addInteraction(me.transformInteraction);
