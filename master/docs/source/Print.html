@@ -471,6 +471,16 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
             rotate: false
         });
 
+        function transformCallback(event) {
+            me.currentExtent = event.feature;
+            me.renderAllClientInfos();
+            var newFeat = me.extentLayer.getSource().getFeatures()[0];
+            me.transformInteraction.select(newFeat);
+        }
+
+        me.transformInteraction.on(&#39;translateend&#39;, transformCallback);
+        me.transformInteraction.on(&#39;scaleend&#39;, transformCallback);
+
         me.transformInteraction.setActive(true);
         targetMap.addInteraction(me.transformInteraction);
     },
@@ -915,6 +925,9 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
                     this.getMapComponent(), me.extentLayer,
                     fieldset.clientInfo
                 );
+                if (me.currentExtent) {
+                    feat.setGeometry(me.currentExtent.getGeometry());
+                }
             }
             fieldset.extentFeature = feat;
         }, this);
