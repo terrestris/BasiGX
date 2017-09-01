@@ -10,6 +10,7 @@
         'util/Accessibility.test.js',
         'util/Animate.test.js',
         'util/Application.test.js',
+        'util/Caching.test.js',
         'util/Color.test.js',
         'util/ConfigParser.test.js',
         'util/Controller.test.js',
