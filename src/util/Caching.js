@@ -118,7 +118,7 @@ Ext.define('BasiGX.util.Caching', {
 
             // width/height of one tile at max resolution in the
             // unit of the underlying projection
-            var tileWidth = tileSize[1] * maxResolution;
+            var tileWidth = tileSize[0] * maxResolution;
             var tileHeight = tileSize[1] * maxResolution;
 
             // the minimum number of tiles that are required to fully
@@ -230,7 +230,7 @@ Ext.define('BasiGX.util.Caching', {
 
         /**
          * Sanitizes the passed extent, potentially taking into account the
-         * passed `ol.View`. A valid extent (left, bottom, right, top) will
+         * passed `ol.View`. A valid extent (minX, minY, maxX, maxY) will
          * be returned unchanged. When the passed extent is falsy, the view
          * will be queried for a property `extent`, and the checking of the
          * validity will use this extent. If we consider the extent invalid,

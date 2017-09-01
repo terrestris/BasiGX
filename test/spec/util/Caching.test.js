@@ -207,6 +207,26 @@ describe('BasiGX.util.Caching', function() {
                     ol.extent.containsExtent(expectedExtent, extent)
                 ).to.be.ok();
             });
+
+            it('works for irregular tilesizes', function() {
+                var maxResolution = 1120.002240004;
+                var tileSize = [123, 456];
+                var extent = [237000, 5207000, 960000, 6150000];
+
+                var expectedExtent = [
+                    237000, 5207000,
+                    1063561.653122952, 6228442.042883648
+                ];
+
+                var got = clazz.getExtentOfCoveringTileGrid(
+                    tileSize, maxResolution, extent
+                );
+
+                expect(got).to.eql(expectedExtent);
+                expect(
+                    ol.extent.containsExtent(expectedExtent, extent)
+                ).to.be.ok();
+            });
         });
 
         describe('#getTileOrigin', function() {
