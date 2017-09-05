@@ -744,8 +744,10 @@ Ext.define('BasiGX.view.form.Print', {
             xtype: 'checkbox',
             name: attributeRec.get('name'),
             checked: true,
-            fieldLabel: attributeRec.get('name'),
-            boxLabel: '…verwenden?' // TODO i18n
+            bind: {
+                fieldLabel: '{' + attributeRec.get('name') + '}',
+                boxLabel: '{labelUse}'
+            }
         };
     },
 
