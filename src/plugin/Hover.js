@@ -68,7 +68,14 @@ Ext.define('BasiGX.plugin.Hover', {
         hoverVectorLayer: null,
         hoverVectorLayerInteraction: null,
         dynamicHoverColor: false,
-        enableHoverSelection: true
+        enableHoverSelection: true,
+        /**
+         * The additional padding (in pixels) of the map component when
+         * determining the positioning of the hover popup.
+         *
+         * @type {Number}
+         */
+        mapPaddingPositioning: 30
     },
 
     /**
@@ -448,15 +455,81 @@ Ext.define('BasiGX.plugin.Hover', {
             var div = Ext.dom.Helper.createDom('<div>');
             div.className = 'feature-hover-popup';
             div.innerHTML = this.getToolTipHtml(layers, features);
+
+            var positioningConfig = me.getPositioningConfig(
+                evt.pixel, div, mapComponent
+            );
+
             var overlay = new ol.Overlay({
                 position: coords,
-                offset: [10, -30],
+                offset: positioningConfig.offset,
+                positioning: positioningConfig.positioning,
                 element: div
             });
             overlay.set(overlayIdentifierKey, overlayIdentifierVal);
             map.addOverlay(overlay);
         }
 
+    },
+
+    /**
+     * Return a positioning configuration object that has appropriate values at
+     * the keys `offset` and `positioning` for the passed pixel, div and
+     * mapComponent. The returned object is ready to be used to configure an
+     * `ol.Overlay` which shall hold the content of `div` and be placed at
+     * `pixel` within the `mapComponent`.
+     *
+     * @param {Array<Number>} pixel The pixel location where the overlay shall
+     *     eventually be positioned.
+     * @param {HTMLDivElement} div The div which is to be placed inside the
+     *     popup. this is expected to be not already rendered inside the page.
+     * @param {BasiGX.view.component.Map} mapComponent The map component, where
+     *     the overlay will be placed.
+     * @return {Object} An object with `offset` and `positioning` information.
+     */
+    getPositioningConfig: function(pixel, div, mapComponent) {
+        // measure the passed div first:
+        div.style.display = 'inline'; // so we can measure it!
+        var divEl = Ext.get(Ext.getBody().dom.appendChild(div));
+        var divDims = [divEl.getWidth(), divEl.getHeight()];
+        div.style.display = ''; // undo styling,
+        div.parentNode.removeChild(div);
+
+        var mapEl = mapComponent.getEl();
+        var mapDims = [mapEl.getWidth(), mapEl.getHeight()];
+
+        // have some padding so that popups might be considered near whatever,
+        // when technically they are not.
+        var threshold = this.getMapPaddingPositioning();
+        var dimLeftRight = divDims[0] + threshold;
+        var dimTopBottom = divDims[1] + threshold;
+
+        // fallback positioning
+        var positioning = ['top', 'left'];
+        var offset = [15, 0];
+
+        if (pixel[0] >= mapDims[0] - dimLeftRight) {
+            // near the right
+            offset[0] = -1 * (offset[0] + divDims[0]);
+        } else if (pixel[0] <= dimLeftRight) {
+            // near the left
+            positioning[1] = 'right';
+            offset[0] = offset[0] + divDims[0];
+        }
+
+        if (pixel[1] >= mapDims[1] - dimTopBottom) {
+            // near the bottom
+            offset[1] = -1 * (offset[1] + divDims[1]);
+        } else if (pixel[1] <= dimTopBottom) {
+            // near the top
+            positioning[0] = 'bottom';
+            offset[1] = offset[1] + divDims[1];
+        }
+
+        return {
+            positioning: positioning.join('-'),
+            offset: offset
+        };
     },
 
     /**
