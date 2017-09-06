@@ -120,11 +120,11 @@ Ext.define('BasiGX.plugin.Hover', {
         }
 
         me.setupMapEventListeners();
-        this.setCmp(cmp);
+        me.setCmp(cmp);
 
-        cmp.setPointerRest(this.getPointerRest());
-        cmp.setPointerRestInterval(this.getPointerRestInterval());
-        cmp.setPointerRestPixelTolerance(this.getPointerRestPixelTolerance());
+        cmp.setPointerRest(me.getPointerRest());
+        cmp.setPointerRestInterval(me.getPointerRestInterval());
+        cmp.setPointerRestPixelTolerance(me.getPointerRestPixelTolerance());
 
         cmp.on('pointerrest', me.onPointerRest, me);
         cmp.on('pointerrestout', me.cleanupHoverArtifacts, me);
