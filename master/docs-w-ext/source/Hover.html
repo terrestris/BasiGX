@@ -85,8 +85,15 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
 </span><span id='BasiGX-plugin-Hover-cfg-hoverVectorLayer'>        hoverVectorLayer: null,
 </span><span id='BasiGX-plugin-Hover-cfg-hoverVectorLayerInteraction'>        hoverVectorLayerInteraction: null,
 </span><span id='BasiGX-plugin-Hover-cfg-dynamicHoverColor'>        dynamicHoverColor: false,
-</span><span id='BasiGX-plugin-Hover-cfg-enableHoverSelection'>        enableHoverSelection: true
-</span>    },
+</span><span id='BasiGX-plugin-Hover-cfg-enableHoverSelection'>        enableHoverSelection: true,
+</span><span id='BasiGX-plugin-Hover-property-mapPaddingPositioning'>        /**
+</span>         * The additional padding (in pixels) of the map component when
+         * determining the positioning of the hover popup.
+         *
+         * @type {Number}
+         */
+        mapPaddingPositioning: 30
+    },
 
 <span id='BasiGX-plugin-Hover-cfg-selectMulti'>    /**
 </span>     * Whether the `ol.interaction.Select` shall be configured to select
@@ -130,11 +137,11 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
         }
 
         me.setupMapEventListeners();
-        this.setCmp(cmp);
+        me.setCmp(cmp);
 
-        cmp.setPointerRest(this.getPointerRest());
-        cmp.setPointerRestInterval(this.getPointerRestInterval());
-        cmp.setPointerRestPixelTolerance(this.getPointerRestPixelTolerance());
+        cmp.setPointerRest(me.getPointerRest());
+        cmp.setPointerRestInterval(me.getPointerRestInterval());
+        cmp.setPointerRestPixelTolerance(me.getPointerRestPixelTolerance());
 
         cmp.on(&#39;pointerrest&#39;, me.onPointerRest, me);
         cmp.on(&#39;pointerrestout&#39;, me.cleanupHoverArtifacts, me);
@@ -465,15 +472,81 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
             var div = Ext.dom.Helper.createDom(&#39;&lt;div&gt;&#39;);
             div.className = &#39;feature-hover-popup&#39;;
             div.innerHTML = this.getToolTipHtml(layers, features);
+
+            var positioningConfig = me.getPositioningConfig(
+                evt.pixel, div, mapComponent
+            );
+
             var overlay = new ol.Overlay({
                 position: coords,
-                offset: [10, -30],
+                offset: positioningConfig.offset,
+                positioning: positioningConfig.positioning,
                 element: div
             });
             overlay.set(overlayIdentifierKey, overlayIdentifierVal);
             map.addOverlay(overlay);
         }
 
+    },
+
+<span id='BasiGX-plugin-Hover-method-getPositioningConfig'>    /**
+</span>     * Return a positioning configuration object that has appropriate values at
+     * the keys `offset` and `positioning` for the passed pixel, div and
+     * mapComponent. The returned object is ready to be used to configure an
+     * `ol.Overlay` which shall hold the content of `div` and be placed at
+     * `pixel` within the `mapComponent`.
+     *
+     * @param {Array&lt;Number&gt;} pixel The pixel location where the overlay shall
+     *     eventually be positioned.
+     * @param {HTMLDivElement} div The div which is to be placed inside the
+     *     popup. this is expected to be not already rendered inside the page.
+     * @param {BasiGX.view.component.Map} mapComponent The map component, where
+     *     the overlay will be placed.
+     * @return {Object} An object with `offset` and `positioning` information.
+     */
+    getPositioningConfig: function(pixel, div, mapComponent) {
+        // measure the passed div first:
+        div.style.display = &#39;inline&#39;; // so we can measure it!
+        var divEl = Ext.get(Ext.getBody().dom.appendChild(div));
+        var divDims = [divEl.getWidth(), divEl.getHeight()];
+        div.style.display = &#39;&#39;; // undo styling,
+        div.parentNode.removeChild(div);
+
+        var mapEl = mapComponent.getEl();
+        var mapDims = [mapEl.getWidth(), mapEl.getHeight()];
+
+        // have some padding so that popups might be considered near whatever,
+        // when technically they are not.
+        var threshold = this.getMapPaddingPositioning();
+        var dimLeftRight = divDims[0] + threshold;
+        var dimTopBottom = divDims[1] + threshold;
+
+        // fallback positioning
+        var positioning = [&#39;top&#39;, &#39;left&#39;];
+        var offset = [15, 0];
+
+        if (pixel[0] &gt;= mapDims[0] - dimLeftRight) {
+            // near the right
+            offset[0] = -1 * (offset[0] + divDims[0]);
+        } else if (pixel[0] &lt;= dimLeftRight) {
+            // near the left
+            positioning[1] = &#39;right&#39;;
+            offset[0] = offset[0] + divDims[0];
+        }
+
+        if (pixel[1] &gt;= mapDims[1] - dimTopBottom) {
+            // near the bottom
+            offset[1] = -1 * (offset[1] + divDims[1]);
+        } else if (pixel[1] &lt;= dimTopBottom) {
+            // near the top
+            positioning[0] = &#39;bottom&#39;;
+            offset[1] = offset[1] + divDims[1];
+        }
+
+        return {
+            positioning: positioning.join(&#39;-&#39;),
+            offset: offset
+        };
     },
 
 <span id='BasiGX-plugin-Hover-method-getToolTipHtml'>    /**
