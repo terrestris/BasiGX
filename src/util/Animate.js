@@ -490,6 +490,13 @@ Ext.define('BasiGX.util.Animate', {
             return listenerKey;
         },
 
+        /**
+        * Returns a flat Array with coordinates
+        *
+        * @param {Array} coordinateArray The Array to flatten
+        * @param {Array} points The flattened Array
+        * @return {Array} The flattened Array
+        */
         extractPoints: function(coordinateArray, points) {
             if (!points) {
                 points = [];
@@ -513,6 +520,13 @@ Ext.define('BasiGX.util.Animate', {
             return points;
         },
 
+        /**
+        * Returns a flat Array with coordinates
+        *
+        * @param {Array} coordinateArray The Array to flatten
+        * @param {Array} segments The flattened Array
+        * @return {Array} The flattened Array
+        */
         extractLines: function(coordinateArray, segments) {
             if (!segments) {
                 segments = [];
