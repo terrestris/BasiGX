@@ -39,6 +39,16 @@ Ext.onReady(function() {
                 text: 'Flash Feature',
                 pressed: false,
                 toggleGroup: 'animation'
+            }, {
+                xtype: 'button',
+                text: 'Follow Vertices',
+                pressed: false,
+                toggleGroup: 'animation'
+            }, {
+                xtype: 'button',
+                text: 'Follow Segments',
+                pressed: false,
+                toggleGroup: 'animation'
             }]
         }]
     });
@@ -85,10 +95,18 @@ Ext.onReady(function() {
             'button[text=Material Fill]')[0].pressed;
         var flashFeature = Ext.ComponentQuery.query(
             'button[text=Flash Feature]')[0].pressed;
+        var followVertices = Ext.ComponentQuery.query(
+            'button[text=Follow Vertices]')[0].pressed;
+        var followSegments = Ext.ComponentQuery.query(
+            'button[text=Follow Segments]')[0].pressed;
         if (materialFill) {
             BasiGX.util.Animate.materialFill(feature, 1000, evt);
         } else if (flashFeature) {
             BasiGX.util.Animate.flashFeature(feature, 1000);
+        } else if (followVertices) {
+            BasiGX.util.Animate.followVertices(feature, 1000);
+        } else if (followSegments) {
+            BasiGX.util.Animate.followVertices(feature, 1000, true);
         }
     }
 
