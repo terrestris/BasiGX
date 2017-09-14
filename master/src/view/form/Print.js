@@ -57,7 +57,10 @@ Ext.define('BasiGX.view.form.Print', {
                 'kann ein Kartenausdruck erzeugt werden.<br>' +
                 '• Füllen Sie das Formular aus und schicken den Druckauftrag ' +
                 'ab.<br>• Nach kurzer Wartezeit sollte der Druck in Form ' +
-                'einer PDF Datei zum Download bereitstehen'
+                'einer PDF Datei zum Download bereitstehen',
+            labelUse: '…verwenden?',
+            northArrow: 'Nordpfeil',
+            scalebar: 'Massstabsleiste'
         }
     },
 
@@ -744,8 +747,10 @@ Ext.define('BasiGX.view.form.Print', {
             xtype: 'checkbox',
             name: attributeRec.get('name'),
             checked: true,
-            fieldLabel: attributeRec.get('name'),
-            boxLabel: '…verwenden?' // TODO i18n
+            bind: {
+                fieldLabel: '{' + attributeRec.get('name') + '}',
+                boxLabel: '{labelUse}'
+            }
         };
     },
 
