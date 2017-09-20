@@ -81,6 +81,14 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
     fields: ['scale', 'resolution'],
 
     /**
+     * Will hold the event keys of any listeners we bind to openlayers objects,
+     * so that we can unbind them once we get destroyed.
+     *
+     * @private
+     */
+    boundEventKeys: [],
+
+    /**
      *
      */
     map: null,
@@ -90,18 +98,18 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
          *
          */
         scales: [
-            {'scale': '1:2.000.000', 'resolution': 560},
-            {'scale': '1:1.000.000', 'resolution': 280},
-            {'scale': '1:500.000', 'resolution': 140},
-            {'scale': '1:250.000', 'resolution': 70},
-            {'scale': '1:100.000', 'resolution': 28},
-            {'scale': '1:50.000', 'resolution': 14},
-            {'scale': '1:25.000', 'resolution': 7},
-            {'scale': '1:10.000', 'resolution': 2.8},
-            {'scale': '1:5.000', 'resolution': 1.4},
-            {'scale': '1:2.500', 'resolution': 0.7},
-            {'scale': '1:1.000', 'resolution': 0.28},
-            {'scale': '1:500', 'resolution': 0.14}
+            {scale: '1:2.000.000', resolution: 560},
+            {scale: '1:1.000.000', resolution: 280},
+            {scale: '1:500.000', resolution: 140},
+            {scale: '1:250.000', resolution: 70},
+            {scale: '1:100.000', resolution: 28},
+            {scale: '1:50.000', resolution: 14},
+            {scale: '1:25.000', resolution: 7},
+            {scale: '1:10.000', resolution: 2.8},
+            {scale: '1:5.000', resolution: 1.4},
+            {scale: '1:2.500', resolution: 0.7},
+            {scale: '1:1.000', resolution: 0.28},
+            {scale: '1:500', resolution: 0.14}
         ]
     },
 
@@ -114,6 +122,7 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
         if (!me.map) {
             me.map = BasiGX.util.Map.getMapComponent().getMap();
         }
+        var mapView = me.map.getView();
 
         // using hard scales here as there is no way currently known to
         // retrieve all resolutions from the map
@@ -127,16 +136,39 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
 
         me.store = scaleStore;
 
-        me.callParent([arguments]);
+        me.callParent();
 
         // set the correct default value
-        me.setValue(me.map.getView().getResolution());
+        me.setValue(mapView.getResolution());
 
         // register listeners to update combo and map
-        me.on('select', function(combo, rec) {
-            me.map.getView().setResolution(rec.get('resolution'));
-        });
-        me.map.getView().on('change:resolution', me.updateComboOnMapChange, me);
+        me.on('select', me.onComboSelect, me);
+
+        // eventually update the combo when map-resolution changes
+        var bufferedUpdateMapResChange = Ext.Function.createBuffered(
+            me.updateComboOnMapChange, 50, me
+        );
+        var key = mapView.on('change:resolution', bufferedUpdateMapResChange);
+        me.boundEventKeys.push(key);
+    },
+
+    /**
+     * Unregister any listeners we may have added to openlayers components when
+     * the combo is destroyed.
+     */
+    onDestroy: function() {
+        ol.Observable.unByKey(this.boundEventKeys);
+        this.boundEventKeys = [];
+    },
+
+    /**
+     * Sets the map resolution to the selected value.
+     *
+     * @param {BasiGX.view.combo.ScaleCombo} combo The scale combo.
+     * @param {Ext.data.Model} rec The selected record.
+     */
+    onComboSelect: function(combo, rec) {
+        this.map.getView().setResolution(rec.get('resolution'));
     },
 
     /**
@@ -150,24 +182,25 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
      *     event.
      */
     updateComboOnMapChange: function(evt) {
-        var resolution = evt.target.get(evt.key); // map.get('resolution')
+        var mapView = evt.target;
+        if (mapView.getAnimating()) {
+            return; // Do not update the combo while we are animating
+        }
+        var resolution = mapView.get(evt.key); // map.get('resolution')
         var store = this.getStore();
-        var matchInStore = false;
 
-        matchInStore = (store.findExact('resolution', resolution) >= 0) ?
-            true : false;
+        var matchInStore = (store.findExact('resolution', resolution) >= 0);
 
-        if (matchInStore) {
-            this.setValue(resolution);
-        } else {
+        if (!matchInStore) {
+            var scale = this.getCurrentScale(resolution);
+            var dspScale = '1:' + Math.round(scale).toLocaleString();
             var rec = {
-                scale: '1:' + Math.round(
-                    this.getCurrentScale(resolution)).toLocaleString(),
+                scale: dspScale,
                 resolution: resolution
             };
             store.add(rec);
-            this.setValue(resolution);
         }
+        this.setValue(resolution);
 
     },
 
