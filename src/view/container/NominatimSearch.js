@@ -59,7 +59,7 @@ Ext.define('BasiGX.view.container.NominatimSearch', {
         /**
          * The URL to the nominatim service
          */
-        nominatimUrl: 'http://nominatim.openstreetmap.org',
+        nominatimUrl: 'https://nominatim.openstreetmap.org',
 
         /**
          *
