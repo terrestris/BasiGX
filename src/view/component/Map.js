@@ -73,7 +73,7 @@ Ext.define('BasiGX.view.component.Map', {
                     {
                         'name': 'OSM WMS',
                         'type': 'TileWMS',
-                        'url': 'http://ows.terrestris.de/osm/service?',
+                        'url': 'https://ows.terrestris.de/osm/service?',
                         'layers': 'OSM-WMS',
                         'topic': false
                     }
