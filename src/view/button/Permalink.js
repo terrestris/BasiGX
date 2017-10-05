@@ -77,6 +77,7 @@ Ext.define('BasiGX.view.button.Permalink', {
             if (!win) {
                 Ext.create('Ext.window.Window', {
                     name: 'permalink-window',
+                    constrain: true,
                     title: this.getViewModel().get('windowTitle'),
                     layout: 'fit',
                     items: [{
