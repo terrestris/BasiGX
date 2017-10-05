@@ -130,6 +130,7 @@ Ext.define('BasiGX.view.button.AddWms', {
                     width: 500,
                     height: 400,
                     layout: 'fit',
+                    constrain: true,
                     items: [{
                         xtype: 'basigx-form-addwms'
                     }]

@@ -1094,7 +1094,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
 
         var fontSymbolPoolWin = Ext.create('Ext.window.Window', {
             title: me.getViewModel().get('fontSymbolPoolWindowTitle'),
-            constrained: true,
+            constrain: true,
             items: [fontSymbolPool]
         });
         fontSymbolPoolWin.showAt(5, 5);
@@ -1145,7 +1145,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
 
         var graphicPoolWin = Ext.create('Ext.window.Window', {
             title: me.getViewModel().get('graphicPoolWindowTitle'),
-            constrained: true,
+            constrain: true,
             items: [graphicPool]
         });
         graphicPoolWin.show();

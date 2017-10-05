@@ -797,7 +797,7 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
 
         var graphicPoolWin = Ext.create('Ext.window.Window', {
             title: me.getViewModel().get('graphicPoolWindowTitle'),
-            constrained: true,
+            constrain: true,
             items: [graphicPool]
         });
         graphicPoolWin.show();
