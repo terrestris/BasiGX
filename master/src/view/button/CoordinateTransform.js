@@ -82,6 +82,7 @@ Ext.define('BasiGX.view.button.CoordinateTransform', {
                     width: 500,
                     height: 400,
                     layout: 'fit',
+                    constrain: true,
                     items: [{
                         xtype: 'basigx-form-coordinatetransform',
                         coordinateSystemsToUse: this.coordinateSystemsToUse,

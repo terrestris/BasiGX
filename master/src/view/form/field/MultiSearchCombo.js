@@ -345,7 +345,8 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
                 }],
                 title: me.getViewModel().get('settingsWindowTitle'),
                 closeAction: 'hide',
-                autoShow: true
+                autoShow: true,
+                constrain: true
             });
             me.settingsWindow = settingsWindow;
         }

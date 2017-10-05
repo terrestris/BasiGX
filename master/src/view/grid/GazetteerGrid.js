@@ -269,6 +269,7 @@ Ext.define('BasiGX.view.grid.GazetteerGrid', {
                 width: 400,
                 layout: 'fit',
                 bodyPadding: 5,
+                constrain: true,
                 html: this.getViewModel().get('gazetteerHtmlHints')
             }).show();
         }
