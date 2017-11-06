@@ -77,7 +77,13 @@ Ext.define('BasiGX.view.form.Print', {
         store: null,
         printExtentAlwaysCentered: true,
         printExtentMovable: false,
-        printExtentScalable: false
+        printExtentScalable: false,
+        /**
+         * Option to be able to print without a map.
+         * @type {Boolean} if true, app selection and the extent rectangle are
+         * disabled.
+         */
+        skipMapMode: false
     },
 
     borderColors: [
@@ -207,11 +213,14 @@ Ext.define('BasiGX.view.form.Print', {
             xtype: 'fieldcontainer',
             name: 'defaultFieldContainer',
             layout: 'form',
-            items: printAppComponent
+            items: printAppComponent,
+            hidden: this.config.skipMapMode
         });
 
-        me.on('afterrender', me.addExtentLayer, me);
-        me.on('afterrender', me.addExtentInteractions, me);
+        if (!this.config.skipMapMode) {
+            me.on('afterrender', me.addExtentLayer, me);
+            me.on('afterrender', me.addExtentInteractions, me);
+        }
 
         me.on('afterrender', me.addParentCollapseExpandListeners, me);
         me.on('beforeDestroy', me.cleanupPrintExtent, me);
@@ -335,7 +344,10 @@ Ext.define('BasiGX.view.form.Print', {
         Ext.each(fieldsets, function(fs) {
             var name = fs.name;
             // TODO double check when rotated
-            var featureBbox = fs.extentFeature.getGeometry().getExtent();
+            var featureBbox;
+            if (fs.extentFeature) {
+                featureBbox = fs.extentFeature.getGeometry().getExtent();
+            }
             var dpi = fs.down('[name="dpi"]').getValue();
 
             attributes[name] = {
@@ -894,9 +906,10 @@ Ext.define('BasiGX.view.form.Print', {
         }
         me._renderingClientExtents = true;
 
-        me.extentLayer.getSource().clear();
-
-        me.resetExtentInteraction();
+        if (me.extentLayer) {
+            me.extentLayer.getSource().clear();
+            me.resetExtentInteraction();
+        }
 
         var fieldsets = [];
         if (me && me.items) {
@@ -944,7 +957,9 @@ Ext.define('BasiGX.view.form.Print', {
         var me = this;
         var map = me.getMapComponent().getMap();
         me.cleanupTransformInteraction();
-        me.extentLayer.getSource().clear();
+        if (this.extentLayer) {
+            me.extentLayer.getSource().clear();
+        }
         map.un('moveend', me.renderAllClientInfos, me);
     },
 
