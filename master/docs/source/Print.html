@@ -94,8 +94,14 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
 </span><span id='BasiGX-view-form-Print-cfg-store'>        store: null,
 </span><span id='BasiGX-view-form-Print-cfg-printExtentAlwaysCentered'>        printExtentAlwaysCentered: true,
 </span><span id='BasiGX-view-form-Print-cfg-printExtentMovable'>        printExtentMovable: false,
-</span><span id='BasiGX-view-form-Print-cfg-printExtentScalable'>        printExtentScalable: false
-</span>    },
+</span><span id='BasiGX-view-form-Print-cfg-printExtentScalable'>        printExtentScalable: false,
+</span><span id='BasiGX-view-form-Print-property-skipMapMode'>        /**
+</span>         * Option to be able to print without a map.
+         * @type {Boolean} if true, app selection and the extent rectangle are
+         * disabled.
+         */
+        skipMapMode: false
+    },
 
 <span id='BasiGX-view-form-Print-property-borderColors'>    borderColors: [
 </span>        &#39;#FF5050&#39;,
@@ -224,11 +230,14 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
             xtype: &#39;fieldcontainer&#39;,
             name: &#39;defaultFieldContainer&#39;,
             layout: &#39;form&#39;,
-            items: printAppComponent
+            items: printAppComponent,
+            hidden: this.config.skipMapMode
         });
 
-        me.on(&#39;afterrender&#39;, me.addExtentLayer, me);
-        me.on(&#39;afterrender&#39;, me.addExtentInteractions, me);
+        if (!this.config.skipMapMode) {
+            me.on(&#39;afterrender&#39;, me.addExtentLayer, me);
+            me.on(&#39;afterrender&#39;, me.addExtentInteractions, me);
+        }
 
         me.on(&#39;afterrender&#39;, me.addParentCollapseExpandListeners, me);
         me.on(&#39;beforeDestroy&#39;, me.cleanupPrintExtent, me);
@@ -352,7 +361,10 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
         Ext.each(fieldsets, function(fs) {
             var name = fs.name;
             // TODO double check when rotated
-            var featureBbox = fs.extentFeature.getGeometry().getExtent();
+            var featureBbox;
+            if (fs.extentFeature) {
+                featureBbox = fs.extentFeature.getGeometry().getExtent();
+            }
             var dpi = fs.down(&#39;[name=&quot;dpi&quot;]&#39;).getValue();
 
             attributes[name] = {
@@ -911,9 +923,10 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
         }
         me._renderingClientExtents = true;
 
-        me.extentLayer.getSource().clear();
-
-        me.resetExtentInteraction();
+        if (me.extentLayer) {
+            me.extentLayer.getSource().clear();
+            me.resetExtentInteraction();
+        }
 
         var fieldsets = [];
         if (me &amp;&amp; me.items) {
@@ -961,7 +974,9 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
         var me = this;
         var map = me.getMapComponent().getMap();
         me.cleanupTransformInteraction();
-        me.extentLayer.getSource().clear();
+        if (this.extentLayer) {
+            me.extentLayer.getSource().clear();
+        }
         map.un(&#39;moveend&#39;, me.renderAllClientInfos, me);
     },
 
