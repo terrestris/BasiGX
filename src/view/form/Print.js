@@ -78,6 +78,11 @@ Ext.define('BasiGX.view.form.Print', {
         printExtentAlwaysCentered: true,
         printExtentMovable: false,
         printExtentScalable: false,
+        /**
+         * Option to be able to print without a map.
+         * @type {Boolean} if true, app selection and the extent rectangle are
+         * disabled.
+         */
         skipMapMode: false
     },
 
@@ -341,7 +346,7 @@ Ext.define('BasiGX.view.form.Print', {
             // TODO double check when rotated
             var featureBbox;
             if (fs.extentFeature) {
-                fs.extentFeature.getGeometry().getExtent();
+                featureBbox = fs.extentFeature.getGeometry().getExtent();
             }
             var dpi = fs.down('[name="dpi"]').getValue();
 
