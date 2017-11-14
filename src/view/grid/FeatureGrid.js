@@ -27,6 +27,15 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         'GeoExt.data.store.Features'
     ],
 
+    viewModel: {
+        data: {
+            renameButton: 'Umbenennen',
+            renameBox: 'Bitte geben Sie den neuen Spaltennamen an:',
+            deleteTitle: 'Löschen',
+            deleteQuestion: 'Wollen Sie die Spalte wirklich löschen?'
+        }
+    },
+
     config: {
         layer: null
     },
@@ -50,6 +59,97 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         this.registerEvents();
         var map = Ext.ComponentQuery.query('basigx-component-map')[0];
         this.createHighlightLayer(map);
+        this.appendMenuEntries();
+    },
+
+    /**
+     * Append extra column menu items.
+     */
+    appendMenuEntries: function() {
+        var grid = this.down('grid');
+        var viewModel = this.getViewModel();
+        var menu = grid.view.headerCt.getMenu();
+        menu.add(this.getRenameEntry(viewModel));
+        menu.add(this.getDeleteEntry(viewModel));
+    },
+
+    /**
+     * Get a rename column menu item.
+     * @param  {Object} viewModel the view model of this component
+     * @return {Object}           the menu item config
+     */
+    getRenameEntry: function(viewModel) {
+        var me = this;
+        return {
+            text: viewModel.get('renameButton'),
+            handler: function(item) {
+                var column = item.up('gridcolumn').dataIndex;
+                Ext.Msg.prompt(
+                    viewModel.get('renameButton'),
+                    viewModel.get('renameBox'),
+                    function(result, text) {
+                        if (result === 'ok') {
+                            me.renameColumn(column, text);
+                        }
+                    },
+                    this,
+                    false,
+                    column
+                );
+            }
+        };
+    },
+
+    /**
+     * Get a delete column menu item.
+     * @param  {Object} viewModel the view model of this component
+     * @return {Object}           the menu item config
+     */
+    getDeleteEntry: function(viewModel) {
+        var me = this;
+        return {
+            text: viewModel.get('deleteTitle'),
+            handler: function(item) {
+                var column = item.up('gridcolumn').dataIndex;
+                Ext.Msg.confirm(
+                    viewModel.get('deleteTitle'),
+                    viewModel.get('deleteQuestion'),
+                    function(result, text) {
+                        if (result === 'yes') {
+                            me.deleteColumn(column);
+                        }
+                    }
+                );
+            }
+        };
+    },
+
+    /**
+     * Rename a column.
+     * @param  {String} from name of the column to rename
+     * @param  {String} to   name to rename the column to
+     */
+    renameColumn: function(from, to) {
+        var features = this.getLayer().getSource().getFeatures();
+        Ext.each(features, function(feature) {
+            feature.set(to, feature.get(from));
+            feature.set(from, undefined);
+        });
+        var store = this.down('grid').getStore();
+        this.reconfigureStore(store);
+    },
+
+    /**
+     * Delete the column from the store and reconfigure.
+     * @param  {String} name name of the column to deleteTitle
+     */
+    deleteColumn: function(name) {
+        var features = this.getLayer().getSource().getFeatures();
+        Ext.each(features, function(feature) {
+            feature.set(name, undefined);
+        });
+        var store = this.down('grid').getStore();
+        this.reconfigureStore(store);
     },
 
     /**
@@ -105,6 +205,10 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             layer: this.getLayer()
         });
 
+        this.reconfigureStore(store);
+    },
+
+    reconfigureStore: function(store) {
         var columns = this.extractSchema(store);
         this.down('grid').reconfigure(store, columns);
     },
@@ -119,7 +223,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var data = store.getData().items;
         if (data.length > 0) {
             Ext.iterate(data[0].data, function(key, value) {
-                if (value.getExtent) {
+                if (!value || value.getExtent) {
                     return;
                 }
                 columns.push({
