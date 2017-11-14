@@ -58,7 +58,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      * @param  {BasiGX.component.Map} map the map
      */
     createHighlightLayer: function(map) {
-        var layer = map.getLayerByName('highlight');
+        var layers = map.getMap().getLayers();
+        var layer = BasiGX.util.Layer.getLayerBy('name', 'highlight', layers);
         if (layer) {
             this.highlightLayer = layer;
             this.highlightSource = layer.getSource();
@@ -74,16 +75,10 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             source: this.highlightSource
         });
         this.highlightLayer.set('name', 'highlight');
-        var trees = Ext.ComponentQuery.query('basigx-panel-legendtree');
-        var store;
-        if (trees.length > 0) {
-            store = trees[0].getStore();
-            store.suspendCollectionEvents();
-        }
+        var displayInLayerSwitcherKey = BasiGX.util.Layer
+                    .KEY_DISPLAY_IN_LAYERSWITCHER;
+        this.highlightLayer.set(displayInLayerSwitcherKey, false);
         map.getMap().addLayer(this.highlightLayer);
-        if (store) {
-            store.resumeCollectionEvents();
-        }
     },
 
     /**
@@ -123,7 +118,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var columns = [];
         var data = store.getData().items;
         if (data.length > 0) {
-            Ext.iterate(store.getData().items[0].data, function(key, value) {
+            Ext.iterate(data[0].data, function(key, value) {
                 if (value.getExtent) {
                     return;
                 }
