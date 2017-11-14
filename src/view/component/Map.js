@@ -180,6 +180,23 @@ Ext.define('BasiGX.view.component.Map', {
             logo: false
         });
         map.addControl(attribution);
+    },
+
+    /**
+     * Retrieves a layer by its name property.
+     * @param  {String} name the name
+     * @return {ol.layer.Layer}     the layer, or undefined, if it doesn't exist
+     */
+    getLayerByName: function(name) {
+        var map = this.getMap();
+        var result;
+        Ext.each(map.getLayers(), function(layer) {
+            if (layer.get('name') === name) {
+                result = layer;
+                return false;
+            }
+        });
+        return result;
     }
 
 });
