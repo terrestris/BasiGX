@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2017-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-grid-FeatureGrid'>/**
+</span> * FeatureGrid
+ *
+ * A FeatureGrid showing the attribute values of features.
+ *
+ * @class BasiGX.view.grid.FeatureGrid
+ */
+Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
+    xtype: &#39;basigx-grid-featuregrid&#39;,
+    extend: &#39;Ext.panel.Panel&#39;,
+    requires: [
+        &#39;GeoExt.data.store.Features&#39;
+    ],
+
+<span id='BasiGX-view-grid-FeatureGrid-cfg-viewModel'>    viewModel: {
+</span>        data: {
+            renameButton: &#39;Umbenennen&#39;,
+            renameBox: &#39;Bitte geben Sie den neuen Spaltennamen an:&#39;,
+            deleteTitle: &#39;Löschen&#39;,
+            deleteQuestion: &#39;Wollen Sie die Spalte wirklich löschen?&#39;
+        }
+    },
+
+    config: {
+<span id='BasiGX-view-grid-FeatureGrid-cfg-layer'>        layer: null
+</span>    },
+
+<span id='BasiGX-view-grid-FeatureGrid-property-items'>    items: [{
+</span>        xtype: &#39;grid&#39;,
+        layout: &#39;fit&#39;,
+        selModel: &#39;cellmodel&#39;,
+        plugins: {
+            ptype: &#39;cellediting&#39;,
+            clicksToEdit: 1
+        }
+    }],
+
+<span id='BasiGX-view-grid-FeatureGrid-method-initComponent'>    /**
+</span>     *
+     */
+    initComponent: function() {
+        this.callParent([arguments]);
+        this.setLayerStore();
+        this.registerEvents();
+        var map = Ext.ComponentQuery.query(&#39;basigx-component-map&#39;)[0];
+        this.createHighlightLayer(map);
+        this.appendMenuEntries();
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-appendMenuEntries'>    /**
+</span>     * Append extra column menu items.
+     */
+    appendMenuEntries: function() {
+        var grid = this.down(&#39;grid&#39;);
+        var viewModel = this.getViewModel();
+        var menu = grid.view.headerCt.getMenu();
+        menu.add(this.getRenameEntry(viewModel));
+        menu.add(this.getDeleteEntry(viewModel));
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-getRenameEntry'>    /**
+</span>     * Get a rename column menu item.
+     * @param  {Object} viewModel the view model of this component
+     * @return {Object}           the menu item config
+     */
+    getRenameEntry: function(viewModel) {
+        var me = this;
+        return {
+            text: viewModel.get(&#39;renameButton&#39;),
+            handler: function(item) {
+                var column = item.up(&#39;gridcolumn&#39;).dataIndex;
+                Ext.Msg.prompt(
+                    viewModel.get(&#39;renameButton&#39;),
+                    viewModel.get(&#39;renameBox&#39;),
+                    function(result, text) {
+                        if (result === &#39;ok&#39;) {
+                            me.renameColumn(column, text);
+                        }
+                    },
+                    this,
+                    false,
+                    column
+                );
+            }
+        };
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-getDeleteEntry'>    /**
+</span>     * Get a delete column menu item.
+     * @param  {Object} viewModel the view model of this component
+     * @return {Object}           the menu item config
+     */
+    getDeleteEntry: function(viewModel) {
+        var me = this;
+        return {
+            text: viewModel.get(&#39;deleteTitle&#39;),
+            handler: function(item) {
+                var column = item.up(&#39;gridcolumn&#39;).dataIndex;
+                Ext.Msg.confirm(
+                    viewModel.get(&#39;deleteTitle&#39;),
+                    viewModel.get(&#39;deleteQuestion&#39;),
+                    function(result, text) {
+                        if (result === &#39;yes&#39;) {
+                            me.deleteColumn(column);
+                        }
+                    }
+                );
+            }
+        };
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-renameColumn'>    /**
+</span>     * Rename a column.
+     * @param  {String} from name of the column to rename
+     * @param  {String} to   name to rename the column to
+     */
+    renameColumn: function(from, to) {
+        var features = this.getLayer().getSource().getFeatures();
+        Ext.each(features, function(feature) {
+            feature.set(to, feature.get(from));
+            feature.set(from, undefined);
+        });
+        var store = this.down(&#39;grid&#39;).getStore();
+        this.reconfigureStore(store);
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-deleteColumn'>    /**
+</span>     * Delete the column from the store and reconfigure.
+     * @param  {String} name name of the column to deleteTitle
+     */
+    deleteColumn: function(name) {
+        var features = this.getLayer().getSource().getFeatures();
+        Ext.each(features, function(feature) {
+            feature.set(name, undefined);
+        });
+        var store = this.down(&#39;grid&#39;).getStore();
+        this.reconfigureStore(store);
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-createHighlightLayer'>    /**
+</span>     * Creates or fetches the highlight layer. The highlight layer is
+     * only instantiated once, with the name &#39;highlight&#39;.
+     * @param  {BasiGX.component.Map} map the map
+     */
+    createHighlightLayer: function(map) {
+        var layers = map.getMap().getLayers();
+        var layer = BasiGX.util.Layer.getLayerBy(&#39;name&#39;, &#39;highlight&#39;, layers);
+        if (layer) {
+            this.highlightLayer = layer;
+            this.highlightSource = layer.getSource();
+            return;
+        }
+        this.highlightSource = new ol.source.Vector();
+        this.highlightLayer = new ol.layer.Vector({
+            style: new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: [255, 0, 0, 0.3]
+                })
+            }),
+            source: this.highlightSource
+        });
+        this.highlightLayer.set(&#39;name&#39;, &#39;highlight&#39;);
+        var displayInLayerSwitcherKey = BasiGX.util.Layer
+                    .KEY_DISPLAY_IN_LAYERSWITCHER;
+        this.highlightLayer.set(displayInLayerSwitcherKey, false);
+        map.getMap().addLayer(this.highlightLayer);
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-registerEvents'>    /**
+</span>     * Registers the mouseover events.
+     */
+    registerEvents: function() {
+        var grid = this.down(&#39;grid&#39;);
+        var me = this;
+        grid.on(&#39;itemmouseenter&#39;, function(_, record) {
+            var feat = record.olObject;
+            me.highlightSource.clear();
+            me.highlightSource.addFeature(feat);
+        });
+        grid.on(&#39;itemmouseleave&#39;, function() {
+            me.highlightSource.clear();
+        });
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-setLayerStore'>    /**
+</span>     * Sets the layer store on the grid.
+     */
+    setLayerStore: function() {
+        var store = new GeoExt.data.store.Features({
+            layer: this.getLayer()
+        });
+
+        this.reconfigureStore(store);
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-reconfigureStore'>    reconfigureStore: function(store) {
+</span>        var columns = this.extractSchema(store);
+        this.down(&#39;grid&#39;).reconfigure(store, columns);
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-extractSchema'>    /**
+</span>     * Extracts the feature schema from the first feature in the store.
+     * @param  {GeoExt.data.store.Features} store the layer store
+     * @return {Array}       an array with the feature attribute names
+     */
+    extractSchema: function(store) {
+        var columns = [];
+        var data = store.getData().items;
+        if (data.length &gt; 0) {
+            Ext.iterate(data[0].data, function(key, value) {
+                if (!value || value.getExtent) {
+                    return;
+                }
+                columns.push({
+                    text: key,
+                    dataIndex: key,
+                    editor: &#39;textfield&#39;
+                });
+            });
+        }
+        return columns;
+    }
+
+});
+</pre>
+</body>
+</html>
