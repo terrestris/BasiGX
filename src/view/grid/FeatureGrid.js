@@ -223,7 +223,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var data = store.getData().items;
         if (data.length > 0) {
             Ext.iterate(data[0].data, function(key, value) {
-                if (!value || value.getExtent) {
+                if (value === undefined || value && value.getExtent) {
                     return;
                 }
                 columns.push({
