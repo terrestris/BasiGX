@@ -53,15 +53,14 @@ Ext.define('BasiGX.view.button.MergeSelection', {
      */
     config: {
         handler: function() {
-            var map = Ext.ComponentQuery.query('basigx-component-map')[0]
-                .getMap();
+            var grid = this.up('window').down('basigx-grid-featuregrid');
+            var map = grid.getMap();
             var sourceLayer = BasiGX.util.Layer.getLayerBy(
                 'name',
                 'planungsradien_vector',
                 map.getLayers()
             );
 
-            var grid = this.up('window').down('basigx-grid-featuregrid');
             var targetLayer = grid.getLayer();
             BasiGX.util.Merge.mergeLayers(sourceLayer, targetLayer);
         }

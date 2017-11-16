@@ -37,7 +37,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     },
 
     config: {
-        layer: null
+        layer: null,
+        map: null
     },
 
     items: [{
@@ -54,11 +55,10 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      *
      */
     initComponent: function() {
-        this.callParent([arguments]);
+        this.callParent();
         this.setLayerStore();
         this.registerEvents();
-        var map = Ext.ComponentQuery.query('basigx-component-map')[0];
-        this.createHighlightLayer(map);
+        this.createHighlightLayer(this.getMap());
         this.appendMenuEntries();
     },
 
