@@ -41,7 +41,7 @@ Ext.define('BasiGX.util.Merge', {
                     if (value === undefined || value && value.getExtent) {
                         return;
                     }
-                    if (!schema.includes(key)) {
+                    if (!schema.includes(key) && key !== 'id') {
                         schema.push(key);
                     }
                 });
