@@ -28,7 +28,8 @@ Ext.define('BasiGX.view.button.MergeSelection', {
         'Ext.window.Window',
         'Ext.app.ViewModel',
         'BasiGX.view.form.CoordinateTransform',
-        'BasiGX.util.Animate'
+        'BasiGX.util.Animate',
+        'BasiGX.view.window.MergeWindow'
     ],
 
     /**
@@ -62,7 +63,11 @@ Ext.define('BasiGX.view.button.MergeSelection', {
             );
 
             var targetLayer = grid.getLayer();
-            BasiGX.util.Merge.mergeLayers(sourceLayer, targetLayer);
+            Ext.create({
+                xtype: 'basigx-window-merge',
+                sourceLayer: sourceLayer,
+                targetLayer: targetLayer
+            });
         },
         /**
          * The source layer name.

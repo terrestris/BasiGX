@@ -26,14 +26,6 @@ Ext.define('BasiGX.util.Merge', {
     ],
     statics: {
 
-        /*begin i18n*/
-        adoptAttributes: 'Select attributes to add to the schema:',
-        applyText: 'Apply',
-        cancelText: 'Cancel',
-        windowTitle: 'Merge features',
-        matchText: 'Please select attributes to be mapped:',
-        /*end i18n*/
-
         /**
          * Extracts the attribute schema from the given layer. Looks for
          * attributes on all features. Excludes fields with name 'id'.
@@ -54,38 +46,6 @@ Ext.define('BasiGX.util.Merge', {
                 });
             });
             return schema.sort();
-        },
-
-        /**
-         * Shows the merge dialog.
-         * @param  {ol.layer.Vector} sourceLayer the layer to merge
-         * @param  {ol.layer.Vector} targetLayer the layer to merge into
-         */
-        mergeLayers: function(sourceLayer, targetLayer) {
-            var sourceSchema = this.extractSchema(sourceLayer);
-            var targetSchema = this.extractSchema(targetLayer);
-
-            var labels = [];
-            var dropdowns = [];
-            Ext.each(targetSchema, function(attr) {
-                labels.push({
-                    xtype: 'label',
-                    margin: 3,
-                    text: attr
-                });
-                dropdowns.push({
-                    xtype: 'combo',
-                    store: sourceSchema,
-                    displayField: 'name',
-                    margin: 3,
-                    valueField: 'name',
-                    value: sourceSchema.includes(attr) ? attr : '',
-                    allowBlank: true
-                });
-            });
-
-            this.createMergeWindow(labels, dropdowns, sourceLayer, targetLayer,
-                sourceSchema, targetSchema);
         },
 
         /**
@@ -143,145 +103,6 @@ Ext.define('BasiGX.util.Merge', {
                 newFeature.set(attribute, feature.get(attribute));
             });
             return newFeature;
-        },
-
-        /**
-         * Callback that actually merges the two layers.
-         * @param  {ol.layer.Vector} sourceLayer the layer to merge
-         * @param  {ol.layer.Vector} targetLayer the layer to merge to
-         * @param  {Array} origSchema  the original target layer origSchema
-         * @return {Function}             the callback
-         */
-        applyHandler: function(sourceLayer, targetLayer, origSchema) {
-            var me = this;
-            return function() {
-                var win = this.up('window');
-                var newFeatures = sourceLayer.getSource().getFeatures();
-                var target = targetLayer.getSource();
-                var mapping = me.extractMapping(win);
-                var copy = me.extractToCopyAttributes(win);
-
-                Ext.each(newFeatures, function(feature) {
-                    var newFeature = me.convertFeature(feature, mapping, copy,
-                        origSchema);
-                    target.addFeature(newFeature);
-                });
-
-                win.destroy();
-            };
-        },
-
-        /**
-         * Callback that just closes/destroys the merge window.
-         */
-        cancelHandler: function() {
-            this.up('window').destroy();
-        },
-
-        /**
-         * Create the multiselect used to select attributes to add.
-         * @param  {Array} attributes the list of attributes
-         * @return {Object}            the ext configuration object
-         */
-        createAttributeSelection: function(attributes) {
-            return {
-                xtype: 'multiselect',
-                margin: 5,
-                fieldLabel: this.adoptAttributes,
-                store: attributes
-            };
-        },
-
-        /**
-         * Creates the ext config for the label/dropdown vboxes for the merges
-         * window.
-         * @param  {Array} labels    the labels
-         * @param  {Array} dropdowns the attributes list
-         * @return {Array}           an array of vbox container configurations
-         */
-        createDropdownList: function(labels, dropdowns) {
-            var vboxes = [];
-            for (var i = 0; i < labels.length; ++i) {
-                vboxes.push({
-                    xtype: 'container',
-                    layout: 'vbox',
-                    margin: 3,
-                    items: [
-                        labels[i],
-                        dropdowns[i]
-                    ]
-                });
-            }
-            return vboxes;
-        },
-
-        /**
-         * Creates and shows the merge window.
-         * @param  {Array} labels       the original attributes label list
-         * @param  {Array} dropdowns    the dropdowns with the source layer
-         * attributes
-         * @param  {ol.layer.Vector} sourceLayer  the layer to merge
-         * @param  {ol.layer.Vector} targetLayer  the layer to merge to
-         * @param  {Array} sourceSchema the source layer schema
-         * @param  {Array} origSchema   the target layer schema
-         */
-        createMergeWindow: function(
-            labels,
-            dropdowns,
-            sourceLayer,
-            targetLayer,
-            sourceSchema,
-            origSchema
-        ) {
-            var vboxes = this.createDropdownList(labels, dropdowns);
-
-            var buttons = {
-                xtype: 'container',
-                layout: 'hbox',
-                items: [{
-                    xtype: 'button',
-                    text: this.applyText,
-                    margin: '2 5 2 2',
-                    handler: this.applyHandler(sourceLayer, targetLayer,
-                        origSchema)
-                }, {
-                    xtype: 'button',
-                    text: this.cancelText,
-                    margin: '2 2 2 0',
-                    handler: this.cancelHandler
-                }]
-            };
-
-            var attributeList = this.createAttributeSelection(sourceSchema);
-
-            var container = {
-                xtype: 'container',
-                layout: 'vbox',
-                scrollable: true,
-                width: 500,
-                items: [{
-                    xtype: 'label',
-                    text: this.matchText
-                }, {
-                    xtype: 'container',
-                    layout: 'hbox',
-                    items: vboxes
-                },
-                    attributeList,
-                {
-                    xtype: 'buttongroup',
-                    rowspan: 2,
-                    items: buttons
-                }]
-            };
-
-            Ext.create({
-                xtype: 'window',
-                items: container,
-                title: this.windowTitle,
-                layout: 'fit',
-                autoShow: true
-            });
         }
 
     }
