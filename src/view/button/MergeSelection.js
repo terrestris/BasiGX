@@ -57,12 +57,17 @@ Ext.define('BasiGX.view.button.MergeSelection', {
             var map = grid.getMap();
             var sourceLayer = BasiGX.util.Layer.getLayerBy(
                 'name',
-                'planungsradien_vector',
+                this.sourceLayer,
                 map.getLayers()
             );
 
             var targetLayer = grid.getLayer();
             BasiGX.util.Merge.mergeLayers(sourceLayer, targetLayer);
-        }
+        },
+        /**
+         * The source layer name.
+         * @type {String}
+         */
+        sourceLayer: null
     }
 });
