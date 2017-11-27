@@ -14,11 +14,11 @@
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "dd261c33-b721-4203-884c-856eb5308c4c",
-      "created": "2017-11-26T09:29:27Z",
+      "uuid": "e6ec0103-9ec6-4112-b7a9-5f6e7e88ee08",
+      "created": "2017-11-27T08:42:08Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "tYGq4Yld7aQ\u003d",
-      "signature": "QFE9oUMK/+/INiP8+uHidRI47BvD1KD5eOB+QaO0XjxXk4mOU/95bsY/EuO0rp+4bvBa4xyD+sLEc3kIi1HsGHErpmcMUeuYsGONKWNuy/ahDGbnNsad0XTIDksVgK6/488UZ2zPICMhuIahT1f9J9cpdWC70r+88/fmsTpqfZv3OjFSea2lCdoyyhkkBcptoWK14tr2C8NTNTvWdO49ltyD8FhdcHbrtM3le7xacWTVQ5SO4p8p/zEsOHLmShk+A/xxVUm00rPt8al4HxtbWZn0MtNwAq4oQ/XxYqoDNkFFlDM6Vm9EUY1Uct53IOwE30E/qLQMhdEozBtLdvv+7A\u003d\u003d"
+      "nonce": "uMqdIPQhVVo\u003d",
+      "signature": "PQLlPAjXiU1W7CDQlVrLlPAXs8wy0EwfNnHBLCQzk0cchoTZHNsOrgn8E3qDIZug5yV+OgDgzhwpXPOIn9UkcX4ZVgLJcYJ0NwHhBDsw5ILAB8pUVbl4MFIRrSU41mMly/uSBNqpSlxsnLjrOBE45+SKdxJ7WSfVAraFUFMAYH3FFgLpHHNybgRqrwHC096cXUBnvYMH3bualHwC/gH+kD73/NfPVXQME/AV9XDm9J5llMiwg2UdgNO0vg+vWJLjpihD9NE5trCpidmhfACT9sFO1hTirKkHsOBQmspayAx4G2u/0kgnXBlv2tFuPXWQSBbtJzmy8L3+vfXYZA00Fg\u003d\u003d"
     }
   ],
   "slicer": {
@@ -57,7 +57,7 @@
     "url": "https://github.com/terrestris/BasiGX.git"
   },
   "devDependencies": {
-    "coveralls": "2.13.3",
+    "coveralls": "3.0.0",
     "eslint": "4.12.0",
     "eslint-config-openlayers": "7.0.0",
     "expect.js": "0.3.1",
