@@ -49,7 +49,7 @@
         "url": "https://github.com/terrestris/BasiGX.git"
     },
     "devDependencies": {
-        "coveralls": "2.13.3",
+        "coveralls": "3.0.0",
         "eslint": "4.12.0",
         "eslint-config-openlayers": "7.0.0",
         "expect.js": "0.3.1",
