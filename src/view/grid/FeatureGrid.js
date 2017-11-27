@@ -43,7 +43,6 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
 
     items: [{
         xtype: 'grid',
-        layout: 'fit',
         selModel: 'cellmodel',
         plugins: {
             ptype: 'cellediting',
