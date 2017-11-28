@@ -73,23 +73,17 @@ Ext.define(&#39;BasiGX.view.button.MergeSelection&#39;, {
     config: {
 <span id='BasiGX-view-button-MergeSelection-cfg-handler'>        handler: function() {
 </span>            var grid = this.up(&#39;window&#39;).down(&#39;basigx-grid-featuregrid&#39;);
-            var map = grid.getMap();
-            var sourceLayer = BasiGX.util.Layer.getLayerBy(
-                &#39;name&#39;,
-                this.sourceLayer,
-                map.getLayers()
-            );
 
             var targetLayer = grid.getLayer();
             Ext.create({
                 xtype: &#39;basigx-window-merge&#39;,
-                sourceLayer: sourceLayer,
+                sourceLayer: this.getSourceLayer(),
                 targetLayer: targetLayer
             });
         },
 <span id='BasiGX-view-button-MergeSelection-property-sourceLayer'>        /**
 </span>         * The source layer name.
-         * @type {String}
+         * @type {ol.layer.Vector}
          */
         sourceLayer: null
     }
