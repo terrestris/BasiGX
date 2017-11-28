@@ -125,13 +125,13 @@ Ext.define('BasiGX.util.WFS', {
          * @param {String} cqlFilter The CQL filter to convert
          * @return {String} The OGC filter.
          */
-        getCqlFilter: function(cqlFilter) {
+        getOgcFromCqlFilter: function(cqlFilter) {
             if (!cqlFilter) {
                 return;
             }
             var parts = cqlFilter.split(' ');// TODO: get smarter
             if (parts.length !== 3) {
-                Ext.log.error('Method `getCqlFilter` can only handle CQL ' +
+                Ext.log.error('Method `getOgcFromCqlFilter` can only handle CQL ' +
                 'filters with one key, one operator and one value!');
                 return;
             }
@@ -182,8 +182,8 @@ Ext.define('BasiGX.util.WFS', {
                     closingTag = Ext.String.insert(ogcFilterType, '/', 1);
                     return ogcFilterType + filters + closingTag;
                 default:
-                    Ext.log.warn('Method `getCqlFilter` could not handle ' +
-                        'the given operator: ' + operator);
+                    Ext.log.warn('Method `getOgcFromCqlFilter` could not ' +
+                        'handle the given operator: ' + operator);
                     return;
             }
             ogcFilterType = '<ogc:' + ogcFilterType + '>';
