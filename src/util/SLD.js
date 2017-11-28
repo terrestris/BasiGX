@@ -24,7 +24,10 @@
  * @author Kai Volland
  */
 Ext.define('BasiGX.util.SLD', {
-    requires: ['BasiGX.util.Object'],
+    requires: [
+        'Ext.String',
+        'BasiGX.util.Object'
+    ],
     statics: {
         jsonixContext: null,
         marshaller: null,
@@ -209,6 +212,83 @@ Ext.define('BasiGX.util.SLD', {
                 ruleFromObject = rules;
             }
             return sldObject;
+        },
+
+        /**
+         * Retrieves the SLD for the given URL and layer name
+         * @param {String} wmsUrl The WMS URL to use
+         * @param {String} layerName The name of the layer to get the SLD for
+         * @param {requestCallback} successCb The callback for the success case
+         * @param {requestCallback} errorCb The callback for the error case
+         */
+        getSldFromGeoserver: function(wmsUrl, layerName, successCb, errorCb) {
+            if (!wmsUrl || !layerName || !successCb || !errorCb) {
+                Ext.log.error('Invalid arguments for method ' +
+                    '`getSldFromGeoserver`');
+                errorCb.call();
+                return;
+            }
+            var url = Ext.String.urlAppend(wmsUrl, 'request=GetStyles');
+            url = Ext.String.urlAppend(url, 'layers=' + layerName);
+            url = Ext.String.urlAppend(url, 'service=WMS');
+            url = Ext.String.urlAppend(url, 'version=1.1.1');
+
+            Ext.Ajax.request({
+                url: url,
+                success: successCb,
+                failure: errorCb,
+                timeout: 120000
+            });
+        },
+
+        /**
+         * Gets all configured SLD filters and converts it to
+         * a SLD filter encoding object.
+         *
+         * @param {Array} rules Array containing all SLD rules
+         * @return {String} Filter encoding for SLD filter.
+         */
+        getFilterEncodingFromSldRules: function(rules) {
+            var filterContent;
+            var sldFilterObj;
+            var sldFilter = [];
+            Ext.each(rules, function(rule) {
+                filterContent = BasiGX.util.Object.getValue('filter', rule);
+                if (filterContent) {
+                    sldFilterObj = BasiGX.util.SLD
+                        .filterContentToWholeSimpleFilter(
+                            filterContent
+                        );
+                    sldFilter.push(
+                        BasiGX.util.SLD.marshaller.marshalString(sldFilterObj)
+                    );
+                }
+            });
+            return sldFilter;
+        },
+
+        /**
+         * This method will be used to create a whole filter encoding string
+         * for given filter content by adding of `<ogc:Filter>` tag around of
+         * filter itself.
+         *
+         * @param {Object} filterContent Jsonix conform filter content value
+         *     object.
+         * @return {Object} An object representing a simple OGC filter 1.0.0;
+         *     ready to be stringified using Jsonix.
+         */
+        filterContentToWholeSimpleFilter: function(filterContent) {
+            return {
+                value: filterContent,
+                name: {
+                    namespaceURI: 'http://www.opengis.net/ogc',
+                    localPart: 'Filter',
+                    prefix: 'ogc',
+                    key: '{http://www.opengis.net/ogc}Filter',
+                    string: '{http://www.opengis.net/ogc}' +
+                        'ogc:Filter'
+                }
+            };
         },
 
         /**
