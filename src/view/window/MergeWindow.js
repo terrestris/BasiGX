@@ -62,28 +62,6 @@ Ext.define('BasiGX.view.window.MergeWindow', {
     },
 
     /**
-     * Extracts the attribute schema from the given layer. Looks for
-     * attributes on all features. Excludes fields with name 'id'.
-     * @param  {ol.layer.Layer} layer the vector layer with the features
-     * @return {Array}       a sorted list of attribute names
-     */
-    extractSchema: function(layer) {
-        var features = layer.getSource().getFeatures();
-        var schema = [];
-        Ext.each(features, function(feature) {
-            Ext.iterate(feature.getProperties(), function(key, value) {
-                if (value === undefined || value && value.getExtent) {
-                    return;
-                }
-                if (!schema.includes(key) && key !== 'id') {
-                    schema.push(key);
-                }
-            });
-        });
-        return schema.sort();
-    },
-
-    /**
      * Creates all the children.
      */
     mergeLayers: function() {
@@ -142,7 +120,7 @@ Ext.define('BasiGX.view.window.MergeWindow', {
      * Callback that just closes/destroys the merge window.
      */
     cancelHandler: function() {
-        this.up('window').destroy();
+        this.up('window').close();
     },
 
     /**

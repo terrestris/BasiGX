@@ -1,4 +1,4 @@
-/* Copyright (c) 2016-present terrestris GmbH & Co. KG
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,9 +15,8 @@
  */
 /**
  *
- * Merge Util
+ * Utility functions for merging layers and features.
  *
- * Message box utilities for a common user experience.
  *
  * @class BasiGX.util.Merge
  */
@@ -28,11 +27,16 @@ Ext.define('BasiGX.util.Merge', {
 
         /**
          * Extracts the attribute schema from the given layer. Looks for
-         * attributes on all features. Excludes fields with name 'id'.
+         * attributes on all features. Excludes fields with name 'id' by
+         * default.
          * @param  {ol.layer.Layer} layer the vector layer with the features
+         * @param  {Array} ignoreFields an array with field names to ignore
          * @return {Array}       a sorted list of attribute names
          */
-        extractSchema: function(layer) {
+        extractSchema: function(layer, ignoreFields) {
+            if (!ignoreFields) {
+                ignoreFields = ['id'];
+            }
             var features = layer.getSource().getFeatures();
             var schema = [];
             Ext.each(features, function(feature) {
@@ -40,7 +44,7 @@ Ext.define('BasiGX.util.Merge', {
                     if (value === undefined || value && value.getExtent) {
                         return;
                     }
-                    if (!schema.includes(key) && key !== 'id') {
+                    if (!schema.includes(key) && !ignoreFields.includes(key)) {
                         schema.push(key);
                     }
                 });
@@ -75,7 +79,7 @@ Ext.define('BasiGX.util.Merge', {
             var selected = multiselect.getSelected();
             var list = [];
             Ext.each(selected, function(item) {
-                list.push(item.data.field1);
+                list.push(item.get('field1'));
             });
             return list;
         },

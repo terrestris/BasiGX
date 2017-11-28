@@ -1,4 +1,4 @@
-/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,7 +46,8 @@ Ext.define('BasiGX.view.button.MergeSelection', {
      *
      */
     bind: {
-        text: '{text}'
+        text: '{text}',
+        tooltip: '{tooltip}'
     },
 
     /**
