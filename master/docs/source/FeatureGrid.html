@@ -55,7 +55,8 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
 
     config: {
 <span id='BasiGX-view-grid-FeatureGrid-cfg-layer'>        layer: null,
-</span><span id='BasiGX-view-grid-FeatureGrid-cfg-map'>        map: null
+</span><span id='BasiGX-view-grid-FeatureGrid-cfg-map'>        map: null,
+</span><span id='BasiGX-view-grid-FeatureGrid-cfg-ignoredAttributes'>        ignoredAttributes: [&#39;id&#39;]
 </span>    },
 
 <span id='BasiGX-view-grid-FeatureGrid-property-items'>    items: [{
@@ -235,11 +236,13 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
      * @return {Array}       an array with the feature attribute names
      */
     extractSchema: function(store) {
+        var me = this;
         var columns = [];
         var data = store.getData().items;
         if (data.length &gt; 0) {
             Ext.iterate(data[0].data, function(key, value) {
-                if (value === undefined || value &amp;&amp; value.getExtent) {
+                if (value === undefined || value &amp;&amp; value.getExtent ||
+                    me.getIgnoredAttributes().includes(key)) {
                     return;
                 }
                 columns.push({
