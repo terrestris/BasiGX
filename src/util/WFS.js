@@ -131,8 +131,8 @@ Ext.define('BasiGX.util.WFS', {
             }
             var parts = cqlFilter.split(' ');// TODO: get smarter
             if (parts.length !== 3) {
-                Ext.log.error('Method `getOgcFromCqlFilter` can only handle CQL ' +
-                'filters with one key, one operator and one value!');
+                Ext.log.error('Method `getOgcFromCqlFilter` can only handle ' +
+                'CQL filters with one key, one operator and one value!');
                 return;
             }
 
