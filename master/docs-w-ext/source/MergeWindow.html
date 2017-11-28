@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2017-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-window-MergeWindow'>/**
+</span> * A window where the user can configure the merging of two layers.
+ *
+ * @class BasiGX.view.window.MergeWindow
+ */
+Ext.define(&#39;BasiGX.view.window.MergeWindow&#39;, {
+    xtype: &#39;basigx-window-merge&#39;,
+    extend: &#39;Ext.window.Window&#39;,
+    requires: [
+        &#39;BasiGX.util.Merge&#39;
+    ],
+
+<span id='BasiGX-view-window-MergeWindow-cfg-viewModel'>    viewModel: {
+</span>        data: {
+            adoptAttributes: &#39;Select attributes to add to the schema:&#39;,
+            applyText: &#39;Apply&#39;,
+            cancelText: &#39;Cancel&#39;,
+            windowTitle: &#39;Merge features&#39;,
+            matchText: &#39;Please select attributes to be mapped:&#39;
+        }
+    },
+
+<span id='BasiGX-view-window-MergeWindow-cfg-bind'>    bind: {
+</span>        title: &#39;{windowTitle}&#39;
+    },
+
+<span id='BasiGX-view-window-MergeWindow-cfg-layout'>    layout: &#39;fit&#39;,
+</span><span id='BasiGX-view-window-MergeWindow-cfg-autoShow'>    autoShow: true,
+</span><span id='BasiGX-view-window-MergeWindow-property-items'>    items: [],
+</span>
+    config: {
+<span id='BasiGX-view-window-MergeWindow-property-sourceLayer'>        /**
+</span>         * The layer to merge.
+         * @type {ol.layer.Vector}
+         */
+        sourceLayer: null,
+<span id='BasiGX-view-window-MergeWindow-property-targetLayer'>        /**
+</span>         * The layer to merge to.
+         * @type {ol.layer.Vector}
+         */
+        targetLayer: null
+    },
+
+<span id='BasiGX-view-window-MergeWindow-method-initComponent'>    initComponent: function() {
+</span>        this.callParent();
+        this.mergeLayers();
+    },
+
+<span id='BasiGX-view-window-MergeWindow-method-mergeLayers'>    /**
+</span>     * Creates all the children.
+     */
+    mergeLayers: function() {
+        var Merge = BasiGX.util.Merge;
+        var sourceSchema = Merge.extractSchema(this.getSourceLayer());
+        var targetSchema = Merge.extractSchema(this.getTargetLayer());
+
+        var labels = [];
+        var dropdowns = [];
+        Ext.each(targetSchema, function(attr) {
+            labels.push({
+                xtype: &#39;label&#39;,
+                margin: 3,
+                text: attr
+            });
+            dropdowns.push({
+                xtype: &#39;combo&#39;,
+                store: sourceSchema,
+                displayField: &#39;name&#39;,
+                margin: 3,
+                valueField: &#39;name&#39;,
+                value: sourceSchema.includes(attr) ? attr : &#39;&#39;,
+                allowBlank: true
+            });
+        });
+
+        this.createMergeWindow(labels, dropdowns, sourceSchema, targetSchema);
+    },
+
+<span id='BasiGX-view-window-MergeWindow-method-applyHandler'>    /**
+</span>     * Callback that actually merges the two layers.
+     * @param  {Array} origSchema  the original target layer origSchema
+     * @return {Function}             the callback
+     */
+    applyHandler: function(origSchema) {
+        var me = this;
+        var Merge = BasiGX.util.Merge;
+        return function() {
+            var win = this.up(&#39;window&#39;);
+            var newFeatures = me.getSourceLayer().getSource().getFeatures();
+            var target = me.getTargetLayer().getSource();
+            var mapping = Merge.extractMapping(win);
+            var copy = Merge.extractToCopyAttributes(win);
+
+            Ext.each(newFeatures, function(feature) {
+                var newFeature = Merge.convertFeature(feature, mapping, copy,
+                    origSchema);
+                target.addFeature(newFeature);
+            });
+
+            win.destroy();
+        };
+    },
+
+<span id='BasiGX-view-window-MergeWindow-method-cancelHandler'>    /**
+</span>     * Callback that just closes/destroys the merge window.
+     */
+    cancelHandler: function() {
+        this.up(&#39;window&#39;).close();
+    },
+
+<span id='BasiGX-view-window-MergeWindow-method-createAttributeSelection'>    /**
+</span>     * Create the multiselect used to select attributes to add.
+     * @param  {Array} attributes the list of attributes
+     * @return {Object}            the ext configuration object
+     */
+    createAttributeSelection: function(attributes) {
+        return {
+            xtype: &#39;multiselect&#39;,
+            margin: 5,
+            bind: {
+                fieldLabel: &#39;{adoptAttributes}&#39;
+            },
+            store: attributes
+        };
+    },
+
+<span id='BasiGX-view-window-MergeWindow-method-createDropdownList'>    /**
+</span>     * Creates the ext config for the label/dropdown vboxes for the merges
+     * window.
+     * @param  {Array} labels    the labels
+     * @param  {Array} dropdowns the attributes list
+     * @return {Array}           an array of vbox container configurations
+     */
+    createDropdownList: function(labels, dropdowns) {
+        var vboxes = [];
+        for (var i = 0; i &lt; labels.length; ++i) {
+            vboxes.push({
+                xtype: &#39;container&#39;,
+                layout: &#39;vbox&#39;,
+                margin: 3,
+                items: [
+                    labels[i],
+                    dropdowns[i]
+                ]
+            });
+        }
+        return vboxes;
+    },
+
+<span id='BasiGX-view-window-MergeWindow-method-createMergeWindow'>    /**
+</span>     * Creates and shows the merge window.
+     * @param  {Array} labels       the original attributes label list
+     * @param  {Array} dropdowns    the dropdowns with the source layer
+     * attributes
+     * @param  {Array} sourceSchema the source layer schema
+     * @param  {Array} origSchema   the target layer schema
+     */
+    createMergeWindow: function(labels, dropdowns, sourceSchema, origSchema) {
+        var vboxes = this.createDropdownList(labels, dropdowns);
+
+        var buttons = {
+            xtype: &#39;container&#39;,
+            layout: &#39;hbox&#39;,
+            items: [{
+                xtype: &#39;button&#39;,
+                bind: {
+                    text: &#39;{applyText}&#39;
+                },
+                margin: &#39;2 5 2 2&#39;,
+                handler: this.applyHandler(origSchema)
+            }, {
+                xtype: &#39;button&#39;,
+                bind: {
+                    text: &#39;{cancelText}&#39;
+                },
+                margin: &#39;2 2 2 0&#39;,
+                handler: this.cancelHandler
+            }]
+        };
+
+        var attributeList = this.createAttributeSelection(sourceSchema);
+
+        var container = {
+            xtype: &#39;container&#39;,
+            layout: &#39;vbox&#39;,
+            scrollable: true,
+            width: 500,
+            items: [{
+                xtype: &#39;label&#39;,
+                bind: {
+                    text: &#39;{matchText}&#39;
+                }
+            }, {
+                xtype: &#39;container&#39;,
+                layout: &#39;hbox&#39;,
+                items: vboxes
+            },
+                attributeList,
+            {
+                xtype: &#39;buttongroup&#39;,
+                rowspan: 2,
+                items: buttons
+            }]
+        };
+
+        this.add(Ext.create(container));
+    }
+});
+</pre>
+</body>
+</html>

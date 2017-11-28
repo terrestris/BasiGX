@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2017-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-button-MergeSelection'>/**
+</span> * Merge selected features button
+ *
+ * Merge selected features into the currently selected layer.
+ *
+ * @class BasiGX.view.button.MergeSelection
+ */
+Ext.define(&#39;BasiGX.view.button.MergeSelection&#39;, {
+    extend: &#39;Ext.button.Button&#39;,
+    xtype: &#39;basigx-button-mergeselection&#39;,
+
+    requires: [
+        &#39;Ext.window.Window&#39;,
+        &#39;Ext.app.ViewModel&#39;,
+        &#39;BasiGX.view.form.CoordinateTransform&#39;,
+        &#39;BasiGX.util.Animate&#39;,
+        &#39;BasiGX.view.window.MergeWindow&#39;
+    ],
+
+<span id='BasiGX-view-button-MergeSelection-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: &#39;Selektierte Features in diesen Layer übernehmen&#39;,
+            text: &#39;Features übernehmen&#39;
+        }
+    },
+
+<span id='BasiGX-view-button-MergeSelection-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: &#39;{text}&#39;,
+        tooltip: &#39;{tooltip}&#39;
+    },
+
+<span id='BasiGX-view-button-MergeSelection-property-config'>    /**
+</span>     *
+     */
+    config: {
+<span id='BasiGX-view-button-MergeSelection-cfg-handler'>        handler: function() {
+</span>            var grid = this.up(&#39;window&#39;).down(&#39;basigx-grid-featuregrid&#39;);
+            var map = grid.getMap();
+            var sourceLayer = BasiGX.util.Layer.getLayerBy(
+                &#39;name&#39;,
+                this.sourceLayer,
+                map.getLayers()
+            );
+
+            var targetLayer = grid.getLayer();
+            Ext.create({
+                xtype: &#39;basigx-window-merge&#39;,
+                sourceLayer: sourceLayer,
+                targetLayer: targetLayer
+            });
+        },
+<span id='BasiGX-view-button-MergeSelection-property-sourceLayer'>        /**
+</span>         * The source layer name.
+         * @type {String}
+         */
+        sourceLayer: null
+    }
+});
+</pre>
+</body>
+</html>

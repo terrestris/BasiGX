@@ -54,12 +54,12 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
     },
 
     config: {
-<span id='BasiGX-view-grid-FeatureGrid-cfg-layer'>        layer: null
+<span id='BasiGX-view-grid-FeatureGrid-cfg-layer'>        layer: null,
+</span><span id='BasiGX-view-grid-FeatureGrid-cfg-map'>        map: null
 </span>    },
 
 <span id='BasiGX-view-grid-FeatureGrid-property-items'>    items: [{
 </span>        xtype: &#39;grid&#39;,
-        layout: &#39;fit&#39;,
         selModel: &#39;cellmodel&#39;,
         plugins: {
             ptype: &#39;cellediting&#39;,
@@ -71,11 +71,10 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
 </span>     *
      */
     initComponent: function() {
-        this.callParent([arguments]);
+        this.callParent();
         this.setLayerStore();
         this.registerEvents();
-        var map = Ext.ComponentQuery.query(&#39;basigx-component-map&#39;)[0];
-        this.createHighlightLayer(map);
+        this.createHighlightLayer(this.getMap());
         this.appendMenuEntries();
     },
 
@@ -240,7 +239,7 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         var data = store.getData().items;
         if (data.length &gt; 0) {
             Ext.iterate(data[0].data, function(key, value) {
-                if (!value || value.getExtent) {
+                if (value === undefined || value &amp;&amp; value.getExtent) {
                     return;
                 }
                 columns.push({
