@@ -14,11 +14,11 @@
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "1fc81b26-efe3-4be4-8183-05a097a384fc",
-      "created": "2017-11-28T15:02:38Z",
+      "uuid": "0ad29dc3-e640-469b-9a2d-bdaa3897d401",
+      "created": "2017-11-29T12:27:58Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "I02jVq+a6F4\u003d",
-      "signature": "NGMM7kAdzRQUTfeSklQjiUB49ODN1FHgZ9zWk8ctHykNZIJR3wQbwGyjV8j1Txn2adyhla07hMo1oeI7ZKNjnWKy4rMTHIWAQD8NPvubATn16cdQfJYYXQ2GyiVCTOy23S5SEErSvxGaErmP2jH1kyrESAVzhkj3PuZwk6sVvaNWvruAUE5rj9w+PQHRI09E99cb5q6spHYaLgQu7rmurxJo+o7m7uU5grAQavAl6TARyqIYXgYMxScFe3icNw5JeCOu3ZO7Uc+RFPmpOx+ExBN5ES2o91oAj40V1nibW6vCBtmPlLUf905/2n6W9VvmuYPXDp+DDj84YsM3iBnZBA\u003d\u003d"
+      "nonce": "Ol5BKA2eEgo\u003d",
+      "signature": "emjbn8bF+wKGErx7seJAahyCvEcNmf+flPlvB8WCjqHO1GzQGaZCRbs8xnwfOyOqEIm36ZyHC5NbBz4jFKCBq0opV21kta2xcCSomKC6r+FhokPsc2aMIy/2ZcN2OlLnD9SNtjPI9esDNCnuZyLJlnkkhE66o/SxJrGx2sqaOzITgG3/cXvSXbEplja6MTNtsMk+oeH5YQRuvMESerHxWA3/YPoubL1WhwoIzVt+Mbf5z6BUfFLbaiCmTFwXNa8kZNiialbz0k1U816cqS8vnE8wzuapBSsAO5h7abgBn+cpL37/tPoSz18CaLJELIY8kL+piQbA0X7ufVrgjJCVqA\u003d\u003d"
     }
   ],
   "slicer": {
