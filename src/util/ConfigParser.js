@@ -875,10 +875,11 @@ Ext.define('BasiGX.util.ConfigParser', {
 
         /**
          * Method turns a comma separated string into an array containing
-         * integers or floats.
+         * integers or floats. If passed an array, parse{Int,Float} will be
+         * called on each item.
          *
          * @param {String} type The type to convert to.
-         * @param {String} string The string to convert.
+         * @param {String | Array} string The string to convert.
          * @return {Array} The parsed array.
          */
         convertStringToNumericArray: function(type, string) {
@@ -888,9 +889,15 @@ Ext.define('BasiGX.util.ConfigParser', {
                 return string;
             }
             if (Ext.isArray(string)) {
-                Ext.log.warn('Passed array instead of string to convert to ' +
-                    ' array of ' + type + '. Returning input array unchanged.');
-                return string;
+                var result = [];
+                Ext.each(string, function(item) {
+                    if (type === 'int') {
+                        result.push(parseInt(item, 10));
+                    } else if (type === 'float') {
+                        result.push(parseFloat(item, 10));
+                    }
+                });
+                return result;
             }
             var arr = [];
             Ext.each(string.split(','), function(part) {
