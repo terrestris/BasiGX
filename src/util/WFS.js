@@ -52,6 +52,7 @@ Ext.define('BasiGX.util.WFS', {
         wfsGetFeatureXmlTpl: '' +
             '<wfs:GetFeature service="WFS" version="1.1.0"' +
                 ' outputFormat="JSON"' +
+                ' maxFeatures="{6}"' +
                 // {0} is replaced with namespace alias,
                 // {1} with namespace URI
                 ' xmlns:{0}="{1}"' +
@@ -391,6 +392,8 @@ Ext.define('BasiGX.util.WFS', {
          * @param {String} geomFieldName The name of the geom field
          * @param {String} filter An OGC 1.1.0 filter in XML format for limiting
          *    the number of returned features.
+         * @param {Integer} maxFeatures The maximum number of features to get.
+         *    Defaults to 1000 if not set.
          * @param {Function} successCallback A function to call with the
          *    response in case the request finished successfully.
          * @param {Function} failureCallback A function to call with the
@@ -400,7 +403,8 @@ Ext.define('BasiGX.util.WFS', {
          * @return {Ext.data.request.Ajax} The request object.
          */
         executeWfsGetFeature: function(url, layer, srsName, displayColumns,
-            geomFieldName, filter, successCallback, failureCallback, scope) {
+            geomFieldName, filter, maxFeatures, successCallback,
+            failureCallback, scope) {
 
             var featureType = layer.getSource().getParams().LAYERS;
             var ns = featureType.split(':')[0];
@@ -423,6 +427,10 @@ Ext.define('BasiGX.util.WFS', {
                     Ext.String.format(propNameTpl, geomFieldName);
             }
 
+            if (!maxFeatures) {
+                maxFeatures = 1000;
+            }
+
             var xml = Ext.String.format(
                 staticMe.wfsGetFeatureXmlTpl,
                 ns,
@@ -430,7 +438,8 @@ Ext.define('BasiGX.util.WFS', {
                 featureType,
                 srsName,
                 propertyNameXml,
-                filter // OGC 1.1.0. filter as string
+                filter, // OGC 1.1.0. filter as string
+                maxFeatures
             );
 
             return Ext.Ajax.request({
@@ -540,6 +549,7 @@ Ext.define('BasiGX.util.WFS', {
                     srs,
                     geomFieldName,
                     filter,
+                    null,
                     successCallback,
                     failureCallback,
                     scope
@@ -579,8 +589,14 @@ Ext.define('BasiGX.util.WFS', {
             if (timeFilterParts) {
                 allFilters = timeFilterParts;
             }
-            var bboxFilter = staticMe.getBboxFilter(map, geomFieldName, extent);
-            allFilters.push(bboxFilter);
+            if (extent) {
+                var bboxFilter = staticMe.getBboxFilter(
+                    map,
+                    geomFieldName,
+                    extent
+                );
+                allFilters.push(bboxFilter);
+            }
 
             var filter = staticMe.combineFilters(allFilters);
 
