@@ -42,6 +42,7 @@ Ext.define('BasiGX.view.window.MergeWindow', {
     layout: 'fit',
     autoShow: true,
     items: [],
+    bodyPadding: 5,
 
     config: {
         /**
@@ -57,8 +58,25 @@ Ext.define('BasiGX.view.window.MergeWindow', {
     },
 
     initComponent: function() {
-        this.callParent();
-        this.mergeLayers();
+        var me = this;
+        me.callParent();
+        me.mergeLayers();
+        me.registerMultiSelectFilter();
+        var combos = me.query('combo');
+        Ext.each(combos, function(combo) {
+            combo.on('change', function() {
+                me.registerMultiSelectFilter();
+            });
+        });
+    },
+
+    registerMultiSelectFilter: function() {
+        var me = this;
+        var store = this.down('multiselect').getStore();
+        store.filterBy(function(rec) {
+            var mapping = BasiGX.util.Merge.extractMapping(me);
+            return mapping[rec.data.field1] === null;
+        });
     },
 
     /**
@@ -84,7 +102,9 @@ Ext.define('BasiGX.view.window.MergeWindow', {
                 margin: 3,
                 valueField: 'name',
                 value: sourceSchema.includes(attr) ? attr : '',
-                allowBlank: true
+                allowBlank: true,
+                forceSelection: true,
+                editable: true
             });
         });
 
@@ -132,6 +152,8 @@ Ext.define('BasiGX.view.window.MergeWindow', {
         return {
             xtype: 'multiselect',
             margin: 5,
+            minHeight: 100,
+            width: '100%',
             bind: {
                 fieldLabel: '{adoptAttributes}'
             },
@@ -175,7 +197,6 @@ Ext.define('BasiGX.view.window.MergeWindow', {
 
         var buttons = {
             xtype: 'container',
-            layout: 'hbox',
             items: [{
                 xtype: 'button',
                 bind: {
@@ -195,11 +216,11 @@ Ext.define('BasiGX.view.window.MergeWindow', {
 
         var attributeList = this.createAttributeSelection(sourceSchema);
 
-        var container = {
-            xtype: 'container',
+        var panel = {
+            xtype: 'form',
             layout: 'vbox',
             scrollable: true,
-            width: 500,
+            width: 550,
             items: [{
                 xtype: 'label',
                 bind: {
@@ -207,17 +228,22 @@ Ext.define('BasiGX.view.window.MergeWindow', {
                 }
             }, {
                 xtype: 'container',
-                layout: 'hbox',
+                layout: {
+                    type: 'table',
+                    // The total column count must be specified here
+                    columns: 3
+                },
                 items: vboxes
             },
-                attributeList,
+            attributeList,
             {
                 xtype: 'buttongroup',
-                rowspan: 2,
+                bodyBorder: false,
+                frame: false,
                 items: buttons
             }]
         };
 
-        this.add(Ext.create(container));
+        this.add(panel);
     }
 });
