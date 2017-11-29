@@ -59,6 +59,7 @@ Ext.define(&#39;BasiGX.view.window.MergeWindow&#39;, {
 <span id='BasiGX-view-window-MergeWindow-cfg-layout'>    layout: &#39;fit&#39;,
 </span><span id='BasiGX-view-window-MergeWindow-cfg-autoShow'>    autoShow: true,
 </span><span id='BasiGX-view-window-MergeWindow-property-items'>    items: [],
+</span><span id='BasiGX-view-window-MergeWindow-cfg-bodyPadding'>    bodyPadding: 5,
 </span>
     config: {
 <span id='BasiGX-view-window-MergeWindow-property-sourceLayer'>        /**
@@ -74,8 +75,25 @@ Ext.define(&#39;BasiGX.view.window.MergeWindow&#39;, {
     },
 
 <span id='BasiGX-view-window-MergeWindow-method-initComponent'>    initComponent: function() {
-</span>        this.callParent();
-        this.mergeLayers();
+</span>        var me = this;
+        me.callParent();
+        me.mergeLayers();
+        me.registerMultiSelectFilter();
+        var combos = me.query(&#39;combo&#39;);
+        Ext.each(combos, function(combo) {
+            combo.on(&#39;change&#39;, function() {
+                me.registerMultiSelectFilter();
+            });
+        });
+    },
+
+<span id='BasiGX-view-window-MergeWindow-method-registerMultiSelectFilter'>    registerMultiSelectFilter: function() {
+</span>        var me = this;
+        var store = this.down(&#39;multiselect&#39;).getStore();
+        store.filterBy(function(rec) {
+            var mapping = BasiGX.util.Merge.extractMapping(me);
+            return mapping[rec.data.field1] === null;
+        });
     },
 
 <span id='BasiGX-view-window-MergeWindow-method-mergeLayers'>    /**
@@ -101,7 +119,9 @@ Ext.define(&#39;BasiGX.view.window.MergeWindow&#39;, {
                 margin: 3,
                 valueField: &#39;name&#39;,
                 value: sourceSchema.includes(attr) ? attr : &#39;&#39;,
-                allowBlank: true
+                allowBlank: true,
+                forceSelection: true,
+                editable: true
             });
         });
 
@@ -149,6 +169,8 @@ Ext.define(&#39;BasiGX.view.window.MergeWindow&#39;, {
         return {
             xtype: &#39;multiselect&#39;,
             margin: 5,
+            minHeight: 100,
+            width: &#39;100%&#39;,
             bind: {
                 fieldLabel: &#39;{adoptAttributes}&#39;
             },
@@ -192,7 +214,6 @@ Ext.define(&#39;BasiGX.view.window.MergeWindow&#39;, {
 
         var buttons = {
             xtype: &#39;container&#39;,
-            layout: &#39;hbox&#39;,
             items: [{
                 xtype: &#39;button&#39;,
                 bind: {
@@ -212,11 +233,11 @@ Ext.define(&#39;BasiGX.view.window.MergeWindow&#39;, {
 
         var attributeList = this.createAttributeSelection(sourceSchema);
 
-        var container = {
-            xtype: &#39;container&#39;,
+        var panel = {
+            xtype: &#39;form&#39;,
             layout: &#39;vbox&#39;,
             scrollable: true,
-            width: 500,
+            width: 550,
             items: [{
                 xtype: &#39;label&#39;,
                 bind: {
@@ -224,18 +245,23 @@ Ext.define(&#39;BasiGX.view.window.MergeWindow&#39;, {
                 }
             }, {
                 xtype: &#39;container&#39;,
-                layout: &#39;hbox&#39;,
+                layout: {
+                    type: &#39;table&#39;,
+                    // The total column count must be specified here
+                    columns: 3
+                },
                 items: vboxes
             },
-                attributeList,
+            attributeList,
             {
                 xtype: &#39;buttongroup&#39;,
-                rowspan: 2,
+                bodyBorder: false,
+                frame: false,
                 items: buttons
             }]
         };
 
-        this.add(Ext.create(container));
+        this.add(panel);
     }
 });
 </pre>
