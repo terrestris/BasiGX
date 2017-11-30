@@ -195,6 +195,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         grid.on('itemmouseleave', function() {
             me.highlightSource.clear();
         });
+        if (this.getLayer().getSource().getFeatures().length === 0) {
+            this.addFeatureKey = this.getLayer().getSource().once('addfeature',
+            function() {
+                me.reconfigureStore(grid.getStore());
+                me.getLayer().getSource().unByKey(me.addFeatureKey);
+            });
+        }
     },
 
     /**
