@@ -37,14 +37,34 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     },
 
     config: {
+        /**
+         * The layer with the features to display in the grid.
+         * @type {ol.layer.Vector}
+         */
         layer: null,
+        /**
+         * The openlayers map.
+         * @type {ol.Map}
+         */
         map: null,
-        ignoredAttributes: ['id']
+        /**
+         * Attributes to ignore. Attributes in this list will not be shown in
+         * the grid.
+         * @type {Array}
+         */
+        ignoredAttributes: ['id'],
+        /**
+         * If set, grid selection will be synchronous with the features in the
+         * layer. Selecting/deselecting features in the grid will add/remove
+         * features from the selection layer.
+         * @type {ol.layer.Vector}
+         */
+        selectionLayer: null
     },
 
     items: [{
         xtype: 'grid',
-        selModel: 'cellmodel',
+        selModel: 'checkboxmodel',
         plugins: {
             ptype: 'cellediting',
             clicksToEdit: 1
@@ -60,6 +80,58 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         this.registerEvents();
         this.createHighlightLayer(this.getMap());
         this.appendMenuEntries();
+    },
+
+    /**
+     * Overridden so we can register add/remove events on the layer's source.
+     * @param  {ol.layer.Vector} selLayer the new selection layer
+     */
+    setSelectionLayer: function(selLayer) {
+        if (this.selectionLayer) {
+            this.selectionLayer.getSource().un(
+                'addfeature',
+                this.selectionFeatureAdded,
+                this
+            );
+            this.selectionLayer.getSource().un(
+                'removefeature',
+                this.selectionFeatureRemoved,
+                this
+            );
+        }
+        if (selLayer) {
+            selLayer.getSource().on(
+                'addfeature',
+                this.selectionFeatureAdded,
+                this
+            );
+            selLayer.getSource().on(
+                'removefeature',
+                this.selectionFeatureRemoved,
+                this
+            );
+        }
+        this.callParent();
+    },
+
+    /**
+     * Unregister openlayers add/remove events.
+     */
+    doDestroy: function() {
+        var selLayer = this.getSelectionLayer();
+        if (selLayer) {
+            selLayer.getSource().un(
+                'addfeature',
+                this.selectionFeatureAdded,
+                this
+            );
+            selLayer.getSource().un(
+                'removefeature',
+                this.selectionFeatureRemoved,
+                this
+            );
+        }
+        this.callParent();
     },
 
     /**
@@ -243,6 +315,48 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             });
         }
         return columns;
+    },
+
+    /**
+     * Finds a feature record in the store by original feature.
+     * @param  {ol.Feature} feature the original features
+     * @return {Object}         an ext record of the feature in the store, or
+     * undefined
+     */
+    findFeatureInStore: function(feature) {
+        var grid = this.down('grid');
+        var store = grid.getStore();
+        var index = store.findBy(function(rec) {
+            if (rec.olObject.getId() === feature.getId()) {
+                return true;
+            }
+        });
+        if (index < 0) {
+            return;
+        }
+        return store.getAt(index);
+    },
+
+    /**
+     * Callback to select a feature if in grid.
+     * @param  {Object} event openlayers add event
+     */
+    selectionFeatureAdded: function(event) {
+        var grid = this.down('grid');
+        var matched = this.findFeatureInStore(event.feature);
+        var selection = grid.getSelection();
+        selection.push(matched);
+        grid.getSelectionModel().select(selection);
+    },
+
+    /**
+     * Callback to deselect a feature if in grid.
+     * @param  {Object} event openlayers remove event
+     */
+    selectionFeatureRemoved: function(event) {
+        var grid = this.down('grid');
+        var matched = this.findFeatureInStore(event.feature);
+        grid.getSelectionModel().deselect([matched]);
     }
 
 });
