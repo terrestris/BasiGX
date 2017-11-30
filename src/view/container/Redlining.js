@@ -33,9 +33,6 @@ Ext.define('BasiGX.view.container.Redlining', {
      */
     viewModel: {
         data: {
-            drawPointsBtnText: 'Draw Points',
-            drawLinesBtnText: 'Draw Lines',
-            drawPolygonsBtnText: 'Draw Polygons',
             drawPostItBtnText: 'Draw Post-it',
             copyObjectBtnText: 'Copy Object',
             moveObjectBtnText: 'Move Object',
@@ -54,21 +51,6 @@ Ext.define('BasiGX.view.container.Redlining', {
                 'werden'
         }
     },
-
-    /**
-     *
-     */
-    drawPointInteraction: null,
-
-    /**
-     *
-     */
-    drawLineInteraction: null,
-
-    /**
-     *
-     */
-    drawPolygonInteraction: null,
 
     /**
      *
@@ -301,74 +283,17 @@ Ext.define('BasiGX.view.container.Redlining', {
     getRedlineItems: function() {
         var me = this;
         return [{
-            xtype: 'button',
-            bind: {
-                text: '{drawPointsBtnText}'
-            },
-            name: 'drawPointsBtn',
-            toggleGroup: 'draw',
-            listeners: {
-                toggle: function(btn, pressed) {
-                    if (!me.drawPointInteraction) {
-                        me.drawPointInteraction = new ol.interaction.Draw({
-                            features: me.redlineFeatures,
-                            type: 'Point'
-                        });
-                        me.map.addInteraction(me.drawPointInteraction);
-                    }
-                    if (pressed) {
-                        me.drawPointInteraction.setActive(true);
-                    } else {
-                        me.drawPointInteraction.setActive(false);
-                    }
-                }
-            }
+            xtype: 'basigx-button-digitize-point',
+            collection: me.redlineFeatures,
+            map: me.map
         }, {
-            xtype: 'button',
-            bind: {
-                text: '{drawLinesBtnText}'
-            },
-            name: 'drawLinesBtn',
-            toggleGroup: 'draw',
-            listeners: {
-                toggle: function(btn, pressed) {
-                    if (!me.drawLineInteraction) {
-                        me.drawLineInteraction = new ol.interaction.Draw({
-                            features: me.redlineFeatures,
-                            type: 'LineString'
-                        });
-                        me.map.addInteraction(me.drawLineInteraction);
-                    }
-                    if (pressed) {
-                        me.drawLineInteraction.setActive(true);
-                    } else {
-                        me.drawLineInteraction.setActive(false);
-                    }
-                }
-            }
+            xtype: 'basigx-button-digitize-line',
+            collection: me.redlineFeatures,
+            map: me.map
         }, {
-            xtype: 'button',
-            bind: {
-                text: '{drawPolygonsBtnText}'
-            },
-            name: 'drawPolygonsBtn',
-            toggleGroup: 'draw',
-            listeners: {
-                toggle: function(btn, pressed) {
-                    if (!me.drawPolygonInteraction) {
-                        me.drawPolygonInteraction = new ol.interaction.Draw({
-                            features: me.redlineFeatures,
-                            type: 'Polygon'
-                        });
-                        me.map.addInteraction(me.drawPolygonInteraction);
-                    }
-                    if (pressed) {
-                        me.drawPolygonInteraction.setActive(true);
-                    } else {
-                        me.drawPolygonInteraction.setActive(false);
-                    }
-                }
-            }
+            xtype: 'basigx-button-digitize-polygon',
+            collection: me.redlineFeatures,
+            map: me.map
         }, {
             xtype: 'button',
             bind: {
