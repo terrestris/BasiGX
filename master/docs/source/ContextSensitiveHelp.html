@@ -205,7 +205,7 @@ Ext.define(&#39;BasiGX.ux.ContextSensitiveHelp&#39;, {
                 var doc = component.getViewModel().get(&#39;documentation&#39;);
                 if (!Ext.isEmpty(doc)) {
                     var exisitingWin = Ext.ComponentQuery.query(
-                            &#39;window[name=contextsensitivehelp]&#39;)[0];
+                        &#39;window[name=contextsensitivehelp]&#39;)[0];
                     if (exisitingWin) {
                         exisitingWin.setHtml(doc);
                         exisitingWin.setTitle(me.getViewModel().get(&#39;title&#39;));

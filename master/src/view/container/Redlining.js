@@ -23,6 +23,9 @@ Ext.define('BasiGX.view.container.Redlining', {
     xtype: 'basigx-container-redlining',
 
     requires: [
+        'BasiGX.view.button.DigitizePoint',
+        'BasiGX.view.button.DigitizeLine',
+        'BasiGX.view.button.DigitizePolygon',
         'BasiGX.view.container.RedlineStyler'
     ],
 
@@ -33,9 +36,6 @@ Ext.define('BasiGX.view.container.Redlining', {
      */
     viewModel: {
         data: {
-            drawPointsBtnText: 'Draw Points',
-            drawLinesBtnText: 'Draw Lines',
-            drawPolygonsBtnText: 'Draw Polygons',
             drawPostItBtnText: 'Draw Post-it',
             copyObjectBtnText: 'Copy Object',
             moveObjectBtnText: 'Move Object',
@@ -54,21 +54,6 @@ Ext.define('BasiGX.view.container.Redlining', {
                 'werden'
         }
     },
-
-    /**
-     *
-     */
-    drawPointInteraction: null,
-
-    /**
-     *
-     */
-    drawLineInteraction: null,
-
-    /**
-     *
-     */
-    drawPolygonInteraction: null,
 
     /**
      *
@@ -301,74 +286,17 @@ Ext.define('BasiGX.view.container.Redlining', {
     getRedlineItems: function() {
         var me = this;
         return [{
-            xtype: 'button',
-            bind: {
-                text: '{drawPointsBtnText}'
-            },
-            name: 'drawPointsBtn',
-            toggleGroup: 'draw',
-            listeners: {
-                toggle: function(btn, pressed) {
-                    if (!me.drawPointInteraction) {
-                        me.drawPointInteraction = new ol.interaction.Draw({
-                            features: me.redlineFeatures,
-                            type: 'Point'
-                        });
-                        me.map.addInteraction(me.drawPointInteraction);
-                    }
-                    if (pressed) {
-                        me.drawPointInteraction.setActive(true);
-                    } else {
-                        me.drawPointInteraction.setActive(false);
-                    }
-                }
-            }
+            xtype: 'basigx-button-digitize-point',
+            collection: me.redlineFeatures,
+            map: me.map
         }, {
-            xtype: 'button',
-            bind: {
-                text: '{drawLinesBtnText}'
-            },
-            name: 'drawLinesBtn',
-            toggleGroup: 'draw',
-            listeners: {
-                toggle: function(btn, pressed) {
-                    if (!me.drawLineInteraction) {
-                        me.drawLineInteraction = new ol.interaction.Draw({
-                            features: me.redlineFeatures,
-                            type: 'LineString'
-                        });
-                        me.map.addInteraction(me.drawLineInteraction);
-                    }
-                    if (pressed) {
-                        me.drawLineInteraction.setActive(true);
-                    } else {
-                        me.drawLineInteraction.setActive(false);
-                    }
-                }
-            }
+            xtype: 'basigx-button-digitize-line',
+            collection: me.redlineFeatures,
+            map: me.map
         }, {
-            xtype: 'button',
-            bind: {
-                text: '{drawPolygonsBtnText}'
-            },
-            name: 'drawPolygonsBtn',
-            toggleGroup: 'draw',
-            listeners: {
-                toggle: function(btn, pressed) {
-                    if (!me.drawPolygonInteraction) {
-                        me.drawPolygonInteraction = new ol.interaction.Draw({
-                            features: me.redlineFeatures,
-                            type: 'Polygon'
-                        });
-                        me.map.addInteraction(me.drawPolygonInteraction);
-                    }
-                    if (pressed) {
-                        me.drawPolygonInteraction.setActive(true);
-                    } else {
-                        me.drawPolygonInteraction.setActive(false);
-                    }
-                }
-            }
+            xtype: 'basigx-button-digitize-polygon',
+            collection: me.redlineFeatures,
+            map: me.map
         }, {
             xtype: 'button',
             bind: {
@@ -418,36 +346,36 @@ Ext.define('BasiGX.view.container.Redlining', {
                     if (!me.copySelectInteraction) {
                         me.copySelectInteraction =
                            new ol.interaction.Select({
-                               condition: function(evt) {
-                                   return ol.events.condition.pointerMove(
-                                       evt) || ol.events.condition.
-                                       click(evt);
-                               },
-                               addCondition: function(evt) {
-                                   if (evt.type === 'click') {
-                                       var features = me.
-                                           copySelectInteraction.
-                                           getFeatures().getArray();
-                                       if (features[0]) {
-                                           var copyFeature = features[0].
-                                               clone();
-                                           var doneFn = function(
-                                               finalFeature) {
-                                               me.redlineFeatures.push(
-                                                   finalFeature);
-                                           };
-                                           BasiGX.util.Animate.moveFeature(
-                                               copyFeature, 500,
-                                               100,
-                                               me.getRedlineStyleFunction(),
-                                               doneFn);
+                                condition: function(evt) {
+                                    return ol.events.condition.pointerMove(
+                                        evt) || ol.events.condition.
+                                        click(evt);
+                                },
+                                addCondition: function(evt) {
+                                    if (evt.type === 'click') {
+                                        var features = me.
+                                            copySelectInteraction.
+                                            getFeatures().getArray();
+                                        if (features[0]) {
+                                            var copyFeature = features[0].
+                                                clone();
+                                            var doneFn = function(
+                                                finalFeature) {
+                                                me.redlineFeatures.push(
+                                                    finalFeature);
+                                            };
+                                            BasiGX.util.Animate.moveFeature(
+                                                copyFeature, 500,
+                                                100,
+                                                me.getRedlineStyleFunction(),
+                                                doneFn);
 
-                                           me.copySelectInteraction.
-                                               getFeatures().clear();
-                                       }
-                                   }
-                               }
-                           });
+                                            me.copySelectInteraction.
+                                                getFeatures().clear();
+                                        }
+                                    }
+                                }
+                            });
                         me.map.addInteraction(me.copySelectInteraction);
                     }
                     if (pressed) {
@@ -469,45 +397,45 @@ Ext.define('BasiGX.view.container.Redlining', {
                     if (!me.translateInteraction) {
                         me.translateSelectInteraction =
                            new ol.interaction.Select({
-                               condition: ol.events.condition.pointerMove,
-                               addCondition: function() {
-                                   var selectedFeatures =
+                                condition: ol.events.condition.pointerMove,
+                                addCondition: function() {
+                                    var selectedFeatures =
                                       me.translateSelectInteraction.
                                           getFeatures();
-                                   var firstFeature = selectedFeatures.
-                                       getArray()[0];
+                                    var firstFeature = selectedFeatures.
+                                        getArray()[0];
 
-                                   if (firstFeature) {
-                                       var redlineFeature = me.
-                                           getRedlineFeatureFromClone(
-                                               firstFeature);
+                                    if (firstFeature) {
+                                        var redlineFeature = me.
+                                            getRedlineFeatureFromClone(
+                                                firstFeature);
 
-                                       if (me.translateFeatureCollection.
-                                           getLength() === 0) {
-                                           me.translateFeatureCollection.
-                                               push(redlineFeature);
-                                       } else if (me.
-                                           translateFeatureCollection.
-                                           getLength() > 0 &&
+                                        if (me.translateFeatureCollection.
+                                            getLength() === 0) {
+                                            me.translateFeatureCollection.
+                                                push(redlineFeature);
+                                        } else if (me.
+                                            translateFeatureCollection.
+                                            getLength() > 0 &&
                                            redlineFeature !== me.
                                                translateFeatureCollection.
                                                getArray()[0]) {
-                                           me.
-                                               translateFeatureCollection.
-                                               clear();
-                                           me.
-                                               translateFeatureCollection.
-                                               push(redlineFeature);
-                                       }
-                                   }
-                               }
-                           });
+                                            me.
+                                                translateFeatureCollection.
+                                                clear();
+                                            me.
+                                                translateFeatureCollection.
+                                                push(redlineFeature);
+                                        }
+                                    }
+                                }
+                            });
                         me.map.addInteraction(me.translateSelectInteraction);
                         me.translateFeatureCollection = new ol.Collection();
                         me.translateInteraction =
                            new ol.interaction.Translate({
-                               features: me.translateFeatureCollection
-                           });
+                                features: me.translateFeatureCollection
+                            });
                         me.map.addInteraction(me.translateInteraction);
                     }
                     if (pressed) {
@@ -734,16 +662,16 @@ Ext.define('BasiGX.view.container.Redlining', {
                     if (text.length > me.postitTextMaxLength) {
                         BasiGX.confirm(me.getViewModel().get(
                             'postItInputTooLongText'), {
-                                fn: function(choice) {
-                                    if (choice === 'yes') {
-                                        text = me.stringDivider(text, 16, '\n');
-                                        me.setPostitStyleAndTextOnFeature(
-                                            text, feat);
-                                    } else {
-                                        me.handlePostitAdd(feat, text);
-                                    }
+                            fn: function(choice) {
+                                if (choice === 'yes') {
+                                    text = me.stringDivider(text, 16, '\n');
+                                    me.setPostitStyleAndTextOnFeature(
+                                        text, feat);
+                                } else {
+                                    me.handlePostitAdd(feat, text);
                                 }
                             }
+                        }
                         );
                     } else {
                         text = me.stringDivider(text, 16, '\n');
@@ -773,16 +701,16 @@ Ext.define('BasiGX.view.container.Redlining', {
                     if (text.length > me.postitTextMaxLength) {
                         BasiGX.confirm(me.getViewModel().get(
                             'postItInputTooLongText'), {
-                                fn: function(choice) {
-                                    if (choice === 'yes') {
-                                        text = me.stringDivider(text, 16, '\n');
-                                        me.setPostitStyleAndTextOnFeature(
-                                            text, feature);
-                                    } else {
-                                        me.modifyPostit(feature, text);
-                                    }
+                            fn: function(choice) {
+                                if (choice === 'yes') {
+                                    text = me.stringDivider(text, 16, '\n');
+                                    me.setPostitStyleAndTextOnFeature(
+                                        text, feature);
+                                } else {
+                                    me.modifyPostit(feature, text);
                                 }
                             }
+                        }
                         );
                     } else {
                         text = me.stringDivider(text, 16, '\n');
