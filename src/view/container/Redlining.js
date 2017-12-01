@@ -23,6 +23,9 @@ Ext.define('BasiGX.view.container.Redlining', {
     xtype: 'basigx-container-redlining',
 
     requires: [
+        'BasiGX.view.button.DigitizePoint',
+        'BasiGX.view.button.DigitizeLine',
+        'BasiGX.view.button.DigitizePolygon',
         'BasiGX.view.container.RedlineStyler'
     ],
 
