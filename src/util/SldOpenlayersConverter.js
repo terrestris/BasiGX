@@ -89,7 +89,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
          */
         getSldNameFromSld: function(sldObj) {
             return sldObj.value.namedLayerOrUserLayer[0]
-                    .namedStyleOrUserStyle[0].name;
+                .namedStyleOrUserStyle[0].name;
         },
 
         /**
@@ -113,9 +113,9 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
          */
         toSldString: function(sldObject) {
             if (sldObject.value.namedLayerOrUserLayer[0]
-                    .namedStyleOrUserStyle[0].isDefault) {
+                .namedStyleOrUserStyle[0].isDefault) {
                 delete sldObject.value.namedLayerOrUserLayer[0]
-                        .namedStyleOrUserStyle[0].isDefault;
+                    .namedStyleOrUserStyle[0].isDefault;
             }
             var util = BasiGX.util.SldOpenlayersConverter;
             return util.marshaller.marshalString(sldObject);
@@ -153,11 +153,11 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                 if (firstNamedLayerOrUserLayer.namedStyleOrUserStyle &&
                   firstNamedLayerOrUserLayer.namedStyleOrUserStyle[0] &&
                   firstNamedLayerOrUserLayer.namedStyleOrUserStyle[0]
-                        .featureTypeStyle &&
+                      .featureTypeStyle &&
                   firstNamedLayerOrUserLayer.namedStyleOrUserStyle[0]
-                        .featureTypeStyle[0] &&
+                      .featureTypeStyle[0] &&
                   firstNamedLayerOrUserLayer.namedStyleOrUserStyle[0]
-                        .featureTypeStyle[0].rule) {
+                      .featureTypeStyle[0].rule) {
                     return firstNamedLayerOrUserLayer.namedStyleOrUserStyle[0]
                         .featureTypeStyle[0].rule;
                 }
@@ -214,19 +214,19 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
             switch (operator) {
                 case 'PropertyIsNull':
                     propertyName = filter.comparisonOps.value.propertyName
-                            .content[0];
+                        .content[0];
                     break;
                 case 'PropertyIsLike':
                     propertyName = filter.comparisonOps.value.propertyName
-                            .content[0];
+                        .content[0];
                     break;
                 case 'PropertyIsBetween':
                     propertyName = filter.comparisonOps.value.expression.value
-                            .content[0];
+                        .content[0];
                     break;
                 default:
                     propertyName = filter.comparisonOps.value.expression[0]
-                            .value.content[0];
+                        .value.content[0];
                     break;
             }
             return propertyName;
@@ -245,17 +245,17 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                     break;
                 case 'PropertyIsLike':
                     literalValues.push(
-                            filter.comparisonOps.value.literal.content[0]);
+                        filter.comparisonOps.value.literal.content[0]);
                     break;
                 case 'PropertyIsBetween':
                     literalValues.push(filter.comparisonOps.value.lowerBoundary
-                            .expression.value.content[0]);
+                        .expression.value.content[0]);
                     literalValues.push(filter.comparisonOps.value.upperBoundary
-                            .expression.value.content[0]);
+                        .expression.value.content[0]);
                     break;
                 default:
                     literalValues.push(filter.comparisonOps.value
-                            .expression[1].value.content[0]);
+                        .expression[1].value.content[0]);
                     break;
             }
             return literalValues;
@@ -340,11 +340,11 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
             if ('fill' in mark) {
                 // find the correct cssParameter
                 var fillColor = sldUtil.getFirstCssParameterContentByName(
-                        mark.fill.cssParameter, 'fill'
-                    );
+                    mark.fill.cssParameter, 'fill'
+                );
                 var fillOpacity = sldUtil.getFirstCssParameterContentByName(
-                        mark.fill.cssParameter, 'fill-opacity'
-                    ) || sldUtil.DEFAULT_FILL_OPACITY;
+                    mark.fill.cssParameter, 'fill-opacity'
+                ) || sldUtil.DEFAULT_FILL_OPACITY;
 
                 fillColor = BasiGX.util.Color.hexToRgba(fillColor, fillOpacity);
                 fill = new ol.style.Fill({
@@ -363,17 +363,17 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
             var stroke;
             if ('stroke' in mark) {
                 var strokeColor = sldUtil.getFirstCssParameterContentByName(
-                        mark.stroke.cssParameter, 'stroke'
-                    ) || sldUtil.DEFAULT_STROKE_COLOR;
+                    mark.stroke.cssParameter, 'stroke'
+                ) || sldUtil.DEFAULT_STROKE_COLOR;
                 var strokeWidth = sldUtil.getFirstCssParameterContentByName(
-                        mark.stroke.cssParameter, 'stroke-width'
-                    ) || sldUtil.DEFAULT_STROKE_WIDTH;
+                    mark.stroke.cssParameter, 'stroke-width'
+                ) || sldUtil.DEFAULT_STROKE_WIDTH;
                 var strokeOpacity = sldUtil.getFirstCssParameterContentByName(
-                        mark.stroke.cssParameter, 'stroke-opacity'
-                    ) || sldUtil.DEFAULT_STROKE_OPACITY;
+                    mark.stroke.cssParameter, 'stroke-opacity'
+                ) || sldUtil.DEFAULT_STROKE_OPACITY;
 
                 strokeColor = BasiGX.util.Color.hexToRgba(strokeColor,
-                        strokeOpacity);
+                    strokeOpacity);
                 stroke = new ol.style.Stroke({
                     color: strokeColor,
                     width: strokeWidth
@@ -494,8 +494,8 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
             } else if ((/Graphic/).test(firstTypeName)) {
                 // … ol.style.Icon
                 var imageSrc = sldUtil.onlineResourceFromGraphic(
-                        firstGraphicOrMark
-                    );
+                    firstGraphicOrMark
+                );
                 style = new ol.style.Style({
                     image: new ol.style.Icon({
                         src: imageSrc,
@@ -625,16 +625,16 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
             };
             if (olSymbolizer.getImage() instanceof ol.style.Circle) {
                 var fillColor = BasiGX.util.Color.rgbaToHex(
-                        olSymbolizer.getImage().getFill().getColor());
+                    olSymbolizer.getImage().getFill().getColor());
                 var fillOpacity = BasiGX.util.Color.rgbaAsArray(
-                        olSymbolizer.getImage().getFill().getColor())[4];
+                    olSymbolizer.getImage().getFill().getColor())[4];
                 var radius = olSymbolizer.getImage().getRadius().toString();
                 var strokeColor = BasiGX.util.Color.rgbaToHex(
-                        olSymbolizer.getImage().getStroke().getColor());
+                    olSymbolizer.getImage().getStroke().getColor());
                 var strokeWidth = olSymbolizer.getImage().getStroke()
-                        .getWidth().toString();
+                    .getWidth().toString();
                 var strokeOpacity = BasiGX.util.Color.rgbaAsArray(
-                        olSymbolizer.getImage().getStroke().getColor())[4];
+                    olSymbolizer.getImage().getStroke().getColor())[4];
 
                 sldSymbolizer.value.graphic.externalGraphicOrMark = [{
                     TYPE_NAME: 'SLD_1_0_0.Mark',
@@ -702,15 +702,15 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
          */
         polygonSymbolizerToSld: function(olSymbolizer) {
             var fillColor = BasiGX.util.Color.rgbaToHex(
-                    olSymbolizer.getFill().getColor());
+                olSymbolizer.getFill().getColor());
             var fillOpacity = BasiGX.util.Color.rgbaAsArray(
-                    olSymbolizer.getFill().getColor())[4];
+                olSymbolizer.getFill().getColor())[4];
             var strokeColor = BasiGX.util.Color.rgbaToHex(
-                    olSymbolizer.getStroke().getColor());
+                olSymbolizer.getStroke().getColor());
             var strokeWidth = olSymbolizer.getStroke()
-                    .getWidth().toString();
+                .getWidth().toString();
             var strokeOpacity = BasiGX.util.Color.rgbaAsArray(
-                    olSymbolizer.getStroke().getColor())[4];
+                olSymbolizer.getStroke().getColor())[4];
 
             var sldSymbolizer = {
                 name: {
@@ -762,11 +762,11 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
          */
         lineSymbolizerToSld: function(olSymbolizer) {
             var strokeColor = BasiGX.util.Color.rgbaToHex(
-                    olSymbolizer.getStroke().getColor());
+                olSymbolizer.getStroke().getColor());
             var strokeWidth = olSymbolizer.getStroke()
-                    .getWidth().toString();
+                .getWidth().toString();
             var strokeOpacity = BasiGX.util.Color.rgbaAsArray(
-                    olSymbolizer.getStroke().getColor())[4];
+                olSymbolizer.getStroke().getColor())[4];
 
             var sldSymbolizer = {
                 name: {
@@ -891,7 +891,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                                 value: {
                                     TYPE_NAME: 'Filter_1_0_0.LiteralType',
                                     content: [filterValues.literalNumberField1
-                                              .toString()]
+                                        .toString()]
                                 }
                             }
                         },
@@ -910,7 +910,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                                 value: {
                                     TYPE_NAME: 'Filter_1_0_0.LiteralType',
                                     content: [filterValues.literalNumberField2
-                                            .toString()]
+                                        .toString()]
                                 }
                             }
                         }
@@ -957,7 +957,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
                         value: {
                             TYPE_NAME: 'Filter_1_0_0.LiteralType',
                             content: [filterValues
-                                    .literalNumberField2.toString()]
+                                .literalNumberField2.toString()]
                         }
                     };
                     break;

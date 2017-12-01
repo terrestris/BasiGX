@@ -176,7 +176,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         });
         this.highlightLayer.set('name', 'highlight');
         var displayInLayerSwitcherKey = BasiGX.util.Layer
-                    .KEY_DISPLAY_IN_LAYERSWITCHER;
+            .KEY_DISPLAY_IN_LAYERSWITCHER;
         this.highlightLayer.set(displayInLayerSwitcherKey, false);
         map.getMap().addLayer(this.highlightLayer);
     },
@@ -197,10 +197,10 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         });
         if (this.getLayer().getSource().getFeatures().length === 0) {
             this.addFeatureKey = this.getLayer().getSource().once('addfeature',
-            function() {
-                me.reconfigureStore(grid.getStore());
-                me.getLayer().getSource().unByKey(me.addFeatureKey);
-            });
+                function() {
+                    me.reconfigureStore(grid.getStore());
+                    me.getLayer().getSource().unByKey(me.addFeatureKey);
+                });
         }
     },
 
