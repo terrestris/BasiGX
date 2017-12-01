@@ -37,14 +37,34 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     },
 
     config: {
+        /**
+         * The layer with the features to display in the grid.
+         * @type {ol.layer.Vector}
+         */
         layer: null,
+        /**
+         * The openlayers map.
+         * @type {ol.Map}
+         */
         map: null,
-        ignoredAttributes: ['id']
+        /**
+         * Attributes to ignore. Attributes in this list will not be shown in
+         * the grid.
+         * @type {Array}
+         */
+        ignoredAttributes: ['id'],
+        /**
+         * If set, grid selection will be synchronous with the features in the
+         * layer. Selecting/deselecting features in the grid will add/remove
+         * features from the selection layer.
+         * @type {ol.layer.Vector}
+         */
+        selectionLayer: null
     },
 
     items: [{
         xtype: 'grid',
-        selModel: 'cellmodel',
+        selModel: 'checkboxmodel',
         plugins: {
             ptype: 'cellediting',
             clicksToEdit: 1
@@ -60,6 +80,26 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         this.registerEvents();
         this.createHighlightLayer(this.getMap());
         this.appendMenuEntries();
+        this.down('grid').on('select', this.rowSelected, this);
+        this.down('grid').on('deselect', this.rowDeselected, this);
+    },
+
+    /**
+     * Overridden so we can register add/remove events on the layer's source.
+     * @param  {ol.layer.Vector} selLayer the new selection layer
+     */
+    setSelectionLayer: function(selLayer) {
+        this.bindOrUnbindSelectionEvents('un', this.selectionLayer);
+        this.bindOrUnbindSelectionEvents('on', selLayer);
+        this.selectionLayer = selLayer;
+    },
+
+    /**
+     * Unregister openlayers add/remove events.
+     */
+    doDestroy: function() {
+        this.bindOrUnbindSelectionEvents('un', this.selectionLayer);
+        this.callParent();
     },
 
     /**
@@ -243,6 +283,118 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             });
         }
         return columns;
+    },
+
+    /**
+     * Finds a feature record in the store by original feature.
+     * @param  {ol.Feature} feature the original features
+     * @return {Object}         an ext record of the feature in the store, or
+     * undefined
+     */
+    findFeatureInStore: function(feature) {
+        var grid = this.down('grid');
+        var store = grid.getStore();
+        var index = store.findBy(function(rec) {
+            if (rec.olObject.getId() === feature.getId()) {
+                return true;
+            }
+        });
+        if (index < 0) {
+            return;
+        }
+        return store.getAt(index);
+    },
+
+    /**
+     * Callback to select a feature if in grid.
+     * @param  {Object} event openlayers add event
+     */
+    selectionFeatureAdded: function(event) {
+        var grid = this.down('grid');
+        var matched = this.findFeatureInStore(event.feature);
+        var selection = grid.getSelection();
+        if (selection.includes(matched) || matched === undefined) {
+            return;
+        }
+        selection.push(matched);
+        grid.getSelectionModel().select(selection);
+    },
+
+    /**
+     * Callback to deselect a feature if in grid.
+     * @param  {Object} event openlayers remove event
+     */
+    selectionFeatureRemoved: function(event) {
+        var grid = this.down('grid');
+        var matched = this.findFeatureInStore(event.feature);
+        grid.getSelectionModel().deselect([matched]);
+    },
+
+    /**
+     * Callback when selecting a feature in the grid, to select the geometry
+     * also in the map.
+     * @param  {Ext.selection.Model} model  the selection Model
+     * @param  {Ext.data.Model} record the feature record
+     */
+    rowSelected: function(model, record) {
+        if (!this.selectionLayer) {
+            return;
+        }
+        var source = this.selectionLayer.getSource();
+        var clone = record.olObject.clone();
+        clone.setId(record.olObject.getId());
+        source.addFeatures([clone]);
+    },
+
+    /**
+     * Callback when deselecting a feature in the grid, to deselect the geometry
+     * also in the map.
+     * @param  {Ext.selection.Model} model  the selection model
+     * @param  {Ext.data.Model} record the feature record
+     */
+    rowDeselected: function(model, record) {
+        if (!this.selectionLayer) {
+            return;
+        }
+        var source = this.selectionLayer.getSource();
+        var id = record.olObject.getId();
+        var matched;
+        Ext.each(source.getFeatures(), function(feature) {
+            if (feature.getId() === id) {
+                matched = feature;
+                return false;
+            }
+        });
+        if (matched) {
+            try {
+                source.removeFeature(matched);
+            } catch (e) {
+                // happens if deselected by selection tool
+            }
+        }
+    },
+
+    /**
+     * Utility function to bind or unbind add/remove feature events on the
+     * selection layer.
+     * @param  {String} onOrOff either 'on' or 'un'
+     * @param  {ol.layer.Vector} layer   the layer the events should be
+     * (un)registered on
+     */
+    bindOrUnbindSelectionEvents: function(onOrOff, layer) {
+        if (!layer) {
+            return;
+        }
+        layer.getSource()[onOrOff](
+            'addfeature',
+            this.selectionFeatureAdded,
+            this
+        );
+        layer.getSource()[onOrOff](
+            'removefeature',
+            this.selectionFeatureRemoved,
+            this
+        );
     }
 
 });
