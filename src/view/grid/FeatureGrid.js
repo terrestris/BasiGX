@@ -89,30 +89,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      * @param  {ol.layer.Vector} selLayer the new selection layer
      */
     setSelectionLayer: function(selLayer) {
-        if (this.selectionLayer) {
-            this.selectionLayer.getSource().un(
-                'addfeature',
-                this.selectionFeatureAdded,
-                this
-            );
-            this.selectionLayer.getSource().un(
-                'removefeature',
-                this.selectionFeatureRemoved,
-                this
-            );
-        }
-        if (selLayer) {
-            selLayer.getSource().on(
-                'addfeature',
-                this.selectionFeatureAdded,
-                this
-            );
-            selLayer.getSource().on(
-                'removefeature',
-                this.selectionFeatureRemoved,
-                this
-            );
-        }
+        this.bindOrUnbindSelectionEvents('un', this.selectionLayer);
+        this.bindOrUnbindSelectionEvents('on', selLayer);
         this.selectionLayer = selLayer;
     },
 
@@ -120,19 +98,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      * Unregister openlayers add/remove events.
      */
     doDestroy: function() {
-        var selLayer = this.getSelectionLayer();
-        if (selLayer) {
-            selLayer.getSource().un(
-                'addfeature',
-                this.selectionFeatureAdded,
-                this
-            );
-            selLayer.getSource().un(
-                'removefeature',
-                this.selectionFeatureRemoved,
-                this
-            );
-        }
+        this.bindOrUnbindSelectionEvents('un', this.selectionLayer);
         this.callParent();
     },
 
@@ -406,6 +372,29 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 // happens if deselected by selection tool
             }
         }
+    },
+
+    /**
+     * Utility function to bind or unbind add/remove feature events on the
+     * selection layer.
+     * @param  {String} onOrOff either 'on' or 'un'
+     * @param  {ol.layer.Vector} layer   the layer the events should be
+     * (un)registered on
+     */
+    bindOrUnbindSelectionEvents: function(onOrOff, layer) {
+        if (!layer) {
+            return;
+        }
+        layer.getSource()[onOrOff](
+            'addfeature',
+            this.selectionFeatureAdded,
+            this
+        );
+        layer.getSource()[onOrOff](
+            'removefeature',
+            this.selectionFeatureRemoved,
+            this
+        );
     }
 
 });
