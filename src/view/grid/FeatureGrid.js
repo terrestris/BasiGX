@@ -80,6 +80,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         this.registerEvents();
         this.createHighlightLayer(this.getMap());
         this.appendMenuEntries();
+        this.down('grid').on('select', this.rowSelected, this);
+        this.down('grid').on('deselect', this.rowDeselected, this);
     },
 
     /**
@@ -111,7 +113,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 this
             );
         }
-        this.callParent();
+        this.selectionLayer = selLayer;
     },
 
     /**
@@ -345,6 +347,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var grid = this.down('grid');
         var matched = this.findFeatureInStore(event.feature);
         var selection = grid.getSelection();
+        if (selection.includes(matched) || matched === undefined) {
+            return;
+        }
         selection.push(matched);
         grid.getSelectionModel().select(selection);
     },
@@ -357,6 +362,50 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var grid = this.down('grid');
         var matched = this.findFeatureInStore(event.feature);
         grid.getSelectionModel().deselect([matched]);
+    },
+
+    /**
+     * Callback when selecting a feature in the grid, to select the geometry
+     * also in the map.
+     * @param  {Ext.selection.Model} model  the selection Model
+     * @param  {Ext.data.Model} record the feature record
+     */
+    rowSelected: function(model, record) {
+        if (!this.selectionLayer) {
+            return;
+        }
+        var source = this.selectionLayer.getSource();
+        var clone = record.olObject.clone();
+        clone.setId(record.olObject.getId());
+        source.addFeatures([clone]);
+    },
+
+    /**
+     * Callback when deselecting a feature in the grid, to deselect the geometry
+     * also in the map.
+     * @param  {Ext.selection.Model} model  the selection model
+     * @param  {Ext.data.Model} record the feature record
+     */
+    rowDeselected: function(model, record) {
+        if (!this.selectionLayer) {
+            return;
+        }
+        var source = this.selectionLayer.getSource();
+        var id = record.olObject.getId();
+        var matched;
+        Ext.each(source.getFeatures(), function(feature) {
+            if (feature.getId() === id) {
+                matched = feature;
+                return false;
+            }
+        });
+        if (matched) {
+            try {
+                source.removeFeature(matched);
+            } catch (e) {
+                // happens if deselected by selection tool
+            }
+        }
     }
 
 });
