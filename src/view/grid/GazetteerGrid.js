@@ -94,7 +94,7 @@ Ext.define('BasiGX.view.grid.GazetteerGrid', {
         },
         iconCls: 'fa fa-refresh fa-2x'
     },
-        '->',
+    '->',
     {
         xtype: 'button',
         name: 'directionsbutton',

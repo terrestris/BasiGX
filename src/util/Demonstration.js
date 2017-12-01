@@ -121,7 +121,7 @@ Ext.define('BasiGX.util.Demonstration', {
             if (conf) {
                 Ext.iterate(conf, function(key, value) {
                     if (Ext.isDefined(
-                            window['BasiGX']['util']['Demonstration'][key])) {
+                        window['BasiGX']['util']['Demonstration'][key])) {
                         window['BasiGX']['util']['Demonstration'][key](
                             value, el, index, liveDemoConfig
                         );
