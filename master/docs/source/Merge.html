@@ -86,6 +86,24 @@ Ext.define(&#39;BasiGX.util.Merge&#39;, {
             return mapping;
         },
 
+<span id='BasiGX-util-Merge-static-method-extractMappedFields'>        /**
+</span>         * Extracts the source layer attributes which have been selected for
+         * mapping.
+         * @param  {Ext.window.Window} win the merge window
+         * @return {Array}     the list of attribute names
+         */
+        extractMappedFields: function(win) {
+            var combos = win.query(&#39;combo&#39;);
+            var fields = [];
+            Ext.each(combos, function(combo) {
+                var value = combo.getValue();
+                if (value) {
+                    fields.push(value);
+                }
+            });
+            return fields;
+        },
+
 <span id='BasiGX-util-Merge-static-method-extractToCopyAttributes'>        /**
 </span>         * Extracts the list of attributes to add from the merge window.
          * @param  {Ext.window.Window} win the merge windowTitle

@@ -91,8 +91,8 @@ Ext.define(&#39;BasiGX.view.window.MergeWindow&#39;, {
 </span>        var me = this;
         var store = this.down(&#39;multiselect&#39;).getStore();
         store.filterBy(function(rec) {
-            var mapping = BasiGX.util.Merge.extractMapping(me);
-            return mapping[rec.data.field1] === null;
+            var mappedFields = BasiGX.util.Merge.extractMappedFields(me);
+            return mappedFields.indexOf(rec.data.field1) === -1;
         });
     },
 
