@@ -990,7 +990,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
 
         if (strokeWidthFs) {
             value = strokeWidthFs.getValue();
-            if(Ext.isNumber(value)) {
+            if (Ext.isNumber(value)) {
                 symbolizerObj.strokeWidth = value.toString();
             } else {
                 symbolizerObj.strokeWidth =
@@ -1000,7 +1000,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
 
         if (!graphicTabActive && radiusFs) {
             value = radiusFs.getValue();
-            if(Ext.isNumber(value)) {
+            if (Ext.isNumber(value)) {
                 symbolizerObj.radius = value.toString();
             } else {
                 symbolizerObj.radius =
