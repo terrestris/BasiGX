@@ -59,9 +59,12 @@ describe('BasiGX.view.combo.ScaleCombo', function() {
         });
     });
     describe('two-way binding', function() {
-        it('reacts on a map view change', function() {
+        it('reacts on a map view change', function(done) {
             map.getView().setResolution(815);
-            expect(combo.getValue()).to.be(815);
+            window.setTimeout(function() {
+                expect(combo.getValue()).to.be(815);
+                done();
+            }, 100);
         });
         it('updates map view on selection', function() {
             var oldRes = map.getView().getResolution();
