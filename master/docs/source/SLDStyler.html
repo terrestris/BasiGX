@@ -717,6 +717,9 @@ Ext.define(&#39;BasiGX.view.container.SLDStyler&#39;, {
                         },
                         value: strokeWidth,
                         name: &#39;stroke-width&#39;,
+                        allowDecimals: true,
+                        decimalPrecision: 1,
+                        decimalSeparator: &#39;.&#39;,
                         minValue: 0,
                         maxValue: 50,
                         listeners: listenerConfig
@@ -1004,14 +1007,22 @@ Ext.define(&#39;BasiGX.view.container.SLDStyler&#39;, {
 
         if (strokeWidthFs) {
             value = strokeWidthFs.getValue();
-            symbolizerObj.strokeWidth = value ? value.toString() :
-                BasiGX.util.SLD.DEFAULT_STROKE_WIDTH.toString();
+            if (Ext.isNumber(value)) {
+                symbolizerObj.strokeWidth = value.toString();
+            } else {
+                symbolizerObj.strokeWidth =
+                    BasiGX.util.SLD.DEFAULT_STROKE_WIDTH.toString();
+            }
         }
 
         if (!graphicTabActive &amp;&amp; radiusFs) {
             value = radiusFs.getValue();
-            symbolizerObj.radius = value ? value.toString() :
-                BasiGX.util.SLD.DEFAULT_POINT_RADIUS.toString();
+            if (Ext.isNumber(value)) {
+                symbolizerObj.radius = value.toString();
+            } else {
+                symbolizerObj.radius =
+                    BasiGX.util.SLD.DEFAULT_POINT_RADIUS.toString();
+            }
         }
 
         if (graphicTabActive) {
