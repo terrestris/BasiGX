@@ -26,6 +26,7 @@ Ext.define('BasiGX.view.container.Redlining', {
         'BasiGX.view.button.DigitizePoint',
         'BasiGX.view.button.DigitizeLine',
         'BasiGX.view.button.DigitizePolygon',
+        'BasiGX.view.button.DigitizeModifyObject',
         'BasiGX.view.container.RedlineStyler'
     ],
 
@@ -39,7 +40,6 @@ Ext.define('BasiGX.view.container.Redlining', {
             drawPostItBtnText: 'Draw Post-it',
             copyObjectBtnText: 'Copy Object',
             moveObjectBtnText: 'Move Object',
-            modifyObjectBtnText: 'Modify Object',
             deleteObjectBtnText: 'Delete Object',
             openStyleBtnText: 'Styler',
             stylerWindowTitle: 'Styler',
@@ -74,16 +74,6 @@ Ext.define('BasiGX.view.container.Redlining', {
      *
      */
     translateSelectInteraction: null,
-
-    /**
-     *
-     */
-    modifyInteraction: null,
-
-    /**
-     *
-     */
-    modifySelectInteraction: null,
 
     /**
      *
@@ -452,49 +442,11 @@ Ext.define('BasiGX.view.container.Redlining', {
                 }
             }
         }, {
-            xtype: 'button',
-            bind: {
-                text: '{modifyObjectBtnText}'
-            },
-            name: 'modifyObjectBtn',
-            toggleGroup: 'draw',
+            xtype: 'basigx-button-digitize-modify-object',
+            map: me.map,
+            collection: me.redlineFeatures,
             listeners: {
-                toggle: function(btn, pressed) {
-                    if (!me.modifyInteraction) {
-                        me.modifySelectInteraction =
-                           new ol.interaction.Select();
-                        me.modifySelectInteraction.on('select', function(evt) {
-                            if (evt.selected && evt.selected[0]) {
-                                var feature = evt.selected[0];
-                                if (feature.get('isPostit')) {
-                                    me.modifyPostit(feature);
-                                }
-                            }
-                            me.modifySelectInteraction.getFeatures().clear();
-                        });
-                        me.map.addInteraction(me.modifySelectInteraction);
-                        me.modifyInteraction = new ol.interaction.Modify({
-                            features: me.redlineFeatures,
-                            pixelTolerance: 20,
-                            deleteCondition: function(event) {
-                                return ol.events.condition
-                                    .singleClick(event);
-                            }
-                        });
-                        me.map.addInteraction(me.modifyInteraction);
-                    }
-                    if (pressed) {
-                        me.modifyInteraction.setActive(true);
-                        me.modifySelectInteraction.setActive(true);
-                        me.modifyInteraction.on('modifyend',
-                            me.fireRedliningChanged, me);
-                    } else {
-                        me.modifyInteraction.setActive(false);
-                        me.modifySelectInteraction.setActive(false);
-                        me.modifyInteraction.un('modifyend',
-                            me.fireRedliningChanged, me);
-                    }
-                }
+                'redliningchanged': me.fireRedliningChanged
             }
         }, {
             xtype: 'button',
@@ -688,42 +640,6 @@ Ext.define('BasiGX.view.container.Redlining', {
     },
 
     /**
-     * Modify a postit text.
-     *
-     * @param {ol.Feature} feature The vector feature.
-     * @param {String} oldText The old text of the postit.
-     */
-    modifyPostit: function(feature, oldText) {
-        var me = this;
-        BasiGX.prompt(me.getViewModel().get('postItWindowTitle'), {
-            fn: function(decision, text) {
-                if (decision === 'ok') {
-                    if (text.length > me.postitTextMaxLength) {
-                        BasiGX.confirm(me.getViewModel().get(
-                            'postItInputTooLongText'), {
-                            fn: function(choice) {
-                                if (choice === 'yes') {
-                                    text = me.stringDivider(text, 16, '\n');
-                                    me.setPostitStyleAndTextOnFeature(
-                                        text, feature);
-                                } else {
-                                    me.modifyPostit(feature, text);
-                                }
-                            }
-                        }
-                        );
-                    } else {
-                        text = me.stringDivider(text, 16, '\n');
-                        me.setPostitStyleAndTextOnFeature(text, feature);
-                    }
-                }
-            },
-            multiline: 150,
-            value: oldText
-        });
-    },
-
-    /**
      * Sets a postit style and text on a feature.
      *
      * @param {String} text The text of the postit.
@@ -883,7 +799,7 @@ Ext.define('BasiGX.view.container.Redlining', {
         me.stateChangeActive = false;
     },
 
-    fireRedliningChanged: function() {
+    fireRedliningChanged: function() {console.log("asd");
         this.fireEvent('redliningchanged', this, this.getState(),
             this.stateChangeActive);
     }
