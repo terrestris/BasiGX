@@ -1,4 +1,4 @@
-/* Copyright (c) 2017-present terrestris GmbH & Co. KG
+/* Copyright (c) 2018-present terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,10 +46,26 @@ Ext.define('BasiGX.view.button.DigitizeModifyObject', {
     },
 
     config: {
+        /**
+         * The ol map. required.
+         */
         map: null,
+
+        /**
+         * The ol collection to work on. required.
+         */
         collection: null,
+
+        /**
+         *
+         */
         modifyInteraction: null,
+
+        /**
+         *
+         */
         modifySelectInteraction: null,
+
         /**
          * The maximum length of text allowed for the postit
          */
@@ -76,7 +92,7 @@ Ext.define('BasiGX.view.button.DigitizeModifyObject', {
                 });
                 me.map.addInteraction(me.modifySelectInteraction);
                 me.modifyInteraction = new ol.interaction.Modify({
-                    features: me.redlineFeatures,
+                    features: me.collection,
                     pixelTolerance: 20,
                     deleteCondition: function(event) {
                         return ol.events.condition
@@ -89,12 +105,12 @@ Ext.define('BasiGX.view.button.DigitizeModifyObject', {
                 me.modifyInteraction.setActive(true);
                 me.modifySelectInteraction.setActive(true);
                 me.modifyInteraction.on('modifyend',
-                    me.fireRedliningChanged, me);
+                    me.fireFeatureChanged, me);
             } else {
                 me.modifyInteraction.setActive(false);
                 me.modifySelectInteraction.setActive(false);
                 me.modifyInteraction.un('modifyend',
-                    me.fireRedliningChanged, me);
+                    me.fireFeatureChanged, me);
             }
         }
     },
@@ -102,8 +118,8 @@ Ext.define('BasiGX.view.button.DigitizeModifyObject', {
     /**
      * Fire a change event to inform other components
      */
-    fireRedliningChanged: function() {
-        this.fireEvent('redliningchanged');
+    fireFeatureChanged: function() {
+        this.fireEvent('featurechanged');
     },
 
     /**
@@ -120,16 +136,16 @@ Ext.define('BasiGX.view.button.DigitizeModifyObject', {
                     if (text.length > me.postitTextMaxLength) {
                         BasiGX.confirm(me.getViewModel().get(
                             'postItInputTooLongText'), {
-                            fn: function(choice) {
-                                if (choice === 'yes') {
-                                    text = me.stringDivider(text, 16, '\n');
-                                    me.setPostitStyleAndTextOnFeature(
-                                        text, feature);
-                                } else {
-                                    me.modifyPostit(feature, text);
+                                fn: function(choice) {
+                                    if (choice === 'yes') {
+                                        text = me.stringDivider(text, 16, '\n');
+                                        me.setPostitStyleAndTextOnFeature(
+                                            text, feature);
+                                    } else {
+                                        me.modifyPostit(feature, text);
+                                    }
                                 }
                             }
-                        }
                         );
                     } else {
                         text = me.stringDivider(text, 16, '\n');
@@ -187,31 +203,13 @@ Ext.define('BasiGX.view.button.DigitizeModifyObject', {
     },
 
     /**
-     * Sets a postit style and text on a feature.
+     * Sets a postit text on a feature.
      *
      * @param {String} text The text of the postit.
      * @param {ol.Feature} feat The vector feature.
      */
     setPostitTextOnFeature: function(text, feat) {
-        // var me = this;
-        // feat.setStyle(new ol.style.Style({
-        //     image: new ol.style.Icon({
-        //         anchorXUnits: 'fraction',
-        //         anchorYUnits: 'pixels',
-        //         opacity: 0.75,
-        //         src: me.getPostitImgSrc()
-        //     }),
-        //     text: new ol.style.Text({
-        //         text: text,
-        //         scale: 1.5,
-        //         offsetY: 80
-        //     })
-        // }));
-        feat.getStyle().setText(new ol.style.Text({
-            text: text,
-            scale: 1.5,
-            offsetY: 80
-        }));
-        // me.redlineFeatures.push(feat);
+        feat.getStyle().getText().setText(text);
+        this.fireFeatureChanged();
     }
 });
