@@ -77,12 +77,15 @@ Ext.define('BasiGX.view.button.DigitizeMoveObject', {
                         condition: ol.events.condition.pointerMove,
                         addCondition: function() {
                             var selectedFeatures =
-                                me.translateSelectInteraction.getFeatures();
+                                this.getFeatures();
                             var firstFeature = selectedFeatures.getArray()[0];
 
                             if (firstFeature) {
                                 var finalFeature = BasiGX.util.Digitize.
-                                    getFeatureFromClone(firstFeature);
+                                    getFeatureFromClone(
+                                        me.collection,
+                                        firstFeature
+                                    );
 
                                 if (me.translateFeatureCollection.getLength()
                                     === 0) {
@@ -118,6 +121,14 @@ Ext.define('BasiGX.view.button.DigitizeMoveObject', {
                 me.translateSelectInteraction.setActive(false);
                 me.translateInteraction.un('translateend',
                     me.fireFeatureChanged, me);
+            }
+        },
+        beforedestroy: function() {
+            if (this.translateInteraction) {
+                this.map.removeInteraction(this.translateInteraction);
+            }
+            if (this.translateSelectInteraction) {
+                this.map.removeInteraction(this.translateSelectInteraction);
             }
         }
     },
