@@ -72,31 +72,31 @@ Ext.define('BasiGX.view.button.DigitizeCopyObject', {
             var me = this;
             if (!me.copySelectInteraction) {
                 me.copySelectInteraction =
-                   new ol.interaction.Select({
-                       condition: function(evt) {
-                           return ol.events.condition.pointerMove(evt) ||
-                           ol.events.condition.click(evt);
-                       },
-                       addCondition: function(evt) {
-                           if (evt.type === 'click') {
-                               var features = me.copySelectInteraction.
-                                   getFeatures().getArray();
-                               if (features[0]) {
-                                   var copyFeature = features[0].clone();
-                                   var doneFn = function(finalFeature) {
-                                       me.collection.push(finalFeature);
-                                   };
-                                   BasiGX.util.Animate.moveFeature(
-                                       copyFeature, 500,
-                                       100,
-                                       me.styleFn,
-                                       doneFn);
-                                   me.copySelectInteraction.
-                                       getFeatures().clear();
-                               }
-                           }
-                       }
-                   });
+                    new ol.interaction.Select({
+                        condition: function(evt) {
+                            return ol.events.condition.pointerMove(evt) ||
+                            ol.events.condition.click(evt);
+                        },
+                        addCondition: function(evt) {
+                            if (evt.type === 'click') {
+                                var features = me.copySelectInteraction.
+                                    getFeatures().getArray();
+                                if (features[0]) {
+                                    var copyFeature = features[0].clone();
+                                    var doneFn = function(finalFeature) {
+                                        me.collection.push(finalFeature);
+                                    };
+                                    BasiGX.util.Animate.moveFeature(
+                                        copyFeature, 500,
+                                        100,
+                                        me.styleFn,
+                                        doneFn);
+                                    me.copySelectInteraction.
+                                        getFeatures().clear();
+                                }
+                            }
+                        }
+                    });
                 me.map.addInteraction(me.copySelectInteraction);
             }
             if (pressed) {

@@ -23,6 +23,7 @@ Ext.define('BasiGX.view.button.DigitizeDeleteObject', {
     xtype: 'basigx-button-digitize-delete-object',
 
     requires: [
+        'BasiGX.util.Digitize'
     ],
 
     /**
@@ -74,7 +75,7 @@ Ext.define('BasiGX.view.button.DigitizeDeleteObject', {
                 var removeFeatures = function(selectedFeatures) {
                     // find the matching feature
                     selectedFeatures.forEach(function(selectedFeature) {
-                        var feature = me.getFeatureFromClone(
+                        var feature = BasiGX.util.Digitize.getFeatureFromClone(
                             selectedFeature
                         );
                         if (feature) {
@@ -114,23 +115,5 @@ Ext.define('BasiGX.view.button.DigitizeDeleteObject', {
                 me.deleteSnapInteraction.setActive(false);
             }
         }
-    },
-
-    /**
-     * @param {ol.Feature} clone The cloned feature to get the feature from.
-     * @return {ol.Feature} The final feature derived from the `clone`.
-     */
-    getFeatureFromClone: function(clone) {
-        var finalFeature;
-        var wktParser = new ol.format.WKT();
-        var cloneWktString = wktParser.writeFeature(clone);
-        Ext.each(this.collection.getArray(), function(feature) {
-            var featureWktString = wktParser.writeFeature(feature);
-            if (cloneWktString === featureWktString) {
-                finalFeature = feature;
-                return false;
-            }
-        });
-        return finalFeature;
     }
 });

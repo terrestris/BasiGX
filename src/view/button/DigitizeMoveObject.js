@@ -23,6 +23,7 @@ Ext.define('BasiGX.view.button.DigitizeMoveObject', {
     xtype: 'basigx-button-digitize-move-object',
 
     requires: [
+        'BasiGX.util.Digitize'
     ],
 
     /**
@@ -80,8 +81,8 @@ Ext.define('BasiGX.view.button.DigitizeMoveObject', {
                             var firstFeature = selectedFeatures.getArray()[0];
 
                             if (firstFeature) {
-                                var finalFeature = me.getFeatureFromClone(
-                                    firstFeature);
+                                var finalFeature = BasiGX.util.Digitize.
+                                    getFeatureFromClone(firstFeature);
 
                                 if (me.translateFeatureCollection.getLength()
                                     === 0) {
@@ -90,8 +91,8 @@ Ext.define('BasiGX.view.button.DigitizeMoveObject', {
                                 } else if (me.
                                     translateFeatureCollection.getLength() > 0
                                     && finalFeature !== me.
-                                       translateFeatureCollection.
-                                       getArray()[0]) {
+                                        translateFeatureCollection.
+                                        getArray()[0]) {
                                     me.translateFeatureCollection.clear();
                                     me.translateFeatureCollection.push(
                                         finalFeature);
@@ -102,9 +103,9 @@ Ext.define('BasiGX.view.button.DigitizeMoveObject', {
                 me.map.addInteraction(me.translateSelectInteraction);
                 me.translateFeatureCollection = new ol.Collection();
                 me.translateInteraction =
-                   new ol.interaction.Translate({
-                       features: me.translateFeatureCollection
-                   });
+                    new ol.interaction.Translate({
+                        features: me.translateFeatureCollection
+                    });
                 me.map.addInteraction(me.translateInteraction);
             }
             if (pressed) {
@@ -126,23 +127,5 @@ Ext.define('BasiGX.view.button.DigitizeMoveObject', {
      */
     fireFeatureChanged: function() {
         this.fireEvent('featurechanged');
-    },
-
-    /**
-     * @param {ol.Feature} clone The cloned feature to get the feature from.
-     * @return {ol.Feature} The final feature derived from the `clone`.
-     */
-    getFeatureFromClone: function(clone) {
-        var finalFeature;
-        var wktParser = new ol.format.WKT();
-        var cloneWktString = wktParser.writeFeature(clone);
-        Ext.each(this.collection.getArray(), function(feature) {
-            var featureWktString = wktParser.writeFeature(feature);
-            if (cloneWktString === featureWktString) {
-                finalFeature = feature;
-                return false;
-            }
-        });
-        return finalFeature;
     }
 });

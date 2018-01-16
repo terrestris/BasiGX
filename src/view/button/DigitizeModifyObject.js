@@ -23,6 +23,7 @@ Ext.define('BasiGX.view.button.DigitizeModifyObject', {
     xtype: 'basigx-button-digitize-modify-object',
 
     requires: [
+        'BasiGX.util.Digitize'
     ],
 
     /**
@@ -136,19 +137,20 @@ Ext.define('BasiGX.view.button.DigitizeModifyObject', {
                     if (text.length > me.postitTextMaxLength) {
                         BasiGX.confirm(me.getViewModel().get(
                             'postItInputTooLongText'), {
-                                fn: function(choice) {
-                                    if (choice === 'yes') {
-                                        text = me.stringDivider(text, 16, '\n');
-                                        me.setPostitStyleAndTextOnFeature(
-                                            text, feature);
-                                    } else {
-                                        me.modifyPostit(feature, text);
-                                    }
+                            fn: function(choice) {
+                                if (choice === 'yes') {
+                                    text = BasiGX.util.Digitize.
+                                        stringDivider(text, 16, '\n');
+                                    me.setPostitStyleAndTextOnFeature(
+                                        text, feature);
+                                } else {
+                                    me.modifyPostit(feature, text);
                                 }
                             }
-                        );
+                        });
                     } else {
-                        text = me.stringDivider(text, 16, '\n');
+                        text = BasiGX.util.Digitize.
+                            stringDivider(text, 16, '\n');
                         me.setPostitTextOnFeature(text, feature);
                     }
                 }
@@ -156,50 +158,6 @@ Ext.define('BasiGX.view.button.DigitizeModifyObject', {
             multiline: 150,
             value: oldText
         });
-    },
-
-    /**
-     * Returns a string that is wrapped: every ~`width` chars a space is
-     * replaced with the passed `spaceReplacer`.
-     *
-     * See http://stackoverflow.com/questions/14484787/wrap-text-in-javascript
-     *
-     * @param {String} str The string to wrap.
-     * @param {Number} width The width of a line (number of characters).
-     * @param {String} spaceReplacer The string to replace spaces with.
-     * @return {String} The 'wrapped' string.
-     */
-    stringDivider: function(str, width, spaceReplacer) {
-        var me = this;
-        var startIndex = 0;
-        var stopIndex = width;
-        if (str.length > width) {
-            var p = width;
-            var left;
-            var right;
-            while (p > 0 && (str[p] !== ' ' && str[p] !== '-')) {
-                p--;
-            }
-            if (p > 0) {
-                if (str.substring(p, p + 1) === '-') {
-                    left = str.substring(0, p + 1);
-                } else {
-                    left = str.substring(0, p);
-                }
-                right = str.substring(p + 1);
-                return left + spaceReplacer + me.stringDivider(
-                    right, width, spaceReplacer);
-            } else {
-                // no whitespace or - found, splitting hard on the width length
-                left = str.substring(startIndex, stopIndex + 1) + '-';
-                right = str.substring(stopIndex + 1);
-                startIndex = stopIndex;
-                stopIndex += width;
-                return left + spaceReplacer + me.stringDivider(
-                    right, width, spaceReplacer);
-            }
-        }
-        return str;
     },
 
     /**
