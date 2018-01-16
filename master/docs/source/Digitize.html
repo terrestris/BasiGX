@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2018-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-util-Digitize'>/**
+</span> * @class BasiGX.util.Digitize
+ */
+Ext.define(&#39;BasiGX.util.Digitize&#39;, {
+
+    statics: {
+<span id='BasiGX-util-Digitize-static-method-getFeatureFromClone'>        /**
+</span>         * @param {ol.Feature} clone The cloned feature to get the feature from.
+         * @return {ol.Feature} The final feature derived from the `clone`.
+         */
+        getFeatureFromClone: function(clone) {
+            var finalFeature;
+            var wktParser = new ol.format.WKT();
+            var cloneWktString = wktParser.writeFeature(clone);
+            Ext.each(this.collection.getArray(), function(feature) {
+                var featureWktString = wktParser.writeFeature(feature);
+                if (cloneWktString === featureWktString) {
+                    finalFeature = feature;
+                    return false;
+                }
+            });
+            return finalFeature;
+        },
+
+<span id='BasiGX-util-Digitize-static-method-stringDivider'>        /**
+</span>         * Returns a string that is wrapped: every ~`width` chars a space is
+         * replaced with the passed `spaceReplacer`.
+         *
+         * See
+         *  http://stackoverflow.com/questions/14484787/wrap-text-in-javascript
+         *
+         * @param {String} str The string to wrap.
+         * @param {Number} width The width of a line (number of characters).
+         * @param {String} spaceReplacer The string to replace spaces with.
+         * @return {String} The &#39;wrapped&#39; string.
+         */
+        stringDivider: function(str, width, spaceReplacer) {
+            var me = this;
+            var startIndex = 0;
+            var stopIndex = width;
+            if (str.length &gt; width) {
+                var p = width;
+                var left;
+                var right;
+                while (p &gt; 0 &amp;&amp; (str[p] !== &#39; &#39; &amp;&amp; str[p] !== &#39;-&#39;)) {
+                    p--;
+                }
+                if (p &gt; 0) {
+                    if (str.substring(p, p + 1) === &#39;-&#39;) {
+                        left = str.substring(0, p + 1);
+                    } else {
+                        left = str.substring(0, p);
+                    }
+                    right = str.substring(p + 1);
+                    return left + spaceReplacer + me.stringDivider(
+                        right, width, spaceReplacer);
+                } else {
+                    // no whitespace or - found,
+                    // splitting hard on the width length
+                    left = str.substring(startIndex, stopIndex + 1) + &#39;-&#39;;
+                    right = str.substring(stopIndex + 1);
+                    startIndex = stopIndex;
+                    stopIndex += width;
+                    return left + spaceReplacer + me.stringDivider(
+                        right, width, spaceReplacer);
+                }
+            }
+            return str;
+        }
+    }
+});
+</pre>
+</body>
+</html>

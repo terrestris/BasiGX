@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2018-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-button-DigitizeModifyObject'>/**
+</span> * Digitize Modify Object Button
+ *
+ * @class BasiGX.view.button.DigitizeModifyObject
+ */
+Ext.define(&#39;BasiGX.view.button.DigitizeModifyObject&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-digitize-modify-object&#39;,
+
+    requires: [
+        &#39;BasiGX.util.Digitize&#39;
+    ],
+
+<span id='BasiGX-view-button-DigitizeModifyObject-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: &#39;Modify an objetct&#39;,
+            modifyObjectBtnText: &#39;Modify object&#39;,
+            postItWindowTitle: &#39;Enter the Post-its text&#39;,
+            postItInputTooLongText: &#39;The text you have entered is too long. &#39; +
+                &#39;Do you want to continue anyway?&#39;
+        }
+    },
+
+<span id='BasiGX-view-button-DigitizeModifyObject-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: &#39;{modifyObjectBtnText}&#39;
+    },
+
+    config: {
+<span id='BasiGX-view-button-DigitizeModifyObject-cfg-map'>        /**
+</span>         * The ol map. required.
+         */
+        map: null,
+
+<span id='BasiGX-view-button-DigitizeModifyObject-cfg-collection'>        /**
+</span>         * The ol collection to work on. required.
+         */
+        collection: null,
+
+<span id='BasiGX-view-button-DigitizeModifyObject-cfg-modifyInteraction'>        /**
+</span>         *
+         */
+        modifyInteraction: null,
+
+<span id='BasiGX-view-button-DigitizeModifyObject-cfg-modifySelectInteraction'>        /**
+</span>         *
+         */
+        modifySelectInteraction: null,
+
+<span id='BasiGX-view-button-DigitizeModifyObject-cfg-postitTextMaxLength'>        /**
+</span>         * The maximum length of text allowed for the postit
+         */
+        postitTextMaxLength: 130
+    },
+
+<span id='BasiGX-view-button-DigitizeModifyObject-property-name'>    name: &#39;modifyObjectBtn&#39;,
+</span><span id='BasiGX-view-button-DigitizeModifyObject-property-toggleGroup'>    toggleGroup: &#39;draw&#39;,
+</span>
+<span id='BasiGX-view-button-DigitizeModifyObject-property-listeners'>    listeners: {
+</span>        toggle: function(btn, pressed) {
+            var me = this;
+            if (!me.modifyInteraction) {
+                me.modifySelectInteraction =
+                   new ol.interaction.Select();
+                me.modifySelectInteraction.on(&#39;select&#39;, function(evt) {
+                    if (evt.selected &amp;&amp; evt.selected[0]) {
+                        var feature = evt.selected[0];
+                        if (feature.get(&#39;isPostit&#39;)) {
+                            me.modifyPostit(feature);
+                        }
+                    }
+                    me.modifySelectInteraction.getFeatures().clear();
+                });
+                me.map.addInteraction(me.modifySelectInteraction);
+                me.modifyInteraction = new ol.interaction.Modify({
+                    features: me.collection,
+                    pixelTolerance: 20,
+                    deleteCondition: function(event) {
+                        return ol.events.condition
+                            .singleClick(event);
+                    }
+                });
+                me.map.addInteraction(me.modifyInteraction);
+            }
+            if (pressed) {
+                me.modifyInteraction.setActive(true);
+                me.modifySelectInteraction.setActive(true);
+                me.modifyInteraction.on(&#39;modifyend&#39;,
+                    me.fireFeatureChanged, me);
+            } else {
+                me.modifyInteraction.setActive(false);
+                me.modifySelectInteraction.setActive(false);
+                me.modifyInteraction.un(&#39;modifyend&#39;,
+                    me.fireFeatureChanged, me);
+            }
+        }
+    },
+
+<span id='BasiGX-view-button-DigitizeModifyObject-method-fireFeatureChanged'>    /**
+</span>     * Fire a change event to inform other components
+     */
+    fireFeatureChanged: function() {
+        this.fireEvent(&#39;featurechanged&#39;);
+    },
+
+<span id='BasiGX-view-button-DigitizeModifyObject-method-modifyPostit'>    /**
+</span>     * Modify a postit text.
+     *
+     * @param {ol.Feature} feature The vector feature.
+     * @param {String} oldText The old text of the postit.
+     */
+    modifyPostit: function(feature, oldText) {
+        var me = this;
+        BasiGX.prompt(me.getViewModel().get(&#39;postItWindowTitle&#39;), {
+            fn: function(decision, text) {
+                if (decision === &#39;ok&#39;) {
+                    if (text.length &gt; me.postitTextMaxLength) {
+                        BasiGX.confirm(me.getViewModel().get(
+                            &#39;postItInputTooLongText&#39;), {
+                            fn: function(choice) {
+                                if (choice === &#39;yes&#39;) {
+                                    text = BasiGX.util.Digitize.
+                                        stringDivider(text, 16, &#39;\n&#39;);
+                                    me.setPostitStyleAndTextOnFeature(
+                                        text, feature);
+                                } else {
+                                    me.modifyPostit(feature, text);
+                                }
+                            }
+                        });
+                    } else {
+                        text = BasiGX.util.Digitize.
+                            stringDivider(text, 16, &#39;\n&#39;);
+                        me.setPostitTextOnFeature(text, feature);
+                    }
+                }
+            },
+            multiline: 150,
+            value: oldText
+        });
+    },
+
+<span id='BasiGX-view-button-DigitizeModifyObject-method-setPostitTextOnFeature'>    /**
+</span>     * Sets a postit text on a feature.
+     *
+     * @param {String} text The text of the postit.
+     * @param {ol.Feature} feat The vector feature.
+     */
+    setPostitTextOnFeature: function(text, feat) {
+        feat.getStyle().getText().setText(text);
+        this.fireFeatureChanged();
+    }
+});
+</pre>
+</body>
+</html>

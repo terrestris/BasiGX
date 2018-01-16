@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2018-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-button-DigitizeMoveObject'>/**
+</span> * Digitize Move Object Button
+ *
+ * @class BasiGX.view.button.DigitizeMoveObject
+ */
+Ext.define(&#39;BasiGX.view.button.DigitizeMoveObject&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-digitize-move-object&#39;,
+
+    requires: [
+        &#39;BasiGX.util.Digitize&#39;
+    ],
+
+<span id='BasiGX-view-button-DigitizeMoveObject-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: &#39;Move an objetct&#39;,
+            moveObjectBtnText: &#39;Move object&#39;
+        }
+    },
+
+<span id='BasiGX-view-button-DigitizeMoveObject-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: &#39;{moveObjectBtnText}&#39;
+    },
+
+    config: {
+<span id='BasiGX-view-button-DigitizeMoveObject-cfg-map'>        /**
+</span>         * The ol map. required.
+         */
+        map: null,
+
+<span id='BasiGX-view-button-DigitizeMoveObject-cfg-collection'>        /**
+</span>         * The ol collection to work on. required.
+         */
+        collection: null,
+
+<span id='BasiGX-view-button-DigitizeMoveObject-cfg-translateInteraction'>        /**
+</span>         *
+         */
+        translateInteraction: null,
+
+<span id='BasiGX-view-button-DigitizeMoveObject-cfg-translateSelectInteraction'>        /**
+</span>         *
+         */
+        translateSelectInteraction: null
+    },
+
+<span id='BasiGX-view-button-DigitizeMoveObject-property-name'>    name: &#39;moveObjectBtn&#39;,
+</span><span id='BasiGX-view-button-DigitizeMoveObject-cfg-toggleGroup'>    toggleGroup: &#39;draw&#39;,
+</span>
+<span id='BasiGX-view-button-DigitizeMoveObject-cfg-listeners'>    listeners: {
+</span>        toggle: function(btn, pressed) {
+            var me = this;
+            if (!me.translateInteraction) {
+                me.translateSelectInteraction =
+                    new ol.interaction.Select({
+                        condition: ol.events.condition.pointerMove,
+                        addCondition: function() {
+                            var selectedFeatures =
+                                me.translateSelectInteraction.getFeatures();
+                            var firstFeature = selectedFeatures.getArray()[0];
+
+                            if (firstFeature) {
+                                var finalFeature = BasiGX.util.Digitize.
+                                    getFeatureFromClone(firstFeature);
+
+                                if (me.translateFeatureCollection.getLength()
+                                    === 0) {
+                                    me.translateFeatureCollection.push(
+                                        finalFeature);
+                                } else if (me.
+                                    translateFeatureCollection.getLength() &gt; 0
+                                    &amp;&amp; finalFeature !== me.
+                                        translateFeatureCollection.
+                                        getArray()[0]) {
+                                    me.translateFeatureCollection.clear();
+                                    me.translateFeatureCollection.push(
+                                        finalFeature);
+                                }
+                            }
+                        }
+                    });
+                me.map.addInteraction(me.translateSelectInteraction);
+                me.translateFeatureCollection = new ol.Collection();
+                me.translateInteraction =
+                    new ol.interaction.Translate({
+                        features: me.translateFeatureCollection
+                    });
+                me.map.addInteraction(me.translateInteraction);
+            }
+            if (pressed) {
+                me.translateInteraction.setActive(true);
+                me.translateSelectInteraction.setActive(true);
+                me.translateInteraction.on(&#39;translateend&#39;,
+                    me.fireFeatureChanged, me);
+            } else {
+                me.translateInteraction.setActive(false);
+                me.translateSelectInteraction.setActive(false);
+                me.translateInteraction.un(&#39;translateend&#39;,
+                    me.fireFeatureChanged, me);
+            }
+        }
+    },
+
+<span id='BasiGX-view-button-DigitizeMoveObject-method-fireFeatureChanged'>    /**
+</span>     * Fire a change event to inform other components
+     */
+    fireFeatureChanged: function() {
+        this.fireEvent(&#39;featurechanged&#39;);
+    }
+});
+</pre>
+</body>
+</html>

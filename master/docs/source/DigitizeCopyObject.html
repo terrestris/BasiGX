@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2018-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-button-DigitizeCopyObject'>/**
+</span> * Digitize Copy Object Button
+ *
+ * @class BasiGX.view.button.DigitizeCopyObject
+ */
+Ext.define(&#39;BasiGX.view.button.DigitizeCopyObject&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-digitize-copy-object&#39;,
+
+    requires: [
+    ],
+
+<span id='BasiGX-view-button-DigitizeCopyObject-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: &#39;Copy an objetct&#39;,
+            copyObjectBtnText: &#39;Copy Object&#39;
+        }
+    },
+
+<span id='BasiGX-view-button-DigitizeCopyObject-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: &#39;{copyObjectBtnText}&#39;
+    },
+
+    config: {
+<span id='BasiGX-view-button-DigitizeCopyObject-cfg-map'>        /**
+</span>         * The ol map. required.
+         */
+        map: null,
+
+<span id='BasiGX-view-button-DigitizeCopyObject-cfg-collection'>        /**
+</span>         * The ol collection to work on. required.
+         */
+        collection: null,
+
+<span id='BasiGX-view-button-DigitizeCopyObject-cfg-copySelectInteraction'>        /**
+</span>         *
+         */
+        copySelectInteraction: null,
+
+<span id='BasiGX-view-button-DigitizeCopyObject-cfg-styleFn'>        /**
+</span>         * The style function of the layer to animate the feature copy
+         */
+        styleFn: null
+    },
+
+<span id='BasiGX-view-button-DigitizeCopyObject-property-name'>    name: &#39;copyObjectBtn&#39;,
+</span><span id='BasiGX-view-button-DigitizeCopyObject-property-toggleGroup'>    toggleGroup: &#39;draw&#39;,
+</span>
+<span id='BasiGX-view-button-DigitizeCopyObject-property-listeners'>    listeners: {
+</span>        toggle: function(btn, pressed) {
+            var me = this;
+            if (!me.copySelectInteraction) {
+                me.copySelectInteraction =
+                    new ol.interaction.Select({
+                        condition: function(evt) {
+                            return ol.events.condition.pointerMove(evt) ||
+                            ol.events.condition.click(evt);
+                        },
+                        addCondition: function(evt) {
+                            if (evt.type === &#39;click&#39;) {
+                                var features = me.copySelectInteraction.
+                                    getFeatures().getArray();
+                                if (features[0]) {
+                                    var copyFeature = features[0].clone();
+                                    var doneFn = function(finalFeature) {
+                                        me.collection.push(finalFeature);
+                                    };
+                                    BasiGX.util.Animate.moveFeature(
+                                        copyFeature, 500,
+                                        100,
+                                        me.styleFn,
+                                        doneFn);
+                                    me.copySelectInteraction.
+                                        getFeatures().clear();
+                                }
+                            }
+                        }
+                    });
+                me.map.addInteraction(me.copySelectInteraction);
+            }
+            if (pressed) {
+                me.copySelectInteraction.setActive(true);
+            } else {
+                me.copySelectInteraction.setActive(false);
+            }
+        }
+    }
+});
+</pre>
+</body>
+</html>

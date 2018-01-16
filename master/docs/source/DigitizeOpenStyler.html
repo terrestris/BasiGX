@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2018-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-button-DigitizeOpenStyler'>/**
+</span> * Digitize Open Styler Button
+ *
+ * @class BasiGX.view.button.DigitizeOpenStyler
+ */
+Ext.define(&#39;BasiGX.view.button.DigitizeOpenStyler&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-digitize-open-styler&#39;,
+
+    requires: [
+        &#39;BasiGX.view.container.RedlineStyler&#39;
+    ],
+
+<span id='BasiGX-view-button-DigitizeOpenStyler-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: &#39;Opens the styler window&#39;,
+            openStyleBtnText: &#39;Styler&#39;,
+            stylerWindowTitle: &#39;Styler&#39;
+        }
+    },
+
+<span id='BasiGX-view-button-DigitizeOpenStyler-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: &#39;{openStyleBtnText}&#39;
+    },
+
+    config: {
+<span id='BasiGX-view-button-DigitizeOpenStyler-cfg-stylerWindow'>        /**
+</span>         *
+         */
+        stylerWindow: null,
+
+<span id='BasiGX-view-button-DigitizeOpenStyler-cfg-redliningVectorLayer'>        /**
+</span>         *
+         */
+        redliningVectorLayer: null,
+
+<span id='BasiGX-view-button-DigitizeOpenStyler-cfg-backendUrls'>        /**
+</span>         * The url objects for images.
+         *
+         * Can contain url and method property
+         */
+        backendUrls: {
+            pictureList: null,
+            pictureSrc: null,
+            pictureUpload: null,
+            graphicDelete: null
+        },
+
+<span id='BasiGX-view-button-DigitizeOpenStyler-cfg-redlinePointStyle'>        redlinePointStyle: null,
+</span>
+<span id='BasiGX-view-button-DigitizeOpenStyler-cfg-redlinePolygonStyle'>        redlinePolygonStyle: null,
+</span>
+<span id='BasiGX-view-button-DigitizeOpenStyler-cfg-redlineLineStringStyle'>        redlineLineStringStyle: null
+</span>
+    },
+
+<span id='BasiGX-view-button-DigitizeOpenStyler-property-name'>    name: &#39;openStyleBtn&#39;,
+</span><span id='BasiGX-view-button-DigitizeOpenStyler-property-toggleGroup'>    toggleGroup: &#39;draw&#39;,
+</span>
+<span id='BasiGX-view-button-DigitizeOpenStyler-property-listeners'>    listeners: {
+</span>        toggle: function(btn, pressed) {
+            var me = this;
+            if (!me.stylerWindow) {
+                me.stylerWindow = Ext.create(&#39;Ext.window.Window&#39;, {
+                    title: me.getViewModel().get(&#39;stylerWindowTitle&#39;),
+                    width: 500,
+                    layout: &#39;fit&#39;,
+                    constrainHeader: true,
+                    autoScroll: true,
+                    closeAction: &#39;hide&#39;,
+                    items: Ext.create(
+                        &#39;BasiGX.view.container.RedlineStyler&#39;, {
+                            redliningVectorLayer: me.getRedliningVectorLayer(),
+                            backendUrls: me.getBackendUrls(),
+                            redlinePointStyle: me.getRedlinePointStyle(),
+                            redlineLineStringStyle:
+                                me.getRedlineLineStringStyle(),
+                            redlinePolygonStyle: me.getRedlinePolygonStyle()
+                        })
+                });
+                me.stylerWindow.on(&#39;close&#39;, function() {
+                    me.fireFeatureChanged();
+                    btn.toggle();
+                });
+            }
+            if (pressed) {
+                me.stylerWindow.show();
+            } else {
+                me.stylerWindow.hide();
+            }
+        }
+    },
+
+<span id='BasiGX-view-button-DigitizeOpenStyler-method-fireFeatureChanged'>    /**
+</span>     * Fire a change event to inform other components
+     */
+    fireFeatureChanged: function() {
+        this.fireEvent(&#39;featurechanged&#39;);
+    }
+});
+</pre>
+</body>
+</html>

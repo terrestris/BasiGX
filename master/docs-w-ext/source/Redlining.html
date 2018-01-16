@@ -43,7 +43,12 @@ Ext.define(&#39;BasiGX.view.container.Redlining&#39;, {
         &#39;BasiGX.view.button.DigitizePoint&#39;,
         &#39;BasiGX.view.button.DigitizeLine&#39;,
         &#39;BasiGX.view.button.DigitizePolygon&#39;,
-        &#39;BasiGX.view.container.RedlineStyler&#39;
+        &#39;BasiGX.view.button.DigitizeCopyObject&#39;,
+        &#39;BasiGX.view.button.DigitizeMoveObject&#39;,
+        &#39;BasiGX.view.button.DigitizeModifyObject&#39;,
+        &#39;BasiGX.view.button.DigitizeDeleteObject&#39;,
+        &#39;BasiGX.view.button.DigitizePostit&#39;,
+        &#39;BasiGX.view.button.DigitizeOpenStyler&#39;
     ],
 
 <span id='BasiGX-view-container-Redlining-cfg-layout'>    layout: &#39;hbox&#39;,
@@ -53,17 +58,6 @@ Ext.define(&#39;BasiGX.view.container.Redlining&#39;, {
      */
     viewModel: {
         data: {
-            drawPostItBtnText: &#39;Draw Post-it&#39;,
-            copyObjectBtnText: &#39;Copy Object&#39;,
-            moveObjectBtnText: &#39;Move Object&#39;,
-            modifyObjectBtnText: &#39;Modify Object&#39;,
-            deleteObjectBtnText: &#39;Delete Object&#39;,
-            openStyleBtnText: &#39;Styler&#39;,
-            stylerWindowTitle: &#39;Styler&#39;,
-            postItWindowTitle: &#39;Enter the Post-its text&#39;,
-            postItWindowCreatePostItBtnText: &#39;Create Post-it&#39;,
-            postItInputTooLongText: &#39;The text you have entered is too long. &#39; +
-                &#39;Do you want to continue anyway?&#39;,
             documentation: &#39;&lt;h2&gt;Redlining&lt;/h2&gt;• Verwenden Sie das &#39; +
                 &#39;Redlining, um mit verschiedenen Werkzeugen auf der Karte &#39; +
                 &#39;zu zeichnen.&lt;br&gt;• Neben Punkten, Linien und Flächen können &#39; +
@@ -71,51 +65,6 @@ Ext.define(&#39;BasiGX.view.container.Redlining&#39;, {
                 &#39;werden&#39;
         }
     },
-
-<span id='BasiGX-view-container-Redlining-property-drawPostitInteraction'>    /**
-</span>     *
-     */
-    drawPostitInteraction: null,
-
-<span id='BasiGX-view-container-Redlining-property-copySelectInteraction'>    /**
-</span>     *
-     */
-    copySelectInteraction: null,
-
-<span id='BasiGX-view-container-Redlining-property-translateInteraction'>    /**
-</span>     *
-     */
-    translateInteraction: null,
-
-<span id='BasiGX-view-container-Redlining-property-translateSelectInteraction'>    /**
-</span>     *
-     */
-    translateSelectInteraction: null,
-
-<span id='BasiGX-view-container-Redlining-property-modifyInteraction'>    /**
-</span>     *
-     */
-    modifyInteraction: null,
-
-<span id='BasiGX-view-container-Redlining-property-modifySelectInteraction'>    /**
-</span>     *
-     */
-    modifySelectInteraction: null,
-
-<span id='BasiGX-view-container-Redlining-property-selectInteraction'>    /**
-</span>     *
-     */
-    selectInteraction: null,
-
-<span id='BasiGX-view-container-Redlining-property-deleteSelectInteraction'>    /**
-</span>     *
-     */
-    deleteSelectInteraction: null,
-
-<span id='BasiGX-view-container-Redlining-property-deleteSnapInteraction'>    /**
-</span>     *
-     */
-    deleteSnapInteraction: null,
 
 <span id='BasiGX-view-container-Redlining-property-redliningVectorLayer'>    /**
 </span>     *
@@ -126,11 +75,6 @@ Ext.define(&#39;BasiGX.view.container.Redlining&#39;, {
 </span>     *
      */
     redlineFeatures: null,
-
-<span id='BasiGX-view-container-Redlining-property-redliningToolsWin'>    /**
-</span>     *
-     */
-    redliningToolsWin: null,
 
 <span id='BasiGX-view-container-Redlining-property-map'>    /**
 </span>     *
@@ -295,8 +239,6 @@ Ext.define(&#39;BasiGX.view.container.Redlining&#39;, {
 <span id='BasiGX-view-container-Redlining-method-getRedlineItems'>    /**
 </span>     * Returns an array of ExtJS components (buttons etc.) to control redlining.
      *
-     * TODO This method needs to be refactored.
-     *
      * @return {Array&lt;Object&gt;} The component configurations as array; ready to
      *     be used inside the `items` configuration of this container.
      */
@@ -315,515 +257,45 @@ Ext.define(&#39;BasiGX.view.container.Redlining&#39;, {
             collection: me.redlineFeatures,
             map: me.map
         }, {
-            xtype: &#39;button&#39;,
-            bind: {
-                text: &#39;{drawPostItBtnText}&#39;
-            },
-            name: &#39;postitbutton&#39;,
-            toggleGroup: &#39;draw&#39;,
+            xtype: &#39;basigx-button-digitize-postit&#39;,
+            collection: me.redlineFeatures,
+            map: me.map,
+            postitPictureUrl: me.getPostitPictureUrl(),
+            postitTextMaxLength: me.getPostitTextMaxLength()
+        }, {
+            xtype: &#39;basigx-button-digitize-copy-object&#39;,
+            collection: me.redlineFeatures,
+            map: me.map,
+            styleFn: me.redlineStyleFunction
+        }, {
+            xtype: &#39;basigx-button-digitize-move-object&#39;,
+            collection: me.redlineFeatures,
+            map: me.map,
             listeners: {
-                toggle: function(btn, pressed) {
-                    if (!me.drawPostitInteraction) {
-                        var src = me.getPostitImgSrc();
-
-                        me.drawPostitInteraction = new ol.interaction.Draw({
-                            features: new ol.Collection(),
-                            type: &#39;Point&#39;,
-                            style: new ol.style.Style({
-                                image: new ol.style.Icon({
-                                    anchorXUnits: &#39;fraction&#39;,
-                                    anchorYUnits: &#39;pixels&#39;,
-                                    opacity: 0.75,
-                                    src: src
-                                })
-                            })
-                        });
-                        me.map.addInteraction(me.drawPostitInteraction);
-                    }
-                    if (pressed) {
-                        me.drawPostitInteraction.setActive(true);
-                        me.drawPostitInteraction.on(&#39;drawend&#39;,
-                            me.setDefaultPostitStyle, me);
-                    } else {
-                        me.drawPostitInteraction.setActive(false);
-                        me.drawPostitInteraction.un(&#39;drawend&#39;,
-                            me.setDefaultPostitStyle, me);
-                    }
-                }
+                &#39;featurechanged&#39;: me.fireRedliningChanged
             }
         }, {
-            xtype: &#39;button&#39;,
-            bind: {
-                text: &#39;{copyObjectBtnText}&#39;
-            },
-            name: &#39;copyObjectBtn&#39;,
-            toggleGroup: &#39;draw&#39;,
+            xtype: &#39;basigx-button-digitize-modify-object&#39;,
+            map: me.map,
+            collection: me.redlineFeatures,
             listeners: {
-                toggle: function(btn, pressed) {
-                    if (!me.copySelectInteraction) {
-                        me.copySelectInteraction =
-                           new ol.interaction.Select({
-                                condition: function(evt) {
-                                    return ol.events.condition.pointerMove(
-                                        evt) || ol.events.condition.
-                                        click(evt);
-                                },
-                                addCondition: function(evt) {
-                                    if (evt.type === &#39;click&#39;) {
-                                        var features = me.
-                                            copySelectInteraction.
-                                            getFeatures().getArray();
-                                        if (features[0]) {
-                                            var copyFeature = features[0].
-                                                clone();
-                                            var doneFn = function(
-                                                finalFeature) {
-                                                me.redlineFeatures.push(
-                                                    finalFeature);
-                                            };
-                                            BasiGX.util.Animate.moveFeature(
-                                                copyFeature, 500,
-                                                100,
-                                                me.getRedlineStyleFunction(),
-                                                doneFn);
-
-                                            me.copySelectInteraction.
-                                                getFeatures().clear();
-                                        }
-                                    }
-                                }
-                            });
-                        me.map.addInteraction(me.copySelectInteraction);
-                    }
-                    if (pressed) {
-                        me.copySelectInteraction.setActive(true);
-                    } else {
-                        me.copySelectInteraction.setActive(false);
-                    }
-                }
+                &#39;featurechanged&#39;: me.fireRedliningChanged
             }
         }, {
-            xtype: &#39;button&#39;,
-            bind: {
-                text: &#39;{moveObjectBtnText}&#39;
-            },
-            name: &#39;moveObjectBtn&#39;,
-            toggleGroup: &#39;draw&#39;,
-            listeners: {
-                toggle: function(btn, pressed) {
-                    if (!me.translateInteraction) {
-                        me.translateSelectInteraction =
-                           new ol.interaction.Select({
-                                condition: ol.events.condition.pointerMove,
-                                addCondition: function() {
-                                    var selectedFeatures =
-                                      me.translateSelectInteraction.
-                                          getFeatures();
-                                    var firstFeature = selectedFeatures.
-                                        getArray()[0];
-
-                                    if (firstFeature) {
-                                        var redlineFeature = me.
-                                            getRedlineFeatureFromClone(
-                                                firstFeature);
-
-                                        if (me.translateFeatureCollection.
-                                            getLength() === 0) {
-                                            me.translateFeatureCollection.
-                                                push(redlineFeature);
-                                        } else if (me.
-                                            translateFeatureCollection.
-                                            getLength() &gt; 0 &amp;&amp;
-                                           redlineFeature !== me.
-                                               translateFeatureCollection.
-                                               getArray()[0]) {
-                                            me.
-                                                translateFeatureCollection.
-                                                clear();
-                                            me.
-                                                translateFeatureCollection.
-                                                push(redlineFeature);
-                                        }
-                                    }
-                                }
-                            });
-                        me.map.addInteraction(me.translateSelectInteraction);
-                        me.translateFeatureCollection = new ol.Collection();
-                        me.translateInteraction =
-                           new ol.interaction.Translate({
-                                features: me.translateFeatureCollection
-                            });
-                        me.map.addInteraction(me.translateInteraction);
-                    }
-                    if (pressed) {
-                        me.translateInteraction.setActive(true);
-                        me.translateSelectInteraction.setActive(true);
-                        me.translateInteraction.on(&#39;translateend&#39;,
-                            me.fireRedliningChanged, me);
-                    } else {
-                        me.translateInteraction.setActive(false);
-                        me.translateSelectInteraction.setActive(false);
-                        me.translateInteraction.un(&#39;translateend&#39;,
-                            me.fireRedliningChanged, me);
-                    }
-                }
-            }
+            xtype: &#39;basigx-button-digitize-delete-object&#39;,
+            map: me.map,
+            collection: me.redlineFeatures
         }, {
-            xtype: &#39;button&#39;,
-            bind: {
-                text: &#39;{modifyObjectBtnText}&#39;
-            },
-            name: &#39;modifyObjectBtn&#39;,
-            toggleGroup: &#39;draw&#39;,
+            xtype: &#39;basigx-button-digitize-open-styler&#39;,
+            redliningVectorLayer: me.redliningVectorLayer,
+            backendUrls: me.getBackendUrls(),
+            redlinePointStyle: me.getRedlinePointStyle(),
+            redlinePolygonStyle: me.getRedlinePolygonStyle(),
+            redlineLineStringStyle: me.getRedlineLineStringStyle(),
             listeners: {
-                toggle: function(btn, pressed) {
-                    if (!me.modifyInteraction) {
-                        me.modifySelectInteraction =
-                           new ol.interaction.Select();
-                        me.modifySelectInteraction.on(&#39;select&#39;, function(evt) {
-                            if (evt.selected &amp;&amp; evt.selected[0]) {
-                                var feature = evt.selected[0];
-                                if (feature.get(&#39;isPostit&#39;)) {
-                                    me.modifyPostit(feature);
-                                }
-                            }
-                            me.modifySelectInteraction.getFeatures().clear();
-                        });
-                        me.map.addInteraction(me.modifySelectInteraction);
-                        me.modifyInteraction = new ol.interaction.Modify({
-                            features: me.redlineFeatures,
-                            pixelTolerance: 20,
-                            deleteCondition: function(event) {
-                                return ol.events.condition
-                                    .singleClick(event);
-                            }
-                        });
-                        me.map.addInteraction(me.modifyInteraction);
-                    }
-                    if (pressed) {
-                        me.modifyInteraction.setActive(true);
-                        me.modifySelectInteraction.setActive(true);
-                        me.modifyInteraction.on(&#39;modifyend&#39;,
-                            me.fireRedliningChanged, me);
-                    } else {
-                        me.modifyInteraction.setActive(false);
-                        me.modifySelectInteraction.setActive(false);
-                        me.modifyInteraction.un(&#39;modifyend&#39;,
-                            me.fireRedliningChanged, me);
-                    }
-                }
-            }
-        }, {
-            xtype: &#39;button&#39;,
-            bind: {
-                text: &#39;{deleteObjectBtnText}&#39;
-            },
-            name: &#39;deleteObjectBtn&#39;,
-            toggleGroup: &#39;draw&#39;,
-            listeners: {
-                toggle: function(btn, pressed) {
-                    if (!me.deleteSelectInteraction) {
-                        var removeFeatures = function(selectedFeatures) {
-                            // find the matching feature in redlining layer
-                            selectedFeatures.forEach(function(selectedFeature) {
-                                var feature = me.getRedlineFeatureFromClone(
-                                    selectedFeature
-                                );
-                                if (feature) {
-                                    me.redlineFeatures.remove(feature);
-                                }
-                                me.deleteSelectInteraction.getFeatures().
-                                    remove(selectedFeature);
-                                me.map.renderSync();
-                            });
-                        };
-                        me.deleteSelectInteraction = new ol.interaction.Select({
-                            condition: function(evt) {
-                                return ol.events.condition.pointerMove(evt) ||
-                                        ol.events.condition.click(evt);
-                            },
-                            addCondition: function(evt) {
-                                if (evt.type === &#39;click&#39;) {
-                                    var selectedFeatures =
-                                        me.deleteSelectInteraction.
-                                            getFeatures();
-                                    removeFeatures(selectedFeatures, evt);
-                                }
-                            }
-                        });
-                        me.map.addInteraction(me.deleteSelectInteraction);
-
-                        me.deleteSnapInteraction = new ol.interaction.Snap({
-                            features: me.redlineFeatures
-                        });
-                        me.map.addInteraction(me.deleteSnapInteraction);
-                    }
-                    if (pressed) {
-                        me.deleteSelectInteraction.setActive(true);
-                        me.deleteSnapInteraction.setActive(true);
-                    } else {
-                        me.deleteSelectInteraction.setActive(false);
-                        me.deleteSnapInteraction.setActive(false);
-                    }
-                }
-            }
-        }, {
-            xtype: &#39;button&#39;,
-            bind: {
-                text: &#39;{openStyleBtnText}&#39;
-            },
-            name: &#39;openStyleBtn&#39;,
-            toggleGroup: &#39;draw&#39;,
-            listeners: {
-                toggle: function(btn, pressed) {
-                    if (!me.stylerWindow) {
-                        var redliningVectorLayer = me.redliningVectorLayer;
-                        me.stylerWindow = Ext.create(&#39;Ext.window.Window&#39;, {
-                            title: me.getViewModel().get(&#39;stylerWindowTitle&#39;),
-                            width: 500,
-                            layout: &#39;fit&#39;,
-                            constrainHeader: true,
-                            autoScroll: true,
-                            closeAction: &#39;hide&#39;,
-                            items: Ext.create(
-                                &#39;BasiGX.view.container.RedlineStyler&#39;, {
-                                    redliningVectorLayer: redliningVectorLayer,
-                                    backendUrls: me.getBackendUrls(),
-                                    redlinePointStyle:
-                                        me.getRedlinePointStyle(),
-                                    redlineLineStringStyle:
-                                   me.getRedlineLineStringStyle(),
-                                    redlinePolygonStyle:
-                                   me.getRedlinePolygonStyle()
-                                })
-                        });
-                        me.stylerWindow.on(&#39;close&#39;, function() {
-                            me.fireRedliningChanged();
-                            btn.toggle();
-                        });
-                    }
-                    if (pressed) {
-                        me.stylerWindow.show();
-                    } else {
-                        me.stylerWindow.hide();
-                    }
-                }
+                &#39;featurechanged&#39;: me.fireRedliningChanged
             }
         }];
-    },
-
-<span id='BasiGX-view-container-Redlining-method-getPostitImgSrc'>    /**
-</span>     * Returns a usable image `src` for the postit; this will either be the
-     * configured one (#postitPictureUrl), or it will be tried to be determined
-     * from the path of the sourcefile of the redlining component itself (which
-     * might be error-prone).
-     *
-     * The safest bet is to configure an explicit `postitPictureUrl`.
-     *
-     * @return {String} A image `src` for the postit image.
-     */
-    getPostitImgSrc: function() {
-        if (this.getPostitPictureUrl() !== null) {
-            return this.getPostitPictureUrl();
-        } else {
-            var classPath = Ext.Loader.getPath(
-                &#39;BasiGX.view.container.Redlining&#39;
-            );
-            var imageBaseSrc;
-            if (classPath) {
-                imageBaseSrc = classPath.split(
-                    &#39;src/view/container/Redlining.js&#39;)[0];
-            }
-            return imageBaseSrc + &#39;resources/img/postit.png&#39;;
-        }
-    },
-
-<span id='BasiGX-view-container-Redlining-method-setDefaultPostitStyle'>    /**
-</span>     * Called after a postit is drawn, this will set a default postit style.
-     *
-     * @param {ol.interaction.Draw.Event} evt The `drawend`-event.
-     */
-    setDefaultPostitStyle: function(evt) {
-        var me = this;
-        var feature = evt.feature;
-        if (feature) {
-            feature.setStyle(new ol.style.Style({
-                image: new ol.style.Icon({
-                    anchorXUnits: &#39;fraction&#39;,
-                    anchorYUnits: &#39;pixels&#39;,
-                    opacity: 0.75,
-                    src: me.getPostitImgSrc()
-                })
-            }));
-            var clone = evt.feature.clone();
-            me.handlePostitAdd(clone);
-        }
-    },
-
-<span id='BasiGX-view-container-Redlining-method-handlePostitAdd'>    /**
-</span>     * Handles adding of a new postit.
-     *
-     * @param {ol.Feature} feat The vector feature.
-     * @param {String} oldText The old text of the postit.
-     */
-    handlePostitAdd: function(feat, oldText) {
-        var me = this;
-
-        feat.set(&#39;isPostit&#39;, true);
-
-        BasiGX.prompt(me.getViewModel().get(&#39;postItWindowTitle&#39;), {
-            fn: function(decision, text) {
-                if (decision === &#39;cancel&#39;) {
-                    me.redlineFeatures.remove(feat);
-                } else {
-                    if (text.length &gt; me.postitTextMaxLength) {
-                        BasiGX.confirm(me.getViewModel().get(
-                            &#39;postItInputTooLongText&#39;), {
-                            fn: function(choice) {
-                                if (choice === &#39;yes&#39;) {
-                                    text = me.stringDivider(text, 16, &#39;\n&#39;);
-                                    me.setPostitStyleAndTextOnFeature(
-                                        text, feat);
-                                } else {
-                                    me.handlePostitAdd(feat, text);
-                                }
-                            }
-                        }
-                        );
-                    } else {
-                        text = me.stringDivider(text, 16, &#39;\n&#39;);
-                        me.setPostitStyleAndTextOnFeature(text, feat);
-                    }
-                }
-            },
-            multiline: 150,
-            value: oldText
-        });
-
-        var button = Ext.ComponentQuery.query(&#39;button[name=postitbutton]&#39;)[0];
-        button.toggle(false);
-    },
-
-<span id='BasiGX-view-container-Redlining-method-modifyPostit'>    /**
-</span>     * Modify a postit text.
-     *
-     * @param {ol.Feature} feature The vector feature.
-     * @param {String} oldText The old text of the postit.
-     */
-    modifyPostit: function(feature, oldText) {
-        var me = this;
-        BasiGX.prompt(me.getViewModel().get(&#39;postItWindowTitle&#39;), {
-            fn: function(decision, text) {
-                if (decision === &#39;ok&#39;) {
-                    if (text.length &gt; me.postitTextMaxLength) {
-                        BasiGX.confirm(me.getViewModel().get(
-                            &#39;postItInputTooLongText&#39;), {
-                            fn: function(choice) {
-                                if (choice === &#39;yes&#39;) {
-                                    text = me.stringDivider(text, 16, &#39;\n&#39;);
-                                    me.setPostitStyleAndTextOnFeature(
-                                        text, feature);
-                                } else {
-                                    me.modifyPostit(feature, text);
-                                }
-                            }
-                        }
-                        );
-                    } else {
-                        text = me.stringDivider(text, 16, &#39;\n&#39;);
-                        me.setPostitStyleAndTextOnFeature(text, feature);
-                    }
-                }
-            },
-            multiline: 150,
-            value: oldText
-        });
-    },
-
-<span id='BasiGX-view-container-Redlining-method-setPostitStyleAndTextOnFeature'>    /**
-</span>     * Sets a postit style and text on a feature.
-     *
-     * @param {String} text The text of the postit.
-     * @param {ol.Feature} feat The vector feature.
-     */
-    setPostitStyleAndTextOnFeature: function(text, feat) {
-        var me = this;
-        feat.setStyle(new ol.style.Style({
-            image: new ol.style.Icon({
-                anchorXUnits: &#39;fraction&#39;,
-                anchorYUnits: &#39;pixels&#39;,
-                opacity: 0.75,
-                src: me.getPostitImgSrc()
-            }),
-            text: new ol.style.Text({
-                text: text,
-                scale: 1.5,
-                offsetY: 80
-            })
-        }));
-        me.redlineFeatures.push(feat);
-    },
-
-<span id='BasiGX-view-container-Redlining-method-getRedlineFeatureFromClone'>    /**
-</span>     * @param {ol.Feature} clone The feature to get the redline feature from.
-     * @return {ol.Feature} The redline feature derived from the `clone`.
-     */
-    getRedlineFeatureFromClone: function(clone) {
-        var redlineFeature;
-        var wktParser = new ol.format.WKT();
-        var cloneWktString = wktParser.writeFeature(clone);
-        Ext.each(this.redlineFeatures.getArray(), function(feature) {
-            var redlineFeatureWktString = wktParser.writeFeature(feature);
-            if (cloneWktString === redlineFeatureWktString) {
-                redlineFeature = feature;
-                return false;
-            }
-        });
-        return redlineFeature;
-    },
-
-<span id='BasiGX-view-container-Redlining-method-stringDivider'>    /**
-</span>     * Returns a string that is wrapped: every ~`width` chars a space is
-     * replaced with the passed `spaceReplacer`.
-     *
-     * See http://stackoverflow.com/questions/14484787/wrap-text-in-javascript
-     *
-     * @param {String} str The string to wrap.
-     * @param {Number} width The width of a line (number of characters).
-     * @param {String} spaceReplacer The string to replace spaces with.
-     * @return {String} The &#39;wrapped&#39; string.
-     */
-    stringDivider: function(str, width, spaceReplacer) {
-        var me = this;
-        var startIndex = 0;
-        var stopIndex = width;
-        if (str.length &gt; width) {
-            var p = width;
-            var left;
-            var right;
-            while (p &gt; 0 &amp;&amp; (str[p] !== &#39; &#39; &amp;&amp; str[p] !== &#39;-&#39;)) {
-                p--;
-            }
-            if (p &gt; 0) {
-                if (str.substring(p, p + 1) === &#39;-&#39;) {
-                    left = str.substring(0, p + 1);
-                } else {
-                    left = str.substring(0, p);
-                }
-                right = str.substring(p + 1);
-                return left + spaceReplacer + me.stringDivider(
-                    right, width, spaceReplacer);
-            } else {
-                // no whitespace or - found, splitting hard on the width length
-                left = str.substring(startIndex, stopIndex + 1) + &#39;-&#39;;
-                right = str.substring(stopIndex + 1);
-                startIndex = stopIndex;
-                stopIndex += width;
-                return left + spaceReplacer + me.stringDivider(
-                    right, width, spaceReplacer);
-            }
-        }
-        return str;
     },
 
 <span id='BasiGX-view-container-Redlining-method-getState'>    /**
@@ -901,8 +373,14 @@ Ext.define(&#39;BasiGX.view.container.Redlining&#39;, {
     },
 
 <span id='BasiGX-view-container-Redlining-method-fireRedliningChanged'>    fireRedliningChanged: function() {
-</span>        this.fireEvent(&#39;redliningchanged&#39;, this, this.getState(),
-            this.stateChangeActive);
+</span>        var me = Ext.ComponentQuery.query(&#39;basigx-container-redlining&#39;)[0];
+        if (!me) {
+            return;
+        }
+        me.fireEvent(&#39;redliningchanged&#39;, me, me.getState(),
+            me.stateChangeActive);
+        // enforce redraw, needed e.g. for label text changes to become visible
+        me.redliningVectorLayer.changed();
     }
 });
 </pre>
