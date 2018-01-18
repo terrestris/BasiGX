@@ -2,14 +2,9 @@ Ext.Loader.syncRequire(['BasiGX.view.container.Redlining']);
 
 describe('BasiGX.view.container.Redlining', function() {
     var redliningContainer;
-    var testObjs;
     beforeEach(function() {
-        testObjs = TestUtil.setupTestObjects();
+        TestUtil.setupTestObjects();
         redliningContainer = Ext.create('BasiGX.view.container.Redlining');
-    });
-    afterEach(function() {
-        redliningContainer.destroy();
-        TestUtil.teardownTestObjects(testObjs);
     });
 
     describe('Basics', function() {
