@@ -70,6 +70,11 @@ Ext.define('BasiGX.view.button.DigitizeLine', {
             } else {
                 this.drawLineInteraction.setActive(false);
             }
+        },
+        beforedestroy: function() {
+            if (this.drawLineInteraction) {
+                this.map.removeInteraction(this.drawLineInteraction);
+            }
         }
     }
 

@@ -121,6 +121,11 @@ Ext.define(&#39;BasiGX.view.button.DigitizeCopyObject&#39;, {
             } else {
                 me.copySelectInteraction.setActive(false);
             }
+        },
+        beforedestroy: function() {
+            if (this.copySelectInteraction) {
+                this.map.removeInteraction(this.copySelectInteraction);
+            }
         }
     }
 });

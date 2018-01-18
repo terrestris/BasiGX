@@ -70,6 +70,11 @@ Ext.define('BasiGX.view.button.DigitizePolygon', {
             } else {
                 this.drawPolygonInteraction.setActive(false);
             }
+        },
+        beforedestroy: function() {
+            if (this.drawPolygonInteraction) {
+                this.map.removeInteraction(this.drawPolygonInteraction);
+            }
         }
     }
 

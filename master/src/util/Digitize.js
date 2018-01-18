@@ -20,14 +20,15 @@ Ext.define('BasiGX.util.Digitize', {
 
     statics: {
         /**
+         * @param {ol.Collection} collection The feature collection to find in.
          * @param {ol.Feature} clone The cloned feature to get the feature from.
          * @return {ol.Feature} The final feature derived from the `clone`.
          */
-        getFeatureFromClone: function(clone) {
+        getFeatureFromClone: function(collection, clone) {
             var finalFeature;
             var wktParser = new ol.format.WKT();
             var cloneWktString = wktParser.writeFeature(clone);
-            Ext.each(this.collection.getArray(), function(feature) {
+            Ext.each(collection.getArray(), function(feature) {
                 var featureWktString = wktParser.writeFeature(feature);
                 if (cloneWktString === featureWktString) {
                     finalFeature = feature;

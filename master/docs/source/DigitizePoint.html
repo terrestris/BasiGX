@@ -87,6 +87,11 @@ Ext.define(&#39;BasiGX.view.button.DigitizePoint&#39;, {
             } else {
                 this.drawPointInteraction.setActive(false);
             }
+        },
+        beforedestroy: function() {
+            if (this.drawPointInteraction) {
+                this.map.removeInteraction(this.drawPointInteraction);
+            }
         }
     }
 
