@@ -109,6 +109,11 @@ Ext.define('BasiGX.view.button.DigitizePostit', {
                 me.drawPostitInteraction.un('drawend',
                     me.setDefaultPostitStyle, me);
             }
+        },
+        beforedestroy: function() {
+            if (this.drawPostitInteraction) {
+                this.map.removeInteraction(this.drawPostitInteraction);
+            }
         }
     },
 

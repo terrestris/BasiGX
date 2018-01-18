@@ -113,6 +113,14 @@ Ext.define('BasiGX.view.button.DigitizeModifyObject', {
                 me.modifyInteraction.un('modifyend',
                     me.fireFeatureChanged, me);
             }
+        },
+        beforedestroy: function() {
+            if (this.modifyInteraction) {
+                this.map.removeInteraction(this.modifyInteraction);
+            }
+            if (this.modifySelectInteraction) {
+                this.map.removeInteraction(this.modifySelectInteraction);
+            }
         }
     },
 

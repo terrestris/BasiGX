@@ -76,6 +76,7 @@ Ext.define('BasiGX.view.button.DigitizeDeleteObject', {
                     // find the matching feature
                     selectedFeatures.forEach(function(selectedFeature) {
                         var feature = BasiGX.util.Digitize.getFeatureFromClone(
+                            me.collection,
                             selectedFeature
                         );
                         if (feature) {
@@ -94,8 +95,7 @@ Ext.define('BasiGX.view.button.DigitizeDeleteObject', {
                     addCondition: function(evt) {
                         if (evt.type === 'click') {
                             var selectedFeatures =
-                                me.deleteSelectInteraction.
-                                    getFeatures();
+                                this.getFeatures();
                             removeFeatures(selectedFeatures, evt);
                         }
                     }
@@ -113,6 +113,14 @@ Ext.define('BasiGX.view.button.DigitizeDeleteObject', {
             } else {
                 me.deleteSelectInteraction.setActive(false);
                 me.deleteSnapInteraction.setActive(false);
+            }
+        },
+        beforedestroy: function() {
+            if (this.deleteSnapInteraction) {
+                this.map.removeInteraction(this.deleteSnapInteraction);
+            }
+            if (this.deleteSelectInteraction) {
+                this.map.removeInteraction(this.deleteSelectInteraction);
             }
         }
     }
