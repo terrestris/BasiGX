@@ -2,6 +2,7 @@
   "extends":"openlayers",
   "globals":{
     "afterEach":false,
+    "after":false,
     "beforeEach":false,
     "describe":false,
     "document":false,

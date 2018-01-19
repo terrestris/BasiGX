@@ -1,11 +1,8 @@
 Ext.Loader.syncRequire(['BasiGX.view.container.Redlining']);
 
 describe('BasiGX.view.container.Redlining', function() {
-    var redliningContainer;
-    beforeEach(function() {
-        TestUtil.setupTestObjects();
-        redliningContainer = Ext.create('BasiGX.view.container.Redlining');
-    });
+    var testObjs = TestUtil.setupTestObjects();
+    var redliningContainer = Ext.create('BasiGX.view.container.Redlining');
 
     describe('Basics', function() {
         it('is defined', function() {
@@ -62,4 +59,5 @@ describe('BasiGX.view.container.Redlining', function() {
             expect(state.features[0].get('foo')).to.eql('bar');
         });
     });
+    TestUtil.teardownTestObjects(testObjs);
 });

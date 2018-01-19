@@ -7,23 +7,18 @@ describe('BasiGX.util.Layer', function() {
     var map;
     var testObjs;
 
-    beforeEach(function() {
-        layer = new ol.layer.Base({
-            humpty: 'dumpty'
-        });
-        namedLayer = new ol.layer.Base({
-            name: 'Some layername'
-        });
-        testObjs = TestUtil.setupTestObjects({
-            mapOpts: {
-                layers: [layer, namedLayer]
-            }
-        });
-        map = testObjs.map;
+    layer = new ol.layer.Base({
+        humpty: 'dumpty'
     });
-    afterEach(function() {
-        TestUtil.teardownTestObjects(testObjs);
+    namedLayer = new ol.layer.Base({
+        name: 'Some layername'
     });
+    testObjs = TestUtil.setupTestObjects({
+        mapOpts: {
+            layers: [layer, namedLayer]
+        }
+    });
+    map = testObjs.map;
 
     function addLayerWithKeyVal(key, val) {
         var cfg = {};
@@ -55,7 +50,7 @@ describe('BasiGX.util.Layer', function() {
             expect(got1).to.be(layer);
 
             var added = addLayerWithKeyVal('foo', 'bar');
-            // This on was just now added
+            // This one was just now added
             var got2 = BasiGX.util.Layer.getLayerBy('foo', 'bar');
             expect(got2).to.be(added);
         });
@@ -66,10 +61,10 @@ describe('BasiGX.util.Layer', function() {
             );
             expect(got1).to.be(layer);
 
-            var added = addLayerWithKeyVal('foo', 'bar');
-            // This on was just now added
+            var added = addLayerWithKeyVal('foo_col', 'bar_col');
+            // This one was just now added
             var got2 = BasiGX.util.Layer.getLayerBy(
-                'foo', 'bar', map.getLayers()
+                'foo_col', 'bar_col', map.getLayers()
             );
             expect(got2).to.be(added);
         });
@@ -80,10 +75,10 @@ describe('BasiGX.util.Layer', function() {
             );
             expect(got1).to.be(layer);
 
-            var added = addLayerWithKeyVal('foo', 'bar');
+            var added = addLayerWithKeyVal('foo_arr', 'bar_arr');
             // This on was just now added
             var got2 = BasiGX.util.Layer.getLayerBy(
-                'foo', 'bar', map.getLayers().getArray()
+                'foo_arr', 'bar_arr', map.getLayers().getArray()
             );
             expect(got2).to.be(added);
         });
@@ -95,16 +90,16 @@ describe('BasiGX.util.Layer', function() {
             );
             expect(got1).to.be(layer);
 
-            var added = addLayerWithKeyVal('foo', 'bar');
+            var added = addLayerWithKeyVal('foo_plain', 'bar_plain');
             arr.push(added);
             // This on was just now added
             var got2 = BasiGX.util.Layer.getLayerBy(
-                'foo', 'bar', arr
+                'foo_plain', 'bar_plain', arr
             );
             expect(got2).to.be(added);
         });
         it('returns `undefined` if not found', function() {
-            var got = BasiGX.util.Layer.getLayerBy('foo', 'bar');
+            var got = BasiGX.util.Layer.getLayerBy('foo_undef', 'bar_undef');
             expect(got).to.be(undefined);
         });
     });
@@ -130,9 +125,10 @@ describe('BasiGX.util.Layer', function() {
             );
             expect(got1).to.be(namedLayer);
 
-            var added = addNamedLayer('foo');
+            var added = addNamedLayer('foo_named');
             // This on was just now added
-            var got2 = BasiGX.util.Layer.getLayerByName('foo', map.getLayers());
+            var got2 = BasiGX.util.Layer.getLayerByName('foo_named',
+                map.getLayers());
             expect(got2).to.be(added);
         });
         it('works with a layer array', function() {
@@ -142,10 +138,10 @@ describe('BasiGX.util.Layer', function() {
             );
             expect(got1).to.be(namedLayer);
 
-            var added = addNamedLayer('foo');
+            var added = addNamedLayer('foo_array');
             // This on was just now added
             var got2 = BasiGX.util.Layer.getLayerByName(
-                'foo', map.getLayers().getArray()
+                'foo_array', map.getLayers().getArray()
             );
             expect(got2).to.be(added);
         });
@@ -157,10 +153,10 @@ describe('BasiGX.util.Layer', function() {
             );
             expect(got1).to.be(namedLayer);
 
-            var added = addNamedLayer('foo');
+            var added = addNamedLayer('foo_plain');
             arr.push(added);
-            // This on was just now added
-            var got2 = BasiGX.util.Layer.getLayerByName('foo', arr);
+            // This one was just now added
+            var got2 = BasiGX.util.Layer.getLayerByName('foo_plain', arr);
             expect(got2).to.be(added);
         });
         it('returns `undefined` if not found', function() {
@@ -188,5 +184,9 @@ describe('BasiGX.util.Layer', function() {
             expect(BasiGX.util.Layer.getVisibleLayers).to.be.a(Function);
         });
         // TODO add meaningful tests
+    });
+
+    after(function() {
+        TestUtil.teardownTestObjects(testObjs);
     });
 });
