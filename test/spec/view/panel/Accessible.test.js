@@ -16,17 +16,8 @@ describe('BasiGX.view.panel.Accessible', function() {
     });
 
     describe('AccessibleTitle plugin', function() {
-        var instance = null;
-        var plugin = null;
-        beforeEach(function() {
-            instance = Ext.create('BasiGX.view.panel.Accessible');
-            plugin = instance.getPlugin('a11ytitle');
-        });
-        afterEach(function() {
-            instance.destroy();
-            instance = null;
-            plugin = null;
-        });
+        var instance = Ext.create('BasiGX.view.panel.Accessible');
+        var plugin = instance.getPlugin('a11ytitle');
 
         it('is configured with a plugin', function() {
             expect(plugin).to.be.a(BasiGX.plugin.AccessibleTitle);

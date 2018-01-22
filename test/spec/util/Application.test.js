@@ -1,22 +1,15 @@
 Ext.Loader.syncRequire(['BasiGX.util.Application']);
 
 describe('BasiGX.util.Application', function() {
+    var testObjs = TestUtil.setupTestObjects();
+    var mapComponent = testObjs.mapComponent;
+
     describe('Basics', function() {
         it('is defined', function() {
             expect(BasiGX.util.Application).to.not.be(undefined);
         });
     });
     describe('Usage of static Methods', function() {
-        var mapComponent;
-        var testObjs;
-        beforeEach(function() {
-            testObjs = TestUtil.setupTestObjects();
-            mapComponent = testObjs.mapComponent;
-        });
-        afterEach(function() {
-            TestUtil.teardownTestObjects(testObjs);
-        });
-
         it('does not throw on getAppContext call', function() {
             expect(BasiGX.util.Application.getAppContext).
                 to.not.throwException();
@@ -40,5 +33,8 @@ describe('BasiGX.util.Application', function() {
             var retVal = BasiGX.util.Application.getRoute();
             expect(retVal).to.be.a('string');
         });
+    });
+    after(function() {
+        TestUtil.teardownTestObjects(testObjs);
     });
 });

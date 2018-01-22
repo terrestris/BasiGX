@@ -11,22 +11,12 @@ describe('BasiGX.view.window.Accessible', function() {
         it('can be instantiated', function() {
             var instance = Ext.create('BasiGX.view.window.Accessible');
             expect(instance).to.be.a(BasiGX.view.window.Accessible);
-            instance.destroy();
         });
     });
 
     describe('AccessibleTitle plugin', function() {
-        var instance = null;
-        var plugin = null;
-        beforeEach(function() {
-            instance = Ext.create('BasiGX.view.window.Accessible');
-            plugin = instance.getPlugin('a11ytitle');
-        });
-        afterEach(function() {
-            instance.destroy();
-            instance = null;
-            plugin = null;
-        });
+        var instance = Ext.create('BasiGX.view.window.Accessible');
+        var plugin = instance.getPlugin('a11ytitle');
 
         it('is configured with a plugin', function() {
             expect(plugin).to.be.a(BasiGX.plugin.AccessibleTitle);
