@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* global jsts*/
+/* Copyright (c) 2018-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-button-SpatialOperatorUnion'>/**
+</span> * Spatial Operator Union Button
+ *
+ * @class BasiGX.view.button.SpatialOperatorUnion
+ */
+Ext.define(&#39;BasiGX.view.button.SpatialOperatorUnion&#39;, {
+    extend: &#39;BasiGX.view.button.SpatialOperatorBase&#39;,
+    xtype: &#39;basigx-button-spatial-operator-union&#39;,
+
+    requires: [
+        &#39;BasiGX.util.Geometry&#39;
+    ],
+
+<span id='BasiGX-view-button-SpatialOperatorUnion-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: &#39;Union geometries&#39;,
+            text: &#39;Union geometries&#39;
+        }
+    },
+
+<span id='BasiGX-view-button-SpatialOperatorUnion-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: &#39;{text}&#39;
+    },
+
+    config: {
+
+<span id='BasiGX-view-button-SpatialOperatorUnion-cfg-targetVectorLayer'>        targetVectorLayer: null,
+</span>
+<span id='BasiGX-view-button-SpatialOperatorUnion-cfg-maxAllowedFeaturesForOperation'>        /**
+</span>         * the number of features which are allowed to process together.
+         * Union may use a high number without problems,
+         * intersect will be restricted to 2
+         */
+        maxAllowedFeaturesForOperation: 9999
+    },
+
+<span id='BasiGX-view-button-SpatialOperatorUnion-property-toggleGroup'>    toggleGroup: &#39;draw&#39;,
+</span>
+<span id='BasiGX-view-button-SpatialOperatorUnion-method-handler'>    handler: function() {
+</span>        // effectively disable the toggle functionality, behaves like
+        // `enableToggle: false` but keeps the ability to be part
+        // of a `toggleGroup`
+        this.setPressed(false);
+    },
+
+<span id='BasiGX-view-button-SpatialOperatorUnion-method-processSelectedGeometries'>    /**
+</span>     * Union function which is given 2 or more geometries
+     *
+     * @param {Array} featureArray The array holding the features to handle
+     * @return {ol.Feature} The final feature
+     */
+    processSelectedGeometries: function(featureArray) {
+        if (!jsts) {
+            Ext.log.error(&#39;No jsts could be found, check your application &#39; +
+                &#39;resources and make sure to include the jsts library&#39;);
+            return;
+        }
+        var parser = new jsts.io.OL3Parser();
+        var parsedGeometries = [];
+        var unionGeom;
+        var newFeature = null;
+
+        Ext.each(featureArray, function(feat) {
+            parsedGeometries.push(parser.read(feat.getGeometry()));
+        });
+
+        for (var i = 0; i &lt; parsedGeometries.length; i++) {
+            if (i === 0) {
+                unionGeom = parsedGeometries[i];
+            } else {
+                unionGeom = unionGeom.union(parsedGeometries[i]);
+            }
+        }
+        if (!unionGeom.isValid() || unionGeom.isEmpty() ||
+            unionGeom.getArea() === 0) {
+            return false;
+        }
+        var result = parser.write(unionGeom);
+        newFeature = new ol.Feature({geometry: result});
+        return newFeature;
+    }
+});
+</pre>
+</body>
+</html>
