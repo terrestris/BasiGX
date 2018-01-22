@@ -341,9 +341,19 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             return;
         }
         var source = this.selectionLayer.getSource();
-        var clone = record.olObject.clone();
-        clone.setId(record.olObject.getId());
-        source.addFeatures([clone]);
+        var id = record.olObject.getId();
+        var matched;
+        Ext.each(source.getFeatures(), function(feature) {
+            if (feature.getId() === id) {
+                matched = feature;
+                return false;
+            }
+        });
+        if (!matched) {
+            var clone = record.olObject.clone();
+            clone.setId(record.olObject.getId());
+            source.addFeatures([clone]);
+        }
     },
 
     /**
