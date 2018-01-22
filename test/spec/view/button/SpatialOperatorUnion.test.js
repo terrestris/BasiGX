@@ -1,4 +1,7 @@
 Ext.Loader.syncRequire(['BasiGX.view.button.SpatialOperatorUnion']);
+// fixup for methods that invoke `Ext.window.MessageBox` which will lead
+// to failing tests
+BasiGX.util.MsgBox.error = Ext.emptyFn;
 
 describe('BasiGX.view.button.SpatialOperatorUnion', function() {
     describe('Basics', function() {
