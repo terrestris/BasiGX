@@ -50,12 +50,12 @@
     },
     "devDependencies": {
         "coveralls": "3.0.0",
-        "eslint": "4.15.0",
+        "eslint": "4.16.0",
         "eslint-config-openlayers": "9.0.0",
         "expect.js": "0.3.1",
         "istanbul": "0.4.5",
-        "mocha": "4.1.0",
+        "mocha": "5.0.0",
         "mocha-phantomjs": "4.1.0",
-        "sinon": "4.1.4"
+        "sinon": "4.2.1"
     }
 }
