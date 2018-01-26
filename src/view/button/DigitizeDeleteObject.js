@@ -31,7 +31,7 @@ Ext.define('BasiGX.view.button.DigitizeDeleteObject', {
      */
     viewModel: {
         data: {
-            tooltip: 'Delete an objetct',
+            tooltip: 'Delete an object',
             deleteObjectBtnText: 'Delete Object'
         }
     },
