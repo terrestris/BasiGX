@@ -45,7 +45,8 @@ Ext.define('BasiGX.view.button.DigitizePoint', {
     config: {
         layer: null,
         map: null,
-        collection: null
+        collection: null,
+        multi: false
     },
 
     name: 'drawPointBtn',
@@ -55,7 +56,7 @@ Ext.define('BasiGX.view.button.DigitizePoint', {
         toggle: function(btn, pressed) {
             if (!this.drawPointInteraction) {
                 var cfg = {
-                    type: 'Point'
+                    type: this.getMulti() ? 'MultiPoint' : 'Point'
                 };
                 if (this.getLayer()) {
                     cfg.source = this.getLayer().getSource();

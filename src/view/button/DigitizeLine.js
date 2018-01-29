@@ -45,7 +45,8 @@ Ext.define('BasiGX.view.button.DigitizeLine', {
     config: {
         layer: null,
         map: null,
-        collection: null
+        collection: null,
+        multi: false
     },
 
     name: 'drawLineBtn',
@@ -55,7 +56,7 @@ Ext.define('BasiGX.view.button.DigitizeLine', {
         toggle: function(btn, pressed) {
             if (!this.drawLineInteraction) {
                 var cfg = {
-                    type: 'LineString'
+                    type: this.getMulti() ? 'MultiLineString' : 'LineString'
                 };
                 if (this.getLayer()) {
                     cfg.source = this.getLayer().getSource();
