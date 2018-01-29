@@ -45,7 +45,8 @@ Ext.define('BasiGX.view.button.DigitizePolygon', {
     config: {
         layer: null,
         map: null,
-        collection: null
+        collection: null,
+        multi: false
     },
 
     name: 'drawPolygonsBtn',
@@ -55,7 +56,7 @@ Ext.define('BasiGX.view.button.DigitizePolygon', {
         toggle: function(btn, pressed) {
             if (!this.drawPolygonInteraction) {
                 var cfg = {
-                    type: 'Polygon'
+                    type: this.getMulti() ? 'MultiPolygon' : 'Polygon'
                 };
                 if (this.getLayer()) {
                     cfg.source = this.getLayer().getSource();
