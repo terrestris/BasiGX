@@ -35,8 +35,8 @@ Ext.define('BasiGX.util.Digitize', {
                     var id2 = clone.getId();
                     if (id1 && id2 && id1 === id2 || !id1 || !id2) {
                         finalFeature = feature;
+                        return false;
                     }
-                    return false;
                 }
             });
             return finalFeature;
