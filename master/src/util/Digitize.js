@@ -31,7 +31,11 @@ Ext.define('BasiGX.util.Digitize', {
             Ext.each(collection.getArray(), function(feature) {
                 var featureWktString = wktParser.writeFeature(feature);
                 if (cloneWktString === featureWktString) {
-                    finalFeature = feature;
+                    var id1 = feature.getId();
+                    var id2 = clone.getId();
+                    if (id1 && id2 && id1 === id2 || !id1 || !id2) {
+                        finalFeature = feature;
+                    }
                     return false;
                 }
             });
