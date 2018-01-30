@@ -859,7 +859,7 @@ Ext.define(&#39;BasiGX.util.ConfigParser&#39;, {
                         );
                         if (node.checked) {
                             group.set(&#39;visible&#39;, true);
-                            var nextParent = parent.get(&#39;parentFolder&#39;);
+                            var nextParent = group.get(&#39;parentFolder&#39;);
                             while (nextParent) {
                                 nextParent.set(&#39;visible&#39;, true);
                                 nextParent = nextParent.get(&#39;parentFolder&#39;);
