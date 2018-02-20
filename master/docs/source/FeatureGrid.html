@@ -289,7 +289,7 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         if (data.length &gt; 0) {
             Ext.iterate(data[0].data, function(key, value) {
                 if (value === undefined || value &amp;&amp; value.getExtent ||
-                    me.getIgnoredAttributes().includes(key)) {
+                    me.getIgnoredAttributes().indexOf(key) !== -1) {
                     return;
                 }
                 columns.push({
@@ -330,7 +330,7 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         var grid = this.down(&#39;grid&#39;);
         var matched = this.findFeatureInStore(event.feature);
         var selection = grid.getSelection();
-        if (selection.includes(matched) || matched === undefined) {
+        if (selection.indexOf(matched) !== -1 || matched === undefined) {
             return;
         }
         selection.push(matched);
