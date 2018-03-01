@@ -239,7 +239,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             this.addFeatureKey = this.getLayer().getSource().once('addfeature',
                 function() {
                     me.reconfigureStore(grid.getStore());
-                    me.getLayer().getSource().unByKey(me.addFeatureKey);
+                    ol.Observable.unByKey(me.addFeatureKey);
                 });
         }
     },
