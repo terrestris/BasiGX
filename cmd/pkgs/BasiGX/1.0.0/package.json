@@ -14,11 +14,11 @@
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "305038ea-456e-444d-a0cd-ca30d798db42",
-      "created": "2018-03-05T08:55:24Z",
+      "uuid": "b1da8c96-2c01-4127-bf74-7c1ee785daeb",
+      "created": "2018-03-06T07:44:53Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "LQK9uce44X0\u003d",
-      "signature": "WoadgXeYSo1CkDw4+bePAaMIHpdID35j50Wer+Fo7z5I3HwzcMkZZsCfrteBN4eMASfG2K2pMdo9oZihW/QLwjQPcAgm1z5eq59Gj15fw8KZd10VBk+xVnbMZZ6Y8XfzT3R72Dsvsc8shLPCLYm6kV2fN56xllMUlgvyWUnPDRG6rnSYfK0zObyxczf0bmJrR+sQpTho2MQhD2VcRCBs/mChlVxLyQiSj2jhQoWr/EimZ+itHqnddkZedg09DE1esZiW93r5IAO6K/uvOT8v0zFAbxRz+zAwVSQL3U0Kh5uwIKgUujqzdR+y3DRsPaOXR2QSZgZDmx77RP+KxN5xQQ\u003d\u003d"
+      "nonce": "vxgEZoMu6Ks\u003d",
+      "signature": "QYcxAVKLkrnbcqZz4nNEX+PgA0KoZKsol09ijICMlYIuucqiF6XqzN8oblM5FqvwxIuZAAyV7AIN6068aYc4YC++WpiiehvsLPAg3uPReI71uaWL4d0Y0EPuHxQ5YoYJLSO5KGd9UY7DK3Apm3FY6sn3ZdL7MxlynReJEwp2Z9AQ2dv2lHBgFWL8dC8FZtvkYqhbkU4kwzobyvyfoQ7FH8ITNyM/jffAjeUhWtD6g0s3iXoFosrRzomSG2/HlQOy3sxM/kInO3MkKiziVkHu3gWMXL0Ir3NkqR5/8gECs1nPQiXSgSlJFKtmAgbQtvYACB4J/bZaA2XqkMWMxqF34Q\u003d\u003d"
     }
   ],
   "slicer": {
@@ -64,6 +64,6 @@
     "istanbul": "0.4.5",
     "mocha": "5.0.0",
     "mocha-phantomjs": "4.1.0",
-    "sinon": "4.2.2"
+    "sinon": "4.4.2"
   }
 }
