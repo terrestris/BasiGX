@@ -380,7 +380,7 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
             }
         };
         var map = me.getMap();
-        var got = map.forEachFeatureAtPixel(pixel, findFunction, me);
+        var got = map.forEachFeatureAtPixel(pixel, findFunction);
         return got || {};
     };
 
