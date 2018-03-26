@@ -326,15 +326,16 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
      * @private
      */
     ol.interaction.Transform.prototype.getFeatureAtPixel_ = function(pixel) {
+        var me = this;
         // will be passed on to map.forEachFeatureAtPixel below
         var findFunction = function(feature, layer) {
             var found = false;
             // Overlay ?
             if (!layer) {
-                if (feature === this.bbox_) {
+                if (feature === me.bbox_) {
                     return false;
                 }
-                this.handles_.forEach(function(f) {
+                me.handles_.forEach(function(f) {
                     if (f === feature) {
                         found = true;
                     }
@@ -349,19 +350,19 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
                 }
             }
 
-            if (this.layers_) {
+            if (me.layers_) {
                 // feature belong to a layer
-                for (var i = 0, num = this.layers_.length; i < num; i++) {
-                    if (this.layers_[i] === layer) {
+                for (var i = 0, num = me.layers_.length; i < num; i++) {
+                    if (me.layers_[i] === layer) {
                         return {
                             feature: feature
                         };
                     }
                 }
                 return null;
-            } else if (this.features_) {
+            } else if (me.features_) {
                 // feature in the collection
-                this.features_.forEach(function(f) {
+                me.features_.forEach(function(f) {
                     if (f === feature) {
                         found = true;
                     }
@@ -378,8 +379,8 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
                 };
             }
         };
-        var map = this.getMap();
-        var got = map.forEachFeatureAtPixel(pixel, findFunction, this);
+        var map = me.getMap();
+        var got = map.forEachFeatureAtPixel(pixel, findFunction);
         return got || {};
     };
 
