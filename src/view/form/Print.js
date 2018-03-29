@@ -78,6 +78,7 @@ Ext.define('BasiGX.view.form.Print', {
         printExtentAlwaysCentered: true,
         printExtentMovable: false,
         printExtentScalable: false,
+        printExtentRotatable: false,
         /**
          * Option to be able to print without a map.
          * @type {Boolean} if true, app selection and the extent rectangle are
@@ -128,6 +129,13 @@ Ext.define('BasiGX.view.form.Print', {
      * @type {ol.interaction.Transform}
      */
     transformInteraction: null,
+
+    /**
+     * The current rotation of the print extent in degrees
+     *
+     * @type {Number}
+     */
+    currentRotationInDegrees: 0,
 
     /**
      * Fires after an `attributefields`-object was added to a fieldset of e.g.
@@ -331,7 +339,16 @@ Ext.define('BasiGX.view.form.Print', {
         var format = me.down('combo[name="format"]').getValue();
         var attributes = {};
         var projection = mapView.getProjection().getCode();
-        var rotation = mapView.getRotation();
+        var rotation;
+        var featureBbox;
+        var dpi;
+
+        if (me.getPrintExtentRotatable() &&
+            me.currentRotationInDegrees) {
+            rotation = me.currentRotationInDegrees;
+        } else {
+            rotation = mapView.getRotation();
+        }
 
         var gxPrintProvider = GeoExt.data.MapfishPrintProvider;
 
@@ -343,22 +360,24 @@ Ext.define('BasiGX.view.form.Print', {
 
         Ext.each(fieldsets, function(fs) {
             var name = fs.name;
-            // TODO double check when rotated
-            var featureBbox;
-            if (fs.extentFeature) {
+            dpi = fs.down('[name="dpi"]').getValue();
+            if (rotation !== 0) {
+                // if extent is rotated, we need to reset the geometrys
+                // rotation back to 0
+                var radians = rotation * Math.PI / 180;
+                var geom = fs.extentFeature.getGeometry().clone();
+                geom.rotate(radians, me.transformInteraction.center_);
+                featureBbox = geom.getExtent();
+            } else {
                 featureBbox = fs.extentFeature.getGeometry().getExtent();
             }
-            var dpi = fs.down('[name="dpi"]').getValue();
-
             attributes[name] = {
                 bbox: featureBbox,
-                dpi: dpi,
-                // TODO Order of Layers in print seems to be reversed.
+                rotation: rotation,
                 layers: serializedLayers.reverse(),
                 projection: projection,
-                rotation: rotation
+                dpi: dpi
             };
-
         }, this);
         // Get all Fields except the DPI Field
         // TODO This query should be optimized or changed into some
@@ -466,7 +485,7 @@ Ext.define('BasiGX.view.form.Print', {
             translate: me.getPrintExtentMovable(),
             scale: me.getPrintExtentScalable(),
             stretch: me.getPrintExtentScalable(),
-            rotate: false
+            rotate: me.getPrintExtentRotatable()
         });
 
         function transformCallback(event) {
@@ -475,10 +494,14 @@ Ext.define('BasiGX.view.form.Print', {
             var newFeat = me.extentLayer.getSource().getFeatures()[0];
             me.transformInteraction.select(newFeat);
         }
+        function rotateCallback(event) {
+            me.currentRotationInDegrees += event.angle * 180 / Math.PI;
+            transformCallback(event);
+        }
 
         me.transformInteraction.on('translateend', transformCallback);
         me.transformInteraction.on('scaleend', transformCallback);
-
+        me.transformInteraction.on('rotateend', rotateCallback);
         me.transformInteraction.setActive(true);
         targetMap.addInteraction(me.transformInteraction);
     },
