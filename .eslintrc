@@ -9,8 +9,10 @@
     "SLD_1_0_0": false,
     "Filter_1_0_0": false,
     "GML_2_1_2": false,
-    "XLink_1_0": false, 
-    "opentype": false
+    "XLink_1_0": false,
+    "opentype": false,
+    "shpwrite": false,
+    "Uint8Array": false
   },
   "rules":{
     "consistent-this":[
