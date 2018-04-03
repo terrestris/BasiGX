@@ -30,11 +30,11 @@ Ext.define('BasiGX.util.Download', {
          */
         downloadLayer: function(layer, map, format) {
             var name = layer.get('name');
-            var json = this.layerToGeoJson(layer, map);
+            var json = BasiGX.util.Download.layerToGeoJson(layer, map);
             var result;
             switch (format) {
                 case 'zip': {
-                    result = this.geoJsonToShpBytes(json, name);
+                    result = BasiGX.util.Download.geoJsonToShpBytes(json, name);
                     break;
                 }
                 default: {
