@@ -692,9 +692,13 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
      * @param {ol.MapBrowserEvent} evt Map browser event.
      * @return {boolean} `false` to stop the drag sequence.
      */
-    ol.interaction.Transform.prototype.handleUpEvent_ = function() {
+    ol.interaction.Transform.prototype.handleUpEvent_ = function(evt) {
+        var deltaX = this.center_[0] - evt.coordinate[0];
+        var deltaY = this.center_[1] - evt.coordinate[1];
+        var a = Math.atan2(deltaY, deltaX);
         this.dispatchEvent({
             type: this.mode_ + 'end',
+            angle: a - this.angle_,
             feature: this.feature_,
             oldgeom: this.geom_
         });
