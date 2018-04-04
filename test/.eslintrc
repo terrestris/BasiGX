@@ -1,5 +1,4 @@
 {
-  "extends":"openlayers",
   "globals":{
     "afterEach":false,
     "after":false,
