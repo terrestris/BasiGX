@@ -47,7 +47,7 @@ Ext.define('BasiGX.util.Download', {
                     return c.charCodeAt(0);
                 });
                 var blob = new Blob([result]);
-                navigator.msSaveBlob(blob, name + '.' + format);
+                window.navigator.msSaveBlob(blob, name + '.' + format);
             } else {
                 var a = document.createElement('a');
                 a.href = 'data:application/octet-stream;base64,' + result;

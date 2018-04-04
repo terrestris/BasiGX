@@ -519,7 +519,7 @@ Ext.define(&#39;BasiGX.util.Animate&#39;, {
                 points = [];
             }
             if (Ext.isArray(coordinateArray)) {
-                Ext.each(coordinateArray, function(coord, index) {
+                Ext.each(coordinateArray, function(coord) {
                     if (Ext.isArray(coord)) {
                         BasiGX.util.Animate.extractPoints(coord, points);
                     }

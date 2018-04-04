@@ -451,7 +451,7 @@ Ext.define(&#39;BasiGX.util.ConfigParser&#39;, {
 
             // TODO Refactor
             if (window.location.hash.indexOf(&#39;center&#39;) &gt; 0) {
-                var centerString = location.hash.split(&#39;center/&#39;)[1].
+                var centerString = window.location.hash.split(&#39;center/&#39;)[1].
                     split(&#39;|&#39;)[0];
                 config.startCenter = centerString;
             }
@@ -830,7 +830,7 @@ Ext.define(&#39;BasiGX.util.ConfigParser&#39;, {
 
                     if (group) {
                         group.getLayers().push(folder);
-                        folder.set(&#39;parentFolder&#39;, parent);
+                        folder.set(&#39;parentFolder&#39;, group);
                     } else {
                         me.layerArray.push(folder);
                     }

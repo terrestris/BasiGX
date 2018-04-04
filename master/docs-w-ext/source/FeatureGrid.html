@@ -171,7 +171,7 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
                 Ext.Msg.confirm(
                     viewModel.get(&#39;deleteTitle&#39;),
                     viewModel.get(&#39;deleteQuestion&#39;),
-                    function(result, text) {
+                    function(result) {
                         if (result === &#39;yes&#39;) {
                             me.deleteColumn(column);
                         }
