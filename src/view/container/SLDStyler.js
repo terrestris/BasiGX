@@ -38,7 +38,8 @@
  *            method: 'DELETE'
  *        },
  *        geoServerUrl: BasiGX.util.Url.getWebProjectBaseUrl() +
- *            'geoserver.action'
+ *            'geoserver.action',
+ *        internalUrl: 'http://shogun-webapp.internal/'
  *     },
  *     layer: 'namespace:layer',
  *     sld: '<xml ...?>',
@@ -146,7 +147,14 @@ Ext.define('BasiGX.view.container.SLDStyler', {
              * would retrieve the specific font from the
              * GEOSERVER_DATA_DIR/fonts directory
              */
-            geoserverFontUrl: null
+            geoserverFontUrl: null,
+
+            /**
+             * If set, this URL is used when creating the SLD instead of the
+             * BasiGX project base url from window.location.
+             * @type {String}
+             */
+            internalUrl: null
         },
         /**
          * The mode indicates if we are styling a `point`, `line` or `polygon`
@@ -1017,8 +1025,13 @@ Ext.define('BasiGX.view.container.SLDStyler', {
             var rotation = graphicTab.down('[name=graphic-rotation]')
                 .getValue();
             if (graphicTab.externalGraphicSrc) {
-                symbolizerObj.externalGraphicSrc = graphicTab
-                    .externalGraphicSrc;
+                var src = graphicTab.externalGraphicSrc;
+                var internalUrl = this.config.backendUrls.internalUrl;
+                var regex = /https?\:\/\/[a-zA-Z\-_0-9.]+\//g;
+                if (this.config.backendUrls.internalUrl) {
+                    src = src.replace(regex, internalUrl);
+                }
+                symbolizerObj.externalGraphicSrc = src;
             }
             if (graphicTab.fontAndUniCode) {
                 symbolizerObj.fontAndUniCode = graphicTab.fontAndUniCode;
