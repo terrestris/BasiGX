@@ -116,7 +116,7 @@ describe('BasiGX.util.SLD', function() {
             expect(modifiedObj).to.be.an('object');
             var graphic = modifiedObj.value.namedLayerOrUserLayer[0]
                 .namedStyleOrUserStyle[0].featureTypeStyle[0].rule[0]
-                .symbolizer[0].value.graphic;
+                .symbolizer[1].value.graphic;
             expect(graphic.externalGraphicOrMark[0]
                 .fill.cssParameter[0].content[0]).to.equal(
                 symbolizerObj.fillColor);
@@ -156,7 +156,7 @@ describe('BasiGX.util.SLD', function() {
             expect(modifiedObj).to.be.an('object');
             var stroke = modifiedObj.value.namedLayerOrUserLayer[0]
                 .namedStyleOrUserStyle[0].featureTypeStyle[0].rule[0]
-                .symbolizer[0].value.stroke;
+                .symbolizer[1].value.stroke;
             expect(stroke.cssParameter[0].content[0]).to.equal(
                 symbolizerObj.strokeColor);
             expect(stroke.cssParameter[1].content[0]).to.equal(
