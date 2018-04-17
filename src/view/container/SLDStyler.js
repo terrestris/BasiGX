@@ -164,7 +164,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
             /**
              * The REST URL of the GeoServer to retrieve all installed fonts.
              * E.g. http://localhost:8080/geoserver/rest/fonts
-             * would list all fonts available in GoeServer
+             * would list all fonts available in GeoServer
              */
             geoserverInstalledFontListUrl: null,
 
