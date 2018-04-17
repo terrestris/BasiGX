@@ -68,6 +68,20 @@ Ext.define(&#39;BasiGX.util.SLD&#39;, {
 </span><span id='BasiGX-util-SLD-static-property-DEFAULT_GRAPHIC_OPACITY'>        DEFAULT_GRAPHIC_OPACITY: &#39;1&#39;,
 </span><span id='BasiGX-util-SLD-static-property-DEFAULT_GRAPHIC_ROTATION'>        DEFAULT_GRAPHIC_ROTATION: &#39;0&#39;,
 </span>
+<span id='BasiGX-util-SLD-static-property-DEFAULT_FONTSIZE'>        DEFAULT_FONTSIZE: &#39;10&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_FONT_FAMILY'>        DEFAULT_FONT_FAMILY: &#39;DejaVu Sans&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_FONT_WEIGHT'>        DEFAULT_FONT_WEIGHT: &#39;normal&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_FONT_STYLE'>        DEFAULT_FONT_STYLE: &#39;normal&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_FONT_FILLCOLOR'>        DEFAULT_FONT_FILLCOLOR: &#39;#000000&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_LABEL_ATTRIBUTE'>        DEFAULT_LABEL_ATTRIBUTE: &#39;name&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_LABEL_PERPENDICULAROFFSET'>        DEFAULT_LABEL_PERPENDICULAROFFSET: &#39;0&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_LABEL_ANCHORPOINTX'>        DEFAULT_LABEL_ANCHORPOINTX: &#39;0&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_LABEL_ANCHORPOINTY'>        DEFAULT_LABEL_ANCHORPOINTY: &#39;0&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_LABEL_DISPLACEMENTX'>        DEFAULT_LABEL_DISPLACEMENTX: &#39;0&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_LABEL_DISPLACEMENTY'>        DEFAULT_LABEL_DISPLACEMENTY: &#39;0&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_LABEL_ROTATION'>        DEFAULT_LABEL_ROTATION: &#39;0&#39;,
+</span><span id='BasiGX-util-SLD-static-property-DEFAULT_LABEL_FOLLOW_LINE'>        DEFAULT_LABEL_FOLLOW_LINE: &#39;false&#39;,
+</span>
 <span id='BasiGX-util-SLD-static-method-setStaticJsonixReferences'>        /**
 </span>         * Method cares about the inital setup and checks if Jsonix is
          * configured correctly
@@ -179,8 +193,6 @@ Ext.define(&#39;BasiGX.util.SLD&#39;, {
 <span id='BasiGX-util-SLD-static-method-setRuleByName'>        /**
 </span>         * Sets a rule Object by the given name and SLD Object.
          * If no exisiting match is found, the rule will be created and added.
-         * As rule names are not unique, you may get an unexpected result as
-         * this method overrides the first match
          *
          * @return {Object} sldObject The modified SLD Object
          * @param {String} ruleName The name of the rule to modify or create.
@@ -209,8 +221,16 @@ Ext.define(&#39;BasiGX.util.SLD&#39;, {
                 newRule.symbolizer.push(symbolizer);
                 rules.push(newRule);
             } else {
-                // override the exisiting symbolizer
-                rules[ruleMatchIdx].symbolizer[0] = symbolizer;
+                // override the exisiting symbolizer. If no matching symbolizer
+                // to override is found, append the symbolizer
+                var symbolizerIndex = rules[ruleMatchIdx].symbolizer.length;
+                Ext.each(rules[ruleMatchIdx].symbolizer, function(s, idx) {
+                    if (s.value.TYPE_NAME === symbolizer.value.TYPE_NAME) {
+                        symbolizerIndex = idx;
+                        return false;
+                    }
+                });
+                rules[ruleMatchIdx].symbolizer[symbolizerIndex] = symbolizer;
             }
             return BasiGX.util.SLD.setRulesOfSldObject(sldObject, rules);
         },
@@ -633,6 +653,139 @@ Ext.define(&#39;BasiGX.util.SLD&#39;, {
                     TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
                     content: [rotation]
                 };
+            }
+
+            sldObj = BasiGX.util.SLD.setRuleByName(
+                ruleName,
+                sldSymbolizer,
+                sldObj
+            );
+            return sldObj;
+        },
+
+<span id='BasiGX-util-SLD-static-method-setTextSymbolizerInRule'>        /**
+</span>         * Method updates the text symbolizer for a given rule and sldObject
+         *
+         * @return {Object} sldObject The updated SLD object.
+         * @param {Object} symbolizerObj The simplified symbolizer object.
+         * @param {String} ruleName The name of the rule that should be updated.
+         * @param {Object} sldObj The sldObj to update, containing the rule.
+         */
+        setTextSymbolizerInRule: function(symbolizerObj, ruleName, sldObj) {
+            var sldSymbolizer = {
+                name: {
+                    namespaceURI: &#39;http://www.opengis.net/sld&#39;,
+                    localPart: &#39;TextSymbolizer&#39;,
+                    prefix: &#39;sld&#39;,
+                    key: &#39;{http://www.opengis.net/sld}TextSymbolizer&#39;,
+                    string: &#39;{http://www.opengis.net/sld}sld:TextSymbolizer&#39;,
+                    CLASS_NAME: &#39;Jsonix.XML.QName&#39;
+                },
+                value: {
+                    TYPE_NAME: &#39;SLD_1_0_0.TextSymbolizer&#39;,
+                    fill: {
+                        TYPE_NAME: &#39;SLD_1_0_0.Fill&#39;,
+                        cssParameter: [{
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;fill&#39;,
+                            content: [symbolizerObj.fontFillColor]
+                        }, {
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;fill-opacity&#39;,
+                            content: [symbolizerObj.fontFillOpacity]
+                        }]
+                    },
+                    font: {
+                        TYPE_NAME: &#39;SLD_1_0_0.Font&#39;,
+                        cssParameter: [{
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;font-family&#39;,
+                            content: [symbolizerObj.fontFamily]
+                        }, {
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;font-size&#39;,
+                            content: [symbolizerObj.fontSize]
+                        }, {
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;font-style&#39;,
+                            content: [symbolizerObj.fontStyle]
+                        }, {
+                            TYPE_NAME: &#39;SLD_1_0_0.CssParameter&#39;,
+                            name: &#39;font-weight&#39;,
+                            content: [symbolizerObj.fontWeight]
+                        }]
+                    },
+                    label: {
+                        TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
+                        content: [{
+                            name: {
+                                key: &#39;{http://www.opengis.net/ogc}PropertyName&#39;,
+                                localPart: &#39;PropertyName&#39;,
+                                namespaceURI: &#39;http://www.opengis.net/ogc&#39;,
+                                prefix: &#39;ogc&#39;,
+                                string: &#39;{http://www.opengis.net/ogc}&#39; +
+                                    &#39;ogc:PropertyName&#39;
+                            },
+                            value: {
+                                TYPE_NAME: &#39;Filter_1_0_0.PropertyNameType&#39;,
+                                content: [symbolizerObj.labelAttribute]
+                            }
+                        }]
+                    }
+                }
+            };
+
+            // do we have pointplacement or lineplacement?
+            if (symbolizerObj.labelAnchorPointX) {
+                sldSymbolizer.value.labelPlacement = {
+                    TYPE_NAME: &#39;SLD_1_0_0.LabelPlacement&#39;
+                };
+                sldSymbolizer.value.labelPlacement.pointPlacement = {
+                    TYPE_NAME: &#39;SLD_1_0_0.PointPlacement&#39;,
+                    anchorPoint: {
+                        TYPE_NAME: &#39;SLD_1_0_0.AnchorPoint&#39;,
+                        anchorPointX: {
+                            TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
+                            content: [symbolizerObj.labelAnchorPointX]
+                        },
+                        anchorPointY: {
+                            TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
+                            content: [symbolizerObj.labelAnchorPointY]
+                        }
+                    },
+                    displacement: {
+                        TYPE_NAME: &#39;SLD_1_0_0.Displacement&#39;,
+                        displacementX: {
+                            TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
+                            content: [symbolizerObj.labelDisplacementX]
+                        },
+                        displacementY: {
+                            TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
+                            content: [symbolizerObj.labelDisplacementY]
+                        }
+                    },
+                    rotation: {
+                        TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
+                        content: [symbolizerObj.labelRotation]
+                    }
+                };
+            } else if (symbolizerObj.perpendicularOffset) {
+                sldSymbolizer.value.labelPlacement = {
+                    TYPE_NAME: &#39;SLD_1_0_0.LabelPlacement&#39;
+                };
+                sldSymbolizer.value.labelPlacement.linePlacement = {
+                    perpendicularOffset: {
+                        TYPE_NAME: &#39;SLD_1_0_0.ParameterValueType&#39;,
+                        content: [symbolizerObj.perpendicularOffset]
+                    }
+                };
+            }
+            if (symbolizerObj.labelFollowLine) {
+                sldSymbolizer.value.vendorOption = [{
+                    TYPE_NAME: &#39;SLD_1_0_0.VendorOption&#39;,
+                    name: &#39;followLine&#39;,
+                    value: symbolizerObj.labelFollowLine
+                }];
             }
 
             sldObj = BasiGX.util.SLD.setRuleByName(

@@ -89,6 +89,20 @@ Ext.define('BasiGX.view.container.SLDStyler', {
             polygonStyleImgScaleSliderLabel: 'Scale',
             polygonStyleImgRotationSliderLabel: 'Rotation',
             polygonStyleImgOpacitySliderLabel: 'Opacity',
+            textStyleFieldSetTitle: 'Text Style',
+            attributeSelectLabel: 'Attribute used for labels',
+            textFontLabel: 'Font',
+            textFontSizeLabel: 'Font size',
+            fontStyleLabel: 'Font style',
+            fontWeightLabel: 'Font weight',
+            textFillColorFieldLabel: 'Text color',
+            textPerpendicularOffsetLabel: 'Perpendicular Offset',
+            textAnchorPointXLabel: 'Anchor Point X',
+            textAnchorPointYLabel: 'Anchor Point Y',
+            textDisplacementXLabel: 'Displacement X',
+            textDisplacementYLabel: 'Displacement Y',
+            textRotationLabel: 'Rotation',
+            textFollowLineLabel: 'Follow Line',
             pointGrapicDeletedSuccessMsgText: 'The icon has been deleted. ' +
                 'Please reassign a new one.',
             pointGrapicDeletedSuccessMsgTitle: 'Deletion succesfull',
@@ -106,6 +120,11 @@ Ext.define('BasiGX.view.container.SLDStyler', {
      *
      */
     padding: 5,
+
+    /**
+     *
+     */
+    layout: 'hbox',
 
     /**
      *
@@ -141,6 +160,14 @@ Ext.define('BasiGX.view.container.SLDStyler', {
              * would list all fonts from the GEOSERVER_DATA_DIR/fonts directory
              */
             geoserverFontListUrl: null,
+
+            /**
+             * The REST URL of the GeoServer to retrieve all installed fonts.
+             * E.g. http://localhost:8080/geoserver/rest/fonts
+             * would list all fonts available in GeoServer
+             */
+            geoserverInstalledFontListUrl: null,
+
             /**
              * The REST URL of the GeoServer to retrieve a specific font. E.g.
              * http://localhost:8080/geoserver/rest/resource/fonts/Arial.ttf
@@ -184,7 +211,21 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         /**
          * The SLD javascript Object
          */
-        sldObj: null
+        sldObj: null,
+
+        /**
+         * Flag to indicate if the user shall be able to configure labels
+         */
+        useTextSymbolizer: false,
+
+        /**
+         * Store containing the attributes of the current layer in order
+         * to let the user select a specific attribute for TextSymbolizers
+         */
+        attributeStore: Ext.create('Ext.data.Store', {
+            fields: ['name', 'value'],
+            sorters: ['name']
+        })
     },
 
     /**
@@ -205,6 +246,10 @@ Ext.define('BasiGX.view.container.SLDStyler', {
             this.add(this.getLineStringFieldset());
         } else if (this.getMode() === 'polygon') {
             this.add(this.getPolygonFieldset());
+        }
+
+        if (this.getUseTextSymbolizer()) {
+            this.add(this.getTextSymbolizerFieldset());
         }
 
         // activate the graphic tab if necessary
@@ -883,6 +928,327 @@ Ext.define('BasiGX.view.container.SLDStyler', {
     },
 
     /**
+     * Creates a fieldset containing UI elements to configure a textsymbolizer
+     *
+     * @return {Object} A configuration for an ExtJS fieldset for styling
+     *     labels.
+     */
+    getTextSymbolizerFieldset: function() {
+        var me = this;
+        var sldObj = me.getSldObj();
+        var getVal = BasiGX.util.Object.getValue;
+        var rule = BasiGX.util.SLD.getRuleByName(me.getRuleName(), sldObj);
+        var listenerConfig = {
+            change: me.updateSLDPreview,
+            scope: me
+        };
+
+        if (!rule) {
+            // take the first available rule to show an initial render
+            // for e.g. new created rules that are not persisted yet
+            var availableRules = BasiGX.util.SLD.rulesFromSldObject(sldObj);
+            rule = availableRules[0];
+        }
+
+        var labelAttribute = BasiGX.util.SLD.DEFAULT_LABEL_ATTRIBUTE;
+        var fontSize = BasiGX.util.SLD.DEFAULT_FONTSIZE;
+        var fontFamily = BasiGX.util.SLD.DEFAULT_FONT_FAMILY;
+        var fontWeight = BasiGX.util.SLD.DEFAULT_FONT_WEIGHT;
+        var fontStyle = BasiGX.util.SLD.DEFAULT_FONT_STYLE;
+        var fontFillColor = BasiGX.util.SLD.DEFAULT_FONT_FILLCOLOR;
+        var perpendicularOffset = BasiGX.util.SLD.
+            DEFAULT_LABEL_PERPENDICULAROFFSET;
+        var labelAnchorPointX = BasiGX.util.SLD.DEFAULT_LABEL_ANCHORPOINTX;
+        var labelAnchorPointY = BasiGX.util.SLD.DEFAULT_LABEL_ANCHORPOINTY;
+        var labelDisplacementX = BasiGX.util.SLD.DEFAULT_LABEL_DISPLACEMENTX;
+        var labelDisplacementY = BasiGX.util.SLD.DEFAULT_LABEL_DISPLACEMENTY;
+        var labelRotation = BasiGX.util.SLD.DEFAULT_LABEL_ROTATION;
+        var followLineLabel = BasiGX.util.SLD.DEFAULT_LABEL_FOLLOW_LINE;
+        var textSymbolizer;
+
+        Ext.each(rule.symbolizer, function(sym) {
+            if (sym.name.localPart === 'TextSymbolizer') {
+                textSymbolizer = sym.value;
+            }
+        });
+
+        if (textSymbolizer) {
+            var font = getVal("font", textSymbolizer);
+            labelAttribute = getVal("value", textSymbolizer.label) ?
+                getVal("value", textSymbolizer.label).content[0] :
+                BasiGX.util.SLD.DEFAULT_LABEL_ATTRIBUTE;
+            Ext.each(font.cssParameter, function(param) {
+                if (param.name === 'font-family') {
+                    fontFamily = param.content[0];
+                } else if (param.name === 'font-size') {
+                    fontSize = param.content[0];
+                } else if (param.name === 'font-style') {
+                    fontStyle = param.content[0];
+                } else if (param.name === 'font-weight') {
+                    fontWeight = param.content[0];
+                }
+            });
+            var fill = getVal('fill', textSymbolizer);
+            if (fill) {
+                fontFillColor = BasiGX.util.SLD.fillFromObj(fill).fillColor;
+                var fillOpacity = BasiGX.util.SLD.fillFromObj(fill).fillOpacity;
+                var alpha = BasiGX.util.Color.makeHex('' +
+                    Math.round(parseFloat(fillOpacity) * 255));
+                fontFillColor = fontFillColor + alpha;
+            }
+            var pointPlacement = getVal('pointPlacement', textSymbolizer);
+            if (pointPlacement) {
+                if (pointPlacement.anchorPoint &&
+                    pointPlacement.anchorPoint.anchorPointX) {
+                    labelAnchorPointX = pointPlacement.anchorPoint.
+                        anchorPointX.content[0];
+                }
+                if (pointPlacement.anchorPoint &&
+                    pointPlacement.anchorPoint.anchorPointY) {
+                    labelAnchorPointY = pointPlacement.anchorPoint.
+                        anchorPointY.content[0];
+                }
+                if (pointPlacement.displacement &&
+                    pointPlacement.displacement.displacementX) {
+                    labelDisplacementX = pointPlacement.displacement.
+                        displacementX.content[0];
+                }
+                if (pointPlacement.displacement &&
+                    pointPlacement.displacement.displacementY) {
+                    labelDisplacementY = pointPlacement.displacement.
+                        displacementY.content[0];
+                }
+                if (pointPlacement.rotation) {
+                    labelRotation = pointPlacement.rotation.content[0];
+                }
+            }
+            var linePlacement = getVal('linePlacement', textSymbolizer);
+            if (linePlacement && linePlacement.perpendicularOffset) {
+                perpendicularOffset = linePlacement.perpendicularOffset.
+                    content[0];
+            }
+            var vendorOptions = getVal('vendorOption', textSymbolizer);
+            if (vendorOptions) {
+                Ext.each(vendorOptions, function(option) {
+                    if (option.name === 'followLine') {
+                        followLineLabel = option.value === 'true' ?
+                            true : false;
+                    }
+                });
+            }
+        }
+
+        var fontStore = Ext.create('Ext.data.Store', {
+            autoLoad: true,
+            proxy: {
+                type: 'ajax',
+                url : me.getBackendUrls().geoserverInstalledFontListUrl,
+                reader: {
+                    type: 'json',
+                    rootProperty: function(data) {
+                        var fontCollection = [];
+                        Ext.each(data.fonts, function(singleFont, idx) {
+                            fontCollection[idx] = {name: singleFont};
+                        });
+                        return fontCollection;
+                    }
+                }
+            },
+            fields: ['name'],
+            sorters: ['name']
+        });
+        var fontStyleStore = Ext.create('Ext.data.Store', {
+            fields: ['name'],
+            sorters: ['name'],
+            data: [{
+                name: 'normal'
+            }, {
+                name: 'italic'
+            }, {
+                name: 'oblique'
+            }]
+        });
+        var fontWeightStore = Ext.create('Ext.data.Store', {
+            fields: ['name'],
+            sorters: ['name'],
+            data: [{
+                name: 'normal'
+            }, {
+                name: 'bold'
+            }]
+        });
+        var fs = {
+            xtype: 'fieldset',
+            height: '100%',
+            bind: {
+                title: '{textStyleFieldSetTitle}'
+            },
+            name: 'textsymbolizer',
+            defaults: {
+                width: 400
+            },
+            items: [{
+                xtype: 'combo',
+                name: 'labelattribute',
+                store: me.attributeStore,
+                displayField: 'name',
+                queryMode: 'local',
+                bind: {
+                    fieldLabel: '{attributeSelectLabel}'
+                },
+                value: labelAttribute,
+                listeners: listenerConfig
+            }, {
+                xtype: 'combo',
+                name: 'fontfamily',
+                bind: {
+                    fieldLabel: '{textFontLabel}'
+                },
+                store: fontStore,
+                value: fontFamily,
+                queryMode: 'local',
+                displayField: 'name',
+                listeners: listenerConfig
+            }, {
+                xtype: 'combo',
+                bind: {
+                    fieldLabel: '{fontStyleLabel}'
+                },
+                name: 'fontstyle',
+                store: fontStyleStore,
+                value: fontStyle,
+                queryMode: 'local',
+                displayField: 'name',
+                listeners: listenerConfig
+            }, {
+                xtype: 'combo',
+                bind: {
+                    fieldLabel: '{fontWeightLabel}'
+                },
+                name: 'fontweight',
+                store: fontWeightStore,
+                value: fontWeight,
+                queryMode: 'local',
+                displayField: 'name',
+                listeners: listenerConfig
+            }, {
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textFontSizeLabel}'
+                },
+                value: fontSize,
+                name: 'fontsize',
+                minValue: 1,
+                maxValue: 50,
+                listeners: listenerConfig
+            }, {
+                xtype: 'container',
+                layout: 'hbox',
+                defaults: {
+                    width: 100
+                },
+                items: [{
+                    xtype: 'displayfield',
+                    width: 100,
+                    bind: {
+                        value: '{textFillColorFieldLabel}'
+                    }
+                }, {
+                    xtype: 'colorbutton',
+                    name: 'fill',
+                    format: 'hex8',
+                    margin: '5 0 0 5',
+                    value: fontFillColor,
+                    listeners: listenerConfig
+                }]
+            }]
+        };
+        if (this.getMode() === 'line') {
+            fs.items.push({
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textPerpendicularOffsetLabel}'
+                },
+                value: perpendicularOffset,
+                name: 'perpendicularoffset',
+                minValue: -500,
+                maxValue: 500,
+                listeners: listenerConfig
+            }, {
+                xtype: 'checkbox',
+                bind: {
+                    fieldLabel: '{textFollowLineLabel}'
+                },
+                name: 'followlinelabel',
+                value: followLineLabel,
+                listeners: listenerConfig
+            });
+        } else {
+            fs.items.push({
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textAnchorPointXLabel}'
+                },
+                value: labelAnchorPointX,
+                name: 'labelanchorpointx',
+                type: 'float',
+                allowDecimals: true,
+                decimalPrecision: 1,
+                decimalSeparator: '.',
+                step: 0.1,
+                minValue: -500,
+                maxValue: 500,
+                listeners: listenerConfig
+            }, {
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textAnchorPointYLabel}'
+                },
+                value: labelAnchorPointY,
+                name: 'labelanchorpointy',
+                allowDecimals: true,
+                decimalPrecision: 1,
+                decimalSeparator: '.',
+                step: 0.1,
+                minValue: -500,
+                maxValue: 500,
+                listeners: listenerConfig
+            }, {
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textDisplacementXLabel}'
+                },
+                value: labelDisplacementX,
+                name: 'labeldisplacementx',
+                minValue: -500,
+                maxValue: 500,
+                listeners: listenerConfig
+            }, {
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textDisplacementYLabel}'
+                },
+                value: labelDisplacementY,
+                name: 'labeldisplacementy',
+                minValue: -500,
+                maxValue: 500,
+                listeners: listenerConfig
+            }, {
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textRotationLabel}'
+                },
+                value: labelRotation,
+                name: 'labelrotation',
+                minValue: 0,
+                maxValue: 359,
+                listeners: listenerConfig
+            });
+        }
+        return fs;
+    },
+
+    /**
      * Creates an image-panel to preview the current SLD
      *
      * @return {Object} An ExtJS configuration object for the image panel
@@ -898,49 +1264,161 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         return panel;
     },
 
-    /**
-     * Method updates the SLD Preview with the current state of the form values
-     */
-    updateSLDPreview: function() {
+    getSingleFeatureForPreview: function() {
+        var me = this;
+        var geoServerUrl = me.getBackendUrls().geoServerUrl;
+        Ext.Ajax.request({
+            url: geoServerUrl,
+            method: 'GET',
+            params: {
+                service: 'WFS',
+                request: 'GetFeature',
+                typeName: me.getLayer(),
+                version: '1.0.0',
+                maxFeatures: 1,
+                outputFormat: 'application/json'
+            },
+            defaultHeaders: BasiGX.util.CSRF.getHeader(),
+            scope: this,
+            success: function(response) {
+                try {
+                    var json = Ext.decode(response.responseText);
+                    if (json.features && json.features.length > 0 &&
+                        json.crs && json.crs.properties &&
+                        json.crs.properties.name) {
+                        var feature = json.features[0];
+                        var reader = new ol.format.GeoJSON();
+                        var olFeature = reader.readFeature(feature);
+                        // make the attributes available for label configuration
+                        me.attributeStore.removeAll();
+                        Ext.iterate(feature.properties, function(k, v) {
+                            me.attributeStore.add(
+                                {"name": k, "value": v}
+                            );
+                        });
+                        // then get the extent for a follow up GetMap
+                        var extent = olFeature.getGeometry().getExtent();
+                        // scale the geometrys extent up to have a better
+                        // overview
+                        extent = ol.extent.buffer(extent, 10000);
+                        var srsCode = json.crs.properties.name.split(
+                            'EPSG::')[1];
+                        var srs = 'EPSG:' + srsCode;
+                        if (extent && srsCode) {
+                            me.getPreviewForSingleFeature(extent, srs);
+                        } else {
+                            me.getLegendGraphicPreview();
+                        }
+                    }
+                } catch (e) {
+                    me.getLegendGraphicPreview();
+                }
+            },
+            failure: function() {
+                me.getLegendGraphicPreview();
+            }
+        });
+    },
+
+    getPreviewForSingleFeature: function(extent, srs) {
         var me = this;
         var selector = 'image[name=sldpreview-' + this.getMode() + ']';
         var imagePanel = Ext.ComponentQuery.query(selector)[0];
-
         var sld = me.getSldFromFormValues();
         var ruleName = me.getRuleName();
         var layer = me.getLayer();
         var geoServerUrl = me.getBackendUrls().geoServerUrl;
 
-        if (imagePanel) {
-            Ext.Ajax.request({
-                binary: true,
-                url: geoServerUrl,
-                method: 'POST',
-                params: {
-                    service: 'WMS',
-                    request: 'GetLegendGraphic',
-                    layer: layer,
-                    version: '1.1.1',
-                    format: 'image/png',
-                    width: 190,
-                    height: 190,
-                    rule: ruleName,
-                    sld_body: sld
-                },
-                defaultHeaders: BasiGX.util.CSRF.getHeader(),
-                scope: this,
-                success: function(response) {
+        Ext.Ajax.request({
+            binary: true,
+            url: geoServerUrl,
+            method: 'POST',
+            params: {
+                SERVICE: 'WMS',
+                REQUEST: 'GetMap',
+                LAYERS: layer,
+                VERSION: '1.1.1',
+                FORMAT: 'image/png',
+                WIDTH: 190,
+                HEIGHT: 190,
+                SRS: srs,
+                RULE: ruleName,
+                SLD_BODY: sld,
+                BBOX: extent.toString()
+            },
+            defaultHeaders: BasiGX.util.CSRF.getHeader(),
+            scope: this,
+            success: function(response) {
+                if (response.responseBytes) {
                     var blob = new Blob(
                         [response.responseBytes],
                         {type: 'image/png'}
                     );
                     var url = window.URL.createObjectURL(blob);
                     imagePanel.setSrc(url);
-                },
-                failure: function() {
-                    Ext.toast('Error retrieving the SLD-Graphic preview');
+                } else {
+                    me.getLegendGraphicPreview();
                 }
-            });
+            },
+            failure: function() {
+                me.getLegendGraphicPreview();
+            }
+        });
+    },
+
+    getLegendGraphicPreview: function() {
+        var me = this;
+        var selector = 'image[name=sldpreview-' + this.getMode() + ']';
+        var imagePanel = Ext.ComponentQuery.query(selector)[0];
+        var sld = me.getSldFromFormValues();
+        var ruleName = me.getRuleName();
+        var layer = me.getLayer();
+        var geoServerUrl = me.getBackendUrls().geoServerUrl;
+
+        Ext.Ajax.request({
+            binary: true,
+            url: geoServerUrl,
+            method: 'POST',
+            params: {
+                service: 'WMS',
+                request: 'GetLegendGraphic',
+                layer: layer,
+                version: '1.1.1',
+                format: 'image/png',
+                width: 190,
+                height: 190,
+                rule: ruleName,
+                sld_body: sld
+            },
+            defaultHeaders: BasiGX.util.CSRF.getHeader(),
+            scope: this,
+            success: function(response) {
+                var blob = new Blob(
+                    [response.responseBytes],
+                    {type: 'image/png'}
+                );
+                var url = window.URL.createObjectURL(blob);
+                imagePanel.setSrc(url);
+            },
+            failure: function() {
+                Ext.toast('Error retrieving the SLD-Graphic preview');
+            }
+        });
+    },
+
+    /**
+     * Method updates the SLD Preview with the current state of the form values
+     */
+    updateSLDPreview: function() {
+        var me = this;
+        var selector = 'image[name=sldpreview-' + me.getMode() + ']';
+        var imagePanel = Ext.ComponentQuery.query(selector)[0];
+        if (imagePanel) {
+            // first we try to get a single feature via WFS to render
+            // a getmap with it in order to be able to preview "real" data
+            // and also to show labels / textsymbolizers. If this fails,
+            // we fall back to a standard getlegendgraphic request.
+            me.getSingleFeatureForPreview();
         }
     },
 
@@ -965,6 +1443,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         var radiusFs = fs.down('[name=radius]');
         var graphicTab = fs.down('[name=graphic]');
         var graphicTabActive = false;
+        var textFs = fs.up().down('fieldset[name=textsymbolizer]');
 
         if (graphicTab) {
             var activeTab = graphicTab.up('tabpanel').getActiveTab();
@@ -1058,6 +1537,69 @@ Ext.define('BasiGX.view.container.SLDStyler', {
             );
         } else if (this.getMode() === 'polygon') {
             sldObj = BasiGX.util.SLD.setPolygonSymbolizerInRule(
+                symbolizerObj,
+                me.getRuleName(),
+                sldObj
+            );
+        }
+
+        if (textFs) {
+            symbolizerObj.labelAttribute = textFs.down(
+                'combo[name=labelattribute]').getValue() ||
+                BasiGX.util.SLD.DEFAULT_LABEL_ATTRIBUTE;
+            symbolizerObj.fontSize = textFs.down('numberfield[name=fontsize]')
+                .getValue().toString() || BasiGX.util.SLD.DEFAULT_FONTSIZE;
+            symbolizerObj.fontFamily = textFs.down('combo[name=fontfamily]')
+                .getValue() || BasiGX.util.SLD.DEFAULT_FONT_FAMILY;
+            symbolizerObj.fontWeight = textFs.down('combo[name=fontweight]')
+                .getValue() || BasiGX.util.SLD.DEFAULT_FONT_WEIGHT;
+            symbolizerObj.fontStyle = textFs.down('combo[name=fontstyle]')
+                .getValue() || BasiGX.util.SLD.DEFAULT_FONT_STYLE;
+            symbolizerObj.fontFillColor = BasiGX.util.SLD.
+                DEFAULT_FONT_FILLCOLOR;
+            symbolizerObj.fontFillOpacity = 0;
+
+            var textFillFs = textFs.down('colorbutton[name=fill]');
+            if (textFillFs) {
+                symbolizerObj.fontFillColor = '#' + textFillFs.getValue().
+                    substring(0, 6);
+                symbolizerObj.fontFillOpacity = BasiGX.util.Color.rgbaAsArray(
+                    BasiGX.util.Color.hex8ToRgba(textFillFs.getValue()))[4];
+            }
+
+            if (this.getMode() === 'line') {
+                symbolizerObj.perpendicularOffset = textFs.down(
+                    'numberfield[name=perpendicularoffset]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                    DEFAULT_LABEL_PERPENDICULAROFFSET;
+                symbolizerObj.labelFollowLine = textFs.down(
+                    'checkbox[name=followlinelabel]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                    DEFAULT_LABEL_FOLLOW_LINE;
+            } else {
+                symbolizerObj.labelAnchorPointX = textFs.down(
+                    'numberfield[name=labelanchorpointx]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                    DEFAULT_LABEL_ANCHORPOINTX;
+                symbolizerObj.labelAnchorPointY = textFs.down(
+                    'numberfield[name=labelanchorpointy]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                    DEFAULT_LABEL_ANCHORPOINTY;
+                symbolizerObj.labelDisplacementX = textFs.down(
+                    'numberfield[name=labeldisplacementx]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                    DEFAULT_LABEL_DISPLACEMENTX;
+                symbolizerObj.labelDisplacementY = textFs.down(
+                    'numberfield[name=labeldisplacementy]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                    DEFAULT_LABEL_DISPLACEMENTY;
+                symbolizerObj.labelRotation = textFs.down(
+                    'numberfield[name=labelrotation]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                    DEFAULT_LABEL_ROTATION;
+            }
+
+            sldObj = BasiGX.util.SLD.setTextSymbolizerInRule(
                 symbolizerObj,
                 me.getRuleName(),
                 sldObj
