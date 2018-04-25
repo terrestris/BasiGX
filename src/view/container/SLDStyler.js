@@ -56,6 +56,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
 
     requires: [
         'Ext.ux.colorpick.Button',
+        'GeoExt.component.Map',
         'BasiGX.view.panel.GraphicPool',
         'BasiGX.view.panel.FontSymbolPool',
         'BasiGX.util.Color',
@@ -225,7 +226,13 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         attributeStore: Ext.create('Ext.data.Store', {
             fields: ['name', 'value'],
             sorters: ['name']
-        })
+        }),
+
+        /**
+         * Flag to indicate if the preview map has already been centered
+         * to a feature of the layer
+         */
+        mapCentered: false
     },
 
     /**
@@ -239,14 +246,23 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         }
         this.callParent();
         this.setSldObj(BasiGX.util.SLD.toSldObject(sld));
-
+        var fs;
         if (this.getMode() === 'point') {
-            this.add(this.getPointFieldset());
+            fs = this.getPointFieldset();
         } else if (this.getMode() === 'line') {
-            this.add(this.getLineStringFieldset());
+            fs = this.getLineStringFieldset();
         } else if (this.getMode() === 'polygon') {
-            this.add(this.getPolygonFieldset());
+            fs = this.getPolygonFieldset();
         }
+        var stylerAndMap = {
+            xtype: 'container',
+            layout: 'vbox',
+            items: [
+                fs,
+                this.createSLDPreviewMap()
+            ]
+        };
+        this.add(stylerAndMap);
 
         if (this.getUseTextSymbolizer()) {
             this.add(this.getTextSymbolizerFieldset());
@@ -552,7 +568,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         }]
                     }]
                 }]
-            }, me.createSLDPreviewPanel()]
+            }]
         };
         return fs;
     },
@@ -642,7 +658,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         listeners: listenerConfig
                     }]
                 }]
-            }, me.createSLDPreviewPanel()]
+            }]
         };
         return fs;
     },
@@ -922,7 +938,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         }]
                     }]
                 }]
-            }, me.createSLDPreviewPanel()]
+            }]
         };
         return fs;
     },
@@ -1249,17 +1265,70 @@ Ext.define('BasiGX.view.container.SLDStyler', {
     },
 
     /**
-     * Creates an image-panel to preview the current SLD
+     * Creates an ol map to preview the current SLD
      *
-     * @return {Object} An ExtJS configuration object for the image panel
+     * @return {Object} An ExtJS configuration object for the map panel
      */
-    createSLDPreviewPanel: function() {
+    createSLDPreviewMap: function() {
+        var layer = new ol.layer.Tile({
+            source: new ol.source.TileWMS({
+                url: this.getBackendUrls().geoServerUrl,
+                params: {
+                    'LAYERS': this.getLayer(),
+                    'TILED': true
+                },
+                tileLoadFunction: function(image, url) {
+                    var img = image.getImage();
+                    if (typeof Blob === 'function') {
+                        var baseUrl = url.split('?')[0];
+                        var params = url.split('?')[1];
+                        params = params.split('&');
+                        var paramObj = {};
+                        Ext.each(params, function(param) {
+                            var split = param.split('=');
+                            var key = decodeURIComponent(split[0]);
+                            var value = decodeURIComponent(split[1]);
+                            paramObj[key] = value;
+                        });
+                        Ext.Ajax.request({
+                            binary: true,
+                            url: baseUrl,
+                            method: 'POST',
+                            params: paramObj,
+                            defaultHeaders: BasiGX.util.CSRF.getHeader(),
+                            scope: this,
+                            success: function(response) {
+                                if (response.responseBytes) {
+                                    var blob = new Blob(
+                                        [response.responseBytes],
+                                        {type: 'image/png'}
+                                    );
+                                    var blobUrl = window.URL.createObjectURL(
+                                        blob);
+                                    img.src = blobUrl;
+                                }
+                            }
+                        });
+                    } else {
+                        img.src = url;
+                    }
+                }
+            })
+        });
         var panel = {
-            xtype: 'image',
+            xtype: 'gx_component_map',
+            layers: [layer],
+            map: new ol.Map({
+                layers: [layer],
+                controls: [new ol.control.Zoom()],
+                view: new ol.View({
+                    center: [0,0],
+                    zoom: 1
+                })
+            }),
             name: 'sldpreview-' + this.getMode(),
-            src: null,
-            width: 200,
-            minHeight: 80
+            width: '100%',
+            minHeight: 310
         };
         return panel;
     },
@@ -1296,114 +1365,40 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                                 {"name": k, "value": v}
                             );
                         });
-                        // then get the extent for a follow up GetMap
+                        // then get the extent for map extent adjustments
                         var extent = olFeature.getGeometry().getExtent();
-                        // scale the geometrys extent up to have a better
-                        // overview
-                        extent = ol.extent.buffer(extent, 10000);
                         var srsCode = json.crs.properties.name.split(
                             'EPSG::')[1];
                         var srs = 'EPSG:' + srsCode;
                         if (extent && srsCode) {
                             me.getPreviewForSingleFeature(extent, srs);
                         } else {
-                            me.getLegendGraphicPreview();
+                            Ext.log.error('Could not retrieve a feature ' +
+                                'via WFS for preview');
                         }
                     }
                 } catch (e) {
-                    me.getLegendGraphicPreview();
+                    Ext.log.error('Could not retrieve a feature ' +
+                        'via WFS for preview');
                 }
             },
             failure: function() {
-                me.getLegendGraphicPreview();
+                Ext.log.error('Could not retrieve a feature ' +
+                    'via WFS for preview');
             }
         });
     },
 
     getPreviewForSingleFeature: function(extent, srs) {
-        var me = this;
-        var selector = 'image[name=sldpreview-' + this.getMode() + ']';
-        var imagePanel = Ext.ComponentQuery.query(selector)[0];
-        var sld = me.getSldFromFormValues();
-        var ruleName = me.getRuleName();
-        var layer = me.getLayer();
-        var geoServerUrl = me.getBackendUrls().geoServerUrl;
-
-        Ext.Ajax.request({
-            binary: true,
-            url: geoServerUrl,
-            method: 'POST',
-            params: {
-                SERVICE: 'WMS',
-                REQUEST: 'GetMap',
-                LAYERS: layer,
-                VERSION: '1.1.1',
-                FORMAT: 'image/png',
-                WIDTH: 190,
-                HEIGHT: 190,
-                SRS: srs,
-                RULE: ruleName,
-                SLD_BODY: sld,
-                BBOX: extent.toString()
-            },
-            defaultHeaders: BasiGX.util.CSRF.getHeader(),
-            scope: this,
-            success: function(response) {
-                if (response.responseBytes) {
-                    var blob = new Blob(
-                        [response.responseBytes],
-                        {type: 'image/png'}
-                    );
-                    var url = window.URL.createObjectURL(blob);
-                    imagePanel.setSrc(url);
-                } else {
-                    me.getLegendGraphicPreview();
-                }
-            },
-            failure: function() {
-                me.getLegendGraphicPreview();
-            }
+        var selector = 'gx_component_map[name=sldpreview-' +
+            this.getMode() + ']';
+        var mapPanel = Ext.ComponentQuery.query(selector)[0];
+        var map = mapPanel.map;
+        var view = new ol.View({
+            projection: srs
         });
-    },
-
-    getLegendGraphicPreview: function() {
-        var me = this;
-        var selector = 'image[name=sldpreview-' + this.getMode() + ']';
-        var imagePanel = Ext.ComponentQuery.query(selector)[0];
-        var sld = me.getSldFromFormValues();
-        var ruleName = me.getRuleName();
-        var layer = me.getLayer();
-        var geoServerUrl = me.getBackendUrls().geoServerUrl;
-
-        Ext.Ajax.request({
-            binary: true,
-            url: geoServerUrl,
-            method: 'POST',
-            params: {
-                service: 'WMS',
-                request: 'GetLegendGraphic',
-                layer: layer,
-                version: '1.1.1',
-                format: 'image/png',
-                width: 190,
-                height: 190,
-                rule: ruleName,
-                sld_body: sld
-            },
-            defaultHeaders: BasiGX.util.CSRF.getHeader(),
-            scope: this,
-            success: function(response) {
-                var blob = new Blob(
-                    [response.responseBytes],
-                    {type: 'image/png'}
-                );
-                var url = window.URL.createObjectURL(blob);
-                imagePanel.setSrc(url);
-            },
-            failure: function() {
-                Ext.toast('Error retrieving the SLD-Graphic preview');
-            }
-        });
+        view.fit(extent);
+        map.setView(view);
     },
 
     /**
@@ -1411,14 +1406,26 @@ Ext.define('BasiGX.view.container.SLDStyler', {
      */
     updateSLDPreview: function() {
         var me = this;
-        var selector = 'image[name=sldpreview-' + me.getMode() + ']';
-        var imagePanel = Ext.ComponentQuery.query(selector)[0];
-        if (imagePanel) {
-            // first we try to get a single feature via WFS to render
-            // a getmap with it in order to be able to preview "real" data
-            // and also to show labels / textsymbolizers. If this fails,
-            // we fall back to a standard getlegendgraphic request.
-            me.getSingleFeatureForPreview();
+        var selector = 'gx_component_map[name=sldpreview-' + me.getMode() + ']';
+        var mapPanel = Ext.ComponentQuery.query(selector)[0];
+        if (mapPanel) {
+            var map = mapPanel.map;
+            var layer = map.getLayers().getArray()[0];
+            if (layer) {
+                var sld = me.getSldFromFormValues();
+                var ruleName = me.getRuleName();
+                layer.getSource().updateParams({
+                    RULE: ruleName,
+                    SLD_BODY: sld
+                });
+            }
+            // try to get a single feature via WFS to render
+            // a map with it in order to be able to preview "real" data
+            // and also to show labels / textsymbolizers.
+            if (!me.mapCentered) {
+                me.getSingleFeatureForPreview();
+                me.mapCentered = true;
+            }
         }
     },
 
@@ -1443,7 +1450,8 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         var radiusFs = fs.down('[name=radius]');
         var graphicTab = fs.down('[name=graphic]');
         var graphicTabActive = false;
-        var textFs = fs.up().down('fieldset[name=textsymbolizer]');
+        var textFs = fs.up('basigx-container-sldstyler').down(
+            'fieldset[name=textsymbolizer]');
 
         if (graphicTab) {
             var activeTab = graphicTab.up('tabpanel').getActiveTab();
@@ -1571,32 +1579,32 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                 symbolizerObj.perpendicularOffset = textFs.down(
                     'numberfield[name=perpendicularoffset]')
                     .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_PERPENDICULAROFFSET;
+                        DEFAULT_LABEL_PERPENDICULAROFFSET;
                 symbolizerObj.labelFollowLine = textFs.down(
                     'checkbox[name=followlinelabel]')
                     .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_FOLLOW_LINE;
+                        DEFAULT_LABEL_FOLLOW_LINE;
             } else {
                 symbolizerObj.labelAnchorPointX = textFs.down(
                     'numberfield[name=labelanchorpointx]')
                     .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_ANCHORPOINTX;
+                        DEFAULT_LABEL_ANCHORPOINTX;
                 symbolizerObj.labelAnchorPointY = textFs.down(
                     'numberfield[name=labelanchorpointy]')
                     .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_ANCHORPOINTY;
+                        DEFAULT_LABEL_ANCHORPOINTY;
                 symbolizerObj.labelDisplacementX = textFs.down(
                     'numberfield[name=labeldisplacementx]')
                     .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_DISPLACEMENTX;
+                        DEFAULT_LABEL_DISPLACEMENTX;
                 symbolizerObj.labelDisplacementY = textFs.down(
                     'numberfield[name=labeldisplacementy]')
                     .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_DISPLACEMENTY;
+                        DEFAULT_LABEL_DISPLACEMENTY;
                 symbolizerObj.labelRotation = textFs.down(
                     'numberfield[name=labelrotation]')
                     .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_ROTATION;
+                        DEFAULT_LABEL_ROTATION;
             }
 
             sldObj = BasiGX.util.SLD.setTextSymbolizerInRule(
