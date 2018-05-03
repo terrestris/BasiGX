@@ -130,16 +130,17 @@ Ext.define('BasiGX.util.WFS', {
             if (!cqlFilter) {
                 return;
             }
-            var parts = cqlFilter.split(' ');// TODO: get smarter
-            if (parts.length !== 3) {
+            var parts = /([\w_]+)\s*([<>=!]+|in|like|IN|LIKE)\s*(.+)/g
+                .exec(cqlFilter);
+            if (parts.length !== 4) {
                 Ext.log.error('Method `getOgcFromCqlFilter` can only handle ' +
                 'CQL filters with one key, one operator and one value!');
                 return;
             }
 
-            var key = parts[0];
-            var operator = parts[1].toLowerCase();
-            var value = parts[2];
+            var key = parts[1];
+            var operator = parts[2].toLowerCase();
+            var value = parts[3];
             var ogcFilterType;
             var closingTag;
 
