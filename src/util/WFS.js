@@ -130,7 +130,7 @@ Ext.define('BasiGX.util.WFS', {
             if (!cqlFilter) {
                 return;
             }
-            var parts = /([\w_]+)\s*([<>=!]+|in|like|IN|LIKE)\s*(.+)/g
+            var parts = /([\w_]+)\s*([<>=!]+|in|like)\s*(.+)/gi
                 .exec(cqlFilter);
             if (parts.length !== 4) {
                 Ext.log.error('Method `getOgcFromCqlFilter` can only handle ' +
