@@ -21,6 +21,7 @@
         'util/Object.test.js',
         'util/SLD.test.js',
         'util/Url.test.js',
+        'util/WFS.test.js',
         'ux/ContextSensitiveHelp.test.js',
         'ux/RowExpanderWithComponents.test.js',
         'view/button/AddWms.test.js',

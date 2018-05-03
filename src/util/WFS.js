@@ -130,9 +130,9 @@ Ext.define('BasiGX.util.WFS', {
             if (!cqlFilter) {
                 return;
             }
-            var parts = /([\w_]+)\s*([<>=!]+|in|like)\s*(.+)/gi
+            var parts = /^\s*([\w_]+)\s*([<>=!]+|in|like)\s*([^\s]+)\s*$/gi
                 .exec(cqlFilter);
-            if (parts.length !== 4) {
+            if (!parts || parts.length !== 4) {
                 Ext.log.error('Method `getOgcFromCqlFilter` can only handle ' +
                 'CQL filters with one key, one operator and one value!');
                 return;
