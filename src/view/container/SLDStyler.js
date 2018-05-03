@@ -989,9 +989,9 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         });
 
         if (textSymbolizer) {
-            var font = getVal("font", textSymbolizer);
-            labelAttribute = getVal("value", textSymbolizer.label) ?
-                getVal("value", textSymbolizer.label).content[0] :
+            var font = getVal('font', textSymbolizer);
+            labelAttribute = getVal('value', textSymbolizer.label) ?
+                getVal('value', textSymbolizer.label).content[0] :
                 BasiGX.util.SLD.DEFAULT_LABEL_ATTRIBUTE;
             Ext.each(font.cssParameter, function(param) {
                 if (param.name === 'font-family') {
@@ -1058,7 +1058,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
             autoLoad: true,
             proxy: {
                 type: 'ajax',
-                url : me.getBackendUrls().geoserverInstalledFontListUrl,
+                url: me.getBackendUrls().geoserverInstalledFontListUrl,
                 reader: {
                     type: 'json',
                     rootProperty: function(data) {
@@ -1362,7 +1362,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                         me.attributeStore.removeAll();
                         Ext.iterate(feature.properties, function(k, v) {
                             me.attributeStore.add(
-                                {"name": k, "value": v}
+                                {'name': k, 'value': v}
                             );
                         });
                         // then get the extent for map extent adjustments
