@@ -723,7 +723,8 @@ Ext.define('BasiGX.view.form.AddWms', {
             params: {
                 LAYERS: capLayer.Name,
                 STYLES: style ? style[0].Name : '',
-                VERSION: version
+                VERSION: version,
+                TRANSPARENT: true
             }
         });
 
