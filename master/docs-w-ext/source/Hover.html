@@ -81,6 +81,7 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
 </span><span id='BasiGX-plugin-Hover-cfg-pointerRestInterval'>        pointerRestInterval: 300,
 </span><span id='BasiGX-plugin-Hover-cfg-pointerRestPixelTolerance'>        pointerRestPixelTolerance: 5,
 </span><span id='BasiGX-plugin-Hover-cfg-featureInfoEpsg'>        featureInfoEpsg: &#39;EPSG:3857&#39;,
+</span><span id='BasiGX-plugin-Hover-cfg-featureInfoCount'>        featureInfoCount: 50,
 </span><span id='BasiGX-plugin-Hover-cfg-hoverVectorLayerSource'>        hoverVectorLayerSource: null,
 </span><span id='BasiGX-plugin-Hover-cfg-hoverVectorLayer'>        hoverVectorLayer: null,
 </span><span id='BasiGX-plugin-Hover-cfg-hoverVectorLayerInteraction'>        hoverVectorLayerInteraction: null,
@@ -348,7 +349,7 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
                         projCode,
                         {
                             &#39;INFO_FORMAT&#39;: &#39;application/json&#39;,
-                            &#39;FEATURE_COUNT&#39;: 50
+                            &#39;FEATURE_COUNT&#39;: me.getFeatureInfoCount()
                         }
                     );
 

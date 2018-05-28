@@ -64,6 +64,7 @@ Ext.define('BasiGX.plugin.Hover', {
         pointerRestInterval: 300,
         pointerRestPixelTolerance: 5,
         featureInfoEpsg: 'EPSG:3857',
+        featureInfoCount: 50,
         hoverVectorLayerSource: null,
         hoverVectorLayer: null,
         hoverVectorLayerInteraction: null,
@@ -331,7 +332,7 @@ Ext.define('BasiGX.plugin.Hover', {
                         projCode,
                         {
                             'INFO_FORMAT': 'application/json',
-                            'FEATURE_COUNT': 50
+                            'FEATURE_COUNT': me.getFeatureInfoCount()
                         }
                     );
 
