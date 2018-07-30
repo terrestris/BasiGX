@@ -75,7 +75,8 @@ Ext.define('BasiGX.plugin.Hover', {
          *
          * @type {Number}
          */
-        mapPaddingPositioning: 30
+        mapPaddingPositioning: 30,
+        maxHeight: null
     },
 
     /**
@@ -492,6 +493,9 @@ Ext.define('BasiGX.plugin.Hover', {
         div.style.display = 'inline'; // so we can measure it!
         var divEl = Ext.get(Ext.getBody().dom.appendChild(div));
         var divDims = [divEl.getWidth(), divEl.getHeight()];
+        if (this.maxHeight) {
+            divDims[1] = Math.min(divDims[1], this.maxHeight);
+        }
         div.style.display = ''; // undo styling,
         div.parentNode.removeChild(div);
 
