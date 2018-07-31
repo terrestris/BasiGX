@@ -93,8 +93,9 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
          *
          * @type {Number}
          */
-        mapPaddingPositioning: 30
-    },
+        mapPaddingPositioning: 30,
+<span id='BasiGX-plugin-Hover-cfg-maxHeight'>        maxHeight: null
+</span>    },
 
 <span id='BasiGX-plugin-Hover-cfg-selectMulti'>    /**
 </span>     * Whether the `ol.interaction.Select` shall be configured to select
@@ -510,6 +511,9 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
         div.style.display = &#39;inline&#39;; // so we can measure it!
         var divEl = Ext.get(Ext.getBody().dom.appendChild(div));
         var divDims = [divEl.getWidth(), divEl.getHeight()];
+        if (this.maxHeight) {
+            divDims[1] = Math.min(divDims[1], this.maxHeight);
+        }
         div.style.display = &#39;&#39;; // undo styling,
         div.parentNode.removeChild(div);
 
