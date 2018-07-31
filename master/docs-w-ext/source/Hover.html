@@ -94,7 +94,8 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
          * @type {Number}
          */
         mapPaddingPositioning: 30,
-<span id='BasiGX-plugin-Hover-cfg-maxHeight'>        maxHeight: null
+<span id='BasiGX-plugin-Hover-cfg-maxHeight'>        maxHeight: null,
+</span><span id='BasiGX-plugin-Hover-cfg-className'>        className: &#39;ol-overlay-container ol-selectable&#39;
 </span>    },
 
 <span id='BasiGX-plugin-Hover-cfg-selectMulti'>    /**
@@ -483,7 +484,8 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
                 position: coords,
                 offset: positioningConfig.offset,
                 positioning: positioningConfig.positioning,
-                element: div
+                element: div,
+                className: this.getClassName()
             });
             overlay.set(overlayIdentifierKey, overlayIdentifierVal);
             map.addOverlay(overlay);
