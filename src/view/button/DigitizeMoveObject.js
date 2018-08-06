@@ -75,7 +75,10 @@ Ext.define('BasiGX.view.button.DigitizeMoveObject', {
                 me.translateSelectInteraction =
                     new ol.interaction.Select({
                         condition: ol.events.condition.pointerMove,
-                        addCondition: function() {
+                        addCondition: function(event) {
+                            if (event.dragging) {
+                                return;
+                            }
                             var selectedFeatures =
                                 this.getFeatures();
                             var firstFeature = selectedFeatures.getArray()[0];
