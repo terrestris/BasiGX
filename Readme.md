@@ -21,11 +21,12 @@ sencha package repo add GeoExt http://geoext.github.io/geoext3/cmd/pkgs
 sencha package repo add BasiGX http://terrestris.github.io/BasiGX/cmd/pkgs
 ```
 
-* Add the packages `GeoExt` & `BasiGX` to the requirements in `app.json`.
+* Add the packages `GeoExt`, `BasiGX` & `ux` to the requirements in `app.json`.
 ```json
     "requires": [
         "GeoExt",
-        "BasiGX"
+        "BasiGX",
+        "ux"
     ],
 ```
 
