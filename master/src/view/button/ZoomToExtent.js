@@ -75,16 +75,18 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
     olMap: null,
 
     /**
-     * The config option `center` is required on instantiation. Also required is
-     * either `zoom` or `resolution`, when both are passed, `zoom` will win.
-     *
-     * TODO Why can't we pass an extent? This is quite unexpected
+     * This can be configured with `center` and either `zoom` or `resolution`
+     * (if both are passed `zoom` will win). If you want to zoom to an extent
+     * passing only the option `extent` will work. The options `center`, `zoom`
+     * and `resolution` will be ignored in this case.
+     * Rotation can be passed in all cases.
      */
     config: {
         center: null,
         zoom: null,
         resolution: null,
         rotation: null,
+        extent: null,
         handler: function() {
             var me = this;
             me.setConfigValues();
@@ -102,6 +104,14 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
             var targetResolution = me.getResolution();
             var targetRotation = me.getRotation();
             var targetZoom = me.getZoom();
+            var targetExtent = me.getExtent();
+
+            if (targetExtent && olView.getResolutionForExtent) {
+                targetResolution = olView.getResolutionForExtent(targetExtent);
+                targetCenter = ol.extent.getCenter(targetExtent);
+                // reset zoom, so the calculated resolution gets considered
+                targetZoom = null;
+            }
 
             // This if is need for backwards comaptibility to ol3
             if (ol.animation) {
