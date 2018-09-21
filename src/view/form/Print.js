@@ -60,7 +60,8 @@ Ext.define('BasiGX.view.form.Print', {
                 'einer PDF Datei zum Download bereitstehen',
             labelUse: '…verwenden?',
             northArrow: 'Nordpfeil',
-            scalebar: 'Massstabsleiste'
+            scalebar: 'Massstabsleiste',
+            templateBrokenMessage: 'Template is broken and can not be used.'
         }
     },
 
@@ -567,6 +568,15 @@ Ext.define('BasiGX.view.form.Print', {
      */
     onPrintProviderReady: function(provider) {
         this.addGenericFieldset(provider);
+        this.down('button[name="createPrint"]').enable();
+    },
+
+    /**
+     * Disable createPrint button if provider initialization fails.
+     */
+    onPrintProviderError: function() {
+        this.down('button[name="createPrint"]').disable();
+        Ext.toast(this.getViewModel().get('templateBrokenMessage'));
     },
 
     /**
@@ -581,6 +591,7 @@ Ext.define('BasiGX.view.form.Print', {
             url: this.getUrl() + appCombo.getValue() + '/capabilities.json',
             listeners: {
                 ready: 'onPrintProviderReady',
+                error: 'onPrintProviderError',
                 scope: this
             }
         });
@@ -728,7 +739,6 @@ Ext.define('BasiGX.view.form.Print', {
         }, this);
 
         this.renderAllClientInfos();
-        me.down('button[name="createPrint"]').enable();
     },
 
     /**
