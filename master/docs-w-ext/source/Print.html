@@ -77,7 +77,8 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
                 &#39;einer PDF Datei zum Download bereitstehen&#39;,
             labelUse: &#39;…verwenden?&#39;,
             northArrow: &#39;Nordpfeil&#39;,
-            scalebar: &#39;Massstabsleiste&#39;
+            scalebar: &#39;Massstabsleiste&#39;,
+            templateBrokenMessage: &#39;Template is broken and can not be used.&#39;
         }
     },
 
@@ -584,6 +585,15 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
      */
     onPrintProviderReady: function(provider) {
         this.addGenericFieldset(provider);
+        this.down(&#39;button[name=&quot;createPrint&quot;]&#39;).enable();
+    },
+
+<span id='BasiGX-view-form-Print-method-onPrintProviderError'>    /**
+</span>     * Disable createPrint button if provider initialization fails.
+     */
+    onPrintProviderError: function() {
+        this.down(&#39;button[name=&quot;createPrint&quot;]&#39;).disable();
+        Ext.toast(this.getViewModel().get(&#39;templateBrokenMessage&#39;));
     },
 
 <span id='BasiGX-view-form-Print-method-onAppSelected'>    /**
@@ -598,6 +608,7 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
             url: this.getUrl() + appCombo.getValue() + &#39;/capabilities.json&#39;,
             listeners: {
                 ready: &#39;onPrintProviderReady&#39;,
+                error: &#39;onPrintProviderError&#39;,
                 scope: this
             }
         });
@@ -745,7 +756,6 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
         }, this);
 
         this.renderAllClientInfos();
-        me.down(&#39;button[name=&quot;createPrint&quot;]&#39;).enable();
     },
 
 <span id='BasiGX-view-form-Print-method-getMapAttributeFields'>    /**
