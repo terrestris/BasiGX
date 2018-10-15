@@ -161,6 +161,10 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
             var ogcFilterType;
             var closingTag;
 
+            // always replace surrounding quotes
+            value = value.replace(/(^[&#39;])/g, &#39;&#39;);
+            value = value.replace(/([&#39;]$)/g, &#39;&#39;);
+
             switch (operator) {
                 case &#39;=&#39;:
                     ogcFilterType = &#39;PropertyIsEqualTo&#39;;
