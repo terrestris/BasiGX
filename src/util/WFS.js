@@ -53,6 +53,7 @@ Ext.define('BasiGX.util.WFS', {
             '<wfs:GetFeature service="WFS" version="1.1.0"' +
                 ' outputFormat="JSON"' +
                 ' maxFeatures="{6}"' +
+                ' viewParams="{7}"' +
                 // {0} is replaced with namespace alias,
                 // {1} with namespace URI
                 ' xmlns:{0}="{1}"' +
@@ -405,11 +406,15 @@ Ext.define('BasiGX.util.WFS', {
          *    response in case the request finished with an error.
          * @param {Object} scope The scope (this-context) of the methods for
          *    success or failure callbacks.
+         * @param {String} viewParams the view params to append
          * @return {Ext.data.request.Ajax} The request object.
          */
         executeWfsGetFeature: function(url, layer, srsName, displayColumns,
             geomFieldName, filter, maxFeatures, successCallback,
-            failureCallback, scope) {
+            failureCallback, scope, viewParams) {
+            if (!viewParams) {
+                viewParams = '';
+            }
 
             var featureType = layer.getSource().getParams().LAYERS;
             var ns = featureType.split(':')[0];
@@ -444,7 +449,8 @@ Ext.define('BasiGX.util.WFS', {
                 srsName,
                 propertyNameXml,
                 filter, // OGC 1.1.0. filter as string
-                maxFeatures
+                maxFeatures,
+                viewParams
             );
 
             return Ext.Ajax.request({
