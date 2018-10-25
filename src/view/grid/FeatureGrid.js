@@ -286,6 +286,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var columns = [];
         if (this.getAddZoomButton()) {
             columns.push({
+                menuDisabled: true,
+                enableColumnHide: false,
+                hideable: false,
                 renderer: function() {
                     return '<span class="fa fa-search" ' +
                         'style="cursor: pointer;"></span>';
