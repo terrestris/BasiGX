@@ -72,7 +72,16 @@ Ext.define(&#39;BasiGX.view.button.MergeSelection&#39;, {
      */
     config: {
 <span id='BasiGX-view-button-MergeSelection-cfg-handler'>        handler: function() {
-</span>            var grid = this.up(&#39;window&#39;).down(&#39;basigx-grid-featuregrid&#39;);
+</span>            var grid;
+            var parent = this.up(&#39;window&#39;);
+            // support embedding in window or panel
+            // This assumes the button is embedded in a buttongroup or similar
+            // panel, hence walking up two panels.
+            if (!parent &amp;&amp; this.config.featureGridSelectorFn) {
+                grid = this.config.featureGridSelectorFn.call(this);
+            } else {
+                grid = parent.down(&#39;basigx-grid-featuregrid&#39;);
+            }
 
             var targetLayer = grid.getLayer();
             Ext.create({
@@ -85,8 +94,9 @@ Ext.define(&#39;BasiGX.view.button.MergeSelection&#39;, {
 </span>         * The source layer name.
          * @type {ol.layer.Vector}
          */
-        sourceLayer: null
-    }
+        sourceLayer: null,
+<span id='BasiGX-view-button-MergeSelection-cfg-featureGridSelectorFn'>        featureGridSelectorFn: null
+</span>    }
 });
 </pre>
 </body>
