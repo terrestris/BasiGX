@@ -55,7 +55,14 @@ Ext.define('BasiGX.view.button.MergeSelection', {
      */
     config: {
         handler: function() {
-            var grid = this.up('window').down('basigx-grid-featuregrid');
+            var parent = this.up('window');
+            // support embedding in window or panel
+            // This assumes the button is embedded in a buttongroup or similar
+            // panel, hence walking up two panels.
+            if (!parent) {
+                parent = this.up('panel').up('panel');
+            }
+            var grid = parent.down('basigx-grid-featuregrid');
 
             var targetLayer = grid.getLayer();
             Ext.create({
