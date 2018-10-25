@@ -62,6 +62,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         selectionLayer: null,
         /**
          * If set to true, a column with a zoom to feature button will be added.
+         * The column can be sorted and is ordered by the selection (selected
+         * rows are considered smaller than non selected rows).
          * @type {boolean}
          */
         addZoomButton: false
@@ -277,6 +279,37 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     },
 
     /**
+     * Compares two rows by checking if they are selected or not.
+     * @param  {Ext.data.Model} a the first record
+     * @param  {Ext.data.Model} b the second record
+     * @return {Number} 0, 1, -1, depending on whether a > b
+     */
+    selectionCompareFunction: function(a, b) {
+        var grid = this.down('grid');
+        var selection = grid.getSelection();
+        var aSelected = false;
+        var bSelected = false;
+        Ext.each(selection, function(item) {
+            if (item === a) {
+                aSelected = true;
+            }
+            if (item === b) {
+                bSelected = true;
+            }
+        });
+        if (aSelected && bSelected) {
+            return 0;
+        }
+        if (aSelected) {
+            return -1;
+        }
+        if (bSelected) {
+            return 1;
+        }
+        return 0;
+    },
+
+    /**
      * Extracts the feature schema from the first feature in the store.
      * @param  {GeoExt.data.store.Features} store the layer store
      * @return {Array}       an array with the feature attribute names
@@ -289,11 +322,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 menuDisabled: true,
                 enableColumnHide: false,
                 hideable: false,
+                sortable: false,
                 renderer: function() {
                     return '<span class="fa fa-search" ' +
                         'style="cursor: pointer;"></span>';
                 },
-                width: 32
+                width: 32,
+                sorter: this.selectionCompareFunction.bind(this)
             });
         }
         var data = store.getData().items;
