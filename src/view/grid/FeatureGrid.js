@@ -59,7 +59,12 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          * features from the selection layer.
          * @type {ol.layer.Vector}
          */
-        selectionLayer: null
+        selectionLayer: null,
+        /**
+         * If set to true, a column with a zoom to feature button will be added.
+         * @type {boolean}
+         */
+        addZoomButton: false
     },
 
     items: [{
@@ -68,6 +73,17 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         plugins: {
             ptype: 'cellediting',
             clicksToEdit: 1
+        },
+        listeners: {
+            cellclick: function(view, td, colIdx, record) {
+                var grid = this.up('basigx-grid-featuregrid');
+                var mapView = grid.getMap().map.getView();
+                if (grid.getAddZoomButton()) {
+                    if (colIdx === 1) {
+                        mapView.fit(record.olObject.getGeometry());
+                    }
+                }
+            }
         }
     }],
 
@@ -268,6 +284,16 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     extractSchema: function(store) {
         var me = this;
         var columns = [];
+        if (this.getAddZoomButton()) {
+            columns.push({
+                // cls: 'fa fa-search',
+                renderer: function() {
+                    return '<span class="fa fa-search" ' +
+                        'style="cursor: pointer;"></span>';
+                },
+                width: 32
+            });
+        }
         var data = store.getData().items;
         if (data.length > 0) {
             Ext.iterate(data[0].data, function(key, value) {
