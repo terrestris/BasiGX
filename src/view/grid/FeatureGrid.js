@@ -81,8 +81,10 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 var grid = this.up('basigx-grid-featuregrid');
                 var mapView = grid.getMap().map.getView();
                 if (grid.getAddZoomButton()) {
-                    if (colIdx === 1) {
-                        mapView.fit(record.olObject.getGeometry());
+                    if (colIdx === 1 && record.olObject.getGeometry()) {
+                        mapView.fit(record.olObject.getGeometry(), {
+                            duration: 300
+                        });
                     }
                 }
             }
