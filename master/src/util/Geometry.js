@@ -1,45 +1,9 @@
-/* Copyright (c) 2017-present terrestris GmbH & Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-/**
- * @class BasiGX.util.Geometry
- */
-Ext.define('BasiGX.util.Geometry', {
 
-    statics: {
-
-        /**
-         * Compares two ol.geom.Geometries.
-         * @param {ol.geom.Geometry} geometry1 The first geometry for the
-         *                                     comparison.
-         * @param {ol.geom.Geometry} geometry2 The second geometry for the
-         *                                     comparison.
-         * @return {Boolean} Returns true if the WKT-representations are
-         *                   identical.
-         */
-        equals: function(geometry1, geometry2) {
-            if (!(geometry1 instanceof ol.geom.SimpleGeometry) ||
-                    !(geometry2 instanceof ol.geom.SimpleGeometry)) {
-                Ext.log.warn('Can only handle ol.geom.SimpleGeometry');
-                return undefined;
-            }
-            var formatWKT = new ol.format.WKT();
-            var wkt1 = formatWKT.writeGeometry(geometry1);
-            var wkt2 = formatWKT.writeGeometry(geometry2);
-
-            return wkt1 === wkt2;
-        }
-    }
-});
+var __cov_TdTzrVrmbZMPTsRuSNV0lQ = (Function('return this'))();
+if (!__cov_TdTzrVrmbZMPTsRuSNV0lQ.__coverage__) { __cov_TdTzrVrmbZMPTsRuSNV0lQ.__coverage__ = {}; }
+__cov_TdTzrVrmbZMPTsRuSNV0lQ = __cov_TdTzrVrmbZMPTsRuSNV0lQ.__coverage__;
+if (!(__cov_TdTzrVrmbZMPTsRuSNV0lQ['/home/travis/build/terrestris/BasiGX/src/util/Geometry.js'])) {
+   __cov_TdTzrVrmbZMPTsRuSNV0lQ['/home/travis/build/terrestris/BasiGX/src/util/Geometry.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Geometry.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0},"b":{"1":[0,0],"2":[0,0]},"f":{"1":0},"fnMap":{"1":{"name":"(anonymous_1)","line":32,"loc":{"start":{"line":32,"column":16},"end":{"line":32,"column":47}}}},"statementMap":{"1":{"start":{"line":19,"column":0},"end":{"line":45,"column":3}},"2":{"start":{"line":33,"column":12},"end":{"line":37,"column":13}},"3":{"start":{"line":35,"column":16},"end":{"line":35,"column":71}},"4":{"start":{"line":36,"column":16},"end":{"line":36,"column":33}},"5":{"start":{"line":38,"column":12},"end":{"line":38,"column":48}},"6":{"start":{"line":39,"column":12},"end":{"line":39,"column":58}},"7":{"start":{"line":40,"column":12},"end":{"line":40,"column":58}},"8":{"start":{"line":42,"column":12},"end":{"line":42,"column":33}}},"branchMap":{"1":{"line":33,"type":"if","locations":[{"start":{"line":33,"column":12},"end":{"line":33,"column":12}},{"start":{"line":33,"column":12},"end":{"line":33,"column":12}}]},"2":{"line":33,"type":"binary-expr","locations":[{"start":{"line":33,"column":16},"end":{"line":33,"column":62}},{"start":{"line":34,"column":20},"end":{"line":34,"column":66}}]}}};
+}
+__cov_TdTzrVrmbZMPTsRuSNV0lQ = __cov_TdTzrVrmbZMPTsRuSNV0lQ['/home/travis/build/terrestris/BasiGX/src/util/Geometry.js'];
+__cov_TdTzrVrmbZMPTsRuSNV0lQ.s['1']++;Ext.define('BasiGX.util.Geometry',{statics:{equals:function(geometry1,geometry2){__cov_TdTzrVrmbZMPTsRuSNV0lQ.f['1']++;__cov_TdTzrVrmbZMPTsRuSNV0lQ.s['2']++;if((__cov_TdTzrVrmbZMPTsRuSNV0lQ.b['2'][0]++,!(geometry1 instanceof ol.geom.SimpleGeometry))||(__cov_TdTzrVrmbZMPTsRuSNV0lQ.b['2'][1]++,!(geometry2 instanceof ol.geom.SimpleGeometry))){__cov_TdTzrVrmbZMPTsRuSNV0lQ.b['1'][0]++;__cov_TdTzrVrmbZMPTsRuSNV0lQ.s['3']++;Ext.log.warn('Can only handle ol.geom.SimpleGeometry');__cov_TdTzrVrmbZMPTsRuSNV0lQ.s['4']++;return undefined;}else{__cov_TdTzrVrmbZMPTsRuSNV0lQ.b['1'][1]++;}__cov_TdTzrVrmbZMPTsRuSNV0lQ.s['5']++;var formatWKT=new ol.format.WKT();__cov_TdTzrVrmbZMPTsRuSNV0lQ.s['6']++;var wkt1=formatWKT.writeGeometry(geometry1);__cov_TdTzrVrmbZMPTsRuSNV0lQ.s['7']++;var wkt2=formatWKT.writeGeometry(geometry2);__cov_TdTzrVrmbZMPTsRuSNV0lQ.s['8']++;return wkt1===wkt2;}}});

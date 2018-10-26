@@ -15,98 +15,15 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
- */
-<span id='BasiGX-view-button-ToggleLegend'>/**
-</span> * ToggleLegend Button
- *
- * Button used to toggle the collapsed state of the legend.
- *
- * @class BasiGX.view.button.ToggleLegend
- */
-Ext.define(&#39;BasiGX.view.button.ToggleLegend&#39;, {
-    extend: &#39;BasiGX.view.button.Base&#39;,
-    xtype: &#39;basigx-button-togglelegend&#39;,
-    requires: [
-        &#39;Ext.app.ViewModel&#39;,
-        &#39;BasiGX.util.Map&#39;
-    ],
-
-<span id='BasiGX-view-button-ToggleLegend-property-viewModel'>    /**
-</span>     *
-     */
-    viewModel: {
-        data: {
-            tooltip: &#39;Layerauswahl&#39;,
-            text: null,
-            documentation: &#39;&lt;h2&gt;Layerauswahl&lt;/h2&gt;• Ein Klick auf &#39; +
-                &#39;den Button klappt die Legendenansicht ein oder aus.&#39;
-        }
-    },
-
-<span id='BasiGX-view-button-ToggleLegend-property-liveDemoConfig'>    /**
-</span>     * A config object to show this tool in action (live demo) when using the
-     * context sensitive help
-     */
-    liveDemoConfig: [
-        {
-            moveMouseTo: &#39;basigx-button-togglelegend&#39;
-        },
-        {
-            clickOnButton: &#39;basigx-button-togglelegend&#39;
-        }
-    ],
-
-<span id='BasiGX-view-button-ToggleLegend-property-bind'>    /**
-</span>     *
-     */
-    bind: {
-        text: &#39;{text}&#39;
-    },
-
-<span id='BasiGX-view-button-ToggleLegend-property-glyph'>    /**
-</span>     * The icons the button should use.
-     * Classic Toolkit uses glyphs, modern toolkit uses html
-     */
-    glyph: &#39;xf022@FontAwesome&#39;,
-<span id='BasiGX-view-button-ToggleLegend-cfg-html'>    html: &#39;&lt;i class=&quot;fa fa-list-alt fa-2x&quot;&gt;&lt;/i&gt;&#39;,
-</span>
-    config: {
-<span id='BasiGX-view-button-ToggleLegend-cfg-legendTreeXType'>        /**
-</span>         * Placeholder for the xtype of the legendtree panel component
-         * (e.g. &#39;basigx-panel-legendtree&#39;).
-         * Will be used to be able to determine the component dynamically.
-         */
-        legendTreeXType: null,
-<span id='BasiGX-view-button-ToggleLegend-cfg-handler'>        handler: function(button) {
-</span>            var me = this;
-            var legendPanel =
-                    BasiGX.util.Map.getLegendTreePanel(me.getLegendTreeXType());
-
-            if (legendPanel) {
-                if (legendPanel.getCollapsed()) {
-                    legendPanel.expand();
-                } else {
-                    legendPanel.collapse();
-                }
-                button.blur();
-            }
-        }
-    }
-});
+  <pre class="prettyprint lang-js">
+var __cov_IEyHI2hnI3pHGa80XvL2Pw = (Function(&#39;return this&#39;))();
+if (!__cov_IEyHI2hnI3pHGa80XvL2Pw.__coverage__) { __cov_IEyHI2hnI3pHGa80XvL2Pw.__coverage__ = {}; }
+__cov_IEyHI2hnI3pHGa80XvL2Pw = __cov_IEyHI2hnI3pHGa80XvL2Pw.__coverage__;
+if (!(__cov_IEyHI2hnI3pHGa80XvL2Pw[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/ToggleLegend.js&#39;])) {
+   __cov_IEyHI2hnI3pHGa80XvL2Pw[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/ToggleLegend.js&#39;] = {&quot;path&quot;:&quot;/home/travis/build/terrestris/BasiGX/src/view/button/ToggleLegend.js&quot;,&quot;s&quot;:{&quot;1&quot;:0,&quot;2&quot;:0,&quot;3&quot;:0,&quot;4&quot;:0,&quot;5&quot;:0,&quot;6&quot;:0,&quot;7&quot;:0,&quot;8&quot;:0},&quot;b&quot;:{&quot;1&quot;:[0,0],&quot;2&quot;:[0,0]},&quot;f&quot;:{&quot;1&quot;:0},&quot;fnMap&quot;:{&quot;1&quot;:{&quot;name&quot;:&quot;(anonymous_1)&quot;,&quot;line&quot;:77,&quot;loc&quot;:{&quot;start&quot;:{&quot;line&quot;:77,&quot;column&quot;:17},&quot;end&quot;:{&quot;line&quot;:77,&quot;column&quot;:34}}}},&quot;statementMap&quot;:{&quot;1&quot;:{&quot;start&quot;:{&quot;line&quot;:23,&quot;column&quot;:0},&quot;end&quot;:{&quot;line&quot;:92,&quot;column&quot;:3}},&quot;2&quot;:{&quot;start&quot;:{&quot;line&quot;:78,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:78,&quot;column&quot;:26}},&quot;3&quot;:{&quot;start&quot;:{&quot;line&quot;:79,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:80,&quot;column&quot;:80}},&quot;4&quot;:{&quot;start&quot;:{&quot;line&quot;:82,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:89,&quot;column&quot;:13}},&quot;5&quot;:{&quot;start&quot;:{&quot;line&quot;:83,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:87,&quot;column&quot;:17}},&quot;6&quot;:{&quot;start&quot;:{&quot;line&quot;:84,&quot;column&quot;:20},&quot;end&quot;:{&quot;line&quot;:84,&quot;column&quot;:41}},&quot;7&quot;:{&quot;start&quot;:{&quot;line&quot;:86,&quot;column&quot;:20},&quot;end&quot;:{&quot;line&quot;:86,&quot;column&quot;:43}},&quot;8&quot;:{&quot;start&quot;:{&quot;line&quot;:88,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:88,&quot;column&quot;:30}}},&quot;branchMap&quot;:{&quot;1&quot;:{&quot;line&quot;:82,&quot;type&quot;:&quot;if&quot;,&quot;locations&quot;:[{&quot;start&quot;:{&quot;line&quot;:82,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:82,&quot;column&quot;:12}},{&quot;start&quot;:{&quot;line&quot;:82,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:82,&quot;column&quot;:12}}]},&quot;2&quot;:{&quot;line&quot;:83,&quot;type&quot;:&quot;if&quot;,&quot;locations&quot;:[{&quot;start&quot;:{&quot;line&quot;:83,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:83,&quot;column&quot;:16}},{&quot;start&quot;:{&quot;line&quot;:83,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:83,&quot;column&quot;:16}}]}}};
+}
+__cov_IEyHI2hnI3pHGa80XvL2Pw = __cov_IEyHI2hnI3pHGa80XvL2Pw[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/ToggleLegend.js&#39;];
+__cov_IEyHI2hnI3pHGa80XvL2Pw.s[&#39;1&#39;]++;Ext.define(&#39;BasiGX.view.button.ToggleLegend&#39;,{extend:&#39;BasiGX.view.button.Base&#39;,xtype:&#39;basigx-button-togglelegend&#39;,requires:[&#39;Ext.app.ViewModel&#39;,&#39;BasiGX.util.Map&#39;],viewModel:{data:{tooltip:&#39;Layerauswahl&#39;,text:null,documentation:&#39;&lt;h2&gt;Layerauswahl&lt;/h2&gt;\u2022 Ein Klick auf &#39;+&#39;den Button klappt die Legendenansicht ein oder aus.&#39;}},liveDemoConfig:[{moveMouseTo:&#39;basigx-button-togglelegend&#39;},{clickOnButton:&#39;basigx-button-togglelegend&#39;}],bind:{text:&#39;{text}&#39;},glyph:&#39;xf022@FontAwesome&#39;,html:&#39;&lt;i class=&quot;fa fa-list-alt fa-2x&quot;&gt;&lt;/i&gt;&#39;,config:{legendTreeXType:null,handler:function(button){__cov_IEyHI2hnI3pHGa80XvL2Pw.f[&#39;1&#39;]++;__cov_IEyHI2hnI3pHGa80XvL2Pw.s[&#39;2&#39;]++;var me=this;__cov_IEyHI2hnI3pHGa80XvL2Pw.s[&#39;3&#39;]++;var legendPanel=BasiGX.util.Map.getLegendTreePanel(me.getLegendTreeXType());__cov_IEyHI2hnI3pHGa80XvL2Pw.s[&#39;4&#39;]++;if(legendPanel){__cov_IEyHI2hnI3pHGa80XvL2Pw.b[&#39;1&#39;][0]++;__cov_IEyHI2hnI3pHGa80XvL2Pw.s[&#39;5&#39;]++;if(legendPanel.getCollapsed()){__cov_IEyHI2hnI3pHGa80XvL2Pw.b[&#39;2&#39;][0]++;__cov_IEyHI2hnI3pHGa80XvL2Pw.s[&#39;6&#39;]++;legendPanel.expand();}else{__cov_IEyHI2hnI3pHGa80XvL2Pw.b[&#39;2&#39;][1]++;__cov_IEyHI2hnI3pHGa80XvL2Pw.s[&#39;7&#39;]++;legendPanel.collapse();}__cov_IEyHI2hnI3pHGa80XvL2Pw.s[&#39;8&#39;]++;button.blur();}else{__cov_IEyHI2hnI3pHGa80XvL2Pw.b[&#39;1&#39;][1]++;}}}});
 </pre>
 </body>
 </html>

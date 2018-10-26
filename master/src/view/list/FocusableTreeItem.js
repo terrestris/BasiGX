@@ -1,91 +1,9 @@
-/* Copyright (c) 2017-present terrestris GmbH & Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-/**
- * `BasiGX.view.list.FocusableTreeItem`
- *
- * A class that can be used inside of `Ext.list.Tree` instances. This tree item
- * class differs to its parent in two points:
- *
- * * `BasiGX.view.list.FocusableTreeItem` instances can be focused; by clicking
- *   or by hitting the tab-key.
- * * If a focused treeitem receives a `keypress`-event that originates from
- *   either the space-bar or the the enter-key, the `selectionchange` event of
- *   the parent `Ext.list.Tree` is fired with the focused item passed as new
- *   selection
- *
- * @class BasiGX.view.list.FocusableTreeItem
- */
-Ext.define('BasiGX.view.list.FocusableTreeItem', {
-    extend: 'Ext.list.TreeItem',
-    xtype: 'focusable-tree-item',
 
-    /**
-     * Changes the `element` specification to add the `tabIndex`-attribute to
-     * the topmost container, but only if it didn't have it already.
-     */
-    makeFocusableElement: function() {
-        var me = this;
-        var spec = me.element;
-        if (spec && Ext.isObject(spec)) {
-            var hasTabIndex = Ext.isDefined(spec.tabIndex) ||
-                Ext.isDefined(spec.tabindex);
-            if (!hasTabIndex) {
-                me.element.tabIndex = 0;
-            }
-        }
-    },
-
-    /**
-     * Registers our `keypress`-handler to eventually trigger `selectionchange`
-     * in the parent list.
-     */
-    bindFocusKeyPressHandler: function() {
-        var me = this;
-        me.getEl().on('keypress', me.onKeyPress, me);
-    },
-
-    /**
-     * Our handler for the `keypress`-event on a focused list item. Will check
-     * if the passed key was either the space-bar or the enter-key, and if so,
-     * it will trigger an appropriate `selectionchange`-event in the parent
-     * treelist.
-     *
-     * @param {Ext.event.Event} evt The `keypress`-event we detected, includes
-     *     the pressed key.
-     */
-    onKeyPress: function(evt) {
-        var me = this;
-        var enter = Ext.event.Event.ENTER;
-        var space = Ext.event.Event.SPACE;
-        var pressedKey = evt.getKey();
-        var list = me.up('treelist');
-        if (list && (pressedKey === enter || pressedKey === space)) {
-            list.fireEvent('selectionchange', list, me.getNode(), {});
-        }
-    },
-
-    /**
-     * The constructor of `BasiGX.view.list.FocusableTreeItem`. First makes the
-     * element focusable, and then registers a handler to handle `keypress`
-     * events on focused list items.
-     */
-    constructor: function() {
-        var me = this;
-        me.makeFocusableElement();
-        me.callParent(arguments);
-        me.bindFocusKeyPressHandler();
-    }
-});
+var __cov_F7jDWt2baJkkPGmiAHmHUw = (Function('return this'))();
+if (!__cov_F7jDWt2baJkkPGmiAHmHUw.__coverage__) { __cov_F7jDWt2baJkkPGmiAHmHUw.__coverage__ = {}; }
+__cov_F7jDWt2baJkkPGmiAHmHUw = __cov_F7jDWt2baJkkPGmiAHmHUw.__coverage__;
+if (!(__cov_F7jDWt2baJkkPGmiAHmHUw['/home/travis/build/terrestris/BasiGX/src/view/list/FocusableTreeItem.js'])) {
+   __cov_F7jDWt2baJkkPGmiAHmHUw['/home/travis/build/terrestris/BasiGX/src/view/list/FocusableTreeItem.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/list/FocusableTreeItem.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0,0]},"f":{"1":0,"2":0,"3":0,"4":0},"fnMap":{"1":{"name":"(anonymous_1)","line":39,"loc":{"start":{"line":39,"column":26},"end":{"line":39,"column":37}}},"2":{"name":"(anonymous_2)","line":55,"loc":{"start":{"line":55,"column":30},"end":{"line":55,"column":41}}},"3":{"name":"(anonymous_3)","line":69,"loc":{"start":{"line":69,"column":16},"end":{"line":69,"column":30}}},"4":{"name":"(anonymous_4)","line":85,"loc":{"start":{"line":85,"column":17},"end":{"line":85,"column":28}}}},"statementMap":{"1":{"start":{"line":31,"column":0},"end":{"line":91,"column":3}},"2":{"start":{"line":40,"column":8},"end":{"line":40,"column":22}},"3":{"start":{"line":41,"column":8},"end":{"line":41,"column":30}},"4":{"start":{"line":42,"column":8},"end":{"line":48,"column":9}},"5":{"start":{"line":43,"column":12},"end":{"line":44,"column":45}},"6":{"start":{"line":45,"column":12},"end":{"line":47,"column":13}},"7":{"start":{"line":46,"column":16},"end":{"line":46,"column":40}},"8":{"start":{"line":56,"column":8},"end":{"line":56,"column":22}},"9":{"start":{"line":57,"column":8},"end":{"line":57,"column":53}},"10":{"start":{"line":70,"column":8},"end":{"line":70,"column":22}},"11":{"start":{"line":71,"column":8},"end":{"line":71,"column":42}},"12":{"start":{"line":72,"column":8},"end":{"line":72,"column":42}},"13":{"start":{"line":73,"column":8},"end":{"line":73,"column":38}},"14":{"start":{"line":74,"column":8},"end":{"line":74,"column":37}},"15":{"start":{"line":75,"column":8},"end":{"line":77,"column":9}},"16":{"start":{"line":76,"column":12},"end":{"line":76,"column":70}},"17":{"start":{"line":86,"column":8},"end":{"line":86,"column":22}},"18":{"start":{"line":87,"column":8},"end":{"line":87,"column":34}},"19":{"start":{"line":88,"column":8},"end":{"line":88,"column":33}},"20":{"start":{"line":89,"column":8},"end":{"line":89,"column":38}}},"branchMap":{"1":{"line":42,"type":"if","locations":[{"start":{"line":42,"column":8},"end":{"line":42,"column":8}},{"start":{"line":42,"column":8},"end":{"line":42,"column":8}}]},"2":{"line":42,"type":"binary-expr","locations":[{"start":{"line":42,"column":12},"end":{"line":42,"column":16}},{"start":{"line":42,"column":20},"end":{"line":42,"column":38}}]},"3":{"line":43,"type":"binary-expr","locations":[{"start":{"line":43,"column":30},"end":{"line":43,"column":58}},{"start":{"line":44,"column":16},"end":{"line":44,"column":44}}]},"4":{"line":45,"type":"if","locations":[{"start":{"line":45,"column":12},"end":{"line":45,"column":12}},{"start":{"line":45,"column":12},"end":{"line":45,"column":12}}]},"5":{"line":75,"type":"if","locations":[{"start":{"line":75,"column":8},"end":{"line":75,"column":8}},{"start":{"line":75,"column":8},"end":{"line":75,"column":8}}]},"6":{"line":75,"type":"binary-expr","locations":[{"start":{"line":75,"column":12},"end":{"line":75,"column":16}},{"start":{"line":75,"column":21},"end":{"line":75,"column":41}},{"start":{"line":75,"column":45},"end":{"line":75,"column":65}}]}}};
+}
+__cov_F7jDWt2baJkkPGmiAHmHUw = __cov_F7jDWt2baJkkPGmiAHmHUw['/home/travis/build/terrestris/BasiGX/src/view/list/FocusableTreeItem.js'];
+__cov_F7jDWt2baJkkPGmiAHmHUw.s['1']++;Ext.define('BasiGX.view.list.FocusableTreeItem',{extend:'Ext.list.TreeItem',xtype:'focusable-tree-item',makeFocusableElement:function(){__cov_F7jDWt2baJkkPGmiAHmHUw.f['1']++;__cov_F7jDWt2baJkkPGmiAHmHUw.s['2']++;var me=this;__cov_F7jDWt2baJkkPGmiAHmHUw.s['3']++;var spec=me.element;__cov_F7jDWt2baJkkPGmiAHmHUw.s['4']++;if((__cov_F7jDWt2baJkkPGmiAHmHUw.b['2'][0]++,spec)&&(__cov_F7jDWt2baJkkPGmiAHmHUw.b['2'][1]++,Ext.isObject(spec))){__cov_F7jDWt2baJkkPGmiAHmHUw.b['1'][0]++;__cov_F7jDWt2baJkkPGmiAHmHUw.s['5']++;var hasTabIndex=(__cov_F7jDWt2baJkkPGmiAHmHUw.b['3'][0]++,Ext.isDefined(spec.tabIndex))||(__cov_F7jDWt2baJkkPGmiAHmHUw.b['3'][1]++,Ext.isDefined(spec.tabindex));__cov_F7jDWt2baJkkPGmiAHmHUw.s['6']++;if(!hasTabIndex){__cov_F7jDWt2baJkkPGmiAHmHUw.b['4'][0]++;__cov_F7jDWt2baJkkPGmiAHmHUw.s['7']++;me.element.tabIndex=0;}else{__cov_F7jDWt2baJkkPGmiAHmHUw.b['4'][1]++;}}else{__cov_F7jDWt2baJkkPGmiAHmHUw.b['1'][1]++;}},bindFocusKeyPressHandler:function(){__cov_F7jDWt2baJkkPGmiAHmHUw.f['2']++;__cov_F7jDWt2baJkkPGmiAHmHUw.s['8']++;var me=this;__cov_F7jDWt2baJkkPGmiAHmHUw.s['9']++;me.getEl().on('keypress',me.onKeyPress,me);},onKeyPress:function(evt){__cov_F7jDWt2baJkkPGmiAHmHUw.f['3']++;__cov_F7jDWt2baJkkPGmiAHmHUw.s['10']++;var me=this;__cov_F7jDWt2baJkkPGmiAHmHUw.s['11']++;var enter=Ext.event.Event.ENTER;__cov_F7jDWt2baJkkPGmiAHmHUw.s['12']++;var space=Ext.event.Event.SPACE;__cov_F7jDWt2baJkkPGmiAHmHUw.s['13']++;var pressedKey=evt.getKey();__cov_F7jDWt2baJkkPGmiAHmHUw.s['14']++;var list=me.up('treelist');__cov_F7jDWt2baJkkPGmiAHmHUw.s['15']++;if((__cov_F7jDWt2baJkkPGmiAHmHUw.b['6'][0]++,list)&&((__cov_F7jDWt2baJkkPGmiAHmHUw.b['6'][1]++,pressedKey===enter)||(__cov_F7jDWt2baJkkPGmiAHmHUw.b['6'][2]++,pressedKey===space))){__cov_F7jDWt2baJkkPGmiAHmHUw.b['5'][0]++;__cov_F7jDWt2baJkkPGmiAHmHUw.s['16']++;list.fireEvent('selectionchange',list,me.getNode(),{});}else{__cov_F7jDWt2baJkkPGmiAHmHUw.b['5'][1]++;}},constructor:function(){__cov_F7jDWt2baJkkPGmiAHmHUw.f['4']++;__cov_F7jDWt2baJkkPGmiAHmHUw.s['17']++;var me=this;__cov_F7jDWt2baJkkPGmiAHmHUw.s['18']++;me.makeFocusableElement();__cov_F7jDWt2baJkkPGmiAHmHUw.s['19']++;me.callParent(arguments);__cov_F7jDWt2baJkkPGmiAHmHUw.s['20']++;me.bindFocusKeyPressHandler();}});

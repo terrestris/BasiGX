@@ -1,49 +1,9 @@
-/* Copyright (c) 2015-present terrestris GmbH & Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-/**
- * @class BasiGX.util.Controller
- */
-Ext.define('BasiGX.util.Controller', {
 
-    statics: {
-        /**
-         * This method creates methdos on the passed controller, which call
-         * their pendant on the associated view when they are invoked. This was
-         * needed for the component.Map (BasiGX). See a controller
-         * that works on this class for more details (the bfs-koala project
-         * has such an example)
-         *
-         * @param {String[]} methodNames Array of function names to borrow from
-         *     the view.
-         * @param {Ext.Class} controllerCls The controller class which we'll
-         *     change and extend.
-         */
-        borrowViewMethods: function(methodNames, controllerCls) {
-            var controllerProto = controllerCls.prototype;
-            Ext.each(methodNames, function(methodName) {
-                if (!Ext.isDefined(controllerProto[methodName])) {
-                    controllerProto[methodName] = function() {
-                        var view = this.getView();
-                        var viewMethod = view[methodName];
-                        if (viewMethod) {
-                            viewMethod.apply(view, arguments);
-                        }
-                    };
-                }
-            });
-        }
-    }
-});
+var __cov_Mgst0oA72e44eRK20ch99A = (Function('return this'))();
+if (!__cov_Mgst0oA72e44eRK20ch99A.__coverage__) { __cov_Mgst0oA72e44eRK20ch99A.__coverage__ = {}; }
+__cov_Mgst0oA72e44eRK20ch99A = __cov_Mgst0oA72e44eRK20ch99A.__coverage__;
+if (!(__cov_Mgst0oA72e44eRK20ch99A['/home/travis/build/terrestris/BasiGX/src/util/Controller.js'])) {
+   __cov_Mgst0oA72e44eRK20ch99A['/home/travis/build/terrestris/BasiGX/src/util/Controller.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Controller.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0},"b":{"1":[0,0],"2":[0,0]},"f":{"1":0,"2":0,"3":0},"fnMap":{"1":{"name":"(anonymous_1)","line":34,"loc":{"start":{"line":34,"column":27},"end":{"line":34,"column":64}}},"2":{"name":"(anonymous_2)","line":36,"loc":{"start":{"line":36,"column":34},"end":{"line":36,"column":55}}},"3":{"name":"(anonymous_3)","line":38,"loc":{"start":{"line":38,"column":50},"end":{"line":38,"column":61}}}},"statementMap":{"1":{"start":{"line":19,"column":0},"end":{"line":49,"column":3}},"2":{"start":{"line":35,"column":12},"end":{"line":35,"column":58}},"3":{"start":{"line":36,"column":12},"end":{"line":46,"column":15}},"4":{"start":{"line":37,"column":16},"end":{"line":45,"column":17}},"5":{"start":{"line":38,"column":20},"end":{"line":44,"column":22}},"6":{"start":{"line":39,"column":24},"end":{"line":39,"column":50}},"7":{"start":{"line":40,"column":24},"end":{"line":40,"column":58}},"8":{"start":{"line":41,"column":24},"end":{"line":43,"column":25}},"9":{"start":{"line":42,"column":28},"end":{"line":42,"column":62}}},"branchMap":{"1":{"line":37,"type":"if","locations":[{"start":{"line":37,"column":16},"end":{"line":37,"column":16}},{"start":{"line":37,"column":16},"end":{"line":37,"column":16}}]},"2":{"line":41,"type":"if","locations":[{"start":{"line":41,"column":24},"end":{"line":41,"column":24}},{"start":{"line":41,"column":24},"end":{"line":41,"column":24}}]}}};
+}
+__cov_Mgst0oA72e44eRK20ch99A = __cov_Mgst0oA72e44eRK20ch99A['/home/travis/build/terrestris/BasiGX/src/util/Controller.js'];
+__cov_Mgst0oA72e44eRK20ch99A.s['1']++;Ext.define('BasiGX.util.Controller',{statics:{borrowViewMethods:function(methodNames,controllerCls){__cov_Mgst0oA72e44eRK20ch99A.f['1']++;__cov_Mgst0oA72e44eRK20ch99A.s['2']++;var controllerProto=controllerCls.prototype;__cov_Mgst0oA72e44eRK20ch99A.s['3']++;Ext.each(methodNames,function(methodName){__cov_Mgst0oA72e44eRK20ch99A.f['2']++;__cov_Mgst0oA72e44eRK20ch99A.s['4']++;if(!Ext.isDefined(controllerProto[methodName])){__cov_Mgst0oA72e44eRK20ch99A.b['1'][0]++;__cov_Mgst0oA72e44eRK20ch99A.s['5']++;controllerProto[methodName]=function(){__cov_Mgst0oA72e44eRK20ch99A.f['3']++;__cov_Mgst0oA72e44eRK20ch99A.s['6']++;var view=this.getView();__cov_Mgst0oA72e44eRK20ch99A.s['7']++;var viewMethod=view[methodName];__cov_Mgst0oA72e44eRK20ch99A.s['8']++;if(viewMethod){__cov_Mgst0oA72e44eRK20ch99A.b['2'][0]++;__cov_Mgst0oA72e44eRK20ch99A.s['9']++;viewMethod.apply(view,arguments);}else{__cov_Mgst0oA72e44eRK20ch99A.b['2'][1]++;}};}else{__cov_Mgst0oA72e44eRK20ch99A.b['1'][1]++;}});}}});

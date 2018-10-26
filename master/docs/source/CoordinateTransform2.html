@@ -15,103 +15,15 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
- */
-<span id='BasiGX-view-button-CoordinateTransform'>/**
-</span> * CoordinateTransform Button
- *
- * Button used to instanciate the basigx-form-CoordinateTransform in order
- * to show and transform coordinates
- *
- * @class BasiGX.view.button.CoordinateTransform
- */
-Ext.define(&#39;BasiGX.view.button.CoordinateTransform&#39;, {
-    extend: &#39;BasiGX.view.button.Base&#39;,
-    xtype: &#39;basigx-button-coordinatetransform&#39;,
-
-    requires: [
-        &#39;Ext.window.Window&#39;,
-        &#39;Ext.app.ViewModel&#39;,
-        &#39;BasiGX.view.form.CoordinateTransform&#39;,
-        &#39;BasiGX.util.Animate&#39;
-    ],
-
-<span id='BasiGX-view-button-CoordinateTransform-property-viewModel'>    /**
-</span>     *
-     */
-    viewModel: {
-        data: {
-            tooltip: &#39;Koordinaten transformieren und anzeigen&#39;,
-            text: &#39;Koordinaten transformieren&#39;,
-            windowTitle: &#39;Koordinaten transformieren&#39;,
-            documentation: &#39;&lt;h2&gt;Koordinaten transformieren&lt;/h2&gt;• Ein Klick &#39; +
-                &#39;auf den Button öffnet ein Fenster, in dem Koordinaten &#39; +
-                &#39;transformiert werden können.&lt;br&gt;• Geben Sie Koordinaten in &#39; +
-                &#39;die Eingabefelder ein, um sich anschließend den Punkt in &#39; +
-                &#39;der Karte anzeigen zu lassen.&lt;br&gt;• Klicken Sie alternativ &#39; +
-                &#39;in die Karte, um sich die jeweiligen Koordinaten anzeigen &#39; +
-                &#39;zu lassen&#39;
-        }
-    },
-
-<span id='BasiGX-view-button-CoordinateTransform-property-bind'>    /**
-</span>     *
-     */
-    bind: {
-        text: &#39;{text}&#39;
-    },
-
-<span id='BasiGX-view-button-CoordinateTransform-property-coordinateSystemsToUse'>    /**
-</span>     * Array of CRS in EPSG notation that should be used
-     */
-    coordinateSystemsToUse: [],
-
-<span id='BasiGX-view-button-CoordinateTransform-property-transformCenterOnRender'>    /**
-</span>     *
-     */
-    transformCenterOnRender: true,
-
-<span id='BasiGX-view-button-CoordinateTransform-property-config'>    /**
-</span>     *
-     */
-    config: {
-<span id='BasiGX-view-button-CoordinateTransform-cfg-handler'>        handler: function() {
-</span>            var win = Ext.ComponentQuery.query(
-                &#39;[name=coordinate-transform-window]&#39;
-            )[0];
-            if (!win) {
-                Ext.create(&#39;Ext.window.Window&#39;, {
-                    name: &#39;coordinate-transform-window&#39;,
-                    title: this.getViewModel().get(&#39;windowTitle&#39;),
-                    width: 500,
-                    height: 400,
-                    layout: &#39;fit&#39;,
-                    constrain: true,
-                    items: [{
-                        xtype: &#39;basigx-form-coordinatetransform&#39;,
-                        coordinateSystemsToUse: this.coordinateSystemsToUse,
-                        transformCenterOnRender: this.transformCenterOnRender
-                    }]
-                }).showAt(0);
-            } else {
-                BasiGX.util.Animate.shake(win);
-            }
-        }
-    }
-});
+  <pre class="prettyprint lang-js">
+var __cov_FmnuuHpuqeKM8LTua5joMg = (Function(&#39;return this&#39;))();
+if (!__cov_FmnuuHpuqeKM8LTua5joMg.__coverage__) { __cov_FmnuuHpuqeKM8LTua5joMg.__coverage__ = {}; }
+__cov_FmnuuHpuqeKM8LTua5joMg = __cov_FmnuuHpuqeKM8LTua5joMg.__coverage__;
+if (!(__cov_FmnuuHpuqeKM8LTua5joMg[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/CoordinateTransform.js&#39;])) {
+   __cov_FmnuuHpuqeKM8LTua5joMg[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/CoordinateTransform.js&#39;] = {&quot;path&quot;:&quot;/home/travis/build/terrestris/BasiGX/src/view/button/CoordinateTransform.js&quot;,&quot;s&quot;:{&quot;1&quot;:0,&quot;2&quot;:0,&quot;3&quot;:0,&quot;4&quot;:0,&quot;5&quot;:0},&quot;b&quot;:{&quot;1&quot;:[0,0]},&quot;f&quot;:{&quot;1&quot;:0},&quot;fnMap&quot;:{&quot;1&quot;:{&quot;name&quot;:&quot;(anonymous_1)&quot;,&quot;line&quot;:74,&quot;loc&quot;:{&quot;start&quot;:{&quot;line&quot;:74,&quot;column&quot;:17},&quot;end&quot;:{&quot;line&quot;:74,&quot;column&quot;:28}}}},&quot;statementMap&quot;:{&quot;1&quot;:{&quot;start&quot;:{&quot;line&quot;:24,&quot;column&quot;:0},&quot;end&quot;:{&quot;line&quot;:97,&quot;column&quot;:3}},&quot;2&quot;:{&quot;start&quot;:{&quot;line&quot;:75,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:77,&quot;column&quot;:17}},&quot;3&quot;:{&quot;start&quot;:{&quot;line&quot;:78,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:94,&quot;column&quot;:13}},&quot;4&quot;:{&quot;start&quot;:{&quot;line&quot;:79,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:91,&quot;column&quot;:29}},&quot;5&quot;:{&quot;start&quot;:{&quot;line&quot;:93,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:93,&quot;column&quot;:47}}},&quot;branchMap&quot;:{&quot;1&quot;:{&quot;line&quot;:78,&quot;type&quot;:&quot;if&quot;,&quot;locations&quot;:[{&quot;start&quot;:{&quot;line&quot;:78,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:78,&quot;column&quot;:12}},{&quot;start&quot;:{&quot;line&quot;:78,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:78,&quot;column&quot;:12}}]}}};
+}
+__cov_FmnuuHpuqeKM8LTua5joMg = __cov_FmnuuHpuqeKM8LTua5joMg[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/CoordinateTransform.js&#39;];
+__cov_FmnuuHpuqeKM8LTua5joMg.s[&#39;1&#39;]++;Ext.define(&#39;BasiGX.view.button.CoordinateTransform&#39;,{extend:&#39;BasiGX.view.button.Base&#39;,xtype:&#39;basigx-button-coordinatetransform&#39;,requires:[&#39;Ext.window.Window&#39;,&#39;Ext.app.ViewModel&#39;,&#39;BasiGX.view.form.CoordinateTransform&#39;,&#39;BasiGX.util.Animate&#39;],viewModel:{data:{tooltip:&#39;Koordinaten transformieren und anzeigen&#39;,text:&#39;Koordinaten transformieren&#39;,windowTitle:&#39;Koordinaten transformieren&#39;,documentation:&#39;&lt;h2&gt;Koordinaten transformieren&lt;/h2&gt;\u2022 Ein Klick &#39;+&#39;auf den Button öffnet ein Fenster, in dem Koordinaten &#39;+&#39;transformiert werden können.&lt;br&gt;\u2022 Geben Sie Koordinaten in &#39;+&#39;die Eingabefelder ein, um sich anschließend den Punkt in &#39;+&#39;der Karte anzeigen zu lassen.&lt;br&gt;\u2022 Klicken Sie alternativ &#39;+&#39;in die Karte, um sich die jeweiligen Koordinaten anzeigen &#39;+&#39;zu lassen&#39;}},bind:{text:&#39;{text}&#39;},coordinateSystemsToUse:[],transformCenterOnRender:true,config:{handler:function(){__cov_FmnuuHpuqeKM8LTua5joMg.f[&#39;1&#39;]++;__cov_FmnuuHpuqeKM8LTua5joMg.s[&#39;2&#39;]++;var win=Ext.ComponentQuery.query(&#39;[name=coordinate-transform-window]&#39;)[0];__cov_FmnuuHpuqeKM8LTua5joMg.s[&#39;3&#39;]++;if(!win){__cov_FmnuuHpuqeKM8LTua5joMg.b[&#39;1&#39;][0]++;__cov_FmnuuHpuqeKM8LTua5joMg.s[&#39;4&#39;]++;Ext.create(&#39;Ext.window.Window&#39;,{name:&#39;coordinate-transform-window&#39;,title:this.getViewModel().get(&#39;windowTitle&#39;),width:500,height:400,layout:&#39;fit&#39;,constrain:true,items:[{xtype:&#39;basigx-form-coordinatetransform&#39;,coordinateSystemsToUse:this.coordinateSystemsToUse,transformCenterOnRender:this.transformCenterOnRender}]}).showAt(0);}else{__cov_FmnuuHpuqeKM8LTua5joMg.b[&#39;1&#39;][1]++;__cov_FmnuuHpuqeKM8LTua5joMg.s[&#39;5&#39;]++;BasiGX.util.Animate.shake(win);}}}});
 </pre>
 </body>
 </html>

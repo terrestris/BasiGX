@@ -1,83 +1,9 @@
-/* Copyright (c) 2017-present terrestris GmbH & Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-/**
- * Digitize Line Button
- *
- * @class BasiGX.view.button.DigitizeLine
- */
-Ext.define('BasiGX.view.button.DigitizeLine', {
-    extend: 'BasiGX.view.button.Base',
-    xtype: 'basigx-button-digitize-line',
 
-    requires: [
-    ],
-
-    /**
-     *
-     */
-    viewModel: {
-        data: {
-            tooltip: 'Digitize a new line',
-            digitizeLineText: 'Digitize line'
-        }
-    },
-
-    /**
-     *
-     */
-    bind: {
-        text: '{digitizeLineText}'
-    },
-
-    config: {
-        layer: null,
-        map: null,
-        collection: null,
-        multi: false
-    },
-
-    name: 'drawLineBtn',
-    toggleGroup: 'draw',
-
-    listeners: {
-        toggle: function(btn, pressed) {
-            if (!this.drawLineInteraction) {
-                var cfg = {
-                    type: this.getMulti() ? 'MultiLineString' : 'LineString'
-                };
-                if (this.getLayer()) {
-                    cfg.source = this.getLayer().getSource();
-                } else {
-                    cfg.features = this.getCollection();
-                }
-                this.drawLineInteraction = new ol.interaction.Draw(cfg);
-                this.getMap().addInteraction(this.drawLineInteraction);
-            }
-            if (pressed) {
-                this.drawLineInteraction.setActive(true);
-            } else {
-                this.drawLineInteraction.setActive(false);
-            }
-        },
-        beforedestroy: function() {
-            if (this.drawLineInteraction) {
-                this.map.removeInteraction(this.drawLineInteraction);
-            }
-        }
-    }
-
-
-});
+var __cov_i3MlwT3BeCkGfPaEyPMHKw = (Function('return this'))();
+if (!__cov_i3MlwT3BeCkGfPaEyPMHKw.__coverage__) { __cov_i3MlwT3BeCkGfPaEyPMHKw.__coverage__ = {}; }
+__cov_i3MlwT3BeCkGfPaEyPMHKw = __cov_i3MlwT3BeCkGfPaEyPMHKw.__coverage__;
+if (!(__cov_i3MlwT3BeCkGfPaEyPMHKw['/home/travis/build/terrestris/BasiGX/src/view/button/DigitizeLine.js'])) {
+   __cov_i3MlwT3BeCkGfPaEyPMHKw['/home/travis/build/terrestris/BasiGX/src/view/button/DigitizeLine.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/DigitizeLine.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0]},"f":{"1":0,"2":0},"fnMap":{"1":{"name":"(anonymous_1)","line":56,"loc":{"start":{"line":56,"column":16},"end":{"line":56,"column":39}}},"2":{"name":"(anonymous_2)","line":75,"loc":{"start":{"line":75,"column":23},"end":{"line":75,"column":34}}}},"statementMap":{"1":{"start":{"line":21,"column":0},"end":{"line":83,"column":3}},"2":{"start":{"line":57,"column":12},"end":{"line":68,"column":13}},"3":{"start":{"line":58,"column":16},"end":{"line":60,"column":18}},"4":{"start":{"line":61,"column":16},"end":{"line":65,"column":17}},"5":{"start":{"line":62,"column":20},"end":{"line":62,"column":61}},"6":{"start":{"line":64,"column":20},"end":{"line":64,"column":56}},"7":{"start":{"line":66,"column":16},"end":{"line":66,"column":72}},"8":{"start":{"line":67,"column":16},"end":{"line":67,"column":71}},"9":{"start":{"line":69,"column":12},"end":{"line":73,"column":13}},"10":{"start":{"line":70,"column":16},"end":{"line":70,"column":57}},"11":{"start":{"line":72,"column":16},"end":{"line":72,"column":58}},"12":{"start":{"line":76,"column":12},"end":{"line":78,"column":13}},"13":{"start":{"line":77,"column":16},"end":{"line":77,"column":69}}},"branchMap":{"1":{"line":57,"type":"if","locations":[{"start":{"line":57,"column":12},"end":{"line":57,"column":12}},{"start":{"line":57,"column":12},"end":{"line":57,"column":12}}]},"2":{"line":59,"type":"cond-expr","locations":[{"start":{"line":59,"column":44},"end":{"line":59,"column":61}},{"start":{"line":59,"column":64},"end":{"line":59,"column":76}}]},"3":{"line":61,"type":"if","locations":[{"start":{"line":61,"column":16},"end":{"line":61,"column":16}},{"start":{"line":61,"column":16},"end":{"line":61,"column":16}}]},"4":{"line":69,"type":"if","locations":[{"start":{"line":69,"column":12},"end":{"line":69,"column":12}},{"start":{"line":69,"column":12},"end":{"line":69,"column":12}}]},"5":{"line":76,"type":"if","locations":[{"start":{"line":76,"column":12},"end":{"line":76,"column":12}},{"start":{"line":76,"column":12},"end":{"line":76,"column":12}}]}}};
+}
+__cov_i3MlwT3BeCkGfPaEyPMHKw = __cov_i3MlwT3BeCkGfPaEyPMHKw['/home/travis/build/terrestris/BasiGX/src/view/button/DigitizeLine.js'];
+__cov_i3MlwT3BeCkGfPaEyPMHKw.s['1']++;Ext.define('BasiGX.view.button.DigitizeLine',{extend:'BasiGX.view.button.Base',xtype:'basigx-button-digitize-line',requires:[],viewModel:{data:{tooltip:'Digitize a new line',digitizeLineText:'Digitize line'}},bind:{text:'{digitizeLineText}'},config:{layer:null,map:null,collection:null,multi:false},name:'drawLineBtn',toggleGroup:'draw',listeners:{toggle:function(btn,pressed){__cov_i3MlwT3BeCkGfPaEyPMHKw.f['1']++;__cov_i3MlwT3BeCkGfPaEyPMHKw.s['2']++;if(!this.drawLineInteraction){__cov_i3MlwT3BeCkGfPaEyPMHKw.b['1'][0]++;__cov_i3MlwT3BeCkGfPaEyPMHKw.s['3']++;var cfg={type:this.getMulti()?(__cov_i3MlwT3BeCkGfPaEyPMHKw.b['2'][0]++,'MultiLineString'):(__cov_i3MlwT3BeCkGfPaEyPMHKw.b['2'][1]++,'LineString')};__cov_i3MlwT3BeCkGfPaEyPMHKw.s['4']++;if(this.getLayer()){__cov_i3MlwT3BeCkGfPaEyPMHKw.b['3'][0]++;__cov_i3MlwT3BeCkGfPaEyPMHKw.s['5']++;cfg.source=this.getLayer().getSource();}else{__cov_i3MlwT3BeCkGfPaEyPMHKw.b['3'][1]++;__cov_i3MlwT3BeCkGfPaEyPMHKw.s['6']++;cfg.features=this.getCollection();}__cov_i3MlwT3BeCkGfPaEyPMHKw.s['7']++;this.drawLineInteraction=new ol.interaction.Draw(cfg);__cov_i3MlwT3BeCkGfPaEyPMHKw.s['8']++;this.getMap().addInteraction(this.drawLineInteraction);}else{__cov_i3MlwT3BeCkGfPaEyPMHKw.b['1'][1]++;}__cov_i3MlwT3BeCkGfPaEyPMHKw.s['9']++;if(pressed){__cov_i3MlwT3BeCkGfPaEyPMHKw.b['4'][0]++;__cov_i3MlwT3BeCkGfPaEyPMHKw.s['10']++;this.drawLineInteraction.setActive(true);}else{__cov_i3MlwT3BeCkGfPaEyPMHKw.b['4'][1]++;__cov_i3MlwT3BeCkGfPaEyPMHKw.s['11']++;this.drawLineInteraction.setActive(false);}},beforedestroy:function(){__cov_i3MlwT3BeCkGfPaEyPMHKw.f['2']++;__cov_i3MlwT3BeCkGfPaEyPMHKw.s['12']++;if(this.drawLineInteraction){__cov_i3MlwT3BeCkGfPaEyPMHKw.b['5'][0]++;__cov_i3MlwT3BeCkGfPaEyPMHKw.s['13']++;this.map.removeInteraction(this.drawLineInteraction);}else{__cov_i3MlwT3BeCkGfPaEyPMHKw.b['5'][1]++;}}}});

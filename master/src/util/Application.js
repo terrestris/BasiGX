@@ -1,81 +1,9 @@
-/* Copyright (c) 2015-present terrestris GmbH & Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-/**
- * Application Util
- *
- * Some methods to work with application
- *
- * @class BasiGX.util.Application
- */
-Ext.define('BasiGX.util.Application', {
 
-    requires: [
-        'BasiGX.util.Layer',
-        'BasiGX.util.Map'
-    ],
-
-    statics: {
-        /**
-         * Returns the application context object for the BasiGX map component
-         * defined by the passed `mapComponentXType`.
-         *
-         * @param {String} mapComponentXType The `xtype` of the component to
-         *     check. Will often be different than the `xtype` of the parent
-         *     class `BasiGX.component.Map` (e.g. when sub classing for
-         *     projects).
-         * @return {Object} The application context or `null`.
-         */
-        getAppContext: function(mapComponentXType) {
-            var mapComp = BasiGX.util.Map.getMapComponent(mapComponentXType);
-
-            if (mapComp && mapComp.appContext) {
-                return mapComp.appContext.data.merge;
-            } else {
-                return null;
-            }
-        },
-
-        /**
-         * Gets a route for the current map of the component with the passed
-         * `mapComponentXType`.
-         *
-         * @param {String} mapComponentXType The `xtype` of the component to
-         *     check. Will often be different than the `xtype` of the parent
-         *     class `BasiGX.component.Map` (e.g. when sub classing for
-         *     projects).
-         * @return {String} A route for the for the current map of the
-         *     component with the passed `mapComponentXType`
-         */
-        getRoute: function(mapComponentXType) {
-            var mapComp = BasiGX.util.Map.getMapComponent(mapComponentXType);
-            var map = mapComp.getMap();
-            var zoom = map.getView().getZoom();
-            var center = map.getView().getCenter().toString();
-            var visibleLayers = BasiGX.util.Layer.getVisibleLayers(map);
-            var visibleLayerRoutingIds = [];
-
-            Ext.each(visibleLayers, function(layer) {
-                visibleLayerRoutingIds.push(layer.get('routingId'));
-            });
-
-            var hash = 'center/' + center +
-                       '|zoom/' + zoom +
-                       '|layers/' + visibleLayerRoutingIds.toString();
-
-            return hash;
-        }
-    }
-});
+var __cov_$OfAed7J38XESAEYWcewyw = (Function('return this'))();
+if (!__cov_$OfAed7J38XESAEYWcewyw.__coverage__) { __cov_$OfAed7J38XESAEYWcewyw.__coverage__ = {}; }
+__cov_$OfAed7J38XESAEYWcewyw = __cov_$OfAed7J38XESAEYWcewyw.__coverage__;
+if (!(__cov_$OfAed7J38XESAEYWcewyw['/home/travis/build/terrestris/BasiGX/src/util/Application.js'])) {
+   __cov_$OfAed7J38XESAEYWcewyw['/home/travis/build/terrestris/BasiGX/src/util/Application.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Application.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0},"b":{"1":[0,0],"2":[0,0]},"f":{"1":0,"2":0,"3":0},"fnMap":{"1":{"name":"(anonymous_1)","line":41,"loc":{"start":{"line":41,"column":23},"end":{"line":41,"column":51}}},"2":{"name":"(anonymous_2)","line":62,"loc":{"start":{"line":62,"column":18},"end":{"line":62,"column":46}}},"3":{"name":"(anonymous_3)","line":70,"loc":{"start":{"line":70,"column":36},"end":{"line":70,"column":52}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":81,"column":3}},"2":{"start":{"line":42,"column":12},"end":{"line":42,"column":77}},"3":{"start":{"line":44,"column":12},"end":{"line":48,"column":13}},"4":{"start":{"line":45,"column":16},"end":{"line":45,"column":53}},"5":{"start":{"line":47,"column":16},"end":{"line":47,"column":28}},"6":{"start":{"line":63,"column":12},"end":{"line":63,"column":77}},"7":{"start":{"line":64,"column":12},"end":{"line":64,"column":39}},"8":{"start":{"line":65,"column":12},"end":{"line":65,"column":47}},"9":{"start":{"line":66,"column":12},"end":{"line":66,"column":62}},"10":{"start":{"line":67,"column":12},"end":{"line":67,"column":72}},"11":{"start":{"line":68,"column":12},"end":{"line":68,"column":44}},"12":{"start":{"line":70,"column":12},"end":{"line":72,"column":15}},"13":{"start":{"line":71,"column":16},"end":{"line":71,"column":68}},"14":{"start":{"line":74,"column":12},"end":{"line":76,"column":70}},"15":{"start":{"line":78,"column":12},"end":{"line":78,"column":24}}},"branchMap":{"1":{"line":44,"type":"if","locations":[{"start":{"line":44,"column":12},"end":{"line":44,"column":12}},{"start":{"line":44,"column":12},"end":{"line":44,"column":12}}]},"2":{"line":44,"type":"binary-expr","locations":[{"start":{"line":44,"column":16},"end":{"line":44,"column":23}},{"start":{"line":44,"column":27},"end":{"line":44,"column":45}}]}}};
+}
+__cov_$OfAed7J38XESAEYWcewyw = __cov_$OfAed7J38XESAEYWcewyw['/home/travis/build/terrestris/BasiGX/src/util/Application.js'];
+__cov_$OfAed7J38XESAEYWcewyw.s['1']++;Ext.define('BasiGX.util.Application',{requires:['BasiGX.util.Layer','BasiGX.util.Map'],statics:{getAppContext:function(mapComponentXType){__cov_$OfAed7J38XESAEYWcewyw.f['1']++;__cov_$OfAed7J38XESAEYWcewyw.s['2']++;var mapComp=BasiGX.util.Map.getMapComponent(mapComponentXType);__cov_$OfAed7J38XESAEYWcewyw.s['3']++;if((__cov_$OfAed7J38XESAEYWcewyw.b['2'][0]++,mapComp)&&(__cov_$OfAed7J38XESAEYWcewyw.b['2'][1]++,mapComp.appContext)){__cov_$OfAed7J38XESAEYWcewyw.b['1'][0]++;__cov_$OfAed7J38XESAEYWcewyw.s['4']++;return mapComp.appContext.data.merge;}else{__cov_$OfAed7J38XESAEYWcewyw.b['1'][1]++;__cov_$OfAed7J38XESAEYWcewyw.s['5']++;return null;}},getRoute:function(mapComponentXType){__cov_$OfAed7J38XESAEYWcewyw.f['2']++;__cov_$OfAed7J38XESAEYWcewyw.s['6']++;var mapComp=BasiGX.util.Map.getMapComponent(mapComponentXType);__cov_$OfAed7J38XESAEYWcewyw.s['7']++;var map=mapComp.getMap();__cov_$OfAed7J38XESAEYWcewyw.s['8']++;var zoom=map.getView().getZoom();__cov_$OfAed7J38XESAEYWcewyw.s['9']++;var center=map.getView().getCenter().toString();__cov_$OfAed7J38XESAEYWcewyw.s['10']++;var visibleLayers=BasiGX.util.Layer.getVisibleLayers(map);__cov_$OfAed7J38XESAEYWcewyw.s['11']++;var visibleLayerRoutingIds=[];__cov_$OfAed7J38XESAEYWcewyw.s['12']++;Ext.each(visibleLayers,function(layer){__cov_$OfAed7J38XESAEYWcewyw.f['3']++;__cov_$OfAed7J38XESAEYWcewyw.s['13']++;visibleLayerRoutingIds.push(layer.get('routingId'));});__cov_$OfAed7J38XESAEYWcewyw.s['14']++;var hash='center/'+center+'|zoom/'+zoom+'|layers/'+visibleLayerRoutingIds.toString();__cov_$OfAed7J38XESAEYWcewyw.s['15']++;return hash;}}});

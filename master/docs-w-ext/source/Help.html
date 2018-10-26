@@ -15,100 +15,15 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
- */
-<span id='BasiGX-view-button-Help'>/**
-</span> * Help Button
- *
- * Button used to instantiate BasiGX.ux.ContextSensitiveHelp
- *
- * @class BasiGX.view.button.Help
- */
-Ext.define(&#39;BasiGX.view.button.Help&#39;, {
-    extend: &#39;BasiGX.view.button.Base&#39;,
-    xtype: &#39;basigx-button-help&#39;,
-
-    requires: [
-        &#39;BasiGX.ux.ContextSensitiveHelp&#39;,
-        &#39;Ext.app.ViewModel&#39;
-    ],
-
-<span id='BasiGX-view-button-Help-property-getHelpFromComponent'>    /**
-</span>     * Flag to enable the usage of the key `documentation`, which holds
-     * an explanation of the component in HTML notation.
-     * Useful, if you want to render a component specific help
-     * instead of opening the regular HTML anchor link
-     */
-    getHelpFromComponent: false,
-
-<span id='BasiGX-view-button-Help-property-helpUrl'>    /**
-</span>     * The URL to use for the help
-     */
-    helpUrl: &#39;../help/index.html&#39;,
-
-<span id='BasiGX-view-button-Help-property-viewModel'>    /**
-</span>     *
-     */
-    viewModel: {
-        data: {
-            tooltip: &#39;Hilfe&#39;,
-            text: null,
-            documentation: &#39;&lt;h2&gt;Hilfe&lt;/h2&gt;• Ein Klick auf den Button &#39; +
-                &#39;aktiviert die kontextsensitive Hilfe.&lt;br&gt;• Sobald Sie &#39; +
-                &#39;anschließend mit der Maus auf eine Komponente der Anwendung &#39; +
-                &#39;klicken, erhalten Sie einen Hilfetext, der deren Benutzung &#39; +
-                &#39;erläutert&#39;
-        }
-    },
-
-<span id='BasiGX-view-button-Help-property-bind'>    /**
-</span>     *
-     */
-    bind: {
-        text: &#39;{text}&#39;
-    },
-
-<span id='BasiGX-view-button-Help-property-glyph'>    /**
-</span>     * The icons the button should use.
-     * Classic Toolkit uses glyphs, modern toolkit uses html
-     */
-    glyph: &#39;xf059@FontAwesome&#39;,
-<span id='BasiGX-view-button-Help-cfg-html'>    html: &#39;&lt;i class=&quot;fa fa-question-circle fa-2x&quot;&gt;&lt;/i&gt;&#39;,
-</span>
-<span id='BasiGX-view-button-Help-property-config'>    /**
-</span>     *
-     */
-    config: {
-<span id='BasiGX-view-button-Help-cfg-additonalHelpKeys'>        additonalHelpKeys: null,
-</span><span id='BasiGX-view-button-Help-cfg-handler'>        handler: function(button) {
-</span>            var help = Ext.create(&#39;BasiGX.ux.ContextSensitiveHelp&#39;, {
-                getHelpFromComponent: this.getHelpFromComponent,
-                helpUrl: this.helpUrl
-            });
-            help.setContextHelp(button.getAdditonalHelpKeys());
-        }
-    },
-
-<span id='BasiGX-view-button-Help-method-setHelpUrl'>    /**
-</span>     * @param {String} url The URL to set
-     */
-    setHelpUrl: function(url) {
-        this.helpUrl = url;
-    }
-});
+  <pre class="prettyprint lang-js">
+var __cov_LGAWv6KD9etUCRKq3a8Bsg = (Function(&#39;return this&#39;))();
+if (!__cov_LGAWv6KD9etUCRKq3a8Bsg.__coverage__) { __cov_LGAWv6KD9etUCRKq3a8Bsg.__coverage__ = {}; }
+__cov_LGAWv6KD9etUCRKq3a8Bsg = __cov_LGAWv6KD9etUCRKq3a8Bsg.__coverage__;
+if (!(__cov_LGAWv6KD9etUCRKq3a8Bsg[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/Help.js&#39;])) {
+   __cov_LGAWv6KD9etUCRKq3a8Bsg[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/Help.js&#39;] = {&quot;path&quot;:&quot;/home/travis/build/terrestris/BasiGX/src/view/button/Help.js&quot;,&quot;s&quot;:{&quot;1&quot;:0,&quot;2&quot;:0,&quot;3&quot;:0,&quot;4&quot;:0},&quot;b&quot;:{},&quot;f&quot;:{&quot;1&quot;:0,&quot;2&quot;:0},&quot;fnMap&quot;:{&quot;1&quot;:{&quot;name&quot;:&quot;(anonymous_1)&quot;,&quot;line&quot;:79,&quot;loc&quot;:{&quot;start&quot;:{&quot;line&quot;:79,&quot;column&quot;:17},&quot;end&quot;:{&quot;line&quot;:79,&quot;column&quot;:34}}},&quot;2&quot;:{&quot;name&quot;:&quot;(anonymous_2)&quot;,&quot;line&quot;:91,&quot;loc&quot;:{&quot;start&quot;:{&quot;line&quot;:91,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:91,&quot;column&quot;:30}}}},&quot;statementMap&quot;:{&quot;1&quot;:{&quot;start&quot;:{&quot;line&quot;:23,&quot;column&quot;:0},&quot;end&quot;:{&quot;line&quot;:94,&quot;column&quot;:3}},&quot;2&quot;:{&quot;start&quot;:{&quot;line&quot;:80,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:83,&quot;column&quot;:15}},&quot;3&quot;:{&quot;start&quot;:{&quot;line&quot;:84,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:84,&quot;column&quot;:63}},&quot;4&quot;:{&quot;start&quot;:{&quot;line&quot;:92,&quot;column&quot;:8},&quot;end&quot;:{&quot;line&quot;:92,&quot;column&quot;:27}}},&quot;branchMap&quot;:{}};
+}
+__cov_LGAWv6KD9etUCRKq3a8Bsg = __cov_LGAWv6KD9etUCRKq3a8Bsg[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/Help.js&#39;];
+__cov_LGAWv6KD9etUCRKq3a8Bsg.s[&#39;1&#39;]++;Ext.define(&#39;BasiGX.view.button.Help&#39;,{extend:&#39;BasiGX.view.button.Base&#39;,xtype:&#39;basigx-button-help&#39;,requires:[&#39;BasiGX.ux.ContextSensitiveHelp&#39;,&#39;Ext.app.ViewModel&#39;],getHelpFromComponent:false,helpUrl:&#39;../help/index.html&#39;,viewModel:{data:{tooltip:&#39;Hilfe&#39;,text:null,documentation:&#39;&lt;h2&gt;Hilfe&lt;/h2&gt;\u2022 Ein Klick auf den Button &#39;+&#39;aktiviert die kontextsensitive Hilfe.&lt;br&gt;\u2022 Sobald Sie &#39;+&#39;anschließend mit der Maus auf eine Komponente der Anwendung &#39;+&#39;klicken, erhalten Sie einen Hilfetext, der deren Benutzung &#39;+&#39;erläutert&#39;}},bind:{text:&#39;{text}&#39;},glyph:&#39;xf059@FontAwesome&#39;,html:&#39;&lt;i class=&quot;fa fa-question-circle fa-2x&quot;&gt;&lt;/i&gt;&#39;,config:{additonalHelpKeys:null,handler:function(button){__cov_LGAWv6KD9etUCRKq3a8Bsg.f[&#39;1&#39;]++;__cov_LGAWv6KD9etUCRKq3a8Bsg.s[&#39;2&#39;]++;var help=Ext.create(&#39;BasiGX.ux.ContextSensitiveHelp&#39;,{getHelpFromComponent:this.getHelpFromComponent,helpUrl:this.helpUrl});__cov_LGAWv6KD9etUCRKq3a8Bsg.s[&#39;3&#39;]++;help.setContextHelp(button.getAdditonalHelpKeys());}},setHelpUrl:function(url){__cov_LGAWv6KD9etUCRKq3a8Bsg.f[&#39;2&#39;]++;__cov_LGAWv6KD9etUCRKq3a8Bsg.s[&#39;4&#39;]++;this.helpUrl=url;}});
 </pre>
 </body>
 </html>

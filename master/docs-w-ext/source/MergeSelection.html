@@ -15,89 +15,15 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2017-present terrestris GmbH &amp; Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
- */
-<span id='BasiGX-view-button-MergeSelection'>/**
-</span> * Merge selected features button
- *
- * Merge selected features into the currently selected layer.
- *
- * @class BasiGX.view.button.MergeSelection
- */
-Ext.define(&#39;BasiGX.view.button.MergeSelection&#39;, {
-    extend: &#39;Ext.button.Button&#39;,
-    xtype: &#39;basigx-button-mergeselection&#39;,
-
-    requires: [
-        &#39;Ext.window.Window&#39;,
-        &#39;Ext.app.ViewModel&#39;,
-        &#39;BasiGX.view.form.CoordinateTransform&#39;,
-        &#39;BasiGX.util.Animate&#39;,
-        &#39;BasiGX.view.window.MergeWindow&#39;
-    ],
-
-<span id='BasiGX-view-button-MergeSelection-property-viewModel'>    /**
-</span>     *
-     */
-    viewModel: {
-        data: {
-            tooltip: &#39;Selektierte Features in diesen Layer übernehmen&#39;,
-            text: &#39;Features übernehmen&#39;
-        }
-    },
-
-<span id='BasiGX-view-button-MergeSelection-property-bind'>    /**
-</span>     *
-     */
-    bind: {
-        text: &#39;{text}&#39;,
-        tooltip: &#39;{tooltip}&#39;
-    },
-
-<span id='BasiGX-view-button-MergeSelection-property-config'>    /**
-</span>     *
-     */
-    config: {
-<span id='BasiGX-view-button-MergeSelection-cfg-handler'>        handler: function() {
-</span>            var grid;
-            var parent = this.up(&#39;window&#39;);
-            // support embedding in window or panel
-            // This assumes the button is embedded in a buttongroup or similar
-            // panel, hence walking up two panels.
-            if (!parent &amp;&amp; this.config.featureGridSelectorFn) {
-                grid = this.config.featureGridSelectorFn.call(this);
-            } else {
-                grid = parent.down(&#39;basigx-grid-featuregrid&#39;);
-            }
-
-            var targetLayer = grid.getLayer();
-            Ext.create({
-                xtype: &#39;basigx-window-merge&#39;,
-                sourceLayer: this.getSourceLayer(),
-                targetLayer: targetLayer
-            });
-        },
-<span id='BasiGX-view-button-MergeSelection-property-sourceLayer'>        /**
-</span>         * The source layer name.
-         * @type {ol.layer.Vector}
-         */
-        sourceLayer: null,
-<span id='BasiGX-view-button-MergeSelection-cfg-featureGridSelectorFn'>        featureGridSelectorFn: null
-</span>    }
-});
+  <pre class="prettyprint lang-js">
+var __cov_fhWZGXt0Lb$1AzzRAoNcVA = (Function(&#39;return this&#39;))();
+if (!__cov_fhWZGXt0Lb$1AzzRAoNcVA.__coverage__) { __cov_fhWZGXt0Lb$1AzzRAoNcVA.__coverage__ = {}; }
+__cov_fhWZGXt0Lb$1AzzRAoNcVA = __cov_fhWZGXt0Lb$1AzzRAoNcVA.__coverage__;
+if (!(__cov_fhWZGXt0Lb$1AzzRAoNcVA[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/MergeSelection.js&#39;])) {
+   __cov_fhWZGXt0Lb$1AzzRAoNcVA[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/MergeSelection.js&#39;] = {&quot;path&quot;:&quot;/home/travis/build/terrestris/BasiGX/src/view/button/MergeSelection.js&quot;,&quot;s&quot;:{&quot;1&quot;:0,&quot;2&quot;:0,&quot;3&quot;:0,&quot;4&quot;:0,&quot;5&quot;:0,&quot;6&quot;:0,&quot;7&quot;:0,&quot;8&quot;:0},&quot;b&quot;:{&quot;1&quot;:[0,0],&quot;2&quot;:[0,0]},&quot;f&quot;:{&quot;1&quot;:0},&quot;fnMap&quot;:{&quot;1&quot;:{&quot;name&quot;:&quot;(anonymous_1)&quot;,&quot;line&quot;:57,&quot;loc&quot;:{&quot;start&quot;:{&quot;line&quot;:57,&quot;column&quot;:17},&quot;end&quot;:{&quot;line&quot;:57,&quot;column&quot;:28}}}},&quot;statementMap&quot;:{&quot;1&quot;:{&quot;start&quot;:{&quot;line&quot;:23,&quot;column&quot;:0},&quot;end&quot;:{&quot;line&quot;:83,&quot;column&quot;:3}},&quot;2&quot;:{&quot;start&quot;:{&quot;line&quot;:58,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:58,&quot;column&quot;:21}},&quot;3&quot;:{&quot;start&quot;:{&quot;line&quot;:59,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:59,&quot;column&quot;:43}},&quot;4&quot;:{&quot;start&quot;:{&quot;line&quot;:63,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:67,&quot;column&quot;:13}},&quot;5&quot;:{&quot;start&quot;:{&quot;line&quot;:64,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:64,&quot;column&quot;:68}},&quot;6&quot;:{&quot;start&quot;:{&quot;line&quot;:66,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:66,&quot;column&quot;:62}},&quot;7&quot;:{&quot;start&quot;:{&quot;line&quot;:69,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:69,&quot;column&quot;:46}},&quot;8&quot;:{&quot;start&quot;:{&quot;line&quot;:70,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:74,&quot;column&quot;:15}}},&quot;branchMap&quot;:{&quot;1&quot;:{&quot;line&quot;:63,&quot;type&quot;:&quot;if&quot;,&quot;locations&quot;:[{&quot;start&quot;:{&quot;line&quot;:63,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:63,&quot;column&quot;:12}},{&quot;start&quot;:{&quot;line&quot;:63,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:63,&quot;column&quot;:12}}]},&quot;2&quot;:{&quot;line&quot;:63,&quot;type&quot;:&quot;binary-expr&quot;,&quot;locations&quot;:[{&quot;start&quot;:{&quot;line&quot;:63,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:63,&quot;column&quot;:23}},{&quot;start&quot;:{&quot;line&quot;:63,&quot;column&quot;:27},&quot;end&quot;:{&quot;line&quot;:63,&quot;column&quot;:60}}]}}};
+}
+__cov_fhWZGXt0Lb$1AzzRAoNcVA = __cov_fhWZGXt0Lb$1AzzRAoNcVA[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/MergeSelection.js&#39;];
+__cov_fhWZGXt0Lb$1AzzRAoNcVA.s[&#39;1&#39;]++;Ext.define(&#39;BasiGX.view.button.MergeSelection&#39;,{extend:&#39;Ext.button.Button&#39;,xtype:&#39;basigx-button-mergeselection&#39;,requires:[&#39;Ext.window.Window&#39;,&#39;Ext.app.ViewModel&#39;,&#39;BasiGX.view.form.CoordinateTransform&#39;,&#39;BasiGX.util.Animate&#39;,&#39;BasiGX.view.window.MergeWindow&#39;],viewModel:{data:{tooltip:&#39;Selektierte Features in diesen Layer übernehmen&#39;,text:&#39;Features übernehmen&#39;}},bind:{text:&#39;{text}&#39;,tooltip:&#39;{tooltip}&#39;},config:{handler:function(){__cov_fhWZGXt0Lb$1AzzRAoNcVA.f[&#39;1&#39;]++;__cov_fhWZGXt0Lb$1AzzRAoNcVA.s[&#39;2&#39;]++;var grid;__cov_fhWZGXt0Lb$1AzzRAoNcVA.s[&#39;3&#39;]++;var parent=this.up(&#39;window&#39;);__cov_fhWZGXt0Lb$1AzzRAoNcVA.s[&#39;4&#39;]++;if((__cov_fhWZGXt0Lb$1AzzRAoNcVA.b[&#39;2&#39;][0]++,!parent)&amp;&amp;(__cov_fhWZGXt0Lb$1AzzRAoNcVA.b[&#39;2&#39;][1]++,this.config.featureGridSelectorFn)){__cov_fhWZGXt0Lb$1AzzRAoNcVA.b[&#39;1&#39;][0]++;__cov_fhWZGXt0Lb$1AzzRAoNcVA.s[&#39;5&#39;]++;grid=this.config.featureGridSelectorFn.call(this);}else{__cov_fhWZGXt0Lb$1AzzRAoNcVA.b[&#39;1&#39;][1]++;__cov_fhWZGXt0Lb$1AzzRAoNcVA.s[&#39;6&#39;]++;grid=parent.down(&#39;basigx-grid-featuregrid&#39;);}__cov_fhWZGXt0Lb$1AzzRAoNcVA.s[&#39;7&#39;]++;var targetLayer=grid.getLayer();__cov_fhWZGXt0Lb$1AzzRAoNcVA.s[&#39;8&#39;]++;Ext.create({xtype:&#39;basigx-window-merge&#39;,sourceLayer:this.getSourceLayer(),targetLayer:targetLayer});},sourceLayer:null,featureGridSelectorFn:null}});
 </pre>
 </body>
 </html>

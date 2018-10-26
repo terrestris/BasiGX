@@ -15,101 +15,15 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2016-present terrestris GmbH &amp; Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
- */
-<span id='BasiGX-store-GazetteerSearch'>/**
-</span> * Data Store for gazetteer search
- *
- * @class BasiGX.store.GazetteerSearch
- */
-Ext.define(&#39;BasiGX.store.GazetteerSearch&#39;, {
-    extend: &#39;Ext.data.Store&#39;,
-
-    alias: &#39;store.basigx-gazetteersearch&#39;,
-
-    requires: [
-        &#39;BasiGX.util.Layer&#39;
-    ],
-
-<span id='BasiGX-store-GazetteerSearch-property-_lastRequest'>    /**
-</span>     * Stores the last request to be able to abort it manually.
-     * @private
-     */
-    _lastRequest: null,
-
-<span id='BasiGX-store-GazetteerSearch-property-proxy'>    proxy: {
-</span>        url: &#39;https://nominatim.openstreetmap.org&#39;,
-        method: &#39;GET&#39;,
-        type: &#39;ajax&#39;,
-        extraParams: {
-            q: null,
-            format: &#39;json&#39;,
-            limit: 100,
-            viewboxlbrt: &#39;-180,90,180,-90&#39;,
-            bounded: 1,
-            polygon_text: 1
-        },
-        limitParam: &#39;maxFeatures&#39;,
-        reader: {
-            type: &#39;json&#39;,
-            rootProperty: &#39;features&#39;
-        }
-    },
-
-<span id='BasiGX-store-GazetteerSearch-property-fields'>    fields: [{
-</span>        name: &#39;place_id&#39;,
-        type: &#39;string&#39;
-    }, {
-        name: &#39;licence&#39;,
-        type: &#39;string&#39;
-    }, {
-        name: &#39;osm_type&#39;,
-        type: &#39;string&#39;
-    }, {
-        name: &#39;osm_id&#39;,
-        type: &#39;number&#39;
-    }, {
-        name: &#39;boundingbox&#39;,
-        type: &#39;auto&#39;
-    }, {
-        name: &#39;lat&#39;,
-        type: &#39;number&#39;
-    }, {
-        name: &#39;lon&#39;,
-        type: &#39;number&#39;
-    }, {
-        name: &#39;geotext&#39;,
-        type: &#39;auto&#39;
-    }, {
-        name: &#39;icon&#39;,
-        type: &#39;string&#39;
-    }, {
-        name: &#39;class&#39;,
-        type: &#39;string&#39;
-    }, {
-        name: &#39;type&#39;,
-        type: &#39;string&#39;
-    }, {
-        name: &#39;importance&#39;,
-        type: &#39;number&#39;
-    }, {
-        name: &#39;icon&#39;,
-        type: &#39;string&#39;
-    }]
-});
+  <pre class="prettyprint lang-js">
+var __cov_VMqmf_mHdNzYMqmOOCzvhQ = (Function(&#39;return this&#39;))();
+if (!__cov_VMqmf_mHdNzYMqmOOCzvhQ.__coverage__) { __cov_VMqmf_mHdNzYMqmOOCzvhQ.__coverage__ = {}; }
+__cov_VMqmf_mHdNzYMqmOOCzvhQ = __cov_VMqmf_mHdNzYMqmOOCzvhQ.__coverage__;
+if (!(__cov_VMqmf_mHdNzYMqmOOCzvhQ[&#39;/home/travis/build/terrestris/BasiGX/src/store/GazetteerSearch.js&#39;])) {
+   __cov_VMqmf_mHdNzYMqmOOCzvhQ[&#39;/home/travis/build/terrestris/BasiGX/src/store/GazetteerSearch.js&#39;] = {&quot;path&quot;:&quot;/home/travis/build/terrestris/BasiGX/src/store/GazetteerSearch.js&quot;,&quot;s&quot;:{&quot;1&quot;:0},&quot;b&quot;:{},&quot;f&quot;:{},&quot;fnMap&quot;:{},&quot;statementMap&quot;:{&quot;1&quot;:{&quot;start&quot;:{&quot;line&quot;:21,&quot;column&quot;:0},&quot;end&quot;:{&quot;line&quot;:95,&quot;column&quot;:3}}},&quot;branchMap&quot;:{}};
+}
+__cov_VMqmf_mHdNzYMqmOOCzvhQ = __cov_VMqmf_mHdNzYMqmOOCzvhQ[&#39;/home/travis/build/terrestris/BasiGX/src/store/GazetteerSearch.js&#39;];
+__cov_VMqmf_mHdNzYMqmOOCzvhQ.s[&#39;1&#39;]++;Ext.define(&#39;BasiGX.store.GazetteerSearch&#39;,{extend:&#39;Ext.data.Store&#39;,alias:&#39;store.basigx-gazetteersearch&#39;,requires:[&#39;BasiGX.util.Layer&#39;],_lastRequest:null,proxy:{url:&#39;https://nominatim.openstreetmap.org&#39;,method:&#39;GET&#39;,type:&#39;ajax&#39;,extraParams:{q:null,format:&#39;json&#39;,limit:100,viewboxlbrt:&#39;-180,90,180,-90&#39;,bounded:1,polygon_text:1},limitParam:&#39;maxFeatures&#39;,reader:{type:&#39;json&#39;,rootProperty:&#39;features&#39;}},fields:[{name:&#39;place_id&#39;,type:&#39;string&#39;},{name:&#39;licence&#39;,type:&#39;string&#39;},{name:&#39;osm_type&#39;,type:&#39;string&#39;},{name:&#39;osm_id&#39;,type:&#39;number&#39;},{name:&#39;boundingbox&#39;,type:&#39;auto&#39;},{name:&#39;lat&#39;,type:&#39;number&#39;},{name:&#39;lon&#39;,type:&#39;number&#39;},{name:&#39;geotext&#39;,type:&#39;auto&#39;},{name:&#39;icon&#39;,type:&#39;string&#39;},{name:&#39;class&#39;,type:&#39;string&#39;},{name:&#39;type&#39;,type:&#39;string&#39;},{name:&#39;importance&#39;,type:&#39;number&#39;},{name:&#39;icon&#39;,type:&#39;string&#39;}]});
 </pre>
 </body>
 </html>

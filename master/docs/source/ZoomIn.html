@@ -15,111 +15,15 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
- */
-<span id='BasiGX-view-button-ZoomIn'>/**
-</span> * ZoomIn Button
- *
- * Button used to zoom in
- *
- * @class BasiGX.view.button.ZoomIn
- */
-Ext.define(&#39;BasiGX.view.button.ZoomIn&#39;, {
-    extend: &#39;BasiGX.view.button.Base&#39;,
-    xtype: &#39;basigx-button-zoomin&#39;,
-    requires: [
-        &#39;Ext.app.ViewModel&#39;,
-        &#39;BasiGX.util.Map&#39;
-    ],
-
-<span id='BasiGX-view-button-ZoomIn-property-viewModel'>    /**
-</span>     *
-     */
-    viewModel: {
-        data: {
-            tooltip: &#39;Hineinzoomen&#39;,
-            text: null,
-            documentation: &#39;&lt;h2&gt;Hineinzoomen&lt;/h2&gt;• Ein Klick auf den Button &#39; +
-                &#39;vergrößert die Karte um eine Zoomstufe.&#39;
-        }
-    },
-
-<span id='BasiGX-view-button-ZoomIn-property-bind'>    bind: {
-</span>        text: &#39;{text}&#39;
-    },
-
-<span id='BasiGX-view-button-ZoomIn-property-olMap'>    /**
-</span>     * The OL3 map this button is bounded to
-     */
-    olMap: null,
-
-<span id='BasiGX-view-button-ZoomIn-property-glyph'>    /**
-</span>     * The icons the button should use.
-     * Classic Toolkit uses glyphs, modern toolkit uses html
-     */
-    glyph: &#39;xf00e@FontAwesome&#39;,
-<span id='BasiGX-view-button-ZoomIn-property-html'>    html: &#39;&lt;i class=&quot;fa fa-search-plus fa-2x&quot;&gt;&lt;/i&gt;&#39;,
-</span>
-<span id='BasiGX-view-button-ZoomIn-property-liveDemoConfig'>    /**
-</span>     * A config object to show this tool in action (live demo) when using the
-     * context sensitive help
-     */
-    liveDemoConfig: [
-        {
-            moveMouseTo: &#39;basigx-button-zoomin&#39;
-        },
-        {
-            clickOnButton: &#39;basigx-button-zoomin&#39;
-        }
-    ],
-
-<span id='BasiGX-view-button-ZoomIn-property-config'>    /**
-</span>     *
-     */
-    config: {
-<span id='BasiGX-view-button-ZoomIn-cfg-handler'>        handler: function() {
-</span>            var me = this;
-            var olMap = me.olMap;
-            var olView;
-            var zoom;
-
-            //fallback
-            if (Ext.isEmpty(olMap)) {
-                olMap = BasiGX.util.Map.getMapComponent().getMap();
-            }
-
-            olView = olMap.getView();
-
-            // This if is need for backwards comaptibility to ol3
-            if (ol.animation) {
-                zoom = ol.animation.zoom({
-                    resolution: olView.getResolution(),
-                    duration: 500
-                });
-                olMap.beforeRender(zoom);
-                olView.setResolution(olView.getResolution() / 2);
-            } else {
-                olView.animate({
-                    resolution: olView.getResolution() / 2,
-                    duration: 500
-                });
-            }
-        }
-    }
-});
+  <pre class="prettyprint lang-js">
+var __cov_QCQQZbxkzmPgkEIKJrmOig = (Function(&#39;return this&#39;))();
+if (!__cov_QCQQZbxkzmPgkEIKJrmOig.__coverage__) { __cov_QCQQZbxkzmPgkEIKJrmOig.__coverage__ = {}; }
+__cov_QCQQZbxkzmPgkEIKJrmOig = __cov_QCQQZbxkzmPgkEIKJrmOig.__coverage__;
+if (!(__cov_QCQQZbxkzmPgkEIKJrmOig[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/ZoomIn.js&#39;])) {
+   __cov_QCQQZbxkzmPgkEIKJrmOig[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/ZoomIn.js&#39;] = {&quot;path&quot;:&quot;/home/travis/build/terrestris/BasiGX/src/view/button/ZoomIn.js&quot;,&quot;s&quot;:{&quot;1&quot;:0,&quot;2&quot;:0,&quot;3&quot;:0,&quot;4&quot;:0,&quot;5&quot;:0,&quot;6&quot;:0,&quot;7&quot;:0,&quot;8&quot;:0,&quot;9&quot;:0,&quot;10&quot;:0,&quot;11&quot;:0,&quot;12&quot;:0,&quot;13&quot;:0},&quot;b&quot;:{&quot;1&quot;:[0,0],&quot;2&quot;:[0,0]},&quot;f&quot;:{&quot;1&quot;:0},&quot;fnMap&quot;:{&quot;1&quot;:{&quot;name&quot;:&quot;(anonymous_1)&quot;,&quot;line&quot;:76,&quot;loc&quot;:{&quot;start&quot;:{&quot;line&quot;:76,&quot;column&quot;:17},&quot;end&quot;:{&quot;line&quot;:76,&quot;column&quot;:28}}}},&quot;statementMap&quot;:{&quot;1&quot;:{&quot;start&quot;:{&quot;line&quot;:23,&quot;column&quot;:0},&quot;end&quot;:{&quot;line&quot;:105,&quot;column&quot;:3}},&quot;2&quot;:{&quot;start&quot;:{&quot;line&quot;:77,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:77,&quot;column&quot;:26}},&quot;3&quot;:{&quot;start&quot;:{&quot;line&quot;:78,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:78,&quot;column&quot;:33}},&quot;4&quot;:{&quot;start&quot;:{&quot;line&quot;:79,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:79,&quot;column&quot;:23}},&quot;5&quot;:{&quot;start&quot;:{&quot;line&quot;:80,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:80,&quot;column&quot;:21}},&quot;6&quot;:{&quot;start&quot;:{&quot;line&quot;:83,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:85,&quot;column&quot;:13}},&quot;7&quot;:{&quot;start&quot;:{&quot;line&quot;:84,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:84,&quot;column&quot;:67}},&quot;8&quot;:{&quot;start&quot;:{&quot;line&quot;:87,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:87,&quot;column&quot;:37}},&quot;9&quot;:{&quot;start&quot;:{&quot;line&quot;:90,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:102,&quot;column&quot;:13}},&quot;10&quot;:{&quot;start&quot;:{&quot;line&quot;:91,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:94,&quot;column&quot;:19}},&quot;11&quot;:{&quot;start&quot;:{&quot;line&quot;:95,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:95,&quot;column&quot;:41}},&quot;12&quot;:{&quot;start&quot;:{&quot;line&quot;:96,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:96,&quot;column&quot;:65}},&quot;13&quot;:{&quot;start&quot;:{&quot;line&quot;:98,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:101,&quot;column&quot;:19}}},&quot;branchMap&quot;:{&quot;1&quot;:{&quot;line&quot;:83,&quot;type&quot;:&quot;if&quot;,&quot;locations&quot;:[{&quot;start&quot;:{&quot;line&quot;:83,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:83,&quot;column&quot;:12}},{&quot;start&quot;:{&quot;line&quot;:83,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:83,&quot;column&quot;:12}}]},&quot;2&quot;:{&quot;line&quot;:90,&quot;type&quot;:&quot;if&quot;,&quot;locations&quot;:[{&quot;start&quot;:{&quot;line&quot;:90,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:90,&quot;column&quot;:12}},{&quot;start&quot;:{&quot;line&quot;:90,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:90,&quot;column&quot;:12}}]}}};
+}
+__cov_QCQQZbxkzmPgkEIKJrmOig = __cov_QCQQZbxkzmPgkEIKJrmOig[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/ZoomIn.js&#39;];
+__cov_QCQQZbxkzmPgkEIKJrmOig.s[&#39;1&#39;]++;Ext.define(&#39;BasiGX.view.button.ZoomIn&#39;,{extend:&#39;BasiGX.view.button.Base&#39;,xtype:&#39;basigx-button-zoomin&#39;,requires:[&#39;Ext.app.ViewModel&#39;,&#39;BasiGX.util.Map&#39;],viewModel:{data:{tooltip:&#39;Hineinzoomen&#39;,text:null,documentation:&#39;&lt;h2&gt;Hineinzoomen&lt;/h2&gt;\u2022 Ein Klick auf den Button &#39;+&#39;vergrößert die Karte um eine Zoomstufe.&#39;}},bind:{text:&#39;{text}&#39;},olMap:null,glyph:&#39;xf00e@FontAwesome&#39;,html:&#39;&lt;i class=&quot;fa fa-search-plus fa-2x&quot;&gt;&lt;/i&gt;&#39;,liveDemoConfig:[{moveMouseTo:&#39;basigx-button-zoomin&#39;},{clickOnButton:&#39;basigx-button-zoomin&#39;}],config:{handler:function(){__cov_QCQQZbxkzmPgkEIKJrmOig.f[&#39;1&#39;]++;__cov_QCQQZbxkzmPgkEIKJrmOig.s[&#39;2&#39;]++;var me=this;__cov_QCQQZbxkzmPgkEIKJrmOig.s[&#39;3&#39;]++;var olMap=me.olMap;__cov_QCQQZbxkzmPgkEIKJrmOig.s[&#39;4&#39;]++;var olView;__cov_QCQQZbxkzmPgkEIKJrmOig.s[&#39;5&#39;]++;var zoom;__cov_QCQQZbxkzmPgkEIKJrmOig.s[&#39;6&#39;]++;if(Ext.isEmpty(olMap)){__cov_QCQQZbxkzmPgkEIKJrmOig.b[&#39;1&#39;][0]++;__cov_QCQQZbxkzmPgkEIKJrmOig.s[&#39;7&#39;]++;olMap=BasiGX.util.Map.getMapComponent().getMap();}else{__cov_QCQQZbxkzmPgkEIKJrmOig.b[&#39;1&#39;][1]++;}__cov_QCQQZbxkzmPgkEIKJrmOig.s[&#39;8&#39;]++;olView=olMap.getView();__cov_QCQQZbxkzmPgkEIKJrmOig.s[&#39;9&#39;]++;if(ol.animation){__cov_QCQQZbxkzmPgkEIKJrmOig.b[&#39;2&#39;][0]++;__cov_QCQQZbxkzmPgkEIKJrmOig.s[&#39;10&#39;]++;zoom=ol.animation.zoom({resolution:olView.getResolution(),duration:500});__cov_QCQQZbxkzmPgkEIKJrmOig.s[&#39;11&#39;]++;olMap.beforeRender(zoom);__cov_QCQQZbxkzmPgkEIKJrmOig.s[&#39;12&#39;]++;olView.setResolution(olView.getResolution()/2);}else{__cov_QCQQZbxkzmPgkEIKJrmOig.b[&#39;2&#39;][1]++;__cov_QCQQZbxkzmPgkEIKJrmOig.s[&#39;13&#39;]++;olView.animate({resolution:olView.getResolution()/2,duration:500});}}}});
 </pre>
 </body>
 </html>
