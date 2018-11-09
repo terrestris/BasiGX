@@ -59,7 +59,14 @@ Ext.define('BasiGX.view.window.MergeWindow', {
          * Optional extra layers to push the features into.
          * @type {ol.layer.Vector[]}
          */
-        extraTargetLayers: null
+        extraTargetLayers: null,
+        /**
+         * Optional callback function to get notified once the features have
+         * been merged.
+         * @type {Function} which will receive the features that have been
+         * merged
+         */
+        mergedFeaturesFn: null
     },
 
     initComponent: function() {
@@ -142,6 +149,10 @@ Ext.define('BasiGX.view.window.MergeWindow', {
             Ext.each(extraLayers, function(layer) {
                 layer.getSource().addFeatures(allFeatures);
             });
+
+            if (me.getMergedFeaturesFn()) {
+                me.getMergedFeaturesFn()(allFeatures);
+            }
 
             win.destroy();
         };

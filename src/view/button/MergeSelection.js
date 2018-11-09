@@ -55,6 +55,7 @@ Ext.define('BasiGX.view.button.MergeSelection', {
      */
     config: {
         handler: function() {
+            var me = this;
             var grid;
             var parent = this.up('window');
             // support embedding the feature grid anywhere
@@ -69,7 +70,10 @@ Ext.define('BasiGX.view.button.MergeSelection', {
                 xtype: 'basigx-window-merge',
                 sourceLayer: this.getSourceLayer(),
                 targetLayer: targetLayer,
-                extraTargetLayers: this.getExtraTargetLayers()
+                extraTargetLayers: this.getExtraTargetLayers(),
+                mergedFeaturesFn: function(features) {
+                    me.getMergedFeaturesFn()(features);
+                }
             });
         },
         /**
@@ -85,6 +89,13 @@ Ext.define('BasiGX.view.button.MergeSelection', {
          * Optional extra target layers to put the features into.
          * @type {ol.layer.Vector[]}
          */
-        extraTargetLayers: null
+        extraTargetLayers: null,
+        /**
+         * Optional callback function to get notified once the features have
+         * been merged.
+         * @type {Function} which will receive the features that have been
+         * merged
+         */
+        mergedFeaturesFn: null
     }
 });
