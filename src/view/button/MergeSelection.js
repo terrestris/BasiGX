@@ -72,7 +72,9 @@ Ext.define('BasiGX.view.button.MergeSelection', {
                 targetLayer: targetLayer,
                 extraTargetLayers: this.getExtraTargetLayers(),
                 mergedFeaturesFn: function(features) {
-                    me.getMergedFeaturesFn()(features);
+                    if (me.getMergedFeaturesFn()) {
+                        me.getMergedFeaturesFn()(features);
+                    }
                 }
             });
         },
