@@ -1,9 +1,98 @@
+/* Copyright (c) 2018-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * @class BasiGX.util.Download
+ */
+Ext.define('BasiGX.util.Download', {
 
-var __cov_P7Djty46s3qkYH8z802PWA = (Function('return this'))();
-if (!__cov_P7Djty46s3qkYH8z802PWA.__coverage__) { __cov_P7Djty46s3qkYH8z802PWA.__coverage__ = {}; }
-__cov_P7Djty46s3qkYH8z802PWA = __cov_P7Djty46s3qkYH8z802PWA.__coverage__;
-if (!(__cov_P7Djty46s3qkYH8z802PWA['/home/travis/build/terrestris/BasiGX/src/util/Download.js'])) {
-   __cov_P7Djty46s3qkYH8z802PWA['/home/travis/build/terrestris/BasiGX/src/util/Download.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Download.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0},"b":{"1":[0,0],"2":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0},"fnMap":{"1":{"name":"(anonymous_1)","line":31,"loc":{"start":{"line":31,"column":23},"end":{"line":31,"column":52}}},"2":{"name":"(anonymous_2)","line":46,"loc":{"start":{"line":46,"column":55},"end":{"line":46,"column":67}}},"3":{"name":"(anonymous_3)","line":68,"loc":{"start":{"line":68,"column":24},"end":{"line":68,"column":45}}},"4":{"name":"(anonymous_4)","line":87,"loc":{"start":{"line":87,"column":27},"end":{"line":87,"column":51}}}},"statementMap":{"1":{"start":{"line":19,"column":0},"end":{"line":98,"column":3}},"2":{"start":{"line":32,"column":12},"end":{"line":32,"column":41}},"3":{"start":{"line":33,"column":12},"end":{"line":33,"column":71}},"4":{"start":{"line":34,"column":12},"end":{"line":34,"column":23}},"5":{"start":{"line":35,"column":12},"end":{"line":44,"column":13}},"6":{"start":{"line":37,"column":20},"end":{"line":37,"column":80}},"7":{"start":{"line":38,"column":20},"end":{"line":38,"column":26}},"8":{"start":{"line":41,"column":20},"end":{"line":41,"column":56}},"9":{"start":{"line":42,"column":20},"end":{"line":42,"column":26}},"10":{"start":{"line":45,"column":12},"end":{"line":59,"column":13}},"11":{"start":{"line":46,"column":16},"end":{"line":48,"column":19}},"12":{"start":{"line":47,"column":20},"end":{"line":47,"column":43}},"13":{"start":{"line":49,"column":16},"end":{"line":49,"column":46}},"14":{"start":{"line":50,"column":16},"end":{"line":50,"column":71}},"15":{"start":{"line":52,"column":16},"end":{"line":52,"column":52}},"16":{"start":{"line":53,"column":16},"end":{"line":53,"column":74}},"17":{"start":{"line":54,"column":16},"end":{"line":54,"column":36}},"18":{"start":{"line":55,"column":16},"end":{"line":55,"column":49}},"19":{"start":{"line":56,"column":16},"end":{"line":56,"column":45}},"20":{"start":{"line":57,"column":16},"end":{"line":57,"column":26}},"21":{"start":{"line":58,"column":16},"end":{"line":58,"column":45}},"22":{"start":{"line":69,"column":12},"end":{"line":69,"column":59}},"23":{"start":{"line":70,"column":12},"end":{"line":70,"column":46}},"24":{"start":{"line":71,"column":12},"end":{"line":71,"column":63}},"25":{"start":{"line":72,"column":12},"end":{"line":75,"column":15}},"26":{"start":{"line":88,"column":12},"end":{"line":94,"column":15}}},"branchMap":{"1":{"line":35,"type":"switch","locations":[{"start":{"line":36,"column":16},"end":{"line":39,"column":17}},{"start":{"line":40,"column":16},"end":{"line":43,"column":17}}]},"2":{"line":45,"type":"if","locations":[{"start":{"line":45,"column":12},"end":{"line":45,"column":12}},{"start":{"line":45,"column":12},"end":{"line":45,"column":12}}]}}};
-}
-__cov_P7Djty46s3qkYH8z802PWA = __cov_P7Djty46s3qkYH8z802PWA['/home/travis/build/terrestris/BasiGX/src/util/Download.js'];
-__cov_P7Djty46s3qkYH8z802PWA.s['1']++;Ext.define('BasiGX.util.Download',{statics:{downloadLayer:function(layer,map,format){__cov_P7Djty46s3qkYH8z802PWA.f['1']++;__cov_P7Djty46s3qkYH8z802PWA.s['2']++;var name=layer.get('name');__cov_P7Djty46s3qkYH8z802PWA.s['3']++;var json=BasiGX.util.Download.layerToGeoJson(layer,map);__cov_P7Djty46s3qkYH8z802PWA.s['4']++;var result;__cov_P7Djty46s3qkYH8z802PWA.s['5']++;switch(format){case'zip':__cov_P7Djty46s3qkYH8z802PWA.b['1'][0]++;{__cov_P7Djty46s3qkYH8z802PWA.s['6']++;result=BasiGX.util.Download.geoJsonToShpBytes(json,name);__cov_P7Djty46s3qkYH8z802PWA.s['7']++;break;}default:__cov_P7Djty46s3qkYH8z802PWA.b['1'][1]++;{__cov_P7Djty46s3qkYH8z802PWA.s['8']++;result=btoa(JSON.stringify(json));__cov_P7Djty46s3qkYH8z802PWA.s['9']++;break;}}__cov_P7Djty46s3qkYH8z802PWA.s['10']++;if(window.navigator.msSaveOrOpenBlob){__cov_P7Djty46s3qkYH8z802PWA.b['2'][0]++;__cov_P7Djty46s3qkYH8z802PWA.s['11']++;result=Uint8Array.from(atob(result),function(c){__cov_P7Djty46s3qkYH8z802PWA.f['2']++;__cov_P7Djty46s3qkYH8z802PWA.s['12']++;return c.charCodeAt(0);});__cov_P7Djty46s3qkYH8z802PWA.s['13']++;var blob=new Blob([result]);__cov_P7Djty46s3qkYH8z802PWA.s['14']++;window.navigator.msSaveBlob(blob,name+'.'+format);}else{__cov_P7Djty46s3qkYH8z802PWA.b['2'][1]++;__cov_P7Djty46s3qkYH8z802PWA.s['15']++;var a=document.createElement('a');__cov_P7Djty46s3qkYH8z802PWA.s['16']++;a.href='data:application/octet-stream;base64,'+result;__cov_P7Djty46s3qkYH8z802PWA.s['17']++;a.target='_blank';__cov_P7Djty46s3qkYH8z802PWA.s['18']++;a.download=name+'.'+format;__cov_P7Djty46s3qkYH8z802PWA.s['19']++;document.body.appendChild(a);__cov_P7Djty46s3qkYH8z802PWA.s['20']++;a.click();__cov_P7Djty46s3qkYH8z802PWA.s['21']++;document.body.removeChild(a);}},layerToGeoJson:function(layer,map){__cov_P7Djty46s3qkYH8z802PWA.f['3']++;__cov_P7Djty46s3qkYH8z802PWA.s['22']++;var features=layer.getSource().getFeatures();__cov_P7Djty46s3qkYH8z802PWA.s['23']++;var fmt=new ol.format.GeoJSON();__cov_P7Djty46s3qkYH8z802PWA.s['24']++;var proj=map.getView().getProjection().getCode();__cov_P7Djty46s3qkYH8z802PWA.s['25']++;return fmt.writeFeaturesObject(features,{dataProjection:'EPSG:4326',featureProjection:proj});},geoJsonToShpBytes:function(geojson,name){__cov_P7Djty46s3qkYH8z802PWA.f['4']++;__cov_P7Djty46s3qkYH8z802PWA.s['26']++;return shpwrite.zip(geojson,{types:{polygon:name+'_polygons',line:name+'_lines',point:name+'_points'}});}}});
+    statics: {
+
+        /**
+         * Download a vector layer from memory, in EPSG:4326. For IE you'll need
+         * a polyfill from https://developer.mozilla.org/en-US/docs
+         * /Web/JavaScript/Reference/Global_Objects/TypedArray/from
+         * @param  {ol.layer.Vector} layer  the layer to download
+         * @param  {ol.Map} map    the map the layer is contained in
+         * @param  {String} format geojson or zip (shapefile)
+         */
+        downloadLayer: function(layer, map, format) {
+            var name = layer.get('name');
+            var json = BasiGX.util.Download.layerToGeoJson(layer, map);
+            var result;
+            switch (format) {
+                case 'zip': {
+                    result = BasiGX.util.Download.geoJsonToShpBytes(json, name);
+                    break;
+                }
+                default: {
+                    result = btoa(JSON.stringify(json));
+                    break;
+                }
+            }
+            if (window.navigator.msSaveOrOpenBlob) {
+                result = Uint8Array.from(atob(result), function(c) {
+                    return c.charCodeAt(0);
+                });
+                var blob = new Blob([result]);
+                window.navigator.msSaveBlob(blob, name + '.' + format);
+            } else {
+                var a = document.createElement('a');
+                a.href = 'data:application/octet-stream;base64,' + result;
+                a.target = '_blank';
+                a.download = name + '.' + format;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+        },
+
+        /**
+         * Return a layer's features as a geojson object.
+         * @param  {ol.layer.Vector} layer the layer
+         * @param  {ol.Map} map   the map the layer is contained in
+         * @return {Object}       a geojson feature collection
+         */
+        layerToGeoJson: function(layer, map) {
+            var features = layer.getSource().getFeatures();
+            var fmt = new ol.format.GeoJSON();
+            var proj = map.getView().getProjection().getCode();
+            return fmt.writeFeaturesObject(features, {
+                dataProjection: 'EPSG:4326',
+                featureProjection: proj
+            });
+        },
+
+        /**
+         * Convert a geojson object or string to a zip containing shapefile(s).
+         * Multiple shape files will be generated in case of mixed geometry
+         * types. Needs https://github.com/mapbox/shp-write/pull/65 in order to
+         * work.
+         * @param  {String | Object} geojson the geojson to convert
+         * @param  {String} name    the layer name
+         * @return {String}         a byte string
+         */
+        geoJsonToShpBytes: function(geojson, name) {
+            return shpwrite.zip(geojson, {
+                types: {
+                    polygon: name + '_polygons',
+                    line: name + '_lines',
+                    point: name + '_points'
+                }
+            });
+        }
+
+    }
+});

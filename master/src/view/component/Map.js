@@ -1,9 +1,185 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Map Component
+ *
+ * Setting up a ol3-map by calling the config parser with the given appContext.
+ * If no appContext is found, a default one will be loaded.
+ * Class usually instanciated in map container.
+ *
+ * @class BasiGX.view.component.Map
+ */
+Ext.define('BasiGX.view.component.Map', {
+    extend: 'GeoExt.component.Map',
+    xtype: 'basigx-component-map',
 
-var __cov_pSj10EAWyddLMb58JDKOzw = (Function('return this'))();
-if (!__cov_pSj10EAWyddLMb58JDKOzw.__coverage__) { __cov_pSj10EAWyddLMb58JDKOzw.__coverage__ = {}; }
-__cov_pSj10EAWyddLMb58JDKOzw = __cov_pSj10EAWyddLMb58JDKOzw.__coverage__;
-if (!(__cov_pSj10EAWyddLMb58JDKOzw['/home/travis/build/terrestris/BasiGX/src/view/component/Map.js'])) {
-   __cov_pSj10EAWyddLMb58JDKOzw['/home/travis/build/terrestris/BasiGX/src/view/component/Map.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/component/Map.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0},"fnMap":{"1":{"name":"(anonymous_1)","line":36,"loc":{"start":{"line":36,"column":15},"end":{"line":36,"column":26}}},"2":{"name":"(anonymous_2)","line":129,"loc":{"start":{"line":129,"column":17},"end":{"line":129,"column":34}}},"3":{"name":"(anonymous_3)","line":141,"loc":{"start":{"line":141,"column":25},"end":{"line":141,"column":44}}},"4":{"name":"(anonymous_4)","line":150,"loc":{"start":{"line":150,"column":25},"end":{"line":150,"column":44}}},"5":{"name":"(anonymous_5)","line":176,"loc":{"start":{"line":176,"column":17},"end":{"line":176,"column":28}}}},"statementMap":{"1":{"start":{"line":25,"column":0},"end":{"line":185,"column":3}},"2":{"start":{"line":37,"column":12},"end":{"line":37,"column":63}},"3":{"start":{"line":130,"column":8},"end":{"line":130,"column":22}},"4":{"start":{"line":132,"column":8},"end":{"line":165,"column":9}},"5":{"start":{"line":135,"column":12},"end":{"line":136,"column":58}},"6":{"start":{"line":138,"column":12},"end":{"line":155,"column":15}},"7":{"start":{"line":142,"column":20},"end":{"line":148,"column":21}},"8":{"start":{"line":143,"column":24},"end":{"line":143,"column":74}},"9":{"start":{"line":144,"column":27},"end":{"line":148,"column":21}},"10":{"start":{"line":145,"column":24},"end":{"line":145,"column":62}},"11":{"start":{"line":147,"column":24},"end":{"line":147,"column":76}},"12":{"start":{"line":151,"column":20},"end":{"line":152,"column":67}},"13":{"start":{"line":153,"column":20},"end":{"line":153,"column":58}},"14":{"start":{"line":157,"column":12},"end":{"line":158,"column":41}},"15":{"start":{"line":160,"column":12},"end":{"line":161,"column":37}},"16":{"start":{"line":163,"column":12},"end":{"line":163,"column":73}},"17":{"start":{"line":164,"column":12},"end":{"line":164,"column":29}},"18":{"start":{"line":167,"column":8},"end":{"line":167,"column":32}},"19":{"start":{"line":169,"column":8},"end":{"line":169,"column":25}},"20":{"start":{"line":171,"column":8},"end":{"line":173,"column":9}},"21":{"start":{"line":172,"column":12},"end":{"line":172,"column":67}},"22":{"start":{"line":177,"column":8},"end":{"line":177,"column":32}},"23":{"start":{"line":178,"column":8},"end":{"line":181,"column":11}},"24":{"start":{"line":182,"column":8},"end":{"line":182,"column":36}}},"branchMap":{"1":{"line":132,"type":"if","locations":[{"start":{"line":132,"column":8},"end":{"line":132,"column":8}},{"start":{"line":132,"column":8},"end":{"line":132,"column":8}}]},"2":{"line":135,"type":"cond-expr","locations":[{"start":{"line":136,"column":16},"end":{"line":136,"column":37}},{"start":{"line":136,"column":40},"end":{"line":136,"column":57}}]},"3":{"line":135,"type":"binary-expr","locations":[{"start":{"line":135,"column":22},"end":{"line":135,"column":28}},{"start":{"line":135,"column":32},"end":{"line":135,"column":53}}]},"4":{"line":142,"type":"if","locations":[{"start":{"line":142,"column":20},"end":{"line":142,"column":20}},{"start":{"line":142,"column":20},"end":{"line":142,"column":20}}]},"5":{"line":144,"type":"if","locations":[{"start":{"line":144,"column":27},"end":{"line":144,"column":27}},{"start":{"line":144,"column":27},"end":{"line":144,"column":27}}]},"6":{"line":171,"type":"if","locations":[{"start":{"line":171,"column":8},"end":{"line":171,"column":8}},{"start":{"line":171,"column":8},"end":{"line":171,"column":8}}]}}};
-}
-__cov_pSj10EAWyddLMb58JDKOzw = __cov_pSj10EAWyddLMb58JDKOzw['/home/travis/build/terrestris/BasiGX/src/view/component/Map.js'];
-__cov_pSj10EAWyddLMb58JDKOzw.s['1']++;Ext.define('BasiGX.view.component.Map',{extend:'GeoExt.component.Map',xtype:'basigx-component-map',requires:['BasiGX.util.ConfigParser','BasiGX.util.Map','BasiGX.util.Layer'],inheritableStatics:{guess:function(){__cov_pSj10EAWyddLMb58JDKOzw.f['1']++;__cov_pSj10EAWyddLMb58JDKOzw.s['2']++;return BasiGX.util.Map.getMapComponent(this.xtype);}},viewModel:{data:{documentation:'<h2>Karte</h2>\u2022 Die Karte wird zur Darstellung '+'der verschiedenen Kartenthemen verwendet.<br>\u2022 Mit Hilfe '+'des Themenbaums oder der Werkzeuge können Sie mit der '+'Karte interagieren.<br>\u2022 Standardmäßig können Sie den '+'Maßstab der Karte mit dem Mausrad oder einem Doppelklick '+'vergrößern und verkleinern.<br>\u2022 Für weitere Informationen '+'verwenden Sie die Hilfe für ein konkretes Werkzeug'}},appContext:null,appContextPath:'resources/appContext.json',fallbackAppContext:{'data':{'merge':{'startCenter':[1163261,6648489],'startZoom':5,'mapLayers':[{'name':'OSM WMS','type':'TileWMS','url':'https://ows.terrestris.de/osm/service?','layers':'OSM-WMS','topic':false}],'mapConfig':{'projection':'EPSG:3857','resolutions':[156543.03390625,78271.516953125,39135.7584765625,19567.87923828125,9783.939619140625,4891.9698095703125,2445.9849047851562,1222.9924523925781,611.4962261962891,305.74811309814453,152.87405654907226,76.43702827453613,38.218514137268066,19.109257068634033,9.554628534317017,4.777314267158508,2.388657133579254,1.194328566789627,0.5971642833948135],'zoom':0}}}},defaultListenerScope:true,autocreateLegends:false,activeRouting:false,constructor:function(config){__cov_pSj10EAWyddLMb58JDKOzw.f['2']++;__cov_pSj10EAWyddLMb58JDKOzw.s['3']++;var me=this;__cov_pSj10EAWyddLMb58JDKOzw.s['4']++;if(!config.map){__cov_pSj10EAWyddLMb58JDKOzw.b['1'][0]++;__cov_pSj10EAWyddLMb58JDKOzw.s['5']++;var url=(__cov_pSj10EAWyddLMb58JDKOzw.b['3'][0]++,config)&&(__cov_pSj10EAWyddLMb58JDKOzw.b['3'][1]++,config.appContextPath)?(__cov_pSj10EAWyddLMb58JDKOzw.b['2'][0]++,config.appContextPath):(__cov_pSj10EAWyddLMb58JDKOzw.b['2'][1]++,me.appContextPath);__cov_pSj10EAWyddLMb58JDKOzw.s['6']++;Ext.Ajax.request({url:url,async:false,success:function(response){__cov_pSj10EAWyddLMb58JDKOzw.f['3']++;__cov_pSj10EAWyddLMb58JDKOzw.s['7']++;if(Ext.isString(response.responseText)){__cov_pSj10EAWyddLMb58JDKOzw.b['4'][0]++;__cov_pSj10EAWyddLMb58JDKOzw.s['8']++;me.appContext=Ext.decode(response.responseText);}else{__cov_pSj10EAWyddLMb58JDKOzw.b['4'][1]++;__cov_pSj10EAWyddLMb58JDKOzw.s['9']++;if(Ext.isObject(response.responseText)){__cov_pSj10EAWyddLMb58JDKOzw.b['5'][0]++;__cov_pSj10EAWyddLMb58JDKOzw.s['10']++;me.appContext=response.responseText;}else{__cov_pSj10EAWyddLMb58JDKOzw.b['5'][1]++;__cov_pSj10EAWyddLMb58JDKOzw.s['11']++;Ext.log.error('Error! Could not parse appContext!');}}},failure:function(response){__cov_pSj10EAWyddLMb58JDKOzw.f['4']++;__cov_pSj10EAWyddLMb58JDKOzw.s['12']++;Ext.log.error('Error! No application '+'context found, example loaded',response);__cov_pSj10EAWyddLMb58JDKOzw.s['13']++;me.appContext=me.fallbackAppContext;}});__cov_pSj10EAWyddLMb58JDKOzw.s['14']++;BasiGX.util.ConfigParser.autocreateLegends=config.autocreateLegends;__cov_pSj10EAWyddLMb58JDKOzw.s['15']++;BasiGX.util.ConfigParser.activeRouting=config.activeRouting;__cov_pSj10EAWyddLMb58JDKOzw.s['16']++;var olMap=BasiGX.util.ConfigParser.setupMap(me.appContext);__cov_pSj10EAWyddLMb58JDKOzw.s['17']++;me.setMap(olMap);}else{__cov_pSj10EAWyddLMb58JDKOzw.b['1'][1]++;}__cov_pSj10EAWyddLMb58JDKOzw.s['18']++;me.callParent([config]);__cov_pSj10EAWyddLMb58JDKOzw.s['19']++;me.addControls();__cov_pSj10EAWyddLMb58JDKOzw.s['20']++;if(Ext.isFunction(BasiGX.util.ConfigParser.postprocessMap)){__cov_pSj10EAWyddLMb58JDKOzw.b['6'][0]++;__cov_pSj10EAWyddLMb58JDKOzw.s['21']++;BasiGX.util.ConfigParser.postprocessMap(me.appContext);}else{__cov_pSj10EAWyddLMb58JDKOzw.b['6'][1]++;}},addControls:function(){__cov_pSj10EAWyddLMb58JDKOzw.f['5']++;__cov_pSj10EAWyddLMb58JDKOzw.s['22']++;var map=this.getMap();__cov_pSj10EAWyddLMb58JDKOzw.s['23']++;var attribution=new ol.control.Attribution({collapsible:false,logo:false});__cov_pSj10EAWyddLMb58JDKOzw.s['24']++;map.addControl(attribution);}});
+    requires: [
+        'BasiGX.util.ConfigParser',
+        'BasiGX.util.Map',
+        'BasiGX.util.Layer'
+    ],
+
+    inheritableStatics: {
+        guess: function() {
+            return BasiGX.util.Map.getMapComponent(this.xtype);
+        }
+    },
+
+    viewModel: {
+        data: {
+            documentation: '<h2>Karte</h2>• Die Karte wird zur Darstellung ' +
+                'der verschiedenen Kartenthemen verwendet.<br>• Mit Hilfe ' +
+                'des Themenbaums oder der Werkzeuge können Sie mit der ' +
+                'Karte interagieren.<br>• Standardmäßig können Sie den ' +
+                'Maßstab der Karte mit dem Mausrad oder einem Doppelklick ' +
+                'vergrößern und verkleinern.<br>• Für weitere Informationen ' +
+                'verwenden Sie die Hilfe für ein konkretes Werkzeug'
+        }
+    },
+
+    /**
+     * The app context
+     */
+    appContext: null,
+
+    /**
+     * The URL to the app Context resource.
+     * Gets requested via AJAX, can be a local file or an webinterface
+     */
+    appContextPath: 'resources/appContext.json',
+
+    /**
+     * The appContext to use when no real context could be retrieved
+     */
+    fallbackAppContext: {
+        'data': {
+            'merge': {
+                'startCenter': [1163261, 6648489],
+                'startZoom': 5,
+                'mapLayers': [
+                    {
+                        'name': 'OSM WMS',
+                        'type': 'TileWMS',
+                        'url': 'https://ows.terrestris.de/osm/service?',
+                        'layers': 'OSM-WMS',
+                        'topic': false
+                    }
+                ],
+                'mapConfig': {
+                    'projection': 'EPSG:3857',
+                    'resolutions': [
+                        156543.03390625,
+                        78271.516953125,
+                        39135.7584765625,
+                        19567.87923828125,
+                        9783.939619140625,
+                        4891.9698095703125,
+                        2445.9849047851562,
+                        1222.9924523925781,
+                        611.4962261962891,
+                        305.74811309814453,
+                        152.87405654907226,
+                        76.43702827453613,
+                        38.218514137268066,
+                        19.109257068634033,
+                        9.554628534317017,
+                        4.777314267158508,
+                        2.388657133579254,
+                        1.194328566789627,
+                        0.5971642833948135
+                    ],
+                    'zoom': 0
+                }
+            }
+        }
+    },
+
+    /**
+     * If this class is extended by an application that uses controllers,
+     * this property should be set to false and the corresponding methods
+     * have to be implemented in the controller.
+     */
+    defaultListenerScope: true,
+
+    /**
+     * flag determines if the layers created by configparser should contain
+     * automatically generated legendurls
+     */
+    autocreateLegends: false,
+
+    /**
+     * flag determines if the the window.location.hash should be manipulated
+     * during runtime
+     */
+    activeRouting: false,
+
+    constructor: function(config) {
+        var me = this;
+
+        if (!config.map) {
+
+            // need to handle config first as its not applied yet
+            var url = config && config.appContextPath ?
+                config.appContextPath : me.appContextPath;
+
+            Ext.Ajax.request({
+                url: url,
+                async: false,
+                success: function(response) {
+                    if (Ext.isString(response.responseText)) {
+                        me.appContext = Ext.decode(response.responseText);
+                    } else if (Ext.isObject(response.responseText)) {
+                        me.appContext = response.responseText;
+                    } else {
+                        Ext.log.error('Error! Could not parse appContext!');
+                    }
+                },
+                failure: function(response) {
+                    Ext.log.error('Error! No application ' +
+                        'context found, example loaded', response);
+                    me.appContext = me.fallbackAppContext;
+                }
+            });
+
+            BasiGX.util.ConfigParser.autocreateLegends =
+                config.autocreateLegends;
+
+            BasiGX.util.ConfigParser.activeRouting =
+                config.activeRouting;
+
+            var olMap = BasiGX.util.ConfigParser.setupMap(me.appContext);
+            me.setMap(olMap);
+        }
+
+        me.callParent([config]);
+
+        me.addControls();
+
+        if (Ext.isFunction(BasiGX.util.ConfigParser.postprocessMap)) {
+            BasiGX.util.ConfigParser.postprocessMap(me.appContext);
+        }
+    },
+
+    addControls: function() {
+        var map = this.getMap();
+        var attribution = new ol.control.Attribution({
+            collapsible: false,
+            logo: false
+        });
+        map.addControl(attribution);
+    }
+
+});

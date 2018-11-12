@@ -1,9 +1,203 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * The `ZoomToExtent` Button
+ *
+ * Button used to zoom to an extent (currently defined by a `center` and either
+ * a `zoom` or a `resolution`).
+ *
+ * TODO This class should probably also accept an extent to configure it, that
+ *      most likely be what most users will expect.
+ *
+ * TODO This class will need some updates when we upgrade to OpenLayers >= 4.
+ *
+ * @class BasiGX.view.button.ZoomToExtent
+ */
+Ext.define('BasiGX.view.button.ZoomToExtent', {
+    extend: 'BasiGX.view.button.Base',
+    xtype: 'basigx-button-zoomtoextent',
 
-var __cov_GobDZuI68m9d$3WqHX4dDA = (Function('return this'))();
-if (!__cov_GobDZuI68m9d$3WqHX4dDA.__coverage__) { __cov_GobDZuI68m9d$3WqHX4dDA.__coverage__ = {}; }
-__cov_GobDZuI68m9d$3WqHX4dDA = __cov_GobDZuI68m9d$3WqHX4dDA.__coverage__;
-if (!(__cov_GobDZuI68m9d$3WqHX4dDA['/home/travis/build/terrestris/BasiGX/src/view/button/ZoomToExtent.js'])) {
-   __cov_GobDZuI68m9d$3WqHX4dDA['/home/travis/build/terrestris/BasiGX/src/view/button/ZoomToExtent.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/ZoomToExtent.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0]},"f":{"1":0,"2":0,"3":0},"fnMap":{"1":{"name":"(anonymous_1)","line":90,"loc":{"start":{"line":90,"column":17},"end":{"line":90,"column":28}}},"2":{"name":"(anonymous_2)","line":167,"loc":{"start":{"line":167,"column":17},"end":{"line":167,"column":28}}},"3":{"name":"(anonymous_3)","line":187,"loc":{"start":{"line":187,"column":21},"end":{"line":187,"column":32}}}},"statementMap":{"1":{"start":{"line":29,"column":0},"end":{"line":203,"column":3}},"2":{"start":{"line":91,"column":12},"end":{"line":91,"column":26}},"3":{"start":{"line":92,"column":12},"end":{"line":92,"column":33}},"4":{"start":{"line":94,"column":12},"end":{"line":94,"column":33}},"5":{"start":{"line":97,"column":12},"end":{"line":99,"column":13}},"6":{"start":{"line":98,"column":16},"end":{"line":98,"column":67}},"7":{"start":{"line":101,"column":12},"end":{"line":101,"column":41}},"8":{"start":{"line":103,"column":12},"end":{"line":103,"column":46}},"9":{"start":{"line":104,"column":12},"end":{"line":104,"column":54}},"10":{"start":{"line":105,"column":12},"end":{"line":105,"column":50}},"11":{"start":{"line":106,"column":12},"end":{"line":106,"column":42}},"12":{"start":{"line":107,"column":12},"end":{"line":107,"column":46}},"13":{"start":{"line":109,"column":12},"end":{"line":114,"column":13}},"14":{"start":{"line":110,"column":16},"end":{"line":110,"column":79}},"15":{"start":{"line":111,"column":16},"end":{"line":111,"column":65}},"16":{"start":{"line":113,"column":16},"end":{"line":113,"column":34}},"17":{"start":{"line":117,"column":12},"end":{"line":153,"column":13}},"18":{"start":{"line":119,"column":16},"end":{"line":121,"column":19}},"19":{"start":{"line":122,"column":16},"end":{"line":124,"column":19}},"20":{"start":{"line":125,"column":16},"end":{"line":127,"column":19}},"21":{"start":{"line":130,"column":16},"end":{"line":130,"column":54}},"22":{"start":{"line":135,"column":16},"end":{"line":135,"column":47}},"23":{"start":{"line":136,"column":16},"end":{"line":136,"column":51}},"24":{"start":{"line":137,"column":16},"end":{"line":141,"column":17}},"25":{"start":{"line":138,"column":20},"end":{"line":138,"column":47}},"26":{"start":{"line":140,"column":20},"end":{"line":140,"column":59}},"27":{"start":{"line":143,"column":16},"end":{"line":146,"column":18}},"28":{"start":{"line":147,"column":16},"end":{"line":151,"column":17}},"29":{"start":{"line":148,"column":20},"end":{"line":148,"column":51}},"30":{"start":{"line":150,"column":20},"end":{"line":150,"column":63}},"31":{"start":{"line":152,"column":16},"end":{"line":152,"column":45}},"32":{"start":{"line":168,"column":8},"end":{"line":168,"column":22}},"33":{"start":{"line":169,"column":8},"end":{"line":169,"column":33}},"34":{"start":{"line":171,"column":8},"end":{"line":176,"column":9}},"35":{"start":{"line":172,"column":12},"end":{"line":175,"column":14}},"36":{"start":{"line":178,"column":8},"end":{"line":178,"column":29}},"37":{"start":{"line":188,"column":8},"end":{"line":188,"column":22}},"38":{"start":{"line":189,"column":8},"end":{"line":189,"column":65}},"39":{"start":{"line":191,"column":8},"end":{"line":201,"column":9}},"40":{"start":{"line":192,"column":12},"end":{"line":194,"column":13}},"41":{"start":{"line":193,"column":16},"end":{"line":193,"column":53}},"42":{"start":{"line":195,"column":12},"end":{"line":197,"column":13}},"43":{"start":{"line":196,"column":16},"end":{"line":196,"column":62}},"44":{"start":{"line":198,"column":12},"end":{"line":200,"column":13}},"45":{"start":{"line":199,"column":16},"end":{"line":199,"column":49}}},"branchMap":{"1":{"line":97,"type":"if","locations":[{"start":{"line":97,"column":12},"end":{"line":97,"column":12}},{"start":{"line":97,"column":12},"end":{"line":97,"column":12}}]},"2":{"line":109,"type":"if","locations":[{"start":{"line":109,"column":12},"end":{"line":109,"column":12}},{"start":{"line":109,"column":12},"end":{"line":109,"column":12}}]},"3":{"line":109,"type":"binary-expr","locations":[{"start":{"line":109,"column":16},"end":{"line":109,"column":28}},{"start":{"line":109,"column":32},"end":{"line":109,"column":61}}]},"4":{"line":117,"type":"if","locations":[{"start":{"line":117,"column":12},"end":{"line":117,"column":12}},{"start":{"line":117,"column":12},"end":{"line":117,"column":12}}]},"5":{"line":137,"type":"if","locations":[{"start":{"line":137,"column":16},"end":{"line":137,"column":16}},{"start":{"line":137,"column":16},"end":{"line":137,"column":16}}]},"6":{"line":147,"type":"if","locations":[{"start":{"line":147,"column":16},"end":{"line":147,"column":16}},{"start":{"line":147,"column":16},"end":{"line":147,"column":16}}]},"7":{"line":171,"type":"if","locations":[{"start":{"line":171,"column":8},"end":{"line":171,"column":8}},{"start":{"line":171,"column":8},"end":{"line":171,"column":8}}]},"8":{"line":171,"type":"binary-expr","locations":[{"start":{"line":171,"column":12},"end":{"line":171,"column":33}},{"start":{"line":171,"column":37},"end":{"line":171,"column":64}}]},"9":{"line":191,"type":"if","locations":[{"start":{"line":191,"column":8},"end":{"line":191,"column":8}},{"start":{"line":191,"column":8},"end":{"line":191,"column":8}}]},"10":{"line":192,"type":"if","locations":[{"start":{"line":192,"column":12},"end":{"line":192,"column":12}},{"start":{"line":192,"column":12},"end":{"line":192,"column":12}}]},"11":{"line":195,"type":"if","locations":[{"start":{"line":195,"column":12},"end":{"line":195,"column":12}},{"start":{"line":195,"column":12},"end":{"line":195,"column":12}}]},"12":{"line":196,"type":"binary-expr","locations":[{"start":{"line":196,"column":31},"end":{"line":196,"column":55}},{"start":{"line":196,"column":59},"end":{"line":196,"column":60}}]},"13":{"line":198,"type":"if","locations":[{"start":{"line":198,"column":12},"end":{"line":198,"column":12}},{"start":{"line":198,"column":12},"end":{"line":198,"column":12}}]},"14":{"line":198,"type":"binary-expr","locations":[{"start":{"line":198,"column":16},"end":{"line":198,"column":29}},{"start":{"line":198,"column":33},"end":{"line":198,"column":52}}]}}};
-}
-__cov_GobDZuI68m9d$3WqHX4dDA = __cov_GobDZuI68m9d$3WqHX4dDA['/home/travis/build/terrestris/BasiGX/src/view/button/ZoomToExtent.js'];
-__cov_GobDZuI68m9d$3WqHX4dDA.s['1']++;Ext.define('BasiGX.view.button.ZoomToExtent',{extend:'BasiGX.view.button.Base',xtype:'basigx-button-zoomtoextent',requires:['BasiGX.util.Application','BasiGX.util.Map','Ext.app.ViewModel'],viewModel:{data:{tooltip:'Auf Gesamtansicht zoomen',text:null,documentation:'<h2>Auf Gesamtansicht zoomen</h2>\u2022 Ein Klick auf '+'den Button zoomt die Karte auf die Gesamtansicht.'}},liveDemoConfig:[{moveMouseTo:'basigx-button-zoomtoextent'},{clickOnButton:'basigx-button-zoomtoextent'}],bind:{text:'{text}'},olMap:null,config:{center:null,zoom:null,resolution:null,rotation:null,extent:null,handler:function(){__cov_GobDZuI68m9d$3WqHX4dDA.f['1']++;__cov_GobDZuI68m9d$3WqHX4dDA.s['2']++;var me=this;__cov_GobDZuI68m9d$3WqHX4dDA.s['3']++;me.setConfigValues();__cov_GobDZuI68m9d$3WqHX4dDA.s['4']++;var olMap=me.olMap;__cov_GobDZuI68m9d$3WqHX4dDA.s['5']++;if(Ext.isEmpty(olMap)){__cov_GobDZuI68m9d$3WqHX4dDA.b['1'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['6']++;olMap=BasiGX.util.Map.getMapComponent().getMap();}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['1'][1]++;}__cov_GobDZuI68m9d$3WqHX4dDA.s['7']++;var olView=olMap.getView();__cov_GobDZuI68m9d$3WqHX4dDA.s['8']++;var targetCenter=me.getCenter();__cov_GobDZuI68m9d$3WqHX4dDA.s['9']++;var targetResolution=me.getResolution();__cov_GobDZuI68m9d$3WqHX4dDA.s['10']++;var targetRotation=me.getRotation();__cov_GobDZuI68m9d$3WqHX4dDA.s['11']++;var targetZoom=me.getZoom();__cov_GobDZuI68m9d$3WqHX4dDA.s['12']++;var targetExtent=me.getExtent();__cov_GobDZuI68m9d$3WqHX4dDA.s['13']++;if((__cov_GobDZuI68m9d$3WqHX4dDA.b['3'][0]++,targetExtent)&&(__cov_GobDZuI68m9d$3WqHX4dDA.b['3'][1]++,olView.getResolutionForExtent)){__cov_GobDZuI68m9d$3WqHX4dDA.b['2'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['14']++;targetResolution=olView.getResolutionForExtent(targetExtent);__cov_GobDZuI68m9d$3WqHX4dDA.s['15']++;targetCenter=ol.extent.getCenter(targetExtent);__cov_GobDZuI68m9d$3WqHX4dDA.s['16']++;targetZoom=null;}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['2'][1]++;}__cov_GobDZuI68m9d$3WqHX4dDA.s['17']++;if(ol.animation){__cov_GobDZuI68m9d$3WqHX4dDA.b['4'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['18']++;var pan=ol.animation.pan({source:olView.getCenter()});__cov_GobDZuI68m9d$3WqHX4dDA.s['19']++;var zoom=ol.animation.zoom({resolution:olView.getResolution()});__cov_GobDZuI68m9d$3WqHX4dDA.s['20']++;var rotate=ol.animation.rotate({rotation:olView.getRotation()});__cov_GobDZuI68m9d$3WqHX4dDA.s['21']++;olMap.beforeRender(pan,zoom,rotate);__cov_GobDZuI68m9d$3WqHX4dDA.s['22']++;olView.setCenter(targetCenter);__cov_GobDZuI68m9d$3WqHX4dDA.s['23']++;olView.setRotation(targetRotation);__cov_GobDZuI68m9d$3WqHX4dDA.s['24']++;if(targetZoom){__cov_GobDZuI68m9d$3WqHX4dDA.b['5'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['25']++;olView.setZoom(targetZoom);}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['5'][1]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['26']++;olView.setResolution(targetResolution);}}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['4'][1]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['27']++;var animationObj={center:targetCenter,rotation:targetRotation};__cov_GobDZuI68m9d$3WqHX4dDA.s['28']++;if(targetZoom){__cov_GobDZuI68m9d$3WqHX4dDA.b['6'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['29']++;animationObj.zoom=targetZoom;}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['6'][1]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['30']++;animationObj.resolution=targetResolution;}__cov_GobDZuI68m9d$3WqHX4dDA.s['31']++;olView.animate(animationObj);}}},glyph:'xf0b2@FontAwesome',html:'<i class="fa fa-arrows-alt fa-2x"></i>',constructor:function(){__cov_GobDZuI68m9d$3WqHX4dDA.f['2']++;__cov_GobDZuI68m9d$3WqHX4dDA.s['32']++;var me=this;__cov_GobDZuI68m9d$3WqHX4dDA.s['33']++;me.callParent(arguments);__cov_GobDZuI68m9d$3WqHX4dDA.s['34']++;if((__cov_GobDZuI68m9d$3WqHX4dDA.b['8'][0]++,me.getZoom()!==null)&&(__cov_GobDZuI68m9d$3WqHX4dDA.b['8'][1]++,me.getResolution()!==null)){__cov_GobDZuI68m9d$3WqHX4dDA.b['7'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['35']++;Ext.raise('Both zoom and resolution set for ZoomToExtent button. '+'Please choose one.');}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['7'][1]++;}__cov_GobDZuI68m9d$3WqHX4dDA.s['36']++;me.setConfigValues();},setConfigValues:function(){__cov_GobDZuI68m9d$3WqHX4dDA.f['3']++;__cov_GobDZuI68m9d$3WqHX4dDA.s['37']++;var me=this;__cov_GobDZuI68m9d$3WqHX4dDA.s['38']++;var appContext=BasiGX.util.Application.getAppContext();__cov_GobDZuI68m9d$3WqHX4dDA.s['39']++;if(appContext){__cov_GobDZuI68m9d$3WqHX4dDA.b['9'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['40']++;if(!me.getCenter()){__cov_GobDZuI68m9d$3WqHX4dDA.b['10'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['41']++;me.setCenter(appContext.startCenter);}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['10'][1]++;}__cov_GobDZuI68m9d$3WqHX4dDA.s['42']++;if(me.getRotation()===null){__cov_GobDZuI68m9d$3WqHX4dDA.b['11'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['43']++;me.setRotation((__cov_GobDZuI68m9d$3WqHX4dDA.b['12'][0]++,appContext.startRotation)||(__cov_GobDZuI68m9d$3WqHX4dDA.b['12'][1]++,0));}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['11'][1]++;}__cov_GobDZuI68m9d$3WqHX4dDA.s['44']++;if((__cov_GobDZuI68m9d$3WqHX4dDA.b['14'][0]++,!me.getZoom())&&(__cov_GobDZuI68m9d$3WqHX4dDA.b['14'][1]++,!me.getResolution())){__cov_GobDZuI68m9d$3WqHX4dDA.b['13'][0]++;__cov_GobDZuI68m9d$3WqHX4dDA.s['45']++;me.setZoom(appContext.startZoom);}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['13'][1]++;}}else{__cov_GobDZuI68m9d$3WqHX4dDA.b['9'][1]++;}}});
+    requires: [
+        'BasiGX.util.Application',
+        'BasiGX.util.Map',
+        'Ext.app.ViewModel'
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Auf Gesamtansicht zoomen',
+            text: null,
+            documentation: '<h2>Auf Gesamtansicht zoomen</h2>• Ein Klick auf ' +
+                'den Button zoomt die Karte auf die Gesamtansicht.'
+        }
+    },
+
+    /**
+     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: 'basigx-button-zoomtoextent'
+        },
+        {
+            clickOnButton: 'basigx-button-zoomtoextent'
+        }
+    ],
+
+    /**
+     *
+     */
+    bind: {
+        text: '{text}'
+    },
+
+    /**
+     * The OpenLayers map this button is bound to. If not passed when
+     * instantiating, a map will be guessed.
+     */
+    olMap: null,
+
+    /**
+     * This can be configured with `center` and either `zoom` or `resolution`
+     * (if both are passed `zoom` will win). If you want to zoom to an extent
+     * passing only the option `extent` will work. The options `center`, `zoom`
+     * and `resolution` will be ignored in this case.
+     * Rotation can be passed in all cases.
+     */
+    config: {
+        center: null,
+        zoom: null,
+        resolution: null,
+        rotation: null,
+        extent: null,
+        handler: function() {
+            var me = this;
+            me.setConfigValues();
+
+            var olMap = me.olMap;
+
+            // fallback
+            if (Ext.isEmpty(olMap)) {
+                olMap = BasiGX.util.Map.getMapComponent().getMap();
+            }
+
+            var olView = olMap.getView();
+
+            var targetCenter = me.getCenter();
+            var targetResolution = me.getResolution();
+            var targetRotation = me.getRotation();
+            var targetZoom = me.getZoom();
+            var targetExtent = me.getExtent();
+
+            if (targetExtent && olView.getResolutionForExtent) {
+                targetResolution = olView.getResolutionForExtent(targetExtent);
+                targetCenter = ol.extent.getCenter(targetExtent);
+                // reset zoom, so the calculated resolution gets considered
+                targetZoom = null;
+            }
+
+            // This if is need for backwards comaptibility to ol3
+            if (ol.animation) {
+                // Create the animation with their respective start values:
+                var pan = ol.animation.pan({
+                    source: olView.getCenter()
+                });
+                var zoom = ol.animation.zoom({
+                    resolution: olView.getResolution()
+                });
+                var rotate = ol.animation.rotate({
+                    rotation: olView.getRotation()
+                });
+                // before we actually render, animate to the new values using
+                // the methods defined above
+                olMap.beforeRender(pan, zoom, rotate);
+
+                // Next: trigger a view change by setting `center`, `rotation`
+                // and either `zoom` (tried first) or `resolution`. The
+                // animation methods will transition smoothly.
+                olView.setCenter(targetCenter);
+                olView.setRotation(targetRotation);
+                if (targetZoom) {
+                    olView.setZoom(targetZoom);
+                } else {
+                    olView.setResolution(targetResolution);
+                }
+            } else {
+                var animationObj = {
+                    center: targetCenter,
+                    rotation: targetRotation
+                };
+                if (targetZoom) {
+                    animationObj.zoom = targetZoom;
+                } else {
+                    animationObj.resolution = targetResolution;
+                }
+                olView.animate(animationObj);
+            }
+        }
+    },
+
+    /**
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: 'xf0b2@FontAwesome',
+    html: '<i class="fa fa-arrows-alt fa-2x"></i>',
+
+    /**
+     *
+     */
+    constructor: function() {
+        var me = this;
+        me.callParent(arguments);
+
+        if (me.getZoom() !== null && me.getResolution() !== null) {
+            Ext.raise(
+                'Both zoom and resolution set for ZoomToExtent button. ' +
+                'Please choose one.'
+            );
+        }
+
+        me.setConfigValues();
+    },
+
+    /**
+     * This method will be called on initialisation and whenever a click/tap
+     * on the button happens. If we were not configured with explicit values
+     * for `center`, `rotation` and either `zoom` or `resolution`, we will try
+     * read out matching values from the application context.
+     */
+    setConfigValues: function() {
+        var me = this;
+        var appContext = BasiGX.util.Application.getAppContext();
+
+        if (appContext) {
+            if (!me.getCenter()) {
+                me.setCenter(appContext.startCenter);
+            }
+            if (me.getRotation() === null) { // 0 is a valid rotation…
+                me.setRotation(appContext.startRotation || 0);
+            }
+            if (!me.getZoom() && !me.getResolution()) {
+                me.setZoom(appContext.startZoom);
+            }
+        }
+    }
+});

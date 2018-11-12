@@ -1,9 +1,648 @@
+/* Copyright (c) 2016-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * WFS utility.
+ *
+ * @class BasiGX.util.WFS
+ */
+Ext.define('BasiGX.util.WFS', {
 
-var __cov_7pNeRWKXbugRUo2reCYyNA = (Function('return this'))();
-if (!__cov_7pNeRWKXbugRUo2reCYyNA.__coverage__) { __cov_7pNeRWKXbugRUo2reCYyNA.__coverage__ = {}; }
-__cov_7pNeRWKXbugRUo2reCYyNA = __cov_7pNeRWKXbugRUo2reCYyNA.__coverage__;
-if (!(__cov_7pNeRWKXbugRUo2reCYyNA['/home/travis/build/terrestris/BasiGX/src/util/WFS.js'])) {
-   __cov_7pNeRWKXbugRUo2reCYyNA['/home/travis/build/terrestris/BasiGX/src/util/WFS.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/WFS.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0,"137":0,"138":0,"139":0,"140":0,"141":0,"142":0,"143":0,"144":0,"145":0,"146":0,"147":0,"148":0,"149":0,"150":0,"151":0,"152":0,"153":0,"154":0,"155":0,"156":0,"157":0,"158":0,"159":0,"160":0,"161":0,"162":0,"163":0,"164":0,"165":0,"166":0,"167":0,"168":0,"169":0,"170":0,"171":0,"172":0,"173":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0,0,0,0,0,0,0,0],"6":[0,0],"7":[0,0],"8":[0,0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0],"19":[0,0],"20":[0,0],"21":[0,0],"22":[0,0],"23":[0,0],"24":[0,0],"25":[0,0],"26":[0,0],"27":[0,0,0],"28":[0,0],"29":[0,0],"30":[0,0],"31":[0,0],"32":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0},"fnMap":{"1":{"name":"(anonymous_1)","line":86,"loc":{"start":{"line":86,"column":23},"end":{"line":86,"column":59}}},"2":{"name":"(anonymous_2)","line":130,"loc":{"start":{"line":130,"column":29},"end":{"line":130,"column":49}}},"3":{"name":"(anonymous_3)","line":181,"loc":{"start":{"line":181,"column":37},"end":{"line":181,"column":51}}},"4":{"name":"(anonymous_4)","line":227,"loc":{"start":{"line":227,"column":28},"end":{"line":227,"column":64}}},"5":{"name":"(anonymous_5)","line":285,"loc":{"start":{"line":285,"column":22},"end":{"line":285,"column":39}}},"6":{"name":"(anonymous_6)","line":302,"loc":{"start":{"line":302,"column":25},"end":{"line":302,"column":42}}},"7":{"name":"(anonymous_7)","line":324,"loc":{"start":{"line":324,"column":24},"end":{"line":324,"column":65}}},"8":{"name":"(anonymous_8)","line":341,"loc":{"start":{"line":341,"column":30},"end":{"line":341,"column":47}}},"9":{"name":"(anonymous_9)","line":365,"loc":{"start":{"line":365,"column":22},"end":{"line":365,"column":69}}},"10":{"name":"(anonymous_10)","line":377,"loc":{"start":{"line":377,"column":45},"end":{"line":377,"column":58}}},"11":{"name":"(anonymous_11)","line":412,"loc":{"start":{"line":412,"column":30},"end":{"line":414,"column":48}}},"12":{"name":"(anonymous_12)","line":428,"loc":{"start":{"line":428,"column":41},"end":{"line":428,"column":55}}},"13":{"name":"(anonymous_13)","line":471,"loc":{"start":{"line":471,"column":31},"end":{"line":471,"column":42}}},"14":{"name":"(anonymous_14)","line":479,"loc":{"start":{"line":479,"column":31},"end":{"line":479,"column":42}}},"15":{"name":"(anonymous_15)","line":489,"loc":{"start":{"line":489,"column":35},"end":{"line":489,"column":54}}},"16":{"name":"(anonymous_16)","line":538,"loc":{"start":{"line":538,"column":33},"end":{"line":540,"column":19}}},"17":{"name":"(anonymous_17)","line":588,"loc":{"start":{"line":588,"column":38},"end":{"line":589,"column":79}}},"18":{"name":"(anonymous_18)","line":628,"loc":{"start":{"line":628,"column":35},"end":{"line":628,"column":64}}},"19":{"name":"(anonymous_19)","line":631,"loc":{"start":{"line":631,"column":33},"end":{"line":631,"column":53}}}},"statementMap":{"1":{"start":{"line":21,"column":0},"end":{"line":648,"column":3}},"2":{"start":{"line":87,"column":12},"end":{"line":105,"column":29}},"3":{"start":{"line":106,"column":12},"end":{"line":106,"column":40}},"4":{"start":{"line":107,"column":12},"end":{"line":107,"column":60}},"5":{"start":{"line":108,"column":12},"end":{"line":110,"column":13}},"6":{"start":{"line":109,"column":16},"end":{"line":109,"column":64}},"7":{"start":{"line":111,"column":12},"end":{"line":117,"column":14}},"8":{"start":{"line":118,"column":12},"end":{"line":118,"column":26}},"9":{"start":{"line":131,"column":12},"end":{"line":133,"column":13}},"10":{"start":{"line":132,"column":16},"end":{"line":132,"column":23}},"11":{"start":{"line":134,"column":12},"end":{"line":135,"column":33}},"12":{"start":{"line":136,"column":12},"end":{"line":140,"column":13}},"13":{"start":{"line":137,"column":16},"end":{"line":138,"column":73}},"14":{"start":{"line":139,"column":16},"end":{"line":139,"column":23}},"15":{"start":{"line":142,"column":12},"end":{"line":142,"column":31}},"16":{"start":{"line":143,"column":12},"end":{"line":143,"column":50}},"17":{"start":{"line":144,"column":12},"end":{"line":144,"column":33}},"18":{"start":{"line":145,"column":12},"end":{"line":145,"column":30}},"19":{"start":{"line":146,"column":12},"end":{"line":146,"column":27}},"20":{"start":{"line":149,"column":12},"end":{"line":149,"column":49}},"21":{"start":{"line":150,"column":12},"end":{"line":150,"column":49}},"22":{"start":{"line":152,"column":12},"end":{"line":195,"column":13}},"23":{"start":{"line":154,"column":20},"end":{"line":154,"column":56}},"24":{"start":{"line":155,"column":20},"end":{"line":155,"column":26}},"25":{"start":{"line":157,"column":20},"end":{"line":157,"column":59}},"26":{"start":{"line":158,"column":20},"end":{"line":158,"column":26}},"27":{"start":{"line":160,"column":20},"end":{"line":160,"column":57}},"28":{"start":{"line":161,"column":20},"end":{"line":161,"column":26}},"29":{"start":{"line":163,"column":20},"end":{"line":163,"column":60}},"30":{"start":{"line":164,"column":20},"end":{"line":164,"column":26}},"31":{"start":{"line":166,"column":20},"end":{"line":166,"column":66}},"32":{"start":{"line":167,"column":20},"end":{"line":167,"column":26}},"33":{"start":{"line":169,"column":20},"end":{"line":169,"column":69}},"34":{"start":{"line":170,"column":20},"end":{"line":170,"column":26}},"35":{"start":{"line":172,"column":20},"end":{"line":172,"column":53}},"36":{"start":{"line":173,"column":20},"end":{"line":173,"column":46}},"37":{"start":{"line":174,"column":20},"end":{"line":174,"column":26}},"38":{"start":{"line":176,"column":20},"end":{"line":176,"column":41}},"39":{"start":{"line":178,"column":20},"end":{"line":178,"column":58}},"40":{"start":{"line":179,"column":20},"end":{"line":179,"column":50}},"41":{"start":{"line":180,"column":20},"end":{"line":180,"column":37}},"42":{"start":{"line":181,"column":20},"end":{"line":187,"column":23}},"43":{"start":{"line":182,"column":24},"end":{"line":186,"column":55}},"44":{"start":{"line":188,"column":20},"end":{"line":188,"column":66}},"45":{"start":{"line":189,"column":20},"end":{"line":189,"column":74}},"46":{"start":{"line":190,"column":20},"end":{"line":190,"column":64}},"47":{"start":{"line":192,"column":20},"end":{"line":193,"column":66}},"48":{"start":{"line":194,"column":20},"end":{"line":194,"column":27}},"49":{"start":{"line":196,"column":12},"end":{"line":196,"column":58}},"50":{"start":{"line":197,"column":12},"end":{"line":197,"column":66}},"51":{"start":{"line":198,"column":12},"end":{"line":202,"column":24}},"52":{"start":{"line":204,"column":12},"end":{"line":210,"column":14}},"53":{"start":{"line":211,"column":12},"end":{"line":211,"column":26}},"54":{"start":{"line":228,"column":12},"end":{"line":230,"column":13}},"55":{"start":{"line":229,"column":16},"end":{"line":229,"column":23}},"56":{"start":{"line":232,"column":12},"end":{"line":232,"column":68}},"57":{"start":{"line":233,"column":12},"end":{"line":235,"column":13}},"58":{"start":{"line":234,"column":16},"end":{"line":234,"column":65}},"59":{"start":{"line":237,"column":12},"end":{"line":237,"column":43}},"60":{"start":{"line":238,"column":12},"end":{"line":238,"column":74}},"61":{"start":{"line":239,"column":12},"end":{"line":239,"column":50}},"62":{"start":{"line":240,"column":12},"end":{"line":242,"column":13}},"63":{"start":{"line":241,"column":16},"end":{"line":241,"column":23}},"64":{"start":{"line":244,"column":12},"end":{"line":244,"column":49}},"65":{"start":{"line":245,"column":12},"end":{"line":245,"column":45}},"66":{"start":{"line":246,"column":12},"end":{"line":246,"column":45}},"67":{"start":{"line":247,"column":12},"end":{"line":249,"column":13}},"68":{"start":{"line":248,"column":16},"end":{"line":248,"column":45}},"69":{"start":{"line":252,"column":12},"end":{"line":255,"column":56}},"70":{"start":{"line":258,"column":12},"end":{"line":261,"column":53}},"71":{"start":{"line":263,"column":12},"end":{"line":267,"column":14}},"72":{"start":{"line":269,"column":12},"end":{"line":273,"column":14}},"73":{"start":{"line":275,"column":12},"end":{"line":275,"column":62}},"74":{"start":{"line":286,"column":12},"end":{"line":286,"column":54}},"75":{"start":{"line":287,"column":12},"end":{"line":287,"column":46}},"76":{"start":{"line":288,"column":12},"end":{"line":290,"column":13}},"77":{"start":{"line":289,"column":16},"end":{"line":289,"column":30}},"78":{"start":{"line":291,"column":12},"end":{"line":291,"column":30}},"79":{"start":{"line":303,"column":12},"end":{"line":303,"column":54}},"80":{"start":{"line":304,"column":12},"end":{"line":304,"column":46}},"81":{"start":{"line":305,"column":12},"end":{"line":307,"column":13}},"82":{"start":{"line":306,"column":16},"end":{"line":306,"column":26}},"83":{"start":{"line":308,"column":12},"end":{"line":308,"column":30}},"84":{"start":{"line":325,"column":12},"end":{"line":325,"column":56}},"85":{"start":{"line":326,"column":12},"end":{"line":326,"column":78}},"86":{"start":{"line":327,"column":12},"end":{"line":327,"column":43}},"87":{"start":{"line":329,"column":12},"end":{"line":329,"column":63}},"88":{"start":{"line":330,"column":12},"end":{"line":330,"column":31}},"89":{"start":{"line":331,"column":12},"end":{"line":335,"column":13}},"90":{"start":{"line":332,"column":16},"end":{"line":332,"column":43}},"91":{"start":{"line":334,"column":16},"end":{"line":334,"column":49}},"92":{"start":{"line":337,"column":12},"end":{"line":337,"column":27}},"93":{"start":{"line":338,"column":12},"end":{"line":338,"column":39}},"94":{"start":{"line":339,"column":12},"end":{"line":339,"column":52}},"95":{"start":{"line":341,"column":12},"end":{"line":345,"column":15}},"96":{"start":{"line":342,"column":16},"end":{"line":344,"column":17}},"97":{"start":{"line":343,"column":20},"end":{"line":343,"column":39}},"98":{"start":{"line":347,"column":12},"end":{"line":347,"column":53}},"99":{"start":{"line":348,"column":12},"end":{"line":350,"column":13}},"100":{"start":{"line":349,"column":16},"end":{"line":349,"column":44}},"101":{"start":{"line":351,"column":12},"end":{"line":351,"column":34}},"102":{"start":{"line":367,"column":12},"end":{"line":367,"column":54}},"103":{"start":{"line":368,"column":12},"end":{"line":368,"column":46}},"104":{"start":{"line":369,"column":12},"end":{"line":371,"column":13}},"105":{"start":{"line":370,"column":16},"end":{"line":370,"column":30}},"106":{"start":{"line":372,"column":12},"end":{"line":372,"column":32}},"107":{"start":{"line":373,"column":12},"end":{"line":373,"column":41}},"108":{"start":{"line":374,"column":12},"end":{"line":374,"column":44}},"109":{"start":{"line":376,"column":12},"end":{"line":376,"column":44}},"110":{"start":{"line":377,"column":12},"end":{"line":379,"column":15}},"111":{"start":{"line":378,"column":16},"end":{"line":378,"column":36}},"112":{"start":{"line":381,"column":12},"end":{"line":385,"column":14}},"113":{"start":{"line":386,"column":12},"end":{"line":386,"column":28}},"114":{"start":{"line":415,"column":12},"end":{"line":417,"column":13}},"115":{"start":{"line":416,"column":16},"end":{"line":416,"column":32}},"116":{"start":{"line":419,"column":12},"end":{"line":419,"column":67}},"117":{"start":{"line":420,"column":12},"end":{"line":420,"column":47}},"118":{"start":{"line":422,"column":12},"end":{"line":422,"column":43}},"119":{"start":{"line":424,"column":12},"end":{"line":424,"column":37}},"120":{"start":{"line":425,"column":12},"end":{"line":425,"column":73}},"121":{"start":{"line":427,"column":12},"end":{"line":438,"column":13}},"122":{"start":{"line":428,"column":16},"end":{"line":430,"column":19}},"123":{"start":{"line":429,"column":20},"end":{"line":429,"column":75}},"124":{"start":{"line":432,"column":16},"end":{"line":434,"column":17}},"125":{"start":{"line":433,"column":20},"end":{"line":433,"column":43}},"126":{"start":{"line":436,"column":16},"end":{"line":437,"column":66}},"127":{"start":{"line":440,"column":12},"end":{"line":442,"column":13}},"128":{"start":{"line":441,"column":16},"end":{"line":441,"column":35}},"129":{"start":{"line":444,"column":12},"end":{"line":454,"column":14}},"130":{"start":{"line":456,"column":12},"end":{"line":464,"column":15}},"131":{"start":{"line":472,"column":12},"end":{"line":472,"column":53}},"132":{"start":{"line":480,"column":12},"end":{"line":480,"column":62}},"133":{"start":{"line":490,"column":12},"end":{"line":490,"column":43}},"134":{"start":{"line":491,"column":12},"end":{"line":491,"column":48}},"135":{"start":{"line":492,"column":12},"end":{"line":492,"column":78}},"136":{"start":{"line":493,"column":12},"end":{"line":506,"column":13}},"137":{"start":{"line":494,"column":16},"end":{"line":494,"column":61}},"138":{"start":{"line":495,"column":16},"end":{"line":495,"column":54}},"139":{"start":{"line":496,"column":16},"end":{"line":496,"column":56}},"140":{"start":{"line":497,"column":16},"end":{"line":497,"column":60}},"141":{"start":{"line":498,"column":16},"end":{"line":498,"column":63}},"142":{"start":{"line":499,"column":16},"end":{"line":505,"column":18}},"143":{"start":{"line":541,"column":12},"end":{"line":541,"column":43}},"144":{"start":{"line":542,"column":12},"end":{"line":544,"column":14}},"145":{"start":{"line":545,"column":12},"end":{"line":545,"column":65}},"146":{"start":{"line":546,"column":12},"end":{"line":546,"column":75}},"147":{"start":{"line":548,"column":12},"end":{"line":548,"column":47}},"148":{"start":{"line":549,"column":12},"end":{"line":549,"column":76}},"149":{"start":{"line":551,"column":12},"end":{"line":568,"column":13}},"150":{"start":{"line":552,"column":16},"end":{"line":552,"column":46}},"151":{"start":{"line":554,"column":16},"end":{"line":554,"column":71}},"152":{"start":{"line":555,"column":16},"end":{"line":555,"column":69}},"153":{"start":{"line":557,"column":16},"end":{"line":567,"column":18}},"154":{"start":{"line":590,"column":12},"end":{"line":590,"column":43}},"155":{"start":{"line":593,"column":12},"end":{"line":595,"column":13}},"156":{"start":{"line":594,"column":16},"end":{"line":594,"column":60}},"157":{"start":{"line":597,"column":12},"end":{"line":597,"column":32}},"158":{"start":{"line":598,"column":12},"end":{"line":599,"column":43}},"159":{"start":{"line":600,"column":12},"end":{"line":602,"column":13}},"160":{"start":{"line":601,"column":16},"end":{"line":601,"column":45}},"161":{"start":{"line":603,"column":12},"end":{"line":610,"column":13}},"162":{"start":{"line":604,"column":16},"end":{"line":608,"column":18}},"163":{"start":{"line":609,"column":16},"end":{"line":609,"column":44}},"164":{"start":{"line":612,"column":12},"end":{"line":612,"column":61}},"165":{"start":{"line":614,"column":12},"end":{"line":614,"column":74}},"166":{"start":{"line":629,"column":12},"end":{"line":629,"column":43}},"167":{"start":{"line":630,"column":12},"end":{"line":630,"column":37}},"168":{"start":{"line":631,"column":12},"end":{"line":633,"column":15}},"169":{"start":{"line":632,"column":16},"end":{"line":632,"column":71}},"170":{"start":{"line":635,"column":12},"end":{"line":644,"column":13}},"171":{"start":{"line":638,"column":16},"end":{"line":640,"column":18}},"172":{"start":{"line":641,"column":16},"end":{"line":643,"column":18}},"173":{"start":{"line":645,"column":12},"end":{"line":645,"column":26}}},"branchMap":{"1":{"line":108,"type":"if","locations":[{"start":{"line":108,"column":12},"end":{"line":108,"column":12}},{"start":{"line":108,"column":12},"end":{"line":108,"column":12}}]},"2":{"line":131,"type":"if","locations":[{"start":{"line":131,"column":12},"end":{"line":131,"column":12}},{"start":{"line":131,"column":12},"end":{"line":131,"column":12}}]},"3":{"line":136,"type":"if","locations":[{"start":{"line":136,"column":12},"end":{"line":136,"column":12}},{"start":{"line":136,"column":12},"end":{"line":136,"column":12}}]},"4":{"line":136,"type":"binary-expr","locations":[{"start":{"line":136,"column":16},"end":{"line":136,"column":22}},{"start":{"line":136,"column":26},"end":{"line":136,"column":44}}]},"5":{"line":152,"type":"switch","locations":[{"start":{"line":153,"column":16},"end":{"line":155,"column":26}},{"start":{"line":156,"column":16},"end":{"line":158,"column":26}},{"start":{"line":159,"column":16},"end":{"line":161,"column":26}},{"start":{"line":162,"column":16},"end":{"line":164,"column":26}},{"start":{"line":165,"column":16},"end":{"line":167,"column":26}},{"start":{"line":168,"column":16},"end":{"line":170,"column":26}},{"start":{"line":171,"column":16},"end":{"line":174,"column":26}},{"start":{"line":175,"column":16},"end":{"line":190,"column":64}},{"start":{"line":191,"column":16},"end":{"line":194,"column":27}}]},"6":{"line":228,"type":"if","locations":[{"start":{"line":228,"column":12},"end":{"line":228,"column":12}},{"start":{"line":228,"column":12},"end":{"line":228,"column":12}}]},"7":{"line":233,"type":"if","locations":[{"start":{"line":233,"column":12},"end":{"line":233,"column":12}},{"start":{"line":233,"column":12},"end":{"line":233,"column":12}}]},"8":{"line":238,"type":"binary-expr","locations":[{"start":{"line":238,"column":25},"end":{"line":238,"column":31}},{"start":{"line":238,"column":35},"end":{"line":238,"column":51}},{"start":{"line":238,"column":55},"end":{"line":238,"column":73}}]},"9":{"line":239,"type":"binary-expr","locations":[{"start":{"line":239,"column":28},"end":{"line":239,"column":34}},{"start":{"line":239,"column":38},"end":{"line":239,"column":49}}]},"10":{"line":240,"type":"if","locations":[{"start":{"line":240,"column":12},"end":{"line":240,"column":12}},{"start":{"line":240,"column":12},"end":{"line":240,"column":12}}]},"11":{"line":247,"type":"if","locations":[{"start":{"line":247,"column":12},"end":{"line":247,"column":12}},{"start":{"line":247,"column":12},"end":{"line":247,"column":12}}]},"12":{"line":288,"type":"if","locations":[{"start":{"line":288,"column":12},"end":{"line":288,"column":12}},{"start":{"line":288,"column":12},"end":{"line":288,"column":12}}]},"13":{"line":288,"type":"binary-expr","locations":[{"start":{"line":288,"column":16},"end":{"line":288,"column":24}},{"start":{"line":288,"column":28},"end":{"line":288,"column":48}}]},"14":{"line":305,"type":"if","locations":[{"start":{"line":305,"column":12},"end":{"line":305,"column":12}},{"start":{"line":305,"column":12},"end":{"line":305,"column":12}}]},"15":{"line":305,"type":"binary-expr","locations":[{"start":{"line":305,"column":16},"end":{"line":305,"column":24}},{"start":{"line":305,"column":28},"end":{"line":305,"column":48}}]},"16":{"line":329,"type":"binary-expr","locations":[{"start":{"line":329,"column":30},"end":{"line":329,"column":40}},{"start":{"line":329,"column":44},"end":{"line":329,"column":62}}]},"17":{"line":331,"type":"if","locations":[{"start":{"line":331,"column":12},"end":{"line":331,"column":12}},{"start":{"line":331,"column":12},"end":{"line":331,"column":12}}]},"18":{"line":342,"type":"if","locations":[{"start":{"line":342,"column":16},"end":{"line":342,"column":16}},{"start":{"line":342,"column":16},"end":{"line":342,"column":16}}]},"19":{"line":348,"type":"if","locations":[{"start":{"line":348,"column":12},"end":{"line":348,"column":12}},{"start":{"line":348,"column":12},"end":{"line":348,"column":12}}]},"20":{"line":369,"type":"if","locations":[{"start":{"line":369,"column":12},"end":{"line":369,"column":12}},{"start":{"line":369,"column":12},"end":{"line":369,"column":12}}]},"21":{"line":369,"type":"binary-expr","locations":[{"start":{"line":369,"column":16},"end":{"line":369,"column":24}},{"start":{"line":369,"column":28},"end":{"line":369,"column":48}}]},"22":{"line":415,"type":"if","locations":[{"start":{"line":415,"column":12},"end":{"line":415,"column":12}},{"start":{"line":415,"column":12},"end":{"line":415,"column":12}}]},"23":{"line":427,"type":"if","locations":[{"start":{"line":427,"column":12},"end":{"line":427,"column":12}},{"start":{"line":427,"column":12},"end":{"line":427,"column":12}}]},"24":{"line":432,"type":"if","locations":[{"start":{"line":432,"column":16},"end":{"line":432,"column":16}},{"start":{"line":432,"column":16},"end":{"line":432,"column":16}}]},"25":{"line":440,"type":"if","locations":[{"start":{"line":440,"column":12},"end":{"line":440,"column":12}},{"start":{"line":440,"column":12},"end":{"line":440,"column":12}}]},"26":{"line":493,"type":"if","locations":[{"start":{"line":493,"column":12},"end":{"line":493,"column":12}},{"start":{"line":493,"column":12},"end":{"line":493,"column":12}}]},"27":{"line":493,"type":"binary-expr","locations":[{"start":{"line":493,"column":16},"end":{"line":493,"column":25}},{"start":{"line":493,"column":29},"end":{"line":493,"column":44}},{"start":{"line":493,"column":48},"end":{"line":493,"column":76}}]},"28":{"line":551,"type":"if","locations":[{"start":{"line":551,"column":12},"end":{"line":551,"column":12}},{"start":{"line":551,"column":12},"end":{"line":551,"column":12}}]},"29":{"line":593,"type":"if","locations":[{"start":{"line":593,"column":12},"end":{"line":593,"column":12}},{"start":{"line":593,"column":12},"end":{"line":593,"column":12}}]},"30":{"line":600,"type":"if","locations":[{"start":{"line":600,"column":12},"end":{"line":600,"column":12}},{"start":{"line":600,"column":12},"end":{"line":600,"column":12}}]},"31":{"line":603,"type":"if","locations":[{"start":{"line":603,"column":12},"end":{"line":603,"column":12}},{"start":{"line":603,"column":12},"end":{"line":603,"column":12}}]},"32":{"line":635,"type":"if","locations":[{"start":{"line":635,"column":12},"end":{"line":635,"column":12}},{"start":{"line":635,"column":12},"end":{"line":635,"column":12}}]}}};
-}
-__cov_7pNeRWKXbugRUo2reCYyNA = __cov_7pNeRWKXbugRUo2reCYyNA['/home/travis/build/terrestris/BasiGX/src/util/WFS.js'];
-__cov_7pNeRWKXbugRUo2reCYyNA.s['1']++;Ext.define('BasiGX.util.WFS',{requires:['BasiGX.util.CSRF','BasiGX.util.Url','BasiGX.util.Filter'],inheritableStatics:{errorMsgTitle:'',wfsExecuteExceptionText:'',reMatchFilter:/(<ogc:Filter\b[^>]*>)(.*?)(<\/ogc:Filter>)/,wfsGetFeatureXmlTpl:''+'<wfs:GetFeature service="WFS" version="1.1.0"'+' outputFormat="JSON"'+' maxFeatures="{6}"'+' viewParams="{7}"'+' xmlns:{0}="{1}"'+' xmlns:wfs="http://www.opengis.net/wfs"'+' xmlns="http://www.opengis.net/ogc"'+' xmlns:gml="http://www.opengis.net/gml"'+' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"'+' xsi:schemaLocation="http://www.opengis.net/wfs'+' http://schemas.opengis.net/wfs/1.0.0/WFS-basic.xsd">'+'<wfs:Query typeName="{2}" srsName="{3}">'+'{4}'+'{5}'+'</wfs:Query>'+'</wfs:GetFeature>',getBboxFilter:function(map,propertyName,extent){__cov_7pNeRWKXbugRUo2reCYyNA.f['1']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['2']++;var tpl=''+'<ogc:And>'+'  <ogc:BBOX>'+'    <ogc:PropertyName>{0}</ogc:PropertyName>'+'    <gml:Envelope'+' xmlns:gml="http://www.opengis.net/gml" srsName="{1}">'+'      <gml:lowerCorner>{2} {3}</gml:lowerCorner>'+'      <gml:upperCorner>{4} {5}</gml:upperCorner>'+'    </gml:Envelope>'+'  </ogc:BBOX>'+'  <ogc:Intersects>'+'    <ogc:PropertyName>{0}</ogc:PropertyName>'+'    <gml:Envelope'+' xmlns:gml="http://www.opengis.net/gml" srsName="{1}">'+'      <gml:lowerCorner>{2} {3}</gml:lowerCorner>'+'      <gml:upperCorner>{4} {5}</gml:upperCorner>'+'    </gml:Envelope>'+'  </ogc:Intersects>'+'</ogc:And>';__cov_7pNeRWKXbugRUo2reCYyNA.s['3']++;var mapView=map.getView();__cov_7pNeRWKXbugRUo2reCYyNA.s['4']++;var srsName=mapView.getProjection().getCode();__cov_7pNeRWKXbugRUo2reCYyNA.s['5']++;if(!extent){__cov_7pNeRWKXbugRUo2reCYyNA.b['1'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['6']++;extent=mapView.calculateExtent(map.getSize());}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['1'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['7']++;var filter=Ext.String.format(tpl,propertyName,srsName,extent[0],extent[1],extent[2],extent[3]);__cov_7pNeRWKXbugRUo2reCYyNA.s['8']++;return filter;},getOgcFromCqlFilter:function(cqlFilter){__cov_7pNeRWKXbugRUo2reCYyNA.f['2']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['9']++;if(!cqlFilter){__cov_7pNeRWKXbugRUo2reCYyNA.b['2'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['10']++;return;}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['2'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['11']++;var parts=/^\s*([\w_]+)\s*([<>=!]+|in|like)\s*([^\s]+)\s*$/gi.exec(cqlFilter);__cov_7pNeRWKXbugRUo2reCYyNA.s['12']++;if((__cov_7pNeRWKXbugRUo2reCYyNA.b['4'][0]++,!parts)||(__cov_7pNeRWKXbugRUo2reCYyNA.b['4'][1]++,parts.length!==4)){__cov_7pNeRWKXbugRUo2reCYyNA.b['3'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['13']++;Ext.log.error('Method `getOgcFromCqlFilter` can only handle '+'CQL filters with one key, one operator and one value!');__cov_7pNeRWKXbugRUo2reCYyNA.s['14']++;return;}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['3'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['15']++;var key=parts[1];__cov_7pNeRWKXbugRUo2reCYyNA.s['16']++;var operator=parts[2].toLowerCase();__cov_7pNeRWKXbugRUo2reCYyNA.s['17']++;var value=parts[3];__cov_7pNeRWKXbugRUo2reCYyNA.s['18']++;var ogcFilterType;__cov_7pNeRWKXbugRUo2reCYyNA.s['19']++;var closingTag;__cov_7pNeRWKXbugRUo2reCYyNA.s['20']++;value=value.replace(/(^['])/g,'');__cov_7pNeRWKXbugRUo2reCYyNA.s['21']++;value=value.replace(/([']$)/g,'');__cov_7pNeRWKXbugRUo2reCYyNA.s['22']++;switch(operator){case'=':__cov_7pNeRWKXbugRUo2reCYyNA.b['5'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['23']++;ogcFilterType='PropertyIsEqualTo';__cov_7pNeRWKXbugRUo2reCYyNA.s['24']++;break;case'!=':__cov_7pNeRWKXbugRUo2reCYyNA.b['5'][1]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['25']++;ogcFilterType='PropertyIsNotEqualTo';__cov_7pNeRWKXbugRUo2reCYyNA.s['26']++;break;case'<':__cov_7pNeRWKXbugRUo2reCYyNA.b['5'][2]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['27']++;ogcFilterType='PropertyIsLessThan';__cov_7pNeRWKXbugRUo2reCYyNA.s['28']++;break;case'>':__cov_7pNeRWKXbugRUo2reCYyNA.b['5'][3]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['29']++;ogcFilterType='PropertyIsGreaterThan';__cov_7pNeRWKXbugRUo2reCYyNA.s['30']++;break;case'<=':__cov_7pNeRWKXbugRUo2reCYyNA.b['5'][4]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['31']++;ogcFilterType='PropertyIsLessThanOrEqualTo';__cov_7pNeRWKXbugRUo2reCYyNA.s['32']++;break;case'>=':__cov_7pNeRWKXbugRUo2reCYyNA.b['5'][5]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['33']++;ogcFilterType='PropertyIsGreaterThanOrEqualTo';__cov_7pNeRWKXbugRUo2reCYyNA.s['34']++;break;case'like':__cov_7pNeRWKXbugRUo2reCYyNA.b['5'][6]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['35']++;ogcFilterType='PropertyIsLike';__cov_7pNeRWKXbugRUo2reCYyNA.s['36']++;value='%'+value+'%';__cov_7pNeRWKXbugRUo2reCYyNA.s['37']++;break;case'in':__cov_7pNeRWKXbugRUo2reCYyNA.b['5'][7]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['38']++;ogcFilterType='Or';__cov_7pNeRWKXbugRUo2reCYyNA.s['39']++;value=value.replace(/([()'])/g,'');__cov_7pNeRWKXbugRUo2reCYyNA.s['40']++;var values=value.split(',');__cov_7pNeRWKXbugRUo2reCYyNA.s['41']++;var filters='';__cov_7pNeRWKXbugRUo2reCYyNA.s['42']++;Ext.each(values,function(val){__cov_7pNeRWKXbugRUo2reCYyNA.f['3']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['43']++;filters+='<ogc:PropertyIsEqualTo>'+'<ogc:PropertyName>'+key+'</ogc:PropertyName>'+'<ogc:Literal>'+val+'</ogc:Literal>'+'</ogc:PropertyIsEqualTo>';});__cov_7pNeRWKXbugRUo2reCYyNA.s['44']++;ogcFilterType='<ogc:'+ogcFilterType+'>';__cov_7pNeRWKXbugRUo2reCYyNA.s['45']++;closingTag=Ext.String.insert(ogcFilterType,'/',1);__cov_7pNeRWKXbugRUo2reCYyNA.s['46']++;return ogcFilterType+filters+closingTag;default:__cov_7pNeRWKXbugRUo2reCYyNA.b['5'][8]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['47']++;Ext.log.warn('Method `getOgcFromCqlFilter` could not '+'handle the given operator: '+operator);__cov_7pNeRWKXbugRUo2reCYyNA.s['48']++;return;}__cov_7pNeRWKXbugRUo2reCYyNA.s['49']++;ogcFilterType='<ogc:'+ogcFilterType+'>';__cov_7pNeRWKXbugRUo2reCYyNA.s['50']++;closingTag=Ext.String.insert(ogcFilterType,'/',1);__cov_7pNeRWKXbugRUo2reCYyNA.s['51']++;var tpl=''+'  {0}'+'    <ogc:PropertyName>{1}</ogc:PropertyName>'+'    <ogc:Literal>{2}</ogc:Literal>'+'  {3}';__cov_7pNeRWKXbugRUo2reCYyNA.s['52']++;var filter=Ext.String.format(tpl,ogcFilterType,key,value,closingTag);__cov_7pNeRWKXbugRUo2reCYyNA.s['53']++;return filter;},getTimeFilterParts:function(layer,dimensionAttribute){__cov_7pNeRWKXbugRUo2reCYyNA.f['4']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['54']++;if(!dimensionAttribute){__cov_7pNeRWKXbugRUo2reCYyNA.b['6'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['55']++;return;}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['6'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['56']++;var dimensionAttributes=dimensionAttribute.split(',');__cov_7pNeRWKXbugRUo2reCYyNA.s['57']++;if(dimensionAttributes.length===1){__cov_7pNeRWKXbugRUo2reCYyNA.b['7'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['58']++;dimensionAttributes.push(dimensionAttributes[0]);}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['7'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['59']++;var source=layer.getSource();__cov_7pNeRWKXbugRUo2reCYyNA.s['60']++;var params=(__cov_7pNeRWKXbugRUo2reCYyNA.b['8'][0]++,source)&&(__cov_7pNeRWKXbugRUo2reCYyNA.b['8'][1]++,source.getParams)&&(__cov_7pNeRWKXbugRUo2reCYyNA.b['8'][2]++,source.getParams());__cov_7pNeRWKXbugRUo2reCYyNA.s['61']++;var timeParam=(__cov_7pNeRWKXbugRUo2reCYyNA.b['9'][0]++,params)&&(__cov_7pNeRWKXbugRUo2reCYyNA.b['9'][1]++,params.TIME);__cov_7pNeRWKXbugRUo2reCYyNA.s['62']++;if(!timeParam){__cov_7pNeRWKXbugRUo2reCYyNA.b['10'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['63']++;return;}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['10'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['64']++;var timeParts=timeParam.split('/');__cov_7pNeRWKXbugRUo2reCYyNA.s['65']++;var lowerBoundary=timeParts[0];__cov_7pNeRWKXbugRUo2reCYyNA.s['66']++;var upperBoundary=timeParts[1];__cov_7pNeRWKXbugRUo2reCYyNA.s['67']++;if(timeParts.length===1){__cov_7pNeRWKXbugRUo2reCYyNA.b['11'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['68']++;upperBoundary=timeParts[0];}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['11'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['69']++;var lowerBoundaryTpl='<ogc:PropertyIsGreaterThanOrEqualTo>'+'<ogc:PropertyName>{0}</ogc:PropertyName>'+'<ogc:Literal>{1}</ogc:Literal>'+'</ogc:PropertyIsGreaterThanOrEqualTo>';__cov_7pNeRWKXbugRUo2reCYyNA.s['70']++;var upperBoundaryTpl='<ogc:PropertyIsLessThanOrEqualTo>'+'<ogc:PropertyName>{0}</ogc:PropertyName>'+'<ogc:Literal>{1}</ogc:Literal>'+'</ogc:PropertyIsLessThanOrEqualTo>';__cov_7pNeRWKXbugRUo2reCYyNA.s['71']++;var lowerBoundaryFilter=Ext.String.format(lowerBoundaryTpl,Ext.String.trim(dimensionAttributes[1]),lowerBoundary);__cov_7pNeRWKXbugRUo2reCYyNA.s['72']++;var upperBoundaryFilter=Ext.String.format(upperBoundaryTpl,Ext.String.trim(dimensionAttributes[0]),upperBoundary);__cov_7pNeRWKXbugRUo2reCYyNA.s['73']++;return[lowerBoundaryFilter,upperBoundaryFilter];},unwrapFilter:function(filter){__cov_7pNeRWKXbugRUo2reCYyNA.f['5']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['74']++;var regex=BasiGX.util.WFS.reMatchFilter;__cov_7pNeRWKXbugRUo2reCYyNA.s['75']++;var matches=filter.match(regex);__cov_7pNeRWKXbugRUo2reCYyNA.s['76']++;if((__cov_7pNeRWKXbugRUo2reCYyNA.b['13'][0]++,!matches)||(__cov_7pNeRWKXbugRUo2reCYyNA.b['13'][1]++,matches.length!==4)){__cov_7pNeRWKXbugRUo2reCYyNA.b['12'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['77']++;return filter;}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['12'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['78']++;return matches[2];},getFilterPrefix:function(filter){__cov_7pNeRWKXbugRUo2reCYyNA.f['6']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['79']++;var regex=BasiGX.util.WFS.reMatchFilter;__cov_7pNeRWKXbugRUo2reCYyNA.s['80']++;var matches=filter.match(regex);__cov_7pNeRWKXbugRUo2reCYyNA.s['81']++;if((__cov_7pNeRWKXbugRUo2reCYyNA.b['15'][0]++,!matches)||(__cov_7pNeRWKXbugRUo2reCYyNA.b['15'][1]++,matches.length!==4)){__cov_7pNeRWKXbugRUo2reCYyNA.b['14'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['82']++;return'';}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['14'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['83']++;return matches[1];},combineFilters:function(filters,combinator,filterTag){__cov_7pNeRWKXbugRUo2reCYyNA.f['7']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['84']++;var ogcNsUri='http://www.opengis.net/ogc';__cov_7pNeRWKXbugRUo2reCYyNA.s['85']++;var defaultStartTag='<ogc:Filter xmlns:ogc="'+ogcNsUri+'">';__cov_7pNeRWKXbugRUo2reCYyNA.s['86']++;var defaultCombineWith='And';__cov_7pNeRWKXbugRUo2reCYyNA.s['87']++;var combineWith=(__cov_7pNeRWKXbugRUo2reCYyNA.b['16'][0]++,combinator)||(__cov_7pNeRWKXbugRUo2reCYyNA.b['16'][1]++,defaultCombineWith);__cov_7pNeRWKXbugRUo2reCYyNA.s['88']++;var startFilterTag;__cov_7pNeRWKXbugRUo2reCYyNA.s['89']++;if(Ext.isDefined(filterTag)){__cov_7pNeRWKXbugRUo2reCYyNA.b['17'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['90']++;startFilterTag=filterTag;}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['17'][1]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['91']++;startFilterTag=defaultStartTag;}__cov_7pNeRWKXbugRUo2reCYyNA.s['92']++;var parts=[];__cov_7pNeRWKXbugRUo2reCYyNA.s['93']++;parts.push(startFilterTag);__cov_7pNeRWKXbugRUo2reCYyNA.s['94']++;parts.push('<ogc:'+combineWith+'>');__cov_7pNeRWKXbugRUo2reCYyNA.s['95']++;Ext.each(filters,function(filter){__cov_7pNeRWKXbugRUo2reCYyNA.f['8']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['96']++;if(filter){__cov_7pNeRWKXbugRUo2reCYyNA.b['18'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['97']++;parts.push(filter);}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['18'][1]++;}});__cov_7pNeRWKXbugRUo2reCYyNA.s['98']++;parts.push('</ogc:'+combineWith+'>');__cov_7pNeRWKXbugRUo2reCYyNA.s['99']++;if(startFilterTag!==''){__cov_7pNeRWKXbugRUo2reCYyNA.b['19'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['100']++;parts.push('</ogc:Filter>');}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['19'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['101']++;return parts.join('');},insertFilter:function(filter,combinator,additionalFilter){__cov_7pNeRWKXbugRUo2reCYyNA.f['9']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['102']++;var regex=BasiGX.util.WFS.reMatchFilter;__cov_7pNeRWKXbugRUo2reCYyNA.s['103']++;var matches=filter.match(regex);__cov_7pNeRWKXbugRUo2reCYyNA.s['104']++;if((__cov_7pNeRWKXbugRUo2reCYyNA.b['21'][0]++,!matches)||(__cov_7pNeRWKXbugRUo2reCYyNA.b['21'][1]++,matches.length!==4)){__cov_7pNeRWKXbugRUo2reCYyNA.b['20'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['105']++;return filter;}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['20'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['106']++;var allFilters=[];__cov_7pNeRWKXbugRUo2reCYyNA.s['107']++;var filterStart=matches[1];__cov_7pNeRWKXbugRUo2reCYyNA.s['108']++;var existingFilter=matches[2];__cov_7pNeRWKXbugRUo2reCYyNA.s['109']++;allFilters.push(existingFilter);__cov_7pNeRWKXbugRUo2reCYyNA.s['110']++;Ext.Array.each(additionalFilter,function(af){__cov_7pNeRWKXbugRUo2reCYyNA.f['10']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['111']++;allFilters.push(af);});__cov_7pNeRWKXbugRUo2reCYyNA.s['112']++;var combined=this.combineFilters(allFilters,combinator,filterStart);__cov_7pNeRWKXbugRUo2reCYyNA.s['113']++;return combined;},executeWfsGetFeature:function(url,layer,srsName,displayColumns,geomFieldName,filter,maxFeatures,successCallback,failureCallback,scope,viewParams){__cov_7pNeRWKXbugRUo2reCYyNA.f['11']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['114']++;if(!viewParams){__cov_7pNeRWKXbugRUo2reCYyNA.b['22'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['115']++;viewParams='';}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['22'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['116']++;var featureType=layer.getSource().getParams().LAYERS;__cov_7pNeRWKXbugRUo2reCYyNA.s['117']++;var ns=featureType.split(':')[0];__cov_7pNeRWKXbugRUo2reCYyNA.s['118']++;var staticMe=BasiGX.util.WFS;__cov_7pNeRWKXbugRUo2reCYyNA.s['119']++;var propertyNameXml='';__cov_7pNeRWKXbugRUo2reCYyNA.s['120']++;var propNameTpl='<wfs:PropertyName>{0}</wfs:PropertyName>';__cov_7pNeRWKXbugRUo2reCYyNA.s['121']++;if(!Ext.isEmpty(displayColumns)){__cov_7pNeRWKXbugRUo2reCYyNA.b['23'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['122']++;Ext.each(displayColumns,function(col){__cov_7pNeRWKXbugRUo2reCYyNA.f['12']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['123']++;propertyNameXml+=Ext.String.format(propNameTpl,col);});__cov_7pNeRWKXbugRUo2reCYyNA.s['124']++;if(!geomFieldName){__cov_7pNeRWKXbugRUo2reCYyNA.b['24'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['125']++;geomFieldName='geom';}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['24'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['126']++;propertyNameXml+=Ext.String.format(propNameTpl,geomFieldName);}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['23'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['127']++;if(!maxFeatures){__cov_7pNeRWKXbugRUo2reCYyNA.b['25'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['128']++;maxFeatures=1000;}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['25'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['129']++;var xml=Ext.String.format(staticMe.wfsGetFeatureXmlTpl,ns,'http://terrestris.de',featureType,srsName,propertyNameXml,filter,maxFeatures,viewParams);__cov_7pNeRWKXbugRUo2reCYyNA.s['130']++;return Ext.Ajax.request({headers:BasiGX.util.CSRF.getHeader(),url:url,method:'POST',xmlData:xml,success:successCallback,failure:failureCallback,scope:scope});},genericSuccessHandler:function(){__cov_7pNeRWKXbugRUo2reCYyNA.f['13']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['131']++;Ext.log.info('WFS GetFeature executed.');},genericFailureHandler:function(){__cov_7pNeRWKXbugRUo2reCYyNA.f['14']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['132']++;Ext.log.warn('Failed to execute WFS GetFeature.');},handleWfsExecuteException:function(response){__cov_7pNeRWKXbugRUo2reCYyNA.f['15']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['133']++;var staticMe=BasiGX.util.WFS;__cov_7pNeRWKXbugRUo2reCYyNA.s['134']++;var filterUtil=BasiGX.util.Filter;__cov_7pNeRWKXbugRUo2reCYyNA.s['135']++;var parsedXml=filterUtil.unmarshaller.unmarshalString(response);__cov_7pNeRWKXbugRUo2reCYyNA.s['136']++;if((__cov_7pNeRWKXbugRUo2reCYyNA.b['27'][0]++,parsedXml)&&(__cov_7pNeRWKXbugRUo2reCYyNA.b['27'][1]++,parsedXml.value)&&(__cov_7pNeRWKXbugRUo2reCYyNA.b['27'][2]++,parsedXml.value.exception[0])){__cov_7pNeRWKXbugRUo2reCYyNA.b['26'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['137']++;var excReport=parsedXml.value.exception[0];__cov_7pNeRWKXbugRUo2reCYyNA.s['138']++;var excCode=excReport.exceptionCode;__cov_7pNeRWKXbugRUo2reCYyNA.s['139']++;var excMsg=excReport.exceptionText[0];__cov_7pNeRWKXbugRUo2reCYyNA.s['140']++;var excTitlePrefix=staticMe.errorMsgTitle;__cov_7pNeRWKXbugRUo2reCYyNA.s['141']++;var excTitle=excTitlePrefix+': '+excCode;__cov_7pNeRWKXbugRUo2reCYyNA.s['142']++;BasiGX.util.MsgBox.error(Ext.String.format(staticMe.wfsExecuteExceptionText,excMsg),{title:excTitle});}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['26'][1]++;}},getFullFilterAndApplyIt:function(filterLayer,spatialFilter,timeFilterParts,sldFilters,successCallback,failureCallback,scope){__cov_7pNeRWKXbugRUo2reCYyNA.f['16']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['143']++;var staticMe=BasiGX.util.WFS;__cov_7pNeRWKXbugRUo2reCYyNA.s['144']++;var spatialTimeFilterPart=staticMe.insertFilter(spatialFilter,'And',timeFilterParts);__cov_7pNeRWKXbugRUo2reCYyNA.s['145']++;var mapComponent=BasiGX.util.Map.getMapComponent();__cov_7pNeRWKXbugRUo2reCYyNA.s['146']++;var srs=mapComponent.map.getView().getProjection().getCode();__cov_7pNeRWKXbugRUo2reCYyNA.s['147']++;var filter=spatialTimeFilterPart;__cov_7pNeRWKXbugRUo2reCYyNA.s['148']++;filter=staticMe.mergeFilterWithSldFilters(filter,sldFilters);__cov_7pNeRWKXbugRUo2reCYyNA.s['149']++;if(!Ext.isEmpty(filter)){__cov_7pNeRWKXbugRUo2reCYyNA.b['28'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['150']++;mapComponent.setLoading(true);__cov_7pNeRWKXbugRUo2reCYyNA.s['151']++;var displayColumns=filterLayer.get('displayColumns');__cov_7pNeRWKXbugRUo2reCYyNA.s['152']++;var geomFieldName=filterLayer.get('geomFieldName');__cov_7pNeRWKXbugRUo2reCYyNA.s['153']++;staticMe.executeWfsGetFeature(filterLayer,displayColumns,srs,geomFieldName,filter,null,successCallback,failureCallback,scope);}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['28'][1]++;}},getTimeAndSldCompliantFilter:function(layer,dimensionAttribute,sldFilters,map,geomFieldName,extent){__cov_7pNeRWKXbugRUo2reCYyNA.f['17']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['154']++;var staticMe=BasiGX.util.WFS;__cov_7pNeRWKXbugRUo2reCYyNA.s['155']++;if(!map){__cov_7pNeRWKXbugRUo2reCYyNA.b['29'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['156']++;map=BasiGX.util.Map.getMapComponent().map;}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['29'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['157']++;var allFilters=[];__cov_7pNeRWKXbugRUo2reCYyNA.s['158']++;var timeFilterParts=staticMe.getTimeFilterParts(layer,dimensionAttribute);__cov_7pNeRWKXbugRUo2reCYyNA.s['159']++;if(timeFilterParts){__cov_7pNeRWKXbugRUo2reCYyNA.b['30'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['160']++;allFilters=timeFilterParts;}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['30'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['161']++;if(extent){__cov_7pNeRWKXbugRUo2reCYyNA.b['31'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['162']++;var bboxFilter=staticMe.getBboxFilter(map,geomFieldName,extent);__cov_7pNeRWKXbugRUo2reCYyNA.s['163']++;allFilters.push(bboxFilter);}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['31'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['164']++;var filter=staticMe.combineFilters(allFilters);__cov_7pNeRWKXbugRUo2reCYyNA.s['165']++;return staticMe.mergeFilterWithSldFilters(filter,sldFilters);},mergeFilterWithSldFilters:function(filter,sldFilters){__cov_7pNeRWKXbugRUo2reCYyNA.f['18']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['166']++;var staticMe=BasiGX.util.WFS;__cov_7pNeRWKXbugRUo2reCYyNA.s['167']++;var plainSldFilters=[];__cov_7pNeRWKXbugRUo2reCYyNA.s['168']++;Ext.each(sldFilters,function(sldFilter){__cov_7pNeRWKXbugRUo2reCYyNA.f['19']++;__cov_7pNeRWKXbugRUo2reCYyNA.s['169']++;plainSldFilters.push(staticMe.unwrapFilter(sldFilter));});__cov_7pNeRWKXbugRUo2reCYyNA.s['170']++;if(plainSldFilters.length>0){__cov_7pNeRWKXbugRUo2reCYyNA.b['32'][0]++;__cov_7pNeRWKXbugRUo2reCYyNA.s['171']++;var orCombinedSldFilter=staticMe.combineFilters(plainSldFilters,'Or','');__cov_7pNeRWKXbugRUo2reCYyNA.s['172']++;filter=staticMe.insertFilter(filter,'And',orCombinedSldFilter);}else{__cov_7pNeRWKXbugRUo2reCYyNA.b['32'][1]++;}__cov_7pNeRWKXbugRUo2reCYyNA.s['173']++;return filter;}}});
+    requires: [
+        'BasiGX.util.CSRF',
+        'BasiGX.util.Url',
+        'BasiGX.util.Filter'
+    ],
+
+    inheritableStatics: {
+
+        /* start i18n*/
+        errorMsgTitle: '',
+        wfsExecuteExceptionText: '',
+        /* end i18n*/
+
+        /**
+         * A regular expression that will match an OGC `<ogc:Filter>` element.
+         * Captured parts are as follows:
+         *
+         * * Index `0`: Complete match.
+         * * Index `1`: `<ogc:Filter>` start tag including attributes, if any.
+         * * Index `2`: Anything between `<ogc:Filter>` start and end tag.
+         * * Index `3`: `</ogc:Filter>` end tag.
+         *
+         * Hat-tip: http://www.regular-expressions.info/examples.html
+         */
+        reMatchFilter: /(<ogc:Filter\b[^>]*>)(.*?)(<\/ogc:Filter>)/,
+
+        /**
+         * The WFS GetFeature XML body template
+         */
+        wfsGetFeatureXmlTpl: '' +
+            '<wfs:GetFeature service="WFS" version="1.1.0"' +
+                ' outputFormat="JSON"' +
+                ' maxFeatures="{6}"' +
+                ' viewParams="{7}"' +
+                // {0} is replaced with namespace alias,
+                // {1} with namespace URI
+                ' xmlns:{0}="{1}"' +
+                ' xmlns:wfs="http://www.opengis.net/wfs"' +
+                ' xmlns="http://www.opengis.net/ogc"' +
+                ' xmlns:gml="http://www.opengis.net/gml"' +
+                ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' +
+                ' xsi:schemaLocation="http://www.opengis.net/wfs' +
+                ' http://schemas.opengis.net/wfs/1.0.0/WFS-basic.xsd">' +
+                // {2} is replaced with qualified featuretype
+                '<wfs:Query typeName="{2}" srsName="{3}">' +
+                    '{4}' + // eventually also multiple times for multiple atts:
+                    // '<wfs:PropertyName>attname</wfs:PropertyName>'
+                    // {5} is replaced with actual filter
+                    '{5}' + // Filter
+                '</wfs:Query>' +
+            '</wfs:GetFeature>',
+
+        /**
+         * Returns a BBOX filter for the given map and the passed property name.
+         *
+         * Implementation very likely to change using Jsonix.
+         *
+         * @param {ol.Map} map The map to get the extent from.
+         * @param {String} propertyName The name of the geometry property of the
+         *     featuretype to filter.
+         * @param {Array} extent The optional extent Array to use for the filter
+         * @return {String} The create BBOX filter.
+         */
+        getBboxFilter: function(map, propertyName, extent) {
+            var tpl = '' +
+                '<ogc:And>' +
+                '  <ogc:BBOX>' +
+                '    <ogc:PropertyName>{0}</ogc:PropertyName>' +
+                '    <gml:Envelope' +
+                ' xmlns:gml="http://www.opengis.net/gml" srsName="{1}">' +
+                '      <gml:lowerCorner>{2} {3}</gml:lowerCorner>' +
+                '      <gml:upperCorner>{4} {5}</gml:upperCorner>' +
+                '    </gml:Envelope>' +
+                '  </ogc:BBOX>' +
+                '  <ogc:Intersects>' +
+                '    <ogc:PropertyName>{0}</ogc:PropertyName>' +
+                '    <gml:Envelope' +
+                ' xmlns:gml="http://www.opengis.net/gml" srsName="{1}">' +
+                '      <gml:lowerCorner>{2} {3}</gml:lowerCorner>' +
+                '      <gml:upperCorner>{4} {5}</gml:upperCorner>' +
+                '    </gml:Envelope>' +
+                '  </ogc:Intersects>' +
+                '</ogc:And>';
+            var mapView = map.getView();
+            var srsName = mapView.getProjection().getCode();
+            if (!extent) {
+                extent = mapView.calculateExtent(map.getSize());
+            }
+            var filter = Ext.String.format(
+                tpl,
+                propertyName,
+                srsName,
+                extent[0], extent[1],
+                extent[2], extent[3]
+            );
+            return filter;
+        },
+
+        /**
+         * Returns an OGC filter for the given CQL Filter.
+         * Support for different filters is currently very limited.
+         * Only CQL filters having a key, operator and value are supported
+         * for now.
+         *
+         * @param {String} cqlFilter The CQL filter to convert
+         * @return {String} The OGC filter.
+         */
+        getOgcFromCqlFilter: function(cqlFilter) {
+            if (!cqlFilter) {
+                return;
+            }
+            var parts = /^\s*([\w_]+)\s*([<>=!]+|in|like)\s*([^\s]+)\s*$/gi
+                .exec(cqlFilter);
+            if (!parts || parts.length !== 4) {
+                Ext.log.error('Method `getOgcFromCqlFilter` can only handle ' +
+                'CQL filters with one key, one operator and one value!');
+                return;
+            }
+
+            var key = parts[1];
+            var operator = parts[2].toLowerCase();
+            var value = parts[3];
+            var ogcFilterType;
+            var closingTag;
+
+            // always replace surrounding quotes
+            value = value.replace(/(^['])/g, '');
+            value = value.replace(/([']$)/g, '');
+
+            switch (operator) {
+                case '=':
+                    ogcFilterType = 'PropertyIsEqualTo';
+                    break;
+                case '!=':
+                    ogcFilterType = 'PropertyIsNotEqualTo';
+                    break;
+                case '<':
+                    ogcFilterType = 'PropertyIsLessThan';
+                    break;
+                case '>':
+                    ogcFilterType = 'PropertyIsGreaterThan';
+                    break;
+                case '<=':
+                    ogcFilterType = 'PropertyIsLessThanOrEqualTo';
+                    break;
+                case '>=':
+                    ogcFilterType = 'PropertyIsGreaterThanOrEqualTo';
+                    break;
+                case 'like':
+                    ogcFilterType = 'PropertyIsLike';
+                    value = '%' + value + '%';
+                    break;
+                case 'in':
+                    ogcFilterType = 'Or';
+                    // cleanup brackets and quotes
+                    value = value.replace(/([()'])/g, '');
+                    var values = value.split(',');
+                    var filters = '';
+                    Ext.each(values, function(val) {
+                        filters +=
+                            '<ogc:PropertyIsEqualTo>' +
+                            '<ogc:PropertyName>' + key + '</ogc:PropertyName>' +
+                            '<ogc:Literal>' + val + '</ogc:Literal>' +
+                            '</ogc:PropertyIsEqualTo>';
+                    });
+                    ogcFilterType = '<ogc:' + ogcFilterType + '>';
+                    closingTag = Ext.String.insert(ogcFilterType, '/', 1);
+                    return ogcFilterType + filters + closingTag;
+                default:
+                    Ext.log.warn('Method `getOgcFromCqlFilter` could not ' +
+                        'handle the given operator: ' + operator);
+                    return;
+            }
+            ogcFilterType = '<ogc:' + ogcFilterType + '>';
+            closingTag = Ext.String.insert(ogcFilterType, '/', 1);
+            var tpl = '' +
+                '  {0}' +
+                '    <ogc:PropertyName>{1}</ogc:PropertyName>' +
+                '    <ogc:Literal>{2}</ogc:Literal>' +
+                '  {3}';
+
+            var filter = Ext.String.format(
+                tpl,
+                ogcFilterType,
+                key,
+                value,
+                closingTag
+            );
+            return filter;
+        },
+
+        /**
+         * Returns an OGC `PropertyIsLessThanOrEqualTo` and
+         * `PropertyIsGreaterThanOrEqualTo` filters with the current TIME taken
+         * from the layer source and the given dimensionAttribute
+         *
+         * @param {ol.layer.Base} layer The layer to get the filter for.
+         * @param {String} dimensionAttribute The dimensionAttribute
+         *      containing the comma separated start / end keys for WMS TIME
+         * @return {Array<String>} An Array containing OGC
+         *     `PropertyIsLessThanOrEqualTo` and `PropertyIsGreatThanOrEqualTo`
+         *     filters regarding to the current TIME taken from the layer
+         *     source and set net definition.
+         */
+        getTimeFilterParts: function(layer, dimensionAttribute) {
+            if (!dimensionAttribute) {
+                return;
+            }
+
+            var dimensionAttributes = dimensionAttribute.split(',');
+            if (dimensionAttributes.length === 1) {
+                dimensionAttributes.push(dimensionAttributes[0]);
+            }
+
+            var source = layer.getSource();
+            var params = source && source.getParams && source.getParams();
+            var timeParam = params && params.TIME;
+            if (!timeParam) {
+                return;
+            }
+
+            var timeParts = timeParam.split('/');
+            var lowerBoundary = timeParts[0];
+            var upperBoundary = timeParts[1];
+            if (timeParts.length === 1) {
+                upperBoundary = timeParts[0];
+            }
+
+            // possibly smallest time range value
+            var lowerBoundaryTpl = '<ogc:PropertyIsGreaterThanOrEqualTo>' +
+                '<ogc:PropertyName>{0}</ogc:PropertyName>' +
+                '<ogc:Literal>{1}</ogc:Literal>' +
+                '</ogc:PropertyIsGreaterThanOrEqualTo>';
+
+            // possibly biggest time range value
+            var upperBoundaryTpl = '<ogc:PropertyIsLessThanOrEqualTo>' +
+                '<ogc:PropertyName>{0}</ogc:PropertyName>' +
+                '<ogc:Literal>{1}</ogc:Literal>' +
+                '</ogc:PropertyIsLessThanOrEqualTo>';
+
+            var lowerBoundaryFilter = Ext.String.format(
+                lowerBoundaryTpl,
+                Ext.String.trim(dimensionAttributes[1]),
+                lowerBoundary
+            );
+
+            var upperBoundaryFilter = Ext.String.format(
+                upperBoundaryTpl,
+                Ext.String.trim(dimensionAttributes[0]),
+                upperBoundary
+            );
+
+            return [lowerBoundaryFilter, upperBoundaryFilter];
+        },
+
+        /**
+         * Returns the contents of filter with the outermost `<ogc:Filter>`
+         * removed.
+         *
+         * @param {String} filter The filter to remove `<ogc:Filter>` from.
+         * @return {String} The contents of the filter.
+         */
+        unwrapFilter: function(filter) {
+            var regex = BasiGX.util.WFS.reMatchFilter;
+            var matches = filter.match(regex);
+            if (!matches || matches.length !== 4) {
+                return filter;
+            }
+            return matches[2];
+        },
+
+        /**
+         * Returns the actually used `<ogc:Filter>` start tag from the passed
+         * OGC filter.
+         *
+         * @param {String} filter The filter to get the `<ogc:Filter>` from.
+         * @return {String} The `<ogc:Filter>` of the filter or the empty
+         *     string.
+         */
+        getFilterPrefix: function(filter) {
+            var regex = BasiGX.util.WFS.reMatchFilter;
+            var matches = filter.match(regex);
+            if (!matches || matches.length !== 4) {
+                return '';
+            }
+            return matches[1];
+        },
+
+        /**
+         * Combines the passed filters with an `<ogc:And>` or `<ogc:Or>` and
+         * returns them.
+         *
+         * @param {Array<String>} filters The filters to join, falsy ones will
+         *     be skipped.
+         * @param {String} [combinator] The boolean combinator to use, should be
+         *     either `And` (the default) or `Or`.
+         * @param {String} [filterTag] The tag which should be used at the begin
+         *     of the filter string. If you pass the empty string (`''`), the
+         *     combined filters will not be wrapped in an `<ogc:Filter>`.
+         * @return {String} An combined OGC filter with the passed filters.
+         */
+        combineFilters: function(filters, combinator, filterTag) {
+            var ogcNsUri = 'http://www.opengis.net/ogc';
+            var defaultStartTag = '<ogc:Filter xmlns:ogc="' + ogcNsUri + '">';
+            var defaultCombineWith = 'And';
+
+            var combineWith = combinator || defaultCombineWith;
+            var startFilterTag;
+            if (Ext.isDefined(filterTag)) {
+                startFilterTag = filterTag;
+            } else {
+                startFilterTag = defaultStartTag;
+            }
+
+            var parts = [];
+            parts.push(startFilterTag);
+            parts.push('<ogc:' + combineWith + '>');
+
+            Ext.each(filters, function(filter) {
+                if (filter) {
+                    parts.push(filter);
+                }
+            });
+
+            parts.push('</ogc:' + combineWith + '>');
+            if (startFilterTag !== '') {
+                parts.push('</ogc:Filter>');
+            }
+            return parts.join('');
+        },
+
+        /**
+         * Combines all configured filters (e.g. spatial and time filter) to
+         * one filter string and returns them.
+         *
+         * @param {Array<String>} filter Given full spatial filter string.
+         * @param {String} [combinator] The boolean combinator to use, should be
+         *     either `And` or `Or`.
+         * @param {String} additionalFilter Additional filter (e.g. time filter)
+         *     that should be added to the given filter.
+         * @return {String} An OGC And filter with the passed filters.
+         */
+        insertFilter: function(filter, combinator, additionalFilter) {
+
+            var regex = BasiGX.util.WFS.reMatchFilter;
+            var matches = filter.match(regex);
+            if (!matches || matches.length !== 4) {
+                return filter;
+            }
+            var allFilters = [];
+            var filterStart = matches[1];
+            var existingFilter = matches[2];
+
+            allFilters.push(existingFilter);
+            Ext.Array.each(additionalFilter, function(af) {
+                allFilters.push(af);
+            });
+
+            var combined = this.combineFilters(
+                allFilters,
+                combinator,
+                filterStart
+            );
+            return combined;
+        },
+
+        /**
+         * Executes a WFS GetFeature request for the passed arguments.
+         *
+         * TODO Refactor so this doesn't need that much arguments.
+         *
+         * @param {String} url The URL to the geoserver WFS endpoint
+         * @param {ol.layer.Base} layer The layer to query
+         * @param {String} srsName The name of the SRS to reporject features to
+         * @param {Array} displayColumns The array of columns to display
+         * @param {String} geomFieldName The name of the geom field
+         * @param {String} filter An OGC 1.1.0 filter in XML format for limiting
+         *    the number of returned features.
+         * @param {Integer} maxFeatures The maximum number of features to get.
+         *    Defaults to 1000 if not set.
+         * @param {Function} successCallback A function to call with the
+         *    response in case the request finished successfully.
+         * @param {Function} failureCallback A function to call with the
+         *    response in case the request finished with an error.
+         * @param {Object} scope The scope (this-context) of the methods for
+         *    success or failure callbacks.
+         * @param {String} viewParams the view params to append
+         * @return {Ext.data.request.Ajax} The request object.
+         */
+        executeWfsGetFeature: function(url, layer, srsName, displayColumns,
+            geomFieldName, filter, maxFeatures, successCallback,
+            failureCallback, scope, viewParams) {
+            if (!viewParams) {
+                viewParams = '';
+            }
+
+            var featureType = layer.getSource().getParams().LAYERS;
+            var ns = featureType.split(':')[0];
+
+            var staticMe = BasiGX.util.WFS;
+
+            var propertyNameXml = '';
+            var propNameTpl = '<wfs:PropertyName>{0}</wfs:PropertyName>';
+
+            if (!Ext.isEmpty(displayColumns)) {
+                Ext.each(displayColumns, function(col) {
+                    propertyNameXml += Ext.String.format(propNameTpl, col);
+                });
+
+                if (!geomFieldName) {
+                    geomFieldName = 'geom'; // just a default
+                }
+
+                propertyNameXml +=
+                    Ext.String.format(propNameTpl, geomFieldName);
+            }
+
+            if (!maxFeatures) {
+                maxFeatures = 1000;
+            }
+
+            var xml = Ext.String.format(
+                staticMe.wfsGetFeatureXmlTpl,
+                ns,
+                'http://terrestris.de', //TODO: do we need sth. better here?
+                featureType,
+                srsName,
+                propertyNameXml,
+                filter, // OGC 1.1.0. filter as string
+                maxFeatures,
+                viewParams
+            );
+
+            return Ext.Ajax.request({
+                headers: BasiGX.util.CSRF.getHeader(),
+                url: url,
+                method: 'POST',
+                xmlData: xml,
+                success: successCallback,
+                failure: failureCallback,
+                scope: scope
+            });
+        },
+
+        /**
+         * A generic function bound as the success callback, if none was
+         * provided.
+         */
+        genericSuccessHandler: function() {
+            Ext.log.info('WFS GetFeature executed.');
+        },
+
+        /**
+         * A generic function bound as the failure callback, if none was
+         * provided.
+         */
+        genericFailureHandler: function() {
+            Ext.log.warn('Failed to execute WFS GetFeature.');
+        },
+
+        /**
+         * If WFS request was successful but response has got an exception,
+         * we try to find it out and show the corresponding error message
+         *
+         * @param {Object} response The response of the Ajax call.
+         */
+        handleWfsExecuteException: function(response) {
+            var staticMe = BasiGX.util.WFS;
+            var filterUtil = BasiGX.util.Filter;
+            var parsedXml = filterUtil.unmarshaller.unmarshalString(response);
+            if (parsedXml && parsedXml.value && parsedXml.value.exception[0]) {
+                var excReport = parsedXml.value.exception[0];
+                var excCode = excReport.exceptionCode;
+                var excMsg = excReport.exceptionText[0];
+                var excTitlePrefix = staticMe.errorMsgTitle;
+                var excTitle = excTitlePrefix + ': ' + excCode;
+                BasiGX.util.MsgBox.error(
+                    Ext.String.format(
+                        staticMe.wfsExecuteExceptionText,
+                        excMsg
+                    ),
+                    {title: excTitle}
+                );
+            }
+        },
+
+        /**
+         * Builds the full filter encoding object from all given filters
+         * (spatial, time and SLD) and sends it as parameter for the WFS
+         * GetFeature request for selection.
+         *
+         * Suppose you have the following filters:
+         *
+         * * `spatialFilter`, let's call this `F1`
+         * * `timeFilter`, call this `F2`
+         * * `sldFilters`, an array of `F3` and `F4`
+         *
+         * This method will combine these filters as follows:
+         *
+         *     F1    AND    F2    AND    (  F3    OR    F4  )
+         *
+         * @param {ol.layer.Base} filterLayer The layer to handle
+         * @param {String} spatialFilter Filter encoding for spatial filter.
+         * @param {String} timeFilterParts Filter encoding for time filter
+         *     containing two OGC filters - `PropertyIsGreaterThanOrEqualTo` and
+         *     `PropertyIsLessThanOrEqualTo`.
+         * @param {Array} sldFilters Array containing filter encodings for SLD
+         *     filters.
+         * @param {Function} successCallback A function to call with the
+         *     response in case the request finished successfully.
+         * @param {Function} failureCallback A function to call with the
+         *     response in case the request finished with an error.
+         * @param {Object} scope The scope (this-context) of the methods for
+         *     success or failure callbacks.
+         */
+        getFullFilterAndApplyIt: function(filterLayer, spatialFilter,
+            timeFilterParts, sldFilters, successCallback, failureCallback,
+            scope) {
+            var staticMe = BasiGX.util.WFS;
+            var spatialTimeFilterPart = staticMe.insertFilter(
+                spatialFilter, 'And', timeFilterParts
+            );
+            var mapComponent = BasiGX.util.Map.getMapComponent();
+            var srs = mapComponent.map.getView().getProjection().getCode();
+
+            var filter = spatialTimeFilterPart; // fallback
+            filter = staticMe.mergeFilterWithSldFilters(filter, sldFilters);
+
+            if (!Ext.isEmpty(filter)) {
+                mapComponent.setLoading(true);
+
+                var displayColumns = filterLayer.get('displayColumns');
+                var geomFieldName = filterLayer.get('geomFieldName');
+
+                staticMe.executeWfsGetFeature(
+                    filterLayer,
+                    displayColumns,
+                    srs,
+                    geomFieldName,
+                    filter,
+                    null,
+                    successCallback,
+                    failureCallback,
+                    scope
+                );
+            }
+        },
+
+        /**
+         * This function will return a filter string containing a bbox filter,
+         * the passed sldFilters and a possible time filter (if the layer is
+         * configured as WMS-T).
+         *
+         * @param {ol.layer.Base} layer The layer to get the filter for.
+         * @param {String} dimensionAttribute The dimensionAttribute
+         *      containing the comma separated start / end keys for WMS TIME
+         * @param {Array} sldFilters An array of filter strings coming
+         *   from the SLD.
+         * @param {ol.Map} map optional map parameter. Will be guessed if
+         *   not passed.
+         * @param {String} geomFieldName The name of the geom field
+         * @param {Array} extent The optional extent Array to use for the bbox
+         *    filter
+         * @return {String} filter string as described above
+         */
+        getTimeAndSldCompliantFilter: function(
+            layer, dimensionAttribute, sldFilters, map, geomFieldName, extent) {
+            var staticMe = BasiGX.util.WFS;
+
+            // guess the map if it has not been passed
+            if (!map) {
+                map = BasiGX.util.Map.getMapComponent().map;
+            }
+
+            var allFilters = [];
+            var timeFilterParts = staticMe.getTimeFilterParts(
+                layer, dimensionAttribute);
+            if (timeFilterParts) {
+                allFilters = timeFilterParts;
+            }
+            if (extent) {
+                var bboxFilter = staticMe.getBboxFilter(
+                    map,
+                    geomFieldName,
+                    extent
+                );
+                allFilters.push(bboxFilter);
+            }
+
+            var filter = staticMe.combineFilters(allFilters);
+
+            return staticMe.mergeFilterWithSldFilters(filter, sldFilters);
+        },
+
+        /**
+         * Merge the passed "base" filter with the passed sld filters.
+         *
+         * @param {String} filter string representing some "base" filter
+         *   (e.g. time/spatial)
+         * @param {Array} sldFilters An array of filter strings coming
+         *   from the SLD.
+         *
+         * @return {String} filter string representing the merge of the passed
+         *   filter with the passed sld filters
+         */
+        mergeFilterWithSldFilters: function(filter, sldFilters) {
+            var staticMe = BasiGX.util.WFS;
+            var plainSldFilters = [];
+            Ext.each(sldFilters, function(sldFilter) {
+                plainSldFilters.push(staticMe.unwrapFilter(sldFilter));
+            });
+
+            if (plainSldFilters.length > 0) {
+                // we had some SLD filters, and need to add them to the
+                // existing one
+                var orCombinedSldFilter = staticMe.combineFilters(
+                    plainSldFilters, 'Or', ''
+                );
+                filter = staticMe.insertFilter(
+                    filter, 'And', orCombinedSldFilter
+                );
+            }
+            return filter;
+        }
+    }
+});

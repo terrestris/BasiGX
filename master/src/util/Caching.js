@@ -1,9 +1,273 @@
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Caching Util
+ *
+ * Some methods that may be helpful in case of caching, e.g. with GeoWebCache
+ *
+ * @class BasiGX.util.Caching
+ */
+Ext.define('BasiGX.util.Caching', {
 
-var __cov_vBvZzR8BJWmaC9cYW0dkhQ = (Function('return this'))();
-if (!__cov_vBvZzR8BJWmaC9cYW0dkhQ.__coverage__) { __cov_vBvZzR8BJWmaC9cYW0dkhQ.__coverage__ = {}; }
-__cov_vBvZzR8BJWmaC9cYW0dkhQ = __cov_vBvZzR8BJWmaC9cYW0dkhQ.__coverage__;
-if (!(__cov_vBvZzR8BJWmaC9cYW0dkhQ['/home/travis/build/terrestris/BasiGX/src/util/Caching.js'])) {
-   __cov_vBvZzR8BJWmaC9cYW0dkhQ['/home/travis/build/terrestris/BasiGX/src/util/Caching.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Caching.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0,0],"16":[0,0,0],"17":[0,0],"18":[0,0,0,0,0,0,0],"19":[0,0],"20":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0},"fnMap":{"1":{"name":"(anonymous_1)","line":49,"loc":{"start":{"line":49,"column":30},"end":{"line":49,"column":63}}},"2":{"name":"(anonymous_2)","line":104,"loc":{"start":{"line":104,"column":37},"end":{"line":104,"column":79}}},"3":{"name":"(anonymous_3)","line":161,"loc":{"start":{"line":161,"column":23},"end":{"line":161,"column":65}}},"4":{"name":"(anonymous_4)","line":186,"loc":{"start":{"line":186,"column":22},"end":{"line":186,"column":37}}},"5":{"name":"(anonymous_5)","line":214,"loc":{"start":{"line":214,"column":26},"end":{"line":214,"column":45}}},"6":{"name":"(anonymous_6)","line":249,"loc":{"start":{"line":249,"column":24},"end":{"line":249,"column":47}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":273,"column":3}},"2":{"start":{"line":50,"column":12},"end":{"line":50,"column":47}},"3":{"start":{"line":51,"column":12},"end":{"line":51,"column":27}},"4":{"start":{"line":52,"column":12},"end":{"line":52,"column":47}},"5":{"start":{"line":53,"column":12},"end":{"line":56,"column":13}},"6":{"start":{"line":54,"column":16},"end":{"line":54,"column":63}},"7":{"start":{"line":55,"column":16},"end":{"line":55,"column":23}},"8":{"start":{"line":57,"column":12},"end":{"line":57,"column":46}},"9":{"start":{"line":58,"column":12},"end":{"line":58,"column":59}},"10":{"start":{"line":59,"column":12},"end":{"line":59,"column":59}},"11":{"start":{"line":60,"column":12},"end":{"line":63,"column":13}},"12":{"start":{"line":61,"column":16},"end":{"line":61,"column":65}},"13":{"start":{"line":62,"column":16},"end":{"line":62,"column":23}},"14":{"start":{"line":64,"column":12},"end":{"line":64,"column":52}},"15":{"start":{"line":65,"column":12},"end":{"line":65,"column":56}},"16":{"start":{"line":66,"column":12},"end":{"line":68,"column":13}},"17":{"start":{"line":67,"column":16},"end":{"line":67,"column":59}},"18":{"start":{"line":69,"column":12},"end":{"line":71,"column":14}},"19":{"start":{"line":72,"column":12},"end":{"line":78,"column":14}},"20":{"start":{"line":80,"column":12},"end":{"line":80,"column":29}},"21":{"start":{"line":105,"column":12},"end":{"line":105,"column":47}},"22":{"start":{"line":106,"column":12},"end":{"line":106,"column":59}},"23":{"start":{"line":107,"column":12},"end":{"line":107,"column":53}},"24":{"start":{"line":108,"column":12},"end":{"line":112,"column":13}},"25":{"start":{"line":109,"column":16},"end":{"line":110,"column":40}},"26":{"start":{"line":111,"column":16},"end":{"line":111,"column":23}},"27":{"start":{"line":114,"column":12},"end":{"line":114,"column":33}},"28":{"start":{"line":115,"column":12},"end":{"line":115,"column":33}},"29":{"start":{"line":116,"column":12},"end":{"line":116,"column":57}},"30":{"start":{"line":117,"column":12},"end":{"line":117,"column":59}},"31":{"start":{"line":121,"column":12},"end":{"line":121,"column":56}},"32":{"start":{"line":122,"column":12},"end":{"line":122,"column":57}},"33":{"start":{"line":126,"column":12},"end":{"line":126,"column":66}},"34":{"start":{"line":127,"column":12},"end":{"line":127,"column":68}},"35":{"start":{"line":130,"column":12},"end":{"line":130,"column":57}},"36":{"start":{"line":131,"column":12},"end":{"line":131,"column":58}},"37":{"start":{"line":133,"column":12},"end":{"line":133,"column":44}},"38":{"start":{"line":162,"column":12},"end":{"line":162,"column":47}},"39":{"start":{"line":163,"column":12},"end":{"line":165,"column":14}},"40":{"start":{"line":166,"column":12},"end":{"line":171,"column":13}},"41":{"start":{"line":167,"column":16},"end":{"line":169,"column":18}},"42":{"start":{"line":170,"column":16},"end":{"line":170,"column":23}},"43":{"start":{"line":172,"column":12},"end":{"line":172,"column":56}},"44":{"start":{"line":187,"column":12},"end":{"line":197,"column":13}},"45":{"start":{"line":188,"column":16},"end":{"line":189,"column":45}},"46":{"start":{"line":190,"column":16},"end":{"line":190,"column":64}},"47":{"start":{"line":191,"column":16},"end":{"line":191,"column":54}},"48":{"start":{"line":192,"column":16},"end":{"line":192,"column":44}},"49":{"start":{"line":193,"column":16},"end":{"line":196,"column":17}},"50":{"start":{"line":194,"column":20},"end":{"line":194,"column":67}},"51":{"start":{"line":195,"column":20},"end":{"line":195,"column":27}},"52":{"start":{"line":198,"column":12},"end":{"line":198,"column":24}},"53":{"start":{"line":215,"column":12},"end":{"line":215,"column":20}},"54":{"start":{"line":216,"column":12},"end":{"line":221,"column":13}},"55":{"start":{"line":217,"column":16},"end":{"line":218,"column":71}},"56":{"start":{"line":219,"column":16},"end":{"line":219,"column":66}},"57":{"start":{"line":220,"column":16},"end":{"line":220,"column":48}},"58":{"start":{"line":222,"column":12},"end":{"line":227,"column":13}},"59":{"start":{"line":224,"column":16},"end":{"line":225,"column":53}},"60":{"start":{"line":226,"column":16},"end":{"line":226,"column":38}},"61":{"start":{"line":228,"column":12},"end":{"line":228,"column":28}},"62":{"start":{"line":251,"column":12},"end":{"line":251,"column":60}},"63":{"start":{"line":252,"column":12},"end":{"line":268,"column":13}},"64":{"start":{"line":257,"column":16},"end":{"line":257,"column":61}},"65":{"start":{"line":258,"column":16},"end":{"line":258,"column":62}},"66":{"start":{"line":259,"column":16},"end":{"line":267,"column":17}},"67":{"start":{"line":260,"column":20},"end":{"line":260,"column":78}},"68":{"start":{"line":261,"column":20},"end":{"line":261,"column":41}},"69":{"start":{"line":262,"column":20},"end":{"line":262,"column":52}},"70":{"start":{"line":264,"column":20},"end":{"line":264,"column":67}},"71":{"start":{"line":265,"column":20},"end":{"line":265,"column":41}},"72":{"start":{"line":266,"column":20},"end":{"line":266,"column":27}},"73":{"start":{"line":269,"column":12},"end":{"line":269,"column":26}}},"branchMap":{"1":{"line":53,"type":"if","locations":[{"start":{"line":53,"column":12},"end":{"line":53,"column":12}},{"start":{"line":53,"column":12},"end":{"line":53,"column":12}}]},"2":{"line":60,"type":"if","locations":[{"start":{"line":60,"column":12},"end":{"line":60,"column":12}},{"start":{"line":60,"column":12},"end":{"line":60,"column":12}}]},"3":{"line":66,"type":"if","locations":[{"start":{"line":66,"column":12},"end":{"line":66,"column":12}},{"start":{"line":66,"column":12},"end":{"line":66,"column":12}}]},"4":{"line":66,"type":"binary-expr","locations":[{"start":{"line":66,"column":16},"end":{"line":66,"column":30}},{"start":{"line":66,"column":34},"end":{"line":66,"column":45}}]},"5":{"line":108,"type":"if","locations":[{"start":{"line":108,"column":12},"end":{"line":108,"column":12}},{"start":{"line":108,"column":12},"end":{"line":108,"column":12}}]},"6":{"line":108,"type":"binary-expr","locations":[{"start":{"line":108,"column":16},"end":{"line":108,"column":25}},{"start":{"line":108,"column":29},"end":{"line":108,"column":43}},{"start":{"line":108,"column":47},"end":{"line":108,"column":54}}]},"7":{"line":166,"type":"if","locations":[{"start":{"line":166,"column":12},"end":{"line":166,"column":12}},{"start":{"line":166,"column":12},"end":{"line":166,"column":12}}]},"8":{"line":187,"type":"if","locations":[{"start":{"line":187,"column":12},"end":{"line":187,"column":12}},{"start":{"line":187,"column":12},"end":{"line":187,"column":12}}]},"9":{"line":187,"type":"binary-expr","locations":[{"start":{"line":187,"column":16},"end":{"line":187,"column":21}},{"start":{"line":187,"column":25},"end":{"line":187,"column":51}}]},"10":{"line":191,"type":"binary-expr","locations":[{"start":{"line":191,"column":26},"end":{"line":191,"column":33}},{"start":{"line":191,"column":37},"end":{"line":191,"column":53}}]},"11":{"line":192,"type":"binary-expr","locations":[{"start":{"line":192,"column":23},"end":{"line":192,"column":26}},{"start":{"line":192,"column":30},"end":{"line":192,"column":43}}]},"12":{"line":193,"type":"if","locations":[{"start":{"line":193,"column":16},"end":{"line":193,"column":16}},{"start":{"line":193,"column":16},"end":{"line":193,"column":16}}]},"13":{"line":216,"type":"if","locations":[{"start":{"line":216,"column":12},"end":{"line":216,"column":12}},{"start":{"line":216,"column":12},"end":{"line":216,"column":12}}]},"14":{"line":222,"type":"if","locations":[{"start":{"line":222,"column":12},"end":{"line":222,"column":12}},{"start":{"line":222,"column":12},"end":{"line":222,"column":12}}]},"15":{"line":222,"type":"binary-expr","locations":[{"start":{"line":222,"column":16},"end":{"line":222,"column":38}},{"start":{"line":223,"column":20},"end":{"line":223,"column":46}},{"start":{"line":223,"column":50},"end":{"line":223,"column":76}}]},"16":{"line":251,"type":"binary-expr","locations":[{"start":{"line":251,"column":21},"end":{"line":251,"column":27}},{"start":{"line":251,"column":32},"end":{"line":251,"column":36}},{"start":{"line":251,"column":40},"end":{"line":251,"column":58}}]},"17":{"line":252,"type":"if","locations":[{"start":{"line":252,"column":12},"end":{"line":252,"column":12}},{"start":{"line":252,"column":12},"end":{"line":252,"column":12}}]},"18":{"line":252,"type":"binary-expr","locations":[{"start":{"line":252,"column":16},"end":{"line":252,"column":36}},{"start":{"line":253,"column":20},"end":{"line":253,"column":44}},{"start":{"line":253,"column":48},"end":{"line":253,"column":72}},{"start":{"line":254,"column":20},"end":{"line":254,"column":44}},{"start":{"line":254,"column":48},"end":{"line":254,"column":72}},{"start":{"line":255,"column":20},"end":{"line":255,"column":51}},{"start":{"line":256,"column":20},"end":{"line":256,"column":52}}]},"19":{"line":258,"type":"binary-expr","locations":[{"start":{"line":258,"column":33},"end":{"line":258,"column":37}},{"start":{"line":258,"column":41},"end":{"line":258,"column":61}}]},"20":{"line":259,"type":"if","locations":[{"start":{"line":259,"column":16},"end":{"line":259,"column":16}},{"start":{"line":259,"column":16},"end":{"line":259,"column":16}}]}}};
-}
-__cov_vBvZzR8BJWmaC9cYW0dkhQ = __cov_vBvZzR8BJWmaC9cYW0dkhQ['/home/travis/build/terrestris/BasiGX/src/util/Caching.js'];
-__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['1']++;Ext.define('BasiGX.util.Caching',{requires:['BasiGX.util.Map'],statics:{getGeoWebCacheConfig:function(view,tileSize,extent){__cov_vBvZzR8BJWmaC9cYW0dkhQ.f['1']++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['2']++;var staticMe=BasiGX.util.Caching;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['3']++;var projection;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['4']++;view=staticMe.sanitizeView(view);__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['5']++;if(!view){__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['1'][0]++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['6']++;Ext.Logger.warn('Failed to guess the ol.View');__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['7']++;return;}else{__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['1'][1]++;}__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['8']++;projection=view.getProjection();__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['9']++;tileSize=staticMe.sanitizeTileSize(tileSize);__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['10']++;extent=staticMe.sanitizeExtent(extent,view);__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['11']++;if(!extent){__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['2'][0]++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['12']++;Ext.Logger.warn('Failed to determine an extent');__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['13']++;return;}else{__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['2'][1]++;}__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['14']++;var resolutions=view.getResolutions();__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['15']++;var maxResolution=view.getMaxResolution();__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['16']++;if((__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['4'][0]++,!maxResolution)&&(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['4'][1]++,resolutions)){__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['3'][0]++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['17']++;maxResolution=Ext.Array.max(resolutions);}else{__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['3'][1]++;}__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['18']++;var tileOrigin=staticMe.getTileOrigin(tileSize,maxResolution,extent);__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['19']++;var gwcConfig={projection:projection.getCode(),resolutions:resolutions,maxResolution:maxResolution,extent:extent,tileOrigin:tileOrigin};__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['20']++;return gwcConfig;},getExtentOfCoveringTileGrid:function(tileSize,maxResolution,extent){__cov_vBvZzR8BJWmaC9cYW0dkhQ.f['2']++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['21']++;var staticMe=BasiGX.util.Caching;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['22']++;tileSize=staticMe.sanitizeTileSize(tileSize);__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['23']++;extent=staticMe.sanitizeExtent(extent);__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['24']++;if((__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['6'][0]++,!tileSize)||(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['6'][1]++,!maxResolution)||(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['6'][2]++,!extent)){__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['5'][0]++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['25']++;Ext.Logger.warn('Tile size, max resolution and extent '+'must be provided');__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['26']++;return;}else{__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['5'][1]++;}__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['27']++;var minX=extent[0];__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['28']++;var minY=extent[1];__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['29']++;var extentWidth=ol.extent.getWidth(extent);__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['30']++;var extentHeight=ol.extent.getHeight(extent);__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['31']++;var tileWidth=tileSize[0]*maxResolution;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['32']++;var tileHeight=tileSize[1]*maxResolution;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['33']++;var minNumTilesX=Math.ceil(extentWidth/tileWidth);__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['34']++;var minNumTilesY=Math.ceil(extentHeight/tileHeight);__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['35']++;var maxX=minX+minNumTilesX*tileWidth;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['36']++;var maxY=minY+minNumTilesY*tileHeight;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['37']++;return[minX,minY,maxX,maxY];},getTileOrigin:function(tileSize,maxResolution,extent){__cov_vBvZzR8BJWmaC9cYW0dkhQ.f['3']++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['38']++;var staticMe=BasiGX.util.Caching;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['39']++;var coveringExtent=staticMe.getExtentOfCoveringTileGrid(tileSize,maxResolution,extent);__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['40']++;if(!coveringExtent){__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['7'][0]++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['41']++;Ext.Logger.warn('Failed to determine covering extent and origin');__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['42']++;return;}else{__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['7'][1]++;}__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['43']++;return ol.extent.getTopLeft(coveringExtent);},sanitizeView:function(view){__cov_vBvZzR8BJWmaC9cYW0dkhQ.f['4']++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['44']++;if((__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['9'][0]++,!view)||(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['9'][1]++,!(view instanceof ol.View))){__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['8'][0]++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['45']++;Ext.Logger.info('No or unexpected view passed,'+' guessing ol.View now');__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['46']++;var mapComp=BasiGX.util.Map.getMapComponent();__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['47']++;var map=(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['10'][0]++,mapComp)&&(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['10'][1]++,mapComp.getMap());__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['48']++;view=(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['11'][0]++,map)&&(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['11'][1]++,map.getView());__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['49']++;if(!view){__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['12'][0]++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['50']++;Ext.Logger.warn('Failed to guess the ol.View');__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['51']++;return;}else{__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['12'][1]++;}}else{__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['8'][1]++;}__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['52']++;return view;},sanitizeTileSize:function(tileSize){__cov_vBvZzR8BJWmaC9cYW0dkhQ.f['5']++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['53']++;var msg;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['54']++;if(Ext.isNumber(tileSize)){__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['13'][0]++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['55']++;msg='Parameter tileSize passed as number,'+' assuming rectangular tilesize of [{0}, {0}] now';__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['56']++;Ext.Logger.info(Ext.String.format(msg,tileSize));__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['57']++;tileSize=[tileSize,tileSize];}else{__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['13'][1]++;}__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['58']++;if((__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['15'][0]++,!Ext.isArray(tileSize))||(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['15'][1]++,!Ext.isNumber(tileSize[0]))||(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['15'][2]++,!Ext.isNumber(tileSize[1]))){__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['14'][0]++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['59']++;Ext.Logger.info('No or unexpected tileSize passed,'+' defaulting to [256, 256] now');__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['60']++;tileSize=[256,256];}else{__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['14'][1]++;}__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['61']++;return tileSize;},sanitizeExtent:function(extent,view){__cov_vBvZzR8BJWmaC9cYW0dkhQ.f['6']++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['62']++;extent=(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['16'][0]++,extent)||(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['16'][1]++,view)&&(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['16'][2]++,view.get('extent'));__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['63']++;if((__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['18'][0]++,!Ext.isArray(extent))||(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['18'][1]++,!Ext.isNumber(extent[0]))||(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['18'][2]++,!Ext.isNumber(extent[1]))||(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['18'][3]++,!Ext.isNumber(extent[2]))||(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['18'][4]++,!Ext.isNumber(extent[3]))||(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['18'][5]++,ol.extent.getWidth(extent)<=0)||(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['18'][6]++,ol.extent.getHeight(extent)<=0)){__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['17'][0]++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['64']++;var msg='No or unexpected extent passed, ';__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['65']++;var projection=(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['19'][0]++,view)&&(__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['19'][1]++,view.getProjection());__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['66']++;if(projection){__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['20'][0]++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['67']++;msg+='defaulting to validity extent of view projection';__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['68']++;Ext.Logger.info(msg);__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['69']++;extent=projection.getExtent();}else{__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['20'][1]++;__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['70']++;msg+='and view cannot be used to derive one';__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['71']++;Ext.Logger.info(msg);__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['72']++;return;}}else{__cov_vBvZzR8BJWmaC9cYW0dkhQ.b['17'][1]++;}__cov_vBvZzR8BJWmaC9cYW0dkhQ.s['73']++;return extent;}}});
+    requires: [
+        'BasiGX.util.Map'
+    ],
+
+    statics: {
+
+        /**
+         * Call this function from the console (in one of your applications)
+         * and it returns config information that may be used to quickly setup a
+         * matching GWC gridset in the GeoServer.
+         *
+         * Note: If the extent is not passed to this function, the ol.view of
+         * the ol.map should have explicitly set an 'extent' property!
+         *
+         * @param {ol.View} [view] The OpenLayers map view. If not passed it
+         *     will be guessed.
+         * @param {Array<Number>} [tileSize] The tile size in pixels. If not
+         *     passed we'll assume a 256×256 pixel tile size.
+         * @param {Array} [extent] The extent to use for the gridSet. If not
+         *     passed, we'll take the validity extent of the projection of the
+         *     view.
+         * @return {Object} An object with information to quickly setup a GWC
+         *     gridset in GeoServer.
+         */
+        getGeoWebCacheConfig: function(view, tileSize, extent) {
+            var staticMe = BasiGX.util.Caching;
+            var projection;
+            view = staticMe.sanitizeView(view);
+            if (!view) {
+                Ext.Logger.warn('Failed to guess the ol.View');
+                return;
+            }
+            projection = view.getProjection();
+            tileSize = staticMe.sanitizeTileSize(tileSize);
+            extent = staticMe.sanitizeExtent(extent, view);
+            if (!extent) {
+                Ext.Logger.warn('Failed to determine an extent');
+                return;
+            }
+            var resolutions = view.getResolutions();
+            var maxResolution = view.getMaxResolution();
+            if (!maxResolution && resolutions) {
+                maxResolution = Ext.Array.max(resolutions);
+            }
+            var tileOrigin = staticMe.getTileOrigin(
+                tileSize, maxResolution, extent
+            );
+            var gwcConfig = {
+                projection: projection.getCode(),
+                resolutions: resolutions,
+                maxResolution: maxResolution,
+                extent: extent,
+                tileOrigin: tileOrigin
+            };
+
+            return gwcConfig;
+        },
+
+        /**
+         * Computes an extent that completely covers the given extent
+         * for tiles of maxResolution and with the specified tileSize.
+         *
+         *     +------------------+
+         *     |                  | computed extent
+         *     |----------------+ |
+         *     |                | |
+         *     |     passed     | |
+         *     |     extent     | |
+         *     |                | |
+         *     +----------------+-+
+         *
+         * @param {Number|Array<Number>} tileSize The tile size in pixels. Can
+         *     be passed as number or as array of two numbers.
+         * @param {Number} maxResolution The max resolution of the view.
+         * @param {Array} extent The extent to use for the gridset.
+         * @return {Array} The array with two elements representing the
+         *     tileOrigin coordinate (the upper left coordinate of the
+         *     covering extent).
+         */
+        getExtentOfCoveringTileGrid: function(tileSize, maxResolution, extent) {
+            var staticMe = BasiGX.util.Caching;
+            tileSize = staticMe.sanitizeTileSize(tileSize);
+            extent = staticMe.sanitizeExtent(extent);
+            if (!tileSize || !maxResolution || !extent) {
+                Ext.Logger.warn('Tile size, max resolution and extent ' +
+                    'must be provided');
+                return;
+            }
+
+            var minX = extent[0];
+            var minY = extent[1];
+            var extentWidth = ol.extent.getWidth(extent);
+            var extentHeight = ol.extent.getHeight(extent);
+
+            // width/height of one tile at max resolution in the
+            // unit of the underlying projection
+            var tileWidth = tileSize[0] * maxResolution;
+            var tileHeight = tileSize[1] * maxResolution;
+
+            // the minimum number of tiles that are required to fully
+            // cover the given extent in x- or y-direction
+            var minNumTilesX = Math.ceil(extentWidth / tileWidth);
+            var minNumTilesY = Math.ceil(extentHeight / tileHeight);
+
+            // finally compute the max x and y values
+            var maxX = minX + (minNumTilesX * tileWidth);
+            var maxY = minY + (minNumTilesY * tileHeight);
+
+            return [minX, minY, maxX, maxY];
+        },
+
+        /**
+         * Computes the tile origin (top left) for a given extent
+         * (lower left/upper right bbox), maxResolution and tileSize that
+         * can be set as the origin on a ol.tilegrid.TileGrid instance to
+         * match a GWC gridset configured in a GeoServer. GetMap requests
+         * should use the parameter tiled=true to make use of the cache.
+         *
+         *     Top-left
+         *     X------------------+
+         *     |                  |
+         *     |----------------+ |
+         *     |                | |
+         *     |     passed     | |
+         *     |     extent     | |
+         *     |                | |
+         *     +----------------+-+
+         *
+         * @param {Number|Array<Number>} tileSize The tile size in pixels. Can
+         *     be passed as number or as array of two numbers.
+         * @param {Number} maxResolution The max resolution of the view.
+         * @param {Array} extent The extent to use for the gridset.
+         * @return {Array} The array with two elements representing the
+         *     tileOrigin coordinate (the upper left coordinate of the
+         *     covering extent).
+         */
+        getTileOrigin: function(tileSize, maxResolution, extent) {
+            var staticMe = BasiGX.util.Caching;
+            var coveringExtent = staticMe.getExtentOfCoveringTileGrid(
+                tileSize, maxResolution, extent
+            );
+            if (!coveringExtent) {
+                Ext.Logger.warn(
+                    'Failed to determine covering extent and origin'
+                );
+                return;
+            }
+            return ol.extent.getTopLeft(coveringExtent);
+        },
+
+        /**
+         * Sanitizes the passed view. If a falsy value is passed or the passed
+         * view is not an instance of `ol.View`, guess the map component on the
+         * page and return the view of its map.
+         *
+         * @param {ol.View} [view] The OpenLayers map view. If not passed it
+         *     will be guessed.
+         * @return {ol.View} A view or undefined if the view could not be
+         *     sanitized.
+         * @private
+         */
+        sanitizeView: function(view) {
+            if (!view || !(view instanceof ol.View)) {
+                Ext.Logger.info('No or unexpected view passed,' +
+                    ' guessing ol.View now');
+                var mapComp = BasiGX.util.Map.getMapComponent();
+                var map = mapComp && mapComp.getMap();
+                view = map && map.getView();
+                if (!view) {
+                    Ext.Logger.warn('Failed to guess the ol.View');
+                    return;
+                }
+            }
+            return view;
+        },
+
+        /**
+         * Sanitizes the passed tile size. If a number is passed, this method
+         * will assume a rectangular tile and return an array of `[in, in]`. If
+         * an array of two numbers is passed, the tile size will be returned
+         * unchanged. Anything else will result in the default tile size of
+         * `[256, 256]` being returned.
+         *
+         * @param {Number|Array<Number>} [tileSize] The tile size in pixels. Can
+         *     be passed as number or as array of two numbers.
+         * @return {Array<Number>} The sanitized tile size as array of two
+         *     numbers or `[256, 256]` if we received something unexpected.
+         * @private
+         */
+        sanitizeTileSize: function(tileSize) {
+            var msg;
+            if (Ext.isNumber(tileSize)) {
+                msg = 'Parameter tileSize passed as number,' +
+                    ' assuming rectangular tilesize of [{0}, {0}] now';
+                Ext.Logger.info(Ext.String.format(msg, tileSize));
+                tileSize = [tileSize, tileSize];
+            }
+            if (!Ext.isArray(tileSize) ||
+                    !Ext.isNumber(tileSize[0]) || !Ext.isNumber(tileSize[1])) {
+                Ext.Logger.info('No or unexpected tileSize passed,' +
+                    ' defaulting to [256, 256] now');
+                tileSize = [256, 256];
+            }
+            return tileSize;
+        },
+
+        /**
+         * Sanitizes the passed extent, potentially taking into account the
+         * passed `ol.View`. A valid extent (minX, minY, maxX, maxY) will
+         * be returned unchanged. When the passed extent is falsy, the view
+         * will be queried for a property `extent`, and the checking of the
+         * validity will use this extent. If we consider the extent invalid,
+         * the view will be asked to provide us the validity extent of its
+         * projection, and we'll use that.
+         *
+         * @param {Array<Number>} [extent] The extent we want to sanitize.
+         * @param {ol.View} [view] Will be used to in case the passed extent is
+         *     falsy or otherwise unexpected. First we check if there is a
+         *     property 'extent' on the view, and finally we'll return the
+         *     validity extent from the projection of the view. Please note that
+         *     this might be `undefined` as well.
+         * @return {Array<Number>} The normalized extent or `undefined`.
+         * @private
+         */
+        sanitizeExtent: function(extent, view) {
+            // some views might have this explicitly set
+            extent = extent || (view && view.get('extent'));
+            if (!Ext.isArray(extent) ||
+                    !Ext.isNumber(extent[0]) || !Ext.isNumber(extent[1]) ||
+                    !Ext.isNumber(extent[2]) || !Ext.isNumber(extent[3]) ||
+                    ol.extent.getWidth(extent) <= 0 ||
+                    ol.extent.getHeight(extent) <= 0) {
+                var msg = 'No or unexpected extent passed, ';
+                var projection = view && view.getProjection();
+                if (projection) {
+                    msg += 'defaulting to validity extent of view projection';
+                    Ext.Logger.info(msg);
+                    extent = projection.getExtent();
+                } else {
+                    msg += 'and view cannot be used to derive one';
+                    Ext.Logger.info(msg);
+                    return;
+                }
+            }
+            return extent;
+        }
+
+    }
+});

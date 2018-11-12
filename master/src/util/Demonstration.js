@@ -1,9 +1,328 @@
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Demonstration Utility class
+ *
+ * Some methods to interactively show the usage of different classes.
+ *
+ * @class BasiGX.util.Demonstration
+ */
+Ext.define('BasiGX.util.Demonstration', {
 
-var __cov_c2gWv9USssNyNa28eYWrOQ = (Function('return this'))();
-if (!__cov_c2gWv9USssNyNa28eYWrOQ.__coverage__) { __cov_c2gWv9USssNyNa28eYWrOQ.__coverage__ = {}; }
-__cov_c2gWv9USssNyNa28eYWrOQ = __cov_c2gWv9USssNyNa28eYWrOQ.__coverage__;
-if (!(__cov_c2gWv9USssNyNa28eYWrOQ['/home/travis/build/terrestris/BasiGX/src/util/Demonstration.js'])) {
-   __cov_c2gWv9USssNyNa28eYWrOQ['/home/travis/build/terrestris/BasiGX/src/util/Demonstration.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Demonstration.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0},"fnMap":{"1":{"name":"(anonymous_1)","line":68,"loc":{"start":{"line":68,"column":14},"end":{"line":68,"column":47}}},"2":{"name":"(anonymous_2)","line":118,"loc":{"start":{"line":118,"column":30},"end":{"line":118,"column":66}}},"3":{"name":"(anonymous_3)","line":122,"loc":{"start":{"line":122,"column":34},"end":{"line":122,"column":55}}},"4":{"name":"(anonymous_4)","line":132,"loc":{"start":{"line":132,"column":64},"end":{"line":132,"column":75}}},"5":{"name":"(anonymous_5)","line":162,"loc":{"start":{"line":162,"column":22},"end":{"line":162,"column":42}}},"6":{"name":"(anonymous_6)","line":184,"loc":{"start":{"line":184,"column":20},"end":{"line":184,"column":33}}},"7":{"name":"(anonymous_7)","line":198,"loc":{"start":{"line":198,"column":17},"end":{"line":198,"column":30}}},"8":{"name":"(anonymous_8)","line":199,"loc":{"start":{"line":199,"column":48},"end":{"line":199,"column":59}}},"9":{"name":"(anonymous_9)","line":221,"loc":{"start":{"line":221,"column":21},"end":{"line":221,"column":41}}},"10":{"name":"(anonymous_10)","line":242,"loc":{"start":{"line":242,"column":23},"end":{"line":242,"column":43}}},"11":{"name":"(anonymous_11)","line":251,"loc":{"start":{"line":251,"column":48},"end":{"line":251,"column":59}}},"12":{"name":"(anonymous_12)","line":274,"loc":{"start":{"line":274,"column":19},"end":{"line":274,"column":39}}},"13":{"name":"(anonymous_13)","line":282,"loc":{"start":{"line":282,"column":21},"end":{"line":282,"column":32}}},"14":{"name":"(anonymous_14)","line":303,"loc":{"start":{"line":303,"column":18},"end":{"line":303,"column":38}}},"15":{"name":"(anonymous_15)","line":321,"loc":{"start":{"line":321,"column":17},"end":{"line":321,"column":37}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":328,"column":3}},"2":{"start":{"line":70,"column":12},"end":{"line":84,"column":15}},"3":{"start":{"line":86,"column":12},"end":{"line":86,"column":31}},"4":{"start":{"line":87,"column":12},"end":{"line":87,"column":32}},"5":{"start":{"line":92,"column":12},"end":{"line":97,"column":15}},"6":{"start":{"line":99,"column":12},"end":{"line":99,"column":49}},"7":{"start":{"line":102,"column":12},"end":{"line":104,"column":14}},"8":{"start":{"line":119,"column":12},"end":{"line":119,"column":45}},"9":{"start":{"line":120,"column":12},"end":{"line":120,"column":49}},"10":{"start":{"line":121,"column":12},"end":{"line":149,"column":13}},"11":{"start":{"line":122,"column":16},"end":{"line":146,"column":19}},"12":{"start":{"line":123,"column":20},"end":{"line":145,"column":21}},"13":{"start":{"line":125,"column":24},"end":{"line":127,"column":26}},"14":{"start":{"line":128,"column":24},"end":{"line":141,"column":25}},"15":{"start":{"line":129,"column":28},"end":{"line":129,"column":67}},"16":{"start":{"line":130,"column":28},"end":{"line":130,"column":69}},"17":{"start":{"line":131,"column":28},"end":{"line":131,"column":65}},"18":{"start":{"line":132,"column":28},"end":{"line":137,"column":31}},"19":{"start":{"line":133,"column":32},"end":{"line":133,"column":40}},"20":{"start":{"line":134,"column":32},"end":{"line":136,"column":34}},"21":{"start":{"line":138,"column":28},"end":{"line":138,"column":50}},"22":{"start":{"line":140,"column":28},"end":{"line":140,"column":66}},"23":{"start":{"line":143,"column":24},"end":{"line":143,"column":65}},"24":{"start":{"line":144,"column":24},"end":{"line":144,"column":31}},"25":{"start":{"line":148,"column":16},"end":{"line":148,"column":54}},"26":{"start":{"line":163,"column":12},"end":{"line":163,"column":28}},"27":{"start":{"line":164,"column":12},"end":{"line":168,"column":13}},"28":{"start":{"line":165,"column":16},"end":{"line":165,"column":46}},"29":{"start":{"line":166,"column":19},"end":{"line":168,"column":13}},"30":{"start":{"line":167,"column":16},"end":{"line":167,"column":36}},"31":{"start":{"line":169,"column":12},"end":{"line":169,"column":69}},"32":{"start":{"line":170,"column":12},"end":{"line":174,"column":13}},"33":{"start":{"line":171,"column":16},"end":{"line":171,"column":57}},"34":{"start":{"line":173,"column":16},"end":{"line":173,"column":33}},"35":{"start":{"line":185,"column":12},"end":{"line":185,"column":50}},"36":{"start":{"line":186,"column":12},"end":{"line":187,"column":57}},"37":{"start":{"line":188,"column":12},"end":{"line":188,"column":19}},"38":{"start":{"line":199,"column":12},"end":{"line":206,"column":15}},"39":{"start":{"line":200,"column":16},"end":{"line":200,"column":29}},"40":{"start":{"line":201,"column":16},"end":{"line":202,"column":54}},"41":{"start":{"line":203,"column":16},"end":{"line":205,"column":17}},"42":{"start":{"line":204,"column":20},"end":{"line":204,"column":38}},"43":{"start":{"line":207,"column":12},"end":{"line":207,"column":29}},"44":{"start":{"line":222,"column":12},"end":{"line":222,"column":78}},"45":{"start":{"line":223,"column":12},"end":{"line":223,"column":58}},"46":{"start":{"line":224,"column":12},"end":{"line":230,"column":15}},"47":{"start":{"line":243,"column":12},"end":{"line":243,"column":78}},"48":{"start":{"line":244,"column":12},"end":{"line":244,"column":54}},"49":{"start":{"line":246,"column":12},"end":{"line":246,"column":42}},"50":{"start":{"line":247,"column":12},"end":{"line":247,"column":36}},"51":{"start":{"line":248,"column":12},"end":{"line":248,"column":35}},"52":{"start":{"line":250,"column":12},"end":{"line":250,"column":41}},"53":{"start":{"line":251,"column":12},"end":{"line":256,"column":15}},"54":{"start":{"line":252,"column":16},"end":{"line":252,"column":40}},"55":{"start":{"line":253,"column":16},"end":{"line":255,"column":17}},"56":{"start":{"line":254,"column":20},"end":{"line":254,"column":51}},"57":{"start":{"line":257,"column":12},"end":{"line":257,"column":28}},"58":{"start":{"line":275,"column":12},"end":{"line":275,"column":78}},"59":{"start":{"line":277,"column":12},"end":{"line":277,"column":35}},"60":{"start":{"line":278,"column":12},"end":{"line":278,"column":51}},"61":{"start":{"line":279,"column":12},"end":{"line":279,"column":22}},"62":{"start":{"line":281,"column":12},"end":{"line":288,"column":15}},"63":{"start":{"line":283,"column":20},"end":{"line":283,"column":71}},"64":{"start":{"line":284,"column":20},"end":{"line":284,"column":24}},"65":{"start":{"line":289,"column":12},"end":{"line":289,"column":25}},"66":{"start":{"line":304,"column":12},"end":{"line":304,"column":78}},"67":{"start":{"line":305,"column":12},"end":{"line":309,"column":14}},"68":{"start":{"line":322,"column":12},"end":{"line":322,"column":78}},"69":{"start":{"line":323,"column":12},"end":{"line":325,"column":13}},"70":{"start":{"line":324,"column":16},"end":{"line":324,"column":36}}},"branchMap":{"1":{"line":121,"type":"if","locations":[{"start":{"line":121,"column":12},"end":{"line":121,"column":12}},{"start":{"line":121,"column":12},"end":{"line":121,"column":12}}]},"2":{"line":123,"type":"if","locations":[{"start":{"line":123,"column":20},"end":{"line":123,"column":20}},{"start":{"line":123,"column":20},"end":{"line":123,"column":20}}]},"3":{"line":128,"type":"if","locations":[{"start":{"line":128,"column":24},"end":{"line":128,"column":24}},{"start":{"line":128,"column":24},"end":{"line":128,"column":24}}]},"4":{"line":129,"type":"binary-expr","locations":[{"start":{"line":129,"column":44},"end":{"line":129,"column":59}},{"start":{"line":129,"column":63},"end":{"line":129,"column":66}}]},"5":{"line":130,"type":"binary-expr","locations":[{"start":{"line":130,"column":43},"end":{"line":130,"column":61}},{"start":{"line":130,"column":65},"end":{"line":130,"column":68}}]},"6":{"line":164,"type":"if","locations":[{"start":{"line":164,"column":12},"end":{"line":164,"column":12}},{"start":{"line":164,"column":12},"end":{"line":164,"column":12}}]},"7":{"line":164,"type":"binary-expr","locations":[{"start":{"line":164,"column":16},"end":{"line":164,"column":31}},{"start":{"line":164,"column":35},"end":{"line":164,"column":64}}]},"8":{"line":166,"type":"if","locations":[{"start":{"line":166,"column":19},"end":{"line":166,"column":19}},{"start":{"line":166,"column":19},"end":{"line":166,"column":19}}]},"9":{"line":170,"type":"if","locations":[{"start":{"line":170,"column":12},"end":{"line":170,"column":12}},{"start":{"line":170,"column":12},"end":{"line":170,"column":12}}]},"10":{"line":203,"type":"if","locations":[{"start":{"line":203,"column":16},"end":{"line":203,"column":16}},{"start":{"line":203,"column":16},"end":{"line":203,"column":16}}]},"11":{"line":223,"type":"binary-expr","locations":[{"start":{"line":223,"column":31},"end":{"line":223,"column":49}},{"start":{"line":223,"column":53},"end":{"line":223,"column":57}}]},"12":{"line":253,"type":"if","locations":[{"start":{"line":253,"column":16},"end":{"line":253,"column":16}},{"start":{"line":253,"column":16},"end":{"line":253,"column":16}}]},"13":{"line":323,"type":"if","locations":[{"start":{"line":323,"column":12},"end":{"line":323,"column":12}},{"start":{"line":323,"column":12},"end":{"line":323,"column":12}}]}}};
-}
-__cov_c2gWv9USssNyNa28eYWrOQ = __cov_c2gWv9USssNyNa28eYWrOQ['/home/travis/build/terrestris/BasiGX/src/util/Demonstration.js'];
-__cov_c2gWv9USssNyNa28eYWrOQ.s['1']++;Ext.define('BasiGX.util.Demonstration',{statics:{demoBrokenTitle:'Error',demoBrokenMsg:'Sorry, the demo seems to be broken.',demo:function(origin,liveDemoConfig){__cov_c2gWv9USssNyNa28eYWrOQ.f['1']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['2']++;var imgBox=Ext.create('Ext.container.Container',{renderTo:Ext.getBody(),height:20,width:20,items:[{xtype:'image',src:'resources/img/cursor_30x52.png',width:30,height:52}],x:origin.getX(),y:origin.getY()});__cov_c2gWv9USssNyNa28eYWrOQ.s['3']++;var el=imgBox.el;__cov_c2gWv9USssNyNa28eYWrOQ.s['4']++;el.setZIndex(99998);__cov_c2gWv9USssNyNa28eYWrOQ.s['5']++;var unclickableLayer=Ext.create('Ext.container.Container',{name:'demooverlay',renderTo:Ext.getBody(),height:Ext.getBody().getHeight(),width:Ext.getBody().getWidth()});__cov_c2gWv9USssNyNa28eYWrOQ.s['6']++;unclickableLayer.el.setZIndex(99999);__cov_c2gWv9USssNyNa28eYWrOQ.s['7']++;BasiGX.util.Demonstration.handleAnimationChain(liveDemoConfig,el,0);},handleAnimationChain:function(liveDemoConfig,el,index){__cov_c2gWv9USssNyNa28eYWrOQ.f['2']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['8']++;var conf=liveDemoConfig[index];__cov_c2gWv9USssNyNa28eYWrOQ.s['9']++;var next=liveDemoConfig[index+1];__cov_c2gWv9USssNyNa28eYWrOQ.s['10']++;if(conf){__cov_c2gWv9USssNyNa28eYWrOQ.b['1'][0]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['11']++;Ext.iterate(conf,function(key,value){__cov_c2gWv9USssNyNa28eYWrOQ.f['3']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['12']++;if(Ext.isDefined(window['BasiGX']['util']['Demonstration'][key])){__cov_c2gWv9USssNyNa28eYWrOQ.b['2'][0]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['13']++;window['BasiGX']['util']['Demonstration'][key](value,el,index,liveDemoConfig);__cov_c2gWv9USssNyNa28eYWrOQ.s['14']++;if(next){__cov_c2gWv9USssNyNa28eYWrOQ.b['3'][0]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['15']++;var waitAfter=(__cov_c2gWv9USssNyNa28eYWrOQ.b['4'][0]++,value.waitAfter)||(__cov_c2gWv9USssNyNa28eYWrOQ.b['4'][1]++,500);__cov_c2gWv9USssNyNa28eYWrOQ.s['16']++;var duration=(__cov_c2gWv9USssNyNa28eYWrOQ.b['5'][0]++,value.moveDuration)||(__cov_c2gWv9USssNyNa28eYWrOQ.b['5'][1]++,500);__cov_c2gWv9USssNyNa28eYWrOQ.s['17']++;var delayTime=waitAfter+duration;__cov_c2gWv9USssNyNa28eYWrOQ.s['18']++;var task=new Ext.util.DelayedTask(function(){__cov_c2gWv9USssNyNa28eYWrOQ.f['4']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['19']++;index++;__cov_c2gWv9USssNyNa28eYWrOQ.s['20']++;BasiGX.util.Demonstration.handleAnimationChain(liveDemoConfig,el,index);});__cov_c2gWv9USssNyNa28eYWrOQ.s['21']++;task.delay(delayTime);}else{__cov_c2gWv9USssNyNa28eYWrOQ.b['3'][1]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['22']++;BasiGX.util.Demonstration.endDemo(el);}}else{__cov_c2gWv9USssNyNa28eYWrOQ.b['2'][1]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['23']++;BasiGX.util.Demonstration.cancelDemo(el);__cov_c2gWv9USssNyNa28eYWrOQ.s['24']++;return;}});}else{__cov_c2gWv9USssNyNa28eYWrOQ.b['1'][1]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['25']++;BasiGX.util.Demonstration.endDemo(el);}},getComponent:function(value,el){__cov_c2gWv9USssNyNa28eYWrOQ.f['5']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['26']++;var queryString;__cov_c2gWv9USssNyNa28eYWrOQ.s['27']++;if((__cov_c2gWv9USssNyNa28eYWrOQ.b['7'][0]++,value.component)&&(__cov_c2gWv9USssNyNa28eYWrOQ.b['7'][1]++,Ext.isString(value.component))){__cov_c2gWv9USssNyNa28eYWrOQ.b['6'][0]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['28']++;queryString=value.component;}else{__cov_c2gWv9USssNyNa28eYWrOQ.b['6'][1]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['29']++;if(Ext.isString(value)){__cov_c2gWv9USssNyNa28eYWrOQ.b['8'][0]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['30']++;queryString=value;}else{__cov_c2gWv9USssNyNa28eYWrOQ.b['8'][1]++;}}__cov_c2gWv9USssNyNa28eYWrOQ.s['31']++;var component=Ext.ComponentQuery.query(queryString)[0];__cov_c2gWv9USssNyNa28eYWrOQ.s['32']++;if(!component){__cov_c2gWv9USssNyNa28eYWrOQ.b['9'][0]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['33']++;BasiGX.util.Demonstration.cancelDemo(el);}else{__cov_c2gWv9USssNyNa28eYWrOQ.b['9'][1]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['34']++;return component;}},cancelDemo:function(el){__cov_c2gWv9USssNyNa28eYWrOQ.f['6']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['35']++;BasiGX.util.Demonstration.endDemo(el);__cov_c2gWv9USssNyNa28eYWrOQ.s['36']++;Ext.Msg.alert(BasiGX.util.Demonstration.demoBrokenTitle,BasiGX.util.Demonstration.demoBrokenMsg);__cov_c2gWv9USssNyNa28eYWrOQ.s['37']++;return;},endDemo:function(el){__cov_c2gWv9USssNyNa28eYWrOQ.f['7']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['38']++;var task=new Ext.util.DelayedTask(function(){__cov_c2gWv9USssNyNa28eYWrOQ.f['8']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['39']++;el.destroy();__cov_c2gWv9USssNyNa28eYWrOQ.s['40']++;var overlay=Ext.ComponentQuery.query('container[name=demooverlay]')[0];__cov_c2gWv9USssNyNa28eYWrOQ.s['41']++;if(overlay){__cov_c2gWv9USssNyNa28eYWrOQ.b['10'][0]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['42']++;overlay.destroy();}else{__cov_c2gWv9USssNyNa28eYWrOQ.b['10'][1]++;}});__cov_c2gWv9USssNyNa28eYWrOQ.s['43']++;task.delay(1000);},moveMouseTo:function(value,el){__cov_c2gWv9USssNyNa28eYWrOQ.f['9']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['44']++;var component=BasiGX.util.Demonstration.getComponent(value,el);__cov_c2gWv9USssNyNa28eYWrOQ.s['45']++;var moveDuration=(__cov_c2gWv9USssNyNa28eYWrOQ.b['11'][0]++,value.moveDuration)||(__cov_c2gWv9USssNyNa28eYWrOQ.b['11'][1]++,1000);__cov_c2gWv9USssNyNa28eYWrOQ.s['46']++;el.animate({duration:moveDuration,to:{x:component.getX()+component.getWidth()/2,y:component.getY()+component.getHeight()/2}});},clickOnButton:function(value,el){__cov_c2gWv9USssNyNa28eYWrOQ.f['10']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['47']++;var component=BasiGX.util.Demonstration.getComponent(value,el);__cov_c2gWv9USssNyNa28eYWrOQ.s['48']++;var wasTogglable=component.enableToggle;__cov_c2gWv9USssNyNa28eYWrOQ.s['49']++;component.enableToggle=true;__cov_c2gWv9USssNyNa28eYWrOQ.s['50']++;component.toggle(false);__cov_c2gWv9USssNyNa28eYWrOQ.s['51']++;component.toggle(true);__cov_c2gWv9USssNyNa28eYWrOQ.s['52']++;component.handler(component);__cov_c2gWv9USssNyNa28eYWrOQ.s['53']++;var task=new Ext.util.DelayedTask(function(){__cov_c2gWv9USssNyNa28eYWrOQ.f['11']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['54']++;component.toggle(false);__cov_c2gWv9USssNyNa28eYWrOQ.s['55']++;if(!wasTogglable){__cov_c2gWv9USssNyNa28eYWrOQ.b['12'][0]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['56']++;component.enableToggle=false;}else{__cov_c2gWv9USssNyNa28eYWrOQ.b['12'][1]++;}});__cov_c2gWv9USssNyNa28eYWrOQ.s['57']++;task.delay(500);},enterText:function(value,el){__cov_c2gWv9USssNyNa28eYWrOQ.f['12']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['58']++;var component=BasiGX.util.Demonstration.getComponent(value,el);__cov_c2gWv9USssNyNa28eYWrOQ.s['59']++;component.setValue('');__cov_c2gWv9USssNyNa28eYWrOQ.s['60']++;var runner=new Ext.util.TaskRunner();__cov_c2gWv9USssNyNa28eYWrOQ.s['61']++;var i=0;__cov_c2gWv9USssNyNa28eYWrOQ.s['62']++;var task=runner.newTask({run:function(){__cov_c2gWv9USssNyNa28eYWrOQ.f['13']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['63']++;component.setValue(value.text.substring(0,i+1));__cov_c2gWv9USssNyNa28eYWrOQ.s['64']++;i++;},interval:100,repeat:value.text.length});__cov_c2gWv9USssNyNa28eYWrOQ.s['65']++;task.start();},scrollTo:function(value,el){__cov_c2gWv9USssNyNa28eYWrOQ.f['14']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['66']++;var component=BasiGX.util.Demonstration.getComponent(value,el);__cov_c2gWv9USssNyNa28eYWrOQ.s['67']++;component.scrollTo(value.target.x,value.target.y,value.target.animate);},destroy:function(value,el){__cov_c2gWv9USssNyNa28eYWrOQ.f['15']++;__cov_c2gWv9USssNyNa28eYWrOQ.s['68']++;var component=BasiGX.util.Demonstration.getComponent(value,el);__cov_c2gWv9USssNyNa28eYWrOQ.s['69']++;if(component){__cov_c2gWv9USssNyNa28eYWrOQ.b['13'][0]++;__cov_c2gWv9USssNyNa28eYWrOQ.s['70']++;component.destroy();}else{__cov_c2gWv9USssNyNa28eYWrOQ.b['13'][1]++;}}}});
+    statics: {
+
+        /**
+         * Starts the live demonstration mode for a specific component.
+         * Example:
+             BasiGX.util.Demonstration.demo(
+                 someExtComponentLikeAButton,
+                 [{
+                      moveMouseTo: {
+                          component: 'basigx-button-addwms',
+                          moveDuration: 2000
+                      }
+                  },
+                  {
+                      clickOnButton: 'basigx-button-addwms'
+                  },
+                  {
+                      moveMouseTo:
+                          'window[name=add-wms-window] textfield[name=url]'
+                  },
+                  {
+                      enterText: {
+                          component:
+                              'window[name=add-wms-window] textfield[name=url]',
+                          text: 'https://ows.terrestris.de/osm/service',
+                          waitAfter: 3500
+                      }
+                  },
+                  {
+                      destroy: 'window[name=add-wms-window]'
+                  }
+              ]);
+         *
+         * @param {Object} origin An Ext.Component from which the action starts
+         * @param {Array} liveDemoConfig The configuration Array which holds
+         *     Objects with information on how to demonstrate the functionality
+         */
+
+        /*begin i18n*/
+        demoBrokenTitle: 'Error',
+        demoBrokenMsg: 'Sorry, the demo seems to be broken.',
+        /*end i18n*/
+
+        demo: function(origin, liveDemoConfig) {
+            // show an absolute positioned demo mouse cursor at the origin
+            var imgBox = Ext.create('Ext.container.Container', {
+                renderTo: Ext.getBody(),
+                height: 20,
+                width: 20,
+                items: [
+                    {
+                        xtype: 'image',
+                        src: 'resources/img/cursor_30x52.png',
+                        width: 30,
+                        height: 52
+                    }
+                ],
+                x: origin.getX(),
+                y: origin.getY()
+            });
+
+            var el = imgBox.el;
+            el.setZIndex(99998);
+
+            // create an invisible mask so that the user cannot interfere the
+            // demonstration. All mouse interactions will get blocked by
+            // this until the demo is ended or cancelled.
+            var unclickableLayer = Ext.create('Ext.container.Container', {
+                name: 'demooverlay',
+                renderTo: Ext.getBody(),
+                height: Ext.getBody().getHeight(),
+                width: Ext.getBody().getWidth()
+            });
+            // make sure we are always on top...
+            unclickableLayer.el.setZIndex(99999);
+
+            // start the demonstration chain
+            BasiGX.util.Demonstration.handleAnimationChain(
+                liveDemoConfig, el, 0
+            );
+        },
+
+        /**
+         * Iterates through the liveDemoConfig object and calls the given
+         * functions to show the usage of a component.
+         *
+         * @param {Array} liveDemoConfig The configuration Array which holds
+         *     Objects with information on how to demonstrate the functionality
+         * @param {Object} el The Ext.element which represents the demo
+         *     mouse cursor
+         * @param {Integer} index The current index of the animation chain
+         *     in order to determine which step is the next one
+         */
+        handleAnimationChain: function(liveDemoConfig, el, index) {
+            var conf = liveDemoConfig[index];
+            var next = liveDemoConfig[index + 1];
+            if (conf) {
+                Ext.iterate(conf, function(key, value) {
+                    if (Ext.isDefined(
+                        window['BasiGX']['util']['Demonstration'][key])) {
+                        window['BasiGX']['util']['Demonstration'][key](
+                            value, el, index, liveDemoConfig
+                        );
+                        if (next) {
+                            var waitAfter = value.waitAfter || 500;
+                            var duration = value.moveDuration || 500;
+                            var delayTime = waitAfter + duration;
+                            var task = new Ext.util.DelayedTask(function() {
+                                index++;
+                                BasiGX.util.Demonstration.handleAnimationChain(
+                                    liveDemoConfig, el, index
+                                );
+                            });
+                            task.delay(delayTime);
+                        } else {
+                            BasiGX.util.Demonstration.endDemo(el);
+                        }
+                    } else {
+                        BasiGX.util.Demonstration.cancelDemo(el);
+                        return;
+                    }
+                });
+            } else {
+                BasiGX.util.Demonstration.endDemo(el);
+            }
+        },
+
+        /**
+         * Gets the Ext.Component based on the given identifier
+         *
+         * @param {String/Object} value Can be either the components
+         *     identifier string or an object holding the string in the
+         *     key `component`
+         * @param {Object} el The Ext.element which represents the demo
+         *     mouse cursor
+         * @return {Object} The Ext.Component which was found
+         */
+        getComponent: function(value, el) {
+            var queryString;
+            if (value.component && Ext.isString(value.component)) {
+                queryString = value.component;
+            } else if (Ext.isString(value)) {
+                queryString = value;
+            }
+            var component = Ext.ComponentQuery.query(queryString)[0];
+            if (!component) {
+                BasiGX.util.Demonstration.cancelDemo(el);
+            } else {
+                return component;
+            }
+        },
+
+        /**
+         * Cancel the demo and give and show an Error Message that something
+         * went wrong
+         *
+         * @param {Object} el The Ext.element which represents the demo
+         *     mouse cursor
+         */
+        cancelDemo: function(el) {
+            BasiGX.util.Demonstration.endDemo(el);
+            Ext.Msg.alert(BasiGX.util.Demonstration.demoBrokenTitle,
+                BasiGX.util.Demonstration.demoBrokenMsg);
+            return;
+        },
+
+        /**
+         * End the demo by removing the demo mouse cursor and the invisible
+         * overlay
+         *
+         * @param {Object} el The Ext.element which represents the demo
+         *     mouse cursor
+         */
+        endDemo: function(el) {
+            var task = new Ext.util.DelayedTask(function() {
+                el.destroy();
+                var overlay = Ext.ComponentQuery.query(
+                    'container[name=demooverlay]')[0];
+                if (overlay) {
+                    overlay.destroy();
+                }
+            });
+            task.delay(1000);
+        },
+
+        /**
+         * Moves the mouse to the given component. A duration in milliseconds
+         * can be given to set the animation duration
+         *
+          * @param {String/Object} value Can be either the components
+         *     identifier string or an object holding the string in the
+         *     key `component`. When an Object is given, it may also contain
+         *     a key `moveDuration` to set the animation duration
+         * @param {Object} el The Ext.element which represents the demo
+         *     mouse cursor
+         */
+        moveMouseTo: function(value, el) {
+            var component = BasiGX.util.Demonstration.getComponent(value, el);
+            var moveDuration = value.moveDuration || 1000;
+            el.animate({
+                duration: moveDuration,
+                to: {
+                    x: component.getX() + (component.getWidth() / 2),
+                    y: component.getY() + (component.getHeight() / 2)
+                }
+            });
+        },
+
+        /**
+         * Used to click on an Ext.button.Button
+         *
+         * @param {String/Object} value Can be either the components
+         *     identifier string or an object holding the string in the
+         *     key `component`
+         * @param {Object} el The Ext.element which represents the demo
+         *     mouse cursor
+         */
+        clickOnButton: function(value, el) {
+            var component = BasiGX.util.Demonstration.getComponent(value, el);
+            var wasTogglable = component.enableToggle;
+            // visually press the button
+            component.enableToggle = true;
+            component.toggle(false);
+            component.toggle(true);
+            // trigger the click
+            component.handler(component);
+            var task = new Ext.util.DelayedTask(function() {
+                component.toggle(false);
+                if (!wasTogglable) {
+                    component.enableToggle = false;
+                }
+            });
+            task.delay(500);
+        },
+
+        /**
+         * Enters a text in a given component by calling the `setValue` method.
+         * The typing of single letters is delayed, therefore the duration
+         * depends on the length of the text to be typed. When calling this
+         * method it makes sense to also set the `waitAfter` key in the `value`
+         * object to something useful
+         *
+         * @param {Object} value An object holding the identifier string in the
+         *     key `component` and the text to enter in the `text` key
+         * @param {Object} el The Ext.element which represents the demo
+         *     mouse cursor
+         * @param {Integer} index The current index of the animation chain
+         *     in order to determine which step is the next one
+         */
+        enterText: function(value, el) {
+            var component = BasiGX.util.Demonstration.getComponent(value, el);
+            // first erase old values
+            component.setValue('');
+            var runner = new Ext.util.TaskRunner();
+            var i = 0;
+
+            var task = runner.newTask({
+                run: function() {
+                    component.setValue(value.text.substring(0, i + 1));
+                    i++;
+                },
+                interval: 100,
+                repeat: value.text.length
+            });
+            task.start();
+        },
+
+        /**
+         * Scrolls a scrollable component to the given coordinates
+         *
+         * @param {Object} value An object holding the identifier string in the
+         *     key `component` and the target information in the `target` key.
+         *     The `target` object contains the coordinates as `x` and `y` and
+         *     the boolean flag `animate` to indicate if we shall animate
+         *     the scroll
+         * @param {Object} el The Ext.element which represents the demo
+         *     mouse cursor
+         */
+        scrollTo: function(value, el) {
+            var component = BasiGX.util.Demonstration.getComponent(value, el);
+            component.scrollTo(
+                value.target.x,
+                value.target.y,
+                value.target.animate
+            );
+        },
+
+        /**
+         * Used to destroy a component by the given identifier
+         *
+         * @param {String/Object} value Can be either the components
+         *     identifier string or an object holding the string in the
+         *     key `component`
+         * @param {Object} el The Ext.element which represents the demo
+         *     mouse cursor
+         */
+        destroy: function(value, el) {
+            var component = BasiGX.util.Demonstration.getComponent(value, el);
+            if (component) {
+                component.destroy();
+            }
+        }
+    }
+});

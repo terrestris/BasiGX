@@ -1,9 +1,239 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * LayerSetChooser Panel
+ *
+ * Used to show different sets of layers to swap the thematic focus of the
+ * application, e.g. by changing the visibility of layers.
+ * The events fired ('itemclick' and 'itemdblclick') will hand over the
+ * selected record
+ *
+ * Example:
+ *
+ *     {
+ *         xtype: 'basigx-panel-layersetchooser',
+ *         layerSetUrl: 'classic/resources/layerset.json',
+ *         listeners: {
+ *             itemclick: this.handleLayerSetClick
+ *         }
+ *     }
+ *
+ * @class BasiGX.view.panel.LayerSetChooser
+ */
+Ext.define('BasiGX.view.panel.LayerSetChooser', {
+    extend: 'Ext.panel.Panel',
+    xtype: 'basigx-panel-layersetchooser',
 
-var __cov_gmdpNDg9iCRMTxCgdxzV4Q = (Function('return this'))();
-if (!__cov_gmdpNDg9iCRMTxCgdxzV4Q.__coverage__) { __cov_gmdpNDg9iCRMTxCgdxzV4Q.__coverage__ = {}; }
-__cov_gmdpNDg9iCRMTxCgdxzV4Q = __cov_gmdpNDg9iCRMTxCgdxzV4Q.__coverage__;
-if (!(__cov_gmdpNDg9iCRMTxCgdxzV4Q['/home/travis/build/terrestris/BasiGX/src/view/panel/LayerSetChooser.js'])) {
-   __cov_gmdpNDg9iCRMTxCgdxzV4Q['/home/travis/build/terrestris/BasiGX/src/view/panel/LayerSetChooser.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/panel/LayerSetChooser.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0},"b":{"1":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0},"fnMap":{"1":{"name":"(anonymous_1)","line":126,"loc":{"start":{"line":126,"column":19},"end":{"line":126,"column":30}}},"2":{"name":"(anonymous_2)","line":164,"loc":{"start":{"line":164,"column":22},"end":{"line":164,"column":55}}},"3":{"name":"(anonymous_3)","line":179,"loc":{"start":{"line":179,"column":31},"end":{"line":179,"column":63}}},"4":{"name":"(anonymous_4)","line":197,"loc":{"start":{"line":197,"column":21},"end":{"line":197,"column":65}}},"5":{"name":"(anonymous_5)","line":215,"loc":{"start":{"line":215,"column":24},"end":{"line":215,"column":68}}},"6":{"name":"(anonymous_6)","line":230,"loc":{"start":{"line":230,"column":27},"end":{"line":230,"column":73}}}},"statementMap":{"1":{"start":{"line":36,"column":0},"end":{"line":239,"column":3}},"2":{"start":{"line":128,"column":8},"end":{"line":137,"column":9}},"3":{"start":{"line":130,"column":12},"end":{"line":136,"column":15}},"4":{"start":{"line":139,"column":8},"end":{"line":139,"column":35}},"5":{"start":{"line":142,"column":8},"end":{"line":143,"column":45}},"6":{"start":{"line":144,"column":8},"end":{"line":145,"column":63}},"7":{"start":{"line":146,"column":8},"end":{"line":147,"column":47}},"8":{"start":{"line":148,"column":8},"end":{"line":149,"column":53}},"9":{"start":{"line":165,"column":8},"end":{"line":166,"column":46}},"10":{"start":{"line":180,"column":8},"end":{"line":181,"column":54}},"11":{"start":{"line":198,"column":8},"end":{"line":199,"column":60}},"12":{"start":{"line":216,"column":8},"end":{"line":217,"column":63}},"13":{"start":{"line":231,"column":8},"end":{"line":231,"column":75}},"14":{"start":{"line":232,"column":8},"end":{"line":232,"column":48}},"15":{"start":{"line":233,"column":8},"end":{"line":237,"column":11}}},"branchMap":{"1":{"line":128,"type":"if","locations":[{"start":{"line":128,"column":8},"end":{"line":128,"column":8}},{"start":{"line":128,"column":8},"end":{"line":128,"column":8}}]}}};
-}
-__cov_gmdpNDg9iCRMTxCgdxzV4Q = __cov_gmdpNDg9iCRMTxCgdxzV4Q['/home/travis/build/terrestris/BasiGX/src/view/panel/LayerSetChooser.js'];
-__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['1']++;Ext.define('BasiGX.view.panel.LayerSetChooser',{extend:'Ext.panel.Panel',xtype:'basigx-panel-layersetchooser',requires:['BasiGX.view.view.LayerSet','Ext.app.ViewModel'],viewModel:{data:{title:'Themen Auswahl',filterFieldLabel:'Filter',documentation:'<h2>Themen Auswahl</h2>\u2022 In diesem Dialog '+'können Sie auf vordefinierte Zusammenstellungen von '+'Kartenthemen zurückgreifen, um diese mit nur einem Klick in '+'der Karte darzustellen'}},bind:{title:'{title}'},region:'center',layout:'fit',minWidth:150,minHeight:170,cls:'img-chooser-dlg',layerSetUrl:null,layerSetData:null,tpl:null,scrollable:'y',bbar:[{xtype:'textfield',name:'filter',bind:{fieldLabel:'{filterFieldLabel}'},labelAlign:'left',labelWidth:45,flex:1}],initComponent:function(){__cov_gmdpNDg9iCRMTxCgdxzV4Q.f['1']++;__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['2']++;if(Ext.isEmpty(this.items)){__cov_gmdpNDg9iCRMTxCgdxzV4Q.b['1'][0]++;__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['3']++;this.items=[{xtype:'basigx-view-layerset',scrollable:true,layerSetUrl:this.layerSetUrl,layerSetData:this.layerSetData,tpl:this.tpl}];}else{__cov_gmdpNDg9iCRMTxCgdxzV4Q.b['1'][1]++;}__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['4']++;this.callParent(arguments);__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['5']++;this.down('basigx-view-layerset').on('select',this.onLayerSetSelect);__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['6']++;this.down('basigx-view-layerset').on('selectionchange',this.onLayerSetSelectionchange);__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['7']++;this.down('basigx-view-layerset').on('itemclick',this.onLayerSetClick);__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['8']++;this.down('basigx-view-layerset').on('itemdblclick',this.onLayerSetDblClick);},onLayerSetSelect:function(view,rec,index,opts){__cov_gmdpNDg9iCRMTxCgdxzV4Q.f['2']++;__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['9']++;this.up('basigx-panel-layersetchooser').fireEvent('select',view,rec,index,opts);},onLayerSetSelectionchange:function(view,selected,eOpts){__cov_gmdpNDg9iCRMTxCgdxzV4Q.f['3']++;__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['10']++;this.up('basigx-panel-layersetchooser').fireEvent('selectionchange',view,selected,eOpts);},onLayerSetClick:function(view,rec,item,index,evt,opts){__cov_gmdpNDg9iCRMTxCgdxzV4Q.f['4']++;__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['11']++;view.up('basigx-panel-layersetchooser').fireEvent('itemclick',view,rec,item,index,evt,opts);},onLayerSetDblClick:function(view,rec,item,index,evt,opts){__cov_gmdpNDg9iCRMTxCgdxzV4Q.f['5']++;__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['12']++;view.up('basigx-panel-layersetchooser').fireEvent('itemdblclick',view,rec,item,index,evt,opts);},filterLayerSetsByText:function(textfield,newVal,oldval,listener){__cov_gmdpNDg9iCRMTxCgdxzV4Q.f['6']++;__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['13']++;var layerProfileView=listener.scope.down('basigx-view-layerset');__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['14']++;var store=layerProfileView.getStore();__cov_gmdpNDg9iCRMTxCgdxzV4Q.s['15']++;store.getFilters().replaceAll({property:'name',anyMatch:true,value:newVal});}});
+    requires: [
+        'BasiGX.view.view.LayerSet',
+        'Ext.app.ViewModel'
+    ],
+
+    viewModel: {
+        data: {
+            title: 'Themen Auswahl',
+            filterFieldLabel: 'Filter',
+            documentation: '<h2>Themen Auswahl</h2>• In diesem Dialog ' +
+                'können Sie auf vordefinierte Zusammenstellungen von ' +
+                'Kartenthemen zurückgreifen, um diese mit nur einem Klick in ' +
+                'der Karte darzustellen'
+        }
+    },
+
+    bind: {
+        title: '{title}'
+    },
+
+    /**
+     *
+     */
+    region: 'center',
+
+    /**
+     *
+     */
+    layout: 'fit',
+
+    /**
+     *
+     */
+    minWidth: 150,
+
+    /**
+     *
+     */
+    minHeight: 170,
+
+    /**
+     *
+     */
+    cls: 'img-chooser-dlg',
+
+    /**
+     *
+     */
+    layerSetUrl: null,
+
+    /**
+     * JSON-object to be passed to the automatically created
+     * 'basigx-view-layerset'.
+     * Only has an effect if this.items is empty.
+     */
+    layerSetData: null,
+
+    /**
+     *
+     */
+    tpl: null,
+
+    /**
+     *
+     */
+    scrollable: 'y',
+
+    /**
+     *
+     */
+    bbar: [
+        {
+            xtype: 'textfield',
+            name: 'filter',
+            bind: {
+                fieldLabel: '{filterFieldLabel}'
+            },
+            labelAlign: 'left',
+            labelWidth: 45,
+            flex: 1
+        }
+    ],
+
+    /**
+     *
+     */
+    initComponent: function() {
+
+        if (Ext.isEmpty(this.items)) {
+
+            this.items = [{
+                xtype: 'basigx-view-layerset',
+                scrollable: true,
+                layerSetUrl: this.layerSetUrl,
+                layerSetData: this.layerSetData,
+                tpl: this.tpl
+            }];
+        }
+
+        this.callParent(arguments);
+
+        // add listeners
+        this.down('basigx-view-layerset').on(
+            'select', this.onLayerSetSelect);
+        this.down('basigx-view-layerset').on(
+            'selectionchange', this.onLayerSetSelectionchange);
+        this.down('basigx-view-layerset').on(
+            'itemclick', this.onLayerSetClick);
+        this.down('basigx-view-layerset').on(
+            'itemdblclick', this.onLayerSetDblClick);
+    },
+
+
+    /**
+     * Just firing an event on the panel.
+     *
+     * Listen to the select event to implement custom handling.
+     *
+     * @param {Ext.selection.DataViewModel} view The selection model.
+     * @param {Ext.data.Model} rec The selected record (layerset).
+     * @param {Number} index The index within the store of the selected record.
+     * @param {Object} opts The options object passed when the event handler
+     *     was registered.
+     */
+    onLayerSetSelect: function(view, rec, index, opts) {
+        this.up('basigx-panel-layersetchooser').fireEvent(
+            'select', view, rec, index, opts);
+    },
+
+    /**
+     * Just firing an event on the panel.
+     *
+     * Listen to the select event to implement custom handling
+     *
+     * @param {Ext.selection.DataViewModel} view The selection model.
+     * @param {Array<Ext.data.Model>} selected The selected records (layersets).
+     * @param {Object} eOpts The options object passed when the event handler
+     *     was registered.
+     */
+    onLayerSetSelectionchange: function(view, selected, eOpts) {
+        this.up('basigx-panel-layersetchooser').fireEvent(
+            'selectionchange', view, selected, eOpts);
+    },
+
+    /**
+     * Just firing an event on the panel.
+     *
+     * Listen to the itemclick event to implement custom handling
+     *
+     * @param {BasiGX.view.view.LayerSet} view The LayerSet view.
+     * @param {Ext.data.Model} rec The clicked record (layerset).
+     * @param {HTMLElement} item The item's element.
+     * @param {Number} index The item's index.
+     * @param {Object} evt The raw event object.
+     * @param {Object} opts The options object passed when the event handler
+     *     was registered.
+     */
+    onLayerSetClick: function(view, rec, item, index, evt, opts) {
+        view.up('basigx-panel-layersetchooser').fireEvent(
+            'itemclick', view, rec, item, index, evt, opts);
+    },
+
+    /**
+     * Just firing an event on the panel.
+     *
+     * Listen to the itemdblclick event to implement custom handling.
+     *
+     * @param {BasiGX.view.view.LayerSet} view The LayerSet view.
+     * @param {Ext.data.Model} rec The double-clicked record (layerset).
+     * @param {HTMLElement} item The item's element.
+     * @param {Number} index The item's index.
+     * @param {Object} evt The raw event object.
+     * @param {Object} opts The options object passed when the event handler
+     *     was registered.
+     */
+    onLayerSetDblClick: function(view, rec, item, index, evt, opts) {
+        view.up('basigx-panel-layersetchooser').fireEvent(
+            'itemdblclick', view, rec, item, index, evt, opts);
+    },
+
+    /**
+     * Can be used to filter the layer sets by text, usually bound as
+     * eventhandler of the `change` event of a textfield.
+     *
+     * @param {Ext.form.field.Text} textfield The textfield.
+     * @param {String} newVal The new value.
+     * @param {String} oldval The old value.
+     * @param {Ext.form.field.Text} listener The options object passed to
+     *     `Ext.util.Observable.addListener`.
+     */
+    filterLayerSetsByText: function(textfield, newVal, oldval, listener) {
+        var layerProfileView = listener.scope.down('basigx-view-layerset');
+        var store = layerProfileView.getStore();
+        store.getFilters().replaceAll({
+            property: 'name',
+            anyMatch: true,
+            value: newVal
+        });
+    }
+});

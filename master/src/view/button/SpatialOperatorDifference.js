@@ -1,9 +1,107 @@
+/* global jsts*/
+/* Copyright (c) 2018-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Spatial Operator Difference Button
+ *
+ * @class BasiGX.view.button.SpatialOperatorDifference
+ */
+Ext.define('BasiGX.view.button.SpatialOperatorDifference', {
+    extend: 'BasiGX.view.button.SpatialOperatorBase',
+    xtype: 'basigx-button-spatial-operator-difference',
 
-var __cov_XNRrm82ybwQR9Jz8U6QNWg = (Function('return this'))();
-if (!__cov_XNRrm82ybwQR9Jz8U6QNWg.__coverage__) { __cov_XNRrm82ybwQR9Jz8U6QNWg.__coverage__ = {}; }
-__cov_XNRrm82ybwQR9Jz8U6QNWg = __cov_XNRrm82ybwQR9Jz8U6QNWg.__coverage__;
-if (!(__cov_XNRrm82ybwQR9Jz8U6QNWg['/home/travis/build/terrestris/BasiGX/src/view/button/SpatialOperatorDifference.js'])) {
-   __cov_XNRrm82ybwQR9Jz8U6QNWg['/home/travis/build/terrestris/BasiGX/src/view/button/SpatialOperatorDifference.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/SpatialOperatorDifference.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0,0]},"f":{"1":0,"2":0,"3":0},"fnMap":{"1":{"name":"(anonymous_1)","line":63,"loc":{"start":{"line":63,"column":13},"end":{"line":63,"column":24}}},"2":{"name":"(anonymous_2)","line":76,"loc":{"start":{"line":76,"column":31},"end":{"line":76,"column":54}}},"3":{"name":"(anonymous_3)","line":87,"loc":{"start":{"line":87,"column":31},"end":{"line":87,"column":46}}}},"statementMap":{"1":{"start":{"line":22,"column":0},"end":{"line":107,"column":3}},"2":{"start":{"line":67,"column":8},"end":{"line":67,"column":31}},"3":{"start":{"line":77,"column":8},"end":{"line":81,"column":9}},"4":{"start":{"line":78,"column":12},"end":{"line":79,"column":71}},"5":{"start":{"line":80,"column":12},"end":{"line":80,"column":19}},"6":{"start":{"line":82,"column":8},"end":{"line":82,"column":45}},"7":{"start":{"line":83,"column":8},"end":{"line":83,"column":34}},"8":{"start":{"line":84,"column":8},"end":{"line":84,"column":27}},"9":{"start":{"line":85,"column":8},"end":{"line":85,"column":30}},"10":{"start":{"line":87,"column":8},"end":{"line":89,"column":11}},"11":{"start":{"line":88,"column":12},"end":{"line":88,"column":67}},"12":{"start":{"line":91,"column":8},"end":{"line":98,"column":9}},"13":{"start":{"line":92,"column":12},"end":{"line":97,"column":13}},"14":{"start":{"line":93,"column":16},"end":{"line":93,"column":53}},"15":{"start":{"line":95,"column":16},"end":{"line":96,"column":41}},"16":{"start":{"line":99,"column":8},"end":{"line":102,"column":9}},"17":{"start":{"line":101,"column":12},"end":{"line":101,"column":25}},"18":{"start":{"line":103,"column":8},"end":{"line":103,"column":50}},"19":{"start":{"line":104,"column":8},"end":{"line":104,"column":56}},"20":{"start":{"line":105,"column":8},"end":{"line":105,"column":26}}},"branchMap":{"1":{"line":77,"type":"if","locations":[{"start":{"line":77,"column":8},"end":{"line":77,"column":8}},{"start":{"line":77,"column":8},"end":{"line":77,"column":8}}]},"2":{"line":92,"type":"if","locations":[{"start":{"line":92,"column":12},"end":{"line":92,"column":12}},{"start":{"line":92,"column":12},"end":{"line":92,"column":12}}]},"3":{"line":99,"type":"if","locations":[{"start":{"line":99,"column":8},"end":{"line":99,"column":8}},{"start":{"line":99,"column":8},"end":{"line":99,"column":8}}]},"4":{"line":99,"type":"binary-expr","locations":[{"start":{"line":99,"column":12},"end":{"line":99,"column":37}},{"start":{"line":99,"column":41},"end":{"line":99,"column":65}},{"start":{"line":100,"column":12},"end":{"line":100,"column":42}}]}}};
-}
-__cov_XNRrm82ybwQR9Jz8U6QNWg = __cov_XNRrm82ybwQR9Jz8U6QNWg['/home/travis/build/terrestris/BasiGX/src/view/button/SpatialOperatorDifference.js'];
-__cov_XNRrm82ybwQR9Jz8U6QNWg.s['1']++;Ext.define('BasiGX.view.button.SpatialOperatorDifference',{extend:'BasiGX.view.button.SpatialOperatorBase',xtype:'basigx-button-spatial-operator-difference',requires:['BasiGX.util.Geometry'],viewModel:{data:{tooltip:'Difference on geometries',text:'Difference on geometries'}},bind:{text:'{text}'},config:{targetVectorLayer:null,maxAllowedFeaturesForOperation:2,showSelectMasterSlaveFeatureDialog:true},toggleGroup:'draw',handler:function(){__cov_XNRrm82ybwQR9Jz8U6QNWg.f['1']++;__cov_XNRrm82ybwQR9Jz8U6QNWg.s['2']++;this.setPressed(false);},processSelectedGeometries:function(featureArray){__cov_XNRrm82ybwQR9Jz8U6QNWg.f['2']++;__cov_XNRrm82ybwQR9Jz8U6QNWg.s['3']++;if(!jsts){__cov_XNRrm82ybwQR9Jz8U6QNWg.b['1'][0]++;__cov_XNRrm82ybwQR9Jz8U6QNWg.s['4']++;Ext.log.error('No jsts could be found, check your application '+'resources and make sure to include the jsts library');__cov_XNRrm82ybwQR9Jz8U6QNWg.s['5']++;return;}else{__cov_XNRrm82ybwQR9Jz8U6QNWg.b['1'][1]++;}__cov_XNRrm82ybwQR9Jz8U6QNWg.s['6']++;var parser=new jsts.io.OL3Parser();__cov_XNRrm82ybwQR9Jz8U6QNWg.s['7']++;var parsedGeometries=[];__cov_XNRrm82ybwQR9Jz8U6QNWg.s['8']++;var differenceGeom;__cov_XNRrm82ybwQR9Jz8U6QNWg.s['9']++;var newFeature=null;__cov_XNRrm82ybwQR9Jz8U6QNWg.s['10']++;Ext.each(featureArray,function(feat){__cov_XNRrm82ybwQR9Jz8U6QNWg.f['3']++;__cov_XNRrm82ybwQR9Jz8U6QNWg.s['11']++;parsedGeometries.push(parser.read(feat.getGeometry()));});__cov_XNRrm82ybwQR9Jz8U6QNWg.s['12']++;for(var i=0;i<parsedGeometries.length;i++){__cov_XNRrm82ybwQR9Jz8U6QNWg.s['13']++;if(i===0){__cov_XNRrm82ybwQR9Jz8U6QNWg.b['2'][0]++;__cov_XNRrm82ybwQR9Jz8U6QNWg.s['14']++;differenceGeom=parsedGeometries[i];}else{__cov_XNRrm82ybwQR9Jz8U6QNWg.b['2'][1]++;__cov_XNRrm82ybwQR9Jz8U6QNWg.s['15']++;differenceGeom=differenceGeom.difference(parsedGeometries[i]);}}__cov_XNRrm82ybwQR9Jz8U6QNWg.s['16']++;if((__cov_XNRrm82ybwQR9Jz8U6QNWg.b['4'][0]++,!differenceGeom.isValid())||(__cov_XNRrm82ybwQR9Jz8U6QNWg.b['4'][1]++,differenceGeom.isEmpty())||(__cov_XNRrm82ybwQR9Jz8U6QNWg.b['4'][2]++,differenceGeom.getArea()===0)){__cov_XNRrm82ybwQR9Jz8U6QNWg.b['3'][0]++;__cov_XNRrm82ybwQR9Jz8U6QNWg.s['17']++;return false;}else{__cov_XNRrm82ybwQR9Jz8U6QNWg.b['3'][1]++;}__cov_XNRrm82ybwQR9Jz8U6QNWg.s['18']++;var result=parser.write(differenceGeom);__cov_XNRrm82ybwQR9Jz8U6QNWg.s['19']++;newFeature=new ol.Feature({geometry:result});__cov_XNRrm82ybwQR9Jz8U6QNWg.s['20']++;return newFeature;}});
+    requires: [
+        'BasiGX.util.Geometry'
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Difference on geometries',
+            text: 'Difference on geometries'
+        }
+    },
+
+    /**
+     *
+     */
+    bind: {
+        text: '{text}'
+    },
+
+    config: {
+
+        targetVectorLayer: null,
+
+        /**
+         * the number of features which are allowed to process together.
+         * Union may use a high number without problems,
+         * intersect will be restricted to 2
+         */
+        maxAllowedFeaturesForOperation: 2,
+
+        showSelectMasterSlaveFeatureDialog: true
+    },
+
+    toggleGroup: 'draw',
+
+    handler: function() {
+        // effectively disable the toggle functionality, behaves like
+        // `enableToggle: false` but keeps the ability to be part
+        // of a `toggleGroup`
+        this.setPressed(false);
+    },
+
+    /**
+     * Difference function which is given 2 geometries
+     *
+     * @param {Array} featureArray The array holding the features to handle
+     * @return {ol.Feature} The final feature
+     */
+    processSelectedGeometries: function(featureArray) {
+        if (!jsts) {
+            Ext.log.error('No jsts could be found, check your application ' +
+                'resources and make sure to include the jsts library');
+            return;
+        }
+        var parser = new jsts.io.OL3Parser();
+        var parsedGeometries = [];
+        var differenceGeom;
+        var newFeature = null;
+
+        Ext.each(featureArray, function(feat) {
+            parsedGeometries.push(parser.read(feat.getGeometry()));
+        });
+
+        for (var i = 0; i < parsedGeometries.length; i++) {
+            if (i === 0) {
+                differenceGeom = parsedGeometries[i];
+            } else {
+                differenceGeom = differenceGeom.difference(
+                    parsedGeometries[i]);
+            }
+        }
+        if (!differenceGeom.isValid() || differenceGeom.isEmpty() ||
+            differenceGeom.getArea() === 0) {
+            return false;
+        }
+        var result = parser.write(differenceGeom);
+        newFeature = new ol.Feature({geometry: result});
+        return newFeature;
+    }
+});

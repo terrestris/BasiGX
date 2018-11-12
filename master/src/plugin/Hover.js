@@ -1,9 +1,842 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * @class BasiGX.plugin.Hover
+ */
+Ext.define('BasiGX.plugin.Hover', {
+    extend: 'Ext.plugin.Abstract',
 
-var __cov_2LmeVOxXT8ua3z9duAlaSA = (Function('return this'))();
-if (!__cov_2LmeVOxXT8ua3z9duAlaSA.__coverage__) { __cov_2LmeVOxXT8ua3z9duAlaSA.__coverage__ = {}; }
-__cov_2LmeVOxXT8ua3z9duAlaSA = __cov_2LmeVOxXT8ua3z9duAlaSA.__coverage__;
-if (!(__cov_2LmeVOxXT8ua3z9duAlaSA['/home/travis/build/terrestris/BasiGX/src/plugin/Hover.js'])) {
-   __cov_2LmeVOxXT8ua3z9duAlaSA['/home/travis/build/terrestris/BasiGX/src/plugin/Hover.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/plugin/Hover.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0,"137":0,"138":0,"139":0,"140":0,"141":0,"142":0,"143":0,"144":0,"145":0,"146":0,"147":0,"148":0,"149":0,"150":0,"151":0,"152":0,"153":0,"154":0,"155":0,"156":0,"157":0,"158":0,"159":0,"160":0,"161":0,"162":0,"163":0,"164":0,"165":0,"166":0,"167":0,"168":0,"169":0,"170":0,"171":0,"172":0,"173":0,"174":0,"175":0,"176":0,"177":0,"178":0,"179":0,"180":0,"181":0,"182":0,"183":0,"184":0,"185":0,"186":0,"187":0,"188":0,"189":0,"190":0,"191":0,"192":0,"193":0,"194":0,"195":0,"196":0,"197":0,"198":0,"199":0,"200":0,"201":0,"202":0,"203":0,"204":0,"205":0,"206":0,"207":0,"208":0,"209":0,"210":0,"211":0,"212":0,"213":0,"214":0,"215":0,"216":0,"217":0,"218":0,"219":0,"220":0,"221":0,"222":0,"223":0,"224":0,"225":0,"226":0,"227":0,"228":0,"229":0,"230":0,"231":0,"232":0,"233":0,"234":0,"235":0,"236":0,"237":0,"238":0,"239":0,"240":0,"241":0,"242":0,"243":0,"244":0,"245":0,"246":0,"247":0,"248":0,"249":0,"250":0,"251":0,"252":0,"253":0,"254":0,"255":0,"256":0,"257":0,"258":0,"259":0,"260":0,"261":0,"262":0,"263":0,"264":0,"265":0,"266":0,"267":0,"268":0,"269":0,"270":0,"271":0,"272":0,"273":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0],"19":[0,0],"20":[0,0],"21":[0,0],"22":[0,0],"23":[0,0],"24":[0,0],"25":[0,0],"26":[0,0],"27":[0,0],"28":[0,0],"29":[0,0],"30":[0,0],"31":[0,0],"32":[0,0],"33":[0,0,0,0],"34":[0,0],"35":[0,0],"36":[0,0],"37":[0,0],"38":[0,0],"39":[0,0],"40":[0,0],"41":[0,0],"42":[0,0],"43":[0,0],"44":[0,0],"45":[0,0],"46":[0,0],"47":[0,0],"48":[0,0],"49":[0,0],"50":[0,0],"51":[0,0],"52":[0,0],"53":[0,0],"54":[0,0],"55":[0,0],"56":[0,0],"57":[0,0],"58":[0,0],"59":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0},"fnMap":{"1":{"name":"(anonymous_1)","line":113,"loc":{"start":{"line":113,"column":10},"end":{"line":113,"column":24}}},"2":{"name":"(anonymous_2)","line":141,"loc":{"start":{"line":141,"column":28},"end":{"line":141,"column":39}}},"3":{"name":"(anonymous_3)","line":160,"loc":{"start":{"line":160,"column":28},"end":{"line":160,"column":39}}},"4":{"name":"(anonymous_4)","line":171,"loc":{"start":{"line":171,"column":36},"end":{"line":171,"column":47}}},"5":{"name":"(anonymous_5)","line":200,"loc":{"start":{"line":200,"column":22},"end":{"line":200,"column":38}}},"6":{"name":"(anonymous_6)","line":215,"loc":{"start":{"line":215,"column":31},"end":{"line":215,"column":42}}},"7":{"name":"(anonymous_7)","line":225,"loc":{"start":{"line":225,"column":25},"end":{"line":225,"column":36}}},"8":{"name":"(anonymous_8)","line":250,"loc":{"start":{"line":250,"column":26},"end":{"line":250,"column":37}}},"9":{"name":"(anonymous_9)","line":264,"loc":{"start":{"line":264,"column":27},"end":{"line":264,"column":45}}},"10":{"name":"(anonymous_10)","line":269,"loc":{"start":{"line":269,"column":22},"end":{"line":269,"column":33}}},"11":{"name":"(anonymous_11)","line":273,"loc":{"start":{"line":273,"column":21},"end":{"line":273,"column":36}}},"12":{"name":"(anonymous_12)","line":284,"loc":{"start":{"line":284,"column":27},"end":{"line":284,"column":38}}},"13":{"name":"(anonymous_13)","line":293,"loc":{"start":{"line":293,"column":34},"end":{"line":293,"column":46}}},"14":{"name":"(anonymous_14)","line":306,"loc":{"start":{"line":306,"column":19},"end":{"line":306,"column":33}}},"15":{"name":"(anonymous_15)","line":318,"loc":{"start":{"line":318,"column":39},"end":{"line":318,"column":68}}},"16":{"name":"(anonymous_16)","line":341,"loc":{"start":{"line":341,"column":50},"end":{"line":341,"column":65}}},"17":{"name":"(anonymous_17)","line":352,"loc":{"start":{"line":352,"column":47},"end":{"line":352,"column":65}}},"18":{"name":"(anonymous_18)","line":366,"loc":{"start":{"line":366,"column":53},"end":{"line":366,"column":68}}},"19":{"name":"(anonymous_19)","line":380,"loc":{"start":{"line":380,"column":27},"end":{"line":380,"column":48}}},"20":{"name":"(anonymous_20)","line":394,"loc":{"start":{"line":394,"column":22},"end":{"line":394,"column":42}}},"21":{"name":"(anonymous_21)","line":413,"loc":{"start":{"line":413,"column":22},"end":{"line":413,"column":60}}},"22":{"name":"(anonymous_22)","line":422,"loc":{"start":{"line":422,"column":27},"end":{"line":422,"column":42}}},"23":{"name":"(anonymous_23)","line":443,"loc":{"start":{"line":443,"column":22},"end":{"line":443,"column":54}}},"24":{"name":"(anonymous_24)","line":452,"loc":{"start":{"line":452,"column":38},"end":{"line":452,"column":50}}},"25":{"name":"(anonymous_25)","line":494,"loc":{"start":{"line":494,"column":26},"end":{"line":494,"column":61}}},"26":{"name":"(anonymous_26)","line":551,"loc":{"start":{"line":551,"column":20},"end":{"line":551,"column":47}}},"27":{"name":"(anonymous_27)","line":556,"loc":{"start":{"line":556,"column":27},"end":{"line":556,"column":42}}},"28":{"name":"(anonymous_28)","line":595,"loc":{"start":{"line":595,"column":17},"end":{"line":595,"column":44}}},"29":{"name":"(anonymous_29)","line":625,"loc":{"start":{"line":625,"column":28},"end":{"line":625,"column":69}}},"30":{"name":"(anonymous_30)","line":687,"loc":{"start":{"line":687,"column":25},"end":{"line":687,"column":43}}},"31":{"name":"(anonymous_31)","line":738,"loc":{"start":{"line":738,"column":26},"end":{"line":738,"column":42}}},"32":{"name":"(anonymous_32)","line":744,"loc":{"start":{"line":744,"column":55},"end":{"line":744,"column":70}}},"33":{"name":"(anonymous_33)","line":769,"loc":{"start":{"line":769,"column":30},"end":{"line":769,"column":63}}},"34":{"name":"(anonymous_34)","line":790,"loc":{"start":{"line":790,"column":36},"end":{"line":790,"column":50}}},"35":{"name":"(anonymous_35)","line":796,"loc":{"start":{"line":796,"column":57},"end":{"line":796,"column":72}}}},"statementMap":{"1":{"start":{"line":19,"column":0},"end":{"line":842,"column":3}},"2":{"start":{"line":114,"column":8},"end":{"line":114,"column":22}},"3":{"start":{"line":116,"column":8},"end":{"line":116,"column":36}},"4":{"start":{"line":118,"column":8},"end":{"line":118,"column":39}},"5":{"start":{"line":119,"column":8},"end":{"line":119,"column":33}},"6":{"start":{"line":121,"column":8},"end":{"line":123,"column":9}},"7":{"start":{"line":122,"column":12},"end":{"line":122,"column":48}},"8":{"start":{"line":125,"column":8},"end":{"line":125,"column":36}},"9":{"start":{"line":126,"column":8},"end":{"line":126,"column":23}},"10":{"start":{"line":128,"column":8},"end":{"line":128,"column":48}},"11":{"start":{"line":129,"column":8},"end":{"line":129,"column":64}},"12":{"start":{"line":130,"column":8},"end":{"line":130,"column":76}},"13":{"start":{"line":132,"column":8},"end":{"line":132,"column":52}},"14":{"start":{"line":133,"column":8},"end":{"line":133,"column":63}},"15":{"start":{"line":142,"column":8},"end":{"line":142,"column":22}},"16":{"start":{"line":143,"column":8},"end":{"line":143,"column":59}},"17":{"start":{"line":144,"column":8},"end":{"line":144,"column":46}},"18":{"start":{"line":145,"column":8},"end":{"line":145,"column":45}},"19":{"start":{"line":146,"column":8},"end":{"line":150,"column":9}},"20":{"start":{"line":147,"column":12},"end":{"line":148,"column":59}},"21":{"start":{"line":149,"column":12},"end":{"line":149,"column":49}},"22":{"start":{"line":161,"column":8},"end":{"line":161,"column":22}},"23":{"start":{"line":162,"column":8},"end":{"line":162,"column":39}},"24":{"start":{"line":163,"column":8},"end":{"line":163,"column":40}},"25":{"start":{"line":165,"column":8},"end":{"line":165,"column":66}},"26":{"start":{"line":172,"column":8},"end":{"line":172,"column":22}},"27":{"start":{"line":173,"column":8},"end":{"line":173,"column":39}},"28":{"start":{"line":174,"column":8},"end":{"line":174,"column":40}},"29":{"start":{"line":176,"column":8},"end":{"line":190,"column":9}},"30":{"start":{"line":177,"column":12},"end":{"line":181,"column":15}},"31":{"start":{"line":182,"column":12},"end":{"line":187,"column":13}},"32":{"start":{"line":183,"column":16},"end":{"line":183,"column":66}},"33":{"start":{"line":184,"column":16},"end":{"line":184,"column":69}},"34":{"start":{"line":186,"column":16},"end":{"line":186,"column":66}},"35":{"start":{"line":188,"column":12},"end":{"line":188,"column":44}},"36":{"start":{"line":189,"column":12},"end":{"line":189,"column":59}},"37":{"start":{"line":201,"column":8},"end":{"line":201,"column":22}},"38":{"start":{"line":202,"column":8},"end":{"line":202,"column":39}},"39":{"start":{"line":203,"column":8},"end":{"line":203,"column":23}},"40":{"start":{"line":204,"column":8},"end":{"line":208,"column":9}},"41":{"start":{"line":205,"column":12},"end":{"line":205,"column":49}},"42":{"start":{"line":207,"column":12},"end":{"line":207,"column":40}},"43":{"start":{"line":209,"column":8},"end":{"line":209,"column":65}},"44":{"start":{"line":216,"column":8},"end":{"line":216,"column":22}},"45":{"start":{"line":217,"column":8},"end":{"line":219,"column":9}},"46":{"start":{"line":218,"column":12},"end":{"line":218,"column":65}},"47":{"start":{"line":226,"column":8},"end":{"line":226,"column":22}},"48":{"start":{"line":227,"column":8},"end":{"line":227,"column":39}},"49":{"start":{"line":228,"column":8},"end":{"line":228,"column":40}},"50":{"start":{"line":230,"column":8},"end":{"line":230,"column":56}},"51":{"start":{"line":232,"column":8},"end":{"line":241,"column":9}},"52":{"start":{"line":233,"column":12},"end":{"line":238,"column":15}},"53":{"start":{"line":239,"column":12},"end":{"line":239,"column":43}},"54":{"start":{"line":240,"column":12},"end":{"line":240,"column":53}},"55":{"start":{"line":243,"column":8},"end":{"line":243,"column":80}},"56":{"start":{"line":244,"column":8},"end":{"line":244,"column":56}},"57":{"start":{"line":251,"column":8},"end":{"line":251,"column":22}},"58":{"start":{"line":252,"column":8},"end":{"line":254,"column":9}},"59":{"start":{"line":253,"column":12},"end":{"line":253,"column":46}},"60":{"start":{"line":265,"column":8},"end":{"line":265,"column":22}},"61":{"start":{"line":267,"column":8},"end":{"line":278,"column":11}},"62":{"start":{"line":270,"column":16},"end":{"line":270,"column":41}},"63":{"start":{"line":274,"column":16},"end":{"line":276,"column":17}},"64":{"start":{"line":275,"column":20},"end":{"line":275,"column":69}},"65":{"start":{"line":285,"column":8},"end":{"line":285,"column":22}},"66":{"start":{"line":286,"column":8},"end":{"line":286,"column":72}},"67":{"start":{"line":287,"column":8},"end":{"line":287,"column":74}},"68":{"start":{"line":288,"column":8},"end":{"line":288,"column":39}},"69":{"start":{"line":289,"column":8},"end":{"line":289,"column":40}},"70":{"start":{"line":291,"column":8},"end":{"line":291,"column":34}},"71":{"start":{"line":292,"column":8},"end":{"line":292,"column":47}},"72":{"start":{"line":293,"column":8},"end":{"line":297,"column":11}},"73":{"start":{"line":294,"column":12},"end":{"line":296,"column":13}},"74":{"start":{"line":295,"column":16},"end":{"line":295,"column":37}},"75":{"start":{"line":307,"column":8},"end":{"line":307,"column":22}},"76":{"start":{"line":308,"column":8},"end":{"line":308,"column":39}},"77":{"start":{"line":309,"column":8},"end":{"line":309,"column":40}},"78":{"start":{"line":310,"column":8},"end":{"line":310,"column":36}},"79":{"start":{"line":311,"column":8},"end":{"line":311,"column":30}},"80":{"start":{"line":312,"column":8},"end":{"line":312,"column":66}},"81":{"start":{"line":313,"column":8},"end":{"line":313,"column":29}},"82":{"start":{"line":314,"column":8},"end":{"line":314,"column":31}},"83":{"start":{"line":316,"column":8},"end":{"line":316,"column":35}},"84":{"start":{"line":318,"column":8},"end":{"line":385,"column":44}},"85":{"start":{"line":319,"column":12},"end":{"line":319,"column":43}},"86":{"start":{"line":320,"column":12},"end":{"line":320,"column":53}},"87":{"start":{"line":321,"column":12},"end":{"line":321,"column":61}},"88":{"start":{"line":322,"column":12},"end":{"line":322,"column":53}},"89":{"start":{"line":327,"column":12},"end":{"line":384,"column":13}},"90":{"start":{"line":328,"column":16},"end":{"line":383,"column":17}},"91":{"start":{"line":331,"column":20},"end":{"line":339,"column":22}},"92":{"start":{"line":341,"column":20},"end":{"line":363,"column":23}},"93":{"start":{"line":343,"column":24},"end":{"line":344,"column":61}},"94":{"start":{"line":345,"column":24},"end":{"line":346,"column":63}},"95":{"start":{"line":348,"column":24},"end":{"line":350,"column":26}},"96":{"start":{"line":352,"column":24},"end":{"line":358,"column":27}},"97":{"start":{"line":353,"column":28},"end":{"line":353,"column":56}},"98":{"start":{"line":354,"column":28},"end":{"line":355,"column":66}},"99":{"start":{"line":356,"column":28},"end":{"line":356,"column":59}},"100":{"start":{"line":357,"column":28},"end":{"line":357,"column":56}},"101":{"start":{"line":360,"column":24},"end":{"line":360,"column":48}},"102":{"start":{"line":362,"column":24},"end":{"line":362,"column":77}},"103":{"start":{"line":364,"column":23},"end":{"line":383,"column":17}},"104":{"start":{"line":366,"column":20},"end":{"line":382,"column":23}},"105":{"start":{"line":367,"column":24},"end":{"line":373,"column":25}},"106":{"start":{"line":369,"column":28},"end":{"line":369,"column":63}},"107":{"start":{"line":372,"column":28},"end":{"line":372,"column":68}},"108":{"start":{"line":374,"column":24},"end":{"line":374,"column":56}},"109":{"start":{"line":375,"column":24},"end":{"line":375,"column":57}},"110":{"start":{"line":376,"column":24},"end":{"line":376,"column":48}},"111":{"start":{"line":377,"column":24},"end":{"line":377,"column":57}},"112":{"start":{"line":378,"column":24},"end":{"line":378,"column":66}},"113":{"start":{"line":379,"column":24},"end":{"line":379,"column":53}},"114":{"start":{"line":381,"column":24},"end":{"line":381,"column":52}},"115":{"start":{"line":387,"column":8},"end":{"line":387,"column":61}},"116":{"start":{"line":395,"column":8},"end":{"line":395,"column":22}},"117":{"start":{"line":396,"column":8},"end":{"line":396,"column":66}},"118":{"start":{"line":397,"column":8},"end":{"line":402,"column":9}},"119":{"start":{"line":399,"column":12},"end":{"line":399,"column":24}},"120":{"start":{"line":401,"column":12},"end":{"line":401,"column":25}},"121":{"start":{"line":414,"column":8},"end":{"line":414,"column":22}},"122":{"start":{"line":415,"column":8},"end":{"line":415,"column":39}},"123":{"start":{"line":416,"column":8},"end":{"line":416,"column":40}},"124":{"start":{"line":417,"column":8},"end":{"line":417,"column":43}},"125":{"start":{"line":418,"column":8},"end":{"line":420,"column":9}},"126":{"start":{"line":419,"column":12},"end":{"line":419,"column":30}},"127":{"start":{"line":421,"column":8},"end":{"line":421,"column":52}},"128":{"start":{"line":422,"column":8},"end":{"line":431,"column":11}},"129":{"start":{"line":423,"column":12},"end":{"line":423,"column":39}},"130":{"start":{"line":424,"column":12},"end":{"line":426,"column":13}},"131":{"start":{"line":425,"column":16},"end":{"line":425,"column":65}},"132":{"start":{"line":427,"column":12},"end":{"line":430,"column":13}},"133":{"start":{"line":429,"column":16},"end":{"line":429,"column":40}},"134":{"start":{"line":444,"column":8},"end":{"line":444,"column":22}},"135":{"start":{"line":445,"column":8},"end":{"line":445,"column":72}},"136":{"start":{"line":446,"column":8},"end":{"line":446,"column":74}},"137":{"start":{"line":447,"column":8},"end":{"line":447,"column":39}},"138":{"start":{"line":448,"column":8},"end":{"line":448,"column":40}},"139":{"start":{"line":449,"column":8},"end":{"line":449,"column":36}},"140":{"start":{"line":451,"column":8},"end":{"line":475,"column":9}},"141":{"start":{"line":452,"column":12},"end":{"line":456,"column":15}},"142":{"start":{"line":453,"column":16},"end":{"line":455,"column":17}},"143":{"start":{"line":454,"column":20},"end":{"line":454,"column":41}},"144":{"start":{"line":458,"column":12},"end":{"line":458,"column":56}},"145":{"start":{"line":459,"column":12},"end":{"line":459,"column":50}},"146":{"start":{"line":460,"column":12},"end":{"line":460,"column":66}},"147":{"start":{"line":462,"column":12},"end":{"line":464,"column":14}},"148":{"start":{"line":466,"column":12},"end":{"line":472,"column":15}},"149":{"start":{"line":473,"column":12},"end":{"line":473,"column":68}},"150":{"start":{"line":474,"column":12},"end":{"line":474,"column":36}},"151":{"start":{"line":496,"column":8},"end":{"line":496,"column":37}},"152":{"start":{"line":497,"column":8},"end":{"line":497,"column":64}},"153":{"start":{"line":498,"column":8},"end":{"line":498,"column":60}},"154":{"start":{"line":499,"column":8},"end":{"line":501,"column":9}},"155":{"start":{"line":500,"column":12},"end":{"line":500,"column":62}},"156":{"start":{"line":502,"column":8},"end":{"line":502,"column":31}},"157":{"start":{"line":503,"column":8},"end":{"line":503,"column":40}},"158":{"start":{"line":505,"column":8},"end":{"line":505,"column":41}},"159":{"start":{"line":506,"column":8},"end":{"line":506,"column":60}},"160":{"start":{"line":510,"column":8},"end":{"line":510,"column":56}},"161":{"start":{"line":511,"column":8},"end":{"line":511,"column":50}},"162":{"start":{"line":512,"column":8},"end":{"line":512,"column":50}},"163":{"start":{"line":515,"column":8},"end":{"line":515,"column":42}},"164":{"start":{"line":516,"column":8},"end":{"line":516,"column":29}},"165":{"start":{"line":518,"column":8},"end":{"line":525,"column":9}},"166":{"start":{"line":520,"column":12},"end":{"line":520,"column":54}},"167":{"start":{"line":521,"column":15},"end":{"line":525,"column":9}},"168":{"start":{"line":523,"column":12},"end":{"line":523,"column":37}},"169":{"start":{"line":524,"column":12},"end":{"line":524,"column":47}},"170":{"start":{"line":527,"column":8},"end":{"line":534,"column":9}},"171":{"start":{"line":529,"column":12},"end":{"line":529,"column":54}},"172":{"start":{"line":530,"column":15},"end":{"line":534,"column":9}},"173":{"start":{"line":532,"column":12},"end":{"line":532,"column":38}},"174":{"start":{"line":533,"column":12},"end":{"line":533,"column":47}},"175":{"start":{"line":536,"column":8},"end":{"line":539,"column":10}},"176":{"start":{"line":552,"column":8},"end":{"line":552,"column":22}},"177":{"start":{"line":553,"column":8},"end":{"line":553,"column":27}},"178":{"start":{"line":554,"column":8},"end":{"line":554,"column":68}},"179":{"start":{"line":556,"column":8},"end":{"line":575,"column":11}},"180":{"start":{"line":557,"column":12},"end":{"line":557,"column":42}},"181":{"start":{"line":558,"column":12},"end":{"line":558,"column":59}},"182":{"start":{"line":560,"column":12},"end":{"line":560,"column":78}},"183":{"start":{"line":562,"column":12},"end":{"line":562,"column":60}},"184":{"start":{"line":567,"column":12},"end":{"line":574,"column":13}},"185":{"start":{"line":568,"column":16},"end":{"line":573,"column":17}},"186":{"start":{"line":569,"column":20},"end":{"line":569,"column":50}},"187":{"start":{"line":570,"column":20},"end":{"line":570,"column":61}},"188":{"start":{"line":572,"column":20},"end":{"line":572,"column":65}},"189":{"start":{"line":577,"column":8},"end":{"line":577,"column":25}},"190":{"start":{"line":596,"column":8},"end":{"line":596,"column":54}},"191":{"start":{"line":597,"column":8},"end":{"line":597,"column":44}},"192":{"start":{"line":598,"column":8},"end":{"line":598,"column":16}},"193":{"start":{"line":599,"column":8},"end":{"line":599,"column":18}},"194":{"start":{"line":600,"column":8},"end":{"line":600,"column":17}},"195":{"start":{"line":602,"column":8},"end":{"line":611,"column":9}},"196":{"start":{"line":604,"column":12},"end":{"line":604,"column":31}},"197":{"start":{"line":605,"column":12},"end":{"line":605,"column":33}},"198":{"start":{"line":606,"column":12},"end":{"line":606,"column":32}},"199":{"start":{"line":608,"column":12},"end":{"line":608,"column":39}},"200":{"start":{"line":609,"column":12},"end":{"line":609,"column":41}},"201":{"start":{"line":610,"column":12},"end":{"line":610,"column":40}},"202":{"start":{"line":613,"column":8},"end":{"line":613,"column":77}},"203":{"start":{"line":626,"column":8},"end":{"line":626,"column":22}},"204":{"start":{"line":627,"column":8},"end":{"line":627,"column":41}},"205":{"start":{"line":628,"column":8},"end":{"line":628,"column":48}},"206":{"start":{"line":629,"column":8},"end":{"line":629,"column":58}},"207":{"start":{"line":630,"column":8},"end":{"line":630,"column":24}},"208":{"start":{"line":631,"column":8},"end":{"line":631,"column":26}},"209":{"start":{"line":633,"column":8},"end":{"line":642,"column":9}},"210":{"start":{"line":634,"column":12},"end":{"line":634,"column":24}},"211":{"start":{"line":635,"column":12},"end":{"line":635,"column":26}},"212":{"start":{"line":636,"column":15},"end":{"line":642,"column":9}},"213":{"start":{"line":637,"column":12},"end":{"line":637,"column":25}},"214":{"start":{"line":638,"column":12},"end":{"line":638,"column":23}},"215":{"start":{"line":639,"column":15},"end":{"line":642,"column":9}},"216":{"start":{"line":640,"column":12},"end":{"line":640,"column":31}},"217":{"start":{"line":641,"column":12},"end":{"line":641,"column":35}},"218":{"start":{"line":644,"column":8},"end":{"line":678,"column":10}},"219":{"start":{"line":688,"column":8},"end":{"line":688,"column":41}},"220":{"start":{"line":689,"column":8},"end":{"line":689,"column":24}},"221":{"start":{"line":690,"column":8},"end":{"line":690,"column":26}},"222":{"start":{"line":692,"column":8},"end":{"line":701,"column":9}},"223":{"start":{"line":693,"column":12},"end":{"line":693,"column":24}},"224":{"start":{"line":694,"column":12},"end":{"line":694,"column":26}},"225":{"start":{"line":695,"column":15},"end":{"line":701,"column":9}},"226":{"start":{"line":696,"column":12},"end":{"line":696,"column":25}},"227":{"start":{"line":697,"column":12},"end":{"line":697,"column":23}},"228":{"start":{"line":698,"column":15},"end":{"line":701,"column":9}},"229":{"start":{"line":699,"column":12},"end":{"line":699,"column":31}},"230":{"start":{"line":700,"column":12},"end":{"line":700,"column":35}},"231":{"start":{"line":703,"column":8},"end":{"line":729,"column":10}},"232":{"start":{"line":739,"column":8},"end":{"line":739,"column":22}},"233":{"start":{"line":740,"column":8},"end":{"line":740,"column":39}},"234":{"start":{"line":741,"column":8},"end":{"line":741,"column":40}},"235":{"start":{"line":742,"column":8},"end":{"line":742,"column":64}},"236":{"start":{"line":744,"column":8},"end":{"line":746,"column":11}},"237":{"start":{"line":745,"column":12},"end":{"line":745,"column":24}},"238":{"start":{"line":748,"column":8},"end":{"line":758,"column":9}},"239":{"start":{"line":749,"column":12},"end":{"line":749,"column":51}},"240":{"start":{"line":750,"column":12},"end":{"line":750,"column":19}},"241":{"start":{"line":752,"column":12},"end":{"line":752,"column":59}},"242":{"start":{"line":753,"column":12},"end":{"line":753,"column":52}},"243":{"start":{"line":754,"column":12},"end":{"line":754,"column":71}},"244":{"start":{"line":755,"column":12},"end":{"line":755,"column":51}},"245":{"start":{"line":756,"column":12},"end":{"line":756,"column":42}},"246":{"start":{"line":757,"column":12},"end":{"line":757,"column":44}},"247":{"start":{"line":770,"column":8},"end":{"line":770,"column":22}},"248":{"start":{"line":771,"column":8},"end":{"line":771,"column":74}},"249":{"start":{"line":772,"column":8},"end":{"line":772,"column":74}},"250":{"start":{"line":773,"column":8},"end":{"line":773,"column":27}},"251":{"start":{"line":776,"column":8},"end":{"line":832,"column":9}},"252":{"start":{"line":779,"column":12},"end":{"line":780,"column":44}},"253":{"start":{"line":781,"column":12},"end":{"line":781,"column":56}},"254":{"start":{"line":786,"column":12},"end":{"line":829,"column":13}},"255":{"start":{"line":790,"column":16},"end":{"line":818,"column":19}},"256":{"start":{"line":794,"column":20},"end":{"line":794,"column":39}},"257":{"start":{"line":796,"column":20},"end":{"line":811,"column":23}},"258":{"start":{"line":799,"column":24},"end":{"line":800,"column":54}},"259":{"start":{"line":801,"column":24},"end":{"line":802,"column":54}},"260":{"start":{"line":803,"column":24},"end":{"line":804,"column":66}},"261":{"start":{"line":805,"column":24},"end":{"line":810,"column":25}},"262":{"start":{"line":806,"column":28},"end":{"line":806,"column":74}},"263":{"start":{"line":807,"column":28},"end":{"line":807,"column":41}},"264":{"start":{"line":809,"column":28},"end":{"line":809,"column":41}},"265":{"start":{"line":815,"column":20},"end":{"line":817,"column":21}},"266":{"start":{"line":816,"column":24},"end":{"line":816,"column":71}},"267":{"start":{"line":819,"column":19},"end":{"line":829,"column":13}},"268":{"start":{"line":824,"column":16},"end":{"line":824,"column":59}},"269":{"start":{"line":828,"column":16},"end":{"line":828,"column":46}},"270":{"start":{"line":831,"column":12},"end":{"line":831,"column":38}},"271":{"start":{"line":835,"column":8},"end":{"line":837,"column":9}},"272":{"start":{"line":836,"column":12},"end":{"line":836,"column":57}},"273":{"start":{"line":839,"column":8},"end":{"line":839,"column":25}}},"branchMap":{"1":{"line":121,"type":"if","locations":[{"start":{"line":121,"column":8},"end":{"line":121,"column":8}},{"start":{"line":121,"column":8},"end":{"line":121,"column":8}}]},"2":{"line":146,"type":"if","locations":[{"start":{"line":146,"column":8},"end":{"line":146,"column":8}},{"start":{"line":146,"column":8},"end":{"line":146,"column":8}}]},"3":{"line":176,"type":"if","locations":[{"start":{"line":176,"column":8},"end":{"line":176,"column":8}},{"start":{"line":176,"column":8},"end":{"line":176,"column":8}}]},"4":{"line":182,"type":"if","locations":[{"start":{"line":182,"column":12},"end":{"line":182,"column":12}},{"start":{"line":182,"column":12},"end":{"line":182,"column":12}}]},"5":{"line":204,"type":"if","locations":[{"start":{"line":204,"column":8},"end":{"line":204,"column":8}},{"start":{"line":204,"column":8},"end":{"line":204,"column":8}}]},"6":{"line":217,"type":"if","locations":[{"start":{"line":217,"column":8},"end":{"line":217,"column":8}},{"start":{"line":217,"column":8},"end":{"line":217,"column":8}}]},"7":{"line":232,"type":"if","locations":[{"start":{"line":232,"column":8},"end":{"line":232,"column":8}},{"start":{"line":232,"column":8},"end":{"line":232,"column":8}}]},"8":{"line":252,"type":"if","locations":[{"start":{"line":252,"column":8},"end":{"line":252,"column":8}},{"start":{"line":252,"column":8},"end":{"line":252,"column":8}}]},"9":{"line":274,"type":"if","locations":[{"start":{"line":274,"column":16},"end":{"line":274,"column":16}},{"start":{"line":274,"column":16},"end":{"line":274,"column":16}}]},"10":{"line":294,"type":"if","locations":[{"start":{"line":294,"column":12},"end":{"line":294,"column":12}},{"start":{"line":294,"column":12},"end":{"line":294,"column":12}}]},"11":{"line":327,"type":"if","locations":[{"start":{"line":327,"column":12},"end":{"line":327,"column":12}},{"start":{"line":327,"column":12},"end":{"line":327,"column":12}}]},"12":{"line":328,"type":"if","locations":[{"start":{"line":328,"column":16},"end":{"line":328,"column":16}},{"start":{"line":328,"column":16},"end":{"line":328,"column":16}}]},"13":{"line":328,"type":"binary-expr","locations":[{"start":{"line":328,"column":20},"end":{"line":328,"column":55}},{"start":{"line":329,"column":27},"end":{"line":329,"column":63}}]},"14":{"line":364,"type":"if","locations":[{"start":{"line":364,"column":23},"end":{"line":364,"column":23}},{"start":{"line":364,"column":23},"end":{"line":364,"column":23}}]},"15":{"line":367,"type":"if","locations":[{"start":{"line":367,"column":24},"end":{"line":367,"column":24}},{"start":{"line":367,"column":24},"end":{"line":367,"column":24}}]},"16":{"line":367,"type":"binary-expr","locations":[{"start":{"line":367,"column":28},"end":{"line":367,"column":55}},{"start":{"line":368,"column":32},"end":{"line":368,"column":66}}]},"17":{"line":397,"type":"if","locations":[{"start":{"line":397,"column":8},"end":{"line":397,"column":8}},{"start":{"line":397,"column":8},"end":{"line":397,"column":8}}]},"18":{"line":397,"type":"binary-expr","locations":[{"start":{"line":397,"column":12},"end":{"line":397,"column":40}},{"start":{"line":398,"column":16},"end":{"line":398,"column":54}}]},"19":{"line":418,"type":"if","locations":[{"start":{"line":418,"column":8},"end":{"line":418,"column":8}},{"start":{"line":418,"column":8},"end":{"line":418,"column":8}}]},"20":{"line":424,"type":"if","locations":[{"start":{"line":424,"column":12},"end":{"line":424,"column":12}},{"start":{"line":424,"column":12},"end":{"line":424,"column":12}}]},"21":{"line":427,"type":"if","locations":[{"start":{"line":427,"column":12},"end":{"line":427,"column":12}},{"start":{"line":427,"column":12},"end":{"line":427,"column":12}}]},"22":{"line":451,"type":"if","locations":[{"start":{"line":451,"column":8},"end":{"line":451,"column":8}},{"start":{"line":451,"column":8},"end":{"line":451,"column":8}}]},"23":{"line":451,"type":"binary-expr","locations":[{"start":{"line":451,"column":12},"end":{"line":451,"column":29}},{"start":{"line":451,"column":33},"end":{"line":451,"column":52}}]},"24":{"line":453,"type":"if","locations":[{"start":{"line":453,"column":16},"end":{"line":453,"column":16}},{"start":{"line":453,"column":16},"end":{"line":453,"column":16}}]},"25":{"line":499,"type":"if","locations":[{"start":{"line":499,"column":8},"end":{"line":499,"column":8}},{"start":{"line":499,"column":8},"end":{"line":499,"column":8}}]},"26":{"line":518,"type":"if","locations":[{"start":{"line":518,"column":8},"end":{"line":518,"column":8}},{"start":{"line":518,"column":8},"end":{"line":518,"column":8}}]},"27":{"line":521,"type":"if","locations":[{"start":{"line":521,"column":15},"end":{"line":521,"column":15}},{"start":{"line":521,"column":15},"end":{"line":521,"column":15}}]},"28":{"line":527,"type":"if","locations":[{"start":{"line":527,"column":8},"end":{"line":527,"column":8}},{"start":{"line":527,"column":8},"end":{"line":527,"column":8}}]},"29":{"line":530,"type":"if","locations":[{"start":{"line":530,"column":15},"end":{"line":530,"column":15}},{"start":{"line":530,"column":15},"end":{"line":530,"column":15}}]},"30":{"line":567,"type":"if","locations":[{"start":{"line":567,"column":12},"end":{"line":567,"column":12}},{"start":{"line":567,"column":12},"end":{"line":567,"column":12}}]},"31":{"line":568,"type":"if","locations":[{"start":{"line":568,"column":16},"end":{"line":568,"column":16}},{"start":{"line":568,"column":16},"end":{"line":568,"column":16}}]},"32":{"line":602,"type":"if","locations":[{"start":{"line":602,"column":8},"end":{"line":602,"column":8}},{"start":{"line":602,"column":8},"end":{"line":602,"column":8}}]},"33":{"line":602,"type":"binary-expr","locations":[{"start":{"line":602,"column":12},"end":{"line":602,"column":34}},{"start":{"line":602,"column":38},"end":{"line":602,"column":64}},{"start":{"line":603,"column":16},"end":{"line":603,"column":42}},{"start":{"line":603,"column":46},"end":{"line":603,"column":72}}]},"34":{"line":613,"type":"binary-expr","locations":[{"start":{"line":613,"column":65},"end":{"line":613,"column":70}},{"start":{"line":613,"column":74},"end":{"line":613,"column":75}}]},"35":{"line":633,"type":"if","locations":[{"start":{"line":633,"column":8},"end":{"line":633,"column":8}},{"start":{"line":633,"column":8},"end":{"line":633,"column":8}}]},"36":{"line":633,"type":"binary-expr","locations":[{"start":{"line":633,"column":12},"end":{"line":633,"column":17}},{"start":{"line":633,"column":21},"end":{"line":633,"column":31}}]},"37":{"line":636,"type":"if","locations":[{"start":{"line":636,"column":15},"end":{"line":636,"column":15}},{"start":{"line":636,"column":15},"end":{"line":636,"column":15}}]},"38":{"line":636,"type":"binary-expr","locations":[{"start":{"line":636,"column":19},"end":{"line":636,"column":24}},{"start":{"line":636,"column":28},"end":{"line":636,"column":37}}]},"39":{"line":639,"type":"if","locations":[{"start":{"line":639,"column":15},"end":{"line":639,"column":15}},{"start":{"line":639,"column":15},"end":{"line":639,"column":15}}]},"40":{"line":647,"type":"cond-expr","locations":[{"start":{"line":648,"column":24},"end":{"line":648,"column":54}},{"start":{"line":648,"column":57},"end":{"line":648,"column":67}}]},"41":{"line":653,"type":"cond-expr","locations":[{"start":{"line":654,"column":28},"end":{"line":654,"column":58}},{"start":{"line":654,"column":61},"end":{"line":654,"column":71}}]},"42":{"line":657,"type":"cond-expr","locations":[{"start":{"line":658,"column":28},"end":{"line":658,"column":58}},{"start":{"line":658,"column":61},"end":{"line":658,"column":71}}]},"43":{"line":662,"type":"cond-expr","locations":[{"start":{"line":663,"column":24},"end":{"line":663,"column":54}},{"start":{"line":663,"column":57},"end":{"line":663,"column":67}}]},"44":{"line":667,"type":"cond-expr","locations":[{"start":{"line":667,"column":38},"end":{"line":667,"column":54}},{"start":{"line":667,"column":57},"end":{"line":667,"column":59}}]},"45":{"line":692,"type":"if","locations":[{"start":{"line":692,"column":8},"end":{"line":692,"column":8}},{"start":{"line":692,"column":8},"end":{"line":692,"column":8}}]},"46":{"line":692,"type":"binary-expr","locations":[{"start":{"line":692,"column":12},"end":{"line":692,"column":17}},{"start":{"line":692,"column":21},"end":{"line":692,"column":31}}]},"47":{"line":695,"type":"if","locations":[{"start":{"line":695,"column":15},"end":{"line":695,"column":15}},{"start":{"line":695,"column":15},"end":{"line":695,"column":15}}]},"48":{"line":695,"type":"binary-expr","locations":[{"start":{"line":695,"column":19},"end":{"line":695,"column":24}},{"start":{"line":695,"column":28},"end":{"line":695,"column":37}}]},"49":{"line":698,"type":"if","locations":[{"start":{"line":698,"column":15},"end":{"line":698,"column":15}},{"start":{"line":698,"column":15},"end":{"line":698,"column":15}}]},"50":{"line":718,"type":"cond-expr","locations":[{"start":{"line":718,"column":38},"end":{"line":718,"column":54}},{"start":{"line":718,"column":57},"end":{"line":718,"column":59}}]},"51":{"line":748,"type":"if","locations":[{"start":{"line":748,"column":8},"end":{"line":748,"column":8}},{"start":{"line":748,"column":8},"end":{"line":748,"column":8}}]},"52":{"line":748,"type":"binary-expr","locations":[{"start":{"line":748,"column":12},"end":{"line":748,"column":43}},{"start":{"line":748,"column":47},"end":{"line":748,"column":55}}]},"53":{"line":776,"type":"if","locations":[{"start":{"line":776,"column":8},"end":{"line":776,"column":8}},{"start":{"line":776,"column":8},"end":{"line":776,"column":8}}]},"54":{"line":776,"type":"binary-expr","locations":[{"start":{"line":776,"column":12},"end":{"line":776,"column":19}},{"start":{"line":776,"column":23},"end":{"line":776,"column":36}}]},"55":{"line":786,"type":"if","locations":[{"start":{"line":786,"column":12},"end":{"line":786,"column":12}},{"start":{"line":786,"column":12},"end":{"line":786,"column":12}}]},"56":{"line":805,"type":"if","locations":[{"start":{"line":805,"column":24},"end":{"line":805,"column":24}},{"start":{"line":805,"column":24},"end":{"line":805,"column":24}}]},"57":{"line":815,"type":"if","locations":[{"start":{"line":815,"column":20},"end":{"line":815,"column":20}},{"start":{"line":815,"column":20},"end":{"line":815,"column":20}}]},"58":{"line":819,"type":"if","locations":[{"start":{"line":819,"column":19},"end":{"line":819,"column":19}},{"start":{"line":819,"column":19},"end":{"line":819,"column":19}}]},"59":{"line":835,"type":"if","locations":[{"start":{"line":835,"column":8},"end":{"line":835,"column":8}},{"start":{"line":835,"column":8},"end":{"line":835,"column":8}}]}}};
-}
-__cov_2LmeVOxXT8ua3z9duAlaSA = __cov_2LmeVOxXT8ua3z9duAlaSA['/home/travis/build/terrestris/BasiGX/src/plugin/Hover.js'];
-__cov_2LmeVOxXT8ua3z9duAlaSA.s['1']++;Ext.define('BasiGX.plugin.Hover',{extend:'Ext.plugin.Abstract',alias:'plugin.hover',pluginId:'hover',inheritableStatics:{HOVER_OVERLAY_IDENTIFIER_KEY:'name',HOVER_OVERLAY_IDENTIFIER_VALUE:'featureinfooverlay',LAYER_HOVERABLE_PROPERTY_NAME:'hoverable',LAYER_HOVERFIELD_PROPERTY_NAME:'hoverField',HOVER_TEMPLATE_PLACEHOLDER_PREFIX:'{{',HOVER_TEMPLATE_PLACEHOLDER_SUFFIX:'}}'},config:{pointerRest:true,pointerRestInterval:300,pointerRestPixelTolerance:5,featureInfoEpsg:'EPSG:3857',featureInfoCount:50,hoverVectorLayerSource:null,hoverVectorLayer:null,hoverVectorLayerInteraction:null,dynamicHoverColor:false,enableHoverSelection:true,mapPaddingPositioning:30,maxHeight:null,className:'ol-overlay-container ol-selectable'},selectMulti:true,selectEventOrigin:'collection',currentHoverTarget:null,pendingRequest:null,init:function(cmp){__cov_2LmeVOxXT8ua3z9duAlaSA.f['1']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['2']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['3']++;me.checkSelectEventOrigin();__cov_2LmeVOxXT8ua3z9duAlaSA.s['4']++;me.addHoverVectorLayerSource();__cov_2LmeVOxXT8ua3z9duAlaSA.s['5']++;me.addHoverVectorLayer();__cov_2LmeVOxXT8ua3z9duAlaSA.s['6']++;if(me.getEnableHoverSelection()){__cov_2LmeVOxXT8ua3z9duAlaSA.b['1'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['7']++;me.addHoverVectorLayerInteraction();}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['1'][1]++;}__cov_2LmeVOxXT8ua3z9duAlaSA.s['8']++;me.setupMapEventListeners();__cov_2LmeVOxXT8ua3z9duAlaSA.s['9']++;me.setCmp(cmp);__cov_2LmeVOxXT8ua3z9duAlaSA.s['10']++;cmp.setPointerRest(me.getPointerRest());__cov_2LmeVOxXT8ua3z9duAlaSA.s['11']++;cmp.setPointerRestInterval(me.getPointerRestInterval());__cov_2LmeVOxXT8ua3z9duAlaSA.s['12']++;cmp.setPointerRestPixelTolerance(me.getPointerRestPixelTolerance());__cov_2LmeVOxXT8ua3z9duAlaSA.s['13']++;cmp.on('pointerrest',me.onPointerRest,me);__cov_2LmeVOxXT8ua3z9duAlaSA.s['14']++;cmp.on('pointerrestout',me.cleanupHoverArtifacts,me);},checkSelectEventOrigin:function(){__cov_2LmeVOxXT8ua3z9duAlaSA.f['2']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['15']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['16']++;var allowedOrigins=['collection','interaction'];__cov_2LmeVOxXT8ua3z9duAlaSA.s['17']++;var defaultOrigin=allowedOrigins[0];__cov_2LmeVOxXT8ua3z9duAlaSA.s['18']++;var selOrigin=me.selectEventOrigin;__cov_2LmeVOxXT8ua3z9duAlaSA.s['19']++;if(!Ext.Array.contains(allowedOrigins,selOrigin)){__cov_2LmeVOxXT8ua3z9duAlaSA.b['2'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['20']++;Ext.log.warn('Unexpected selectEventOrigin "'+selOrigin+'",'+' correcting to "'+defaultOrigin+'".');__cov_2LmeVOxXT8ua3z9duAlaSA.s['21']++;me.selectEventOrigin=defaultOrigin;}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['2'][1]++;}},setupMapEventListeners:function(){__cov_2LmeVOxXT8ua3z9duAlaSA.f['3']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['22']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['23']++;var mapComponent=me.getCmp();__cov_2LmeVOxXT8ua3z9duAlaSA.s['24']++;var map=mapComponent.getMap();__cov_2LmeVOxXT8ua3z9duAlaSA.s['25']++;map.on('change:layerGroup',me.cleanupHoverArtifacts,me);},addHoverVectorLayerInteraction:function(){__cov_2LmeVOxXT8ua3z9duAlaSA.f['4']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['26']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['27']++;var mapComponent=me.getCmp();__cov_2LmeVOxXT8ua3z9duAlaSA.s['28']++;var map=mapComponent.getMap();__cov_2LmeVOxXT8ua3z9duAlaSA.s['29']++;if(!me.getHoverVectorLayerInteraction()){__cov_2LmeVOxXT8ua3z9duAlaSA.b['3'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['30']++;var interaction=new ol.interaction.Select({multi:me.selectMulti,style:me.selectStyleFunction,layers:[me.getHoverVectorLayer()]});__cov_2LmeVOxXT8ua3z9duAlaSA.s['31']++;if(me.selectEventOrigin==='collection'){__cov_2LmeVOxXT8ua3z9duAlaSA.b['4'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['32']++;var featureCollection=interaction.getFeatures();__cov_2LmeVOxXT8ua3z9duAlaSA.s['33']++;featureCollection.on('add',me.onFeatureClicked,me);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['4'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['34']++;interaction.on('select',me.onFeatureClicked,me);}__cov_2LmeVOxXT8ua3z9duAlaSA.s['35']++;map.addInteraction(interaction);__cov_2LmeVOxXT8ua3z9duAlaSA.s['36']++;me.setHoverVectorLayerInteraction(interaction);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['3'][1]++;}},onFeatureClicked:function(olEvt){__cov_2LmeVOxXT8ua3z9duAlaSA.f['5']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['37']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['38']++;var mapComponent=me.getCmp();__cov_2LmeVOxXT8ua3z9duAlaSA.s['39']++;var olFeatures;__cov_2LmeVOxXT8ua3z9duAlaSA.s['40']++;if(me.selectEventOrigin==='collection'){__cov_2LmeVOxXT8ua3z9duAlaSA.b['5'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['41']++;olFeatures=olEvt.target.getArray();}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['5'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['42']++;olFeatures=olEvt.selected;}__cov_2LmeVOxXT8ua3z9duAlaSA.s['43']++;mapComponent.fireEvent('hoverfeaturesclick',olFeatures);},addHoverVectorLayerSource:function(){__cov_2LmeVOxXT8ua3z9duAlaSA.f['6']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['44']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['45']++;if(!me.getHoverVectorLayerSource()){__cov_2LmeVOxXT8ua3z9duAlaSA.b['6'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['46']++;me.setHoverVectorLayerSource(new ol.source.Vector());}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['6'][1]++;}},addHoverVectorLayer:function(){__cov_2LmeVOxXT8ua3z9duAlaSA.f['7']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['47']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['48']++;var mapComponent=me.getCmp();__cov_2LmeVOxXT8ua3z9duAlaSA.s['49']++;var map=mapComponent.getMap();__cov_2LmeVOxXT8ua3z9duAlaSA.s['50']++;var hoverVectorLayer=me.getHoverVectorLayer();__cov_2LmeVOxXT8ua3z9duAlaSA.s['51']++;if(!hoverVectorLayer){__cov_2LmeVOxXT8ua3z9duAlaSA.b['7'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['52']++;hoverVectorLayer=new ol.layer.Vector({name:'hoverVectorLayer',source:me.getHoverVectorLayerSource(),visible:true,zIndex:1000});__cov_2LmeVOxXT8ua3z9duAlaSA.s['53']++;map.addLayer(hoverVectorLayer);__cov_2LmeVOxXT8ua3z9duAlaSA.s['54']++;me.setHoverVectorLayer(hoverVectorLayer);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['7'][1]++;}__cov_2LmeVOxXT8ua3z9duAlaSA.s['55']++;var inLayerSwitcherKey=BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;__cov_2LmeVOxXT8ua3z9duAlaSA.s['56']++;hoverVectorLayer.set(inLayerSwitcherKey,false);},clearPendingRequests:function(){__cov_2LmeVOxXT8ua3z9duAlaSA.f['8']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['57']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['58']++;if(me.pendingRequest){__cov_2LmeVOxXT8ua3z9duAlaSA.b['8'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['59']++;Ext.Ajax.abort(me.pendingRequest);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['8'][1]++;}},requestAsynchronously:function(url,cb){__cov_2LmeVOxXT8ua3z9duAlaSA.f['9']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['60']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['61']++;me.pendingRequest=Ext.Ajax.request({url:url,callback:function(){__cov_2LmeVOxXT8ua3z9duAlaSA.f['10']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['62']++;me.pendingRequest=null;},success:cb,failure:function(resp){__cov_2LmeVOxXT8ua3z9duAlaSA.f['11']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['63']++;if(!resp.aborted){__cov_2LmeVOxXT8ua3z9duAlaSA.b['9'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['64']++;Ext.log.error('Couldn\'t get FeatureInfo',resp);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['9'][1]++;}}});},cleanupHoverArtifacts:function(){__cov_2LmeVOxXT8ua3z9duAlaSA.f['12']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['65']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['66']++;var overlayIdentifierKey=me.self.HOVER_OVERLAY_IDENTIFIER_KEY;__cov_2LmeVOxXT8ua3z9duAlaSA.s['67']++;var overlayIdentifierVal=me.self.HOVER_OVERLAY_IDENTIFIER_VALUE;__cov_2LmeVOxXT8ua3z9duAlaSA.s['68']++;var mapComponent=me.getCmp();__cov_2LmeVOxXT8ua3z9duAlaSA.s['69']++;var map=mapComponent.getMap();__cov_2LmeVOxXT8ua3z9duAlaSA.s['70']++;me.clearPendingRequests();__cov_2LmeVOxXT8ua3z9duAlaSA.s['71']++;me.getHoverVectorLayerSource().clear();__cov_2LmeVOxXT8ua3z9duAlaSA.s['72']++;map.getOverlays().forEach(function(o){__cov_2LmeVOxXT8ua3z9duAlaSA.f['13']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['73']++;if(o.get(overlayIdentifierKey)===overlayIdentifierVal){__cov_2LmeVOxXT8ua3z9duAlaSA.b['10'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['74']++;map.removeOverlay(o);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['10'][1]++;}});},onPointerRest:function(evt){__cov_2LmeVOxXT8ua3z9duAlaSA.f['14']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['75']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['76']++;var mapComponent=me.getCmp();__cov_2LmeVOxXT8ua3z9duAlaSA.s['77']++;var map=mapComponent.getMap();__cov_2LmeVOxXT8ua3z9duAlaSA.s['78']++;var mapView=map.getView();__cov_2LmeVOxXT8ua3z9duAlaSA.s['79']++;var pixel=evt.pixel;__cov_2LmeVOxXT8ua3z9duAlaSA.s['80']++;var hoverableProp=me.self.LAYER_HOVERABLE_PROPERTY_NAME;__cov_2LmeVOxXT8ua3z9duAlaSA.s['81']++;var hoverLayers=[];__cov_2LmeVOxXT8ua3z9duAlaSA.s['82']++;var hoverFeatures=[];__cov_2LmeVOxXT8ua3z9duAlaSA.s['83']++;me.cleanupHoverArtifacts();__cov_2LmeVOxXT8ua3z9duAlaSA.s['84']++;map.forEachLayerAtPixel(pixel,function(layer,pixelValues){__cov_2LmeVOxXT8ua3z9duAlaSA.f['15']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['85']++;var source=layer.getSource();__cov_2LmeVOxXT8ua3z9duAlaSA.s['86']++;var resolution=mapView.getResolution();__cov_2LmeVOxXT8ua3z9duAlaSA.s['87']++;var projCode=mapView.getProjection().getCode();__cov_2LmeVOxXT8ua3z9duAlaSA.s['88']++;var hoverable=layer.get(hoverableProp);__cov_2LmeVOxXT8ua3z9duAlaSA.s['89']++;if(hoverable!==false){__cov_2LmeVOxXT8ua3z9duAlaSA.b['11'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['90']++;if((__cov_2LmeVOxXT8ua3z9duAlaSA.b['13'][0]++,source instanceof ol.source.TileWMS)||(__cov_2LmeVOxXT8ua3z9duAlaSA.b['13'][1]++,source instanceof ol.source.ImageWMS)){__cov_2LmeVOxXT8ua3z9duAlaSA.b['12'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['91']++;var url=source.getGetFeatureInfoUrl(evt.coordinate,resolution,projCode,{'INFO_FORMAT':'application/json','FEATURE_COUNT':me.getFeatureInfoCount()});__cov_2LmeVOxXT8ua3z9duAlaSA.s['92']++;me.requestAsynchronously(url,function(resp){__cov_2LmeVOxXT8ua3z9duAlaSA.f['16']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['93']++;var respFeatures=new ol.format.GeoJSON().readFeatures(resp.responseText);__cov_2LmeVOxXT8ua3z9duAlaSA.s['94']++;var respProjection=new ol.format.GeoJSON().readProjection(resp.responseText);__cov_2LmeVOxXT8ua3z9duAlaSA.s['95']++;me.showHoverFeature(layer,respFeatures,respProjection);__cov_2LmeVOxXT8ua3z9duAlaSA.s['96']++;Ext.each(respFeatures,function(feature){__cov_2LmeVOxXT8ua3z9duAlaSA.f['17']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['97']++;feature.set('layer',layer);__cov_2LmeVOxXT8ua3z9duAlaSA.s['98']++;var featureStyle=me.highlightStyleFunction(feature,resolution,pixelValues);__cov_2LmeVOxXT8ua3z9duAlaSA.s['99']++;feature.setStyle(featureStyle);__cov_2LmeVOxXT8ua3z9duAlaSA.s['100']++;hoverFeatures.push(feature);});__cov_2LmeVOxXT8ua3z9duAlaSA.s['101']++;hoverLayers.push(layer);__cov_2LmeVOxXT8ua3z9duAlaSA.s['102']++;me.showHoverToolTip(evt,hoverLayers,hoverFeatures);});}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['12'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['103']++;if(source instanceof ol.source.Vector){__cov_2LmeVOxXT8ua3z9duAlaSA.b['14'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['104']++;map.forEachFeatureAtPixel(pixel,function(feat){__cov_2LmeVOxXT8ua3z9duAlaSA.f['18']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['105']++;if((__cov_2LmeVOxXT8ua3z9duAlaSA.b['16'][0]++,layer.get('type')==='WFS')||(__cov_2LmeVOxXT8ua3z9duAlaSA.b['16'][1]++,layer.get('type')==='WFSCluster')){__cov_2LmeVOxXT8ua3z9duAlaSA.b['15'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['106']++;var hvl=me.getHoverVectorLayer();__cov_2LmeVOxXT8ua3z9duAlaSA.s['107']++;hvl.setStyle(me.highlightStyleFunction);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['15'][1]++;}__cov_2LmeVOxXT8ua3z9duAlaSA.s['108']++;var featureClone=feat.clone();__cov_2LmeVOxXT8ua3z9duAlaSA.s['109']++;featureClone.set('layer',layer);__cov_2LmeVOxXT8ua3z9duAlaSA.s['110']++;hoverLayers.push(layer);__cov_2LmeVOxXT8ua3z9duAlaSA.s['111']++;hoverFeatures.push(featureClone);__cov_2LmeVOxXT8ua3z9duAlaSA.s['112']++;me.showHoverFeature(layer,hoverFeatures);__cov_2LmeVOxXT8ua3z9duAlaSA.s['113']++;me.currentHoverTarget=feat;},me,function(vectorCand){__cov_2LmeVOxXT8ua3z9duAlaSA.f['19']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['114']++;return vectorCand===layer;});}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['14'][1]++;}}}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['11'][1]++;}},this,me.hoverLayerFilter,this);__cov_2LmeVOxXT8ua3z9duAlaSA.s['115']++;me.showHoverToolTip(evt,hoverLayers,hoverFeatures);},hoverLayerFilter:function(candidate){__cov_2LmeVOxXT8ua3z9duAlaSA.f['20']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['116']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['117']++;var hoverableProp=me.self.LAYER_HOVERABLE_PROPERTY_NAME;__cov_2LmeVOxXT8ua3z9duAlaSA.s['118']++;if((__cov_2LmeVOxXT8ua3z9duAlaSA.b['18'][0]++,candidate.get(hoverableProp))||(__cov_2LmeVOxXT8ua3z9duAlaSA.b['18'][1]++,candidate.get('type')==='WFSCluster')){__cov_2LmeVOxXT8ua3z9duAlaSA.b['17'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['119']++;return true;}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['17'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['120']++;return false;}},showHoverFeature:function(layer,features,projection){__cov_2LmeVOxXT8ua3z9duAlaSA.f['21']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['121']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['122']++;var mapComponent=me.getCmp();__cov_2LmeVOxXT8ua3z9duAlaSA.s['123']++;var map=mapComponent.getMap();__cov_2LmeVOxXT8ua3z9duAlaSA.s['124']++;var proj=me.getFeatureInfoEpsg();__cov_2LmeVOxXT8ua3z9duAlaSA.s['125']++;if(projection){__cov_2LmeVOxXT8ua3z9duAlaSA.b['19'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['126']++;proj=projection;}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['19'][1]++;}__cov_2LmeVOxXT8ua3z9duAlaSA.s['127']++;var source=me.getHoverVectorLayerSource();__cov_2LmeVOxXT8ua3z9duAlaSA.s['128']++;Ext.each(features,function(feat){__cov_2LmeVOxXT8ua3z9duAlaSA.f['22']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['129']++;var g=feat.getGeometry();__cov_2LmeVOxXT8ua3z9duAlaSA.s['130']++;if(g){__cov_2LmeVOxXT8ua3z9duAlaSA.b['20'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['131']++;g.transform(proj,map.getView().getProjection());}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['20'][1]++;}__cov_2LmeVOxXT8ua3z9duAlaSA.s['132']++;if(!Ext.Array.contains(source.getFeatures(),feat)){__cov_2LmeVOxXT8ua3z9duAlaSA.b['21'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['133']++;source.addFeature(feat);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['21'][1]++;}});},showHoverToolTip:function(evt,layers,features){__cov_2LmeVOxXT8ua3z9duAlaSA.f['23']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['134']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['135']++;var overlayIdentifierKey=me.self.HOVER_OVERLAY_IDENTIFIER_KEY;__cov_2LmeVOxXT8ua3z9duAlaSA.s['136']++;var overlayIdentifierVal=me.self.HOVER_OVERLAY_IDENTIFIER_VALUE;__cov_2LmeVOxXT8ua3z9duAlaSA.s['137']++;var mapComponent=me.getCmp();__cov_2LmeVOxXT8ua3z9duAlaSA.s['138']++;var map=mapComponent.getMap();__cov_2LmeVOxXT8ua3z9duAlaSA.s['139']++;var coords=evt.coordinate;__cov_2LmeVOxXT8ua3z9duAlaSA.s['140']++;if((__cov_2LmeVOxXT8ua3z9duAlaSA.b['23'][0]++,layers.length>0)&&(__cov_2LmeVOxXT8ua3z9duAlaSA.b['23'][1]++,features.length>0)){__cov_2LmeVOxXT8ua3z9duAlaSA.b['22'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['141']++;map.getOverlays().forEach(function(o){__cov_2LmeVOxXT8ua3z9duAlaSA.f['24']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['142']++;if(o.get(overlayIdentifierKey)===overlayIdentifierVal){__cov_2LmeVOxXT8ua3z9duAlaSA.b['24'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['143']++;map.removeOverlay(o);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['24'][1]++;}});__cov_2LmeVOxXT8ua3z9duAlaSA.s['144']++;var div=Ext.dom.Helper.createDom('<div>');__cov_2LmeVOxXT8ua3z9duAlaSA.s['145']++;div.className='feature-hover-popup';__cov_2LmeVOxXT8ua3z9duAlaSA.s['146']++;div.innerHTML=this.getToolTipHtml(layers,features);__cov_2LmeVOxXT8ua3z9duAlaSA.s['147']++;var positioningConfig=me.getPositioningConfig(evt.pixel,div,mapComponent);__cov_2LmeVOxXT8ua3z9duAlaSA.s['148']++;var overlay=new ol.Overlay({position:coords,offset:positioningConfig.offset,positioning:positioningConfig.positioning,element:div,className:this.getClassName()});__cov_2LmeVOxXT8ua3z9duAlaSA.s['149']++;overlay.set(overlayIdentifierKey,overlayIdentifierVal);__cov_2LmeVOxXT8ua3z9duAlaSA.s['150']++;map.addOverlay(overlay);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['22'][1]++;}},getPositioningConfig:function(pixel,div,mapComponent){__cov_2LmeVOxXT8ua3z9duAlaSA.f['25']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['151']++;div.style.display='inline';__cov_2LmeVOxXT8ua3z9duAlaSA.s['152']++;var divEl=Ext.get(Ext.getBody().dom.appendChild(div));__cov_2LmeVOxXT8ua3z9duAlaSA.s['153']++;var divDims=[divEl.getWidth(),divEl.getHeight()];__cov_2LmeVOxXT8ua3z9duAlaSA.s['154']++;if(this.maxHeight){__cov_2LmeVOxXT8ua3z9duAlaSA.b['25'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['155']++;divDims[1]=Math.min(divDims[1],this.maxHeight);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['25'][1]++;}__cov_2LmeVOxXT8ua3z9duAlaSA.s['156']++;div.style.display='';__cov_2LmeVOxXT8ua3z9duAlaSA.s['157']++;div.parentNode.removeChild(div);__cov_2LmeVOxXT8ua3z9duAlaSA.s['158']++;var mapEl=mapComponent.getEl();__cov_2LmeVOxXT8ua3z9duAlaSA.s['159']++;var mapDims=[mapEl.getWidth(),mapEl.getHeight()];__cov_2LmeVOxXT8ua3z9duAlaSA.s['160']++;var threshold=this.getMapPaddingPositioning();__cov_2LmeVOxXT8ua3z9duAlaSA.s['161']++;var dimLeftRight=divDims[0]+threshold;__cov_2LmeVOxXT8ua3z9duAlaSA.s['162']++;var dimTopBottom=divDims[1]+threshold;__cov_2LmeVOxXT8ua3z9duAlaSA.s['163']++;var positioning=['top','left'];__cov_2LmeVOxXT8ua3z9duAlaSA.s['164']++;var offset=[15,0];__cov_2LmeVOxXT8ua3z9duAlaSA.s['165']++;if(pixel[0]>=mapDims[0]-dimLeftRight){__cov_2LmeVOxXT8ua3z9duAlaSA.b['26'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['166']++;offset[0]=-1*(offset[0]+divDims[0]);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['26'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['167']++;if(pixel[0]<=dimLeftRight){__cov_2LmeVOxXT8ua3z9duAlaSA.b['27'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['168']++;positioning[1]='right';__cov_2LmeVOxXT8ua3z9duAlaSA.s['169']++;offset[0]=offset[0]+divDims[0];}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['27'][1]++;}}__cov_2LmeVOxXT8ua3z9duAlaSA.s['170']++;if(pixel[1]>=mapDims[1]-dimTopBottom){__cov_2LmeVOxXT8ua3z9duAlaSA.b['28'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['171']++;offset[1]=-1*(offset[1]+divDims[1]);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['28'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['172']++;if(pixel[1]<=dimTopBottom){__cov_2LmeVOxXT8ua3z9duAlaSA.b['29'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['173']++;positioning[0]='bottom';__cov_2LmeVOxXT8ua3z9duAlaSA.s['174']++;offset[1]=offset[1]+divDims[1];}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['29'][1]++;}}__cov_2LmeVOxXT8ua3z9duAlaSA.s['175']++;return{positioning:positioning.join('-'),offset:offset};},getToolTipHtml:function(layers,features){__cov_2LmeVOxXT8ua3z9duAlaSA.f['26']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['176']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['177']++;var innerHtml='';__cov_2LmeVOxXT8ua3z9duAlaSA.s['178']++;var hoverfieldProp=me.self.LAYER_HOVERFIELD_PROPERTY_NAME;__cov_2LmeVOxXT8ua3z9duAlaSA.s['179']++;Ext.each(features,function(feat){__cov_2LmeVOxXT8ua3z9duAlaSA.f['27']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['180']++;var layer=feat.get('layer');__cov_2LmeVOxXT8ua3z9duAlaSA.s['181']++;var hoverFieldProp=layer.get(hoverfieldProp);__cov_2LmeVOxXT8ua3z9duAlaSA.s['182']++;var hoverText=me.getHoverTextFromTemplate(feat,hoverFieldProp);__cov_2LmeVOxXT8ua3z9duAlaSA.s['183']++;innerHtml+='<b>'+layer.get('name')+'</b>';__cov_2LmeVOxXT8ua3z9duAlaSA.s['184']++;if(feat){__cov_2LmeVOxXT8ua3z9duAlaSA.b['30'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['185']++;if(layer.get('type')==='WFSCluster'){__cov_2LmeVOxXT8ua3z9duAlaSA.b['31'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['186']++;var count=feat.get('count');__cov_2LmeVOxXT8ua3z9duAlaSA.s['187']++;innerHtml+='<br />'+count+'<br />';}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['31'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['188']++;innerHtml+='<br />'+hoverText+'<br />';}}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['30'][1]++;}});__cov_2LmeVOxXT8ua3z9duAlaSA.s['189']++;return innerHtml;},transparify:function(baseColor,alpha){__cov_2LmeVOxXT8ua3z9duAlaSA.f['28']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['190']++;var rgbaTemplate='rgba({0}, {1}, {2}, {3})';__cov_2LmeVOxXT8ua3z9duAlaSA.s['191']++;var fallbackBaseColor=[255,0,0];__cov_2LmeVOxXT8ua3z9duAlaSA.s['192']++;var red;__cov_2LmeVOxXT8ua3z9duAlaSA.s['193']++;var green;__cov_2LmeVOxXT8ua3z9duAlaSA.s['194']++;var blue;__cov_2LmeVOxXT8ua3z9duAlaSA.s['195']++;if((__cov_2LmeVOxXT8ua3z9duAlaSA.b['33'][0]++,baseColor.length===4)&&(__cov_2LmeVOxXT8ua3z9duAlaSA.b['33'][1]++,Ext.isNumber(baseColor[0]))&&(__cov_2LmeVOxXT8ua3z9duAlaSA.b['33'][2]++,Ext.isNumber(baseColor[1]))&&(__cov_2LmeVOxXT8ua3z9duAlaSA.b['33'][3]++,Ext.isNumber(baseColor[2]))){__cov_2LmeVOxXT8ua3z9duAlaSA.b['32'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['196']++;red=baseColor[0];__cov_2LmeVOxXT8ua3z9duAlaSA.s['197']++;green=baseColor[1];__cov_2LmeVOxXT8ua3z9duAlaSA.s['198']++;blue=baseColor[2];}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['32'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['199']++;red=fallbackBaseColor[0];__cov_2LmeVOxXT8ua3z9duAlaSA.s['200']++;green=fallbackBaseColor[1];__cov_2LmeVOxXT8ua3z9duAlaSA.s['201']++;blue=fallbackBaseColor[2];}__cov_2LmeVOxXT8ua3z9duAlaSA.s['202']++;return Ext.String.format(rgbaTemplate,red,green,blue,(__cov_2LmeVOxXT8ua3z9duAlaSA.b['34'][0]++,alpha)||(__cov_2LmeVOxXT8ua3z9duAlaSA.b['34'][1]++,1));},highlightStyleFunction:function(feature,resolution,baseColor){__cov_2LmeVOxXT8ua3z9duAlaSA.f['29']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['203']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['204']++;var count=feature.get('count');__cov_2LmeVOxXT8ua3z9duAlaSA.s['205']++;var hoverColor='rgba(255, 0, 0, 0.6)';__cov_2LmeVOxXT8ua3z9duAlaSA.s['206']++;var dynamicHoverColor=me.getDynamicHoverColor();__cov_2LmeVOxXT8ua3z9duAlaSA.s['207']++;var radius=14;__cov_2LmeVOxXT8ua3z9duAlaSA.s['208']++;var fontSize=10;__cov_2LmeVOxXT8ua3z9duAlaSA.s['209']++;if((__cov_2LmeVOxXT8ua3z9duAlaSA.b['36'][0]++,count)&&(__cov_2LmeVOxXT8ua3z9duAlaSA.b['36'][1]++,count>10)){__cov_2LmeVOxXT8ua3z9duAlaSA.b['35'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['210']++;radius=25;__cov_2LmeVOxXT8ua3z9duAlaSA.s['211']++;fontSize=14;}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['35'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['212']++;if((__cov_2LmeVOxXT8ua3z9duAlaSA.b['38'][0]++,count)&&(__cov_2LmeVOxXT8ua3z9duAlaSA.b['38'][1]++,count<4)){__cov_2LmeVOxXT8ua3z9duAlaSA.b['37'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['213']++;fontSize=7;__cov_2LmeVOxXT8ua3z9duAlaSA.s['214']++;radius=8;}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['37'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['215']++;if(count){__cov_2LmeVOxXT8ua3z9duAlaSA.b['39'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['216']++;radius=count*2;__cov_2LmeVOxXT8ua3z9duAlaSA.s['217']++;fontSize=count*1.3;}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['39'][1]++;}}}__cov_2LmeVOxXT8ua3z9duAlaSA.s['218']++;return[new ol.style.Style({fill:new ol.style.Fill({color:dynamicHoverColor?(__cov_2LmeVOxXT8ua3z9duAlaSA.b['40'][0]++,me.transparify(baseColor,0.3)):(__cov_2LmeVOxXT8ua3z9duAlaSA.b['40'][1]++,hoverColor)}),image:new ol.style.Circle({radius:radius,fill:new ol.style.Fill({color:dynamicHoverColor?(__cov_2LmeVOxXT8ua3z9duAlaSA.b['41'][0]++,me.transparify(baseColor,0.4)):(__cov_2LmeVOxXT8ua3z9duAlaSA.b['41'][1]++,hoverColor)}),stroke:new ol.style.Stroke({color:dynamicHoverColor?(__cov_2LmeVOxXT8ua3z9duAlaSA.b['42'][0]++,me.transparify(baseColor,0.6)):(__cov_2LmeVOxXT8ua3z9duAlaSA.b['42'][1]++,hoverColor)})}),stroke:new ol.style.Stroke({color:dynamicHoverColor?(__cov_2LmeVOxXT8ua3z9duAlaSA.b['43'][0]++,me.transparify(baseColor,0.5)):(__cov_2LmeVOxXT8ua3z9duAlaSA.b['43'][1]++,hoverColor),width:5}),text:new ol.style.Text({text:count>1?(__cov_2LmeVOxXT8ua3z9duAlaSA.b['44'][0]++,count.toString()):(__cov_2LmeVOxXT8ua3z9duAlaSA.b['44'][1]++,''),font:'bold '+fontSize*2+'px Arial',stroke:new ol.style.Stroke({color:'black',width:1}),fill:new ol.style.Fill({color:'white'})})})];},selectStyleFunction:function(feature){__cov_2LmeVOxXT8ua3z9duAlaSA.f['30']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['219']++;var count=feature.get('count');__cov_2LmeVOxXT8ua3z9duAlaSA.s['220']++;var radius=14;__cov_2LmeVOxXT8ua3z9duAlaSA.s['221']++;var fontSize=10;__cov_2LmeVOxXT8ua3z9duAlaSA.s['222']++;if((__cov_2LmeVOxXT8ua3z9duAlaSA.b['46'][0]++,count)&&(__cov_2LmeVOxXT8ua3z9duAlaSA.b['46'][1]++,count>10)){__cov_2LmeVOxXT8ua3z9duAlaSA.b['45'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['223']++;radius=25;__cov_2LmeVOxXT8ua3z9duAlaSA.s['224']++;fontSize=14;}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['45'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['225']++;if((__cov_2LmeVOxXT8ua3z9duAlaSA.b['48'][0]++,count)&&(__cov_2LmeVOxXT8ua3z9duAlaSA.b['48'][1]++,count<4)){__cov_2LmeVOxXT8ua3z9duAlaSA.b['47'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['226']++;fontSize=7;__cov_2LmeVOxXT8ua3z9duAlaSA.s['227']++;radius=8;}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['47'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['228']++;if(count){__cov_2LmeVOxXT8ua3z9duAlaSA.b['49'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['229']++;radius=count*2;__cov_2LmeVOxXT8ua3z9duAlaSA.s['230']++;fontSize=count*1.3;}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['49'][1]++;}}}__cov_2LmeVOxXT8ua3z9duAlaSA.s['231']++;return[new ol.style.Style({fill:new ol.style.Fill({color:'rgba(0, 0, 255, 0.6)'}),image:new ol.style.Circle({radius:radius,fill:new ol.style.Fill({color:'rgba(0, 0, 255, 0.6)'}),stroke:new ol.style.Stroke({color:'gray'})}),text:new ol.style.Text({text:count>1?(__cov_2LmeVOxXT8ua3z9duAlaSA.b['50'][0]++,count.toString()):(__cov_2LmeVOxXT8ua3z9duAlaSA.b['50'][1]++,''),font:'bold '+fontSize*2+'px Arial',stroke:new ol.style.Stroke({color:'black',width:1}),fill:new ol.style.Fill({color:'white'})})})];},hoverClusterFeatures:function(pixel){__cov_2LmeVOxXT8ua3z9duAlaSA.f['31']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['232']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['233']++;var mapComponent=me.getCmp();__cov_2LmeVOxXT8ua3z9duAlaSA.s['234']++;var map=mapComponent.getMap();__cov_2LmeVOxXT8ua3z9duAlaSA.s['235']++;var wmsHoverPlugin=mapComponent.getPlugin('wmshover');__cov_2LmeVOxXT8ua3z9duAlaSA.s['236']++;var feature=map.forEachFeatureAtPixel(pixel,function(feat){__cov_2LmeVOxXT8ua3z9duAlaSA.f['32']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['237']++;return feat;});__cov_2LmeVOxXT8ua3z9duAlaSA.s['238']++;if((__cov_2LmeVOxXT8ua3z9duAlaSA.b['52'][0]++,feature===me.highlightFeature)||(__cov_2LmeVOxXT8ua3z9duAlaSA.b['52'][1]++,!feature)){__cov_2LmeVOxXT8ua3z9duAlaSA.b['51'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['239']++;wmsHoverPlugin.cleanupHoverArtifacts();__cov_2LmeVOxXT8ua3z9duAlaSA.s['240']++;return;}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['51'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['241']++;var hvl=wmsHoverPlugin.getHoverVectorLayer();__cov_2LmeVOxXT8ua3z9duAlaSA.s['242']++;hvl.setStyle(me.highlightStyleFunction);__cov_2LmeVOxXT8ua3z9duAlaSA.s['243']++;var hvlSource=wmsHoverPlugin.getHoverVectorLayerSource();__cov_2LmeVOxXT8ua3z9duAlaSA.s['244']++;wmsHoverPlugin.cleanupHoverArtifacts();__cov_2LmeVOxXT8ua3z9duAlaSA.s['245']++;hvlSource.addFeature(feature);__cov_2LmeVOxXT8ua3z9duAlaSA.s['246']++;me.highLightedFeature=feature;}},getHoverTextFromTemplate:function(feature,hoverTemplate){__cov_2LmeVOxXT8ua3z9duAlaSA.f['33']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['247']++;var me=this;__cov_2LmeVOxXT8ua3z9duAlaSA.s['248']++;var placeHolderPrefix=me.self.HOVER_TEMPLATE_PLACEHOLDER_PREFIX;__cov_2LmeVOxXT8ua3z9duAlaSA.s['249']++;var placeHolderSuffix=me.self.HOVER_TEMPLATE_PLACEHOLDER_SUFFIX;__cov_2LmeVOxXT8ua3z9duAlaSA.s['250']++;var hoverText='';__cov_2LmeVOxXT8ua3z9duAlaSA.s['251']++;if((__cov_2LmeVOxXT8ua3z9duAlaSA.b['54'][0]++,feature)&&(__cov_2LmeVOxXT8ua3z9duAlaSA.b['54'][1]++,hoverTemplate)){__cov_2LmeVOxXT8ua3z9duAlaSA.b['53'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['252']++;var regExp=new RegExp(placeHolderPrefix+'(.*?)'+placeHolderSuffix,'g');__cov_2LmeVOxXT8ua3z9duAlaSA.s['253']++;var regExpRes=hoverTemplate.match(regExp);__cov_2LmeVOxXT8ua3z9duAlaSA.s['254']++;if(regExpRes){__cov_2LmeVOxXT8ua3z9duAlaSA.b['55'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['255']++;Ext.each(regExpRes,function(res){__cov_2LmeVOxXT8ua3z9duAlaSA.f['34']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['256']++;var noMatchCnt=0;__cov_2LmeVOxXT8ua3z9duAlaSA.s['257']++;Ext.iterate(feature.getProperties(),function(k,v){__cov_2LmeVOxXT8ua3z9duAlaSA.f['35']++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['258']++;var placeHolderPrefixLength=decodeURIComponent(placeHolderPrefix).length;__cov_2LmeVOxXT8ua3z9duAlaSA.s['259']++;var placeHolderSuffixLength=decodeURIComponent(placeHolderSuffix).length;__cov_2LmeVOxXT8ua3z9duAlaSA.s['260']++;var placeHolderName=res.slice(placeHolderPrefixLength,res.length-placeHolderSuffixLength);__cov_2LmeVOxXT8ua3z9duAlaSA.s['261']++;if(placeHolderName===k){__cov_2LmeVOxXT8ua3z9duAlaSA.b['56'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['262']++;hoverTemplate=hoverTemplate.replace(res,v);__cov_2LmeVOxXT8ua3z9duAlaSA.s['263']++;return false;}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['56'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['264']++;noMatchCnt++;}});__cov_2LmeVOxXT8ua3z9duAlaSA.s['265']++;if(noMatchCnt===Ext.Object.getSize(feature.attributes)){__cov_2LmeVOxXT8ua3z9duAlaSA.b['57'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['266']++;hoverTemplate=hoverTemplate.replace(res,'');}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['57'][1]++;}});}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['55'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['267']++;if(!Ext.isEmpty(feature.get(hoverTemplate))){__cov_2LmeVOxXT8ua3z9duAlaSA.b['58'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['268']++;hoverTemplate=feature.get(hoverTemplate);}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['58'][1]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['269']++;hoverText=feature.get('id');}}__cov_2LmeVOxXT8ua3z9duAlaSA.s['270']++;hoverText=hoverTemplate;}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['53'][1]++;}__cov_2LmeVOxXT8ua3z9duAlaSA.s['271']++;if(Ext.isString(hoverText)){__cov_2LmeVOxXT8ua3z9duAlaSA.b['59'][0]++;__cov_2LmeVOxXT8ua3z9duAlaSA.s['272']++;hoverText=hoverText.replace(/\n/g,'<br>');}else{__cov_2LmeVOxXT8ua3z9duAlaSA.b['59'][1]++;}__cov_2LmeVOxXT8ua3z9duAlaSA.s['273']++;return hoverText;}});
+    alias: 'plugin.hover',
+    pluginId: 'hover',
+
+    inheritableStatics: {
+        HOVER_OVERLAY_IDENTIFIER_KEY: 'name',
+        HOVER_OVERLAY_IDENTIFIER_VALUE: 'featureinfooverlay',
+
+        /**
+         * The property of a layer that holds a boolean value which indicates
+         * whether this layer qualifies for hovering.
+         *
+         * @type {String}
+         */
+        LAYER_HOVERABLE_PROPERTY_NAME: 'hoverable',
+
+        /**
+         * The property of a layer that holds a string value which indicates,
+         * which field of the layer shall be shown when hovering.
+         *
+         * @type {String}
+         */
+        LAYER_HOVERFIELD_PROPERTY_NAME: 'hoverField',
+
+        /**
+         * The prefix used in a regular expression to match any placeholder
+         * field in the hover template.
+         *
+         * @type {String}
+         */
+        HOVER_TEMPLATE_PLACEHOLDER_PREFIX: '\{\{',
+
+        /**
+         * The suffix used in a regular expression to match any placeholder
+         * field in the hover template.
+         *
+         * @type {String}
+         */
+        HOVER_TEMPLATE_PLACEHOLDER_SUFFIX: '\}\}'
+    },
+
+    config: {
+        pointerRest: true,
+        pointerRestInterval: 300,
+        pointerRestPixelTolerance: 5,
+        featureInfoEpsg: 'EPSG:3857',
+        featureInfoCount: 50,
+        hoverVectorLayerSource: null,
+        hoverVectorLayer: null,
+        hoverVectorLayerInteraction: null,
+        dynamicHoverColor: false,
+        enableHoverSelection: true,
+        /**
+         * The additional padding (in pixels) of the map component when
+         * determining the positioning of the hover popup.
+         *
+         * @type {Number}
+         */
+        mapPaddingPositioning: 30,
+        maxHeight: null,
+        className: 'ol-overlay-container ol-selectable'
+    },
+
+    /**
+     * Whether the `ol.interaction.Select` shall be configured to select
+     * multiple features from the hover layer.
+     *
+     * @property {boolean}
+     * @cfg
+     */
+    selectMulti: true,
+
+    /**
+     * The origin of the select event. We support two origins:
+     *
+     * * `'collection'` (the current default), which fires whenever an `add`
+     *   event of the collection of selected features is fired, and
+     * * `'interaction'` which fires when the select interaction fires the
+     *   select event.
+     *
+     * Older versions of ol3 did not expose / have the latter event, and
+     * therefore the 'workaround' with the collection events was chosen.
+     *
+     * @property {string}
+     * @cfg
+     */
+    selectEventOrigin: 'collection',
+
+    currentHoverTarget: null,
+
+    pendingRequest: null,
+
+    init: function(cmp) {
+        var me = this;
+
+        me.checkSelectEventOrigin();
+
+        me.addHoverVectorLayerSource();
+        me.addHoverVectorLayer();
+
+        if (me.getEnableHoverSelection()) {
+            me.addHoverVectorLayerInteraction();
+        }
+
+        me.setupMapEventListeners();
+        me.setCmp(cmp);
+
+        cmp.setPointerRest(me.getPointerRest());
+        cmp.setPointerRestInterval(me.getPointerRestInterval());
+        cmp.setPointerRestPixelTolerance(me.getPointerRestPixelTolerance());
+
+        cmp.on('pointerrest', me.onPointerRest, me);
+        cmp.on('pointerrestout', me.cleanupHoverArtifacts, me);
+    },
+
+    /**
+     * Called during the initialisation phase, this methdo ensures that the
+     * configuration option #selectEventOrigin has a valid value; e.g. either
+     * is `'collection'` (historical default) or `'interaction'`.
+     */
+    checkSelectEventOrigin: function() {
+        var me = this;
+        var allowedOrigins = ['collection', 'interaction'];
+        var defaultOrigin = allowedOrigins[0];
+        var selOrigin = me.selectEventOrigin;
+        if (!Ext.Array.contains(allowedOrigins, selOrigin)) {
+            Ext.log.warn('Unexpected selectEventOrigin "' + selOrigin + '",' +
+                ' correcting to "' + defaultOrigin + '".');
+            me.selectEventOrigin = defaultOrigin;
+        }
+    },
+
+    /**
+     * Adds any relevant listeners on the ol.Map. For now we only ensure that
+     * when the top-level layerGroup changes (e.g. by adding or removing a
+     * layer), we cleanup any visual artifacts from hovering.
+     *
+     * @private
+     */
+    setupMapEventListeners: function() {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
+        // whenever the layergroup changes, we need to cleanup hover artifacts
+        map.on('change:layerGroup', me.cleanupHoverArtifacts, me);
+    },
+
+    /**
+     *
+     */
+    addHoverVectorLayerInteraction: function() {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
+
+        if (!me.getHoverVectorLayerInteraction()) {
+            var interaction = new ol.interaction.Select({
+                multi: me.selectMulti,
+                style: me.selectStyleFunction,
+                layers: [me.getHoverVectorLayer()]
+            });
+            if (me.selectEventOrigin === 'collection') {
+                var featureCollection = interaction.getFeatures();
+                featureCollection.on('add', me.onFeatureClicked, me);
+            } else {
+                interaction.on('select', me.onFeatureClicked, me);
+            }
+            map.addInteraction(interaction);
+            me.setHoverVectorLayerInteraction(interaction);
+        }
+    },
+
+    /**
+     * Bound to either a collection- or select-interaction-event, this method
+     * fires the `hoverfeaturesclick` event on the map component.
+     *
+     * @param {ol.Collection.Event|ol.interaction.Select.Event} olEvt The event
+     *     we listen to. Is dependend on #selectEventOrigin.
+     */
+    onFeatureClicked: function(olEvt) {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var olFeatures;
+        if (me.selectEventOrigin === 'collection') {
+            olFeatures = olEvt.target.getArray();
+        } else {
+            olFeatures = olEvt.selected;
+        }
+        mapComponent.fireEvent('hoverfeaturesclick', olFeatures);
+    },
+
+    /**
+     *
+     */
+    addHoverVectorLayerSource: function() {
+        var me = this;
+        if (!me.getHoverVectorLayerSource()) {
+            me.setHoverVectorLayerSource(new ol.source.Vector());
+        }
+    },
+
+    /**
+     *
+     */
+    addHoverVectorLayer: function() {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
+
+        var hoverVectorLayer = me.getHoverVectorLayer();
+
+        if (!hoverVectorLayer) {
+            hoverVectorLayer = new ol.layer.Vector({
+                name: 'hoverVectorLayer',
+                source: me.getHoverVectorLayerSource(),
+                visible: true,
+                zIndex: 1000
+            });
+            map.addLayer(hoverVectorLayer);
+            me.setHoverVectorLayer(hoverVectorLayer);
+        }
+        // Set our internal flag to filter this layer out of the tree / legend
+        var inLayerSwitcherKey = BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+        hoverVectorLayer.set(inLayerSwitcherKey, false);
+    },
+
+    /**
+     * Aborts pending AJAX requests, if any.
+     */
+    clearPendingRequests: function() {
+        var me = this;
+        if (me.pendingRequest) {
+            Ext.Ajax.abort(me.pendingRequest);
+        }
+    },
+
+    /**
+     * Requests the passed `url` asynchrounously and calls `cb` when that call
+     * was successful.
+     *
+     * @param {String} url The URL to request.
+     * @param {Function} cb The callback to execute when the call succeeded.
+     */
+    requestAsynchronously: function(url, cb) {
+        var me = this;
+
+        me.pendingRequest = Ext.Ajax.request({
+            url: url,
+            callback: function() {
+                me.pendingRequest = null;
+            },
+            success: cb,
+            failure: function(resp) {
+                if (!resp.aborted) {
+                    Ext.log.error('Couldn\'t get FeatureInfo', resp);
+                }
+            }
+        });
+    },
+
+    /**
+     *
+     */
+    cleanupHoverArtifacts: function() {
+        var me = this;
+        var overlayIdentifierKey = me.self.HOVER_OVERLAY_IDENTIFIER_KEY;
+        var overlayIdentifierVal = me.self.HOVER_OVERLAY_IDENTIFIER_VALUE;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
+
+        me.clearPendingRequests();
+        me.getHoverVectorLayerSource().clear();
+        map.getOverlays().forEach(function(o) {
+            if (o.get(overlayIdentifierKey) === overlayIdentifierVal) {
+                map.removeOverlay(o);
+            }
+        });
+    },
+
+    /**
+     * The handler for the pointerrest event on the mapcomponent.
+     *
+     * @param {ol.MapBrowserEvent} evt The original and most recent
+     *     MapBrowserEvent event.
+     */
+    onPointerRest: function(evt) {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
+        var mapView = map.getView();
+        var pixel = evt.pixel;
+        var hoverableProp = me.self.LAYER_HOVERABLE_PROPERTY_NAME;
+        var hoverLayers = [];
+        var hoverFeatures = [];
+
+        me.cleanupHoverArtifacts();
+
+        map.forEachLayerAtPixel(pixel, function(layer, pixelValues) {
+            var source = layer.getSource();
+            var resolution = mapView.getResolution();
+            var projCode = mapView.getProjection().getCode();
+            var hoverable = layer.get(hoverableProp);
+
+            // a layer will NOT be requested for hovering if there is a
+            // "hoverable" property set to false. If this property is not set
+            // or has any other value than "false", the layer will be requested
+            if (hoverable !== false) {
+                if (source instanceof ol.source.TileWMS
+                        || source instanceof ol.source.ImageWMS) {
+                    // me.cleanupHoverArtifacts();
+                    var url = source.getGetFeatureInfoUrl(
+                        evt.coordinate,
+                        resolution,
+                        projCode,
+                        {
+                            'INFO_FORMAT': 'application/json',
+                            'FEATURE_COUNT': me.getFeatureInfoCount()
+                        }
+                    );
+
+                    me.requestAsynchronously(url, function(resp) {
+                        // TODO: replace evt/coords with real response geometry
+                        var respFeatures = (new ol.format.GeoJSON())
+                            .readFeatures(resp.responseText);
+                        var respProjection = (new ol.format.GeoJSON())
+                            .readProjection(resp.responseText);
+
+                        me.showHoverFeature(
+                            layer, respFeatures, respProjection
+                        );
+
+                        Ext.each(respFeatures, function(feature) {
+                            feature.set('layer', layer);
+                            var featureStyle = me.highlightStyleFunction(
+                                feature, resolution, pixelValues);
+                            feature.setStyle(featureStyle);
+                            hoverFeatures.push(feature);
+                        });
+
+                        hoverLayers.push(layer);
+
+                        me.showHoverToolTip(evt, hoverLayers, hoverFeatures);
+                    });
+                } else if (source instanceof ol.source.Vector) {
+                    // VECTOR!
+                    map.forEachFeatureAtPixel(pixel, function(feat) {
+                        if (layer.get('type') === 'WFS' ||
+                                layer.get('type') === 'WFSCluster') {
+                            var hvl = me.getHoverVectorLayer();
+                            // TODO This should be dynamically generated
+                            // from the clusterStyle
+                            hvl.setStyle(me.highlightStyleFunction);
+                        }
+                        var featureClone = feat.clone();
+                        featureClone.set('layer', layer);
+                        hoverLayers.push(layer);
+                        hoverFeatures.push(featureClone);
+                        me.showHoverFeature(layer, hoverFeatures);
+                        me.currentHoverTarget = feat;
+                    }, me, function(vectorCand) {
+                        return vectorCand === layer;
+                    });
+                }
+            }
+        }, this, me.hoverLayerFilter, this);
+
+        me.showHoverToolTip(evt, hoverLayers, hoverFeatures);
+    },
+
+    /**
+     * @param {ol.layer.Base} candidate The layer to check.
+     * @return {Boolean} Whether the passed layer should be hoverable.
+     */
+    hoverLayerFilter: function(candidate) {
+        var me = this;
+        var hoverableProp = me.self.LAYER_HOVERABLE_PROPERTY_NAME;
+        if (candidate.get(hoverableProp) ||
+                candidate.get('type') === 'WFSCluster') {
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    /**
+     * Adds the passed features to the hover vector layer.
+     *
+     * @param {ol.layer.Layer} layer The layer. Currently unused in the method.
+     * @param {Array<ol.Feature>} features The features to hover by adding them
+     *     to the source of the hover vector layer.
+     * @param {ol.Projection} projection The projection of the features.
+     */
+    showHoverFeature: function(layer, features, projection) {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
+        var proj = me.getFeatureInfoEpsg();
+        if (projection) {
+            proj = projection;
+        }
+        var source = me.getHoverVectorLayerSource();
+        Ext.each(features, function(feat) {
+            var g = feat.getGeometry();
+            if (g) {
+                g.transform(proj, map.getView().getProjection());
+            }
+            if (!Ext.Array.contains(source.getFeatures(),
+                feat)) {
+                source.addFeature(feat);
+            }
+        });
+    },
+
+    /**
+     * Shows the hover tooltip.
+     *
+     * @param {ol.MapBrowserEvent} evt The OpenLayers event, containing e.g.
+     *     the coordinate.
+     * @param {Array<ol.layer.Layer>} layers The layers that the features may
+     *     originate from.
+     * @param {Array<ol.Feature>} features The features that were hovered.
+     */
+    showHoverToolTip: function(evt, layers, features) {
+        var me = this;
+        var overlayIdentifierKey = me.self.HOVER_OVERLAY_IDENTIFIER_KEY;
+        var overlayIdentifierVal = me.self.HOVER_OVERLAY_IDENTIFIER_VALUE;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
+        var coords = evt.coordinate;
+
+        if (layers.length > 0 && features.length > 0) {
+            map.getOverlays().forEach(function(o) {
+                if (o.get(overlayIdentifierKey) === overlayIdentifierVal) {
+                    map.removeOverlay(o);
+                }
+            });
+
+            var div = Ext.dom.Helper.createDom('<div>');
+            div.className = 'feature-hover-popup';
+            div.innerHTML = this.getToolTipHtml(layers, features);
+
+            var positioningConfig = me.getPositioningConfig(
+                evt.pixel, div, mapComponent
+            );
+
+            var overlay = new ol.Overlay({
+                position: coords,
+                offset: positioningConfig.offset,
+                positioning: positioningConfig.positioning,
+                element: div,
+                className: this.getClassName()
+            });
+            overlay.set(overlayIdentifierKey, overlayIdentifierVal);
+            map.addOverlay(overlay);
+        }
+
+    },
+
+    /**
+     * Return a positioning configuration object that has appropriate values at
+     * the keys `offset` and `positioning` for the passed pixel, div and
+     * mapComponent. The returned object is ready to be used to configure an
+     * `ol.Overlay` which shall hold the content of `div` and be placed at
+     * `pixel` within the `mapComponent`.
+     *
+     * @param {Array<Number>} pixel The pixel location where the overlay shall
+     *     eventually be positioned.
+     * @param {HTMLDivElement} div The div which is to be placed inside the
+     *     popup. This is expected to be not already rendered inside the page.
+     * @param {BasiGX.view.component.Map} mapComponent The map component, where
+     *     the overlay will be placed.
+     * @return {Object} An object with `offset` and `positioning` information.
+     */
+    getPositioningConfig: function(pixel, div, mapComponent) {
+        // measure the passed div first:
+        div.style.display = 'inline'; // so we can measure it!
+        var divEl = Ext.get(Ext.getBody().dom.appendChild(div));
+        var divDims = [divEl.getWidth(), divEl.getHeight()];
+        if (this.maxHeight) {
+            divDims[1] = Math.min(divDims[1], this.maxHeight);
+        }
+        div.style.display = ''; // undo styling,
+        div.parentNode.removeChild(div);
+
+        var mapEl = mapComponent.getEl();
+        var mapDims = [mapEl.getWidth(), mapEl.getHeight()];
+
+        // have some padding so that popups might be considered near whatever,
+        // when technically they are not.
+        var threshold = this.getMapPaddingPositioning();
+        var dimLeftRight = divDims[0] + threshold;
+        var dimTopBottom = divDims[1] + threshold;
+
+        // fallback positioning
+        var positioning = ['top', 'left'];
+        var offset = [15, 0];
+
+        if (pixel[0] >= mapDims[0] - dimLeftRight) {
+            // near the right
+            offset[0] = -1 * (offset[0] + divDims[0]);
+        } else if (pixel[0] <= dimLeftRight) {
+            // near the left
+            positioning[1] = 'right';
+            offset[0] = offset[0] + divDims[0];
+        }
+
+        if (pixel[1] >= mapDims[1] - dimTopBottom) {
+            // near the bottom
+            offset[1] = -1 * (offset[1] + divDims[1]);
+        } else if (pixel[1] <= dimTopBottom) {
+            // near the top
+            positioning[0] = 'bottom';
+            offset[1] = offset[1] + divDims[1];
+        }
+
+        return {
+            positioning: positioning.join('-'),
+            offset: offset
+        };
+    },
+
+    /**
+     * Given a set of `layers` and features that stem from these, get the HTML
+     * for the tooltip.
+     *
+     * @param {Array<ol.layer.Base>} layers The layers from which the features
+     *     stem.
+     * @param {Array<ol.Feature>} features The features that were hovered.
+     * @return {String} The HTML for the tooltip.
+     */
+    getToolTipHtml: function(layers, features) {
+        var me = this;
+        var innerHtml = '';
+        var hoverfieldProp = me.self.LAYER_HOVERFIELD_PROPERTY_NAME;
+
+        Ext.each(features, function(feat) {
+            var layer = feat.get('layer');
+            var hoverFieldProp = layer.get(hoverfieldProp);
+
+            var hoverText = me.getHoverTextFromTemplate(feat, hoverFieldProp);
+
+            innerHtml += '<b>' + layer.get('name') + '</b>';
+
+            // we check for existing feature here as there maybe strange
+            // situations (e.g. when zooming in unfavorable situations) where
+            // feat is undefined
+            if (feat) {
+                if (layer.get('type') === 'WFSCluster') {
+                    var count = feat.get('count');
+                    innerHtml += '<br />' + count + '<br />';
+                } else {
+                    innerHtml += '<br />' + hoverText + '<br />';
+                }
+            }
+        });
+
+        return innerHtml;
+    },
+
+    /**
+     * Returns another variant of the passed `baseColor` with the passed
+     * `alpha` value. This can be used to get e.g. a half transparent reddish
+     * color from a true red. If no `alpha` is passed, `1` is assumed. One
+     * could therefore effectively use this to turn a half-transparent reddish
+     * color into true red by simply no passing an alpha.
+     *
+     * @param {Array<Number>} baseColor An array of three (or four) numbers for
+     *     the `r`, `g`, `b` (and `a`) parts of a color. All of `r`, `g` and `b`
+     *     range from `0` to `255`, only integer values make sense. If passed,
+     *     `a` should be between `0` and `1`, and can be fractional.
+     * @param {Number} alpha The new `alpha` value. Should be between `0` and
+     *     `1`, and can be fractional.
+     * @return {String} The new color as string, in `rgba(r, g, b, a)`-format.
+     */
+    transparify: function(baseColor, alpha) {
+        var rgbaTemplate = 'rgba({0}, {1}, {2}, {3})';
+        var fallbackBaseColor = [255, 0, 0];
+        var red;
+        var green;
+        var blue;
+
+        if (baseColor.length === 4 && Ext.isNumber(baseColor[0]) &&
+                Ext.isNumber(baseColor[1]) && Ext.isNumber(baseColor[2])) {
+            red = baseColor[0];
+            green = baseColor[1];
+            blue = baseColor[2];
+        } else {
+            red = fallbackBaseColor[0];
+            green = fallbackBaseColor[1];
+            blue = fallbackBaseColor[2];
+        }
+
+        return Ext.String.format(rgbaTemplate, red, green, blue, alpha || 1);
+    },
+
+    /**
+     * An OpenLayers style function that highlights the passed feature.
+     *
+     * @param {ol.Feature} feature The feature to highlight.
+     * @param {Number} resolution The resolution the features is rendered in.
+     * @param {Array<Number>} baseColor The base color for highlighting.
+     * @return {Array<ol.style.Style>} The styles to use to highlight the
+     *     feature.
+     */
+    highlightStyleFunction: function(feature, resolution, baseColor) {
+        var me = this;
+        var count = feature.get('count');
+        var hoverColor = 'rgba(255, 0, 0, 0.6)';
+        var dynamicHoverColor = me.getDynamicHoverColor();
+        var radius = 14;
+        var fontSize = 10;
+
+        if (count && count > 10) {
+            radius = 25;
+            fontSize = 14;
+        } else if (count && count < 4) {
+            fontSize = 7;
+            radius = 8;
+        } else if (count) {
+            radius = count * 2;
+            fontSize = count * 1.3;
+        }
+
+        return [
+            new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: dynamicHoverColor ?
+                        me.transparify(baseColor, 0.3) : hoverColor
+                }),
+                image: new ol.style.Circle({
+                    radius: radius,
+                    fill: new ol.style.Fill({
+                        color: dynamicHoverColor ?
+                            me.transparify(baseColor, 0.4) : hoverColor
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: dynamicHoverColor ?
+                            me.transparify(baseColor, 0.6) : hoverColor
+                    })
+                }),
+                stroke: new ol.style.Stroke({
+                    color: dynamicHoverColor ?
+                        me.transparify(baseColor, 0.5) : hoverColor,
+                    width: 5
+                }),
+                text: new ol.style.Text({
+                    text: count > 1 ? count.toString() : '',
+                    font: 'bold ' + fontSize * 2 + 'px Arial',
+                    stroke: new ol.style.Stroke({
+                        color: 'black',
+                        width: 1
+                    }),
+                    fill: new ol.style.Fill({
+                        color: 'white'
+                    })
+                })
+            })
+        ];
+    },
+
+    /**
+     * An OpenLayers style function for selected features.
+     *
+     * @param {ol.Feature} feature The feature that was selected.
+     * @return {Array<ol.style.Style>} The styles to use to style the feature.
+     */
+    selectStyleFunction: function(feature) {
+        var count = feature.get('count');
+        var radius = 14;
+        var fontSize = 10;
+
+        if (count && count > 10) {
+            radius = 25;
+            fontSize = 14;
+        } else if (count && count < 4) {
+            fontSize = 7;
+            radius = 8;
+        } else if (count) {
+            radius = count * 2;
+            fontSize = count * 1.3;
+        }
+
+        return [
+            new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: 'rgba(0, 0, 255, 0.6)'
+                }),
+                image: new ol.style.Circle({
+                    radius: radius,
+                    fill: new ol.style.Fill({
+                        color: 'rgba(0, 0, 255, 0.6)'
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: 'gray'
+                    })
+                }),
+                text: new ol.style.Text({
+                    text: count > 1 ? count.toString() : '',
+                    font: 'bold ' + fontSize * 2 + 'px Arial',
+                    stroke: new ol.style.Stroke({
+                        color: 'black',
+                        width: 1
+                    }),
+                    fill: new ol.style.Fill({
+                        color: 'white'
+                    })
+                })
+            })
+        ];
+    },
+
+    /**
+     * Highlights a hovered cluster feature at the passed `pixel`, if any.
+     *
+     * @param {ol.Pixel} pixel An array with two numbers representing the pixel
+     *     to check for a feature.
+     */
+    hoverClusterFeatures: function(pixel) {
+        var me = this;
+        var mapComponent = me.getCmp();
+        var map = mapComponent.getMap();
+        var wmsHoverPlugin = mapComponent.getPlugin('wmshover');
+
+        var feature = map.forEachFeatureAtPixel(pixel, function(feat) {
+            return feat;
+        });
+
+        if (feature === me.highlightFeature || !feature) {
+            wmsHoverPlugin.cleanupHoverArtifacts();
+            return;
+        } else {
+            var hvl = wmsHoverPlugin.getHoverVectorLayer();
+            hvl.setStyle(me.highlightStyleFunction);
+            var hvlSource = wmsHoverPlugin.getHoverVectorLayerSource();
+            wmsHoverPlugin.cleanupHoverArtifacts();
+            hvlSource.addFeature(feature);
+            me.highLightedFeature = feature;
+        }
+    },
+
+    /**
+     * Returns the hover text for the passed `feature` and `hoverTemplate`.
+     *
+     * @param {ol.Feature} feature The feature that was hovered.
+     * @param {String} hoverTemplate The template to fill with feature
+     *     attributes.
+     * @return {String} The text for the hovered feature.
+     */
+    getHoverTextFromTemplate: function(feature, hoverTemplate) {
+        var me = this;
+        var placeHolderPrefix = me.self.HOVER_TEMPLATE_PLACEHOLDER_PREFIX;
+        var placeHolderSuffix = me.self.HOVER_TEMPLATE_PLACEHOLDER_SUFFIX;
+        var hoverText = '';
+
+        // Set the hoverfield for the popup, if set
+        if (feature && hoverTemplate) {
+            // Find any character between two braces (including the braces in
+            // the result)
+            var regExp = new RegExp(placeHolderPrefix + '(.*?)' +
+                    placeHolderSuffix, 'g');
+            var regExpRes = hoverTemplate.match(regExp);
+
+            // If we have a regex result, it means we found a placeholder in
+            // the template and have to replace the placeholder with its
+            // appropriate value
+            if (regExpRes) {
+                // Iterate over all regex match results and find the proper
+                // attribute for the given placeholder, finally set the desired
+                // value to the hover field text
+                Ext.each(regExpRes, function(res) {
+                    // We count every non matching candidate. If this count is
+                    // equal to the objects length, we assume that there is no
+                    // match at all and set the output value to an empty value
+                    var noMatchCnt = 0;
+
+                    Ext.iterate(feature.getProperties(), function(k, v) {
+                        // Remove the suffixes and find the matching attribute
+                        // column
+                        var placeHolderPrefixLength = decodeURIComponent(
+                            placeHolderPrefix).length;
+                        var placeHolderSuffixLength = decodeURIComponent(
+                            placeHolderSuffix).length;
+                        var placeHolderName = res.slice(placeHolderPrefixLength,
+                            res.length - placeHolderSuffixLength);
+                        if (placeHolderName === k) {
+                            hoverTemplate = hoverTemplate.replace(res, v);
+                            return false;
+                        } else {
+                            noMatchCnt++;
+                        }
+                    });
+
+                    // No key match found for this feature (e.g. if key not
+                    // present or value is null)
+                    if (noMatchCnt === Ext.Object.getSize(feature.attributes)) {
+                        hoverTemplate = hoverTemplate.replace(res, '');
+                    }
+                });
+            } else if (!Ext.isEmpty(feature.get(hoverTemplate))) {
+                // If we couldn't find any match, the hoverTemplate could be a
+                // simple string containing the "hoverField". To obtain
+                // backwards-compatibility, we check if this field is present
+                // and set the hoverText accordingly
+                hoverTemplate = feature.get(hoverTemplate);
+            } else {
+                // Try to use "id" as fallback. If "id" is not available, the
+                // value will be "undefined"
+                hoverText = feature.get('id');
+            }
+
+            hoverText = hoverTemplate;
+        }
+
+        // Replace all newline breaks with a html <br> tag
+        if (Ext.isString(hoverText)) {
+            hoverText = hoverText.replace(/\n/g, '<br>');
+        }
+
+        return hoverText;
+    }
+
+});

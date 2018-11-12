@@ -1,9 +1,445 @@
+/* Copyright (c) 2018-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Spatial Operator Base Button
+ *
+ * @class BasiGX.view.button.SpatialOperatorBase
+ */
+Ext.define('BasiGX.view.button.SpatialOperatorBase', {
+    extend: 'BasiGX.view.button.Base',
+    xtype: 'basigx-button-spatial-operator-base',
 
-var __cov_BFKnkB64au5ejsRv6Fcw7Q = (Function('return this'))();
-if (!__cov_BFKnkB64au5ejsRv6Fcw7Q.__coverage__) { __cov_BFKnkB64au5ejsRv6Fcw7Q.__coverage__ = {}; }
-__cov_BFKnkB64au5ejsRv6Fcw7Q = __cov_BFKnkB64au5ejsRv6Fcw7Q.__coverage__;
-if (!(__cov_BFKnkB64au5ejsRv6Fcw7Q['/home/travis/build/terrestris/BasiGX/src/view/button/SpatialOperatorBase.js'])) {
-   __cov_BFKnkB64au5ejsRv6Fcw7Q['/home/travis/build/terrestris/BasiGX/src/view/button/SpatialOperatorBase.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/SpatialOperatorBase.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0],"19":[0,0],"20":[0,0,0],"21":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0},"fnMap":{"1":{"name":"(anonymous_1)","line":103,"loc":{"start":{"line":103,"column":15},"end":{"line":103,"column":26}}},"2":{"name":"(anonymous_2)","line":111,"loc":{"start":{"line":111,"column":15},"end":{"line":111,"column":26}}},"3":{"name":"(anonymous_3)","line":120,"loc":{"start":{"line":120,"column":27},"end":{"line":120,"column":45}}},"4":{"name":"(anonymous_4)","line":154,"loc":{"start":{"line":154,"column":27},"end":{"line":154,"column":49}}},"5":{"name":"(anonymous_5)","line":169,"loc":{"start":{"line":169,"column":34},"end":{"line":169,"column":55}}},"6":{"name":"(anonymous_6)","line":185,"loc":{"start":{"line":185,"column":13},"end":{"line":185,"column":24}}},"7":{"name":"(anonymous_7)","line":205,"loc":{"start":{"line":205,"column":42},"end":{"line":205,"column":65}}},"8":{"name":"(anonymous_8)","line":227,"loc":{"start":{"line":227,"column":36},"end":{"line":227,"column":60}}},"9":{"name":"(anonymous_9)","line":257,"loc":{"start":{"line":257,"column":36},"end":{"line":257,"column":60}}},"10":{"name":"(anonymous_10)","line":311,"loc":{"start":{"line":311,"column":25},"end":{"line":311,"column":39}}},"11":{"name":"(anonymous_11)","line":340,"loc":{"start":{"line":340,"column":25},"end":{"line":340,"column":36}}},"12":{"name":"(anonymous_12)","line":355,"loc":{"start":{"line":355,"column":36},"end":{"line":355,"column":55}}},"13":{"name":"(anonymous_13)","line":365,"loc":{"start":{"line":365,"column":37},"end":{"line":365,"column":48}}},"14":{"name":"(anonymous_14)","line":371,"loc":{"start":{"line":371,"column":39},"end":{"line":371,"column":57}}},"15":{"name":"(anonymous_15)","line":376,"loc":{"start":{"line":376,"column":54},"end":{"line":376,"column":69}}},"16":{"name":"(anonymous_16)","line":399,"loc":{"start":{"line":399,"column":20},"end":{"line":399,"column":44}}},"17":{"name":"(anonymous_17)","line":402,"loc":{"start":{"line":402,"column":50},"end":{"line":402,"column":69}}},"18":{"name":"(anonymous_18)","line":419,"loc":{"start":{"line":419,"column":22},"end":{"line":419,"column":40}}}},"statementMap":{"1":{"start":{"line":21,"column":0},"end":{"line":445,"column":3}},"2":{"start":{"line":104,"column":12},"end":{"line":104,"column":29}},"3":{"start":{"line":112,"column":8},"end":{"line":112,"column":22}},"4":{"start":{"line":113,"column":8},"end":{"line":116,"column":9}},"5":{"start":{"line":114,"column":12},"end":{"line":114,"column":64}},"6":{"start":{"line":115,"column":12},"end":{"line":115,"column":19}},"7":{"start":{"line":119,"column":8},"end":{"line":122,"column":11}},"8":{"start":{"line":121,"column":12},"end":{"line":121,"column":47}},"9":{"start":{"line":124,"column":8},"end":{"line":145,"column":9}},"10":{"start":{"line":126,"column":12},"end":{"line":128,"column":57}},"11":{"start":{"line":129,"column":12},"end":{"line":129,"column":35}},"12":{"start":{"line":130,"column":15},"end":{"line":145,"column":9}},"13":{"start":{"line":132,"column":12},"end":{"line":139,"column":13}},"14":{"start":{"line":133,"column":16},"end":{"line":133,"column":78}},"15":{"start":{"line":136,"column":16},"end":{"line":137,"column":42}},"16":{"start":{"line":138,"column":16},"end":{"line":138,"column":53}},"17":{"start":{"line":141,"column":12},"end":{"line":143,"column":65}},"18":{"start":{"line":144,"column":12},"end":{"line":144,"column":35}},"19":{"start":{"line":155,"column":8},"end":{"line":155,"column":22}},"20":{"start":{"line":157,"column":8},"end":{"line":162,"column":9}},"21":{"start":{"line":158,"column":12},"end":{"line":159,"column":68}},"22":{"start":{"line":160,"column":12},"end":{"line":160,"column":25}},"23":{"start":{"line":161,"column":12},"end":{"line":161,"column":19}},"24":{"start":{"line":163,"column":8},"end":{"line":165,"column":9}},"25":{"start":{"line":164,"column":12},"end":{"line":164,"column":40}},"26":{"start":{"line":168,"column":8},"end":{"line":172,"column":9}},"27":{"start":{"line":169,"column":12},"end":{"line":171,"column":15}},"28":{"start":{"line":170,"column":16},"end":{"line":170,"column":46}},"29":{"start":{"line":174,"column":8},"end":{"line":174,"column":55}},"30":{"start":{"line":176,"column":8},"end":{"line":178,"column":9}},"31":{"start":{"line":177,"column":12},"end":{"line":177,"column":49}},"32":{"start":{"line":179,"column":8},"end":{"line":179,"column":21}},"33":{"start":{"line":186,"column":8},"end":{"line":186,"column":22}},"34":{"start":{"line":188,"column":8},"end":{"line":188,"column":31}},"35":{"start":{"line":190,"column":8},"end":{"line":192,"column":9}},"36":{"start":{"line":191,"column":12},"end":{"line":191,"column":61}},"37":{"start":{"line":194,"column":8},"end":{"line":196,"column":9}},"38":{"start":{"line":195,"column":12},"end":{"line":195,"column":50}},"39":{"start":{"line":206,"column":8},"end":{"line":206,"column":22}},"40":{"start":{"line":209,"column":8},"end":{"line":210,"column":38}},"41":{"start":{"line":211,"column":8},"end":{"line":212,"column":39}},"42":{"start":{"line":214,"column":8},"end":{"line":217,"column":11}},"43":{"start":{"line":219,"column":8},"end":{"line":242,"column":11}},"44":{"start":{"line":228,"column":24},"end":{"line":228,"column":57}},"45":{"start":{"line":244,"column":8},"end":{"line":247,"column":11}},"46":{"start":{"line":249,"column":8},"end":{"line":272,"column":11}},"47":{"start":{"line":258,"column":24},"end":{"line":258,"column":57}},"48":{"start":{"line":274,"column":8},"end":{"line":347,"column":21}},"49":{"start":{"line":313,"column":20},"end":{"line":335,"column":21}},"50":{"start":{"line":316,"column":24},"end":{"line":316,"column":47}},"51":{"start":{"line":317,"column":24},"end":{"line":317,"column":74}},"52":{"start":{"line":318,"column":24},"end":{"line":318,"column":72}},"53":{"start":{"line":321,"column":24},"end":{"line":321,"column":56}},"54":{"start":{"line":323,"column":24},"end":{"line":323,"column":65}},"55":{"start":{"line":324,"column":24},"end":{"line":324,"column":64}},"56":{"start":{"line":326,"column":24},"end":{"line":327,"column":50}},"57":{"start":{"line":329,"column":24},"end":{"line":330,"column":38}},"58":{"start":{"line":331,"column":24},"end":{"line":331,"column":61}},"59":{"start":{"line":333,"column":24},"end":{"line":334,"column":57}},"60":{"start":{"line":341,"column":20},"end":{"line":343,"column":21}},"61":{"start":{"line":342,"column":24},"end":{"line":342,"column":62}},"62":{"start":{"line":344,"column":20},"end":{"line":344,"column":43}},"63":{"start":{"line":356,"column":8},"end":{"line":356,"column":22}},"64":{"start":{"line":357,"column":8},"end":{"line":359,"column":9}},"65":{"start":{"line":358,"column":12},"end":{"line":358,"column":72}},"66":{"start":{"line":366,"column":8},"end":{"line":366,"column":22}},"67":{"start":{"line":367,"column":8},"end":{"line":367,"column":46}},"68":{"start":{"line":368,"column":8},"end":{"line":370,"column":9}},"69":{"start":{"line":369,"column":12},"end":{"line":369,"column":19}},"70":{"start":{"line":371,"column":8},"end":{"line":388,"column":11}},"71":{"start":{"line":372,"column":12},"end":{"line":374,"column":13}},"72":{"start":{"line":373,"column":16},"end":{"line":373,"column":23}},"73":{"start":{"line":375,"column":12},"end":{"line":375,"column":30}},"74":{"start":{"line":376,"column":12},"end":{"line":381,"column":15}},"75":{"start":{"line":377,"column":16},"end":{"line":380,"column":17}},"76":{"start":{"line":378,"column":20},"end":{"line":378,"column":33}},"77":{"start":{"line":379,"column":20},"end":{"line":379,"column":33}},"78":{"start":{"line":382,"column":12},"end":{"line":387,"column":13}},"79":{"start":{"line":383,"column":16},"end":{"line":383,"column":57}},"80":{"start":{"line":385,"column":16},"end":{"line":386,"column":62}},"81":{"start":{"line":400,"column":8},"end":{"line":400,"column":22}},"82":{"start":{"line":401,"column":8},"end":{"line":401,"column":51}},"83":{"start":{"line":402,"column":8},"end":{"line":411,"column":11}},"84":{"start":{"line":403,"column":12},"end":{"line":410,"column":13}},"85":{"start":{"line":409,"column":16},"end":{"line":409,"column":44}},"86":{"start":{"line":412,"column":8},"end":{"line":412,"column":29}},"87":{"start":{"line":420,"column":8},"end":{"line":441,"column":9}},"88":{"start":{"line":421,"column":12},"end":{"line":435,"column":15}},"89":{"start":{"line":436,"column":12},"end":{"line":437,"column":63}},"90":{"start":{"line":438,"column":12},"end":{"line":438,"column":70}},"91":{"start":{"line":439,"column":12},"end":{"line":439,"column":60}},"92":{"start":{"line":440,"column":12},"end":{"line":440,"column":46}},"93":{"start":{"line":442,"column":8},"end":{"line":442,"column":48}},"94":{"start":{"line":443,"column":8},"end":{"line":443,"column":63}}},"branchMap":{"1":{"line":113,"type":"if","locations":[{"start":{"line":113,"column":8},"end":{"line":113,"column":8}},{"start":{"line":113,"column":8},"end":{"line":113,"column":8}}]},"2":{"line":124,"type":"if","locations":[{"start":{"line":124,"column":8},"end":{"line":124,"column":8}},{"start":{"line":124,"column":8},"end":{"line":124,"column":8}}]},"3":{"line":130,"type":"if","locations":[{"start":{"line":130,"column":15},"end":{"line":130,"column":15}},{"start":{"line":130,"column":15},"end":{"line":130,"column":15}}]},"4":{"line":132,"type":"if","locations":[{"start":{"line":132,"column":12},"end":{"line":132,"column":12}},{"start":{"line":132,"column":12},"end":{"line":132,"column":12}}]},"5":{"line":157,"type":"if","locations":[{"start":{"line":157,"column":8},"end":{"line":157,"column":8}},{"start":{"line":157,"column":8},"end":{"line":157,"column":8}}]},"6":{"line":163,"type":"if","locations":[{"start":{"line":163,"column":8},"end":{"line":163,"column":8}},{"start":{"line":163,"column":8},"end":{"line":163,"column":8}}]},"7":{"line":168,"type":"if","locations":[{"start":{"line":168,"column":8},"end":{"line":168,"column":8}},{"start":{"line":168,"column":8},"end":{"line":168,"column":8}}]},"8":{"line":176,"type":"if","locations":[{"start":{"line":176,"column":8},"end":{"line":176,"column":8}},{"start":{"line":176,"column":8},"end":{"line":176,"column":8}}]},"9":{"line":190,"type":"if","locations":[{"start":{"line":190,"column":8},"end":{"line":190,"column":8}},{"start":{"line":190,"column":8},"end":{"line":190,"column":8}}]},"10":{"line":194,"type":"if","locations":[{"start":{"line":194,"column":8},"end":{"line":194,"column":8}},{"start":{"line":194,"column":8},"end":{"line":194,"column":8}}]},"11":{"line":313,"type":"if","locations":[{"start":{"line":313,"column":20},"end":{"line":313,"column":20}},{"start":{"line":313,"column":20},"end":{"line":313,"column":20}}]},"12":{"line":313,"type":"binary-expr","locations":[{"start":{"line":313,"column":24},"end":{"line":313,"column":55}},{"start":{"line":314,"column":24},"end":{"line":314,"column":54}}]},"13":{"line":341,"type":"if","locations":[{"start":{"line":341,"column":20},"end":{"line":341,"column":20}},{"start":{"line":341,"column":20},"end":{"line":341,"column":20}}]},"14":{"line":357,"type":"if","locations":[{"start":{"line":357,"column":8},"end":{"line":357,"column":8}},{"start":{"line":357,"column":8},"end":{"line":357,"column":8}}]},"15":{"line":368,"type":"if","locations":[{"start":{"line":368,"column":8},"end":{"line":368,"column":8}},{"start":{"line":368,"column":8},"end":{"line":368,"column":8}}]},"16":{"line":372,"type":"if","locations":[{"start":{"line":372,"column":12},"end":{"line":372,"column":12}},{"start":{"line":372,"column":12},"end":{"line":372,"column":12}}]},"17":{"line":377,"type":"if","locations":[{"start":{"line":377,"column":16},"end":{"line":377,"column":16}},{"start":{"line":377,"column":16},"end":{"line":377,"column":16}}]},"18":{"line":382,"type":"if","locations":[{"start":{"line":382,"column":12},"end":{"line":382,"column":12}},{"start":{"line":382,"column":12},"end":{"line":382,"column":12}}]},"19":{"line":403,"type":"if","locations":[{"start":{"line":403,"column":12},"end":{"line":403,"column":12}},{"start":{"line":403,"column":12},"end":{"line":403,"column":12}}]},"20":{"line":403,"type":"binary-expr","locations":[{"start":{"line":403,"column":16},"end":{"line":403,"column":43}},{"start":{"line":404,"column":16},"end":{"line":404,"column":42}},{"start":{"line":405,"column":16},"end":{"line":405,"column":48}}]},"21":{"line":420,"type":"if","locations":[{"start":{"line":420,"column":8},"end":{"line":420,"column":8}},{"start":{"line":420,"column":8},"end":{"line":420,"column":8}}]}}};
-}
-__cov_BFKnkB64au5ejsRv6Fcw7Q = __cov_BFKnkB64au5ejsRv6Fcw7Q['/home/travis/build/terrestris/BasiGX/src/view/button/SpatialOperatorBase.js'];
-__cov_BFKnkB64au5ejsRv6Fcw7Q.s['1']++;Ext.define('BasiGX.view.button.SpatialOperatorBase',{extend:'BasiGX.view.button.Base',xtype:'basigx-button-spatial-operator-base',requires:[],viewModel:{data:{invalidResultGeometryText:'The process returned an invalid '+'geometry. Please try again',noValidOrNotEnoughGeometriesSelectedText:'Please select at '+'least 2 valid objects',tooManyFeaturesSelectedText:'Please select {0} objects as '+'maximum. If you want to edit more objects, repeat the '+'operation in multiple steps',masterSlaveFeatureDialogTitle:'Select objects',firstFeatureNameInGrid:'Object 1',secondFeatureNameInGrid:'Object 2',firstGridTitle:'Object to be edited',secondGridTitle:'Helper object',gridDescriptionText:'The objects geometry on the left side will '+'be edited. The object on the right side will remain '+'untouched. Drag and drop objects to switch their assignment',startOperationFromGridText:'Start operation',invalidGridSelectionText:'Invalid selection'}},config:{selectionVectorLayer:null,targetVectorLayer:null,removeSelectedGeometriesAfterOperation:true,copyAttributesFromFirstSelectedFeature:true,maxAllowedFeaturesForOperation:2,featureArray:[],showSelectMasterSlaveFeatureDialog:false},listeners:{click:function(){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['1']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['2']++;this.doProcess();}},doProcess:function(){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['2']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['3']++;var me=this;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['4']++;if(!me.getSelectionVectorLayer()){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['1'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['5']++;Ext.log.error('No selection layer given, aborting');__cov_BFKnkB64au5ejsRv6Fcw7Q.s['6']++;return;}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['1'][1]++;}__cov_BFKnkB64au5ejsRv6Fcw7Q.s['7']++;Ext.each(me.selectionVectorLayer.getSource().getFeatures(),function(feature){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['3']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['8']++;me.getFeatureArray().push(feature);});__cov_BFKnkB64au5ejsRv6Fcw7Q.s['9']++;if(me.getFeatureArray().length>me.getMaxAllowedFeaturesForOperation()){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['2'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['10']++;BasiGX.util.MsgBox.error(Ext.String.format(me.getViewModel().get('tooManyFeaturesSelectedText'),me.getMaxAllowedFeaturesForOperation()));__cov_BFKnkB64au5ejsRv6Fcw7Q.s['11']++;me.setFeatureArray([]);}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['2'][1]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['12']++;if(me.getFeatureArray().length>=2){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['3'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['13']++;if(me.getShowSelectMasterSlaveFeatureDialog()){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['4'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['14']++;me.createSelectMasterSlaveFeatureDialog(me.getFeatureArray());}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['4'][1]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['15']++;var newFeature=me.processSelectedGeometries(me.getFeatureArray());__cov_BFKnkB64au5ejsRv6Fcw7Q.s['16']++;me.handleOperationResult(newFeature);}}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['3'][1]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['17']++;BasiGX.util.MsgBox.error(me.getViewModel().get('noValidOrNotEnoughGeometriesSelectedText'));__cov_BFKnkB64au5ejsRv6Fcw7Q.s['18']++;me.setFeatureArray([]);}}},handleOperationResult:function(newFeatures){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['4']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['19']++;var me=this;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['20']++;if(!newFeatures){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['5'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['21']++;BasiGX.util.MsgBox.error(me.getViewModel().get('invalidResultGeometryText'));__cov_BFKnkB64au5ejsRv6Fcw7Q.s['22']++;me.cleanup();__cov_BFKnkB64au5ejsRv6Fcw7Q.s['23']++;return;}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['5'][1]++;}__cov_BFKnkB64au5ejsRv6Fcw7Q.s['24']++;if(!Ext.isArray(newFeatures)){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['6'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['25']++;newFeatures=[newFeatures];}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['6'][1]++;}__cov_BFKnkB64au5ejsRv6Fcw7Q.s['26']++;if(me.getCopyAttributesFromFirstSelectedFeature()){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['7'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['27']++;Ext.each(newFeatures,function(newFeature){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['5']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['28']++;me.copyAttributes(newFeature);});}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['7'][1]++;}__cov_BFKnkB64au5ejsRv6Fcw7Q.s['29']++;me.addFeaturesToTargetVectorLayer(newFeatures);__cov_BFKnkB64au5ejsRv6Fcw7Q.s['30']++;if(me.getRemoveSelectedGeometriesAfterOperation()){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['8'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['31']++;me.removeOriginalOperationFeatures();}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['8'][1]++;}__cov_BFKnkB64au5ejsRv6Fcw7Q.s['32']++;me.cleanup();},cleanup:function(){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['6']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['33']++;var me=this;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['34']++;me.setFeatureArray([]);__cov_BFKnkB64au5ejsRv6Fcw7Q.s['35']++;if(me.getSelectionVectorLayer()){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['9'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['36']++;me.getSelectionVectorLayer().getSource().clear();}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['9'][1]++;}__cov_BFKnkB64au5ejsRv6Fcw7Q.s['37']++;if(me.highLightLayer){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['10'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['38']++;me.highLightLayer.getSource().clear();}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['10'][1]++;}},createSelectMasterSlaveFeatureDialog:function(featureArray){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['7']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['39']++;var me=this;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['40']++;featureArray[0].displayName=me.getViewModel().get('firstFeatureNameInGrid');__cov_BFKnkB64au5ejsRv6Fcw7Q.s['41']++;featureArray[1].displayName=me.getViewModel().get('secondFeatureNameInGrid');__cov_BFKnkB64au5ejsRv6Fcw7Q.s['42']++;var masterGridStore=Ext.create('Ext.data.Store',{fields:['displayName'],data:[featureArray[0]]});__cov_BFKnkB64au5ejsRv6Fcw7Q.s['43']++;var masterGrid=Ext.create('Ext.grid.Panel',{viewConfig:{plugins:{ptype:'gridviewdragdrop',dragGroup:'masterGridDDGroup',dropGroup:'slaveGridDDGroup'},listeners:{itemmouseenter:function(scope,record){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['8']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['44']++;me.highlightFeature(record.data);}}},store:masterGridStore,columns:[{text:me.getViewModel().get('firstGridTitle'),flex:1,sortable:true,dataIndex:'displayName'}],margins:'0 2 0 0'});__cov_BFKnkB64au5ejsRv6Fcw7Q.s['45']++;var slaveGridStore=Ext.create('Ext.data.Store',{fields:['displayName'],data:[featureArray[1]]});__cov_BFKnkB64au5ejsRv6Fcw7Q.s['46']++;var slaveGrid=Ext.create('Ext.grid.Panel',{viewConfig:{plugins:{ptype:'gridviewdragdrop',dragGroup:'slaveGridDDGroup',dropGroup:'masterGridDDGroup'},listeners:{itemmouseenter:function(scope,record){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['9']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['47']++;me.highlightFeature(record.data);}}},store:slaveGridStore,columns:[{text:me.getViewModel().get('secondGridTitle'),flex:1,sortable:true,dataIndex:'displayName'}],margins:'0 0 0 2'});__cov_BFKnkB64au5ejsRv6Fcw7Q.s['48']++;Ext.create('Ext.window.Window',{title:me.getViewModel().get('masterSlaveFeatureDialogTitle'),name:'masterslavefeaturedialogwin',width:450,height:220,items:[{xtype:'panel',border:false,bodyPadding:5,items:[{xtype:'displayfield',value:me.getViewModel().get('gridDescriptionText')}]},{xtype:'panel',height:100,border:false,layout:{type:'hbox',align:'stretch',padding:5},defaults:{flex:1},items:[masterGrid,slaveGrid]}],buttons:[{text:me.getViewModel().get('startOperationFromGridText'),handler:function(btn){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['10']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['49']++;if((__cov_BFKnkB64au5ejsRv6Fcw7Q.b['12'][0]++,masterGridStore.getCount()>=1)&&(__cov_BFKnkB64au5ejsRv6Fcw7Q.b['12'][1]++,slaveGridStore.getCount()>=1)){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['11'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['50']++;me.setFeatureArray([]);__cov_BFKnkB64au5ejsRv6Fcw7Q.s['51']++;var masterFeature=masterGridStore.getAt(0).data;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['52']++;var slaveFeature=slaveGridStore.getAt(0).data;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['53']++;slaveFeature.keepFeature=true;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['54']++;me.getFeatureArray().push(masterFeature);__cov_BFKnkB64au5ejsRv6Fcw7Q.s['55']++;me.getFeatureArray().push(slaveFeature);__cov_BFKnkB64au5ejsRv6Fcw7Q.s['56']++;var newFeature=me.processSelectedGeometries(me.getFeatureArray());__cov_BFKnkB64au5ejsRv6Fcw7Q.s['57']++;btn.up('window[name=masterslavefeaturedialogwin]').destroy();__cov_BFKnkB64au5ejsRv6Fcw7Q.s['58']++;me.handleOperationResult(newFeature);}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['11'][1]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['59']++;BasiGX.util.MsgBox.error(me.getViewModel().get('invalidGridSelectionText'));}}}],listeners:{'close':function(){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['11']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['60']++;if(me.highLightLayer){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['13'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['61']++;me.highLightLayer.getSource().clear();}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['13'][1]++;}__cov_BFKnkB64au5ejsRv6Fcw7Q.s['62']++;me.setFeatureArray([]);}}}).showAt(0);},addFeaturesToTargetVectorLayer:function(features){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['12']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['63']++;var me=this;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['64']++;if(me.getTargetVectorLayer()){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['14'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['65']++;me.getTargetVectorLayer().getSource().addFeatures(features);}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['14'][1]++;}},removeOriginalOperationFeatures:function(){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['13']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['66']++;var me=this;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['67']++;var layer=me.getTargetVectorLayer();__cov_BFKnkB64au5ejsRv6Fcw7Q.s['68']++;if(!layer){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['15'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['69']++;return;}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['15'][1]++;}__cov_BFKnkB64au5ejsRv6Fcw7Q.s['70']++;Ext.each(me.getFeatureArray(),function(feature){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['14']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['71']++;if(feature.keepFeature){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['16'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['72']++;return;}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['16'][1]++;}__cov_BFKnkB64au5ejsRv6Fcw7Q.s['73']++;var match=false;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['74']++;Ext.each(layer.getSource().getFeatures(),function(feat){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['15']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['75']++;if(feature===feat){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['17'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['76']++;match=true;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['77']++;return false;}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['17'][1]++;}});__cov_BFKnkB64au5ejsRv6Fcw7Q.s['78']++;if(match){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['18'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['79']++;layer.getSource().removeFeature(feature);}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['18'][1]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['80']++;Ext.log.warn('Could not remove an original feature, as the '+'target and source layer seem to differ');}});},copyAttributes:function(targetFeature){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['16']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['81']++;var me=this;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['82']++;var firstFeature=me.getFeatureArray()[0];__cov_BFKnkB64au5ejsRv6Fcw7Q.s['83']++;Ext.iterate(firstFeature.getProperties(),function(key,val){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['17']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['84']++;if((__cov_BFKnkB64au5ejsRv6Fcw7Q.b['20'][0]++,key.toLowerCase()!=='fid')&&(__cov_BFKnkB64au5ejsRv6Fcw7Q.b['20'][1]++,key.toLowerCase()!=='id')&&(__cov_BFKnkB64au5ejsRv6Fcw7Q.b['20'][2]++,key.toLowerCase()!=='geometry')){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['19'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['85']++;targetFeature.set(key,val);}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['19'][1]++;}});__cov_BFKnkB64au5ejsRv6Fcw7Q.s['86']++;return targetFeature;},highlightFeature:function(feature){__cov_BFKnkB64au5ejsRv6Fcw7Q.f['18']++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['87']++;if(!this.highLightLayer){__cov_BFKnkB64au5ejsRv6Fcw7Q.b['21'][0]++;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['88']++;this.highLightLayer=new ol.layer.Vector({source:new ol.source.Vector(),style:new ol.style.Style({stroke:new ol.style.Stroke({color:[255,255,0,1],width:5}),image:new ol.style.Circle({radius:7,fill:new ol.style.Fill({color:[255,255,0,1]})})})});__cov_BFKnkB64au5ejsRv6Fcw7Q.s['89']++;var displayInLayerSwitcherKey=BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['90']++;this.highLightLayer.set(displayInLayerSwitcherKey,false);__cov_BFKnkB64au5ejsRv6Fcw7Q.s['91']++;var map=BasiGX.util.Map.getMapComponent().map;__cov_BFKnkB64au5ejsRv6Fcw7Q.s['92']++;map.addLayer(this.highLightLayer);}else{__cov_BFKnkB64au5ejsRv6Fcw7Q.b['21'][1]++;}__cov_BFKnkB64au5ejsRv6Fcw7Q.s['93']++;this.highLightLayer.getSource().clear();__cov_BFKnkB64au5ejsRv6Fcw7Q.s['94']++;this.highLightLayer.getSource().addFeatures([feature]);}});
+    requires: [
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            invalidResultGeometryText: 'The process returned an invalid ' +
+                'geometry. Please try again',
+            noValidOrNotEnoughGeometriesSelectedText: 'Please select at ' +
+                'least 2 valid objects',
+            tooManyFeaturesSelectedText: 'Please select {0} objects as ' +
+                'maximum. If you want to edit more objects, repeat the ' +
+                'operation in multiple steps',
+            masterSlaveFeatureDialogTitle: 'Select objects',
+            firstFeatureNameInGrid: 'Object 1',
+            secondFeatureNameInGrid: 'Object 2',
+            firstGridTitle: 'Object to be edited',
+            secondGridTitle: 'Helper object',
+            gridDescriptionText: 'The objects geometry on the left side will ' +
+                'be edited. The object on the right side will remain ' +
+                'untouched. Drag and drop objects to switch their assignment',
+            startOperationFromGridText: 'Start operation',
+            invalidGridSelectionText: 'Invalid selection'
+        }
+    },
+
+    /**
+     *
+     */
+    // bind: {
+    //     text: '{copyObjectBtnText}'
+    // },
+
+    config: {
+        /**
+         * Reference to the selectionVectorLayer
+         */
+        selectionVectorLayer: null,
+
+        /**
+         * Reference to the targetVectorLayer
+         */
+        targetVectorLayer: null,
+
+        /**
+         * if set to true, the selected geometries for the spatial operation
+         * will be removed after the operation, as a new one is derived
+         */
+        removeSelectedGeometriesAfterOperation: true,
+
+        /**
+         * copy the attributes of the first selected feature if set to true
+         */
+        copyAttributesFromFirstSelectedFeature: true,
+
+        /**
+         * the number of features which are allowed to process together.
+         * Union may use a high number without problems,
+         * intersect will be restricted to 2
+         */
+        maxAllowedFeaturesForOperation: 2,
+
+        /**
+         * an array containing the geometries that should be processed
+         */
+        featureArray: [],
+
+        /**
+         * a boolean to indicate that a dialog window should be shown which
+         * gives the user the opportunity to select which feature should be
+         * used as master and which one as slave for the spatial operation
+         */
+        showSelectMasterSlaveFeatureDialog: false
+    },
+
+    listeners: {
+        click: function() {
+            this.doProcess();
+        }
+    },
+
+    /**
+     * Main method starting the spatial operation after validating the input
+     */
+    doProcess: function() {
+        var me = this;
+        if (!me.getSelectionVectorLayer()) {
+            Ext.log.error('No selection layer given, aborting');
+            return;
+        }
+
+        // push the selected features from the select control
+        Ext.each(me.selectionVectorLayer.getSource().
+            getFeatures(), function(feature) {
+            me.getFeatureArray().push(feature);
+        });
+
+        if (me.getFeatureArray().length >
+            me.getMaxAllowedFeaturesForOperation()) {
+            BasiGX.util.MsgBox.error(Ext.String.format(
+                me.getViewModel().get('tooManyFeaturesSelectedText'),
+                me.getMaxAllowedFeaturesForOperation()));
+            me.setFeatureArray([]);
+        } else if (me.getFeatureArray().length >= 2) {
+            // check if we have to display a dialog window for processing
+            if (me.getShowSelectMasterSlaveFeatureDialog()) {
+                me.createSelectMasterSlaveFeatureDialog(me.getFeatureArray());
+            } else {
+                // do the spatial operation directly
+                var newFeature = me.processSelectedGeometries(
+                    me.getFeatureArray());
+                me.handleOperationResult(newFeature);
+            }
+        } else {
+            BasiGX.util.MsgBox.error(
+                me.getViewModel().get(
+                    'noValidOrNotEnoughGeometriesSelectedText'));
+            me.setFeatureArray([]);
+        }
+    },
+
+    /**
+     * Method used on callback after spatial operation
+     *
+     * @param {ol.Feature|ol.Feature[]} newFeatures The feature generated by the
+     * spatial operation
+     */
+    handleOperationResult: function(newFeatures) {
+        var me = this;
+        // check for valid geometry
+        if (!newFeatures) {
+            BasiGX.util.MsgBox.error(
+                me.getViewModel().get('invalidResultGeometryText'));
+            me.cleanup();
+            return;
+        }
+        if (!Ext.isArray(newFeatures)) {
+            newFeatures = [newFeatures];
+        }
+        // copy the attributes from the first selected feature to the
+        // new target feature
+        if (me.getCopyAttributesFromFirstSelectedFeature()) {
+            Ext.each(newFeatures, function(newFeature) {
+                me.copyAttributes(newFeature);
+            });
+        }
+        // add the new feature to the layer
+        me.addFeaturesToTargetVectorLayer(newFeatures);
+        // remove original geometries after operation
+        if (me.getRemoveSelectedGeometriesAfterOperation()) {
+            me.removeOriginalOperationFeatures();
+        }
+        me.cleanup();
+    },
+
+    /**
+     * Resets the selections and highlights after processing
+     */
+    cleanup: function() {
+        var me = this;
+        // reset the geometries Array
+        me.setFeatureArray([]);
+        // cleanup selections
+        if (me.getSelectionVectorLayer()) {
+            me.getSelectionVectorLayer().getSource().clear();
+        }
+        // cleanup highlight features
+        if (me.highLightLayer) {
+            me.highLightLayer.getSource().clear();
+        }
+    },
+
+    /**
+     * Creates an `Ext.window.Window` to offer the user the option to select
+     * which features shall be used in which way during the spatial operation
+     *
+     * @param {ol.Feature[]} featureArray The array of features to use
+     */
+    createSelectMasterSlaveFeatureDialog: function(featureArray) {
+        var me = this;
+
+        // setting the displayname for the features
+        featureArray[0].displayName = me.getViewModel().get(
+            'firstFeatureNameInGrid');
+        featureArray[1].displayName = me.getViewModel().get(
+            'secondFeatureNameInGrid');
+
+        var masterGridStore = Ext.create('Ext.data.Store', {
+            fields: ['displayName'],
+            data: [featureArray[0]]
+        });
+
+        var masterGrid = Ext.create('Ext.grid.Panel', {
+            viewConfig: {
+                plugins: {
+                    ptype: 'gridviewdragdrop',
+                    dragGroup: 'masterGridDDGroup',
+                    dropGroup: 'slaveGridDDGroup'
+                },
+                listeners: {
+                    itemmouseenter: function(scope, record) {
+                        me.highlightFeature(record.data);
+                    }
+                }
+            },
+            store: masterGridStore,
+            columns: [
+                {
+                    text: me.getViewModel().get('firstGridTitle'),
+                    flex: 1,
+                    sortable: true,
+                    dataIndex: 'displayName'
+                }
+            ],
+            margins: '0 2 0 0'
+        });
+
+        var slaveGridStore = Ext.create('Ext.data.Store', {
+            fields: ['displayName'],
+            data: [featureArray[1]]
+        });
+
+        var slaveGrid = Ext.create('Ext.grid.Panel', {
+            viewConfig: {
+                plugins: {
+                    ptype: 'gridviewdragdrop',
+                    dragGroup: 'slaveGridDDGroup',
+                    dropGroup: 'masterGridDDGroup'
+                },
+                listeners: {
+                    itemmouseenter: function(scope, record) {
+                        me.highlightFeature(record.data);
+                    }
+                }
+            },
+            store: slaveGridStore,
+            columns: [
+                {
+                    text: me.getViewModel().get('secondGridTitle'),
+                    flex: 1,
+                    sortable: true,
+                    dataIndex: 'displayName'
+                }
+            ],
+            margins: '0 0 0 2'
+        });
+
+        Ext.create('Ext.window.Window', {
+            title: me.getViewModel().get('masterSlaveFeatureDialogTitle'),
+            name: 'masterslavefeaturedialogwin',
+            width: 450,
+            height: 220,
+            items: [
+                {
+                    xtype: 'panel',
+                    border: false,
+                    bodyPadding: 5,
+                    items: [
+                        {
+                            xtype: 'displayfield',
+                            value: me.getViewModel().get('gridDescriptionText')
+                        }
+                    ]
+                },
+                {
+                    xtype: 'panel',
+                    height: 100,
+                    border: false,
+                    layout: {
+                        type: 'hbox',
+                        align: 'stretch',
+                        padding: 5
+                    },
+                    defaults: {
+                        flex: 1
+                    },
+                    items: [
+                        masterGrid,
+                        slaveGrid
+                    ]
+                }
+            ],
+            buttons: [{
+                text: me.getViewModel().get('startOperationFromGridText'),
+                handler: function(btn) {
+                    //check if at least one feature is on every side
+                    if (masterGridStore.getCount() >= 1 &&
+                        slaveGridStore.getCount() >= 1) {
+                        // reset the featurearray and reorder it
+                        me.setFeatureArray([]);
+                        var masterFeature = masterGridStore.getAt(0).data;
+                        var slaveFeature = slaveGridStore.getAt(0).data;
+
+                        // mark the second feature to stay after processing
+                        slaveFeature.keepFeature = true;
+
+                        me.getFeatureArray().push(masterFeature);
+                        me.getFeatureArray().push(slaveFeature);
+
+                        var newFeature = me.processSelectedGeometries(
+                            me.getFeatureArray());
+
+                        btn.up('window[name=masterslavefeaturedialogwin]').
+                            destroy();
+                        me.handleOperationResult(newFeature);
+                    } else {
+                        BasiGX.util.MsgBox.error(me.getViewModel().get(
+                            'invalidGridSelectionText'));
+                    }
+                }
+            }],
+            listeners: {
+                // remove all hovered features on window close
+                'close': function() {
+                    if (me.highLightLayer) {
+                        me.highLightLayer.getSource().clear();
+                    }
+                    me.setFeatureArray([]);
+                }
+            }
+        }).showAt(0);
+    },
+
+    /**
+     * Adds the newly generated features to the targetVectorLayer
+     *
+     * @param {ol.Feature[]} features The features to add
+     */
+    addFeaturesToTargetVectorLayer: function(features) {
+        var me = this;
+        if (me.getTargetVectorLayer()) {
+            me.getTargetVectorLayer().getSource().addFeatures(features);
+        }
+    },
+
+    /**
+     * Remove original features after the operation
+     */
+    removeOriginalOperationFeatures: function() {
+        var me = this;
+        var layer = me.getTargetVectorLayer();
+        if (!layer) {
+            return;
+        }
+        Ext.each(me.getFeatureArray(), function(feature) {
+            if (feature.keepFeature) {
+                return;
+            }
+            var match = false;
+            Ext.each(layer.getSource().getFeatures(), function(feat) {
+                if (feature === feat) {
+                    match = true;
+                    return false;
+                }
+            });
+            if (match) {
+                layer.getSource().removeFeature(feature);
+            } else {
+                Ext.log.warn('Could not remove an original feature, as the ' +
+                    'target and source layer seem to differ');
+            }
+        });
+    },
+
+    /**
+     * Copy the attributes of the first selected feature
+     * to the new target feature
+     *
+     * @param {ol.Feature} targetFeature The feature that shall receive
+     *     the new attributes
+     * @return {ol.Feature} The final feature
+     */
+    copyAttributes: function(targetFeature) {
+        var me = this;
+        var firstFeature = me.getFeatureArray()[0];
+        Ext.iterate(firstFeature.getProperties(), function(key, val) {
+            if (key.toLowerCase() !== 'fid' &&
+                key.toLowerCase() !== 'id' &&
+                key.toLowerCase() !== 'geometry') {
+                // var prop = {};
+                // prop[key] = val;
+                // targetFeature.setProperties(prop);
+                targetFeature.set(key, val);
+            }
+        });
+        return targetFeature;
+    },
+
+    /**
+     * Highlights a feature
+     * @param {ol.Feature} feature The feature to highlight
+     */
+    highlightFeature: function(feature) {
+        if (!this.highLightLayer) {
+            this.highLightLayer = new ol.layer.Vector({
+                source: new ol.source.Vector(),
+                style: new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: [255, 255, 0, 1],
+                        width: 5
+                    }),
+                    image: new ol.style.Circle({
+                        radius: 7,
+                        fill: new ol.style.Fill({
+                            color: [255, 255, 0, 1]
+                        })
+                    })
+                })
+            });
+            var displayInLayerSwitcherKey =
+                BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+            this.highLightLayer.set(displayInLayerSwitcherKey, false);
+            var map = BasiGX.util.Map.getMapComponent().map;
+            map.addLayer(this.highLightLayer);
+        }
+        this.highLightLayer.getSource().clear();
+        this.highLightLayer.getSource().addFeatures([feature]);
+    }
+});

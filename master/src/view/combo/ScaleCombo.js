@@ -1,9 +1,223 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * ScaleCombo
+ *
+ * Lets the user control the maps scale with a combobox
+ *
+ * @class BasiGX.view.combo.ScaleCombo
+ */
+Ext.define('BasiGX.view.combo.ScaleCombo', {
+    xtype: 'basigx-combo-scale',
+    extend: 'Ext.form.field.ComboBox',
+    requires: [
+    ],
 
-var __cov_ycuTgTZmMYZ4lqID3Xabnw = (Function('return this'))();
-if (!__cov_ycuTgTZmMYZ4lqID3Xabnw.__coverage__) { __cov_ycuTgTZmMYZ4lqID3Xabnw.__coverage__ = {}; }
-__cov_ycuTgTZmMYZ4lqID3Xabnw = __cov_ycuTgTZmMYZ4lqID3Xabnw.__coverage__;
-if (!(__cov_ycuTgTZmMYZ4lqID3Xabnw['/home/travis/build/terrestris/BasiGX/src/view/combo/ScaleCombo.js'])) {
-   __cov_ycuTgTZmMYZ4lqID3Xabnw['/home/travis/build/terrestris/BasiGX/src/view/combo/ScaleCombo.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/combo/ScaleCombo.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0},"fnMap":{"1":{"name":"(anonymous_1)","line":119,"loc":{"start":{"line":119,"column":19},"end":{"line":119,"column":30}}},"2":{"name":"(anonymous_2)","line":159,"loc":{"start":{"line":159,"column":15},"end":{"line":159,"column":26}}},"3":{"name":"(anonymous_3)","line":170,"loc":{"start":{"line":170,"column":19},"end":{"line":170,"column":40}}},"4":{"name":"(anonymous_4)","line":184,"loc":{"start":{"line":184,"column":28},"end":{"line":184,"column":42}}},"5":{"name":"(anonymous_5)","line":215,"loc":{"start":{"line":215,"column":21},"end":{"line":215,"column":42}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":223,"column":3}},"2":{"start":{"line":120,"column":8},"end":{"line":120,"column":22}},"3":{"start":{"line":122,"column":8},"end":{"line":124,"column":9}},"4":{"start":{"line":123,"column":12},"end":{"line":123,"column":64}},"5":{"start":{"line":125,"column":8},"end":{"line":125,"column":39}},"6":{"start":{"line":129,"column":8},"end":{"line":135,"column":11}},"7":{"start":{"line":137,"column":8},"end":{"line":137,"column":30}},"8":{"start":{"line":139,"column":8},"end":{"line":139,"column":24}},"9":{"start":{"line":142,"column":8},"end":{"line":142,"column":45}},"10":{"start":{"line":145,"column":8},"end":{"line":145,"column":46}},"11":{"start":{"line":148,"column":8},"end":{"line":150,"column":10}},"12":{"start":{"line":151,"column":8},"end":{"line":151,"column":78}},"13":{"start":{"line":152,"column":8},"end":{"line":152,"column":36}},"14":{"start":{"line":160,"column":8},"end":{"line":160,"column":51}},"15":{"start":{"line":161,"column":8},"end":{"line":161,"column":33}},"16":{"start":{"line":171,"column":8},"end":{"line":171,"column":64}},"17":{"start":{"line":185,"column":8},"end":{"line":185,"column":33}},"18":{"start":{"line":186,"column":8},"end":{"line":188,"column":9}},"19":{"start":{"line":187,"column":12},"end":{"line":187,"column":19}},"20":{"start":{"line":189,"column":8},"end":{"line":189,"column":46}},"21":{"start":{"line":190,"column":8},"end":{"line":190,"column":36}},"22":{"start":{"line":192,"column":8},"end":{"line":192,"column":76}},"23":{"start":{"line":194,"column":8},"end":{"line":202,"column":9}},"24":{"start":{"line":195,"column":12},"end":{"line":195,"column":57}},"25":{"start":{"line":196,"column":12},"end":{"line":196,"column":69}},"26":{"start":{"line":197,"column":12},"end":{"line":200,"column":14}},"27":{"start":{"line":201,"column":12},"end":{"line":201,"column":27}},"28":{"start":{"line":203,"column":8},"end":{"line":203,"column":34}},"29":{"start":{"line":216,"column":8},"end":{"line":216,"column":22}},"30":{"start":{"line":217,"column":8},"end":{"line":217,"column":64}},"31":{"start":{"line":218,"column":8},"end":{"line":218,"column":30}},"32":{"start":{"line":219,"column":8},"end":{"line":219,"column":49}},"33":{"start":{"line":220,"column":8},"end":{"line":220,"column":51}},"34":{"start":{"line":221,"column":8},"end":{"line":221,"column":21}}},"branchMap":{"1":{"line":122,"type":"if","locations":[{"start":{"line":122,"column":8},"end":{"line":122,"column":8}},{"start":{"line":122,"column":8},"end":{"line":122,"column":8}}]},"2":{"line":186,"type":"if","locations":[{"start":{"line":186,"column":8},"end":{"line":186,"column":8}},{"start":{"line":186,"column":8},"end":{"line":186,"column":8}}]},"3":{"line":186,"type":"binary-expr","locations":[{"start":{"line":186,"column":12},"end":{"line":186,"column":32}},{"start":{"line":186,"column":36},"end":{"line":186,"column":58}}]},"4":{"line":194,"type":"if","locations":[{"start":{"line":194,"column":8},"end":{"line":194,"column":8}},{"start":{"line":194,"column":8},"end":{"line":194,"column":8}}]}}};
-}
-__cov_ycuTgTZmMYZ4lqID3Xabnw = __cov_ycuTgTZmMYZ4lqID3Xabnw['/home/travis/build/terrestris/BasiGX/src/view/combo/ScaleCombo.js'];
-__cov_ycuTgTZmMYZ4lqID3Xabnw.s['1']++;Ext.define('BasiGX.view.combo.ScaleCombo',{xtype:'basigx-combo-scale',extend:'Ext.form.field.ComboBox',requires:[],viewModel:{data:{fieldLabel:null,documentation:'<h2>Maßstabswahl</h2>\u2022 Wählen Sie mit Hilfe '+'dieser ComboBox den gewünschten Maßstab aus.<br>\u2022 Zoomen '+'Sie innerhalb der Karte, so aktualisiert sich die ComboBox '+'entsprechend mit dem aktuellen Maßstab'}},bind:{fieldLabel:'{fieldLabel}'},queryMode:'local',forceSelection:false,allowBlank:false,width:120,editable:false,displayField:'scale',valueField:'resolution',fields:['scale','resolution'],boundEventKeys:[],map:null,config:{scales:[{scale:'1:2.000.000',resolution:560},{scale:'1:1.000.000',resolution:280},{scale:'1:500.000',resolution:140},{scale:'1:250.000',resolution:70},{scale:'1:100.000',resolution:28},{scale:'1:50.000',resolution:14},{scale:'1:25.000',resolution:7},{scale:'1:10.000',resolution:2.8},{scale:'1:5.000',resolution:1.4},{scale:'1:2.500',resolution:0.7},{scale:'1:1.000',resolution:0.28},{scale:'1:500',resolution:0.14}]},initComponent:function(){__cov_ycuTgTZmMYZ4lqID3Xabnw.f['1']++;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['2']++;var me=this;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['3']++;if(!me.map){__cov_ycuTgTZmMYZ4lqID3Xabnw.b['1'][0]++;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['4']++;me.map=BasiGX.util.Map.getMapComponent().getMap();}else{__cov_ycuTgTZmMYZ4lqID3Xabnw.b['1'][1]++;}__cov_ycuTgTZmMYZ4lqID3Xabnw.s['5']++;var mapView=me.map.getView();__cov_ycuTgTZmMYZ4lqID3Xabnw.s['6']++;var scaleStore=Ext.create('Ext.data.Store',{sorters:[{property:'resolution',direction:'DESC'}],data:me.getScales()});__cov_ycuTgTZmMYZ4lqID3Xabnw.s['7']++;me.store=scaleStore;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['8']++;me.callParent();__cov_ycuTgTZmMYZ4lqID3Xabnw.s['9']++;me.setValue(mapView.getResolution());__cov_ycuTgTZmMYZ4lqID3Xabnw.s['10']++;me.on('select',me.onComboSelect,me);__cov_ycuTgTZmMYZ4lqID3Xabnw.s['11']++;var bufferedUpdateMapResChange=Ext.Function.createBuffered(me.updateComboOnMapChange,50,me);__cov_ycuTgTZmMYZ4lqID3Xabnw.s['12']++;var key=mapView.on('change:resolution',bufferedUpdateMapResChange);__cov_ycuTgTZmMYZ4lqID3Xabnw.s['13']++;me.boundEventKeys.push(key);},onDestroy:function(){__cov_ycuTgTZmMYZ4lqID3Xabnw.f['2']++;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['14']++;ol.Observable.unByKey(this.boundEventKeys);__cov_ycuTgTZmMYZ4lqID3Xabnw.s['15']++;this.boundEventKeys=[];},onComboSelect:function(combo,rec){__cov_ycuTgTZmMYZ4lqID3Xabnw.f['3']++;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['16']++;this.map.getView().setResolution(rec.get('resolution'));},updateComboOnMapChange:function(evt){__cov_ycuTgTZmMYZ4lqID3Xabnw.f['4']++;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['17']++;var mapView=evt.target;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['18']++;if((__cov_ycuTgTZmMYZ4lqID3Xabnw.b['3'][0]++,mapView.getAnimating)&&(__cov_ycuTgTZmMYZ4lqID3Xabnw.b['3'][1]++,mapView.getAnimating())){__cov_ycuTgTZmMYZ4lqID3Xabnw.b['2'][0]++;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['19']++;return;}else{__cov_ycuTgTZmMYZ4lqID3Xabnw.b['2'][1]++;}__cov_ycuTgTZmMYZ4lqID3Xabnw.s['20']++;var resolution=mapView.get(evt.key);__cov_ycuTgTZmMYZ4lqID3Xabnw.s['21']++;var store=this.getStore();__cov_ycuTgTZmMYZ4lqID3Xabnw.s['22']++;var matchInStore=store.findExact('resolution',resolution)>=0;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['23']++;if(!matchInStore){__cov_ycuTgTZmMYZ4lqID3Xabnw.b['4'][0]++;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['24']++;var scale=this.getCurrentScale(resolution);__cov_ycuTgTZmMYZ4lqID3Xabnw.s['25']++;var dspScale='1:'+Math.round(scale).toLocaleString();__cov_ycuTgTZmMYZ4lqID3Xabnw.s['26']++;var rec={scale:dspScale,resolution:resolution};__cov_ycuTgTZmMYZ4lqID3Xabnw.s['27']++;store.add(rec);}else{__cov_ycuTgTZmMYZ4lqID3Xabnw.b['4'][1]++;}__cov_ycuTgTZmMYZ4lqID3Xabnw.s['28']++;this.setValue(resolution);},getCurrentScale:function(resolution){__cov_ycuTgTZmMYZ4lqID3Xabnw.f['5']++;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['29']++;var me=this;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['30']++;var units=me.map.getView().getProjection().getUnits();__cov_ycuTgTZmMYZ4lqID3Xabnw.s['31']++;var dpi=25.4/0.28;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['32']++;var mpu=ol.proj.METERS_PER_UNIT[units];__cov_ycuTgTZmMYZ4lqID3Xabnw.s['33']++;var scale=resolution*mpu*39.37*dpi;__cov_ycuTgTZmMYZ4lqID3Xabnw.s['34']++;return scale;}});
+    viewModel: {
+        data: {
+            fieldLabel: null,
+            documentation: '<h2>Maßstabswahl</h2>• Wählen Sie mit Hilfe ' +
+                'dieser ComboBox den gewünschten Maßstab aus.<br>• Zoomen ' +
+                'Sie innerhalb der Karte, so aktualisiert sich die ComboBox ' +
+                'entsprechend mit dem aktuellen Maßstab'
+        }
+    },
+
+    bind: {
+        fieldLabel: '{fieldLabel}'
+    },
+
+    /**
+     *
+     */
+    queryMode: 'local',
+
+    /**
+     *
+     */
+    forceSelection: false,
+
+    /**
+     *
+     */
+    allowBlank: false,
+
+    /**
+     *
+     */
+    width: 120,
+
+    /**
+     *
+     */
+    editable: false,
+
+    /**
+     *
+     */
+    displayField: 'scale',
+
+    /**
+     *
+     */
+    valueField: 'resolution',
+
+    /**
+     *
+     */
+    fields: ['scale', 'resolution'],
+
+    /**
+     * Will hold the event keys of any listeners we bind to openlayers objects,
+     * so that we can unbind them once we get destroyed.
+     *
+     * @private
+     */
+    boundEventKeys: [],
+
+    /**
+     *
+     */
+    map: null,
+
+    config: {
+        /**
+         *
+         */
+        scales: [
+            {scale: '1:2.000.000', resolution: 560},
+            {scale: '1:1.000.000', resolution: 280},
+            {scale: '1:500.000', resolution: 140},
+            {scale: '1:250.000', resolution: 70},
+            {scale: '1:100.000', resolution: 28},
+            {scale: '1:50.000', resolution: 14},
+            {scale: '1:25.000', resolution: 7},
+            {scale: '1:10.000', resolution: 2.8},
+            {scale: '1:5.000', resolution: 1.4},
+            {scale: '1:2.500', resolution: 0.7},
+            {scale: '1:1.000', resolution: 0.28},
+            {scale: '1:500', resolution: 0.14}
+        ]
+    },
+
+    /**
+     *
+     */
+    initComponent: function() {
+        var me = this;
+
+        if (!me.map) {
+            me.map = BasiGX.util.Map.getMapComponent().getMap();
+        }
+        var mapView = me.map.getView();
+
+        // using hard scales here as there is no way currently known to
+        // retrieve all resolutions from the map
+        var scaleStore = Ext.create('Ext.data.Store', {
+            sorters: [{
+                property: 'resolution',
+                direction: 'DESC'
+            }],
+            data: me.getScales()
+        });
+
+        me.store = scaleStore;
+
+        me.callParent();
+
+        // set the correct default value
+        me.setValue(mapView.getResolution());
+
+        // register listeners to update combo and map
+        me.on('select', me.onComboSelect, me);
+
+        // eventually update the combo when map-resolution changes
+        var bufferedUpdateMapResChange = Ext.Function.createBuffered(
+            me.updateComboOnMapChange, 50, me
+        );
+        var key = mapView.on('change:resolution', bufferedUpdateMapResChange);
+        me.boundEventKeys.push(key);
+    },
+
+    /**
+     * Unregister any listeners we may have added to openlayers components when
+     * the combo is destroyed.
+     */
+    onDestroy: function() {
+        ol.Observable.unByKey(this.boundEventKeys);
+        this.boundEventKeys = [];
+    },
+
+    /**
+     * Sets the map resolution to the selected value.
+     *
+     * @param {BasiGX.view.combo.ScaleCombo} combo The scale combo.
+     * @param {Ext.data.Model} rec The selected record.
+     */
+    onComboSelect: function(combo, rec) {
+        this.map.getView().setResolution(rec.get('resolution'));
+    },
+
+    /**
+     * This method updates the combo with the current maps scale.
+     *
+     * If the current scale is not available in the scaleStore, it will
+     * be created and added. This way we support maps with different scales than
+     * the hardwired ones in our scaleStore
+     *
+     * @param {ol.events.Event} evt The event from the `change:resolution`
+     *     event.
+     */
+    updateComboOnMapChange: function(evt) {
+        var mapView = evt.target;
+        if (mapView.getAnimating && mapView.getAnimating()) {
+            return; // Do not update the combo while we are animating
+        }
+        var resolution = mapView.get(evt.key); // map.get('resolution')
+        var store = this.getStore();
+
+        var matchInStore = (store.findExact('resolution', resolution) >= 0);
+
+        if (!matchInStore) {
+            var scale = this.getCurrentScale(resolution);
+            var dspScale = '1:' + Math.round(scale).toLocaleString();
+            var rec = {
+                scale: dspScale,
+                resolution: resolution
+            };
+            store.add(rec);
+        }
+        this.setValue(resolution);
+
+    },
+
+    /**
+     * A little helper method for getting a scale for a given resolution.
+     *
+     * TODO I think we have this elsewhere as well. We should reuse it probably.
+     *
+     * @param {Number} resolution The resolution to convert.
+     * @return {Number} The calculated scale.
+     */
+    getCurrentScale: function(resolution) {
+        var me = this;
+        var units = me.map.getView().getProjection().getUnits();
+        var dpi = 25.4 / 0.28;
+        var mpu = ol.proj.METERS_PER_UNIT[units];
+        var scale = resolution * mpu * 39.37 * dpi;
+        return scale;
+    }
+});

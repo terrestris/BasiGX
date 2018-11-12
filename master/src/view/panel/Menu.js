@@ -1,9 +1,86 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Menu Panel
+ *
+ * Used to show a menu containing different panels of your choice, e.g.
+ * the print form panel
+ *
+ * @class BasiGX.view.panel.Menu
+ */
+Ext.define('BasiGX.view.panel.Menu', {
+    extend: 'Ext.panel.Panel',
+    xtype: 'basigx-panel-menu',
 
-var __cov_ajDADfhHl1LH4qb$AF3sLw = (Function('return this'))();
-if (!__cov_ajDADfhHl1LH4qb$AF3sLw.__coverage__) { __cov_ajDADfhHl1LH4qb$AF3sLw.__coverage__ = {}; }
-__cov_ajDADfhHl1LH4qb$AF3sLw = __cov_ajDADfhHl1LH4qb$AF3sLw.__coverage__;
-if (!(__cov_ajDADfhHl1LH4qb$AF3sLw['/home/travis/build/terrestris/BasiGX/src/view/panel/Menu.js'])) {
-   __cov_ajDADfhHl1LH4qb$AF3sLw['/home/travis/build/terrestris/BasiGX/src/view/panel/Menu.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/panel/Menu.js","s":{"1":0,"2":0,"3":0,"4":0},"b":{"1":[0,0]},"f":{"1":0},"fnMap":{"1":{"name":"(anonymous_1)","line":75,"loc":{"start":{"line":75,"column":39},"end":{"line":75,"column":54}}}},"statementMap":{"1":{"start":{"line":24,"column":0},"end":{"line":86,"column":3}},"2":{"start":{"line":76,"column":8},"end":{"line":84,"column":9}},"3":{"start":{"line":77,"column":12},"end":{"line":79,"column":15}},"4":{"start":{"line":81,"column":12},"end":{"line":83,"column":15}}},"branchMap":{"1":{"line":76,"type":"if","locations":[{"start":{"line":76,"column":8},"end":{"line":76,"column":8}},{"start":{"line":76,"column":8},"end":{"line":76,"column":8}}]}}};
-}
-__cov_ajDADfhHl1LH4qb$AF3sLw = __cov_ajDADfhHl1LH4qb$AF3sLw['/home/travis/build/terrestris/BasiGX/src/view/panel/Menu.js'];
-__cov_ajDADfhHl1LH4qb$AF3sLw.s['1']++;Ext.define('BasiGX.view.panel.Menu',{extend:'Ext.panel.Panel',xtype:'basigx-panel-menu',requires:['Ext.layout.container.Accordion','Ext.app.ViewModel'],viewModel:{data:{closedMenuTitle:'Menu schließen',openedMenuTitle:'Menu anzeigen'}},defaultListenerScope:true,headerPosition:'bottom',collapsible:true,hideCollapseTool:true,titleCollapse:true,titleAlign:'center',activeItem:1,defaults:{hideCollapseTool:true,titleCollapse:true},layout:{type:'accordion',titleCollapse:false,animate:true},items:[],listeners:{collapse:'setTitleAccordingToCollapsedState',expand:'setTitleAccordingToCollapsedState',afterrender:'setTitleAccordingToCollapsedState'},setTitleAccordingToCollapsedState:function(menu){__cov_ajDADfhHl1LH4qb$AF3sLw.f['1']++;__cov_ajDADfhHl1LH4qb$AF3sLw.s['2']++;if(menu.getCollapsed()===false){__cov_ajDADfhHl1LH4qb$AF3sLw.b['1'][0]++;__cov_ajDADfhHl1LH4qb$AF3sLw.s['3']++;menu.setBind({title:'{closedMenuTitle}'});}else{__cov_ajDADfhHl1LH4qb$AF3sLw.b['1'][1]++;__cov_ajDADfhHl1LH4qb$AF3sLw.s['4']++;menu.setBind({title:'{openedMenuTitle}'});}}});
+    requires: [
+        'Ext.layout.container.Accordion',
+        'Ext.app.ViewModel'
+    ],
+
+    viewModel: {
+        data: {
+            closedMenuTitle: 'Menu schließen',
+            openedMenuTitle: 'Menu anzeigen'
+        }
+    },
+
+    defaultListenerScope: true,
+
+    headerPosition: 'bottom',
+
+    collapsible: true,
+
+    hideCollapseTool: true,
+
+    titleCollapse: true,
+
+    titleAlign: 'center',
+
+    activeItem: 1,
+
+    defaults: {
+        // applied to each contained panel
+        hideCollapseTool: true,
+        titleCollapse: true
+    },
+
+    layout: {
+        // layout-specific configs go here
+        type: 'accordion',
+        titleCollapse: false,
+        animate: true
+    },
+
+    items: [],
+
+    listeners: {
+        collapse: 'setTitleAccordingToCollapsedState',
+        expand: 'setTitleAccordingToCollapsedState',
+        afterrender: 'setTitleAccordingToCollapsedState'
+    },
+
+    setTitleAccordingToCollapsedState: function(menu) {
+        if (menu.getCollapsed() === false) {
+            menu.setBind({
+                title: '{closedMenuTitle}'
+            });
+        } else {
+            menu.setBind({
+                title: '{openedMenuTitle}'
+            });
+        }
+    }
+});

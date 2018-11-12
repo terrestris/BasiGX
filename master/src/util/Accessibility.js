@@ -1,9 +1,64 @@
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Accessibility Utility class
+ *
+ * Some methods to enhance the accessibility of an ExtJS application.
+ *
+ * @class BasiGX.util.Accessibility
+ */
+Ext.define('BasiGX.util.Accessibility', {
+    alternateClassName: 'BasiGX.util.A11y',
+    statics: {
 
-var __cov_jNZKt0l8PKLC4eJfschLyQ = (Function('return this'))();
-if (!__cov_jNZKt0l8PKLC4eJfschLyQ.__coverage__) { __cov_jNZKt0l8PKLC4eJfschLyQ.__coverage__ = {}; }
-__cov_jNZKt0l8PKLC4eJfschLyQ = __cov_jNZKt0l8PKLC4eJfschLyQ.__coverage__;
-if (!(__cov_jNZKt0l8PKLC4eJfschLyQ['/home/travis/build/terrestris/BasiGX/src/util/Accessibility.js'])) {
-   __cov_jNZKt0l8PKLC4eJfschLyQ['/home/travis/build/terrestris/BasiGX/src/util/Accessibility.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Accessibility.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0]},"f":{"1":0,"2":0,"3":0},"fnMap":{"1":{"name":"(anonymous_1)","line":33,"loc":{"start":{"line":33,"column":24},"end":{"line":33,"column":35}}},"2":{"name":"(anonymous_2)","line":45,"loc":{"start":{"line":45,"column":25},"end":{"line":45,"column":44}}},"3":{"name":"(anonymous_3)","line":57,"loc":{"start":{"line":57,"column":25},"end":{"line":57,"column":36}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":64,"column":3}},"2":{"start":{"line":34,"column":12},"end":{"line":34,"column":59}},"3":{"start":{"line":46,"column":12},"end":{"line":46,"column":70}},"4":{"start":{"line":47,"column":12},"end":{"line":49,"column":13}},"5":{"start":{"line":48,"column":16},"end":{"line":48,"column":47}},"6":{"start":{"line":58,"column":12},"end":{"line":58,"column":70}},"7":{"start":{"line":59,"column":12},"end":{"line":59,"column":65}},"8":{"start":{"line":60,"column":12},"end":{"line":60,"column":30}}},"branchMap":{"1":{"line":47,"type":"if","locations":[{"start":{"line":47,"column":12},"end":{"line":47,"column":12}},{"start":{"line":47,"column":12},"end":{"line":47,"column":12}}]},"2":{"line":59,"type":"binary-expr","locations":[{"start":{"line":59,"column":23},"end":{"line":59,"column":31}},{"start":{"line":59,"column":35},"end":{"line":59,"column":64}}]},"3":{"line":60,"type":"binary-expr","locations":[{"start":{"line":60,"column":19},"end":{"line":60,"column":23}},{"start":{"line":60,"column":27},"end":{"line":60,"column":29}}]}}};
-}
-__cov_jNZKt0l8PKLC4eJfschLyQ = __cov_jNZKt0l8PKLC4eJfschLyQ['/home/travis/build/terrestris/BasiGX/src/util/Accessibility.js'];
-__cov_jNZKt0l8PKLC4eJfschLyQ.s['1']++;Ext.define('BasiGX.util.Accessibility',{alternateClassName:'BasiGX.util.A11y',statics:{getHtmlElement:function(){__cov_jNZKt0l8PKLC4eJfschLyQ.f['1']++;__cov_jNZKt0l8PKLC4eJfschLyQ.s['2']++;return Ext.get(Ext.DomQuery.select('html')[0]);},setHtmlLanguage:function(language){__cov_jNZKt0l8PKLC4eJfschLyQ.f['2']++;__cov_jNZKt0l8PKLC4eJfschLyQ.s['3']++;var htmlElem=BasiGX.util.Accessibility.getHtmlElement();__cov_jNZKt0l8PKLC4eJfschLyQ.s['4']++;if(htmlElem){__cov_jNZKt0l8PKLC4eJfschLyQ.b['1'][0]++;__cov_jNZKt0l8PKLC4eJfschLyQ.s['5']++;htmlElem.set({lang:language});}else{__cov_jNZKt0l8PKLC4eJfschLyQ.b['1'][1]++;}},getHtmlLanguage:function(){__cov_jNZKt0l8PKLC4eJfschLyQ.f['3']++;__cov_jNZKt0l8PKLC4eJfschLyQ.s['6']++;var htmlElem=BasiGX.util.Accessibility.getHtmlElement();__cov_jNZKt0l8PKLC4eJfschLyQ.s['7']++;var lang=(__cov_jNZKt0l8PKLC4eJfschLyQ.b['2'][0]++,htmlElem)&&(__cov_jNZKt0l8PKLC4eJfschLyQ.b['2'][1]++,htmlElem.getAttribute('lang'));__cov_jNZKt0l8PKLC4eJfschLyQ.s['8']++;return(__cov_jNZKt0l8PKLC4eJfschLyQ.b['3'][0]++,lang)||(__cov_jNZKt0l8PKLC4eJfschLyQ.b['3'][1]++,'');}}});
+        /**
+         * Returns an `Ext.Element` for the top-level `<html>`-element.
+         *
+         * @return {Ext.Element} The `Ext.Element` wrapped around the
+         *     top-level `<html>`-element.
+         */
+        getHtmlElement: function() {
+            return Ext.get(Ext.DomQuery.select('html')[0]);
+        },
+
+        /**
+         * Sets the 'lang'-attribute of the top-level `<html>`-element to the
+         * passed value. This enables screenreaders to pronounce the content
+         * of a page better.
+         *
+         * @param {String} language The language to set. Should be an ISO 639-1
+         *     language code, e.g. `'en'` or `'de'`.
+         */
+        setHtmlLanguage: function(language) {
+            var htmlElem = BasiGX.util.Accessibility.getHtmlElement();
+            if (htmlElem) {
+                htmlElem.set({lang: language});
+            }
+        },
+
+        /**
+         * Returns the `lang`-attribute of the top-level `<html>`-element.
+         *
+         * @return {String} The value of the lang attribute, e.g. 'en'.
+         */
+        getHtmlLanguage: function() {
+            var htmlElem = BasiGX.util.Accessibility.getHtmlElement();
+            var lang = htmlElem && htmlElem.getAttribute('lang');
+            return lang || '';
+        }
+
+    }
+});

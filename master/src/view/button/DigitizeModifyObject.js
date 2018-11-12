@@ -1,9 +1,181 @@
+/* Copyright (c) 2018-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Digitize Modify Object Button
+ *
+ * @class BasiGX.view.button.DigitizeModifyObject
+ */
+Ext.define('BasiGX.view.button.DigitizeModifyObject', {
+    extend: 'BasiGX.view.button.Base',
+    xtype: 'basigx-button-digitize-modify-object',
 
-var __cov_9KUjIS8Xar64wIDs06PWMg = (Function('return this'))();
-if (!__cov_9KUjIS8Xar64wIDs06PWMg.__coverage__) { __cov_9KUjIS8Xar64wIDs06PWMg.__coverage__ = {}; }
-__cov_9KUjIS8Xar64wIDs06PWMg = __cov_9KUjIS8Xar64wIDs06PWMg.__coverage__;
-if (!(__cov_9KUjIS8Xar64wIDs06PWMg['/home/travis/build/terrestris/BasiGX/src/view/button/DigitizeModifyObject.js'])) {
-   __cov_9KUjIS8Xar64wIDs06PWMg['/home/travis/build/terrestris/BasiGX/src/view/button/DigitizeModifyObject.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/DigitizeModifyObject.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0},"fnMap":{"1":{"name":"(anonymous_1)","line":80,"loc":{"start":{"line":80,"column":16},"end":{"line":80,"column":39}}},"2":{"name":"(anonymous_2)","line":85,"loc":{"start":{"line":85,"column":56},"end":{"line":85,"column":70}}},"3":{"name":"(anonymous_3)","line":98,"loc":{"start":{"line":98,"column":37},"end":{"line":98,"column":53}}},"4":{"name":"(anonymous_4)","line":117,"loc":{"start":{"line":117,"column":23},"end":{"line":117,"column":34}}},"5":{"name":"(anonymous_5)","line":130,"loc":{"start":{"line":130,"column":24},"end":{"line":130,"column":35}}},"6":{"name":"(anonymous_6)","line":140,"loc":{"start":{"line":140,"column":18},"end":{"line":140,"column":45}}},"7":{"name":"(anonymous_7)","line":143,"loc":{"start":{"line":143,"column":16},"end":{"line":143,"column":41}}},"8":{"name":"(anonymous_8)","line":148,"loc":{"start":{"line":148,"column":32},"end":{"line":148,"column":49}}},"9":{"name":"(anonymous_9)","line":177,"loc":{"start":{"line":177,"column":28},"end":{"line":177,"column":49}}}},"statementMap":{"1":{"start":{"line":21,"column":0},"end":{"line":181,"column":3}},"2":{"start":{"line":81,"column":12},"end":{"line":81,"column":26}},"3":{"start":{"line":82,"column":12},"end":{"line":104,"column":13}},"4":{"start":{"line":83,"column":16},"end":{"line":84,"column":47}},"5":{"start":{"line":85,"column":16},"end":{"line":93,"column":19}},"6":{"start":{"line":86,"column":20},"end":{"line":91,"column":21}},"7":{"start":{"line":87,"column":24},"end":{"line":87,"column":54}},"8":{"start":{"line":88,"column":24},"end":{"line":90,"column":25}},"9":{"start":{"line":89,"column":28},"end":{"line":89,"column":53}},"10":{"start":{"line":92,"column":20},"end":{"line":92,"column":69}},"11":{"start":{"line":94,"column":16},"end":{"line":94,"column":66}},"12":{"start":{"line":95,"column":16},"end":{"line":102,"column":19}},"13":{"start":{"line":99,"column":24},"end":{"line":100,"column":48}},"14":{"start":{"line":103,"column":16},"end":{"line":103,"column":60}},"15":{"start":{"line":105,"column":12},"end":{"line":115,"column":13}},"16":{"start":{"line":106,"column":16},"end":{"line":106,"column":53}},"17":{"start":{"line":107,"column":16},"end":{"line":107,"column":59}},"18":{"start":{"line":108,"column":16},"end":{"line":109,"column":47}},"19":{"start":{"line":111,"column":16},"end":{"line":111,"column":54}},"20":{"start":{"line":112,"column":16},"end":{"line":112,"column":60}},"21":{"start":{"line":113,"column":16},"end":{"line":114,"column":47}},"22":{"start":{"line":118,"column":12},"end":{"line":120,"column":13}},"23":{"start":{"line":119,"column":16},"end":{"line":119,"column":67}},"24":{"start":{"line":121,"column":12},"end":{"line":123,"column":13}},"25":{"start":{"line":122,"column":16},"end":{"line":122,"column":73}},"26":{"start":{"line":131,"column":8},"end":{"line":131,"column":41}},"27":{"start":{"line":141,"column":8},"end":{"line":141,"column":22}},"28":{"start":{"line":142,"column":8},"end":{"line":168,"column":11}},"29":{"start":{"line":144,"column":16},"end":{"line":164,"column":17}},"30":{"start":{"line":145,"column":20},"end":{"line":163,"column":21}},"31":{"start":{"line":146,"column":24},"end":{"line":158,"column":27}},"32":{"start":{"line":149,"column":32},"end":{"line":156,"column":33}},"33":{"start":{"line":150,"column":36},"end":{"line":151,"column":70}},"34":{"start":{"line":152,"column":36},"end":{"line":153,"column":55}},"35":{"start":{"line":155,"column":36},"end":{"line":155,"column":67}},"36":{"start":{"line":160,"column":24},"end":{"line":161,"column":58}},"37":{"start":{"line":162,"column":24},"end":{"line":162,"column":65}},"38":{"start":{"line":178,"column":8},"end":{"line":178,"column":48}},"39":{"start":{"line":179,"column":8},"end":{"line":179,"column":34}}},"branchMap":{"1":{"line":82,"type":"if","locations":[{"start":{"line":82,"column":12},"end":{"line":82,"column":12}},{"start":{"line":82,"column":12},"end":{"line":82,"column":12}}]},"2":{"line":86,"type":"if","locations":[{"start":{"line":86,"column":20},"end":{"line":86,"column":20}},{"start":{"line":86,"column":20},"end":{"line":86,"column":20}}]},"3":{"line":86,"type":"binary-expr","locations":[{"start":{"line":86,"column":24},"end":{"line":86,"column":36}},{"start":{"line":86,"column":40},"end":{"line":86,"column":55}}]},"4":{"line":88,"type":"if","locations":[{"start":{"line":88,"column":24},"end":{"line":88,"column":24}},{"start":{"line":88,"column":24},"end":{"line":88,"column":24}}]},"5":{"line":105,"type":"if","locations":[{"start":{"line":105,"column":12},"end":{"line":105,"column":12}},{"start":{"line":105,"column":12},"end":{"line":105,"column":12}}]},"6":{"line":118,"type":"if","locations":[{"start":{"line":118,"column":12},"end":{"line":118,"column":12}},{"start":{"line":118,"column":12},"end":{"line":118,"column":12}}]},"7":{"line":121,"type":"if","locations":[{"start":{"line":121,"column":12},"end":{"line":121,"column":12}},{"start":{"line":121,"column":12},"end":{"line":121,"column":12}}]},"8":{"line":144,"type":"if","locations":[{"start":{"line":144,"column":16},"end":{"line":144,"column":16}},{"start":{"line":144,"column":16},"end":{"line":144,"column":16}}]},"9":{"line":145,"type":"if","locations":[{"start":{"line":145,"column":20},"end":{"line":145,"column":20}},{"start":{"line":145,"column":20},"end":{"line":145,"column":20}}]},"10":{"line":149,"type":"if","locations":[{"start":{"line":149,"column":32},"end":{"line":149,"column":32}},{"start":{"line":149,"column":32},"end":{"line":149,"column":32}}]}}};
-}
-__cov_9KUjIS8Xar64wIDs06PWMg = __cov_9KUjIS8Xar64wIDs06PWMg['/home/travis/build/terrestris/BasiGX/src/view/button/DigitizeModifyObject.js'];
-__cov_9KUjIS8Xar64wIDs06PWMg.s['1']++;Ext.define('BasiGX.view.button.DigitizeModifyObject',{extend:'BasiGX.view.button.Base',xtype:'basigx-button-digitize-modify-object',requires:['BasiGX.util.Digitize'],viewModel:{data:{tooltip:'Modify an objetct',modifyObjectBtnText:'Modify object',postItWindowTitle:'Enter the Post-its text',postItInputTooLongText:'The text you have entered is too long. '+'Do you want to continue anyway?'}},bind:{text:'{modifyObjectBtnText}'},config:{map:null,collection:null,modifyInteraction:null,modifySelectInteraction:null,postitTextMaxLength:130},name:'modifyObjectBtn',toggleGroup:'draw',listeners:{toggle:function(btn,pressed){__cov_9KUjIS8Xar64wIDs06PWMg.f['1']++;__cov_9KUjIS8Xar64wIDs06PWMg.s['2']++;var me=this;__cov_9KUjIS8Xar64wIDs06PWMg.s['3']++;if(!me.modifyInteraction){__cov_9KUjIS8Xar64wIDs06PWMg.b['1'][0]++;__cov_9KUjIS8Xar64wIDs06PWMg.s['4']++;me.modifySelectInteraction=new ol.interaction.Select();__cov_9KUjIS8Xar64wIDs06PWMg.s['5']++;me.modifySelectInteraction.on('select',function(evt){__cov_9KUjIS8Xar64wIDs06PWMg.f['2']++;__cov_9KUjIS8Xar64wIDs06PWMg.s['6']++;if((__cov_9KUjIS8Xar64wIDs06PWMg.b['3'][0]++,evt.selected)&&(__cov_9KUjIS8Xar64wIDs06PWMg.b['3'][1]++,evt.selected[0])){__cov_9KUjIS8Xar64wIDs06PWMg.b['2'][0]++;__cov_9KUjIS8Xar64wIDs06PWMg.s['7']++;var feature=evt.selected[0];__cov_9KUjIS8Xar64wIDs06PWMg.s['8']++;if(feature.get('isPostit')){__cov_9KUjIS8Xar64wIDs06PWMg.b['4'][0]++;__cov_9KUjIS8Xar64wIDs06PWMg.s['9']++;me.modifyPostit(feature);}else{__cov_9KUjIS8Xar64wIDs06PWMg.b['4'][1]++;}}else{__cov_9KUjIS8Xar64wIDs06PWMg.b['2'][1]++;}__cov_9KUjIS8Xar64wIDs06PWMg.s['10']++;me.modifySelectInteraction.getFeatures().clear();});__cov_9KUjIS8Xar64wIDs06PWMg.s['11']++;me.map.addInteraction(me.modifySelectInteraction);__cov_9KUjIS8Xar64wIDs06PWMg.s['12']++;me.modifyInteraction=new ol.interaction.Modify({features:me.collection,pixelTolerance:20,deleteCondition:function(event){__cov_9KUjIS8Xar64wIDs06PWMg.f['3']++;__cov_9KUjIS8Xar64wIDs06PWMg.s['13']++;return ol.events.condition.singleClick(event);}});__cov_9KUjIS8Xar64wIDs06PWMg.s['14']++;me.map.addInteraction(me.modifyInteraction);}else{__cov_9KUjIS8Xar64wIDs06PWMg.b['1'][1]++;}__cov_9KUjIS8Xar64wIDs06PWMg.s['15']++;if(pressed){__cov_9KUjIS8Xar64wIDs06PWMg.b['5'][0]++;__cov_9KUjIS8Xar64wIDs06PWMg.s['16']++;me.modifyInteraction.setActive(true);__cov_9KUjIS8Xar64wIDs06PWMg.s['17']++;me.modifySelectInteraction.setActive(true);__cov_9KUjIS8Xar64wIDs06PWMg.s['18']++;me.modifyInteraction.on('modifyend',me.fireFeatureChanged,me);}else{__cov_9KUjIS8Xar64wIDs06PWMg.b['5'][1]++;__cov_9KUjIS8Xar64wIDs06PWMg.s['19']++;me.modifyInteraction.setActive(false);__cov_9KUjIS8Xar64wIDs06PWMg.s['20']++;me.modifySelectInteraction.setActive(false);__cov_9KUjIS8Xar64wIDs06PWMg.s['21']++;me.modifyInteraction.un('modifyend',me.fireFeatureChanged,me);}},beforedestroy:function(){__cov_9KUjIS8Xar64wIDs06PWMg.f['4']++;__cov_9KUjIS8Xar64wIDs06PWMg.s['22']++;if(this.modifyInteraction){__cov_9KUjIS8Xar64wIDs06PWMg.b['6'][0]++;__cov_9KUjIS8Xar64wIDs06PWMg.s['23']++;this.map.removeInteraction(this.modifyInteraction);}else{__cov_9KUjIS8Xar64wIDs06PWMg.b['6'][1]++;}__cov_9KUjIS8Xar64wIDs06PWMg.s['24']++;if(this.modifySelectInteraction){__cov_9KUjIS8Xar64wIDs06PWMg.b['7'][0]++;__cov_9KUjIS8Xar64wIDs06PWMg.s['25']++;this.map.removeInteraction(this.modifySelectInteraction);}else{__cov_9KUjIS8Xar64wIDs06PWMg.b['7'][1]++;}}},fireFeatureChanged:function(){__cov_9KUjIS8Xar64wIDs06PWMg.f['5']++;__cov_9KUjIS8Xar64wIDs06PWMg.s['26']++;this.fireEvent('featurechanged');},modifyPostit:function(feature,oldText){__cov_9KUjIS8Xar64wIDs06PWMg.f['6']++;__cov_9KUjIS8Xar64wIDs06PWMg.s['27']++;var me=this;__cov_9KUjIS8Xar64wIDs06PWMg.s['28']++;BasiGX.prompt(me.getViewModel().get('postItWindowTitle'),{fn:function(decision,text){__cov_9KUjIS8Xar64wIDs06PWMg.f['7']++;__cov_9KUjIS8Xar64wIDs06PWMg.s['29']++;if(decision==='ok'){__cov_9KUjIS8Xar64wIDs06PWMg.b['8'][0]++;__cov_9KUjIS8Xar64wIDs06PWMg.s['30']++;if(text.length>me.postitTextMaxLength){__cov_9KUjIS8Xar64wIDs06PWMg.b['9'][0]++;__cov_9KUjIS8Xar64wIDs06PWMg.s['31']++;BasiGX.confirm(me.getViewModel().get('postItInputTooLongText'),{fn:function(choice){__cov_9KUjIS8Xar64wIDs06PWMg.f['8']++;__cov_9KUjIS8Xar64wIDs06PWMg.s['32']++;if(choice==='yes'){__cov_9KUjIS8Xar64wIDs06PWMg.b['10'][0]++;__cov_9KUjIS8Xar64wIDs06PWMg.s['33']++;text=BasiGX.util.Digitize.stringDivider(text,16,'\n');__cov_9KUjIS8Xar64wIDs06PWMg.s['34']++;me.setPostitStyleAndTextOnFeature(text,feature);}else{__cov_9KUjIS8Xar64wIDs06PWMg.b['10'][1]++;__cov_9KUjIS8Xar64wIDs06PWMg.s['35']++;me.modifyPostit(feature,text);}}});}else{__cov_9KUjIS8Xar64wIDs06PWMg.b['9'][1]++;__cov_9KUjIS8Xar64wIDs06PWMg.s['36']++;text=BasiGX.util.Digitize.stringDivider(text,16,'\n');__cov_9KUjIS8Xar64wIDs06PWMg.s['37']++;me.setPostitTextOnFeature(text,feature);}}else{__cov_9KUjIS8Xar64wIDs06PWMg.b['8'][1]++;}},multiline:150,value:oldText});},setPostitTextOnFeature:function(text,feat){__cov_9KUjIS8Xar64wIDs06PWMg.f['9']++;__cov_9KUjIS8Xar64wIDs06PWMg.s['38']++;feat.getStyle().getText().setText(text);__cov_9KUjIS8Xar64wIDs06PWMg.s['39']++;this.fireFeatureChanged();}});
+    requires: [
+        'BasiGX.util.Digitize'
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Modify an objetct',
+            modifyObjectBtnText: 'Modify object',
+            postItWindowTitle: 'Enter the Post-its text',
+            postItInputTooLongText: 'The text you have entered is too long. ' +
+                'Do you want to continue anyway?'
+        }
+    },
+
+    /**
+     *
+     */
+    bind: {
+        text: '{modifyObjectBtnText}'
+    },
+
+    config: {
+        /**
+         * The ol map. required.
+         */
+        map: null,
+
+        /**
+         * The ol collection to work on. required.
+         */
+        collection: null,
+
+        /**
+         *
+         */
+        modifyInteraction: null,
+
+        /**
+         *
+         */
+        modifySelectInteraction: null,
+
+        /**
+         * The maximum length of text allowed for the postit
+         */
+        postitTextMaxLength: 130
+    },
+
+    name: 'modifyObjectBtn',
+    toggleGroup: 'draw',
+
+    listeners: {
+        toggle: function(btn, pressed) {
+            var me = this;
+            if (!me.modifyInteraction) {
+                me.modifySelectInteraction =
+                   new ol.interaction.Select();
+                me.modifySelectInteraction.on('select', function(evt) {
+                    if (evt.selected && evt.selected[0]) {
+                        var feature = evt.selected[0];
+                        if (feature.get('isPostit')) {
+                            me.modifyPostit(feature);
+                        }
+                    }
+                    me.modifySelectInteraction.getFeatures().clear();
+                });
+                me.map.addInteraction(me.modifySelectInteraction);
+                me.modifyInteraction = new ol.interaction.Modify({
+                    features: me.collection,
+                    pixelTolerance: 20,
+                    deleteCondition: function(event) {
+                        return ol.events.condition
+                            .singleClick(event);
+                    }
+                });
+                me.map.addInteraction(me.modifyInteraction);
+            }
+            if (pressed) {
+                me.modifyInteraction.setActive(true);
+                me.modifySelectInteraction.setActive(true);
+                me.modifyInteraction.on('modifyend',
+                    me.fireFeatureChanged, me);
+            } else {
+                me.modifyInteraction.setActive(false);
+                me.modifySelectInteraction.setActive(false);
+                me.modifyInteraction.un('modifyend',
+                    me.fireFeatureChanged, me);
+            }
+        },
+        beforedestroy: function() {
+            if (this.modifyInteraction) {
+                this.map.removeInteraction(this.modifyInteraction);
+            }
+            if (this.modifySelectInteraction) {
+                this.map.removeInteraction(this.modifySelectInteraction);
+            }
+        }
+    },
+
+    /**
+     * Fire a change event to inform other components
+     */
+    fireFeatureChanged: function() {
+        this.fireEvent('featurechanged');
+    },
+
+    /**
+     * Modify a postit text.
+     *
+     * @param {ol.Feature} feature The vector feature.
+     * @param {String} oldText The old text of the postit.
+     */
+    modifyPostit: function(feature, oldText) {
+        var me = this;
+        BasiGX.prompt(me.getViewModel().get('postItWindowTitle'), {
+            fn: function(decision, text) {
+                if (decision === 'ok') {
+                    if (text.length > me.postitTextMaxLength) {
+                        BasiGX.confirm(me.getViewModel().get(
+                            'postItInputTooLongText'), {
+                            fn: function(choice) {
+                                if (choice === 'yes') {
+                                    text = BasiGX.util.Digitize.
+                                        stringDivider(text, 16, '\n');
+                                    me.setPostitStyleAndTextOnFeature(
+                                        text, feature);
+                                } else {
+                                    me.modifyPostit(feature, text);
+                                }
+                            }
+                        });
+                    } else {
+                        text = BasiGX.util.Digitize.
+                            stringDivider(text, 16, '\n');
+                        me.setPostitTextOnFeature(text, feature);
+                    }
+                }
+            },
+            multiline: 150,
+            value: oldText
+        });
+    },
+
+    /**
+     * Sets a postit text on a feature.
+     *
+     * @param {String} text The text of the postit.
+     * @param {ol.Feature} feat The vector feature.
+     */
+    setPostitTextOnFeature: function(text, feat) {
+        feat.getStyle().getText().setText(text);
+        this.fireFeatureChanged();
+    }
+});

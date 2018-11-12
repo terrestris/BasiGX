@@ -1,9 +1,936 @@
+/* Copyright (c) 2016-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Redline Styler
+ *
+ * Used in combination with the Redline Tools Container and allows a user
+ * to modify the styles the features are drawn with.
+ * You need to require the 'ux' package in your app.json to make use of this
+ * component.
+ *
+ * @class BasiGX.view.container.RedlineStyler
+ */
+Ext.define('BasiGX.view.container.RedlineStyler', {
+    extend: 'Ext.container.Container',
+    xtype: 'basigx-container-redlinestyler',
 
-var __cov_O3fhm7kuhgVYV8SB2xEbmw = (Function('return this'))();
-if (!__cov_O3fhm7kuhgVYV8SB2xEbmw.__coverage__) { __cov_O3fhm7kuhgVYV8SB2xEbmw.__coverage__ = {}; }
-__cov_O3fhm7kuhgVYV8SB2xEbmw = __cov_O3fhm7kuhgVYV8SB2xEbmw.__coverage__;
-if (!(__cov_O3fhm7kuhgVYV8SB2xEbmw['/home/travis/build/terrestris/BasiGX/src/view/container/RedlineStyler.js'])) {
-   __cov_O3fhm7kuhgVYV8SB2xEbmw['/home/travis/build/terrestris/BasiGX/src/view/container/RedlineStyler.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/container/RedlineStyler.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0,"137":0,"138":0,"139":0,"140":0,"141":0,"142":0,"143":0,"144":0,"145":0,"146":0,"147":0,"148":0,"149":0,"150":0,"151":0,"152":0,"153":0,"154":0,"155":0,"156":0,"157":0,"158":0,"159":0,"160":0,"161":0,"162":0,"163":0,"164":0,"165":0,"166":0,"167":0,"168":0,"169":0,"170":0,"171":0,"172":0,"173":0,"174":0,"175":0,"176":0,"177":0,"178":0,"179":0,"180":0,"181":0,"182":0,"183":0,"184":0,"185":0,"186":0,"187":0,"188":0,"189":0,"190":0,"191":0,"192":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0],"19":[0,0],"20":[0,0],"21":[0,0],"22":[0,0],"23":[0,0],"24":[0,0,0,0],"25":[0,0],"26":[0,0,0,0],"27":[0,0],"28":[0,0,0,0],"29":[0,0],"30":[0,0,0,0,0],"31":[0,0],"32":[0,0],"33":[0,0],"34":[0,0],"35":[0,0],"36":[0,0],"37":[0,0],"38":[0,0],"39":[0,0],"40":[0,0],"41":[0,0],"42":[0,0],"43":[0,0],"44":[0,0],"45":[0,0],"46":[0,0],"47":[0,0],"48":[0,0],"49":[0,0],"50":[0,0],"51":[0,0],"52":[0,0],"53":[0,0],"54":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0},"fnMap":{"1":{"name":"(anonymous_1)","line":97,"loc":{"start":{"line":97,"column":19},"end":{"line":97,"column":36}}},"2":{"name":"(anonymous_2)","line":112,"loc":{"start":{"line":112,"column":22},"end":{"line":112,"column":33}}},"3":{"name":"(anonymous_3)","line":172,"loc":{"start":{"line":172,"column":36},"end":{"line":172,"column":57}}},"4":{"name":"(anonymous_4)","line":186,"loc":{"start":{"line":186,"column":36},"end":{"line":186,"column":57}}},"5":{"name":"(anonymous_5)","line":209,"loc":{"start":{"line":209,"column":42},"end":{"line":209,"column":53}}},"6":{"name":"(anonymous_6)","line":216,"loc":{"start":{"line":216,"column":40},"end":{"line":216,"column":69}}},"7":{"name":"(anonymous_7)","line":246,"loc":{"start":{"line":246,"column":42},"end":{"line":246,"column":53}}},"8":{"name":"(anonymous_8)","line":253,"loc":{"start":{"line":253,"column":40},"end":{"line":253,"column":69}}},"9":{"name":"(anonymous_9)","line":292,"loc":{"start":{"line":292,"column":36},"end":{"line":292,"column":47}}},"10":{"name":"(anonymous_10)","line":308,"loc":{"start":{"line":308,"column":36},"end":{"line":308,"column":47}}},"11":{"name":"(anonymous_11)","line":325,"loc":{"start":{"line":325,"column":36},"end":{"line":325,"column":47}}},"12":{"name":"(anonymous_12)","line":358,"loc":{"start":{"line":358,"column":27},"end":{"line":358,"column":38}}},"13":{"name":"(anonymous_13)","line":393,"loc":{"start":{"line":393,"column":32},"end":{"line":393,"column":53}}},"14":{"name":"(anonymous_14)","line":415,"loc":{"start":{"line":415,"column":38},"end":{"line":415,"column":49}}},"15":{"name":"(anonymous_15)","line":422,"loc":{"start":{"line":422,"column":36},"end":{"line":422,"column":57}}},"16":{"name":"(anonymous_16)","line":457,"loc":{"start":{"line":457,"column":24},"end":{"line":457,"column":35}}},"17":{"name":"(anonymous_17)","line":494,"loc":{"start":{"line":494,"column":32},"end":{"line":494,"column":53}}},"18":{"name":"(anonymous_18)","line":518,"loc":{"start":{"line":518,"column":38},"end":{"line":518,"column":49}}},"19":{"name":"(anonymous_19)","line":525,"loc":{"start":{"line":525,"column":36},"end":{"line":525,"column":57}}},"20":{"name":"(anonymous_20)","line":552,"loc":{"start":{"line":552,"column":38},"end":{"line":552,"column":49}}},"21":{"name":"(anonymous_21)","line":559,"loc":{"start":{"line":559,"column":36},"end":{"line":559,"column":57}}},"22":{"name":"(anonymous_22)","line":598,"loc":{"start":{"line":598,"column":17},"end":{"line":598,"column":63}}},"23":{"name":"(anonymous_23)","line":647,"loc":{"start":{"line":647,"column":24},"end":{"line":647,"column":55}}},"24":{"name":"(anonymous_24)","line":704,"loc":{"start":{"line":704,"column":29},"end":{"line":704,"column":59}}},"25":{"name":"(anonymous_25)","line":729,"loc":{"start":{"line":729,"column":26},"end":{"line":729,"column":59}}},"26":{"name":"(anonymous_26)","line":752,"loc":{"start":{"line":752,"column":26},"end":{"line":752,"column":37}}},"27":{"name":"(anonymous_27)","line":757,"loc":{"start":{"line":757,"column":32},"end":{"line":757,"column":53}}},"28":{"name":"(anonymous_28)","line":783,"loc":{"start":{"line":783,"column":36},"end":{"line":783,"column":47}}},"29":{"name":"(anonymous_29)","line":816,"loc":{"start":{"line":816,"column":21},"end":{"line":816,"column":42}}},"30":{"name":"(anonymous_30)","line":859,"loc":{"start":{"line":859,"column":24},"end":{"line":859,"column":35}}},"31":{"name":"(anonymous_31)","line":874,"loc":{"start":{"line":874,"column":14},"end":{"line":874,"column":25}}},"32":{"name":"(anonymous_32)","line":893,"loc":{"start":{"line":893,"column":14},"end":{"line":893,"column":30}}}},"statementMap":{"1":{"start":{"line":26,"column":0},"end":{"line":936,"column":3}},"2":{"start":{"line":98,"column":8},"end":{"line":98,"column":24}},"3":{"start":{"line":99,"column":8},"end":{"line":99,"column":49}},"4":{"start":{"line":100,"column":8},"end":{"line":100,"column":54}},"5":{"start":{"line":101,"column":8},"end":{"line":101,"column":51}},"6":{"start":{"line":102,"column":8},"end":{"line":102,"column":34}},"7":{"start":{"line":113,"column":8},"end":{"line":113,"column":22}},"8":{"start":{"line":114,"column":8},"end":{"line":114,"column":46}},"9":{"start":{"line":115,"column":8},"end":{"line":117,"column":9}},"10":{"start":{"line":116,"column":12},"end":{"line":116,"column":24}},"11":{"start":{"line":118,"column":8},"end":{"line":118,"column":42}},"12":{"start":{"line":119,"column":8},"end":{"line":119,"column":24}},"13":{"start":{"line":120,"column":8},"end":{"line":120,"column":23}},"14":{"start":{"line":121,"column":8},"end":{"line":121,"column":24}},"15":{"start":{"line":122,"column":8},"end":{"line":122,"column":28}},"16":{"start":{"line":123,"column":8},"end":{"line":123,"column":34}},"17":{"start":{"line":124,"column":8},"end":{"line":124,"column":36}},"18":{"start":{"line":126,"column":8},"end":{"line":142,"column":9}},"19":{"start":{"line":127,"column":12},"end":{"line":127,"column":49}},"20":{"start":{"line":128,"column":12},"end":{"line":128,"column":53}},"21":{"start":{"line":129,"column":15},"end":{"line":142,"column":9}},"22":{"start":{"line":130,"column":12},"end":{"line":130,"column":44}},"23":{"start":{"line":131,"column":12},"end":{"line":136,"column":13}},"24":{"start":{"line":132,"column":16},"end":{"line":132,"column":64}},"25":{"start":{"line":133,"column":16},"end":{"line":133,"column":64}},"26":{"start":{"line":134,"column":16},"end":{"line":135,"column":76}},"27":{"start":{"line":137,"column":12},"end":{"line":141,"column":13}},"28":{"start":{"line":138,"column":16},"end":{"line":138,"column":60}},"29":{"start":{"line":139,"column":16},"end":{"line":140,"column":54}},"30":{"start":{"line":144,"column":8},"end":{"line":347,"column":10}},"31":{"start":{"line":173,"column":32},"end":{"line":173,"column":62}},"32":{"start":{"line":187,"column":32},"end":{"line":187,"column":67}},"33":{"start":{"line":210,"column":36},"end":{"line":211,"column":69}},"34":{"start":{"line":212,"column":36},"end":{"line":214,"column":39}},"35":{"start":{"line":217,"column":36},"end":{"line":223,"column":37}},"36":{"start":{"line":218,"column":40},"end":{"line":219,"column":61}},"37":{"start":{"line":220,"column":40},"end":{"line":222,"column":43}},"38":{"start":{"line":247,"column":36},"end":{"line":248,"column":69}},"39":{"start":{"line":249,"column":36},"end":{"line":251,"column":39}},"40":{"start":{"line":254,"column":36},"end":{"line":260,"column":37}},"41":{"start":{"line":255,"column":40},"end":{"line":256,"column":61}},"42":{"start":{"line":257,"column":40},"end":{"line":259,"column":43}},"43":{"start":{"line":293,"column":32},"end":{"line":293,"column":69}},"44":{"start":{"line":294,"column":32},"end":{"line":294,"column":59}},"45":{"start":{"line":309,"column":32},"end":{"line":309,"column":69}},"46":{"start":{"line":310,"column":32},"end":{"line":310,"column":59}},"47":{"start":{"line":326,"column":32},"end":{"line":326,"column":69}},"48":{"start":{"line":327,"column":32},"end":{"line":327,"column":59}},"49":{"start":{"line":348,"column":8},"end":{"line":348,"column":18}},"50":{"start":{"line":359,"column":8},"end":{"line":359,"column":22}},"51":{"start":{"line":360,"column":8},"end":{"line":360,"column":51}},"52":{"start":{"line":361,"column":8},"end":{"line":363,"column":9}},"53":{"start":{"line":362,"column":12},"end":{"line":362,"column":24}},"54":{"start":{"line":364,"column":8},"end":{"line":364,"column":60}},"55":{"start":{"line":365,"column":8},"end":{"line":367,"column":29}},"56":{"start":{"line":369,"column":8},"end":{"line":446,"column":10}},"57":{"start":{"line":394,"column":28},"end":{"line":394,"column":69}},"58":{"start":{"line":416,"column":32},"end":{"line":417,"column":65}},"59":{"start":{"line":418,"column":32},"end":{"line":420,"column":35}},"60":{"start":{"line":423,"column":32},"end":{"line":424,"column":53}},"61":{"start":{"line":425,"column":32},"end":{"line":427,"column":34}},"62":{"start":{"line":447,"column":8},"end":{"line":447,"column":18}},"63":{"start":{"line":458,"column":8},"end":{"line":458,"column":22}},"64":{"start":{"line":459,"column":8},"end":{"line":459,"column":48}},"65":{"start":{"line":460,"column":8},"end":{"line":462,"column":9}},"66":{"start":{"line":461,"column":12},"end":{"line":461,"column":24}},"67":{"start":{"line":463,"column":8},"end":{"line":463,"column":56}},"68":{"start":{"line":464,"column":8},"end":{"line":465,"column":74}},"69":{"start":{"line":466,"column":8},"end":{"line":466,"column":60}},"70":{"start":{"line":467,"column":8},"end":{"line":469,"column":29}},"71":{"start":{"line":471,"column":8},"end":{"line":583,"column":10}},"72":{"start":{"line":495,"column":28},"end":{"line":497,"column":30}},"73":{"start":{"line":519,"column":32},"end":{"line":520,"column":65}},"74":{"start":{"line":521,"column":32},"end":{"line":523,"column":35}},"75":{"start":{"line":526,"column":32},"end":{"line":527,"column":53}},"76":{"start":{"line":528,"column":32},"end":{"line":530,"column":34}},"77":{"start":{"line":553,"column":32},"end":{"line":554,"column":65}},"78":{"start":{"line":555,"column":32},"end":{"line":557,"column":35}},"79":{"start":{"line":560,"column":32},"end":{"line":561,"column":53}},"80":{"start":{"line":562,"column":32},"end":{"line":564,"column":34}},"81":{"start":{"line":584,"column":8},"end":{"line":584,"column":18}},"82":{"start":{"line":599,"column":8},"end":{"line":599,"column":22}},"83":{"start":{"line":600,"column":8},"end":{"line":600,"column":21}},"84":{"start":{"line":601,"column":8},"end":{"line":601,"column":18}},"85":{"start":{"line":602,"column":8},"end":{"line":602,"column":21}},"86":{"start":{"line":603,"column":8},"end":{"line":604,"column":45}},"87":{"start":{"line":606,"column":8},"end":{"line":624,"column":9}},"88":{"start":{"line":607,"column":12},"end":{"line":607,"column":49}},"89":{"start":{"line":608,"column":12},"end":{"line":608,"column":71}},"90":{"start":{"line":609,"column":12},"end":{"line":609,"column":64}},"91":{"start":{"line":610,"column":12},"end":{"line":610,"column":43}},"92":{"start":{"line":611,"column":12},"end":{"line":611,"column":59}},"93":{"start":{"line":612,"column":15},"end":{"line":624,"column":9}},"94":{"start":{"line":613,"column":12},"end":{"line":613,"column":54}},"95":{"start":{"line":614,"column":12},"end":{"line":614,"column":70}},"96":{"start":{"line":615,"column":12},"end":{"line":615,"column":68}},"97":{"start":{"line":616,"column":12},"end":{"line":616,"column":48}},"98":{"start":{"line":617,"column":12},"end":{"line":617,"column":64}},"99":{"start":{"line":619,"column":12},"end":{"line":619,"column":51}},"100":{"start":{"line":620,"column":12},"end":{"line":620,"column":73}},"101":{"start":{"line":621,"column":12},"end":{"line":621,"column":68}},"102":{"start":{"line":622,"column":12},"end":{"line":622,"column":45}},"103":{"start":{"line":623,"column":12},"end":{"line":623,"column":61}},"104":{"start":{"line":627,"column":8},"end":{"line":629,"column":9}},"105":{"start":{"line":628,"column":12},"end":{"line":628,"column":43}},"106":{"start":{"line":633,"column":8},"end":{"line":633,"column":77}},"107":{"start":{"line":648,"column":8},"end":{"line":648,"column":31}},"108":{"start":{"line":649,"column":8},"end":{"line":649,"column":42}},"109":{"start":{"line":650,"column":8},"end":{"line":650,"column":44}},"110":{"start":{"line":651,"column":8},"end":{"line":651,"column":36}},"111":{"start":{"line":652,"column":8},"end":{"line":652,"column":43}},"112":{"start":{"line":654,"column":8},"end":{"line":656,"column":9}},"113":{"start":{"line":655,"column":12},"end":{"line":655,"column":50}},"114":{"start":{"line":657,"column":8},"end":{"line":660,"column":9}},"115":{"start":{"line":659,"column":12},"end":{"line":659,"column":62}},"116":{"start":{"line":661,"column":8},"end":{"line":664,"column":9}},"117":{"start":{"line":663,"column":12},"end":{"line":663,"column":66}},"118":{"start":{"line":665,"column":8},"end":{"line":668,"column":9}},"119":{"start":{"line":667,"column":12},"end":{"line":667,"column":66}},"120":{"start":{"line":670,"column":8},"end":{"line":688,"column":11}},"121":{"start":{"line":690,"column":8},"end":{"line":690,"column":21}},"122":{"start":{"line":705,"column":8},"end":{"line":714,"column":11}},"123":{"start":{"line":715,"column":8},"end":{"line":715,"column":21}},"124":{"start":{"line":730,"column":8},"end":{"line":743,"column":11}},"125":{"start":{"line":744,"column":8},"end":{"line":744,"column":21}},"126":{"start":{"line":753,"column":8},"end":{"line":753,"column":22}},"127":{"start":{"line":754,"column":8},"end":{"line":755,"column":45}},"128":{"start":{"line":757,"column":8},"end":{"line":781,"column":10}},"129":{"start":{"line":758,"column":12},"end":{"line":758,"column":75}},"130":{"start":{"line":759,"column":12},"end":{"line":761,"column":37}},"131":{"start":{"line":762,"column":12},"end":{"line":762,"column":54}},"132":{"start":{"line":763,"column":12},"end":{"line":772,"column":15}},"133":{"start":{"line":773,"column":12},"end":{"line":773,"column":64}},"134":{"start":{"line":774,"column":12},"end":{"line":774,"column":48}},"135":{"start":{"line":777,"column":12},"end":{"line":779,"column":14}},"136":{"start":{"line":780,"column":12},"end":{"line":780,"column":48}},"137":{"start":{"line":783,"column":8},"end":{"line":789,"column":10}},"138":{"start":{"line":784,"column":12},"end":{"line":788,"column":14}},"139":{"start":{"line":791,"column":8},"end":{"line":796,"column":11}},"140":{"start":{"line":798,"column":8},"end":{"line":802,"column":11}},"141":{"start":{"line":803,"column":8},"end":{"line":803,"column":30}},"142":{"start":{"line":817,"column":8},"end":{"line":817,"column":22}},"143":{"start":{"line":818,"column":8},"end":{"line":818,"column":36}},"144":{"start":{"line":819,"column":8},"end":{"line":819,"column":36}},"145":{"start":{"line":820,"column":8},"end":{"line":820,"column":34}},"146":{"start":{"line":822,"column":8},"end":{"line":823,"column":45}},"147":{"start":{"line":824,"column":8},"end":{"line":824,"column":71}},"148":{"start":{"line":825,"column":8},"end":{"line":825,"column":60}},"149":{"start":{"line":827,"column":8},"end":{"line":829,"column":9}},"150":{"start":{"line":828,"column":12},"end":{"line":828,"column":19}},"151":{"start":{"line":830,"column":8},"end":{"line":841,"column":11}},"152":{"start":{"line":842,"column":8},"end":{"line":842,"column":43}},"153":{"start":{"line":843,"column":8},"end":{"line":843,"column":59}},"154":{"start":{"line":844,"column":8},"end":{"line":844,"column":43}},"155":{"start":{"line":847,"column":8},"end":{"line":847,"column":77}},"156":{"start":{"line":860,"column":8},"end":{"line":860,"column":22}},"157":{"start":{"line":861,"column":8},"end":{"line":861,"column":79}},"158":{"start":{"line":862,"column":8},"end":{"line":862,"column":73}},"159":{"start":{"line":863,"column":8},"end":{"line":863,"column":71}},"160":{"start":{"line":864,"column":8},"end":{"line":864,"column":45}},"161":{"start":{"line":875,"column":8},"end":{"line":875,"column":22}},"162":{"start":{"line":877,"column":8},"end":{"line":881,"column":10}},"163":{"start":{"line":883,"column":8},"end":{"line":883,"column":21}},"164":{"start":{"line":894,"column":8},"end":{"line":894,"column":22}},"165":{"start":{"line":895,"column":8},"end":{"line":896,"column":45}},"166":{"start":{"line":897,"column":8},"end":{"line":914,"column":9}},"167":{"start":{"line":898,"column":12},"end":{"line":898,"column":54}},"168":{"start":{"line":899,"column":12},"end":{"line":899,"column":70}},"169":{"start":{"line":900,"column":12},"end":{"line":900,"column":69}},"170":{"start":{"line":901,"column":12},"end":{"line":913,"column":13}},"171":{"start":{"line":902,"column":16},"end":{"line":902,"column":40}},"172":{"start":{"line":903,"column":16},"end":{"line":903,"column":67}},"173":{"start":{"line":904,"column":16},"end":{"line":904,"column":51}},"174":{"start":{"line":905,"column":16},"end":{"line":906,"column":34}},"175":{"start":{"line":907,"column":16},"end":{"line":912,"column":17}},"176":{"start":{"line":908,"column":20},"end":{"line":908,"column":70}},"177":{"start":{"line":909,"column":20},"end":{"line":910,"column":36}},"178":{"start":{"line":911,"column":20},"end":{"line":911,"column":51}},"179":{"start":{"line":916,"column":8},"end":{"line":924,"column":9}},"180":{"start":{"line":917,"column":12},"end":{"line":917,"column":58}},"181":{"start":{"line":918,"column":12},"end":{"line":918,"column":74}},"182":{"start":{"line":919,"column":12},"end":{"line":919,"column":79}},"183":{"start":{"line":920,"column":12},"end":{"line":923,"column":13}},"184":{"start":{"line":921,"column":16},"end":{"line":921,"column":45}},"185":{"start":{"line":922,"column":16},"end":{"line":922,"column":59}},"186":{"start":{"line":926,"column":8},"end":{"line":934,"column":9}},"187":{"start":{"line":927,"column":12},"end":{"line":927,"column":58}},"188":{"start":{"line":928,"column":12},"end":{"line":928,"column":74}},"189":{"start":{"line":929,"column":12},"end":{"line":929,"column":73}},"190":{"start":{"line":930,"column":12},"end":{"line":933,"column":13}},"191":{"start":{"line":931,"column":16},"end":{"line":931,"column":42}},"192":{"start":{"line":932,"column":16},"end":{"line":932,"column":56}}},"branchMap":{"1":{"line":115,"type":"if","locations":[{"start":{"line":115,"column":8},"end":{"line":115,"column":8}},{"start":{"line":115,"column":8},"end":{"line":115,"column":8}}]},"2":{"line":126,"type":"if","locations":[{"start":{"line":126,"column":8},"end":{"line":126,"column":8}},{"start":{"line":126,"column":8},"end":{"line":126,"column":8}}]},"3":{"line":129,"type":"if","locations":[{"start":{"line":129,"column":15},"end":{"line":129,"column":15}},{"start":{"line":129,"column":15},"end":{"line":129,"column":15}}]},"4":{"line":131,"type":"if","locations":[{"start":{"line":131,"column":12},"end":{"line":131,"column":12}},{"start":{"line":131,"column":12},"end":{"line":131,"column":12}}]},"5":{"line":134,"type":"cond-expr","locations":[{"start":{"line":135,"column":20},"end":{"line":135,"column":61}},{"start":{"line":135,"column":64},"end":{"line":135,"column":75}}]},"6":{"line":137,"type":"if","locations":[{"start":{"line":137,"column":12},"end":{"line":137,"column":12}},{"start":{"line":137,"column":12},"end":{"line":137,"column":12}}]},"7":{"line":139,"type":"cond-expr","locations":[{"start":{"line":139,"column":61},"end":{"line":140,"column":41}},{"start":{"line":140,"column":44},"end":{"line":140,"column":53}}]},"8":{"line":217,"type":"if","locations":[{"start":{"line":217,"column":36},"end":{"line":217,"column":36}},{"start":{"line":217,"column":36},"end":{"line":217,"column":36}}]},"9":{"line":254,"type":"if","locations":[{"start":{"line":254,"column":36},"end":{"line":254,"column":36}},{"start":{"line":254,"column":36},"end":{"line":254,"column":36}}]},"10":{"line":288,"type":"cond-expr","locations":[{"start":{"line":288,"column":45},"end":{"line":288,"column":59}},{"start":{"line":288,"column":62},"end":{"line":288,"column":64}}]},"11":{"line":304,"type":"cond-expr","locations":[{"start":{"line":304,"column":45},"end":{"line":304,"column":59}},{"start":{"line":304,"column":62},"end":{"line":304,"column":64}}]},"12":{"line":320,"type":"cond-expr","locations":[{"start":{"line":320,"column":44},"end":{"line":320,"column":54}},{"start":{"line":320,"column":57},"end":{"line":320,"column":60}}]},"13":{"line":361,"type":"if","locations":[{"start":{"line":361,"column":8},"end":{"line":361,"column":8}},{"start":{"line":361,"column":8},"end":{"line":361,"column":8}}]},"14":{"line":365,"type":"cond-expr","locations":[{"start":{"line":366,"column":12},"end":{"line":366,"column":58}},{"start":{"line":367,"column":12},"end":{"line":367,"column":28}}]},"15":{"line":460,"type":"if","locations":[{"start":{"line":460,"column":8},"end":{"line":460,"column":8}},{"start":{"line":460,"column":8},"end":{"line":460,"column":8}}]},"16":{"line":464,"type":"cond-expr","locations":[{"start":{"line":465,"column":12},"end":{"line":465,"column":56}},{"start":{"line":465,"column":59},"end":{"line":465,"column":73}}]},"17":{"line":467,"type":"cond-expr","locations":[{"start":{"line":468,"column":12},"end":{"line":468,"column":58}},{"start":{"line":469,"column":12},"end":{"line":469,"column":28}}]},"18":{"line":606,"type":"if","locations":[{"start":{"line":606,"column":8},"end":{"line":606,"column":8}},{"start":{"line":606,"column":8},"end":{"line":606,"column":8}}]},"19":{"line":612,"type":"if","locations":[{"start":{"line":612,"column":15},"end":{"line":612,"column":15}},{"start":{"line":612,"column":15},"end":{"line":612,"column":15}}]},"20":{"line":627,"type":"if","locations":[{"start":{"line":627,"column":8},"end":{"line":627,"column":8}},{"start":{"line":627,"column":8},"end":{"line":627,"column":8}}]},"21":{"line":654,"type":"if","locations":[{"start":{"line":654,"column":8},"end":{"line":654,"column":8}},{"start":{"line":654,"column":8},"end":{"line":654,"column":8}}]},"22":{"line":654,"type":"binary-expr","locations":[{"start":{"line":654,"column":12},"end":{"line":654,"column":20}},{"start":{"line":654,"column":24},"end":{"line":654,"column":42}}]},"23":{"line":657,"type":"if","locations":[{"start":{"line":657,"column":8},"end":{"line":657,"column":8}},{"start":{"line":657,"column":8},"end":{"line":657,"column":8}}]},"24":{"line":657,"type":"binary-expr","locations":[{"start":{"line":657,"column":12},"end":{"line":657,"column":20}},{"start":{"line":657,"column":24},"end":{"line":657,"column":40}},{"start":{"line":657,"column":44},"end":{"line":657,"column":62}},{"start":{"line":658,"column":12},"end":{"line":658,"column":39}}]},"25":{"line":661,"type":"if","locations":[{"start":{"line":661,"column":8},"end":{"line":661,"column":8}},{"start":{"line":661,"column":8},"end":{"line":661,"column":8}}]},"26":{"line":661,"type":"binary-expr","locations":[{"start":{"line":661,"column":12},"end":{"line":661,"column":20}},{"start":{"line":661,"column":24},"end":{"line":661,"column":42}},{"start":{"line":661,"column":46},"end":{"line":661,"column":66}},{"start":{"line":662,"column":12},"end":{"line":662,"column":41}}]},"27":{"line":665,"type":"if","locations":[{"start":{"line":665,"column":8},"end":{"line":665,"column":8}},{"start":{"line":665,"column":8},"end":{"line":665,"column":8}}]},"28":{"line":665,"type":"binary-expr","locations":[{"start":{"line":665,"column":12},"end":{"line":665,"column":20}},{"start":{"line":665,"column":24},"end":{"line":665,"column":42}},{"start":{"line":665,"column":46},"end":{"line":665,"column":66}},{"start":{"line":666,"column":12},"end":{"line":666,"column":41}}]},"29":{"line":671,"type":"cond-expr","locations":[{"start":{"line":674,"column":16},"end":{"line":686,"column":18}},{"start":{"line":686,"column":21},"end":{"line":686,"column":29}}]},"30":{"line":671,"type":"binary-expr","locations":[{"start":{"line":671,"column":19},"end":{"line":671,"column":36}},{"start":{"line":671,"column":40},"end":{"line":671,"column":60}},{"start":{"line":672,"column":12},"end":{"line":672,"column":34}},{"start":{"line":672,"column":38},"end":{"line":672,"column":60}},{"start":{"line":673,"column":12},"end":{"line":673,"column":34}}]},"31":{"line":675,"type":"binary-expr","locations":[{"start":{"line":675,"column":28},"end":{"line":675,"column":45}},{"start":{"line":675,"column":49},"end":{"line":675,"column":63}}]},"32":{"line":677,"type":"cond-expr","locations":[{"start":{"line":677,"column":54},"end":{"line":677,"column":74}},{"start":{"line":678,"column":28},"end":{"line":678,"column":45}}]},"33":{"line":681,"type":"cond-expr","locations":[{"start":{"line":681,"column":56},"end":{"line":681,"column":78}},{"start":{"line":682,"column":28},"end":{"line":682,"column":47}}]},"34":{"line":683,"type":"cond-expr","locations":[{"start":{"line":683,"column":56},"end":{"line":683,"column":78}},{"start":{"line":684,"column":28},"end":{"line":684,"column":47}}]},"35":{"line":687,"type":"binary-expr","locations":[{"start":{"line":687,"column":18},"end":{"line":687,"column":36}},{"start":{"line":687,"column":40},"end":{"line":687,"column":59}}]},"36":{"line":706,"type":"cond-expr","locations":[{"start":{"line":707,"column":16},"end":{"line":712,"column":18}},{"start":{"line":712,"column":21},"end":{"line":712,"column":41}}]},"37":{"line":706,"type":"binary-expr","locations":[{"start":{"line":706,"column":20},"end":{"line":706,"column":41}},{"start":{"line":706,"column":45},"end":{"line":706,"column":66}}]},"38":{"line":708,"type":"cond-expr","locations":[{"start":{"line":708,"column":51},"end":{"line":708,"column":72}},{"start":{"line":709,"column":24},"end":{"line":709,"column":55}}]},"39":{"line":710,"type":"cond-expr","locations":[{"start":{"line":710,"column":51},"end":{"line":710,"column":72}},{"start":{"line":711,"column":24},"end":{"line":711,"column":55}}]},"40":{"line":713,"type":"binary-expr","locations":[{"start":{"line":713,"column":18},"end":{"line":713,"column":36}},{"start":{"line":713,"column":40},"end":{"line":713,"column":59}}]},"41":{"line":731,"type":"cond-expr","locations":[{"start":{"line":732,"column":16},"end":{"line":734,"column":18}},{"start":{"line":734,"column":21},"end":{"line":734,"column":39}}]},"42":{"line":735,"type":"cond-expr","locations":[{"start":{"line":736,"column":16},"end":{"line":741,"column":18}},{"start":{"line":741,"column":21},"end":{"line":741,"column":41}}]},"43":{"line":735,"type":"binary-expr","locations":[{"start":{"line":735,"column":20},"end":{"line":735,"column":44}},{"start":{"line":735,"column":48},"end":{"line":735,"column":72}}]},"44":{"line":737,"type":"cond-expr","locations":[{"start":{"line":737,"column":54},"end":{"line":737,"column":78}},{"start":{"line":738,"column":24},"end":{"line":738,"column":55}}]},"45":{"line":739,"type":"cond-expr","locations":[{"start":{"line":739,"column":54},"end":{"line":739,"column":78}},{"start":{"line":740,"column":24},"end":{"line":740,"column":55}}]},"46":{"line":742,"type":"binary-expr","locations":[{"start":{"line":742,"column":18},"end":{"line":742,"column":36}},{"start":{"line":742,"column":40},"end":{"line":742,"column":59}}]},"47":{"line":827,"type":"if","locations":[{"start":{"line":827,"column":8},"end":{"line":827,"column":8}},{"start":{"line":827,"column":8},"end":{"line":827,"column":8}}]},"48":{"line":897,"type":"if","locations":[{"start":{"line":897,"column":8},"end":{"line":897,"column":8}},{"start":{"line":897,"column":8},"end":{"line":897,"column":8}}]},"49":{"line":901,"type":"if","locations":[{"start":{"line":901,"column":12},"end":{"line":901,"column":12}},{"start":{"line":901,"column":12},"end":{"line":901,"column":12}}]},"50":{"line":907,"type":"if","locations":[{"start":{"line":907,"column":16},"end":{"line":907,"column":16}},{"start":{"line":907,"column":16},"end":{"line":907,"column":16}}]},"51":{"line":916,"type":"if","locations":[{"start":{"line":916,"column":8},"end":{"line":916,"column":8}},{"start":{"line":916,"column":8},"end":{"line":916,"column":8}}]},"52":{"line":920,"type":"if","locations":[{"start":{"line":920,"column":12},"end":{"line":920,"column":12}},{"start":{"line":920,"column":12},"end":{"line":920,"column":12}}]},"53":{"line":926,"type":"if","locations":[{"start":{"line":926,"column":8},"end":{"line":926,"column":8}},{"start":{"line":926,"column":8},"end":{"line":926,"column":8}}]},"54":{"line":930,"type":"if","locations":[{"start":{"line":930,"column":12},"end":{"line":930,"column":12}},{"start":{"line":930,"column":12},"end":{"line":930,"column":12}}]}}};
-}
-__cov_O3fhm7kuhgVYV8SB2xEbmw = __cov_O3fhm7kuhgVYV8SB2xEbmw['/home/travis/build/terrestris/BasiGX/src/view/container/RedlineStyler.js'];
-__cov_O3fhm7kuhgVYV8SB2xEbmw.s['1']++;Ext.define('BasiGX.view.container.RedlineStyler',{extend:'Ext.container.Container',xtype:'basigx-container-redlinestyler',requires:['Ext.ux.colorpick.Button','BasiGX.view.panel.GraphicPool','BasiGX.util.Color'],viewModel:{data:{pointStyleFieldSetTitle:'Point Style',pointStyleSymbolPanelTitle:'Symbol',pointStyleRadiusNumberFieldLabel:'Point Radius',pointStyleStrokeNumberFieldLabel:'Stroke Width',pointStyleStrokeColorFieldLabel:'Stroke Color',pointStyleFillColorFieldLabel:'Fill Color',pointStyleGraphicPanelTitle:'Graphic',pointStyleChooseImgBtnText:'Choose Image',pointStyleImgOffsetXSliderLabel:'Graphic Offset X',pointStyleImgOffsetYSliderLabel:'Graphic Offset Y',pointStyleImgScaleSliderLabel:'Scale',lineStyleFieldSetTitle:'LineString Style',lineStyleStrokeNumberFieldLabel:'Stroke Width',lineStyleStrokeColorFieldLabel:'Stroke Color',polygonStyleFieldSetTitle:'Polygon Style',polygonStyleStrokeNumberFieldLabel:'Stroke Width',polygonStyleStrokeColorFieldLabel:'Stroke Color',polygonStyleFillColorFieldLabel:'Fill Color',pointGrapicDeletedSuccessMsgText:'The icon has been deleted. '+'Please reassign a new one.',pointGrapicDeletedSuccessMsgTitle:'Deletion succesfull',graphicPoolWindowTitle:'Graphic Pool',documentation:'<h2>Styler</h2>\u2022 Benutzen Sie den '+'Styler, um Ihre Zeichenobjekte nach Wunsch zu gestalten.'+'<br>\u2022 Neben Farben, Strichstärken und Schrifteigenschaften '+'können auch eigene Icons für die Symbolisierung verwendet '+'werden'}},redliningVectorLayer:null,padding:5,config:{backendUrls:{pictureList:null,pictureSrc:null,pictureUpload:null,graphicDelete:null},redlinePointStyle:null,redlineLineStringStyle:null,redlinePolygonStyle:null},initComponent:function(config){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['1']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['2']++;this.items=[];__cov_O3fhm7kuhgVYV8SB2xEbmw.s['3']++;this.items.push(this.getPointFieldset());__cov_O3fhm7kuhgVYV8SB2xEbmw.s['4']++;this.items.push(this.getLineStringFieldset());__cov_O3fhm7kuhgVYV8SB2xEbmw.s['5']++;this.items.push(this.getPolygonFieldset());__cov_O3fhm7kuhgVYV8SB2xEbmw.s['6']++;this.callParent([config]);},getPointFieldset:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['2']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['7']++;var me=this;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['8']++;var style=me.getRedlinePointStyle();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['9']++;if(Ext.isEmpty(style)){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['1'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['10']++;return null;}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['1'][1]++;}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['11']++;var imageStyle=style.getImage();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['12']++;var imageAnchor;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['13']++;var imageScale;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['14']++;var radius=10;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['15']++;var strokeWidth=0;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['16']++;var fillColor='#008000';__cov_O3fhm7kuhgVYV8SB2xEbmw.s['17']++;var strokeColor='#ffcc33';__cov_O3fhm7kuhgVYV8SB2xEbmw.s['18']++;if(imageStyle instanceof ol.style.Icon){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['2'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['19']++;imageAnchor=imageStyle.getAnchor();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['20']++;imageScale=imageStyle.getScale()*100;}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['2'][1]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['21']++;if(imageStyle instanceof ol.style.Circle){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['3'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['22']++;radius=imageStyle.getRadius();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['23']++;if(imageStyle.getStroke()){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['4'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['24']++;strokeWidth=imageStyle.getStroke().getWidth();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['25']++;strokeColor=imageStyle.getStroke().getColor();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['26']++;strokeColor=strokeColor.indexOf('rgba')>-1?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['5'][0]++,BasiGX.util.Color.rgbaToHex8(strokeColor)):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['5'][1]++,strokeColor);}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['4'][1]++;}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['27']++;if(imageStyle.getFill()){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['6'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['28']++;fillColor=imageStyle.getFill().getColor();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['29']++;fillColor=fillColor.indexOf('rgba')>-1?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['7'][0]++,BasiGX.util.Color.rgbaToHex8(fillColor)):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['7'][1]++,fillColor);}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['6'][1]++;}}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['3'][1]++;}}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['30']++;var fs={xtype:'fieldset',bind:{title:'{pointStyleFieldSetTitle}'},name:'pointstyle',layout:'hbox',items:[{xtype:'tabpanel',items:[{xtype:'panel',bind:{title:'{pointStyleSymbolPanelTitle}'},defaults:{margin:3,width:220},items:[{xtype:'numberfield',bind:{fieldLabel:'{pointStyleRadiusNumberFieldLabel}'},name:'pointradius',value:radius,minValue:1,maxValue:50,listeners:{change:function(field,val){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['3']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['31']++;me.updateStyle({radius:val});}}},{xtype:'numberfield',bind:{fieldLabel:'{pointStyleStrokeNumberFieldLabel}'},name:'pointstrokewidth',value:strokeWidth,minValue:0,maxValue:50,listeners:{change:function(field,val){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['4']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['32']++;me.updateStyle({strokewidth:val});}}},{xtype:'container',layout:'hbox',defaults:{width:100},items:[{xtype:'displayfield',width:100,bind:{value:'{pointStyleStrokeColorFieldLabel}'}},{xtype:'colorbutton',name:'pointstrokecolor',format:'hex8',value:strokeColor,margin:'5 0 0 10',listeners:{boxready:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['5']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['33']++;var color=BasiGX.util.Color.hex8ToRgba(this.getValue());__cov_O3fhm7kuhgVYV8SB2xEbmw.s['34']++;me.updateStyle({strokecolor:color});},change:function(field,val,oldVal){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['6']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['35']++;if(oldVal){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['8'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['36']++;var color=BasiGX.util.Color.hex8ToRgba(val);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['37']++;me.updateStyle({strokecolor:color});}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['8'][1]++;}}}}]},{xtype:'container',layout:'hbox',defaults:{width:100},items:[{xtype:'displayfield',width:100,bind:{value:'{pointStyleFillColorFieldLabel}'}},{xtype:'colorbutton',name:'pointfillcolor',format:'hex8',margin:'0 0 0 10',value:fillColor,listeners:{boxready:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['7']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['38']++;var color=BasiGX.util.Color.hex8ToRgba(this.getValue());__cov_O3fhm7kuhgVYV8SB2xEbmw.s['39']++;me.updateStyle({fillcolor:color});},change:function(field,val,oldVal){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['8']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['40']++;if(oldVal){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['9'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['41']++;var color=BasiGX.util.Color.hex8ToRgba(val);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['42']++;me.updateStyle({fillcolor:color});}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['9'][1]++;}}}}]}]},{xtype:'panel',bind:{title:'{pointStyleGraphicPanelTitle}'},name:'pointgraphic',defaults:{margin:3,width:220},items:[{xtype:'button',bind:{text:'{pointStyleChooseImgBtnText}'},handler:me.onChooseGraphicClick,scope:me},{xtype:'slider',bind:{fieldLabel:'{pointStyleImgOffsetXSliderLabel}'},name:'xoffset',value:imageAnchor?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['10'][0]++,imageAnchor[0]):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['10'][1]++,50),minValue:0,maxValue:100,listeners:{change:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['9']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['43']++;var values=me.getImageAttributes();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['44']++;me.changeIconStyle(values);},scope:me}},{xtype:'slider',bind:{fieldLabel:'{pointStyleImgOffsetYSliderLabel}'},name:'yoffset',value:imageAnchor?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['11'][0]++,imageAnchor[1]):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['11'][1]++,50),minValue:0,maxValue:100,listeners:{change:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['10']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['45']++;var values=me.getImageAttributes();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['46']++;me.changeIconStyle(values);},scope:me}},{xtype:'slider',bind:{fieldLabel:'{pointStyleImgScaleSliderLabel}'},name:'iconscale',value:imageScale?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['12'][0]++,imageScale):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['12'][1]++,100),increment:1,minValue:10,maxValue:500,listeners:{change:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['11']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['47']++;var values=me.getImageAttributes();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['48']++;me.changeIconStyle(values);},scope:me}}]}]},{xtype:'panel',border:false,layout:'fit',items:[{xtype:'gx_renderer',margin:20,width:200,height:160,name:'pointRenderPreview',symbolizers:style,symbolType:'Point'}]}]};__cov_O3fhm7kuhgVYV8SB2xEbmw.s['49']++;return fs;},getLineStringFieldset:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['12']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['50']++;var me=this;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['51']++;var style=me.getRedlineLineStringStyle();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['52']++;if(Ext.isEmpty(style)){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['13'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['53']++;return null;}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['13'][1]++;}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['54']++;var styleStrokeColor=style.getStroke().getColor();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['55']++;var strokeColor=styleStrokeColor.indexOf('rgba')>-1?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['14'][0]++,BasiGX.util.Color.rgbaToHex8(styleStrokeColor)):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['14'][1]++,styleStrokeColor);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['56']++;var fs={xtype:'fieldset',bind:{title:'{lineStyleFieldSetTitle}'},name:'linestringstyle',layout:'hbox',items:[{xtype:'fieldset',layout:'vbox',width:220,defaults:{margin:3,width:180},items:[{xtype:'numberfield',bind:{fieldLabel:'{lineStyleStrokeNumberFieldLabel}'},value:style.getStroke().getWidth(),minValue:0,maxValue:50,listeners:{change:function(field,val){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['13']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['57']++;me.updateStyle(null,{strokewidth:val});}}},{xtype:'container',layout:'hbox',defaults:{width:70},items:[{xtype:'displayfield',width:100,bind:{value:'{lineStyleStrokeColorFieldLabel}'}},{xtype:'colorbutton',format:'hex8',value:strokeColor,margin:'5 0 0 10',listeners:{boxready:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['14']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['58']++;var color=BasiGX.util.Color.hex8ToRgba(this.getValue());__cov_O3fhm7kuhgVYV8SB2xEbmw.s['59']++;me.updateStyle(null,{strokecolor:color});},change:function(field,val){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['15']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['60']++;var color=BasiGX.util.Color.hex8ToRgba(val);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['61']++;me.updateStyle(null,{strokecolor:color});}}}]}]},{xtype:'panel',border:false,layout:'fit',items:[{xtype:'gx_renderer',margin:20,width:200,height:60,name:'lineRenderPreview',symbolizers:style,symbolType:'Line'}]}]};__cov_O3fhm7kuhgVYV8SB2xEbmw.s['62']++;return fs;},getPolygonFieldset:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['16']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['63']++;var me=this;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['64']++;var style=me.getRedlinePolygonStyle();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['65']++;if(Ext.isEmpty(style)){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['15'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['66']++;return null;}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['15'][1]++;}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['67']++;var styleFillColor=style.getFill().getColor();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['68']++;var fillColor=styleFillColor.indexOf('rgba')>-1?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['16'][0]++,BasiGX.util.Color.rgbaToHex8(styleFillColor)):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['16'][1]++,styleFillColor);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['69']++;var styleStrokeColor=style.getStroke().getColor();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['70']++;var strokeColor=styleStrokeColor.indexOf('rgba')>-1?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['17'][0]++,BasiGX.util.Color.rgbaToHex8(styleStrokeColor)):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['17'][1]++,styleStrokeColor);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['71']++;var fs={xtype:'fieldset',bind:{title:'{polygonStyleFieldSetTitle}'},name:'polygonstyle',layout:'hbox',items:[{xtype:'fieldset',layout:'vbox',width:220,defaults:{width:180},items:[{xtype:'numberfield',bind:{fieldLabel:'{polygonStyleStrokeNumberFieldLabel}'},value:style.getStroke().getWidth(),minValue:0,maxValue:50,listeners:{change:function(field,val){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['17']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['72']++;me.updateStyle(null,null,{strokewidth:val});}}},{xtype:'container',layout:'hbox',defaults:{width:70},items:[{xtype:'displayfield',width:100,bind:{value:'{polygonStyleStrokeColorFieldLabel}'}},{xtype:'colorbutton',format:'hex8',value:strokeColor,margin:'5 0 0 10',listeners:{boxready:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['18']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['73']++;var color=BasiGX.util.Color.hex8ToRgba(this.getValue());__cov_O3fhm7kuhgVYV8SB2xEbmw.s['74']++;me.updateStyle(null,null,{strokecolor:color});},change:function(field,val){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['19']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['75']++;var color=BasiGX.util.Color.hex8ToRgba(val);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['76']++;me.updateStyle(null,null,{strokecolor:color});}}}]},{xtype:'container',layout:'hbox',defaults:{width:100},items:[{xtype:'displayfield',width:100,bind:{value:'{polygonStyleFillColorFieldLabel}'}},{xtype:'colorbutton',format:'hex8',margin:'0 0 0 10',value:fillColor,listeners:{boxready:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['20']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['77']++;var color=BasiGX.util.Color.hex8ToRgba(this.getValue());__cov_O3fhm7kuhgVYV8SB2xEbmw.s['78']++;me.updateStyle(null,null,{fillcolor:color});},change:function(field,val){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['21']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['79']++;var color=BasiGX.util.Color.hex8ToRgba(val);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['80']++;me.updateStyle(null,null,{fillcolor:color});}}}]}]},{xtype:'panel',border:false,layout:'fit',items:[{xtype:'gx_renderer',margin:20,width:200,height:100,name:'polygonRenderPreview',symbolizers:style,symbolType:'Polygon'}]}]};__cov_O3fhm7kuhgVYV8SB2xEbmw.s['81']++;return fs;},updateStyle:function(pointStyle,lineStyle,polygonStyle){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['22']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['82']++;var me=this;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['83']++;var oldStyle;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['84']++;var style;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['85']++;var renderer;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['86']++;var redliningContainer=Ext.ComponentQuery.query('basigx-container-redlining')[0];__cov_O3fhm7kuhgVYV8SB2xEbmw.s['87']++;if(pointStyle){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['18'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['88']++;oldStyle=me.getRedlinePointStyle();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['89']++;renderer=me.down('gx_renderer[name=pointRenderPreview]');__cov_O3fhm7kuhgVYV8SB2xEbmw.s['90']++;style=me.generatePointStyle(oldStyle,pointStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['91']++;me.setRedlinePointStyle(style);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['92']++;redliningContainer.setRedlinePointStyle(style);}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['18'][1]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['93']++;if(lineStyle){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['19'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['94']++;oldStyle=me.getRedlineLineStringStyle();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['95']++;renderer=me.down('gx_renderer[name=lineRenderPreview]');__cov_O3fhm7kuhgVYV8SB2xEbmw.s['96']++;style=me.generateLineStringStyle(oldStyle,lineStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['97']++;me.setRedlineLineStringStyle(style);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['98']++;redliningContainer.setRedlineLineStringStyle(style);}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['19'][1]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['99']++;oldStyle=me.getRedlinePolygonStyle();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['100']++;renderer=me.down('gx_renderer[name=polygonRenderPreview]');__cov_O3fhm7kuhgVYV8SB2xEbmw.s['101']++;style=me.generatePolygonStyle(oldStyle,polygonStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['102']++;me.setRedlinePolygonStyle(style);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['103']++;redliningContainer.setRedlinePolygonStyle(style);}}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['104']++;if(renderer){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['20'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['105']++;renderer.setSymbolizers(style);}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['20'][1]++;}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['106']++;me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());},generatePointStyle:function(oldStyle,pointStyle){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['23']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['107']++;var fallBackRadius=7;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['108']++;var fallBackFillColor='#008000';__cov_O3fhm7kuhgVYV8SB2xEbmw.s['109']++;var fallBackStrokeColor='#ffcc33';__cov_O3fhm7kuhgVYV8SB2xEbmw.s['110']++;var fallBackStrokeWidth=2;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['111']++;var oldImage=oldStyle.getImage();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['112']++;if((__cov_O3fhm7kuhgVYV8SB2xEbmw.b['22'][0]++,oldImage)&&(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['22'][1]++,oldImage.getRadius)){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['21'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['113']++;fallBackRadius=oldImage.getRadius();}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['21'][1]++;}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['114']++;if((__cov_O3fhm7kuhgVYV8SB2xEbmw.b['24'][0]++,oldImage)&&(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['24'][1]++,oldImage.getFill)&&(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['24'][2]++,oldImage.getFill())&&(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['24'][3]++,oldImage.getFill().getColor)){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['23'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['115']++;fallBackFillColor=oldImage.getFill().getColor();}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['23'][1]++;}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['116']++;if((__cov_O3fhm7kuhgVYV8SB2xEbmw.b['26'][0]++,oldImage)&&(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['26'][1]++,oldImage.getStroke)&&(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['26'][2]++,oldImage.getStroke())&&(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['26'][3]++,oldImage.getStroke().getColor)){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['25'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['117']++;fallBackStrokeColor=oldImage.getStroke().getColor();}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['25'][1]++;}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['118']++;if((__cov_O3fhm7kuhgVYV8SB2xEbmw.b['28'][0]++,oldImage)&&(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['28'][1]++,oldImage.getStroke)&&(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['28'][2]++,oldImage.getStroke())&&(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['28'][3]++,oldImage.getStroke().getWidth)){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['27'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['119']++;fallBackStrokeWidth=oldImage.getStroke().getWidth();}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['27'][1]++;}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['120']++;var style=new ol.style.Style({image:(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['30'][0]++,pointStyle.radius)||(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['30'][1]++,pointStyle.fillcolor)||(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['30'][2]++,pointStyle.fillopacity)||(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['30'][3]++,pointStyle.strokewidth)||(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['30'][4]++,pointStyle.strokecolor)?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['29'][0]++,new ol.style.Circle({radius:(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['31'][0]++,pointStyle.radius)||(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['31'][1]++,fallBackRadius),fill:new ol.style.Fill({color:pointStyle.fillcolor?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['32'][0]++,pointStyle.fillcolor):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['32'][1]++,fallBackFillColor)}),stroke:new ol.style.Stroke({color:pointStyle.strokecolor?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['33'][0]++,pointStyle.strokecolor):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['33'][1]++,fallBackStrokeColor),width:pointStyle.strokewidth?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['34'][0]++,pointStyle.strokewidth):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['34'][1]++,fallBackStrokeWidth)})})):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['29'][1]++,oldImage),text:(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['35'][0]++,oldStyle.getText())||(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['35'][1]++,new ol.style.Text())});__cov_O3fhm7kuhgVYV8SB2xEbmw.s['121']++;return style;},generateLineStringStyle:function(oldStyle,lineStyle){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['24']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['122']++;var style=new ol.style.Style({stroke:(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['37'][0]++,lineStyle.strokewidth)||(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['37'][1]++,lineStyle.strokecolor)?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['36'][0]++,new ol.style.Stroke({color:lineStyle.strokecolor?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['38'][0]++,lineStyle.strokecolor):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['38'][1]++,oldStyle.getStroke().getColor()),width:lineStyle.strokewidth?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['39'][0]++,lineStyle.strokewidth):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['39'][1]++,oldStyle.getStroke().getWidth())})):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['36'][1]++,oldStyle.getStroke()),text:(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['40'][0]++,oldStyle.getText())||(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['40'][1]++,new ol.style.Text())});__cov_O3fhm7kuhgVYV8SB2xEbmw.s['123']++;return style;},generatePolygonStyle:function(oldStyle,polygonStyle){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['25']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['124']++;var style=new ol.style.Style({fill:polygonStyle.fillcolor?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['41'][0]++,new ol.style.Fill({color:polygonStyle.fillcolor})):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['41'][1]++,oldStyle.getFill()),stroke:(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['43'][0]++,polygonStyle.strokewidth)||(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['43'][1]++,polygonStyle.strokecolor)?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['42'][0]++,new ol.style.Stroke({color:polygonStyle.strokecolor?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['44'][0]++,polygonStyle.strokecolor):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['44'][1]++,oldStyle.getStroke().getColor()),width:polygonStyle.strokewidth?(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['45'][0]++,polygonStyle.strokewidth):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['45'][1]++,oldStyle.getStroke().getWidth())})):(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['42'][1]++,oldStyle.getStroke()),text:(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['46'][0]++,oldStyle.getText())||(__cov_O3fhm7kuhgVYV8SB2xEbmw.b['46'][1]++,new ol.style.Text())});__cov_O3fhm7kuhgVYV8SB2xEbmw.s['125']++;return style;},onChooseGraphicClick:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['26']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['126']++;var me=this;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['127']++;var redliningContainer=Ext.ComponentQuery.query('basigx-container-redlining')[0];__cov_O3fhm7kuhgVYV8SB2xEbmw.s['128']++;var okClickCallbackFn=function(pictureRec){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['27']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['129']++;var renderer=me.down('gx_renderer[name=pointRenderPreview]');__cov_O3fhm7kuhgVYV8SB2xEbmw.s['130']++;var pictureUrl=BasiGX.util.Url.getWebProjectBaseUrl()+me.getBackendUrls().pictureSrc.url+pictureRec.get('id');__cov_O3fhm7kuhgVYV8SB2xEbmw.s['131']++;var imageValues=me.getImageAttributes();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['132']++;var imageStyle=new ol.style.Style({image:new ol.style.Icon({anchor:[imageValues[0],imageValues[1]],scale:imageValues[2],src:pictureUrl})});__cov_O3fhm7kuhgVYV8SB2xEbmw.s['133']++;redliningContainer.setRedlinePointStyle(imageStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['134']++;me.setRedlinePointStyle(imageStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['135']++;me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());__cov_O3fhm7kuhgVYV8SB2xEbmw.s['136']++;renderer.setSymbolizers(imageStyle);};__cov_O3fhm7kuhgVYV8SB2xEbmw.s['137']++;var deleteClickCallbackFn=function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['28']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['138']++;Ext.toast(me.getViewModel().get('pointGrapicDeletedSuccessMsgText'),me.getViewModel().get('pointGrapicDeletedSuccessMsgTitle'),'t');};__cov_O3fhm7kuhgVYV8SB2xEbmw.s['139']++;var graphicPool=Ext.create('BasiGX.view.panel.GraphicPool',{backendUrls:me.getBackendUrls(),okClickCallbackFn:okClickCallbackFn,deleteClickCallbackFn:deleteClickCallbackFn,useCsrfToken:true});__cov_O3fhm7kuhgVYV8SB2xEbmw.s['140']++;var graphicPoolWin=Ext.create('Ext.window.Window',{title:me.getViewModel().get('graphicPoolWindowTitle'),constrain:true,items:[graphicPool]});__cov_O3fhm7kuhgVYV8SB2xEbmw.s['141']++;graphicPoolWin.show();},changeIconStyle:function(imageProps){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['29']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['142']++;var me=this;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['143']++;var offsetX=imageProps[0];__cov_O3fhm7kuhgVYV8SB2xEbmw.s['144']++;var offsetY=imageProps[1];__cov_O3fhm7kuhgVYV8SB2xEbmw.s['145']++;var scale=imageProps[2];__cov_O3fhm7kuhgVYV8SB2xEbmw.s['146']++;var redliningContainer=Ext.ComponentQuery.query('basigx-container-redlining')[0];__cov_O3fhm7kuhgVYV8SB2xEbmw.s['147']++;var renderer=me.down('gx_renderer[name=pointRenderPreview]');__cov_O3fhm7kuhgVYV8SB2xEbmw.s['148']++;var oldStyle=me.getRedlinePointStyle().getImage();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['149']++;if(!(oldStyle instanceof ol.style.Icon)){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['47'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['150']++;return;}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['47'][1]++;}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['151']++;var iconStyle=new ol.style.Style({image:new ol.style.Icon({scale:scale,anchorXUnits:'fraction',anchorYUnits:'fraction',anchor:[offsetX,offsetY],src:oldStyle.getSrc()})});__cov_O3fhm7kuhgVYV8SB2xEbmw.s['152']++;renderer.setSymbolizers(iconStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['153']++;redliningContainer.setRedlinePointStyle(iconStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['154']++;me.setRedlinePointStyle(iconStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['155']++;me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());},getImageAttributes:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['30']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['156']++;var me=this;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['157']++;var fractionX=1-me.down('slider[name=xoffset]').getValue()/100;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['158']++;var fractionY=me.down('slider[name=yoffset]').getValue()/100;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['159']++;var scale=me.down('slider[name=iconscale]').getValue()/100;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['160']++;return[fractionX,fractionY,scale];},getState:function(){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['31']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['161']++;var me=this;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['162']++;var state={pointStyle:me.getRedlinePointStyle(),lineStyle:me.getRedlineLineStringStyle(),polygonStyle:me.getRedlinePolygonStyle()};__cov_O3fhm7kuhgVYV8SB2xEbmw.s['163']++;return state;},setState:function(state){__cov_O3fhm7kuhgVYV8SB2xEbmw.f['32']++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['164']++;var me=this;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['165']++;var redliningContainer=Ext.ComponentQuery.query('basigx-container-redlining')[0];__cov_O3fhm7kuhgVYV8SB2xEbmw.s['166']++;if(state.pointStyle){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['48'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['167']++;me.setRedlinePointStyle(state.pointStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['168']++;redliningContainer.setRedlinePointStyle(state.pointStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['169']++;var pointFieldSet=me.down('fieldset[name=pointstyle]');__cov_O3fhm7kuhgVYV8SB2xEbmw.s['170']++;if(pointFieldSet){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['49'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['171']++;pointFieldSet.destroy();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['172']++;var anotherPointFieldSet=this.getPointFieldset();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['173']++;me.insert(0,anotherPointFieldSet);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['174']++;var isIconStyle=state.pointStyle.getImage()instanceof ol.style.Icon;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['175']++;if(isIconStyle){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['50'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['176']++;var iconTab=me.down('panel[name=pointgraphic]');__cov_O3fhm7kuhgVYV8SB2xEbmw.s['177']++;var tabPanel=me.down('fieldset[name=pointstyle]').down('tabpanel');__cov_O3fhm7kuhgVYV8SB2xEbmw.s['178']++;tabPanel.setActiveTab(iconTab);}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['50'][1]++;}}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['49'][1]++;}}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['48'][1]++;}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['179']++;if(state.lineStyle){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['51'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['180']++;me.setRedlineLineStringStyle(state.lineStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['181']++;redliningContainer.setRedlineLineStringStyle(state.lineStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['182']++;var lineStringFieldSet=me.down('fieldset[name=linestringstyle]');__cov_O3fhm7kuhgVYV8SB2xEbmw.s['183']++;if(lineStringFieldSet){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['52'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['184']++;lineStringFieldSet.destroy();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['185']++;me.insert(1,this.getLineStringFieldset());}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['52'][1]++;}}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['51'][1]++;}__cov_O3fhm7kuhgVYV8SB2xEbmw.s['186']++;if(state.polygonStyle){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['53'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['187']++;me.setRedlinePolygonStyle(state.polygonStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['188']++;redliningContainer.setRedlinePolygonStyle(state.polygonStyle);__cov_O3fhm7kuhgVYV8SB2xEbmw.s['189']++;var polygonFieldSet=me.down('fieldset[name=polygonstyle]');__cov_O3fhm7kuhgVYV8SB2xEbmw.s['190']++;if(polygonFieldSet){__cov_O3fhm7kuhgVYV8SB2xEbmw.b['54'][0]++;__cov_O3fhm7kuhgVYV8SB2xEbmw.s['191']++;polygonFieldSet.destroy();__cov_O3fhm7kuhgVYV8SB2xEbmw.s['192']++;me.insert(2,this.getPolygonFieldset());}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['54'][1]++;}}else{__cov_O3fhm7kuhgVYV8SB2xEbmw.b['53'][1]++;}}});
+    requires: [
+        'Ext.ux.colorpick.Button',
+        'BasiGX.view.panel.GraphicPool',
+        'BasiGX.util.Color'
+    ],
+
+    viewModel: {
+        data: {
+            pointStyleFieldSetTitle: 'Point Style',
+            pointStyleSymbolPanelTitle: 'Symbol',
+            pointStyleRadiusNumberFieldLabel: 'Point Radius',
+            pointStyleStrokeNumberFieldLabel: 'Stroke Width',
+            pointStyleStrokeColorFieldLabel: 'Stroke Color',
+            pointStyleFillColorFieldLabel: 'Fill Color',
+            pointStyleGraphicPanelTitle: 'Graphic',
+            pointStyleChooseImgBtnText: 'Choose Image',
+            pointStyleImgOffsetXSliderLabel: 'Graphic Offset X',
+            pointStyleImgOffsetYSliderLabel: 'Graphic Offset Y',
+            pointStyleImgScaleSliderLabel: 'Scale',
+            lineStyleFieldSetTitle: 'LineString Style',
+            lineStyleStrokeNumberFieldLabel: 'Stroke Width',
+            lineStyleStrokeColorFieldLabel: 'Stroke Color',
+            polygonStyleFieldSetTitle: 'Polygon Style',
+            polygonStyleStrokeNumberFieldLabel: 'Stroke Width',
+            polygonStyleStrokeColorFieldLabel: 'Stroke Color',
+            polygonStyleFillColorFieldLabel: 'Fill Color',
+            pointGrapicDeletedSuccessMsgText: 'The icon has been deleted. ' +
+                'Please reassign a new one.',
+            pointGrapicDeletedSuccessMsgTitle: 'Deletion succesfull',
+            graphicPoolWindowTitle: 'Graphic Pool',
+            documentation: '<h2>Styler</h2>• Benutzen Sie den ' +
+                'Styler, um Ihre Zeichenobjekte nach Wunsch zu gestalten.' +
+                '<br>• Neben Farben, Strichstärken und Schrifteigenschaften ' +
+                'können auch eigene Icons für die Symbolisierung verwendet ' +
+                'werden'
+        }
+    },
+
+    /**
+     *
+     */
+    redliningVectorLayer: null,
+
+    /**
+     *
+     */
+    padding: 5,
+
+    /**
+     * The url objects for images.
+     * Can contain url and method property
+     */
+    config: {
+        backendUrls: {
+            pictureList: null,
+            pictureSrc: null,
+            pictureUpload: null,
+            graphicDelete: null
+        },
+        redlinePointStyle: null,
+        redlineLineStringStyle: null,
+        redlinePolygonStyle: null
+    },
+
+    /**
+     * @param {Object} config The configuration object for the redline styler.
+     */
+    initComponent: function(config) {
+        this.items = [];
+        this.items.push(this.getPointFieldset());
+        this.items.push(this.getLineStringFieldset());
+        this.items.push(this.getPolygonFieldset());
+        this.callParent([config]);
+    },
+
+    /**
+     * Returns a configuration object for an ExtJS fieldset for styling points
+     * which can e.g. be used inside the `items` config.
+     *
+     * @return {Object} A configuration for an ExtJS fieldset for styling
+     *     points.
+     */
+    getPointFieldset: function() {
+        var me = this;
+        var style = me.getRedlinePointStyle();
+        if (Ext.isEmpty(style)) {
+            return null;
+        }
+        var imageStyle = style.getImage();
+        var imageAnchor;
+        var imageScale;
+        var radius = 10;
+        var strokeWidth = 0;
+        var fillColor = '#008000';
+        var strokeColor = '#ffcc33';
+
+        if (imageStyle instanceof ol.style.Icon) {
+            imageAnchor = imageStyle.getAnchor();
+            imageScale = imageStyle.getScale() * 100;
+        } else if (imageStyle instanceof ol.style.Circle) {
+            radius = imageStyle.getRadius();
+            if (imageStyle.getStroke()) {
+                strokeWidth = imageStyle.getStroke().getWidth();
+                strokeColor = imageStyle.getStroke().getColor();
+                strokeColor = strokeColor.indexOf('rgba') > -1 ?
+                    BasiGX.util.Color.rgbaToHex8(strokeColor) : strokeColor;
+            }
+            if (imageStyle.getFill()) {
+                fillColor = imageStyle.getFill().getColor();
+                fillColor = fillColor.indexOf('rgba') > -1 ? BasiGX.util.Color.
+                    rgbaToHex8(fillColor) : fillColor;
+            }
+        }
+
+        var fs = {
+            xtype: 'fieldset',
+            bind: {
+                title: '{pointStyleFieldSetTitle}'
+            },
+            name: 'pointstyle',
+            layout: 'hbox',
+            items: [{
+                xtype: 'tabpanel',
+                items: [{
+                    xtype: 'panel',
+                    bind: {
+                        title: '{pointStyleSymbolPanelTitle}'
+                    },
+                    defaults: {
+                        margin: 3,
+                        width: 220
+                    },
+                    items: [{
+                        xtype: 'numberfield',
+                        bind: {
+                            fieldLabel: '{pointStyleRadiusNumberFieldLabel}'
+                        },
+                        name: 'pointradius',
+                        value: radius,
+                        minValue: 1,
+                        maxValue: 50,
+                        listeners: {
+                            change: function(field, val) {
+                                me.updateStyle({radius: val});
+                            }
+                        }
+                    }, {
+                        xtype: 'numberfield',
+                        bind: {
+                            fieldLabel: '{pointStyleStrokeNumberFieldLabel}'
+                        },
+                        name: 'pointstrokewidth',
+                        value: strokeWidth,
+                        minValue: 0,
+                        maxValue: 50,
+                        listeners: {
+                            change: function(field, val) {
+                                me.updateStyle({strokewidth: val});
+                            }
+                        }
+                    }, {
+                        xtype: 'container',
+                        layout: 'hbox',
+                        defaults: {
+                            width: 100
+                        },
+                        items: [{
+                            xtype: 'displayfield',
+                            width: 100,
+                            bind: {
+                                value: '{pointStyleStrokeColorFieldLabel}'
+                            }
+                        }, {
+                            xtype: 'colorbutton',
+                            name: 'pointstrokecolor',
+                            format: 'hex8',
+                            value: strokeColor,
+                            margin: '5 0 0 10',
+                            listeners: {
+                                boxready: function() {
+                                    var color = BasiGX.util.Color
+                                        .hex8ToRgba(this.getValue());
+                                    me.updateStyle({
+                                        strokecolor: color
+                                    });
+                                },
+                                change: function(field, val, oldVal) {
+                                    if (oldVal) {
+                                        var color = BasiGX.util.Color
+                                            .hex8ToRgba(val);
+                                        me.updateStyle({
+                                            strokecolor: color
+                                        });
+                                    }
+                                }
+                            }
+                        }]
+                    }, {
+                        xtype: 'container',
+                        layout: 'hbox',
+                        defaults: {
+                            width: 100
+                        },
+                        items: [{
+                            xtype: 'displayfield',
+                            width: 100,
+                            bind: {
+                                value: '{pointStyleFillColorFieldLabel}'
+                            }
+                        }, {
+                            xtype: 'colorbutton',
+                            name: 'pointfillcolor',
+                            format: 'hex8',
+                            margin: '0 0 0 10',
+                            value: fillColor,
+                            listeners: {
+                                boxready: function() {
+                                    var color = BasiGX.util.Color
+                                        .hex8ToRgba(this.getValue());
+                                    me.updateStyle({
+                                        fillcolor: color
+                                    });
+                                },
+                                change: function(field, val, oldVal) {
+                                    if (oldVal) {
+                                        var color = BasiGX.util.Color
+                                            .hex8ToRgba(val);
+                                        me.updateStyle({
+                                            fillcolor: color
+                                        });
+                                    }
+                                }
+                            }
+                        }]
+                    }]
+                }, {
+                    xtype: 'panel',
+                    bind: {
+                        title: '{pointStyleGraphicPanelTitle}'
+                    },
+                    name: 'pointgraphic',
+                    defaults: {
+                        margin: 3,
+                        width: 220
+                    },
+                    items: [{
+                        xtype: 'button',
+                        bind: {
+                            text: '{pointStyleChooseImgBtnText}'
+                        },
+                        handler: me.onChooseGraphicClick,
+                        scope: me
+                    }, {
+                        xtype: 'slider',
+                        bind: {
+                            fieldLabel: '{pointStyleImgOffsetXSliderLabel}'
+                        },
+                        name: 'xoffset',
+                        value: imageAnchor ? imageAnchor[0] : 50,
+                        minValue: 0,
+                        maxValue: 100,
+                        listeners: {
+                            change: function() {
+                                var values = me.getImageAttributes();
+                                me.changeIconStyle(values);
+                            },
+                            scope: me
+                        }
+                    }, {
+                        xtype: 'slider',
+                        bind: {
+                            fieldLabel: '{pointStyleImgOffsetYSliderLabel}'
+                        },
+                        name: 'yoffset',
+                        value: imageAnchor ? imageAnchor[1] : 50,
+                        minValue: 0,
+                        maxValue: 100,
+                        listeners: {
+                            change: function() {
+                                var values = me.getImageAttributes();
+                                me.changeIconStyle(values);
+                            },
+                            scope: me
+                        }
+                    }, {
+                        xtype: 'slider',
+                        bind: {
+                            fieldLabel: '{pointStyleImgScaleSliderLabel}'
+                        },
+                        name: 'iconscale',
+                        value: imageScale ? imageScale : 100,
+                        increment: 1,
+                        minValue: 10,
+                        maxValue: 500,
+                        listeners: {
+                            change: function() {
+                                var values = me.getImageAttributes();
+                                me.changeIconStyle(values);
+                            },
+                            scope: me
+                        }
+                    }]
+                }]
+            }, {
+                xtype: 'panel',
+                border: false,
+                layout: 'fit',
+                items: [{
+                    xtype: 'gx_renderer',
+                    margin: 20,
+                    width: 200,
+                    height: 160,
+                    name: 'pointRenderPreview',
+                    symbolizers: style,
+                    symbolType: 'Point'
+                }]
+            }]
+        };
+        return fs;
+    },
+
+    /**
+     * Returns a configuration object for an ExtJS fieldset for styling
+     * linestrings which can e.g. be used inside the `items` config.
+     *
+     * @return {Object} A configuration for an ExtJS fieldset for styling
+     *     linestrings.
+     */
+    getLineStringFieldset: function() {
+        var me = this;
+        var style = me.getRedlineLineStringStyle();
+        if (Ext.isEmpty(style)) {
+            return null;
+        }
+        var styleStrokeColor = style.getStroke().getColor();
+        var strokeColor = styleStrokeColor.indexOf('rgba') > -1 ?
+            BasiGX.util.Color.rgbaToHex8(styleStrokeColor) :
+            styleStrokeColor;
+
+        var fs = {
+            xtype: 'fieldset',
+            bind: {
+                title: '{lineStyleFieldSetTitle}'
+            },
+            name: 'linestringstyle',
+            layout: 'hbox',
+            items: [{
+                xtype: 'fieldset',
+                layout: 'vbox',
+                width: 220,
+                defaults: {
+                    margin: 3,
+                    width: 180
+                },
+                items: [{
+                    xtype: 'numberfield',
+                    bind: {
+                        fieldLabel: '{lineStyleStrokeNumberFieldLabel}'
+                    },
+                    value: style.getStroke().getWidth(),
+                    minValue: 0,
+                    maxValue: 50,
+                    listeners: {
+                        change: function(field, val) {
+                            me.updateStyle(null, {strokewidth: val});
+                        }
+                    }
+                }, {
+                    xtype: 'container',
+                    layout: 'hbox',
+                    defaults: {
+                        width: 70
+                    },
+                    items: [{
+                        xtype: 'displayfield',
+                        width: 100,
+                        bind: {
+                            value: '{lineStyleStrokeColorFieldLabel}'
+                        }
+                    }, {
+                        xtype: 'colorbutton',
+                        format: 'hex8',
+                        value: strokeColor,
+                        margin: '5 0 0 10',
+                        listeners: {
+                            boxready: function() {
+                                var color = BasiGX.util.Color
+                                    .hex8ToRgba(this.getValue());
+                                me.updateStyle(null, {
+                                    strokecolor: color
+                                });
+                            },
+                            change: function(field, val) {
+                                var color = BasiGX.util.Color
+                                    .hex8ToRgba(val);
+                                me.updateStyle(null,
+                                    {strokecolor: color}
+                                );
+                            }
+                        }
+                    }]
+                }]
+            }, {
+                xtype: 'panel',
+                border: false,
+                layout: 'fit',
+                items: [{
+                    xtype: 'gx_renderer',
+                    margin: 20,
+                    width: 200,
+                    height: 60,
+                    name: 'lineRenderPreview',
+                    symbolizers: style,
+                    symbolType: 'Line'
+                }]
+            }]
+        };
+        return fs;
+    },
+
+    /**
+     * Returns a configuration object for an ExtJS fieldset for styling
+     * polygon which can e.g. be used inside the `items` config.
+     *
+     * @return {Object} A configuration for an ExtJS fieldset for styling
+     *     polygon.
+     */
+    getPolygonFieldset: function() {
+        var me = this;
+        var style = me.getRedlinePolygonStyle();
+        if (Ext.isEmpty(style)) {
+            return null;
+        }
+        var styleFillColor = style.getFill().getColor();
+        var fillColor = styleFillColor.indexOf('rgba') > -1 ?
+            BasiGX.util.Color.rgbaToHex8(styleFillColor) : styleFillColor;
+        var styleStrokeColor = style.getStroke().getColor();
+        var strokeColor = styleStrokeColor.indexOf('rgba') > -1 ?
+            BasiGX.util.Color.rgbaToHex8(styleStrokeColor) :
+            styleStrokeColor;
+
+        var fs = {
+            xtype: 'fieldset',
+            bind: {
+                title: '{polygonStyleFieldSetTitle}'
+            },
+            name: 'polygonstyle',
+            layout: 'hbox',
+            items: [{
+                xtype: 'fieldset',
+                layout: 'vbox',
+                width: 220,
+                defaults: {
+                    width: 180
+                },
+                items: [{
+                    xtype: 'numberfield',
+                    bind: {
+                        fieldLabel: '{polygonStyleStrokeNumberFieldLabel}'
+                    },
+                    value: style.getStroke().getWidth(),
+                    minValue: 0,
+                    maxValue: 50,
+                    listeners: {
+                        change: function(field, val) {
+                            me.updateStyle(null, null,
+                                {strokewidth: val}
+                            );
+                        }
+                    }
+                }, {
+                    xtype: 'container',
+                    layout: 'hbox',
+                    defaults: {
+                        width: 70
+                    },
+                    items: [{
+                        xtype: 'displayfield',
+                        width: 100,
+                        bind: {
+                            value: '{polygonStyleStrokeColorFieldLabel}'
+                        }
+                    }, {
+                        xtype: 'colorbutton',
+                        format: 'hex8',
+                        value: strokeColor,
+                        margin: '5 0 0 10',
+                        listeners: {
+                            boxready: function() {
+                                var color = BasiGX.util.Color
+                                    .hex8ToRgba(this.getValue());
+                                me.updateStyle(null, null, {
+                                    strokecolor: color
+                                });
+                            },
+                            change: function(field, val) {
+                                var color = BasiGX.util.Color
+                                    .hex8ToRgba(val);
+                                me.updateStyle(null, null,
+                                    {strokecolor: color}
+                                );
+                            }
+                        }
+                    }]
+                }, {
+                    xtype: 'container',
+                    layout: 'hbox',
+                    defaults: {
+                        width: 100
+                    },
+                    items: [{
+                        xtype: 'displayfield',
+                        width: 100,
+                        bind: {
+                            value: '{polygonStyleFillColorFieldLabel}'
+                        }
+                    }, {
+                        xtype: 'colorbutton',
+                        format: 'hex8',
+                        margin: '0 0 0 10',
+                        value: fillColor,
+                        listeners: {
+                            boxready: function() {
+                                var color = BasiGX.util.Color
+                                    .hex8ToRgba(this.getValue());
+                                me.updateStyle(null, null, {
+                                    fillcolor: color
+                                });
+                            },
+                            change: function(field, val) {
+                                var color = BasiGX.util.Color
+                                    .hex8ToRgba(val);
+                                me.updateStyle(null, null,
+                                    {fillcolor: color}
+                                );
+                            }
+                        }
+                    }]
+                }]
+            }, {
+                xtype: 'panel',
+                border: false,
+                layout: 'fit',
+                items: [{
+                    xtype: 'gx_renderer',
+                    margin: 20,
+                    width: 200,
+                    height: 100,
+                    name: 'polygonRenderPreview',
+                    symbolizers: style,
+                    symbolType: 'Polygon'
+                }]
+            }]
+        };
+        return fs;
+    },
+
+    /**
+     * Update the style by rewriting and reapplying on the layer and the
+     * `gx_renderer`
+     *
+     * @param {Object} pointStyle A serialized version of a point style, *not*
+     *     an instance of `ol.style.Style`.
+     * @param {Object} lineStyle A serialized version of a linestring style,
+     *     *not* an instance of `ol.style.Style`.
+     * @param {Object} polygonStyle A serialized version of a polygon style,
+     *     *not* an instance of `ol.style.Style`.
+     */
+    updateStyle: function(pointStyle, lineStyle, polygonStyle) {
+        var me = this;
+        var oldStyle;
+        var style;
+        var renderer;
+        var redliningContainer = Ext.ComponentQuery.query(
+            'basigx-container-redlining')[0];
+
+        if (pointStyle) {
+            oldStyle = me.getRedlinePointStyle();
+            renderer = me.down('gx_renderer[name=pointRenderPreview]');
+            style = me.generatePointStyle(oldStyle, pointStyle);
+            me.setRedlinePointStyle(style);
+            redliningContainer.setRedlinePointStyle(style);
+        } else if (lineStyle) {
+            oldStyle = me.getRedlineLineStringStyle();
+            renderer = me.down('gx_renderer[name=lineRenderPreview]');
+            style = me.generateLineStringStyle(oldStyle, lineStyle);
+            me.setRedlineLineStringStyle(style);
+            redliningContainer.setRedlineLineStringStyle(style);
+        } else {
+            oldStyle = me.getRedlinePolygonStyle();
+            renderer = me.down('gx_renderer[name=polygonRenderPreview]');
+            style = me.generatePolygonStyle(oldStyle, polygonStyle);
+            me.setRedlinePolygonStyle(style);
+            redliningContainer.setRedlinePolygonStyle(style);
+        }
+
+        // refresh the gx_renderer
+        if (renderer) {
+            renderer.setSymbolizers(style);
+        }
+
+        // reapply the styleFn on the layer so that ol3 starts redrawing
+        // with new styles
+        me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
+    },
+
+    /**
+     * Returns a new `ol.style.Style` as a merge of an `oldStyle` and variations
+     * given in the `pointStyle`.
+     *
+     * @param {ol.style.Style} oldStyle The old style of the point.
+     * @param {Object} pointStyle A serialized version of a point style, *not*
+     *     an instance of `ol.style.Style`.
+     * @return {ol.style.Style} The new style, with properties defaulting to
+     *     their counterparts in `oldStyle`, overwritten by properties of the
+     *     passed `pointStyle`.
+     */
+    generatePointStyle: function(oldStyle, pointStyle) {
+        var fallBackRadius = 7;
+        var fallBackFillColor = '#008000';
+        var fallBackStrokeColor = '#ffcc33';
+        var fallBackStrokeWidth = 2;
+        var oldImage = oldStyle.getImage();
+
+        if (oldImage && oldImage.getRadius) {
+            fallBackRadius = oldImage.getRadius();
+        }
+        if (oldImage && oldImage.getFill && oldImage.getFill() &&
+            oldImage.getFill().getColor) {
+            fallBackFillColor = oldImage.getFill().getColor();
+        }
+        if (oldImage && oldImage.getStroke && oldImage.getStroke() &&
+            oldImage.getStroke().getColor) {
+            fallBackStrokeColor = oldImage.getStroke().getColor();
+        }
+        if (oldImage && oldImage.getStroke && oldImage.getStroke() &&
+            oldImage.getStroke().getWidth) {
+            fallBackStrokeWidth = oldImage.getStroke().getWidth();
+        }
+
+        var style = new ol.style.Style({
+            image: pointStyle.radius || pointStyle.fillcolor ||
+            pointStyle.fillopacity || pointStyle.strokewidth ||
+            pointStyle.strokecolor ?
+                new ol.style.Circle({
+                    radius: pointStyle.radius || fallBackRadius,
+                    fill: new ol.style.Fill({
+                        color: pointStyle.fillcolor ? pointStyle.fillcolor :
+                            fallBackFillColor
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: pointStyle.strokecolor ? pointStyle.strokecolor :
+                            fallBackStrokeColor,
+                        width: pointStyle.strokewidth ? pointStyle.strokewidth :
+                            fallBackStrokeWidth
+                    })
+                }) : oldImage,
+            text: oldStyle.getText() || new ol.style.Text()
+        });
+
+        return style;
+    },
+
+    /**
+     * Returns a new `ol.style.Style` as a merge of an `oldStyle` and variations
+     * given in the `lineStyle`.
+     *
+     * @param {ol.style.Style} oldStyle The old style of the linestring.
+     * @param {Object} lineStyle A serialized version of a linestring style,
+     *     *not* an instance of `ol.style.Style`.
+     * @return {ol.style.Style} The new style, with properties defaulting to
+     *     their counterparts in `oldStyle`, overwritten by properties of the
+     *     passed `lineStyle`.
+     */
+    generateLineStringStyle: function(oldStyle, lineStyle) {
+        var style = new ol.style.Style({
+            stroke: lineStyle.strokewidth || lineStyle.strokecolor ?
+                new ol.style.Stroke({
+                    color: lineStyle.strokecolor ? lineStyle.strokecolor :
+                        oldStyle.getStroke().getColor(),
+                    width: lineStyle.strokewidth ? lineStyle.strokewidth :
+                        oldStyle.getStroke().getWidth()
+                }) : oldStyle.getStroke(),
+            text: oldStyle.getText() || new ol.style.Text()
+        });
+        return style;
+    },
+
+    /**
+     * Returns a new `ol.style.Style` as a merge of an `oldStyle` and variations
+     * given in the `polygonStyle`.
+     *
+     * @param {ol.style.Style} oldStyle The old style of the polygon.
+     * @param {Object} polygonStyle A serialized version of a polygon style,
+     *     *not* an instance of `ol.style.Style`.
+     * @return {ol.style.Style} The new style, with properties defaulting to
+     *     their counterparts in `oldStyle`, overwritten by properties of the
+     *     passed `polygonStyle`.
+     */
+    generatePolygonStyle: function(oldStyle, polygonStyle) {
+        var style = new ol.style.Style({
+            fill: polygonStyle.fillcolor ?
+                new ol.style.Fill({
+                    color: polygonStyle.fillcolor
+                }) : oldStyle.getFill(),
+            stroke: polygonStyle.strokewidth || polygonStyle.strokecolor ?
+                new ol.style.Stroke({
+                    color: polygonStyle.strokecolor ? polygonStyle.strokecolor :
+                        oldStyle.getStroke().getColor(),
+                    width: polygonStyle.strokewidth ? polygonStyle.strokewidth :
+                        oldStyle.getStroke().getWidth()
+                }) : oldStyle.getStroke(),
+            text: oldStyle.getText() || new ol.style.Text()
+        });
+        return style;
+    },
+
+    /**
+     * Creates and shows a window with a `BasiGX.view.panel.GraphicPool`, that
+     * will eventually update both the preview and also the styles in the
+     * attached layer.
+     */
+    onChooseGraphicClick: function() {
+        var me = this;
+        var redliningContainer = Ext.ComponentQuery.query(
+            'basigx-container-redlining')[0];
+
+        var okClickCallbackFn = function(pictureRec) {
+            var renderer = me.down('gx_renderer[name=pointRenderPreview]');
+            var pictureUrl = BasiGX.util.Url.getWebProjectBaseUrl() +
+                me.getBackendUrls().pictureSrc.url +
+                pictureRec.get('id');
+            var imageValues = me.getImageAttributes();
+            var imageStyle = new ol.style.Style({
+                image: new ol.style.Icon({
+                    anchor: [
+                        imageValues[0],
+                        imageValues[1]
+                    ],
+                    scale: imageValues[2],
+                    src: pictureUrl
+                })
+            });
+            redliningContainer.setRedlinePointStyle(imageStyle);
+            me.setRedlinePointStyle(imageStyle);
+            // reapply the styleFn on the layer so that ol3 starts redrawing
+            // with new styles
+            me.redliningVectorLayer.setStyle(
+                me.redliningVectorLayer.getStyle()
+            );
+            renderer.setSymbolizers(imageStyle);
+        };
+
+        var deleteClickCallbackFn = function() {
+            Ext.toast(
+                me.getViewModel().get('pointGrapicDeletedSuccessMsgText'),
+                me.getViewModel().get('pointGrapicDeletedSuccessMsgTitle'),
+                't'
+            );
+        };
+
+        var graphicPool = Ext.create('BasiGX.view.panel.GraphicPool', {
+            backendUrls: me.getBackendUrls(),
+            okClickCallbackFn: okClickCallbackFn,
+            deleteClickCallbackFn: deleteClickCallbackFn,
+            useCsrfToken: true
+        });
+
+        var graphicPoolWin = Ext.create('Ext.window.Window', {
+            title: me.getViewModel().get('graphicPoolWindowTitle'),
+            constrain: true,
+            items: [graphicPool]
+        });
+        graphicPoolWin.show();
+    },
+
+    /**
+     * Called whenever the icon style changed, this method will ensure that
+     * both the redlining styler, the `gx_preview` and the vector layer are
+     * updated to use the new style.
+     *
+     * @param {Array} imageProps The properties for the new icon. `offsetX` is
+     *     expected at index `0`, `offsetY` is expected at index `1` and `scale`
+     *     is expected at index `2`. To obtain such an array from the form
+     *     values, you can use #getImageAttributes.
+     */
+    changeIconStyle: function(imageProps) {
+        var me = this;
+        var offsetX = imageProps[0];
+        var offsetY = imageProps[1];
+        var scale = imageProps[2];
+
+        var redliningContainer = Ext.ComponentQuery.query(
+            'basigx-container-redlining')[0];
+        var renderer = me.down('gx_renderer[name=pointRenderPreview]');
+        var oldStyle = me.getRedlinePointStyle().getImage();
+        // just set a new style if an icon style has already been set
+        if (!(oldStyle instanceof ol.style.Icon)) {
+            return;
+        }
+        var iconStyle = new ol.style.Style({
+            image: new ol.style.Icon({
+                scale: scale,
+                anchorXUnits: 'fraction',
+                anchorYUnits: 'fraction',
+                anchor: [
+                    offsetX,
+                    offsetY
+                ],
+                src: oldStyle.getSrc()
+            })
+        });
+        renderer.setSymbolizers(iconStyle);
+        redliningContainer.setRedlinePointStyle(iconStyle);
+        me.setRedlinePointStyle(iconStyle);
+        // reapply the styleFn on the layer so that ol3 starts redrawing
+        // with new styles
+        me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
+    },
+
+    /**
+     * Gets an array of icon style attributes from the form elements to
+     * manipulate them.
+     *
+     * @return {Array} The image properties for the new icon. `offsetX` is
+     *     stored at index `0`, `offsetY` is stored at index `1` and `scale`
+     *     is stored at index `2`. You can use such an array updating the style
+     *     using #changeIconStyle.
+     */
+    getImageAttributes: function() {
+        var me = this;
+        var fractionX = 1 - (me.down('slider[name=xoffset]').getValue() / 100);
+        var fractionY = me.down('slider[name=yoffset]').getValue() / 100;
+        var scale = me.down('slider[name=iconscale]').getValue() / 100;
+        return [fractionX, fractionY, scale];
+    },
+
+    /**
+     * This method returns the current state of the redlining styles.
+     *
+     * @return {Object} The current state of the redlining styles. The styles
+     *     live under the following keys: `pointStyle`, `lineStyle` and
+     *     `polygonStyle`.
+     */
+    getState: function() {
+        var me = this;
+
+        var state = {
+            pointStyle: me.getRedlinePointStyle(),
+            lineStyle: me.getRedlineLineStringStyle(),
+            polygonStyle: me.getRedlinePolygonStyle()
+        };
+
+        return state;
+    },
+
+    /**
+     * This method sets the state of the redlining styles.
+     *
+     * @param {Object} state An object with the new states of the redlining
+     *     components. Should have the following keys: `pointStyle`, `lineStyle`
+     *     and `polygonStyle`.
+     */
+    setState: function(state) {
+        var me = this;
+        var redliningContainer = Ext.ComponentQuery.query(
+            'basigx-container-redlining')[0];
+        if (state.pointStyle) {
+            me.setRedlinePointStyle(state.pointStyle);
+            redliningContainer.setRedlinePointStyle(state.pointStyle);
+            var pointFieldSet = me.down('fieldset[name=pointstyle]');
+            if (pointFieldSet) {
+                pointFieldSet.destroy();
+                var anotherPointFieldSet = this.getPointFieldset();
+                me.insert(0, anotherPointFieldSet);
+                var isIconStyle = state.pointStyle.getImage() instanceof
+                    ol.style.Icon;
+                if (isIconStyle) {
+                    var iconTab = me.down('panel[name=pointgraphic]');
+                    var tabPanel = me.down('fieldset[name=pointstyle]').down(
+                        'tabpanel');
+                    tabPanel.setActiveTab(iconTab);
+                }
+            }
+        }
+
+        if (state.lineStyle) {
+            me.setRedlineLineStringStyle(state.lineStyle);
+            redliningContainer.setRedlineLineStringStyle(state.lineStyle);
+            var lineStringFieldSet = me.down('fieldset[name=linestringstyle]');
+            if (lineStringFieldSet) {
+                lineStringFieldSet.destroy();
+                me.insert(1, this.getLineStringFieldset());
+            }
+        }
+
+        if (state.polygonStyle) {
+            me.setRedlinePolygonStyle(state.polygonStyle);
+            redliningContainer.setRedlinePolygonStyle(state.polygonStyle);
+            var polygonFieldSet = me.down('fieldset[name=polygonstyle]');
+            if (polygonFieldSet) {
+                polygonFieldSet.destroy();
+                me.insert(2, this.getPolygonFieldset());
+            }
+        }
+    }
+});

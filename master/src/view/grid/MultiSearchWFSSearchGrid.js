@@ -1,9 +1,601 @@
+/* Copyright (c) 2016-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ *  A grid showing results of the multisearch WFS search response values.
+ *  inspired by BasiGX.view.container.WfsSearch
+ *  This class is used by BasiGX.view.form.field.MultiSearchCombo
+ *
+ * @class BasiGX.view.grid.MultiSearchWFSSearchGrid
+ *
+ * @extends Ext.grid.Panel
+ *
+ * @requires GeoExt.component.FeatureRenderer
+ * @requires GeoExt.data.store.Features
+ * @requires BasiGX.util.Map
+ * @requires BasiGX.util.Layer
+ * @requires BasiGX.util.Animate
+ *
+ */
+Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
+    extend: 'Ext.grid.Panel',
+    xtype: 'basigx-grid-multisearchwfssearchgrid',
 
-var __cov_SYaLOpXoJCU1ZGdOLhFruA = (Function('return this'))();
-if (!__cov_SYaLOpXoJCU1ZGdOLhFruA.__coverage__) { __cov_SYaLOpXoJCU1ZGdOLhFruA.__coverage__ = {}; }
-__cov_SYaLOpXoJCU1ZGdOLhFruA = __cov_SYaLOpXoJCU1ZGdOLhFruA.__coverage__;
-if (!(__cov_SYaLOpXoJCU1ZGdOLhFruA['/home/travis/build/terrestris/BasiGX/src/view/grid/MultiSearchWFSSearchGrid.js'])) {
-   __cov_SYaLOpXoJCU1ZGdOLhFruA['/home/travis/build/terrestris/BasiGX/src/view/grid/MultiSearchWFSSearchGrid.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/grid/MultiSearchWFSSearchGrid.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0,"137":0,"138":0,"139":0,"140":0,"141":0,"142":0,"143":0,"144":0,"145":0,"146":0,"147":0,"148":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0],"19":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0},"fnMap":{"1":{"name":"(anonymous_1)","line":144,"loc":{"start":{"line":144,"column":20},"end":{"line":144,"column":31}}},"2":{"name":"(anonymous_2)","line":189,"loc":{"start":{"line":189,"column":22},"end":{"line":189,"column":38}}},"3":{"name":"(anonymous_3)","line":199,"loc":{"start":{"line":199,"column":19},"end":{"line":199,"column":30}}},"4":{"name":"(anonymous_4)","line":252,"loc":{"start":{"line":252,"column":26},"end":{"line":252,"column":54}}},"5":{"name":"(anonymous_5)","line":265,"loc":{"start":{"line":265,"column":31},"end":{"line":265,"column":43}}},"6":{"name":"(anonymous_6)","line":285,"loc":{"start":{"line":285,"column":21},"end":{"line":285,"column":40}}},"7":{"name":"(anonymous_7)","line":297,"loc":{"start":{"line":297,"column":21},"end":{"line":297,"column":40}}},"8":{"name":"(anonymous_8)","line":313,"loc":{"start":{"line":313,"column":17},"end":{"line":313,"column":32}}},"9":{"name":"(anonymous_9)","line":328,"loc":{"start":{"line":328,"column":21},"end":{"line":328,"column":40}}},"10":{"name":"(anonymous_10)","line":340,"loc":{"start":{"line":340,"column":21},"end":{"line":340,"column":40}}},"11":{"name":"(anonymous_11)","line":356,"loc":{"start":{"line":356,"column":29},"end":{"line":356,"column":52}}},"12":{"name":"(anonymous_12)","line":359,"loc":{"start":{"line":359,"column":31},"end":{"line":359,"column":51}}},"13":{"name":"(anonymous_13)","line":365,"loc":{"start":{"line":365,"column":36},"end":{"line":365,"column":51}}},"14":{"name":"(anonymous_14)","line":385,"loc":{"start":{"line":385,"column":22},"end":{"line":385,"column":45}}},"15":{"name":"(anonymous_15)","line":415,"loc":{"start":{"line":415,"column":31},"end":{"line":415,"column":44}}},"16":{"name":"(anonymous_16)","line":416,"loc":{"start":{"line":416,"column":36},"end":{"line":416,"column":51}}},"17":{"name":"(anonymous_17)","line":457,"loc":{"start":{"line":457,"column":23},"end":{"line":457,"column":42}}},"18":{"name":"(anonymous_18)","line":470,"loc":{"start":{"line":470,"column":31},"end":{"line":470,"column":49}}},"19":{"name":"(anonymous_19)","line":475,"loc":{"start":{"line":475,"column":48},"end":{"line":475,"column":63}}},"20":{"name":"(anonymous_20)","line":500,"loc":{"start":{"line":500,"column":16},"end":{"line":500,"column":27}}},"21":{"name":"(anonymous_21)","line":521,"loc":{"start":{"line":521,"column":25},"end":{"line":521,"column":36}}},"22":{"name":"(anonymous_22)","line":538,"loc":{"start":{"line":538,"column":22},"end":{"line":538,"column":50}}},"23":{"name":"(anonymous_23)","line":560,"loc":{"start":{"line":560,"column":24},"end":{"line":560,"column":52}}},"24":{"name":"(anonymous_24)","line":579,"loc":{"start":{"line":579,"column":30},"end":{"line":579,"column":58}}}},"statementMap":{"1":{"start":{"line":32,"column":0},"end":{"line":601,"column":3}},"2":{"start":{"line":145,"column":12},"end":{"line":149,"column":16}},"3":{"start":{"line":190,"column":16},"end":{"line":191,"column":34}},"4":{"start":{"line":200,"column":8},"end":{"line":200,"column":22}},"5":{"start":{"line":202,"column":8},"end":{"line":202,"column":33}},"6":{"start":{"line":204,"column":8},"end":{"line":204,"column":60}},"7":{"start":{"line":206,"column":8},"end":{"line":218,"column":9}},"8":{"start":{"line":207,"column":12},"end":{"line":212,"column":15}},"9":{"start":{"line":214,"column":12},"end":{"line":215,"column":63}},"10":{"start":{"line":216,"column":12},"end":{"line":216,"column":77}},"11":{"start":{"line":217,"column":12},"end":{"line":217,"column":56}},"12":{"start":{"line":220,"column":8},"end":{"line":224,"column":11}},"13":{"start":{"line":226,"column":8},"end":{"line":226,"column":39}},"14":{"start":{"line":229,"column":8},"end":{"line":229,"column":61}},"15":{"start":{"line":230,"column":8},"end":{"line":230,"column":58}},"16":{"start":{"line":233,"column":8},"end":{"line":233,"column":45}},"17":{"start":{"line":234,"column":8},"end":{"line":234,"column":57}},"18":{"start":{"line":235,"column":8},"end":{"line":235,"column":59}},"19":{"start":{"line":236,"column":8},"end":{"line":236,"column":60}},"20":{"start":{"line":238,"column":8},"end":{"line":238,"column":50}},"21":{"start":{"line":253,"column":8},"end":{"line":253,"column":22}},"22":{"start":{"line":254,"column":8},"end":{"line":254,"column":27}},"23":{"start":{"line":255,"column":8},"end":{"line":255,"column":25}},"24":{"start":{"line":257,"column":8},"end":{"line":257,"column":55}},"25":{"start":{"line":259,"column":8},"end":{"line":259,"column":37}},"26":{"start":{"line":261,"column":8},"end":{"line":261,"column":27}},"27":{"start":{"line":263,"column":8},"end":{"line":263,"column":61}},"28":{"start":{"line":265,"column":8},"end":{"line":269,"column":11}},"29":{"start":{"line":266,"column":12},"end":{"line":268,"column":13}},"30":{"start":{"line":267,"column":16},"end":{"line":267,"column":65}},"31":{"start":{"line":271,"column":8},"end":{"line":277,"column":10}},"32":{"start":{"line":279,"column":8},"end":{"line":279,"column":28}},"33":{"start":{"line":281,"column":8},"end":{"line":302,"column":11}},"34":{"start":{"line":286,"column":16},"end":{"line":286,"column":37}},"35":{"start":{"line":287,"column":16},"end":{"line":294,"column":17}},"36":{"start":{"line":288,"column":20},"end":{"line":288,"column":69}},"37":{"start":{"line":289,"column":23},"end":{"line":294,"column":17}},"38":{"start":{"line":290,"column":20},"end":{"line":290,"column":57}},"39":{"start":{"line":292,"column":20},"end":{"line":293,"column":58}},"40":{"start":{"line":295,"column":16},"end":{"line":295,"column":74}},"41":{"start":{"line":298,"column":16},"end":{"line":298,"column":37}},"42":{"start":{"line":299,"column":16},"end":{"line":300,"column":30}},"43":{"start":{"line":314,"column":8},"end":{"line":314,"column":22}},"44":{"start":{"line":315,"column":8},"end":{"line":315,"column":45}},"45":{"start":{"line":316,"column":8},"end":{"line":316,"column":74}},"46":{"start":{"line":317,"column":8},"end":{"line":317,"column":50}},"47":{"start":{"line":318,"column":8},"end":{"line":318,"column":58}},"48":{"start":{"line":319,"column":8},"end":{"line":319,"column":21}},"49":{"start":{"line":321,"column":8},"end":{"line":321,"column":28}},"50":{"start":{"line":323,"column":8},"end":{"line":345,"column":11}},"51":{"start":{"line":329,"column":16},"end":{"line":329,"column":37}},"52":{"start":{"line":330,"column":16},"end":{"line":337,"column":17}},"53":{"start":{"line":331,"column":20},"end":{"line":331,"column":74}},"54":{"start":{"line":332,"column":23},"end":{"line":337,"column":17}},"55":{"start":{"line":333,"column":20},"end":{"line":333,"column":62}},"56":{"start":{"line":335,"column":20},"end":{"line":336,"column":48}},"57":{"start":{"line":338,"column":16},"end":{"line":338,"column":61}},"58":{"start":{"line":341,"column":16},"end":{"line":341,"column":37}},"59":{"start":{"line":342,"column":16},"end":{"line":343,"column":30}},"60":{"start":{"line":357,"column":8},"end":{"line":357,"column":22}},"61":{"start":{"line":358,"column":8},"end":{"line":358,"column":36}},"62":{"start":{"line":359,"column":8},"end":{"line":372,"column":11}},"63":{"start":{"line":360,"column":12},"end":{"line":363,"column":15}},"64":{"start":{"line":365,"column":12},"end":{"line":371,"column":15}},"65":{"start":{"line":366,"column":16},"end":{"line":370,"column":17}},"66":{"start":{"line":369,"column":20},"end":{"line":369,"column":68}},"67":{"start":{"line":373,"column":8},"end":{"line":373,"column":34}},"68":{"start":{"line":386,"column":8},"end":{"line":386,"column":22}},"69":{"start":{"line":388,"column":8},"end":{"line":388,"column":57}},"70":{"start":{"line":390,"column":8},"end":{"line":390,"column":61}},"71":{"start":{"line":391,"column":8},"end":{"line":391,"column":65}},"72":{"start":{"line":392,"column":8},"end":{"line":392,"column":17}},"73":{"start":{"line":393,"column":8},"end":{"line":393,"column":73}},"74":{"start":{"line":394,"column":8},"end":{"line":394,"column":68}},"75":{"start":{"line":396,"column":8},"end":{"line":400,"column":9}},"76":{"start":{"line":397,"column":12},"end":{"line":397,"column":33}},"77":{"start":{"line":399,"column":12},"end":{"line":399,"column":31}},"78":{"start":{"line":402,"column":8},"end":{"line":402,"column":45}},"79":{"start":{"line":403,"column":8},"end":{"line":403,"column":45}},"80":{"start":{"line":405,"column":8},"end":{"line":413,"column":69}},"81":{"start":{"line":415,"column":8},"end":{"line":441,"column":11}},"82":{"start":{"line":416,"column":12},"end":{"line":440,"column":15}},"83":{"start":{"line":417,"column":16},"end":{"line":439,"column":34}},"84":{"start":{"line":443,"column":8},"end":{"line":443,"column":35}},"85":{"start":{"line":445,"column":8},"end":{"line":445,"column":19}},"86":{"start":{"line":458,"column":8},"end":{"line":458,"column":22}},"87":{"start":{"line":459,"column":8},"end":{"line":459,"column":34}},"88":{"start":{"line":460,"column":8},"end":{"line":460,"column":45}},"89":{"start":{"line":462,"column":8},"end":{"line":493,"column":9}},"90":{"start":{"line":463,"column":12},"end":{"line":463,"column":46}},"91":{"start":{"line":465,"column":12},"end":{"line":467,"column":13}},"92":{"start":{"line":466,"column":16},"end":{"line":466,"column":26}},"93":{"start":{"line":469,"column":12},"end":{"line":469,"column":43}},"94":{"start":{"line":470,"column":12},"end":{"line":492,"column":15}},"95":{"start":{"line":471,"column":16},"end":{"line":471,"column":59}},"96":{"start":{"line":472,"column":16},"end":{"line":472,"column":33}},"97":{"start":{"line":475,"column":16},"end":{"line":481,"column":19}},"98":{"start":{"line":476,"column":20},"end":{"line":476,"column":71}},"99":{"start":{"line":477,"column":20},"end":{"line":480,"column":21}},"100":{"start":{"line":478,"column":24},"end":{"line":478,"column":41}},"101":{"start":{"line":479,"column":24},"end":{"line":479,"column":37}},"102":{"start":{"line":483,"column":16},"end":{"line":483,"column":63}},"103":{"start":{"line":484,"column":16},"end":{"line":484,"column":61}},"104":{"start":{"line":486,"column":16},"end":{"line":489,"column":22}},"105":{"start":{"line":490,"column":16},"end":{"line":490,"column":74}},"106":{"start":{"line":501,"column":8},"end":{"line":501,"column":22}},"107":{"start":{"line":502,"column":8},"end":{"line":505,"column":9}},"108":{"start":{"line":503,"column":12},"end":{"line":503,"column":65}},"109":{"start":{"line":504,"column":12},"end":{"line":504,"column":27}},"110":{"start":{"line":506,"column":8},"end":{"line":515,"column":9}},"111":{"start":{"line":507,"column":12},"end":{"line":509,"column":15}},"112":{"start":{"line":510,"column":12},"end":{"line":511,"column":63}},"113":{"start":{"line":512,"column":12},"end":{"line":512,"column":56}},"114":{"start":{"line":513,"column":12},"end":{"line":513,"column":31}},"115":{"start":{"line":514,"column":12},"end":{"line":514,"column":40}},"116":{"start":{"line":522,"column":8},"end":{"line":522,"column":22}},"117":{"start":{"line":524,"column":8},"end":{"line":524,"column":45}},"118":{"start":{"line":525,"column":8},"end":{"line":525,"column":57}},"119":{"start":{"line":526,"column":8},"end":{"line":526,"column":59}},"120":{"start":{"line":527,"column":8},"end":{"line":527,"column":60}},"121":{"start":{"line":539,"column":8},"end":{"line":539,"column":22}},"122":{"start":{"line":540,"column":8},"end":{"line":540,"column":34}},"123":{"start":{"line":541,"column":8},"end":{"line":541,"column":34}},"124":{"start":{"line":543,"column":8},"end":{"line":543,"column":42}},"125":{"start":{"line":545,"column":8},"end":{"line":550,"column":9}},"126":{"start":{"line":546,"column":12},"end":{"line":547,"column":31}},"127":{"start":{"line":548,"column":12},"end":{"line":548,"column":72}},"128":{"start":{"line":549,"column":12},"end":{"line":549,"column":50}},"129":{"start":{"line":561,"column":8},"end":{"line":561,"column":22}},"130":{"start":{"line":562,"column":8},"end":{"line":562,"column":34}},"131":{"start":{"line":563,"column":8},"end":{"line":563,"column":34}},"132":{"start":{"line":565,"column":8},"end":{"line":565,"column":42}},"133":{"start":{"line":567,"column":8},"end":{"line":569,"column":9}},"134":{"start":{"line":568,"column":12},"end":{"line":568,"column":63}},"135":{"start":{"line":580,"column":8},"end":{"line":580,"column":22}},"136":{"start":{"line":581,"column":8},"end":{"line":581,"column":34}},"137":{"start":{"line":582,"column":8},"end":{"line":582,"column":42}},"138":{"start":{"line":583,"column":8},"end":{"line":583,"column":19}},"139":{"start":{"line":584,"column":8},"end":{"line":584,"column":14}},"140":{"start":{"line":585,"column":8},"end":{"line":585,"column":14}},"141":{"start":{"line":587,"column":8},"end":{"line":587,"column":34}},"142":{"start":{"line":589,"column":8},"end":{"line":597,"column":9}},"143":{"start":{"line":590,"column":12},"end":{"line":590,"column":69}},"144":{"start":{"line":591,"column":12},"end":{"line":591,"column":50}},"145":{"start":{"line":592,"column":12},"end":{"line":592,"column":55}},"146":{"start":{"line":593,"column":12},"end":{"line":593,"column":56}},"147":{"start":{"line":594,"column":12},"end":{"line":594,"column":56}},"148":{"start":{"line":596,"column":12},"end":{"line":596,"column":52}}},"branchMap":{"1":{"line":206,"type":"if","locations":[{"start":{"line":206,"column":8},"end":{"line":206,"column":8}},{"start":{"line":206,"column":8},"end":{"line":206,"column":8}}]},"2":{"line":266,"type":"if","locations":[{"start":{"line":266,"column":12},"end":{"line":266,"column":12}},{"start":{"line":266,"column":12},"end":{"line":266,"column":12}}]},"3":{"line":287,"type":"if","locations":[{"start":{"line":287,"column":16},"end":{"line":287,"column":16}},{"start":{"line":287,"column":16},"end":{"line":287,"column":16}}]},"4":{"line":289,"type":"if","locations":[{"start":{"line":289,"column":23},"end":{"line":289,"column":23}},{"start":{"line":289,"column":23},"end":{"line":289,"column":23}}]},"5":{"line":330,"type":"if","locations":[{"start":{"line":330,"column":16},"end":{"line":330,"column":16}},{"start":{"line":330,"column":16},"end":{"line":330,"column":16}}]},"6":{"line":332,"type":"if","locations":[{"start":{"line":332,"column":23},"end":{"line":332,"column":23}},{"start":{"line":332,"column":23},"end":{"line":332,"column":23}}]},"7":{"line":366,"type":"if","locations":[{"start":{"line":366,"column":16},"end":{"line":366,"column":16}},{"start":{"line":366,"column":16},"end":{"line":366,"column":16}}]},"8":{"line":366,"type":"binary-expr","locations":[{"start":{"line":366,"column":20},"end":{"line":367,"column":67}},{"start":{"line":368,"column":20},"end":{"line":368,"column":46}}]},"9":{"line":396,"type":"if","locations":[{"start":{"line":396,"column":8},"end":{"line":396,"column":8}},{"start":{"line":396,"column":8},"end":{"line":396,"column":8}}]},"10":{"line":462,"type":"if","locations":[{"start":{"line":462,"column":8},"end":{"line":462,"column":8}},{"start":{"line":462,"column":8},"end":{"line":462,"column":8}}]},"11":{"line":465,"type":"if","locations":[{"start":{"line":465,"column":12},"end":{"line":465,"column":12}},{"start":{"line":465,"column":12},"end":{"line":465,"column":12}}]},"12":{"line":476,"type":"binary-expr","locations":[{"start":{"line":476,"column":39},"end":{"line":476,"column":40}},{"start":{"line":476,"column":44},"end":{"line":476,"column":70}}]},"13":{"line":477,"type":"if","locations":[{"start":{"line":477,"column":20},"end":{"line":477,"column":20}},{"start":{"line":477,"column":20},"end":{"line":477,"column":20}}]},"14":{"line":477,"type":"binary-expr","locations":[{"start":{"line":477,"column":24},"end":{"line":477,"column":36}},{"start":{"line":477,"column":40},"end":{"line":477,"column":77}}]},"15":{"line":502,"type":"if","locations":[{"start":{"line":502,"column":8},"end":{"line":502,"column":8}},{"start":{"line":502,"column":8},"end":{"line":502,"column":8}}]},"16":{"line":506,"type":"if","locations":[{"start":{"line":506,"column":8},"end":{"line":506,"column":8}},{"start":{"line":506,"column":8},"end":{"line":506,"column":8}}]},"17":{"line":545,"type":"if","locations":[{"start":{"line":545,"column":8},"end":{"line":545,"column":8}},{"start":{"line":545,"column":8},"end":{"line":545,"column":8}}]},"18":{"line":567,"type":"if","locations":[{"start":{"line":567,"column":8},"end":{"line":567,"column":8}},{"start":{"line":567,"column":8},"end":{"line":567,"column":8}}]},"19":{"line":589,"type":"if","locations":[{"start":{"line":589,"column":8},"end":{"line":589,"column":8}},{"start":{"line":589,"column":8},"end":{"line":589,"column":8}}]}}};
-}
-__cov_SYaLOpXoJCU1ZGdOLhFruA = __cov_SYaLOpXoJCU1ZGdOLhFruA['/home/travis/build/terrestris/BasiGX/src/view/grid/MultiSearchWFSSearchGrid.js'];
-__cov_SYaLOpXoJCU1ZGdOLhFruA.s['1']++;Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid',{extend:'Ext.grid.Panel',xtype:'basigx-grid-multisearchwfssearchgrid',requires:['GeoExt.component.FeatureRenderer','GeoExt.data.store.Features','BasiGX.util.Map','BasiGX.util.Layer','BasiGX.util.Animate'],viewModel:{data:{title:'Objektsuche'}},bind:{title:'{title}'},store:null,cls:'search-result-grid',searchResultVectorLayer:null,collapsible:true,titleCollapse:true,collapseDirection:'top',headerPosition:'left',hideHeaders:true,maxHeight:180,config:{combo:null,minSearchTextChars:3,typeDelay:300,allowedFeatureTypeDataTypes:['xsd:string'],searchTerm:null,map:null,layer:null,searchResultFeatureStyle:new ol.style.Style({image:new ol.style.Circle({radius:6,fill:new ol.style.Fill({color:'#4990D1'}),stroke:new ol.style.Stroke({color:'#fff',width:2})}),stroke:new ol.style.Stroke({color:'#4990D1',width:4})}),searchResultHighlightFeatureStyle:new ol.style.Style({image:new ol.style.Circle({radius:8,fill:new ol.style.Fill({color:'#EE0000'}),stroke:new ol.style.Stroke({color:'#fff',width:2})}),stroke:new ol.style.Stroke({color:'#EE0000',width:6})}),searchResultSelectFeatureStyle:new ol.style.Style({image:new ol.style.Circle({radius:10,fill:new ol.style.Fill({color:'#EE0000'}),stroke:new ol.style.Stroke({color:'#fff',width:2})}),stroke:new ol.style.Stroke({color:'#EE0000',width:8})}),flashStyle:function(){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['1']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['2']++;return[new ol.style.Style({image:new ol.style.Circle({radius:5})})];}},features:[{ftype:'grouping',groupHeaderTpl:'Layer: {name}'}],columns:[{text:'Feature',dataIndex:'displayfield',flex:5,renderer:function(value){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['2']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['3']++;return'<span data-qtip="'+value+'">'+value+'</span>';}}],initComponent:function(){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['3']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['4']++;var me=this;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['5']++;me.callParent(arguments);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['6']++;me.map=BasiGX.util.Map.getMapComponent().getMap();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['7']++;if(!me.searchResultVectorLayer){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['1'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['8']++;me.searchResultVectorLayer=new ol.layer.Vector({name:'Object Search Results',source:new ol.source.Vector(),style:me.getSearchResultFeatureStyle(),hoverable:false});__cov_SYaLOpXoJCU1ZGdOLhFruA.s['9']++;var displayInLayerSwitcherKey=BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['10']++;me.searchResultVectorLayer.set(displayInLayerSwitcherKey,false);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['11']++;me.map.addLayer(me.searchResultVectorLayer);}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['1'][1]++;}__cov_SYaLOpXoJCU1ZGdOLhFruA.s['12']++;var searchResultStore=Ext.create('GeoExt.data.store.Features',{map:me.map,layer:me.searchResultVectorLayer,groupField:'featuretype'});__cov_SYaLOpXoJCU1ZGdOLhFruA.s['13']++;me.setStore(searchResultStore);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['14']++;me.on('describeFeatureTypeResponse',me.getFeatures);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['15']++;me.on('getFeatureResponse',me.showSearchResults);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['16']++;me.on('boxready',me.onBoxReady,me);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['17']++;me.on('itemmouseenter',me.highlightFeature,me);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['18']++;me.on('itemmouseleave',me.unhighlightFeature,me);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['19']++;me.on('itemclick',me.highlightSelectedFeature,me);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['20']++;me.on('hide',me.unregisterListeners,me);},describeFeatureTypes:function(searchterm,combo){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['4']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['21']++;var me=this;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['22']++;var typeNames=[];__cov_SYaLOpXoJCU1ZGdOLhFruA.s['23']++;var featureTypes;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['24']++;me.searchResultVectorLayer.getSource().clear();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['25']++;me.setSearchTerm(searchterm);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['26']++;me.setCombo(combo);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['27']++;var searchLayers=combo.getConfiguredSearchLayers();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['28']++;Ext.each(searchLayers,function(l){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['5']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['29']++;if(l.getSource().getParams){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['2'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['30']++;typeNames.push(l.getSource().getParams().LAYERS);}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['2'][1]++;}});__cov_SYaLOpXoJCU1ZGdOLhFruA.s['31']++;var describeFeatureTypeParams={REQUEST:'DescribeFeatureType',SERVICE:'WFS',VERSION:'1.1.0',OUTPUTFORMAT:'application/json',TYPENAME:typeNames.toString()};__cov_SYaLOpXoJCU1ZGdOLhFruA.s['32']++;me.setLoading(true);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['33']++;Ext.Ajax.request({url:combo.getWfsServerUrl(),params:describeFeatureTypeParams,method:'GET',success:function(response){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['6']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['34']++;me.setLoading(false);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['35']++;if(Ext.isString(response.responseText)){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['3'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['36']++;featureTypes=Ext.decode(response.responseText);}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['3'][1]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['37']++;if(Ext.isObject(response.responseText)){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['4'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['38']++;featureTypes=response.responseText;}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['4'][1]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['39']++;Ext.log.error('Error! Could not parse '+'describe featuretype response!');}}__cov_SYaLOpXoJCU1ZGdOLhFruA.s['40']++;me.fireEvent('describeFeatureTypeResponse',featureTypes);},failure:function(response){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['7']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['41']++;me.setLoading(false);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['42']++;Ext.log.error('Error on describe featuretype request:',response);}});},getFeatures:function(resp){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['8']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['43']++;var me=this;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['44']++;var featureTypes=resp.featureTypes;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['45']++;var cleanedFeatureType=me.cleanUpFeatureDataTypes(featureTypes);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['46']++;var url=me.getCombo().getWfsServerUrl();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['47']++;var xml=me.setupXmlPostBody(cleanedFeatureType);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['48']++;var features;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['49']++;me.setLoading(true);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['50']++;Ext.Ajax.request({url:url,method:'POST',headers:BasiGX.util.CSRF.getHeader(),xmlData:xml,success:function(response){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['9']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['51']++;me.setLoading(false);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['52']++;if(Ext.isString(response.responseText)){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['5'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['53']++;features=Ext.decode(response.responseText).features;}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['5'][1]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['54']++;if(Ext.isObject(response.responseText)){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['6'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['55']++;features=response.responseText.features;}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['6'][1]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['56']++;Ext.log.error('Error! Could not parse '+'GetFeature response!');}}__cov_SYaLOpXoJCU1ZGdOLhFruA.s['57']++;me.fireEvent('getFeatureResponse',features);},failure:function(response){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['10']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['58']++;me.setLoading(false);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['59']++;Ext.log.error('Error on GetFeature request:',response);}});},cleanUpFeatureDataTypes:function(featureTypes){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['11']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['60']++;var me=this;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['61']++;var cleanedFeatureType=[];__cov_SYaLOpXoJCU1ZGdOLhFruA.s['62']++;Ext.each(featureTypes,function(ft,index){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['12']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['63']++;cleanedFeatureType.push({typeName:ft.typeName,properties:[]});__cov_SYaLOpXoJCU1ZGdOLhFruA.s['64']++;Ext.each(ft.properties,function(prop){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['13']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['65']++;if((__cov_SYaLOpXoJCU1ZGdOLhFruA.b['8'][0]++,Ext.Array.contains(me.getAllowedFeatureTypeDataTypes(),prop.type))&&(__cov_SYaLOpXoJCU1ZGdOLhFruA.b['8'][1]++,prop.name.indexOf(' ')<0)){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['7'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['66']++;cleanedFeatureType[index].properties.push(prop);}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['7'][1]++;}});});__cov_SYaLOpXoJCU1ZGdOLhFruA.s['67']++;return cleanedFeatureType;},setupXmlPostBody:function(featureTypes){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['14']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['68']++;var me=this;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['69']++;var limitToBBox=me.getCombo().getLimitToBBox();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['70']++;var map=BasiGX.util.Map.getMapComponent().getMap();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['71']++;var projection=map.getView().getProjection().getCode();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['72']++;var bbox;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['73']++;var visibleExtent=map.getView().calculateExtent(map.getSize());__cov_SYaLOpXoJCU1ZGdOLhFruA.s['74']++;var totalExtent=map.getView().getProjection().getExtent();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['75']++;if(limitToBBox){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['9'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['76']++;bbox=visibleExtent;}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['9'][1]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['77']++;bbox=totalExtent;}__cov_SYaLOpXoJCU1ZGdOLhFruA.s['78']++;var bboxll=bbox[0]+' '+bbox[1];__cov_SYaLOpXoJCU1ZGdOLhFruA.s['79']++;var bboxur=bbox[2]+' '+bbox[3];__cov_SYaLOpXoJCU1ZGdOLhFruA.s['80']++;var xml='<wfs:GetFeature service="WFS" version="1.1.0" '+'outputFormat="application/json" '+'xmlns:wfs="http://www.opengis.net/wfs" '+'xmlns:ogc="http://www.opengis.net/ogc" '+'xmlns:gml="http://www.opengis.net/gml" '+'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '+'xsi:schemaLocation="http://www.opengis.net/wfs '+'http://schemas.opengis.net/wfs/1.1.0/WFS-basic.xsd">';__cov_SYaLOpXoJCU1ZGdOLhFruA.s['81']++;Ext.each(featureTypes,function(ft){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['15']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['82']++;Ext.each(ft.properties,function(prop){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['16']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['83']++;xml+='<wfs:Query typeName="'+me.getCombo().getWfsPrefix()+ft.typeName+'">'+'<ogc:Filter>'+'<ogc:And>'+'<ogc:BBOX>'+'<gml:Envelope srsName="'+projection+'">'+'<gml:lowerCorner>'+bboxll+'</gml:lowerCorner>'+'<gml:upperCorner>'+bboxur+'</gml:upperCorner>'+'</gml:Envelope>'+'</ogc:BBOX>'+'<ogc:PropertyIsLike wildCard="*" singleChar="."'+' escape="\\" matchCase="false">'+'<ogc:PropertyName>'+prop.name+'</ogc:PropertyName>'+'<ogc:Literal>'+'*'+me.searchTerm+'*'+'</ogc:Literal>'+'</ogc:PropertyIsLike>'+'</ogc:And>'+'</ogc:Filter>'+'</wfs:Query>';});});__cov_SYaLOpXoJCU1ZGdOLhFruA.s['84']++;xml+='</wfs:GetFeature>';__cov_SYaLOpXoJCU1ZGdOLhFruA.s['85']++;return xml;},showSearchResults:function(features){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['17']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['86']++;var me=this;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['87']++;var combo=me.getCombo();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['88']++;var parser=new ol.format.GeoJSON();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['89']++;if(!features){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['10'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['90']++;Ext.log.error('No feature found');}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['10'][1]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['91']++;if(features.length>0){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['11'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['92']++;me.show();}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['11'][1]++;}__cov_SYaLOpXoJCU1ZGdOLhFruA.s['93']++;var searchTerm=me.searchTerm;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['94']++;Ext.each(features,function(feature){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['18']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['95']++;var featuretype=feature.id.split('.')[0];__cov_SYaLOpXoJCU1ZGdOLhFruA.s['96']++;var displayfield;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['97']++;Ext.iterate(feature.properties,function(k,v){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['19']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['98']++;var lowercaseVal=(__cov_SYaLOpXoJCU1ZGdOLhFruA.b['12'][0]++,v)&&(__cov_SYaLOpXoJCU1ZGdOLhFruA.b['12'][1]++,v.toString().toLowerCase());__cov_SYaLOpXoJCU1ZGdOLhFruA.s['99']++;if((__cov_SYaLOpXoJCU1ZGdOLhFruA.b['14'][0]++,lowercaseVal)&&(__cov_SYaLOpXoJCU1ZGdOLhFruA.b['14'][1]++,lowercaseVal.indexOf(searchTerm)>-1)){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['13'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['100']++;displayfield=v;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['101']++;return false;}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['13'][1]++;}});__cov_SYaLOpXoJCU1ZGdOLhFruA.s['102']++;feature.properties.displayfield=displayfield;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['103']++;feature.properties.featuretype=featuretype;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['104']++;var olFeat=parser.readFeatures(feature,{dataProjection:combo.getWfsDataProjection(),featureProjection:combo.getWfsFeatureProjection()})[0];__cov_SYaLOpXoJCU1ZGdOLhFruA.s['105']++;me.searchResultVectorLayer.getSource().addFeature(olFeat);});}},onBoxReady:function(){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['20']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['106']++;var me=this;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['107']++;if(!me.getMap()){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['15'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['108']++;var map=BasiGX.util.Map.getMapComponent().getMap();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['109']++;me.setMap(map);}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['15'][1]++;}__cov_SYaLOpXoJCU1ZGdOLhFruA.s['110']++;if(!me.getLayer()){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['16'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['111']++;var layer=new ol.layer.Vector({source:new ol.source.Vector()});__cov_SYaLOpXoJCU1ZGdOLhFruA.s['112']++;var displayInLayerSwitcherKey=BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['113']++;layer.set(displayInLayerSwitcherKey,false);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['114']++;me.setLayer(layer);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['115']++;me.getMap().addLayer(layer);}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['16'][1]++;}},unregisterListeners:function(){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['21']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['116']++;var me=this;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['117']++;me.un('boxready',me.onBoxReady,me);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['118']++;me.un('itemmouseenter',me.highlightFeature,me);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['119']++;me.un('itemmouseleave',me.unhighlightFeature,me);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['120']++;me.un('itemclick',me.highlightSelectedFeature,me);},highlightFeature:function(tableView,record){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['22']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['121']++;var me=this;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['122']++;var layer=me.getLayer();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['123']++;layer.getSource().clear();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['124']++;var feature=record.getFeature();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['125']++;if(feature){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['17'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['126']++;this.flashListenerKey=BasiGX.util.Animate.flashFeature(feature,1000);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['127']++;feature.setStyle(me.getSearchResultHighlightFeatureStyle());__cov_SYaLOpXoJCU1ZGdOLhFruA.s['128']++;layer.getSource().addFeature(feature);}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['17'][1]++;}},unhighlightFeature:function(tableView,record){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['23']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['129']++;var me=this;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['130']++;var layer=me.getLayer();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['131']++;layer.getSource().clear();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['132']++;var feature=record.getFeature();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['133']++;if(feature){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['18'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['134']++;feature.setStyle(me.getSearchResultFeatureStyle());}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['18'][1]++;}},highlightSelectedFeature:function(tableView,record){__cov_SYaLOpXoJCU1ZGdOLhFruA.f['24']++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['135']++;var me=this;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['136']++;var layer=me.getLayer();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['137']++;var feature=record.getFeature();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['138']++;var extent;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['139']++;var x;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['140']++;var y;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['141']++;layer.getSource().clear();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['142']++;if(feature){__cov_SYaLOpXoJCU1ZGdOLhFruA.b['19'][0]++;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['143']++;feature.setStyle(me.getSearchResultSelectFeatureStyle());__cov_SYaLOpXoJCU1ZGdOLhFruA.s['144']++;layer.getSource().addFeature(feature);__cov_SYaLOpXoJCU1ZGdOLhFruA.s['145']++;extent=feature.getGeometry().getExtent();__cov_SYaLOpXoJCU1ZGdOLhFruA.s['146']++;x=extent[0]+(extent[2]-extent[0])/2;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['147']++;y=extent[1]+(extent[3]-extent[1])/2;__cov_SYaLOpXoJCU1ZGdOLhFruA.s['148']++;me.getMap().getView().setCenter([x,y]);}else{__cov_SYaLOpXoJCU1ZGdOLhFruA.b['19'][1]++;}}});
+    requires: [
+        'GeoExt.component.FeatureRenderer',
+        'GeoExt.data.store.Features',
+        'BasiGX.util.Map',
+        'BasiGX.util.Layer',
+        'BasiGX.util.Animate'
+    ],
+
+    viewModel: {
+        data: {
+            title: 'Objektsuche'
+        }
+    },
+
+    bind: {
+        title: '{title}'
+    },
+
+    store: null,
+
+    cls: 'search-result-grid',
+
+    searchResultVectorLayer: null,
+
+    collapsible: true,
+
+    titleCollapse: true,
+
+    collapseDirection: 'top',
+
+    headerPosition: 'left',
+
+    hideHeaders: true,
+
+    maxHeight: 180,
+
+    config: {
+
+        combo: null,
+
+        minSearchTextChars: 3,
+
+        typeDelay: 300,
+
+        allowedFeatureTypeDataTypes: [
+            'xsd:string'
+        ],
+
+        searchTerm: null,
+
+        map: null,
+
+        layer: null,
+
+        searchResultFeatureStyle: new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 6,
+                fill: new ol.style.Fill({
+                    color: '#4990D1'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#fff',
+                    width: 2
+                })
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#4990D1',
+                width: 4
+            })
+        }),
+
+        searchResultHighlightFeatureStyle: new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 8,
+                fill: new ol.style.Fill({
+                    color: '#EE0000'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#fff',
+                    width: 2
+                })
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#EE0000',
+                width: 6
+            })
+        }),
+
+        /**
+         *
+         */
+        searchResultSelectFeatureStyle: new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 10,
+                fill: new ol.style.Fill({
+                    color: '#EE0000'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#fff',
+                    width: 2
+                })
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#EE0000',
+                width: 8
+            })
+        }),
+
+        flashStyle: function() {
+            return [new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: 5
+                })
+            })];
+        }
+
+    },
+
+
+    /**
+    *
+    */
+    features: [{
+        ftype: 'grouping',
+        groupHeaderTpl: 'Layer: {name}'
+    }],
+
+    /**
+    *
+    */
+    columns: [
+        /**
+               * @todo gx_renderer doesn't render all features every time
+               */
+    //    {
+    //        xtype: 'widgetcolumn',
+    //        flex: 1,
+    //        widget: {
+    //            xtype: 'gx_renderer'
+    //        },
+    //        onWidgetAttach: function(column, gxRenderer, record) {
+    //            // update the symbolizer with the related feature
+    //            var feature = record.getFeature();
+    //            gxRenderer.update({
+    //                feature: feature,
+    //                symbolizers: this.up('grid').getSearchResultFeatureStyle()
+    //            });
+    //        }
+    //    },
+        {
+            text: 'Feature',
+            dataIndex: 'displayfield',
+            flex: 5,
+            renderer: function(value) {
+                return '<span data-qtip="' + value + '">' +
+                value + '</span>';
+            }
+        }
+    ],
+
+    /**
+    *
+    */
+    initComponent: function() {
+        var me = this;
+
+        me.callParent(arguments);
+
+        me.map = BasiGX.util.Map.getMapComponent().getMap();
+
+        if (!me.searchResultVectorLayer) {
+            me.searchResultVectorLayer = new ol.layer.Vector({
+                name: 'Object Search Results',
+                source: new ol.source.Vector(),
+                style: me.getSearchResultFeatureStyle(),
+                hoverable: false
+            });
+
+            var displayInLayerSwitcherKey =
+                BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+            me.searchResultVectorLayer.set(displayInLayerSwitcherKey, false);
+            me.map.addLayer(me.searchResultVectorLayer);
+        }
+
+        var searchResultStore = Ext.create('GeoExt.data.store.Features', {
+            map: me.map,
+            layer: me.searchResultVectorLayer,
+            groupField: 'featuretype'
+        });
+
+        me.setStore(searchResultStore);
+
+
+        me.on('describeFeatureTypeResponse', me.getFeatures);
+        me.on('getFeatureResponse', me.showSearchResults);
+
+        // add listeners
+        me.on('boxready', me.onBoxReady, me);
+        me.on('itemmouseenter', me.highlightFeature, me);
+        me.on('itemmouseleave', me.unhighlightFeature, me);
+        me.on('itemclick', me.highlightSelectedFeature, me);
+        // unregister listeners on grid hide
+        me.on('hide', me.unregisterListeners, me);
+
+    },
+
+
+    /**
+     * Called by BasiGX.view.form.field.MultiSearchCombo.doObjectSearch()
+     * This method starts the search by requesting the WFS-DescribyFeatureType
+     * for all wanted layers.
+     *
+     * @param {string} searchterm The search term
+     * @param {Ext.form.field.Combo} combo The calling combobox to set it on the
+     *     WFSGrid
+     */
+    describeFeatureTypes: function(searchterm, combo) {
+        var me = this;
+        var typeNames = [];
+        var featureTypes;
+
+        me.searchResultVectorLayer.getSource().clear();
+
+        me.setSearchTerm(searchterm);
+
+        me.setCombo(combo);
+
+        var searchLayers = combo.getConfiguredSearchLayers();
+
+        Ext.each(searchLayers, function(l) {
+            if (l.getSource().getParams) {
+                typeNames.push(l.getSource().getParams().LAYERS);
+            }
+        });
+
+        var describeFeatureTypeParams = {
+            REQUEST: 'DescribeFeatureType',
+            SERVICE: 'WFS',
+            VERSION: '1.1.0',
+            OUTPUTFORMAT: 'application/json',
+            TYPENAME: typeNames.toString()
+        };
+
+        me.setLoading(true);
+
+        Ext.Ajax.request({
+            url: combo.getWfsServerUrl(),
+            params: describeFeatureTypeParams,
+            method: 'GET',
+            success: function(response) {
+                me.setLoading(false);
+                if (Ext.isString(response.responseText)) {
+                    featureTypes = Ext.decode(response.responseText);
+                } else if (Ext.isObject(response.responseText)) {
+                    featureTypes = response.responseText;
+                } else {
+                    Ext.log.error('Error! Could not parse ' +
+                        'describe featuretype response!');
+                }
+                me.fireEvent('describeFeatureTypeResponse', featureTypes);
+            },
+            failure: function(response) {
+                me.setLoading(false);
+                Ext.log.error('Error on describe featuretype request:',
+                    response);
+            }
+        });
+    },
+
+    /**
+     * Called by describeFeatureTypeResponse event fired by successfull
+     * describeFeatureTypes() response.
+     *
+     * This method requests the actual features fitting to the search term.
+     *
+     * @param {Object} resp The ajax response containing DescribeFeatureType.
+     */
+    getFeatures: function(resp) {
+        var me = this;
+        var featureTypes = resp.featureTypes;
+        var cleanedFeatureType = me.cleanUpFeatureDataTypes(featureTypes);
+        var url = me.getCombo().getWfsServerUrl();
+        var xml = me.setupXmlPostBody(cleanedFeatureType);
+        var features;
+
+        me.setLoading(true);
+
+        Ext.Ajax.request({
+            url: url,
+            method: 'POST',
+            headers: BasiGX.util.CSRF.getHeader(),
+            xmlData: xml,
+            success: function(response) {
+                me.setLoading(false);
+                if (Ext.isString(response.responseText)) {
+                    features = Ext.decode(response.responseText).features;
+                } else if (Ext.isObject(response.responseText)) {
+                    features = response.responseText.features;
+                } else {
+                    Ext.log.error('Error! Could not parse ' +
+                        'GetFeature response!');
+                }
+                me.fireEvent('getFeatureResponse', features);
+            },
+            failure: function(response) {
+                me.setLoading(false);
+                Ext.log.error('Error on GetFeature request:',
+                    response);
+            }
+        });
+    },
+
+    /**
+     * This method removes unwanted dataTypes from the passed ones.
+     *
+     * Called by getFeatures() for less vulnerability
+     *
+     * @param {Array<Object>} featureTypes The featuretypes.
+     * @return {Array<Object>} The wanted typenames.
+     */
+    cleanUpFeatureDataTypes: function(featureTypes) {
+        var me = this;
+        var cleanedFeatureType = [];
+        Ext.each(featureTypes, function(ft, index) {
+            cleanedFeatureType.push({
+                typeName: ft.typeName,
+                properties: []
+            });
+
+            Ext.each(ft.properties, function(prop) {
+                if (Ext.Array.contains(
+                    me.getAllowedFeatureTypeDataTypes(), prop.type) &&
+                    prop.name.indexOf(' ') < 0) {
+                    cleanedFeatureType[index].properties.push(prop);
+                }
+            });
+        });
+        return cleanedFeatureType;
+    },
+
+    /**
+     * Sets up a XML as string for a 'wfs:GetFeature'-operation.
+     *
+     * Called by #getFeatures to build the POST Body. It decides if the search
+     * should be done in the visible extent only.
+     *
+     * @param {Array<Object>} featureTypes The featuretypes.
+     * @return {String} The XML.
+     */
+    setupXmlPostBody: function(featureTypes) {
+        var me = this;
+
+        var limitToBBox = me.getCombo().getLimitToBBox();
+
+        var map = BasiGX.util.Map.getMapComponent().getMap();
+        var projection = map.getView().getProjection().getCode();
+        var bbox;
+        var visibleExtent = map.getView().calculateExtent(map.getSize());
+        var totalExtent = map.getView().getProjection().getExtent();
+
+        if (limitToBBox) {
+            bbox = visibleExtent;
+        } else {
+            bbox = totalExtent;
+        }
+
+        var bboxll = bbox[0] + ' ' + bbox[1];
+        var bboxur = bbox[2] + ' ' + bbox[3];
+
+        var xml =
+            '<wfs:GetFeature service="WFS" version="1.1.0" ' +
+              'outputFormat="application/json" ' +
+              'xmlns:wfs="http://www.opengis.net/wfs" ' +
+              'xmlns:ogc="http://www.opengis.net/ogc" ' +
+              'xmlns:gml="http://www.opengis.net/gml" ' +
+              'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
+              'xsi:schemaLocation="http://www.opengis.net/wfs ' +
+              'http://schemas.opengis.net/wfs/1.1.0/WFS-basic.xsd">';
+
+        Ext.each(featureTypes, function(ft) {
+            Ext.each(ft.properties, function(prop) {
+                xml +=
+                    '<wfs:Query typeName="' + me.getCombo().getWfsPrefix() +
+                           ft.typeName + '">' +
+                     '<ogc:Filter>' +
+                      '<ogc:And>' +
+                       '<ogc:BBOX>' +
+                        '<gml:Envelope srsName="' + projection + '">' +
+                         '<gml:lowerCorner>' + bboxll + '</gml:lowerCorner>' +
+                         '<gml:upperCorner>' + bboxur + '</gml:upperCorner>' +
+                        '</gml:Envelope>' +
+                       '</ogc:BBOX>' +
+                       '<ogc:PropertyIsLike wildCard="*" singleChar="."' +
+                        ' escape="\\" matchCase="false">' +
+                        '<ogc:PropertyName>' +
+                         prop.name +
+                        '</ogc:PropertyName>' +
+                        '<ogc:Literal>' +
+                         '*' + me.searchTerm + '*' +
+                         '</ogc:Literal>' +
+                       '</ogc:PropertyIsLike>' +
+                      '</ogc:And>' +
+                     '</ogc:Filter>' +
+                   '</wfs:Query>';
+            });
+        });
+
+        xml += '</wfs:GetFeature>';
+
+        return xml;
+    },
+
+    /**
+     * This method parses the features and adds them to the store to show the
+     * search results in the grid.
+     *
+     * Called by getFeatureResponse event fired by successfull response of
+     * the method #getFeatures.
+     *
+     * @param {Array<ol.Feature>} features The features.
+     */
+    showSearchResults: function(features) {
+        var me = this;
+        var combo = me.getCombo();
+        var parser = new ol.format.GeoJSON();
+
+        if (!features) {
+            Ext.log.error('No feature found');
+        } else {
+            if (features.length > 0) {
+                me.show();
+            }
+
+            var searchTerm = me.searchTerm;
+            Ext.each(features, function(feature) {
+                var featuretype = feature.id.split('.')[0];
+                var displayfield;
+
+                // find the matching value in order to display it
+                Ext.iterate(feature.properties, function(k, v) {
+                    var lowercaseVal = v && v.toString().toLowerCase();
+                    if (lowercaseVal && lowercaseVal.indexOf(searchTerm) > -1) {
+                        displayfield = v;
+                        return false;
+                    }
+                });
+
+                feature.properties.displayfield = displayfield;
+                feature.properties.featuretype = featuretype;
+
+                var olFeat = parser.readFeatures(feature, {
+                    dataProjection: combo.getWfsDataProjection(),
+                    featureProjection: combo.getWfsFeatureProjection()
+                })[0];
+                me.searchResultVectorLayer.getSource().addFeature(olFeat);
+
+            });
+        }
+
+    },
+
+    /**
+    * called by OnBoxready listener to add search layer
+    */
+    onBoxReady: function() {
+        var me = this;
+        if (!me.getMap()) {
+            var map = BasiGX.util.Map.getMapComponent().getMap();
+            me.setMap(map);
+        }
+        if (!me.getLayer()) {
+            var layer = new ol.layer.Vector({
+                source: new ol.source.Vector()
+            });
+            var displayInLayerSwitcherKey =
+                BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+            layer.set(displayInLayerSwitcherKey, false);
+            me.setLayer(layer);
+            me.getMap().addLayer(layer);
+        }
+    },
+
+    /**
+    * called by OnHide to deactivate all listeners when not needed
+    */
+    unregisterListeners: function() {
+        var me = this;
+
+        me.un('boxready', me.onBoxReady, me);
+        me.un('itemmouseenter', me.highlightFeature, me);
+        me.un('itemmouseleave', me.unhighlightFeature, me);
+        me.un('itemclick', me.highlightSelectedFeature, me);
+
+    },
+
+    /**
+     * Called by onitemmouseenter listener to highlight the hovered search
+     * results on the map.
+     *
+     * @param {Ext.grid.Panel} tableView The grid panel (`Ext.view.View`).
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     */
+    highlightFeature: function(tableView, record) {
+        var me = this;
+        var layer = me.getLayer();
+        layer.getSource().clear();
+
+        var feature = record.getFeature();
+
+        if (feature) {
+            this.flashListenerKey = BasiGX.util.Animate.flashFeature(
+                feature, 1000);
+            feature.setStyle(me.getSearchResultHighlightFeatureStyle());
+            layer.getSource().addFeature(feature);
+        }
+    },
+
+    /**
+     * Called by onitemmouseleave listener to unhighlight the search
+     * results on the map.
+     *
+     * @param {Ext.grid.Panel} tableView The grid panel (`Ext.view.View`).
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     */
+    unhighlightFeature: function(tableView, record) {
+        var me = this;
+        var layer = me.getLayer();
+        layer.getSource().clear();
+
+        var feature = record.getFeature();
+
+        if (feature) {
+            feature.setStyle(me.getSearchResultFeatureStyle());
+        }
+
+    },
+
+    /**
+     * Called by onitemclick listener to center map on clicked item.
+     *
+     * @param {Ext.grid.Panel} tableView The grid panel (`Ext.view.View`).
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     */
+    highlightSelectedFeature: function(tableView, record) {
+        var me = this;
+        var layer = me.getLayer();
+        var feature = record.getFeature();
+        var extent;
+        var x;
+        var y;
+
+        layer.getSource().clear();
+
+        if (feature) {
+            feature.setStyle(me.getSearchResultSelectFeatureStyle());
+            layer.getSource().addFeature(feature);
+            extent = feature.getGeometry().getExtent();
+            x = extent[0] + (extent[2] - extent[0]) / 2;
+            y = extent[1] + (extent[3] - extent[1]) / 2;
+
+            me.getMap().getView().setCenter([x, y]);
+        }
+
+    }
+
+});

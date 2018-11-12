@@ -1,9 +1,186 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ *
+ * A utility class offering static methods to work with OpenLayers layers.
+ *
+ * @class BasiGX.util.Layer
+ */
+Ext.define('BasiGX.util.Layer', {
+    requires: [
+        'BasiGX.util.Map'
+    ],
+    statics: {
+        /**
+         * A name of a boolean property that utility layers should set to an
+         * appropriate value (often `false`). The layer displaying components
+         * usually read out the property and determine whether to show an entry
+         * for the particular layer in question.
+         *
+         * TODO It should be safe to change the property to e.g.
+         *     `'basigx-displayInLayerSwitcher'`, but we'll keep it as is for
+         *     backwards compatibility for now.
+         */
+        KEY_DISPLAY_IN_LAYERSWITCHER: 'bp_displayInLayerSwitcher',
 
-var __cov_X61hqs6lEAl8s$o75ZJ$FQ = (Function('return this'))();
-if (!__cov_X61hqs6lEAl8s$o75ZJ$FQ.__coverage__) { __cov_X61hqs6lEAl8s$o75ZJ$FQ.__coverage__ = {}; }
-__cov_X61hqs6lEAl8s$o75ZJ$FQ = __cov_X61hqs6lEAl8s$o75ZJ$FQ.__coverage__;
-if (!(__cov_X61hqs6lEAl8s$o75ZJ$FQ['/home/travis/build/terrestris/BasiGX/src/util/Layer.js'])) {
-   __cov_X61hqs6lEAl8s$o75ZJ$FQ['/home/travis/build/terrestris/BasiGX/src/util/Layer.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Layer.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0,0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0},"fnMap":{"1":{"name":"(anonymous_1)","line":53,"loc":{"start":{"line":53,"column":20},"end":{"line":53,"column":51}}},"2":{"name":"(anonymous_2)","line":66,"loc":{"start":{"line":66,"column":29},"end":{"line":66,"column":45}}},"3":{"name":"(anonymous_3)","line":88,"loc":{"start":{"line":88,"column":24},"end":{"line":88,"column":56}}},"4":{"name":"(anonymous_4)","line":99,"loc":{"start":{"line":99,"column":31},"end":{"line":99,"column":65}}},"5":{"name":"(anonymous_5)","line":112,"loc":{"start":{"line":112,"column":29},"end":{"line":112,"column":45}}},"6":{"name":"(anonymous_6)","line":143,"loc":{"start":{"line":143,"column":22},"end":{"line":143,"column":36}}},"7":{"name":"(anonymous_7)","line":151,"loc":{"start":{"line":151,"column":27},"end":{"line":151,"column":43}}},"8":{"name":"(anonymous_8)","line":154,"loc":{"start":{"line":154,"column":24},"end":{"line":154,"column":41}}},"9":{"name":"(anonymous_9)","line":170,"loc":{"start":{"line":170,"column":26},"end":{"line":170,"column":47}}},"10":{"name":"(anonymous_10)","line":175,"loc":{"start":{"line":175,"column":29},"end":{"line":175,"column":45}}}},"statementMap":{"1":{"start":{"line":22,"column":0},"end":{"line":186,"column":3}},"2":{"start":{"line":54,"column":12},"end":{"line":54,"column":26}},"3":{"start":{"line":55,"column":12},"end":{"line":55,"column":30}},"4":{"start":{"line":56,"column":12},"end":{"line":56,"column":23}},"5":{"start":{"line":58,"column":12},"end":{"line":64,"column":13}},"6":{"start":{"line":59,"column":16},"end":{"line":60,"column":55}},"7":{"start":{"line":62,"column":16},"end":{"line":62,"column":69}},"8":{"start":{"line":63,"column":16},"end":{"line":63,"column":52}},"9":{"start":{"line":66,"column":12},"end":{"line":77,"column":15}},"10":{"start":{"line":67,"column":16},"end":{"line":69,"column":17}},"11":{"start":{"line":68,"column":20},"end":{"line":68,"column":33}},"12":{"start":{"line":70,"column":16},"end":{"line":76,"column":17}},"13":{"start":{"line":72,"column":20},"end":{"line":72,"column":42}},"14":{"start":{"line":73,"column":20},"end":{"line":73,"column":33}},"15":{"start":{"line":74,"column":23},"end":{"line":76,"column":17}},"16":{"start":{"line":75,"column":20},"end":{"line":75,"column":79}},"17":{"start":{"line":78,"column":12},"end":{"line":78,"column":33}},"18":{"start":{"line":89,"column":12},"end":{"line":89,"column":66}},"19":{"start":{"line":100,"column":12},"end":{"line":100,"column":26}},"20":{"start":{"line":101,"column":12},"end":{"line":101,"column":30}},"21":{"start":{"line":102,"column":12},"end":{"line":102,"column":23}},"22":{"start":{"line":104,"column":12},"end":{"line":110,"column":13}},"23":{"start":{"line":105,"column":16},"end":{"line":106,"column":55}},"24":{"start":{"line":108,"column":16},"end":{"line":108,"column":69}},"25":{"start":{"line":109,"column":16},"end":{"line":109,"column":52}},"26":{"start":{"line":112,"column":12},"end":{"line":132,"column":15}},"27":{"start":{"line":113,"column":16},"end":{"line":115,"column":17}},"28":{"start":{"line":114,"column":20},"end":{"line":114,"column":33}},"29":{"start":{"line":116,"column":16},"end":{"line":131,"column":17}},"30":{"start":{"line":118,"column":20},"end":{"line":118,"column":42}},"31":{"start":{"line":120,"column":20},"end":{"line":120,"column":33}},"32":{"start":{"line":121,"column":23},"end":{"line":131,"column":17}},"33":{"start":{"line":125,"column":20},"end":{"line":125,"column":42}},"34":{"start":{"line":127,"column":20},"end":{"line":127,"column":33}},"35":{"start":{"line":128,"column":23},"end":{"line":131,"column":17}},"36":{"start":{"line":129,"column":20},"end":{"line":130,"column":56}},"37":{"start":{"line":133,"column":12},"end":{"line":133,"column":33}},"38":{"start":{"line":144,"column":12},"end":{"line":146,"column":13}},"39":{"start":{"line":145,"column":16},"end":{"line":145,"column":65}},"40":{"start":{"line":147,"column":12},"end":{"line":147,"column":41}},"41":{"start":{"line":148,"column":12},"end":{"line":148,"column":26}},"42":{"start":{"line":149,"column":12},"end":{"line":149,"column":31}},"43":{"start":{"line":151,"column":12},"end":{"line":159,"column":15}},"44":{"start":{"line":152,"column":16},"end":{"line":157,"column":17}},"45":{"start":{"line":153,"column":20},"end":{"line":156,"column":27}},"46":{"start":{"line":155,"column":28},"end":{"line":155,"column":51}},"47":{"start":{"line":158,"column":16},"end":{"line":158,"column":38}},"48":{"start":{"line":160,"column":12},"end":{"line":160,"column":29}},"49":{"start":{"line":171,"column":12},"end":{"line":171,"column":26}},"50":{"start":{"line":172,"column":12},"end":{"line":172,"column":53}},"51":{"start":{"line":173,"column":12},"end":{"line":173,"column":35}},"52":{"start":{"line":175,"column":12},"end":{"line":181,"column":15}},"53":{"start":{"line":176,"column":16},"end":{"line":180,"column":17}},"54":{"start":{"line":179,"column":20},"end":{"line":179,"column":46}},"55":{"start":{"line":183,"column":12},"end":{"line":183,"column":33}}},"branchMap":{"1":{"line":58,"type":"if","locations":[{"start":{"line":58,"column":12},"end":{"line":58,"column":12}},{"start":{"line":58,"column":12},"end":{"line":58,"column":12}}]},"2":{"line":59,"type":"cond-expr","locations":[{"start":{"line":60,"column":20},"end":{"line":60,"column":41}},{"start":{"line":60,"column":44},"end":{"line":60,"column":54}}]},"3":{"line":67,"type":"if","locations":[{"start":{"line":67,"column":16},"end":{"line":67,"column":16}},{"start":{"line":67,"column":16},"end":{"line":67,"column":16}}]},"4":{"line":70,"type":"if","locations":[{"start":{"line":70,"column":16},"end":{"line":70,"column":16}},{"start":{"line":70,"column":16},"end":{"line":70,"column":16}}]},"5":{"line":70,"type":"binary-expr","locations":[{"start":{"line":70,"column":20},"end":{"line":70,"column":42}},{"start":{"line":71,"column":20},"end":{"line":71,"column":50}}]},"6":{"line":74,"type":"if","locations":[{"start":{"line":74,"column":23},"end":{"line":74,"column":23}},{"start":{"line":74,"column":23},"end":{"line":74,"column":23}}]},"7":{"line":104,"type":"if","locations":[{"start":{"line":104,"column":12},"end":{"line":104,"column":12}},{"start":{"line":104,"column":12},"end":{"line":104,"column":12}}]},"8":{"line":105,"type":"cond-expr","locations":[{"start":{"line":106,"column":20},"end":{"line":106,"column":41}},{"start":{"line":106,"column":44},"end":{"line":106,"column":54}}]},"9":{"line":113,"type":"if","locations":[{"start":{"line":113,"column":16},"end":{"line":113,"column":16}},{"start":{"line":113,"column":16},"end":{"line":113,"column":16}}]},"10":{"line":116,"type":"if","locations":[{"start":{"line":116,"column":16},"end":{"line":116,"column":16}},{"start":{"line":116,"column":16},"end":{"line":116,"column":16}}]},"11":{"line":116,"type":"binary-expr","locations":[{"start":{"line":116,"column":20},"end":{"line":116,"column":44}},{"start":{"line":117,"column":19},"end":{"line":117,"column":59}}]},"12":{"line":121,"type":"if","locations":[{"start":{"line":121,"column":23},"end":{"line":121,"column":23}},{"start":{"line":121,"column":23},"end":{"line":121,"column":23}}]},"13":{"line":121,"type":"binary-expr","locations":[{"start":{"line":121,"column":27},"end":{"line":121,"column":42}},{"start":{"line":122,"column":20},"end":{"line":122,"column":47}},{"start":{"line":123,"column":20},"end":{"line":123,"column":72}},{"start":{"line":124,"column":20},"end":{"line":124,"column":50}}]},"14":{"line":128,"type":"if","locations":[{"start":{"line":128,"column":23},"end":{"line":128,"column":23}},{"start":{"line":128,"column":23},"end":{"line":128,"column":23}}]},"15":{"line":144,"type":"if","locations":[{"start":{"line":144,"column":12},"end":{"line":144,"column":12}},{"start":{"line":144,"column":12},"end":{"line":144,"column":12}}]},"16":{"line":152,"type":"if","locations":[{"start":{"line":152,"column":16},"end":{"line":152,"column":16}},{"start":{"line":152,"column":16},"end":{"line":152,"column":16}}]},"17":{"line":176,"type":"if","locations":[{"start":{"line":176,"column":16},"end":{"line":176,"column":16}},{"start":{"line":176,"column":16},"end":{"line":176,"column":16}}]},"18":{"line":176,"type":"binary-expr","locations":[{"start":{"line":176,"column":20},"end":{"line":176,"column":40}},{"start":{"line":177,"column":20},"end":{"line":177,"column":42}},{"start":{"line":178,"column":20},"end":{"line":178,"column":47}}]}}};
-}
-__cov_X61hqs6lEAl8s$o75ZJ$FQ = __cov_X61hqs6lEAl8s$o75ZJ$FQ['/home/travis/build/terrestris/BasiGX/src/util/Layer.js'];
-__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['1']++;Ext.define('BasiGX.util.Layer',{requires:['BasiGX.util.Map'],statics:{KEY_DISPLAY_IN_LAYERSWITCHER:'bp_displayInLayerSwitcher',NAME_MEASURE_LAYER:'basigx-measure-layer',getLayerBy:function(key,val,collection){__cov_X61hqs6lEAl8s$o75ZJ$FQ.f['1']++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['2']++;var me=this;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['3']++;var matchingLayer;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['4']++;var layers;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['5']++;if(!Ext.isEmpty(collection)){__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['1'][0]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['6']++;layers=collection.getArray?(__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['2'][0]++,collection.getArray()):(__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['2'][1]++,collection);}else{__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['1'][1]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['7']++;var map=BasiGX.util.Map.getMapComponent().getMap();__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['8']++;layers=map.getLayers().getArray();}__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['9']++;Ext.each(layers,function(layer){__cov_X61hqs6lEAl8s$o75ZJ$FQ.f['2']++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['10']++;if(matchingLayer){__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['3'][0]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['11']++;return false;}else{__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['3'][1]++;}__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['12']++;if((__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['5'][0]++,layer.get(key)===val)&&(__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['5'][1]++,layer instanceof ol.layer.Base)){__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['4'][0]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['13']++;matchingLayer=layer;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['14']++;return false;}else{__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['4'][1]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['15']++;if(layer instanceof ol.layer.Group){__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['6'][0]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['16']++;matchingLayer=me.getLayerBy(key,val,layer.getLayers());}else{__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['6'][1]++;}}});__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['17']++;return matchingLayer;},getLayerByName:function(layername,collection){__cov_X61hqs6lEAl8s$o75ZJ$FQ.f['3']++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['18']++;return this.getLayerBy('name',layername,collection);},getLayerByFeatureType:function(featureType,collection){__cov_X61hqs6lEAl8s$o75ZJ$FQ.f['4']++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['19']++;var me=this;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['20']++;var matchingLayer;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['21']++;var layers;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['22']++;if(!Ext.isEmpty(collection)){__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['7'][0]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['23']++;layers=collection.getArray?(__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['8'][0]++,collection.getArray()):(__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['8'][1]++,collection);}else{__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['7'][1]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['24']++;var map=BasiGX.util.Map.getMapComponent().getMap();__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['25']++;layers=map.getLayers().getArray();}__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['26']++;Ext.each(layers,function(layer){__cov_X61hqs6lEAl8s$o75ZJ$FQ.f['5']++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['27']++;if(matchingLayer){__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['9'][0]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['28']++;return false;}else{__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['9'][1]++;}__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['29']++;if((__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['11'][0]++,layer.get('featureType'))&&(__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['11'][1]++,layer.get('featureType')===featureType)){__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['10'][0]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['30']++;matchingLayer=layer;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['31']++;return false;}else{__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['10'][1]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['32']++;if((__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['13'][0]++,layer.getSource)&&(__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['13'][1]++,layer.getSource().getParams)&&(__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['13'][2]++,layer.getSource().getParams().LAYERS===featureType)&&(__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['13'][3]++,layer instanceof ol.layer.Base)){__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['12'][0]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['33']++;matchingLayer=layer;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['34']++;return false;}else{__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['12'][1]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['35']++;if(layer instanceof ol.layer.Group){__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['14'][0]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['36']++;matchingLayer=me.getLayerByFeatureType(featureType,layer.getLayers());}else{__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['14'][1]++;}}}});__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['37']++;return matchingLayer;},getAllLayers:function(map){__cov_X61hqs6lEAl8s$o75ZJ$FQ.f['6']++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['38']++;if(!map){__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['15'][0]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['39']++;map=BasiGX.util.Map.getMapComponent().getMap();}else{__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['15'][1]++;}__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['40']++;var layers=map.getLayers();__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['41']++;var me=this;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['42']++;var allLayers=[];__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['43']++;layers.forEach(function(layer){__cov_X61hqs6lEAl8s$o75ZJ$FQ.f['7']++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['44']++;if(layer instanceof ol.layer.Group){__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['16'][0]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['45']++;Ext.each(me.getAllLayers(layer),function(layeri){__cov_X61hqs6lEAl8s$o75ZJ$FQ.f['8']++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['46']++;allLayers.push(layeri);});}else{__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['16'][1]++;}__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['47']++;allLayers.push(layer);});__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['48']++;return allLayers;},getVisibleLayers:function(collection){__cov_X61hqs6lEAl8s$o75ZJ$FQ.f['9']++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['49']++;var me=this;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['50']++;var layers=me.getAllLayers(collection);__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['51']++;var visibleLayers=[];__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['52']++;Ext.each(layers,function(layer){__cov_X61hqs6lEAl8s$o75ZJ$FQ.f['10']++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['53']++;if((__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['18'][0]++,layer.get('visible'))&&(__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['18'][1]++,layer.get('routingId'))&&(__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['18'][2]++,!layer.get('isSliderLayer'))){__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['17'][0]++;__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['54']++;visibleLayers.push(layer);}else{__cov_X61hqs6lEAl8s$o75ZJ$FQ.b['17'][1]++;}});__cov_X61hqs6lEAl8s$o75ZJ$FQ.s['55']++;return visibleLayers;}}});
+        /**
+         * The name of a layer used for drawing measurements on. Can be used to
+         * dynamically determine that particular layer.
+         */
+        NAME_MEASURE_LAYER: 'basigx-measure-layer',
+
+        /**
+         * Get an ol3-layer by the given key-value constellation.
+         *
+         * @param {String} key - the layers property name
+         * @param {String} val - the layers property value for the given key
+         * @param {ol.Collection} collection - optional collection to search in
+         * @return {ol.Layer} matchingLayer - the ol3-layer
+         */
+        getLayerBy: function(key, val, collection) {
+            var me = this;
+            var matchingLayer;
+            var layers;
+
+            if (!Ext.isEmpty(collection)) {
+                layers = collection.getArray ?
+                    collection.getArray() : collection;
+            } else {
+                var map = BasiGX.util.Map.getMapComponent().getMap();
+                layers = map.getLayers().getArray();
+            }
+
+            Ext.each(layers, function(layer) {
+                if (matchingLayer) {
+                    return false;
+                }
+                if (layer.get(key) === val &&
+                    layer instanceof ol.layer.Base) {
+                    matchingLayer = layer;
+                    return false;
+                } else if (layer instanceof ol.layer.Group) {
+                    matchingLayer = me.getLayerBy(key, val, layer.getLayers());
+                }
+            });
+            return matchingLayer;
+        },
+
+        /**
+         * Get an ol3-layer by the given name.
+         *
+         * @param {String} layername - the layers name
+         * @param {ol.Collection} collection - optional collection to search in
+         * @return {ol.Layer} matchingLayer - the ol3-layer
+         */
+        getLayerByName: function(layername, collection) {
+            return this.getLayerBy('name', layername, collection);
+        },
+
+        /**
+         * Gets an ol3-layer by the given featureType.
+         *
+         * @param {String} featureType - the layers featureType
+         * @param {ol.Collection} collection - optional collection to search in
+         * @return {ol.Layer} matchingLayer - the ol3-layer
+         */
+        getLayerByFeatureType: function(featureType, collection) {
+            var me = this;
+            var matchingLayer;
+            var layers;
+
+            if (!Ext.isEmpty(collection)) {
+                layers = collection.getArray ?
+                    collection.getArray() : collection;
+            } else {
+                var map = BasiGX.util.Map.getMapComponent().getMap();
+                layers = map.getLayers().getArray();
+            }
+
+            Ext.each(layers, function(layer) {
+                if (matchingLayer) {
+                    return false;
+                }
+                if (layer.get('featureType') &&
+                   layer.get('featureType') === featureType) {
+                    matchingLayer = layer;
+
+                    return false;
+                } else if (layer.getSource &&
+                    layer.getSource().getParams &&
+                    layer.getSource().getParams().LAYERS === featureType &&
+                    layer instanceof ol.layer.Base) {
+                    matchingLayer = layer;
+
+                    return false;
+                } else if (layer instanceof ol.layer.Group) {
+                    matchingLayer = me.getLayerByFeatureType(
+                        featureType, layer.getLayers());
+                }
+            });
+            return matchingLayer;
+        },
+
+
+        /**
+         * Returns all layers of an map. Even the hidden ones.
+         *
+         * @param {ol.Map} map The OpenLayers map to get the layers from.
+         * @return {Array} An array of all Layers.
+         */
+        getAllLayers: function(map) {
+            if (!map) {
+                map = BasiGX.util.Map.getMapComponent().getMap();
+            }
+            var layers = map.getLayers();
+            var me = this;
+            var allLayers = [];
+
+            layers.forEach(function(layer) {
+                if (layer instanceof ol.layer.Group) {
+                    Ext.each(me.getAllLayers(layer),
+                        function(layeri) {
+                            allLayers.push(layeri);
+                        });
+                }
+                allLayers.push(layer);
+            });
+            return allLayers;
+        },
+
+        /**
+         * Returns all visible layers of an map.
+         *
+         * @param {ol.layerCollection|ol.Map} collection Either a collection
+         *     of layers or an `OpenLayers.Map`.
+         * @return {Array} An array of the visible Layers.
+         */
+        getVisibleLayers: function(collection) {
+            var me = this;
+            var layers = me.getAllLayers(collection);
+            var visibleLayers = [];
+
+            Ext.each(layers, function(layer) {
+                if (layer.get('visible') &&
+                    layer.get('routingId') &&
+                    !layer.get('isSliderLayer')) {
+                    visibleLayers.push(layer);
+                }
+            });
+
+            return visibleLayers;
+        }
+    }
+});

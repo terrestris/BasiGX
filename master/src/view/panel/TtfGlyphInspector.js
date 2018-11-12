@@ -1,9 +1,337 @@
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * This class is heavily inspired by the glyph inspector of the opentype.js
+ * project. Original resource is http://opentype.js.org/glyph-inspector.html
+ * opentype.js is available on https://github.com/nodebox/opentype.js
+ * under the MIT License.
+ *
+ * This class renders the glyphs of a given ttf-font into an ExtJS panel.
+ *
+ * @class BasiGX.view.panel.TtfGlyphInspector
+ */
+Ext.define('BasiGX.view.panel.TtfGlyphInspector', {
+    extend: 'Ext.panel.Panel',
+    xtype: 'basigx-panel-ttfglyphinspector',
 
-var __cov_KtiRDtbW7g$KugPGRyim$g = (Function('return this'))();
-if (!__cov_KtiRDtbW7g$KugPGRyim$g.__coverage__) { __cov_KtiRDtbW7g$KugPGRyim$g.__coverage__ = {}; }
-__cov_KtiRDtbW7g$KugPGRyim$g = __cov_KtiRDtbW7g$KugPGRyim$g.__coverage__;
-if (!(__cov_KtiRDtbW7g$KugPGRyim$g['/home/travis/build/terrestris/BasiGX/src/view/panel/TtfGlyphInspector.js'])) {
-   __cov_KtiRDtbW7g$KugPGRyim$g['/home/travis/build/terrestris/BasiGX/src/view/panel/TtfGlyphInspector.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/panel/TtfGlyphInspector.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0},"fnMap":{"1":{"name":"(anonymous_1)","line":79,"loc":{"start":{"line":79,"column":19},"end":{"line":79,"column":30}}},"2":{"name":"(anonymous_2)","line":93,"loc":{"start":{"line":93,"column":29},"end":{"line":93,"column":40}}},"3":{"name":"(anonymous_3)","line":97,"loc":{"start":{"line":97,"column":38},"end":{"line":97,"column":58}}},"4":{"name":"(anonymous_4)","line":112,"loc":{"start":{"line":112,"column":25},"end":{"line":112,"column":42}}},"5":{"name":"(anonymous_5)","line":136,"loc":{"start":{"line":136,"column":19},"end":{"line":136,"column":37}}},"6":{"name":"(anonymous_6)","line":149,"loc":{"start":{"line":149,"column":21},"end":{"line":149,"column":50}}},"7":{"name":"(anonymous_7)","line":215,"loc":{"start":{"line":215,"column":22},"end":{"line":215,"column":40}}},"8":{"name":"(anonymous_8)","line":229,"loc":{"start":{"line":229,"column":16},"end":{"line":229,"column":32}}},"9":{"name":"(anonymous_9)","line":238,"loc":{"start":{"line":238,"column":18},"end":{"line":238,"column":33}}},"10":{"name":"(anonymous_10)","line":296,"loc":{"start":{"line":296,"column":16},"end":{"line":296,"column":32}}},"11":{"name":"(anonymous_11)","line":321,"loc":{"start":{"line":321,"column":22},"end":{"line":321,"column":33}}}},"statementMap":{"1":{"start":{"line":26,"column":0},"end":{"line":337,"column":3}},"2":{"start":{"line":80,"column":8},"end":{"line":80,"column":22}},"3":{"start":{"line":81,"column":8},"end":{"line":85,"column":9}},"4":{"start":{"line":82,"column":12},"end":{"line":83,"column":54}},"5":{"start":{"line":84,"column":12},"end":{"line":84,"column":19}},"6":{"start":{"line":87,"column":8},"end":{"line":91,"column":9}},"7":{"start":{"line":88,"column":12},"end":{"line":89,"column":48}},"8":{"start":{"line":90,"column":12},"end":{"line":90,"column":19}},"9":{"start":{"line":93,"column":8},"end":{"line":105,"column":11}},"10":{"start":{"line":94,"column":12},"end":{"line":94,"column":47}},"11":{"start":{"line":95,"column":12},"end":{"line":95,"column":44}},"12":{"start":{"line":96,"column":12},"end":{"line":96,"column":34}},"13":{"start":{"line":97,"column":12},"end":{"line":104,"column":15}},"14":{"start":{"line":98,"column":16},"end":{"line":102,"column":17}},"15":{"start":{"line":99,"column":20},"end":{"line":100,"column":39}},"16":{"start":{"line":101,"column":20},"end":{"line":101,"column":27}},"17":{"start":{"line":103,"column":16},"end":{"line":103,"column":38}},"18":{"start":{"line":106,"column":8},"end":{"line":106,"column":24}},"19":{"start":{"line":113,"column":8},"end":{"line":115,"column":9}},"20":{"start":{"line":114,"column":12},"end":{"line":114,"column":53}},"21":{"start":{"line":116,"column":8},"end":{"line":118,"column":9}},"22":{"start":{"line":117,"column":12},"end":{"line":117,"column":19}},"23":{"start":{"line":119,"column":8},"end":{"line":119,"column":36}},"24":{"start":{"line":120,"column":8},"end":{"line":120,"column":38}},"25":{"start":{"line":121,"column":8},"end":{"line":121,"column":50}},"26":{"start":{"line":122,"column":8},"end":{"line":123,"column":28}},"27":{"start":{"line":124,"column":8},"end":{"line":124,"column":45}},"28":{"start":{"line":125,"column":8},"end":{"line":125,"column":47}},"29":{"start":{"line":126,"column":8},"end":{"line":129,"column":10}},"30":{"start":{"line":137,"column":8},"end":{"line":137,"column":39}},"31":{"start":{"line":138,"column":8},"end":{"line":142,"column":9}},"32":{"start":{"line":139,"column":12},"end":{"line":139,"column":65}},"33":{"start":{"line":141,"column":12},"end":{"line":141,"column":63}},"34":{"start":{"line":150,"column":8},"end":{"line":150,"column":29}},"35":{"start":{"line":151,"column":8},"end":{"line":151,"column":42}},"36":{"start":{"line":152,"column":8},"end":{"line":157,"column":10}},"37":{"start":{"line":158,"column":8},"end":{"line":160,"column":9}},"38":{"start":{"line":159,"column":12},"end":{"line":159,"column":19}},"39":{"start":{"line":162,"column":8},"end":{"line":162,"column":34}},"40":{"start":{"line":163,"column":8},"end":{"line":163,"column":36}},"41":{"start":{"line":164,"column":8},"end":{"line":168,"column":10}},"42":{"start":{"line":169,"column":8},"end":{"line":170,"column":24}},"43":{"start":{"line":171,"column":8},"end":{"line":172,"column":31}},"44":{"start":{"line":173,"column":8},"end":{"line":173,"column":53}},"45":{"start":{"line":174,"column":8},"end":{"line":174,"column":53}},"46":{"start":{"line":175,"column":8},"end":{"line":175,"column":22}},"47":{"start":{"line":177,"column":8},"end":{"line":177,"column":34}},"48":{"start":{"line":178,"column":8},"end":{"line":183,"column":10}},"49":{"start":{"line":184,"column":8},"end":{"line":189,"column":10}},"50":{"start":{"line":190,"column":8},"end":{"line":195,"column":10}},"51":{"start":{"line":196,"column":8},"end":{"line":201,"column":10}},"52":{"start":{"line":203,"column":8},"end":{"line":203,"column":34}},"53":{"start":{"line":204,"column":8},"end":{"line":209,"column":10}},"54":{"start":{"line":216,"column":8},"end":{"line":216,"column":36}},"55":{"start":{"line":217,"column":8},"end":{"line":217,"column":75}},"56":{"start":{"line":218,"column":8},"end":{"line":218,"column":50}},"57":{"start":{"line":219,"column":8},"end":{"line":223,"column":9}},"58":{"start":{"line":220,"column":12},"end":{"line":222,"column":14}},"59":{"start":{"line":230,"column":8},"end":{"line":230,"column":75}},"60":{"start":{"line":231,"column":8},"end":{"line":232,"column":40}},"61":{"start":{"line":239,"column":8},"end":{"line":239,"column":25}},"62":{"start":{"line":241,"column":8},"end":{"line":243,"column":10}},"63":{"start":{"line":245,"column":8},"end":{"line":246,"column":45}},"64":{"start":{"line":247,"column":8},"end":{"line":249,"column":38}},"65":{"start":{"line":250,"column":8},"end":{"line":250,"column":41}},"66":{"start":{"line":251,"column":8},"end":{"line":251,"column":46}},"67":{"start":{"line":252,"column":8},"end":{"line":254,"column":10}},"68":{"start":{"line":255,"column":8},"end":{"line":257,"column":33}},"69":{"start":{"line":258,"column":8},"end":{"line":260,"column":38}},"70":{"start":{"line":262,"column":8},"end":{"line":262,"column":63}},"71":{"start":{"line":263,"column":8},"end":{"line":263,"column":34}},"72":{"start":{"line":264,"column":8},"end":{"line":264,"column":57}},"73":{"start":{"line":265,"column":8},"end":{"line":268,"column":10}},"74":{"start":{"line":269,"column":8},"end":{"line":288,"column":9}},"75":{"start":{"line":270,"column":12},"end":{"line":270,"column":54}},"76":{"start":{"line":271,"column":12},"end":{"line":274,"column":14}},"77":{"start":{"line":275,"column":12},"end":{"line":276,"column":32}},"78":{"start":{"line":277,"column":12},"end":{"line":277,"column":30}},"79":{"start":{"line":278,"column":12},"end":{"line":278,"column":42}},"80":{"start":{"line":279,"column":12},"end":{"line":279,"column":51}},"81":{"start":{"line":280,"column":12},"end":{"line":280,"column":52}},"82":{"start":{"line":281,"column":12},"end":{"line":283,"column":14}},"83":{"start":{"line":284,"column":12},"end":{"line":284,"column":39}},"84":{"start":{"line":287,"column":12},"end":{"line":287,"column":63}},"85":{"start":{"line":289,"column":8},"end":{"line":289,"column":41}},"86":{"start":{"line":290,"column":8},"end":{"line":290,"column":33}},"87":{"start":{"line":297,"column":8},"end":{"line":299,"column":9}},"88":{"start":{"line":298,"column":12},"end":{"line":298,"column":19}},"89":{"start":{"line":300,"column":8},"end":{"line":301,"column":31}},"90":{"start":{"line":302,"column":8},"end":{"line":302,"column":51}},"91":{"start":{"line":303,"column":8},"end":{"line":303,"column":53}},"92":{"start":{"line":305,"column":8},"end":{"line":315,"column":9}},"93":{"start":{"line":306,"column":12},"end":{"line":308,"column":14}},"94":{"start":{"line":309,"column":12},"end":{"line":311,"column":14}},"95":{"start":{"line":312,"column":12},"end":{"line":313,"column":54}},"96":{"start":{"line":314,"column":12},"end":{"line":314,"column":67}},"97":{"start":{"line":322,"column":8},"end":{"line":322,"column":63}},"98":{"start":{"line":323,"column":8},"end":{"line":323,"column":42}},"99":{"start":{"line":324,"column":8},"end":{"line":335,"column":9}},"100":{"start":{"line":325,"column":12},"end":{"line":325,"column":58}},"101":{"start":{"line":326,"column":12},"end":{"line":326,"column":42}},"102":{"start":{"line":327,"column":12},"end":{"line":327,"column":44}},"103":{"start":{"line":328,"column":12},"end":{"line":328,"column":38}},"104":{"start":{"line":329,"column":12},"end":{"line":329,"column":32}},"105":{"start":{"line":330,"column":12},"end":{"line":332,"column":14}},"106":{"start":{"line":333,"column":12},"end":{"line":333,"column":45}},"107":{"start":{"line":334,"column":12},"end":{"line":334,"column":48}}},"branchMap":{"1":{"line":69,"type":"binary-expr","locations":[{"start":{"line":69,"column":16},"end":{"line":69,"column":39}},{"start":{"line":69,"column":43},"end":{"line":69,"column":44}}]},"2":{"line":81,"type":"if","locations":[{"start":{"line":81,"column":8},"end":{"line":81,"column":8}},{"start":{"line":81,"column":8},"end":{"line":81,"column":8}}]},"3":{"line":87,"type":"if","locations":[{"start":{"line":87,"column":8},"end":{"line":87,"column":8}},{"start":{"line":87,"column":8},"end":{"line":87,"column":8}}]},"4":{"line":98,"type":"if","locations":[{"start":{"line":98,"column":16},"end":{"line":98,"column":16}},{"start":{"line":98,"column":16},"end":{"line":98,"column":16}}]},"5":{"line":113,"type":"if","locations":[{"start":{"line":113,"column":8},"end":{"line":113,"column":8}},{"start":{"line":113,"column":8},"end":{"line":113,"column":8}}]},"6":{"line":116,"type":"if","locations":[{"start":{"line":116,"column":8},"end":{"line":116,"column":8}},{"start":{"line":116,"column":8},"end":{"line":116,"column":8}}]},"7":{"line":138,"type":"if","locations":[{"start":{"line":138,"column":8},"end":{"line":138,"column":8}},{"start":{"line":138,"column":8},"end":{"line":138,"column":8}}]},"8":{"line":158,"type":"if","locations":[{"start":{"line":158,"column":8},"end":{"line":158,"column":8}},{"start":{"line":158,"column":8},"end":{"line":158,"column":8}}]},"9":{"line":297,"type":"if","locations":[{"start":{"line":297,"column":8},"end":{"line":297,"column":8}},{"start":{"line":297,"column":8},"end":{"line":297,"column":8}}]},"10":{"line":305,"type":"if","locations":[{"start":{"line":305,"column":8},"end":{"line":305,"column":8}},{"start":{"line":305,"column":8},"end":{"line":305,"column":8}}]}}};
-}
-__cov_KtiRDtbW7g$KugPGRyim$g = __cov_KtiRDtbW7g$KugPGRyim$g['/home/travis/build/terrestris/BasiGX/src/view/panel/TtfGlyphInspector.js'];
-__cov_KtiRDtbW7g$KugPGRyim$g.s['1']++;Ext.define('BasiGX.view.panel.TtfGlyphInspector',{extend:'Ext.panel.Panel',xtype:'basigx-panel-ttfglyphinspector',width:500,height:500,fontSrc:null,fontFamilyName:null,html:'<div>'+'Glyphs: <span id="pagination"></span>'+'<br>'+'<div id="glyph-list-end"></div>'+'</div>',cellCount:100,cellWidth:44,cellHeight:40,cellMarginTop:1,cellMarginBottom:8,cellMarginLeftRight:1,pixelRatio:(__cov_KtiRDtbW7g$KugPGRyim$g.b['1'][0]++,window.devicePixelRatio)||(__cov_KtiRDtbW7g$KugPGRyim$g.b['1'][1]++,1),pageSelected:null,font:null,fontScale:null,fontSize:null,initComponent:function(){__cov_KtiRDtbW7g$KugPGRyim$g.f['1']++;__cov_KtiRDtbW7g$KugPGRyim$g.s['2']++;var me=this;__cov_KtiRDtbW7g$KugPGRyim$g.s['3']++;if(!window.opentype){__cov_KtiRDtbW7g$KugPGRyim$g.b['2'][0]++;__cov_KtiRDtbW7g$KugPGRyim$g.s['4']++;Ext.log.error('Required global variable "opentype"'+' not found. Is opentype.js loaded?');__cov_KtiRDtbW7g$KugPGRyim$g.s['5']++;return;}else{__cov_KtiRDtbW7g$KugPGRyim$g.b['2'][1]++;}__cov_KtiRDtbW7g$KugPGRyim$g.s['6']++;if(!me.fontSrc){__cov_KtiRDtbW7g$KugPGRyim$g.b['3'][0]++;__cov_KtiRDtbW7g$KugPGRyim$g.s['7']++;Ext.log.error('Required parameter "fontSrc" not set! '+'Did you pass this parameter?');__cov_KtiRDtbW7g$KugPGRyim$g.s['8']++;return;}else{__cov_KtiRDtbW7g$KugPGRyim$g.b['3'][1]++;}__cov_KtiRDtbW7g$KugPGRyim$g.s['9']++;me.on('afterrender',function(){__cov_KtiRDtbW7g$KugPGRyim$g.f['2']++;__cov_KtiRDtbW7g$KugPGRyim$g.s['10']++;me.enableHighDPICanvas('glyph-bg');__cov_KtiRDtbW7g$KugPGRyim$g.s['11']++;me.enableHighDPICanvas('glyph');__cov_KtiRDtbW7g$KugPGRyim$g.s['12']++;me.prepareGlyphList();__cov_KtiRDtbW7g$KugPGRyim$g.s['13']++;opentype.load(me.fontSrc,function(err,font){__cov_KtiRDtbW7g$KugPGRyim$g.f['3']++;__cov_KtiRDtbW7g$KugPGRyim$g.s['14']++;if(err){__cov_KtiRDtbW7g$KugPGRyim$g.b['4'][0]++;__cov_KtiRDtbW7g$KugPGRyim$g.s['15']++;Ext.log.error('Could not load the given font, '+'aborting...');__cov_KtiRDtbW7g$KugPGRyim$g.s['16']++;return;}else{__cov_KtiRDtbW7g$KugPGRyim$g.b['4'][1]++;}__cov_KtiRDtbW7g$KugPGRyim$g.s['17']++;me.onFontLoaded(font);});});__cov_KtiRDtbW7g$KugPGRyim$g.s['18']++;me.callParent();},enableHighDPICanvas:function(canvas){__cov_KtiRDtbW7g$KugPGRyim$g.f['4']++;__cov_KtiRDtbW7g$KugPGRyim$g.s['19']++;if(typeof canvas==='string'){__cov_KtiRDtbW7g$KugPGRyim$g.b['5'][0]++;__cov_KtiRDtbW7g$KugPGRyim$g.s['20']++;canvas=document.getElementById(canvas);}else{__cov_KtiRDtbW7g$KugPGRyim$g.b['5'][1]++;}__cov_KtiRDtbW7g$KugPGRyim$g.s['21']++;if(this.pixelRatio===1){__cov_KtiRDtbW7g$KugPGRyim$g.b['6'][0]++;__cov_KtiRDtbW7g$KugPGRyim$g.s['22']++;return;}else{__cov_KtiRDtbW7g$KugPGRyim$g.b['6'][1]++;}__cov_KtiRDtbW7g$KugPGRyim$g.s['23']++;var oldWidth=canvas.width;__cov_KtiRDtbW7g$KugPGRyim$g.s['24']++;var oldHeight=canvas.height;__cov_KtiRDtbW7g$KugPGRyim$g.s['25']++;canvas.width=oldWidth*this.pixelRatio;__cov_KtiRDtbW7g$KugPGRyim$g.s['26']++;canvas.height=oldHeight*this.pixelRatio;__cov_KtiRDtbW7g$KugPGRyim$g.s['27']++;canvas.style.width=oldWidth+'px';__cov_KtiRDtbW7g$KugPGRyim$g.s['28']++;canvas.style.height=oldHeight+'px';__cov_KtiRDtbW7g$KugPGRyim$g.s['29']++;canvas.getContext('2d').scale(this.pixelRatio,this.pixelRatio);},formatUnicode:function(unicode){__cov_KtiRDtbW7g$KugPGRyim$g.f['5']++;__cov_KtiRDtbW7g$KugPGRyim$g.s['30']++;unicode=unicode.toString(16);__cov_KtiRDtbW7g$KugPGRyim$g.s['31']++;if(unicode.length>4){__cov_KtiRDtbW7g$KugPGRyim$g.b['7'][0]++;__cov_KtiRDtbW7g$KugPGRyim$g.s['32']++;return('000000'+unicode.toUpperCase()).substr(-6);}else{__cov_KtiRDtbW7g$KugPGRyim$g.b['7'][1]++;__cov_KtiRDtbW7g$KugPGRyim$g.s['33']++;return('0000'+unicode.toUpperCase()).substr(-4);}},renderGlyphItem:function(canvas,glyphIndex){__cov_KtiRDtbW7g$KugPGRyim$g.f['6']++;__cov_KtiRDtbW7g$KugPGRyim$g.s['34']++;var cellMarkSize=4;__cov_KtiRDtbW7g$KugPGRyim$g.s['35']++;var ctx=canvas.getContext('2d');__cov_KtiRDtbW7g$KugPGRyim$g.s['36']++;ctx.clearRect(0,0,this.cellWidth,this.cellHeight);__cov_KtiRDtbW7g$KugPGRyim$g.s['37']++;if(glyphIndex>=this.font.numGlyphs){__cov_KtiRDtbW7g$KugPGRyim$g.b['8'][0]++;__cov_KtiRDtbW7g$KugPGRyim$g.s['38']++;return;}else{__cov_KtiRDtbW7g$KugPGRyim$g.b['8'][1]++;}__cov_KtiRDtbW7g$KugPGRyim$g.s['39']++;ctx.fillStyle='#606060';__cov_KtiRDtbW7g$KugPGRyim$g.s['40']++;ctx.font='9px sans-serif';__cov_KtiRDtbW7g$KugPGRyim$g.s['41']++;ctx.fillText(glyphIndex,1,this.cellHeight-1);__cov_KtiRDtbW7g$KugPGRyim$g.s['42']++;var glyph=this.font.glyphs.get(glyphIndex);__cov_KtiRDtbW7g$KugPGRyim$g.s['43']++;var glyphWidth=glyph.advanceWidth*this.fontScale;__cov_KtiRDtbW7g$KugPGRyim$g.s['44']++;var xmin=(this.cellWidth-glyphWidth)/2;__cov_KtiRDtbW7g$KugPGRyim$g.s['45']++;var xmax=(this.cellWidth+glyphWidth)/2;__cov_KtiRDtbW7g$KugPGRyim$g.s['46']++;var x0=xmin;__cov_KtiRDtbW7g$KugPGRyim$g.s['47']++;ctx.fillStyle='#a0a0a0';__cov_KtiRDtbW7g$KugPGRyim$g.s['48']++;ctx.fillRect(xmin-cellMarkSize+1,this.fontSize,cellMarkSize,1);__cov_KtiRDtbW7g$KugPGRyim$g.s['49']++;ctx.fillRect(xmin,this.fontSize,1,cellMarkSize);__cov_KtiRDtbW7g$KugPGRyim$g.s['50']++;ctx.fillRect(xmax,this.fontSize,cellMarkSize,1);__cov_KtiRDtbW7g$KugPGRyim$g.s['51']++;ctx.fillRect(xmax,this.fontSize,1,cellMarkSize);__cov_KtiRDtbW7g$KugPGRyim$g.s['52']++;ctx.fillStyle='#000000';__cov_KtiRDtbW7g$KugPGRyim$g.s['53']++;glyph.draw(ctx,x0,this.fontSize,this.fontSize);},displayGlyphPage:function(pageNum){__cov_KtiRDtbW7g$KugPGRyim$g.f['7']++;__cov_KtiRDtbW7g$KugPGRyim$g.s['54']++;this.pageSelected=pageNum;__cov_KtiRDtbW7g$KugPGRyim$g.s['55']++;document.getElementById('p'+pageNum).className='page-selected';__cov_KtiRDtbW7g$KugPGRyim$g.s['56']++;var firstGlyph=pageNum*this.cellCount;__cov_KtiRDtbW7g$KugPGRyim$g.s['57']++;for(var i=0;i<this.cellCount;i++){__cov_KtiRDtbW7g$KugPGRyim$g.s['58']++;this.renderGlyphItem(document.getElementById('g'+i),firstGlyph+i);}},pageSelect:function(event){__cov_KtiRDtbW7g$KugPGRyim$g.f['8']++;__cov_KtiRDtbW7g$KugPGRyim$g.s['59']++;document.getElementsByClassName('page-selected')[0].className='';__cov_KtiRDtbW7g$KugPGRyim$g.s['60']++;this.displayGlyphPage(+event.target.id.substr(1));},onFontLoaded:function(font){__cov_KtiRDtbW7g$KugPGRyim$g.f['9']++;__cov_KtiRDtbW7g$KugPGRyim$g.s['61']++;this.font=font;__cov_KtiRDtbW7g$KugPGRyim$g.s['62']++;this.fontFamilyName=font.names.fontFamily[Object.keys(font.names.fontFamily)[0]];__cov_KtiRDtbW7g$KugPGRyim$g.s['63']++;var w=this.cellWidth-this.cellMarginLeftRight*2;__cov_KtiRDtbW7g$KugPGRyim$g.s['64']++;var h=this.cellHeight-this.cellMarginTop-this.cellMarginBottom;__cov_KtiRDtbW7g$KugPGRyim$g.s['65']++;var head=this.font.tables.head;__cov_KtiRDtbW7g$KugPGRyim$g.s['66']++;var maxHeight=head.yMax-head.yMin;__cov_KtiRDtbW7g$KugPGRyim$g.s['67']++;this.fontScale=Math.min(w/(head.xMax-head.xMin),h/maxHeight);__cov_KtiRDtbW7g$KugPGRyim$g.s['68']++;this.fontSize=this.fontScale*this.font.unitsPerEm;__cov_KtiRDtbW7g$KugPGRyim$g.s['69']++;this.fontSize=this.cellMarginTop+h*head.yMax/maxHeight;__cov_KtiRDtbW7g$KugPGRyim$g.s['70']++;var pagination=document.getElementById('pagination');__cov_KtiRDtbW7g$KugPGRyim$g.s['71']++;pagination.innerHTML='';__cov_KtiRDtbW7g$KugPGRyim$g.s['72']++;var fragment=document.createDocumentFragment();__cov_KtiRDtbW7g$KugPGRyim$g.s['73']++;var numPages=Math.ceil(this.font.numGlyphs/this.cellCount);__cov_KtiRDtbW7g$KugPGRyim$g.s['74']++;for(var i=0;i<numPages;i++){__cov_KtiRDtbW7g$KugPGRyim$g.s['75']++;var link=document.createElement('span');__cov_KtiRDtbW7g$KugPGRyim$g.s['76']++;var lastIndex=Math.min(this.font.numGlyphs-1,(i+1)*this.cellCount-1);__cov_KtiRDtbW7g$KugPGRyim$g.s['77']++;link.textContent=i*this.cellCount+'-'+lastIndex;__cov_KtiRDtbW7g$KugPGRyim$g.s['78']++;link.id='p'+i;__cov_KtiRDtbW7g$KugPGRyim$g.s['79']++;link.style.cursor='pointer';__cov_KtiRDtbW7g$KugPGRyim$g.s['80']++;link.style.padding='0 10px 5px 10px';__cov_KtiRDtbW7g$KugPGRyim$g.s['81']++;link.style.textDecoration='underline';__cov_KtiRDtbW7g$KugPGRyim$g.s['82']++;link.addEventListener('click',this.pageSelect.bind(this),false);__cov_KtiRDtbW7g$KugPGRyim$g.s['83']++;fragment.appendChild(link);__cov_KtiRDtbW7g$KugPGRyim$g.s['84']++;fragment.appendChild(document.createTextNode(' '));}__cov_KtiRDtbW7g$KugPGRyim$g.s['85']++;pagination.appendChild(fragment);__cov_KtiRDtbW7g$KugPGRyim$g.s['86']++;this.displayGlyphPage(0);},cellSelect:function(event){__cov_KtiRDtbW7g$KugPGRyim$g.f['10']++;__cov_KtiRDtbW7g$KugPGRyim$g.s['87']++;if(!this.font){__cov_KtiRDtbW7g$KugPGRyim$g.b['9'][0]++;__cov_KtiRDtbW7g$KugPGRyim$g.s['88']++;return;}else{__cov_KtiRDtbW7g$KugPGRyim$g.b['9'][1]++;}__cov_KtiRDtbW7g$KugPGRyim$g.s['89']++;var firstGlyphIndex=this.pageSelected*this.cellCount;__cov_KtiRDtbW7g$KugPGRyim$g.s['90']++;var cellIndex=+event.target.id.substr(1);__cov_KtiRDtbW7g$KugPGRyim$g.s['91']++;var glyphIndex=firstGlyphIndex+cellIndex;__cov_KtiRDtbW7g$KugPGRyim$g.s['92']++;if(glyphIndex<this.font.numGlyphs){__cov_KtiRDtbW7g$KugPGRyim$g.b['10'][0]++;__cov_KtiRDtbW7g$KugPGRyim$g.s['93']++;var glyph=this.font.glyphs.get(glyphIndex);__cov_KtiRDtbW7g$KugPGRyim$g.s['94']++;var unicode=this.formatUnicode(glyph.unicode);__cov_KtiRDtbW7g$KugPGRyim$g.s['95']++;var fullQualifiedGlypName='ttf://'+this.fontFamilyName+'#0x'+unicode;__cov_KtiRDtbW7g$KugPGRyim$g.s['96']++;this.fireEvent('glyphSelected',fullQualifiedGlypName);}else{__cov_KtiRDtbW7g$KugPGRyim$g.b['10'][1]++;}},prepareGlyphList:function(){__cov_KtiRDtbW7g$KugPGRyim$g.f['11']++;__cov_KtiRDtbW7g$KugPGRyim$g.s['97']++;var marker=document.getElementById('glyph-list-end');__cov_KtiRDtbW7g$KugPGRyim$g.s['98']++;var parent=marker.parentElement;__cov_KtiRDtbW7g$KugPGRyim$g.s['99']++;for(var i=0;i<this.cellCount;i++){__cov_KtiRDtbW7g$KugPGRyim$g.s['100']++;var canvas=document.createElement('canvas');__cov_KtiRDtbW7g$KugPGRyim$g.s['101']++;canvas.width=this.cellWidth;__cov_KtiRDtbW7g$KugPGRyim$g.s['102']++;canvas.height=this.cellHeight;__cov_KtiRDtbW7g$KugPGRyim$g.s['103']++;canvas.className='item';__cov_KtiRDtbW7g$KugPGRyim$g.s['104']++;canvas.id='g'+i;__cov_KtiRDtbW7g$KugPGRyim$g.s['105']++;canvas.addEventListener('click',this.cellSelect.bind(this),false);__cov_KtiRDtbW7g$KugPGRyim$g.s['106']++;this.enableHighDPICanvas(canvas);__cov_KtiRDtbW7g$KugPGRyim$g.s['107']++;parent.insertBefore(canvas,marker);}}});
+    /**
+     * The initial width of the panel
+     */
+    width: 500,
+
+    /**
+     * The initial height of the panel
+     */
+    height: 500,
+
+    /**
+     * The (blob)-url to a TrueTypeFont to render
+     */
+    fontSrc: null,
+
+    /**
+     * The font family name of the loaded font
+     */
+    fontFamilyName: null,
+
+    /**
+     * The html elements used to render the glyphs
+     */
+    html:
+        '<div>' +
+            'Glyphs: <span id="pagination"></span>' +
+            '<br>' +
+            '<div id="glyph-list-end"></div>' +
+        '</div>',
+
+    /**
+     * Render specific variables
+     */
+    cellCount: 100,
+    cellWidth: 44,
+    cellHeight: 40,
+    cellMarginTop: 1,
+    cellMarginBottom: 8,
+    cellMarginLeftRight: 1,
+    pixelRatio: window.devicePixelRatio || 1,
+    pageSelected: null,
+    font: null,
+    fontScale: null,
+    fontSize: null,
+
+    /**
+     * Method called with an (blob)-url to a ttf font to render.
+     * Will create and return an 'Ext.panel.Panel' to show the fonts glyphs.
+     */
+    initComponent: function() {
+        var me = this;
+        if (!window.opentype) {
+            Ext.log.error('Required global variable "opentype"' +
+                ' not found. Is opentype.js loaded?');
+            return;
+        }
+
+        if (!me.fontSrc) {
+            Ext.log.error('Required parameter "fontSrc" not set! ' +
+                'Did you pass this parameter?');
+            return;
+        }
+
+        me.on('afterrender', function() {
+            me.enableHighDPICanvas('glyph-bg');
+            me.enableHighDPICanvas('glyph');
+            me.prepareGlyphList();
+            opentype.load(me.fontSrc, function(err, font) {
+                if (err) {
+                    Ext.log.error('Could not load the given font, ' +
+                        'aborting...');
+                    return;
+                }
+                me.onFontLoaded(font);
+            });
+        });
+        me.callParent();
+    },
+
+    /**
+     * @param {String} canvas The canvas id or canvas element
+     */
+    enableHighDPICanvas: function(canvas) {
+        if (typeof canvas === 'string') {
+            canvas = document.getElementById(canvas);
+        }
+        if (this.pixelRatio === 1) {
+            return;
+        }
+        var oldWidth = canvas.width;
+        var oldHeight = canvas.height;
+        canvas.width = oldWidth * this.pixelRatio;
+        canvas.height = oldHeight *
+            this.pixelRatio;
+        canvas.style.width = oldWidth + 'px';
+        canvas.style.height = oldHeight + 'px';
+        canvas.getContext('2d').scale(
+            this.pixelRatio,
+            this.pixelRatio
+        );
+    },
+
+    /**
+     * @return {String} unicodestring The formatted UniCode
+     * @param {Number} unicode The UniCode describing a specific glyph
+     */
+    formatUnicode: function(unicode) {
+        unicode = unicode.toString(16);
+        if (unicode.length > 4) {
+            return ('000000' + unicode.toUpperCase()).substr(-6);
+        } else {
+            return ('0000' + unicode.toUpperCase()).substr(-4);
+        }
+    },
+
+    /**
+     * @param {Object} canvas The canvas Object
+     * @param {Number} glyphIndex The index of the glyph
+     */
+    renderGlyphItem: function(canvas, glyphIndex) {
+        var cellMarkSize = 4;
+        var ctx = canvas.getContext('2d');
+        ctx.clearRect(
+            0,
+            0,
+            this.cellWidth,
+            this.cellHeight
+        );
+        if (glyphIndex >= this.font.numGlyphs) {
+            return;
+        }
+
+        ctx.fillStyle = '#606060';
+        ctx.font = '9px sans-serif';
+        ctx.fillText(
+            glyphIndex,
+            1,
+            this.cellHeight - 1
+        );
+        var glyph = this.font.glyphs.get(
+            glyphIndex);
+        var glyphWidth = glyph.advanceWidth *
+                this.fontScale;
+        var xmin = (this.cellWidth - glyphWidth) / 2;
+        var xmax = (this.cellWidth + glyphWidth) / 2;
+        var x0 = xmin;
+
+        ctx.fillStyle = '#a0a0a0';
+        ctx.fillRect(
+            xmin - cellMarkSize + 1,
+            this.fontSize,
+            cellMarkSize,
+            1
+        );
+        ctx.fillRect(
+            xmin,
+            this.fontSize,
+            1,
+            cellMarkSize
+        );
+        ctx.fillRect(
+            xmax,
+            this.fontSize,
+            cellMarkSize,
+            1
+        );
+        ctx.fillRect(
+            xmax,
+            this.fontSize,
+            1,
+            cellMarkSize
+        );
+
+        ctx.fillStyle = '#000000';
+        glyph.draw(
+            ctx,
+            x0,
+            this.fontSize,
+            this.fontSize
+        );
+    },
+
+    /**
+     * @param {Number} pageNum The page number.
+     */
+    displayGlyphPage: function(pageNum) {
+        this.pageSelected = pageNum;
+        document.getElementById('p' + pageNum).className = 'page-selected';
+        var firstGlyph = pageNum * this.cellCount;
+        for (var i = 0; i < this.cellCount; i++) {
+            this.renderGlyphItem(
+                document.getElementById('g' + i), firstGlyph + i
+            );
+        }
+    },
+
+    /**
+     * @param {Event} event The event that triggered this function
+     */
+    pageSelect: function(event) {
+        document.getElementsByClassName('page-selected')[0].className = '';
+        this.displayGlyphPage(
+            +event.target.id.substr(1));
+    },
+
+    /**
+     * @param {Object} font The font object
+     */
+    onFontLoaded: function(font) {
+        this.font = font;
+        // set the family name to the first available name
+        this.fontFamilyName = font.names.fontFamily[
+            Object.keys(font.names.fontFamily)[0]
+        ];
+
+        var w = this.cellWidth -
+                this.cellMarginLeftRight * 2;
+        var h = this.cellHeight -
+                this.cellMarginTop -
+                this.cellMarginBottom;
+        var head = this.font.tables.head;
+        var maxHeight = head.yMax - head.yMin;
+        this.fontScale = Math.min(
+            w / (head.xMax - head.xMin), h / maxHeight
+        );
+        this.fontSize =
+            this.fontScale *
+            this.font.unitsPerEm;
+        this.fontSize =
+            this.cellMarginTop +
+            h * head.yMax / maxHeight;
+
+        var pagination = document.getElementById('pagination');
+        pagination.innerHTML = '';
+        var fragment = document.createDocumentFragment();
+        var numPages = Math.ceil(
+            this.font.numGlyphs /
+            this.cellCount
+        );
+        for (var i = 0; i < numPages; i++) {
+            var link = document.createElement('span');
+            var lastIndex = Math.min(
+                this.font.numGlyphs - 1,
+                (i + 1) * this.cellCount - 1
+            );
+            link.textContent = i * this.cellCount +
+                '-' + lastIndex;
+            link.id = 'p' + i;
+            link.style.cursor = 'pointer';
+            link.style.padding = '0 10px 5px 10px';
+            link.style.textDecoration = 'underline';
+            link.addEventListener('click',
+                this.pageSelect.bind(this), false
+            );
+            fragment.appendChild(link);
+            // A white space allows to break very long lines into multiple
+            // lines. This is needed for fonts with thousands of glyphs.
+            fragment.appendChild(document.createTextNode(' '));
+        }
+        pagination.appendChild(fragment);
+        this.displayGlyphPage(0);
+    },
+
+    /**
+     * @param {Event} event The event that triggered this function
+     */
+    cellSelect: function(event) {
+        if (!this.font) {
+            return;
+        }
+        var firstGlyphIndex = this.pageSelected *
+                this.cellCount;
+        var cellIndex = +event.target.id.substr(1);
+        var glyphIndex = firstGlyphIndex + cellIndex;
+
+        if (glyphIndex < this.font.numGlyphs) {
+            var glyph = this.font.glyphs.get(
+                glyphIndex
+            );
+            var unicode = this.formatUnicode(
+                glyph.unicode
+            );
+            var fullQualifiedGlypName = 'ttf://' +
+                this.fontFamilyName + '#0x' + unicode;
+            this.fireEvent('glyphSelected', fullQualifiedGlypName);
+        }
+    },
+
+    /**
+     * Prepare the list of glyphs
+     */
+    prepareGlyphList: function() {
+        var marker = document.getElementById('glyph-list-end');
+        var parent = marker.parentElement;
+        for (var i = 0; i < this.cellCount; i++) {
+            var canvas = document.createElement('canvas');
+            canvas.width = this.cellWidth;
+            canvas.height = this.cellHeight;
+            canvas.className = 'item';
+            canvas.id = 'g' + i;
+            canvas.addEventListener('click',
+                this.cellSelect.bind(this), false
+            );
+            this.enableHighDPICanvas(canvas);
+            parent.insertBefore(canvas, marker);
+        }
+    }
+});

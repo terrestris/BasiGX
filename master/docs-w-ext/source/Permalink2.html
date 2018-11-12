@@ -15,15 +15,98 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">
-var __cov_GpplK_WRcJT7TGll46UASw = (Function(&#39;return this&#39;))();
-if (!__cov_GpplK_WRcJT7TGll46UASw.__coverage__) { __cov_GpplK_WRcJT7TGll46UASw.__coverage__ = {}; }
-__cov_GpplK_WRcJT7TGll46UASw = __cov_GpplK_WRcJT7TGll46UASw.__coverage__;
-if (!(__cov_GpplK_WRcJT7TGll46UASw[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/Permalink.js&#39;])) {
-   __cov_GpplK_WRcJT7TGll46UASw[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/Permalink.js&#39;] = {&quot;path&quot;:&quot;/home/travis/build/terrestris/BasiGX/src/view/button/Permalink.js&quot;,&quot;s&quot;:{&quot;1&quot;:0,&quot;2&quot;:0,&quot;3&quot;:0,&quot;4&quot;:0,&quot;5&quot;:0},&quot;b&quot;:{&quot;1&quot;:[0,0]},&quot;f&quot;:{&quot;1&quot;:0},&quot;fnMap&quot;:{&quot;1&quot;:{&quot;name&quot;:&quot;(anonymous_1)&quot;,&quot;line&quot;:75,&quot;loc&quot;:{&quot;start&quot;:{&quot;line&quot;:75,&quot;column&quot;:17},&quot;end&quot;:{&quot;line&quot;:75,&quot;column&quot;:28}}}},&quot;statementMap&quot;:{&quot;1&quot;:{&quot;start&quot;:{&quot;line&quot;:23,&quot;column&quot;:0},&quot;end&quot;:{&quot;line&quot;:92,&quot;column&quot;:3}},&quot;2&quot;:{&quot;start&quot;:{&quot;line&quot;:76,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:76,&quot;column&quot;:77}},&quot;3&quot;:{&quot;start&quot;:{&quot;line&quot;:77,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:89,&quot;column&quot;:13}},&quot;4&quot;:{&quot;start&quot;:{&quot;line&quot;:78,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:86,&quot;column&quot;:26}},&quot;5&quot;:{&quot;start&quot;:{&quot;line&quot;:88,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:88,&quot;column&quot;:47}}},&quot;branchMap&quot;:{&quot;1&quot;:{&quot;line&quot;:77,&quot;type&quot;:&quot;if&quot;,&quot;locations&quot;:[{&quot;start&quot;:{&quot;line&quot;:77,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:77,&quot;column&quot;:12}},{&quot;start&quot;:{&quot;line&quot;:77,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:77,&quot;column&quot;:12}}]}}};
-}
-__cov_GpplK_WRcJT7TGll46UASw = __cov_GpplK_WRcJT7TGll46UASw[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/Permalink.js&#39;];
-__cov_GpplK_WRcJT7TGll46UASw.s[&#39;1&#39;]++;Ext.define(&#39;BasiGX.view.button.Permalink&#39;,{extend:&#39;BasiGX.view.button.Base&#39;,xtype:&#39;basigx-button-permalink&#39;,requires:[&#39;Ext.window.Window&#39;,&#39;Ext.app.ViewModel&#39;,&#39;BasiGX.view.form.Permalink&#39;,&#39;BasiGX.util.Animate&#39;,&#39;BasiGX.util.Application&#39;],viewModel:{data:{tooltip:&#39;Permalink erzeugen&#39;,text:&#39;Permalink&#39;,windowTitle:&#39;Link zur Anwendung&#39;,documentation:&#39;&lt;h2&gt;Permalink erzeugen&lt;/h2&gt;\u2022 Ein Klick auf &#39;+&#39;den Button öffnet ein Fenster, in dem ein Permalink erzeugt &#39;+&#39;werden kann. Dieser Link kann benutzt werden, um die &#39;+&#39;Applikation in einem vordefinierten Zustand, wie z.B. &#39;+&#39;Zentrum der Karte oder sichtbare Themen, zu öffnen.&#39;}},liveDemoConfig:[{moveMouseTo:&#39;basigx-button-permalink&#39;},{clickOnButton:&#39;basigx-button-permalink&#39;},{moveMouseTo:&#39;window[name=permalink-window]&#39;},{destroy:&#39;window[name=permalink-window]&#39;}],bind:{text:&#39;{text}&#39;},config:{handler:function(){__cov_GpplK_WRcJT7TGll46UASw.f[&#39;1&#39;]++;__cov_GpplK_WRcJT7TGll46UASw.s[&#39;2&#39;]++;var win=Ext.ComponentQuery.query(&#39;[name=permalink-window]&#39;)[0];__cov_GpplK_WRcJT7TGll46UASw.s[&#39;3&#39;]++;if(!win){__cov_GpplK_WRcJT7TGll46UASw.b[&#39;1&#39;][0]++;__cov_GpplK_WRcJT7TGll46UASw.s[&#39;4&#39;]++;Ext.create(&#39;Ext.window.Window&#39;,{name:&#39;permalink-window&#39;,constrain:true,title:this.getViewModel().get(&#39;windowTitle&#39;),layout:&#39;fit&#39;,items:[{xtype:&#39;basigx-form-permalink&#39;}]}).show();}else{__cov_GpplK_WRcJT7TGll46UASw.b[&#39;1&#39;][1]++;__cov_GpplK_WRcJT7TGll46UASw.s[&#39;5&#39;]++;BasiGX.util.Animate.shake(win);}}}});
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-button-Permalink'>/**
+</span> * Permalink Button
+ *
+ * Button used to open a permalink window.
+ *
+ * @class BasiGX.view.button.Permalink
+ */
+Ext.define(&#39;BasiGX.view.button.Permalink&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-permalink&#39;,
+
+    requires: [
+        &#39;Ext.window.Window&#39;,
+        &#39;Ext.app.ViewModel&#39;,
+        &#39;BasiGX.view.form.Permalink&#39;,
+        &#39;BasiGX.util.Animate&#39;,
+        &#39;BasiGX.util.Application&#39;
+    ],
+
+<span id='BasiGX-view-button-Permalink-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: &#39;Permalink erzeugen&#39;,
+            text: &#39;Permalink&#39;,
+            windowTitle: &#39;Link zur Anwendung&#39;,
+            documentation: &#39;&lt;h2&gt;Permalink erzeugen&lt;/h2&gt;• Ein Klick auf &#39; +
+                &#39;den Button öffnet ein Fenster, in dem ein Permalink erzeugt &#39; +
+                &#39;werden kann. Dieser Link kann benutzt werden, um die &#39; +
+                &#39;Applikation in einem vordefinierten Zustand, wie z.B. &#39; +
+                &#39;Zentrum der Karte oder sichtbare Themen, zu öffnen.&#39;
+        }
+    },
+
+<span id='BasiGX-view-button-Permalink-property-liveDemoConfig'>    /**
+</span>     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: &#39;basigx-button-permalink&#39;
+        },
+        {
+            clickOnButton: &#39;basigx-button-permalink&#39;
+        },
+        {
+            moveMouseTo: &#39;window[name=permalink-window]&#39;
+        },
+        {
+            destroy: &#39;window[name=permalink-window]&#39;
+        }
+    ],
+
+<span id='BasiGX-view-button-Permalink-cfg-bind'>    bind: {
+</span>        text: &#39;{text}&#39;
+    },
+
+    config: {
+<span id='BasiGX-view-button-Permalink-cfg-handler'>        handler: function() {
+</span>            var win = Ext.ComponentQuery.query(&#39;[name=permalink-window]&#39;)[0];
+            if (!win) {
+                Ext.create(&#39;Ext.window.Window&#39;, {
+                    name: &#39;permalink-window&#39;,
+                    constrain: true,
+                    title: this.getViewModel().get(&#39;windowTitle&#39;),
+                    layout: &#39;fit&#39;,
+                    items: [{
+                        xtype: &#39;basigx-form-permalink&#39;
+                    }]
+                }).show();
+            } else {
+                BasiGX.util.Animate.shake(win);
+            }
+        }
+    }
+});
 </pre>
 </body>
 </html>

@@ -1,9 +1,438 @@
+/* Copyright (c) 2016-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Utility class containing static methods to create a filter encoding objects
+ * depending on given layer attribute filter configuration.
+ *
+ * @class BasiGX.util.Filter
+ */
+Ext.define('BasiGX.util.Filter', {
 
-var __cov_z3o9O$rTkNIfKHz5UEje_g = (Function('return this'))();
-if (!__cov_z3o9O$rTkNIfKHz5UEje_g.__coverage__) { __cov_z3o9O$rTkNIfKHz5UEje_g.__coverage__ = {}; }
-__cov_z3o9O$rTkNIfKHz5UEje_g = __cov_z3o9O$rTkNIfKHz5UEje_g.__coverage__;
-if (!(__cov_z3o9O$rTkNIfKHz5UEje_g['/home/travis/build/terrestris/BasiGX/src/util/Filter.js'])) {
-   __cov_z3o9O$rTkNIfKHz5UEje_g['/home/travis/build/terrestris/BasiGX/src/util/Filter.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Filter.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0},"b":{"1":[0,0,0,0,0,0,0,0,0],"2":[0,0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0},"fnMap":{"1":{"name":"(anonymous_1)","line":38,"loc":{"start":{"line":38,"column":42},"end":{"line":38,"column":66}}},"2":{"name":"(anonymous_2)","line":73,"loc":{"start":{"line":73,"column":36},"end":{"line":73,"column":59}}},"3":{"name":"(anonymous_3)","line":262,"loc":{"start":{"line":262,"column":37},"end":{"line":262,"column":76}}},"4":{"name":"(anonymous_4)","line":292,"loc":{"start":{"line":292,"column":40},"end":{"line":292,"column":63}}},"5":{"name":"(anonymous_5)","line":339,"loc":{"start":{"line":339,"column":44},"end":{"line":340,"column":39}}},"6":{"name":"(anonymous_6)","line":435,"loc":{"start":{"line":435,"column":3},"end":{"line":435,"column":14}}}},"statementMap":{"1":{"start":{"line":22,"column":0},"end":{"line":438,"column":3}},"2":{"start":{"line":39,"column":12},"end":{"line":49,"column":14}},"3":{"start":{"line":74,"column":12},"end":{"line":128,"column":14}},"4":{"start":{"line":130,"column":12},"end":{"line":226,"column":13}},"5":{"start":{"line":132,"column":20},"end":{"line":132,"column":26}},"6":{"start":{"line":134,"column":20},"end":{"line":134,"column":26}},"7":{"start":{"line":136,"column":20},"end":{"line":188,"column":22}},"8":{"start":{"line":189,"column":20},"end":{"line":189,"column":26}},"9":{"start":{"line":191,"column":20},"end":{"line":204,"column":22}},"10":{"start":{"line":205,"column":20},"end":{"line":205,"column":26}},"11":{"start":{"line":210,"column":20},"end":{"line":222,"column":22}},"12":{"start":{"line":223,"column":20},"end":{"line":223,"column":26}},"13":{"start":{"line":225,"column":20},"end":{"line":225,"column":26}},"14":{"start":{"line":227,"column":12},"end":{"line":227,"column":32}},"15":{"start":{"line":263,"column":12},"end":{"line":263,"column":48}},"16":{"start":{"line":264,"column":12},"end":{"line":290,"column":14}},"17":{"start":{"line":292,"column":12},"end":{"line":299,"column":15}},"18":{"start":{"line":293,"column":16},"end":{"line":294,"column":72}},"19":{"start":{"line":296,"column":16},"end":{"line":298,"column":18}},"20":{"start":{"line":300,"column":12},"end":{"line":300,"column":33}},"21":{"start":{"line":341,"column":12},"end":{"line":341,"column":56}},"22":{"start":{"line":342,"column":12},"end":{"line":342,"column":56}},"23":{"start":{"line":343,"column":12},"end":{"line":383,"column":14}},"24":{"start":{"line":385,"column":12},"end":{"line":430,"column":13}},"25":{"start":{"line":387,"column":20},"end":{"line":417,"column":26}},"26":{"start":{"line":418,"column":20},"end":{"line":418,"column":26}},"27":{"start":{"line":420,"column":20},"end":{"line":426,"column":22}},"28":{"start":{"line":427,"column":20},"end":{"line":427,"column":26}},"29":{"start":{"line":429,"column":20},"end":{"line":429,"column":26}},"30":{"start":{"line":432,"column":12},"end":{"line":432,"column":33}},"31":{"start":{"line":436,"column":4},"end":{"line":437,"column":55}}},"branchMap":{"1":{"line":130,"type":"switch","locations":[{"start":{"line":131,"column":16},"end":{"line":132,"column":26}},{"start":{"line":133,"column":16},"end":{"line":134,"column":26}},{"start":{"line":135,"column":16},"end":{"line":189,"column":26}},{"start":{"line":190,"column":16},"end":{"line":205,"column":26}},{"start":{"line":206,"column":16},"end":{"line":206,"column":42}},{"start":{"line":207,"column":16},"end":{"line":207,"column":51}},{"start":{"line":208,"column":16},"end":{"line":208,"column":45}},{"start":{"line":209,"column":16},"end":{"line":223,"column":26}},{"start":{"line":224,"column":16},"end":{"line":225,"column":26}}]},"2":{"line":385,"type":"switch","locations":[{"start":{"line":386,"column":16},"end":{"line":418,"column":26}},{"start":{"line":419,"column":16},"end":{"line":427,"column":26}},{"start":{"line":428,"column":16},"end":{"line":429,"column":26}}]}}};
-}
-__cov_z3o9O$rTkNIfKHz5UEje_g = __cov_z3o9O$rTkNIfKHz5UEje_g['/home/travis/build/terrestris/BasiGX/src/util/Filter.js'];
-__cov_z3o9O$rTkNIfKHz5UEje_g.s['1']++;Ext.define('BasiGX.util.Filter',{requires:'BasiGX.util.SLD',statics:{filterContentToWholeSimpleFilter:function(filterContent){__cov_z3o9O$rTkNIfKHz5UEje_g.f['1']++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['2']++;return{value:filterContent,name:{namespaceURI:'http://www.opengis.net/ogc',localPart:'Filter',prefix:'ogc',key:'{http://www.opengis.net/ogc}Filter',string:'{http://www.opengis.net/ogc}'+'ogc:Filter'}};},filterValuesToSimpleFilter:function(filterValues){__cov_z3o9O$rTkNIfKHz5UEje_g.f['2']++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['3']++;var simpleFilter={value:{TYPE_NAME:'Filter_1_0_0.FilterType',comparisonOps:{name:{namespaceURI:'http://www.opengis.net/ogc',localPart:filterValues.operator,prefix:'ogc',key:'{http://www.opengis.net/ogc}'+filterValues.operator,string:'{http://www.opengis.net/ogc}ogc:'+filterValues.operator},value:{TYPE_NAME:'Filter_1_0_0.BinaryComparisonOpType',expression:[{name:{namespaceURI:'http://www.opengis.net/ogc',localPart:'PropertyName',prefix:'ogc',key:'{http://www.opengis.net/ogc}'+'PropertyName',string:'{http://www.opengis.net/ogc}'+'ogc:PropertyName'},value:{TYPE_NAME:'Filter_1_0_0.PropertyNameType',content:[filterValues.attribute]}},{name:{namespaceURI:'http://www.opengis.net/ogc',localPart:'Literal',prefix:'ogc',key:'{http://www.opengis.net/ogc}Literal',string:'{http://www.opengis.net/ogc}'+'ogc:Literal'},value:{TYPE_NAME:'Filter_1_0_0.LiteralType',content:[filterValues.filterValue]}}]}}},name:{namespaceURI:'http://www.opengis.net/ogc',localPart:'Filter',prefix:'ogc',key:'{http://www.opengis.net/ogc}Filter',string:'{http://www.opengis.net/ogc}'+'ogc:Filter'}};__cov_z3o9O$rTkNIfKHz5UEje_g.s['4']++;switch(filterValues.operator){case'PropertyIsEqualTo':__cov_z3o9O$rTkNIfKHz5UEje_g.b['1'][0]++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['5']++;break;case'PropertyIsNotEqualTo':__cov_z3o9O$rTkNIfKHz5UEje_g.b['1'][1]++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['6']++;break;case'PropertyIsBetween':__cov_z3o9O$rTkNIfKHz5UEje_g.b['1'][2]++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['7']++;simpleFilter.value.comparisonOps.value={TYPE_NAME:'Filter_1_0_0.PropertyIsBetweenType',expression:{name:{namespaceURI:'http://www.opengis.net/ogc',localPart:'PropertyName',prefix:'ogc',key:'{http://www.opengis.net/ogc}PropertyName',string:'{http://www.opengis.net/ogc}'+'ogc:PropertyName'},value:{TYPE_NAME:'Filter_1_0_0.PropertyNameType',content:[filterValues.attribute]}},lowerBoundary:{TYPE_NAME:'Filter_1_0_0.LowerBoundaryType',expression:{name:{namespaceURI:'http://www.opengis.net/ogc',localPart:'Literal',prefix:'ogc',key:'{http://www.opengis.net/ogc}Literal',string:'{http://www.opengis.net/ogc}'+'ogc:Literal'},value:{TYPE_NAME:'Filter_1_0_0.LiteralType',content:[filterValues.minBoundary.toString()]}}},upperBoundary:{TYPE_NAME:'Filter_1_0_0.UpperBoundaryType',expression:{name:{namespaceURI:'http://www.opengis.net/ogc',localPart:'Literal',prefix:'ogc',key:'{http://www.opengis.net/ogc}Literal',string:'{http://www.opengis.net/ogc}'+'ogc:Literal'},value:{TYPE_NAME:'Filter_1_0_0.LiteralType',content:[filterValues.maxBoundary.toString()]}}}};__cov_z3o9O$rTkNIfKHz5UEje_g.s['8']++;break;case'PropertyIsLike':__cov_z3o9O$rTkNIfKHz5UEje_g.b['1'][3]++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['9']++;simpleFilter.value.comparisonOps.value={TYPE_NAME:'Filter_1_0_0.PropertyIsLikeType',wildCard:'*',singleChar:'%',escape:'!',propertyName:{TYPE_NAME:'Filter_1_0_0.PropertyNameType',content:[filterValues.attribute]},literal:{TYPE_NAME:'Filter_1_0_0.LiteralType',content:[filterValues.filterValue]}};__cov_z3o9O$rTkNIfKHz5UEje_g.s['10']++;break;case'PropertyIsLessThan':__cov_z3o9O$rTkNIfKHz5UEje_g.b['1'][4]++;case'PropertyIsLessThanOrEqualTo':__cov_z3o9O$rTkNIfKHz5UEje_g.b['1'][5]++;case'PropertyIsGreaterThan':__cov_z3o9O$rTkNIfKHz5UEje_g.b['1'][6]++;case'PropertyIsGreaterThanOrEqualTo':__cov_z3o9O$rTkNIfKHz5UEje_g.b['1'][7]++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['11']++;simpleFilter.value.comparisonOps.value.expression[1]={name:{namespaceURI:'http://www.opengis.net/ogc',localPart:'Literal',prefix:'ogc',key:'{http://www.opengis.net/ogc}Literal',string:'{http://www.opengis.net/ogc}ogc:Literal'},value:{TYPE_NAME:'Filter_1_0_0.LiteralType',content:[filterValues.filterValue]}};__cov_z3o9O$rTkNIfKHz5UEje_g.s['12']++;break;default:__cov_z3o9O$rTkNIfKHz5UEje_g.b['1'][8]++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['13']++;break;}__cov_z3o9O$rTkNIfKHz5UEje_g.s['14']++;return simpleFilter;},filterValuesToLogicalFilter:function(filterValuesArray,logicalOp){__cov_z3o9O$rTkNIfKHz5UEje_g.f['3']++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['15']++;var filterUtil=BasiGX.util.Filter;__cov_z3o9O$rTkNIfKHz5UEje_g.s['16']++;var logicalFilter={name:{namespaceURI:'http://www.opengis.net/ogc',localPart:'Filter',prefix:'ogc',key:'{http://www.opengis.net/ogc}Filter',string:'{http://www.opengis.net/ogc}'+'ogc:Filter'},value:{TYPE_NAME:'Filter_1_0_0.FilterType',logicOps:{name:{namespaceURI:'http://www.opengis.net/ogc',localPart:logicalOp,prefix:'ogc',key:'{http://www.opengis.net/ogc}'+logicalOp,string:'{http://www.opengis.net/ogc}ogc:'+logicalOp},value:{TYPENAME:'Filter_1_0_0.BinaryLogicOpType',ops:[]}}}};__cov_z3o9O$rTkNIfKHz5UEje_g.s['17']++;Ext.each(filterValuesArray,function(filterValues){__cov_z3o9O$rTkNIfKHz5UEje_g.f['4']++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['18']++;var simpleFilter=filterUtil.filterValuesToSimpleFilter(filterValues);__cov_z3o9O$rTkNIfKHz5UEje_g.s['19']++;logicalFilter.value.logicOps.value.ops.push(simpleFilter.value.comparisonOps);});__cov_z3o9O$rTkNIfKHz5UEje_g.s['20']++;return logicalFilter;},filterGeometryToIntersectionFilter:function(geom,proj,geomName,geomType,spatialOperator){__cov_z3o9O$rTkNIfKHz5UEje_g.f['5']++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['21']++;var ogcNsUri='http://www.opengis.net/ogc';__cov_z3o9O$rTkNIfKHz5UEje_g.s['22']++;var gmlNsUri='http://www.opengis.net/gml';__cov_z3o9O$rTkNIfKHz5UEje_g.s['23']++;var spatialFilter={name:{key:'{'+ogcNsUri+'}Filter',localPart:'Filter',namespaceURI:ogcNsUri,prefix:'ogc',string:'{'+ogcNsUri+'}Filter'},value:{TYPE_NAME:'Filter_1_0_0.FilterType',spatialOps:{name:{key:'{'+ogcNsUri+'}'+spatialOperator,localPart:spatialOperator,namespaceURI:ogcNsUri,prefix:'ogc',string:'{'+ogcNsUri+'}ogc:'+spatialOperator},value:{TYPENAME:'Filter_1_0_0.BinarySpatialOpType',geometry:{name:{key:'{'+gmlNsUri+'}'+geomType,localPart:geomType,namespaceURI:gmlNsUri,prefix:'gml',string:'{'+gmlNsUri+'}gml:'+geomType},value:{TYPE_NAME:'GML_3_1_1.'+geomType+'Type',srsName:proj}},propertyName:{TYPE_NAME:'Filter_1_0_0.PropertyNameType',content:[geomName]}}}}};__cov_z3o9O$rTkNIfKHz5UEje_g.s['24']++;switch(geomType){case'Polygon':__cov_z3o9O$rTkNIfKHz5UEje_g.b['2'][0]++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['25']++;spatialFilter.value.spatialOps.value.geometry.value.exterior={name:{key:'{'+gmlNsUri+'}exterior',localPart:'exterior',namespaceURI:gmlNsUri,prefix:'gml',string:'{'+gmlNsUri+'}gml:exterior'},value:{TYPE_NAME:'GML_3_1_1.AbstractRingPropertyType',ring:{name:{key:'{'+gmlNsUri+'}LinearRing',localPart:'LinearRing',namespaceURI:gmlNsUri,prefix:'gml',string:'{'+gmlNsUri+'}gml:LinearRing'},value:{TYPE_NAME:'GML_3_1_1.LinearRingType',posList:{TYPE_NAME:'GML_3_1_1.'+'DirectPositionListType',value:geom}}}}};__cov_z3o9O$rTkNIfKHz5UEje_g.s['26']++;break;case'LineString':__cov_z3o9O$rTkNIfKHz5UEje_g.b['2'][1]++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['27']++;spatialFilter.value.spatialOps.value.geometry.value={TYPE_NAME:'GML_3_1_1.LineStringType',posList:{TYPE_NAME:'GML_3_1_1.DirectPositionListType',value:geom}};__cov_z3o9O$rTkNIfKHz5UEje_g.s['28']++;break;default:__cov_z3o9O$rTkNIfKHz5UEje_g.b['2'][2]++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['29']++;break;}__cov_z3o9O$rTkNIfKHz5UEje_g.s['30']++;return spatialFilter;}}},function(){__cov_z3o9O$rTkNIfKHz5UEje_g.f['6']++;__cov_z3o9O$rTkNIfKHz5UEje_g.s['31']++;BasiGX.util.SLD.setStaticJsonixReferences(BasiGX.util.Filter);});
+    requires: 'BasiGX.util.SLD',
+
+    statics: {
+
+        /**
+         * This method will be used to create a whole filter encoding string
+         * for given filter content by adding of `<ogc:Filter>` tag around of
+         * filter itself.
+         *
+         * @param {Object} filterContent Jsonix conform filter content value
+         *     object.
+         * @return {Object} An object representing a simple OGC filter 1.0.0;
+         *     ready to be stringified using Jsonix.
+         */
+        filterContentToWholeSimpleFilter: function(filterContent) {
+            return {
+                value: filterContent,
+                name: {
+                    namespaceURI: 'http://www.opengis.net/ogc',
+                    localPart: 'Filter',
+                    prefix: 'ogc',
+                    key: '{http://www.opengis.net/ogc}Filter',
+                    string: '{http://www.opengis.net/ogc}' +
+                        'ogc:Filter'
+                }
+            };
+        },
+
+        /**
+         * This method will be used to create simple filter without logical
+         * operators and nesting.
+         *
+         * Output after marshalling via Jsonix could be e.g. as follows:
+         *
+         *     <ogc:Filter xmlns:ogc='http://www.opengis.net/ogc'
+         *                 xmlns:gml='http://www.opengis.net/gml'
+         *                 xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+         *                 xmlns:xlink='http://www.w3.org/1999/xlink'>
+         *         <ogc:PropertyIsLike wildCard='*' singleChar='%' escape='!'>
+         *             <ogc:PropertyName>neid</ogc:PropertyName>
+         *             <ogc:Literal>01VD2</ogc:Literal>
+         *         </ogc:PropertyIsLike>
+         *     </ogc:Filter>
+         *
+         * @param {Object} filterValues A representation of filter values coming
+         *     from our form for defining them.
+         * @return {Object} An object representing a simple OGC filter 1.0.0;
+         *     ready to be stringified using Jsonix.
+         */
+        filterValuesToSimpleFilter: function(filterValues) {
+            var simpleFilter = {
+                value: {
+                    TYPE_NAME: 'Filter_1_0_0.FilterType',
+                    comparisonOps: {
+                        name: {
+                            namespaceURI: 'http://www.opengis.net/ogc',
+                            localPart: filterValues.operator,
+                            prefix: 'ogc',
+                            key: '{http://www.opengis.net/ogc}' +
+                            filterValues.operator,
+                            string: '{http://www.opengis.net/ogc}ogc:' +
+                                filterValues.operator
+                        },
+                        value: {
+                            TYPE_NAME: 'Filter_1_0_0.BinaryComparisonOpType',
+                            expression: [{
+                                name: {
+                                    namespaceURI: 'http://www.opengis.net/ogc',
+                                    localPart: 'PropertyName',
+                                    prefix: 'ogc',
+                                    key: '{http://www.opengis.net/ogc}' +
+                                        'PropertyName',
+                                    string: '{http://www.opengis.net/ogc}' +
+                                        'ogc:PropertyName'
+                                },
+                                value: {
+                                    TYPE_NAME: 'Filter_1_0_0.PropertyNameType',
+                                    content: [filterValues.attribute]
+                                }
+                            }, {
+                                name: {
+                                    namespaceURI: 'http://www.opengis.net/ogc',
+                                    localPart: 'Literal',
+                                    prefix: 'ogc',
+                                    key: '{http://www.opengis.net/ogc}Literal',
+                                    string: '{http://www.opengis.net/ogc}' +
+                                        'ogc:Literal'
+                                },
+                                value: {
+                                    TYPE_NAME: 'Filter_1_0_0.LiteralType',
+                                    content: [filterValues.filterValue]
+                                }
+                            }]
+                        }
+                    }
+                },
+                name: {
+                    namespaceURI: 'http://www.opengis.net/ogc',
+                    localPart: 'Filter',
+                    prefix: 'ogc',
+                    key: '{http://www.opengis.net/ogc}Filter',
+                    string: '{http://www.opengis.net/ogc}' +
+                        'ogc:Filter'
+                }
+            };
+
+            switch (filterValues.operator) {
+                case 'PropertyIsEqualTo':
+                    break;
+                case 'PropertyIsNotEqualTo':
+                    break;
+                case 'PropertyIsBetween':
+                    simpleFilter.value.comparisonOps.value = {
+                        TYPE_NAME: 'Filter_1_0_0.PropertyIsBetweenType',
+                        expression: {
+                            name: {
+                                namespaceURI: 'http://www.opengis.net/ogc',
+                                localPart: 'PropertyName',
+                                prefix: 'ogc',
+                                key: '{http://www.opengis.net/ogc}PropertyName',
+                                string: '{http://www.opengis.net/ogc}' +
+                                    'ogc:PropertyName'
+                            },
+                            value: {
+                                TYPE_NAME: 'Filter_1_0_0.PropertyNameType',
+                                content: [filterValues.attribute]
+                            }
+                        },
+                        lowerBoundary: {
+                            TYPE_NAME: 'Filter_1_0_0.LowerBoundaryType',
+                            expression: {
+                                name: {
+                                    namespaceURI: 'http://www.opengis.net/ogc',
+                                    localPart: 'Literal',
+                                    prefix: 'ogc',
+                                    key: '{http://www.opengis.net/ogc}Literal',
+                                    string: '{http://www.opengis.net/ogc}' +
+                                        'ogc:Literal'
+                                },
+                                value: {
+                                    TYPE_NAME: 'Filter_1_0_0.LiteralType',
+                                    content: [filterValues
+                                        .minBoundary.toString()]
+                                }
+                            }
+                        },
+                        upperBoundary: {
+                            TYPE_NAME: 'Filter_1_0_0.UpperBoundaryType',
+                            expression: {
+                                name: {
+                                    namespaceURI: 'http://www.opengis.net/ogc',
+                                    localPart: 'Literal',
+                                    prefix: 'ogc',
+                                    key: '{http://www.opengis.net/ogc}Literal',
+                                    string: '{http://www.opengis.net/ogc}' +
+                                        'ogc:Literal'
+                                },
+                                value: {
+                                    TYPE_NAME: 'Filter_1_0_0.LiteralType',
+                                    content: [filterValues
+                                        .maxBoundary.toString()]
+                                }
+                            }
+                        }
+                    };
+                    break;
+                case 'PropertyIsLike':
+                    simpleFilter.value.comparisonOps.value = {
+                        TYPE_NAME: 'Filter_1_0_0.PropertyIsLikeType',
+                        wildCard: '*',
+                        singleChar: '%',
+                        escape: '!',
+                        propertyName: {
+                            TYPE_NAME: 'Filter_1_0_0.PropertyNameType',
+                            content: [filterValues.attribute]
+                        },
+                        literal: {
+                            TYPE_NAME: 'Filter_1_0_0.LiteralType',
+                            content: [filterValues.filterValue]
+                        }
+                    };
+                    break;
+                case 'PropertyIsLessThan':
+                case 'PropertyIsLessThanOrEqualTo':
+                case 'PropertyIsGreaterThan':
+                case 'PropertyIsGreaterThanOrEqualTo':
+                    simpleFilter.value.comparisonOps.value.expression[1] = {
+                        name: {
+                            namespaceURI: 'http://www.opengis.net/ogc',
+                            localPart: 'Literal',
+                            prefix: 'ogc',
+                            key: '{http://www.opengis.net/ogc}Literal',
+                            string: '{http://www.opengis.net/ogc}ogc:Literal'
+                        },
+                        value: {
+                            TYPE_NAME: 'Filter_1_0_0.LiteralType',
+                            content: [filterValues.filterValue]
+                        }
+                    };
+                    break;
+                default:
+                    break;
+            }
+            return simpleFilter;
+        },
+
+        /**
+         * This method will be used to create more complex nested filter
+         * including logical operators AND and OR.
+         *
+         * **Note:** Multiple nesting is not supported yet.
+         *
+         * Output after marshalling via Jsonix could be e.g. as follows:
+         *
+         *     <ogc:Filter xmlns:ogc='http://www.opengis.net/ogc'
+         *                 xmlns:gml='http://www.opengis.net/gml'
+         *                 xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+         *                 xmlns:xlink='http://www.w3.org/1999/xlink'>
+         *         <ogc:Or>
+         *             <ogc:PropertyIsLike wildCard='*'
+         *                  singleChar='%' escape='!'>
+         *                 <ogc:PropertyName>neid</ogc:PropertyName>
+         *                 <ogc:Literal>02VD2</ogc:Literal>
+         *             </ogc:PropertyIsLike>
+         *             <ogc:PropertyIsGreaterThanOrEqualTo>
+         *                 <ogc:PropertyName>cellid</ogc:PropertyName>
+         *                 <ogc:Literal>0</ogc:Literal>
+         *             </ogc:PropertyIsGreaterThanOrEqualTo>
+         *         </ogc:Or>
+         *     </ogc:Filter>
+         *
+         * @param {Array} filterValuesArray An array of filter values coming
+         *     from our form for defining them.
+         * @param {String} logicalOp A string defining the logical operation
+         *     used for the combination. Either `'Or'` or `'And'`.
+         * @return {Object} A logically combining object with the passed filters
+         *     that is ready to be serialized to a string by Jsonix.
+         */
+        filterValuesToLogicalFilter: function(filterValuesArray, logicalOp) {
+            var filterUtil = BasiGX.util.Filter;
+            var logicalFilter = {
+                name: {
+                    namespaceURI: 'http://www.opengis.net/ogc',
+                    localPart: 'Filter',
+                    prefix: 'ogc',
+                    key: '{http://www.opengis.net/ogc}Filter',
+                    string: '{http://www.opengis.net/ogc}' +
+                        'ogc:Filter'
+                },
+                value: {
+                    TYPE_NAME: 'Filter_1_0_0.FilterType',
+                    logicOps: {
+                        name: {
+                            namespaceURI: 'http://www.opengis.net/ogc',
+                            localPart: logicalOp,
+                            prefix: 'ogc',
+                            key: '{http://www.opengis.net/ogc}' + logicalOp,
+                            string: '{http://www.opengis.net/ogc}ogc:'
+                                + logicalOp
+                        },
+                        value: {
+                            TYPENAME: 'Filter_1_0_0.BinaryLogicOpType',
+                            ops: []
+                        }
+                    }
+                }
+            };
+
+            Ext.each(filterValuesArray, function(filterValues) {
+                var simpleFilter =
+                    filterUtil.filterValuesToSimpleFilter(filterValues);
+
+                logicalFilter.value.logicOps.value.ops.push(
+                    simpleFilter.value.comparisonOps
+                );
+            });
+            return logicalFilter;
+        },
+
+        /**
+         * This method will be used to create simple spatial filter (e.g. for
+         * INTERSECT, CONTAIN or OVERLAP operations). Currently only INTERSECT
+         * filter will be supported.
+         * Output after marshalling via Jsonix could be e.g. as follows:
+         *
+         *    <ogc:Filter xmlns:ogc='http://www.opengis.net/ogc'
+         *                xmlns:gml='http://www.opengis.net/gml'
+         *                xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+         *                xmlns:xlink='http://www.w3.org/1999/xlink'
+         *                xmlns:ows='http://www.opengis.net/ows/1.1'
+         *                xmlns:wps='http://www.opengis.net/wps/1.0.0'>
+         *       <ogc:Intersects>
+         *           <ogc:PropertyName>geom</ogc:PropertyName>
+         *           <gml:Polygon srsName='EPSG:25832'>
+         *               <gml:exterior>
+         *                   <gml:LinearRing>
+         *                       <gml:posList>
+         *                            680504.3137212421 5639437.573
+         *                            680498.5086607657 5639496.512768128
+         *                            [...]
+         *                            680504.3137212421 5639437.573
+         *                        </gml:posList>
+         *                    </gml:LinearRing>
+         *                </gml:exterior>
+         *            </gml:Polygon>
+         *        </ogc:Intersects>
+         *    </ogc:Filter>
+         *
+         *    @param {Array} geom Coordinates array
+         *    @param {String} proj Projection string (e.g. EPSG:25832)
+         *    @param {String} geomName Name of geometry column (e.g. geom)
+         *    @param {String} geomType The geometry type
+         *    @param {String} spatialOperator The spatial operator
+         *    @return {String} The spatial filter
+         */
+        filterGeometryToIntersectionFilter: function(geom, proj, geomName,
+            geomType, spatialOperator) {
+            var ogcNsUri = 'http://www.opengis.net/ogc';
+            var gmlNsUri = 'http://www.opengis.net/gml';
+            var spatialFilter = {
+                name: {
+                    key: '{' + ogcNsUri + '}Filter',
+                    localPart: 'Filter',
+                    namespaceURI: ogcNsUri,
+                    prefix: 'ogc',
+                    string: '{' + ogcNsUri + '}Filter'
+                },
+                value: {
+                    TYPE_NAME: 'Filter_1_0_0.FilterType',
+                    spatialOps: {
+                        name: {
+                            key: '{' + ogcNsUri + '}' + spatialOperator,
+                            localPart: spatialOperator,
+                            namespaceURI: ogcNsUri,
+                            prefix: 'ogc',
+                            string: '{' + ogcNsUri + '}ogc:' + spatialOperator
+                        },
+                        value: {
+                            TYPENAME: 'Filter_1_0_0.BinarySpatialOpType',
+                            geometry: {
+                                name: {
+                                    key: '{' + gmlNsUri + '}' + geomType,
+                                    localPart: geomType,
+                                    namespaceURI: gmlNsUri,
+                                    prefix: 'gml',
+                                    string: '{' + gmlNsUri + '}gml:' + geomType
+                                },
+                                value: {
+                                    TYPE_NAME: 'GML_3_1_1.' + geomType + 'Type',
+                                    srsName: proj
+                                }
+                            },
+                            propertyName: {
+                                TYPE_NAME: 'Filter_1_0_0.PropertyNameType',
+                                content: [geomName]
+                            }
+                        }
+                    }
+                }
+            };
+
+            switch (geomType) {
+                case 'Polygon':
+                    spatialFilter.value.spatialOps.value.geometry
+                        .value.exterior = {
+                            name: {
+                                key: '{' + gmlNsUri + '}exterior',
+                                localPart: 'exterior',
+                                namespaceURI: gmlNsUri,
+                                prefix: 'gml',
+                                string: '{' + gmlNsUri + '}gml:exterior'
+                            },
+                            value: {
+                                TYPE_NAME: 'GML_3_1_1.AbstractRingPropertyType',
+                                ring: {
+                                    name: {
+                                        key: '{' + gmlNsUri + '}LinearRing',
+                                        localPart: 'LinearRing',
+                                        namespaceURI: gmlNsUri,
+                                        prefix: 'gml',
+                                        string: '{' + gmlNsUri +
+                                            '}gml:LinearRing'
+                                    },
+                                    value: {
+                                        TYPE_NAME: 'GML_3_1_1.LinearRingType',
+                                        posList: {
+                                            TYPE_NAME: 'GML_3_1_1.' +
+                                                'DirectPositionListType',
+                                            value: geom
+                                        }
+                                    }
+                                }
+                            }
+                        };
+                    break;
+                case 'LineString':
+                    spatialFilter.value.spatialOps.value.geometry.value = {
+                        TYPE_NAME: 'GML_3_1_1.LineStringType',
+                        posList: {
+                            TYPE_NAME: 'GML_3_1_1.DirectPositionListType',
+                            value: geom
+                        }
+                    };
+                    break;
+                default:
+                    break;
+            }
+
+            return spatialFilter;
+        }
+    }
+}, function() {
+    BasiGX.util.SLD
+        .setStaticJsonixReferences(BasiGX.util.Filter);
+});

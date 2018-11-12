@@ -1,9 +1,348 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * CoordinateTransform FormPanel
+ *
+ * Used to show and transform coordinates
+ *
+ * @class BasiGX.view.form.CoordinateTransform
+ */
+Ext.define('BasiGX.view.form.CoordinateTransform', {
+    extend: 'Ext.form.Panel',
+    xtype: 'basigx-form-coordinatetransform',
 
-var __cov_3yws_N83ZzCpq68pNq6syw = (Function('return this'))();
-if (!__cov_3yws_N83ZzCpq68pNq6syw.__coverage__) { __cov_3yws_N83ZzCpq68pNq6syw.__coverage__ = {}; }
-__cov_3yws_N83ZzCpq68pNq6syw = __cov_3yws_N83ZzCpq68pNq6syw.__coverage__;
-if (!(__cov_3yws_N83ZzCpq68pNq6syw['/home/travis/build/terrestris/BasiGX/src/view/form/CoordinateTransform.js'])) {
-   __cov_3yws_N83ZzCpq68pNq6syw['/home/travis/build/terrestris/BasiGX/src/view/form/CoordinateTransform.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/form/CoordinateTransform.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0},"fnMap":{"1":{"name":"(anonymous_1)","line":77,"loc":{"start":{"line":77,"column":19},"end":{"line":77,"column":30}}},"2":{"name":"(anonymous_2)","line":89,"loc":{"start":{"line":89,"column":49},"end":{"line":89,"column":63}}},"3":{"name":"(anonymous_3)","line":175,"loc":{"start":{"line":175,"column":29},"end":{"line":175,"column":40}}},"4":{"name":"(anonymous_4)","line":190,"loc":{"start":{"line":190,"column":31},"end":{"line":190,"column":42}}},"5":{"name":"(anonymous_5)","line":203,"loc":{"start":{"line":203,"column":17},"end":{"line":203,"column":31}}},"6":{"name":"(anonymous_6)","line":218,"loc":{"start":{"line":218,"column":25},"end":{"line":218,"column":41}}},"7":{"name":"(anonymous_7)","line":223,"loc":{"start":{"line":223,"column":26},"end":{"line":223,"column":40}}},"8":{"name":"(anonymous_8)","line":238,"loc":{"start":{"line":238,"column":21},"end":{"line":238,"column":74}}},"9":{"name":"(anonymous_9)","line":263,"loc":{"start":{"line":263,"column":15},"end":{"line":263,"column":41}}},"10":{"name":"(anonymous_10)","line":291,"loc":{"start":{"line":291,"column":28},"end":{"line":291,"column":41}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":348,"column":3}},"2":{"start":{"line":78,"column":8},"end":{"line":78,"column":22}},"3":{"start":{"line":79,"column":8},"end":{"line":79,"column":30}},"4":{"start":{"line":82,"column":8},"end":{"line":82,"column":60}},"5":{"start":{"line":84,"column":8},"end":{"line":87,"column":9}},"6":{"start":{"line":85,"column":12},"end":{"line":85,"column":68}},"7":{"start":{"line":86,"column":12},"end":{"line":86,"column":19}},"8":{"start":{"line":89,"column":8},"end":{"line":159,"column":11}},"9":{"start":{"line":90,"column":12},"end":{"line":90,"column":50}},"10":{"start":{"line":92,"column":12},"end":{"line":96,"column":13}},"11":{"start":{"line":93,"column":16},"end":{"line":94,"column":38}},"12":{"start":{"line":95,"column":16},"end":{"line":95,"column":23}},"13":{"start":{"line":98,"column":12},"end":{"line":157,"column":14}},"14":{"start":{"line":158,"column":12},"end":{"line":158,"column":34}},"15":{"start":{"line":161,"column":8},"end":{"line":170,"column":10}},"16":{"start":{"line":172,"column":8},"end":{"line":172,"column":24}},"17":{"start":{"line":175,"column":8},"end":{"line":186,"column":11}},"18":{"start":{"line":176,"column":12},"end":{"line":177,"column":40}},"19":{"start":{"line":178,"column":12},"end":{"line":180,"column":13}},"20":{"start":{"line":179,"column":16},"end":{"line":179,"column":54}},"21":{"start":{"line":182,"column":12},"end":{"line":185,"column":13}},"22":{"start":{"line":183,"column":16},"end":{"line":183,"column":68}},"23":{"start":{"line":184,"column":16},"end":{"line":184,"column":47}},"24":{"start":{"line":188,"column":8},"end":{"line":188,"column":41}},"25":{"start":{"line":190,"column":8},"end":{"line":195,"column":11}},"26":{"start":{"line":191,"column":12},"end":{"line":192,"column":40}},"27":{"start":{"line":193,"column":12},"end":{"line":193,"column":53}},"28":{"start":{"line":194,"column":12},"end":{"line":194,"column":45}},"29":{"start":{"line":204,"column":12},"end":{"line":204,"column":65}},"30":{"start":{"line":205,"column":12},"end":{"line":205,"column":25}},"31":{"start":{"line":206,"column":12},"end":{"line":207,"column":40}},"32":{"start":{"line":208,"column":12},"end":{"line":208,"column":53}},"33":{"start":{"line":219,"column":8},"end":{"line":221,"column":10}},"34":{"start":{"line":222,"column":8},"end":{"line":222,"column":77}},"35":{"start":{"line":223,"column":8},"end":{"line":225,"column":11}},"36":{"start":{"line":224,"column":12},"end":{"line":224,"column":34}},"37":{"start":{"line":226,"column":8},"end":{"line":226,"column":36}},"38":{"start":{"line":239,"column":8},"end":{"line":240,"column":38}},"39":{"start":{"line":242,"column":8},"end":{"line":254,"column":9}},"40":{"start":{"line":244,"column":12},"end":{"line":245,"column":50}},"41":{"start":{"line":246,"column":12},"end":{"line":247,"column":50}},"42":{"start":{"line":250,"column":12},"end":{"line":251,"column":60}},"43":{"start":{"line":252,"column":12},"end":{"line":253,"column":60}},"44":{"start":{"line":256,"column":8},"end":{"line":256,"column":33}},"45":{"start":{"line":264,"column":8},"end":{"line":266,"column":13}},"46":{"start":{"line":267,"column":8},"end":{"line":267,"column":77}},"47":{"start":{"line":268,"column":8},"end":{"line":268,"column":61}},"48":{"start":{"line":269,"column":8},"end":{"line":271,"column":10}},"49":{"start":{"line":272,"column":8},"end":{"line":273,"column":52}},"50":{"start":{"line":274,"column":8},"end":{"line":275,"column":41}},"51":{"start":{"line":276,"column":8},"end":{"line":276,"column":24}},"52":{"start":{"line":277,"column":8},"end":{"line":277,"column":38}},"53":{"start":{"line":278,"column":8},"end":{"line":278,"column":30}},"54":{"start":{"line":280,"column":8},"end":{"line":289,"column":9}},"55":{"start":{"line":281,"column":12},"end":{"line":281,"column":48}},"56":{"start":{"line":282,"column":15},"end":{"line":289,"column":9}},"57":{"start":{"line":283,"column":12},"end":{"line":283,"column":37}},"58":{"start":{"line":285,"column":12},"end":{"line":285,"column":58}},"59":{"start":{"line":286,"column":12},"end":{"line":286,"column":77}},"60":{"start":{"line":287,"column":12},"end":{"line":287,"column":77}},"61":{"start":{"line":288,"column":12},"end":{"line":288,"column":50}},"62":{"start":{"line":291,"column":8},"end":{"line":308,"column":11}},"63":{"start":{"line":292,"column":12},"end":{"line":307,"column":13}},"64":{"start":{"line":293,"column":16},"end":{"line":299,"column":17}},"65":{"start":{"line":294,"column":20},"end":{"line":295,"column":64}},"66":{"start":{"line":297,"column":20},"end":{"line":298,"column":68}},"67":{"start":{"line":301,"column":16},"end":{"line":303,"column":18}},"68":{"start":{"line":304,"column":16},"end":{"line":306,"column":18}},"69":{"start":{"line":311,"column":8},"end":{"line":333,"column":9}},"70":{"start":{"line":312,"column":12},"end":{"line":313,"column":63}},"71":{"start":{"line":315,"column":12},"end":{"line":329,"column":15}},"72":{"start":{"line":331,"column":12},"end":{"line":331,"column":71}},"73":{"start":{"line":332,"column":12},"end":{"line":332,"column":66}},"74":{"start":{"line":335,"column":8},"end":{"line":336,"column":46}},"75":{"start":{"line":338,"column":8},"end":{"line":340,"column":11}},"76":{"start":{"line":341,"column":8},"end":{"line":341,"column":49}},"77":{"start":{"line":342,"column":8},"end":{"line":342,"column":64}},"78":{"start":{"line":344,"column":8},"end":{"line":346,"column":9}},"79":{"start":{"line":345,"column":12},"end":{"line":345,"column":77}}},"branchMap":{"1":{"line":84,"type":"if","locations":[{"start":{"line":84,"column":8},"end":{"line":84,"column":8}},{"start":{"line":84,"column":8},"end":{"line":84,"column":8}}]},"2":{"line":92,"type":"if","locations":[{"start":{"line":92,"column":12},"end":{"line":92,"column":12}},{"start":{"line":92,"column":12},"end":{"line":92,"column":12}}]},"3":{"line":178,"type":"if","locations":[{"start":{"line":178,"column":12},"end":{"line":178,"column":12}},{"start":{"line":178,"column":12},"end":{"line":178,"column":12}}]},"4":{"line":182,"type":"if","locations":[{"start":{"line":182,"column":12},"end":{"line":182,"column":12}},{"start":{"line":182,"column":12},"end":{"line":182,"column":12}}]},"5":{"line":242,"type":"if","locations":[{"start":{"line":242,"column":8},"end":{"line":242,"column":8}},{"start":{"line":242,"column":8},"end":{"line":242,"column":8}}]},"6":{"line":272,"type":"binary-expr","locations":[{"start":{"line":272,"column":22},"end":{"line":272,"column":61}},{"start":{"line":273,"column":12},"end":{"line":273,"column":51}}]},"7":{"line":274,"type":"binary-expr","locations":[{"start":{"line":274,"column":27},"end":{"line":274,"column":55}},{"start":{"line":275,"column":12},"end":{"line":275,"column":40}}]},"8":{"line":280,"type":"if","locations":[{"start":{"line":280,"column":8},"end":{"line":280,"column":8}},{"start":{"line":280,"column":8},"end":{"line":280,"column":8}}]},"9":{"line":282,"type":"if","locations":[{"start":{"line":282,"column":15},"end":{"line":282,"column":15}},{"start":{"line":282,"column":15},"end":{"line":282,"column":15}}]},"10":{"line":292,"type":"if","locations":[{"start":{"line":292,"column":12},"end":{"line":292,"column":12}},{"start":{"line":292,"column":12},"end":{"line":292,"column":12}}]},"11":{"line":293,"type":"if","locations":[{"start":{"line":293,"column":16},"end":{"line":293,"column":16}},{"start":{"line":293,"column":16},"end":{"line":293,"column":16}}]},"12":{"line":311,"type":"if","locations":[{"start":{"line":311,"column":8},"end":{"line":311,"column":8}},{"start":{"line":311,"column":8},"end":{"line":311,"column":8}}]},"13":{"line":344,"type":"if","locations":[{"start":{"line":344,"column":8},"end":{"line":344,"column":8}},{"start":{"line":344,"column":8},"end":{"line":344,"column":8}}]}}};
-}
-__cov_3yws_N83ZzCpq68pNq6syw = __cov_3yws_N83ZzCpq68pNq6syw['/home/travis/build/terrestris/BasiGX/src/view/form/CoordinateTransform.js'];
-__cov_3yws_N83ZzCpq68pNq6syw.s['1']++;Ext.define('BasiGX.view.form.CoordinateTransform',{extend:'Ext.form.Panel',xtype:'basigx-form-coordinatetransform',requires:['Ext.button.Button','Ext.app.ViewModel'],viewModel:{data:{coordFieldSetTitle:'Koordinaten',coordXFieldLabel:'X-Koordinate',coordYFieldLabel:'Y-Koordinate',transformBtnText:'Transformieren',resetFormBtnText:'Zurücksetzen',transformBtnIconCls:'{transformButtonIconCls}',transformBtnTooltip:'{transformButtonToolTip}',documentation:'<h2>Koordinaten transformieren</h2>\u2022 In diesem '+'Dialog können Koordinaten transformiert werden.<br>'+'\u2022 Geben Sie Koordinaten in die Eingabefelder ein, um sich '+'anschließend den Punkt in der Karte anzeigen zu lassen.<br>'+'\u2022 Klicken Sie alternativ in die Karte, um sich die '+'jeweiligen Koordinaten anzeigen zu lassen'}},padding:5,layout:'form',scrollable:'y',map:null,config:{coordinateSystemsToUse:[],transformCenterOnRender:true},initComponent:function(){__cov_3yws_N83ZzCpq68pNq6syw.f['1']++;__cov_3yws_N83ZzCpq68pNq6syw.s['2']++;var me=this;__cov_3yws_N83ZzCpq68pNq6syw.s['3']++;var crsFieldsets=[];__cov_3yws_N83ZzCpq68pNq6syw.s['4']++;me.map=BasiGX.util.Map.getMapComponent().getMap();__cov_3yws_N83ZzCpq68pNq6syw.s['5']++;if(Ext.isEmpty(me.getCoordinateSystemsToUse())){__cov_3yws_N83ZzCpq68pNq6syw.b['1'][0]++;__cov_3yws_N83ZzCpq68pNq6syw.s['6']++;Ext.log.warn('No coordinatesystems given to Component');__cov_3yws_N83ZzCpq68pNq6syw.s['7']++;return;}else{__cov_3yws_N83ZzCpq68pNq6syw.b['1'][1]++;}__cov_3yws_N83ZzCpq68pNq6syw.s['8']++;Ext.each(me.getCoordinateSystemsToUse(),function(crs){__cov_3yws_N83ZzCpq68pNq6syw.f['2']++;__cov_3yws_N83ZzCpq68pNq6syw.s['9']++;var targetCrs=ol.proj.get(crs.code);__cov_3yws_N83ZzCpq68pNq6syw.s['10']++;if(!Ext.isDefined(targetCrs)){__cov_3yws_N83ZzCpq68pNq6syw.b['2'][0]++;__cov_3yws_N83ZzCpq68pNq6syw.s['11']++;Ext.log.warn('The CRS '+crs.code+' is not defined, did '+'you require it?');__cov_3yws_N83ZzCpq68pNq6syw.s['12']++;return;}else{__cov_3yws_N83ZzCpq68pNq6syw.b['2'][1]++;}__cov_3yws_N83ZzCpq68pNq6syw.s['13']++;var fs={xtype:'fieldset',title:crs.name,crs:crs.code,items:[{xtype:'numberfield',name:'xcoord',decimalSeparator:',',decimalPrecision:7,bind:{fieldLabel:'{coordXFieldLabel}'},value:'',hideTrigger:true,keyNavEnabled:false,mouseWheelEnabled:false,listeners:{'focus':me.toggleBtnVisibility}},{xtype:'container',layout:'hbox',margin:'0 0 5 0',items:[{xtype:'numberfield',name:'ycoord',decimalSeparator:',',decimalPrecision:7,bind:{fieldLabel:'{coordYFieldLabel}'},value:'',hideTrigger:true,keyNavEnabled:false,mouseWheelEnabled:false,listeners:{'focus':me.toggleBtnVisibility}},{xtype:'button',name:'transform',margin:'0 0 0 30',width:110,bind:{text:'{transformBtnText}',iconCls:'{transformButtonIconCls}',tooltip:'{transformButtonToolTip}'},hidden:true,handler:me.transform}]}]};__cov_3yws_N83ZzCpq68pNq6syw.s['14']++;crsFieldsets.push(fs);});__cov_3yws_N83ZzCpq68pNq6syw.s['15']++;me.items=[{xtype:'fieldset',layout:'form',bind:{title:'{coordFieldSetTitle}'},items:crsFieldsets}];__cov_3yws_N83ZzCpq68pNq6syw.s['16']++;me.callParent();__cov_3yws_N83ZzCpq68pNq6syw.s['17']++;me.on('afterrender',function(){__cov_3yws_N83ZzCpq68pNq6syw.f['3']++;__cov_3yws_N83ZzCpq68pNq6syw.s['18']++;var transformvectorlayer=BasiGX.util.Layer.getLayerByName('transformvectorlayer');__cov_3yws_N83ZzCpq68pNq6syw.s['19']++;if(transformvectorlayer){__cov_3yws_N83ZzCpq68pNq6syw.b['3'][0]++;__cov_3yws_N83ZzCpq68pNq6syw.s['20']++;transformvectorlayer.setVisible(true);}else{__cov_3yws_N83ZzCpq68pNq6syw.b['3'][1]++;}__cov_3yws_N83ZzCpq68pNq6syw.s['21']++;if(me.getTransformCenterOnRender()){__cov_3yws_N83ZzCpq68pNq6syw.b['4'][0]++;__cov_3yws_N83ZzCpq68pNq6syw.s['22']++;var coordToTransform=me.map.getView().getCenter();__cov_3yws_N83ZzCpq68pNq6syw.s['23']++;me.transform(coordToTransform);}else{__cov_3yws_N83ZzCpq68pNq6syw.b['4'][1]++;}});__cov_3yws_N83ZzCpq68pNq6syw.s['24']++;me.map.on('click',me.transform);__cov_3yws_N83ZzCpq68pNq6syw.s['25']++;me.on('beforedestroy',function(){__cov_3yws_N83ZzCpq68pNq6syw.f['4']++;__cov_3yws_N83ZzCpq68pNq6syw.s['26']++;var transformvectorlayer=BasiGX.util.Layer.getLayerByName('transformvectorlayer');__cov_3yws_N83ZzCpq68pNq6syw.s['27']++;transformvectorlayer.getSource().clear();__cov_3yws_N83ZzCpq68pNq6syw.s['28']++;me.map.un('click',me.transform);});},buttons:[{bind:{text:'{resetFormBtnText}'},handler:function(btn){__cov_3yws_N83ZzCpq68pNq6syw.f['5']++;__cov_3yws_N83ZzCpq68pNq6syw.s['29']++;var view=btn.up('basigx-form-coordinatetransform');__cov_3yws_N83ZzCpq68pNq6syw.s['30']++;view.reset();__cov_3yws_N83ZzCpq68pNq6syw.s['31']++;var transformvectorlayer=BasiGX.util.Layer.getLayerByName('transformvectorlayer');__cov_3yws_N83ZzCpq68pNq6syw.s['32']++;transformvectorlayer.getSource().clear();}}],toggleBtnVisibility:function(field){__cov_3yws_N83ZzCpq68pNq6syw.f['6']++;__cov_3yws_N83ZzCpq68pNq6syw.s['33']++;var allBtns=Ext.ComponentQuery.query('basigx-form-coordinatetransform button[name=transform]');__cov_3yws_N83ZzCpq68pNq6syw.s['34']++;var currentBtn=field.up('fieldset').down('button[name=transform]');__cov_3yws_N83ZzCpq68pNq6syw.s['35']++;Ext.each(allBtns,function(btn){__cov_3yws_N83ZzCpq68pNq6syw.f['7']++;__cov_3yws_N83ZzCpq68pNq6syw.s['36']++;btn.setVisible(false);});__cov_3yws_N83ZzCpq68pNq6syw.s['37']++;currentBtn.setVisible(true);},transformCoords:function(coordToTransform,mapProjection,targetCrs){__cov_3yws_N83ZzCpq68pNq6syw.f['8']++;__cov_3yws_N83ZzCpq68pNq6syw.s['38']++;var transformedCoords=ol.proj.transform(coordToTransform,mapProjection,targetCrs);__cov_3yws_N83ZzCpq68pNq6syw.s['39']++;if(targetCrs.getUnits()==='m'){__cov_3yws_N83ZzCpq68pNq6syw.b['5'][0]++;__cov_3yws_N83ZzCpq68pNq6syw.s['40']++;transformedCoords[0]=Math.round(transformedCoords[0]*100)/100;__cov_3yws_N83ZzCpq68pNq6syw.s['41']++;transformedCoords[1]=Math.round(transformedCoords[1]*100)/100;}else{__cov_3yws_N83ZzCpq68pNq6syw.b['5'][1]++;__cov_3yws_N83ZzCpq68pNq6syw.s['42']++;transformedCoords[0]=Math.round(transformedCoords[0]*10000000)/10000000;__cov_3yws_N83ZzCpq68pNq6syw.s['43']++;transformedCoords[1]=Math.round(transformedCoords[1]*10000000)/10000000;}__cov_3yws_N83ZzCpq68pNq6syw.s['44']++;return transformedCoords;},transform:function(evtOrBtnOrArray){__cov_3yws_N83ZzCpq68pNq6syw.f['9']++;__cov_3yws_N83ZzCpq68pNq6syw.s['45']++;var coordTransformForm=Ext.ComponentQuery.query('basigx-form-coordinatetransform')[0];__cov_3yws_N83ZzCpq68pNq6syw.s['46']++;var mapProjection=coordTransformForm.map.getView().getProjection();__cov_3yws_N83ZzCpq68pNq6syw.s['47']++;var fieldSets=coordTransformForm.query('fieldset');__cov_3yws_N83ZzCpq68pNq6syw.s['48']++;var transformvectorlayer=BasiGX.util.Layer.getLayerByName('transformvectorlayer');__cov_3yws_N83ZzCpq68pNq6syw.s['49']++;var isOlEvt=(__cov_3yws_N83ZzCpq68pNq6syw.b['6'][0]++,Ext.isArray(evtOrBtnOrArray.coordinate))&&(__cov_3yws_N83ZzCpq68pNq6syw.b['6'][1]++,evtOrBtnOrArray.coordinate.length===2);__cov_3yws_N83ZzCpq68pNq6syw.s['50']++;var isCoordArray=(__cov_3yws_N83ZzCpq68pNq6syw.b['7'][0]++,Ext.isArray(evtOrBtnOrArray))&&(__cov_3yws_N83ZzCpq68pNq6syw.b['7'][1]++,evtOrBtnOrArray.length===2);__cov_3yws_N83ZzCpq68pNq6syw.s['51']++;var coords=[];__cov_3yws_N83ZzCpq68pNq6syw.s['52']++;var coordsSrs=mapProjection;__cov_3yws_N83ZzCpq68pNq6syw.s['53']++;var transformedCoords;__cov_3yws_N83ZzCpq68pNq6syw.s['54']++;if(isOlEvt){__cov_3yws_N83ZzCpq68pNq6syw.b['8'][0]++;__cov_3yws_N83ZzCpq68pNq6syw.s['55']++;coords=evtOrBtnOrArray.coordinate;}else{__cov_3yws_N83ZzCpq68pNq6syw.b['8'][1]++;__cov_3yws_N83ZzCpq68pNq6syw.s['56']++;if(isCoordArray){__cov_3yws_N83ZzCpq68pNq6syw.b['9'][0]++;__cov_3yws_N83ZzCpq68pNq6syw.s['57']++;coords=evtOrBtnOrArray;}else{__cov_3yws_N83ZzCpq68pNq6syw.b['9'][1]++;__cov_3yws_N83ZzCpq68pNq6syw.s['58']++;var fieldset=evtOrBtnOrArray.up('fieldset');__cov_3yws_N83ZzCpq68pNq6syw.s['59']++;coords[0]=fieldset.down('numberfield[name=xcoord]').getValue();__cov_3yws_N83ZzCpq68pNq6syw.s['60']++;coords[1]=fieldset.down('numberfield[name=ycoord]').getValue();__cov_3yws_N83ZzCpq68pNq6syw.s['61']++;coordsSrs=ol.proj.get(fieldset.crs);}}__cov_3yws_N83ZzCpq68pNq6syw.s['62']++;Ext.each(fieldSets,function(fs){__cov_3yws_N83ZzCpq68pNq6syw.f['10']++;__cov_3yws_N83ZzCpq68pNq6syw.s['63']++;if(!Ext.isEmpty(fs.crs)){__cov_3yws_N83ZzCpq68pNq6syw.b['10'][0]++;__cov_3yws_N83ZzCpq68pNq6syw.s['64']++;if(coordsSrs){__cov_3yws_N83ZzCpq68pNq6syw.b['11'][0]++;__cov_3yws_N83ZzCpq68pNq6syw.s['65']++;transformedCoords=coordTransformForm.transformCoords(coords,coordsSrs,ol.proj.get(fs.crs));}else{__cov_3yws_N83ZzCpq68pNq6syw.b['11'][1]++;__cov_3yws_N83ZzCpq68pNq6syw.s['66']++;transformedCoords=coordTransformForm.transformCoords(coords,mapProjection,ol.proj.get(fs.crs));}__cov_3yws_N83ZzCpq68pNq6syw.s['67']++;fs.down('numberfield[name=xcoord]').setValue(transformedCoords[0]);__cov_3yws_N83ZzCpq68pNq6syw.s['68']++;fs.down('numberfield[name=ycoord]').setValue(transformedCoords[1]);}else{__cov_3yws_N83ZzCpq68pNq6syw.b['10'][1]++;}});__cov_3yws_N83ZzCpq68pNq6syw.s['69']++;if(!Ext.isDefined(transformvectorlayer)){__cov_3yws_N83ZzCpq68pNq6syw.b['12'][0]++;__cov_3yws_N83ZzCpq68pNq6syw.s['70']++;var displayInLayerSwitcherKey=BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;__cov_3yws_N83ZzCpq68pNq6syw.s['71']++;transformvectorlayer=new ol.layer.Vector({name:'transformvectorlayer',source:new ol.source.Vector(),style:new ol.style.Style({image:new ol.style.Circle({radius:8,fill:new ol.style.Fill({color:'rgba(255, 0, 0, 0.7)'}),stroke:new ol.style.Stroke({color:'rgba(255, 0, 0, 0.7)'})})})});__cov_3yws_N83ZzCpq68pNq6syw.s['72']++;transformvectorlayer.set(displayInLayerSwitcherKey,false);__cov_3yws_N83ZzCpq68pNq6syw.s['73']++;coordTransformForm.map.addLayer(transformvectorlayer);}else{__cov_3yws_N83ZzCpq68pNq6syw.b['12'][1]++;}__cov_3yws_N83ZzCpq68pNq6syw.s['74']++;var transformedMapCoords=ol.proj.transform(coords,coordsSrs,mapProjection);__cov_3yws_N83ZzCpq68pNq6syw.s['75']++;var feature=new ol.Feature({geometry:new ol.geom.Point(transformedMapCoords)});__cov_3yws_N83ZzCpq68pNq6syw.s['76']++;transformvectorlayer.getSource().clear();__cov_3yws_N83ZzCpq68pNq6syw.s['77']++;transformvectorlayer.getSource().addFeatures([feature]);__cov_3yws_N83ZzCpq68pNq6syw.s['78']++;if(!isOlEvt){__cov_3yws_N83ZzCpq68pNq6syw.b['13'][0]++;__cov_3yws_N83ZzCpq68pNq6syw.s['79']++;coordTransformForm.map.getView().setCenter(transformedMapCoords);}else{__cov_3yws_N83ZzCpq68pNq6syw.b['13'][1]++;}}});
+    requires: [
+        'Ext.button.Button',
+        'Ext.app.ViewModel'
+    ],
+
+    viewModel: {
+        data: {
+            coordFieldSetTitle: 'Koordinaten',
+            coordXFieldLabel: 'X-Koordinate',
+            coordYFieldLabel: 'Y-Koordinate',
+            transformBtnText: 'Transformieren',
+            resetFormBtnText: 'Zurücksetzen',
+            transformBtnIconCls: '{transformButtonIconCls}',
+            transformBtnTooltip: '{transformButtonToolTip}',
+            documentation: '<h2>Koordinaten transformieren</h2>• In diesem ' +
+                'Dialog können Koordinaten transformiert werden.<br>' +
+                '• Geben Sie Koordinaten in die Eingabefelder ein, um sich ' +
+                'anschließend den Punkt in der Karte anzeigen zu lassen.<br>' +
+                '• Klicken Sie alternativ in die Karte, um sich die ' +
+                'jeweiligen Koordinaten anzeigen zu lassen'
+        }
+    },
+
+    padding: 5,
+    layout: 'form',
+
+    scrollable: 'y',
+
+    /**
+     *
+     */
+    map: null,
+
+    config: {
+        /**
+         * Array of Objects containing code in EPSG notation and Name to display
+         * that should be used:
+         * {code: 'EPSG:4326', name: 'WGS84'}
+         */
+        coordinateSystemsToUse: [],
+
+        /**
+         *
+         */
+        transformCenterOnRender: true
+    },
+
+    /**
+     *
+     */
+    initComponent: function() {
+        var me = this;
+        var crsFieldsets = [];
+
+        //set map
+        me.map = BasiGX.util.Map.getMapComponent().getMap();
+
+        if (Ext.isEmpty(me.getCoordinateSystemsToUse())) {
+            Ext.log.warn('No coordinatesystems given to Component');
+            return;
+        }
+
+        Ext.each(me.getCoordinateSystemsToUse(), function(crs) {
+            var targetCrs = ol.proj.get(crs.code);
+            // first we check if the crs can be used at all
+            if (!Ext.isDefined(targetCrs)) {
+                Ext.log.warn('The CRS ' + crs.code + ' is not defined, did ' +
+                   'you require it?');
+                return;
+            }
+
+            var fs = {
+                xtype: 'fieldset',
+                title: crs.name,
+                crs: crs.code,
+                items: [
+                    {
+                        xtype: 'numberfield',
+                        name: 'xcoord',
+                        decimalSeparator: ',',
+                        decimalPrecision: 7,
+                        bind: {
+                            fieldLabel: '{coordXFieldLabel}'
+                        },
+                        value: '',
+                        // Remove spinner buttons, and arrow key and mouse wheel
+                        // listeners
+                        hideTrigger: true,
+                        keyNavEnabled: false,
+                        mouseWheelEnabled: false,
+                        listeners: {
+                            'focus': me.toggleBtnVisibility
+                        }
+                    },
+                    {
+                        xtype: 'container',
+                        layout: 'hbox',
+                        margin: '0 0 5 0',
+                        items: [{
+                            xtype: 'numberfield',
+                            name: 'ycoord',
+                            decimalSeparator: ',',
+                            decimalPrecision: 7,
+                            bind: {
+                                fieldLabel: '{coordYFieldLabel}'
+                            },
+                            value: '',
+                            // Remove spinner buttons, and arrow key and mouse
+                            // wheel listeners
+                            hideTrigger: true,
+                            keyNavEnabled: false,
+                            mouseWheelEnabled: false,
+                            listeners: {
+                                'focus': me.toggleBtnVisibility
+                            }
+                        }, {
+                            xtype: 'button',
+                            name: 'transform',
+                            margin: '0 0 0 30',
+                            width: 110,
+                            bind: {
+                                text: '{transformBtnText}',
+                                iconCls: '{transformButtonIconCls}',
+                                tooltip: '{transformButtonToolTip}'
+                            },
+                            hidden: true,
+                            handler: me.transform
+                        }]
+                    }
+                ]
+            };
+            crsFieldsets.push(fs);
+        });
+
+        me.items = [
+            {
+                xtype: 'fieldset',
+                layout: 'form',
+                bind: {
+                    title: '{coordFieldSetTitle}'
+                },
+                items: crsFieldsets
+            }
+        ];
+
+        me.callParent();
+
+        // set the initial values
+        me.on('afterrender', function() {
+            var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
+                'transformvectorlayer');
+            if (transformvectorlayer) {
+                transformvectorlayer.setVisible(true);
+            }
+
+            if (me.getTransformCenterOnRender()) {
+                var coordToTransform = me.map.getView().getCenter();
+                me.transform(coordToTransform);
+            }
+        });
+
+        me.map.on('click', me.transform);
+
+        me.on('beforedestroy', function() {
+            var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
+                'transformvectorlayer');
+            transformvectorlayer.getSource().clear();
+            me.map.un('click', me.transform);
+        });
+    },
+
+    // Reset and Submit buttons
+    buttons: [{
+        bind: {
+            text: '{resetFormBtnText}'
+        },
+        handler: function(btn) {
+            var view = btn.up('basigx-form-coordinatetransform');
+            view.reset();
+            var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
+                'transformvectorlayer');
+            transformvectorlayer.getSource().clear();
+        }
+    }],
+
+    /**
+     * Bound to the focus event of the textfields, this handler ensures that
+     * only the correct (associated) transform button is visible.
+     *
+     * @param {Ext.form.fiel.Text} field The textfield.
+     */
+    toggleBtnVisibility: function(field) {
+        var allBtns = Ext.ComponentQuery.query(
+            'basigx-form-coordinatetransform button[name=transform]'
+        );
+        var currentBtn = field.up('fieldset').down('button[name=transform]');
+        Ext.each(allBtns, function(btn) {
+            btn.setVisible(false);
+        });
+        currentBtn.setVisible(true);
+    },
+
+    /**
+     * Transforms the passed coordinates from `mapProjection` to `targetCrs`
+     * rounds according to the units of the `targetCrs`.
+     *
+     * @param {ol.Coordinate} coordToTransform The coordinates to transform.
+     * @param {ol.proj.Projection} mapProjection The source projection.
+     * @param {ol.proj.Projection} targetCrs The target projection.
+     * @return {ol.Coordinate} The transformed and formatted coordinates.
+     */
+    transformCoords: function(coordToTransform, mapProjection, targetCrs) {
+        var transformedCoords = ol.proj.transform(coordToTransform,
+            mapProjection, targetCrs);
+
+        if (targetCrs.getUnits() === 'm') {
+            // round metric crs coords to decimeters
+            transformedCoords[0] = Math.round(
+                transformedCoords[0] * 100) / 100;
+            transformedCoords[1] = Math.round(
+                transformedCoords[1] * 100) / 100;
+        } else {
+            // round geographic crs coords to decimeters
+            transformedCoords[0] = Math.round(
+                transformedCoords[0] * 10000000) / 10000000;
+            transformedCoords[1] = Math.round(
+                transformedCoords[1] * 10000000) / 10000000;
+        }
+
+        return transformedCoords;
+    },
+
+    /**
+     * @param {ol.MapBrowserEvent|ol.Coordinate|Ext.button.Button}
+     *     evtOrBtnOrArray The input to transfrom, works with different types.
+     */
+    transform: function(evtOrBtnOrArray) {
+        var coordTransformForm = Ext.ComponentQuery.query(
+            'basigx-form-coordinatetransform'
+        )[0];
+        var mapProjection = coordTransformForm.map.getView().getProjection();
+        var fieldSets = coordTransformForm.query('fieldset');
+        var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
+            'transformvectorlayer'
+        );
+        var isOlEvt = Ext.isArray(evtOrBtnOrArray.coordinate) &&
+            evtOrBtnOrArray.coordinate.length === 2;
+        var isCoordArray = Ext.isArray(evtOrBtnOrArray) &&
+            evtOrBtnOrArray.length === 2;
+        var coords = [];
+        var coordsSrs = mapProjection;
+        var transformedCoords;
+
+        if (isOlEvt) {
+            coords = evtOrBtnOrArray.coordinate;
+        } else if (isCoordArray) {
+            coords = evtOrBtnOrArray;
+        } else {
+            var fieldset = evtOrBtnOrArray.up('fieldset');
+            coords[0] = fieldset.down('numberfield[name=xcoord]').getValue();
+            coords[1] = fieldset.down('numberfield[name=ycoord]').getValue();
+            coordsSrs = ol.proj.get(fieldset.crs);
+        }
+
+        Ext.each(fieldSets, function(fs) {
+            if (!Ext.isEmpty(fs.crs)) {
+                if (coordsSrs) {
+                    transformedCoords = coordTransformForm.transformCoords(
+                        coords, coordsSrs, ol.proj.get(fs.crs));
+                } else {
+                    transformedCoords = coordTransformForm.transformCoords(
+                        coords, mapProjection, ol.proj.get(fs.crs));
+                }
+
+                fs.down('numberfield[name=xcoord]').setValue(
+                    transformedCoords[0]
+                );
+                fs.down('numberfield[name=ycoord]').setValue(
+                    transformedCoords[1]
+                );
+            }
+        });
+
+        // now show coord on map
+        if (!Ext.isDefined(transformvectorlayer)) {
+            var displayInLayerSwitcherKey =
+                BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+
+            transformvectorlayer = new ol.layer.Vector({
+                name: 'transformvectorlayer',
+                source: new ol.source.Vector(),
+                style: new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: 8,
+                        fill: new ol.style.Fill({
+                            color: 'rgba(255, 0, 0, 0.7)'
+                        }),
+                        stroke: new ol.style.Stroke({
+                            color: 'rgba(255, 0, 0, 0.7)'
+                        })
+                    })
+                })
+            });
+
+            transformvectorlayer.set(displayInLayerSwitcherKey, false);
+            coordTransformForm.map.addLayer(transformvectorlayer);
+        }
+
+        var transformedMapCoords = ol.proj.transform(
+            coords, coordsSrs, mapProjection);
+
+        var feature = new ol.Feature({
+            geometry: new ol.geom.Point(transformedMapCoords)
+        });
+        transformvectorlayer.getSource().clear();
+        transformvectorlayer.getSource().addFeatures([feature]);
+        // recenter if we were not triggered by click in map
+        if (!isOlEvt) {
+            coordTransformForm.map.getView().setCenter(transformedMapCoords);
+        }
+    }
+});

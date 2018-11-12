@@ -1,9 +1,92 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * ToggleLegend Button
+ *
+ * Button used to toggle the collapsed state of the legend.
+ *
+ * @class BasiGX.view.button.ToggleLegend
+ */
+Ext.define('BasiGX.view.button.ToggleLegend', {
+    extend: 'BasiGX.view.button.Base',
+    xtype: 'basigx-button-togglelegend',
+    requires: [
+        'Ext.app.ViewModel',
+        'BasiGX.util.Map'
+    ],
 
-var __cov_IEyHI2hnI3pHGa80XvL2Pw = (Function('return this'))();
-if (!__cov_IEyHI2hnI3pHGa80XvL2Pw.__coverage__) { __cov_IEyHI2hnI3pHGa80XvL2Pw.__coverage__ = {}; }
-__cov_IEyHI2hnI3pHGa80XvL2Pw = __cov_IEyHI2hnI3pHGa80XvL2Pw.__coverage__;
-if (!(__cov_IEyHI2hnI3pHGa80XvL2Pw['/home/travis/build/terrestris/BasiGX/src/view/button/ToggleLegend.js'])) {
-   __cov_IEyHI2hnI3pHGa80XvL2Pw['/home/travis/build/terrestris/BasiGX/src/view/button/ToggleLegend.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/ToggleLegend.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0},"b":{"1":[0,0],"2":[0,0]},"f":{"1":0},"fnMap":{"1":{"name":"(anonymous_1)","line":77,"loc":{"start":{"line":77,"column":17},"end":{"line":77,"column":34}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":92,"column":3}},"2":{"start":{"line":78,"column":12},"end":{"line":78,"column":26}},"3":{"start":{"line":79,"column":12},"end":{"line":80,"column":80}},"4":{"start":{"line":82,"column":12},"end":{"line":89,"column":13}},"5":{"start":{"line":83,"column":16},"end":{"line":87,"column":17}},"6":{"start":{"line":84,"column":20},"end":{"line":84,"column":41}},"7":{"start":{"line":86,"column":20},"end":{"line":86,"column":43}},"8":{"start":{"line":88,"column":16},"end":{"line":88,"column":30}}},"branchMap":{"1":{"line":82,"type":"if","locations":[{"start":{"line":82,"column":12},"end":{"line":82,"column":12}},{"start":{"line":82,"column":12},"end":{"line":82,"column":12}}]},"2":{"line":83,"type":"if","locations":[{"start":{"line":83,"column":16},"end":{"line":83,"column":16}},{"start":{"line":83,"column":16},"end":{"line":83,"column":16}}]}}};
-}
-__cov_IEyHI2hnI3pHGa80XvL2Pw = __cov_IEyHI2hnI3pHGa80XvL2Pw['/home/travis/build/terrestris/BasiGX/src/view/button/ToggleLegend.js'];
-__cov_IEyHI2hnI3pHGa80XvL2Pw.s['1']++;Ext.define('BasiGX.view.button.ToggleLegend',{extend:'BasiGX.view.button.Base',xtype:'basigx-button-togglelegend',requires:['Ext.app.ViewModel','BasiGX.util.Map'],viewModel:{data:{tooltip:'Layerauswahl',text:null,documentation:'<h2>Layerauswahl</h2>\u2022 Ein Klick auf '+'den Button klappt die Legendenansicht ein oder aus.'}},liveDemoConfig:[{moveMouseTo:'basigx-button-togglelegend'},{clickOnButton:'basigx-button-togglelegend'}],bind:{text:'{text}'},glyph:'xf022@FontAwesome',html:'<i class="fa fa-list-alt fa-2x"></i>',config:{legendTreeXType:null,handler:function(button){__cov_IEyHI2hnI3pHGa80XvL2Pw.f['1']++;__cov_IEyHI2hnI3pHGa80XvL2Pw.s['2']++;var me=this;__cov_IEyHI2hnI3pHGa80XvL2Pw.s['3']++;var legendPanel=BasiGX.util.Map.getLegendTreePanel(me.getLegendTreeXType());__cov_IEyHI2hnI3pHGa80XvL2Pw.s['4']++;if(legendPanel){__cov_IEyHI2hnI3pHGa80XvL2Pw.b['1'][0]++;__cov_IEyHI2hnI3pHGa80XvL2Pw.s['5']++;if(legendPanel.getCollapsed()){__cov_IEyHI2hnI3pHGa80XvL2Pw.b['2'][0]++;__cov_IEyHI2hnI3pHGa80XvL2Pw.s['6']++;legendPanel.expand();}else{__cov_IEyHI2hnI3pHGa80XvL2Pw.b['2'][1]++;__cov_IEyHI2hnI3pHGa80XvL2Pw.s['7']++;legendPanel.collapse();}__cov_IEyHI2hnI3pHGa80XvL2Pw.s['8']++;button.blur();}else{__cov_IEyHI2hnI3pHGa80XvL2Pw.b['1'][1]++;}}}});
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Layerauswahl',
+            text: null,
+            documentation: '<h2>Layerauswahl</h2>• Ein Klick auf ' +
+                'den Button klappt die Legendenansicht ein oder aus.'
+        }
+    },
+
+    /**
+     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: 'basigx-button-togglelegend'
+        },
+        {
+            clickOnButton: 'basigx-button-togglelegend'
+        }
+    ],
+
+    /**
+     *
+     */
+    bind: {
+        text: '{text}'
+    },
+
+    /**
+     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: 'xf022@FontAwesome',
+    html: '<i class="fa fa-list-alt fa-2x"></i>',
+
+    config: {
+        /**
+         * Placeholder for the xtype of the legendtree panel component
+         * (e.g. 'basigx-panel-legendtree').
+         * Will be used to be able to determine the component dynamically.
+         */
+        legendTreeXType: null,
+        handler: function(button) {
+            var me = this;
+            var legendPanel =
+                    BasiGX.util.Map.getLegendTreePanel(me.getLegendTreeXType());
+
+            if (legendPanel) {
+                if (legendPanel.getCollapsed()) {
+                    legendPanel.expand();
+                } else {
+                    legendPanel.collapse();
+                }
+                button.blur();
+            }
+        }
+    }
+});

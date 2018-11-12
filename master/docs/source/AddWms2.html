@@ -15,15 +15,154 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">
-var __cov_$v9CMxLezUMlQnzRrDbWqg = (Function(&#39;return this&#39;))();
-if (!__cov_$v9CMxLezUMlQnzRrDbWqg.__coverage__) { __cov_$v9CMxLezUMlQnzRrDbWqg.__coverage__ = {}; }
-__cov_$v9CMxLezUMlQnzRrDbWqg = __cov_$v9CMxLezUMlQnzRrDbWqg.__coverage__;
-if (!(__cov_$v9CMxLezUMlQnzRrDbWqg[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/AddWms.js&#39;])) {
-   __cov_$v9CMxLezUMlQnzRrDbWqg[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/AddWms.js&#39;] = {&quot;path&quot;:&quot;/home/travis/build/terrestris/BasiGX/src/view/button/AddWms.js&quot;,&quot;s&quot;:{&quot;1&quot;:0,&quot;2&quot;:0,&quot;3&quot;:0,&quot;4&quot;:0,&quot;5&quot;:0,&quot;6&quot;:0,&quot;7&quot;:0,&quot;8&quot;:0},&quot;b&quot;:{&quot;1&quot;:[0,0]},&quot;f&quot;:{&quot;1&quot;:0},&quot;fnMap&quot;:{&quot;1&quot;:{&quot;name&quot;:&quot;(anonymous_1)&quot;,&quot;line&quot;:123,&quot;loc&quot;:{&quot;start&quot;:{&quot;line&quot;:123,&quot;column&quot;:17},&quot;end&quot;:{&quot;line&quot;:123,&quot;column&quot;:28}}}},&quot;statementMap&quot;:{&quot;1&quot;:{&quot;start&quot;:{&quot;line&quot;:24,&quot;column&quot;:0},&quot;end&quot;:{&quot;line&quot;:148,&quot;column&quot;:3}},&quot;2&quot;:{&quot;start&quot;:{&quot;line&quot;:124,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:124,&quot;column&quot;:75}},&quot;3&quot;:{&quot;start&quot;:{&quot;line&quot;:125,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:145,&quot;column&quot;:13}},&quot;4&quot;:{&quot;start&quot;:{&quot;line&quot;:127,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:137,&quot;column&quot;:18}},&quot;5&quot;:{&quot;start&quot;:{&quot;line&quot;:139,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:139,&quot;column&quot;:65}},&quot;6&quot;:{&quot;start&quot;:{&quot;line&quot;:140,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:140,&quot;column&quot;:61}},&quot;7&quot;:{&quot;start&quot;:{&quot;line&quot;:142,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:142,&quot;column&quot;:69}},&quot;8&quot;:{&quot;start&quot;:{&quot;line&quot;:144,&quot;column&quot;:16},&quot;end&quot;:{&quot;line&quot;:144,&quot;column&quot;:47}}},&quot;branchMap&quot;:{&quot;1&quot;:{&quot;line&quot;:125,&quot;type&quot;:&quot;if&quot;,&quot;locations&quot;:[{&quot;start&quot;:{&quot;line&quot;:125,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:125,&quot;column&quot;:12}},{&quot;start&quot;:{&quot;line&quot;:125,&quot;column&quot;:12},&quot;end&quot;:{&quot;line&quot;:125,&quot;column&quot;:12}}]}}};
-}
-__cov_$v9CMxLezUMlQnzRrDbWqg = __cov_$v9CMxLezUMlQnzRrDbWqg[&#39;/home/travis/build/terrestris/BasiGX/src/view/button/AddWms.js&#39;];
-__cov_$v9CMxLezUMlQnzRrDbWqg.s[&#39;1&#39;]++;Ext.define(&#39;BasiGX.view.button.AddWms&#39;,{extend:&#39;BasiGX.view.button.Base&#39;,xtype:&#39;basigx-button-addwms&#39;,requires:[&#39;Ext.window.Window&#39;,&#39;Ext.app.ViewModel&#39;,&#39;BasiGX.view.form.AddWms&#39;,&#39;BasiGX.util.Animate&#39;],viewModel:{data:{tooltip:&#39;WMS hinzufügen&#39;,text:&#39;WMS &lt;span style=&quot;font-size: 1.7em; &#39;+&#39;font-weight: normal;&quot;&gt;\u2295&lt;/span&gt;&#39;,windowTitle:&#39;WMS hinzufügen&#39;,documentation:&#39;&lt;h2&gt;WMS hinzufügen&lt;/h2&gt;\u2022 Ein Klick auf den &#39;+&#39;Button öffnet ein Fenster, in dem Sie mit Hilfe einer &#39;+&#39;WMS-URL einen beliebigen Kartendienst der Karte hinzufügen &#39;+&#39;können.&#39;}},bind:{text:&#39;{text}&#39;},liveDemoConfig:[{moveMouseTo:{component:&#39;basigx-button-addwms&#39;,moveDuration:2000}},{clickOnButton:&#39;basigx-button-addwms&#39;},{moveMouseTo:{component:&#39;window[name=add-wms-window] textfield[name=url]&#39;,moveDuration:2000}},{enterText:{component:&#39;window[name=add-wms-window] textfield[name=url]&#39;,text:&#39;https://ows.terrestris.de/osm/service&#39;,waitAfter:3500}},{moveMouseTo:&#39;window[name=add-wms-window] button[name=requestLayersBtn]&#39;},{clickOnButton:{component:&#39;window[name=add-wms-window] button[name=requestLayersBtn]&#39;,waitAfter:3000}},{scrollTo:{component:&#39;window[name=add-wms-window] form&#39;,target:{x:0,y:999,animate:true}}},{moveMouseTo:&#39;window[name=add-wms-window] button[name=add-checked-layers]&#39;},{destroy:&#39;window[name=add-wms-window]&#39;}],config:{windowConfig:{},handler:function(){__cov_$v9CMxLezUMlQnzRrDbWqg.f[&#39;1&#39;]++;__cov_$v9CMxLezUMlQnzRrDbWqg.s[&#39;2&#39;]++;var win=Ext.ComponentQuery.query(&#39;[name=add-wms-window]&#39;)[0];__cov_$v9CMxLezUMlQnzRrDbWqg.s[&#39;3&#39;]++;if(!win){__cov_$v9CMxLezUMlQnzRrDbWqg.b[&#39;1&#39;][0]++;__cov_$v9CMxLezUMlQnzRrDbWqg.s[&#39;4&#39;]++;var windowConfig={name:&#39;add-wms-window&#39;,title:this.getViewModel().get(&#39;windowTitle&#39;),width:500,height:400,layout:&#39;fit&#39;,constrain:true,items:[{xtype:&#39;basigx-form-addwms&#39;}]};__cov_$v9CMxLezUMlQnzRrDbWqg.s[&#39;5&#39;]++;var windowConfigToApply=this.getWindowConfig();__cov_$v9CMxLezUMlQnzRrDbWqg.s[&#39;6&#39;]++;Ext.apply(windowConfig,windowConfigToApply);__cov_$v9CMxLezUMlQnzRrDbWqg.s[&#39;7&#39;]++;Ext.create(&#39;Ext.window.Window&#39;,windowConfig).show();}else{__cov_$v9CMxLezUMlQnzRrDbWqg.b[&#39;1&#39;][1]++;__cov_$v9CMxLezUMlQnzRrDbWqg.s[&#39;8&#39;]++;BasiGX.util.Animate.shake(win);}}}});
+  <pre class="prettyprint lang-js">/* Copyright (c) 2015-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-button-AddWms'>/**
+</span> * AddWms Button
+ *
+ * Button used to instanciate the basigx-form-addwms in order to add a
+ * WMS to the map
+ *
+ * @class BasiGX.view.button.AddWms
+ */
+Ext.define(&#39;BasiGX.view.button.AddWms&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-addwms&#39;,
+
+    requires: [
+        &#39;Ext.window.Window&#39;,
+        &#39;Ext.app.ViewModel&#39;,
+        &#39;BasiGX.view.form.AddWms&#39;,
+        &#39;BasiGX.util.Animate&#39;
+    ],
+
+<span id='BasiGX-view-button-AddWms-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: &#39;WMS hinzufügen&#39;,
+            text: &#39;WMS &lt;span style=&quot;font-size: 1.7em; &#39; +
+                &#39;font-weight: normal;&quot;&gt;⊕&lt;/span&gt;&#39;,
+            windowTitle: &#39;WMS hinzufügen&#39;,
+            documentation: &#39;&lt;h2&gt;WMS hinzufügen&lt;/h2&gt;• Ein Klick auf den &#39; +
+                &#39;Button öffnet ein Fenster, in dem Sie mit Hilfe einer &#39; +
+                &#39;WMS-URL einen beliebigen Kartendienst der Karte hinzufügen &#39; +
+                &#39;können.&#39;
+        }
+    },
+
+<span id='BasiGX-view-button-AddWms-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: &#39;{text}&#39;
+    },
+
+<span id='BasiGX-view-button-AddWms-property-liveDemoConfig'>    /**
+</span>     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: {
+                component: &#39;basigx-button-addwms&#39;,
+                moveDuration: 2000
+            }
+        },
+        {
+            clickOnButton: &#39;basigx-button-addwms&#39;
+        },
+        {
+            moveMouseTo: {
+                component: &#39;window[name=add-wms-window] textfield[name=url]&#39;,
+                moveDuration: 2000
+            }
+        },
+        {
+            enterText: {
+                component: &#39;window[name=add-wms-window] textfield[name=url]&#39;,
+                text: &#39;https://ows.terrestris.de/osm/service&#39;,
+                waitAfter: 3500
+            }
+        },
+        {
+            moveMouseTo:
+                &#39;window[name=add-wms-window] button[name=requestLayersBtn]&#39;
+        },
+        {
+            clickOnButton: {
+                component:
+                    &#39;window[name=add-wms-window] button[name=requestLayersBtn]&#39;,
+                waitAfter: 3000
+            }
+        },
+        {
+            scrollTo: {
+                component: &#39;window[name=add-wms-window] form&#39;,
+                target: {
+                    x: 0,
+                    y: 999,
+                    animate: true
+                }
+            }
+        },
+        {
+            moveMouseTo:
+                &#39;window[name=add-wms-window] button[name=add-checked-layers]&#39;
+        },
+        {
+            destroy: &#39;window[name=add-wms-window]&#39;
+        }
+    ],
+
+<span id='BasiGX-view-button-AddWms-property-config'>    /**
+</span>     *
+     */
+    config: {
+<span id='BasiGX-view-button-AddWms-cfg-windowConfig'>        windowConfig: {
+</span>            // can be used by subclasses to apply/merge
+            // additional/other values for the window
+        },
+<span id='BasiGX-view-button-AddWms-cfg-handler'>        handler: function() {
+</span>            var win = Ext.ComponentQuery.query(&#39;[name=add-wms-window]&#39;)[0];
+            if (!win) {
+
+                var windowConfig = {
+                    name: &#39;add-wms-window&#39;,
+                    title: this.getViewModel().get(&#39;windowTitle&#39;),
+                    width: 500,
+                    height: 400,
+                    layout: &#39;fit&#39;,
+                    constrain: true,
+                    items: [{
+                        xtype: &#39;basigx-form-addwms&#39;
+                    }]
+                };
+
+                var windowConfigToApply = this.getWindowConfig();
+                Ext.apply(windowConfig, windowConfigToApply);
+
+                Ext.create(&#39;Ext.window.Window&#39;, windowConfig).show();
+            } else {
+                BasiGX.util.Animate.shake(win);
+            }
+        }
+    }
+});
 </pre>
 </body>
 </html>

@@ -1,9 +1,380 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * MapContainer Panel
+ *
+ * Represents a main viewport which holds the map and other map related
+ * components. Using this container leads to a map with integrated or
+ * overlapping components, instead of arranging them in a border layout.
+ *
+ * @class BasiGX.view.panel.MapContainer
+ */
+Ext.define('BasiGX.view.panel.MapContainer', {
+    extend: 'Ext.panel.Panel',
+    xtype: 'basigx-panel-mapcontainer',
 
-var __cov_JpWrP0m2sxd3b9KLD4yaPg = (Function('return this'))();
-if (!__cov_JpWrP0m2sxd3b9KLD4yaPg.__coverage__) { __cov_JpWrP0m2sxd3b9KLD4yaPg.__coverage__ = {}; }
-__cov_JpWrP0m2sxd3b9KLD4yaPg = __cov_JpWrP0m2sxd3b9KLD4yaPg.__coverage__;
-if (!(__cov_JpWrP0m2sxd3b9KLD4yaPg['/home/travis/build/terrestris/BasiGX/src/view/panel/MapContainer.js'])) {
-   __cov_JpWrP0m2sxd3b9KLD4yaPg['/home/travis/build/terrestris/BasiGX/src/view/panel/MapContainer.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/panel/MapContainer.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0},"fnMap":{"1":{"name":"(anonymous_1)","line":158,"loc":{"start":{"line":158,"column":19},"end":{"line":158,"column":30}}},"2":{"name":"(anonymous_2)","line":194,"loc":{"start":{"line":194,"column":21},"end":{"line":194,"column":32}}},"3":{"name":"(anonymous_3)","line":208,"loc":{"start":{"line":208,"column":13},"end":{"line":208,"column":24}}},"4":{"name":"(anonymous_4)","line":219,"loc":{"start":{"line":219,"column":16},"end":{"line":219,"column":27}}},"5":{"name":"(anonymous_5)","line":234,"loc":{"start":{"line":234,"column":20},"end":{"line":234,"column":31}}},"6":{"name":"(anonymous_6)","line":250,"loc":{"start":{"line":250,"column":32},"end":{"line":250,"column":43}}},"7":{"name":"(anonymous_7)","line":271,"loc":{"start":{"line":271,"column":24},"end":{"line":271,"column":35}}},"8":{"name":"(anonymous_8)","line":282,"loc":{"start":{"line":282,"column":20},"end":{"line":282,"column":31}}},"9":{"name":"(anonymous_9)","line":293,"loc":{"start":{"line":293,"column":32},"end":{"line":293,"column":46}}},"10":{"name":"(anonymous_10)","line":317,"loc":{"start":{"line":317,"column":23},"end":{"line":317,"column":34}}},"11":{"name":"(anonymous_11)","line":337,"loc":{"start":{"line":337,"column":23},"end":{"line":337,"column":49}}},"12":{"name":"(anonymous_12)","line":355,"loc":{"start":{"line":355,"column":31},"end":{"line":355,"column":42}}},"13":{"name":"(anonymous_13)","line":370,"loc":{"start":{"line":370,"column":32},"end":{"line":370,"column":43}}}},"statementMap":{"1":{"start":{"line":25,"column":0},"end":{"line":380,"column":3}},"2":{"start":{"line":159,"column":8},"end":{"line":159,"column":22}},"3":{"start":{"line":162,"column":8},"end":{"line":162,"column":24}},"4":{"start":{"line":168,"column":8},"end":{"line":168,"column":29}},"5":{"start":{"line":171,"column":8},"end":{"line":171,"column":21}},"6":{"start":{"line":174,"column":8},"end":{"line":174,"column":24}},"7":{"start":{"line":177,"column":8},"end":{"line":177,"column":28}},"8":{"start":{"line":180,"column":8},"end":{"line":180,"column":40}},"9":{"start":{"line":185,"column":8},"end":{"line":185,"column":32}},"10":{"start":{"line":188,"column":8},"end":{"line":188,"column":68}},"11":{"start":{"line":195,"column":8},"end":{"line":195,"column":22}},"12":{"start":{"line":197,"column":8},"end":{"line":197,"column":54}},"13":{"start":{"line":199,"column":8},"end":{"line":199,"column":29}},"14":{"start":{"line":202,"column":8},"end":{"line":202,"column":50}},"15":{"start":{"line":209,"column":8},"end":{"line":209,"column":22}},"16":{"start":{"line":211,"column":8},"end":{"line":211,"column":38}},"17":{"start":{"line":213,"column":8},"end":{"line":213,"column":21}},"18":{"start":{"line":220,"column":8},"end":{"line":220,"column":22}},"19":{"start":{"line":222,"column":8},"end":{"line":222,"column":44}},"20":{"start":{"line":224,"column":8},"end":{"line":226,"column":9}},"21":{"start":{"line":225,"column":12},"end":{"line":225,"column":51}},"22":{"start":{"line":228,"column":8},"end":{"line":228,"column":24}},"23":{"start":{"line":235,"column":8},"end":{"line":235,"column":22}},"24":{"start":{"line":237,"column":8},"end":{"line":237,"column":52}},"25":{"start":{"line":240,"column":8},"end":{"line":242,"column":9}},"26":{"start":{"line":241,"column":12},"end":{"line":241,"column":57}},"27":{"start":{"line":244,"column":8},"end":{"line":244,"column":28}},"28":{"start":{"line":251,"column":8},"end":{"line":251,"column":22}},"29":{"start":{"line":253,"column":8},"end":{"line":253,"column":76}},"30":{"start":{"line":256,"column":8},"end":{"line":258,"column":9}},"31":{"start":{"line":257,"column":12},"end":{"line":257,"column":73}},"32":{"start":{"line":261,"column":8},"end":{"line":263,"column":9}},"33":{"start":{"line":262,"column":12},"end":{"line":262,"column":47}},"34":{"start":{"line":265,"column":8},"end":{"line":265,"column":40}},"35":{"start":{"line":272,"column":8},"end":{"line":272,"column":22}},"36":{"start":{"line":274,"column":8},"end":{"line":274,"column":54}},"37":{"start":{"line":276,"column":8},"end":{"line":276,"column":32}},"38":{"start":{"line":283,"column":8},"end":{"line":283,"column":22}},"39":{"start":{"line":285,"column":8},"end":{"line":285,"column":57}},"40":{"start":{"line":289,"column":8},"end":{"line":305,"column":9}},"41":{"start":{"line":290,"column":12},"end":{"line":292,"column":15}},"42":{"start":{"line":293,"column":12},"end":{"line":301,"column":15}},"43":{"start":{"line":294,"column":16},"end":{"line":294,"column":45}},"44":{"start":{"line":295,"column":16},"end":{"line":295,"column":45}},"45":{"start":{"line":296,"column":16},"end":{"line":296,"column":64}},"46":{"start":{"line":297,"column":16},"end":{"line":299,"column":17}},"47":{"start":{"line":298,"column":20},"end":{"line":298,"column":33}},"48":{"start":{"line":300,"column":16},"end":{"line":300,"column":28}},"49":{"start":{"line":304,"column":12},"end":{"line":304,"column":47}},"50":{"start":{"line":308,"column":8},"end":{"line":308,"column":33}},"51":{"start":{"line":318,"column":8},"end":{"line":326,"column":11}},"52":{"start":{"line":328,"column":8},"end":{"line":328,"column":28}},"53":{"start":{"line":338,"column":8},"end":{"line":339,"column":36}},"54":{"start":{"line":340,"column":8},"end":{"line":344,"column":9}},"55":{"start":{"line":341,"column":12},"end":{"line":341,"column":29}},"56":{"start":{"line":343,"column":12},"end":{"line":343,"column":29}},"57":{"start":{"line":345,"column":8},"end":{"line":345,"column":22}},"58":{"start":{"line":346,"column":8},"end":{"line":346,"column":41}},"59":{"start":{"line":347,"column":8},"end":{"line":347,"column":42}},"60":{"start":{"line":348,"column":8},"end":{"line":348,"column":49}},"61":{"start":{"line":356,"column":8},"end":{"line":356,"column":66}},"62":{"start":{"line":357,"column":8},"end":{"line":357,"column":26}},"63":{"start":{"line":358,"column":8},"end":{"line":360,"column":9}},"64":{"start":{"line":359,"column":12},"end":{"line":359,"column":47}},"65":{"start":{"line":361,"column":8},"end":{"line":363,"column":9}},"66":{"start":{"line":362,"column":12},"end":{"line":362,"column":63}},"67":{"start":{"line":371,"column":8},"end":{"line":371,"column":75}},"68":{"start":{"line":372,"column":8},"end":{"line":372,"column":25}},"69":{"start":{"line":373,"column":8},"end":{"line":375,"column":9}},"70":{"start":{"line":374,"column":12},"end":{"line":374,"column":46}},"71":{"start":{"line":376,"column":8},"end":{"line":378,"column":9}},"72":{"start":{"line":377,"column":12},"end":{"line":377,"column":66}}},"branchMap":{"1":{"line":224,"type":"if","locations":[{"start":{"line":224,"column":8},"end":{"line":224,"column":8}},{"start":{"line":224,"column":8},"end":{"line":224,"column":8}}]},"2":{"line":240,"type":"if","locations":[{"start":{"line":240,"column":8},"end":{"line":240,"column":8}},{"start":{"line":240,"column":8},"end":{"line":240,"column":8}}]},"3":{"line":240,"type":"binary-expr","locations":[{"start":{"line":240,"column":12},"end":{"line":240,"column":34}},{"start":{"line":240,"column":38},"end":{"line":240,"column":49}}]},"4":{"line":256,"type":"if","locations":[{"start":{"line":256,"column":8},"end":{"line":256,"column":8}},{"start":{"line":256,"column":8},"end":{"line":256,"column":8}}]},"5":{"line":256,"type":"binary-expr","locations":[{"start":{"line":256,"column":12},"end":{"line":256,"column":49}},{"start":{"line":256,"column":53},"end":{"line":256,"column":73}}]},"6":{"line":261,"type":"if","locations":[{"start":{"line":261,"column":8},"end":{"line":261,"column":8}},{"start":{"line":261,"column":8},"end":{"line":261,"column":8}}]},"7":{"line":289,"type":"if","locations":[{"start":{"line":289,"column":8},"end":{"line":289,"column":8}},{"start":{"line":289,"column":8},"end":{"line":289,"column":8}}]},"8":{"line":289,"type":"binary-expr","locations":[{"start":{"line":289,"column":12},"end":{"line":289,"column":35}},{"start":{"line":289,"column":39},"end":{"line":289,"column":50}}]},"9":{"line":297,"type":"if","locations":[{"start":{"line":297,"column":16},"end":{"line":297,"column":16}},{"start":{"line":297,"column":16},"end":{"line":297,"column":16}}]},"10":{"line":297,"type":"binary-expr","locations":[{"start":{"line":297,"column":20},"end":{"line":297,"column":25}},{"start":{"line":297,"column":29},"end":{"line":297,"column":57}}]},"11":{"line":340,"type":"if","locations":[{"start":{"line":340,"column":8},"end":{"line":340,"column":8}},{"start":{"line":340,"column":8},"end":{"line":340,"column":8}}]},"12":{"line":358,"type":"if","locations":[{"start":{"line":358,"column":8},"end":{"line":358,"column":8}},{"start":{"line":358,"column":8},"end":{"line":358,"column":8}}]},"13":{"line":361,"type":"if","locations":[{"start":{"line":361,"column":8},"end":{"line":361,"column":8}},{"start":{"line":361,"column":8},"end":{"line":361,"column":8}}]},"14":{"line":373,"type":"if","locations":[{"start":{"line":373,"column":8},"end":{"line":373,"column":8}},{"start":{"line":373,"column":8},"end":{"line":373,"column":8}}]},"15":{"line":376,"type":"if","locations":[{"start":{"line":376,"column":8},"end":{"line":376,"column":8}},{"start":{"line":376,"column":8},"end":{"line":376,"column":8}}]}}};
-}
-__cov_JpWrP0m2sxd3b9KLD4yaPg = __cov_JpWrP0m2sxd3b9KLD4yaPg['/home/travis/build/terrestris/BasiGX/src/view/panel/MapContainer.js'];
-__cov_JpWrP0m2sxd3b9KLD4yaPg.s['1']++;Ext.define('BasiGX.view.panel.MapContainer',{extend:'Ext.panel.Panel',xtype:'basigx-panel-mapcontainer',requires:['Ext.dom.Query','Ext.app.ViewModel','GeoExt.data.store.LayersTree','GeoExt.component.OverviewMap','BasiGX.util.Layer','BasiGX.view.component.Map','BasiGX.view.panel.LegendTree','BasiGX.view.panel.Menu','BasiGX.view.button.ZoomIn','BasiGX.view.button.ZoomOut','BasiGX.view.button.ZoomToExtent','BasiGX.view.button.ToggleLegend'],viewModel:{data:{titleLegendPanel:'Legende',documentation:'<h2>Karte</h2>\u2022 Die Karte wird zur Darstellung '+'der verschiedenen Kartenthemen verwendet.<br>\u2022 Mit Hilfe '+'des Themenbaums oder der Werkzeuge können Sie mit der '+'Karte interagieren.<br>\u2022 Standardmäßig können Sie den '+'Maßstab der Karte mit dem Mausrad oder einem Doppelklick '+'vergrößern und verkleinern.<br>\u2022 Für weitere Informationen '+'verwenden Sie die Hilfe für ein konkretes Werkzeug'}},layout:'absolute',header:false,mapPanel:null,config:{mapComponentConfig:{xtype:'basigx-component-map',anchor:'100% 100%'},menuConfig:{xtype:'basigx-panel-menu',width:300,items:[]},toolbarConfig:{xtype:'toolbar',vertical:true,width:50,cls:'basigx-map-tools',x:0,y:0,defaults:{scale:'large'}},overviewMapConfig:{xtype:'gx_overviewmap',magnification:10,width:400,height:150,padding:5,cls:'basigx-overview-map',hidden:true,layers:[new ol.layer.Tile({source:new ol.source.TileWMS({url:'https://ows.terrestris.de/osm/service?',params:{'layers':'OSM-WMS','TILED':true}})})]},overviewMapToggleButtonConfig:{xtype:'button',scale:'large',helpKey:'basigx-overview-map-button',cls:'basigx-overview-map-button',glyph:'xf0ac@FontAwesome',enableToggle:true},legendPanelConfig:{xtype:'basigx-panel-legendtree',width:250,height:300,layout:'fit',collapsible:true,collapsed:true,hideCollapseTool:true,collapseDirection:'bottom',titleCollapse:true,titleAlign:'center',rootVisible:false,bind:{title:'{titleLegendPanel}'}},additionalItems:[]},initComponent:function(){__cov_JpWrP0m2sxd3b9KLD4yaPg.f['1']++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['2']++;var me=this;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['3']++;me.callParent();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['4']++;me.addMapComponent();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['5']++;me.addMenu();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['6']++;me.addToolbar();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['7']++;me.addOverviewMap();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['8']++;me.addOverviewMapToggleButton();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['9']++;me.addAdditionalItems();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['10']++;me.on('afterrender',me.addLegendPanel,me,{single:true});},addMapComponent:function(){__cov_JpWrP0m2sxd3b9KLD4yaPg.f['2']++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['11']++;var me=this;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['12']++;var mapComponent=me.getMapComponentConfig();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['13']++;me.add(mapComponent);__cov_JpWrP0m2sxd3b9KLD4yaPg.s['14']++;me.mapPanel=me.down(mapComponent.xtype);},addMenu:function(){__cov_JpWrP0m2sxd3b9KLD4yaPg.f['3']++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['15']++;var me=this;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['16']++;var menu=me.getMenuConfig();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['17']++;me.add(menu);},addToolbar:function(){__cov_JpWrP0m2sxd3b9KLD4yaPg.f['4']++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['18']++;var me=this;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['19']++;var toolbar=me.getToolbarConfig();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['20']++;if(!toolbar.items){__cov_JpWrP0m2sxd3b9KLD4yaPg.b['1'][0]++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['21']++;toolbar.items=me.buildToolbarItems();}else{__cov_JpWrP0m2sxd3b9KLD4yaPg.b['1'][1]++;}__cov_JpWrP0m2sxd3b9KLD4yaPg.s['22']++;me.add(toolbar);},addOverviewMap:function(){__cov_JpWrP0m2sxd3b9KLD4yaPg.f['5']++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['23']++;var me=this;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['24']++;var overviewMap=me.getOverviewMapConfig();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['25']++;if((__cov_JpWrP0m2sxd3b9KLD4yaPg.b['3'][0]++,!overviewMap.parentMap)&&(__cov_JpWrP0m2sxd3b9KLD4yaPg.b['3'][1]++,me.mapPanel)){__cov_JpWrP0m2sxd3b9KLD4yaPg.b['2'][0]++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['26']++;overviewMap.parentMap=me.mapPanel.getMap();}else{__cov_JpWrP0m2sxd3b9KLD4yaPg.b['2'][1]++;}__cov_JpWrP0m2sxd3b9KLD4yaPg.s['27']++;me.add(overviewMap);},addOverviewMapToggleButton:function(){__cov_JpWrP0m2sxd3b9KLD4yaPg.f['6']++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['28']++;var me=this;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['29']++;var overviewMapToggleButton=me.getOverviewMapToggleButtonConfig();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['30']++;if((__cov_JpWrP0m2sxd3b9KLD4yaPg.b['5'][0]++,!overviewMapToggleButton.toggleHander)&&(__cov_JpWrP0m2sxd3b9KLD4yaPg.b['5'][1]++,me.toggleOverviewMap)){__cov_JpWrP0m2sxd3b9KLD4yaPg.b['4'][0]++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['31']++;overviewMapToggleButton.toggleHandler=me.toggleOverviewMap;}else{__cov_JpWrP0m2sxd3b9KLD4yaPg.b['4'][1]++;}__cov_JpWrP0m2sxd3b9KLD4yaPg.s['32']++;if(!overviewMapToggleButton.scope){__cov_JpWrP0m2sxd3b9KLD4yaPg.b['6'][0]++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['33']++;overviewMapToggleButton.scope=me;}else{__cov_JpWrP0m2sxd3b9KLD4yaPg.b['6'][1]++;}__cov_JpWrP0m2sxd3b9KLD4yaPg.s['34']++;me.add(overviewMapToggleButton);},addAdditionalItems:function(){__cov_JpWrP0m2sxd3b9KLD4yaPg.f['7']++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['35']++;var me=this;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['36']++;var additionalItems=me.getAdditionalItems();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['37']++;me.add(additionalItems);},addLegendPanel:function(){__cov_JpWrP0m2sxd3b9KLD4yaPg.f['8']++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['38']++;var me=this;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['39']++;var legendTreeConfig=me.getLegendPanelConfig();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['40']++;if((__cov_JpWrP0m2sxd3b9KLD4yaPg.b['8'][0]++,!legendTreeConfig.store)&&(__cov_JpWrP0m2sxd3b9KLD4yaPg.b['8'][1]++,me.mapPanel)){__cov_JpWrP0m2sxd3b9KLD4yaPg.b['7'][0]++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['41']++;var treeStore=Ext.create('GeoExt.data.store.LayersTree',{layerGroup:me.mapPanel.getMap().getLayerGroup()});__cov_JpWrP0m2sxd3b9KLD4yaPg.s['42']++;treeStore.addFilter(function(rec){__cov_JpWrP0m2sxd3b9KLD4yaPg.f['9']++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['43']++;var layer=rec.getOlLayer();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['44']++;var util=BasiGX.util.Layer;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['45']++;var showKey=util.KEY_DISPLAY_IN_LAYERSWITCHER;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['46']++;if((__cov_JpWrP0m2sxd3b9KLD4yaPg.b['10'][0]++,layer)&&(__cov_JpWrP0m2sxd3b9KLD4yaPg.b['10'][1]++,layer.get(showKey)===false)){__cov_JpWrP0m2sxd3b9KLD4yaPg.b['9'][0]++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['47']++;return false;}else{__cov_JpWrP0m2sxd3b9KLD4yaPg.b['9'][1]++;}__cov_JpWrP0m2sxd3b9KLD4yaPg.s['48']++;return true;});__cov_JpWrP0m2sxd3b9KLD4yaPg.s['49']++;legendTreeConfig.store=treeStore;}else{__cov_JpWrP0m2sxd3b9KLD4yaPg.b['7'][1]++;}__cov_JpWrP0m2sxd3b9KLD4yaPg.s['50']++;me.add(legendTreeConfig);},buildToolbarItems:function(){__cov_JpWrP0m2sxd3b9KLD4yaPg.f['10']++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['51']++;var toolbarItems=[{xtype:'basigx-button-zoomin'},{xtype:'basigx-button-zoomout'},{xtype:'basigx-button-zoomtoextent'},{xtype:'basigx-button-togglelegend'}];__cov_JpWrP0m2sxd3b9KLD4yaPg.s['52']++;return toolbarItems;},toggleOverviewMap:function(button,pressed){__cov_JpWrP0m2sxd3b9KLD4yaPg.f['11']++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['53']++;var ovm=button.up('basigx-panel-mapcontainer').down('gx_overviewmap');__cov_JpWrP0m2sxd3b9KLD4yaPg.s['54']++;if(pressed){__cov_JpWrP0m2sxd3b9KLD4yaPg.b['11'][0]++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['55']++;ovm.show(button);}else{__cov_JpWrP0m2sxd3b9KLD4yaPg.b['11'][1]++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['56']++;ovm.hide(button);}__cov_JpWrP0m2sxd3b9KLD4yaPg.s['57']++;button.blur();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['58']++;this.toggleScalelineAdjustment();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['59']++;this.toggleScalecomboAdjustment();__cov_JpWrP0m2sxd3b9KLD4yaPg.s['60']++;this.fireEvent('overviewmapToggle',ovm);},toggleScalelineAdjustment:function(){__cov_JpWrP0m2sxd3b9KLD4yaPg.f['12']++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['61']++;var scaleline=Ext.dom.Query.select('.ol-scale-line')[0];__cov_JpWrP0m2sxd3b9KLD4yaPg.s['62']++;var scalelineElem;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['63']++;if(scaleline){__cov_JpWrP0m2sxd3b9KLD4yaPg.b['12'][0]++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['64']++;scalelineElem=Ext.get(scaleline);}else{__cov_JpWrP0m2sxd3b9KLD4yaPg.b['12'][1]++;}__cov_JpWrP0m2sxd3b9KLD4yaPg.s['65']++;if(scalelineElem){__cov_JpWrP0m2sxd3b9KLD4yaPg.b['13'][0]++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['66']++;scalelineElem.toggleCls('basigx-scaline-adjusted');}else{__cov_JpWrP0m2sxd3b9KLD4yaPg.b['13'][1]++;}},toggleScalecomboAdjustment:function(){__cov_JpWrP0m2sxd3b9KLD4yaPg.f['13']++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['67']++;var scaleCombo=Ext.ComponentQuery.query('basigx-combo-scale')[0];__cov_JpWrP0m2sxd3b9KLD4yaPg.s['68']++;var scaleComboEl;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['69']++;if(scaleCombo){__cov_JpWrP0m2sxd3b9KLD4yaPg.b['14'][0]++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['70']++;scaleComboEl=scaleCombo.getEl();}else{__cov_JpWrP0m2sxd3b9KLD4yaPg.b['14'][1]++;}__cov_JpWrP0m2sxd3b9KLD4yaPg.s['71']++;if(scaleComboEl){__cov_JpWrP0m2sxd3b9KLD4yaPg.b['15'][0]++;__cov_JpWrP0m2sxd3b9KLD4yaPg.s['72']++;scaleComboEl.toggleCls('basigx-combo-scale-adjusted');}else{__cov_JpWrP0m2sxd3b9KLD4yaPg.b['15'][1]++;}}});
+    requires: [
+        'Ext.dom.Query',
+        'Ext.app.ViewModel',
+        'GeoExt.data.store.LayersTree',
+        'GeoExt.component.OverviewMap',
+
+        'BasiGX.util.Layer',
+        'BasiGX.view.component.Map',
+        'BasiGX.view.panel.LegendTree',
+        'BasiGX.view.panel.Menu',
+
+        'BasiGX.view.button.ZoomIn',
+        'BasiGX.view.button.ZoomOut',
+        'BasiGX.view.button.ZoomToExtent',
+        'BasiGX.view.button.ToggleLegend'
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            titleLegendPanel: 'Legende',
+            documentation: '<h2>Karte</h2>• Die Karte wird zur Darstellung ' +
+                'der verschiedenen Kartenthemen verwendet.<br>• Mit Hilfe ' +
+                'des Themenbaums oder der Werkzeuge können Sie mit der ' +
+                'Karte interagieren.<br>• Standardmäßig können Sie den ' +
+                'Maßstab der Karte mit dem Mausrad oder einem Doppelklick ' +
+                'vergrößern und verkleinern.<br>• Für weitere Informationen ' +
+                'verwenden Sie die Hilfe für ein konkretes Werkzeug'
+        }
+    },
+
+    /**
+     *
+     */
+    layout: 'absolute',
+
+    /**
+     *
+     */
+    header: false,
+
+    /**
+     * The mapPanel containing the map.
+     */
+    mapPanel: null,
+
+    /**
+     * Config
+     */
+    config: {
+        mapComponentConfig: {
+            xtype: 'basigx-component-map',
+            anchor: '100% 100%'
+        },
+        menuConfig: {
+            xtype: 'basigx-panel-menu',
+            width: 300,
+            items: []
+        },
+        toolbarConfig: {
+            xtype: 'toolbar',
+            vertical: true,
+            width: 50,
+            cls: 'basigx-map-tools',
+            x: 0,
+            y: 0,
+            defaults: {
+                scale: 'large'
+            }
+        },
+        overviewMapConfig: {
+            xtype: 'gx_overviewmap',
+            magnification: 10,
+            width: 400,
+            height: 150,
+            padding: 5,
+            cls: 'basigx-overview-map',
+            hidden: true,
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.TileWMS({
+                        url: 'https://ows.terrestris.de/osm/service?',
+                        params: {'layers': 'OSM-WMS', 'TILED': true}
+                    })
+                })
+            ]
+        },
+        overviewMapToggleButtonConfig: {
+            xtype: 'button',
+            scale: 'large',
+            helpKey: 'basigx-overview-map-button',
+            cls: 'basigx-overview-map-button',
+            glyph: 'xf0ac@FontAwesome',
+            enableToggle: true
+        },
+        legendPanelConfig: {
+            xtype: 'basigx-panel-legendtree',
+            width: 250,
+            height: 300,
+            layout: 'fit',
+            collapsible: true,
+            collapsed: true,
+            hideCollapseTool: true,
+            collapseDirection: 'bottom',
+            titleCollapse: true,
+            titleAlign: 'center',
+            rootVisible: false,
+            bind: {
+                title: '{titleLegendPanel}'
+            }
+        },
+        /* use this property for additional items that can not be added
+         * to "items" immediately as they depend on the map or
+         * other components that are built in the MapContainer and should be
+         * instanciated first
+         */
+        additionalItems: []
+    },
+
+    /**
+     * Fired when the overviewmap is toggled.
+     * @event overviewmapToggle
+     */
+
+    /**
+     * Init
+     */
+    initComponent: function() {
+        var me = this;
+
+        // call parent (we can use this.add() after this call)
+        me.callParent();
+
+        /* add the map component and set it as member
+         * the map should be built first as some other components
+         * depend on it
+         */
+        me.addMapComponent();
+
+        // add the menu. TODO: make optional based on config and pass menuItems
+        me.addMenu();
+
+        // add the toolbar. TODO: make optional based on config
+        me.addToolbar();
+
+        // add the overview map. TODO make optional based on config
+        me.addOverviewMap();
+
+        // add the overview map toggle button. TODO make optional
+        me.addOverviewMapToggleButton();
+
+        /* add additional items (that possibly depend on the map or other
+         * components that were built in the lines before)
+         */
+        me.addAdditionalItems();
+
+        // TODO make optional based on config
+        me.on('afterrender', me.addLegendPanel, me, {single: true});
+    },
+
+    /**
+     *
+     */
+    addMapComponent: function() {
+        var me = this;
+
+        var mapComponent = me.getMapComponentConfig();
+
+        me.add(mapComponent);
+
+        // query the mapPanel we just built to set it as a member
+        me.mapPanel = me.down(mapComponent.xtype);
+    },
+
+    /**
+     *
+     */
+    addMenu: function() {
+        var me = this;
+
+        var menu = me.getMenuConfig();
+
+        me.add(menu);
+    },
+
+    /**
+     *
+     */
+    addToolbar: function() {
+        var me = this;
+
+        var toolbar = me.getToolbarConfig();
+
+        if (!toolbar.items) {
+            toolbar.items = me.buildToolbarItems();
+        }
+
+        me.add(toolbar);
+    },
+
+    /**
+     *
+     */
+    addOverviewMap: function() {
+        var me = this;
+
+        var overviewMap = me.getOverviewMapConfig();
+
+        // set the overviewmap parent map
+        if (!overviewMap.parentMap && me.mapPanel) {
+            overviewMap.parentMap = me.mapPanel.getMap();
+        }
+
+        me.add(overviewMap);
+    },
+
+    /**
+     *
+     */
+    addOverviewMapToggleButton: function() {
+        var me = this;
+
+        var overviewMapToggleButton = me.getOverviewMapToggleButtonConfig();
+
+        // set the toggleHandler if not configured
+        if (!overviewMapToggleButton.toggleHander && me.toggleOverviewMap) {
+            overviewMapToggleButton.toggleHandler = me.toggleOverviewMap;
+        }
+
+        // set the scope (e.g. for handler or toggleHandler)
+        if (!overviewMapToggleButton.scope) {
+            overviewMapToggleButton.scope = me;
+        }
+
+        me.add(overviewMapToggleButton);
+    },
+
+    /**
+     *
+     */
+    addAdditionalItems: function() {
+        var me = this;
+
+        var additionalItems = me.getAdditionalItems();
+
+        me.add(additionalItems);
+    },
+
+    /**
+     *
+     */
+    addLegendPanel: function() {
+        var me = this;
+
+        var legendTreeConfig = me.getLegendPanelConfig();
+
+
+        // set the store if not configured
+        if (!legendTreeConfig.store && me.mapPanel) {
+            var treeStore = Ext.create('GeoExt.data.store.LayersTree', {
+                layerGroup: me.mapPanel.getMap().getLayerGroup()
+            });
+            treeStore.addFilter(function(rec) {
+                var layer = rec.getOlLayer();
+                var util = BasiGX.util.Layer;
+                var showKey = util.KEY_DISPLAY_IN_LAYERSWITCHER;
+                if (layer && layer.get(showKey) === false) {
+                    return false;
+                }
+                return true;
+            });
+
+            // set the store
+            legendTreeConfig.store = treeStore;
+        }
+
+        // add the legend panel
+        me.add(legendTreeConfig);
+    },
+
+    /**
+     * Returns an array of ExtJS configurations for toolbar items.
+     *
+     * @return {Array<Object>} An array of ExtJS configurations for toolbar
+     *     items (mostly buttons).
+     */
+    buildToolbarItems: function() {
+        var toolbarItems = [{
+            xtype: 'basigx-button-zoomin'
+        }, {
+            xtype: 'basigx-button-zoomout'
+        }, {
+            xtype: 'basigx-button-zoomtoextent'
+        }, {
+            xtype: 'basigx-button-togglelegend'
+        }];
+
+        return toolbarItems;
+    },
+
+    /**
+     * Toggles the overviewmap.
+     *
+     * @param {Ext.button.Button} button The toggle button for the overview map.
+     * @param {Boolean} pressed Whether the butten is currently pressed or not.
+     */
+    toggleOverviewMap: function(button, pressed) {
+        var ovm = button.up('basigx-panel-mapcontainer')
+            .down('gx_overviewmap');
+        if (pressed) {
+            ovm.show(button);
+        } else {
+            ovm.hide(button);
+        }
+        button.blur();
+        this.toggleScalelineAdjustment();
+        this.toggleScalecomboAdjustment();
+        this.fireEvent('overviewmapToggle', ovm);
+    },
+
+    /**
+     * Called from #toggleOverviewMap, this method toggles a CSS class on
+     * the Openlayers scaleline HTML element.
+     */
+    toggleScalelineAdjustment: function() {
+        var scaleline = Ext.dom.Query.select('.ol-scale-line')[0];
+        var scalelineElem;
+        if (scaleline) {
+            scalelineElem = Ext.get(scaleline);
+        }
+        if (scalelineElem) {
+            scalelineElem.toggleCls('basigx-scaline-adjusted');
+        }
+    },
+
+    /**
+     * Called from #toggleOverviewMap, this method toggles a CSS class on
+     * the BasiGX scale combo HTML element.
+     */
+    toggleScalecomboAdjustment: function() {
+        var scaleCombo = Ext.ComponentQuery.query('basigx-combo-scale')[0];
+        var scaleComboEl;
+        if (scaleCombo) {
+            scaleComboEl = scaleCombo.getEl();
+        }
+        if (scaleComboEl) {
+            scaleComboEl.toggleCls('basigx-combo-scale-adjusted');
+        }
+    }
+});

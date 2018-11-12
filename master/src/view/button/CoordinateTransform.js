@@ -1,9 +1,97 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * CoordinateTransform Button
+ *
+ * Button used to instanciate the basigx-form-CoordinateTransform in order
+ * to show and transform coordinates
+ *
+ * @class BasiGX.view.button.CoordinateTransform
+ */
+Ext.define('BasiGX.view.button.CoordinateTransform', {
+    extend: 'BasiGX.view.button.Base',
+    xtype: 'basigx-button-coordinatetransform',
 
-var __cov_FmnuuHpuqeKM8LTua5joMg = (Function('return this'))();
-if (!__cov_FmnuuHpuqeKM8LTua5joMg.__coverage__) { __cov_FmnuuHpuqeKM8LTua5joMg.__coverage__ = {}; }
-__cov_FmnuuHpuqeKM8LTua5joMg = __cov_FmnuuHpuqeKM8LTua5joMg.__coverage__;
-if (!(__cov_FmnuuHpuqeKM8LTua5joMg['/home/travis/build/terrestris/BasiGX/src/view/button/CoordinateTransform.js'])) {
-   __cov_FmnuuHpuqeKM8LTua5joMg['/home/travis/build/terrestris/BasiGX/src/view/button/CoordinateTransform.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/CoordinateTransform.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0},"b":{"1":[0,0]},"f":{"1":0},"fnMap":{"1":{"name":"(anonymous_1)","line":74,"loc":{"start":{"line":74,"column":17},"end":{"line":74,"column":28}}}},"statementMap":{"1":{"start":{"line":24,"column":0},"end":{"line":97,"column":3}},"2":{"start":{"line":75,"column":12},"end":{"line":77,"column":17}},"3":{"start":{"line":78,"column":12},"end":{"line":94,"column":13}},"4":{"start":{"line":79,"column":16},"end":{"line":91,"column":29}},"5":{"start":{"line":93,"column":16},"end":{"line":93,"column":47}}},"branchMap":{"1":{"line":78,"type":"if","locations":[{"start":{"line":78,"column":12},"end":{"line":78,"column":12}},{"start":{"line":78,"column":12},"end":{"line":78,"column":12}}]}}};
-}
-__cov_FmnuuHpuqeKM8LTua5joMg = __cov_FmnuuHpuqeKM8LTua5joMg['/home/travis/build/terrestris/BasiGX/src/view/button/CoordinateTransform.js'];
-__cov_FmnuuHpuqeKM8LTua5joMg.s['1']++;Ext.define('BasiGX.view.button.CoordinateTransform',{extend:'BasiGX.view.button.Base',xtype:'basigx-button-coordinatetransform',requires:['Ext.window.Window','Ext.app.ViewModel','BasiGX.view.form.CoordinateTransform','BasiGX.util.Animate'],viewModel:{data:{tooltip:'Koordinaten transformieren und anzeigen',text:'Koordinaten transformieren',windowTitle:'Koordinaten transformieren',documentation:'<h2>Koordinaten transformieren</h2>\u2022 Ein Klick '+'auf den Button öffnet ein Fenster, in dem Koordinaten '+'transformiert werden können.<br>\u2022 Geben Sie Koordinaten in '+'die Eingabefelder ein, um sich anschließend den Punkt in '+'der Karte anzeigen zu lassen.<br>\u2022 Klicken Sie alternativ '+'in die Karte, um sich die jeweiligen Koordinaten anzeigen '+'zu lassen'}},bind:{text:'{text}'},coordinateSystemsToUse:[],transformCenterOnRender:true,config:{handler:function(){__cov_FmnuuHpuqeKM8LTua5joMg.f['1']++;__cov_FmnuuHpuqeKM8LTua5joMg.s['2']++;var win=Ext.ComponentQuery.query('[name=coordinate-transform-window]')[0];__cov_FmnuuHpuqeKM8LTua5joMg.s['3']++;if(!win){__cov_FmnuuHpuqeKM8LTua5joMg.b['1'][0]++;__cov_FmnuuHpuqeKM8LTua5joMg.s['4']++;Ext.create('Ext.window.Window',{name:'coordinate-transform-window',title:this.getViewModel().get('windowTitle'),width:500,height:400,layout:'fit',constrain:true,items:[{xtype:'basigx-form-coordinatetransform',coordinateSystemsToUse:this.coordinateSystemsToUse,transformCenterOnRender:this.transformCenterOnRender}]}).showAt(0);}else{__cov_FmnuuHpuqeKM8LTua5joMg.b['1'][1]++;__cov_FmnuuHpuqeKM8LTua5joMg.s['5']++;BasiGX.util.Animate.shake(win);}}}});
+    requires: [
+        'Ext.window.Window',
+        'Ext.app.ViewModel',
+        'BasiGX.view.form.CoordinateTransform',
+        'BasiGX.util.Animate'
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Koordinaten transformieren und anzeigen',
+            text: 'Koordinaten transformieren',
+            windowTitle: 'Koordinaten transformieren',
+            documentation: '<h2>Koordinaten transformieren</h2>• Ein Klick ' +
+                'auf den Button öffnet ein Fenster, in dem Koordinaten ' +
+                'transformiert werden können.<br>• Geben Sie Koordinaten in ' +
+                'die Eingabefelder ein, um sich anschließend den Punkt in ' +
+                'der Karte anzeigen zu lassen.<br>• Klicken Sie alternativ ' +
+                'in die Karte, um sich die jeweiligen Koordinaten anzeigen ' +
+                'zu lassen'
+        }
+    },
+
+    /**
+     *
+     */
+    bind: {
+        text: '{text}'
+    },
+
+    /**
+     * Array of CRS in EPSG notation that should be used
+     */
+    coordinateSystemsToUse: [],
+
+    /**
+     *
+     */
+    transformCenterOnRender: true,
+
+    /**
+     *
+     */
+    config: {
+        handler: function() {
+            var win = Ext.ComponentQuery.query(
+                '[name=coordinate-transform-window]'
+            )[0];
+            if (!win) {
+                Ext.create('Ext.window.Window', {
+                    name: 'coordinate-transform-window',
+                    title: this.getViewModel().get('windowTitle'),
+                    width: 500,
+                    height: 400,
+                    layout: 'fit',
+                    constrain: true,
+                    items: [{
+                        xtype: 'basigx-form-coordinatetransform',
+                        coordinateSystemsToUse: this.coordinateSystemsToUse,
+                        transformCenterOnRender: this.transformCenterOnRender
+                    }]
+                }).showAt(0);
+            } else {
+                BasiGX.util.Animate.shake(win);
+            }
+        }
+    }
+});

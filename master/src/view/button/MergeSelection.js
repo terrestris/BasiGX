@@ -1,9 +1,103 @@
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Merge selected features button
+ *
+ * Merge selected features into the currently selected layer.
+ *
+ * @class BasiGX.view.button.MergeSelection
+ */
+Ext.define('BasiGX.view.button.MergeSelection', {
+    extend: 'Ext.button.Button',
+    xtype: 'basigx-button-mergeselection',
 
-var __cov_fhWZGXt0Lb$1AzzRAoNcVA = (Function('return this'))();
-if (!__cov_fhWZGXt0Lb$1AzzRAoNcVA.__coverage__) { __cov_fhWZGXt0Lb$1AzzRAoNcVA.__coverage__ = {}; }
-__cov_fhWZGXt0Lb$1AzzRAoNcVA = __cov_fhWZGXt0Lb$1AzzRAoNcVA.__coverage__;
-if (!(__cov_fhWZGXt0Lb$1AzzRAoNcVA['/home/travis/build/terrestris/BasiGX/src/view/button/MergeSelection.js'])) {
-   __cov_fhWZGXt0Lb$1AzzRAoNcVA['/home/travis/build/terrestris/BasiGX/src/view/button/MergeSelection.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/MergeSelection.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0},"b":{"1":[0,0],"2":[0,0]},"f":{"1":0},"fnMap":{"1":{"name":"(anonymous_1)","line":57,"loc":{"start":{"line":57,"column":17},"end":{"line":57,"column":28}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":83,"column":3}},"2":{"start":{"line":58,"column":12},"end":{"line":58,"column":21}},"3":{"start":{"line":59,"column":12},"end":{"line":59,"column":43}},"4":{"start":{"line":63,"column":12},"end":{"line":67,"column":13}},"5":{"start":{"line":64,"column":16},"end":{"line":64,"column":68}},"6":{"start":{"line":66,"column":16},"end":{"line":66,"column":62}},"7":{"start":{"line":69,"column":12},"end":{"line":69,"column":46}},"8":{"start":{"line":70,"column":12},"end":{"line":74,"column":15}}},"branchMap":{"1":{"line":63,"type":"if","locations":[{"start":{"line":63,"column":12},"end":{"line":63,"column":12}},{"start":{"line":63,"column":12},"end":{"line":63,"column":12}}]},"2":{"line":63,"type":"binary-expr","locations":[{"start":{"line":63,"column":16},"end":{"line":63,"column":23}},{"start":{"line":63,"column":27},"end":{"line":63,"column":60}}]}}};
-}
-__cov_fhWZGXt0Lb$1AzzRAoNcVA = __cov_fhWZGXt0Lb$1AzzRAoNcVA['/home/travis/build/terrestris/BasiGX/src/view/button/MergeSelection.js'];
-__cov_fhWZGXt0Lb$1AzzRAoNcVA.s['1']++;Ext.define('BasiGX.view.button.MergeSelection',{extend:'Ext.button.Button',xtype:'basigx-button-mergeselection',requires:['Ext.window.Window','Ext.app.ViewModel','BasiGX.view.form.CoordinateTransform','BasiGX.util.Animate','BasiGX.view.window.MergeWindow'],viewModel:{data:{tooltip:'Selektierte Features in diesen Layer übernehmen',text:'Features übernehmen'}},bind:{text:'{text}',tooltip:'{tooltip}'},config:{handler:function(){__cov_fhWZGXt0Lb$1AzzRAoNcVA.f['1']++;__cov_fhWZGXt0Lb$1AzzRAoNcVA.s['2']++;var grid;__cov_fhWZGXt0Lb$1AzzRAoNcVA.s['3']++;var parent=this.up('window');__cov_fhWZGXt0Lb$1AzzRAoNcVA.s['4']++;if((__cov_fhWZGXt0Lb$1AzzRAoNcVA.b['2'][0]++,!parent)&&(__cov_fhWZGXt0Lb$1AzzRAoNcVA.b['2'][1]++,this.config.featureGridSelectorFn)){__cov_fhWZGXt0Lb$1AzzRAoNcVA.b['1'][0]++;__cov_fhWZGXt0Lb$1AzzRAoNcVA.s['5']++;grid=this.config.featureGridSelectorFn.call(this);}else{__cov_fhWZGXt0Lb$1AzzRAoNcVA.b['1'][1]++;__cov_fhWZGXt0Lb$1AzzRAoNcVA.s['6']++;grid=parent.down('basigx-grid-featuregrid');}__cov_fhWZGXt0Lb$1AzzRAoNcVA.s['7']++;var targetLayer=grid.getLayer();__cov_fhWZGXt0Lb$1AzzRAoNcVA.s['8']++;Ext.create({xtype:'basigx-window-merge',sourceLayer:this.getSourceLayer(),targetLayer:targetLayer});},sourceLayer:null,featureGridSelectorFn:null}});
+    requires: [
+        'Ext.window.Window',
+        'Ext.app.ViewModel',
+        'BasiGX.view.form.CoordinateTransform',
+        'BasiGX.util.Animate',
+        'BasiGX.view.window.MergeWindow'
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Selektierte Features in diesen Layer übernehmen',
+            text: 'Features übernehmen'
+        }
+    },
+
+    /**
+     *
+     */
+    bind: {
+        text: '{text}',
+        tooltip: '{tooltip}'
+    },
+
+    /**
+     *
+     */
+    config: {
+        handler: function() {
+            var me = this;
+            var grid;
+            var parent = this.up('window');
+            // support embedding the feature grid anywhere
+            if (!parent && this.config.featureGridSelectorFn) {
+                grid = this.config.featureGridSelectorFn.call(this);
+            } else {
+                grid = parent.down('basigx-grid-featuregrid');
+            }
+
+            var targetLayer = grid.getLayer();
+            Ext.create({
+                xtype: 'basigx-window-merge',
+                sourceLayer: this.getSourceLayer(),
+                targetLayer: targetLayer,
+                extraTargetLayers: this.getExtraTargetLayers(),
+                mergedFeaturesFn: function(features) {
+                    if (me.getMergedFeaturesFn()) {
+                        me.getMergedFeaturesFn()(features);
+                    }
+                }
+            });
+        },
+        /**
+         * The source layer name.
+         * @type {ol.layer.Vector}
+         */
+        sourceLayer: null,
+        /**
+         * A function to obtain the feature grid.
+         */
+        featureGridSelectorFn: null,
+        /**
+         * Optional extra target layers to put the features into.
+         * @type {ol.layer.Vector[]}
+         */
+        extraTargetLayers: null,
+        /**
+         * Optional callback function to get notified once the features have
+         * been merged.
+         * @type {Function} which will receive the features that have been
+         * merged
+         */
+        mergedFeaturesFn: null
+    }
+});

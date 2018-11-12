@@ -1,9 +1,272 @@
+/*global FileReader*/
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * HTML 5 - CSV Importer
+ *
+ * This form is used to import csv files to an Ext-JS Grid. As it uses the HTML5
+ * File-Api InternetExplorer < 10 is not supported.
+ *
+ * Current CSV Requirements:
+ *      First Row contains headers.
+ *      Seperator is comma.
+ *      Strings are in doublequotes.
+ *
+ * @class BasiGX.view.form.CsvImport
+ */
+Ext.define('BasiGX.view.form.CsvImport', {
+    extend: 'Ext.form.Panel',
 
-var __cov_rLSqbvcoZh$clhsJvc5HCQ = (Function('return this'))();
-if (!__cov_rLSqbvcoZh$clhsJvc5HCQ.__coverage__) { __cov_rLSqbvcoZh$clhsJvc5HCQ.__coverage__ = {}; }
-__cov_rLSqbvcoZh$clhsJvc5HCQ = __cov_rLSqbvcoZh$clhsJvc5HCQ.__coverage__;
-if (!(__cov_rLSqbvcoZh$clhsJvc5HCQ['/home/travis/build/terrestris/BasiGX/src/view/form/CsvImport.js'])) {
-   __cov_rLSqbvcoZh$clhsJvc5HCQ['/home/travis/build/terrestris/BasiGX/src/view/form/CsvImport.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/form/CsvImport.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0},"fnMap":{"1":{"name":"(anonymous_1)","line":45,"loc":{"start":{"line":45,"column":19},"end":{"line":45,"column":34}}},"2":{"name":"(anonymous_2)","line":85,"loc":{"start":{"line":85,"column":19},"end":{"line":85,"column":33}}},"3":{"name":"(anonymous_3)","line":97,"loc":{"start":{"line":97,"column":17},"end":{"line":97,"column":31}}},"4":{"name":"(anonymous_4)","line":104,"loc":{"start":{"line":104,"column":17},"end":{"line":104,"column":28}}},"5":{"name":"(anonymous_5)","line":127,"loc":{"start":{"line":127,"column":12},"end":{"line":127,"column":28}}},"6":{"name":"(anonymous_6)","line":143,"loc":{"start":{"line":143,"column":13},"end":{"line":143,"column":27}}},"7":{"name":"(anonymous_7)","line":156,"loc":{"start":{"line":156,"column":23},"end":{"line":156,"column":57}}},"8":{"name":"(anonymous_8)","line":171,"loc":{"start":{"line":171,"column":35},"end":{"line":171,"column":52}}},"9":{"name":"(anonymous_9)","line":175,"loc":{"start":{"line":175,"column":27},"end":{"line":175,"column":48}}},"10":{"name":"(anonymous_10)","line":196,"loc":{"start":{"line":196,"column":15},"end":{"line":196,"column":35}}},"11":{"name":"(anonymous_11)","line":201,"loc":{"start":{"line":201,"column":28},"end":{"line":201,"column":53}}},"12":{"name":"(anonymous_12)","line":216,"loc":{"start":{"line":216,"column":22},"end":{"line":216,"column":40}}},"13":{"name":"(anonymous_13)","line":220,"loc":{"start":{"line":220,"column":26},"end":{"line":220,"column":54}}},"14":{"name":"(anonymous_14)","line":245,"loc":{"start":{"line":245,"column":17},"end":{"line":245,"column":31}}},"15":{"name":"(anonymous_15)","line":252,"loc":{"start":{"line":252,"column":25},"end":{"line":252,"column":41}}}},"statementMap":{"1":{"start":{"line":30,"column":0},"end":{"line":272,"column":3}},"2":{"start":{"line":46,"column":8},"end":{"line":46,"column":22}},"3":{"start":{"line":47,"column":8},"end":{"line":47,"column":28}},"4":{"start":{"line":48,"column":8},"end":{"line":50,"column":9}},"5":{"start":{"line":49,"column":12},"end":{"line":49,"column":65}},"6":{"start":{"line":86,"column":12},"end":{"line":86,"column":42}},"7":{"start":{"line":88,"column":12},"end":{"line":88,"column":76}},"8":{"start":{"line":89,"column":12},"end":{"line":89,"column":48}},"9":{"start":{"line":98,"column":12},"end":{"line":98,"column":48}},"10":{"start":{"line":99,"column":12},"end":{"line":99,"column":43}},"11":{"start":{"line":105,"column":12},"end":{"line":117,"column":13}},"12":{"start":{"line":106,"column":16},"end":{"line":106,"column":52}},"13":{"start":{"line":107,"column":16},"end":{"line":107,"column":64}},"14":{"start":{"line":108,"column":16},"end":{"line":108,"column":65}},"15":{"start":{"line":109,"column":16},"end":{"line":109,"column":46}},"16":{"start":{"line":111,"column":16},"end":{"line":111,"column":40}},"17":{"start":{"line":112,"column":16},"end":{"line":112,"column":53}},"18":{"start":{"line":113,"column":16},"end":{"line":113,"column":55}},"19":{"start":{"line":116,"column":16},"end":{"line":116,"column":75}},"20":{"start":{"line":128,"column":8},"end":{"line":128,"column":74}},"21":{"start":{"line":129,"column":8},"end":{"line":129,"column":38}},"22":{"start":{"line":130,"column":8},"end":{"line":130,"column":49}},"23":{"start":{"line":131,"column":8},"end":{"line":131,"column":46}},"24":{"start":{"line":133,"column":8},"end":{"line":133,"column":69}},"25":{"start":{"line":144,"column":8},"end":{"line":147,"column":9}},"26":{"start":{"line":146,"column":12},"end":{"line":146,"column":46}},"27":{"start":{"line":157,"column":8},"end":{"line":159,"column":10}},"28":{"start":{"line":160,"column":8},"end":{"line":160,"column":30}},"29":{"start":{"line":161,"column":8},"end":{"line":169,"column":11}},"30":{"start":{"line":171,"column":8},"end":{"line":173,"column":26}},"31":{"start":{"line":172,"column":12},"end":{"line":172,"column":43}},"32":{"start":{"line":175,"column":8},"end":{"line":184,"column":26}},"33":{"start":{"line":176,"column":12},"end":{"line":183,"column":15}},"34":{"start":{"line":186,"column":8},"end":{"line":186,"column":62}},"35":{"start":{"line":188,"column":8},"end":{"line":188,"column":40}},"36":{"start":{"line":197,"column":8},"end":{"line":197,"column":22}},"37":{"start":{"line":198,"column":8},"end":{"line":198,"column":44}},"38":{"start":{"line":200,"column":8},"end":{"line":200,"column":28}},"39":{"start":{"line":201,"column":8},"end":{"line":206,"column":15}},"40":{"start":{"line":202,"column":12},"end":{"line":205,"column":13}},"41":{"start":{"line":203,"column":16},"end":{"line":203,"column":62}},"42":{"start":{"line":204,"column":16},"end":{"line":204,"column":36}},"43":{"start":{"line":207,"column":8},"end":{"line":207,"column":29}},"44":{"start":{"line":217,"column":8},"end":{"line":217,"column":22}},"45":{"start":{"line":218,"column":8},"end":{"line":218,"column":22}},"46":{"start":{"line":220,"column":8},"end":{"line":235,"column":11}},"47":{"start":{"line":221,"column":12},"end":{"line":222,"column":46}},"48":{"start":{"line":223,"column":12},"end":{"line":234,"column":13}},"49":{"start":{"line":224,"column":16},"end":{"line":225,"column":68}},"50":{"start":{"line":226,"column":16},"end":{"line":233,"column":17}},"51":{"start":{"line":227,"column":20},"end":{"line":227,"column":57}},"52":{"start":{"line":228,"column":20},"end":{"line":228,"column":48}},"53":{"start":{"line":231,"column":20},"end":{"line":232,"column":80}},"54":{"start":{"line":237,"column":8},"end":{"line":237,"column":70}},"55":{"start":{"line":246,"column":8},"end":{"line":246,"column":22}},"56":{"start":{"line":247,"column":8},"end":{"line":248,"column":27}},"57":{"start":{"line":249,"column":8},"end":{"line":249,"column":29}},"58":{"start":{"line":250,"column":8},"end":{"line":250,"column":29}},"59":{"start":{"line":252,"column":8},"end":{"line":264,"column":15}},"60":{"start":{"line":253,"column":12},"end":{"line":253,"column":44}},"61":{"start":{"line":254,"column":12},"end":{"line":262,"column":13}},"62":{"start":{"line":257,"column":16},"end":{"line":258,"column":39}},"63":{"start":{"line":259,"column":16},"end":{"line":259,"column":34}},"64":{"start":{"line":261,"column":16},"end":{"line":261,"column":72}},"65":{"start":{"line":263,"column":12},"end":{"line":263,"column":39}},"66":{"start":{"line":266,"column":8},"end":{"line":268,"column":9}},"67":{"start":{"line":267,"column":12},"end":{"line":267,"column":44}},"68":{"start":{"line":270,"column":8},"end":{"line":270,"column":43}}},"branchMap":{"1":{"line":48,"type":"if","locations":[{"start":{"line":48,"column":8},"end":{"line":48,"column":8}},{"start":{"line":48,"column":8},"end":{"line":48,"column":8}}]},"2":{"line":89,"type":"binary-expr","locations":[{"start":{"line":89,"column":19},"end":{"line":89,"column":37}},{"start":{"line":89,"column":41},"end":{"line":89,"column":47}}]},"3":{"line":105,"type":"if","locations":[{"start":{"line":105,"column":12},"end":{"line":105,"column":12}},{"start":{"line":105,"column":12},"end":{"line":105,"column":12}}]},"4":{"line":144,"type":"if","locations":[{"start":{"line":144,"column":8},"end":{"line":144,"column":8}},{"start":{"line":144,"column":8},"end":{"line":144,"column":8}}]},"5":{"line":202,"type":"if","locations":[{"start":{"line":202,"column":12},"end":{"line":202,"column":12}},{"start":{"line":202,"column":12},"end":{"line":202,"column":12}}]},"6":{"line":223,"type":"if","locations":[{"start":{"line":223,"column":12},"end":{"line":223,"column":12}},{"start":{"line":223,"column":12},"end":{"line":223,"column":12}}]},"7":{"line":223,"type":"binary-expr","locations":[{"start":{"line":223,"column":16},"end":{"line":223,"column":39}},{"start":{"line":223,"column":43},"end":{"line":223,"column":70}}]},"8":{"line":226,"type":"if","locations":[{"start":{"line":226,"column":16},"end":{"line":226,"column":16}},{"start":{"line":226,"column":16},"end":{"line":226,"column":16}}]},"9":{"line":254,"type":"if","locations":[{"start":{"line":254,"column":12},"end":{"line":254,"column":12}},{"start":{"line":254,"column":12},"end":{"line":254,"column":12}}]},"10":{"line":254,"type":"binary-expr","locations":[{"start":{"line":254,"column":16},"end":{"line":254,"column":57}},{"start":{"line":255,"column":16},"end":{"line":255,"column":38}}]},"11":{"line":266,"type":"if","locations":[{"start":{"line":266,"column":8},"end":{"line":266,"column":8}},{"start":{"line":266,"column":8},"end":{"line":266,"column":8}}]},"12":{"line":266,"type":"binary-expr","locations":[{"start":{"line":266,"column":12},"end":{"line":266,"column":21}},{"start":{"line":266,"column":25},"end":{"line":266,"column":42}}]}}};
-}
-__cov_rLSqbvcoZh$clhsJvc5HCQ = __cov_rLSqbvcoZh$clhsJvc5HCQ['/home/travis/build/terrestris/BasiGX/src/view/form/CsvImport.js'];
-__cov_rLSqbvcoZh$clhsJvc5HCQ.s['1']++;Ext.define('BasiGX.view.form.CsvImport',{extend:'Ext.form.Panel',xtype:'form-csvimport',config:{grid:null,dataArray:null},initComponent:function(conf){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['1']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['2']++;var me=this;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['3']++;me.callParent(conf);__cov_rLSqbvcoZh$clhsJvc5HCQ.s['4']++;if(!me.getGrid()){__cov_rLSqbvcoZh$clhsJvc5HCQ.b['1'][0]++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['5']++;Ext.Error.raise('No grid defined for csv-importer.');}else{__cov_rLSqbvcoZh$clhsJvc5HCQ.b['1'][1]++;}},associatonObject:{},bodyPadding:10,items:[{xtype:'filefield',name:'csv_file',fieldLabel:'CSV-Datei',labelWidth:70,width:400,msgTarget:'side',allowBlank:false,buttonText:'Datei auswählen \u2026',validator:function(val){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['2']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['6']++;var fileName=/^.*\.(csv)$/i;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['7']++;var errMsg='Der Datenimport ist nur mit CSV-Dateien möglich.';__cov_rLSqbvcoZh$clhsJvc5HCQ.s['8']++;return(__cov_rLSqbvcoZh$clhsJvc5HCQ.b['2'][0]++,fileName.test(val))||(__cov_rLSqbvcoZh$clhsJvc5HCQ.b['2'][1]++,errMsg);}}],buttons:[{xtype:'button',name:'importBtn',text:'Importieren',handler:function(btn){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['3']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['9']++;var csvImportForm=this.up('form');__cov_rLSqbvcoZh$clhsJvc5HCQ.s['10']++;csvImportForm.startImport(btn);},disabled:true},{text:'Datei einlesen',handler:function(){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['4']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['11']++;if(window.FileReader){__cov_rLSqbvcoZh$clhsJvc5HCQ.b['3'][0]++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['12']++;var csvImportForm=this.up('form');__cov_rLSqbvcoZh$clhsJvc5HCQ.s['13']++;var fileField=csvImportForm.down('filefield');__cov_rLSqbvcoZh$clhsJvc5HCQ.s['14']++;var file=fileField.extractFileInput().files[0];__cov_rLSqbvcoZh$clhsJvc5HCQ.s['15']++;var reader=new FileReader();__cov_rLSqbvcoZh$clhsJvc5HCQ.s['16']++;reader.readAsText(file);__cov_rLSqbvcoZh$clhsJvc5HCQ.s['17']++;reader.onload=csvImportForm.onLoad;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['18']++;reader.onerror=csvImportForm.onError;}else{__cov_rLSqbvcoZh$clhsJvc5HCQ.b['3'][1]++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['19']++;Ext.Toast('FileReader are not supported in this browser.');}}}],onLoad:function(event){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['5']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['20']++;var csvImportForm=Ext.ComponentQuery.query('form-csvimport')[0];__cov_rLSqbvcoZh$clhsJvc5HCQ.s['21']++;var csv=event.target.result;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['22']++;var dataArray=Ext.util.CSV.decode(csv);__cov_rLSqbvcoZh$clhsJvc5HCQ.s['23']++;csvImportForm.setDataArray(dataArray);__cov_rLSqbvcoZh$clhsJvc5HCQ.s['24']++;csvImportForm.setupAssociations(dataArray[0],csvImportForm);},onError:function(evt){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['6']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['25']++;if(evt.target.error.name==='NotReadableError'){__cov_rLSqbvcoZh$clhsJvc5HCQ.b['4'][0]++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['26']++;Ext.toast('Canno\'t read file !');}else{__cov_rLSqbvcoZh$clhsJvc5HCQ.b['4'][1]++;}},setupAssociations:function(titleRow,csvImportForm){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['7']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['27']++;var dataModelColumns=csvImportForm.getGrid().query('gridcolumn[hidden=false]');__cov_rLSqbvcoZh$clhsJvc5HCQ.s['28']++;var columnTitles=[];__cov_rLSqbvcoZh$clhsJvc5HCQ.s['29']++;var assoFieldset=Ext.create('Ext.form.FieldSet',{title:'Felder assoziieren',name:'assoFieldset',layout:'form',scrollable:'y',maxHeight:300,collapsible:true,margin:'0 0 30 0'});__cov_rLSqbvcoZh$clhsJvc5HCQ.s['30']++;Ext.each(dataModelColumns,function(column){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['8']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['31']++;columnTitles.push(column.text);},csvImportForm);__cov_rLSqbvcoZh$clhsJvc5HCQ.s['32']++;Ext.each(titleRow,function(columnName){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['9']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['33']++;assoFieldset.add({xtype:'combobox',name:columnName,fieldLabel:columnName,store:columnTitles,value:csvImportForm.associatonObject[columnName],msgTarget:'side'});},csvImportForm);__cov_rLSqbvcoZh$clhsJvc5HCQ.s['34']++;csvImportForm.down('button[name=importBtn]').enable();__cov_rLSqbvcoZh$clhsJvc5HCQ.s['35']++;csvImportForm.add(assoFieldset);},addToGrid:function(dataArray){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['10']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['36']++;var me=this;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['37']++;var store=me.getGrid().getStore();__cov_rLSqbvcoZh$clhsJvc5HCQ.s['38']++;me.setLoading(true);__cov_rLSqbvcoZh$clhsJvc5HCQ.s['39']++;Ext.each(dataArray,function(dataRow,index){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['11']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['40']++;if(index>0){__cov_rLSqbvcoZh$clhsJvc5HCQ.b['5'][0]++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['41']++;var instance=this.parseDataFromRow(dataRow);__cov_rLSqbvcoZh$clhsJvc5HCQ.s['42']++;store.add(instance);}else{__cov_rLSqbvcoZh$clhsJvc5HCQ.b['5'][1]++;}},me);__cov_rLSqbvcoZh$clhsJvc5HCQ.s['43']++;me.setLoading(false);},parseDataFromRow:function(dataRow){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['12']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['44']++;var me=this;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['45']++;var data={};__cov_rLSqbvcoZh$clhsJvc5HCQ.s['46']++;Ext.each(dataRow,function(csvColumn,rowIdx){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['13']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['47']++;var gridColumText=me.associatonObject[me.getDataArray()[0][rowIdx]];__cov_rLSqbvcoZh$clhsJvc5HCQ.s['48']++;if((__cov_rLSqbvcoZh$clhsJvc5HCQ.b['7'][0]++,!Ext.isEmpty(csvColumn))&&(__cov_rLSqbvcoZh$clhsJvc5HCQ.b['7'][1]++,!Ext.isEmpty(gridColumText))){__cov_rLSqbvcoZh$clhsJvc5HCQ.b['6'][0]++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['49']++;var gridColumn=me.getGrid().down('gridcolumn[text='+gridColumText+']');__cov_rLSqbvcoZh$clhsJvc5HCQ.s['50']++;if(gridColumn){__cov_rLSqbvcoZh$clhsJvc5HCQ.b['8'][0]++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['51']++;var dataIndex=gridColumn.dataIndex;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['52']++;data[dataIndex]=csvColumn;}else{__cov_rLSqbvcoZh$clhsJvc5HCQ.b['8'][1]++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['53']++;Ext.Error.raise(gridColumText,' does not exist. Please check you associationObject.');}}else{__cov_rLSqbvcoZh$clhsJvc5HCQ.b['6'][1]++;}});__cov_rLSqbvcoZh$clhsJvc5HCQ.s['54']++;return Ext.create(this.getGrid().getStore().getModel(),data);},startImport:function(btn){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['14']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['55']++;var me=this;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['56']++;var combos=btn.up('form').down('fieldset[name=assoFieldset]').query('combo');__cov_rLSqbvcoZh$clhsJvc5HCQ.s['57']++;var comboValues=[];__cov_rLSqbvcoZh$clhsJvc5HCQ.s['58']++;var formValid=true;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['59']++;Ext.each(combos,function(combo){__cov_rLSqbvcoZh$clhsJvc5HCQ.f['15']++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['60']++;var comboVal=combo.getValue();__cov_rLSqbvcoZh$clhsJvc5HCQ.s['61']++;if((__cov_rLSqbvcoZh$clhsJvc5HCQ.b['10'][0]++,Ext.Array.contains(comboValues,comboVal))&&(__cov_rLSqbvcoZh$clhsJvc5HCQ.b['10'][1]++,!Ext.isEmpty(comboVal))){__cov_rLSqbvcoZh$clhsJvc5HCQ.b['9'][0]++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['62']++;combo.markInvalid('Diese Feld wurde bereits mit einer anderen'+'Spalte asoziert');__cov_rLSqbvcoZh$clhsJvc5HCQ.s['63']++;formValid=false;}else{__cov_rLSqbvcoZh$clhsJvc5HCQ.b['9'][1]++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['64']++;this.associatonObject[combo.getFieldLabel()]=comboVal;}__cov_rLSqbvcoZh$clhsJvc5HCQ.s['65']++;comboValues.push(comboVal);},me);__cov_rLSqbvcoZh$clhsJvc5HCQ.s['66']++;if((__cov_rLSqbvcoZh$clhsJvc5HCQ.b['12'][0]++,formValid)&&(__cov_rLSqbvcoZh$clhsJvc5HCQ.b['12'][1]++,me.getDataArray())){__cov_rLSqbvcoZh$clhsJvc5HCQ.b['11'][0]++;__cov_rLSqbvcoZh$clhsJvc5HCQ.s['67']++;me.addToGrid(me.getDataArray());}else{__cov_rLSqbvcoZh$clhsJvc5HCQ.b['11'][1]++;}__cov_rLSqbvcoZh$clhsJvc5HCQ.s['68']++;me.fireEvent('importcomplete',me);}});
+    xtype: 'form-csvimport',
+
+    config: {
+        grid: null,
+        dataArray: null
+    },
+
+    /**
+     * Initializes the CsvImport form.
+     *
+     * @param {Object} conf The configuration for the CsvImport form.
+     */
+    initComponent: function(conf) {
+        var me = this;
+        me.callParent(conf);
+        if (!me.getGrid()) {
+            Ext.Error.raise('No grid defined for csv-importer.');
+        }
+    },
+
+    /**
+     * You can put default associations here. These will fill the comboboxes.
+     *
+     * The `key` represents the csv-column. The `value` represents the grid
+     * column text, e.g.:
+     *
+     *     // …
+     *     associatonObject: {
+     *         Name: "Nachname",
+     *         Vorname: "Vorname",
+     *         Straße: null,
+     *         Hausnummer: null,
+     *         Postleitzahl: null,
+     *         Stadt: null,
+     *         "E-Mail_1": "E-Mail",
+     *         "E-Mail_2": null
+     *     },
+     *     // …
+     */
+    associatonObject: {},
+
+    bodyPadding: 10,
+
+    items: [{
+        xtype: 'filefield',
+        name: 'csv_file',
+        fieldLabel: 'CSV-Datei', // TODO i18n
+        labelWidth: 70,
+        width: 400,
+        msgTarget: 'side',
+        allowBlank: false,
+        buttonText: 'Datei auswählen …', // TODO i18n
+        validator: function(val) {
+            var fileName = /^.*\.(csv)$/i;
+            // TODO i18n
+            var errMsg = 'Der Datenimport ist nur mit CSV-Dateien möglich.';
+            return fileName.test(val) || errMsg;
+        }
+    }],
+
+    buttons: [{
+        xtype: 'button',
+        name: 'importBtn',
+        text: 'Importieren', // TODO i18n
+        handler: function(btn) {
+            var csvImportForm = this.up('form');
+            csvImportForm.startImport(btn);
+        },
+        disabled: true
+    }, {
+        text: 'Datei einlesen', // TODO i18n
+        handler: function() {
+            if (window.FileReader) {
+                var csvImportForm = this.up('form');
+                var fileField = csvImportForm.down('filefield');
+                var file = fileField.extractFileInput().files[0];
+                var reader = new FileReader();
+
+                reader.readAsText(file);
+                reader.onload = csvImportForm.onLoad;
+                reader.onerror = csvImportForm.onError;
+            } else {
+                // TODO i18n
+                Ext.Toast('FileReader are not supported in this browser.');
+            }
+        }
+    }],
+
+    /**
+     * Bound on the FileReader.load event, this decodes the uploaded file as CSV
+     * and calls #setDataArray and #setupAssociations.
+     *
+     * @param {Object} event The event from the FileReader.
+     */
+    onLoad: function(event) {
+        var csvImportForm = Ext.ComponentQuery.query('form-csvimport')[0];
+        var csv = event.target.result;
+        var dataArray = Ext.util.CSV.decode(csv);
+        csvImportForm.setDataArray(dataArray);
+
+        csvImportForm.setupAssociations(dataArray[0], csvImportForm);
+
+    },
+
+    /**
+     * Bound on the FileReader.error event, this warns if a `NotReadableError`
+     * occured.
+     *
+     * @param {Object} evt The event from the FileReader.
+     */
+    onError: function(evt) {
+        if (evt.target.error.name === 'NotReadableError') {
+            // TODO i18n
+            Ext.toast('Canno\'t read file !');
+        }
+    },
+
+    /**
+     * Sets up associations between CSV and grid columns.
+     *
+     * @param {Array<String>} titleRow The first row of the CSV (the titles).
+     * @param {BasiGX.view.form.CsvImport} csvImportForm The CSV import form.
+     */
+    setupAssociations: function(titleRow, csvImportForm) {
+        var dataModelColumns = csvImportForm.getGrid().query(
+            'gridcolumn[hidden=false]'
+        );
+        var columnTitles = [];
+        var assoFieldset = Ext.create('Ext.form.FieldSet', {
+            title: 'Felder assoziieren', // TODO i18n
+            name: 'assoFieldset',
+            layout: 'form',
+            scrollable: 'y',
+            maxHeight: 300,
+            collapsible: true,
+            margin: '0 0 30 0'
+        });
+
+        Ext.each(dataModelColumns, function(column) {
+            columnTitles.push(column.text);
+        }, csvImportForm);
+
+        Ext.each(titleRow, function(columnName) {
+            assoFieldset.add({
+                xtype: 'combobox',
+                name: columnName,
+                fieldLabel: columnName,
+                store: columnTitles,
+                value: csvImportForm.associatonObject[columnName],
+                msgTarget: 'side'
+            });
+        }, csvImportForm);
+
+        csvImportForm.down('button[name=importBtn]').enable();
+
+        csvImportForm.add(assoFieldset);
+    },
+
+    /**
+     * Adds a data array to the grid.
+     *
+     * @param {Array<Object>} dataArray The CSV rows.
+     */
+    addToGrid: function(dataArray) {
+        var me = this;
+        var store = me.getGrid().getStore();
+
+        me.setLoading(true);
+        Ext.each(dataArray, function(dataRow, index) {
+            if (index > 0) { //skip first row of csv. it contains the header
+                var instance = this.parseDataFromRow(dataRow);
+                store.add(instance);
+            }
+        }, me);
+        me.setLoading(false);
+    },
+
+    /**
+     * Turns a data row into a record.
+     *
+     * @param {Object} dataRow A CSV data row.
+     * @return {Ext.data.Model} A created record for the grid.
+     */
+    parseDataFromRow: function(dataRow) {
+        var me = this;
+        var data = {};
+
+        Ext.each(dataRow, function(csvColumn, rowIdx) {
+            var gridColumText = me.associatonObject[
+                me.getDataArray()[0][rowIdx]];
+            if (!Ext.isEmpty(csvColumn) && !Ext.isEmpty(gridColumText)) {
+                var gridColumn = me.getGrid()
+                    .down('gridcolumn[text=' + gridColumText + ']');
+                if (gridColumn) {
+                    var dataIndex = gridColumn.dataIndex;
+                    data[dataIndex] = csvColumn;
+                } else {
+                    // TODO i18n
+                    Ext.Error.raise(gridColumText,
+                        ' does not exist. Please check you associationObject.');
+                }
+            }
+        });
+
+        return Ext.create(this.getGrid().getStore().getModel(), data);
+    },
+
+    /**
+     * Starts the import.
+     *
+     * @param {Ext.button.Button} btn The button.
+     */
+    startImport: function(btn) {
+        var me = this;
+        var combos = btn.up('form').down('fieldset[name=assoFieldset]').
+            query('combo');
+        var comboValues = [];
+        var formValid = true;
+
+        Ext.each(combos, function(combo) {
+            var comboVal = combo.getValue();
+            if (Ext.Array.contains(comboValues, comboVal) &&
+                !Ext.isEmpty(comboVal)) {
+                // TODO i18n
+                combo.markInvalid('Diese Feld wurde bereits mit einer anderen' +
+                    'Spalte asoziert');
+                formValid = false;
+            } else {
+                this.associatonObject[combo.getFieldLabel()] = comboVal;
+            }
+            comboValues.push(comboVal);
+        }, me);
+
+        if (formValid && me.getDataArray()) {
+            me.addToGrid(me.getDataArray());
+        }
+
+        me.fireEvent('importcomplete', me);
+    }
+});

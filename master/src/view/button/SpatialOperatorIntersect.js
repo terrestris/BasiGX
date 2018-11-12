@@ -1,9 +1,276 @@
+/* global jsts*/
+/* Copyright (c) 2018-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Spatial Operator Intersect Button
+ *
+ * @class BasiGX.view.button.SpatialOperatorIntersect
+ */
+Ext.define('BasiGX.view.button.SpatialOperatorIntersect', {
+    extend: 'BasiGX.view.button.SpatialOperatorBase',
+    xtype: 'basigx-button-spatial-operator-intersect',
 
-var __cov_vKFh3HItYZN9D3qXhkLG$w = (Function('return this'))();
-if (!__cov_vKFh3HItYZN9D3qXhkLG$w.__coverage__) { __cov_vKFh3HItYZN9D3qXhkLG$w.__coverage__ = {}; }
-__cov_vKFh3HItYZN9D3qXhkLG$w = __cov_vKFh3HItYZN9D3qXhkLG$w.__coverage__;
-if (!(__cov_vKFh3HItYZN9D3qXhkLG$w['/home/travis/build/terrestris/BasiGX/src/view/button/SpatialOperatorIntersect.js'])) {
-   __cov_vKFh3HItYZN9D3qXhkLG$w['/home/travis/build/terrestris/BasiGX/src/view/button/SpatialOperatorIntersect.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/SpatialOperatorIntersect.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0,0,0,0],"10":[0,0],"11":[0,0],"12":[0,0,0,0,0],"13":[0,0],"14":[0,0],"15":[0,0,0,0,0],"16":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0},"fnMap":{"1":{"name":"(anonymous_1)","line":80,"loc":{"start":{"line":80,"column":13},"end":{"line":80,"column":24}}},"2":{"name":"(anonymous_2)","line":93,"loc":{"start":{"line":93,"column":31},"end":{"line":93,"column":54}}},"3":{"name":"(anonymous_3)","line":103,"loc":{"start":{"line":103,"column":31},"end":{"line":103,"column":46}}},"4":{"name":"(anonymous_4)","line":119,"loc":{"start":{"line":119,"column":39},"end":{"line":119,"column":54}}},"5":{"name":"(anonymous_5)","line":135,"loc":{"start":{"line":135,"column":20},"end":{"line":135,"column":41}}},"6":{"name":"(anonymous_6)","line":140,"loc":{"start":{"line":140,"column":23},"end":{"line":140,"column":39}}},"7":{"name":"(anonymous_7)","line":157,"loc":{"start":{"line":157,"column":33},"end":{"line":157,"column":60}}},"8":{"name":"(anonymous_8)","line":183,"loc":{"start":{"line":183,"column":26},"end":{"line":183,"column":47}}},"9":{"name":"(anonymous_9)","line":187,"loc":{"start":{"line":187,"column":29},"end":{"line":187,"column":48}}},"10":{"name":"(anonymous_10)","line":189,"loc":{"start":{"line":189,"column":33},"end":{"line":189,"column":49}}},"11":{"name":"(anonymous_11)","line":217,"loc":{"start":{"line":217,"column":28},"end":{"line":217,"column":49}}},"12":{"name":"(anonymous_12)","line":221,"loc":{"start":{"line":221,"column":29},"end":{"line":221,"column":48}}},"13":{"name":"(anonymous_13)","line":222,"loc":{"start":{"line":222,"column":33},"end":{"line":222,"column":49}}},"14":{"name":"(anonymous_14)","line":254,"loc":{"start":{"line":254,"column":24},"end":{"line":254,"column":45}}},"15":{"name":"(anonymous_15)","line":261,"loc":{"start":{"line":261,"column":34},"end":{"line":261,"column":49}}},"16":{"name":"(anonymous_16)","line":266,"loc":{"start":{"line":266,"column":40},"end":{"line":266,"column":55}}}},"statementMap":{"1":{"start":{"line":22,"column":0},"end":{"line":276,"column":3}},"2":{"start":{"line":84,"column":8},"end":{"line":84,"column":31}},"3":{"start":{"line":94,"column":8},"end":{"line":98,"column":9}},"4":{"start":{"line":95,"column":12},"end":{"line":96,"column":71}},"5":{"start":{"line":97,"column":12},"end":{"line":97,"column":19}},"6":{"start":{"line":99,"column":8},"end":{"line":99,"column":45}},"7":{"start":{"line":100,"column":8},"end":{"line":100,"column":34}},"8":{"start":{"line":101,"column":8},"end":{"line":101,"column":29}},"9":{"start":{"line":103,"column":8},"end":{"line":105,"column":11}},"10":{"start":{"line":104,"column":12},"end":{"line":104,"column":67}},"11":{"start":{"line":107,"column":8},"end":{"line":112,"column":9}},"12":{"start":{"line":108,"column":12},"end":{"line":108,"column":73}},"13":{"start":{"line":110,"column":12},"end":{"line":111,"column":34}},"14":{"start":{"line":114,"column":8},"end":{"line":124,"column":9}},"15":{"start":{"line":115,"column":12},"end":{"line":117,"column":13}},"16":{"start":{"line":116,"column":16},"end":{"line":116,"column":54}},"17":{"start":{"line":118,"column":12},"end":{"line":118,"column":33}},"18":{"start":{"line":119,"column":12},"end":{"line":122,"column":15}},"19":{"start":{"line":120,"column":16},"end":{"line":120,"column":48}},"20":{"start":{"line":121,"column":16},"end":{"line":121,"column":69}},"21":{"start":{"line":123,"column":12},"end":{"line":123,"column":31}},"22":{"start":{"line":126,"column":8},"end":{"line":126,"column":21}},"23":{"start":{"line":136,"column":8},"end":{"line":136,"column":22}},"24":{"start":{"line":137,"column":8},"end":{"line":137,"column":31}},"25":{"start":{"line":138,"column":8},"end":{"line":138,"column":25}},"26":{"start":{"line":140,"column":8},"end":{"line":145,"column":11}},"27":{"start":{"line":141,"column":12},"end":{"line":144,"column":13}},"28":{"start":{"line":142,"column":16},"end":{"line":142,"column":34}},"29":{"start":{"line":143,"column":16},"end":{"line":143,"column":29}},"30":{"start":{"line":146,"column":8},"end":{"line":148,"column":9}},"31":{"start":{"line":147,"column":12},"end":{"line":147,"column":28}},"32":{"start":{"line":158,"column":8},"end":{"line":158,"column":29}},"33":{"start":{"line":159,"column":8},"end":{"line":166,"column":9}},"34":{"start":{"line":160,"column":12},"end":{"line":165,"column":13}},"35":{"start":{"line":161,"column":16},"end":{"line":161,"column":55}},"36":{"start":{"line":163,"column":16},"end":{"line":164,"column":41}},"37":{"start":{"line":167,"column":8},"end":{"line":172,"column":9}},"38":{"start":{"line":171,"column":12},"end":{"line":171,"column":25}},"39":{"start":{"line":173,"column":8},"end":{"line":173,"column":32}},"40":{"start":{"line":184,"column":8},"end":{"line":184,"column":22}},"41":{"start":{"line":185,"column":8},"end":{"line":185,"column":25}},"42":{"start":{"line":187,"column":8},"end":{"line":205,"column":11}},"43":{"start":{"line":188,"column":12},"end":{"line":188,"column":38}},"44":{"start":{"line":189,"column":12},"end":{"line":197,"column":15}},"45":{"start":{"line":190,"column":16},"end":{"line":196,"column":17}},"46":{"start":{"line":191,"column":20},"end":{"line":193,"column":21}},"47":{"start":{"line":192,"column":24},"end":{"line":192,"column":66}},"48":{"start":{"line":198,"column":12},"end":{"line":203,"column":13}},"49":{"start":{"line":202,"column":16},"end":{"line":202,"column":23}},"50":{"start":{"line":204,"column":12},"end":{"line":204,"column":51}},"51":{"start":{"line":207,"column":8},"end":{"line":207,"column":23}},"52":{"start":{"line":218,"column":8},"end":{"line":218,"column":22}},"53":{"start":{"line":219,"column":8},"end":{"line":219,"column":25}},"54":{"start":{"line":221,"column":8},"end":{"line":239,"column":11}},"55":{"start":{"line":222,"column":12},"end":{"line":238,"column":15}},"56":{"start":{"line":223,"column":16},"end":{"line":225,"column":17}},"57":{"start":{"line":224,"column":20},"end":{"line":224,"column":27}},"58":{"start":{"line":226,"column":16},"end":{"line":237,"column":17}},"59":{"start":{"line":227,"column":20},"end":{"line":227,"column":68}},"60":{"start":{"line":228,"column":20},"end":{"line":233,"column":21}},"61":{"start":{"line":232,"column":24},"end":{"line":232,"column":31}},"62":{"start":{"line":234,"column":20},"end":{"line":234,"column":61}},"63":{"start":{"line":241,"column":8},"end":{"line":241,"column":23}},"64":{"start":{"line":255,"column":8},"end":{"line":255,"column":22}},"65":{"start":{"line":256,"column":8},"end":{"line":256,"column":25}},"66":{"start":{"line":257,"column":8},"end":{"line":257,"column":39}},"67":{"start":{"line":259,"column":8},"end":{"line":271,"column":9}},"68":{"start":{"line":260,"column":12},"end":{"line":260,"column":71}},"69":{"start":{"line":261,"column":12},"end":{"line":263,"column":15}},"70":{"start":{"line":262,"column":16},"end":{"line":262,"column":49}},"71":{"start":{"line":264,"column":12},"end":{"line":264,"column":71}},"72":{"start":{"line":265,"column":12},"end":{"line":270,"column":13}},"73":{"start":{"line":266,"column":16},"end":{"line":268,"column":19}},"74":{"start":{"line":267,"column":20},"end":{"line":267,"column":53}},"75":{"start":{"line":269,"column":16},"end":{"line":269,"column":35}},"76":{"start":{"line":273,"column":8},"end":{"line":273,"column":23}}},"branchMap":{"1":{"line":94,"type":"if","locations":[{"start":{"line":94,"column":8},"end":{"line":94,"column":8}},{"start":{"line":94,"column":8},"end":{"line":94,"column":8}}]},"2":{"line":107,"type":"if","locations":[{"start":{"line":107,"column":8},"end":{"line":107,"column":8}},{"start":{"line":107,"column":8},"end":{"line":107,"column":8}}]},"3":{"line":114,"type":"if","locations":[{"start":{"line":114,"column":8},"end":{"line":114,"column":8}},{"start":{"line":114,"column":8},"end":{"line":114,"column":8}}]},"4":{"line":115,"type":"if","locations":[{"start":{"line":115,"column":12},"end":{"line":115,"column":12}},{"start":{"line":115,"column":12},"end":{"line":115,"column":12}}]},"5":{"line":141,"type":"if","locations":[{"start":{"line":141,"column":12},"end":{"line":141,"column":12}},{"start":{"line":141,"column":12},"end":{"line":141,"column":12}}]},"6":{"line":146,"type":"if","locations":[{"start":{"line":146,"column":8},"end":{"line":146,"column":8}},{"start":{"line":146,"column":8},"end":{"line":146,"column":8}}]},"7":{"line":160,"type":"if","locations":[{"start":{"line":160,"column":12},"end":{"line":160,"column":12}},{"start":{"line":160,"column":12},"end":{"line":160,"column":12}}]},"8":{"line":167,"type":"if","locations":[{"start":{"line":167,"column":8},"end":{"line":167,"column":8}},{"start":{"line":167,"column":8},"end":{"line":167,"column":8}}]},"9":{"line":167,"type":"binary-expr","locations":[{"start":{"line":167,"column":12},"end":{"line":167,"column":39}},{"start":{"line":167,"column":43},"end":{"line":167,"column":69}},{"start":{"line":168,"column":13},"end":{"line":168,"column":61}},{"start":{"line":169,"column":12},"end":{"line":169,"column":65}},{"start":{"line":170,"column":12},"end":{"line":170,"column":61}}]},"10":{"line":191,"type":"if","locations":[{"start":{"line":191,"column":20},"end":{"line":191,"column":20}},{"start":{"line":191,"column":20},"end":{"line":191,"column":20}}]},"11":{"line":198,"type":"if","locations":[{"start":{"line":198,"column":12},"end":{"line":198,"column":12}},{"start":{"line":198,"column":12},"end":{"line":198,"column":12}}]},"12":{"line":198,"type":"binary-expr","locations":[{"start":{"line":198,"column":16},"end":{"line":198,"column":36}},{"start":{"line":198,"column":40},"end":{"line":198,"column":61}},{"start":{"line":199,"column":17},"end":{"line":199,"column":59}},{"start":{"line":200,"column":16},"end":{"line":200,"column":63}},{"start":{"line":201,"column":16},"end":{"line":201,"column":57}}]},"13":{"line":223,"type":"if","locations":[{"start":{"line":223,"column":16},"end":{"line":223,"column":16}},{"start":{"line":223,"column":16},"end":{"line":223,"column":16}}]},"14":{"line":228,"type":"if","locations":[{"start":{"line":228,"column":20},"end":{"line":228,"column":20}},{"start":{"line":228,"column":20},"end":{"line":228,"column":20}}]},"15":{"line":228,"type":"binary-expr","locations":[{"start":{"line":228,"column":24},"end":{"line":228,"column":46}},{"start":{"line":228,"column":50},"end":{"line":228,"column":73}},{"start":{"line":229,"column":25},"end":{"line":229,"column":69}},{"start":{"line":230,"column":24},"end":{"line":230,"column":73}},{"start":{"line":231,"column":24},"end":{"line":231,"column":67}}]},"16":{"line":265,"type":"if","locations":[{"start":{"line":265,"column":12},"end":{"line":265,"column":12}},{"start":{"line":265,"column":12},"end":{"line":265,"column":12}}]}}};
-}
-__cov_vKFh3HItYZN9D3qXhkLG$w = __cov_vKFh3HItYZN9D3qXhkLG$w['/home/travis/build/terrestris/BasiGX/src/view/button/SpatialOperatorIntersect.js'];
-__cov_vKFh3HItYZN9D3qXhkLG$w.s['1']++;Ext.define('BasiGX.view.button.SpatialOperatorIntersect',{extend:'BasiGX.view.button.SpatialOperatorBase',xtype:'basigx-button-spatial-operator-intersect',requires:['BasiGX.util.Geometry'],viewModel:{data:{tooltip:'Intersect geometries',text:'Intersect geometries'}},bind:{text:'{text}'},config:{targetVectorLayer:null,maxAllowedFeaturesForOperation:2,fullSplit:false,tolerance:0},toggleGroup:'draw',handler:function(){__cov_vKFh3HItYZN9D3qXhkLG$w.f['1']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['2']++;this.setPressed(false);},processSelectedGeometries:function(featureArray){__cov_vKFh3HItYZN9D3qXhkLG$w.f['2']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['3']++;if(!jsts){__cov_vKFh3HItYZN9D3qXhkLG$w.b['1'][0]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['4']++;Ext.log.error('No jsts could be found, check your application '+'resources and make sure to include the jsts library');__cov_vKFh3HItYZN9D3qXhkLG$w.s['5']++;return;}else{__cov_vKFh3HItYZN9D3qXhkLG$w.b['1'][1]++;}__cov_vKFh3HItYZN9D3qXhkLG$w.s['6']++;var parser=new jsts.io.OL3Parser();__cov_vKFh3HItYZN9D3qXhkLG$w.s['7']++;var parsedGeometries=[];__cov_vKFh3HItYZN9D3qXhkLG$w.s['8']++;var intersectionGeom;__cov_vKFh3HItYZN9D3qXhkLG$w.s['9']++;Ext.each(featureArray,function(feat){__cov_vKFh3HItYZN9D3qXhkLG$w.f['3']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['10']++;parsedGeometries.push(parser.read(feat.getGeometry()));});__cov_vKFh3HItYZN9D3qXhkLG$w.s['11']++;if(this.getFullSplit()){__cov_vKFh3HItYZN9D3qXhkLG$w.b['2'][0]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['12']++;intersectionGeom=this.calculateFullSplit(parsedGeometries);}else{__cov_vKFh3HItYZN9D3qXhkLG$w.b['2'][1]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['13']++;intersectionGeom=this.calculateSingleIntersection(parsedGeometries);}__cov_vKFh3HItYZN9D3qXhkLG$w.s['14']++;if(intersectionGeom){__cov_vKFh3HItYZN9D3qXhkLG$w.b['3'][0]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['15']++;if(!Ext.isArray(intersectionGeom)){__cov_vKFh3HItYZN9D3qXhkLG$w.b['4'][0]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['16']++;intersectionGeom=[intersectionGeom];}else{__cov_vKFh3HItYZN9D3qXhkLG$w.b['4'][1]++;}__cov_vKFh3HItYZN9D3qXhkLG$w.s['17']++;var newFeatures=[];__cov_vKFh3HItYZN9D3qXhkLG$w.s['18']++;Ext.each(intersectionGeom,function(geom){__cov_vKFh3HItYZN9D3qXhkLG$w.f['4']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['19']++;var result=parser.write(geom);__cov_vKFh3HItYZN9D3qXhkLG$w.s['20']++;newFeatures.push(new ol.Feature({geometry:result}));});__cov_vKFh3HItYZN9D3qXhkLG$w.s['21']++;return newFeatures;}else{__cov_vKFh3HItYZN9D3qXhkLG$w.b['3'][1]++;}__cov_vKFh3HItYZN9D3qXhkLG$w.s['22']++;return false;},pushIfNotEqual:function(geom,list){__cov_vKFh3HItYZN9D3qXhkLG$w.f['5']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['23']++;var me=this;__cov_vKFh3HItYZN9D3qXhkLG$w.s['24']++;var foundEqual=false;__cov_vKFh3HItYZN9D3qXhkLG$w.s['25']++;geom.normalize();__cov_vKFh3HItYZN9D3qXhkLG$w.s['26']++;Ext.each(list,function(other){__cov_vKFh3HItYZN9D3qXhkLG$w.f['6']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['27']++;if(other.equalsExact(geom,me.getTolerance())){__cov_vKFh3HItYZN9D3qXhkLG$w.b['5'][0]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['28']++;foundEqual=true;__cov_vKFh3HItYZN9D3qXhkLG$w.s['29']++;return false;}else{__cov_vKFh3HItYZN9D3qXhkLG$w.b['5'][1]++;}});__cov_vKFh3HItYZN9D3qXhkLG$w.s['30']++;if(!foundEqual){__cov_vKFh3HItYZN9D3qXhkLG$w.b['6'][0]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['31']++;list.push(geom);}else{__cov_vKFh3HItYZN9D3qXhkLG$w.b['6'][1]++;}},calculateSingleIntersection:function(parsedGeometries){__cov_vKFh3HItYZN9D3qXhkLG$w.f['7']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['32']++;var intersectionGeom;__cov_vKFh3HItYZN9D3qXhkLG$w.s['33']++;for(var i=0;i<parsedGeometries.length;i++){__cov_vKFh3HItYZN9D3qXhkLG$w.s['34']++;if(i===0){__cov_vKFh3HItYZN9D3qXhkLG$w.b['7'][0]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['35']++;intersectionGeom=parsedGeometries[i];}else{__cov_vKFh3HItYZN9D3qXhkLG$w.b['7'][1]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['36']++;intersectionGeom=intersectionGeom.intersection(parsedGeometries[i]);}}__cov_vKFh3HItYZN9D3qXhkLG$w.s['37']++;if((__cov_vKFh3HItYZN9D3qXhkLG$w.b['9'][0]++,!intersectionGeom.isValid())||(__cov_vKFh3HItYZN9D3qXhkLG$w.b['9'][1]++,intersectionGeom.isEmpty())||(__cov_vKFh3HItYZN9D3qXhkLG$w.b['9'][2]++,intersectionGeom.getGeometryType()!=='Polygon')&&(__cov_vKFh3HItYZN9D3qXhkLG$w.b['9'][3]++,intersectionGeom.getGeometryType()!=='MultiPolygon')||(__cov_vKFh3HItYZN9D3qXhkLG$w.b['9'][4]++,intersectionGeom.getArea()<=this.getTolerance())){__cov_vKFh3HItYZN9D3qXhkLG$w.b['8'][0]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['38']++;return false;}else{__cov_vKFh3HItYZN9D3qXhkLG$w.b['8'][1]++;}__cov_vKFh3HItYZN9D3qXhkLG$w.s['39']++;return intersectionGeom;},calculateDifferences:function(geometries){__cov_vKFh3HItYZN9D3qXhkLG$w.f['8']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['40']++;var me=this;__cov_vKFh3HItYZN9D3qXhkLG$w.s['41']++;var results=[];__cov_vKFh3HItYZN9D3qXhkLG$w.s['42']++;Ext.each(geometries,function(geometry){__cov_vKFh3HItYZN9D3qXhkLG$w.f['9']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['43']++;var difference=geometry;__cov_vKFh3HItYZN9D3qXhkLG$w.s['44']++;Ext.each(geometries,function(other){__cov_vKFh3HItYZN9D3qXhkLG$w.f['10']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['45']++;try{__cov_vKFh3HItYZN9D3qXhkLG$w.s['46']++;if(geometry!==other){__cov_vKFh3HItYZN9D3qXhkLG$w.b['10'][0]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['47']++;difference=difference.difference(other);}else{__cov_vKFh3HItYZN9D3qXhkLG$w.b['10'][1]++;}}catch(e){}});__cov_vKFh3HItYZN9D3qXhkLG$w.s['48']++;if((__cov_vKFh3HItYZN9D3qXhkLG$w.b['12'][0]++,difference.isEmpty())||(__cov_vKFh3HItYZN9D3qXhkLG$w.b['12'][1]++,!difference.isValid())||(__cov_vKFh3HItYZN9D3qXhkLG$w.b['12'][2]++,difference.getGeometryType()!=='Polygon')&&(__cov_vKFh3HItYZN9D3qXhkLG$w.b['12'][3]++,difference.getGeometryType()!=='MultiPolygon')||(__cov_vKFh3HItYZN9D3qXhkLG$w.b['12'][4]++,difference.getArea()<=me.getTolerance())){__cov_vKFh3HItYZN9D3qXhkLG$w.b['11'][0]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['49']++;return;}else{__cov_vKFh3HItYZN9D3qXhkLG$w.b['11'][1]++;}__cov_vKFh3HItYZN9D3qXhkLG$w.s['50']++;me.pushIfNotEqual(difference,results);});__cov_vKFh3HItYZN9D3qXhkLG$w.s['51']++;return results;},calculateIntersections:function(geometries){__cov_vKFh3HItYZN9D3qXhkLG$w.f['11']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['52']++;var me=this;__cov_vKFh3HItYZN9D3qXhkLG$w.s['53']++;var results=[];__cov_vKFh3HItYZN9D3qXhkLG$w.s['54']++;Ext.each(geometries,function(geometry){__cov_vKFh3HItYZN9D3qXhkLG$w.f['12']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['55']++;Ext.each(geometries,function(other){__cov_vKFh3HItYZN9D3qXhkLG$w.f['13']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['56']++;if(geometry===other){__cov_vKFh3HItYZN9D3qXhkLG$w.b['13'][0]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['57']++;return;}else{__cov_vKFh3HItYZN9D3qXhkLG$w.b['13'][1]++;}__cov_vKFh3HItYZN9D3qXhkLG$w.s['58']++;try{__cov_vKFh3HItYZN9D3qXhkLG$w.s['59']++;var intersection=geometry.intersection(other);__cov_vKFh3HItYZN9D3qXhkLG$w.s['60']++;if((__cov_vKFh3HItYZN9D3qXhkLG$w.b['15'][0]++,intersection.isEmpty())||(__cov_vKFh3HItYZN9D3qXhkLG$w.b['15'][1]++,!intersection.isValid())||(__cov_vKFh3HItYZN9D3qXhkLG$w.b['15'][2]++,intersection.getGeometryType()!=='Polygon')&&(__cov_vKFh3HItYZN9D3qXhkLG$w.b['15'][3]++,intersection.getGeometryType()!=='MultiPolygon')||(__cov_vKFh3HItYZN9D3qXhkLG$w.b['15'][4]++,intersection.getArea()<=me.getTolerance())){__cov_vKFh3HItYZN9D3qXhkLG$w.b['14'][0]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['61']++;return;}else{__cov_vKFh3HItYZN9D3qXhkLG$w.b['14'][1]++;}__cov_vKFh3HItYZN9D3qXhkLG$w.s['62']++;me.pushIfNotEqual(intersection,results);}catch(e){}});});__cov_vKFh3HItYZN9D3qXhkLG$w.s['63']++;return results;},calculateFullSplit:function(geometries){__cov_vKFh3HItYZN9D3qXhkLG$w.f['14']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['64']++;var me=this;__cov_vKFh3HItYZN9D3qXhkLG$w.s['65']++;var results=[];__cov_vKFh3HItYZN9D3qXhkLG$w.s['66']++;var intersections=geometries;__cov_vKFh3HItYZN9D3qXhkLG$w.s['67']++;while(intersections.length>0){__cov_vKFh3HItYZN9D3qXhkLG$w.s['68']++;var differences=this.calculateDifferences(intersections);__cov_vKFh3HItYZN9D3qXhkLG$w.s['69']++;Ext.each(differences,function(geom){__cov_vKFh3HItYZN9D3qXhkLG$w.f['15']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['70']++;me.pushIfNotEqual(geom,results);});__cov_vKFh3HItYZN9D3qXhkLG$w.s['71']++;intersections=this.calculateIntersections(intersections);__cov_vKFh3HItYZN9D3qXhkLG$w.s['72']++;if(differences.length===0){__cov_vKFh3HItYZN9D3qXhkLG$w.b['16'][0]++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['73']++;Ext.each(intersections,function(geom){__cov_vKFh3HItYZN9D3qXhkLG$w.f['16']++;__cov_vKFh3HItYZN9D3qXhkLG$w.s['74']++;me.pushIfNotEqual(geom,results);});__cov_vKFh3HItYZN9D3qXhkLG$w.s['75']++;intersections=[];}else{__cov_vKFh3HItYZN9D3qXhkLG$w.b['16'][1]++;}}__cov_vKFh3HItYZN9D3qXhkLG$w.s['76']++;return results;}});
+    requires: [
+        'BasiGX.util.Geometry'
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Intersect geometries',
+            text: 'Intersect geometries'
+        }
+    },
+
+    /**
+     *
+     */
+    bind: {
+        text: '{text}'
+    },
+
+    config: {
+
+        targetVectorLayer: null,
+
+        /**
+         * the number of features which are allowed to process together.
+         * Union may use a high number without problems,
+         * intersect will be restricted to 2. With fullSplit set to true, the
+         * number is not limited.
+         */
+        maxAllowedFeaturesForOperation: 2,
+
+        /**
+         * If set to true, the operator will calculate all resulting parts of
+         * the intersection, including the parts that do not intersect with
+         * other geometries. Default is false.
+         * @type {Boolean}
+         */
+        fullSplit: false,
+
+        /**
+         * The tolerance to use when comparing geometries during difference and
+         * intersection calculation. Set this to a sane value in order to avoid
+         * getting overlapping/duplicate geometries. This is also used to filter
+         * out geometries smaller that this value in size (this happens a lot if
+         * multiple geometries are involved).
+         * @type {Number}
+         */
+        tolerance: 0
+    },
+
+    toggleGroup: 'draw',
+
+    handler: function() {
+        // effectively disable the toggle functionality, behaves like
+        // `enableToggle: false` but keeps the ability to be part
+        // of a `toggleGroup`
+        this.setPressed(false);
+    },
+
+    /**
+     * Intersect function which is given 2 geometries
+     *
+     * @param {Array} featureArray The array holding the features to handle
+     * @return {ol.Feature} The final feature
+     */
+    processSelectedGeometries: function(featureArray) {
+        if (!jsts) {
+            Ext.log.error('No jsts could be found, check your application ' +
+                'resources and make sure to include the jsts library');
+            return;
+        }
+        var parser = new jsts.io.OL3Parser();
+        var parsedGeometries = [];
+        var intersectionGeom;
+
+        Ext.each(featureArray, function(feat) {
+            parsedGeometries.push(parser.read(feat.getGeometry()));
+        });
+
+        if (this.getFullSplit()) {
+            intersectionGeom = this.calculateFullSplit(parsedGeometries);
+        } else {
+            intersectionGeom = this.calculateSingleIntersection(
+                parsedGeometries);
+        }
+
+        if (intersectionGeom) {
+            if (!Ext.isArray(intersectionGeom)) {
+                intersectionGeom = [intersectionGeom];
+            }
+            var newFeatures = [];
+            Ext.each(intersectionGeom, function(geom) {
+                var result = parser.write(geom);
+                newFeatures.push(new ol.Feature({geometry: result}));
+            });
+            return newFeatures;
+        }
+
+        return false;
+    },
+
+    /**
+     * Normalizes the geometry, then adds it to the list if not contained yet.
+     * This is a rather expensive operation, use only when necessary!
+     * @param  {jsts.geom.Geometry} geom the jsts geometry
+     * @param  {Array} list the list to possibly add the geometry to
+     */
+    pushIfNotEqual: function(geom, list) {
+        var me = this;
+        var foundEqual = false;
+        geom.normalize();
+
+        Ext.each(list, function(other) {
+            if (other.equalsExact(geom, me.getTolerance())) {
+                foundEqual = true;
+                return false;
+            }
+        });
+        if (!foundEqual) {
+            list.push(geom);
+        }
+    },
+
+    /**
+     * Calculates just the intersection of some geometries.
+     * @param  {jsts.geom.Geometry} parsedGeometries the jsts geometries
+     * @return {jsts.geom.Geometry|Boolean} the intersection, or false, if it
+     * could not be calculated or the resulting geometry is too small or invalid
+     */
+    calculateSingleIntersection: function(parsedGeometries) {
+        var intersectionGeom;
+        for (var i = 0; i < parsedGeometries.length; i++) {
+            if (i === 0) {
+                intersectionGeom = parsedGeometries[i];
+            } else {
+                intersectionGeom = intersectionGeom.intersection(
+                    parsedGeometries[i]);
+            }
+        }
+        if (!intersectionGeom.isValid() || intersectionGeom.isEmpty() ||
+            (intersectionGeom.getGeometryType() !== 'Polygon' &&
+            intersectionGeom.getGeometryType() !== 'MultiPolygon') ||
+            intersectionGeom.getArea() <= this.getTolerance()) {
+            return false;
+        }
+        return intersectionGeom;
+    },
+
+    /**
+     * Calculates the difference polygons for a set of polygons. The difference
+     * polygons are the parts of the polygons that do not intersect with any
+     * others.
+     * @param  {jsts.geom.Geometry[]} geometries the jsts geometries
+     * @return {jsts.geom.Geometry[]} the set of difference polygons
+     */
+    calculateDifferences: function(geometries) {
+        var me = this;
+        var results = [];
+
+        Ext.each(geometries, function(geometry) {
+            var difference = geometry;
+            Ext.each(geometries, function(other) {
+                try {
+                    if (geometry !== other) {
+                        difference = difference.difference(other);
+                    }
+                } catch (e) {
+                    // ignore topology exceptions for now
+                }
+            });
+            if (difference.isEmpty() || !difference.isValid() ||
+                (difference.getGeometryType() !== 'Polygon' &&
+                difference.getGeometryType() !== 'MultiPolygon') ||
+                difference.getArea() <= me.getTolerance()) {
+                return;
+            }
+            me.pushIfNotEqual(difference, results);
+        });
+
+        return results;
+    },
+
+    /**
+     * Calculates the intersection geometries for a given set of polygons. Note
+     * that this may calculate overlapping polygons if multiple polygons are
+     * involved.
+     * @param  {jsts.geom.Geometry[]} geometries the jsts geometries
+     * @return {jsts.geom.Geometry[]} the intersection polygon list
+     */
+    calculateIntersections: function(geometries) {
+        var me = this;
+        var results = [];
+
+        Ext.each(geometries, function(geometry) {
+            Ext.each(geometries, function(other) {
+                if (geometry === other) {
+                    return;
+                }
+                try {
+                    var intersection = geometry.intersection(other);
+                    if (intersection.isEmpty() || !intersection.isValid() ||
+                        (intersection.getGeometryType() !== 'Polygon' &&
+                        intersection.getGeometryType() !== 'MultiPolygon') ||
+                        intersection.getArea() <= me.getTolerance()) {
+                        return;
+                    }
+                    me.pushIfNotEqual(intersection, results);
+                } catch (e) {
+                    // ignore topology exceptions for now
+                }
+            });
+        });
+
+        return results;
+    },
+
+    /**
+     * Calculates the full split polygons when intersecting a group of polygons.
+     * It works by repeatedly calculating the difference polygons, adding them
+     * to the list of results, and then calculating the intersections. If no
+     * differences were found, they're added to the results list and we're done.
+     * If differences were found, repeat the process with the differences as new
+     * input.
+     * @param  {jsts.geom.Geometry[]} geometries the list of input polygons
+     * @return {jsts.geom.Geometry[]} the list of the resulting split geometries
+     */
+    calculateFullSplit: function(geometries) {
+        var me = this;
+        var results = [];
+        var intersections = geometries;
+
+        while (intersections.length > 0) {
+            var differences = this.calculateDifferences(intersections);
+            Ext.each(differences, function(geom) {
+                me.pushIfNotEqual(geom, results);
+            });
+            intersections = this.calculateIntersections(intersections);
+            if (differences.length === 0) {
+                Ext.each(intersections, function(geom) {
+                    me.pushIfNotEqual(geom, results);
+                });
+                intersections = [];
+            }
+        }
+
+        return results;
+    }
+
+});

@@ -1,9 +1,886 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * A measure tool button.
+ *
+ * Mainly influenced by ol3 examples.
+ *
+ * @class BasiGX.view.button.Measure
+ */
+Ext.define('BasiGX.view.button.Measure', {
+    extend: 'BasiGX.view.button.Base',
+    xtype: 'basigx-button-measure',
 
-var __cov_mFWw3NCbQt3cD45PAdCnzA = (Function('return this'))();
-if (!__cov_mFWw3NCbQt3cD45PAdCnzA.__coverage__) { __cov_mFWw3NCbQt3cD45PAdCnzA.__coverage__ = {}; }
-__cov_mFWw3NCbQt3cD45PAdCnzA = __cov_mFWw3NCbQt3cD45PAdCnzA.__coverage__;
-if (!(__cov_mFWw3NCbQt3cD45PAdCnzA['/home/travis/build/terrestris/BasiGX/src/view/button/Measure.js'])) {
-   __cov_mFWw3NCbQt3cD45PAdCnzA['/home/travis/build/terrestris/BasiGX/src/view/button/Measure.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/Measure.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0,"137":0,"138":0,"139":0,"140":0,"141":0,"142":0,"143":0,"144":0,"145":0,"146":0,"147":0,"148":0,"149":0,"150":0,"151":0,"152":0,"153":0,"154":0,"155":0,"156":0,"157":0,"158":0,"159":0,"160":0,"161":0,"162":0,"163":0,"164":0,"165":0,"166":0,"167":0,"168":0,"169":0,"170":0,"171":0,"172":0,"173":0,"174":0,"175":0,"176":0,"177":0,"178":0,"179":0,"180":0,"181":0,"182":0,"183":0,"184":0,"185":0,"186":0,"187":0,"188":0,"189":0,"190":0,"191":0,"192":0,"193":0,"194":0,"195":0,"196":0,"197":0,"198":0,"199":0,"200":0,"201":0,"202":0,"203":0,"204":0,"205":0,"206":0,"207":0,"208":0,"209":0,"210":0,"211":0,"212":0,"213":0,"214":0,"215":0,"216":0,"217":0,"218":0,"219":0,"220":0,"221":0,"222":0,"223":0,"224":0,"225":0,"226":0,"227":0,"228":0,"229":0,"230":0,"231":0,"232":0,"233":0,"234":0,"235":0,"236":0,"237":0,"238":0,"239":0,"240":0,"241":0,"242":0,"243":0,"244":0,"245":0,"246":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0,0,0],"8":[0,0,0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0],"19":[0,0],"20":[0,0],"21":[0,0],"22":[0,0],"23":[0,0],"24":[0,0],"25":[0,0],"26":[0,0],"27":[0,0],"28":[0,0],"29":[0,0],"30":[0,0],"31":[0,0],"32":[0,0],"33":[0,0],"34":[0,0],"35":[0,0],"36":[0,0],"37":[0,0],"38":[0,0],"39":[0,0],"40":[0,0],"41":[0,0],"42":[0,0],"43":[0,0],"44":[0,0],"45":[0,0],"46":[0,0],"47":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0},"fnMap":{"1":{"name":"(anonymous_1)","line":225,"loc":{"start":{"line":225,"column":24},"end":{"line":225,"column":43}}},"2":{"name":"(anonymous_2)","line":243,"loc":{"start":{"line":243,"column":17},"end":{"line":243,"column":28}}},"3":{"name":"(anonymous_3)","line":281,"loc":{"start":{"line":281,"column":35},"end":{"line":281,"column":46}}},"4":{"name":"(anonymous_4)","line":299,"loc":{"start":{"line":299,"column":17},"end":{"line":299,"column":40}}},"5":{"name":"(anonymous_5)","line":325,"loc":{"start":{"line":325,"column":34},"end":{"line":325,"column":45}}},"6":{"name":"(anonymous_6)","line":353,"loc":{"start":{"line":353,"column":31},"end":{"line":353,"column":42}}},"7":{"name":"(anonymous_7)","line":367,"loc":{"start":{"line":367,"column":24},"end":{"line":367,"column":35}}},"8":{"name":"(anonymous_8)","line":407,"loc":{"start":{"line":407,"column":27},"end":{"line":407,"column":38}}},"9":{"name":"(anonymous_9)","line":421,"loc":{"start":{"line":421,"column":19},"end":{"line":421,"column":30}}},"10":{"name":"(anonymous_10)","line":445,"loc":{"start":{"line":445,"column":22},"end":{"line":445,"column":33}}},"11":{"name":"(anonymous_11)","line":466,"loc":{"start":{"line":466,"column":13},"end":{"line":466,"column":24}}},"12":{"name":"(anonymous_12)","line":469,"loc":{"start":{"line":469,"column":34},"end":{"line":469,"column":58}}},"13":{"name":"(anonymous_13)","line":482,"loc":{"start":{"line":482,"column":21},"end":{"line":482,"column":32}}},"14":{"name":"(anonymous_14)","line":485,"loc":{"start":{"line":485,"column":44},"end":{"line":485,"column":69}}},"15":{"name":"(anonymous_15)","line":490,"loc":{"start":{"line":490,"column":40},"end":{"line":490,"column":61}}},"16":{"name":"(anonymous_16)","line":505,"loc":{"start":{"line":505,"column":27},"end":{"line":505,"column":41}}},"17":{"name":"(anonymous_17)","line":538,"loc":{"start":{"line":538,"column":15},"end":{"line":538,"column":29}}},"18":{"name":"(anonymous_18)","line":563,"loc":{"start":{"line":563,"column":13},"end":{"line":563,"column":24}}},"19":{"name":"(anonymous_19)","line":595,"loc":{"start":{"line":595,"column":24},"end":{"line":595,"column":38}}},"20":{"name":"(anonymous_20)","line":640,"loc":{"start":{"line":640,"column":23},"end":{"line":640,"column":34}}},"21":{"name":"(anonymous_21)","line":661,"loc":{"start":{"line":661,"column":26},"end":{"line":661,"column":37}}},"22":{"name":"(anonymous_22)","line":682,"loc":{"start":{"line":682,"column":23},"end":{"line":682,"column":34}}},"23":{"name":"(anonymous_23)","line":697,"loc":{"start":{"line":697,"column":26},"end":{"line":697,"column":37}}},"24":{"name":"(anonymous_24)","line":717,"loc":{"start":{"line":717,"column":18},"end":{"line":717,"column":33}}},"25":{"name":"(anonymous_25)","line":754,"loc":{"start":{"line":754,"column":16},"end":{"line":754,"column":34}}},"26":{"name":"(anonymous_26)","line":794,"loc":{"start":{"line":794,"column":11},"end":{"line":794,"column":32}}},"27":{"name":"(anonymous_27)","line":817,"loc":{"start":{"line":817,"column":14},"end":{"line":817,"column":35}}},"28":{"name":"(anonymous_28)","line":835,"loc":{"start":{"line":835,"column":19},"end":{"line":835,"column":38}}},"29":{"name":"(anonymous_29)","line":847,"loc":{"start":{"line":847,"column":28},"end":{"line":847,"column":47}}},"30":{"name":"(anonymous_30)","line":868,"loc":{"start":{"line":868,"column":17},"end":{"line":868,"column":32}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":886,"column":3}},"2":{"start":{"line":226,"column":16},"end":{"line":228,"column":17}},"3":{"start":{"line":227,"column":20},"end":{"line":227,"column":80}},"4":{"start":{"line":229,"column":16},"end":{"line":229,"column":30}},"5":{"start":{"line":230,"column":16},"end":{"line":230,"column":32}},"6":{"start":{"line":231,"column":16},"end":{"line":234,"column":44}},"7":{"start":{"line":235,"column":16},"end":{"line":235,"column":60}},"8":{"start":{"line":244,"column":8},"end":{"line":244,"column":22}},"9":{"start":{"line":245,"column":8},"end":{"line":245,"column":42}},"10":{"start":{"line":247,"column":8},"end":{"line":247,"column":33}},"11":{"start":{"line":249,"column":8},"end":{"line":249,"column":60}},"12":{"start":{"line":251,"column":8},"end":{"line":251,"column":41}},"13":{"start":{"line":252,"column":8},"end":{"line":252,"column":47}},"14":{"start":{"line":253,"column":8},"end":{"line":256,"column":11}},"15":{"start":{"line":258,"column":8},"end":{"line":258,"column":60}},"16":{"start":{"line":259,"column":8},"end":{"line":259,"column":70}},"17":{"start":{"line":261,"column":8},"end":{"line":265,"column":9}},"18":{"start":{"line":262,"column":12},"end":{"line":262,"column":51}},"19":{"start":{"line":263,"column":12},"end":{"line":263,"column":65}},"20":{"start":{"line":264,"column":12},"end":{"line":264,"column":42}},"21":{"start":{"line":267,"column":8},"end":{"line":267,"column":45}},"22":{"start":{"line":269,"column":8},"end":{"line":269,"column":58}},"23":{"start":{"line":270,"column":8},"end":{"line":270,"column":80}},"24":{"start":{"line":272,"column":8},"end":{"line":272,"column":39}},"25":{"start":{"line":273,"column":8},"end":{"line":273,"column":45}},"26":{"start":{"line":275,"column":8},"end":{"line":275,"column":44}},"27":{"start":{"line":282,"column":8},"end":{"line":282,"column":22}},"28":{"start":{"line":283,"column":8},"end":{"line":289,"column":9}},"29":{"start":{"line":284,"column":12},"end":{"line":284,"column":35}},"30":{"start":{"line":285,"column":12},"end":{"line":285,"column":38}},"31":{"start":{"line":287,"column":12},"end":{"line":287,"column":35}},"32":{"start":{"line":288,"column":12},"end":{"line":288,"column":38}},"33":{"start":{"line":300,"column":8},"end":{"line":300,"column":22}},"34":{"start":{"line":301,"column":8},"end":{"line":315,"column":9}},"35":{"start":{"line":302,"column":12},"end":{"line":302,"column":43}},"36":{"start":{"line":303,"column":12},"end":{"line":305,"column":14}},"37":{"start":{"line":306,"column":12},"end":{"line":308,"column":14}},"38":{"start":{"line":309,"column":12},"end":{"line":311,"column":14}},"39":{"start":{"line":312,"column":12},"end":{"line":314,"column":14}},"40":{"start":{"line":326,"column":8},"end":{"line":326,"column":22}},"41":{"start":{"line":327,"column":8},"end":{"line":327,"column":50}},"42":{"start":{"line":328,"column":8},"end":{"line":328,"column":67}},"43":{"start":{"line":329,"column":8},"end":{"line":356,"column":11}},"44":{"start":{"line":354,"column":16},"end":{"line":354,"column":29}},"45":{"start":{"line":357,"column":8},"end":{"line":357,"column":27}},"46":{"start":{"line":368,"column":8},"end":{"line":368,"column":22}},"47":{"start":{"line":369,"column":8},"end":{"line":369,"column":42}},"48":{"start":{"line":370,"column":8},"end":{"line":370,"column":60}},"49":{"start":{"line":371,"column":8},"end":{"line":371,"column":72}},"50":{"start":{"line":373,"column":8},"end":{"line":393,"column":11}},"51":{"start":{"line":395,"column":8},"end":{"line":395,"column":52}},"52":{"start":{"line":397,"column":8},"end":{"line":397,"column":28}},"53":{"start":{"line":408,"column":8},"end":{"line":408,"column":41}},"54":{"start":{"line":409,"column":8},"end":{"line":411,"column":9}},"55":{"start":{"line":410,"column":12},"end":{"line":410,"column":38}},"56":{"start":{"line":412,"column":8},"end":{"line":412,"column":24}},"57":{"start":{"line":422,"column":8},"end":{"line":422,"column":20}},"58":{"start":{"line":423,"column":8},"end":{"line":435,"column":9}},"59":{"start":{"line":425,"column":16},"end":{"line":425,"column":39}},"60":{"start":{"line":426,"column":16},"end":{"line":426,"column":22}},"61":{"start":{"line":428,"column":16},"end":{"line":428,"column":39}},"62":{"start":{"line":429,"column":16},"end":{"line":429,"column":22}},"63":{"start":{"line":431,"column":16},"end":{"line":431,"column":40}},"64":{"start":{"line":432,"column":16},"end":{"line":432,"column":22}},"65":{"start":{"line":434,"column":16},"end":{"line":434,"column":22}},"66":{"start":{"line":436,"column":8},"end":{"line":436,"column":23}},"67":{"start":{"line":446,"column":8},"end":{"line":446,"column":23}},"68":{"start":{"line":447,"column":8},"end":{"line":459,"column":9}},"69":{"start":{"line":449,"column":16},"end":{"line":449,"column":45}},"70":{"start":{"line":450,"column":16},"end":{"line":450,"column":22}},"71":{"start":{"line":452,"column":16},"end":{"line":452,"column":45}},"72":{"start":{"line":453,"column":16},"end":{"line":453,"column":22}},"73":{"start":{"line":455,"column":16},"end":{"line":455,"column":46}},"74":{"start":{"line":456,"column":16},"end":{"line":456,"column":22}},"75":{"start":{"line":458,"column":16},"end":{"line":458,"column":22}},"76":{"start":{"line":460,"column":8},"end":{"line":460,"column":26}},"77":{"start":{"line":467,"column":8},"end":{"line":467,"column":22}},"78":{"start":{"line":468,"column":8},"end":{"line":468,"column":39}},"79":{"start":{"line":469,"column":8},"end":{"line":473,"column":11}},"80":{"start":{"line":470,"column":12},"end":{"line":472,"column":13}},"81":{"start":{"line":471,"column":16},"end":{"line":471,"column":48}},"82":{"start":{"line":474,"column":8},"end":{"line":474,"column":26}},"83":{"start":{"line":475,"column":8},"end":{"line":475,"column":29}},"84":{"start":{"line":476,"column":8},"end":{"line":476,"column":50}},"85":{"start":{"line":483,"column":8},"end":{"line":483,"column":22}},"86":{"start":{"line":485,"column":8},"end":{"line":487,"column":11}},"87":{"start":{"line":486,"column":12},"end":{"line":486,"column":49}},"88":{"start":{"line":488,"column":8},"end":{"line":488,"column":39}},"89":{"start":{"line":490,"column":8},"end":{"line":495,"column":11}},"90":{"start":{"line":491,"column":12},"end":{"line":491,"column":61}},"91":{"start":{"line":492,"column":12},"end":{"line":494,"column":13}},"92":{"start":{"line":493,"column":16},"end":{"line":493,"column":47}},"93":{"start":{"line":496,"column":8},"end":{"line":496,"column":35}},"94":{"start":{"line":506,"column":8},"end":{"line":506,"column":22}},"95":{"start":{"line":507,"column":8},"end":{"line":507,"column":57}},"96":{"start":{"line":509,"column":8},"end":{"line":528,"column":9}},"97":{"start":{"line":510,"column":12},"end":{"line":510,"column":47}},"98":{"start":{"line":511,"column":12},"end":{"line":512,"column":36}},"99":{"start":{"line":513,"column":12},"end":{"line":527,"column":13}},"100":{"start":{"line":514,"column":16},"end":{"line":514,"column":60}},"101":{"start":{"line":515,"column":16},"end":{"line":515,"column":71}},"102":{"start":{"line":516,"column":16},"end":{"line":516,"column":38}},"103":{"start":{"line":517,"column":16},"end":{"line":521,"column":19}},"104":{"start":{"line":522,"column":16},"end":{"line":522,"column":43}},"105":{"start":{"line":523,"column":16},"end":{"line":523,"column":52}},"106":{"start":{"line":525,"column":16},"end":{"line":525,"column":48}},"107":{"start":{"line":526,"column":16},"end":{"line":526,"column":56}},"108":{"start":{"line":539,"column":8},"end":{"line":539,"column":22}},"109":{"start":{"line":540,"column":8},"end":{"line":540,"column":55}},"110":{"start":{"line":541,"column":8},"end":{"line":541,"column":32}},"111":{"start":{"line":543,"column":8},"end":{"line":547,"column":9}},"112":{"start":{"line":544,"column":12},"end":{"line":546,"column":14}},"113":{"start":{"line":549,"column":8},"end":{"line":554,"column":9}},"114":{"start":{"line":550,"column":12},"end":{"line":550,"column":33}},"115":{"start":{"line":551,"column":12},"end":{"line":551,"column":38}},"116":{"start":{"line":552,"column":12},"end":{"line":552,"column":35}},"117":{"start":{"line":553,"column":12},"end":{"line":553,"column":27}},"118":{"start":{"line":564,"column":8},"end":{"line":564,"column":22}},"119":{"start":{"line":566,"column":8},"end":{"line":568,"column":9}},"120":{"start":{"line":567,"column":12},"end":{"line":567,"column":54}},"121":{"start":{"line":571,"column":8},"end":{"line":571,"column":57}},"122":{"start":{"line":572,"column":8},"end":{"line":578,"column":9}},"123":{"start":{"line":573,"column":12},"end":{"line":573,"column":38}},"124":{"start":{"line":575,"column":12},"end":{"line":576,"column":41}},"125":{"start":{"line":577,"column":12},"end":{"line":577,"column":49}},"126":{"start":{"line":581,"column":8},"end":{"line":581,"column":25}},"127":{"start":{"line":584,"column":8},"end":{"line":587,"column":9}},"128":{"start":{"line":585,"column":12},"end":{"line":585,"column":44}},"129":{"start":{"line":586,"column":12},"end":{"line":586,"column":38}},"130":{"start":{"line":596,"column":8},"end":{"line":596,"column":22}},"131":{"start":{"line":598,"column":8},"end":{"line":600,"column":9}},"132":{"start":{"line":599,"column":12},"end":{"line":599,"column":19}},"133":{"start":{"line":602,"column":8},"end":{"line":604,"column":9}},"134":{"start":{"line":603,"column":12},"end":{"line":603,"column":19}},"135":{"start":{"line":606,"column":8},"end":{"line":606,"column":63}},"136":{"start":{"line":607,"column":8},"end":{"line":607,"column":46}},"137":{"start":{"line":608,"column":8},"end":{"line":608,"column":49}},"138":{"start":{"line":610,"column":8},"end":{"line":610,"column":41}},"139":{"start":{"line":612,"column":8},"end":{"line":631,"column":9}},"140":{"start":{"line":613,"column":12},"end":{"line":613,"column":23}},"141":{"start":{"line":614,"column":12},"end":{"line":614,"column":47}},"142":{"start":{"line":615,"column":12},"end":{"line":615,"column":59}},"143":{"start":{"line":616,"column":12},"end":{"line":628,"column":13}},"144":{"start":{"line":617,"column":16},"end":{"line":617,"column":45}},"145":{"start":{"line":618,"column":16},"end":{"line":618,"column":70}},"146":{"start":{"line":620,"column":16},"end":{"line":620,"column":79}},"147":{"start":{"line":621,"column":19},"end":{"line":628,"column":13}},"148":{"start":{"line":622,"column":16},"end":{"line":622,"column":47}},"149":{"start":{"line":623,"column":16},"end":{"line":623,"column":67}},"150":{"start":{"line":624,"column":16},"end":{"line":624,"column":63}},"151":{"start":{"line":625,"column":19},"end":{"line":628,"column":13}},"152":{"start":{"line":626,"column":16},"end":{"line":626,"column":46}},"153":{"start":{"line":627,"column":16},"end":{"line":627,"column":68}},"154":{"start":{"line":629,"column":12},"end":{"line":629,"column":56}},"155":{"start":{"line":630,"column":12},"end":{"line":630,"column":63}},"156":{"start":{"line":633,"column":8},"end":{"line":633,"column":50}},"157":{"start":{"line":634,"column":8},"end":{"line":634,"column":53}},"158":{"start":{"line":641,"column":8},"end":{"line":641,"column":22}},"159":{"start":{"line":642,"column":8},"end":{"line":642,"column":57}},"160":{"start":{"line":644,"column":8},"end":{"line":646,"column":9}},"161":{"start":{"line":645,"column":12},"end":{"line":645,"column":19}},"162":{"start":{"line":648,"column":8},"end":{"line":648,"column":66}},"163":{"start":{"line":649,"column":8},"end":{"line":649,"column":54}},"164":{"start":{"line":650,"column":8},"end":{"line":654,"column":11}},"165":{"start":{"line":655,"column":8},"end":{"line":655,"column":42}},"166":{"start":{"line":662,"column":8},"end":{"line":662,"column":22}},"167":{"start":{"line":663,"column":8},"end":{"line":663,"column":57}},"168":{"start":{"line":664,"column":8},"end":{"line":666,"column":9}},"169":{"start":{"line":665,"column":12},"end":{"line":665,"column":19}},"170":{"start":{"line":668,"column":8},"end":{"line":668,"column":69}},"171":{"start":{"line":669,"column":8},"end":{"line":670,"column":38}},"172":{"start":{"line":671,"column":8},"end":{"line":675,"column":11}},"173":{"start":{"line":676,"column":8},"end":{"line":676,"column":45}},"174":{"start":{"line":683,"column":8},"end":{"line":683,"column":22}},"175":{"start":{"line":684,"column":8},"end":{"line":686,"column":9}},"176":{"start":{"line":685,"column":12},"end":{"line":685,"column":76}},"177":{"start":{"line":687,"column":8},"end":{"line":689,"column":9}},"178":{"start":{"line":688,"column":12},"end":{"line":688,"column":49}},"179":{"start":{"line":690,"column":8},"end":{"line":690,"column":37}},"180":{"start":{"line":691,"column":8},"end":{"line":691,"column":30}},"181":{"start":{"line":698,"column":8},"end":{"line":698,"column":22}},"182":{"start":{"line":699,"column":8},"end":{"line":703,"column":9}},"183":{"start":{"line":700,"column":12},"end":{"line":702,"column":14}},"184":{"start":{"line":704,"column":8},"end":{"line":706,"column":9}},"185":{"start":{"line":705,"column":12},"end":{"line":705,"column":52}},"186":{"start":{"line":707,"column":8},"end":{"line":707,"column":40}},"187":{"start":{"line":708,"column":8},"end":{"line":708,"column":33}},"188":{"start":{"line":718,"column":8},"end":{"line":718,"column":22}},"189":{"start":{"line":719,"column":8},"end":{"line":719,"column":69}},"190":{"start":{"line":720,"column":8},"end":{"line":720,"column":19}},"191":{"start":{"line":722,"column":8},"end":{"line":736,"column":9}},"192":{"start":{"line":723,"column":12},"end":{"line":723,"column":53}},"193":{"start":{"line":724,"column":12},"end":{"line":724,"column":52}},"194":{"start":{"line":725,"column":12},"end":{"line":725,"column":23}},"195":{"start":{"line":726,"column":12},"end":{"line":726,"column":62}},"196":{"start":{"line":727,"column":12},"end":{"line":733,"column":13}},"197":{"start":{"line":728,"column":16},"end":{"line":729,"column":61}},"198":{"start":{"line":730,"column":16},"end":{"line":731,"column":65}},"199":{"start":{"line":732,"column":16},"end":{"line":732,"column":64}},"200":{"start":{"line":735,"column":12},"end":{"line":735,"column":62}},"201":{"start":{"line":737,"column":8},"end":{"line":737,"column":19}},"202":{"start":{"line":738,"column":8},"end":{"line":744,"column":9}},"203":{"start":{"line":739,"column":12},"end":{"line":740,"column":44}},"204":{"start":{"line":742,"column":12},"end":{"line":743,"column":21}},"205":{"start":{"line":745,"column":8},"end":{"line":745,"column":22}},"206":{"start":{"line":755,"column":8},"end":{"line":755,"column":22}},"207":{"start":{"line":756,"column":8},"end":{"line":756,"column":69}},"208":{"start":{"line":757,"column":8},"end":{"line":757,"column":17}},"209":{"start":{"line":759,"column":8},"end":{"line":768,"column":9}},"210":{"start":{"line":760,"column":12},"end":{"line":760,"column":53}},"211":{"start":{"line":761,"column":12},"end":{"line":761,"column":62}},"212":{"start":{"line":762,"column":12},"end":{"line":763,"column":42}},"213":{"start":{"line":764,"column":12},"end":{"line":764,"column":69}},"214":{"start":{"line":765,"column":12},"end":{"line":765,"column":67}},"215":{"start":{"line":767,"column":12},"end":{"line":767,"column":37}},"216":{"start":{"line":770,"column":8},"end":{"line":770,"column":19}},"217":{"start":{"line":771,"column":8},"end":{"line":777,"column":9}},"218":{"start":{"line":772,"column":12},"end":{"line":773,"column":51}},"219":{"start":{"line":775,"column":12},"end":{"line":776,"column":38}},"220":{"start":{"line":778,"column":8},"end":{"line":778,"column":22}},"221":{"start":{"line":795,"column":8},"end":{"line":795,"column":35}},"222":{"start":{"line":796,"column":8},"end":{"line":796,"column":35}},"223":{"start":{"line":798,"column":8},"end":{"line":798,"column":39}},"224":{"start":{"line":800,"column":8},"end":{"line":800,"column":31}},"225":{"start":{"line":801,"column":8},"end":{"line":801,"column":21}},"226":{"start":{"line":819,"column":8},"end":{"line":819,"column":43}},"227":{"start":{"line":820,"column":8},"end":{"line":823,"column":9}},"228":{"start":{"line":822,"column":12},"end":{"line":822,"column":32}},"229":{"start":{"line":824,"column":8},"end":{"line":824,"column":21}},"230":{"start":{"line":836,"column":8},"end":{"line":836,"column":30}},"231":{"start":{"line":848,"column":8},"end":{"line":848,"column":38}},"232":{"start":{"line":849,"column":8},"end":{"line":851,"column":9}},"233":{"start":{"line":850,"column":12},"end":{"line":850,"column":40}},"234":{"start":{"line":852,"column":8},"end":{"line":852,"column":25}},"235":{"start":{"line":869,"column":8},"end":{"line":869,"column":22}},"236":{"start":{"line":870,"column":8},"end":{"line":870,"column":43}},"237":{"start":{"line":871,"column":8},"end":{"line":871,"column":38}},"238":{"start":{"line":872,"column":8},"end":{"line":874,"column":9}},"239":{"start":{"line":873,"column":12},"end":{"line":873,"column":22}},"240":{"start":{"line":876,"column":8},"end":{"line":876,"column":46}},"241":{"start":{"line":877,"column":8},"end":{"line":877,"column":46}},"242":{"start":{"line":878,"column":8},"end":{"line":878,"column":54}},"243":{"start":{"line":880,"column":8},"end":{"line":880,"column":49}},"244":{"start":{"line":881,"column":8},"end":{"line":881,"column":40}},"245":{"start":{"line":882,"column":8},"end":{"line":882,"column":58}},"246":{"start":{"line":884,"column":8},"end":{"line":884,"column":27}}},"branchMap":{"1":{"line":226,"type":"if","locations":[{"start":{"line":226,"column":16},"end":{"line":226,"column":16}},{"start":{"line":226,"column":16},"end":{"line":226,"column":16}}]},"2":{"line":261,"type":"if","locations":[{"start":{"line":261,"column":8},"end":{"line":261,"column":8}},{"start":{"line":261,"column":8},"end":{"line":261,"column":8}}]},"3":{"line":283,"type":"if","locations":[{"start":{"line":283,"column":8},"end":{"line":283,"column":8}},{"start":{"line":283,"column":8},"end":{"line":283,"column":8}}]},"4":{"line":301,"type":"if","locations":[{"start":{"line":301,"column":8},"end":{"line":301,"column":8}},{"start":{"line":301,"column":8},"end":{"line":301,"column":8}}]},"5":{"line":328,"type":"cond-expr","locations":[{"start":{"line":328,"column":53},"end":{"line":328,"column":54}},{"start":{"line":328,"column":57},"end":{"line":328,"column":66}}]},"6":{"line":409,"type":"if","locations":[{"start":{"line":409,"column":8},"end":{"line":409,"column":8}},{"start":{"line":409,"column":8},"end":{"line":409,"column":8}}]},"7":{"line":423,"type":"switch","locations":[{"start":{"line":424,"column":12},"end":{"line":426,"column":22}},{"start":{"line":427,"column":12},"end":{"line":429,"column":22}},{"start":{"line":430,"column":12},"end":{"line":432,"column":22}},{"start":{"line":433,"column":12},"end":{"line":434,"column":22}}]},"8":{"line":447,"type":"switch","locations":[{"start":{"line":448,"column":12},"end":{"line":450,"column":22}},{"start":{"line":451,"column":12},"end":{"line":453,"column":22}},{"start":{"line":454,"column":12},"end":{"line":456,"column":22}},{"start":{"line":457,"column":12},"end":{"line":458,"column":22}}]},"9":{"line":470,"type":"if","locations":[{"start":{"line":470,"column":12},"end":{"line":470,"column":12}},{"start":{"line":470,"column":12},"end":{"line":470,"column":12}}]},"10":{"line":491,"type":"binary-expr","locations":[{"start":{"line":491,"column":25},"end":{"line":491,"column":35}},{"start":{"line":491,"column":39},"end":{"line":491,"column":60}}]},"11":{"line":492,"type":"if","locations":[{"start":{"line":492,"column":12},"end":{"line":492,"column":12}},{"start":{"line":492,"column":12},"end":{"line":492,"column":12}}]},"12":{"line":509,"type":"if","locations":[{"start":{"line":509,"column":8},"end":{"line":509,"column":8}},{"start":{"line":509,"column":8},"end":{"line":509,"column":8}}]},"13":{"line":511,"type":"cond-expr","locations":[{"start":{"line":511,"column":52},"end":{"line":511,"column":73}},{"start":{"line":512,"column":16},"end":{"line":512,"column":35}}]},"14":{"line":513,"type":"if","locations":[{"start":{"line":513,"column":12},"end":{"line":513,"column":12}},{"start":{"line":513,"column":12},"end":{"line":513,"column":12}}]},"15":{"line":543,"type":"if","locations":[{"start":{"line":543,"column":8},"end":{"line":543,"column":8}},{"start":{"line":543,"column":8},"end":{"line":543,"column":8}}]},"16":{"line":543,"type":"binary-expr","locations":[{"start":{"line":543,"column":12},"end":{"line":543,"column":45}},{"start":{"line":543,"column":49},"end":{"line":543,"column":74}}]},"17":{"line":549,"type":"if","locations":[{"start":{"line":549,"column":8},"end":{"line":549,"column":8}},{"start":{"line":549,"column":8},"end":{"line":549,"column":8}}]},"18":{"line":549,"type":"binary-expr","locations":[{"start":{"line":549,"column":12},"end":{"line":549,"column":34}},{"start":{"line":549,"column":38},"end":{"line":549,"column":69}}]},"19":{"line":566,"type":"if","locations":[{"start":{"line":566,"column":8},"end":{"line":566,"column":8}},{"start":{"line":566,"column":8},"end":{"line":566,"column":8}}]},"20":{"line":572,"type":"if","locations":[{"start":{"line":572,"column":8},"end":{"line":572,"column":8}},{"start":{"line":572,"column":8},"end":{"line":572,"column":8}}]},"21":{"line":572,"type":"binary-expr","locations":[{"start":{"line":572,"column":12},"end":{"line":572,"column":45}},{"start":{"line":572,"column":49},"end":{"line":572,"column":74}}]},"22":{"line":584,"type":"if","locations":[{"start":{"line":584,"column":8},"end":{"line":584,"column":8}},{"start":{"line":584,"column":8},"end":{"line":584,"column":8}}]},"23":{"line":584,"type":"binary-expr","locations":[{"start":{"line":584,"column":12},"end":{"line":584,"column":45}},{"start":{"line":584,"column":49},"end":{"line":584,"column":74}}]},"24":{"line":598,"type":"if","locations":[{"start":{"line":598,"column":8},"end":{"line":598,"column":8}},{"start":{"line":598,"column":8},"end":{"line":598,"column":8}}]},"25":{"line":602,"type":"if","locations":[{"start":{"line":602,"column":8},"end":{"line":602,"column":8}},{"start":{"line":602,"column":8},"end":{"line":602,"column":8}}]},"26":{"line":602,"type":"binary-expr","locations":[{"start":{"line":602,"column":12},"end":{"line":602,"column":34}},{"start":{"line":602,"column":38},"end":{"line":602,"column":63}}]},"27":{"line":612,"type":"if","locations":[{"start":{"line":612,"column":8},"end":{"line":612,"column":8}},{"start":{"line":612,"column":8},"end":{"line":612,"column":8}}]},"28":{"line":616,"type":"if","locations":[{"start":{"line":616,"column":12},"end":{"line":616,"column":12}},{"start":{"line":616,"column":12},"end":{"line":616,"column":12}}]},"29":{"line":621,"type":"if","locations":[{"start":{"line":621,"column":19},"end":{"line":621,"column":19}},{"start":{"line":621,"column":19},"end":{"line":621,"column":19}}]},"30":{"line":625,"type":"if","locations":[{"start":{"line":625,"column":19},"end":{"line":625,"column":19}},{"start":{"line":625,"column":19},"end":{"line":625,"column":19}}]},"31":{"line":644,"type":"if","locations":[{"start":{"line":644,"column":8},"end":{"line":644,"column":8}},{"start":{"line":644,"column":8},"end":{"line":644,"column":8}}]},"32":{"line":664,"type":"if","locations":[{"start":{"line":664,"column":8},"end":{"line":664,"column":8}},{"start":{"line":664,"column":8},"end":{"line":664,"column":8}}]},"33":{"line":684,"type":"if","locations":[{"start":{"line":684,"column":8},"end":{"line":684,"column":8}},{"start":{"line":684,"column":8},"end":{"line":684,"column":8}}]},"34":{"line":684,"type":"binary-expr","locations":[{"start":{"line":684,"column":12},"end":{"line":684,"column":33}},{"start":{"line":684,"column":37},"end":{"line":684,"column":65}}]},"35":{"line":687,"type":"if","locations":[{"start":{"line":687,"column":8},"end":{"line":687,"column":8}},{"start":{"line":687,"column":8},"end":{"line":687,"column":8}}]},"36":{"line":699,"type":"if","locations":[{"start":{"line":699,"column":8},"end":{"line":699,"column":8}},{"start":{"line":699,"column":8},"end":{"line":699,"column":8}}]},"37":{"line":699,"type":"binary-expr","locations":[{"start":{"line":699,"column":12},"end":{"line":699,"column":36}},{"start":{"line":699,"column":40},"end":{"line":699,"column":71}}]},"38":{"line":704,"type":"if","locations":[{"start":{"line":704,"column":8},"end":{"line":704,"column":8}},{"start":{"line":704,"column":8},"end":{"line":704,"column":8}}]},"39":{"line":722,"type":"if","locations":[{"start":{"line":722,"column":8},"end":{"line":722,"column":8}},{"start":{"line":722,"column":8},"end":{"line":722,"column":8}}]},"40":{"line":738,"type":"if","locations":[{"start":{"line":738,"column":8},"end":{"line":738,"column":8}},{"start":{"line":738,"column":8},"end":{"line":738,"column":8}}]},"41":{"line":738,"type":"binary-expr","locations":[{"start":{"line":738,"column":12},"end":{"line":738,"column":38}},{"start":{"line":738,"column":42},"end":{"line":738,"column":55}}]},"42":{"line":759,"type":"if","locations":[{"start":{"line":759,"column":8},"end":{"line":759,"column":8}},{"start":{"line":759,"column":8},"end":{"line":759,"column":8}}]},"43":{"line":771,"type":"if","locations":[{"start":{"line":771,"column":8},"end":{"line":771,"column":8}},{"start":{"line":771,"column":8},"end":{"line":771,"column":8}}]},"44":{"line":771,"type":"binary-expr","locations":[{"start":{"line":771,"column":12},"end":{"line":771,"column":38}},{"start":{"line":771,"column":42},"end":{"line":771,"column":54}}]},"45":{"line":820,"type":"if","locations":[{"start":{"line":820,"column":8},"end":{"line":820,"column":8}},{"start":{"line":820,"column":8},"end":{"line":820,"column":8}}]},"46":{"line":849,"type":"if","locations":[{"start":{"line":849,"column":8},"end":{"line":849,"column":8}},{"start":{"line":849,"column":8},"end":{"line":849,"column":8}}]},"47":{"line":872,"type":"if","locations":[{"start":{"line":872,"column":8},"end":{"line":872,"column":8}},{"start":{"line":872,"column":8},"end":{"line":872,"column":8}}]}}};
-}
-__cov_mFWw3NCbQt3cD45PAdCnzA = __cov_mFWw3NCbQt3cD45PAdCnzA['/home/travis/build/terrestris/BasiGX/src/view/button/Measure.js'];
-__cov_mFWw3NCbQt3cD45PAdCnzA.s['1']++;Ext.define('BasiGX.view.button.Measure',{extend:'BasiGX.view.button.Base',xtype:'basigx-button-measure',requires:['BasiGX.util.Layer','BasiGX.util.Map','Ext.app.ViewModel'],viewModel:{data:{textline:'Strecke messen',textpoly:'Fläche messen',textangle:'Winkel messen',tooltipLine:'Strecke messen',tooltipPoly:'Fläche messen',tooltipAngle:'Winkel messen',continuePolygonMsg:'Klicken zum Zeichnen der Fläche',continueLineMsg:'Klicken zum Zeichnen der Strecke',continueAngleMsg:'Klicken zum Zeichnen des Winkels',clickToDrawText:'Klicken zum Messen',documentation:'<h2>Messwerkzeug</h2>\u2022 Ein Klick auf den Button '+'aktiviert das Messwerkzeug.<br>\u2022 Klicken Sie anschließend '+'mit der Maus in der Karte, um einen Messpunkt zu '+'erstellen.<br>\u2022 Wiederholen Sie den Vorgang mit beliebig '+'vielen Messpunkten.<br>\u2022 Um den Messvorgang abzuschließen '+'führen Sie einen Doppelklick aus.<br>\u2022 Das Messergebnis '+'wird ihnen in der Karte angezeigt.'}},enableToggle:true,measureVectorLayer:null,drawAction:null,geodesic:true,measureType:'line',sketch:null,helpTooltipElement:null,helpTooltip:null,measureTooltipElement:null,measureTooltip:null,allowOnlyOneDrawing:true,strokeColor:'rgba(255, 0, 0, 0.8)',fillColor:'rgba(255, 0, 0, 0.5)',decimalPlacesInToolTips:2,switchToKmOnLargeValues:true,showMeasureInfoOnClickedPoints:false,eventKeys:{drawstart:null,drawend:null,pointermove:null,click:null},createdTooltipDivs:[],createdTooltipOverlays:[],statics:{CSS_CLASSES:{TOOLTIP:'basigx-measure-tooltip tooltip',TOOLTIP_DYNAMIC:'basigx-measure-tooltip-dynamic tooltip-measure',TOOLTIP_STATIC:'basigx-measure-tooltip-static tooltip-static',toSelector:function(classStr){__cov_mFWw3NCbQt3cD45PAdCnzA.f['1']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['2']++;if(!classStr){__cov_mFWw3NCbQt3cD45PAdCnzA.b['1'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['3']++;Ext.raise('Cannot convert "'+classStr+'" to selector.');}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['1'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['4']++;var dot='.';__cov_mFWw3NCbQt3cD45PAdCnzA.s['5']++;var space=' ';__cov_mFWw3NCbQt3cD45PAdCnzA.s['6']++;var trimmed=classStr.replace(/^\s+/,'').replace(/\s+$/,'').replace(/\s+/g,space);__cov_mFWw3NCbQt3cD45PAdCnzA.s['7']++;return dot+trimmed.split(space).join(dot);}}},constructor:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['2']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['8']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['9']++;var LayerUtil=BasiGX.util.Layer;__cov_mFWw3NCbQt3cD45PAdCnzA.s['10']++;me.callParent(arguments);__cov_mFWw3NCbQt3cD45PAdCnzA.s['11']++;me.map=BasiGX.util.Map.getMapComponent().getMap();__cov_mFWw3NCbQt3cD45PAdCnzA.s['12']++;var btnText=me.btnTextByType();__cov_mFWw3NCbQt3cD45PAdCnzA.s['13']++;var btnTooltip=me.btnTooltipByType();__cov_mFWw3NCbQt3cD45PAdCnzA.s['14']++;me.setBind({text:btnText,tooltip:btnTooltip});__cov_mFWw3NCbQt3cD45PAdCnzA.s['15']++;var nameMeasureLayer=LayerUtil.NAME_MEASURE_LAYER;__cov_mFWw3NCbQt3cD45PAdCnzA.s['16']++;var measureLayer=LayerUtil.getLayerByName(nameMeasureLayer);__cov_mFWw3NCbQt3cD45PAdCnzA.s['17']++;if(Ext.isEmpty(measureLayer)){__cov_mFWw3NCbQt3cD45PAdCnzA.b['2'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['18']++;measureLayer=me.createMeasureLayer();__cov_mFWw3NCbQt3cD45PAdCnzA.s['19']++;measureLayer.set('bp_displayInLayerSwitcher',false);__cov_mFWw3NCbQt3cD45PAdCnzA.s['20']++;me.map.addLayer(measureLayer);}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['2'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['21']++;me.measureVectorLayer=measureLayer;__cov_mFWw3NCbQt3cD45PAdCnzA.s['22']++;me.drawAction=me.drawInteractionByMeasureType();__cov_mFWw3NCbQt3cD45PAdCnzA.s['23']++;me.drawAction.on('change:active',me.onDrawInteractionActiveChange,me);__cov_mFWw3NCbQt3cD45PAdCnzA.s['24']++;me.drawAction.setActive(false);__cov_mFWw3NCbQt3cD45PAdCnzA.s['25']++;me.map.addInteraction(me.drawAction);__cov_mFWw3NCbQt3cD45PAdCnzA.s['26']++;me.on('toggle',me.onBtnToggle,me);},onDrawInteractionActiveChange:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['3']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['27']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['28']++;if(me.drawAction.getActive()){__cov_mFWw3NCbQt3cD45PAdCnzA.b['3'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['29']++;me.createHelpTooltip();__cov_mFWw3NCbQt3cD45PAdCnzA.s['30']++;me.createMeasureTooltip();}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['3'][1]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['31']++;me.removeHelpTooltip();__cov_mFWw3NCbQt3cD45PAdCnzA.s['32']++;me.removeMeasureTooltip();}},onBtnToggle:function(btn,pressed){__cov_mFWw3NCbQt3cD45PAdCnzA.f['4']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['33']++;btn.cleanUp();__cov_mFWw3NCbQt3cD45PAdCnzA.s['34']++;if(pressed){__cov_mFWw3NCbQt3cD45PAdCnzA.b['4'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['35']++;btn.drawAction.setActive(true);__cov_mFWw3NCbQt3cD45PAdCnzA.s['36']++;btn.eventKeys.drawstart=btn.drawAction.on('drawstart',btn.drawStart,btn);__cov_mFWw3NCbQt3cD45PAdCnzA.s['37']++;btn.eventKeys.drawend=btn.drawAction.on('drawend',btn.drawEnd,btn);__cov_mFWw3NCbQt3cD45PAdCnzA.s['38']++;var throttledPointerMove=Ext.Function.createThrottled(btn.pointerMoveHandler,50,btn);__cov_mFWw3NCbQt3cD45PAdCnzA.s['39']++;btn.eventKeys.pointermove=btn.map.on('pointermove',throttledPointerMove);}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['4'][1]++;}},drawInteractionByMeasureType:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['5']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['40']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['41']++;var drawType=me.drawTypeByMeasureType();__cov_mFWw3NCbQt3cD45PAdCnzA.s['42']++;var maxPoints=me.measureType==='angle'?(__cov_mFWw3NCbQt3cD45PAdCnzA.b['5'][0]++,2):(__cov_mFWw3NCbQt3cD45PAdCnzA.b['5'][1]++,undefined);__cov_mFWw3NCbQt3cD45PAdCnzA.s['43']++;var interaction=new ol.interaction.Draw({name:'drawaction',source:me.measureVectorLayer.getSource(),type:drawType,maxPoints:maxPoints,style:new ol.style.Style({fill:new ol.style.Fill({color:me.fillColor}),stroke:new ol.style.Stroke({color:me.strokeColor,lineDash:[10,10],width:2}),image:new ol.style.Circle({radius:5,stroke:new ol.style.Stroke({color:me.strokeColor}),fill:new ol.style.Fill({color:me.fillColor})})}),freehandCondition:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['6']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['44']++;return false;}});__cov_mFWw3NCbQt3cD45PAdCnzA.s['45']++;return interaction;},createMeasureLayer:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['7']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['46']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['47']++;var LayerUtil=BasiGX.util.Layer;__cov_mFWw3NCbQt3cD45PAdCnzA.s['48']++;var nameMeasureLayer=LayerUtil.NAME_MEASURE_LAYER;__cov_mFWw3NCbQt3cD45PAdCnzA.s['49']++;var noLayerSwitcherKey=LayerUtil.KEY_DISPLAY_IN_LAYERSWITCHER;__cov_mFWw3NCbQt3cD45PAdCnzA.s['50']++;var measureLayer=new ol.layer.Vector({name:nameMeasureLayer,source:new ol.source.Vector({features:new ol.Collection()}),style:new ol.style.Style({fill:new ol.style.Fill({color:me.fillColor}),stroke:new ol.style.Stroke({color:me.strokeColor,width:2}),image:new ol.style.Circle({radius:7,fill:new ol.style.Fill({color:me.fillColor})})})});__cov_mFWw3NCbQt3cD45PAdCnzA.s['51']++;measureLayer.set(noLayerSwitcherKey,false);__cov_mFWw3NCbQt3cD45PAdCnzA.s['52']++;return measureLayer;},drawTypeByMeasureType:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['8']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['53']++;var drawType='MultiLineString';__cov_mFWw3NCbQt3cD45PAdCnzA.s['54']++;if(this.measureType==='polygon'){__cov_mFWw3NCbQt3cD45PAdCnzA.b['6'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['55']++;drawType='MultiPolygon';}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['6'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['56']++;return drawType;},btnTextByType:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['9']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['57']++;var btnText;__cov_mFWw3NCbQt3cD45PAdCnzA.s['58']++;switch(this.measureType){case'line':__cov_mFWw3NCbQt3cD45PAdCnzA.b['7'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['59']++;btnText='{textline}';__cov_mFWw3NCbQt3cD45PAdCnzA.s['60']++;break;case'polygon':__cov_mFWw3NCbQt3cD45PAdCnzA.b['7'][1]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['61']++;btnText='{textpoly}';__cov_mFWw3NCbQt3cD45PAdCnzA.s['62']++;break;case'angle':__cov_mFWw3NCbQt3cD45PAdCnzA.b['7'][2]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['63']++;btnText='{textangle}';__cov_mFWw3NCbQt3cD45PAdCnzA.s['64']++;break;default:__cov_mFWw3NCbQt3cD45PAdCnzA.b['7'][3]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['65']++;break;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['66']++;return btnText;},btnTooltipByType:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['10']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['67']++;var btnTooltip;__cov_mFWw3NCbQt3cD45PAdCnzA.s['68']++;switch(this.measureType){case'line':__cov_mFWw3NCbQt3cD45PAdCnzA.b['8'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['69']++;btnTooltip='{tooltipLine}';__cov_mFWw3NCbQt3cD45PAdCnzA.s['70']++;break;case'polygon':__cov_mFWw3NCbQt3cD45PAdCnzA.b['8'][1]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['71']++;btnTooltip='{tooltipPoly}';__cov_mFWw3NCbQt3cD45PAdCnzA.s['72']++;break;case'angle':__cov_mFWw3NCbQt3cD45PAdCnzA.b['8'][2]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['73']++;btnTooltip='{tooltipAngle}';__cov_mFWw3NCbQt3cD45PAdCnzA.s['74']++;break;default:__cov_mFWw3NCbQt3cD45PAdCnzA.b['8'][3]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['75']++;break;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['76']++;return btnTooltip;},cleanUp:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['11']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['77']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['78']++;me.drawAction.setActive(false);__cov_mFWw3NCbQt3cD45PAdCnzA.s['79']++;Ext.iterate(me.eventKeys,function(key,eventKey){__cov_mFWw3NCbQt3cD45PAdCnzA.f['12']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['80']++;if(eventKey){__cov_mFWw3NCbQt3cD45PAdCnzA.b['9'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['81']++;ol.Observable.unByKey(eventKey);}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['9'][1]++;}});__cov_mFWw3NCbQt3cD45PAdCnzA.s['82']++;me.eventKeys={};__cov_mFWw3NCbQt3cD45PAdCnzA.s['83']++;me.cleanUpToolTips();__cov_mFWw3NCbQt3cD45PAdCnzA.s['84']++;me.measureVectorLayer.getSource().clear();},cleanUpToolTips:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['13']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['85']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['86']++;Ext.each(me.createdTooltipOverlays,function(tooltipOverlay){__cov_mFWw3NCbQt3cD45PAdCnzA.f['14']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['87']++;me.map.removeOverlay(tooltipOverlay);});__cov_mFWw3NCbQt3cD45PAdCnzA.s['88']++;me.createdTooltipOverlays=[];__cov_mFWw3NCbQt3cD45PAdCnzA.s['89']++;Ext.each(me.createdTooltipDivs,function(tooltipDiv){__cov_mFWw3NCbQt3cD45PAdCnzA.f['15']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['90']++;var parent=(__cov_mFWw3NCbQt3cD45PAdCnzA.b['10'][0]++,tooltipDiv)&&(__cov_mFWw3NCbQt3cD45PAdCnzA.b['10'][1]++,tooltipDiv.parentNode);__cov_mFWw3NCbQt3cD45PAdCnzA.s['91']++;if(parent){__cov_mFWw3NCbQt3cD45PAdCnzA.b['11'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['92']++;parent.removeChild(tooltipDiv);}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['11'][1]++;}});__cov_mFWw3NCbQt3cD45PAdCnzA.s['93']++;me.createdTooltipDivs=[];},addMeasureStopToolTip:function(evt){__cov_mFWw3NCbQt3cD45PAdCnzA.f['16']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['94']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['95']++;var CSS=BasiGX.view.button.Measure.CSS_CLASSES;__cov_mFWw3NCbQt3cD45PAdCnzA.s['96']++;if(!Ext.isEmpty(me.sketch)){__cov_mFWw3NCbQt3cD45PAdCnzA.b['12'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['97']++;var geom=me.sketch.getGeometry();__cov_mFWw3NCbQt3cD45PAdCnzA.s['98']++;var value=me.measureType==='line'?(__cov_mFWw3NCbQt3cD45PAdCnzA.b['13'][0]++,me.formatLength(geom)):(__cov_mFWw3NCbQt3cD45PAdCnzA.b['13'][1]++,me.formatArea(geom));__cov_mFWw3NCbQt3cD45PAdCnzA.s['99']++;if(parseInt(value,10)>0){__cov_mFWw3NCbQt3cD45PAdCnzA.b['14'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['100']++;var div=Ext.dom.Helper.createDom('<div>');__cov_mFWw3NCbQt3cD45PAdCnzA.s['101']++;div.className=CSS.TOOLTIP+' '+CSS.TOOLTIP_STATIC;__cov_mFWw3NCbQt3cD45PAdCnzA.s['102']++;div.innerHTML=value;__cov_mFWw3NCbQt3cD45PAdCnzA.s['103']++;var tooltip=new ol.Overlay({element:div,offset:[0,-15],positioning:'bottom-center'});__cov_mFWw3NCbQt3cD45PAdCnzA.s['104']++;me.map.addOverlay(tooltip);__cov_mFWw3NCbQt3cD45PAdCnzA.s['105']++;tooltip.setPosition(evt.coordinate);__cov_mFWw3NCbQt3cD45PAdCnzA.s['106']++;me.createdTooltipDivs.push(div);__cov_mFWw3NCbQt3cD45PAdCnzA.s['107']++;me.createdTooltipOverlays.push(tooltip);}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['14'][1]++;}}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['12'][1]++;}},drawStart:function(evt){__cov_mFWw3NCbQt3cD45PAdCnzA.f['17']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['108']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['109']++;var source=me.measureVectorLayer.getSource();__cov_mFWw3NCbQt3cD45PAdCnzA.s['110']++;me.sketch=evt.feature;__cov_mFWw3NCbQt3cD45PAdCnzA.s['111']++;if((__cov_mFWw3NCbQt3cD45PAdCnzA.b['16'][0]++,me.showMeasureInfoOnClickedPoints)&&(__cov_mFWw3NCbQt3cD45PAdCnzA.b['16'][1]++,me.measureType==='line')){__cov_mFWw3NCbQt3cD45PAdCnzA.b['15'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['112']++;me.eventKeys.click=me.map.on('click',me.addMeasureStopToolTip,me);}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['15'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['113']++;if((__cov_mFWw3NCbQt3cD45PAdCnzA.b['18'][0]++,me.allowOnlyOneDrawing)&&(__cov_mFWw3NCbQt3cD45PAdCnzA.b['18'][1]++,source.getFeatures().length>0)){__cov_mFWw3NCbQt3cD45PAdCnzA.b['17'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['114']++;me.cleanUpToolTips();__cov_mFWw3NCbQt3cD45PAdCnzA.s['115']++;me.createMeasureTooltip();__cov_mFWw3NCbQt3cD45PAdCnzA.s['116']++;me.createHelpTooltip();__cov_mFWw3NCbQt3cD45PAdCnzA.s['117']++;source.clear();}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['17'][1]++;}},drawEnd:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['18']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['118']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['119']++;if(me.eventKeys.click){__cov_mFWw3NCbQt3cD45PAdCnzA.b['19'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['120']++;ol.Observable.unByKey(me.eventKeys.click);}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['19'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['121']++;var CSS=BasiGX.view.button.Measure.CSS_CLASSES;__cov_mFWw3NCbQt3cD45PAdCnzA.s['122']++;if((__cov_mFWw3NCbQt3cD45PAdCnzA.b['21'][0]++,me.showMeasureInfoOnClickedPoints)&&(__cov_mFWw3NCbQt3cD45PAdCnzA.b['21'][1]++,me.measureType==='line')){__cov_mFWw3NCbQt3cD45PAdCnzA.b['20'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['123']++;me.removeMeasureTooltip();}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['20'][1]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['124']++;me.measureTooltipElement.className=CSS.TOOLTIP+' '+CSS.TOOLTIP_STATIC;__cov_mFWw3NCbQt3cD45PAdCnzA.s['125']++;me.measureTooltip.setOffset([0,-7]);}__cov_mFWw3NCbQt3cD45PAdCnzA.s['126']++;me.sketch=null;__cov_mFWw3NCbQt3cD45PAdCnzA.s['127']++;if((__cov_mFWw3NCbQt3cD45PAdCnzA.b['23'][0]++,me.showMeasureInfoOnClickedPoints)&&(__cov_mFWw3NCbQt3cD45PAdCnzA.b['23'][1]++,me.measureType==='line')){__cov_mFWw3NCbQt3cD45PAdCnzA.b['22'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['128']++;me.measureTooltipElement=null;__cov_mFWw3NCbQt3cD45PAdCnzA.s['129']++;me.createMeasureTooltip();}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['22'][1]++;}},pointerMoveHandler:function(evt){__cov_mFWw3NCbQt3cD45PAdCnzA.f['19']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['130']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['131']++;if(evt.dragging){__cov_mFWw3NCbQt3cD45PAdCnzA.b['24'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['132']++;return;}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['24'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['133']++;if((__cov_mFWw3NCbQt3cD45PAdCnzA.b['26'][0]++,!me.helpTooltipElement)||(__cov_mFWw3NCbQt3cD45PAdCnzA.b['26'][1]++,!me.measureTooltipElement)){__cov_mFWw3NCbQt3cD45PAdCnzA.b['25'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['134']++;return;}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['25'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['135']++;var helpMsg=me.getViewModel().get('clickToDrawText');__cov_mFWw3NCbQt3cD45PAdCnzA.s['136']++;var helpTooltipCoord=evt.coordinate;__cov_mFWw3NCbQt3cD45PAdCnzA.s['137']++;var measureTooltipCoord=evt.coordinate;__cov_mFWw3NCbQt3cD45PAdCnzA.s['138']++;var measureType=me.measureType;__cov_mFWw3NCbQt3cD45PAdCnzA.s['139']++;if(me.sketch){__cov_mFWw3NCbQt3cD45PAdCnzA.b['27'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['140']++;var output;__cov_mFWw3NCbQt3cD45PAdCnzA.s['141']++;var geom=me.sketch.getGeometry();__cov_mFWw3NCbQt3cD45PAdCnzA.s['142']++;measureTooltipCoord=geom.getLastCoordinate();__cov_mFWw3NCbQt3cD45PAdCnzA.s['143']++;if(measureType==='polygon'){__cov_mFWw3NCbQt3cD45PAdCnzA.b['28'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['144']++;output=me.formatArea(geom);__cov_mFWw3NCbQt3cD45PAdCnzA.s['145']++;helpMsg=me.getViewModel().get('continuePolygonMsg');__cov_mFWw3NCbQt3cD45PAdCnzA.s['146']++;measureTooltipCoord=geom.getInteriorPoint().getCoordinates();}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['28'][1]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['147']++;if(measureType==='line'){__cov_mFWw3NCbQt3cD45PAdCnzA.b['29'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['148']++;output=me.formatLength(geom);__cov_mFWw3NCbQt3cD45PAdCnzA.s['149']++;helpMsg=me.getViewModel().get('continueLineMsg');__cov_mFWw3NCbQt3cD45PAdCnzA.s['150']++;measureTooltipCoord=geom.getLastCoordinate();}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['29'][1]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['151']++;if(measureType==='angle'){__cov_mFWw3NCbQt3cD45PAdCnzA.b['30'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['152']++;output=me.formatAngle(geom);__cov_mFWw3NCbQt3cD45PAdCnzA.s['153']++;helpMsg=me.getViewModel().get('continueAngleMsg');}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['30'][1]++;}}}__cov_mFWw3NCbQt3cD45PAdCnzA.s['154']++;me.measureTooltipElement.innerHTML=output;__cov_mFWw3NCbQt3cD45PAdCnzA.s['155']++;me.measureTooltip.setPosition(measureTooltipCoord);}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['27'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['156']++;me.helpTooltipElement.innerHTML=helpMsg;__cov_mFWw3NCbQt3cD45PAdCnzA.s['157']++;me.helpTooltip.setPosition(helpTooltipCoord);},createHelpTooltip:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['20']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['158']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['159']++;var CSS=BasiGX.view.button.Measure.CSS_CLASSES;__cov_mFWw3NCbQt3cD45PAdCnzA.s['160']++;if(me.helpTooltipElement){__cov_mFWw3NCbQt3cD45PAdCnzA.b['31'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['161']++;return;}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['31'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['162']++;me.helpTooltipElement=Ext.dom.Helper.createDom('<div>');__cov_mFWw3NCbQt3cD45PAdCnzA.s['163']++;me.helpTooltipElement.className=CSS.TOOLTIP;__cov_mFWw3NCbQt3cD45PAdCnzA.s['164']++;me.helpTooltip=new ol.Overlay({element:me.helpTooltipElement,offset:[15,0],positioning:'center-left'});__cov_mFWw3NCbQt3cD45PAdCnzA.s['165']++;me.map.addOverlay(me.helpTooltip);},createMeasureTooltip:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['21']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['166']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['167']++;var CSS=BasiGX.view.button.Measure.CSS_CLASSES;__cov_mFWw3NCbQt3cD45PAdCnzA.s['168']++;if(me.measureTooltipElement){__cov_mFWw3NCbQt3cD45PAdCnzA.b['32'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['169']++;return;}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['32'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['170']++;me.measureTooltipElement=Ext.dom.Helper.createDom('<div>');__cov_mFWw3NCbQt3cD45PAdCnzA.s['171']++;me.measureTooltipElement.className=CSS.TOOLTIP+' '+CSS.TOOLTIP_DYNAMIC;__cov_mFWw3NCbQt3cD45PAdCnzA.s['172']++;me.measureTooltip=new ol.Overlay({element:me.measureTooltipElement,offset:[0,-15],positioning:'bottom-center'});__cov_mFWw3NCbQt3cD45PAdCnzA.s['173']++;me.map.addOverlay(me.measureTooltip);},removeHelpTooltip:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['22']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['174']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['175']++;if((__cov_mFWw3NCbQt3cD45PAdCnzA.b['34'][0]++,me.helpTooltipElement)&&(__cov_mFWw3NCbQt3cD45PAdCnzA.b['34'][1]++,me.helpTooltipElement.parent)){__cov_mFWw3NCbQt3cD45PAdCnzA.b['33'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['176']++;me.helpTooltipElement.parent.removeChild(me.helpTooltipElement);}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['33'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['177']++;if(me.helpTooltip){__cov_mFWw3NCbQt3cD45PAdCnzA.b['35'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['178']++;me.map.removeOverlay(me.helpTooltip);}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['35'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['179']++;me.helpTooltipElement=null;__cov_mFWw3NCbQt3cD45PAdCnzA.s['180']++;me.helpTooltip=null;},removeMeasureTooltip:function(){__cov_mFWw3NCbQt3cD45PAdCnzA.f['23']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['181']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['182']++;if((__cov_mFWw3NCbQt3cD45PAdCnzA.b['37'][0]++,me.measureTooltipElement)&&(__cov_mFWw3NCbQt3cD45PAdCnzA.b['37'][1]++,me.measureTooltipElement.parent)){__cov_mFWw3NCbQt3cD45PAdCnzA.b['36'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['183']++;me.measureTooltipElement.parent.removeChild(me.measureTooltipElement);}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['36'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['184']++;if(me.measureTooltip){__cov_mFWw3NCbQt3cD45PAdCnzA.b['38'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['185']++;me.map.removeOverlay(me.measureTooltip);}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['38'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['186']++;me.measureTooltipElement=null;__cov_mFWw3NCbQt3cD45PAdCnzA.s['187']++;me.measureTooltip=null;},formatLength:function(line){__cov_mFWw3NCbQt3cD45PAdCnzA.f['24']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['188']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['189']++;var decimalHelper=Math.pow(10,me.decimalPlacesInToolTips);__cov_mFWw3NCbQt3cD45PAdCnzA.s['190']++;var length;__cov_mFWw3NCbQt3cD45PAdCnzA.s['191']++;if(me.geodesic){__cov_mFWw3NCbQt3cD45PAdCnzA.b['39'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['192']++;var wgs84Sphere=new ol.Sphere(6378137);__cov_mFWw3NCbQt3cD45PAdCnzA.s['193']++;var coordinates=line.getCoordinates();__cov_mFWw3NCbQt3cD45PAdCnzA.s['194']++;length=0;__cov_mFWw3NCbQt3cD45PAdCnzA.s['195']++;var sourceProj=me.map.getView().getProjection();__cov_mFWw3NCbQt3cD45PAdCnzA.s['196']++;for(var i=0,ii=coordinates.length-1;i<ii;++i){__cov_mFWw3NCbQt3cD45PAdCnzA.s['197']++;var c1=ol.proj.transform(coordinates[i],sourceProj,'EPSG:4326');__cov_mFWw3NCbQt3cD45PAdCnzA.s['198']++;var c2=ol.proj.transform(coordinates[i+1],sourceProj,'EPSG:4326');__cov_mFWw3NCbQt3cD45PAdCnzA.s['199']++;length+=wgs84Sphere.haversineDistance(c1,c2);}}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['39'][1]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['200']++;length=Math.round(line.getLength()*100)/100;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['201']++;var output;__cov_mFWw3NCbQt3cD45PAdCnzA.s['202']++;if((__cov_mFWw3NCbQt3cD45PAdCnzA.b['41'][0]++,me.switchToKmOnLargeValues)&&(__cov_mFWw3NCbQt3cD45PAdCnzA.b['41'][1]++,length>1000)){__cov_mFWw3NCbQt3cD45PAdCnzA.b['40'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['203']++;output=Math.round(length/1000*decimalHelper)/decimalHelper+' '+'km';}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['40'][1]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['204']++;output=Math.round(length*decimalHelper)/decimalHelper+' m';}__cov_mFWw3NCbQt3cD45PAdCnzA.s['205']++;return output;},formatArea:function(polygon){__cov_mFWw3NCbQt3cD45PAdCnzA.f['25']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['206']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['207']++;var decimalHelper=Math.pow(10,me.decimalPlacesInToolTips);__cov_mFWw3NCbQt3cD45PAdCnzA.s['208']++;var area;__cov_mFWw3NCbQt3cD45PAdCnzA.s['209']++;if(me.geodesic){__cov_mFWw3NCbQt3cD45PAdCnzA.b['42'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['210']++;var wgs84Sphere=new ol.Sphere(6378137);__cov_mFWw3NCbQt3cD45PAdCnzA.s['211']++;var sourceProj=me.map.getView().getProjection();__cov_mFWw3NCbQt3cD45PAdCnzA.s['212']++;var geom=polygon.clone().transform(sourceProj,'EPSG:4326');__cov_mFWw3NCbQt3cD45PAdCnzA.s['213']++;var coordinates=geom.getLinearRing(0).getCoordinates();__cov_mFWw3NCbQt3cD45PAdCnzA.s['214']++;area=Math.abs(wgs84Sphere.geodesicArea(coordinates));}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['42'][1]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['215']++;area=polygon.getArea();}__cov_mFWw3NCbQt3cD45PAdCnzA.s['216']++;var output;__cov_mFWw3NCbQt3cD45PAdCnzA.s['217']++;if((__cov_mFWw3NCbQt3cD45PAdCnzA.b['44'][0]++,me.switchToKmOnLargeValues)&&(__cov_mFWw3NCbQt3cD45PAdCnzA.b['44'][1]++,area>10000)){__cov_mFWw3NCbQt3cD45PAdCnzA.b['43'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['218']++;output=Math.round(area/1000000*decimalHelper)/decimalHelper+' km<sup>2</sup>';}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['43'][1]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['219']++;output=Math.round(area*decimalHelper)/decimalHelper+' '+'m<sup>2</sup>';}__cov_mFWw3NCbQt3cD45PAdCnzA.s['220']++;return output;},angle:function(start,end){__cov_mFWw3NCbQt3cD45PAdCnzA.f['26']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['221']++;var dx=start[0]-end[0];__cov_mFWw3NCbQt3cD45PAdCnzA.s['222']++;var dy=start[1]-end[1];__cov_mFWw3NCbQt3cD45PAdCnzA.s['223']++;var theta=Math.atan2(dy,dx);__cov_mFWw3NCbQt3cD45PAdCnzA.s['224']++;theta*=180/Math.PI;__cov_mFWw3NCbQt3cD45PAdCnzA.s['225']++;return theta;},angle360:function(start,end){__cov_mFWw3NCbQt3cD45PAdCnzA.f['27']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['226']++;var theta=this.angle(start,end);__cov_mFWw3NCbQt3cD45PAdCnzA.s['227']++;if(theta<0){__cov_mFWw3NCbQt3cD45PAdCnzA.b['45'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['228']++;theta=360+theta;}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['45'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['229']++;return theta;},makeClockwise:function(angle360){__cov_mFWw3NCbQt3cD45PAdCnzA.f['28']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['230']++;return 360-angle360;},makeZeroDegreesAtNorth:function(angle360){__cov_mFWw3NCbQt3cD45PAdCnzA.f['29']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['231']++;var corrected=angle360+90;__cov_mFWw3NCbQt3cD45PAdCnzA.s['232']++;if(corrected>360){__cov_mFWw3NCbQt3cD45PAdCnzA.b['46'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['233']++;corrected=corrected-360;}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['46'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['234']++;return corrected;},formatAngle:function(line){__cov_mFWw3NCbQt3cD45PAdCnzA.f['30']++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['235']++;var me=this;__cov_mFWw3NCbQt3cD45PAdCnzA.s['236']++;var coords=line.getCoordinates();__cov_mFWw3NCbQt3cD45PAdCnzA.s['237']++;var numCoords=coords.length;__cov_mFWw3NCbQt3cD45PAdCnzA.s['238']++;if(numCoords<2){__cov_mFWw3NCbQt3cD45PAdCnzA.b['47'][0]++;__cov_mFWw3NCbQt3cD45PAdCnzA.s['239']++;return'';}else{__cov_mFWw3NCbQt3cD45PAdCnzA.b['47'][1]++;}__cov_mFWw3NCbQt3cD45PAdCnzA.s['240']++;var lastPoint=coords[numCoords-1];__cov_mFWw3NCbQt3cD45PAdCnzA.s['241']++;var prevPoint=coords[numCoords-2];__cov_mFWw3NCbQt3cD45PAdCnzA.s['242']++;var angle=me.angle360(prevPoint,lastPoint);__cov_mFWw3NCbQt3cD45PAdCnzA.s['243']++;angle=me.makeZeroDegreesAtNorth(angle);__cov_mFWw3NCbQt3cD45PAdCnzA.s['244']++;angle=me.makeClockwise(angle);__cov_mFWw3NCbQt3cD45PAdCnzA.s['245']++;angle=angle.toFixed(me.decimalPlacesInToolTips);__cov_mFWw3NCbQt3cD45PAdCnzA.s['246']++;return angle+'\xB0';}});
+    requires: [
+        'BasiGX.util.Layer',
+        'BasiGX.util.Map',
+        'Ext.app.ViewModel'
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            textline: 'Strecke messen',
+            textpoly: 'Fläche messen',
+            textangle: 'Winkel messen',
+            tooltipLine: 'Strecke messen',
+            tooltipPoly: 'Fläche messen',
+            tooltipAngle: 'Winkel messen',
+            continuePolygonMsg: 'Klicken zum Zeichnen der Fläche',
+            continueLineMsg: 'Klicken zum Zeichnen der Strecke',
+            continueAngleMsg: 'Klicken zum Zeichnen des Winkels',
+            clickToDrawText: 'Klicken zum Messen',
+            documentation: '<h2>Messwerkzeug</h2>• Ein Klick auf den Button ' +
+                'aktiviert das Messwerkzeug.<br>• Klicken Sie anschließend ' +
+                'mit der Maus in der Karte, um einen Messpunkt zu ' +
+                'erstellen.<br>• Wiederholen Sie den Vorgang mit beliebig ' +
+                'vielen Messpunkten.<br>• Um den Messvorgang abzuschließen ' +
+                'führen Sie einen Doppelklick aus.<br>• Das Messergebnis ' +
+                'wird ihnen in der Karte angezeigt.'
+        }
+    },
+
+    /**
+     *
+     */
+    enableToggle: true,
+
+    /**
+     *
+     */
+    measureVectorLayer: null,
+
+    /**
+     *
+     */
+    drawAction: null,
+
+    /**
+     *
+     */
+    geodesic: true,
+
+    /**
+     *
+     */
+    measureType: 'line',
+
+    /**
+     * Currently drawn feature.
+     *
+     * @type {ol.Feature}
+     */
+    sketch: null,
+
+    /**
+     * The help tooltip element.
+     *
+     * @type {Element}
+     */
+    helpTooltipElement: null,
+
+    /**
+     * Overlay to show the help messages.
+     *
+     * @type {ol.Overlay}
+     */
+    helpTooltip: null,
+
+    /**
+     * The measure tooltip element.
+     *
+     * @type {Element}
+     */
+    measureTooltipElement: null,
+
+    /**
+     * Overlay to show the measurement.
+     *
+     * @type {ol.Overlay}
+     */
+    measureTooltip: null,
+
+    /**
+     * Used to allow / disallow multiple drawings at a time on the map
+     */
+    allowOnlyOneDrawing: true,
+
+    /**
+     *
+     */
+    strokeColor: 'rgba(255, 0, 0, 0.8)',
+
+    /**
+     *
+     */
+    fillColor: 'rgba(255, 0, 0, 0.5)',
+
+    /**
+     * how many decimal places will be allowed for the measure tooltips
+     */
+    decimalPlacesInToolTips: 2,
+
+    /**
+     * Determine if a area / line greater than 10000 should be switched to km
+     * instead of m in popups.
+     */
+    switchToKmOnLargeValues: true,
+
+    /**
+     * Determines if a marker with current measurement should be shown every
+     * time the user clicks while drawing
+     */
+    showMeasureInfoOnClickedPoints: false,
+
+    /**
+     * An object holding keyed `ol.EventsKey` instances returned by the `on`
+     * method of `ol.Observable`. These keys are used to unbind temporary
+     * listeners on events of the `ol.interaction.Draw` or `ol.Map`. The keys
+     * are the names of the events on the various objects. The `click` key is
+     * not always bound, but only for certain #measureType values.
+     *
+     * In #cleanUp, we unbind all events we have bound so as to not leak
+     * memory, and to ensure we have no concurring listeners being active at a
+     * time (E.g. when multiple measure buttons are in an application).
+     *
+     * @type {Object}
+     */
+    eventKeys: {
+        drawstart: null,
+        drawend: null,
+        pointermove: null,
+        click: null
+    },
+
+    /**
+     * An array of created divs we use for the tooltips. Used to eventually
+     * clean up everything we added.
+     *
+     * @type{Array<HTMLDivElement>}
+     */
+    createdTooltipDivs: [],
+
+    /**
+     * An array of created overlays we use for the tooltips. Used to eventually
+     * clean up everything we added.
+     *
+     * @type{Array<ol.Overlay>}
+     */
+    createdTooltipOverlays: [],
+
+    statics: {
+
+        /**
+         * CSS classes we'll assign to the popups from measuring. use these to
+         * style the text of the popups / overlays.
+         */
+        CSS_CLASSES: {
+
+            /**
+             * Every tooltip will have these classes. The unprefixed 'tooltip'
+             * is kept for backwards compatibility only and should not be used
+             * anymore for styling.
+             */
+            TOOLTIP: 'basigx-measure-tooltip tooltip',
+
+            /**
+             * Measurement tooltips with the everchanging values will have these
+             * classes. The unprefixed 'tooltip-measure' is kept for backwards
+             * compatibility only and should not be used anymore for styling.
+             */
+            TOOLTIP_DYNAMIC: 'basigx-measure-tooltip-dynamic tooltip-measure',
+
+            /**
+             * The tooltips for finished measurements will have these classes.
+             * The unprefixed 'tooltip-static' is kept for backwards
+             * compatibility only and should not be used anymore for styling.
+             */
+            TOOLTIP_STATIC: 'basigx-measure-tooltip-static tooltip-static',
+
+            /**
+             * A utility method that turns the passed space separated CSS class
+             * names into a selector.
+             *
+             *     BasiGX.view.button.Measure.CSS_CLASSES.toSelector('foo bar');
+             *     // returns '.foo.bar'
+             *
+             * @param {String} classStr The space separated names of classes.
+             * @return {String} A selector that can be used to query the DOM.
+             */
+            toSelector: function(classStr) {
+                if (!classStr) {
+                    Ext.raise('Cannot convert "' + classStr + '" to selector.');
+                }
+                var dot = '.';
+                var space = ' ';
+                var trimmed = classStr
+                    .replace(/^\s+/, '') // leading whitespace
+                    .replace(/\s+$/, '') // trailing whitespace
+                    .replace(/\s+/g, space); // multiple spaces to one
+                return dot + trimmed.split(space).join(dot);
+            }
+        }
+    },
+
+    /**
+     *
+     */
+    constructor: function() {
+        var me = this;
+        var LayerUtil = BasiGX.util.Layer;
+
+        me.callParent(arguments);
+
+        me.map = BasiGX.util.Map.getMapComponent().getMap();
+
+        var btnText = me.btnTextByType();
+        var btnTooltip = me.btnTooltipByType();
+        me.setBind({
+            text: btnText,
+            tooltip: btnTooltip
+        });
+
+        var nameMeasureLayer = LayerUtil.NAME_MEASURE_LAYER;
+        var measureLayer = LayerUtil.getLayerByName(nameMeasureLayer);
+
+        if (Ext.isEmpty(measureLayer)) {
+            measureLayer = me.createMeasureLayer();
+            measureLayer.set('bp_displayInLayerSwitcher', false);
+            me.map.addLayer(measureLayer);
+        }
+
+        me.measureVectorLayer = measureLayer;
+
+        me.drawAction = me.drawInteractionByMeasureType();
+        me.drawAction.on('change:active', me.onDrawInteractionActiveChange, me);
+
+        me.drawAction.setActive(false);
+        me.map.addInteraction(me.drawAction);
+
+        me.on('toggle', me.onBtnToggle, me);
+    },
+
+    /**
+     *
+     */
+    onDrawInteractionActiveChange: function() {
+        var me = this;
+        if (me.drawAction.getActive()) {
+            me.createHelpTooltip();
+            me.createMeasureTooltip();
+        } else {
+            me.removeHelpTooltip();
+            me.removeMeasureTooltip();
+        }
+    },
+
+    /**
+     * Called when the button is toggled, this method ensures that everything
+     * is cleaned up when unpressed, and that measuring can start when pressed.
+     *
+     * @param {Ext.Button} btn The measure button itself.
+     * @param {Boolean} pressed Whether the button is now pressed or not.
+     */
+    onBtnToggle: function(btn, pressed) {
+        btn.cleanUp();
+        if (pressed) {
+            btn.drawAction.setActive(true);
+            btn.eventKeys.drawstart = btn.drawAction.on(
+                'drawstart', btn.drawStart, btn
+            );
+            btn.eventKeys.drawend = btn.drawAction.on(
+                'drawend', btn.drawEnd, btn
+            );
+            var throttledPointerMove = Ext.Function.createThrottled(
+                btn.pointerMoveHandler, 50, btn
+            );
+            btn.eventKeys.pointermove = btn.map.on(
+                'pointermove', throttledPointerMove
+            );
+        }
+    },
+
+    /**
+     * Creates a correctly configured OpenLayers draw interaction depending on
+     * the configured #measureType.
+     *
+     * @return {ol.interaction.Draw} The created interaction, which is not yet
+     *     added to the map.
+     */
+    drawInteractionByMeasureType: function() {
+        var me = this;
+        var drawType = me.drawTypeByMeasureType();
+        var maxPoints = me.measureType === 'angle' ? 2 : undefined;
+        var interaction = new ol.interaction.Draw({
+            name: 'drawaction',
+            source: me.measureVectorLayer.getSource(),
+            type: drawType,
+            maxPoints: maxPoints,
+            style: new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: me.fillColor
+                }),
+                stroke: new ol.style.Stroke({
+                    color: me.strokeColor,
+                    lineDash: [10, 10],
+                    width: 2
+                }),
+                image: new ol.style.Circle({
+                    radius: 5,
+                    stroke: new ol.style.Stroke({
+                        color: me.strokeColor
+                    }),
+                    fill: new ol.style.Fill({
+                        color: me.fillColor
+                    })
+                })
+            }),
+            freehandCondition: function() {
+                return false;
+            }
+        });
+        return interaction;
+    },
+
+    /**
+     * Creates a correctly setup vector layer on which the draw interaction will
+     * work.
+     *
+     * @return {ol.layer.Vector} The layer on which the draw interaction will
+     *     work.
+     */
+    createMeasureLayer: function() {
+        var me = this;
+        var LayerUtil = BasiGX.util.Layer;
+        var nameMeasureLayer = LayerUtil.NAME_MEASURE_LAYER;
+        var noLayerSwitcherKey = LayerUtil.KEY_DISPLAY_IN_LAYERSWITCHER;
+
+        var measureLayer = new ol.layer.Vector({
+            name: nameMeasureLayer,
+            source: new ol.source.Vector({
+                features: new ol.Collection()
+            }),
+            style: new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: me.fillColor
+                }),
+                stroke: new ol.style.Stroke({
+                    color: me.strokeColor,
+                    width: 2
+                }),
+                image: new ol.style.Circle({
+                    radius: 7,
+                    fill: new ol.style.Fill({
+                        color: me.fillColor
+                    })
+                })
+            })
+        });
+        // Set our internal flag to filter this layer out of the tree / legend
+        measureLayer.set(noLayerSwitcherKey, false);
+
+        return measureLayer;
+    },
+
+    /**
+     * Examines the #measureType property of the this button an returns the
+     * type to use for drawing vectors, either `'MultiLineString'` or
+     * `'MultiPolygon'`.
+     *
+     * @return {String} The type to draw.
+     */
+    drawTypeByMeasureType: function() {
+        var drawType = 'MultiLineString';
+        if (this.measureType === 'polygon') {
+            drawType = 'MultiPolygon';
+        }
+        return drawType;
+    },
+
+    /**
+     * Determines a viewmodel template to use for button texts depending on the
+     * configured #measureType.
+     *
+     * @return {String} The viewmodel template to use.
+     */
+    btnTextByType: function() {
+        var btnText;
+        switch (this.measureType) {
+            case 'line':
+                btnText = '{textline}';
+                break;
+            case 'polygon':
+                btnText = '{textpoly}';
+                break;
+            case 'angle':
+                btnText = '{textangle}';
+                break;
+            default:
+                break;
+        }
+        return btnText;
+    },
+
+    /**
+     * Determines a viewmodel template to use for button btnTooltips depending
+     * on the configured #measureType.
+     *
+     * @return {String} The viewmodel template to use.
+     */
+    btnTooltipByType: function() {
+        var btnTooltip;
+        switch (this.measureType) {
+            case 'line':
+                btnTooltip = '{tooltipLine}';
+                break;
+            case 'polygon':
+                btnTooltip = '{tooltipPoly}';
+                break;
+            case 'angle':
+                btnTooltip = '{tooltipAngle}';
+                break;
+            default:
+                break;
+        }
+        return btnTooltip;
+    },
+
+    /**
+     * Cleans up artifacts from measuring when the button is unpressed.
+     */
+    cleanUp: function() {
+        var me = this;
+        me.drawAction.setActive(false);
+        Ext.iterate(me.eventKeys, function(key, eventKey) {
+            if (eventKey) {
+                ol.Observable.unByKey(eventKey);
+            }
+        });
+        me.eventKeys = {};
+        me.cleanUpToolTips();
+        me.measureVectorLayer.getSource().clear();
+    },
+
+    /**
+     * Cleans up tooltips when the button is unpressed.
+     */
+    cleanUpToolTips: function() {
+        var me = this;
+
+        Ext.each(me.createdTooltipOverlays, function(tooltipOverlay) {
+            me.map.removeOverlay(tooltipOverlay);
+        });
+        me.createdTooltipOverlays = [];
+
+        Ext.each(me.createdTooltipDivs, function(tooltipDiv) {
+            var parent = tooltipDiv && tooltipDiv.parentNode;
+            if (parent) {
+                parent.removeChild(tooltipDiv);
+            }
+        });
+        me.createdTooltipDivs = [];
+    },
+
+    /**
+     * Adds a tooltip on click where a measuring stop occured.
+     *
+     * @param {ol.MapBrowserEvent} evt The event which contains the coordinate
+     *     for the tooltip.
+     */
+    addMeasureStopToolTip: function(evt) {
+        var me = this;
+        var CSS = BasiGX.view.button.Measure.CSS_CLASSES;
+
+        if (!Ext.isEmpty(me.sketch)) {
+            var geom = me.sketch.getGeometry();
+            var value = me.measureType === 'line' ? me.formatLength(geom) :
+                me.formatArea(geom);
+            if (parseInt(value, 10) > 0) {
+                var div = Ext.dom.Helper.createDom('<div>');
+                div.className = CSS.TOOLTIP + ' ' + CSS.TOOLTIP_STATIC;
+                div.innerHTML = value;
+                var tooltip = new ol.Overlay({
+                    element: div,
+                    offset: [0, -15],
+                    positioning: 'bottom-center'
+                });
+                me.map.addOverlay(tooltip);
+                tooltip.setPosition(evt.coordinate);
+
+                me.createdTooltipDivs.push(div);
+                me.createdTooltipOverlays.push(tooltip);
+            }
+        }
+    },
+
+    /**
+     * Sets up listeners whenever the drawing of a measurement sketch is
+     * started.
+     *
+     * @param {ol.interaction.Draw.Event} evt The event which contains the
+     *     feature we are drawing.
+     */
+    drawStart: function(evt) {
+        var me = this;
+        var source = me.measureVectorLayer.getSource();
+        me.sketch = evt.feature;
+
+        if (me.showMeasureInfoOnClickedPoints && me.measureType === 'line') {
+            me.eventKeys.click = me.map.on(
+                'click', me.addMeasureStopToolTip, me
+            );
+        }
+
+        if (me.allowOnlyOneDrawing && source.getFeatures().length > 0) {
+            me.cleanUpToolTips();
+            me.createMeasureTooltip();
+            me.createHelpTooltip();
+            source.clear();
+        }
+    },
+
+    /**
+     * Called whenever measuring stops, this method draws static tooltips with
+     * the result onto the map canvas and unregisters various listeners.
+     *
+     * TODO We should remove the commented code.
+     */
+    drawEnd: function() {
+        var me = this;
+
+        if (me.eventKeys.click) {
+            ol.Observable.unByKey(me.eventKeys.click);
+        }
+
+        // Fix doubled label for lastPoint of line
+        var CSS = BasiGX.view.button.Measure.CSS_CLASSES;
+        if (me.showMeasureInfoOnClickedPoints && me.measureType === 'line') {
+            me.removeMeasureTooltip();
+        } else {
+            me.measureTooltipElement.className = CSS.TOOLTIP +
+                ' ' + CSS.TOOLTIP_STATIC;
+            me.measureTooltip.setOffset([0, -7]);
+        }
+
+        // unset sketch
+        me.sketch = null;
+
+        // Fix doubled label for lastPoint of line
+        if (me.showMeasureInfoOnClickedPoints && me.measureType === 'line') {
+            me.measureTooltipElement = null;
+            me.createMeasureTooltip();
+        }
+    },
+
+    /**
+     * Handle pointer move by updating and repositioning the dynamic tooltip.
+     *
+     * @param {ol.MapBrowserEvent} evt The event from the pointermove.
+     */
+    pointerMoveHandler: function(evt) {
+        var me = this;
+
+        if (evt.dragging) {
+            return;
+        }
+
+        if (!me.helpTooltipElement || !me.measureTooltipElement) {
+            return;
+        }
+
+        var helpMsg = me.getViewModel().get('clickToDrawText');
+        var helpTooltipCoord = evt.coordinate;
+        var measureTooltipCoord = evt.coordinate;
+
+        var measureType = me.measureType;
+
+        if (me.sketch) {
+            var output;
+            var geom = me.sketch.getGeometry();
+            measureTooltipCoord = geom.getLastCoordinate();
+            if (measureType === 'polygon') {
+                output = me.formatArea(geom);
+                helpMsg = me.getViewModel().get('continuePolygonMsg');
+                // attach area at interior point
+                measureTooltipCoord = geom.getInteriorPoint().getCoordinates();
+            } else if (measureType === 'line') {
+                output = me.formatLength(geom);
+                helpMsg = me.getViewModel().get('continueLineMsg');
+                measureTooltipCoord = geom.getLastCoordinate();
+            } else if (measureType === 'angle') {
+                output = me.formatAngle(geom);
+                helpMsg = me.getViewModel().get('continueAngleMsg');
+            }
+            me.measureTooltipElement.innerHTML = output;
+            me.measureTooltip.setPosition(measureTooltipCoord);
+        }
+
+        me.helpTooltipElement.innerHTML = helpMsg;
+        me.helpTooltip.setPosition(helpTooltipCoord);
+    },
+
+    /**
+     * Creates a new help tooltip as `ol.Overlay`.
+     */
+    createHelpTooltip: function() {
+        var me = this;
+        var CSS = BasiGX.view.button.Measure.CSS_CLASSES;
+
+        if (me.helpTooltipElement) {
+            return;
+        }
+
+        me.helpTooltipElement = Ext.dom.Helper.createDom('<div>');
+        me.helpTooltipElement.className = CSS.TOOLTIP;
+        me.helpTooltip = new ol.Overlay({
+            element: me.helpTooltipElement,
+            offset: [15, 0],
+            positioning: 'center-left'
+        });
+        me.map.addOverlay(me.helpTooltip);
+    },
+
+    /**
+     * Creates a new measure tooltip as `ol.Overlay`.
+     */
+    createMeasureTooltip: function() {
+        var me = this;
+        var CSS = BasiGX.view.button.Measure.CSS_CLASSES;
+        if (me.measureTooltipElement) {
+            return;
+        }
+
+        me.measureTooltipElement = Ext.dom.Helper.createDom('<div>');
+        me.measureTooltipElement.className = CSS.TOOLTIP +
+            ' ' + CSS.TOOLTIP_DYNAMIC;
+        me.measureTooltip = new ol.Overlay({
+            element: me.measureTooltipElement,
+            offset: [0, -15],
+            positioning: 'bottom-center'
+        });
+        me.map.addOverlay(me.measureTooltip);
+    },
+
+    /**
+     *
+     */
+    removeHelpTooltip: function() {
+        var me = this;
+        if (me.helpTooltipElement && me.helpTooltipElement.parent) {
+            me.helpTooltipElement.parent.removeChild(me.helpTooltipElement);
+        }
+        if (me.helpTooltip) {
+            me.map.removeOverlay(me.helpTooltip);
+        }
+        me.helpTooltipElement = null;
+        me.helpTooltip = null;
+    },
+
+    /**
+     *
+     */
+    removeMeasureTooltip: function() {
+        var me = this;
+        if (me.measureTooltipElement && me.measureTooltipElement.parent) {
+            me.measureTooltipElement.parent.removeChild(
+                me.measureTooltipElement
+            );
+        }
+        if (me.measureTooltip) {
+            me.map.removeOverlay(me.measureTooltip);
+        }
+        me.measureTooltipElement = null;
+        me.measureTooltip = null;
+    },
+
+    /**
+     * Format length output for the tooltip.
+     *
+     * @param {ol.geom.MultiLineString} line The drawn line.
+     * @return {String} The formatted length of the line.
+     */
+    formatLength: function(line) {
+        var me = this;
+        var decimalHelper = Math.pow(10, me.decimalPlacesInToolTips);
+        var length;
+
+        if (me.geodesic) {
+            var wgs84Sphere = new ol.Sphere(6378137);
+            var coordinates = line.getCoordinates();
+            length = 0;
+            var sourceProj = me.map.getView().getProjection();
+            for (var i = 0, ii = coordinates.length - 1; i < ii; ++i) {
+                var c1 = ol.proj.transform(
+                    coordinates[i], sourceProj, 'EPSG:4326');
+                var c2 = ol.proj.transform(
+                    coordinates[i + 1], sourceProj, 'EPSG:4326');
+                length += wgs84Sphere.haversineDistance(c1, c2);
+            }
+        } else {
+            length = Math.round(line.getLength() * 100) / 100;
+        }
+        var output;
+        if (me.switchToKmOnLargeValues && length > 1000) {
+            output = (Math.round(length / 1000 * decimalHelper) /
+                decimalHelper) + ' ' + 'km';
+        } else {
+            output = (Math.round(length * decimalHelper) / decimalHelper) +
+                ' m';
+        }
+        return output;
+    },
+
+    /**
+     * Format length output for the tooltip.
+     *
+     * @param {ol.geom.Polygon} polygon The drawn polygon.
+     * @return {String} The formatted area of the polygon.
+     */
+    formatArea: function(polygon) {
+        var me = this;
+        var decimalHelper = Math.pow(10, me.decimalPlacesInToolTips);
+        var area;
+
+        if (me.geodesic) {
+            var wgs84Sphere = new ol.Sphere(6378137);
+            var sourceProj = me.map.getView().getProjection();
+            var geom = (polygon.clone().transform(
+                sourceProj, 'EPSG:4326'));
+            var coordinates = geom.getLinearRing(0).getCoordinates();
+            area = Math.abs(wgs84Sphere.geodesicArea(coordinates));
+        } else {
+            area = polygon.getArea();
+        }
+
+        var output;
+        if (me.switchToKmOnLargeValues && area > 10000) {
+            output = (Math.round(area / 1000000 * decimalHelper) /
+                decimalHelper) + ' km<sup>2</sup>';
+        } else {
+            output = (Math.round(area * decimalHelper) / decimalHelper) +
+                ' ' + 'm<sup>2</sup>';
+        }
+        return output;
+    },
+
+    /**
+     * Determine the angle between two coordinates. The angle will be between
+     * -180° and 180°, with 0° being in the east. The angle will increase
+     * counter-clockwise.
+     *
+     * Inspired by http://stackoverflow.com/a/31136507
+     *
+     * @param {Array<Number>} start The start coordinates of the line with the
+     *     x-coordinate being at index `0` and y-coordinate being at index `1`.
+     * @param {Array<Number>} end The end coordinates of the line with the
+     *     x-coordinate being at index `0` and y-coordinate being at index `1`.
+     * @return {Number} the angle in degreees, ranging from -180° to 180°.
+     */
+    angle: function(start, end) {
+        var dx = start[0] - end[0];
+        var dy = start[1] - end[1];
+        // range (-PI, PI]
+        var theta = Math.atan2(dy, dx);
+        // rads to degs, range (-180, 180]
+        theta *= 180 / Math.PI;
+        return theta;
+    },
+
+    /**
+     * Determine the angle between two coordinates. The angle will be between
+     * 0° and 360°, with 0° being in the east. The angle will increase
+     * counter-clockwise.
+     *
+     * Inspired by http://stackoverflow.com/a/31136507
+     *
+     * @param {Array<Number>} start The start coordinates of the line with the
+     *     x-coordinate being at index `0` and y-coordinate being at index `1`.
+     * @param {Array<Number>} end The end coordinates of the line with the
+     *     x-coordinate being at index `0` and y-coordinate being at index `1`.
+     * @return {Number} the angle in degreees, ranging from 0° and 360°.
+     */
+    angle360: function(start, end) {
+        // range (-180, 180]
+        var theta = this.angle(start, end);
+        if (theta < 0) {
+            // range [0, 360)
+            theta = 360 + theta;
+        }
+        return theta;
+    },
+
+    /**
+     * Given an angle between 0° and 360° this angle returns the exact opposite
+     * of the angle, e.g. for 90° you'll get back 270°. This effectively turns
+     * the direction of the angle from counter-clockwise to clockwise.
+     *
+     * @param {Number} angle360 The input angle obtained counter-clockwise.
+     * @return {Number} The clockwise angle.
+     */
+    makeClockwise: function(angle360) {
+        return 360 - angle360;
+    },
+
+    /**
+     * This methods adds an offset of 90° to an counter-clockwise increasing
+     * angle of a line so that the origin (0°) lies at the top (in the north).
+     *
+     * @param {Number} angle360 The input angle obtained counter-clockwise, with
+     *     0° degrees being in the east.
+     * @return {Number} The adjusted angle, with 0° being in the north.
+     */
+    makeZeroDegreesAtNorth: function(angle360) {
+        var corrected = angle360 + 90;
+        if (corrected > 360) {
+            corrected = corrected - 360;
+        }
+        return corrected;
+    },
+
+    /**
+     * Returns the angle of the passed linestring in degrees, with 'N' being the
+     * 0°-line and the angle increases in clockwise direction.
+     *
+     * TODO The angle calculation assumes an unrotated view. We should enhance
+     *    this method to (optionally) correct the determined angle by the
+     *    rotation of the map.
+     *
+     * @param {ol.geom.LineString} line The linestring to get the
+     *     angle from. As this line is comming from our internal draw
+     *     interaction, we know that it will only consist of two points.
+     * @return {String} The formatted angle of the line.
+     */
+    formatAngle: function(line) {
+        var me = this;
+        var coords = line.getCoordinates();
+        var numCoords = coords.length;
+        if (numCoords < 2) {
+            return '';
+        }
+
+        var lastPoint = coords[numCoords - 1];
+        var prevPoint = coords[numCoords - 2];
+        var angle = me.angle360(prevPoint, lastPoint);
+
+        angle = me.makeZeroDegreesAtNorth(angle);
+        angle = me.makeClockwise(angle);
+        angle = angle.toFixed(me.decimalPlacesInToolTips);
+
+        return angle + '°';
+    }
+});

@@ -1,9 +1,157 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ *
+ * Map Util
+ *
+ * Some methods to work with ol-layers
+ *
+ * @class BasiGX.util.Map
+ */
+Ext.define('BasiGX.util.Map', {
 
-var __cov_L3JL0lLuU8iZBiFvTUOxzQ = (Function('return this'))();
-if (!__cov_L3JL0lLuU8iZBiFvTUOxzQ.__coverage__) { __cov_L3JL0lLuU8iZBiFvTUOxzQ.__coverage__ = {}; }
-__cov_L3JL0lLuU8iZBiFvTUOxzQ = __cov_L3JL0lLuU8iZBiFvTUOxzQ.__coverage__;
-if (!(__cov_L3JL0lLuU8iZBiFvTUOxzQ['/home/travis/build/terrestris/BasiGX/src/util/Map.js'])) {
-   __cov_L3JL0lLuU8iZBiFvTUOxzQ['/home/travis/build/terrestris/BasiGX/src/util/Map.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/Map.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0},"fnMap":{"1":{"name":"(anonymous_1)","line":53,"loc":{"start":{"line":53,"column":31},"end":{"line":53,"column":54}}},"2":{"name":"(anonymous_2)","line":70,"loc":{"start":{"line":70,"column":31},"end":{"line":70,"column":59}}},"3":{"name":"(anonymous_3)","line":83,"loc":{"start":{"line":83,"column":23},"end":{"line":83,"column":37}}},"4":{"name":"(anonymous_4)","line":96,"loc":{"start":{"line":96,"column":18},"end":{"line":96,"column":32}}},"5":{"name":"(anonymous_5)","line":114,"loc":{"start":{"line":114,"column":25},"end":{"line":114,"column":48}}},"6":{"name":"(anonymous_6)","line":142,"loc":{"start":{"line":142,"column":28},"end":{"line":142,"column":54}}}},"statementMap":{"1":{"start":{"line":24,"column":0},"end":{"line":157,"column":3}},"2":{"start":{"line":54,"column":12},"end":{"line":54,"column":31}},"3":{"start":{"line":55,"column":12},"end":{"line":55,"column":53}},"4":{"start":{"line":56,"column":12},"end":{"line":56,"column":53}},"5":{"start":{"line":57,"column":12},"end":{"line":57,"column":68}},"6":{"start":{"line":71,"column":12},"end":{"line":71,"column":31}},"7":{"start":{"line":72,"column":12},"end":{"line":72,"column":53}},"8":{"start":{"line":73,"column":12},"end":{"line":73,"column":53}},"9":{"start":{"line":74,"column":12},"end":{"line":74,"column":61}},"10":{"start":{"line":84,"column":12},"end":{"line":84,"column":49}},"11":{"start":{"line":97,"column":12},"end":{"line":97,"column":46}},"12":{"start":{"line":98,"column":12},"end":{"line":98,"column":65}},"13":{"start":{"line":99,"column":12},"end":{"line":99,"column":58}},"14":{"start":{"line":115,"column":12},"end":{"line":115,"column":29}},"15":{"start":{"line":116,"column":12},"end":{"line":118,"column":13}},"16":{"start":{"line":117,"column":16},"end":{"line":117,"column":73}},"17":{"start":{"line":121,"column":12},"end":{"line":125,"column":13}},"18":{"start":{"line":122,"column":16},"end":{"line":124,"column":21}},"19":{"start":{"line":128,"column":12},"end":{"line":130,"column":13}},"20":{"start":{"line":129,"column":16},"end":{"line":129,"column":69}},"21":{"start":{"line":132,"column":12},"end":{"line":132,"column":32}},"22":{"start":{"line":143,"column":12},"end":{"line":143,"column":32}},"23":{"start":{"line":145,"column":12},"end":{"line":147,"column":13}},"24":{"start":{"line":146,"column":16},"end":{"line":146,"column":79}},"25":{"start":{"line":149,"column":12},"end":{"line":153,"column":13}},"26":{"start":{"line":150,"column":16},"end":{"line":152,"column":21}},"27":{"start":{"line":154,"column":12},"end":{"line":154,"column":35}}},"branchMap":{"1":{"line":116,"type":"if","locations":[{"start":{"line":116,"column":12},"end":{"line":116,"column":12}},{"start":{"line":116,"column":12},"end":{"line":116,"column":12}}]},"2":{"line":121,"type":"if","locations":[{"start":{"line":121,"column":12},"end":{"line":121,"column":12}},{"start":{"line":121,"column":12},"end":{"line":121,"column":12}}]},"3":{"line":128,"type":"if","locations":[{"start":{"line":128,"column":12},"end":{"line":128,"column":12}},{"start":{"line":128,"column":12},"end":{"line":128,"column":12}}]},"4":{"line":145,"type":"if","locations":[{"start":{"line":145,"column":12},"end":{"line":145,"column":12}},{"start":{"line":145,"column":12},"end":{"line":145,"column":12}}]},"5":{"line":149,"type":"if","locations":[{"start":{"line":149,"column":12},"end":{"line":149,"column":12}},{"start":{"line":149,"column":12},"end":{"line":149,"column":12}}]}}};
-}
-__cov_L3JL0lLuU8iZBiFvTUOxzQ = __cov_L3JL0lLuU8iZBiFvTUOxzQ['/home/travis/build/terrestris/BasiGX/src/util/Map.js'];
-__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['1']++;Ext.define('BasiGX.util.Map',{statics:{dpi:90.7142857142857,inchesPerMeter:39.37,getResolutionForScale:function(scale,units){__cov_L3JL0lLuU8iZBiFvTUOxzQ.f['1']++;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['2']++;var dpi=this.dpi;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['3']++;var inchesPerMeter=this.inchesPerMeter;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['4']++;var mpu=ol.proj.METERS_PER_UNIT[units];__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['5']++;return parseFloat(scale)/(mpu*inchesPerMeter*dpi);},getScaleForResolution:function(resolution,units){__cov_L3JL0lLuU8iZBiFvTUOxzQ.f['2']++;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['6']++;var dpi=this.dpi;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['7']++;var inchesPerMeter=this.inchesPerMeter;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['8']++;var mpu=ol.proj.METERS_PER_UNIT[units];__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['9']++;return resolution*mpu*inchesPerMeter*dpi;},getResolution:function(map){__cov_L3JL0lLuU8iZBiFvTUOxzQ.f['3']++;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['10']++;return map.getView().getResolution();},getScale:function(map){__cov_L3JL0lLuU8iZBiFvTUOxzQ.f['4']++;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['11']++;var res=this.getResolution(map);__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['12']++;var units=map.getView().getProjection().getUnits();__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['13']++;return this.getScaleForResolution(res,units);},getMapComponent:function(mapCompXType){__cov_L3JL0lLuU8iZBiFvTUOxzQ.f['5']++;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['14']++;var mapComponent;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['15']++;if(mapCompXType){__cov_L3JL0lLuU8iZBiFvTUOxzQ.b['1'][0]++;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['16']++;mapComponent=Ext.ComponentQuery.query(mapCompXType)[0];}else{__cov_L3JL0lLuU8iZBiFvTUOxzQ.b['1'][1]++;}__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['17']++;if(Ext.isEmpty(mapComponent)){__cov_L3JL0lLuU8iZBiFvTUOxzQ.b['2'][0]++;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['18']++;mapComponent=Ext.ComponentQuery.query('basigx-component-map')[0];}else{__cov_L3JL0lLuU8iZBiFvTUOxzQ.b['2'][1]++;}__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['19']++;if(Ext.isEmpty(mapComponent)){__cov_L3JL0lLuU8iZBiFvTUOxzQ.b['3'][0]++;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['20']++;mapComponent=Ext.ComponentQuery.query('gx_map')[0];}else{__cov_L3JL0lLuU8iZBiFvTUOxzQ.b['3'][1]++;}__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['21']++;return mapComponent;},getLegendTreePanel:function(legendCompXType){__cov_L3JL0lLuU8iZBiFvTUOxzQ.f['6']++;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['22']++;var legendComponent;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['23']++;if(legendCompXType){__cov_L3JL0lLuU8iZBiFvTUOxzQ.b['4'][0]++;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['24']++;legendComponent=Ext.ComponentQuery.query(legendCompXType)[0];}else{__cov_L3JL0lLuU8iZBiFvTUOxzQ.b['4'][1]++;}__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['25']++;if(Ext.isEmpty(legendComponent)){__cov_L3JL0lLuU8iZBiFvTUOxzQ.b['5'][0]++;__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['26']++;legendComponent=Ext.ComponentQuery.query('basigx-panel-legendtree')[0];}else{__cov_L3JL0lLuU8iZBiFvTUOxzQ.b['5'][1]++;}__cov_L3JL0lLuU8iZBiFvTUOxzQ.s['27']++;return legendComponent;}}});
+    statics: {
+        /**
+         * The dpi as defined by OGC (e.g. for WMTS tile matrix sets).
+         * Calculated as 25.4 / 0.28
+         *   * 25.4 mm in one inch
+         *   * one pixel is 0.28mm (per spec of OGC)
+         *
+         * @type {Number}
+         */
+        dpi: 90.7142857142857, // = 25.4 / 0.28;
+
+        /**
+         * The number of inches in a meter.
+         *
+         * @type {Number}
+         */
+        inchesPerMeter: 39.37,
+
+        /**
+         * Given a scale and a unit, this method will return a resolution.
+         *
+         * @param {Number} scale The scale you wish to have the resolution for.
+         * @param {String} units The units to get the resolution for, typically
+         *     the unit of the projection of the map view. Allowed values are
+         *     `'degrees'`, `'ft'`, `'m'` or `'us-ft'`
+         * @return {Number} The calculated resolution.
+         */
+        getResolutionForScale: function(scale, units) {
+            var dpi = this.dpi;
+            var inchesPerMeter = this.inchesPerMeter;
+            var mpu = ol.proj.METERS_PER_UNIT[units];
+            return parseFloat(scale) / (mpu * inchesPerMeter * dpi);
+        },
+
+        /**
+         * Given a resolution and a unit, this method will return a scale.
+         *
+         * @param {Number} resolution The resolution you wish to have the scale
+         *     for.
+         * @param {String} units The units to get the resoultuion for, typically
+         *     the unit of the projection odf the map view. Allowed values are
+         *     `'degrees'`, `'ft'`, `'m'` or `'us-ft'`
+         * @return {Number} The calculated scale.
+         */
+        getScaleForResolution: function(resolution, units) {
+            var dpi = this.dpi;
+            var inchesPerMeter = this.inchesPerMeter;
+            var mpu = ol.proj.METERS_PER_UNIT[units];
+            return (resolution * mpu * inchesPerMeter * dpi);
+        },
+
+        /**
+         * Returns the resolution of the passed map's view.
+         *
+         * @param {ol.Map} map The map to get the resolution from.
+         * @return {Number} The resolution of the view of the passed map.
+         */
+        getResolution: function(map) {
+            return map.getView().getResolution();
+        },
+
+        /**
+         * Gets the scale of the passed map.
+         *
+         * See also http://gis.stackexchange.com/questions/158435/how-to-get-cur
+         * rent-scale-in-openlayers-3
+         *
+         * @param {ol.Map} map The map to get the scale from.
+         * @return {Number} The scale of the map.
+         */
+        getScale: function(map) {
+            var res = this.getResolution(map);
+            var units = map.getView().getProjection().getUnits();
+            return this.getScaleForResolution(res, units);
+        },
+
+        /**
+         * Determine map component depending on provided xtype.
+         *
+         * If no xtype was specified, `basigx-component-map` component will be
+         * used as fallback. If this also could not be found, use the first
+         * GeoExt map component with xtype `gx_map`.
+         *
+         * @param {String} mapCompXType Provided map component xtype
+         * @return {Object} The map component, which is at least a
+         *     GeoExt.component.Map and possibly an instance of the xtype you
+         *     passed.
+         */
+        getMapComponent: function(mapCompXType) {
+            var mapComponent;
+            if (mapCompXType) {
+                mapComponent = Ext.ComponentQuery.query(mapCompXType)[0];
+            }
+
+            //fallback to basigx map component
+            if (Ext.isEmpty(mapComponent)) {
+                mapComponent = Ext.ComponentQuery.query(
+                    'basigx-component-map'
+                )[0];
+            }
+
+            //fallback to the most common GeoExt map component
+            if (Ext.isEmpty(mapComponent)) {
+                mapComponent = Ext.ComponentQuery.query('gx_map')[0];
+            }
+
+            return mapComponent;
+        },
+
+        /**
+         * Determine legendtree panel component depending on provided xtype.
+         * If no xtype was specified, `basigx-panel-legendtree` component will
+         * be used as fallback.
+         * @param {String} legendCompXType Provided map component xtype
+         * @return {Object} The legend component.
+         */
+        getLegendTreePanel: function(legendCompXType) {
+            var legendComponent;
+
+            if (legendCompXType) {
+                legendComponent = Ext.ComponentQuery.query(legendCompXType)[0];
+            }
+            //fallback to basigx legendtree panel component
+            if (Ext.isEmpty(legendComponent)) {
+                legendComponent = Ext.ComponentQuery.query(
+                    'basigx-panel-legendtree'
+                )[0];
+            }
+            return legendComponent;
+        }
+    }
+});

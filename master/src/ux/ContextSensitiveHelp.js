@@ -1,9 +1,287 @@
+/*global Ext, window, document*/
+/* Copyright (C) 2011-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.-
+ *
+ * @author terrestris GmbH & Co. KG
+ * @author M. Jansen <jansen@terrestris.de>
+ */
+/**
+ * Provides a bunch of methods to open a help window whose URL has an
+ * anchor if the provided xy-location was found to have special documentation.
+ *
+ * Usually you create an instance of the class and then call #setContextHelp to
+ * overlay the complete application with a layer that listens for clicks to get
+ * contextual help. The #helpUrl will be opened in a popup after every click and
+ * an anchor is appended to the URL, if the clicked component either has a
+ * `xtype` or `helpKey` set to something that also exists in the list
+ * #existingHelpKeys. Only instances of Ext.window.Window or more generally
+ * instances of subclasses of Ext.container.Container qualifiy as candidates for
+ * help.
+ *
+ * Based on code from Animal and timo.nuros at http://www.sencha.com/forum/showt
+ * hread.php?63272-Implementing-a-context-sensitive-help
+ *
+ * @class BasiGX.ux.ContextSensitiveHelp
+ */
+Ext.define('BasiGX.ux.ContextSensitiveHelp', {
 
-var __cov_QPU4QDhjHjGYy_G_F796aQ = (Function('return this'))();
-if (!__cov_QPU4QDhjHjGYy_G_F796aQ.__coverage__) { __cov_QPU4QDhjHjGYy_G_F796aQ.__coverage__ = {}; }
-__cov_QPU4QDhjHjGYy_G_F796aQ = __cov_QPU4QDhjHjGYy_G_F796aQ.__coverage__;
-if (!(__cov_QPU4QDhjHjGYy_G_F796aQ['/home/travis/build/terrestris/BasiGX/src/ux/ContextSensitiveHelp.js'])) {
-   __cov_QPU4QDhjHjGYy_G_F796aQ['/home/travis/build/terrestris/BasiGX/src/ux/ContextSensitiveHelp.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/ux/ContextSensitiveHelp.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0},"fnMap":{"1":{"name":"(anonymous_1)","line":113,"loc":{"start":{"line":113,"column":18},"end":{"line":113,"column":31}}},"2":{"name":"(anonymous_2)","line":132,"loc":{"start":{"line":132,"column":27},"end":{"line":132,"column":43}}},"3":{"name":"(anonymous_3)","line":146,"loc":{"start":{"line":146,"column":26},"end":{"line":146,"column":46}}},"4":{"name":"(anonymous_4)","line":177,"loc":{"start":{"line":177,"column":31},"end":{"line":177,"column":47}}},"5":{"name":"(anonymous_5)","line":213,"loc":{"start":{"line":213,"column":41},"end":{"line":213,"column":55}}},"6":{"name":"(anonymous_6)","line":255,"loc":{"start":{"line":255,"column":20},"end":{"line":255,"column":49}}},"7":{"name":"(anonymous_7)","line":277,"loc":{"start":{"line":277,"column":30},"end":{"line":277,"column":51}}}},"statementMap":{"1":{"start":{"line":38,"column":0},"end":{"line":287,"column":3}},"2":{"start":{"line":114,"column":8},"end":{"line":114,"column":36}},"3":{"start":{"line":115,"column":8},"end":{"line":119,"column":9}},"4":{"start":{"line":116,"column":12},"end":{"line":116,"column":52}},"5":{"start":{"line":118,"column":12},"end":{"line":118,"column":23}},"6":{"start":{"line":133,"column":8},"end":{"line":133,"column":61}},"7":{"start":{"line":134,"column":8},"end":{"line":134,"column":40}},"8":{"start":{"line":135,"column":8},"end":{"line":135,"column":19}},"9":{"start":{"line":147,"column":8},"end":{"line":147,"column":53}},"10":{"start":{"line":148,"column":8},"end":{"line":148,"column":22}},"11":{"start":{"line":149,"column":8},"end":{"line":149,"column":19}},"12":{"start":{"line":150,"column":8},"end":{"line":152,"column":10}},"13":{"start":{"line":153,"column":8},"end":{"line":155,"column":10}},"14":{"start":{"line":157,"column":8},"end":{"line":165,"column":9}},"15":{"start":{"line":158,"column":12},"end":{"line":159,"column":57}},"16":{"start":{"line":161,"column":12},"end":{"line":161,"column":36}},"17":{"start":{"line":162,"column":12},"end":{"line":164,"column":13}},"18":{"start":{"line":163,"column":16},"end":{"line":163,"column":62}},"19":{"start":{"line":166,"column":8},"end":{"line":166,"column":25}},"20":{"start":{"line":178,"column":8},"end":{"line":178,"column":22}},"21":{"start":{"line":179,"column":8},"end":{"line":179,"column":56}},"22":{"start":{"line":180,"column":8},"end":{"line":180,"column":57}},"23":{"start":{"line":182,"column":8},"end":{"line":245,"column":9}},"24":{"start":{"line":187,"column":12},"end":{"line":223,"column":13}},"25":{"start":{"line":188,"column":16},"end":{"line":188,"column":72}},"26":{"start":{"line":189,"column":16},"end":{"line":222,"column":17}},"27":{"start":{"line":190,"column":20},"end":{"line":191,"column":64}},"28":{"start":{"line":192,"column":20},"end":{"line":221,"column":21}},"29":{"start":{"line":193,"column":24},"end":{"line":193,"column":50}},"30":{"start":{"line":194,"column":24},"end":{"line":194,"column":78}},"31":{"start":{"line":195,"column":24},"end":{"line":196,"column":55}},"32":{"start":{"line":197,"column":24},"end":{"line":197,"column":79}},"33":{"start":{"line":199,"column":24},"end":{"line":220,"column":34}},"34":{"start":{"line":214,"column":36},"end":{"line":217,"column":38}},"35":{"start":{"line":226,"column":12},"end":{"line":226,"column":39}},"36":{"start":{"line":227,"column":12},"end":{"line":227,"column":20}},"37":{"start":{"line":229,"column":12},"end":{"line":231,"column":13}},"38":{"start":{"line":230,"column":16},"end":{"line":230,"column":41}},"39":{"start":{"line":232,"column":12},"end":{"line":235,"column":33}},"40":{"start":{"line":237,"column":12},"end":{"line":244,"column":13}},"41":{"start":{"line":238,"column":16},"end":{"line":238,"column":28}},"42":{"start":{"line":240,"column":16},"end":{"line":243,"column":18}},"43":{"start":{"line":246,"column":8},"end":{"line":246,"column":20}},"44":{"start":{"line":256,"column":8},"end":{"line":256,"column":22}},"45":{"start":{"line":257,"column":8},"end":{"line":257,"column":43}},"46":{"start":{"line":258,"column":8},"end":{"line":258,"column":52}},"47":{"start":{"line":259,"column":8},"end":{"line":259,"column":41}},"48":{"start":{"line":261,"column":8},"end":{"line":266,"column":9}},"49":{"start":{"line":262,"column":12},"end":{"line":265,"column":14}},"50":{"start":{"line":268,"column":8},"end":{"line":268,"column":70}},"51":{"start":{"line":270,"column":8},"end":{"line":270,"column":32}},"52":{"start":{"line":271,"column":8},"end":{"line":274,"column":11}},"53":{"start":{"line":275,"column":8},"end":{"line":275,"column":35}},"54":{"start":{"line":277,"column":8},"end":{"line":282,"column":11}},"55":{"start":{"line":278,"column":12},"end":{"line":278,"column":61}},"56":{"start":{"line":279,"column":12},"end":{"line":279,"column":35}},"57":{"start":{"line":280,"column":12},"end":{"line":280,"column":48}},"58":{"start":{"line":281,"column":12},"end":{"line":281,"column":25}},"59":{"start":{"line":283,"column":8},"end":{"line":283,"column":25}},"60":{"start":{"line":285,"column":8},"end":{"line":285,"column":33}}},"branchMap":{"1":{"line":115,"type":"if","locations":[{"start":{"line":115,"column":8},"end":{"line":115,"column":8}},{"start":{"line":115,"column":8},"end":{"line":115,"column":8}}]},"2":{"line":157,"type":"if","locations":[{"start":{"line":157,"column":8},"end":{"line":157,"column":8}},{"start":{"line":157,"column":8},"end":{"line":157,"column":8}}]},"3":{"line":157,"type":"binary-expr","locations":[{"start":{"line":157,"column":12},"end":{"line":157,"column":24}},{"start":{"line":157,"column":28},"end":{"line":157,"column":42}}]},"4":{"line":158,"type":"cond-expr","locations":[{"start":{"line":159,"column":16},"end":{"line":159,"column":33}},{"start":{"line":159,"column":36},"end":{"line":159,"column":56}}]},"5":{"line":162,"type":"if","locations":[{"start":{"line":162,"column":12},"end":{"line":162,"column":12}},{"start":{"line":162,"column":12},"end":{"line":162,"column":12}}]},"6":{"line":182,"type":"if","locations":[{"start":{"line":182,"column":8},"end":{"line":182,"column":8}},{"start":{"line":182,"column":8},"end":{"line":182,"column":8}}]},"7":{"line":187,"type":"if","locations":[{"start":{"line":187,"column":12},"end":{"line":187,"column":12}},{"start":{"line":187,"column":12},"end":{"line":187,"column":12}}]},"8":{"line":187,"type":"binary-expr","locations":[{"start":{"line":187,"column":16},"end":{"line":187,"column":38}},{"start":{"line":187,"column":42},"end":{"line":187,"column":66}}]},"9":{"line":189,"type":"if","locations":[{"start":{"line":189,"column":16},"end":{"line":189,"column":16}},{"start":{"line":189,"column":16},"end":{"line":189,"column":16}}]},"10":{"line":192,"type":"if","locations":[{"start":{"line":192,"column":20},"end":{"line":192,"column":20}},{"start":{"line":192,"column":20},"end":{"line":192,"column":20}}]},"11":{"line":212,"type":"cond-expr","locations":[{"start":{"line":212,"column":67},"end":{"line":212,"column":72}},{"start":{"line":212,"column":75},"end":{"line":212,"column":79}}]},"12":{"line":229,"type":"if","locations":[{"start":{"line":229,"column":12},"end":{"line":229,"column":12}},{"start":{"line":229,"column":12},"end":{"line":229,"column":12}}]},"13":{"line":237,"type":"if","locations":[{"start":{"line":237,"column":12},"end":{"line":237,"column":12}},{"start":{"line":237,"column":12},"end":{"line":237,"column":12}}]},"14":{"line":261,"type":"if","locations":[{"start":{"line":261,"column":8},"end":{"line":261,"column":8}},{"start":{"line":261,"column":8},"end":{"line":261,"column":8}}]}}};
-}
-__cov_QPU4QDhjHjGYy_G_F796aQ = __cov_QPU4QDhjHjGYy_G_F796aQ['/home/travis/build/terrestris/BasiGX/src/ux/ContextSensitiveHelp.js'];
-__cov_QPU4QDhjHjGYy_G_F796aQ.s['1']++;Ext.define('BasiGX.ux.ContextSensitiveHelp',{extend:'Ext.Component',requires:['BasiGX.util.Demonstration'],viewModel:{data:{title:'Help',demoButtonText:'Demo'}},helpUrl:'../help/index.html',getHelpFromComponent:false,existingHelpKeys:['basigx-button-help','basigx-button-zoomin','basigx-button-zoomout','basigx-button-zoomtoextent','basigx-button-togglelegend','basigx-overview-map-button','basigx-button-addwms','basigx-button-measure','basigx-button-coordinatetransform','basigx-button-permalink','basigx-combo-scale','basigx-button-hsi','basigx-overview-map-button','basigx-panel-layersetchooser','basigx-form-print','basigx-container-overpasssearch'],warnPopupBlockerTitle:'Warnung',warnPopupBlockerContent:'Bitte deaktivieren Sie etwaige '+'Popup-Blocker,um die Hilfe anzuzeigen.',getCmpFromEl:function(el){__cov_QPU4QDhjHjGYy_G_F796aQ.f['1']++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['2']++;var cmp=Ext.getCmp(el.id);__cov_QPU4QDhjHjGYy_G_F796aQ.s['3']++;if(!cmp){__cov_QPU4QDhjHjGYy_G_F796aQ.b['1'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['4']++;return this.getCmpFromEl(el.parentNode);}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['1'][1]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['5']++;return cmp;}},getComponentFromPoint:function(point){__cov_QPU4QDhjHjGYy_G_F796aQ.f['2']++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['6']++;var el=document.elementFromPoint(point.x,point.y);__cov_QPU4QDhjHjGYy_G_F796aQ.s['7']++;var cmp=this.getCmpFromEl(el);__cov_QPU4QDhjHjGYy_G_F796aQ.s['8']++;return cmp;},bubbleToExistingHelp:function(component){__cov_QPU4QDhjHjGYy_G_F796aQ.f['3']++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['9']++;var existingHelpKeys=this.existingHelpKeys;__cov_QPU4QDhjHjGYy_G_F796aQ.s['10']++;var foundHelp;__cov_QPU4QDhjHjGYy_G_F796aQ.s['11']++;var parent;__cov_QPU4QDhjHjGYy_G_F796aQ.s['12']++;var xtypeHasHelp=Ext.Array.contains(existingHelpKeys,component.xtype);__cov_QPU4QDhjHjGYy_G_F796aQ.s['13']++;var compHasHelpKey=Ext.Array.contains(existingHelpKeys,component.helpKey);__cov_QPU4QDhjHjGYy_G_F796aQ.s['14']++;if((__cov_QPU4QDhjHjGYy_G_F796aQ.b['3'][0]++,xtypeHasHelp)||(__cov_QPU4QDhjHjGYy_G_F796aQ.b['3'][1]++,compHasHelpKey)){__cov_QPU4QDhjHjGYy_G_F796aQ.b['2'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['15']++;foundHelp=compHasHelpKey?(__cov_QPU4QDhjHjGYy_G_F796aQ.b['4'][0]++,component.helpKey):(__cov_QPU4QDhjHjGYy_G_F796aQ.b['4'][1]++,component.getXType());}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['2'][1]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['16']++;parent=component.up();__cov_QPU4QDhjHjGYy_G_F796aQ.s['17']++;if(parent){__cov_QPU4QDhjHjGYy_G_F796aQ.b['5'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['18']++;foundHelp=this.bubbleToExistingHelp(parent);}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['5'][1]++;}}__cov_QPU4QDhjHjGYy_G_F796aQ.s['19']++;return foundHelp;},displayHelpForCoordinates:function(point){__cov_QPU4QDhjHjGYy_G_F796aQ.f['4']++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['20']++;var me=this;__cov_QPU4QDhjHjGYy_G_F796aQ.s['21']++;var component=me.getComponentFromPoint(point);__cov_QPU4QDhjHjGYy_G_F796aQ.s['22']++;var helpKey=me.bubbleToExistingHelp(component);__cov_QPU4QDhjHjGYy_G_F796aQ.s['23']++;if(me.getHelpFromComponent){__cov_QPU4QDhjHjGYy_G_F796aQ.b['6'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['24']++;if((__cov_QPU4QDhjHjGYy_G_F796aQ.b['8'][0]++,component.getViewModel)&&(__cov_QPU4QDhjHjGYy_G_F796aQ.b['8'][1]++,component.getViewModel())){__cov_QPU4QDhjHjGYy_G_F796aQ.b['7'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['25']++;var doc=component.getViewModel().get('documentation');__cov_QPU4QDhjHjGYy_G_F796aQ.s['26']++;if(!Ext.isEmpty(doc)){__cov_QPU4QDhjHjGYy_G_F796aQ.b['9'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['27']++;var exisitingWin=Ext.ComponentQuery.query('window[name=contextsensitivehelp]')[0];__cov_QPU4QDhjHjGYy_G_F796aQ.s['28']++;if(exisitingWin){__cov_QPU4QDhjHjGYy_G_F796aQ.b['10'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['29']++;exisitingWin.setHtml(doc);__cov_QPU4QDhjHjGYy_G_F796aQ.s['30']++;exisitingWin.setTitle(me.getViewModel().get('title'));__cov_QPU4QDhjHjGYy_G_F796aQ.s['31']++;exisitingWin.down('button[name=demo]').setHidden(!component.liveDemoConfig);__cov_QPU4QDhjHjGYy_G_F796aQ.s['32']++;exisitingWin.liveDemoConfig=component.liveDemoConfig;}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['10'][1]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['33']++;Ext.create('Ext.window.Window',{title:me.getViewModel().get('title'),name:'contextsensitivehelp',width:500,height:400,scrollable:true,bodyPadding:5,html:doc,liveDemoConfig:component.liveDemoConfig,items:[{xtype:'button',name:'demo',text:me.getViewModel().get('demoButtonText'),hidden:component.liveDemoConfig?(__cov_QPU4QDhjHjGYy_G_F796aQ.b['11'][0]++,false):(__cov_QPU4QDhjHjGYy_G_F796aQ.b['11'][1]++,true),handler:function(btn){__cov_QPU4QDhjHjGYy_G_F796aQ.f['5']++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['34']++;BasiGX.util.Demonstration.demo(btn,btn.up().liveDemoConfig);}}]}).show();}}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['9'][1]++;}}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['7'][1]++;}}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['6'][1]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['35']++;var helpUrl=this.helpUrl;__cov_QPU4QDhjHjGYy_G_F796aQ.s['36']++;var win;__cov_QPU4QDhjHjGYy_G_F796aQ.s['37']++;if(helpKey){__cov_QPU4QDhjHjGYy_G_F796aQ.b['12'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['38']++;helpUrl+='#'+helpKey;}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['12'][1]++;}__cov_QPU4QDhjHjGYy_G_F796aQ.s['39']++;win=window.open(helpUrl,'ContextSensitiveHelp','width=800,height=550,scrollbars=yes,left=200,top=150,'+'resizable=yes,location=yes,menubar=no,status=no,'+'dependent=yes');__cov_QPU4QDhjHjGYy_G_F796aQ.s['40']++;if(win){__cov_QPU4QDhjHjGYy_G_F796aQ.b['13'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['41']++;win.focus();}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['13'][1]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['42']++;Ext.Msg.alert(this.warnPopupBlockerTitle,this.warnPopupBlockerContent);}}__cov_QPU4QDhjHjGYy_G_F796aQ.s['43']++;return true;},setContextHelp:function(additionalHelpKeys){__cov_QPU4QDhjHjGYy_G_F796aQ.f['6']++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['44']++;var me=this;__cov_QPU4QDhjHjGYy_G_F796aQ.s['45']++;var size=Ext.getBody().getSize();__cov_QPU4QDhjHjGYy_G_F796aQ.s['46']++;var helpDom=document.createElement('div');__cov_QPU4QDhjHjGYy_G_F796aQ.s['47']++;var helpLayer=Ext.get(helpDom);__cov_QPU4QDhjHjGYy_G_F796aQ.s['48']++;if(additionalHelpKeys){__cov_QPU4QDhjHjGYy_G_F796aQ.b['14'][0]++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['49']++;Ext.Array.push(me.existingHelpKeys,additionalHelpKeys);}else{__cov_QPU4QDhjHjGYy_G_F796aQ.b['14'][1]++;}__cov_QPU4QDhjHjGYy_G_F796aQ.s['50']++;document.body.insertBefore(helpDom,document.body.firstChild);__cov_QPU4QDhjHjGYy_G_F796aQ.s['51']++;helpLayer.setSize(size);__cov_QPU4QDhjHjGYy_G_F796aQ.s['52']++;helpLayer.setStyle({'cursor':'help','position':'absolute'});__cov_QPU4QDhjHjGYy_G_F796aQ.s['53']++;helpLayer.setZIndex(20000);__cov_QPU4QDhjHjGYy_G_F796aQ.s['54']++;helpLayer.on('click',function(clickEvent){__cov_QPU4QDhjHjGYy_G_F796aQ.f['7']++;__cov_QPU4QDhjHjGYy_G_F796aQ.s['55']++;var point=Ext.util.Point.fromEvent(clickEvent);__cov_QPU4QDhjHjGYy_G_F796aQ.s['56']++;me.helpLayer.destroy();__cov_QPU4QDhjHjGYy_G_F796aQ.s['57']++;me.displayHelpForCoordinates(point);__cov_QPU4QDhjHjGYy_G_F796aQ.s['58']++;me.destroy();});__cov_QPU4QDhjHjGYy_G_F796aQ.s['59']++;helpLayer.show();__cov_QPU4QDhjHjGYy_G_F796aQ.s['60']++;me.helpLayer=helpLayer;}});
+    extend: 'Ext.Component',
+
+    requires: [
+        'BasiGX.util.Demonstration'
+    ],
+
+    viewModel: {
+        data: {
+            title: 'Help',
+            demoButtonText: 'Demo'
+        }
+    },
+
+    /**
+     * The base URL of the help HTML which contains named anchors as defined
+     * in #existingHelpKeys.
+     */
+    helpUrl: '../help/index.html',
+
+    /**
+     * Flag to enable the usage of the key `documentation`, which holds
+     * an explanation of the component in HTML notation.
+     * Useful, if you want to render a component specific help
+     * instead of opening the regular HTML anchor link
+     */
+    getHelpFromComponent: false,
+
+    /**
+     * A list of all named links/anchors in the HTML file #helpUrl. Remember
+     * to add all existing keys to this list.
+     */
+    existingHelpKeys: [
+        'basigx-button-help',
+        'basigx-button-zoomin',
+        'basigx-button-zoomout',
+        'basigx-button-zoomtoextent',
+        'basigx-button-togglelegend',
+        'basigx-overview-map-button',
+        'basigx-button-addwms',
+        'basigx-button-measure',
+        'basigx-button-coordinatetransform',
+        'basigx-button-permalink',
+        'basigx-combo-scale',
+        'basigx-button-hsi',
+        'basigx-overview-map-button',
+        'basigx-panel-layersetchooser',
+        'basigx-form-print',
+        'basigx-container-overpasssearch'
+    ],
+
+    /* begin i18n */
+
+    /**
+     * Title for the warning when a popup blocker is active.
+     */
+    warnPopupBlockerTitle: 'Warnung',
+
+    /**
+     * Content of the warning when a popup blocker is active.
+     */
+    warnPopupBlockerContent: 'Bitte deaktivieren Sie etwaige ' +
+        'Popup-Blocker,um die Hilfe anzuzeigen.',
+
+    /* end i18n */
+
+    /**
+     * Return a component for the passed element `el`.
+     *
+     * TODO does this actually do what it tells me it does?
+     *
+     * @param {HTMLElement} el The HTML element.
+     * @return {Ext.Component} The component.
+     */
+    getCmpFromEl: function(el) {
+        var cmp = Ext.getCmp(el.id);
+        if (!cmp) {
+            return this.getCmpFromEl(el.parentNode);
+        } else {
+            return cmp;
+        }
+    },
+
+    /**
+     * Returns the lowest level component at the specified point.
+     *
+     * TODO Double check whether we can really pass only a x-coordinate, I
+     *      doubt that right now.
+     *
+     * @param {Ext.util.Point|Number} point The point at which to find the
+     *     associated component, or the x coordinate of the point.
+     * @return {Ext.Component} The Component at the specified point.
+     */
+    getComponentFromPoint: function(point) {
+        var el = document.elementFromPoint(point.x, point.y);
+        var cmp = this.getCmpFromEl(el);
+        return cmp;
+    },
+
+    /**
+     * Bubbles up the component hierarchy until it finds one component for
+     * which we have a help.
+     *
+     * @param {Ext.component} component The component from which we'll
+     *     bubble up until we find one that we have help for.
+     * @return {Ext.component} The found component.
+     */
+    bubbleToExistingHelp: function(component) {
+        var existingHelpKeys = this.existingHelpKeys;
+        var foundHelp;
+        var parent;
+        var xtypeHasHelp = Ext.Array.contains(
+            existingHelpKeys, component.xtype
+        );
+        var compHasHelpKey = Ext.Array.contains(
+            existingHelpKeys, component.helpKey
+        );
+
+        if (xtypeHasHelp || compHasHelpKey) {
+            foundHelp = compHasHelpKey ?
+                component.helpKey : component.getXType();
+        } else {
+            parent = component.up();
+            if (parent) {
+                foundHelp = this.bubbleToExistingHelp(parent);
+            }
+        }
+        return foundHelp;
+    },
+
+    /**
+     * Determines the component at the passed point that has help info
+     * available, and opens an appropriate URL in a new window if possible.
+     *
+     * @param {Ext.util.Point} point The point at which the pointer rests.
+     * @return {Boolean} Always true. We can probably remove this return
+     *     value.
+     */
+    displayHelpForCoordinates: function(point) {
+        var me = this;
+        var component = me.getComponentFromPoint(point);
+        var helpKey = me.bubbleToExistingHelp(component);
+
+        if (me.getHelpFromComponent) {
+            // open an Ext.window to display the html fragment
+            // which needs to be specified by the `documentation` property.
+            // If a liveDemoConfig is given, we will render a demo button
+            // to demonstrate the usage of the component
+            if (component.getViewModel && component.getViewModel()) {
+                var doc = component.getViewModel().get('documentation');
+                if (!Ext.isEmpty(doc)) {
+                    var exisitingWin = Ext.ComponentQuery.query(
+                        'window[name=contextsensitivehelp]')[0];
+                    if (exisitingWin) {
+                        exisitingWin.setHtml(doc);
+                        exisitingWin.setTitle(me.getViewModel().get('title'));
+                        exisitingWin.down('button[name=demo]').setHidden(
+                            !component.liveDemoConfig);
+                        exisitingWin.liveDemoConfig = component.liveDemoConfig;
+                    } else {
+                        Ext.create('Ext.window.Window', {
+                            title: me.getViewModel().get('title'),
+                            name: 'contextsensitivehelp',
+                            width: 500,
+                            height: 400,
+                            scrollable: true,
+                            bodyPadding: 5,
+                            html: doc,
+                            liveDemoConfig: component.liveDemoConfig,
+                            items: [{
+                                xtype: 'button',
+                                name: 'demo',
+                                text: me.getViewModel().get('demoButtonText'),
+                                hidden: component.liveDemoConfig ? false : true,
+                                handler: function(btn) {
+                                    BasiGX.util.Demonstration.demo(
+                                        btn,
+                                        btn.up().liveDemoConfig
+                                    );
+                                }
+                            }]
+                        }).show();
+                    }
+                }
+            }
+        } else {
+            // open up a HTML help document with anchor
+            var helpUrl = this.helpUrl;
+            var win;
+
+            if (helpKey) {
+                helpUrl += '#' + helpKey;
+            }
+            win = window.open(helpUrl, 'ContextSensitiveHelp',
+                'width=800,height=550,scrollbars=yes,left=200,top=150,' +
+                'resizable=yes,location=yes,menubar=no,status=no,' +
+                'dependent=yes');
+
+            if (win) {
+                win.focus();
+            } else {
+                Ext.Msg.alert(
+                    this.warnPopupBlockerTitle,
+                    this.warnPopupBlockerContent
+                );
+            }
+        }
+        return true;
+    },
+
+    /**
+     * The Main method of an instance of this class.
+     *
+     * @param {Array<String>} [additionalHelpKeys] An array of additional keys
+     *     for which help exists.
+     */
+    setContextHelp: function(additionalHelpKeys) {
+        var me = this;
+        var size = Ext.getBody().getSize();
+        var helpDom = document.createElement('div');
+        var helpLayer = Ext.get(helpDom);
+
+        if (additionalHelpKeys) {
+            Ext.Array.push(
+                me.existingHelpKeys,
+                additionalHelpKeys
+            );
+        }
+
+        document.body.insertBefore(helpDom, document.body.firstChild);
+
+        helpLayer.setSize(size);
+        helpLayer.setStyle({
+            'cursor': 'help',
+            'position': 'absolute'
+        });
+        helpLayer.setZIndex(20000);
+
+        helpLayer.on('click', function(clickEvent) {
+            var point = Ext.util.Point.fromEvent(clickEvent);
+            me.helpLayer.destroy();
+            me.displayHelpForCoordinates(point);
+            me.destroy();
+        });
+        helpLayer.show();
+
+        me.helpLayer = helpLayer;
+    }
+});

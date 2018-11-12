@@ -1,9 +1,117 @@
+/* Copyright (c) 2016-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Gazetteer combo used to search in the glorious dataset of OSM.
+ *
+ * @class BasiGX.view.form.field.GazetteerCombo
+ *
+ */
+Ext.define('BasiGX.view.form.field.GazetteerCombo', {
+    extend: 'Ext.form.field.ComboBox',
 
-var __cov_ExGsrJnJEtzoPht3_mf__Q = (Function('return this'))();
-if (!__cov_ExGsrJnJEtzoPht3_mf__Q.__coverage__) { __cov_ExGsrJnJEtzoPht3_mf__Q.__coverage__ = {}; }
-__cov_ExGsrJnJEtzoPht3_mf__Q = __cov_ExGsrJnJEtzoPht3_mf__Q.__coverage__;
-if (!(__cov_ExGsrJnJEtzoPht3_mf__Q['/home/travis/build/terrestris/BasiGX/src/view/form/field/GazetteerCombo.js'])) {
-   __cov_ExGsrJnJEtzoPht3_mf__Q['/home/travis/build/terrestris/BasiGX/src/view/form/field/GazetteerCombo.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/form/field/GazetteerCombo.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0},"fnMap":{"1":{"name":"(anonymous_1)","line":36,"loc":{"start":{"line":36,"column":19},"end":{"line":36,"column":30}}},"2":{"name":"(anonymous_2)","line":48,"loc":{"start":{"line":48,"column":16},"end":{"line":48,"column":27}}},"3":{"name":"(anonymous_3)","line":62,"loc":{"start":{"line":62,"column":24},"end":{"line":62,"column":50}}},"4":{"name":"(anonymous_4)","line":88,"loc":{"start":{"line":88,"column":23},"end":{"line":88,"column":39}}}},"statementMap":{"1":{"start":{"line":22,"column":0},"end":{"line":117,"column":3}},"2":{"start":{"line":37,"column":8},"end":{"line":37,"column":22}},"3":{"start":{"line":39,"column":8},"end":{"line":39,"column":33}},"4":{"start":{"line":41,"column":8},"end":{"line":41,"column":45}},"5":{"start":{"line":42,"column":8},"end":{"line":42,"column":51}},"6":{"start":{"line":49,"column":8},"end":{"line":49,"column":22}},"7":{"start":{"line":50,"column":8},"end":{"line":53,"column":11}},"8":{"start":{"line":63,"column":8},"end":{"line":63,"column":22}},"9":{"start":{"line":64,"column":8},"end":{"line":65,"column":69}},"10":{"start":{"line":67,"column":8},"end":{"line":80,"column":9}},"11":{"start":{"line":68,"column":12},"end":{"line":70,"column":13}},"12":{"start":{"line":69,"column":16},"end":{"line":69,"column":42}},"13":{"start":{"line":71,"column":12},"end":{"line":71,"column":43}},"14":{"start":{"line":73,"column":12},"end":{"line":79,"column":13}},"15":{"start":{"line":74,"column":16},"end":{"line":78,"column":19}},"16":{"start":{"line":89,"column":8},"end":{"line":91,"column":13}},"17":{"start":{"line":92,"column":8},"end":{"line":92,"column":54}},"18":{"start":{"line":93,"column":8},"end":{"line":93,"column":74}},"19":{"start":{"line":94,"column":8},"end":{"line":94,"column":46}},"20":{"start":{"line":96,"column":8},"end":{"line":96,"column":29}},"21":{"start":{"line":98,"column":8},"end":{"line":98,"column":52}},"22":{"start":{"line":100,"column":8},"end":{"line":100,"column":60}},"23":{"start":{"line":102,"column":8},"end":{"line":113,"column":9}},"24":{"start":{"line":103,"column":12},"end":{"line":103,"column":65}},"25":{"start":{"line":104,"column":12},"end":{"line":104,"column":39}},"26":{"start":{"line":105,"column":12},"end":{"line":105,"column":62}},"27":{"start":{"line":106,"column":12},"end":{"line":106,"column":68}},"28":{"start":{"line":107,"column":12},"end":{"line":108,"column":29}},"29":{"start":{"line":109,"column":12},"end":{"line":110,"column":44}},"30":{"start":{"line":112,"column":12},"end":{"line":112,"column":73}},"31":{"start":{"line":114,"column":8},"end":{"line":114,"column":30}},"32":{"start":{"line":115,"column":8},"end":{"line":115,"column":59}}},"branchMap":{"1":{"line":67,"type":"if","locations":[{"start":{"line":67,"column":8},"end":{"line":67,"column":8}},{"start":{"line":67,"column":8},"end":{"line":67,"column":8}}]},"2":{"line":68,"type":"if","locations":[{"start":{"line":68,"column":12},"end":{"line":68,"column":12}},{"start":{"line":68,"column":12},"end":{"line":68,"column":12}}]},"3":{"line":73,"type":"if","locations":[{"start":{"line":73,"column":12},"end":{"line":73,"column":12}},{"start":{"line":73,"column":12},"end":{"line":73,"column":12}}]},"4":{"line":102,"type":"if","locations":[{"start":{"line":102,"column":8},"end":{"line":102,"column":8}},{"start":{"line":102,"column":8},"end":{"line":102,"column":8}}]}}};
-}
-__cov_ExGsrJnJEtzoPht3_mf__Q = __cov_ExGsrJnJEtzoPht3_mf__Q['/home/travis/build/terrestris/BasiGX/src/view/form/field/GazetteerCombo.js'];
-__cov_ExGsrJnJEtzoPht3_mf__Q.s['1']++;Ext.define('BasiGX.view.form.field.GazetteerCombo',{extend:'Ext.form.field.ComboBox',xtype:'basigx_form_field_gazetteercombo',requires:['BasiGX.util.Map'],store:[],initComponent:function(){__cov_ExGsrJnJEtzoPht3_mf__Q.f['1']++;__cov_ExGsrJnJEtzoPht3_mf__Q.s['2']++;var me=this;__cov_ExGsrJnJEtzoPht3_mf__Q.s['3']++;me.callParent(arguments);__cov_ExGsrJnJEtzoPht3_mf__Q.s['4']++;me.on('boxready',me.onBoxReady,me);__cov_ExGsrJnJEtzoPht3_mf__Q.s['5']++;me.on('change',me.onComboValueChange,me);},onBoxReady:function(){__cov_ExGsrJnJEtzoPht3_mf__Q.f['2']++;__cov_ExGsrJnJEtzoPht3_mf__Q.s['6']++;var me=this;__cov_ExGsrJnJEtzoPht3_mf__Q.s['7']++;me.nav=Ext.create('Ext.util.KeyNav',me.el,{esc:me.clearValue,scope:me});},onComboValueChange:function(combo,newValue){__cov_ExGsrJnJEtzoPht3_mf__Q.f['3']++;__cov_ExGsrJnJEtzoPht3_mf__Q.s['8']++;var me=this;__cov_ExGsrJnJEtzoPht3_mf__Q.s['9']++;var gazetteerGrid=Ext.ComponentQuery.query('basigx_grid_gazetteergrid')[0];__cov_ExGsrJnJEtzoPht3_mf__Q.s['10']++;if(newValue){__cov_ExGsrJnJEtzoPht3_mf__Q.b['1'][0]++;__cov_ExGsrJnJEtzoPht3_mf__Q.s['11']++;if(gazetteerGrid){__cov_ExGsrJnJEtzoPht3_mf__Q.b['2'][0]++;__cov_ExGsrJnJEtzoPht3_mf__Q.s['12']++;gazetteerGrid.show(combo);}else{__cov_ExGsrJnJEtzoPht3_mf__Q.b['2'][1]++;}__cov_ExGsrJnJEtzoPht3_mf__Q.s['13']++;me.doGazetteerSearch(newValue);}else{__cov_ExGsrJnJEtzoPht3_mf__Q.b['1'][1]++;__cov_ExGsrJnJEtzoPht3_mf__Q.s['14']++;if(gazetteerGrid){__cov_ExGsrJnJEtzoPht3_mf__Q.b['3'][0]++;__cov_ExGsrJnJEtzoPht3_mf__Q.s['15']++;gazetteerGrid.getEl().slideOut('t',{duration:250,callback:gazetteerGrid.onGazetteerGridSlideOut,scope:gazetteerGrid});}else{__cov_ExGsrJnJEtzoPht3_mf__Q.b['3'][1]++;}}},doGazetteerSearch:function(value){__cov_ExGsrJnJEtzoPht3_mf__Q.f['4']++;__cov_ExGsrJnJEtzoPht3_mf__Q.s['16']++;var gazetteerGrid=Ext.ComponentQuery.query('basigx_grid_gazetteergrid')[0];__cov_ExGsrJnJEtzoPht3_mf__Q.s['17']++;var gazetteerStore=gazetteerGrid.getStore();__cov_ExGsrJnJEtzoPht3_mf__Q.s['18']++;var checkbox=gazetteerGrid.down('checkbox[name=limitcheckbox]');__cov_ExGsrJnJEtzoPht3_mf__Q.s['19']++;var limitToBBox=checkbox.getValue();__cov_ExGsrJnJEtzoPht3_mf__Q.s['20']++;gazetteerGrid.show();__cov_ExGsrJnJEtzoPht3_mf__Q.s['21']++;Ext.Ajax.abort(gazetteerStore._lastRequest);__cov_ExGsrJnJEtzoPht3_mf__Q.s['22']++;gazetteerStore.getProxy().setExtraParam('q',value);__cov_ExGsrJnJEtzoPht3_mf__Q.s['23']++;if(limitToBBox){__cov_ExGsrJnJEtzoPht3_mf__Q.b['4'][0]++;__cov_ExGsrJnJEtzoPht3_mf__Q.s['24']++;var map=BasiGX.util.Map.getMapComponent().getMap();__cov_ExGsrJnJEtzoPht3_mf__Q.s['25']++;var olView=map.getView();__cov_ExGsrJnJEtzoPht3_mf__Q.s['26']++;var projection=olView.getProjection().getCode();__cov_ExGsrJnJEtzoPht3_mf__Q.s['27']++;var bbox=map.getView().calculateExtent(map.getSize());__cov_ExGsrJnJEtzoPht3_mf__Q.s['28']++;var transformedBbox=ol.proj.transformExtent(bbox,projection,'EPSG:4326');__cov_ExGsrJnJEtzoPht3_mf__Q.s['29']++;gazetteerStore.getProxy().setExtraParam('viewboxlbrt',transformedBbox.toString());}else{__cov_ExGsrJnJEtzoPht3_mf__Q.b['4'][1]++;__cov_ExGsrJnJEtzoPht3_mf__Q.s['30']++;gazetteerStore.getProxy().setExtraParam('viewboxlbrt',null);}__cov_ExGsrJnJEtzoPht3_mf__Q.s['31']++;gazetteerStore.load();__cov_ExGsrJnJEtzoPht3_mf__Q.s['32']++;gazetteerStore._lastRequest=Ext.Ajax.getLatest();}});
+    xtype: 'basigx_form_field_gazetteercombo',
+
+    requires: [
+        'BasiGX.util.Map'
+    ],
+
+    store: [],
+
+    /**
+     * Initializes the gazetteer combo component.
+     */
+    initComponent: function() {
+        var me = this;
+
+        me.callParent(arguments);
+
+        me.on('boxready', me.onBoxReady, me);
+        me.on('change', me.onComboValueChange, me);
+    },
+
+    /**
+     *
+     */
+    onBoxReady: function() {
+        var me = this;
+        me.nav = Ext.create('Ext.util.KeyNav', me.el, {
+            esc: me.clearValue,
+            scope: me
+        });
+    },
+
+    /**
+     * When the combo value changes, do a new gazetteer search.
+     *
+     * @param {BasiGX.view.form.field.GazetteerCombo} combo The combo.
+     * @param {String} newValue The new selected value.
+     */
+    onComboValueChange: function(combo, newValue) {
+        var me = this;
+        var gazetteerGrid =
+            Ext.ComponentQuery.query('basigx_grid_gazetteergrid')[0];
+
+        if (newValue) {
+            if (gazetteerGrid) {
+                gazetteerGrid.show(combo);
+            }
+            me.doGazetteerSearch(newValue);
+        } else {
+            if (gazetteerGrid) {
+                gazetteerGrid.getEl().slideOut('t', {
+                    duration: 250,
+                    callback: gazetteerGrid.onGazetteerGridSlideOut,
+                    scope: gazetteerGrid
+                });
+            }
+        }
+    },
+
+    /**
+     * Modifies and then loads the store of the `basigx_grid_gazetteergrid`.
+     *
+     * @param {String} value The new selected value.
+     */
+    doGazetteerSearch: function(value) {
+        var gazetteerGrid = Ext.ComponentQuery.query(
+            'basigx_grid_gazetteergrid'
+        )[0];
+        var gazetteerStore = gazetteerGrid.getStore();
+        var checkbox = gazetteerGrid.down('checkbox[name=limitcheckbox]');
+        var limitToBBox = checkbox.getValue();
+
+        gazetteerGrid.show();
+
+        Ext.Ajax.abort(gazetteerStore._lastRequest);
+
+        gazetteerStore.getProxy().setExtraParam('q', value);
+
+        if (limitToBBox) {
+            var map = BasiGX.util.Map.getMapComponent().getMap();
+            var olView = map.getView();
+            var projection = olView.getProjection().getCode();
+            var bbox = map.getView().calculateExtent(map.getSize());
+            var transformedBbox = ol.proj.transformExtent(bbox, projection,
+                'EPSG:4326');
+            gazetteerStore.getProxy().setExtraParam('viewboxlbrt',
+                transformedBbox.toString());
+        } else {
+            gazetteerStore.getProxy().setExtraParam('viewboxlbrt', null);
+        }
+        gazetteerStore.load();
+        gazetteerStore._lastRequest = Ext.Ajax.getLatest();
+    }
+});

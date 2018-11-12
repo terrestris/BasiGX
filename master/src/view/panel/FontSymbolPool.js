@@ -1,9 +1,240 @@
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ *
+ * BasiGX.view.panel.FontSymbolPool
+ *
+ * Used to display the available fonts and their symbols available in
+ * the geoserver. Enables user to select a symbol for e.g. SLD styling
+ *
+ * @class BasiGX.view.panel.FontSymbolPool
+ */
+Ext.define('BasiGX.view.panel.FontSymbolPool', {
+    extend: 'Ext.panel.Panel',
+    xtype: 'basigx-panel-fontsymbolpool',
 
-var __cov_W529EYzbG5qMLaVzvXP_Ng = (Function('return this'))();
-if (!__cov_W529EYzbG5qMLaVzvXP_Ng.__coverage__) { __cov_W529EYzbG5qMLaVzvXP_Ng.__coverage__ = {}; }
-__cov_W529EYzbG5qMLaVzvXP_Ng = __cov_W529EYzbG5qMLaVzvXP_Ng.__coverage__;
-if (!(__cov_W529EYzbG5qMLaVzvXP_Ng['/home/travis/build/terrestris/BasiGX/src/view/panel/FontSymbolPool.js'])) {
-   __cov_W529EYzbG5qMLaVzvXP_Ng['/home/travis/build/terrestris/BasiGX/src/view/panel/FontSymbolPool.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/panel/FontSymbolPool.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0},"b":{"1":[0,0],"2":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0},"fnMap":{"1":{"name":"(anonymous_1)","line":122,"loc":{"start":{"line":122,"column":19},"end":{"line":122,"column":30}}},"2":{"name":"(anonymous_2)","line":178,"loc":{"start":{"line":178,"column":18},"end":{"line":178,"column":44}}},"3":{"name":"(anonymous_3)","line":194,"loc":{"start":{"line":194,"column":25},"end":{"line":194,"column":44}}},"4":{"name":"(anonymous_4)","line":203,"loc":{"start":{"line":203,"column":25},"end":{"line":203,"column":36}}},"5":{"name":"(anonymous_5)","line":215,"loc":{"start":{"line":215,"column":19},"end":{"line":215,"column":30}}},"6":{"name":"(anonymous_6)","line":219,"loc":{"start":{"line":219,"column":25},"end":{"line":219,"column":41}}},"7":{"name":"(anonymous_7)","line":226,"loc":{"start":{"line":226,"column":39},"end":{"line":226,"column":72}}},"8":{"name":"(anonymous_8)","line":234,"loc":{"start":{"line":234,"column":24},"end":{"line":234,"column":35}}}},"statementMap":{"1":{"start":{"line":25,"column":0},"end":{"line":240,"column":3}},"2":{"start":{"line":123,"column":8},"end":{"line":123,"column":22}},"3":{"start":{"line":126,"column":8},"end":{"line":139,"column":11}},"4":{"start":{"line":140,"column":8},"end":{"line":140,"column":21}},"5":{"start":{"line":142,"column":8},"end":{"line":154,"column":11}},"6":{"start":{"line":156,"column":8},"end":{"line":166,"column":10}},"7":{"start":{"line":168,"column":8},"end":{"line":168,"column":24}},"8":{"start":{"line":179,"column":8},"end":{"line":179,"column":64}},"9":{"start":{"line":180,"column":8},"end":{"line":180,"column":55}},"10":{"start":{"line":181,"column":8},"end":{"line":181,"column":57}},"11":{"start":{"line":182,"column":8},"end":{"line":182,"column":49}},"12":{"start":{"line":184,"column":8},"end":{"line":207,"column":9}},"13":{"start":{"line":185,"column":12},"end":{"line":206,"column":15}},"14":{"start":{"line":195,"column":20},"end":{"line":198,"column":22}},"15":{"start":{"line":199,"column":20},"end":{"line":199,"column":63}},"16":{"start":{"line":200,"column":20},"end":{"line":200,"column":51}},"17":{"start":{"line":201,"column":20},"end":{"line":201,"column":47}},"18":{"start":{"line":204,"column":20},"end":{"line":204,"column":70}},"19":{"start":{"line":216,"column":8},"end":{"line":216,"column":22}},"20":{"start":{"line":218,"column":8},"end":{"line":218,"column":64}},"21":{"start":{"line":219,"column":8},"end":{"line":221,"column":11}},"22":{"start":{"line":220,"column":12},"end":{"line":220,"column":28}},"23":{"start":{"line":222,"column":8},"end":{"line":224,"column":11}},"24":{"start":{"line":225,"column":8},"end":{"line":225,"column":29}},"25":{"start":{"line":226,"column":8},"end":{"line":228,"column":11}},"26":{"start":{"line":227,"column":12},"end":{"line":227,"column":69}},"27":{"start":{"line":235,"column":8},"end":{"line":235,"column":22}},"28":{"start":{"line":236,"column":8},"end":{"line":238,"column":9}},"29":{"start":{"line":237,"column":12},"end":{"line":237,"column":36}}},"branchMap":{"1":{"line":184,"type":"if","locations":[{"start":{"line":184,"column":8},"end":{"line":184,"column":8}},{"start":{"line":184,"column":8},"end":{"line":184,"column":8}}]},"2":{"line":236,"type":"if","locations":[{"start":{"line":236,"column":8},"end":{"line":236,"column":8}},{"start":{"line":236,"column":8},"end":{"line":236,"column":8}}]}}};
-}
-__cov_W529EYzbG5qMLaVzvXP_Ng = __cov_W529EYzbG5qMLaVzvXP_Ng['/home/travis/build/terrestris/BasiGX/src/view/panel/FontSymbolPool.js'];
-__cov_W529EYzbG5qMLaVzvXP_Ng.s['1']++;Ext.define('BasiGX.view.panel.FontSymbolPool',{extend:'Ext.panel.Panel',xtype:'basigx-panel-fontsymbolpool',requires:['BasiGX.util.Url','BasiGX.util.CSRF','BasiGX.util.MsgBox','BasiGX.view.panel.TtfGlyphInspector'],viewModel:{data:{closeBtnText:'Close',fontSelectLabel:'Select a font',documentation:'<h2>Zeichensatz Sammlung</h2>\u2022 In diesem Dialog '+'kann für die Darstellung von Objekten ein Zeichen einer '+'Schriftart gewählt werden.<br>\u2022 Wählen Sie zunächst eine '+'Schriftart aus.<br>\u2022 Anschließend können Sie aus der '+'Zeichentabelle ein Symbol auswählen, dass zur Darstellung '+'verwendet werden soll'}},padding:5,width:535,height:600,layout:'vbox',config:{geoserverFontListUrl:null,geoserverFontUrl:null,useCsrfToken:false,onGlyphSelected:null,useCloseButton:true,fontBlobUrl:null,selectedFontName:null},initComponent:function(){__cov_W529EYzbG5qMLaVzvXP_Ng.f['1']++;__cov_W529EYzbG5qMLaVzvXP_Ng.s['2']++;var me=this;__cov_W529EYzbG5qMLaVzvXP_Ng.s['3']++;var store=Ext.create('Ext.data.Store',{sorters:'fontName',fields:['name'],proxy:{type:'ajax',url:me.getGeoserverFontListUrl(),reader:{type:'json',rootProperty:'ResourceDirectory.children.child'}}});__cov_W529EYzbG5qMLaVzvXP_Ng.s['4']++;store.load();__cov_W529EYzbG5qMLaVzvXP_Ng.s['5']++;me.items=[{xtype:'combo',width:400,store:store,bind:{fieldLabel:'{fontSelectLabel}'},displayField:'name',queryMode:'local',listeners:{change:me.fontSelected}}];__cov_W529EYzbG5qMLaVzvXP_Ng.s['6']++;me.bbar=['->',{bind:{text:'{closeBtnText}'},scope:me,handler:me.onCloseButtonClick,hidden:!me.getUseCloseButton()}];__cov_W529EYzbG5qMLaVzvXP_Ng.s['7']++;me.callParent();},fontSelected:function(combo,fontName){__cov_W529EYzbG5qMLaVzvXP_Ng.f['2']++;__cov_W529EYzbG5qMLaVzvXP_Ng.s['8']++;var symbolPool=this.up('basigx-panel-fontsymbolpool');__cov_W529EYzbG5qMLaVzvXP_Ng.s['9']++;var selectedRecord=combo.getSelectedRecord();__cov_W529EYzbG5qMLaVzvXP_Ng.s['10']++;var ttfHref=selectedRecord.getData().link.href;__cov_W529EYzbG5qMLaVzvXP_Ng.s['11']++;symbolPool.setSelectedFontName(fontName);__cov_W529EYzbG5qMLaVzvXP_Ng.s['12']++;if(ttfHref){__cov_W529EYzbG5qMLaVzvXP_Ng.b['1'][0]++;__cov_W529EYzbG5qMLaVzvXP_Ng.s['13']++;Ext.Ajax.request({binary:true,url:symbolPool.getGeoserverFontUrl(),method:'GET',params:{fontName:fontName},defaultHeaders:BasiGX.util.CSRF.getHeader(),scope:this,success:function(response){__cov_W529EYzbG5qMLaVzvXP_Ng.f['3']++;__cov_W529EYzbG5qMLaVzvXP_Ng.s['14']++;var blob=new Blob([response.responseBytes],{type:'application/octet-stream'});__cov_W529EYzbG5qMLaVzvXP_Ng.s['15']++;var url=window.URL.createObjectURL(blob);__cov_W529EYzbG5qMLaVzvXP_Ng.s['16']++;symbolPool.setFontBlobUrl(url);__cov_W529EYzbG5qMLaVzvXP_Ng.s['17']++;symbolPool.renderSymbols();},failure:function(){__cov_W529EYzbG5qMLaVzvXP_Ng.f['4']++;__cov_W529EYzbG5qMLaVzvXP_Ng.s['18']++;Ext.toast('Error retrieving the Graphic preview');}});}else{__cov_W529EYzbG5qMLaVzvXP_Ng.b['1'][1]++;}},renderSymbols:function(){__cov_W529EYzbG5qMLaVzvXP_Ng.f['5']++;__cov_W529EYzbG5qMLaVzvXP_Ng.s['19']++;var me=this;__cov_W529EYzbG5qMLaVzvXP_Ng.s['20']++;var panels=me.query('basigx-panel-ttfglyphinspector');__cov_W529EYzbG5qMLaVzvXP_Ng.s['21']++;Ext.each(panels,function(panel){__cov_W529EYzbG5qMLaVzvXP_Ng.f['6']++;__cov_W529EYzbG5qMLaVzvXP_Ng.s['22']++;panel.destroy();});__cov_W529EYzbG5qMLaVzvXP_Ng.s['23']++;var glyphPanel=Ext.create('BasiGX.view.panel.TtfGlyphInspector',{fontSrc:this.getFontBlobUrl()});__cov_W529EYzbG5qMLaVzvXP_Ng.s['24']++;this.add(glyphPanel);__cov_W529EYzbG5qMLaVzvXP_Ng.s['25']++;glyphPanel.on('glyphSelected',function(fullQualifiedGlyphName){__cov_W529EYzbG5qMLaVzvXP_Ng.f['7']++;__cov_W529EYzbG5qMLaVzvXP_Ng.s['26']++;me.getOnGlyphSelected().call(me,fullQualifiedGlyphName);});},onCloseButtonClick:function(){__cov_W529EYzbG5qMLaVzvXP_Ng.f['8']++;__cov_W529EYzbG5qMLaVzvXP_Ng.s['27']++;var me=this;__cov_W529EYzbG5qMLaVzvXP_Ng.s['28']++;if(me.up('window')){__cov_W529EYzbG5qMLaVzvXP_Ng.b['2'][0]++;__cov_W529EYzbG5qMLaVzvXP_Ng.s['29']++;me.up('window').close();}else{__cov_W529EYzbG5qMLaVzvXP_Ng.b['2'][1]++;}}});
+    requires: [
+        'BasiGX.util.Url',
+        'BasiGX.util.CSRF',
+        'BasiGX.util.MsgBox',
+        'BasiGX.view.panel.TtfGlyphInspector'
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            closeBtnText: 'Close',
+            fontSelectLabel: 'Select a font',
+            documentation: '<h2>Zeichensatz Sammlung</h2>• In diesem Dialog ' +
+                'kann für die Darstellung von Objekten ein Zeichen einer ' +
+                'Schriftart gewählt werden.<br>• Wählen Sie zunächst eine ' +
+                'Schriftart aus.<br>• Anschließend können Sie aus der ' +
+                'Zeichentabelle ein Symbol auswählen, dass zur Darstellung ' +
+                'verwendet werden soll'
+        }
+    },
+
+    /**
+     * global padding
+     */
+    padding: 5,
+
+    /**
+     * a default width for this component
+     */
+    width: 535,
+
+    /**
+     * a default height for this component
+     */
+    height: 600,
+
+    /**
+     * the layout to use
+     */
+    layout: 'vbox',
+
+    /**
+     *
+     */
+    config: {
+        /**
+         * The REST URL of the GeoServer to retrieve all available fonts.
+         * E.g. http://localhost:8080/geoserver/rest/resource/fonts
+         * would list all fonts from the GEOSERVER_DATA_DIR/fonts directory
+         */
+        geoserverFontListUrl: null,
+
+        /**
+         * The REST URL of the GeoServer to retrieve a specific font. E.g.
+         * http://localhost:8080/geoserver/rest/resource/fonts/Arial.ttf
+         * would retrieve the specific font from the
+         * GEOSERVER_DATA_DIR/fonts directory
+         */
+        geoserverFontUrl: null,
+
+        /**
+         * flag that indicates that a csrf-token should be sent to backend
+         * interfaces on every ajax / form submit.
+         */
+        useCsrfToken: false,
+
+        /**
+         * function that should be called when a glyph has been selected
+         */
+        onGlyphSelected: null,
+
+        /**
+         * should we offer a close button? Will close a parent window if
+         * one exists
+         */
+        useCloseButton: true,
+
+        /**
+         * The current ttf font object url to use as blob converted Uint8Array
+         */
+        fontBlobUrl: null,
+
+        /**
+         * The name of the currently selected font
+         */
+        selectedFontName: null
+    },
+
+    /**
+     *
+     */
+    initComponent: function() {
+        var me = this;
+
+        // retrieve the available fonts from GeoServer via REST
+        var store = Ext.create('Ext.data.Store', {
+            sorters: 'fontName',
+            fields: [
+                'name'
+            ],
+            proxy: {
+                type: 'ajax',
+                url: me.getGeoserverFontListUrl(),
+                reader: {
+                    type: 'json',
+                    rootProperty: 'ResourceDirectory.children.child'
+                }
+            }
+        });
+        store.load();
+
+        me.items = [{
+            xtype: 'combo',
+            width: 400,
+            store: store,
+            bind: {
+                fieldLabel: '{fontSelectLabel}'
+            },
+            displayField: 'name',
+            queryMode: 'local',
+            listeners: {
+                change: me.fontSelected
+            }
+        }];
+
+        me.bbar = [
+            '->',
+            {
+                bind: {
+                    text: '{closeBtnText}'
+                },
+                scope: me,
+                handler: me.onCloseButtonClick,
+                hidden: !me.getUseCloseButton()
+            }
+        ];
+
+        me.callParent();
+    },
+
+    /**
+     * Method retrieves a TrueTypeFont in binary mode from the GeoServer
+     * in order to render its glyphs on the client side.
+     *
+     * @param {Object} combo The combobox that fired the event.
+     * @param {String} fontName The name of the font that has been selected.
+     */
+    fontSelected: function(combo, fontName) {
+        var symbolPool = this.up('basigx-panel-fontsymbolpool');
+        var selectedRecord = combo.getSelectedRecord();
+        var ttfHref = selectedRecord.getData().link.href;
+        symbolPool.setSelectedFontName(fontName);
+
+        if (ttfHref) {
+            Ext.Ajax.request({
+                binary: true,
+                url: symbolPool.getGeoserverFontUrl(),
+                method: 'GET',
+                params: {
+                    fontName: fontName
+                },
+                defaultHeaders: BasiGX.util.CSRF.getHeader(),
+                scope: this,
+                success: function(response) {
+                    var blob = new Blob(
+                        [response.responseBytes],
+                        {type: 'application/octet-stream'}
+                    );
+                    var url = window.URL.createObjectURL(blob);
+                    symbolPool.setFontBlobUrl(url);
+                    symbolPool.renderSymbols();
+                },
+                failure: function() {
+                    Ext.toast('Error retrieving the Graphic preview');
+                }
+            });
+        }
+    },
+
+    /**
+     * Method renders the available glyphs of a TrueTypeFont by instantiating
+     * 'BasiGX.view.panel.TtfGlyphInspector' with the font-blob. If a glyph
+     * has been clicked by the user, the given callBack function will be called.
+     */
+    renderSymbols: function() {
+        var me = this;
+        // cleanup
+        var panels = me.query('basigx-panel-ttfglyphinspector');
+        Ext.each(panels, function(panel) {
+            panel.destroy();
+        });
+        var glyphPanel = Ext.create('BasiGX.view.panel.TtfGlyphInspector', {
+            fontSrc: this.getFontBlobUrl()
+        });
+        this.add(glyphPanel);
+        glyphPanel.on('glyphSelected', function(fullQualifiedGlyphName) {
+            me.getOnGlyphSelected().call(me, fullQualifiedGlyphName);
+        });
+    },
+
+    /**
+     * Method closes the window where this panel is embedded, if any.
+     */
+    onCloseButtonClick: function() {
+        var me = this;
+        if (me.up('window')) {
+            me.up('window').close();
+        }
+    }
+});

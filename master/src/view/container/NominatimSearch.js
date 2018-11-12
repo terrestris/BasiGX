@@ -1,9 +1,721 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Nominatim Search
+ *
+ * Used to search in the glorious dataset of OSM
+ *
+ * Example of usage:
+ *
+ *     {
+ *         xtype: 'basigx-search-nominatim',
+ *         clusterResults: true,
+ *         viewboxlbrt: '6.9186,52.4677,11.2308,53.9642'
+ *     }
+ *
+ * TODO This class has a lot in common with both #OverpassSearch and the
+ *      generic #WfsSearch. We should factor out shared code.
+ *
+ * @class BasiGX.view.container.NominatimSearch
+ */
+Ext.define('BasiGX.view.container.NominatimSearch', {
+    extend: 'Ext.container.Container',
+    xtype: 'basigx-search-nominatim',
 
-var __cov_qxo3zUK$wSegRtrvze0U_Q = (Function('return this'))();
-if (!__cov_qxo3zUK$wSegRtrvze0U_Q.__coverage__) { __cov_qxo3zUK$wSegRtrvze0U_Q.__coverage__ = {}; }
-__cov_qxo3zUK$wSegRtrvze0U_Q = __cov_qxo3zUK$wSegRtrvze0U_Q.__coverage__;
-if (!(__cov_qxo3zUK$wSegRtrvze0U_Q['/home/travis/build/terrestris/BasiGX/src/view/container/NominatimSearch.js'])) {
-   __cov_qxo3zUK$wSegRtrvze0U_Q['/home/travis/build/terrestris/BasiGX/src/view/container/NominatimSearch.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/container/NominatimSearch.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0,"137":0,"138":0,"139":0,"140":0,"141":0,"142":0,"143":0,"144":0,"145":0,"146":0,"147":0,"148":0,"149":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0],"19":[0,0],"20":[0,0],"21":[0,0],"22":[0,0],"23":[0,0],"24":[0,0],"25":[0,0],"26":[0,0],"27":[0,0],"28":[0,0,0],"29":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0},"fnMap":{"1":{"name":"(anonymous_1)","line":126,"loc":{"start":{"line":126,"column":45},"end":{"line":126,"column":68}}},"2":{"name":"(anonymous_2)","line":182,"loc":{"start":{"line":182,"column":24},"end":{"line":182,"column":49}}},"3":{"name":"(anonymous_3)","line":259,"loc":{"start":{"line":259,"column":19},"end":{"line":259,"column":30}}},"4":{"name":"(anonymous_4)","line":284,"loc":{"start":{"line":284,"column":23},"end":{"line":284,"column":41}}},"5":{"name":"(anonymous_5)","line":335,"loc":{"start":{"line":335,"column":40},"end":{"line":335,"column":77}}},"6":{"name":"(anonymous_6)","line":348,"loc":{"start":{"line":348,"column":34},"end":{"line":348,"column":50}}},"7":{"name":"(anonymous_7)","line":390,"loc":{"start":{"line":390,"column":19},"end":{"line":390,"column":39}}},"8":{"name":"(anonymous_8)","line":408,"loc":{"start":{"line":408,"column":68},"end":{"line":408,"column":79}}},"9":{"name":"(anonymous_9)","line":419,"loc":{"start":{"line":419,"column":28},"end":{"line":419,"column":39}}},"10":{"name":"(anonymous_10)","line":428,"loc":{"start":{"line":428,"column":15},"end":{"line":428,"column":26}}},"11":{"name":"(anonymous_11)","line":437,"loc":{"start":{"line":437,"column":19},"end":{"line":437,"column":30}}},"12":{"name":"(anonymous_12)","line":450,"loc":{"start":{"line":450,"column":35},"end":{"line":450,"column":50}}},"13":{"name":"(anonymous_13)","line":458,"loc":{"start":{"line":458,"column":21},"end":{"line":458,"column":40}}},"14":{"name":"(anonymous_14)","line":470,"loc":{"start":{"line":470,"column":21},"end":{"line":470,"column":40}}},"15":{"name":"(anonymous_15)","line":514,"loc":{"start":{"line":514,"column":23},"end":{"line":514,"column":42}}},"16":{"name":"(anonymous_16)","line":523,"loc":{"start":{"line":523,"column":27},"end":{"line":523,"column":45}}},"17":{"name":"(anonymous_17)","line":527,"loc":{"start":{"line":527,"column":33},"end":{"line":527,"column":48}}},"18":{"name":"(anonymous_18)","line":561,"loc":{"start":{"line":561,"column":18},"end":{"line":561,"column":35}}},"19":{"name":"(anonymous_19)","line":588,"loc":{"start":{"line":588,"column":20},"end":{"line":588,"column":42}}},"20":{"name":"(anonymous_20)","line":605,"loc":{"start":{"line":605,"column":22},"end":{"line":605,"column":56}}},"21":{"name":"(anonymous_21)","line":651,"loc":{"start":{"line":651,"column":24},"end":{"line":651,"column":58}}},"22":{"name":"(anonymous_22)","line":675,"loc":{"start":{"line":675,"column":30},"end":{"line":675,"column":64}}},"23":{"name":"(anonymous_23)","line":677,"loc":{"start":{"line":677,"column":19},"end":{"line":677,"column":33}}},"24":{"name":"(anonymous_24)","line":699,"loc":{"start":{"line":699,"column":34},"end":{"line":699,"column":52}}},"25":{"name":"(anonymous_25)","line":703,"loc":{"start":{"line":703,"column":34},"end":{"line":703,"column":49}}},"26":{"name":"(anonymous_26)","line":705,"loc":{"start":{"line":705,"column":47},"end":{"line":705,"column":59}}}},"statementMap":{"1":{"start":{"line":34,"column":0},"end":{"line":721,"column":3}},"2":{"start":{"line":127,"column":12},"end":{"line":144,"column":15}},"3":{"start":{"line":184,"column":12},"end":{"line":184,"column":72}},"4":{"start":{"line":185,"column":12},"end":{"line":187,"column":13}},"5":{"start":{"line":186,"column":16},"end":{"line":186,"column":35}},"6":{"start":{"line":188,"column":12},"end":{"line":204,"column":16}},"7":{"start":{"line":260,"column":8},"end":{"line":260,"column":22}},"8":{"start":{"line":263,"column":8},"end":{"line":263,"column":60}},"9":{"start":{"line":265,"column":8},"end":{"line":273,"column":9}},"10":{"start":{"line":266,"column":12},"end":{"line":271,"column":15}},"11":{"start":{"line":272,"column":12},"end":{"line":272,"column":56}},"12":{"start":{"line":275,"column":8},"end":{"line":299,"column":9}},"13":{"start":{"line":276,"column":12},"end":{"line":279,"column":15}},"14":{"start":{"line":281,"column":12},"end":{"line":293,"column":15}},"15":{"start":{"line":285,"column":20},"end":{"line":285,"column":64}},"16":{"start":{"line":286,"column":20},"end":{"line":286,"column":54}},"17":{"start":{"line":287,"column":20},"end":{"line":290,"column":21}},"18":{"start":{"line":288,"column":24},"end":{"line":288,"column":71}},"19":{"start":{"line":289,"column":24},"end":{"line":289,"column":54}},"20":{"start":{"line":291,"column":20},"end":{"line":291,"column":33}},"21":{"start":{"line":294,"column":12},"end":{"line":294,"column":45}},"22":{"start":{"line":297,"column":12},"end":{"line":297,"column":74}},"23":{"start":{"line":301,"column":8},"end":{"line":305,"column":11}},"24":{"start":{"line":307,"column":8},"end":{"line":369,"column":10}},"25":{"start":{"line":337,"column":28},"end":{"line":337,"column":58}},"26":{"start":{"line":338,"column":28},"end":{"line":342,"column":31}},"27":{"start":{"line":349,"column":28},"end":{"line":350,"column":50}},"28":{"start":{"line":370,"column":8},"end":{"line":370,"column":33}},"29":{"start":{"line":372,"column":8},"end":{"line":372,"column":57}},"30":{"start":{"line":373,"column":8},"end":{"line":373,"column":50}},"31":{"start":{"line":375,"column":8},"end":{"line":375,"column":67}},"32":{"start":{"line":377,"column":8},"end":{"line":380,"column":9}},"33":{"start":{"line":378,"column":12},"end":{"line":378,"column":63}},"34":{"start":{"line":379,"column":12},"end":{"line":379,"column":65}},"35":{"start":{"line":381,"column":8},"end":{"line":381,"column":62}},"36":{"start":{"line":391,"column":8},"end":{"line":391,"column":73}},"37":{"start":{"line":392,"column":8},"end":{"line":392,"column":39}},"38":{"start":{"line":394,"column":8},"end":{"line":396,"column":9}},"39":{"start":{"line":395,"column":12},"end":{"line":395,"column":19}},"40":{"start":{"line":399,"column":8},"end":{"line":399,"column":44}},"41":{"start":{"line":402,"column":8},"end":{"line":402,"column":39}},"42":{"start":{"line":405,"column":8},"end":{"line":407,"column":9}},"43":{"start":{"line":406,"column":12},"end":{"line":406,"column":54}},"44":{"start":{"line":408,"column":8},"end":{"line":410,"column":11}},"45":{"start":{"line":409,"column":12},"end":{"line":409,"column":47}},"46":{"start":{"line":411,"column":8},"end":{"line":413,"column":10}},"47":{"start":{"line":420,"column":8},"end":{"line":420,"column":22}},"48":{"start":{"line":421,"column":8},"end":{"line":421,"column":68}},"49":{"start":{"line":422,"column":8},"end":{"line":422,"column":23}},"50":{"start":{"line":429,"column":8},"end":{"line":429,"column":22}},"51":{"start":{"line":430,"column":8},"end":{"line":430,"column":55}},"52":{"start":{"line":431,"column":8},"end":{"line":431,"column":63}},"53":{"start":{"line":438,"column":8},"end":{"line":438,"column":22}},"54":{"start":{"line":439,"column":8},"end":{"line":439,"column":20}},"55":{"start":{"line":441,"column":8},"end":{"line":447,"column":10}},"56":{"start":{"line":449,"column":8},"end":{"line":449,"column":45}},"57":{"start":{"line":450,"column":8},"end":{"line":452,"column":11}},"58":{"start":{"line":451,"column":12},"end":{"line":451,"column":37}},"59":{"start":{"line":454,"column":8},"end":{"line":454,"column":28}},"60":{"start":{"line":456,"column":8},"end":{"line":475,"column":11}},"61":{"start":{"line":459,"column":16},"end":{"line":459,"column":37}},"62":{"start":{"line":460,"column":16},"end":{"line":467,"column":17}},"63":{"start":{"line":461,"column":20},"end":{"line":461,"column":64}},"64":{"start":{"line":462,"column":23},"end":{"line":467,"column":17}},"65":{"start":{"line":463,"column":20},"end":{"line":463,"column":52}},"66":{"start":{"line":465,"column":20},"end":{"line":466,"column":47}},"67":{"start":{"line":468,"column":16},"end":{"line":468,"column":59}},"68":{"start":{"line":471,"column":16},"end":{"line":471,"column":37}},"69":{"start":{"line":472,"column":16},"end":{"line":473,"column":30}},"70":{"start":{"line":515,"column":8},"end":{"line":515,"column":22}},"71":{"start":{"line":516,"column":8},"end":{"line":516,"column":67}},"72":{"start":{"line":518,"column":8},"end":{"line":520,"column":9}},"73":{"start":{"line":519,"column":12},"end":{"line":519,"column":24}},"74":{"start":{"line":522,"column":8},"end":{"line":522,"column":39}},"75":{"start":{"line":523,"column":8},"end":{"line":547,"column":11}},"76":{"start":{"line":524,"column":12},"end":{"line":524,"column":29}},"77":{"start":{"line":527,"column":12},"end":{"line":532,"column":15}},"78":{"start":{"line":528,"column":16},"end":{"line":531,"column":17}},"79":{"start":{"line":529,"column":20},"end":{"line":529,"column":37}},"80":{"start":{"line":530,"column":20},"end":{"line":530,"column":33}},"81":{"start":{"line":534,"column":12},"end":{"line":540,"column":15}},"82":{"start":{"line":541,"column":12},"end":{"line":545,"column":13}},"83":{"start":{"line":542,"column":16},"end":{"line":542,"column":65}},"84":{"start":{"line":544,"column":16},"end":{"line":544,"column":57}},"85":{"start":{"line":546,"column":12},"end":{"line":546,"column":70}},"86":{"start":{"line":549,"column":8},"end":{"line":549,"column":79}},"87":{"start":{"line":550,"column":8},"end":{"line":552,"column":9}},"88":{"start":{"line":551,"column":12},"end":{"line":551,"column":43}},"89":{"start":{"line":562,"column":8},"end":{"line":562,"column":22}},"90":{"start":{"line":563,"column":8},"end":{"line":563,"column":38}},"91":{"start":{"line":566,"column":8},"end":{"line":579,"column":9}},"92":{"start":{"line":567,"column":12},"end":{"line":569,"column":15}},"93":{"start":{"line":570,"column":12},"end":{"line":572,"column":15}},"94":{"start":{"line":573,"column":12},"end":{"line":573,"column":43}},"95":{"start":{"line":574,"column":12},"end":{"line":574,"column":49}},"96":{"start":{"line":576,"column":12},"end":{"line":578,"column":15}},"97":{"start":{"line":589,"column":8},"end":{"line":591,"column":10}},"98":{"start":{"line":592,"column":8},"end":{"line":592,"column":69}},"99":{"start":{"line":593,"column":8},"end":{"line":593,"column":45}},"100":{"start":{"line":606,"column":8},"end":{"line":608,"column":9}},"101":{"start":{"line":607,"column":12},"end":{"line":607,"column":19}},"102":{"start":{"line":609,"column":8},"end":{"line":609,"column":22}},"103":{"start":{"line":610,"column":8},"end":{"line":610,"column":20}},"104":{"start":{"line":611,"column":8},"end":{"line":611,"column":19}},"105":{"start":{"line":612,"column":8},"end":{"line":612,"column":17}},"106":{"start":{"line":614,"column":8},"end":{"line":614,"column":36}},"107":{"start":{"line":615,"column":8},"end":{"line":615,"column":53}},"108":{"start":{"line":617,"column":8},"end":{"line":626,"column":9}},"109":{"start":{"line":618,"column":12},"end":{"line":618,"column":73}},"110":{"start":{"line":619,"column":12},"end":{"line":620,"column":62}},"111":{"start":{"line":621,"column":12},"end":{"line":621,"column":57}},"112":{"start":{"line":622,"column":12},"end":{"line":622,"column":52}},"113":{"start":{"line":624,"column":12},"end":{"line":624,"column":38}},"114":{"start":{"line":625,"column":12},"end":{"line":625,"column":23}},"115":{"start":{"line":628,"column":8},"end":{"line":635,"column":9}},"116":{"start":{"line":629,"column":12},"end":{"line":631,"column":14}},"117":{"start":{"line":632,"column":12},"end":{"line":634,"column":14}},"118":{"start":{"line":636,"column":8},"end":{"line":639,"column":9}},"119":{"start":{"line":637,"column":12},"end":{"line":638,"column":39}},"120":{"start":{"line":652,"column":8},"end":{"line":654,"column":9}},"121":{"start":{"line":653,"column":12},"end":{"line":653,"column":19}},"122":{"start":{"line":655,"column":8},"end":{"line":655,"column":36}},"123":{"start":{"line":656,"column":8},"end":{"line":663,"column":9}},"124":{"start":{"line":657,"column":12},"end":{"line":657,"column":73}},"125":{"start":{"line":658,"column":12},"end":{"line":662,"column":13}},"126":{"start":{"line":659,"column":16},"end":{"line":659,"column":70}},"127":{"start":{"line":661,"column":16},"end":{"line":661,"column":78}},"128":{"start":{"line":676,"column":8},"end":{"line":676,"column":41}},"129":{"start":{"line":677,"column":8},"end":{"line":685,"column":17}},"130":{"start":{"line":678,"column":12},"end":{"line":678,"column":70}},"131":{"start":{"line":679,"column":12},"end":{"line":679,"column":52}},"132":{"start":{"line":680,"column":12},"end":{"line":684,"column":13}},"133":{"start":{"line":681,"column":16},"end":{"line":681,"column":69}},"134":{"start":{"line":683,"column":16},"end":{"line":683,"column":77}},"135":{"start":{"line":687,"column":8},"end":{"line":687,"column":75}},"136":{"start":{"line":688,"column":8},"end":{"line":688,"column":76}},"137":{"start":{"line":690,"column":8},"end":{"line":690,"column":57}},"138":{"start":{"line":700,"column":8},"end":{"line":700,"column":22}},"139":{"start":{"line":701,"column":8},"end":{"line":701,"column":27}},"140":{"start":{"line":702,"column":8},"end":{"line":702,"column":72}},"141":{"start":{"line":703,"column":8},"end":{"line":718,"column":11}},"142":{"start":{"line":704,"column":12},"end":{"line":714,"column":13}},"143":{"start":{"line":705,"column":16},"end":{"line":713,"column":19}},"144":{"start":{"line":706,"column":20},"end":{"line":712,"column":21}},"145":{"start":{"line":710,"column":24},"end":{"line":710,"column":46}},"146":{"start":{"line":711,"column":24},"end":{"line":711,"column":37}},"147":{"start":{"line":715,"column":12},"end":{"line":717,"column":13}},"148":{"start":{"line":716,"column":16},"end":{"line":716,"column":29}},"149":{"start":{"line":719,"column":8},"end":{"line":719,"column":30}}},"branchMap":{"1":{"line":138,"type":"cond-expr","locations":[{"start":{"line":138,"column":29},"end":{"line":143,"column":18}},{"start":{"line":143,"column":21},"end":{"line":143,"column":30}}]},"2":{"line":185,"type":"if","locations":[{"start":{"line":185,"column":12},"end":{"line":185,"column":12}},{"start":{"line":185,"column":12},"end":{"line":185,"column":12}}]},"3":{"line":265,"type":"if","locations":[{"start":{"line":265,"column":8},"end":{"line":265,"column":8}},{"start":{"line":265,"column":8},"end":{"line":265,"column":8}}]},"4":{"line":275,"type":"if","locations":[{"start":{"line":275,"column":8},"end":{"line":275,"column":8}},{"start":{"line":275,"column":8},"end":{"line":275,"column":8}}]},"5":{"line":275,"type":"binary-expr","locations":[{"start":{"line":275,"column":12},"end":{"line":275,"column":29}},{"start":{"line":275,"column":33},"end":{"line":275,"column":49}}]},"6":{"line":287,"type":"if","locations":[{"start":{"line":287,"column":20},"end":{"line":287,"column":20}},{"start":{"line":287,"column":20},"end":{"line":287,"column":20}}]},"7":{"line":377,"type":"if","locations":[{"start":{"line":377,"column":8},"end":{"line":377,"column":8}},{"start":{"line":377,"column":8},"end":{"line":377,"column":8}}]},"8":{"line":394,"type":"if","locations":[{"start":{"line":394,"column":8},"end":{"line":394,"column":8}},{"start":{"line":394,"column":8},"end":{"line":394,"column":8}}]},"9":{"line":405,"type":"if","locations":[{"start":{"line":405,"column":8},"end":{"line":405,"column":8}},{"start":{"line":405,"column":8},"end":{"line":405,"column":8}}]},"10":{"line":460,"type":"if","locations":[{"start":{"line":460,"column":16},"end":{"line":460,"column":16}},{"start":{"line":460,"column":16},"end":{"line":460,"column":16}}]},"11":{"line":462,"type":"if","locations":[{"start":{"line":462,"column":23},"end":{"line":462,"column":23}},{"start":{"line":462,"column":23},"end":{"line":462,"column":23}}]},"12":{"line":518,"type":"if","locations":[{"start":{"line":518,"column":8},"end":{"line":518,"column":8}},{"start":{"line":518,"column":8},"end":{"line":518,"column":8}}]},"13":{"line":528,"type":"if","locations":[{"start":{"line":528,"column":16},"end":{"line":528,"column":16}},{"start":{"line":528,"column":16},"end":{"line":528,"column":16}}]},"14":{"line":528,"type":"binary-expr","locations":[{"start":{"line":528,"column":20},"end":{"line":528,"column":21}},{"start":{"line":528,"column":25},"end":{"line":528,"column":76}}]},"15":{"line":541,"type":"if","locations":[{"start":{"line":541,"column":12},"end":{"line":541,"column":12}},{"start":{"line":541,"column":12},"end":{"line":541,"column":12}}]},"16":{"line":550,"type":"if","locations":[{"start":{"line":550,"column":8},"end":{"line":550,"column":8}},{"start":{"line":550,"column":8},"end":{"line":550,"column":8}}]},"17":{"line":566,"type":"if","locations":[{"start":{"line":566,"column":8},"end":{"line":566,"column":8}},{"start":{"line":566,"column":8},"end":{"line":566,"column":8}}]},"18":{"line":606,"type":"if","locations":[{"start":{"line":606,"column":8},"end":{"line":606,"column":8}},{"start":{"line":606,"column":8},"end":{"line":606,"column":8}}]},"19":{"line":617,"type":"if","locations":[{"start":{"line":617,"column":8},"end":{"line":617,"column":8}},{"start":{"line":617,"column":8},"end":{"line":617,"column":8}}]},"20":{"line":628,"type":"if","locations":[{"start":{"line":628,"column":8},"end":{"line":628,"column":8}},{"start":{"line":628,"column":8},"end":{"line":628,"column":8}}]},"21":{"line":636,"type":"if","locations":[{"start":{"line":636,"column":8},"end":{"line":636,"column":8}},{"start":{"line":636,"column":8},"end":{"line":636,"column":8}}]},"22":{"line":652,"type":"if","locations":[{"start":{"line":652,"column":8},"end":{"line":652,"column":8}},{"start":{"line":652,"column":8},"end":{"line":652,"column":8}}]},"23":{"line":656,"type":"if","locations":[{"start":{"line":656,"column":8},"end":{"line":656,"column":8}},{"start":{"line":656,"column":8},"end":{"line":656,"column":8}}]},"24":{"line":658,"type":"if","locations":[{"start":{"line":658,"column":12},"end":{"line":658,"column":12}},{"start":{"line":658,"column":12},"end":{"line":658,"column":12}}]},"25":{"line":680,"type":"if","locations":[{"start":{"line":680,"column":12},"end":{"line":680,"column":12}},{"start":{"line":680,"column":12},"end":{"line":680,"column":12}}]},"26":{"line":704,"type":"if","locations":[{"start":{"line":704,"column":12},"end":{"line":704,"column":12}},{"start":{"line":704,"column":12},"end":{"line":704,"column":12}}]},"27":{"line":706,"type":"if","locations":[{"start":{"line":706,"column":20},"end":{"line":706,"column":20}},{"start":{"line":706,"column":20},"end":{"line":706,"column":20}}]},"28":{"line":706,"type":"binary-expr","locations":[{"start":{"line":706,"column":24},"end":{"line":706,"column":59}},{"start":{"line":707,"column":23},"end":{"line":707,"column":64}},{"start":{"line":708,"column":23},"end":{"line":709,"column":64}}]},"29":{"line":715,"type":"if","locations":[{"start":{"line":715,"column":12},"end":{"line":715,"column":12}},{"start":{"line":715,"column":12},"end":{"line":715,"column":12}}]}}};
-}
-__cov_qxo3zUK$wSegRtrvze0U_Q = __cov_qxo3zUK$wSegRtrvze0U_Q['/home/travis/build/terrestris/BasiGX/src/view/container/NominatimSearch.js'];
-__cov_qxo3zUK$wSegRtrvze0U_Q.s['1']++;Ext.define('BasiGX.view.container.NominatimSearch',{extend:'Ext.container.Container',xtype:'basigx-search-nominatim',requires:['GeoExt.data.store.Features','GeoExt.component.FeatureRenderer','BasiGX.util.Animate','BasiGX.util.Map'],viewModel:{data:{searchTermTextFieldLabel:'Suchbegriff',searchResultGridTitle:'Suchergebnisse',resetBtnText:'Zurücksetzen',documentation:'<h2>Nominatim-Suche</h2>\u2022 Benutzen Sie die '+'Nominatim Suche, um nach Orten, Straßen, Koordinaten oder '+'anderen geographisch verortenen Daten aus dem Bestand von '+'OpenStreetMap zu suchen'}},config:{nominatimUrl:'https://nominatim.openstreetmap.org',format:'json',limit:100,viewboxlbrt:'-180,90,180,-90',minSearchTextChars:3,typeDelay:500,groupHeaderTpl:'{type}',searchResultFeatureStyle:new ol.style.Style({image:new ol.style.Circle({radius:6,fill:new ol.style.Fill({color:'#8B0000'}),stroke:new ol.style.Stroke({color:'#fff',width:2})}),fill:new ol.style.Fill({color:'#8B0000'}),stroke:new ol.style.Stroke({color:'#8B0000',width:4})}),searchResultHighlightFeatureStyleFn:function(radius,text){__cov_qxo3zUK$wSegRtrvze0U_Q.f['1']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['2']++;return new ol.style.Style({image:new ol.style.Circle({radius:radius,fill:new ol.style.Fill({color:'#EE0000'}),stroke:new ol.style.Stroke({color:'gray',width:3})}),text:text?(__cov_qxo3zUK$wSegRtrvze0U_Q.b['1'][0]++,new ol.style.Text({text:text.toString(),fill:new ol.style.Fill({color:'#fff'})})):(__cov_qxo3zUK$wSegRtrvze0U_Q.b['1'][1]++,undefined)});},searchResultSelectFeatureStyle:new ol.style.Style({image:new ol.style.Circle({radius:8,fill:new ol.style.Fill({color:'#0099CC'}),stroke:new ol.style.Stroke({color:'#fff',width:2})}),fill:new ol.style.Fill({color:'#0099CC'}),stroke:new ol.style.Stroke({color:'#0099CC',width:6})}),clusterStyleFn:function(amount,radius){__cov_qxo3zUK$wSegRtrvze0U_Q.f['2']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['3']++;var maxRadius=this.clusterLayer.getSource().distance_/2;__cov_qxo3zUK$wSegRtrvze0U_Q.s['4']++;if(radius>maxRadius){__cov_qxo3zUK$wSegRtrvze0U_Q.b['2'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['5']++;radius=maxRadius;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['2'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['6']++;return[new ol.style.Style({image:new ol.style.Circle({radius:radius,stroke:new ol.style.Stroke({color:'#fff'}),fill:new ol.style.Fill({color:'#3399CC'})}),text:new ol.style.Text({text:amount.toString(),fill:new ol.style.Fill({color:'#fff'})})})];},highLightFeatureOnHoverInGrid:true},layout:'fit',typeDelayTask:null,searchTerm:null,searchResultVectorLayer:null,clusterLayer:null,clusterResults:false,styleCache:[],map:null,initComponent:function(){__cov_qxo3zUK$wSegRtrvze0U_Q.f['3']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['7']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['8']++;me.map=BasiGX.util.Map.getMapComponent().getMap();__cov_qxo3zUK$wSegRtrvze0U_Q.s['9']++;if(!me.searchResultVectorLayer){__cov_qxo3zUK$wSegRtrvze0U_Q.b['3'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['10']++;me.searchResultVectorLayer=new ol.layer.Vector({name:'nominatimsearchresult',source:new ol.source.Vector(),style:me.getSearchResultFeatureStyle(),visible:!me.clusterResults});__cov_qxo3zUK$wSegRtrvze0U_Q.s['11']++;me.map.addLayer(me.searchResultVectorLayer);}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['3'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['12']++;if((__cov_qxo3zUK$wSegRtrvze0U_Q.b['5'][0]++,me.clusterResults)&&(__cov_qxo3zUK$wSegRtrvze0U_Q.b['5'][1]++,!me.clusterLayer)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['4'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['13']++;var clusterSource=new ol.source.Cluster({distance:40,source:me.searchResultVectorLayer.getSource()});__cov_qxo3zUK$wSegRtrvze0U_Q.s['14']++;me.clusterLayer=new ol.layer.Vector({name:'nominatimclusterlayer',source:clusterSource,style:function(feature){__cov_qxo3zUK$wSegRtrvze0U_Q.f['4']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['15']++;var amount=feature.get('features').length;__cov_qxo3zUK$wSegRtrvze0U_Q.s['16']++;var style=me.styleCache[amount];__cov_qxo3zUK$wSegRtrvze0U_Q.s['17']++;if(!style){__cov_qxo3zUK$wSegRtrvze0U_Q.b['6'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['18']++;style=me.clusterStyleFn(amount,amount+10);__cov_qxo3zUK$wSegRtrvze0U_Q.s['19']++;me.styleCache[amount]=style;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['6'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['20']++;return style;}});__cov_qxo3zUK$wSegRtrvze0U_Q.s['21']++;me.map.addLayer(me.clusterLayer);__cov_qxo3zUK$wSegRtrvze0U_Q.s['22']++;me.searchResultVectorLayer.setStyle(me.clusterStyleFn('',8));}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['4'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['23']++;var searchResultStore=Ext.create('GeoExt.data.store.Features',{map:me.map,layer:me.searchResultVectorLayer,groupField:'type'});__cov_qxo3zUK$wSegRtrvze0U_Q.s['24']++;me.items=[{xtype:'textfield',name:'nominatimSearchTerm',bind:{fieldLabel:'{searchTermTextFieldLabel}'},enableKeyEvents:true,listeners:{change:me.handleKeyDown}},{xtype:'grid',name:'nominatimsearchresultgrid',hidden:true,hideHeaders:true,bind:{title:'{searchResultGridTitle}'},store:searchResultStore,columns:[{xtype:'widgetcolumn',flex:1,widget:{xtype:'gx_renderer'},onWidgetAttach:function(column,gxRenderer,record){__cov_qxo3zUK$wSegRtrvze0U_Q.f['5']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['25']++;var feature=record.olObject;__cov_qxo3zUK$wSegRtrvze0U_Q.s['26']++;gxRenderer.update({feature:feature,symbolizers:GeoExt.component.FeatureRenderer.determineStyle(record)});}},{dataIndex:'displayfield',flex:7,renderer:function(value){__cov_qxo3zUK$wSegRtrvze0U_Q.f['6']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['27']++;return'<span data-qtip="'+value+'">'+value+'</span>';}}],features:[{ftype:'grouping',groupHeaderTpl:me.getGroupHeaderTpl()}],width:200,height:300},{xtype:'button',bind:{text:'{resetBtnText}'},margin:'10 0 0 0',handler:me.resetSearchGridAndText,scope:me}];__cov_qxo3zUK$wSegRtrvze0U_Q.s['28']++;me.callParent(arguments);__cov_qxo3zUK$wSegRtrvze0U_Q.s['29']++;me.on('nominatimResponse',me.showSearchResults);__cov_qxo3zUK$wSegRtrvze0U_Q.s['30']++;me.on('show',me.down('textfield').focus);__cov_qxo3zUK$wSegRtrvze0U_Q.s['31']++;var grid=me.down('grid[name=nominatimsearchresultgrid]');__cov_qxo3zUK$wSegRtrvze0U_Q.s['32']++;if(me.getHighLightFeatureOnHoverInGrid()){__cov_qxo3zUK$wSegRtrvze0U_Q.b['7'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['33']++;grid.on('itemmouseenter',me.highlightFeature,me);__cov_qxo3zUK$wSegRtrvze0U_Q.s['34']++;grid.on('itemmouseleave',me.unhighlightFeature,me);}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['7'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['35']++;grid.on('itemclick',me.highlightSelectedFeature,me);},handleKeyDown:function(textfield){__cov_qxo3zUK$wSegRtrvze0U_Q.f['7']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['36']++;var nominatimContainer=textfield.up('basigx-search-nominatim');__cov_qxo3zUK$wSegRtrvze0U_Q.s['37']++;var val=textfield.getValue();__cov_qxo3zUK$wSegRtrvze0U_Q.s['38']++;if(val.length<nominatimContainer.getMinSearchTextChars()){__cov_qxo3zUK$wSegRtrvze0U_Q.b['8'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['39']++;return;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['8'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['40']++;nominatimContainer.searchTerm=val;__cov_qxo3zUK$wSegRtrvze0U_Q.s['41']++;nominatimContainer.resetGrid();__cov_qxo3zUK$wSegRtrvze0U_Q.s['42']++;if(nominatimContainer.typeDelayTask){__cov_qxo3zUK$wSegRtrvze0U_Q.b['9'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['43']++;nominatimContainer.typeDelayTask.cancel();}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['9'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['44']++;nominatimContainer.typeDelayTask=new Ext.util.DelayedTask(function(){__cov_qxo3zUK$wSegRtrvze0U_Q.f['8']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['45']++;nominatimContainer.triggerSearch();});__cov_qxo3zUK$wSegRtrvze0U_Q.s['46']++;nominatimContainer.typeDelayTask.delay(nominatimContainer.getTypeDelay());},resetSearchGridAndText:function(){__cov_qxo3zUK$wSegRtrvze0U_Q.f['9']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['47']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['48']++;me.down('textfield[name=nominatimSearchTerm]').setValue('');__cov_qxo3zUK$wSegRtrvze0U_Q.s['49']++;me.resetGrid();},resetGrid:function(){__cov_qxo3zUK$wSegRtrvze0U_Q.f['10']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['50']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['51']++;me.searchResultVectorLayer.getSource().clear();__cov_qxo3zUK$wSegRtrvze0U_Q.s['52']++;me.down('grid[name=nominatimsearchresultgrid]').hide();},triggerSearch:function(){__cov_qxo3zUK$wSegRtrvze0U_Q.f['11']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['53']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['54']++;var results;__cov_qxo3zUK$wSegRtrvze0U_Q.s['55']++;var requestParams={q:me.searchTerm,format:me.getFormat(),limit:me.getLimit(),viewboxlbrt:me.getViewboxlbrt(),bounded:1};__cov_qxo3zUK$wSegRtrvze0U_Q.s['56']++;var url=me.getNominatimUrl()+'?';__cov_qxo3zUK$wSegRtrvze0U_Q.s['57']++;Ext.iterate(requestParams,function(k,v){__cov_qxo3zUK$wSegRtrvze0U_Q.f['12']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['58']++;url+=k+'='+v+'&';});__cov_qxo3zUK$wSegRtrvze0U_Q.s['59']++;me.setLoading(true);__cov_qxo3zUK$wSegRtrvze0U_Q.s['60']++;Ext.Ajax.request({url:url,success:function(response){__cov_qxo3zUK$wSegRtrvze0U_Q.f['13']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['61']++;me.setLoading(false);__cov_qxo3zUK$wSegRtrvze0U_Q.s['62']++;if(Ext.isString(response.responseText)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['10'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['63']++;results=Ext.decode(response.responseText);}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['10'][1]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['64']++;if(Ext.isObject(response.responseText)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['11'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['65']++;results=response.responseText;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['11'][1]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['66']++;Ext.log.error('Error! Could not parse '+'nominatim response!');}}__cov_qxo3zUK$wSegRtrvze0U_Q.s['67']++;me.fireEvent('nominatimResponse',results);},failure:function(response){__cov_qxo3zUK$wSegRtrvze0U_Q.f['14']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['68']++;me.setLoading(false);__cov_qxo3zUK$wSegRtrvze0U_Q.s['69']++;Ext.log.error('Error on nominatim request:',response);}});},showSearchResults:function(features){__cov_qxo3zUK$wSegRtrvze0U_Q.f['15']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['70']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['71']++;var grid=me.down('grid[name=nominatimsearchresultgrid]');__cov_qxo3zUK$wSegRtrvze0U_Q.s['72']++;if(features.length>0){__cov_qxo3zUK$wSegRtrvze0U_Q.b['12'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['73']++;grid.show();}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['12'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['74']++;var searchTerm=me.searchTerm;__cov_qxo3zUK$wSegRtrvze0U_Q.s['75']++;Ext.each(features,function(feature){__cov_qxo3zUK$wSegRtrvze0U_Q.f['16']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['76']++;var displayfield;__cov_qxo3zUK$wSegRtrvze0U_Q.s['77']++;Ext.iterate(feature,function(k,v){__cov_qxo3zUK$wSegRtrvze0U_Q.f['17']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['78']++;if((__cov_qxo3zUK$wSegRtrvze0U_Q.b['14'][0]++,v)&&(__cov_qxo3zUK$wSegRtrvze0U_Q.b['14'][1]++,v.toString().toLowerCase().indexOf(searchTerm)>-1)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['13'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['79']++;displayfield=v;__cov_qxo3zUK$wSegRtrvze0U_Q.s['80']++;return false;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['13'][1]++;}});__cov_qxo3zUK$wSegRtrvze0U_Q.s['81']++;var olFeat=new ol.Feature({geometry:new ol.geom.Point(ol.proj.transform([parseFloat(feature.lon),parseFloat(feature.lat)],'EPSG:4326','EPSG:3857')),properties:feature});__cov_qxo3zUK$wSegRtrvze0U_Q.s['82']++;if(!displayfield){__cov_qxo3zUK$wSegRtrvze0U_Q.b['15'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['83']++;olFeat.set('displayfield',feature.display_name);}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['15'][1]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['84']++;olFeat.set('displayfield',displayfield);}__cov_qxo3zUK$wSegRtrvze0U_Q.s['85']++;me.searchResultVectorLayer.getSource().addFeature(olFeat);});__cov_qxo3zUK$wSegRtrvze0U_Q.s['86']++;var featureExtent=me.searchResultVectorLayer.getSource().getExtent();__cov_qxo3zUK$wSegRtrvze0U_Q.s['87']++;if(!Ext.Array.contains(featureExtent,Infinity)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['16'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['88']++;me.zoomToExtent(featureExtent);}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['16'][1]++;}},zoomToExtent:function(extent){__cov_qxo3zUK$wSegRtrvze0U_Q.f['18']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['89']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['90']++;var olView=me.map.getView();__cov_qxo3zUK$wSegRtrvze0U_Q.s['91']++;if(ol.animation){__cov_qxo3zUK$wSegRtrvze0U_Q.b['17'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['92']++;var pan=ol.animation.pan({source:olView.getCenter()});__cov_qxo3zUK$wSegRtrvze0U_Q.s['93']++;var zoom=ol.animation.zoom({resolution:olView.getResolution()});__cov_qxo3zUK$wSegRtrvze0U_Q.s['94']++;me.map.beforeRender(pan,zoom);__cov_qxo3zUK$wSegRtrvze0U_Q.s['95']++;olView.fit(extent,me.map.getSize());}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['17'][1]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['96']++;olView.fit(extent,{duration:500});}},updateRenderer:function(item,style){__cov_qxo3zUK$wSegRtrvze0U_Q.f['19']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['97']++;var renderer=Ext.getCmp(Ext.query('div[id^=gx_renderer',true,item)[0].id);__cov_qxo3zUK$wSegRtrvze0U_Q.s['98']++;var src=renderer.map.getLayers().getArray()[0].getSource();__cov_qxo3zUK$wSegRtrvze0U_Q.s['99']++;src.getFeatures()[0].setStyle(style);},highlightFeature:function(tableView,record,item){__cov_qxo3zUK$wSegRtrvze0U_Q.f['20']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['100']++;if(this.enterEventRec===record){__cov_qxo3zUK$wSegRtrvze0U_Q.b['18'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['101']++;return;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['18'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['102']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['103']++;var feature;__cov_qxo3zUK$wSegRtrvze0U_Q.s['104']++;var radius;__cov_qxo3zUK$wSegRtrvze0U_Q.s['105']++;var text;__cov_qxo3zUK$wSegRtrvze0U_Q.s['106']++;this.enterEventRec=record;__cov_qxo3zUK$wSegRtrvze0U_Q.s['107']++;ol.Observable.unByKey(this.flashListenerKey);__cov_qxo3zUK$wSegRtrvze0U_Q.s['108']++;if(this.clusterResults){__cov_qxo3zUK$wSegRtrvze0U_Q.b['19'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['109']++;feature=this.getClusterFeatureFromFeature(record.olObject);__cov_qxo3zUK$wSegRtrvze0U_Q.s['110']++;var featureStyle=this.clusterLayer.getStyle()(feature,me.map.getView().getResolution())[0];__cov_qxo3zUK$wSegRtrvze0U_Q.s['111']++;radius=featureStyle.getImage().getRadius();__cov_qxo3zUK$wSegRtrvze0U_Q.s['112']++;text=featureStyle.getText().getText();}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['19'][1]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['113']++;feature=record.olObject;__cov_qxo3zUK$wSegRtrvze0U_Q.s['114']++;radius=5;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['115']++;if(tableView.getSelection()[0]!==record){__cov_qxo3zUK$wSegRtrvze0U_Q.b['20'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['116']++;feature.setStyle(this.getSearchResultHighlightFeatureStyleFn()(radius,text));__cov_qxo3zUK$wSegRtrvze0U_Q.s['117']++;this.updateRenderer(item,this.getSearchResultHighlightFeatureStyleFn()(8,text));}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['20'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['118']++;if(feature){__cov_qxo3zUK$wSegRtrvze0U_Q.b['21'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['119']++;this.flashListenerKey=BasiGX.util.Animate.flashFeature(feature,1000,radius);}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['21'][1]++;}},unhighlightFeature:function(tableView,record,item){__cov_qxo3zUK$wSegRtrvze0U_Q.f['21']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['120']++;if(this.leaveEventRec===record){__cov_qxo3zUK$wSegRtrvze0U_Q.b['22'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['121']++;return;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['22'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['122']++;this.leaveEventRec=record;__cov_qxo3zUK$wSegRtrvze0U_Q.s['123']++;if(tableView.getSelection()[0]!==record){__cov_qxo3zUK$wSegRtrvze0U_Q.b['23'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['124']++;record.olObject.setStyle(this.getSearchResultFeatureStyle());__cov_qxo3zUK$wSegRtrvze0U_Q.s['125']++;if(this.clusterResults){__cov_qxo3zUK$wSegRtrvze0U_Q.b['24'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['126']++;this.updateRenderer(item,this.clusterStyleFn('',8));}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['24'][1]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['127']++;this.updateRenderer(item,this.getSearchResultFeatureStyle());}}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['23'][1]++;}},highlightSelectedFeature:function(tableView,record,item){__cov_qxo3zUK$wSegRtrvze0U_Q.f['22']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['128']++;var store=tableView.getStore();__cov_qxo3zUK$wSegRtrvze0U_Q.s['129']++;store.each(function(rec){__cov_qxo3zUK$wSegRtrvze0U_Q.f['23']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['130']++;rec.olObject.setStyle(this.getSearchResultFeatureStyle());__cov_qxo3zUK$wSegRtrvze0U_Q.s['131']++;var row=tableView.getRowByRecord(rec);__cov_qxo3zUK$wSegRtrvze0U_Q.s['132']++;if(this.clusterResults){__cov_qxo3zUK$wSegRtrvze0U_Q.b['25'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['133']++;this.updateRenderer(row,this.clusterStyleFn('',8));}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['25'][1]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['134']++;this.updateRenderer(row,this.getSearchResultFeatureStyle());}},this);__cov_qxo3zUK$wSegRtrvze0U_Q.s['135']++;record.olObject.setStyle(this.getSearchResultSelectFeatureStyle());__cov_qxo3zUK$wSegRtrvze0U_Q.s['136']++;this.updateRenderer(item,this.getSearchResultSelectFeatureStyle());__cov_qxo3zUK$wSegRtrvze0U_Q.s['137']++;this.zoomToExtent(record.olObject.getGeometry());},getClusterFeatureFromFeature:function(feature){__cov_qxo3zUK$wSegRtrvze0U_Q.f['24']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['138']++;var me=this;__cov_qxo3zUK$wSegRtrvze0U_Q.s['139']++;var clusterFeature;__cov_qxo3zUK$wSegRtrvze0U_Q.s['140']++;var clusterFeatures=me.clusterLayer.getSource().getFeatures();__cov_qxo3zUK$wSegRtrvze0U_Q.s['141']++;Ext.each(clusterFeatures,function(feat){__cov_qxo3zUK$wSegRtrvze0U_Q.f['25']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['142']++;if(!Ext.isEmpty(feat.get('features'))){__cov_qxo3zUK$wSegRtrvze0U_Q.b['26'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['143']++;Ext.each(feat.get('features'),function(f){__cov_qxo3zUK$wSegRtrvze0U_Q.f['26']++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['144']++;if((__cov_qxo3zUK$wSegRtrvze0U_Q.b['28'][0]++,f.getProperties().properties.osm_id)&&(__cov_qxo3zUK$wSegRtrvze0U_Q.b['28'][1]++,feature.getProperties().properties.osm_id)&&(__cov_qxo3zUK$wSegRtrvze0U_Q.b['28'][2]++,f.getProperties().properties.osm_id===feature.getProperties().properties.osm_id)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['27'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['145']++;clusterFeature=feat;__cov_qxo3zUK$wSegRtrvze0U_Q.s['146']++;return false;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['27'][1]++;}});}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['26'][1]++;}__cov_qxo3zUK$wSegRtrvze0U_Q.s['147']++;if(!Ext.isEmpty(clusterFeature)){__cov_qxo3zUK$wSegRtrvze0U_Q.b['29'][0]++;__cov_qxo3zUK$wSegRtrvze0U_Q.s['148']++;return false;}else{__cov_qxo3zUK$wSegRtrvze0U_Q.b['29'][1]++;}});__cov_qxo3zUK$wSegRtrvze0U_Q.s['149']++;return clusterFeature;}});
+    requires: [
+        'GeoExt.data.store.Features',
+        'GeoExt.component.FeatureRenderer',
+
+        'BasiGX.util.Animate',
+        'BasiGX.util.Map'
+    ],
+
+    viewModel: {
+        data: {
+            searchTermTextFieldLabel: 'Suchbegriff',
+            searchResultGridTitle: 'Suchergebnisse',
+            resetBtnText: 'Zurücksetzen',
+            documentation: '<h2>Nominatim-Suche</h2>• Benutzen Sie die ' +
+                'Nominatim Suche, um nach Orten, Straßen, Koordinaten oder ' +
+                'anderen geographisch verortenen Daten aus dem Bestand von ' +
+                'OpenStreetMap zu suchen'
+        }
+    },
+
+    config: {
+        /**
+         * The URL to the nominatim service
+         */
+        nominatimUrl: 'https://nominatim.openstreetmap.org',
+
+        /**
+         *
+         */
+        format: 'json',
+
+        /**
+         * limit the search results count
+         */
+        limit: 100,
+
+        /**
+         * The lat-lon viewbox to limit the searchquery to
+         */
+        viewboxlbrt: '-180,90,180,-90',
+
+        /**
+         * minimum chars to trigger the search
+         */
+        minSearchTextChars: 3,
+
+        /**
+         * delay before query gets triggered to avoid triggers while typing
+         */
+        typeDelay: 500,
+
+        /**
+         * the template to change the groups titles
+         */
+        groupHeaderTpl: '{type}',
+
+        /**
+         * An `ol.style.Style` for result features.
+         *
+         * @type {ol.style.Style}
+         */
+        searchResultFeatureStyle: new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 6,
+                fill: new ol.style.Fill({
+                    color: '#8B0000'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#fff',
+                    width: 2
+                })
+            }),
+            fill: new ol.style.Fill({
+                color: '#8B0000'
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#8B0000',
+                width: 4
+            })
+        }),
+
+        /**
+         * A function generating an `ol.style.Style` for highlighting features.
+         *
+         * @param {Number} radius The radius of the circle.
+         * @param {String} text The text for the style.
+         * @return {ol.style.Style} The generated style.
+         */
+        searchResultHighlightFeatureStyleFn: function(radius, text) {
+            return new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: radius,
+                    fill: new ol.style.Fill({
+                        color: '#EE0000'
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: 'gray',
+                        width: 3
+                    })
+                }),
+                text: text ? new ol.style.Text({
+                    text: text.toString(),
+                    fill: new ol.style.Fill({
+                        color: '#fff'
+                    })
+                }) : undefined
+            });
+        },
+
+        /**
+         * An `ol.style.Style` for selected result features.
+         *
+         * @type {ol.style.Style}
+         */
+        searchResultSelectFeatureStyle: new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 8,
+                fill: new ol.style.Fill({
+                    color: '#0099CC'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#fff',
+                    width: 2
+                })
+            }),
+            fill: new ol.style.Fill({
+                color: '#0099CC'
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#0099CC',
+                width: 6
+            })
+        }),
+
+        /**
+         * Returns an array of styles.
+         *
+         * TODO Are we accessing a private property here?
+         *      `getSource().distance_` => this should be changed.
+         *
+         * @param {Number} amount The amount.
+         * @param {Number} radius The radius.
+         * @return {Array<ol.style.Style>} The generated styles.
+         */
+        clusterStyleFn: function(amount, radius) {
+            // set maxradius
+            var maxRadius = this.clusterLayer.getSource().distance_ / 2;
+            if (radius > maxRadius) {
+                radius = maxRadius;
+            }
+            return [new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: radius,
+                    stroke: new ol.style.Stroke({
+                        color: '#fff'
+                    }),
+                    fill: new ol.style.Fill({
+                        color: '#3399CC'
+                    })
+                }),
+                text: new ol.style.Text({
+                    text: amount.toString(),
+                    fill: new ol.style.Fill({
+                        color: '#fff'
+                    })
+                })
+            })];
+        },
+
+        /**
+         * Whether we want to highlight the associated feature in the map when
+         * we hover over the row for the feature in the grid.
+         *
+         * @type {Boolean}
+         */
+        highLightFeatureOnHoverInGrid: true
+    },
+
+    /**
+     *
+     */
+    layout: 'fit',
+
+    /**
+     *
+     */
+    typeDelayTask: null,
+
+    /**
+     *
+     */
+    searchTerm: null,
+
+    /**
+     *
+     */
+    searchResultVectorLayer: null,
+
+    /**
+     *
+     */
+    clusterLayer: null,
+
+    /**
+     *
+     */
+    clusterResults: false,
+
+    /**
+     *
+     */
+    styleCache: [],
+
+    /**
+     *
+     */
+    map: null,
+
+    /**
+     *
+     */
+    initComponent: function() {
+        var me = this;
+
+        //set map
+        me.map = BasiGX.util.Map.getMapComponent().getMap();
+
+        if (!me.searchResultVectorLayer) {
+            me.searchResultVectorLayer = new ol.layer.Vector({
+                name: 'nominatimsearchresult',
+                source: new ol.source.Vector(),
+                style: me.getSearchResultFeatureStyle(),
+                visible: !me.clusterResults
+            });
+            me.map.addLayer(me.searchResultVectorLayer);
+        }
+
+        if (me.clusterResults && !me.clusterLayer) {
+            var clusterSource = new ol.source.Cluster({
+                distance: 40,
+                source: me.searchResultVectorLayer.getSource()
+            });
+
+            me.clusterLayer = new ol.layer.Vector({
+                name: 'nominatimclusterlayer',
+                source: clusterSource,
+                style: function(feature) {
+                    var amount = feature.get('features').length;
+                    var style = me.styleCache[amount];
+                    if (!style) {
+                        style = me.clusterStyleFn(amount, amount + 10);
+                        me.styleCache[amount] = style;
+                    }
+                    return style;
+                }
+            });
+            me.map.addLayer(me.clusterLayer);
+
+            // correct the vectorlayerstyle for the grid symbolizer
+            me.searchResultVectorLayer.setStyle(me.clusterStyleFn('', 8));
+
+        }
+
+        var searchResultStore = Ext.create('GeoExt.data.store.Features', {
+            map: me.map,
+            layer: me.searchResultVectorLayer,
+            groupField: 'type'
+        });
+
+        me.items = [
+            {
+                xtype: 'textfield',
+                name: 'nominatimSearchTerm',
+                bind: {
+                    fieldLabel: '{searchTermTextFieldLabel}'
+                },
+                enableKeyEvents: true,
+                listeners: {
+                    change: me.handleKeyDown
+                }
+            },
+            {
+                xtype: 'grid',
+                name: 'nominatimsearchresultgrid',
+                hidden: true,
+                hideHeaders: true,
+                bind: {
+                    title: '{searchResultGridTitle}'
+                },
+                store: searchResultStore,
+                columns: [
+                    {
+                        xtype: 'widgetcolumn',
+                        flex: 1,
+                        widget: {
+                            xtype: 'gx_renderer'
+                        },
+                        onWidgetAttach: function(column, gxRenderer, record) {
+                            // update the symbolizer with the related feature
+                            var feature = record.olObject;
+                            gxRenderer.update({
+                                feature: feature,
+                                symbolizers: GeoExt.component.FeatureRenderer
+                                    .determineStyle(record)
+                            });
+                        }
+                    },
+                    {
+                        dataIndex: 'displayfield',
+                        flex: 7,
+                        renderer: function(value) {
+                            return '<span data-qtip="' + value + '">' +
+                                value + '</span>';
+                        }
+                    }
+                ],
+                features: [{
+                    ftype: 'grouping',
+                    groupHeaderTpl: me.getGroupHeaderTpl()
+                }],
+                width: 200,
+                height: 300
+            }, {
+                xtype: 'button',
+                bind: {
+                    text: '{resetBtnText}'
+                },
+                margin: '10 0 0 0',
+                handler: me.resetSearchGridAndText,
+                scope: me
+            }
+        ];
+        me.callParent(arguments);
+
+        me.on('nominatimResponse', me.showSearchResults);
+        me.on('show', me.down('textfield').focus);
+
+        var grid = me.down('grid[name=nominatimsearchresultgrid]');
+
+        if (me.getHighLightFeatureOnHoverInGrid()) {
+            grid.on('itemmouseenter', me.highlightFeature, me);
+            grid.on('itemmouseleave', me.unhighlightFeature, me);
+        }
+        grid.on('itemclick', me.highlightSelectedFeature, me);
+    },
+
+    /**
+     * Bound to the `change`-event of the textfield.
+     *
+     * @param {Ext.form.field.Text} textfield The textfield in which one enters
+     *     the query.
+     */
+    handleKeyDown: function(textfield) {
+        var nominatimContainer = textfield.up('basigx-search-nominatim');
+        var val = textfield.getValue();
+
+        if (val.length < nominatimContainer.getMinSearchTextChars()) {
+            return;
+        }
+
+        // set the searchterm on component
+        nominatimContainer.searchTerm = val;
+
+        // reset grid from old values
+        nominatimContainer.resetGrid();
+
+        // prepare the describeFeatureType for all given layers
+        if (nominatimContainer.typeDelayTask) {
+            nominatimContainer.typeDelayTask.cancel();
+        }
+        nominatimContainer.typeDelayTask = new Ext.util.DelayedTask(function() {
+            nominatimContainer.triggerSearch();
+        });
+        nominatimContainer.typeDelayTask.delay(
+            nominatimContainer.getTypeDelay()
+        );
+    },
+
+    /**
+     *
+     */
+    resetSearchGridAndText: function() {
+        var me = this;
+        me.down('textfield[name=nominatimSearchTerm]').setValue('');
+        me.resetGrid();
+    },
+
+    /**
+     *
+     */
+    resetGrid: function() {
+        var me = this;
+        me.searchResultVectorLayer.getSource().clear();
+        me.down('grid[name=nominatimsearchresultgrid]').hide();
+    },
+
+    /**
+     * Actually trigger the search.
+     */
+    triggerSearch: function() {
+        var me = this;
+        var results;
+
+        var requestParams = {
+            q: me.searchTerm,
+            format: me.getFormat(),
+            limit: me.getLimit(),
+            viewboxlbrt: me.getViewboxlbrt(),
+            bounded: 1
+        };
+
+        var url = me.getNominatimUrl() + '?';
+        Ext.iterate(requestParams, function(k, v) {
+            url += k + '=' + v + '&';
+        });
+
+        me.setLoading(true);
+
+        Ext.Ajax.request({
+            url: url,
+            success: function(response) {
+                me.setLoading(false);
+                if (Ext.isString(response.responseText)) {
+                    results = Ext.decode(response.responseText);
+                } else if (Ext.isObject(response.responseText)) {
+                    results = response.responseText;
+                } else {
+                    Ext.log.error('Error! Could not parse ' +
+                        'nominatim response!');
+                }
+                me.fireEvent('nominatimResponse', results);
+            },
+            failure: function(response) {
+                me.setLoading(false);
+                Ext.log.error('Error on nominatim request:',
+                    response);
+            }
+        });
+    },
+
+    /**
+     * Response example:
+     *
+     *     {
+     *       "place_id":"14823013",
+     *       "licence":"Data © OpenStreetMap contributors, ODbL 1.0. http:/[…]",
+     *       "osm_type":"node",
+     *       "osm_id":"1364459810",
+     *       "boundingbox":[
+     *         "53.4265254",
+     *         "53.4266254",
+     *         "8.5341417",
+     *         "8.5342417"
+     *       ],
+     *       "lat":"53.4265754",
+     *       "lon":"8.5341917",
+     *       "display_name":"Bäckerei, Bütteler Straße, Loxstedt, Landkreis[…]",
+     *       "class":"highway",
+     *       "type":"bus_stop",
+     *       "importance":0.101,
+     *       "icon":"http://nominatim.openstreetmap.org/images/mapicons/tra[…]",
+     *       "address":{
+     *         "bus_stop":"Bäckerei",
+     *         "road":"Bütteler Straße",
+     *         "village":"Loxstedt",
+     *         "county":"Landkreis Cuxhaven",
+     *         "state":"Niedersachsen",
+     *         "postcode":"27612",
+     *         "country":"Deutschland",
+     *         "country_code":"de"
+     *       }
+     *     }
+     *
+     * @param {Array<ol.Feature>} features The features to display in the result
+     *     grid.
+     */
+    showSearchResults: function(features) {
+        var me = this;
+        var grid = me.down('grid[name=nominatimsearchresultgrid]');
+
+        if (features.length > 0) {
+            grid.show();
+        }
+
+        var searchTerm = me.searchTerm;
+        Ext.each(features, function(feature) {
+            var displayfield;
+
+            // find the matching value in order to display it
+            Ext.iterate(feature, function(k, v) {
+                if (v && v.toString().toLowerCase().indexOf(searchTerm) > -1) {
+                    displayfield = v;
+                    return false;
+                }
+            });
+
+            var olFeat = new ol.Feature({
+                geometry: new ol.geom.Point(ol.proj.transform(
+                    [parseFloat(feature.lon), parseFloat(feature.lat)],
+                    'EPSG:4326', 'EPSG:3857'
+                )),
+                properties: feature
+            });
+            if (!displayfield) {
+                olFeat.set('displayfield', feature.display_name);
+            } else {
+                olFeat.set('displayfield', displayfield);
+            }
+            me.searchResultVectorLayer.getSource().addFeature(olFeat);
+        });
+
+        var featureExtent = me.searchResultVectorLayer.getSource().getExtent();
+        if (!Ext.Array.contains(featureExtent, Infinity)) {
+            me.zoomToExtent(featureExtent);
+        }
+    },
+
+    /**
+     * Works with extent or geom.
+     *
+     * @param {ol.Extent|ol.geom.SimpleGeometry} extent The extent or geometry
+     *     to zoom to.
+     */
+    zoomToExtent: function(extent) {
+        var me = this;
+        var olView = me.map.getView();
+
+        // This if is need for backwards comaptibility to ol3
+        if (ol.animation) {
+            var pan = ol.animation.pan({
+                source: olView.getCenter()
+            });
+            var zoom = ol.animation.zoom({
+                resolution: olView.getResolution()
+            });
+            me.map.beforeRender(pan, zoom);
+            olView.fit(extent, me.map.getSize());
+        } else {
+            olView.fit(extent, {
+                duration: 500
+            });
+        }
+    },
+
+    /**
+     * Update the symbolizer in the grid.
+     *
+     * @param {HTMLElement} item The HTML-element where the renderer lives in.
+     * @param {ol.style.Style} style The new style for the renderer.
+     */
+    updateRenderer: function(item, style) {
+        var renderer = Ext.getCmp(
+            Ext.query('div[id^=gx_renderer', true, item)[0].id
+        );
+        var src = renderer.map.getLayers().getArray()[0].getSource();
+        src.getFeatures()[0].setStyle(style);
+    },
+
+    /**
+     * Highlights the feature.
+     *
+     * Bound to the `itemmouseenter`-event on the grid.
+     *
+     * @param {Ext.view.View} tableView The tableView / grid.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} item The item's element.
+     */
+    highlightFeature: function(tableView, record, item) {
+        if (this.enterEventRec === record) {
+            return;
+        }
+        var me = this;
+        var feature;
+        var radius;
+        var text;
+
+        this.enterEventRec = record;
+        ol.Observable.unByKey(this.flashListenerKey);
+
+        if (this.clusterResults) {
+            feature = this.getClusterFeatureFromFeature(record.olObject);
+            var featureStyle = this.clusterLayer.getStyle()(
+                feature, me.map.getView().getResolution())[0];
+            radius = featureStyle.getImage().getRadius();
+            text = featureStyle.getText().getText();
+        } else {
+            feature = record.olObject;
+            radius = 5; // default value
+        }
+
+        if (tableView.getSelection()[0] !== record) {
+            feature.setStyle(
+                this.getSearchResultHighlightFeatureStyleFn()(radius, text)
+            );
+            this.updateRenderer(item,
+                this.getSearchResultHighlightFeatureStyleFn()(8, text)
+            );
+        }
+        if (feature) {
+            this.flashListenerKey = BasiGX.util.Animate.flashFeature(
+                feature, 1000, radius);
+        }
+    },
+
+    /**
+     * Unhighlights a previously highlighted feature.
+     *
+     * Bound to the `itemmouseleave`-event on the grid.
+     *
+     * @param {Ext.view.View} tableView The tableView / grid.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} item The item's element.
+     */
+    unhighlightFeature: function(tableView, record, item) {
+        if (this.leaveEventRec === record) {
+            return;
+        }
+        this.leaveEventRec = record;
+        if (tableView.getSelection()[0] !== record) {
+            record.olObject.setStyle(this.getSearchResultFeatureStyle());
+            if (this.clusterResults) {
+                this.updateRenderer(item, this.clusterStyleFn('', 8));
+            } else {
+                this.updateRenderer(item, this.getSearchResultFeatureStyle());
+            }
+        }
+    },
+
+    /**
+     * Highlights a selected feature.
+     *
+     * Bound to the `itemclick`-event on the grid.
+     *
+     * @param {Ext.view.View} tableView The tableView / grid.
+     * @param {Ext.data.Model} record The record that belongs to the item.
+     * @param {HTMLElement} item The item's element.
+     */
+    highlightSelectedFeature: function(tableView, record, item) {
+        var store = tableView.getStore();
+        store.each(function(rec) {
+            rec.olObject.setStyle(this.getSearchResultFeatureStyle());
+            var row = tableView.getRowByRecord(rec);
+            if (this.clusterResults) {
+                this.updateRenderer(row, this.clusterStyleFn('', 8));
+            } else {
+                this.updateRenderer(row, this.getSearchResultFeatureStyle());
+            }
+        }, this);
+
+        record.olObject.setStyle(this.getSearchResultSelectFeatureStyle());
+        this.updateRenderer(item, this.getSearchResultSelectFeatureStyle());
+
+        this.zoomToExtent(record.olObject.getGeometry());
+    },
+
+    /**
+     * Returns the cluster feature from the given `ol.Feature`.
+     *
+     * @param {ol.Feature} feature The feature to get the cluster feature from.
+     * @return {ol.Feature} The cluster feature.
+     */
+    getClusterFeatureFromFeature: function(feature) {
+        var me = this;
+        var clusterFeature;
+        var clusterFeatures = me.clusterLayer.getSource().getFeatures();
+        Ext.each(clusterFeatures, function(feat) {
+            if (!Ext.isEmpty(feat.get('features'))) {
+                Ext.each(feat.get('features'), function(f) {
+                    if (f.getProperties().properties.osm_id &&
+                       feature.getProperties().properties.osm_id &&
+                       f.getProperties().properties.osm_id ===
+                       feature.getProperties().properties.osm_id) {
+                        clusterFeature = feat;
+                        return false;
+                    }
+                });
+            }
+            if (!Ext.isEmpty(clusterFeature)) {
+                return false;
+            }
+        });
+        return clusterFeature;
+    }
+});

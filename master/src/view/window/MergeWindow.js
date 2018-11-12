@@ -1,9 +1,271 @@
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * A window where the user can configure the merging of two layers.
+ *
+ * @class BasiGX.view.window.MergeWindow
+ */
+Ext.define('BasiGX.view.window.MergeWindow', {
+    xtype: 'basigx-window-merge',
+    extend: 'Ext.window.Window',
+    requires: [
+        'BasiGX.util.Merge'
+    ],
 
-var __cov_g$qgx$PKn_62jAkPMBYY3g = (Function('return this'))();
-if (!__cov_g$qgx$PKn_62jAkPMBYY3g.__coverage__) { __cov_g$qgx$PKn_62jAkPMBYY3g.__coverage__ = {}; }
-__cov_g$qgx$PKn_62jAkPMBYY3g = __cov_g$qgx$PKn_62jAkPMBYY3g.__coverage__;
-if (!(__cov_g$qgx$PKn_62jAkPMBYY3g['/home/travis/build/terrestris/BasiGX/src/view/window/MergeWindow.js'])) {
-   __cov_g$qgx$PKn_62jAkPMBYY3g['/home/travis/build/terrestris/BasiGX/src/view/window/MergeWindow.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/window/MergeWindow.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0},"b":{"1":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0},"fnMap":{"1":{"name":"(anonymous_1)","line":60,"loc":{"start":{"line":60,"column":19},"end":{"line":60,"column":30}}},"2":{"name":"(anonymous_2)","line":66,"loc":{"start":{"line":66,"column":25},"end":{"line":66,"column":41}}},"3":{"name":"(anonymous_3)","line":67,"loc":{"start":{"line":67,"column":31},"end":{"line":67,"column":42}}},"4":{"name":"(anonymous_4)","line":73,"loc":{"start":{"line":73,"column":31},"end":{"line":73,"column":42}}},"5":{"name":"(anonymous_5)","line":76,"loc":{"start":{"line":76,"column":23},"end":{"line":76,"column":37}}},"6":{"name":"(anonymous_6)","line":85,"loc":{"start":{"line":85,"column":17},"end":{"line":85,"column":28}}},"7":{"name":"(anonymous_7)","line":92,"loc":{"start":{"line":92,"column":31},"end":{"line":92,"column":46}}},"8":{"name":"(anonymous_8)","line":119,"loc":{"start":{"line":119,"column":18},"end":{"line":119,"column":39}}},"9":{"name":"(anonymous_9)","line":122,"loc":{"start":{"line":122,"column":15},"end":{"line":122,"column":26}}},"10":{"name":"(anonymous_10)","line":129,"loc":{"start":{"line":129,"column":34},"end":{"line":129,"column":52}}},"11":{"name":"(anonymous_11)","line":142,"loc":{"start":{"line":142,"column":19},"end":{"line":142,"column":30}}},"12":{"name":"(anonymous_12)","line":151,"loc":{"start":{"line":151,"column":30},"end":{"line":151,"column":51}}},"13":{"name":"(anonymous_13)","line":171,"loc":{"start":{"line":171,"column":24},"end":{"line":171,"column":52}}},"14":{"name":"(anonymous_14)","line":195,"loc":{"start":{"line":195,"column":23},"end":{"line":195,"column":77}}}},"statementMap":{"1":{"start":{"line":21,"column":0},"end":{"line":249,"column":3}},"2":{"start":{"line":61,"column":8},"end":{"line":61,"column":22}},"3":{"start":{"line":62,"column":8},"end":{"line":62,"column":24}},"4":{"start":{"line":63,"column":8},"end":{"line":63,"column":25}},"5":{"start":{"line":64,"column":8},"end":{"line":64,"column":39}},"6":{"start":{"line":65,"column":8},"end":{"line":65,"column":39}},"7":{"start":{"line":66,"column":8},"end":{"line":70,"column":11}},"8":{"start":{"line":67,"column":12},"end":{"line":69,"column":15}},"9":{"start":{"line":68,"column":16},"end":{"line":68,"column":47}},"10":{"start":{"line":74,"column":8},"end":{"line":74,"column":22}},"11":{"start":{"line":75,"column":8},"end":{"line":75,"column":56}},"12":{"start":{"line":76,"column":8},"end":{"line":79,"column":11}},"13":{"start":{"line":77,"column":12},"end":{"line":77,"column":73}},"14":{"start":{"line":78,"column":12},"end":{"line":78,"column":64}},"15":{"start":{"line":86,"column":8},"end":{"line":86,"column":38}},"16":{"start":{"line":87,"column":8},"end":{"line":87,"column":70}},"17":{"start":{"line":88,"column":8},"end":{"line":88,"column":70}},"18":{"start":{"line":90,"column":8},"end":{"line":90,"column":24}},"19":{"start":{"line":91,"column":8},"end":{"line":91,"column":27}},"20":{"start":{"line":92,"column":8},"end":{"line":109,"column":11}},"21":{"start":{"line":93,"column":12},"end":{"line":97,"column":15}},"22":{"start":{"line":98,"column":12},"end":{"line":108,"column":15}},"23":{"start":{"line":111,"column":8},"end":{"line":111,"column":78}},"24":{"start":{"line":120,"column":8},"end":{"line":120,"column":22}},"25":{"start":{"line":121,"column":8},"end":{"line":121,"column":38}},"26":{"start":{"line":122,"column":8},"end":{"line":136,"column":10}},"27":{"start":{"line":123,"column":12},"end":{"line":123,"column":40}},"28":{"start":{"line":124,"column":12},"end":{"line":124,"column":76}},"29":{"start":{"line":125,"column":12},"end":{"line":125,"column":57}},"30":{"start":{"line":126,"column":12},"end":{"line":126,"column":52}},"31":{"start":{"line":127,"column":12},"end":{"line":127,"column":58}},"32":{"start":{"line":129,"column":12},"end":{"line":133,"column":15}},"33":{"start":{"line":130,"column":16},"end":{"line":131,"column":32}},"34":{"start":{"line":132,"column":16},"end":{"line":132,"column":46}},"35":{"start":{"line":135,"column":12},"end":{"line":135,"column":26}},"36":{"start":{"line":143,"column":8},"end":{"line":143,"column":34}},"37":{"start":{"line":152,"column":8},"end":{"line":161,"column":10}},"38":{"start":{"line":172,"column":8},"end":{"line":172,"column":24}},"39":{"start":{"line":173,"column":8},"end":{"line":183,"column":9}},"40":{"start":{"line":174,"column":12},"end":{"line":182,"column":15}},"41":{"start":{"line":184,"column":8},"end":{"line":184,"column":22}},"42":{"start":{"line":196,"column":8},"end":{"line":196,"column":64}},"43":{"start":{"line":198,"column":8},"end":{"line":215,"column":10}},"44":{"start":{"line":217,"column":8},"end":{"line":217,"column":72}},"45":{"start":{"line":219,"column":8},"end":{"line":245,"column":10}},"46":{"start":{"line":247,"column":8},"end":{"line":247,"column":24}}},"branchMap":{"1":{"line":104,"type":"cond-expr","locations":[{"start":{"line":104,"column":53},"end":{"line":104,"column":57}},{"start":{"line":104,"column":60},"end":{"line":104,"column":62}}]}}};
-}
-__cov_g$qgx$PKn_62jAkPMBYY3g = __cov_g$qgx$PKn_62jAkPMBYY3g['/home/travis/build/terrestris/BasiGX/src/view/window/MergeWindow.js'];
-__cov_g$qgx$PKn_62jAkPMBYY3g.s['1']++;Ext.define('BasiGX.view.window.MergeWindow',{xtype:'basigx-window-merge',extend:'Ext.window.Window',requires:['BasiGX.util.Merge'],viewModel:{data:{adoptAttributes:'Select attributes to add to the schema:',applyText:'Apply',cancelText:'Cancel',windowTitle:'Merge features',matchText:'Please select attributes to be mapped:'}},bind:{title:'{windowTitle}'},layout:'fit',autoShow:true,items:[],bodyPadding:5,config:{sourceLayer:null,targetLayer:null},initComponent:function(){__cov_g$qgx$PKn_62jAkPMBYY3g.f['1']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['2']++;var me=this;__cov_g$qgx$PKn_62jAkPMBYY3g.s['3']++;me.callParent();__cov_g$qgx$PKn_62jAkPMBYY3g.s['4']++;me.mergeLayers();__cov_g$qgx$PKn_62jAkPMBYY3g.s['5']++;me.registerMultiSelectFilter();__cov_g$qgx$PKn_62jAkPMBYY3g.s['6']++;var combos=me.query('combo');__cov_g$qgx$PKn_62jAkPMBYY3g.s['7']++;Ext.each(combos,function(combo){__cov_g$qgx$PKn_62jAkPMBYY3g.f['2']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['8']++;combo.on('change',function(){__cov_g$qgx$PKn_62jAkPMBYY3g.f['3']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['9']++;me.registerMultiSelectFilter();});});},registerMultiSelectFilter:function(){__cov_g$qgx$PKn_62jAkPMBYY3g.f['4']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['10']++;var me=this;__cov_g$qgx$PKn_62jAkPMBYY3g.s['11']++;var store=this.down('multiselect').getStore();__cov_g$qgx$PKn_62jAkPMBYY3g.s['12']++;store.filterBy(function(rec){__cov_g$qgx$PKn_62jAkPMBYY3g.f['5']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['13']++;var mappedFields=BasiGX.util.Merge.extractMappedFields(me);__cov_g$qgx$PKn_62jAkPMBYY3g.s['14']++;return mappedFields.indexOf(rec.data.field1)===-1;});},mergeLayers:function(){__cov_g$qgx$PKn_62jAkPMBYY3g.f['6']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['15']++;var Merge=BasiGX.util.Merge;__cov_g$qgx$PKn_62jAkPMBYY3g.s['16']++;var sourceSchema=Merge.extractSchema(this.getSourceLayer());__cov_g$qgx$PKn_62jAkPMBYY3g.s['17']++;var targetSchema=Merge.extractSchema(this.getTargetLayer());__cov_g$qgx$PKn_62jAkPMBYY3g.s['18']++;var labels=[];__cov_g$qgx$PKn_62jAkPMBYY3g.s['19']++;var dropdowns=[];__cov_g$qgx$PKn_62jAkPMBYY3g.s['20']++;Ext.each(targetSchema,function(attr){__cov_g$qgx$PKn_62jAkPMBYY3g.f['7']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['21']++;labels.push({xtype:'label',margin:3,text:attr});__cov_g$qgx$PKn_62jAkPMBYY3g.s['22']++;dropdowns.push({xtype:'combo',store:sourceSchema,displayField:'name',margin:3,valueField:'name',value:sourceSchema.includes(attr)?(__cov_g$qgx$PKn_62jAkPMBYY3g.b['1'][0]++,attr):(__cov_g$qgx$PKn_62jAkPMBYY3g.b['1'][1]++,''),allowBlank:true,forceSelection:true,editable:true});});__cov_g$qgx$PKn_62jAkPMBYY3g.s['23']++;this.createMergeWindow(labels,dropdowns,sourceSchema,targetSchema);},applyHandler:function(origSchema){__cov_g$qgx$PKn_62jAkPMBYY3g.f['8']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['24']++;var me=this;__cov_g$qgx$PKn_62jAkPMBYY3g.s['25']++;var Merge=BasiGX.util.Merge;__cov_g$qgx$PKn_62jAkPMBYY3g.s['26']++;return function(){__cov_g$qgx$PKn_62jAkPMBYY3g.f['9']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['27']++;var win=this.up('window');__cov_g$qgx$PKn_62jAkPMBYY3g.s['28']++;var newFeatures=me.getSourceLayer().getSource().getFeatures();__cov_g$qgx$PKn_62jAkPMBYY3g.s['29']++;var target=me.getTargetLayer().getSource();__cov_g$qgx$PKn_62jAkPMBYY3g.s['30']++;var mapping=Merge.extractMapping(win);__cov_g$qgx$PKn_62jAkPMBYY3g.s['31']++;var copy=Merge.extractToCopyAttributes(win);__cov_g$qgx$PKn_62jAkPMBYY3g.s['32']++;Ext.each(newFeatures,function(feature){__cov_g$qgx$PKn_62jAkPMBYY3g.f['10']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['33']++;var newFeature=Merge.convertFeature(feature,mapping,copy,origSchema);__cov_g$qgx$PKn_62jAkPMBYY3g.s['34']++;target.addFeature(newFeature);});__cov_g$qgx$PKn_62jAkPMBYY3g.s['35']++;win.destroy();};},cancelHandler:function(){__cov_g$qgx$PKn_62jAkPMBYY3g.f['11']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['36']++;this.up('window').close();},createAttributeSelection:function(attributes){__cov_g$qgx$PKn_62jAkPMBYY3g.f['12']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['37']++;return{xtype:'multiselect',margin:5,minHeight:100,width:'100%',bind:{fieldLabel:'{adoptAttributes}'},store:attributes};},createDropdownList:function(labels,dropdowns){__cov_g$qgx$PKn_62jAkPMBYY3g.f['13']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['38']++;var vboxes=[];__cov_g$qgx$PKn_62jAkPMBYY3g.s['39']++;for(var i=0;i<labels.length;++i){__cov_g$qgx$PKn_62jAkPMBYY3g.s['40']++;vboxes.push({xtype:'container',layout:'vbox',margin:3,items:[labels[i],dropdowns[i]]});}__cov_g$qgx$PKn_62jAkPMBYY3g.s['41']++;return vboxes;},createMergeWindow:function(labels,dropdowns,sourceSchema,origSchema){__cov_g$qgx$PKn_62jAkPMBYY3g.f['14']++;__cov_g$qgx$PKn_62jAkPMBYY3g.s['42']++;var vboxes=this.createDropdownList(labels,dropdowns);__cov_g$qgx$PKn_62jAkPMBYY3g.s['43']++;var buttons={xtype:'container',items:[{xtype:'button',bind:{text:'{applyText}'},margin:'2 5 2 2',handler:this.applyHandler(origSchema)},{xtype:'button',bind:{text:'{cancelText}'},margin:'2 2 2 0',handler:this.cancelHandler}]};__cov_g$qgx$PKn_62jAkPMBYY3g.s['44']++;var attributeList=this.createAttributeSelection(sourceSchema);__cov_g$qgx$PKn_62jAkPMBYY3g.s['45']++;var panel={xtype:'form',layout:'vbox',scrollable:true,width:550,items:[{xtype:'label',bind:{text:'{matchText}'}},{xtype:'container',layout:{type:'table',columns:3},items:vboxes},attributeList,{xtype:'buttongroup',bodyBorder:false,frame:false,items:buttons}]};__cov_g$qgx$PKn_62jAkPMBYY3g.s['46']++;this.add(panel);}});
+    viewModel: {
+        data: {
+            adoptAttributes: 'Select attributes to add to the schema:',
+            applyText: 'Apply',
+            cancelText: 'Cancel',
+            windowTitle: 'Merge features',
+            matchText: 'Please select attributes to be mapped:'
+        }
+    },
+
+    bind: {
+        title: '{windowTitle}'
+    },
+
+    layout: 'fit',
+    autoShow: true,
+    items: [],
+    bodyPadding: 5,
+
+    config: {
+        /**
+         * The layer to merge.
+         * @type {ol.layer.Vector}
+         */
+        sourceLayer: null,
+        /**
+         * The layer to merge to.
+         * @type {ol.layer.Vector}
+         */
+        targetLayer: null,
+        /**
+         * Optional extra layers to push the features into.
+         * @type {ol.layer.Vector[]}
+         */
+        extraTargetLayers: null,
+        /**
+         * Optional callback function to get notified once the features have
+         * been merged.
+         * @type {Function} which will receive the features that have been
+         * merged
+         */
+        mergedFeaturesFn: null
+    },
+
+    initComponent: function() {
+        var me = this;
+        me.callParent();
+        me.mergeLayers();
+        me.registerMultiSelectFilter();
+        var combos = me.query('combo');
+        Ext.each(combos, function(combo) {
+            combo.on('change', function() {
+                me.registerMultiSelectFilter();
+            });
+        });
+    },
+
+    registerMultiSelectFilter: function() {
+        var me = this;
+        var store = this.down('multiselect').getStore();
+        store.filterBy(function(rec) {
+            var mappedFields = BasiGX.util.Merge.extractMappedFields(me);
+            return mappedFields.indexOf(rec.data.field1) === -1;
+        });
+    },
+
+    /**
+     * Creates all the children.
+     */
+    mergeLayers: function() {
+        var Merge = BasiGX.util.Merge;
+        var sourceSchema = Merge.extractSchema(this.getSourceLayer());
+        var targetSchema = Merge.extractSchema(this.getTargetLayer());
+
+        var labels = [];
+        var dropdowns = [];
+        Ext.each(targetSchema, function(attr) {
+            labels.push({
+                xtype: 'label',
+                margin: 3,
+                text: attr
+            });
+            dropdowns.push({
+                xtype: 'combo',
+                store: sourceSchema,
+                displayField: 'name',
+                margin: 3,
+                valueField: 'name',
+                value: sourceSchema.includes(attr) ? attr : '',
+                allowBlank: true,
+                forceSelection: true,
+                editable: true
+            });
+        });
+
+        this.createMergeWindow(labels, dropdowns, sourceSchema, targetSchema);
+    },
+
+    /**
+     * Callback that actually merges the two layers.
+     * @param  {Array} origSchema  the original target layer origSchema
+     * @return {Function}             the callback
+     */
+    applyHandler: function(origSchema) {
+        var me = this;
+        var Merge = BasiGX.util.Merge;
+        return function() {
+            var win = this.up('window');
+            var newFeatures = me.getSourceLayer().getSource().getFeatures();
+            var target = me.getTargetLayer().getSource();
+            var mapping = Merge.extractMapping(win);
+            var copy = Merge.extractToCopyAttributes(win);
+            var extraLayers = me.getExtraTargetLayers() || [];
+            var allFeatures = [];
+
+            Ext.each(newFeatures, function(feature) {
+                var newFeature = Merge.convertFeature(feature, mapping, copy,
+                    origSchema);
+                allFeatures.push(newFeature);
+                target.addFeature(newFeature);
+            });
+            Ext.each(extraLayers, function(layer) {
+                layer.getSource().addFeatures(allFeatures);
+            });
+
+            if (me.getMergedFeaturesFn()) {
+                me.getMergedFeaturesFn()(allFeatures);
+            }
+
+            win.destroy();
+        };
+    },
+
+    /**
+     * Callback that just closes/destroys the merge window.
+     */
+    cancelHandler: function() {
+        this.up('window').close();
+    },
+
+    /**
+     * Create the multiselect used to select attributes to add.
+     * @param  {Array} attributes the list of attributes
+     * @return {Object}            the ext configuration object
+     */
+    createAttributeSelection: function(attributes) {
+        return {
+            xtype: 'multiselect',
+            margin: 5,
+            minHeight: 100,
+            width: '100%',
+            bind: {
+                fieldLabel: '{adoptAttributes}'
+            },
+            store: attributes
+        };
+    },
+
+    /**
+     * Creates the ext config for the label/dropdown vboxes for the merges
+     * window.
+     * @param  {Array} labels    the labels
+     * @param  {Array} dropdowns the attributes list
+     * @return {Array}           an array of vbox container configurations
+     */
+    createDropdownList: function(labels, dropdowns) {
+        var vboxes = [];
+        for (var i = 0; i < labels.length; ++i) {
+            vboxes.push({
+                xtype: 'container',
+                layout: 'vbox',
+                margin: 3,
+                items: [
+                    labels[i],
+                    dropdowns[i]
+                ]
+            });
+        }
+        return vboxes;
+    },
+
+    /**
+     * Creates and shows the merge window.
+     * @param  {Array} labels       the original attributes label list
+     * @param  {Array} dropdowns    the dropdowns with the source layer
+     * attributes
+     * @param  {Array} sourceSchema the source layer schema
+     * @param  {Array} origSchema   the target layer schema
+     */
+    createMergeWindow: function(labels, dropdowns, sourceSchema, origSchema) {
+        var vboxes = this.createDropdownList(labels, dropdowns);
+
+        var buttons = {
+            xtype: 'container',
+            items: [{
+                xtype: 'button',
+                bind: {
+                    text: '{applyText}'
+                },
+                margin: '2 5 2 2',
+                handler: this.applyHandler(origSchema)
+            }, {
+                xtype: 'button',
+                bind: {
+                    text: '{cancelText}'
+                },
+                margin: '2 2 2 0',
+                handler: this.cancelHandler
+            }]
+        };
+
+        var attributeList = this.createAttributeSelection(sourceSchema);
+
+        var panel = {
+            xtype: 'form',
+            layout: 'vbox',
+            scrollable: true,
+            width: 550,
+            items: [{
+                xtype: 'label',
+                bind: {
+                    text: '{matchText}'
+                }
+            }, {
+                xtype: 'container',
+                layout: {
+                    type: 'table',
+                    // The total column count must be specified here
+                    columns: 3
+                },
+                items: vboxes
+            },
+            attributeList,
+            {
+                xtype: 'buttongroup',
+                bodyBorder: false,
+                frame: false,
+                items: buttons
+            }]
+        };
+
+        this.add(panel);
+    }
+});

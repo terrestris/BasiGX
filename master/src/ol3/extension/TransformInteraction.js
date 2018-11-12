@@ -1,9 +1,713 @@
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
+ * Copyright (c) 2016-present Jean-Marc Viglino
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/* This file is basically a copy of
+ * https://raw.githubusercontent.com/Viglino/ol3-ext/gh-pages/interaction/
+ * transforminteraction.js by https://github.com/Viglino at commit
+ * 8c92ee5c9668f3451c807f33fa4d9933eac2cd22
+ * That code is licenced under the French Opensource BSD like CeCILL-B FREE
+ * SOFTWARE LICENSE
+ * (http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html)
+ */
+/**
+ * A wrapper class that loads the excellent `ol.interaction.Transform` into
+ * the page.
+ *
+ * Changes to the original class by [Viglino](https://github.com/Viglino):
+ *   * Code style
+ *   * Wrapped in an Ext.class, so this extension can be required from other
+ *     classes
+ *   * The vectorlayer for the handles has KEY_DISPLAY_IN_LAYERSWITCHER from
+ *     BasiGX.util.Layer set to false
+ */
+Ext.define('BasiGX.ol3.extension.TransformInteraction', {
+    requires: [
+        'BasiGX.util.Layer'
+    ],
+    singleton: true
+}, function() {
+    // Once this class is required, this function will execute and create the
+    // extension in the ol3 namespace.
 
-var __cov_zOB2W2kshp8R3XBUXjf$Nw = (Function('return this'))();
-if (!__cov_zOB2W2kshp8R3XBUXjf$Nw.__coverage__) { __cov_zOB2W2kshp8R3XBUXjf$Nw.__coverage__ = {}; }
-__cov_zOB2W2kshp8R3XBUXjf$Nw = __cov_zOB2W2kshp8R3XBUXjf$Nw.__coverage__;
-if (!(__cov_zOB2W2kshp8R3XBUXjf$Nw['/home/travis/build/terrestris/BasiGX/src/ol3/extension/TransformInteraction.js'])) {
-   __cov_zOB2W2kshp8R3XBUXjf$Nw['/home/travis/build/terrestris/BasiGX/src/ol3/extension/TransformInteraction.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/ol3/extension/TransformInteraction.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0,"137":0,"138":0,"139":0,"140":0,"141":0,"142":0,"143":0,"144":0,"145":0,"146":0,"147":0,"148":0,"149":0,"150":0,"151":0,"152":0,"153":0,"154":0,"155":0,"156":0,"157":0,"158":0,"159":0,"160":0,"161":0,"162":0,"163":0,"164":0,"165":0,"166":0,"167":0,"168":0,"169":0,"170":0,"171":0,"172":0,"173":0,"174":0,"175":0,"176":0,"177":0,"178":0,"179":0,"180":0,"181":0,"182":0,"183":0,"184":0,"185":0,"186":0,"187":0,"188":0,"189":0,"190":0,"191":0,"192":0,"193":0,"194":0,"195":0,"196":0,"197":0,"198":0,"199":0,"200":0,"201":0,"202":0,"203":0,"204":0,"205":0,"206":0,"207":0,"208":0,"209":0,"210":0,"211":0,"212":0,"213":0,"214":0,"215":0,"216":0,"217":0,"218":0,"219":0,"220":0,"221":0,"222":0,"223":0,"224":0,"225":0,"226":0,"227":0,"228":0,"229":0,"230":0,"231":0,"232":0,"233":0,"234":0,"235":0,"236":0,"237":0,"238":0,"239":0,"240":0,"241":0,"242":0,"243":0,"244":0,"245":0,"246":0,"247":0,"248":0,"249":0,"250":0,"251":0,"252":0,"253":0,"254":0,"255":0,"256":0,"257":0,"258":0,"259":0,"260":0,"261":0},"b":{"1":[0,0],"2":[0,0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0],"19":[0,0],"20":[0,0],"21":[0,0],"22":[0,0],"23":[0,0],"24":[0,0],"25":[0,0],"26":[0,0],"27":[0,0],"28":[0,0],"29":[0,0],"30":[0,0],"31":[0,0],"32":[0,0],"33":[0,0],"34":[0,0],"35":[0,0],"36":[0,0],"37":[0,0],"38":[0,0],"39":[0,0],"40":[0,0],"41":[0,0],"42":[0,0],"43":[0,0],"44":[0,0],"45":[0,0],"46":[0,0],"47":[0,0],"48":[0,0],"49":[0,0],"50":[0,0],"51":[0,0],"52":[0,0,0,0,0],"53":[0,0],"54":[0,0],"55":[0,0],"56":[0,0,0,0],"57":[0,0],"58":[0,0],"59":[0,0],"60":[0,0],"61":[0,0],"62":[0,0],"63":[0,0],"64":[0,0],"65":[0,0],"66":[0,0],"67":[0,0],"68":[0,0],"69":[0,0],"70":[0,0],"71":[0,0],"72":[0,0],"73":[0,0],"74":[0,0],"75":[0,0],"76":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0},"fnMap":{"1":{"name":"(anonymous_1)","line":41,"loc":{"start":{"line":41,"column":3},"end":{"line":41,"column":14}}},"2":{"name":"(anonymous_2)","line":86,"loc":{"start":{"line":86,"column":31},"end":{"line":86,"column":49}}},"3":{"name":"(anonymous_3)","line":131,"loc":{"start":{"line":131,"column":34},"end":{"line":131,"column":45}}},"4":{"name":"(anonymous_4)","line":145,"loc":{"start":{"line":145,"column":19},"end":{"line":145,"column":37}}},"5":{"name":"(anonymous_5)","line":187,"loc":{"start":{"line":187,"column":48},"end":{"line":187,"column":62}}},"6":{"name":"(anonymous_6)","line":206,"loc":{"start":{"line":206,"column":51},"end":{"line":206,"column":63}}},"7":{"name":"(anonymous_7)","line":216,"loc":{"start":{"line":216,"column":57},"end":{"line":216,"column":68}}},"8":{"name":"(anonymous_8)","line":254,"loc":{"start":{"line":254,"column":26},"end":{"line":254,"column":74}}},"9":{"name":"(anonymous_9)","line":288,"loc":{"start":{"line":288,"column":50},"end":{"line":288,"column":75}}},"10":{"name":"(anonymous_10)","line":328,"loc":{"start":{"line":328,"column":60},"end":{"line":328,"column":76}}},"11":{"name":"(anonymous_11)","line":331,"loc":{"start":{"line":331,"column":27},"end":{"line":331,"column":52}}},"12":{"name":"(anonymous_12)","line":338,"loc":{"start":{"line":338,"column":36},"end":{"line":338,"column":48}}},"13":{"name":"(anonymous_13)","line":365,"loc":{"start":{"line":365,"column":37},"end":{"line":365,"column":49}}},"14":{"name":"(anonymous_14)","line":392,"loc":{"start":{"line":392,"column":53},"end":{"line":392,"column":70}}},"15":{"name":"(anonymous_15)","line":485,"loc":{"start":{"line":485,"column":48},"end":{"line":485,"column":66}}},"16":{"name":"(anonymous_16)","line":500,"loc":{"start":{"line":500,"column":58},"end":{"line":500,"column":72}}},"17":{"name":"(anonymous_17)","line":553,"loc":{"start":{"line":553,"column":58},"end":{"line":553,"column":72}}},"18":{"name":"(anonymous_18)","line":583,"loc":{"start":{"line":583,"column":38},"end":{"line":583,"column":50}}},"19":{"name":"(anonymous_19)","line":626,"loc":{"start":{"line":626,"column":40},"end":{"line":626,"column":62}}},"20":{"name":"(anonymous_20)","line":661,"loc":{"start":{"line":661,"column":58},"end":{"line":661,"column":72}}},"21":{"name":"(anonymous_21)","line":695,"loc":{"start":{"line":695,"column":56},"end":{"line":695,"column":70}}}},"statementMap":{"1":{"start":{"line":36,"column":0},"end":{"line":713,"column":3}},"2":{"start":{"line":46,"column":4},"end":{"line":54,"column":5}},"3":{"start":{"line":47,"column":8},"end":{"line":48,"column":56}},"4":{"start":{"line":49,"column":8},"end":{"line":49,"column":15}},"5":{"start":{"line":50,"column":11},"end":{"line":54,"column":5}},"6":{"start":{"line":51,"column":8},"end":{"line":52,"column":33}},"7":{"start":{"line":53,"column":8},"end":{"line":53,"column":15}},"8":{"start":{"line":86,"column":4},"end":{"line":160,"column":6}},"9":{"start":{"line":87,"column":8},"end":{"line":89,"column":9}},"10":{"start":{"line":88,"column":12},"end":{"line":88,"column":25}},"11":{"start":{"line":90,"column":8},"end":{"line":90,"column":22}},"12":{"start":{"line":92,"column":8},"end":{"line":97,"column":11}},"13":{"start":{"line":100,"column":8},"end":{"line":100,"column":42}},"14":{"start":{"line":102,"column":8},"end":{"line":102,"column":26}},"15":{"start":{"line":103,"column":8},"end":{"line":109,"column":9}},"16":{"start":{"line":104,"column":12},"end":{"line":108,"column":13}},"17":{"start":{"line":105,"column":16},"end":{"line":105,"column":40}},"18":{"start":{"line":107,"column":16},"end":{"line":107,"column":42}},"19":{"start":{"line":110,"column":8},"end":{"line":110,"column":30}},"20":{"start":{"line":113,"column":8},"end":{"line":113,"column":75}},"21":{"start":{"line":115,"column":8},"end":{"line":115,"column":61}},"22":{"start":{"line":117,"column":8},"end":{"line":117,"column":57}},"23":{"start":{"line":119,"column":8},"end":{"line":119,"column":53}},"24":{"start":{"line":121,"column":8},"end":{"line":121,"column":55}},"25":{"start":{"line":124,"column":8},"end":{"line":124,"column":36}},"26":{"start":{"line":125,"column":8},"end":{"line":127,"column":9}},"27":{"start":{"line":126,"column":12},"end":{"line":126,"column":54}},"28":{"start":{"line":128,"column":8},"end":{"line":128,"column":53}},"29":{"start":{"line":131,"column":8},"end":{"line":133,"column":11}},"30":{"start":{"line":132,"column":12},"end":{"line":132,"column":31}},"31":{"start":{"line":136,"column":8},"end":{"line":136,"column":44}},"32":{"start":{"line":137,"column":8},"end":{"line":151,"column":11}},"33":{"start":{"line":146,"column":16},"end":{"line":148,"column":50}},"34":{"start":{"line":149,"column":16},"end":{"line":149,"column":39}},"35":{"start":{"line":153,"column":8},"end":{"line":156,"column":10}},"36":{"start":{"line":159,"column":8},"end":{"line":159,"column":31}},"37":{"start":{"line":161,"column":4},"end":{"line":161,"column":66}},"38":{"start":{"line":165,"column":4},"end":{"line":178,"column":6}},"39":{"start":{"line":187,"column":4},"end":{"line":199,"column":6}},"40":{"start":{"line":188,"column":8},"end":{"line":190,"column":9}},"41":{"start":{"line":189,"column":12},"end":{"line":189,"column":58}},"42":{"start":{"line":191,"column":8},"end":{"line":191,"column":64}},"43":{"start":{"line":192,"column":8},"end":{"line":192,"column":39}},"44":{"start":{"line":195,"column":8},"end":{"line":198,"column":9}},"45":{"start":{"line":196,"column":12},"end":{"line":196,"column":69}},"46":{"start":{"line":197,"column":12},"end":{"line":197,"column":35}},"47":{"start":{"line":206,"column":4},"end":{"line":211,"column":6}},"48":{"start":{"line":207,"column":8},"end":{"line":207,"column":66}},"49":{"start":{"line":208,"column":8},"end":{"line":210,"column":9}},"50":{"start":{"line":209,"column":12},"end":{"line":209,"column":30}},"51":{"start":{"line":216,"column":4},"end":{"line":279,"column":6}},"52":{"start":{"line":217,"column":8},"end":{"line":220,"column":11}},"53":{"start":{"line":222,"column":8},"end":{"line":226,"column":11}},"54":{"start":{"line":227,"column":8},"end":{"line":229,"column":11}},"55":{"start":{"line":230,"column":8},"end":{"line":232,"column":11}},"56":{"start":{"line":233,"column":8},"end":{"line":238,"column":11}},"57":{"start":{"line":239,"column":8},"end":{"line":239,"column":56}},"58":{"start":{"line":240,"column":8},"end":{"line":246,"column":11}},"59":{"start":{"line":247,"column":8},"end":{"line":253,"column":11}},"60":{"start":{"line":254,"column":8},"end":{"line":262,"column":10}},"61":{"start":{"line":255,"column":12},"end":{"line":261,"column":14}},"62":{"start":{"line":264,"column":8},"end":{"line":277,"column":10}},"63":{"start":{"line":278,"column":8},"end":{"line":278,"column":27}},"64":{"start":{"line":288,"column":4},"end":{"line":318,"column":6}},"65":{"start":{"line":289,"column":8},"end":{"line":291,"column":9}},"66":{"start":{"line":290,"column":12},"end":{"line":290,"column":19}},"67":{"start":{"line":292,"column":8},"end":{"line":296,"column":9}},"68":{"start":{"line":293,"column":12},"end":{"line":293,"column":40}},"69":{"start":{"line":295,"column":12},"end":{"line":295,"column":42}},"70":{"start":{"line":297,"column":8},"end":{"line":316,"column":9}},"71":{"start":{"line":298,"column":12},"end":{"line":298,"column":53}},"72":{"start":{"line":299,"column":12},"end":{"line":306,"column":13}},"73":{"start":{"line":300,"column":16},"end":{"line":302,"column":17}},"74":{"start":{"line":301,"column":20},"end":{"line":301,"column":43}},"75":{"start":{"line":303,"column":16},"end":{"line":305,"column":17}},"76":{"start":{"line":304,"column":20},"end":{"line":304,"column":37}},"77":{"start":{"line":307,"column":12},"end":{"line":307,"column":52}},"78":{"start":{"line":308,"column":12},"end":{"line":315,"column":13}},"79":{"start":{"line":309,"column":16},"end":{"line":311,"column":17}},"80":{"start":{"line":310,"column":20},"end":{"line":310,"column":57}},"81":{"start":{"line":312,"column":16},"end":{"line":314,"column":17}},"82":{"start":{"line":313,"column":20},"end":{"line":313,"column":37}},"83":{"start":{"line":317,"column":8},"end":{"line":317,"column":27}},"84":{"start":{"line":328,"column":4},"end":{"line":385,"column":6}},"85":{"start":{"line":329,"column":8},"end":{"line":329,"column":22}},"86":{"start":{"line":331,"column":8},"end":{"line":381,"column":10}},"87":{"start":{"line":332,"column":12},"end":{"line":332,"column":30}},"88":{"start":{"line":334,"column":12},"end":{"line":351,"column":13}},"89":{"start":{"line":335,"column":16},"end":{"line":337,"column":17}},"90":{"start":{"line":336,"column":20},"end":{"line":336,"column":33}},"91":{"start":{"line":338,"column":16},"end":{"line":342,"column":19}},"92":{"start":{"line":339,"column":20},"end":{"line":341,"column":21}},"93":{"start":{"line":340,"column":24},"end":{"line":340,"column":37}},"94":{"start":{"line":343,"column":16},"end":{"line":350,"column":17}},"95":{"start":{"line":344,"column":20},"end":{"line":349,"column":22}},"96":{"start":{"line":353,"column":12},"end":{"line":380,"column":13}},"97":{"start":{"line":355,"column":16},"end":{"line":361,"column":17}},"98":{"start":{"line":356,"column":20},"end":{"line":360,"column":21}},"99":{"start":{"line":357,"column":24},"end":{"line":359,"column":26}},"100":{"start":{"line":362,"column":16},"end":{"line":362,"column":28}},"101":{"start":{"line":363,"column":19},"end":{"line":380,"column":13}},"102":{"start":{"line":365,"column":16},"end":{"line":369,"column":19}},"103":{"start":{"line":366,"column":20},"end":{"line":368,"column":21}},"104":{"start":{"line":367,"column":24},"end":{"line":367,"column":37}},"105":{"start":{"line":370,"column":16},"end":{"line":374,"column":17}},"106":{"start":{"line":371,"column":20},"end":{"line":371,"column":46}},"107":{"start":{"line":373,"column":20},"end":{"line":373,"column":32}},"108":{"start":{"line":377,"column":16},"end":{"line":379,"column":18}},"109":{"start":{"line":382,"column":8},"end":{"line":382,"column":30}},"110":{"start":{"line":383,"column":8},"end":{"line":383,"column":65}},"111":{"start":{"line":384,"column":8},"end":{"line":384,"column":25}},"112":{"start":{"line":392,"column":4},"end":{"line":478,"column":6}},"113":{"start":{"line":393,"column":8},"end":{"line":393,"column":47}},"114":{"start":{"line":394,"column":8},"end":{"line":394,"column":32}},"115":{"start":{"line":395,"column":8},"end":{"line":395,"column":16}},"116":{"start":{"line":396,"column":8},"end":{"line":396,"column":17}},"117":{"start":{"line":397,"column":8},"end":{"line":397,"column":14}},"118":{"start":{"line":398,"column":8},"end":{"line":400,"column":9}},"119":{"start":{"line":399,"column":12},"end":{"line":399,"column":19}},"120":{"start":{"line":401,"column":8},"end":{"line":477,"column":9}},"121":{"start":{"line":402,"column":12},"end":{"line":413,"column":13}},"122":{"start":{"line":403,"column":16},"end":{"line":408,"column":18}},"123":{"start":{"line":409,"column":16},"end":{"line":409,"column":62}},"124":{"start":{"line":410,"column":16},"end":{"line":410,"column":55}},"125":{"start":{"line":411,"column":16},"end":{"line":411,"column":54}},"126":{"start":{"line":412,"column":16},"end":{"line":412,"column":61}},"127":{"start":{"line":415,"column":12},"end":{"line":415,"column":58}},"128":{"start":{"line":416,"column":12},"end":{"line":422,"column":13}},"129":{"start":{"line":417,"column":16},"end":{"line":417,"column":69}},"130":{"start":{"line":418,"column":16},"end":{"line":421,"column":19}},"131":{"start":{"line":423,"column":12},"end":{"line":423,"column":51}},"132":{"start":{"line":424,"column":12},"end":{"line":424,"column":50}},"133":{"start":{"line":425,"column":12},"end":{"line":425,"column":30}},"134":{"start":{"line":426,"column":12},"end":{"line":426,"column":45}},"135":{"start":{"line":427,"column":12},"end":{"line":466,"column":13}},"136":{"start":{"line":428,"column":16},"end":{"line":428,"column":33}},"137":{"start":{"line":430,"column":16},"end":{"line":443,"column":17}},"138":{"start":{"line":431,"column":20},"end":{"line":442,"column":21}},"139":{"start":{"line":432,"column":24},"end":{"line":440,"column":27}},"140":{"start":{"line":441,"column":24},"end":{"line":441,"column":41}},"141":{"start":{"line":445,"column":16},"end":{"line":454,"column":17}},"142":{"start":{"line":446,"column":20},"end":{"line":453,"column":21}},"143":{"start":{"line":447,"column":24},"end":{"line":451,"column":27}},"144":{"start":{"line":452,"column":24},"end":{"line":452,"column":41}},"145":{"start":{"line":456,"column":16},"end":{"line":465,"column":17}},"146":{"start":{"line":457,"column":20},"end":{"line":463,"column":23}},"147":{"start":{"line":464,"column":20},"end":{"line":464,"column":37}},"148":{"start":{"line":468,"column":12},"end":{"line":474,"column":13}},"149":{"start":{"line":469,"column":16},"end":{"line":472,"column":19}},"150":{"start":{"line":473,"column":16},"end":{"line":473,"column":33}},"151":{"start":{"line":476,"column":12},"end":{"line":476,"column":65}},"152":{"start":{"line":485,"column":4},"end":{"line":494,"column":6}},"153":{"start":{"line":486,"column":8},"end":{"line":486,"column":32}},"154":{"start":{"line":487,"column":8},"end":{"line":487,"column":78}},"155":{"start":{"line":488,"column":8},"end":{"line":488,"column":63}},"156":{"start":{"line":489,"column":8},"end":{"line":489,"column":27}},"157":{"start":{"line":490,"column":8},"end":{"line":493,"column":11}},"158":{"start":{"line":500,"column":4},"end":{"line":547,"column":6}},"159":{"start":{"line":501,"column":8},"end":{"line":501,"column":53}},"160":{"start":{"line":502,"column":8},"end":{"line":502,"column":34}},"161":{"start":{"line":503,"column":8},"end":{"line":509,"column":9}},"162":{"start":{"line":508,"column":12},"end":{"line":508,"column":37}},"163":{"start":{"line":510,"column":8},"end":{"line":546,"column":9}},"164":{"start":{"line":511,"column":12},"end":{"line":511,"column":36}},"165":{"start":{"line":512,"column":12},"end":{"line":512,"column":35}},"166":{"start":{"line":513,"column":12},"end":{"line":513,"column":46}},"167":{"start":{"line":515,"column":12},"end":{"line":515,"column":46}},"168":{"start":{"line":516,"column":12},"end":{"line":516,"column":36}},"169":{"start":{"line":517,"column":12},"end":{"line":517,"column":61}},"170":{"start":{"line":518,"column":12},"end":{"line":518,"column":52}},"171":{"start":{"line":519,"column":12},"end":{"line":519,"column":68}},"172":{"start":{"line":520,"column":12},"end":{"line":520,"column":58}},"173":{"start":{"line":521,"column":12},"end":{"line":521,"column":71}},"174":{"start":{"line":522,"column":12},"end":{"line":525,"column":14}},"175":{"start":{"line":527,"column":12},"end":{"line":532,"column":15}},"176":{"start":{"line":533,"column":12},"end":{"line":533,"column":24}},"177":{"start":{"line":535,"column":12},"end":{"line":535,"column":36}},"178":{"start":{"line":536,"column":12},"end":{"line":536,"column":70}},"179":{"start":{"line":537,"column":12},"end":{"line":537,"column":67}},"180":{"start":{"line":538,"column":12},"end":{"line":538,"column":31}},"181":{"start":{"line":539,"column":12},"end":{"line":544,"column":15}},"182":{"start":{"line":545,"column":12},"end":{"line":545,"column":25}},"183":{"start":{"line":553,"column":4},"end":{"line":656,"column":6}},"184":{"start":{"line":554,"column":8},"end":{"line":554,"column":21}},"185":{"start":{"line":555,"column":8},"end":{"line":555,"column":19}},"186":{"start":{"line":556,"column":8},"end":{"line":556,"column":19}},"187":{"start":{"line":557,"column":8},"end":{"line":655,"column":9}},"188":{"start":{"line":559,"column":16},"end":{"line":559,"column":61}},"189":{"start":{"line":560,"column":16},"end":{"line":560,"column":61}},"190":{"start":{"line":561,"column":16},"end":{"line":561,"column":51}},"191":{"start":{"line":562,"column":16},"end":{"line":567,"column":17}},"192":{"start":{"line":563,"column":20},"end":{"line":563,"column":50}},"193":{"start":{"line":564,"column":20},"end":{"line":564,"column":67}},"194":{"start":{"line":566,"column":20},"end":{"line":566,"column":56}},"195":{"start":{"line":568,"column":16},"end":{"line":568,"column":39}},"196":{"start":{"line":569,"column":16},"end":{"line":575,"column":19}},"197":{"start":{"line":576,"column":16},"end":{"line":576,"column":22}},"198":{"start":{"line":579,"column":16},"end":{"line":579,"column":65}},"199":{"start":{"line":580,"column":16},"end":{"line":580,"column":65}},"200":{"start":{"line":582,"column":16},"end":{"line":582,"column":70}},"201":{"start":{"line":583,"column":16},"end":{"line":585,"column":19}},"202":{"start":{"line":584,"column":20},"end":{"line":584,"column":62}},"203":{"start":{"line":587,"column":16},"end":{"line":587,"column":50}},"204":{"start":{"line":588,"column":16},"end":{"line":594,"column":19}},"205":{"start":{"line":595,"column":16},"end":{"line":595,"column":22}},"206":{"start":{"line":598,"column":16},"end":{"line":598,"column":42}},"207":{"start":{"line":599,"column":16},"end":{"line":601,"column":17}},"208":{"start":{"line":600,"column":20},"end":{"line":600,"column":71}},"209":{"start":{"line":603,"column":16},"end":{"line":603,"column":55}},"210":{"start":{"line":604,"column":16},"end":{"line":604,"column":57}},"211":{"start":{"line":605,"column":16},"end":{"line":605,"column":34}},"212":{"start":{"line":606,"column":16},"end":{"line":606,"column":55}},"213":{"start":{"line":607,"column":16},"end":{"line":607,"column":57}},"214":{"start":{"line":608,"column":16},"end":{"line":608,"column":34}},"215":{"start":{"line":611,"column":16},"end":{"line":611,"column":66}},"216":{"start":{"line":612,"column":16},"end":{"line":623,"column":17}},"217":{"start":{"line":614,"column":20},"end":{"line":618,"column":21}},"218":{"start":{"line":615,"column":24},"end":{"line":615,"column":56}},"219":{"start":{"line":617,"column":24},"end":{"line":617,"column":56}},"220":{"start":{"line":620,"column":20},"end":{"line":622,"column":21}},"221":{"start":{"line":621,"column":24},"end":{"line":621,"column":55}},"222":{"start":{"line":625,"column":16},"end":{"line":625,"column":46}},"223":{"start":{"line":626,"column":16},"end":{"line":641,"column":19}},"224":{"start":{"line":627,"column":20},"end":{"line":629,"column":21}},"225":{"start":{"line":628,"column":24},"end":{"line":628,"column":34}},"226":{"start":{"line":631,"column":20},"end":{"line":639,"column":21}},"227":{"start":{"line":632,"column":24},"end":{"line":634,"column":25}},"228":{"start":{"line":633,"column":28},"end":{"line":633,"column":74}},"229":{"start":{"line":635,"column":24},"end":{"line":638,"column":25}},"230":{"start":{"line":636,"column":28},"end":{"line":637,"column":62}},"231":{"start":{"line":640,"column":20},"end":{"line":640,"column":30}},"232":{"start":{"line":642,"column":16},"end":{"line":642,"column":52}},"233":{"start":{"line":643,"column":16},"end":{"line":643,"column":35}},"234":{"start":{"line":644,"column":16},"end":{"line":650,"column":19}},"235":{"start":{"line":651,"column":16},"end":{"line":651,"column":22}},"236":{"start":{"line":654,"column":16},"end":{"line":654,"column":22}},"237":{"start":{"line":661,"column":4},"end":{"line":689,"column":6}},"238":{"start":{"line":663,"column":8},"end":{"line":688,"column":9}},"239":{"start":{"line":664,"column":12},"end":{"line":664,"column":30}},"240":{"start":{"line":665,"column":12},"end":{"line":665,"column":57}},"241":{"start":{"line":666,"column":12},"end":{"line":666,"column":49}},"242":{"start":{"line":667,"column":12},"end":{"line":687,"column":13}},"243":{"start":{"line":668,"column":16},"end":{"line":668,"column":22}},"244":{"start":{"line":669,"column":16},"end":{"line":676,"column":17}},"245":{"start":{"line":670,"column":20},"end":{"line":672,"column":43}},"246":{"start":{"line":673,"column":20},"end":{"line":673,"column":42}},"247":{"start":{"line":675,"column":20},"end":{"line":675,"column":44}},"248":{"start":{"line":678,"column":16},"end":{"line":680,"column":17}},"249":{"start":{"line":679,"column":20},"end":{"line":679,"column":64}},"250":{"start":{"line":681,"column":16},"end":{"line":681,"column":41}},"251":{"start":{"line":683,"column":16},"end":{"line":685,"column":17}},"252":{"start":{"line":684,"column":20},"end":{"line":684,"column":64}},"253":{"start":{"line":686,"column":16},"end":{"line":686,"column":49}},"254":{"start":{"line":695,"column":4},"end":{"line":709,"column":6}},"255":{"start":{"line":696,"column":8},"end":{"line":696,"column":57}},"256":{"start":{"line":697,"column":8},"end":{"line":697,"column":57}},"257":{"start":{"line":698,"column":8},"end":{"line":698,"column":43}},"258":{"start":{"line":699,"column":8},"end":{"line":704,"column":11}},"259":{"start":{"line":706,"column":8},"end":{"line":706,"column":27}},"260":{"start":{"line":707,"column":8},"end":{"line":707,"column":26}},"261":{"start":{"line":708,"column":8},"end":{"line":708,"column":21}}},"branchMap":{"1":{"line":46,"type":"if","locations":[{"start":{"line":46,"column":4},"end":{"line":46,"column":4}},{"start":{"line":46,"column":4},"end":{"line":46,"column":4}}]},"2":{"line":46,"type":"binary-expr","locations":[{"start":{"line":46,"column":8},"end":{"line":46,"column":11}},{"start":{"line":46,"column":15},"end":{"line":46,"column":30}},{"start":{"line":46,"column":34},"end":{"line":46,"column":57}}]},"3":{"line":50,"type":"if","locations":[{"start":{"line":50,"column":11},"end":{"line":50,"column":11}},{"start":{"line":50,"column":11},"end":{"line":50,"column":11}}]},"4":{"line":87,"type":"if","locations":[{"start":{"line":87,"column":8},"end":{"line":87,"column":8}},{"start":{"line":87,"column":8},"end":{"line":87,"column":8}}]},"5":{"line":103,"type":"if","locations":[{"start":{"line":103,"column":8},"end":{"line":103,"column":8}},{"start":{"line":103,"column":8},"end":{"line":103,"column":8}}]},"6":{"line":104,"type":"if","locations":[{"start":{"line":104,"column":12},"end":{"line":104,"column":12}},{"start":{"line":104,"column":12},"end":{"line":104,"column":12}}]},"7":{"line":125,"type":"if","locations":[{"start":{"line":125,"column":8},"end":{"line":125,"column":8}},{"start":{"line":125,"column":8},"end":{"line":125,"column":8}}]},"8":{"line":146,"type":"binary-expr","locations":[{"start":{"line":146,"column":27},"end":{"line":146,"column":48}},{"start":{"line":146,"column":52},"end":{"line":146,"column":61}}]},"9":{"line":147,"type":"binary-expr","locations":[{"start":{"line":147,"column":21},"end":{"line":147,"column":46}},{"start":{"line":147,"column":50},"end":{"line":147,"column":52}}]},"10":{"line":148,"type":"binary-expr","locations":[{"start":{"line":148,"column":21},"end":{"line":148,"column":42}},{"start":{"line":148,"column":46},"end":{"line":148,"column":48}}]},"11":{"line":188,"type":"if","locations":[{"start":{"line":188,"column":8},"end":{"line":188,"column":8}},{"start":{"line":188,"column":8},"end":{"line":188,"column":8}}]},"12":{"line":195,"type":"if","locations":[{"start":{"line":195,"column":8},"end":{"line":195,"column":8}},{"start":{"line":195,"column":8},"end":{"line":195,"column":8}}]},"13":{"line":208,"type":"if","locations":[{"start":{"line":208,"column":8},"end":{"line":208,"column":8}},{"start":{"line":208,"column":8},"end":{"line":208,"column":8}}]},"14":{"line":236,"type":"cond-expr","locations":[{"start":{"line":236,"column":35},"end":{"line":236,"column":37}},{"start":{"line":236,"column":40},"end":{"line":236,"column":41}}]},"15":{"line":239,"type":"cond-expr","locations":[{"start":{"line":239,"column":47},"end":{"line":239,"column":50}},{"start":{"line":239,"column":53},"end":{"line":239,"column":55}}]},"16":{"line":243,"type":"cond-expr","locations":[{"start":{"line":243,"column":35},"end":{"line":243,"column":37}},{"start":{"line":243,"column":40},"end":{"line":243,"column":41}}]},"17":{"line":250,"type":"cond-expr","locations":[{"start":{"line":250,"column":35},"end":{"line":250,"column":37}},{"start":{"line":250,"column":40},"end":{"line":250,"column":41}}]},"18":{"line":289,"type":"if","locations":[{"start":{"line":289,"column":8},"end":{"line":289,"column":8}},{"start":{"line":289,"column":8},"end":{"line":289,"column":8}}]},"19":{"line":292,"type":"if","locations":[{"start":{"line":292,"column":8},"end":{"line":292,"column":8}},{"start":{"line":292,"column":8},"end":{"line":292,"column":8}}]},"20":{"line":299,"type":"if","locations":[{"start":{"line":299,"column":12},"end":{"line":299,"column":12}},{"start":{"line":299,"column":12},"end":{"line":299,"column":12}}]},"21":{"line":300,"type":"if","locations":[{"start":{"line":300,"column":16},"end":{"line":300,"column":16}},{"start":{"line":300,"column":16},"end":{"line":300,"column":16}}]},"22":{"line":303,"type":"if","locations":[{"start":{"line":303,"column":16},"end":{"line":303,"column":16}},{"start":{"line":303,"column":16},"end":{"line":303,"column":16}}]},"23":{"line":308,"type":"if","locations":[{"start":{"line":308,"column":12},"end":{"line":308,"column":12}},{"start":{"line":308,"column":12},"end":{"line":308,"column":12}}]},"24":{"line":309,"type":"if","locations":[{"start":{"line":309,"column":16},"end":{"line":309,"column":16}},{"start":{"line":309,"column":16},"end":{"line":309,"column":16}}]},"25":{"line":310,"type":"cond-expr","locations":[{"start":{"line":310,"column":49},"end":{"line":310,"column":51}},{"start":{"line":310,"column":54},"end":{"line":310,"column":55}}]},"26":{"line":312,"type":"if","locations":[{"start":{"line":312,"column":16},"end":{"line":312,"column":16}},{"start":{"line":312,"column":16},"end":{"line":312,"column":16}}]},"27":{"line":334,"type":"if","locations":[{"start":{"line":334,"column":12},"end":{"line":334,"column":12}},{"start":{"line":334,"column":12},"end":{"line":334,"column":12}}]},"28":{"line":335,"type":"if","locations":[{"start":{"line":335,"column":16},"end":{"line":335,"column":16}},{"start":{"line":335,"column":16},"end":{"line":335,"column":16}}]},"29":{"line":339,"type":"if","locations":[{"start":{"line":339,"column":20},"end":{"line":339,"column":20}},{"start":{"line":339,"column":20},"end":{"line":339,"column":20}}]},"30":{"line":343,"type":"if","locations":[{"start":{"line":343,"column":16},"end":{"line":343,"column":16}},{"start":{"line":343,"column":16},"end":{"line":343,"column":16}}]},"31":{"line":353,"type":"if","locations":[{"start":{"line":353,"column":12},"end":{"line":353,"column":12}},{"start":{"line":353,"column":12},"end":{"line":353,"column":12}}]},"32":{"line":356,"type":"if","locations":[{"start":{"line":356,"column":20},"end":{"line":356,"column":20}},{"start":{"line":356,"column":20},"end":{"line":356,"column":20}}]},"33":{"line":363,"type":"if","locations":[{"start":{"line":363,"column":19},"end":{"line":363,"column":19}},{"start":{"line":363,"column":19},"end":{"line":363,"column":19}}]},"34":{"line":366,"type":"if","locations":[{"start":{"line":366,"column":20},"end":{"line":366,"column":20}},{"start":{"line":366,"column":20},"end":{"line":366,"column":20}}]},"35":{"line":370,"type":"if","locations":[{"start":{"line":370,"column":16},"end":{"line":370,"column":16}},{"start":{"line":370,"column":16},"end":{"line":370,"column":16}}]},"36":{"line":384,"type":"binary-expr","locations":[{"start":{"line":384,"column":15},"end":{"line":384,"column":18}},{"start":{"line":384,"column":22},"end":{"line":384,"column":24}}]},"37":{"line":398,"type":"if","locations":[{"start":{"line":398,"column":8},"end":{"line":398,"column":8}},{"start":{"line":398,"column":8},"end":{"line":398,"column":8}}]},"38":{"line":401,"type":"if","locations":[{"start":{"line":401,"column":8},"end":{"line":401,"column":8}},{"start":{"line":401,"column":8},"end":{"line":401,"column":8}}]},"39":{"line":402,"type":"if","locations":[{"start":{"line":402,"column":12},"end":{"line":402,"column":12}},{"start":{"line":402,"column":12},"end":{"line":402,"column":12}}]},"40":{"line":416,"type":"if","locations":[{"start":{"line":416,"column":12},"end":{"line":416,"column":12}},{"start":{"line":416,"column":12},"end":{"line":416,"column":12}}]},"41":{"line":427,"type":"if","locations":[{"start":{"line":427,"column":12},"end":{"line":427,"column":12}},{"start":{"line":427,"column":12},"end":{"line":427,"column":12}}]},"42":{"line":430,"type":"if","locations":[{"start":{"line":430,"column":16},"end":{"line":430,"column":16}},{"start":{"line":430,"column":16},"end":{"line":430,"column":16}}]},"43":{"line":430,"type":"binary-expr","locations":[{"start":{"line":430,"column":20},"end":{"line":430,"column":39}},{"start":{"line":430,"column":43},"end":{"line":430,"column":60}}]},"44":{"line":438,"type":"cond-expr","locations":[{"start":{"line":438,"column":48},"end":{"line":438,"column":51}},{"start":{"line":438,"column":54},"end":{"line":438,"column":57}}]},"45":{"line":445,"type":"if","locations":[{"start":{"line":445,"column":16},"end":{"line":445,"column":16}},{"start":{"line":445,"column":16},"end":{"line":445,"column":16}}]},"46":{"line":456,"type":"if","locations":[{"start":{"line":456,"column":16},"end":{"line":456,"column":16}},{"start":{"line":456,"column":16},"end":{"line":456,"column":16}}]},"47":{"line":456,"type":"binary-expr","locations":[{"start":{"line":456,"column":20},"end":{"line":456,"column":41}},{"start":{"line":456,"column":45},"end":{"line":456,"column":74}}]},"48":{"line":468,"type":"if","locations":[{"start":{"line":468,"column":12},"end":{"line":468,"column":12}},{"start":{"line":468,"column":12},"end":{"line":468,"column":12}}]},"49":{"line":487,"type":"binary-expr","locations":[{"start":{"line":487,"column":23},"end":{"line":487,"column":36}},{"start":{"line":487,"column":40},"end":{"line":487,"column":77}}]},"50":{"line":488,"type":"cond-expr","locations":[{"start":{"line":488,"column":33},"end":{"line":488,"column":53}},{"start":{"line":488,"column":57},"end":{"line":488,"column":62}}]},"51":{"line":503,"type":"if","locations":[{"start":{"line":503,"column":8},"end":{"line":503,"column":8}},{"start":{"line":503,"column":8},"end":{"line":503,"column":8}}]},"52":{"line":503,"type":"binary-expr","locations":[{"start":{"line":503,"column":12},"end":{"line":503,"column":25}},{"start":{"line":503,"column":29},"end":{"line":503,"column":54}},{"start":{"line":505,"column":17},"end":{"line":505,"column":27}},{"start":{"line":505,"column":31},"end":{"line":505,"column":52}},{"start":{"line":506,"column":19},"end":{"line":506,"column":47}}]},"53":{"line":510,"type":"if","locations":[{"start":{"line":510,"column":8},"end":{"line":510,"column":8}},{"start":{"line":510,"column":8},"end":{"line":510,"column":8}}]},"54":{"line":536,"type":"binary-expr","locations":[{"start":{"line":536,"column":27},"end":{"line":536,"column":34}},{"start":{"line":536,"column":38},"end":{"line":536,"column":69}}]},"55":{"line":537,"type":"cond-expr","locations":[{"start":{"line":537,"column":37},"end":{"line":537,"column":57}},{"start":{"line":537,"column":61},"end":{"line":537,"column":66}}]},"56":{"line":557,"type":"switch","locations":[{"start":{"line":558,"column":12},"end":{"line":576,"column":22}},{"start":{"line":578,"column":12},"end":{"line":595,"column":22}},{"start":{"line":597,"column":12},"end":{"line":651,"column":22}},{"start":{"line":653,"column":12},"end":{"line":654,"column":22}}]},"57":{"line":562,"type":"if","locations":[{"start":{"line":562,"column":16},"end":{"line":562,"column":16}},{"start":{"line":562,"column":16},"end":{"line":562,"column":16}}]},"58":{"line":599,"type":"if","locations":[{"start":{"line":599,"column":16},"end":{"line":599,"column":16}},{"start":{"line":599,"column":16},"end":{"line":599,"column":16}}]},"59":{"line":599,"type":"binary-expr","locations":[{"start":{"line":599,"column":20},"end":{"line":599,"column":45}},{"start":{"line":599,"column":49},"end":{"line":599,"column":74}}]},"60":{"line":612,"type":"if","locations":[{"start":{"line":612,"column":16},"end":{"line":612,"column":16}},{"start":{"line":612,"column":16},"end":{"line":612,"column":16}}]},"61":{"line":614,"type":"if","locations":[{"start":{"line":614,"column":20},"end":{"line":614,"column":20}},{"start":{"line":614,"column":20},"end":{"line":614,"column":20}}]},"62":{"line":615,"type":"cond-expr","locations":[{"start":{"line":615,"column":48},"end":{"line":615,"column":51}},{"start":{"line":615,"column":54},"end":{"line":615,"column":55}}]},"63":{"line":617,"type":"cond-expr","locations":[{"start":{"line":617,"column":48},"end":{"line":617,"column":51}},{"start":{"line":617,"column":54},"end":{"line":617,"column":55}}]},"64":{"line":620,"type":"if","locations":[{"start":{"line":620,"column":20},"end":{"line":620,"column":20}},{"start":{"line":620,"column":20},"end":{"line":620,"column":20}}]},"65":{"line":620,"type":"binary-expr","locations":[{"start":{"line":620,"column":24},"end":{"line":620,"column":50}},{"start":{"line":620,"column":54},"end":{"line":620,"column":69}}]},"66":{"line":627,"type":"if","locations":[{"start":{"line":627,"column":20},"end":{"line":627,"column":20}},{"start":{"line":627,"column":20},"end":{"line":627,"column":20}}]},"67":{"line":632,"type":"if","locations":[{"start":{"line":632,"column":24},"end":{"line":632,"column":24}},{"start":{"line":632,"column":24},"end":{"line":632,"column":24}}]},"68":{"line":635,"type":"if","locations":[{"start":{"line":635,"column":24},"end":{"line":635,"column":24}},{"start":{"line":635,"column":24},"end":{"line":635,"column":24}}]},"69":{"line":663,"type":"if","locations":[{"start":{"line":663,"column":8},"end":{"line":663,"column":8}},{"start":{"line":663,"column":8},"end":{"line":663,"column":8}}]},"70":{"line":667,"type":"if","locations":[{"start":{"line":667,"column":12},"end":{"line":667,"column":12}},{"start":{"line":667,"column":12},"end":{"line":667,"column":12}}]},"71":{"line":669,"type":"if","locations":[{"start":{"line":669,"column":16},"end":{"line":669,"column":16}},{"start":{"line":669,"column":16},"end":{"line":669,"column":16}}]},"72":{"line":670,"type":"binary-expr","locations":[{"start":{"line":670,"column":31},"end":{"line":670,"column":41}},{"start":{"line":670,"column":45},"end":{"line":670,"column":54}}]},"73":{"line":671,"type":"binary-expr","locations":[{"start":{"line":671,"column":25},"end":{"line":671,"column":39}},{"start":{"line":671,"column":43},"end":{"line":671,"column":45}}]},"74":{"line":672,"type":"binary-expr","locations":[{"start":{"line":672,"column":25},"end":{"line":672,"column":35}},{"start":{"line":672,"column":39},"end":{"line":672,"column":41}}]},"75":{"line":678,"type":"if","locations":[{"start":{"line":678,"column":16},"end":{"line":678,"column":16}},{"start":{"line":678,"column":16},"end":{"line":678,"column":16}}]},"76":{"line":683,"type":"if","locations":[{"start":{"line":683,"column":16},"end":{"line":683,"column":16}},{"start":{"line":683,"column":16},"end":{"line":683,"column":16}}]}}};
-}
-__cov_zOB2W2kshp8R3XBUXjf$Nw = __cov_zOB2W2kshp8R3XBUXjf$Nw['/home/travis/build/terrestris/BasiGX/src/ol3/extension/TransformInteraction.js'];
-__cov_zOB2W2kshp8R3XBUXjf$Nw.s['1']++;Ext.define('BasiGX.ol3.extension.TransformInteraction',{requires:['BasiGX.util.Layer'],singleton:true},function(){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['1']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['2']++;if((__cov_zOB2W2kshp8R3XBUXjf$Nw.b['2'][0]++,!ol)||(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['2'][1]++,!ol.interaction)||(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['2'][2]++,!ol.interaction.Pointer)){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['1'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['3']++;Ext.log.error('Cannot define `ol.interaction.Transform`: Not '+'all needed OpenLayers 3 classes present.');__cov_zOB2W2kshp8R3XBUXjf$Nw.s['4']++;return;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['1'][1]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['5']++;if('Transform'in ol.interaction){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['3'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['6']++;Ext.log.error('Cannot define `ol.interaction.Transform`: It is '+' defined already.');__cov_zOB2W2kshp8R3XBUXjf$Nw.s['7']++;return;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['3'][1]++;}}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['8']++;ol.interaction.Transform=function(options){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['2']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['9']++;if(!options){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['4'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['10']++;options={};}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['4'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['11']++;var me=this;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['12']++;ol.interaction.Pointer.call(this,{handleDownEvent:this.handleDownEvent_,handleDragEvent:this.handleDragEvent_,handleMoveEvent:this.handleMoveEvent_,handleUpEvent:this.handleUpEvent_});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['13']++;this.features_=options.features;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['14']++;var layers=null;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['15']++;if(options.layers){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['5'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['16']++;if(options.layers instanceof Array){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['6'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['17']++;layers=options.layers;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['6'][1]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['18']++;layers=[options.layers];}}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['5'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['19']++;this.layers_=layers;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['20']++;this.set('translateFeature',options.translateFeature!==false);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['21']++;this.set('translate',options.translate!==false);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['22']++;this.set('stretch',options.stretch!==false);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['23']++;this.set('scale',options.scale!==false);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['24']++;this.set('rotate',options.rotate!==false);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['25']++;var fixedScaleRatio=false;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['26']++;if(options.fixedScaleRatio!==undefined){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['7'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['27']++;fixedScaleRatio=options.fixedScaleRatio;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['7'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['28']++;this.set('fixedScaleRatio',fixedScaleRatio);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['29']++;this.on('propertychange',function(){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['3']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['30']++;this.drawSketch_();});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['31']++;this.handles_=new ol.Collection();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['32']++;this.overlayLayer_=new ol.layer.Vector({source:new ol.source.Vector({features:this.handles_,useSpatialIndex:false}),name:'Transform overlay',displayInLayerSwitcher:false,style:function(feature){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['4']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['33']++;var key=((__cov_zOB2W2kshp8R3XBUXjf$Nw.b['8'][0]++,feature.get('handle'))||(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['8'][1]++,'default'))+((__cov_zOB2W2kshp8R3XBUXjf$Nw.b['9'][0]++,feature.get('constraint'))||(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['9'][1]++,''))+((__cov_zOB2W2kshp8R3XBUXjf$Nw.b['10'][0]++,feature.get('option'))||(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['10'][1]++,''));__cov_zOB2W2kshp8R3XBUXjf$Nw.s['34']++;return me.style[key];}});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['35']++;this.overlayLayer_.set(BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER,false);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['36']++;this.setDefaultStyle();};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['37']++;ol.inherits(ol.interaction.Transform,ol.interaction.Pointer);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['38']++;ol.interaction.Transform.prototype.Cursors={'default':'auto','select':'pointer','translate':'move','rotate':'move','scale':'ne-resize','scale1':'nw-resize','scale2':'ne-resize','scale3':'nw-resize','scalev':'e-resize','scaleh1':'n-resize','scalev2':'e-resize','scaleh3':'n-resize'};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['39']++;ol.interaction.Transform.prototype.setMap=function(map){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['5']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['40']++;if(this.getMap()){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['11'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['41']++;this.getMap().removeLayer(this.overlayLayer_);}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['11'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['42']++;ol.interaction.Pointer.prototype.setMap.call(this,map);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['43']++;this.overlayLayer_.setMap(map);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['44']++;if(map!==null){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['12'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['45']++;this.isTouch=/touch/.test(map.getViewport().className);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['46']++;this.setDefaultStyle();}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['12'][1]++;}};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['47']++;ol.interaction.Transform.prototype.setActive=function(b){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['6']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['48']++;ol.interaction.Pointer.prototype.setActive.call(this,b);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['49']++;if(b){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['13'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['50']++;this.select(null);}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['13'][1]++;}};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['51']++;ol.interaction.Transform.prototype.setDefaultStyle=function(){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['7']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['52']++;var stroke=new ol.style.Stroke({color:[255,0,0,1],width:1});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['53']++;var strokedash=new ol.style.Stroke({color:[255,0,0,1],width:1,lineDash:[4,4]});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['54']++;var fill0=new ol.style.Fill({color:[255,0,0,0.01]});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['55']++;var fill=new ol.style.Fill({color:[255,255,255,0.8]});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['56']++;var circle=new ol.style.RegularShape({fill:fill,stroke:stroke,radius:this.isTouch?(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['14'][0]++,12):(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['14'][1]++,6),points:15});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['57']++;circle.getAnchor()[0]=this.isTouch?(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['15'][0]++,-10):(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['15'][1]++,-5);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['58']++;var bigpt=new ol.style.RegularShape({fill:fill,stroke:stroke,radius:this.isTouch?(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['16'][0]++,16):(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['16'][1]++,8),points:4,angle:Math.PI/4});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['59']++;var smallpt=new ol.style.RegularShape({fill:fill,stroke:stroke,radius:this.isTouch?(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['17'][0]++,12):(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['17'][1]++,6),points:4,angle:Math.PI/4});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['60']++;var createStyle=function(passedImage,passedStroke,passedFill){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['8']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['61']++;return[new ol.style.Style({image:passedImage,stroke:passedStroke,fill:passedFill})];};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['62']++;this.style={'default':createStyle(bigpt,strokedash,fill0),'translate':createStyle(bigpt,stroke,fill),'rotate':createStyle(circle,stroke,fill),'rotate0':createStyle(bigpt,stroke,fill),'scale':createStyle(bigpt,stroke,fill),'scale1':createStyle(bigpt,stroke,fill),'scale2':createStyle(bigpt,stroke,fill),'scale3':createStyle(bigpt,stroke,fill),'scalev':createStyle(smallpt,stroke,fill),'scaleh1':createStyle(smallpt,stroke,fill),'scalev2':createStyle(smallpt,stroke,fill),'scaleh3':createStyle(smallpt,stroke,fill)};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['63']++;this.drawSketch_();};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['64']++;ol.interaction.Transform.prototype.setStyle=function(style,olstyle){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['9']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['65']++;if(!olstyle){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['18'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['66']++;return;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['18'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['67']++;if(olstyle instanceof Array){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['19'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['68']++;this.style[style]=olstyle;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['19'][1]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['69']++;this.style[style]=[olstyle];}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['70']++;for(var i=0,num=this.style[style].length;i<num;i++){__cov_zOB2W2kshp8R3XBUXjf$Nw.s['71']++;var im=this.style[style][i].getImage();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['72']++;if(im){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['20'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['73']++;if(style==='rotate'){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['21'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['74']++;im.getAnchor()[0]=-5;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['21'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['75']++;if(this.isTouch){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['22'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['76']++;im.setScale(1.8);}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['22'][1]++;}}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['20'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['77']++;var tx=this.style[style][i].getText();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['78']++;if(tx){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['23'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['79']++;if(style==='rotate'){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['24'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['80']++;tx.setOffsetX(this.isTouch?(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['25'][0]++,14):(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['25'][1]++,7));}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['24'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['81']++;if(this.isTouch){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['26'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['82']++;tx.setScale(1.8);}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['26'][1]++;}}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['23'][1]++;}}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['83']++;this.drawSketch_();};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['84']++;ol.interaction.Transform.prototype.getFeatureAtPixel_=function(pixel){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['10']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['85']++;var me=this;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['86']++;var findFunction=function(feature,layer){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['11']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['87']++;var found=false;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['88']++;if(!layer){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['27'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['89']++;if(feature===me.bbox_){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['28'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['90']++;return false;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['28'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['91']++;me.handles_.forEach(function(f){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['12']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['92']++;if(f===feature){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['29'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['93']++;found=true;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['29'][1]++;}});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['94']++;if(found){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['30'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['95']++;return{feature:feature,handle:feature.get('handle'),constraint:feature.get('constraint'),option:feature.get('option')};}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['30'][1]++;}}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['27'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['96']++;if(me.layers_){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['31'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['97']++;for(var i=0,num=me.layers_.length;i<num;i++){__cov_zOB2W2kshp8R3XBUXjf$Nw.s['98']++;if(me.layers_[i]===layer){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['32'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['99']++;return{feature:feature};}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['32'][1]++;}}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['100']++;return null;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['31'][1]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['101']++;if(me.features_){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['33'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['102']++;me.features_.forEach(function(f){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['13']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['103']++;if(f===feature){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['34'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['104']++;found=true;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['34'][1]++;}});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['105']++;if(found){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['35'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['106']++;return{feature:feature};}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['35'][1]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['107']++;return null;}}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['33'][1]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['108']++;return{feature:feature};}}};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['109']++;var map=me.getMap();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['110']++;var got=map.forEachFeatureAtPixel(pixel,findFunction);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['111']++;return(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['36'][0]++,got)||(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['36'][1]++,{});};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['112']++;ol.interaction.Transform.prototype.drawSketch_=function(center){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['14']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['113']++;this.overlayLayer_.getSource().clear();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['114']++;var map=this.getMap();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['115']++;var ext;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['116']++;var geom;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['117']++;var f;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['118']++;if(!this.feature_){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['37'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['119']++;return;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['37'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['120']++;if(center===true){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['38'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['121']++;if(!this.ispt_){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['39'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['122']++;this.overlayLayer_.getSource().addFeature(new ol.Feature({geometry:new ol.geom.Point(this.center_),handle:'rotate0'}));__cov_zOB2W2kshp8R3XBUXjf$Nw.s['123']++;ext=this.feature_.getGeometry().getExtent();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['124']++;geom=ol.geom.Polygon.fromExtent(ext);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['125']++;f=this.bbox_=new ol.Feature(geom);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['126']++;this.overlayLayer_.getSource().addFeature(f);}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['39'][1]++;}}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['38'][1]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['127']++;ext=this.feature_.getGeometry().getExtent();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['128']++;if(this.ispt_){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['40'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['129']++;var p=map.getPixelFromCoordinate([ext[0],ext[1]]);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['130']++;ext=ol.extent.boundingExtent([map.getCoordinateFromPixel([p[0]-10,p[1]-10]),map.getCoordinateFromPixel([p[0]+10,p[1]+10])]);}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['40'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['131']++;geom=ol.geom.Polygon.fromExtent(ext);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['132']++;f=this.bbox_=new ol.Feature(geom);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['133']++;var features=[];__cov_zOB2W2kshp8R3XBUXjf$Nw.s['134']++;var g=geom.getCoordinates()[0];__cov_zOB2W2kshp8R3XBUXjf$Nw.s['135']++;if(!this.ispt_){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['41'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['136']++;features.push(f);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['137']++;if((__cov_zOB2W2kshp8R3XBUXjf$Nw.b['43'][0]++,this.get('stretch'))&&(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['43'][1]++,this.get('scale'))){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['42'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['138']++;for(var i=0,toI=g.length-1;i<toI;i++){__cov_zOB2W2kshp8R3XBUXjf$Nw.s['139']++;f=new ol.Feature({geometry:new ol.geom.Point([(g[i][0]+g[i+1][0])/2,(g[i][1]+g[i+1][1])/2]),handle:'scale',constraint:i%2?(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['44'][0]++,'h'):(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['44'][1]++,'v'),option:i});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['140']++;features.push(f);}}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['42'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['141']++;if(this.get('scale')){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['45'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['142']++;for(var j=0,toJ=g.length-1;j<toJ;j++){__cov_zOB2W2kshp8R3XBUXjf$Nw.s['143']++;f=new ol.Feature({geometry:new ol.geom.Point(g[j]),handle:'scale',option:j});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['144']++;features.push(f);}}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['45'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['145']++;if((__cov_zOB2W2kshp8R3XBUXjf$Nw.b['47'][0]++,this.get('translate'))&&(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['47'][1]++,!this.get('translateFeature'))){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['46'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['146']++;f=new ol.Feature({geometry:new ol.geom.Point([(g[0][0]+g[2][0])/2,(g[0][1]+g[2][1])/2]),handle:'translate'});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['147']++;features.push(f);}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['46'][1]++;}}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['41'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['148']++;if(this.get('rotate')){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['48'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['149']++;f=new ol.Feature({geometry:new ol.geom.Point(g[3]),handle:'rotate'});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['150']++;features.push(f);}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['48'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['151']++;this.overlayLayer_.getSource().addFeatures(features);}};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['152']++;ol.interaction.Transform.prototype.select=function(feature){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['15']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['153']++;this.feature_=feature;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['154']++;var geomType=(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['49'][0]++,this.feature_)&&(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['49'][1]++,this.feature_.getGeometry().getType());__cov_zOB2W2kshp8R3XBUXjf$Nw.s['155']++;this.ispt_=geomType?(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['50'][0]++,geomType==='Point'):(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['50'][1]++,false);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['156']++;this.drawSketch_();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['157']++;this.dispatchEvent({type:'select',feature:this.feature_});};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['158']++;ol.interaction.Transform.prototype.handleDownEvent_=function(evt){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['16']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['159']++;var sel=this.getFeatureAtPixel_(evt.pixel);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['160']++;var feature=sel.feature;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['161']++;if((__cov_zOB2W2kshp8R3XBUXjf$Nw.b['52'][0]++,this.feature_)&&(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['52'][1]++,this.feature_===feature)&&((__cov_zOB2W2kshp8R3XBUXjf$Nw.b['52'][2]++,this.ispt_)&&(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['52'][3]++,this.get('translate'))||(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['52'][4]++,this.get('translateFeature')))){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['51'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['162']++;sel.handle='translate';}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['51'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['163']++;if(sel.handle){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['53'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['164']++;this.mode_=sel.handle;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['165']++;this.opt_=sel.option;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['166']++;this.constraint_=sel.constraint;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['167']++;this.coordinate_=evt.coordinate;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['168']++;this.pixel_=evt.pixel;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['169']++;this.geom_=this.feature_.getGeometry().clone();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['170']++;var geomExtent=this.geom_.getExtent();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['171']++;var extentPoly=ol.geom.Polygon.fromExtent(geomExtent);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['172']++;this.extent_=extentPoly.getCoordinates()[0];__cov_zOB2W2kshp8R3XBUXjf$Nw.s['173']++;this.center_=ol.extent.getCenter(this.geom_.getExtent());__cov_zOB2W2kshp8R3XBUXjf$Nw.s['174']++;this.angle_=Math.atan2(this.center_[1]-evt.coordinate[1],this.center_[0]-evt.coordinate[0]);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['175']++;this.dispatchEvent({type:this.mode_+'start',feature:this.feature_,pixel:evt.pixel,coordinate:evt.coordinate});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['176']++;return true;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['53'][1]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['177']++;this.feature_=feature;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['178']++;var geomType=(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['54'][0]++,feature)&&(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['54'][1]++,feature.getGeometry().getType());__cov_zOB2W2kshp8R3XBUXjf$Nw.s['179']++;this.ispt_=geomType?(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['55'][0]++,geomType==='Point'):(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['55'][1]++,false);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['180']++;this.drawSketch_();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['181']++;this.dispatchEvent({type:'select',feature:this.feature_,pixel:evt.pixel,coordinate:evt.coordinate});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['182']++;return false;}};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['183']++;ol.interaction.Transform.prototype.handleDragEvent_=function(evt){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['17']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['184']++;var geometry;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['185']++;var deltaX;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['186']++;var deltaY;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['187']++;switch(this.mode_){case'rotate':__cov_zOB2W2kshp8R3XBUXjf$Nw.b['56'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['188']++;deltaX=this.center_[0]-evt.coordinate[0];__cov_zOB2W2kshp8R3XBUXjf$Nw.s['189']++;deltaY=this.center_[1]-evt.coordinate[1];__cov_zOB2W2kshp8R3XBUXjf$Nw.s['190']++;var a=Math.atan2(deltaY,deltaX);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['191']++;if(!this.ispt){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['57'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['192']++;geometry=this.geom_.clone();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['193']++;geometry.rotate(a-this.angle_,this.center_);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['194']++;this.feature_.setGeometry(geometry);}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['57'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['195']++;this.drawSketch_(true);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['196']++;this.dispatchEvent({type:'rotating',feature:this.feature_,angle:a-this.angle_,pixel:evt.pixel,coordinate:evt.coordinate});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['197']++;break;case'translate':__cov_zOB2W2kshp8R3XBUXjf$Nw.b['56'][1]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['198']++;deltaX=evt.coordinate[0]-this.coordinate_[0];__cov_zOB2W2kshp8R3XBUXjf$Nw.s['199']++;deltaY=evt.coordinate[1]-this.coordinate_[1];__cov_zOB2W2kshp8R3XBUXjf$Nw.s['200']++;this.feature_.getGeometry().translate(deltaX,deltaY);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['201']++;this.handles_.forEach(function(f){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['18']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['202']++;f.getGeometry().translate(deltaX,deltaY);});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['203']++;this.coordinate_=evt.coordinate;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['204']++;this.dispatchEvent({type:'translating',feature:this.feature_,delta:[deltaX,deltaY],pixel:evt.pixel,coordinate:evt.coordinate});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['205']++;break;case'scale':__cov_zOB2W2kshp8R3XBUXjf$Nw.b['56'][2]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['206']++;var center=this.center_;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['207']++;if((__cov_zOB2W2kshp8R3XBUXjf$Nw.b['59'][0]++,evt.originalEvent.metaKey)||(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['59'][1]++,evt.originalEvent.ctrlKey)){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['58'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['208']++;center=this.extent_[(Number(this.opt_)+2)%4];}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['58'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['209']++;var x1=evt.coordinate[0]-center[0];__cov_zOB2W2kshp8R3XBUXjf$Nw.s['210']++;var x2=this.coordinate_[0]-center[0];__cov_zOB2W2kshp8R3XBUXjf$Nw.s['211']++;var scx=x1/x2;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['212']++;var y1=evt.coordinate[1]-center[1];__cov_zOB2W2kshp8R3XBUXjf$Nw.s['213']++;var y2=this.coordinate_[1]-center[1];__cov_zOB2W2kshp8R3XBUXjf$Nw.s['214']++;var scy=y1/y2;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['215']++;var fixedScaleRatio=this.get('fixedScaleRatio');__cov_zOB2W2kshp8R3XBUXjf$Nw.s['216']++;if(this.constraint_){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['60'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['217']++;if(this.constraint_==='h'){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['61'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['218']++;scx=fixedScaleRatio?(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['62'][0]++,scy):(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['62'][1]++,1);}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['61'][1]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['219']++;scy=fixedScaleRatio?(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['63'][0]++,scx):(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['63'][1]++,1);}}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['60'][1]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['220']++;if((__cov_zOB2W2kshp8R3XBUXjf$Nw.b['65'][0]++,evt.originalEvent.shiftKey)||(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['65'][1]++,fixedScaleRatio)){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['64'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['221']++;scx=scy=Math.min(scx,scy);}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['64'][1]++;}}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['222']++;geometry=this.geom_.clone();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['223']++;geometry.applyTransform(function(g1,g2,dim){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['19']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['224']++;if(dim<2){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['66'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['225']++;return g2;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['66'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['226']++;for(var i=0;i<g1.length;i+=dim){__cov_zOB2W2kshp8R3XBUXjf$Nw.s['227']++;if(scx!==1){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['67'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['228']++;g2[i]=center[0]+(g1[i]-center[0])*scx;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['67'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['229']++;if(scy!==1){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['68'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['230']++;g2[i+1]=center[1]+(g1[i+1]-center[1])*scy;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['68'][1]++;}}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['231']++;return g2;});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['232']++;this.feature_.setGeometry(geometry);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['233']++;this.drawSketch_();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['234']++;this.dispatchEvent({type:'scaling',feature:this.feature_,scale:[scx,scy],pixel:evt.pixel,coordinate:evt.coordinate});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['235']++;break;default:__cov_zOB2W2kshp8R3XBUXjf$Nw.b['56'][3]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['236']++;break;}};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['237']++;ol.interaction.Transform.prototype.handleMoveEvent_=function(evt){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['20']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['238']++;if(!this.mode_){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['69'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['239']++;var map=evt.map;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['240']++;var sel=this.getFeatureAtPixel_(evt.pixel);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['241']++;var element=map.getTargetElement();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['242']++;if(sel.feature){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['70'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['243']++;var c;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['244']++;if(sel.handle){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['71'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['245']++;var key=((__cov_zOB2W2kshp8R3XBUXjf$Nw.b['72'][0]++,sel.handle)||(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['72'][1]++,'default'))+((__cov_zOB2W2kshp8R3XBUXjf$Nw.b['73'][0]++,sel.constraint)||(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['73'][1]++,''))+((__cov_zOB2W2kshp8R3XBUXjf$Nw.b['74'][0]++,sel.option)||(__cov_zOB2W2kshp8R3XBUXjf$Nw.b['74'][1]++,''));__cov_zOB2W2kshp8R3XBUXjf$Nw.s['246']++;c=this.Cursors[key];}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['71'][1]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['247']++;c=this.Cursors.select;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['248']++;if(this.previousCursor_===undefined){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['75'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['249']++;this.previousCursor_=element.style.cursor;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['75'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['250']++;element.style.cursor=c;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['70'][1]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['251']++;if(this.previousCursor_!==undefined){__cov_zOB2W2kshp8R3XBUXjf$Nw.b['76'][0]++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['252']++;element.style.cursor=this.previousCursor_;}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['76'][1]++;}__cov_zOB2W2kshp8R3XBUXjf$Nw.s['253']++;this.previousCursor_=undefined;}}else{__cov_zOB2W2kshp8R3XBUXjf$Nw.b['69'][1]++;}};__cov_zOB2W2kshp8R3XBUXjf$Nw.s['254']++;ol.interaction.Transform.prototype.handleUpEvent_=function(evt){__cov_zOB2W2kshp8R3XBUXjf$Nw.f['21']++;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['255']++;var deltaX=this.center_[0]-evt.coordinate[0];__cov_zOB2W2kshp8R3XBUXjf$Nw.s['256']++;var deltaY=this.center_[1]-evt.coordinate[1];__cov_zOB2W2kshp8R3XBUXjf$Nw.s['257']++;var a=Math.atan2(deltaY,deltaX);__cov_zOB2W2kshp8R3XBUXjf$Nw.s['258']++;this.dispatchEvent({type:this.mode_+'end',angle:a-this.angle_,feature:this.feature_,oldgeom:this.geom_});__cov_zOB2W2kshp8R3XBUXjf$Nw.s['259']++;this.drawSketch_();__cov_zOB2W2kshp8R3XBUXjf$Nw.s['260']++;this.mode_=null;__cov_zOB2W2kshp8R3XBUXjf$Nw.s['261']++;return false;};});
+    // some basic sanity checks
+    if (!ol || !ol.interaction || !ol.interaction.Pointer) {
+        Ext.log.error('Cannot define `ol.interaction.Transform`: Not ' +
+            'all needed OpenLayers 3 classes present.');
+        return;
+    } else if ('Transform' in ol.interaction) {
+        Ext.log.error('Cannot define `ol.interaction.Transform`: It is ' +
+            ' defined already.');
+        return;
+    }
+
+    // -------------------------------------------------------------
+    // ---       Definition of the ol.interaction.Transform      ---
+
+    /**
+     * Interaction rotate
+     *
+     * @constructor
+     * @extends {ol.interaction.Pointer}
+     * @fires select
+     * @fires rotatestart
+     * @fires rotating
+     * @fires rotateend
+     * @fires translatestart
+     * @fires translating
+     * @fires translateend
+     * @fires scalestart
+     * @fires scaling
+     * @fires scaleend
+     * @param {olx.interaction.TransformOptions} options These are the
+     *     possible keys:
+     *     - layers {Array<ol.Layer>} array of layers to transform,
+     *     - features {ol.Collection<ol.Feature>} collection of feature to
+     *       transform,
+     *     - translateFeature {bool} Translate when click on feature
+     *     - translate {bool} Can translate the feature
+     *     - stretch {bool} can stretch the feature
+     *     - scale {bool} can scale the feature
+     *     - rotate {bool} can rotate the feature
+     *     - style {} list of ol.style for handles
+     */
+    ol.interaction.Transform = function(options) {
+        if (!options) {
+            options = {};
+        }
+        var me = this;
+
+        ol.interaction.Pointer.call(this, {
+            handleDownEvent: this.handleDownEvent_,
+            handleDragEvent: this.handleDragEvent_,
+            handleMoveEvent: this.handleMoveEvent_,
+            handleUpEvent: this.handleUpEvent_
+        });
+
+        /** Collection of feature to transform */
+        this.features_ = options.features;
+        /** List of layers to transform */
+        var layers = null;
+        if (options.layers) {
+            if (options.layers instanceof Array) {
+                layers = options.layers;
+            } else {
+                layers = [options.layers];
+            }
+        }
+        this.layers_ = layers;
+
+        /** Translate when click on feature */
+        this.set('translateFeature', (options.translateFeature !== false));
+        /** Can translate the feature */
+        this.set('translate', (options.translate !== false));
+        /** Can stretch the feature */
+        this.set('stretch', (options.stretch !== false));
+        /** Can scale the feature */
+        this.set('scale', (options.scale !== false));
+        /** Can rotate the feature */
+        this.set('rotate', (options.rotate !== false));
+
+        // TODO MJ: added option to keep a fixed scale when scaling at edges
+        var fixedScaleRatio = false;
+        if (options.fixedScaleRatio !== undefined) {
+            fixedScaleRatio = options.fixedScaleRatio;
+        }
+        this.set('fixedScaleRatio', fixedScaleRatio);
+
+        // Force redraw when changed
+        this.on('propertychange', function() {
+            this.drawSketch_();
+        });
+
+        // Create a new overlay layer for the sketch
+        this.handles_ = new ol.Collection();
+        this.overlayLayer_ = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: this.handles_,
+                useSpatialIndex: false
+            }),
+            name: 'Transform overlay',
+            displayInLayerSwitcher: false,
+            // Return the style according to the handle type
+            style: function(feature) {
+                var key = (feature.get('handle') || 'default') +
+                    (feature.get('constraint') || '') +
+                    (feature.get('option') || '');
+                return (me.style[key]);
+            }
+        });
+        // Change BasiGX:
+        this.overlayLayer_.set(
+            BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER,
+            false
+        );
+
+        // setstyle
+        this.setDefaultStyle();
+    };
+    ol.inherits(ol.interaction.Transform, ol.interaction.Pointer);
+
+    /** Cursors for transform
+    */
+    ol.interaction.Transform.prototype.Cursors = {
+        'default': 'auto',
+        'select': 'pointer',
+        'translate': 'move',
+        'rotate': 'move',
+        'scale': 'ne-resize',
+        'scale1': 'nw-resize',
+        'scale2': 'ne-resize',
+        'scale3': 'nw-resize',
+        'scalev': 'e-resize',
+        'scaleh1': 'n-resize',
+        'scalev2': 'e-resize',
+        'scaleh3': 'n-resize'
+    };
+
+    /**
+     * Remove the interaction from its current map, if any, and attach it to a
+     * new map, if any. Pass `null` to just remove the interaction from the
+     * current map.
+     * @param {ol.Map} map Map.
+     * @api stable
+     */
+    ol.interaction.Transform.prototype.setMap = function(map) {
+        if (this.getMap()) {
+            this.getMap().removeLayer(this.overlayLayer_);
+        }
+        ol.interaction.Pointer.prototype.setMap.call(this, map);
+        this.overlayLayer_.setMap(map);
+        // Changed MJ: added guard whether map is not null.
+        // https://github.com/Viglino/ol3-ext/pull/16
+        if (map !== null) {
+            this.isTouch = /touch/.test(map.getViewport().className);
+            this.setDefaultStyle();
+        }
+    };
+
+    /**
+     * Activate/deactivate interaction
+     * @param {boolean} b Whether the interaction shall be active.
+     * @api stable
+     */
+    ol.interaction.Transform.prototype.setActive = function(b) {
+        ol.interaction.Pointer.prototype.setActive.call (this, b);
+        if (b) {
+            this.select(null);
+        }
+    };
+
+    /**
+     * Set default sketch style
+     */
+    ol.interaction.Transform.prototype.setDefaultStyle = function() { // Style
+        var stroke = new ol.style.Stroke({
+            color: [255, 0, 0, 1],
+            width: 1
+        });
+
+        var strokedash = new ol.style.Stroke({
+            color: [255, 0, 0, 1],
+            width: 1,
+            lineDash: [4, 4]
+        });
+        var fill0 = new ol.style.Fill({
+            color: [255, 0, 0, 0.01]
+        });
+        var fill = new ol.style.Fill({
+            color: [255, 255, 255, 0.8]
+        });
+        var circle = new ol.style.RegularShape({
+            fill: fill,
+            stroke: stroke,
+            radius: this.isTouch ? 12 : 6,
+            points: 15
+        });
+        circle.getAnchor()[0] = this.isTouch ? -10 : -5;
+        var bigpt = new ol.style.RegularShape({
+            fill: fill,
+            stroke: stroke,
+            radius: this.isTouch ? 16 : 8,
+            points: 4,
+            angle: Math.PI / 4
+        });
+        var smallpt = new ol.style.RegularShape({
+            fill: fill,
+            stroke: stroke,
+            radius: this.isTouch ? 12 : 6,
+            points: 4,
+            angle: Math.PI / 4
+        });
+        var createStyle = function(passedImage, passedStroke, passedFill) {
+            return [
+                new ol.style.Style({
+                    image: passedImage,
+                    stroke: passedStroke,
+                    fill: passedFill
+                })
+            ];
+        };
+        /** Style for handles */
+        this.style = {
+            'default': createStyle(bigpt, strokedash, fill0),
+            'translate': createStyle(bigpt, stroke, fill),
+            'rotate': createStyle(circle, stroke, fill),
+            'rotate0': createStyle(bigpt, stroke, fill),
+            'scale': createStyle(bigpt, stroke, fill),
+            'scale1': createStyle(bigpt, stroke, fill),
+            'scale2': createStyle(bigpt, stroke, fill),
+            'scale3': createStyle(bigpt, stroke, fill),
+            'scalev': createStyle(smallpt, stroke, fill),
+            'scaleh1': createStyle(smallpt, stroke, fill),
+            'scalev2': createStyle(smallpt, stroke, fill),
+            'scaleh3': createStyle(smallpt, stroke, fill)
+        };
+        this.drawSketch_();
+    };
+
+    /**
+     * Set sketch style.
+     * @param {String} style The style key.
+     * @param {ol.style.Style|Array<ol.style.Style>} olstyle The OpenLayers
+     *     style or array of styles.
+     * @api stable
+     */
+    ol.interaction.Transform.prototype.setStyle = function(style, olstyle) {
+        if (!olstyle) {
+            return;
+        }
+        if (olstyle instanceof Array) {
+            this.style[style] = olstyle;
+        } else {
+            this.style[style] = [olstyle];
+        }
+        for (var i = 0, num = this.style[style].length; i < num; i++) {
+            var im = this.style[style][i].getImage();
+            if (im) {
+                if (style === 'rotate') {
+                    im.getAnchor()[0] = -5;
+                }
+                if (this.isTouch) {
+                    im.setScale(1.8);
+                }
+            }
+            var tx = this.style[style][i].getText();
+            if (tx) {
+                if (style === 'rotate') {
+                    tx.setOffsetX(this.isTouch ? 14 : 7);
+                }
+                if (this.isTouch) {
+                    tx.setScale(1.8);
+                }
+            }
+        }
+        this.drawSketch_();
+    };
+
+    /**
+     * Get Feature at pixel
+     *
+     * @param {ol.Pixel} pixel The pixe to get a feature for.
+     * @return {Object} An object that has the found feature at the key
+     *     `feature` and possibly more information.
+     * @private
+     */
+    ol.interaction.Transform.prototype.getFeatureAtPixel_ = function(pixel) {
+        var me = this;
+        // will be passed on to map.forEachFeatureAtPixel below
+        var findFunction = function(feature, layer) {
+            var found = false;
+            // Overlay ?
+            if (!layer) {
+                if (feature === me.bbox_) {
+                    return false;
+                }
+                me.handles_.forEach(function(f) {
+                    if (f === feature) {
+                        found = true;
+                    }
+                });
+                if (found) {
+                    return {
+                        feature: feature,
+                        handle: feature.get('handle'),
+                        constraint: feature.get('constraint'),
+                        option: feature.get('option')
+                    };
+                }
+            }
+
+            if (me.layers_) {
+                // feature belong to a layer
+                for (var i = 0, num = me.layers_.length; i < num; i++) {
+                    if (me.layers_[i] === layer) {
+                        return {
+                            feature: feature
+                        };
+                    }
+                }
+                return null;
+            } else if (me.features_) {
+                // feature in the collection
+                me.features_.forEach(function(f) {
+                    if (f === feature) {
+                        found = true;
+                    }
+                });
+                if (found) {
+                    return {feature: feature};
+                } else {
+                    return null;
+                }
+            } else {
+                // Others
+                return {
+                    feature: feature
+                };
+            }
+        };
+        var map = me.getMap();
+        var got = map.forEachFeatureAtPixel(pixel, findFunction);
+        return got || {};
+    };
+
+    /**
+     * Draw transform sketch
+     *
+     * @param {boolean} center draw only the center
+     */
+    ol.interaction.Transform.prototype.drawSketch_ = function(center) {
+        this.overlayLayer_.getSource().clear();
+        var map = this.getMap();
+        var ext;
+        var geom;
+        var f;
+        if (!this.feature_) {
+            return;
+        }
+        if (center === true) {
+            if (!this.ispt_) {
+                this.overlayLayer_.getSource().addFeature(
+                    new ol.Feature({
+                        geometry: new ol.geom.Point(this.center_),
+                        handle: 'rotate0'
+                    })
+                );
+                ext = this.feature_.getGeometry().getExtent();
+                geom = ol.geom.Polygon.fromExtent(ext);
+                f = this.bbox_ = new ol.Feature(geom);
+                this.overlayLayer_.getSource().addFeature(f);
+            }
+        } else {
+            ext = this.feature_.getGeometry().getExtent();
+            if (this.ispt_) {
+                var p = map.getPixelFromCoordinate([ext[0], ext[1]]);
+                ext = ol.extent.boundingExtent([
+                    map.getCoordinateFromPixel([p[0] - 10, p[1] - 10]),
+                    map.getCoordinateFromPixel([p[0] + 10, p[1] + 10])
+                ]);
+            }
+            geom = ol.geom.Polygon.fromExtent(ext);
+            f = this.bbox_ = new ol.Feature(geom);
+            var features = [];
+            var g = geom.getCoordinates()[0];
+            if (!this.ispt_) {
+                features.push(f);
+                // Middle
+                if (this.get('stretch') && this.get('scale')) {
+                    for (var i = 0, toI = g.length - 1; i < toI; i++) {
+                        f = new ol.Feature({
+                            geometry: new ol.geom.Point([
+                                (g[i][0] + g[i + 1][0]) / 2,
+                                (g[i][1] + g[i + 1][1]) / 2
+                            ]),
+                            handle: 'scale',
+                            constraint: i % 2 ? 'h' : 'v',
+                            option: i
+                        });
+                        features.push(f);
+                    }
+                }
+                // Handles
+                if (this.get('scale')) {
+                    for (var j = 0, toJ = g.length - 1; j < toJ; j++) {
+                        f = new ol.Feature({
+                            geometry: new ol.geom.Point(g[j]),
+                            handle: 'scale',
+                            option: j
+                        });
+                        features.push(f);
+                    }
+                }
+                // Center
+                if (this.get('translate') && !this.get('translateFeature')) {
+                    f = new ol.Feature({
+                        geometry: new ol.geom.Point([
+                            (g[0][0] + g[2][0]) / 2,
+                            (g[0][1] + g[2][1]) / 2
+                        ]),
+                        handle: 'translate'
+                    });
+                    features.push(f);
+                }
+            }
+            // Rotate
+            if (this.get('rotate')) {
+                f = new ol.Feature({
+                    geometry: new ol.geom.Point(g[3]),
+                    handle: 'rotate'
+                });
+                features.push(f);
+            }
+            // Add sketch
+            this.overlayLayer_.getSource().addFeatures(features);
+        }
+    };
+
+    /**
+     * Select a feature to transform.
+
+     * @param {ol.Feature} feature The feature to transform.
+     */
+    ol.interaction.Transform.prototype.select = function(feature) {
+        this.feature_ = feature;
+        var geomType = this.feature_ && this.feature_.getGeometry().getType();
+        this.ispt_ = geomType ? (geomType === 'Point') : false;
+        this.drawSketch_();
+        this.dispatchEvent({
+            type: 'select',
+            feature: this.feature_
+        });
+    };
+
+    /**
+     * @param {ol.MapBrowserEvent} evt Map browser event.
+     * @return {boolean} `true` to start the drag sequence.
+     */
+    ol.interaction.Transform.prototype.handleDownEvent_ = function(evt) {
+        var sel = this.getFeatureAtPixel_(evt.pixel);
+        var feature = sel.feature;
+        if (this.feature_ && this.feature_ === feature
+            && (
+                (this.ispt_ && this.get('translate'))
+                || this.get('translateFeature')
+            )) {
+            sel.handle = 'translate';
+        }
+        if (sel.handle) {
+            this.mode_ = sel.handle;
+            this.opt_ = sel.option;
+            this.constraint_ = sel.constraint;
+            // Save info
+            this.coordinate_ = evt.coordinate;
+            this.pixel_ = evt.pixel;
+            this.geom_ = this.feature_.getGeometry().clone();
+            var geomExtent = this.geom_.getExtent();
+            var extentPoly = ol.geom.Polygon.fromExtent(geomExtent);
+            this.extent_ = extentPoly.getCoordinates()[0];
+            this.center_ = ol.extent.getCenter(this.geom_.getExtent());
+            this.angle_ = Math.atan2(
+                this.center_[1] - evt.coordinate[1],
+                this.center_[0] - evt.coordinate[0]
+            );
+
+            this.dispatchEvent({
+                type: this.mode_ + 'start',
+                feature: this.feature_,
+                pixel: evt.pixel,
+                coordinate: evt.coordinate
+            });
+            return true;
+        } else {
+            this.feature_ = feature;
+            var geomType = feature && feature.getGeometry().getType();
+            this.ispt_ = geomType ? (geomType === 'Point') : false;
+            this.drawSketch_();
+            this.dispatchEvent({
+                type: 'select',
+                feature: this.feature_,
+                pixel: evt.pixel,
+                coordinate: evt.coordinate
+            });
+            return false;
+        }
+    };
+
+
+    /**
+     * @param {ol.MapBrowserEvent} evt Map browser event.
+     */
+    ol.interaction.Transform.prototype.handleDragEvent_ = function(evt) {
+        var geometry;
+        var deltaX;
+        var deltaY;
+        switch (this.mode_) {
+            case 'rotate':
+                deltaX = this.center_[0] - evt.coordinate[0];
+                deltaY = this.center_[1] - evt.coordinate[1];
+                var a = Math.atan2(deltaY, deltaX);
+                if (!this.ispt) {
+                    geometry = this.geom_.clone();
+                    geometry.rotate(a - this.angle_, this.center_);
+
+                    this.feature_.setGeometry(geometry);
+                }
+                this.drawSketch_(true);
+                this.dispatchEvent({
+                    type: 'rotating',
+                    feature: this.feature_,
+                    angle: a - this.angle_,
+                    pixel: evt.pixel,
+                    coordinate: evt.coordinate
+                });
+                break;
+
+            case 'translate':
+                deltaX = evt.coordinate[0] - this.coordinate_[0];
+                deltaY = evt.coordinate[1] - this.coordinate_[1];
+
+                this.feature_.getGeometry().translate(deltaX, deltaY);
+                this.handles_.forEach(function(f) {
+                    f.getGeometry().translate(deltaX, deltaY);
+                });
+
+                this.coordinate_ = evt.coordinate;
+                this.dispatchEvent({
+                    type: 'translating',
+                    feature: this.feature_,
+                    delta: [deltaX, deltaY],
+                    pixel: evt.pixel,
+                    coordinate: evt.coordinate
+                });
+                break;
+
+            case 'scale':
+                var center = this.center_;
+                if (evt.originalEvent.metaKey || evt.originalEvent.ctrlKey) {
+                    center = this.extent_[(Number(this.opt_) + 2) % 4];
+                }
+
+                var x1 = evt.coordinate[0] - center[0];
+                var x2 = this.coordinate_[0] - center[0];
+                var scx = x1 / x2;
+                var y1 = evt.coordinate[1] - center[1];
+                var y2 = this.coordinate_[1] - center[1];
+                var scy = y1 / y2;
+
+                // TODO added MJ, fixedScaleRatio for scaling
+                var fixedScaleRatio = this.get('fixedScaleRatio');
+                if (this.constraint_) {
+                    // TODO added MJ, fixedScaleRatio for scaling
+                    if (this.constraint_ === 'h') {
+                        scx = fixedScaleRatio ? scy : 1;
+                    } else {
+                        scy = fixedScaleRatio ? scx : 1;
+                    }
+                } else {
+                    if (evt.originalEvent.shiftKey || fixedScaleRatio) {
+                        scx = scy = Math.min(scx, scy);
+                    }
+                }
+
+                geometry = this.geom_.clone();
+                geometry.applyTransform(function(g1, g2, dim) {
+                    if (dim < 2) {
+                        return g2;
+                    }
+
+                    for (var i = 0; i < g1.length; i += dim) {
+                        if (scx !== 1) {
+                            g2[i] = center[0] + (g1[i] - center[0]) * scx;
+                        }
+                        if (scy !== 1) {
+                            g2[i + 1] = center[1] +
+                                (g1[i + 1] - center[1]) * scy;
+                        }
+                    }
+                    return g2;
+                });
+                this.feature_.setGeometry(geometry);
+                this.drawSketch_();
+                this.dispatchEvent({
+                    type: 'scaling',
+                    feature: this.feature_,
+                    scale: [scx, scy],
+                    pixel: evt.pixel,
+                    coordinate: evt.coordinate
+                });
+                break;
+
+            default:
+                break;
+        }
+    };
+
+    /**
+     * @param {ol.MapBrowserEvent} evt Event.
+     */
+    ol.interaction.Transform.prototype.handleMoveEvent_ = function(evt) {
+        // console.log("handleMoveEvent");
+        if (!this.mode_) {
+            var map = evt.map;
+            var sel = this.getFeatureAtPixel_(evt.pixel);
+            var element = map.getTargetElement();
+            if (sel.feature) {
+                var c;
+                if (sel.handle) {
+                    var key = (sel.handle || 'default') +
+                        (sel.constraint || '') +
+                        (sel.option || '');
+                    c = this.Cursors[key];
+                } else {
+                    c = this.Cursors.select;
+                }
+
+                if (this.previousCursor_ === undefined) {
+                    this.previousCursor_ = element.style.cursor;
+                }
+                element.style.cursor = c;
+            } else {
+                if (this.previousCursor_ !== undefined) {
+                    element.style.cursor = this.previousCursor_;
+                }
+                this.previousCursor_ = undefined;
+            }
+        }
+    };
+
+    /**
+     * @param {ol.MapBrowserEvent} evt Map browser event.
+     * @return {boolean} `false` to stop the drag sequence.
+     */
+    ol.interaction.Transform.prototype.handleUpEvent_ = function(evt) {
+        var deltaX = this.center_[0] - evt.coordinate[0];
+        var deltaY = this.center_[1] - evt.coordinate[1];
+        var a = Math.atan2(deltaY, deltaX);
+        this.dispatchEvent({
+            type: this.mode_ + 'end',
+            angle: a - this.angle_,
+            feature: this.feature_,
+            oldgeom: this.geom_
+        });
+
+        this.drawSketch_();
+        this.mode_ = null;
+        return false;
+    };
+
+    // --- End of the definition of the ol.interaction.Transform ---
+    // -------------------------------------------------------------
+});

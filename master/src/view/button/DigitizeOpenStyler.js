@@ -1,9 +1,121 @@
+/* Copyright (c) 2018-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Digitize Open Styler Button
+ *
+ * @class BasiGX.view.button.DigitizeOpenStyler
+ */
+Ext.define('BasiGX.view.button.DigitizeOpenStyler', {
+    extend: 'BasiGX.view.button.Base',
+    xtype: 'basigx-button-digitize-open-styler',
 
-var __cov_2lG44ZqIcUksFlb$C8deNw = (Function('return this'))();
-if (!__cov_2lG44ZqIcUksFlb$C8deNw.__coverage__) { __cov_2lG44ZqIcUksFlb$C8deNw.__coverage__ = {}; }
-__cov_2lG44ZqIcUksFlb$C8deNw = __cov_2lG44ZqIcUksFlb$C8deNw.__coverage__;
-if (!(__cov_2lG44ZqIcUksFlb$C8deNw['/home/travis/build/terrestris/BasiGX/src/view/button/DigitizeOpenStyler.js'])) {
-   __cov_2lG44ZqIcUksFlb$C8deNw['/home/travis/build/terrestris/BasiGX/src/view/button/DigitizeOpenStyler.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/DigitizeOpenStyler.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0},"b":{"1":[0,0],"2":[0,0]},"f":{"1":0,"2":0,"3":0},"fnMap":{"1":{"name":"(anonymous_1)","line":82,"loc":{"start":{"line":82,"column":16},"end":{"line":82,"column":39}}},"2":{"name":"(anonymous_2)","line":102,"loc":{"start":{"line":102,"column":44},"end":{"line":102,"column":55}}},"3":{"name":"(anonymous_3)","line":118,"loc":{"start":{"line":118,"column":24},"end":{"line":118,"column":35}}}},"statementMap":{"1":{"start":{"line":21,"column":0},"end":{"line":121,"column":3}},"2":{"start":{"line":83,"column":12},"end":{"line":83,"column":26}},"3":{"start":{"line":84,"column":12},"end":{"line":106,"column":13}},"4":{"start":{"line":85,"column":16},"end":{"line":101,"column":19}},"5":{"start":{"line":102,"column":16},"end":{"line":105,"column":19}},"6":{"start":{"line":103,"column":20},"end":{"line":103,"column":44}},"7":{"start":{"line":104,"column":20},"end":{"line":104,"column":33}},"8":{"start":{"line":107,"column":12},"end":{"line":111,"column":13}},"9":{"start":{"line":108,"column":16},"end":{"line":108,"column":39}},"10":{"start":{"line":110,"column":16},"end":{"line":110,"column":39}},"11":{"start":{"line":119,"column":8},"end":{"line":119,"column":41}}},"branchMap":{"1":{"line":84,"type":"if","locations":[{"start":{"line":84,"column":12},"end":{"line":84,"column":12}},{"start":{"line":84,"column":12},"end":{"line":84,"column":12}}]},"2":{"line":107,"type":"if","locations":[{"start":{"line":107,"column":12},"end":{"line":107,"column":12}},{"start":{"line":107,"column":12},"end":{"line":107,"column":12}}]}}};
-}
-__cov_2lG44ZqIcUksFlb$C8deNw = __cov_2lG44ZqIcUksFlb$C8deNw['/home/travis/build/terrestris/BasiGX/src/view/button/DigitizeOpenStyler.js'];
-__cov_2lG44ZqIcUksFlb$C8deNw.s['1']++;Ext.define('BasiGX.view.button.DigitizeOpenStyler',{extend:'BasiGX.view.button.Base',xtype:'basigx-button-digitize-open-styler',requires:['BasiGX.view.container.RedlineStyler'],viewModel:{data:{tooltip:'Opens the styler window',openStyleBtnText:'Styler',stylerWindowTitle:'Styler'}},bind:{text:'{openStyleBtnText}'},config:{stylerWindow:null,redliningVectorLayer:null,backendUrls:{pictureList:null,pictureSrc:null,pictureUpload:null,graphicDelete:null},redlinePointStyle:null,redlinePolygonStyle:null,redlineLineStringStyle:null},name:'openStyleBtn',toggleGroup:'draw',listeners:{toggle:function(btn,pressed){__cov_2lG44ZqIcUksFlb$C8deNw.f['1']++;__cov_2lG44ZqIcUksFlb$C8deNw.s['2']++;var me=this;__cov_2lG44ZqIcUksFlb$C8deNw.s['3']++;if(!me.stylerWindow){__cov_2lG44ZqIcUksFlb$C8deNw.b['1'][0]++;__cov_2lG44ZqIcUksFlb$C8deNw.s['4']++;me.stylerWindow=Ext.create('Ext.window.Window',{title:me.getViewModel().get('stylerWindowTitle'),width:500,layout:'fit',constrainHeader:true,autoScroll:true,closeAction:'hide',items:Ext.create('BasiGX.view.container.RedlineStyler',{redliningVectorLayer:me.getRedliningVectorLayer(),backendUrls:me.getBackendUrls(),redlinePointStyle:me.getRedlinePointStyle(),redlineLineStringStyle:me.getRedlineLineStringStyle(),redlinePolygonStyle:me.getRedlinePolygonStyle()})});__cov_2lG44ZqIcUksFlb$C8deNw.s['5']++;me.stylerWindow.on('close',function(){__cov_2lG44ZqIcUksFlb$C8deNw.f['2']++;__cov_2lG44ZqIcUksFlb$C8deNw.s['6']++;me.fireFeatureChanged();__cov_2lG44ZqIcUksFlb$C8deNw.s['7']++;btn.toggle();});}else{__cov_2lG44ZqIcUksFlb$C8deNw.b['1'][1]++;}__cov_2lG44ZqIcUksFlb$C8deNw.s['8']++;if(pressed){__cov_2lG44ZqIcUksFlb$C8deNw.b['2'][0]++;__cov_2lG44ZqIcUksFlb$C8deNw.s['9']++;me.stylerWindow.show();}else{__cov_2lG44ZqIcUksFlb$C8deNw.b['2'][1]++;__cov_2lG44ZqIcUksFlb$C8deNw.s['10']++;me.stylerWindow.hide();}}},fireFeatureChanged:function(){__cov_2lG44ZqIcUksFlb$C8deNw.f['3']++;__cov_2lG44ZqIcUksFlb$C8deNw.s['11']++;this.fireEvent('featurechanged');}});
+    requires: [
+        'BasiGX.view.container.RedlineStyler'
+    ],
+
+    /**
+     *
+     */
+    viewModel: {
+        data: {
+            tooltip: 'Opens the styler window',
+            openStyleBtnText: 'Styler',
+            stylerWindowTitle: 'Styler'
+        }
+    },
+
+    /**
+     *
+     */
+    bind: {
+        text: '{openStyleBtnText}'
+    },
+
+    config: {
+        /**
+         *
+         */
+        stylerWindow: null,
+
+        /**
+         *
+         */
+        redliningVectorLayer: null,
+
+        /**
+         * The url objects for images.
+         *
+         * Can contain url and method property
+         */
+        backendUrls: {
+            pictureList: null,
+            pictureSrc: null,
+            pictureUpload: null,
+            graphicDelete: null
+        },
+
+        redlinePointStyle: null,
+
+        redlinePolygonStyle: null,
+
+        redlineLineStringStyle: null
+
+    },
+
+    name: 'openStyleBtn',
+    toggleGroup: 'draw',
+
+    listeners: {
+        toggle: function(btn, pressed) {
+            var me = this;
+            if (!me.stylerWindow) {
+                me.stylerWindow = Ext.create('Ext.window.Window', {
+                    title: me.getViewModel().get('stylerWindowTitle'),
+                    width: 500,
+                    layout: 'fit',
+                    constrainHeader: true,
+                    autoScroll: true,
+                    closeAction: 'hide',
+                    items: Ext.create(
+                        'BasiGX.view.container.RedlineStyler', {
+                            redliningVectorLayer: me.getRedliningVectorLayer(),
+                            backendUrls: me.getBackendUrls(),
+                            redlinePointStyle: me.getRedlinePointStyle(),
+                            redlineLineStringStyle:
+                                me.getRedlineLineStringStyle(),
+                            redlinePolygonStyle: me.getRedlinePolygonStyle()
+                        })
+                });
+                me.stylerWindow.on('close', function() {
+                    me.fireFeatureChanged();
+                    btn.toggle();
+                });
+            }
+            if (pressed) {
+                me.stylerWindow.show();
+            } else {
+                me.stylerWindow.hide();
+            }
+        }
+    },
+
+    /**
+     * Fire a change event to inform other components
+     */
+    fireFeatureChanged: function() {
+        this.fireEvent('featurechanged');
+    }
+});

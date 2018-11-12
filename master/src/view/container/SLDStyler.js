@@ -1,9 +1,1727 @@
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * SLD Styler
+ *
+ * Used in combination with a GeoServer to edit SLD styles and preview
+ * or save them
+ *
+ * @example:
+ * var styleEditor = {
+ *     xtype: 'basigx-container-sldstyler',
+ *     backendUrls: {
+ *        pictureList: {
+ *            url: 'rest/images',
+ *            method: 'GET'
+ *        },
+ *        pictureSrc: {
+ *            url: 'image/getThumbnail.action?id='
+ *        },
+ *        pictureUpload: {
+ *            url: 'image/upload.action?'
+ *        },
+ *        graphicDelete: {
+ *            url: 'rest/images/',
+ *            method: 'DELETE'
+ *        },
+ *        geoServerUrl: BasiGX.util.Url.getWebProjectBaseUrl() +
+ *            'geoserver.action',
+ *        internalUrl: 'http://shogun-webapp.internal/'
+ *     },
+ *     layer: 'namespace:layer',
+ *     sld: '<xml ...?>',
+ *     ruleName: 'rule1',
+ *     mode: 'polygon'
+ * };
+ *
+ * @author Johannes Weskamm
+ * @class BasiGX.view.container.SLDStyler
+ */
+Ext.define('BasiGX.view.container.SLDStyler', {
+    extend: 'Ext.container.Container',
+    xtype: 'basigx-container-sldstyler',
 
-var __cov_mOjjRDPqFjKuBlA9zGRTZg = (Function('return this'))();
-if (!__cov_mOjjRDPqFjKuBlA9zGRTZg.__coverage__) { __cov_mOjjRDPqFjKuBlA9zGRTZg.__coverage__ = {}; }
-__cov_mOjjRDPqFjKuBlA9zGRTZg = __cov_mOjjRDPqFjKuBlA9zGRTZg.__coverage__;
-if (!(__cov_mOjjRDPqFjKuBlA9zGRTZg['/home/travis/build/terrestris/BasiGX/src/view/container/SLDStyler.js'])) {
-   __cov_mOjjRDPqFjKuBlA9zGRTZg['/home/travis/build/terrestris/BasiGX/src/view/container/SLDStyler.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/container/SLDStyler.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0,"137":0,"138":0,"139":0,"140":0,"141":0,"142":0,"143":0,"144":0,"145":0,"146":0,"147":0,"148":0,"149":0,"150":0,"151":0,"152":0,"153":0,"154":0,"155":0,"156":0,"157":0,"158":0,"159":0,"160":0,"161":0,"162":0,"163":0,"164":0,"165":0,"166":0,"167":0,"168":0,"169":0,"170":0,"171":0,"172":0,"173":0,"174":0,"175":0,"176":0,"177":0,"178":0,"179":0,"180":0,"181":0,"182":0,"183":0,"184":0,"185":0,"186":0,"187":0,"188":0,"189":0,"190":0,"191":0,"192":0,"193":0,"194":0,"195":0,"196":0,"197":0,"198":0,"199":0,"200":0,"201":0,"202":0,"203":0,"204":0,"205":0,"206":0,"207":0,"208":0,"209":0,"210":0,"211":0,"212":0,"213":0,"214":0,"215":0,"216":0,"217":0,"218":0,"219":0,"220":0,"221":0,"222":0,"223":0,"224":0,"225":0,"226":0,"227":0,"228":0,"229":0,"230":0,"231":0,"232":0,"233":0,"234":0,"235":0,"236":0,"237":0,"238":0,"239":0,"240":0,"241":0,"242":0,"243":0,"244":0,"245":0,"246":0,"247":0,"248":0,"249":0,"250":0,"251":0,"252":0,"253":0,"254":0,"255":0,"256":0,"257":0,"258":0,"259":0,"260":0,"261":0,"262":0,"263":0,"264":0,"265":0,"266":0,"267":0,"268":0,"269":0,"270":0,"271":0,"272":0,"273":0,"274":0,"275":0,"276":0,"277":0,"278":0,"279":0,"280":0,"281":0,"282":0,"283":0,"284":0,"285":0,"286":0,"287":0,"288":0,"289":0,"290":0,"291":0,"292":0,"293":0,"294":0,"295":0,"296":0,"297":0,"298":0,"299":0,"300":0,"301":0,"302":0,"303":0,"304":0,"305":0,"306":0,"307":0,"308":0,"309":0,"310":0,"311":0,"312":0,"313":0,"314":0,"315":0,"316":0,"317":0,"318":0,"319":0,"320":0,"321":0,"322":0,"323":0,"324":0,"325":0,"326":0,"327":0,"328":0,"329":0,"330":0,"331":0,"332":0,"333":0,"334":0,"335":0,"336":0,"337":0,"338":0,"339":0,"340":0,"341":0,"342":0,"343":0,"344":0,"345":0,"346":0,"347":0,"348":0,"349":0,"350":0,"351":0,"352":0,"353":0,"354":0,"355":0,"356":0,"357":0,"358":0,"359":0,"360":0,"361":0,"362":0,"363":0,"364":0,"365":0,"366":0,"367":0,"368":0,"369":0,"370":0,"371":0,"372":0,"373":0,"374":0,"375":0,"376":0,"377":0,"378":0,"379":0,"380":0,"381":0,"382":0,"383":0,"384":0,"385":0,"386":0,"387":0,"388":0,"389":0,"390":0,"391":0,"392":0,"393":0,"394":0,"395":0,"396":0,"397":0,"398":0,"399":0,"400":0,"401":0,"402":0,"403":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0,0,0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0],"19":[0,0],"20":[0,0],"21":[0,0],"22":[0,0],"23":[0,0],"24":[0,0],"25":[0,0],"26":[0,0],"27":[0,0],"28":[0,0],"29":[0,0],"30":[0,0],"31":[0,0],"32":[0,0],"33":[0,0],"34":[0,0],"35":[0,0],"36":[0,0],"37":[0,0],"38":[0,0],"39":[0,0],"40":[0,0],"41":[0,0],"42":[0,0],"43":[0,0],"44":[0,0],"45":[0,0],"46":[0,0],"47":[0,0],"48":[0,0],"49":[0,0],"50":[0,0],"51":[0,0],"52":[0,0],"53":[0,0],"54":[0,0],"55":[0,0],"56":[0,0],"57":[0,0],"58":[0,0],"59":[0,0],"60":[0,0],"61":[0,0],"62":[0,0],"63":[0,0],"64":[0,0],"65":[0,0],"66":[0,0],"67":[0,0],"68":[0,0],"69":[0,0],"70":[0,0],"71":[0,0],"72":[0,0],"73":[0,0,0,0,0],"74":[0,0],"75":[0,0],"76":[0,0],"77":[0,0],"78":[0,0],"79":[0,0],"80":[0,0],"81":[0,0],"82":[0,0],"83":[0,0],"84":[0,0],"85":[0,0],"86":[0,0],"87":[0,0],"88":[0,0],"89":[0,0],"90":[0,0],"91":[0,0],"92":[0,0],"93":[0,0],"94":[0,0],"95":[0,0],"96":[0,0],"97":[0,0],"98":[0,0],"99":[0,0],"100":[0,0],"101":[0,0],"102":[0,0],"103":[0,0],"104":[0,0],"105":[0,0],"106":[0,0],"107":[0,0],"108":[0,0],"109":[0,0],"110":[0,0],"111":[0,0],"112":[0,0],"113":[0,0],"114":[0,0],"115":[0,0],"116":[0,0],"117":[0,0],"118":[0,0],"119":[0,0],"120":[0,0],"121":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0},"fnMap":{"1":{"name":"(anonymous_1)","line":241,"loc":{"start":{"line":241,"column":19},"end":{"line":241,"column":30}}},"2":{"name":"(anonymous_2)","line":296,"loc":{"start":{"line":296,"column":22},"end":{"line":296,"column":33}}},"3":{"name":"(anonymous_3)","line":583,"loc":{"start":{"line":583,"column":27},"end":{"line":583,"column":38}}},"4":{"name":"(anonymous_4)","line":673,"loc":{"start":{"line":673,"column":24},"end":{"line":673,"column":35}}},"5":{"name":"(anonymous_5)","line":952,"loc":{"start":{"line":952,"column":31},"end":{"line":952,"column":42}}},"6":{"name":"(anonymous_6)","line":985,"loc":{"start":{"line":985,"column":34},"end":{"line":985,"column":48}}},"7":{"name":"(anonymous_7)","line":996,"loc":{"start":{"line":996,"column":40},"end":{"line":996,"column":56}}},"8":{"name":"(anonymous_8)","line":1048,"loc":{"start":{"line":1048,"column":40},"end":{"line":1048,"column":57}}},"9":{"name":"(anonymous_9)","line":1064,"loc":{"start":{"line":1064,"column":34},"end":{"line":1064,"column":49}}},"10":{"name":"(anonymous_10)","line":1066,"loc":{"start":{"line":1066,"column":45},"end":{"line":1066,"column":71}}},"11":{"name":"(anonymous_11)","line":1272,"loc":{"start":{"line":1272,"column":25},"end":{"line":1272,"column":36}}},"12":{"name":"(anonymous_12)","line":1280,"loc":{"start":{"line":1280,"column":34},"end":{"line":1280,"column":55}}},"13":{"name":"(anonymous_13)","line":1287,"loc":{"start":{"line":1287,"column":41},"end":{"line":1287,"column":57}}},"14":{"name":"(anonymous_14)","line":1300,"loc":{"start":{"line":1300,"column":37},"end":{"line":1300,"column":56}}},"15":{"name":"(anonymous_15)","line":1336,"loc":{"start":{"line":1336,"column":32},"end":{"line":1336,"column":43}}},"16":{"name":"(anonymous_16)","line":1352,"loc":{"start":{"line":1352,"column":21},"end":{"line":1352,"column":40}}},"17":{"name":"(anonymous_17)","line":1363,"loc":{"start":{"line":1363,"column":56},"end":{"line":1363,"column":71}}},"18":{"name":"(anonymous_18)","line":1385,"loc":{"start":{"line":1385,"column":21},"end":{"line":1385,"column":32}}},"19":{"name":"(anonymous_19)","line":1392,"loc":{"start":{"line":1392,"column":32},"end":{"line":1392,"column":54}}},"20":{"name":"(anonymous_20)","line":1407,"loc":{"start":{"line":1407,"column":22},"end":{"line":1407,"column":33}}},"21":{"name":"(anonymous_21)","line":1440,"loc":{"start":{"line":1440,"column":26},"end":{"line":1440,"column":37}}},"22":{"name":"(anonymous_22)","line":1633,"loc":{"start":{"line":1633,"column":23},"end":{"line":1633,"column":34}}},"23":{"name":"(anonymous_23)","line":1635,"loc":{"start":{"line":1635,"column":25},"end":{"line":1635,"column":58}}},"24":{"name":"(anonymous_24)","line":1658,"loc":{"start":{"line":1658,"column":23},"end":{"line":1658,"column":37}}},"25":{"name":"(anonymous_25)","line":1682,"loc":{"start":{"line":1682,"column":26},"end":{"line":1682,"column":37}}},"26":{"name":"(anonymous_26)","line":1684,"loc":{"start":{"line":1684,"column":32},"end":{"line":1684,"column":53}}},"27":{"name":"(anonymous_27)","line":1705,"loc":{"start":{"line":1705,"column":36},"end":{"line":1705,"column":47}}}},"statementMap":{"1":{"start":{"line":53,"column":0},"end":{"line":1727,"column":3}},"2":{"start":{"line":242,"column":8},"end":{"line":242,"column":32}},"3":{"start":{"line":243,"column":8},"end":{"line":246,"column":9}},"4":{"start":{"line":244,"column":12},"end":{"line":244,"column":78}},"5":{"start":{"line":245,"column":12},"end":{"line":245,"column":19}},"6":{"start":{"line":247,"column":8},"end":{"line":247,"column":26}},"7":{"start":{"line":248,"column":8},"end":{"line":248,"column":57}},"8":{"start":{"line":249,"column":8},"end":{"line":249,"column":15}},"9":{"start":{"line":250,"column":8},"end":{"line":256,"column":9}},"10":{"start":{"line":251,"column":12},"end":{"line":251,"column":41}},"11":{"start":{"line":252,"column":15},"end":{"line":256,"column":9}},"12":{"start":{"line":253,"column":12},"end":{"line":253,"column":46}},"13":{"start":{"line":254,"column":15},"end":{"line":256,"column":9}},"14":{"start":{"line":255,"column":12},"end":{"line":255,"column":43}},"15":{"start":{"line":257,"column":8},"end":{"line":264,"column":10}},"16":{"start":{"line":265,"column":8},"end":{"line":265,"column":31}},"17":{"start":{"line":267,"column":8},"end":{"line":269,"column":9}},"18":{"start":{"line":268,"column":12},"end":{"line":268,"column":55}},"19":{"start":{"line":272,"column":8},"end":{"line":272,"column":41}},"20":{"start":{"line":273,"column":8},"end":{"line":274,"column":55}},"21":{"start":{"line":275,"column":8},"end":{"line":281,"column":9}},"22":{"start":{"line":280,"column":12},"end":{"line":280,"column":40}},"23":{"start":{"line":282,"column":8},"end":{"line":285,"column":9}},"24":{"start":{"line":283,"column":12},"end":{"line":283,"column":71}},"25":{"start":{"line":284,"column":12},"end":{"line":284,"column":69}},"26":{"start":{"line":286,"column":8},"end":{"line":286,"column":32}},"27":{"start":{"line":297,"column":8},"end":{"line":297,"column":22}},"28":{"start":{"line":298,"column":8},"end":{"line":298,"column":36}},"29":{"start":{"line":299,"column":8},"end":{"line":299,"column":49}},"30":{"start":{"line":300,"column":8},"end":{"line":300,"column":75}},"31":{"start":{"line":301,"column":8},"end":{"line":304,"column":10}},"32":{"start":{"line":306,"column":8},"end":{"line":311,"column":9}},"33":{"start":{"line":309,"column":12},"end":{"line":309,"column":76}},"34":{"start":{"line":310,"column":12},"end":{"line":310,"column":37}},"35":{"start":{"line":313,"column":8},"end":{"line":313,"column":63}},"36":{"start":{"line":314,"column":8},"end":{"line":314,"column":67}},"37":{"start":{"line":315,"column":8},"end":{"line":315,"column":63}},"38":{"start":{"line":316,"column":8},"end":{"line":316,"column":59}},"39":{"start":{"line":317,"column":8},"end":{"line":317,"column":63}},"40":{"start":{"line":318,"column":8},"end":{"line":318,"column":58}},"41":{"start":{"line":319,"column":8},"end":{"line":319,"column":63}},"42":{"start":{"line":320,"column":8},"end":{"line":320,"column":75}},"43":{"start":{"line":321,"column":8},"end":{"line":321,"column":71}},"44":{"start":{"line":322,"column":8},"end":{"line":322,"column":38}},"45":{"start":{"line":323,"column":8},"end":{"line":323,"column":34}},"46":{"start":{"line":324,"column":8},"end":{"line":324,"column":18}},"47":{"start":{"line":326,"column":8},"end":{"line":326,"column":40}},"48":{"start":{"line":327,"column":8},"end":{"line":327,"column":44}},"49":{"start":{"line":328,"column":8},"end":{"line":328,"column":40}},"50":{"start":{"line":329,"column":8},"end":{"line":329,"column":46}},"51":{"start":{"line":331,"column":8},"end":{"line":337,"column":9}},"52":{"start":{"line":332,"column":12},"end":{"line":332,"column":68}},"53":{"start":{"line":333,"column":12},"end":{"line":333,"column":72}},"54":{"start":{"line":334,"column":12},"end":{"line":335,"column":59}},"55":{"start":{"line":336,"column":12},"end":{"line":336,"column":42}},"56":{"start":{"line":339,"column":8},"end":{"line":346,"column":9}},"57":{"start":{"line":340,"column":12},"end":{"line":340,"column":76}},"58":{"start":{"line":341,"column":12},"end":{"line":341,"column":80}},"59":{"start":{"line":342,"column":12},"end":{"line":342,"column":76}},"60":{"start":{"line":343,"column":12},"end":{"line":344,"column":61}},"61":{"start":{"line":345,"column":12},"end":{"line":345,"column":46}},"62":{"start":{"line":348,"column":8},"end":{"line":350,"column":9}},"63":{"start":{"line":349,"column":12},"end":{"line":349,"column":51}},"64":{"start":{"line":352,"column":8},"end":{"line":372,"column":9}},"65":{"start":{"line":353,"column":12},"end":{"line":355,"column":13}},"66":{"start":{"line":354,"column":16},"end":{"line":354,"column":65}},"67":{"start":{"line":356,"column":12},"end":{"line":358,"column":13}},"68":{"start":{"line":357,"column":16},"end":{"line":357,"column":77}},"69":{"start":{"line":359,"column":12},"end":{"line":361,"column":13}},"70":{"start":{"line":360,"column":16},"end":{"line":360,"column":73}},"71":{"start":{"line":362,"column":12},"end":{"line":364,"column":13}},"72":{"start":{"line":363,"column":16},"end":{"line":363,"column":61}},"73":{"start":{"line":365,"column":12},"end":{"line":371,"column":13}},"74":{"start":{"line":366,"column":16},"end":{"line":366,"column":74}},"75":{"start":{"line":367,"column":16},"end":{"line":370,"column":17}},"76":{"start":{"line":368,"column":20},"end":{"line":369,"column":36}},"77":{"start":{"line":374,"column":8},"end":{"line":572,"column":10}},"78":{"start":{"line":573,"column":8},"end":{"line":573,"column":18}},"79":{"start":{"line":584,"column":8},"end":{"line":584,"column":22}},"80":{"start":{"line":585,"column":8},"end":{"line":585,"column":36}},"81":{"start":{"line":586,"column":8},"end":{"line":586,"column":49}},"82":{"start":{"line":587,"column":8},"end":{"line":587,"column":75}},"83":{"start":{"line":588,"column":8},"end":{"line":591,"column":10}},"84":{"start":{"line":593,"column":8},"end":{"line":598,"column":9}},"85":{"start":{"line":596,"column":12},"end":{"line":596,"column":76}},"86":{"start":{"line":597,"column":12},"end":{"line":597,"column":37}},"87":{"start":{"line":600,"column":8},"end":{"line":600,"column":63}},"88":{"start":{"line":601,"column":8},"end":{"line":601,"column":67}},"89":{"start":{"line":602,"column":8},"end":{"line":602,"column":63}},"90":{"start":{"line":604,"column":8},"end":{"line":604,"column":44}},"91":{"start":{"line":606,"column":8},"end":{"line":613,"column":9}},"92":{"start":{"line":607,"column":12},"end":{"line":607,"column":76}},"93":{"start":{"line":608,"column":12},"end":{"line":608,"column":80}},"94":{"start":{"line":609,"column":12},"end":{"line":609,"column":76}},"95":{"start":{"line":610,"column":12},"end":{"line":611,"column":61}},"96":{"start":{"line":612,"column":12},"end":{"line":612,"column":46}},"97":{"start":{"line":615,"column":8},"end":{"line":662,"column":10}},"98":{"start":{"line":663,"column":8},"end":{"line":663,"column":18}},"99":{"start":{"line":674,"column":8},"end":{"line":674,"column":22}},"100":{"start":{"line":675,"column":8},"end":{"line":675,"column":36}},"101":{"start":{"line":676,"column":8},"end":{"line":676,"column":49}},"102":{"start":{"line":677,"column":8},"end":{"line":677,"column":75}},"103":{"start":{"line":678,"column":8},"end":{"line":681,"column":10}},"104":{"start":{"line":683,"column":8},"end":{"line":688,"column":9}},"105":{"start":{"line":686,"column":12},"end":{"line":686,"column":76}},"106":{"start":{"line":687,"column":12},"end":{"line":687,"column":37}},"107":{"start":{"line":690,"column":8},"end":{"line":690,"column":63}},"108":{"start":{"line":691,"column":8},"end":{"line":691,"column":67}},"109":{"start":{"line":692,"column":8},"end":{"line":692,"column":63}},"110":{"start":{"line":693,"column":8},"end":{"line":693,"column":59}},"111":{"start":{"line":694,"column":8},"end":{"line":694,"column":63}},"112":{"start":{"line":695,"column":8},"end":{"line":695,"column":63}},"113":{"start":{"line":696,"column":8},"end":{"line":696,"column":75}},"114":{"start":{"line":697,"column":8},"end":{"line":697,"column":71}},"115":{"start":{"line":698,"column":8},"end":{"line":698,"column":38}},"116":{"start":{"line":699,"column":8},"end":{"line":699,"column":34}},"117":{"start":{"line":700,"column":8},"end":{"line":700,"column":18}},"118":{"start":{"line":702,"column":8},"end":{"line":702,"column":40}},"119":{"start":{"line":703,"column":8},"end":{"line":703,"column":44}},"120":{"start":{"line":704,"column":8},"end":{"line":704,"column":46}},"121":{"start":{"line":706,"column":8},"end":{"line":712,"column":9}},"122":{"start":{"line":707,"column":12},"end":{"line":707,"column":68}},"123":{"start":{"line":708,"column":12},"end":{"line":708,"column":72}},"124":{"start":{"line":709,"column":12},"end":{"line":710,"column":59}},"125":{"start":{"line":711,"column":12},"end":{"line":711,"column":42}},"126":{"start":{"line":714,"column":8},"end":{"line":721,"column":9}},"127":{"start":{"line":715,"column":12},"end":{"line":715,"column":76}},"128":{"start":{"line":716,"column":12},"end":{"line":716,"column":80}},"129":{"start":{"line":717,"column":12},"end":{"line":717,"column":76}},"130":{"start":{"line":718,"column":12},"end":{"line":719,"column":61}},"131":{"start":{"line":720,"column":12},"end":{"line":720,"column":46}},"132":{"start":{"line":723,"column":8},"end":{"line":743,"column":9}},"133":{"start":{"line":724,"column":12},"end":{"line":726,"column":13}},"134":{"start":{"line":725,"column":16},"end":{"line":725,"column":65}},"135":{"start":{"line":727,"column":12},"end":{"line":729,"column":13}},"136":{"start":{"line":728,"column":16},"end":{"line":728,"column":77}},"137":{"start":{"line":730,"column":12},"end":{"line":732,"column":13}},"138":{"start":{"line":731,"column":16},"end":{"line":731,"column":73}},"139":{"start":{"line":733,"column":12},"end":{"line":735,"column":13}},"140":{"start":{"line":734,"column":16},"end":{"line":734,"column":61}},"141":{"start":{"line":736,"column":12},"end":{"line":742,"column":13}},"142":{"start":{"line":737,"column":16},"end":{"line":737,"column":74}},"143":{"start":{"line":738,"column":16},"end":{"line":741,"column":17}},"144":{"start":{"line":739,"column":20},"end":{"line":740,"column":36}},"145":{"start":{"line":745,"column":8},"end":{"line":942,"column":10}},"146":{"start":{"line":943,"column":8},"end":{"line":943,"column":18}},"147":{"start":{"line":953,"column":8},"end":{"line":953,"column":22}},"148":{"start":{"line":954,"column":8},"end":{"line":954,"column":36}},"149":{"start":{"line":955,"column":8},"end":{"line":955,"column":49}},"150":{"start":{"line":956,"column":8},"end":{"line":956,"column":75}},"151":{"start":{"line":957,"column":8},"end":{"line":960,"column":10}},"152":{"start":{"line":962,"column":8},"end":{"line":967,"column":9}},"153":{"start":{"line":965,"column":12},"end":{"line":965,"column":76}},"154":{"start":{"line":966,"column":12},"end":{"line":966,"column":37}},"155":{"start":{"line":969,"column":8},"end":{"line":969,"column":69}},"156":{"start":{"line":970,"column":8},"end":{"line":970,"column":56}},"157":{"start":{"line":971,"column":8},"end":{"line":971,"column":61}},"158":{"start":{"line":972,"column":8},"end":{"line":972,"column":61}},"159":{"start":{"line":973,"column":8},"end":{"line":973,"column":59}},"160":{"start":{"line":974,"column":8},"end":{"line":974,"column":67}},"161":{"start":{"line":975,"column":8},"end":{"line":976,"column":46}},"162":{"start":{"line":977,"column":8},"end":{"line":977,"column":75}},"163":{"start":{"line":978,"column":8},"end":{"line":978,"column":75}},"164":{"start":{"line":979,"column":8},"end":{"line":979,"column":77}},"165":{"start":{"line":980,"column":8},"end":{"line":980,"column":77}},"166":{"start":{"line":981,"column":8},"end":{"line":981,"column":67}},"167":{"start":{"line":982,"column":8},"end":{"line":982,"column":72}},"168":{"start":{"line":983,"column":8},"end":{"line":983,"column":27}},"169":{"start":{"line":985,"column":8},"end":{"line":989,"column":11}},"170":{"start":{"line":986,"column":12},"end":{"line":988,"column":13}},"171":{"start":{"line":987,"column":16},"end":{"line":987,"column":43}},"172":{"start":{"line":991,"column":8},"end":{"line":1055,"column":9}},"173":{"start":{"line":992,"column":12},"end":{"line":992,"column":54}},"174":{"start":{"line":993,"column":12},"end":{"line":995,"column":56}},"175":{"start":{"line":996,"column":12},"end":{"line":1006,"column":15}},"176":{"start":{"line":997,"column":16},"end":{"line":1005,"column":17}},"177":{"start":{"line":998,"column":20},"end":{"line":998,"column":50}},"178":{"start":{"line":999,"column":23},"end":{"line":1005,"column":17}},"179":{"start":{"line":1000,"column":20},"end":{"line":1000,"column":48}},"180":{"start":{"line":1001,"column":23},"end":{"line":1005,"column":17}},"181":{"start":{"line":1002,"column":20},"end":{"line":1002,"column":49}},"182":{"start":{"line":1003,"column":23},"end":{"line":1005,"column":17}},"183":{"start":{"line":1004,"column":20},"end":{"line":1004,"column":50}},"184":{"start":{"line":1007,"column":12},"end":{"line":1007,"column":54}},"185":{"start":{"line":1008,"column":12},"end":{"line":1014,"column":13}},"186":{"start":{"line":1009,"column":16},"end":{"line":1009,"column":76}},"187":{"start":{"line":1010,"column":16},"end":{"line":1010,"column":80}},"188":{"start":{"line":1011,"column":16},"end":{"line":1012,"column":63}},"189":{"start":{"line":1013,"column":16},"end":{"line":1013,"column":54}},"190":{"start":{"line":1015,"column":12},"end":{"line":1015,"column":74}},"191":{"start":{"line":1016,"column":12},"end":{"line":1040,"column":13}},"192":{"start":{"line":1017,"column":16},"end":{"line":1021,"column":17}},"193":{"start":{"line":1019,"column":20},"end":{"line":1020,"column":48}},"194":{"start":{"line":1022,"column":16},"end":{"line":1026,"column":17}},"195":{"start":{"line":1024,"column":20},"end":{"line":1025,"column":48}},"196":{"start":{"line":1027,"column":16},"end":{"line":1031,"column":17}},"197":{"start":{"line":1029,"column":20},"end":{"line":1030,"column":49}},"198":{"start":{"line":1032,"column":16},"end":{"line":1036,"column":17}},"199":{"start":{"line":1034,"column":20},"end":{"line":1035,"column":49}},"200":{"start":{"line":1037,"column":16},"end":{"line":1039,"column":17}},"201":{"start":{"line":1038,"column":20},"end":{"line":1038,"column":71}},"202":{"start":{"line":1041,"column":12},"end":{"line":1041,"column":72}},"203":{"start":{"line":1042,"column":12},"end":{"line":1045,"column":13}},"204":{"start":{"line":1043,"column":16},"end":{"line":1044,"column":31}},"205":{"start":{"line":1046,"column":12},"end":{"line":1046,"column":71}},"206":{"start":{"line":1047,"column":12},"end":{"line":1054,"column":13}},"207":{"start":{"line":1048,"column":16},"end":{"line":1053,"column":19}},"208":{"start":{"line":1049,"column":20},"end":{"line":1052,"column":21}},"209":{"start":{"line":1050,"column":24},"end":{"line":1051,"column":41}},"210":{"start":{"line":1057,"column":8},"end":{"line":1075,"column":11}},"211":{"start":{"line":1065,"column":24},"end":{"line":1065,"column":48}},"212":{"start":{"line":1066,"column":24},"end":{"line":1068,"column":27}},"213":{"start":{"line":1067,"column":28},"end":{"line":1067,"column":69}},"214":{"start":{"line":1069,"column":24},"end":{"line":1069,"column":46}},"215":{"start":{"line":1076,"column":8},"end":{"line":1086,"column":11}},"216":{"start":{"line":1087,"column":8},"end":{"line":1095,"column":11}},"217":{"start":{"line":1096,"column":8},"end":{"line":1181,"column":10}},"218":{"start":{"line":1182,"column":8},"end":{"line":1263,"column":9}},"219":{"start":{"line":1183,"column":12},"end":{"line":1201,"column":15}},"220":{"start":{"line":1203,"column":12},"end":{"line":1262,"column":15}},"221":{"start":{"line":1264,"column":8},"end":{"line":1264,"column":18}},"222":{"start":{"line":1273,"column":8},"end":{"line":1317,"column":11}},"223":{"start":{"line":1281,"column":20},"end":{"line":1281,"column":47}},"224":{"start":{"line":1282,"column":20},"end":{"line":1314,"column":21}},"225":{"start":{"line":1283,"column":24},"end":{"line":1283,"column":56}},"226":{"start":{"line":1284,"column":24},"end":{"line":1284,"column":55}},"227":{"start":{"line":1285,"column":24},"end":{"line":1285,"column":51}},"228":{"start":{"line":1286,"column":24},"end":{"line":1286,"column":42}},"229":{"start":{"line":1287,"column":24},"end":{"line":1292,"column":27}},"230":{"start":{"line":1288,"column":28},"end":{"line":1288,"column":57}},"231":{"start":{"line":1289,"column":28},"end":{"line":1289,"column":67}},"232":{"start":{"line":1290,"column":28},"end":{"line":1290,"column":69}},"233":{"start":{"line":1291,"column":28},"end":{"line":1291,"column":50}},"234":{"start":{"line":1293,"column":24},"end":{"line":1311,"column":27}},"235":{"start":{"line":1301,"column":32},"end":{"line":1309,"column":33}},"236":{"start":{"line":1302,"column":36},"end":{"line":1305,"column":38}},"237":{"start":{"line":1306,"column":36},"end":{"line":1307,"column":46}},"238":{"start":{"line":1308,"column":36},"end":{"line":1308,"column":54}},"239":{"start":{"line":1313,"column":24},"end":{"line":1313,"column":38}},"240":{"start":{"line":1318,"column":8},"end":{"line":1332,"column":10}},"241":{"start":{"line":1333,"column":8},"end":{"line":1333,"column":21}},"242":{"start":{"line":1337,"column":8},"end":{"line":1337,"column":22}},"243":{"start":{"line":1338,"column":8},"end":{"line":1338,"column":60}},"244":{"start":{"line":1339,"column":8},"end":{"line":1389,"column":11}},"245":{"start":{"line":1353,"column":16},"end":{"line":1383,"column":17}},"246":{"start":{"line":1354,"column":20},"end":{"line":1354,"column":65}},"247":{"start":{"line":1355,"column":20},"end":{"line":1379,"column":21}},"248":{"start":{"line":1358,"column":24},"end":{"line":1358,"column":55}},"249":{"start":{"line":1359,"column":24},"end":{"line":1359,"column":61}},"250":{"start":{"line":1360,"column":24},"end":{"line":1360,"column":68}},"251":{"start":{"line":1362,"column":24},"end":{"line":1362,"column":54}},"252":{"start":{"line":1363,"column":24},"end":{"line":1367,"column":27}},"253":{"start":{"line":1364,"column":28},"end":{"line":1366,"column":30}},"254":{"start":{"line":1369,"column":24},"end":{"line":1369,"column":73}},"255":{"start":{"line":1370,"column":24},"end":{"line":1371,"column":41}},"256":{"start":{"line":1372,"column":24},"end":{"line":1372,"column":52}},"257":{"start":{"line":1373,"column":24},"end":{"line":1378,"column":25}},"258":{"start":{"line":1374,"column":28},"end":{"line":1374,"column":71}},"259":{"start":{"line":1376,"column":28},"end":{"line":1377,"column":55}},"260":{"start":{"line":1381,"column":20},"end":{"line":1382,"column":47}},"261":{"start":{"line":1386,"column":16},"end":{"line":1387,"column":43}},"262":{"start":{"line":1393,"column":8},"end":{"line":1394,"column":33}},"263":{"start":{"line":1395,"column":8},"end":{"line":1395,"column":61}},"264":{"start":{"line":1396,"column":8},"end":{"line":1396,"column":31}},"265":{"start":{"line":1397,"column":8},"end":{"line":1399,"column":11}},"266":{"start":{"line":1400,"column":8},"end":{"line":1400,"column":25}},"267":{"start":{"line":1401,"column":8},"end":{"line":1401,"column":26}},"268":{"start":{"line":1408,"column":8},"end":{"line":1408,"column":22}},"269":{"start":{"line":1409,"column":8},"end":{"line":1409,"column":80}},"270":{"start":{"line":1410,"column":8},"end":{"line":1410,"column":61}},"271":{"start":{"line":1411,"column":8},"end":{"line":1429,"column":9}},"272":{"start":{"line":1412,"column":12},"end":{"line":1412,"column":35}},"273":{"start":{"line":1413,"column":12},"end":{"line":1413,"column":54}},"274":{"start":{"line":1414,"column":12},"end":{"line":1421,"column":13}},"275":{"start":{"line":1415,"column":16},"end":{"line":1415,"column":52}},"276":{"start":{"line":1416,"column":16},"end":{"line":1416,"column":48}},"277":{"start":{"line":1417,"column":16},"end":{"line":1420,"column":19}},"278":{"start":{"line":1425,"column":12},"end":{"line":1428,"column":13}},"279":{"start":{"line":1426,"column":16},"end":{"line":1426,"column":48}},"280":{"start":{"line":1427,"column":16},"end":{"line":1427,"column":38}},"281":{"start":{"line":1441,"column":8},"end":{"line":1441,"column":22}},"282":{"start":{"line":1442,"column":8},"end":{"line":1442,"column":68}},"283":{"start":{"line":1443,"column":8},"end":{"line":1443,"column":55}},"284":{"start":{"line":1444,"column":8},"end":{"line":1444,"column":38}},"285":{"start":{"line":1445,"column":8},"end":{"line":1445,"column":18}},"286":{"start":{"line":1446,"column":8},"end":{"line":1448,"column":9}},"287":{"start":{"line":1447,"column":12},"end":{"line":1447,"column":22}},"288":{"start":{"line":1450,"column":8},"end":{"line":1450,"column":48}},"289":{"start":{"line":1451,"column":8},"end":{"line":1451,"column":51}},"290":{"start":{"line":1452,"column":8},"end":{"line":1452,"column":37}},"291":{"start":{"line":1453,"column":8},"end":{"line":1454,"column":45}},"292":{"start":{"line":1456,"column":8},"end":{"line":1461,"column":9}},"293":{"start":{"line":1457,"column":12},"end":{"line":1457,"column":69}},"294":{"start":{"line":1458,"column":12},"end":{"line":1460,"column":13}},"295":{"start":{"line":1459,"column":16},"end":{"line":1459,"column":40}},"296":{"start":{"line":1463,"column":8},"end":{"line":1464,"column":35}},"297":{"start":{"line":1465,"column":8},"end":{"line":1466,"column":37}},"298":{"start":{"line":1467,"column":8},"end":{"line":1469,"column":43}},"299":{"start":{"line":1471,"column":8},"end":{"line":1471,"column":31}},"300":{"start":{"line":1473,"column":8},"end":{"line":1477,"column":9}},"301":{"start":{"line":1474,"column":12},"end":{"line":1474,"column":78}},"302":{"start":{"line":1475,"column":12},"end":{"line":1476,"column":68}},"303":{"start":{"line":1479,"column":8},"end":{"line":1484,"column":9}},"304":{"start":{"line":1480,"column":12},"end":{"line":1481,"column":33}},"305":{"start":{"line":1482,"column":12},"end":{"line":1483,"column":70}},"306":{"start":{"line":1486,"column":8},"end":{"line":1494,"column":9}},"307":{"start":{"line":1487,"column":12},"end":{"line":1487,"column":45}},"308":{"start":{"line":1488,"column":12},"end":{"line":1493,"column":13}},"309":{"start":{"line":1489,"column":16},"end":{"line":1489,"column":61}},"310":{"start":{"line":1491,"column":16},"end":{"line":1492,"column":68}},"311":{"start":{"line":1496,"column":8},"end":{"line":1504,"column":9}},"312":{"start":{"line":1497,"column":12},"end":{"line":1497,"column":40}},"313":{"start":{"line":1498,"column":12},"end":{"line":1503,"column":13}},"314":{"start":{"line":1499,"column":16},"end":{"line":1499,"column":56}},"315":{"start":{"line":1501,"column":16},"end":{"line":1502,"column":68}},"316":{"start":{"line":1506,"column":8},"end":{"line":1532,"column":9}},"317":{"start":{"line":1509,"column":12},"end":{"line":1509,"column":75}},"318":{"start":{"line":1510,"column":12},"end":{"line":1511,"column":34}},"319":{"start":{"line":1512,"column":12},"end":{"line":1513,"column":28}},"320":{"start":{"line":1514,"column":12},"end":{"line":1522,"column":13}},"321":{"start":{"line":1515,"column":16},"end":{"line":1515,"column":56}},"322":{"start":{"line":1516,"column":16},"end":{"line":1516,"column":70}},"323":{"start":{"line":1517,"column":16},"end":{"line":1517,"column":62}},"324":{"start":{"line":1518,"column":16},"end":{"line":1520,"column":17}},"325":{"start":{"line":1519,"column":20},"end":{"line":1519,"column":58}},"326":{"start":{"line":1521,"column":16},"end":{"line":1521,"column":55}},"327":{"start":{"line":1523,"column":12},"end":{"line":1525,"column":13}},"328":{"start":{"line":1524,"column":16},"end":{"line":1524,"column":73}},"329":{"start":{"line":1526,"column":12},"end":{"line":1527,"column":64}},"330":{"start":{"line":1528,"column":12},"end":{"line":1529,"column":67}},"331":{"start":{"line":1530,"column":12},"end":{"line":1531,"column":68}},"332":{"start":{"line":1534,"column":8},"end":{"line":1552,"column":9}},"333":{"start":{"line":1535,"column":12},"end":{"line":1539,"column":14}},"334":{"start":{"line":1540,"column":15},"end":{"line":1552,"column":9}},"335":{"start":{"line":1541,"column":12},"end":{"line":1545,"column":14}},"336":{"start":{"line":1546,"column":15},"end":{"line":1552,"column":9}},"337":{"start":{"line":1547,"column":12},"end":{"line":1551,"column":14}},"338":{"start":{"line":1554,"column":8},"end":{"line":1615,"column":9}},"339":{"start":{"line":1555,"column":12},"end":{"line":1557,"column":56}},"340":{"start":{"line":1558,"column":12},"end":{"line":1559,"column":75}},"341":{"start":{"line":1560,"column":12},"end":{"line":1561,"column":67}},"342":{"start":{"line":1562,"column":12},"end":{"line":1563,"column":67}},"343":{"start":{"line":1564,"column":12},"end":{"line":1565,"column":66}},"344":{"start":{"line":1566,"column":12},"end":{"line":1567,"column":39}},"345":{"start":{"line":1568,"column":12},"end":{"line":1568,"column":46}},"346":{"start":{"line":1570,"column":12},"end":{"line":1570,"column":67}},"347":{"start":{"line":1571,"column":12},"end":{"line":1576,"column":13}},"348":{"start":{"line":1572,"column":16},"end":{"line":1573,"column":36}},"349":{"start":{"line":1574,"column":16},"end":{"line":1575,"column":76}},"350":{"start":{"line":1578,"column":12},"end":{"line":1608,"column":13}},"351":{"start":{"line":1579,"column":16},"end":{"line":1582,"column":58}},"352":{"start":{"line":1583,"column":16},"end":{"line":1586,"column":50}},"353":{"start":{"line":1588,"column":16},"end":{"line":1591,"column":51}},"354":{"start":{"line":1592,"column":16},"end":{"line":1595,"column":51}},"355":{"start":{"line":1596,"column":16},"end":{"line":1599,"column":52}},"356":{"start":{"line":1600,"column":16},"end":{"line":1603,"column":52}},"357":{"start":{"line":1604,"column":16},"end":{"line":1607,"column":47}},"358":{"start":{"line":1610,"column":12},"end":{"line":1614,"column":14}},"359":{"start":{"line":1617,"column":8},"end":{"line":1617,"column":54}},"360":{"start":{"line":1620,"column":8},"end":{"line":1620,"column":23}},"361":{"start":{"line":1621,"column":8},"end":{"line":1621,"column":76}},"362":{"start":{"line":1622,"column":8},"end":{"line":1622,"column":29}},"363":{"start":{"line":1624,"column":8},"end":{"line":1624,"column":19}},"364":{"start":{"line":1634,"column":8},"end":{"line":1634,"column":22}},"365":{"start":{"line":1635,"column":8},"end":{"line":1652,"column":10}},"366":{"start":{"line":1636,"column":12},"end":{"line":1636,"column":54}},"367":{"start":{"line":1637,"column":12},"end":{"line":1637,"column":62}},"368":{"start":{"line":1639,"column":12},"end":{"line":1639,"column":48}},"369":{"start":{"line":1641,"column":12},"end":{"line":1643,"column":13}},"370":{"start":{"line":1642,"column":16},"end":{"line":1642,"column":75}},"371":{"start":{"line":1644,"column":12},"end":{"line":1646,"column":13}},"372":{"start":{"line":1645,"column":16},"end":{"line":1645,"column":77}},"373":{"start":{"line":1647,"column":12},"end":{"line":1647,"column":61}},"374":{"start":{"line":1648,"column":12},"end":{"line":1648,"column":63}},"375":{"start":{"line":1649,"column":12},"end":{"line":1649,"column":69}},"376":{"start":{"line":1650,"column":12},"end":{"line":1650,"column":62}},"377":{"start":{"line":1651,"column":12},"end":{"line":1651,"column":34}},"378":{"start":{"line":1655,"column":8},"end":{"line":1656,"column":69}},"379":{"start":{"line":1657,"column":8},"end":{"line":1657,"column":54}},"380":{"start":{"line":1658,"column":8},"end":{"line":1660,"column":11}},"381":{"start":{"line":1659,"column":12},"end":{"line":1659,"column":26}},"382":{"start":{"line":1662,"column":8},"end":{"line":1667,"column":11}},"383":{"start":{"line":1669,"column":8},"end":{"line":1673,"column":11}},"384":{"start":{"line":1674,"column":8},"end":{"line":1674,"column":39}},"385":{"start":{"line":1683,"column":8},"end":{"line":1683,"column":22}},"386":{"start":{"line":1684,"column":8},"end":{"line":1703,"column":10}},"387":{"start":{"line":1685,"column":12},"end":{"line":1687,"column":37}},"388":{"start":{"line":1688,"column":12},"end":{"line":1688,"column":54}},"389":{"start":{"line":1689,"column":12},"end":{"line":1689,"column":54}},"390":{"start":{"line":1691,"column":12},"end":{"line":1691,"column":44}},"391":{"start":{"line":1693,"column":12},"end":{"line":1695,"column":13}},"392":{"start":{"line":1694,"column":16},"end":{"line":1694,"column":76}},"393":{"start":{"line":1696,"column":12},"end":{"line":1698,"column":13}},"394":{"start":{"line":1697,"column":16},"end":{"line":1697,"column":76}},"395":{"start":{"line":1699,"column":12},"end":{"line":1699,"column":60}},"396":{"start":{"line":1700,"column":12},"end":{"line":1700,"column":62}},"397":{"start":{"line":1701,"column":12},"end":{"line":1701,"column":68}},"398":{"start":{"line":1702,"column":12},"end":{"line":1702,"column":34}},"399":{"start":{"line":1705,"column":8},"end":{"line":1711,"column":10}},"400":{"start":{"line":1706,"column":12},"end":{"line":1710,"column":14}},"401":{"start":{"line":1713,"column":8},"end":{"line":1718,"column":11}},"402":{"start":{"line":1720,"column":8},"end":{"line":1724,"column":11}},"403":{"start":{"line":1725,"column":8},"end":{"line":1725,"column":30}}},"branchMap":{"1":{"line":243,"type":"if","locations":[{"start":{"line":243,"column":8},"end":{"line":243,"column":8}},{"start":{"line":243,"column":8},"end":{"line":243,"column":8}}]},"2":{"line":250,"type":"if","locations":[{"start":{"line":250,"column":8},"end":{"line":250,"column":8}},{"start":{"line":250,"column":8},"end":{"line":250,"column":8}}]},"3":{"line":252,"type":"if","locations":[{"start":{"line":252,"column":15},"end":{"line":252,"column":15}},{"start":{"line":252,"column":15},"end":{"line":252,"column":15}}]},"4":{"line":254,"type":"if","locations":[{"start":{"line":254,"column":15},"end":{"line":254,"column":15}},{"start":{"line":254,"column":15},"end":{"line":254,"column":15}}]},"5":{"line":267,"type":"if","locations":[{"start":{"line":267,"column":8},"end":{"line":267,"column":8}},{"start":{"line":267,"column":8},"end":{"line":267,"column":8}}]},"6":{"line":275,"type":"if","locations":[{"start":{"line":275,"column":8},"end":{"line":275,"column":8}},{"start":{"line":275,"column":8},"end":{"line":275,"column":8}}]},"7":{"line":275,"type":"binary-expr","locations":[{"start":{"line":275,"column":12},"end":{"line":275,"column":25}},{"start":{"line":275,"column":29},"end":{"line":275,"column":45}},{"start":{"line":276,"column":12},"end":{"line":276,"column":43}},{"start":{"line":277,"column":12},"end":{"line":277,"column":42}},{"start":{"line":278,"column":12},"end":{"line":279,"column":39}}]},"8":{"line":282,"type":"if","locations":[{"start":{"line":282,"column":8},"end":{"line":282,"column":8}},{"start":{"line":282,"column":8},"end":{"line":282,"column":8}}]},"9":{"line":306,"type":"if","locations":[{"start":{"line":306,"column":8},"end":{"line":306,"column":8}},{"start":{"line":306,"column":8},"end":{"line":306,"column":8}}]},"10":{"line":331,"type":"if","locations":[{"start":{"line":331,"column":8},"end":{"line":331,"column":8}},{"start":{"line":331,"column":8},"end":{"line":331,"column":8}}]},"11":{"line":339,"type":"if","locations":[{"start":{"line":339,"column":8},"end":{"line":339,"column":8}},{"start":{"line":339,"column":8},"end":{"line":339,"column":8}}]},"12":{"line":348,"type":"if","locations":[{"start":{"line":348,"column":8},"end":{"line":348,"column":8}},{"start":{"line":348,"column":8},"end":{"line":348,"column":8}}]},"13":{"line":352,"type":"if","locations":[{"start":{"line":352,"column":8},"end":{"line":352,"column":8}},{"start":{"line":352,"column":8},"end":{"line":352,"column":8}}]},"14":{"line":353,"type":"if","locations":[{"start":{"line":353,"column":12},"end":{"line":353,"column":12}},{"start":{"line":353,"column":12},"end":{"line":353,"column":12}}]},"15":{"line":356,"type":"if","locations":[{"start":{"line":356,"column":12},"end":{"line":356,"column":12}},{"start":{"line":356,"column":12},"end":{"line":356,"column":12}}]},"16":{"line":359,"type":"if","locations":[{"start":{"line":359,"column":12},"end":{"line":359,"column":12}},{"start":{"line":359,"column":12},"end":{"line":359,"column":12}}]},"17":{"line":362,"type":"if","locations":[{"start":{"line":362,"column":12},"end":{"line":362,"column":12}},{"start":{"line":362,"column":12},"end":{"line":362,"column":12}}]},"18":{"line":365,"type":"if","locations":[{"start":{"line":365,"column":12},"end":{"line":365,"column":12}},{"start":{"line":365,"column":12},"end":{"line":365,"column":12}}]},"19":{"line":367,"type":"if","locations":[{"start":{"line":367,"column":16},"end":{"line":367,"column":16}},{"start":{"line":367,"column":16},"end":{"line":367,"column":16}}]},"20":{"line":487,"type":"cond-expr","locations":[{"start":{"line":487,"column":51},"end":{"line":487,"column":55}},{"start":{"line":487,"column":58},"end":{"line":487,"column":63}}]},"21":{"line":520,"type":"cond-expr","locations":[{"start":{"line":520,"column":55},"end":{"line":520,"column":59}},{"start":{"line":520,"column":62},"end":{"line":520,"column":67}}]},"22":{"line":532,"type":"cond-expr","locations":[{"start":{"line":532,"column":59},"end":{"line":532,"column":63}},{"start":{"line":532,"column":66},"end":{"line":532,"column":71}}]},"23":{"line":539,"type":"cond-expr","locations":[{"start":{"line":539,"column":59},"end":{"line":539,"column":63}},{"start":{"line":539,"column":66},"end":{"line":539,"column":71}}]},"24":{"line":549,"type":"cond-expr","locations":[{"start":{"line":549,"column":55},"end":{"line":549,"column":59}},{"start":{"line":549,"column":62},"end":{"line":549,"column":67}}]},"25":{"line":555,"type":"cond-expr","locations":[{"start":{"line":555,"column":59},"end":{"line":555,"column":63}},{"start":{"line":555,"column":66},"end":{"line":555,"column":71}}]},"26":{"line":562,"type":"cond-expr","locations":[{"start":{"line":562,"column":59},"end":{"line":562,"column":63}},{"start":{"line":562,"column":66},"end":{"line":562,"column":71}}]},"27":{"line":593,"type":"if","locations":[{"start":{"line":593,"column":8},"end":{"line":593,"column":8}},{"start":{"line":593,"column":8},"end":{"line":593,"column":8}}]},"28":{"line":606,"type":"if","locations":[{"start":{"line":606,"column":8},"end":{"line":606,"column":8}},{"start":{"line":606,"column":8},"end":{"line":606,"column":8}}]},"29":{"line":683,"type":"if","locations":[{"start":{"line":683,"column":8},"end":{"line":683,"column":8}},{"start":{"line":683,"column":8},"end":{"line":683,"column":8}}]},"30":{"line":706,"type":"if","locations":[{"start":{"line":706,"column":8},"end":{"line":706,"column":8}},{"start":{"line":706,"column":8},"end":{"line":706,"column":8}}]},"31":{"line":714,"type":"if","locations":[{"start":{"line":714,"column":8},"end":{"line":714,"column":8}},{"start":{"line":714,"column":8},"end":{"line":714,"column":8}}]},"32":{"line":723,"type":"if","locations":[{"start":{"line":723,"column":8},"end":{"line":723,"column":8}},{"start":{"line":723,"column":8},"end":{"line":723,"column":8}}]},"33":{"line":724,"type":"if","locations":[{"start":{"line":724,"column":12},"end":{"line":724,"column":12}},{"start":{"line":724,"column":12},"end":{"line":724,"column":12}}]},"34":{"line":727,"type":"if","locations":[{"start":{"line":727,"column":12},"end":{"line":727,"column":12}},{"start":{"line":727,"column":12},"end":{"line":727,"column":12}}]},"35":{"line":730,"type":"if","locations":[{"start":{"line":730,"column":12},"end":{"line":730,"column":12}},{"start":{"line":730,"column":12},"end":{"line":730,"column":12}}]},"36":{"line":733,"type":"if","locations":[{"start":{"line":733,"column":12},"end":{"line":733,"column":12}},{"start":{"line":733,"column":12},"end":{"line":733,"column":12}}]},"37":{"line":736,"type":"if","locations":[{"start":{"line":736,"column":12},"end":{"line":736,"column":12}},{"start":{"line":736,"column":12},"end":{"line":736,"column":12}}]},"38":{"line":738,"type":"if","locations":[{"start":{"line":738,"column":16},"end":{"line":738,"column":16}},{"start":{"line":738,"column":16},"end":{"line":738,"column":16}}]},"39":{"line":869,"type":"cond-expr","locations":[{"start":{"line":869,"column":55},"end":{"line":869,"column":59}},{"start":{"line":869,"column":62},"end":{"line":869,"column":67}}]},"40":{"line":891,"type":"cond-expr","locations":[{"start":{"line":891,"column":55},"end":{"line":891,"column":59}},{"start":{"line":891,"column":62},"end":{"line":891,"column":67}}]},"41":{"line":903,"type":"cond-expr","locations":[{"start":{"line":903,"column":59},"end":{"line":903,"column":63}},{"start":{"line":903,"column":66},"end":{"line":903,"column":71}}]},"42":{"line":910,"type":"cond-expr","locations":[{"start":{"line":910,"column":59},"end":{"line":910,"column":63}},{"start":{"line":910,"column":66},"end":{"line":910,"column":71}}]},"43":{"line":925,"type":"cond-expr","locations":[{"start":{"line":925,"column":59},"end":{"line":925,"column":63}},{"start":{"line":925,"column":66},"end":{"line":925,"column":71}}]},"44":{"line":932,"type":"cond-expr","locations":[{"start":{"line":932,"column":59},"end":{"line":932,"column":63}},{"start":{"line":932,"column":66},"end":{"line":932,"column":71}}]},"45":{"line":962,"type":"if","locations":[{"start":{"line":962,"column":8},"end":{"line":962,"column":8}},{"start":{"line":962,"column":8},"end":{"line":962,"column":8}}]},"46":{"line":986,"type":"if","locations":[{"start":{"line":986,"column":12},"end":{"line":986,"column":12}},{"start":{"line":986,"column":12},"end":{"line":986,"column":12}}]},"47":{"line":991,"type":"if","locations":[{"start":{"line":991,"column":8},"end":{"line":991,"column":8}},{"start":{"line":991,"column":8},"end":{"line":991,"column":8}}]},"48":{"line":993,"type":"cond-expr","locations":[{"start":{"line":994,"column":16},"end":{"line":994,"column":64}},{"start":{"line":995,"column":16},"end":{"line":995,"column":55}}]},"49":{"line":997,"type":"if","locations":[{"start":{"line":997,"column":16},"end":{"line":997,"column":16}},{"start":{"line":997,"column":16},"end":{"line":997,"column":16}}]},"50":{"line":999,"type":"if","locations":[{"start":{"line":999,"column":23},"end":{"line":999,"column":23}},{"start":{"line":999,"column":23},"end":{"line":999,"column":23}}]},"51":{"line":1001,"type":"if","locations":[{"start":{"line":1001,"column":23},"end":{"line":1001,"column":23}},{"start":{"line":1001,"column":23},"end":{"line":1001,"column":23}}]},"52":{"line":1003,"type":"if","locations":[{"start":{"line":1003,"column":23},"end":{"line":1003,"column":23}},{"start":{"line":1003,"column":23},"end":{"line":1003,"column":23}}]},"53":{"line":1008,"type":"if","locations":[{"start":{"line":1008,"column":12},"end":{"line":1008,"column":12}},{"start":{"line":1008,"column":12},"end":{"line":1008,"column":12}}]},"54":{"line":1016,"type":"if","locations":[{"start":{"line":1016,"column":12},"end":{"line":1016,"column":12}},{"start":{"line":1016,"column":12},"end":{"line":1016,"column":12}}]},"55":{"line":1017,"type":"if","locations":[{"start":{"line":1017,"column":16},"end":{"line":1017,"column":16}},{"start":{"line":1017,"column":16},"end":{"line":1017,"column":16}}]},"56":{"line":1017,"type":"binary-expr","locations":[{"start":{"line":1017,"column":20},"end":{"line":1017,"column":46}},{"start":{"line":1018,"column":20},"end":{"line":1018,"column":59}}]},"57":{"line":1022,"type":"if","locations":[{"start":{"line":1022,"column":16},"end":{"line":1022,"column":16}},{"start":{"line":1022,"column":16},"end":{"line":1022,"column":16}}]},"58":{"line":1022,"type":"binary-expr","locations":[{"start":{"line":1022,"column":20},"end":{"line":1022,"column":46}},{"start":{"line":1023,"column":20},"end":{"line":1023,"column":59}}]},"59":{"line":1027,"type":"if","locations":[{"start":{"line":1027,"column":16},"end":{"line":1027,"column":16}},{"start":{"line":1027,"column":16},"end":{"line":1027,"column":16}}]},"60":{"line":1027,"type":"binary-expr","locations":[{"start":{"line":1027,"column":20},"end":{"line":1027,"column":47}},{"start":{"line":1028,"column":20},"end":{"line":1028,"column":61}}]},"61":{"line":1032,"type":"if","locations":[{"start":{"line":1032,"column":16},"end":{"line":1032,"column":16}},{"start":{"line":1032,"column":16},"end":{"line":1032,"column":16}}]},"62":{"line":1032,"type":"binary-expr","locations":[{"start":{"line":1032,"column":20},"end":{"line":1032,"column":47}},{"start":{"line":1033,"column":20},"end":{"line":1033,"column":61}}]},"63":{"line":1037,"type":"if","locations":[{"start":{"line":1037,"column":16},"end":{"line":1037,"column":16}},{"start":{"line":1037,"column":16},"end":{"line":1037,"column":16}}]},"64":{"line":1042,"type":"if","locations":[{"start":{"line":1042,"column":12},"end":{"line":1042,"column":12}},{"start":{"line":1042,"column":12},"end":{"line":1042,"column":12}}]},"65":{"line":1042,"type":"binary-expr","locations":[{"start":{"line":1042,"column":16},"end":{"line":1042,"column":29}},{"start":{"line":1042,"column":33},"end":{"line":1042,"column":66}}]},"66":{"line":1047,"type":"if","locations":[{"start":{"line":1047,"column":12},"end":{"line":1047,"column":12}},{"start":{"line":1047,"column":12},"end":{"line":1047,"column":12}}]},"67":{"line":1049,"type":"if","locations":[{"start":{"line":1049,"column":20},"end":{"line":1049,"column":20}},{"start":{"line":1049,"column":20},"end":{"line":1049,"column":20}}]},"68":{"line":1050,"type":"cond-expr","locations":[{"start":{"line":1051,"column":28},"end":{"line":1051,"column":32}},{"start":{"line":1051,"column":35},"end":{"line":1051,"column":40}}]},"69":{"line":1182,"type":"if","locations":[{"start":{"line":1182,"column":8},"end":{"line":1182,"column":8}},{"start":{"line":1182,"column":8},"end":{"line":1182,"column":8}}]},"70":{"line":1282,"type":"if","locations":[{"start":{"line":1282,"column":20},"end":{"line":1282,"column":20}},{"start":{"line":1282,"column":20},"end":{"line":1282,"column":20}}]},"71":{"line":1301,"type":"if","locations":[{"start":{"line":1301,"column":32},"end":{"line":1301,"column":32}},{"start":{"line":1301,"column":32},"end":{"line":1301,"column":32}}]},"72":{"line":1355,"type":"if","locations":[{"start":{"line":1355,"column":20},"end":{"line":1355,"column":20}},{"start":{"line":1355,"column":20},"end":{"line":1355,"column":20}}]},"73":{"line":1355,"type":"binary-expr","locations":[{"start":{"line":1355,"column":24},"end":{"line":1355,"column":37}},{"start":{"line":1355,"column":41},"end":{"line":1355,"column":65}},{"start":{"line":1356,"column":24},"end":{"line":1356,"column":32}},{"start":{"line":1356,"column":36},"end":{"line":1356,"column":55}},{"start":{"line":1357,"column":24},"end":{"line":1357,"column":48}}]},"74":{"line":1373,"type":"if","locations":[{"start":{"line":1373,"column":24},"end":{"line":1373,"column":24}},{"start":{"line":1373,"column":24},"end":{"line":1373,"column":24}}]},"75":{"line":1373,"type":"binary-expr","locations":[{"start":{"line":1373,"column":28},"end":{"line":1373,"column":34}},{"start":{"line":1373,"column":38},"end":{"line":1373,"column":45}}]},"76":{"line":1411,"type":"if","locations":[{"start":{"line":1411,"column":8},"end":{"line":1411,"column":8}},{"start":{"line":1411,"column":8},"end":{"line":1411,"column":8}}]},"77":{"line":1414,"type":"if","locations":[{"start":{"line":1414,"column":12},"end":{"line":1414,"column":12}},{"start":{"line":1414,"column":12},"end":{"line":1414,"column":12}}]},"78":{"line":1425,"type":"if","locations":[{"start":{"line":1425,"column":12},"end":{"line":1425,"column":12}},{"start":{"line":1425,"column":12},"end":{"line":1425,"column":12}}]},"79":{"line":1446,"type":"if","locations":[{"start":{"line":1446,"column":8},"end":{"line":1446,"column":8}},{"start":{"line":1446,"column":8},"end":{"line":1446,"column":8}}]},"80":{"line":1446,"type":"binary-expr","locations":[{"start":{"line":1446,"column":12},"end":{"line":1446,"column":15}},{"start":{"line":1446,"column":19},"end":{"line":1446,"column":26}}]},"81":{"line":1456,"type":"if","locations":[{"start":{"line":1456,"column":8},"end":{"line":1456,"column":8}},{"start":{"line":1456,"column":8},"end":{"line":1456,"column":8}}]},"82":{"line":1458,"type":"if","locations":[{"start":{"line":1458,"column":12},"end":{"line":1458,"column":12}},{"start":{"line":1458,"column":12},"end":{"line":1458,"column":12}}]},"83":{"line":1463,"type":"cond-expr","locations":[{"start":{"line":1463,"column":40},"end":{"line":1463,"column":70}},{"start":{"line":1464,"column":12},"end":{"line":1464,"column":34}}]},"84":{"line":1465,"type":"cond-expr","locations":[{"start":{"line":1465,"column":42},"end":{"line":1465,"column":74}},{"start":{"line":1466,"column":12},"end":{"line":1466,"column":36}}]},"85":{"line":1467,"type":"cond-expr","locations":[{"start":{"line":1468,"column":12},"end":{"line":1468,"column":50}},{"start":{"line":1469,"column":12},"end":{"line":1469,"column":42}}]},"86":{"line":1473,"type":"if","locations":[{"start":{"line":1473,"column":8},"end":{"line":1473,"column":8}},{"start":{"line":1473,"column":8},"end":{"line":1473,"column":8}}]},"87":{"line":1479,"type":"if","locations":[{"start":{"line":1479,"column":8},"end":{"line":1479,"column":8}},{"start":{"line":1479,"column":8},"end":{"line":1479,"column":8}}]},"88":{"line":1486,"type":"if","locations":[{"start":{"line":1486,"column":8},"end":{"line":1486,"column":8}},{"start":{"line":1486,"column":8},"end":{"line":1486,"column":8}}]},"89":{"line":1488,"type":"if","locations":[{"start":{"line":1488,"column":12},"end":{"line":1488,"column":12}},{"start":{"line":1488,"column":12},"end":{"line":1488,"column":12}}]},"90":{"line":1496,"type":"if","locations":[{"start":{"line":1496,"column":8},"end":{"line":1496,"column":8}},{"start":{"line":1496,"column":8},"end":{"line":1496,"column":8}}]},"91":{"line":1496,"type":"binary-expr","locations":[{"start":{"line":1496,"column":12},"end":{"line":1496,"column":29}},{"start":{"line":1496,"column":33},"end":{"line":1496,"column":41}}]},"92":{"line":1498,"type":"if","locations":[{"start":{"line":1498,"column":12},"end":{"line":1498,"column":12}},{"start":{"line":1498,"column":12},"end":{"line":1498,"column":12}}]},"93":{"line":1506,"type":"if","locations":[{"start":{"line":1506,"column":8},"end":{"line":1506,"column":8}},{"start":{"line":1506,"column":8},"end":{"line":1506,"column":8}}]},"94":{"line":1514,"type":"if","locations":[{"start":{"line":1514,"column":12},"end":{"line":1514,"column":12}},{"start":{"line":1514,"column":12},"end":{"line":1514,"column":12}}]},"95":{"line":1518,"type":"if","locations":[{"start":{"line":1518,"column":16},"end":{"line":1518,"column":16}},{"start":{"line":1518,"column":16},"end":{"line":1518,"column":16}}]},"96":{"line":1523,"type":"if","locations":[{"start":{"line":1523,"column":12},"end":{"line":1523,"column":12}},{"start":{"line":1523,"column":12},"end":{"line":1523,"column":12}}]},"97":{"line":1526,"type":"cond-expr","locations":[{"start":{"line":1526,"column":48},"end":{"line":1526,"column":64}},{"start":{"line":1527,"column":16},"end":{"line":1527,"column":63}}]},"98":{"line":1528,"type":"cond-expr","locations":[{"start":{"line":1528,"column":53},"end":{"line":1528,"column":71}},{"start":{"line":1529,"column":16},"end":{"line":1529,"column":66}}]},"99":{"line":1530,"type":"cond-expr","locations":[{"start":{"line":1530,"column":55},"end":{"line":1530,"column":74}},{"start":{"line":1531,"column":16},"end":{"line":1531,"column":67}}]},"100":{"line":1534,"type":"if","locations":[{"start":{"line":1534,"column":8},"end":{"line":1534,"column":8}},{"start":{"line":1534,"column":8},"end":{"line":1534,"column":8}}]},"101":{"line":1540,"type":"if","locations":[{"start":{"line":1540,"column":15},"end":{"line":1540,"column":15}},{"start":{"line":1540,"column":15},"end":{"line":1540,"column":15}}]},"102":{"line":1546,"type":"if","locations":[{"start":{"line":1546,"column":15},"end":{"line":1546,"column":15}},{"start":{"line":1546,"column":15},"end":{"line":1546,"column":15}}]},"103":{"line":1554,"type":"if","locations":[{"start":{"line":1554,"column":8},"end":{"line":1554,"column":8}},{"start":{"line":1554,"column":8},"end":{"line":1554,"column":8}}]},"104":{"line":1555,"type":"binary-expr","locations":[{"start":{"line":1555,"column":43},"end":{"line":1556,"column":56}},{"start":{"line":1557,"column":16},"end":{"line":1557,"column":55}}]},"105":{"line":1558,"type":"binary-expr","locations":[{"start":{"line":1558,"column":37},"end":{"line":1559,"column":38}},{"start":{"line":1559,"column":42},"end":{"line":1559,"column":74}}]},"106":{"line":1560,"type":"binary-expr","locations":[{"start":{"line":1560,"column":39},"end":{"line":1561,"column":27}},{"start":{"line":1561,"column":31},"end":{"line":1561,"column":66}}]},"107":{"line":1562,"type":"binary-expr","locations":[{"start":{"line":1562,"column":39},"end":{"line":1563,"column":27}},{"start":{"line":1563,"column":31},"end":{"line":1563,"column":66}}]},"108":{"line":1564,"type":"binary-expr","locations":[{"start":{"line":1564,"column":38},"end":{"line":1565,"column":27}},{"start":{"line":1565,"column":31},"end":{"line":1565,"column":65}}]},"109":{"line":1571,"type":"if","locations":[{"start":{"line":1571,"column":12},"end":{"line":1571,"column":12}},{"start":{"line":1571,"column":12},"end":{"line":1571,"column":12}}]},"110":{"line":1578,"type":"if","locations":[{"start":{"line":1578,"column":12},"end":{"line":1578,"column":12}},{"start":{"line":1578,"column":12},"end":{"line":1578,"column":12}}]},"111":{"line":1579,"type":"binary-expr","locations":[{"start":{"line":1579,"column":52},"end":{"line":1581,"column":42}},{"start":{"line":1581,"column":46},"end":{"line":1582,"column":57}}]},"112":{"line":1583,"type":"binary-expr","locations":[{"start":{"line":1583,"column":48},"end":{"line":1585,"column":42}},{"start":{"line":1585,"column":46},"end":{"line":1586,"column":49}}]},"113":{"line":1588,"type":"binary-expr","locations":[{"start":{"line":1588,"column":50},"end":{"line":1590,"column":42}},{"start":{"line":1590,"column":46},"end":{"line":1591,"column":50}}]},"114":{"line":1592,"type":"binary-expr","locations":[{"start":{"line":1592,"column":50},"end":{"line":1594,"column":42}},{"start":{"line":1594,"column":46},"end":{"line":1595,"column":50}}]},"115":{"line":1596,"type":"binary-expr","locations":[{"start":{"line":1596,"column":51},"end":{"line":1598,"column":42}},{"start":{"line":1598,"column":46},"end":{"line":1599,"column":51}}]},"116":{"line":1600,"type":"binary-expr","locations":[{"start":{"line":1600,"column":51},"end":{"line":1602,"column":42}},{"start":{"line":1602,"column":46},"end":{"line":1603,"column":51}}]},"117":{"line":1604,"type":"binary-expr","locations":[{"start":{"line":1604,"column":46},"end":{"line":1606,"column":42}},{"start":{"line":1606,"column":46},"end":{"line":1607,"column":46}}]},"118":{"line":1641,"type":"if","locations":[{"start":{"line":1641,"column":12},"end":{"line":1641,"column":12}},{"start":{"line":1641,"column":12},"end":{"line":1641,"column":12}}]},"119":{"line":1644,"type":"if","locations":[{"start":{"line":1644,"column":12},"end":{"line":1644,"column":12}},{"start":{"line":1644,"column":12},"end":{"line":1644,"column":12}}]},"120":{"line":1693,"type":"if","locations":[{"start":{"line":1693,"column":12},"end":{"line":1693,"column":12}},{"start":{"line":1693,"column":12},"end":{"line":1693,"column":12}}]},"121":{"line":1696,"type":"if","locations":[{"start":{"line":1696,"column":12},"end":{"line":1696,"column":12}},{"start":{"line":1696,"column":12},"end":{"line":1696,"column":12}}]}}};
-}
-__cov_mOjjRDPqFjKuBlA9zGRTZg = __cov_mOjjRDPqFjKuBlA9zGRTZg['/home/travis/build/terrestris/BasiGX/src/view/container/SLDStyler.js'];
-__cov_mOjjRDPqFjKuBlA9zGRTZg.s['1']++;Ext.define('BasiGX.view.container.SLDStyler',{extend:'Ext.container.Container',xtype:'basigx-container-sldstyler',requires:['Ext.ux.colorpick.Button','GeoExt.component.Map','BasiGX.view.panel.GraphicPool','BasiGX.view.panel.FontSymbolPool','BasiGX.util.Color','BasiGX.util.SLD','BasiGX.util.Object'],viewModel:{data:{pointStyleFieldSetTitle:'Point Style',pointStyleSymbolPanelTitle:'Symbol',pointStyleRadiusNumberFieldLabel:'Point Radius',pointStyleStrokeNumberFieldLabel:'Stroke Width',pointStyleStrokeColorFieldLabel:'Stroke Color',pointStyleFillColorFieldLabel:'Fill Color',pointStyleGraphicPanelTitle:'Graphic',pointStyleChooseImgBtnText:'Choose Image',pointStyleChooseFontBtnText:'Choose Font Symbol',pointStyleImgScaleSliderLabel:'Scale',pointStyleImgRotationSliderLabel:'Rotation',pointStyleImgOpacitySliderLabel:'Opacity',lineStyleFieldSetTitle:'LineString Style',lineStyleStrokeNumberFieldLabel:'Stroke Width',lineStyleStrokeColorFieldLabel:'Stroke Color',polygonStyleFieldSetTitle:'Polygon Style',polygonStyleSymbolPanelTitle:'Symbol',polygonStyleStrokeNumberFieldLabel:'Stroke Width',polygonStyleStrokeColorFieldLabel:'Stroke Color',polygonStyleFillColorFieldLabel:'Fill Color',polygonStyleGraphicPanelTitle:'Graphic',polygonStyleImgScaleSliderLabel:'Scale',polygonStyleImgRotationSliderLabel:'Rotation',polygonStyleImgOpacitySliderLabel:'Opacity',textStyleFieldSetTitle:'Text Style',attributeSelectLabel:'Attribute used for labels',textFontLabel:'Font',textFontSizeLabel:'Font size',fontStyleLabel:'Font style',fontWeightLabel:'Font weight',textFillColorFieldLabel:'Text color',textPerpendicularOffsetLabel:'Perpendicular Offset',textAnchorPointXLabel:'Anchor Point X',textAnchorPointYLabel:'Anchor Point Y',textDisplacementXLabel:'Displacement X',textDisplacementYLabel:'Displacement Y',textRotationLabel:'Rotation',textFollowLineLabel:'Follow Line',pointGrapicDeletedSuccessMsgText:'The icon has been deleted. '+'Please reassign a new one.',pointGrapicDeletedSuccessMsgTitle:'Deletion succesfull',graphicPoolWindowTitle:'Graphic Pool',fontSymbolPoolWindowTitle:'Font symbol pool',documentation:'<h2>SLD Styler</h2>\u2022 Verwenden Sie den '+'SLD Styler, um Ihre Zeichenobjekte nach Wunsch zu gestalten.'+'<br>\u2022 Neben Farben, Strichstärken und Schrifteigenschaften '+'können auch eigene Icons für die Symbolisierung verwendet '+'werden'}},padding:5,layout:'hbox',config:{backendUrls:{pictureList:null,pictureSrc:null,pictureUpload:null,graphicDelete:null,geoServerUrl:null,geoserverFontListUrl:null,geoserverInstalledFontListUrl:null,geoserverFontUrl:null,internalUrl:null},mode:'point',layer:null,sld:null,ruleName:null,rule:null,sldObj:null,useTextSymbolizer:false,attributeStore:Ext.create('Ext.data.Store',{fields:['name','value'],sorters:['name']}),mapCentered:false},initComponent:function(){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['1']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['2']++;var sld=this.getSld();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['3']++;if(!sld){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['1'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['4']++;Ext.log.warn('Component needs to be configured with a valid SLD');__cov_mOjjRDPqFjKuBlA9zGRTZg.s['5']++;return;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['1'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['6']++;this.callParent();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['7']++;this.setSldObj(BasiGX.util.SLD.toSldObject(sld));__cov_mOjjRDPqFjKuBlA9zGRTZg.s['8']++;var fs;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['9']++;if(this.getMode()==='point'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['2'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['10']++;fs=this.getPointFieldset();}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['2'][1]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['11']++;if(this.getMode()==='line'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['3'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['12']++;fs=this.getLineStringFieldset();}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['3'][1]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['13']++;if(this.getMode()==='polygon'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['4'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['14']++;fs=this.getPolygonFieldset();}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['4'][1]++;}}}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['15']++;var stylerAndMap={xtype:'container',layout:'vbox',items:[fs,this.createSLDPreviewMap()]};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['16']++;this.add(stylerAndMap);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['17']++;if(this.getUseTextSymbolizer()){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['5'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['18']++;this.add(this.getTextSymbolizerFieldset());}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['5'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['19']++;var usingExternalGraphic=false;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['20']++;var graphicOrMark=BasiGX.util.Object.getValue('externalGraphicOrMark',this.getSldObj());__cov_mOjjRDPqFjKuBlA9zGRTZg.s['21']++;if((__cov_mOjjRDPqFjKuBlA9zGRTZg.b['7'][0]++,graphicOrMark)&&(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['7'][1]++,graphicOrMark[0])&&((__cov_mOjjRDPqFjKuBlA9zGRTZg.b['7'][2]++,graphicOrMark[0].onlineResource)||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['7'][3]++,graphicOrMark[0].wellKnownName)&&(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['7'][4]++,graphicOrMark[0].wellKnownName.content[0].indexOf('ttf://')>-1))){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['6'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['22']++;usingExternalGraphic=true;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['6'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['23']++;if(usingExternalGraphic){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['8'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['24']++;var externalGrphicPanel=this.down('panel[name=graphic]');__cov_mOjjRDPqFjKuBlA9zGRTZg.s['25']++;this.down('tabpanel').setActiveItem(externalGrphicPanel);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['8'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['26']++;this.updateSLDPreview();},getPointFieldset:function(){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['2']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['27']++;var me=this;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['28']++;var sldObj=me.getSldObj();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['29']++;var getVal=BasiGX.util.Object.getValue;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['30']++;var rule=BasiGX.util.SLD.getRuleByName(me.getRuleName(),sldObj);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['31']++;var listenerConfig={change:me.updateSLDPreview,scope:me};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['32']++;if(!rule){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['9'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['33']++;var availableRules=BasiGX.util.SLD.rulesFromSldObject(sldObj);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['34']++;rule=availableRules[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['9'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['35']++;var strokeWidth=BasiGX.util.SLD.DEFAULT_STROKE_WIDTH;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['36']++;var strokeOpacity=BasiGX.util.SLD.DEFAULT_STROKE_OPACITY;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['37']++;var strokeColor=BasiGX.util.SLD.DEFAULT_STROKE_COLOR;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['38']++;var fillColor=BasiGX.util.SLD.DEFAULT_FILL_COLOR;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['39']++;var fillOpacity=BasiGX.util.SLD.DEFAULT_FILL_OPACITY;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['40']++;var radius=BasiGX.util.SLD.DEFAULT_POINT_RADIUS;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['41']++;var graphicSize=BasiGX.util.SLD.DEFAULT_GRAPHIC_SIZE;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['42']++;var graphicOpacity=BasiGX.util.SLD.DEFAULT_GRAPHIC_OPACITY*100;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['43']++;var graphicRotation=BasiGX.util.SLD.DEFAULT_GRAPHIC_ROTATION;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['44']++;var externalGraphicSrc=null;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['45']++;var fontAndUniCode=null;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['46']++;var alpha;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['47']++;var fill=getVal('fill',rule);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['48']++;var stroke=getVal('stroke',rule);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['49']++;var size=getVal('size',rule);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['50']++;var graphic=getVal('graphic',rule);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['51']++;if(fill){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['10'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['52']++;fillColor=BasiGX.util.SLD.fillFromObj(fill).fillColor;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['53']++;fillOpacity=BasiGX.util.SLD.fillFromObj(fill).fillOpacity;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['54']++;alpha=BasiGX.util.Color.makeHex(''+Math.round(parseFloat(fillOpacity)*255));__cov_mOjjRDPqFjKuBlA9zGRTZg.s['55']++;fillColor=fillColor+alpha;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['10'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['56']++;if(stroke){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['11'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['57']++;strokeWidth=BasiGX.util.SLD.strokeFromObj(stroke).strokeWidth;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['58']++;strokeOpacity=BasiGX.util.SLD.strokeFromObj(stroke).strokeOpacity;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['59']++;strokeColor=BasiGX.util.SLD.strokeFromObj(stroke).strokeColor;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['60']++;alpha=BasiGX.util.Color.makeHex(''+Math.round(parseFloat(strokeOpacity)*255));__cov_mOjjRDPqFjKuBlA9zGRTZg.s['61']++;strokeColor=strokeColor+alpha;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['11'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['62']++;if(size){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['12'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['63']++;radius=parseInt(size.content[0],10);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['12'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['64']++;if(graphic){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['13'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['65']++;if(getVal('size',graphic)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['14'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['66']++;graphicSize=getVal('size',graphic).content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['14'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['67']++;if(getVal('opacity',graphic)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['15'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['68']++;graphicOpacity=getVal('opacity',graphic).content[0]*100;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['15'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['69']++;if(getVal('rotation',graphic)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['16'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['70']++;graphicRotation=getVal('rotation',graphic).content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['16'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['71']++;if(getVal('href',graphic)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['17'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['72']++;externalGraphicSrc=getVal('href',graphic);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['17'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['73']++;if(getVal('wellKnownName',graphic)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['18'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['74']++;var content=getVal('wellKnownName',graphic).content[0];__cov_mOjjRDPqFjKuBlA9zGRTZg.s['75']++;if(content.indexOf('ttf://')>-1){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['19'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['76']++;fontAndUniCode=getVal('wellKnownName',graphic).content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['19'][1]++;}}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['18'][1]++;}}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['13'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['77']++;var fs={xtype:'fieldset',bind:{title:'{pointStyleFieldSetTitle}'},name:'pointstyle',layout:'hbox',items:[{xtype:'tabpanel',items:[{xtype:'panel',bind:{title:'{pointStyleSymbolPanelTitle}'},defaults:{margin:3,width:220},items:[{xtype:'numberfield',bind:{fieldLabel:'{pointStyleRadiusNumberFieldLabel}'},name:'radius',value:radius,minValue:1,maxValue:50,listeners:listenerConfig},{xtype:'numberfield',bind:{fieldLabel:'{pointStyleStrokeNumberFieldLabel}'},name:'stroke-width',value:strokeWidth,minValue:0,maxValue:50,listeners:listenerConfig},{xtype:'container',layout:'hbox',defaults:{width:100},items:[{xtype:'displayfield',width:100,bind:{value:'{pointStyleStrokeColorFieldLabel}'}},{xtype:'colorbutton',name:'stroke',format:'hex8',value:strokeColor,margin:'5 0 0 10',listeners:listenerConfig}]},{xtype:'container',layout:'hbox',defaults:{width:100},items:[{xtype:'displayfield',width:100,bind:{value:'{pointStyleFillColorFieldLabel}'}},{xtype:'colorbutton',name:'fill',format:'hex8',margin:'0 0 0 10',value:fillColor,listeners:listenerConfig}]}]},{xtype:'panel',bind:{title:'{pointStyleGraphicPanelTitle}'},name:'graphic',externalGraphicSrc:externalGraphicSrc,fontAndUniCode:fontAndUniCode,defaults:{margin:3,width:220},layout:'vbox',items:[{xtype:'button',bind:{text:'{pointStyleChooseImgBtnText}'},handler:me.onChooseGraphicClick,scope:me},{xtype:'button',bind:{text:'{pointStyleChooseFontBtnText}'},handler:me.onChooseFontClick,scope:me},{xtype:'slider',bind:{fieldLabel:'{pointStyleImgOpacitySliderLabel}'},name:'graphic-opacity',value:graphicOpacity,disabled:fontAndUniCode?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['20'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['20'][1]++,false),minValue:0,maxValue:100,increment:10,listeners:listenerConfig},{xtype:'slider',bind:{fieldLabel:'{pointStyleImgRotationSliderLabel}'},name:'graphic-rotation',value:graphicRotation,minValue:0,maxValue:360,listeners:listenerConfig},{xtype:'slider',bind:{fieldLabel:'{pointStyleImgScaleSliderLabel}'},name:'graphic-scale',value:graphicSize,increment:1,minValue:1,maxValue:100,listeners:listenerConfig},{xtype:'slider',bind:{fieldLabel:'{pointStyleStrokeNumberFieldLabel}'},name:'stroke-width',value:strokeWidth,disabled:externalGraphicSrc?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['21'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['21'][1]++,false),minValue:0,maxValue:50,listeners:listenerConfig},{xtype:'container',layout:'hbox',defaults:{width:100},items:[{xtype:'displayfield',disabled:externalGraphicSrc?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['22'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['22'][1]++,false),width:100,bind:{value:'{pointStyleStrokeColorFieldLabel}'}},{xtype:'colorbutton',disabled:externalGraphicSrc?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['23'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['23'][1]++,false),name:'stroke',format:'hex8',value:strokeColor,margin:'5 0 0 10',listeners:listenerConfig}]},{xtype:'container',layout:'hbox',disabled:externalGraphicSrc?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['24'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['24'][1]++,false),defaults:{width:100},items:[{xtype:'displayfield',disabled:externalGraphicSrc?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['25'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['25'][1]++,false),width:100,bind:{value:'{pointStyleFillColorFieldLabel}'}},{xtype:'colorbutton',disabled:externalGraphicSrc?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['26'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['26'][1]++,false),name:'fill',format:'hex8',margin:'0 0 0 10',value:fillColor,listeners:listenerConfig}]}]}]}]};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['78']++;return fs;},getLineStringFieldset:function(){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['3']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['79']++;var me=this;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['80']++;var sldObj=me.getSldObj();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['81']++;var getVal=BasiGX.util.Object.getValue;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['82']++;var rule=BasiGX.util.SLD.getRuleByName(me.getRuleName(),sldObj);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['83']++;var listenerConfig={change:me.updateSLDPreview,scope:me};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['84']++;if(!rule){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['27'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['85']++;var availableRules=BasiGX.util.SLD.rulesFromSldObject(sldObj);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['86']++;rule=availableRules[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['27'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['87']++;var strokeWidth=BasiGX.util.SLD.DEFAULT_STROKE_WIDTH;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['88']++;var strokeOpacity=BasiGX.util.SLD.DEFAULT_STROKE_OPACITY;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['89']++;var strokeColor=BasiGX.util.SLD.DEFAULT_STROKE_COLOR;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['90']++;var stroke=getVal('stroke',rule);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['91']++;if(stroke){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['28'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['92']++;strokeWidth=BasiGX.util.SLD.strokeFromObj(stroke).strokeWidth;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['93']++;strokeOpacity=BasiGX.util.SLD.strokeFromObj(stroke).strokeOpacity;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['94']++;strokeColor=BasiGX.util.SLD.strokeFromObj(stroke).strokeColor;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['95']++;var alpha=BasiGX.util.Color.makeHex(''+Math.round(parseFloat(strokeOpacity)*255));__cov_mOjjRDPqFjKuBlA9zGRTZg.s['96']++;strokeColor=strokeColor+alpha;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['28'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['97']++;var fs={xtype:'fieldset',bind:{title:'{lineStyleFieldSetTitle}'},name:'linestyle',layout:'hbox',items:[{xtype:'fieldset',layout:'vbox',width:220,defaults:{margin:3,width:180},items:[{xtype:'numberfield',bind:{fieldLabel:'{lineStyleStrokeNumberFieldLabel}'},value:strokeWidth,name:'stroke-width',minValue:0,maxValue:50,listeners:listenerConfig},{xtype:'container',layout:'hbox',defaults:{width:100},items:[{xtype:'displayfield',width:100,bind:{value:'{lineStyleStrokeColorFieldLabel}'}},{xtype:'colorbutton',format:'hex8',value:strokeColor,name:'stroke',margin:'5 0 0 10',listeners:listenerConfig}]}]}]};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['98']++;return fs;},getPolygonFieldset:function(){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['4']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['99']++;var me=this;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['100']++;var sldObj=me.getSldObj();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['101']++;var getVal=BasiGX.util.Object.getValue;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['102']++;var rule=BasiGX.util.SLD.getRuleByName(me.getRuleName(),sldObj);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['103']++;var listenerConfig={change:me.updateSLDPreview,scope:me};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['104']++;if(!rule){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['29'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['105']++;var availableRules=BasiGX.util.SLD.rulesFromSldObject(sldObj);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['106']++;rule=availableRules[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['29'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['107']++;var strokeWidth=BasiGX.util.SLD.DEFAULT_STROKE_WIDTH;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['108']++;var strokeOpacity=BasiGX.util.SLD.DEFAULT_STROKE_OPACITY;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['109']++;var strokeColor=BasiGX.util.SLD.DEFAULT_STROKE_COLOR;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['110']++;var fillColor=BasiGX.util.SLD.DEFAULT_FILL_COLOR;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['111']++;var fillOpacity=BasiGX.util.SLD.DEFAULT_FILL_OPACITY;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['112']++;var graphicSize=BasiGX.util.SLD.DEFAULT_GRAPHIC_SIZE;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['113']++;var graphicOpacity=BasiGX.util.SLD.DEFAULT_GRAPHIC_OPACITY*100;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['114']++;var graphicRotation=BasiGX.util.SLD.DEFAULT_GRAPHIC_ROTATION;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['115']++;var externalGraphicSrc=null;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['116']++;var fontAndUniCode=null;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['117']++;var alpha;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['118']++;var fill=getVal('fill',rule);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['119']++;var stroke=getVal('stroke',rule);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['120']++;var graphic=getVal('graphic',rule);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['121']++;if(fill){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['30'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['122']++;fillColor=BasiGX.util.SLD.fillFromObj(fill).fillColor;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['123']++;fillOpacity=BasiGX.util.SLD.fillFromObj(fill).fillOpacity;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['124']++;alpha=BasiGX.util.Color.makeHex(''+Math.round(parseFloat(fillOpacity)*255));__cov_mOjjRDPqFjKuBlA9zGRTZg.s['125']++;fillColor=fillColor+alpha;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['30'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['126']++;if(stroke){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['31'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['127']++;strokeWidth=BasiGX.util.SLD.strokeFromObj(stroke).strokeWidth;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['128']++;strokeOpacity=BasiGX.util.SLD.strokeFromObj(stroke).strokeOpacity;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['129']++;strokeColor=BasiGX.util.SLD.strokeFromObj(stroke).strokeColor;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['130']++;alpha=BasiGX.util.Color.makeHex(''+Math.round(parseFloat(strokeOpacity)*255));__cov_mOjjRDPqFjKuBlA9zGRTZg.s['131']++;strokeColor=strokeColor+alpha;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['31'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['132']++;if(graphic){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['32'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['133']++;if(getVal('size',graphic)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['33'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['134']++;graphicSize=getVal('size',graphic).content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['33'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['135']++;if(getVal('opacity',graphic)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['34'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['136']++;graphicOpacity=getVal('opacity',graphic).content[0]*100;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['34'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['137']++;if(getVal('rotation',graphic)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['35'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['138']++;graphicRotation=getVal('rotation',graphic).content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['35'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['139']++;if(getVal('href',graphic)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['36'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['140']++;externalGraphicSrc=getVal('href',graphic);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['36'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['141']++;if(getVal('wellKnownName',graphic)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['37'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['142']++;var content=getVal('wellKnownName',graphic).content[0];__cov_mOjjRDPqFjKuBlA9zGRTZg.s['143']++;if(content.indexOf('ttf://')>-1){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['38'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['144']++;fontAndUniCode=getVal('wellKnownName',graphic).content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['38'][1]++;}}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['37'][1]++;}}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['32'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['145']++;var fs={xtype:'fieldset',bind:{title:'{polygonStyleFieldSetTitle}'},name:'polygonstyle',layout:'hbox',items:[{xtype:'tabpanel',items:[{xtype:'panel',bind:{title:'{polygonStyleSymbolPanelTitle}'},layout:'vbox',width:220,defaults:{margin:3,width:210},items:[{xtype:'numberfield',bind:{fieldLabel:'{polygonStyleStrokeNumberFieldLabel}'},value:strokeWidth,name:'stroke-width',allowDecimals:true,decimalPrecision:1,decimalSeparator:'.',minValue:0,maxValue:50,listeners:listenerConfig},{xtype:'container',layout:'hbox',defaults:{width:100},items:[{xtype:'displayfield',width:100,bind:{value:'{polygonStyleStrokeColorFieldLabel}'}},{xtype:'colorbutton',format:'hex8',value:strokeColor,name:'stroke',margin:'5 0 0 10',listeners:listenerConfig}]},{xtype:'container',layout:'hbox',defaults:{width:100},items:[{xtype:'displayfield',width:100,bind:{value:'{polygonStyleFillColorFieldLabel}'}},{xtype:'colorbutton',format:'hex8',margin:'0 0 0 10',value:fillColor,name:'fill',listeners:listenerConfig}]}]},{xtype:'panel',bind:{title:'{polygonStyleGraphicPanelTitle}'},name:'graphic',layout:'vbox',externalGraphicSrc:externalGraphicSrc,fontAndUniCode:fontAndUniCode,defaults:{margin:3,width:210},items:[{xtype:'button',bind:{text:'{pointStyleChooseImgBtnText}'},handler:me.onChooseGraphicClick,scope:me},{xtype:'button',bind:{text:'{pointStyleChooseFontBtnText}'},handler:me.onChooseFontClick,scope:me},{xtype:'slider',bind:{fieldLabel:'{polygonStyleImgOpacitySliderLabel}'},name:'graphic-opacity',value:graphicOpacity,disabled:true,minValue:0,maxValue:100,increment:10,listeners:listenerConfig},{xtype:'slider',bind:{fieldLabel:'{polygonStyleImgRotationSliderLabel}'},name:'graphic-rotation',value:graphicRotation,disabled:externalGraphicSrc?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['39'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['39'][1]++,false),minValue:0,maxValue:360,listeners:listenerConfig},{xtype:'slider',bind:{fieldLabel:'{polygonStyleImgScaleSliderLabel}'},name:'graphic-scale',value:graphicSize,increment:1,minValue:1,maxValue:200,listeners:listenerConfig},{xtype:'slider',bind:{fieldLabel:'{polygonStyleStrokeNumberFieldLabel}'},name:'stroke-width',value:strokeWidth,disabled:externalGraphicSrc?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['40'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['40'][1]++,false),minValue:0,maxValue:10,listeners:listenerConfig},{xtype:'container',layout:'hbox',defaults:{width:100},items:[{xtype:'displayfield',disabled:externalGraphicSrc?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['41'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['41'][1]++,false),width:100,bind:{value:'{polygonStyleStrokeColorFieldLabel}'}},{xtype:'colorbutton',disabled:externalGraphicSrc?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['42'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['42'][1]++,false),name:'stroke',format:'hex8',value:strokeColor,margin:'5 0 0 10',listeners:listenerConfig}]},{xtype:'container',layout:'hbox',defaults:{width:100},items:[{xtype:'displayfield',disabled:externalGraphicSrc?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['43'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['43'][1]++,false),width:100,bind:{value:'{polygonStyleFillColorFieldLabel}'}},{xtype:'colorbutton',disabled:externalGraphicSrc?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['44'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['44'][1]++,false),name:'fill',format:'hex8',margin:'0 0 0 10',value:fillColor,listeners:listenerConfig}]}]}]}]};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['146']++;return fs;},getTextSymbolizerFieldset:function(){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['5']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['147']++;var me=this;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['148']++;var sldObj=me.getSldObj();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['149']++;var getVal=BasiGX.util.Object.getValue;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['150']++;var rule=BasiGX.util.SLD.getRuleByName(me.getRuleName(),sldObj);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['151']++;var listenerConfig={change:me.updateSLDPreview,scope:me};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['152']++;if(!rule){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['45'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['153']++;var availableRules=BasiGX.util.SLD.rulesFromSldObject(sldObj);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['154']++;rule=availableRules[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['45'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['155']++;var labelAttribute=BasiGX.util.SLD.DEFAULT_LABEL_ATTRIBUTE;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['156']++;var fontSize=BasiGX.util.SLD.DEFAULT_FONTSIZE;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['157']++;var fontFamily=BasiGX.util.SLD.DEFAULT_FONT_FAMILY;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['158']++;var fontWeight=BasiGX.util.SLD.DEFAULT_FONT_WEIGHT;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['159']++;var fontStyle=BasiGX.util.SLD.DEFAULT_FONT_STYLE;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['160']++;var fontFillColor=BasiGX.util.SLD.DEFAULT_FONT_FILLCOLOR;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['161']++;var perpendicularOffset=BasiGX.util.SLD.DEFAULT_LABEL_PERPENDICULAROFFSET;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['162']++;var labelAnchorPointX=BasiGX.util.SLD.DEFAULT_LABEL_ANCHORPOINTX;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['163']++;var labelAnchorPointY=BasiGX.util.SLD.DEFAULT_LABEL_ANCHORPOINTY;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['164']++;var labelDisplacementX=BasiGX.util.SLD.DEFAULT_LABEL_DISPLACEMENTX;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['165']++;var labelDisplacementY=BasiGX.util.SLD.DEFAULT_LABEL_DISPLACEMENTY;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['166']++;var labelRotation=BasiGX.util.SLD.DEFAULT_LABEL_ROTATION;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['167']++;var followLineLabel=BasiGX.util.SLD.DEFAULT_LABEL_FOLLOW_LINE;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['168']++;var textSymbolizer;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['169']++;Ext.each(rule.symbolizer,function(sym){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['6']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['170']++;if(sym.name.localPart==='TextSymbolizer'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['46'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['171']++;textSymbolizer=sym.value;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['46'][1]++;}});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['172']++;if(textSymbolizer){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['47'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['173']++;var font=getVal('font',textSymbolizer);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['174']++;labelAttribute=getVal('value',textSymbolizer.label)?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['48'][0]++,getVal('value',textSymbolizer.label).content[0]):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['48'][1]++,BasiGX.util.SLD.DEFAULT_LABEL_ATTRIBUTE);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['175']++;Ext.each(font.cssParameter,function(param){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['7']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['176']++;if(param.name==='font-family'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['49'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['177']++;fontFamily=param.content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['49'][1]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['178']++;if(param.name==='font-size'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['50'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['179']++;fontSize=param.content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['50'][1]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['180']++;if(param.name==='font-style'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['51'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['181']++;fontStyle=param.content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['51'][1]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['182']++;if(param.name==='font-weight'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['52'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['183']++;fontWeight=param.content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['52'][1]++;}}}}});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['184']++;var fill=getVal('fill',textSymbolizer);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['185']++;if(fill){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['53'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['186']++;fontFillColor=BasiGX.util.SLD.fillFromObj(fill).fillColor;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['187']++;var fillOpacity=BasiGX.util.SLD.fillFromObj(fill).fillOpacity;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['188']++;var alpha=BasiGX.util.Color.makeHex(''+Math.round(parseFloat(fillOpacity)*255));__cov_mOjjRDPqFjKuBlA9zGRTZg.s['189']++;fontFillColor=fontFillColor+alpha;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['53'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['190']++;var pointPlacement=getVal('pointPlacement',textSymbolizer);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['191']++;if(pointPlacement){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['54'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['192']++;if((__cov_mOjjRDPqFjKuBlA9zGRTZg.b['56'][0]++,pointPlacement.anchorPoint)&&(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['56'][1]++,pointPlacement.anchorPoint.anchorPointX)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['55'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['193']++;labelAnchorPointX=pointPlacement.anchorPoint.anchorPointX.content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['55'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['194']++;if((__cov_mOjjRDPqFjKuBlA9zGRTZg.b['58'][0]++,pointPlacement.anchorPoint)&&(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['58'][1]++,pointPlacement.anchorPoint.anchorPointY)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['57'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['195']++;labelAnchorPointY=pointPlacement.anchorPoint.anchorPointY.content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['57'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['196']++;if((__cov_mOjjRDPqFjKuBlA9zGRTZg.b['60'][0]++,pointPlacement.displacement)&&(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['60'][1]++,pointPlacement.displacement.displacementX)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['59'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['197']++;labelDisplacementX=pointPlacement.displacement.displacementX.content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['59'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['198']++;if((__cov_mOjjRDPqFjKuBlA9zGRTZg.b['62'][0]++,pointPlacement.displacement)&&(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['62'][1]++,pointPlacement.displacement.displacementY)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['61'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['199']++;labelDisplacementY=pointPlacement.displacement.displacementY.content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['61'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['200']++;if(pointPlacement.rotation){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['63'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['201']++;labelRotation=pointPlacement.rotation.content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['63'][1]++;}}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['54'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['202']++;var linePlacement=getVal('linePlacement',textSymbolizer);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['203']++;if((__cov_mOjjRDPqFjKuBlA9zGRTZg.b['65'][0]++,linePlacement)&&(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['65'][1]++,linePlacement.perpendicularOffset)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['64'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['204']++;perpendicularOffset=linePlacement.perpendicularOffset.content[0];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['64'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['205']++;var vendorOptions=getVal('vendorOption',textSymbolizer);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['206']++;if(vendorOptions){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['66'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['207']++;Ext.each(vendorOptions,function(option){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['8']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['208']++;if(option.name==='followLine'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['67'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['209']++;followLineLabel=option.value==='true'?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['68'][0]++,true):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['68'][1]++,false);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['67'][1]++;}});}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['66'][1]++;}}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['47'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['210']++;var fontStore=Ext.create('Ext.data.Store',{autoLoad:true,proxy:{type:'ajax',url:me.getBackendUrls().geoserverInstalledFontListUrl,reader:{type:'json',rootProperty:function(data){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['9']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['211']++;var fontCollection=[];__cov_mOjjRDPqFjKuBlA9zGRTZg.s['212']++;Ext.each(data.fonts,function(singleFont,idx){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['10']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['213']++;fontCollection[idx]={name:singleFont};});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['214']++;return fontCollection;}}},fields:['name'],sorters:['name']});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['215']++;var fontStyleStore=Ext.create('Ext.data.Store',{fields:['name'],sorters:['name'],data:[{name:'normal'},{name:'italic'},{name:'oblique'}]});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['216']++;var fontWeightStore=Ext.create('Ext.data.Store',{fields:['name'],sorters:['name'],data:[{name:'normal'},{name:'bold'}]});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['217']++;var fs={xtype:'fieldset',height:'100%',bind:{title:'{textStyleFieldSetTitle}'},name:'textsymbolizer',defaults:{width:400},items:[{xtype:'combo',name:'labelattribute',store:me.attributeStore,displayField:'name',queryMode:'local',bind:{fieldLabel:'{attributeSelectLabel}'},value:labelAttribute,listeners:listenerConfig},{xtype:'combo',name:'fontfamily',bind:{fieldLabel:'{textFontLabel}'},store:fontStore,value:fontFamily,queryMode:'local',displayField:'name',listeners:listenerConfig},{xtype:'combo',bind:{fieldLabel:'{fontStyleLabel}'},name:'fontstyle',store:fontStyleStore,value:fontStyle,queryMode:'local',displayField:'name',listeners:listenerConfig},{xtype:'combo',bind:{fieldLabel:'{fontWeightLabel}'},name:'fontweight',store:fontWeightStore,value:fontWeight,queryMode:'local',displayField:'name',listeners:listenerConfig},{xtype:'numberfield',bind:{fieldLabel:'{textFontSizeLabel}'},value:fontSize,name:'fontsize',minValue:1,maxValue:50,listeners:listenerConfig},{xtype:'container',layout:'hbox',defaults:{width:100},items:[{xtype:'displayfield',width:100,bind:{value:'{textFillColorFieldLabel}'}},{xtype:'colorbutton',name:'fill',format:'hex8',margin:'5 0 0 5',value:fontFillColor,listeners:listenerConfig}]}]};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['218']++;if(this.getMode()==='line'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['69'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['219']++;fs.items.push({xtype:'numberfield',bind:{fieldLabel:'{textPerpendicularOffsetLabel}'},value:perpendicularOffset,name:'perpendicularoffset',minValue:-500,maxValue:500,listeners:listenerConfig},{xtype:'checkbox',bind:{fieldLabel:'{textFollowLineLabel}'},name:'followlinelabel',value:followLineLabel,listeners:listenerConfig});}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['69'][1]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['220']++;fs.items.push({xtype:'numberfield',bind:{fieldLabel:'{textAnchorPointXLabel}'},value:labelAnchorPointX,name:'labelanchorpointx',type:'float',allowDecimals:true,decimalPrecision:1,decimalSeparator:'.',step:0.1,minValue:-500,maxValue:500,listeners:listenerConfig},{xtype:'numberfield',bind:{fieldLabel:'{textAnchorPointYLabel}'},value:labelAnchorPointY,name:'labelanchorpointy',allowDecimals:true,decimalPrecision:1,decimalSeparator:'.',step:0.1,minValue:-500,maxValue:500,listeners:listenerConfig},{xtype:'numberfield',bind:{fieldLabel:'{textDisplacementXLabel}'},value:labelDisplacementX,name:'labeldisplacementx',minValue:-500,maxValue:500,listeners:listenerConfig},{xtype:'numberfield',bind:{fieldLabel:'{textDisplacementYLabel}'},value:labelDisplacementY,name:'labeldisplacementy',minValue:-500,maxValue:500,listeners:listenerConfig},{xtype:'numberfield',bind:{fieldLabel:'{textRotationLabel}'},value:labelRotation,name:'labelrotation',minValue:0,maxValue:359,listeners:listenerConfig});}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['221']++;return fs;},createSLDPreviewMap:function(){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['11']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['222']++;var layer=new ol.layer.Tile({source:new ol.source.TileWMS({url:this.getBackendUrls().geoServerUrl,params:{'LAYERS':this.getLayer(),'TILED':true},tileLoadFunction:function(image,url){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['12']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['223']++;var img=image.getImage();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['224']++;if(typeof Blob==='function'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['70'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['225']++;var baseUrl=url.split('?')[0];__cov_mOjjRDPqFjKuBlA9zGRTZg.s['226']++;var params=url.split('?')[1];__cov_mOjjRDPqFjKuBlA9zGRTZg.s['227']++;params=params.split('&');__cov_mOjjRDPqFjKuBlA9zGRTZg.s['228']++;var paramObj={};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['229']++;Ext.each(params,function(param){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['13']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['230']++;var split=param.split('=');__cov_mOjjRDPqFjKuBlA9zGRTZg.s['231']++;var key=decodeURIComponent(split[0]);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['232']++;var value=decodeURIComponent(split[1]);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['233']++;paramObj[key]=value;});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['234']++;Ext.Ajax.request({binary:true,url:baseUrl,method:'POST',params:paramObj,defaultHeaders:BasiGX.util.CSRF.getHeader(),scope:this,success:function(response){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['14']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['235']++;if(response.responseBytes){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['71'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['236']++;var blob=new Blob([response.responseBytes],{type:'image/png'});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['237']++;var blobUrl=window.URL.createObjectURL(blob);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['238']++;img.src=blobUrl;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['71'][1]++;}}});}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['70'][1]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['239']++;img.src=url;}}})});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['240']++;var panel={xtype:'gx_component_map',layers:[layer],map:new ol.Map({layers:[layer],controls:[new ol.control.Zoom()],view:new ol.View({center:[0,0],zoom:1})}),name:'sldpreview-'+this.getMode(),width:'100%',minHeight:310};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['241']++;return panel;},getSingleFeatureForPreview:function(){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['15']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['242']++;var me=this;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['243']++;var geoServerUrl=me.getBackendUrls().geoServerUrl;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['244']++;Ext.Ajax.request({url:geoServerUrl,method:'GET',params:{service:'WFS',request:'GetFeature',typeName:me.getLayer(),version:'1.0.0',maxFeatures:1,outputFormat:'application/json'},defaultHeaders:BasiGX.util.CSRF.getHeader(),scope:this,success:function(response){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['16']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['245']++;try{__cov_mOjjRDPqFjKuBlA9zGRTZg.s['246']++;var json=Ext.decode(response.responseText);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['247']++;if((__cov_mOjjRDPqFjKuBlA9zGRTZg.b['73'][0]++,json.features)&&(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['73'][1]++,json.features.length>0)&&(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['73'][2]++,json.crs)&&(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['73'][3]++,json.crs.properties)&&(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['73'][4]++,json.crs.properties.name)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['72'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['248']++;var feature=json.features[0];__cov_mOjjRDPqFjKuBlA9zGRTZg.s['249']++;var reader=new ol.format.GeoJSON();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['250']++;var olFeature=reader.readFeature(feature);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['251']++;me.attributeStore.removeAll();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['252']++;Ext.iterate(feature.properties,function(k,v){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['17']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['253']++;me.attributeStore.add({'name':k,'value':v});});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['254']++;var extent=olFeature.getGeometry().getExtent();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['255']++;var srsCode=json.crs.properties.name.split('EPSG::')[1];__cov_mOjjRDPqFjKuBlA9zGRTZg.s['256']++;var srs='EPSG:'+srsCode;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['257']++;if((__cov_mOjjRDPqFjKuBlA9zGRTZg.b['75'][0]++,extent)&&(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['75'][1]++,srsCode)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['74'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['258']++;me.getPreviewForSingleFeature(extent,srs);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['74'][1]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['259']++;Ext.log.error('Could not retrieve a feature '+'via WFS for preview');}}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['72'][1]++;}}catch(e){__cov_mOjjRDPqFjKuBlA9zGRTZg.s['260']++;Ext.log.error('Could not retrieve a feature '+'via WFS for preview');}},failure:function(){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['18']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['261']++;Ext.log.error('Could not retrieve a feature '+'via WFS for preview');}});},getPreviewForSingleFeature:function(extent,srs){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['19']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['262']++;var selector='gx_component_map[name=sldpreview-'+this.getMode()+']';__cov_mOjjRDPqFjKuBlA9zGRTZg.s['263']++;var mapPanel=Ext.ComponentQuery.query(selector)[0];__cov_mOjjRDPqFjKuBlA9zGRTZg.s['264']++;var map=mapPanel.map;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['265']++;var view=new ol.View({projection:srs});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['266']++;view.fit(extent);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['267']++;map.setView(view);},updateSLDPreview:function(){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['20']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['268']++;var me=this;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['269']++;var selector='gx_component_map[name=sldpreview-'+me.getMode()+']';__cov_mOjjRDPqFjKuBlA9zGRTZg.s['270']++;var mapPanel=Ext.ComponentQuery.query(selector)[0];__cov_mOjjRDPqFjKuBlA9zGRTZg.s['271']++;if(mapPanel){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['76'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['272']++;var map=mapPanel.map;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['273']++;var layer=map.getLayers().getArray()[0];__cov_mOjjRDPqFjKuBlA9zGRTZg.s['274']++;if(layer){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['77'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['275']++;var sld=me.getSldFromFormValues();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['276']++;var ruleName=me.getRuleName();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['277']++;layer.getSource().updateParams({RULE:ruleName,SLD_BODY:sld});}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['77'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['278']++;if(!me.mapCentered){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['78'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['279']++;me.getSingleFeatureForPreview();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['280']++;me.mapCentered=true;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['78'][1]++;}}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['76'][1]++;}},getSldFromFormValues:function(){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['21']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['281']++;var me=this;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['282']++;var selector='fieldset[name='+this.getMode()+'style]';__cov_mOjjRDPqFjKuBlA9zGRTZg.s['283']++;var fs=Ext.ComponentQuery.query(selector)[0];__cov_mOjjRDPqFjKuBlA9zGRTZg.s['284']++;var sldObj=this.getSldObj();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['285']++;var value;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['286']++;if((__cov_mOjjRDPqFjKuBlA9zGRTZg.b['80'][0]++,!fs)||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['80'][1]++,!sldObj)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['79'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['287']++;return'';}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['79'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['288']++;var radiusFs=fs.down('[name=radius]');__cov_mOjjRDPqFjKuBlA9zGRTZg.s['289']++;var graphicTab=fs.down('[name=graphic]');__cov_mOjjRDPqFjKuBlA9zGRTZg.s['290']++;var graphicTabActive=false;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['291']++;var textFs=fs.up('basigx-container-sldstyler').down('fieldset[name=textsymbolizer]');__cov_mOjjRDPqFjKuBlA9zGRTZg.s['292']++;if(graphicTab){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['81'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['293']++;var activeTab=graphicTab.up('tabpanel').getActiveTab();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['294']++;if(activeTab===graphicTab){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['82'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['295']++;graphicTabActive=true;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['82'][1]++;}}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['81'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['296']++;var fillFs=graphicTabActive?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['83'][0]++,graphicTab.down('[name=fill]')):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['83'][1]++,fs.down('[name=fill]'));__cov_mOjjRDPqFjKuBlA9zGRTZg.s['297']++;var strokeFs=graphicTabActive?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['84'][0]++,graphicTab.down('[name=stroke]')):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['84'][1]++,fs.down('[name=stroke]'));__cov_mOjjRDPqFjKuBlA9zGRTZg.s['298']++;var strokeWidthFs=graphicTabActive?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['85'][0]++,graphicTab.down('[name=stroke-width]')):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['85'][1]++,fs.down('[name=stroke-width]'));__cov_mOjjRDPqFjKuBlA9zGRTZg.s['299']++;var symbolizerObj={};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['300']++;if(fillFs){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['86'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['301']++;symbolizerObj.fillColor='#'+fillFs.getValue().substring(0,6);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['302']++;symbolizerObj.fillOpacity=BasiGX.util.Color.rgbaAsArray(BasiGX.util.Color.hex8ToRgba(fillFs.getValue()))[4];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['86'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['303']++;if(strokeFs){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['87'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['304']++;symbolizerObj.strokeColor='#'+strokeFs.getValue().substring(0,6);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['305']++;symbolizerObj.strokeOpacity=BasiGX.util.Color.rgbaAsArray(BasiGX.util.Color.hex8ToRgba(strokeFs.getValue()))[4];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['87'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['306']++;if(strokeWidthFs){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['88'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['307']++;value=strokeWidthFs.getValue();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['308']++;if(Ext.isNumber(value)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['89'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['309']++;symbolizerObj.strokeWidth=value.toString();}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['89'][1]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['310']++;symbolizerObj.strokeWidth=BasiGX.util.SLD.DEFAULT_STROKE_WIDTH.toString();}}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['88'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['311']++;if((__cov_mOjjRDPqFjKuBlA9zGRTZg.b['91'][0]++,!graphicTabActive)&&(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['91'][1]++,radiusFs)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['90'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['312']++;value=radiusFs.getValue();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['313']++;if(Ext.isNumber(value)){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['92'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['314']++;symbolizerObj.radius=value.toString();}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['92'][1]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['315']++;symbolizerObj.radius=BasiGX.util.SLD.DEFAULT_POINT_RADIUS.toString();}}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['90'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['316']++;if(graphicTabActive){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['93'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['317']++;var scale=graphicTab.down('[name=graphic-scale]').getValue();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['318']++;var opacity=graphicTab.down('[name=graphic-opacity]').getValue()/100;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['319']++;var rotation=graphicTab.down('[name=graphic-rotation]').getValue();__cov_mOjjRDPqFjKuBlA9zGRTZg.s['320']++;if(graphicTab.externalGraphicSrc){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['94'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['321']++;var src=graphicTab.externalGraphicSrc;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['322']++;var internalUrl=this.config.backendUrls.internalUrl;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['323']++;var regex=/https?\:\/\/[a-zA-Z\-_0-9.]+\//g;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['324']++;if(this.config.backendUrls.internalUrl){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['95'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['325']++;src=src.replace(regex,internalUrl);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['95'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['326']++;symbolizerObj.externalGraphicSrc=src;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['94'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['327']++;if(graphicTab.fontAndUniCode){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['96'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['328']++;symbolizerObj.fontAndUniCode=graphicTab.fontAndUniCode;}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['96'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['329']++;symbolizerObj.graphicSize=scale?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['97'][0]++,scale.toString()):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['97'][1]++,BasiGX.util.SLD.DEFAULT_GRAPHIC_SIZE.toString());__cov_mOjjRDPqFjKuBlA9zGRTZg.s['330']++;symbolizerObj.graphicOpacity=opacity?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['98'][0]++,opacity.toString()):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['98'][1]++,BasiGX.util.SLD.DEFAULT_GRAPHIC_OPACITY.toString());__cov_mOjjRDPqFjKuBlA9zGRTZg.s['331']++;symbolizerObj.graphicRotation=rotation?(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['99'][0]++,rotation.toString()):(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['99'][1]++,BasiGX.util.SLD.DEFAULT_GRAPHIC_ROTATION.toString());}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['93'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['332']++;if(this.getMode()==='point'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['100'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['333']++;sldObj=BasiGX.util.SLD.setPointSymbolizerInRule(symbolizerObj,me.getRuleName(),sldObj);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['100'][1]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['334']++;if(this.getMode()==='line'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['101'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['335']++;sldObj=BasiGX.util.SLD.setLineSymbolizerInRule(symbolizerObj,me.getRuleName(),sldObj);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['101'][1]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['336']++;if(this.getMode()==='polygon'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['102'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['337']++;sldObj=BasiGX.util.SLD.setPolygonSymbolizerInRule(symbolizerObj,me.getRuleName(),sldObj);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['102'][1]++;}}}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['338']++;if(textFs){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['103'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['339']++;symbolizerObj.labelAttribute=(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['104'][0]++,textFs.down('combo[name=labelattribute]').getValue())||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['104'][1]++,BasiGX.util.SLD.DEFAULT_LABEL_ATTRIBUTE);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['340']++;symbolizerObj.fontSize=(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['105'][0]++,textFs.down('numberfield[name=fontsize]').getValue().toString())||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['105'][1]++,BasiGX.util.SLD.DEFAULT_FONTSIZE);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['341']++;symbolizerObj.fontFamily=(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['106'][0]++,textFs.down('combo[name=fontfamily]').getValue())||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['106'][1]++,BasiGX.util.SLD.DEFAULT_FONT_FAMILY);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['342']++;symbolizerObj.fontWeight=(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['107'][0]++,textFs.down('combo[name=fontweight]').getValue())||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['107'][1]++,BasiGX.util.SLD.DEFAULT_FONT_WEIGHT);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['343']++;symbolizerObj.fontStyle=(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['108'][0]++,textFs.down('combo[name=fontstyle]').getValue())||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['108'][1]++,BasiGX.util.SLD.DEFAULT_FONT_STYLE);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['344']++;symbolizerObj.fontFillColor=BasiGX.util.SLD.DEFAULT_FONT_FILLCOLOR;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['345']++;symbolizerObj.fontFillOpacity=0;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['346']++;var textFillFs=textFs.down('colorbutton[name=fill]');__cov_mOjjRDPqFjKuBlA9zGRTZg.s['347']++;if(textFillFs){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['109'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['348']++;symbolizerObj.fontFillColor='#'+textFillFs.getValue().substring(0,6);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['349']++;symbolizerObj.fontFillOpacity=BasiGX.util.Color.rgbaAsArray(BasiGX.util.Color.hex8ToRgba(textFillFs.getValue()))[4];}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['109'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['350']++;if(this.getMode()==='line'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['110'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['351']++;symbolizerObj.perpendicularOffset=(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['111'][0]++,textFs.down('numberfield[name=perpendicularoffset]').getValue().toString())||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['111'][1]++,BasiGX.util.SLD.DEFAULT_LABEL_PERPENDICULAROFFSET);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['352']++;symbolizerObj.labelFollowLine=(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['112'][0]++,textFs.down('checkbox[name=followlinelabel]').getValue().toString())||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['112'][1]++,BasiGX.util.SLD.DEFAULT_LABEL_FOLLOW_LINE);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['110'][1]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['353']++;symbolizerObj.labelAnchorPointX=(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['113'][0]++,textFs.down('numberfield[name=labelanchorpointx]').getValue().toString())||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['113'][1]++,BasiGX.util.SLD.DEFAULT_LABEL_ANCHORPOINTX);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['354']++;symbolizerObj.labelAnchorPointY=(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['114'][0]++,textFs.down('numberfield[name=labelanchorpointy]').getValue().toString())||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['114'][1]++,BasiGX.util.SLD.DEFAULT_LABEL_ANCHORPOINTY);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['355']++;symbolizerObj.labelDisplacementX=(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['115'][0]++,textFs.down('numberfield[name=labeldisplacementx]').getValue().toString())||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['115'][1]++,BasiGX.util.SLD.DEFAULT_LABEL_DISPLACEMENTX);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['356']++;symbolizerObj.labelDisplacementY=(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['116'][0]++,textFs.down('numberfield[name=labeldisplacementy]').getValue().toString())||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['116'][1]++,BasiGX.util.SLD.DEFAULT_LABEL_DISPLACEMENTY);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['357']++;symbolizerObj.labelRotation=(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['117'][0]++,textFs.down('numberfield[name=labelrotation]').getValue().toString())||(__cov_mOjjRDPqFjKuBlA9zGRTZg.b['117'][1]++,BasiGX.util.SLD.DEFAULT_LABEL_ROTATION);}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['358']++;sldObj=BasiGX.util.SLD.setTextSymbolizerInRule(symbolizerObj,me.getRuleName(),sldObj);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['103'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['359']++;var sld=BasiGX.util.SLD.toSldString(sldObj);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['360']++;me.setSld(sld);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['361']++;me.setRule(BasiGX.util.SLD.getRuleByName(me.getRuleName(),sldObj));__cov_mOjjRDPqFjKuBlA9zGRTZg.s['362']++;me.setSldObj(sldObj);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['363']++;return sld;},onChooseFontClick:function(){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['22']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['364']++;var me=this;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['365']++;var callbackFn=function(fullQualifiedGlyphName){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['23']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['366']++;var graphicFs=me.down('[name=graphic]');__cov_mOjjRDPqFjKuBlA9zGRTZg.s['367']++;graphicFs.fontAndUniCode=fullQualifiedGlyphName;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['368']++;graphicFs.externalGraphicSrc=null;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['369']++;if(me.getMode()==='point'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['118'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['370']++;graphicFs.down('[name=graphic-opacity]').setDisabled(true);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['118'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['371']++;if(me.getMode()==='polygon'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['119'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['372']++;graphicFs.down('[name=graphic-rotation]').setDisabled(false);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['119'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['373']++;graphicFs.down('[name=fill]').setDisabled(false);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['374']++;graphicFs.down('[name=stroke]').setDisabled(false);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['375']++;graphicFs.down('[name=stroke-width]').setDisabled(false);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['376']++;graphicFs.down('[name=stroke-width]').setValue(1);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['377']++;me.updateSLDPreview();};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['378']++;var selector='window[title='+me.getViewModel().get('fontSymbolPoolWindowTitle')+']';__cov_mOjjRDPqFjKuBlA9zGRTZg.s['379']++;var wins=Ext.ComponentQuery.query(selector);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['380']++;Ext.each(wins,function(win){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['24']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['381']++;win.destroy();});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['382']++;var fontSymbolPool=Ext.create('BasiGX.view.panel.FontSymbolPool',{geoserverFontListUrl:me.getBackendUrls().geoserverFontListUrl,geoserverFontUrl:me.getBackendUrls().geoserverFontUrl,useCsrfToken:true,onGlyphSelected:callbackFn});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['383']++;var fontSymbolPoolWin=Ext.create('Ext.window.Window',{title:me.getViewModel().get('fontSymbolPoolWindowTitle'),constrain:true,items:[fontSymbolPool]});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['384']++;fontSymbolPoolWin.showAt(5,5);},onChooseGraphicClick:function(){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['25']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['385']++;var me=this;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['386']++;var okClickCallbackFn=function(pictureRec){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['26']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['387']++;var pictureUrl=BasiGX.util.Url.getWebProjectBaseUrl()+me.getBackendUrls().pictureSrc.url+pictureRec.get('id');__cov_mOjjRDPqFjKuBlA9zGRTZg.s['388']++;var graphicFs=me.down('[name=graphic]');__cov_mOjjRDPqFjKuBlA9zGRTZg.s['389']++;graphicFs.externalGraphicSrc=pictureUrl;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['390']++;graphicFs.fontAndUniCode=null;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['391']++;if(me.getMode()==='point'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['120'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['392']++;graphicFs.down('[name=graphic-opacity]').setDisabled(false);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['120'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['393']++;if(me.getMode()==='polygon'){__cov_mOjjRDPqFjKuBlA9zGRTZg.b['121'][0]++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['394']++;graphicFs.down('[name=graphic-rotation]').setDisabled(true);}else{__cov_mOjjRDPqFjKuBlA9zGRTZg.b['121'][1]++;}__cov_mOjjRDPqFjKuBlA9zGRTZg.s['395']++;graphicFs.down('[name=fill]').setDisabled(true);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['396']++;graphicFs.down('[name=stroke]').setDisabled(true);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['397']++;graphicFs.down('[name=stroke-width]').setDisabled(true);__cov_mOjjRDPqFjKuBlA9zGRTZg.s['398']++;me.updateSLDPreview();};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['399']++;var deleteClickCallbackFn=function(){__cov_mOjjRDPqFjKuBlA9zGRTZg.f['27']++;__cov_mOjjRDPqFjKuBlA9zGRTZg.s['400']++;Ext.toast(me.getViewModel().get('pointGrapicDeletedSuccessMsgText'),me.getViewModel().get('pointGrapicDeletedSuccessMsgTitle'),'t');};__cov_mOjjRDPqFjKuBlA9zGRTZg.s['401']++;var graphicPool=Ext.create('BasiGX.view.panel.GraphicPool',{backendUrls:me.getBackendUrls(),okClickCallbackFn:okClickCallbackFn,deleteClickCallbackFn:deleteClickCallbackFn,useCsrfToken:true});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['402']++;var graphicPoolWin=Ext.create('Ext.window.Window',{title:me.getViewModel().get('graphicPoolWindowTitle'),constrain:true,items:[graphicPool]});__cov_mOjjRDPqFjKuBlA9zGRTZg.s['403']++;graphicPoolWin.show();}});
+    requires: [
+        'Ext.ux.colorpick.Button',
+        'GeoExt.component.Map',
+        'BasiGX.view.panel.GraphicPool',
+        'BasiGX.view.panel.FontSymbolPool',
+        'BasiGX.util.Color',
+        'BasiGX.util.SLD',
+        'BasiGX.util.Object'
+    ],
+
+    viewModel: {
+        data: {
+            pointStyleFieldSetTitle: 'Point Style',
+            pointStyleSymbolPanelTitle: 'Symbol',
+            pointStyleRadiusNumberFieldLabel: 'Point Radius',
+            pointStyleStrokeNumberFieldLabel: 'Stroke Width',
+            pointStyleStrokeColorFieldLabel: 'Stroke Color',
+            pointStyleFillColorFieldLabel: 'Fill Color',
+            pointStyleGraphicPanelTitle: 'Graphic',
+            pointStyleChooseImgBtnText: 'Choose Image',
+            pointStyleChooseFontBtnText: 'Choose Font Symbol',
+            pointStyleImgScaleSliderLabel: 'Scale',
+            pointStyleImgRotationSliderLabel: 'Rotation',
+            pointStyleImgOpacitySliderLabel: 'Opacity',
+            lineStyleFieldSetTitle: 'LineString Style',
+            lineStyleStrokeNumberFieldLabel: 'Stroke Width',
+            lineStyleStrokeColorFieldLabel: 'Stroke Color',
+            polygonStyleFieldSetTitle: 'Polygon Style',
+            polygonStyleSymbolPanelTitle: 'Symbol',
+            polygonStyleStrokeNumberFieldLabel: 'Stroke Width',
+            polygonStyleStrokeColorFieldLabel: 'Stroke Color',
+            polygonStyleFillColorFieldLabel: 'Fill Color',
+            polygonStyleGraphicPanelTitle: 'Graphic',
+            polygonStyleImgScaleSliderLabel: 'Scale',
+            polygonStyleImgRotationSliderLabel: 'Rotation',
+            polygonStyleImgOpacitySliderLabel: 'Opacity',
+            textStyleFieldSetTitle: 'Text Style',
+            attributeSelectLabel: 'Attribute used for labels',
+            textFontLabel: 'Font',
+            textFontSizeLabel: 'Font size',
+            fontStyleLabel: 'Font style',
+            fontWeightLabel: 'Font weight',
+            textFillColorFieldLabel: 'Text color',
+            textPerpendicularOffsetLabel: 'Perpendicular Offset',
+            textAnchorPointXLabel: 'Anchor Point X',
+            textAnchorPointYLabel: 'Anchor Point Y',
+            textDisplacementXLabel: 'Displacement X',
+            textDisplacementYLabel: 'Displacement Y',
+            textRotationLabel: 'Rotation',
+            textFollowLineLabel: 'Follow Line',
+            pointGrapicDeletedSuccessMsgText: 'The icon has been deleted. ' +
+                'Please reassign a new one.',
+            pointGrapicDeletedSuccessMsgTitle: 'Deletion succesfull',
+            graphicPoolWindowTitle: 'Graphic Pool',
+            fontSymbolPoolWindowTitle: 'Font symbol pool',
+            documentation: '<h2>SLD Styler</h2>• Verwenden Sie den ' +
+                'SLD Styler, um Ihre Zeichenobjekte nach Wunsch zu gestalten.' +
+                '<br>• Neben Farben, Strichstärken und Schrifteigenschaften ' +
+                'können auch eigene Icons für die Symbolisierung verwendet ' +
+                'werden'
+        }
+    },
+
+    /**
+     *
+     */
+    padding: 5,
+
+    /**
+     *
+     */
+    layout: 'hbox',
+
+    /**
+     *
+     */
+    config: {
+        /**
+         *
+         */
+        backendUrls: {
+            /**
+             * The URL to retrieve all images with resource link as JSON
+             */
+            pictureList: null,
+            /**
+             * The URL to retrieve an image as thumbnail
+             */
+            pictureSrc: null,
+            /**
+             * The URL to upload an image
+             */
+            pictureUpload: null,
+            /**
+             * The URL to delete an image
+             */
+            graphicDelete: null,
+            /**
+             * The URL of the GeoServer to use
+             */
+            geoServerUrl: null,
+            /**
+             * The REST URL of the GeoServer to retrieve all available fonts.
+             * E.g. http://localhost:8080/geoserver/rest/resource/fonts
+             * would list all fonts from the GEOSERVER_DATA_DIR/fonts directory
+             */
+            geoserverFontListUrl: null,
+
+            /**
+             * The REST URL of the GeoServer to retrieve all installed fonts.
+             * E.g. http://localhost:8080/geoserver/rest/fonts
+             * would list all fonts available in GeoServer
+             */
+            geoserverInstalledFontListUrl: null,
+
+            /**
+             * The REST URL of the GeoServer to retrieve a specific font. E.g.
+             * http://localhost:8080/geoserver/rest/resource/fonts/Arial.ttf
+             * would retrieve the specific font from the
+             * GEOSERVER_DATA_DIR/fonts directory
+             */
+            geoserverFontUrl: null,
+
+            /**
+             * If set, this URL is used when creating the SLD instead of the
+             * BasiGX project base url from window.location.
+             * @type {String}
+             */
+            internalUrl: null
+        },
+        /**
+         * The mode indicates if we are styling a `point`, `line` or `polygon`
+         */
+        mode: 'point',
+
+        /**
+         * The full qualified layerName of the layer in GeoServer
+         */
+        layer: null,
+
+        /**
+         * The SLD this component shall use
+         */
+        sld: null,
+
+        /**
+         * The name of the rule of the SLD we want to handle
+         */
+        ruleName: null,
+
+        /**
+         * The rule Object. Gets set on update of style
+         */
+        rule: null,
+
+        /**
+         * The SLD javascript Object
+         */
+        sldObj: null,
+
+        /**
+         * Flag to indicate if the user shall be able to configure labels
+         */
+        useTextSymbolizer: false,
+
+        /**
+         * Store containing the attributes of the current layer in order
+         * to let the user select a specific attribute for TextSymbolizers
+         */
+        attributeStore: Ext.create('Ext.data.Store', {
+            fields: ['name', 'value'],
+            sorters: ['name']
+        }),
+
+        /**
+         * Flag to indicate if the preview map has already been centered
+         * to a feature of the layer
+         */
+        mapCentered: false
+    },
+
+    /**
+     * @param {Object} config The configuration object for the SLD styler.
+     */
+    initComponent: function() {
+        var sld = this.getSld();
+        if (!sld) {
+            Ext.log.warn('Component needs to be configured with a valid SLD');
+            return;
+        }
+        this.callParent();
+        this.setSldObj(BasiGX.util.SLD.toSldObject(sld));
+        var fs;
+        if (this.getMode() === 'point') {
+            fs = this.getPointFieldset();
+        } else if (this.getMode() === 'line') {
+            fs = this.getLineStringFieldset();
+        } else if (this.getMode() === 'polygon') {
+            fs = this.getPolygonFieldset();
+        }
+        var stylerAndMap = {
+            xtype: 'container',
+            layout: 'vbox',
+            items: [
+                fs,
+                this.createSLDPreviewMap()
+            ]
+        };
+        this.add(stylerAndMap);
+
+        if (this.getUseTextSymbolizer()) {
+            this.add(this.getTextSymbolizerFieldset());
+        }
+
+        // activate the graphic tab if necessary
+        var usingExternalGraphic = false;
+        var graphicOrMark = BasiGX.util.Object.getValue(
+            'externalGraphicOrMark', this.getSldObj());
+        if (graphicOrMark && graphicOrMark[0] &&
+           (graphicOrMark[0].onlineResource ||
+           (graphicOrMark[0].wellKnownName &&
+            graphicOrMark[0].wellKnownName.content[0]
+                .indexOf('ttf://') > -1))) {
+            usingExternalGraphic = true;
+        }
+        if (usingExternalGraphic) {
+            var externalGrphicPanel = this.down('panel[name=graphic]');
+            this.down('tabpanel').setActiveItem(externalGrphicPanel);
+        }
+        this.updateSLDPreview();
+    },
+
+    /**
+     * Returns a configuration object for an ExtJS fieldset for styling points
+     * which can e.g. be used inside the `items` config.
+     *
+     * @return {Object} A configuration for an ExtJS fieldset for styling
+     *     points.
+     */
+    getPointFieldset: function() {
+        var me = this;
+        var sldObj = me.getSldObj();
+        var getVal = BasiGX.util.Object.getValue;
+        var rule = BasiGX.util.SLD.getRuleByName(me.getRuleName(), sldObj);
+        var listenerConfig = {
+            change: me.updateSLDPreview,
+            scope: me
+        };
+
+        if (!rule) {
+            // take the first available rule to show an initial render
+            // for e.g. new created rules that are not persisted yet
+            var availableRules = BasiGX.util.SLD.rulesFromSldObject(sldObj);
+            rule = availableRules[0];
+        }
+
+        var strokeWidth = BasiGX.util.SLD.DEFAULT_STROKE_WIDTH;
+        var strokeOpacity = BasiGX.util.SLD.DEFAULT_STROKE_OPACITY;
+        var strokeColor = BasiGX.util.SLD.DEFAULT_STROKE_COLOR;
+        var fillColor = BasiGX.util.SLD.DEFAULT_FILL_COLOR;
+        var fillOpacity = BasiGX.util.SLD.DEFAULT_FILL_OPACITY;
+        var radius = BasiGX.util.SLD.DEFAULT_POINT_RADIUS;
+        var graphicSize = BasiGX.util.SLD.DEFAULT_GRAPHIC_SIZE;
+        var graphicOpacity = BasiGX.util.SLD.DEFAULT_GRAPHIC_OPACITY * 100;
+        var graphicRotation = BasiGX.util.SLD.DEFAULT_GRAPHIC_ROTATION;
+        var externalGraphicSrc = null;
+        var fontAndUniCode = null;
+        var alpha;
+
+        var fill = getVal('fill', rule);
+        var stroke = getVal('stroke', rule);
+        var size = getVal('size', rule);
+        var graphic = getVal('graphic', rule);
+
+        if (fill) {
+            fillColor = BasiGX.util.SLD.fillFromObj(fill).fillColor;
+            fillOpacity = BasiGX.util.SLD.fillFromObj(fill).fillOpacity;
+            alpha = BasiGX.util.Color.makeHex('' +
+                Math.round(parseFloat(fillOpacity) * 255));
+            fillColor = fillColor + alpha;
+        }
+
+        if (stroke) {
+            strokeWidth = BasiGX.util.SLD.strokeFromObj(stroke).strokeWidth;
+            strokeOpacity = BasiGX.util.SLD.strokeFromObj(stroke).strokeOpacity;
+            strokeColor = BasiGX.util.SLD.strokeFromObj(stroke).strokeColor;
+            alpha = BasiGX.util.Color.makeHex('' +
+                Math.round(parseFloat(strokeOpacity) * 255));
+            strokeColor = strokeColor + alpha;
+        }
+
+        if (size) {
+            radius = parseInt(size.content[0], 10);
+        }
+
+        if (graphic) {
+            if (getVal('size', graphic)) {
+                graphicSize = getVal('size', graphic).content[0];
+            }
+            if (getVal('opacity', graphic)) {
+                graphicOpacity = getVal('opacity', graphic).content[0] * 100;
+            }
+            if (getVal('rotation', graphic)) {
+                graphicRotation = getVal('rotation', graphic).content[0];
+            }
+            if (getVal('href', graphic)) {
+                externalGraphicSrc = getVal('href', graphic);
+            }
+            if (getVal('wellKnownName', graphic)) {
+                var content = getVal('wellKnownName', graphic).content[0];
+                if (content.indexOf('ttf://') > -1) {
+                    fontAndUniCode = getVal('wellKnownName', graphic)
+                        .content[0];
+                }
+            }
+        }
+
+        var fs = {
+            xtype: 'fieldset',
+            bind: {
+                title: '{pointStyleFieldSetTitle}'
+            },
+            name: 'pointstyle',
+            layout: 'hbox',
+            items: [{
+                xtype: 'tabpanel',
+                items: [{
+                    xtype: 'panel',
+                    bind: {
+                        title: '{pointStyleSymbolPanelTitle}'
+                    },
+                    defaults: {
+                        margin: 3,
+                        width: 220
+                    },
+                    items: [{
+                        xtype: 'numberfield',
+                        bind: {
+                            fieldLabel: '{pointStyleRadiusNumberFieldLabel}'
+                        },
+                        name: 'radius',
+                        value: radius,
+                        minValue: 1,
+                        maxValue: 50,
+                        listeners: listenerConfig
+                    }, {
+                        xtype: 'numberfield',
+                        bind: {
+                            fieldLabel: '{pointStyleStrokeNumberFieldLabel}'
+                        },
+                        name: 'stroke-width',
+                        value: strokeWidth,
+                        minValue: 0,
+                        maxValue: 50,
+                        listeners: listenerConfig
+                    }, {
+                        xtype: 'container',
+                        layout: 'hbox',
+                        defaults: {
+                            width: 100
+                        },
+                        items: [{
+                            xtype: 'displayfield',
+                            width: 100,
+                            bind: {
+                                value: '{pointStyleStrokeColorFieldLabel}'
+                            }
+                        }, {
+                            xtype: 'colorbutton',
+                            name: 'stroke',
+                            format: 'hex8',
+                            value: strokeColor,
+                            margin: '5 0 0 10',
+                            listeners: listenerConfig
+                        }]
+                    }, {
+                        xtype: 'container',
+                        layout: 'hbox',
+                        defaults: {
+                            width: 100
+                        },
+                        items: [{
+                            xtype: 'displayfield',
+                            width: 100,
+                            bind: {
+                                value: '{pointStyleFillColorFieldLabel}'
+                            }
+                        }, {
+                            xtype: 'colorbutton',
+                            name: 'fill',
+                            format: 'hex8',
+                            margin: '0 0 0 10',
+                            value: fillColor,
+                            listeners: listenerConfig
+                        }]
+                    }]
+                }, {
+                    xtype: 'panel',
+                    bind: {
+                        title: '{pointStyleGraphicPanelTitle}'
+                    },
+                    name: 'graphic',
+                    externalGraphicSrc: externalGraphicSrc,
+                    fontAndUniCode: fontAndUniCode,
+                    defaults: {
+                        margin: 3,
+                        width: 220
+                    },
+                    layout: 'vbox',
+                    items: [{
+                        xtype: 'button',
+                        bind: {
+                            text: '{pointStyleChooseImgBtnText}'
+                        },
+                        handler: me.onChooseGraphicClick,
+                        scope: me
+                    }, {
+                        xtype: 'button',
+                        bind: {
+                            text: '{pointStyleChooseFontBtnText}'
+                        },
+                        handler: me.onChooseFontClick,
+                        scope: me
+                    }, {
+                        xtype: 'slider',
+                        bind: {
+                            fieldLabel: '{pointStyleImgOpacitySliderLabel}'
+                        },
+                        name: 'graphic-opacity',
+                        value: graphicOpacity,
+                        disabled: fontAndUniCode ? true : false,
+                        minValue: 0,
+                        maxValue: 100,
+                        increment: 10,
+                        listeners: listenerConfig
+                    }, {
+                        xtype: 'slider',
+                        bind: {
+                            fieldLabel: '{pointStyleImgRotationSliderLabel}'
+                        },
+                        name: 'graphic-rotation',
+                        value: graphicRotation,
+                        minValue: 0,
+                        maxValue: 360,
+                        listeners: listenerConfig
+                    }, {
+                        xtype: 'slider',
+                        bind: {
+                            fieldLabel: '{pointStyleImgScaleSliderLabel}'
+                        },
+                        name: 'graphic-scale',
+                        value: graphicSize,
+                        increment: 1,
+                        minValue: 1,
+                        maxValue: 100,
+                        listeners: listenerConfig
+                    }, {
+                        xtype: 'slider',
+                        bind: {
+                            fieldLabel: '{pointStyleStrokeNumberFieldLabel}'
+                        },
+                        name: 'stroke-width',
+                        value: strokeWidth,
+                        disabled: externalGraphicSrc ? true : false,
+                        minValue: 0,
+                        maxValue: 50,
+                        listeners: listenerConfig
+                    }, {
+                        xtype: 'container',
+                        layout: 'hbox',
+                        defaults: {
+                            width: 100
+                        },
+                        items: [{
+                            xtype: 'displayfield',
+                            disabled: externalGraphicSrc ? true : false,
+                            width: 100,
+                            bind: {
+                                value: '{pointStyleStrokeColorFieldLabel}'
+                            }
+                        }, {
+                            xtype: 'colorbutton',
+                            disabled: externalGraphicSrc ? true : false,
+                            name: 'stroke',
+                            format: 'hex8',
+                            value: strokeColor,
+                            margin: '5 0 0 10',
+                            listeners: listenerConfig
+                        }]
+                    }, {
+                        xtype: 'container',
+                        layout: 'hbox',
+                        disabled: externalGraphicSrc ? true : false,
+                        defaults: {
+                            width: 100
+                        },
+                        items: [{
+                            xtype: 'displayfield',
+                            disabled: externalGraphicSrc ? true : false,
+                            width: 100,
+                            bind: {
+                                value: '{pointStyleFillColorFieldLabel}'
+                            }
+                        }, {
+                            xtype: 'colorbutton',
+                            disabled: externalGraphicSrc ? true : false,
+                            name: 'fill',
+                            format: 'hex8',
+                            margin: '0 0 0 10',
+                            value: fillColor,
+                            listeners: listenerConfig
+                        }]
+                    }]
+                }]
+            }]
+        };
+        return fs;
+    },
+
+    /**
+     * Returns a configuration object for an ExtJS fieldset for styling
+     * linestrings which can e.g. be used inside the `items` config.
+     *
+     * @return {Object} A configuration for an ExtJS fieldset for styling
+     *     linestrings.
+     */
+    getLineStringFieldset: function() {
+        var me = this;
+        var sldObj = me.getSldObj();
+        var getVal = BasiGX.util.Object.getValue;
+        var rule = BasiGX.util.SLD.getRuleByName(me.getRuleName(), sldObj);
+        var listenerConfig = {
+            change: me.updateSLDPreview,
+            scope: me
+        };
+
+        if (!rule) {
+            // take the first available rule to show an initial render
+            // for e.g. new created rules that are not persisted yet
+            var availableRules = BasiGX.util.SLD.rulesFromSldObject(sldObj);
+            rule = availableRules[0];
+        }
+
+        var strokeWidth = BasiGX.util.SLD.DEFAULT_STROKE_WIDTH;
+        var strokeOpacity = BasiGX.util.SLD.DEFAULT_STROKE_OPACITY;
+        var strokeColor = BasiGX.util.SLD.DEFAULT_STROKE_COLOR;
+
+        var stroke = getVal('stroke', rule);
+
+        if (stroke) {
+            strokeWidth = BasiGX.util.SLD.strokeFromObj(stroke).strokeWidth;
+            strokeOpacity = BasiGX.util.SLD.strokeFromObj(stroke).strokeOpacity;
+            strokeColor = BasiGX.util.SLD.strokeFromObj(stroke).strokeColor;
+            var alpha = BasiGX.util.Color.makeHex('' +
+                Math.round(parseFloat(strokeOpacity) * 255));
+            strokeColor = strokeColor + alpha;
+        }
+
+        var fs = {
+            xtype: 'fieldset',
+            bind: {
+                title: '{lineStyleFieldSetTitle}'
+            },
+            name: 'linestyle',
+            layout: 'hbox',
+            items: [{
+                xtype: 'fieldset',
+                layout: 'vbox',
+                width: 220,
+                defaults: {
+                    margin: 3,
+                    width: 180
+                },
+                items: [{
+                    xtype: 'numberfield',
+                    bind: {
+                        fieldLabel: '{lineStyleStrokeNumberFieldLabel}'
+                    },
+                    value: strokeWidth,
+                    name: 'stroke-width',
+                    minValue: 0,
+                    maxValue: 50,
+                    listeners: listenerConfig
+                }, {
+                    xtype: 'container',
+                    layout: 'hbox',
+                    defaults: {
+                        width: 100
+                    },
+                    items: [{
+                        xtype: 'displayfield',
+                        width: 100,
+                        bind: {
+                            value: '{lineStyleStrokeColorFieldLabel}'
+                        }
+                    }, {
+                        xtype: 'colorbutton',
+                        format: 'hex8',
+                        value: strokeColor,
+                        name: 'stroke',
+                        margin: '5 0 0 10',
+                        listeners: listenerConfig
+                    }]
+                }]
+            }]
+        };
+        return fs;
+    },
+
+    /**
+     * Returns a configuration object for an ExtJS fieldset for styling
+     * polygons which can e.g. be used inside the `items` config.
+     *
+     * @return {Object} A configuration for an ExtJS fieldset for styling
+     *     polygon.
+     */
+    getPolygonFieldset: function() {
+        var me = this;
+        var sldObj = me.getSldObj();
+        var getVal = BasiGX.util.Object.getValue;
+        var rule = BasiGX.util.SLD.getRuleByName(me.getRuleName(), sldObj);
+        var listenerConfig = {
+            change: me.updateSLDPreview,
+            scope: me
+        };
+
+        if (!rule) {
+            // take the first available rule to show an initial render
+            // for e.g. new created rules that are not persisted yet
+            var availableRules = BasiGX.util.SLD.rulesFromSldObject(sldObj);
+            rule = availableRules[0];
+        }
+
+        var strokeWidth = BasiGX.util.SLD.DEFAULT_STROKE_WIDTH;
+        var strokeOpacity = BasiGX.util.SLD.DEFAULT_STROKE_OPACITY;
+        var strokeColor = BasiGX.util.SLD.DEFAULT_STROKE_COLOR;
+        var fillColor = BasiGX.util.SLD.DEFAULT_FILL_COLOR;
+        var fillOpacity = BasiGX.util.SLD.DEFAULT_FILL_OPACITY;
+        var graphicSize = BasiGX.util.SLD.DEFAULT_GRAPHIC_SIZE;
+        var graphicOpacity = BasiGX.util.SLD.DEFAULT_GRAPHIC_OPACITY * 100;
+        var graphicRotation = BasiGX.util.SLD.DEFAULT_GRAPHIC_ROTATION;
+        var externalGraphicSrc = null;
+        var fontAndUniCode = null;
+        var alpha;
+
+        var fill = getVal('fill', rule);
+        var stroke = getVal('stroke', rule);
+        var graphic = getVal('graphic', rule);
+
+        if (fill) {
+            fillColor = BasiGX.util.SLD.fillFromObj(fill).fillColor;
+            fillOpacity = BasiGX.util.SLD.fillFromObj(fill).fillOpacity;
+            alpha = BasiGX.util.Color.makeHex('' +
+                Math.round(parseFloat(fillOpacity) * 255));
+            fillColor = fillColor + alpha;
+        }
+
+        if (stroke) {
+            strokeWidth = BasiGX.util.SLD.strokeFromObj(stroke).strokeWidth;
+            strokeOpacity = BasiGX.util.SLD.strokeFromObj(stroke).strokeOpacity;
+            strokeColor = BasiGX.util.SLD.strokeFromObj(stroke).strokeColor;
+            alpha = BasiGX.util.Color.makeHex('' +
+                Math.round(parseFloat(strokeOpacity) * 255));
+            strokeColor = strokeColor + alpha;
+        }
+
+        if (graphic) {
+            if (getVal('size', graphic)) {
+                graphicSize = getVal('size', graphic).content[0];
+            }
+            if (getVal('opacity', graphic)) {
+                graphicOpacity = getVal('opacity', graphic).content[0] * 100;
+            }
+            if (getVal('rotation', graphic)) {
+                graphicRotation = getVal('rotation', graphic).content[0];
+            }
+            if (getVal('href', graphic)) {
+                externalGraphicSrc = getVal('href', graphic);
+            }
+            if (getVal('wellKnownName', graphic)) {
+                var content = getVal('wellKnownName', graphic).content[0];
+                if (content.indexOf('ttf://') > -1) {
+                    fontAndUniCode = getVal('wellKnownName', graphic)
+                        .content[0];
+                }
+            }
+        }
+
+        var fs = {
+            xtype: 'fieldset',
+            bind: {
+                title: '{polygonStyleFieldSetTitle}'
+            },
+            name: 'polygonstyle',
+            layout: 'hbox',
+            items: [{
+                xtype: 'tabpanel',
+                items: [{
+                    xtype: 'panel',
+                    bind: {
+                        title: '{polygonStyleSymbolPanelTitle}'
+                    },
+                    layout: 'vbox',
+                    width: 220,
+                    defaults: {
+                        margin: 3,
+                        width: 210
+                    },
+                    items: [{
+                        xtype: 'numberfield',
+                        bind: {
+                            fieldLabel: '{polygonStyleStrokeNumberFieldLabel}'
+                        },
+                        value: strokeWidth,
+                        name: 'stroke-width',
+                        allowDecimals: true,
+                        decimalPrecision: 1,
+                        decimalSeparator: '.',
+                        minValue: 0,
+                        maxValue: 50,
+                        listeners: listenerConfig
+                    }, {
+                        xtype: 'container',
+                        layout: 'hbox',
+                        defaults: {
+                            width: 100
+                        },
+                        items: [{
+                            xtype: 'displayfield',
+                            width: 100,
+                            bind: {
+                                value: '{polygonStyleStrokeColorFieldLabel}'
+                            }
+                        }, {
+                            xtype: 'colorbutton',
+                            format: 'hex8',
+                            value: strokeColor,
+                            name: 'stroke',
+                            margin: '5 0 0 10',
+                            listeners: listenerConfig
+                        }]
+                    }, {
+                        xtype: 'container',
+                        layout: 'hbox',
+                        defaults: {
+                            width: 100
+                        },
+                        items: [{
+                            xtype: 'displayfield',
+                            width: 100,
+                            bind: {
+                                value: '{polygonStyleFillColorFieldLabel}'
+                            }
+                        }, {
+                            xtype: 'colorbutton',
+                            format: 'hex8',
+                            margin: '0 0 0 10',
+                            value: fillColor,
+                            name: 'fill',
+                            listeners: listenerConfig
+                        }]
+                    }]
+                }, {
+                    xtype: 'panel',
+                    bind: {
+                        title: '{polygonStyleGraphicPanelTitle}'
+                    },
+                    name: 'graphic',
+                    layout: 'vbox',
+                    externalGraphicSrc: externalGraphicSrc,
+                    fontAndUniCode: fontAndUniCode,
+                    defaults: {
+                        margin: 3,
+                        width: 210
+                    },
+                    items: [{
+                        xtype: 'button',
+                        bind: {
+                            text: '{pointStyleChooseImgBtnText}'
+                        },
+                        handler: me.onChooseGraphicClick,
+                        scope: me
+                    }, {
+                        xtype: 'button',
+                        bind: {
+                            text: '{pointStyleChooseFontBtnText}'
+                        },
+                        handler: me.onChooseFontClick,
+                        scope: me
+                    },
+                    // opacity seems to be unsupported for external graphics /
+                    // graphic fills, although its valid in SLD.
+                    {
+                        xtype: 'slider',
+                        bind: {
+                            fieldLabel: '{polygonStyleImgOpacitySliderLabel}'
+                        },
+                        name: 'graphic-opacity',
+                        value: graphicOpacity,
+                        disabled: true,
+                        minValue: 0,
+                        maxValue: 100,
+                        increment: 10,
+                        listeners: listenerConfig
+                    },
+                    {
+                        xtype: 'slider',
+                        bind: {
+                            fieldLabel: '{polygonStyleImgRotationSliderLabel}'
+                        },
+                        name: 'graphic-rotation',
+                        value: graphicRotation,
+                        disabled: externalGraphicSrc ? true : false,
+                        minValue: 0,
+                        maxValue: 360,
+                        listeners: listenerConfig
+                    }, {
+                        xtype: 'slider',
+                        bind: {
+                            fieldLabel: '{polygonStyleImgScaleSliderLabel}'
+                        },
+                        name: 'graphic-scale',
+                        value: graphicSize,
+                        increment: 1,
+                        minValue: 1,
+                        maxValue: 200,
+                        listeners: listenerConfig
+                    }, {
+                        xtype: 'slider',
+                        bind: {
+                            fieldLabel: '{polygonStyleStrokeNumberFieldLabel}'
+                        },
+                        name: 'stroke-width',
+                        value: strokeWidth,
+                        disabled: externalGraphicSrc ? true : false,
+                        minValue: 0,
+                        maxValue: 10,
+                        listeners: listenerConfig
+                    }, {
+                        xtype: 'container',
+                        layout: 'hbox',
+                        defaults: {
+                            width: 100
+                        },
+                        items: [{
+                            xtype: 'displayfield',
+                            disabled: externalGraphicSrc ? true : false,
+                            width: 100,
+                            bind: {
+                                value: '{polygonStyleStrokeColorFieldLabel}'
+                            }
+                        }, {
+                            xtype: 'colorbutton',
+                            disabled: externalGraphicSrc ? true : false,
+                            name: 'stroke',
+                            format: 'hex8',
+                            value: strokeColor,
+                            margin: '5 0 0 10',
+                            listeners: listenerConfig
+                        }]
+                    }, {
+                        xtype: 'container',
+                        layout: 'hbox',
+                        defaults: {
+                            width: 100
+                        },
+                        items: [{
+                            xtype: 'displayfield',
+                            disabled: externalGraphicSrc ? true : false,
+                            width: 100,
+                            bind: {
+                                value: '{polygonStyleFillColorFieldLabel}'
+                            }
+                        }, {
+                            xtype: 'colorbutton',
+                            disabled: externalGraphicSrc ? true : false,
+                            name: 'fill',
+                            format: 'hex8',
+                            margin: '0 0 0 10',
+                            value: fillColor,
+                            listeners: listenerConfig
+                        }]
+                    }]
+                }]
+            }]
+        };
+        return fs;
+    },
+
+    /**
+     * Creates a fieldset containing UI elements to configure a textsymbolizer
+     *
+     * @return {Object} A configuration for an ExtJS fieldset for styling
+     *     labels.
+     */
+    getTextSymbolizerFieldset: function() {
+        var me = this;
+        var sldObj = me.getSldObj();
+        var getVal = BasiGX.util.Object.getValue;
+        var rule = BasiGX.util.SLD.getRuleByName(me.getRuleName(), sldObj);
+        var listenerConfig = {
+            change: me.updateSLDPreview,
+            scope: me
+        };
+
+        if (!rule) {
+            // take the first available rule to show an initial render
+            // for e.g. new created rules that are not persisted yet
+            var availableRules = BasiGX.util.SLD.rulesFromSldObject(sldObj);
+            rule = availableRules[0];
+        }
+
+        var labelAttribute = BasiGX.util.SLD.DEFAULT_LABEL_ATTRIBUTE;
+        var fontSize = BasiGX.util.SLD.DEFAULT_FONTSIZE;
+        var fontFamily = BasiGX.util.SLD.DEFAULT_FONT_FAMILY;
+        var fontWeight = BasiGX.util.SLD.DEFAULT_FONT_WEIGHT;
+        var fontStyle = BasiGX.util.SLD.DEFAULT_FONT_STYLE;
+        var fontFillColor = BasiGX.util.SLD.DEFAULT_FONT_FILLCOLOR;
+        var perpendicularOffset = BasiGX.util.SLD.
+            DEFAULT_LABEL_PERPENDICULAROFFSET;
+        var labelAnchorPointX = BasiGX.util.SLD.DEFAULT_LABEL_ANCHORPOINTX;
+        var labelAnchorPointY = BasiGX.util.SLD.DEFAULT_LABEL_ANCHORPOINTY;
+        var labelDisplacementX = BasiGX.util.SLD.DEFAULT_LABEL_DISPLACEMENTX;
+        var labelDisplacementY = BasiGX.util.SLD.DEFAULT_LABEL_DISPLACEMENTY;
+        var labelRotation = BasiGX.util.SLD.DEFAULT_LABEL_ROTATION;
+        var followLineLabel = BasiGX.util.SLD.DEFAULT_LABEL_FOLLOW_LINE;
+        var textSymbolizer;
+
+        Ext.each(rule.symbolizer, function(sym) {
+            if (sym.name.localPart === 'TextSymbolizer') {
+                textSymbolizer = sym.value;
+            }
+        });
+
+        if (textSymbolizer) {
+            var font = getVal('font', textSymbolizer);
+            labelAttribute = getVal('value', textSymbolizer.label) ?
+                getVal('value', textSymbolizer.label).content[0] :
+                BasiGX.util.SLD.DEFAULT_LABEL_ATTRIBUTE;
+            Ext.each(font.cssParameter, function(param) {
+                if (param.name === 'font-family') {
+                    fontFamily = param.content[0];
+                } else if (param.name === 'font-size') {
+                    fontSize = param.content[0];
+                } else if (param.name === 'font-style') {
+                    fontStyle = param.content[0];
+                } else if (param.name === 'font-weight') {
+                    fontWeight = param.content[0];
+                }
+            });
+            var fill = getVal('fill', textSymbolizer);
+            if (fill) {
+                fontFillColor = BasiGX.util.SLD.fillFromObj(fill).fillColor;
+                var fillOpacity = BasiGX.util.SLD.fillFromObj(fill).fillOpacity;
+                var alpha = BasiGX.util.Color.makeHex('' +
+                    Math.round(parseFloat(fillOpacity) * 255));
+                fontFillColor = fontFillColor + alpha;
+            }
+            var pointPlacement = getVal('pointPlacement', textSymbolizer);
+            if (pointPlacement) {
+                if (pointPlacement.anchorPoint &&
+                    pointPlacement.anchorPoint.anchorPointX) {
+                    labelAnchorPointX = pointPlacement.anchorPoint.
+                        anchorPointX.content[0];
+                }
+                if (pointPlacement.anchorPoint &&
+                    pointPlacement.anchorPoint.anchorPointY) {
+                    labelAnchorPointY = pointPlacement.anchorPoint.
+                        anchorPointY.content[0];
+                }
+                if (pointPlacement.displacement &&
+                    pointPlacement.displacement.displacementX) {
+                    labelDisplacementX = pointPlacement.displacement.
+                        displacementX.content[0];
+                }
+                if (pointPlacement.displacement &&
+                    pointPlacement.displacement.displacementY) {
+                    labelDisplacementY = pointPlacement.displacement.
+                        displacementY.content[0];
+                }
+                if (pointPlacement.rotation) {
+                    labelRotation = pointPlacement.rotation.content[0];
+                }
+            }
+            var linePlacement = getVal('linePlacement', textSymbolizer);
+            if (linePlacement && linePlacement.perpendicularOffset) {
+                perpendicularOffset = linePlacement.perpendicularOffset.
+                    content[0];
+            }
+            var vendorOptions = getVal('vendorOption', textSymbolizer);
+            if (vendorOptions) {
+                Ext.each(vendorOptions, function(option) {
+                    if (option.name === 'followLine') {
+                        followLineLabel = option.value === 'true' ?
+                            true : false;
+                    }
+                });
+            }
+        }
+
+        var fontStore = Ext.create('Ext.data.Store', {
+            autoLoad: true,
+            proxy: {
+                type: 'ajax',
+                url: me.getBackendUrls().geoserverInstalledFontListUrl,
+                reader: {
+                    type: 'json',
+                    rootProperty: function(data) {
+                        var fontCollection = [];
+                        Ext.each(data.fonts, function(singleFont, idx) {
+                            fontCollection[idx] = {name: singleFont};
+                        });
+                        return fontCollection;
+                    }
+                }
+            },
+            fields: ['name'],
+            sorters: ['name']
+        });
+        var fontStyleStore = Ext.create('Ext.data.Store', {
+            fields: ['name'],
+            sorters: ['name'],
+            data: [{
+                name: 'normal'
+            }, {
+                name: 'italic'
+            }, {
+                name: 'oblique'
+            }]
+        });
+        var fontWeightStore = Ext.create('Ext.data.Store', {
+            fields: ['name'],
+            sorters: ['name'],
+            data: [{
+                name: 'normal'
+            }, {
+                name: 'bold'
+            }]
+        });
+        var fs = {
+            xtype: 'fieldset',
+            height: '100%',
+            bind: {
+                title: '{textStyleFieldSetTitle}'
+            },
+            name: 'textsymbolizer',
+            defaults: {
+                width: 400
+            },
+            items: [{
+                xtype: 'combo',
+                name: 'labelattribute',
+                store: me.attributeStore,
+                displayField: 'name',
+                queryMode: 'local',
+                bind: {
+                    fieldLabel: '{attributeSelectLabel}'
+                },
+                value: labelAttribute,
+                listeners: listenerConfig
+            }, {
+                xtype: 'combo',
+                name: 'fontfamily',
+                bind: {
+                    fieldLabel: '{textFontLabel}'
+                },
+                store: fontStore,
+                value: fontFamily,
+                queryMode: 'local',
+                displayField: 'name',
+                listeners: listenerConfig
+            }, {
+                xtype: 'combo',
+                bind: {
+                    fieldLabel: '{fontStyleLabel}'
+                },
+                name: 'fontstyle',
+                store: fontStyleStore,
+                value: fontStyle,
+                queryMode: 'local',
+                displayField: 'name',
+                listeners: listenerConfig
+            }, {
+                xtype: 'combo',
+                bind: {
+                    fieldLabel: '{fontWeightLabel}'
+                },
+                name: 'fontweight',
+                store: fontWeightStore,
+                value: fontWeight,
+                queryMode: 'local',
+                displayField: 'name',
+                listeners: listenerConfig
+            }, {
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textFontSizeLabel}'
+                },
+                value: fontSize,
+                name: 'fontsize',
+                minValue: 1,
+                maxValue: 50,
+                listeners: listenerConfig
+            }, {
+                xtype: 'container',
+                layout: 'hbox',
+                defaults: {
+                    width: 100
+                },
+                items: [{
+                    xtype: 'displayfield',
+                    width: 100,
+                    bind: {
+                        value: '{textFillColorFieldLabel}'
+                    }
+                }, {
+                    xtype: 'colorbutton',
+                    name: 'fill',
+                    format: 'hex8',
+                    margin: '5 0 0 5',
+                    value: fontFillColor,
+                    listeners: listenerConfig
+                }]
+            }]
+        };
+        if (this.getMode() === 'line') {
+            fs.items.push({
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textPerpendicularOffsetLabel}'
+                },
+                value: perpendicularOffset,
+                name: 'perpendicularoffset',
+                minValue: -500,
+                maxValue: 500,
+                listeners: listenerConfig
+            }, {
+                xtype: 'checkbox',
+                bind: {
+                    fieldLabel: '{textFollowLineLabel}'
+                },
+                name: 'followlinelabel',
+                value: followLineLabel,
+                listeners: listenerConfig
+            });
+        } else {
+            fs.items.push({
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textAnchorPointXLabel}'
+                },
+                value: labelAnchorPointX,
+                name: 'labelanchorpointx',
+                type: 'float',
+                allowDecimals: true,
+                decimalPrecision: 1,
+                decimalSeparator: '.',
+                step: 0.1,
+                minValue: -500,
+                maxValue: 500,
+                listeners: listenerConfig
+            }, {
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textAnchorPointYLabel}'
+                },
+                value: labelAnchorPointY,
+                name: 'labelanchorpointy',
+                allowDecimals: true,
+                decimalPrecision: 1,
+                decimalSeparator: '.',
+                step: 0.1,
+                minValue: -500,
+                maxValue: 500,
+                listeners: listenerConfig
+            }, {
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textDisplacementXLabel}'
+                },
+                value: labelDisplacementX,
+                name: 'labeldisplacementx',
+                minValue: -500,
+                maxValue: 500,
+                listeners: listenerConfig
+            }, {
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textDisplacementYLabel}'
+                },
+                value: labelDisplacementY,
+                name: 'labeldisplacementy',
+                minValue: -500,
+                maxValue: 500,
+                listeners: listenerConfig
+            }, {
+                xtype: 'numberfield',
+                bind: {
+                    fieldLabel: '{textRotationLabel}'
+                },
+                value: labelRotation,
+                name: 'labelrotation',
+                minValue: 0,
+                maxValue: 359,
+                listeners: listenerConfig
+            });
+        }
+        return fs;
+    },
+
+    /**
+     * Creates an ol map to preview the current SLD
+     *
+     * @return {Object} An ExtJS configuration object for the map panel
+     */
+    createSLDPreviewMap: function() {
+        var layer = new ol.layer.Tile({
+            source: new ol.source.TileWMS({
+                url: this.getBackendUrls().geoServerUrl,
+                params: {
+                    'LAYERS': this.getLayer(),
+                    'TILED': true
+                },
+                tileLoadFunction: function(image, url) {
+                    var img = image.getImage();
+                    if (typeof Blob === 'function') {
+                        var baseUrl = url.split('?')[0];
+                        var params = url.split('?')[1];
+                        params = params.split('&');
+                        var paramObj = {};
+                        Ext.each(params, function(param) {
+                            var split = param.split('=');
+                            var key = decodeURIComponent(split[0]);
+                            var value = decodeURIComponent(split[1]);
+                            paramObj[key] = value;
+                        });
+                        Ext.Ajax.request({
+                            binary: true,
+                            url: baseUrl,
+                            method: 'POST',
+                            params: paramObj,
+                            defaultHeaders: BasiGX.util.CSRF.getHeader(),
+                            scope: this,
+                            success: function(response) {
+                                if (response.responseBytes) {
+                                    var blob = new Blob(
+                                        [response.responseBytes],
+                                        {type: 'image/png'}
+                                    );
+                                    var blobUrl = window.URL.createObjectURL(
+                                        blob);
+                                    img.src = blobUrl;
+                                }
+                            }
+                        });
+                    } else {
+                        img.src = url;
+                    }
+                }
+            })
+        });
+        var panel = {
+            xtype: 'gx_component_map',
+            layers: [layer],
+            map: new ol.Map({
+                layers: [layer],
+                controls: [new ol.control.Zoom()],
+                view: new ol.View({
+                    center: [0,0],
+                    zoom: 1
+                })
+            }),
+            name: 'sldpreview-' + this.getMode(),
+            width: '100%',
+            minHeight: 310
+        };
+        return panel;
+    },
+
+    getSingleFeatureForPreview: function() {
+        var me = this;
+        var geoServerUrl = me.getBackendUrls().geoServerUrl;
+        Ext.Ajax.request({
+            url: geoServerUrl,
+            method: 'GET',
+            params: {
+                service: 'WFS',
+                request: 'GetFeature',
+                typeName: me.getLayer(),
+                version: '1.0.0',
+                maxFeatures: 1,
+                outputFormat: 'application/json'
+            },
+            defaultHeaders: BasiGX.util.CSRF.getHeader(),
+            scope: this,
+            success: function(response) {
+                try {
+                    var json = Ext.decode(response.responseText);
+                    if (json.features && json.features.length > 0 &&
+                        json.crs && json.crs.properties &&
+                        json.crs.properties.name) {
+                        var feature = json.features[0];
+                        var reader = new ol.format.GeoJSON();
+                        var olFeature = reader.readFeature(feature);
+                        // make the attributes available for label configuration
+                        me.attributeStore.removeAll();
+                        Ext.iterate(feature.properties, function(k, v) {
+                            me.attributeStore.add(
+                                {'name': k, 'value': v}
+                            );
+                        });
+                        // then get the extent for map extent adjustments
+                        var extent = olFeature.getGeometry().getExtent();
+                        var srsCode = json.crs.properties.name.split(
+                            'EPSG::')[1];
+                        var srs = 'EPSG:' + srsCode;
+                        if (extent && srsCode) {
+                            me.getPreviewForSingleFeature(extent, srs);
+                        } else {
+                            Ext.log.error('Could not retrieve a feature ' +
+                                'via WFS for preview');
+                        }
+                    }
+                } catch (e) {
+                    Ext.log.error('Could not retrieve a feature ' +
+                        'via WFS for preview');
+                }
+            },
+            failure: function() {
+                Ext.log.error('Could not retrieve a feature ' +
+                    'via WFS for preview');
+            }
+        });
+    },
+
+    getPreviewForSingleFeature: function(extent, srs) {
+        var selector = 'gx_component_map[name=sldpreview-' +
+            this.getMode() + ']';
+        var mapPanel = Ext.ComponentQuery.query(selector)[0];
+        var map = mapPanel.map;
+        var view = new ol.View({
+            projection: srs
+        });
+        view.fit(extent);
+        map.setView(view);
+    },
+
+    /**
+     * Method updates the SLD Preview with the current state of the form values
+     */
+    updateSLDPreview: function() {
+        var me = this;
+        var selector = 'gx_component_map[name=sldpreview-' + me.getMode() + ']';
+        var mapPanel = Ext.ComponentQuery.query(selector)[0];
+        if (mapPanel) {
+            var map = mapPanel.map;
+            var layer = map.getLayers().getArray()[0];
+            if (layer) {
+                var sld = me.getSldFromFormValues();
+                var ruleName = me.getRuleName();
+                layer.getSource().updateParams({
+                    RULE: ruleName,
+                    SLD_BODY: sld
+                });
+            }
+            // try to get a single feature via WFS to render
+            // a map with it in order to be able to preview "real" data
+            // and also to show labels / textsymbolizers.
+            if (!me.mapCentered) {
+                me.getSingleFeatureForPreview();
+                me.mapCentered = true;
+            }
+        }
+    },
+
+    /**
+     * Method transforms the current form values into a valid SLD string,
+     * which is then used to preview the current style with the help of an
+     * `GetLegendGraphic` request issued against the GeoServer
+     *
+     * @return {String} sld The SLD string representing the current state of
+     *     the form values
+     */
+    getSldFromFormValues: function() {
+        var me = this;
+        var selector = 'fieldset[name=' + this.getMode() + 'style]';
+        var fs = Ext.ComponentQuery.query(selector)[0];
+        var sldObj = this.getSldObj();
+        var value;
+        if (!fs || !sldObj) {
+            return '';
+        }
+
+        var radiusFs = fs.down('[name=radius]');
+        var graphicTab = fs.down('[name=graphic]');
+        var graphicTabActive = false;
+        var textFs = fs.up('basigx-container-sldstyler').down(
+            'fieldset[name=textsymbolizer]');
+
+        if (graphicTab) {
+            var activeTab = graphicTab.up('tabpanel').getActiveTab();
+            if (activeTab === graphicTab) {
+                graphicTabActive = true;
+            }
+        }
+
+        var fillFs = graphicTabActive ? graphicTab.down('[name=fill]') :
+            fs.down('[name=fill]');
+        var strokeFs = graphicTabActive ? graphicTab.down('[name=stroke]') :
+            fs.down('[name=stroke]');
+        var strokeWidthFs = graphicTabActive ?
+            graphicTab.down('[name=stroke-width]') :
+            fs.down('[name=stroke-width]');
+
+        var symbolizerObj = {};
+
+        if (fillFs) {
+            symbolizerObj.fillColor = '#' + fillFs.getValue().substring(0, 6);
+            symbolizerObj.fillOpacity = BasiGX.util.Color.rgbaAsArray(
+                BasiGX.util.Color.hex8ToRgba(fillFs.getValue()))[4];
+        }
+
+        if (strokeFs) {
+            symbolizerObj.strokeColor = '#' + strokeFs.getValue()
+                .substring(0, 6);
+            symbolizerObj.strokeOpacity = BasiGX.util.Color.rgbaAsArray(
+                BasiGX.util.Color.hex8ToRgba(strokeFs.getValue()))[4];
+        }
+
+        if (strokeWidthFs) {
+            value = strokeWidthFs.getValue();
+            if (Ext.isNumber(value)) {
+                symbolizerObj.strokeWidth = value.toString();
+            } else {
+                symbolizerObj.strokeWidth =
+                    BasiGX.util.SLD.DEFAULT_STROKE_WIDTH.toString();
+            }
+        }
+
+        if (!graphicTabActive && radiusFs) {
+            value = radiusFs.getValue();
+            if (Ext.isNumber(value)) {
+                symbolizerObj.radius = value.toString();
+            } else {
+                symbolizerObj.radius =
+                    BasiGX.util.SLD.DEFAULT_POINT_RADIUS.toString();
+            }
+        }
+
+        if (graphicTabActive) {
+            // only write external graphic or font values when the graphic
+            // tab is active
+            var scale = graphicTab.down('[name=graphic-scale]').getValue();
+            var opacity = graphicTab.down('[name=graphic-opacity]')
+                .getValue() / 100;
+            var rotation = graphicTab.down('[name=graphic-rotation]')
+                .getValue();
+            if (graphicTab.externalGraphicSrc) {
+                var src = graphicTab.externalGraphicSrc;
+                var internalUrl = this.config.backendUrls.internalUrl;
+                var regex = /https?\:\/\/[a-zA-Z\-_0-9.]+\//g;
+                if (this.config.backendUrls.internalUrl) {
+                    src = src.replace(regex, internalUrl);
+                }
+                symbolizerObj.externalGraphicSrc = src;
+            }
+            if (graphicTab.fontAndUniCode) {
+                symbolizerObj.fontAndUniCode = graphicTab.fontAndUniCode;
+            }
+            symbolizerObj.graphicSize = scale ? scale.toString() :
+                BasiGX.util.SLD.DEFAULT_GRAPHIC_SIZE.toString();
+            symbolizerObj.graphicOpacity = opacity ? opacity.toString() :
+                BasiGX.util.SLD.DEFAULT_GRAPHIC_OPACITY.toString();
+            symbolizerObj.graphicRotation = rotation ? rotation.toString() :
+                BasiGX.util.SLD.DEFAULT_GRAPHIC_ROTATION.toString();
+        }
+
+        if (this.getMode() === 'point') {
+            sldObj = BasiGX.util.SLD.setPointSymbolizerInRule(
+                symbolizerObj,
+                me.getRuleName(),
+                sldObj
+            );
+        } else if (this.getMode() === 'line') {
+            sldObj = BasiGX.util.SLD.setLineSymbolizerInRule(
+                symbolizerObj,
+                me.getRuleName(),
+                sldObj
+            );
+        } else if (this.getMode() === 'polygon') {
+            sldObj = BasiGX.util.SLD.setPolygonSymbolizerInRule(
+                symbolizerObj,
+                me.getRuleName(),
+                sldObj
+            );
+        }
+
+        if (textFs) {
+            symbolizerObj.labelAttribute = textFs.down(
+                'combo[name=labelattribute]').getValue() ||
+                BasiGX.util.SLD.DEFAULT_LABEL_ATTRIBUTE;
+            symbolizerObj.fontSize = textFs.down('numberfield[name=fontsize]')
+                .getValue().toString() || BasiGX.util.SLD.DEFAULT_FONTSIZE;
+            symbolizerObj.fontFamily = textFs.down('combo[name=fontfamily]')
+                .getValue() || BasiGX.util.SLD.DEFAULT_FONT_FAMILY;
+            symbolizerObj.fontWeight = textFs.down('combo[name=fontweight]')
+                .getValue() || BasiGX.util.SLD.DEFAULT_FONT_WEIGHT;
+            symbolizerObj.fontStyle = textFs.down('combo[name=fontstyle]')
+                .getValue() || BasiGX.util.SLD.DEFAULT_FONT_STYLE;
+            symbolizerObj.fontFillColor = BasiGX.util.SLD.
+                DEFAULT_FONT_FILLCOLOR;
+            symbolizerObj.fontFillOpacity = 0;
+
+            var textFillFs = textFs.down('colorbutton[name=fill]');
+            if (textFillFs) {
+                symbolizerObj.fontFillColor = '#' + textFillFs.getValue().
+                    substring(0, 6);
+                symbolizerObj.fontFillOpacity = BasiGX.util.Color.rgbaAsArray(
+                    BasiGX.util.Color.hex8ToRgba(textFillFs.getValue()))[4];
+            }
+
+            if (this.getMode() === 'line') {
+                symbolizerObj.perpendicularOffset = textFs.down(
+                    'numberfield[name=perpendicularoffset]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                        DEFAULT_LABEL_PERPENDICULAROFFSET;
+                symbolizerObj.labelFollowLine = textFs.down(
+                    'checkbox[name=followlinelabel]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                        DEFAULT_LABEL_FOLLOW_LINE;
+            } else {
+                symbolizerObj.labelAnchorPointX = textFs.down(
+                    'numberfield[name=labelanchorpointx]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                        DEFAULT_LABEL_ANCHORPOINTX;
+                symbolizerObj.labelAnchorPointY = textFs.down(
+                    'numberfield[name=labelanchorpointy]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                        DEFAULT_LABEL_ANCHORPOINTY;
+                symbolizerObj.labelDisplacementX = textFs.down(
+                    'numberfield[name=labeldisplacementx]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                        DEFAULT_LABEL_DISPLACEMENTX;
+                symbolizerObj.labelDisplacementY = textFs.down(
+                    'numberfield[name=labeldisplacementy]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                        DEFAULT_LABEL_DISPLACEMENTY;
+                symbolizerObj.labelRotation = textFs.down(
+                    'numberfield[name=labelrotation]')
+                    .getValue().toString() || BasiGX.util.SLD.
+                        DEFAULT_LABEL_ROTATION;
+            }
+
+            sldObj = BasiGX.util.SLD.setTextSymbolizerInRule(
+                symbolizerObj,
+                me.getRuleName(),
+                sldObj
+            );
+        }
+
+        var sld = BasiGX.util.SLD.toSldString(sldObj);
+
+        // update our properties
+        me.setSld(sld);
+        me.setRule(BasiGX.util.SLD.getRuleByName(me.getRuleName(), sldObj));
+        me.setSldObj(sldObj);
+
+        return sld;
+
+    },
+
+    /**
+     * Creates and shows a window with a `BasiGX.view.panel.FontSymbolPool`,
+     * that allows the user to pick a font and symbol for setting a ttf mark
+     * in the sld
+     */
+    onChooseFontClick: function() {
+        var me = this;
+        var callbackFn = function(fullQualifiedGlyphName) {
+            var graphicFs = me.down('[name=graphic]');
+            graphicFs.fontAndUniCode = fullQualifiedGlyphName;
+            // unset an potential external graphic
+            graphicFs.externalGraphicSrc = null;
+            // set matching style options
+            if (me.getMode() === 'point') {
+                graphicFs.down('[name=graphic-opacity]').setDisabled(true);
+            }
+            if (me.getMode() === 'polygon') {
+                graphicFs.down('[name=graphic-rotation]').setDisabled(false);
+            }
+            graphicFs.down('[name=fill]').setDisabled(false);
+            graphicFs.down('[name=stroke]').setDisabled(false);
+            graphicFs.down('[name=stroke-width]').setDisabled(false);
+            graphicFs.down('[name=stroke-width]').setValue(1);
+            me.updateSLDPreview();
+        };
+
+        // cleanup
+        var selector = 'window[title=' +
+            me.getViewModel().get('fontSymbolPoolWindowTitle') + ']';
+        var wins = Ext.ComponentQuery.query(selector);
+        Ext.each(wins, function(win) {
+            win.destroy();
+        });
+
+        var fontSymbolPool = Ext.create('BasiGX.view.panel.FontSymbolPool', {
+            geoserverFontListUrl: me.getBackendUrls().geoserverFontListUrl,
+            geoserverFontUrl: me.getBackendUrls().geoserverFontUrl,
+            useCsrfToken: true,
+            onGlyphSelected: callbackFn
+        });
+
+        var fontSymbolPoolWin = Ext.create('Ext.window.Window', {
+            title: me.getViewModel().get('fontSymbolPoolWindowTitle'),
+            constrain: true,
+            items: [fontSymbolPool]
+        });
+        fontSymbolPoolWin.showAt(5, 5);
+    },
+
+    /**
+     * Creates and shows a window with a `BasiGX.view.panel.GraphicPool`, that
+     * will eventually update both the preview and also the styles in the
+     * attached layer.
+     */
+    onChooseGraphicClick: function() {
+        var me = this;
+        var okClickCallbackFn = function(pictureRec) {
+            var pictureUrl = BasiGX.util.Url.getWebProjectBaseUrl() +
+                me.getBackendUrls().pictureSrc.url +
+                pictureRec.get('id');
+            var graphicFs = me.down('[name=graphic]');
+            graphicFs.externalGraphicSrc = pictureUrl;
+            // unset an potential font and glyph
+            graphicFs.fontAndUniCode = null;
+            // set matching style options
+            if (me.getMode() === 'point') {
+                graphicFs.down('[name=graphic-opacity]').setDisabled(false);
+            }
+            if (me.getMode() === 'polygon') {
+                graphicFs.down('[name=graphic-rotation]').setDisabled(true);
+            }
+            graphicFs.down('[name=fill]').setDisabled(true);
+            graphicFs.down('[name=stroke]').setDisabled(true);
+            graphicFs.down('[name=stroke-width]').setDisabled(true);
+            me.updateSLDPreview();
+        };
+
+        var deleteClickCallbackFn = function() {
+            Ext.toast(
+                me.getViewModel().get('pointGrapicDeletedSuccessMsgText'),
+                me.getViewModel().get('pointGrapicDeletedSuccessMsgTitle'),
+                't'
+            );
+        };
+
+        var graphicPool = Ext.create('BasiGX.view.panel.GraphicPool', {
+            backendUrls: me.getBackendUrls(),
+            okClickCallbackFn: okClickCallbackFn,
+            deleteClickCallbackFn: deleteClickCallbackFn,
+            useCsrfToken: true
+        });
+
+        var graphicPoolWin = Ext.create('Ext.window.Window', {
+            title: me.getViewModel().get('graphicPoolWindowTitle'),
+            constrain: true,
+            items: [graphicPool]
+        });
+        graphicPoolWin.show();
+    }
+});

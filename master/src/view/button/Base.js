@@ -1,9 +1,40 @@
-
-var __cov_HmcfUOY_KJEE1gMzMOje1g = (Function('return this'))();
-if (!__cov_HmcfUOY_KJEE1gMzMOje1g.__coverage__) { __cov_HmcfUOY_KJEE1gMzMOje1g.__coverage__ = {}; }
-__cov_HmcfUOY_KJEE1gMzMOje1g = __cov_HmcfUOY_KJEE1gMzMOje1g.__coverage__;
-if (!(__cov_HmcfUOY_KJEE1gMzMOje1g['/home/travis/build/terrestris/BasiGX/src/view/button/Base.js'])) {
-   __cov_HmcfUOY_KJEE1gMzMOje1g['/home/travis/build/terrestris/BasiGX/src/view/button/Base.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/button/Base.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0},"b":{"1":[0,0]},"f":{"1":0},"fnMap":{"1":{"name":"(anonymous_1)","line":31,"loc":{"start":{"line":31,"column":17},"end":{"line":31,"column":28}}}},"statementMap":{"1":{"start":{"line":21,"column":0},"end":{"line":40,"column":3}},"2":{"start":{"line":32,"column":8},"end":{"line":32,"column":22}},"3":{"start":{"line":33,"column":8},"end":{"line":33,"column":33}},"4":{"start":{"line":34,"column":8},"end":{"line":38,"column":9}},"5":{"start":{"line":35,"column":12},"end":{"line":35,"column":38}},"6":{"start":{"line":36,"column":12},"end":{"line":36,"column":60}},"7":{"start":{"line":37,"column":12},"end":{"line":37,"column":29}}},"branchMap":{"1":{"line":34,"type":"if","locations":[{"start":{"line":34,"column":8},"end":{"line":34,"column":8}},{"start":{"line":34,"column":8},"end":{"line":34,"column":8}}]}}};
-}
-__cov_HmcfUOY_KJEE1gMzMOje1g = __cov_HmcfUOY_KJEE1gMzMOje1g['/home/travis/build/terrestris/BasiGX/src/view/button/Base.js'];
-__cov_HmcfUOY_KJEE1gMzMOje1g.s['1']++;Ext.define('BasiGX.view.button.Base',{extend:'Ext.Button',xtype:'basigx-button-base',viewModel:{data:{}},bind:{},constructor:function(){__cov_HmcfUOY_KJEE1gMzMOje1g.f['1']++;__cov_HmcfUOY_KJEE1gMzMOje1g.s['2']++;var me=this;__cov_HmcfUOY_KJEE1gMzMOje1g.s['3']++;me.callParent(arguments);__cov_HmcfUOY_KJEE1gMzMOje1g.s['4']++;if(me.setTooltip){__cov_HmcfUOY_KJEE1gMzMOje1g.b['1'][0]++;__cov_HmcfUOY_KJEE1gMzMOje1g.s['5']++;var bind=me.config.bind;__cov_HmcfUOY_KJEE1gMzMOje1g.s['6']++;bind.tooltip=me.getViewModel().get('tooltip');__cov_HmcfUOY_KJEE1gMzMOje1g.s['7']++;me.setBind(bind);}else{__cov_HmcfUOY_KJEE1gMzMOje1g.b['1'][1]++;}}});
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * A base class for buttons.
+ *
+ * @class BasiGX.view.button.Base
+ */
+Ext.define('BasiGX.view.button.Base', {
+    extend: 'Ext.Button',
+    xtype: 'basigx-button-base',
+    viewModel: {
+        data: {}
+    },
+    bind: {},
+    /**
+     *
+     */
+    constructor: function() {
+        var me = this;
+        me.callParent(arguments);
+        if (me.setTooltip) {
+            var bind = me.config.bind;
+            bind.tooltip = me.getViewModel().get('tooltip');
+            me.setBind(bind);
+        }
+    }
+});

@@ -1,9 +1,304 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * LegendTree Panel
+ *
+ * Used to build a TreePanel with layer legends.
+ *
+ * @class BasiGX.view.panel.LegendTree
+ */
+Ext.define('BasiGX.view.panel.LegendTree', {
+    extend: 'Ext.tree.Panel',
+    xtype: 'basigx-panel-legendtree',
 
-var __cov_02mCQvbxJDDPWj$Os72hKw = (Function('return this'))();
-if (!__cov_02mCQvbxJDDPWj$Os72hKw.__coverage__) { __cov_02mCQvbxJDDPWj$Os72hKw.__coverage__ = {}; }
-__cov_02mCQvbxJDDPWj$Os72hKw = __cov_02mCQvbxJDDPWj$Os72hKw.__coverage__;
-if (!(__cov_02mCQvbxJDDPWj$Os72hKw['/home/travis/build/terrestris/BasiGX/src/view/panel/LegendTree.js'])) {
-   __cov_02mCQvbxJDDPWj$Os72hKw['/home/travis/build/terrestris/BasiGX/src/view/panel/LegendTree.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/panel/LegendTree.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0,0],"17":[0,0],"18":[0,0],"19":[0,0],"20":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0},"fnMap":{"1":{"name":"(anonymous_1)","line":47,"loc":{"start":{"line":47,"column":21},"end":{"line":47,"column":38}}},"2":{"name":"(anonymous_2)","line":97,"loc":{"start":{"line":97,"column":19},"end":{"line":97,"column":30}}},"3":{"name":"(anonymous_3)","line":130,"loc":{"start":{"line":130,"column":37},"end":{"line":130,"column":48}}},"4":{"name":"(anonymous_4)","line":160,"loc":{"start":{"line":160,"column":22},"end":{"line":160,"column":37}}},"5":{"name":"(anonymous_5)","line":185,"loc":{"start":{"line":185,"column":19},"end":{"line":185,"column":43}}},"6":{"name":"(anonymous_6)","line":205,"loc":{"start":{"line":205,"column":21},"end":{"line":205,"column":32}}},"7":{"name":"(anonymous_7)","line":213,"loc":{"start":{"line":213,"column":23},"end":{"line":213,"column":34}}},"8":{"name":"(anonymous_8)","line":221,"loc":{"start":{"line":221,"column":21},"end":{"line":221,"column":32}}},"9":{"name":"(anonymous_9)","line":232,"loc":{"start":{"line":232,"column":21},"end":{"line":232,"column":35}}},"10":{"name":"(anonymous_10)","line":240,"loc":{"start":{"line":240,"column":37},"end":{"line":240,"column":53}}},"11":{"name":"(anonymous_11)","line":259,"loc":{"start":{"line":259,"column":18},"end":{"line":259,"column":32}}},"12":{"name":"(anonymous_12)","line":301,"loc":{"start":{"line":301,"column":29},"end":{"line":301,"column":40}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":304,"column":3}},"2":{"start":{"line":48,"column":12},"end":{"line":48,"column":50}},"3":{"start":{"line":98,"column":8},"end":{"line":98,"column":22}},"4":{"start":{"line":102,"column":8},"end":{"line":111,"column":9}},"5":{"start":{"line":103,"column":12},"end":{"line":110,"column":13}},"6":{"start":{"line":104,"column":16},"end":{"line":104,"column":37}},"7":{"start":{"line":105,"column":16},"end":{"line":105,"column":45}},"8":{"start":{"line":106,"column":16},"end":{"line":109,"column":40}},"9":{"start":{"line":112,"column":8},"end":{"line":112,"column":30}},"10":{"start":{"line":114,"column":8},"end":{"line":114,"column":25}},"11":{"start":{"line":115,"column":8},"end":{"line":120,"column":11}},"12":{"start":{"line":123,"column":8},"end":{"line":123,"column":24}},"13":{"start":{"line":127,"column":8},"end":{"line":135,"column":9}},"14":{"start":{"line":129,"column":12},"end":{"line":134,"column":13}},"15":{"start":{"line":130,"column":16},"end":{"line":132,"column":51}},"16":{"start":{"line":131,"column":20},"end":{"line":131,"column":36}},"17":{"start":{"line":133,"column":16},"end":{"line":133,"column":45}},"18":{"start":{"line":161,"column":8},"end":{"line":161,"column":39}},"19":{"start":{"line":162,"column":8},"end":{"line":162,"column":39}},"20":{"start":{"line":163,"column":8},"end":{"line":163,"column":43}},"21":{"start":{"line":164,"column":8},"end":{"line":168,"column":9}},"22":{"start":{"line":165,"column":12},"end":{"line":166,"column":71}},"23":{"start":{"line":167,"column":12},"end":{"line":167,"column":19}},"24":{"start":{"line":169,"column":8},"end":{"line":169,"column":22}},"25":{"start":{"line":170,"column":8},"end":{"line":170,"column":63}},"26":{"start":{"line":171,"column":8},"end":{"line":171,"column":59}},"27":{"start":{"line":173,"column":8},"end":{"line":177,"column":9}},"28":{"start":{"line":174,"column":12},"end":{"line":175,"column":29}},"29":{"start":{"line":176,"column":12},"end":{"line":176,"column":19}},"30":{"start":{"line":178,"column":8},"end":{"line":182,"column":9}},"31":{"start":{"line":179,"column":12},"end":{"line":180,"column":43}},"32":{"start":{"line":181,"column":12},"end":{"line":181,"column":19}},"33":{"start":{"line":184,"column":8},"end":{"line":184,"column":34}},"34":{"start":{"line":185,"column":8},"end":{"line":198,"column":11}},"35":{"start":{"line":186,"column":12},"end":{"line":197,"column":13}},"36":{"start":{"line":187,"column":16},"end":{"line":187,"column":48}},"37":{"start":{"line":189,"column":16},"end":{"line":189,"column":53}},"38":{"start":{"line":190,"column":16},"end":{"line":190,"column":49}},"39":{"start":{"line":191,"column":16},"end":{"line":191,"column":74}},"40":{"start":{"line":192,"column":16},"end":{"line":196,"column":17}},"41":{"start":{"line":193,"column":20},"end":{"line":193,"column":52}},"42":{"start":{"line":194,"column":23},"end":{"line":196,"column":17}},"43":{"start":{"line":195,"column":20},"end":{"line":195,"column":52}},"44":{"start":{"line":206,"column":8},"end":{"line":206,"column":40}},"45":{"start":{"line":214,"column":8},"end":{"line":214,"column":42}},"46":{"start":{"line":222,"column":8},"end":{"line":222,"column":40}},"47":{"start":{"line":233,"column":8},"end":{"line":233,"column":22}},"48":{"start":{"line":234,"column":8},"end":{"line":234,"column":51}},"49":{"start":{"line":237,"column":8},"end":{"line":246,"column":9}},"50":{"start":{"line":240,"column":12},"end":{"line":245,"column":15}},"51":{"start":{"line":241,"column":16},"end":{"line":241,"column":50}},"52":{"start":{"line":242,"column":16},"end":{"line":244,"column":17}},"53":{"start":{"line":243,"column":20},"end":{"line":243,"column":33}},"54":{"start":{"line":247,"column":8},"end":{"line":247,"column":21}},"55":{"start":{"line":261,"column":8},"end":{"line":261,"column":46}},"56":{"start":{"line":264,"column":8},"end":{"line":266,"column":9}},"57":{"start":{"line":265,"column":12},"end":{"line":265,"column":35}},"58":{"start":{"line":268,"column":8},"end":{"line":268,"column":32}},"59":{"start":{"line":269,"column":8},"end":{"line":274,"column":9}},"60":{"start":{"line":270,"column":12},"end":{"line":270,"column":52}},"61":{"start":{"line":272,"column":12},"end":{"line":273,"column":51}},"62":{"start":{"line":276,"column":8},"end":{"line":276,"column":71}},"63":{"start":{"line":277,"column":8},"end":{"line":293,"column":9}},"64":{"start":{"line":279,"column":12},"end":{"line":279,"column":39}},"65":{"start":{"line":284,"column":12},"end":{"line":289,"column":20}},"66":{"start":{"line":290,"column":12},"end":{"line":290,"column":68}},"67":{"start":{"line":292,"column":12},"end":{"line":292,"column":39}},"68":{"start":{"line":302,"column":8},"end":{"line":302,"column":73}}},"branchMap":{"1":{"line":102,"type":"if","locations":[{"start":{"line":102,"column":8},"end":{"line":102,"column":8}},{"start":{"line":102,"column":8},"end":{"line":102,"column":8}}]},"2":{"line":103,"type":"if","locations":[{"start":{"line":103,"column":12},"end":{"line":103,"column":12}},{"start":{"line":103,"column":12},"end":{"line":103,"column":12}}]},"3":{"line":103,"type":"binary-expr","locations":[{"start":{"line":103,"column":16},"end":{"line":103,"column":28}},{"start":{"line":103,"column":32},"end":{"line":103,"column":51}}]},"4":{"line":127,"type":"if","locations":[{"start":{"line":127,"column":8},"end":{"line":127,"column":8}},{"start":{"line":127,"column":8},"end":{"line":127,"column":8}}]},"5":{"line":129,"type":"if","locations":[{"start":{"line":129,"column":12},"end":{"line":129,"column":12}},{"start":{"line":129,"column":12},"end":{"line":129,"column":12}}]},"6":{"line":164,"type":"if","locations":[{"start":{"line":164,"column":8},"end":{"line":164,"column":8}},{"start":{"line":164,"column":8},"end":{"line":164,"column":8}}]},"7":{"line":164,"type":"binary-expr","locations":[{"start":{"line":164,"column":12},"end":{"line":164,"column":19}},{"start":{"line":164,"column":23},"end":{"line":164,"column":30}},{"start":{"line":164,"column":34},"end":{"line":164,"column":43}}]},"8":{"line":173,"type":"if","locations":[{"start":{"line":173,"column":8},"end":{"line":173,"column":8}},{"start":{"line":173,"column":8},"end":{"line":173,"column":8}}]},"9":{"line":178,"type":"if","locations":[{"start":{"line":178,"column":8},"end":{"line":178,"column":8}},{"start":{"line":178,"column":8},"end":{"line":178,"column":8}}]},"10":{"line":186,"type":"if","locations":[{"start":{"line":186,"column":12},"end":{"line":186,"column":12}},{"start":{"line":186,"column":12},"end":{"line":186,"column":12}}]},"11":{"line":192,"type":"if","locations":[{"start":{"line":192,"column":16},"end":{"line":192,"column":16}},{"start":{"line":192,"column":16},"end":{"line":192,"column":16}}]},"12":{"line":192,"type":"binary-expr","locations":[{"start":{"line":192,"column":20},"end":{"line":192,"column":38}},{"start":{"line":192,"column":42},"end":{"line":192,"column":48}}]},"13":{"line":194,"type":"if","locations":[{"start":{"line":194,"column":23},"end":{"line":194,"column":23}},{"start":{"line":194,"column":23},"end":{"line":194,"column":23}}]},"14":{"line":194,"type":"binary-expr","locations":[{"start":{"line":194,"column":27},"end":{"line":194,"column":46}},{"start":{"line":194,"column":50},"end":{"line":194,"column":58}}]},"15":{"line":237,"type":"if","locations":[{"start":{"line":237,"column":8},"end":{"line":237,"column":8}},{"start":{"line":237,"column":8},"end":{"line":237,"column":8}}]},"16":{"line":237,"type":"binary-expr","locations":[{"start":{"line":237,"column":12},"end":{"line":237,"column":33}},{"start":{"line":238,"column":12},"end":{"line":238,"column":25}},{"start":{"line":239,"column":12},"end":{"line":239,"column":37}}]},"17":{"line":242,"type":"if","locations":[{"start":{"line":242,"column":16},"end":{"line":242,"column":16}},{"start":{"line":242,"column":16},"end":{"line":242,"column":16}}]},"18":{"line":264,"type":"if","locations":[{"start":{"line":264,"column":8},"end":{"line":264,"column":8}},{"start":{"line":264,"column":8},"end":{"line":264,"column":8}}]},"19":{"line":269,"type":"if","locations":[{"start":{"line":269,"column":8},"end":{"line":269,"column":8}},{"start":{"line":269,"column":8},"end":{"line":269,"column":8}}]},"20":{"line":277,"type":"if","locations":[{"start":{"line":277,"column":8},"end":{"line":277,"column":8}},{"start":{"line":277,"column":8},"end":{"line":277,"column":8}}]}}};
-}
-__cov_02mCQvbxJDDPWj$Os72hKw = __cov_02mCQvbxJDDPWj$Os72hKw['/home/travis/build/terrestris/BasiGX/src/view/panel/LegendTree.js'];
-__cov_02mCQvbxJDDPWj$Os72hKw.s['1']++;Ext.define('BasiGX.view.panel.LegendTree',{extend:'Ext.tree.Panel',xtype:'basigx-panel-legendtree',requires:['BasiGX.ux.RowExpanderWithComponents','Ext.app.ViewModel'],viewModel:{data:{documentation:'<h2>Themen Auswahl mit Legenden</h2>\u2022 In diesem '+'Fenster können Sie die verfügbaren Kartenthemen sehen und '+'deren Sichtbarkeit steuern. Ausserdem haben Sie die '+'Möglichkeit, sich die Legenden zu den einzelnen Themen '+'anzeigen zu lassen'}},viewConfig:{plugins:{ptype:'treeviewdragdrop'},getRowClass:function(record){__cov_02mCQvbxJDDPWj$Os72hKw.f['1']++;__cov_02mCQvbxJDDPWj$Os72hKw.s['2']++;return this.up().getCssForRow(record);}},layout:'fit',width:250,height:300,collapsible:true,collapsed:true,hideCollapseTool:true,collapseDirection:'bottom',titleCollapse:true,titleAlign:'center',rootVisible:false,allowDeselect:true,selModel:{mode:'MULTI'},cls:'basigx-legend-panel',initiallyCollapsed:null,initComponent:function(){__cov_02mCQvbxJDDPWj$Os72hKw.f['2']++;__cov_02mCQvbxJDDPWj$Os72hKw.s['3']++;var me=this;__cov_02mCQvbxJDDPWj$Os72hKw.s['4']++;if(me.isExtVersionLowerThan62()){__cov_02mCQvbxJDDPWj$Os72hKw.b['1'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['5']++;if((__cov_02mCQvbxJDDPWj$Os72hKw.b['3'][0]++,me.collapsed)&&(__cov_02mCQvbxJDDPWj$Os72hKw.b['3'][1]++,me.hideCollapseTool)){__cov_02mCQvbxJDDPWj$Os72hKw.b['2'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['6']++;me.collapsed=false;__cov_02mCQvbxJDDPWj$Os72hKw.s['7']++;me.initiallyCollapsed=true;__cov_02mCQvbxJDDPWj$Os72hKw.s['8']++;Ext.log.info('Ignoring configuration "collapsed" and instead'+' setup a one-time afterlayout listener that will'+' collapse the panel (this is possibly due to a bug'+' in ExtJS 6)');}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['2'][1]++;}}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['1'][1]++;}__cov_02mCQvbxJDDPWj$Os72hKw.s['9']++;me.hideHeaders=true;__cov_02mCQvbxJDDPWj$Os72hKw.s['10']++;me.lines=false;__cov_02mCQvbxJDDPWj$Os72hKw.s['11']++;me.plugins=[{ptype:'rowexpanderwithcomponents',hideExpandColumn:true,rowBodyCompTemplate:me.rowBodyCompTemplate,pluginId:'rowexpanderwithcomponents'}];__cov_02mCQvbxJDDPWj$Os72hKw.s['12']++;me.callParent();__cov_02mCQvbxJDDPWj$Os72hKw.s['13']++;if(me.isExtVersionLowerThan62()){__cov_02mCQvbxJDDPWj$Os72hKw.b['4'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['14']++;if(me.initiallyCollapsed){__cov_02mCQvbxJDDPWj$Os72hKw.b['5'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['15']++;me.on('afterlayout',function(){__cov_02mCQvbxJDDPWj$Os72hKw.f['3']++;__cov_02mCQvbxJDDPWj$Os72hKw.s['16']++;this.collapse();},me,{single:true,delay:100});__cov_02mCQvbxJDDPWj$Os72hKw.s['17']++;me.initiallyCollapsed=null;}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['5'][1]++;}}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['4'][1]++;}},rowBodyCompTemplate:{xtype:'container',items:[{xtype:'image',src:'{{record.getOlLayer().get("legendUrl")}}',height:'{{record.getOlLayer().get("legendHeight")}}',alt:'{{record.getOlLayer().get("legendUrl")}}'}]},setModeAllBodies:function(mode){__cov_02mCQvbxJDDPWj$Os72hKw.f['4']++;__cov_02mCQvbxJDDPWj$Os72hKw.s['18']++;var toggle=mode==='toggle';__cov_02mCQvbxJDDPWj$Os72hKw.s['19']++;var expand=mode==='expand';__cov_02mCQvbxJDDPWj$Os72hKw.s['20']++;var collapse=mode==='collapse';__cov_02mCQvbxJDDPWj$Os72hKw.s['21']++;if((__cov_02mCQvbxJDDPWj$Os72hKw.b['7'][0]++,!toggle)&&(__cov_02mCQvbxJDDPWj$Os72hKw.b['7'][1]++,!expand)&&(__cov_02mCQvbxJDDPWj$Os72hKw.b['7'][2]++,!collapse)){__cov_02mCQvbxJDDPWj$Os72hKw.b['6'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['22']++;Ext.log.warn('Illegal mode, expected "'+mode+'"'+' to be bei either "toggle", "expand" or "collapse".');__cov_02mCQvbxJDDPWj$Os72hKw.s['23']++;return;}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['6'][1]++;}__cov_02mCQvbxJDDPWj$Os72hKw.s['24']++;var me=this;__cov_02mCQvbxJDDPWj$Os72hKw.s['25']++;var plugin=me.getPlugin('rowexpanderwithcomponents');__cov_02mCQvbxJDDPWj$Os72hKw.s['26']++;var collapsedClass=me.plugins[0].rowCollapsedCls;__cov_02mCQvbxJDDPWj$Os72hKw.s['27']++;if(me.initiallyCollapsed){__cov_02mCQvbxJDDPWj$Os72hKw.b['8'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['28']++;Ext.log.warn('Cannot set mode of all bodies, the view is still '+'collapsed');__cov_02mCQvbxJDDPWj$Os72hKw.s['29']++;return;}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['8'][1]++;}__cov_02mCQvbxJDDPWj$Os72hKw.s['30']++;if(!plugin){__cov_02mCQvbxJDDPWj$Os72hKw.b['9'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['31']++;Ext.log.warn('Cannot set mode of all bodies, Failed to determine '+'the row expander-plugin');__cov_02mCQvbxJDDPWj$Os72hKw.s['32']++;return;}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['9'][1]++;}__cov_02mCQvbxJDDPWj$Os72hKw.s['33']++;var store=me.getStore();__cov_02mCQvbxJDDPWj$Os72hKw.s['34']++;store.each(function(record,index){__cov_02mCQvbxJDDPWj$Os72hKw.f['5']++;__cov_02mCQvbxJDDPWj$Os72hKw.s['35']++;if(toggle){__cov_02mCQvbxJDDPWj$Os72hKw.b['10'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['36']++;plugin.toggleRow(index,record);}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['10'][1]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['37']++;var rowNode=me.view.getNode(index);__cov_02mCQvbxJDDPWj$Os72hKw.s['38']++;var normalRow=Ext.fly(rowNode);__cov_02mCQvbxJDDPWj$Os72hKw.s['39']++;var currentlyCollapsed=normalRow.hasCls(collapsedClass);__cov_02mCQvbxJDDPWj$Os72hKw.s['40']++;if((__cov_02mCQvbxJDDPWj$Os72hKw.b['12'][0]++,currentlyCollapsed)&&(__cov_02mCQvbxJDDPWj$Os72hKw.b['12'][1]++,expand)){__cov_02mCQvbxJDDPWj$Os72hKw.b['11'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['41']++;plugin.toggleRow(index,record);}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['11'][1]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['42']++;if((__cov_02mCQvbxJDDPWj$Os72hKw.b['14'][0]++,!currentlyCollapsed)&&(__cov_02mCQvbxJDDPWj$Os72hKw.b['14'][1]++,collapse)){__cov_02mCQvbxJDDPWj$Os72hKw.b['13'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['43']++;plugin.toggleRow(index,record);}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['13'][1]++;}}}});},expandAllBodies:function(){__cov_02mCQvbxJDDPWj$Os72hKw.f['6']++;__cov_02mCQvbxJDDPWj$Os72hKw.s['44']++;this.setModeAllBodies('expand');},collapseAllBodies:function(){__cov_02mCQvbxJDDPWj$Os72hKw.f['7']++;__cov_02mCQvbxJDDPWj$Os72hKw.s['45']++;this.setModeAllBodies('collapse');},toggleAllBodies:function(){__cov_02mCQvbxJDDPWj$Os72hKw.f['8']++;__cov_02mCQvbxJDDPWj$Os72hKw.s['46']++;this.setModeAllBodies('toggle');},getColorFromRow:function(rec){__cov_02mCQvbxJDDPWj$Os72hKw.f['9']++;__cov_02mCQvbxJDDPWj$Os72hKw.s['47']++;var me=this;__cov_02mCQvbxJDDPWj$Os72hKw.s['48']++;var color=rec.getData().get('treeColor');__cov_02mCQvbxJDDPWj$Os72hKw.s['49']++;if((__cov_02mCQvbxJDDPWj$Os72hKw.b['16'][0]++,!Ext.isDefined(color))&&(__cov_02mCQvbxJDDPWj$Os72hKw.b['16'][1]++,!rec.isLeaf())&&(__cov_02mCQvbxJDDPWj$Os72hKw.b['16'][2]++,rec.childNodes.length>0)){__cov_02mCQvbxJDDPWj$Os72hKw.b['15'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['50']++;Ext.each(rec.childNodes,function(child){__cov_02mCQvbxJDDPWj$Os72hKw.f['10']++;__cov_02mCQvbxJDDPWj$Os72hKw.s['51']++;color=me.getColorFromRow(child);__cov_02mCQvbxJDDPWj$Os72hKw.s['52']++;if(Ext.isDefined(color)){__cov_02mCQvbxJDDPWj$Os72hKw.b['17'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['53']++;return false;}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['17'][1]++;}});}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['15'][1]++;}__cov_02mCQvbxJDDPWj$Os72hKw.s['54']++;return color;},getCssForRow:function(rec){__cov_02mCQvbxJDDPWj$Os72hKw.f['11']++;__cov_02mCQvbxJDDPWj$Os72hKw.s['55']++;var color=this.getColorFromRow(rec);__cov_02mCQvbxJDDPWj$Os72hKw.s['56']++;if(!Ext.isDefined(color)){__cov_02mCQvbxJDDPWj$Os72hKw.b['18'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['57']++;return'my-body-class';}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['18'][1]++;}__cov_02mCQvbxJDDPWj$Os72hKw.s['58']++;var elemenIdAndCssClass;__cov_02mCQvbxJDDPWj$Os72hKw.s['59']++;if(color===null){__cov_02mCQvbxJDDPWj$Os72hKw.b['19'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['60']++;elemenIdAndCssClass='stylesheet-null';}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['19'][1]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['61']++;elemenIdAndCssClass='stylesheet-'+color.replace(/[\(\),\. ]+/g,'-');}__cov_02mCQvbxJDDPWj$Os72hKw.s['62']++;var sheet=Ext.DomQuery.selectNode('#'+elemenIdAndCssClass);__cov_02mCQvbxJDDPWj$Os72hKw.s['63']++;if(sheet){__cov_02mCQvbxJDDPWj$Os72hKw.b['20'][0]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['64']++;return elemenIdAndCssClass;}else{__cov_02mCQvbxJDDPWj$Os72hKw.b['20'][1]++;__cov_02mCQvbxJDDPWj$Os72hKw.s['65']++;var css=''+'.'+elemenIdAndCssClass+' { '+' background-color: '+color+';'+' background:linear-gradient(to right, white, '+color+');'+' filter: alpha(opacity=50);'+'}';__cov_02mCQvbxJDDPWj$Os72hKw.s['66']++;Ext.util.CSS.createStyleSheet(css,elemenIdAndCssClass);__cov_02mCQvbxJDDPWj$Os72hKw.s['67']++;return elemenIdAndCssClass;}},isExtVersionLowerThan62:function(){__cov_02mCQvbxJDDPWj$Os72hKw.f['12']++;__cov_02mCQvbxJDDPWj$Os72hKw.s['68']++;return parseInt(Ext.getVersion().getShortVersion(),10)<620000;}});
+    requires: [
+        'BasiGX.ux.RowExpanderWithComponents',
+        'Ext.app.ViewModel'
+    ],
+
+    viewModel: {
+        data: {
+            documentation: '<h2>Themen Auswahl mit Legenden</h2>• In diesem ' +
+                'Fenster können Sie die verfügbaren Kartenthemen sehen und ' +
+                'deren Sichtbarkeit steuern. Ausserdem haben Sie die ' +
+                'Möglichkeit, sich die Legenden zu den einzelnen Themen ' +
+                'anzeigen zu lassen'
+        }
+    },
+
+    /**
+     * adding custom method to get access to row styles
+     */
+    viewConfig: {
+        plugins: {ptype: 'treeviewdragdrop'},
+        getRowClass: function(record) {
+            return this.up().getCssForRow(record);
+        }
+    },
+
+    layout: 'fit',
+
+    width: 250,
+
+    height: 300,
+
+    collapsible: true,
+
+    collapsed: true,
+
+    hideCollapseTool: true,
+
+    collapseDirection: 'bottom',
+
+    titleCollapse: true,
+
+    titleAlign: 'center',
+
+    rootVisible: false,
+
+    allowDeselect: true,
+
+    selModel: {
+        mode: 'MULTI'
+    },
+
+    cls: 'basigx-legend-panel',
+
+    /**
+     * @private
+     */
+    initiallyCollapsed: null,
+
+    /**
+     * Take care of the collapsed configuration.
+     *
+     * For some reason, for the legend panel we cannot have the configuration
+     *
+     *     {
+     *         collapsed: true,
+     *         hideCollapseTool: true
+     *     }
+     * because the the showing on header click does not work. We have this one
+     * time listener, that tells us what we originally wanted.
+     */
+    initComponent: function() {
+        var me = this;
+
+        // The following fix is needed for ExtJS versions between 6.0.0 and
+        // 6.2.0 only. We keep it for backwards compatibility.
+        if (me.isExtVersionLowerThan62()) {
+            if (me.collapsed && me.hideCollapseTool) {
+                me.collapsed = false;
+                me.initiallyCollapsed = true;
+                Ext.log.info('Ignoring configuration "collapsed" and instead' +
+                        ' setup a one-time afterlayout listener that will' +
+                        ' collapse the panel (this is possibly due to a bug' +
+                        ' in ExtJS 6)');
+            }
+        }
+        me.hideHeaders = true;
+
+        me.lines = false;
+        me.plugins = [{
+            ptype: 'rowexpanderwithcomponents',
+            hideExpandColumn: true,
+            rowBodyCompTemplate: me.rowBodyCompTemplate,
+            pluginId: 'rowexpanderwithcomponents'
+        }];
+
+        // call parent
+        me.callParent();
+
+        // The following fix is needed for ExtJS versions between 6.0.0 and
+        // 6.2.0 only. We keep it for backwards compatibility.
+        if (me.isExtVersionLowerThan62()) {
+            // See the comment above the constructor why we need this.
+            if (me.initiallyCollapsed) {
+                me.on('afterlayout', function() {
+                    this.collapse();
+                }, me, {single: true, delay: 100});
+                me.initiallyCollapsed = null;
+            }
+        }
+    },
+
+    /**
+     * This template will be used for every record. It can contain general
+     * Ext JS Components. Text in "{{ }}" will be executed as JavaScript.
+     */
+    rowBodyCompTemplate: {
+        xtype: 'container',
+        items: [{
+            xtype: 'image',
+            src: '{{record.getOlLayer().get("legendUrl")}}',
+            height: '{{record.getOlLayer().get("legendHeight")}}',
+            alt: '{{record.getOlLayer().get("legendUrl")}}'
+        }]
+    },
+
+    /**
+     * Expands, collapses or toggles all row bodies with the components,
+     * depending on the passed mode.
+     *
+     * @param {String} mode The mode to set; either `toggle`, `expand` or
+     *     `collapse`.
+     * @protected
+     */
+    setModeAllBodies: function(mode) {
+        var toggle = mode === 'toggle';
+        var expand = mode === 'expand';
+        var collapse = mode === 'collapse';
+        if (!toggle && !expand && !collapse) {
+            Ext.log.warn('Illegal mode, expected "' + mode + '"' +
+                ' to be bei either "toggle", "expand" or "collapse".');
+            return;
+        }
+        var me = this;
+        var plugin = me.getPlugin('rowexpanderwithcomponents');
+        var collapsedClass = me.plugins[0].rowCollapsedCls;
+
+        if (me.initiallyCollapsed) {
+            Ext.log.warn('Cannot set mode of all bodies, the view is still ' +
+                'collapsed');
+            return;
+        }
+        if (!plugin) {
+            Ext.log.warn('Cannot set mode of all bodies, Failed to determine ' +
+                'the row expander-plugin');
+            return;
+        }
+
+        var store = me.getStore();
+        store.each(function(record, index) {
+            if (toggle) {
+                plugin.toggleRow(index, record);
+            } else {
+                var rowNode = me.view.getNode(index);
+                var normalRow = Ext.fly(rowNode);
+                var currentlyCollapsed = normalRow.hasCls(collapsedClass);
+                if (currentlyCollapsed && expand) {
+                    plugin.toggleRow(index, record);
+                } else if (!currentlyCollapsed && collapse) {
+                    plugin.toggleRow(index, record);
+                }
+            }
+        });
+    },
+
+    /**
+     * Expands all row bodies with the components, effectively showing
+     * previously hidden legends.
+     */
+    expandAllBodies: function() {
+        this.setModeAllBodies('expand');
+    },
+
+    /**
+     * Collapses all row bodies with the components, effectively hiding
+     * previously shown legends.
+     */
+    collapseAllBodies: function() {
+        this.setModeAllBodies('collapse');
+    },
+
+    /**
+     * Toggles all row bodies with the components, effectively showing
+     * previously hidden legends and hiding previously shown legends.
+     */
+    toggleAllBodies: function() {
+        this.setModeAllBodies('toggle');
+    },
+
+    /**
+     * Recursively searches the passed record (or its children) for a
+     * `treeColor` field and eventually returns the found color.
+     *
+     * @param {Ext.data.Model} rec A tree node record to search the color in.
+     * @return {String} A color value.
+     */
+    getColorFromRow: function(rec) {
+        var me = this;
+        var color = rec.getData().get('treeColor');
+
+        // detect if we have a folder and apply color from childNode
+        if (!Ext.isDefined(color) &&
+            !rec.isLeaf() &&
+            rec.childNodes.length > 0) {
+            Ext.each(rec.childNodes, function(child) {
+                color = me.getColorFromRow(child);
+                if (Ext.isDefined(color)) {
+                    return false;
+                }
+            });
+        }
+        return color;
+    },
+
+    /**
+     * Method gives access to the rows style.
+     *
+     * If a layer is configured with property 'treeColor', the color will
+     * get applied here. Folders will inherit the color
+     *
+     * @param {Ext.data.Model} rec The tree node record of the row.
+     * @return {String} A CSS class to use.
+     */
+    getCssForRow: function(rec) {
+
+        var color = this.getColorFromRow(rec);
+
+        // if color is still not defined, return old default
+        if (!Ext.isDefined(color)) {
+            return 'my-body-class';
+        }
+
+        var elemenIdAndCssClass;
+        if (color === null) {
+            elemenIdAndCssClass = 'stylesheet-null';
+        } else {
+            elemenIdAndCssClass = 'stylesheet-' +
+                color.replace(/[\(\),\. ]+/g, '-');
+        }
+
+        var sheet = Ext.DomQuery.selectNode('#' + elemenIdAndCssClass);
+        if (sheet) {
+            // already create once before
+            return elemenIdAndCssClass;
+            // instead of returning, we could also remove the sheet and add it
+            // again: see below
+            // sheet.parentNode.removeChild(sheet);
+        } else {
+            var css = '' +
+                '.' + elemenIdAndCssClass + ' { ' +
+                ' background-color: ' + color + ';' +
+                ' background:linear-gradient(to right, white, ' + color + ');' +
+                ' filter: alpha(opacity=50);' + // IE9 fallback
+                '}';
+            Ext.util.CSS.createStyleSheet(css, elemenIdAndCssClass);
+
+            return elemenIdAndCssClass;
+        }
+    },
+
+    /**
+     * Tests if the current ExtJS version is lower than 6.2.0.000.
+     *
+     * @return {Boolean} Whether the version is lower than 6.2.0.000 or not.
+     */
+    isExtVersionLowerThan62: function() {
+        return parseInt(Ext.getVersion().getShortVersion(), 10) < 620000;
+    }
+});

@@ -1,9 +1,908 @@
+/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * AddWms FormPanel
+ *
+ * Used to add an WMS to the map
+ *
+ * @class BasiGX.view.form.AddWms
+ */
+Ext.define('BasiGX.view.form.AddWms', {
+    extend: 'Ext.form.Panel',
+    xtype: 'basigx-form-addwms',
 
-var __cov_aw_ivxye20OPypoB_Way2A = (Function('return this'))();
-if (!__cov_aw_ivxye20OPypoB_Way2A.__coverage__) { __cov_aw_ivxye20OPypoB_Way2A.__coverage__ = {}; }
-__cov_aw_ivxye20OPypoB_Way2A = __cov_aw_ivxye20OPypoB_Way2A.__coverage__;
-if (!(__cov_aw_ivxye20OPypoB_Way2A['/home/travis/build/terrestris/BasiGX/src/view/form/AddWms.js'])) {
-   __cov_aw_ivxye20OPypoB_Way2A['/home/travis/build/terrestris/BasiGX/src/view/form/AddWms.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/view/form/AddWms.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0,"137":0,"138":0,"139":0,"140":0,"141":0,"142":0,"143":0,"144":0,"145":0,"146":0,"147":0,"148":0,"149":0,"150":0,"151":0,"152":0,"153":0,"154":0,"155":0,"156":0,"157":0,"158":0,"159":0,"160":0,"161":0,"162":0,"163":0,"164":0,"165":0,"166":0,"167":0,"168":0,"169":0,"170":0,"171":0,"172":0,"173":0,"174":0,"175":0,"176":0,"177":0,"178":0,"179":0,"180":0,"181":0,"182":0,"183":0,"184":0,"185":0,"186":0,"187":0,"188":0,"189":0,"190":0,"191":0,"192":0,"193":0,"194":0,"195":0,"196":0,"197":0,"198":0,"199":0,"200":0,"201":0,"202":0,"203":0,"204":0,"205":0,"206":0,"207":0,"208":0,"209":0,"210":0,"211":0,"212":0,"213":0,"214":0,"215":0,"216":0,"217":0,"218":0,"219":0,"220":0,"221":0,"222":0,"223":0,"224":0,"225":0,"226":0,"227":0,"228":0,"229":0,"230":0,"231":0,"232":0,"233":0,"234":0,"235":0,"236":0,"237":0,"238":0,"239":0,"240":0,"241":0,"242":0,"243":0,"244":0,"245":0,"246":0,"247":0,"248":0,"249":0,"250":0,"251":0,"252":0,"253":0,"254":0,"255":0,"256":0,"257":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0],"19":[0,0],"20":[0,0],"21":[0,0],"22":[0,0],"23":[0,0],"24":[0,0],"25":[0,0,0],"26":[0,0],"27":[0,0],"28":[0,0],"29":[0,0],"30":[0,0],"31":[0,0],"32":[0,0],"33":[0,0],"34":[0,0],"35":[0,0],"36":[0,0],"37":[0,0],"38":[0,0],"39":[0,0],"40":[0,0],"41":[0,0],"42":[0,0],"43":[0,0,0],"44":[0,0],"45":[0,0],"46":[0,0,0,0,0],"47":[0,0],"48":[0,0],"49":[0,0],"50":[0,0],"51":[0,0],"52":[0,0],"53":[0,0],"54":[0,0],"55":[0,0],"56":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0},"fnMap":{"1":{"name":"(anonymous_1)","line":214,"loc":{"start":{"line":214,"column":28},"end":{"line":214,"column":48}}},"2":{"name":"(anonymous_2)","line":218,"loc":{"start":{"line":218,"column":34},"end":{"line":218,"column":54}}},"3":{"name":"(anonymous_3)","line":236,"loc":{"start":{"line":236,"column":28},"end":{"line":236,"column":47}}},"4":{"name":"(anonymous_4)","line":240,"loc":{"start":{"line":240,"column":34},"end":{"line":240,"column":53}}},"5":{"name":"(anonymous_5)","line":277,"loc":{"start":{"line":277,"column":34},"end":{"line":277,"column":59}}},"6":{"name":"(anonymous_6)","line":300,"loc":{"start":{"line":300,"column":28},"end":{"line":300,"column":46}}},"7":{"name":"(anonymous_7)","line":319,"loc":{"start":{"line":319,"column":21},"end":{"line":319,"column":35}}},"8":{"name":"(anonymous_8)","line":339,"loc":{"start":{"line":339,"column":21},"end":{"line":339,"column":35}}},"9":{"name":"(anonymous_9)","line":350,"loc":{"start":{"line":350,"column":19},"end":{"line":350,"column":30}}},"10":{"name":"(anonymous_10)","line":367,"loc":{"start":{"line":367,"column":16},"end":{"line":367,"column":27}}},"11":{"name":"(anonymous_11)","line":381,"loc":{"start":{"line":381,"column":33},"end":{"line":381,"column":50}}},"12":{"name":"(anonymous_12)","line":413,"loc":{"start":{"line":413,"column":28},"end":{"line":413,"column":39}}},"13":{"name":"(anonymous_13)","line":439,"loc":{"start":{"line":439,"column":36},"end":{"line":439,"column":61}}},"14":{"name":"(anonymous_14)","line":482,"loc":{"start":{"line":482,"column":30},"end":{"line":482,"column":53}}},"15":{"name":"(anonymous_15)","line":496,"loc":{"start":{"line":496,"column":30},"end":{"line":496,"column":49}}},"16":{"name":"(anonymous_16)","line":544,"loc":{"start":{"line":544,"column":30},"end":{"line":544,"column":49}}},"17":{"name":"(anonymous_17)","line":586,"loc":{"start":{"line":586,"column":32},"end":{"line":586,"column":58}}},"18":{"name":"(anonymous_18)","line":593,"loc":{"start":{"line":593,"column":37},"end":{"line":593,"column":57}}},"19":{"name":"(anonymous_19)","line":615,"loc":{"start":{"line":615,"column":21},"end":{"line":615,"column":54}}},"20":{"name":"(anonymous_20)","line":625,"loc":{"start":{"line":625,"column":35},"end":{"line":625,"column":57}}},"21":{"name":"(anonymous_21)","line":637,"loc":{"start":{"line":637,"column":31},"end":{"line":637,"column":42}}},"22":{"name":"(anonymous_22)","line":691,"loc":{"start":{"line":691,"column":31},"end":{"line":691,"column":42}}},"23":{"name":"(anonymous_23)","line":711,"loc":{"start":{"line":711,"column":16},"end":{"line":711,"column":58}}},"24":{"name":"(anonymous_24)","line":759,"loc":{"start":{"line":759,"column":36},"end":{"line":759,"column":59}}},"25":{"name":"(anonymous_25)","line":779,"loc":{"start":{"line":779,"column":25},"end":{"line":779,"column":41}}},"26":{"name":"(anonymous_26)","line":786,"loc":{"start":{"line":786,"column":38},"end":{"line":786,"column":57}}},"27":{"name":"(anonymous_27)","line":808,"loc":{"start":{"line":808,"column":33},"end":{"line":808,"column":50}}},"28":{"name":"(anonymous_28)","line":815,"loc":{"start":{"line":815,"column":25},"end":{"line":815,"column":41}}},"29":{"name":"(anonymous_29)","line":873,"loc":{"start":{"line":873,"column":22},"end":{"line":873,"column":33}}},"30":{"name":"(anonymous_30)","line":878,"loc":{"start":{"line":878,"column":29},"end":{"line":878,"column":48}}},"31":{"name":"(anonymous_31)","line":890,"loc":{"start":{"line":890,"column":20},"end":{"line":890,"column":31}}},"32":{"name":"(anonymous_32)","line":893,"loc":{"start":{"line":893,"column":29},"end":{"line":893,"column":48}}},"33":{"name":"(anonymous_33)","line":901,"loc":{"start":{"line":901,"column":22},"end":{"line":901,"column":33}}},"34":{"name":"(anonymous_34)","line":904,"loc":{"start":{"line":904,"column":29},"end":{"line":904,"column":48}}}},"statementMap":{"1":{"start":{"line":23,"column":0},"end":{"line":908,"column":3}},"2":{"start":{"line":215,"column":24},"end":{"line":215,"column":70}},"3":{"start":{"line":216,"column":24},"end":{"line":216,"column":42}},"4":{"start":{"line":219,"column":24},"end":{"line":219,"column":70}},"5":{"start":{"line":220,"column":24},"end":{"line":220,"column":64}},"6":{"start":{"line":221,"column":24},"end":{"line":223,"column":25}},"7":{"start":{"line":222,"column":28},"end":{"line":222,"column":54}},"8":{"start":{"line":237,"column":24},"end":{"line":237,"column":69}},"9":{"start":{"line":238,"column":24},"end":{"line":238,"column":42}},"10":{"start":{"line":241,"column":24},"end":{"line":241,"column":69}},"11":{"start":{"line":242,"column":24},"end":{"line":242,"column":64}},"12":{"start":{"line":243,"column":24},"end":{"line":248,"column":25}},"13":{"start":{"line":244,"column":28},"end":{"line":244,"column":53}},"14":{"start":{"line":246,"column":28},"end":{"line":246,"column":58}},"15":{"start":{"line":247,"column":28},"end":{"line":247,"column":54}},"16":{"start":{"line":278,"column":24},"end":{"line":278,"column":75}},"17":{"start":{"line":279,"column":24},"end":{"line":279,"column":78}},"18":{"start":{"line":301,"column":28},"end":{"line":301,"column":72}},"19":{"start":{"line":302,"column":28},"end":{"line":302,"column":61}},"20":{"start":{"line":320,"column":16},"end":{"line":320,"column":56}},"21":{"start":{"line":321,"column":16},"end":{"line":321,"column":39}},"22":{"start":{"line":322,"column":16},"end":{"line":322,"column":49}},"23":{"start":{"line":323,"column":16},"end":{"line":323,"column":34}},"24":{"start":{"line":324,"column":16},"end":{"line":324,"column":51}},"25":{"start":{"line":325,"column":16},"end":{"line":325,"column":65}},"26":{"start":{"line":326,"column":16},"end":{"line":326,"column":45}},"27":{"start":{"line":327,"column":16},"end":{"line":327,"column":65}},"28":{"start":{"line":328,"column":16},"end":{"line":328,"column":49}},"29":{"start":{"line":340,"column":16},"end":{"line":340,"column":56}},"30":{"start":{"line":341,"column":16},"end":{"line":341,"column":34}},"31":{"start":{"line":342,"column":16},"end":{"line":342,"column":46}},"32":{"start":{"line":351,"column":8},"end":{"line":351,"column":22}},"33":{"start":{"line":352,"column":8},"end":{"line":352,"column":24}},"34":{"start":{"line":353,"column":8},"end":{"line":353,"column":52}},"35":{"start":{"line":354,"column":8},"end":{"line":354,"column":41}},"36":{"start":{"line":355,"column":8},"end":{"line":355,"column":55}},"37":{"start":{"line":356,"column":8},"end":{"line":356,"column":55}},"38":{"start":{"line":357,"column":8},"end":{"line":357,"column":37}},"39":{"start":{"line":358,"column":8},"end":{"line":358,"column":41}},"40":{"start":{"line":368,"column":8},"end":{"line":368,"column":22}},"41":{"start":{"line":369,"column":8},"end":{"line":369,"column":34}},"42":{"start":{"line":370,"column":8},"end":{"line":370,"column":30}},"43":{"start":{"line":382,"column":8},"end":{"line":382,"column":38}},"44":{"start":{"line":384,"column":8},"end":{"line":405,"column":9}},"45":{"start":{"line":388,"column":12},"end":{"line":388,"column":45}},"46":{"start":{"line":389,"column":15},"end":{"line":405,"column":9}},"47":{"start":{"line":390,"column":12},"end":{"line":390,"column":37}},"48":{"start":{"line":391,"column":15},"end":{"line":405,"column":9}},"49":{"start":{"line":392,"column":12},"end":{"line":392,"column":34}},"50":{"start":{"line":393,"column":15},"end":{"line":405,"column":9}},"51":{"start":{"line":394,"column":12},"end":{"line":394,"column":37}},"52":{"start":{"line":395,"column":15},"end":{"line":405,"column":9}},"53":{"start":{"line":396,"column":12},"end":{"line":396,"column":40}},"54":{"start":{"line":397,"column":15},"end":{"line":405,"column":9}},"55":{"start":{"line":398,"column":12},"end":{"line":398,"column":43}},"56":{"start":{"line":399,"column":15},"end":{"line":405,"column":9}},"57":{"start":{"line":400,"column":12},"end":{"line":400,"column":39}},"58":{"start":{"line":401,"column":15},"end":{"line":405,"column":9}},"59":{"start":{"line":402,"column":12},"end":{"line":402,"column":36}},"60":{"start":{"line":403,"column":15},"end":{"line":405,"column":9}},"61":{"start":{"line":404,"column":12},"end":{"line":404,"column":36}},"62":{"start":{"line":406,"column":8},"end":{"line":406,"column":20}},"63":{"start":{"line":414,"column":8},"end":{"line":414,"column":22}},"64":{"start":{"line":415,"column":8},"end":{"line":415,"column":32}},"65":{"start":{"line":416,"column":8},"end":{"line":418,"column":9}},"66":{"start":{"line":417,"column":12},"end":{"line":417,"column":19}},"67":{"start":{"line":419,"column":8},"end":{"line":419,"column":28}},"68":{"start":{"line":420,"column":8},"end":{"line":420,"column":39}},"69":{"start":{"line":421,"column":8},"end":{"line":421,"column":38}},"70":{"start":{"line":422,"column":8},"end":{"line":422,"column":16}},"71":{"start":{"line":424,"column":8},"end":{"line":428,"column":9}},"72":{"start":{"line":425,"column":12},"end":{"line":425,"column":29}},"73":{"start":{"line":427,"column":12},"end":{"line":427,"column":34}},"74":{"start":{"line":430,"column":8},"end":{"line":430,"column":20}},"75":{"start":{"line":432,"column":8},"end":{"line":450,"column":9}},"76":{"start":{"line":433,"column":12},"end":{"line":433,"column":37}},"77":{"start":{"line":436,"column":12},"end":{"line":436,"column":49}},"78":{"start":{"line":437,"column":12},"end":{"line":437,"column":53}},"79":{"start":{"line":439,"column":12},"end":{"line":449,"column":15}},"80":{"start":{"line":440,"column":16},"end":{"line":442,"column":18}},"81":{"start":{"line":444,"column":16},"end":{"line":448,"column":17}},"82":{"start":{"line":445,"column":20},"end":{"line":445,"column":45}},"83":{"start":{"line":446,"column":20},"end":{"line":446,"column":55}},"84":{"start":{"line":447,"column":20},"end":{"line":447,"column":33}},"85":{"start":{"line":452,"column":8},"end":{"line":457,"column":9}},"86":{"start":{"line":454,"column":12},"end":{"line":454,"column":33}},"87":{"start":{"line":455,"column":12},"end":{"line":455,"column":66}},"88":{"start":{"line":456,"column":12},"end":{"line":456,"column":19}},"89":{"start":{"line":458,"column":8},"end":{"line":471,"column":11}},"90":{"start":{"line":483,"column":8},"end":{"line":485,"column":9}},"91":{"start":{"line":484,"column":12},"end":{"line":484,"column":25}},"92":{"start":{"line":486,"column":8},"end":{"line":486,"column":63}},"93":{"start":{"line":497,"column":8},"end":{"line":497,"column":22}},"94":{"start":{"line":499,"column":8},"end":{"line":499,"column":34}},"95":{"start":{"line":503,"column":8},"end":{"line":506,"column":9}},"96":{"start":{"line":504,"column":12},"end":{"line":504,"column":50}},"97":{"start":{"line":505,"column":12},"end":{"line":505,"column":19}},"98":{"start":{"line":508,"column":8},"end":{"line":508,"column":42}},"99":{"start":{"line":509,"column":8},"end":{"line":509,"column":31}},"100":{"start":{"line":510,"column":8},"end":{"line":510,"column":19}},"101":{"start":{"line":511,"column":8},"end":{"line":512,"column":34}},"102":{"start":{"line":513,"column":8},"end":{"line":523,"column":9}},"103":{"start":{"line":514,"column":12},"end":{"line":514,"column":56}},"104":{"start":{"line":516,"column":12},"end":{"line":520,"column":13}},"105":{"start":{"line":517,"column":16},"end":{"line":517,"column":72}},"106":{"start":{"line":518,"column":16},"end":{"line":518,"column":37}},"107":{"start":{"line":519,"column":16},"end":{"line":519,"column":23}},"108":{"start":{"line":521,"column":12},"end":{"line":521,"column":40}},"109":{"start":{"line":522,"column":12},"end":{"line":522,"column":19}},"110":{"start":{"line":524,"column":8},"end":{"line":524,"column":73}},"111":{"start":{"line":525,"column":8},"end":{"line":533,"column":9}},"112":{"start":{"line":526,"column":12},"end":{"line":530,"column":13}},"113":{"start":{"line":527,"column":16},"end":{"line":527,"column":67}},"114":{"start":{"line":528,"column":16},"end":{"line":528,"column":37}},"115":{"start":{"line":529,"column":16},"end":{"line":529,"column":23}},"116":{"start":{"line":531,"column":12},"end":{"line":531,"column":40}},"117":{"start":{"line":532,"column":12},"end":{"line":532,"column":19}},"118":{"start":{"line":534,"column":8},"end":{"line":534,"column":57}},"119":{"start":{"line":535,"column":8},"end":{"line":535,"column":39}},"120":{"start":{"line":536,"column":8},"end":{"line":536,"column":29}},"121":{"start":{"line":545,"column":8},"end":{"line":545,"column":22}},"122":{"start":{"line":546,"column":8},"end":{"line":546,"column":37}},"123":{"start":{"line":547,"column":8},"end":{"line":547,"column":49}},"124":{"start":{"line":548,"column":8},"end":{"line":548,"column":28}},"125":{"start":{"line":550,"column":8},"end":{"line":550,"column":68}},"126":{"start":{"line":553,"column":8},"end":{"line":555,"column":9}},"127":{"start":{"line":554,"column":12},"end":{"line":554,"column":54}},"128":{"start":{"line":558,"column":8},"end":{"line":565,"column":9}},"129":{"start":{"line":559,"column":12},"end":{"line":564,"column":13}},"130":{"start":{"line":562,"column":16},"end":{"line":562,"column":59}},"131":{"start":{"line":563,"column":16},"end":{"line":563,"column":73}},"132":{"start":{"line":567,"column":8},"end":{"line":574,"column":9}},"133":{"start":{"line":568,"column":12},"end":{"line":568,"column":33}},"134":{"start":{"line":569,"column":12},"end":{"line":569,"column":78}},"135":{"start":{"line":570,"column":12},"end":{"line":570,"column":19}},"136":{"start":{"line":573,"column":12},"end":{"line":573,"column":40}},"137":{"start":{"line":587,"column":8},"end":{"line":587,"column":34}},"138":{"start":{"line":588,"column":8},"end":{"line":600,"column":9}},"139":{"start":{"line":589,"column":12},"end":{"line":589,"column":41}},"140":{"start":{"line":590,"column":12},"end":{"line":599,"column":13}},"141":{"start":{"line":591,"column":16},"end":{"line":591,"column":78}},"142":{"start":{"line":592,"column":16},"end":{"line":592,"column":78}},"143":{"start":{"line":593,"column":16},"end":{"line":595,"column":19}},"144":{"start":{"line":594,"column":20},"end":{"line":594,"column":63}},"145":{"start":{"line":598,"column":16},"end":{"line":598,"column":77}},"146":{"start":{"line":601,"column":8},"end":{"line":601,"column":32}},"147":{"start":{"line":616,"column":8},"end":{"line":616,"column":22}},"148":{"start":{"line":617,"column":8},"end":{"line":617,"column":42}},"149":{"start":{"line":619,"column":8},"end":{"line":619,"column":42}},"150":{"start":{"line":620,"column":8},"end":{"line":622,"column":9}},"151":{"start":{"line":621,"column":12},"end":{"line":621,"column":70}},"152":{"start":{"line":623,"column":8},"end":{"line":629,"column":9}},"153":{"start":{"line":624,"column":12},"end":{"line":624,"column":26}},"154":{"start":{"line":625,"column":12},"end":{"line":627,"column":15}},"155":{"start":{"line":626,"column":16},"end":{"line":626,"column":54}},"156":{"start":{"line":628,"column":12},"end":{"line":628,"column":27}},"157":{"start":{"line":630,"column":8},"end":{"line":630,"column":19}},"158":{"start":{"line":638,"column":8},"end":{"line":638,"column":22}},"159":{"start":{"line":639,"column":8},"end":{"line":639,"column":74}},"160":{"start":{"line":640,"column":8},"end":{"line":640,"column":47}},"161":{"start":{"line":641,"column":8},"end":{"line":641,"column":57}},"162":{"start":{"line":642,"column":8},"end":{"line":642,"column":59}},"163":{"start":{"line":643,"column":8},"end":{"line":643,"column":61}},"164":{"start":{"line":644,"column":8},"end":{"line":644,"column":65}},"165":{"start":{"line":645,"column":8},"end":{"line":645,"column":58}},"166":{"start":{"line":646,"column":8},"end":{"line":649,"column":9}},"167":{"start":{"line":648,"column":12},"end":{"line":648,"column":19}},"168":{"start":{"line":650,"column":8},"end":{"line":660,"column":9}},"169":{"start":{"line":652,"column":12},"end":{"line":652,"column":37}},"170":{"start":{"line":653,"column":12},"end":{"line":655,"column":13}},"171":{"start":{"line":654,"column":16},"end":{"line":654,"column":46}},"172":{"start":{"line":656,"column":12},"end":{"line":658,"column":13}},"173":{"start":{"line":657,"column":16},"end":{"line":657,"column":48}},"174":{"start":{"line":659,"column":12},"end":{"line":659,"column":19}},"175":{"start":{"line":661,"column":8},"end":{"line":667,"column":9}},"176":{"start":{"line":663,"column":12},"end":{"line":663,"column":38}},"177":{"start":{"line":666,"column":12},"end":{"line":666,"column":37}},"178":{"start":{"line":669,"column":8},"end":{"line":676,"column":9}},"179":{"start":{"line":670,"column":12},"end":{"line":675,"column":13}},"180":{"start":{"line":672,"column":16},"end":{"line":672,"column":46}},"181":{"start":{"line":674,"column":16},"end":{"line":674,"column":47}},"182":{"start":{"line":677,"column":8},"end":{"line":684,"column":9}},"183":{"start":{"line":678,"column":12},"end":{"line":683,"column":13}},"184":{"start":{"line":680,"column":16},"end":{"line":680,"column":48}},"185":{"start":{"line":682,"column":16},"end":{"line":682,"column":49}},"186":{"start":{"line":692,"column":8},"end":{"line":692,"column":22}},"187":{"start":{"line":693,"column":8},"end":{"line":693,"column":74}},"188":{"start":{"line":694,"column":8},"end":{"line":694,"column":70}},"189":{"start":{"line":695,"column":8},"end":{"line":695,"column":28}},"190":{"start":{"line":696,"column":8},"end":{"line":698,"column":9}},"191":{"start":{"line":697,"column":12},"end":{"line":697,"column":26}},"192":{"start":{"line":714,"column":8},"end":{"line":719,"column":9}},"193":{"start":{"line":718,"column":12},"end":{"line":718,"column":19}},"194":{"start":{"line":720,"column":8},"end":{"line":720,"column":35}},"195":{"start":{"line":721,"column":8},"end":{"line":729,"column":11}},"196":{"start":{"line":731,"column":8},"end":{"line":731,"column":29}},"197":{"start":{"line":733,"column":8},"end":{"line":738,"column":9}},"198":{"start":{"line":737,"column":12},"end":{"line":737,"column":61}},"199":{"start":{"line":740,"column":8},"end":{"line":745,"column":11}},"200":{"start":{"line":746,"column":8},"end":{"line":746,"column":23}},"201":{"start":{"line":760,"column":8},"end":{"line":760,"column":22}},"202":{"start":{"line":761,"column":8},"end":{"line":763,"column":9}},"203":{"start":{"line":762,"column":12},"end":{"line":762,"column":25}},"204":{"start":{"line":764,"column":8},"end":{"line":764,"column":43}},"205":{"start":{"line":765,"column":8},"end":{"line":767,"column":9}},"206":{"start":{"line":766,"column":12},"end":{"line":766,"column":25}},"207":{"start":{"line":768,"column":8},"end":{"line":768,"column":28}},"208":{"start":{"line":769,"column":8},"end":{"line":769,"column":61}},"209":{"start":{"line":770,"column":8},"end":{"line":770,"column":62}},"210":{"start":{"line":773,"column":8},"end":{"line":773,"column":57}},"211":{"start":{"line":774,"column":8},"end":{"line":775,"column":47}},"212":{"start":{"line":777,"column":8},"end":{"line":777,"column":54}},"213":{"start":{"line":779,"column":8},"end":{"line":795,"column":11}},"214":{"start":{"line":780,"column":12},"end":{"line":780,"column":70}},"215":{"start":{"line":781,"column":12},"end":{"line":783,"column":13}},"216":{"start":{"line":782,"column":16},"end":{"line":782,"column":41}},"217":{"start":{"line":785,"column":12},"end":{"line":794,"column":13}},"218":{"start":{"line":786,"column":16},"end":{"line":793,"column":19}},"219":{"start":{"line":787,"column":20},"end":{"line":789,"column":22}},"220":{"start":{"line":790,"column":20},"end":{"line":792,"column":21}},"221":{"start":{"line":791,"column":24},"end":{"line":791,"column":52}},"222":{"start":{"line":797,"column":8},"end":{"line":797,"column":58}},"223":{"start":{"line":809,"column":8},"end":{"line":809,"column":22}},"224":{"start":{"line":810,"column":8},"end":{"line":810,"column":39}},"225":{"start":{"line":811,"column":8},"end":{"line":811,"column":55}},"226":{"start":{"line":812,"column":8},"end":{"line":812,"column":47}},"227":{"start":{"line":813,"column":8},"end":{"line":813,"column":28}},"228":{"start":{"line":814,"column":8},"end":{"line":814,"column":76}},"229":{"start":{"line":815,"column":8},"end":{"line":822,"column":11}},"230":{"start":{"line":816,"column":12},"end":{"line":821,"column":15}},"231":{"start":{"line":823,"column":8},"end":{"line":823,"column":32}},"232":{"start":{"line":825,"column":8},"end":{"line":825,"column":25}},"233":{"start":{"line":827,"column":8},"end":{"line":837,"column":9}},"234":{"start":{"line":828,"column":12},"end":{"line":836,"column":15}},"235":{"start":{"line":839,"column":8},"end":{"line":849,"column":9}},"236":{"start":{"line":840,"column":12},"end":{"line":848,"column":15}},"237":{"start":{"line":851,"column":8},"end":{"line":851,"column":27}},"238":{"start":{"line":852,"column":8},"end":{"line":860,"column":11}},"239":{"start":{"line":862,"column":8},"end":{"line":866,"column":11}},"240":{"start":{"line":874,"column":8},"end":{"line":874,"column":22}},"241":{"start":{"line":875,"column":8},"end":{"line":875,"column":55}},"242":{"start":{"line":876,"column":8},"end":{"line":876,"column":76}},"243":{"start":{"line":877,"column":8},"end":{"line":877,"column":61}},"244":{"start":{"line":878,"column":8},"end":{"line":883,"column":11}},"245":{"start":{"line":879,"column":12},"end":{"line":879,"column":59}},"246":{"start":{"line":880,"column":12},"end":{"line":880,"column":43}},"247":{"start":{"line":881,"column":12},"end":{"line":881,"column":53}},"248":{"start":{"line":882,"column":12},"end":{"line":882,"column":39}},"249":{"start":{"line":884,"column":8},"end":{"line":884,"column":39}},"250":{"start":{"line":891,"column":8},"end":{"line":891,"column":72}},"251":{"start":{"line":892,"column":8},"end":{"line":892,"column":41}},"252":{"start":{"line":893,"column":8},"end":{"line":895,"column":11}},"253":{"start":{"line":894,"column":12},"end":{"line":894,"column":36}},"254":{"start":{"line":902,"column":8},"end":{"line":902,"column":72}},"255":{"start":{"line":903,"column":8},"end":{"line":903,"column":41}},"256":{"start":{"line":904,"column":8},"end":{"line":906,"column":11}},"257":{"start":{"line":905,"column":12},"end":{"line":905,"column":37}}},"branchMap":{"1":{"line":221,"type":"if","locations":[{"start":{"line":221,"column":24},"end":{"line":221,"column":24}},{"start":{"line":221,"column":24},"end":{"line":221,"column":24}}]},"2":{"line":243,"type":"if","locations":[{"start":{"line":243,"column":24},"end":{"line":243,"column":24}},{"start":{"line":243,"column":24},"end":{"line":243,"column":24}}]},"3":{"line":384,"type":"if","locations":[{"start":{"line":384,"column":8},"end":{"line":384,"column":8}},{"start":{"line":384,"column":8},"end":{"line":384,"column":8}}]},"4":{"line":389,"type":"if","locations":[{"start":{"line":389,"column":15},"end":{"line":389,"column":15}},{"start":{"line":389,"column":15},"end":{"line":389,"column":15}}]},"5":{"line":391,"type":"if","locations":[{"start":{"line":391,"column":15},"end":{"line":391,"column":15}},{"start":{"line":391,"column":15},"end":{"line":391,"column":15}}]},"6":{"line":393,"type":"if","locations":[{"start":{"line":393,"column":15},"end":{"line":393,"column":15}},{"start":{"line":393,"column":15},"end":{"line":393,"column":15}}]},"7":{"line":395,"type":"if","locations":[{"start":{"line":395,"column":15},"end":{"line":395,"column":15}},{"start":{"line":395,"column":15},"end":{"line":395,"column":15}}]},"8":{"line":397,"type":"if","locations":[{"start":{"line":397,"column":15},"end":{"line":397,"column":15}},{"start":{"line":397,"column":15},"end":{"line":397,"column":15}}]},"9":{"line":399,"type":"if","locations":[{"start":{"line":399,"column":15},"end":{"line":399,"column":15}},{"start":{"line":399,"column":15},"end":{"line":399,"column":15}}]},"10":{"line":401,"type":"if","locations":[{"start":{"line":401,"column":15},"end":{"line":401,"column":15}},{"start":{"line":401,"column":15},"end":{"line":401,"column":15}}]},"11":{"line":401,"type":"binary-expr","locations":[{"start":{"line":401,"column":19},"end":{"line":401,"column":32}},{"start":{"line":401,"column":36},"end":{"line":401,"column":48}}]},"12":{"line":403,"type":"if","locations":[{"start":{"line":403,"column":15},"end":{"line":403,"column":15}},{"start":{"line":403,"column":15},"end":{"line":403,"column":15}}]},"13":{"line":416,"type":"if","locations":[{"start":{"line":416,"column":8},"end":{"line":416,"column":8}},{"start":{"line":416,"column":8},"end":{"line":416,"column":8}}]},"14":{"line":424,"type":"if","locations":[{"start":{"line":424,"column":8},"end":{"line":424,"column":8}},{"start":{"line":424,"column":8},"end":{"line":424,"column":8}}]},"15":{"line":432,"type":"if","locations":[{"start":{"line":432,"column":8},"end":{"line":432,"column":8}},{"start":{"line":432,"column":8},"end":{"line":432,"column":8}}]},"16":{"line":444,"type":"if","locations":[{"start":{"line":444,"column":16},"end":{"line":444,"column":16}},{"start":{"line":444,"column":16},"end":{"line":444,"column":16}}]},"17":{"line":452,"type":"if","locations":[{"start":{"line":452,"column":8},"end":{"line":452,"column":8}},{"start":{"line":452,"column":8},"end":{"line":452,"column":8}}]},"18":{"line":483,"type":"if","locations":[{"start":{"line":483,"column":8},"end":{"line":483,"column":8}},{"start":{"line":483,"column":8},"end":{"line":483,"column":8}}]},"19":{"line":503,"type":"if","locations":[{"start":{"line":503,"column":8},"end":{"line":503,"column":8}},{"start":{"line":503,"column":8},"end":{"line":503,"column":8}}]},"20":{"line":516,"type":"if","locations":[{"start":{"line":516,"column":12},"end":{"line":516,"column":12}},{"start":{"line":516,"column":12},"end":{"line":516,"column":12}}]},"21":{"line":525,"type":"if","locations":[{"start":{"line":525,"column":8},"end":{"line":525,"column":8}},{"start":{"line":525,"column":8},"end":{"line":525,"column":8}}]},"22":{"line":526,"type":"if","locations":[{"start":{"line":526,"column":12},"end":{"line":526,"column":12}},{"start":{"line":526,"column":12},"end":{"line":526,"column":12}}]},"23":{"line":553,"type":"if","locations":[{"start":{"line":553,"column":8},"end":{"line":553,"column":8}},{"start":{"line":553,"column":8},"end":{"line":553,"column":8}}]},"24":{"line":558,"type":"if","locations":[{"start":{"line":558,"column":8},"end":{"line":558,"column":8}},{"start":{"line":558,"column":8},"end":{"line":558,"column":8}}]},"25":{"line":558,"type":"binary-expr","locations":[{"start":{"line":558,"column":12},"end":{"line":558,"column":39}},{"start":{"line":558,"column":43},"end":{"line":558,"column":56}},{"start":{"line":558,"column":60},"end":{"line":558,"column":72}}]},"26":{"line":559,"type":"if","locations":[{"start":{"line":559,"column":12},"end":{"line":559,"column":12}},{"start":{"line":559,"column":12},"end":{"line":559,"column":12}}]},"27":{"line":567,"type":"if","locations":[{"start":{"line":567,"column":8},"end":{"line":567,"column":8}},{"start":{"line":567,"column":8},"end":{"line":567,"column":8}}]},"28":{"line":588,"type":"if","locations":[{"start":{"line":588,"column":8},"end":{"line":588,"column":8}},{"start":{"line":588,"column":8},"end":{"line":588,"column":8}}]},"29":{"line":620,"type":"if","locations":[{"start":{"line":620,"column":8},"end":{"line":620,"column":8}},{"start":{"line":620,"column":8},"end":{"line":620,"column":8}}]},"30":{"line":623,"type":"if","locations":[{"start":{"line":623,"column":8},"end":{"line":623,"column":8}},{"start":{"line":623,"column":8},"end":{"line":623,"column":8}}]},"31":{"line":623,"type":"binary-expr","locations":[{"start":{"line":623,"column":12},"end":{"line":623,"column":24}},{"start":{"line":623,"column":28},"end":{"line":623,"column":51}}]},"32":{"line":646,"type":"if","locations":[{"start":{"line":646,"column":8},"end":{"line":646,"column":8}},{"start":{"line":646,"column":8},"end":{"line":646,"column":8}}]},"33":{"line":650,"type":"if","locations":[{"start":{"line":650,"column":8},"end":{"line":650,"column":8}},{"start":{"line":650,"column":8},"end":{"line":650,"column":8}}]},"34":{"line":653,"type":"if","locations":[{"start":{"line":653,"column":12},"end":{"line":653,"column":12}},{"start":{"line":653,"column":12},"end":{"line":653,"column":12}}]},"35":{"line":656,"type":"if","locations":[{"start":{"line":656,"column":12},"end":{"line":656,"column":12}},{"start":{"line":656,"column":12},"end":{"line":656,"column":12}}]},"36":{"line":661,"type":"if","locations":[{"start":{"line":661,"column":8},"end":{"line":661,"column":8}},{"start":{"line":661,"column":8},"end":{"line":661,"column":8}}]},"37":{"line":669,"type":"if","locations":[{"start":{"line":669,"column":8},"end":{"line":669,"column":8}},{"start":{"line":669,"column":8},"end":{"line":669,"column":8}}]},"38":{"line":670,"type":"if","locations":[{"start":{"line":670,"column":12},"end":{"line":670,"column":12}},{"start":{"line":670,"column":12},"end":{"line":670,"column":12}}]},"39":{"line":677,"type":"if","locations":[{"start":{"line":677,"column":8},"end":{"line":677,"column":8}},{"start":{"line":677,"column":8},"end":{"line":677,"column":8}}]},"40":{"line":678,"type":"if","locations":[{"start":{"line":678,"column":12},"end":{"line":678,"column":12}},{"start":{"line":678,"column":12},"end":{"line":678,"column":12}}]},"41":{"line":696,"type":"if","locations":[{"start":{"line":696,"column":8},"end":{"line":696,"column":8}},{"start":{"line":696,"column":8},"end":{"line":696,"column":8}}]},"42":{"line":714,"type":"if","locations":[{"start":{"line":714,"column":8},"end":{"line":714,"column":8}},{"start":{"line":714,"column":8},"end":{"line":714,"column":8}}]},"43":{"line":714,"type":"binary-expr","locations":[{"start":{"line":714,"column":12},"end":{"line":714,"column":31}},{"start":{"line":715,"column":12},"end":{"line":715,"column":37}},{"start":{"line":716,"column":12},"end":{"line":716,"column":54}}]},"44":{"line":725,"type":"cond-expr","locations":[{"start":{"line":725,"column":32},"end":{"line":725,"column":45}},{"start":{"line":725,"column":48},"end":{"line":725,"column":50}}]},"45":{"line":733,"type":"if","locations":[{"start":{"line":733,"column":8},"end":{"line":733,"column":8}},{"start":{"line":733,"column":8},"end":{"line":733,"column":8}}]},"46":{"line":733,"type":"binary-expr","locations":[{"start":{"line":733,"column":12},"end":{"line":733,"column":30}},{"start":{"line":733,"column":34},"end":{"line":733,"column":53}},{"start":{"line":734,"column":12},"end":{"line":734,"column":43}},{"start":{"line":735,"column":12},"end":{"line":735,"column":44}},{"start":{"line":736,"column":12},"end":{"line":736,"column":48}}]},"47":{"line":761,"type":"if","locations":[{"start":{"line":761,"column":8},"end":{"line":761,"column":8}},{"start":{"line":761,"column":8},"end":{"line":761,"column":8}}]},"48":{"line":765,"type":"if","locations":[{"start":{"line":765,"column":8},"end":{"line":765,"column":8}},{"start":{"line":765,"column":8},"end":{"line":765,"column":8}}]},"49":{"line":765,"type":"binary-expr","locations":[{"start":{"line":765,"column":12},"end":{"line":765,"column":31}},{"start":{"line":765,"column":35},"end":{"line":765,"column":54}}]},"50":{"line":781,"type":"if","locations":[{"start":{"line":781,"column":12},"end":{"line":781,"column":12}},{"start":{"line":781,"column":12},"end":{"line":781,"column":12}}]},"51":{"line":785,"type":"if","locations":[{"start":{"line":785,"column":12},"end":{"line":785,"column":12}},{"start":{"line":785,"column":12},"end":{"line":785,"column":12}}]},"52":{"line":785,"type":"binary-expr","locations":[{"start":{"line":785,"column":16},"end":{"line":785,"column":31}},{"start":{"line":785,"column":35},"end":{"line":785,"column":59}}]},"53":{"line":790,"type":"if","locations":[{"start":{"line":790,"column":20},"end":{"line":790,"column":20}},{"start":{"line":790,"column":20},"end":{"line":790,"column":20}}]},"54":{"line":797,"type":"cond-expr","locations":[{"start":{"line":797,"column":39},"end":{"line":797,"column":49}},{"start":{"line":797,"column":52},"end":{"line":797,"column":57}}]},"55":{"line":827,"type":"if","locations":[{"start":{"line":827,"column":8},"end":{"line":827,"column":8}},{"start":{"line":827,"column":8},"end":{"line":827,"column":8}}]},"56":{"line":839,"type":"if","locations":[{"start":{"line":839,"column":8},"end":{"line":839,"column":8}},{"start":{"line":839,"column":8},"end":{"line":839,"column":8}}]}}};
-}
-__cov_aw_ivxye20OPypoB_Way2A = __cov_aw_ivxye20OPypoB_Way2A['/home/travis/build/terrestris/BasiGX/src/view/form/AddWms.js'];
-__cov_aw_ivxye20OPypoB_Way2A.s['1']++;Ext.define('BasiGX.view.form.AddWms',{extend:'Ext.form.Panel',xtype:'basigx-form-addwms',requires:['Ext.app.ViewModel','Ext.button.Button','Ext.form.CheckboxGroup','Ext.form.FieldContainer','Ext.form.FieldSet','Ext.form.field.Text','Ext.form.field.Hidden','Ext.form.field.Checkbox','Ext.form.field.Radio','Ext.form.field.ComboBox','Ext.layout.container.Anchor','Ext.layout.container.HBox','Ext.toolbar.Toolbar','BasiGX.util.Map','BasiGX.util.MsgBox'],viewModel:{data:{queryParamsFieldSetTitle:'Anfrageparameter',wmsUrlTextFieldLabel:'WMS-URL',wmsVersionContainerFieldLabel:'Version',availableLayesFieldSetTitle:'Verfügbare Layer',resetBtnText:'Zurücksetzen',requestLayersBtnText:'Verfügbare Layer abfragen',checkAllLayersBtnText:'Alle auswählen',uncheckAllLayersBtnText:'Nichts auswählen',addCheckedLayersBtnText:'Ausgewählte Layer hinzufügen',errorIncompatibleWMS:'Der angefragte WMS ist nicht kompatibel '+'zur Anwendung',errorRequestFailed:'Die angegebene URL konnte nicht abgefragt '+'werden',errorCouldntParseResponse:'Die erhaltene Antwort konnte nicht '+'erfolgreich geparst werden',msgRequestTimedOut:'Die Anfrage wurde nicht schnell genug '+'beantwortet und abgebrochen',msgServiceException:'Eine OGC ServiceException ist aufgetreten',msgCorsMisconfiguration:'HTTP access control (CORS) auf dem '+'Zielserver vermutlich nicht korrekt konfiguriert',msgUnauthorized:'Der Client ist nicht gegenüber dem Zielserver '+'authentifiziert',msgForbidden:'Der Client hat keinen Zugriff auf die angefragte '+'Ressource',msgFileNotFound:'Die angefragte Ressource existiert nicht',msgTooManyRequests:'Der Client hat zu viele Anfragen gestellt',msgServiceUnavailable:'Der Server ist derzeit nicht verfügbar '+'(zu viele Anfragen bzw. Wartungsmodus)',msgGatewayTimeOut:'Der Server fungierte als Gateway und das '+'Originalziel hat zu langsam geantwortet',msgClientError:'Ein unspezifizierter Clientfehler ist aufgetreten',msgServerError:'Ein unspezifizierter Serverfehler ist aufgetreten',documentation:'<h2>WMS hinzufügen</h2>\u2022 In diesem Dialog '+'können Sie mit Hilfe einer WMS-URL '+'einen beliebigen Kartendienst der Karte hinzufügen.'}},padding:5,layout:'anchor',defaults:{anchor:'100%'},scrollable:true,config:{candidatesInitiallyChecked:false,hasCheckAllBtn:false,hasUncheckAllBtn:false,includeSubLayer:false,versionArray:['1.3.0','1.1.1'],autoDetectVersion:false,wmsBaseUrls:[],defaultUrl:'https://ows.terrestris.de/osm/service',useDefaultXhrHeader:false,disableCaching:true},parser:null,lastErrorMsgKey:null,triedVersions:[],items:[{xtype:'fieldset',layout:'anchor',defaults:{anchor:'100%'},bind:{title:'{queryParamsFieldSetTitle}'},items:[{xtype:'textfield',bind:{fieldLabel:'{wmsUrlTextFieldLabel}'},name:'url',allowBlank:false,value:null,listeners:{change:function(textfield){__cov_aw_ivxye20OPypoB_Way2A.f['1']++;__cov_aw_ivxye20OPypoB_Way2A.s['2']++;var view=textfield.up('basigx-form-addwms');__cov_aw_ivxye20OPypoB_Way2A.s['3']++;view.resetState();},beforerender:function(textfield){__cov_aw_ivxye20OPypoB_Way2A.f['2']++;__cov_aw_ivxye20OPypoB_Way2A.s['4']++;var view=textfield.up('basigx-form-addwms');__cov_aw_ivxye20OPypoB_Way2A.s['5']++;var countUrls=view.wmsBaseUrls.length;__cov_aw_ivxye20OPypoB_Way2A.s['6']++;if(countUrls!==0){__cov_aw_ivxye20OPypoB_Way2A.b['1'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['7']++;textfield.setHidden(true);}else{__cov_aw_ivxye20OPypoB_Way2A.b['1'][1]++;}}}},{xtype:'combobox',bind:{fieldLabel:'{wmsUrlTextFieldLabel}'},store:null,name:'urlCombo',allowBlank:false,value:null,listeners:{change:function(combobox){__cov_aw_ivxye20OPypoB_Way2A.f['3']++;__cov_aw_ivxye20OPypoB_Way2A.s['8']++;var view=combobox.up('basigx-form-addwms');__cov_aw_ivxye20OPypoB_Way2A.s['9']++;view.resetState();},beforerender:function(combobox){__cov_aw_ivxye20OPypoB_Way2A.f['4']++;__cov_aw_ivxye20OPypoB_Way2A.s['10']++;var view=combobox.up('basigx-form-addwms');__cov_aw_ivxye20OPypoB_Way2A.s['11']++;var countUrls=view.wmsBaseUrls.length;__cov_aw_ivxye20OPypoB_Way2A.s['12']++;if(countUrls===0){__cov_aw_ivxye20OPypoB_Way2A.b['2'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['13']++;combobox.setHidden(true);}else{__cov_aw_ivxye20OPypoB_Way2A.b['2'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['14']++;var urlWms=view.wmsBaseUrls;__cov_aw_ivxye20OPypoB_Way2A.s['15']++;combobox.setStore(urlWms);}}}},{xtype:'fieldcontainer',bind:{fieldLabel:'{wmsVersionContainerFieldLabel}'},defaultType:'radiofield',defaults:{flex:1},layout:'hbox',items:[{boxLabel:'v1.1.1',name:'version',inputValue:'1.1.1',id:'v111-radio'},{boxLabel:'v1.3.0',name:'version',inputValue:'1.3.0',id:'v130-radio',checked:true}],listeners:{beforerender:function(fieldcontainer){__cov_aw_ivxye20OPypoB_Way2A.f['5']++;__cov_aw_ivxye20OPypoB_Way2A.s['16']++;var view=fieldcontainer.up('basigx-form-addwms');__cov_aw_ivxye20OPypoB_Way2A.s['17']++;fieldcontainer.setHidden(view.getAutoDetectVersion());}}}]},{xtype:'fieldset',name:'fs-available-layers',layout:'anchor',scrollable:'y',maxHeight:200,defaults:{anchor:'100%'},bind:{title:'{availableLayesFieldSetTitle}'},items:{xtype:'checkboxgroup',listeners:{change:{fn:function(cbGroup){__cov_aw_ivxye20OPypoB_Way2A.f['6']++;__cov_aw_ivxye20OPypoB_Way2A.s['18']++;var form=cbGroup.up('basigx-form-addwms');__cov_aw_ivxye20OPypoB_Way2A.s['19']++;form.updateControlToolbarState();},buffer:50}},columns:2,vertical:true}}],buttons:[{bind:{text:'{resetBtnText}'},handler:function(btn){__cov_aw_ivxye20OPypoB_Way2A.f['7']++;__cov_aw_ivxye20OPypoB_Way2A.s['20']++;var view=btn.up('basigx-form-addwms');__cov_aw_ivxye20OPypoB_Way2A.s['21']++;view.getForm().reset();__cov_aw_ivxye20OPypoB_Way2A.s['22']++;view.removeAddLayersComponents();__cov_aw_ivxye20OPypoB_Way2A.s['23']++;view.resetState();__cov_aw_ivxye20OPypoB_Way2A.s['24']++;var defaultValue=view.defaultUrl;__cov_aw_ivxye20OPypoB_Way2A.s['25']++;var combo=view.down('combobox[name=urlCombo]');__cov_aw_ivxye20OPypoB_Way2A.s['26']++;combo.setValue(defaultValue);__cov_aw_ivxye20OPypoB_Way2A.s['27']++;var textfield=view.down('textfield[name=url]');__cov_aw_ivxye20OPypoB_Way2A.s['28']++;textfield.setValue(defaultValue);}},'->',{bind:{text:'{requestLayersBtnText}'},name:'requestLayersBtn',formBind:true,disabled:true,handler:function(btn){__cov_aw_ivxye20OPypoB_Way2A.f['8']++;__cov_aw_ivxye20OPypoB_Way2A.s['29']++;var view=btn.up('basigx-form-addwms');__cov_aw_ivxye20OPypoB_Way2A.s['30']++;view.resetState();__cov_aw_ivxye20OPypoB_Way2A.s['31']++;view.requestGetCapabilities();}}],initComponent:function(){__cov_aw_ivxye20OPypoB_Way2A.f['9']++;__cov_aw_ivxye20OPypoB_Way2A.s['32']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['33']++;me.callParent();__cov_aw_ivxye20OPypoB_Way2A.s['34']++;me.parser=new ol.format.WMSCapabilities();__cov_aw_ivxye20OPypoB_Way2A.s['35']++;var defaultValue=me.defaultUrl;__cov_aw_ivxye20OPypoB_Way2A.s['36']++;var combo=me.down('combobox[name=urlCombo]');__cov_aw_ivxye20OPypoB_Way2A.s['37']++;var textfield=me.down('textfield[name=url]');__cov_aw_ivxye20OPypoB_Way2A.s['38']++;combo.setValue(defaultValue);__cov_aw_ivxye20OPypoB_Way2A.s['39']++;textfield.setValue(defaultValue);},resetState:function(){__cov_aw_ivxye20OPypoB_Way2A.f['10']++;__cov_aw_ivxye20OPypoB_Way2A.s['40']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['41']++;me.lastErrorMsgKey=null;__cov_aw_ivxye20OPypoB_Way2A.s['42']++;me.triedVersions=[];},responseStatusToErrorMsgKey:function(status){__cov_aw_ivxye20OPypoB_Way2A.f['11']++;__cov_aw_ivxye20OPypoB_Way2A.s['43']++;status=parseInt(status,10);__cov_aw_ivxye20OPypoB_Way2A.s['44']++;if(status===0){__cov_aw_ivxye20OPypoB_Way2A.b['3'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['45']++;return'msgCorsMisconfiguration';}else{__cov_aw_ivxye20OPypoB_Way2A.b['3'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['46']++;if(status===401){__cov_aw_ivxye20OPypoB_Way2A.b['4'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['47']++;return'msgUnauthorized';}else{__cov_aw_ivxye20OPypoB_Way2A.b['4'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['48']++;if(status===403){__cov_aw_ivxye20OPypoB_Way2A.b['5'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['49']++;return'msgForbidden';}else{__cov_aw_ivxye20OPypoB_Way2A.b['5'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['50']++;if(status===404){__cov_aw_ivxye20OPypoB_Way2A.b['6'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['51']++;return'msgFileNotFound';}else{__cov_aw_ivxye20OPypoB_Way2A.b['6'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['52']++;if(status===429){__cov_aw_ivxye20OPypoB_Way2A.b['7'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['53']++;return'msgTooManyRequests';}else{__cov_aw_ivxye20OPypoB_Way2A.b['7'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['54']++;if(status===503){__cov_aw_ivxye20OPypoB_Way2A.b['8'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['55']++;return'msgServiceUnavailable';}else{__cov_aw_ivxye20OPypoB_Way2A.b['8'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['56']++;if(status===504){__cov_aw_ivxye20OPypoB_Way2A.b['9'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['57']++;return'msgGatewayTimeOut';}else{__cov_aw_ivxye20OPypoB_Way2A.b['9'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['58']++;if((__cov_aw_ivxye20OPypoB_Way2A.b['11'][0]++,status>=400)&&(__cov_aw_ivxye20OPypoB_Way2A.b['11'][1]++,status<500)){__cov_aw_ivxye20OPypoB_Way2A.b['10'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['59']++;return'msgClientError';}else{__cov_aw_ivxye20OPypoB_Way2A.b['10'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['60']++;if(status>=500){__cov_aw_ivxye20OPypoB_Way2A.b['12'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['61']++;return'msgServerError';}else{__cov_aw_ivxye20OPypoB_Way2A.b['12'][1]++;}}}}}}}}}__cov_aw_ivxye20OPypoB_Way2A.s['62']++;return null;},requestGetCapabilities:function(){__cov_aw_ivxye20OPypoB_Way2A.f['12']++;__cov_aw_ivxye20OPypoB_Way2A.s['63']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['64']++;var form=me.getForm();__cov_aw_ivxye20OPypoB_Way2A.s['65']++;if(!form.isValid()){__cov_aw_ivxye20OPypoB_Way2A.b['13'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['66']++;return;}else{__cov_aw_ivxye20OPypoB_Way2A.b['13'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['67']++;me.setLoading(true);__cov_aw_ivxye20OPypoB_Way2A.s['68']++;me.removeAddLayersComponents();__cov_aw_ivxye20OPypoB_Way2A.s['69']++;var values=form.getValues();__cov_aw_ivxye20OPypoB_Way2A.s['70']++;var url;__cov_aw_ivxye20OPypoB_Way2A.s['71']++;if(me.wmsBaseUrls.length===0){__cov_aw_ivxye20OPypoB_Way2A.b['14'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['72']++;url=values.url;}else{__cov_aw_ivxye20OPypoB_Way2A.b['14'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['73']++;url=values.urlCombo;}__cov_aw_ivxye20OPypoB_Way2A.s['74']++;var version;__cov_aw_ivxye20OPypoB_Way2A.s['75']++;if(!me.getAutoDetectVersion()){__cov_aw_ivxye20OPypoB_Way2A.b['15'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['76']++;version=values.version;}else{__cov_aw_ivxye20OPypoB_Way2A.b['15'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['77']++;var triedVersions=me.triedVersions;__cov_aw_ivxye20OPypoB_Way2A.s['78']++;var versionsToTry=me.getVersionArray();__cov_aw_ivxye20OPypoB_Way2A.s['79']++;Ext.each(versionsToTry,function(currentVersion){__cov_aw_ivxye20OPypoB_Way2A.f['13']++;__cov_aw_ivxye20OPypoB_Way2A.s['80']++;var alreadyTried=Ext.Array.contains(triedVersions,currentVersion);__cov_aw_ivxye20OPypoB_Way2A.s['81']++;if(!alreadyTried){__cov_aw_ivxye20OPypoB_Way2A.b['16'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['82']++;version=currentVersion;__cov_aw_ivxye20OPypoB_Way2A.s['83']++;triedVersions.push(currentVersion);__cov_aw_ivxye20OPypoB_Way2A.s['84']++;return false;}else{__cov_aw_ivxye20OPypoB_Way2A.b['16'][1]++;}});}__cov_aw_ivxye20OPypoB_Way2A.s['85']++;if(!version){__cov_aw_ivxye20OPypoB_Way2A.b['17'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['86']++;me.setLoading(false);__cov_aw_ivxye20OPypoB_Way2A.s['87']++;BasiGX.warn(me.getErrorMessage('errorRequestFailed'));__cov_aw_ivxye20OPypoB_Way2A.s['88']++;return;}else{__cov_aw_ivxye20OPypoB_Way2A.b['17'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['89']++;Ext.Ajax.request({url:url,method:'GET',useDefaultXhrHeader:me.getUseDefaultXhrHeader(),disableCaching:me.getDisableCaching(),params:{REQUEST:'GetCapabilities',SERVICE:'WMS',VERSION:version},success:me.onGetCapabilitiesSuccess,failure:me.onGetCapabilitiesFailure,scope:me});},isServiceExceptionReport:function(responseText){__cov_aw_ivxye20OPypoB_Way2A.f['14']++;__cov_aw_ivxye20OPypoB_Way2A.s['90']++;if(!responseText){__cov_aw_ivxye20OPypoB_Way2A.b['18'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['91']++;return false;}else{__cov_aw_ivxye20OPypoB_Way2A.b['18'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['92']++;return/<ServiceExceptionReport/g.test(responseText);},onGetCapabilitiesSuccess:function(response){__cov_aw_ivxye20OPypoB_Way2A.f['15']++;__cov_aw_ivxye20OPypoB_Way2A.s['93']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['94']++;me.lastErrorMsgKey=null;__cov_aw_ivxye20OPypoB_Way2A.s['95']++;if(me.isServiceExceptionReport(response.responseText)){__cov_aw_ivxye20OPypoB_Way2A.b['19'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['96']++;me.onGetCapabilitiesFailure(response);__cov_aw_ivxye20OPypoB_Way2A.s['97']++;return;}else{__cov_aw_ivxye20OPypoB_Way2A.b['19'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['98']++;var viewModel=me.getViewModel();__cov_aw_ivxye20OPypoB_Way2A.s['99']++;var parser=me.parser;__cov_aw_ivxye20OPypoB_Way2A.s['100']++;var result;__cov_aw_ivxye20OPypoB_Way2A.s['101']++;var isLastAvailableVersion=me.getVersionArray().length===me.triedVersions.length;__cov_aw_ivxye20OPypoB_Way2A.s['102']++;try{__cov_aw_ivxye20OPypoB_Way2A.s['103']++;result=parser.read(response.responseText);}catch(ex){__cov_aw_ivxye20OPypoB_Way2A.s['104']++;if(isLastAvailableVersion){__cov_aw_ivxye20OPypoB_Way2A.b['20'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['105']++;BasiGX.warn(viewModel.get('errorCouldntParseResponse'));__cov_aw_ivxye20OPypoB_Way2A.s['106']++;me.setLoading(false);__cov_aw_ivxye20OPypoB_Way2A.s['107']++;return;}else{__cov_aw_ivxye20OPypoB_Way2A.b['20'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['108']++;me.requestGetCapabilities();__cov_aw_ivxye20OPypoB_Way2A.s['109']++;return;}__cov_aw_ivxye20OPypoB_Way2A.s['110']++;var compatibleLayers=me.isCompatibleCapabilityResponse(result);__cov_aw_ivxye20OPypoB_Way2A.s['111']++;if(!compatibleLayers){__cov_aw_ivxye20OPypoB_Way2A.b['21'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['112']++;if(isLastAvailableVersion){__cov_aw_ivxye20OPypoB_Way2A.b['22'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['113']++;BasiGX.warn(viewModel.get('errorIncompatibleWMS'));__cov_aw_ivxye20OPypoB_Way2A.s['114']++;me.setLoading(false);__cov_aw_ivxye20OPypoB_Way2A.s['115']++;return;}else{__cov_aw_ivxye20OPypoB_Way2A.b['22'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['116']++;me.requestGetCapabilities();__cov_aw_ivxye20OPypoB_Way2A.s['117']++;return;}else{__cov_aw_ivxye20OPypoB_Way2A.b['21'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['118']++;me.fillAvailableLayersFieldset(compatibleLayers);__cov_aw_ivxye20OPypoB_Way2A.s['119']++;me.updateControlToolbarState();__cov_aw_ivxye20OPypoB_Way2A.s['120']++;me.setLoading(false);},onGetCapabilitiesFailure:function(response){__cov_aw_ivxye20OPypoB_Way2A.f['16']++;__cov_aw_ivxye20OPypoB_Way2A.s['121']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['122']++;var status=response.status;__cov_aw_ivxye20OPypoB_Way2A.s['123']++;var responseText=response.responseText;__cov_aw_ivxye20OPypoB_Way2A.s['124']++;var errDetails=[];__cov_aw_ivxye20OPypoB_Way2A.s['125']++;me.lastErrorMsgKey=me.responseStatusToErrorMsgKey(status);__cov_aw_ivxye20OPypoB_Way2A.s['126']++;if(response.timedout){__cov_aw_ivxye20OPypoB_Way2A.b['23'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['127']++;me.lastErrorMsgKey='msgRequestTimedOut';}else{__cov_aw_ivxye20OPypoB_Way2A.b['23'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['128']++;if((__cov_aw_ivxye20OPypoB_Way2A.b['25'][0]++,me.lastErrorMsgKey===null)&&(__cov_aw_ivxye20OPypoB_Way2A.b['25'][1]++,status>=200)&&(__cov_aw_ivxye20OPypoB_Way2A.b['25'][2]++,status<300)){__cov_aw_ivxye20OPypoB_Way2A.b['24'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['129']++;if(me.isServiceExceptionReport(responseText)){__cov_aw_ivxye20OPypoB_Way2A.b['26'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['130']++;me.lastErrorMsgKey='msgServiceException';__cov_aw_ivxye20OPypoB_Way2A.s['131']++;errDetails=me.exceptionDetailsFromReport(responseText);}else{__cov_aw_ivxye20OPypoB_Way2A.b['26'][1]++;}}else{__cov_aw_ivxye20OPypoB_Way2A.b['24'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['132']++;if(!me.getAutoDetectVersion()){__cov_aw_ivxye20OPypoB_Way2A.b['27'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['133']++;me.setLoading(false);__cov_aw_ivxye20OPypoB_Way2A.s['134']++;BasiGX.warn(me.getErrorMessage('errorRequestFailed',errDetails));__cov_aw_ivxye20OPypoB_Way2A.s['135']++;return;}else{__cov_aw_ivxye20OPypoB_Way2A.b['27'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['136']++;me.requestGetCapabilities();}},exceptionDetailsFromReport:function(exceptionReport){__cov_aw_ivxye20OPypoB_Way2A.f['17']++;__cov_aw_ivxye20OPypoB_Way2A.s['137']++;var exceptionDetails=[];__cov_aw_ivxye20OPypoB_Way2A.s['138']++;if(DOMParser){__cov_aw_ivxye20OPypoB_Way2A.b['28'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['139']++;var parser=new DOMParser();__cov_aw_ivxye20OPypoB_Way2A.s['140']++;try{__cov_aw_ivxye20OPypoB_Way2A.s['141']++;var xml=parser.parseFromString(exceptionReport,'text/xml');__cov_aw_ivxye20OPypoB_Way2A.s['142']++;var exceptions=Ext.DomQuery.select('ServiceException',xml);__cov_aw_ivxye20OPypoB_Way2A.s['143']++;Ext.each(exceptions,function(exception){__cov_aw_ivxye20OPypoB_Way2A.f['18']++;__cov_aw_ivxye20OPypoB_Way2A.s['144']++;exceptionDetails.push(exception.innerHTML);});}catch(e){__cov_aw_ivxye20OPypoB_Way2A.s['145']++;Ext.Logger.warn('Failed to parse responseText as XML: '+e);}}else{__cov_aw_ivxye20OPypoB_Way2A.b['28'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['146']++;return exceptionDetails;},getErrorMessage:function(errorKey,errorDetails){__cov_aw_ivxye20OPypoB_Way2A.f['19']++;__cov_aw_ivxye20OPypoB_Way2A.s['147']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['148']++;var viewModel=me.getViewModel();__cov_aw_ivxye20OPypoB_Way2A.s['149']++;var msg=viewModel.get(errorKey);__cov_aw_ivxye20OPypoB_Way2A.s['150']++;if(me.lastErrorMsgKey!==null){__cov_aw_ivxye20OPypoB_Way2A.b['29'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['151']++;msg+='<br /><br />'+viewModel.get(me.lastErrorMsgKey);}else{__cov_aw_ivxye20OPypoB_Way2A.b['29'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['152']++;if((__cov_aw_ivxye20OPypoB_Way2A.b['31'][0]++,errorDetails)&&(__cov_aw_ivxye20OPypoB_Way2A.b['31'][1]++,errorDetails.length>0)){__cov_aw_ivxye20OPypoB_Way2A.b['30'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['153']++;msg+='<ul>';__cov_aw_ivxye20OPypoB_Way2A.s['154']++;Ext.each(errorDetails,function(errorDetail){__cov_aw_ivxye20OPypoB_Way2A.f['20']++;__cov_aw_ivxye20OPypoB_Way2A.s['155']++;msg+='<li>'+errorDetail+'</li>';});__cov_aw_ivxye20OPypoB_Way2A.s['156']++;msg+='</ul>';}else{__cov_aw_ivxye20OPypoB_Way2A.b['30'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['157']++;return msg;},updateControlToolbarState:function(){__cov_aw_ivxye20OPypoB_Way2A.f['21']++;__cov_aw_ivxye20OPypoB_Way2A.s['158']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['159']++;var cbGroup=me.down('[name=fs-available-layers] checkboxgroup');__cov_aw_ivxye20OPypoB_Way2A.s['160']++;var allCbs=cbGroup.query('checkbox');__cov_aw_ivxye20OPypoB_Way2A.s['161']++;var allChecked=cbGroup.query('[checked=true]');__cov_aw_ivxye20OPypoB_Way2A.s['162']++;var allDisabled=cbGroup.query('[disabled=true]');__cov_aw_ivxye20OPypoB_Way2A.s['163']++;var checkAllBtn=me.down('[name=check-all-layers]');__cov_aw_ivxye20OPypoB_Way2A.s['164']++;var uncheckAllBtn=me.down('[name=uncheck-all-layers]');__cov_aw_ivxye20OPypoB_Way2A.s['165']++;var addBtn=me.down('[name=add-checked-layers]');__cov_aw_ivxye20OPypoB_Way2A.s['166']++;if(allCbs.length===0){__cov_aw_ivxye20OPypoB_Way2A.b['32'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['167']++;return;}else{__cov_aw_ivxye20OPypoB_Way2A.b['32'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['168']++;if(allDisabled.length===allCbs.length){__cov_aw_ivxye20OPypoB_Way2A.b['33'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['169']++;addBtn.setDisabled(true);__cov_aw_ivxye20OPypoB_Way2A.s['170']++;if(checkAllBtn){__cov_aw_ivxye20OPypoB_Way2A.b['34'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['171']++;checkAllBtn.setDisabled(true);}else{__cov_aw_ivxye20OPypoB_Way2A.b['34'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['172']++;if(uncheckAllBtn){__cov_aw_ivxye20OPypoB_Way2A.b['35'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['173']++;uncheckAllBtn.setDisabled(true);}else{__cov_aw_ivxye20OPypoB_Way2A.b['35'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['174']++;return;}else{__cov_aw_ivxye20OPypoB_Way2A.b['33'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['175']++;if(allChecked.length>0){__cov_aw_ivxye20OPypoB_Way2A.b['36'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['176']++;addBtn.setDisabled(false);}else{__cov_aw_ivxye20OPypoB_Way2A.b['36'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['177']++;addBtn.setDisabled(true);}__cov_aw_ivxye20OPypoB_Way2A.s['178']++;if(checkAllBtn){__cov_aw_ivxye20OPypoB_Way2A.b['37'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['179']++;if(allCbs.length===allChecked.length){__cov_aw_ivxye20OPypoB_Way2A.b['38'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['180']++;checkAllBtn.setDisabled(true);}else{__cov_aw_ivxye20OPypoB_Way2A.b['38'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['181']++;checkAllBtn.setDisabled(false);}}else{__cov_aw_ivxye20OPypoB_Way2A.b['37'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['182']++;if(uncheckAllBtn){__cov_aw_ivxye20OPypoB_Way2A.b['39'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['183']++;if(allChecked.length===0){__cov_aw_ivxye20OPypoB_Way2A.b['40'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['184']++;uncheckAllBtn.setDisabled(true);}else{__cov_aw_ivxye20OPypoB_Way2A.b['40'][1]++;__cov_aw_ivxye20OPypoB_Way2A.s['185']++;uncheckAllBtn.setDisabled(false);}}else{__cov_aw_ivxye20OPypoB_Way2A.b['39'][1]++;}},removeAddLayersComponents:function(){__cov_aw_ivxye20OPypoB_Way2A.f['22']++;__cov_aw_ivxye20OPypoB_Way2A.s['186']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['187']++;var cbGroup=me.down('[name=fs-available-layers] checkboxgroup');__cov_aw_ivxye20OPypoB_Way2A.s['188']++;var tb=me.down('toolbar[name=interact-w-available-layers]');__cov_aw_ivxye20OPypoB_Way2A.s['189']++;cbGroup.removeAll();__cov_aw_ivxye20OPypoB_Way2A.s['190']++;if(tb){__cov_aw_ivxye20OPypoB_Way2A.b['41'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['191']++;me.remove(tb);}else{__cov_aw_ivxye20OPypoB_Way2A.b['41'][1]++;}},getOlLayer:function(capLayer,version,mapProj,url){__cov_aw_ivxye20OPypoB_Way2A.f['23']++;__cov_aw_ivxye20OPypoB_Way2A.s['192']++;if((__cov_aw_ivxye20OPypoB_Way2A.b['43'][0]++,version==='1.3.0')&&(__cov_aw_ivxye20OPypoB_Way2A.b['43'][1]++,Ext.isArray(capLayer.CRS))&&(__cov_aw_ivxye20OPypoB_Way2A.b['43'][2]++,!Ext.Array.contains(capLayer.CRS,mapProj))){__cov_aw_ivxye20OPypoB_Way2A.b['42'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['193']++;return;}else{__cov_aw_ivxye20OPypoB_Way2A.b['42'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['194']++;var style=capLayer.Style;__cov_aw_ivxye20OPypoB_Way2A.s['195']++;var olSource=new ol.source.TileWMS({url:url,params:{LAYERS:capLayer.Name,STYLES:style?(__cov_aw_ivxye20OPypoB_Way2A.b['44'][0]++,style[0].Name):(__cov_aw_ivxye20OPypoB_Way2A.b['44'][1]++,''),VERSION:version,TRANSPARENT:true}});__cov_aw_ivxye20OPypoB_Way2A.s['196']++;var legendUrl=null;__cov_aw_ivxye20OPypoB_Way2A.s['197']++;if((__cov_aw_ivxye20OPypoB_Way2A.b['46'][0]++,Ext.isArray(style))&&(__cov_aw_ivxye20OPypoB_Way2A.b['46'][1]++,!Ext.isEmpty(style))&&(__cov_aw_ivxye20OPypoB_Way2A.b['46'][2]++,Ext.isArray(style[0].LegendURL))&&(__cov_aw_ivxye20OPypoB_Way2A.b['46'][3]++,!Ext.isEmpty(style[0].LegendURL))&&(__cov_aw_ivxye20OPypoB_Way2A.b['46'][4]++,style[0].LegendURL[0].OnlineResource)){__cov_aw_ivxye20OPypoB_Way2A.b['45'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['198']++;legendUrl=style[0].LegendURL[0].OnlineResource;}else{__cov_aw_ivxye20OPypoB_Way2A.b['45'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['199']++;var olLayer=new ol.layer.Tile({topic:true,name:capLayer.Title,source:olSource,legendUrl:legendUrl});__cov_aw_ivxye20OPypoB_Way2A.s['200']++;return olLayer;},isCompatibleCapabilityResponse:function(capabilities){__cov_aw_ivxye20OPypoB_Way2A.f['24']++;__cov_aw_ivxye20OPypoB_Way2A.s['201']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['202']++;if(!capabilities){__cov_aw_ivxye20OPypoB_Way2A.b['47'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['203']++;return false;}else{__cov_aw_ivxye20OPypoB_Way2A.b['47'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['204']++;var version=capabilities.version;__cov_aw_ivxye20OPypoB_Way2A.s['205']++;if((__cov_aw_ivxye20OPypoB_Way2A.b['49'][0]++,version!=='1.1.1')&&(__cov_aw_ivxye20OPypoB_Way2A.b['49'][1]++,version!=='1.3.0')){__cov_aw_ivxye20OPypoB_Way2A.b['48'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['206']++;return false;}else{__cov_aw_ivxye20OPypoB_Way2A.b['48'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['207']++;var compatible=[];__cov_aw_ivxye20OPypoB_Way2A.s['208']++;var map=BasiGX.util.Map.getMapComponent().getMap();__cov_aw_ivxye20OPypoB_Way2A.s['209']++;var mapProj=map.getView().getProjection().getCode();__cov_aw_ivxye20OPypoB_Way2A.s['210']++;var layers=capabilities.Capability.Layer.Layer;__cov_aw_ivxye20OPypoB_Way2A.s['211']++;var url=capabilities.Capability.Request.GetMap.DCPType[0].HTTP.Get.OnlineResource;__cov_aw_ivxye20OPypoB_Way2A.s['212']++;var includeSubLayer=me.getIncludeSubLayer();__cov_aw_ivxye20OPypoB_Way2A.s['213']++;Ext.each(layers,function(layer){__cov_aw_ivxye20OPypoB_Way2A.f['25']++;__cov_aw_ivxye20OPypoB_Way2A.s['214']++;var olLayer=me.getOlLayer(layer,version,mapProj,url);__cov_aw_ivxye20OPypoB_Way2A.s['215']++;if(olLayer){__cov_aw_ivxye20OPypoB_Way2A.b['50'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['216']++;compatible.push(olLayer);}else{__cov_aw_ivxye20OPypoB_Way2A.b['50'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['217']++;if((__cov_aw_ivxye20OPypoB_Way2A.b['52'][0]++,includeSubLayer)&&(__cov_aw_ivxye20OPypoB_Way2A.b['52'][1]++,Ext.isArray(layer.Layer))){__cov_aw_ivxye20OPypoB_Way2A.b['51'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['218']++;Ext.each(layer.Layer,function(subLayer){__cov_aw_ivxye20OPypoB_Way2A.f['26']++;__cov_aw_ivxye20OPypoB_Way2A.s['219']++;var subOlLayer=me.getOlLayer(subLayer,version,mapProj,url);__cov_aw_ivxye20OPypoB_Way2A.s['220']++;if(subOlLayer){__cov_aw_ivxye20OPypoB_Way2A.b['53'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['221']++;compatible.push(subOlLayer);}else{__cov_aw_ivxye20OPypoB_Way2A.b['53'][1]++;}});}else{__cov_aw_ivxye20OPypoB_Way2A.b['51'][1]++;}});__cov_aw_ivxye20OPypoB_Way2A.s['222']++;return compatible.length>0?(__cov_aw_ivxye20OPypoB_Way2A.b['54'][0]++,compatible):(__cov_aw_ivxye20OPypoB_Way2A.b['54'][1]++,false);},fillAvailableLayersFieldset:function(layers){__cov_aw_ivxye20OPypoB_Way2A.f['27']++;__cov_aw_ivxye20OPypoB_Way2A.s['223']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['224']++;me.removeAddLayersComponents();__cov_aw_ivxye20OPypoB_Way2A.s['225']++;var fs=me.down('[name=fs-available-layers]');__cov_aw_ivxye20OPypoB_Way2A.s['226']++;var cbGroup=fs.down('checkboxgroup');__cov_aw_ivxye20OPypoB_Way2A.s['227']++;var checkBoxes=[];__cov_aw_ivxye20OPypoB_Way2A.s['228']++;var candidatesInitiallyChecked=me.getCandidatesInitiallyChecked();__cov_aw_ivxye20OPypoB_Way2A.s['229']++;Ext.each(layers,function(layer){__cov_aw_ivxye20OPypoB_Way2A.f['28']++;__cov_aw_ivxye20OPypoB_Way2A.s['230']++;checkBoxes.push({xtype:'checkbox',boxLabel:layer.get('name'),checked:candidatesInitiallyChecked,olLayer:layer});});__cov_aw_ivxye20OPypoB_Way2A.s['231']++;cbGroup.add(checkBoxes);__cov_aw_ivxye20OPypoB_Way2A.s['232']++;var tbItems=[];__cov_aw_ivxye20OPypoB_Way2A.s['233']++;if(me.getHasCheckAllBtn()){__cov_aw_ivxye20OPypoB_Way2A.b['55'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['234']++;tbItems.push({xtype:'button',name:'check-all-layers',bind:{text:'{checkAllLayersBtnText}'},handler:me.checkAllLayers,scope:me});}else{__cov_aw_ivxye20OPypoB_Way2A.b['55'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['235']++;if(me.getHasUncheckAllBtn()){__cov_aw_ivxye20OPypoB_Way2A.b['56'][0]++;__cov_aw_ivxye20OPypoB_Way2A.s['236']++;tbItems.push({xtype:'button',name:'uncheck-all-layers',bind:{text:'{uncheckAllLayersBtnText}'},handler:me.uncheckAllLayers,scope:me});}else{__cov_aw_ivxye20OPypoB_Way2A.b['56'][1]++;}__cov_aw_ivxye20OPypoB_Way2A.s['237']++;tbItems.push('->');__cov_aw_ivxye20OPypoB_Way2A.s['238']++;tbItems.push({xtype:'button',name:'add-checked-layers',bind:{text:'{addCheckedLayersBtnText}'},handler:me.addCheckedLayers,scope:me});__cov_aw_ivxye20OPypoB_Way2A.s['239']++;me.add({xtype:'toolbar',name:'interact-w-available-layers',items:tbItems});},addCheckedLayers:function(){__cov_aw_ivxye20OPypoB_Way2A.f['29']++;__cov_aw_ivxye20OPypoB_Way2A.s['240']++;var me=this;__cov_aw_ivxye20OPypoB_Way2A.s['241']++;var fs=me.down('[name=fs-available-layers]');__cov_aw_ivxye20OPypoB_Way2A.s['242']++;var checkboxes=fs.query('checkbox[checked=true][disabled=false]');__cov_aw_ivxye20OPypoB_Way2A.s['243']++;var map=BasiGX.util.Map.getMapComponent().getMap();__cov_aw_ivxye20OPypoB_Way2A.s['244']++;Ext.each(checkboxes,function(checkbox){__cov_aw_ivxye20OPypoB_Way2A.f['30']++;__cov_aw_ivxye20OPypoB_Way2A.s['245']++;me.fireEvent('beforewmsadd',checkbox.olLayer);__cov_aw_ivxye20OPypoB_Way2A.s['246']++;map.addLayer(checkbox.olLayer);__cov_aw_ivxye20OPypoB_Way2A.s['247']++;me.fireEvent('wmsadd',checkbox.olLayer);__cov_aw_ivxye20OPypoB_Way2A.s['248']++;checkbox.setDisabled(true);});__cov_aw_ivxye20OPypoB_Way2A.s['249']++;me.updateControlToolbarState();},checkAllLayers:function(){__cov_aw_ivxye20OPypoB_Way2A.f['31']++;__cov_aw_ivxye20OPypoB_Way2A.s['250']++;var sel='[name=fs-available-layers] checkbox[disabled=false]';__cov_aw_ivxye20OPypoB_Way2A.s['251']++;var checkboxes=this.query(sel);__cov_aw_ivxye20OPypoB_Way2A.s['252']++;Ext.each(checkboxes,function(checkbox){__cov_aw_ivxye20OPypoB_Way2A.f['32']++;__cov_aw_ivxye20OPypoB_Way2A.s['253']++;checkbox.setValue(true);});},uncheckAllLayers:function(){__cov_aw_ivxye20OPypoB_Way2A.f['33']++;__cov_aw_ivxye20OPypoB_Way2A.s['254']++;var sel='[name=fs-available-layers] checkbox[disabled=false]';__cov_aw_ivxye20OPypoB_Way2A.s['255']++;var checkboxes=this.query(sel);__cov_aw_ivxye20OPypoB_Way2A.s['256']++;Ext.each(checkboxes,function(checkbox){__cov_aw_ivxye20OPypoB_Way2A.f['34']++;__cov_aw_ivxye20OPypoB_Way2A.s['257']++;checkbox.setValue(false);});}});
+    requires: [
+        'Ext.app.ViewModel',
+        'Ext.button.Button',
+        'Ext.form.CheckboxGroup',
+        'Ext.form.FieldContainer',
+        'Ext.form.FieldSet',
+        'Ext.form.field.Text',
+        'Ext.form.field.Hidden',
+        'Ext.form.field.Checkbox',
+        'Ext.form.field.Radio',
+        'Ext.form.field.ComboBox',
+        'Ext.layout.container.Anchor',
+        'Ext.layout.container.HBox',
+        'Ext.toolbar.Toolbar',
+
+        'BasiGX.util.Map',
+        'BasiGX.util.MsgBox'
+    ],
+
+    viewModel: {
+        data: {
+            queryParamsFieldSetTitle: 'Anfrageparameter',
+            wmsUrlTextFieldLabel: 'WMS-URL',
+            wmsVersionContainerFieldLabel: 'Version',
+            availableLayesFieldSetTitle: 'Verfügbare Layer',
+            resetBtnText: 'Zurücksetzen',
+            requestLayersBtnText: 'Verfügbare Layer abfragen',
+            checkAllLayersBtnText: 'Alle auswählen',
+            uncheckAllLayersBtnText: 'Nichts auswählen',
+            addCheckedLayersBtnText: 'Ausgewählte Layer hinzufügen',
+            errorIncompatibleWMS: 'Der angefragte WMS ist nicht kompatibel ' +
+                    'zur Anwendung',
+            errorRequestFailed: 'Die angegebene URL konnte nicht abgefragt ' +
+                    'werden',
+            errorCouldntParseResponse: 'Die erhaltene Antwort konnte nicht ' +
+                    'erfolgreich geparst werden',
+            msgRequestTimedOut: 'Die Anfrage wurde nicht schnell genug ' +
+                    'beantwortet und abgebrochen',
+            msgServiceException: 'Eine OGC ServiceException ist aufgetreten',
+            msgCorsMisconfiguration: 'HTTP access control (CORS) auf dem ' +
+                    'Zielserver vermutlich nicht korrekt konfiguriert',
+            msgUnauthorized: 'Der Client ist nicht gegenüber dem Zielserver ' +
+                    'authentifiziert',
+            msgForbidden: 'Der Client hat keinen Zugriff auf die angefragte ' +
+                    'Ressource',
+            msgFileNotFound: 'Die angefragte Ressource existiert nicht',
+            msgTooManyRequests: 'Der Client hat zu viele Anfragen gestellt',
+            msgServiceUnavailable: 'Der Server ist derzeit nicht verfügbar ' +
+                    '(zu viele Anfragen bzw. Wartungsmodus)',
+            msgGatewayTimeOut: 'Der Server fungierte als Gateway und das ' +
+                    'Originalziel hat zu langsam geantwortet',
+            msgClientError: 'Ein unspezifizierter Clientfehler ist aufgetreten',
+            msgServerError: 'Ein unspezifizierter Serverfehler ist aufgetreten',
+            documentation: '<h2>WMS hinzufügen</h2>• In diesem Dialog ' +
+                'können Sie mit Hilfe einer WMS-URL ' +
+                'einen beliebigen Kartendienst der Karte hinzufügen.'
+        }
+    },
+
+    padding: 5,
+    layout: 'anchor',
+    defaults: {
+        anchor: '100%'
+    },
+
+    scrollable: true,
+
+
+    config: {
+
+        /**
+         * Whether layers shall start `checked` or `unchecked` in the available
+         * layers fieldset.
+         */
+        candidatesInitiallyChecked: false,
+
+        /**
+         * Whether to add a `Check all layers` button to the toolbar to interact
+         * with the layers of a GetCapabilities response.
+         */
+        hasCheckAllBtn: false,
+
+        /**
+         * Whether to add a `Uncheck all layers` button to the toolbar to
+         * interact with the layers of a GetCapabilities response.
+         */
+        hasUncheckAllBtn: false,
+
+        /**
+         * Whether to include sublayers when creating the list of available
+         * layers.
+         */
+        includeSubLayer: false,
+
+        /**
+         * The WMS versions we try to use in the getCapabilities requests.
+         */
+        versionArray: ['1.3.0', '1.1.1'],
+
+        /**
+         * Whether to test the WMS versions in #versionArray automatically in
+         * descending order. This will hide the user interface for manually
+         * selecting the version to ask the WMS for.
+         */
+        autoDetectVersion: false,
+
+        /**
+         * With these WMS urls we fill the combobox. If this is empty (default),
+         * no combobox will be rendered but a plain textfield.
+         */
+        wmsBaseUrls: [],
+
+        /**
+         * Default url for the textfield or combobox.
+         */
+        defaultUrl: 'https://ows.terrestris.de/osm/service',
+
+        /**
+         * Whether we will send the `X-Requested-With` header when fetching the
+         * capabilities document from the URL. The `X-Requested-With` header is
+         * usually added for XHR, but adding it should lead to a preflight
+         * request (see https://goo.gl/6JzdUI), which some servers fail.
+         *
+         * @type {Boolean}
+         */
+        useDefaultXhrHeader: false,
+
+        /**
+         * Whether the request against the WMS servers will contain the ExtJS
+         * cache buster (`_dc=123…`) or not. If set to `false`, the param will
+         * not be send, if set to `true`, we'll pass it along (ExtJS default
+         * behaviour).
+         *
+         * The name of this parameter is taken from the config option of
+         * `Ext.Ajax`, turning the boolean logic around would be even more
+         * confusing.
+         *
+         * Defaults to `true`, e.g. the cache buster will be send along in the
+         * GET-request.
+         *
+         * @type {Boolean}
+         */
+        disableCaching: true
+    },
+
+    /**
+     * The `ol.format.WMSCapabilities` which we use to parse any responses. Will
+     * be set in `initComponent`
+     *
+     * @private
+     */
+    parser: null,
+
+    /**
+     * Keeps track of the viewModel key of the last error (if any).
+     *
+     * @private
+     */
+    lastErrorMsgKey: null,
+
+    /**
+     * The WMS versions we already tried to request the getCapabilities
+     * document for.
+     *
+     * @private
+     */
+    triedVersions: [],
+
+    items: [
+        {
+            xtype: 'fieldset',
+            layout: 'anchor',
+            defaults: {
+                anchor: '100%'
+            },
+            bind: {
+                title: '{queryParamsFieldSetTitle}'
+            },
+            items: [{
+                xtype: 'textfield',
+                bind: {
+                    fieldLabel: '{wmsUrlTextFieldLabel}'
+                },
+                name: 'url',
+                allowBlank: false,
+                value: null,
+                listeners: {
+                    change: function(textfield) {
+                        var view = textfield.up('basigx-form-addwms');
+                        view.resetState();
+                    },
+                    beforerender: function(textfield) {
+                        var view = textfield.up('basigx-form-addwms');
+                        var countUrls = view.wmsBaseUrls.length;
+                        if (countUrls !== 0) {
+                            textfield.setHidden(true);
+                        }
+                    }
+                }
+            }, {
+                xtype: 'combobox',
+                bind: {
+                    fieldLabel: '{wmsUrlTextFieldLabel}'
+                },
+                store: null,
+                name: 'urlCombo',
+                allowBlank: false,
+                value: null,
+                listeners: {
+                    change: function(combobox) {
+                        var view = combobox.up('basigx-form-addwms');
+                        view.resetState();
+                    },
+                    beforerender: function(combobox) {
+                        var view = combobox.up('basigx-form-addwms');
+                        var countUrls = view.wmsBaseUrls.length;
+                        if (countUrls === 0) {
+                            combobox.setHidden(true);
+                        } else {
+                            var urlWms = view.wmsBaseUrls;
+                            combobox.setStore(urlWms);
+                        }
+                    }
+                }
+            }, {
+                xtype: 'fieldcontainer',
+                bind: {
+                    fieldLabel: '{wmsVersionContainerFieldLabel}'
+                },
+                defaultType: 'radiofield',
+                defaults: {
+                    flex: 1
+                },
+                layout: 'hbox',
+                items: [
+                    // TODO generate from #versionArray?
+                    {
+                        boxLabel: 'v1.1.1',
+                        name: 'version',
+                        inputValue: '1.1.1',
+                        id: 'v111-radio'
+                    }, {
+                        boxLabel: 'v1.3.0',
+                        name: 'version',
+                        inputValue: '1.3.0',
+                        id: 'v130-radio',
+                        checked: true
+                    }
+                ],
+                listeners: {
+                    beforerender: function(fieldcontainer) {
+                        var view = fieldcontainer.up('basigx-form-addwms');
+                        fieldcontainer.setHidden(view.getAutoDetectVersion());
+                    }
+                }
+            }]
+        },
+        {
+            xtype: 'fieldset',
+            name: 'fs-available-layers',
+            layout: 'anchor',
+            scrollable: 'y',
+            maxHeight: 200,
+            defaults: {
+                anchor: '100%'
+            },
+            bind: {
+                title: '{availableLayesFieldSetTitle}'
+            },
+            items: {
+                xtype: 'checkboxgroup',
+                listeners: {
+                    change: {
+                        fn: function(cbGroup) {
+                            var form = cbGroup.up('basigx-form-addwms');
+                            form.updateControlToolbarState();
+                        },
+                        buffer: 50
+                    }
+                },
+                columns: 2,
+                vertical: true
+            }
+        }
+    ],
+
+    // Reset and Submit buttons
+    buttons: [
+        {
+            bind: {
+                text: '{resetBtnText}'
+            },
+            handler: function(btn) {
+                var view = btn.up('basigx-form-addwms');
+                view.getForm().reset();
+                view.removeAddLayersComponents();
+                view.resetState();
+                var defaultValue = view.defaultUrl;
+                var combo = view.down('combobox[name=urlCombo]');
+                combo.setValue(defaultValue);
+                var textfield = view.down('textfield[name=url]');
+                textfield.setValue(defaultValue);
+            }
+        },
+        '->',
+        {
+            bind: {
+                text: '{requestLayersBtnText}'
+            },
+            name: 'requestLayersBtn',
+            formBind: true, // only enabled once the form is valid
+            disabled: true,
+            handler: function(btn) {
+                var view = btn.up('basigx-form-addwms');
+                view.resetState();
+                view.requestGetCapabilities();
+            }
+        }
+    ],
+
+    /**
+     * Initializes the form and sets up the parser instance.
+     */
+    initComponent: function() {
+        var me = this;
+        me.callParent();
+        me.parser = new ol.format.WMSCapabilities();
+        var defaultValue = me.defaultUrl;
+        var combo = me.down('combobox[name=urlCombo]');
+        var textfield = me.down('textfield[name=url]');
+        combo.setValue(defaultValue);
+        textfield.setValue(defaultValue);
+    },
+
+    /**
+     * Resets our internal state tracking properties for tracking the tried
+     * versions and the last error message key we have determined.
+     *
+     * @private
+     */
+    resetState: function() {
+        var me = this;
+        me.lastErrorMsgKey = null;
+        me.triedVersions = [];
+    },
+
+    /**
+     * Returns a key for a viewModel property for the passed HTTP status code or
+     * null if we don't consider the status code an error.
+     *
+     * @param {Number} status The HTTP status code of the last response.
+     * @return {String} An error message key to be looked up in the viewModel.
+     * @private
+     */
+    responseStatusToErrorMsgKey: function(status) {
+        status = parseInt(status, 10);
+        // handle very common ones specifically
+        if (status === 0) {
+            // Most likely CORS
+            // * either not enabled at all
+            // * or misconfigured
+            return 'msgCorsMisconfiguration';
+        } else if (status === 401) {
+            return 'msgUnauthorized';
+        } else if (status === 403) {
+            return 'msgForbidden';
+        } else if (status === 404) {
+            return 'msgFileNotFound';
+        } else if (status === 429) {
+            return 'msgTooManyRequests';
+        } else if (status === 503) {
+            return 'msgServiceUnavailable';
+        } else if (status === 504) {
+            return 'msgGatewayTimeOut';
+        } else if (status >= 400 && status < 500) {
+            return 'msgClientError';
+        } else if (status >= 500) {
+            return 'msgServerError';
+        }
+        return null;
+    },
+
+    /**
+     * Will be called with the `get layers` button. Issues a GetCapabilities
+     * request and sets up handlers for reacting on the response.
+     */
+    requestGetCapabilities: function() {
+        var me = this;
+        var form = me.getForm();
+        if (!form.isValid()) {
+            return;
+        }
+        me.setLoading(true);
+        me.removeAddLayersComponents();
+        var values = form.getValues();
+        var url;
+
+        if (me.wmsBaseUrls.length === 0) {
+            url = values.url;
+        } else {
+            url = values.urlCombo;
+        }
+
+        var version;
+
+        if (!me.getAutoDetectVersion()) {
+            version = values.version;
+        } else {
+            // try to detect the WMS version we should try next
+            var triedVersions = me.triedVersions;
+            var versionsToTry = me.getVersionArray();
+
+            Ext.each(versionsToTry, function(currentVersion) {
+                var alreadyTried = Ext.Array.contains(
+                    triedVersions, currentVersion
+                );
+
+                if (!alreadyTried) {
+                    version = currentVersion;
+                    triedVersions.push(currentVersion);
+                    return false;
+                }
+            });
+        }
+
+        if (!version) {
+            // should only happen if all versions have been tried and all failed
+            me.setLoading(false);
+            BasiGX.warn(me.getErrorMessage('errorRequestFailed'));
+            return;
+        }
+        Ext.Ajax.request({
+            url: url,
+            method: 'GET',
+            useDefaultXhrHeader: me.getUseDefaultXhrHeader(),
+            disableCaching: me.getDisableCaching(),
+            params: {
+                REQUEST: 'GetCapabilities',
+                SERVICE: 'WMS',
+                VERSION: version
+            },
+            success: me.onGetCapabilitiesSuccess,
+            failure: me.onGetCapabilitiesFailure,
+            scope: me
+        });
+    },
+
+    /**
+     * Returns true if the passed responseText is a service exception report.
+     *
+     * @param {String} responseText The responseText of a request which is
+     *     possibly a service exception report.
+     * @return {Boolean} Whether the response is a service exception report
+     *     document.
+     */
+    isServiceExceptionReport: function(responseText) {
+        if (!responseText) {
+            return false;
+        }
+        return (/<ServiceExceptionReport/g).test(responseText);
+    },
+
+    /**
+     * Called if we could successfully query for the capabilities of a WMS, this
+     * method will examine the answer and eventually set up a fieldset for all
+     * the layers that we have found in the server's answer.
+     *
+     * @param {XMLHttpRequest} response The response of the request.
+     */
+    onGetCapabilitiesSuccess: function(response) {
+        var me = this;
+
+        me.lastErrorMsgKey = null;
+        // some servers answer with a ServiceExceptionReport, e.g. when a server
+        // only supports v1.1.1 but was requested with v1.3.0. In that case, we
+        // have to manually call the failure callback.
+        if (me.isServiceExceptionReport(response.responseText)) {
+            me.onGetCapabilitiesFailure(response);
+            return;
+        }
+
+        var viewModel = me.getViewModel();
+        var parser = me.parser;
+        var result;
+        var isLastAvailableVersion = me.getVersionArray().length ===
+          me.triedVersions.length;
+        try {
+            result = parser.read(response.responseText);
+        } catch (ex) {
+            if (isLastAvailableVersion) {
+                BasiGX.warn(viewModel.get('errorCouldntParseResponse'));
+                me.setLoading(false);
+                return;
+            }
+            me.requestGetCapabilities();
+            return;
+        }
+        var compatibleLayers = me.isCompatibleCapabilityResponse(result);
+        if (!compatibleLayers) {
+            if (isLastAvailableVersion) {
+                BasiGX.warn(viewModel.get('errorIncompatibleWMS'));
+                me.setLoading(false);
+                return;
+            }
+            me.requestGetCapabilities();
+            return;
+        }
+        me.fillAvailableLayersFieldset(compatibleLayers);
+        me.updateControlToolbarState();
+        me.setLoading(false);
+    },
+
+    /**
+     * Called if we could not successfully query for the capabilities of a WMS.
+     *
+     * @param {XMLHttpRequest} response The response of the request.
+     */
+    onGetCapabilitiesFailure: function(response) {
+        var me = this;
+        var status = response.status;
+        var responseText = response.responseText;
+        var errDetails = [];
+        // Keep track of the last error, to eventually inform the user
+        me.lastErrorMsgKey = me.responseStatusToErrorMsgKey(status);
+
+        // we might simply have timed out
+        if (response.timedout) {
+            me.lastErrorMsgKey = 'msgRequestTimedOut';
+        }
+
+        // If we still do not have a msg key and a OK status, check if it's a SE
+        if (me.lastErrorMsgKey === null && status >= 200 && status < 300) {
+            if (me.isServiceExceptionReport(responseText)) {
+                // overwrite the key from the status, this should be considered
+                // an error
+                me.lastErrorMsgKey = 'msgServiceException';
+                errDetails = me.exceptionDetailsFromReport(responseText);
+            }
+        }
+
+        if (!me.getAutoDetectVersion()) {
+            me.setLoading(false);
+            BasiGX.warn(me.getErrorMessage('errorRequestFailed', errDetails));
+            return;
+        } else {
+            // we will try another WMS version automatically…
+            me.requestGetCapabilities();
+        }
+    },
+
+    /**
+     * Returns an array of `<ServiceException>` text contents of the passed
+     * `<ServiceExceptionReport>` or an empty array.
+     *
+     * @param {String} exceptionReport An OGC ServiceExceptionReport as string.
+     * @return {Array<String>} exceptionReport An array of `<ServiceException>`
+     *     text contents of the passed `<ServiceExceptionReport>` or an empty
+     *     array.
+     */
+    exceptionDetailsFromReport: function(exceptionReport) {
+        var exceptionDetails = [];
+        if (DOMParser) {
+            var parser = new DOMParser();
+            try {
+                var xml = parser.parseFromString(exceptionReport, 'text/xml');
+                var exceptions = Ext.DomQuery.select('ServiceException', xml);
+                Ext.each(exceptions, function(exception) {
+                    exceptionDetails.push(exception.innerHTML);
+                });
+            } catch (e) {
+                // pass
+                Ext.Logger.warn('Failed to parse responseText as XML: ' + e);
+            }
+        }
+        return exceptionDetails;
+    },
+
+    /**
+     * Returns the error message to display to the user for the passed key,
+     * optionally adding the passed details.
+     *
+     * @param {String} errorKey The key to look up in the view model for the
+     *     error.
+     * @param {Array<String>} [errorDetails] Optional array of details to
+     *     display.
+     * @return {String} The error message to display.
+     * @private
+     */
+    getErrorMessage: function(errorKey, errorDetails) {
+        var me = this;
+        var viewModel = me.getViewModel();
+
+        var msg = viewModel.get(errorKey);
+        if (me.lastErrorMsgKey !== null) {
+            msg += '<br /><br />' + viewModel.get(me.lastErrorMsgKey);
+        }
+        if (errorDetails && errorDetails.length > 0) {
+            msg += '<ul>';
+            Ext.each(errorDetails, function(errorDetail) {
+                msg += '<li>' + errorDetail + '</li>';
+            });
+            msg += '</ul>';
+        }
+        return msg;
+    },
+
+    /**
+     * Updates the disabled state of the buttons to control the layer
+     * checkboxes (e.g. check all, uncheck all, add selected).
+     */
+    updateControlToolbarState: function() {
+        var me = this;
+        var cbGroup = me.down('[name=fs-available-layers] checkboxgroup');
+        var allCbs = cbGroup.query('checkbox');
+        var allChecked = cbGroup.query('[checked=true]');
+        var allDisabled = cbGroup.query('[disabled=true]');
+        var checkAllBtn = me.down('[name=check-all-layers]');
+        var uncheckAllBtn = me.down('[name=uncheck-all-layers]');
+        var addBtn = me.down('[name=add-checked-layers]');
+        if (allCbs.length === 0) {
+            // no checkboxes, also no control toolbar, return
+            return;
+        }
+        if (allDisabled.length === allCbs.length) {
+            // all checkboxes are disabled, all controls can be disabled
+            addBtn.setDisabled(true);
+            if (checkAllBtn) {
+                checkAllBtn.setDisabled(true);
+            }
+            if (uncheckAllBtn) {
+                uncheckAllBtn.setDisabled(true);
+            }
+            return;
+        }
+        if (allChecked.length > 0) {
+            // at least one checkbox is checked
+            addBtn.setDisabled(false);
+        } else {
+            // not even one is checked
+            addBtn.setDisabled(true);
+        }
+
+        if (checkAllBtn) {
+            if (allCbs.length === allChecked.length) {
+                // all are checked already
+                checkAllBtn.setDisabled(true);
+            } else {
+                checkAllBtn.setDisabled(false);
+            }
+        }
+        if (uncheckAllBtn) {
+            if (allChecked.length === 0) {
+                // not a single one is checked
+                uncheckAllBtn.setDisabled(true);
+            } else {
+                uncheckAllBtn.setDisabled(false);
+            }
+        }
+    },
+
+    /**
+     * Remove the checkboxes for layers from previous requests, and also the
+     * interact-toolbar.
+     */
+    removeAddLayersComponents: function() {
+        var me = this;
+        var cbGroup = me.down('[name=fs-available-layers] checkboxgroup');
+        var tb = me.down('toolbar[name=interact-w-available-layers]');
+        cbGroup.removeAll();
+        if (tb) {
+            me.remove(tb);
+        }
+    },
+
+    /**
+     * A utility method that creates an ol.layer.Tile with a ol.source.TileWMS
+     * from the properties of a layer from a getCapabilities response.
+     *
+     * @param {Object} capLayer A layer from a GetCapabilities response
+     * @param {String} version The WMS version.
+     * @param {String} mapProj The map projection as string.
+     * @param {String} url The WMS URL.
+     * @return {ol.layer.Tile} The created layer or `undefined`.
+     */
+    getOlLayer: function(capLayer, version, mapProj, url) {
+        // This really should not matter, as ol3 can reproject in the client
+        // At least it shoudl be configurable
+        if (version === '1.3.0' &&
+            Ext.isArray(capLayer.CRS) &&
+            !Ext.Array.contains(capLayer.CRS, mapProj)) {
+            // only available for 1.3.0
+            return;
+        }
+        var style = capLayer.Style;
+        var olSource = new ol.source.TileWMS({
+            url: url,
+            params: {
+                LAYERS: capLayer.Name,
+                STYLES: style ? style[0].Name : '',
+                VERSION: version,
+                TRANSPARENT: true
+            }
+        });
+
+        var legendUrl = null;
+
+        if (Ext.isArray(style) && !Ext.isEmpty(style) &&
+            Ext.isArray(style[0].LegendURL) &&
+            !Ext.isEmpty(style[0].LegendURL) &&
+            style[0].LegendURL[0].OnlineResource) {
+            legendUrl = style[0].LegendURL[0].OnlineResource;
+        }
+
+        var olLayer = new ol.layer.Tile({
+            topic: true,
+            name: capLayer.Title,
+            source: olSource,
+            legendUrl: legendUrl
+        });
+        return olLayer;
+    },
+
+    /**
+     * Checks if the passed capabilities object (from the #parser) is
+     * compatible. It woill return an array of layers if we could determine any,
+     * and the boolean value `false` if not.
+     *
+     * @param {Object} capabilities The GetCapabbilties object as it is returned
+     *     by our parser.
+     * @return {ol.layer.Tile[]|boolean} Eitehr an array of comüatible layers or
+     *     'false'.
+     */
+    isCompatibleCapabilityResponse: function(capabilities) {
+        var me = this;
+        if (!capabilities) {
+            return false;
+        }
+        var version = capabilities.version;
+        if (version !== '1.1.1' && version !== '1.3.0') {
+            return false;
+        }
+        var compatible = [];
+        var map = BasiGX.util.Map.getMapComponent().getMap();
+        var mapProj = map.getView().getProjection().getCode();
+
+        // same in both versions
+        var layers = capabilities.Capability.Layer.Layer;
+        var url = capabilities.Capability.Request.GetMap.
+            DCPType[0].HTTP.Get.OnlineResource;
+
+        var includeSubLayer = me.getIncludeSubLayer();
+
+        Ext.each(layers, function(layer) {
+            var olLayer = me.getOlLayer(layer, version, mapProj, url);
+            if (olLayer) {
+                compatible.push(olLayer);
+            }
+
+            if (includeSubLayer && Ext.isArray(layer.Layer)) {
+                Ext.each(layer.Layer, function(subLayer) {
+                    var subOlLayer = me.getOlLayer(
+                        subLayer, version, mapProj, url
+                    );
+                    if (subOlLayer) {
+                        compatible.push(subOlLayer);
+                    }
+                });
+            }
+        });
+
+        return compatible.length > 0 ? compatible : false;
+    },
+
+    /**
+     * Takes an array of OpenLayers layers (as gathered by the method to fetch
+     * them from the capabilities object #isCompatibleCapabilityResponse) and
+     * updates the avaialable layers fieldset with matching entries.
+     *
+     * @param {ol.layer.Tile[]} layers The layers for which the we shall fill
+     *     the fieldset.
+     */
+    fillAvailableLayersFieldset: function(layers) {
+        var me = this;
+        me.removeAddLayersComponents();
+        var fs = me.down('[name=fs-available-layers]');
+        var cbGroup = fs.down('checkboxgroup');
+        var checkBoxes = [];
+        var candidatesInitiallyChecked = me.getCandidatesInitiallyChecked();
+        Ext.each(layers, function(layer) {
+            checkBoxes.push({
+                xtype: 'checkbox',
+                boxLabel: layer.get('name'),
+                checked: candidatesInitiallyChecked,
+                olLayer: layer
+            });
+        });
+        cbGroup.add(checkBoxes);
+
+        var tbItems = [];
+
+        if (me.getHasCheckAllBtn()) {
+            tbItems.push({
+                xtype: 'button',
+                name: 'check-all-layers',
+                bind: {
+                    text: '{checkAllLayersBtnText}'
+                },
+                handler: me.checkAllLayers,
+                scope: me
+            });
+        }
+
+        if (me.getHasUncheckAllBtn()) {
+            tbItems.push({
+                xtype: 'button',
+                name: 'uncheck-all-layers',
+                bind: {
+                    text: '{uncheckAllLayersBtnText}'
+                },
+                handler: me.uncheckAllLayers,
+                scope: me
+            });
+        }
+
+        tbItems.push('->');
+        tbItems.push({
+            xtype: 'button',
+            name: 'add-checked-layers',
+            bind: {
+                text: '{addCheckedLayersBtnText}'
+            },
+            handler: me.addCheckedLayers,
+            scope: me
+        });
+
+        me.add({
+            xtype: 'toolbar',
+            name: 'interact-w-available-layers',
+            items: tbItems
+        });
+    },
+
+    /**
+     * Examines the available layers fieldset, and adds all checked layers to
+     * the map.
+     */
+    addCheckedLayers: function() {
+        var me = this;
+        var fs = me.down('[name=fs-available-layers]');
+        var checkboxes = fs.query('checkbox[checked=true][disabled=false]');
+        var map = BasiGX.util.Map.getMapComponent().getMap();
+        Ext.each(checkboxes, function(checkbox) {
+            me.fireEvent('beforewmsadd', checkbox.olLayer);
+            map.addLayer(checkbox.olLayer);
+            me.fireEvent('wmsadd', checkbox.olLayer);
+            checkbox.setDisabled(true);
+        });
+        me.updateControlToolbarState();
+    },
+
+    /**
+     * Checks all checkboxes in the available layers fieldset.
+     */
+    checkAllLayers: function() {
+        var sel = '[name=fs-available-layers] checkbox[disabled=false]';
+        var checkboxes = this.query(sel);
+        Ext.each(checkboxes, function(checkbox) {
+            checkbox.setValue(true);
+        });
+    },
+
+    /**
+     * Unchecks all checkboxes in the available layers fieldset.
+     */
+    uncheckAllLayers: function() {
+        var sel = '[name=fs-available-layers] checkbox[disabled=false]';
+        var checkboxes = this.query(sel);
+        Ext.each(checkboxes, function(checkbox) {
+            checkbox.setValue(false);
+        });
+    }
+});

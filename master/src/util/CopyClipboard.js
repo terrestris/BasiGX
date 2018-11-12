@@ -1,9 +1,89 @@
+/* Copyright (c) 2017-present terrestris GmbH & Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/**
+ * Copy-to-clipboard utilities.
+ *
+ * @class BasiGX.util.CopyClipboard
+ */
+Ext.define('BasiGX.util.CopyClipboard', {
 
-var __cov_746aTi_Bubx8xyms7GWRgA = (Function('return this'))();
-if (!__cov_746aTi_Bubx8xyms7GWRgA.__coverage__) { __cov_746aTi_Bubx8xyms7GWRgA.__coverage__ = {}; }
-__cov_746aTi_Bubx8xyms7GWRgA = __cov_746aTi_Bubx8xyms7GWRgA.__coverage__;
-if (!(__cov_746aTi_Bubx8xyms7GWRgA['/home/travis/build/terrestris/BasiGX/src/util/CopyClipboard.js'])) {
-   __cov_746aTi_Bubx8xyms7GWRgA['/home/travis/build/terrestris/BasiGX/src/util/CopyClipboard.js'] = {"path":"/home/travis/build/terrestris/BasiGX/src/util/CopyClipboard.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0]},"f":{"1":0},"fnMap":{"1":{"name":"(anonymous_1)","line":46,"loc":{"start":{"line":46,"column":29},"end":{"line":46,"column":79}}}},"statementMap":{"1":{"start":{"line":21,"column":0},"end":{"line":89,"column":3}},"2":{"start":{"line":47,"column":12},"end":{"line":47,"column":53}},"3":{"start":{"line":49,"column":12},"end":{"line":52,"column":13}},"4":{"start":{"line":50,"column":16},"end":{"line":51,"column":43}},"5":{"start":{"line":54,"column":12},"end":{"line":54,"column":35}},"6":{"start":{"line":55,"column":12},"end":{"line":59,"column":14}},"7":{"start":{"line":60,"column":12},"end":{"line":63,"column":14}},"8":{"start":{"line":65,"column":12},"end":{"line":65,"column":46}},"9":{"start":{"line":66,"column":12},"end":{"line":66,"column":38}},"10":{"start":{"line":68,"column":12},"end":{"line":85,"column":13}},"11":{"start":{"line":69,"column":16},"end":{"line":69,"column":59}},"12":{"start":{"line":70,"column":16},"end":{"line":78,"column":17}},"13":{"start":{"line":71,"column":20},"end":{"line":73,"column":21}},"14":{"start":{"line":72,"column":24},"end":{"line":72,"column":48}},"15":{"start":{"line":75,"column":20},"end":{"line":77,"column":21}},"16":{"start":{"line":76,"column":24},"end":{"line":76,"column":48}},"17":{"start":{"line":79,"column":16},"end":{"line":79,"column":42}},"18":{"start":{"line":81,"column":16},"end":{"line":83,"column":17}},"19":{"start":{"line":82,"column":20},"end":{"line":82,"column":44}},"20":{"start":{"line":84,"column":16},"end":{"line":84,"column":42}}},"branchMap":{"1":{"line":49,"type":"if","locations":[{"start":{"line":49,"column":12},"end":{"line":49,"column":12}},{"start":{"line":49,"column":12},"end":{"line":49,"column":12}}]},"2":{"line":70,"type":"if","locations":[{"start":{"line":70,"column":16},"end":{"line":70,"column":16}},{"start":{"line":70,"column":16},"end":{"line":70,"column":16}}]},"3":{"line":71,"type":"if","locations":[{"start":{"line":71,"column":20},"end":{"line":71,"column":20}},{"start":{"line":71,"column":20},"end":{"line":71,"column":20}}]},"4":{"line":75,"type":"if","locations":[{"start":{"line":75,"column":20},"end":{"line":75,"column":20}},{"start":{"line":75,"column":20},"end":{"line":75,"column":20}}]},"5":{"line":81,"type":"if","locations":[{"start":{"line":81,"column":16},"end":{"line":81,"column":16}},{"start":{"line":81,"column":16},"end":{"line":81,"column":16}}]}}};
-}
-__cov_746aTi_Bubx8xyms7GWRgA = __cov_746aTi_Bubx8xyms7GWRgA['/home/travis/build/terrestris/BasiGX/src/util/CopyClipboard.js'];
-__cov_746aTi_Bubx8xyms7GWRgA.s['1']++;Ext.define('BasiGX.util.CopyClipboard',{statics:{copyToClipboardSupported:document.queryCommandSupported('copy'),copyTextToClipboard:function(copyText,cbSuccess,cbFailure,cbScope){__cov_746aTi_Bubx8xyms7GWRgA.f['1']++;__cov_746aTi_Bubx8xyms7GWRgA.s['2']++;var staticMe=BasiGX.util.CopyClipboard;__cov_746aTi_Bubx8xyms7GWRgA.s['3']++;if(!staticMe.copyToClipboardSupported){__cov_746aTi_Bubx8xyms7GWRgA.b['1'][0]++;__cov_746aTi_Bubx8xyms7GWRgA.s['4']++;Ext.Logger.warn('Copy to clipboard is not supported '+'by the browser!');}else{__cov_746aTi_Bubx8xyms7GWRgA.b['1'][1]++;}__cov_746aTi_Bubx8xyms7GWRgA.s['5']++;var dh=Ext.DomHelper;__cov_746aTi_Bubx8xyms7GWRgA.s['6']++;var spec={tag:'input',id:'hidden-copy-paste-textarea',style:'height:0;'};__cov_746aTi_Bubx8xyms7GWRgA.s['7']++;var hiddenInputField=dh.append(Ext.getBody(),spec);__cov_746aTi_Bubx8xyms7GWRgA.s['8']++;hiddenInputField.value=copyText;__cov_746aTi_Bubx8xyms7GWRgA.s['9']++;hiddenInputField.select();__cov_746aTi_Bubx8xyms7GWRgA.s['10']++;try{__cov_746aTi_Bubx8xyms7GWRgA.s['11']++;var success=document.execCommand('copy');__cov_746aTi_Bubx8xyms7GWRgA.s['12']++;if(success){__cov_746aTi_Bubx8xyms7GWRgA.b['2'][0]++;__cov_746aTi_Bubx8xyms7GWRgA.s['13']++;if(Ext.isFunction(cbSuccess)){__cov_746aTi_Bubx8xyms7GWRgA.b['3'][0]++;__cov_746aTi_Bubx8xyms7GWRgA.s['14']++;cbSuccess.call(cbScope);}else{__cov_746aTi_Bubx8xyms7GWRgA.b['3'][1]++;}}else{__cov_746aTi_Bubx8xyms7GWRgA.b['2'][1]++;__cov_746aTi_Bubx8xyms7GWRgA.s['15']++;if(Ext.isFunction(cbFailure)){__cov_746aTi_Bubx8xyms7GWRgA.b['4'][0]++;__cov_746aTi_Bubx8xyms7GWRgA.s['16']++;cbFailure.call(cbScope);}else{__cov_746aTi_Bubx8xyms7GWRgA.b['4'][1]++;}}__cov_746aTi_Bubx8xyms7GWRgA.s['17']++;hiddenInputField.remove();}catch(err){__cov_746aTi_Bubx8xyms7GWRgA.s['18']++;if(Ext.isFunction(cbFailure)){__cov_746aTi_Bubx8xyms7GWRgA.b['5'][0]++;__cov_746aTi_Bubx8xyms7GWRgA.s['19']++;cbFailure.call(cbScope);}else{__cov_746aTi_Bubx8xyms7GWRgA.b['5'][1]++;}__cov_746aTi_Bubx8xyms7GWRgA.s['20']++;hiddenInputField.remove();}}}});
+    statics: {
+
+        /**
+         * Property indicating the current browser support of the query command
+         * 'copy'.
+         *
+         * @readonly
+         * @type {Boolean} isSupported Whether the 'copy' command is supported
+         *                             or not.
+         */
+        copyToClipboardSupported: document.queryCommandSupported('copy'),
+
+        /**
+         * Copies the given value to the clipboard.
+         *
+         * @param {String|Number} copyText The text to copy to the clipboard.
+         * @param {Function} cbSuccess The callback function to call on copy to
+         *                             clipboard success. Optional.
+         * @param {Function} cbFailure The callback function to call on copy to
+         *                             clipboard failure. Optional.
+         * @param {Function} cbScope The scope to use in the callback
+         *                           functions. Optional.
+         */
+        copyTextToClipboard: function(copyText, cbSuccess, cbFailure, cbScope) {
+            var staticMe = BasiGX.util.CopyClipboard;
+
+            if (!staticMe.copyToClipboardSupported) {
+                Ext.Logger.warn('Copy to clipboard is not supported ' +
+                        'by the browser!');
+            }
+
+            var dh = Ext.DomHelper;
+            var spec = {
+                tag: 'input',
+                id: 'hidden-copy-paste-textarea',
+                style: 'height:0;'
+            };
+            var hiddenInputField = dh.append(
+                Ext.getBody(),
+                spec
+            );
+
+            hiddenInputField.value = copyText;
+            hiddenInputField.select();
+
+            try {
+                var success = document.execCommand('copy');
+                if (success) {
+                    if (Ext.isFunction(cbSuccess)) {
+                        cbSuccess.call(cbScope);
+                    }
+                } else {
+                    if (Ext.isFunction(cbFailure)) {
+                        cbFailure.call(cbScope);
+                    }
+                }
+                hiddenInputField.remove();
+            } catch (err) {
+                if (Ext.isFunction(cbFailure)) {
+                    cbFailure.call(cbScope);
+                }
+                hiddenInputField.remove();
+            }
+        }
+    }
+
+});
