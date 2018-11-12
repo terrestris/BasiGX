@@ -54,7 +54,19 @@ Ext.define('BasiGX.view.window.MergeWindow', {
          * The layer to merge to.
          * @type {ol.layer.Vector}
          */
-        targetLayer: null
+        targetLayer: null,
+        /**
+         * Optional extra layers to push the features into.
+         * @type {ol.layer.Vector[]}
+         */
+        extraTargetLayers: null,
+        /**
+         * Optional callback function to get notified once the features have
+         * been merged.
+         * @type {Function} which will receive the features that have been
+         * merged
+         */
+        mergedFeaturesFn: null
     },
 
     initComponent: function() {
@@ -125,12 +137,22 @@ Ext.define('BasiGX.view.window.MergeWindow', {
             var target = me.getTargetLayer().getSource();
             var mapping = Merge.extractMapping(win);
             var copy = Merge.extractToCopyAttributes(win);
+            var extraLayers = me.getExtraTargetLayers() || [];
+            var allFeatures = [];
 
             Ext.each(newFeatures, function(feature) {
                 var newFeature = Merge.convertFeature(feature, mapping, copy,
                     origSchema);
+                allFeatures.push(newFeature);
                 target.addFeature(newFeature);
             });
+            Ext.each(extraLayers, function(layer) {
+                layer.getSource().addFeatures(allFeatures);
+            });
+
+            if (me.getMergedFeaturesFn()) {
+                me.getMergedFeaturesFn()(allFeatures);
+            }
 
             win.destroy();
         };

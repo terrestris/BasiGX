@@ -124,6 +124,7 @@ Ext.define('BasiGX.util.Merge', {
             Ext.each(toCopy, function(attribute) {
                 newFeature.set(attribute, feature.get(attribute));
             });
+            newFeature.setId('converted_' + feature.getId());
             return newFeature;
         }
 

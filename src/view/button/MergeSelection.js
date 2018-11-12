@@ -55,11 +55,10 @@ Ext.define('BasiGX.view.button.MergeSelection', {
      */
     config: {
         handler: function() {
+            var me = this;
             var grid;
             var parent = this.up('window');
-            // support embedding in window or panel
-            // This assumes the button is embedded in a buttongroup or similar
-            // panel, hence walking up two panels.
+            // support embedding the feature grid anywhere
             if (!parent && this.config.featureGridSelectorFn) {
                 grid = this.config.featureGridSelectorFn.call(this);
             } else {
@@ -70,7 +69,13 @@ Ext.define('BasiGX.view.button.MergeSelection', {
             Ext.create({
                 xtype: 'basigx-window-merge',
                 sourceLayer: this.getSourceLayer(),
-                targetLayer: targetLayer
+                targetLayer: targetLayer,
+                extraTargetLayers: this.getExtraTargetLayers(),
+                mergedFeaturesFn: function(features) {
+                    if (me.getMergedFeaturesFn()) {
+                        me.getMergedFeaturesFn()(features);
+                    }
+                }
             });
         },
         /**
@@ -78,6 +83,21 @@ Ext.define('BasiGX.view.button.MergeSelection', {
          * @type {ol.layer.Vector}
          */
         sourceLayer: null,
-        featureGridSelectorFn: null
+        /**
+         * A function to obtain the feature grid.
+         */
+        featureGridSelectorFn: null,
+        /**
+         * Optional extra target layers to put the features into.
+         * @type {ol.layer.Vector[]}
+         */
+        extraTargetLayers: null,
+        /**
+         * Optional callback function to get notified once the features have
+         * been merged.
+         * @type {Function} which will receive the features that have been
+         * merged
+         */
+        mergedFeaturesFn: null
     }
 });
