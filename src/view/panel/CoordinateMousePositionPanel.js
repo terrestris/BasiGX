@@ -65,7 +65,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     /**
      * TODO: fill my documentation
      */
-    epsgCodeArray: ['EPSG:3857', 'EPSG:4326', 'EPSG:3035', 'EPSG:29902', 'EPSG:2157'],
+    epsgCodeArray: null,
 
     /**
      *
@@ -93,7 +93,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
             x: 'Easting',
             y: 'Northing'
         },
-        degree: {
+        degrees: {
             x: 'Longitude',
             y: 'Latitude'
         }
@@ -106,12 +106,13 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
         var me = this,
             coordinateFieldLabelPerUnit = me.coordinateFieldLabelPerUnit;
 
-        // will be filled as soon as CRS definitions are ready
         me.items = [{
+            // will be filled as soon as CRS definitions are ready
             name: 'crs-group',
             xtype: 'button',
             hidden: true
         }, {
+            // helper component updated by openlayers mouse position control
             name: 'mouse-position',
             hidden: true,
             xtype: 'component'
@@ -153,23 +154,20 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
         var me = this,
             epsgCodeArray = me.epsgCodeArray;
 
-        if (epsgCodeArray) {
-            //check if map projection is included
-            var projectionInitPromise = BasiGX.util.Projection.
-                fetchProj4jCrsDefinitions(epsgCodeArray);
-            projectionInitPromise
-                .then(function (proj4jObjects) {
-                    BasiGX.util.Projection.initProj4Definitions(proj4jObjects, me);
-                    me.generateCrsChangeButtonGroup(proj4jObjects);
-                })
-                .catch(function () {
-                    // TODO: nicer error handling
-                });
-        } else {
-            me.generateCrsChangeButtonGroup({
-                xfsdf: 23
-            });
+        if (!epsgCodeArray) {
+            epsgCodeArray = [me.olMap.getView().getProjection().getCode()];
         }
+        //check if map projection is included
+        var projectionInitPromise = BasiGX.util.Projection.
+            fetchProj4jCrsDefinitions(epsgCodeArray);
+        projectionInitPromise
+            .then(function (proj4jObjects) {
+                BasiGX.util.Projection.initProj4Definitions(proj4jObjects, me);
+                me.generateCrsChangeButtonGroup(proj4jObjects);
+            })
+            .catch(function () {
+                Ext.log.warn('Could not initialize projections');
+            });
     },
 
     /**
@@ -181,51 +179,61 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
         }
 
         var me = this,
-            isMenu = proj4jObjects.length > me.segmentedButtonLimit;
+            isMenu = proj4jObjects.length > me.segmentedButtonLimit,
+            cmpCfg;
 
-        var buttonCfg = {
-            xtype: isMenu ? 'button' : 'segmentedbutton',
-            name: 'crs-group',
-            items: isMenu ? undefined : [],
-            menu: isMenu ? [] : undefined,
-            bind: {
-                text: isMenu ? '{srsName}' : null
-            }
-        };
-
-        Ext.each(proj4jObjects, function (projectionDefinition) {
-            var code = projectionDefinition.code;
-            var name = projectionDefinition.name;
-            var itemCfg = {
-                text: name,
-                epsgCode: 'EPSG:' + code
-            };
-            if (isMenu) {
-                itemCfg.handler = me.onCrsItemClick.bind(me, isMenu);
-                buttonCfg.menu.push(itemCfg);
-            } else {
-                buttonCfg.items.push(itemCfg);
-            }
-        });
-
-        if (!isMenu) {
-            buttonCfg.listeners = {
-                toggle: me.onCrsItemClick.bind(me, isMenu)
+        if (proj4jObjects.length === 1) {
+            // simply add a label
+            cmpCfg = {
+                xtype: 'label',
+                margin: 3,
+                text: proj4jObjects[0].name
             };
         } else {
-            var mapCode = me.olMap.getView().getProjection().getCode().split(':')[1];
-            var filtered = Ext.Array.filter(proj4jObjects, function (obj) {
-                return obj.code === mapCode;
+            cmpCfg = {
+                xtype: isMenu ? 'button' : 'segmentedbutton',
+                name: 'crs-group',
+                items: isMenu ? undefined : [],
+                menu: isMenu ? [] : undefined,
+                bind: {
+                    text: isMenu ? '{srsName}' : null
+                }
+            };
+
+            Ext.each(proj4jObjects, function (projectionDefinition) {
+                var code = projectionDefinition.code;
+                var name = projectionDefinition.name;
+                var itemCfg = {
+                    text: name,
+                    epsgCode: 'EPSG:' + code
+                };
+                if (isMenu) {
+                    itemCfg.handler = me.onCrsItemClick.bind(me, isMenu);
+                    cmpCfg.menu.push(itemCfg);
+                } else {
+                    cmpCfg.items.push(itemCfg);
+                }
             });
-            // update view model to set correct CRS name
-            me.getViewModel().setData({
-                srsName: filtered ? filtered[0].name : ''
-            });
+
+            if (!isMenu) {
+                cmpCfg.listeners = {
+                    toggle: me.onCrsItemClick.bind(me, isMenu)
+                };
+            } else {
+                var mapCode = me.olMap.getView().getProjection().getCode().split(':')[1];
+                var filtered = Ext.Array.filter(proj4jObjects, function (obj) {
+                    return obj.code === mapCode;
+                });
+                // update view model to set correct CRS name
+                me.getViewModel().setData({
+                    srsName: filtered ? filtered[0].name : ''
+                });
+            }
         }
 
         var cmpToRemove = me.down('component[name="crs-group"]');
         me.remove(cmpToRemove);
-        me.insert(0, buttonCfg);
+        me.insert(0, cmpCfg);
     },
 
     /**
