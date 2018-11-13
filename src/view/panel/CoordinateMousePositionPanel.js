@@ -176,14 +176,14 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
 
         var projectionInitPromise = BasiGX.util.Projection.
             fetchProj4jCrsDefinitions(epsgCodeArray);
+        var failureFunction = function () {
+            Ext.log.warn('Could not initialize projections');
+        };
         projectionInitPromise
             .then(function (proj4jObjects) {
                 BasiGX.util.Projection.initProj4Definitions(proj4jObjects, me);
                 me.generateCrsChangeButtonGroup(proj4jObjects);
-            })
-            .catch(function () {
-                Ext.log.warn('Could not initialize projections');
-            });
+            }, failureFunction);
     },
 
     /**
