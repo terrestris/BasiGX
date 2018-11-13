@@ -33,34 +33,26 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     ],
 
     /**
-     *
+     * TODO: docs
      */
     viewModel: {
         data: {
-            // TODO
-            closeBtnText: 'Close',
-            fontSelectLabel: 'Select a font',
-            documentation: '<h2>Zeichensatz Sammlung</h2>• In diesem Dialog ' +
-                'kann für die Darstellung von Objekten ein Zeichen einer ' +
-                'Schriftart gewählt werden.<br>• Wählen Sie zunächst eine ' +
-                'Schriftart aus.<br>• Anschließend können Sie aus der ' +
-                'Zeichentabelle ein Symbol auswählen, dass zur Darstellung ' +
-                'verwendet werden soll',
             xVal: NaN,
             yVal: NaN,
             xLabel: 'Easting',
             yLabel: 'Northing',
-            srsName: ''
+            srsName: '',
+            centerTooltip: 'Center map to coordinates'
         }
     },
 
     /**
-     *
+     * TODO: docs
      */
     layout: 'hbox',
 
     /**
-     *
+     * TODO: docs
      */
     segmentedButtonLimit: 3,
 
@@ -125,6 +117,9 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 fieldLabel: '{xLabel}'
             },
             labelAlign: 'right',
+            validator: function (val) {
+                return Ext.isNumeric(val);
+            }
         }, {
             xtype: 'textfield',
             name: 'yVal',
@@ -132,7 +127,19 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 value: '{yVal}',
                 fieldLabel: '{yLabel}'
             },
-            labelAlign: 'right'
+            labelAlign: 'right',
+            validator: function (val) {
+                return Ext.isNumeric(val);
+            }
+        }, {
+            xtype: 'button',
+            margin: '0 0 0 5',
+            glyph: 'xf192@FontAwesome',
+            bind: {
+                tooltip: '{centerTooltip}'
+            },
+            handler: me.onCenterToCoordinateClick,
+            scope: me
         }];
 
         if (!me.olMap && !(me.olMap instanceof ol.Map)) {
@@ -322,6 +329,28 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
             xVal: xVal,
             yVal: yVal
         });
+    },
+
+    /**
+     * TODO: docs
+     */
+    onCenterToCoordinateClick: function () {
+        var me = this;
+        var viewModel = me.getViewModel();
+        var xVal = viewModel.get('xVal');
+        var yVal = viewModel.get('yVal');
+
+        if (!Ext.isNumeric(xVal) || !Ext.isNumeric(yVal)) {
+            return;
+        }
+
+        // transform to map projection
+        var targetCenter = ol.proj.transform(
+            [Number.parseFloat(xVal), Number.parseFloat(yVal)],
+            me.olMousePositionControl.getProjection(),
+            me.olMap.getView().getProjection()
+        );
+        me.olMap.getView().setCenter(targetCenter);
     }
 
 });
