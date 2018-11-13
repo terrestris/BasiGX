@@ -48,6 +48,8 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 'verwendet werden soll',
             xVal: NaN,
             yVal: NaN,
+            xLabel: 'Easting',
+            yLabel: 'Northing',
             srsName: ''
         }
     },
@@ -81,15 +83,15 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
      *
      */
     coordinateDigitsForUnit: {
-        m: 3,
-        degree: 6
+        metre: 3,
+        degrees: 6
     },
 
     /**
      *
      */
     coordinateFieldLabelPerUnit: {
-        m: {
+        metre: {
             x: 'Easting',
             y: 'Northing'
         },
@@ -103,8 +105,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
      * TODO: docs
      */
     initComponent: function () {
-        var me = this,
-            coordinateFieldLabelPerUnit = me.coordinateFieldLabelPerUnit;
+        var me = this;
 
         me.items = [{
             // will be filled as soon as CRS definitions are ready
@@ -120,18 +121,18 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
             xtype: 'textfield',
             name: 'xVal',
             bind: {
-                value: '{xVal}'
+                value: '{xVal}',
+                fieldLabel: '{xLabel}'
             },
             labelAlign: 'right',
-            fieldLabel: coordinateFieldLabelPerUnit.m.x,
         }, {
             xtype: 'textfield',
             name: 'yVal',
             bind: {
-                value: '{yVal}'
+                value: '{yVal}',
+                fieldLabel: '{yLabel}'
             },
-            labelAlign: 'right',
-            fieldLabel: coordinateFieldLabelPerUnit.m.y,
+            labelAlign: 'right'
         }];
 
         if (!me.olMap && !(me.olMap instanceof ol.Map)) {
@@ -152,12 +153,15 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
      */
     initProjections: function () {
         var me = this,
-            epsgCodeArray = me.epsgCodeArray;
+            epsgCodeArray = me.epsgCodeArray,
+            mapProjection = me.olMap.getView().getProjection().getCode();
 
         if (!epsgCodeArray) {
-            epsgCodeArray = [me.olMap.getView().getProjection().getCode()];
+            epsgCodeArray = [mapProjection];
+        } else {
+            epsgCodeArray = Ext.Array.merge(epsgCodeArray, [mapProjection]);
         }
-        //check if map projection is included
+
         var projectionInitPromise = BasiGX.util.Projection.
             fetchProj4jCrsDefinitions(epsgCodeArray);
         projectionInitPromise
@@ -203,9 +207,14 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
             Ext.each(proj4jObjects, function (projectionDefinition) {
                 var code = projectionDefinition.code;
                 var name = projectionDefinition.name;
+                var unit = projectionDefinition.unit;
+                if (unit.indexOf('degree') > -1) {
+                    unit = 'degrees';
+                }
                 var itemCfg = {
                     text: name,
-                    epsgCode: 'EPSG:' + code
+                    epsgCode: 'EPSG:' + code,
+                    epsgUnit: unit
                 };
                 if (isMenu) {
                     itemCfg.handler = me.onCrsItemClick.bind(me, isMenu);
@@ -220,11 +229,11 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                     toggle: me.onCrsItemClick.bind(me, isMenu)
                 };
             } else {
+                // update view model to set correct CRS name of map
                 var mapCode = me.olMap.getView().getProjection().getCode().split(':')[1];
                 var filtered = Ext.Array.filter(proj4jObjects, function (obj) {
                     return obj.code === mapCode;
                 });
-                // update view model to set correct CRS name
                 me.getViewModel().setData({
                     srsName: filtered ? filtered[0].name : ''
                 });
@@ -244,11 +253,17 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
             targetCmp = isMenu ? btn : segBtn;
 
         var targetCode = targetCmp.epsgCode;
+        var targetUnit = targetCmp.epsgUnit;
         var srsName = targetCmp.text;
         // update control
         me.olMousePositionControl.setProjection(targetCode);
+        me.olMousePositionControl.setCoordinateFormat(
+            ol.coordinate.createStringXY(me.coordinateDigitsForUnit[targetUnit])
+        );
         me.getViewModel().setData({
-            srsName: srsName
+            srsName: srsName,
+            xLabel: me.coordinateFieldLabelPerUnit[targetUnit].x,
+            yLabel: me.coordinateFieldLabelPerUnit[targetUnit].y
         });
     },
 
@@ -261,9 +276,10 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
             tagetDivId = targetComponent.getEl().id;
         if (!me.olMap) {
             Ext.log.warn('No Openlayers map found.');
+            return;
         }
         me.olMousePositionControl = new ol.control.MousePosition({
-            coordinateFormat: ol.coordinate.createStringXY(me.coordinateDigitsForUnit.m),
+            coordinateFormat: ol.coordinate.createStringXY(me.coordinateDigitsForUnit.metre),
             projection: me.olMap.getView().getProjection(),
             target: document.getElementById(tagetDivId),
             undefinedHTML: 'NaN,NaN'
