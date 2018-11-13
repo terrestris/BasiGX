@@ -20,22 +20,34 @@ Ext.define('BasiGX.util.Projection', {
 
     statics: {
 
-        // TODO unique values in epsgCodeArray
+        /**
+         * Fetch EPSG code definitions from http://epsg.io for given array
+         * of EPSG codes
+         *
+         * @param {String[]} epsgCodeArray An array of EPSG code string,
+         * e.g. ['EPSG:4326']
+         * @return {Ext.Promise} An ExtJS promise resolving if all EPSG
+         * information has successfully been fetched from http://epsg.io
+         */
         fetchProj4jCrsDefinitions: function (epsgCodeArray) {
             if (!Ext.isArray(epsgCodeArray)) {
-                return Ext.Promise.reject('No valid array of EPSG codes provided.');
+                return Ext.Promise.reject('No valid array of EPSG codes ' +
+                    ' provided.');
             }
             var epsgPromises = [];
-            Ext.each(epsgCodeArray, function (epsgCodeStr) {
+            var epsgIoBaseUrl = 'http://epsg.io/?q={0}&format=json';
+            Ext.each(Ext.Array.unique(epsgCodeArray), function (epsgCodeStr) {
                 var epsgCode = epsgCodeStr.toUpperCase().replace('EPSG:', '');
                 var epsgPromise = new Ext.Promise(function (resolve, reject) {
-                    var epsgUrl = Ext.String.format('http://epsg.io/?q={0}&format=json', epsgCode);
+                    var epsgUrl = Ext.String.format(epsgIoBaseUrl, epsgCode);
                     Ext.Ajax.request({
                         url: epsgUrl,
                         useDefaultXhrHeader: false,
                         success: function (response) {
-                            if (response && response.responseText && response.status === 200) {
-                                var resultObj = JSON.parse(response.responseText);
+                            if (response && response.responseText &&
+                                response.status === 200) {
+                                var resultObj = JSON.parse(response.
+                                    responseText);
                                 resolve(resultObj.results[0]);
                             } else {
                                 reject(response.status);
@@ -49,13 +61,15 @@ Ext.define('BasiGX.util.Projection', {
                 });
                 epsgPromises.push(epsgPromise);
             });
+
             return Ext.Promise.all(epsgPromises);
         },
 
         /**
          * Register crs definitions
-         *
-         * @method
+         * @param {Object[]} proj4jObjects An array of objects returned by
+         * http://epsg.io which includes information on projection, in
+         * particular the name, the unit and the proj4 definition
          */
         initProj4Definitions: function (proj4jObjects) {
             Ext.each(proj4jObjects, function (projectionDefinition) {

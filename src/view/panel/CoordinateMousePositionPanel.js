@@ -17,7 +17,8 @@
  *
  * BasiGX.view.panel.CoordinateMousePositionPanel
  *
- * TODO: docs
+ * A panel holding information on currently used CRS and mouse position. This
+ * can be added to app footer, for example
  *
  * @class BasiGX.view.panel.CoordinateMousePositionPanel
  */
@@ -33,7 +34,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     ],
 
     /**
-     * TODO: docs
+     * The viewModel definition
      */
     viewModel: {
         data: {
@@ -47,32 +48,35 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     },
 
     /**
-     * TODO: docs
+     * The used layout
      */
     layout: 'hbox',
 
     /**
-     * TODO: docs
+     * Threshold above which a button menu will be created and not a segmented
+     * button
      */
     segmentedButtonLimit: 3,
 
     /**
-     * TODO: fill my documentation
+     * The array of EPSG codes to be available in segmented button group or
+     * button menu
      */
     epsgCodeArray: null,
 
     /**
-     *
+     * The OpenLayers map
      */
     olMap: null,
 
     /**
-     *
+     * The OpenLayers MousePosition control
      */
     olMousePositionControl: null,
 
     /**
-     *
+     * Object holding number of digits to be shown depending on unit of
+     * projection system
      */
     coordinateDigitsForUnit: {
         metre: 3,
@@ -80,7 +84,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     },
 
     /**
-     *
+     * Object holding field labels depending on unit of projection system
      */
     coordinateFieldLabelPerUnit: {
         metre: {
@@ -94,7 +98,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     },
 
     /**
-     * TODO: docs
+     * The initialization function
      */
     initComponent: function () {
         var me = this;
@@ -156,12 +160,13 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     },
 
     /**
-     * TODO: docs
+     * Initilization of projections using BasiGX.util.Projection for passed
+     * EPSG codes / currently active propjection in map
      */
     initProjections: function () {
-        var me = this,
-            epsgCodeArray = me.epsgCodeArray,
-            mapProjection = me.olMap.getView().getProjection().getCode();
+        var me = this;
+        var epsgCodeArray = me.epsgCodeArray;
+        var mapProjection = me.olMap.getView().getProjection().getCode();
 
         if (!epsgCodeArray) {
             epsgCodeArray = [mapProjection];
@@ -182,22 +187,25 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     },
 
     /**
-     * TODO: docs
+     * Generate UI depending on number of passed EPSG codes
+     *
+     * @param {Object[]} proj4jObjects An array of objects returned by
+     *        http://epsg.io which includes information on projection, in
+     *        particular the name, the unit and the proj4 definition
      */
     generateCrsChangeButtonGroup: function (proj4jObjects) {
         if (!Ext.isArray(proj4jObjects)) {
             return;
         }
 
-        var me = this,
-            isMenu = proj4jObjects.length > me.segmentedButtonLimit,
-            cmpCfg;
+        var me = this;
+        var isMenu = proj4jObjects.length > me.segmentedButtonLimit;
+        var cmpCfg;
 
         if (proj4jObjects.length === 1) {
             // simply add a label
             cmpCfg = {
                 xtype: 'label',
-                margin: 3,
                 text: proj4jObjects[0].name
             };
         } else {
@@ -237,7 +245,8 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 };
             } else {
                 // update view model to set correct CRS name of map
-                var mapCode = me.olMap.getView().getProjection().getCode().split(':')[1];
+                var mapCode = me.olMap.getView().getProjection().getCode()
+                    .split(':')[1];
                 var filtered = Ext.Array.filter(proj4jObjects, function (obj) {
                     return obj.code === mapCode;
                 });
@@ -253,12 +262,17 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     },
 
     /**
-     * Peter
+     * Click handler if CRS changed
+     * @param {Boolean} isMenu If the CRS selection cpomponent is a menu button
+     *                  or not
+     * @param {Ext.Component} btn The menu button that was clicked
+     *                        (if isMenu = true)
+     * @param {Ext.Component} segBtn The button in segmented button that was
+     *                        clicked (if isMenu = true)
      */
     onCrsItemClick: function (isMenu, btn, segBtn) {
-        var me = this,
-            targetCmp = isMenu ? btn : segBtn;
-
+        var me = this;
+        var targetCmp = isMenu ? btn : segBtn;
         var targetCode = targetCmp.epsgCode;
         var targetUnit = targetCmp.epsgUnit;
         var srsName = targetCmp.text;
@@ -275,26 +289,32 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     },
 
     /**
-     * TODO: docs
+     * Initializes ol.control.MousePosition
      */
     initOlMouseControl: function () {
-        var me = this,
-            targetComponent = me.down('component[name="mouse-position"]'),
-            tagetDivId = targetComponent.getEl().id;
+        var me = this;
+        var targetComponent = me.down('component[name="mouse-position"]');
+        var tagetDivId = targetComponent.getEl().id;
         if (!me.olMap) {
             Ext.log.warn('No Openlayers map found.');
             return;
         }
         me.olMousePositionControl = new ol.control.MousePosition({
-            coordinateFormat: ol.coordinate.createStringXY(me.coordinateDigitsForUnit.metre),
+            coordinateFormat: ol.coordinate.createStringXY(
+                me.coordinateDigitsForUnit.metre
+            ),
             projection: me.olMap.getView().getProjection(),
             target: document.getElementById(tagetDivId),
             undefinedHTML: 'NaN,NaN'
         });
         me.olMap.addControl(me.olMousePositionControl);
-        var coordElement = Ext.Element.select('div.ol-mouse-position').elements[0];
+        var coordElement = Ext.Element.select('div.ol-mouse-position')
+            .elements[0];
+        // register MutationObserver on node to get chaned in DOM triggered by
+        // OpenLayers
         var observer = new MutationObserver(function (mutations) {
-            if (mutations && mutations.length === 1 && Ext.isTextNode(mutations[0].addedNodes[0])) {
+            if (mutations && mutations.length === 1 &&
+                Ext.isTextNode(mutations[0].addedNodes[0])) {
                 // update textfields
                 var textContent = mutations[0].addedNodes[0].textContent;
                 me.updateCoordinateFields(textContent.trim());
@@ -306,21 +326,24 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     },
 
     /**
-     * Update viewModel fields xVal and yVal based on updated passed text content
+     * Update viewModel fields xVal and yVal based on updated passed text
+     * content
      *
      * @param {String} textContent result of ol.control.MousePosition
      */
     updateCoordinateFields: function (textContent) {
-        var me = this,
-            viewModel = me.getViewModel();
-        if (!textContent || !Ext.isString(textContent) || textContent.indexOf(',') === -1) {
+        var me = this;
+        var viewModel = me.getViewModel();
+        if (!textContent || !Ext.isString(textContent) ||
+            textContent.indexOf(',') === -1) {
             return;
         }
         var splittedVal = textContent.split(',');
         if (splittedVal.length !== 2) {
             return;
         }
-        if (Number.isNaN(Number(splittedVal[0])) || Number.isNaN(Number(splittedVal[1]))) {
+        if (Number.isNaN(Number(splittedVal[0])) ||
+            Number.isNaN(Number(splittedVal[1]))) {
             return;
         }
         var xVal = Number(splittedVal[0]);
@@ -332,7 +355,8 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     },
 
     /**
-     * TODO: docs
+     * Handler called if map should be centered on coordinate entered in
+     * coordinate input fields
      */
     onCenterToCoordinateClick: function () {
         var me = this;
