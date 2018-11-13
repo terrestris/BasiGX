@@ -11,6 +11,7 @@
     "Ext":false,
     "GeoExt":false,
     "ol":false,
+    "proj4": false,
     "TestUtil":false
   },
   "rules":{
