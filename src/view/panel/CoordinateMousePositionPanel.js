@@ -109,7 +109,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
             xtype: 'button',
             hidden: true
         }, {
-            // helper component updated by openlayers mouse position control
+            // helper component updated by OpenLayers mouse position control
             name: 'mouse-position',
             hidden: true,
             xtype: 'component'
@@ -121,9 +121,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 fieldLabel: '{xLabel}'
             },
             labelAlign: 'right',
-            validator: function (val) {
-                return Ext.isNumeric(val);
-            }
+            validator: Ext.isNumeric
         }, {
             xtype: 'textfield',
             name: 'yVal',
@@ -132,9 +130,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 fieldLabel: '{yLabel}'
             },
             labelAlign: 'right',
-            validator: function (val) {
-                return Ext.isNumeric(val);
-            }
+            validator: Ext.isNumeric
         }, {
             xtype: 'button',
             margin: '0 0 0 5',
@@ -156,7 +152,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
             me.initOlMouseControl();
             me.initProjections();
         });
-        me.callParent(arguments);
+        me.callParent();
     },
 
     /**
@@ -266,7 +262,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
 
     /**
      * Click handler if CRS changed
-     * @param {Boolean} isMenu If the CRS selection cpomponent is a menu button
+     * @param {Boolean} isMenu If the CRS selection component is a menu button
      *                  or not
      * @param {Ext.Component} btn The menu button that was clicked
      *                        (if isMenu = true)
@@ -297,7 +293,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     initOlMouseControl: function () {
         var me = this;
         var targetComponent = me.down('component[name="mouse-position"]');
-        var tagetDivId = targetComponent.getEl().id;
+        var targetDivId = targetComponent.getEl().id;
         if (!me.olMap) {
             Ext.log.warn('No OpenLayers map found.');
             return;
@@ -307,13 +303,13 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 me.coordinateDigitsForUnit.meter
             ),
             projection: me.olMap.getView().getProjection(),
-            target: document.getElementById(tagetDivId),
+            target: document.getElementById(targetDivId),
             undefinedHTML: 'NaN,NaN'
         });
         me.olMap.addControl(me.olMousePositionControl);
         var coordElement = Ext.Element.select('div.ol-mouse-position')
             .elements[0];
-        // register MutationObserver on node to get chaned in DOM triggered by
+        // register MutationObserver on node to get changed in DOM triggered by
         // OpenLayers
         var observer = new MutationObserver(function (mutations) {
             if (mutations && mutations.length === 1 &&
@@ -345,8 +341,8 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
         if (splittedVal.length !== 2) {
             return;
         }
-        if (Number.isNaN(Number(splittedVal[0])) ||
-            Number.isNaN(Number(splittedVal[1]))) {
+        if (!Ext.isNumber(Number(splittedVal[0])) ||
+            !Ext.isNumber(Number(splittedVal[1]))) {
             return;
         }
         var xVal = Number(splittedVal[0]);
