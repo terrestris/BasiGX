@@ -57,6 +57,7 @@
         'view/grid/GazetteerGrid.test.js',
         'view/list/FocusableTreeItem.test.js',
         'view/panel/Accessible.test.js',
+        'view/panel/CoordinateMousePositionPanel.test.js',
         'view/panel/Header.test.js',
         'view/panel/LayerSetChooser.test.js',
         'view/panel/LegendTree.test.js',
