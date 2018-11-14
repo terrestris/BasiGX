@@ -20,6 +20,12 @@
  * A panel holding information on currently used CRS and mouse position. This
  * can be added to app footer, for example
  *
+ * This class uses the MutationObserver interface
+ * (https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)
+ * to listen to changes in DOM performed by ol.control.MousePosition. It's
+ * supported by most browsers. If a polyfill is needed, it can be found here:
+ * https://cdn.polyfill.io/v2/polyfill.min.js?features=MutationObserver%7Calways
+ *
  * @class BasiGX.view.panel.CoordinateMousePositionPanel
  */
 Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
