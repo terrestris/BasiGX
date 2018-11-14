@@ -79,7 +79,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
      * projection system
      */
     coordinateDigitsForUnit: {
-        metre: 3,
+        meter: 3,
         degrees: 6
     },
 
@@ -87,7 +87,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
      * Object holding field labels depending on unit of projection system
      */
     coordinateFieldLabelPerUnit: {
-        metre: {
+        meter: {
             x: 'Easting',
             y: 'Northing'
         },
@@ -226,6 +226,9 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 if (unit.indexOf('degree') > -1) {
                     unit = 'degrees';
                 }
+                if (unit.indexOf('metre') > -1) {
+                    unit = 'meter';
+                }
                 var itemCfg = {
                     text: name,
                     epsgCode: 'EPSG:' + code,
@@ -296,12 +299,12 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
         var targetComponent = me.down('component[name="mouse-position"]');
         var tagetDivId = targetComponent.getEl().id;
         if (!me.olMap) {
-            Ext.log.warn('No Openlayers map found.');
+            Ext.log.warn('No OpenLayers map found.');
             return;
         }
         me.olMousePositionControl = new ol.control.MousePosition({
             coordinateFormat: ol.coordinate.createStringXY(
-                me.coordinateDigitsForUnit.metre
+                me.coordinateDigitsForUnit.meter
             ),
             projection: me.olMap.getView().getProjection(),
             target: document.getElementById(tagetDivId),
