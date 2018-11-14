@@ -35,7 +35,7 @@ Ext.define('BasiGX.util.Projection', {
                     ' provided.');
             }
             var epsgPromises = [];
-            var epsgIoBaseUrl = 'http://epsg.io/?q={0}&format=json';
+            var epsgIoBaseUrl = '//epsg.io/?q={0}&format=json';
             Ext.each(Ext.Array.unique(epsgCodeArray), function (epsgCodeStr) {
                 var epsgCode = epsgCodeStr.toUpperCase().replace('EPSG:', '');
                 var epsgPromise = new Ext.Promise(function (resolve, reject) {
