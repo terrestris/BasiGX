@@ -701,8 +701,6 @@ Ext.define('BasiGX.view.form.Print', {
     },
 
     /**
-     * TODO REMOVE EXTENT
-     * TODO is the line above still valid?
      *
      * @param {Ext.form.field.Combo} combo The layout combobox.
      * @param {String} layoutname The selected layout.
@@ -735,10 +733,15 @@ Ext.define('BasiGX.view.form.Print', {
         });
 
         layoutRec.attributes().each(function(attribute) {
-            this.addAttributeFields(attribute, attributeFieldset);
-        }, this);
+            me.addAttributeFields(attribute, attributeFieldset);
+        }, me);
 
-        this.renderAllClientInfos();
+        // reset rotation and extent
+        me.currentRotationInDegrees = 0;
+        me.currentExtent = null;
+
+        me.renderAllClientInfos();
+        me.down('button[name="createPrint"]').enable();
     },
 
     /**
