@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2018-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-MapLoadingStatusBar'>/**
+</span> * A progressbar that indicates loading of map resources such as tile of layers.
+ *
+ * This will work with sources that inherit from `ol.source.Image` or
+ * `ol.source.TileImage` directly. This includes e.g.:
+ *
+ * * `ol.source.ImageWMS`,
+ * * `ol.source.ImageArcGISRest`,
+ * * `ol.source.ImageCanvas`,
+ * * `ol.source.ImageMapGuide`,
+ * * `ol.source.ImageStatic`,
+ * * `ol.source.ImageWMS`,
+ * * `ol.source.Raster`,
+ * * `ol.source.BingMaps`,
+ * * `ol.source.TileArcGISRest`,
+ * * `ol.source.TileJSON`,
+ * * `ol.source.TileWMS`,
+ * * `ol.source.WMTS`,
+ * * `ol.source.XYZ`,
+ * * `ol.source.Zoomify`,
+ * * `ol.source.CartoDB`,
+ * * `ol.source.OSM`,
+ * * `ol.source.Stamen`
+ *
+ * If your `ol.source.Vector` fires all the custom events `vectorloadstart`,
+ * `vectorloadend` and `vectorloaderror` -- e.g. by using a custom loader
+ * function -- these source will also participate when this component determines
+ * the loading state of the application. This will also work for vector sources
+ * that are clustered.
+ *
+ * @class BasiGX.view.MapLoadingStatusBar
+ */
+Ext.define(&#39;BasiGX.view.MapLoadingStatusBar&#39;, {
+    extend: &#39;Ext.ProgressBar&#39;,
+    xtype: &#39;basigx-maploadingstatusbar&#39;,
+
+    requires: [
+        &#39;BasiGX.util.Map&#39;
+    ],
+
+    config: {
+<span id='BasiGX-view-MapLoadingStatusBar-property-map'>        /**
+</span>         * The Map for which this progressbar shows the loading status. If not
+         * passed, we&#39;ll guess.
+         *
+         * @type {ol.Map}
+         */
+        map: null,
+
+<span id='BasiGX-view-MapLoadingStatusBar-property-waitConf'>        /**
+</span>         * A configuration to be passed to the `wait` method, see the API
+         * method. A text here will override a `loadingText` entry of a
+         * `viewModel`.
+         *
+         * @type {Object}
+         */
+        waitConf: {
+            interval: 200,
+            increment: 15
+        }
+    },
+
+<span id='BasiGX-view-MapLoadingStatusBar-property-viewModel'>    viewModel: {
+</span>        data: {
+<span id='BasiGX-view-MapLoadingStatusBar-property-loadingText'>            /**
+</span>             * The text to show when loading is happening. Can be overriden with
+             * the `waitConf` configuration option.
+             *
+             * @type {String}
+             */
+            loadingText: &#39;Loading…&#39;
+        }
+    },
+
+<span id='BasiGX-view-MapLoadingStatusBar-property-loading'>    /**
+</span>     * The number of currently loading &#39;things&#39; (tiles, XHR …)
+     *
+     * @private
+     * @type {Number}
+     */
+    loading: 0,
+
+<span id='BasiGX-view-MapLoadingStatusBar-method-initComponent'>    /**
+</span>     * The constructor of the ProgressBar.
+     */
+    initComponent: function() {
+        var me = this;
+        if (!me.getMap()) {
+            me.setMap(BasiGX.util.Map.getMapComponent().getMap());
+        }
+        me.hide();
+        me.callParent();
+    },
+
+<span id='BasiGX-view-MapLoadingStatusBar-method-applyMap'>    /**
+</span>     * Called when the `map` is set, this will unbind from the current map, if
+     * needed, and bind to the newly passed map.
+     *
+     * @param {ol.Map} newMap The new map, if any.
+     * @param {ol.Map} oldMap The old map, if any.
+     * @return {ol.Map} The new map.
+     */
+    applyMap: function(newMap, oldMap) {
+        var me = this;
+        if (oldMap) {
+            me.registerUnregisterListeners(false, oldMap);
+        }
+        if (newMap) {
+            me.registerUnregisterListeners(true, newMap);
+        }
+        return newMap;
+    },
+
+<span id='BasiGX-view-MapLoadingStatusBar-method-registerUnregisterListeners'>    /**
+</span>     * Registers or unregisters needed events for the layers in the passed map.
+     *
+     * @param {Boolean} register `true` to register, `false` to unregister.
+     * @param {ol.Map} map The map to register/unregister on.
+     */
+    registerUnregisterListeners: function(register, map) {
+        if (!(map instanceof ol.Map)) {
+            return;
+        }
+        var group = map.getLayerGroup();
+        this.registerUnregisterLayerListeners(register, group);
+    },
+
+<span id='BasiGX-view-MapLoadingStatusBar-method-registerUnregisterLayerListeners'>    /**
+</span>     * Registers or unregisters needed events for the passed layer, takes care
+     * of group layers by calling itself recursively.
+     *
+     * @param {Boolean} register `true` to register, `false` to unregister.
+     * @param {ol.layer.Layer} layer The layer to register/unregister on.
+     */
+    registerUnregisterLayerListeners: function(register, layer) {
+        var me = this;
+        var method = register ? &#39;on&#39; : &#39;un&#39;;
+        if (layer instanceof ol.layer.Group) {
+            // call ourself recursively
+            var layers = layer.getLayers();
+            layers.forEach(function(child) {
+                me.registerUnregisterLayerListeners(register, child);
+            });
+            // handle future changes to this group, or stop doing so
+            layers[method](&#39;add&#39;, me.onLayerAddedToGroup, me);
+            layers[method](&#39;remove&#39;, me.onLayerRemovedFromGroup, me);
+        } else {
+            var source = layer.getSource();
+            // bind or unbind our handlers
+            me.bindOrUnbindLoadHandlers(register, source);
+        }
+    },
+
+<span id='BasiGX-view-MapLoadingStatusBar-method-bindOrUnbindLoadHandlers'>    /**
+</span>     * Registers or unregisters needed events for the passed source, takes care
+     * of source which do not naturally support load events (`vector`-sources).
+     *
+     * @param {Boolean} bind `true` to register, `false` to unregister.
+     * @param {ol.source.Source} source The source to register/unregister on.
+     */
+    bindOrUnbindLoadHandlers: function(bind, source) {
+        var me = this;
+        var method = bind ? &#39;on&#39; : &#39;un&#39;;
+        var eventPrefix = &#39;&#39;;
+        if (source instanceof ol.source.Image) {
+            // includes ImageWms, but also e.g. ImageArcGISRest, OSM…
+            eventPrefix = &#39;image&#39;;
+        } else if (source instanceof ol.source.TileImage) {
+            // includes TileWMS, Bingmaps and more
+            eventPrefix = &#39;tile&#39;;
+        } else if (source instanceof ol.source.Vector) {
+            if (source instanceof ol.source.Cluster) {
+                source = source.getSource(); // we fire on the raw source
+            }
+            eventPrefix = &#39;vector&#39;;
+        }
+
+        if (eventPrefix) {
+            source[method](eventPrefix + &#39;loadstart&#39;, me.incrementAndCheck, me);
+            source[method](eventPrefix + &#39;loadend&#39;, me.decrementAndCheck, me);
+            source[method](eventPrefix + &#39;loaderror&#39;, me.decrementAndCheck, me);
+        }
+    },
+
+<span id='BasiGX-view-MapLoadingStatusBar-method-incrementAndCheck'>    /**
+</span>     * Called whenever loading starts, this will increment the internal counter
+     * and also start the progress-updating mechanism.
+     */
+    incrementAndCheck: function() {
+        var me = this;
+        me.loading++;
+        if (me.isWaiting()) {
+            return;
+        }
+        if (me.loading &gt; 0) {
+            var waitConf = me.getWaitConf();
+            if (!waitConf.text){
+                waitConf.text = me.lookupViewModel().get(&#39;loadingText&#39;);
+            }
+
+            me.show();
+            me.wait(waitConf);
+        }
+    },
+
+<span id='BasiGX-view-MapLoadingStatusBar-method-decrementAndCheck'>    /**
+</span>     * Called whenever loading stops or errors, this will decrement the internal
+     * and if nothing is currently loading, it will stop the progress-updating
+     * mechanism, reset the counter and hide the progressbar.
+     */
+    decrementAndCheck: function() {
+        var me = this;
+        me.loading--;
+        if (me.loading &lt;= 0) {
+            me.reset(true);
+            me.loading = 0; // sanity
+        }
+    },
+
+<span id='BasiGX-view-MapLoadingStatusBar-method-onLayerAddedToGroup'>    /**
+</span>     * Takes care of added layers to any `ol.layer.Group`, these need to get the
+     * appropriate handlers assigned.
+     *
+     * @param {ol.event.Event} evt The add event of the `ol.layer.Group`.
+     */
+    onLayerAddedToGroup: function(evt) {
+        this.registerUnregisterLayerListeners(true, evt.element);
+    },
+
+<span id='BasiGX-view-MapLoadingStatusBar-method-onLayerRemovedFromGroup'>    /**
+</span>     * Takes care of removed layers to any `ol.layer.Group`, these need to get
+     * appropriate handlers removed.
+     *
+     * @param {ol.event.Event} evt The remove event of the `ol.layer.Group`.
+     */
+    onLayerRemovedFromGroup: function(evt) {
+        this.registerUnregisterLayerListeners(false, evt.element);
+    },
+
+<span id='BasiGX-view-MapLoadingStatusBar-method-doDestroy'>    /**
+</span>     * Unbind any registered handlers of the current map before continuing
+     * destroying this component.
+     */
+    doDestroy: function() {
+        var me = this;
+        me.registerUnregisterListeners(false, me.getMap());
+        me.callParent();
+    }
+
+});
+</pre>
+</body>
+</html>
