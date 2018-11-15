@@ -24,6 +24,7 @@
         'util/WFS.test.js',
         'ux/ContextSensitiveHelp.test.js',
         'ux/RowExpanderWithComponents.test.js',
+        'view/MapLoadingStatusBar.test.js',
         'view/button/AddWms.test.js',
         'view/button/Base.test.js',
         'view/button/CoordinateTransform.test.js',
