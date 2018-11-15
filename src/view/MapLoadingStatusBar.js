@@ -40,8 +40,8 @@
  * If your `ol.source.Vector` fires all the custom events `vectorloadstart`,
  * `vectorloadend` and `vectorloaderror` -- e.g. by using a custom loader
  * function -- these source will also participate when this component determines
- * the loading state of the application. Thos will also work for vector sources
- * thatare clustered.
+ * the loading state of the application. This will also work for vector sources
+ * that are clustered.
  *
  * @class BasiGX.view.MapLoadingStatusBar
  */
@@ -220,7 +220,7 @@ Ext.define('BasiGX.view.MapLoadingStatusBar', {
 
     /**
      * Called whenever loading stops or errors, this will decrement the internal
-     * and if nothin is currently loading, it will stop the progress-updating
+     * and if nothing is currently loading, it will stop the progress-updating
      * mechanism, reset the counter and hide the progressbar.
      */
     decrementAndCheck: function() {
