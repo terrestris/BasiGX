@@ -178,7 +178,7 @@ Ext.define('BasiGX.view.MapLoadingStatusBar', {
         var method = bind ? 'on' : 'un';
         var eventPrefix = '';
         if (source instanceof ol.source.Image) {
-            // includes ImnageWms, but also e.g. ImageArcGISRest, OSM…
+            // includes ImageWms, but also e.g. ImageArcGISRest, OSM…
             eventPrefix = 'image';
         } else if (source instanceof ol.source.TileImage) {
             // includes TileWMS, Bingmaps and more
