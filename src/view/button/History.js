@@ -1,4 +1,4 @@
-/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+/* Copyright (c) 2018-present terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,7 +14,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * A history navigation button.
+ * A history navigation button in order to interact with the HTML5 History API.
+ *
+ * Since the History API is supported by current browsers down to IE10 the usage
+ * of this might need a polyfill
+ * (like https://github.com/browserstate/history.js/) in older browsers,
+ * see https://caniuse.com/#search=history for details.
  *
  * @class BasiGX.view.button.History
  */
@@ -78,9 +83,9 @@ Ext.define('BasiGX.view.button.History', {
     onBtnClick: function(btn) {
         var me = this;
         if (me.mode === 'HISTORY') {
-            if (btn.direction === 'back') {
+            if (btn.direction === 'BACK') {
                 window.history.back();
-            } else if (btn.direction === 'forward') {
+            } else if (btn.direction === 'FORWARD') {
                 window.history.forward();
             }
         }
