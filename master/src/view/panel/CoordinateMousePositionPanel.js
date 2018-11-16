@@ -104,6 +104,17 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     },
 
     /**
+     * Whether the textfields shall update, which is undesired while typing in
+     * the textfields. Listeners for `focus` and `blur` ensure that this will be
+     * `false` when a coordinate field has the focus and `true` if the field is
+     * not focused.
+     *
+     * @private
+     * @type {Boolean}
+     */
+    updateTextfields: true,
+
+    /**
      * The initialization function
      */
     initComponent: function () {
@@ -127,6 +138,11 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 fieldLabel: '{xLabel}'
             },
             labelAlign: 'right',
+            listeners: {
+                focus: me.stopUpdating,
+                blur: me.resumeUpdating,
+                scope: me
+            },
             validator: Ext.isNumeric
         }, {
             xtype: 'textfield',
@@ -136,6 +152,11 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 fieldLabel: '{yLabel}'
             },
             labelAlign: 'right',
+            listeners: {
+                focus: me.stopUpdating,
+                blur: me.resumeUpdating,
+                scope: me
+            },
             validator: Ext.isNumeric
         }, {
             xtype: 'button',
@@ -159,6 +180,22 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
             me.initProjections();
         });
         me.callParent();
+    },
+
+    /**
+     * Stop updating the textfields for the coordinates, e.g. when a coordinate
+     * textfield has the focus.
+     */
+    stopUpdating: function() {
+        this.updateTextfields = false;
+    },
+
+    /**
+     * Resume a previously stopped updating of the textfields for the
+     * coordinates, e.g. when a coordinate textfield has lost the focus.
+     */
+    resumeUpdating: function() {
+        this.updateTextfields = true;
     },
 
     /**
@@ -338,6 +375,9 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
      */
     updateCoordinateFields: function (textContent) {
         var me = this;
+        if (!me.updateTextfields) {
+            return;
+        }
         var viewModel = me.getViewModel();
         if (!textContent || !Ext.isString(textContent) ||
             textContent.indexOf(',') === -1) {

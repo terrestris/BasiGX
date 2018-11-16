@@ -120,6 +120,17 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
         }
     },
 
+<span id='BasiGX-view-panel-CoordinateMousePositionPanel-property-updateTextfields'>    /**
+</span>     * Whether the textfields shall update, which is undesired while typing in
+     * the textfields. Listeners for `focus` and `blur` ensure that this will be
+     * `false` when a coordinate field has the focus and `true` if the field is
+     * not focused.
+     *
+     * @private
+     * @type {Boolean}
+     */
+    updateTextfields: true,
+
 <span id='BasiGX-view-panel-CoordinateMousePositionPanel-method-initComponent'>    /**
 </span>     * The initialization function
      */
@@ -144,6 +155,11 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
                 fieldLabel: &#39;{xLabel}&#39;
             },
             labelAlign: &#39;right&#39;,
+            listeners: {
+                focus: me.stopUpdating,
+                blur: me.resumeUpdating,
+                scope: me
+            },
             validator: Ext.isNumeric
         }, {
             xtype: &#39;textfield&#39;,
@@ -153,6 +169,11 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
                 fieldLabel: &#39;{yLabel}&#39;
             },
             labelAlign: &#39;right&#39;,
+            listeners: {
+                focus: me.stopUpdating,
+                blur: me.resumeUpdating,
+                scope: me
+            },
             validator: Ext.isNumeric
         }, {
             xtype: &#39;button&#39;,
@@ -176,6 +197,22 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
             me.initProjections();
         });
         me.callParent();
+    },
+
+<span id='BasiGX-view-panel-CoordinateMousePositionPanel-method-stopUpdating'>    /**
+</span>     * Stop updating the textfields for the coordinates, e.g. when a coordinate
+     * textfield has the focus.
+     */
+    stopUpdating: function() {
+        this.updateTextfields = false;
+    },
+
+<span id='BasiGX-view-panel-CoordinateMousePositionPanel-method-resumeUpdating'>    /**
+</span>     * Resume a previously stopped updating of the textfields for the
+     * coordinates, e.g. when a coordinate textfield has lost the focus.
+     */
+    resumeUpdating: function() {
+        this.updateTextfields = true;
     },
 
 <span id='BasiGX-view-panel-CoordinateMousePositionPanel-method-initProjections'>    /**
@@ -355,6 +392,9 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
      */
     updateCoordinateFields: function (textContent) {
         var me = this;
+        if (!me.updateTextfields) {
+            return;
+        }
         var viewModel = me.getViewModel();
         if (!textContent || !Ext.isString(textContent) ||
             textContent.indexOf(&#39;,&#39;) === -1) {
