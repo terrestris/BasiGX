@@ -79,6 +79,44 @@ Ext.define('BasiGX.util.Layer', {
         },
 
         /**
+         * Returns the list of layers matching the given pair of properties.
+         *
+         * @param {String} key - the layers property name
+         * @param {String} value - the layers property value for the given key
+         * @param {ol.Collection} collection - optional collection to search in
+         *
+         * @return {ol.layer.Base[]} The array of matching layers.
+         */
+        getLayersBy: function (key, value, collection) {
+            if (!key) {
+                return [];
+            }
+            var me = this;
+            var matchingLayers = [];
+            var layers;
+
+            if (!Ext.isEmpty(collection)) {
+                layers = collection.getArray ?
+                    collection.getArray() : collection;
+            } else {
+                var map = BasiGX.util.Map.getMapComponent().getMap();
+                layers = map.getLayers().getArray();
+            }
+
+            Ext.each(layers, function (layer) {
+                if (layer.get(key) === value &&
+                    layer instanceof ol.layer.Base) {
+                    matchingLayers.push(layer);
+                    return false;
+                } else if (layer instanceof ol.layer.Group) {
+                    matchingLayers = Ext.Array.merge(matchingLayers,
+                        me.getLayersBy(key, value, layer.getLayers()));
+                }
+            });
+            return matchingLayers;
+        },
+
+        /**
          * Get an ol3-layer by the given name.
          *
          * @param {String} layername - the layers name
