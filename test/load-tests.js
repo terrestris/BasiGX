@@ -29,6 +29,7 @@
         'view/button/Base.test.js',
         'view/button/CoordinateTransform.test.js',
         'view/button/Help.test.js',
+        'view/button/History.test.js',
         'view/button/Hsi.test.js',
         'view/button/Measure.test.js',
         'view/button/Permalink.test.js',
