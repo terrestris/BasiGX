@@ -107,7 +107,6 @@ Ext.define('BasiGX.util.Layer', {
                 if (layer.get(key) === value &&
                     layer instanceof ol.layer.Base) {
                     matchingLayers.push(layer);
-                    return false;
                 } else if (layer instanceof ol.layer.Group) {
                     matchingLayers = Ext.Array.merge(matchingLayers,
                         me.getLayersBy(key, value, layer.getLayers()));
