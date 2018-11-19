@@ -3,12 +3,18 @@ Ext.Loader.syncRequire(['BasiGX.util.Layer']);
 describe('BasiGX.util.Layer', function() {
 
     var layer;
+    var layer2;
     var namedLayer;
     var map;
     var testObjs;
 
     layer = new ol.layer.Base({
-        humpty: 'dumpty'
+        humpty: 'dumpty',
+        testProperty: 'ok'
+    });
+    layer2 = new ol.layer.Base({
+        humpty: 'peter',
+        testProperty: 'ok'
     });
     namedLayer = new ol.layer.Base({
         name: 'Some layername'
@@ -162,6 +168,50 @@ describe('BasiGX.util.Layer', function() {
         it('returns `undefined` if not found', function() {
             var got = BasiGX.util.Layer.getLayerByName('not existing');
             expect(got).to.be(undefined);
+        });
+    });
+
+    describe('#getLayersBy', function() {
+        it('is a defined function', function() {
+            expect(BasiGX.util.Layer.getLayersBy).to.be.a(Function);
+        });
+        it('returns empty array if no key is provided', function() {
+            var got = BasiGX.util.Layer.getLayersBy();
+            expect(got).to.be.empty();
+        });
+        it('works without the optional collection', function() {
+            var got = BasiGX.util.Layer.getLayersBy('humpty', 'dumpty');
+            expect(got).to.be.an('array');
+            expect(got).to.have.length(1);
+            expect(got[0]).to.be(layer);
+        });
+        it('works with a layer collection', function() {
+            var got = BasiGX.util.Layer.getLayersBy('humpty', 'dumpty',
+                map.getLayers()
+            );
+            expect(got).to.be.an('array');
+            expect(got).to.have.length(1);
+            expect(got[0]).to.be(layer);
+        });
+        it('works with a layer array', function() {
+            var got = BasiGX.util.Layer.getLayersBy('humpty', 'dumpty',
+                map.getLayers().getArray()
+            );
+            expect(got).to.be.an('array');
+            expect(got).to.have.length(1);
+            expect(got[0]).to.be(layer);
+        });
+        it('works recursively', function () {
+            var layerGroup = new ol.layer.Group({
+                layers: [layer2]
+            });
+            map.addLayer(layerGroup);
+
+            var got = BasiGX.util.Layer.getLayersBy('testProperty', 'ok');
+            expect(got).to.be.an('array');
+            expect(got).to.have.length(2);
+            expect(got[0]).to.be(layer);
+            expect(got[1]).to.be(layer2);
         });
     });
 
