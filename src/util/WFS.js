@@ -103,6 +103,16 @@ Ext.define('BasiGX.util.WFS', {
                 '    </gml:Envelope>' +
                 '  </ogc:Intersects>' +
                 '</ogc:And>';
+
+            tpl = '' +
+                '  <ogc:BBOX>' +
+                '    <ogc:PropertyName>{0}</ogc:PropertyName>' +
+                '    <gml:Envelope' + ' srsName="{1}">' +
+                '      <gml:lowerCorner>{2} {3}</gml:lowerCorner>' +
+                '      <gml:upperCorner>{4} {5}</gml:upperCorner>' +
+                '    </gml:Envelope>' +
+                '  </ogc:BBOX>';
+
             var mapView = map.getView();
             var srsName = mapView.getProjection().getCode();
             if (!extent) {
@@ -328,6 +338,7 @@ Ext.define('BasiGX.util.WFS', {
         combineFilters: function(filters, combinator, filterTag) {
             var ogcNsUri = 'http://www.opengis.net/ogc';
             var defaultStartTag = '<ogc:Filter xmlns:ogc="' + ogcNsUri + '">';
+            defaultStartTag = '<ogc:Filter>';
             var defaultCombineWith = 'And';
 
             var combineWith = combinator || defaultCombineWith;
@@ -340,15 +351,21 @@ Ext.define('BasiGX.util.WFS', {
 
             var parts = [];
             parts.push(startFilterTag);
-            parts.push('<ogc:' + combineWith + '>');
 
-            Ext.each(filters, function(filter) {
+            if (filters.length > 1) {
+                parts.push('<ogc:' + combineWith + '>');
+            }
+
+            Ext.each(filters, function (filter) {
                 if (filter) {
                     parts.push(filter);
                 }
             });
 
-            parts.push('</ogc:' + combineWith + '>');
+            if (filters.length > 1) {
+                parts.push('</ogc:' + combineWith + '>');
+            }
+
             if (startFilterTag !== '') {
                 parts.push('</ogc:Filter>');
             }
