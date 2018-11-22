@@ -124,27 +124,32 @@ Ext.define('BasiGX.util.WFS', {
          * @param {Array} propertyNames The name of the properties which should
          * be queried.
          * @param {String} queryValue The value to query.
-         * @param {Array} combinator Should be either `And` or `Or`.
+         * @param {String} combinator Should be either `And` or `Or`.
          * @param {Boolean} matchCase If the case should be considered.
          *   Default is false.
+         * @param {String} namespace Namespace alias for the XML to be used as
+         *   prefix for `PropertyIsLike` filter. Optional. Default is `ogc`.
          * @return {String} The created LIKE filter.
          */
-        getAttributeFilter: function(propertyNames, queryValue, combinator,
-            matchCase) {
+        getAttributeLikeFilter: function(propertyNames, queryValue, combinator,
+            matchCase, namespace) {
             var defaultCombineWith = 'Or';
             var defaultMatchCase = false;
+
+            var ogcNs = namespace || 'ogc';
+            ogcNs += ':';
 
             var combineWith = combinator || defaultCombineWith;
             var match = matchCase || defaultMatchCase;
 
             var tpl = '' +
-                '  <PropertyIsLike wildCard="*" singleChar="." escape="!" ' +
-                '  matchCase="' + match + '">' +
+                ' <PropertyIsLike wildCard="*" singleChar="."' +
+                ' escape="!" matchCase="' + match + '">' +
                 '      <PropertyName>{0}</PropertyName>' +
                 '      <Literal>*{1}*</Literal>' +
                 '  </PropertyIsLike>';
 
-            var filter = '<ogc:' + combineWith + '>';
+            var filter = '<'+ ogcNs + combineWith + '>';
             Ext.each(propertyNames, function(propertyName) {
                 filter += Ext.String.format(
                     tpl,
@@ -152,7 +157,7 @@ Ext.define('BasiGX.util.WFS', {
                     queryValue
                 );
             });
-            filter += '</ogc:' + combineWith + '>';
+            filter += '</' + ogcNs + combineWith + '>';
             return filter;
         },
 
