@@ -78,6 +78,39 @@ Ext.define('BasiGX.util.Layer', {
             return matchingLayer;
         },
 
+                /**
+         * @param {String} layersParam The (qualified) layers param,
+         *  e.g. 'netview:NodeB'
+         *
+         * @return {ol.layer.Layer} The ol layer from the map (if it
+         *  could be found)
+         */
+        getLayerByLayersParam: function(layersParam) {
+            var map = BasiGX.util.Map.getMapComponent().getMap();
+            var mapLayers = map.getLayers();
+            var olLayer;
+            var foundIt = false;
+
+            var checkForLayersParam = function(layer) {
+                if(foundIt === true) {
+                    return;
+                }
+                if (layer instanceof ol.layer.Layer &&
+                    layer.getSource() instanceof ol.source.TileWMS &&
+                    layer.getSource().getParams().LAYERS === layersParam) {
+                    olLayer = layer;
+                    foundIt = true;
+                } else if (layer instanceof ol.layer.Group) {
+                    var groupLayers = layer.getLayers();
+
+                    // recursive call for the layers in the layer group
+                    groupLayers.forEach(checkForLayersParam);
+                }
+            };
+            mapLayers.forEach(checkForLayersParam);
+            return olLayer;
+        },
+
         /**
          * Returns the list of layers matching the given pair of properties.
          *
