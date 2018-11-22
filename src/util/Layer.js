@@ -78,15 +78,20 @@ Ext.define('BasiGX.util.Layer', {
             return matchingLayer;
         },
 
-                /**
-         * @param {String} layersParam The (qualified) layers param,
-         *  e.g. 'netview:NodeB'
+        /**
+         * Returns the layer matching the given qualified layer name.
          *
-         * @return {ol.layer.Layer} The ol layer from the map (if it
-         *  could be found)
+         * @param {String} layersParam The (qualified) layers param,
+         *  e.g. 'foo:bar'
+         * @param {ol.Map} map The OpenLayers map to get the layers from.
+         *
+         * @return {ol.layer.Layer} The OpenLayers layer from the map (if it
+         *  could be found).
          */
-        getLayerByLayersParam: function(layersParam) {
-            var map = BasiGX.util.Map.getMapComponent().getMap();
+        getLayerByLayersParam: function(layersParam, map) {
+            if (!map) {
+                map = BasiGX.util.Map.getMapComponent().getMap();
+            }
             var mapLayers = map.getLayers();
             var olLayer;
             var foundIt = false;
