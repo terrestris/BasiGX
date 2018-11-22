@@ -117,6 +117,49 @@ Ext.define('BasiGX.util.WFS', {
             );
             return filter;
         },
+        /**
+         * Returns a attribute LIKE filter for the passed property names. Can be
+         * combined with `Or` (default) or `And` operator.
+         *
+         * @param {Array} propertyNames The name of the properties which should
+         * be queried.
+         * @param {String} queryValue The value to query.
+         * @param {String} combinator Should be either `And` or `Or`.
+         * @param {Boolean} matchCase If the case should be considered.
+         *   Default is false.
+         * @param {String} namespace Namespace alias for the XML to be used as
+         *   prefix for `PropertyIsLike` filter. Optional. Default is `ogc`.
+         * @return {String} The created LIKE filter.
+         */
+        getAttributeLikeFilter: function(propertyNames, queryValue, combinator,
+            matchCase, namespace) {
+            var defaultCombineWith = 'Or';
+            var defaultMatchCase = false;
+
+            var ogcNs = namespace || 'ogc';
+            ogcNs += ':';
+
+            var combineWith = combinator || defaultCombineWith;
+            var match = matchCase || defaultMatchCase;
+
+            var tpl = '' +
+                ' <PropertyIsLike wildCard="*" singleChar="."' +
+                ' escape="!" matchCase="' + match + '">' +
+                '      <PropertyName>{0}</PropertyName>' +
+                '      <Literal>*{1}*</Literal>' +
+                '  </PropertyIsLike>';
+
+            var filter = '<'+ ogcNs + combineWith + '>';
+            Ext.each(propertyNames, function(propertyName) {
+                filter += Ext.String.format(
+                    tpl,
+                    propertyName,
+                    queryValue
+                );
+            });
+            filter += '</' + ogcNs + combineWith + '>';
+            return filter;
+        },
 
         /**
          * Returns an OGC filter for the given CQL Filter.
