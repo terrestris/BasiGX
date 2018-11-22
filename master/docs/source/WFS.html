@@ -134,6 +134,49 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
             );
             return filter;
         },
+<span id='BasiGX-util-WFS-static-method-getAttributeLikeFilter'>        /**
+</span>         * Returns a attribute LIKE filter for the passed property names. Can be
+         * combined with `Or` (default) or `And` operator.
+         *
+         * @param {Array} propertyNames The name of the properties which should
+         * be queried.
+         * @param {String} queryValue The value to query.
+         * @param {String} combinator Should be either `And` or `Or`.
+         * @param {Boolean} matchCase If the case should be considered.
+         *   Default is false.
+         * @param {String} namespace Namespace alias for the XML to be used as
+         *   prefix for `PropertyIsLike` filter. Optional. Default is `ogc`.
+         * @return {String} The created LIKE filter.
+         */
+        getAttributeLikeFilter: function(propertyNames, queryValue, combinator,
+            matchCase, namespace) {
+            var defaultCombineWith = &#39;Or&#39;;
+            var defaultMatchCase = false;
+
+            var ogcNs = namespace || &#39;ogc&#39;;
+            ogcNs += &#39;:&#39;;
+
+            var combineWith = combinator || defaultCombineWith;
+            var match = matchCase || defaultMatchCase;
+
+            var tpl = &#39;&#39; +
+                &#39; &lt;PropertyIsLike wildCard=&quot;*&quot; singleChar=&quot;.&quot;&#39; +
+                &#39; escape=&quot;!&quot; matchCase=&quot;&#39; + match + &#39;&quot;&gt;&#39; +
+                &#39;      &lt;PropertyName&gt;{0}&lt;/PropertyName&gt;&#39; +
+                &#39;      &lt;Literal&gt;*{1}*&lt;/Literal&gt;&#39; +
+                &#39;  &lt;/PropertyIsLike&gt;&#39;;
+
+            var filter = &#39;&lt;&#39;+ ogcNs + combineWith + &#39;&gt;&#39;;
+            Ext.each(propertyNames, function(propertyName) {
+                filter += Ext.String.format(
+                    tpl,
+                    propertyName,
+                    queryValue
+                );
+            });
+            filter += &#39;&lt;/&#39; + ogcNs + combineWith + &#39;&gt;&#39;;
+            return filter;
+        },
 
 <span id='BasiGX-util-WFS-static-method-getOgcFromCqlFilter'>        /**
 </span>         * Returns an OGC filter for the given CQL Filter.

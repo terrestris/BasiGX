@@ -95,6 +95,44 @@ Ext.define(&#39;BasiGX.util.Layer&#39;, {
             return matchingLayer;
         },
 
+<span id='BasiGX-util-Layer-static-method-getLayerByLayersParam'>        /**
+</span>         * Returns the layer matching the given qualified layer name.
+         *
+         * @param {String} layersParam The (qualified) layers param,
+         *  e.g. &#39;foo:bar&#39;
+         * @param {ol.Map} map The OpenLayers map to get the layers from.
+         *
+         * @return {ol.layer.Layer} The OpenLayers layer from the map (if it
+         *  could be found).
+         */
+        getLayerByLayersParam: function(layersParam, map) {
+            if (!map) {
+                map = BasiGX.util.Map.getMapComponent().getMap();
+            }
+            var mapLayers = map.getLayers();
+            var olLayer;
+            var foundIt = false;
+
+            var checkForLayersParam = function(layer) {
+                if(foundIt === true) {
+                    return;
+                }
+                if (layer instanceof ol.layer.Layer &amp;&amp;
+                    layer.getSource() instanceof ol.source.TileWMS &amp;&amp;
+                    layer.getSource().getParams().LAYERS === layersParam) {
+                    olLayer = layer;
+                    foundIt = true;
+                } else if (layer instanceof ol.layer.Group) {
+                    var groupLayers = layer.getLayers();
+
+                    // recursive call for the layers in the layer group
+                    groupLayers.forEach(checkForLayersParam);
+                }
+            };
+            mapLayers.forEach(checkForLayersParam);
+            return olLayer;
+        },
+
 <span id='BasiGX-util-Layer-static-method-getLayersBy'>        /**
 </span>         * Returns the list of layers matching the given pair of properties.
          *
