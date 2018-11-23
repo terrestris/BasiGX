@@ -209,7 +209,7 @@ Ext.define('BasiGX.view.MapLoadingStatusBar', {
         }
         if (me.loading > 0) {
             var waitConf = me.getWaitConf();
-            if (!waitConf.text){
+            if (!waitConf.text) {
                 waitConf.text = me.lookupViewModel().get('loadingText');
             }
 

@@ -268,7 +268,7 @@ Ext.define('BasiGX.util.WFS', {
          *     filters regarding to the current TIME taken from the layer
          *     source and set net definition.
          */
-        getTimeFilterParts: function (layer, dimensionAttribute,
+        getTimeFilterParts: function(layer, dimensionAttribute,
             timeParamFallback) {
 
             if (!dimensionAttribute) {

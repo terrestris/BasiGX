@@ -270,7 +270,7 @@ Ext.define('BasiGX.view.panel.LegendTree', {
             elemenIdAndCssClass = 'stylesheet-null';
         } else {
             elemenIdAndCssClass = 'stylesheet-' +
-                color.replace(/[\(\),\. ]+/g, '-');
+                color.replace(/[(),. ]+/g, '-');
         }
 
         var sheet = Ext.DomQuery.selectNode('#' + elemenIdAndCssClass);

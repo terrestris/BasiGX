@@ -29,21 +29,21 @@ Ext.define('BasiGX.util.Projection', {
          * @return {Ext.Promise} An ExtJS promise resolving if all EPSG
          * information has successfully been fetched from http://epsg.io
          */
-        fetchProj4jCrsDefinitions: function (epsgCodeArray) {
+        fetchProj4jCrsDefinitions: function(epsgCodeArray) {
             if (!Ext.isArray(epsgCodeArray)) {
                 return Ext.Promise.reject('No valid array of EPSG codes ' +
                     ' provided.');
             }
             var epsgPromises = [];
             var epsgIoBaseUrl = '//epsg.io/?q={0}&format=json';
-            Ext.each(Ext.Array.unique(epsgCodeArray), function (epsgCodeStr) {
+            Ext.each(Ext.Array.unique(epsgCodeArray), function(epsgCodeStr) {
                 var epsgCode = epsgCodeStr.toUpperCase().replace('EPSG:', '');
-                var epsgPromise = new Ext.Promise(function (resolve, reject) {
+                var epsgPromise = new Ext.Promise(function(resolve, reject) {
                     var epsgUrl = Ext.String.format(epsgIoBaseUrl, epsgCode);
                     Ext.Ajax.request({
                         url: epsgUrl,
                         useDefaultXhrHeader: false,
-                        success: function (response) {
+                        success: function(response) {
                             if (response && response.responseText &&
                                 response.status === 200) {
                                 var resultObj = Ext.decode(response.
@@ -53,7 +53,7 @@ Ext.define('BasiGX.util.Projection', {
                                 reject(response.status);
                             }
                         },
-                        failure: function (response) {
+                        failure: function(response) {
                             reject(response.status);
                         }
                     });
@@ -71,8 +71,8 @@ Ext.define('BasiGX.util.Projection', {
          * http://epsg.io which includes information on projection, in
          * particular the name, the unit and the proj4 definition
          */
-        initProj4Definitions: function (proj4jObjects) {
-            Ext.each(proj4jObjects, function (projectionDefinition) {
+        initProj4Definitions: function(proj4jObjects) {
+            Ext.each(proj4jObjects, function(projectionDefinition) {
                 var code = projectionDefinition.code;
                 var proj4Def = projectionDefinition.proj4;
                 // register to PRO4J
