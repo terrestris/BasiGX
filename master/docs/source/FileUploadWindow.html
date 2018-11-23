@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2018-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-window-FileUploadWindow'>/**
+</span> * @class BasiGX.view.window.FileUploadWindow
+ */
+Ext.define(&#39;BasiGX.view.window.FileUploadWindow&#39;, {
+    extend: &#39;Ext.window.Window&#39;,
+    xtype: &#39;basigx-window-fileupload&#39;,
+<span id='BasiGX-view-window-FileUploadWindow-property-cls'>    cls: &#39;basigx-window-fileupload&#39;,
+</span>
+    requires: [
+        &#39;Ext.form.field.File&#39;
+    ],
+
+<span id='BasiGX-view-window-FileUploadWindow-property-viewModel'>    viewModel: {
+</span>        data: {
+            title: &#39;Upload file&#39;,
+            description: &#39;Please select a file to upload:&#39;,
+            okButtonLabel: &#39;Ok&#39;,
+            cancelButtonLabel: &#39;Cancel&#39;
+        }
+    },
+
+    config: {
+<span id='BasiGX-view-window-FileUploadWindow-cfg-importHandler'>        /**
+</span>         * Callback function that receives the contents of the selected
+         * file as string when ok is clicked.
+         */
+        importHandler: function() {},
+<span id='BasiGX-view-window-FileUploadWindow-cfg-cancelHandler'>        /**
+</span>         * Callback function called when cancel is clicked.
+         */
+        cancelHandler: function() {}
+    },
+
+<span id='BasiGX-view-window-FileUploadWindow-property-bind'>    bind: {
+</span>        title: &#39;{title}&#39;
+    },
+
+<span id='BasiGX-view-window-FileUploadWindow-property-constrainHeader'>    constrainHeader: true,
+</span><span id='BasiGX-view-window-FileUploadWindow-property-collapsible'>    collapsible: true,
+</span><span id='BasiGX-view-window-FileUploadWindow-property-height'>    height: 140,
+</span><span id='BasiGX-view-window-FileUploadWindow-property-width'>    width: 300,
+</span><span id='BasiGX-view-window-FileUploadWindow-property-layout'>    layout: &#39;vbox&#39;,
+</span><span id='BasiGX-view-window-FileUploadWindow-property-autoShow'>    autoShow: true,
+</span><span id='BasiGX-view-window-FileUploadWindow-property-defaults'>    defaults: {
+</span>        flex: 1,
+        width: &#39;100%&#39;
+    },
+
+<span id='BasiGX-view-window-FileUploadWindow-property-items'>    items: [{
+</span>        xtype: &#39;form&#39;,
+        bodyPadding: 10,
+        bbar: [{
+            xtype: &#39;button&#39;,
+            bind: {
+                text: &#39;{okButtonLabel}&#39;
+            },
+            handler: function() {
+                var win = this.up(&#39;window&#39;);
+                if (win.down(&#39;form&#39;).isValid()) {
+                    var file = win.el.dom.querySelector(&#39;input[type=file]&#39;)
+                        .files[0];
+                    var reader = new FileReader();
+                    reader.onload = function() {
+                        win.getImportHandler()(this.result);
+                        win.close();
+                    };
+                    // NOTE: could be improved to use the other read functions
+                    // if configured, or other text encodings
+                    reader.readAsText(file);
+                }
+            }
+        }, {
+            xtype: &#39;button&#39;,
+            bind: {
+                text: &#39;{cancelButtonLabel}&#39;
+            },
+            handler: function() {
+                var win = this.up(&#39;window&#39;);
+                win.getCancelHandler()();
+                win.close();
+            }
+        }],
+        items: [{
+            xtype: &#39;label&#39;,
+            padding: 5,
+            bind: {
+                text: &#39;{description}&#39;
+            }
+        }, {
+            xtype: &#39;filefield&#39;,
+            padding: 5,
+            allowBlank: false
+        }]
+    }]
+
+});
+</pre>
+</body>
+</html>
