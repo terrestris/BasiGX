@@ -204,6 +204,9 @@ Ext.define('BasiGX.view.MapLoadingStatusBar', {
     incrementAndCheck: function() {
         var me = this;
         me.loading++;
+        if (!me.isVisible()) {
+            me.show();
+        }
         if (me.isWaiting()) {
             return;
         }
@@ -212,8 +215,31 @@ Ext.define('BasiGX.view.MapLoadingStatusBar', {
             if (!waitConf.text) {
                 waitConf.text = me.lookupViewModel().get('loadingText');
             }
+            if (waitConf.duration) {
+                // when we have a duration set, we need to make sure that when
+                // the duration is exceeded, we internally reset our loading
+                // counter. Since the user can also set a custom function to
+                // execute, we have to handle this case as well.
 
-            me.show();
+                // 1. Our handler when duration is reached.
+                var resetLoading = Ext.Function.bind(me.resetLoading, me);
+                if (waitConf.fn && Ext.isFunction(waitConf.fn)) {
+                    // 2. The user has set a handler when duration is reached
+                    //    We create a function that will first call the user
+                    //    function, then ours
+                    resetLoading = Ext.Function.createSequence(
+                        waitConf.fn,
+                        resetLoading,
+                        waitConf.scope
+                    );
+                }
+                // 3. Set the newly created function (probably a combination of
+                //    a user and the internal function)
+                waitConf.fn = resetLoading;
+                // 4. Unset any possibly set scope from user, the createSequence
+                //    from above took care of that already.
+                delete waitConf.scope;
+            }
             me.wait(waitConf);
         }
     },
@@ -228,8 +254,15 @@ Ext.define('BasiGX.view.MapLoadingStatusBar', {
         me.loading--;
         if (me.loading <= 0) {
             me.reset(true);
-            me.loading = 0; // sanity
+            me.resetLoading(); // sanity
         }
+    },
+
+    /**
+     * Helper method to reset the internal loading counter.
+     */
+    resetLoading: function() {
+        this.loading = 0;
     },
 
     /**
