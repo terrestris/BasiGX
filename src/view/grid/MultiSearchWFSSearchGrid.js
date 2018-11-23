@@ -167,21 +167,22 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         /**
                * @todo gx_renderer doesn't render all features every time
                */
-    //    {
-    //        xtype: 'widgetcolumn',
-    //        flex: 1,
-    //        widget: {
-    //            xtype: 'gx_renderer'
-    //        },
-    //        onWidgetAttach: function(column, gxRenderer, record) {
-    //            // update the symbolizer with the related feature
-    //            var feature = record.getFeature();
-    //            gxRenderer.update({
-    //                feature: feature,
-    //                symbolizers: this.up('grid').getSearchResultFeatureStyle()
-    //            });
-    //        }
-    //    },
+        //    {
+        //        xtype: 'widgetcolumn',
+        //        flex: 1,
+        //        widget: {
+        //            xtype: 'gx_renderer'
+        //        },
+        //        onWidgetAttach: function(column, gxRenderer, record) {
+        //            // update the symbolizer with the related feature
+        //            var feature = record.getFeature();
+        //            gxRenderer.update({
+        //                feature: feature,
+        //                symbolizers: this.up('grid')
+        // .getSearchResultFeatureStyle()
+        //            });
+        //        }
+        //    },
         {
             text: 'Feature',
             dataIndex: 'displayfield',
