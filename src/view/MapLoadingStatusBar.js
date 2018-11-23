@@ -217,7 +217,7 @@ Ext.define('BasiGX.view.MapLoadingStatusBar', {
             }
             if (waitConf.duration) {
                 // when we have a duration set, we need to make sure that when
-                // The duration is exceeded, we internally reset our loading
+                // the duration is exceeded, we internally reset our loading
                 // counter. Since the user can also set a custom function to
                 // execute, we have to handle this case as well.
 
@@ -225,8 +225,8 @@ Ext.define('BasiGX.view.MapLoadingStatusBar', {
                 var resetLoading = Ext.Function.bind(me.resetLoading, me);
                 if (waitConf.fn && Ext.isFunction(waitConf.fn)) {
                     // 2. The user has set a handler when duration is reached
-                    //    We creeate a function that will first call the user
-                    //    function, than ours
+                    //    We create a function that will first call the user
+                    //    function, then ours
                     resetLoading = Ext.Function.createSequence(
                         waitConf.fn,
                         resetLoading,
