@@ -97,7 +97,7 @@ Ext.define('BasiGX.util.Layer', {
             var foundIt = false;
 
             var checkForLayersParam = function(layer) {
-                if(foundIt === true) {
+                if (foundIt === true) {
                     return;
                 }
                 if (layer instanceof ol.layer.Layer &&
@@ -125,7 +125,7 @@ Ext.define('BasiGX.util.Layer', {
          *
          * @return {ol.layer.Base[]} The array of matching layers.
          */
-        getLayersBy: function (key, value, collection) {
+        getLayersBy: function(key, value, collection) {
             if (!key) {
                 return [];
             }
@@ -141,7 +141,7 @@ Ext.define('BasiGX.util.Layer', {
                 layers = map.getLayers().getArray();
             }
 
-            Ext.each(layers, function (layer) {
+            Ext.each(layers, function(layer) {
                 if (layer.get(key) === value &&
                     layer instanceof ol.layer.Base) {
                     matchingLayers.push(layer);

@@ -247,6 +247,7 @@ Ext.define(&#39;BasiGX.ux.RowExpanderWithComponents&#39;, {
 
         for (var all in obj) {
             if (typeof obj[all] === &#39;string&#39; &amp;&amp; obj[all].match(/{{(.*)}}/)) {
+                /* eslint no-eval:0 */
                 obj[all] = eval(obj[all].match(/{{(.*)}}/)[1]);
             }
             if (typeof obj[all] === &#39;object&#39; &amp;&amp; obj[all] !== null) {

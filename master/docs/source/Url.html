@@ -88,7 +88,7 @@ Ext.define(&#39;BasiGX.util.Url&#39;, {
             var loc = window.location;
             var url = loc.protocol + &#39;//&#39; + loc.host;
             var webProjectName = window.location.pathname.match(
-                /^\/[\w\-]*\/?/
+                /^\/[\w-]*\/?/
             )[0];
 
             return url + webProjectName;

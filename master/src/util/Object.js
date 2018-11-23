@@ -70,8 +70,8 @@ Ext.define('BasiGX.util.Object', {
             // if the queryKey contains backslashes we understand this as the
             // path in the object-hierarchy and will return the last matching
             // value
-            if (queryKey.split('\/').length > 1) {
-                Ext.each(queryKey.split('\/'), function(key) {
+            if (queryKey.split('/').length > 1) {
+                Ext.each(queryKey.split('/'), function(key) {
                     if (queryObject[key]) {
                         queryObject = queryObject[key];
                     } else {

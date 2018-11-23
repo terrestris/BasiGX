@@ -373,14 +373,14 @@ Ext.define(&#39;BasiGX.view.container.Redlining&#39;, {
     },
 
 <span id='BasiGX-view-container-Redlining-method-fireRedliningChanged'>    fireRedliningChanged: function() {
-</span>        var me = Ext.ComponentQuery.query(&#39;basigx-container-redlining&#39;)[0];
-        if (!me) {
+</span>        var myComp = Ext.ComponentQuery.query(&#39;basigx-container-redlining&#39;)[0];
+        if (!myComp) {
             return;
         }
-        me.fireEvent(&#39;redliningchanged&#39;, me, me.getState(),
-            me.stateChangeActive);
+        myComp.fireEvent(&#39;redliningchanged&#39;, myComp, myComp.getState(),
+            myComp.stateChangeActive);
         // enforce redraw, needed e.g. for label text changes to become visible
-        me.redliningVectorLayer.changed();
+        myComp.redliningVectorLayer.changed();
     }
 });
 </pre>

@@ -1514,7 +1514,7 @@ Ext.define('BasiGX.view.container.SLDStyler', {
             if (graphicTab.externalGraphicSrc) {
                 var src = graphicTab.externalGraphicSrc;
                 var internalUrl = this.config.backendUrls.internalUrl;
-                var regex = /https?\:\/\/[a-zA-Z\-_0-9.]+\//g;
+                var regex = /https?:\/\/[a-zA-Z\-_0-9.]+\//g;
                 if (this.config.backendUrls.internalUrl) {
                     src = src.replace(regex, internalUrl);
                 }
@@ -1579,32 +1579,32 @@ Ext.define('BasiGX.view.container.SLDStyler', {
                 symbolizerObj.perpendicularOffset = textFs.down(
                     'numberfield[name=perpendicularoffset]')
                     .getValue().toString() || BasiGX.util.SLD.
-                        DEFAULT_LABEL_PERPENDICULAROFFSET;
+                    DEFAULT_LABEL_PERPENDICULAROFFSET;
                 symbolizerObj.labelFollowLine = textFs.down(
                     'checkbox[name=followlinelabel]')
                     .getValue().toString() || BasiGX.util.SLD.
-                        DEFAULT_LABEL_FOLLOW_LINE;
+                    DEFAULT_LABEL_FOLLOW_LINE;
             } else {
                 symbolizerObj.labelAnchorPointX = textFs.down(
                     'numberfield[name=labelanchorpointx]')
                     .getValue().toString() || BasiGX.util.SLD.
-                        DEFAULT_LABEL_ANCHORPOINTX;
+                    DEFAULT_LABEL_ANCHORPOINTX;
                 symbolizerObj.labelAnchorPointY = textFs.down(
                     'numberfield[name=labelanchorpointy]')
                     .getValue().toString() || BasiGX.util.SLD.
-                        DEFAULT_LABEL_ANCHORPOINTY;
+                    DEFAULT_LABEL_ANCHORPOINTY;
                 symbolizerObj.labelDisplacementX = textFs.down(
                     'numberfield[name=labeldisplacementx]')
                     .getValue().toString() || BasiGX.util.SLD.
-                        DEFAULT_LABEL_DISPLACEMENTX;
+                    DEFAULT_LABEL_DISPLACEMENTX;
                 symbolizerObj.labelDisplacementY = textFs.down(
                     'numberfield[name=labeldisplacementy]')
                     .getValue().toString() || BasiGX.util.SLD.
-                        DEFAULT_LABEL_DISPLACEMENTY;
+                    DEFAULT_LABEL_DISPLACEMENTY;
                 symbolizerObj.labelRotation = textFs.down(
                     'numberfield[name=labelrotation]')
                     .getValue().toString() || BasiGX.util.SLD.
-                        DEFAULT_LABEL_ROTATION;
+                    DEFAULT_LABEL_ROTATION;
             }
 
             sldObj = BasiGX.util.SLD.setTextSymbolizerInRule(

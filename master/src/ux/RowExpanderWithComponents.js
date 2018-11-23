@@ -230,6 +230,7 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
 
         for (var all in obj) {
             if (typeof obj[all] === 'string' && obj[all].match(/{{(.*)}}/)) {
+                /* eslint no-eval:0 */
                 obj[all] = eval(obj[all].match(/{{(.*)}}/)[1]);
             }
             if (typeof obj[all] === 'object' && obj[all] !== null) {
