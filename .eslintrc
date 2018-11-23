@@ -19,7 +19,8 @@
     "XLink_1_0": false,
     "opentype": false,
     "shpwrite": false,
-    "Uint8Array": false
+    "Uint8Array": false,
+    "FileReader": false
   },
   "rules":{
     "consistent-this":[
