@@ -117,7 +117,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     /**
      * The initialization function
      */
-    initComponent: function () {
+    initComponent: function() {
         var me = this;
 
         me.items = [{
@@ -175,7 +175,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
             me.olMap = mapPanel ? mapPanel.map : null;
         }
 
-        me.on('afterrender', function () {
+        me.on('afterrender', function() {
             me.initOlMouseControl();
             me.initProjections();
         });
@@ -202,7 +202,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
      * Initilization of projections using BasiGX.util.Projection for passed
      * EPSG codes / currently active propjection in map
      */
-    initProjections: function () {
+    initProjections: function() {
         var me = this;
         var epsgCodeArray = me.epsgCodeArray;
         var mapProjection = me.olMap.getView().getProjection().getCode();
@@ -215,11 +215,11 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
 
         var projectionInitPromise = BasiGX.util.Projection.
             fetchProj4jCrsDefinitions(epsgCodeArray);
-        var failureFunction = function () {
+        var failureFunction = function() {
             Ext.log.warn('Could not initialize projections');
         };
         projectionInitPromise
-            .then(function (proj4jObjects) {
+            .then(function(proj4jObjects) {
                 BasiGX.util.Projection.initProj4Definitions(proj4jObjects, me);
                 me.generateCrsChangeButtonGroup(proj4jObjects);
             }, failureFunction);
@@ -232,7 +232,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
      *        http://epsg.io which includes information on projection, in
      *        particular the name, the unit and the proj4 definition
      */
-    generateCrsChangeButtonGroup: function (proj4jObjects) {
+    generateCrsChangeButtonGroup: function(proj4jObjects) {
         if (!Ext.isArray(proj4jObjects)) {
             return;
         }
@@ -258,7 +258,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 }
             };
 
-            Ext.each(proj4jObjects, function (projectionDefinition) {
+            Ext.each(proj4jObjects, function(projectionDefinition) {
                 var code = projectionDefinition.code;
                 var name = projectionDefinition.name;
                 var unit = projectionDefinition.unit;
@@ -289,7 +289,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 // update view model to set correct CRS name of map
                 var mapCode = me.olMap.getView().getProjection().getCode()
                     .split(':')[1];
-                var filtered = Ext.Array.filter(proj4jObjects, function (obj) {
+                var filtered = Ext.Array.filter(proj4jObjects, function(obj) {
                     return obj.code === mapCode;
                 });
                 me.getViewModel().setData({
@@ -312,7 +312,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
      * @param {Ext.Component} segBtn The button in segmented button that was
      *                        clicked (if isMenu = true)
      */
-    onCrsItemClick: function (isMenu, btn, segBtn) {
+    onCrsItemClick: function(isMenu, btn, segBtn) {
         var me = this;
         var targetCmp = isMenu ? btn : segBtn;
         var targetCode = targetCmp.epsgCode;
@@ -333,7 +333,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     /**
      * Initializes ol.control.MousePosition
      */
-    initOlMouseControl: function () {
+    initOlMouseControl: function() {
         var me = this;
         var targetComponent = me.down('component[name="mouse-position"]');
         var targetDivId = targetComponent.getEl().id;
@@ -354,7 +354,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
             .elements[0];
         // register MutationObserver on node to get changed in DOM triggered by
         // OpenLayers
-        var observer = new MutationObserver(function (mutations) {
+        var observer = new MutationObserver(function(mutations) {
             if (mutations && mutations.length === 1 &&
                 Ext.isTextNode(mutations[0].addedNodes[0])) {
                 // update textfields
@@ -373,7 +373,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
      *
      * @param {String} textContent result of ol.control.MousePosition
      */
-    updateCoordinateFields: function (textContent) {
+    updateCoordinateFields: function(textContent) {
         var me = this;
         if (!me.updateTextfields) {
             return;
@@ -403,7 +403,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
      * Handler called if map should be centered on coordinate entered in
      * coordinate input fields
      */
-    onCenterToCoordinateClick: function () {
+    onCenterToCoordinateClick: function() {
         var me = this;
         var viewModel = me.getViewModel();
         var xVal = viewModel.get('xVal');

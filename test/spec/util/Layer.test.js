@@ -201,7 +201,7 @@ describe('BasiGX.util.Layer', function() {
             expect(got).to.have.length(1);
             expect(got[0]).to.be(layer);
         });
-        it('works recursively', function () {
+        it('works recursively', function() {
             var layerGroup = new ol.layer.Group({
                 layers: [layer2]
             });

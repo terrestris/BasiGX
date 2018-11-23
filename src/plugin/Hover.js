@@ -48,7 +48,7 @@ Ext.define('BasiGX.plugin.Hover', {
          *
          * @type {String}
          */
-        HOVER_TEMPLATE_PLACEHOLDER_PREFIX: '\{\{',
+        HOVER_TEMPLATE_PLACEHOLDER_PREFIX: '{{',
 
         /**
          * The suffix used in a regular expression to match any placeholder
@@ -56,7 +56,7 @@ Ext.define('BasiGX.plugin.Hover', {
          *
          * @type {String}
          */
-        HOVER_TEMPLATE_PLACEHOLDER_SUFFIX: '\}\}'
+        HOVER_TEMPLATE_PLACEHOLDER_SUFFIX: '}}'
     },
 
     config: {
