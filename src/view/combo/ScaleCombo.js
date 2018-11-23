@@ -188,6 +188,9 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
         }
         var resolution = mapView.get(evt.key); // map.get('resolution')
         var store = this.getStore();
+        if (!store) {
+            return; // perhaps we've been destroyed already
+        }
 
         var matchInStore = (store.findExact('resolution', resolution) >= 0);
 
