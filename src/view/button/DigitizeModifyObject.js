@@ -86,7 +86,9 @@ Ext.define('BasiGX.view.button.DigitizeModifyObject', {
                     if (evt.selected && evt.selected[0]) {
                         var feature = evt.selected[0];
                         if (feature.get('isPostit')) {
-                            me.modifyPostit(feature);
+                            var oldText = feature.getStyle()
+                                .getText().getText();
+                            me.modifyPostit(feature, oldText);
                         }
                     }
                     me.modifySelectInteraction.getFeatures().clear();
@@ -175,7 +177,9 @@ Ext.define('BasiGX.view.button.DigitizeModifyObject', {
      * @param {ol.Feature} feat The vector feature.
      */
     setPostitTextOnFeature: function(text, feat) {
-        feat.getStyle().getText().setText(text);
+        var style = feat.getStyle();
+        style.getText().setText(text);
+        feat.setStyle(style);
         this.fireFeatureChanged();
     }
 });
