@@ -14,11 +14,11 @@
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "a6ad4aef-1b22-47c0-ae16-8b8f0a61dc2d",
-      "created": "2018-11-27T12:07:52Z",
+      "uuid": "86a3c03e-794e-40c0-a8db-9b95e976c85c",
+      "created": "2018-11-28T14:17:03Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "FOrbwTcsHuQ\u003d",
-      "signature": "qJPtw9h7zbx7mtkrD2J6yCedsHPiFvjX8WojiCTcZLKkAM30a6IcBoFM8gIM0EOkkFzRBWPndcvp8QB+iPaTbrEgXp4DSR3EqdV5poXXtltkuc3gc+R2bC1Ko0d86+3t/LIrcKSpXrJqVzDqHj/2BUVJsHN1CKRSPFspXQ3DncL/UivMmVZshU9feAzqE94RAWFcWdHAfwRho+2a6neSwhbWd+bvKrElXmIPNc+xJoLd4gkCNts2kAYkk2ksltFgV4AcAXvaW5Yyng+HZL+a3Ngrpre3Hm8TxPNAthfoqOC/lhb7j6QYYNKS1LQ5kg2kNkkXIshB8qS0fWTXiWRerQ\u003d\u003d"
+      "nonce": "SK+4+DxT8gE\u003d",
+      "signature": "JPjBW2EJcMDocQqZ95CHSE2gKVV0I6kfXAbbd16Pgi8hC2FValyUGjKsQBOj5Xd1xNv0eTV0yCC1ZXzVqRX4z1KSR8V95gxzmHFztLr0x2sa9iH8Tqk4fg2vcXK0onzvGTnSnaneEtnlAuZlqCRGAH1+TW/J/JqjDylko3llfSZKuPk8RYSD2LRlAE3fqn4uhQ6SpSYSTbQhYHWZMErWHxCP0YVpw45eFxypM3Lin+cWTdQU6HBjJ19r4F6qcvAQTN4WfQfBraelG9W/BSWA1Rsgpy9bqzvWUxw8wHxgtrV2zCjofT7IthZudLtuXdpjqI5l/CFlzV1lb97HDwKt3g\u003d\u003d"
     }
   ],
   "slicer": {
@@ -44,13 +44,12 @@
   "output": "${package.dir}/build",
   "scripts": {
     "pretest": "npm run lint",
-    "test": "mocha-phantomjs --ignore-resource-errors --ssl-protocol\u003dany --ignore-ssl-errors\u003dtrue --local-to-remote-url-access\u003dtrue test/index.html",
+    "test": "karma start --single-run",
     "lint": "eslint -c .eslintrc src/ \u0026\u0026 eslint -c test/.eslintrc test/",
     "lint:fix": "eslint -c .eslintrc --fix src/ \u0026\u0026 eslint -c test/.eslintrc --fix test/",
-    "save-coverage": "mocha-phantomjs --ignore-resource-errors --ssl-protocol\u003dany --ignore-ssl-errors\u003dtrue --local-to-remote-url-access\u003dtrue --hooks ./test/phantom_hooks.js test/index.html",
     "clean-coverage": "rm -rf src_instrumented src_old coverage",
-    "ci-coverage": "npm run clean-coverage \u0026\u0026 istanbul instrument src -o src_instrumented \u0026\u0026 mv src src_old \u0026\u0026 mv src_instrumented src \u0026\u0026 istanbul cover npm run save-coverage \u0026\u0026 mv src src_instrumented \u0026\u0026 mv src_old src \u0026\u0026 istanbul report --root ./coverage lcovonly \u0026\u0026 cat ./coverage/lcov.info | coveralls",
-    "html-coverage": "npm run clean-coverage \u0026\u0026 istanbul instrument src -o src_instrumented \u0026\u0026 mv src src_old \u0026\u0026 mv src_instrumented src \u0026\u0026 istanbul cover npm run save-coverage \u0026\u0026 mv src src_instrumented \u0026\u0026 mv src_old src \u0026\u0026 istanbul report --root ./coverage html"
+    "ci-coverage": "npm run clean-coverage \u0026\u0026 npm run test \u0026\u0026 istanbul report --root ./coverage lcovonly \u0026\u0026 cat ./coverage/lcov.info | coveralls",
+    "html-coverage": "npm run clean-coverage \u0026\u0026 npm run test \u0026\u0026 istanbul report --root ./coverage html"
   },
   "repository": {
     "type": "git",
@@ -61,8 +60,16 @@
     "eslint": "5.9.0",
     "expect.js": "0.3.1",
     "istanbul": "0.4.5",
+    "karma": "3.1.1",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-coverage": "1.1.2",
+    "karma-coverage-istanbul-reporter": "2.0.4",
+    "karma-expect": "1.1.3",
+    "karma-mocha": "1.3.0",
+    "karma-mocha-reporter": "2.2.5",
+    "karma-sinon": "1.0.5",
     "mocha": "5.2.0",
-    "mocha-phantomjs": "4.1.0",
+    "puppeteer": "1.10.0",
     "sinon": "7.1.1"
   }
 }
