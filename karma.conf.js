@@ -24,7 +24,6 @@ module.exports = function(config) {
         basePath: '',
 
         proxies: {
-            '/koalaProxy': proxyUrl,
             '/resources': '/base/resources'
         },
 
