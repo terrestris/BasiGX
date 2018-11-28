@@ -1,7 +1,6 @@
 /* eslint-disable */
 module.exports = function(config) {
 
-    var proxyUrl = 'http://localhost:3000';
     var files = [
         'https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.6.4/ol.js',
         'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/ext-all.js',
@@ -17,14 +16,18 @@ module.exports = function(config) {
         'https://cdn.jsdelivr.net/npm/proj4@2.5.0/dist/proj4-src.min.js',
         'src/**/*js',
         'test/test-helper-functions.js',
-        'test/**/*js'
+        'test/**/*js',
+        {pattern: 'test/**/*gif', watched: false, included: false, served: true},
+        {pattern: 'test/**/*json', watched: false, included: false, served: true}
     ];
 
     config.set({
-        basePath: '',
+        basePath: '.',
 
         proxies: {
-            '/resources': '/base/resources'
+            '/resources': '/base/test/resources',
+            '/spec': '/base/test/spec',
+            '/BasiGX': '/base/src'
         },
 
         // frameworks to use
@@ -36,7 +39,6 @@ module.exports = function(config) {
 
         // list of files to exclude
         exclude: [
-            // './resources/lib/**/test/*.js'
         ],
 
         preprocessors: {
