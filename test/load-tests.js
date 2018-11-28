@@ -74,4 +74,10 @@
     for (; i < dependencyCnt; i++) {
         doc.write(getScriptTag(specPath + dependencies[i]));
     }
+    Ext.Loader.setConfig({
+        enabled: true,
+        paths: {
+            'BasiGX': '../src'
+        }
+    });
 }(document, this));
