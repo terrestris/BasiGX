@@ -136,8 +136,14 @@ Ext.define('BasiGX.view.button.DigitizePostit', {
             );
             var imageBaseSrc;
             if (classPath) {
-                imageBaseSrc = classPath.split(
-                    'src/view/button/DigitizePostit.js')[0];
+                if (classPath.indexOf('src/view/button/DigitizePostit.js') === -1) {
+                    // we're on a production build, so let's use the
+                    // image from the classic resource folder
+                    imageBaseSrc = 'classic/';
+                } else {
+                    imageBaseSrc = classPath.split(
+                        'src/view/button/DigitizePostit.js')[0];
+                }
             }
             return imageBaseSrc + 'resources/img/postit.png';
         }
