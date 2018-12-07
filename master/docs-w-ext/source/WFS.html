@@ -98,28 +98,41 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
          * @param {String} propertyName The name of the geometry property of the
          *     featuretype to filter.
          * @param {Array} extent The optional extent Array to use for the filter
+         * @param {String} type The type of the filter to create, can either be
+         *     `&#39;bbox&#39;`, `&#39;intersects&#39;` or `&#39;both&#39;` (the default). Strings other
+         *     than the beforementioned will be interpreted as `&#39;both&#39;`.
          * @return {String} The create BBOX filter.
          */
-        getBboxFilter: function(map, propertyName, extent) {
-            var tpl = &#39;&#39; +
-                &#39;&lt;ogc:And&gt;&#39; +
-                &#39;  &lt;ogc:BBOX&gt;&#39; +
-                &#39;    &lt;ogc:PropertyName&gt;{0}&lt;/ogc:PropertyName&gt;&#39; +
-                &#39;    &lt;gml:Envelope&#39; +
-                &#39; xmlns:gml=&quot;http://www.opengis.net/gml&quot; srsName=&quot;{1}&quot;&gt;&#39; +
-                &#39;      &lt;gml:lowerCorner&gt;{2} {3}&lt;/gml:lowerCorner&gt;&#39; +
-                &#39;      &lt;gml:upperCorner&gt;{4} {5}&lt;/gml:upperCorner&gt;&#39; +
-                &#39;    &lt;/gml:Envelope&gt;&#39; +
-                &#39;  &lt;/ogc:BBOX&gt;&#39; +
-                &#39;  &lt;ogc:Intersects&gt;&#39; +
-                &#39;    &lt;ogc:PropertyName&gt;{0}&lt;/ogc:PropertyName&gt;&#39; +
-                &#39;    &lt;gml:Envelope&#39; +
-                &#39; xmlns:gml=&quot;http://www.opengis.net/gml&quot; srsName=&quot;{1}&quot;&gt;&#39; +
-                &#39;      &lt;gml:lowerCorner&gt;{2} {3}&lt;/gml:lowerCorner&gt;&#39; +
-                &#39;      &lt;gml:upperCorner&gt;{4} {5}&lt;/gml:upperCorner&gt;&#39; +
-                &#39;    &lt;/gml:Envelope&gt;&#39; +
-                &#39;  &lt;/ogc:Intersects&gt;&#39; +
-                &#39;&lt;/ogc:And&gt;&#39;;
+        getBboxFilter: function(map, propertyName, extent, type) {
+            type = type ? (type + &#39;&#39;).toLowerCase() : &#39;both&#39;;
+            type = (type === &#39;bbox&#39; || type === &#39;intersects&#39;) ? type : &#39;both&#39;;
+            var filters = [];
+            if (type === &#39;bbox&#39; || type === &#39;both&#39;) {
+                filters.push(
+                    &#39;  &lt;ogc:BBOX&gt;&#39; +
+                    &#39;    &lt;ogc:PropertyName&gt;{0}&lt;/ogc:PropertyName&gt;&#39; +
+                    &#39;    &lt;gml:Envelope&#39; +
+                    &#39; xmlns:gml=&quot;http://www.opengis.net/gml&quot; srsName=&quot;{1}&quot;&gt;&#39; +
+                    &#39;      &lt;gml:lowerCorner&gt;{2} {3}&lt;/gml:lowerCorner&gt;&#39; +
+                    &#39;      &lt;gml:upperCorner&gt;{4} {5}&lt;/gml:upperCorner&gt;&#39; +
+                    &#39;    &lt;/gml:Envelope&gt;&#39; +
+                    &#39;  &lt;/ogc:BBOX&gt;&#39;
+                );
+            }
+            if (type === &#39;intersects&#39; || type === &#39;both&#39;) {
+                filters.push(
+                    &#39;  &lt;ogc:Intersects&gt;&#39; +
+                    &#39;    &lt;ogc:PropertyName&gt;{0}&lt;/ogc:PropertyName&gt;&#39; +
+                    &#39;    &lt;gml:Envelope&#39; +
+                    &#39; xmlns:gml=&quot;http://www.opengis.net/gml&quot; srsName=&quot;{1}&quot;&gt;&#39; +
+                    &#39;      &lt;gml:lowerCorner&gt;{2} {3}&lt;/gml:lowerCorner&gt;&#39; +
+                    &#39;      &lt;gml:upperCorner&gt;{4} {5}&lt;/gml:upperCorner&gt;&#39; +
+                    &#39;    &lt;/gml:Envelope&gt;&#39; +
+                    &#39;  &lt;/ogc:Intersects&gt;&#39;
+                );
+            }
+
+            var tpl = BasiGX.util.WFS.combineFilters(filters, &#39;And&#39;, &#39;&#39;);
             var mapView = map.getView();
             var srsName = mapView.getProjection().getCode();
             if (!extent) {
@@ -389,6 +402,10 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
             var ogcNsUri = &#39;http://www.opengis.net/ogc&#39;;
             var defaultStartTag = &#39;&lt;ogc:Filter xmlns:ogc=&quot;&#39; + ogcNsUri + &#39;&quot;&gt;&#39;;
             var defaultCombineWith = &#39;And&#39;;
+            var truthyFilters = Ext.Array.filter(filters, function(filter) {
+                return !!filter;
+            });
+            var numFilters = truthyFilters.length;
 
             var combineWith = combinator || defaultCombineWith;
             var startFilterTag;
@@ -400,15 +417,19 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
 
             var parts = [];
             parts.push(startFilterTag);
-            parts.push(&#39;&lt;ogc:&#39; + combineWith + &#39;&gt;&#39;);
 
-            Ext.each(filters, function(filter) {
-                if (filter) {
-                    parts.push(filter);
-                }
+            if (numFilters &gt; 1) {
+                parts.push(&#39;&lt;ogc:&#39; + combineWith + &#39;&gt;&#39;);
+            }
+
+            Ext.each(truthyFilters, function(filter) {
+                parts.push(filter);
             });
 
-            parts.push(&#39;&lt;/ogc:&#39; + combineWith + &#39;&gt;&#39;);
+            if (numFilters &gt; 1) {
+                parts.push(&#39;&lt;/ogc:&#39; + combineWith + &#39;&gt;&#39;);
+            }
+
             if (startFilterTag !== &#39;&#39;) {
                 parts.push(&#39;&lt;/ogc:Filter&gt;&#39;);
             }
