@@ -2,7 +2,7 @@
 module.exports = function(config) {
 
     var files = [
-        'https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.6.4/ol.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.6.5/ol.js',
         'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/ext-all.js',
         'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/packages/ux/classic/ux.js',
         'https://geoext.github.io/geoext3/master/GeoExt.js',

@@ -81,28 +81,41 @@ Ext.define('BasiGX.util.WFS', {
          * @param {String} propertyName The name of the geometry property of the
          *     featuretype to filter.
          * @param {Array} extent The optional extent Array to use for the filter
+         * @param {String} type The type of the filter to create, can either be
+         *     `'bbox'`, `'intersects'` or `'both'` (the default). Strings other
+         *     than the beforementioned will be interpreted as `'both'`.
          * @return {String} The create BBOX filter.
          */
-        getBboxFilter: function(map, propertyName, extent) {
-            var tpl = '' +
-                '<ogc:And>' +
-                '  <ogc:BBOX>' +
-                '    <ogc:PropertyName>{0}</ogc:PropertyName>' +
-                '    <gml:Envelope' +
-                ' xmlns:gml="http://www.opengis.net/gml" srsName="{1}">' +
-                '      <gml:lowerCorner>{2} {3}</gml:lowerCorner>' +
-                '      <gml:upperCorner>{4} {5}</gml:upperCorner>' +
-                '    </gml:Envelope>' +
-                '  </ogc:BBOX>' +
-                '  <ogc:Intersects>' +
-                '    <ogc:PropertyName>{0}</ogc:PropertyName>' +
-                '    <gml:Envelope' +
-                ' xmlns:gml="http://www.opengis.net/gml" srsName="{1}">' +
-                '      <gml:lowerCorner>{2} {3}</gml:lowerCorner>' +
-                '      <gml:upperCorner>{4} {5}</gml:upperCorner>' +
-                '    </gml:Envelope>' +
-                '  </ogc:Intersects>' +
-                '</ogc:And>';
+        getBboxFilter: function(map, propertyName, extent, type) {
+            type = type ? (type + '').toLowerCase() : 'both';
+            type = (type === 'bbox' || type === 'intersects') ? type : 'both';
+            var filters = [];
+            if (type === 'bbox' || type === 'both') {
+                filters.push(
+                    '  <ogc:BBOX>' +
+                    '    <ogc:PropertyName>{0}</ogc:PropertyName>' +
+                    '    <gml:Envelope' +
+                    ' xmlns:gml="http://www.opengis.net/gml" srsName="{1}">' +
+                    '      <gml:lowerCorner>{2} {3}</gml:lowerCorner>' +
+                    '      <gml:upperCorner>{4} {5}</gml:upperCorner>' +
+                    '    </gml:Envelope>' +
+                    '  </ogc:BBOX>'
+                );
+            }
+            if (type === 'intersects' || type === 'both') {
+                filters.push(
+                    '  <ogc:Intersects>' +
+                    '    <ogc:PropertyName>{0}</ogc:PropertyName>' +
+                    '    <gml:Envelope' +
+                    ' xmlns:gml="http://www.opengis.net/gml" srsName="{1}">' +
+                    '      <gml:lowerCorner>{2} {3}</gml:lowerCorner>' +
+                    '      <gml:upperCorner>{4} {5}</gml:upperCorner>' +
+                    '    </gml:Envelope>' +
+                    '  </ogc:Intersects>'
+                );
+            }
+
+            var tpl = BasiGX.util.WFS.combineFilters(filters, 'And', '');
             var mapView = map.getView();
             var srsName = mapView.getProjection().getCode();
             if (!extent) {
@@ -372,6 +385,10 @@ Ext.define('BasiGX.util.WFS', {
             var ogcNsUri = 'http://www.opengis.net/ogc';
             var defaultStartTag = '<ogc:Filter xmlns:ogc="' + ogcNsUri + '">';
             var defaultCombineWith = 'And';
+            var truthyFilters = Ext.Array.filter(filters, function(filter) {
+                return !!filter;
+            });
+            var numFilters = truthyFilters.length;
 
             var combineWith = combinator || defaultCombineWith;
             var startFilterTag;
@@ -383,15 +400,19 @@ Ext.define('BasiGX.util.WFS', {
 
             var parts = [];
             parts.push(startFilterTag);
-            parts.push('<ogc:' + combineWith + '>');
 
-            Ext.each(filters, function(filter) {
-                if (filter) {
-                    parts.push(filter);
-                }
+            if (numFilters > 1) {
+                parts.push('<ogc:' + combineWith + '>');
+            }
+
+            Ext.each(truthyFilters, function(filter) {
+                parts.push(filter);
             });
 
-            parts.push('</ogc:' + combineWith + '>');
+            if (numFilters > 1) {
+                parts.push('</ogc:' + combineWith + '>');
+            }
+
             if (startFilterTag !== '') {
                 parts.push('</ogc:Filter>');
             }
