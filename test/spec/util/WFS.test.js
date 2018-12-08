@@ -4,7 +4,7 @@ describe('BasiGX.util.WFS', function() {
     var WfsUtil = BasiGX.util.WFS;
     describe('Basics', function() {
         it('is defined', function() {
-            expect(BasiGX.util.WFS).to.not.be(undefined);
+            expect(WfsUtil).to.not.be(undefined);
         });
     });
 
@@ -141,6 +141,69 @@ describe('BasiGX.util.WFS', function() {
             });
         });
 
+        describe('#getAttributeLikeFilter', function() {
+            it('returns an attribute filter', function() {
+                var got = WfsUtil.getAttributeLikeFilter(
+                    ['a', 'b'], 'foo'
+                );
+                expect((/<PropertyIsLike/).test(got)).to.be(true);
+                expect(got.match(/<PropertyIsLike/g).length).to.be(2);
+                expect((/<\/PropertyIsLike/).test(got)).to.be(true);
+                expect(got.match(/<\/PropertyIsLike/g).length).to.be(2);
+                expect((/<PropertyName>a<\/PropertyName>/).test(got)).to.be(true);
+                expect((/<PropertyName>b<\/PropertyName>/).test(got)).to.be(true);
+                expect(got.match(/<Literal>\*foo\*<\/Literal>/g).length).to.be(2);
+            });
+
+            it('returns Or-combined filters by default', function() {
+                var got = WfsUtil.getAttributeLikeFilter(
+                    ['a', 'b'], 'foo'
+                );
+                expect((/ogc:Or/).test(got)).to.be(true);
+                expect((/\/ogc:Or/).test(got)).to.be(true);
+                expect((/ogc:And/).test(got)).to.be(false);
+                expect((/\/ogc:And/).test(got)).to.be(false);
+            });
+
+            it('can be made to combine filters with And', function() {
+                var got = WfsUtil.getAttributeLikeFilter(
+                    ['a', 'b'], 'foo', 'And'
+                );
+                expect((/ogc:Or/).test(got)).to.be(false);
+                expect((/\/ogc:Or/).test(got)).to.be(false);
+                expect((/ogc:And/).test(got)).to.be(true);
+                expect((/\/ogc:And/).test(got)).to.be(true);
+            });
+
+            it('is case insensitive by default', function() {
+                var got = WfsUtil.getAttributeLikeFilter(
+                    ['a', 'b'], 'foo'
+                );
+                expect((/matchCase="false"/).test(got)).to.be(true);
+            });
+
+            it('can be made case sensitive', function() {
+                var got = WfsUtil.getAttributeLikeFilter(
+                    ['a', 'b'], 'foo', 'Or', true
+                );
+                expect((/matchCase="true"/).test(got)).to.be(true);
+            });
+
+            it('uses "ogc" as ogc namespace alias by default', function() {
+                var got = WfsUtil.getAttributeLikeFilter(
+                    ['a', 'b'], 'foo'
+                );
+                expect((/ogc:/).test(got)).to.be(true);
+            });
+
+            it('can be made to use a different ogc namespace alias', function() {
+                var got = WfsUtil.getAttributeLikeFilter(
+                    ['a', 'b'], 'foo', 'Or', false, 'bar'
+                );
+                expect((/bar:/).test(got)).to.be(true);
+            });
+        });
+
         describe('#getOgcFromCqlFilter', function() {
 
             it('can parse >= filters', function() {
@@ -182,6 +245,10 @@ describe('BasiGX.util.WFS', function() {
                 var filter = WfsUtil.getOgcFromCqlFilter('someProp In 7');
                 expect(filter).to.not.be(undefined);
                 expect(filter).to.be.an('string');
+            });
+            it('returns undefined on unexpected operator', function() {
+                var filter = WfsUtil.getOgcFromCqlFilter('someProp <=> 7');
+                expect(filter).to.be(undefined);
             });
 
             it('can parse >= filters without whitespace', function() {
