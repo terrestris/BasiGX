@@ -4,7 +4,7 @@
 
 …pronounced `ˈbeɪsɪks/`
 
-BasiGX is an ExtJS package used to create modern GIS-Applications based on ExtJS 6, GeoExt3 and OpenLayers 3.
+BasiGX is an ExtJS package used to create modern GIS-Applications based on ExtJS 6, GeoExt3 and OpenLayers > 3.
 It consists of multiple components that helps the developer to put together a customized app quickly.
 
 ## Documentation
