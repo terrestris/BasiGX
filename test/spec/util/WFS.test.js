@@ -205,6 +205,10 @@ describe('BasiGX.util.WFS', function() {
         });
 
         describe('#getOgcFromCqlFilter', function() {
+            it('returns undefined on undefined input', function() {
+                var filter = WfsUtil.getOgcFromCqlFilter();
+                expect(filter).to.be(undefined);
+            });
 
             it('can parse >= filters', function() {
                 var filter = WfsUtil.getOgcFromCqlFilter('someProp >= 7');
@@ -316,10 +320,156 @@ describe('BasiGX.util.WFS', function() {
                 expect(filter).to.be.an('string');
             });
             it('can parse = filters with lots of whitespace', function() {
-                var filter = BasiGX.util.WFS
-                    .getOgcFromCqlFilter('    someProp= 7     ');
+                var filter = WfsUtil.getOgcFromCqlFilter('    someProp= 7    ');
                 expect(filter).to.not.be(undefined);
                 expect(filter).to.be.an('string');
+            });
+        });
+
+        describe('#getTimeFilterParts', function() {
+            var rePropIsGTE = /ogc:PropertyIsGreaterThanOrEqualTo/;
+            var rePropIsLTE = /ogc:PropertyIsLessThanOrEqualTo/;
+            var rePropNameA = /<ogc:PropertyName>a<\/ogc:PropertyName>/;
+            var rePropNameB = /<ogc:PropertyName>b<\/ogc:PropertyName>/;
+            var reLiteral1999 = /<ogc:Literal>1999-11-27<\/ogc:Literal>/;
+            var reLiteral2000 = /<ogc:Literal>2000-11-27<\/ogc:Literal>/;
+            var reLiteral2001 = /<ogc:Literal>2001-11-27<\/ogc:Literal>/;
+            var reLiteral2002 = /<ogc:Literal>2002-11-27<\/ogc:Literal>/;
+            var layer = new ol.layer.Tile({
+                source: new ol.source.TileWMS({
+                    params: {
+                        TIME: "1999-11-27/2000-11-27"
+                    }
+                })
+            });
+
+            it('returns filters for a WMS time layer', function() {
+                var filters = WfsUtil.getTimeFilterParts(layer, 'a,b');
+                expect(filters).to.be.an('array');
+                expect(filters.length).to.be(2);
+
+                // check lower boundary
+                expect(rePropIsGTE.test(filters[0])).to.be(true);
+                expect(rePropNameB.test(filters[0])).to.be(true);
+                expect(reLiteral1999.test(filters[0])).to.be(true);
+
+                // check upper boundary
+                expect(rePropIsLTE.test(filters[1])).to.be(true);
+                expect(rePropNameA.test(filters[1])).to.be(true);
+                expect(reLiteral2000.test(filters[1])).to.be(true);
+            });
+
+            it('uses one dimension attribute for both if needed', function() {
+                var filters = WfsUtil.getTimeFilterParts(layer, 'a');
+
+                expect(filters).to.be.an('array');
+                expect(filters.length).to.be(2);
+                // check lower boundary
+                expect(rePropIsGTE.test(filters[0])).to.be(true);
+                expect(rePropNameA.test(filters[0])).to.be(true); // use 'a'
+                expect(reLiteral1999.test(filters[0])).to.be(true);
+
+                // check upper boundary
+                expect(rePropIsLTE.test(filters[1])).to.be(true);
+                expect(rePropNameA.test(filters[1])).to.be(true);
+                expect(reLiteral2000.test(filters[1])).to.be(true);
+            });
+
+            it('returns undefined if no dimension attribute', function() {
+                var filters = WfsUtil.getTimeFilterParts(layer);
+
+                expect(filters).to.be(undefined);
+            });
+
+            it('returns undefined if no TIME & no fallback', function() {
+                var l1 = new ol.layer.Tile({
+                    source: new ol.source.TileWMS({
+                        params: {} // No time param
+                    })
+                });
+                var l2 = new ol.layer.Tile({
+                    source: new ol.source.TileWMS({
+                        // No params at all
+                    })
+                });
+                var l3 = new ol.layer.Tile({
+                    // unexpected source
+                    source: new ol.source.OSM({})
+                });
+
+                var f1 = WfsUtil.getTimeFilterParts(l1);
+                expect(f1).to.be(undefined);
+
+                var f2 = WfsUtil.getTimeFilterParts(l2);
+                expect(f2).to.be(undefined);
+
+                var f3 = WfsUtil.getTimeFilterParts(l3);
+                expect(f3).to.be(undefined);
+            });
+
+            it('can be configured to use a fallback', function() {
+                var l = new ol.layer.Tile({
+                    source: new ol.source.OSM({})
+                });
+                var filters = WfsUtil.getTimeFilterParts(
+                    l, 'a', "2001-11-27/2002-11-27"
+                );
+                expect(filters).to.be.an('array');
+                expect(filters.length).to.be(2);
+
+                // check lower boundary
+                expect(rePropIsGTE.test(filters[0])).to.be(true);
+                expect(rePropNameA.test(filters[0])).to.be(true);
+                expect(reLiteral2001.test(filters[0])).to.be(true);
+
+                // check upper boundary
+                expect(rePropIsLTE.test(filters[1])).to.be(true);
+                expect(rePropNameA.test(filters[1])).to.be(true);
+                expect(reLiteral2002.test(filters[1])).to.be(true);
+            });
+
+            it('can work with single part times (TIME)', function() {
+                var l = new ol.layer.Tile({
+                    source: new ol.source.TileWMS({
+                        params: {
+                            TIME: "1999-11-27"
+                        }
+                    })
+                });
+                var filters = WfsUtil.getTimeFilterParts(l, 'a');
+                expect(filters).to.be.an('array');
+                expect(filters.length).to.be(2);
+
+                // check lower boundary
+                expect(rePropIsGTE.test(filters[0])).to.be(true);
+                expect(rePropNameA.test(filters[0])).to.be(true);
+                expect(reLiteral1999.test(filters[0])).to.be(true);
+
+                // check upper boundary
+                expect(rePropIsLTE.test(filters[1])).to.be(true);
+                expect(rePropNameA.test(filters[1])).to.be(true);
+                expect(reLiteral1999.test(filters[1])).to.be(true);
+            });
+
+            it('can work with single part times (fallback)', function() {
+                var l = new ol.layer.Tile({
+                    source: new ol.source.OSM({})
+                });
+                var filters = WfsUtil.getTimeFilterParts(
+                    l, 'a', "1999-11-27"
+                );
+                expect(filters).to.be.an('array');
+                expect(filters.length).to.be(2);
+
+                // check lower boundary
+                expect(rePropIsGTE.test(filters[0])).to.be(true);
+                expect(rePropNameA.test(filters[0])).to.be(true);
+                expect(reLiteral1999.test(filters[0])).to.be(true);
+
+                // check upper boundary
+                expect(rePropIsLTE.test(filters[1])).to.be(true);
+                expect(rePropNameA.test(filters[1])).to.be(true);
+                expect(reLiteral1999.test(filters[1])).to.be(true);
             });
         });
 
