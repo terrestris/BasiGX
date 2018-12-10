@@ -75,8 +75,6 @@ Ext.define('BasiGX.view.button.SpatialOperatorIntersect', {
         tolerance: 0
     },
 
-    toggleGroup: 'draw',
-
     handler: function() {
         // effectively disable the toggle functionality, behaves like
         // `enableToggle: false` but keeps the ability to be part
