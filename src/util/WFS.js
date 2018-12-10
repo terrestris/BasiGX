@@ -274,12 +274,12 @@ Ext.define('BasiGX.util.WFS', {
          *
          * @param {ol.layer.Base} layer The layer to get the filter for.
          * @param {String} dimensionAttribute The dimensionAttribute
-         *      containing the comma separated start / end keys for WMS TIME
+         *   containing the comma separated start / end keys for WMS TIME
          * @param {String} timeParamFallback The time parameter fallback string
          * @return {Array<String>} An Array containing OGC
-         *     `PropertyIsLessThanOrEqualTo` and `PropertyIsGreatThanOrEqualTo`
-         *     filters regarding to the current TIME taken from the layer
-         *     source and set net definition.
+         *   `PropertyIsLessThanOrEqualTo` and  `PropertyIsGreaterThanOrEqualTo`
+         *   filters regarding to the current TIME taken from the layer source
+         *   and set net definition.
          */
         getTimeFilterParts: function(layer, dimensionAttribute,
             timeParamFallback) {
