@@ -5,5 +5,12 @@ describe('BasiGX.view.button.MergeSelection', function() {
         it('is defined', function() {
             expect(BasiGX.view.button.MergeSelection).to.not.be(undefined);
         });
+
+        it('can be instantiated', function() {
+            var inst = Ext.create('BasiGX.view.button.MergeSelection');
+            expect(inst).to.be.a(BasiGX.view.button.MergeSelection);
+            // teardown
+            inst.destroy();
+        });
     });
 });

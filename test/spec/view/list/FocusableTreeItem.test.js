@@ -11,39 +11,75 @@ describe('BasiGX.view.list.FocusableTreeItem', function() {
         it('can be instantiated', function() {
             var item = Ext.create('BasiGX.view.list.FocusableTreeItem');
             expect(item).to.be.a(BasiGX.view.list.FocusableTreeItem);
+            // teardown
+            item.destroy();
         });
     });
     describe('Usage inside of a treelist', function() {
-        var callback = sinon.spy();
-        var div = document.createElement('div');
-        document.body.appendChild(div);
-        var store = {
-            root: {
-                expanded: true,
-                children: [{
-                    text: 'humpty',
-                    leaf: true
-                }, {
-                    text: 'dumpty',
-                    leaf: true
-                }, {
-                    text: 'foobar',
-                    leaf: true
-                }]
-            }
+        var callback;
+        var treeList;
+        var div;
+        var item;
+        var target;
+
+        /**
+         * Returns a mock-event as it would have been created by an
+         * actual keydown.
+         *
+         * @param {Number} key The keyCode of the pressed key.
+         * @return {Ext.event.Event} The mocked-up event.
+         */
+        var makeEvt = function(key) {
+            return Ext.create('Ext.event.Event', {
+                type: 'keypress',
+                keyCode: key,
+                target: target
+            });
         };
-        var treeList = Ext.create('Ext.list.Tree', {
-            defaults: {
-                // This way our BasiGX class is used
-                xtype: 'focusable-tree-item'
-            },
-            store: store,
-            listeners: {
-                selectionchange: callback
-            },
-            renderTo: div
+
+        beforeEach(function() {
+            callback = sinon.spy();
+            div = document.createElement('div');
+            document.body.appendChild(div);
+            var store = {
+                root: {
+                    expanded: true,
+                    children: [{
+                        text: 'humpty',
+                        leaf: true
+                    }, {
+                        text: 'dumpty',
+                        leaf: true
+                    }, {
+                        text: 'foobar',
+                        leaf: true
+                    }]
+                }
+            };
+            treeList = Ext.create('Ext.list.Tree', {
+                defaults: {
+                    // This way our BasiGX class is used
+                    xtype: 'focusable-tree-item'
+                },
+                store: store,
+                listeners: {
+                    selectionchange: callback
+                },
+                renderTo: div
+            });
+            expect(treeList).to.be.a(Ext.list.Tree);
+
+            item = Ext.ComponentQuery.query('focusable-tree-item')[0];
+            expect(item).to.be.ok();
+            expect(item.onKeyPress).to.be.ok();
+            target = item.el.dom;
         });
-        expect(treeList).to.be.a(Ext.list.Tree);
+
+        afterEach(function() {
+            treeList.destroy();
+            div.parentNode.removeChild(div);
+            callback = null;
+        });
 
         it('renders `<li>` elements with `tabIndex` attribute', function() {
             var selector = 'li.x-focusable-tree-item[tabindex]';
@@ -53,29 +89,6 @@ describe('BasiGX.view.list.FocusableTreeItem', function() {
 
         describe('ensures treelist `selectionchange` event can be triggered',
             function() {
-                var item;
-                var target;
-
-                /**
-                 * Returns a mock-event as it would have been created by an
-                 * actual keydown.
-                 *
-                 * @param {Number} key The keyCode of the pressed key.
-                 * @return {Ext.event.Event} The mocked-up event.
-                 */
-                var makeEvt = function(key) {
-                    return Ext.create('Ext.event.Event', {
-                        type: 'keypress',
-                        keyCode: key,
-                        target: target
-                    });
-                };
-
-                item = Ext.ComponentQuery.query('focusable-tree-item')[0];
-                expect(item).to.be.ok();
-                expect(item.onKeyPress).to.be.ok();
-                target = item.el.dom;
-
                 it('is triggered on ENTER-key', function() {
                     var evtEnter = makeEvt(Ext.event.Event.ENTER);
 

@@ -13,6 +13,14 @@ describe('BasiGX.view.button.History', function() {
         });
     });
 
+    afterEach(function() {
+        btn.destroy();
+        var parent = buttonDiv && buttonDiv.parentNode;
+        if(parent) {
+            parent.removeChild(buttonDiv);
+        }
+    });
+
     describe('Basics', function() {
         it('is defined', function() {
             expect(BasiGX.view.button.History).to.not.be(undefined);
