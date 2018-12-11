@@ -33,7 +33,10 @@ Ext.define('BasiGX.view.button.Base', {
         me.callParent(arguments);
         if (me.setTooltip) {
             var bind = me.config.bind;
-            bind.tooltip = me.getViewModel().get('tooltip');
+            var ttFromViewModel = me.getViewModel().get('tooltip');
+            if (ttFromViewModel) {
+                bind.tooltip = ttFromViewModel;
+            }
             me.setBind(bind);
         }
     }
