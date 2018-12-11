@@ -140,10 +140,33 @@
         teardownTestDiv(createdObjs.mapDiv);
     }
 
+    /**
+     * Tries to call `destroy` on all passed arguments, will throw if this isn't
+     * possible to make tests fail.
+     */
+    function destroyAll() {
+        Ext.each(arguments, function(cmp) {
+            if (cmp && cmp.destroy) {
+                try {
+                    cmp.destroy();
+                } catch (e) {
+                    Ext.Logger.warn("Trouble destroying cmp: " + e);
+                    throw e;
+                }
+            } else {
+                var msg = "Unexpected component passed for destroying: " +
+                    "'" + cmp + "' (" + (typeof cmp) + ")";
+                Ext.Logger.info(msg);
+                throw new Error(msg);
+            }
+        });
+    }
+
     global.TestUtil = {
         setupTestDiv: setupTestDiv,
         teardownTestDiv: teardownTestDiv,
         setupTestObjects: setupTestObjects,
-        teardownTestObjects: teardownTestObjects
+        teardownTestObjects: teardownTestObjects,
+        destroyAll: destroyAll
     };
 }(this));

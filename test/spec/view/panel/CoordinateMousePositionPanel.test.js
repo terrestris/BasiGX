@@ -6,5 +6,12 @@ describe('BasiGX.view.panel.CoordinateMousePositionPanel', function() {
             expect(BasiGX.view.panel.CoordinateMousePositionPanel)
                 .to.not.be(undefined);
         });
+
+        it('can be instantiated', function() {
+            var inst = Ext.create('BasiGX.view.panel.CoordinateMousePositionPanel');
+            expect(inst).to.be.a(BasiGX.view.panel.CoordinateMousePositionPanel);
+            // teardown
+            inst.destroy();
+        });
     });
 });

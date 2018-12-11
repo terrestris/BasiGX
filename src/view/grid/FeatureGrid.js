@@ -43,8 +43,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          */
         layer: null,
         /**
-         * The openlayers map.
-         * @type {ol.Map}
+         * The BasiGX map component.
+         * @type {BasiGX.component.Map}
          */
         map: null,
         /**

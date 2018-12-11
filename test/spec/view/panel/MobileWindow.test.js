@@ -5,5 +5,12 @@ describe('BasiGX.view.panel.MobileWindow', function() {
         it('is defined', function() {
             expect(BasiGX.view.panel.MobileWindow).to.not.be(undefined);
         });
+
+        it('can be instantiated', function() {
+            var inst = Ext.create('BasiGX.view.panel.MobileWindow');
+            expect(inst).to.be.a(BasiGX.view.panel.MobileWindow);
+            // teardown
+            inst.destroy();
+        });
     });
 });
