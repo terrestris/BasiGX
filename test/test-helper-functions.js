@@ -162,11 +162,41 @@
         });
     }
 
+    /**
+     * A stored copy of `Ext.Logger.info`, when logging is turned off
+     * temporarilly via `disableLogging` or `null` when logging is enabled.
+     *
+     * @type {Function}
+     * @private
+     */
+    var originalLoggerLog = null;
+    /**
+     * Disables logging via `Ext.Logger` methods like `info`, `warn` etc.
+     */
+    function disableLogging() {
+        if (originalLoggerLog === null && Ext.Logger.info !== Ext.emptyFn) {
+            originalLoggerLog = Ext.Logger.info;
+            Ext.Logger.info = Ext.emptyFn;
+        }
+    }
+
+    /**
+     * Enables logging via `Ext.Logger` methods like `info`, `warn` etc.
+     */
+    function enableLogging() {
+        if (originalLoggerLog !== null && Ext.Logger.info === Ext.emptyFn) {
+            Ext.Logger.info = originalLoggerLog;
+            originalLoggerLog = null;
+        }
+    }
+
     global.TestUtil = {
         setupTestDiv: setupTestDiv,
         teardownTestDiv: teardownTestDiv,
         setupTestObjects: setupTestObjects,
         teardownTestObjects: teardownTestObjects,
-        destroyAll: destroyAll
+        destroyAll: destroyAll,
+        disableLogging: disableLogging,
+        enableLogging: enableLogging
     };
 }(this));

@@ -3,10 +3,19 @@ Ext.Loader.syncRequire([
 ]);
 
 describe('BasiGX.view.combo.Language', function() {
+    var Cls = BasiGX.view.combo.Language;
     var combo;
+    var originalSuccessFn = Cls.prototype.onLoadAppLocaleSuccess;
+    var silentOnLoadAppLocaleSuccess = function() {
+        TestUtil.disableLogging(); // turn annoying loggs temporarily off
+        originalSuccessFn.apply(this, arguments);
+        TestUtil.enableLogging();
+    };
     beforeEach(function() {
+
         combo = Ext.create('BasiGX.view.combo.Language', {
-            onLoadAppLocaleFailure: function() {}
+            onLoadAppLocaleFailure: function() {},
+            onLoadAppLocaleSuccess: silentOnLoadAppLocaleSuccess
         });
     });
     afterEach(function() {
@@ -45,16 +54,11 @@ describe('BasiGX.view.combo.Language', function() {
         });
     });
     describe('can change the language', function() {
-        var origExtLogInfo = null;
         var htmlElement = null;
         beforeEach(function() {
             htmlElement = document.querySelector('html');
-            origExtLogInfo = Ext.Logger.info;
-            Ext.Logger.info = function() {}; // don't output logs when testing
         });
         afterEach(function() {
-            Ext.Logger.info = origExtLogInfo; // restore old log
-            origExtLogInfo = null;
             htmlElement = null;
         });
         it('changes the lang-attribute of the html-element', function() {
