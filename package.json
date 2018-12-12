@@ -39,7 +39,7 @@
         "test": "karma start --single-run",
         "lint": "eslint -c .eslintrc src/ && eslint -c test/.eslintrc test/",
         "lint:fix": "eslint -c .eslintrc --fix src/ && eslint -c test/.eslintrc --fix test/",
-        "clean-coverage": "rm -rf src_instrumented src_old coverage",
+        "clean-coverage": "rimraf coverage",
         "ci-coverage": "npm run clean-coverage && npm run test && istanbul report --root ./coverage lcovonly && cat ./coverage/lcov.info | coveralls",
         "html-coverage": "npm run clean-coverage && npm run test && istanbul report --root ./coverage html"
     },
@@ -62,6 +62,7 @@
         "karma-sinon": "1.0.5",
         "mocha": "5.2.0",
         "puppeteer": "1.11.0",
+        "rimraf": "2.6.2",
         "sinon": "7.1.1"
     }
 }
