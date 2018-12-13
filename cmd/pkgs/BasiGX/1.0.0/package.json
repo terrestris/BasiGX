@@ -14,11 +14,11 @@
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "0d68436e-c918-4969-9df9-05d63441f921",
-      "created": "2018-12-11T07:36:47Z",
+      "uuid": "60048a1d-a3ff-4459-8f13-25f695f0caa5",
+      "created": "2018-12-13T11:38:49Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "uEY1E7xoiHQ\u003d",
-      "signature": "Q/fvQ02rW6kVGL5pTtVZuCSKX/Md8i4GzfE8O9ZMT+nhSm+Rb+tKgez18v4hybgOXG7BU3lEZzRC3bqgVCm7LDCe1688+FprtaIo047H/RXcm24NJTiQ6wLM9IHAcmH4PjPFH9yKPnijm3VxndWwcpuoTu+UJjHX5vQdS4alp6Mt+krE77LcxcimZ6kYUbGuVDc6yn8L55n6T/q3uUsbtNMlPc7fj2lSj7V10Lobsv3VxNevfhUkeRjms6YvU1y4ZHs0iJWMerEdLOOlnmnJdVMeeJVy9rVHkdXYd799wnpwgDNDJW65irAmpiiT6x39y+g9qaXvnwcCFjJGOTFzDA\u003d\u003d"
+      "nonce": "1F7ijREhUjQ\u003d",
+      "signature": "Rw1i/8Ol7qyjHjpDvHydqsOo1cmN+DeEAfS2DTk9WFrzmKNUvgj3qqp0RKooIYznyRJsyhRm9QFgcWuJPoVimvCte77HoqAfivNybl5/lpd8WUN8j/a2sSmM8LZECzQxOhd/jHJPjtnn6FlR54m/WDGPeYKVHZ1naA/5/gg1IdqAbVv4/XhSq6NW9y4+2LcfgfsUFLtHyN/kal2p5xB5uIwEXdc7aNV0jFEsDavRcwqV2wFztfXvn+iBKHTMv9D6jFich6Iwyatzmnak08ZYt93A5jeU5PL55WEBtC8J3O6VjRGbdcRYemaqB3IFp9Kuo0QVY76Nvd0fYgZUK2DkRA\u003d\u003d"
     }
   ],
   "slicer": {
@@ -47,7 +47,7 @@
     "test": "karma start --single-run",
     "lint": "eslint -c .eslintrc src/ \u0026\u0026 eslint -c test/.eslintrc test/",
     "lint:fix": "eslint -c .eslintrc --fix src/ \u0026\u0026 eslint -c test/.eslintrc --fix test/",
-    "clean-coverage": "rm -rf src_instrumented src_old coverage",
+    "clean-coverage": "rimraf coverage",
     "ci-coverage": "npm run clean-coverage \u0026\u0026 npm run test \u0026\u0026 istanbul report --root ./coverage lcovonly \u0026\u0026 cat ./coverage/lcov.info | coveralls",
     "html-coverage": "npm run clean-coverage \u0026\u0026 npm run test \u0026\u0026 istanbul report --root ./coverage html"
   },
@@ -70,6 +70,7 @@
     "karma-sinon": "1.0.5",
     "mocha": "5.2.0",
     "puppeteer": "1.11.0",
+    "rimraf": "2.6.2",
     "sinon": "7.1.1"
   }
 }
