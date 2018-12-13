@@ -3,28 +3,6 @@
 // and some more.
 (function(global) {
     /**
-     * A helper method that'll return a HTML script tag for loading
-     * an external JavaScript file.
-     *
-     * @param {string} src The `src` of the external JavaScript file.
-     * @return {string} The script tag with given `src`
-     */
-    function getExternalScriptTag(src) {
-        return '<scr' + 'ipt src="' + src + '"></scr' + 'ipt>';
-    }
-
-    /**
-     * A helper method that'll return a HTML script tag for executing
-     * some given JavaScript code.
-     *
-     * @param {string} code The code to execute.
-     * @return {string} The script tag with given content.
-     */
-    function getInlineScriptTag(code) {
-        return '<scr' + 'ipt>' + code + '</scr' + 'ipt>';
-    }
-
-    /**
      * Ensures that the `BasiGX.view.component.Map` is available for
      * instantiation by calling `Ext.Loader.syncRequire` if needed.
      *
@@ -166,8 +144,6 @@
         setupTestDiv: setupTestDiv,
         teardownTestDiv: teardownTestDiv,
         setupTestObjects: setupTestObjects,
-        teardownTestObjects: teardownTestObjects,
-        getExternalScriptTag: getExternalScriptTag,
-        getInlineScriptTag: getInlineScriptTag
+        teardownTestObjects: teardownTestObjects
     };
 }(this));

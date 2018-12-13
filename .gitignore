@@ -10,7 +10,6 @@ sass/example/bootstrap.jsonp
 sass/example/bootstrap.js
 docs/
 coverage/
-src_instrumented/
 
 # node modules
 ##############
