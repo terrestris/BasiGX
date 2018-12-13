@@ -5,5 +5,12 @@ describe('BasiGX.view.panel.Header', function() {
         it('is defined', function() {
             expect(BasiGX.view.panel.Header).to.not.be(undefined);
         });
+
+        it('can be instantiated', function() {
+            var inst = Ext.create('BasiGX.view.panel.Header');
+            expect(inst).to.be.a(BasiGX.view.panel.Header);
+            // teardown
+            inst.destroy();
+        });
     });
 });

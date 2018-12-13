@@ -6,27 +6,20 @@ var commonConfig = require('./karma-conf.common.js');
 module.exports = function(config) {
     commonConfig(config); // apply shared configuration
     config.set({
-        // Preprocess so we can gather coverage
-        preprocessors: {
-            'src/**/*.js': ['coverage']
-        },
-
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['mocha', 'coverage'],
+        reporters: ['dots'],
 
         // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: false,
+        autoWatch: true,
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
-        singleRun: true,
+        singleRun: false,
 
-        // optionally, configure the reporter
-        coverageReporter: {
-            dir: 'coverage/',
-            type: 'json'
-        }
+        // Concurrency level
+        // how many browser should be started simultaneous
+        concurrency: Infinity
     });
 };

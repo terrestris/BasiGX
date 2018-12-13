@@ -5,5 +5,12 @@ describe('BasiGX.view.panel.TtfGlyphInspector', function() {
         it('is defined', function() {
             expect(BasiGX.view.panel.TtfGlyphInspector).to.not.be(undefined);
         });
+
+        it('can be instantiated', function() {
+            var inst = Ext.create('BasiGX.view.panel.TtfGlyphInspector');
+            expect(inst).to.be.a(BasiGX.view.panel.TtfGlyphInspector);
+            // teardown
+            inst.destroy();
+        });
     });
 });
