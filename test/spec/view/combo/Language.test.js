@@ -7,7 +7,7 @@ describe('BasiGX.view.combo.Language', function() {
     var combo;
     var originalSuccessFn = Cls.prototype.onLoadAppLocaleSuccess;
     var silentOnLoadAppLocaleSuccess = function() {
-        TestUtil.disableLogging(); // turn annoying loggs temporarily off
+        TestUtil.disableLogging(); // turn annoying logs temporarily off
         originalSuccessFn.apply(this, arguments);
         TestUtil.enableLogging();
     };
