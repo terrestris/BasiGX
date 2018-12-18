@@ -16,7 +16,7 @@
 /**
  * A measure tool button.
  *
- * Mainly influenced by ol3 examples.
+ * Mainly influenced by ol examples.
  *
  * @class BasiGX.view.button.Measure
  */

@@ -113,7 +113,7 @@ Ext.define('BasiGX.view.button.ZoomToExtent', {
                 targetZoom = null;
             }
 
-            // This if is need for backwards comaptibility to ol3
+            // This if is need for backwards comaptibility to ol
             if (ol.animation) {
                 // Create the animation with their respective start values:
                 var pan = ol.animation.pan({

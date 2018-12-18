@@ -562,7 +562,7 @@ Ext.define('BasiGX.view.container.NominatimSearch', {
         var me = this;
         var olView = me.map.getView();
 
-        // This if is need for backwards comaptibility to ol3
+        // This if is need for backwards comaptibility to ol
         if (ol.animation) {
             var pan = ol.animation.pan({
                 source: olView.getCenter()

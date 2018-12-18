@@ -98,7 +98,7 @@ Ext.define('BasiGX.plugin.Hover', {
      * * `'interaction'` which fires when the select interaction fires the
      *   select event.
      *
-     * Older versions of ol3 did not expose / have the latter event, and
+     * Older versions of ol did not expose / have the latter event, and
      * therefore the 'workaround' with the collection events was chosen.
      *
      * @property {string}
