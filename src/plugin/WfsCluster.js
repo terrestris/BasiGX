@@ -27,9 +27,9 @@ Ext.define('BasiGX.plugin.WfsCluster', {
 
     init: function(cmp) {
         var me = this;
-        this.setCmp(cmp);
+        me.setCmp(cmp);
 
-        me.setUpClusterLayers(this.getCmp());
+        me.setUpClusterLayers(me.getCmp());
     },
 
     setUpClusterLayers: function(mapComponent) {
