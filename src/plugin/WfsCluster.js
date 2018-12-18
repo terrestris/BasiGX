@@ -14,8 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * Plugin used for serversided (GeoServer SQL-View) Clustering. And clientsided
- * (OL3) styling.
+ * Plugin used for server-side clustering (e.g. with a GeoServer SQL-View), and
+ * client-side styling.
  *
  * @class BasiGX.plugin.WfsCluster
  */
