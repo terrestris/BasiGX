@@ -150,6 +150,8 @@ Ext.define('BasiGX.plugin.WfsCluster', {
                             'version=1.0.0&' +
                             'request=GetFeature&' +
                             'typeName=' + featureType + '&' +
+                            // TODO portability, e.g. UMN mapserver might have
+                            // sth. else (if at all…)
                             'outputFormat=application/json&' +
                             'bbox=' + extent.join(',') + '&' +
                             'viewParams=resolutioninm:' + factor + ';' +
