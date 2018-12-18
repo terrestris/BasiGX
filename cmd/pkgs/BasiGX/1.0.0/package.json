@@ -14,11 +14,11 @@
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "8b7bee60-6392-444b-8338-48e9b1fdf3d5",
-      "created": "2018-12-13T12:09:20Z",
+      "uuid": "8167e984-8e6c-44a4-b967-ff7324f9a659",
+      "created": "2018-12-18T08:47:48Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "yDyyTKiNBKA\u003d",
-      "signature": "gBAB/qGz+XOYuTakj4ZIfjE9fuQIY0c3OydvXKUVtxTp2bremyqEsuRarZB0KnlHj4oeYSRuVEAOobzuu3JqYxrrouqg2wsn0Crle9HCPtMM9bIHQU0DONS1Q6Bd+r65dj7YxFJkyu/Oe53yz3rla/zX/ahz9F9QDPkErU5XPC2YtFzEu/VkIaiPEo4nGL46pXIg7dMAA4B4Z1C3TsMxQOwnrYIiCYnIDeha8sngUpxptKKq+gGCiPegQihZWoJCZtekzpx7wKCb3V7CI8EDd/bTYOyoijSZ42uXqKeWRWKCiO4y683SKCuLxKV2GJ7I/rnYG07+Io4Yn5iQ+b6pbA\u003d\u003d"
+      "nonce": "PaHiv14s6qw\u003d",
+      "signature": "evdWakpJ3AzIVeg8gQcptnxywWx5oKc0JOElAWAjk9yApu/eR3RGobvpIHbfwOdO7nYePwPMSBMeNW6gUgJXST7iBKKvu9YclAfG322Y2HEyg06bstjJJCdx3pXgrhOh7AUweprieEBDtrJAU72IJJBsbE//5ZU+5V1l5aVysOTtf8EOiV5jRMo9U+AiwVY/41k6g+LcnnFOz9y6QHh32Cpcfzaq5cR4MZIvd4cRbuS+7ZWeTpuWho/dRWz+0jTs4xtVMT7Fn1liEqe9GtcfPgKY8CLljPK0FZk2imcdOBGNDYavIzDdS1KCkNliy9X02IfjD+NavKymf5WQovt6fw\u003d\u003d"
     }
   ],
   "slicer": {
@@ -61,7 +61,7 @@
     "eslint": "5.10.0",
     "expect.js": "0.3.1",
     "istanbul": "0.4.5",
-    "karma": "3.1.3",
+    "karma": "3.1.4",
     "karma-chrome-launcher": "2.2.0",
     "karma-coverage": "1.1.2",
     "karma-coverage-istanbul-reporter": "2.0.4",
