@@ -710,7 +710,7 @@ Ext.define('BasiGX.view.form.AddWms', {
      */
     getOlLayer: function(capLayer, version, mapProj, url) {
         // This really should not matter, as ol3 can reproject in the client
-        // At least it shoudl be configurable
+        // At least it should be configurable
         if (version === '1.3.0' &&
             Ext.isArray(capLayer.CRS) &&
             !Ext.Array.contains(capLayer.CRS, mapProj)) {
