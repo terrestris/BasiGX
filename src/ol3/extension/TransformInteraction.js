@@ -40,7 +40,7 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
     singleton: true
 }, function() {
     // Once this class is required, this function will execute and create the
-    // extension in the ol3 namespace.
+    // extension in the ol namespace.
 
     // some basic sanity checks
     if (!ol || !ol.interaction || !ol.interaction.Pointer) {

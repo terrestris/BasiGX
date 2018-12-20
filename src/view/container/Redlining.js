@@ -348,7 +348,7 @@ Ext.define('BasiGX.view.container.Redlining', {
             me.setRedlineStyleFunction(state.styleFunction);
         }
 
-        // reapply the styleFn on the layer so that ol3 starts redrawing
+        // reapply the styleFn on the layer so that ol starts redrawing
         // with new styles
         me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
 

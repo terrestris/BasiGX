@@ -43,12 +43,12 @@ Ext.define('BasiGX.util.Layer', {
         NAME_MEASURE_LAYER: 'basigx-measure-layer',
 
         /**
-         * Get an ol3-layer by the given key-value constellation.
+         * Get an ol-layer by the given key-value constellation.
          *
          * @param {String} key - the layers property name
          * @param {String} val - the layers property value for the given key
          * @param {ol.Collection} collection - optional collection to search in
-         * @return {ol.Layer} matchingLayer - the ol3-layer
+         * @return {ol.Layer} matchingLayer - the ol-layer
          */
         getLayerBy: function(key, val, collection) {
             var me = this;
@@ -154,22 +154,22 @@ Ext.define('BasiGX.util.Layer', {
         },
 
         /**
-         * Get an ol3-layer by the given name.
+         * Get an ol-layer by the given name.
          *
          * @param {String} layername - the layers name
          * @param {ol.Collection} collection - optional collection to search in
-         * @return {ol.Layer} matchingLayer - the ol3-layer
+         * @return {ol.Layer} matchingLayer - the ol-layer
          */
         getLayerByName: function(layername, collection) {
             return this.getLayerBy('name', layername, collection);
         },
 
         /**
-         * Gets an ol3-layer by the given featureType.
+         * Gets an ol-layer by the given featureType.
          *
          * @param {String} featureType - the layers featureType
          * @param {ol.Collection} collection - optional collection to search in
-         * @return {ol.Layer} matchingLayer - the ol3-layer
+         * @return {ol.Layer} matchingLayer - the ol-layer
          */
         getLayerByFeatureType: function(featureType, collection) {
             var me = this;

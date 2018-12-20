@@ -20,7 +20,7 @@ Ext.define('BasiGX.util.Controller', {
 
     statics: {
         /**
-         * This method creates methdos on the passed controller, which call
+         * This method creates methods on the passed controller, which call
          * their pendant on the associated view when they are invoked. This was
          * needed for the component.Map (BasiGX). See a controller
          * that works on this class for more details (the bfs-koala project
