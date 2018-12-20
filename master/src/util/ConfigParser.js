@@ -17,7 +17,7 @@
  * ConfigParser Util
  *
  * Parses an application context in JSON Format
- * in order to generate ol3 based layers and map with the given configuration.
+ * in order to generate ol based layers and map with the given configuration.
  * @class BasiGX.util.ConfigParser
  */
 /* Example appContext response from SHOGun 1:
@@ -414,10 +414,10 @@ Ext.define('BasiGX.util.ConfigParser', {
         layerArray: [],
 
         /**
-         * Method creates an ol3 map and its layers based on the given context
+         * Method creates an ol map and its layers based on the given context
          *
          * @param {Object} context The context object
-         * @return {ol.Map} An ol3-map or null if an invalid context was given.
+         * @return {ol.Map} An ol-map or null if an invalid context was given.
          */
         setupMap: function(context) {
             var me = this;
@@ -466,10 +466,10 @@ Ext.define('BasiGX.util.ConfigParser', {
         },
 
         /**
-         * Creates an ol3 layer based on a config object
+         * Creates an ol layer based on a config object
          *
          * @param {Object} layer - the layer object
-         * @return {ol.Layer} - An ol3 layer object
+         * @return {ol.Layer} - An ol layer object
          */
         createLayer: function(layer) {
             var me = this;
@@ -518,7 +518,7 @@ Ext.define('BasiGX.util.ConfigParser', {
                 // as described on https://wiki.intranet.terrestris.de/doku.php
                 // ?id=clustering
                 //
-                // There is currently no way in ol3 to request features on
+                // There is currently no way in ol to request features on
                 // every extent change, so we need to handle it ourselves with
                 // map listeners, which happens in the cluster plugin
                 if (config.type === 'WFSCluster') {
@@ -709,10 +709,10 @@ Ext.define('BasiGX.util.ConfigParser', {
         },
 
         /**
-         * Creates an ol3 layer group.
+         * Creates an ol layer group.
          *
          * @param {Object} node The node which has been identified as group
-         * @return {ol.layer.Group} An ol3-layer group
+         * @return {ol.layer.Group} An ol-layer group
          */
         createFolder: function(node) {
             return new ol.layer.Group({
@@ -754,7 +754,7 @@ Ext.define('BasiGX.util.ConfigParser', {
         },
 
         /**
-         * Method sets up an layer and grouplayer collection for an ol3 map
+         * Method sets up an layer and grouplayer collection for an ol map
          *
          * @param {Object} layerConfig The layerconfig object
          * @param {ol.layer.Group} parent The parent to which we may append
@@ -789,7 +789,7 @@ Ext.define('BasiGX.util.ConfigParser', {
         },
 
         /**
-         * Method sets up an layer and grouplayer collection for an ol3 map
+         * Method sets up an layer and grouplayer collection for an ol map
          * based on an SHOGun application Context
          *
          * @param {Object} treeCfg The layerTreeConfig object

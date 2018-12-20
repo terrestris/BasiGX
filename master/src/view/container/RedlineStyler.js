@@ -628,7 +628,7 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
             renderer.setSymbolizers(style);
         }
 
-        // reapply the styleFn on the layer so that ol3 starts redrawing
+        // reapply the styleFn on the layer so that ol starts redrawing
         // with new styles
         me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
     },
@@ -772,7 +772,7 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
             });
             redliningContainer.setRedlinePointStyle(imageStyle);
             me.setRedlinePointStyle(imageStyle);
-            // reapply the styleFn on the layer so that ol3 starts redrawing
+            // reapply the styleFn on the layer so that ol starts redrawing
             // with new styles
             me.redliningVectorLayer.setStyle(
                 me.redliningVectorLayer.getStyle()
@@ -842,7 +842,7 @@ Ext.define('BasiGX.view.container.RedlineStyler', {
         renderer.setSymbolizers(iconStyle);
         redliningContainer.setRedlinePointStyle(iconStyle);
         me.setRedlinePointStyle(iconStyle);
-        // reapply the styleFn on the layer so that ol3 starts redrawing
+        // reapply the styleFn on the layer so that ol starts redrawing
         // with new styles
         me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
     },

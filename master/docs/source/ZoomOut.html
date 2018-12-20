@@ -65,7 +65,7 @@ Ext.define(&#39;BasiGX.view.button.ZoomOut&#39;, {
     },
 
 <span id='BasiGX-view-button-ZoomOut-property-olMap'>    /**
-</span>     * The OL3 map this button is bounded to
+</span>     * The ol map this button is bound to
      */
     olMap: null,
 
@@ -103,7 +103,7 @@ Ext.define(&#39;BasiGX.view.button.ZoomOut&#39;, {
 
             olView = olMap.getView();
 
-            // This if is need for backwards comaptibility to ol3
+            // This if is need for backwards compatibility to ol
             if (ol.animation) {
                 zoom = ol.animation.zoom({
                     resolution: olView.getResolution(),

@@ -60,12 +60,12 @@ Ext.define(&#39;BasiGX.util.Layer&#39;, {
         NAME_MEASURE_LAYER: &#39;basigx-measure-layer&#39;,
 
 <span id='BasiGX-util-Layer-static-method-getLayerBy'>        /**
-</span>         * Get an ol3-layer by the given key-value constellation.
+</span>         * Get an ol-layer by the given key-value constellation.
          *
          * @param {String} key - the layers property name
          * @param {String} val - the layers property value for the given key
          * @param {ol.Collection} collection - optional collection to search in
-         * @return {ol.Layer} matchingLayer - the ol3-layer
+         * @return {ol.Layer} matchingLayer - the ol-layer
          */
         getLayerBy: function(key, val, collection) {
             var me = this;
@@ -171,22 +171,22 @@ Ext.define(&#39;BasiGX.util.Layer&#39;, {
         },
 
 <span id='BasiGX-util-Layer-static-method-getLayerByName'>        /**
-</span>         * Get an ol3-layer by the given name.
+</span>         * Get an ol-layer by the given name.
          *
          * @param {String} layername - the layers name
          * @param {ol.Collection} collection - optional collection to search in
-         * @return {ol.Layer} matchingLayer - the ol3-layer
+         * @return {ol.Layer} matchingLayer - the ol-layer
          */
         getLayerByName: function(layername, collection) {
             return this.getLayerBy(&#39;name&#39;, layername, collection);
         },
 
 <span id='BasiGX-util-Layer-static-method-getLayerByFeatureType'>        /**
-</span>         * Gets an ol3-layer by the given featureType.
+</span>         * Gets an ol-layer by the given featureType.
          *
          * @param {String} featureType - the layers featureType
          * @param {ol.Collection} collection - optional collection to search in
-         * @return {ol.Layer} matchingLayer - the ol3-layer
+         * @return {ol.Layer} matchingLayer - the ol-layer
          */
         getLayerByFeatureType: function(featureType, collection) {
             var me = this;

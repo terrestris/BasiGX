@@ -196,7 +196,7 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchGazetteerGrid&#39;, {
         var feature = format.readFeature(wkt);
         var geom = feature.getGeometry().transform(&#39;EPSG:4326&#39;, projection);
 
-        // This if is need for backwards comaptibility to ol3
+        // This if is need for backwards compatibility to ol
         if (ol.animation) {
             olView.fit(geom, map.getSize());
         } else {

@@ -31,8 +31,8 @@
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
 <span id='BasiGX-plugin-WfsCluster'>/**
-</span> * Plugin used for serversided (GeoServer SQL-View) Clustering. And clientsided
- * (OL3) styling.
+</span> * Plugin used for server-side clustering (e.g. with a GeoServer SQL-View), and
+ * client-side styling.
  *
  * @class BasiGX.plugin.WfsCluster
  */
@@ -44,9 +44,9 @@ Ext.define(&#39;BasiGX.plugin.WfsCluster&#39;, {
 </span>
 <span id='BasiGX-plugin-WfsCluster-method-init'>    init: function(cmp) {
 </span>        var me = this;
-        this.setCmp(cmp);
+        me.setCmp(cmp);
 
-        me.setUpClusterLayers(this.getCmp());
+        me.setUpClusterLayers(me.getCmp());
     },
 
 <span id='BasiGX-plugin-WfsCluster-method-setUpClusterLayers'>    setUpClusterLayers: function(mapComponent) {
@@ -167,6 +167,8 @@ Ext.define(&#39;BasiGX.plugin.WfsCluster&#39;, {
                             &#39;version=1.0.0&amp;&#39; +
                             &#39;request=GetFeature&amp;&#39; +
                             &#39;typeName=&#39; + featureType + &#39;&amp;&#39; +
+                            // TODO portability, e.g. UMN mapserver might have
+                            // sth. else (if at all…)
                             &#39;outputFormat=application/json&amp;&#39; +
                             &#39;bbox=&#39; + extent.join(&#39;,&#39;) + &#39;&amp;&#39; +
                             &#39;viewParams=resolutioninm:&#39; + factor + &#39;;&#39; +

@@ -16,7 +16,7 @@
 /**
  * Map Component
  *
- * Setting up a ol3-map by calling the config parser with the given appContext.
+ * Setting up a ol-map by calling the config parser with the given appContext.
  * If no appContext is found, a default one will be loaded.
  * Class usually instanciated in map container.
  *

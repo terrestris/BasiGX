@@ -71,7 +71,7 @@ Ext.define('BasiGX.util.Animate', {
                 var flashStyle;
 
                 if (vectorContext.setStyle && vectorContext.drawGeometry) {
-                    // for ol3 versions from v3.15.0
+                    // for ol versions from v3.15.0
                     var isPoint = flashGeom instanceof ol.geom.Point ||
                         flashGeom instanceof ol.geom.MultiPoint;
                     var isLine = flashGeom instanceof ol.geom.LineString ||
@@ -120,7 +120,7 @@ Ext.define('BasiGX.util.Animate', {
                     vectorContext.setStyle(flashStyle);
                     vectorContext.drawGeometry(flashGeom, null);
                 } else {
-                    // for ol3 versions older v3.15.0
+                    // for ol versions older v3.15.0
                     flashStyle = new ol.style.Circle({
                         radius: radius,
                         snapToPixel: false,
@@ -138,7 +138,7 @@ Ext.define('BasiGX.util.Animate', {
                     ol.Observable.unByKey(listenerKey);
                     return;
                 }
-                // tell OL3 to continue postcompose animation
+                // tell ol to continue postcompose animation
                 frameState.animate = true;
             }
             listenerKey = map.on('postcompose', animate);
@@ -251,7 +251,7 @@ Ext.define('BasiGX.util.Animate', {
                     feature.set('__animating', undefined);
                     return;
                 }
-                // tell OL3 to continue postcompose animation
+                // tell OL to continue postcompose animation
                 frameState.animate = true;
             }
             listenerKey = map.on('postcompose', animate);
@@ -407,7 +407,7 @@ Ext.define('BasiGX.util.Animate', {
                     feature.set('__animating', undefined);
                     return;
                 }
-                // tell OL3 to continue postcompose animation
+                // tell OL to continue postcompose animation
                 frameState.animate = true;
             }
             listenerKey = map.on('postcompose', animate);
@@ -479,7 +479,7 @@ Ext.define('BasiGX.util.Animate', {
                     doneFn(featureToMove);
                     return;
                 }
-                // tell OL3 to continue postcompose animation
+                // tell OL to continue postcompose animation
                 frameState.animate = true;
 
                 actualFrames++;

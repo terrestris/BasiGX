@@ -726,7 +726,7 @@ Ext.define(&#39;BasiGX.view.form.AddWms&#39;, {
      * @return {ol.layer.Tile} The created layer or `undefined`.
      */
     getOlLayer: function(capLayer, version, mapProj, url) {
-        // This really should not matter, as ol3 can reproject in the client
+        // This really should not matter, as ol can reproject in the client
         // At least it should be configurable
         if (version === &#39;1.3.0&#39; &amp;&amp;
             Ext.isArray(capLayer.CRS) &amp;&amp;
