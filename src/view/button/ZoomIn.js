@@ -45,7 +45,7 @@ Ext.define('BasiGX.view.button.ZoomIn', {
     },
 
     /**
-     * The ol map this button is bounded to
+     * The ol map this button is bound to
      */
     olMap: null,
 
