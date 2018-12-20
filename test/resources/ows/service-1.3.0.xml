@@ -1,0 +1,229 @@
+<?xml version="1.0" ?>
+<WMS_Capabilities xmlns="http://www.opengis.net/wms" xmlns:sld="http://www.opengis.net/sld" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.3.0" xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd">
+<Service>
+  <Name>WMS</Name>
+  <Title>OpenStreetMap WMS</Title>
+  <Abstract>OpenStreetMap WMS, bereitgestellt durch terrestris GmbH und Co. KG. Beschleunigt mit MapProxy (http://mapproxy.org/)</Abstract>
+  <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.terrestris.de"/>
+  <ContactInformation>
+      <ContactPersonPrimary>
+        <ContactPerson>Johannes Weskamm</ContactPerson>
+        <ContactOrganization>terrestris GmbH und Co. KG</ContactOrganization>
+      </ContactPersonPrimary>
+      <ContactPosition>Technical Director</ContactPosition>
+      <ContactAddress>
+        <AddressType>postal</AddressType>
+        <Address>Kölnstr. 99</Address>
+        <City>Bonn</City>
+        <StateOrProvince></StateOrProvince>
+        <PostCode>53111</PostCode>
+        <Country>Germany</Country>
+      </ContactAddress>
+      <ContactVoiceTelephone>+49(0)228 962 899 51</ContactVoiceTelephone>
+      <ContactFacsimileTelephone>+49(0)228 962 899 57</ContactFacsimileTelephone>
+      <ContactElectronicMailAddress>info@terrestris.de</ContactElectronicMailAddress>
+  </ContactInformation>
+    <Fees>None</Fees>
+    <AccessConstraints>(c) OpenStreetMap contributors (http://www.openstreetmap.org/copyright) (c) OpenStreetMap Data (http://openstreetmapdata.com) (c) Natural Earth Data (http://www.naturalearthdata.com) (c) ASTER GDEM 30m (https://asterweb.jpl.nasa.gov/gdem.asp) (c) SRTM 450m by ViewfinderPanoramas (http://viewfinderpanoramas.org/) (c) Great Lakes Bathymetry by NGDC (http://www.ngdc.noaa.gov/mgg/greatlakes/) (c) SRTM 30m by NASA EOSDIS Land Processes Distributed Active Archive Center (LP DAAC, https://lpdaac.usgs.gov/)</AccessConstraints>
+</Service>
+<Capability>
+  <Request>
+    <GetCapabilities>
+      <Format>text/xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xlink:href="http://ows.terrestris.de/osm/service?"/></Get>
+        </HTTP>
+      </DCPType>
+    </GetCapabilities>
+    <GetMap>
+      <Format>image/jpeg</Format>
+      <Format>image/png</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xlink:href="http://ows.terrestris.de/osm/service?"/></Get>
+        </HTTP>
+      </DCPType>
+    </GetMap>
+    <GetFeatureInfo>
+      <Format>text/plain</Format>
+      <Format>text/html</Format>
+      <Format>text/xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xlink:href="http://ows.terrestris.de/osm/service?"/></Get>
+        </HTTP>
+      </DCPType>
+    </GetFeatureInfo>
+    <sld:GetLegendGraphic>
+      <Format>image/jpeg</Format>
+      <Format>image/png</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xlink:href="http://ows.terrestris.de/osm/service?"/></Get>
+        </HTTP>
+      </DCPType>
+    </sld:GetLegendGraphic>
+  </Request>
+  <Exception>
+    <Format>XML</Format>
+    <Format>INIMAGE</Format>
+    <Format>BLANK</Format>
+  </Exception>
+  <Layer queryable="1">
+    <Title>OpenStreetMap WMS</Title>
+    <CRS>EPSG:900913</CRS>
+    <CRS>EPSG:3857</CRS>
+    <CRS>EPSG:25832</CRS>
+    <CRS>EPSG:25833</CRS>
+    <CRS>EPSG:29192</CRS>
+    <CRS>EPSG:29193</CRS>
+    <CRS>EPSG:31466</CRS>
+    <CRS>EPSG:31467</CRS>
+    <CRS>EPSG:31468</CRS>
+    <CRS>EPSG:32648</CRS>
+    <CRS>EPSG:4326</CRS>
+    <CRS>EPSG:4674</CRS>
+    <CRS>EPSG:3068</CRS>
+    <CRS>EPSG:3034</CRS>
+    <CRS>EPSG:3035</CRS>
+    <CRS>EPSG:2100</CRS>
+    <CRS>EPSG:31463</CRS>
+    <CRS>EPSG:4258</CRS>
+    <CRS>EPSG:4839</CRS>
+    <CRS>EPSG:2180</CRS>
+    <CRS>EPSG:21781</CRS>
+    <CRS>EPSG:2056</CRS>
+    <EX_GeographicBoundingBox>
+      <westBoundLongitude>-180</westBoundLongitude>
+      <eastBoundLongitude>180</eastBoundLongitude>
+      <southBoundLatitude>-88</southBoundLatitude>
+      <northBoundLatitude>88</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="CRS:84" minx="-180" miny="-88" maxx="180" maxy="88" />
+    <BoundingBox CRS="EPSG:900913" minx="-20037508.3428" miny="-25819498.5135" maxx="20037508.3428" maxy="25819498.5135" />
+    <BoundingBox CRS="EPSG:4326" minx="-88" miny="-180" maxx="88" maxy="180" />
+    <BoundingBox CRS="EPSG:3857" minx="-20037508.3428" miny="-25819498.5135" maxx="20037508.3428" maxy="25819498.5135" />
+    <Layer queryable="1">
+      <Name>OSM-WMS</Name>
+      <Title>OpenStreetMap WMS - by terrestris</Title>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-180</westBoundLongitude>
+        <eastBoundLongitude>180</eastBoundLongitude>
+        <southBoundLatitude>-88</southBoundLatitude>
+        <northBoundLatitude>88</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="-180" miny="-88" maxx="180" maxy="88" />
+      <BoundingBox CRS="EPSG:900913" minx="-20037508.3428" miny="-25819498.5135" maxx="20037508.3428" maxy="25819498.5135" />
+      <BoundingBox CRS="EPSG:4326" minx="-88" miny="-180" maxx="88" maxy="180" />
+      <BoundingBox CRS="EPSG:3857" minx="-20037508.3428" miny="-25819498.5135" maxx="20037508.3428" maxy="25819498.5135" />
+      <Style>
+        <Name>default</Name>
+        <Title>default</Title>
+        <LegendURL width="155" height="344">
+          <Format>image/png</Format>
+          <OnlineResource xlink:type="simple" xlink:href="http://ows.terrestris.de/osm/service?styles=&amp;layer=OSM-WMS&amp;service=WMS&amp;format=image%2Fpng&amp;sld_version=1.1.0&amp;request=GetLegendGraphic&amp;version=1.1.1" />
+        </LegendURL>
+      </Style>
+    </Layer>
+    <Layer queryable="1">
+      <Name>OSM-Overlay-WMS</Name>
+      <Title>OSM Overlay WMS - by terrestris</Title>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-180</westBoundLongitude>
+        <eastBoundLongitude>180</eastBoundLongitude>
+        <southBoundLatitude>-88</southBoundLatitude>
+        <northBoundLatitude>88</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="-180" miny="-88" maxx="180" maxy="88" />
+      <BoundingBox CRS="EPSG:900913" minx="-20037508.3428" miny="-25819498.5135" maxx="20037508.3428" maxy="25819498.5135" />
+      <BoundingBox CRS="EPSG:4326" minx="-88" miny="-180" maxx="88" maxy="180" />
+      <BoundingBox CRS="EPSG:3857" minx="-20037508.3428" miny="-25819498.5135" maxx="20037508.3428" maxy="25819498.5135" />
+    </Layer>
+    <Layer queryable="1">
+      <Name>TOPO-WMS</Name>
+      <Title>Topographic WMS - by terrestris</Title>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-180</westBoundLongitude>
+        <eastBoundLongitude>180</eastBoundLongitude>
+        <southBoundLatitude>-88</southBoundLatitude>
+        <northBoundLatitude>88</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="-180" miny="-88" maxx="180" maxy="88" />
+      <BoundingBox CRS="EPSG:900913" minx="-20037508.3428" miny="-25819498.5135" maxx="20037508.3428" maxy="25819498.5135" />
+      <BoundingBox CRS="EPSG:4326" minx="-88" miny="-180" maxx="88" maxy="180" />
+      <BoundingBox CRS="EPSG:3857" minx="-20037508.3428" miny="-25819498.5135" maxx="20037508.3428" maxy="25819498.5135" />
+    </Layer>
+    <Layer queryable="1">
+      <Name>TOPO-OSM-WMS</Name>
+      <Title>Topographic OSM WMS - by terrestris</Title>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-180</westBoundLongitude>
+        <eastBoundLongitude>180</eastBoundLongitude>
+        <southBoundLatitude>-88</southBoundLatitude>
+        <northBoundLatitude>88</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="-180" miny="-88" maxx="180" maxy="88" />
+      <BoundingBox CRS="EPSG:900913" minx="-20037508.3428" miny="-25819498.5135" maxx="20037508.3428" maxy="25819498.5135" />
+      <BoundingBox CRS="EPSG:4326" minx="-88" miny="-180" maxx="88" maxy="180" />
+      <BoundingBox CRS="EPSG:3857" minx="-20037508.3428" miny="-25819498.5135" maxx="20037508.3428" maxy="25819498.5135" />
+    </Layer>
+    <Layer>
+      <Name>SRTM30-Hillshade</Name>
+      <Title>SRTM30 Hillshade - by terrestris</Title>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-180</westBoundLongitude>
+        <eastBoundLongitude>180</eastBoundLongitude>
+        <southBoundLatitude>-56</southBoundLatitude>
+        <northBoundLatitude>60</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="-180" miny="-56" maxx="180" maxy="60" />
+      <BoundingBox CRS="EPSG:900913" minx="-20037508.3428" miny="-7558415.65608" maxx="20037508.3428" maxy="8399737.88982" />
+      <BoundingBox CRS="EPSG:4326" minx="-56" miny="-180" maxx="60" maxy="180" />
+      <BoundingBox CRS="EPSG:3857" minx="-20037508.3428" miny="-7558415.65608" maxx="20037508.3428" maxy="8399737.88982" />
+    </Layer>
+    <Layer>
+      <Name>SRTM30-Colored</Name>
+      <Title>SRTM30 Colored - by terrestris</Title>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-180</westBoundLongitude>
+        <eastBoundLongitude>180</eastBoundLongitude>
+        <southBoundLatitude>-56</southBoundLatitude>
+        <northBoundLatitude>60</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="-180" miny="-56" maxx="180" maxy="60" />
+      <BoundingBox CRS="EPSG:900913" minx="-20037508.3428" miny="-7558415.65608" maxx="20037508.3428" maxy="8399737.88982" />
+      <BoundingBox CRS="EPSG:4326" minx="-56" miny="-180" maxx="60" maxy="180" />
+      <BoundingBox CRS="EPSG:3857" minx="-20037508.3428" miny="-7558415.65608" maxx="20037508.3428" maxy="8399737.88982" />
+    </Layer>
+    <Layer>
+      <Name>SRTM30-Colored-Hillshade</Name>
+      <Title>SRTM30 Colored Hillshade - by terrestris</Title>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-180</westBoundLongitude>
+        <eastBoundLongitude>180</eastBoundLongitude>
+        <southBoundLatitude>-56</southBoundLatitude>
+        <northBoundLatitude>60</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="-180" miny="-56" maxx="180" maxy="60" />
+      <BoundingBox CRS="EPSG:900913" minx="-20037508.3428" miny="-7558415.65608" maxx="20037508.3428" maxy="8399737.88982" />
+      <BoundingBox CRS="EPSG:4326" minx="-56" miny="-180" maxx="60" maxy="180" />
+      <BoundingBox CRS="EPSG:3857" minx="-20037508.3428" miny="-7558415.65608" maxx="20037508.3428" maxy="8399737.88982" />
+    </Layer>
+    <Layer>
+      <Name>SRTM30-Contour</Name>
+      <Title>SRTM30 Contour Lines - by terrestris</Title>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-180</westBoundLongitude>
+        <eastBoundLongitude>180</eastBoundLongitude>
+        <southBoundLatitude>-56</southBoundLatitude>
+        <northBoundLatitude>60</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="-180" miny="-56" maxx="180" maxy="60" />
+      <BoundingBox CRS="EPSG:900913" minx="-20037508.3428" miny="-7558415.65608" maxx="20037508.3428" maxy="8399737.88982" />
+      <BoundingBox CRS="EPSG:4326" minx="-56" miny="-180" maxx="60" maxy="180" />
+      <BoundingBox CRS="EPSG:3857" minx="-20037508.3428" miny="-7558415.65608" maxx="20037508.3428" maxy="8399737.88982" />
+    </Layer>
+  </Layer>
+</Capability>
+</WMS_Capabilities>
