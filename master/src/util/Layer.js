@@ -45,8 +45,8 @@ Ext.define('BasiGX.util.Layer', {
         /**
          * Get an ol-layer by the given key-value constellation.
          *
-         * @param {String} key - the layers property name
-         * @param {String} val - the layers property value for the given key
+         * @param {String} key - the layer's property name
+         * @param {String} val - the layer's property value for the given key
          * @param {ol.Collection} collection - optional collection to search in
          * @return {ol.Layer} matchingLayer - the ol-layer
          */
@@ -240,7 +240,7 @@ Ext.define('BasiGX.util.Layer', {
          *
          * @param {ol.layerCollection|ol.Map} collection Either a collection
          *     of layers or an `OpenLayers.Map`.
-         * @return {Array} An array of the visible Layers.
+         * @return {Array} An array of the visible layers.
          */
         getVisibleLayers: function(collection) {
             var me = this;
