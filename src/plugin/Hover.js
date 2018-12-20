@@ -134,7 +134,7 @@ Ext.define('BasiGX.plugin.Hover', {
     },
 
     /**
-     * Called during the initialisation phase, this methdo ensures that the
+     * Called during the initialisation phase, this method ensures that the
      * configuration option #selectEventOrigin has a valid value; e.g. either
      * is `'collection'` (historical default) or `'interaction'`.
      */
