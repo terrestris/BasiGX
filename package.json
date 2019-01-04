@@ -63,7 +63,7 @@
         "karma-sinon": "1.0.5",
         "mocha": "5.2.0",
         "puppeteer": "1.11.0",
-        "rimraf": "2.6.2",
+        "rimraf": "2.6.3",
         "sinon": "7.1.1"
     }
 }
