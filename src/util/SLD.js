@@ -341,7 +341,7 @@ Ext.define('BasiGX.util.SLD', {
          *
          * @return {Object} sldObject The updated SLD object.
          * @param {String} ruleName The name of the rule that should be updated.
-         * @param {Object} sldObj The sldObj to update, containing the rule.
+         * @param {Object} sldObject The sldObj to update, containing the rule.
          */
         removeTextSymbolizerFromRule: function(ruleName, sldObject) {
             var rules = BasiGX.util.SLD.rulesFromSldObject(sldObject);
