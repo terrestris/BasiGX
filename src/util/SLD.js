@@ -337,7 +337,7 @@ Ext.define('BasiGX.util.SLD', {
         },
 
         /**
-         * Method removes the point symbolizer for a given rule and sldObject
+         * Method removes the text symbolizer for a given rule and sldObject
          *
          * @return {Object} sldObject The updated SLD object.
          * @param {String} ruleName The name of the rule that should be updated.
