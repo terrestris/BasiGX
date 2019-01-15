@@ -1095,6 +1095,10 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         });
         var fs = {
             xtype: 'fieldset',
+            checkboxToggle: true,
+            checkbox: {
+                listeners: listenerConfig
+            },
             height: '100%',
             bind: {
                 title: '{textStyleFieldSetTitle}'
