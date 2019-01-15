@@ -337,6 +337,39 @@ Ext.define('BasiGX.util.SLD', {
         },
 
         /**
+         * Method removes the text symbolizer for a given rule and sldObject
+         *
+         * @return {Object} sldObject The updated SLD object.
+         * @param {String} ruleName The name of the rule that should be updated.
+         * @param {Object} sldObject The sldObj to update, containing the rule.
+         */
+        removeTextSymbolizerFromRule: function(ruleName, sldObject) {
+            var rules = BasiGX.util.SLD.rulesFromSldObject(sldObject);
+            if (!rules) {
+                rules = [];
+            }
+            var ruleMatchIdx;
+            Ext.each(rules, function(currentRule, index) {
+                if (currentRule.name === ruleName) {
+                    ruleMatchIdx = index;
+                    return false;
+                }
+            });
+            if (Ext.isNumeric(ruleMatchIdx)) {
+                // remove the existing TextSymbolizer
+                var symbolizerIndex;
+                Ext.each(rules[ruleMatchIdx].symbolizer, function(s, idx) {
+                    if (s.value.TYPE_NAME === 'SLD_1_0_0.TextSymbolizer') {
+                        symbolizerIndex = idx;
+                        return false;
+                    }
+                });
+                rules[ruleMatchIdx].symbolizer.splice(symbolizerIndex, 1);
+            }
+            return sldObject;
+        },
+
+        /**
          * Method converts a stroke object in Jsonix syntax into a simplified
          * object
          *
