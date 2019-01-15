@@ -1556,66 +1556,72 @@ Ext.define('BasiGX.view.container.SLDStyler', {
         }
 
         if (textFs) {
-            symbolizerObj.labelAttribute = textFs.down(
-                'combo[name=labelattribute]').getValue() ||
-                BasiGX.util.SLD.DEFAULT_LABEL_ATTRIBUTE;
-            symbolizerObj.fontSize = textFs.down('numberfield[name=fontsize]')
-                .getValue().toString() || BasiGX.util.SLD.DEFAULT_FONTSIZE;
-            symbolizerObj.fontFamily = textFs.down('combo[name=fontfamily]')
-                .getValue() || BasiGX.util.SLD.DEFAULT_FONT_FAMILY;
-            symbolizerObj.fontWeight = textFs.down('combo[name=fontweight]')
-                .getValue() || BasiGX.util.SLD.DEFAULT_FONT_WEIGHT;
-            symbolizerObj.fontStyle = textFs.down('combo[name=fontstyle]')
-                .getValue() || BasiGX.util.SLD.DEFAULT_FONT_STYLE;
-            symbolizerObj.fontFillColor = BasiGX.util.SLD.
-                DEFAULT_FONT_FILLCOLOR;
-            symbolizerObj.fontFillOpacity = 0;
+            if (textFs.checkboxCmp.checked) { 
+                // Set text symbolizer only if the checkbox "text style" is checked
+                symbolizerObj.labelAttribute = textFs.down(
+                    'combo[name=labelattribute]').getValue() ||
+                    BasiGX.util.SLD.DEFAULT_LABEL_ATTRIBUTE;
+                symbolizerObj.fontSize = textFs.down('numberfield[name=fontsize]')
+                    .getValue().toString() || BasiGX.util.SLD.DEFAULT_FONTSIZE;
+                symbolizerObj.fontFamily = textFs.down('combo[name=fontfamily]')
+                    .getValue() || BasiGX.util.SLD.DEFAULT_FONT_FAMILY;
+                symbolizerObj.fontWeight = textFs.down('combo[name=fontweight]')
+                    .getValue() || BasiGX.util.SLD.DEFAULT_FONT_WEIGHT;
+                symbolizerObj.fontStyle = textFs.down('combo[name=fontstyle]')
+                    .getValue() || BasiGX.util.SLD.DEFAULT_FONT_STYLE;
+                symbolizerObj.fontFillColor = BasiGX.util.SLD.
+                    DEFAULT_FONT_FILLCOLOR;
+                symbolizerObj.fontFillOpacity = 0;
+    
+                var textFillFs = textFs.down('colorbutton[name=fill]');
+                if (textFillFs) {
+                    symbolizerObj.fontFillColor = '#' + textFillFs.getValue().
+                        substring(0, 6);
+                    symbolizerObj.fontFillOpacity = BasiGX.util.Color.rgbaAsArray(
+                        BasiGX.util.Color.hex8ToRgba(textFillFs.getValue()))[4];
+                }
+    
+                if (this.getMode() === 'line') {
+                    symbolizerObj.perpendicularOffset = textFs.down(
+                        'numberfield[name=perpendicularoffset]')
+                        .getValue().toString() || BasiGX.util.SLD.
+                            DEFAULT_LABEL_PERPENDICULAROFFSET;
+                    symbolizerObj.labelFollowLine = textFs.down(
+                        'checkbox[name=followlinelabel]')
+                        .getValue().toString() || BasiGX.util.SLD.
+                            DEFAULT_LABEL_FOLLOW_LINE;
+                } else {
+                    symbolizerObj.labelAnchorPointX = textFs.down(
+                        'numberfield[name=labelanchorpointx]')
+                        .getValue().toString() || BasiGX.util.SLD.
+                            DEFAULT_LABEL_ANCHORPOINTX;
+                    symbolizerObj.labelAnchorPointY = textFs.down(
+                        'numberfield[name=labelanchorpointy]')
+                        .getValue().toString() || BasiGX.util.SLD.
+                            DEFAULT_LABEL_ANCHORPOINTY;
+                    symbolizerObj.labelDisplacementX = textFs.down(
+                        'numberfield[name=labeldisplacementx]')
+                        .getValue().toString() || BasiGX.util.SLD.
+                            DEFAULT_LABEL_DISPLACEMENTX;
+                    symbolizerObj.labelDisplacementY = textFs.down(
+                        'numberfield[name=labeldisplacementy]')
+                        .getValue().toString() || BasiGX.util.SLD.
+                            DEFAULT_LABEL_DISPLACEMENTY;
+                    symbolizerObj.labelRotation = textFs.down(
+                        'numberfield[name=labelrotation]')
+                        .getValue().toString() || BasiGX.util.SLD.
+                            DEFAULT_LABEL_ROTATION;
+                }
 
-            var textFillFs = textFs.down('colorbutton[name=fill]');
-            if (textFillFs) {
-                symbolizerObj.fontFillColor = '#' + textFillFs.getValue().
-                    substring(0, 6);
-                symbolizerObj.fontFillOpacity = BasiGX.util.Color.rgbaAsArray(
-                    BasiGX.util.Color.hex8ToRgba(textFillFs.getValue()))[4];
-            }
-
-            if (this.getMode() === 'line') {
-                symbolizerObj.perpendicularOffset = textFs.down(
-                    'numberfield[name=perpendicularoffset]')
-                    .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_PERPENDICULAROFFSET;
-                symbolizerObj.labelFollowLine = textFs.down(
-                    'checkbox[name=followlinelabel]')
-                    .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_FOLLOW_LINE;
+                sldObj = BasiGX.util.SLD.setTextSymbolizerInRule(
+                    symbolizerObj,
+                    me.getRuleName(),
+                    sldObj
+                );
             } else {
-                symbolizerObj.labelAnchorPointX = textFs.down(
-                    'numberfield[name=labelanchorpointx]')
-                    .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_ANCHORPOINTX;
-                symbolizerObj.labelAnchorPointY = textFs.down(
-                    'numberfield[name=labelanchorpointy]')
-                    .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_ANCHORPOINTY;
-                symbolizerObj.labelDisplacementX = textFs.down(
-                    'numberfield[name=labeldisplacementx]')
-                    .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_DISPLACEMENTX;
-                symbolizerObj.labelDisplacementY = textFs.down(
-                    'numberfield[name=labeldisplacementy]')
-                    .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_DISPLACEMENTY;
-                symbolizerObj.labelRotation = textFs.down(
-                    'numberfield[name=labelrotation]')
-                    .getValue().toString() || BasiGX.util.SLD.
-                    DEFAULT_LABEL_ROTATION;
+                // If the checkbox "text style" is unchecked, remove the text symbolizer from sldObj
+                sldObj = BasiGX.util.SLD.removeTextSymbolizerFromRule(me.getRuleName(), sldObj);
             }
-
-            sldObj = BasiGX.util.SLD.setTextSymbolizerInRule(
-                symbolizerObj,
-                me.getRuleName(),
-                sldObj
-            );
         }
 
         var sld = BasiGX.util.SLD.toSldString(sldObj);
