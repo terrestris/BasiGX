@@ -47,6 +47,32 @@ describe('BasiGX.util.SLD', function() {
                     '</sld:Stroke>' +
                   '</sld:PolygonSymbolizer>' +
                 '</sld:Rule>' +
+                '<sld:Rule>' +
+                  '<sld:Name>rule2</sld:Name>' +
+                  '<sld:TextSymbolizer>' +
+                  '<sld:Label>' +
+                  '<ogc:PropertyName>ao_key</ogc:PropertyName>' +
+                  '</sld:Label>' +
+                    '<sld:Font>' +
+                      '<sld:CssParameter name="font-family">SansSerif</sld:CssParameter>' +
+                      '<sld:CssParameter name="font-size">12</sld:CssParameter>' +
+                      '<sld:CssParameter name="font-style">normal</sld:CssParameter>' +
+                      '<sld:CssParameter name="font-weight">normal</sld:CssParameter>' +
+                    '</sld:Font>' +
+                  '</sld:TextSymbolizer>' +
+                  '<sld:PointSymbolizer>' +
+                    '<sld:Graphic>' +
+                      '<sld:Mark>' +
+                        '<sld:WellKnownName>circle</sld:WellKnownName>' +
+                        '<sld:Fill>' +
+                          '<sld:CssParameter name="fill">#ff6600</sld:CssParameter>' +
+                        '</sld:Fill>' +
+                        '<sld:Stroke/>' +
+                      '</sld:Mark>' +
+                      '<sld:Size>6</sld:Size>' +
+                    '</sld:Graphic>' +
+                  '</sld:PointSymbolizer>' +
+                '</sld:Rule>' +
               '</sld:FeatureTypeStyle>' +
             '</sld:UserStyle>' +
           '</sld:NamedLayer>' +
@@ -189,6 +215,71 @@ describe('BasiGX.util.SLD', function() {
                 symbolizerObj.graphicRotation);
             expect(graphic.size.content[0]).to.equal(
                 symbolizerObj.graphicSize);
+        });
+        it('updates a text symbolizer correctly', function() {
+            var obj = BasiGX.util.SLD.toSldObject(sld);
+            var ruleName = 'rule1';
+            var symbolizerObj = {
+                fontFamily: 'SansSerif',
+                fontSize: '13',
+                fontStyle: 'italic',
+                fontWeight: 'bold',
+                fontFillColor: '#cc0f0f',
+                labelAnchorPointX: '0.5',
+                labelAnchorPointY: '-0.5',
+                labelDisplacementX: '2',
+                labelDisplacementY: '4',
+                labelRotation: '15'
+            };
+            var modifiedObj = BasiGX.util.SLD
+                .setTextSymbolizerInRule(symbolizerObj, ruleName, obj);
+            expect(modifiedObj).to.not.be(undefined);
+            expect(modifiedObj).to.be.an('object');
+            var value = modifiedObj.value.namedLayerOrUserLayer[0]
+                .namedStyleOrUserStyle[0].featureTypeStyle[0].rule[0]
+                .symbolizer[1].value;
+            expect(value.font.cssParameter[0].content[0]).to.equal(
+                symbolizerObj.fontFamily);
+            expect(value.font.cssParameter[1].content[0]).to.equal(
+                symbolizerObj.fontSize);
+            expect(value.font.cssParameter[2].content[0]).to.equal(
+                symbolizerObj.fontStyle);
+            expect(value.font.cssParameter[3].content[0]).to.equal(
+                symbolizerObj.fontWeight);
+            expect(value.fill.cssParameter[0].content[0]).to.equal(
+                symbolizerObj.fontFillColor);
+            expect(value.labelPlacement.pointPlacement
+                .anchorPoint.anchorPointX.content[0]).to.equal(
+                symbolizerObj.labelAnchorPointX);
+            expect(value.labelPlacement.pointPlacement
+                .anchorPoint.anchorPointY.content[0]).to.equal(
+                symbolizerObj.labelAnchorPointY);
+            expect(value.labelPlacement.pointPlacement
+                .displacement.displacementX.content[0]).to.equal(
+                symbolizerObj.labelDisplacementX);
+            expect(value.labelPlacement.pointPlacement
+                .displacement.displacementY.content[0]).to.equal(
+                symbolizerObj.labelDisplacementY);
+            expect(value.labelPlacement
+                .pointPlacement.rotation.content[0]).to.equal(
+                symbolizerObj.labelRotation);
+        });
+        it('removes a text symbolizer correctly', function() {
+            var obj = BasiGX.util.SLD.toSldObject(sld);
+            var ruleName = 'rule2';
+            var modifiedObj = BasiGX.util.SLD
+                .removeTextSymbolizerFromRule(ruleName, obj);
+            expect(modifiedObj).to.not.be(undefined);
+            expect(modifiedObj).to.be.an('object');
+            var symbolizers = modifiedObj.value.namedLayerOrUserLayer[0]
+                .namedStyleOrUserStyle[0].featureTypeStyle[0].rule[1]
+                .symbolizer;
+            expect(symbolizers).to.be.an('array');
+            expect(symbolizers.length).to.equal(1);
+            expect(symbolizers[0].value.TYPE_NAME).to.equal(
+                'SLD_1_0_0.PointSymbolizer');
+            expect(symbolizers[0].value.TYPE_NAME).to.not.equal(
+                'SLD_1_0_0.TextSymbolizer');
         });
     });
 });
