@@ -998,6 +998,7 @@ Ext.define(&#39;BasiGX.view.container.SLDStyler&#39;, {
         var labelRotation = BasiGX.util.SLD.DEFAULT_LABEL_ROTATION;
         var followLineLabel = BasiGX.util.SLD.DEFAULT_LABEL_FOLLOW_LINE;
         var textSymbolizer;
+        var checkboxToggled = false;
 
         Ext.each(rule.symbolizer, function(sym) {
             if (sym.name.localPart === &#39;TextSymbolizer&#39;) {
@@ -1006,6 +1007,7 @@ Ext.define(&#39;BasiGX.view.container.SLDStyler&#39;, {
         });
 
         if (textSymbolizer) {
+            checkboxToggled = true;
             var font = getVal(&#39;font&#39;, textSymbolizer);
             labelAttribute = getVal(&#39;value&#39;, textSymbolizer.label) ?
                 getVal(&#39;value&#39;, textSymbolizer.label).content[0] :
@@ -1114,7 +1116,11 @@ Ext.define(&#39;BasiGX.view.container.SLDStyler&#39;, {
             xtype: &#39;fieldset&#39;,
             checkboxToggle: true,
             checkbox: {
-                listeners: listenerConfig
+                // Note: Setting the listeners overwrites the default collapse
+                // behavior. In this case it&#39;s wanted, but to keep the default
+                // toggling the handler config has to be used instead
+                listeners: listenerConfig,
+                checked: checkboxToggled
             },
             height: &#39;100%&#39;,
             bind: {
