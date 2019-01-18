@@ -364,7 +364,7 @@ Ext.define('BasiGX.util.SLD', {
                         return false;
                     }
                 });
-                if (symbolizerIndex) {
+                if (Ext.isNumeric(symbolizerIndex)) {
                     rules[ruleMatchIdx].symbolizer.splice(symbolizerIndex, 1);
                 }
             }
