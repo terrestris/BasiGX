@@ -14,11 +14,11 @@
   "signatures": [
     {
       "name": "terrestris GmbH \u0026 Co. KG",
-      "uuid": "98a9365a-ee23-4b39-b342-86095075f965",
-      "created": "2019-01-21T08:17:06Z",
+      "uuid": "01297b74-49c0-44e3-add8-27083d9274f4",
+      "created": "2019-02-01T09:03:46Z",
       "algorithm": "SHA1withRSA",
-      "nonce": "ytRalY6it4w\u003d",
-      "signature": "ExL8sgczWDaquFCFfmnmLujcQ0jcNK5k+9m/JoWMI6yBV/VgDvv3SV+oGr9xzRTSp2z7vOqyXsckfJba9RI4nKceOsoJzPsvAWyBUU8GyeccZ/do4rwbYoJfeLyXMIO3AN51QDhSnUx/oo0f7Aj/ZoD3d4kFLB83SqESd6Bzkxjx0g31lK8MU84dEXEf4iMUO1uQnRNUnsLImF4RufQ83yxD1UrXzDFbTE1y9jhnSX2YhMWIcOJbZ+d77QZiwAL8bglbXzxkfwUfmsK3OEyYxLwa33zPAmD/+k0gwgLegrDlfcwRinRkdDGPrX7PnOIXfG7q+/gP5KO/c/WLgBHheg\u003d\u003d"
+      "nonce": "7uxUKUxSWAM\u003d",
+      "signature": "NNH2rl8mi7pPXpgkHiv4l8rEnkp9ycSmoj83rGU86/13BWk54VXsXl+weE1BQEBDK4BR+Jhaw5/Dof/RpT2XIkNXg+e0CK4cWZ+2wuywGsIN7/O7qbcpBNYXZAf3mtxLEuS5GP+0ckWaUyTVTA+lAdc07mifsTv1fUuuODlHfj8QvIGayr2vJ8EawiO5EYN0GPV5gCaIAD1ZvEB4G/8gwEnUWgn0MVsDHSyJtoMIzZ7mTA//uP0KECUcosEQttE2I6U0Gt1FWrE4NTHSWcG+nwTNAfpSeGGVRr/9lizIVCKiRB3MRN1rFg+V0JAxcsKRonqcTqCeE2kstAk5lh8BAQ\u003d\u003d"
     }
   ],
   "slicer": {
@@ -70,7 +70,7 @@
     "karma-mocha-reporter": "2.2.5",
     "karma-sinon": "1.0.5",
     "mocha": "5.2.0",
-    "puppeteer": "1.11.0",
+    "puppeteer": "1.12.0",
     "rimraf": "2.6.3",
     "sinon": "7.2.3"
   }
