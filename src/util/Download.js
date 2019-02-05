@@ -50,12 +50,18 @@ Ext.define('BasiGX.util.Download', {
                 window.navigator.msSaveBlob(blob, name + '.' + format);
             } else {
                 var a = document.createElement('a');
-                a.href = 'data:application/octet-stream;base64,' + result;
-                a.target = '_blank';
-                a.download = name + '.' + format;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
+                result.then(function(data) {
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        a.href = event.target.result;
+                        a.target = '_blank';
+                        a.download = name + '.' + format;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    };
+                    reader.readAsDataURL(data);
+                });
             }
         },
 
