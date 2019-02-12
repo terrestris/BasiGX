@@ -334,19 +334,27 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             });
         }
         var data = store.getData().items;
+        var attributes = [];
         if (data.length > 0) {
-            Ext.iterate(data[0].data, function(key, value) {
-                if (value === undefined || value && value.getExtent ||
-                    me.getIgnoredAttributes().indexOf(key) !== -1) {
-                    return;
-                }
-                columns.push({
-                    text: key,
-                    dataIndex: key,
-                    editor: 'textfield'
+            Ext.each(data, function(item) {
+                Ext.iterate(item.data, function(key, value) {
+                    if (value === undefined || value && value.getExtent ||
+                        me.getIgnoredAttributes().indexOf(key) !== -1) {
+                        return;
+                    }
+                    if (attributes.indexOf(key) === -1) {
+                        attributes.push(key);
+                    }
                 });
             });
         }
+        Ext.each(attributes, function(attribute) {
+            columns.push({
+                text: attribute,
+                dataIndex: attribute,
+                editor: 'textfield'
+            });
+        });
         return columns;
     },
 
