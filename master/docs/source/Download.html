@@ -59,14 +59,22 @@ Ext.define(&#39;BasiGX.util.Download&#39;, {
                     break;
                 }
             }
-            if (window.navigator.msSaveOrOpenBlob) {
+            if (typeof result === &#39;string&#39;) {
+                var a = document.createElement(&#39;a&#39;);
+                a.href = &#39;data:application/json;base64,&#39; + result;
+                a.target = &#39;_blank&#39;;
+                a.download = name + &#39;.&#39; + format;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } else if (window.navigator.msSaveOrOpenBlob) {
                 result = Uint8Array.from(atob(result), function(c) {
                     return c.charCodeAt(0);
                 });
                 var blob = new Blob([result]);
                 window.navigator.msSaveBlob(blob, name + &#39;.&#39; + format);
             } else {
-                var a = document.createElement(&#39;a&#39;);
+                a = document.createElement(&#39;a&#39;);
                 result.then(function(data) {
                     var reader = new FileReader();
                     reader.onload = function(event) {
