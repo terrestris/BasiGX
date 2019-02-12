@@ -42,14 +42,22 @@ Ext.define('BasiGX.util.Download', {
                     break;
                 }
             }
-            if (window.navigator.msSaveOrOpenBlob) {
+            if (typeof result === 'string') {
+                var a = document.createElement('a');
+                a.href = 'data:application/json;base64,' + result;
+                a.target = '_blank';
+                a.download = name + '.' + format;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } else if (window.navigator.msSaveOrOpenBlob) {
                 result = Uint8Array.from(atob(result), function(c) {
                     return c.charCodeAt(0);
                 });
                 var blob = new Blob([result]);
                 window.navigator.msSaveBlob(blob, name + '.' + format);
             } else {
-                var a = document.createElement('a');
+                a = document.createElement('a');
                 result.then(function(data) {
                     var reader = new FileReader();
                     reader.onload = function(event) {
