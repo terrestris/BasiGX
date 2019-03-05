@@ -62,7 +62,7 @@
         "karma-mocha-reporter": "2.2.5",
         "karma-sinon": "1.0.5",
         "mocha": "6.0.2",
-        "puppeteer": "1.12.2",
+        "puppeteer": "1.13.0",
         "rimraf": "2.6.3",
         "sinon": "7.2.6"
     }
