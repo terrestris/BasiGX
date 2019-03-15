@@ -74,6 +74,53 @@ Ext.define('BasiGX.view.window.PreviewWindow', {
                 })
             })
         });
+        this.map.on('singleclick', this.mapClicked.bind(this));
+    },
+
+    mapClicked: function(event) {
+        var me = this;
+        var mapView = this.map.getView();
+        var resolution = mapView.getResolution();
+        var projCode = mapView.getProjection().getCode();
+        var url = this.layer.getSource().getGetFeatureInfoUrl(
+            event.coordinate,
+            resolution,
+            projCode,
+            {
+                'INFO_FORMAT': 'application/json',
+                'FEATURE_COUNT': 100
+            }
+        );
+        Ext.Ajax.request({
+            url: url,
+            success: function(response) {
+                var collection = JSON.parse(response.responseText);
+                if (collection.features.length > 0) {
+                    var mapComponent = me.down('gx_component_map');
+                    var fmt = new ol.format.GeoJSON();
+                    var features = fmt.readFeatures(collection);
+                    var vectorLayer = new ol.layer.Vector({
+                        source: new ol.source.Vector({features: features})
+                    });
+                    var win = Ext.create('Ext.window.Window', {
+                        title: me.getTitle(),
+                        layout: 'fit',
+                        width: 500,
+                        height: 500,
+                        bodyPadding: 5,
+                        items: [{
+                            xtype: 'basigx-grid-featuregrid',
+                            layout: 'fit',
+                            layer: vectorLayer,
+                            map: mapComponent,
+                            title: false,
+                            hideHeader: true
+                        }]
+                    }).show();
+                    win.down('grid').getHeader().hide();
+                }
+            }
+        });
     },
 
     /**
