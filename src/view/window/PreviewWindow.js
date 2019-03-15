@@ -74,6 +74,12 @@ Ext.define('BasiGX.view.window.PreviewWindow', {
                 })
             })
         });
+        this.addDocked({
+            xtype: 'basigx-combo-scale',
+            useScalesFromMap: true,
+            map: this.map,
+            dock: 'bottom'
+        });
         this.map.on('singleclick', this.mapClicked.bind(this));
     },
 
