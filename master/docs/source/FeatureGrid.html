@@ -117,8 +117,9 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         this.registerEvents();
         this.createHighlightLayer(this.getMap());
         this.appendMenuEntries();
-        this.down(&#39;grid&#39;).on(&#39;select&#39;, this.rowSelected, this);
-        this.down(&#39;grid&#39;).on(&#39;deselect&#39;, this.rowDeselected, this);
+        var grid = this.down(&#39;grid&#39;);
+        grid.on(&#39;select&#39;, this.rowSelected, this);
+        grid.on(&#39;deselect&#39;, this.rowDeselected, this);
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-method-setSelectionLayer'>    /**

@@ -110,7 +110,9 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
             {scale: '1:2.500', resolution: 0.7},
             {scale: '1:1.000', resolution: 0.28},
             {scale: '1:500', resolution: 0.14}
-        ]
+        ],
+
+        useScalesFromMap: false
     },
 
     /**
@@ -123,6 +125,9 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
             me.map = BasiGX.util.Map.getMapComponent().getMap();
         }
         var mapView = me.map.getView();
+        if (this.getUseScalesFromMap()) {
+            this.setScales(this.calculateScalesFromMap(me.map));
+        }
 
         // using hard scales here as there is no way currently known to
         // retrieve all resolutions from the map
@@ -150,6 +155,33 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
         );
         var key = mapView.on('change:resolution', bufferedUpdateMapResChange);
         me.boundEventKeys.push(key);
+    },
+
+    /**
+     * Calculates the scales from map view resolutions. Keep in mind that this
+     * assumes the resolutions are linearly scaled by doubling at each zoom
+     * level.
+     *
+     * @param {ol.Map} map the map
+     * @return {object[]} the scales
+     */
+    calculateScalesFromMap: function(map) {
+        var view = map.getView();
+        var resToScale = BasiGX.util.Map.getScaleForResolution
+            .bind(BasiGX.util.Map);
+        var minResolution = view.getMinResolution();
+        var maxResolution = view.getMaxResolution();
+        var units = view.getProjection().getUnits();
+        var scales = [];
+        var cur = minResolution;
+        while(cur < maxResolution) {
+            scales.push({
+                scale: resToScale(cur, units).toFixed(0),
+                resolution: cur
+            });
+            cur *= 2;
+        }
+        return scales;
     },
 
     /**

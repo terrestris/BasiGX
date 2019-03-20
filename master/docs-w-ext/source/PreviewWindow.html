@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2019-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-window-PreviewWindow'>/**
+</span> * Shows a layer preview window.
+ *
+ * @class BasiGX.view.window.PreviewWindow
+ */
+Ext.define(&#39;BasiGX.view.window.PreviewWindow&#39;, {
+    extend: &#39;Ext.window.Window&#39;,
+
+<span id='BasiGX-view-window-PreviewWindow-cfg-closeAction'>    closeAction: &#39;hide&#39;,
+</span>
+<span id='BasiGX-view-window-PreviewWindow-cfg-constrain'>    constrain: true,
+</span>
+    config: {
+<span id='BasiGX-view-window-PreviewWindow-cfg-projection'>        projection: &#39;EPSG:3857&#39;,
+</span><span id='BasiGX-view-window-PreviewWindow-cfg-center'>        center: [1095801, 6726458],
+</span><span id='BasiGX-view-window-PreviewWindow-cfg-zoom'>        zoom: 3,
+</span><span id='BasiGX-view-window-PreviewWindow-cfg-dataExtent'>        dataExtent: [[10000, 20000], [20000, 40000]]
+</span>    },
+
+<span id='BasiGX-view-window-PreviewWindow-cfg-tools'>    tools: [{
+</span>        type: &#39;gear&#39;,
+        handler: function() {
+            this.up(&#39;window&#39;).showLegend();
+        }
+    }],
+
+<span id='BasiGX-view-window-PreviewWindow-method-initComponent'>    /**
+</span>     * Sets up the map and the controls.
+     */
+    initComponent: function() {
+        this.callParent();
+        var markup = &#39;&lt;i class=&quot;fa fa-globe&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&#39;;
+        var worldIcon = Ext.dom.Helper.createDom(markup);
+        var controls = [
+            new ol.control.Zoom(),
+            new ol.control.ZoomToExtent({
+                label: worldIcon
+            })
+        ];
+        if (this.getDataExtent()) {
+            markup = &#39;&lt;i class=&quot;fa fa-asterisk&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&#39;;
+            worldIcon = Ext.dom.Helper.createDom(markup);
+            controls.push(this.extentControl = new ol.control.ZoomToExtent({
+                className: &#39;basigx-zoom-to-data-extent&#39;,
+                label: worldIcon,
+                extent: ol.extent.boundingExtent(this.getDataExtent())
+            }));
+        }
+        this.add({
+            xtype: &#39;gx_component_map&#39;,
+            width: 400,
+            height: 400,
+            map: this.map = new ol.Map({
+                controls: controls,
+                view: new ol.View({
+                    center: this.getCenter(),
+                    zoom: this.getZoom(),
+                    projection: this.getProjection()
+                })
+            })
+        });
+        this.addDocked({
+            xtype: &#39;basigx-combo-scale&#39;,
+            useScalesFromMap: true,
+            map: this.map,
+            dock: &#39;bottom&#39;
+        });
+        this.map.on(&#39;singleclick&#39;, this.mapClicked.bind(this));
+    },
+
+<span id='BasiGX-view-window-PreviewWindow-method-mapClicked'>    mapClicked: function(event) {
+</span>        var me = this;
+        var mapView = this.map.getView();
+        var resolution = mapView.getResolution();
+        var projCode = mapView.getProjection().getCode();
+        var url = this.layer.getSource().getGetFeatureInfoUrl(
+            event.coordinate,
+            resolution,
+            projCode,
+            {
+                &#39;INFO_FORMAT&#39;: &#39;application/json&#39;,
+                &#39;FEATURE_COUNT&#39;: 100
+            }
+        );
+        Ext.Ajax.request({
+            url: url,
+            success: function(response) {
+                var collection = JSON.parse(response.responseText);
+                if (collection.features.length &gt; 0) {
+                    var mapComponent = me.down(&#39;gx_component_map&#39;);
+                    var fmt = new ol.format.GeoJSON();
+                    var features = fmt.readFeatures(collection);
+                    var vectorLayer = new ol.layer.Vector({
+                        source: new ol.source.Vector({features: features})
+                    });
+                    var win = Ext.create(&#39;Ext.window.Window&#39;, {
+                        title: me.getTitle(),
+                        layout: &#39;fit&#39;,
+                        width: 500,
+                        height: 500,
+                        bodyPadding: 5,
+                        items: [{
+                            xtype: &#39;basigx-grid-featuregrid&#39;,
+                            layout: &#39;fit&#39;,
+                            layer: vectorLayer,
+                            map: mapComponent,
+                            title: false,
+                            hideHeader: true
+                        }]
+                    }).show();
+                    win.down(&#39;grid&#39;).getHeader().hide();
+                }
+            }
+        });
+    },
+
+<span id='BasiGX-view-window-PreviewWindow-method-setLayer'>    /**
+</span>     * Call this to update the preview with a different layer.
+     *
+     * @param {ol.layer.Layer} layer the layer
+     * @param {Object} config the SHOGun configuration object
+     */
+    setLayer: function(layer, config) {
+        this.layer = layer;
+        this.layerConfig = config;
+        this.map.getLayers().clear();
+        this.map.addLayer(layer);
+    },
+
+<span id='BasiGX-view-window-PreviewWindow-method-setDataExtent'>    /**
+</span>     * Call this with coordinates to update the data extent.
+     *
+     * @param {array[]} dataExtent the coordinates, e.g. [[-1, -1], [1, 1]]
+     */
+    setDataExtent: function(dataExtent) {
+        var markup = &#39;&lt;i class=&quot;fa fa-asterisk&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&#39;;
+        var worldIcon = Ext.dom.Helper.createDom(markup);
+        this.dataExtent = dataExtent;
+        if (this.extentControl) {
+            this.map.removeControl(this.extentControl);
+            this.map.addControl(
+                this.extentControl = new ol.control.ZoomToExtent({
+                    className: &#39;basigx-zoom-to-data-extent&#39;,
+                    label: worldIcon,
+                    extent: ol.extent.boundingExtent(this.getDataExtent())
+                }));
+        }
+    },
+
+<span id='BasiGX-view-window-PreviewWindow-method-showLegend'>    /**
+</span>     * This is called internally to show the legend, if any.
+     */
+    showLegend: function() {
+        if (!this.layerConfig) {
+            return;
+        }
+        var url = this.layerConfig.source.url;
+        if (!url.startsWith(&#39;http&#39;)) {
+            url = window.origin + url;
+        }
+        var params = {
+            request: &#39;GetLegendGraphic&#39;,
+            service: &#39;WMS&#39;,
+            version: &#39;1.1.1&#39;,
+            format: &#39;image/png&#39;,
+            layer: this.layerConfig.source.layerNames
+        };
+        url += &#39;?&#39; + Ext.Object.toQueryString(params);
+        Ext.create(&#39;Ext.window.Window&#39;, {
+            title: this.getTitle(),
+            layout: &#39;fit&#39;,
+            minWidth: 200,
+            minHeight: 200,
+            bodyPadding: 5,
+            items: [{
+                html: &#39;&lt;img alt=&quot;&#39; + this.getTitle() + &#39;&quot; src=&quot;&#39; +
+                    url + &#39;&quot;&gt;&lt;/img&gt;&#39;
+            }]
+        }).show();
+    }
+
+});
+</pre>
+</body>
+</html>

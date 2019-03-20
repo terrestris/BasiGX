@@ -127,8 +127,10 @@ Ext.define(&#39;BasiGX.view.combo.ScaleCombo&#39;, {
             {scale: &#39;1:2.500&#39;, resolution: 0.7},
             {scale: &#39;1:1.000&#39;, resolution: 0.28},
             {scale: &#39;1:500&#39;, resolution: 0.14}
-        ]
-    },
+        ],
+
+<span id='BasiGX-view-combo-ScaleCombo-cfg-useScalesFromMap'>        useScalesFromMap: false
+</span>    },
 
 <span id='BasiGX-view-combo-ScaleCombo-method-initComponent'>    /**
 </span>     *
@@ -140,6 +142,9 @@ Ext.define(&#39;BasiGX.view.combo.ScaleCombo&#39;, {
             me.map = BasiGX.util.Map.getMapComponent().getMap();
         }
         var mapView = me.map.getView();
+        if (this.getUseScalesFromMap()) {
+            this.setScales(this.calculateScalesFromMap(me.map));
+        }
 
         // using hard scales here as there is no way currently known to
         // retrieve all resolutions from the map
@@ -167,6 +172,33 @@ Ext.define(&#39;BasiGX.view.combo.ScaleCombo&#39;, {
         );
         var key = mapView.on(&#39;change:resolution&#39;, bufferedUpdateMapResChange);
         me.boundEventKeys.push(key);
+    },
+
+<span id='BasiGX-view-combo-ScaleCombo-method-calculateScalesFromMap'>    /**
+</span>     * Calculates the scales from map view resolutions. Keep in mind that this
+     * assumes the resolutions are linearly scaled by doubling at each zoom
+     * level.
+     *
+     * @param {ol.Map} map the map
+     * @return {object[]} the scales
+     */
+    calculateScalesFromMap: function(map) {
+        var view = map.getView();
+        var resToScale = BasiGX.util.Map.getScaleForResolution
+            .bind(BasiGX.util.Map);
+        var minResolution = view.getMinResolution();
+        var maxResolution = view.getMaxResolution();
+        var units = view.getProjection().getUnits();
+        var scales = [];
+        var cur = minResolution;
+        while(cur &lt; maxResolution) {
+            scales.push({
+                scale: resToScale(cur, units).toFixed(0),
+                resolution: cur
+            });
+            cur *= 2;
+        }
+        return scales;
     },
 
 <span id='BasiGX-view-combo-ScaleCombo-method-onDestroy'>    /**
