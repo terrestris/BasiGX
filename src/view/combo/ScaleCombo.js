@@ -125,7 +125,7 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
             me.map = BasiGX.util.Map.getMapComponent().getMap();
         }
         var mapView = me.map.getView();
-        if (this.getUseScalesFromMap) {
+        if (this.getUseScalesFromMap()) {
             this.setScales(this.calculateScalesFromMap(me.map));
         }
 
