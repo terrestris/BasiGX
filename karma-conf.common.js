@@ -4,9 +4,9 @@
 module.exports = function(config) {
 
     var files = [
-        'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-neptune/resources/theme-crips-all_1.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-neptune/resources/theme-crisp-all_2.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-neptune/resources/theme-crisp-all.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-neptune/resources/theme-neptune-all_1.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-neptune/resources/theme-neptune-all_2.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-neptune/resources/theme-neptune-all.css',
         'https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.6.5/ol.css',
         'https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.6.5/ol.js',
         'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/ext-all.js',
@@ -23,8 +23,7 @@ module.exports = function(config) {
         'src/**/*js',
         'test/test-helper-functions.js',
         'test/**/*js',
-        {pattern: 'test/**/*gif', watched: false, included: false, served: true},
-        {pattern: 'test/**/*json', watched: false, included: false, served: true}
+        {pattern: 'test/resources/**/*', watched: false, included: false, served: true}
     ];
 
     config.set({
