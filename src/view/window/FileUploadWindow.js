@@ -43,7 +43,12 @@ Ext.define('BasiGX.view.window.FileUploadWindow', {
         /**
          * Callback function called when cancel is clicked.
          */
-        cancelHandler: function() {}
+        cancelHandler: function() {},
+        /**
+         * If set to true, (fake) path components will be stripped in the
+         * text field.
+         */
+        hideFakepath: false
     },
 
     bind: {
@@ -104,7 +109,18 @@ Ext.define('BasiGX.view.window.FileUploadWindow', {
         }, {
             xtype: 'filefield',
             padding: 5,
-            allowBlank: false
+            allowBlank: false,
+            listeners: {
+                change: function(field, path) {
+                    if (!this.up('window').getHideFakepath()) {
+                        return;
+                    }
+                    var ms = /[/\\]([^/\\]+)$/.exec(path);
+                    if (ms && ms[1]) {
+                        field.el.dom.querySelector('input').value = ms[1];
+                    }
+                }
+            }
         }]
     }]
 
