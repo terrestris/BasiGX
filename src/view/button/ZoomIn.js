@@ -56,6 +56,8 @@ Ext.define('BasiGX.view.button.ZoomIn', {
     glyph: 'xf00e@FontAwesome',
     html: '<i class="fa fa-search-plus fa-2x"></i>',
 
+    toggleGroup: 'navigation',
+
     /**
      * A config object to show this tool in action (live demo) when using the
      * context sensitive help
@@ -69,37 +71,84 @@ Ext.define('BasiGX.view.button.ZoomIn', {
         }
     ],
 
-    /**
-     *
-     */
     config: {
-        handler: function() {
+        /**
+         * When set to true zoom in by clicking and dragging on the map is
+         * enabled. Default is true.
+         */
+        enableZoomInWithBox: true,
+        /**
+         * Whether zoom action should be animated or not. Default is true.
+         */
+        enableAnimation: true,
+        /**
+         * Reference to ol DragZoom interaction which will be used if
+         * #enableZoomInWithBox is set to true.
+         */
+        dragZoomInteraction: null,
+        /**
+         * Default zoom animation duration in milliseconds. Only applicable if
+         * #enableAnimation is set to true.
+         */
+        animationDuration: 500
+    },
+
+    listeners: {
+        toggle: function (btn, pressed) {
             var me = this;
-            var olMap = me.olMap;
-            var olView;
-            var zoom;
-
             //fallback
-            if (Ext.isEmpty(olMap)) {
-                olMap = BasiGX.util.Map.getMapComponent().getMap();
+            if (Ext.isEmpty(me.olMap)) {
+                me.olMap = BasiGX.util.Map.getMapComponent().getMap();
             }
+            if (me.enableZoomInWithBox) {
+                if (!me.dragZoomInInteraction) {
+                    me.dragZoomInInteraction = new ol.interaction.DragZoom({
+                        condition: ol.events.condition.always,
+                        duration: me.animationDuration
+                    });
+                    me.olMap.addInteraction(me.dragZoomInInteraction);
+                }
+            }
+            if (pressed) {
+                me.olMap.on('click', me.zoomIn, me);
+                if (me.enableZoomInWithBox) {
+                    me.dragZoomInInteraction.setActive(true);
+                }
+            } else {
+                me.olMap.un('click', me.zoomIn, me);
+                if (me.enableZoomInWithBox) {
+                    me.dragZoomInInteraction.setActive(false);
+                }
+            }
+        }
+    },
 
-            olView = olMap.getView();
+    /**
+     * Callback function of `click` event on the map while zoomIn button is
+     * toggled.
+     */
+    zoomIn: function() {
+        var me = this;
+        var zoom;
+        var olView = me.olMap.getView();
 
-            // This if is need for backwards compatibility to ol
+        // This if is need for backwards comaptibility to ol
+        if (me.enableAnimation) {
             if (ol.animation) {
                 zoom = ol.animation.zoom({
                     resolution: olView.getResolution(),
-                    duration: 500
+                    duration: me.animationDuration
                 });
-                olMap.beforeRender(zoom);
+                me.olMap.beforeRender(zoom);
                 olView.setResolution(olView.getResolution() / 2);
             } else {
                 olView.animate({
                     resolution: olView.getResolution() / 2,
-                    duration: 500
+                    duration: me.animationDuration
                 });
             }
+        } else {
+            olView.setResolution(olView.getResolution() / 2);
         }
     }
 });
