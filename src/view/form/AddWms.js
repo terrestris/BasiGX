@@ -313,6 +313,7 @@ Ext.define('BasiGX.view.form.AddWms', {
     // Reset and Submit buttons
     buttons: [
         {
+            name: 'resetFormBtn',
             bind: {
                 text: '{resetBtnText}'
             },

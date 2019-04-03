@@ -22,7 +22,7 @@ describe('BasiGX.view.form.AddWms', function() {
             });
         });
         afterEach(function() {
-            if(form) {
+            if (form) {
                 form.destroy();
                 form = null;
             }
@@ -119,6 +119,173 @@ describe('BasiGX.view.form.AddWms', function() {
         });
     });
 
+    describe('Behaviour', function() {
+        var form = null;
+        beforeEach(function() {
+            form = Ext.create('BasiGX.view.form.AddWms', {
+                renderTo: Ext.getBody()
+            });
+        });
+        afterEach(function() {
+            if (form) {
+                form.destroy();
+                form = null;
+            }
+        });
+        describe('fetches layers of a server', function() {
+            var numExpectedLayers = 8;
+            it('works with 1.3.0', function(done) {
+                form.down('[name="url"]').setValue('/resources/ows/service-1.3.0.xml');
+                form.down('[name="requestLayersBtn"]').click();
+
+                window.setTimeout(function() {
+                    var checkboxes = form.query('[name="fs-available-layers"] checkbox');
+                    expect(checkboxes.length).to.be(numExpectedLayers);
+                    done();
+                }, 50);
+            });
+            it('works with 1.1.1', function(done) {
+                form.down('[name="url"]').setValue('/resources/ows/service-1.1.1.xml');
+                form.down('[name="requestLayersBtn"]').click();
+                window.setTimeout(function() {
+                    var checkboxes = form.query('[name="fs-available-layers"] checkbox');
+                    expect(checkboxes.length).to.be(numExpectedLayers);
+                    done();
+                }, 50);
+            });
+        });
+
+        describe('selection state determines if a layer can be added', function() {
+            var selPrefix = '[name="fs-available-layers"] ';
+            var addToMapBtn;
+            var checkboxes;
+            beforeEach(function(done) {
+                if (!form) {
+                    form = Ext.create('BasiGX.view.form.AddWms', {
+                        renderTo: Ext.getBody()
+                    });
+                }
+                form.down('[name="url"]').setValue('/resources/ows/service-1.3.0.xml');
+                form.down('[name="requestLayersBtn"]').click();
+                window.setTimeout(function() {
+                    addToMapBtn = form.down('button[name="add-checked-layers"]');
+                    checkboxes = form.query(selPrefix + 'checkbox');
+                    done();
+                }, 50);
+            });
+
+            afterEach(function() {
+                if (form) {
+                    form.destroy();
+                    form = null;
+                }
+            });
+
+            it('renders the button initially disabled', function() {
+                var checkedCheckboxes = form.query(selPrefix + 'checkbox[checked=true]');
+                expect(checkedCheckboxes.length).to.be(0);
+                expect(addToMapBtn.isDisabled()).to.be(true);
+            });
+
+            it('enables the add to map button if at least one selected', function(done) {
+                // check a checkbox, button should be enabled
+                checkboxes[0].setValue(true);
+                var checkedCheckboxes;
+                addToMapBtn = form.down('button[name="add-checked-layers"]');
+
+                window.setTimeout(function() {
+                    checkedCheckboxes = form.query(selPrefix + 'checkbox[checked=true]');
+                    expect(checkedCheckboxes.length).to.be(1);
+                    expect(addToMapBtn.isDisabled()).to.be(false);
+
+                    // check another one
+                    checkboxes[1].setValue(true);
+                    checkedCheckboxes = form.query(selPrefix + 'checkbox[checked=true]');
+                    expect(checkedCheckboxes.length).to.be(2);
+                    expect(addToMapBtn.isDisabled()).to.be(false);
+
+                    // uncheck the last, still one checked
+                    checkboxes[1].setValue(false);
+                    checkedCheckboxes = form.query(selPrefix + 'checkbox[checked=true]');
+                    expect(checkedCheckboxes.length).to.be(1);
+                    expect(addToMapBtn.isDisabled()).to.be(false);
+
+                    done();
+                }, 50);
+            });
+
+            it('disables the button as soon as no more are selected', function(done) {
+                checkboxes[0].setValue(false);
+
+                window.setTimeout(function() {
+                    var checkedCheckboxes = form.query(selPrefix + 'checkbox[checked=true]');
+                    addToMapBtn = form.down('button[name="add-checked-layers"]');
+                    expect(checkedCheckboxes.length).to.be(0);
+                    expect(addToMapBtn.isDisabled()).to.be(true);
+
+                    done();
+                }, 50);
+            });
+        });
+
+        describe('form can be resetted', function() {
+            var selPrefix = '[name="fs-available-layers"] ';
+
+            beforeEach(function(done) {
+                if (!form) {
+                    form = Ext.create('BasiGX.view.form.AddWms', {
+                        renderTo: Ext.getBody()
+                    });
+                }
+                form.down('[name="url"]').setValue('/resources/ows/service-1.3.0.xml');
+                form.down('[name="requestLayersBtn"]').click();
+                window.setTimeout(function() {
+                    done();
+                }, 50);
+            });
+
+            afterEach(function() {
+                if (form) {
+                    form.destroy();
+                    form = null;
+                }
+            });
+
+            it('removes checkboxes', function(done) {
+                var checkboxes = form.query(selPrefix + 'checkbox');
+                expect(checkboxes.length > 0).to.be(true);
+                form.down('[name="resetFormBtn"]').click();
+                window.setTimeout(function() {
+                    checkboxes = form.query(selPrefix + 'checkbox');
+                    expect(checkboxes.length).to.be(0);
+                    done();
+                }, 50);
+            });
+
+            it('removes add checked layers button', function(done) {
+                var btn = form.down('[name="add-checked-layers"]');
+                expect(btn).to.be.ok();
+                form.down('[name="resetFormBtn"]').click();
+                window.setTimeout(function() {
+                    btn = form.down('[name="add-checked-layers"]');
+                    expect(btn).to.be(null);
+                    done();
+                }, 50);
+            });
+
+            it('resets entered URL to default', function(done) {
+                var urlField = form.down('[name="url"]');
+                expect(urlField.getValue()).to.be.ok();
+                form.down('[name="resetFormBtn"]').click();
+                window.setTimeout(function() {
+                    urlField = form.down('[name="url"]');
+                    expect(urlField.getValue()).to.be(form.getDefaultUrl());
+                    done();
+                }, 50);
+            });
+        });
+    });
+
     describe('Methods', function() {
         var form = null;
         beforeEach(function() {
@@ -127,7 +294,7 @@ describe('BasiGX.view.form.AddWms', function() {
             });
         });
         afterEach(function() {
-            if(form) {
+            if (form) {
                 form.destroy();
                 form = null;
             }
@@ -139,60 +306,46 @@ describe('BasiGX.view.form.AddWms', function() {
                 expect(form.responseStatusToErrorMsgKey('0')).to.be(exp);
                 expect(form.getViewModel().get(exp)).to.be.ok();
             });
-        });
-        describe('responseStatusToErrorMsgKey', function() {
             it('returns a key for unauthorized error status', function() {
                 var exp = 'msgUnauthorized';
                 expect(form.responseStatusToErrorMsgKey(401)).to.be(exp);
                 expect(form.responseStatusToErrorMsgKey('401')).to.be(exp);
                 expect(form.getViewModel().get(exp)).to.be.ok();
             });
-        });
-        describe('responseStatusToErrorMsgKey', function() {
             it('returns a key for forbidded error status', function() {
                 var exp = 'msgForbidden';
                 expect(form.responseStatusToErrorMsgKey(403)).to.be(exp);
                 expect(form.responseStatusToErrorMsgKey('403')).to.be(exp);
                 expect(form.getViewModel().get(exp)).to.be.ok();
             });
-        });
-        describe('responseStatusToErrorMsgKey', function() {
             it('returns a key for file not found error status', function() {
                 var exp = 'msgFileNotFound';
                 expect(form.responseStatusToErrorMsgKey(404)).to.be(exp);
                 expect(form.responseStatusToErrorMsgKey('404')).to.be(exp);
                 expect(form.getViewModel().get(exp)).to.be.ok();
             });
-        });
-        describe('responseStatusToErrorMsgKey', function() {
             it('returns a key for too many requests error status', function() {
                 var exp = 'msgTooManyRequests';
                 expect(form.responseStatusToErrorMsgKey(429)).to.be(exp);
                 expect(form.responseStatusToErrorMsgKey('429')).to.be(exp);
                 expect(form.getViewModel().get(exp)).to.be.ok();
             });
-        });
-        describe('responseStatusToErrorMsgKey', function() {
-            it('returns a key for sevice unavailable error status', function() {
+            it('returns a key for service unavailable error status', function() {
                 var exp = 'msgServiceUnavailable';
                 expect(form.responseStatusToErrorMsgKey(503)).to.be(exp);
                 expect(form.responseStatusToErrorMsgKey('503')).to.be(exp);
                 expect(form.getViewModel().get(exp)).to.be.ok();
             });
-        });
-        describe('responseStatusToErrorMsgKey', function() {
             it('returns a key for gateway timeout error status', function() {
                 var exp = 'msgGatewayTimeOut';
                 expect(form.responseStatusToErrorMsgKey(504)).to.be(exp);
                 expect(form.responseStatusToErrorMsgKey('504')).to.be(exp);
                 expect(form.getViewModel().get(exp)).to.be.ok();
             });
-        });
-        describe('responseStatusToErrorMsgKey', function() {
             it('returns null for unexpected status', function() {
                 var exp = null;
                 var checks = [
-                    -1, 'humpty', false, NaN, [], {}, function(){}
+                    -1, 'humpty', false, NaN, [], {}, function() { }
                 ];
                 Ext.each(checks, function(check) {
                     expect(form.responseStatusToErrorMsgKey(check)).to.be(exp);
