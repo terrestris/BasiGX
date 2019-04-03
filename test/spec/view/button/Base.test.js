@@ -9,6 +9,12 @@ describe('BasiGX.view.button.Base', function() {
             var btn = Ext.create('BasiGX.view.button.Base');
             expect(btn).to.be.a(BasiGX.view.button.Base);
         });
+        it('can be rendered', function() {
+            var btn = Ext.create('BasiGX.view.button.Base', {
+                renderTo: Ext.getBody()
+            });
+            expect(btn).to.be.a(BasiGX.view.button.Base);
+        });
     });
     describe('Tooltip bound if possible (direct instantiation)', function() {
         it('binds to tooltip if `setTooltip` exists', function() {

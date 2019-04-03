@@ -16,5 +16,16 @@ describe('BasiGX.view.form.CoordinateTransform', function() {
             // teardown
             inst.destroy();
         });
+
+        it('can be rendered', function() {
+            var inst = Ext.create('BasiGX.view.form.CoordinateTransform', {
+                coordinateSystemsToUse: [
+                    {code: 'EPSG:4326', name: 'WGS84'}
+                ],
+                renderTo: Ext.getBody()
+            });
+            expect(inst).to.be.a(BasiGX.view.form.CoordinateTransform);
+        });
     });
+
 });

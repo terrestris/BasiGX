@@ -12,5 +12,14 @@ describe('BasiGX.view.form.Permalink', function() {
             // teardown
             inst.destroy();
         });
+
+        it('can be rendered', function() {
+            var inst = Ext.create('BasiGX.view.form.Permalink', {
+                renderTo: Ext.getBody()
+            });
+            expect(inst).to.be.a(BasiGX.view.form.Permalink);
+            // teardown
+            inst.destroy();
+        });
     });
 });
