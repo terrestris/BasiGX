@@ -188,35 +188,29 @@ describe('BasiGX.view.form.AddWms', function() {
             });
 
             it('enables the add to map button if at least one selected', function(done) {
+                // check a checkbox, button should be enabled
                 checkboxes[0].setValue(true);
-                var checkedCheckboxes = form.query(selPrefix + 'checkbox[checked=true]');
+                var checkedCheckboxes;
                 addToMapBtn = form.down('button[name="add-checked-layers"]');
 
                 window.setTimeout(function() {
+                    checkedCheckboxes = form.query(selPrefix + 'checkbox[checked=true]');
                     expect(checkedCheckboxes.length).to.be(1);
                     expect(addToMapBtn.isDisabled()).to.be(false);
 
                     // check another one
                     checkboxes[1].setValue(true);
+                    checkedCheckboxes = form.query(selPrefix + 'checkbox[checked=true]');
+                    expect(checkedCheckboxes.length).to.be(2);
+                    expect(addToMapBtn.isDisabled()).to.be(false);
 
-                    window.setTimeout(function() {
-                        checkedCheckboxes = form.query(selPrefix + 'checkbox[checked=true]');
-                        addToMapBtn = form.down('button[name="add-checked-layers"]');
-                        expect(checkedCheckboxes.length).to.be(2);
-                        expect(addToMapBtn.isDisabled()).to.be(false);
+                    // uncheck the last, still one checked
+                    checkboxes[1].setValue(false);
+                    checkedCheckboxes = form.query(selPrefix + 'checkbox[checked=true]');
+                    expect(checkedCheckboxes.length).to.be(1);
+                    expect(addToMapBtn.isDisabled()).to.be(false);
 
-                        // uncheck the last, still one checked
-                        checkboxes[1].setValue(false);
-
-                        window.setTimeout(function() {
-                            checkedCheckboxes = form.query(selPrefix + 'checkbox[checked=true]');
-                            addToMapBtn = form.down('button[name="add-checked-layers"]');
-                            expect(checkedCheckboxes.length).to.be(1);
-                            expect(addToMapBtn.isDisabled()).to.be(false);
-
-                            done();
-                        }, 50);
-                    }, 50);
+                    done();
                 }, 50);
             });
 
