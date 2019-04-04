@@ -25,5 +25,27 @@ describe('BasiGX.view.form.CsvImport', function() {
             // teardown
             TestUtil.destroyAll(inst, grid, store);
         });
+
+        it('can be instantiated', function() {
+            var store = Ext.create('Ext.data.Store', {
+                fields:['a'],
+                data: [{ a: 'foo' }]
+            });
+
+            var grid = Ext.create('Ext.grid.Panel', {
+                store: store,
+                columns: [
+                    { text: 'A', dataIndex: 'a' }
+                ],
+                renderTo: Ext.getBody()
+            });
+            var inst = Ext.create('BasiGX.view.form.CsvImport', {
+                grid: grid,
+                renderTo: Ext.getBody()
+            });
+            expect(inst).to.be.a(BasiGX.view.form.CsvImport);
+            // teardown
+            TestUtil.destroyAll(inst, grid, store);
+        });
     });
 });

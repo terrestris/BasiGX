@@ -12,5 +12,14 @@ describe('BasiGX.view.form.Print', function() {
             // teardown
             inst.destroy();
         });
+
+        it('can be rendered', function() {
+            var inst = Ext.create('BasiGX.view.form.Print', {
+                renderTo: Ext.getBody()
+            });
+            expect(inst).to.be.a(BasiGX.view.form.Print);
+            // teardown
+            inst.destroy();
+        });
     });
 });

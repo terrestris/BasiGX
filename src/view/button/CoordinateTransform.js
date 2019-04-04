@@ -68,15 +68,21 @@ Ext.define('BasiGX.view.button.CoordinateTransform', {
     transformCenterOnRender: true,
 
     /**
+     * The window instance which will be created by this button.
+     *
+     * @type {Ext.window.Window}
+     * @private
+     */
+    _win: null,
+
+    /**
      *
      */
     config: {
         handler: function() {
-            var win = Ext.ComponentQuery.query(
-                '[name=coordinate-transform-window]'
-            )[0];
+            var win = this._win;
             if (!win) {
-                Ext.create('Ext.window.Window', {
+                win = Ext.create('Ext.window.Window', {
                     name: 'coordinate-transform-window',
                     title: this.getViewModel().get('windowTitle'),
                     width: 500,
@@ -88,10 +94,22 @@ Ext.define('BasiGX.view.button.CoordinateTransform', {
                         coordinateSystemsToUse: this.coordinateSystemsToUse,
                         transformCenterOnRender: this.transformCenterOnRender
                     }]
-                }).showAt(0);
+                });
+                this._win = win;
+                win.show();
             } else {
                 BasiGX.util.Animate.shake(win);
             }
+        }
+    },
+
+    /**
+     * Do any necessary cleanup (e.g. remove listeners, destroy dependent
+     * objects …).
+     */
+    onDestroy: function() {
+        if (this._win) {
+            this._win.destroy();
         }
     }
 });

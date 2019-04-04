@@ -113,36 +113,56 @@ Ext.define('BasiGX.view.button.AddWms', {
     ],
 
     /**
+     * The window instance which will be created by this button.
+     *
+     * @type {Ext.window.Window}
+     * @private
+     */
+    _win: null,
+
+    /**
      *
      */
     config: {
         windowConfig: {
             // can be used by subclasses to apply/merge
             // additional/other values for the window
-        },
-        handler: function() {
-            var win = Ext.ComponentQuery.query('[name=add-wms-window]')[0];
-            if (!win) {
+        }
+    },
 
-                var windowConfig = {
-                    name: 'add-wms-window',
-                    title: this.getViewModel().get('windowTitle'),
-                    width: 500,
-                    height: 400,
-                    layout: 'fit',
-                    constrain: true,
-                    items: [{
-                        xtype: 'basigx-form-addwms'
-                    }]
-                };
+    handler: function() {
+        var win = this._win;
+        if (!win) {
+            var windowConfig = {
+                name: 'add-wms-window',
+                title: this.getViewModel().get('windowTitle'),
+                width: 500,
+                height: 400,
+                layout: 'fit',
+                constrain: true,
+                items: [{
+                    xtype: 'basigx-form-addwms'
+                }]
+            };
 
-                var windowConfigToApply = this.getWindowConfig();
-                Ext.apply(windowConfig, windowConfigToApply);
+            var windowConfigToApply = this.getWindowConfig();
+            Ext.apply(windowConfig, windowConfigToApply);
 
-                Ext.create('Ext.window.Window', windowConfig).show();
-            } else {
-                BasiGX.util.Animate.shake(win);
-            }
+            win = Ext.create('Ext.window.Window', windowConfig);
+            this._win = win;
+            win.show();
+        } else {
+            BasiGX.util.Animate.shake(win);
+        }
+    },
+
+    /**
+     * Do any necessary cleanup (e.g. remove listeners, destroy dependent
+     * objects …).
+     */
+    onDestroy: function() {
+        if (this._win) {
+            this._win.destroy();
         }
     }
 });
