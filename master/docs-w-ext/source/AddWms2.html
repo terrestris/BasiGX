@@ -129,6 +129,14 @@ Ext.define(&#39;BasiGX.view.button.AddWms&#39;, {
         }
     ],
 
+<span id='BasiGX-view-button-AddWms-property-_win'>    /**
+</span>     * The window instance which will be created by this button.
+     *
+     * @type {Ext.window.Window}
+     * @private
+     */
+    _win: null,
+
 <span id='BasiGX-view-button-AddWms-property-config'>    /**
 </span>     *
      */
@@ -136,30 +144,42 @@ Ext.define(&#39;BasiGX.view.button.AddWms&#39;, {
 <span id='BasiGX-view-button-AddWms-cfg-windowConfig'>        windowConfig: {
 </span>            // can be used by subclasses to apply/merge
             // additional/other values for the window
-        },
-<span id='BasiGX-view-button-AddWms-cfg-handler'>        handler: function() {
-</span>            var win = Ext.ComponentQuery.query(&#39;[name=add-wms-window]&#39;)[0];
-            if (!win) {
+        }
+    },
 
-                var windowConfig = {
-                    name: &#39;add-wms-window&#39;,
-                    title: this.getViewModel().get(&#39;windowTitle&#39;),
-                    width: 500,
-                    height: 400,
-                    layout: &#39;fit&#39;,
-                    constrain: true,
-                    items: [{
-                        xtype: &#39;basigx-form-addwms&#39;
-                    }]
-                };
+<span id='BasiGX-view-button-AddWms-method-handler'>    handler: function() {
+</span>        var win = this._win;
+        if (!win) {
+            var windowConfig = {
+                name: &#39;add-wms-window&#39;,
+                title: this.getViewModel().get(&#39;windowTitle&#39;),
+                width: 500,
+                height: 400,
+                layout: &#39;fit&#39;,
+                constrain: true,
+                items: [{
+                    xtype: &#39;basigx-form-addwms&#39;
+                }]
+            };
 
-                var windowConfigToApply = this.getWindowConfig();
-                Ext.apply(windowConfig, windowConfigToApply);
+            var windowConfigToApply = this.getWindowConfig();
+            Ext.apply(windowConfig, windowConfigToApply);
 
-                Ext.create(&#39;Ext.window.Window&#39;, windowConfig).show();
-            } else {
-                BasiGX.util.Animate.shake(win);
-            }
+            win = Ext.create(&#39;Ext.window.Window&#39;, windowConfig);
+            this._win = win;
+            win.show();
+        } else {
+            BasiGX.util.Animate.shake(win);
+        }
+    },
+
+<span id='BasiGX-view-button-AddWms-method-onDestroy'>    /**
+</span>     * Do any necessary cleanup (e.g. remove listeners, destroy dependent
+     * objects …).
+     */
+    onDestroy: function() {
+        if (this._win) {
+            this._win.destroy();
         }
     }
 });
