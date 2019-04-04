@@ -35,8 +35,12 @@ Ext.define('BasiGX.view.button.ZoomIn', {
         data: {
             tooltip: 'Hineinzoomen',
             text: null,
-            documentation: '<h2>Hineinzoomen</h2>• Ein Klick auf den Button ' +
-                'vergrößert die Karte um eine Zoomstufe.'
+            documentation: '<h2>Hineinzoomen</h2>' +
+                '• Ein Klick auf den Button aktiviert ZoomIn-Modus:<br>' +
+                '• Ein Klick in die Karte vergrößert sie um eine Zoomstufe. ' +
+                '• Wird ein Rechteck über die Karte gezogen, zoomt die Karte ' +
+                'zum gewählten Ausschnitt (Button muss mit der Option ' +
+                '`enableZoomInWithBox=true` konfiguriert sein).'
         }
     },
 
