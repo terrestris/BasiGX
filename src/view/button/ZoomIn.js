@@ -62,8 +62,9 @@ Ext.define('BasiGX.view.button.ZoomIn', {
 
     /**
      * ZoomIn button is not toggleable per default and behaves like simple
-     * button. If #toggleGroup is set by instantiation the `click` handler will
-     * be ignored and `toggle` handler will be used instead.
+     * button. If #toggleGroup or #enableToggle is set by instantiation the
+     * `click` handler will be ignored and `toggle` handler will be used
+     * instead.
      */
     toggleGroup: null,
 
@@ -113,12 +114,12 @@ Ext.define('BasiGX.view.button.ZoomIn', {
         click: function() {
             var me = this;
             // do nothing if configured as toggle button
-            if (!Ext.isEmpty(me.toggleGroup)) {
+            if (me.enableToggle) {
                 return;
             }
             me.zoomIn();
         },
-        toggle: function (btn, pressed) {
+        toggle: function(btn, pressed) {
             var me = this;
             if (me.enableZoomInWithBox) {
                 if (!me.dragZoomInInteraction) {

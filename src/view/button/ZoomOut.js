@@ -59,8 +59,9 @@ Ext.define('BasiGX.view.button.ZoomOut', {
 
     /**
      * ZoomOut button is not toggleable per default and behaves like simple
-     * button. If #toggleGroup is set by instantiation the `click` handler will
-     * be ignored and `toggle` handler will be used instead.
+     * button. If #toggleGroup or #enableToggle is set by instantiation the
+     * `click` handler will be ignored and `toggle` handler will be used
+     * instead.
      */
     toggleGroup: null,
 
@@ -108,21 +109,21 @@ Ext.define('BasiGX.view.button.ZoomOut', {
     },
 
     listeners: {
-        afterrender: function () {
+        afterrender: function() {
             var me = this;
             if (Ext.isEmpty(me.olMap)) {
                 me.olMap = BasiGX.util.Map.getMapComponent().getMap();
             }
         },
-        click: function () {
+        click: function() {
             var me = this;
             // do nothing if configured as toggle button
-            if (!Ext.isEmpty(me.toggleGroup)) {
+            if (me.enableToggle) {
                 return;
             }
             me.zoomOut();
         },
-        toggle: function (btn, pressed) {
+        toggle: function(btn, pressed) {
             var me = this;
             if (me.enableZoomOutWithBox) {
                 if (!me.dragZoomOutInteraction) {
@@ -152,7 +153,7 @@ Ext.define('BasiGX.view.button.ZoomOut', {
      * Callback function of `click` event on the map while zoomOut button is
      * toggled.
      */
-    zoomOut: function () {
+    zoomOut: function() {
         var me = this;
         var zoom;
         var olView = me.olMap.getView();
