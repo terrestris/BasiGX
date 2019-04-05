@@ -60,7 +60,12 @@ Ext.define('BasiGX.view.button.ZoomIn', {
     glyph: 'xf00e@FontAwesome',
     html: '<i class="fa fa-search-plus fa-2x"></i>',
 
-    toggleGroup: 'navigation',
+    /**
+     * ZoomIn button is not toggleable per default and behaves like simple
+     * button. If #toggleGroup is set by instantiation the `click` handler will
+     * be ignored and `toggle` handler will be used instead.
+     */
+    toggleGroup: null,
 
     /**
      * A config object to show this tool in action (live demo) when using the
@@ -78,32 +83,43 @@ Ext.define('BasiGX.view.button.ZoomIn', {
     config: {
         /**
          * When set to true zoom in by clicking and dragging on the map is
-         * enabled. Default is true.
+         * enabled. Only applicable if instantiated as toggle button.
+         * Default is true.
          */
         enableZoomInWithBox: true,
         /**
          * Whether zoom action should be animated or not. Default is true.
          */
-        enableAnimation: true,
+        animate: true,
         /**
          * Reference to ol DragZoom interaction which will be used if
          * #enableZoomInWithBox is set to true.
          */
-        dragZoomInteraction: null,
+        dragZoomInInteraction: null,
         /**
          * Default zoom animation duration in milliseconds. Only applicable if
-         * #enableAnimation is set to true.
+         * #animate is set to true.
          */
         animationDuration: 500
     },
 
     listeners: {
-        toggle: function (btn, pressed) {
+        afterrender: function() {
             var me = this;
-            //fallback
             if (Ext.isEmpty(me.olMap)) {
                 me.olMap = BasiGX.util.Map.getMapComponent().getMap();
             }
+        },
+        click: function() {
+            var me = this;
+            // do nothing if configured as toggle button
+            if (!Ext.isEmpty(me.toggleGroup)) {
+                return;
+            }
+            me.zoomIn();
+        },
+        toggle: function (btn, pressed) {
+            var me = this;
             if (me.enableZoomInWithBox) {
                 if (!me.dragZoomInInteraction) {
                     me.dragZoomInInteraction = new ol.interaction.DragZoom({
@@ -137,7 +153,7 @@ Ext.define('BasiGX.view.button.ZoomIn', {
         var olView = me.olMap.getView();
 
         // This if is need for backwards comaptibility to ol
-        if (me.enableAnimation) {
+        if (me.animate) {
             if (ol.animation) {
                 zoom = ol.animation.zoom({
                     resolution: olView.getResolution(),

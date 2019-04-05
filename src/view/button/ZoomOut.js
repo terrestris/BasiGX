@@ -57,7 +57,12 @@ Ext.define('BasiGX.view.button.ZoomOut', {
      */
     olMap: null,
 
-    toggleGroup: 'navigation',
+    /**
+     * ZoomOut button is not toggleable per default and behaves like simple
+     * button. If #toggleGroup is set by instantiation the `click` handler will
+     * be ignored and `toggle` handler will be used instead.
+     */
+    toggleGroup: null,
 
     /**
      * The icons the button should use.
@@ -82,31 +87,43 @@ Ext.define('BasiGX.view.button.ZoomOut', {
     config: {
         /**
          * When set to true zoom out by clicking and dragging on the map is
-         * enabled. Default is false.
+         * enabled. Only applicable if instantiated as toggle button.
+         * Default is false.
          */
         enableZoomOutWithBox: false,
         /**
          * Whether zoom action should be animated or not. Default is true.
          */
-        enableAnimation: true,
+        animate: true,
         /**
          * Reference to ol DragZoom interaction which will be used if
          * #enableZoomOutWithBox is set to true.
          */
         dragZoomOutInteraction: null,
         /**
-         * Default zoom animation duration in milliseconds.
+         * Default zoom animation duration in milliseconds. Only applicable if
+         * #animate is set to true.
          */
         animationDuration: 500
     },
 
     listeners: {
-        toggle: function (btn, pressed) {
+        afterrender: function () {
             var me = this;
-            //fallback
             if (Ext.isEmpty(me.olMap)) {
                 me.olMap = BasiGX.util.Map.getMapComponent().getMap();
             }
+        },
+        click: function () {
+            var me = this;
+            // do nothing if configured as toggle button
+            if (!Ext.isEmpty(me.toggleGroup)) {
+                return;
+            }
+            me.zoomOut();
+        },
+        toggle: function (btn, pressed) {
+            var me = this;
             if (me.enableZoomOutWithBox) {
                 if (!me.dragZoomOutInteraction) {
                     me.dragZoomOutInteraction = new ol.interaction.DragZoom({
@@ -141,7 +158,7 @@ Ext.define('BasiGX.view.button.ZoomOut', {
         var olView = me.olMap.getView();
 
         // This if is need for backwards compatibility to ol
-        if (me.enableAnimation) {
+        if (me.animate) {
             if (ol.animation) {
                 zoom = ol.animation.zoom({
                     resolution: olView.getResolution(),
