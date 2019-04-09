@@ -35,8 +35,13 @@ Ext.define('BasiGX.view.button.ZoomOut', {
         data: {
             tooltip: 'Herauszoomen',
             text: null,
-            documentation: '<h2>Herauszoomen</h2>• Ein Klick auf den Button ' +
-                'verkleinert die Karte um eine Zoomstufe.'
+            documentation: '<h2>Herauszoomen</h2>' +
+                '• Ein Klick auf den Button aktiviert ZoomOut-Modus:<br>' +
+                '• Ein Klick in die Karte verkleinert sie um eine Zoomstufe. ' +
+                '• Wird ein Rechteck über die Karte gezogen, zoomt die Karte ' +
+                'zum gewählten Ausschnitt (Button muss mit der Option ' +
+                '`enableZoomOutWithBox=true` konfiguriert sein).'
+
         }
     },
 
@@ -51,6 +56,14 @@ Ext.define('BasiGX.view.button.ZoomOut', {
      * The ol map this button is bound to
      */
     olMap: null,
+
+    /**
+     * ZoomOut button is not toggleable per default and behaves like simple
+     * button. If #toggleGroup or #enableToggle is set by instantiation the
+     * `click` handler will be ignored and `toggle` handler will be used
+     * instead.
+     */
+    toggleGroup: null,
 
     /**
      * The icons the button should use.
@@ -73,26 +86,86 @@ Ext.define('BasiGX.view.button.ZoomOut', {
     ],
 
     config: {
-        handler: function() {
+        /**
+         * When set to true zoom out by clicking and dragging on the map is
+         * enabled. Only applicable if instantiated as toggle button.
+         * Default is false.
+         */
+        enableZoomOutWithBox: false,
+        /**
+         * Whether zoom action should be animated or not. Default is true.
+         */
+        animate: true,
+        /**
+         * Reference to ol DragZoom interaction which will be used if
+         * #enableZoomOutWithBox is set to true.
+         */
+        dragZoomOutInteraction: null,
+        /**
+         * Default zoom animation duration in milliseconds. Only applicable if
+         * #animate is set to true.
+         */
+        animationDuration: 500
+    },
+
+    listeners: {
+        afterrender: function() {
             var me = this;
-            var olMap = me.olMap;
-            var olView;
-            var zoom;
-
-            // fallback
-            if (Ext.isEmpty(olMap)) {
-                olMap = BasiGX.util.Map.getMapComponent().getMap();
+            if (Ext.isEmpty(me.olMap)) {
+                me.olMap = BasiGX.util.Map.getMapComponent().getMap();
             }
+        },
+        click: function() {
+            var me = this;
+            // do nothing if configured as toggle button
+            if (me.enableToggle) {
+                return;
+            }
+            me.zoomOut();
+        },
+        toggle: function(btn, pressed) {
+            var me = this;
+            if (me.enableZoomOutWithBox) {
+                if (!me.dragZoomOutInteraction) {
+                    me.dragZoomOutInteraction = new ol.interaction.DragZoom({
+                        condition: ol.events.condition.always,
+                        duration: me.animationDuration,
+                        out: true
+                    });
+                    me.olMap.addInteraction(me.dragZoomOutInteraction);
+                }
+            }
+            if (pressed) {
+                me.olMap.on('click', me.zoomOut, me);
+                if (me.enableZoomOutWithBox) {
+                    me.dragZoomOutInteraction.setActive(true);
+                }
+            } else {
+                me.olMap.un('click', me.zoomOut);
+                if (me.enableZoomOutWithBox) {
+                    me.dragZoomOutInteraction.setActive(false);
+                }
+            }
+        }
+    },
 
-            olView = olMap.getView();
+    /**
+     * Callback function of `click` event on the map while zoomOut button is
+     * toggled.
+     */
+    zoomOut: function() {
+        var me = this;
+        var zoom;
+        var olView = me.olMap.getView();
 
-            // This if is need for backwards compatibility to ol
+        // This if is need for backwards compatibility to ol
+        if (me.animate) {
             if (ol.animation) {
                 zoom = ol.animation.zoom({
                     resolution: olView.getResolution(),
                     duration: 500
                 });
-                olMap.beforeRender(zoom);
+                me.olMap.beforeRender(zoom);
                 olView.setResolution(olView.getResolution() * 2);
             } else {
                 olView.animate({
@@ -100,6 +173,8 @@ Ext.define('BasiGX.view.button.ZoomOut', {
                     duration: 500
                 });
             }
+        } else {
+            olView.setResolution(olView.getResolution() * 2);
         }
     }
 });
