@@ -52,8 +52,13 @@ Ext.define(&#39;BasiGX.view.button.ZoomOut&#39;, {
         data: {
             tooltip: &#39;Herauszoomen&#39;,
             text: null,
-            documentation: &#39;&lt;h2&gt;Herauszoomen&lt;/h2&gt;• Ein Klick auf den Button &#39; +
-                &#39;verkleinert die Karte um eine Zoomstufe.&#39;
+            documentation: &#39;&lt;h2&gt;Herauszoomen&lt;/h2&gt;&#39; +
+                &#39;• Ein Klick auf den Button aktiviert ZoomOut-Modus:&lt;br&gt;&#39; +
+                &#39;• Ein Klick in die Karte verkleinert sie um eine Zoomstufe. &#39; +
+                &#39;• Wird ein Rechteck über die Karte gezogen, zoomt die Karte &#39; +
+                &#39;zum gewählten Ausschnitt (Button muss mit der Option &#39; +
+                &#39;`enableZoomOutWithBox=true` konfiguriert sein).&#39;
+
         }
     },
 
@@ -68,6 +73,14 @@ Ext.define(&#39;BasiGX.view.button.ZoomOut&#39;, {
 </span>     * The ol map this button is bound to
      */
     olMap: null,
+
+<span id='BasiGX-view-button-ZoomOut-property-toggleGroup'>    /**
+</span>     * ZoomOut button is not toggleable per default and behaves like simple
+     * button. If #toggleGroup or #enableToggle is set by instantiation the
+     * `click` handler will be ignored and `toggle` handler will be used
+     * instead.
+     */
+    toggleGroup: null,
 
 <span id='BasiGX-view-button-ZoomOut-property-glyph'>    /**
 </span>     * The icons the button should use.
@@ -90,26 +103,86 @@ Ext.define(&#39;BasiGX.view.button.ZoomOut&#39;, {
     ],
 
     config: {
-<span id='BasiGX-view-button-ZoomOut-cfg-handler'>        handler: function() {
-</span>            var me = this;
-            var olMap = me.olMap;
-            var olView;
-            var zoom;
+<span id='BasiGX-view-button-ZoomOut-cfg-enableZoomOutWithBox'>        /**
+</span>         * When set to true zoom out by clicking and dragging on the map is
+         * enabled. Only applicable if instantiated as toggle button.
+         * Default is false.
+         */
+        enableZoomOutWithBox: false,
+<span id='BasiGX-view-button-ZoomOut-cfg-animate'>        /**
+</span>         * Whether zoom action should be animated or not. Default is true.
+         */
+        animate: true,
+<span id='BasiGX-view-button-ZoomOut-cfg-dragZoomOutInteraction'>        /**
+</span>         * Reference to ol DragZoom interaction which will be used if
+         * #enableZoomOutWithBox is set to true.
+         */
+        dragZoomOutInteraction: null,
+<span id='BasiGX-view-button-ZoomOut-cfg-animationDuration'>        /**
+</span>         * Default zoom animation duration in milliseconds. Only applicable if
+         * #animate is set to true.
+         */
+        animationDuration: 500
+    },
 
-            // fallback
-            if (Ext.isEmpty(olMap)) {
-                olMap = BasiGX.util.Map.getMapComponent().getMap();
+<span id='BasiGX-view-button-ZoomOut-property-listeners'>    listeners: {
+</span>        afterrender: function() {
+            var me = this;
+            if (Ext.isEmpty(me.olMap)) {
+                me.olMap = BasiGX.util.Map.getMapComponent().getMap();
             }
+        },
+        click: function() {
+            var me = this;
+            // do nothing if configured as toggle button
+            if (me.enableToggle) {
+                return;
+            }
+            me.zoomOut();
+        },
+        toggle: function(btn, pressed) {
+            var me = this;
+            if (me.enableZoomOutWithBox) {
+                if (!me.dragZoomOutInteraction) {
+                    me.dragZoomOutInteraction = new ol.interaction.DragZoom({
+                        condition: ol.events.condition.always,
+                        duration: me.animationDuration,
+                        out: true
+                    });
+                    me.olMap.addInteraction(me.dragZoomOutInteraction);
+                }
+            }
+            if (pressed) {
+                me.olMap.on(&#39;click&#39;, me.zoomOut, me);
+                if (me.enableZoomOutWithBox) {
+                    me.dragZoomOutInteraction.setActive(true);
+                }
+            } else {
+                me.olMap.un(&#39;click&#39;, me.zoomOut);
+                if (me.enableZoomOutWithBox) {
+                    me.dragZoomOutInteraction.setActive(false);
+                }
+            }
+        }
+    },
 
-            olView = olMap.getView();
+<span id='BasiGX-view-button-ZoomOut-method-zoomOut'>    /**
+</span>     * Callback function of `click` event on the map while zoomOut button is
+     * toggled.
+     */
+    zoomOut: function() {
+        var me = this;
+        var zoom;
+        var olView = me.olMap.getView();
 
-            // This if is need for backwards compatibility to ol
+        // This if is need for backwards compatibility to ol
+        if (me.animate) {
             if (ol.animation) {
                 zoom = ol.animation.zoom({
                     resolution: olView.getResolution(),
                     duration: 500
                 });
-                olMap.beforeRender(zoom);
+                me.olMap.beforeRender(zoom);
                 olView.setResolution(olView.getResolution() * 2);
             } else {
                 olView.animate({
@@ -117,6 +190,8 @@ Ext.define(&#39;BasiGX.view.button.ZoomOut&#39;, {
                     duration: 500
                 });
             }
+        } else {
+            olView.setResolution(olView.getResolution() * 2);
         }
     }
 });
