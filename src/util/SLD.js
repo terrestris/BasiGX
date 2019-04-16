@@ -26,19 +26,10 @@
 Ext.define('BasiGX.util.SLD', {
     requires: [
         'Ext.String',
+        'BasiGX.util.Jsonix',
         'BasiGX.util.Object'
     ],
     statics: {
-        jsonixContext: null,
-        marshaller: null,
-        unmarshaller: null,
-        neededGlobals: [
-            'Jsonix',
-            'SLD_1_0_0',
-            'Filter_1_0_0',
-            'GML_2_1_2',
-            'XLink_1_0'
-        ],
         DEFAULT_STROKE_OPACITY: '1',
         DEFAULT_STROKE_COLOR: '#000000',
         DEFAULT_STROKE_WIDTH: '1',
@@ -66,49 +57,10 @@ Ext.define('BasiGX.util.SLD', {
         DEFAULT_LABEL_FOLLOW_LINE: 'false',
 
         /**
-         * Method cares about the inital setup and checks if Jsonix is
-         * configured correctly
+         *
          */
         setStaticJsonixReferences: function() {
-            var staticMe = BasiGX.util.SLD;
-            var foundCnt = 0;
-            Ext.each(staticMe.neededGlobals, function(needed) {
-                if (needed in window) {
-                    foundCnt += 1;
-                } else {
-                    Ext.log.error('Required global variable "' + needed + '"' +
-                    ' not found. Are Jsonix needed mappings loaded?');
-                }
-            });
-            if (foundCnt !== staticMe.neededGlobals.length) {
-                var msg = 'This function is not functional as its' +
-                    ' requirements weren\'t met.';
-                staticMe.toSldObject = function() {
-                    Ext.log.error(msg);
-                };
-                staticMe.toSldString = function() {
-                    Ext.log.error(msg);
-                };
-                return;
-            }
-            // create the objects…
-            var context = new Jsonix.Context([
-                SLD_1_0_0, Filter_1_0_0, GML_2_1_2, XLink_1_0
-            ], {
-                namespacePrefixes: {
-                    'http://www.opengis.net/sld': 'sld',
-                    'http://www.opengis.net/ogc': 'ogc',
-                    'http://www.opengis.net/gml': 'gml',
-                    'http://www.w3.org/2001/XMLSchema-instance': 'xsi',
-                    'http://www.w3.org/1999/xlink': 'xlink'
-                }
-            });
-            var marshaller = context.createMarshaller();
-            var unmarshaller = context.createUnmarshaller();
-            // … and store them in the static variables.
-            staticMe.jsonixContext = context;
-            staticMe.marshaller = marshaller;
-            staticMe.unmarshaller = unmarshaller;
+            // empty stub to obtain backwards compatability
         },
 
         /**
@@ -120,7 +72,7 @@ Ext.define('BasiGX.util.SLD', {
          */
         toSldObject: function(sldStr) {
             try {
-                return BasiGX.util.SLD.unmarshaller.unmarshalString(sldStr);
+                return BasiGX.util.Jsonix.unmarshaller.unmarshalString(sldStr);
             } catch (e) {
                 Ext.log.warn('Could not unmarshal the SLD string!');
                 return null;
@@ -135,7 +87,7 @@ Ext.define('BasiGX.util.SLD', {
          * @param {Object} sldObject The SLD object to transform.
          */
         toSldString: function(sldObject) {
-            return BasiGX.util.SLD.marshaller.marshalString(sldObject);
+            return BasiGX.util.Jsonix.marshaller.marshalString(sldObject);
         },
 
         /**
@@ -280,7 +232,7 @@ Ext.define('BasiGX.util.SLD', {
                             filterContent
                         );
                     sldFilter.push(
-                        BasiGX.util.SLD.marshaller.marshalString(sldFilterObj)
+                        BasiGX.util.Jsonix.marshaller.marshalString(sldFilterObj)
                     );
                 }
             });
@@ -814,6 +766,4 @@ Ext.define('BasiGX.util.SLD', {
             return sldObj;
         }
     }
-}, function() {
-    BasiGX.util.SLD.setStaticJsonixReferences();
 });
