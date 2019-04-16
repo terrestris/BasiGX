@@ -35,6 +35,14 @@ Ext.define('BasiGX.plugin.Hover', {
         LAYER_HOVERABLE_PROPERTY_NAME: 'hoverable',
 
         /**
+         * The property of a layer that holds a boolean value which indicates
+         * whether this layer features shall be reverted on hover tooltip.
+         *
+         * @type {String}
+         */
+        LAYER_HOVER_FEATURES_REVERT_NAME: 'hoverFeaturesRevert',
+
+        /**
          * The property of a layer that holds a string value which indicates,
          * which field of the layer shall be shown when hovering.
          *
@@ -310,6 +318,7 @@ Ext.define('BasiGX.plugin.Hover', {
         var mapView = map.getView();
         var pixel = evt.pixel;
         var hoverableProp = me.self.LAYER_HOVERABLE_PROPERTY_NAME;
+        var hoverFeaturesRevertProp = me.self.LAYER_HOVER_FEATURES_REVERT_NAME;
         var hoverLayers = [];
         var hoverFeatures = [];
 
@@ -320,6 +329,7 @@ Ext.define('BasiGX.plugin.Hover', {
             var resolution = mapView.getResolution();
             var projCode = mapView.getProjection().getCode();
             var hoverable = layer.get(hoverableProp);
+            var hoverFeaturesRevert = layer.get(hoverFeaturesRevertProp);
 
             // a layer will NOT be requested for hovering if there is a
             // "hoverable" property set to false. If this property is not set
@@ -356,6 +366,9 @@ Ext.define('BasiGX.plugin.Hover', {
                             feature.setStyle(featureStyle);
                             hoverFeatures.push(feature);
                         });
+                        if (hoverFeaturesRevert) {
+                            hoverFeatures.reverse();
+                        }
 
                         hoverLayers.push(layer);
 
