@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2019-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-util-Namespace'>/**
+</span> * Namespace utility.
+ *
+ * @class BasiGX.util.Namespace
+ */
+Ext.define(&#39;BasiGX.util.Namespace&#39;, {
+
+    inheritableStatics: {
+<span id='BasiGX-util-Namespace-static-property-namespaces'>        /**
+</span>         * An object with all namespaces as keys, and their respective namespace
+         * URI as value.
+         *
+         * Filled in the on class defined function.
+         *
+         * @type {Object}
+         */
+        namespaces: null,
+
+<span id='BasiGX-util-Namespace-static-property-namespaceUris'>        /**
+</span>         * An object with all namespace URIs as keys, and their respective
+         * namespace as value.
+         *
+         * Filled in the on class defined function.
+         *
+         * @type {Object}
+         */
+        namespaceUris: null,
+
+<span id='BasiGX-util-Namespace-static-method-namespaceUriFromNamespace'>        /**
+</span>         * Get the URI of a namespace by it&#39;s alias / name.
+         *
+         * @param {String} namespace The namespace alias / name, e.g. &#39;yourapp&#39;.
+         * @return {String} The URI for that alias / name, e.g.
+         *     &#39;http://tomcat:8080/yourapp&#39;.
+         */
+        namespaceUriFromNamespace: function(namespace) {
+            var staticMe = BasiGX.util.Namespace;
+            var nsUri = &#39;&#39;;
+            if (namespace in staticMe.namespaces) {
+                nsUri = staticMe.namespaces[namespace];
+            }
+            return nsUri;
+        },
+
+<span id='BasiGX-util-Namespace-static-method-namespaceFromNamespaceUri'>        /**
+</span>         * Get the namespace alias / name by it&#39;s namespace URI.
+         *
+         * @param {String} nsUri The namespace URI to get the alias /
+         *     name for, e.g. &#39;http://tomcat:8080/yourapp&#39;.
+         * @return {String} The namespace alias / name, e.g.
+         *     &#39;yourapp&#39;.
+         */
+        namespaceFromNamespaceUri: function(nsUri) {
+            var staticMe = BasiGX.util.Namespace;
+            var ns = &#39;&#39;;
+            if (nsUri in staticMe.namespaceUris) {
+                ns = staticMe.namespaceUris[nsUri];
+            }
+            return ns;
+        },
+
+<span id='BasiGX-util-Namespace-static-method-namespaceFromFeatureType'>        /**
+</span>         * Get the namespace from a qualified featureType.
+         *
+         * @param {String} featureType The featureType,
+         *  e.g. &#39;yourapp:somelayer&#39;.
+         * @return {String}  The namespace alias / name, e.g.
+         *     &#39;yourapp&#39;.
+         */
+        namespaceFromFeatureType: function(featureType) {
+            return (featureType || &#39;&#39;).split(&#39;:&#39;)[0];
+        },
+
+<span id='BasiGX-util-Namespace-static-method-namespaceUriFromFeatureType'>        /**
+</span>         * Get the namespace URI from a qualified featureType.
+         *
+         * @param {String} featureType The featureType,
+         *  e.g. &#39;yourapp:somelayer&#39;.
+         * @return {String} The namespace URI for the featureType,
+         *      e.g. &#39;http://tomcat:8080/yourapp&#39;.
+         */
+        namespaceUriFromFeatureType: function(featureType) {
+            var staticMe = BasiGX.util.Namespace;
+            var namespace = staticMe.namespaceFromFeatureType(featureType);
+            return staticMe.namespaceUriFromNamespace(namespace);
+        },
+
+<span id='BasiGX-util-Namespace-static-method-setup'>        /**
+</span>         * Sets up the internally used objects which link namespaces to their
+         * URIs and vice-versa. Called directly after this class is defined, and
+         * you usually should not need to call it yourself.
+         *
+         * @param {Object} namespaces An object of namespaces.
+         * @private
+         */
+        setup: function(namespaces) {
+            var staticMe = BasiGX.util.Namespace;
+
+            staticMe.namespaces = namespaces;
+            staticMe.namespaceUris = {};
+
+            Ext.iterate(staticMe.namespaces, function(namespace, uri) {
+                staticMe.namespaceUris[uri] = namespace;
+            });
+        }
+    }
+});
+</pre>
+</body>
+</html>

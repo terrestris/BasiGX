@@ -43,19 +43,10 @@
 Ext.define(&#39;BasiGX.util.SLD&#39;, {
     requires: [
         &#39;Ext.String&#39;,
+        &#39;BasiGX.util.Jsonix&#39;,
         &#39;BasiGX.util.Object&#39;
     ],
     statics: {
-<span id='BasiGX-util-SLD-static-property-jsonixContext'>        jsonixContext: null,
-</span><span id='BasiGX-util-SLD-static-property-marshaller'>        marshaller: null,
-</span><span id='BasiGX-util-SLD-static-property-unmarshaller'>        unmarshaller: null,
-</span><span id='BasiGX-util-SLD-static-property-neededGlobals'>        neededGlobals: [
-</span>            &#39;Jsonix&#39;,
-            &#39;SLD_1_0_0&#39;,
-            &#39;Filter_1_0_0&#39;,
-            &#39;GML_2_1_2&#39;,
-            &#39;XLink_1_0&#39;
-        ],
 <span id='BasiGX-util-SLD-static-property-DEFAULT_STROKE_OPACITY'>        DEFAULT_STROKE_OPACITY: &#39;1&#39;,
 </span><span id='BasiGX-util-SLD-static-property-DEFAULT_STROKE_COLOR'>        DEFAULT_STROKE_COLOR: &#39;#000000&#39;,
 </span><span id='BasiGX-util-SLD-static-property-DEFAULT_STROKE_WIDTH'>        DEFAULT_STROKE_WIDTH: &#39;1&#39;,
@@ -83,49 +74,10 @@ Ext.define(&#39;BasiGX.util.SLD&#39;, {
 </span><span id='BasiGX-util-SLD-static-property-DEFAULT_LABEL_FOLLOW_LINE'>        DEFAULT_LABEL_FOLLOW_LINE: &#39;false&#39;,
 </span>
 <span id='BasiGX-util-SLD-static-method-setStaticJsonixReferences'>        /**
-</span>         * Method cares about the inital setup and checks if Jsonix is
-         * configured correctly
+</span>         *
          */
         setStaticJsonixReferences: function() {
-            var staticMe = BasiGX.util.SLD;
-            var foundCnt = 0;
-            Ext.each(staticMe.neededGlobals, function(needed) {
-                if (needed in window) {
-                    foundCnt += 1;
-                } else {
-                    Ext.log.error(&#39;Required global variable &quot;&#39; + needed + &#39;&quot;&#39; +
-                    &#39; not found. Are Jsonix needed mappings loaded?&#39;);
-                }
-            });
-            if (foundCnt !== staticMe.neededGlobals.length) {
-                var msg = &#39;This function is not functional as its&#39; +
-                    &#39; requirements weren\&#39;t met.&#39;;
-                staticMe.toSldObject = function() {
-                    Ext.log.error(msg);
-                };
-                staticMe.toSldString = function() {
-                    Ext.log.error(msg);
-                };
-                return;
-            }
-            // create the objects…
-            var context = new Jsonix.Context([
-                SLD_1_0_0, Filter_1_0_0, GML_2_1_2, XLink_1_0
-            ], {
-                namespacePrefixes: {
-                    &#39;http://www.opengis.net/sld&#39;: &#39;sld&#39;,
-                    &#39;http://www.opengis.net/ogc&#39;: &#39;ogc&#39;,
-                    &#39;http://www.opengis.net/gml&#39;: &#39;gml&#39;,
-                    &#39;http://www.w3.org/2001/XMLSchema-instance&#39;: &#39;xsi&#39;,
-                    &#39;http://www.w3.org/1999/xlink&#39;: &#39;xlink&#39;
-                }
-            });
-            var marshaller = context.createMarshaller();
-            var unmarshaller = context.createUnmarshaller();
-            // … and store them in the static variables.
-            staticMe.jsonixContext = context;
-            staticMe.marshaller = marshaller;
-            staticMe.unmarshaller = unmarshaller;
+            // empty stub to obtain backwards compatibility
         },
 
 <span id='BasiGX-util-SLD-static-method-toSldObject'>        /**
@@ -137,7 +89,7 @@ Ext.define(&#39;BasiGX.util.SLD&#39;, {
          */
         toSldObject: function(sldStr) {
             try {
-                return BasiGX.util.SLD.unmarshaller.unmarshalString(sldStr);
+                return BasiGX.util.Jsonix.unmarshaller.unmarshalString(sldStr);
             } catch (e) {
                 Ext.log.warn(&#39;Could not unmarshal the SLD string!&#39;);
                 return null;
@@ -152,7 +104,7 @@ Ext.define(&#39;BasiGX.util.SLD&#39;, {
          * @param {Object} sldObject The SLD object to transform.
          */
         toSldString: function(sldObject) {
-            return BasiGX.util.SLD.marshaller.marshalString(sldObject);
+            return BasiGX.util.Jsonix.marshaller.marshalString(sldObject);
         },
 
 <span id='BasiGX-util-SLD-static-method-rulesFromSldObject'>        /**
@@ -297,7 +249,9 @@ Ext.define(&#39;BasiGX.util.SLD&#39;, {
                             filterContent
                         );
                     sldFilter.push(
-                        BasiGX.util.SLD.marshaller.marshalString(sldFilterObj)
+                        BasiGX.util.Jsonix.marshaller.marshalString(
+                            sldFilterObj
+                        )
                     );
                 }
             });
@@ -831,8 +785,6 @@ Ext.define(&#39;BasiGX.util.SLD&#39;, {
             return sldObj;
         }
     }
-}, function() {
-    BasiGX.util.SLD.setStaticJsonixReferences();
 });
 </pre>
 </body>

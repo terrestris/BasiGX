@@ -40,7 +40,8 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
     requires: [
         &#39;BasiGX.util.CSRF&#39;,
         &#39;BasiGX.util.Url&#39;,
-        &#39;BasiGX.util.Filter&#39;
+        &#39;BasiGX.util.Filter&#39;,
+        &#39;BasiGX.util.Jsonix&#39;
     ],
 
     inheritableStatics: {
@@ -573,8 +574,8 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
          */
         handleWfsExecuteException: function(response) {
             var staticMe = BasiGX.util.WFS;
-            var filterUtil = BasiGX.util.Filter;
-            var parsedXml = filterUtil.unmarshaller.unmarshalString(response);
+            var util = BasiGX.util.Jsonix;
+            var parsedXml = util.unmarshaller.unmarshalString(response);
             if (parsedXml &amp;&amp; parsedXml.value &amp;&amp; parsedXml.value.exception[0]) {
                 var excReport = parsedXml.value.exception[0];
                 var excCode = excReport.exceptionCode;

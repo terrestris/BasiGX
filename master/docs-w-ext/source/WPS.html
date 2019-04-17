@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2019-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-util-WPS'>/**
+</span> * WPS utility.
+ *
+ * @class BasiGX.util.WPS
+ */
+Ext.define(&#39;BasiGX.util.WPS&#39;, {
+
+    requires: [
+        &#39;BasiGX.util.CSRF&#39;,
+        &#39;BasiGX.util.Jsonix&#39;,
+        &#39;BasiGX.util.Url&#39;,
+        &#39;BasiGX.util.Filter&#39;,
+        &#39;BasiGX.util.Namespace&#39;
+    ],
+
+    inheritableStatics: {
+
+<span id='BasiGX-util-WPS-static-property-errorMsgTitle'>        /* start i18n*/
+</span>        errorMsgTitle: &#39;&#39;,
+<span id='BasiGX-util-WPS-static-property-wpsExecuteExceptionText'>        wpsExecuteExceptionText: &#39;&#39;,
+</span>        /* end i18n*/
+
+<span id='BasiGX-util-WPS-static-method-createWpsExecuteProcessObject'>        /**
+</span>         * Creates a Jsonix object conform to OGC `wps:Execute` XML document.
+         * At the moment it will be assumed that we always return a JSON object
+         * in `wps:ResponseForm`. If this should be changed, the related hard
+         * coded block below should be adjusted.
+         *
+         * `wps:DataInputs` block will be determined via
+         * #requestParamstoWpsInputs method.
+         *
+         * Output after marshaling via Jsonix could be e.g. as follows
+         * (here as example for `gs:ElevationProfile` WPS process,
+         * the huge `&lt;wps:DataInputs&gt;` block is intentionally left out).
+         *
+         *    &lt;wps:Execute xmlns:wps=&quot;http://www.opengis.net/wps/1.0.0&quot;
+         *         xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+         *         xmlns:gml=&quot;http://www.opengis.net/gml&quot;
+         *         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         *         xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;
+         *         xmlns:ows=&quot;http://www.opengis.net/ows/1.1&quot;
+         *         xmlns:wcs=&quot;http://www.opengis.net/wcs/1.1&quot;
+         *         service=&quot;WPS&quot; version=&quot;1.0.0&quot;&gt;
+         *        &lt;ows:Identifier&gt;gs:ElevationProfile&lt;/ows:Identifier&gt;
+         *        &lt;wps:DataInputs&gt;...&lt;/wps:DataInputs&gt;
+         *        &lt;wps:ResponseForm&gt;
+         *            &lt;wps:RawDataOutput mimeType=&quot;application/json&quot;&gt;
+         *                &lt;ows:Identifier&gt;result&lt;/ows:Identifier&gt;
+         *            &lt;/wps:RawDataOutput&gt;
+         *        &lt;/wps:ResponseForm&gt;
+         *    &lt;/wps:Execute&gt;
+         *
+         * @param {String} wpsIdentifier Name of WPS process to be executed
+         * @param {Array&lt;Object&gt;} inputs Array of objects containing values
+         *     to each WPS input parameter.
+         * @return {Object} Jsonix object to be marshaled to XML
+         *     `wps:Execute` document.
+         *
+         */
+        createWpsExecuteProcessObject: function (wpsIdentifier, inputs) {
+            var staticMe = BasiGX.util.WPS;
+            var executeDoc = {
+                name: {
+                    namespaceURI: &quot;http://www.opengis.net/wps/1.0.0&quot;,
+                    localPart: &quot;Execute&quot;,
+                    prefix: &quot;wps&quot;,
+                    key: &quot;{http://www.opengis.net/wps/1.0.0}Execute&quot;,
+                    string: &quot;{http://www.opengis.net/wps/1.0.0}wps:Execute&quot;
+                },
+                value :{
+                    TYPE_NAME: &quot;WPS_1_0_0.Execute&quot;,
+                    version: &quot;1.0.0&quot;,
+                    service: &quot;WPS&quot;,
+                    identifier :{
+                        TYPE_NAME: &quot;OWS_1_1_0.CodeType&quot;,
+                        value: wpsIdentifier
+                    },
+                    dataInputs: {
+                        TYPE_NAME: &quot;WPS_1_0_0.DataInputsType&quot;,
+                        input: staticMe.requestParamstoWpsInputs(inputs)
+                    },
+                    responseForm: {
+                        TYPE_NAME: &quot;WPS_1_0_0.ResponseFormType&quot;,
+                        rawDataOutput: {
+                            TYPE_NAME: &quot;WPS_1_0_0.OutputDefinitionType&quot;,
+                            mimeType: &quot;application/json&quot;,
+                            identifier: {
+                                TYPE_NAME: &quot;OWS_1_1_0.CodeType&quot;,
+                                value: &quot;result&quot;
+                            }
+                        }
+                    }
+                }
+            };
+            return executeDoc;
+        },
+
+<span id='BasiGX-util-WPS-static-method-requestParamstoWpsInputs'>        /**
+</span>         * Creates a part of Jsonix `wps:Execute` object related to
+         * `wps:DataInputs`.
+         *
+         * At the moment the following input types are supported:
+         *   * `coverage`
+         *     * Defined as `wps:Reference`to OGC WCS service.
+         *   * `geometry`
+         *     * Defined as `wps:ComplexData` in CDATA format.
+         *   * `vertexCount`
+         *     * Defined as `wps:LiteralData`, will be used in
+         *          `eg:ElevationProfile` WPS process.
+         *
+         * @param {Array&lt;Object&gt;} inputs Array of objects containing values
+         *     to each WPS input parameter.
+         * @return {Array&lt;Object&gt;} Array of Jsonix objects to be marshaled to
+         *      XML `wps:Input` document block.
+         */
+        requestParamstoWpsInputs: function (inputs) {
+            var staticMe = BasiGX.util.WPS;
+            var wpsInput = [];
+            var singleInput = {};
+            for (var identifier in inputs) {
+                singleInput = {
+                    TYPE_NAME: &#39;WPS_1_0_0.InputType&#39;,
+                    identifier: {
+                        TYPE_NAME: &quot;OWS_1_1_0.CodeType&quot;,
+                        value: identifier
+                    }
+                };
+                var inputValue = inputs[identifier];
+                if (Ext.isObject(inputValue)) {
+                    if (inputValue.hasOwnProperty(&#39;identifier&#39;)) {
+                        // we have a reference
+                        // TODO at the moment only reference to a coverage will
+                        // be supported
+                        singleInput.reference = {
+                            TYPE_NAME: &quot;WPS_1_0_0.InputReferenceType&quot;,
+                            mimeType: &quot;image/tiff&quot;,
+                            href: &quot;http://geoserver/wcs&quot;,
+                            method: &quot;POST&quot;,
+                            body: {
+                                TYPE_NAME: &#39;AnyType&#39;,
+                                content: [
+                                    staticMe.getGetCoverageRequestXml(
+                                        inputValue.identifier
+                                    )
+                                ]
+                            }
+                        };
+                    } else if (inputValue.hasOwnProperty(&#39;mimeType&#39;) &amp;&amp;
+                            inputValue.hasOwnProperty(&#39;data&#39;)) {
+                        // we have a CDATA (e.g. geometry) input
+                        singleInput.data = {
+                            TYPE_NAME: &quot;WPS_1_0_0.DataType&quot;,
+                            complexData: {
+                                TYPE_NAME: &quot;WPS_1_0_0.ComplexDataType&quot;,
+                                mimeType: inputValue.mimeType,
+                                content: [
+                                    &#39;&lt;![CDATA[&#39; + inputValue.data + &#39;]]&gt;&#39;
+                                ]
+                            }
+                        };
+                    }
+                } else {
+                    // we have literal data hier
+                    singleInput.data = {
+                        TYPE_NAME: &quot;WPS_1_0_0.DataType&quot;,
+                        literalData: {
+                            TYPE_NAME: &quot;WPS_1_0_0.LiteralDataType&quot;,
+                            value: inputValue.toString()
+                        }
+                    };
+                }
+                wpsInput.push(singleInput);
+            }
+            return wpsInput;
+        },
+
+<span id='BasiGX-util-WPS-static-method-getGetCoverageRequestXml'>        /**
+</span>         * Creates a Jsonix object conform to WCS GetCoverage request and
+         * marshals it to the related XML document.
+         *
+         * @param {String} coverage Name of the coverage which should be
+         *     requested via WCS GetCoverage.
+         * @return {String} Parsed XML request for the WCS GetCoverage.
+         */
+        getGetCoverageRequestXml: function (coverage) {
+
+            var json = {
+                name: {
+                    namespaceURI: &quot;http://www.opengis.net/wcs/1.1.1&quot;,
+                    localPart: &quot;GetCoverage&quot;,
+                    prefix: &quot;wcs&quot;,
+                    key: &quot;{http://www.opengis.net/wcs/1.1.1}GetCoverage&quot;,
+                    string: &quot;{http://www.opengis.net/wcs/1.1.1}GetCoverage&quot;
+                },
+                value: {
+                    TYPE_NAME: &quot;WCS_1_1.GetCoverage&quot;,
+                    version: &quot;1.1.1&quot;,
+                    service: &quot;WCS&quot;,
+                    identifier: {
+                        TYPE_NAME: &quot;OWS_1_1_0.CodeType&quot;,
+                        value: coverage
+                    },
+                    domainSubset: {
+                        TYPE_NAME: &quot;WCS_1_1.DomainSubsetType&quot;
+                    },
+                    output: {
+                        TYPE_NAME: &quot;WCS_1_1.OutputType&quot;,
+                        format: &quot;image/tiff&quot;
+                    }
+                }
+            };
+            return BasiGX.util.Jsonix.marshaller.marshalString(json);
+        },
+
+<span id='BasiGX-util-WPS-static-method-execute'>        /**
+</span>         * Execute a call to the given WPS process.
+         *
+         * Pass `success` or `failure` callback to process the response of the
+         * WPS call.
+         *
+         * @param {String} process Name of the WPS to be executed.
+         * @param {Object} inputs An object containing all inputs.
+         * @param {Function} [success] The callback to invoke when the execution
+         *     call succeeded. Will receive the XMLHttpRequest object containing
+         *     the response data as first argument. Additionally, the second
+         *     argument will be the parameters to the request call. Optional.
+         * @param {Function} [failure] The callback to invoke when the execution
+         *     call failed. Will receive the XMLHttpRequest object containing
+         *     the response data as first argument. Additionally, the second
+         *     argument will be the parameters to the request call. Optional.
+         * @param {Object} [scope] The scope to be used in the provided callback
+         *     functions. If not provided, the scope is set to the global
+         *     window. Optional.
+         * @param {Number} timeout The timeout in milliseconds to use for the
+         *     request. Default is to 30.000 ms (30 s).
+         * @return {Ext.data.request.Ajax} The request object which on may use
+         *     to e.g. abort the request.
+         */
+        execute: function(process, inputs, success, failure, scope, timeout) {
+            var staticMe = BasiGX.util.WPS;
+            var namespaceUtil = BasiGX.util.Namespace;
+
+            if (!Ext.isDefined(success)) {
+                success = staticMe.genericSuccessHandler;
+            }
+            if (!Ext.isDefined(failure)) {
+                failure = staticMe.genericFailureHandler;
+            }
+
+            var jsonixExecuteObj = staticMe.createWpsExecuteProcessObject(
+                process, inputs
+            );
+            var xml =
+                BasiGX.util.Jsonix.marshaller.marshalString(jsonixExecuteObj);
+            var decodedXml = staticMe.decodeXml(xml);
+
+            var namespace = namespaceUtil.namespaceFromFeatureType(process);
+
+            return staticMe.executeProcess(
+                decodedXml, namespace, success, failure, scope, timeout
+            );
+        },
+
+<span id='BasiGX-util-WPS-static-method-executeProcess'>        /**
+</span>         * Execute a call to a WPS process.
+         *
+         * @param {String} xml The `&lt;wps:Execute&gt;`-xml to send.
+         * @param {String} namespace The namespace of the process to execute.
+         * @param {Function} success The callback to invoke when the
+         *     execution call succeeded. Will receive the response object of the
+         *     request.
+         * @param {Function} failure The callback to invoke when the
+         *     execution call failed. Will receive the response object of the
+         *     request.
+         * @param {Object} scope The scope to be used in the provided callback
+         *     functions. If not provided, the scope is set to the global
+         *     window.
+         * @param {Number} timeout The timeout in milliseconds to use for the
+         *     request. Default is to 30.000 ms (30 s).
+         * @return {Ext.data.request.Ajax} The request object which on may use
+         *     to e.g. abort the request.
+         * @private
+         */
+        executeProcess: function(xml, namespace, success, failure, scope,
+            timeout) {
+            var baseUrl = BasiGX.util.Url.getWebProjectBaseUrl();
+
+            return Ext.Ajax.request({
+                headers: BasiGX.util.CSRF.getHeader(),
+                url: baseUrl + &#39;geoserver.action&#39;,
+                // Pass on certain technically unneeded request paramters, which
+                // `geoserver.action` can use do determine a final URL to pass
+                // the request through to.
+                //
+                // TODO Future enhancements might keep only the `namespace`,
+                //      this would mean that we would change the backend to skip
+                //      detection of the target URL if a namespace parameter is
+                //      found.
+                params: {
+                    service: &#39;WPS&#39;,
+                    request: &#39;Execute&#39;,
+                    version: &#39;1.0.0&#39;,
+                    namespace: namespace
+                },
+                method: &#39;POST&#39;,
+                xmlData: xml,
+                success: success,
+                failure: failure,
+                scope: scope,
+                timeout: timeout
+            });
+        },
+
+<span id='BasiGX-util-WPS-static-method-genericSuccessHandler'>        /**
+</span>         * A generic function bound as the success callback, if none was
+         * provided.
+         */
+        genericSuccessHandler: function() {
+            Ext.log.info(&#39;WPS process executed.&#39;);
+        },
+
+<span id='BasiGX-util-WPS-static-method-genericFailureHandler'>        /**
+</span>         * A generic function bound as the failure callback, if none was
+         * provided.
+         */
+        genericFailureHandler: function() {
+            Ext.log.warn(&#39;Failed to execute WPS process.&#39;);
+        },
+
+<span id='BasiGX-util-WPS-static-method-handleWpsExecuteException'>        /**
+</span>         * If WPS request was successful but response has got an exception,
+         * we try to find it out and show the corresponding error message
+         *
+         * @param {Object} response The response of the successful Ajax call
+         *     which is a ServiceException.
+         */
+        handleWpsExecuteException: function(response) {
+            var staticMe = BasiGX.util.WPS;
+            var filterUtil = BasiGX.util.Filter;
+            var parsedXml = filterUtil.unmarshaller.unmarshalString(response);
+            var excReport;
+            if (parsedXml &amp;&amp; parsedXml.value) {
+                if (parsedXml.value.exception) {
+                    excReport = parsedXml.value.exception[0];
+                } else if (parsedXml.value.status &amp;&amp;
+                        parsedXml.value.status.processFailed &amp;&amp;
+                        parsedXml.value.status.processFailed.exceptionReport) {
+                    excReport = parsedXml.value.status.processFailed
+                        .exceptionReport.exception[0];
+                }
+                var excCode = excReport.exceptionCode;
+                var excMsg = excReport.exceptionText[0];
+                var excTitlePrefix = staticMe.errorMsgTitle;
+                var excTitle = excTitlePrefix + &quot;: &quot; + excCode;
+                BasiGX.util.MsgBox.error(
+                    Ext.String.format(
+                        staticMe.wpsExecuteExceptionText,
+                        excMsg
+                    ),
+                    {title: excTitle}
+                );
+            }
+        },
+
+<span id='BasiGX-util-WPS-static-method-decodeXml'>        /**
+</span>         * Decodes encoded HTML characters like `greater than` (&gt;) or `less
+         *    then` (&lt;) back to the symbols.
+         *
+         * @param {String} xmlString XML or HTML document to be decoded.
+         * @return {String} Decoded XML or HTML document.
+         */
+        decodeXml: function (xmlString) {
+            var map = {
+                &#39;&amp;lt;&#39;: &#39;&lt;&#39;,
+                &#39;&amp;gt;&#39;: &#39;&gt;&#39;
+            };
+            return xmlString.replace(/(&amp;quot;|&amp;lt;|&amp;gt;|&amp;amp;)/g,
+                function(str, item) {
+                    return map[item];
+                }
+            );
+        }
+    }
+});
+</pre>
+</body>
+</html>

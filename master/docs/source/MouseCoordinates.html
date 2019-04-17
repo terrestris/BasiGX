@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2019-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-util-MouseCoordinates'>/**
+</span> * Utility class containing a static method for rendering a mouse coordinates
+ * formatted depending on currently set application projection.
+ *
+ * @class BasiGX.util.MouseCoordinates
+ */
+Ext.define(&#39;BasiGX.util.MouseCoordinates&#39;, {
+
+    statics: {
+<span id='BasiGX-util-MouseCoordinates-static-property-enNorth'>        enNorth: &#39;N&#39;,
+</span><span id='BasiGX-util-MouseCoordinates-static-property-enEast'>        enEast: &#39;E&#39;,
+</span><span id='BasiGX-util-MouseCoordinates-static-property-enSouth'>        enSouth: &#39;S&#39;,
+</span><span id='BasiGX-util-MouseCoordinates-static-property-enWest'>        enWest: &#39;W&#39;,
+</span><span id='BasiGX-util-MouseCoordinates-static-property-mousePositionLabel'>        /* begin i18n */
+</span>        mousePositionLabel: &#39;&#39;,
+<span id='BasiGX-util-MouseCoordinates-static-property-dspNorth'>        dspNorth: &#39;&#39;,
+</span><span id='BasiGX-util-MouseCoordinates-static-property-dspEast'>        dspEast: &#39;&#39;,
+</span><span id='BasiGX-util-MouseCoordinates-static-property-dspSouth'>        dspSouth: &#39;&#39;,
+</span><span id='BasiGX-util-MouseCoordinates-static-property-dspWest'>        dspWest: &#39;&#39;,
+</span>        /* end i18n */
+
+<span id='BasiGX-util-MouseCoordinates-static-method-mouseCoordinateRenderer'>        /**
+</span>         * Renderer for mouse coordinate string representation. The format
+         * depends on configured projection of the application. If some metric
+         * projection (e.g. EPSG:25832 or EPSG:3857) are used, coordinates are
+         * shown in meter, otherwise (e.g. EPSG:4326) degrees units are used.
+         *
+         * @param {Array&lt;Number&gt;} coord Current coordinate pair to be shown.
+         * @param {Array&lt;Number&gt;} hideProjectionName Whether the prefix
+         *     containing current projection name should be hidden or not.
+         * @return {String} Formatted mouse position label.
+         */
+        mouseCoordinateRenderer: function(coord, hideProjectionName) {
+            var staticMe = BasiGX.util.MouseCoordinates;
+            var map = BasiGX.util.Map.getMapComponent().getMap();
+            var proj = map.getView().getProjection();
+            var unitsAreMetric = proj.getUnits() === &#39;m&#39;;
+
+            // for some reason, in case of metric units, the fraction digits
+            // seem not to be correct/irritating in case of metric units...
+            var fractionDigits = unitsAreMetric === true ? 0 : 3;
+
+            var decimal = ol.coordinate.format(
+                coord, &#39;{x} / {y}&#39;, fractionDigits
+            );
+            var decimalSeparator = Ext.util.Format.decimalSeparator;
+
+            if (decimalSeparator !== &#39;.&#39;) {
+                // replace the point as decimal separator with locale one
+                decimal = decimal.replace(/\./g, decimalSeparator);
+            }
+
+            if (!unitsAreMetric) {
+                var hdms = ol.coordinate.toStringHDMS(coord);
+                // handle possibly different abbreviations for north, east, etc.
+                if (staticMe.enNorth !== staticMe.dspNorth) {
+                    hdms = hdms.replace(
+                        new RegExp(staticMe.enNorth, &#39;g&#39;),
+                        staticMe.dspNorth
+                    );
+                }
+                if (staticMe.enEast !== staticMe.dspEast) {
+                    hdms = hdms.replace(
+                        new RegExp(staticMe.enEast, &#39;g&#39;),
+                        staticMe.dspEast
+                    );
+                }
+                if (staticMe.enSouth !== staticMe.dspSouth) {
+                    hdms = hdms.replace(
+                        new RegExp(staticMe.enSouth, &#39;g&#39;),
+                        staticMe.dspSouth
+                    );
+                }
+                if (staticMe.enWest !== staticMe.dspWest) {
+                    hdms = hdms.replace(
+                        new RegExp(staticMe.enWest, &#39;g&#39;),
+                        staticMe.dspWest
+                    );
+                }
+                if (hideProjectionName) {
+                    return Ext.String.format(
+                        &quot;{0}&lt;br/&gt;({1})&quot;,
+                        decimal, hdms
+                    );
+                } else {
+                    return Ext.String.format(
+                        &quot;{0} ({1}): {2}&lt;br/&gt;({3})&quot;,
+                        staticMe.mousePositionLabel, proj.getCode(),
+                        decimal, hdms
+                    );
+                }
+            } else {
+                if (hideProjectionName) {
+                    return Ext.String.format(&quot;{0} (m)&quot;, decimal);
+                } else {
+                    return Ext.String.format(
+                        &quot;{0} ({1}):&lt;br/&gt;{2} (m)&quot;,
+                        staticMe.mousePositionLabel, proj.getCode(),
+                        decimal
+                    );
+                }
+
+            }
+        }
+    }
+});
+</pre>
+</body>
+</html>
