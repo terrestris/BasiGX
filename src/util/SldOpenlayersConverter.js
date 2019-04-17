@@ -32,7 +32,7 @@ Ext.define('BasiGX.util.SldOpenlayersConverter', {
          *
          */
         setStaticJsonixReferences: function() {
-            // empty stub to obtain backwards compatability
+            // empty stub to obtain backwards compatibility
         },
 
         /**

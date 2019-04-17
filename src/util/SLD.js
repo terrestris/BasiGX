@@ -60,7 +60,7 @@ Ext.define('BasiGX.util.SLD', {
          *
          */
         setStaticJsonixReferences: function() {
-            // empty stub to obtain backwards compatability
+            // empty stub to obtain backwards compatibility
         },
 
         /**

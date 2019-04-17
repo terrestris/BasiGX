@@ -61,7 +61,7 @@ Ext.define('BasiGX.util.Namespace', {
          * Get the namespace alias / name by it's namespace URI.
          *
          * @param {String} nsUri The namespace URI to get the alias /
-         *     name for, e.g. 'http://10.133.7.71:8080/yourapp'.
+         *     name for, e.g. 'http://tomcat:8080/yourapp'.
          * @return {String} The namespace alias / name, e.g.
          *     'yourapp'.
          */

@@ -46,7 +46,7 @@ Ext.define('BasiGX.util.WPS', {
          *
          * Output after marshaling via Jsonix could be e.g. as follows
          * (here as example for `gs:ElevationProfile` WPS process,
-         * the huge `<wps:DatInputs>` block is intentionally left out).
+         * the huge `<wps:DataInputs>` block is intentionally left out).
          *
          *    <wps:Execute xmlns:wps="http://www.opengis.net/wps/1.0.0"
          *         xmlns:ogc="http://www.opengis.net/ogc"
