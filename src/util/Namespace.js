@@ -77,7 +77,8 @@ Ext.define('BasiGX.util.Namespace', {
         /**
          * Get the namespace from a qualified featureType.
          *
-         * @param {String} featureType The featureType, e.g. 'yourapp:somelayer'.
+         * @param {String} featureType The featureType,
+         *  e.g. 'yourapp:somelayer'.
          * @return {String}  The namespace alias / name, e.g.
          *     'yourapp'.
          */
@@ -88,7 +89,8 @@ Ext.define('BasiGX.util.Namespace', {
         /**
          * Get the namespace URI from a qualified featureType.
          *
-         * @param {String} featureType The featureType, e.g. 'yourapp:somelayer'.
+         * @param {String} featureType The featureType,
+         *  e.g. 'yourapp:somelayer'.
          * @return {String} The namespace URI for the featureType,
          *      e.g. 'http://tomcat:8080/yourapp'.
          */

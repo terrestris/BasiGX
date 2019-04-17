@@ -47,8 +47,11 @@ Ext.define('BasiGX.util.Jsonix', {
             var availableGlobals = [];
             Ext.each(staticMe.possibleGlobals, function(possible) {
                 if (!(possible in window)) {
-                    Ext.Logger.warn('Possible global variable "' + possible + '"' +
-                    ' not found. This functionality will not be available!');
+                    Ext.Logger.warn(
+                        'Possible global variable "' +
+                        possible + '" not found. ' +
+                        'This functionality will not be available!'
+                    );
                 } else {
                     availableGlobals.push(window[possible]);
                 }
@@ -56,17 +59,17 @@ Ext.define('BasiGX.util.Jsonix', {
             // create the objects…
             var context = new Jsonix.Context(
                 availableGlobals, {
-                namespacePrefixes: {
-                    'http://www.opengis.net/sld': 'sld',
-                    "http://www.opengis.net/ogc": "ogc",
-                    "http://www.opengis.net/gml": "gml",
-                    "http://www.w3.org/2001/XMLSchema-instance": "xsi",
-                    "http://www.w3.org/1999/xlink": "xlink",
-                    "http://www.opengis.net/ows/1.1": "ows",
-                    "http://www.opengis.net/wps/1.0.0": "wps",
-                    "http://www.opengis.net/wcs/1.1.1": "wcs"
-                }
-            });
+                    namespacePrefixes: {
+                        'http://www.opengis.net/sld': 'sld',
+                        "http://www.opengis.net/ogc": "ogc",
+                        "http://www.opengis.net/gml": "gml",
+                        "http://www.w3.org/2001/XMLSchema-instance": "xsi",
+                        "http://www.w3.org/1999/xlink": "xlink",
+                        "http://www.opengis.net/ows/1.1": "ows",
+                        "http://www.opengis.net/wps/1.0.0": "wps",
+                        "http://www.opengis.net/wcs/1.1.1": "wcs"
+                    }
+                });
             var marshaller = context.createMarshaller();
             var unmarshaller = context.createUnmarshaller();
             // … and store them in the static variables.

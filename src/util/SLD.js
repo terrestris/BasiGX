@@ -232,7 +232,9 @@ Ext.define('BasiGX.util.SLD', {
                             filterContent
                         );
                     sldFilter.push(
-                        BasiGX.util.Jsonix.marshaller.marshalString(sldFilterObj)
+                        BasiGX.util.Jsonix.marshaller.marshalString(
+                            sldFilterObj
+                        )
                     );
                 }
             });

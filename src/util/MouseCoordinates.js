@@ -47,7 +47,7 @@ Ext.define('BasiGX.util.MouseCoordinates', {
          */
         mouseCoordinateRenderer: function(coord, hideProjectionName) {
             var staticMe = BasiGX.util.MouseCoordinates;
-            var map = GDIViewer.client.view.component.Map.guess().getMap();
+            var map = BasiGX.util.Map.getMapComponent().getMap();
             var proj = map.getView().getProjection();
             var unitsAreMetric = proj.getUnits() === 'm';
 
