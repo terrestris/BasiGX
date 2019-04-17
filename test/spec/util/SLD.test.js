@@ -83,12 +83,6 @@ describe('BasiGX.util.SLD', function() {
         it('is defined', function() {
             expect(BasiGX.util.SLD).to.not.be(undefined);
         });
-        it('can use Jsonix', function() {
-            expect(Jsonix).to.not.be(undefined);
-            expect(BasiGX.util.SLD.jsonixContext).to.not.be(null);
-            expect(BasiGX.util.SLD.marshaller).to.not.be(null);
-            expect(BasiGX.util.SLD.unmarshaller).to.not.be(null);
-        });
     });
     describe('In depth', function() {
         it('can write an javascript object from SLD string', function() {

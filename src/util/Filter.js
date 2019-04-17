@@ -21,8 +21,6 @@
  */
 Ext.define('BasiGX.util.Filter', {
 
-    requires: 'BasiGX.util.SLD',
-
     statics: {
 
         /**
@@ -432,7 +430,4 @@ Ext.define('BasiGX.util.Filter', {
             return spatialFilter;
         }
     }
-}, function() {
-    BasiGX.util.SLD
-        .setStaticJsonixReferences(BasiGX.util.Filter);
 });
