@@ -56,6 +56,16 @@ Ext.define('BasiGX.util.Jsonix', {
                     availableGlobals.push(window[possible]);
                 }
             });
+            if (!('Jsonix' in window)) {
+                Ext.Logger.warn(
+                    'Missing Jsonix library. BasiGX.util.Jsonix will not ' +
+                    'work as expected.'
+                );
+                staticMe.jsonixContext = null;
+                staticMe.marshaller = null;
+                staticMe.unmarshaller = null;
+                return;
+            }
             // create the objects…
             var context = new Jsonix.Context(
                 availableGlobals, {
