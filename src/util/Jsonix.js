@@ -56,18 +56,28 @@ Ext.define('BasiGX.util.Jsonix', {
                     availableGlobals.push(window[possible]);
                 }
             });
+            if (!('Jsonix' in window)) {
+                Ext.Logger.warn(
+                    'Missing Jsonix library. BasiGX.util.Jsonix will not ' +
+                    'work as expected.'
+                );
+                staticMe.jsonixContext = null;
+                staticMe.marshaller = null;
+                staticMe.unmarshaller = null;
+                return;
+            }
             // create the objects…
             var context = new Jsonix.Context(
                 availableGlobals, {
                     namespacePrefixes: {
                         'http://www.opengis.net/sld': 'sld',
-                        "http://www.opengis.net/ogc": "ogc",
-                        "http://www.opengis.net/gml": "gml",
-                        "http://www.w3.org/2001/XMLSchema-instance": "xsi",
-                        "http://www.w3.org/1999/xlink": "xlink",
-                        "http://www.opengis.net/ows/1.1": "ows",
-                        "http://www.opengis.net/wps/1.0.0": "wps",
-                        "http://www.opengis.net/wcs/1.1.1": "wcs"
+                        'http://www.opengis.net/ogc': 'ogc',
+                        'http://www.opengis.net/gml': 'gml',
+                        'http://www.w3.org/2001/XMLSchema-instance': 'xsi',
+                        'http://www.w3.org/1999/xlink': 'xlink',
+                        'http://www.opengis.net/ows/1.1': 'ows',
+                        'http://www.opengis.net/wps/1.0.0': 'wps',
+                        'http://www.opengis.net/wcs/1.1.1': 'wcs'
                     }
                 });
             var marshaller = context.createMarshaller();
