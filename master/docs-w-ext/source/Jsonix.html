@@ -73,18 +73,28 @@ Ext.define(&#39;BasiGX.util.Jsonix&#39;, {
                     availableGlobals.push(window[possible]);
                 }
             });
+            if (!(&#39;Jsonix&#39; in window)) {
+                Ext.Logger.warn(
+                    &#39;Missing Jsonix library. BasiGX.util.Jsonix will not &#39; +
+                    &#39;work as expected.&#39;
+                );
+                staticMe.jsonixContext = null;
+                staticMe.marshaller = null;
+                staticMe.unmarshaller = null;
+                return;
+            }
             // create the objects…
             var context = new Jsonix.Context(
                 availableGlobals, {
                     namespacePrefixes: {
                         &#39;http://www.opengis.net/sld&#39;: &#39;sld&#39;,
-                        &quot;http://www.opengis.net/ogc&quot;: &quot;ogc&quot;,
-                        &quot;http://www.opengis.net/gml&quot;: &quot;gml&quot;,
-                        &quot;http://www.w3.org/2001/XMLSchema-instance&quot;: &quot;xsi&quot;,
-                        &quot;http://www.w3.org/1999/xlink&quot;: &quot;xlink&quot;,
-                        &quot;http://www.opengis.net/ows/1.1&quot;: &quot;ows&quot;,
-                        &quot;http://www.opengis.net/wps/1.0.0&quot;: &quot;wps&quot;,
-                        &quot;http://www.opengis.net/wcs/1.1.1&quot;: &quot;wcs&quot;
+                        &#39;http://www.opengis.net/ogc&#39;: &#39;ogc&#39;,
+                        &#39;http://www.opengis.net/gml&#39;: &#39;gml&#39;,
+                        &#39;http://www.w3.org/2001/XMLSchema-instance&#39;: &#39;xsi&#39;,
+                        &#39;http://www.w3.org/1999/xlink&#39;: &#39;xlink&#39;,
+                        &#39;http://www.opengis.net/ows/1.1&#39;: &#39;ows&#39;,
+                        &#39;http://www.opengis.net/wps/1.0.0&#39;: &#39;wps&#39;,
+                        &#39;http://www.opengis.net/wcs/1.1.1&#39;: &#39;wcs&#39;
                     }
                 });
             var marshaller = context.createMarshaller();
