@@ -141,7 +141,7 @@ Ext.define('BasiGX.view.button.ZoomOut', {
                     me.dragZoomOutInteraction.setActive(true);
                 }
             } else {
-                me.olMap.un('click', me.zoomOut);
+                me.olMap.un('click', me.zoomOut, me);
                 if (me.enableZoomOutWithBox) {
                     me.dragZoomOutInteraction.setActive(false);
                 }
