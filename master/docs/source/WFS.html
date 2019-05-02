@@ -41,7 +41,8 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
         &#39;BasiGX.util.CSRF&#39;,
         &#39;BasiGX.util.Url&#39;,
         &#39;BasiGX.util.Filter&#39;,
-        &#39;BasiGX.util.Jsonix&#39;
+        &#39;BasiGX.util.Jsonix&#39;,
+        &#39;BasiGX.util.Namespace&#39;
     ],
 
     inheritableStatics: {
@@ -504,6 +505,8 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
 
             var featureType = layer.getSource().getParams().LAYERS;
             var ns = featureType.split(&#39;:&#39;)[0];
+            var namespaceUtil = BasiGX.util.Namespace;
+            var nsUri = namespaceUtil.namespaceUriFromNamespace(ns);
 
             var staticMe = BasiGX.util.WFS;
 
@@ -530,7 +533,7 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
             var xml = Ext.String.format(
                 staticMe.wfsGetFeatureXmlTpl,
                 ns,
-                &#39;http://terrestris.de&#39;, //TODO: do we need sth. better here?
+                nsUri,
                 featureType,
                 srsName,
                 propertyNameXml,
@@ -641,15 +644,17 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
                 var geomFieldName = filterLayer.get(&#39;geomFieldName&#39;);
 
                 staticMe.executeWfsGetFeature(
+                    filterLayer.getSource().getUrls()[0],
                     filterLayer,
-                    displayColumns,
                     srs,
+                    displayColumns,
                     geomFieldName,
                     filter,
                     null,
                     successCallback,
                     failureCallback,
-                    scope
+                    scope,
+                    null
                 );
             }
         },
