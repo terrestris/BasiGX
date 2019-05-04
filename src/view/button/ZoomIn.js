@@ -154,7 +154,7 @@ Ext.define('BasiGX.view.button.ZoomIn', {
         var zoom;
         var olView = me.olMap.getView();
 
-        // This if is need for backwards comaptibility to ol
+        // This if is need for backwards compatibility to ol
         if (me.animate) {
             if (ol.animation) {
                 zoom = ol.animation.zoom({
