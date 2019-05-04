@@ -37,7 +37,8 @@ Ext.define('BasiGX.view.button.ZoomOut', {
             text: null,
             documentation: '<h2>Herauszoomen</h2>' +
                 '• Ein Klick auf den Button aktiviert ZoomOut-Modus:<br>' +
-                '• Ein Klick in die Karte verkleinert sie um eine Zoomstufe. ' +
+                '• Ein Klick in die Karte verkleinert sie um eine Zoomstufe.' +
+                '<br>' +
                 '• Wird ein Rechteck über die Karte gezogen, zoomt die Karte ' +
                 'zum gewählten Ausschnitt (Button muss mit der Option ' +
                 '`enableZoomOutWithBox=true` konfiguriert sein).'
