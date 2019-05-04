@@ -98,13 +98,13 @@ Ext.define('BasiGX.view.button.ZoomOut', {
          */
         animate: true,
         /**
-         * Reference to ol DragZoom interaction which will be used if
-         * #enableZoomOutWithBox is set to true.
+         * Reference to the OpenLayers DragZoom interaction which will be used
+         * if the configuration #enableZoomOutWithBox is set to true.
          */
         dragZoomOutInteraction: null,
         /**
          * Default zoom animation duration in milliseconds. Only applicable if
-         * #animate is set to true.
+         * the configuration #animate is set to true.
          */
         animationDuration: 500
     },

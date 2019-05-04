@@ -94,13 +94,13 @@ Ext.define('BasiGX.view.button.ZoomIn', {
          */
         animate: true,
         /**
-         * Reference to ol DragZoom interaction which will be used if
-         * #enableZoomInWithBox is set to true.
+         * Reference to the OpenLayers DragZoom interaction which will be used
+         * if the configuration #enableZoomInWithBox is set to true.
          */
         dragZoomInInteraction: null,
         /**
          * Default zoom animation duration in milliseconds. Only applicable if
-         * #animate is set to true.
+         * the configuration #animate is set to true.
          */
         animationDuration: 500
     },
