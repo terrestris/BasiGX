@@ -164,14 +164,14 @@ Ext.define('BasiGX.view.button.ZoomOut', {
             if (ol.animation) {
                 zoom = ol.animation.zoom({
                     resolution: olView.getResolution(),
-                    duration: 500
+                    duration: me.animationDuration
                 });
                 me.olMap.beforeRender(zoom);
                 olView.setResolution(olView.getResolution() * 2);
             } else {
                 olView.animate({
                     resolution: olView.getResolution() * 2,
-                    duration: 500
+                    duration: me.animationDuration
                 });
             }
         } else {
