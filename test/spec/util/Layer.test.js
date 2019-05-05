@@ -236,6 +236,125 @@ describe('BasiGX.util.Layer', function() {
         // TODO add meaningful tests
     });
 
+    describe('#getLayerByLayersParam', function() {
+        it('is a defined function', function() {
+            expect(BasiGX.util.Layer.getLayerByLayersParam).to.be.a(Function);
+        });
+
+        var makeTileLayer = function(params) {
+            return new ol.layer.Tile({
+                source: new ol.source.TileWMS({
+                    url: '',
+                    params: params
+                })
+            });
+        };
+        var makeImageLayer = function(params) {
+            return new ol.layer.Image({
+                source: new ol.source.ImageWMS({
+                    url: '',
+                    params: params
+                })
+            });
+        };
+        var tileLayer1 = makeTileLayer({LAYERS: 'abc:def-1'});
+        var tileLayer2 = makeTileLayer({layers: 'abc:def-2'});
+        var tileLayer3 = makeTileLayer({LaYErS: 'abc:def-3'}); // casing crazy
+        var tileLayer4 = makeTileLayer({LAYERS: 'abc:def-4'});
+        var tileLayer5 = makeTileLayer({layers: 'abc:def-5'});
+        var tileLayer6 = makeTileLayer({layERS: 'abc:def-6'}); // casing crazy
+
+        var imageLayer1 = makeImageLayer({LAYERS: 'uvw:xyz-1'});
+        var imageLayer2 = makeImageLayer({layers: 'uvw:xyz-2'});
+        var imageLayer3 = makeImageLayer({LayeRS: 'uvw:xyz-3'}); // casing crazy
+        var imageLayer4 = makeImageLayer({LAYERS: 'uvw:xyz-4'});
+        var imageLayer5 = makeImageLayer({layers: 'uvw:xyz-5'});
+        var imageLayer6 = makeImageLayer({lAyErs: 'uvw:xyz-6'}); // casing crazy
+
+        var deepgroup = new ol.layer.Group({
+            layers: [
+                new ol.layer.Group({
+                    layers: [
+                        tileLayer4, tileLayer5, tileLayer6,
+                        imageLayer4, imageLayer5, imageLayer6
+                    ]
+                })
+            ]
+        });
+        var m = new ol.Map({
+            layers: [
+                tileLayer1, tileLayer2, tileLayer3,
+                imageLayer1, imageLayer2, imageLayer3,
+                deepgroup
+            ]
+        });
+
+        it('returns undefined if not found', function() {
+            var got = BasiGX.util.Layer.getLayerByLayersParam('piep:matz', m);
+            expect(got).to.be(undefined);
+        });
+
+        it('finds a tilelayer (param casing: LAYERS)', function() {
+            var got = BasiGX.util.Layer.getLayerByLayersParam('abc:def-1', m);
+            expect(got).to.be(tileLayer1);
+        });
+
+        it('finds a tilelayer (param casing: layers)', function() {
+            var got = BasiGX.util.Layer.getLayerByLayersParam('abc:def-2', m);
+            expect(got).to.be(tileLayer2);
+        });
+
+        it('finds a tilelayer (param casing: crazy)', function() {
+            var got = BasiGX.util.Layer.getLayerByLayersParam('abc:def-3', m);
+            expect(got).to.be(tileLayer3);
+        });
+
+        it('finds an imagelayer (param casing: LAYERS)', function() {
+            var got = BasiGX.util.Layer.getLayerByLayersParam('uvw:xyz-1', m);
+            expect(got).to.be(imageLayer1);
+        });
+
+        it('finds an imagelayer (param casing: layers)', function() {
+            var got = BasiGX.util.Layer.getLayerByLayersParam('uvw:xyz-2', m);
+            expect(got).to.be(imageLayer2);
+        });
+
+        it('finds an imagelayer (param casing: crazy)', function() {
+            var got = BasiGX.util.Layer.getLayerByLayersParam('uvw:xyz-3', m);
+            expect(got).to.be(imageLayer3);
+        });
+
+        it('finds a tilelayer (param casing: LAYERS) in a group', function() {
+            var got = BasiGX.util.Layer.getLayerByLayersParam('abc:def-4', m);
+            expect(got).to.be(tileLayer4);
+        });
+
+        it('finds a tilelayer (param casing: layers) in a group', function() {
+            var got = BasiGX.util.Layer.getLayerByLayersParam('abc:def-5', m);
+            expect(got).to.be(tileLayer5);
+        });
+
+        it('finds a tilelayer (param casing: crazy) in a group', function() {
+            var got = BasiGX.util.Layer.getLayerByLayersParam('abc:def-6', m);
+            expect(got).to.be(tileLayer6);
+        });
+
+        it('finds an imagelayer (param casing: LAYERS) in a group', function() {
+            var got = BasiGX.util.Layer.getLayerByLayersParam('uvw:xyz-4', m);
+            expect(got).to.be(imageLayer4);
+        });
+
+        it('finds an imagelayer (param casing: layers) in a group', function() {
+            var got = BasiGX.util.Layer.getLayerByLayersParam('uvw:xyz-5', m);
+            expect(got).to.be(imageLayer5);
+        });
+
+        it('finds an imagelayer (param casing: crazy) in a group', function() {
+            var got = BasiGX.util.Layer.getLayerByLayersParam('uvw:xyz-6', m);
+            expect(got).to.be(imageLayer6);
+        });
+    });
+
     after(function() {
         TestUtil.teardownTestObjects(testObjs);
     });
