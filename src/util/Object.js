@@ -97,6 +97,24 @@ Ext.define('BasiGX.util.Object', {
         },
 
         /**
+         * A utility method to get the layers-key from an object which
+         * represents URL params. Will first try the keys `LAYERS`, then
+         * `layers` and finally all sorts of mixed casing spellings like
+         * `lAyERs`.
+         *
+         * @param {Object} params The object to look in.
+         * @return {*} The value for the layers key in the first matched casing
+         *     variant
+         */
+        layersFromParams: function(params) {
+            var commonVariants = ['LAYERS', 'layers'];
+            var variantRegEx = /^layers$/i;
+            return BasiGX.util.Object.getValueSpellingVariants(
+                params, commonVariants, variantRegEx
+            );
+        },
+
+        /**
          * Method may be used to return a value of a given input object by a
          * provided query key. The query key can be used in two ways:
          *   * Single-value: Find the first matching key in the provided object

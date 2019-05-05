@@ -71,7 +71,27 @@ describe('BasiGX.util.Object', function() {
                 );
                 expect(got).to.be('aye');
             });
-        });
+        }); // end of '#getValueSpellingVariants'
+
+        describe('#layersFromParams', function() {
+            var cls = BasiGX.util.Object;
+            it('can be used to get layers in uppercase (LAYERS)', function() {
+                var params = {foo: 'bar', LAYERS: 'yay!'};
+                var got = cls.layersFromParams(params);
+                expect(got).to.be('yay!');
+            });
+            it('can be used to get layers in lowercase (layers)', function() {
+                var params = {foo: 'bar', layers: 'yay!'};
+                var got = cls.layersFromParams(params);
+                expect(got).to.be('yay!');
+            });
+            it('can be used to get layers in any casing (e.g. LaYeRs)', function() {
+                var params = {foo: 'bar', LaYeRs: 'yay!'};
+                var got = cls.layersFromParams(params);
+                expect(got).to.be('yay!');
+            });
+        }); // end of '#layersFromParams'
+
         describe('#getValue', function() {
             var testObject;
             beforeEach(function() {
