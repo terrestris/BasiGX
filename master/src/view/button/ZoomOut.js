@@ -37,7 +37,8 @@ Ext.define('BasiGX.view.button.ZoomOut', {
             text: null,
             documentation: '<h2>Herauszoomen</h2>' +
                 '• Ein Klick auf den Button aktiviert ZoomOut-Modus:<br>' +
-                '• Ein Klick in die Karte verkleinert sie um eine Zoomstufe. ' +
+                '• Ein Klick in die Karte verkleinert sie um eine Zoomstufe.' +
+                '<br>' +
                 '• Wird ein Rechteck über die Karte gezogen, zoomt die Karte ' +
                 'zum gewählten Ausschnitt (Button muss mit der Option ' +
                 '`enableZoomOutWithBox=true` konfiguriert sein).'
@@ -97,13 +98,13 @@ Ext.define('BasiGX.view.button.ZoomOut', {
          */
         animate: true,
         /**
-         * Reference to ol DragZoom interaction which will be used if
-         * #enableZoomOutWithBox is set to true.
+         * Reference to the OpenLayers DragZoom interaction which will be used
+         * if the configuration #enableZoomOutWithBox is set to true.
          */
         dragZoomOutInteraction: null,
         /**
          * Default zoom animation duration in milliseconds. Only applicable if
-         * #animate is set to true.
+         * the configuration #animate is set to true.
          */
         animationDuration: 500
     },
@@ -163,14 +164,14 @@ Ext.define('BasiGX.view.button.ZoomOut', {
             if (ol.animation) {
                 zoom = ol.animation.zoom({
                     resolution: olView.getResolution(),
-                    duration: 500
+                    duration: me.animationDuration
                 });
                 me.olMap.beforeRender(zoom);
                 olView.setResolution(olView.getResolution() * 2);
             } else {
                 olView.animate({
                     resolution: olView.getResolution() * 2,
-                    duration: 500
+                    duration: me.animationDuration
                 });
             }
         } else {

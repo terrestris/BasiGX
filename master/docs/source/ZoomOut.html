@@ -54,7 +54,8 @@ Ext.define(&#39;BasiGX.view.button.ZoomOut&#39;, {
             text: null,
             documentation: &#39;&lt;h2&gt;Herauszoomen&lt;/h2&gt;&#39; +
                 &#39;• Ein Klick auf den Button aktiviert ZoomOut-Modus:&lt;br&gt;&#39; +
-                &#39;• Ein Klick in die Karte verkleinert sie um eine Zoomstufe. &#39; +
+                &#39;• Ein Klick in die Karte verkleinert sie um eine Zoomstufe.&#39; +
+                &#39;&lt;br&gt;&#39; +
                 &#39;• Wird ein Rechteck über die Karte gezogen, zoomt die Karte &#39; +
                 &#39;zum gewählten Ausschnitt (Button muss mit der Option &#39; +
                 &#39;`enableZoomOutWithBox=true` konfiguriert sein).&#39;
@@ -114,13 +115,13 @@ Ext.define(&#39;BasiGX.view.button.ZoomOut&#39;, {
          */
         animate: true,
 <span id='BasiGX-view-button-ZoomOut-cfg-dragZoomOutInteraction'>        /**
-</span>         * Reference to ol DragZoom interaction which will be used if
-         * #enableZoomOutWithBox is set to true.
+</span>         * Reference to the OpenLayers DragZoom interaction which will be used
+         * if the configuration #enableZoomOutWithBox is set to true.
          */
         dragZoomOutInteraction: null,
 <span id='BasiGX-view-button-ZoomOut-cfg-animationDuration'>        /**
 </span>         * Default zoom animation duration in milliseconds. Only applicable if
-         * #animate is set to true.
+         * the configuration #animate is set to true.
          */
         animationDuration: 500
     },
@@ -180,14 +181,14 @@ Ext.define(&#39;BasiGX.view.button.ZoomOut&#39;, {
             if (ol.animation) {
                 zoom = ol.animation.zoom({
                     resolution: olView.getResolution(),
-                    duration: 500
+                    duration: me.animationDuration
                 });
                 me.olMap.beforeRender(zoom);
                 olView.setResolution(olView.getResolution() * 2);
             } else {
                 olView.animate({
                     resolution: olView.getResolution() * 2,
-                    duration: 500
+                    duration: me.animationDuration
                 });
             }
         } else {

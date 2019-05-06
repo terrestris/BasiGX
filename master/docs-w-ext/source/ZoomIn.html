@@ -54,7 +54,8 @@ Ext.define(&#39;BasiGX.view.button.ZoomIn&#39;, {
             text: null,
             documentation: &#39;&lt;h2&gt;Hineinzoomen&lt;/h2&gt;&#39; +
                 &#39;• Ein Klick auf den Button aktiviert ZoomIn-Modus:&lt;br&gt;&#39; +
-                &#39;• Ein Klick in die Karte vergrößert sie um eine Zoomstufe. &#39; +
+                &#39;• Ein Klick in die Karte vergrößert sie um eine Zoomstufe.&#39; +
+                &#39;&lt;br&gt;&#39; +
                 &#39;• Wird ein Rechteck über die Karte gezogen, zoomt die Karte &#39; +
                 &#39;zum gewählten Ausschnitt (Button muss mit der Option &#39; +
                 &#39;`enableZoomInWithBox=true` konfiguriert sein).&#39;
@@ -110,13 +111,13 @@ Ext.define(&#39;BasiGX.view.button.ZoomIn&#39;, {
          */
         animate: true,
 <span id='BasiGX-view-button-ZoomIn-cfg-dragZoomInInteraction'>        /**
-</span>         * Reference to ol DragZoom interaction which will be used if
-         * #enableZoomInWithBox is set to true.
+</span>         * Reference to the OpenLayers DragZoom interaction which will be used
+         * if the configuration #enableZoomInWithBox is set to true.
          */
         dragZoomInInteraction: null,
 <span id='BasiGX-view-button-ZoomIn-cfg-animationDuration'>        /**
 </span>         * Default zoom animation duration in milliseconds. Only applicable if
-         * #animate is set to true.
+         * the configuration #animate is set to true.
          */
         animationDuration: 500
     },
@@ -170,7 +171,7 @@ Ext.define(&#39;BasiGX.view.button.ZoomIn&#39;, {
         var zoom;
         var olView = me.olMap.getView();
 
-        // This if is need for backwards comaptibility to ol
+        // This if is need for backwards compatibility to ol
         if (me.animate) {
             if (ol.animation) {
                 zoom = ol.animation.zoom({
