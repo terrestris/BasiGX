@@ -39,9 +39,97 @@
  */
 Ext.define(&#39;BasiGX.util.Object&#39;, {
 
-    requires: [&#39;BasiGX.util.Application&#39;],
+    requires: [
+        &#39;Ext.Object&#39;,
+        &#39;BasiGX.util.Application&#39;
+    ],
 
     statics: {
+<span id='BasiGX-util-Object-static-method-getValueSpellingVariants'>        /**
+</span>         * Returns the value of a key in the passed object, when we do not know
+         * exactly how the key was spelled (e.g. with regard to casing). This
+         * can be useful, if the object contains key-value-pairs which
+         * represent URL-parameters. With this method you can e.g. find LAYERS,
+         * layers and any other casing (by providing a regular expression) in an
+         * object that represents common WMS query paramers like the ones from
+         * `wmsSource.getParams()`.
+         *
+         * Example:
+         *
+         *     var params = wmsSource.getParams();
+         *     var layers = BasiGX.util.Object.getValueSpellingVariants(
+         *         params, [&#39;LAYERS&#39;, &#39;layers&#39;], /^layers$/i
+         *     );
+         *     // layers now contains the value of e.g. params.LAYERS,
+         *     // params.layers or params.LaYeRs
+         *
+         * @param {Object} obj The object in which the key whose spelling is
+         *     unclear will be looked up. Required.
+         * @param {String[]} commonVariants An array of strings with common
+         *     variants of the key, these will be looked up first and in order.
+         *     At least `commonVariants` or `variantRe` must be passed. You can
+         *     pass both. If one of the keys herein is existing in `obj`, we&#39;ll
+         *     return the value at that key and will not make use of the regular
+         *     expression in `variantRe`.
+         * @param {RegExp} variantRe A regular expression matching the key of
+         *     which we do not know the spelling. At least `variantRe` or
+         *     `commonVariants` must be passed. You can pass both. If a common
+         *     variant exists in `obj`, this will not be considered. Otherwise
+         *     the *first* key in `obj` that matches the regular expression will
+         *     be used.
+         * @return {*} The value stored in `obj` at the first variant of the key
+         *     that matched.
+         */
+        getValueSpellingVariants: function(obj, commonVariants, variantRe) {
+            var foundValue = undefined;
+            if (!obj) {
+                return foundValue; // nothing to search in passed
+            }
+            var hasCommonVariants = Ext.isArray(commonVariants);
+            var hasVariantRegex = variantRe &amp;&amp; variantRe instanceof RegExp;
+            if(!hasVariantRegex &amp;&amp; !hasCommonVariants) {
+                return foundValue; // Neither RegExp nor common variants passed
+            }
+            if (!hasCommonVariants) {
+                commonVariants = [];
+            }
+            Ext.each(commonVariants, function(commonVariant) {
+                if (commonVariant in obj) {
+                    foundValue = obj[commonVariant];
+                    return false; // exit `Ext.each` early
+                }
+            });
+            if(!Ext.isDefined(foundValue) &amp;&amp; hasVariantRegex) {
+                // since we did not find a common variant check all keys against
+                // the regular expression
+                var keys = Ext.Object.getKeys(obj);
+                Ext.each(keys, function(key) {
+                    if (key &amp;&amp; variantRe.test(key)) {
+                        foundValue = obj[key];
+                        return false; // exit `Ext.each` early
+                    }
+                });
+            }
+            return foundValue;
+        },
+
+<span id='BasiGX-util-Object-static-method-layersFromParams'>        /**
+</span>         * A utility method to get the layers-key from an object which
+         * represents URL params. Will first try the keys `LAYERS`, then
+         * `layers` and finally all sorts of mixed casing spellings like
+         * `lAyERs`.
+         *
+         * @param {Object} params The object to look in.
+         * @return {*} The value for the layers key in the first matched casing
+         *     variant
+         */
+        layersFromParams: function(params) {
+            var commonVariants = [&#39;LAYERS&#39;, &#39;layers&#39;];
+            var variantRegEx = /^layers$/i;
+            return BasiGX.util.Object.getValueSpellingVariants(
+                params, commonVariants, variantRegEx
+            );
+        },
 
 <span id='BasiGX-util-Object-static-method-getValue'>        /**
 </span>         * Method may be used to return a value of a given input object by a
