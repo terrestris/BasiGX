@@ -23,8 +23,7 @@
 Ext.define('BasiGX.util.Object', {
 
     requires: [
-        'Ext.Object',
-        'BasiGX.util.Application'
+        'Ext.Object'
     ],
 
     statics: {
@@ -126,7 +125,9 @@ Ext.define('BasiGX.util.Object', {
          * @param {String} queryKey The key to be searched.
          * @param {Object} [queryObject] The object to be searched on. If not
          *     provided the global application context (on root-level) will
-         *     be used.
+         *     be used. You should alway pass queryObject if possible, the
+         *     guessing of the queryObject is *deprecated*, future versions
+         *     might remove this behaviour.
          *
          * @return {*} The target value or `undefined` if the given couldn't be
          *     found.
@@ -134,14 +135,25 @@ Ext.define('BasiGX.util.Object', {
         getValue: function(queryKey, queryObject) {
             var queryMatch;
 
-            // if weren't called with an queryObject, get the global application
-            // context as input value
+            // *deprecated* If we weren't called with an queryObject, get the
+            // global application context as input value, *deprecated*.
             if (!queryObject) {
-                queryObject = BasiGX.util.Application.getAppContext() ||
-                    Ext && Ext.app && Ext.app.Application &&
-                    Ext.app.Application.instance &&
-                    Ext.app.Application.instance.getApplicationContext ?
-                    Ext.app.Application.instance.getApplicationContext() : null;
+                Ext.Logger.warn('Not passing a query object to `getValue` of ' +
+                    '`BasiGX.util.Object` is deprecated.');
+                if ('Application' in BasiGX.util) {
+                    // …we cannot require BasiGX.util.Application since this
+                    // would introduce a circular dependency. We should also
+                    // probably not guess in a library utility method, but
+                    // determine it in application code
+                    queryObject = BasiGX.util.Application.getAppContext();
+                } else {
+                    var appInstance = BasiGX.util.Object.getValue(
+                        'app/Application/instance', Ext
+                    );
+                    if (appInstance) {
+                        queryObject = appInstance.getApplicationContext();
+                    }
+                }
             }
 
             if (!Ext.isObject(queryObject)) {
