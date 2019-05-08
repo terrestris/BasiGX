@@ -107,7 +107,7 @@ Ext.define('BasiGX.util.Layer', {
                     || layer.getSource() instanceof ol.source.ImageWMS)) {
 
                     var params = layer.getSource().getParams();
-                    if(ObjectUtil.layersFromParams(params) === layersParam) {
+                    if (ObjectUtil.layersFromParams(params) === layersParam) {
                         olLayer = layer;
                         foundIt = true;
                     }
