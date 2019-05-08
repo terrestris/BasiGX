@@ -38,7 +38,8 @@
  */
 Ext.define(&#39;BasiGX.util.Layer&#39;, {
     requires: [
-        &#39;BasiGX.util.Map&#39;
+        &#39;BasiGX.util.Map&#39;,
+        &#39;BasiGX.util.Object&#39;
     ],
     statics: {
 <span id='BasiGX-util-Layer-static-property-KEY_DISPLAY_IN_LAYERSWITCHER'>        /**
@@ -109,6 +110,7 @@ Ext.define(&#39;BasiGX.util.Layer&#39;, {
             if (!map) {
                 map = BasiGX.util.Map.getMapComponent().getMap();
             }
+            var ObjectUtil = BasiGX.util.Object;
             var mapLayers = map.getLayers();
             var olLayer;
             var foundIt = false;
@@ -118,10 +120,14 @@ Ext.define(&#39;BasiGX.util.Layer&#39;, {
                     return;
                 }
                 if (layer instanceof ol.layer.Layer &amp;&amp;
-                    layer.getSource() instanceof ol.source.TileWMS &amp;&amp;
-                    layer.getSource().getParams().LAYERS === layersParam) {
-                    olLayer = layer;
-                    foundIt = true;
+                    (layer.getSource() instanceof ol.source.TileWMS
+                    || layer.getSource() instanceof ol.source.ImageWMS)) {
+
+                    var params = layer.getSource().getParams();
+                    if (ObjectUtil.layersFromParams(params) === layersParam) {
+                        olLayer = layer;
+                        foundIt = true;
+                    }
                 } else if (layer instanceof ol.layer.Group) {
                     var groupLayers = layer.getLayers();
 

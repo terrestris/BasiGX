@@ -39,10 +39,11 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
 
     requires: [
         &#39;BasiGX.util.CSRF&#39;,
-        &#39;BasiGX.util.Url&#39;,
         &#39;BasiGX.util.Filter&#39;,
         &#39;BasiGX.util.Jsonix&#39;,
-        &#39;BasiGX.util.Namespace&#39;
+        &#39;BasiGX.util.Namespace&#39;,
+        &#39;BasiGX.util.Object&#39;,
+        &#39;BasiGX.util.Url&#39;
     ],
 
     inheritableStatics: {
@@ -503,7 +504,8 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
                 viewParams = &#39;&#39;;
             }
 
-            var featureType = layer.getSource().getParams().LAYERS;
+            var params = layer.getSource().getParams();
+            var featureType = BasiGX.util.Object.layersFromParams(params);
             var ns = featureType.split(&#39;:&#39;)[0];
             var namespaceUtil = BasiGX.util.Namespace;
             var nsUri = namespaceUtil.namespaceUriFromNamespace(ns);
