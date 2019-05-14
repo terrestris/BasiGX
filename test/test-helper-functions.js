@@ -150,12 +150,12 @@
                 try {
                     cmp.destroy();
                 } catch (e) {
-                    Ext.Logger.warn("Trouble destroying cmp: " + e);
+                    Ext.Logger.warn('Trouble destroying cmp: ' + e);
                     throw e;
                 }
             } else {
-                var msg = "Unexpected component passed for destroying: " +
-                    "'" + cmp + "' (" + (typeof cmp) + ")";
+                var msg = 'Unexpected component passed for destroying: ' +
+                    '\'' + cmp + '\' (' + (typeof cmp) + ')';
                 Ext.Logger.info(msg);
                 throw new Error(msg);
             }

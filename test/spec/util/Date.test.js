@@ -62,14 +62,14 @@ describe('BasiGX.util.Date', function() {
                 expect(clazz.selectedDateStringToRealDate).to.be.a('function');
             });
             it('turns a string to date', function() {
-                var got = clazz.selectedDateStringToRealDate("11/28/2002");
+                var got = clazz.selectedDateStringToRealDate('11/28/2002');
                 expect(Ext.Date.defaultFormat).to.be('m/d/Y');
                 expect(got.getFullYear()).to.be(2002);
                 expect(got.getMonth()).to.be(10); // January is 0
                 expect(got.getDate()).to.be(28);
             });
             it('handles m/d/Y with two digit year', function() {
-                var got = clazz.selectedDateStringToRealDate("11/28/02");
+                var got = clazz.selectedDateStringToRealDate('11/28/02');
                 expect(Ext.Date.defaultFormat).to.be('m/d/Y');
                 expect(got.getFullYear()).to.be(2002);
                 expect(got.getMonth()).to.be(10); // January is 0

@@ -174,7 +174,7 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
         var units = view.getProjection().getUnits();
         var scales = [];
         var cur = minResolution;
-        while(cur < maxResolution) {
+        while (cur < maxResolution) {
             scales.push({
                 scale: resToScale(cur, units).toFixed(0),
                 resolution: cur
