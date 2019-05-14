@@ -20,6 +20,158 @@ describe('BasiGX.util.WFS', function() {
             TestUtil.teardownTestObjects(testObjs);
         });
 
+        var simpleFilterStart = [
+            '<ogc:Filter',
+            ' xmlns:ogc="http://www.opengis.net/ogc">'
+        ].join('');
+        var complexFilterStart = [
+            '<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc"',
+            ' xmlns:gml="http://www.opengis.net/gml"',
+            ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"',
+            ' xmlns:xlink="http://www.w3.org/1999/xlink">'
+        ].join('');
+        var isLike1 = [
+            '  <ogc:PropertyIsLike wildCard="*" singleChar="%" escape="!">',
+            '    <ogc:PropertyName>HUMPTY</ogc:PropertyName>',
+            '    <ogc:Literal>DUMPTY</ogc:Literal>',
+            '  </ogc:PropertyIsLike>'
+        ].join('');
+        var isLike2 = [
+            '  <ogc:PropertyIsLike wildCard="*" singleChar="%" escape="!">',
+            '    <ogc:PropertyName>FOO</ogc:PropertyName>',
+            '    <ogc:Literal>BAR</ogc:Literal>',
+            '  </ogc:PropertyIsLike>'
+        ].join('');
+        var filterEnd = '</ogc:Filter>';
+
+        var isLike1Wrapped = [
+            complexFilterStart,
+            isLike1,
+            filterEnd
+        ].join('');
+
+        describe('#unwrapFilter', function() {
+            it('is defined', function() {
+                expect(WfsUtil.unwrapFilter).to.not.be(undefined);
+            });
+            it('is a function', function() {
+                expect(WfsUtil.unwrapFilter).to.be.a('function');
+            });
+            it('removes <ogc:Filter> tag', function() {
+                var got = WfsUtil
+                    .unwrapFilter(isLike1Wrapped);
+                expect(got).to.eql(isLike1);
+            });
+            it('does not care about attributes', function() {
+                var inputs = [
+                    '<ogc:Filter>foo-bar</ogc:Filter>',
+                    '<ogc:Filter a>foo-bar</ogc:Filter>',
+                    '<ogc:Filter a="b">foo-bar</ogc:Filter>',
+                    '<ogc:Filter a="b" c="d">foo-bar</ogc:Filter>',
+                    '<ogc:Filter   a="b"    c="d"    >foo-bar</ogc:Filter>'
+                ];
+                inputs.forEach(function(input) {
+                    var got = WfsUtil.unwrapFilter(input);
+                    expect(got).to.eql('foo-bar');
+                });
+            });
+            it('returns non-filters untouched', function() {
+                var got = WfsUtil.unwrapFilter('foo-bar');
+                expect(got).to.eql('foo-bar');
+            });
+        });
+
+        describe('#getFilterPrefix', function() {
+            it('is defined', function() {
+                expect(WfsUtil.getFilterPrefix).to.not.be(undefined);
+            });
+            it('is a function', function() {
+                expect(WfsUtil.getFilterPrefix).to.be.a('function');
+            });
+            it('get the actual <ogc:Filter> tag', function() {
+                var got = WfsUtil.getFilterPrefix(
+                    isLike1Wrapped
+                );
+                expect(got).to.eql(complexFilterStart);
+            });
+            it('keeps actual attributes', function() {
+                var inputs = [
+                    '<ogc:Filter>foo-bar</ogc:Filter>',
+                    '<ogc:Filter a>foo-bar</ogc:Filter>',
+                    '<ogc:Filter a="b">foo-bar</ogc:Filter>',
+                    '<ogc:Filter a="b" c="d">foo-bar</ogc:Filter>',
+                    '<ogc:Filter   a="b"    c="d"    >foo-bar</ogc:Filter>'
+                ];
+                var expecteds = [
+                    '<ogc:Filter>',
+                    '<ogc:Filter a>',
+                    '<ogc:Filter a="b">',
+                    '<ogc:Filter a="b" c="d">',
+                    '<ogc:Filter   a="b"    c="d"    >'
+                ];
+                inputs.forEach(function(input, idx) {
+                    var got = WfsUtil.getFilterPrefix(input);
+                    expect(got).to.eql(expecteds[idx]);
+                });
+            });
+            it('returns empty string for non-filters', function() {
+                var got = WfsUtil.getFilterPrefix('foo-bar');
+                expect(got).to.eql('');
+            });
+        });
+
+        describe('#combineFilters', function() {
+            it('is defined', function() {
+                expect(WfsUtil.combineFilters).to.not.be(undefined);
+            });
+            it('is a function', function() {
+                expect(WfsUtil.combineFilters).to.be.a('function');
+            });
+            it('wraps in <ogc:Filter>', function() {
+                var filters = [isLike1, isLike2];
+                var got = WfsUtil.combineFilters(filters);
+                var expStart = Ext.String.startsWith(got, simpleFilterStart);
+                expect(expStart).to.be(true);
+                expect((/<\/ogc:Filter>$/g).test(got)).to.be(true);
+            });
+            it('joins using in <ogc:And>', function() {
+                var filters = [isLike1, isLike2];
+                var got = WfsUtil.combineFilters(filters);
+                var containsOpening = (/<ogc:And>/g).test(got);
+                var containsClosing = (/<\/ogc:And>/g).test(got);
+                expect(containsOpening).to.be(true);
+                expect(containsClosing).to.be(true);
+            });
+            it('can join using <ogc:Or>', function() {
+                var filters = [isLike1, isLike2];
+                var got = WfsUtil
+                    .combineFilters(filters, 'Or');
+                var containsOpening = (/<ogc:Or>/g).test(got);
+                var containsClosing = (/<\/ogc:Or>/g).test(got);
+                expect(containsOpening).to.be(true);
+                expect(containsClosing).to.be(true);
+            });
+            it('optionally does not wrap in <ogc:Filter>', function() {
+                var filters = [isLike1, isLike2];
+                var got = WfsUtil.combineFilters(
+                    filters, 'And', ''
+                );
+                var expStart = Ext.String.startsWith(got, simpleFilterStart);
+                expect(expStart).to.be(false);
+                expect((/^<ogc:And>/g).test(got)).to.be(true);
+                expect((/<\/ogc:And>$/g).test(got)).to.be(true);
+            });
+            it('optionally wraps in custom <ogc:Filter>', function() {
+                var filters = [isLike1, isLike2];
+                var got = WfsUtil.combineFilters(
+                    filters, 'And', complexFilterStart
+                );
+                var expStart = Ext.String.startsWith(got, complexFilterStart);
+                expect(expStart).to.be(true);
+                expect((/<\/ogc:Filter>$/g).test(got)).to.be(true);
+            });
+        });
+
         describe('#getBboxFilter', function() {
             it('returns combined bbox aand intersects filter', function() {
                 var got = WfsUtil.getBboxFilter(
