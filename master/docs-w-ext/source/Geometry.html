@@ -39,7 +39,8 @@ Ext.define(&#39;BasiGX.util.Geometry&#39;, {
 
 <span id='BasiGX-util-Geometry-static-method-getGeometryDuplicates'>        /**
 </span>         * Check the features geometries&#39; for equality and return the features
-         * which have duplicates.
+         * which have duplicates. Currently only works with two dimensional
+         * geometries.
          *
          * @param {ol.Feature[]} features the features to check
          * @param {number} delta the delta for coordinate comparison, default
@@ -65,7 +66,7 @@ Ext.define(&#39;BasiGX.util.Geometry&#39;, {
         },
 
 <span id='BasiGX-util-Geometry-static-method-isDuplicate'>        /**
-</span>         * Checks whether to geometries are equal.
+</span>         * Checks whether two geometries are equal.
          *
          * @param {ol.geom.Geometry} geom1 the first geometry
          * @param {ol.geom.Geometry} geom2 the second geometry

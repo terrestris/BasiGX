@@ -29,7 +29,7 @@ Ext.define('BasiGX.util.Namespace', {
          *
          * @type {Object}
          */
-        namespaces: null,
+        namespaces: {},
 
         /**
          * An object with all namespace URIs as keys, and their respective
