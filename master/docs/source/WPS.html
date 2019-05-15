@@ -89,36 +89,36 @@ Ext.define(&#39;BasiGX.util.WPS&#39;, {
          *     `wps:Execute` document.
          *
          */
-        createWpsExecuteProcessObject: function (wpsIdentifier, inputs) {
+        createWpsExecuteProcessObject: function(wpsIdentifier, inputs) {
             var staticMe = BasiGX.util.WPS;
             var executeDoc = {
                 name: {
-                    namespaceURI: &quot;http://www.opengis.net/wps/1.0.0&quot;,
-                    localPart: &quot;Execute&quot;,
-                    prefix: &quot;wps&quot;,
-                    key: &quot;{http://www.opengis.net/wps/1.0.0}Execute&quot;,
-                    string: &quot;{http://www.opengis.net/wps/1.0.0}wps:Execute&quot;
+                    namespaceURI: &#39;http://www.opengis.net/wps/1.0.0&#39;,
+                    localPart: &#39;Execute&#39;,
+                    prefix: &#39;wps&#39;,
+                    key: &#39;{http://www.opengis.net/wps/1.0.0}Execute&#39;,
+                    string: &#39;{http://www.opengis.net/wps/1.0.0}wps:Execute&#39;
                 },
-                value :{
-                    TYPE_NAME: &quot;WPS_1_0_0.Execute&quot;,
-                    version: &quot;1.0.0&quot;,
-                    service: &quot;WPS&quot;,
-                    identifier :{
-                        TYPE_NAME: &quot;OWS_1_1_0.CodeType&quot;,
+                value: {
+                    TYPE_NAME: &#39;WPS_1_0_0.Execute&#39;,
+                    version: &#39;1.0.0&#39;,
+                    service: &#39;WPS&#39;,
+                    identifier: {
+                        TYPE_NAME: &#39;OWS_1_1_0.CodeType&#39;,
                         value: wpsIdentifier
                     },
                     dataInputs: {
-                        TYPE_NAME: &quot;WPS_1_0_0.DataInputsType&quot;,
+                        TYPE_NAME: &#39;WPS_1_0_0.DataInputsType&#39;,
                         input: staticMe.requestParamstoWpsInputs(inputs)
                     },
                     responseForm: {
-                        TYPE_NAME: &quot;WPS_1_0_0.ResponseFormType&quot;,
+                        TYPE_NAME: &#39;WPS_1_0_0.ResponseFormType&#39;,
                         rawDataOutput: {
-                            TYPE_NAME: &quot;WPS_1_0_0.OutputDefinitionType&quot;,
-                            mimeType: &quot;application/json&quot;,
+                            TYPE_NAME: &#39;WPS_1_0_0.OutputDefinitionType&#39;,
+                            mimeType: &#39;application/json&#39;,
                             identifier: {
-                                TYPE_NAME: &quot;OWS_1_1_0.CodeType&quot;,
-                                value: &quot;result&quot;
+                                TYPE_NAME: &#39;OWS_1_1_0.CodeType&#39;,
+                                value: &#39;result&#39;
                             }
                         }
                     }
@@ -145,7 +145,7 @@ Ext.define(&#39;BasiGX.util.WPS&#39;, {
          * @return {Array&lt;Object&gt;} Array of Jsonix objects to be marshaled to
          *      XML `wps:Input` document block.
          */
-        requestParamstoWpsInputs: function (inputs) {
+        requestParamstoWpsInputs: function(inputs) {
             var staticMe = BasiGX.util.WPS;
             var wpsInput = [];
             var singleInput = {};
@@ -153,7 +153,7 @@ Ext.define(&#39;BasiGX.util.WPS&#39;, {
                 singleInput = {
                     TYPE_NAME: &#39;WPS_1_0_0.InputType&#39;,
                     identifier: {
-                        TYPE_NAME: &quot;OWS_1_1_0.CodeType&quot;,
+                        TYPE_NAME: &#39;OWS_1_1_0.CodeType&#39;,
                         value: identifier
                     }
                 };
@@ -164,10 +164,10 @@ Ext.define(&#39;BasiGX.util.WPS&#39;, {
                         // TODO at the moment only reference to a coverage will
                         // be supported
                         singleInput.reference = {
-                            TYPE_NAME: &quot;WPS_1_0_0.InputReferenceType&quot;,
-                            mimeType: &quot;image/tiff&quot;,
-                            href: &quot;http://geoserver/wcs&quot;,
-                            method: &quot;POST&quot;,
+                            TYPE_NAME: &#39;WPS_1_0_0.InputReferenceType&#39;,
+                            mimeType: &#39;image/tiff&#39;,
+                            href: &#39;http://geoserver/wcs&#39;,
+                            method: &#39;POST&#39;,
                             body: {
                                 TYPE_NAME: &#39;AnyType&#39;,
                                 content: [
@@ -181,9 +181,9 @@ Ext.define(&#39;BasiGX.util.WPS&#39;, {
                             inputValue.hasOwnProperty(&#39;data&#39;)) {
                         // we have a CDATA (e.g. geometry) input
                         singleInput.data = {
-                            TYPE_NAME: &quot;WPS_1_0_0.DataType&quot;,
+                            TYPE_NAME: &#39;WPS_1_0_0.DataType&#39;,
                             complexData: {
-                                TYPE_NAME: &quot;WPS_1_0_0.ComplexDataType&quot;,
+                                TYPE_NAME: &#39;WPS_1_0_0.ComplexDataType&#39;,
                                 mimeType: inputValue.mimeType,
                                 content: [
                                     &#39;&lt;![CDATA[&#39; + inputValue.data + &#39;]]&gt;&#39;
@@ -194,9 +194,9 @@ Ext.define(&#39;BasiGX.util.WPS&#39;, {
                 } else {
                     // we have literal data hier
                     singleInput.data = {
-                        TYPE_NAME: &quot;WPS_1_0_0.DataType&quot;,
+                        TYPE_NAME: &#39;WPS_1_0_0.DataType&#39;,
                         literalData: {
-                            TYPE_NAME: &quot;WPS_1_0_0.LiteralDataType&quot;,
+                            TYPE_NAME: &#39;WPS_1_0_0.LiteralDataType&#39;,
                             value: inputValue.toString()
                         }
                     };
@@ -214,30 +214,30 @@ Ext.define(&#39;BasiGX.util.WPS&#39;, {
          *     requested via WCS GetCoverage.
          * @return {String} Parsed XML request for the WCS GetCoverage.
          */
-        getGetCoverageRequestXml: function (coverage) {
+        getGetCoverageRequestXml: function(coverage) {
 
             var json = {
                 name: {
-                    namespaceURI: &quot;http://www.opengis.net/wcs/1.1.1&quot;,
-                    localPart: &quot;GetCoverage&quot;,
-                    prefix: &quot;wcs&quot;,
-                    key: &quot;{http://www.opengis.net/wcs/1.1.1}GetCoverage&quot;,
-                    string: &quot;{http://www.opengis.net/wcs/1.1.1}GetCoverage&quot;
+                    namespaceURI: &#39;http://www.opengis.net/wcs/1.1.1&#39;,
+                    localPart: &#39;GetCoverage&#39;,
+                    prefix: &#39;wcs&#39;,
+                    key: &#39;{http://www.opengis.net/wcs/1.1.1}GetCoverage&#39;,
+                    string: &#39;{http://www.opengis.net/wcs/1.1.1}GetCoverage&#39;
                 },
                 value: {
-                    TYPE_NAME: &quot;WCS_1_1.GetCoverage&quot;,
-                    version: &quot;1.1.1&quot;,
-                    service: &quot;WCS&quot;,
+                    TYPE_NAME: &#39;WCS_1_1.GetCoverage&#39;,
+                    version: &#39;1.1.1&#39;,
+                    service: &#39;WCS&#39;,
                     identifier: {
-                        TYPE_NAME: &quot;OWS_1_1_0.CodeType&quot;,
+                        TYPE_NAME: &#39;OWS_1_1_0.CodeType&#39;,
                         value: coverage
                     },
                     domainSubset: {
-                        TYPE_NAME: &quot;WCS_1_1.DomainSubsetType&quot;
+                        TYPE_NAME: &#39;WCS_1_1.DomainSubsetType&#39;
                     },
                     output: {
-                        TYPE_NAME: &quot;WCS_1_1.OutputType&quot;,
-                        format: &quot;image/tiff&quot;
+                        TYPE_NAME: &#39;WCS_1_1.OutputType&#39;,
+                        format: &#39;image/tiff&#39;
                     }
                 }
             };
@@ -383,7 +383,7 @@ Ext.define(&#39;BasiGX.util.WPS&#39;, {
                 var excCode = excReport.exceptionCode;
                 var excMsg = excReport.exceptionText[0];
                 var excTitlePrefix = staticMe.errorMsgTitle;
-                var excTitle = excTitlePrefix + &quot;: &quot; + excCode;
+                var excTitle = excTitlePrefix + &#39;: &#39; + excCode;
                 BasiGX.util.MsgBox.error(
                     Ext.String.format(
                         staticMe.wpsExecuteExceptionText,
@@ -401,7 +401,7 @@ Ext.define(&#39;BasiGX.util.WPS&#39;, {
          * @param {String} xmlString XML or HTML document to be decoded.
          * @return {String} Decoded XML or HTML document.
          */
-        decodeXml: function (xmlString) {
+        decodeXml: function(xmlString) {
             var map = {
                 &#39;&amp;lt;&#39;: &#39;&lt;&#39;,
                 &#39;&amp;gt;&#39;: &#39;&gt;&#39;

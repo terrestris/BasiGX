@@ -190,7 +190,7 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
         me.on('beforedestroy', function() {
             var transformvectorlayer = BasiGX.util.Layer.getLayerByName(
                 'transformvectorlayer');
-            if(transformvectorlayer) {
+            if (transformvectorlayer) {
                 transformvectorlayer.getSource().clear();
             }
             me.map.un('click', me.transform);

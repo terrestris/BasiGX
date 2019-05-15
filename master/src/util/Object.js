@@ -69,7 +69,7 @@ Ext.define('BasiGX.util.Object', {
             }
             var hasCommonVariants = Ext.isArray(commonVariants);
             var hasVariantRegex = variantRe && variantRe instanceof RegExp;
-            if(!hasVariantRegex && !hasCommonVariants) {
+            if (!hasVariantRegex && !hasCommonVariants) {
                 return foundValue; // Neither RegExp nor common variants passed
             }
             if (!hasCommonVariants) {
@@ -81,7 +81,7 @@ Ext.define('BasiGX.util.Object', {
                     return false; // exit `Ext.each` early
                 }
             });
-            if(!Ext.isDefined(foundValue) && hasVariantRegex) {
+            if (!Ext.isDefined(foundValue) && hasVariantRegex) {
                 // since we did not find a common variant check all keys against
                 // the regular expression
                 var keys = Ext.Object.getKeys(obj);

@@ -111,22 +111,22 @@ Ext.define(&#39;BasiGX.util.MouseCoordinates&#39;, {
                 }
                 if (hideProjectionName) {
                     return Ext.String.format(
-                        &quot;{0}&lt;br/&gt;({1})&quot;,
+                        &#39;{0}&lt;br/&gt;({1})&#39;,
                         decimal, hdms
                     );
                 } else {
                     return Ext.String.format(
-                        &quot;{0} ({1}): {2}&lt;br/&gt;({3})&quot;,
+                        &#39;{0} ({1}): {2}&lt;br/&gt;({3})&#39;,
                         staticMe.mousePositionLabel, proj.getCode(),
                         decimal, hdms
                     );
                 }
             } else {
                 if (hideProjectionName) {
-                    return Ext.String.format(&quot;{0} (m)&quot;, decimal);
+                    return Ext.String.format(&#39;{0} (m)&#39;, decimal);
                 } else {
                     return Ext.String.format(
-                        &quot;{0} ({1}):&lt;br/&gt;{2} (m)&quot;,
+                        &#39;{0} ({1}):&lt;br/&gt;{2} (m)&#39;,
                         staticMe.mousePositionLabel, proj.getCode(),
                         decimal
                     );
