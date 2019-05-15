@@ -26,7 +26,7 @@ describe('BasiGX.view.button.CoordinateTransform', function() {
 
     describe('Behaviour', function() {
         it('shows a BasiGX.view.form.CoordinateTransform in a window on click',
-            function () {
+            function() {
                 var btn = Ext.create('BasiGX.view.button.CoordinateTransform', {
                     renderTo: Ext.getBody(),
                     coordinateSystemsToUse: [
@@ -45,7 +45,7 @@ describe('BasiGX.view.button.CoordinateTransform', function() {
             }
         );
 
-        it('only opens one window on multiple click', function () {
+        it('only opens one window on multiple click', function() {
             var btn = Ext.create('BasiGX.view.button.CoordinateTransform', {
                 renderTo: Ext.getBody(),
                 coordinateSystemsToUse: [
@@ -65,7 +65,7 @@ describe('BasiGX.view.button.CoordinateTransform', function() {
             btn.destroy();
         });
 
-        it('cleans up an opened window on close', function () {
+        it('cleans up an opened window on close', function() {
             var btn = Ext.create('BasiGX.view.button.CoordinateTransform', {
                 renderTo: Ext.getBody(),
                 coordinateSystemsToUse: [

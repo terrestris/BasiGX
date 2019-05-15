@@ -16,7 +16,7 @@ describe('BasiGX.view.button.History', function() {
     afterEach(function() {
         btn.destroy();
         var parent = buttonDiv && buttonDiv.parentNode;
-        if(parent) {
+        if (parent) {
             parent.removeChild(buttonDiv);
         }
     });

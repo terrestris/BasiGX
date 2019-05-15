@@ -8,7 +8,7 @@ describe('BasiGX.view.form.CsvImport', function() {
 
         it('can be instantiated', function() {
             var store = Ext.create('Ext.data.Store', {
-                fields:['a'],
+                fields: ['a'],
                 data: [{ a: 'foo' }]
             });
 
@@ -28,7 +28,7 @@ describe('BasiGX.view.form.CsvImport', function() {
 
         it('can be instantiated', function() {
             var store = Ext.create('Ext.data.Store', {
-                fields:['a'],
+                fields: ['a'],
                 data: [{ a: 'foo' }]
             });
 

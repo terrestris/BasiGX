@@ -22,7 +22,7 @@ describe('BasiGX.view.button.AddWms', function() {
     });
 
     describe('Behaviour', function() {
-        it('shows a BasiGX.view.form.AddWms in a window on click', function () {
+        it('shows a BasiGX.view.form.AddWms in a window on click', function() {
             var btn = Ext.create('BasiGX.view.button.AddWms', {
                 renderTo: Ext.getBody()
             });
@@ -35,7 +35,7 @@ describe('BasiGX.view.button.AddWms', function() {
             btn.destroy();
         });
 
-        it('only opens one window on multiple click', function () {
+        it('only opens one window on multiple click', function() {
             var btn = Ext.create('BasiGX.view.button.AddWms', {
                 renderTo: Ext.getBody()
             });
@@ -50,7 +50,7 @@ describe('BasiGX.view.button.AddWms', function() {
             btn.destroy();
         });
 
-        it('cleans up an opened window on close', function () {
+        it('cleans up an opened window on close', function() {
             var btn = Ext.create('BasiGX.view.button.AddWms', {
                 renderTo: Ext.getBody()
             });

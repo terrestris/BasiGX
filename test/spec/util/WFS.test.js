@@ -490,7 +490,7 @@ describe('BasiGX.util.WFS', function() {
             var layer = new ol.layer.Tile({
                 source: new ol.source.TileWMS({
                     params: {
-                        TIME: "1999-11-27/2000-11-27"
+                        TIME: '1999-11-27/2000-11-27'
                     }
                 })
             });
@@ -564,7 +564,7 @@ describe('BasiGX.util.WFS', function() {
                     source: new ol.source.OSM({})
                 });
                 var filters = WfsUtil.getTimeFilterParts(
-                    l, 'a', "2001-11-27/2002-11-27"
+                    l, 'a', '2001-11-27/2002-11-27'
                 );
                 expect(filters).to.be.an('array');
                 expect(filters.length).to.be(2);
@@ -584,7 +584,7 @@ describe('BasiGX.util.WFS', function() {
                 var l = new ol.layer.Tile({
                     source: new ol.source.TileWMS({
                         params: {
-                            TIME: "1999-11-27"
+                            TIME: '1999-11-27'
                         }
                     })
                 });
@@ -608,7 +608,7 @@ describe('BasiGX.util.WFS', function() {
                     source: new ol.source.OSM({})
                 });
                 var filters = WfsUtil.getTimeFilterParts(
-                    l, 'a', "1999-11-27"
+                    l, 'a', '1999-11-27'
                 );
                 expect(filters).to.be.an('array');
                 expect(filters.length).to.be(2);

@@ -60,11 +60,11 @@ describe('BasiGX.view.button.ZoomOut', function() {
             btn.toggle();
             expect(btn.olMap.getInteractions().getArray().length).to.be(intCount + 1);
         });
-        it('doesn\'t do anything on click if configured as toggle button', function () {
+        it('doesn\'t do anything on click if configured as toggle button', function() {
             var got = btn.click();
             expect(got).to.be(undefined);
         });
-        it('calls zoomOut method on click if configured as simple button', function () {
+        it('calls zoomOut method on click if configured as simple button', function() {
             var btn2 = Ext.create('BasiGX.view.button.ZoomOut', {
                 olMap: map
             });

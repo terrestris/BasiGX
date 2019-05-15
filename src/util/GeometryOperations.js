@@ -39,7 +39,7 @@ Ext.define('BasiGX.util.GeometryOperations', {
          */
         translateCircleToPolygon: function(features) {
             Ext.each(features.getArray(), function(f) {
-                if (f.getGeometry().getType() === "Circle") {
+                if (f.getGeometry().getType() === 'Circle') {
                     var geom = f.getGeometry();
                     var newGeom = new ol.geom.Polygon.fromCircle(geom);
                     var newFeat = new ol.Feature(newGeom);
