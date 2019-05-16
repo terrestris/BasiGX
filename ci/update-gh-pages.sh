@@ -119,7 +119,8 @@ jsduck \
     "$DOWN_DIR/ext-$SENCHA_EXTJS_VERSION/classic/classic/src"
 
 
-# 4. done.
+# 4. Add minified build
+npx uglifyjs $(find src/ -name "*.js") --compress --mangle > BasiGX.min.js
 
 # Next: add, commit and push
 git add --all
