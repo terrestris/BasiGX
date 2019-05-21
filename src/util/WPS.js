@@ -351,8 +351,8 @@ Ext.define('BasiGX.util.WPS', {
          */
         handleWpsExecuteException: function(response) {
             var staticMe = BasiGX.util.WPS;
-            var filterUtil = BasiGX.util.Filter;
-            var parsedXml = filterUtil.unmarshaller.unmarshalString(response);
+            var jsonixUtil = BasiGX.util.Jsonix;
+            var parsedXml = jsonixUtil.unmarshaller.unmarshalString(response);
             var excReport;
             if (parsedXml && parsedXml.value) {
                 if (parsedXml.value.exception) {
