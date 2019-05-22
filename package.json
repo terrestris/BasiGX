@@ -8,7 +8,7 @@
     "summary": "Basic Components for ExtJS 6 and GeoExt 3",
     "description": "Basic Components for ExtJS 6 and GeoExt 3",
     "detailedDescription": "This package consists of several components that can be used to setup an Application based on ExtJS 6, GeoExt 3 and OL3",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "compatVersion": "1.0.0",
     "format": "1",
     "framework": "ext",
@@ -46,7 +46,7 @@
         "serve-examples": "serve -l 3000 & opn 'http://localhost:3000/examples'",
         "build": "npm run test && npm run clean:dist && copyfiles -V -a 'src/**' 'sass/**' 'resources/**' Readme.md LICENSE package.json dist/",
         "clean:dist": "rimraf ./dist/*",
-        "release": "np --no-yarn --contents dist && git push https://github.com/terrestris/BasiGX.git master --tags"
+        "release": "npm run build && np --no-yarn --contents dist && git push https://github.com/terrestris/BasiGX.git master --tags"
     },
     "repository": {
         "type": "git",
