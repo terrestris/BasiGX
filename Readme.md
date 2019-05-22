@@ -18,12 +18,12 @@ Assuming you already have setup or freshly created an ExtJS 6 application, you j
 
 * Add GeoExt by installing it via npm:
 ```bash
-npm i geoext3
+npm i @geoext/geoext3
 ```
 
 * Add BasiGX by installing it via npm:
 ```bash
-npm i basigx
+npm i @terrestris/basigx
 ```
 
 * Add `GeoExt` & `BasiGX` to the classpath in `app.json`.
@@ -47,8 +47,6 @@ npm i basigx
         ]
         ...
 ```
-
-* Call `sencha app refresh`
 
 ## Feedback
 
