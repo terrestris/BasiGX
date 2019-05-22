@@ -44,7 +44,7 @@
         "ci-coverage": "npm run clean-coverage && npm run test && istanbul report --root ./coverage lcovonly && cat ./coverage/lcov.info | coveralls",
         "html-coverage": "npm run clean-coverage && npm run test && istanbul report --root ./coverage html",
         "serve-examples": "serve -l 3000 & opn 'http://localhost:3000/examples'",
-        "build": "npm run test && npm run clean:dist && copyfiles -V -a 'src/**' 'sass/**' 'resources/**' Readme.md LICENSE dist/",
+        "build": "npm run test && npm run clean:dist && copyfiles -V -a 'src/**' 'sass/**' 'resources/**' Readme.md LICENSE package.json dist/",
         "clean:dist": "rimraf ./dist/*",
         "release": "np --no-yarn --contents dist && git push https://github.com/terrestris/BasiGX.git master --tags"
     },
