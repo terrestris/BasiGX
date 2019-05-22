@@ -72,6 +72,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     items: [{
         xtype: 'grid',
         selModel: 'checkboxmodel',
+        enableLocking: true,
         plugins: {
             ptype: 'cellediting',
             clicksToEdit: 1
@@ -322,10 +323,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var columns = [];
         if (this.getAddZoomButton()) {
             columns.push({
+                minWidth: 35,
                 menuDisabled: true,
                 enableColumnHide: false,
                 hideable: false,
                 sortable: false,
+                disabled: true,
+                locked: true,
                 renderer: function() {
                     return '<span class="fa fa-search" ' +
                         'style="cursor: pointer;"></span>';
