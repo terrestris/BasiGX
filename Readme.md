@@ -18,7 +18,7 @@ Assuming you already have setup or freshly created an ExtJS 6 application, you j
 
 * Add GeoExt by installing it via npm:
 ```bash
-npm i @geoext/geoext3
+npm i @geoext/geoext
 ```
 
 * Add BasiGX by installing it via npm:
