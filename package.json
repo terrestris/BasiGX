@@ -1,5 +1,5 @@
 {
-    "name": "BasiGX",
+    "name": "basigx",
     "namespace": "BasiGX",
     "type": "code",
     "creator": "terrestris GmbH & Co. KG",
@@ -43,13 +43,17 @@
         "clean-coverage": "rimraf coverage",
         "ci-coverage": "npm run clean-coverage && npm run test && istanbul report --root ./coverage lcovonly && cat ./coverage/lcov.info | coveralls",
         "html-coverage": "npm run clean-coverage && npm run test && istanbul report --root ./coverage html",
-        "serve-examples": "serve -l 3000 & opn 'http://localhost:3000/examples'"
+        "serve-examples": "serve -l 3000 & opn 'http://localhost:3000/examples'",
+        "build": "npm run test && npm run clean:dist && copyfiles -V -a 'src/**' 'sass/**' 'resources/**' Readme.md LICENSE dist/",
+        "clean:dist": "rimraf ./dist/*",
+        "release": "np --no-yarn --contents dist && git push https://github.com/terrestris/BasiGX.git master --tags"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/terrestris/BasiGX.git"
     },
     "devDependencies": {
+        "copyfiles": "2.1.0",
         "coveralls": "3.0.3",
         "eslint": "5.16.0",
         "expect.js": "0.3.1",
@@ -63,6 +67,7 @@
         "karma-mocha-reporter": "2.2.5",
         "karma-sinon": "1.0.5",
         "mocha": "6.1.4",
+        "np": "5.0.2",
         "opn-cli": "5.0.0",
         "puppeteer": "1.16.0",
         "rimraf": "2.6.3",

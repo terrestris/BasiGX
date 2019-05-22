@@ -16,23 +16,36 @@ It consists of multiple components that helps the developer to put together a cu
 
 Assuming you already have setup or freshly created an ExtJS 6 application, you just need to
 
-* Add the GeoExt ExtJS repository:
+* Add GeoExt by installing it via npm:
 ```bash
-sencha package repo add GeoExt http://geoext.github.io/geoext3/cmd/pkgs
+npm i geoext3
 ```
 
-* Add the BasiGX ExtJS repository:
+* Add BasiGX by installing it via npm:
 ```bash
-sencha package repo add BasiGX http://terrestris.github.io/BasiGX/cmd/pkgs
+npm i basigx
 ```
 
-* Add the packages `GeoExt`, `BasiGX` & `ux` to the requirements in `app.json`.
+* Add `GeoExt` & `BasiGX` to the classpath in `app.json`.
 ```json
-    "requires": [
-        "GeoExt",
-        "BasiGX",
-        "ux"
-    ],
+    "classpath": [
+        "app",
+        "${toolkit.name}/src",
+        "node_modules/@terrestris/basigx/src",
+        ...
+```
+
+* Add the sass directory of `BasiGX` to the sass -> src configuration in `app.json`.
+```json
+    "sass": [
+        ...
+        "src": [
+            "sass/src",
+            "${toolkit.name}/sass/src",
+            "node_modules/@terrestris/basigx/sass/src"
+            ...
+        ]
+        ...
 ```
 
 * Call `sencha app refresh`
