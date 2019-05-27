@@ -40,12 +40,14 @@ Ext.define('BasiGX.util.WFS', {
          *
          * * Index `0`: Complete match.
          * * Index `1`: `<ogc:Filter>` start tag including attributes, if any.
+         *   Will also match non-prefixed variant `<Filter>`
          * * Index `2`: Anything between `<ogc:Filter>` start and end tag.
-         * * Index `3`: `</ogc:Filter>` end tag.
+         * * Index `3`: `</ogc:Filter>` end tag.  Will also match
+         *   non-prefixed variant `</Filter>`
          *
          * Hat-tip: http://www.regular-expressions.info/examples.html
          */
-        reMatchFilter: /(<ogc:Filter\b[^>]*>)(.*?)(<\/ogc:Filter>)/,
+        reMatchFilter: /(<(?:ogc:)?Filter\b[^>]*>)(.*?)(<\/(?:ogc:)?Filter>)/,
 
         /**
          * The WFS GetFeature XML body template
@@ -337,10 +339,11 @@ Ext.define('BasiGX.util.WFS', {
         },
 
         /**
-         * Returns the contents of filter with the outermost `<ogc:Filter>`
-         * removed.
+         * Returns the contents of filter with the outermost `<ogc:Filter>` or
+         * `<Filter>` removed.
          *
-         * @param {String} filter The filter to remove `<ogc:Filter>` from.
+         * @param {String} filter The filter to remove `<ogc:Filter>` /
+         *     `<Filter>` from.
          * @return {String} The contents of the filter.
          */
         unwrapFilter: function(filter) {
@@ -353,12 +356,13 @@ Ext.define('BasiGX.util.WFS', {
         },
 
         /**
-         * Returns the actually used `<ogc:Filter>` start tag from the passed
-         * OGC filter.
+         * Returns the actually used `<ogc:Filter>` / `<Filter>` start tag
+         * from the passed OGC filter.
          *
-         * @param {String} filter The filter to get the `<ogc:Filter>` from.
-         * @return {String} The `<ogc:Filter>` of the filter or the empty
-         *     string.
+         * @param {String} filter The filter to get the `<ogc:Filter>` /
+         *     `<Filter>` from.
+         * @return {String} The `<ogc:Filter>` / `<Filter>` of the filter or
+         *     the empty string.
          */
         getFilterPrefix: function(filter) {
             var regex = BasiGX.util.WFS.reMatchFilter;

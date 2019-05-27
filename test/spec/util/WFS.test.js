@@ -473,6 +473,63 @@ describe('BasiGX.util.WFS', function() {
             });
         });
 
+        // unwrapFilter
+        describe('#unwrapFilter', function() {
+            var unwrapFilter = BasiGX.util.WFS.unwrapFilter;
+            it('can unwrap non-namespaced filters', function() {
+                var filter = '<Filter><Inside>Humpty</Inside></Filter>';
+                var got = unwrapFilter(filter);
+                var expected = '<Inside>Humpty</Inside>';
+                expect(got).to.be(expected);
+            });
+            it('can unwrap namespaced filters', function() {
+                var filter = '<ogc:Filter><Inside>Humpty</Inside></ogc:Filter>';
+                var got = unwrapFilter(filter);
+                var expected = '<Inside>Humpty</Inside>';
+                expect(got).to.be(expected);
+            });
+            it('returns the input if not passed a filter', function() {
+                var filter = '<Something>Dumpty</Something>';
+                var got = unwrapFilter(filter);
+                expect(got).to.be(filter);
+            });
+        }); // end of unwrapFilter
+
+        // getFilterPrefix
+        describe('#getFilterPrefix', function() {
+            var getFilterPrefix = BasiGX.util.WFS.getFilterPrefix;
+            it('can get the prefix if non-namespaced filter', function() {
+                var filter = '<Filter><Inside>Humpty</Inside></Filter>';
+                var got = getFilterPrefix(filter);
+                var expected = '<Filter>';
+                expect(got).to.be(expected);
+            });
+            it('can get the prefix if namespaced filter', function() {
+                var filter = '<ogc:Filter><Inside>Humpty</Inside></ogc:Filter>';
+                var got = getFilterPrefix(filter);
+                var expected = '<ogc:Filter>';
+                expect(got).to.be(expected);
+            });
+            it('ensures the prefix keeps any attributes (non-namespaced)', function() {
+                var filter = '<Filter if="you" have="ghosts"><YouHaveEvrThng/></Filter>';
+                var got = getFilterPrefix(filter);
+                var expected = '<Filter if="you" have="ghosts">';
+                expect(got).to.be(expected);
+            });
+            it('ensures the prefix keeps any attributes (namespaced)', function() {
+                var filter = '<ogc:Filter if="you" have="ghosts"><YouHaveEvrThng/></ogc:Filter>';
+                var got = getFilterPrefix(filter);
+                var expected = '<ogc:Filter if="you" have="ghosts">';
+                expect(got).to.be(expected);
+            });
+            it('returns an empty string if not passed a filter', function() {
+                var filter = '<Something>Dumpty</Something>';
+                var got = getFilterPrefix(filter);
+                var expected = '';
+                expect(got).to.be(expected);
+            });
+        }); // end of getFilterPrefix
+
     });
 
 });
