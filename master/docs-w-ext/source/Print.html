@@ -55,9 +55,9 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
     statics: {
 <span id='BasiGX-view-form-Print-static-property-LAYER_IDENTIFIER_KEY'>        LAYER_IDENTIFIER_KEY: &#39;_basigx_printextent_layer_&#39;
 </span>    },
-<span id='BasiGX-view-form-Print-cfg-defaultListenerScope'>    defaultListenerScope: true,
+<span id='BasiGX-view-form-Print-property-defaultListenerScope'>    defaultListenerScope: true,
 </span>
-<span id='BasiGX-view-form-Print-cfg-viewModel'>    viewModel: {
+<span id='BasiGX-view-form-Print-property-viewModel'>    viewModel: {
 </span>        data: {
             title: &#39;Drucken&#39;,
             labelDpi: &#39;DPI&#39;,
@@ -82,13 +82,13 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
         }
     },
 
-<span id='BasiGX-view-form-Print-cfg-bind'>    bind: {
+<span id='BasiGX-view-form-Print-property-bind'>    bind: {
 </span>        title: &#39;{title}&#39;
     },
 
-<span id='BasiGX-view-form-Print-cfg-maxHeight'>    maxHeight: 250,
+<span id='BasiGX-view-form-Print-property-maxHeight'>    maxHeight: 250,
 </span>
-<span id='BasiGX-view-form-Print-cfg-autoScroll'>    autoScroll: true,
+<span id='BasiGX-view-form-Print-property-autoScroll'>    autoScroll: true,
 </span>
     config: {
 <span id='BasiGX-view-form-Print-cfg-url'>        url: null,
@@ -112,15 +112,15 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
         &#39;#CCFF66&#39;
     ],
 
-<span id='BasiGX-view-form-Print-cfg-layout'>    layout: &#39;form&#39;,
+<span id='BasiGX-view-form-Print-property-layout'>    layout: &#39;form&#39;,
 </span>
-<span id='BasiGX-view-form-Print-cfg-bodyPadding'>    bodyPadding: &#39;0 5px 0 0&#39;,
+<span id='BasiGX-view-form-Print-property-bodyPadding'>    bodyPadding: &#39;0 5px 0 0&#39;,
 </span>
 <span id='BasiGX-view-form-Print-property-extentLayer'>    extentLayer: null,
 </span>
 <span id='BasiGX-view-form-Print-property-provider'>    provider: null,
 </span>
-<span id='BasiGX-view-form-Print-cfg-defaultType'>    defaultType: &#39;textfield&#39;,
+<span id='BasiGX-view-form-Print-property-defaultType'>    defaultType: &#39;textfield&#39;,
 </span>
 <span id='BasiGX-view-form-Print-property-remotePrintAppsStore'>    /**
 </span>     * The store containing the apps of the print servlet. This is the base of
@@ -211,7 +211,7 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
         }
     }],
 
-<span id='BasiGX-view-form-Print-cfg-listeners'>    listeners: {
+<span id='BasiGX-view-form-Print-property-listeners'>    listeners: {
 </span>        collapse: &#39;cleanupPrintExtent&#39;,
         resize: &#39;renderAllClientInfos&#39;
     },

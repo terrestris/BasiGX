@@ -38,9 +38,9 @@
 Ext.define(&#39;BasiGX.view.window.PreviewWindow&#39;, {
     extend: &#39;Ext.window.Window&#39;,
 
-<span id='BasiGX-view-window-PreviewWindow-cfg-closeAction'>    closeAction: &#39;hide&#39;,
+<span id='BasiGX-view-window-PreviewWindow-property-closeAction'>    closeAction: &#39;hide&#39;,
 </span>
-<span id='BasiGX-view-window-PreviewWindow-cfg-constrain'>    constrain: true,
+<span id='BasiGX-view-window-PreviewWindow-property-constrain'>    constrain: true,
 </span>
     config: {
 <span id='BasiGX-view-window-PreviewWindow-cfg-projection'>        projection: &#39;EPSG:3857&#39;,
@@ -49,7 +49,7 @@ Ext.define(&#39;BasiGX.view.window.PreviewWindow&#39;, {
 </span><span id='BasiGX-view-window-PreviewWindow-cfg-dataExtent'>        dataExtent: [[10000, 20000], [20000, 40000]]
 </span>    },
 
-<span id='BasiGX-view-window-PreviewWindow-cfg-tools'>    tools: [{
+<span id='BasiGX-view-window-PreviewWindow-property-tools'>    tools: [{
 </span>        type: &#39;gear&#39;,
         handler: function() {
             this.up(&#39;window&#39;).showLegend();
