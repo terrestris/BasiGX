@@ -523,7 +523,7 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
      */
     getPositioningConfig: function(pixel, div, mapComponent) {
         // measure the passed div first:
-        div.style.display = &#39;inline&#39;; // so we can measure it!
+        div.style.display = &#39;table-cell&#39;; // so we can measure it!
         var divEl = Ext.get(Ext.getBody().dom.appendChild(div));
         var divDims = [divEl.getWidth(), divEl.getHeight()];
         if (this.maxHeight) {
