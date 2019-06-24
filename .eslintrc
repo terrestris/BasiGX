@@ -1,17 +1,17 @@
 {
-  "globals":{
-    "BasiGX":false,
-    "Ext":false,
-    "GeoExt":false,
+  "globals": {
+    "BasiGX": false,
+    "Ext": false,
+    "GeoExt": false,
     "MutationObserver": false,
-    "ol":false,
+    "ol": false,
     "proj4": false,
-    "window":false,
-    "document":false,
+    "window": false,
+    "document": false,
     "DOMParser": false,
-    "btoa":false,
-    "atob":false,
-    "Blob":false,
+    "btoa": false,
+    "atob": false,
+    "Blob": false,
     "Jsonix": false,
     "SLD_1_0_0": false,
     "Filter_1_0_0": false,
@@ -20,41 +20,42 @@
     "opentype": false,
     "shpwrite": false,
     "Uint8Array": false,
-    "FileReader": false
+    "FileReader": false,
+    "jsts": false
   },
-  "rules":{
-    "consistent-this":[
+  "rules": {
+    "consistent-this": [
       1,
       "me"
     ],
-    "indent":[
+    "indent": [
       1,
       4,
       {
-        "VariableDeclarator":1,
-        "SwitchCase":1
+        "VariableDeclarator": 1,
+        "SwitchCase": 1
       }
     ],
-    "max-len":[
+    "max-len": [
       2,
       80,
       4
     ],
-    "one-var":[
+    "one-var": [
       2,
       "never"
     ],
-    "quote-props":[
+    "quote-props": [
       1,
       "consistent"
     ],
-    "valid-jsdoc":[
+    "valid-jsdoc": [
       2,
       {
-        "prefer":{
-          "returns":"return"
+        "prefer": {
+          "returns": "return"
         },
-        "requireReturn":false
+        "requireReturn": false
       }
     ],
     "comma-dangle": 2,
