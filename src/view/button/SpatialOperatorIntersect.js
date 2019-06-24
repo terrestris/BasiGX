@@ -1,4 +1,3 @@
-/* global jsts*/
 /* Copyright (c) 2018-present terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
