@@ -128,7 +128,7 @@ Ext.define('BasiGX.util.MsgBox', {
             var staticMe = BasiGX.util.MsgBox;
             var defaultConf = {
                 title: staticMe.msgBoxTitleWarn,
-                buttons: Ext.MessageBox.OKCANCEL,
+                buttons: Ext.MessageBox.OK,
                 icon: Ext.Msg.WARNING
             };
             staticMe.show(msg, defaultConf, userConf);
