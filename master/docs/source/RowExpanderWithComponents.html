@@ -60,18 +60,20 @@ Ext.define(&#39;BasiGX.ux.RowExpanderWithComponents&#39;, {
 <span id='BasiGX-ux-RowExpanderWithComponents-cfg-rowBodyCompTemplate'>    /**
 </span>     * @cfg {Object} rowBodyCompTemplate
      * This template will be used for every record. It can contain general
-     * Ext JS Components. Text in &quot;{{ }}&quot; will be executed as JavaScript.
+     * Ext JS Components. Text in `{{ }}` will be executed as JavaScript.
      * Sample below
-     * rowBodyCompTemplate: {
-            xtype: &#39;container&#39;,
-            items: [{
-                xtype: &#39;image&#39;,
-                src: &#39;{{record.getOlLayer().get(&quot;legendUrl&quot;)}}&#39;,
-                height: &#39;{{record.getOlLayer().get(&quot;legendHeight&quot;)}}&#39;,
-                alt: &#39;{{record.getOlLayer().get(&quot;legendUrl&quot;)}}&#39;
-            }]
-        }
-     * (defaults to &lt;tt&gt;null&lt;/tt&gt;).
+     *
+     *     rowBodyCompTemplate: {
+     *       xtype: &#39;container&#39;,
+     *       items: [{
+     *         xtype: &#39;image&#39;,
+     *         src: &#39;{{record.getOlLayer().get(&quot;legendUrl&quot;)}}&#39;,
+     *         height: &#39;{{record.getOlLayer().get(&quot;legendHeight&quot;)}}&#39;,
+     *         alt: &#39;{{record.getOlLayer().get(&quot;legendUrl&quot;)}}&#39;
+     *       }]
+     *     }
+     *
+     * Defaults to &lt;tt&gt;null&lt;/tt&gt;
      */
     rowBodyCompTemplate: null,
 

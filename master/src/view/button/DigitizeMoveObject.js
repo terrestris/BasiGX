@@ -45,12 +45,12 @@ Ext.define('BasiGX.view.button.DigitizeMoveObject', {
 
     config: {
         /**
-         * The ol map. required.
+         * The OpenLayers map. Required.
          */
         map: null,
 
         /**
-         * The ol collection to work on. required.
+         * The OpenLayers collection to work on. Required.
          */
         collection: null,
 
