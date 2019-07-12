@@ -46,7 +46,8 @@
         "serve-examples": "serve -l 3000 & opn 'http://localhost:3000/examples'",
         "build": "npm run test && npm run clean:dist && copyfiles -V -a 'src/**' 'sass/**' 'resources/**' Readme.md LICENSE package.json dist/",
         "clean:dist": "rimraf ./dist/*",
-        "release": "npm run build && np --no-yarn --contents dist && git push https://github.com/terrestris/BasiGX.git master --tags"
+        "release": "npm run build && np --no-yarn --contents dist && git push https://github.com/terrestris/BasiGX.git master --tags",
+        "generate:docs": "jsduck --config jsduck.json"
     },
     "repository": {
         "type": "git",
