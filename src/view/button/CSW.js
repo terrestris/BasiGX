@@ -1,4 +1,4 @@
-/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+/* Copyright (c) 2019-present terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,10 +37,10 @@ Ext.define('BasiGX.view.button.CSW', {
      */
     viewModel: {
         data: {
-            tooltip: 'CSW abfragen',
+            tooltip: 'Katalogservice für externe Karteninhalte (CSW) abfragen',
             text: 'CSW <span style="font-size: 1.7em; ' +
                 'font-weight: normal;">⊕</span>',
-            windowTitle: 'CSW abfragen',
+            windowTitle: 'Web Catalogue Service (CSW) abfragen',
             documentation: '<h2>CSW abfragen</h2>• Ein Klick auf den ' +
                 'Button öffnet ein Fenster, in dem Sie mit Hilfe einer ' +
                 'CSW-URL einen Kartendienst der Karte hinzufügen ' +

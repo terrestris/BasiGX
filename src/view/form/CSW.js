@@ -1,4 +1,4 @@
-/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+/* Copyright (c) 2019-present terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -100,31 +100,37 @@ Ext.define('BasiGX.view.form.CSW', {
         defaultUrl: 'https://data.mundialis.de/geonetwork/srv/ger/csw?',
 
         /**
-         * Whether we will send the `X-Requested-With` header when fetching the
-         * CSW records from the URL. The `X-Requested-With` header is
-         * usually added for XHR, but adding it should lead to a preflight
-         * request (see https://goo.gl/6JzdUI), which some servers fail.
-         *
-         * @type {Boolean}
+         * Additional parameters that will be applied to the `Ext.Ajax.request`
          */
-        useDefaultXhrHeader: false,
+        additionalRequestParams: {
 
-        /**
-         * Whether the request against the CSW servers will contain the ExtJS
-         * cache buster (`_dc=123…`) or not. If set to `false`, the param will
-         * not be send, if set to `true`, we'll pass it along (ExtJS default
-         * behaviour).
-         *
-         * The name of this parameter is taken from the config option of
-         * `Ext.Ajax`, turning the boolean logic around would be even more
-         * confusing.
-         *
-         * Defaults to `true`, e.g. the cache buster will be send along in the
-         * GET-request.
-         *
-         * @type {Boolean}
-         */
-        disableCaching: true
+            /**
+             * Whether we will send the `X-Requested-With` header when fetching
+             * the CSW records from the URL. The `X-Requested-With` header is
+             * usually added for XHR, but adding it should lead to a preflight
+             * request (see https://goo.gl/6JzdUI), which some servers fail.
+             *
+             * @type {Boolean}
+             */
+            useDefaultXhrHeader: false,
+
+            /**
+             * Whether the request against the CSW servers will contain the
+             * ExtJS cache buster (`_dc=123…`) or not. If set to `false`, the
+             * param will not be send, if set to `true`, we'll pass it along
+             * (ExtJS default behaviour).
+             *
+             * The name of this parameter is taken from the config option of
+             * `Ext.Ajax`, turning the boolean logic around would be even more
+             * confusing.
+             *
+             * Defaults to `true`, e.g. the cache buster will be send along in
+             * the GET-request.
+             *
+             * @type {Boolean}
+             */
+            disableCaching: true
+        }
     },
 
     /**
@@ -367,16 +373,16 @@ Ext.define('BasiGX.view.form.CSW', {
               '</csw:Query>' +
             '</csw:GetRecords>';
 
-        Ext.Ajax.request({
+        var options = {
             url: url,
             method: 'POST',
             xmlData: postBody,
-            useDefaultXhrHeader: me.getUseDefaultXhrHeader(),
-            disableCaching: me.getDisableCaching(),
             success: me.onGetRecordsSuccess,
             failure: me.onGetRecordsFailure,
             scope: me
-        });
+        };
+        Ext.apply(options, me.getAdditionalRequestParams());
+        Ext.Ajax.request(options);
     },
 
     /**
