@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2019-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-button-CSW'>/**
+</span> * CSW Button
+ *
+ * Button used to instanciate the basigx-form-csw in order to add a
+ * service to the map
+ *
+ * @class BasiGX.view.button.CSW
+ */
+Ext.define(&#39;BasiGX.view.button.CSW&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-csw&#39;,
+
+    requires: [
+        &#39;Ext.window.Window&#39;,
+        &#39;Ext.app.ViewModel&#39;,
+        &#39;BasiGX.view.form.CSW&#39;,
+        &#39;BasiGX.util.Animate&#39;
+    ],
+
+<span id='BasiGX-view-button-CSW-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: &#39;Katalogservice für externe Karteninhalte (CSW) abfragen&#39;,
+            text: &#39;CSW &lt;span style=&quot;font-size: 1.7em; &#39; +
+                &#39;font-weight: normal;&quot;&gt;⊕&lt;/span&gt;&#39;,
+            windowTitle: &#39;Web Catalogue Service (CSW) abfragen&#39;,
+            documentation: &#39;&lt;h2&gt;CSW abfragen&lt;/h2&gt;• Ein Klick auf den &#39; +
+                &#39;Button öffnet ein Fenster, in dem Sie mit Hilfe einer &#39; +
+                &#39;CSW-URL einen Kartendienst der Karte hinzufügen &#39; +
+                &#39;können.&#39;
+        }
+    },
+
+<span id='BasiGX-view-button-CSW-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: &#39;{text}&#39;
+    },
+
+<span id='BasiGX-view-button-CSW-property-_win'>    /**
+</span>     * The window instance which will be created by this button.
+     *
+     * @type {Ext.window.Window}
+     * @private
+     */
+    _win: null,
+
+<span id='BasiGX-view-button-CSW-property-config'>    /**
+</span>     *
+     */
+    config: {
+<span id='BasiGX-view-button-CSW-cfg-windowConfig'>        windowConfig: {
+</span>            // can be used by subclasses to apply/merge
+            // additional/other values for the window
+        }
+    },
+
+<span id='BasiGX-view-button-CSW-method-handler'>    handler: function() {
+</span>        var win = this._win;
+        if (!win) {
+            var windowConfig = {
+                name: &#39;csw-window&#39;,
+                title: this.getViewModel().get(&#39;windowTitle&#39;),
+                width: 500,
+                height: 400,
+                layout: &#39;fit&#39;,
+                constrain: true,
+                items: [{
+                    xtype: &#39;basigx-form-csw&#39;
+                }]
+            };
+
+            var windowConfigToApply = this.getWindowConfig();
+            Ext.apply(windowConfig, windowConfigToApply);
+
+            win = Ext.create(&#39;Ext.window.Window&#39;, windowConfig);
+            this._win = win;
+            win.show();
+        } else {
+            BasiGX.util.Animate.shake(win);
+        }
+    },
+
+<span id='BasiGX-view-button-CSW-method-onDestroy'>    /**
+</span>     * Do any necessary cleanup (e.g. remove listeners, destroy dependent
+     * objects …).
+     */
+    onDestroy: function() {
+        if (this._win) {
+            this._win.destroy();
+        }
+    }
+});
+</pre>
+</body>
+</html>
