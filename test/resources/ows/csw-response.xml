@@ -1,0 +1,342 @@
+<csw:GetRecordsResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd">
+<csw:SearchStatus timestamp="2019-07-10T14:48:51"/>
+<csw:SearchResults numberOfRecordsMatched="40" numberOfRecordsReturned="10" elementSet="full" nextRecord="11">
+<csw:Record xmlns:dct="http://purl.org/dc/terms/" xmlns:ows="http://www.opengis.net/ows" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:identifier>bd50d623-6cf6-4853-a8c4-3c3dcb720326</dc:identifier>
+<dc:title>Buitenplaatsen</dc:title>
+<dc:type>dataset</dc:type>
+<dc:subject>rijksmonument</dc:subject>
+<dc:subject>monument</dc:subject>
+<dc:subject>landschapsarchitectuur</dc:subject>
+<dc:subject>architectuurgeschiedenis</dc:subject>
+<dc:subject>bouwkunde</dc:subject>
+<dc:subject>structure</dc:subject>
+<dc:format>Shape, WMS, WFS</dc:format>
+<dc:format>ESRI Shape</dc:format>
+<dct:abstract>
+De dataset bevat de begrenzingen van de rijksbeschermde buitenplaatsen waar de Rijksdienst voor het Cultureel Erfgoed een nauwkeurige digitale begrenzing van heeft gemaakt.
+</dct:abstract>
+<dc:rights>otherRestrictions</dc:rights>
+<dc:source>
+In de periode 2011 tot en met 2013 is van alle rijksbeschermde buitenplaatsen waarvoor de begrenzingskaart niet digitaal gemaakt is (maar vaak wel als scan van de papieren kaart aanwezig), of de begrenzingskaart geheel ontbrak, een digitale begrenzing getekend. Van de buitenplaatsen waarvan geen (digitale of analoge) aanwijzingskaart beschikbaar is, is de geleverde contour bedoeld als indicatieve grens: hieraan kunnen geen rechten ontleend worden. Uitsluitend de uiterste begrenzing van de buitenplaatsen zijn in de kaartlaag opgenomen, de complexonderdeelnummers niet. Dit betekent dat de begrenzingen de beschermde aanleg van de buitenplaatsen betreffen en GEEN uitsluitsel geven over welke objecten binnen die begrenzingen ook zelfstandig als rijksmonument zijn beschermd. Dit is geen INSPIRE dataset.
+</dc:source>
+<dc:format>Shape, WMS, WFS</dc:format>
+<dc:format>ESRI Shape</dc:format>
+<ows:BoundingBox crs="urn:ogc:def:crs:EPSG::28992">
+<ows:LowerCorner>7.21097 50.7539</ows:LowerCorner>
+<ows:UpperCorner>3.37087 53.4658</ows:UpperCorner>
+</ows:BoundingBox>
+<dc:URI protocol="OGC:WMS" name="Buitenplaatsen" description="Buitenplaatsen">
+http://services.rce.geovoorziening.nl/buitenplaatsen/wms
+</dc:URI>
+<dc:URI protocol="OGC:WFS" name="Buitenplaatsen" description="Buitenplaatsen">
+http://services.rce.geovoorziening.nl/buitenplaatsen/wfs
+</dc:URI>
+<dc:URI protocol="download" name="Download Buitenplaatsenkaartlaag in ESRI Shape formaat">
+http://www.cultureelerfgoed.nl/sites/default/files/downloads/dossiers/rce_buitenplaatsen_vlakken_0.zip
+</dc:URI>
+<dc:URI protocol="image/png" name="thumbnail">
+http://services.rce.geovoorziening.nl/www/PreviewBuitenplaatsenKlein200x150.png
+</dc:URI>
+</csw:Record>
+<csw:Record xmlns:dct="http://purl.org/dc/terms/" xmlns:ows="http://www.opengis.net/ows" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:identifier>dfe5b146-354f-4bc7-99b1-6713817afac9</dc:identifier>
+<dc:title>Archeologische Monumenten Kaart (2014)</dc:title>
+<dc:type>dataset</dc:type>
+<dc:subject>archeologisch monument</dc:subject>
+<dc:subject>archeologie</dc:subject>
+<dc:subject>cultuurhistorie</dc:subject>
+<dc:subject>Beschermde gebieden</dc:subject>
+<dc:subject>environment</dc:subject>
+<dc:format/>
+<dct:abstract>
+De Archeologische Monumenten Kaart (AMK) is in samenwerking met de verschillende provincies en gemeentelijk archeologen ontwikkeld. De kaart bevat een overzicht van archeologische terreinen in Nederland. De AMK is een van de bronnen om ruimtelijke plannen, zoals streek- en bestemmingsplannen, te kunnen opstellen, beoordelen en toetsen op hun gevolgen voor de archeologie. Een groot aantal provincies gebruikt de AMK ook als bron voor de ontwikkeling van digitale cultuurhistorische waardenkaarten. De terreinen zijn beoordeeld op de criteria kwaliteit, zeldzaamheid, representativiteit, ensemblewaarde en belevingswaarde. Op grond van deze criteria zijn de terreinen ingedeeld in terreinen met archeologische waarde, hoge archeologische waarde en zeer hoge archeologische waarde. Onder deze laatste categorie vallen ook de wettelijk beschermde monumenten. De AMK vormt altijd een momentopname van de archeologische kennis over een provincie. Ieder jaar komen er nieuwe archeologische terreinen bij. Bestaande terreinen kunnen vervallen, groter of juist kleiner worden. Daarnaast kunnen ook buiten de terreinen die op de AMK staan, waardevolle archeologische resten liggen.
+</dct:abstract>
+<dc:rights>otherRestrictions</dc:rights>
+<dc:source>
+De begrenzingen van de monumenten zijn deels overgenomen uit de top10vector. Dit is geen INSPIRE dataset.
+</dc:source>
+<dc:format/>
+<ows:BoundingBox crs="urn:ogc:def:crs:EPSG::28992">
+<ows:LowerCorner>7.21097 50.7539</ows:LowerCorner>
+<ows:UpperCorner>3.37087 53.4658</ows:UpperCorner>
+</ows:BoundingBox>
+<dc:URI protocol="OGC:WMS" name="ArcheologicalMonuments" description="Archeologische Monumenten">http://services.rce.geovoorziening.nl/rce/wms</dc:URI>
+<dc:URI protocol="OGC:WFS" name="ArcheologicalMonuments" description="Archeologische Monumenten">http://services.rce.geovoorziening.nl/rce/wfs</dc:URI>
+<dc:URI protocol="INSPIRE Atom" name="Atom feed ArcheologicalMonuments" description="Atom feed Archeologische Monumenten">
+http://services.rce.geovoorziening.nl/www/download/data/Archeologische_Monumenten_nl.xml
+</dc:URI>
+<dc:URI protocol="website" name="Archeologische Monumentenkaart (AMK)">http://www.cultureelerfgoed.nl</dc:URI>
+<dc:URI protocol="image/png" name="thumbnail">
+http://services.rce.geovoorziening.nl/www/PreviewAMKklein200x150.png
+</dc:URI>
+</csw:Record>
+<csw:Record xmlns:dct="http://purl.org/dc/terms/" xmlns:ows="http://www.opengis.net/ows" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:identifier>88a3c1ae-902e-4efa-8663-ddd836101929</dc:identifier>
+<dc:title>Werelderfgoed</dc:title>
+<dc:type>dataset</dc:type>
+<dc:subject>werelderfgoed</dc:subject>
+<dc:subject>UNESCO</dc:subject>
+<dc:subject>Beschermde gebieden</dc:subject>
+<dc:subject>structure</dc:subject>
+<dc:format/>
+<dct:abstract>
+Begrenzingen van het Nederlandse cultureel erfgoed dat vanwege haar uitzonderlijke universele waarde door het Werelderfgoed comite van UNESCO is geplaatst op de Werelderfgoedlijst. De begrenzingen zijn gebaseerd op de kaarten die destijds opgenomen waren in het nominatiedossier dat aan Unesco is aangeboden.
+</dct:abstract>
+<dc:rights>otherRestrictions</dc:rights>
+<dc:source>
+De begrenzingen zijn door de Rijksdienst voor het Cultureel Erfgoed gedigitaliseerd op basis van TOP10vector/Top10NL, GBKN/BGT en topografische kaarten 1:25.000.
+</dc:source>
+<dc:format/>
+<ows:BoundingBox crs="urn:ogc:def:crs:EPSG::28992">
+<ows:LowerCorner>7.2 50.8</ows:LowerCorner>
+<ows:UpperCorner>3.4 53.6</ows:UpperCorner>
+</ows:BoundingBox>
+<dc:URI protocol="OGC:WMS" name="WorldHeritage" description="Unesco Wereld Erfgoed">http://services.rce.geovoorziening.nl/rce/wms</dc:URI>
+<dc:URI protocol="OGC:WFS" name="WorldHeritage" description="Unesco Wereld Erfgoed">http://services.rce.geovoorziening.nl/rce/wfs</dc:URI>
+<dc:URI protocol="INSPIRE Atom" name="Atom feed WorldHeritage" description="Atom feed Unesco Wereld Erfgoed">
+http://services.rce.geovoorziening.nl/www/download/data/Unesco_Werelderfgoed_nl.xml
+</dc:URI>
+<dc:URI protocol="image/png" name="thumbnail">
+http://services.rce.geovoorziening.nl/www/PreviewWerelderfgoedKlein200x150.png
+</dc:URI>
+</csw:Record>
+<csw:Record xmlns:dct="http://purl.org/dc/terms/" xmlns:ows="http://www.opengis.net/ows" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:identifier>6f84efeb-fc1d-4565-a721-80735ea57dbd</dc:identifier>
+<dc:title>Rijksmonumenten</dc:title>
+<dc:type>dataset</dc:type>
+<dc:subject>rijksmonument</dc:subject>
+<dc:subject>monument</dc:subject>
+<dc:subject>kunstgeschiedenis</dc:subject>
+<dc:subject>architectuurgeschiedenis</dc:subject>
+<dc:subject>bouwkunde</dc:subject>
+<dc:subject>archeologie</dc:subject>
+<dc:subject>cultuurhistorie</dc:subject>
+<dc:subject>cultureel erfgoed</dc:subject>
+<dc:subject>RCE</dc:subject>
+<dc:subject>Beschermde gebieden</dc:subject>
+<dc:subject>structure</dc:subject>
+<dc:format>Shape, GML, WMS, WFS</dc:format>
+<dct:abstract>
+In de dataset 'Rijksmonumenten' zijn gegevens opgenomen van alle monumenten in Nederland die door het Rijk zijn aangewezen als beschermd monument. Deze rijksmonumenten zijn van nationale betekenis. De gegevens in de dataset zijn ontleend aan het Rijksmonumentenregister zoals beheerd door de Rijksdienst voor het Cultureel Erfgoed. Een monument dat is ingeschreven in dit register heeft de beschermde status. Als de aanwijzingsprocedure van een monument nog niet is afgerond dan heeft het een voorbeschermde status.
+</dct:abstract>
+<dc:rights>otherRestrictions</dc:rights>
+<dc:source>
+Het Rijksmonumentenregister is fysiek opgenomen in de Objecten Databank (ODB). Maandelijks wordt uit deze ODB een extract gegenereerd. Uit dit extract worden vervolgens de digitale kaartlagen gegenereerd die gebruikt kunnen worden in Geografische Informatie Systemen.
+</dc:source>
+<dc:format>Shape, GML, WMS, WFS</dc:format>
+<ows:BoundingBox crs="urn:ogc:def:crs:EPSG::28992">
+<ows:LowerCorner>7.21097 50.7539</ows:LowerCorner>
+<ows:UpperCorner>3.37087 53.4658</ows:UpperCorner>
+</ows:BoundingBox>
+<dc:URI protocol="OGC:WMS" name="NationalListedMonuments">http://services.rce.geovoorziening.nl/rce/wms</dc:URI>
+<dc:URI protocol="OGC:WFS" name="NationalListedMonuments">http://services.rce.geovoorziening.nl/rce/wfs</dc:URI>
+<dc:URI protocol="INSPIRE Atom" name="Atom feed NationalListedMonuments">
+http://services.rce.geovoorziening.nl/www/download/data/Rijksmonumenten_nl.xml
+</dc:URI>
+<dc:URI protocol="download" name="Download Rijksmonumenten kaartlaag in ESRI Shape formaat">
+http://services.rce.geovoorziening.nl/www/download/data/Rijksmonumenten_nl.xml
+</dc:URI>
+</csw:Record>
+<csw:Record xmlns:dct="http://purl.org/dc/terms/" xmlns:ows="http://www.opengis.net/ows" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:identifier>4e2ef670-cddd-11dd-ad8b-0800200c9a66</dc:identifier>
+<dc:title>Stads- en Dorpsgezichten</dc:title>
+<dc:type>dataset</dc:type>
+<dc:subject>historische geografie</dc:subject>
+<dc:subject>stedenbouwkunde</dc:subject>
+<dc:subject>planologie</dc:subject>
+<dc:subject>architectuurgeschiedenis</dc:subject>
+<dc:subject>bouwkunde</dc:subject>
+<dc:subject>Beschermde gebieden</dc:subject>
+<dc:subject>planningCadastre</dc:subject>
+<dc:format>ESRI Shape</dc:format>
+<dct:abstract>
+De Stads- en Dorpsgezichtenkaartlaag bevat alle gebieden waarvoor de procedure is gestart om het gebied aan te wijzen als rijksbeschermd stads- of dorpsgezicht (ex artikel 35 van de Monumentenwet 1988). In de default weergave van de INSPIRE Web Map Service worden alleen de aangewezen stads- en dorpsgezichten getoond. De kwaliteit van de ligging van de begrenzing van de stads- en dorpsgezichten is wisselend. Zie de informatie over de datakwaliteit.
+</dct:abstract>
+<dc:rights>otherRestrictions</dc:rights>
+<dc:source>
+Voor een klein aantal gebieden zijn bij het digitaliseren van de begrenzing de GBKN en de kadastrale percelen uit het LKI als referentieondergronden gebruikt. Voor deze gebieden geldt dat de begrenzing wat ligging betreft identiek is aan de begrenzing die op de officiele (papieren) kaart staat die bij het aanwijzingsbesluit en -toelichting is gevoegd. Zie het veld Ondergrond. De ligging van de begrenzingen in de provincies Friesland en Limburg is visueel vergeleken met die in de aanwijzingskaarten en waar nodig verbeterd. Hierbij is gebruik gemaakt van de topografische kaart op schaal 1:10.000 (TOP10vector). De verbeteringen hebben de kwaliteit van de ligging van de begrenzingen verhoogd maar nemen niet het risico weg dat de ligging van de begrenzingen mogelijk tot maximaal zo'n 20 meter afwijkt van die op de officiele aanwijzingskaarten. Voor de overige provincies is deze controle niet uitgevoerd. De kwaliteit van de ligging van de begrenzingen is voor deze provincies onduidelijk. Op basis van de ervaringen opgedaan tijdens het werken met de kaartlaag en bij de controle van de begrenzingen in Friesland en Limburg, kan de maximale afwijking in de ligging van de begrenzing worden ingeschat op ongeveer 100 meter. Voor meer informatie over de beschrijvende gegevens van de stads- en dorpsgezichten en de ligging van de begrenzing kan contact opgenomen worden met de Rijksdienst voor het Cultureel Erfgoed, telefoon: 033-4217456 of info@cultureelerfgoed.nl
+</dc:source>
+<dc:format>ESRI Shape</dc:format>
+<ows:BoundingBox crs="urn:ogc:def:crs:EPSG::28992">
+<ows:LowerCorner>7.21097 50.7539</ows:LowerCorner>
+<ows:UpperCorner>3.37087 53.4658</ows:UpperCorner>
+</ows:BoundingBox>
+<dc:URI protocol="OGC:WMS" name="Townscapes" description="Stads- en Dorpsgezichten">http://services.rce.geovoorziening.nl/rce/wms</dc:URI>
+<dc:URI protocol="OGC:WFS" name="Townscapes" description="Stads- en Dorpsgezichten">http://services.rce.geovoorziening.nl/rce/wfs</dc:URI>
+<dc:URI protocol="INSPIRE Atom" name="Atom feed Townscapes" description="Atom feed Stads- en Dorpsgezichten">
+http://services.rce.geovoorziening.nl/www/download/data/Stads_en_Dorpsgezichten_nl.xml
+</dc:URI>
+<dc:URI protocol="download" name="Stads- en dorpsgezichtenkaartlaag">
+http://services.rce.geovoorziening.nl/www/download/data/Stads_en_Dorpsgezichten_nl.xml
+</dc:URI>
+<dc:URI protocol="website" name="Kaart met stads- en dorpsgezichten">
+https://www.cultureelerfgoed.nl/onderwerpen/bronnen-en-kaarten/overzicht/kaart-van-beschermde-stads--en-dorpsgezichten
+</dc:URI>
+<dc:URI protocol="image/png" name="thumbnail">
+http://services.rce.geovoorziening.nl/www/PreviewStadsEnDorpsgezichtenKlein200x150.png
+</dc:URI>
+</csw:Record>
+<csw:Record xmlns:dct="http://purl.org/dc/terms/" xmlns:ows="http://www.opengis.net/ows" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:identifier>719f3336-f112-4d03-90da-e56178ecfbd5</dc:identifier>
+<dc:title>
+Kaart van Hoog Nederland met afgedekte pleistocene sedimenten
+</dc:title>
+<dc:type>dataset</dc:type>
+<dc:subject>archeologie</dc:subject>
+<dc:subject>environment</dc:subject>
+<dc:format>WMS, WFS</dc:format>
+<dct:abstract>
+Hoog Nederland is het deel van Nederland waar het oppervlak grotendeels bestaat uit pleistocene afzettingen. Ongeveer een kwart van dit areaal is tijdens het Holoceen (na 10.000 BP) afgedekt door sediment dat is afgezet door water (colluvium, beek- en rivierafzettingen e.d.), wind (stuifzand), plantengroei (veen) en de mens (cultuurdekken). Door deze afdekkingen zijn de archologische resten veelal beter beschermd tegen latere verstoringen.
+</dct:abstract>
+<dc:rights>otherRestrictions</dc:rights>
+<dc:language>dut</dc:language>
+<dc:source>
+Bij het selecteren van de afzettingen is gebruikgemaakt van de digitale Bodemkaart van Nederland 1:50.000 en de toelichting daarop. Verder is gebruikgemaakt van de IKAW (1:50.000), de digitale kaart van de archeoregio’s en de paleogeografische kaart van P.C. Vos. Dit is geen INSPIRE dataset.
+</dc:source>
+<dc:format>WMS, WFS</dc:format>
+<ows:BoundingBox crs="urn:ogc:def:crs:EPSG::28992">
+<ows:LowerCorner>7.21097 50.7539</ows:LowerCorner>
+<ows:UpperCorner>3.37087 53.4658</ows:UpperCorner>
+</ows:BoundingBox>
+<dc:URI protocol="OGC:WMS" name="Afgedekt_Pleistoceen">
+http://services.rce.geovoorziening.nl/afgedekt_pleistoceen/wms?
+</dc:URI>
+<dc:URI protocol="OGC:WFS" name="Afgedekt_Pleistoceen">
+http://services.rce.geovoorziening.nl/afgedekt_pleistoceen/wfs?
+</dc:URI>
+</csw:Record>
+<csw:Record xmlns:dct="http://purl.org/dc/terms/" xmlns:ows="http://www.opengis.net/ows" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:identifier>c635759c-6cf0-4d6c-b6a1-7ae3f9028034</dc:identifier>
+<dc:title>Top Pleistocene oppervlakte</dc:title>
+<dc:type>dataset</dc:type>
+<dc:subject>archeologie</dc:subject>
+<dc:subject>geoscientificInformation</dc:subject>
+<dc:format>WMS, WFS</dc:format>
+<dct:abstract>
+Deze kaarten geven de ligging van de top van de Pleistocene oppervlakte weer, dat in de loop van het Holoceen voor een groot deel is bedekt met zee- en rivierafzettingen en veen. Eén van de kaartlagen (plzgeul) betreft een reconstructie van het Pleistocene oppervlak aan het begin van het Holoceen (ca. 9000 v. Chr; meter t.o.v. NAP). De andere kaartlaag (plmgeul) geeft de huidige ligging van het Pleistocene oppervlakte weer (meter t.o.v. NAP). Hierop zijn de grote Holocene geulinsnijdingen in de Nederlandse kustvlakte (de rode geulvormen) goed zichtbaar.
+</dct:abstract>
+<dc:rights>otherRestrictions</dc:rights>
+<dc:language>dut</dc:language>
+<dc:source>
+Deze reconstructie is gebaseerd op de analyse en interpretatie van tienduizenden grondboringen, onderzoek naar de vorming en ouderdom van geologische afzettingen in de bodem en archeologische informatie. Dit is geen INSPIRE dataset.
+</dc:source>
+<dc:format>WMS, WFS</dc:format>
+<ows:BoundingBox crs="urn:ogc:def:crs:EPSG::28992">
+<ows:LowerCorner>7.21097 50.7539</ows:LowerCorner>
+<ows:UpperCorner>3.37087 53.4658</ows:UpperCorner>
+</ows:BoundingBox>
+<dc:URI protocol="OGC:WMS" name="plzgeul">
+http://services.rce.geovoorziening.nl/toppleistoceen/wms?
+</dc:URI>
+<dc:URI protocol="OGC:WMS" name="plmgeul">
+http://services.rce.geovoorziening.nl/toppleistoceen/wms?
+</dc:URI>
+<dc:URI protocol="OGC:WFS" name="plzgeul">
+http://services.rce.geovoorziening.nl/toppleistoceen/wfs?
+</dc:URI>
+<dc:URI protocol="OGC:WFS" name="plmgeul">
+http://services.rce.geovoorziening.nl/toppleistoceen/wfs?
+</dc:URI>
+</csw:Record>
+<csw:Record xmlns:dct="http://purl.org/dc/terms/" xmlns:ows="http://www.opengis.net/ows" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:identifier>15dc2644-1822-4fc2-8536-2bb2058c4a43</dc:identifier>
+<dc:title>Hunebedden</dc:title>
+<dc:type>dataset</dc:type>
+<dc:subject>hunebedden</dc:subject>
+<dc:subject>historische geografie</dc:subject>
+<dc:subject>landschap</dc:subject>
+<dc:subject>RCE</dc:subject>
+<dc:subject>archeologie</dc:subject>
+<dc:subject>rijksmonument</dc:subject>
+<dc:subject>monument</dc:subject>
+<dc:subject>cultureel erfgoed</dc:subject>
+<dc:subject>erfgoed</dc:subject>
+<dc:subject>society</dc:subject>
+<dc:format>Shape, WMS, WFS, GML</dc:format>
+<dct:abstract>
+In de dataset 'Hunebedden' zijn de locaties opgenomen van alle hunebedden die nog zichtbaar zijn.
+</dct:abstract>
+<dc:rights>otherRestrictions</dc:rights>
+<dc:language>dut</dc:language>
+<dc:source>
+De begrenzingen van de hunebedden zijn in het terrein opgemeten. Het Object Databank nummer (ODB) komt vanuit het Rijksmonumentenregister. Dit is geen INSPIRE dataset.
+</dc:source>
+<dc:format>Shape, WMS, WFS, GML</dc:format>
+<ows:BoundingBox crs="urn:ogc:def:crs:EPSG::28992">
+<ows:LowerCorner>7.3492139987157365 52.68925339087892</ows:LowerCorner>
+<ows:UpperCorner>5.683574594362337 53.23490775195891</ows:UpperCorner>
+</ows:BoundingBox>
+<dc:URI protocol="OGC:WMS" name="Hunebedden">
+http://services.rce.geovoorziening.nl/landschapsatlas/wms?
+</dc:URI>
+<dc:URI protocol="OGC:WFS" name="Hunebedden">
+http://services.rce.geovoorziening.nl/landschapsatlas/wfs?
+</dc:URI>
+<dc:URI protocol="image/png" name="thumbnail">
+resources.get?id=85&fname=Hunebed_rood_s.png&access=public
+</dc:URI>
+</csw:Record>
+<csw:Record xmlns:dct="http://purl.org/dc/terms/" xmlns:ows="http://www.opengis.net/ows" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:identifier>95dd5c26-a7e6-4f37-8b92-cc4213490943</dc:identifier>
+<dc:title>Weidemolens en windmotoren</dc:title>
+<dc:type>dataset</dc:type>
+<dc:subject>molen</dc:subject>
+<dc:subject>historische geografie</dc:subject>
+<dc:subject>landschap</dc:subject>
+<dc:subject>RCE</dc:subject>
+<dc:subject>rijksmonument</dc:subject>
+<dc:subject>monument</dc:subject>
+<dc:subject>Cultuurlandschap</dc:subject>
+<dc:subject>cultureel erfgoed</dc:subject>
+<dc:subject>erfgoed</dc:subject>
+<dc:subject>society</dc:subject>
+<dc:format>Shape, WMS, WFS, GML</dc:format>
+<dct:abstract>
+De dataset ‘weidemolens en windmotoren’ bevat de landsdekkende kartering van deze typen molens volgens de gegevens van de Vereniging De Hollandsche Molen in de database van www.molendatabase.net. Alleen de bestaande molens of nog zichtbare molenrestanten zijn opgenomen. Elke molen is middels het Ten Bruggencate-nummer voorzien van een link naar de betreffende informatiepagina van de site http://allemolens.nl.
+</dct:abstract>
+<dc:rights>otherRestrictions</dc:rights>
+<dc:language>dut</dc:language>
+<dc:source>
+De basis voor deze dataset is een export van het op aanwezigheid van een intacte molen of restant gefilterd bestand van Vereniging De Hollandsche Molen (DHM) van 24-10-2016. Verdwenen molens zijn op verzoek van de RCE buiten de selectie gelaten. Op basis van het Ten Bruggencate-nummer is in de gegevenstabel een koppelveld gemaakt naar de gedetailleerde gegevens zoals die op www.allemolens.nl zijn te vinden. De hierbij opgenomen foto’s zijn handmatig van deeplinks voorzien omdat deze niet beschikbaar was in de datasets van De Hollandsche Molen en ook niet gegenereerd kan worden op basis van het Ten Bruggencate-nummer. Waar op www.allemolens.nl (nog) geen foto beschikbaar is, wordt dit nu op identieke wijze getoond in de Landschapsatlas. Dit is geen INSPIRE dataset.
+</dc:source>
+<dc:format>Shape, WMS, WFS, GML</dc:format>
+<ows:BoundingBox crs="urn:ogc:def:crs:EPSG::28992">
+<ows:LowerCorner>7.21097 50.7539</ows:LowerCorner>
+<ows:UpperCorner>3.37087 53.4658</ows:UpperCorner>
+</ows:BoundingBox>
+<dc:URI protocol="OGC:WMS" name="weidemolens_en_windmotoren">
+http://services.rce.geovoorziening.nl/landschapsatlas/wms?
+</dc:URI>
+<dc:URI protocol="OGC:WFS" name="weidemolens_en_windmotoren">
+http://services.rce.geovoorziening.nl/landschapsatlas/wfs?
+</dc:URI>
+</csw:Record>
+<csw:Record xmlns:dct="http://purl.org/dc/terms/" xmlns:ows="http://www.opengis.net/ows" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:identifier>19d90f62-5db9-4478-9773-c977c5652d2b</dc:identifier>
+<dc:title>HISTLAND</dc:title>
+<dc:type>dataset</dc:type>
+<dc:subject>cultuurhistorie</dc:subject>
+<dc:subject>historische geografie</dc:subject>
+<dc:subject>landschap</dc:subject>
+<dc:subject>environment</dc:subject>
+<dc:format>WMS</dc:format>
+<dc:format>WFS</dc:format>
+<dct:abstract>
+HISTLAND (Historisch landschappelijk informatiesysteem) bevat geografische gegevens over de ontginningsgeschiedenis van het Nederlandse landschap en de mate van verandering van dat landschap.
+</dct:abstract>
+<dc:rights>otherRestrictions</dc:rights>
+<dc:source>
+De kaartvlakken zijn gebaseerd op ingetekende vlakken op papieren kaarten met schaal 1:100.000. Dit is geen INSPIRE dataset.
+</dc:source>
+<dc:format>WMS</dc:format>
+<dc:format>WFS</dc:format>
+<ows:BoundingBox crs="urn:ogc:def:crs:EPSG::28992">
+<ows:LowerCorner>7.21097 50.7539</ows:LowerCorner>
+<ows:UpperCorner>3.37087 53.4658</ows:UpperCorner>
+</ows:BoundingBox>
+<dc:URI protocol="OGC:WMS" name="HISTLAND">http://services.rce.geovoorziening.nl/histland/wms</dc:URI>
+<dc:URI protocol="OGC:WFS" name="HISTLAND">http://services.rce.geovoorziening.nl/histland/wfs</dc:URI>
+</csw:Record>
+</csw:SearchResults>
+</csw:GetRecordsResponse>
