@@ -496,6 +496,9 @@ Ext.define('BasiGX.plugin.Hover', {
      * `ol.Overlay` which shall hold the content of `div` and be placed at
      * `pixel` within the `mapComponent`.
      *
+     * The passed pixel location can also be outside of the map, i.e. negative
+     * or bigger than the map's pixel bounds.
+     *
      * @param {Array<Number>} pixel The pixel location where the overlay shall
      *     eventually be positioned.
      * @param {HTMLDivElement} div The div which is to be placed inside the
@@ -531,19 +534,31 @@ Ext.define('BasiGX.plugin.Hover', {
         if (pixel[0] >= mapDims[0] - dimLeftRight) {
             // near the right
             offset[0] = -1 * (offset[0] + divDims[0]);
+            if (pixel[0] > mapDims[0]) {
+                offset[0] += mapDims[0] - pixel[0];
+            }
         } else if (pixel[0] <= dimLeftRight) {
             // near the left
             positioning[1] = 'right';
             offset[0] = offset[0] + divDims[0];
+            if (pixel[0] < 0) {
+                offset[0] += Math.abs(pixel[0]);
+            }
         }
 
         if (pixel[1] >= mapDims[1] - dimTopBottom) {
             // near the bottom
             offset[1] = -1 * (offset[1] + divDims[1]);
+            if (pixel[1] > mapDims[1]) {
+                offset[1] += mapDims[1] - pixel[1];
+            }
         } else if (pixel[1] <= dimTopBottom) {
             // near the top
             positioning[0] = 'bottom';
             offset[1] = offset[1] + divDims[1];
+            if (pixel[1] < 0) {
+                offset[1] += Math.abs(pixel[1]);
+            }
         }
 
         return {
