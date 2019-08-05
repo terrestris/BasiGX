@@ -73,7 +73,7 @@
         "puppeteer": "1.19.0",
         "rimraf": "2.6.3",
         "serve": "11.1.0",
-        "sinon": "7.3.2",
+        "sinon": "7.4.0",
         "uglify-js": "3.6.0"
     }
 }
