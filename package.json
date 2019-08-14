@@ -36,8 +36,8 @@
     "output": "${package.dir}/build",
     "scripts": {
         "pretest": "npm run lint",
-        "test": "export CHROME_BIN=chromium-browser && karma start --single-run",
-        "test:watch": "export CHROME_BIN=chromium-browser && karma start karma-watch.conf.js",
+        "test": "karma start --single-run",
+        "test:watch": "karma start karma-watch.conf.js",
         "lint": "eslint -c .eslintrc src/ && eslint -c test/.eslintrc test/",
         "lint:fix": "eslint -c .eslintrc --fix src/ && eslint -c test/.eslintrc --fix test/",
         "clean-coverage": "rimraf coverage",
