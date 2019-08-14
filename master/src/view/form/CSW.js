@@ -208,6 +208,15 @@ Ext.define('BasiGX.view.form.CSW', {
                     change: function(textfield) {
                         var view = textfield.up('basigx-form-csw');
                         view.resetState();
+                    },
+                    specialkey: function (textfield, evt) {
+                        // execute search on ENTER is hit inside the textfield
+                        if(evt.getKey() === evt.ENTER){
+                            evt.preventDefault();
+                            var view = textfield.up('basigx-form-csw');
+                            view.resetState();
+                            view.requestGetRecords();
+                        }
                     }
                 }
             }]
