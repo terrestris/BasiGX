@@ -72,15 +72,23 @@ module.exports = function(config) {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: [
-            // 'Chrome'
+            'ChromeNoSandbox'
             // 'Firefox',
-            'Chromium_no_sandbox'
+            // 'Chromium_no_sandbox'
         ],
 
         customLaunchers: {
-            Chromium_no_sandbox: {
-                base: 'ChromiumHeadless',
-                flags: ['--no-sandbox']
+            ChromeNoSandbox: {
+                base: 'Chrome',
+                flags: [
+                    '--no-sandbox',
+                    '--headless',
+                    '--disable-web-security',
+                    '--disable-gpu',
+                    // Without a remote debugging port, Google Chrome exits immediately.
+                    '--remote-debugging-port=9999',
+                    '--remote-debugging-address=1.1.1.1'
+                ]
             }
         },
 
