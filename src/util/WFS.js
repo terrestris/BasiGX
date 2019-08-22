@@ -482,17 +482,21 @@ Ext.define('BasiGX.util.WFS', {
          * @param {Object} scope The scope (this-context) of the methods for
          *    success or failure callbacks.
          * @param {String} viewParams the view params to append
+         * @param {String} featureType the feature type to query
          * @return {Ext.data.request.Ajax} The request object.
          */
         executeWfsGetFeature: function(url, layer, srsName, displayColumns,
             geomFieldName, filter, maxFeatures, successCallback,
-            failureCallback, scope, viewParams) {
+            failureCallback, scope, viewParams, featureType) {
             if (!viewParams) {
                 viewParams = '';
             }
 
-            var params = layer.getSource().getParams();
-            var featureType = BasiGX.util.Object.layersFromParams(params);
+            if (!featureType) {
+                var params = layer.getSource().getParams();
+                featureType = BasiGX.util.Object.layersFromParams(params);
+            }
+
             var ns = featureType.split(':')[0];
             var namespaceUtil = BasiGX.util.Namespace;
             var nsUri = namespaceUtil.namespaceUriFromNamespace(ns);
