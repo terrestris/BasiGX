@@ -17,7 +17,7 @@
  * A progressbar that indicates loading of map resources such as tile of layers.
  *
  * This will work with sources that inherit from `ol.source.Image` or
- * `ol.source.TileImage` directly. This includes e.g.:
+ * `ol.source.Tile` directly. This includes e.g.:
  *
  * * `ol.source.ImageWMS`,
  * * `ol.source.ImageArcGISRest`,
@@ -35,7 +35,8 @@
  * * `ol.source.Zoomify`,
  * * `ol.source.CartoDB`,
  * * `ol.source.OSM`,
- * * `ol.source.Stamen`
+ * * `ol.source.Stamen`,
+ * * `ol.source.VectorTile`
  *
  * If your `ol.source.Vector` fires all the custom events `vectorloadstart`,
  * `vectorloadend` and `vectorloaderror` -- e.g. by using a custom loader
@@ -180,7 +181,7 @@ Ext.define('BasiGX.view.MapLoadingStatusBar', {
         if (source instanceof ol.source.Image) {
             // includes ImageWms, but also e.g. ImageArcGISRest, OSM…
             eventPrefix = 'image';
-        } else if (source instanceof ol.source.TileImage) {
+        } else if (source instanceof ol.source.Tile) {
             // includes TileWMS, Bingmaps and more
             eventPrefix = 'tile';
         } else if (source instanceof ol.source.Vector) {
