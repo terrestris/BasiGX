@@ -63,7 +63,7 @@ Ext.define('BasiGX.util.Map', {
          * @param {Number} resolution The resolution you wish to have the scale
          *     for.
          * @param {String} units The units to get the resoultuion for, typically
-         *     the unit of the projection odf the map view. Allowed values are
+         *     the unit of the projection of the map view. Allowed values are
          *     `'degrees'`, `'ft'`, `'m'` or `'us-ft'`
          * @return {Number} The calculated scale.
          */
