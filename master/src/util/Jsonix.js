@@ -17,6 +17,11 @@
  * Common utility class containing static methods for determination,
  * initialization and storing of Jsonix components.
  *
+ * Please note that you'll have to include jsonix dependency and used
+ * module factories either in you app.json (list of JavaScript assets
+ * - Block "js") or in a script tag in a index-template.html file in
+ * order to get this util working correctly.
+ *
  * @class BasiGX.util.Jsonix
  */
 Ext.define('BasiGX.util.Jsonix', {
