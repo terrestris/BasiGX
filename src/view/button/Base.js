@@ -21,21 +21,23 @@
 Ext.define('BasiGX.view.button.Base', {
     extend: 'Ext.Button',
     xtype: 'basigx-button-base',
+
     viewModel: {
         data: {}
     },
     bind: {},
+
     /**
      *
      */
-    constructor: function() {
+    constructor: function () {
         var me = this;
         me.callParent(arguments);
         if (me.setTooltip) {
             var bind = me.config.bind;
             var ttFromViewModel = me.getViewModel().get('tooltip');
             if (ttFromViewModel) {
-                bind.tooltip = ttFromViewModel;
+                bind.tooltip = '{tooltip}';
             }
             me.setBind(bind);
         }
