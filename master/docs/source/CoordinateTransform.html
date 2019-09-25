@@ -97,9 +97,8 @@ Ext.define(&#39;BasiGX.view.button.CoordinateTransform&#39;, {
      */
     config: {
 <span id='BasiGX-view-button-CoordinateTransform-cfg-handler'>        handler: function() {
-</span>            var win = this._win;
-            if (!win) {
-                win = Ext.create(&#39;Ext.window.Window&#39;, {
+</span>            if (!this._win) {
+                this._win = Ext.create(&#39;Ext.window.Window&#39;, {
                     name: &#39;coordinate-transform-window&#39;,
                     title: this.getViewModel().get(&#39;windowTitle&#39;),
                     width: 500,
@@ -110,23 +109,25 @@ Ext.define(&#39;BasiGX.view.button.CoordinateTransform&#39;, {
                         xtype: &#39;basigx-form-coordinatetransform&#39;,
                         coordinateSystemsToUse: this.coordinateSystemsToUse,
                         transformCenterOnRender: this.transformCenterOnRender
-                    }]
+                    }],
+                    listeners: {
+                        destroy: this.onDestroy,
+                        scope: this
+                    }
                 });
-                this._win = win;
-                win.show();
+                this._win.show();
             } else {
-                BasiGX.util.Animate.shake(win);
+                BasiGX.util.Animate.shake(this._win);
             }
         }
     },
 
 <span id='BasiGX-view-button-CoordinateTransform-method-onDestroy'>    /**
-</span>     * Do any necessary cleanup (e.g. remove listeners, destroy dependent
-     * objects …).
+</span>     * Reset window reference
      */
     onDestroy: function() {
         if (this._win) {
-            this._win.destroy();
+            this._win = null;
         }
     }
 });
