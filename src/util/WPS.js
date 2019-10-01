@@ -142,8 +142,10 @@ Ext.define('BasiGX.util.WPS', {
                 };
                 var inputValue = inputs[identifier];
                 if (Ext.isObject(inputValue)) {
-                    if (inputValue.hasOwnProperty('identifier')) {
-                        if (inputValue.hasOwnProperty('wfsProperties')) {
+                    if (Object.prototype.hasOwnProperty.call(inputValue,
+                        'identifier')) {
+                        if (Object.prototype.hasOwnProperty.call(inputValue,
+                            'wfsProperties')) {
                             var namespace = inputValue.wfsProperties.namespace;
                             var namespaceUri = inputValue.wfsProperties.
                                 namespaceUri;
@@ -199,8 +201,9 @@ Ext.define('BasiGX.util.WPS', {
                                 }
                             };
                         }
-                    } else if (inputValue.hasOwnProperty('mimeType') &&
-                        inputValue.hasOwnProperty('data')) {
+                    } else if (Object.prototype.hasOwnProperty.call(inputValue,
+                        'mimeType') && Object.prototype.hasOwnProperty
+                        .call(inputValue, 'data')) {
                         // we have a CDATA (e.g. geometry) input
                         singleInput.data = {
                             TYPE_NAME: 'WPS_1_0_0.DataType',
