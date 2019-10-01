@@ -25,7 +25,8 @@ Ext.define('BasiGX.util.WPS', {
         'BasiGX.util.Jsonix',
         'BasiGX.util.Url',
         'BasiGX.util.Filter',
-        'BasiGX.util.Namespace'
+        'BasiGX.util.Namespace',
+        'BasiGX.util.WFS'
     ],
 
     inheritableStatics: {
@@ -72,7 +73,7 @@ Ext.define('BasiGX.util.WPS', {
          *     `wps:Execute` document.
          *
          */
-        createWpsExecuteProcessObject: function(wpsIdentifier, inputs) {
+        createWpsExecuteProcessObject: function (wpsIdentifier, inputs) {
             var staticMe = BasiGX.util.WPS;
             var executeDoc = {
                 name: {
@@ -128,7 +129,7 @@ Ext.define('BasiGX.util.WPS', {
          * @return {Array<Object>} Array of Jsonix objects to be marshaled to
          *      XML `wps:Input` document block.
          */
-        requestParamstoWpsInputs: function(inputs) {
+        requestParamstoWpsInputs: function (inputs) {
             var staticMe = BasiGX.util.WPS;
             var wpsInput = [];
             var singleInput = {};
@@ -142,26 +143,68 @@ Ext.define('BasiGX.util.WPS', {
                 };
                 var inputValue = inputs[identifier];
                 if (Ext.isObject(inputValue)) {
-                    if (inputValue.hasOwnProperty('identifier')) {
-                        // we have a reference
-                        // TODO at the moment only reference to a coverage will
-                        // be supported
-                        singleInput.reference = {
-                            TYPE_NAME: 'WPS_1_0_0.InputReferenceType',
-                            mimeType: 'image/tiff',
-                            href: 'http://geoserver/wcs',
-                            method: 'POST',
-                            body: {
-                                TYPE_NAME: 'AnyType',
-                                content: [
-                                    staticMe.getGetCoverageRequestXml(
-                                        inputValue.identifier
-                                    )
-                                ]
-                            }
-                        };
-                    } else if (inputValue.hasOwnProperty('mimeType') &&
-                            inputValue.hasOwnProperty('data')) {
+                    if (Object.prototype.hasOwnProperty.call(inputValue,
+                        'identifier')) {
+                        if (Object.prototype.hasOwnProperty.call(inputValue,
+                            'wfsProperties')) {
+                            var namespace = inputValue.wfsProperties.namespace;
+                            var namespaceUri = inputValue.wfsProperties.
+                                namespaceUri;
+                            var featureType = inputValue.wfsProperties.
+                                featureType;
+                            var crs = inputValue.wfsProperties.crs ||
+                                'EPSG:4326';
+                            var propertyNameXml = inputValue.wfsProperties
+                                .propertyNameXml || '';
+                            var filter = inputValue.wfsProperties
+                                .filter || '';
+                            var viewParams = inputValue.wfsProperties
+                                .viewParams || '';
+                            var maxFeatures = inputValue.wfsProperties
+                                .maxFeatures || 0;
+                            var content = Ext.String.format(
+                                BasiGX.util.WFS.wfsGetFeatureXmlTpl,
+                                namespace,
+                                namespaceUri,
+                                featureType,
+                                crs,
+                                propertyNameXml,
+                                filter,
+                                maxFeatures,
+                                viewParams
+                            );
+                            singleInput.reference = {
+                                TYPE_NAME: 'WPS_1_0_0.InputReferenceType',
+                                mimeType: 'text/xml',
+                                href: 'http://geoserver/wfs',
+                                method: 'POST',
+                                body: {
+                                    TYPE_NAME: 'AnyType',
+                                    content: [content]
+                                }
+                            };
+                        } else {
+                            // we have a reference
+                            // TODO at the moment only reference to a coverage
+                            // will be supported
+                            singleInput.reference = {
+                                TYPE_NAME: 'WPS_1_0_0.InputReferenceType',
+                                mimeType: 'image/tiff',
+                                href: 'http://geoserver/wcs',
+                                method: 'POST',
+                                body: {
+                                    TYPE_NAME: 'AnyType',
+                                    content: [
+                                        staticMe.getGetCoverageRequestXml(
+                                            inputValue.identifier
+                                        )
+                                    ]
+                                }
+                            };
+                        }
+                    } else if (Object.prototype.hasOwnProperty.call(inputValue,
+                        'mimeType') && Object.prototype.hasOwnProperty
+                        .call(inputValue, 'data')) {
                         // we have a CDATA (e.g. geometry) input
                         singleInput.data = {
                             TYPE_NAME: 'WPS_1_0_0.DataType',
@@ -197,7 +240,7 @@ Ext.define('BasiGX.util.WPS', {
          *     requested via WCS GetCoverage.
          * @return {String} Parsed XML request for the WCS GetCoverage.
          */
-        getGetCoverageRequestXml: function(coverage) {
+        getGetCoverageRequestXml: function (coverage) {
 
             var json = {
                 name: {
@@ -251,7 +294,7 @@ Ext.define('BasiGX.util.WPS', {
          * @return {Ext.data.request.Ajax} The request object which on may use
          *     to e.g. abort the request.
          */
-        execute: function(process, inputs, success, failure, scope, timeout) {
+        execute: function (process, inputs, success, failure, scope, timeout) {
             var staticMe = BasiGX.util.WPS;
             var namespaceUtil = BasiGX.util.Namespace;
 
@@ -296,7 +339,7 @@ Ext.define('BasiGX.util.WPS', {
          *     to e.g. abort the request.
          * @private
          */
-        executeProcess: function(xml, namespace, success, failure, scope,
+        executeProcess: function (xml, namespace, success, failure, scope,
             timeout) {
             var baseUrl = BasiGX.util.Url.getWebProjectBaseUrl();
 
@@ -330,7 +373,7 @@ Ext.define('BasiGX.util.WPS', {
          * A generic function bound as the success callback, if none was
          * provided.
          */
-        genericSuccessHandler: function() {
+        genericSuccessHandler: function () {
             Ext.log.info('WPS process executed.');
         },
 
@@ -338,7 +381,7 @@ Ext.define('BasiGX.util.WPS', {
          * A generic function bound as the failure callback, if none was
          * provided.
          */
-        genericFailureHandler: function() {
+        genericFailureHandler: function () {
             Ext.log.warn('Failed to execute WPS process.');
         },
 
@@ -349,7 +392,7 @@ Ext.define('BasiGX.util.WPS', {
          * @param {Object} response The response of the successful Ajax call
          *     which is a ServiceException.
          */
-        handleWpsExecuteException: function(response) {
+        handleWpsExecuteException: function (response) {
             var staticMe = BasiGX.util.WPS;
             var jsonixUtil = BasiGX.util.Jsonix;
             var parsedXml = jsonixUtil.unmarshaller.unmarshalString(response);
@@ -358,8 +401,8 @@ Ext.define('BasiGX.util.WPS', {
                 if (parsedXml.value.exception) {
                     excReport = parsedXml.value.exception[0];
                 } else if (parsedXml.value.status &&
-                        parsedXml.value.status.processFailed &&
-                        parsedXml.value.status.processFailed.exceptionReport) {
+                    parsedXml.value.status.processFailed &&
+                    parsedXml.value.status.processFailed.exceptionReport) {
                     excReport = parsedXml.value.status.processFailed
                         .exceptionReport.exception[0];
                 }
@@ -372,7 +415,7 @@ Ext.define('BasiGX.util.WPS', {
                         staticMe.wpsExecuteExceptionText,
                         excMsg
                     ),
-                    {title: excTitle}
+                    { title: excTitle }
                 );
             }
         },
@@ -384,13 +427,13 @@ Ext.define('BasiGX.util.WPS', {
          * @param {String} xmlString XML or HTML document to be decoded.
          * @return {String} Decoded XML or HTML document.
          */
-        decodeXml: function(xmlString) {
+        decodeXml: function (xmlString) {
             var map = {
                 '&lt;': '<',
                 '&gt;': '>'
             };
             return xmlString.replace(/(&quot;|&lt;|&gt;|&amp;)/g,
-                function(str, item) {
+                function (str, item) {
                     return map[item];
                 }
             );
