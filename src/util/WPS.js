@@ -161,7 +161,7 @@ Ext.define('BasiGX.util.WPS', {
                             var viewParams = inputValue.wfsProperties
                                 .viewParams || '';
                             var maxFeatures = inputValue.wfsProperties
-                                .maxFeatures || 0;
+                                .maxFeatures;
                             var content = Ext.String.format(
                                 BasiGX.util.WFS.wfsGetFeatureXmlTpl,
                                 namespace,
@@ -173,6 +173,10 @@ Ext.define('BasiGX.util.WPS', {
                                 maxFeatures,
                                 viewParams
                             );
+                            if (!Ext.isDefined(maxFeatures)) {
+                                // Replace maxFeatures string by an empty one
+                                content = content.replace('maxFeatures=""', '');
+                            }
                             singleInput.reference = {
                                 TYPE_NAME: 'WPS_1_0_0.InputReferenceType',
                                 mimeType: 'text/xml',
