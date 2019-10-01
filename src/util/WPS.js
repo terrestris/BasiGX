@@ -25,7 +25,8 @@ Ext.define('BasiGX.util.WPS', {
         'BasiGX.util.Jsonix',
         'BasiGX.util.Url',
         'BasiGX.util.Filter',
-        'BasiGX.util.Namespace'
+        'BasiGX.util.Namespace',
+        'BasiGX.util.WFS'
     ],
 
     inheritableStatics: {
