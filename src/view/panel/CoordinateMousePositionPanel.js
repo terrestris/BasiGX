@@ -375,7 +375,8 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
         var me = this;
         if (me.olMap) {
             var center = me.olMap.getView().getCenter();
-            center = ol.proj.transform(center, me.olMousePositionControl.getProjection(),
+            center = ol.proj.transform(center, 
+                me.olMousePositionControl.getProjection(),
                 me.olMap.getView().getProjection());
 
             me.getViewModel().setData({
