@@ -195,6 +195,7 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
         me.on(&#39;afterrender&#39;, function() {
             me.initOlMouseControl();
             me.initProjections();
+            me.initCenter();
         });
         me.callParent();
     },
@@ -217,7 +218,7 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
 
 <span id='BasiGX-view-panel-CoordinateMousePositionPanel-method-initProjections'>    /**
 </span>     * Initilization of projections using BasiGX.util.Projection for passed
-     * EPSG codes / currently active propjection in map
+     * EPSG codes / currently active projection in map
      */
     initProjections: function() {
         var me = this;
@@ -382,6 +383,24 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
         observer.observe(coordElement, {
             childList: true
         });
+    },
+
+<span id='BasiGX-view-panel-CoordinateMousePositionPanel-method-initCenter'>    /**
+</span>     * Initializes the text boxes with the map&#39;s initial center
+     */
+    initCenter: function() {
+        var me = this;
+        if (me.olMap) {
+            var center = me.olMap.getView().getCenter();
+            center = ol.proj.transform(center,
+                me.olMousePositionControl.getProjection(),
+                me.olMap.getView().getProjection());
+
+            me.getViewModel().setData({
+                xVal: center[0],
+                yVal: center[1]
+            });
+        }
     },
 
 <span id='BasiGX-view-panel-CoordinateMousePositionPanel-method-updateCoordinateFields'>    /**
