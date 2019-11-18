@@ -186,6 +186,9 @@ describe('BasiGX.plugin.Hover', function() {
                     ol.interaction.Select
                 );
             });
+            it('has a default hoverColor value set', function () {
+                expect(plugin.getHoverColor()).to.be('rgba(255, 0, 0, 0.6)');
+            });
         });
         describe('defaults are changeable', function() {
             var mapComponentConfigured;
@@ -194,11 +197,13 @@ describe('BasiGX.plugin.Hover', function() {
             var layer;
             var interaction;
             var testObjs2;
+            var hoverColor;
 
             beforeEach(function() {
                 source = new ol.source.Vector();
                 layer = new ol.layer.Vector();
                 interaction = new ol.interaction.Select();
+                hoverColor = 'rgba(0, 255, 0, 1)';
                 testObjs2 = TestUtil.setupTestObjects({
                     mapComponentOpts: {
                         plugins: {
@@ -209,6 +214,7 @@ describe('BasiGX.plugin.Hover', function() {
                             featureInfoEpsg: 'EPSG:1337',
                             hoverVectorLayerSource: source,
                             hoverVectorLayer: layer,
+                            hoverColor: hoverColor,
                             hoverVectorLayerInteraction: interaction
                         }
                     }
@@ -249,6 +255,11 @@ describe('BasiGX.plugin.Hover', function() {
             it('has the expected hoverVectorLayerInteraction', function() {
                 expect(pluginConfigured.getHoverVectorLayerInteraction()).to.be(
                     interaction
+                );
+            });
+            it('has the expected hoverColor', function () {
+                expect(pluginConfigured.getHoverColor()).to.be(
+                    hoverColor
                 );
             });
         });
