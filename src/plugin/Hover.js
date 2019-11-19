@@ -76,6 +76,7 @@ Ext.define('BasiGX.plugin.Hover', {
         hoverVectorLayerSource: null,
         hoverVectorLayer: null,
         hoverVectorLayerInteraction: null,
+        hoverColor: 'rgba(255, 0, 0, 0.6)',
         dynamicHoverColor: false,
         enableHoverSelection: true,
         /**
@@ -659,7 +660,7 @@ Ext.define('BasiGX.plugin.Hover', {
     highlightStyleFunction: function(feature, resolution, baseColor) {
         var me = this;
         var count = feature.get('count');
-        var hoverColor = 'rgba(255, 0, 0, 0.6)';
+        var hoverColor = me.getHoverColor();
         var dynamicHoverColor = me.getDynamicHoverColor();
         var radius = 14;
         var fontSize = 10;
