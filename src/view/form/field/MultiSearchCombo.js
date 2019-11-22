@@ -283,6 +283,8 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
                     me.fireEvent('checkresultsvisibility');
                 }, me, {single: true});
             } else {
+                me.noGazetteerResults = true;
+                gazetteerGrid.hide();
                 gazetteerGrid.getStore().removeAll();
             }
         } else {
@@ -308,6 +310,8 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
                 objectSearchGrid.describeFeatureTypes(value, me);
                 objectSearchGrid.expand();
             } else {
+                objectSearchGrid.hide();
+                me.noWfsSearchResults = true;
                 objectSearchGrid.getStore().removeAll();
             }
         } else {
