@@ -369,7 +369,8 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
             me.searchContainer = searchContainer;
             me.on('checkresultsvisibility', function () {
                 var hidden = me.noGazetteerResults && me.noWfsSearchResults;
-                searchContainer.down('panel[name=noresults]').setVisible(hidden);
+                var selector = 'panel[name=noresults]';
+                me.searchContainer.down(selector).setVisible(hidden);
             }, me);
         }
         me.searchContainer.show();

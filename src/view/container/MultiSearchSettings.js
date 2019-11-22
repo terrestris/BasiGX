@@ -136,6 +136,26 @@ Ext.define('BasiGX.view.container.MultiSearchSettings', {
         me.setCombo(me.combo);
 
         me.on('beforerender', me.addLayers);
+
+        var objectSearchCb = me.down('checkboxfield[name=objectsearch]');
+
+        objectSearchCb.on('change', me.onObjectSearchCbChange, me);
+    },
+
+    /**
+     *
+     * Disables configuration of searchable layers if "Object search" checkbox
+     * is unchecked.
+     *
+     * @param {Ext.form.field.Checkbox} cb Object search checkbox.
+     * @param {boolean} checked Whether the checkbox is checked.
+     */
+    onObjectSearchCbChange: function(cb, checked) {
+        var me = this;
+        var layersContainer = me.down('fieldcontainer[name="objectlayers"]');
+        if (layersContainer) {
+            layersContainer.setDisabled(!checked);
+        }
     },
 
     /**
