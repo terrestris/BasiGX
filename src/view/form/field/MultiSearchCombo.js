@@ -355,7 +355,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 
         var value = me.getValue();
 
-        if (value) {
+        if (value && value.length >= me.minChars) {
             me.doGazetteerSearch(value);
             me.doObjectSearch(value);
         } else {
