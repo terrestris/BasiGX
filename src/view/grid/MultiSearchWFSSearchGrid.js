@@ -157,7 +157,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
     */
     features: [{
         ftype: 'grouping',
-        groupHeaderTpl: 'Layer: {name}'
+        groupHeaderTpl: '{name} ({children.length})'
     }],
 
     /**
