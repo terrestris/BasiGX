@@ -251,6 +251,16 @@
         }
     },
 
+    "BasiGX.view.form.field.MultiSearchCombo": {
+        "config": {
+            "data": {
+                "emptyText": "Suche ...",
+                "settingsWindowTitle": "Sucheinstellungen",
+                "noResultsFoundText": "Keine Ergebnisse gefunden"
+            }
+        }
+    },
+
     "BasiGX.view.panel.GraphicPool": {
         "config": {
             "data": {
