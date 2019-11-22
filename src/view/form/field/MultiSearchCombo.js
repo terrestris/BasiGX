@@ -314,14 +314,14 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 
                 style: {
                     top: position.top,
-                    left: position.left
+                    left: position.left,
+                    zIndex: 10
                 }
 
             });
 
             me.searchContainer = searchContainer;
         }
-
         me.searchContainer.show();
     },
 
@@ -368,7 +368,5 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
             });
             me.settingsWindow = settingsWindow;
         }
-
     }
-
 });
