@@ -410,14 +410,14 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
      */
     setupXmlPostBody: function(featureTypes) {
         var me = this;
-
-        var limitToBBox = me.getCombo().getLimitToBBox();
-
+        var combo = me.getCombo();
+        var limitToBBox = combo.getLimitToBBox();
         var map = BasiGX.util.Map.getMapComponent().getMap();
         var projection = map.getView().getProjection().getCode();
         var bbox;
         var visibleExtent = map.getView().calculateExtent(map.getSize());
         var totalExtent = map.getView().getProjection().getExtent();
+        var maxFeatures = combo.getMaxFeatures();
 
         if (limitToBBox) {
             bbox = visibleExtent;
@@ -431,6 +431,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         var xml =
             '<wfs:GetFeature service="WFS" version="1.1.0" ' +
               'outputFormat="application/json" ' +
+              'maxFeatures="' + maxFeatures + '" ' +
               'xmlns:wfs="http://www.opengis.net/wfs" ' +
               'xmlns:ogc="http://www.opengis.net/ogc" ' +
               'xmlns:gml="http://www.opengis.net/gml" ' +

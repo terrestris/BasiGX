@@ -48,6 +48,7 @@ Ext.define('BasiGX.view.container.MultiSearchSettings', {
             objectSearchLabel: 'Objekt Suche verwenden',
             objectSearchLayersLabel: 'Layer für Objektsuche',
             saveBtnText: 'Sucheinstellungen speichern',
+            maxResultCountText: 'Maximale Anzahl der Ergebnisse',
             documentation: '<h2>Multi-Suche</h2>• Benutzen Sie die ' +
                 'Mutlisuche, um nach beliebigen Begriffen über mehrere ' +
                 'Datenquellen hinweg gleichzeitig zu suchen.<br>• Über ' +
@@ -70,49 +71,57 @@ Ext.define('BasiGX.view.container.MultiSearchSettings', {
     items: [{
         xtype: 'form',
         width: '100%',
-        items: [
-            {
-                xtype: 'fieldcontainer',
-                name: 'generalsettings',
-                bind: {
-                    fieldLabel: '{generalSettingsLabel}'
-                },
-                defaultType: 'checkboxfield',
-                labelWidth: 200,
-                items: [
-                    {
-                        bind: {
-                            boxLabel: '{limitCboxLabel}'
-                        },
-                        labelWidth: 200,
-                        name: 'limitcheckbox',
-                        checked: true
-                    }, {
-                        bind: {
-                            boxLabel: '{gazetteerLabel}'
-                        },
-                        labelWidth: 200,
-                        name: 'gazetteersearch',
-                        checked: true
-                    }, {
-                        bind: {
-                            boxLabel: '{objectSearchLabel}'
-                        },
-                        labelWidth: 200,
-                        name: 'objectsearch',
-                        checked: true
-                    }
-                ]
-            }, {
-                xtype: 'fieldcontainer',
-                name: 'objectlayers',
-                bind: {
-                    fieldLabel: '{objectSearchLayersLabel}'
-                },
-                defaultType: 'checkboxfield',
-                labelWidth: 200
-            }
-        ]
+        defaults: {
+            labelWidth: 200
+        },
+        items: [{
+            xtype: 'fieldcontainer',
+            name: 'generalsettings',
+            bind: {
+                fieldLabel: '{generalSettingsLabel}'
+            },
+            defaults: {
+                xtype: 'checkboxfield',
+                checked: true
+            },
+            items: [
+                {
+                    bind: {
+                        boxLabel: '{limitCboxLabel}'
+                    },
+                    name: 'limitcheckbox'
+                }, {
+                    bind: {
+                        boxLabel: '{gazetteerLabel}'
+                    },
+                    name: 'gazetteersearch'
+                }, {
+                    bind: {
+                        boxLabel: '{objectSearchLabel}'
+                    },
+                    name: 'objectsearch'
+                }
+            ]
+        }, {
+            xtype: 'fieldcontainer',
+            name: 'resultcount',
+            bind: {
+                fieldLabel: '{maxResultCountText}'
+            },
+            items: [{
+                xtype: 'numberfield',
+                name: 'maxfeatures',
+                minValue: 0,
+                maxValue: 50
+            }]
+        }, {
+            xtype: 'fieldcontainer',
+            name: 'objectlayers',
+            bind: {
+                fieldLabel: '{objectSearchLayersLabel}'
+            },
+            defaultType: 'checkboxfield'
+        }]
     }, {
         xtype: 'button',
         bind: {
@@ -140,6 +149,8 @@ Ext.define('BasiGX.view.container.MultiSearchSettings', {
         var objectSearchCb = me.down('checkboxfield[name=objectsearch]');
 
         objectSearchCb.on('change', me.onObjectSearchCbChange, me);
+
+        me.down('numberfield[name=maxfeatures]').setValue(me.combo.getMaxFeatures());
     },
 
     /**
@@ -200,6 +211,10 @@ Ext.define('BasiGX.view.container.MultiSearchSettings', {
                         combo.configuredSearchLayers.push(l);
                     }
                 });
+
+            } else if (parentItem.name === 'resultcount') {
+                var maxFeatures = parentItem.down('numberfield').getValue();
+                combo.setMaxFeatures(maxFeatures);
 
             } else {
                 Ext.log.error('Found setting for which no handler exists');

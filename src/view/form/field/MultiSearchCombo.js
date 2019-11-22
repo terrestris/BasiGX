@@ -92,6 +92,11 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
         searchLayerBlackList: [],
 
         /**
+         * Maximum number of features to retrieve from WFS search.
+         */
+        maxFeatures: 10,
+
+        /**
          * Delay in ms before query avoid search triggering while typing
          */
         typeDelay: 500
