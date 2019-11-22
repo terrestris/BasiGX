@@ -230,14 +230,39 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         me.on('describeFeatureTypeResponse', me.getFeatures);
         me.on('getFeatureResponse', me.showSearchResults);
 
-        // add listeners
         me.on('boxready', me.onBoxReady, me);
+
+        // add listeners for interaction between grid and found features
+        // while grid is visible
+        me.on('afterrender', me.registerListeners, me);
+        me.on('show', me.registerListeners, me);
+
+        // unregister the same listeners on grid hide
+        me.on('hide', me.unregisterListeners, me);
+        me.on('destroy', me.unregisterListeners, me);
+
+    },
+
+    /**
+     * Called once the grid is shown. Registers all related listeners for
+     * interaction between grid and features on the map.
+     */
+    registerListeners: function() {
+        var me = this;
         me.on('itemmouseenter', me.highlightFeature, me);
         me.on('itemmouseleave', me.unhighlightFeature, me);
         me.on('itemclick', me.highlightSelectedFeature, me);
-        // unregister listeners on grid hide
-        me.on('hide', me.unregisterListeners, me);
+    },
 
+    /**
+     * Called once the grid turns hidden. Deactivates all related listeners for
+     * interaction between grid and features on the map.
+     */
+    unregisterListeners: function () {
+        var me = this;
+        me.un('itemmouseenter', me.highlightFeature, me);
+        me.un('itemmouseleave', me.unhighlightFeature, me);
+        me.un('itemclick', me.highlightSelectedFeature, me);
     },
 
 
@@ -514,19 +539,6 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
             me.setLayer(layer);
             me.getMap().addLayer(layer);
         }
-    },
-
-    /**
-    * called by OnHide to deactivate all listeners when not needed
-    */
-    unregisterListeners: function() {
-        var me = this;
-
-        me.un('boxready', me.onBoxReady, me);
-        me.un('itemmouseenter', me.highlightFeature, me);
-        me.un('itemmouseleave', me.unhighlightFeature, me);
-        me.un('itemclick', me.highlightSelectedFeature, me);
-
     },
 
     /**
