@@ -249,23 +249,27 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
      * @param {boolean} limitToBBox Search is limited to visible extent
      */
     doGazetteerSearch: function(value, limitToBBox) {
-
         var me = this;
-
         var gazetteerGrid =
             Ext.ComponentQuery.query(me.getGazetteerGrid())[0];
 
         if (gazetteerGrid) {
             if (me.getGazetteerSearch()) {
                 gazetteerGrid.doGazetteerSearch(value, limitToBBox);
-                gazetteerGrid.expand();
+                gazetteerGrid.getStore().on('load', function(store) {
+                    if (store.getData().items.length > 0) {
+                        gazetteerGrid.show();
+                        gazetteerGrid.expand();
+                    } else {
+                        gazetteerGrid.hide();
+                    }
+                }, me, {single: true});
             } else {
                 gazetteerGrid.getStore().removeAll();
             }
         } else {
             Ext.log.error('Gazetteer SearchGrid not found');
         }
-
     },
 
     /**

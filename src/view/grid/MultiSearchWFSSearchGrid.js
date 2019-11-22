@@ -488,36 +488,37 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         if (!features) {
             Ext.log.error('No feature found');
         } else {
-            if (features.length > 0) {
+            if (features.length === 0) {
+                me.hide();
+            } else {
                 me.show();
-            }
 
-            var searchTerm = me.searchTerm;
-            Ext.each(features, function(feature) {
-                var featuretype = feature.id.split('.')[0];
-                var displayfield;
+                var searchTerm = me.searchTerm;
+                Ext.each(features, function(feature) {
+                    var featuretype = feature.id.split('.')[0];
+                    var displayfield;
 
-                // find the matching value in order to display it
-                Ext.iterate(feature.properties, function(k, v) {
-                    var lowercaseVal = v && v.toString().toLowerCase();
-                    if (lowercaseVal && lowercaseVal.indexOf(searchTerm) > -1) {
-                        displayfield = v;
-                        return false;
-                    }
+                    // find the matching value in order to display it
+                    Ext.iterate(feature.properties, function(k, v) {
+                        var lowercaseVal = v && v.toString().toLowerCase();
+                        if (lowercaseVal && lowercaseVal.indexOf(searchTerm) > -1) {
+                            displayfield = v;
+                            return false;
+                        }
+                    });
+
+                    feature.properties.displayfield = displayfield;
+                    feature.properties.featuretype = featuretype;
+
+                    var olFeat = parser.readFeatures(feature, {
+                        dataProjection: combo.getWfsDataProjection(),
+                        featureProjection: combo.getWfsFeatureProjection()
+                    })[0];
+                    me.searchResultVectorLayer.getSource().addFeature(olFeat);
+
                 });
-
-                feature.properties.displayfield = displayfield;
-                feature.properties.featuretype = featuretype;
-
-                var olFeat = parser.readFeatures(feature, {
-                    dataProjection: combo.getWfsDataProjection(),
-                    featureProjection: combo.getWfsFeatureProjection()
-                })[0];
-                me.searchResultVectorLayer.getSource().addFeature(olFeat);
-
-            });
+            }
         }
-
     },
 
     /**
