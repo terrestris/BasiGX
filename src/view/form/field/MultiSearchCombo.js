@@ -98,6 +98,8 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 
     settingsWindow: null,
 
+    minChars: 0,
+
     bind: {
         emptyText: '{emptyText}'
     },
@@ -174,34 +176,50 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
         var me = this;
 
         if (newValue) {
-            // create the multi search panel
-            me.showResults();
+            if (newValue.length >= me.minChars) {
 
-            // start the gazetteer search
-            me.doGazetteerSearch(newValue, me.getLimitToBBox);
+                // create the multi search panel
+                me.showResults();
 
-            // start the object search
-            me.doObjectSearch(newValue);
+                // start the gazetteer search
+                me.doGazetteerSearch(newValue, me.getLimitToBBox);
 
+                // start the object search
+                me.doObjectSearch(newValue);
+            } else {
+                me.cleanupSearch();
+            }
         } else {
-            var objectSearchGrid =
-                Ext.ComponentQuery.query(me.getWfsSearchGrid())[0];
-            var searchLayer = objectSearchGrid.searchResultVectorLayer;
+            me.cleanupSearch();
+        }
+    },
 
-            if (searchLayer) {
-                searchLayer.getSource().clear();
-            }
+    /**
+     * Cleanup result vector layer and hide search container
+     */
+    cleanupSearch: function() {
+        var me = this;
+        var wfsGrid = me.getWfsSearchGrid();
+        var objectSearchGrid = Ext.ComponentQuery.query(wfsGrid)[0];
 
-            if (me.searchContainer) {
-                me.searchContainer.getEl().slideOut('t', {
-                    duration: 250,
-                    callback: function() {
-                        me.searchContainer.hide();
-                    },
-                    scope: me.searchContainer
-                });
-            }
+        if (!objectSearchGrid) {
+            return;
+        }
 
+        var searchLayer = objectSearchGrid.searchResultVectorLayer;
+
+        if (searchLayer) {
+            searchLayer.getSource().clear();
+        }
+
+        if (me.searchContainer) {
+            me.searchContainer.getEl().slideOut('t', {
+                duration: 250,
+                callback: function () {
+                    me.searchContainer.hide();
+                },
+                scope: me.searchContainer
+            });
         }
     },
 
