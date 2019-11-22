@@ -108,6 +108,21 @@
             }
         }
     },
+
+    "BasiGX.view.container.MultiSearchSettings": {
+        "config": {
+            "data": {
+                "generalSettingsLabel": "Allgemeine Einstellungen",
+                "limitCboxLabel": "Auf den sichtbaren Kartenbereich einschränken",
+                "gazetteerLabel": "Gazetteer Suche verwenden",
+                "objectSearchLabel": "Objekt Suche verwenden",
+                "objectSearchLayersLabel": "Layer für Objektsuche",
+                "saveBtnText": "Sucheinstellungen speichern",
+                "maxResultCountText": "Maximale Anzahl der Ergebnisse"
+            }
+        }
+    },
+
     "BasiGX.view.container.NominatimSearch": {
         "config": {
             "data": {

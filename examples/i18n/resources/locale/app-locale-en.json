@@ -108,6 +108,21 @@
             }
         }
     },
+
+    "BasiGX.view.container.MultiSearchSettings": {
+        "config": {
+            "data": {
+                "generalSettingsLabel": "General settings",
+                "limitCboxLabel": "Limit to visible extent",
+                "gazetteerLabel": "Use OpenStreetMap search",
+                "objectSearchLabel": "Search in layers of this application",
+                "objectSearchLayersLabel": "Selected layers for the search",
+                "saveBtnText": "Save search settings",
+                "maxResultCountText": "Maximum search results count"
+            }
+        }
+    },
+
     "BasiGX.view.container.NominatimSearch": {
         "config": {
             "data": {
