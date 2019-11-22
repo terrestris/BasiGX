@@ -142,15 +142,17 @@ Ext.define('BasiGX.view.container.MultiSearchSettings', {
 
         me.callParent();
 
-        me.setCombo(me.combo);
+        if (me.combo) {
+            me.setCombo(me.combo);
+            me.down('numberfield[name=maxfeatures]')
+                .setValue(me.getCombo().getMaxFeatures());
+        }
 
         me.on('beforerender', me.addLayers);
 
         var objectSearchCb = me.down('checkboxfield[name=objectsearch]');
 
         objectSearchCb.on('change', me.onObjectSearchCbChange, me);
-
-        me.down('numberfield[name=maxfeatures]').setValue(me.combo.getMaxFeatures());
     },
 
     /**
