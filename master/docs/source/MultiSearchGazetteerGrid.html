@@ -121,14 +121,38 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchGazetteerGrid&#39;, {
 
         me.callParent(arguments);
 
-        // add listeners
         me.on(&#39;boxready&#39;, me.onBoxReady, me);
+
+        // add listeners for interaction between grid and found features
+        // while grid is visible
+        me.on(&#39;afterrender&#39;, me.registerListeners, me);
+        me.on(&#39;show&#39;, me.registerListeners, me);
+
+        // unregister the same listeners on grid hide
+        me.on(&#39;hide&#39;, me.unregisterListeners, me);
+        me.on(&#39;destroy&#39;, me.unregisterListeners, me);
+    },
+
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-method-registerListeners'>    /**
+</span>     * Called once the grid is shown. Registers all related listeners for
+     * interaction between grid and features on the map.
+     */
+    registerListeners: function() {
+        var me = this;
         me.on(&#39;itemmouseenter&#39;, me.onItemMouseEnter, me);
         me.on(&#39;itemmouseleave&#39;, me.onItemMouseLeave, me);
         me.on(&#39;itemclick&#39;, me.onItemClick, me);
+    },
 
-        // unregister listeners on grid hide
-        me.on(&#39;hide&#39;, me.unregisterListeners, me);
+<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-method-unregisterListeners'>    /**
+</span>     * Called once the grid turns hidden. Deactivates all related listeners for
+     * interaction between grid and features on the map.
+     */
+    unregisterListeners: function () {
+        var me = this;
+        me.un(&#39;itemmouseenter&#39;, me.onItemMouseEnter, me);
+        me.un(&#39;itemmouseleave&#39;, me.onItemMouseLeave, me);
+        me.un(&#39;itemclick&#39;, me.onItemClick, me);
     },
 
 <span id='BasiGX-view-grid-MultiSearchGazetteerGrid-method-onBoxReady'>    /**
@@ -204,18 +228,6 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchGazetteerGrid&#39;, {
                 duration: 500
             });
         }
-    },
-
-<span id='BasiGX-view-grid-MultiSearchGazetteerGrid-method-unregisterListeners'>    /**
-</span>     * Called by onhide listener to deactivate all listeners when inactive.
-     */
-    unregisterListeners: function() {
-        var me = this;
-
-        me.un(&#39;boxready&#39;, me.onBoxReady, me);
-        me.un(&#39;itemmouseenter&#39;, me.onItemMouseEnter, me);
-        me.un(&#39;itemmouseleave&#39;, me.onItemMouseLeave, me);
-        me.un(&#39;itemclick&#39;, me.onItemClick, me);
     },
 
 <span id='BasiGX-view-grid-MultiSearchGazetteerGrid-method-doGazetteerSearch'>    /**

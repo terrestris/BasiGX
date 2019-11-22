@@ -58,7 +58,8 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
     viewModel: {
         data: {
             emptyText: 'Suche ...',
-            settingsWindowTitle: 'Sucheinstellungen'
+            settingsWindowTitle: 'Sucheinstellungen',
+            noResultsFoundText: 'Keine Ergebnisse gefunden'
         }
     },
 
@@ -88,8 +89,17 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 
         configuredSearchLayers: [],
 
-        searchLayerBlackList: []
+        searchLayerBlackList: [],
 
+        /**
+         * Maximum number of features to retrieve from WFS search.
+         */
+        maxFeatures: 10,
+
+        /**
+         * Delay in ms before query avoid search triggering while typing
+         */
+        typeDelay: 500
     },
 
     store: [],
@@ -97,6 +107,28 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
     searchContainer: null,
 
     settingsWindow: null,
+
+    /**
+     * Member to check if some gazetteer results were retrieved for the searched
+     * term. If neither gazetteer nor wfs results are returned "No results
+     * found" message will be shown as callback.
+     */
+    noGazetteerResults: false,
+
+    /**
+     * Member to check if some wfs results were retrieved for the searched term
+     * term. If neither gazetteer nor wfs results are returned "No results
+     * found" message will be shown as callback.
+     */
+    noWfsSearchResults: false,
+
+    minChars: 0,
+
+    /**
+     * Member for the delayed task to buffer search execution within specified
+     * time period provided via `typeDelay` config
+     */
+    typeDelayTask: null,
 
     bind: {
         emptyText: '{emptyText}'
@@ -174,34 +206,58 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
         var me = this;
 
         if (newValue) {
-            // create the multi search panel
-            me.showResults();
+            if (newValue.length >= me.minChars) {
 
-            // start the gazetteer search
-            me.doGazetteerSearch(newValue, me.getLimitToBBox);
+                if (me.typeDelayTask) {
+                    me.typeDelayTask.cancel();
+                }
 
-            // start the object search
-            me.doObjectSearch(newValue);
+                // delay search execution
+                me.typeDelayTask = new Ext.util.DelayedTask(function() {
+                    // create the multi search panel
+                    me.showResults();
 
-        } else {
-            var objectSearchGrid =
-                Ext.ComponentQuery.query(me.getWfsSearchGrid())[0];
-            var searchLayer = objectSearchGrid.searchResultVectorLayer;
+                    // start the gazetteer search
+                    me.doGazetteerSearch(newValue, me.getLimitToBBox);
 
-            if (searchLayer) {
-                searchLayer.getSource().clear();
-            }
-
-            if (me.searchContainer) {
-                me.searchContainer.getEl().slideOut('t', {
-                    duration: 250,
-                    callback: function() {
-                        me.searchContainer.hide();
-                    },
-                    scope: me.searchContainer
+                    // start the object search
+                    me.doObjectSearch(newValue);
                 });
+                me.typeDelayTask.delay(me.getTypeDelay());
+            } else {
+                me.cleanupSearch();
             }
+        } else {
+            me.cleanupSearch();
+        }
+    },
 
+    /**
+     * Cleanup result vector layer and hide search container
+     */
+    cleanupSearch: function() {
+        var me = this;
+        var wfsGrid = me.getWfsSearchGrid();
+        var objectSearchGrid = Ext.ComponentQuery.query(wfsGrid)[0];
+
+        if (!objectSearchGrid) {
+            return;
+        }
+
+        var searchLayer = objectSearchGrid.searchResultVectorLayer;
+
+        if (searchLayer) {
+            searchLayer.getSource().clear();
+        }
+
+        if (me.searchContainer) {
+            me.searchContainer.getEl().slideOut('t', {
+                duration: 250,
+                callback: function () {
+                    me.searchContainer.hide();
+                },
+                scope: me.searchContainer
+            });
         }
     },
 
@@ -213,23 +269,32 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
      * @param {boolean} limitToBBox Search is limited to visible extent
      */
     doGazetteerSearch: function(value, limitToBBox) {
-
         var me = this;
-
         var gazetteerGrid =
             Ext.ComponentQuery.query(me.getGazetteerGrid())[0];
 
         if (gazetteerGrid) {
             if (me.getGazetteerSearch()) {
                 gazetteerGrid.doGazetteerSearch(value, limitToBBox);
-                gazetteerGrid.expand();
+                gazetteerGrid.getStore().on('load', function(store) {
+                    if (store.getData().items.length > 0) {
+                        gazetteerGrid.show();
+                        gazetteerGrid.expand();
+                        me.noGazetteerResults = false;
+                    } else {
+                        gazetteerGrid.hide();
+                        me.noGazetteerResults = true;
+                    }
+                    me.fireEvent('checkresultsvisibility');
+                }, me, {single: true});
             } else {
+                me.noGazetteerResults = true;
+                gazetteerGrid.hide();
                 gazetteerGrid.getStore().removeAll();
             }
         } else {
             Ext.log.error('Gazetteer SearchGrid not found');
         }
-
     },
 
     /**
@@ -250,6 +315,8 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
                 objectSearchGrid.describeFeatureTypes(value, me);
                 objectSearchGrid.expand();
             } else {
+                objectSearchGrid.hide();
+                me.noWfsSearchResults = true;
                 objectSearchGrid.getStore().removeAll();
             }
         } else {
@@ -283,28 +350,36 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 
             searchContainer = Ext.create(Ext.container.Container, {
                 renderTo: Ext.getBody(),
-
+                name: 'search-results-container',
                 items: [
                     {
                         xtype: me.getGazetteerGrid()
                     }, {
                         xtype: me.getWfsSearchGrid()
+                    }, {
+                        xtype: 'panel',
+                        name: 'noresults',
+                        bodyPadding: 10,
+                        hidden: true,
+                        html: me.getViewModel().get('noResultsFoundText')
                     }
                 ],
-
                 width: position.width,
-
                 style: {
                     top: position.top,
-                    left: position.left
+                    left: position.left,
+                    zIndex: 10
                 }
-
             });
-
             me.searchContainer = searchContainer;
+            me.on('checkresultsvisibility', function () {
+                var hidden = me.noGazetteerResults && me.noWfsSearchResults;
+                var selector = 'panel[name=noresults]';
+                me.searchContainer.down(selector).setVisible(hidden);
+            }, me);
         }
-
         me.searchContainer.show();
+
     },
 
     /**
@@ -315,7 +390,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 
         var value = me.getValue();
 
-        if (value) {
+        if (value && value.length >= me.minChars) {
             me.doGazetteerSearch(value);
             me.doObjectSearch(value);
         } else {
@@ -350,7 +425,5 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
             });
             me.settingsWindow = settingsWindow;
         }
-
     }
-
 });

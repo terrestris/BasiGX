@@ -65,6 +65,7 @@ Ext.define(&#39;BasiGX.view.container.MultiSearchSettings&#39;, {
             objectSearchLabel: &#39;Objekt Suche verwenden&#39;,
             objectSearchLayersLabel: &#39;Layer für Objektsuche&#39;,
             saveBtnText: &#39;Sucheinstellungen speichern&#39;,
+            maxResultCountText: &#39;Maximale Anzahl der Ergebnisse&#39;,
             documentation: &#39;&lt;h2&gt;Multi-Suche&lt;/h2&gt;• Benutzen Sie die &#39; +
                 &#39;Mutlisuche, um nach beliebigen Begriffen über mehrere &#39; +
                 &#39;Datenquellen hinweg gleichzeitig zu suchen.&lt;br&gt;• Über &#39; +
@@ -87,49 +88,57 @@ Ext.define(&#39;BasiGX.view.container.MultiSearchSettings&#39;, {
 <span id='BasiGX-view-container-MultiSearchSettings-property-items'>    items: [{
 </span>        xtype: &#39;form&#39;,
         width: &#39;100%&#39;,
-        items: [
-            {
-                xtype: &#39;fieldcontainer&#39;,
-                name: &#39;generalsettings&#39;,
-                bind: {
-                    fieldLabel: &#39;{generalSettingsLabel}&#39;
-                },
-                defaultType: &#39;checkboxfield&#39;,
-                labelWidth: 200,
-                items: [
-                    {
-                        bind: {
-                            boxLabel: &#39;{limitCboxLabel}&#39;
-                        },
-                        labelWidth: 200,
-                        name: &#39;limitcheckbox&#39;,
-                        checked: true
-                    }, {
-                        bind: {
-                            boxLabel: &#39;{gazetteerLabel}&#39;
-                        },
-                        labelWidth: 200,
-                        name: &#39;gazetteersearch&#39;,
-                        checked: true
-                    }, {
-                        bind: {
-                            boxLabel: &#39;{objectSearchLabel}&#39;
-                        },
-                        labelWidth: 200,
-                        name: &#39;objectsearch&#39;,
-                        checked: true
-                    }
-                ]
-            }, {
-                xtype: &#39;fieldcontainer&#39;,
-                name: &#39;objectlayers&#39;,
-                bind: {
-                    fieldLabel: &#39;{objectSearchLayersLabel}&#39;
-                },
-                defaultType: &#39;checkboxfield&#39;,
-                labelWidth: 200
-            }
-        ]
+        defaults: {
+            labelWidth: 200
+        },
+        items: [{
+            xtype: &#39;fieldcontainer&#39;,
+            name: &#39;generalsettings&#39;,
+            bind: {
+                fieldLabel: &#39;{generalSettingsLabel}&#39;
+            },
+            defaults: {
+                xtype: &#39;checkboxfield&#39;,
+                checked: true
+            },
+            items: [
+                {
+                    bind: {
+                        boxLabel: &#39;{limitCboxLabel}&#39;
+                    },
+                    name: &#39;limitcheckbox&#39;
+                }, {
+                    bind: {
+                        boxLabel: &#39;{gazetteerLabel}&#39;
+                    },
+                    name: &#39;gazetteersearch&#39;
+                }, {
+                    bind: {
+                        boxLabel: &#39;{objectSearchLabel}&#39;
+                    },
+                    name: &#39;objectsearch&#39;
+                }
+            ]
+        }, {
+            xtype: &#39;fieldcontainer&#39;,
+            name: &#39;resultcount&#39;,
+            bind: {
+                fieldLabel: &#39;{maxResultCountText}&#39;
+            },
+            items: [{
+                xtype: &#39;numberfield&#39;,
+                name: &#39;maxfeatures&#39;,
+                minValue: 0,
+                maxValue: 50
+            }]
+        }, {
+            xtype: &#39;fieldcontainer&#39;,
+            name: &#39;objectlayers&#39;,
+            bind: {
+                fieldLabel: &#39;{objectSearchLayersLabel}&#39;
+            },
+            defaultType: &#39;checkboxfield&#39;
+        }]
     }, {
         xtype: &#39;button&#39;,
         bind: {
@@ -150,9 +159,33 @@ Ext.define(&#39;BasiGX.view.container.MultiSearchSettings&#39;, {
 
         me.callParent();
 
-        me.setCombo(me.combo);
+        if (me.combo) {
+            me.setCombo(me.combo);
+            me.down(&#39;numberfield[name=maxfeatures]&#39;)
+                .setValue(me.getCombo().getMaxFeatures());
+        }
 
         me.on(&#39;beforerender&#39;, me.addLayers);
+
+        var objectSearchCb = me.down(&#39;checkboxfield[name=objectsearch]&#39;);
+
+        objectSearchCb.on(&#39;change&#39;, me.onObjectSearchCbChange, me);
+    },
+
+<span id='BasiGX-view-container-MultiSearchSettings-method-onObjectSearchCbChange'>    /**
+</span>     *
+     * Disables configuration of searchable layers if &quot;Object search&quot; checkbox
+     * is unchecked.
+     *
+     * @param {Ext.form.field.Checkbox} cb Object search checkbox.
+     * @param {boolean} checked Whether the checkbox is checked.
+     */
+    onObjectSearchCbChange: function(cb, checked) {
+        var me = this;
+        var layersContainer = me.down(&#39;fieldcontainer[name=&quot;objectlayers&quot;]&#39;);
+        if (layersContainer) {
+            layersContainer.setDisabled(!checked);
+        }
     },
 
 <span id='BasiGX-view-container-MultiSearchSettings-method-saveSettings'>    /**
@@ -197,6 +230,10 @@ Ext.define(&#39;BasiGX.view.container.MultiSearchSettings&#39;, {
                         combo.configuredSearchLayers.push(l);
                     }
                 });
+
+            } else if (parentItem.name === &#39;resultcount&#39;) {
+                var maxFeatures = parentItem.down(&#39;numberfield&#39;).getValue();
+                combo.setMaxFeatures(maxFeatures);
 
             } else {
                 Ext.log.error(&#39;Found setting for which no handler exists&#39;);

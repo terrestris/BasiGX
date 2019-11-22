@@ -174,7 +174,7 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
     */
     features: [{
         ftype: &#39;grouping&#39;,
-        groupHeaderTpl: &#39;Layer: {name}&#39;
+        groupHeaderTpl: &#39;{name} ({children.length})&#39;
     }],
 
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-property-columns'>    /**
@@ -247,14 +247,39 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
         me.on(&#39;describeFeatureTypeResponse&#39;, me.getFeatures);
         me.on(&#39;getFeatureResponse&#39;, me.showSearchResults);
 
-        // add listeners
         me.on(&#39;boxready&#39;, me.onBoxReady, me);
+
+        // add listeners for interaction between grid and found features
+        // while grid is visible
+        me.on(&#39;afterrender&#39;, me.registerListeners, me);
+        me.on(&#39;show&#39;, me.registerListeners, me);
+
+        // unregister the same listeners on grid hide
+        me.on(&#39;hide&#39;, me.unregisterListeners, me);
+        me.on(&#39;destroy&#39;, me.unregisterListeners, me);
+
+    },
+
+<span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-method-registerListeners'>    /**
+</span>     * Called once the grid is shown. Registers all related listeners for
+     * interaction between grid and features on the map.
+     */
+    registerListeners: function() {
+        var me = this;
         me.on(&#39;itemmouseenter&#39;, me.highlightFeature, me);
         me.on(&#39;itemmouseleave&#39;, me.unhighlightFeature, me);
         me.on(&#39;itemclick&#39;, me.highlightSelectedFeature, me);
-        // unregister listeners on grid hide
-        me.on(&#39;hide&#39;, me.unregisterListeners, me);
+    },
 
+<span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-method-unregisterListeners'>    /**
+</span>     * Called once the grid turns hidden. Deactivates all related listeners for
+     * interaction between grid and features on the map.
+     */
+    unregisterListeners: function () {
+        var me = this;
+        me.un(&#39;itemmouseenter&#39;, me.highlightFeature, me);
+        me.un(&#39;itemmouseleave&#39;, me.unhighlightFeature, me);
+        me.un(&#39;itemclick&#39;, me.highlightSelectedFeature, me);
     },
 
 
@@ -402,14 +427,14 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
      */
     setupXmlPostBody: function(featureTypes) {
         var me = this;
-
-        var limitToBBox = me.getCombo().getLimitToBBox();
-
+        var combo = me.getCombo();
+        var limitToBBox = combo.getLimitToBBox();
         var map = BasiGX.util.Map.getMapComponent().getMap();
         var projection = map.getView().getProjection().getCode();
         var bbox;
         var visibleExtent = map.getView().calculateExtent(map.getSize());
         var totalExtent = map.getView().getProjection().getExtent();
+        var maxFeatures = combo.getMaxFeatures();
 
         if (limitToBBox) {
             bbox = visibleExtent;
@@ -423,6 +448,7 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
         var xml =
             &#39;&lt;wfs:GetFeature service=&quot;WFS&quot; version=&quot;1.1.0&quot; &#39; +
               &#39;outputFormat=&quot;application/json&quot; &#39; +
+              &#39;maxFeatures=&quot;&#39; + maxFeatures + &#39;&quot; &#39; +
               &#39;xmlns:wfs=&quot;http://www.opengis.net/wfs&quot; &#39; +
               &#39;xmlns:ogc=&quot;http://www.opengis.net/ogc&quot; &#39; +
               &#39;xmlns:gml=&quot;http://www.opengis.net/gml&quot; &#39; +
@@ -480,36 +506,40 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
         if (!features) {
             Ext.log.error(&#39;No feature found&#39;);
         } else {
-            if (features.length &gt; 0) {
+            if (features.length === 0) {
+                me.hide();
+                combo.noWfsSearchResults = true;
+            } else {
                 me.show();
-            }
+                combo.noWfsSearchResults = false;
 
-            var searchTerm = me.searchTerm;
-            Ext.each(features, function(feature) {
-                var featuretype = feature.id.split(&#39;.&#39;)[0];
-                var displayfield;
+                var searchTerm = me.searchTerm;
+                Ext.each(features, function(feature) {
+                    var featuretype = feature.id.split(&#39;.&#39;)[0];
+                    var displayfield;
 
-                // find the matching value in order to display it
-                Ext.iterate(feature.properties, function(k, v) {
-                    var lowercaseVal = v &amp;&amp; v.toString().toLowerCase();
-                    if (lowercaseVal &amp;&amp; lowercaseVal.indexOf(searchTerm) &gt; -1) {
-                        displayfield = v;
-                        return false;
-                    }
+                    // find the matching value in order to display it
+                    Ext.iterate(feature.properties, function(k, v) {
+                        var lcVal = v &amp;&amp; v.toString().toLowerCase();
+                        if (lcVal &amp;&amp; lcVal.indexOf(searchTerm) &gt; -1) {
+                            displayfield = v;
+                            return false;
+                        }
+                    });
+
+                    feature.properties.displayfield = displayfield;
+                    feature.properties.featuretype = featuretype;
+
+                    var olFeat = parser.readFeatures(feature, {
+                        dataProjection: combo.getWfsDataProjection(),
+                        featureProjection: combo.getWfsFeatureProjection()
+                    })[0];
+                    me.searchResultVectorLayer.getSource().addFeature(olFeat);
+
                 });
-
-                feature.properties.displayfield = displayfield;
-                feature.properties.featuretype = featuretype;
-
-                var olFeat = parser.readFeatures(feature, {
-                    dataProjection: combo.getWfsDataProjection(),
-                    featureProjection: combo.getWfsFeatureProjection()
-                })[0];
-                me.searchResultVectorLayer.getSource().addFeature(olFeat);
-
-            });
+            }
+            combo.fireEvent(&#39;checkresultsvisibility&#39;);
         }
-
     },
 
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-method-onBoxReady'>    /**
@@ -531,19 +561,6 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
             me.setLayer(layer);
             me.getMap().addLayer(layer);
         }
-    },
-
-<span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-method-unregisterListeners'>    /**
-</span>    * called by OnHide to deactivate all listeners when not needed
-    */
-    unregisterListeners: function() {
-        var me = this;
-
-        me.un(&#39;boxready&#39;, me.onBoxReady, me);
-        me.un(&#39;itemmouseenter&#39;, me.highlightFeature, me);
-        me.un(&#39;itemmouseleave&#39;, me.unhighlightFeature, me);
-        me.un(&#39;itemclick&#39;, me.highlightSelectedFeature, me);
-
     },
 
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-method-highlightFeature'>    /**
