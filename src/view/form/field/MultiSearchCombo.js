@@ -58,7 +58,8 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
     viewModel: {
         data: {
             emptyText: 'Suche ...',
-            settingsWindowTitle: 'Sucheinstellungen'
+            settingsWindowTitle: 'Sucheinstellungen',
+            noResultsFoundText: 'Keine Ergebnisse gefunden'
         }
     },
 
@@ -101,6 +102,20 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
     searchContainer: null,
 
     settingsWindow: null,
+
+    /**
+     * Member to check if some gazetteer results were retrieved for the searched
+     * term. If neither gazetteer nor wfs results are returned "No results
+     * found" message will be shown as callback.
+     */
+    noGazetteerResults: false,
+
+    /**
+     * Member to check if some wfs results were retrieved for the searched term
+     * term. If neither gazetteer nor wfs results are returned "No results
+     * found" message will be shown as callback.
+     */
+    noWfsSearchResults: false,
 
     minChars: 0,
 
@@ -260,9 +275,12 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
                     if (store.getData().items.length > 0) {
                         gazetteerGrid.show();
                         gazetteerGrid.expand();
+                        me.noGazetteerResults = false;
                     } else {
                         gazetteerGrid.hide();
+                        me.noGazetteerResults = true;
                     }
+                    me.fireEvent('checkresultsvisibility');
                 }, me, {single: true});
             } else {
                 gazetteerGrid.getStore().removeAll();
@@ -323,28 +341,35 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 
             searchContainer = Ext.create(Ext.container.Container, {
                 renderTo: Ext.getBody(),
-
+                name: 'search-results-container',
                 items: [
                     {
                         xtype: me.getGazetteerGrid()
                     }, {
                         xtype: me.getWfsSearchGrid()
+                    }, {
+                        xtype: 'panel',
+                        name: 'noresults',
+                        bodyPadding: 10,
+                        hidden: true,
+                        html: me.getViewModel().get('noResultsFoundText')
                     }
                 ],
-
                 width: position.width,
-
                 style: {
                     top: position.top,
                     left: position.left,
                     zIndex: 10
                 }
-
             });
-
             me.searchContainer = searchContainer;
+            me.on('checkresultsvisibility', function () {
+                var hidden = me.noGazetteerResults && me.noWfsSearchResults;
+                searchContainer.down('panel[name=noresults]').setVisible(hidden);
+            }, me);
         }
         me.searchContainer.show();
+
     },
 
     /**

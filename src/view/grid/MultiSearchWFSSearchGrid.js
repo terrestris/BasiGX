@@ -490,8 +490,10 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         } else {
             if (features.length === 0) {
                 me.hide();
+                combo.noWfsSearchResults = true;
             } else {
                 me.show();
+                combo.noWfsSearchResults = false;
 
                 var searchTerm = me.searchTerm;
                 Ext.each(features, function(feature) {
@@ -500,8 +502,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
 
                     // find the matching value in order to display it
                     Ext.iterate(feature.properties, function(k, v) {
-                        var lowercaseVal = v && v.toString().toLowerCase();
-                        if (lowercaseVal && lowercaseVal.indexOf(searchTerm) > -1) {
+                        var lcVal = v && v.toString().toLowerCase();
+                        if (lcVal && lcVal.indexOf(searchTerm) > -1) {
                             displayfield = v;
                             return false;
                         }
@@ -518,6 +520,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
 
                 });
             }
+            combo.fireEvent('checkresultsvisibility');
         }
     },
 
