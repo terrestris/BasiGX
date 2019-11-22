@@ -108,6 +108,21 @@
             }
         }
     },
+
+    "BasiGX.view.container.MultiSearchSettings": {
+        "config": {
+            "data": {
+                "generalSettingsLabel": "General settings",
+                "limitCboxLabel": "Limit to visible extent",
+                "gazetteerLabel": "Use OpenStreetMap search",
+                "objectSearchLabel": "Search in layers of this application",
+                "objectSearchLayersLabel": "Selected layers for the search",
+                "saveBtnText": "Save search settings",
+                "maxResultCountText": "Maximum search results count"
+            }
+        }
+    },
+
     "BasiGX.view.container.NominatimSearch": {
         "config": {
             "data": {
@@ -247,6 +262,16 @@
                 "layoutComboLabel": "Layout",
                 "attributesTitle": "Attributes",
                 "mapTitleLabel": "Map title"
+            }
+        }
+    },
+
+    "BasiGX.view.form.field.MultiSearchCombo": {
+        "config": {
+            "data": {
+                "emptyText": "Search ...",
+                "settingsWindowTitle": "Search settings",
+                "noResultsFoundText": "No results found"
             }
         }
     },

@@ -157,7 +157,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
     */
     features: [{
         ftype: 'grouping',
-        groupHeaderTpl: 'Layer: {name}'
+        groupHeaderTpl: '{name} ({children.length})'
     }],
 
     /**
@@ -230,14 +230,39 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         me.on('describeFeatureTypeResponse', me.getFeatures);
         me.on('getFeatureResponse', me.showSearchResults);
 
-        // add listeners
         me.on('boxready', me.onBoxReady, me);
+
+        // add listeners for interaction between grid and found features
+        // while grid is visible
+        me.on('afterrender', me.registerListeners, me);
+        me.on('show', me.registerListeners, me);
+
+        // unregister the same listeners on grid hide
+        me.on('hide', me.unregisterListeners, me);
+        me.on('destroy', me.unregisterListeners, me);
+
+    },
+
+    /**
+     * Called once the grid is shown. Registers all related listeners for
+     * interaction between grid and features on the map.
+     */
+    registerListeners: function() {
+        var me = this;
         me.on('itemmouseenter', me.highlightFeature, me);
         me.on('itemmouseleave', me.unhighlightFeature, me);
         me.on('itemclick', me.highlightSelectedFeature, me);
-        // unregister listeners on grid hide
-        me.on('hide', me.unregisterListeners, me);
+    },
 
+    /**
+     * Called once the grid turns hidden. Deactivates all related listeners for
+     * interaction between grid and features on the map.
+     */
+    unregisterListeners: function () {
+        var me = this;
+        me.un('itemmouseenter', me.highlightFeature, me);
+        me.un('itemmouseleave', me.unhighlightFeature, me);
+        me.un('itemclick', me.highlightSelectedFeature, me);
     },
 
 
@@ -385,14 +410,14 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
      */
     setupXmlPostBody: function(featureTypes) {
         var me = this;
-
-        var limitToBBox = me.getCombo().getLimitToBBox();
-
+        var combo = me.getCombo();
+        var limitToBBox = combo.getLimitToBBox();
         var map = BasiGX.util.Map.getMapComponent().getMap();
         var projection = map.getView().getProjection().getCode();
         var bbox;
         var visibleExtent = map.getView().calculateExtent(map.getSize());
         var totalExtent = map.getView().getProjection().getExtent();
+        var maxFeatures = combo.getMaxFeatures();
 
         if (limitToBBox) {
             bbox = visibleExtent;
@@ -406,6 +431,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         var xml =
             '<wfs:GetFeature service="WFS" version="1.1.0" ' +
               'outputFormat="application/json" ' +
+              'maxFeatures="' + maxFeatures + '" ' +
               'xmlns:wfs="http://www.opengis.net/wfs" ' +
               'xmlns:ogc="http://www.opengis.net/ogc" ' +
               'xmlns:gml="http://www.opengis.net/gml" ' +
@@ -463,36 +489,40 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         if (!features) {
             Ext.log.error('No feature found');
         } else {
-            if (features.length > 0) {
+            if (features.length === 0) {
+                me.hide();
+                combo.noWfsSearchResults = true;
+            } else {
                 me.show();
-            }
+                combo.noWfsSearchResults = false;
 
-            var searchTerm = me.searchTerm;
-            Ext.each(features, function(feature) {
-                var featuretype = feature.id.split('.')[0];
-                var displayfield;
+                var searchTerm = me.searchTerm;
+                Ext.each(features, function(feature) {
+                    var featuretype = feature.id.split('.')[0];
+                    var displayfield;
 
-                // find the matching value in order to display it
-                Ext.iterate(feature.properties, function(k, v) {
-                    var lowercaseVal = v && v.toString().toLowerCase();
-                    if (lowercaseVal && lowercaseVal.indexOf(searchTerm) > -1) {
-                        displayfield = v;
-                        return false;
-                    }
+                    // find the matching value in order to display it
+                    Ext.iterate(feature.properties, function(k, v) {
+                        var lcVal = v && v.toString().toLowerCase();
+                        if (lcVal && lcVal.indexOf(searchTerm) > -1) {
+                            displayfield = v;
+                            return false;
+                        }
+                    });
+
+                    feature.properties.displayfield = displayfield;
+                    feature.properties.featuretype = featuretype;
+
+                    var olFeat = parser.readFeatures(feature, {
+                        dataProjection: combo.getWfsDataProjection(),
+                        featureProjection: combo.getWfsFeatureProjection()
+                    })[0];
+                    me.searchResultVectorLayer.getSource().addFeature(olFeat);
+
                 });
-
-                feature.properties.displayfield = displayfield;
-                feature.properties.featuretype = featuretype;
-
-                var olFeat = parser.readFeatures(feature, {
-                    dataProjection: combo.getWfsDataProjection(),
-                    featureProjection: combo.getWfsFeatureProjection()
-                })[0];
-                me.searchResultVectorLayer.getSource().addFeature(olFeat);
-
-            });
+            }
+            combo.fireEvent('checkresultsvisibility');
         }
-
     },
 
     /**
@@ -514,19 +544,6 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
             me.setLayer(layer);
             me.getMap().addLayer(layer);
         }
-    },
-
-    /**
-    * called by OnHide to deactivate all listeners when not needed
-    */
-    unregisterListeners: function() {
-        var me = this;
-
-        me.un('boxready', me.onBoxReady, me);
-        me.un('itemmouseenter', me.highlightFeature, me);
-        me.un('itemmouseleave', me.unhighlightFeature, me);
-        me.un('itemclick', me.highlightSelectedFeature, me);
-
     },
 
     /**
