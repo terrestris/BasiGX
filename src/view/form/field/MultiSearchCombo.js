@@ -88,8 +88,12 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 
         configuredSearchLayers: [],
 
-        searchLayerBlackList: []
+        searchLayerBlackList: [],
 
+        /**
+         * Delay in ms before query avoid search triggering while typing
+         */
+        typeDelay: 500
     },
 
     store: [],
@@ -99,6 +103,12 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
     settingsWindow: null,
 
     minChars: 0,
+
+    /**
+     * Member for the delayed task to buffer search execution within specified
+     * time period provided via `typeDelay` config
+     */
+    typeDelayTask: null,
 
     bind: {
         emptyText: '{emptyText}'
@@ -178,14 +188,22 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
         if (newValue) {
             if (newValue.length >= me.minChars) {
 
-                // create the multi search panel
-                me.showResults();
+                if (me.typeDelayTask) {
+                    me.typeDelayTask.cancel();
+                }
 
-                // start the gazetteer search
-                me.doGazetteerSearch(newValue, me.getLimitToBBox);
+                // delay search execution
+                me.typeDelayTask = new Ext.util.DelayedTask(function() {
+                    // create the multi search panel
+                    me.showResults();
 
-                // start the object search
-                me.doObjectSearch(newValue);
+                    // start the gazetteer search
+                    me.doGazetteerSearch(newValue, me.getLimitToBBox);
+
+                    // start the object search
+                    me.doObjectSearch(newValue);
+                });
+                me.typeDelayTask.delay(me.getTypeDelay());
             } else {
                 me.cleanupSearch();
             }
