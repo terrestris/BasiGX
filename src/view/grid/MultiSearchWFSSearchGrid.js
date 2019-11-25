@@ -439,31 +439,61 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
               'xsi:schemaLocation="http://www.opengis.net/wfs ' +
               'http://schemas.opengis.net/wfs/1.1.0/WFS-basic.xsd">';
 
+        var bboxFilter =
+            '<ogc:BBOX>' +
+                '<gml:Envelope srsName="' + projection + '">' +
+                    '<gml:lowerCorner>' + bboxll + '</gml:lowerCorner>' +
+                    '<gml:upperCorner>' + bboxur + '</gml:upperCorner>' +
+                '</gml:Envelope>' +
+            '</ogc:BBOX>';
+
         Ext.each(featureTypes, function(ft) {
-            Ext.each(ft.properties, function(prop) {
+            var props = ft.properties;
+            Ext.each(props, function(prop) {
+                var comparisonFilter;
+
+                switch (prop.type) {
+                    case 'xsd:string':
+                        comparisonFilter =
+                            '<ogc:PropertyIsLike wildCard="*" singleChar="."' +
+                                ' escape="\\" matchCase="false">' +
+                                '<ogc:PropertyName>' +
+                                    prop.name +
+                                '</ogc:PropertyName>' +
+                                '<ogc:Literal>' +
+                                    '*' + me.searchTerm + '*' +
+                                '</ogc:Literal>' +
+                            '</ogc:PropertyIsLike>';
+                        break;
+                    case 'xsd:int':
+                    case 'xsd:number':
+                        comparisonFilter =
+                            '<ogc:PropertyIsLike wildCard="*" singleChar="."' +
+                                ' escape="\\" matchCase="false">' +
+                                '<ogc:Function name="stringFormat">' +
+                                    '<ogc:Literal>%f</ogc:Literal>' +
+                                    '<ogc:PropertyName>' +
+                                        prop.name +
+                                    '</ogc:PropertyName>' +
+                                '</ogc:Function>' +
+                                '<ogc:Literal>' +
+                                    '*' + me.searchTerm + '*' +
+                                '</ogc:Literal>' +
+                            '</ogc:PropertyIsLike>';
+                        break;
+                    default:
+                        break;
+                }
                 xml +=
                     '<wfs:Query typeName="' + me.getCombo().getWfsPrefix() +
-                           ft.typeName + '">' +
-                     '<ogc:Filter>' +
-                      '<ogc:And>' +
-                       '<ogc:BBOX>' +
-                        '<gml:Envelope srsName="' + projection + '">' +
-                         '<gml:lowerCorner>' + bboxll + '</gml:lowerCorner>' +
-                         '<gml:upperCorner>' + bboxur + '</gml:upperCorner>' +
-                        '</gml:Envelope>' +
-                       '</ogc:BBOX>' +
-                       '<ogc:PropertyIsLike wildCard="*" singleChar="."' +
-                        ' escape="\\" matchCase="false">' +
-                        '<ogc:PropertyName>' +
-                         prop.name +
-                        '</ogc:PropertyName>' +
-                        '<ogc:Literal>' +
-                         '*' + me.searchTerm + '*' +
-                         '</ogc:Literal>' +
-                       '</ogc:PropertyIsLike>' +
-                      '</ogc:And>' +
-                     '</ogc:Filter>' +
-                   '</wfs:Query>';
+                    ft.typeName + '">' +
+                    '<ogc:Filter>' +
+                        '<ogc:And>' +
+                        bboxFilter +
+                        comparisonFilter +
+                        '</ogc:And>' +
+                    '</ogc:Filter>' +
+                    '</wfs:Query>';
             });
         });
 
