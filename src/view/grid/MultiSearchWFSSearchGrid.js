@@ -448,7 +448,11 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
             '</ogc:BBOX>';
 
         Ext.each(featureTypes, function(ft) {
+            var searchableAttributes = me.findSearchableAttributes(ft);
             var props = ft.properties;
+            if (searchableAttributes) {
+                props = searchableAttributes;
+            }
             Ext.each(props, function(prop) {
                 var comparisonFilter;
 
@@ -500,6 +504,50 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         xml += '</wfs:GetFeature>';
 
         return xml;
+    },
+
+    /**
+     * Tries to estimate feature attributes which should be used for WFS search.
+     * This can be the case, if the layer is configured with custom property
+     * `searchable` set to true and having an array of `searchColumns` as
+     * further attribute.
+     * If at least one of these condition is not filled, `false` will be
+     * returned and the default behaviour (use all feature type attributes for
+     * search) takes effect.
+     *
+     * @param {Object} featureType Object containing feature type name and its
+     *     properties.
+     *
+     * @return {Array} Array of searchable attributes for given feature type
+     */
+    findSearchableAttributes: function(featureType) {
+        var me = this;
+        var combo = me.combo;
+        var searchableAttributes = [];
+        var searchLayers = combo.getAllSearchLayers();
+
+        var ftName = featureType.typeName;
+        var layer = searchLayers.find(function (l) {
+            return l.get('name') === ftName;
+        });
+
+        var searchable = layer && layer.get('searchable') &&
+            layer.get('searchColumns');
+
+        if (searchable && !Ext.isEmpty(layer.get('searchColumns'))) {
+            Ext.each(layer.get('searchColumns'), function(sc) {
+                var ft = featureType.properties.find(function (prop) {
+                    return prop.name === sc;
+                });
+                if (ft && ft.type) {
+                    searchableAttributes.push({
+                        name: sc,
+                        type: ft.type
+                    });
+                }
+            });
+        }
+        return searchable && searchableAttributes;
     },
 
     /**
