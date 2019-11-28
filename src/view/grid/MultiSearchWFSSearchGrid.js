@@ -38,7 +38,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         'GeoExt.data.store.Features',
         'BasiGX.util.Map',
         'BasiGX.util.Layer',
-        'BasiGX.util.Animate'
+        'BasiGX.util.Animate',
+        'BasiGX.util.StringTemplate'
     ],
 
     viewModel: {
@@ -86,6 +87,15 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         map: null,
 
         layer: null,
+
+        /**
+         * Object containing two keys - suffix and prefix - to match begin and
+         * end of any placeholder in the display template of search results.
+         * If not set, fallback values `TEMPLATE_PLACEHOLDER_PREFIX` and
+         *`TEMPLATE_PLACEHOLDER_SUFFIX` from `BasiGX.util.StringTemplate` util
+         * will be assumed by templating.
+         */
+        templateConfig: {},
 
         searchResultFeatureStyle: new ol.style.Style({
             image: new ol.style.Circle({
@@ -225,7 +235,6 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         });
 
         me.setStore(searchResultStore);
-
 
         me.on('describeFeatureTypeResponse', me.getFeatures);
         me.on('getFeatureResponse', me.showSearchResults);
@@ -563,6 +572,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         var me = this;
         var combo = me.getCombo();
         var parser = new ol.format.GeoJSON();
+        var searchLayers = combo.getAllSearchLayers();
 
         if (!features) {
             Ext.log.error('No feature found');
@@ -576,17 +586,38 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
 
                 var searchTerm = me.searchTerm;
                 Ext.each(features, function(feature) {
-                    var featuretype = feature.id.split('.')[0];
-                    var displayfield;
+                    var useCustomTemplate = false;
+                    var ftName = feature.id && feature.id.split('.')[0];
+                    var layer;
+                    if (ftName) {
+                        layer = searchLayers.find(function (l) {
+                            return l.get('name') === ftName;
+                        });
+                    }
+                    if (layer) {
+                        useCustomTemplate = layer && layer.get('searchable') &&
+                            layer.get('searchTemplate');
+                    }
 
-                    // find the matching value in order to display it
-                    Ext.iterate(feature.properties, function(k, v) {
-                        var lcVal = v && v.toString().toLowerCase();
-                        if (lcVal && lcVal.indexOf(searchTerm) > -1) {
-                            displayfield = v;
-                            return false;
-                        }
-                    });
+                    var displayfield;
+                    var featuretype = feature.id.split('.')[0];
+
+                    if (useCustomTemplate) {
+                        var templateUtil = BasiGX.util.StringTemplate;
+                        displayfield = templateUtil.getTextFromTemplate(
+                            feature, layer.get('searchTemplate'),
+                            me.getTemplateConfig()
+                        );
+                    } else {
+                        // find the matching value in order to display it
+                        Ext.iterate(feature.properties, function(k, v) {
+                            var lcVal = v && v.toString().toLowerCase();
+                            if (lcVal && lcVal.indexOf(searchTerm) > -1) {
+                                displayfield = v;
+                                return false;
+                            }
+                        });
+                    }
 
                     feature.properties.displayfield = displayfield;
                     feature.properties.featuretype = featuretype;
