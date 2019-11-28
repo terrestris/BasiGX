@@ -1,3 +1,4 @@
+/* eslint max-len: ["error", { "comments": 100 }] */
 /* Copyright (c) 2016-present terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
@@ -478,13 +479,24 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                                 '</ogc:Literal>' +
                             '</ogc:PropertyIsLike>';
                         break;
+                    // TODO add support for xsd:date
                     case 'xsd:int':
                     case 'xsd:number':
+                        var type = 'java.lang.Double';
+                        // Creates custom filter function `stringFormat` which
+                        // doesn't oficially contained in geoserver filter
+                        // functions list.
+                        // To get this filter work, the additional geoserver
+                        // extension `terrestris-filterfunctions` must be
+                        // installed (see
+                        // https://github.com/terrestris/terrestris-filterfunctions
+                        // for further details)
                         comparisonFilter =
                             '<ogc:PropertyIsLike wildCard="*" singleChar="."' +
                                 ' escape="\\" matchCase="false">' +
                                 '<ogc:Function name="stringFormat">' +
                                     '<ogc:Literal>%f</ogc:Literal>' +
+                                    '<ogc:Literal>' + type + '</ogc:Literal>' +
                                     '<ogc:PropertyName>' +
                                         prop.name +
                                     '</ogc:PropertyName>' +
