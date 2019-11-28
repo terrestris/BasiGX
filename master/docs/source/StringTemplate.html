@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2019-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-util-StringTemplate'>/**
+</span> * StringTemplate Util
+ *
+ * This util contains some methods to manipulate string arguments using certain
+ * templates.
+ *
+ * @class BasiGX.util.StringTemplate
+ */
+Ext.define(&#39;BasiGX.util.StringTemplate&#39;, {
+
+    requires: [
+    ],
+
+    statics: {
+
+<span id='BasiGX-util-StringTemplate-static-property-TEMPLATE_PLACEHOLDER_PREFIX'>        /**
+</span>         * The prefix used in a regular expression to match any placeholder
+         * field in the provided template.
+         *
+         * @type {String}
+         */
+        TEMPLATE_PLACEHOLDER_PREFIX: &#39;{{&#39;,
+
+<span id='BasiGX-util-StringTemplate-static-property-TEMPLATE_PLACEHOLDER_SUFFIX'>        /**
+</span>         * The suffix used in a regular expression to match any placeholder
+         * field in the provided template.
+         *
+         * @type {String}
+         */
+        TEMPLATE_PLACEHOLDER_SUFFIX: &#39;}}&#39;,
+
+<span id='BasiGX-util-StringTemplate-static-method-getTextFromTemplate'>        /**
+</span>         * Returns the display text for the passed feature using provided
+         * template. Can be used for customized representation of
+         * feature properties e.g. on hovering or inside of search result
+         * grids.
+         *
+         * @param {ol.Feature} feature The affected feature.
+         * @param {String} template The template to fill with feature
+         *     attributes.
+         * @param {Object} config Object containing template config (suffix and
+         *     prefix). Optional.
+         * @return {String} The templated feature text.
+         */
+        getTextFromTemplate: function (feature, template, config) {
+            var staticMe = BasiGX.util.StringTemplate;
+            var placeHolderPrefix = staticMe.TEMPLATE_PLACEHOLDER_PREFIX;
+            var placeHolderSuffix = staticMe.TEMPLATE_PLACEHOLDER_SUFFIX;
+            if (config &amp;&amp; config.prefix) {
+                placeHolderPrefix = config.prefix;
+            }
+            if (config &amp;&amp; config.suffix) {
+                placeHolderSuffix = config.suffix;
+            }
+            var templatedText;
+
+            if (feature &amp;&amp; template) {
+                // Find any character between two braces (including the braces
+                // in the result)
+                var regExp = new RegExp(placeHolderPrefix + &#39;(.*?)&#39; +
+                        placeHolderSuffix, &#39;g&#39;);
+                var regExpRes = template.match(regExp);
+
+                // If we have a regex result, it means we found a placeholder in
+                // the template and have to replace the placeholder with its
+                // appropriate value
+                if (regExpRes) {
+                    // Iterate over all regex match results and find the proper
+                    // attribute for the given placeholder, finally set the
+                    // desired value to the hover field text
+                    Ext.each(regExpRes, function (res) {
+                        // We count every non matching candidate. If this count
+                        // us equal to the objects length, we assume that there
+                        // is no match at all and set the output value to an
+                        // empty value
+                        var noMatchCnt = 0;
+
+                        var props = feature.getProperties ?
+                            feature.getProperties() : feature.properties;
+
+                        Ext.iterate(props, function (k, v) {
+                            // Remove the suffixes and find the matching
+                            // attribute column
+                            var phPrefixLength = decodeURIComponent(
+                                placeHolderPrefix).length;
+                            var phSuffixLength = decodeURIComponent(
+                                placeHolderSuffix).length;
+                            var placeHolderName = res.slice(phPrefixLength,
+                                res.length - phSuffixLength);
+                            if (placeHolderName === k) {
+                                template = template.replace(res, v);
+                                return false;
+                            } else {
+                                noMatchCnt++;
+                            }
+                        });
+
+                        // No key match found for this feature (e.g. if key not
+                        // present or value is null)
+                        if (noMatchCnt === Ext.Object.getSize(props)) {
+                            template = template.replace(res, &#39;&#39;);
+                        }
+                        templatedText = template;
+                    });
+                } else if (feature.get &amp;&amp; feature.get(template) &amp;&amp;
+                    !Ext.isEmpty(feature.get(template))) {
+                    // If we couldn&#39;t find any match, the template could be a
+                    // simple string containing the e.g. &quot;hoverTemplate&quot;.
+                    // To obtain backwards-compatibility, we check if this
+                    // field is present and set the text accordingly
+                    template = feature.get(template);
+                    templatedText = template;
+                } else {
+                    // Try to use &quot;id&quot; as fallback.
+                    // If &quot;id&quot; is not available, the value will be &quot;undefined&quot;
+                    templatedText = feature.id;
+                }
+            }
+
+            // Replace all newline breaks with a html &lt;br&gt; tag
+            if (Ext.isString(templatedText)) {
+                templatedText = templatedText.replace(/\n/g, &#39;&lt;br&gt;&#39;);
+            }
+            return templatedText;
+        }
+    }
+});
+</pre>
+</body>
+</html>

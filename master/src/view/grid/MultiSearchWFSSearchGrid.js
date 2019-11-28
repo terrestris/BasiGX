@@ -1,3 +1,4 @@
+/* eslint max-len: ["error", { "comments": 100 }] */
 /* Copyright (c) 2016-present terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
@@ -38,7 +39,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         'GeoExt.data.store.Features',
         'BasiGX.util.Map',
         'BasiGX.util.Layer',
-        'BasiGX.util.Animate'
+        'BasiGX.util.Animate',
+        'BasiGX.util.StringTemplate'
     ],
 
     viewModel: {
@@ -86,6 +88,15 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         map: null,
 
         layer: null,
+
+        /**
+         * Object containing two keys - suffix and prefix - to match begin and
+         * end of any placeholder in the display template of search results.
+         * If not set, fallback values `TEMPLATE_PLACEHOLDER_PREFIX` and
+         *`TEMPLATE_PLACEHOLDER_SUFFIX` from `BasiGX.util.StringTemplate` util
+         * will be assumed by templating.
+         */
+        templateConfig: {},
 
         searchResultFeatureStyle: new ol.style.Style({
             image: new ol.style.Circle({
@@ -225,7 +236,6 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         });
 
         me.setStore(searchResultStore);
-
 
         me.on('describeFeatureTypeResponse', me.getFeatures);
         me.on('getFeatureResponse', me.showSearchResults);
@@ -439,37 +449,126 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
               'xsi:schemaLocation="http://www.opengis.net/wfs ' +
               'http://schemas.opengis.net/wfs/1.1.0/WFS-basic.xsd">';
 
+        var bboxFilter =
+            '<ogc:BBOX>' +
+                '<gml:Envelope srsName="' + projection + '">' +
+                    '<gml:lowerCorner>' + bboxll + '</gml:lowerCorner>' +
+                    '<gml:upperCorner>' + bboxur + '</gml:upperCorner>' +
+                '</gml:Envelope>' +
+            '</ogc:BBOX>';
+
         Ext.each(featureTypes, function(ft) {
-            Ext.each(ft.properties, function(prop) {
+            var searchableAttributes = me.findSearchableAttributes(ft);
+            var props = ft.properties;
+            if (searchableAttributes) {
+                props = searchableAttributes;
+            }
+            Ext.each(props, function(prop) {
+                var comparisonFilter;
+
+                switch (prop.type) {
+                    case 'xsd:string':
+                        comparisonFilter =
+                            '<ogc:PropertyIsLike wildCard="*" singleChar="."' +
+                                ' escape="\\" matchCase="false">' +
+                                '<ogc:PropertyName>' +
+                                    prop.name +
+                                '</ogc:PropertyName>' +
+                                '<ogc:Literal>' +
+                                    '*' + me.searchTerm + '*' +
+                                '</ogc:Literal>' +
+                            '</ogc:PropertyIsLike>';
+                        break;
+                    // TODO add support for xsd:date
+                    case 'xsd:int':
+                    case 'xsd:number':
+                        var type = 'java.lang.Double';
+                        // Creates custom filter function `stringFormat` which
+                        // doesn't oficially contained in geoserver filter
+                        // functions list.
+                        // To get this filter work, the additional geoserver
+                        // extension `terrestris-filterfunctions` must be
+                        // installed (see
+                        // https://github.com/terrestris/terrestris-filterfunctions
+                        // for further details)
+                        comparisonFilter =
+                            '<ogc:PropertyIsLike wildCard="*" singleChar="."' +
+                                ' escape="\\" matchCase="false">' +
+                                '<ogc:Function name="stringFormat">' +
+                                    '<ogc:Literal>%f</ogc:Literal>' +
+                                    '<ogc:Literal>' + type + '</ogc:Literal>' +
+                                    '<ogc:PropertyName>' +
+                                        prop.name +
+                                    '</ogc:PropertyName>' +
+                                '</ogc:Function>' +
+                                '<ogc:Literal>' +
+                                    '*' + me.searchTerm + '*' +
+                                '</ogc:Literal>' +
+                            '</ogc:PropertyIsLike>';
+                        break;
+                    default:
+                        break;
+                }
                 xml +=
                     '<wfs:Query typeName="' + me.getCombo().getWfsPrefix() +
-                           ft.typeName + '">' +
-                     '<ogc:Filter>' +
-                      '<ogc:And>' +
-                       '<ogc:BBOX>' +
-                        '<gml:Envelope srsName="' + projection + '">' +
-                         '<gml:lowerCorner>' + bboxll + '</gml:lowerCorner>' +
-                         '<gml:upperCorner>' + bboxur + '</gml:upperCorner>' +
-                        '</gml:Envelope>' +
-                       '</ogc:BBOX>' +
-                       '<ogc:PropertyIsLike wildCard="*" singleChar="."' +
-                        ' escape="\\" matchCase="false">' +
-                        '<ogc:PropertyName>' +
-                         prop.name +
-                        '</ogc:PropertyName>' +
-                        '<ogc:Literal>' +
-                         '*' + me.searchTerm + '*' +
-                         '</ogc:Literal>' +
-                       '</ogc:PropertyIsLike>' +
-                      '</ogc:And>' +
-                     '</ogc:Filter>' +
-                   '</wfs:Query>';
+                    ft.typeName + '">' +
+                    '<ogc:Filter>' +
+                        '<ogc:And>' +
+                        bboxFilter +
+                        comparisonFilter +
+                        '</ogc:And>' +
+                    '</ogc:Filter>' +
+                    '</wfs:Query>';
             });
         });
 
         xml += '</wfs:GetFeature>';
 
         return xml;
+    },
+
+    /**
+     * Tries to estimate feature attributes which should be used for WFS search.
+     * This can be the case, if the layer is configured with custom property
+     * `searchable` set to true and having an array of `searchColumns` as
+     * further attribute.
+     * If at least one of these condition is not filled, `false` will be
+     * returned and the default behaviour (use all feature type attributes for
+     * search) takes effect.
+     *
+     * @param {Object} featureType Object containing feature type name and its
+     *     properties.
+     *
+     * @return {Array} Array of searchable attributes for given feature type
+     */
+    findSearchableAttributes: function(featureType) {
+        var me = this;
+        var combo = me.combo;
+        var searchableAttributes = [];
+        var searchLayers = combo.getAllSearchLayers();
+
+        var ftName = featureType.typeName;
+        var layer = searchLayers.find(function (l) {
+            return l.get('name') === ftName;
+        });
+
+        var searchable = layer && layer.get('searchable') &&
+            layer.get('searchColumns');
+
+        if (searchable && !Ext.isEmpty(layer.get('searchColumns'))) {
+            Ext.each(layer.get('searchColumns'), function(sc) {
+                var ft = featureType.properties.find(function (prop) {
+                    return prop.name === sc;
+                });
+                if (ft && ft.type) {
+                    searchableAttributes.push({
+                        name: sc,
+                        type: ft.type
+                    });
+                }
+            });
+        }
+        return searchable && searchableAttributes;
     },
 
     /**
@@ -485,6 +584,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         var me = this;
         var combo = me.getCombo();
         var parser = new ol.format.GeoJSON();
+        var searchLayers = combo.getAllSearchLayers();
 
         if (!features) {
             Ext.log.error('No feature found');
@@ -498,20 +598,40 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
 
                 var searchTerm = me.searchTerm;
                 Ext.each(features, function(feature) {
-                    var featuretype = feature.id.split('.')[0];
+                    var useCustomTemplate = false;
+                    var ftName = feature.id && feature.id.split('.')[0];
+                    var layer;
+                    if (ftName) {
+                        layer = searchLayers.find(function (l) {
+                            return l.get('name') === ftName;
+                        });
+                    }
+                    if (layer) {
+                        useCustomTemplate = layer && layer.get('searchable') &&
+                            layer.get('searchTemplate');
+                    }
+
                     var displayfield;
 
-                    // find the matching value in order to display it
-                    Ext.iterate(feature.properties, function(k, v) {
-                        var lcVal = v && v.toString().toLowerCase();
-                        if (lcVal && lcVal.indexOf(searchTerm) > -1) {
-                            displayfield = v;
-                            return false;
-                        }
-                    });
+                    if (useCustomTemplate) {
+                        var templateUtil = BasiGX.util.StringTemplate;
+                        displayfield = templateUtil.getTextFromTemplate(
+                            feature, layer.get('searchTemplate'),
+                            me.getTemplateConfig()
+                        );
+                    } else {
+                        // find the matching value in order to display it
+                        Ext.iterate(feature.properties, function(k, v) {
+                            var lcVal = v && v.toString().toLowerCase();
+                            if (lcVal && lcVal.indexOf(searchTerm) > -1) {
+                                displayfield = v;
+                                return false;
+                            }
+                        });
+                    }
 
                     feature.properties.displayfield = displayfield;
-                    feature.properties.featuretype = featuretype;
+                    feature.properties.featuretype = ftName;
 
                     var olFeat = parser.readFeatures(feature, {
                         dataProjection: combo.getWfsDataProjection(),

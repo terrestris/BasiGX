@@ -36,6 +36,10 @@
 Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
     extend: &#39;Ext.plugin.Abstract&#39;,
 
+    requires: [
+        &#39;BasiGX.util.StringTemplate&#39;
+    ],
+
     alias: &#39;plugin.hover&#39;,
 <span id='BasiGX-plugin-Hover-property-pluginId'>    pluginId: &#39;hover&#39;,
 </span>
@@ -604,26 +608,29 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
         var me = this;
         var innerHtml = &#39;&#39;;
         var hoverfieldProp = me.self.LAYER_HOVERFIELD_PROPERTY_NAME;
+        var templateUtil = BasiGX.util.StringTemplate;
+        var templateConfig = {
+            prefix: me.self.HOVER_TEMPLATE_PLACEHOLDER_PREFIX,
+            suffix: me.self.HOVER_TEMPLATE_PLACEHOLDER_SUFFIX
+        };
 
-        Ext.each(features, function(feat) {
-            var layer = feat.get(&#39;layer&#39;);
-            var hoverFieldProp = layer.get(hoverfieldProp);
-
-            var hoverText = me.getHoverTextFromTemplate(feat, hoverFieldProp);
-
+        Ext.each(layers, function (layer) {
             innerHtml += &#39;&lt;b&gt;&#39; + layer.get(&#39;name&#39;) + &#39;&lt;/b&gt;&#39;;
+            Ext.each(features, function(feat) {
+                if (feat &amp;&amp; feat.get(&#39;layer&#39;) === layer) {
+                    var hoverFieldProp = layer.get(hoverfieldProp);
 
-            // we check for existing feature here as there maybe strange
-            // situations (e.g. when zooming in unfavorable situations) where
-            // feat is undefined
-            if (feat) {
-                if (layer.get(&#39;type&#39;) === &#39;WFSCluster&#39;) {
-                    var count = feat.get(&#39;count&#39;);
-                    innerHtml += &#39;&lt;br /&gt;&#39; + count + &#39;&lt;br /&gt;&#39;;
-                } else {
-                    innerHtml += &#39;&lt;br /&gt;&#39; + hoverText + &#39;&lt;br /&gt;&#39;;
+                    var hoverText = templateUtil.getTextFromTemplate(
+                        feat, hoverFieldProp, templateConfig);
+
+                    if (layer.get(&#39;type&#39;) === &#39;WFSCluster&#39;) {
+                        var count = feat.get(&#39;count&#39;);
+                        innerHtml += &#39;&lt;br /&gt;&#39; + count + &#39;&lt;br /&gt;&#39;;
+                    } else {
+                        innerHtml += &#39;&lt;br /&gt;&#39; + hoverText + &#39;&lt;br /&gt;&#39;;
+                    }
                 }
-            }
+            });
         });
 
         return innerHtml;
@@ -808,90 +815,9 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
             hvlSource.addFeature(feature);
             me.highLightedFeature = feature;
         }
-    },
-
-<span id='BasiGX-plugin-Hover-method-getHoverTextFromTemplate'>    /**
-</span>     * Returns the hover text for the passed `feature` and `hoverTemplate`.
-     *
-     * @param {ol.Feature} feature The feature that was hovered.
-     * @param {String} hoverTemplate The template to fill with feature
-     *     attributes.
-     * @return {String} The text for the hovered feature.
-     */
-    getHoverTextFromTemplate: function(feature, hoverTemplate) {
-        var me = this;
-        var placeHolderPrefix = me.self.HOVER_TEMPLATE_PLACEHOLDER_PREFIX;
-        var placeHolderSuffix = me.self.HOVER_TEMPLATE_PLACEHOLDER_SUFFIX;
-        var hoverText = &#39;&#39;;
-
-        // Set the hoverfield for the popup, if set
-        if (feature &amp;&amp; hoverTemplate) {
-            // Find any character between two braces (including the braces in
-            // the result)
-            var regExp = new RegExp(placeHolderPrefix + &#39;(.*?)&#39; +
-                    placeHolderSuffix, &#39;g&#39;);
-            var regExpRes = hoverTemplate.match(regExp);
-
-            // If we have a regex result, it means we found a placeholder in
-            // the template and have to replace the placeholder with its
-            // appropriate value
-            if (regExpRes) {
-                // Iterate over all regex match results and find the proper
-                // attribute for the given placeholder, finally set the desired
-                // value to the hover field text
-                Ext.each(regExpRes, function(res) {
-                    // We count every non matching candidate. If this count is
-                    // equal to the objects length, we assume that there is no
-                    // match at all and set the output value to an empty value
-                    var noMatchCnt = 0;
-
-                    Ext.iterate(feature.getProperties(), function(k, v) {
-                        // Remove the suffixes and find the matching attribute
-                        // column
-                        var placeHolderPrefixLength = decodeURIComponent(
-                            placeHolderPrefix).length;
-                        var placeHolderSuffixLength = decodeURIComponent(
-                            placeHolderSuffix).length;
-                        var placeHolderName = res.slice(placeHolderPrefixLength,
-                            res.length - placeHolderSuffixLength);
-                        if (placeHolderName === k) {
-                            hoverTemplate = hoverTemplate.replace(res, v);
-                            return false;
-                        } else {
-                            noMatchCnt++;
-                        }
-                    });
-
-                    // No key match found for this feature (e.g. if key not
-                    // present or value is null)
-                    if (noMatchCnt === Ext.Object.getSize(feature.attributes)) {
-                        hoverTemplate = hoverTemplate.replace(res, &#39;&#39;);
-                    }
-                });
-            } else if (!Ext.isEmpty(feature.get(hoverTemplate))) {
-                // If we couldn&#39;t find any match, the hoverTemplate could be a
-                // simple string containing the &quot;hoverField&quot;. To obtain
-                // backwards-compatibility, we check if this field is present
-                // and set the hoverText accordingly
-                hoverTemplate = feature.get(hoverTemplate);
-            } else {
-                // Try to use &quot;id&quot; as fallback. If &quot;id&quot; is not available, the
-                // value will be &quot;undefined&quot;
-                hoverText = feature.get(&#39;id&#39;);
-            }
-
-            hoverText = hoverTemplate;
-        }
-
-        // Replace all newline breaks with a html &lt;br&gt; tag
-        if (Ext.isString(hoverText)) {
-            hoverText = hoverText.replace(/\n/g, &#39;&lt;br&gt;&#39;);
-        }
-
-        return hoverText;
     }
-
 });
+
 </pre>
 </body>
 </html>
