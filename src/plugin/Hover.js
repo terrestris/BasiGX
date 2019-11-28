@@ -19,6 +19,10 @@
 Ext.define('BasiGX.plugin.Hover', {
     extend: 'Ext.plugin.Abstract',
 
+    requires: [
+        'BasiGX.util.StringTemplate'
+    ],
+
     alias: 'plugin.hover',
     pluginId: 'hover',
 
@@ -587,26 +591,29 @@ Ext.define('BasiGX.plugin.Hover', {
         var me = this;
         var innerHtml = '';
         var hoverfieldProp = me.self.LAYER_HOVERFIELD_PROPERTY_NAME;
+        var templateUtil = BasiGX.util.StringTemplate;
+        var templateConfig = {
+            prefix: me.self.HOVER_TEMPLATE_PLACEHOLDER_PREFIX,
+            suffix: me.self.HOVER_TEMPLATE_PLACEHOLDER_SUFFIX
+        };
 
-        Ext.each(features, function(feat) {
-            var layer = feat.get('layer');
-            var hoverFieldProp = layer.get(hoverfieldProp);
-
-            var hoverText = me.getHoverTextFromTemplate(feat, hoverFieldProp);
-
+        Ext.each(layers, function (layer) {
             innerHtml += '<b>' + layer.get('name') + '</b>';
+            Ext.each(features, function(feat) {
+                if (feat && feat.get('layer') === layer) {
+                    var hoverFieldProp = layer.get(hoverfieldProp);
 
-            // we check for existing feature here as there maybe strange
-            // situations (e.g. when zooming in unfavorable situations) where
-            // feat is undefined
-            if (feat) {
-                if (layer.get('type') === 'WFSCluster') {
-                    var count = feat.get('count');
-                    innerHtml += '<br />' + count + '<br />';
-                } else {
-                    innerHtml += '<br />' + hoverText + '<br />';
+                    var hoverText = templateUtil.getTextFromTemplate(
+                        feat, hoverFieldProp, templateConfig);
+
+                    if (layer.get('type') === 'WFSCluster') {
+                        var count = feat.get('count');
+                        innerHtml += '<br />' + count + '<br />';
+                    } else {
+                        innerHtml += '<br />' + hoverText + '<br />';
+                    }
                 }
-            }
+            });
         });
 
         return innerHtml;
@@ -791,87 +798,6 @@ Ext.define('BasiGX.plugin.Hover', {
             hvlSource.addFeature(feature);
             me.highLightedFeature = feature;
         }
-    },
-
-    /**
-     * Returns the hover text for the passed `feature` and `hoverTemplate`.
-     *
-     * @param {ol.Feature} feature The feature that was hovered.
-     * @param {String} hoverTemplate The template to fill with feature
-     *     attributes.
-     * @return {String} The text for the hovered feature.
-     */
-    getHoverTextFromTemplate: function(feature, hoverTemplate) {
-        var me = this;
-        var placeHolderPrefix = me.self.HOVER_TEMPLATE_PLACEHOLDER_PREFIX;
-        var placeHolderSuffix = me.self.HOVER_TEMPLATE_PLACEHOLDER_SUFFIX;
-        var hoverText = '';
-
-        // Set the hoverfield for the popup, if set
-        if (feature && hoverTemplate) {
-            // Find any character between two braces (including the braces in
-            // the result)
-            var regExp = new RegExp(placeHolderPrefix + '(.*?)' +
-                    placeHolderSuffix, 'g');
-            var regExpRes = hoverTemplate.match(regExp);
-
-            // If we have a regex result, it means we found a placeholder in
-            // the template and have to replace the placeholder with its
-            // appropriate value
-            if (regExpRes) {
-                // Iterate over all regex match results and find the proper
-                // attribute for the given placeholder, finally set the desired
-                // value to the hover field text
-                Ext.each(regExpRes, function(res) {
-                    // We count every non matching candidate. If this count is
-                    // equal to the objects length, we assume that there is no
-                    // match at all and set the output value to an empty value
-                    var noMatchCnt = 0;
-
-                    Ext.iterate(feature.getProperties(), function(k, v) {
-                        // Remove the suffixes and find the matching attribute
-                        // column
-                        var placeHolderPrefixLength = decodeURIComponent(
-                            placeHolderPrefix).length;
-                        var placeHolderSuffixLength = decodeURIComponent(
-                            placeHolderSuffix).length;
-                        var placeHolderName = res.slice(placeHolderPrefixLength,
-                            res.length - placeHolderSuffixLength);
-                        if (placeHolderName === k) {
-                            hoverTemplate = hoverTemplate.replace(res, v);
-                            return false;
-                        } else {
-                            noMatchCnt++;
-                        }
-                    });
-
-                    // No key match found for this feature (e.g. if key not
-                    // present or value is null)
-                    if (noMatchCnt === Ext.Object.getSize(feature.attributes)) {
-                        hoverTemplate = hoverTemplate.replace(res, '');
-                    }
-                });
-            } else if (!Ext.isEmpty(feature.get(hoverTemplate))) {
-                // If we couldn't find any match, the hoverTemplate could be a
-                // simple string containing the "hoverField". To obtain
-                // backwards-compatibility, we check if this field is present
-                // and set the hoverText accordingly
-                hoverTemplate = feature.get(hoverTemplate);
-            } else {
-                // Try to use "id" as fallback. If "id" is not available, the
-                // value will be "undefined"
-                hoverText = feature.get('id');
-            }
-
-            hoverText = hoverTemplate;
-        }
-
-        // Replace all newline breaks with a html <br> tag
-        if (Ext.isString(hoverText)) {
-            hoverText = hoverText.replace(/\n/g, '<br>');
-        }
-
-        return hoverText;
     }
-
 });
+
