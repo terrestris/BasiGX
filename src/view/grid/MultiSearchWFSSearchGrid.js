@@ -612,7 +612,6 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                     }
 
                     var displayfield;
-                    var featuretype = feature.id.split('.')[0];
 
                     if (useCustomTemplate) {
                         var templateUtil = BasiGX.util.StringTemplate;
@@ -632,7 +631,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                     }
 
                     feature.properties.displayfield = displayfield;
-                    feature.properties.featuretype = featuretype;
+                    feature.properties.featuretype = ftName;
 
                     var olFeat = parser.readFeatures(feature, {
                         dataProjection: combo.getWfsDataProjection(),
