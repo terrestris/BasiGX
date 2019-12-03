@@ -389,7 +389,7 @@ Ext.define('BasiGX.plugin.Hover', {
                             // from the clusterStyle
                             hvl.setStyle(me.highlightStyleFunction);
                         }
-                        if(!Ext.Array.contains(hoverLayers, layer)) {
+                        if (!Ext.Array.contains(hoverLayers, layer)) {
                             hoverLayers.push(layer);
                         }
                         if (feat.get('layer') === layer) {
