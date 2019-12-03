@@ -389,10 +389,19 @@ Ext.define('BasiGX.plugin.Hover', {
                             // from the clusterStyle
                             hvl.setStyle(me.highlightStyleFunction);
                         }
-                        hoverLayers.push(layer);
+                        if (!Ext.Array.contains(hoverLayers, layer)) {
+                            hoverLayers.push(layer);
+                        }
                         if (feat.get('layer') === layer) {
                             var clone = feat.clone();
-                            if (!Ext.Array.contains(hoverFeatures, clone)) {
+                            clone.setId(feat.getId());
+
+                            var hoverFeaturesIds = Ext.Array.map(hoverFeatures,
+                                function(hoverFeat) {
+                                    return hoverFeat.getId();
+                                });
+                            if (!Ext.Array.contains(hoverFeaturesIds,
+                                feat.getId())) {
                                 var style = me.highlightStyleFunction(
                                     clone, resolution, pixel);
                                 clone.setStyle(style);
