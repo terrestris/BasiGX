@@ -130,7 +130,6 @@ Ext.define('BasiGX.view.component.Map', {
         var me = this;
 
         if (!config.map) {
-
             // need to handle config first as its not applied yet
             var url = config && config.appContextPath ?
                 config.appContextPath : me.appContextPath;
