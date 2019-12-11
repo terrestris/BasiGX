@@ -742,7 +742,8 @@ Ext.define('BasiGX.view.form.AddWms', {
             topic: true,
             name: capLayer.Title,
             source: olSource,
-            legendUrl: legendUrl
+            legendUrl: legendUrl,
+            queryable: capLayer.queryable
         });
         return olLayer;
     },
