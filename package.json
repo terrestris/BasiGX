@@ -55,7 +55,7 @@
     },
     "devDependencies": {
         "copyfiles": "2.1.1",
-        "coveralls": "3.0.8",
+        "coveralls": "3.0.9",
         "eslint": "6.7.2",
         "expect.js": "0.3.1",
         "istanbul": "0.4.5",
