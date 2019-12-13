@@ -92,6 +92,27 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
         searchLayerBlackList: [],
 
         /**
+         * Whether to use custom geoserver filter function `stringFormat` which
+         * isn't officially contained in geoserver filter functions list.
+         *
+         * Geoserver cannot handle LIKE queries on numeric fields out of the
+         * box. For manually converting to string e.g. `strTrim` filter function
+         * can be used though. In some cases double values will be possibly
+         * converted to scientific notation, what makes LIKE queries useless.
+         *
+         * Example:
+         * * string representation of `2375239000 is `2.375239e+9`
+         * * string representation of `2391101900 is `2.3911019e+9`
+         * Query like `attrName ILIKE "%239%" will return only the first match.
+         *
+         * If set to true, the additional geoserver extension
+         *`terrestris-filterfunctions` must be installed (see
+         * https://github.com/terrestris/terrestris-filterfunctions
+         * for further details)
+         */
+        useGeoServerStringExtension: false,
+
+        /**
          * Maximum number of features to retrieve from WFS search.
          */
         maxFeatures: 10,
