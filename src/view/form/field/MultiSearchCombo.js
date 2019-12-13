@@ -93,7 +93,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 
         /**
          * Whether to use custom geoserver filter function `stringFormat` which
-         * isn't oficially contained in geoserver filter functions list.
+         * isn't officially contained in geoserver filter functions list.
          *
          * Geoserver cannot handle LIKE queries on numeric fields out of the
          * box. For manually converting to string e.g. `strTrim` filter function
