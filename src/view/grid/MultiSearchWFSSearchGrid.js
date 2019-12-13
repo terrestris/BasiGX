@@ -483,42 +483,52 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                     case 'xsd:int':
                     case 'xsd:number':
                         var type = 'java.lang.Double';
-                        // Creates custom filter function `stringFormat` which
-                        // doesn't oficially contained in geoserver filter
-                        // functions list.
-                        // To get this filter work, the additional geoserver
-                        // extension `terrestris-filterfunctions` must be
-                        // installed (see
-                        // https://github.com/terrestris/terrestris-filterfunctions
-                        // for further details)
-                        comparisonFilter =
-                            '<ogc:PropertyIsLike wildCard="*" singleChar="."' +
-                                ' escape="\\" matchCase="false">' +
-                                '<ogc:Function name="stringFormat">' +
-                                    '<ogc:Literal>%f</ogc:Literal>' +
-                                    '<ogc:Literal>' + type + '</ogc:Literal>' +
-                                    '<ogc:PropertyName>' +
-                                        prop.name +
-                                    '</ogc:PropertyName>' +
-                                '</ogc:Function>' +
-                                '<ogc:Literal>' +
-                                    '*' + me.searchTerm + '*' +
-                                '</ogc:Literal>' +
-                            '</ogc:PropertyIsLike>';
+                        if (combo.getUseGeoServerStringExtension()) {
+                            comparisonFilter =
+                                '<ogc:PropertyIsLike wildCard="*" ' +
+                                    'singleChar="." escape="\\" ' +
+                                    'matchCase="false">' +
+                                    '<ogc:Function name="stringFormat">' +
+                                        '<ogc:Literal>%f</ogc:Literal>' +
+                                        '<ogc:Literal>' + type +
+                                        '</ogc:Literal>' +
+                                        '<ogc:PropertyName>' + prop.name +
+                                        '</ogc:PropertyName>' +
+                                    '</ogc:Function>' +
+                                    '<ogc:Literal>' +
+                                        '*' + me.searchTerm + '*' +
+                                    '</ogc:Literal>' +
+                                '</ogc:PropertyIsLike>';
+                        } else {
+                            comparisonFilter =
+                                '<ogc:PropertyIsLike wildCard="*" ' +
+                                    'singleChar="." escape="\\" ' +
+                                    'matchCase="false">' +
+                                    '<ogc:Function name="strTrim">' +
+                                        '<ogc:PropertyName>' + prop.name +
+                                        '</ogc:PropertyName>' +
+                                    '</ogc:Function>' +
+                                    '<ogc:Literal>' +
+                                        '*' + me.searchTerm + '*' +
+                                    '</ogc:Literal>' +
+                                '</ogc:PropertyIsLike>';
+                        }
                         break;
                     default:
                         break;
                 }
-                xml +=
-                    '<wfs:Query typeName="' + me.getCombo().getWfsPrefix() +
-                    ft.typeName + '">' +
-                    '<ogc:Filter>' +
+                if (comparisonFilter) {
+                    xml +=
+                        '<wfs:Query typeName="' + me.getCombo().getWfsPrefix() +
+                        ft.typeName + '">' +
+                        '<ogc:Filter>' +
                         '<ogc:And>' +
                         bboxFilter +
                         comparisonFilter +
                         '</ogc:And>' +
-                    '</ogc:Filter>' +
-                    '</wfs:Query>';
+                        '</ogc:Filter>' +
+                        '</wfs:Query>';
+                }
             });
         });
 
