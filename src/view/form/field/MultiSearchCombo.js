@@ -98,7 +98,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
          * Geoserver cannot handle LIKE queries on numeric fields out of the
          * box. For manually converting to string e.g. `strTrim` filter function
          * can be used though. In some cases double values will be possibly
-         * converted to scientific notation, what makes LIKE query useless.
+         * converted to scientific notation, what makes LIKE queries useless.
          *
          * Example:
          * * string representation of `2375239000 is `2.375239e+9`
