@@ -606,7 +606,7 @@ Ext.define('BasiGX.plugin.Hover', {
             suffix: me.self.HOVER_TEMPLATE_PLACEHOLDER_SUFFIX
         };
 
-        Ext.each(layers, function (layer) {
+        Ext.each(layers, function(layer) {
             innerHtml += '<b>' + layer.get('name') + '</b>';
             Ext.each(features, function(feat) {
                 if (feat && feat.get('layer') === layer) {
