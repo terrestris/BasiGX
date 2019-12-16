@@ -97,6 +97,23 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
          */
         templateConfig: {},
 
+        /**
+         * Whether the map should zoom to clicked search result.
+         * If set to false, the map will be only centered on chosen object,
+         * otherwise the map view will be adapted to fit the selected feature.
+         */
+        zoomToSearchResults: false,
+
+        /**
+         * Custom map scale value, which will be used by zoom to clicked search
+         * result. Applies only if #zoomToSearchResults set to true and desired
+         * geometry type is configured.
+         */
+        zoomToScale: {
+            point: 1000,
+            multipoint: 1000
+        },
+
         searchResultFeatureStyle: new ol.style.Style({
             image: new ol.style.Circle({
                 radius: 6,
@@ -727,6 +744,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         var me = this;
         var layer = me.getLayer();
         var feature = record.getFeature();
+        var geom;
         var extent;
         var x;
         var y;
@@ -736,13 +754,27 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         if (feature) {
             feature.setStyle(me.getSearchResultSelectFeatureStyle());
             layer.getSource().addFeature(feature);
-            extent = feature.getGeometry().getExtent();
+            geom = feature.getGeometry();
+            extent = geom.getExtent();
             x = extent[0] + (extent[2] - extent[0]) / 2;
             y = extent[1] + (extent[3] - extent[1]) / 2;
 
-            me.getMap().getView().setCenter([x, y]);
+            var olView = me.getMap().getView();
+
+            if (me.getZoomToSearchResults()) {
+                var scale = me.getZoomToScale()[geom.getType().toLowerCase()];
+                var zoom;
+                if (scale) {
+                    var units = olView.getProjection().getUnits();
+                    zoom = BasiGX.util.Map.getResolutionForScale(scale, units);
+                }
+                olView.fit(geom, {
+                    duration: 500,
+                    zoom: zoom
+                });
+            } else {
+                olView.setCenter([x, y]);
+            }
         }
-
     }
-
 });
