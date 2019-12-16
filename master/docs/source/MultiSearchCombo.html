@@ -186,6 +186,27 @@ Ext.define(&#39;BasiGX.view.form.field.MultiSearchCombo&#39;, {
             handler: function() {
                 this.showSettingsWindow();
             }
+        },
+        close: {
+            cls: &#39;multisearch-open-container-trigger&#39;,
+            handler: function (combo) {
+                this.changeContainerVisibility(combo);
+            }
+        }
+    },
+
+<span id='BasiGX-view-form-field-MultiSearchCombo-method-changeContainerVisibility'>    /**
+</span>     * Called by the close trigger, changes visibility of search results
+     * container.
+     * @param {BasiGX.view.form.field.MultiSearchCombo} combo Multisearch combo.
+     */
+    changeContainerVisibility:  function(combo) {
+        if (combo.searchContainer) {
+            if (combo.searchContainer.isVisible()) {
+                combo.cleanupSearch();
+            } else {
+                combo.refreshSearchResults();
+            }
         }
     },
 
@@ -286,6 +307,13 @@ Ext.define(&#39;BasiGX.view.form.field.MultiSearchCombo&#39;, {
 
         if (searchLayer) {
             searchLayer.getSource().clear();
+        }
+
+        var closeTrigger = me.triggers.close;
+        if (closeTrigger) {
+            var openCls = &#39;multisearch-open-container-trigger&#39;;
+            var closeCls = &#39;multisearch-close-container-trigger&#39;;
+            closeTrigger.el.removeCls(closeCls).addCls(openCls);
         }
 
         if (me.searchContainer) {
@@ -418,6 +446,12 @@ Ext.define(&#39;BasiGX.view.form.field.MultiSearchCombo&#39;, {
         }
         me.searchContainer.show();
 
+        var closeTrigger = me.triggers.close;
+        if (closeTrigger) {
+            var openCls = &#39;multisearch-open-container-trigger&#39;;
+            var closeCls = &#39;multisearch-close-container-trigger&#39;;
+            closeTrigger.el.removeCls(openCls).addCls(closeCls);
+        }
     },
 
 <span id='BasiGX-view-form-field-MultiSearchCombo-method-refreshSearchResults'>    /**
@@ -428,7 +462,9 @@ Ext.define(&#39;BasiGX.view.form.field.MultiSearchCombo&#39;, {
 
         var value = me.getValue();
 
+
         if (value &amp;&amp; value.length &gt;= me.minChars) {
+            me.showResults();
             me.doGazetteerSearch(value);
             me.doObjectSearch(value);
         } else {

@@ -169,6 +169,27 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
             handler: function() {
                 this.showSettingsWindow();
             }
+        },
+        close: {
+            cls: 'multisearch-open-container-trigger',
+            handler: function (combo) {
+                this.changeContainerVisibility(combo);
+            }
+        }
+    },
+
+    /**
+     * Called by the close trigger, changes visibility of search results
+     * container.
+     * @param {BasiGX.view.form.field.MultiSearchCombo} combo Multisearch combo.
+     */
+    changeContainerVisibility:  function(combo) {
+        if (combo.searchContainer) {
+            if (combo.searchContainer.isVisible()) {
+                combo.cleanupSearch();
+            } else {
+                combo.refreshSearchResults();
+            }
         }
     },
 
@@ -269,6 +290,13 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 
         if (searchLayer) {
             searchLayer.getSource().clear();
+        }
+
+        var closeTrigger = me.triggers.close;
+        if (closeTrigger) {
+            var openCls = 'multisearch-open-container-trigger';
+            var closeCls = 'multisearch-close-container-trigger';
+            closeTrigger.el.removeCls(closeCls).addCls(openCls);
         }
 
         if (me.searchContainer) {
@@ -401,6 +429,12 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
         }
         me.searchContainer.show();
 
+        var closeTrigger = me.triggers.close;
+        if (closeTrigger) {
+            var openCls = 'multisearch-open-container-trigger';
+            var closeCls = 'multisearch-close-container-trigger';
+            closeTrigger.el.removeCls(openCls).addCls(closeCls);
+        }
     },
 
     /**
@@ -411,7 +445,9 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
 
         var value = me.getValue();
 
+
         if (value && value.length >= me.minChars) {
+            me.showResults();
             me.doGazetteerSearch(value);
             me.doObjectSearch(value);
         } else {
