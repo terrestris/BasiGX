@@ -88,6 +88,23 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
             options = {};
         }
         var me = this;
+        // Create a new overlay layer for the sketch
+        this.handles_ = new ol.Collection();
+        this.overlayLayer_ = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: this.handles_,
+                useSpatialIndex: false
+            }),
+            name: 'Transform overlay',
+            displayInLayerSwitcher: false,
+            // Return the style according to the handle type
+            style: function(feature) {
+                var key = (feature.get('handle') || 'default') +
+                    (feature.get('constraint') || '') +
+                    (feature.get('option') || '');
+                return (me.style[key]);
+            }
+        });
 
         ol.interaction.Pointer.call(this, {
             handleDownEvent: this.handleDownEvent_,
@@ -132,23 +149,6 @@ Ext.define('BasiGX.ol3.extension.TransformInteraction', {
             this.drawSketch_();
         });
 
-        // Create a new overlay layer for the sketch
-        this.handles_ = new ol.Collection();
-        this.overlayLayer_ = new ol.layer.Vector({
-            source: new ol.source.Vector({
-                features: this.handles_,
-                useSpatialIndex: false
-            }),
-            name: 'Transform overlay',
-            displayInLayerSwitcher: false,
-            // Return the style according to the handle type
-            style: function(feature) {
-                var key = (feature.get('handle') || 'default') +
-                    (feature.get('constraint') || '') +
-                    (feature.get('option') || '');
-                return (me.style[key]);
-            }
-        });
         // Change BasiGX:
         this.overlayLayer_.set(
             BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER,

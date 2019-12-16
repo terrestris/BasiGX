@@ -105,6 +105,23 @@ Ext.define(&#39;BasiGX.ol3.extension.TransformInteraction&#39;, {
             options = {};
         }
         var me = this;
+        // Create a new overlay layer for the sketch
+        this.handles_ = new ol.Collection();
+        this.overlayLayer_ = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: this.handles_,
+                useSpatialIndex: false
+            }),
+            name: &#39;Transform overlay&#39;,
+            displayInLayerSwitcher: false,
+            // Return the style according to the handle type
+            style: function(feature) {
+                var key = (feature.get(&#39;handle&#39;) || &#39;default&#39;) +
+                    (feature.get(&#39;constraint&#39;) || &#39;&#39;) +
+                    (feature.get(&#39;option&#39;) || &#39;&#39;);
+                return (me.style[key]);
+            }
+        });
 
         ol.interaction.Pointer.call(this, {
             handleDownEvent: this.handleDownEvent_,
@@ -149,23 +166,6 @@ Ext.define(&#39;BasiGX.ol3.extension.TransformInteraction&#39;, {
             this.drawSketch_();
         });
 
-        // Create a new overlay layer for the sketch
-        this.handles_ = new ol.Collection();
-        this.overlayLayer_ = new ol.layer.Vector({
-            source: new ol.source.Vector({
-                features: this.handles_,
-                useSpatialIndex: false
-            }),
-            name: &#39;Transform overlay&#39;,
-            displayInLayerSwitcher: false,
-            // Return the style according to the handle type
-            style: function(feature) {
-                var key = (feature.get(&#39;handle&#39;) || &#39;default&#39;) +
-                    (feature.get(&#39;constraint&#39;) || &#39;&#39;) +
-                    (feature.get(&#39;option&#39;) || &#39;&#39;);
-                return (me.style[key]);
-            }
-        });
         // Change BasiGX:
         this.overlayLayer_.set(
             BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER,
