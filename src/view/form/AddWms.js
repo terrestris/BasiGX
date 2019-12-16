@@ -137,6 +137,12 @@ Ext.define('BasiGX.view.form.AddWms', {
         wmsBaseUrls: [],
 
         /**
+         * Defines a URL which will be appended to all capabilites requests.
+         * Especially useful when dealing with CORS problems.
+         */
+        proxyUrl: null,
+
+        /**
          * Default url for the textfield or combobox.
          */
         defaultUrl: 'https://ows.terrestris.de/osm/service',
@@ -420,12 +426,16 @@ Ext.define('BasiGX.view.form.AddWms', {
         me.setLoading(true);
         me.removeAddLayersComponents();
         var values = form.getValues();
-        var url;
+        var url = '';
+
+        if (me.getProxyUrl()) {
+            url += me.getProxyUrl();
+        }
 
         if (me.wmsBaseUrls.length === 0) {
-            url = values.url;
+            url += values.url;
         } else {
-            url = values.urlCombo;
+            url += values.urlCombo;
         }
 
         var version;
