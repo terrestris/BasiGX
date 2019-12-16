@@ -738,12 +738,34 @@ Ext.define('BasiGX.view.form.AddWms', {
             legendUrl = style[0].LegendURL[0].OnlineResource;
         }
 
+        var bbox;
+        for (var i = 0; i < capLayer.BoundingBox.length; ++i) {
+            if (capLayer.BoundingBox[i].crs === 'CRS:84') {
+                bbox = capLayer.BoundingBox[i].extent;
+            }
+        }
+        if (!bbox) {
+            for (i = 0; i < capLayer.BoundingBox.length; ++i) {
+                if (capLayer.BoundingBox[i].crs === 'EPSG:4326') {
+                    bbox = capLayer.BoundingBox[i].extent;
+                }
+            }
+        }
+        // looks like parsing 1.1.1 capabilities the crs is not
+        // set on the bounding box object
+        if (!bbox) {
+            for (i = 0; i < capLayer.BoundingBox.length; ++i) {
+                bbox = capLayer.BoundingBox[i].extent;
+            }
+        }
+
         var olLayer = new ol.layer.Tile({
             topic: true,
             name: capLayer.Title,
             source: olSource,
             legendUrl: legendUrl,
-            queryable: capLayer.queryable
+            queryable: capLayer.queryable,
+            layerExtent: bbox
         });
         return olLayer;
     },
