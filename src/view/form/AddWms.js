@@ -429,7 +429,7 @@ Ext.define('BasiGX.view.form.AddWms', {
         var url = '';
 
         if (me.getProxyUrl()) {
-            url += me.getProxyUrl()
+            url += me.getProxyUrl();
         }
 
         if (me.wmsBaseUrls.length === 0) {
