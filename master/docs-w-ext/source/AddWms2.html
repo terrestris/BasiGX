@@ -153,6 +153,12 @@ Ext.define(&#39;BasiGX.view.form.AddWms&#39;, {
          */
         wmsBaseUrls: [],
 
+<span id='BasiGX-view-form-AddWms-cfg-proxyUrl'>        /**
+</span>         * Defines a URL which will be appended to all capabilites requests.
+         * Especially useful when dealing with CORS problems.
+         */
+        proxyUrl: null,
+
 <span id='BasiGX-view-form-AddWms-cfg-defaultUrl'>        /**
 </span>         * Default url for the textfield or combobox.
          */
@@ -437,12 +443,16 @@ Ext.define(&#39;BasiGX.view.form.AddWms&#39;, {
         me.setLoading(true);
         me.removeAddLayersComponents();
         var values = form.getValues();
-        var url;
+        var url = &#39;&#39;;
+
+        if (me.getProxyUrl()) {
+            url += me.getProxyUrl();
+        }
 
         if (me.wmsBaseUrls.length === 0) {
-            url = values.url;
+            url += values.url;
         } else {
-            url = values.urlCombo;
+            url += values.urlCombo;
         }
 
         var version;
