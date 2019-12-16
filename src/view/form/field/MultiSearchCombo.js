@@ -172,8 +172,8 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
         },
         close: {
             cls: 'multisearch-open-container-trigger',
-            handler: function (combo, trigger) {
-                this.changeContainerVisibility(combo, trigger);
+            handler: function (combo) {
+                this.changeContainerVisibility(combo);
             }
         }
     },
