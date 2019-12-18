@@ -91,8 +91,7 @@ Ext.define(&#39;BasiGX.view.button.CSW&#39;, {
     },
 
 <span id='BasiGX-view-button-CSW-method-handler'>    handler: function() {
-</span>        var win = this._win;
-        if (!win) {
+</span>        if (!this._win) {
             var windowConfig = {
                 name: &#39;csw-window&#39;,
                 title: this.getViewModel().get(&#39;windowTitle&#39;),
@@ -102,17 +101,20 @@ Ext.define(&#39;BasiGX.view.button.CSW&#39;, {
                 constrain: true,
                 items: [{
                     xtype: &#39;basigx-form-csw&#39;
-                }]
+                }],
+                listeners: {
+                    destroy: this.onDestroy,
+                    scope: this
+                }
             };
 
             var windowConfigToApply = this.getWindowConfig();
             Ext.apply(windowConfig, windowConfigToApply);
 
-            win = Ext.create(&#39;Ext.window.Window&#39;, windowConfig);
-            this._win = win;
-            win.show();
+            this._win = Ext.create(&#39;Ext.window.Window&#39;, windowConfig);
+            this._win.show();
         } else {
-            BasiGX.util.Animate.shake(win);
+            BasiGX.util.Animate.shake(this._win);
         }
     },
 
@@ -122,7 +124,7 @@ Ext.define(&#39;BasiGX.view.button.CSW&#39;, {
      */
     onDestroy: function() {
         if (this._win) {
-            this._win.destroy();
+            this._win = null;
         }
     }
 });
