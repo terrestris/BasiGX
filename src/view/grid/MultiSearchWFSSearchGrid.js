@@ -575,7 +575,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
 
         var ftName = featureType.typeName;
         var layer = searchLayers.find(function(l) {
-            return l.get('name') === ftName;
+            var layerName = l.getSource().getParams().LAYERS;
+            return layerName && layerName.indexOf(ftName) > -1;
         });
 
         var searchable = layer && layer.get('searchable') &&
@@ -629,7 +630,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                     var layer;
                     if (ftName) {
                         layer = searchLayers.find(function(l) {
-                            return l.get('name') === ftName;
+                            var layerName = l.getSource().getParams().LAYERS;
+                            return layerName && layerName.indexOf(ftName) > -1;
                         });
                     }
                     if (layer) {
