@@ -353,15 +353,23 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
             method: &#39;GET&#39;,
             success: function(response) {
                 me.setLoading(false);
-                if (Ext.isString(response.responseText)) {
-                    featureTypes = Ext.decode(response.responseText);
-                } else if (Ext.isObject(response.responseText)) {
-                    featureTypes = response.responseText;
-                } else {
-                    Ext.log.error(&#39;Error! Could not parse &#39; +
-                        &#39;describe featuretype response!&#39;);
+                try {
+                    if (Ext.isString(response.responseText)) {
+                        featureTypes = Ext.decode(response.responseText);
+                    } else if (Ext.isObject(response.responseText)) {
+                        featureTypes = response.responseText;
+                    } else {
+                        Ext.log.error(&#39;Error! Could not parse &#39; +
+                            &#39;describe featuretype response!&#39;);
+                    }
+                    if (featureTypes) {
+                        me.fireEvent(&#39;describeFeatureTypeResponse&#39;,
+                            featureTypes);
+                    }
+                } catch (error) {
+                    Ext.log.error(&#39;Error on describe featuretype request:&#39;,
+                        error);
                 }
-                me.fireEvent(&#39;describeFeatureTypeResponse&#39;, featureTypes);
             },
             failure: function(response) {
                 me.setLoading(false);
@@ -382,9 +390,10 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
     getFeatures: function(resp) {
         var me = this;
         var featureTypes = resp.featureTypes;
+        var ns = resp.targetPrefix;
         var cleanedFeatureType = me.cleanUpFeatureDataTypes(featureTypes);
         var url = me.getCombo().getWfsServerUrl();
-        var xml = me.setupXmlPostBody(cleanedFeatureType);
+        var xml = me.setupXmlPostBody(cleanedFeatureType, ns);
         var features;
 
         me.setLoading(true);
@@ -449,27 +458,37 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
      * should be done in the visible extent only.
      *
      * @param {Array&lt;Object&gt;} featureTypes The featuretypes.
+     * @param {String} namespace Featuretype namespace from DescribeFeatureType
+     *     response. Will only be used if `wfsPrefix` config of parent combo is
+     *     not set.
      * @return {String} The XML.
      */
-    setupXmlPostBody: function(featureTypes) {
+    setupXmlPostBody: function(featureTypes, namespace) {
         var me = this;
         var combo = me.getCombo();
         var limitToBBox = combo.getLimitToBBox();
         var map = BasiGX.util.Map.getMapComponent().getMap();
         var projection = map.getView().getProjection().getCode();
         var bbox;
+        var bboxFilter;
         var visibleExtent = map.getView().calculateExtent(map.getSize());
-        var totalExtent = map.getView().getProjection().getExtent();
         var maxFeatures = combo.getMaxFeatures();
 
         if (limitToBBox) {
             bbox = visibleExtent;
-        } else {
-            bbox = totalExtent;
         }
 
-        var bboxll = bbox[0] + &#39; &#39; + bbox[1];
-        var bboxur = bbox[2] + &#39; &#39; + bbox[3];
+        if (bbox) {
+            var bboxll = bbox[0] + &#39; &#39; + bbox[1];
+            var bboxur = bbox[2] + &#39; &#39; + bbox[3];
+            bboxFilter =
+                &#39;&lt;ogc:BBOX&gt;&#39; +
+                    &#39;&lt;gml:Envelope srsName=&quot;&#39; + projection + &#39;&quot;&gt;&#39; +
+                        &#39;&lt;gml:lowerCorner&gt;&#39; + bboxll + &#39;&lt;/gml:lowerCorner&gt;&#39; +
+                        &#39;&lt;gml:upperCorner&gt;&#39; + bboxur + &#39;&lt;/gml:upperCorner&gt;&#39; +
+                    &#39;&lt;/gml:Envelope&gt;&#39; +
+                &#39;&lt;/ogc:BBOX&gt;&#39;;
+        }
 
         var xml =
             &#39;&lt;wfs:GetFeature service=&quot;WFS&quot; version=&quot;1.1.0&quot; &#39; +
@@ -481,14 +500,6 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
             &#39;xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; &#39; +
             &#39;xsi:schemaLocation=&quot;http://www.opengis.net/wfs &#39; +
             &#39;http://schemas.opengis.net/wfs/1.1.0/WFS-basic.xsd&quot;&gt;&#39;;
-
-        var bboxFilter =
-            &#39;&lt;ogc:BBOX&gt;&#39; +
-                &#39;&lt;gml:Envelope srsName=&quot;&#39; + projection + &#39;&quot;&gt;&#39; +
-                    &#39;&lt;gml:lowerCorner&gt;&#39; + bboxll + &#39;&lt;/gml:lowerCorner&gt;&#39; +
-                    &#39;&lt;gml:upperCorner&gt;&#39; + bboxur + &#39;&lt;/gml:upperCorner&gt;&#39; +
-                &#39;&lt;/gml:Envelope&gt;&#39; +
-            &#39;&lt;/ogc:BBOX&gt;&#39;;
 
         Ext.each(featureTypes, function(ft) {
             var searchableAttributes = me.findSearchableAttributes(ft);
@@ -551,15 +562,19 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
                         break;
                 }
                 if (comparisonFilter) {
+                    var ns = me.getCombo().getWfsPrefix() || namespace + &#39;:&#39;;
+                    var filter;
+                    if (bboxFilter) {
+                        filter = &#39;&lt;ogc:And&gt;&#39; +
+                            bboxFilter +
+                            comparisonFilter +
+                            &#39;&lt;/ogc:And&gt;&#39;;
+                    } else {
+                        filter = comparisonFilter;
+                    }
                     xml +=
-                        &#39;&lt;wfs:Query typeName=&quot;&#39; + me.getCombo().getWfsPrefix() +
-                        ft.typeName + &#39;&quot;&gt;&#39; +
-                        &#39;&lt;ogc:Filter&gt;&#39; +
-                        &#39;&lt;ogc:And&gt;&#39; +
-                        bboxFilter +
-                        comparisonFilter +
-                        &#39;&lt;/ogc:And&gt;&#39; +
-                        &#39;&lt;/ogc:Filter&gt;&#39; +
+                        &#39;&lt;wfs:Query typeName=&quot;&#39; + ns + ft.typeName + &#39;&quot;&gt;&#39; +
+                            &#39;&lt;ogc:Filter&gt;&#39; + filter + &#39;&lt;/ogc:Filter&gt;&#39; +
                         &#39;&lt;/wfs:Query&gt;&#39;;
                 }
             });
@@ -592,7 +607,8 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
 
         var ftName = featureType.typeName;
         var layer = searchLayers.find(function(l) {
-            return l.get(&#39;name&#39;) === ftName;
+            var layerName = l.getSource().getParams().LAYERS;
+            return layerName &amp;&amp; layerName.indexOf(ftName) &gt; -1;
         });
 
         var searchable = layer &amp;&amp; layer.get(&#39;searchable&#39;) &amp;&amp;
@@ -646,7 +662,8 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
                     var layer;
                     if (ftName) {
                         layer = searchLayers.find(function(l) {
-                            return l.get(&#39;name&#39;) === ftName;
+                            var layerName = l.getSource().getParams().LAYERS;
+                            return layerName &amp;&amp; layerName.indexOf(ftName) &gt; -1;
                         });
                     }
                     if (layer) {
