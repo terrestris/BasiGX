@@ -336,15 +336,23 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
             method: 'GET',
             success: function(response) {
                 me.setLoading(false);
-                if (Ext.isString(response.responseText)) {
-                    featureTypes = Ext.decode(response.responseText);
-                } else if (Ext.isObject(response.responseText)) {
-                    featureTypes = response.responseText;
-                } else {
-                    Ext.log.error('Error! Could not parse ' +
-                        'describe featuretype response!');
+                try {
+                    if (Ext.isString(response.responseText)) {
+                        featureTypes = Ext.decode(response.responseText);
+                    } else if (Ext.isObject(response.responseText)) {
+                        featureTypes = response.responseText;
+                    } else {
+                        Ext.log.error('Error! Could not parse ' +
+                            'describe featuretype response!');
+                    }
+                    if (featureTypes) {
+                        me.fireEvent('describeFeatureTypeResponse',
+                            featureTypes);
+                    }
+                } catch (error) {
+                    Ext.log.error('Error on describe featuretype request:',
+                        error);
                 }
-                me.fireEvent('describeFeatureTypeResponse', featureTypes);
             },
             failure: function(response) {
                 me.setLoading(false);
