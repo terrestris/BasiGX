@@ -59,16 +59,6 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
     },
 
     /**
-     * a default width for this component
-     */
-    width: 535,
-
-    /**
-     * a default height for this component
-     */
-    height: 600,
-
-    /**
      * the layout to use
      */
     layout: 'vbox',
@@ -115,7 +105,20 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
          * should we offer a close button? Will close a parent window if
          * one exists
          */
-        useCloseButton: true
+        useCloseButton: true,
+        /**
+         * optimal hover css class(es) for each item
+         * comma-separated list for mulitple classes
+         */
+        overItemCls: false,
+        /**
+         * default width
+         */
+        windowWidth: 535,
+        /**
+         * default height
+         */
+        windowHeight: 600
     },
 
     /**
@@ -123,11 +126,13 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
     */
     initComponent: function() {
         var me = this;
-
         // UI displaying the user pictures
         me.pictureView = Ext.create('BasiGX.view.view.GraphicPool', {
             title: false,
-            backendUrls: me.getBackendUrls()
+            backendUrls: me.getBackendUrls(),
+            overItemCls: me.getOverItemCls(),
+            height: me.getWindowHeight(),
+            width: me.getWindowWidth()
         });
         var viewModel = me.getViewModel();
         var btnText = viewModel.get('chooseImageBtnText');
