@@ -94,7 +94,13 @@ Ext.define('BasiGX.view.view.GraphicPool', {
         /**
          * use trackover?
          */
-        trackOver: true
+        trackOver: true,
+
+        /**
+         * mouseover css class for each item
+         * NOTE/TODO: if set, trackOver becomes redundant
+         */
+        overItemCls: false
     },
 
     /**
