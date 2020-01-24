@@ -21,6 +21,14 @@
 Ext.define('BasiGX.view.window.PreviewWindow', {
     extend: 'Ext.window.Window',
 
+    viewModel: {
+        data: {
+            showLegendTooltip: 'Show Legend',
+            zoomToProjectionTooltip: 'Zoom to extent of projection',
+            zoomToLayerTooltip: 'Fit to extent'
+        }
+    },
+
     closeAction: 'hide',
 
     constrain: true,
@@ -32,13 +40,6 @@ Ext.define('BasiGX.view.window.PreviewWindow', {
         dataExtent: [[10000, 20000], [20000, 40000]]
     },
 
-    tools: [{
-        type: 'gear',
-        handler: function() {
-            this.up('window').showLegend();
-        }
-    }],
-
     /**
      * Sets up the map and the controls.
      */
@@ -46,20 +47,41 @@ Ext.define('BasiGX.view.window.PreviewWindow', {
         this.callParent();
         var markup = '<i class="fa fa-globe" aria-hidden="true"></i>';
         var worldIcon = Ext.dom.Helper.createDom(markup);
+
+        /**
+         * Create custom button to show legend.
+         */
+
+        var buttonInfo = Ext.dom.Helper.createDom(
+            '<button><i class="fa fa-info" aria-hidden="true"></i></button>');
+        buttonInfo.title = this.getViewModel().get('showLegendTooltip');
+        buttonInfo.type= 'button';
+
+        buttonInfo.addEventListener('click', this.showLegend.bind(this));
+        var element = document.createElement('div');
+        element.className = 'ol-control ol-unselectable basigx-show-legend';
+        element.appendChild(buttonInfo);
+
         var controls = [
             new ol.control.Zoom(),
+            new ol.control.Control({
+                element: element
+            }),
             new ol.control.ZoomToExtent({
-                label: worldIcon
+                label: worldIcon,
+                tipLabel: this.getViewModel().get('zoomToProjectionTooltip')
             })
         ];
         if (this.getDataExtent()) {
-            markup = '<i class="fa fa-asterisk" aria-hidden="true"></i>';
-            worldIcon = Ext.dom.Helper.createDom(markup);
+            markup = '<i class="fa fa-arrows-alt" aria-hidden="true"></i>';
+            var zoomIcon = Ext.dom.Helper.createDom(markup);
             controls.push(this.extentControl = new ol.control.ZoomToExtent({
                 className: 'basigx-zoom-to-data-extent',
-                label: worldIcon,
+                label: zoomIcon,
+                tipLabel: this.getViewModel().get('zoomToLayerTooltip'),
                 extent: ol.extent.boundingExtent(this.getDataExtent())
             }));
+
         }
         this.add({
             xtype: 'gx_component_map',
@@ -148,15 +170,16 @@ Ext.define('BasiGX.view.window.PreviewWindow', {
      * @param {array[]} dataExtent the coordinates, e.g. [[-1, -1], [1, 1]]
      */
     setDataExtent: function(dataExtent) {
-        var markup = '<i class="fa fa-asterisk" aria-hidden="true"></i>';
-        var worldIcon = Ext.dom.Helper.createDom(markup);
+        var markup = '<i class="fa fa-arrows-alt" aria-hidden="true"></i>';
+        var zoomIcon = Ext.dom.Helper.createDom(markup);
         this.dataExtent = dataExtent;
         if (this.extentControl) {
             this.map.removeControl(this.extentControl);
             this.map.addControl(
                 this.extentControl = new ol.control.ZoomToExtent({
                     className: 'basigx-zoom-to-data-extent',
-                    label: worldIcon,
+                    label: zoomIcon,
+                    tipLabel: this.getViewModel().get('zoomToLayerTooltip'),
                     extent: ol.extent.boundingExtent(this.getDataExtent())
                 }));
         }
@@ -178,7 +201,8 @@ Ext.define('BasiGX.view.window.PreviewWindow', {
             service: 'WMS',
             version: '1.1.1',
             format: 'image/png',
-            layer: this.layerConfig.source.layerNames
+            layer: this.layerConfig.source.layerNames,
+            legend_options: 'forceLabels:on'
         };
         url += '?' + Ext.Object.toQueryString(params);
         Ext.create('Ext.window.Window', {
