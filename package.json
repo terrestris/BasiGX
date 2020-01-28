@@ -71,7 +71,7 @@
         "np": "5.2.1",
         "opn-cli": "5.0.0",
         "puppeteer": "2.0.0",
-        "rimraf": "3.0.0",
+        "rimraf": "3.0.1",
         "serve": "11.2.0",
         "sinon": "8.1.0",
         "uglify-js": "3.7.6"
