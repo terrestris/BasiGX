@@ -7,6 +7,11 @@
 BasiGX is an ExtJS package used to create modern GIS-Applications based on ExtJS 6, GeoExt3 and OpenLayers > 3.
 It consists of multiple components that helps the developer to put together a customized app quickly.
 
+## Development requirements
+
+* Node.js 10.13.0 or later
+* npm 6.8.0 or later
+
 ## Documentation
 
 * http://terrestris.github.io/BasiGX/master/docs/
