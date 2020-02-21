@@ -87,6 +87,14 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
      */
     epsgCodeArray: null,
 
+<span id='BasiGX-view-panel-CoordinateMousePositionPanel-cfg-activeEpsgCode'>    /**
+</span>     * @cfg {String} activeEpsgCode
+     *
+     * The initially active EPSG code. Has to be an element of #epsgCodeArray.
+     * Otherwise the last element in the list is set as active code.
+     */
+    activeEpsgCode: null,
+
 <span id='BasiGX-view-panel-CoordinateMousePositionPanel-property-olMap'>    /**
 </span>     * The OpenLayers map
      */
@@ -319,6 +327,15 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
         var cmpToRemove = me.down(&#39;component[name=&quot;crs-group&quot;]&#39;);
         me.remove(cmpToRemove);
         me.insert(0, cmpCfg);
+
+        // set initial active CRS due to configuration
+        var targetCmp = isMenu ? me.down(&#39;button&#39;) : me.down(&#39;segmentedbutton&#39;);
+        var targetItems = isMenu ? targetCmp.getMenu().items : targetCmp.items;
+        var index = targetItems.findIndex(&#39;epsgCode&#39;, me.activeEpsgCode);
+        if (index &gt;= 0) {
+            me.onCrsItemClick(isMenu, targetItems.getAt(index),
+                targetItems.getAt(index));
+        }
     },
 
 <span id='BasiGX-view-panel-CoordinateMousePositionPanel-method-onCrsItemClick'>    /**
