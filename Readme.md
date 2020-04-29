@@ -1,8 +1,8 @@
 # BasiGX
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/terrestris/BasiGX.svg)](https://greenkeeper.io/) [![Build Status](https://travis-ci.org/terrestris/BasiGX.svg?branch=master)](https://travis-ci.org/terrestris/BasiGX) [![Coverage Status](https://coveralls.io/repos/terrestris/BasiGX/badge.svg?branch=master&service=github)](https://coveralls.io/github/terrestris/BasiGX?branch=master)
+[![Build Status](https://travis-ci.org/terrestris/BasiGX.svg?branch=master)](https://travis-ci.org/terrestris/BasiGX) [![Coverage Status](https://coveralls.io/repos/terrestris/BasiGX/badge.svg?branch=master&service=github)](https://coveralls.io/github/terrestris/BasiGX?branch=master) [![Known Vulnerabilities](https://snyk.io/test/github/terrestris/BasiGX/badge.svg?targetFile=package.json)](https://snyk.io/test/github/terrestris/BasiGX?targetFile=package.json)
 
-…pronounced `ˈbeɪsɪks/`
+…pronounced `ˈbeɪsɪks/`, like the english word `basics`.
 
 BasiGX is an ExtJS package used to create modern GIS-Applications based on ExtJS 6, GeoExt3 and OpenLayers > 3.
 It consists of multiple components that helps the developer to put together a customized app quickly.
