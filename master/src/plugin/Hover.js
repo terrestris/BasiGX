@@ -549,7 +549,7 @@ Ext.define('BasiGX.plugin.Hover', {
 
         // fallback positioning
         var positioning = ['top', 'left'];
-        var offset = [15, 0];
+        var offset = [20, 0];
 
         if (pixel[0] >= mapDims[0] - dimLeftRight) {
             // near the right
