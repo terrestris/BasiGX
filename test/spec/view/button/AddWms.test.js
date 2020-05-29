@@ -50,7 +50,7 @@ describe('BasiGX.view.button.AddWms', function() {
             var forms = wins[0].query('basigx-form-addwms');
             expect(forms.length).to.be(1);
             expect(btn._win === wins[0]);
-            Ext.each(wins, function (w) {
+            Ext.each(wins, function(w) {
                 w.close();
             });
             expect(btn._win === null);
@@ -65,7 +65,7 @@ describe('BasiGX.view.button.AddWms', function() {
             btn.click();
             var wins = Ext.ComponentQuery.query('window[name=add-wms-window]');
             expect(wins.length).to.be(1);
-            Ext.each(wins, function (w) {
+            Ext.each(wins, function(w) {
                 w.close();
             });
             wins = Ext.ComponentQuery.query('window[name=add-wms-window]');

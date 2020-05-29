@@ -40,7 +40,7 @@ describe('BasiGX.view.button.CoordinateTransform', function() {
                 expect(wins.length).to.be(1);
                 var forms = wins[0].query('basigx-form-coordinatetransform');
                 expect(forms.length).to.be(1);
-                Ext.each(wins, function (w) {
+                Ext.each(wins, function(w) {
                     w.close();
                 });
                 // teardown
@@ -65,7 +65,7 @@ describe('BasiGX.view.button.CoordinateTransform', function() {
             var forms = wins[0].query('basigx-form-coordinatetransform');
             expect(forms.length).to.be(1);
             expect(btn._win === wins[0]);
-            Ext.each(wins, function (w) {
+            Ext.each(wins, function(w) {
                 w.close();
             });
             expect(btn._win === null);
@@ -85,7 +85,7 @@ describe('BasiGX.view.button.CoordinateTransform', function() {
                 'window[name=coordinate-transform-window]'
             );
             expect(wins.length).to.be(1);
-            Ext.each(wins, function (w) {
+            Ext.each(wins, function(w) {
                 w.close();
             });
             wins = Ext.ComponentQuery.query(

@@ -186,7 +186,7 @@ describe('BasiGX.plugin.Hover', function() {
                     ol.interaction.Select
                 );
             });
-            it('has a default hoverColor value set', function () {
+            it('has a default hoverColor value set', function() {
                 expect(plugin.getHoverColor()).to.be('rgba(255, 0, 0, 0.6)');
             });
         });
@@ -257,7 +257,7 @@ describe('BasiGX.plugin.Hover', function() {
                     interaction
                 );
             });
-            it('has the expected hoverColor', function () {
+            it('has the expected hoverColor', function() {
                 expect(pluginConfigured.getHoverColor()).to.be(
                     hoverColor
                 );
