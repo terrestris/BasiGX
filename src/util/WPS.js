@@ -73,7 +73,7 @@ Ext.define('BasiGX.util.WPS', {
          *     `wps:Execute` document.
          *
          */
-        createWpsExecuteProcessObject: function (wpsIdentifier, inputs) {
+        createWpsExecuteProcessObject: function(wpsIdentifier, inputs) {
             var staticMe = BasiGX.util.WPS;
             var executeDoc = {
                 name: {
@@ -129,7 +129,7 @@ Ext.define('BasiGX.util.WPS', {
          * @return {Array<Object>} Array of Jsonix objects to be marshaled to
          *      XML `wps:Input` document block.
          */
-        requestParamstoWpsInputs: function (inputs) {
+        requestParamstoWpsInputs: function(inputs) {
             var staticMe = BasiGX.util.WPS;
             var wpsInput = [];
             var singleInput = {};
@@ -244,7 +244,7 @@ Ext.define('BasiGX.util.WPS', {
          *     requested via WCS GetCoverage.
          * @return {String} Parsed XML request for the WCS GetCoverage.
          */
-        getGetCoverageRequestXml: function (coverage) {
+        getGetCoverageRequestXml: function(coverage) {
 
             var json = {
                 name: {
@@ -298,7 +298,7 @@ Ext.define('BasiGX.util.WPS', {
          * @return {Ext.data.request.Ajax} The request object which on may use
          *     to e.g. abort the request.
          */
-        execute: function (process, inputs, success, failure, scope, timeout) {
+        execute: function(process, inputs, success, failure, scope, timeout) {
             var staticMe = BasiGX.util.WPS;
             var namespaceUtil = BasiGX.util.Namespace;
 
@@ -343,7 +343,7 @@ Ext.define('BasiGX.util.WPS', {
          *     to e.g. abort the request.
          * @private
          */
-        executeProcess: function (xml, namespace, success, failure, scope,
+        executeProcess: function(xml, namespace, success, failure, scope,
             timeout) {
             var baseUrl = BasiGX.util.Url.getWebProjectBaseUrl();
 
@@ -377,7 +377,7 @@ Ext.define('BasiGX.util.WPS', {
          * A generic function bound as the success callback, if none was
          * provided.
          */
-        genericSuccessHandler: function () {
+        genericSuccessHandler: function() {
             Ext.log.info('WPS process executed.');
         },
 
@@ -385,7 +385,7 @@ Ext.define('BasiGX.util.WPS', {
          * A generic function bound as the failure callback, if none was
          * provided.
          */
-        genericFailureHandler: function () {
+        genericFailureHandler: function() {
             Ext.log.warn('Failed to execute WPS process.');
         },
 
@@ -396,7 +396,7 @@ Ext.define('BasiGX.util.WPS', {
          * @param {Object} response The response of the successful Ajax call
          *     which is a ServiceException.
          */
-        handleWpsExecuteException: function (response) {
+        handleWpsExecuteException: function(response) {
             var staticMe = BasiGX.util.WPS;
             var jsonixUtil = BasiGX.util.Jsonix;
             var parsedXml = jsonixUtil.unmarshaller.unmarshalString(response);
@@ -431,13 +431,13 @@ Ext.define('BasiGX.util.WPS', {
          * @param {String} xmlString XML or HTML document to be decoded.
          * @return {String} Decoded XML or HTML document.
          */
-        decodeXml: function (xmlString) {
+        decodeXml: function(xmlString) {
             var map = {
                 '&lt;': '<',
                 '&gt;': '>'
             };
             return xmlString.replace(/(&quot;|&lt;|&gt;|&amp;)/g,
-                function (str, item) {
+                function(str, item) {
                     return map[item];
                 }
             );

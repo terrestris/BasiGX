@@ -30,7 +30,7 @@ Ext.define('BasiGX.view.button.Base', {
     /**
      *
      */
-    constructor: function () {
+    constructor: function() {
         var me = this;
         me.callParent(arguments);
         if (me.setTooltip) {

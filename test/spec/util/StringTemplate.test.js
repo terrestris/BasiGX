@@ -1,6 +1,6 @@
 Ext.Loader.syncRequire(['BasiGX.util.StringTemplate']);
 
-describe('BasiGX.util.StringTemplate', function () {
+describe('BasiGX.util.StringTemplate', function() {
     describe('Basics', function() {
         it('is defined', function() {
             expect(BasiGX.util.StringTemplate).to.not.be(undefined);
@@ -11,7 +11,7 @@ describe('BasiGX.util.StringTemplate', function () {
 
         var feature = null;
 
-        beforeEach(function () {
+        beforeEach(function() {
             feature = new ol.Feature({
                 id: 123,
                 geometry: new ol.geom.Point([10, 10]),
