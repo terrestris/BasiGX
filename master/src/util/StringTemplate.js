@@ -57,7 +57,7 @@ Ext.define('BasiGX.util.StringTemplate', {
          *     prefix). Optional.
          * @return {String} The templated feature text.
          */
-        getTextFromTemplate: function (feature, template, config) {
+        getTextFromTemplate: function(feature, template, config) {
             var staticMe = BasiGX.util.StringTemplate;
             var placeHolderPrefix = staticMe.TEMPLATE_PLACEHOLDER_PREFIX;
             var placeHolderSuffix = staticMe.TEMPLATE_PLACEHOLDER_SUFFIX;
@@ -83,7 +83,7 @@ Ext.define('BasiGX.util.StringTemplate', {
                     // Iterate over all regex match results and find the proper
                     // attribute for the given placeholder, finally set the
                     // desired value to the hover field text
-                    Ext.each(regExpRes, function (res) {
+                    Ext.each(regExpRes, function(res) {
                         // We count every non matching candidate. If this count
                         // us equal to the objects length, we assume that there
                         // is no match at all and set the output value to an
@@ -93,7 +93,7 @@ Ext.define('BasiGX.util.StringTemplate', {
                         var props = feature.getProperties ?
                             feature.getProperties() : feature.properties;
 
-                        Ext.iterate(props, function (k, v) {
+                        Ext.iterate(props, function(k, v) {
                             // Remove the suffixes and find the matching
                             // attribute column
                             var phPrefixLength = decodeURIComponent(

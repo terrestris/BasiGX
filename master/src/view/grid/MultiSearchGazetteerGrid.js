@@ -131,7 +131,7 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid', {
      * Called once the grid turns hidden. Deactivates all related listeners for
      * interaction between grid and features on the map.
      */
-    unregisterListeners: function () {
+    unregisterListeners: function() {
         var me = this;
         me.un('itemmouseenter', me.onItemMouseEnter, me);
         me.un('itemmouseleave', me.onItemMouseLeave, me);

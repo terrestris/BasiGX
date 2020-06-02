@@ -226,9 +226,9 @@ Ext.define(&#39;BasiGX.view.form.CSW&#39;, {
                         var view = textfield.up(&#39;basigx-form-csw&#39;);
                         view.resetState();
                     },
-                    specialkey: function (textfield, evt) {
+                    specialkey: function(textfield, evt) {
                         // execute search on ENTER is hit inside the textfield
-                        if(evt.getKey() === evt.ENTER){
+                        if (evt.getKey() === evt.ENTER) {
                             evt.preventDefault();
                             var view = textfield.up(&#39;basigx-form-csw&#39;);
                             view.resetState();

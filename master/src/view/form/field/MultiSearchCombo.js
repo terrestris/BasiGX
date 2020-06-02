@@ -172,7 +172,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
         },
         close: {
             cls: 'multisearch-open-container-trigger',
-            handler: function (combo) {
+            handler: function(combo) {
                 this.changeContainerVisibility(combo);
             }
         }
@@ -183,7 +183,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
      * container.
      * @param {BasiGX.view.form.field.MultiSearchCombo} combo Multisearch combo.
      */
-    changeContainerVisibility:  function(combo) {
+    changeContainerVisibility: function(combo) {
         if (combo.searchContainer) {
             if (combo.searchContainer.isVisible()) {
                 combo.cleanupSearch();
@@ -302,7 +302,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
         if (me.searchContainer) {
             me.searchContainer.getEl().slideOut('t', {
                 duration: 250,
-                callback: function () {
+                callback: function() {
                     me.searchContainer.hide();
                 },
                 scope: me.searchContainer
@@ -421,7 +421,7 @@ Ext.define('BasiGX.view.form.field.MultiSearchCombo', {
                 }
             });
             me.searchContainer = searchContainer;
-            me.on('checkresultsvisibility', function () {
+            me.on('checkresultsvisibility', function() {
                 var hidden = me.noGazetteerResults && me.noWfsSearchResults;
                 var selector = 'panel[name=noresults]';
                 me.searchContainer.down(selector).setVisible(hidden);

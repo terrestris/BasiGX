@@ -749,23 +749,25 @@ Ext.define('BasiGX.view.form.AddWms', {
         }
 
         var bbox;
-        for (var i = 0; i < capLayer.BoundingBox.length; ++i) {
-            if (capLayer.BoundingBox[i].crs === 'CRS:84') {
-                bbox = capLayer.BoundingBox[i].extent;
-            }
-        }
-        if (!bbox) {
-            for (i = 0; i < capLayer.BoundingBox.length; ++i) {
-                if (capLayer.BoundingBox[i].crs === 'EPSG:4326') {
+        if (capLayer.BoundingBox) {
+            for (var i = 0; i < capLayer.BoundingBox.length; ++i) {
+                if (capLayer.BoundingBox[i].crs === 'CRS:84') {
                     bbox = capLayer.BoundingBox[i].extent;
                 }
             }
-        }
-        // looks like parsing 1.1.1 capabilities the crs is not
-        // set on the bounding box object
-        if (!bbox) {
-            for (i = 0; i < capLayer.BoundingBox.length; ++i) {
-                bbox = capLayer.BoundingBox[i].extent;
+            if (!bbox) {
+                for (i = 0; i < capLayer.BoundingBox.length; ++i) {
+                    if (capLayer.BoundingBox[i].crs === 'EPSG:4326') {
+                        bbox = capLayer.BoundingBox[i].extent;
+                    }
+                }
+            }
+            // looks like parsing 1.1.1 capabilities the crs is not
+            // set on the bounding box object
+            if (!bbox) {
+                for (i = 0; i < capLayer.BoundingBox.length; ++i) {
+                    bbox = capLayer.BoundingBox[i].extent;
+                }
             }
         }
 
