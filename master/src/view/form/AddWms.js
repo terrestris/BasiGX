@@ -783,6 +783,30 @@ Ext.define('BasiGX.view.form.AddWms', {
     },
 
     /**
+     * Recursively collect all available sub layers from
+     * the given capabilities layer node.
+     *
+     * @param {object} layer the capabilities layer node
+     * @param {string} version the WMS version
+     * @param {string} mapProj the projection
+     * @param {string} url the WMS URL
+     * @param {ol.Layer[]} compatible the array to collect the layers in
+     */
+    collectLayers: function(layer, version, mapProj, url, compatible) {
+        var me = this;
+        var olLayer = me.getOlLayer(layer, version, mapProj, url);
+        if (olLayer) {
+            compatible.push(olLayer);
+        }
+
+        if (Ext.isArray(layer.Layer)) {
+            Ext.each(layer.Layer, function(subLayer) {
+                me.collectLayers(subLayer, version, mapProj, url, compatible);
+            });
+        }
+    },
+
+    /**
      * Checks if the passed capabilities object (from the #parser) is
      * compatible. It woill return an array of layers if we could determine any,
      * and the boolean value `false` if not.
@@ -820,12 +844,13 @@ Ext.define('BasiGX.view.form.AddWms', {
 
             if (includeSubLayer && Ext.isArray(layer.Layer)) {
                 Ext.each(layer.Layer, function(subLayer) {
-                    var subOlLayer = me.getOlLayer(
-                        subLayer, version, mapProj, url
+                    me.collectLayers(
+                        subLayer,
+                        version,
+                        mapProj,
+                        url,
+                        compatible
                     );
-                    if (subOlLayer) {
-                        compatible.push(subOlLayer);
-                    }
                 });
             }
         });
