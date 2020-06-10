@@ -198,6 +198,8 @@ Ext.define('BasiGX.view.form.AddWms', {
      */
     triedVersions: [],
 
+    defaultButton: 'requestLayersBtn',
+
     items: [
         {
             xtype: 'fieldset',
@@ -341,6 +343,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                 text: '{requestLayersBtnText}'
             },
             name: 'requestLayersBtn',
+            reference: 'requestLayersBtn',
             formBind: true, // only enabled once the form is valid
             disabled: true,
             handler: function(btn) {
