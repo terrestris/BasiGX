@@ -717,14 +717,15 @@ Ext.define('BasiGX.view.form.AddWms', {
      * @param {String} version The WMS version.
      * @param {String} mapProj The map projection as string.
      * @param {String} url The WMS URL.
+     * @param {string[]} allCrs a list of all available coordinate systems
+     *  up to this level
      * @return {ol.layer.Tile} The created layer or `undefined`.
      */
-    getOlLayer: function(capLayer, version, mapProj, url) {
+    getOlLayer: function(capLayer, version, mapProj, url, allCrs) {
         // This really should not matter, as ol can reproject in the client
         // At least it should be configurable
         if (version === '1.3.0' &&
-            Ext.isArray(capLayer.CRS) &&
-            !Ext.Array.contains(capLayer.CRS, mapProj)) {
+            !Ext.Array.contains(allCrs, mapProj)) {
             // only available for 1.3.0
             return;
         }
@@ -791,27 +792,36 @@ Ext.define('BasiGX.view.form.AddWms', {
      * @param {string} mapProj the projection
      * @param {string} url the WMS URL
      * @param {ol.Layer[]} compatible the array to collect the layers in
+     * @param {string[]} allCrs all coordinate systems found in the hierarchy
      */
-    collectLayers: function(layer, version, mapProj, url, compatible) {
+    collectLayers: function(layer, version, mapProj, url, compatible, allCrs) {
         var me = this;
-        var olLayer = me.getOlLayer(layer, version, mapProj, url);
+        allCrs = allCrs.concat(layer.CRS);
+        var olLayer = me.getOlLayer(layer, version, mapProj, url, allCrs);
         if (olLayer) {
             compatible.push(olLayer);
         }
 
         if (Ext.isArray(layer.Layer)) {
             Ext.each(layer.Layer, function(subLayer) {
-                me.collectLayers(subLayer, version, mapProj, url, compatible);
+                me.collectLayers(
+                    subLayer,
+                    version,
+                    mapProj,
+                    url,
+                    compatible,
+                    allCrs.slice()
+                );
             });
         }
     },
 
     /**
      * Checks if the passed capabilities object (from the #parser) is
-     * compatible. It woill return an array of layers if we could determine any,
+     * compatible. It will return an array of layers if we could determine any,
      * and the boolean value `false` if not.
      *
-     * @param {Object} capabilities The GetCapabbilties object as it is returned
+     * @param {Object} capabilities The GetCapabilties object as it is returned
      *     by our parser.
      * @return {ol.layer.Tile[]|boolean} Eitehr an array of comüatible layers or
      *     'false'.
@@ -830,6 +840,7 @@ Ext.define('BasiGX.view.form.AddWms', {
         var mapProj = map.getView().getProjection().getCode();
 
         // same in both versions
+        var allCrs = capabilities.Capability.Layer.CRS || [];
         var layers = capabilities.Capability.Layer.Layer;
         var url = capabilities.Capability.Request.GetMap.
             DCPType[0].HTTP.Get.OnlineResource;
@@ -837,7 +848,8 @@ Ext.define('BasiGX.view.form.AddWms', {
         var includeSubLayer = me.getIncludeSubLayer();
 
         Ext.each(layers, function(layer) {
-            var olLayer = me.getOlLayer(layer, version, mapProj, url);
+            var crsList = allCrs.concat(layer.CRS);
+            var olLayer = me.getOlLayer(layer, version, mapProj, url, crsList);
             if (olLayer) {
                 compatible.push(olLayer);
             }
@@ -849,7 +861,8 @@ Ext.define('BasiGX.view.form.AddWms', {
                         version,
                         mapProj,
                         url,
-                        compatible
+                        compatible,
+                        crsList
                     );
                 });
             }
