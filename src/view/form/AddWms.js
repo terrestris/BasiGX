@@ -824,7 +824,7 @@ Ext.define('BasiGX.view.form.AddWms', {
      * compatible. It will return an array of layers if we could determine any,
      * and the boolean value `false` if not.
      *
-     * @param {Object} capabilities The GetCapabilties object as it is returned
+     * @param {Object} capabilities The GetCapabilities object as it is returned
      *     by our parser.
      * @return {ol.layer.Tile[]|boolean} Eitehr an array of comüatible layers or
      *     'false'.
