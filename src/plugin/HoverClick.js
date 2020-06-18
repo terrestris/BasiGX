@@ -7,9 +7,7 @@ Ext.define('BasiGX.plugin.HoverClick', {
     inheritableStatics: {
         /**
          * The property of a layer that holds a boolean value which indicates
-         * whether this layer qualifies for clicking. If this property is
-         * undefined the value of LAYER_HOVERABLE_PROPERTY_NAME will be used
-         * to maintain backwards compatibility.
+         * whether this layer qualifies for clicking.
          */
         LAYER_CLICKABLE_PROPERTY_NAME: 'clickable'
     },
