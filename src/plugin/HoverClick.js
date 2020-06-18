@@ -242,10 +242,6 @@ Ext.define('BasiGX.plugin.HoverClick', {
         var map = mapComponent.getMap();
         var proj = me.getFeatureInfoEpsg();
         var clickableProp = me.self.LAYER_CLICKABLE_PROPERTY_NAME;
-        if (clickableProp === undefined) {
-            clickableProp = me.self.LAYER_HOVERABLE_PROPERTY_NAME;
-        }
-
         var clickable = layer.get(clickableProp);
 
         if (projection) {
