@@ -14,13 +14,13 @@ Ext.define('BasiGX.plugin.HoverClick', {
 
     config: {
         /**
-         * Enable/Disable hovering globally. If true, the plugin will not
+         * Enable/Disable hovering globally. If false, the plugin will not
          * listen to any hover event, regardless if a layer has a truthy
          * hoverable property.
          */
         hoverable: true,
         /**
-         * Enable/Disable clicking globally. If true, the plugin will not
+         * Enable/Disable clicking globally. If false, the plugin will not
          * listen to any click event, regardless if a layer has a truthy
          * clickable property.
          */
@@ -137,7 +137,7 @@ Ext.define('BasiGX.plugin.HoverClick', {
 
             if (source instanceof ol.source.TileWMS
                     || source instanceof ol.source.ImageWMS) {
-                // me.cleanupHoverArtifacts();
+
                 var url = source.getGetFeatureInfoUrl(
                     evt.coordinate,
                     resolution,
