@@ -562,7 +562,7 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
                         break;
                 }
                 if (comparisonFilter) {
-                    var ns = me.getCombo().getWfsPrefix() || namespace + &#39;:&#39;;
+                    var ns = (namespace || me.getCombo().getWfsPrefix()) + &#39;:&#39;;
                     var filter;
                     if (bboxFilter) {
                         filter = &#39;&lt;ogc:And&gt;&#39; +
