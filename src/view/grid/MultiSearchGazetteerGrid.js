@@ -80,7 +80,8 @@ Ext.define('BasiGX.view.grid.MultiSearchGazetteerGrid', {
             text: '',
             xtype: 'templatecolumn',
             width: 40,
-            tpl: '<img src="https://nominatim.terrestris.de{icon}" height="16" width="16">'
+            tpl: '<img src="https://nominatim.terrestris.de{icon}"' +
+                ' height="16" width="16">'
         }, {
             text: 'Name',
             xtype: 'templatecolumn',
