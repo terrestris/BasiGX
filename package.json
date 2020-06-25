@@ -71,7 +71,7 @@
         "mocha": "8.0.1",
         "np": "6.2.4",
         "opn-cli": "5.0.0",
-        "puppeteer": "4.0.0",
+        "puppeteer": "4.0.1",
         "rimraf": "3.0.2",
         "serve": "11.3.2",
         "sinon": "9.0.2",
