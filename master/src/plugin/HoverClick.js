@@ -96,6 +96,18 @@ Ext.define('BasiGX.plugin.HoverClick', {
     },
 
     /**
+     * Overwrites the hover.js onFeatureClicked method to
+     * a noop method, as this function does not fit into
+     * the hoverClick concept with separate workflows
+     * for hovering and clicking.
+     *
+     * @return {undefined}
+     */
+    onFeatureClicked: function () {
+        return;
+    },
+
+    /**
      * Filters the clickable features by checking the
      * isClickable property.
      *
@@ -171,6 +183,7 @@ Ext.define('BasiGX.plugin.HoverClick', {
                     }
 
                     hoverLayers.push(layer);
+                    mapComponent.fireEvent('hoverfeaturesclick', hoverFeatures);
                 });
             } else if (source instanceof ol.source.Vector) {
                 // VECTOR!
@@ -203,6 +216,7 @@ Ext.define('BasiGX.plugin.HoverClick', {
                     }
                     me.showHoverFeature(layer, hoverFeatures);
                     me.currentHoverTarget = feat;
+                    mapComponent.fireEvent('hoverfeaturesclick', hoverFeatures);
                 }, me, function(vectorCand) {
                     return vectorCand === layer;
                 });

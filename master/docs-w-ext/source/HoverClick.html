@@ -112,6 +112,18 @@
         }
     },
 
+<span id='global-method-onFeatureClicked'>    /**
+</span>     * Overwrites the hover.js onFeatureClicked method to
+     * a noop method, as this function does not fit into
+     * the hoverClick concept with separate workflows
+     * for hovering and clicking.
+     *
+     * @return {undefined}
+     */
+    onFeatureClicked: function () {
+        return;
+    },
+
 <span id='global-method-filterClickableFeatures'>    /**
 </span>     * Filters the clickable features by checking the
      * isClickable property.
@@ -188,6 +200,7 @@
                     }
 
                     hoverLayers.push(layer);
+                    mapComponent.fireEvent(&#39;hoverfeaturesclick&#39;, hoverFeatures);
                 });
             } else if (source instanceof ol.source.Vector) {
                 // VECTOR!
@@ -220,6 +233,7 @@
                     }
                     me.showHoverFeature(layer, hoverFeatures);
                     me.currentHoverTarget = feat;
+                    mapComponent.fireEvent(&#39;hoverfeaturesclick&#39;, hoverFeatures);
                 }, me, function(vectorCand) {
                     return vectorCand === layer;
                 });
