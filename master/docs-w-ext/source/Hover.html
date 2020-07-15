@@ -37,7 +37,8 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
     extend: &#39;Ext.plugin.Abstract&#39;,
 
     requires: [
-        &#39;BasiGX.util.StringTemplate&#39;
+        &#39;BasiGX.util.StringTemplate&#39;,
+        &#39;BasiGX.util.Url&#39;
     ],
 
     alias: &#39;plugin.hover&#39;,
@@ -108,8 +109,13 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
          */
         mapPaddingPositioning: 30,
 <span id='BasiGX-plugin-Hover-cfg-maxHeight'>        maxHeight: null,
-</span><span id='BasiGX-plugin-Hover-cfg-className'>        className: &#39;ol-overlay-container ol-selectable&#39;
-</span>    },
+</span><span id='BasiGX-plugin-Hover-cfg-className'>        className: &#39;ol-overlay-container ol-selectable&#39;,
+</span><span id='BasiGX-plugin-Hover-cfg-enableClickableLinks'>        /**
+</span>         * If true, renders urls as clickable links.
+         * If false, renders urls as plain strings.
+         */
+        enableClickableLinks: false
+    },
 
 <span id='BasiGX-plugin-Hover-cfg-selectMulti'>    /**
 </span>     * Whether the `ol.interaction.Select` shall be configured to select
@@ -618,6 +624,7 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
         var innerHtml = &#39;&#39;;
         var hoverfieldProp = me.self.LAYER_HOVERFIELD_PROPERTY_NAME;
         var templateUtil = BasiGX.util.StringTemplate;
+        var urlUtil = BasiGX.util.Url;
         var templateConfig = {
             prefix: me.self.HOVER_TEMPLATE_PLACEHOLDER_PREFIX,
             suffix: me.self.HOVER_TEMPLATE_PLACEHOLDER_SUFFIX
@@ -636,7 +643,18 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
                         var count = feat.get(&#39;count&#39;);
                         innerHtml += &#39;&lt;br /&gt;&#39; + count + &#39;&lt;br /&gt;&#39;;
                     } else {
-                        innerHtml += &#39;&lt;br /&gt;&#39; + hoverText + &#39;&lt;br /&gt;&#39;;
+                        if (
+                            me.getEnableClickableLinks()
+                            &amp;&amp; urlUtil.isUrl(hoverText)
+                        ) {
+                            innerHtml += &#39;&lt;br /&gt;&lt;a href=&quot;&#39;
+                                + hoverText
+                                + &#39;&quot; target=&quot;_blank&quot;&gt;&#39;
+                                + hoverText
+                                + &#39;&lt;/a&gt;&lt;br /&gt;&#39;;
+                        } else {
+                            innerHtml += &#39;&lt;br /&gt;&#39; + hoverText + &#39;&lt;br /&gt;&#39;;
+                        }
                     }
                 }
             });

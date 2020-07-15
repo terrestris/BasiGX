@@ -86,6 +86,17 @@ Ext.define('BasiGX.util.Url', {
             var loc = window.location;
             var baseUrl = loc.protocol + '//' + loc.host + '/';
             return baseUrl;
+        },
+
+        /**
+         * Checks if a string is a url, i.e. if it starts
+         * with http(s)://.
+         *
+         * @param {String} str The string to check.
+         * @return {Boolean} true, if string is a url, false otherwise.
+         */
+        isUrl: function (str) {
+            return str.startsWith("http://") || str.startsWith("https://");
         }
 
     }
