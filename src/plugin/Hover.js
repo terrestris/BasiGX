@@ -20,7 +20,8 @@ Ext.define('BasiGX.plugin.Hover', {
     extend: 'Ext.plugin.Abstract',
 
     requires: [
-        'BasiGX.util.StringTemplate'
+        'BasiGX.util.StringTemplate',
+        'BasiGX.util.Url'
     ],
 
     alias: 'plugin.hover',
@@ -91,7 +92,12 @@ Ext.define('BasiGX.plugin.Hover', {
          */
         mapPaddingPositioning: 30,
         maxHeight: null,
-        className: 'ol-overlay-container ol-selectable'
+        className: 'ol-overlay-container ol-selectable',
+        /**
+         * If true, renders urls as clickable links.
+         * If false, renders urls as plain strings.
+         */
+        enableClickableLinks: false
     },
 
     /**
@@ -601,6 +607,7 @@ Ext.define('BasiGX.plugin.Hover', {
         var innerHtml = '';
         var hoverfieldProp = me.self.LAYER_HOVERFIELD_PROPERTY_NAME;
         var templateUtil = BasiGX.util.StringTemplate;
+        var urlUtil = BasiGX.util.Url;
         var templateConfig = {
             prefix: me.self.HOVER_TEMPLATE_PLACEHOLDER_PREFIX,
             suffix: me.self.HOVER_TEMPLATE_PLACEHOLDER_SUFFIX
@@ -619,7 +626,18 @@ Ext.define('BasiGX.plugin.Hover', {
                         var count = feat.get('count');
                         innerHtml += '<br />' + count + '<br />';
                     } else {
-                        innerHtml += '<br />' + hoverText + '<br />';
+                        if (
+                            me.getEnableClickableLinks()
+                            && urlUtil.isUrl(hoverText)
+                        ) {
+                            innerHtml += '<br /><a href="'
+                                + hoverText
+                                + '" target="_blank">'
+                                + hoverText
+                                + '</a><br />';
+                        } else {
+                            innerHtml += '<br />' + hoverText + '<br />';
+                        }
                     }
                 }
             });
