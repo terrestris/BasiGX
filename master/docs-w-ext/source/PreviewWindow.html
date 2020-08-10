@@ -42,7 +42,8 @@ Ext.define(&#39;BasiGX.view.window.PreviewWindow&#39;, {
 </span>        data: {
             showLegendTooltip: &#39;Show Legend&#39;,
             zoomToProjectionTooltip: &#39;Zoom to extent of projection&#39;,
-            zoomToLayerTooltip: &#39;Fit to extent&#39;
+            zoomToLayerTooltip: &#39;Fit to extent&#39;,
+            legendTitle: &#39;Legend&#39;
         }
     },
 
@@ -223,7 +224,7 @@ Ext.define(&#39;BasiGX.view.window.PreviewWindow&#39;, {
         };
         url += &#39;?&#39; + Ext.Object.toQueryString(params);
         Ext.create(&#39;Ext.window.Window&#39;, {
-            title: this.getTitle(),
+            title: this.getViewModel().get(&#39;legendTitle&#39;),
             layout: &#39;fit&#39;,
             minWidth: 200,
             minHeight: 200,
