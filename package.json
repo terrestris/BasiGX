@@ -59,22 +59,22 @@
     "devDependencies": {
         "copyfiles": "2.3.0",
         "coveralls": "3.1.0",
-        "eslint": "7.3.1",
+        "eslint": "7.8.1",
         "expect.js": "0.3.1",
-        "karma": "5.1.0",
+        "karma": "5.2.1",
         "karma-chrome-launcher": "3.1.0",
-        "karma-coverage": "2.0.2",
+        "karma-coverage": "2.0.3",
         "karma-expect": "1.1.3",
         "karma-mocha": "2.0.1",
         "karma-mocha-reporter": "2.2.5",
         "karma-sinon": "1.0.5",
-        "mocha": "8.0.1",
-        "np": "6.2.4",
+        "mocha": "8.1.3",
+        "np": "6.5.0",
         "opn-cli": "5.0.0",
-        "puppeteer": "4.0.1",
+        "puppeteer": "5.2.1",
         "rimraf": "3.0.2",
         "serve": "11.3.2",
-        "sinon": "9.0.2",
-        "uglify-js": "3.10.0"
+        "sinon": "9.0.3",
+        "uglify-js": "3.10.3"
     }
 }
