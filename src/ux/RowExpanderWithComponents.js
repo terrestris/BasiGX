@@ -218,6 +218,35 @@ Ext.define('BasiGX.ux.RowExpanderWithComponents', {
     },
 
     /**
+     * Overrides the key bindings to be consistent with standard ext trees.
+     * Also see https://www.w3.org/TR/wai-aria-practices/#treegrid
+     *
+     * @param {Object} view the view
+     * @param {Object} record the record
+     * @param {Object} row the row
+     * @param {Number} rowIdx the row index
+     * @param {KeyEvent} e the key event
+     */
+    onKeyDown: function(view, record, row, rowIdx, e) {
+        var me = this;
+        var key = e.getKey();
+        var pos = view.getNavigationModel().getPosition();
+        var isCollapsed;
+
+        if (pos) {
+            row = Ext.fly(row);
+            isCollapsed = row.hasCls(me.rowCollapsedCls);
+
+            if (e.ctrlKey && key === 39 && isCollapsed) {
+                me.toggleRow(rowIdx, record);
+            }
+            if (e.ctrlKey && key === 37 && !isCollapsed) {
+                me.toggleRow(rowIdx, record);
+            }
+        }
+    },
+
+    /**
      * Converts all string values with {{}} to code
      * Example: '{{record.get('test'}}' converts to record.get('test')
      *
