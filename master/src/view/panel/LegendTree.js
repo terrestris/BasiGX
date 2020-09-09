@@ -257,7 +257,6 @@ Ext.define('BasiGX.view.panel.LegendTree', {
      * @return {String} A CSS class to use.
      */
     getCssForRow: function(rec) {
-
         var color = this.getColorFromRow(rec);
 
         // if color is still not defined, return old default
