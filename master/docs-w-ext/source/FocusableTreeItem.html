@@ -90,8 +90,26 @@ Ext.define(&#39;BasiGX.view.list.FocusableTreeItem&#39;, {
         var pressedKey = evt.getKey();
         var list = me.up(&#39;treelist&#39;);
         if (list &amp;&amp; (pressedKey === enter || pressedKey === space)) {
-            list.fireEvent(&#39;selectionchange&#39;, list, me.getNode(), {});
+            list.setSelection(me.getNode());
+            try {
+                me.el.dom.click();
+            } catch (e) {
+                Ext.log(&#39;Problem when trying to emulate click on node: &#39; + e);
+            }
         }
+    },
+
+<span id='BasiGX-view-list-FocusableTreeItem-method-bindFocusEvents'>    /**
+</span>     * Binds the focusenter and focusleave events to add/remove the
+     * x-focused class.
+     */
+    bindFocusEvents: function() {
+        this.getEl().on(&#39;focusenter&#39;, function() {
+            this.addCls(&#39;x-focused&#39;);
+        });
+        this.getEl().on(&#39;focusleave&#39;, function() {
+            this.removeCls(&#39;x-focused&#39;);
+        });
     },
 
 <span id='BasiGX-view-list-FocusableTreeItem-method-constructor'>    /**
@@ -104,6 +122,7 @@ Ext.define(&#39;BasiGX.view.list.FocusableTreeItem&#39;, {
         me.makeFocusableElement();
         me.callParent(arguments);
         me.bindFocusKeyPressHandler();
+        me.bindFocusEvents();
     }
 });
 </pre>
