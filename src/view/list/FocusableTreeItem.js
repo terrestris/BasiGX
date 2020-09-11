@@ -88,10 +88,10 @@ Ext.define('BasiGX.view.list.FocusableTreeItem', {
      */
     bindFocusEvents: function() {
         this.getEl().on('focusenter', function() {
-            this.dom.classList.add('x-focused');
+            this.addCls('x-focused');
         });
         this.getEl().on('focusleave', function() {
-            this.dom.classList.remove('x-focused');
+            this.removeCls('x-focused');
         });
     },
 
