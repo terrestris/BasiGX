@@ -105,6 +105,12 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
 </span>
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-cfg-layer'>        layer: null,
 </span>
+<span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-cfg-useLayerName'>        /**
+</span>         * If set to true, the layer name will be used for grouping in the
+         * grid.
+         */
+        useLayerName: false,
+
 <span id='BasiGX-view-grid-MultiSearchWFSSearchGrid-cfg-templateConfig'>        /**
 </span>         * Object containing two keys - suffix and prefix - to match begin and
          * end of any placeholder in the display template of search results.
@@ -691,7 +697,11 @@ Ext.define(&#39;BasiGX.view.grid.MultiSearchWFSSearchGrid&#39;, {
                     }
 
                     feature.properties.displayfield = displayfield;
-                    feature.properties.featuretype = ftName;
+                    if (me.getUseLayerName()) {
+                        feature.properties.featuretype = layer.get(&#39;name&#39;);
+                    } else {
+                        feature.properties.featuretype = ftName;
+                    }
 
                     var olFeat = parser.readFeatures(feature, {
                         dataProjection: combo.getWfsDataProjection(),
