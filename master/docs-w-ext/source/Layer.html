@@ -279,6 +279,34 @@ Ext.define(&#39;BasiGX.util.Layer&#39;, {
             });
 
             return visibleLayers;
+        },
+
+<span id='BasiGX-util-Layer-static-method-cascadeLayers'>        /**
+</span>         * Cascades down a given LayerGroup, calling the given function for
+         * each LayerGroup / Layer.
+         *
+         * @param  {ol.layer.Group} lyrGroup The layer group to cascade down
+         * @param  {Function} fn A function to call on every LayerGroup / Layer
+         * @return {void}
+         */
+        cascadeLayers: function(lyrGroup, fn) {
+            if (!(lyrGroup instanceof ol.layer.Group)) {
+                // skip on wrong input type
+                Ext.Logger.warn(
+                    &#39;No ol.layer.Group given to &#39; +
+                    &#39;BasiGX.util.Layer.cascadeLayers. It is unlikely that &#39; +
+                    &#39;this will work properly. Skipping!&#39;);
+                return null;
+            }
+
+            lyrGroup.getLayers().forEach(function(layerOrGroup) {
+                if (Ext.isFunction(fn)) {
+                    fn(layerOrGroup);
+                }
+                if (layerOrGroup instanceof ol.layer.Group) {
+                    BasiGX.util.Layer.cascadeLayers(layerOrGroup, fn);
+                }
+            });
         }
     }
 });
