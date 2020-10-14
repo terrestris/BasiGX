@@ -355,6 +355,44 @@ describe('BasiGX.util.Layer', function() {
         });
     });
 
+    describe('#cascadeLayers', function() {
+        it('is a defined function', function() {
+            expect(BasiGX.util.Layer.cascadeLayers).to.be.a(Function);
+        });
+
+        var tileLayer = new ol.layer.Image();
+        var imageLayer = new ol.layer.Image();
+        var vectorLayer = new ol.layer.Vector();
+
+        var nestedGroup = new ol.layer.Group({
+            layers: [
+                new ol.layer.Group({
+                    layers: [
+                        tileLayer, imageLayer,
+                        new ol.layer.Group({
+                            layers: [vectorLayer]
+                        })
+                    ]
+                })
+            ]
+        });
+
+        var cnt = 0;
+        BasiGX.util.Layer.cascadeLayers(nestedGroup, function(lyr) {
+            lyr.set('foo', 'bar');
+            cnt++;
+        });
+
+        it('executes given function for every layer', function() {
+            expect(cnt).to.be(5);
+        });
+        it('allows to modify layers / layer groups', function() {
+            expect(tileLayer.get('foo')).to.be('bar');
+            expect(imageLayer.get('foo')).to.be('bar');
+            expect(vectorLayer.get('foo')).to.be('bar');
+        });
+    });
+
     after(function() {
         TestUtil.teardownTestObjects(testObjs);
     });
