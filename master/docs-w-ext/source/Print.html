@@ -102,8 +102,9 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
          * @type {Boolean} if true, app selection and the extent rectangle are
          * disabled.
          */
-        skipMapMode: false
-    },
+        skipMapMode: false,
+<span id='BasiGX-view-form-Print-cfg-useJsonp'>        useJsonp: true
+</span>    },
 
 <span id='BasiGX-view-form-Print-property-borderColors'>    borderColors: [
 </span>        &#39;#FF5050&#39;,
@@ -258,13 +259,21 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
      */
     createAppsStore: function() {
         var me = this;
+        var proxy = {
+            type: &#39;ajax&#39;,
+            url: me.getUrl() + &#39;apps.json&#39;
+        };
+        if (this.getUseJsonp()) {
+            proxy.type = &#39;jsonp&#39;;
+            proxy.callbackKey = &#39;jsonp&#39;;
+        } else {
+            proxy.reader = {
+                type: &#39;json&#39;
+            };
+        }
         var remoteAppsStore = Ext.create(&#39;Ext.data.Store&#39;, {
             autoLoad: true,
-            proxy: {
-                type: &#39;jsonp&#39;,
-                url: me.getUrl() + &#39;apps.json&#39;,
-                callbackKey: &#39;jsonp&#39;
-            },
+            proxy: proxy,
             listeners: {
                 // The real work is done in the callback below, make sure
                 // to read the docs there
@@ -610,7 +619,8 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
                 ready: &#39;onPrintProviderReady&#39;,
                 error: &#39;onPrintProviderError&#39;,
                 scope: this
-            }
+            },
+            useJsonp: this.getUseJsonp()
         });
     },
 
