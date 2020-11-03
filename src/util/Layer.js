@@ -279,7 +279,7 @@ Ext.define('BasiGX.util.Layer', {
                     'No ol.layer.Group given to ' +
                     'BasiGX.util.Layer.cascadeLayers. It is unlikely that ' +
                     'this will work properly. Skipping!');
-                return null;
+                return;
             }
             if(!Ext.isFunction(fn)){
                 Ext.Logger.warn(
