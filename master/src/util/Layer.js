@@ -281,11 +281,15 @@ Ext.define('BasiGX.util.Layer', {
                     'this will work properly. Skipping!');
                 return null;
             }
+            if(!Ext.isFunction(fn)){
+                Ext.Logger.warn(
+                    'No function passed ' +
+                    'this will not work. Skipping!');
+                return;
+            }
 
             lyrGroup.getLayers().forEach(function(layerOrGroup) {
-                if (Ext.isFunction(fn)) {
-                    fn(layerOrGroup);
-                }
+                fn(layerOrGroup);
                 if (layerOrGroup instanceof ol.layer.Group) {
                     BasiGX.util.Layer.cascadeLayers(layerOrGroup, fn);
                 }
