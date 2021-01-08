@@ -91,8 +91,17 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
         },
 
         /**
-          * Optional filter function. Can be useful to filter some images in
-          * unsupported format from store.
+         * Optional filter function. Can be useful to filter some images in
+         * unsupported format from store.
+         *
+         * For instance, the following filter would return PNG images only:
+         *
+         * {
+         *    filterFn: function(item) {
+         *        return item.data.fileType === 'image/png';
+         *    }
+         * }
+         *
         */
         filterFn: null,
 
