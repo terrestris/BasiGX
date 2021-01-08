@@ -82,6 +82,12 @@ Ext.define('BasiGX.view.view.GraphicPool', {
         backendUrls: null,
 
         /**
+         * Optional filter function. Can be useful to filter some images in
+         * unsupported format from store.
+         */
+        filterFn: null,
+
+        /**
          *
          */
         itemSelector: 'div.thumb-wrap',
@@ -114,7 +120,6 @@ Ext.define('BasiGX.view.view.GraphicPool', {
 
         var store = Ext.create('Ext.data.Store', {
             sorters: 'fileName',
-            //            TODO: add and make a model configurable?
             proxy: {
                 type: 'ajax',
                 url: BasiGX.util.Url.getWebProjectBaseUrl() +
@@ -125,6 +130,12 @@ Ext.define('BasiGX.view.view.GraphicPool', {
                 }
             }
         });
+
+        // apply store filter if passed
+        if (Ext.isFunction(me.getFilterFn())) {
+            store.setFilters(me.getFilterFn());
+        }
+
         store.load();
 
         var srcUrl = BasiGX.util.Url.getWebProjectBaseUrl() +

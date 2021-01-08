@@ -86,6 +86,12 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
         },
 
         /**
+          * Optional filter function. Can be useful to filter some images in
+          * unsupported format from store.
+        */
+        filterFn: null,
+
+        /**
          * flag that indicates that a csrf-token should be sent to backend
          * interfaces on every ajax / form submit.
          */
@@ -132,7 +138,8 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
             backendUrls: me.getBackendUrls(),
             overItemCls: me.getOverItemCls(),
             height: me.getWindowHeight(),
-            width: me.getWindowWidth()
+            width: me.getWindowWidth(),
+            filterFn: me.getFilterFn()
         });
         var viewModel = me.getViewModel();
         var btnText = viewModel.get('chooseImageBtnText');
