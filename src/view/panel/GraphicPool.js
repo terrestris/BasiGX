@@ -59,7 +59,7 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
     },
 
     /**
-     * the layout to use
+     * The layout to use
      */
     layout: 'vbox',
 
@@ -69,6 +69,11 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
     * @private
     */
     pictureView: null,
+
+    /**
+     * Add vertical scrollbar
+     */
+    scrollable: 'y',
 
     /**
      *
