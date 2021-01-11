@@ -76,7 +76,7 @@ Ext.define(&#39;BasiGX.view.panel.GraphicPool&#39;, {
     },
 
 <span id='BasiGX-view-panel-GraphicPool-property-layout'>    /**
-</span>     * the layout to use
+</span>     * The layout to use
      */
     layout: &#39;vbox&#39;,
 
@@ -86,6 +86,11 @@ Ext.define(&#39;BasiGX.view.panel.GraphicPool&#39;, {
     * @private
     */
     pictureView: null,
+
+<span id='BasiGX-view-panel-GraphicPool-property-scrollable'>    /**
+</span>     * Add vertical scrollbar
+     */
+    scrollable: &#39;y&#39;,
 
 <span id='BasiGX-view-panel-GraphicPool-property-config'>    /**
 </span>     *
@@ -101,6 +106,21 @@ Ext.define(&#39;BasiGX.view.panel.GraphicPool&#39;, {
             pictureUpload: null,
             graphicDelete: null
         },
+
+<span id='BasiGX-view-panel-GraphicPool-cfg-filterFn'>        /**
+</span>         * Optional filter function. Can be useful to filter some images in
+         * unsupported format from store.
+         *
+         * For instance, the following filter would return PNG images only:
+         *
+         * {
+         *    filterFn: function(item) {
+         *        return item.data.fileType === &#39;image/png&#39;;
+         *    }
+         * }
+         *
+        */
+        filterFn: null,
 
 <span id='BasiGX-view-panel-GraphicPool-cfg-useCsrfToken'>        /**
 </span>         * flag that indicates that a csrf-token should be sent to backend
@@ -149,7 +169,8 @@ Ext.define(&#39;BasiGX.view.panel.GraphicPool&#39;, {
             backendUrls: me.getBackendUrls(),
             overItemCls: me.getOverItemCls(),
             height: me.getWindowHeight(),
-            width: me.getWindowWidth()
+            width: me.getWindowWidth(),
+            filterFn: me.getFilterFn()
         });
         var viewModel = me.getViewModel();
         var btnText = viewModel.get(&#39;chooseImageBtnText&#39;);
