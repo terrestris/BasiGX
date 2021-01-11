@@ -59,7 +59,7 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
     },
 
     /**
-     * the layout to use
+     * The layout to use
      */
     layout: 'vbox',
 
@@ -69,6 +69,11 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
     * @private
     */
     pictureView: null,
+
+    /**
+     * Add vertical scrollbar
+     */
+    scrollable: 'y',
 
     /**
      *
@@ -84,6 +89,21 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
             pictureUpload: null,
             graphicDelete: null
         },
+
+        /**
+         * Optional filter function. Can be useful to filter some images in
+         * unsupported format from store.
+         *
+         * For instance, the following filter would return PNG images only:
+         *
+         * {
+         *    filterFn: function(item) {
+         *        return item.data.fileType === 'image/png';
+         *    }
+         * }
+         *
+        */
+        filterFn: null,
 
         /**
          * flag that indicates that a csrf-token should be sent to backend
@@ -132,7 +152,8 @@ Ext.define('BasiGX.view.panel.GraphicPool', {
             backendUrls: me.getBackendUrls(),
             overItemCls: me.getOverItemCls(),
             height: me.getWindowHeight(),
-            width: me.getWindowWidth()
+            width: me.getWindowWidth(),
+            filterFn: me.getFilterFn()
         });
         var viewModel = me.getViewModel();
         var btnText = viewModel.get('chooseImageBtnText');
