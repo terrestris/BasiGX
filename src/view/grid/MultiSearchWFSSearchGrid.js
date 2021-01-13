@@ -806,9 +806,9 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         }
         // set layer visibility of clicked feature to true
         if (layerName) {
-            var layer = BasiGX.util.Layer.getLayerByName();
-            if (!layer.getVisible()) {
-                layer.setVisible(true);
+            var olLayer = BasiGX.util.Layer.getLayerByName();
+            if (!olLayer.getVisible()) {
+                olLayer.setVisible(true);
             }
         }
     }
