@@ -775,6 +775,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         var extent;
         var x;
         var y;
+        var layerName = record.getData().featuretype;
 
         layer.getSource().clear();
 
@@ -801,6 +802,13 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                 });
             } else {
                 olView.setCenter([x, y]);
+            }
+        }
+        // set layer visibility of clicked feature to true
+        if (layerName) {
+            var olLayer = BasiGX.util.Layer.getLayerByName(layerName);
+            if (!olLayer.getVisible()) {
+                olLayer.setVisible(true);
             }
         }
     }
