@@ -79,12 +79,12 @@ Ext.define(&#39;BasiGX.view.container.MultiSearchSettings&#39;, {
 </span>
 <span id='BasiGX-view-container-MultiSearchSettings-property-padding'>    padding: 20,
 </span>
-<span id='BasiGX-view-container-MultiSearchSettings-property-width'>    width: 500,
-</span>
     config: {
 <span id='BasiGX-view-container-MultiSearchSettings-cfg-combo'>        combo: null
 </span>    },
 
+<span id='BasiGX-view-container-MultiSearchSettings-property-layout'>    layout: &#39;fit&#39;,
+</span>
 <span id='BasiGX-view-container-MultiSearchSettings-property-items'>    items: [{
 </span>        xtype: &#39;form&#39;,
         width: &#39;100%&#39;,
@@ -134,21 +134,28 @@ Ext.define(&#39;BasiGX.view.container.MultiSearchSettings&#39;, {
         }, {
             xtype: &#39;fieldcontainer&#39;,
             name: &#39;objectlayers&#39;,
+            maxHeight: 200,
+            scrollable: &#39;y&#39;,
             bind: {
                 fieldLabel: &#39;{objectSearchLayersLabel}&#39;
             },
             defaultType: &#39;checkboxfield&#39;
+        }],
+        dockedItems: [{
+            xtype: &#39;toolbar&#39;,
+            dock: &#39;bottom&#39;,
+            items: [{
+                xtype: &#39;button&#39;,
+                bind: {
+                    text: &#39;{saveBtnText}&#39;
+                },
+                formBind: true,
+                handler: function(btn) {
+                    var multisearchSettingsContainer = this.up(&#39;form&#39;).up();
+                    multisearchSettingsContainer.saveSettings(btn);
+                }
+            }]
         }]
-    }, {
-        xtype: &#39;button&#39;,
-        bind: {
-            text: &#39;{saveBtnText}&#39;
-        },
-        formBind: true,
-        handler: function(btn) {
-            var multisearchSettingsContainer = this.up();
-            multisearchSettingsContainer.saveSettings(btn);
-        }
     }],
 
 <span id='BasiGX-view-container-MultiSearchSettings-method-initComponent'>    /**
@@ -197,7 +204,8 @@ Ext.define(&#39;BasiGX.view.container.MultiSearchSettings&#39;, {
      * @param {Ext.button.Button} btn The &quot;save&quot;-button.
      */
     saveSettings: function(btn) {
-        var settingsContainer = btn.up();
+
+        var settingsContainer = btn.up(&#39;form&#39;).up();
 
         var win = settingsContainer.up();
 

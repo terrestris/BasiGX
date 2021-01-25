@@ -62,11 +62,11 @@ Ext.define('BasiGX.view.container.MultiSearchSettings', {
 
     padding: 20,
 
-    width: 500,
-
     config: {
         combo: null
     },
+
+    layout: 'fit',
 
     items: [{
         xtype: 'form',
@@ -117,21 +117,28 @@ Ext.define('BasiGX.view.container.MultiSearchSettings', {
         }, {
             xtype: 'fieldcontainer',
             name: 'objectlayers',
+            maxHeight: 200,
+            scrollable: 'y',
             bind: {
                 fieldLabel: '{objectSearchLayersLabel}'
             },
             defaultType: 'checkboxfield'
+        }],
+        dockedItems: [{
+            xtype: 'toolbar',
+            dock: 'bottom',
+            items: [{
+                xtype: 'button',
+                bind: {
+                    text: '{saveBtnText}'
+                },
+                formBind: true,
+                handler: function(btn) {
+                    var multisearchSettingsContainer = this.up('form').up();
+                    multisearchSettingsContainer.saveSettings(btn);
+                }
+            }]
         }]
-    }, {
-        xtype: 'button',
-        bind: {
-            text: '{saveBtnText}'
-        },
-        formBind: true,
-        handler: function(btn) {
-            var multisearchSettingsContainer = this.up();
-            multisearchSettingsContainer.saveSettings(btn);
-        }
     }],
 
     /**
@@ -180,7 +187,8 @@ Ext.define('BasiGX.view.container.MultiSearchSettings', {
      * @param {Ext.button.Button} btn The "save"-button.
      */
     saveSettings: function(btn) {
-        var settingsContainer = btn.up();
+
+        var settingsContainer = btn.up('form').up();
 
         var win = settingsContainer.up();
 
