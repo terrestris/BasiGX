@@ -57,24 +57,24 @@
         "url": "https://github.com/terrestris/BasiGX.git"
     },
     "devDependencies": {
-        "copyfiles": "2.3.0",
+        "copyfiles": "2.4.1",
         "coveralls": "3.1.0",
-        "eslint": "7.9.0",
+        "eslint": "7.18.0",
         "expect.js": "0.3.1",
-        "karma": "5.2.2",
+        "karma": "6.0.2",
         "karma-chrome-launcher": "3.1.0",
         "karma-coverage": "2.0.3",
         "karma-expect": "1.1.3",
         "karma-mocha": "2.0.1",
         "karma-mocha-reporter": "2.2.5",
         "karma-sinon": "1.0.5",
-        "mocha": "8.1.3",
-        "np": "6.5.0",
+        "mocha": "8.2.1",
+        "np": "7.2.0",
         "opn-cli": "5.0.0",
-        "puppeteer": "5.3.1",
+        "puppeteer": "5.5.0",
         "rimraf": "3.0.2",
         "serve": "11.3.2",
-        "sinon": "9.0.3",
-        "uglify-js": "3.10.4"
+        "sinon": "9.2.4",
+        "uglify-js": "3.12.5"
     }
 }
