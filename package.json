@@ -45,7 +45,7 @@
         "lint": "eslint -c .eslintrc src/ && eslint -c test/.eslintrc test/",
         "lint:fix": "eslint -c .eslintrc --fix src/ && eslint -c test/.eslintrc --fix test/",
         "clean-coverage": "rimraf coverage",
-        "ci-coverage": "npm run clean-coverage && karma start --single-run --reporters=dots,coverage && cat ./coverage/*/lcov.info | coveralls",
+        "ci-coverage": "npm run clean-coverage && karma start --single-run --reporters=dots,coverage && cat ./coverage/*/lcov.info",
         "serve-examples": "serve -l 3000 & opn 'http://localhost:3000/examples'",
         "build": "npm run test && npm run clean:dist && copyfiles -V -a 'src/**' 'sass/**' 'resources/**' Readme.md LICENSE package.json dist/",
         "clean:dist": "rimraf ./dist/*",
