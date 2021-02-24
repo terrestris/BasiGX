@@ -569,7 +569,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                                         '</ogc:PropertyName>' +
                                     '</ogc:Function>' +
                                     '<ogc:Literal>' +
-                                        '*' + me.searchTerm + '*' +
+                                        '*' + me.searchTerm.toLowerCase() +
+                                        '*' +
                                     '</ogc:Literal>' +
                                 '</ogc:PropertyIsLike>';
                         } else {
@@ -582,7 +583,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                                         '</ogc:PropertyName>' +
                                     '</ogc:Function>' +
                                     '<ogc:Literal>' +
-                                        '*' + me.searchTerm + '*' +
+                                        '*' + me.searchTerm.toLowerCase() +
+                                        '*' +
                                     '</ogc:Literal>' +
                                 '</ogc:PropertyIsLike>';
                         }
@@ -601,8 +603,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                     } else {
                         filter = comparisonFilter;
                     }
-                    xml +=
-                        '<wfs:Query typeName="' + ns + ft.typeName + '">' +
+                    xml += '<wfs:Query typeName="' + ns + ft.typeName +
+                        '" srsName="' + projection + '">' +
                             '<ogc:Filter>' + filter + '</ogc:Filter>' +
                         '</wfs:Query>';
                 }
