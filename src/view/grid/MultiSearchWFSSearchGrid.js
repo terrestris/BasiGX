@@ -686,7 +686,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                 me.show();
                 combo.noWfsSearchResults = false;
 
-                var searchTerm = me.searchTerm;
+                var searchTerm = me.searchTerm.toLowerCase();
                 Ext.each(features, function(feature) {
                     var useCustomTemplate = false;
                     var ftName = feature.id && feature.id.split('.')[0];
