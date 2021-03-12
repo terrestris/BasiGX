@@ -30,6 +30,12 @@ jobs:
     - name: Install dependencies ⏬
       run: npm ci
 
+    - name: Install ruby & jsduck
+      uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+      run: gem install jsduck
+
     - name: Cleanup and prepare pages
       run: |
         rm -rf master
