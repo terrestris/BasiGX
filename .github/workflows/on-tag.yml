@@ -31,7 +31,6 @@ jobs:
       uses: actions/cache@v2
       with:
         path: |
-          resources/external
           ext-6.2.0
           ext-6.2.0-gpl.zip
         key: ${{ runner.OS }}-node-${{ hashFiles('resources/external/ext-all.js') }}
