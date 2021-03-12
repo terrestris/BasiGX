@@ -49,10 +49,12 @@ jobs:
         wget -q https://github.com/geoext/geoext3/archive/master.zip -O geoext3-master.zip
         unzip -qo geoext3-master.zip
 
-    - name: Install ruby & jsduck
+    - name: Install ruby
       uses: actions/setup-ruby@v1
       with:
         ruby-version: '2.6'
+
+    - name: Install jsduck
       run: gem install jsduck
 
     - name: Cleanup and prepare pages
