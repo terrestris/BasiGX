@@ -39,8 +39,8 @@
     },
     "output": "${package.dir}/build",
     "scripts": {
-        "pretest": "npm run lint",
-        "test": "karma start --single-run --reporters=mocha",
+        "test": "npm run lint && npm run test:spec",
+        "test:spec": "karma start --single-run --reporters=mocha",
         "test:watch": "karma start karma-watch.conf.js --reporters=mocha",
         "lint": "eslint -c .eslintrc src/ && eslint -c test/.eslintrc test/",
         "lint:fix": "eslint -c .eslintrc --fix src/ && eslint -c test/.eslintrc --fix test/",

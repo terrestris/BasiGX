@@ -267,6 +267,8 @@ Ext.define('BasiGX.view.button.Measure', {
         me.measureVectorLayer = measureLayer;
 
         me.drawAction = me.drawInteractionByMeasureType();
+        me.onDrawInteractionActiveChange
+          = me.onDrawInteractionActiveChange.bind(me);
         me.drawAction.on('change:active', me.onDrawInteractionActiveChange);
 
         me.drawAction.setActive(false);
