@@ -427,6 +427,7 @@ Ext.define('BasiGX.view.form.AddWms', {
             return;
         }
         me.setLoading(true);
+        me.uncheckAllLayers();
         me.removeAddLayersComponents();
         var values = form.getValues();
         var url = '';
