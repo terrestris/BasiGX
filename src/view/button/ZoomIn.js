@@ -132,17 +132,26 @@ Ext.define('BasiGX.view.button.ZoomIn', {
                 }
             }
             if (pressed) {
-                me.olMap.on('click', me.zoomIn, me);
+                me.olMap.on('click', me.zoomIn);
                 if (me.enableZoomInWithBox) {
                     me.dragZoomInInteraction.setActive(true);
                 }
             } else {
-                me.olMap.un('click', me.zoomIn, me);
+                me.olMap.un('click', me.zoomIn);
                 if (me.enableZoomInWithBox) {
                     me.dragZoomInInteraction.setActive(false);
                 }
             }
         }
+    },
+
+    /**
+     *
+     */
+    constructor: function() {
+        var me = this;
+        me.callParent(arguments);
+        me.zoomIn = me.zoomIn.bind(this);
     },
 
     /**

@@ -64,7 +64,7 @@ Ext.define('BasiGX.plugin.WfsCluster', {
             // on every map move
             map.on('moveend', function() {
                 me.loadClusterFeatures(clusterLayers);
-            }, me);
+            });
         }
     },
 

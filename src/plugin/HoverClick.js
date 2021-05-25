@@ -92,9 +92,9 @@ Ext.define('BasiGX.plugin.HoverClick', {
             });
             if (me.selectEventOrigin === 'collection') {
                 var featureCollection = interaction.getFeatures();
-                featureCollection.on('add', me.onFeatureClicked, me);
+                featureCollection.on('add', me.onFeatureClicked.bind(me));
             } else {
-                interaction.on('select', me.onFeatureClicked, me);
+                interaction.on('select', me.onFeatureClicked.bind(me));
             }
             map.addInteraction(interaction);
             me.setHoverVectorLayerInteraction(interaction);

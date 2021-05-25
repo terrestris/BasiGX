@@ -200,6 +200,16 @@ Ext.define('BasiGX.view.form.Print', {
         resize: 'renderAllClientInfos'
     },
 
+
+    /**
+     *
+     */
+    constructor: function() {
+        var me = this;
+        me.callParent(arguments);
+        me.renderAllClientInfos = me.renderAllClientInfos.bind(this);
+    },
+
     /**
      * Initializes the print form.
      */
@@ -904,7 +914,7 @@ Ext.define('BasiGX.view.form.Print', {
             case 'MapAttributeValues':
                 attributeFields = me.getMapAttributeFields(attributeRec);
                 if (me.getPrintExtentAlwaysCentered()) {
-                    map.on('moveend', me.renderAllClientInfos, me);
+                    map.on('moveend', me.renderAllClientInfos);
                 }
                 break;
             case 'NorthArrowAttributeValues':
@@ -1006,7 +1016,7 @@ Ext.define('BasiGX.view.form.Print', {
         if (this.extentLayer) {
             me.extentLayer.getSource().clear();
         }
-        map.un('moveend', me.renderAllClientInfos, me);
+        map.un('moveend', me.renderAllClientInfos);
     },
 
     /**

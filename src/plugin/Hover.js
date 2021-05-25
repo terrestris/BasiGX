@@ -181,7 +181,7 @@ Ext.define('BasiGX.plugin.Hover', {
         var mapComponent = me.getCmp();
         var map = mapComponent.getMap();
         // whenever the layergroup changes, we need to cleanup hover artifacts
-        map.on('change:layerGroup', me.cleanupHoverArtifacts, me);
+        map.on('change:layerGroup', me.cleanupHoverArtifacts.bind(me));
     },
 
     /**
@@ -200,9 +200,9 @@ Ext.define('BasiGX.plugin.Hover', {
             });
             if (me.selectEventOrigin === 'collection') {
                 var featureCollection = interaction.getFeatures();
-                featureCollection.on('add', me.onFeatureClicked, me);
+                featureCollection.on('add', me.onFeatureClicked.bind(me));
             } else {
-                interaction.on('select', me.onFeatureClicked, me);
+                interaction.on('select', me.onFeatureClicked.bind(me));
             }
             map.addInteraction(interaction);
             me.setHoverVectorLayerInteraction(interaction);

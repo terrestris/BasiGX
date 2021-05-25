@@ -147,7 +147,7 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
         me.setValue(mapView.getResolution());
 
         // register listeners to update combo and map
-        me.on('select', me.onComboSelect, me);
+        me.on('select', me.onComboSelect.bind(me));
 
         // eventually update the combo when map-resolution changes
         var bufferedUpdateMapResChange = Ext.Function.createBuffered(

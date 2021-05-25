@@ -103,11 +103,11 @@ Ext.define('BasiGX.view.button.DigitizePostit', {
             if (pressed) {
                 me.drawPostitInteraction.setActive(true);
                 me.drawPostitInteraction.on('drawend',
-                    me.setDefaultPostitStyle, me);
+                    me.setDefaultPostitStyle);
             } else {
                 me.drawPostitInteraction.setActive(false);
                 me.drawPostitInteraction.un('drawend',
-                    me.setDefaultPostitStyle, me);
+                    me.setDefaultPostitStyle);
             }
         },
         beforedestroy: function() {
@@ -115,6 +115,15 @@ Ext.define('BasiGX.view.button.DigitizePostit', {
                 this.map.removeInteraction(this.drawPostitInteraction);
             }
         }
+    },
+
+    /**
+     *
+     */
+    constructor: function() {
+        var me = this;
+        me.callParent(arguments);
+        me.setDefaultPostitStyle = me.setDefaultPostitStyle.bind(this);
     },
 
     /**
