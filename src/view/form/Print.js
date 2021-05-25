@@ -31,7 +31,7 @@ Ext.define('BasiGX.view.form.Print', {
 
         'BasiGX.util.Layer',
         'BasiGX.util.Map',
-        'BasiGX.ol3.extension.TransformInteraction',
+        'BasiGX.olExt.TransformInteraction',
 
         'GeoExt.data.MapfishPrintProvider'
     ],

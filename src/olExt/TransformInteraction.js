@@ -17,7 +17,7 @@
  *   * The vectorlayer for the handles has KEY_DISPLAY_IN_LAYERSWITCHER from
  *     BasiGX.util.Layer set to false
  */
-Ext.define('BasiGX.ol3.extension.TransformInteraction', {
+Ext.define('BasiGX.olExt.TransformInteraction', {
     requires: [
         'BasiGX.util.Layer'
     ],

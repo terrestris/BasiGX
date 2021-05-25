@@ -12,10 +12,12 @@ module.exports = function(config) {
         'node_modules/@geoext/openlayers-legacy/dist/ol.js',
         'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/ext-all.js',
         'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/packages/ux/classic/ux.js',
+        // GeoExt source files
         {
             pattern: 'node_modules/@geoext/geoext/src/**/*.js',
             included: true
         },
+        // GeoExt classic toolkit source files
         {
             pattern: 'node_modules/@geoext/geoext/classic/**/*.js',
             included: true
