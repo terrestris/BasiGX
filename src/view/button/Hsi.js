@@ -107,7 +107,7 @@ Ext.define('BasiGX.view.button.Hsi', {
 
     /**
      * Activates or deactivates the `pointerrest`-event depending on the passed
-     * status.
+     * status and prevents click events trigger if control was untoggled.
      *
      * TODO we should get rid of the guessing, or at least make it optional.
      *
@@ -120,5 +120,12 @@ Ext.define('BasiGX.view.button.Hsi', {
 
         mapComponent = BasiGX.util.Map.getMapComponent(me.getMapPanelXType());
         mapComponent.setPointerRest(status);
+
+        var plugins = mapComponent.getPlugins();
+        Ext.each(plugins, function(plugin) {
+            if (plugin instanceof BasiGX.plugin.HoverClick) {
+                plugin.setClickActive(status);
+            }
+        });
     }
 });
