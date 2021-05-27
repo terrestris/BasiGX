@@ -24,7 +24,13 @@ Ext.define('BasiGX.plugin.HoverClick', {
          * listen to any click event, regardless if a layer has a truthy
          * clickable property.
          */
-        clickable: true
+        clickable: true,
+
+        /**
+         * Control state of click event on the map. If the underlying HSI button
+         * gets untoggled, click interaction on the map should be deactivated.
+         */
+        clickActive: true
     },
 
     init: function (cmp) {
@@ -62,7 +68,7 @@ Ext.define('BasiGX.plugin.HoverClick', {
         var me = this;
         me.callParent();
 
-        if (me.getClickable()) {
+        if (me.getClickable() && me.getClickActive()) {
             var mapComponent = me.getCmp();
             var map = mapComponent.getMap();
             map.on('click', me.onClick, me);
@@ -124,7 +130,13 @@ Ext.define('BasiGX.plugin.HoverClick', {
      * @param {MouseEvent.onClick} evt The onClick event
      */
     onClick: function (evt) {
+
         var me = this;
+
+        if (!me.getClickActive()) {
+            return;
+        }
+
         var mapComponent = me.getCmp();
         var map = mapComponent.getMap();
         var mapView = map.getView();
