@@ -187,8 +187,8 @@ Ext.define('BasiGX.view.container.Redlining', {
      */
     constructor: function() {
         var me = this;
-        me.callParent(arguments);
         me.fireRedliningChanged = me.fireRedliningChanged.bind(this);
+        me.callParent(arguments);
     },
 
     /**

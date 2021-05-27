@@ -349,7 +349,7 @@ Ext.define('BasiGX.plugin.Hover', {
                 if (source instanceof ol.source.TileWMS
                         || source instanceof ol.source.ImageWMS) {
                     // me.cleanupHoverArtifacts();
-                    var url = source.getGetFeatureInfoUrl(
+                    var url = source.getFeatureInfoUrl(
                         evt.coordinate,
                         resolution,
                         projCode,
@@ -416,12 +416,16 @@ Ext.define('BasiGX.plugin.Hover', {
                         }
                         me.showHoverFeature(layer, hoverFeatures);
                         me.currentHoverTarget = feat;
-                    }, me, function(vectorCand) {
-                        return vectorCand === layer;
+                    }, {
+                        layerFilter: function(vectorCand) {
+                            return vectorCand === layer;
+                        }
                     });
                 }
             }
-        }, this, me.hoverLayerFilter, this);
+        }, {
+            layerFilter: me.hoverLayerFilter.bind(me)
+        });
 
         me.showHoverToolTip(evt, hoverLayers, hoverFeatures);
     },

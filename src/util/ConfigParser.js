@@ -451,8 +451,7 @@ Ext.define('BasiGX.util.ConfigParser', {
                     units: 'm',
                     resolutions: me.convertStringToNumericArray(
                         'float', config.mapConfig.resolutions)
-                }),
-                logo: false
+                })
             });
             // create the layers
             me.getLayersArray(context);
@@ -510,7 +509,7 @@ Ext.define('BasiGX.util.ConfigParser', {
             var cfg;
 
             var attributions = config.attribution ?
-                [new ol.Attribution({html: config.attribution})] : undefined;
+                config.attribution : undefined;
 
             if (sourceType === 'Vector') {
 

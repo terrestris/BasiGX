@@ -122,8 +122,8 @@ Ext.define('BasiGX.view.button.DigitizePostit', {
      */
     constructor: function() {
         var me = this;
-        me.callParent(arguments);
         me.setDefaultPostitStyle = me.setDefaultPostitStyle.bind(this);
+        me.callParent(arguments);
     },
 
     /**

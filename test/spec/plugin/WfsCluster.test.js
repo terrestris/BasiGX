@@ -53,7 +53,7 @@ describe('BasiGX.plugin.WfsCluster', function() {
         it('sets a defaut cluster style on the layer', function() {
             plugin.setUpClusterLayers(mapComponent);
             expect(layer.getStyle()).to.be.a('function');
-            expect(layer.getStyle()).to.eql(plugin.clusterStyleFuntion);
+            expect(layer.getStyle()).to.eql(plugin.clusterStyleFunction);
         });
         it('registers and calls a visibilityListener on the layer', function() {
 

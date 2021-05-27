@@ -206,8 +206,8 @@ Ext.define('BasiGX.view.form.Print', {
      */
     constructor: function() {
         var me = this;
-        me.callParent(arguments);
         me.renderAllClientInfos = me.renderAllClientInfos.bind(this);
+        me.callParent(arguments);
     },
 
     /**

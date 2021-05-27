@@ -141,8 +141,8 @@ Ext.define('BasiGX.view.button.DigitizeMoveObject', {
      */
     constructor: function() {
         var me = this;
-        me.callParent(arguments);
         me.fireFeatureChanged = me.fireFeatureChanged.bind(this);
+        me.callParent(arguments);
     },
 
     /**

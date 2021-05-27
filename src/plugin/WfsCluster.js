@@ -55,7 +55,7 @@ Ext.define('BasiGX.plugin.WfsCluster', {
                 if (layer.get('olStyle')) {
                     layer.setStyle(layer.get('olStyle'));
                 } else {
-                    layer.setStyle(me.clusterStyleFuntion);
+                    layer.setStyle(me.clusterStyleFunction);
                 }
             }
         });
@@ -68,7 +68,7 @@ Ext.define('BasiGX.plugin.WfsCluster', {
         }
     },
 
-    clusterStyleFuntion: function(feature) {
+    clusterStyleFunction: function(feature) {
         var layerName;
         if (feature.getId()) {
             layerName = feature.getId().split('.')[0];

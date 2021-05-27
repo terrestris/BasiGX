@@ -155,8 +155,8 @@ Ext.define('BasiGX.view.button.ZoomOut', {
      */
     constructor: function() {
         var me = this;
-        me.callParent(arguments);
         me.zoomOut = me.zoomOut.bind(this);
+        me.callParent(arguments);
     },
 
     /**
