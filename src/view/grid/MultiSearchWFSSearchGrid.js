@@ -327,7 +327,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                 if (split.length !== 2) {
                     split = ['', split[1]];
                 }
-                if (!workspaces.hasOwnProperty(split[0])) {
+                if (!(split[0] in workspaces)) {
                     workspaces[split[0]] = [];
                 }
                 workspaces[split[0]].push(fqLayerName);

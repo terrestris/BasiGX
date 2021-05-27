@@ -108,12 +108,12 @@ Ext.define('BasiGX.view.button.DigitizeModifyObject', {
                 me.modifyInteraction.setActive(true);
                 me.modifySelectInteraction.setActive(true);
                 me.modifyInteraction.on('modifyend',
-                  me.fireFeatureChanged);
+                    me.fireFeatureChanged);
             } else {
                 me.modifyInteraction.setActive(false);
                 me.modifySelectInteraction.setActive(false);
                 me.modifyInteraction.un('modifyend',
-                  me.fireFeatureChanged);
+                    me.fireFeatureChanged);
             }
         },
         beforedestroy: function() {
