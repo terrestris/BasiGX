@@ -240,7 +240,9 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         if (!me.searchResultVectorLayer) {
             me.searchResultVectorLayer = new ol.layer.Vector({
                 name: 'Object Search Results',
-                source: new ol.source.Vector(),
+                source: new ol.source.Vector({
+                    features: new ol.Collection()
+                }),
                 style: me.getSearchResultFeatureStyle(),
                 hoverable: false
             });

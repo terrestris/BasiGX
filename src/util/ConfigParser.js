@@ -443,12 +443,11 @@ Ext.define('BasiGX.util.ConfigParser', {
                 controls: [new ol.control.ScaleLine()], // TODO add attribution
                 view: new ol.View({
                     center: this.convertStringToNumericArray(
-                        'int', config.startCenter),
+                        'float', config.startCenter),
                     zoom: config.startZoom || 2,
                     maxResolution: config.maxResolution,
                     minResolution: config.minResolution,
                     projection: config.mapConfig.projection || 'EPSG:3857',
-                    units: 'm',
                     resolutions: me.convertStringToNumericArray(
                         'float', config.mapConfig.resolutions)
                 })
@@ -893,7 +892,7 @@ Ext.define('BasiGX.util.ConfigParser', {
                     if (type === 'int') {
                         result.push(parseInt(item, 10));
                     } else if (type === 'float') {
-                        result.push(parseFloat(item, 10));
+                        result.push(parseFloat(item));
                     }
                 });
                 return result;

@@ -10,7 +10,9 @@ describe('BasiGX.view.grid.FeatureGrid', function() {
             var testObjs = TestUtil.setupTestObjects();
             var cfg = {
                 layer: new ol.layer.Vector({
-                    source: new ol.source.Vector()
+                    source: new ol.source.Vector({
+                        features: new ol.Collection()
+                    })
                 }),
                 map: testObjs.mapComponent
             };
