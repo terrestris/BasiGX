@@ -428,7 +428,6 @@ Ext.define('BasiGX.util.ConfigParser', {
                 Ext.log.warn('Invalid context given to configParser!');
                 return null;
             }
-
             config = context.data.merge;
             me.appContext = config;
 
@@ -438,7 +437,6 @@ Ext.define('BasiGX.util.ConfigParser', {
                     split('|')[0];
                 config.startCenter = centerString;
             }
-
             me.map = new ol.Map({
                 controls: [new ol.control.ScaleLine()], // TODO add attribution
                 view: new ol.View({

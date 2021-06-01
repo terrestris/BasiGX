@@ -94,15 +94,20 @@ describe('BasiGX.util.Caching', function() {
             it('returns a valid cfg, for alternative extents', function() {
                 var view = testObjs.map.getView();
                 var tileSize = [128, 128]; // reduce so that tiles fit in extent
+                // This extent needs to be cloned or at least the map extent cannot be directly
+                // modified. Otherwise, we will be modifying the map extent directly,
+                // afecting other tests. This is how OL6 works
                 var extent = view.getProjection().getExtent();
-                extent[2] = 0;
-                extent[3] = 0; // only a quarter of the world
-                var got = clazz.getGeoWebCacheConfig(view, tileSize, extent);
+                // only a quarter of the world for this test
+                var quarterOfTheWorldExtent = [extent[0], extent[1], 0, 0] ;
+                var got = clazz.getGeoWebCacheConfig(view, tileSize, quarterOfTheWorldExtent);
                 expect(got.projection).to.be(view.getProjection().getCode());
                 expect(got.resolutions).to.eql(view.getResolutions());
                 expect(got.maxResolution).to.eql(view.getMaxResolution());
-                expect(got.extent).to.eql(extent);
-                expect(got.tileOrigin).to.eql([extent[0], extent[3]]);
+                expect(got.extent).to.eql(quarterOfTheWorldExtent);
+                expect(got.tileOrigin).to.eql(
+                    [quarterOfTheWorldExtent[0], quarterOfTheWorldExtent[3]]
+                );
             });
             it('works for real world values, EPSG:25832', function() {
                 var view = new ol.View({

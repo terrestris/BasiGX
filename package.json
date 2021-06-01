@@ -58,12 +58,10 @@
         "url": "https://github.com/terrestris/BasiGX.git"
     },
     "peerDependencies": {
-        "@geoext/geoext": "^3.3.2",
-        "@geoext/openlayers-legacy": "^6.5.2"
+        "@geoext/geoext": "4.0.0",
+        "@geoext/openlayers-legacy": "6.5.2"
     },
     "devDependencies": {
-        "@geoext/geoext": "4.0.0",
-        "@geoext/openlayers-legacy": "6.5.2",
         "copyfiles": "2.4.1",
         "coveralls": "3.1.0",
         "eslint": "7.18.0",
