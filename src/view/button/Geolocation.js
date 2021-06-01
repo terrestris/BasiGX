@@ -1,4 +1,4 @@
-/* Copyright (c) 2015-present terrestris GmbH & Co. KG
+/* Copyright (c) 2021-present terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,9 +35,9 @@ Ext.define('BasiGX.view.button.Geolocation', {
         data: {
             text: 'GPS Position anzeigen',
             tooltip: 'GPS Position anzeigen',
-            documentation: '<h2>GPS Position anzeigen</h2>• Ein Klick auf den Button ' +
-                'aktiviert die Geo Lokalisierung.<br>• Auf der Karte wird die ' +
-                'Position angezeigt.'
+            documentation: '<h2>GPS Position anzeigen</h2>• Ein Klick auf ' +
+                'den Button aktiviert die Geo Lokalisierung.<br>• Auf der ' +
+                'Karte wird die Position angezeigt.'
         }
     },
 
@@ -162,12 +162,14 @@ Ext.define('BasiGX.view.button.Geolocation', {
         if (coords) {
             if (!me.positionFeature) {
                 me.positionFeature = new ol.Feature();
-                me.geolocationVectorLayer.getSource().addFeature(me.positionFeature);
+                me.geolocationVectorLayer.getSource()
+                    .addFeature(me.positionFeature);
             }
-            me.positionFeature.setGeometry(new ol.geom.Point(coords))
+            me.positionFeature.setGeometry(new ol.geom.Point(coords));
         } else {
             if (me.positionFeature) {
-                me.geolocationVectorLayer.getSource().removeFeature(me.positionFeature);
+                me.geolocationVectorLayer.getSource()
+                    .removeFeature(me.positionFeature);
                 me.positionFeature = null;
             }
         }
@@ -178,12 +180,14 @@ Ext.define('BasiGX.view.button.Geolocation', {
         if (geom) {
             if (!me.accuracyFeature) {
                 me.accuracyFeature = new ol.Feature();
-                me.geolocationVectorLayer.getSource().addFeature(me.accuracyFeature);
+                me.geolocationVectorLayer.getSource()
+                    .addFeature(me.accuracyFeature);
             }
-            me.accuracyFeature.setGeometry(geom)
+            me.accuracyFeature.setGeometry(geom);
         } else {
             if (me.accuracyFeature) {
-                me.geolocationVectorLayer.getSource().removeFeature(me.accuracyFeature);
+                me.geolocationVectorLayer.getSource()
+                    .removeFeature(me.accuracyFeature);
                 me.accuracyFeature = null;
             }
         }
