@@ -74,6 +74,9 @@ Ext.define('BasiGX.view.button.Geolocation', {
                 component: 'basigx-button-geolocation',
                 moveDuration: 2000
             }
+        },
+        {
+            clickOnButton: 'basigx-button-geolocation'
         }
     ],
 
