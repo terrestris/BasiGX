@@ -191,9 +191,9 @@ Ext.define('BasiGX.view.button.Geolocation', {
 
     /**
      * Called when the button is toggled, this method ensures that everything
-     * is cleaned up when unpressed, and that measuring can start when pressed.
+     * is cleaned up when unpressed.
      *
-     * @param {Ext.Button} btn The measure button itself.
+     * @param {Ext.Button} btn The button itself.
      * @param {Boolean} pressed Whether the button is now pressed or not.
      */
     onBtnToggle: function (btn, pressed) {
@@ -206,11 +206,9 @@ Ext.define('BasiGX.view.button.Geolocation', {
     },
 
     /**
-     * Creates a correctly setup vector layer on which the draw interaction will
-     * work.
+     * Creates a vector layer to show the geolocation on.
      *
-     * @return {ol.layer.Vector} The layer on which the draw interaction will
-     *     work.
+     * @return {ol.layer.Vector} The layer.
      */
     createGeolocationLayer: function () {
         var me = this;
