@@ -57,6 +57,7 @@
         "url": "https://github.com/terrestris/BasiGX.git"
     },
     "devDependencies": {
+        "@geoext/geoext": "^3.4.0",
         "copyfiles": "2.4.1",
         "coveralls": "3.1.0",
         "eslint": "7.18.0",
