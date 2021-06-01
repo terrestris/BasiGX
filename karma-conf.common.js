@@ -12,7 +12,14 @@ module.exports = function(config) {
         'https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.6.5/ol.js',
         'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/ext-all.js',
         'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/packages/ux/classic/ux.js',
-        'https://geoext.github.io/geoext3/master/GeoExt.js',
+        {
+            pattern: 'node_modules/@geoext/geoext/src/**/*.js',
+            included: true
+        },
+        {
+            pattern: 'node_modules/@geoext/geoext/classic/**/*.js',
+            included: true
+        },
         'https://cdnjs.cloudflare.com/ajax/libs/opentype.js/0.6.9/opentype.min.js',
         'https://cdn.jsdelivr.net/gh/highsource/jsonix@2.4.1/dist/Jsonix-min.js',
         'https://cdn.jsdelivr.net/gh/bjornharrtell/jsts@gh-pages/1.4.0/jsts.min.js',
