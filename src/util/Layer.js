@@ -44,6 +44,12 @@ Ext.define('BasiGX.util.Layer', {
         NAME_MEASURE_LAYER: 'basigx-measure-layer',
 
         /**
+         * The name of a layer used for the geolocation. Can be used to
+         * dynamically determine that particular layer.
+         */
+        NAME_MEASURE_LAYER: 'basigx-geolocation-layer',
+
+        /**
          * Get an ol-layer by the given key-value constellation.
          *
          * @param {String} key - the layer's property name
