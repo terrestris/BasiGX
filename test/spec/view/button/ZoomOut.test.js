@@ -10,7 +10,7 @@ describe('BasiGX.view.button.ZoomOut', function() {
         testObjs = TestUtil.setupTestObjects({
             mapOpts: {
                 view: new ol.View({
-                    resolutions: [50, 100, 200, 400, 800],
+                    resolutions: [800, 400, 200, 100, 50],
                     resolution: 100
                 })
             }

@@ -111,7 +111,7 @@ Ext.define('BasiGX.view.window.PreviewWindow', {
         var mapView = this.map.getView();
         var resolution = mapView.getResolution();
         var projCode = mapView.getProjection().getCode();
-        var url = this.layer.getSource().getGetFeatureInfoUrl(
+        var url = this.layer.getSource().getFeatureInfoUrl(
             event.coordinate,
             resolution,
             projCode,

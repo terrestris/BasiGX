@@ -92,9 +92,9 @@ Ext.define('BasiGX.plugin.HoverClick', {
             });
             if (me.selectEventOrigin === 'collection') {
                 var featureCollection = interaction.getFeatures();
-                featureCollection.on('add', me.onFeatureClicked, me);
+                featureCollection.on('add', me.onFeatureClicked.bind(me));
             } else {
-                interaction.on('select', me.onFeatureClicked, me);
+                interaction.on('select', me.onFeatureClicked.bind(me));
             }
             map.addInteraction(interaction);
             me.setHoverVectorLayerInteraction(interaction);
@@ -162,7 +162,7 @@ Ext.define('BasiGX.plugin.HoverClick', {
             if (source instanceof ol.source.TileWMS
                     || source instanceof ol.source.ImageWMS) {
 
-                var url = source.getGetFeatureInfoUrl(
+                var url = source.getFeatureInfoUrl(
                     evt.coordinate,
                     resolution,
                     projCode,
@@ -229,11 +229,15 @@ Ext.define('BasiGX.plugin.HoverClick', {
                     me.showHoverFeature(layer, hoverFeatures);
                     me.currentHoverTarget = feat;
                     mapComponent.fireEvent('hoverfeaturesclick', hoverFeatures);
-                }, me, function(vectorCand) {
-                    return vectorCand === layer;
+                }, {
+                    layerFilter: function(vectorCand) {
+                        return vectorCand === layer;
+                    }
                 });
             }
-        }, this, me.clickLayerFilter, this);
+        }, {
+            layerFilter: me.clickLayerFilter.bind(me)
+        });
     },
 
     /**

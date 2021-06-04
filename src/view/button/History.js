@@ -71,7 +71,7 @@ Ext.define('BasiGX.view.button.History', {
 
         me.callParent();
 
-        me.on('click', me.onBtnClick, me);
+        me.on('click', me.onBtnClick);
     },
 
     /**

@@ -96,7 +96,7 @@ Ext.define('BasiGX.util.Url', {
          * @return {Boolean} true, if string is a url, false otherwise.
          */
         isUrl: function (str) {
-            return str.startsWith("http://") || str.startsWith("https://");
+            return str.startsWith('http://') || str.startsWith('https://');
         }
 
     }

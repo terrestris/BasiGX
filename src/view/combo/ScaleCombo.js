@@ -147,7 +147,7 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
         me.setValue(mapView.getResolution());
 
         // register listeners to update combo and map
-        me.on('select', me.onComboSelect, me);
+        me.on('select', me.onComboSelect.bind(me));
 
         // eventually update the combo when map-resolution changes
         var bufferedUpdateMapResChange = Ext.Function.createBuffered(
@@ -249,10 +249,9 @@ Ext.define('BasiGX.view.combo.ScaleCombo', {
      */
     getCurrentScale: function(resolution) {
         var me = this;
-        var units = me.map.getView().getProjection().getUnits();
+        var projection = me.map.getView().getProjection();
         var dpi = 25.4 / 0.28;
-        var mpu = ol.proj.METERS_PER_UNIT[units];
-        var scale = resolution * mpu * 39.37 * dpi;
-        return scale;
+        var mpu = projection.getMetersPerUnit();
+        return resolution * mpu * 39.37 * dpi;
     }
 });

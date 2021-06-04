@@ -137,17 +137,26 @@ Ext.define('BasiGX.view.button.ZoomOut', {
                 }
             }
             if (pressed) {
-                me.olMap.on('click', me.zoomOut, me);
+                me.olMap.on('click', me.zoomOut);
                 if (me.enableZoomOutWithBox) {
                     me.dragZoomOutInteraction.setActive(true);
                 }
             } else {
-                me.olMap.un('click', me.zoomOut, me);
+                me.olMap.un('click', me.zoomOut);
                 if (me.enableZoomOutWithBox) {
                     me.dragZoomOutInteraction.setActive(false);
                 }
             }
         }
+    },
+
+    /**
+     *
+     */
+    constructor: function() {
+        var me = this;
+        me.zoomOut = me.zoomOut.bind(this);
+        me.callParent(arguments);
     },
 
     /**

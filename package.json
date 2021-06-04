@@ -39,8 +39,8 @@
     },
     "output": "${package.dir}/build",
     "scripts": {
-        "pretest": "npm run lint",
-        "test": "karma start --single-run --reporters=mocha",
+        "test": "npm run lint && npm run test:spec",
+        "test:spec": "karma start --single-run --reporters=mocha",
         "test:watch": "karma start karma-watch.conf.js --reporters=mocha",
         "lint": "eslint -c .eslintrc src/ && eslint -c test/.eslintrc test/",
         "lint:fix": "eslint -c .eslintrc --fix src/ && eslint -c test/.eslintrc --fix test/",
@@ -57,14 +57,19 @@
         "type": "git",
         "url": "https://github.com/terrestris/BasiGX.git"
     },
+    "peerDependencies": {
+        "@geoext/geoext": "4.0.0",
+        "@geoext/openlayers-legacy": "6.5.2"
+    },
     "devDependencies": {
-        "@geoext/geoext": "^3.4.0",
+        "@geoext/geoext": "4.0.0",
+        "@geoext/openlayers-legacy": "6.5.2",
         "copyfiles": "2.4.1",
         "coveralls": "3.1.0",
         "eslint": "7.18.0",
         "expect.js": "0.3.1",
-        "karma": "6.0.2",
-        "karma-chrome-launcher": "3.1.0",
+        "karma": "^6.3.2",
+        "karma-chrome-launcher": "^3.1.0",
         "karma-coverage": "2.0.3",
         "karma-expect": "1.1.3",
         "karma-mocha": "2.0.1",
