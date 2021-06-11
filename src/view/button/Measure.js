@@ -761,8 +761,8 @@ Ext.define('BasiGX.view.button.Measure', {
             var sourceProj = me.map.getView().getProjection();
             var geom = (polygon.clone().transform(
                 sourceProj, 'EPSG:4326'));
-            var coordinates = geom.getLinearRing(0).getCoordinates();
-            area = Math.abs(ol.sphere.getArea(coordinates));
+            //var coordinates = geom.getLinearRing(0).getCoordinates();
+            area = Math.abs(ol.sphere.getArea(polygon, {projection: sourceProj}));
         } else {
             area = polygon.getArea();
         }

@@ -18,7 +18,8 @@
  */
 Ext.define('BasiGX.util.Animate', {
     requires: [
-        'BasiGX.util.Map'
+        'BasiGX.util.Map',
+        'BasiGX.util.Layer'
     ],
     statics: {
         shake: function(component, duration, amplitude) {
@@ -52,15 +53,13 @@ Ext.define('BasiGX.util.Animate', {
          *
          * @param {Object} feature The ol.feature to flash
          * @param {Integer} duration The duration to animate in milliseconds
-         * @return {Object} listenerKey The maps postcompose listener
+         * @return {Object} listenerKey The maps postrender listener
          */
         flashFeature: function(feature, duration) {
-            var map = BasiGX.util.Map.getMapComponent().getMap();
             var start = new Date().getTime();
             var listenerKey;
-
             function animate(event) {
-                var vectorContext = event.vectorContext;
+                var vectorContext = ol.render.getVectorContext(event);
                 var frameState = event.frameState;
                 var flashGeom = feature.getGeometry().clone();
                 var elapsed = frameState.time - start;
@@ -135,14 +134,13 @@ Ext.define('BasiGX.util.Animate', {
                 }
 
                 if (elapsed > duration) {
-                    ol.Observable.unByKey(listenerKey);
+                    BasiGX.util.Animate.endAnimation(feature, listenerKey);
                     return;
                 }
-                // tell ol to continue postcompose animation
+                // tell ol to continue postrender animation
                 frameState.animate = true;
             }
-            listenerKey = map.on('postcompose', animate);
-            map.render();
+            listenerKey = BasiGX.util.Animate.doAnimation(feature, animate);
             return listenerKey;
         },
 
@@ -152,7 +150,7 @@ Ext.define('BasiGX.util.Animate', {
          * @param {Object} feature The ol.feature to flash
          * @param {Integer} duration The duration to animate in milliseconds
          * @param {Object} olEvt The ol.event where the mouse has been clicked
-         * @return {Object} listenerKey The maps postcompose listener
+         * @return {Object} listenerKey The maps postrender listener
          */
         materialFill: function(feature, duration, olEvt) {
             if (feature.get('__animating')) {
@@ -172,7 +170,7 @@ Ext.define('BasiGX.util.Animate', {
             feature.set('__animating', true);
 
             function animate(event) {
-                var vectorContext = event.vectorContext;
+                var vectorContext = ol.render.getVectorContext(event);
                 var context = event.context;
                 var frameState = event.frameState;
                 var elapsed = frameState.time - start;
@@ -247,15 +245,14 @@ Ext.define('BasiGX.util.Animate', {
                 }
 
                 if (elapsed > duration) {
-                    ol.Observable.unByKey(listenerKey);
+                    BasiGX.util.Animate.endAnimation(feature, listenerKey);
                     feature.set('__animating', undefined);
                     return;
                 }
-                // tell OL to continue postcompose animation
+                // tell OL to continue postrender animation
                 frameState.animate = true;
             }
-            listenerKey = map.on('postcompose', animate);
-            map.render();
+            listenerKey = BasiGX.util.Animate.doAnimation(feature, animate);
             return listenerKey;
         },
 
@@ -266,7 +263,7 @@ Ext.define('BasiGX.util.Animate', {
          * @param {Object} feature The ol.feature to flash
          * @param {Integer} duration The duration to animate in milliseconds
          * @param {Boolean} followSegments If we shall follow line segments
-         * @return {Object} listenerKey The maps postcompose listener
+         * @return {Object} listenerKey The maps postrender listener
          */
         followVertices: function(feature, duration, followSegments) {
             if (feature.get('__animating')) {
@@ -309,7 +306,7 @@ Ext.define('BasiGX.util.Animate', {
             feature.set('__animating', true);
 
             function animate(event) {
-                var vectorContext = event.vectorContext;
+                var vectorContext = ol.render.getVectorContext(event);
                 var context = event.context;
                 var frameState = event.frameState;
                 var elapsed = frameState.time - start;
@@ -403,15 +400,14 @@ Ext.define('BasiGX.util.Animate', {
 
                 if (elapsed > duration) {
                     map.render();
-                    ol.Observable.unByKey(listenerKey);
+                    BasiGX.util.Animate.endAnimation(feature, listenerKey);
                     feature.set('__animating', undefined);
                     return;
                 }
-                // tell OL to continue postcompose animation
+                // tell OL to continue postrender animation
                 frameState.animate = true;
             }
-            listenerKey = map.on('postcompose', animate);
-            map.render();
+            listenerKey = BasiGX.util.Animate.doAnimation(feature, animate);
             return listenerKey;
         },
 
@@ -429,7 +425,7 @@ Ext.define('BasiGX.util.Animate', {
         * @param {ol.style.Style} style The style to use when moving the
         *     `feature`.
         * @param {Function} doneFn The function to call when done.
-        * @return {String} A listener key from a postcompose event.
+        * @return {String} A listener key from a postrender event.
         */
         moveFeature: function(featureToMove, duration, pixel, style, doneFn) {
             var map = BasiGX.util.Map.getMapComponent().getMap();
@@ -450,7 +446,7 @@ Ext.define('BasiGX.util.Animate', {
             var deltaY = totalDisplacement / expectedFrames;
 
             var animate = function(event) {
-                var vectorContext = event.vectorContext;
+                var vectorContext = ol.render.getVectorContext(event);
                 var frameState = event.frameState;
                 var elapsed = frameState.time - start;
 
@@ -470,23 +466,23 @@ Ext.define('BasiGX.util.Animate', {
                         vectorContext.drawPolygonGeometry(geometry, null);
                     }
                 } else {
-                    vectorContext.setStyle(style);
+                  // TODO
+                    vectorContext.setStyle(style[0]);
                     vectorContext.drawGeometry(geometry);
                 }
 
                 if (elapsed > duration || actualFrames >= expectedFrames) {
-                    ol.Observable.unByKey(listenerKey);
+                    BasiGX.util.Animate.endAnimation(featureToMove, listenerKey);
                     doneFn(featureToMove);
                     return;
                 }
-                // tell OL to continue postcompose animation
+                // tell OL to continue postrender animation
                 frameState.animate = true;
 
                 actualFrames++;
             };
 
-            listenerKey = map.on('postcompose', animate);
-            map.render();
+            listenerKey = BasiGX.util.Animate.doAnimation(featureToMove, animate);
             return listenerKey;
         },
 
@@ -557,6 +553,35 @@ Ext.define('BasiGX.util.Animate', {
                 });
             }
             return segments;
+        },
+
+        doAnimation: function(feature, animate) {
+          var layer = BasiGX.util.Layer
+            .getLayerByName(BasiGX.util.Layer.NAME_ANIMATE_LAYER);
+          var map = BasiGX.util.Map.getMapComponent().getMap();
+          if(!layer) {
+            layer = new ol.layer.Vector({
+                name: BasiGX.util.Layer.NAME_ANIMATE_LAYER,
+                source: new ol.source.Vector(),
+                // style: function() { return null }
+              });
+            layer.set(BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER, false);
+            map.addLayer(layer);
+          }
+          layer.getSource().addFeature(feature);
+          var listenerKey = layer.on('postrender', animate);
+          map.render();
+          return listenerKey;
+        },
+
+        endAnimation: function (feature, listenerKey) {
+          ol.Observable.unByKey(listenerKey);
+          var layer = BasiGX.util.Layer
+            .getLayerByName(BasiGX.util.Layer.NAME_ANIMATE_LAYER);
+          // TODO: remove feature
+          layer.getSource().clear();
+
         }
+
     }
 });
