@@ -289,7 +289,6 @@ Ext.define('BasiGX.util.OlStyle', {
                 rotateWithView: olCircleStyle.getRotateWithView(),
                 rotation: olCircleStyle.getRotation(),
                 scale: olCircleStyle.getScale(),
-                snapToPixel: olCircleStyle.getSnapToPixel(),
                 stroke: this.writeStrokeStyle(olCircleStyle.getStroke())
             };
         },
@@ -320,7 +319,6 @@ Ext.define('BasiGX.util.OlStyle', {
                 rotation: olIconStyle.getRotation(),
                 scale: olIconStyle.getScale(),
                 size: olIconStyle.getSize(),
-                snapToPixel: olIconStyle.getSnapToPixel(),
                 src: olIconStyle.getSrc()
             };
         },
@@ -351,7 +349,6 @@ Ext.define('BasiGX.util.OlStyle', {
                 rotateWithView: olRegularShape.getRotateWithView(),
                 rotation: olRegularShape.getRotation(),
                 scale: olRegularShape.getScale(),
-                snapToPixel: olRegularShape.getSnapToPixel(),
                 stroke: this.writeStrokeStyle(olRegularShape.getStroke())
             };
         },
