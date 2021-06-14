@@ -550,7 +550,7 @@ Ext.define('BasiGX.util.Animate', {
 
             if (!layer) {
                 layer = BasiGX.util.Layer
-                    .getLayerByName(BasiGX.util.Layer.NAME_ANIMATE_LAYER);
+                    .getLayerByName(BasiGX.util.Layer.NAME_ANIMATION_LAYER);
                 if (!layer) {
                     var fill = new ol.style.Fill({
                         color: 'rgba(0,0,0,0.001)'
@@ -561,7 +561,7 @@ Ext.define('BasiGX.util.Animate', {
                     });
 
                     layer = new ol.layer.Vector({
-                        name: BasiGX.util.Layer.NAME_ANIMATE_LAYER,
+                        name: BasiGX.util.Layer.NAME_ANIMATION_LAYER,
                         source: new ol.source.Vector(),
                         style: new ol.style.Style({
                             fill: fill,
@@ -592,7 +592,7 @@ Ext.define('BasiGX.util.Animate', {
             feature.set('__animating', undefined);
             if (!layer) {
                 layer = BasiGX.util.Layer
-                    .getLayerByName(BasiGX.util.Layer.NAME_ANIMATE_LAYER);
+                    .getLayerByName(BasiGX.util.Layer.NAME_ANIMATION_LAYER);
                 window.setTimeout(function () {
                     layer.getSource().removeFeature();
                 }, 0);
