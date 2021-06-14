@@ -593,9 +593,7 @@ Ext.define('BasiGX.util.Animate', {
             if (!layer) {
                 layer = BasiGX.util.Layer
                     .getLayerByName(BasiGX.util.Layer.NAME_ANIMATION_LAYER);
-                window.setTimeout(function () {
-                    layer.getSource().removeFeature();
-                }, 0);
+                layer.getSource().removeFeature(feature);
             }
         }
     }
