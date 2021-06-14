@@ -242,7 +242,7 @@ Ext.define('BasiGX.util.Animate', {
                 frameState.animate = true;
             }
 
-            listenerKey = staticMe.doAnimation(feature, animate, layer);
+            listenerKey = staticMe.doAnimation(feature, layer, animate);
             return listenerKey;
         },
 
@@ -458,7 +458,7 @@ Ext.define('BasiGX.util.Animate', {
                 });
 
                 if (elapsed > duration || actualFrames >= expectedFrames) {
-                    staticMe.endAnimation(featureToMove, listenerKey);
+                    staticMe.endAnimation(featureToMove, layer, listenerKey);
                     doneFn(featureToMove);
                     return;
                 }
@@ -468,7 +468,7 @@ Ext.define('BasiGX.util.Animate', {
                 actualFrames++;
             };
 
-            listenerKey = staticMe.doAnimation(featureToMove, animate);
+            listenerKey = staticMe.doAnimation(featureToMove, layer, animate);
             return listenerKey;
         },
 
