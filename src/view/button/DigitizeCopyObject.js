@@ -90,6 +90,7 @@ Ext.define('BasiGX.view.button.DigitizeCopyObject', {
                                         copyFeature, 500,
                                         100,
                                         me.styleFn,
+                                        undefined,
                                         doneFn);
                                     me.copySelectInteraction.
                                         getFeatures().clear();
