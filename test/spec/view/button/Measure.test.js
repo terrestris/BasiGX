@@ -358,4 +358,15 @@ describe('BasiGX.view.button.Measure', function() {
             });
         });
     });
+
+    describe('#formatArea', function() {
+        it('formats the area of a polygon as expected', function() {
+
+            var vertices = [[0, 0], [0, 5], [5, 5], [5, 0], [0, 0]];
+            var geom = new ol.geom.Polygon([vertices]);
+
+            var area = btn.formatArea(geom);
+            expect(area).to.be('24.94 m<sup>2</sup>');
+        });
+    });	
 });
