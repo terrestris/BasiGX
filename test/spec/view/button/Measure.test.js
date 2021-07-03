@@ -368,5 +368,5 @@ describe('BasiGX.view.button.Measure', function() {
             var area = btn.formatArea(geom);
             expect(area).to.be('24.94 m<sup>2</sup>');
         });
-    });	
+    });
 });
