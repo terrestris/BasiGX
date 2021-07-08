@@ -759,6 +759,7 @@ Ext.define('BasiGX.view.button.Measure', {
 
         if (me.geodesic) {
             var sourceProj = me.map.getView().getProjection();
+
             area = Math.abs(ol.sphere.getArea(polygon, {
                 projection: sourceProj
             }));
