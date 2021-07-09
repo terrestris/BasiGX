@@ -758,7 +758,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
         }
         if (feature) {
             this.flashListenerKey = BasiGX.util.Animate.flashFeature(
-                feature, 1000, radius);
+                feature, 1000, radius, me.searchResultVectorLayer);
         }
     },
 

@@ -18,10 +18,11 @@
  */
 Ext.define('BasiGX.util.Animate', {
     requires: [
-        'BasiGX.util.Map'
+        'BasiGX.util.Map',
+        'BasiGX.util.Layer'
     ],
     statics: {
-        shake: function(component, duration, amplitude) {
+        shake: function (component, duration, amplitude) {
             duration = duration || 200;
             amplitude = amplitude || 5;
             var startX = component.getX();
@@ -52,15 +53,19 @@ Ext.define('BasiGX.util.Animate', {
          *
          * @param {Object} feature The ol.feature to flash
          * @param {Integer} duration The duration to animate in milliseconds
-         * @return {Object} listenerKey The maps postcompose listener
+         * @param {ol.layer.Layer} layer The animation will take place in the
+         *      context of this layer. The layer needs to be rendered in the
+         *      visible extent.
+         * @return {Object|undefined} listenerKey The maps postrender listener
+         *      or undefined if the feature is already animated.
          */
-        flashFeature: function(feature, duration) {
-            var map = BasiGX.util.Map.getMapComponent().getMap();
+        flashFeature: function (feature, duration, layer) {
+            var staticMe = BasiGX.util.Animate;
             var start = new Date().getTime();
             var listenerKey;
 
             function animate(event) {
-                var vectorContext = event.vectorContext;
+                var vectorContext = ol.render.getVectorContext(event);
                 var frameState = event.frameState;
                 var flashGeom = feature.getGeometry().clone();
                 var elapsed = frameState.time - start;
@@ -70,79 +75,63 @@ Ext.define('BasiGX.util.Animate', {
                 var opacity = ol.easing.easeOut(1 - elapsedRatio);
                 var flashStyle;
 
-                if (vectorContext.setStyle && vectorContext.drawGeometry) {
-                    // for ol versions from v3.15.0
-                    var isPoint = flashGeom instanceof ol.geom.Point ||
-                        flashGeom instanceof ol.geom.MultiPoint;
-                    var isLine = flashGeom instanceof ol.geom.LineString ||
-                        flashGeom instanceof ol.geom.MultiLineString;
-                    var isPoly = flashGeom instanceof ol.geom.Polygon ||
-                        flashGeom instanceof ol.geom.MultiPolygon;
+                var isPoint = flashGeom instanceof ol.geom.Point ||
+                    flashGeom instanceof ol.geom.MultiPoint;
+                var isLine = flashGeom instanceof ol.geom.LineString ||
+                    flashGeom instanceof ol.geom.MultiLineString;
+                var isPoly = flashGeom instanceof ol.geom.Polygon ||
+                    flashGeom instanceof ol.geom.MultiPolygon;
 
-                    var r = 255;
-                    var g = parseInt((200 * opacity), 10);
-                    var b = 0;
-                    var color = 'rgba(' +
-                        r + ',' +
-                        g + ',' +
-                        b + ',' +
-                        opacity +
+                var r = 255;
+                var g = parseInt((200 * opacity), 10);
+                var b = 0;
+                var color = 'rgba(' +
+                    r + ',' +
+                    g + ',' +
+                    b + ',' +
+                    opacity +
                     ')';
-                    if (isPoint) {
-                        flashStyle = new ol.style.Style({
-                            image: new ol.style.Circle({
-                                radius: radius,
-                                snapToPixel: false,
-                                stroke: new ol.style.Stroke({
-                                    color: color,
-                                    width: 4,
-                                    opacity: opacity
-                                })
-                            })
-                        });
-                    } else if (isLine) {
-                        radius = ol.easing.easeOut(elapsedRatio) * 12;
-                        flashStyle = new ol.style.Style({
+                if (isPoint) {
+                    flashStyle = new ol.style.Style({
+                        image: new ol.style.Circle({
+                            radius: radius,
+                            snapToPixel: false,
                             stroke: new ol.style.Stroke({
                                 color: color,
-                                width: radius
+                                width: 4,
+                                opacity: opacity
                             })
-                        });
-                    } else if (isPoly) {
-                        radius = ol.easing.easeOut(elapsedRatio) * 10;
-                        flashStyle = new ol.style.Style({
-                            stroke: new ol.style.Stroke({
-                                color: color,
-                                width: radius
-                            })
-                        });
-                    }
-                    vectorContext.setStyle(flashStyle);
-                    vectorContext.drawGeometry(flashGeom, null);
-                } else {
-                    // for ol versions older v3.15.0
-                    flashStyle = new ol.style.Circle({
-                        radius: radius,
-                        snapToPixel: false,
-                        stroke: new ol.style.Stroke({
-                            color: 'rgba(255, 0, 0, ' + opacity + ')',
-                            width: 4,
-                            opacity: opacity
                         })
                     });
-                    vectorContext.setImageStyle(flashStyle);
-                    vectorContext.drawPointGeometry(flashGeom, null);
+                } else if (isLine) {
+                    radius = ol.easing.easeOut(elapsedRatio) * 12;
+                    flashStyle = new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: color,
+                            width: radius
+                        })
+                    });
+                } else if (isPoly) {
+                    radius = ol.easing.easeOut(elapsedRatio) * 10;
+                    flashStyle = new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: color,
+                            width: radius
+                        })
+                    });
                 }
+                vectorContext.setStyle(flashStyle);
+                vectorContext.drawGeometry(flashGeom, null);
 
                 if (elapsed > duration) {
-                    ol.Observable.unByKey(listenerKey);
+                    staticMe.endAnimation(feature, layer, listenerKey);
                     return;
                 }
-                // tell ol to continue postcompose animation
+                // tell ol to continue postrender animation
                 frameState.animate = true;
             }
-            listenerKey = map.on('postcompose', animate);
-            map.render();
+
+            listenerKey = staticMe.doAnimation(feature, layer, animate);
             return listenerKey;
         },
 
@@ -152,12 +141,14 @@ Ext.define('BasiGX.util.Animate', {
          * @param {Object} feature The ol.feature to flash
          * @param {Integer} duration The duration to animate in milliseconds
          * @param {Object} olEvt The ol.event where the mouse has been clicked
-         * @return {Object} listenerKey The maps postcompose listener
+         * @param {ol.layer.Layer} layer The animation will take place in the
+         *      context of this layer. The layer needs to be rendered in the
+         *      visible extent.
+         * @return {Object|undefined} listenerKey The maps postrender listener
+         *      or undefined if the feature is already animated.
          */
-        materialFill: function(feature, duration, olEvt) {
-            if (feature.get('__animating')) {
-                return;
-            }
+        materialFill: function (feature, duration, olEvt, layer) {
+            var staticMe = BasiGX.util.Animate;
             var map = BasiGX.util.Map.getMapComponent().getMap();
             var resolution = map.getView().getResolution();
             var flashGeom = feature.getGeometry().clone();
@@ -169,10 +160,9 @@ Ext.define('BasiGX.util.Animate', {
             var start = new Date().getTime();
             var listenerKey;
             var clickPixel = olEvt.pixel;
-            feature.set('__animating', true);
 
             function animate(event) {
-                var vectorContext = event.vectorContext;
+                var vectorContext = ol.render.getVectorContext(event);
                 var context = event.context;
                 var frameState = event.frameState;
                 var elapsed = frameState.time - start;
@@ -201,7 +191,7 @@ Ext.define('BasiGX.util.Animate', {
                         g + ',' +
                         b + ',' +
                         '0.5' +
-                    ')';
+                        ')';
                     grad.addColorStop(0, color);
                 } else {
                     color = 'rgba(' +
@@ -209,53 +199,50 @@ Ext.define('BasiGX.util.Animate', {
                         g + ',' +
                         b + ',' +
                         (1 - elapsedRatio) +
-                    ')';
+                        ')';
                     grad.addColorStop(0, color);
                 }
                 grad.addColorStop(1, 'rgba(255,255,255,0)');
 
-                if (vectorContext.setStyle && vectorContext.drawGeometry) {
-                    if (isPoint) {
-                        var image = new ol.style.Circle({
-                            radius: 20,
-                            snapToPixel: false,
-                            fill: new ol.style.Fill({
-                                color: grad
-                            })
-                        });
-                        style = new ol.style.Style({
-                            image: image
-                        });
-                    } else if (isLine) {
-                        var stroke = new ol.style.Stroke({
-                            width: 10,
+                if (isPoint) {
+                    var image = new ol.style.Circle({
+                        radius: 20,
+                        snapToPixel: false,
+                        fill: new ol.style.Fill({
                             color: grad
-                        });
-                        style = new ol.style.Style({
-                            stroke: stroke
-                        });
-                    } else {
-                        var fill = new ol.style.Fill({
-                            color: grad
-                        });
-                        style = new ol.style.Style({
-                            fill: fill
-                        });
-                    }
-                    vectorContext.setStyle(style);
-                    vectorContext.drawGeometry(flashGeom, null);
+                        })
+                    });
+                    style = new ol.style.Style({
+                        image: image
+                    });
+                } else if (isLine) {
+                    var stroke = new ol.style.Stroke({
+                        width: 10,
+                        color: grad
+                    });
+                    style = new ol.style.Style({
+                        stroke: stroke
+                    });
+                } else {
+                    var fill = new ol.style.Fill({
+                        color: grad
+                    });
+                    style = new ol.style.Style({
+                        fill: fill
+                    });
                 }
+                vectorContext.setStyle(style);
+                vectorContext.drawGeometry(flashGeom, null);
 
                 if (elapsed > duration) {
-                    ol.Observable.unByKey(listenerKey);
-                    feature.set('__animating', undefined);
+                    staticMe.endAnimation(feature, layer, listenerKey);
                     return;
                 }
-                // tell OL to continue postcompose animation
+                // tell OL to continue postrender animation
                 frameState.animate = true;
             }
-            listenerKey = map.on('postcompose', animate);
-            map.render();
+
+            listenerKey = staticMe.doAnimation(feature, layer, animate);
             return listenerKey;
         },
 
@@ -266,12 +253,14 @@ Ext.define('BasiGX.util.Animate', {
          * @param {Object} feature The ol.feature to flash
          * @param {Integer} duration The duration to animate in milliseconds
          * @param {Boolean} followSegments If we shall follow line segments
-         * @return {Object} listenerKey The maps postcompose listener
+         * @param {ol.layer.Layer} layer The animation will take place in the
+         *      context of this layer. The layer needs to be rendered in the
+         *      visible extent.
+         * @return {Object|undefined} listenerKey The maps postrender listener
+         *      or undefined if the feature is already animated.
          */
-        followVertices: function(feature, duration, followSegments) {
-            if (feature.get('__animating')) {
-                return;
-            }
+        followVertices: function (feature, duration, followSegments, layer) {
+            var staticMe = BasiGX.util.Animate;
             var map = BasiGX.util.Map.getMapComponent().getMap();
             var flashGeom = feature.getGeometry().clone();
             var isPoint = flashGeom instanceof ol.geom.Point ||
@@ -306,10 +295,8 @@ Ext.define('BasiGX.util.Animate', {
                 timePerFeature = duration / pointArray.length / 2;
             }
 
-            feature.set('__animating', true);
-
             function animate(event) {
-                var vectorContext = event.vectorContext;
+                var vectorContext = ol.render.getVectorContext(event);
                 var context = event.context;
                 var frameState = event.frameState;
                 var elapsed = frameState.time - start;
@@ -341,7 +328,7 @@ Ext.define('BasiGX.util.Animate', {
                         g + ',' +
                         b + ',' +
                         '0.5' +
-                    ')';
+                        ')';
                     grad.addColorStop(0, color);
                 } else {
                     color = 'rgba(' +
@@ -349,7 +336,7 @@ Ext.define('BasiGX.util.Animate', {
                         g + ',' +
                         b + ',' +
                         (1 - elapsedRatio) +
-                    ')';
+                        ')';
                     grad.addColorStop(0, color);
                 }
                 grad.addColorStop(1, 'rgba(255,255,255,0)');
@@ -403,35 +390,40 @@ Ext.define('BasiGX.util.Animate', {
 
                 if (elapsed > duration) {
                     map.render();
-                    ol.Observable.unByKey(listenerKey);
-                    feature.set('__animating', undefined);
+                    staticMe.endAnimation(feature, layer, listenerKey);
                     return;
                 }
-                // tell OL to continue postcompose animation
+                // tell OL to continue postrender animation
                 frameState.animate = true;
             }
-            listenerKey = map.on('postcompose', animate);
-            map.render();
+
+            listenerKey = staticMe.doAnimation(feature, layer, animate);
             return listenerKey;
         },
 
         /**
-        * Moves / translates an `ol.Feature` to the given `pixel` delta in
-        * in the end.
-        * the given `duration` in ms, using the given style, calling a `doneFn`
-        *
-        * Useful e.g. when hovering clustered features to show their children.
-        *
-        * @param {ol.Feature} featureToMove The feature to move.
-        * @param {Number} duration The duration in MS for the moving to to
-        *     complete.
-        * @param {Array<Number>} pixel Delta of pixels to move the feature.
-        * @param {ol.style.Style} style The style to use when moving the
-        *     `feature`.
-        * @param {Function} doneFn The function to call when done.
-        * @return {String} A listener key from a postcompose event.
-        */
-        moveFeature: function(featureToMove, duration, pixel, style, doneFn) {
+         * Moves / translates an `ol.Feature` to the given `pixel` delta in
+         * in the end.
+         * the given `duration` in ms, using the given style, calling a `doneFn`
+         *
+         * Useful e.g. when hovering clustered features to show their children.
+         *
+         * @param {ol.Feature} featureToMove The feature to move.
+         * @param {Number} duration The duration in MS for the moving to to
+         *     complete.
+         * @param {Array<Number>} pixel Delta of pixels to move the feature.
+         * @param {ol.style.StyleLike} style The style to use when moving the
+         *     `feature`.
+         * @param {ol.layer.Layer} layer The animation will take place in the
+         *      context of this layer. The layer needs to be rendered in the
+         *      visible extent.
+         * @param {Function} doneFn The function to call when done.
+         * @return {Object|undefined} listenerKey The maps postrender listener
+         *      or undefined if the feature is already animated.
+         */
+        moveFeature: function (featureToMove, duration, pixel, style,
+            layer, doneFn) {
+            var staticMe = BasiGX.util.Animate;
             var map = BasiGX.util.Map.getMapComponent().getMap();
             var listenerKey;
 
@@ -449,60 +441,50 @@ Ext.define('BasiGX.util.Animate', {
             var deltaX = totalDisplacement / expectedFrames;
             var deltaY = totalDisplacement / expectedFrames;
 
-            var animate = function(event) {
-                var vectorContext = event.vectorContext;
+            var animate = function (event) {
+                var vectorContext = ol.render.getVectorContext(event);
                 var frameState = event.frameState;
                 var elapsed = frameState.time - start;
 
                 geometry.translate(deltaX, deltaY);
 
-                if (vectorContext.setFillStrokeStyle &&
-                   vectorContext.setImageStyle &&
-                   vectorContext.drawPointGeometry) {
-                    vectorContext.setFillStrokeStyle(
-                        style.getFill(), style.getStroke());
-                    vectorContext.setImageStyle(style.getImage());
-                    if (geometry instanceof ol.geom.Point) {
-                        vectorContext.drawPointGeometry(geometry, null);
-                    } else if (geometry instanceof ol.geom.LineString) {
-                        vectorContext.drawLineStringGeometry(geometry, null);
-                    } else {
-                        vectorContext.drawPolygonGeometry(geometry, null);
-                    }
-                } else {
-                    vectorContext.setStyle(style);
-                    vectorContext.drawGeometry(geometry);
+                if (!Ext.isArray(style)) {
+                    style = [style];
                 }
 
+                Ext.Array.forEach(style, function (s) {
+                    vectorContext.setStyle(s);
+                    vectorContext.drawGeometry(geometry);
+                });
+
                 if (elapsed > duration || actualFrames >= expectedFrames) {
-                    ol.Observable.unByKey(listenerKey);
+                    staticMe.endAnimation(featureToMove, layer, listenerKey);
                     doneFn(featureToMove);
                     return;
                 }
-                // tell OL to continue postcompose animation
+                // tell OL to continue postrender animation
                 frameState.animate = true;
 
                 actualFrames++;
             };
 
-            listenerKey = map.on('postcompose', animate);
-            map.render();
+            listenerKey = staticMe.doAnimation(featureToMove, layer, animate);
             return listenerKey;
         },
 
         /**
-        * Returns a flat Array with coordinates
-        *
-        * @param {Array} coordinateArray The Array to flatten
-        * @param {Array} points The flattened Array
-        * @return {Array} The flattened Array
-        */
-        extractPoints: function(coordinateArray, points) {
+         * Returns a flat Array with coordinates
+         *
+         * @param {Array} coordinateArray The Array to flatten
+         * @param {Array} points The flattened Array
+         * @return {Array} The flattened Array
+         */
+        extractPoints: function (coordinateArray, points) {
             if (!points) {
                 points = [];
             }
             if (Ext.isArray(coordinateArray)) {
-                Ext.each(coordinateArray, function(coord) {
+                Ext.each(coordinateArray, function (coord) {
                     if (Ext.isArray(coord)) {
                         BasiGX.util.Animate.extractPoints(coord, points);
                     }
@@ -521,19 +503,19 @@ Ext.define('BasiGX.util.Animate', {
         },
 
         /**
-        * Returns a flat Array with coordinates
-        *
-        * @param {Array} coordinateArray The Array to flatten
-        * @param {Array} segments The flattened Array
-        * @return {Array} The flattened Array
-        */
-        extractLines: function(coordinateArray, segments) {
+         * Returns a flat Array with coordinates
+         *
+         * @param {Array} coordinateArray The Array to flatten
+         * @param {Array} segments The flattened Array
+         * @return {Array} The flattened Array
+         */
+        extractLines: function (coordinateArray, segments) {
             if (!segments) {
                 segments = [];
             }
             if (segments.length === 0 && coordinateArray.length > 1) {
                 // we have a multipolygon here, need to flatten it
-                Ext.each(coordinateArray, function(coord) {
+                Ext.each(coordinateArray, function (coord) {
                     var subElements = BasiGX.util.Animate.extractLines(
                         coord, segments);
                     Ext.Array.merge(segments, subElements);
@@ -542,7 +524,7 @@ Ext.define('BasiGX.util.Animate', {
 
             if (coordinateArray.length === 1) {
                 // simple Polygon
-                Ext.each(coordinateArray[0], function(pointOrArray, index) {
+                Ext.each(coordinateArray[0], function (pointOrArray, index) {
                     if (pointOrArray.length === 2 &&
                         Ext.isNumeric(pointOrArray[0]) &&
                         Ext.isNumeric(pointOrArray[1]) &&
@@ -557,6 +539,62 @@ Ext.define('BasiGX.util.Animate', {
                 });
             }
             return segments;
+        },
+
+        doAnimation: function (feature, layer, animate) {
+            if (feature.get('__animating')) {
+                return;
+            }
+
+            var map = BasiGX.util.Map.getMapComponent().getMap();
+
+            if (!layer) {
+                layer = BasiGX.util.Layer
+                    .getLayerByName(BasiGX.util.Layer.NAME_ANIMATION_LAYER);
+                if (!layer) {
+                    var fill = new ol.style.Fill({
+                        color: 'rgba(0,0,0,0.001)'
+                    });
+                    var stroke = new ol.style.Stroke({
+                        color: 'rgba(0,0,0,0.001)',
+                        width: 1
+                    });
+
+                    layer = new ol.layer.Vector({
+                        name: BasiGX.util.Layer.NAME_ANIMATION_LAYER,
+                        source: new ol.source.Vector(),
+                        style: new ol.style.Style({
+                            fill: fill,
+                            stroke: stroke,
+                            image: new ol.style.Circle({
+                                fill: fill,
+                                stroke: stroke,
+                                radius: 1
+                            })
+                        })
+                    });
+                    var key = BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+                    layer.set(key, false);
+                    map.addLayer(layer);
+                }
+                layer.getSource().addFeature(feature);
+            }
+
+            feature.set('__animating', true);
+
+            var listenerKey = layer.on('postrender', animate);
+            map.render();
+            return listenerKey;
+        },
+
+        endAnimation: function (feature, layer, listenerKey) {
+            ol.Observable.unByKey(listenerKey);
+            feature.set('__animating', undefined);
+            if (!layer) {
+                layer = BasiGX.util.Layer
+                    .getLayerByName(BasiGX.util.Layer.NAME_ANIMATION_LAYER);
+                layer.getSource().removeFeature(feature);
+            }
         }
     }
 });

@@ -778,8 +778,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         var feature = record.getFeature();
 
         if (feature) {
-            this.flashListenerKey = BasiGX.util.Animate.flashFeature(
-                feature, 1000);
+            BasiGX.util.Animate.flashFeature(feature, 1000, layer);
             feature.setStyle(me.getSearchResultHighlightFeatureStyle());
             layer.getSource().addFeature(feature);
         }
