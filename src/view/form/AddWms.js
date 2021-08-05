@@ -228,6 +228,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                         var countUrls = view.wmsBaseUrls.length;
                         if (countUrls !== 0) {
                             textfield.setHidden(true);
+                            textfield.allowBlank = true;
                         }
                     }
                 }
