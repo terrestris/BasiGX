@@ -130,7 +130,14 @@ Ext.define('BasiGX.view.form.CSW', {
              * @type {Boolean}
              */
             disableCaching: true
-        }
+        },
+
+        /**
+         * Optional AJAX proxy URL, which will be added before the 'real'
+         * target CSW URL, e.g. '../my-proxy.action?baseUrl='
+         * @cfg {String}
+         */
+        ajaxProxy: null
     },
 
     /**
@@ -361,6 +368,11 @@ Ext.define('BasiGX.view.form.CSW', {
             url = values.cswUrl;
         } else {
             url = values.cswUrlCombo;
+        }
+
+        // add optional AJAX proxy URL
+        if (!Ext.isEmpty(me.ajaxProxy)) {
+            url = me.ajaxProxy + url;
         }
 
         var postBody =
