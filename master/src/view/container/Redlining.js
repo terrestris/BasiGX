@@ -185,6 +185,15 @@ Ext.define('BasiGX.view.container.Redlining', {
     /**
      *
      */
+    constructor: function() {
+        var me = this;
+        me.fireRedliningChanged = me.fireRedliningChanged.bind(this);
+        me.callParent(arguments);
+    },
+
+    /**
+     *
+     */
     initComponent: function() {
         var me = this;
         var displayInLayerSwitcherKey = BasiGX.util.Layer.
@@ -196,7 +205,7 @@ Ext.define('BasiGX.view.container.Redlining', {
         if (!me.redliningVectorLayer) {
             me.redlineFeatures = new ol.Collection();
             me.redlineFeatures.on(
-                'propertychange', me.fireRedliningChanged, me
+                'propertychange', me.fireRedliningChanged
             );
             me.redliningVectorLayer = new ol.layer.Vector({
                 source: new ol.source.Vector({features: me.redlineFeatures}),
@@ -214,7 +223,7 @@ Ext.define('BasiGX.view.container.Redlining', {
         beforedestroy: function() {
             if (this.redlineFeatures) {
                 this.redlineFeatures.un('propertychange',
-                    this.fireRedliningChanged, this);
+                    this.fireRedliningChanged);
             }
         }
     },

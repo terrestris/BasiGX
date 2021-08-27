@@ -125,12 +125,12 @@ Ext.define(&#39;BasiGX.view.button.DigitizeModifyObject&#39;, {
                 me.modifyInteraction.setActive(true);
                 me.modifySelectInteraction.setActive(true);
                 me.modifyInteraction.on(&#39;modifyend&#39;,
-                    me.fireFeatureChanged, me);
+                    me.fireFeatureChanged);
             } else {
                 me.modifyInteraction.setActive(false);
                 me.modifySelectInteraction.setActive(false);
                 me.modifyInteraction.un(&#39;modifyend&#39;,
-                    me.fireFeatureChanged, me);
+                    me.fireFeatureChanged);
             }
         },
         beforedestroy: function() {
@@ -141,6 +141,15 @@ Ext.define(&#39;BasiGX.view.button.DigitizeModifyObject&#39;, {
                 this.map.removeInteraction(this.modifySelectInteraction);
             }
         }
+    },
+
+<span id='BasiGX-view-button-DigitizeModifyObject-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function() {
+        var me = this;
+        me.fireFeatureChanged = me.fireFeatureChanged.bind(this);
+        me.callParent(arguments);
     },
 
 <span id='BasiGX-view-button-DigitizeModifyObject-method-fireFeatureChanged'>    /**

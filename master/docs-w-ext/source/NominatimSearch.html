@@ -60,7 +60,7 @@ Ext.define(&#39;BasiGX.view.container.NominatimSearch&#39;, {
         &#39;BasiGX.util.Map&#39;
     ],
 
-<span id='BasiGX-view-container-NominatimSearch-property-viewModel'>    viewModel: {
+<span id='BasiGX-view-container-NominatimSearch-cfg-viewModel'>    viewModel: {
 </span>        data: {
             searchTermTextFieldLabel: &#39;Suchbegriff&#39;,
             searchResultGridTitle: &#39;Suchergebnisse&#39;,
@@ -282,7 +282,9 @@ Ext.define(&#39;BasiGX.view.container.NominatimSearch&#39;, {
         if (!me.searchResultVectorLayer) {
             me.searchResultVectorLayer = new ol.layer.Vector({
                 name: &#39;nominatimsearchresult&#39;,
-                source: new ol.source.Vector(),
+                source: new ol.source.Vector({
+                    features: new ol.Collection()
+                }),
                 style: me.getSearchResultFeatureStyle(),
                 visible: !me.clusterResults
             });
@@ -652,7 +654,7 @@ Ext.define(&#39;BasiGX.view.container.NominatimSearch&#39;, {
         }
         if (feature) {
             this.flashListenerKey = BasiGX.util.Animate.flashFeature(
-                feature, 1000, radius);
+                feature, 1000, radius, me.searchResultVectorLayer);
         }
     },
 

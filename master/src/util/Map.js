@@ -53,7 +53,7 @@ Ext.define('BasiGX.util.Map', {
         getResolutionForScale: function(scale, units) {
             var dpi = this.dpi;
             var inchesPerMeter = this.inchesPerMeter;
-            var mpu = ol.proj.METERS_PER_UNIT[units];
+            var mpu = ol.proj.Units.METERS_PER_UNIT[units];
             return parseFloat(scale) / (mpu * inchesPerMeter * dpi);
         },
 
@@ -70,7 +70,7 @@ Ext.define('BasiGX.util.Map', {
         getScaleForResolution: function(resolution, units) {
             var dpi = this.dpi;
             var inchesPerMeter = this.inchesPerMeter;
-            var mpu = ol.proj.METERS_PER_UNIT[units];
+            var mpu = ol.proj.Units.METERS_PER_UNIT[units];
             return (resolution * mpu * inchesPerMeter * dpi);
         },
 

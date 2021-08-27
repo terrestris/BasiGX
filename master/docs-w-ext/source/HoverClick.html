@@ -41,7 +41,13 @@
          * listen to any click event, regardless if a layer has a truthy
          * clickable property.
          */
-        clickable: true
+        clickable: true,
+
+<span id='global-property-clickActive'>        /**
+</span>         * Control state of click event on the map. If the underlying HSI button
+         * gets untoggled, click interaction on the map should be deactivated.
+         */
+        clickActive: true
     },
 
     init: function (cmp) {
@@ -79,7 +85,7 @@
         var me = this;
         me.callParent();
 
-        if (me.getClickable()) {
+        if (me.getClickable() &amp;&amp; me.getClickActive()) {
             var mapComponent = me.getCmp();
             var map = mapComponent.getMap();
             map.on(&#39;click&#39;, me.onClick, me);
@@ -103,9 +109,9 @@
             });
             if (me.selectEventOrigin === &#39;collection&#39;) {
                 var featureCollection = interaction.getFeatures();
-                featureCollection.on(&#39;add&#39;, me.onFeatureClicked, me);
+                featureCollection.on(&#39;add&#39;, me.onFeatureClicked.bind(me));
             } else {
-                interaction.on(&#39;select&#39;, me.onFeatureClicked, me);
+                interaction.on(&#39;select&#39;, me.onFeatureClicked.bind(me));
             }
             map.addInteraction(interaction);
             me.setHoverVectorLayerInteraction(interaction);
@@ -141,7 +147,13 @@
      * @param {MouseEvent.onClick} evt The onClick event
      */
     onClick: function (evt) {
+
         var me = this;
+
+        if (!me.getClickActive()) {
+            return;
+        }
+
         var mapComponent = me.getCmp();
         var map = mapComponent.getMap();
         var mapView = map.getView();
@@ -167,7 +179,7 @@
             if (source instanceof ol.source.TileWMS
                     || source instanceof ol.source.ImageWMS) {
 
-                var url = source.getGetFeatureInfoUrl(
+                var url = source.getFeatureInfoUrl(
                     evt.coordinate,
                     resolution,
                     projCode,
@@ -234,11 +246,15 @@
                     me.showHoverFeature(layer, hoverFeatures);
                     me.currentHoverTarget = feat;
                     mapComponent.fireEvent(&#39;hoverfeaturesclick&#39;, hoverFeatures);
-                }, me, function(vectorCand) {
-                    return vectorCand === layer;
+                }, {
+                    layerFilter: function(vectorCand) {
+                        return vectorCand === layer;
+                    }
                 });
             }
-        }, this, me.clickLayerFilter, this);
+        }, {
+            layerFilter: me.clickLayerFilter.bind(me)
+        });
     },
 
 <span id='global-method-clickLayerFilter'>    /**

@@ -445,7 +445,6 @@ Ext.define(&#39;BasiGX.util.ConfigParser&#39;, {
                 Ext.log.warn(&#39;Invalid context given to configParser!&#39;);
                 return null;
             }
-
             config = context.data.merge;
             me.appContext = config;
 
@@ -455,21 +454,18 @@ Ext.define(&#39;BasiGX.util.ConfigParser&#39;, {
                     split(&#39;|&#39;)[0];
                 config.startCenter = centerString;
             }
-
             me.map = new ol.Map({
                 controls: [new ol.control.ScaleLine()], // TODO add attribution
                 view: new ol.View({
                     center: this.convertStringToNumericArray(
-                        &#39;int&#39;, config.startCenter),
+                        &#39;float&#39;, config.startCenter),
                     zoom: config.startZoom || 2,
                     maxResolution: config.maxResolution,
                     minResolution: config.minResolution,
                     projection: config.mapConfig.projection || &#39;EPSG:3857&#39;,
-                    units: &#39;m&#39;,
                     resolutions: me.convertStringToNumericArray(
                         &#39;float&#39;, config.mapConfig.resolutions)
-                }),
-                logo: false
+                })
             });
             // create the layers
             me.getLayersArray(context);
@@ -527,7 +523,7 @@ Ext.define(&#39;BasiGX.util.ConfigParser&#39;, {
             var cfg;
 
             var attributions = config.attribution ?
-                [new ol.Attribution({html: config.attribution})] : undefined;
+                config.attribution : undefined;
 
             if (sourceType === &#39;Vector&#39;) {
 
@@ -911,7 +907,7 @@ Ext.define(&#39;BasiGX.util.ConfigParser&#39;, {
                     if (type === &#39;int&#39;) {
                         result.push(parseInt(item, 10));
                     } else if (type === &#39;float&#39;) {
-                        result.push(parseFloat(item, 10));
+                        result.push(parseFloat(item));
                     }
                 });
                 return result;

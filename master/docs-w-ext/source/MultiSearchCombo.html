@@ -72,7 +72,7 @@ Ext.define(&#39;BasiGX.view.form.field.MultiSearchCombo&#39;, {
         &#39;BasiGX.view.grid.MultiSearchGazetteerGrid&#39;
     ],
 
-<span id='BasiGX-view-form-field-MultiSearchCombo-property-viewModel'>    viewModel: {
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-viewModel'>    viewModel: {
 </span>        data: {
             emptyText: &#39;Suche ...&#39;,
             settingsWindowTitle: &#39;Sucheinstellungen&#39;,
@@ -140,7 +140,7 @@ Ext.define(&#39;BasiGX.view.form.field.MultiSearchCombo&#39;, {
         typeDelay: 500
     },
 
-<span id='BasiGX-view-form-field-MultiSearchCombo-property-store'>    store: [],
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-store'>    store: [],
 </span>
 <span id='BasiGX-view-form-field-MultiSearchCombo-property-searchContainer'>    searchContainer: null,
 </span>
@@ -160,7 +160,7 @@ Ext.define(&#39;BasiGX.view.form.field.MultiSearchCombo&#39;, {
      */
     noWfsSearchResults: false,
 
-<span id='BasiGX-view-form-field-MultiSearchCombo-property-minChars'>    minChars: 0,
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-minChars'>    minChars: 0,
 </span>
 <span id='BasiGX-view-form-field-MultiSearchCombo-property-typeDelayTask'>    /**
 </span>     * Member for the delayed task to buffer search execution within specified
@@ -168,13 +168,13 @@ Ext.define(&#39;BasiGX.view.form.field.MultiSearchCombo&#39;, {
      */
     typeDelayTask: null,
 
-<span id='BasiGX-view-form-field-MultiSearchCombo-property-bind'>    bind: {
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-bind'>    bind: {
 </span>        emptyText: &#39;{emptyText}&#39;
     },
 
-<span id='BasiGX-view-form-field-MultiSearchCombo-property-triggerCls'>    triggerCls: &#39;default-trigger&#39;,
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-triggerCls'>    triggerCls: &#39;default-trigger&#39;,
 </span>
-<span id='BasiGX-view-form-field-MultiSearchCombo-property-triggers'>    triggers: {
+<span id='BasiGX-view-form-field-MultiSearchCombo-cfg-triggers'>    triggers: {
 </span>        refresh: {
             cls: &#39;multisearch-refresh-trigger&#39;,
             handler: function() {

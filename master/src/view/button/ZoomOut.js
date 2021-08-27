@@ -116,7 +116,26 @@ Ext.define('BasiGX.view.button.ZoomOut', {
                 me.olMap = BasiGX.util.Map.getMapComponent().getMap();
             }
         },
+        // Please note that we use both classic and modern events here. For
+        // unknown reason the base button extends the modern Ext.Button,
+        // however, this works in classic as well
+        painted: function() {
+            // HBD: for unknown reasons, `this` is actually the El of
+            // this component, so we need to get the component manually
+            var comp = this.component;
+            if (Ext.isEmpty(comp.olMap)) {
+                comp.olMap = BasiGX.util.Map.getMapComponent().getMap();
+            }
+        },
         click: function() {
+            var me = this;
+            // do nothing if configured as toggle button
+            if (me.enableToggle) {
+                return;
+            }
+            me.zoomOut();
+        },
+        tap: function() {
             var me = this;
             // do nothing if configured as toggle button
             if (me.enableToggle) {
@@ -137,17 +156,26 @@ Ext.define('BasiGX.view.button.ZoomOut', {
                 }
             }
             if (pressed) {
-                me.olMap.on('click', me.zoomOut, me);
+                me.olMap.on('click', me.zoomOut);
                 if (me.enableZoomOutWithBox) {
                     me.dragZoomOutInteraction.setActive(true);
                 }
             } else {
-                me.olMap.un('click', me.zoomOut, me);
+                me.olMap.un('click', me.zoomOut);
                 if (me.enableZoomOutWithBox) {
                     me.dragZoomOutInteraction.setActive(false);
                 }
             }
         }
+    },
+
+    /**
+     *
+     */
+    constructor: function() {
+        var me = this;
+        me.zoomOut = me.zoomOut.bind(this);
+        me.callParent(arguments);
     },
 
     /**

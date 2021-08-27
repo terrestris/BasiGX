@@ -48,7 +48,7 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
 
         &#39;BasiGX.util.Layer&#39;,
         &#39;BasiGX.util.Map&#39;,
-        &#39;BasiGX.ol3.extension.TransformInteraction&#39;,
+        &#39;BasiGX.olExt.TransformInteraction&#39;,
 
         &#39;GeoExt.data.MapfishPrintProvider&#39;
     ],
@@ -215,6 +215,16 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
 <span id='BasiGX-view-form-Print-property-listeners'>    listeners: {
 </span>        collapse: &#39;cleanupPrintExtent&#39;,
         resize: &#39;renderAllClientInfos&#39;
+    },
+
+
+<span id='BasiGX-view-form-Print-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function() {
+        var me = this;
+        me.renderAllClientInfos = me.renderAllClientInfos.bind(this);
+        me.callParent(arguments);
     },
 
 <span id='BasiGX-view-form-Print-method-initComponent'>    /**
@@ -921,7 +931,7 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
             case &#39;MapAttributeValues&#39;:
                 attributeFields = me.getMapAttributeFields(attributeRec);
                 if (me.getPrintExtentAlwaysCentered()) {
-                    map.on(&#39;moveend&#39;, me.renderAllClientInfos, me);
+                    map.on(&#39;moveend&#39;, me.renderAllClientInfos);
                 }
                 break;
             case &#39;NorthArrowAttributeValues&#39;:
@@ -1023,7 +1033,7 @@ Ext.define(&#39;BasiGX.view.form.Print&#39;, {
         if (this.extentLayer) {
             me.extentLayer.getSource().clear();
         }
-        map.un(&#39;moveend&#39;, me.renderAllClientInfos, me);
+        map.un(&#39;moveend&#39;, me.renderAllClientInfos);
     },
 
 <span id='BasiGX-view-form-Print-method-cleanupTransformInteraction'>    /**

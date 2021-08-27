@@ -42,7 +42,7 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
     ],
 
     alias: &#39;plugin.hover&#39;,
-<span id='BasiGX-plugin-Hover-property-pluginId'>    pluginId: &#39;hover&#39;,
+<span id='BasiGX-plugin-Hover-cfg-pluginId'>    pluginId: &#39;hover&#39;,
 </span>
     inheritableStatics: {
 <span id='BasiGX-plugin-Hover-static-property-HOVER_OVERLAY_IDENTIFIER_KEY'>        HOVER_OVERLAY_IDENTIFIER_KEY: &#39;name&#39;,
@@ -198,7 +198,7 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
         var mapComponent = me.getCmp();
         var map = mapComponent.getMap();
         // whenever the layergroup changes, we need to cleanup hover artifacts
-        map.on(&#39;change:layerGroup&#39;, me.cleanupHoverArtifacts, me);
+        map.on(&#39;change:layerGroup&#39;, me.cleanupHoverArtifacts.bind(me));
     },
 
 <span id='BasiGX-plugin-Hover-method-addHoverVectorLayerInteraction'>    /**
@@ -217,9 +217,9 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
             });
             if (me.selectEventOrigin === &#39;collection&#39;) {
                 var featureCollection = interaction.getFeatures();
-                featureCollection.on(&#39;add&#39;, me.onFeatureClicked, me);
+                featureCollection.on(&#39;add&#39;, me.onFeatureClicked.bind(me));
             } else {
-                interaction.on(&#39;select&#39;, me.onFeatureClicked, me);
+                interaction.on(&#39;select&#39;, me.onFeatureClicked.bind(me));
             }
             map.addInteraction(interaction);
             me.setHoverVectorLayerInteraction(interaction);
@@ -366,7 +366,7 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
                 if (source instanceof ol.source.TileWMS
                         || source instanceof ol.source.ImageWMS) {
                     // me.cleanupHoverArtifacts();
-                    var url = source.getGetFeatureInfoUrl(
+                    var url = source.getFeatureInfoUrl(
                         evt.coordinate,
                         resolution,
                         projCode,
@@ -433,12 +433,16 @@ Ext.define(&#39;BasiGX.plugin.Hover&#39;, {
                         }
                         me.showHoverFeature(layer, hoverFeatures);
                         me.currentHoverTarget = feat;
-                    }, me, function(vectorCand) {
-                        return vectorCand === layer;
+                    }, {
+                        layerFilter: function(vectorCand) {
+                            return vectorCand === layer;
+                        }
                     });
                 }
             }
-        }, this, me.hoverLayerFilter, this);
+        }, {
+            layerFilter: me.hoverLayerFilter.bind(me)
+        });
 
         me.showHoverToolTip(evt, hoverLayers, hoverFeatures);
     },

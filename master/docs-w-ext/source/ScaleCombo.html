@@ -43,7 +43,7 @@ Ext.define(&#39;BasiGX.view.combo.ScaleCombo&#39;, {
     requires: [
     ],
 
-<span id='BasiGX-view-combo-ScaleCombo-property-viewModel'>    viewModel: {
+<span id='BasiGX-view-combo-ScaleCombo-cfg-viewModel'>    viewModel: {
 </span>        data: {
             fieldLabel: null,
             documentation: &#39;&lt;h2&gt;Maßstabswahl&lt;/h2&gt;• Wählen Sie mit Hilfe &#39; +
@@ -53,7 +53,7 @@ Ext.define(&#39;BasiGX.view.combo.ScaleCombo&#39;, {
         }
     },
 
-<span id='BasiGX-view-combo-ScaleCombo-property-bind'>    bind: {
+<span id='BasiGX-view-combo-ScaleCombo-cfg-bind'>    bind: {
 </span>        fieldLabel: &#39;{fieldLabel}&#39;
     },
 
@@ -164,7 +164,7 @@ Ext.define(&#39;BasiGX.view.combo.ScaleCombo&#39;, {
         me.setValue(mapView.getResolution());
 
         // register listeners to update combo and map
-        me.on(&#39;select&#39;, me.onComboSelect, me);
+        me.on(&#39;select&#39;, me.onComboSelect.bind(me));
 
         // eventually update the combo when map-resolution changes
         var bufferedUpdateMapResChange = Ext.Function.createBuffered(
@@ -266,11 +266,10 @@ Ext.define(&#39;BasiGX.view.combo.ScaleCombo&#39;, {
      */
     getCurrentScale: function(resolution) {
         var me = this;
-        var units = me.map.getView().getProjection().getUnits();
+        var projection = me.map.getView().getProjection();
         var dpi = 25.4 / 0.28;
-        var mpu = ol.proj.METERS_PER_UNIT[units];
-        var scale = resolution * mpu * 39.37 * dpi;
-        return scale;
+        var mpu = projection.getMetersPerUnit();
+        return resolution * mpu * 39.37 * dpi;
     }
 });
 </pre>

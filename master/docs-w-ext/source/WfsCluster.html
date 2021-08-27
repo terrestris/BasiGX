@@ -40,7 +40,7 @@ Ext.define(&#39;BasiGX.plugin.WfsCluster&#39;, {
     extend: &#39;Ext.plugin.Abstract&#39;,
 
     alias: &#39;plugin.wfscluster&#39;,
-<span id='BasiGX-plugin-WfsCluster-property-pluginId'>    pluginId: &#39;wfscluster&#39;,
+<span id='BasiGX-plugin-WfsCluster-cfg-pluginId'>    pluginId: &#39;wfscluster&#39;,
 </span>
 <span id='BasiGX-plugin-WfsCluster-method-init'>    init: function(cmp) {
 </span>        var me = this;
@@ -72,7 +72,7 @@ Ext.define(&#39;BasiGX.plugin.WfsCluster&#39;, {
                 if (layer.get(&#39;olStyle&#39;)) {
                     layer.setStyle(layer.get(&#39;olStyle&#39;));
                 } else {
-                    layer.setStyle(me.clusterStyleFuntion);
+                    layer.setStyle(me.clusterStyleFunction);
                 }
             }
         });
@@ -81,11 +81,11 @@ Ext.define(&#39;BasiGX.plugin.WfsCluster&#39;, {
             // on every map move
             map.on(&#39;moveend&#39;, function() {
                 me.loadClusterFeatures(clusterLayers);
-            }, me);
+            });
         }
     },
 
-<span id='BasiGX-plugin-WfsCluster-method-clusterStyleFuntion'>    clusterStyleFuntion: function(feature) {
+<span id='BasiGX-plugin-WfsCluster-method-clusterStyleFunction'>    clusterStyleFunction: function(feature) {
 </span>        var layerName;
         if (feature.getId()) {
             layerName = feature.getId().split(&#39;.&#39;)[0];

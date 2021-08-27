@@ -31,7 +31,7 @@ Ext.define('BasiGX.view.form.Print', {
 
         'BasiGX.util.Layer',
         'BasiGX.util.Map',
-        'BasiGX.ol3.extension.TransformInteraction',
+        'BasiGX.olExt.TransformInteraction',
 
         'GeoExt.data.MapfishPrintProvider'
     ],
@@ -198,6 +198,16 @@ Ext.define('BasiGX.view.form.Print', {
     listeners: {
         collapse: 'cleanupPrintExtent',
         resize: 'renderAllClientInfos'
+    },
+
+
+    /**
+     *
+     */
+    constructor: function() {
+        var me = this;
+        me.renderAllClientInfos = me.renderAllClientInfos.bind(this);
+        me.callParent(arguments);
     },
 
     /**
@@ -904,7 +914,7 @@ Ext.define('BasiGX.view.form.Print', {
             case 'MapAttributeValues':
                 attributeFields = me.getMapAttributeFields(attributeRec);
                 if (me.getPrintExtentAlwaysCentered()) {
-                    map.on('moveend', me.renderAllClientInfos, me);
+                    map.on('moveend', me.renderAllClientInfos);
                 }
                 break;
             case 'NorthArrowAttributeValues':
@@ -1006,7 +1016,7 @@ Ext.define('BasiGX.view.form.Print', {
         if (this.extentLayer) {
             me.extentLayer.getSource().clear();
         }
-        map.un('moveend', me.renderAllClientInfos, me);
+        map.un('moveend', me.renderAllClientInfos);
     },
 
     /**

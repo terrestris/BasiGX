@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2021-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-button-Geolocation'>/**
+</span> * A geolocation tool button.
+ *
+ * @class BasiGX.view.button.Geolocation
+ */
+Ext.define(&#39;BasiGX.view.button.Geolocation&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-geolocation&#39;,
+
+    requires: [
+        &#39;BasiGX.util.Layer&#39;,
+        &#39;BasiGX.util.Map&#39;,
+        &#39;Ext.app.ViewModel&#39;
+    ],
+
+<span id='BasiGX-view-button-Geolocation-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            text: &#39;GPS Position anzeigen&#39;,
+            tooltip: &#39;GPS Position anzeigen&#39;,
+            documentation: &#39;&lt;h2&gt;GPS Position anzeigen&lt;/h2&gt;• Ein Klick auf &#39; +
+                &#39;den Button aktiviert die Geo Lokalisierung.&lt;br&gt;• Auf der &#39; +
+                &#39;Karte wird die Position angezeigt.&#39;
+        }
+    },
+
+<span id='BasiGX-view-button-Geolocation-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: &#39;{text}&#39;
+    },
+
+<span id='BasiGX-view-button-Geolocation-property-glyph'>    /**
+</span>     * The icons the button should use.
+     * Classic Toolkit uses glyphs, modern toolkit uses html
+     */
+    glyph: &#39;xf041@FontAwesome&#39;,
+<span id='BasiGX-view-button-Geolocation-cfg-html'>    html: &#39;&lt;i class=&quot;fa fa-map-marker fa-2x&quot;&gt;&lt;/i&gt;&#39;,
+</span>
+<span id='BasiGX-view-button-Geolocation-property-liveDemoConfig'>    /**
+</span>     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: {
+                component: &#39;basigx-button-geolocation&#39;,
+                moveDuration: 2000
+            }
+        },
+        {
+            clickOnButton: &#39;basigx-button-geolocation&#39;
+        },
+        {
+            moveMouseTo: {
+                component: &#39;basigx-button-geolocation&#39;,
+                moveDuration: 2000
+            }
+        },
+        {
+            clickOnButton: &#39;basigx-button-geolocation&#39;
+        }
+    ],
+
+<span id='BasiGX-view-button-Geolocation-property-enableToggle'>    /**
+</span>     *
+     */
+    enableToggle: true,
+
+<span id='BasiGX-view-button-Geolocation-property-geolocationVectorLayer'>    /**
+</span>     *
+     */
+    geolocationVectorLayer: null,
+
+<span id='BasiGX-view-button-Geolocation-property-geolocation'>    /**
+</span>     *
+     */
+    geolocation: null,
+
+<span id='BasiGX-view-button-Geolocation-property-showAccuracy'>    /**
+</span>     *
+     */
+    showAccuracy: true,
+
+<span id='BasiGX-view-button-Geolocation-property-strokeColor'>    /**
+</span>     *
+     */
+    strokeColor: &#39;rgba(255, 0, 0, 0.8)&#39;,
+
+<span id='BasiGX-view-button-Geolocation-property-fillColor'>    /**
+</span>     *
+     */
+    fillColor: &#39;rgba(255, 0, 0, 0.5)&#39;,
+
+<span id='BasiGX-view-button-Geolocation-property-positionFeature'>    /**
+</span>     *
+     */
+    positionFeature: null,
+
+<span id='BasiGX-view-button-Geolocation-property-accuracyFeature'>    /**
+</span>     *
+     */
+    accuracyFeature: null,
+
+<span id='BasiGX-view-button-Geolocation-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function () {
+        var me = this;
+        var LayerUtil = BasiGX.util.Layer;
+
+        me.callParent(arguments);
+
+        me.map = BasiGX.util.Map.getMapComponent().getMap();
+
+        var nameGeolocationLayer = LayerUtil.NAME_GEOLOCATION_LAYER;
+        var geolocationLayer = LayerUtil.getLayerByName(nameGeolocationLayer);
+
+        if (Ext.isEmpty(geolocationLayer)) {
+            geolocationLayer = me.createGeolocationLayer();
+            geolocationLayer.set(&#39;bp_displayInLayerSwitcher&#39;, false);
+            me.map.addLayer(geolocationLayer);
+        }
+
+        me.geolocationVectorLayer = geolocationLayer;
+
+        me.geolocation = new ol.Geolocation({
+            projection: me.map.getView().getProjection()
+        });
+        me.geolocation.on(&#39;change:position&#39;, function () {
+            me.updatePositionFeature(me.geolocation.getPosition());
+        });
+        me.geolocation.on(&#39;change:accuracyGeometry&#39;, function () {
+            if (me.showAccuracy) {
+                me.updateAccuracyFeature(me.geolocation.getAccuracyGeometry());
+            }
+        });
+
+        me.on(&#39;toggle&#39;, me.onBtnToggle, me);
+    },
+
+<span id='BasiGX-view-button-Geolocation-method-updatePositionFeature'>    updatePositionFeature: function (coords) {
+</span>        var me = this;
+        if (coords) {
+            if (!me.positionFeature) {
+                me.positionFeature = new ol.Feature();
+                me.geolocationVectorLayer.getSource()
+                    .addFeature(me.positionFeature);
+            }
+            me.positionFeature.setGeometry(new ol.geom.Point(coords));
+        } else {
+            if (me.positionFeature) {
+                me.geolocationVectorLayer.getSource()
+                    .removeFeature(me.positionFeature);
+                me.positionFeature = null;
+            }
+        }
+    },
+
+<span id='BasiGX-view-button-Geolocation-method-updateAccuracyFeature'>    updateAccuracyFeature: function (geom) {
+</span>        var me = this;
+        if (geom) {
+            if (!me.accuracyFeature) {
+                me.accuracyFeature = new ol.Feature();
+                me.geolocationVectorLayer.getSource()
+                    .addFeature(me.accuracyFeature);
+            }
+            me.accuracyFeature.setGeometry(geom);
+        } else {
+            if (me.accuracyFeature) {
+                me.geolocationVectorLayer.getSource()
+                    .removeFeature(me.accuracyFeature);
+                me.accuracyFeature = null;
+            }
+        }
+    },
+
+<span id='BasiGX-view-button-Geolocation-method-onBtnToggle'>    /**
+</span>     * Called when the button is toggled, this method ensures that everything
+     * is cleaned up when unpressed.
+     *
+     * @param {Ext.Button} btn The button itself.
+     * @param {Boolean} pressed Whether the button is now pressed or not.
+     */
+    onBtnToggle: function (btn, pressed) {
+        var me = this;
+        me.geolocation.setTracking(pressed);
+        if (!pressed) {
+            me.updateAccuracyFeature(null);
+            me.updatePositionFeature(null);
+        }
+    },
+
+<span id='BasiGX-view-button-Geolocation-method-createGeolocationLayer'>    /**
+</span>     * Creates a vector layer to show the geolocation on.
+     *
+     * @return {ol.layer.Vector} The layer.
+     */
+    createGeolocationLayer: function () {
+        var me = this;
+        var LayerUtil = BasiGX.util.Layer;
+        var nameGeolocationLayer = LayerUtil.NAME_GEOLOCATION_LAYER;
+        var noLayerSwitcherKey = LayerUtil.KEY_DISPLAY_IN_LAYERSWITCHER;
+
+        var geolocationLayer = new ol.layer.Vector({
+            name: nameGeolocationLayer,
+            source: new ol.source.Vector({
+                features: new ol.Collection()
+            }),
+            style: new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: me.fillColor
+                }),
+                stroke: new ol.style.Stroke({
+                    color: me.strokeColor,
+                    width: 2
+                }),
+                image: new ol.style.Circle({
+                    radius: 7,
+                    fill: new ol.style.Fill({
+                        color: me.fillColor
+                    })
+                })
+            })
+        });
+        // Set our internal flag to filter this layer out of the tree / legend
+        geolocationLayer.set(noLayerSwitcherKey, false);
+
+        return geolocationLayer;
+    }
+});
+</pre>
+</body>
+</html>

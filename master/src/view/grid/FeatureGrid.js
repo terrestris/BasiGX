@@ -92,6 +92,15 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         }
     }],
 
+
+    constructor: function () {
+        var me = this;
+
+        me.selectionFeatureAdded = me.selectionFeatureAdded.bind(me);
+        me.selectionFeatureRemoved = me.selectionFeatureRemoved.bind(me);
+        me.callParent(arguments);
+    },
+
     /**
      *
      */
@@ -475,13 +484,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         }
         layer.getSource()[onOrOff](
             'addfeature',
-            this.selectionFeatureAdded,
-            this
+            this.selectionFeatureAdded
         );
         layer.getSource()[onOrOff](
             'removefeature',
-            this.selectionFeatureRemoved,
-            this
+            this.selectionFeatureRemoved
         );
     }
 

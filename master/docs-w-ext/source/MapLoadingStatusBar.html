@@ -93,7 +93,7 @@ Ext.define(&#39;BasiGX.view.MapLoadingStatusBar&#39;, {
         }
     },
 
-<span id='BasiGX-view-MapLoadingStatusBar-property-viewModel'>    viewModel: {
+<span id='BasiGX-view-MapLoadingStatusBar-cfg-viewModel'>    viewModel: {
 </span>        data: {
 <span id='BasiGX-view-MapLoadingStatusBar-property-loadingText'>            /**
 </span>             * The text to show when loading is happening. Can be overriden with
@@ -112,6 +112,18 @@ Ext.define(&#39;BasiGX.view.MapLoadingStatusBar&#39;, {
      * @type {Number}
      */
     loading: 0,
+
+
+<span id='BasiGX-view-MapLoadingStatusBar-method-constructor'>    constructor: function () {
+</span>        var me = this;
+
+        me.incrementAndCheck = me.incrementAndCheck.bind(me);
+        me.decrementAndCheck = me.decrementAndCheck.bind(me);
+        me.onLayerAddedToGroup = me.onLayerAddedToGroup.bind(me);
+        me.onLayerRemovedFromGroup = me.onLayerRemovedFromGroup.bind(me);
+
+        me.callParent(arguments);
+    },
 
 <span id='BasiGX-view-MapLoadingStatusBar-method-initComponent'>    /**
 </span>     * The constructor of the ProgressBar.
@@ -175,8 +187,8 @@ Ext.define(&#39;BasiGX.view.MapLoadingStatusBar&#39;, {
                 me.registerUnregisterLayerListeners(register, child);
             });
             // handle future changes to this group, or stop doing so
-            layers[method](&#39;add&#39;, me.onLayerAddedToGroup, me);
-            layers[method](&#39;remove&#39;, me.onLayerRemovedFromGroup, me);
+            layers[method](&#39;add&#39;, me.onLayerAddedToGroup);
+            layers[method](&#39;remove&#39;, me.onLayerRemovedFromGroup);
         } else {
             var source = layer.getSource();
             // bind or unbind our handlers
@@ -209,9 +221,9 @@ Ext.define(&#39;BasiGX.view.MapLoadingStatusBar&#39;, {
         }
 
         if (eventPrefix) {
-            source[method](eventPrefix + &#39;loadstart&#39;, me.incrementAndCheck, me);
-            source[method](eventPrefix + &#39;loadend&#39;, me.decrementAndCheck, me);
-            source[method](eventPrefix + &#39;loaderror&#39;, me.decrementAndCheck, me);
+            source[method](eventPrefix + &#39;loadstart&#39;, me.incrementAndCheck);
+            source[method](eventPrefix + &#39;loadend&#39;, me.decrementAndCheck);
+            source[method](eventPrefix + &#39;loaderror&#39;, me.decrementAndCheck);
         }
     },
 

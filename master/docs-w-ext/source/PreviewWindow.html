@@ -38,7 +38,7 @@
 Ext.define(&#39;BasiGX.view.window.PreviewWindow&#39;, {
     extend: &#39;Ext.window.Window&#39;,
 
-<span id='BasiGX-view-window-PreviewWindow-property-viewModel'>    viewModel: {
+<span id='BasiGX-view-window-PreviewWindow-cfg-viewModel'>    viewModel: {
 </span>        data: {
             showLegendTooltip: &#39;Show Legend&#39;,
             zoomToProjectionTooltip: &#39;Zoom to extent of projection&#39;,
@@ -47,9 +47,9 @@ Ext.define(&#39;BasiGX.view.window.PreviewWindow&#39;, {
         }
     },
 
-<span id='BasiGX-view-window-PreviewWindow-property-closeAction'>    closeAction: &#39;hide&#39;,
+<span id='BasiGX-view-window-PreviewWindow-cfg-closeAction'>    closeAction: &#39;hide&#39;,
 </span>
-<span id='BasiGX-view-window-PreviewWindow-property-constrain'>    constrain: true,
+<span id='BasiGX-view-window-PreviewWindow-cfg-constrain'>    constrain: true,
 </span>
     config: {
 <span id='BasiGX-view-window-PreviewWindow-cfg-projection'>        projection: &#39;EPSG:3857&#39;,
@@ -128,7 +128,7 @@ Ext.define(&#39;BasiGX.view.window.PreviewWindow&#39;, {
         var mapView = this.map.getView();
         var resolution = mapView.getResolution();
         var projCode = mapView.getProjection().getCode();
-        var url = this.layer.getSource().getGetFeatureInfoUrl(
+        var url = this.layer.getSource().getFeatureInfoUrl(
             event.coordinate,
             resolution,
             projCode,

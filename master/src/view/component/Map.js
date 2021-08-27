@@ -175,8 +175,7 @@ Ext.define('BasiGX.view.component.Map', {
     addControls: function() {
         var map = this.getMap();
         var attribution = new ol.control.Attribution({
-            collapsible: false,
-            logo: false
+            collapsible: false
         });
         map.addControl(attribution);
     }

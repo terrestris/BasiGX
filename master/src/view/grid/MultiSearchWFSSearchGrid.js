@@ -240,7 +240,9 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         if (!me.searchResultVectorLayer) {
             me.searchResultVectorLayer = new ol.layer.Vector({
                 name: 'Object Search Results',
-                source: new ol.source.Vector(),
+                source: new ol.source.Vector({
+                    features: new ol.Collection()
+                }),
                 style: me.getSearchResultFeatureStyle(),
                 hoverable: false
             });
@@ -309,7 +311,6 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
      */
     describeFeatureTypes: function(searchterm, combo) {
         var me = this;
-        var typeNames = [];
         var featureTypes;
 
         me.searchResultVectorLayer.getSource().clear();
@@ -319,52 +320,71 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         me.setCombo(combo);
 
         var searchLayers = combo.getConfiguredSearchLayers();
+        var workspaces = {};
 
         Ext.each(searchLayers, function(l) {
             if (l.getSource().getParams) {
-                typeNames.push(l.getSource().getParams().LAYERS);
+                var fqLayerName = l.getSource().getParams().LAYERS;
+                var split = fqLayerName.split(':');
+                if (split.length !== 2) {
+                    split = ['', split[1]];
+                }
+                if (!(split[0] in workspaces)) {
+                    workspaces[split[0]] = [];
+                }
+                workspaces[split[0]].push(fqLayerName);
             }
         });
 
-        var describeFeatureTypeParams = {
-            REQUEST: 'DescribeFeatureType',
-            SERVICE: 'WFS',
-            VERSION: '1.1.0',
-            OUTPUTFORMAT: 'application/json',
-            TYPENAME: typeNames.toString()
-        };
+        var params = Ext.Array.map(Object.keys(workspaces),
+            function(workspace) {
+                return {
+                    REQUEST: 'DescribeFeatureType',
+                    SERVICE: 'WFS',
+                    VERSION: '1.1.0',
+                    OUTPUTFORMAT: 'application/json',
+                    TYPENAME: workspaces[workspace].toString()
+                };
+            });
 
         me.setLoading(true);
 
-        Ext.Ajax.request({
-            url: combo.getWfsServerUrl(),
-            params: describeFeatureTypeParams,
-            method: 'GET',
-            success: function(response) {
-                me.setLoading(false);
-                try {
-                    if (Ext.isString(response.responseText)) {
-                        featureTypes = Ext.decode(response.responseText);
-                    } else if (Ext.isObject(response.responseText)) {
-                        featureTypes = response.responseText;
-                    } else {
-                        Ext.log.error('Error! Could not parse ' +
-                            'describe featuretype response!');
+        Ext.Promise.all(Ext.Array.map(params, function(param) {
+            return Ext.Ajax.request({
+                url: combo.getWfsServerUrl(),
+                params: param,
+                method: 'GET'
+            });
+        })).then(function(responses) {
+            me.setLoading(false);
+            var dirtyFeatureTypes = Ext.Array.map(responses,
+                function(response) {
+                    try {
+                        var resFeatureTypes;
+                        if (Ext.isString(response.responseText)) {
+                            resFeatureTypes = Ext.decode(response.responseText);
+                        } else if (Ext.isObject(response.responseText)) {
+                            resFeatureTypes = response.responseText;
+                        } else {
+                            Ext.log.error('Error! Could not parse ' +
+                                'describe featuretype response!');
+                        }
+                        if (resFeatureTypes) {
+                            return resFeatureTypes;
+                        }
+                    } catch (error) {
+                        Ext.log.error('Error on describe featuretype request:',
+                            error);
                     }
-                    if (featureTypes) {
-                        me.fireEvent('describeFeatureTypeResponse',
-                            featureTypes);
-                    }
-                } catch (error) {
-                    Ext.log.error('Error on describe featuretype request:',
-                        error);
-                }
-            },
-            failure: function(response) {
-                me.setLoading(false);
-                Ext.log.error('Error on describe featuretype request:',
-                    response);
-            }
+                });
+            featureTypes = Ext.Array.clean(dirtyFeatureTypes);
+            me.fireEvent('describeFeatureTypeResponse',
+                featureTypes);
+
+        }).catch(function(response) {
+            me.setLoading(false);
+            Ext.log.error('Error on describe featuretype request:',
+                response);
         });
     },
 
@@ -374,41 +394,63 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
      *
      * This method requests the actual features fitting to the search term.
      *
-     * @param {Object} resp The ajax response containing DescribeFeatureType.
+     * @param {Array} responses The array of ajax responses
+     *                          containing DescribeFeatureType.
      */
-    getFeatures: function(resp) {
+    getFeatures: function(responses) {
         var me = this;
-        var featureTypes = resp.featureTypes;
-        var ns = resp.targetPrefix;
-        var cleanedFeatureType = me.cleanUpFeatureDataTypes(featureTypes);
-        var url = me.getCombo().getWfsServerUrl();
-        var xml = me.setupXmlPostBody(cleanedFeatureType, ns);
-        var features;
 
         me.setLoading(true);
-
-        Ext.Ajax.request({
-            url: url,
-            method: 'POST',
-            headers: BasiGX.util.CSRF.getHeader(),
-            xmlData: xml,
-            success: function(response) {
-                me.setLoading(false);
-                if (Ext.isString(response.responseText)) {
-                    features = Ext.decode(response.responseText).features;
-                } else if (Ext.isObject(response.responseText)) {
-                    features = response.responseText.features;
+        Ext.Promise.all(Ext.Array.map(responses, function(resp) {
+            var featureTypes = resp.featureTypes;
+            var ns = resp.targetPrefix;
+            var cleanedFeatureType = me.cleanUpFeatureDataTypes(featureTypes);
+            var url = me.getCombo().getWfsServerUrl();
+            var xml = me.setupXmlPostBody(cleanedFeatureType, ns);
+            var features;
+            return Ext.Ajax.request({
+                url: url,
+                method: 'POST',
+                headers: BasiGX.util.CSRF.getHeader(),
+                xmlData: xml,
+                success: function(response) {
+                    me.setLoading(false);
+                    if (Ext.isString(response.responseText)) {
+                        features = Ext.decode(response.responseText).features;
+                    } else if (Ext.isObject(response.responseText)) {
+                        features = response.responseText.features;
+                    } else {
+                        Ext.log.error('Error! Could not parse ' +
+                            'GetFeature response!');
+                    }
+                    me.fireEvent('getFeatureResponse', features);
+                },
+                failure: function(response) {
+                    me.setLoading(false);
+                    Ext.log.error('Error on GetFeature request:',
+                        response);
+                }
+            });
+        })).then(function(resps) {
+            me.setLoading(false);
+            var features = [];
+            Ext.Array.each(resps, function(resp) {
+                var feats;
+                if (Ext.isString(resp.responseText)) {
+                    feats = Ext.decode(resp.responseText).features;
+                } else if (Ext.isObject(resp.responseText)) {
+                    feats = resp.responseText.features;
                 } else {
                     Ext.log.error('Error! Could not parse ' +
                         'GetFeature response!');
                 }
-                me.fireEvent('getFeatureResponse', features);
-            },
-            failure: function(response) {
-                me.setLoading(false);
-                Ext.log.error('Error on GetFeature request:',
-                    response);
-            }
+                features = Ext.Array.merge(features, feats);
+            });
+            me.fireEvent('getFeatureResponse', features);
+        }).catch(function(response){
+            me.setLoading(false);
+            Ext.log.error('Error on GetFeature request:',
+                response);
         });
     },
 
@@ -529,7 +571,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                                         '</ogc:PropertyName>' +
                                     '</ogc:Function>' +
                                     '<ogc:Literal>' +
-                                        '*' + me.searchTerm + '*' +
+                                        '*' + me.searchTerm.toLowerCase() +
+                                        '*' +
                                     '</ogc:Literal>' +
                                 '</ogc:PropertyIsLike>';
                         } else {
@@ -542,7 +585,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                                         '</ogc:PropertyName>' +
                                     '</ogc:Function>' +
                                     '<ogc:Literal>' +
-                                        '*' + me.searchTerm + '*' +
+                                        '*' + me.searchTerm.toLowerCase() +
+                                        '*' +
                                     '</ogc:Literal>' +
                                 '</ogc:PropertyIsLike>';
                         }
@@ -561,8 +605,8 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                     } else {
                         filter = comparisonFilter;
                     }
-                    xml +=
-                        '<wfs:Query typeName="' + ns + ft.typeName + '">' +
+                    xml += '<wfs:Query typeName="' + ns + ft.typeName +
+                        '" srsName="' + projection + '">' +
                             '<ogc:Filter>' + filter + '</ogc:Filter>' +
                         '</wfs:Query>';
                 }
@@ -644,7 +688,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
                 me.show();
                 combo.noWfsSearchResults = false;
 
-                var searchTerm = me.searchTerm;
+                var searchTerm = me.searchTerm.toLowerCase();
                 Ext.each(features, function(feature) {
                     var useCustomTemplate = false;
                     var ftName = feature.id && feature.id.split('.')[0];
@@ -734,8 +778,7 @@ Ext.define('BasiGX.view.grid.MultiSearchWFSSearchGrid', {
         var feature = record.getFeature();
 
         if (feature) {
-            this.flashListenerKey = BasiGX.util.Animate.flashFeature(
-                feature, 1000);
+            BasiGX.util.Animate.flashFeature(feature, 1000, layer);
             feature.setStyle(me.getSearchResultHighlightFeatureStyle());
             layer.getSource().addFeature(feature);
         }

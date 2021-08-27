@@ -96,6 +96,18 @@ Ext.define('BasiGX.view.MapLoadingStatusBar', {
      */
     loading: 0,
 
+
+    constructor: function () {
+        var me = this;
+
+        me.incrementAndCheck = me.incrementAndCheck.bind(me);
+        me.decrementAndCheck = me.decrementAndCheck.bind(me);
+        me.onLayerAddedToGroup = me.onLayerAddedToGroup.bind(me);
+        me.onLayerRemovedFromGroup = me.onLayerRemovedFromGroup.bind(me);
+
+        me.callParent(arguments);
+    },
+
     /**
      * The constructor of the ProgressBar.
      */
@@ -158,8 +170,8 @@ Ext.define('BasiGX.view.MapLoadingStatusBar', {
                 me.registerUnregisterLayerListeners(register, child);
             });
             // handle future changes to this group, or stop doing so
-            layers[method]('add', me.onLayerAddedToGroup, me);
-            layers[method]('remove', me.onLayerRemovedFromGroup, me);
+            layers[method]('add', me.onLayerAddedToGroup);
+            layers[method]('remove', me.onLayerRemovedFromGroup);
         } else {
             var source = layer.getSource();
             // bind or unbind our handlers
@@ -192,9 +204,9 @@ Ext.define('BasiGX.view.MapLoadingStatusBar', {
         }
 
         if (eventPrefix) {
-            source[method](eventPrefix + 'loadstart', me.incrementAndCheck, me);
-            source[method](eventPrefix + 'loadend', me.decrementAndCheck, me);
-            source[method](eventPrefix + 'loaderror', me.decrementAndCheck, me);
+            source[method](eventPrefix + 'loadstart', me.incrementAndCheck);
+            source[method](eventPrefix + 'loadend', me.decrementAndCheck);
+            source[method](eventPrefix + 'loaderror', me.decrementAndCheck);
         }
     },
 

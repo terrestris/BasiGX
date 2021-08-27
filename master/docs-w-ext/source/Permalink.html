@@ -30,82 +30,101 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-<span id='BasiGX-view-button-Permalink'>/**
-</span> * Permalink Button
+<span id='BasiGX-view-form-Permalink'>/**
+</span> * Permalink FormPanel
  *
- * Button used to open a permalink window.
+ * Used to show a permalink of the mapstate (center, zoom, visible layers)
  *
- * @class BasiGX.view.button.Permalink
+ * @class BasiGX.view.form.Permalink
  */
-Ext.define(&#39;BasiGX.view.button.Permalink&#39;, {
-    extend: &#39;BasiGX.view.button.Base&#39;,
-    xtype: &#39;basigx-button-permalink&#39;,
+Ext.define(&#39;BasiGX.view.form.Permalink&#39;, {
+    extend: &#39;Ext.form.Panel&#39;,
+
+    xtype: &#39;basigx-form-permalink&#39;,
 
     requires: [
-        &#39;Ext.window.Window&#39;,
+        &#39;Ext.button.Button&#39;,
         &#39;Ext.app.ViewModel&#39;,
-        &#39;BasiGX.view.form.Permalink&#39;,
-        &#39;BasiGX.util.Animate&#39;,
-        &#39;BasiGX.util.Application&#39;
+
+        &#39;BasiGX.util.CopyClipboard&#39;
     ],
 
-<span id='BasiGX-view-button-Permalink-property-viewModel'>    /**
-</span>     *
-     */
-    viewModel: {
-        data: {
-            tooltip: &#39;Permalink erzeugen&#39;,
-            text: &#39;Permalink&#39;,
-            windowTitle: &#39;Link zur Anwendung&#39;,
-            documentation: &#39;&lt;h2&gt;Permalink erzeugen&lt;/h2&gt;• Ein Klick auf &#39; +
-                &#39;den Button öffnet ein Fenster, in dem ein Permalink erzeugt &#39; +
-                &#39;werden kann. Dieser Link kann benutzt werden, um die &#39; +
+<span id='BasiGX-view-form-Permalink-cfg-viewModel'>    viewModel: {
+</span>        data: {
+            refreshBtnText: &#39;Erneuern&#39;,
+            copyToClipboardBtnText: &#39;In Zwischenablage kopieren&#39;,
+            documentation: &#39;&lt;h2&gt;Permalink erzeugen&lt;/h2&gt;• In diesem Dialog &#39; +
+                &#39;kann ein Permalink erzeugt werden.&lt;br&gt;&#39; +
+                &#39;• Dieser Link kann benutzt werden, um die &#39; +
                 &#39;Applikation in einem vordefinierten Zustand, wie z.B. &#39; +
                 &#39;Zentrum der Karte oder sichtbare Themen, zu öffnen.&#39;
         }
     },
 
-<span id='BasiGX-view-button-Permalink-property-liveDemoConfig'>    /**
-</span>     * A config object to show this tool in action (live demo) when using the
-     * context sensitive help
-     */
-    liveDemoConfig: [
-        {
-            moveMouseTo: &#39;basigx-button-permalink&#39;
-        },
-        {
-            clickOnButton: &#39;basigx-button-permalink&#39;
-        },
-        {
-            moveMouseTo: &#39;window[name=permalink-window]&#39;
-        },
-        {
-            destroy: &#39;window[name=permalink-window]&#39;
-        }
-    ],
-
-<span id='BasiGX-view-button-Permalink-property-bind'>    bind: {
-</span>        text: &#39;{text}&#39;
+<span id='BasiGX-view-form-Permalink-cfg-padding'>    padding: 5,
+</span><span id='BasiGX-view-form-Permalink-cfg-layout'>    layout: &#39;fit&#39;,
+</span><span id='BasiGX-view-form-Permalink-cfg-minWidth'>    minWidth: 320,
+</span><span id='BasiGX-view-form-Permalink-cfg-defaults'>    defaults: {
+</span>        anchor: &#39;100%&#39;
     },
 
-    config: {
-<span id='BasiGX-view-button-Permalink-cfg-handler'>        handler: function() {
-</span>            var win = Ext.ComponentQuery.query(&#39;[name=permalink-window]&#39;)[0];
-            if (!win) {
-                Ext.create(&#39;Ext.window.Window&#39;, {
-                    name: &#39;permalink-window&#39;,
-                    constrain: true,
-                    title: this.getViewModel().get(&#39;windowTitle&#39;),
-                    layout: &#39;fit&#39;,
-                    items: [{
-                        xtype: &#39;basigx-form-permalink&#39;
-                    }]
-                }).show();
-            } else {
-                BasiGX.util.Animate.shake(win);
+<span id='BasiGX-view-form-Permalink-property-items'>    items: [{
+</span>        xtype: &#39;textfield&#39;,
+        name: &#39;textfield-permalink&#39;,
+        editable: false,
+        listeners: {
+            afterrender: function(textfield) {
+                var permalink = textfield.up(&#39;form&#39;).getPermalink();
+                textfield.setValue(permalink);
+            },
+            change: function(textfield) {
+                var width = Ext.util.TextMetrics.measure(
+                    textfield.getEl(), textfield.getValue()).width;
+                textfield.setWidth(width + 20);
             }
         }
+    }],
+
+<span id='BasiGX-view-form-Permalink-cfg-buttons'>    buttons: [{
+</span>        bind: {
+            text: &#39;{refreshBtnText}&#39;
+        },
+        handler: function(btn) {
+            var permalink = btn.up(&#39;form&#39;).getPermalink();
+            var textfield = btn.up(&#39;form&#39;).down(&#39;textfield&#39;);
+            textfield.setValue(permalink);
+        }
+    }, {
+        bind: {
+            text: &#39;{copyToClipboardBtnText}&#39;
+        },
+        listeners: {
+            boxready: function(btn) {
+                btn.setHidden(
+                    !BasiGX.util.CopyClipboard.copyToClipboardSupported);
+            },
+            initialize: function(btn) {
+                btn.setHidden(
+                    !BasiGX.util.CopyClipboard.copyToClipboardSupported);
+            }
+        },
+        handler: function(btn) {
+            var textfield = btn.up(&#39;form&#39;).down(&#39;textfield&#39;);
+            var value = textfield.getValue();
+
+            BasiGX.util.CopyClipboard.copyTextToClipboard(value);
+        }
+    }],
+
+<span id='BasiGX-view-form-Permalink-method-getPermalink'>    getPermalink: function() {
+</span>        var route = BasiGX.util.Application.getRoute();
+        var hrefWithoutHash = window.location.origin +
+            window.location.pathname +
+            window.location.search;
+        var permalink = hrefWithoutHash + &#39;#&#39; + route;
+        return permalink;
     }
+
 });
 </pre>
 </body>

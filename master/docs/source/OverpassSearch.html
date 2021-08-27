@@ -292,7 +292,9 @@ Ext.define(&#39;BasiGX.view.container.OverpassSearch&#39;, {
         if (!me.searchResultVectorLayer) {
             me.searchResultVectorLayer = new ol.layer.Vector({
                 name: &#39;overpasssearchresult&#39;,
-                source: new ol.source.Vector(),
+                source: new ol.source.Vector({
+                    features: new ol.Collection()
+                }),
                 style: me.getSearchResultFeatureStyle(),
                 visible: !me.clusterResults
             });
@@ -751,7 +753,7 @@ Ext.define(&#39;BasiGX.view.container.OverpassSearch&#39;, {
         }
         if (feature) {
             this.flashListenerKey = BasiGX.util.Animate.flashFeature(
-                feature, 1000, radius);
+                feature, 1000, radius, this.searchResultVectorLayer);
         }
     },
 

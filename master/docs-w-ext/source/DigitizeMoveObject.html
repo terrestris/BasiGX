@@ -83,9 +83,9 @@ Ext.define(&#39;BasiGX.view.button.DigitizeMoveObject&#39;, {
     },
 
 <span id='BasiGX-view-button-DigitizeMoveObject-property-name'>    name: &#39;moveObjectBtn&#39;,
-</span><span id='BasiGX-view-button-DigitizeMoveObject-property-toggleGroup'>    toggleGroup: &#39;draw&#39;,
+</span><span id='BasiGX-view-button-DigitizeMoveObject-cfg-toggleGroup'>    toggleGroup: &#39;draw&#39;,
 </span>
-<span id='BasiGX-view-button-DigitizeMoveObject-property-listeners'>    listeners: {
+<span id='BasiGX-view-button-DigitizeMoveObject-cfg-listeners'>    listeners: {
 </span>        toggle: function(btn, pressed) {
             var me = this;
             if (!me.translateInteraction) {
@@ -135,12 +135,12 @@ Ext.define(&#39;BasiGX.view.button.DigitizeMoveObject&#39;, {
                 me.translateInteraction.setActive(true);
                 me.translateSelectInteraction.setActive(true);
                 me.translateInteraction.on(&#39;translateend&#39;,
-                    me.fireFeatureChanged, me);
+                    me.fireFeatureChanged);
             } else {
                 me.translateInteraction.setActive(false);
                 me.translateSelectInteraction.setActive(false);
                 me.translateInteraction.un(&#39;translateend&#39;,
-                    me.fireFeatureChanged, me);
+                    me.fireFeatureChanged);
             }
         },
         beforedestroy: function() {
@@ -151,6 +151,15 @@ Ext.define(&#39;BasiGX.view.button.DigitizeMoveObject&#39;, {
                 this.map.removeInteraction(this.translateSelectInteraction);
             }
         }
+    },
+
+<span id='BasiGX-view-button-DigitizeMoveObject-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function() {
+        var me = this;
+        me.fireFeatureChanged = me.fireFeatureChanged.bind(this);
+        me.callParent(arguments);
     },
 
 <span id='BasiGX-view-button-DigitizeMoveObject-method-fireFeatureChanged'>    /**

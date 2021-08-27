@@ -295,7 +295,9 @@ Ext.define('BasiGX.view.container.WfsSearch', {
 
         if (!me.searchResultVectorLayer) {
             me.searchResultVectorLayer = new ol.layer.Vector({
-                source: new ol.source.Vector(),
+                source: new ol.source.Vector({
+                    features: new ol.Collection()
+                }),
                 style: me.getSearchResultFeatureStyle(),
                 visible: !me.clusterResults,
                 name: staticMe.SEARCH_RESULT_VECTOR_LAYER_NAME
@@ -756,7 +758,7 @@ Ext.define('BasiGX.view.container.WfsSearch', {
         }
         if (feature) {
             this.flashListenerKey = BasiGX.util.Animate.flashFeature(
-                feature, 1000, radius);
+                feature, 1000, radius, me.searchResultVectorLayer);
         }
     },
 

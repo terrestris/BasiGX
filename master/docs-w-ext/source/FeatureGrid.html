@@ -44,7 +44,7 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         &#39;GeoExt.data.store.Features&#39;
     ],
 
-<span id='BasiGX-view-grid-FeatureGrid-property-viewModel'>    viewModel: {
+<span id='BasiGX-view-grid-FeatureGrid-cfg-viewModel'>    viewModel: {
 </span>        data: {
             renameButton: &#39;Umbenennen&#39;,
             renameBox: &#39;Bitte geben Sie den neuen Spaltennamen an:&#39;,
@@ -108,6 +108,15 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
             }
         }
     }],
+
+
+<span id='BasiGX-view-grid-FeatureGrid-method-constructor'>    constructor: function () {
+</span>        var me = this;
+
+        me.selectionFeatureAdded = me.selectionFeatureAdded.bind(me);
+        me.selectionFeatureRemoved = me.selectionFeatureRemoved.bind(me);
+        me.callParent(arguments);
+    },
 
 <span id='BasiGX-view-grid-FeatureGrid-method-initComponent'>    /**
 </span>     *
@@ -492,13 +501,11 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         }
         layer.getSource()[onOrOff](
             &#39;addfeature&#39;,
-            this.selectionFeatureAdded,
-            this
+            this.selectionFeatureAdded
         );
         layer.getSource()[onOrOff](
             &#39;removefeature&#39;,
-            this.selectionFeatureRemoved,
-            this
+            this.selectionFeatureRemoved
         );
     }
 

@@ -118,12 +118,12 @@ Ext.define('BasiGX.view.button.DigitizeMoveObject', {
                 me.translateInteraction.setActive(true);
                 me.translateSelectInteraction.setActive(true);
                 me.translateInteraction.on('translateend',
-                    me.fireFeatureChanged, me);
+                    me.fireFeatureChanged);
             } else {
                 me.translateInteraction.setActive(false);
                 me.translateSelectInteraction.setActive(false);
                 me.translateInteraction.un('translateend',
-                    me.fireFeatureChanged, me);
+                    me.fireFeatureChanged);
             }
         },
         beforedestroy: function() {
@@ -134,6 +134,15 @@ Ext.define('BasiGX.view.button.DigitizeMoveObject', {
                 this.map.removeInteraction(this.translateSelectInteraction);
             }
         }
+    },
+
+    /**
+     *
+     */
+    constructor: function() {
+        var me = this;
+        me.fireFeatureChanged = me.fireFeatureChanged.bind(this);
+        me.callParent(arguments);
     },
 
     /**

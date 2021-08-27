@@ -88,7 +88,7 @@ Ext.define(&#39;BasiGX.view.button.ZoomOut&#39;, {
      * Classic Toolkit uses glyphs, modern toolkit uses html
      */
     glyph: &#39;xf010@FontAwesome&#39;,
-<span id='BasiGX-view-button-ZoomOut-property-html'>    html: &#39;&lt;i class=&quot;fa fa-search-minus fa-2x&quot;&gt;&lt;/i&gt;&#39;,
+<span id='BasiGX-view-button-ZoomOut-cfg-html'>    html: &#39;&lt;i class=&quot;fa fa-search-minus fa-2x&quot;&gt;&lt;/i&gt;&#39;,
 </span>
 <span id='BasiGX-view-button-ZoomOut-property-liveDemoConfig'>    /**
 </span>     * A config object to show this tool in action (live demo) when using the
@@ -126,14 +126,33 @@ Ext.define(&#39;BasiGX.view.button.ZoomOut&#39;, {
         animationDuration: 500
     },
 
-<span id='BasiGX-view-button-ZoomOut-property-listeners'>    listeners: {
+<span id='BasiGX-view-button-ZoomOut-cfg-listeners'>    listeners: {
 </span>        afterrender: function() {
             var me = this;
             if (Ext.isEmpty(me.olMap)) {
                 me.olMap = BasiGX.util.Map.getMapComponent().getMap();
             }
         },
+        // Please note that we use both classic and modern events here. For
+        // unknown reason the base button extends the modern Ext.Button,
+        // however, this works in classic as well
+        painted: function() {
+            // HBD: for unknown reasons, `this` is actually the El of
+            // this component, so we need to get the component manually
+            var comp = this.component;
+            if (Ext.isEmpty(comp.olMap)) {
+                comp.olMap = BasiGX.util.Map.getMapComponent().getMap();
+            }
+        },
         click: function() {
+            var me = this;
+            // do nothing if configured as toggle button
+            if (me.enableToggle) {
+                return;
+            }
+            me.zoomOut();
+        },
+        tap: function() {
             var me = this;
             // do nothing if configured as toggle button
             if (me.enableToggle) {
@@ -154,17 +173,26 @@ Ext.define(&#39;BasiGX.view.button.ZoomOut&#39;, {
                 }
             }
             if (pressed) {
-                me.olMap.on(&#39;click&#39;, me.zoomOut, me);
+                me.olMap.on(&#39;click&#39;, me.zoomOut);
                 if (me.enableZoomOutWithBox) {
                     me.dragZoomOutInteraction.setActive(true);
                 }
             } else {
-                me.olMap.un(&#39;click&#39;, me.zoomOut, me);
+                me.olMap.un(&#39;click&#39;, me.zoomOut);
                 if (me.enableZoomOutWithBox) {
                     me.dragZoomOutInteraction.setActive(false);
                 }
             }
         }
+    },
+
+<span id='BasiGX-view-button-ZoomOut-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function() {
+        var me = this;
+        me.zoomOut = me.zoomOut.bind(this);
+        me.callParent(arguments);
     },
 
 <span id='BasiGX-view-button-ZoomOut-method-zoomOut'>    /**

@@ -47,11 +47,11 @@ Ext.define(&#39;BasiGX.view.grid.GazetteerGrid&#39;, {
         &#39;BasiGX.util.Animate&#39;
     ],
 
-<span id='BasiGX-view-grid-GazetteerGrid-property-store'>    store: {
+<span id='BasiGX-view-grid-GazetteerGrid-cfg-store'>    store: {
 </span>        type: &#39;basigx-gazetteersearch&#39;
     },
 
-<span id='BasiGX-view-grid-GazetteerGrid-property-viewModel'>    viewModel: {
+<span id='BasiGX-view-grid-GazetteerGrid-cfg-viewModel'>    viewModel: {
 </span>        data: {
             title: &#39;Gazetteer&#39;,
             hideToolTooltip: &#39;Gazetteer verbergen&#39;,
@@ -69,11 +69,11 @@ Ext.define(&#39;BasiGX.view.grid.GazetteerGrid&#39;, {
         }
     },
 
-<span id='BasiGX-view-grid-GazetteerGrid-property-bind'>    bind: {
+<span id='BasiGX-view-grid-GazetteerGrid-cfg-bind'>    bind: {
 </span>        title: &#39;{title}&#39;
     },
 
-<span id='BasiGX-view-grid-GazetteerGrid-property-tools'>    tools: [{
+<span id='BasiGX-view-grid-GazetteerGrid-cfg-tools'>    tools: [{
 </span>        type: &#39;minimize&#39;,
         bind: {
             tooltip: &#39;{hideToolTooltip}&#39;
@@ -89,13 +89,13 @@ Ext.define(&#39;BasiGX.view.grid.GazetteerGrid&#39;, {
         }
     }],
 
-<span id='BasiGX-view-grid-GazetteerGrid-property-width'>    width: 500,
+<span id='BasiGX-view-grid-GazetteerGrid-cfg-width'>    width: 500,
 </span>
-<span id='BasiGX-view-grid-GazetteerGrid-property-maxHeight'>    maxHeight: 400,
+<span id='BasiGX-view-grid-GazetteerGrid-cfg-maxHeight'>    maxHeight: 400,
 </span>
-<span id='BasiGX-view-grid-GazetteerGrid-property-hidden'>    hidden: true,
+<span id='BasiGX-view-grid-GazetteerGrid-cfg-hidden'>    hidden: true,
 </span>
-<span id='BasiGX-view-grid-GazetteerGrid-property-tbar'>    tbar: [{
+<span id='BasiGX-view-grid-GazetteerGrid-cfg-tbar'>    tbar: [{
 </span>        xtype: &#39;checkbox&#39;,
         name: &#39;limitcheckbox&#39;,
         checked: true,
@@ -122,7 +122,7 @@ Ext.define(&#39;BasiGX.view.grid.GazetteerGrid&#39;, {
     }
     ],
 
-<span id='BasiGX-view-grid-GazetteerGrid-property-style'>    style: {
+<span id='BasiGX-view-grid-GazetteerGrid-cfg-style'>    style: {
 </span>        right: &#39;75px&#39;,
         top: &#39;10px&#39;
     },
@@ -133,7 +133,7 @@ Ext.define(&#39;BasiGX.view.grid.GazetteerGrid&#39;, {
 <span id='BasiGX-view-grid-GazetteerGrid-cfg-map'>        map: null
 </span>    },
 
-<span id='BasiGX-view-grid-GazetteerGrid-property-columns'>    columns: {
+<span id='BasiGX-view-grid-GazetteerGrid-cfg-columns'>    columns: {
 </span>        items: [{
             text: &#39;&#39;,
             xtype: &#39;templatecolumn&#39;,

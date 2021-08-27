@@ -95,9 +95,9 @@ Ext.define(&#39;BasiGX.view.button.DigitizePostit&#39;, {
     },
 
 <span id='BasiGX-view-button-DigitizePostit-property-name'>    name: &#39;postitbutton&#39;,
-</span><span id='BasiGX-view-button-DigitizePostit-property-toggleGroup'>    toggleGroup: &#39;draw&#39;,
+</span><span id='BasiGX-view-button-DigitizePostit-cfg-toggleGroup'>    toggleGroup: &#39;draw&#39;,
 </span>
-<span id='BasiGX-view-button-DigitizePostit-property-listeners'>    listeners: {
+<span id='BasiGX-view-button-DigitizePostit-cfg-listeners'>    listeners: {
 </span>        toggle: function(btn, pressed) {
             var me = this;
             if (!me.drawPostitInteraction) {
@@ -120,11 +120,11 @@ Ext.define(&#39;BasiGX.view.button.DigitizePostit&#39;, {
             if (pressed) {
                 me.drawPostitInteraction.setActive(true);
                 me.drawPostitInteraction.on(&#39;drawend&#39;,
-                    me.setDefaultPostitStyle, me);
+                    me.setDefaultPostitStyle);
             } else {
                 me.drawPostitInteraction.setActive(false);
                 me.drawPostitInteraction.un(&#39;drawend&#39;,
-                    me.setDefaultPostitStyle, me);
+                    me.setDefaultPostitStyle);
             }
         },
         beforedestroy: function() {
@@ -132,6 +132,15 @@ Ext.define(&#39;BasiGX.view.button.DigitizePostit&#39;, {
                 this.map.removeInteraction(this.drawPostitInteraction);
             }
         }
+    },
+
+<span id='BasiGX-view-button-DigitizePostit-method-constructor'>    /**
+</span>     *
+     */
+    constructor: function() {
+        var me = this;
+        me.setDefaultPostitStyle = me.setDefaultPostitStyle.bind(this);
+        me.callParent(arguments);
     },
 
 <span id='BasiGX-view-button-DigitizePostit-method-getPostitImgSrc'>    /**

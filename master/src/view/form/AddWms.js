@@ -228,6 +228,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                         var countUrls = view.wmsBaseUrls.length;
                         if (countUrls !== 0) {
                             textfield.setHidden(true);
+                            textfield.allowBlank = true;
                         }
                     }
                 }
@@ -250,6 +251,7 @@ Ext.define('BasiGX.view.form.AddWms', {
                         var countUrls = view.wmsBaseUrls.length;
                         if (countUrls === 0) {
                             combobox.setHidden(true);
+                            combobox.allowBlank = true;
                         } else {
                             var urlWms = view.wmsBaseUrls;
                             combobox.setStore(urlWms);
@@ -293,7 +295,7 @@ Ext.define('BasiGX.view.form.AddWms', {
             xtype: 'fieldset',
             name: 'fs-available-layers',
             layout: 'anchor',
-            scrollable: 'y',
+            scrollable: true,
             maxHeight: 200,
             defaults: {
                 anchor: '100%'
@@ -427,6 +429,7 @@ Ext.define('BasiGX.view.form.AddWms', {
             return;
         }
         me.setLoading(true);
+        me.uncheckAllLayers();
         me.removeAddLayersComponents();
         var values = form.getValues();
         var url = '';

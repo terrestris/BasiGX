@@ -24,7 +24,13 @@ Ext.define('BasiGX.plugin.HoverClick', {
          * listen to any click event, regardless if a layer has a truthy
          * clickable property.
          */
-        clickable: true
+        clickable: true,
+
+        /**
+         * Control state of click event on the map. If the underlying HSI button
+         * gets untoggled, click interaction on the map should be deactivated.
+         */
+        clickActive: true
     },
 
     init: function (cmp) {
@@ -62,7 +68,7 @@ Ext.define('BasiGX.plugin.HoverClick', {
         var me = this;
         me.callParent();
 
-        if (me.getClickable()) {
+        if (me.getClickable() && me.getClickActive()) {
             var mapComponent = me.getCmp();
             var map = mapComponent.getMap();
             map.on('click', me.onClick, me);
@@ -86,9 +92,9 @@ Ext.define('BasiGX.plugin.HoverClick', {
             });
             if (me.selectEventOrigin === 'collection') {
                 var featureCollection = interaction.getFeatures();
-                featureCollection.on('add', me.onFeatureClicked, me);
+                featureCollection.on('add', me.onFeatureClicked.bind(me));
             } else {
-                interaction.on('select', me.onFeatureClicked, me);
+                interaction.on('select', me.onFeatureClicked.bind(me));
             }
             map.addInteraction(interaction);
             me.setHoverVectorLayerInteraction(interaction);
@@ -124,7 +130,13 @@ Ext.define('BasiGX.plugin.HoverClick', {
      * @param {MouseEvent.onClick} evt The onClick event
      */
     onClick: function (evt) {
+
         var me = this;
+
+        if (!me.getClickActive()) {
+            return;
+        }
+
         var mapComponent = me.getCmp();
         var map = mapComponent.getMap();
         var mapView = map.getView();
@@ -150,7 +162,7 @@ Ext.define('BasiGX.plugin.HoverClick', {
             if (source instanceof ol.source.TileWMS
                     || source instanceof ol.source.ImageWMS) {
 
-                var url = source.getGetFeatureInfoUrl(
+                var url = source.getFeatureInfoUrl(
                     evt.coordinate,
                     resolution,
                     projCode,
@@ -217,11 +229,15 @@ Ext.define('BasiGX.plugin.HoverClick', {
                     me.showHoverFeature(layer, hoverFeatures);
                     me.currentHoverTarget = feat;
                     mapComponent.fireEvent('hoverfeaturesclick', hoverFeatures);
-                }, me, function(vectorCand) {
-                    return vectorCand === layer;
+                }, {
+                    layerFilter: function(vectorCand) {
+                        return vectorCand === layer;
+                    }
                 });
             }
-        }, this, me.clickLayerFilter, this);
+        }, {
+            layerFilter: me.clickLayerFilter.bind(me)
+        });
     },
 
     /**

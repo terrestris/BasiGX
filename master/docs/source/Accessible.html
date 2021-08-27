@@ -30,24 +30,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-<span id='BasiGX-view-panel-Accessible'>/**
+<span id='BasiGX-view-window-Accessible'>/**
 </span> * A base class for windows which will provide everything that the parent class
- * `Ext.panel.Panel` has and additionally incorporates the plugin to add
+ * `Ext.window.Window` has and additionally incorporates the plugin to add
  * structural HTML for enhanced accessibility (`BasiGX.plugin.AccessibleTitle`).
  *
- * @class BasiGX.view.panel.Accessible
+ * @class BasiGX.view.window.Accessible
  */
-Ext.define(&#39;BasiGX.view.panel.Accessible&#39;, {
-    alternateClassName: &#39;BasiGX.view.panel.A11y&#39;,
-    extend: &#39;Ext.panel.Panel&#39;,
+Ext.define(&#39;BasiGX.view.window.Accessible&#39;, {
+    alternateClassName: &#39;BasiGX.view.window.A11y&#39;,
+    extend: &#39;Ext.window.Window&#39;,
     requires: [
         &#39;BasiGX.plugin.AccessibleTitle&#39;
     ],
-<span id='BasiGX-view-panel-Accessible-property-plugins'>    plugins: [{
-</span>        ptype: &#39;a11ytitle&#39;,
-        a11yHeadingLevel: 3
-    }]
-});
+<span id='BasiGX-view-window-Accessible-property-plugins'>    plugins: [&#39;a11ytitle&#39;]
+</span>});
 </pre>
 </body>
 </html>

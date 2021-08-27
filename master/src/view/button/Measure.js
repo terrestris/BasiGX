@@ -244,6 +244,8 @@ Ext.define('BasiGX.view.button.Measure', {
         var me = this;
         var LayerUtil = BasiGX.util.Layer;
 
+        me.onDrawInteractionActiveChange
+          = me.onDrawInteractionActiveChange.bind(me);
         me.callParent(arguments);
 
         me.map = BasiGX.util.Map.getMapComponent().getMap();
@@ -267,7 +269,7 @@ Ext.define('BasiGX.view.button.Measure', {
         me.measureVectorLayer = measureLayer;
 
         me.drawAction = me.drawInteractionByMeasureType();
-        me.drawAction.on('change:active', me.onDrawInteractionActiveChange, me);
+        me.drawAction.on('change:active', me.onDrawInteractionActiveChange);
 
         me.drawAction.setActive(false);
         me.map.addInteraction(me.drawAction);
@@ -301,10 +303,10 @@ Ext.define('BasiGX.view.button.Measure', {
         if (pressed) {
             btn.drawAction.setActive(true);
             btn.eventKeys.drawstart = btn.drawAction.on(
-                'drawstart', btn.drawStart, btn
+                'drawstart', btn.drawStart.bind(btn)
             );
             btn.eventKeys.drawend = btn.drawAction.on(
-                'drawend', btn.drawEnd, btn
+                'drawend', btn.drawEnd.bind(btn)
             );
             var throttledPointerMove = Ext.Function.createThrottled(
                 btn.pointerMoveHandler, 50, btn
@@ -542,7 +544,7 @@ Ext.define('BasiGX.view.button.Measure', {
 
         if (me.showMeasureInfoOnClickedPoints && me.measureType === 'line') {
             me.eventKeys.click = me.map.on(
-                'click', me.addMeasureStopToolTip, me
+                'click', me.addMeasureStopToolTip.bind(me)
             );
         }
 
@@ -720,7 +722,6 @@ Ext.define('BasiGX.view.button.Measure', {
         var length;
 
         if (me.geodesic) {
-            var wgs84Sphere = new ol.Sphere(6378137);
             var coordinates = line.getCoordinates();
             length = 0;
             var sourceProj = me.map.getView().getProjection();
@@ -729,7 +730,7 @@ Ext.define('BasiGX.view.button.Measure', {
                     coordinates[i], sourceProj, 'EPSG:4326');
                 var c2 = ol.proj.transform(
                     coordinates[i + 1], sourceProj, 'EPSG:4326');
-                length += wgs84Sphere.haversineDistance(c1, c2);
+                length += ol.sphere.getDistance(c1, c2);
             }
         } else {
             length = Math.round(line.getLength() * 100) / 100;
@@ -757,12 +758,11 @@ Ext.define('BasiGX.view.button.Measure', {
         var area;
 
         if (me.geodesic) {
-            var wgs84Sphere = new ol.Sphere(6378137);
             var sourceProj = me.map.getView().getProjection();
-            var geom = (polygon.clone().transform(
-                sourceProj, 'EPSG:4326'));
-            var coordinates = geom.getLinearRing(0).getCoordinates();
-            area = Math.abs(wgs84Sphere.geodesicArea(coordinates));
+
+            area = Math.abs(ol.sphere.getArea(polygon, {
+                projection: sourceProj
+            }));
         } else {
             area = polygon.getArea();
         }
