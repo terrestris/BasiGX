@@ -22,7 +22,7 @@ jobs:
     - name: Cache Node.js modules 💾
       uses: actions/cache@v2
       with:
-        path: ~/.npm
+        path: node_modules
         key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.OS }}-node-
@@ -31,5 +31,10 @@ jobs:
     - name: Install dependencies ⏬
       run: npm ci
 
-    - name: Build artifacts 🏗️
-      run: npm run build
+    - name: Generate coverage 🧪
+      run: npm run ci-coverage
+
+    - name: Publish to coveralls ⭐
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}

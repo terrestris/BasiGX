@@ -1,0 +1,22 @@
+{
+    "--external": [
+        "ol.*",
+        "GeoExt.*"
+    ],
+    "--ignore-html": "debug",
+    "--output": "docs",
+    "--processes": 0,
+    "--title": "BasiGX",
+    "--warnings": [
+      "-extend",
+      "-link"
+    ],
+    "--": [
+        "src/",
+        "classic/",
+        "geoext3-master/src/",
+        "geoext3-master/classic/",
+        "ext-6.2.0/packages/core/src/",
+        "ext-6.2.0/classic/classic/src/"
+    ]
+}
