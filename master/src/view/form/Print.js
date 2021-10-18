@@ -457,7 +457,7 @@ Ext.define('BasiGX.view.form.Print', {
         //          cleanupPrintExtent method, but tzhat may currently
         //          be called to often.
         var existingLayer = null;
-        var isPrintExtentLayerKey = this.self.LAYER_IDENTIFIER_KEY;
+        var isPrintExtentLayerKey = BasiGX.view.form.Print.LAYER_IDENTIFIER_KEY;
         targetMap.getLayers().forEach(function(maplayer) {
             if (maplayer.get(isPrintExtentLayerKey) === true) {
                 existingLayer = maplayer;
@@ -478,7 +478,6 @@ Ext.define('BasiGX.view.form.Print', {
         var displayInLayerSwitcherKey = BasiGX.util.Layer
             .KEY_DISPLAY_IN_LAYERSWITCHER;
         layer.set(displayInLayerSwitcherKey, false);
-
         targetMap.addLayer(layer);
         this.extentLayer = layer;
     },
