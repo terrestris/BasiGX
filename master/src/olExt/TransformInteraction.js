@@ -380,11 +380,15 @@ Ext.define('BasiGX.olExt.TransformInteraction', {
             var extendExt = this.getGeometryRotateToZero_(f).getExtent();
             ol.extent.extend(ext, extendExt);
         }.bind(this));
+        var fromExtent = ol.geom.Polygon_fromExtent;
+        if (!fromExtent) {
+            fromExtent = ol.geom.Polygon.fromExtent;
+        }
 
-        if (center===true) {
+        if (center === true) {
             if (!this.ispt_) {
                 this.overlayLayer_.getSource().addFeature(new ol.Feature( { geometry: new ol.geom.Point(this.center_), handle:'rotate0' }) );
-                geom = ol.geom.Polygon_fromExtent(ext);
+                geom = fromExtent(ext);
                 if (this.get('enableRotatedTransform') && viewRotation !== 0) {
                     geom.rotate(viewRotation, this.getMap().getView().getCenter())
                 }
@@ -400,7 +404,7 @@ Ext.define('BasiGX.olExt.TransformInteraction', {
                     this.getMap().getCoordinateFromPixel([p[0]+10, p[1]+10])
                 ]);
             }
-            geom = ol.geom.Polygon_fromExtent(ext);
+            geom = fromExtent(ext);
             if (this.get('enableRotatedTransform') && viewRotation !== 0) {
                 geom.rotate(viewRotation, this.getMap().getView().getCenter())
             }
@@ -507,6 +511,10 @@ Ext.define('BasiGX.olExt.TransformInteraction', {
      * @private
      */
     ol.interaction.Transform.prototype.handleDownEvent_ = function(evt) {
+        var fromExtent = ol.geom.Polygon_fromExtent;
+        if (!fromExtent) {
+            fromExtent = ol.geom.Polygon.fromExtent;
+        }
         if (!this._handleEvent(evt, this.selection_)) return;
         var sel = this.getFeatureAtPixel_(evt.pixel);
         var feature = sel.feature;
@@ -537,9 +545,9 @@ Ext.define('BasiGX.olExt.TransformInteraction', {
                     rotExtent = ol.extent.extend(rotExtent, rotGeom.getExtent());
                 }
             }
-            this.extent_ = (ol.geom.Polygon_fromExtent(extent)).getCoordinates()[0];
+            this.extent_ = fromExtent(extent).getCoordinates()[0];
             if (this.get('enableRotatedTransform') && viewRotation !== 0) {
-                this.rotatedExtent_ = (ol.geom.Polygon_fromExtent(rotExtent)).getCoordinates()[0];
+                this.rotatedExtent_ = fromExtent(rotExtent).getCoordinates()[0];
             }
             if (this.mode_==='rotate') {
                 this.center_ = this.getCenter() || ol.extent.getCenter(extent);
