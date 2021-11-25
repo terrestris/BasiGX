@@ -68,11 +68,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          */
         addZoomButton: false,
         /**
-         * Configures locking on the grid.
+         * Configures locking on the grid. See https://docs.sencha.com/extjs/6.2.0/classic/Ext.grid.Panel.html#cfg-enableLocking
          */
         enableLocking: true,
         /**
-         * Configures the grid header.
+         * Configures the grid header. See https://docs.sencha.com/extjs/6.2.0/classic/Ext.grid.Panel.html#cfg-header
          */
         gridHeader: true
     },
