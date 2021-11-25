@@ -93,7 +93,6 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     initComponent: function() {
         this.callParent();
-        console.log(this.getEnableLocking())
         this.add({
             xtype: 'grid',
             selModel: 'checkboxmodel',
