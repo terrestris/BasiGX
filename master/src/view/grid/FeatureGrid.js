@@ -66,31 +66,18 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          * rows are considered smaller than non selected rows).
          * @type {boolean}
          */
-        addZoomButton: false
+        addZoomButton: false,
+        /**
+         * Configures locking on the grid. See https://docs.sencha.com/extjs/6.2.0/classic/Ext.grid.Panel.html#cfg-enableLocking
+         */
+        enableLocking: true,
+        /**
+         * Configures the grid header. See https://docs.sencha.com/extjs/6.2.0/classic/Ext.grid.Panel.html#cfg-header
+         */
+        gridHeader: true
     },
 
-    items: [{
-        xtype: 'grid',
-        selModel: 'checkboxmodel',
-        enableLocking: true,
-        plugins: {
-            ptype: 'cellediting',
-            clicksToEdit: 1
-        },
-        listeners: {
-            cellclick: function(view, td, colIdx, record) {
-                var grid = this.up('basigx-grid-featuregrid');
-                var mapView = grid.getMap().map.getView();
-                if (grid.getAddZoomButton()) {
-                    if (colIdx === 1 && record.olObject.getGeometry()) {
-                        mapView.fit(record.olObject.getGeometry(), {
-                            duration: 300
-                        });
-                    }
-                }
-            }
-        }
-    }],
+    items: [],
 
 
     constructor: function () {
@@ -106,6 +93,29 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     initComponent: function() {
         this.callParent();
+        this.add({
+            xtype: 'grid',
+            selModel: 'checkboxmodel',
+            enableLocking: this.getEnableLocking(),
+            header: this.getGridHeader(),
+            plugins: {
+                ptype: 'cellediting',
+                clicksToEdit: 1
+            },
+            listeners: {
+                cellclick: function(view, td, colIdx, record) {
+                    var grid = this.up('basigx-grid-featuregrid');
+                    var mapView = grid.getMap().map.getView();
+                    if (grid.getAddZoomButton()) {
+                        if (colIdx === 1 && record.olObject.getGeometry()) {
+                            mapView.fit(record.olObject.getGeometry(), {
+                                duration: 300
+                            });
+                        }
+                    }
+                }
+            }
+        });
         this.setLayerStore();
         this.registerEvents();
         this.createHighlightLayer(this.getMap());

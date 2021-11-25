@@ -83,32 +83,19 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
          * rows are considered smaller than non selected rows).
          * @type {boolean}
          */
-        addZoomButton: false
+        addZoomButton: false,
+<span id='BasiGX-view-grid-FeatureGrid-cfg-enableLocking'>        /**
+</span>         * Configures locking on the grid. See https://docs.sencha.com/extjs/6.2.0/classic/Ext.grid.Panel.html#cfg-enableLocking
+         */
+        enableLocking: true,
+<span id='BasiGX-view-grid-FeatureGrid-cfg-gridHeader'>        /**
+</span>         * Configures the grid header. See https://docs.sencha.com/extjs/6.2.0/classic/Ext.grid.Panel.html#cfg-header
+         */
+        gridHeader: true
     },
 
-<span id='BasiGX-view-grid-FeatureGrid-property-items'>    items: [{
-</span>        xtype: &#39;grid&#39;,
-        selModel: &#39;checkboxmodel&#39;,
-        enableLocking: true,
-        plugins: {
-            ptype: &#39;cellediting&#39;,
-            clicksToEdit: 1
-        },
-        listeners: {
-            cellclick: function(view, td, colIdx, record) {
-                var grid = this.up(&#39;basigx-grid-featuregrid&#39;);
-                var mapView = grid.getMap().map.getView();
-                if (grid.getAddZoomButton()) {
-                    if (colIdx === 1 &amp;&amp; record.olObject.getGeometry()) {
-                        mapView.fit(record.olObject.getGeometry(), {
-                            duration: 300
-                        });
-                    }
-                }
-            }
-        }
-    }],
-
+<span id='BasiGX-view-grid-FeatureGrid-property-items'>    items: [],
+</span>
 
 <span id='BasiGX-view-grid-FeatureGrid-method-constructor'>    constructor: function () {
 </span>        var me = this;
@@ -123,6 +110,29 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
      */
     initComponent: function() {
         this.callParent();
+        this.add({
+            xtype: &#39;grid&#39;,
+            selModel: &#39;checkboxmodel&#39;,
+            enableLocking: this.getEnableLocking(),
+            header: this.getGridHeader(),
+            plugins: {
+                ptype: &#39;cellediting&#39;,
+                clicksToEdit: 1
+            },
+            listeners: {
+                cellclick: function(view, td, colIdx, record) {
+                    var grid = this.up(&#39;basigx-grid-featuregrid&#39;);
+                    var mapView = grid.getMap().map.getView();
+                    if (grid.getAddZoomButton()) {
+                        if (colIdx === 1 &amp;&amp; record.olObject.getGeometry()) {
+                            mapView.fit(record.olObject.getGeometry(), {
+                                duration: 300
+                            });
+                        }
+                    }
+                }
+            }
+        });
         this.setLayerStore();
         this.registerEvents();
         this.createHighlightLayer(this.getMap());
