@@ -80,6 +80,7 @@ Ext.define('BasiGX.view.form.Print', {
         printExtentMovable: false,
         printExtentScalable: false,
         printExtentRotatable: false,
+        alwaysKeepAspectRatio: false,
         /**
          * Option to be able to print without a map.
          * @type {Boolean} if true, app selection and the extent rectangle are
@@ -501,6 +502,9 @@ Ext.define('BasiGX.view.form.Print', {
         me.transformInteraction = new ol.interaction.Transform({
             layers: [extentLayer],
             fixedScaleRatio: true,
+            keepAspectRatio: me.getAlwaysKeepAspectRatio() ?
+                ol.events.condition.always :
+                ol.events.condition.shiftKeyOnly,
             translate: me.getPrintExtentMovable(),
             scale: me.getPrintExtentScalable(),
             stretch: me.getPrintExtentScalable(),
