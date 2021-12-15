@@ -71,7 +71,7 @@ Ext.define('BasiGX.plugin.HoverClick', {
         if (me.getClickable() && me.getClickActive()) {
             var mapComponent = me.getCmp();
             var map = mapComponent.getMap();
-            map.on('click', me.onClick, me);
+            map.on('click', me.onClick.bind(me));
         }
     },
 

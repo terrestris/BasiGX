@@ -88,7 +88,7 @@
         if (me.getClickable() &amp;&amp; me.getClickActive()) {
             var mapComponent = me.getCmp();
             var map = mapComponent.getMap();
-            map.on(&#39;click&#39;, me.onClick, me);
+            map.on(&#39;click&#39;, me.onClick.bind(me));
         }
     },
 
