@@ -67,6 +67,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          * @type {boolean}
          */
         addZoomButton: false,
+
+        /* eslint-disable */
         /**
          * Configures locking on the grid. See https://docs.sencha.com/extjs/6.2.0/classic/Ext.grid.Panel.html#cfg-enableLocking
          */
@@ -74,13 +76,14 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         /**
          * Configures the grid header. See https://docs.sencha.com/extjs/6.2.0/classic/Ext.grid.Panel.html#cfg-header
          */
-        gridHeader: true
+        gridHeader: undefined
+        /* eslint-enable */
     },
 
     items: [],
 
 
-    constructor: function () {
+    constructor: function() {
         var me = this;
 
         me.selectionFeatureAdded = me.selectionFeatureAdded.bind(me);
