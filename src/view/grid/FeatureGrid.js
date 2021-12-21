@@ -247,11 +247,25 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             return;
         }
         this.highlightSource = new ol.source.Vector();
+
+        var color = [255, 0, 0, 0.3];
+        var stroke = new ol.style.Stroke({
+            color: color,
+            width: 1
+        });
+        var fill = new ol.style.Fill({
+            color: color
+        });
+
         this.highlightLayer = new ol.layer.Vector({
             style: new ol.style.Style({
-                fill: new ol.style.Fill({
-                    color: [255, 0, 0, 0.3]
-                })
+                image: new ol.style.Circle({
+                    fill: fill,
+                    stroke: stroke,
+                    radius: 5
+                }),
+                fill: fill,
+                stroke: stroke
             }),
             source: this.highlightSource
         });
