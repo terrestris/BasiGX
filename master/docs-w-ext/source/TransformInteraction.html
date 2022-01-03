@@ -728,10 +728,9 @@ Ext.define(&#39;BasiGX.olExt.TransformInteraction&#39;, {
                 if (this.constraint_) {
                     if (this.constraint_==&quot;h&quot;) scx=1;
                     else scy=1;
-                } else {
-                    if (this.get(&#39;keepAspectRatio&#39;)(evt)) {
-                        scx = scy = Math.min(scx,scy);
-                    }
+                }
+                if (this.get(&#39;keepAspectRatio&#39;)(evt)) {
+                    scx = scy = Math.min(scx,scy);
                 }
 
                 for (i=0, f; f=this.selection_.item(i); i++) {
