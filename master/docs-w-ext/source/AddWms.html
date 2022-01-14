@@ -30,977 +30,158 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-<span id='BasiGX-view-form-AddWms'>/**
-</span> * AddWms FormPanel
+<span id='BasiGX-view-button-AddWms'>/**
+</span> * AddWms Button
  *
- * Used to add an WMS to the map
+ * Button used to instanciate the basigx-form-addwms in order to add a
+ * WMS to the map
  *
- * @class BasiGX.view.form.AddWms
+ * @class BasiGX.view.button.AddWms
  */
-Ext.define(&#39;BasiGX.view.form.AddWms&#39;, {
-    extend: &#39;Ext.form.Panel&#39;,
-    xtype: &#39;basigx-form-addwms&#39;,
+Ext.define(&#39;BasiGX.view.button.AddWms&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-addwms&#39;,
 
     requires: [
+        &#39;Ext.window.Window&#39;,
         &#39;Ext.app.ViewModel&#39;,
-        &#39;Ext.button.Button&#39;,
-        &#39;Ext.form.CheckboxGroup&#39;,
-        &#39;Ext.form.FieldContainer&#39;,
-        &#39;Ext.form.FieldSet&#39;,
-        &#39;Ext.form.field.Text&#39;,
-        &#39;Ext.form.field.Hidden&#39;,
-        &#39;Ext.form.field.Checkbox&#39;,
-        &#39;Ext.form.field.Radio&#39;,
-        &#39;Ext.form.field.ComboBox&#39;,
-        &#39;Ext.layout.container.Anchor&#39;,
-        &#39;Ext.layout.container.HBox&#39;,
-        &#39;Ext.toolbar.Toolbar&#39;,
-
-        &#39;BasiGX.util.Map&#39;,
-        &#39;BasiGX.util.MsgBox&#39;
+        &#39;BasiGX.view.form.AddWms&#39;,
+        &#39;BasiGX.util.Animate&#39;
     ],
 
-<span id='BasiGX-view-form-AddWms-cfg-viewModel'>    viewModel: {
-</span>        data: {
-            queryParamsFieldSetTitle: &#39;Anfrageparameter&#39;,
-            wmsUrlTextFieldLabel: &#39;WMS-URL&#39;,
-            wmsVersionContainerFieldLabel: &#39;Version&#39;,
-            availableLayesFieldSetTitle: &#39;Verfügbare Layer&#39;,
-            resetBtnText: &#39;Zurücksetzen&#39;,
-            requestLayersBtnText: &#39;Verfügbare Layer abfragen&#39;,
-            checkAllLayersBtnText: &#39;Alle auswählen&#39;,
-            uncheckAllLayersBtnText: &#39;Nichts auswählen&#39;,
-            addCheckedLayersBtnText: &#39;Ausgewählte Layer hinzufügen&#39;,
-            errorIncompatibleWMS: &#39;Der angefragte WMS ist nicht kompatibel &#39; +
-                    &#39;zur Anwendung&#39;,
-            errorRequestFailed: &#39;Die angegebene URL konnte nicht abgefragt &#39; +
-                    &#39;werden&#39;,
-            errorCouldntParseResponse: &#39;Die erhaltene Antwort konnte nicht &#39; +
-                    &#39;erfolgreich geparst werden&#39;,
-            msgRequestTimedOut: &#39;Die Anfrage wurde nicht schnell genug &#39; +
-                    &#39;beantwortet und abgebrochen&#39;,
-            msgServiceException: &#39;Eine OGC ServiceException ist aufgetreten&#39;,
-            msgCorsMisconfiguration: &#39;HTTP access control (CORS) auf dem &#39; +
-                    &#39;Zielserver vermutlich nicht korrekt konfiguriert&#39;,
-            msgUnauthorized: &#39;Der Client ist nicht gegenüber dem Zielserver &#39; +
-                    &#39;authentifiziert&#39;,
-            msgForbidden: &#39;Der Client hat keinen Zugriff auf die angefragte &#39; +
-                    &#39;Ressource&#39;,
-            msgFileNotFound: &#39;Die angefragte Ressource existiert nicht&#39;,
-            msgTooManyRequests: &#39;Der Client hat zu viele Anfragen gestellt&#39;,
-            msgServiceUnavailable: &#39;Der Server ist derzeit nicht verfügbar &#39; +
-                    &#39;(zu viele Anfragen bzw. Wartungsmodus)&#39;,
-            msgGatewayTimeOut: &#39;Der Server fungierte als Gateway und das &#39; +
-                    &#39;Originalziel hat zu langsam geantwortet&#39;,
-            msgClientError: &#39;Ein unspezifizierter Clientfehler ist aufgetreten&#39;,
-            msgServerError: &#39;Ein unspezifizierter Serverfehler ist aufgetreten&#39;,
-            documentation: &#39;&lt;h2&gt;WMS hinzufügen&lt;/h2&gt;• In diesem Dialog &#39; +
-                &#39;können Sie mit Hilfe einer WMS-URL &#39; +
-                &#39;einen beliebigen Kartendienst der Karte hinzufügen.&#39;
+<span id='BasiGX-view-button-AddWms-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: &#39;WMS hinzufügen&#39;,
+            text: &#39;WMS &lt;span style=&quot;font-size: 1.7em; &#39; +
+                &#39;font-weight: normal;&quot;&gt;⊕&lt;/span&gt;&#39;,
+            windowTitle: &#39;WMS hinzufügen&#39;,
+            documentation: &#39;&lt;h2&gt;WMS hinzufügen&lt;/h2&gt;• Ein Klick auf den &#39; +
+                &#39;Button öffnet ein Fenster, in dem Sie mit Hilfe einer &#39; +
+                &#39;WMS-URL einen beliebigen Kartendienst der Karte hinzufügen &#39; +
+                &#39;können.&#39;
         }
     },
 
-<span id='BasiGX-view-form-AddWms-cfg-padding'>    padding: 5,
-</span><span id='BasiGX-view-form-AddWms-cfg-layout'>    layout: &#39;anchor&#39;,
-</span><span id='BasiGX-view-form-AddWms-cfg-defaults'>    defaults: {
-</span>        anchor: &#39;100%&#39;
+<span id='BasiGX-view-button-AddWms-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: &#39;{text}&#39;
     },
 
-<span id='BasiGX-view-form-AddWms-cfg-scrollable'>    scrollable: true,
-</span>
+<span id='BasiGX-view-button-AddWms-property-liveDemoConfig'>    /**
+</span>     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: {
+                component: &#39;basigx-button-addwms&#39;,
+                moveDuration: 2000
+            }
+        },
+        {
+            clickOnButton: &#39;basigx-button-addwms&#39;
+        },
+        {
+            moveMouseTo: {
+                component: &#39;window[name=add-wms-window] textfield[name=url]&#39;,
+                moveDuration: 2000
+            }
+        },
+        {
+            enterText: {
+                component: &#39;window[name=add-wms-window] textfield[name=url]&#39;,
+                text: &#39;https://ows.terrestris.de/osm/service&#39;,
+                waitAfter: 3500
+            }
+        },
+        {
+            moveMouseTo:
+                &#39;window[name=add-wms-window] button[name=requestLayersBtn]&#39;
+        },
+        {
+            clickOnButton: {
+                component:
+                    &#39;window[name=add-wms-window] button[name=requestLayersBtn]&#39;,
+                waitAfter: 3000
+            }
+        },
+        {
+            scrollTo: {
+                component: &#39;window[name=add-wms-window] form&#39;,
+                target: {
+                    x: 0,
+                    y: 999,
+                    animate: true
+                }
+            }
+        },
+        {
+            moveMouseTo:
+                &#39;window[name=add-wms-window] button[name=add-checked-layers]&#39;
+        },
+        {
+            destroy: &#39;window[name=add-wms-window]&#39;
+        }
+    ],
 
+<span id='BasiGX-view-button-AddWms-property-_win'>    /**
+</span>     * The window instance which will be created by this button.
+     *
+     * @type {Ext.window.Window}
+     * @private
+     */
+    _win: null,
+
+<span id='BasiGX-view-button-AddWms-property-config'>    /**
+</span>     *
+     */
     config: {
-
-<span id='BasiGX-view-form-AddWms-cfg-candidatesInitiallyChecked'>        /**
-</span>         * Whether layers shall start `checked` or `unchecked` in the available
-         * layers fieldset.
-         */
-        candidatesInitiallyChecked: false,
-
-<span id='BasiGX-view-form-AddWms-cfg-hasCheckAllBtn'>        /**
-</span>         * Whether to add a `Check all layers` button to the toolbar to interact
-         * with the layers of a GetCapabilities response.
-         */
-        hasCheckAllBtn: false,
-
-<span id='BasiGX-view-form-AddWms-cfg-hasUncheckAllBtn'>        /**
-</span>         * Whether to add a `Uncheck all layers` button to the toolbar to
-         * interact with the layers of a GetCapabilities response.
-         */
-        hasUncheckAllBtn: false,
-
-<span id='BasiGX-view-form-AddWms-cfg-includeSubLayer'>        /**
-</span>         * Whether to include sublayers when creating the list of available
-         * layers.
-         */
-        includeSubLayer: false,
-
-<span id='BasiGX-view-form-AddWms-cfg-versionArray'>        /**
-</span>         * The WMS versions we try to use in the getCapabilities requests.
-         */
-        versionArray: [&#39;1.3.0&#39;, &#39;1.1.1&#39;],
-
-<span id='BasiGX-view-form-AddWms-cfg-autoDetectVersion'>        /**
-</span>         * Whether to test the WMS versions in #versionArray automatically in
-         * descending order. This will hide the user interface for manually
-         * selecting the version to ask the WMS for.
-         */
-        autoDetectVersion: false,
-
-<span id='BasiGX-view-form-AddWms-cfg-wmsBaseUrls'>        /**
-</span>         * With these WMS urls we fill the combobox. If this is empty (default),
-         * no combobox will be rendered but a plain textfield.
-         */
-        wmsBaseUrls: [],
-
-<span id='BasiGX-view-form-AddWms-cfg-proxyUrl'>        /**
-</span>         * Defines a URL which will be appended to all capabilites requests.
-         * Especially useful when dealing with CORS problems.
-         */
-        proxyUrl: null,
-
-<span id='BasiGX-view-form-AddWms-cfg-defaultUrl'>        /**
-</span>         * Default url for the textfield or combobox.
-         */
-        defaultUrl: &#39;https://ows.terrestris.de/osm/service&#39;,
-
-<span id='BasiGX-view-form-AddWms-property-useDefaultXhrHeader'>        /**
-</span>         * Whether we will send the `X-Requested-With` header when fetching the
-         * capabilities document from the URL. The `X-Requested-With` header is
-         * usually added for XHR, but adding it should lead to a preflight
-         * request (see https://goo.gl/6JzdUI), which some servers fail.
-         *
-         * @type {Boolean}
-         */
-        useDefaultXhrHeader: false,
-
-<span id='BasiGX-view-form-AddWms-property-disableCaching'>        /**
-</span>         * Whether the request against the WMS servers will contain the ExtJS
-         * cache buster (`_dc=123…`) or not. If set to `false`, the param will
-         * not be send, if set to `true`, we&#39;ll pass it along (ExtJS default
-         * behaviour).
-         *
-         * The name of this parameter is taken from the config option of
-         * `Ext.Ajax`, turning the boolean logic around would be even more
-         * confusing.
-         *
-         * Defaults to `true`, e.g. the cache buster will be send along in the
-         * GET-request.
-         *
-         * @type {Boolean}
-         */
-        disableCaching: true
+<span id='BasiGX-view-button-AddWms-cfg-windowConfig'>        windowConfig: {
+</span>            // can be used by subclasses to apply/merge
+            // additional/other values for the window
+        }
     },
 
-<span id='BasiGX-view-form-AddWms-property-parser'>    /**
-</span>     * The `ol.format.WMSCapabilities` which we use to parse any responses. Will
-     * be set in `initComponent`
-     *
-     * @private
-     */
-    parser: null,
-
-<span id='BasiGX-view-form-AddWms-property-lastErrorMsgKey'>    /**
-</span>     * Keeps track of the viewModel key of the last error (if any).
-     *
-     * @private
-     */
-    lastErrorMsgKey: null,
-
-<span id='BasiGX-view-form-AddWms-property-triedVersions'>    /**
-</span>     * The WMS versions we already tried to request the getCapabilities
-     * document for.
-     *
-     * @private
-     */
-    triedVersions: [],
-
-<span id='BasiGX-view-form-AddWms-cfg-defaultButton'>    defaultButton: &#39;requestLayersBtn&#39;,
-</span>
-<span id='BasiGX-view-form-AddWms-property-items'>    items: [
-</span>        {
-            xtype: &#39;fieldset&#39;,
-            layout: &#39;anchor&#39;,
-            defaults: {
-                anchor: &#39;100%&#39;
-            },
-            bind: {
-                title: &#39;{queryParamsFieldSetTitle}&#39;
-            },
-            items: [{
-                xtype: &#39;textfield&#39;,
-                bind: {
-                    fieldLabel: &#39;{wmsUrlTextFieldLabel}&#39;
-                },
-                name: &#39;url&#39;,
-                allowBlank: false,
-                value: null,
+<span id='BasiGX-view-button-AddWms-method-handler'>    handler: function() {
+</span>        if (!this._win) {
+            var windowConfig = {
+                name: &#39;add-wms-window&#39;,
+                title: this.getViewModel().get(&#39;windowTitle&#39;),
+                width: 500,
+                height: 400,
+                layout: &#39;fit&#39;,
+                constrain: true,
+                items: [{
+                    xtype: &#39;basigx-form-addwms&#39;
+                }],
                 listeners: {
-                    change: function(textfield) {
-                        var view = textfield.up(&#39;basigx-form-addwms&#39;);
-                        view.resetState();
-                    },
-                    beforerender: function(textfield) {
-                        var view = textfield.up(&#39;basigx-form-addwms&#39;);
-                        var countUrls = view.wmsBaseUrls.length;
-                        if (countUrls !== 0) {
-                            textfield.setHidden(true);
-                            textfield.allowBlank = true;
-                        }
-                    }
+                    destroy: this.onDestroy,
+                    scope: this
                 }
-            }, {
-                xtype: &#39;combobox&#39;,
-                bind: {
-                    fieldLabel: &#39;{wmsUrlTextFieldLabel}&#39;
-                },
-                store: null,
-                name: &#39;urlCombo&#39;,
-                allowBlank: false,
-                value: null,
-                listeners: {
-                    change: function(combobox) {
-                        var view = combobox.up(&#39;basigx-form-addwms&#39;);
-                        view.resetState();
-                    },
-                    beforerender: function(combobox) {
-                        var view = combobox.up(&#39;basigx-form-addwms&#39;);
-                        var countUrls = view.wmsBaseUrls.length;
-                        if (countUrls === 0) {
-                            combobox.setHidden(true);
-                            combobox.allowBlank = true;
-                        } else {
-                            var urlWms = view.wmsBaseUrls;
-                            combobox.setStore(urlWms);
-                        }
-                    }
-                }
-            }, {
-                xtype: &#39;fieldcontainer&#39;,
-                bind: {
-                    fieldLabel: &#39;{wmsVersionContainerFieldLabel}&#39;
-                },
-                defaultType: &#39;radiofield&#39;,
-                defaults: {
-                    flex: 1
-                },
-                layout: &#39;hbox&#39;,
-                items: [
-                    // TODO generate from #versionArray?
-                    {
-                        boxLabel: &#39;v1.1.1&#39;,
-                        name: &#39;version&#39;,
-                        inputValue: &#39;1.1.1&#39;,
-                        id: &#39;v111-radio&#39;
-                    }, {
-                        boxLabel: &#39;v1.3.0&#39;,
-                        name: &#39;version&#39;,
-                        inputValue: &#39;1.3.0&#39;,
-                        id: &#39;v130-radio&#39;,
-                        checked: true
-                    }
-                ],
-                listeners: {
-                    beforerender: function(fieldcontainer) {
-                        var view = fieldcontainer.up(&#39;basigx-form-addwms&#39;);
-                        fieldcontainer.setHidden(view.getAutoDetectVersion());
-                    }
-                }
-            }]
-        },
-        {
-            xtype: &#39;fieldset&#39;,
-            name: &#39;fs-available-layers&#39;,
-            layout: &#39;anchor&#39;,
-            scrollable: true,
-            maxHeight: 200,
-            defaults: {
-                anchor: &#39;100%&#39;
-            },
-            bind: {
-                title: &#39;{availableLayesFieldSetTitle}&#39;
-            },
-            items: {
-                xtype: &#39;checkboxgroup&#39;,
-                listeners: {
-                    change: {
-                        fn: function(cbGroup) {
-                            var form = cbGroup.up(&#39;basigx-form-addwms&#39;);
-                            form.updateControlToolbarState();
-                        },
-                        buffer: 50
-                    }
-                },
-                columns: 2,
-                vertical: true
-            }
-        }
-    ],
+            };
 
-<span id='BasiGX-view-form-AddWms-cfg-buttons'>    // Reset and Submit buttons
-</span>    buttons: [
-        {
-            name: &#39;resetFormBtn&#39;,
-            bind: {
-                text: &#39;{resetBtnText}&#39;
-            },
-            handler: function(btn) {
-                var view = btn.up(&#39;basigx-form-addwms&#39;);
-                view.getForm().reset();
-                view.removeAddLayersComponents();
-                view.resetState();
-                var defaultValue = view.defaultUrl;
-                var combo = view.down(&#39;combobox[name=urlCombo]&#39;);
-                combo.setValue(defaultValue);
-                var textfield = view.down(&#39;textfield[name=url]&#39;);
-                textfield.setValue(defaultValue);
-            }
-        },
-        &#39;-&gt;&#39;,
-        {
-            bind: {
-                text: &#39;{requestLayersBtnText}&#39;
-            },
-            name: &#39;requestLayersBtn&#39;,
-            reference: &#39;requestLayersBtn&#39;,
-            formBind: true, // only enabled once the form is valid
-            disabled: true,
-            handler: function(btn) {
-                var view = btn.up(&#39;basigx-form-addwms&#39;);
-                view.resetState();
-                view.requestGetCapabilities();
-            }
-        }
-    ],
+            var windowConfigToApply = this.getWindowConfig();
+            Ext.apply(windowConfig, windowConfigToApply);
 
-<span id='BasiGX-view-form-AddWms-method-initComponent'>    /**
-</span>     * Initializes the form and sets up the parser instance.
-     */
-    initComponent: function() {
-        var me = this;
-        me.callParent();
-        me.parser = new ol.format.WMSCapabilities();
-        var defaultValue = me.defaultUrl;
-        var combo = me.down(&#39;combobox[name=urlCombo]&#39;);
-        var textfield = me.down(&#39;textfield[name=url]&#39;);
-        combo.setValue(defaultValue);
-        textfield.setValue(defaultValue);
-    },
-
-<span id='BasiGX-view-form-AddWms-method-resetState'>    /**
-</span>     * Resets our internal state tracking properties for tracking the tried
-     * versions and the last error message key we have determined.
-     *
-     * @private
-     */
-    resetState: function() {
-        var me = this;
-        me.lastErrorMsgKey = null;
-        me.triedVersions = [];
-    },
-
-<span id='BasiGX-view-form-AddWms-method-responseStatusToErrorMsgKey'>    /**
-</span>     * Returns a key for a viewModel property for the passed HTTP status code or
-     * null if we don&#39;t consider the status code an error.
-     *
-     * @param {Number} status The HTTP status code of the last response.
-     * @return {String} An error message key to be looked up in the viewModel.
-     * @private
-     */
-    responseStatusToErrorMsgKey: function(status) {
-        status = parseInt(status, 10);
-        // handle very common ones specifically
-        if (status === 0) {
-            // Most likely CORS
-            // * either not enabled at all
-            // * or misconfigured
-            return &#39;msgCorsMisconfiguration&#39;;
-        } else if (status === 401) {
-            return &#39;msgUnauthorized&#39;;
-        } else if (status === 403) {
-            return &#39;msgForbidden&#39;;
-        } else if (status === 404) {
-            return &#39;msgFileNotFound&#39;;
-        } else if (status === 429) {
-            return &#39;msgTooManyRequests&#39;;
-        } else if (status === 503) {
-            return &#39;msgServiceUnavailable&#39;;
-        } else if (status === 504) {
-            return &#39;msgGatewayTimeOut&#39;;
-        } else if (status &gt;= 400 &amp;&amp; status &lt; 500) {
-            return &#39;msgClientError&#39;;
-        } else if (status &gt;= 500) {
-            return &#39;msgServerError&#39;;
-        }
-        return null;
-    },
-
-<span id='BasiGX-view-form-AddWms-method-requestGetCapabilities'>    /**
-</span>     * Will be called with the `get layers` button. Issues a GetCapabilities
-     * request and sets up handlers for reacting on the response.
-     */
-    requestGetCapabilities: function() {
-        var me = this;
-        var form = me.getForm();
-        if (!form.isValid()) {
-            return;
-        }
-        me.setLoading(true);
-        me.uncheckAllLayers();
-        me.removeAddLayersComponents();
-        var values = form.getValues();
-        var url = &#39;&#39;;
-
-        if (me.getProxyUrl()) {
-            url += me.getProxyUrl();
-        }
-
-        if (me.wmsBaseUrls.length === 0) {
-            url += values.url;
+            this._win = Ext.create(&#39;Ext.window.Window&#39;, windowConfig);
+            this._win.show();
         } else {
-            url += values.urlCombo;
-        }
-
-        var version;
-
-        if (!me.getAutoDetectVersion()) {
-            version = values.version;
-        } else {
-            // try to detect the WMS version we should try next
-            var triedVersions = me.triedVersions;
-            var versionsToTry = me.getVersionArray();
-
-            Ext.each(versionsToTry, function(currentVersion) {
-                var alreadyTried = Ext.Array.contains(
-                    triedVersions, currentVersion
-                );
-
-                if (!alreadyTried) {
-                    version = currentVersion;
-                    triedVersions.push(currentVersion);
-                    return false;
-                }
-            });
-        }
-
-        if (!version) {
-            // should only happen if all versions have been tried and all failed
-            me.setLoading(false);
-            BasiGX.warn(me.getErrorMessage(&#39;errorRequestFailed&#39;));
-            return;
-        }
-        Ext.Ajax.request({
-            url: url,
-            method: &#39;GET&#39;,
-            useDefaultXhrHeader: me.getUseDefaultXhrHeader(),
-            disableCaching: me.getDisableCaching(),
-            params: {
-                REQUEST: &#39;GetCapabilities&#39;,
-                SERVICE: &#39;WMS&#39;,
-                VERSION: version
-            },
-            success: me.onGetCapabilitiesSuccess,
-            failure: me.onGetCapabilitiesFailure,
-            scope: me
-        });
-    },
-
-<span id='BasiGX-view-form-AddWms-method-isServiceExceptionReport'>    /**
-</span>     * Returns true if the passed responseText is a service exception report.
-     *
-     * @param {String} responseText The responseText of a request which is
-     *     possibly a service exception report.
-     * @return {Boolean} Whether the response is a service exception report
-     *     document.
-     */
-    isServiceExceptionReport: function(responseText) {
-        if (!responseText) {
-            return false;
-        }
-        return (/&lt;ServiceExceptionReport/g).test(responseText);
-    },
-
-<span id='BasiGX-view-form-AddWms-method-onGetCapabilitiesSuccess'>    /**
-</span>     * Called if we could successfully query for the capabilities of a WMS, this
-     * method will examine the answer and eventually set up a fieldset for all
-     * the layers that we have found in the server&#39;s answer.
-     *
-     * @param {XMLHttpRequest} response The response of the request.
-     */
-    onGetCapabilitiesSuccess: function(response) {
-        var me = this;
-
-        me.lastErrorMsgKey = null;
-        // some servers answer with a ServiceExceptionReport, e.g. when a server
-        // only supports v1.1.1 but was requested with v1.3.0. In that case, we
-        // have to manually call the failure callback.
-        if (me.isServiceExceptionReport(response.responseText)) {
-            me.onGetCapabilitiesFailure(response);
-            return;
-        }
-
-        var viewModel = me.getViewModel();
-        var parser = me.parser;
-        var result;
-        var isLastAvailableVersion = me.getVersionArray().length ===
-          me.triedVersions.length;
-        try {
-            result = parser.read(response.responseText);
-        } catch (ex) {
-            if (isLastAvailableVersion) {
-                BasiGX.warn(viewModel.get(&#39;errorCouldntParseResponse&#39;));
-                me.setLoading(false);
-                return;
-            }
-            me.requestGetCapabilities();
-            return;
-        }
-        var compatibleLayers = me.isCompatibleCapabilityResponse(result);
-        if (!compatibleLayers) {
-            if (isLastAvailableVersion) {
-                BasiGX.warn(viewModel.get(&#39;errorIncompatibleWMS&#39;));
-                me.setLoading(false);
-                return;
-            }
-            me.requestGetCapabilities();
-            return;
-        }
-        me.fillAvailableLayersFieldset(compatibleLayers);
-        me.updateControlToolbarState();
-        me.setLoading(false);
-    },
-
-<span id='BasiGX-view-form-AddWms-method-onGetCapabilitiesFailure'>    /**
-</span>     * Called if we could not successfully query for the capabilities of a WMS.
-     *
-     * @param {XMLHttpRequest} response The response of the request.
-     */
-    onGetCapabilitiesFailure: function(response) {
-        var me = this;
-        var status = response.status;
-        var responseText = response.responseText;
-        var errDetails = [];
-        // Keep track of the last error, to eventually inform the user
-        me.lastErrorMsgKey = me.responseStatusToErrorMsgKey(status);
-
-        // we might simply have timed out
-        if (response.timedout) {
-            me.lastErrorMsgKey = &#39;msgRequestTimedOut&#39;;
-        }
-
-        // If we still do not have a msg key and a OK status, check if it&#39;s a SE
-        if (me.lastErrorMsgKey === null &amp;&amp; status &gt;= 200 &amp;&amp; status &lt; 300) {
-            if (me.isServiceExceptionReport(responseText)) {
-                // overwrite the key from the status, this should be considered
-                // an error
-                me.lastErrorMsgKey = &#39;msgServiceException&#39;;
-                errDetails = me.exceptionDetailsFromReport(responseText);
-            }
-        }
-
-        if (!me.getAutoDetectVersion()) {
-            me.setLoading(false);
-            BasiGX.warn(me.getErrorMessage(&#39;errorRequestFailed&#39;, errDetails));
-            return;
-        } else {
-            // we will try another WMS version automatically…
-            me.requestGetCapabilities();
+            BasiGX.util.Animate.shake(this._win);
         }
     },
 
-<span id='BasiGX-view-form-AddWms-method-exceptionDetailsFromReport'>    /**
-</span>     * Returns an array of `&lt;ServiceException&gt;` text contents of the passed
-     * `&lt;ServiceExceptionReport&gt;` or an empty array.
-     *
-     * @param {String} exceptionReport An OGC ServiceExceptionReport as string.
-     * @return {Array&lt;String&gt;} exceptionReport An array of `&lt;ServiceException&gt;`
-     *     text contents of the passed `&lt;ServiceExceptionReport&gt;` or an empty
-     *     array.
+<span id='BasiGX-view-button-AddWms-method-onDestroy'>    /**
+</span>     * Reset window reference
      */
-    exceptionDetailsFromReport: function(exceptionReport) {
-        var exceptionDetails = [];
-        if (DOMParser) {
-            var parser = new DOMParser();
-            try {
-                var xml = parser.parseFromString(exceptionReport, &#39;text/xml&#39;);
-                var exceptions = Ext.DomQuery.select(&#39;ServiceException&#39;, xml);
-                Ext.each(exceptions, function(exception) {
-                    exceptionDetails.push(exception.innerHTML);
-                });
-            } catch (e) {
-                // pass
-                Ext.Logger.warn(&#39;Failed to parse responseText as XML: &#39; + e);
-            }
+    onDestroy: function() {
+        if (this._win) {
+            this._win = null;
         }
-        return exceptionDetails;
-    },
-
-<span id='BasiGX-view-form-AddWms-method-getErrorMessage'>    /**
-</span>     * Returns the error message to display to the user for the passed key,
-     * optionally adding the passed details.
-     *
-     * @param {String} errorKey The key to look up in the view model for the
-     *     error.
-     * @param {Array&lt;String&gt;} [errorDetails] Optional array of details to
-     *     display.
-     * @return {String} The error message to display.
-     * @private
-     */
-    getErrorMessage: function(errorKey, errorDetails) {
-        var me = this;
-        var viewModel = me.getViewModel();
-
-        var msg = viewModel.get(errorKey);
-        if (me.lastErrorMsgKey !== null) {
-            msg += &#39;&lt;br /&gt;&lt;br /&gt;&#39; + viewModel.get(me.lastErrorMsgKey);
-        }
-        if (errorDetails &amp;&amp; errorDetails.length &gt; 0) {
-            msg += &#39;&lt;ul&gt;&#39;;
-            Ext.each(errorDetails, function(errorDetail) {
-                msg += &#39;&lt;li&gt;&#39; + errorDetail + &#39;&lt;/li&gt;&#39;;
-            });
-            msg += &#39;&lt;/ul&gt;&#39;;
-        }
-        return msg;
-    },
-
-<span id='BasiGX-view-form-AddWms-method-updateControlToolbarState'>    /**
-</span>     * Updates the disabled state of the buttons to control the layer
-     * checkboxes (e.g. check all, uncheck all, add selected).
-     */
-    updateControlToolbarState: function() {
-        var me = this;
-        var cbGroup = me.down(&#39;[name=fs-available-layers] checkboxgroup&#39;);
-        var allCbs = cbGroup.query(&#39;checkbox&#39;);
-        var allChecked = cbGroup.query(&#39;[checked=true]&#39;);
-        var allDisabled = cbGroup.query(&#39;[disabled=true]&#39;);
-        var checkAllBtn = me.down(&#39;[name=check-all-layers]&#39;);
-        var uncheckAllBtn = me.down(&#39;[name=uncheck-all-layers]&#39;);
-        var addBtn = me.down(&#39;[name=add-checked-layers]&#39;);
-        if (allCbs.length === 0) {
-            // no checkboxes, also no control toolbar, return
-            return;
-        }
-        if (allDisabled.length === allCbs.length) {
-            // all checkboxes are disabled, all controls can be disabled
-            addBtn.setDisabled(true);
-            if (checkAllBtn) {
-                checkAllBtn.setDisabled(true);
-            }
-            if (uncheckAllBtn) {
-                uncheckAllBtn.setDisabled(true);
-            }
-            return;
-        }
-        if (allChecked.length &gt; 0) {
-            // at least one checkbox is checked
-            addBtn.setDisabled(false);
-        } else {
-            // not even one is checked
-            addBtn.setDisabled(true);
-        }
-
-        if (checkAllBtn) {
-            if (allCbs.length === allChecked.length) {
-                // all are checked already
-                checkAllBtn.setDisabled(true);
-            } else {
-                checkAllBtn.setDisabled(false);
-            }
-        }
-        if (uncheckAllBtn) {
-            if (allChecked.length === 0) {
-                // not a single one is checked
-                uncheckAllBtn.setDisabled(true);
-            } else {
-                uncheckAllBtn.setDisabled(false);
-            }
-        }
-    },
-
-<span id='BasiGX-view-form-AddWms-method-removeAddLayersComponents'>    /**
-</span>     * Remove the checkboxes for layers from previous requests, and also the
-     * interact-toolbar.
-     */
-    removeAddLayersComponents: function() {
-        var me = this;
-        var cbGroup = me.down(&#39;[name=fs-available-layers] checkboxgroup&#39;);
-        var tb = me.down(&#39;toolbar[name=interact-w-available-layers]&#39;);
-        cbGroup.removeAll();
-        if (tb) {
-            me.remove(tb);
-        }
-    },
-
-<span id='BasiGX-view-form-AddWms-method-getOlLayer'>    /**
-</span>     * A utility method that creates an ol.layer.Tile with a ol.source.TileWMS
-     * from the properties of a layer from a getCapabilities response.
-     *
-     * @param {Object} capLayer A layer from a GetCapabilities response
-     * @param {String} version The WMS version.
-     * @param {String} mapProj The map projection as string.
-     * @param {String} url The WMS URL.
-     * @param {string[]} allCrs a list of all available coordinate systems
-     *  up to this level
-     * @return {ol.layer.Tile} The created layer or `undefined`.
-     */
-    getOlLayer: function(capLayer, version, mapProj, url, allCrs) {
-        // This really should not matter, as ol can reproject in the client
-        // At least it should be configurable
-        if (version === &#39;1.3.0&#39; &amp;&amp;
-            !Ext.Array.contains(allCrs, mapProj)) {
-            // only available for 1.3.0
-            return;
-        }
-        var style = capLayer.Style;
-        var olSource = new ol.source.TileWMS({
-            url: url,
-            params: {
-                LAYERS: capLayer.Name,
-                STYLES: style ? style[0].Name : &#39;&#39;,
-                VERSION: version,
-                TRANSPARENT: true
-            }
-        });
-
-        var legendUrl = null;
-
-        if (Ext.isArray(style) &amp;&amp; !Ext.isEmpty(style) &amp;&amp;
-            Ext.isArray(style[0].LegendURL) &amp;&amp;
-            !Ext.isEmpty(style[0].LegendURL) &amp;&amp;
-            style[0].LegendURL[0].OnlineResource) {
-            legendUrl = style[0].LegendURL[0].OnlineResource;
-        }
-
-        var bbox;
-        if (capLayer.BoundingBox) {
-            for (var i = 0; i &lt; capLayer.BoundingBox.length; ++i) {
-                if (capLayer.BoundingBox[i].crs === &#39;CRS:84&#39;) {
-                    bbox = capLayer.BoundingBox[i].extent;
-                }
-            }
-            if (!bbox) {
-                for (i = 0; i &lt; capLayer.BoundingBox.length; ++i) {
-                    if (capLayer.BoundingBox[i].crs === &#39;EPSG:4326&#39;) {
-                        bbox = capLayer.BoundingBox[i].extent;
-                    }
-                }
-            }
-            // looks like parsing 1.1.1 capabilities the crs is not
-            // set on the bounding box object
-            if (!bbox) {
-                for (i = 0; i &lt; capLayer.BoundingBox.length; ++i) {
-                    bbox = capLayer.BoundingBox[i].extent;
-                }
-            }
-        }
-
-        var olLayer = new ol.layer.Tile({
-            topic: true,
-            name: capLayer.Title,
-            source: olSource,
-            legendUrl: legendUrl,
-            queryable: capLayer.queryable,
-            layerExtent: bbox
-        });
-        return olLayer;
-    },
-
-<span id='BasiGX-view-form-AddWms-method-collectLayers'>    /**
-</span>     * Recursively collect all available sub layers from
-     * the given capabilities layer node.
-     *
-     * @param {object} layer the capabilities layer node
-     * @param {string} version the WMS version
-     * @param {string} mapProj the projection
-     * @param {string} url the WMS URL
-     * @param {ol.Layer[]} compatible the array to collect the layers in
-     * @param {string[]} allCrs all coordinate systems found in the hierarchy
-     */
-    collectLayers: function(layer, version, mapProj, url, compatible, allCrs) {
-        var me = this;
-        allCrs = allCrs.concat(layer.CRS);
-        var olLayer = me.getOlLayer(layer, version, mapProj, url, allCrs);
-        if (olLayer) {
-            compatible.push(olLayer);
-        }
-
-        if (Ext.isArray(layer.Layer)) {
-            Ext.each(layer.Layer, function(subLayer) {
-                me.collectLayers(
-                    subLayer,
-                    version,
-                    mapProj,
-                    url,
-                    compatible,
-                    allCrs.slice()
-                );
-            });
-        }
-    },
-
-<span id='BasiGX-view-form-AddWms-method-isCompatibleCapabilityResponse'>    /**
-</span>     * Checks if the passed capabilities object (from the #parser) is
-     * compatible. It will return an array of layers if we could determine any,
-     * and the boolean value `false` if not.
-     *
-     * @param {Object} capabilities The GetCapabilities object as it is returned
-     *     by our parser.
-     * @return {ol.layer.Tile[]|boolean} Eitehr an array of comüatible layers or
-     *     &#39;false&#39;.
-     */
-    isCompatibleCapabilityResponse: function(capabilities) {
-        var me = this;
-        if (!capabilities) {
-            return false;
-        }
-        var version = capabilities.version;
-        if (version !== &#39;1.1.1&#39; &amp;&amp; version !== &#39;1.3.0&#39;) {
-            return false;
-        }
-        var compatible = [];
-        var map = BasiGX.util.Map.getMapComponent().getMap();
-        var mapProj = map.getView().getProjection().getCode();
-
-        // same in both versions
-        var allCrs = capabilities.Capability.Layer.CRS || [];
-        var layers = capabilities.Capability.Layer.Layer;
-        var url = capabilities.Capability.Request.GetMap.
-            DCPType[0].HTTP.Get.OnlineResource;
-
-        var includeSubLayer = me.getIncludeSubLayer();
-
-        Ext.each(layers, function(layer) {
-            var crsList = allCrs.concat(layer.CRS);
-            var olLayer = me.getOlLayer(layer, version, mapProj, url, crsList);
-            if (olLayer) {
-                compatible.push(olLayer);
-            }
-
-            if (includeSubLayer &amp;&amp; Ext.isArray(layer.Layer)) {
-                Ext.each(layer.Layer, function(subLayer) {
-                    me.collectLayers(
-                        subLayer,
-                        version,
-                        mapProj,
-                        url,
-                        compatible,
-                        crsList
-                    );
-                });
-            }
-        });
-
-        return compatible.length &gt; 0 ? compatible : false;
-    },
-
-<span id='BasiGX-view-form-AddWms-method-fillAvailableLayersFieldset'>    /**
-</span>     * Takes an array of OpenLayers layers (as gathered by the method to fetch
-     * them from the capabilities object #isCompatibleCapabilityResponse) and
-     * updates the avaialable layers fieldset with matching entries.
-     *
-     * @param {ol.layer.Tile[]} layers The layers for which the we shall fill
-     *     the fieldset.
-     */
-    fillAvailableLayersFieldset: function(layers) {
-        var me = this;
-        me.removeAddLayersComponents();
-        var fs = me.down(&#39;[name=fs-available-layers]&#39;);
-        var cbGroup = fs.down(&#39;checkboxgroup&#39;);
-        var checkBoxes = [];
-        var candidatesInitiallyChecked = me.getCandidatesInitiallyChecked();
-        Ext.each(layers, function(layer) {
-            checkBoxes.push({
-                xtype: &#39;checkbox&#39;,
-                boxLabel: layer.get(&#39;name&#39;),
-                checked: candidatesInitiallyChecked,
-                olLayer: layer
-            });
-        });
-        cbGroup.add(checkBoxes);
-
-        var tbItems = [];
-
-        if (me.getHasCheckAllBtn()) {
-            tbItems.push({
-                xtype: &#39;button&#39;,
-                name: &#39;check-all-layers&#39;,
-                bind: {
-                    text: &#39;{checkAllLayersBtnText}&#39;
-                },
-                handler: me.checkAllLayers,
-                scope: me
-            });
-        }
-
-        if (me.getHasUncheckAllBtn()) {
-            tbItems.push({
-                xtype: &#39;button&#39;,
-                name: &#39;uncheck-all-layers&#39;,
-                bind: {
-                    text: &#39;{uncheckAllLayersBtnText}&#39;
-                },
-                handler: me.uncheckAllLayers,
-                scope: me
-            });
-        }
-
-        tbItems.push(&#39;-&gt;&#39;);
-        tbItems.push({
-            xtype: &#39;button&#39;,
-            name: &#39;add-checked-layers&#39;,
-            bind: {
-                text: &#39;{addCheckedLayersBtnText}&#39;
-            },
-            handler: me.addCheckedLayers,
-            scope: me
-        });
-
-        me.add({
-            xtype: &#39;toolbar&#39;,
-            name: &#39;interact-w-available-layers&#39;,
-            items: tbItems
-        });
-    },
-
-<span id='BasiGX-view-form-AddWms-method-addCheckedLayers'>    /**
-</span>     * Examines the available layers fieldset, and adds all checked layers to
-     * the map.
-     */
-    addCheckedLayers: function() {
-        var me = this;
-        var fs = me.down(&#39;[name=fs-available-layers]&#39;);
-        var checkboxes = fs.query(&#39;checkbox[checked=true][disabled=false]&#39;);
-        var map = BasiGX.util.Map.getMapComponent().getMap();
-        Ext.each(checkboxes, function(checkbox) {
-            me.fireEvent(&#39;beforewmsadd&#39;, checkbox.olLayer);
-            map.addLayer(checkbox.olLayer);
-            me.fireEvent(&#39;wmsadd&#39;, checkbox.olLayer);
-            checkbox.setDisabled(true);
-        });
-        me.updateControlToolbarState();
-    },
-
-<span id='BasiGX-view-form-AddWms-method-checkAllLayers'>    /**
-</span>     * Checks all checkboxes in the available layers fieldset.
-     */
-    checkAllLayers: function() {
-        var sel = &#39;[name=fs-available-layers] checkbox[disabled=false]&#39;;
-        var checkboxes = this.query(sel);
-        Ext.each(checkboxes, function(checkbox) {
-            checkbox.setValue(true);
-        });
-    },
-
-<span id='BasiGX-view-form-AddWms-method-uncheckAllLayers'>    /**
-</span>     * Unchecks all checkboxes in the available layers fieldset.
-     */
-    uncheckAllLayers: function() {
-        var sel = &#39;[name=fs-available-layers] checkbox[disabled=false]&#39;;
-        var checkboxes = this.query(sel);
-        Ext.each(checkboxes, function(checkbox) {
-            checkbox.setValue(false);
-        });
     }
 });
 </pre>
