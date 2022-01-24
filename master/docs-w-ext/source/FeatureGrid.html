@@ -41,6 +41,7 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
     xtype: &#39;basigx-grid-featuregrid&#39;,
     extend: &#39;Ext.panel.Panel&#39;,
     requires: [
+        &#39;Ext.grid.filters.Filters&#39;,
         &#39;GeoExt.data.store.Features&#39;
     ],
 
@@ -93,7 +94,12 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
 <span id='BasiGX-view-grid-FeatureGrid-cfg-gridHeader'>        /**
 </span>         * Configures the grid header. See https://docs.sencha.com/extjs/6.2.0/classic/Ext.grid.Panel.html#cfg-header
          */
-        gridHeader: undefined
+        gridHeader: undefined,
+        /* eslint-enable */
+<span id='BasiGX-view-grid-FeatureGrid-cfg-enableFiltering'>        /**
+</span>         * Configures filtering on the grid.
+         */
+        enableFiltering: false
         /* eslint-enable */
     },
 
@@ -118,10 +124,13 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
             selModel: &#39;checkboxmodel&#39;,
             enableLocking: this.getEnableLocking(),
             header: this.getGridHeader(),
-            plugins: {
-                ptype: &#39;cellediting&#39;,
-                clicksToEdit: 1
-            },
+            plugins: [
+                {
+                    ptype: &#39;cellediting&#39;,
+                    clicksToEdit: 1
+                },
+                &#39;gridfilters&#39;
+            ],
             listeners: {
                 cellclick: function(view, td, colIdx, record) {
                     var grid = this.up(&#39;basigx-grid-featuregrid&#39;);
@@ -410,7 +419,8 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
             columns.push({
                 text: attribute,
                 dataIndex: attribute,
-                editor: &#39;textfield&#39;
+                editor: &#39;textfield&#39;,
+                filter: me.enableFiltering
             });
         });
         return columns;
