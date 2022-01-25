@@ -56,7 +56,7 @@
         "generate:docs-w-ext:master": "jsduck --config=jsduck-w-ext.json --output=master/docs-w-ext --title=\"BasiGX $npm_package_version-dev Documentation (incl. ExtJS classes)\" --warnings=-all:resources/external/ext-6.2.0",
         "generate:docs:tag": "jsduck --config=jsduck.json --output=$npm_package_version/docs --title=\"BasiGX $npm_package_version Documentation\" --warnings=-inheritdoc",
         "generate:docs-w-ext:tag": "jsduck --config=jsduck-w-ext.json --output=$npm_package_version/docs-w-ext --title=\"BasiGX $npm_package_version Documentation (incl. ExtJS classes)\" --warnings=-all:resources/external/ext-6.2.0"
-        },
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/terrestris/BasiGX.git"
