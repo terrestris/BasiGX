@@ -24,7 +24,10 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     xtype: 'basigx-grid-featuregrid',
     extend: 'Ext.panel.Panel',
     requires: [
+        'Ext.Array',
         'Ext.grid.filters.Filters',
+        'BasiGX.util.WFS',
+        'BasiGX.util.WFST',
         'GeoExt.data.store.Features'
     ],
 
@@ -33,7 +36,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             renameButton: 'Umbenennen',
             renameBox: 'Bitte geben Sie den neuen Spaltennamen an:',
             deleteTitle: 'Löschen',
-            deleteQuestion: 'Wollen Sie die Spalte wirklich löschen?'
+            deleteQuestion: 'Wollen Sie die Spalte wirklich löschen?',
+            saveButton: 'Speichern',
+            saveErrorText: 'Änderungen konnten nicht gespeichert werden.'
         }
     },
 
@@ -82,7 +87,12 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         /**
          * Configures filtering on the grid.
          */
-        enableFiltering: false
+        enableFiltering: false,
+        /* eslint-enable */
+        /**
+         * Configures editing of the grid.
+         */
+        enableEditing: false
         /* eslint-enable */
     },
 
@@ -102,7 +112,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     initComponent: function() {
         this.callParent();
-        this.add({
+        var gridOpts = {
             xtype: 'grid',
             selModel: 'checkboxmodel',
             enableLocking: this.getEnableLocking(),
@@ -127,7 +137,17 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                     }
                 }
             }
-        });
+        };
+        if (this.enableEditing) {
+            gridOpts.tbar = ['->', {
+                type: 'button',
+                bind: {
+                    text: this.getViewModel().get('saveButton')
+                },
+                handler: this.onSaveClick.bind(this)
+            }];
+        }
+        this.add(gridOpts);
         this.setLayerStore();
         this.registerEvents();
         this.createHighlightLayer(this.getMap());
@@ -399,12 +419,16 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             });
         }
         Ext.each(attributes, function(attribute) {
-            columns.push({
+            var col = {
                 text: attribute,
                 dataIndex: attribute,
-                editor: 'textfield',
                 filter: me.enableFiltering
-            });
+            };
+            var isIdField = attribute === me.layer.getProperties().idField;
+            if (me.enableEditing && !isIdField) {
+                col.editor = 'textfield';
+            }
+            columns.push(col);
         });
         return columns;
     },
@@ -527,6 +551,85 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             'removefeature',
             this.selectionFeatureRemoved
         );
+    },
+
+    /**
+     * Handler for the save button of the feature grid.
+     *
+     * @param {Ext.button.Button} btn The clicked button.
+     */
+    onSaveClick: function(btn) {
+        var me = this;
+        var vm = me.getViewModel();
+        var grid = btn.up('gridpanel');
+        grid.setLoading(true);
+        var gridStore = grid.getStore();
+        var updateFeatures = me.getModifiedFeatures(gridStore);
+        var insertFeatures = [];
+        var deleteFeatures = [];
+
+        me.performWfst(me.layer, insertFeatures, updateFeatures, deleteFeatures)
+            .then(function() {
+                gridStore.commitChanges();
+                grid.setLoading(false);
+            }, function() {
+                Ext.toast(vm.get('saveErrorText'));
+                grid.setLoading(false);
+            });
+    },
+
+    /**
+     * Perform a WFS-T with lockFeatures.
+     *
+     * @param {ol.Layer} layer The layer to which the features belong.
+     * @param {ol.Feature[]} inserts List of new features.
+     * @param {ol.Feature[]} updates List of features to update.
+     * @param {ol.Feature[]} deletes List of features to delete.
+     * @return {Ext.Promise} Promise with the resolve or rejected transaction.
+     */
+    performWfst: function(layer, inserts, updates, deletes) {
+        return BasiGX.util.WFST.lockFeatures(layer)
+            .then(function(response) {
+                return BasiGX.util.WFST.handleLockFeaturesResponse(response);
+            })
+            .then(function(lockId) {
+                var opts = {
+                    layer: layer,
+                    wfstInserts: inserts,
+                    wfstUpdates: updates,
+                    wfstDeletes: deletes,
+                    lockId: lockId
+                };
+                return BasiGX.util.WFST.transact(opts);
+            });
+    },
+
+    /**
+     * Get the modified features from the gridstore.
+     *
+     * @param {Ext.data.Store} store The store to get the features from.
+     * @return {ol.Feature[]} List of modified store records as features.
+     */
+    getModifiedFeatures: function(store) {
+        var me = this;
+        var layerProps = me.layer.getProperties();
+        var idField = layerProps.idField;
+        var modifiedFeatures = [];
+
+        store.each(function(rec) {
+            if (rec.dirty) {
+                var modifiedFields = {};
+                Ext.Object.each(rec.getData(), function(field, value){
+                    if (rec.isModified(field)) {
+                        modifiedFields[field] = value;
+                    }
+                });
+                var feature = new ol.Feature(modifiedFields);
+                feature.setId(rec.get(idField));
+                modifiedFeatures.push(feature);
+            }
+        }, undefined, {filtered: true});
+        return modifiedFeatures;
     }
 
 });
