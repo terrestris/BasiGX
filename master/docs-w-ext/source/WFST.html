@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2016-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-util-WFST'>/**
+</span> * @class BasiGX.util.WFST
+ */
+Ext.define(&#39;BasiGX.util.WFST&#39;, {
+
+    requires: [
+        &#39;BasiGX.util.Map&#39;,
+        &#39;BasiGX.util.CSRF&#39;
+    ],
+
+    statics: {
+
+<span id='BasiGX-util-WFST-static-property-lockTime'>        /**
+</span>         * The duration for a feature lock in minutes
+         */
+        lockTime: 1,
+
+<span id='BasiGX-util-WFST-static-method-transact'>        /**
+</span>         * Starts a WFS Transaction for the given feature arrays.
+         *
+         * @param {Object} opts Options for the transaction.
+         * @param {ol.layer} opts.layer The layer the features come from.
+         * @param {Array} opts.wfstInserts The Array holding
+         *  the features to insert.
+         *
+         * @param {Array} opts.wfstUpdates The Array holding
+         *  the features to update.
+         *
+         * @param {Array} opts.wfstDeletes The Array holding
+         *  the features to delete.
+         *
+         * @param {String} opts.lockId The id of the current feature lock.
+         * @return {Ext.Promise} Promise resolving with transactionResponse.
+         */
+        transact: function(opts) {
+            return new Ext.Promise(function(resolve, reject) {
+                var layerProps = opts.layer.getProperties();
+                var format = new ol.format.WFS;
+                var map = BasiGX.util.Map.getMapComponent().map;
+                var projection = map.getView().getProjection().getCode();
+                var url = layerProps.wfsBaseUrl;
+                if (!Ext.isDefined(url) || Ext.isEmpty(url)) {
+                    return reject(&#39;No wfsBaseUrl defined.&#39;);
+                }
+
+                var qualifiedLayerName = layerProps.originalLayerName;
+                var featurePrefix = qualifiedLayerName.split(&#39;:&#39;)[0];
+                var featureType = qualifiedLayerName.split(&#39;:&#39;)[1];
+                var featureNs = layerProps.namespace;
+
+                var transactionOpts = {
+                    featureNS: featureNs,
+                    featurePrefix: featurePrefix,
+                    featureType: featureType,
+                    srsName: projection
+                };
+                var xml = format.writeTransaction(
+                    opts.wfstInserts,
+                    opts.wfstUpdates,
+                    opts.wfstDeletes,
+                    transactionOpts
+                );
+                /* eslint-disable */
+                var serializer = new XMLSerializer();
+                /* eslint-enable */
+                xml = serializer.serializeToString(xml);
+
+                // override the geometryname, as its hardcoded
+                // through OpenLayers to `geometry`
+                var gname = layerProps.geomField;
+                xml = xml.replace(
+                    /&lt;Property&gt;&lt;Name&gt;geometry&lt;\/Name&gt;/g,
+                    &#39;&lt;Property&gt;&lt;Name&gt;&#39; + gname + &#39;&lt;/Name&gt;&#39;);
+                xml = xml.replace(/&lt;geometry&gt;/g, &#39;&lt;&#39; + gname + &#39;&gt;&#39;);
+                xml = xml.replace(/&lt;\/geometry&gt;/g, &#39;&lt;/&#39; + gname + &#39;&gt;&#39;);
+                // insert the lockId, if available
+                if (opts.lockId) {
+                    // TODO fails on FF, XML seems to be serialized differently
+                    /* eslint-disable */
+                    xml = xml.replace(/(http:\/\/schemas.opengis.net\/wfs\/1.1.0\/wfs.xsd&quot;&gt;)/g,
+                        function($1) {
+                            return $1 + &#39;&lt;LockId&gt;&#39; + opts.lockId + &#39;&lt;/LockId&gt;&#39;;
+                        });
+                    /* eslint-enable */
+                    xml = xml.replace(&#39;XMLSchema-instance&quot;&gt;&#39;,
+                        &#39;XMLSchema-instance&quot;&gt;&lt;LockId&gt;&#39; +
+                        opts.lockId + &#39;&lt;/LockId&gt;&#39;);
+                }
+
+                Ext.Ajax.request({
+                    url: url,
+                    xmlData: xml,
+                    headers: BasiGX.util.CSRF.getHeader(),
+                    method: &#39;POST&#39;,
+                    success: function(xhr) {
+                        var res = xhr.responseText;
+                        /* eslint-disable */
+                        var transactionResponse = format.readTransactionResponse(xhr.responseText);
+                        /* eslint-enable */
+                        if (Ext.isEmpty(transactionResponse) ||
+                            res.indexOf(&#39;&lt;ows:ExceptionText&gt;&#39;) &gt;= 0) {
+                            var msg = &#39;Unspecified error occured.&#39;;
+                            if (res.indexOf(&#39;&lt;ows:ExceptionText&gt;&#39;) &gt;= 0) {
+                                msg = res.split(&#39;&lt;ows:ExceptionText&gt;&#39;)[1].
+                                    split(&#39;&lt;/ows:ExceptionText&gt;&#39;)[0];
+                            }
+                            return reject(msg);
+                        }
+
+                        var result = transactionResponse.transactionSummary;
+                        if ((result.totalDeleted &amp;&amp; result.totalDeleted &gt; 0) ||
+                            /* eslint-disable */
+                            (result.totalInserted &amp;&amp; result.totalInserted &gt; 0) ||
+                            /* eslint-enable */
+                            (result.totalUpdated &amp;&amp; result.totalUpdated &gt; 0)) {
+                            // TODO: layer needs to be transformed
+                            //       to real WFS layer
+                            opts.layer.changed();
+                        }
+                        resolve(transactionResponse);
+                    },
+                    failure: function(xhr) {
+                        var res = xhr.responseText;
+                        /* eslint-disable */
+                        var transactionResponse = format.readTransactionResponse(res);
+                        /* eslint-enable */
+                        var msg = &#39;Unspecified error occured.&#39; +
+                            transactionResponse;
+                        if (res.indexOf(&#39;&lt;ows:ExceptionText&gt;&#39;) &gt;= 0) {
+                            msg = res.split(&#39;&lt;ows:ExceptionText&gt;&#39;)[1].
+                                split(&#39;&lt;/ows:ExceptionText&gt;&#39;)[0];
+                        }
+                        reject(msg);
+                    }
+                });
+            });
+        },
+
+<span id='BasiGX-util-WFST-static-method-lockFeatures'>        /**
+</span>         * Issues a WFS-T LockFeature
+         *
+         * @param {ol.layer} layer The layer the lock should be aquired for
+         * @return {Ext.Promise} The AJAX Request as a promise
+         */
+        lockFeatures: function(layer) {
+            var layerProps = layer.getProperties();
+            var qualifiedLayerName = layerProps.originalLayerName;
+            var layerName = qualifiedLayerName.split(&#39;:&#39;)[1];
+
+            var nsUri = layerProps.namespace;
+            var url = layerProps.wfsBaseUrl;
+
+            if (!Ext.isDefined(url) || Ext.isEmpty(url)) {
+                return new Ext.Promise(function(resolve, reject){
+                    reject(&#39;No url specified.&#39;);
+                });
+            }
+
+            var xmlTemplate = &#39;&lt;LockFeature &#39; +
+                &#39;xmlns=&quot;http://www.opengis.net/wfs&quot; &#39; +
+                &#39;xmlns:ns=&quot;{0}&quot; &#39; +
+                &#39;service=&quot;WFS&quot; &#39; +
+                &#39;expiry=&quot;&#39; + BasiGX.util.WFST.lockTime + &#39;&quot; &#39; +
+                &#39;version=&quot;1.1.0&quot;&gt;&#39; +
+                &#39;&lt;Lock typeName=&quot;ns:{1}&quot;/&gt;&#39; +
+                &#39;&lt;/LockFeature&gt;&#39;;
+            var xml = Ext.String.format(xmlTemplate, nsUri, layerName);
+            return Ext.Ajax.request({
+                url: url,
+                xmlData: xml,
+                method: &#39;POST&#39;,
+                headers: BasiGX.util.CSRF.getHeader()
+            });
+        },
+
+<span id='BasiGX-util-WFST-static-method-handleLockFeaturesResponse'>        /**
+</span>         * Handles the response from the LockFeature request.
+         *
+         * @param {Object} response The XHR response of the request
+         * @return {Ext.Promise} A promise resolving with a lockId.
+         */
+        handleLockFeaturesResponse: function(response) {
+            var resText = response.responseText;
+            var lockId;
+            if (resText.indexOf(&#39;&lt;wfs:LockId&gt;&#39;) &gt;= 0) {
+                lockId = resText.split(
+                    &#39;&lt;wfs:LockId&gt;&#39;)[1].split(&#39;&lt;/wfs:LockId&gt;&#39;)[0];
+                Ext.log.info(&#39;WFS-T Lock aquired with id &#39; + lockId +
+                    &#39;, will time out in &#39; + BasiGX.util.WFST.lockTime +
+                    &#39; minutes&#39;
+                );
+            }
+            return new Ext.Promise(function(resolve, reject) {
+                if (lockId) {
+                    resolve(lockId);
+                } else {
+                    reject();
+                }
+            });
+        }
+
+    }
+});
+</pre>
+</body>
+</html>
