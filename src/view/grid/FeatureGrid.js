@@ -28,6 +28,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         'Ext.grid.filters.Filters',
         'BasiGX.util.WFST',
         'BasiGX.view.button.DigitizeModifyObject',
+        'BasiGX.view.button.DigitizeMoveObject',
         'BasiGX.view.button.DigitizeDeleteObject',
         'GeoExt.data.store.Features'
     ],
@@ -42,6 +43,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             saveErrorText: 'Änderungen konnten nicht gespeichert werden.',
             editGeometryButton: 'Geometrie editieren',
             removeGeometryButton: 'Geometrie entfernen',
+            moveGeometryButton: 'Geometrie bewegen',
             cancelButton: 'Abbrechen'
         }
     },
@@ -166,6 +168,15 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 handler: this.onEditButtonClick.bind(this),
                 bind: {
                     text: this.getViewModel().get('removeGeometryButton')
+                }
+            }, {
+                xtype: 'basigx-button-digitize-move-object',
+                collection: collection,
+                map: map,
+                glyph: 'xf108@Flaticon',
+                handler: this.onEditButtonClick.bind(this),
+                bind: {
+                    text: this.getViewModel().get('moveGeometryButton')
                 }
             }, {
                 xtype: 'basigx-button-digitize-modify-object',
