@@ -174,9 +174,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 handler: this.onSaveClick.bind(this)
             }];
         }
-        this.createEditLayer();
-        this.hideEditLayer();
-        this.addEditLayerToMap();
+        if (this.enableEditing) {
+            this.createEditLayer();
+            this.hideEditLayer();
+            this.addEditLayerToMap();
+        }
         this.add(gridOpts);
         this.setLayerStore();
         this.registerEvents();
@@ -833,11 +835,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     onBeforeDestroy: function() {
         var me = this;
-        me.resetGeometryEditing();
-        var mapComponent = BasiGX.util.Map.getMapComponent();
-        var map = mapComponent.map;
-        map.removeLayer(me.editLayer);
-        me.editLayer = undefined;
+        if (me.enableEditing) {
+            me.resetGeometryEditing();
+            var mapComponent = BasiGX.util.Map.getMapComponent();
+            var map = mapComponent.map;
+            map.removeLayer(me.editLayer);
+            me.editLayer = undefined;
+        }
     },
 
     /**
