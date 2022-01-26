@@ -27,6 +27,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         'Ext.Array',
         'Ext.grid.filters.Filters',
         'BasiGX.util.WFST',
+        'BasiGX.view.button.DigitizeModifyObject',
+        'BasiGX.view.button.DigitizeDeleteObject',
         'GeoExt.data.store.Features'
     ],
 
@@ -39,6 +41,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             saveButton: 'Speichern',
             saveErrorText: 'Änderungen konnten nicht gespeichert werden.',
             editGeometryButton: 'Geometrie editieren',
+            removeGeometryButton: 'Geometrie entfernen',
             cancelButton: 'Abbrechen'
         }
     },
@@ -97,9 +100,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         /* eslint-enable */
     },
 
-    modifyInteraction: undefined,
     editLayer: undefined,
     featuresWithModifiedGeometries: [],
+    featuresWithRemovedGeometries: [],
 
     items: [],
 
@@ -150,34 +153,42 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             }
         };
         if (this.enableEditing) {
-            gridOpts.tbar = ['->', {
-                type: 'button',
-                name: 'editGeometryButton',
-                iconCls: 'x-fa fa-pencil-square-o ' +
-                    'basigx-grid-featuregrid-toolbar-button',
+            this.createEditLayer();
+            this.hideEditLayer();
+            this.addEditLayerToMap();
+            var map = BasiGX.util.Map.getMapComponent().map;
+            var collection = this.editLayer.getSource().getFeaturesCollection();
+            gridOpts.tbar = ['->',{
+                xtype: 'basigx-button-digitize-delete-object',
+                map: map,
+                collection: collection,
+                glyph: 'xf12d@FontAwesome',
+                handler: this.onEditButtonClick.bind(this),
                 bind: {
-                    tooltip: this.getViewModel().get('editGeometryButton')
-                },
-                enableToggle: true,
-                handler: this.onEditGeometryClick.bind(this)
+                    text: this.getViewModel().get('removeGeometryButton')
+                }
             }, {
-                type: 'button',
+                xtype: 'basigx-button-digitize-modify-object',
+                map: map,
+                collection: collection,
+                glyph: 'xf044@FontAwesome',
+                handler: this.onEditButtonClick.bind(this),
+                bind: {
+                    text: this.getViewModel().get('editGeometryButton')
+                }
+            }, {
+                xtype: 'button',
                 bind: {
                     text: this.getViewModel().get('cancelButton')
                 },
                 handler: this.onCancelClick.bind(this)
             }, {
-                type: 'button',
+                xtype: 'button',
                 bind: {
                     text: this.getViewModel().get('saveButton')
                 },
                 handler: this.onSaveClick.bind(this)
             }];
-        }
-        if (this.enableEditing) {
-            this.createEditLayer();
-            this.hideEditLayer();
-            this.addEditLayerToMap();
         }
         this.add(gridOpts);
         this.setLayerStore();
@@ -362,6 +373,33 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                     ol.Observable.unByKey(me.addFeatureKey);
                 });
         }
+        if (me.enableEditing) {
+            var source = me.editLayer.getSource();
+            source.on('changefeature', me.onChangeFeature.bind(me));
+            source.on('removefeature', me.onRemoveFeature.bind(me));
+        }
+    },
+
+    /**
+     * Handler for the change feature event.
+     * @param {ol.source.Vector.VectorSourceEvent} evt changefeature
+     */
+    onChangeFeature: function(evt) {
+        var me = this;
+        var idField = me.layer.getProperties().idField;
+        var featureId = evt.feature.getProperties()[idField];
+        Ext.Array.include(me.featuresWithModifiedGeometries, featureId);
+    },
+
+    /**
+     * Handler for the remove feature event.
+     * @param {ol.source.Vector.VectorSourceEvent} evt removefeature
+     */
+    onRemoveFeature: function(evt) {
+        var me = this;
+        var idField = me.layer.getProperties().idField;
+        var featureId = evt.feature.getProperties()[idField];
+        Ext.Array.include(me.featuresWithRemovedGeometries, featureId);
     },
 
     /**
@@ -599,7 +637,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var gridStore = grid.getStore();
         var updates = me.getModifiedFeatures(gridStore);
         var inserts = [];
-        var deletes = [];
+        var deletes = me.getDeletedFeatures(gridStore);
 
         me.performWfst(me.layer, inserts, updates, deletes)
             .then(function() {
@@ -617,7 +655,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 grid.setLoading(false);
                 // only update if geometries were edited.
                 var shouldUpdate = me.featuresWithModifiedGeometries.length > 0;
-                me.resetGeometryEditing();
+                me.featuresWithModifiedGeometries = [];
                 if (shouldUpdate) {
                     me.fireEvent('geometrieseditedandsaved');
                 }
@@ -691,54 +729,28 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     },
 
     /**
-     * Handler for the edit geometry button.
-     * @param {Ext.button.Button} btn The clicked button.
-     */
-    onEditGeometryClick: function(btn) {
-        var me = this;
-        if (btn.pressed) {
-            me.startEditingGeometry();
-        } else {
-            me.stopEditingGeometry();
-        }
-    },
-
-    /**
-     * Start editing a geometry.
+     * Get the deleted features from the original layer.
      *
-     * This adds a modify interaction for the editLayer
-     * to the map.
+     * @return {ol.Feature[]} List of features to delete.
      */
-    startEditingGeometry: function() {
+    getDeletedFeatures: function() {
         var me = this;
-        var mapComponent = BasiGX.util.Map.getMapComponent();
-        var map = mapComponent.map;
-        if (me.modifyInteraction) {
-            map.removeInteraction(me.modifyInteraction);
-        }
-        me.showEditLayer();
-        me.modifyInteraction = new ol.interaction.Modify({
-            source: me.editLayer.getSource()
+        var layerProps = me.layer.getProperties();
+        var idField = layerProps.idField;
+        var deletedFeatures = [];
+
+        var features = me.layer.getSource().getFeatures();
+        Ext.Array.each(features, function(feature) {
+            var featureId = feature.get(idField);
+            var containsFeature = Ext.Array.contains(
+                me.featuresWithRemovedGeometries, featureId);
+            if (containsFeature) {
+                var f = new ol.Feature();
+                f.setId(feature.get(idField));
+                deletedFeatures.push(f);
+            }
         });
-        me.modifyInteraction.on('modifyend', me.onModifyEnd.bind(me));
-        map.addInteraction(me.modifyInteraction);
-    },
-
-    /**
-     * Stops editing a geometry.
-     *
-     * This removes the modify interaction for the editLayer
-     * from the map.
-     */
-    stopEditingGeometry: function() {
-        var me = this;
-        var mapComponent = BasiGX.util.Map.getMapComponent();
-        var map = mapComponent.map;
-        if (me.modifyInteraction) {
-            me.modifyInteraction.un('modifyend', me.onModifyEnd.bind(me));
-            map.removeInteraction(me.modifyInteraction);
-            me.modifyInteraction = undefined;
-        }
+        return deletedFeatures;
     },
 
     /**
@@ -762,19 +774,6 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     },
 
     /**
-     * Handler for the modifyend event.
-     * @param {ol.interaction.Modify.ModifyEvent} evt The modify event.
-     */
-    onModifyEnd: function(evt) {
-        var me = this;
-        var idField = me.layer.getProperties().idField;
-        Ext.Array.each(evt.features.getArray(), function(feature) {
-            var featureId = feature.getProperties()[idField];
-            Ext.Array.include(me.featuresWithModifiedGeometries, featureId);
-        });
-    },
-
-    /**
      * Gets the geometry for the feature in the editLayer that
      * corresponds to the given featureId.
      * @param {Number} featureId The id to filter by.
@@ -791,17 +790,6 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             return;
         }
         return foundFeature.getGeometry().clone();
-    },
-
-    /**
-     * Reset the geometry editing to its initial state.
-     */
-    resetGeometryEditing: function() {
-        var me = this;
-        me.down('[name=editGeometryButton]').setPressed(false);
-        me.stopEditingGeometry();
-        me.featuresWithModifiedGeometries = [];
-        me.hideEditLayer();
     },
 
     /**
@@ -836,7 +824,6 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     onBeforeDestroy: function() {
         var me = this;
         if (me.enableEditing) {
-            me.resetGeometryEditing();
             var mapComponent = BasiGX.util.Map.getMapComponent();
             var map = mapComponent.map;
             map.removeLayer(me.editLayer);
@@ -849,9 +836,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     onCancelClick: function() {
         var me = this;
-        me.down('[name=editGeometryButton]').setPressed(false);
-        me.stopEditingGeometry();
         me.featuresWithModifiedGeometries = [];
+        me.featuresWithRemovedGeometries = [];
+        me.resetAllButtons();
         var mapComponent = BasiGX.util.Map.getMapComponent();
         var map = mapComponent.map;
         map.removeLayer(me.editLayer);
@@ -859,6 +846,28 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         me.addEditLayerToMap();
         me.hideEditLayer();
         this.setLayerStore();
+    },
+
+    /**
+     * Handler for the editing buttons.
+     * @param {Ext.button.Button} btn The clicked button.
+     */
+    onEditButtonClick: function(btn) {
+        var me = this;
+        if (btn.pressed) {
+            me.showEditLayer();
+        } else {
+            me.hideEditLayer();
+        }
+    },
+
+    /**
+     * Resets all buttons to a their initial state.
+     */
+    resetAllButtons: function() {
+        var me = this;
+        me.down('basigx-button-digitize-delete-object').setPressed(false);
+        me.down('basigx-button-digitize-modify-object').setPressed(false);
     }
 
 });
