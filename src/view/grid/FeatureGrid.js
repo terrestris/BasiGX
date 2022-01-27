@@ -123,6 +123,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
 
         me.selectionFeatureAdded = me.selectionFeatureAdded.bind(me);
         me.selectionFeatureRemoved = me.selectionFeatureRemoved.bind(me);
+        me.onChangeFeature = me.onChangeFeature.bind(me);
+        me.onAddFeature = me.onAddFeature.bind(me);
+        me.onRemoveFeature = me.onRemoveFeature.bind(me);
         me.callParent(arguments);
     },
 
@@ -464,9 +467,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     registerEditingEvents: function() {
         var me = this;
         var source = me.editLayer.getSource();
-        source.on('changefeature', me.onChangeFeature.bind(me));
-        source.on('removefeature', me.onRemoveFeature.bind(me));
-        source.on('addfeature', me.onAddFeature.bind(me));
+        source.on('changefeature', me.onChangeFeature);
+        source.on('removefeature', me.onRemoveFeature);
+        source.on('addfeature', me.onAddFeature);
     },
 
     /**
@@ -475,9 +478,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     unregisterEditingEvents: function() {
         var me = this;
         var source = me.editLayer.getSource();
-        source.un('changefeature', me.onChangeFeature.bind(me));
-        source.un('removefeature', me.onRemoveFeature.bind(me));
-        source.un('addfeature', me.onAddFeature.bind(me));
+        source.un('changefeature', me.onChangeFeature);
+        source.un('removefeature', me.onRemoveFeature);
+        source.un('addfeature', me.onAddFeature);
     },
 
     /**
