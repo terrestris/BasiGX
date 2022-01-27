@@ -43,11 +43,14 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             deleteTitle: 'Löschen',
             deleteQuestion: 'Wollen Sie die Spalte wirklich löschen?',
             saveButton: 'Speichern',
+            cancelButton: 'Abbrechen',
             saveErrorText: 'Änderungen konnten nicht gespeichert werden.',
             editGeometryButton: 'Geometrie editieren',
             removeGeometryButton: 'Geometrie entfernen',
             moveGeometryButton: 'Geometrie bewegen',
-            cancelButton: 'Abbrechen'
+            addPointButton: 'Punkt hinzufügen',
+            addLineButton: 'Linie hinzufügen',
+            addPolygonButton: 'Polygon hinzufügen'
         }
     },
 
@@ -170,29 +173,50 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 layer: this.editLayer,
                 glyph: 'xf100@Flaticon',
                 multi: true,
-                handler: this.onEditButtonClick.bind(this)
+                handler: this.onEditButtonClick.bind(this),
+                viewModel: {
+                    data: {
+                        tooltip: this.getViewModel().get('addPointButton'),
+                        digitizePointText: ''
+                    }
+                }
             }, {
                 xtype: 'basigx-button-digitize-line',
                 map: map,
                 layer: this.editLayer,
                 glyph: 'xf104@Flaticon',
                 multi: true,
-                handler: this.onEditButtonClick.bind(this)
+                handler: this.onEditButtonClick.bind(this),
+                viewModel: {
+                    data: {
+                        tooltip: this.getViewModel().get('addLineButton'),
+                        digitizeLineText: ''
+                    }
+                }
             }, {
                 xtype: 'basigx-button-digitize-polygon',
                 map: map,
                 layer: this.editLayer,
                 glyph: 'xf107@Flaticon',
                 multi: true,
-                handler: this.onEditButtonClick.bind(this)
+                handler: this.onEditButtonClick.bind(this),
+                viewModel: {
+                    data: {
+                        digitizePolygonText: '',
+                        tooltip: this.getViewModel().get('addPolygonButton')
+                    }
+                }
             }, {
                 xtype: 'basigx-button-digitize-delete-object',
                 map: map,
                 collection: collection,
                 glyph: 'xf12d@FontAwesome',
                 handler: this.onEditButtonClick.bind(this),
-                bind: {
-                    text: this.getViewModel().get('removeGeometryButton')
+                viewModel: {
+                    data: {
+                        deleteObjectBtnText: '',
+                        tooltip: this.getViewModel().get('removeGeometryButton')
+                    }
                 }
             }, {
                 xtype: 'basigx-button-digitize-move-object',
@@ -200,8 +224,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 map: map,
                 glyph: 'xf108@Flaticon',
                 handler: this.onEditButtonClick.bind(this),
-                bind: {
-                    text: this.getViewModel().get('moveGeometryButton')
+                viewModel: {
+                    data: {
+                        moveObjectBtnText: '',
+                        tooltip: this.getViewModel().get('moveGeometryButton')
+                    }
                 }
             }, {
                 xtype: 'basigx-button-digitize-modify-object',
@@ -209,10 +236,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 collection: collection,
                 glyph: 'xf044@FontAwesome',
                 handler: this.onEditButtonClick.bind(this),
-                bind: {
-                    text: this.getViewModel().get('editGeometryButton')
+                viewModel: {
+                    data: {
+                        modifyObjectBtnText: '',
+                        tooltip: this.getViewModel().get('editGeometryButton')
+                    }
                 }
-            }, {
+            },' ', {
                 xtype: 'button',
                 bind: {
                     text: this.getViewModel().get('cancelButton')
