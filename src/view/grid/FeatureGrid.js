@@ -25,6 +25,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     extend: 'Ext.panel.Panel',
     requires: [
         'Ext.Array',
+        'Ext.container.ButtonGroup',
         'Ext.grid.filters.Filters',
         'BasiGX.util.WFST',
         'BasiGX.view.button.DigitizePoint',
@@ -53,6 +54,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             addPolygonButton: 'Polygon hinzufügen'
         }
     },
+
+    height: 500,
 
     config: {
         /**
@@ -135,8 +138,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     initComponent: function() {
         this.callParent();
+        var gridHeight = 456;
+        if (this.enableEditing) {
+            gridHeight = 406;
+        }
         var gridOpts = {
             xtype: 'grid',
+            height: gridHeight,
             selModel: 'checkboxmodel',
             enableLocking: this.getEnableLocking(),
             header: this.getGridHeader(),
@@ -161,100 +169,108 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 }
             }
         };
+        this.createEditLayer();
         if (this.enableEditing) {
-            this.createEditLayer();
             this.hideEditLayer();
             this.addEditLayerToMap();
             var map = BasiGX.util.Map.getMapComponent().map;
             var collection = this.editLayer.getSource().getFeaturesCollection();
-            gridOpts.tbar = ['->',{
-                xtype: 'basigx-button-digitize-point',
-                map: map,
-                layer: this.editLayer,
-                glyph: 'xf100@Flaticon',
-                multi: true,
-                handler: this.onEditButtonClick.bind(this),
-                viewModel: {
-                    data: {
-                        tooltip: this.getViewModel().get('addPointButton'),
-                        digitizePointText: ''
+            var editTools = {
+                xtype: 'buttongroup',
+                height: 50,
+                tbar: ['->', {
+                    xtype: 'basigx-button-digitize-point',
+                    map: map,
+                    layer: this.editLayer,
+                    glyph: 'xf100@Flaticon',
+                    multi: true,
+                    handler: this.onEditButtonClick.bind(this),
+                    viewModel: {
+                        data: {
+                            tooltip: this.getViewModel().get('addPointButton'),
+                            digitizePointText: ''
+                        }
                     }
-                }
-            }, {
-                xtype: 'basigx-button-digitize-line',
-                map: map,
-                layer: this.editLayer,
-                glyph: 'xf104@Flaticon',
-                multi: true,
-                handler: this.onEditButtonClick.bind(this),
-                viewModel: {
-                    data: {
-                        tooltip: this.getViewModel().get('addLineButton'),
-                        digitizeLineText: ''
+                }, {
+                    xtype: 'basigx-button-digitize-line',
+                    map: map,
+                    layer: this.editLayer,
+                    glyph: 'xf104@Flaticon',
+                    multi: true,
+                    handler: this.onEditButtonClick.bind(this),
+                    viewModel: {
+                        data: {
+                            tooltip: this.getViewModel().get('addLineButton'),
+                            digitizeLineText: ''
+                        }
                     }
-                }
-            }, {
-                xtype: 'basigx-button-digitize-polygon',
-                map: map,
-                layer: this.editLayer,
-                glyph: 'xf107@Flaticon',
-                multi: true,
-                handler: this.onEditButtonClick.bind(this),
-                viewModel: {
-                    data: {
-                        digitizePolygonText: '',
-                        tooltip: this.getViewModel().get('addPolygonButton')
+                }, {
+                    xtype: 'basigx-button-digitize-polygon',
+                    map: map,
+                    layer: this.editLayer,
+                    glyph: 'xf107@Flaticon',
+                    multi: true,
+                    handler: this.onEditButtonClick.bind(this),
+                    viewModel: {
+                        data: {
+                            digitizePolygonText: '',
+                            tooltip: this.getViewModel().get('addPolygonButton')
+                        }
                     }
-                }
-            }, {
-                xtype: 'basigx-button-digitize-delete-object',
-                map: map,
-                collection: collection,
-                glyph: 'xf12d@FontAwesome',
-                handler: this.onEditButtonClick.bind(this),
-                viewModel: {
-                    data: {
-                        deleteObjectBtnText: '',
-                        tooltip: this.getViewModel().get('removeGeometryButton')
+                }, {
+                    xtype: 'basigx-button-digitize-delete-object',
+                    map: map,
+                    collection: collection,
+                    glyph: 'xf12d@FontAwesome',
+                    handler: this.onEditButtonClick.bind(this),
+                    viewModel: {
+                        data: {
+                            deleteObjectBtnText: '',
+                            tooltip: this.getViewModel().get(
+                                'removeGeometryButton')
+                        }
                     }
-                }
-            }, {
-                xtype: 'basigx-button-digitize-move-object',
-                collection: collection,
-                map: map,
-                glyph: 'xf108@Flaticon',
-                handler: this.onEditButtonClick.bind(this),
-                viewModel: {
-                    data: {
-                        moveObjectBtnText: '',
-                        tooltip: this.getViewModel().get('moveGeometryButton')
+                }, {
+                    xtype: 'basigx-button-digitize-move-object',
+                    collection: collection,
+                    map: map,
+                    glyph: 'xf108@Flaticon',
+                    handler: this.onEditButtonClick.bind(this),
+                    viewModel: {
+                        data: {
+                            moveObjectBtnText: '',
+                            tooltip: this.getViewModel().get(
+                                'moveGeometryButton')
+                        }
                     }
-                }
-            }, {
-                xtype: 'basigx-button-digitize-modify-object',
-                map: map,
-                collection: collection,
-                glyph: 'xf044@FontAwesome',
-                handler: this.onEditButtonClick.bind(this),
-                viewModel: {
-                    data: {
-                        modifyObjectBtnText: '',
-                        tooltip: this.getViewModel().get('editGeometryButton')
+                }, {
+                    xtype: 'basigx-button-digitize-modify-object',
+                    map: map,
+                    collection: collection,
+                    glyph: 'xf044@FontAwesome',
+                    handler: this.onEditButtonClick.bind(this),
+                    viewModel: {
+                        data: {
+                            modifyObjectBtnText: '',
+                            tooltip: this.getViewModel().get(
+                                'editGeometryButton')
+                        }
                     }
-                }
-            },' ', {
-                xtype: 'button',
-                bind: {
-                    text: this.getViewModel().get('cancelButton')
-                },
-                handler: this.onCancelClick.bind(this)
-            }, {
-                xtype: 'button',
-                bind: {
-                    text: this.getViewModel().get('saveButton')
-                },
-                handler: this.onSaveClick.bind(this)
-            }];
+                }, ' ', {
+                    xtype: 'button',
+                    bind: {
+                        text: this.getViewModel().get('cancelButton')
+                    },
+                    handler: this.onCancelClick.bind(this)
+                }, {
+                    xtype: 'button',
+                    bind: {
+                        text: this.getViewModel().get('saveButton')
+                    },
+                    handler: this.onSaveClick.bind(this)
+                }]
+            };
+            this.add(editTools);
             this.registerEditingEvents();
         }
         this.add(gridOpts);
