@@ -27,6 +27,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         'Ext.Array',
         'Ext.grid.filters.Filters',
         'BasiGX.util.WFST',
+        'BasiGX.view.button.DigitizePoint',
+        'BasiGX.view.button.DigitizeLine',
+        'BasiGX.view.button.DigitizePolygon',
         'BasiGX.view.button.DigitizeModifyObject',
         'BasiGX.view.button.DigitizeMoveObject',
         'BasiGX.view.button.DigitizeDeleteObject',
@@ -105,6 +108,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     editLayer: undefined,
     featuresWithModifiedGeometries: [],
     featuresWithRemovedGeometries: [],
+    newFeaturesAdded: false,
 
     items: [],
 
@@ -161,6 +165,27 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             var map = BasiGX.util.Map.getMapComponent().map;
             var collection = this.editLayer.getSource().getFeaturesCollection();
             gridOpts.tbar = ['->',{
+                xtype: 'basigx-button-digitize-point',
+                map: map,
+                layer: this.editLayer,
+                glyph: 'xf100@Flaticon',
+                multi: true,
+                handler: this.onEditButtonClick.bind(this)
+            }, {
+                xtype: 'basigx-button-digitize-line',
+                map: map,
+                layer: this.editLayer,
+                glyph: 'xf104@Flaticon',
+                multi: true,
+                handler: this.onEditButtonClick.bind(this)
+            }, {
+                xtype: 'basigx-button-digitize-polygon',
+                map: map,
+                layer: this.editLayer,
+                glyph: 'xf107@Flaticon',
+                multi: true,
+                handler: this.onEditButtonClick.bind(this)
+            }, {
                 xtype: 'basigx-button-digitize-delete-object',
                 map: map,
                 collection: collection,
@@ -200,6 +225,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 },
                 handler: this.onSaveClick.bind(this)
             }];
+            this.registerEditingEvents();
         }
         this.add(gridOpts);
         this.setLayerStore();
@@ -384,11 +410,28 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                     ol.Observable.unByKey(me.addFeatureKey);
                 });
         }
-        if (me.enableEditing) {
-            var source = me.editLayer.getSource();
-            source.on('changefeature', me.onChangeFeature.bind(me));
-            source.on('removefeature', me.onRemoveFeature.bind(me));
-        }
+    },
+
+    /**
+     * Register all editing events.
+     */
+    registerEditingEvents: function() {
+        var me = this;
+        var source = me.editLayer.getSource();
+        source.on('changefeature', me.onChangeFeature.bind(me));
+        source.on('removefeature', me.onRemoveFeature.bind(me));
+        source.on('addfeature', me.onAddFeature.bind(me));
+    },
+
+    /**
+     * Unregister all editing events.
+     */
+    unregisterEditingEvents: function() {
+        var me = this;
+        var source = me.editLayer.getSource();
+        source.un('changefeature', me.onChangeFeature.bind(me));
+        source.un('removefeature', me.onRemoveFeature.bind(me));
+        source.un('addfeature', me.onAddFeature.bind(me));
     },
 
     /**
@@ -411,6 +454,14 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var idField = me.layer.getProperties().idField;
         var featureId = evt.feature.getProperties()[idField];
         Ext.Array.include(me.featuresWithRemovedGeometries, featureId);
+    },
+
+    /**
+     * Handler for the add feature event.
+     */
+    onAddFeature: function() {
+        var me = this;
+        me.newFeaturesAdded = true;
     },
 
     /**
@@ -647,29 +698,26 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         grid.setLoading(true);
         var gridStore = grid.getStore();
         var updates = me.getModifiedFeatures(gridStore);
-        var inserts = [];
-        var deletes = me.getDeletedFeatures(gridStore);
+        var inserts = me.getAddedFeatures(gridStore);
+        var deletes = me.getDeletedFeatures();
 
         me.performWfst(me.layer, inserts, updates, deletes)
             .then(function() {
                 gridStore.commitChanges();
-                return new Ext.Promise(function(res) {
-                    res();
-                });
-            }, function() {
-                Ext.toast(vm.get('saveErrorText'));
-                return new Ext.Promise(function(res) {
-                    res();
-                });
-            })
-            .then(function() {
                 grid.setLoading(false);
                 // only update if geometries were edited.
-                var shouldUpdate = me.featuresWithModifiedGeometries.length > 0;
+                var shouldUpdate = me.didGeometryChange();
                 me.featuresWithModifiedGeometries = [];
+                me.newFeaturesAdded = false;
+                me.featuresWithRemovedGeometries = [];
+                me.resetAllButtons();
                 if (shouldUpdate) {
                     me.fireEvent('geometrieseditedandsaved');
                 }
+            }, function() {
+                Ext.toast(vm.get('saveErrorText'));
+                grid.setLoading(false);
+                me.resetAllButtons();
             });
     },
 
@@ -712,6 +760,10 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var modifiedFeatures = [];
 
         store.each(function(rec) {
+            var isNewFeature = !Ext.isDefined(rec.get(idField));
+            if (isNewFeature) {
+                return;
+            }
             var isModified = false;
             var modifiedFields = {};
             var featureId = rec.get(idField);
@@ -762,6 +814,42 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             }
         });
         return deletedFeatures;
+    },
+
+    /**
+     * Get the added features from the store.
+     *
+     * @param {Ext.data.Store} store The store to get the features from.
+     * @return {ol.Feature[]} List of features to add.
+     */
+    getAddedFeatures: function(store) {
+        var me = this;
+        var layerProps = me.layer.getProperties();
+        var idField = layerProps.idField;
+        var newFeatures = [];
+        store.each(function(rec) {
+            if (!Ext.isDefined(rec.get(idField))) {
+                var data = Ext.Object.merge({}, rec.getData());
+                delete data.id;
+                var feature = new ol.Feature(data);
+                newFeatures.push(feature);
+            }
+
+        });
+        return newFeatures;
+    },
+
+    /**
+     * Check if any geometry did change.
+     *
+     * @return {boolean} True, if geometry did change. False otherwise.
+     */
+    didGeometryChange: function() {
+        var me = this;
+        var wasModified = me.featuresWithModifiedGeometries.length > 0;
+        var wasAdded = me.newFeaturesAdded;
+        var wasRemoved = me.featuresWithRemovedGeometries.length > 0;
+        return wasModified || wasAdded || wasRemoved;
     },
 
     /**
@@ -836,6 +924,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var me = this;
         if (me.enableEditing) {
             var mapComponent = BasiGX.util.Map.getMapComponent();
+            me.unregisterEditingEvents();
             var map = mapComponent.map;
             map.removeLayer(me.editLayer);
             me.editLayer = undefined;
@@ -849,6 +938,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var me = this;
         me.featuresWithModifiedGeometries = [];
         me.featuresWithRemovedGeometries = [];
+        me.newFeaturesAdded = false;
         me.resetAllButtons();
         var mapComponent = BasiGX.util.Map.getMapComponent();
         var map = mapComponent.map;
@@ -879,6 +969,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var me = this;
         me.down('basigx-button-digitize-delete-object').setPressed(false);
         me.down('basigx-button-digitize-modify-object').setPressed(false);
+        me.down('basigx-button-digitize-point').setPressed(false);
+        me.down('basigx-button-digitize-line').setPressed(false);
+        me.down('basigx-button-digitize-polygon').setPressed(false);
     }
 
 });
