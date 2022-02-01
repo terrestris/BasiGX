@@ -103,12 +103,18 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          * Configures filtering on the grid.
          */
         enableFiltering: false,
-        /* eslint-enable */
         /**
          * Configures editing of the grid.
          */
-        enableEditing: false
-        /* eslint-enable */
+        enableEditing: false,
+        /**
+         * List of supported geometry types.
+         * Following strings are supported:
+         *
+         * "Point", "MultiPoint", "LineString",
+         * "MulitLineString", "Polygon", "MultiPolygon"
+         */
+        geometryTypes: []
     },
 
     editLayer: undefined,
@@ -941,95 +947,138 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var editTools = {
             xtype: 'buttongroup',
             height: 50,
-            tbar: ['->', {
-                xtype: 'basigx-button-digitize-point',
-                map: map,
-                layer: me.editLayer,
-                glyph: 'xf100@Flaticon',
-                multi: true,
-                handler: me.onEditButtonClick.bind(me),
-                viewModel: {
-                    data: {
-                        tooltip: vm.get('addPointButton'),
-                        digitizePointText: ''
-                    }
-                }
-            }, {
-                xtype: 'basigx-button-digitize-line',
-                map: map,
-                layer: me.editLayer,
-                glyph: 'xf104@Flaticon',
-                multi: true,
-                handler: me.onEditButtonClick.bind(me),
-                viewModel: {
-                    data: {
-                        tooltip: vm.get('addLineButton'),
-                        digitizeLineText: ''
-                    }
-                }
-            }, {
-                xtype: 'basigx-button-digitize-polygon',
-                map: map,
-                layer: me.editLayer,
-                glyph: 'xf107@Flaticon',
-                multi: true,
-                handler: me.onEditButtonClick.bind(me),
-                viewModel: {
-                    data: {
-                        digitizePolygonText: '',
-                        tooltip: vm.get('addPolygonButton')
-                    }
-                }
-            }, {
-                xtype: 'basigx-button-digitize-delete-object',
-                map: map,
-                collection: collection,
-                glyph: 'xf12d@FontAwesome',
-                handler: me.onEditButtonClick.bind(me),
-                viewModel: {
-                    data: {
-                        deleteObjectBtnText: '',
-                        tooltip: vm.get('removeGeometryButton')
-                    }
-                }
-            }, {
-                xtype: 'basigx-button-digitize-move-object',
-                collection: collection,
-                map: map,
-                glyph: 'xf108@Flaticon',
-                handler: me.onEditButtonClick.bind(me),
-                viewModel: {
-                    data: {
-                        moveObjectBtnText: '',
-                        tooltip: vm.get('moveGeometryButton')
-                    }
-                }
-            }, {
-                xtype: 'basigx-button-digitize-modify-object',
-                map: map,
-                collection: collection,
-                glyph: 'xf044@FontAwesome',
-                handler: me.onEditButtonClick.bind(me),
-                viewModel: {
-                    data: {
-                        modifyObjectBtnText: '',
-                        tooltip: vm.get('editGeometryButton')
-                    }
-                }
-            }, ' ', {
-                xtype: 'button',
-                bind: {
-                    text: vm.get('cancelButton')
-                },
-                handler: me.onCancelClick.bind(me)
-            }, {
-                xtype: 'button',
-                bind: {
-                    text: vm.get('saveButton')
-                },
-                handler: me.onSaveClick.bind(me)
-            }]
+            tbar: []
         };
+        var containsPoint = Ext.Array.contains(this.geometryTypes, 'Point');
+        var containsMultiPoint = Ext.Array.contains(
+            this.geometryTypes, 'MultiPoint');
+        var containsLine = Ext.Array.contains(this.geometryTypes, 'LineString');
+        var containsMultiLine = Ext.Array.contains(
+            this.geometryTypes, 'MultiLineString');
+        var containsPolygon = Ext.Array.contains(this.geometryTypes, 'Polygon');
+        var containsMultiPolygon = Ext.Array.contains(
+            this.geometryTypes, 'MultiPolygon');
+
+        var pointTool = {
+            xtype: 'basigx-button-digitize-point',
+            map: map,
+            layer: me.editLayer,
+            glyph: 'xf100@Flaticon',
+            handler: me.onEditButtonClick.bind(me),
+            multi: false,
+            viewModel: {
+                data: {
+                    tooltip: vm.get('addPointButton'),
+                    digitizePointText: ''
+                }
+            }
+        };
+        if (!containsPoint && !containsMultiPoint) {
+            pointTool.disabled = true;
+        }
+        if (containsMultiPoint) {
+            pointTool.multi = true;
+        }
+        editTools.tbar.push(pointTool);
+
+        var lineTool = {
+            xtype: 'basigx-button-digitize-line',
+            map: map,
+            layer: me.editLayer,
+            glyph: 'xf104@Flaticon',
+            multi: false,
+            handler: me.onEditButtonClick.bind(me),
+            viewModel: {
+                data: {
+                    tooltip: vm.get('addLineButton'),
+                    digitizeLineText: ''
+                }
+            }
+        };
+        if (!containsLine && !containsMultiLine) {
+            lineTool.disabled = true;
+        }
+        if (containsMultiLine) {
+            lineTool.multi = true;
+        }
+        editTools.tbar.push(lineTool);
+
+        var polygonTool = {
+            xtype: 'basigx-button-digitize-polygon',
+            map: map,
+            layer: me.editLayer,
+            glyph: 'xf107@Flaticon',
+            multi: false,
+            handler: me.onEditButtonClick.bind(me),
+            viewModel: {
+                data: {
+                    digitizePolygonText: '',
+                    tooltip: vm.get('addPolygonButton')
+                }
+            }
+        };
+        if (!containsPolygon && !containsMultiPolygon) {
+            polygonTool.disabled = true;
+        }
+        if (containsMultiPolygon) {
+            polygonTool.multi = true;
+        }
+        editTools.tbar.push(polygonTool);
+
+        editTools.tbar.push({
+            xtype: 'basigx-button-digitize-delete-object',
+            map: map,
+            collection: collection,
+            glyph: 'xf12d@FontAwesome',
+            handler: me.onEditButtonClick.bind(me),
+            viewModel: {
+                data: {
+                    deleteObjectBtnText: '',
+                    tooltip: vm.get('removeGeometryButton')
+                }
+            }
+        });
+        editTools.tbar.push({
+            xtype: 'basigx-button-digitize-move-object',
+            collection: collection,
+            map: map,
+            glyph: 'xf108@Flaticon',
+            handler: me.onEditButtonClick.bind(me),
+            viewModel: {
+                data: {
+                    moveObjectBtnText: '',
+                    tooltip: vm.get('moveGeometryButton')
+                }
+            }
+        });
+        editTools.tbar.push({
+            xtype: 'basigx-button-digitize-modify-object',
+            map: map,
+            collection: collection,
+            glyph: 'xf044@FontAwesome',
+            handler: me.onEditButtonClick.bind(me),
+            viewModel: {
+                data: {
+                    modifyObjectBtnText: '',
+                    tooltip: vm.get('editGeometryButton')
+                }
+            }
+        });
+        editTools.tbar.push(' ');
+        editTools.tbar.push({
+            xtype: 'button',
+            bind: {
+                text: vm.get('cancelButton')
+            },
+            handler: me.onCancelClick.bind(me)
+        });
+        editTools.tbar.push({
+            xtype: 'button',
+            bind: {
+                text: vm.get('saveButton')
+            },
+            handler: me.onSaveClick.bind(me)
+        });
         me.insert(0, editTools);
     },
 
