@@ -131,7 +131,15 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
          * &quot;Point&quot;, &quot;MultiPoint&quot;, &quot;LineString&quot;,
          * &quot;MulitLineString&quot;, &quot;Polygon&quot;, &quot;MultiPolygon&quot;
          */
-        geometryTypes: []
+        geometryTypes: [],
+<span id='BasiGX-view-grid-FeatureGrid-cfg-enableColumnRenaming'>        /**
+</span>         * Allows/disallows renaming a column.
+         */
+        enableColumnRenaming: true,
+<span id='BasiGX-view-grid-FeatureGrid-cfg-enableColumnRemoving'>        /**
+</span>         * Allows/disallows removing a column.
+         */
+        enableColumnRemoving: true
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-property-editLayer'>    editLayer: undefined,
@@ -234,11 +242,16 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
 </span>     * Append extra column menu items.
      */
     appendMenuEntries: function() {
+        var me = this;
         var grid = this.down(&#39;grid&#39;);
         var viewModel = this.getViewModel();
         var menu = grid.view.headerCt.getMenu();
-        menu.add(this.getRenameEntry(viewModel));
-        menu.add(this.getDeleteEntry(viewModel));
+        if (me.getEnableColumnRenaming()) {
+            menu.add(this.getRenameEntry(viewModel));
+        }
+        if (me.getEnableColumnRemoving()) {
+            menu.add(this.getDeleteEntry(viewModel));
+        }
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-method-getRenameEntry'>    /**
