@@ -114,7 +114,15 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          * "Point", "MultiPoint", "LineString",
          * "MulitLineString", "Polygon", "MultiPolygon"
          */
-        geometryTypes: []
+        geometryTypes: [],
+        /**
+         * Allows/disallows renaming a column.
+         */
+        enableColumnRenaming: true,
+        /**
+         * Allows/disallows removing a column.
+         */
+        enableColumnRemoving: true
     },
 
     editLayer: undefined,
@@ -217,11 +225,16 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      * Append extra column menu items.
      */
     appendMenuEntries: function() {
+        var me = this;
         var grid = this.down('grid');
         var viewModel = this.getViewModel();
         var menu = grid.view.headerCt.getMenu();
-        menu.add(this.getRenameEntry(viewModel));
-        menu.add(this.getDeleteEntry(viewModel));
+        if (me.getEnableColumnRenaming()) {
+            menu.add(this.getRenameEntry(viewModel));
+        }
+        if (me.getEnableColumnRemoving()) {
+            menu.add(this.getDeleteEntry(viewModel));
+        }
     },
 
     /**
