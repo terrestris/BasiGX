@@ -44,6 +44,7 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         &#39;Ext.Array&#39;,
         &#39;Ext.container.ButtonGroup&#39;,
         &#39;Ext.grid.filters.Filters&#39;,
+        &#39;Ext.grid.plugin.CellEditing&#39;,
         &#39;BasiGX.util.WFST&#39;,
         &#39;BasiGX.view.button.DigitizePoint&#39;,
         &#39;BasiGX.view.button.DigitizeLine&#39;,
@@ -404,7 +405,6 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
      */
     registerEditingEvents: function() {
         var me = this;
-        me.editLayer.getSource().on(&#39;changefeature&#39;, me.onChangeFeature);
         me.editLayer.getSource().on(&#39;removefeature&#39;, me.onRemoveFeature);
         me.editLayer.getSource().on(&#39;addfeature&#39;, me.onAddFeature);
     },
@@ -414,20 +414,20 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
      */
     unregisterEditingEvents: function() {
         var me = this;
-        me.editLayer.getSource().un(&#39;changefeature&#39;, me.onChangeFeature);
         me.editLayer.getSource().un(&#39;removefeature&#39;, me.onRemoveFeature);
         me.editLayer.getSource().un(&#39;addfeature&#39;, me.onAddFeature);
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-method-onChangeFeature'>    /**
 </span>     * Handler for the change feature event.
-     * @param {ol.source.Vector.VectorSourceEvent} evt changefeature
+     * @param {ol.Feature} feature The changed feature.
      */
-    onChangeFeature: function(evt) {
+    onChangeFeature: function(feature) {
         var me = this;
         var idField = me.layer.getProperties().idField;
-        var featureId = evt.feature.getProperties()[idField];
+        var featureId = feature.getProperties()[idField];
         Ext.Array.include(me.featuresWithModifiedGeometries, featureId);
+        me.onDataChanged();
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-method-onRemoveFeature'>    /**
@@ -439,6 +439,7 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         var idField = me.layer.getProperties().idField;
         var featureId = evt.feature.getProperties()[idField];
         Ext.Array.include(me.featuresWithRemovedGeometries, featureId);
+        me.onDataChanged();
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-method-onAddFeature'>    /**
@@ -447,14 +448,19 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
     onAddFeature: function() {
         var me = this;
         me.newFeaturesAdded = true;
+        me.onDataChanged();
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-method-setLayerStore'>    /**
 </span>     * Sets the layer store on the grid.
      */
     setLayerStore: function() {
+        var me = this;
         var store = new GeoExt.data.store.Features({
-            layer: this.editLayer
+            layer: this.editLayer,
+            listeners: {
+                update: me.onDataChanged.bind(me)
+            }
         });
 
         this.reconfigureStore(store);
@@ -463,6 +469,46 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
 <span id='BasiGX-view-grid-FeatureGrid-method-reconfigureStore'>    reconfigureStore: function(store) {
 </span>        var columns = this.extractSchema(store);
         this.down(&#39;grid&#39;).reconfigure(store, columns);
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-onDataChanged'>    /**
+</span>     * Method that is called, when the data changed.
+     *
+     * I.e. when geometries were edited, removed or added,
+     * as well as when the data in the table changed.
+     */
+    onDataChanged: function() {
+        var me = this;
+        me.updateSaveButtonState(false);
+        me.updateCancelButtonState(false);
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-updateSaveButtonState'>    /**
+</span>     * Enables or disables the save button.
+     *
+     * @param {boolean} disabled True, if button should be disabled. False,
+     * if button should be enabled.
+     */
+    updateSaveButtonState: function(disabled) {
+        var me = this;
+        var saveButton = me.down(&#39;[name=featuregrid-save-btn]&#39;);
+        if (saveButton) {
+            saveButton.setDisabled(disabled);
+        }
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-updateCancelButtonState'>    /**
+</span>     * Enables or disables the cancel button.
+     *
+     * @param {boolean} disabled True, if button should be disabled. False,
+     * if button should be enabled.
+     */
+    updateCancelButtonState: function(disabled) {
+        var me = this;
+        var cancelButton = me.down(&#39;[name=featuregrid-cancel-btn]&#39;);
+        if (cancelButton) {
+            cancelButton.setDisabled(disabled);
+        }
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-method-selectionCompareFunction'>    /**
@@ -924,6 +970,35 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         }
     },
 
+<span id='BasiGX-view-grid-FeatureGrid-method-getCellEditingPlugin'>    /**
+</span>     * Get the cellediting plugin of the grid.
+     *
+     * @return {Ext.grid.plugin.CellEditing} The cellediting plugin, if found.
+     */
+    getCellEditingPlugin: function() {
+        var me = this;
+        var grid = me.down(&#39;grid&#39;);
+        var plugins = grid.getPlugins();
+        var editingPluginIdx = Ext.Array.findBy(plugins, function(plugin) {
+            return plugin.ptype === &#39;cellediting&#39;;
+        });
+        if (editingPluginIdx === -1) {
+            return;
+        }
+        return plugins[editingPluginIdx];
+    },
+
+<span id='BasiGX-view-grid-FeatureGrid-method-completeTableEditing'>    /**
+</span>     * Completes any occuring editing in the table
+     */
+    completeTableEditing: function() {
+        var me = this;
+        var editPlugin = me.getCellEditingPlugin();
+        if (editPlugin) {
+            editPlugin.completeEdit();
+        }
+    },
+
 <span id='BasiGX-view-grid-FeatureGrid-method-onCancelClick'>    /**
 </span>     * The handler for the cancel button.
      */
@@ -932,6 +1007,7 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         me.featuresWithModifiedGeometries = [];
         me.featuresWithRemovedGeometries = [];
         me.newFeaturesAdded = false;
+        me.completeTableEditing();
         me.removeEditLayer();
         me.createEditLayer();
         me.addEditLayerToMap();
@@ -1079,6 +1155,12 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
                     moveObjectBtnText: &#39;&#39;,
                     tooltip: vm.get(&#39;moveGeometryButton&#39;)
                 }
+            },
+            listeners: {
+                featurechanged: function(evt) {
+                    var feature = evt.features.getArray()[0];
+                    me.onChangeFeature(feature);
+                }
             }
         });
         editTools.tbar.push({
@@ -1092,21 +1174,31 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
                     modifyObjectBtnText: &#39;&#39;,
                     tooltip: vm.get(&#39;editGeometryButton&#39;)
                 }
+            },
+            listeners: {
+                featurechanged: function(evt) {
+                    var feature = evt.features.getArray()[0];
+                    me.onChangeFeature(feature);
+                }
             }
         });
         editTools.tbar.push(&#39; &#39;);
         editTools.tbar.push({
             xtype: &#39;button&#39;,
+            name: &#39;featuregrid-cancel-btn&#39;,
             bind: {
                 text: vm.get(&#39;cancelButton&#39;)
             },
+            disabled: true,
             handler: me.onCancelClick.bind(me)
         });
         editTools.tbar.push({
             xtype: &#39;button&#39;,
+            name: &#39;featuregrid-save-btn&#39;,
             bind: {
                 text: vm.get(&#39;saveButton&#39;)
             },
+            disabled: true,
             handler: me.onSaveClick.bind(me)
         });
         me.insert(0, editTools);
