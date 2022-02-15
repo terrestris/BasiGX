@@ -147,8 +147,9 @@ Ext.define('BasiGX.view.button.DigitizeMoveObject', {
 
     /**
      * Fire a change event to inform other components
+     * @param {ol.source.Vector.VectorSourceEvent} evt The openlayers event.
      */
-    fireFeatureChanged: function() {
-        this.fireEvent('featurechanged');
+    fireFeatureChanged: function(evt) {
+        this.fireEvent('featurechanged', evt);
     }
 });
