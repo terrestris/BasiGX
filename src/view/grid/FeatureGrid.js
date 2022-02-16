@@ -52,7 +52,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             moveGeometryButton: 'Geometrie bewegen',
             addPointButton: 'Punkt hinzufügen',
             addLineButton: 'Linie hinzufügen',
-            addPolygonButton: 'Polygon hinzufügen'
+            addPolygonButton: 'Polygon hinzufügen',
+            featuresWithModifiedGeometries: [],
+            featuresWithRemovedGeometries: [],
+            newFeaturesAdded: false,
+            isEditing: false
         }
     },
 
@@ -127,10 +131,6 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     },
 
     editLayer: undefined,
-    featuresWithModifiedGeometries: [],
-    featuresWithRemovedGeometries: [],
-    newFeaturesAdded: false,
-
     items: [],
 
     constructor: function() {
@@ -407,10 +407,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     onChangeFeature: function(feature) {
         var me = this;
+        var vm = me.getViewModel();
+        me.startEditingFeature();
         var idField = me.layer.getProperties().idField;
         var featureId = feature.getProperties()[idField];
-        Ext.Array.include(me.featuresWithModifiedGeometries, featureId);
-        me.onDataChanged();
+        var modifiedFeatures = vm.get('featuresWithModifiedGeometries');
+        Ext.Array.include(modifiedFeatures, featureId);
+        vm.set('featuresWithModifiedGeometries', modifiedFeatures);
     },
 
     /**
@@ -419,10 +422,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     onRemoveFeature: function(evt) {
         var me = this;
+        var vm = me.getViewModel();
+        me.startEditingFeature();
         var idField = me.layer.getProperties().idField;
         var featureId = evt.feature.getProperties()[idField];
-        Ext.Array.include(me.featuresWithRemovedGeometries, featureId);
-        me.onDataChanged();
+        var removedFeatures = vm.get('featuresWithRemovedGeometries');
+        Ext.Array.include(removedFeatures, featureId);
+        vm.set('featuresWithRemovedGeometries', removedFeatures);
     },
 
     /**
@@ -430,8 +436,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     onAddFeature: function() {
         var me = this;
-        me.newFeaturesAdded = true;
-        me.onDataChanged();
+        var vm = me.getViewModel();
+        me.startEditingFeature();
+        vm.set('newFeaturesAdded', true);
     },
 
     /**
@@ -442,7 +449,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var store = new GeoExt.data.store.Features({
             layer: this.editLayer,
             listeners: {
-                update: me.onDataChanged.bind(me)
+                update: function() {
+                    me.startEditingFeature();
+                }
             }
         });
 
@@ -452,46 +461,6 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     reconfigureStore: function(store) {
         var columns = this.extractSchema(store);
         this.down('grid').reconfigure(store, columns);
-    },
-
-    /**
-     * Method that is called, when the data changed.
-     *
-     * I.e. when geometries were edited, removed or added,
-     * as well as when the data in the table changed.
-     */
-    onDataChanged: function() {
-        var me = this;
-        me.updateSaveButtonState(false);
-        me.updateCancelButtonState(false);
-    },
-
-    /**
-     * Enables or disables the save button.
-     *
-     * @param {boolean} disabled True, if button should be disabled. False,
-     * if button should be enabled.
-     */
-    updateSaveButtonState: function(disabled) {
-        var me = this;
-        var saveButton = me.down('[name=featuregrid-save-btn]');
-        if (saveButton) {
-            saveButton.setDisabled(disabled);
-        }
-    },
-
-    /**
-     * Enables or disables the cancel button.
-     *
-     * @param {boolean} disabled True, if button should be disabled. False,
-     * if button should be enabled.
-     */
-    updateCancelButtonState: function(disabled) {
-        var me = this;
-        var cancelButton = me.down('[name=featuregrid-cancel-btn]');
-        if (cancelButton) {
-            cancelButton.setDisabled(disabled);
-        }
     },
 
     /**
@@ -719,15 +688,17 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 grid.setLoading(false);
                 // only update if geometries were edited.
                 var shouldUpdate = me.didGeometryChange();
-                me.featuresWithModifiedGeometries = [];
-                me.newFeaturesAdded = false;
-                me.featuresWithRemovedGeometries = [];
+                vm.set('featuresWithModifiedGeometries', []);
+                vm.set('newFeaturesAdded', false);
+                vm.set('featuresWithRemovedGeometries', []);
+                me.finishEditing();
                 me.resetAllButtons();
                 if (shouldUpdate) {
                     me.fireEvent('geometrieseditedandsaved');
                 }
             }, function() {
                 Ext.toast(vm.get('saveErrorText'));
+                me.finishEditing();
                 grid.setLoading(false);
                 me.resetAllButtons();
             });
@@ -767,6 +738,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     getModifiedFeatures: function(store) {
         var me = this;
+        var vm = me.getViewModel();
         var layerProps = me.layer.getProperties();
         var idField = layerProps.idField;
         var modifiedFeatures = [];
@@ -780,7 +752,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             var modifiedFields = {};
             var featureId = rec.get(idField);
             var containsFeature = Ext.Array.contains(
-                me.featuresWithModifiedGeometries, featureId);
+                vm.get('featuresWithModifiedGeometries'), featureId);
             if (containsFeature) {
                 modifiedFields.geometry = me.getEditGeometryForFeature(
                     featureId);
@@ -810,6 +782,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     getDeletedFeatures: function() {
         var me = this;
+        var vm = me.getViewModel();
         var layerProps = me.layer.getProperties();
         var idField = layerProps.idField;
         var deletedFeatures = [];
@@ -818,7 +791,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         Ext.Array.each(features, function(feature) {
             var featureId = feature.get(idField);
             var containsFeature = Ext.Array.contains(
-                me.featuresWithRemovedGeometries, featureId);
+                vm.get('featuresWithRemovedGeometries'), featureId);
             if (containsFeature) {
                 var f = new ol.Feature();
                 f.setId(feature.get(idField));
@@ -858,9 +831,10 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     didGeometryChange: function() {
         var me = this;
-        var wasModified = me.featuresWithModifiedGeometries.length > 0;
-        var wasAdded = me.newFeaturesAdded;
-        var wasRemoved = me.featuresWithRemovedGeometries.length > 0;
+        var vm = me.getViewModel();
+        var wasModified = vm.get('featuresWithModifiedGeometries').length > 0;
+        var wasAdded = vm.get('newFeaturesAdded');
+        var wasRemoved = vm.get('featuresWithRemovedGeometries').length > 0;
         return wasModified || wasAdded || wasRemoved;
     },
 
@@ -982,14 +956,28 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         }
     },
 
+    startEditingFeature: function() {
+        var me = this;
+        var vm = me.getViewModel();
+        vm.set('isEditing', true);
+    },
+
+    finishEditing: function() {
+        var me = this;
+        var vm = me.getViewModel();
+        vm.set('isEditing', false);
+    },
+
     /**
      * The handler for the cancel button.
      */
     onCancelClick: function() {
         var me = this;
-        me.featuresWithModifiedGeometries = [];
-        me.featuresWithRemovedGeometries = [];
-        me.newFeaturesAdded = false;
+        var vm = me.getViewModel();
+        vm.set('featuresWithModifiedGeometries', []);
+        vm.set('featuresWithRemovedGeometries', []);
+        vm.set('newFeaturesAdded', false);
+        me.finishEditing();
         me.completeTableEditing();
         me.removeEditLayer();
         me.createEditLayer();
@@ -1170,18 +1158,18 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             xtype: 'button',
             name: 'featuregrid-cancel-btn',
             bind: {
-                text: vm.get('cancelButton')
+                text: '{cancelButton}',
+                disabled: '{!isEditing}'
             },
-            disabled: true,
             handler: me.onCancelClick.bind(me)
         });
         editTools.tbar.push({
             xtype: 'button',
             name: 'featuregrid-save-btn',
             bind: {
-                text: vm.get('saveButton')
+                text: '{saveButton}',
+                disabled: '{!isEditing}'
             },
-            disabled: true,
             handler: me.onSaveClick.bind(me)
         });
         me.insert(0, editTools);
