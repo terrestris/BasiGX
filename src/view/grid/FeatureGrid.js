@@ -705,7 +705,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     },
 
     /**
-     * Perform a WFS-T with lockFeatures.
+     * Perform a WFS-T.
      *
      * @param {ol.Layer} layer The layer to which the features belong.
      * @param {ol.Feature[]} inserts List of new features.
@@ -714,20 +714,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      * @return {Ext.Promise} Promise with the resolve or rejected transaction.
      */
     performWfst: function(layer, inserts, updates, deletes) {
-        return BasiGX.util.WFST.lockFeatures(layer)
-            .then(function(response) {
-                return BasiGX.util.WFST.handleLockFeaturesResponse(response);
-            })
-            .then(function(lockId) {
-                var opts = {
-                    layer: layer,
-                    wfstInserts: inserts,
-                    wfstUpdates: updates,
-                    wfstDeletes: deletes,
-                    lockId: lockId
-                };
-                return BasiGX.util.WFST.transact(opts);
-            });
+        var opts = {
+            layer: layer,
+            wfstInserts: inserts,
+            wfstUpdates: updates,
+            wfstDeletes: deletes
+        };
+        return BasiGX.util.WFST.transact(opts);
     },
 
     /**
