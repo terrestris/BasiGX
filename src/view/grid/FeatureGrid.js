@@ -25,9 +25,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     extend: 'Ext.panel.Panel',
     requires: [
         'Ext.Array',
+        'Ext.Component',
         'Ext.container.ButtonGroup',
         'Ext.grid.filters.Filters',
         'Ext.grid.plugin.CellEditing',
+        'Ext.util.DelayedTask',
         'BasiGX.util.WFST',
         'BasiGX.view.button.DigitizePoint',
         'BasiGX.view.button.DigitizeLine',
@@ -47,6 +49,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             saveButton: 'Speichern',
             cancelButton: 'Abbrechen',
             saveErrorText: 'Änderungen konnten nicht gespeichert werden.',
+            saveReminderText: 'Sie haben seit über {0}min nicht mehr ' +
+                'gespeichert. Bitte speichern Sie regelmäßig.',
             editGeometryButton: 'Geometrie editieren',
             removeGeometryButton: 'Geometrie entfernen',
             moveGeometryButton: 'Geometrie bewegen',
@@ -56,7 +60,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             featuresWithModifiedGeometries: [],
             featuresWithRemovedGeometries: [],
             newFeaturesAdded: false,
-            isEditing: false
+            isEditing: false,
+            showSaveReminder: false,
+            saveReminderTask: undefined
         }
     },
 
@@ -127,7 +133,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         /**
          * Allows/disallows removing a column.
          */
-        enableColumnRemoving: true
+        enableColumnRemoving: true,
+        /**
+         * Time in ms in which the saveReminder should
+         * be shown. Time starts after the first edit.
+         * Defaults to 10min.
+         */
+        saveReminderDelay: 10 * 60 * 1000
     },
 
     editLayer: undefined,
@@ -914,9 +926,14 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     onBeforeDestroy: function() {
         var me = this;
+        var vm = me.getViewModel();
         if (me.enableEditing) {
             me.removeEditLayer();
             me.editLayer = undefined;
+        }
+        var task = vm.get('saveReminderTask');
+        if (task) {
+            task.cancel();
         }
     },
 
@@ -953,12 +970,23 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var me = this;
         var vm = me.getViewModel();
         vm.set('isEditing', true);
+        var task = new Ext.util.DelayedTask(function() {
+            vm.set('showSaveReminder', true);
+        });
+        task.delay(me.getSaveReminderDelay());
+        vm.set('saveReminderTask', task);
     },
 
     finishEditing: function() {
         var me = this;
         var vm = me.getViewModel();
         vm.set('isEditing', false);
+        var task = vm.get('saveReminderTask');
+        if (task) {
+            task.cancel();
+        }
+        vm.set('saveReminderTask', undefined);
+        vm.set('showSaveReminder', false);
     },
 
     /**
@@ -1164,6 +1192,18 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 disabled: '{!isEditing}'
             },
             handler: me.onSaveClick.bind(me)
+        });
+        var saveReminderText = vm.get('saveReminderText');
+        var delay = me.getSaveReminderDelay();
+        var delayInMinutes = Math.floor(delay / 1000 / 60);
+
+        saveReminderText = Ext.String.format(saveReminderText, delayInMinutes);
+        editTools.tbar.push({
+            xtype: 'component',
+            bind: {
+                hidden: '{!showSaveReminder}',
+                html: '<b style="color: red;">' + saveReminderText + '</b>'
+            }
         });
         me.insert(0, editTools);
     },
