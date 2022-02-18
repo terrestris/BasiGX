@@ -42,9 +42,11 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
     extend: &#39;Ext.panel.Panel&#39;,
     requires: [
         &#39;Ext.Array&#39;,
+        &#39;Ext.Component&#39;,
         &#39;Ext.container.ButtonGroup&#39;,
         &#39;Ext.grid.filters.Filters&#39;,
         &#39;Ext.grid.plugin.CellEditing&#39;,
+        &#39;Ext.util.DelayedTask&#39;,
         &#39;BasiGX.util.WFST&#39;,
         &#39;BasiGX.view.button.DigitizePoint&#39;,
         &#39;BasiGX.view.button.DigitizeLine&#39;,
@@ -64,6 +66,8 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
             saveButton: &#39;Speichern&#39;,
             cancelButton: &#39;Abbrechen&#39;,
             saveErrorText: &#39;Änderungen konnten nicht gespeichert werden.&#39;,
+            saveReminderText: &#39;Sie haben seit über {0}min nicht mehr &#39; +
+                &#39;gespeichert. Bitte speichern Sie regelmäßig.&#39;,
             editGeometryButton: &#39;Geometrie editieren&#39;,
             removeGeometryButton: &#39;Geometrie entfernen&#39;,
             moveGeometryButton: &#39;Geometrie bewegen&#39;,
@@ -73,7 +77,9 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
             featuresWithModifiedGeometries: [],
             featuresWithRemovedGeometries: [],
             newFeaturesAdded: false,
-            isEditing: false
+            isEditing: false,
+            showSaveReminder: false,
+            saveReminderTask: undefined
         }
     },
 
@@ -144,7 +150,13 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
 <span id='BasiGX-view-grid-FeatureGrid-cfg-enableColumnRemoving'>        /**
 </span>         * Allows/disallows removing a column.
          */
-        enableColumnRemoving: true
+        enableColumnRemoving: true,
+<span id='BasiGX-view-grid-FeatureGrid-cfg-saveReminderDelay'>        /**
+</span>         * Time in ms in which the saveReminder should
+         * be shown. Time starts after the first edit.
+         * Defaults to 10min.
+         */
+        saveReminderDelay: 10 * 60 * 1000
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-property-editLayer'>    editLayer: undefined,
@@ -931,9 +943,14 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
      */
     onBeforeDestroy: function() {
         var me = this;
+        var vm = me.getViewModel();
         if (me.enableEditing) {
             me.removeEditLayer();
             me.editLayer = undefined;
+        }
+        var task = vm.get(&#39;saveReminderTask&#39;);
+        if (task) {
+            task.cancel();
         }
     },
 
@@ -970,12 +987,23 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
 </span>        var me = this;
         var vm = me.getViewModel();
         vm.set(&#39;isEditing&#39;, true);
+        var task = new Ext.util.DelayedTask(function() {
+            vm.set(&#39;showSaveReminder&#39;, true);
+        });
+        task.delay(me.getSaveReminderDelay());
+        vm.set(&#39;saveReminderTask&#39;, task);
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-method-finishEditing'>    finishEditing: function() {
 </span>        var me = this;
         var vm = me.getViewModel();
         vm.set(&#39;isEditing&#39;, false);
+        var task = vm.get(&#39;saveReminderTask&#39;);
+        if (task) {
+            task.cancel();
+        }
+        vm.set(&#39;saveReminderTask&#39;, undefined);
+        vm.set(&#39;showSaveReminder&#39;, false);
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-method-onCancelClick'>    /**
@@ -1181,6 +1209,18 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
                 disabled: &#39;{!isEditing}&#39;
             },
             handler: me.onSaveClick.bind(me)
+        });
+        var saveReminderText = vm.get(&#39;saveReminderText&#39;);
+        var delay = me.getSaveReminderDelay();
+        var delayInMinutes = Math.floor(delay / 1000 / 60);
+
+        saveReminderText = Ext.String.format(saveReminderText, delayInMinutes);
+        editTools.tbar.push({
+            xtype: &#39;component&#39;,
+            bind: {
+                hidden: &#39;{!showSaveReminder}&#39;,
+                html: &#39;&lt;b style=&quot;color: red;&quot;&gt;&#39; + saveReminderText + &#39;&lt;/b&gt;&#39;
+            }
         });
         me.insert(0, editTools);
     },
