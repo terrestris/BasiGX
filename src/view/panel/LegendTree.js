@@ -307,7 +307,7 @@ Ext.define('BasiGX.view.panel.LegendTree', {
      */
     onCollapse: function() {
       setTimeout(function () {
-        // Update the map size when opening the grid
+        // Update the map size when collapsing the legendTree
         var map = BasiGX.util.Map.getMapComponent().map;
         map.updateSize();
       }, 100);
