@@ -216,9 +216,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         grid.on('deselect', this.rowDeselected, this);
 
         setTimeout(function () {
-          // Update the map size when opening the grid
-          var map = BasiGX.util.Map.getMapComponent().map;
-          map.updateSize();
+            // Update the map size when opening the grid
+            var map = BasiGX.util.Map.getMapComponent().map;
+            map.updateSize();
         }, 100);
     },
 
@@ -931,24 +931,24 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      * The handler for the beforedestroy event.
      */
     onBeforeDestroy: function() {
-      var me = this;
-      var vm = me.getViewModel();
+        var me = this;
+        var vm = me.getViewModel();
       
-      if (me.enableEditing) {
-        me.removeEditLayer();
-        me.editLayer = undefined;
-      }
+        if (me.enableEditing) {
+            me.removeEditLayer();
+            me.editLayer = undefined;
+        }
 
-      var task = vm.get('saveReminderTask');
-      if (task) {
-        task.cancel();
-      }
+        var task = vm.get('saveReminderTask');
+        if (task) {
+            task.cancel();
+        }
 
-      setTimeout(function () {
-        // Update the map size when closing the grid
-        var map = BasiGX.util.Map.getMapComponent().map;
-        map.updateSize();
-      }, 100);
+        setTimeout(function () {
+            // Update the map size when closing the grid
+            var map = BasiGX.util.Map.getMapComponent().map;
+            map.updateSize();
+        }, 100);
     },
 
     /**
