@@ -65,7 +65,9 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
             deleteQuestion: &#39;Wollen Sie die Spalte wirklich löschen?&#39;,
             saveButton: &#39;Speichern&#39;,
             cancelButton: &#39;Abbrechen&#39;,
+            reloadButton: &#39;Neu laden&#39;,
             saveErrorText: &#39;Änderungen konnten nicht gespeichert werden.&#39;,
+            saveSuccessText: &#39;Änderungen erfolgreich gespeichert.&#39;,
             saveReminderText: &#39;Sie haben seit über {0}min nicht mehr &#39; +
                 &#39;gespeichert. Bitte speichern Sie regelmäßig.&#39;,
             editGeometryButton: &#39;Geometrie editieren&#39;,
@@ -178,6 +180,13 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
      * Fires when geometries were edited and saved.
      * This can be useful for reloading the original
      * layer, if included as WMS.
+     */
+
+<span id='BasiGX-view-grid-FeatureGrid-event-reloadgrid'>    /**
+</span>     * @event reloadgrid
+     * Fires when the reload button was clicked.
+     * This can be used to trigger reloading of
+     * the data and updating the grid, accordingly.
      */
 
 <span id='BasiGX-view-grid-FeatureGrid-method-initComponent'>    /**
@@ -715,6 +724,7 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
             .then(function() {
                 gridStore.commitChanges();
                 grid.setLoading(false);
+                Ext.toast(vm.get(&#39;saveSuccessText&#39;));
                 // only update if geometries were edited.
                 var shouldUpdate = me.didGeometryChange();
                 vm.set(&#39;featuresWithModifiedGeometries&#39;, []);
@@ -1026,6 +1036,11 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         this.setLayerStore();
     },
 
+<span id='BasiGX-view-grid-FeatureGrid-method-onReloadClick'>    onReloadClick: function() {
+</span>        var me = this;
+        me.fireEvent(&#39;reloadgrid&#39;);
+    },
+
 <span id='BasiGX-view-grid-FeatureGrid-method-onEditButtonClick'>    /**
 </span>     * Handler for the editing buttons.
      * @param {Ext.button.Button} btn The clicked button.
@@ -1062,7 +1077,15 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         var editTools = {
             xtype: &#39;buttongroup&#39;,
             height: 50,
-            tbar: []
+            tbar: [{
+                xtype: &#39;button&#39;,
+                name: &#39;featuregrid-reload-btn&#39;,
+                bind: {
+                    text: &#39;{reloadButton}&#39;,
+                    disabled: &#39;{isEditing}&#39;
+                },
+                handler: me.onReloadClick.bind(me)
+            }, &#39; &#39;]
         };
         var containsPoint = Ext.Array.contains(this.geometryTypes, &#39;Point&#39;);
         var containsMultiPoint = Ext.Array.contains(
