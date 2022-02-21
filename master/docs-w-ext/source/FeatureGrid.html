@@ -240,6 +240,12 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         var grid = this.down(&#39;grid&#39;);
         grid.on(&#39;select&#39;, this.rowSelected, this);
         grid.on(&#39;deselect&#39;, this.rowDeselected, this);
+
+        setTimeout(function () {
+            // Update the map size when opening the grid
+            var map = BasiGX.util.Map.getMapComponent().map;
+            map.updateSize();
+        }, 100);
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-method-setSelectionLayer'>    /**
@@ -959,14 +965,22 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
     onBeforeDestroy: function() {
         var me = this;
         var vm = me.getViewModel();
+      
         if (me.enableEditing) {
             me.removeEditLayer();
             me.editLayer = undefined;
         }
+
         var task = vm.get(&#39;saveReminderTask&#39;);
         if (task) {
             task.cancel();
         }
+
+        setTimeout(function () {
+            // Update the map size when closing the grid
+            var map = BasiGX.util.Map.getMapComponent().map;
+            map.updateSize();
+        }, 100);
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-method-getCellEditingPlugin'>    /**

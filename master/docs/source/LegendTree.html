@@ -114,6 +114,9 @@ Ext.define(&#39;BasiGX.view.panel.LegendTree&#39;, {
     initComponent: function() {
         var me = this;
 
+        this.addListener(&#39;collapse&#39;, this.onCollapse.bind(this));
+        this.addListener(&#39;expand&#39;, this.onExpand.bind(this));
+
         // The following fix is needed for ExtJS versions between 6.0.0 and
         // 6.2.0 only. We keep it for backwards compatibility.
         if (me.isExtVersionLowerThan62()) {
@@ -165,7 +168,6 @@ Ext.define(&#39;BasiGX.view.panel.LegendTree&#39;, {
             alt: &#39;{{record.getOlLayer().get(&quot;legendUrl&quot;)}}&#39;
         }]
     },
-
 <span id='BasiGX-view-panel-LegendTree-method-setModeAllBodies'>    /**
 </span>     * Expands, collapses or toggles all row bodies with the components,
      * depending on the passed mode.
@@ -316,6 +318,23 @@ Ext.define(&#39;BasiGX.view.panel.LegendTree&#39;, {
      */
     isExtVersionLowerThan62: function() {
         return parseInt(Ext.getVersion().getShortVersion(), 10) &lt; 620000;
+    },
+<span id='BasiGX-view-panel-LegendTree-method-onCollapse'>    /**
+</span>     * The handler for the beforedestroy event.
+     */
+    onCollapse: function() {
+        setTimeout(function () {
+            // Update the map size when collapsing the legendTree
+            var map = BasiGX.util.Map.getMapComponent().map;
+            map.updateSize();
+        }, 100);
+    },
+<span id='BasiGX-view-panel-LegendTree-method-onExpand'>    onExpand: function() {
+</span>        setTimeout(function () {
+            // Update the map size when expanding the legendTree
+            var map = BasiGX.util.Map.getMapComponent().map;
+            map.updateSize();
+      }, 100);
     }
 });
 </pre>
