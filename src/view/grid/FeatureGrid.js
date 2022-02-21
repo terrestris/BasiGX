@@ -48,6 +48,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             deleteQuestion: 'Wollen Sie die Spalte wirklich löschen?',
             saveButton: 'Speichern',
             cancelButton: 'Abbrechen',
+            reloadButton: 'Neu laden',
             saveErrorText: 'Änderungen konnten nicht gespeichert werden.',
             saveReminderText: 'Sie haben seit über {0}min nicht mehr ' +
                 'gespeichert. Bitte speichern Sie regelmäßig.',
@@ -161,6 +162,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      * Fires when geometries were edited and saved.
      * This can be useful for reloading the original
      * layer, if included as WMS.
+     */
+
+    /**
+     * @event reloadgrid
+     * Fires when the reload button was clicked.
+     * This can be used to trigger reloading of
+     * the data and updating the grid, accordingly.
      */
 
     /**
@@ -1009,6 +1017,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         this.setLayerStore();
     },
 
+    onReloadClick: function() {
+        var me = this;
+        me.fireEvent('reloadgrid');
+    },
+
     /**
      * Handler for the editing buttons.
      * @param {Ext.button.Button} btn The clicked button.
@@ -1045,7 +1058,15 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var editTools = {
             xtype: 'buttongroup',
             height: 50,
-            tbar: []
+            tbar: [{
+                xtype: 'button',
+                name: 'featuregrid-reload-btn',
+                bind: {
+                    text: '{reloadButton}',
+                    disabled: '{isEditing}'
+                },
+                handler: me.onReloadClick.bind(me)
+            }, ' ']
         };
         var containsPoint = Ext.Array.contains(this.geometryTypes, 'Point');
         var containsMultiPoint = Ext.Array.contains(
