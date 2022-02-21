@@ -945,7 +945,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
       }
 
       setTimeout(function () {
-        // Update the map size when opening the grid
+        // Update the map size when closing the grid
         var map = BasiGX.util.Map.getMapComponent().map;
         map.updateSize();
       }, 100);
