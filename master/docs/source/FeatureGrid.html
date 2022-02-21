@@ -487,7 +487,12 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         var store = new GeoExt.data.store.Features({
             layer: this.editLayer,
             listeners: {
-                update: function() {
+                update: function(st, rec, operation) {
+                    // We do not want to trigger the editing
+                    // when changes were committed.
+                    if (operation === &#39;commit&#39;) {
+                        return;
+                    }
                     me.startEditingFeature();
                 }
             }
