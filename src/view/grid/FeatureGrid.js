@@ -50,6 +50,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             cancelButton: 'Abbrechen',
             reloadButton: 'Neu laden',
             saveErrorText: 'Änderungen konnten nicht gespeichert werden.',
+            saveSuccessText: 'Änderungen erfolgreich gespeichert.',
             saveReminderText: 'Sie haben seit über {0}min nicht mehr ' +
                 'gespeichert. Bitte speichern Sie regelmäßig.',
             editGeometryButton: 'Geometrie editieren',
@@ -706,6 +707,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             .then(function() {
                 gridStore.commitChanges();
                 grid.setLoading(false);
+                Ext.toast(vm.get('saveSuccessText'));
                 // only update if geometries were edited.
                 var shouldUpdate = me.didGeometryChange();
                 vm.set('featuresWithModifiedGeometries', []);
