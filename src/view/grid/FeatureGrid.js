@@ -221,7 +221,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         // if enableEditing is set to false but the refresh button needs
         // to be visible, the toolbar needs to be created to show the
         // refresh button
-        if(this.enableRefreshButton && !this.enableEditing) {
+        if (this.enableRefreshButton && !this.enableEditing) {
           this.createEditToolbar();
         }
         this.add(gridOpts);
@@ -1098,7 +1098,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             }, ' ']
         };
 
-        if(me.enableEditing) {
+        if (me.enableEditing) {
             var vm = me.getViewModel();
             var map = BasiGX.util.Map.getMapComponent().map;
             var collection = this.editLayer.getSource().getFeaturesCollection();
