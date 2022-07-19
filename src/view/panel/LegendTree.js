@@ -306,17 +306,17 @@ Ext.define('BasiGX.view.panel.LegendTree', {
      * The handler for the beforedestroy event.
      */
     onCollapse: function() {
-        setTimeout(function () {
+        window.setTimeout(function () {
             // Update the map size when collapsing the legendTree
             var map = BasiGX.util.Map.getMapComponent().map;
             map.updateSize();
         }, 100);
     },
     onExpand: function() {
-        setTimeout(function () {
+        window.setTimeout(function () {
             // Update the map size when expanding the legendTree
             var map = BasiGX.util.Map.getMapComponent().map;
             map.updateSize();
-      }, 100);
+        }, 100);
     }
 });
