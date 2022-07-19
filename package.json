@@ -80,7 +80,7 @@
         "karma-mocha-reporter": "2.2.5",
         "karma-sinon": "1.0.5",
         "mocha": "9.0.3",
-        "np": "7.5.0",
+        "np": "7.6.2",
         "open-cli": "7.0.0",
         "puppeteer": "10.2.0",
         "rimraf": "3.0.2",
