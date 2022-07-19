@@ -123,7 +123,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         /**
         * Configures the visibility of the refresh button of the grid.
         */
-         enableRefreshButton: false,
+        enableRefreshButton: false,
         /**
          * List of supported geometry types.
          * Following strings are supported:
@@ -222,7 +222,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         // to be visible, the toolbar needs to be created to show the
         // refresh button
         if (this.enableRefreshButton && !this.enableEditing) {
-          this.createEditToolbar();
+            this.createEditToolbar();
         }
         this.add(gridOpts);
         this.setLayerStore();
@@ -234,7 +234,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         grid.on('select', this.rowSelected, this);
         grid.on('deselect', this.rowDeselected, this);
 
-        setTimeout(function () {
+        window.setTimeout(function () {
             // Update the map size when opening the grid
             var map = BasiGX.util.Map.getMapComponent().map;
             map.updateSize();
@@ -958,7 +958,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     onBeforeDestroy: function() {
         var me = this;
         var vm = me.getViewModel();
-      
+
         if (me.enableEditing) {
             me.removeEditLayer();
             me.editLayer = undefined;
@@ -969,7 +969,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             task.cancel();
         }
 
-        setTimeout(function () {
+        window.setTimeout(function () {
             // Update the map size when closing the grid
             var map = BasiGX.util.Map.getMapComponent().map;
             map.updateSize();
@@ -1083,7 +1083,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     createEditToolbar: function() {
         var me = this;
-        
+
         var editTools = {
             xtype: 'buttongroup',
             height: 50,
@@ -1105,10 +1105,12 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             var containsPoint = Ext.Array.contains(this.geometryTypes, 'Point');
             var containsMultiPoint = Ext.Array.contains(
                 this.geometryTypes, 'MultiPoint');
-            var containsLine = Ext.Array.contains(this.geometryTypes, 'LineString');
+            var containsLine = Ext.Array.contains(this.geometryTypes,
+                'LineString');
             var containsMultiLine = Ext.Array.contains(
                 this.geometryTypes, 'MultiLineString');
-            var containsPolygon = Ext.Array.contains(this.geometryTypes, 'Polygon');
+            var containsPolygon = Ext.Array.contains(this.geometryTypes,
+                'Polygon');
             var containsMultiPolygon = Ext.Array.contains(
                 this.geometryTypes, 'MultiPolygon');
 
@@ -1171,7 +1173,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 }
             };
             if (!containsPolygon && !containsMultiPolygon) {
-              polygonTool.disabled = true;
+                polygonTool.disabled = true;
             }
             if (containsMultiPolygon) {
                 polygonTool.multi = true;
@@ -1252,7 +1254,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             var delay = me.getSaveReminderDelay();
             var delayInMinutes = Math.floor(delay / 1000 / 60);
 
-            saveReminderText = Ext.String.format(saveReminderText, delayInMinutes);
+            saveReminderText = Ext.String.format(saveReminderText,
+                delayInMinutes);
             editTools.tbar.push({
                 xtype: 'component',
                 bind: {
