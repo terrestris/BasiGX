@@ -632,7 +632,7 @@ Ext.define('BasiGX.util.WFS', {
 
             if (layerSource instanceof ol.source.TileWMS) {
                 url = layerSource.getUrls()[0];
-            } else if(layerSource instanceof ol.source.ImageWMS) {
+            } else if (layerSource instanceof ol.source.ImageWMS) {
                 url = layerSource.getUrl();
             } else {
                 return;
