@@ -644,6 +644,17 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
             var mapComponent = BasiGX.util.Map.getMapComponent();
             var srs = mapComponent.map.getView().getProjection().getCode();
 
+            var layerSource = filterLayer.getSource();
+            var url;
+
+            if (layerSource instanceof ol.source.TileWMS) {
+                url = layerSource.getUrls()[0];
+            } else if (layerSource instanceof ol.source.ImageWMS) {
+                url = layerSource.getUrl();
+            } else {
+                return;
+            }
+
             var filter = spatialTimeFilterPart; // fallback
             filter = staticMe.mergeFilterWithSldFilters(filter, sldFilters);
 
@@ -654,7 +665,7 @@ Ext.define(&#39;BasiGX.util.WFS&#39;, {
                 var geomFieldName = filterLayer.get(&#39;geomFieldName&#39;);
 
                 staticMe.executeWfsGetFeature(
-                    filterLayer.getSource().getUrls()[0],
+                    url,
                     filterLayer,
                     srs,
                     displayColumns,
