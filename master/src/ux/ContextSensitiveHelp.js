@@ -75,6 +75,7 @@ Ext.define('BasiGX.ux.ContextSensitiveHelp', {
         'basigx-button-togglelegend',
         'basigx-overview-map-button',
         'basigx-button-addwms',
+        'basigx-button-addarcgisrest',
         'basigx-button-measure',
         'basigx-button-coordinatetransform',
         'basigx-button-permalink',

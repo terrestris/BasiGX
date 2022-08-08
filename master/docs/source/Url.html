@@ -114,6 +114,27 @@ Ext.define(&#39;BasiGX.util.Url&#39;, {
          */
         isUrl: function (str) {
             return str.startsWith(&#39;http://&#39;) || str.startsWith(&#39;https://&#39;);
+        },
+
+<span id='BasiGX-util-Url-static-method-setQueryParam'>        /**
+</span>         * Sets a query parameter.
+         *
+         * This will overwrite an existing parameter with the
+         * same queryKey. If there are multiple query parameters
+         * with the same key, the others are deleted.
+         *
+         * @param {string} url The url.
+         * @param {string} queryKey The key of the query parameter.
+         * @param {string} queryValue The value of the query parameter.
+         * @return {string} The URL with the new query parameter.
+         */
+        setQueryParam: function(url, queryKey, queryValue) {
+            var urlObj = new URL(url);
+            var searchParams = urlObj.searchParams;
+            searchParams.set(queryKey, queryValue);
+            var newUrl = urlObj.origin +
+                urlObj.pathname + &#39;?&#39; + searchParams.toString();
+            return newUrl;
         }
 
     }

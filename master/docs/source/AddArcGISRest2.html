@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2022-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-view-button-AddArcGISRest'>/**
+</span> * AddArcGISRest Button
+ *
+ * Button used to instanciate the basigx-form-addarcgisrest in order to add a
+ * ArcGIS REST layer to the map
+ *
+ * @class BasiGX.view.button.AddArcGISRest
+ */
+Ext.define(&#39;BasiGX.view.button.AddArcGISRest&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-addarcgisrest&#39;,
+
+    requires: [
+        &#39;Ext.window.Window&#39;,
+        &#39;Ext.app.ViewModel&#39;,
+        &#39;BasiGX.view.form.AddArcGISRest&#39;,
+        &#39;BasiGX.util.Animate&#39;
+    ],
+
+<span id='BasiGX-view-button-AddArcGISRest-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: &#39;ArcGIS REST Layer hinzufügen&#39;,
+            text: &#39;ArcGIS REST &lt;span style=&quot;font-size: 1.7em; &#39; +
+                &#39;font-weight: normal;&quot;&gt;⊕&lt;/span&gt;&#39;,
+            windowTitle: &#39;ArcGIS REST Layer hinzufügen&#39;,
+            documentation: &#39;&lt;h2&gt;ArcGIS REST Layer hinzufügen&lt;/h2&gt;• Ein Klick&#39; +
+                &#39;auf den Button öffnet ein Fenster, in dem Sie mit Hilfe &#39; +
+                &#39;einer ArcGIS REST-URL einen beliebigen Kartendienst der &#39; +
+                &#39;Karte hinzufügen können.&#39;
+        }
+    },
+
+<span id='BasiGX-view-button-AddArcGISRest-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: &#39;{text}&#39;
+    },
+
+<span id='BasiGX-view-button-AddArcGISRest-property-liveDemoConfig'>    /**
+</span>     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: {
+                component: &#39;basigx-button-addarcgisrest&#39;,
+                moveDuration: 2000
+            }
+        },
+        {
+            clickOnButton: &#39;basigx-button-addarcgisrest&#39;
+        },
+        {
+            moveMouseTo: {
+                component: &#39;window[name=add-arcgisrest-window] &#39; +
+                    &#39;textfield[name=url]&#39;,
+                moveDuration: 2000
+            }
+        },
+        {
+            enterText: {
+                component: &#39;window[name=add-arcgisrest-window] &#39; +
+                    &#39;textfield[name=url]&#39;,
+                text: &#39;https://gis.epa.ie/arcgis/rest/services&#39;,
+                waitAfter: 3500
+            }
+        },
+        {
+            moveMouseTo:
+                &#39;window[name=add-arcgisrest-window] &#39; +
+                &#39;button[name=requestLayersBtn]&#39;
+        },
+        {
+            clickOnButton: {
+                component:
+                    &#39;window[name=add-arcgisrest-window] &#39; +
+                    &#39;button[name=requestLayersBtn]&#39;,
+                waitAfter: 3000
+            }
+        },
+        {
+            scrollTo: {
+                component: &#39;window[name=add-arcgisrest-window] form&#39;,
+                target: {
+                    x: 0,
+                    y: 999,
+                    animate: true
+                }
+            }
+        },
+        {
+            moveMouseTo:
+                &#39;window[name=add-arcgisrest-window] &#39; +
+                &#39;button[name=add-checked-layers]&#39;
+        },
+        {
+            destroy: &#39;window[name=add-arcgisrest-window]&#39;
+        }
+    ],
+
+<span id='BasiGX-view-button-AddArcGISRest-property-_win'>    /**
+</span>     * The window instance which will be created by this button.
+     *
+     * @type {Ext.window.Window}
+     * @private
+     */
+    _win: null,
+
+<span id='BasiGX-view-button-AddArcGISRest-property-config'>    /**
+</span>     *
+     */
+    config: {
+<span id='BasiGX-view-button-AddArcGISRest-cfg-windowConfig'>        windowConfig: {
+</span>            // can be used by subclasses to apply/merge
+            // additional/other values for the window
+        }
+    },
+
+<span id='BasiGX-view-button-AddArcGISRest-method-handler'>    handler: function() {
+</span>        if (!this._win) {
+            var windowConfig = {
+                name: &#39;add-arcgisrest-window&#39;,
+                title: this.getViewModel().get(&#39;windowTitle&#39;),
+                width: 500,
+                height: 400,
+                layout: &#39;fit&#39;,
+                constrain: true,
+                items: [{
+                    xtype: &#39;basigx-form-addarcgisrest&#39;
+                }],
+                listeners: {
+                    destroy: this.onDestroy,
+                    scope: this
+                }
+            };
+
+            var windowConfigToApply = this.getWindowConfig();
+            Ext.apply(windowConfig, windowConfigToApply);
+
+            this._win = Ext.create(&#39;Ext.window.Window&#39;, windowConfig);
+            this._win.show();
+        } else {
+            BasiGX.util.Animate.shake(this._win);
+        }
+    },
+
+<span id='BasiGX-view-button-AddArcGISRest-method-onDestroy'>    /**
+</span>     * Reset window reference
+     */
+    onDestroy: function() {
+        if (this._win) {
+            this._win = null;
+        }
+    }
+});
+</pre>
+</body>
+</html>

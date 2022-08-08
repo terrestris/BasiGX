@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* Copyright (c) 2022-present terrestris GmbH &amp; Co. KG
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+<span id='BasiGX-util-ArcGISRest'>/**
+</span> * ArcGISRest Util
+ *
+ * Some methods to work with ArcGISRest
+ *
+ * @class BasiGX.util.ArcGISRest
+ */
+Ext.define(&#39;BasiGX.util.ArcGISRest&#39;, {
+    statics: {
+
+<span id='BasiGX-util-ArcGISRest-static-method-isArcGISRestUrl'>        /**
+</span>         * Check if a url is an ArcGISRest URL.
+         *
+         * ArcGISRest URL must contain a path called &#39;/services/&#39;.
+         *
+         * @param {string} url The url to check.
+         * @return {boolean} True, if url is ArcGISRest URL. False otherwise.
+         */
+        isArcGISRestUrl: function(url) {
+            var urlObj = new URL(url);
+            var parts = urlObj.pathname.split(&#39;/&#39;);
+            return parts.indexOf(&#39;services&#39;) &gt; -1;
+        },
+
+<span id='BasiGX-util-ArcGISRest-static-method-getArcGISRestRootUrl'>        /**
+</span>         * Get the root URL of the ArcGISRest service.
+         *
+         * @param {string} url The URL to get the root URL from.
+         * @return {string} The root URL.
+         */
+        getArcGISRestRootUrl: function(url) {
+            if (!BasiGX.util.ArcGISRest.isArcGISRestUrl(url)) {
+                return;
+            }
+            var urlObj = new URL(url);
+            var parts = urlObj.pathname.split(&#39;/&#39;);
+            var serviceIndex = parts.indexOf(&#39;services&#39;);
+            var baseParts = parts.slice(0, serviceIndex + 1);
+            var basePath = baseParts.join(&#39;/&#39;);
+
+            return urlObj.origin + basePath;
+        },
+
+<span id='BasiGX-util-ArcGISRest-static-method-createOlLayerFromArcGISRest'>        /**
+</span>         * Creates an olLayer from an ArcGISRest layer config.
+         *
+         * @param {object} layerConfig The layer config to base the olLayer on.
+         * @param {object} layerConfig.service The service config info.
+         * @param {string} layerConfig.service.type The service type.
+         * @param {string} layerConfig.service.name The service name.
+         * @param {string} layerConfig.url The service url.
+         * @param {boolean} useDefaultHeader Whether to use the default
+         * Xhr header.
+         * @return {Ext.Promise} A promise containing the olLayer.
+         */
+        createOlLayerFromArcGISRest: function(layerConfig, useDefaultHeader) {
+            var service = layerConfig.service;
+            var url = layerConfig.url;
+            var rootUrl = BasiGX.util.ArcGISRest.getArcGISRestRootUrl(url);
+            if (!rootUrl) {
+                Ext.log.warn(&#39;Provided URL is not a valid ArcGISRest URL&#39;);
+                return Ext.Promise.reject();
+            }
+            var serviceUrl = [rootUrl, service.name, service.type].join(&#39;/&#39;);
+            var onReject = function() {
+                return Ext.Promise.reject();
+            };
+            return Ext.Ajax.request({
+                url: BasiGX.util.Url.setQueryParam(serviceUrl, &#39;f&#39;, &#39;json&#39;),
+                method: &#39;GET&#39;,
+                useDefaultXhrHeader: useDefaultHeader
+            }, onReject).then(function(response) {
+                var responseJson = JSON.parse(response.responseText);
+                return Ext.Promise.resolve(responseJson);
+            }, onReject).then(function(serviceInfo) {
+                var layer = undefined;
+                switch(service.type) {
+                    case &#39;ImageServer&#39;:
+                    case &#39;MapServer&#39;:
+                        var source = new ol.source.TileArcGISRest({
+                            url: serviceUrl,
+                            projection: &#39;EPSG:&#39; +
+                                serviceInfo.spatialReference.wkid
+                        });
+                        layer = new ol.layer.Tile({
+                            source: source,
+                            name: service.name,
+                            topic: true
+                        });
+                        break;
+                    case &#39;FeatureServer&#39;:
+                        // FeatureServers can only be requested
+                        // for single layers in a service.
+                        Ext.log.info(&#39;ArcGISRest FeatureServer is &#39; +
+                            &#39;currently not supported.&#39;);
+                        break;
+                    default:
+                        break;
+                }
+                return Ext.Promise.resolve(layer);
+            }, function() {
+                Ext.log.warn(&#39;Could not create olLayer from ArcGISRest.&#39;);
+                return Ext.Promise.resolve();
+            });
+        }
+    }
+});
+</pre>
+</body>
+</html>
