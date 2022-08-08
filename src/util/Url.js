@@ -100,7 +100,7 @@ Ext.define('BasiGX.util.Url', {
         },
 
         /**
-         * Set a query parameter.
+         * Sets a query parameter.
          *
          * This will overwrite an existing parameter with the
          * same queryKey. If there are multiple query parameters

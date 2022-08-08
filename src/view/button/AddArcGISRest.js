@@ -37,13 +37,13 @@ Ext.define('BasiGX.view.button.AddArcGISRest', {
      */
     viewModel: {
         data: {
-            tooltip: 'ArcGIS Rest Layer hinzufügen',
-            text: 'ArcGIS Rest <span style="font-size: 1.7em; ' +
+            tooltip: 'ArcGIS REST Layer hinzufügen',
+            text: 'ArcGIS REST <span style="font-size: 1.7em; ' +
                 'font-weight: normal;">⊕</span>',
-            windowTitle: 'ArcGIS Rest Layer hinzufügen',
-            documentation: '<h2>ArcGIS Rest Layer hinzufügen</h2>• Ein Klick' +
+            windowTitle: 'ArcGIS REST Layer hinzufügen',
+            documentation: '<h2>ArcGIS REST Layer hinzufügen</h2>• Ein Klick' +
                 'auf den Button öffnet ein Fenster, in dem Sie mit Hilfe ' +
-                'einer ArcGIS Rest-URL einen beliebigen Kartendienst der ' +
+                'einer ArcGIS REST-URL einen beliebigen Kartendienst der ' +
                 'Karte hinzufügen können.'
         }
     },

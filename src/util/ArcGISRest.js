@@ -71,8 +71,12 @@ Ext.define('BasiGX.util.ArcGISRest', {
         createOlLayerFromArcGISRest: function(layerConfig, useDefaultHeader) {
             var service = layerConfig.service;
             var url = layerConfig.url;
-            var serviceUrl = BasiGX.util.ArcGISRest.getArcGISRestRootUrl(url);
-            serviceUrl = [serviceUrl, service.name, service.type].join('/');
+            var rootUrl = BasiGX.util.ArcGISRest.getArcGISRestRootUrl(url);
+            if (!rootUrl) {
+                Ext.log.warn('Provided URL is not a valid ArcGISRest URL');
+                return Ext.Promise.reject();
+            }
+            var serviceUrl = [rootUrl, service.name, service.type].join('/');
             var onReject = function() {
                 return Ext.Promise.reject();
             };
