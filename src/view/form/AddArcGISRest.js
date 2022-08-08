@@ -40,7 +40,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         data: {
             queryParamsFieldSetTitle: 'Anfrageparameter',
             arcGISUrlTextFieldLabel: 'ArcGIS Service URL',
-            availableLayesFieldSetTitle: 'Verfügbare Layer',
+            availableLayersFieldSetTitle: 'Verfügbare Layer',
             resetBtnText: 'Zurücksetzen',
             requestLayersBtnText: 'Verfügbare Layer abfragen',
             checkAllLayersBtnText: 'Alle auswählen',
@@ -195,7 +195,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
                 anchor: '100%'
             },
             bind: {
-                title: '{availableLayesFieldSetTitle}'
+                title: '{availableLayersFieldSetTitle}'
             },
             items: {
                 xtype: 'checkboxgroup',
