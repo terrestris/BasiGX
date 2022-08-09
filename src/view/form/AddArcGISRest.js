@@ -355,17 +355,24 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
                 url: response.request.url
             };
         });
-        // TODO remove this as soon as FeatureServer is supported.
-        layerConfigs = Ext.Array.filter(
+        var featureServers = Ext.Array.filter(
             layerConfigs, function(layerConfig) {
-                var isMapServer = layerConfig.service.type === 'MapServer';
-                var isImageServer = layerConfig.service.type === 'ImageServer';
-                return isMapServer || isImageServer;
+                return layerConfig.service.type === 'FeatureServer';
             }
         );
-        this.fillAvailableLayersFieldset(layerConfigs);
-        this.updateControlToolbarState();
-        this.setLoading(false);
+        this.loadFeatureServersLayers(featureServers)
+            .then(function(featureServerConfigs) {
+                layerConfigs = Ext.Array.filter(
+                    layerConfigs, function(layerConfig) {
+                        return layerConfig.service.type !== 'FeatureServer';
+                    }
+                );
+                layerConfigs = Ext.Array.merge(
+                    layerConfigs, featureServerConfigs);
+                this.fillAvailableLayersFieldset(layerConfigs);
+                this.updateControlToolbarState();
+                this.setLoading(false);
+            }.bind(this));
     },
 
     /**
@@ -388,6 +395,92 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
 
         me.setLoading(false);
         BasiGX.warn(me.getErrorMessage('errorRequestFailed', errDetails));
+    },
+
+    /**
+     * Loads the layerConfigs for all layers of all FeatureServers.
+     *
+     * @param {object[]} featureServers List of layerConfigs of FeatureServers.
+     * @return {Ext.Promise} A promise that resolves with a list of
+     * layerConfigs, where each layerConfig represents a single layer of a
+     * FeatureServer.
+     */
+    loadFeatureServersLayers: function(featureServers) {
+        var me = this;
+        return new Ext.Promise(function(resolve) {
+            var allLayerConfigs = [];
+            var servers = Ext.Array.clone(featureServers);
+            // add last item to easier handle requests
+            servers.push(undefined);
+            Ext.Array.reduce(servers, function(prev, val, idx, arr) {
+                return prev.then(function(res) {
+                    // handle previous promise
+                    if (res) {
+                        var layerConfigs = me.getFeatureServerConfigs(
+                            res, arr[idx - 1]);
+                        allLayerConfigs = Ext.Array.merge(
+                            allLayerConfigs, layerConfigs);
+                    }
+                    // prepare next request
+                    if (val) {
+                        return me.requestFeatureServer.call(me, val);
+                    } else {
+                        // Last item is undefined, i.e. we are done.
+                        // So we resolve the promise.
+                        resolve(allLayerConfigs);
+                    }
+                }, function (err) {
+                    // error handling, still prepare next request
+                    Ext.log.warn('Could not load featureServer info', err);
+                    if (val) {
+                        return me.requestFeatureServer.call(me, val);
+                    } else {
+                        resolve(allLayerConfigs);
+                    }
+                });
+            }, Ext.Promise.resolve());
+        });
+    },
+
+    /**
+     * Make a request to the given featureServer.
+     *
+     * @param {object} featureServer The featureServer config.
+     * See BasiGX.util.ArcGISRest.createOlLayerFromArcGISRest for
+     * a detailed description of the object.
+     * @return {Ext.Promise} The promise.
+     */
+    requestFeatureServer: function(featureServer) {
+        var me = this;
+        var serviceUrl = BasiGX.util.ArcGISRest.createFeatureServerUrl(
+            featureServer.url, featureServer.service.name, 'json');
+        return Ext.Ajax.request({
+            url: serviceUrl,
+            method: 'POST',
+            useDefaultXhrHeader: me.getUseDefaultXhrHeader()
+        });
+    },
+
+    /**
+     * Gets the layerConfigs for all FeatureServer layers.
+     *
+     * @param {object} response Resolve Ext.Ajax.request promise.
+     * @param {object} layerConfig The FeatureServer layerConfig.
+     * @return {object[]} List of layerConfigs for each single layer
+     * in a FeatureServer.
+     */
+    getFeatureServerConfigs: function(response, layerConfig) {
+        var res = JSON.parse(response.responseText);
+        var configs = Ext.Array.map(res.layers, function(layer) {
+            var config = Ext.clone(layerConfig);
+            config.url = response.request.url;
+            config.layer = {
+                id: layer.id,
+                name: layer.name
+            };
+            return config;
+        });
+        return configs;
     },
 
     /**
@@ -524,9 +617,13 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         var checkBoxes = [];
         var candidatesInitiallyChecked = me.getCandidatesInitiallyChecked();
         Ext.each(layers, function(layer) {
+            var boxLabel = layer.service.name;
+            if (layer.service.type === 'FeatureServer') {
+                boxLabel += '/' + layer.layer.name;
+            }
             checkBoxes.push({
                 xtype: 'checkbox',
-                boxLabel: layer.service.name,
+                boxLabel: boxLabel,
                 checked: candidatesInitiallyChecked,
                 arcGISLayerConfig: layer
             });
