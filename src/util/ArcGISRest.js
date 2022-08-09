@@ -126,7 +126,7 @@ Ext.define('BasiGX.util.ArcGISRest', {
          * @param {string} layerConfig.service.type The service type.
          * @param {string} layerConfig.service.name The service name.
          * @param {string} layerConfig.url The service url.
-         * @param {object} layerConfig.layer (optional) The layer confings of
+         * @param {object} layerConfig.layer (optional) The layer config of
          * a FeatureServer layer.
          * @param {number} layerConfig.layer.id The id of a FeatureServer layer.
          * @param {string} layerConfig.layer.name The name of a FeatureServer
