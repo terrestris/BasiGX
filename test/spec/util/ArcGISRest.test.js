@@ -88,5 +88,16 @@ describe('BasiGX.util.ArcGISRest', function() {
             expect(result).to.equal(url);
         });
 
+        it('returns the featureServer url with a specified filter', function() {
+            var serviceUrl = 'http://example.com/services/foo/FeatureServer';
+            var layerId = 0;
+            var filter = 'foo=bar';
+            var url = serviceUrl + '/' + layerId + '/query' +
+                '?where=' + encodeURIComponent(filter);
+            var result = BasiGX.util.ArcGISRest.createFeatureServerQueryUrl(
+                serviceUrl, layerId, undefined, filter);
+            expect(result).to.equal(url);
+        });
+
     });
 });

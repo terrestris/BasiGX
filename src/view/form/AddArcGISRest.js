@@ -360,7 +360,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
                 return layerConfig.service.type === 'FeatureServer';
             }
         );
-        this.loadFeatureServersLayers(featureServers)
+        this.loadLayersOfFeatureServers(featureServers)
             .then(function(featureServerConfigs) {
                 layerConfigs = Ext.Array.filter(
                     layerConfigs, function(layerConfig) {
@@ -405,7 +405,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
      * layerConfigs, where each layerConfig represents a single layer of a
      * FeatureServer.
      */
-    loadFeatureServersLayers: function(featureServers) {
+    loadLayersOfFeatureServers: function(featureServers) {
         var me = this;
         return new Ext.Promise(function(resolve) {
             var allLayerConfigs = [];

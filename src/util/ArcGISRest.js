@@ -94,9 +94,12 @@ Ext.define('BasiGX.util.ArcGISRest', {
          * @param {string} serviceUrl The URL of the service.
          * @param {number} layerId The id of the layer in the FeatureServer.
          * @param {string} format The output format.
+         * @param {string} filter The filter condition.
          * @return {string} The query URL.
          */
-        createFeatureServerQueryUrl: function(serviceUrl, layerId, format) {
+        createFeatureServerQueryUrl: function(
+            serviceUrl, layerId, format, filter
+        ) {
             if (!BasiGX.util.ArcGISRest.isArcGISRestUrl(serviceUrl)) {
                 return;
             }
@@ -112,8 +115,13 @@ Ext.define('BasiGX.util.ArcGISRest', {
             }
             // The query endpoint has a required 'where' parameter. In
             // order to get all features, we apply a where-clause that
-            // always returns true.
-            url = BasiGX.util.Url.setQueryParam(url, 'where', '1=1');
+            // always returns true. This behavior can be overwritten
+            // by specifying a 'filter' argument.
+            var filterToUse = '1=1';
+            if (filter) {
+                filterToUse = filter;
+            }
+            url = BasiGX.util.Url.setQueryParam(url, 'where', filterToUse);
 
             return url;
         },
@@ -127,7 +135,7 @@ Ext.define('BasiGX.util.ArcGISRest', {
          * @param {string} layerConfig.service.name The service name.
          * @param {string} layerConfig.url The service url.
          * @param {object} layerConfig.layer (optional) The layer config of
-         * a FeatureServer layer.
+         * a FeatureServer layer. Mandatory for layers of type Feature Server.
          * @param {number} layerConfig.layer.id The id of a FeatureServer layer.
          * @param {string} layerConfig.layer.name The name of a FeatureServer
          * layer.
