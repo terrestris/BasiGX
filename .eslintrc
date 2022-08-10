@@ -21,7 +21,8 @@
     "shpwrite": false,
     "Uint8Array": false,
     "FileReader": false,
-    "jsts": false
+    "jsts": false,
+    "URL": false
   },
   "rules": {
     "consistent-this": [
