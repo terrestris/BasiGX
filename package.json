@@ -17,7 +17,7 @@
         "ux"
     ],
     "engines": {
-        "node": ">=16",
+        "node": ">=16.13",
         "npm": ">=8.5.0"
     },
     "toolkit": "classic",
