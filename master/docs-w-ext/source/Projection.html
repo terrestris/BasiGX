@@ -38,13 +38,13 @@ Ext.define(&#39;BasiGX.util.Projection&#39;, {
     statics: {
 
 <span id='BasiGX-util-Projection-static-method-fetchProj4jCrsDefinitions'>        /**
-</span>         * Fetch EPSG code definitions from http://epsg.io for given array
+</span>         * Fetch EPSG code definitions from https://epsg.io for given array
          * of EPSG codes
          *
          * @param {String[]} epsgCodeArray An array of EPSG code string,
          * e.g. [&#39;EPSG:4326&#39;]
          * @return {Ext.Promise} An ExtJS promise resolving if all EPSG
-         * information has successfully been fetched from http://epsg.io
+         * information has successfully been fetched from https://epsg.io
          */
         fetchProj4jCrsDefinitions: function(epsgCodeArray) {
             if (!Ext.isArray(epsgCodeArray)) {
@@ -52,7 +52,7 @@ Ext.define(&#39;BasiGX.util.Projection&#39;, {
                     &#39; provided.&#39;);
             }
             var epsgPromises = [];
-            var epsgIoBaseUrl = &#39;//epsg.io/?q={0}&amp;format=json&#39;;
+            var epsgIoBaseUrl = &#39;https://epsg.io/?q={0}&amp;format=json&#39;;
             Ext.each(Ext.Array.unique(epsgCodeArray), function(epsgCodeStr) {
                 var epsgCode = epsgCodeStr.toUpperCase().replace(&#39;EPSG:&#39;, &#39;&#39;);
                 var epsgPromise = new Ext.Promise(function(resolve, reject) {
@@ -85,7 +85,7 @@ Ext.define(&#39;BasiGX.util.Projection&#39;, {
 <span id='BasiGX-util-Projection-static-method-initProj4Definitions'>        /**
 </span>         * Register crs definitions
          * @param {Object[]} proj4jObjects An array of objects returned by
-         * http://epsg.io which includes information on projection, in
+         * https://epsg.io which includes information on projection, in
          * particular the name, the unit and the proj4 definition
          */
         initProj4Definitions: function(proj4jObjects) {
