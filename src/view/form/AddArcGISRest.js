@@ -407,39 +407,28 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
      */
     loadLayersOfFeatureServers: function(featureServers) {
         var me = this;
-        return new Ext.Promise(function(resolve) {
-            var allLayerConfigs = [];
-            var servers = Ext.Array.clone(featureServers);
-            // add last item to easier handle requests
-            servers.push(undefined);
-            Ext.Array.reduce(servers, function(prev, val, idx, arr) {
-                return prev.then(function(res) {
-                    // handle previous promise
-                    if (res) {
-                        var layerConfigs = me.getFeatureServerConfigs(
-                            res, arr[idx - 1]);
-                        allLayerConfigs = Ext.Array.merge(
-                            allLayerConfigs, layerConfigs);
-                    }
-                    // prepare next request
-                    if (val) {
-                        return me.requestFeatureServer.call(me, val);
-                    } else {
-                        // Last item is undefined, i.e. we are done.
-                        // So we resolve the promise.
-                        resolve(allLayerConfigs);
-                    }
-                }, function (err) {
-                    // error handling, still prepare next request
+        var mappedPromises = Ext.Array.map(featureServers, function(server) {
+            return me.requestFeatureServer.call(me, server)
+                .then(function(res) {
+                    var config = me.getFeatureServerConfigs(
+                        res, server
+                    );
+                    return config;
+                }, function(err) {
                     Ext.log.warn('Could not load featureServer info', err);
-                    if (val) {
-                        return me.requestFeatureServer.call(me, val);
-                    } else {
-                        resolve(allLayerConfigs);
-                    }
+                    return;
                 });
-            }, Ext.Promise.resolve());
         });
+        return Ext.Promise.all(mappedPromises)
+            .then(function(responses) {
+                var configs = Ext.Array.reduce(responses, function(acc, conf) {
+                    if (!conf) {
+                        return acc;
+                    }
+                    return Ext.Array.merge(acc, conf);
+                });
+                return Ext.Promise.resolve(configs);
+            });
     },
 
     /**
