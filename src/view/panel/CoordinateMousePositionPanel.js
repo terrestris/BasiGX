@@ -238,7 +238,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
      * Generate UI depending on number of passed EPSG codes
      *
      * @param {Object[]} proj4jObjects An array of objects returned by
-     *        http://epsg.io which includes information on projection, in
+     *        https://epsg.io which includes information on projection, in
      *        particular the name, the unit and the proj4 definition
      */
     generateCrsChangeButtonGroup: function(proj4jObjects) {
