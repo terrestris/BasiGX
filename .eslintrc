@@ -20,6 +20,7 @@
     "opentype": false,
     "shpwrite": false,
     "Uint8Array": false,
+    "URL": false,
     "FileReader": false,
     "jsts": false
   },
