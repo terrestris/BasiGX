@@ -21,6 +21,11 @@
  * @class BasiGX.util.ArcGISRest
  */
 Ext.define('BasiGX.util.ArcGISRest', {
+
+    requires: [
+        'BasiGX.util.Url'
+    ],
+
     statics: {
 
         /**
@@ -57,6 +62,71 @@ Ext.define('BasiGX.util.ArcGISRest', {
         },
 
         /**
+         * Creates the URL for a FeatureServer request.
+         *
+         * @param {string} serviceUrl The URL of the service.
+         * @param {string} serverName The name of the FeatureServer.
+         * @param {string} format The output format.
+         * @return {string} The URL to the FeatureServer.
+         */
+        createFeatureServerUrl: function(serviceUrl, serverName, format) {
+            if (!BasiGX.util.ArcGISRest.isArcGISRestUrl(serviceUrl)) {
+                return;
+            }
+            var urlObj = new URL(serviceUrl);
+            var parts = urlObj.pathname.split('/');
+            parts.push(serverName);
+            parts.push('FeatureServer');
+            var path = parts.join('/');
+
+            var url = urlObj.origin + path;
+            if (format) {
+                url = BasiGX.util.Url.setQueryParam(url, 'f', format);
+            }
+
+            return url;
+
+        },
+
+        /**
+         * Creates a query URL for a layer of a FeatureServer.
+         *
+         * @param {string} serviceUrl The URL of the service.
+         * @param {number} layerId The id of the layer in the FeatureServer.
+         * @param {string} format The output format.
+         * @param {string} filter The filter condition.
+         * @return {string} The query URL.
+         */
+        createFeatureServerQueryUrl: function(
+            serviceUrl, layerId, format, filter
+        ) {
+            if (!BasiGX.util.ArcGISRest.isArcGISRestUrl(serviceUrl)) {
+                return;
+            }
+            var urlObj = new URL(serviceUrl);
+            var parts = urlObj.pathname.split('/');
+            parts.push(layerId);
+            parts.push('query');
+            var path = parts.join('/');
+
+            var url = urlObj.origin + path;
+            if (format) {
+                url = BasiGX.util.Url.setQueryParam(url, 'f', format);
+            }
+            // The query endpoint has a required 'where' parameter. In
+            // order to get all features, we apply a where-clause that
+            // always returns true. This behavior can be overwritten
+            // by specifying a 'filter' argument.
+            var filterToUse = '1=1';
+            if (filter) {
+                filterToUse = filter;
+            }
+            url = BasiGX.util.Url.setQueryParam(url, 'where', filterToUse);
+
+            return url;
+        },
+
+        /**
          * Creates an olLayer from an ArcGISRest layer config.
          *
          * @param {object} layerConfig The layer config to base the olLayer on.
@@ -64,14 +134,20 @@ Ext.define('BasiGX.util.ArcGISRest', {
          * @param {string} layerConfig.service.type The service type.
          * @param {string} layerConfig.service.name The service name.
          * @param {string} layerConfig.url The service url.
+         * @param {object} layerConfig.layer (optional) The layer config of
+         * a FeatureServer layer. Mandatory for layers of type Feature Server.
+         * @param {number} layerConfig.layer.id The id of a FeatureServer layer.
+         * @param {string} layerConfig.layer.name The name of a FeatureServer
+         * layer.
          * @param {boolean} useDefaultHeader Whether to use the default
          * Xhr header.
          * @return {Ext.Promise} A promise containing the olLayer.
          */
         createOlLayerFromArcGISRest: function(layerConfig, useDefaultHeader) {
+            var staticMe = BasiGX.util.ArcGISRest;
             var service = layerConfig.service;
             var url = layerConfig.url;
-            var rootUrl = BasiGX.util.ArcGISRest.getArcGISRestRootUrl(url);
+            var rootUrl = staticMe.getArcGISRestRootUrl(url);
             if (!rootUrl) {
                 Ext.log.warn('Provided URL is not a valid ArcGISRest URL');
                 return Ext.Promise.reject();
@@ -89,10 +165,11 @@ Ext.define('BasiGX.util.ArcGISRest', {
                 return Ext.Promise.resolve(responseJson);
             }, onReject).then(function(serviceInfo) {
                 var layer = undefined;
+                var source = undefined;
                 switch(service.type) {
                     case 'ImageServer':
                     case 'MapServer':
-                        var source = new ol.source.TileArcGISRest({
+                        source = new ol.source.TileArcGISRest({
                             url: serviceUrl,
                             projection: 'EPSG:' +
                                 serviceInfo.spatialReference.wkid
@@ -104,10 +181,21 @@ Ext.define('BasiGX.util.ArcGISRest', {
                         });
                         break;
                     case 'FeatureServer':
-                        // FeatureServers can only be requested
-                        // for single layers in a service.
-                        Ext.log.info('ArcGISRest FeatureServer is ' +
-                            'currently not supported.');
+                        var esrijsonFormat = new ol.format.EsriJSON();
+
+                        var sourceUrl = staticMe.createFeatureServerQueryUrl(
+                            url, layerConfig.layer.id, 'json');
+
+                        source = new ol.source.Vector({
+                            url: sourceUrl,
+                            format: esrijsonFormat
+                        });
+
+                        layer = new ol.layer.Vector({
+                            source: source,
+                            name: service.name + '/' + layerConfig.layer.name,
+                            topic: true
+                        });
                         break;
                     default:
                         break;

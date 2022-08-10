@@ -38,6 +38,11 @@
  * @class BasiGX.util.ArcGISRest
  */
 Ext.define(&#39;BasiGX.util.ArcGISRest&#39;, {
+
+    requires: [
+        &#39;BasiGX.util.Url&#39;
+    ],
+
     statics: {
 
 <span id='BasiGX-util-ArcGISRest-static-method-isArcGISRestUrl'>        /**
@@ -73,6 +78,71 @@ Ext.define(&#39;BasiGX.util.ArcGISRest&#39;, {
             return urlObj.origin + basePath;
         },
 
+<span id='BasiGX-util-ArcGISRest-static-method-createFeatureServerUrl'>        /**
+</span>         * Creates the URL for a FeatureServer request.
+         *
+         * @param {string} serviceUrl The URL of the service.
+         * @param {string} serverName The name of the FeatureServer.
+         * @param {string} format The output format.
+         * @return {string} The URL to the FeatureServer.
+         */
+        createFeatureServerUrl: function(serviceUrl, serverName, format) {
+            if (!BasiGX.util.ArcGISRest.isArcGISRestUrl(serviceUrl)) {
+                return;
+            }
+            var urlObj = new URL(serviceUrl);
+            var parts = urlObj.pathname.split(&#39;/&#39;);
+            parts.push(serverName);
+            parts.push(&#39;FeatureServer&#39;);
+            var path = parts.join(&#39;/&#39;);
+
+            var url = urlObj.origin + path;
+            if (format) {
+                url = BasiGX.util.Url.setQueryParam(url, &#39;f&#39;, format);
+            }
+
+            return url;
+
+        },
+
+<span id='BasiGX-util-ArcGISRest-static-method-createFeatureServerQueryUrl'>        /**
+</span>         * Creates a query URL for a layer of a FeatureServer.
+         *
+         * @param {string} serviceUrl The URL of the service.
+         * @param {number} layerId The id of the layer in the FeatureServer.
+         * @param {string} format The output format.
+         * @param {string} filter The filter condition.
+         * @return {string} The query URL.
+         */
+        createFeatureServerQueryUrl: function(
+            serviceUrl, layerId, format, filter
+        ) {
+            if (!BasiGX.util.ArcGISRest.isArcGISRestUrl(serviceUrl)) {
+                return;
+            }
+            var urlObj = new URL(serviceUrl);
+            var parts = urlObj.pathname.split(&#39;/&#39;);
+            parts.push(layerId);
+            parts.push(&#39;query&#39;);
+            var path = parts.join(&#39;/&#39;);
+
+            var url = urlObj.origin + path;
+            if (format) {
+                url = BasiGX.util.Url.setQueryParam(url, &#39;f&#39;, format);
+            }
+            // The query endpoint has a required &#39;where&#39; parameter. In
+            // order to get all features, we apply a where-clause that
+            // always returns true. This behavior can be overwritten
+            // by specifying a &#39;filter&#39; argument.
+            var filterToUse = &#39;1=1&#39;;
+            if (filter) {
+                filterToUse = filter;
+            }
+            url = BasiGX.util.Url.setQueryParam(url, &#39;where&#39;, filterToUse);
+
+            return url;
+        },
+
 <span id='BasiGX-util-ArcGISRest-static-method-createOlLayerFromArcGISRest'>        /**
 </span>         * Creates an olLayer from an ArcGISRest layer config.
          *
@@ -81,14 +151,20 @@ Ext.define(&#39;BasiGX.util.ArcGISRest&#39;, {
          * @param {string} layerConfig.service.type The service type.
          * @param {string} layerConfig.service.name The service name.
          * @param {string} layerConfig.url The service url.
+         * @param {object} layerConfig.layer (optional) The layer config of
+         * a FeatureServer layer. Mandatory for layers of type Feature Server.
+         * @param {number} layerConfig.layer.id The id of a FeatureServer layer.
+         * @param {string} layerConfig.layer.name The name of a FeatureServer
+         * layer.
          * @param {boolean} useDefaultHeader Whether to use the default
          * Xhr header.
          * @return {Ext.Promise} A promise containing the olLayer.
          */
         createOlLayerFromArcGISRest: function(layerConfig, useDefaultHeader) {
+            var staticMe = BasiGX.util.ArcGISRest;
             var service = layerConfig.service;
             var url = layerConfig.url;
-            var rootUrl = BasiGX.util.ArcGISRest.getArcGISRestRootUrl(url);
+            var rootUrl = staticMe.getArcGISRestRootUrl(url);
             if (!rootUrl) {
                 Ext.log.warn(&#39;Provided URL is not a valid ArcGISRest URL&#39;);
                 return Ext.Promise.reject();
@@ -106,10 +182,11 @@ Ext.define(&#39;BasiGX.util.ArcGISRest&#39;, {
                 return Ext.Promise.resolve(responseJson);
             }, onReject).then(function(serviceInfo) {
                 var layer = undefined;
+                var source = undefined;
                 switch(service.type) {
                     case &#39;ImageServer&#39;:
                     case &#39;MapServer&#39;:
-                        var source = new ol.source.TileArcGISRest({
+                        source = new ol.source.TileArcGISRest({
                             url: serviceUrl,
                             projection: &#39;EPSG:&#39; +
                                 serviceInfo.spatialReference.wkid
@@ -121,10 +198,21 @@ Ext.define(&#39;BasiGX.util.ArcGISRest&#39;, {
                         });
                         break;
                     case &#39;FeatureServer&#39;:
-                        // FeatureServers can only be requested
-                        // for single layers in a service.
-                        Ext.log.info(&#39;ArcGISRest FeatureServer is &#39; +
-                            &#39;currently not supported.&#39;);
+                        var esrijsonFormat = new ol.format.EsriJSON();
+
+                        var sourceUrl = staticMe.createFeatureServerQueryUrl(
+                            url, layerConfig.layer.id, &#39;json&#39;);
+
+                        source = new ol.source.Vector({
+                            url: sourceUrl,
+                            format: esrijsonFormat
+                        });
+
+                        layer = new ol.layer.Vector({
+                            source: source,
+                            name: service.name + &#39;/&#39; + layerConfig.layer.name,
+                            topic: true
+                        });
                         break;
                     default:
                         break;
