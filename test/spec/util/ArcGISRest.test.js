@@ -43,4 +43,61 @@ describe('BasiGX.util.ArcGISRest', function() {
             expect(result).to.be(undefined);
         });
     });
+
+    describe('#createFeatureServerUrl', function() {
+
+        it('returns the featureServer url', function() {
+            var serviceUrl = 'http://example.com/services';
+            var featureServerName = 'foo';
+            var url = serviceUrl + '/' + featureServerName + '/FeatureServer';
+            var result = BasiGX.util.ArcGISRest.createFeatureServerUrl(
+                serviceUrl, featureServerName);
+            expect(result).to.equal(url);
+        });
+
+        it('returns the featureServer url with a specified format', function() {
+            var serviceUrl = 'http://example.com/services';
+            var featureServerName = 'foo';
+            var format = 'bar';
+            var url = serviceUrl + '/' + featureServerName + '/FeatureServer?f=' + format;
+            var result = BasiGX.util.ArcGISRest.createFeatureServerUrl(
+                serviceUrl, featureServerName, format);
+            expect(result).to.equal(url);
+        });
+    });
+
+    describe('#createFeatureServerQueryUrl', function() {
+
+        it('returns the featureServer query url', function() {
+            var serviceUrl = 'http://example.com/services/foo/FeatureServer';
+            var layerId = 0;
+            var url = serviceUrl + '/' + layerId + '/query?where='+ encodeURIComponent('1=1');
+            var result = BasiGX.util.ArcGISRest.createFeatureServerQueryUrl(
+                serviceUrl, layerId);
+            expect(result).to.equal(url);
+        });
+
+        it('returns the featureServer url with a specified format', function() {
+            var serviceUrl = 'http://example.com/services/foo/FeatureServer';
+            var layerId = 0;
+            var format = 'bar';
+            var url = serviceUrl + '/' + layerId + '/query' +
+                '?f=' + format + '&where=' + encodeURIComponent('1=1');
+            var result = BasiGX.util.ArcGISRest.createFeatureServerQueryUrl(
+                serviceUrl, layerId, format);
+            expect(result).to.equal(url);
+        });
+
+        it('returns the featureServer url with a specified filter', function() {
+            var serviceUrl = 'http://example.com/services/foo/FeatureServer';
+            var layerId = 0;
+            var filter = 'foo=bar';
+            var url = serviceUrl + '/' + layerId + '/query' +
+                '?where=' + encodeURIComponent(filter);
+            var result = BasiGX.util.ArcGISRest.createFeatureServerQueryUrl(
+                serviceUrl, layerId, undefined, filter);
+            expect(result).to.equal(url);
+        });
+
+    });
 });

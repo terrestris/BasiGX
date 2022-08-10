@@ -53,6 +53,23 @@ npm i @terrestris/basigx
         ...
 ```
 
+## IE
+
+BasiGX does not officially support Internet Explorer. If BasiGX is used in an environment where supporting IE is required,
+please make sure to add required polyfills to your project.
+
+Example:
+
+Download a polyfill for `Url()` (e.g. https://www.npmjs.com/package/url-polyfill) and reference it in your `app.json`:
+
+```json
+ "js": [
+    {
+      "path": "./<path>/<to>/<your>/polyfill.min.js"
+    },
+ ]
+```
+
 ## Feedback
 
 Feedback is more than welcome. Please open an issue or contact us directly via `info@terrestris.de`
