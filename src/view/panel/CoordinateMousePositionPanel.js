@@ -84,6 +84,22 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
     olMap: null,
 
     /**
+     * The layer for the marker
+     */
+    markerLayer: null,
+
+    /**
+     * True, if marker should be shown at coordinate.
+     * False otherwise.
+     */
+    showMarker: false,
+
+    /**
+     * Optional style for the marker.
+     */
+    markerStyle: null,
+
+    /**
      * The OpenLayers MousePosition control
      */
     olMousePositionControl: null,
@@ -455,7 +471,39 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
             me.olMousePositionControl.getProjection(),
             me.olMap.getView().getProjection()
         );
+        if (me.showMarker) {
+            me.showMarkerOnMap(targetCenter);
+        }
         me.olMap.getView().setCenter(targetCenter);
+    },
+
+    /**
+     * Places a marker on the map.
+     *
+     * @param {[number, number]} position The position for the marker.
+     */
+    showMarkerOnMap: function(position) {
+        var me = this;
+        if (!me.markerLayer) {
+            var source = new ol.source.Vector();
+            var style = undefined;
+            if (me.markerStyle) {
+                style = me.markerStyle;
+            }
+            me.markerLayer = new ol.layer.Vector({
+                source: source,
+                style: style
+            });
+            me.olMap.addLayer(me.markerLayer);
+        }
+        var markerSource = me.markerLayer.getSource();
+        markerSource.clear();
+        markerSource.addFeature(new ol.Feature({
+            geometry: new ol.geom.Point(position)
+        }));
+        me.olMap.once('click', function() {
+            markerSource.clear();
+        });
     }
 
 });
