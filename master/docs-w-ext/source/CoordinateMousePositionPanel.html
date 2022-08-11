@@ -100,6 +100,22 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
      */
     olMap: null,
 
+<span id='BasiGX-view-panel-CoordinateMousePositionPanel-property-markerLayer'>    /**
+</span>     * The layer for the marker
+     */
+    markerLayer: null,
+
+<span id='BasiGX-view-panel-CoordinateMousePositionPanel-property-showMarker'>    /**
+</span>     * True, if marker should be shown at coordinate.
+     * False otherwise.
+     */
+    showMarker: false,
+
+<span id='BasiGX-view-panel-CoordinateMousePositionPanel-property-markerStyle'>    /**
+</span>     * Optional style for the marker.
+     */
+    markerStyle: null,
+
 <span id='BasiGX-view-panel-CoordinateMousePositionPanel-property-olMousePositionControl'>    /**
 </span>     * The OpenLayers MousePosition control
      */
@@ -472,7 +488,39 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
             me.olMousePositionControl.getProjection(),
             me.olMap.getView().getProjection()
         );
+        if (me.showMarker) {
+            me.showMarkerOnMap(targetCenter);
+        }
         me.olMap.getView().setCenter(targetCenter);
+    },
+
+<span id='BasiGX-view-panel-CoordinateMousePositionPanel-method-showMarkerOnMap'>    /**
+</span>     * Places a marker on the map.
+     *
+     * @param {[number, number]} position The position for the marker.
+     */
+    showMarkerOnMap: function(position) {
+        var me = this;
+        if (!me.markerLayer) {
+            var source = new ol.source.Vector();
+            var style = undefined;
+            if (me.markerStyle) {
+                style = me.markerStyle;
+            }
+            me.markerLayer = new ol.layer.Vector({
+                source: source,
+                style: style
+            });
+            me.olMap.addLayer(me.markerLayer);
+        }
+        var markerSource = me.markerLayer.getSource();
+        markerSource.clear();
+        markerSource.addFeature(new ol.Feature({
+            geometry: new ol.geom.Point(position)
+        }));
+        me.olMap.once(&#39;click&#39;, function() {
+            markerSource.clear();
+        });
     }
 
 });
