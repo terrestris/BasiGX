@@ -36,7 +36,8 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
         'Ext.button.Segmented',
 
         'BasiGX.view.component.Map',
-        'BasiGX.util.Projection'
+        'BasiGX.util.Projection',
+        'BasiGX.util.Layer'
     ],
 
     /**
@@ -517,6 +518,9 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 source: source,
                 style: style
             });
+            var LayerUtil = BasiGX.util.Layer;
+            var showInLayerSwitcherKey = LayerUtil.KEY_DISPLAY_IN_LAYERSWITCHER;
+            me.markerLayer.set(showInLayerSwitcherKey, false);
             me.olMap.addLayer(me.markerLayer);
         }
         var markerSource = me.markerLayer.getSource();
