@@ -36,7 +36,8 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
         'Ext.button.Segmented',
 
         'BasiGX.view.component.Map',
-        'BasiGX.util.Projection'
+        'BasiGX.util.Projection',
+        'BasiGX.util.Layer'
     ],
 
     /**
@@ -137,6 +138,29 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
      * @type {Boolean}
      */
     updateTextfields: true,
+
+    listeners: {
+        /**
+         * Removes the marker from the map.
+         */
+        'removeMarker': function() {
+            var me = this;
+            if (me.markerLayer) {
+                me.markerLayer.getSource().clear();
+            }
+
+        },
+        /**
+         * Checks if given feature is our map marker.
+         * @param {ol.Feature} feat The feature to check.
+         * @return {boolean} True, if feature is our map marker.
+         * False otherwise.
+         */
+        'isMapMarker': function(feat) {
+            var me = this;
+            return me.isMapMarker(feat);
+        }
+    },
 
     /**
      * The initialization function
@@ -494,16 +518,35 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 source: source,
                 style: style
             });
+            var LayerUtil = BasiGX.util.Layer;
+            var showInLayerSwitcherKey = LayerUtil.KEY_DISPLAY_IN_LAYERSWITCHER;
+            me.markerLayer.set(showInLayerSwitcherKey, false);
             me.olMap.addLayer(me.markerLayer);
         }
         var markerSource = me.markerLayer.getSource();
-        markerSource.clear();
-        markerSource.addFeature(new ol.Feature({
+        var feature = new ol.Feature({
             geometry: new ol.geom.Point(position)
-        }));
-        me.olMap.once('click', function() {
-            markerSource.clear();
         });
+        markerSource.clear();
+        markerSource.addFeature(feature);
+    },
+
+    /**
+     * Checks if a given feature is our map marker.
+     *
+     * @param {ol.Feature} feat The feature to check.
+     * @return {boolean} True, if feature is our map marker. False otherwise.
+     */
+    isMapMarker: function(feat) {
+        var me = this;
+        if (!me.markerLayer) {
+            return false;
+        }
+        var source = me.markerLayer.getSource();
+        if (!source) {
+            return false;
+        }
+        return source.getFeatures()[0] === feat;
     }
 
 });

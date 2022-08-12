@@ -53,7 +53,8 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
         &#39;Ext.button.Segmented&#39;,
 
         &#39;BasiGX.view.component.Map&#39;,
-        &#39;BasiGX.util.Projection&#39;
+        &#39;BasiGX.util.Projection&#39;,
+        &#39;BasiGX.util.Layer&#39;
     ],
 
 <span id='BasiGX-view-panel-CoordinateMousePositionPanel-property-viewModel'>    /**
@@ -154,6 +155,29 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
      * @type {Boolean}
      */
     updateTextfields: true,
+
+<span id='BasiGX-view-panel-CoordinateMousePositionPanel-cfg-listeners'>    listeners: {
+</span><span id='BasiGX-view-panel-CoordinateMousePositionPanel-method-removeMarker'>        /**
+</span>         * Removes the marker from the map.
+         */
+        &#39;removeMarker&#39;: function() {
+            var me = this;
+            if (me.markerLayer) {
+                me.markerLayer.getSource().clear();
+            }
+
+        },
+<span id='BasiGX-view-panel-CoordinateMousePositionPanel-method-isMapMarker'>        /**
+</span>         * Checks if given feature is our map marker.
+         * @param {ol.Feature} feat The feature to check.
+         * @return {boolean} True, if feature is our map marker.
+         * False otherwise.
+         */
+        &#39;isMapMarker&#39;: function(feat) {
+            var me = this;
+            return me.isMapMarker(feat);
+        }
+    },
 
 <span id='BasiGX-view-panel-CoordinateMousePositionPanel-method-initComponent'>    /**
 </span>     * The initialization function
@@ -511,16 +535,35 @@ Ext.define(&#39;BasiGX.view.panel.CoordinateMousePositionPanel&#39;, {
                 source: source,
                 style: style
             });
+            var LayerUtil = BasiGX.util.Layer;
+            var showInLayerSwitcherKey = LayerUtil.KEY_DISPLAY_IN_LAYERSWITCHER;
+            me.markerLayer.set(showInLayerSwitcherKey, false);
             me.olMap.addLayer(me.markerLayer);
         }
         var markerSource = me.markerLayer.getSource();
-        markerSource.clear();
-        markerSource.addFeature(new ol.Feature({
+        var feature = new ol.Feature({
             geometry: new ol.geom.Point(position)
-        }));
-        me.olMap.once(&#39;click&#39;, function() {
-            markerSource.clear();
         });
+        markerSource.clear();
+        markerSource.addFeature(feature);
+    },
+
+<span id='BasiGX-view-panel-CoordinateMousePositionPanel-method-isMapMarker'>    /**
+</span>     * Checks if a given feature is our map marker.
+     *
+     * @param {ol.Feature} feat The feature to check.
+     * @return {boolean} True, if feature is our map marker. False otherwise.
+     */
+    isMapMarker: function(feat) {
+        var me = this;
+        if (!me.markerLayer) {
+            return false;
+        }
+        var source = me.markerLayer.getSource();
+        if (!source) {
+            return false;
+        }
+        return source.getFeatures()[0] === feat;
     }
 
 });
