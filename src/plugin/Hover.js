@@ -618,7 +618,10 @@ Ext.define('BasiGX.plugin.Hover', {
         };
 
         Ext.each(layers, function(layer) {
-            innerHtml += '<b>' + layer.get('name') + '</b>';
+
+            var layerTitle = '<b>' + layer.get('name') + '</b>';
+            var hoverInfo = '';
+
             Ext.each(features, function(feat) {
                 if (feat && feat.get('layer') === layer) {
                     var hoverFieldProp = layer.get(hoverfieldProp);
@@ -628,23 +631,30 @@ Ext.define('BasiGX.plugin.Hover', {
 
                     if (layer.get('type') === 'WFSCluster') {
                         var count = feat.get('count');
-                        innerHtml += '<br />' + count + '<br />';
+                        hoverInfo += '<br />' + count;
                     } else {
                         if (
                             me.getEnableClickableLinks()
                             && urlUtil.isUrl(hoverText)
                         ) {
-                            innerHtml += '<br /><a href="'
+                            hoverInfo += '<br /><a href="'
                                 + hoverText
                                 + '" target="_blank">'
                                 + hoverText
-                                + '</a><br />';
+                                + '</a>';
                         } else {
-                            innerHtml += '<br />' + hoverText + '<br />';
+                            hoverInfo += '<br />' + hoverText;
                         }
                     }
                 }
             });
+            if (hoverInfo) {
+                if (innerHtml.length === 0) {
+                    innerHtml += layerTitle + hoverInfo;
+                } else {
+                    innerHtml += '<br />' + layerTitle + hoverInfo;
+                }
+            }
         });
 
         return innerHtml;
