@@ -347,7 +347,7 @@ Ext.define('BasiGX.plugin.Hover', {
             // or has any other value than "false", the layer will be requested
             if (hoverable !== false) {
                 if (source instanceof ol.source.TileWMS
-                        || source instanceof ol.source.ImageWMS) {
+                    || source instanceof ol.source.ImageWMS) {
                     // me.cleanupHoverArtifacts();
                     var url = source.getFeatureInfoUrl(
                         evt.coordinate,
@@ -389,7 +389,7 @@ Ext.define('BasiGX.plugin.Hover', {
                     // VECTOR!
                     map.forEachFeatureAtPixel(pixel, function(feat) {
                         if (layer.get('type') === 'WFS' ||
-                                layer.get('type') === 'WFSCluster') {
+                            layer.get('type') === 'WFSCluster') {
                             var hvl = me.getHoverVectorLayer();
                             // TODO This should be dynamically generated
                             // from the clusterStyle
@@ -438,7 +438,7 @@ Ext.define('BasiGX.plugin.Hover', {
         var me = this;
         var hoverableProp = me.self.LAYER_HOVERABLE_PROPERTY_NAME;
         if (candidate.get(hoverableProp) ||
-                candidate.get('type') === 'WFSCluster') {
+            candidate.get('type') === 'WFSCluster') {
             return true;
         } else {
             return false;
@@ -618,7 +618,10 @@ Ext.define('BasiGX.plugin.Hover', {
         };
 
         Ext.each(layers, function(layer) {
-            innerHtml += '<b>' + layer.get('name') + '</b>';
+
+            var layerTitle = '<b>' + layer.get('name') + '</b>';
+            var hoverInfo = '';
+
             Ext.each(features, function(feat) {
                 if (feat && feat.get('layer') === layer) {
                     var hoverFieldProp = layer.get(hoverfieldProp);
@@ -628,23 +631,30 @@ Ext.define('BasiGX.plugin.Hover', {
 
                     if (layer.get('type') === 'WFSCluster') {
                         var count = feat.get('count');
-                        innerHtml += '<br />' + count + '<br />';
+                        hoverInfo += '<br />' + count;
                     } else {
                         if (
                             me.getEnableClickableLinks()
                             && urlUtil.isUrl(hoverText)
                         ) {
-                            innerHtml += '<br /><a href="'
+                            hoverInfo += '<br /><a href="'
                                 + hoverText
                                 + '" target="_blank">'
                                 + hoverText
-                                + '</a><br />';
+                                + '</a>';
                         } else {
-                            innerHtml += '<br />' + hoverText + '<br />';
+                            hoverInfo += '<br />' + hoverText;
                         }
                     }
                 }
             });
+            if (hoverInfo) {
+                if (innerHtml.length === 0) {
+                    innerHtml += layerTitle + hoverInfo;
+                } else {
+                    innerHtml += '<br />' + layerTitle + hoverInfo;
+                }
+            }
         });
 
         return innerHtml;
@@ -673,7 +683,7 @@ Ext.define('BasiGX.plugin.Hover', {
         var blue;
 
         if (baseColor.length === 4 && Ext.isNumber(baseColor[0]) &&
-                Ext.isNumber(baseColor[1]) && Ext.isNumber(baseColor[2])) {
+            Ext.isNumber(baseColor[1]) && Ext.isNumber(baseColor[2])) {
             red = baseColor[0];
             green = baseColor[1];
             blue = baseColor[2];
