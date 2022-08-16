@@ -26,7 +26,8 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
 
     requires: [
         'Ext.button.Button',
-        'Ext.app.ViewModel'
+        'Ext.app.ViewModel',
+        'BasiGX.util.CopyClipboard'
     ],
 
     viewModel: {
@@ -36,8 +37,9 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
             coordYFieldLabel: 'Y-Koordinate',
             transformBtnText: 'Transformieren',
             resetFormBtnText: 'Zurücksetzen',
-            transformBtnIconCls: '{transformButtonIconCls}',
-            transformBtnTooltip: '{transformButtonToolTip}',
+            transformBtnToolTip: 'Transformieren',
+            copyToClipboardBtnText: 'In Zwischenablage kopieren',
+            copyToClipboardButtonToolTip: 'In Zwischenablage kopieren',
             documentation: '<h2>Koordinaten transformieren</h2>• In diesem ' +
                 'Dialog können Koordinaten transformiert werden.<br>' +
                 '• Geben Sie Koordinaten in die Eingabefelder ein, um sich ' +
@@ -47,7 +49,6 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
         }
     },
 
-    padding: 5,
     layout: 'form',
 
     scrollable: 'y',
@@ -91,83 +92,87 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
             // first we check if the crs can be used at all
             if (!Ext.isDefined(targetCrs)) {
                 Ext.log.warn('The CRS ' + crs.code + ' is not defined, did ' +
-                   'you require it?');
+                    'you require it?');
                 return;
             }
 
             var fs = {
                 xtype: 'fieldset',
+                layout: {
+                    type: 'vbox',
+                    align: 'stretch'
+                },
                 title: crs.name,
                 crs: crs.code,
-                items: [
-                    {
-                        xtype: 'numberfield',
-                        name: 'xcoord',
-                        decimalSeparator: ',',
-                        decimalPrecision: 7,
-                        bind: {
-                            fieldLabel: '{coordXFieldLabel}'
-                        },
-                        value: '',
-                        // Remove spinner buttons, and arrow key and mouse wheel
-                        // listeners
-                        hideTrigger: true,
-                        keyNavEnabled: false,
-                        mouseWheelEnabled: false,
-                        listeners: {
-                            'focus': me.toggleBtnVisibility
-                        }
-                    },
-                    {
-                        xtype: 'container',
-                        layout: 'hbox',
-                        margin: '0 0 5 0',
-                        items: [{
-                            xtype: 'numberfield',
-                            name: 'ycoord',
-                            decimalSeparator: ',',
-                            decimalPrecision: 7,
-                            bind: {
-                                fieldLabel: '{coordYFieldLabel}'
-                            },
-                            value: '',
-                            // Remove spinner buttons, and arrow key and mouse
-                            // wheel listeners
-                            hideTrigger: true,
-                            keyNavEnabled: false,
-                            mouseWheelEnabled: false,
-                            listeners: {
-                                'focus': me.toggleBtnVisibility
-                            }
-                        }, {
-                            xtype: 'button',
-                            name: 'transform',
-                            margin: '0 0 0 30',
-                            width: 110,
-                            bind: {
-                                text: '{transformBtnText}',
-                                iconCls: '{transformButtonIconCls}',
-                                tooltip: '{transformButtonToolTip}'
-                            },
-                            hidden: true,
-                            handler: me.transform
-                        }]
+                defaults: {
+                    xtype: 'numberfield',
+                    decimalSeparator: ',',
+                    decimalPrecision: 7,
+                    hideTrigger: true,
+                    keyNavEnabled: false,
+                    mouseWheelEnabled: false,
+                    value: '',
+                    listeners: {
+                        focus: me.toggleBtnVisibility,
+                        change: me.onCoordinateValueChange
                     }
+                },
+                items: [{
+                    name: 'xcoord',
+                    bind: {
+                        fieldLabel: '{coordXFieldLabel}'
+                    }
+                }, {
+                    name: 'ycoord',
+                    bind: {
+                        fieldLabel: '{coordYFieldLabel}'
+                    }
+                }, {
+                    xtype: 'container',
+                    layout: {
+                        type: 'hbox',
+                        align: 'stretch'
+                    },
+                    defaults: {
+                        xtype: 'button'
+                    },
+                    items: [{
+                        name: 'copy',
+                        margin: '0 5 0 0',
+                        bind: {
+                            text: '{copyToClipboardBtnText}',
+                            tooltip: '{copyToClipboardButtonToolTip}'
+                        },
+                        listeners: {
+                            boxready: function(btn) {
+                                btn.setHidden(
+                                    !BasiGX.util.CopyClipboard.copyToClipboardSupported);
+                            }
+                        },
+                        handler: me.copyCoordinatesToClipboard
+                    }, {
+                        name: 'transform',
+                        bind: {
+                            text: '{transformBtnText}',
+                            tooltip: '{transformBtnToolTip}'
+                        },
+                        hidden: true,
+                        handler: me.transform
+                    }]
+                }
                 ]
             };
             crsFieldsets.push(fs);
         });
 
-        me.items = [
-            {
-                xtype: 'fieldset',
-                layout: 'form',
-                bind: {
-                    title: '{coordFieldSetTitle}'
-                },
-                items: crsFieldsets
-            }
-        ];
+        me.items = [{
+            xtype: 'fieldset',
+            layout: 'form',
+            bind: {
+                title: '{coordFieldSetTitle}'
+            },
+            items: crsFieldsets
+        }];
 
         me.callParent();
 
@@ -197,7 +202,6 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
         });
     },
 
-    // Reset and Submit buttons
     buttons: [{
         bind: {
             text: '{resetFormBtnText}'
@@ -318,12 +322,11 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
                 name: 'transformvectorlayer',
                 source: new ol.source.Vector(),
                 style: new ol.style.Style({
-                    image: new ol.style.Circle({
-                        radius: 8,
+                    text: new ol.style.Text({
+                        text: '\uf05b',
+                        font: 'normal 24px FontAwesome',
+                        textBaseline: 'middle',
                         fill: new ol.style.Fill({
-                            color: 'rgba(255, 0, 0, 0.7)'
-                        }),
-                        stroke: new ol.style.Stroke({
                             color: 'rgba(255, 0, 0, 0.7)'
                         })
                     })
@@ -346,5 +349,35 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
         if (!isOlEvt) {
             coordTransformForm.map.getView().setCenter(transformedMapCoords);
         }
+    },
+
+    /**
+     * Copies displayed coordinates to the clipboard.
+     *
+     * @param {Ext.button.Button} btn The clicked copy button
+    */
+    copyCoordinatesToClipboard: function(btn) {
+        var fs = btn.up('fieldset');
+        var xVal = fs.down('numberfield[name=xcoord]').getValue();
+        var yVal = fs.down('numberfield[name=ycoord]').getValue();
+        if (xVal && yVal) {
+            BasiGX.util.CopyClipboard.copyTextToClipboard(xVal + ' ' + yVal);
+        }
+    },
+
+    /**
+     * Toggles disabled state of fieldset buttons depending on provided field
+     * value.
+     *
+     * @param {Ext.form.field.Number} numberField Coordinate field
+     * @param {Number|null} newValue Current coordinate value
+     */
+    onCoordinateValueChange: function(numberField, newValue) {
+        var fs = numberField.up('fieldset');
+        var btns = fs.query('button');
+        Ext.each(btns, function(btn) {
+            btn.setDisabled(!newValue);
+        })
     }
+
 });
