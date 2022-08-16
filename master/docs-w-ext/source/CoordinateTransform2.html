@@ -75,9 +75,10 @@ Ext.define(&#39;BasiGX.view.button.CoordinateTransform&#39;, {
     },
 
 <span id='BasiGX-view-button-CoordinateTransform-property-coordinateSystemsToUse'>    /**
-</span>     * Array of CRS in EPSG notation that should be used
+</span>     * Array of CRS in EPSG notation that should be used.
+     * By default EPSG:4326 will be used.
      */
-    coordinateSystemsToUse: [],
+    coordinateSystemsToUse: [{ code: &#39;EPSG:4326&#39;, name: &#39;WGS84&#39; }],
 
 <span id='BasiGX-view-button-CoordinateTransform-property-transformCenterOnRender'>    /**
 </span>     *
@@ -102,7 +103,7 @@ Ext.define(&#39;BasiGX.view.button.CoordinateTransform&#39;, {
                     name: &#39;coordinate-transform-window&#39;,
                     title: this.getViewModel().get(&#39;windowTitle&#39;),
                     width: 500,
-                    height: 400,
+                    maxHeight: 500,
                     layout: &#39;fit&#39;,
                     constrain: true,
                     items: [{
