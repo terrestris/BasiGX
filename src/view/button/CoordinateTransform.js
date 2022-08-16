@@ -86,7 +86,7 @@ Ext.define('BasiGX.view.button.CoordinateTransform', {
                     name: 'coordinate-transform-window',
                     title: this.getViewModel().get('windowTitle'),
                     width: 500,
-                    height: 400,
+                    maxHeight: 500,
                     layout: 'fit',
                     constrain: true,
                     items: [{
