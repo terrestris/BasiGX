@@ -322,12 +322,11 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
                 name: 'transformvectorlayer',
                 source: new ol.source.Vector(),
                 style: new ol.style.Style({
-                    image: new ol.style.Circle({
-                        radius: 8,
+                    text: new ol.style.Text({
+                        text: '\uf05b',
+                        font: 'normal 24px FontAwesome',
+                        textBaseline: 'middle',
                         fill: new ol.style.Fill({
-                            color: 'rgba(255, 0, 0, 0.7)'
-                        }),
-                        stroke: new ol.style.Stroke({
                             color: 'rgba(255, 0, 0, 0.7)'
                         })
                     })
