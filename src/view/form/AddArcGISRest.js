@@ -422,7 +422,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         return Ext.Promise.all(mappedPromises)
             .then(function(responses) {
                 var configs = [];
-                if (Ext.isEmpty(responses) == false) {
+                if (!Ext.isEmpty(responses)) {
                     configs = Ext.Array.reduce(responses, function(acc, conf) {
                         if (!conf) {
                             return acc;
