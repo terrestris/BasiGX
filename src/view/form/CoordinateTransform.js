@@ -145,8 +145,9 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
                         },
                         listeners: {
                             boxready: function(btn) {
+                                var ccUtil = BasiGX.util.CopyClipboard;
                                 btn.setHidden(
-                                    !BasiGX.util.CopyClipboard.copyToClipboardSupported);
+                                    !ccUtil.copyToClipboardSupported);
                             }
                         },
                         handler: me.copyCoordinatesToClipboard
@@ -377,7 +378,7 @@ Ext.define('BasiGX.view.form.CoordinateTransform', {
         var btns = fs.query('button');
         Ext.each(btns, function(btn) {
             btn.setDisabled(!newValue);
-        })
+        });
     }
 
 });
