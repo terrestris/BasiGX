@@ -421,12 +421,15 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         });
         return Ext.Promise.all(mappedPromises)
             .then(function(responses) {
-                var configs = Ext.Array.reduce(responses, function(acc, conf) {
-                    if (!conf) {
-                        return acc;
-                    }
-                    return Ext.Array.merge(acc, conf);
-                });
+                var configs = [];
+                if (!Ext.isEmpty(responses)) {
+                    configs = Ext.Array.reduce(responses, function(acc, conf) {
+                        if (!conf) {
+                            return acc;
+                        }
+                        return Ext.Array.merge(acc, conf);
+                    });
+                }
                 return Ext.Promise.resolve(configs);
             });
     },
