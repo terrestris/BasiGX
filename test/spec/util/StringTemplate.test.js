@@ -50,8 +50,17 @@ describe('BasiGX.util.StringTemplate', function() {
                 var got = BasiGX.util.StringTemplate.getTextFromTemplate(feature, tpl, config);
                 expect(got).to.be(feature.get('featProp'));
             });
-            it('returns feature id if custom template could not be applied', function() {
+            it('returns provided template if no replacement could not be applied', function() {
                 var tpl = '{{featProp}}';
+                var config = {
+                    prefix: '<',
+                    suffix: '>'
+                };
+                var got = BasiGX.util.StringTemplate.getTextFromTemplate(feature, tpl, config);
+                expect(got).to.be(tpl);
+            });
+            it('returns feature if provided template is empty', function() {
+                var tpl = undefined;
                 var config = {
                     prefix: '<',
                     suffix: '>'
@@ -59,9 +68,9 @@ describe('BasiGX.util.StringTemplate', function() {
                 var got = BasiGX.util.StringTemplate.getTextFromTemplate(feature, tpl, config);
                 expect(got).to.be(feature.id);
             });
-            it('returns undefined if any template could not be applied and '+
+            it('returns undefined if provided template is empty and '+
                 'feature has no id', function() {
-                var tpl = '{{featProp}}';
+                var tpl = undefined;
                 var config = {
                     prefix: '<',
                     suffix: '>'
