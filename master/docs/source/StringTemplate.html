@@ -142,6 +142,10 @@ Ext.define(&#39;BasiGX.util.StringTemplate&#39;, {
                     // field is present and set the text accordingly
                     template = feature.get(template);
                     templatedText = template;
+                } else if (template) {
+                    // still no match -&gt; set the provided template string
+                    // itself as templated text
+                    templatedText = template;
                 } else {
                     // Try to use &quot;id&quot; as fallback.
                     // If &quot;id&quot; is not available, the value will be &quot;undefined&quot;
