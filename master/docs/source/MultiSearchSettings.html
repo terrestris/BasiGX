@@ -80,7 +80,10 @@ Ext.define(&#39;BasiGX.view.container.MultiSearchSettings&#39;, {
 <span id='BasiGX-view-container-MultiSearchSettings-property-padding'>    padding: 20,
 </span>
     config: {
-<span id='BasiGX-view-container-MultiSearchSettings-cfg-combo'>        combo: null
+<span id='BasiGX-view-container-MultiSearchSettings-cfg-combo'>        combo: null,
+</span><span id='BasiGX-view-container-MultiSearchSettings-cfg-limitToExtent'>        limitToExtent: true,
+</span><span id='BasiGX-view-container-MultiSearchSettings-cfg-useGazetteerSearch'>        useGazetteerSearch: true,
+</span><span id='BasiGX-view-container-MultiSearchSettings-cfg-useObjectSearch'>        useObjectSearch: true
 </span>    },
 
 <span id='BasiGX-view-container-MultiSearchSettings-property-layout'>    layout: &#39;fit&#39;,
@@ -98,27 +101,24 @@ Ext.define(&#39;BasiGX.view.container.MultiSearchSettings&#39;, {
                 fieldLabel: &#39;{generalSettingsLabel}&#39;
             },
             defaults: {
-                xtype: &#39;checkboxfield&#39;,
-                checked: true
+                xtype: &#39;checkboxfield&#39;
             },
-            items: [
-                {
-                    bind: {
-                        boxLabel: &#39;{limitCboxLabel}&#39;
-                    },
-                    name: &#39;limitcheckbox&#39;
-                }, {
-                    bind: {
-                        boxLabel: &#39;{gazetteerLabel}&#39;
-                    },
-                    name: &#39;gazetteersearch&#39;
-                }, {
-                    bind: {
-                        boxLabel: &#39;{objectSearchLabel}&#39;
-                    },
-                    name: &#39;objectsearch&#39;
-                }
-            ]
+            items: [{
+                bind: {
+                    boxLabel: &#39;{limitCboxLabel}&#39;
+                },
+                name: &#39;limitcheckbox&#39;
+            }, {
+                bind: {
+                    boxLabel: &#39;{gazetteerLabel}&#39;
+                },
+                name: &#39;gazetteersearch&#39;
+            }, {
+                bind: {
+                    boxLabel: &#39;{objectSearchLabel}&#39;
+                },
+                name: &#39;objectsearch&#39;
+            }]
         }, {
             xtype: &#39;fieldcontainer&#39;,
             name: &#39;resultcount&#39;,
@@ -166,11 +166,18 @@ Ext.define(&#39;BasiGX.view.container.MultiSearchSettings&#39;, {
 
         me.callParent();
 
-        if (me.combo) {
-            me.setCombo(me.combo);
+        if (me.getCombo()) {
+            me.setCombo(me.getCombo());
             me.down(&#39;numberfield[name=maxfeatures]&#39;)
                 .setValue(me.getCombo().getMaxFeatures());
         }
+
+        me.down(&#39;checkbox[name=limitcheckbox]&#39;)
+            .setValue(me.getLimitToExtent());
+        me.down(&#39;checkbox[name=gazetteersearch]&#39;)
+            .setValue(me.getUseGazetteerSearch());
+        me.down(&#39;checkbox[name=objectsearch]&#39;)
+            .setValue(me.getUseObjectSearch());
 
         me.on(&#39;beforerender&#39;, me.addLayers);
 
