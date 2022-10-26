@@ -63,7 +63,10 @@ Ext.define('BasiGX.view.container.MultiSearchSettings', {
     padding: 20,
 
     config: {
-        combo: null
+        combo: null,
+        limitToExtent: true,
+        useGazetteerSearch: true,
+        useObjectSearch: true
     },
 
     layout: 'fit',
@@ -81,27 +84,24 @@ Ext.define('BasiGX.view.container.MultiSearchSettings', {
                 fieldLabel: '{generalSettingsLabel}'
             },
             defaults: {
-                xtype: 'checkboxfield',
-                checked: true
+                xtype: 'checkboxfield'
             },
-            items: [
-                {
-                    bind: {
-                        boxLabel: '{limitCboxLabel}'
-                    },
-                    name: 'limitcheckbox'
-                }, {
-                    bind: {
-                        boxLabel: '{gazetteerLabel}'
-                    },
-                    name: 'gazetteersearch'
-                }, {
-                    bind: {
-                        boxLabel: '{objectSearchLabel}'
-                    },
-                    name: 'objectsearch'
-                }
-            ]
+            items: [{
+                bind: {
+                    boxLabel: '{limitCboxLabel}'
+                },
+                name: 'limitcheckbox'
+            }, {
+                bind: {
+                    boxLabel: '{gazetteerLabel}'
+                },
+                name: 'gazetteersearch'
+            }, {
+                bind: {
+                    boxLabel: '{objectSearchLabel}'
+                },
+                name: 'objectsearch'
+            }]
         }, {
             xtype: 'fieldcontainer',
             name: 'resultcount',
@@ -149,11 +149,18 @@ Ext.define('BasiGX.view.container.MultiSearchSettings', {
 
         me.callParent();
 
-        if (me.combo) {
-            me.setCombo(me.combo);
+        if (me.getCombo()) {
+            me.setCombo(me.getCombo());
             me.down('numberfield[name=maxfeatures]')
                 .setValue(me.getCombo().getMaxFeatures());
         }
+
+        me.down('checkbox[name=limitcheckbox]')
+            .setValue(me.getLimitToExtent());
+        me.down('checkbox[name=gazetteersearch]')
+            .setValue(me.getUseGazetteerSearch());
+        me.down('checkbox[name=objectsearch]')
+            .setValue(me.getUseObjectSearch());
 
         me.on('beforerender', me.addLayers);
 
