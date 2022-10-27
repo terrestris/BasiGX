@@ -162,7 +162,12 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
          * be shown. Time starts after the first edit.
          * Defaults to 10min.
          */
-        saveReminderDelay: 10 * 60 * 1000
+        saveReminderDelay: 10 * 60 * 1000,
+<span id='BasiGX-view-grid-FeatureGrid-cfg-exampleFeature'>        /**
+</span>         * An example GeoJSON feature object that will be used to extract the schema
+         * in case no features are in the store.
+         */
+        exampleFeature: null
     },
 
 <span id='BasiGX-view-grid-FeatureGrid-property-editLayer'>    editLayer: undefined,
@@ -578,8 +583,13 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
                 sorter: this.selectionCompareFunction.bind(this)
             });
         }
-        var data = store.getData().items;
+        var data = store.getData().items.slice();
         var attributes = [];
+        if (data.length === 0 &amp;&amp; this.getExampleFeature()) {
+            data.push({
+                data: this.getExampleFeature().properties
+            });
+        }
         if (data.length &gt; 0) {
             Ext.each(data, function(item) {
                 Ext.iterate(item.data, function(key, value) {

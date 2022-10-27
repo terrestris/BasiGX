@@ -145,7 +145,12 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          * be shown. Time starts after the first edit.
          * Defaults to 10min.
          */
-        saveReminderDelay: 10 * 60 * 1000
+        saveReminderDelay: 10 * 60 * 1000,
+        /**
+         * An example GeoJSON feature object that will be used to extract the schema
+         * in case no features are in the store.
+         */
+        exampleFeature: null
     },
 
     editLayer: undefined,
@@ -561,8 +566,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 sorter: this.selectionCompareFunction.bind(this)
             });
         }
-        var data = store.getData().items;
+        var data = store.getData().items.slice();
         var attributes = [];
+        if (data.length === 0 && this.getExampleFeature()) {
+            data.push({
+                data: this.getExampleFeature().properties
+            });
+        }
         if (data.length > 0) {
             Ext.each(data, function(item) {
                 Ext.iterate(item.data, function(key, value) {
