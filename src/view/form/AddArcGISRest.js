@@ -29,11 +29,16 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         'Ext.form.FieldSet',
         'Ext.form.field.ComboBox',
         'Ext.form.CheckboxGroup',
+        'Ext.tree.Panel',
         'Ext.Promise',
+        'Ext.data.TreeStore',
+        'Ext.data.Model',
+        'Ext.data.proxy.Ajax',
         'BasiGX.util.Map',
         'BasiGX.util.MsgBox',
         'BasiGX.util.Url',
-        'BasiGX.util.ArcGISRest'
+        'BasiGX.util.ArcGISRest',
+        'BasiGX.view.tree.ArcGISRestServiceTree'
     ],
 
     viewModel: {
@@ -67,7 +72,8 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
             msgInvalidUrl: 'Die angegebene URL ist keine valide ArcGISRest URL',
             documentation: '<h2>ArcGISRest Layer hinzufügen</h2>• In ' +
                 'diesem Dialog können Sie mit Hilfe einer ArcGISRest-URL ' +
-                'einen beliebigen Kartendienst der Karte hinzufügen.'
+                'einen beliebigen Kartendienst der Karte hinzufügen.',
+            serviceLayersVisibility: {}
         }
     },
 
@@ -360,16 +366,16 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
                 return layerConfig.service.type === 'FeatureServer';
             }
         );
+        var nonFeatureServers = Ext.Array.filter(
+            layerConfigs, function(layerConfig) {
+                return layerConfig.service.type !== 'FeatureServer';
+            }
+        );
         this.loadLayersOfFeatureServers(featureServers)
             .then(function(featureServerConfigs) {
-                layerConfigs = Ext.Array.filter(
-                    layerConfigs, function(layerConfig) {
-                        return layerConfig.service.type !== 'FeatureServer';
-                    }
-                );
-                layerConfigs = Ext.Array.merge(
-                    layerConfigs, featureServerConfigs);
-                this.fillAvailableLayersFieldset(layerConfigs);
+                var mergedConfigs = Ext.Array.merge(
+                    nonFeatureServers, featureServerConfigs);
+                this.fillAvailableLayersFieldset(mergedConfigs);
                 this.updateControlToolbarState();
                 this.setLoading(false);
             }.bind(this));
@@ -609,16 +615,23 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         var checkBoxes = [];
         var candidatesInitiallyChecked = me.getCandidatesInitiallyChecked();
         Ext.each(layers, function(layer) {
-            var boxLabel = layer.service.name;
-            if (layer.service.type === 'FeatureServer') {
-                boxLabel += '/' + layer.layer.name;
-            }
+            // var boxLabel = layer.service.name;
+            // if (layer.service.type === 'FeatureServer') {
+            //     boxLabel += '/' + layer.layer.name;
+            // }
+
             checkBoxes.push({
-                xtype: 'checkbox',
-                boxLabel: boxLabel,
-                checked: candidatesInitiallyChecked,
-                arcGISLayerConfig: layer
+                xtype: 'basigx-tree-arcgisrestservicetree',
+                arcGISLayerConfig: layer,
+                checked: candidatesInitiallyChecked
             });
+
+            // checkBoxes.push({
+            //     xtype: 'checkbox',
+            //     boxLabel: boxLabel,
+            //     checked: candidatesInitiallyChecked,
+            //     arcGISLayerConfig: layer
+            // });
         });
         cbGroup.add(checkBoxes);
 
