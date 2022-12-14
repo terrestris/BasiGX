@@ -63,11 +63,11 @@
     },
     "peerDependencies": {
         "@geoext/geoext": "4.1.0",
-        "@geoext/openlayers-legacy": "6.15.1"
+        "ol": ">=7"
     },
     "devDependencies": {
         "@geoext/geoext": "4.1.0",
-        "@geoext/openlayers-legacy": "6.15.1",
+        "ol": "^7.1.0",
         "copyfiles": "2.4.1",
         "coveralls": "3.1.1",
         "eslint": "8.25.0",
