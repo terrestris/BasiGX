@@ -176,7 +176,7 @@ Ext.define('BasiGX.util.ArcGISRest', {
                 return Ext.Promise.reject();
             }
 
-            // collect all sublayer indexes the user has marked as visible
+            // collect all sublayer indexes that the user has marked as visible
             var visibleLayerIndexes = [];
             layerConfig.subLayerStore.each(function(sublayer, layerIndex){
                 var visibility = sublayer.get('visibility');

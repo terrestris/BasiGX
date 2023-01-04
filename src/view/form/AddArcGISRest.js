@@ -615,23 +615,11 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         var checkBoxes = [];
         var candidatesInitiallyChecked = me.getCandidatesInitiallyChecked();
         Ext.each(layers, function(layer) {
-            // var boxLabel = layer.service.name;
-            // if (layer.service.type === 'FeatureServer') {
-            //     boxLabel += '/' + layer.layer.name;
-            // }
-
             checkBoxes.push({
                 xtype: 'basigx-tree-arcgisrestservicetree',
                 arcGISLayerConfig: layer,
                 checked: candidatesInitiallyChecked
             });
-
-            // checkBoxes.push({
-            //     xtype: 'checkbox',
-            //     boxLabel: boxLabel,
-            //     checked: candidatesInitiallyChecked,
-            //     arcGISLayerConfig: layer
-            // });
         });
         cbGroup.add(checkBoxes);
 
