@@ -87,6 +87,17 @@ Ext.define('BasiGX.util.ArcGISRest', {
             return url;
         },
 
+        /**
+         * Creates the URL for a MapServer request.
+         *
+         * TODO: does not work for this URL yet:
+         *       https://gis.epa.ie/arcgis/rest/services
+         *
+         * @param {string} serviceUrl The URL of the service.
+         * @param {string} serverName The name of the MapServer.
+         * @param {string} format The output format.
+         * @return {string} The URL to the MapServer.
+         */
         createMapServerUrl: function(serviceUrl, serverName, format) {
             // TODO refactor with createFeatureServerUrl if code works
             if (!BasiGX.util.ArcGISRest.isArcGISRestUrl(serviceUrl)) {
