@@ -160,6 +160,9 @@ Ext.define('BasiGX.util.ArcGISRest', {
          * a FeatureServer layer. Mandatory for layers of type Feature Server.
          * @param {number} layerConfig.layer.id The id of a FeatureServer layer.
          * @param {string} layerConfig.layer.name The name of a FeatureServer
+         *
+         * TODO: add sublayers
+         *
          * layer.
          * @param {boolean} useDefaultHeader Whether to use the default
          * Xhr header.
@@ -174,6 +177,15 @@ Ext.define('BasiGX.util.ArcGISRest', {
                 Ext.log.warn('Provided URL is not a valid ArcGISRest URL');
                 return Ext.Promise.reject();
             }
+
+            // collect all sublayer indexes the user has marked as visible
+            var visibleLayerIndexes = [];
+            layerConfig.subLayers.each(function(sublayer, layerIndex){
+                if (sublayer.get('visibility')){
+                   visibleLayerIndexes.push(layerIndex);
+                }
+            });
+
             var serviceUrl = [rootUrl, service.name, service.type].join('/');
             var onReject = function() {
                 return Ext.Promise.reject();
@@ -194,7 +206,11 @@ Ext.define('BasiGX.util.ArcGISRest', {
                         source = new ol.source.TileArcGISRest({
                             url: serviceUrl,
                             projection: 'EPSG:' +
-                                serviceInfo.spatialReference.wkid
+                                serviceInfo.spatialReference.wkid,
+                            params: {
+                                'LAYERS': 'show:' + visibleLayerIndexes.join(',')
+                            }
+
                         });
                         layer = new ol.layer.Tile({
                             source: source,

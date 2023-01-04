@@ -111,7 +111,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         /**
          * Default url for the textfield or combobox.
          */
-        defaultUrl: 'https://gis.epa.ie/arcgis/rest/services',
+        defaultUrl: 'https://gis.epa.ie/arcgis/rest/services/Copernicus',
 
         /**
          * Whether we will send the `X-Requested-With` header when fetching the
@@ -700,11 +700,16 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
     addCheckedLayers: function() {
         var me = this;
         var fs = me.down('[name=fs-available-layers]');
-        var checkboxes = fs.query('checkbox[checked=true][disabled=false]');
+        // var checkboxes = fs.query('checkbox[checked=true][disabled=false]');
+        // TODO: find cleaner approach with error handling
+        var layerItems = fs.items.items[0].items.items;
         var map = BasiGX.util.Map.getMapComponent().getMap();
         var useDefaultHeader = me.getUseDefaultXhrHeader();
-        Ext.each(checkboxes, function(checkbox) {
-            var config = checkbox.arcGISLayerConfig;
+        Ext.each(layerItems, function(layerItem) {
+            var config = layerItem.arcGISLayerConfig;
+
+            // TODO: rethink provided argument
+            config.subLayers = layerItem.getStore();
             BasiGX.util.ArcGISRest.createOlLayerFromArcGISRest(
                 config, useDefaultHeader
             )
@@ -715,7 +720,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
                     me.fireEvent('beforearcgisrestadd', layer);
                     map.addLayer(layer);
                     me.fireEvent('arcgisrestadd', layer);
-                    checkbox.setDisabled(true);
+                    layerItem.setDisabled(true);
                     me.updateControlToolbarState();
                 });
         });
