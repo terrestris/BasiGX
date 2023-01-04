@@ -44,6 +44,14 @@ Ext.define('BasiGX.view.tree.ArcGISRestServiceTree', {
 
     checked: null,
 
+    listeners: {
+       itemclick: function(view, record){
+         // toggle visibility of sublayer
+         var currentVisibility = record.get('visibility');
+         record.set('visibility', !currentVisibility);
+       }
+    },
+
     columns: {
         header: false,
         items: [{
