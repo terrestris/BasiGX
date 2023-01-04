@@ -147,9 +147,12 @@ Ext.define('BasiGX.view.tree.ArcGISRestServiceTree', {
         expandedNode.appendChild(layers);
     },
 
-    onRequestServiceFailure: function(status) {
-        // TODO give feedback
-        console.log('failed to request service');
+    onRequestServiceFailure: function (status) {
+        // TODO: read text from viewmodel or config
+        var errorText = 'Requesting sublayers failed.'
+        Ext.Logger.error(errorText);
+        Ext.Logger.error(status);
+        BasiGX.warn(errorText);
     }
 
 });
