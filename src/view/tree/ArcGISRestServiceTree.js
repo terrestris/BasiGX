@@ -45,9 +45,15 @@ Ext.define('BasiGX.view.tree.ArcGISRestServiceTree', {
 
     listeners: {
        itemclick: function(view, record){
-         // toggle visibility of sublayer
-         var currentVisibility = record.get('visibility');
-         record.set('visibility', !currentVisibility);
+          // toggle visibility of sublayer
+          var currentVisibility = record.get('visibility');
+          record.set('visibility', !currentVisibility);
+       },
+       beforecheckchange: function(node, checked){
+          // when layer is not checked anymore it will be collapsed
+          if (checked) {
+            node.collapse();
+          }
        }
     },
 
@@ -97,6 +103,10 @@ Ext.define('BasiGX.view.tree.ArcGISRestServiceTree', {
 
     onNodeExpand: function(expandedNode) {
         var me = this;
+
+        // ensure expanded layer is always checked
+        expandedNode.set('checked', true);
+
         if (expandedNode.hasChildNodes()) {
             return;
         }
