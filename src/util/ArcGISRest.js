@@ -159,13 +159,9 @@ Ext.define('BasiGX.util.ArcGISRest', {
          * @param {object} layerConfig.layer (optional) The layer config of
          * a FeatureServer layer. Mandatory for layers of type Feature Server.
          * @param {number} layerConfig.layer.id The id of a FeatureServer layer.
-         * @param {string} layerConfig.layer.name The name of a FeatureServer
-         *
-         * TODO: add sublayers
-         *
-         * layer.
-         * @param {boolean} useDefaultHeader Whether to use the default
-         * Xhr header.
+         * @param {string} layerConfig.layer.name The name of a FeatureServer layer.
+         * @param {Ext.data.TreeStore}  layerConfig.subLayerStore The tree store containing the sublayers.
+         * @param {boolean} useDefaultHeader Whether to use the default Xhr header.
          * @return {Ext.Promise} A promise containing the olLayer.
          */
         createOlLayerFromArcGISRest: function(layerConfig, useDefaultHeader) {
@@ -180,9 +176,13 @@ Ext.define('BasiGX.util.ArcGISRest', {
 
             // collect all sublayer indexes the user has marked as visible
             var visibleLayerIndexes = [];
-            layerConfig.subLayers.each(function(sublayer, layerIndex){
-                if (sublayer.get('visibility')){
-                   visibleLayerIndexes.push(layerIndex);
+            layerConfig.subLayerStore.each(function(sublayer, layerIndex){
+                var visibility = sublayer.get('visibility');
+                var layerId = sublayer.get('layerId');
+                var layerIdValid = Ext.isNumeric(layerId) && layerId >= 0;
+
+                if (visibility && layerIdValid){
+                    visibleLayerIndexes.push(layerId);
                 }
             });
 

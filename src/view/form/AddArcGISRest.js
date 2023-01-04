@@ -700,16 +700,37 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
     addCheckedLayers: function() {
         var me = this;
         var fs = me.down('[name=fs-available-layers]');
-        // var checkboxes = fs.query('checkbox[checked=true][disabled=false]');
-        // TODO: find cleaner approach with error handling
-        var layerItems = fs.items.items[0].items.items;
+
+        // collect checked layers from form
+        var layerItems = [];
+        var layerConfigTrees = fs.query('basigx-tree-arcgisrestservicetree');
+        Ext.each(layerConfigTrees, function(layerConfig){
+            var store = layerConfig.getStore();
+            if (!store) {
+              return;
+            }
+
+            var root = store.getRoot();
+            if (!root) {
+              return;
+            }
+
+            if (root.get('checked')) {
+                layerItems.push(layerConfig)
+            }
+        });
+
         var map = BasiGX.util.Map.getMapComponent().getMap();
         var useDefaultHeader = me.getUseDefaultXhrHeader();
         Ext.each(layerItems, function(layerItem) {
             var config = layerItem.arcGISLayerConfig;
 
-            // TODO: rethink provided argument
-            config.subLayers = layerItem.getStore();
+            var subLayerStore = layerItem.getStore();
+            if (!subLayerStore){
+                return;
+            }
+
+            config.subLayerStore = subLayerStore;
             BasiGX.util.ArcGISRest.createOlLayerFromArcGISRest(
                 config, useDefaultHeader
             )

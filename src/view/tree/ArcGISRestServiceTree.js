@@ -42,7 +42,6 @@ Ext.define('BasiGX.view.tree.ArcGISRestServiceTree', {
 
     arcGISLayerConfig: null,
 
-    checked: null,
 
     listeners: {
        itemclick: function(view, record){
@@ -87,6 +86,7 @@ Ext.define('BasiGX.view.tree.ArcGISRestServiceTree', {
             model: 'GeoExt.data.model.ArcGISRestServiceLayer',
             root: {
                 name: rootLabel,
+                checked: true,
                 children: []
             },
             listeners: {
