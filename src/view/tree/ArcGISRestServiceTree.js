@@ -139,8 +139,6 @@ Ext.define('BasiGX.view.tree.ArcGISRestServiceTree', {
             return Ext.create('GeoExt.data.model.ArcGISRestServiceLayer',{
                 layerId: layer.id,
                 name: layer.name,
-                // TODO remove this line as soon as we use our custom leaf item
-                text: layer.name + layer.defaultVisibility,
                 defaultVisibility: layer.defaultVisibility,
                 visibility: layer.defaultVisibility,
                 leaf: true

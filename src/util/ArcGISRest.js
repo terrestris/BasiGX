@@ -159,9 +159,11 @@ Ext.define('BasiGX.util.ArcGISRest', {
          * @param {object} layerConfig.layer (optional) The layer config of
          * a FeatureServer layer. Mandatory for layers of type Feature Server.
          * @param {number} layerConfig.layer.id The id of a FeatureServer layer.
-         * @param {string} layerConfig.layer.name The name of a FeatureServer layer.
+         * @param {string} layerConfig.layer.name The name of a FeatureServer
+         * layer.
          * @param {Ext.data.TreeStore}  layerConfig.subLayerStore The tree store containing the sublayers.
-         * @param {boolean} useDefaultHeader Whether to use the default Xhr header.
+         * @param {boolean} useDefaultHeader Whether to use the default Xhr
+         * header.
          * @return {Ext.Promise} A promise containing the olLayer.
          */
         createOlLayerFromArcGISRest: function(layerConfig, useDefaultHeader) {
