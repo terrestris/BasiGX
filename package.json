@@ -84,7 +84,7 @@
         "open-cli": "7.1.0",
         "puppeteer": "18.2.1",
         "rimraf": "3.0.2",
-        "serve": "14.0.1",
+        "serve": "14.1.2",
         "sinon": "14.0.1",
         "uglify-js": "3.17.3"
     }
