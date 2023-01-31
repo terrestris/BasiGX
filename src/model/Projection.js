@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * Projection mode for use with the Projections Store
+ * Projection model for use with the Projections Store
  *
  * @class BasiGX.model.Projection
  */
