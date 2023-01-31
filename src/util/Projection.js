@@ -56,6 +56,7 @@ Ext.define('BasiGX.util.Projection', {
                             if (response && response.responseText &&
                                 response.status === 200) {
                                 var resultObj = Ext.decode(response.responseText);
+                                projectionsStore.add(Ext.apply({}, resultObj.results[0]));
                                 resolve(resultObj.results[0]);
                             } else {
                                 reject(response.status);

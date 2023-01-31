@@ -21,49 +21,7 @@
 Ext.define('BasiGX.store.Projections', {
     extend: 'Ext.data.Store',
     alias: 'store.basigx-projections',
+    model: 'BasiGX.model.Projection',
     singleton: true,
-
-    data: [],
-
-    fields: [{
-        name: 'id',
-        type: 'string',
-        identifier: true
-    }, {
-        name: 'accuracy',
-        type: 'string'
-    }, {
-        name: 'area',
-        type: 'string'
-    }, {
-        name: 'authority',
-        type: 'string'
-    }, {
-        name: 'bbox',
-        type: 'auto'
-    }, {
-        name: 'code',
-        type: 'string'
-    }, {
-        name: 'default_trans',
-        type: 'number'
-    }, {
-        name: 'kind',
-        type: 'string'
-    }, {
-        name: 'name',
-        type: 'string'
-    }, {
-        name: 'proj4',
-        type: 'string'
-    }, {
-        name: 'trans',
-        type: 'auto'
-    }, {
-        name: 'unit',
-        type: 'string'
-    }, {
-        name: 'wkt',
-        type: 'string'
-    }]
+    data: []
 });
