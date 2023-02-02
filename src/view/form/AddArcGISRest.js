@@ -73,7 +73,8 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
             documentation: '<h2>ArcGISRest Layer hinzufügen</h2>• In ' +
                 'diesem Dialog können Sie mit Hilfe einer ArcGISRest-URL ' +
                 'einen beliebigen Kartendienst der Karte hinzufügen.',
-            serviceLayersVisibility: {}
+            serviceLayersVisibility: {},
+            availableLayersFieldSetMaxHeight: null
         }
     },
 
@@ -121,7 +122,12 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
          *
          * @type {Boolean}
          */
-        useDefaultXhrHeader: false
+        useDefaultXhrHeader: false,
+
+        /**
+         * Allow parent configure available layers fieldset maxHeight
+         */
+        availableLayersFieldSetMaxHeight: null
     },
 
     /**
@@ -133,18 +139,18 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
 
     defaultButton: 'requestLayersBtn',
 
+    layout: 'vbox',
+
     items: [
         {
             xtype: 'fieldset',
-            layout: 'anchor',
-            defaults: {
-                anchor: '100%'
-            },
+            width: '100%',
             bind: {
                 title: '{queryParamsFieldSetTitle}'
             },
             items: [{
                 xtype: 'textfield',
+                width: '100%',
                 bind: {
                     fieldLabel: '{arcGISUrlTextFieldLabel}'
                 },
@@ -194,14 +200,13 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         {
             xtype: 'fieldset',
             name: 'fs-available-layers',
-            layout: 'anchor',
+            flex: 1,
+            width: '100%',
             scrollable: 'y',
-            maxHeight: 200,
-            defaults: {
-                anchor: '100%'
-            },
+            hidden: true,
             bind: {
-                title: '{availableLayersFieldSetTitle}'
+                title: '{availableLayersFieldSetTitle}',
+                maxHeight: '{availableLayersFieldSetMaxHeight}'
             },
             items: {
                 xtype: 'checkboxgroup',
@@ -614,6 +619,9 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         var cbGroup = fs.down('checkboxgroup');
         var checkBoxes = [];
         var candidatesInitiallyChecked = me.getCandidatesInitiallyChecked();
+
+        fs.setHidden(false);
+
         Ext.each(layers, function(layer) {
             checkBoxes.push({
                 xtype: 'basigx-tree-arcgisrestservicetree',
@@ -663,6 +671,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         me.add({
             xtype: 'toolbar',
             name: 'interact-w-available-layers',
+            width: '100%',
             items: tbItems
         });
     },
@@ -755,5 +764,15 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         Ext.each(checkboxes, function(checkbox) {
             checkbox.setValue(false);
         });
+    },
+
+    /**
+     * Set the viewModel property availableLayersFieldSetMaxHeight when the component
+     * config property availableLayersFieldSetMaxHeight changes to it can be used in a binding
+     */
+    updateAvailableLayersFieldSetMaxHeight: function(newValue) {
+        var me = this;
+        var vm = me.getViewModel();
+        vm.set('availableLayersFieldSetMaxHeight', newValue);
     }
 });
