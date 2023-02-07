@@ -195,6 +195,51 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
                         }
                     }
                 }
+            }, {
+                xtype: 'container',
+                layout: {
+                    type: 'hbox',
+                    pack: 'end'
+                },
+                items: [{
+                    xtype: 'button',
+                    name: 'resetFormBtn',
+                    bind: {
+                        text: '{resetBtnText}'
+                    },
+                    handler: function(btn) {
+                        var view = btn.up('basigx-form-addarcgisrest');
+                        view.getForm().reset();
+                        view.removeAddLayersComponents();
+                        view.resetState();
+                        var defaultValue = view.defaultUrl;
+                        var combo = view.down('combobox[name=urlCombo]');
+                        combo.setValue(defaultValue);
+                        var textfield = view.down('textfield[name=url]');
+                        textfield.setValue(defaultValue);
+                        var fs = view.down('[name=fs-available-layers]');
+                        fs.setHidden(true);
+                    }
+                }, {
+                    xtype: 'button',
+                    bind: {
+                        text: '{requestLayersBtnText}'
+                    },
+                    margin: '0 0 0 5',
+                    name: 'requestLayersBtn',
+                    reference: 'requestLayersBtn',
+                    formBind: true, // only enabled once the form is valid
+                    disabled: true,
+                    handler: function(btn) {
+                        var view = btn.up('basigx-form-addarcgisrest');
+                        view.resetState();
+                        view.requestLayers()
+                            .then(
+                                view.onGetServicesSuccess.bind(view),
+                                view.onGetServicesFailure.bind(view)
+                            );
+                    }
+                }]
             }]
         },
         {
@@ -221,46 +266,6 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
                 },
                 columns: 2,
                 vertical: true
-            }
-        }
-    ],
-
-    // Reset and Submit buttons
-    buttons: [
-        {
-            name: 'resetFormBtn',
-            bind: {
-                text: '{resetBtnText}'
-            },
-            handler: function(btn) {
-                var view = btn.up('basigx-form-addarcgisrest');
-                view.getForm().reset();
-                view.removeAddLayersComponents();
-                view.resetState();
-                var defaultValue = view.defaultUrl;
-                var combo = view.down('combobox[name=urlCombo]');
-                combo.setValue(defaultValue);
-                var textfield = view.down('textfield[name=url]');
-                textfield.setValue(defaultValue);
-            }
-        },
-        '->',
-        {
-            bind: {
-                text: '{requestLayersBtnText}'
-            },
-            name: 'requestLayersBtn',
-            reference: 'requestLayersBtn',
-            formBind: true, // only enabled once the form is valid
-            disabled: true,
-            handler: function(btn) {
-                var view = btn.up('basigx-form-addarcgisrest');
-                view.resetState();
-                view.requestLayers()
-                    .then(
-                        view.onGetServicesSuccess.bind(view),
-                        view.onGetServicesFailure.bind(view)
-                    );
             }
         }
     ],
