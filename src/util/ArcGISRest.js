@@ -62,22 +62,27 @@ Ext.define('BasiGX.util.ArcGISRest', {
         },
 
         /**
-         * Creates the URL for a FeatureServer request.
+         * Creates the URL for a FeatureServer/MapServer/GPServer.
          *
          * @param {string} serviceUrl The URL of the service.
-         * @param {string} serverName The name of the FeatureServer.
+         * @param {string} serverName The name of the Server.
          * @param {string} format The output format.
-         * @return {string} The URL to the FeatureServer.
+         * @param {string} serverType FeatureServer/MapServer/GPServer.
+         * @return {string} The URL to the FeatureServer/MapServer/GPServer.
          */
-        createFeatureServerUrl: function(serviceUrl, serverName, format) {
+        createServerUrl: function(serviceUrl, serverName, format, serverType) {
             if (!BasiGX.util.ArcGISRest.isArcGISRestUrl(serviceUrl)) {
                 return;
             }
-            var urlObj = new URL(serviceUrl);
+
+            // Working with the root Url ensures that this code works
+            // with both root and folder level services
+            var rootUrl = BasiGX.util.ArcGISRest.getArcGISRestRootUrl(
+                serviceUrl
+            );
+            var urlObj = new URL(rootUrl);
             var parts = urlObj.pathname.split('/');
-            parts.push(serverName);
-            parts.push('FeatureServer');
-            var path = parts.join('/');
+            var path = parts.concat([serverName, serverType]).join('/');
 
             var url = urlObj.origin + path;
             if (format) {
@@ -88,10 +93,24 @@ Ext.define('BasiGX.util.ArcGISRest', {
         },
 
         /**
-         * Creates the URL for a MapServer request.
+         * Creates the URL for a FeatureServer request.
          *
-         * TODO: does not work for this URL yet:
-         *       https://gis.epa.ie/arcgis/rest/services
+         * @param {string} serviceUrl The URL of the service.
+         * @param {string} serverName The name of the FeatureServer.
+         * @param {string} format The output format.
+         * @return {string} The URL to the FeatureServer.
+         */
+        createFeatureServerUrl: function(serviceUrl, serverName, format) {
+            return BasiGX.util.ArcGISRest.createServerUrl(
+                serviceUrl,
+                serverName,
+                format,
+                'FeatureServer'
+            );
+        },
+
+        /**
+         * Creates the URL for a MapServer request.
          *
          * @param {string} serviceUrl The URL of the service.
          * @param {string} serverName The name of the MapServer.
@@ -99,26 +118,12 @@ Ext.define('BasiGX.util.ArcGISRest', {
          * @return {string} The URL to the MapServer.
          */
         createMapServerUrl: function(serviceUrl, serverName, format) {
-            // TODO refactor with createFeatureServerUrl if code works
-            if (!BasiGX.util.ArcGISRest.isArcGISRestUrl(serviceUrl)) {
-                return;
-            }
-            var urlObj = new URL(serviceUrl);
-            var parts = urlObj.pathname.split('/');
-            if (parts[parts.length - 1] === '') {
-                parts.pop();
-            }
-            parts.pop();
-            parts.push(serverName);
-            parts.push('MapServer');
-            var path = parts.join('/');
-
-            var url = urlObj.origin + path;
-            if (format) {
-                url = BasiGX.util.Url.setQueryParam(url, 'f', format);
-            }
-
-            return url;
+            return BasiGX.util.ArcGISRest.createServerUrl(
+                serviceUrl,
+                serverName,
+                format,
+                'MapServer'
+            );
         },
 
         /**
@@ -172,7 +177,8 @@ Ext.define('BasiGX.util.ArcGISRest', {
          * @param {number} layerConfig.layer.id The id of a FeatureServer layer.
          * @param {string} layerConfig.layer.name The name of a FeatureServer
          * layer.
-         * @param {Ext.data.TreeStore}  layerConfig.subLayerStore The tree store containing the sublayers.
+         * @param {Ext.data.TreeStore}  layerConfig.subLayerStore The tree
+         * store containing the sublayers.
          * @param {boolean} useDefaultHeader Whether to use the default Xhr
          * header.
          * @return {Ext.Promise} A promise containing the olLayer.
@@ -189,7 +195,7 @@ Ext.define('BasiGX.util.ArcGISRest', {
 
             // collect all sublayer indexes that the user has marked as visible
             var visibleLayerIndexes = [];
-            layerConfig.subLayerStore.each(function(sublayer, layerIndex){
+            layerConfig.subLayerStore.each(function(sublayer){
                 var visibility = sublayer.get('visibility');
                 var layerId = sublayer.get('layerId');
                 var layerIdValid = Ext.isNumeric(layerId) && layerId >= 0;
@@ -221,7 +227,8 @@ Ext.define('BasiGX.util.ArcGISRest', {
                             projection: 'EPSG:' +
                                 serviceInfo.spatialReference.wkid,
                             params: {
-                                'LAYERS': 'show:' + visibleLayerIndexes.join(',')
+                                'LAYERS': 'show:' +
+                                    visibleLayerIndexes.join(',')
                             }
 
                         });

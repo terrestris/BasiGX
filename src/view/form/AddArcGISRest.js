@@ -709,16 +709,16 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         Ext.each(layerConfigTrees, function(layerConfig){
             var store = layerConfig.getStore();
             if (!store) {
-              return;
+                return;
             }
 
             var root = store.getRoot();
             if (!root) {
-              return;
+                return;
             }
 
             if (root.get('checked')) {
-                layerItems.push(layerConfig)
+                layerItems.push(layerConfig);
             }
         });
 
@@ -772,8 +772,11 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
     },
 
     /**
-     * Set the viewModel property availableLayersFieldSetMaxHeight when the component
-     * config property availableLayersFieldSetMaxHeight changes to it can be used in a binding
+     * Set the viewModel property availableLayersFieldSetMaxHeight
+     * when the component config property availableLayersFieldSetMaxHeight
+     * changes to it can be used in a binding
+     *
+     * @param {Number} newValue Value to set
      */
     updateAvailableLayersFieldSetMaxHeight: function(newValue) {
         var me = this;

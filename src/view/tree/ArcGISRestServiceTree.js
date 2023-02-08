@@ -44,17 +44,17 @@ Ext.define('BasiGX.view.tree.ArcGISRestServiceTree', {
 
 
     listeners: {
-       itemclick: function(view, record){
-          // toggle visibility of sublayer
-          var currentVisibility = record.get('visibility');
-          record.set('visibility', !currentVisibility);
-       },
-       beforecheckchange: function(node, checked){
-          // when layer is not checked anymore it will be collapsed
-          if (checked) {
-            node.collapse();
-          }
-       }
+        itemclick: function(view, record){
+            // toggle visibility of sublayer
+            var currentVisibility = record.get('visibility');
+            record.set('visibility', !currentVisibility);
+        },
+        beforecheckchange: function(node, checked){
+            // when layer is not checked anymore it will be collapsed
+            if (checked) {
+                node.collapse();
+            }
+        }
     },
 
     columns: {
@@ -159,7 +159,7 @@ Ext.define('BasiGX.view.tree.ArcGISRestServiceTree', {
 
     onRequestServiceFailure: function (status) {
         // TODO: read text from viewmodel or config
-        var errorText = 'Requesting sublayers failed.'
+        var errorText = 'Requesting sublayers failed.';
         Ext.Logger.error(errorText);
         Ext.Logger.error(status);
         BasiGX.warn(errorText);
