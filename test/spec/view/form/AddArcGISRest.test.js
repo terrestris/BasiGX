@@ -94,6 +94,19 @@ describe('BasiGX.view.form.AddArcGISRest', function() {
 
     describe('Methods', function() {
         var form = null;
+        var layers = [{
+            service: {
+                name: 'Copernicus/HighResolutionLayers',
+                type: 'MapServer'
+            },
+            url: 'https://gis.epa.ie/arcgis/rest/services/Copernicus?f=json'
+        },{
+            service: {
+                name: 'Copernicus/HotSpotMonitoring',
+                type: 'MapServer'
+            },
+            url: 'https://gis.epa.ie/arcgis/rest/services/Copernicus?f=json'
+        }];
         beforeEach(function() {
             form = Ext.create('BasiGX.view.form.AddArcGISRest', {
                 renderTo: Ext.getBody()
@@ -183,6 +196,25 @@ describe('BasiGX.view.form.AddArcGISRest', function() {
                     expect(form.responseStatusToErrorMsgKey('' + check)).to.be(exp);
                     expect(form.getViewModel().get(exp)).to.be.ok();
                 });
+            });
+        });
+        describe('checkAllLayers / uncheckAllLayers', function() {
+            it('checks and unchecks all layers', function() {
+                function isAllChecked(trees) {
+                    return Ext.Array.every(trees, function (tree) {
+                        return tree.getStore().getAt(0).get('checked');
+                    });
+                }
+
+                form.fillAvailableLayersFieldset(layers);
+                var trees = form.query('[name=fs-available-layers] basigx-tree-arcgisrestservicetree');
+                expect(isAllChecked(trees)).to.be(true);
+
+                form.uncheckAllLayers();
+                expect(isAllChecked(trees)).to.be(false);
+
+                form.checkAllLayers();
+                expect(isAllChecked(trees)).to.be(true);
             });
         });
     });
