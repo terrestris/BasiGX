@@ -753,10 +753,10 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
      * Checks all checkboxes in the available layers fieldset.
      */
     checkAllLayers: function() {
-        var sel = '[name=fs-available-layers] checkbox[disabled=false]';
-        var checkboxes = this.query(sel);
-        Ext.each(checkboxes, function(checkbox) {
-            checkbox.setValue(true);
+        var sel = '[name=fs-available-layers] basigx-tree-arcgisrestservicetree';
+        var trees = this.query(sel);
+        Ext.each(trees, function(tree) {
+            tree.getStore().getAt(0).set('checked', true);
         });
     },
 
@@ -764,10 +764,10 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
      * Unchecks all checkboxes in the available layers fieldset.
      */
     uncheckAllLayers: function() {
-        var sel = '[name=fs-available-layers] checkbox[disabled=false]';
-        var checkboxes = this.query(sel);
-        Ext.each(checkboxes, function(checkbox) {
-            checkbox.setValue(false);
+        var sel = '[name=fs-available-layers] basigx-tree-arcgisrestservicetree';
+        var trees = this.query(sel);
+        Ext.each(trees, function(tree) {
+            tree.getStore().getAt(0).set('checked', false);
         });
     },
 
