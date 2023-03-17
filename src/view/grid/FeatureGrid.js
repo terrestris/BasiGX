@@ -205,6 +205,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             xtype: 'grid',
             flex: 1,
             height: gridHeight,
+            forceFit: true,
             selModel: 'checkboxmodel',
             enableLocking: this.getEnableLocking(),
             header: this.getGridHeader(),
