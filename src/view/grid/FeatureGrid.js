@@ -111,6 +111,12 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          * Configures the grid header. See https://docs.sencha.com/extjs/6.2.0/classic/Ext.grid.Panel.html#cfg-header
          */
         gridHeader: undefined,
+
+        /**
+         * Height of grid toolbar. Defaults to 50px.
+         */
+        gridToolbarHeight: 50,
+
         /* eslint-enable */
         /**
          * Configures filtering on the grid.
@@ -186,9 +192,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     initComponent: function() {
         this.callParent();
-        var gridHeight = 456;
+        var gridHeight = this.height;
         if (this.enableEditing || this.enableRefreshButton) {
-            gridHeight = 406;
+            gridHeight = gridHeight - this.getGridToolbarHeight();
         }
         var gridOpts = {
             xtype: 'grid',
@@ -1096,7 +1102,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
 
         var editTools = {
             xtype: 'buttongroup',
-            height: 50,
+            height: this.getGridToolbarHeight(),
             tbar: [{
                 xtype: 'button',
                 name: 'featuregrid-reload-btn',
