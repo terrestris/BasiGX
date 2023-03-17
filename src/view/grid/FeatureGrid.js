@@ -162,6 +162,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
     editLayer: undefined,
     items: [],
 
+    layout: {
+        type: 'vbox',
+        align: 'stretch'
+    },
+
     constructor: function() {
         var me = this;
 
@@ -198,6 +203,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         }
         var gridOpts = {
             xtype: 'grid',
+            flex: 1,
             height: gridHeight,
             selModel: 'checkboxmodel',
             enableLocking: this.getEnableLocking(),
