@@ -564,7 +564,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var columns = [];
         if (this.getAddZoomButton()) {
             columns.push({
-                minWidth: 35,
+                maxWidth: 35,
                 menuDisabled: true,
                 enableColumnHide: false,
                 hideable: false,
@@ -575,7 +575,6 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                     return '<span class="fa fa-search" ' +
                         'style="cursor: pointer;"></span>';
                 },
-                width: 32,
                 sorter: this.selectionCompareFunction.bind(this)
             });
         }
