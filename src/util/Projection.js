@@ -17,6 +17,9 @@
  * @class BasiGX.util.Projection
  */
 Ext.define('BasiGX.util.Projection', {
+    requires: [
+        'BasiGX.store.Projections'
+    ],
 
     statics: {
 
@@ -29,39 +32,42 @@ Ext.define('BasiGX.util.Projection', {
          * @return {Ext.Promise} An ExtJS promise resolving if all EPSG
          * information has successfully been fetched from https://epsg.io
          */
-        fetchProj4jCrsDefinitions: function(epsgCodeArray) {
+        fetchProj4jCrsDefinitions: function (epsgCodeArray) {
             if (!Ext.isArray(epsgCodeArray)) {
                 return Ext.Promise.reject('No valid array of EPSG codes ' +
                     ' provided.');
             }
-            var epsgPromises = [];
             var epsgIoBaseUrl = 'https://epsg.io/?q={0}&format=json';
-            Ext.each(Ext.Array.unique(epsgCodeArray), function(epsgCodeStr) {
+            var projectionsStore = BasiGX.store.Projections;
+            var epsgPromises = Ext.Array.map(Ext.Array.unique(epsgCodeArray), function (epsgCodeStr) {
                 var epsgCode = epsgCodeStr.toUpperCase().replace('EPSG:', '');
-                var epsgPromise = new Ext.Promise(function(resolve, reject) {
+                var existingDef = projectionsStore.getById(epsgCodeStr.toUpperCase());
+
+                if (existingDef) {
+                    return Ext.Promise.resolve(existingDef.getData());
+                }
+
+                return new Ext.Promise(function (resolve, reject) {
                     var epsgUrl = Ext.String.format(epsgIoBaseUrl, epsgCode);
                     Ext.Ajax.request({
                         url: epsgUrl,
                         useDefaultXhrHeader: false,
-                        success: function(response) {
+                        success: function (response) {
                             if (response && response.responseText &&
                                 response.status === 200) {
-                                var resultObj = Ext.decode(response.
-                                    responseText);
+                                var resultObj = Ext.decode(response.responseText);
+                                projectionsStore.add(Ext.apply({}, resultObj.results[0]));
                                 resolve(resultObj.results[0]);
                             } else {
                                 reject(response.status);
                             }
                         },
-                        failure: function(response) {
+                        failure: function (response) {
                             reject(response.status);
                         }
                     });
-
                 });
-                epsgPromises.push(epsgPromise);
             });
-
             return Ext.Promise.all(epsgPromises);
         },
 
