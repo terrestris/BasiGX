@@ -128,6 +128,12 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
 </span>         * Configures the grid header. See https://docs.sencha.com/extjs/6.2.0/classic/Ext.grid.Panel.html#cfg-header
          */
         gridHeader: undefined,
+
+<span id='BasiGX-view-grid-FeatureGrid-cfg-gridToolbarHeight'>        /**
+</span>         * Height of grid toolbar. Defaults to 50px.
+         */
+        gridToolbarHeight: 50,
+
         /* eslint-enable */
 <span id='BasiGX-view-grid-FeatureGrid-cfg-enableFiltering'>        /**
 </span>         * Configures filtering on the grid.
@@ -173,6 +179,11 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
 <span id='BasiGX-view-grid-FeatureGrid-property-editLayer'>    editLayer: undefined,
 </span><span id='BasiGX-view-grid-FeatureGrid-property-items'>    items: [],
 </span>
+<span id='BasiGX-view-grid-FeatureGrid-cfg-layout'>    layout: {
+</span>        type: &#39;vbox&#39;,
+        align: &#39;stretch&#39;
+    },
+
 <span id='BasiGX-view-grid-FeatureGrid-method-constructor'>    constructor: function() {
 </span>        var me = this;
 
@@ -203,13 +214,15 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
      */
     initComponent: function() {
         this.callParent();
-        var gridHeight = 456;
+        var gridHeight = this.height;
         if (this.enableEditing || this.enableRefreshButton) {
-            gridHeight = 406;
+            gridHeight = gridHeight - this.getGridToolbarHeight();
         }
         var gridOpts = {
             xtype: &#39;grid&#39;,
+            flex: 1,
             height: gridHeight,
+            forceFit: true,
             selModel: &#39;checkboxmodel&#39;,
             enableLocking: this.getEnableLocking(),
             header: this.getGridHeader(),
@@ -568,7 +581,7 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
         var columns = [];
         if (this.getAddZoomButton()) {
             columns.push({
-                minWidth: 35,
+                maxWidth: 35,
                 menuDisabled: true,
                 enableColumnHide: false,
                 hideable: false,
@@ -579,7 +592,6 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
                     return &#39;&lt;span class=&quot;fa fa-search&quot; &#39; +
                         &#39;style=&quot;cursor: pointer;&quot;&gt;&lt;/span&gt;&#39;;
                 },
-                width: 32,
                 sorter: this.selectionCompareFunction.bind(this)
             });
         }
@@ -1113,7 +1125,7 @@ Ext.define(&#39;BasiGX.view.grid.FeatureGrid&#39;, {
 
         var editTools = {
             xtype: &#39;buttongroup&#39;,
-            height: 50,
+            height: this.getGridToolbarHeight(),
             tbar: [{
                 xtype: &#39;button&#39;,
                 name: &#39;featuregrid-reload-btn&#39;,
