@@ -11,15 +11,15 @@ jobs:
 
     steps:
     - name: Checkout sources
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Use Node.js 16.x
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: 16.x
 
     - name: Cache Node.js modules 💾
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: |
           node_modules
@@ -29,7 +29,7 @@ jobs:
           ${{ runner.OS }}-
 
     - name: Cache ext 💾
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: |
           ext-6.2.0
@@ -50,7 +50,7 @@ jobs:
         unzip -qo geoext3-master.zip
 
     - name: Install ruby
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: '2.6'
 
