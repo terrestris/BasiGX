@@ -48,7 +48,7 @@
         "ci-coverage": "npm run clean-coverage && karma start --single-run --reporters=dots,coverage && cat ./coverage/*/lcov.info > coverage/lcov.info",
         "serve-examples": "serve -l 3000 & open-cli 'http://localhost:3000/examples'",
         "build": "npm run test && npm run clean:dist && copyfiles -V -a 'src/**' 'sass/**' 'resources/**' Readme.md LICENSE package.json dist/",
-        "clean:dist": "rimraf ./dist/*",
+        "clean:dist": "rimraf dist",
         "postversion": "cp package.json dist/",
         "release": "npm run build && np --no-yarn --contents ./dist && git push https://github.com/terrestris/BasiGX.git master --tags",
         "generate:docs": "jsduck --config jsduck.json",
