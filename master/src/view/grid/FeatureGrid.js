@@ -153,8 +153,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          */
         saveReminderDelay: 10 * 60 * 1000,
         /**
-         * An example GeoJSON feature object that will be used to extract the schema
-         * in case no features are in the store.
+         * An example GeoJSON feature object that will be used to extract the
+         * schema in case no features are in the store.
          */
         exampleFeature: null
     },

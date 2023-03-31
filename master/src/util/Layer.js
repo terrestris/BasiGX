@@ -80,8 +80,7 @@ Ext.define('BasiGX.util.Layer', {
                 if (matchingLayer) {
                     return false;
                 }
-                if (layer.get(key) === val &&
-                    layer instanceof ol.layer.Base) {
+                if (layer.get(key) === val && layer instanceof ol.layer.Base) {
                     matchingLayer = layer;
                     return false;
                 } else if (layer instanceof ol.layer.Group) {
