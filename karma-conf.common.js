@@ -8,8 +8,8 @@ module.exports = function(config) {
         'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-neptune/resources/theme-neptune-all_1.css',
         'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-neptune/resources/theme-neptune-all_2.css',
         'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-neptune/resources/theme-neptune-all.css',
-        'node_modules/@geoext/openlayers-legacy/dist/ol.css',
-        'node_modules/@geoext/openlayers-legacy/dist/ol.js',
+        'node_modules/ol/ol.css',
+        'node_modules/ol/dist/ol.js',
         'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/ext-all.js',
         'https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/packages/ux/classic/ux.js',
         // GeoExt source files

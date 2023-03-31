@@ -29,7 +29,7 @@ Ext.define('BasiGX.olExt.TransformInteraction', {
     // some basic sanity checks
     if (!ol || !ol.interaction || !ol.interaction.Pointer) {
         Ext.log.error('Cannot define `ol.interaction.Transform`: Not ' +
-            'all needed OpenLayers 3 classes present.');
+            'all needed OpenLayers classes present.');
         return;
     } else if ('Transform' in ol.interaction) {
         Ext.log.error('Cannot define `ol.interaction.Transform`: It is ' +

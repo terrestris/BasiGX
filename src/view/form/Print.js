@@ -545,7 +545,7 @@ Ext.define('BasiGX.view.form.Print', {
         ) !== false); // may be undefined for certain layers
 
         if (isChecked && hasName && nonOpaque && inTree) {
-            if (layer instanceof ol.layer.Vector &&
+            if (layer instanceof ol.layer.BaseVector &&
                 layer.getSource().getFeatures().length < 1) {
                 return false;
             }
