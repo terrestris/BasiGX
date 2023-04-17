@@ -233,7 +233,16 @@ Ext.define('BasiGX.view.panel.LegendTree', {
      */
     getColorFromRow: function(rec) {
         var me = this;
-        var color = rec.getData().get('treeColor');
+        var recData = rec.getData();
+        var color;
+        if (Ext.isFunction(recData.get)) {
+            color = recData.get('treeColor');
+        } else if (recData.treeColor) {
+            color = recData.treeColor;
+        } else if (Ext.isFunction(rec.getOlLayer) &&
+            Ext.isFunction(rec.getOlLayer().get)) {
+            color = rec.getOlLayer().get('treeColor');
+        }
 
         // detect if we have a folder and apply color from childNode
         if (!Ext.isDefined(color) &&
