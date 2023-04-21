@@ -327,6 +327,7 @@ Ext.define('BasiGX.plugin.Hover', {
         var mapComponent = me.getCmp();
         var map = mapComponent.getMap();
         var mapView = map.getView();
+        var allLayers = map.getAllLayers();
         var pixel = evt.pixel;
         var hoverableProp = me.self.LAYER_HOVERABLE_PROPERTY_NAME;
         var hoverFeaturesRevertProp = me.self.LAYER_HOVER_FEATURES_REVERT_NAME;
@@ -335,7 +336,7 @@ Ext.define('BasiGX.plugin.Hover', {
 
         me.cleanupHoverArtifacts();
 
-        map.forEachLayerAtPixel(pixel, function(layer, pixelValues) {
+        var callback = function(layer, pixelValues) {
             var source = layer.getSource();
             var resolution = mapView.getResolution();
             var projCode = mapView.getProjection().getCode();
@@ -423,8 +424,16 @@ Ext.define('BasiGX.plugin.Hover', {
                     });
                 }
             }
-        }, {
-            layerFilter: me.hoverLayerFilter.bind(me)
+        };
+
+        allLayers.forEach(function(lyr) {
+            var layerData = lyr.getData(pixel);
+            if (layerData) {
+                var alphaValue = layerData.at(3);
+                if (alphaValue > 0 && me.hoverLayerFilter(lyr)) {
+                    callback(lyr, layerData);
+                }
+            }
         });
 
         me.showHoverToolTip(evt, hoverLayers, hoverFeatures);
