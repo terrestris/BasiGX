@@ -140,6 +140,7 @@ Ext.define('BasiGX.plugin.HoverClick', {
         var mapComponent = me.getCmp();
         var map = mapComponent.getMap();
         var mapView = map.getView();
+        var allLayers = map.getAllLayers();
         var pixel = evt.pixel;
         var hoverFeaturesRevertProp = me.self.LAYER_HOVER_FEATURES_REVERT_NAME;
         var clickableProp = me.self.LAYER_CLICKABLE_PROPERTY_NAME;
@@ -148,7 +149,7 @@ Ext.define('BasiGX.plugin.HoverClick', {
 
         me.cleanupHoverArtifacts();
 
-        map.forEachLayerAtPixel(pixel, function(layer, pixelValues) {
+        var callback = function(layer, pixelValues) {
             if (!layer.get(clickableProp)) {
                 return;
             }
@@ -157,7 +158,6 @@ Ext.define('BasiGX.plugin.HoverClick', {
             var resolution = mapView.getResolution();
             var projCode = mapView.getProjection().getCode();
             var hoverFeaturesRevert = layer.get(hoverFeaturesRevertProp);
-
 
             if (source instanceof ol.source.TileWMS
                     || source instanceof ol.source.ImageWMS) {
@@ -235,9 +235,18 @@ Ext.define('BasiGX.plugin.HoverClick', {
                     }
                 });
             }
-        }, {
-            layerFilter: me.clickLayerFilter.bind(me)
+        };
+
+        allLayers.forEach(function(lyr) {
+            var layerData = lyr.getData(pixel);
+            if (layerData) {
+                var alphaValue = layerData.at(3);
+                if (alphaValue > 0 && me.clickLayerFilter(lyr)) {
+                    callback(lyr, layerData);
+                }
+            }
         });
+
     },
 
     /**
