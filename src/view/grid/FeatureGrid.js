@@ -156,7 +156,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          * An example GeoJSON feature object that will be used to extract the
          * schema in case no features are in the store.
          */
-        exampleFeature: null
+        exampleFeature: null,
+        /**
+         * The padding to use when zooming to features. Can be a single number or an array of numbers.
+         */
+        zoomPadding: 0
     },
 
     editLayer: undefined,
@@ -196,6 +200,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      *
      */
     initComponent: function() {
+        var me = this;
         this.callParent();
         var gridHeight = this.height;
         if (this.enableEditing || this.enableRefreshButton) {
@@ -222,8 +227,16 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                     var mapView = grid.getMap().map.getView();
                     if (grid.getAddZoomButton()) {
                         if (colIdx === 1 && record.olObject.getGeometry()) {
+                            var padding = me.getZoomPadding();
+                            if (typeof padding === 'number') {
+                                padding = [padding, padding, padding, padding];
+                            }
+                            if (!padding) {
+                                padding = undefined;
+                            }
                             mapView.fit(record.olObject.getGeometry(), {
-                                duration: 300
+                                duration: 300,
+                                padding: padding
                             });
                         }
                     }
