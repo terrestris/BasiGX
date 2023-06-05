@@ -158,7 +158,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          */
         exampleFeature: null,
         /**
-         * The padding to use when zooming to features. Can be a single number or an array of numbers.
+         * The padding to use when zooming to features.
+         * Can be a single number or an array of numbers.
          */
         zoomPadding: 0
     },
