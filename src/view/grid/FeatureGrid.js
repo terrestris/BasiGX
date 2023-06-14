@@ -160,7 +160,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         /**
          * The padding to use when zooming to features. Can be a single number or an array of numbers.
          */
-        zoomPadding: 0
+        zoomPadding: 0,
+        /**
+         * The max zoom to use when zooming to features.
+        */
+        maxZoom: undefined
     },
 
     editLayer: undefined,
@@ -234,9 +238,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                             if (!padding) {
                                 padding = undefined;
                             }
+                            var maxZoom = me.getMaxZoom();
                             mapView.fit(record.olObject.getGeometry(), {
                                 duration: 300,
-                                padding: padding
+                                padding: padding,
+                                maxZoom: maxZoom
                             });
                         }
                     }
