@@ -153,15 +153,19 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          */
         saveReminderDelay: 10 * 60 * 1000,
         /**
-         * An example GeoJSON feature object that will be used to extract the
-         * schema in case no features are in the store.
+         * An example GeoJSON feature object that will be used to extract the schema
+         * in case no features are in the store.
          */
         exampleFeature: null,
         /**
          * The padding to use when zooming to features.
          * Can be a single number or an array of numbers.
          */
-        zoomPadding: 0
+        zoomPadding: 0,
+        /**
+         * The max zoom to use when zooming to features.
+        */
+        maxZoom: undefined
     },
 
     editLayer: undefined,
@@ -235,9 +239,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                             if (!padding) {
                                 padding = undefined;
                             }
+                            var maxZoom = me.getMaxZoom();
                             mapView.fit(record.olObject.getGeometry(), {
                                 duration: 300,
-                                padding: padding
+                                padding: padding,
+                                maxZoom: maxZoom
                             });
                         }
                     }
