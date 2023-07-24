@@ -30,102 +30,630 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-<span id='BasiGX-view-button-CSW'>/**
-</span> * CSW Button
+<span id='BasiGX-view-form-CSW'>/**
+</span> * CSW FormPanel
  *
- * Button used to instanciate the basigx-form-csw in order to add a
- * service to the map
+ * Used to find OGC services through CSW and add them to the map.
+ * Currently only WMS layers are supported
  *
- * @class BasiGX.view.button.CSW
+ * @class BasiGX.view.form.CSW
  */
-Ext.define(&#39;BasiGX.view.button.CSW&#39;, {
-    extend: &#39;BasiGX.view.button.Base&#39;,
-    xtype: &#39;basigx-button-csw&#39;,
+Ext.define(&#39;BasiGX.view.form.CSW&#39;, {
+    extend: &#39;Ext.form.Panel&#39;,
+    xtype: &#39;basigx-form-csw&#39;,
 
     requires: [
-        &#39;Ext.window.Window&#39;,
         &#39;Ext.app.ViewModel&#39;,
-        &#39;BasiGX.view.form.CSW&#39;,
-        &#39;BasiGX.util.Animate&#39;
+        &#39;Ext.button.Button&#39;,
+        &#39;Ext.form.FieldContainer&#39;,
+        &#39;Ext.form.FieldSet&#39;,
+        &#39;Ext.form.field.Text&#39;,
+        &#39;Ext.form.field.Hidden&#39;,
+        &#39;Ext.form.field.ComboBox&#39;,
+        &#39;Ext.layout.container.Anchor&#39;,
+        &#39;Ext.layout.container.HBox&#39;,
+        &#39;Ext.toolbar.Toolbar&#39;,
+
+        &#39;BasiGX.util.MsgBox&#39;,
+        &#39;BasiGX.view.form.AddWms&#39;
     ],
 
-<span id='BasiGX-view-button-CSW-property-viewModel'>    /**
-</span>     *
-     */
-    viewModel: {
-        data: {
-            tooltip: &#39;Katalogservice für externe Karteninhalte (CSW) abfragen&#39;,
-            text: &#39;CSW &lt;span style=&quot;font-size: 1.7em; &#39; +
-                &#39;font-weight: normal;&quot;&gt;⊕&lt;/span&gt;&#39;,
-            windowTitle: &#39;Web Catalogue Service (CSW) abfragen&#39;,
-            documentation: &#39;&lt;h2&gt;CSW abfragen&lt;/h2&gt;• Ein Klick auf den &#39; +
-                &#39;Button öffnet ein Fenster, in dem Sie mit Hilfe einer &#39; +
-                &#39;CSW-URL einen Kartendienst der Karte hinzufügen &#39; +
-                &#39;können.&#39;
+<span id='BasiGX-view-form-CSW-property-viewModel'>    viewModel: {
+</span>        data: {
+            queryParamsFieldSetTitle: &#39;CSW Basis URL&#39;,
+            availableLayesFieldSetTitle: &#39;Verfügbare CSW Dienste&#39;,
+            resetBtnText: &#39;Zurücksetzen&#39;,
+            cswSearchTextFieldLabel: &#39;Suchbegriff (optional)&#39;,
+            requestLayersBtnText: &#39;Verfügbare CSW-Dienste abfragen&#39;,
+            errorNoServiceFound: &#39;Es konnte kein passender Dienst gefunden &#39; +
+              &#39;werden&#39;,
+            errorRequestFailed: &#39;Die angegebene URL konnte nicht abgefragt &#39; +
+              &#39;werden&#39;,
+            errorCouldntParseResponse: &#39;Die erhaltene Antwort konnte nicht &#39; +
+              &#39;erfolgreich geparst werden&#39;,
+            msgRequestTimedOut: &#39;Die Anfrage wurde nicht schnell genug &#39; +
+              &#39;beantwortet und abgebrochen&#39;,
+            msgServiceException: &#39;Eine OGC ServiceException ist aufgetreten&#39;,
+            msgCorsMisconfiguration: &#39;HTTP access control (CORS) auf dem &#39; +
+              &#39;Zielserver vermutlich nicht korrekt konfiguriert&#39;,
+            msgUnauthorized: &#39;Der Client ist nicht gegenüber dem Zielserver &#39; +
+              &#39;authentifiziert&#39;,
+            msgForbidden: &#39;Der Client hat keinen Zugriff auf die angefragte &#39; +
+              &#39;Ressource&#39;,
+            msgFileNotFound: &#39;Die angefragte Ressource existiert nicht&#39;,
+            msgTooManyRequests: &#39;Der Client hat zu viele Anfragen gestellt&#39;,
+            msgServiceUnavailable: &#39;Der Server ist derzeit nicht verfügbar &#39; +
+              &#39;(zu viele Anfragen bzw. Wartungsmodus)&#39;,
+            msgGatewayTimeOut: &#39;Der Server fungierte als Gateway und das &#39; +
+              &#39;Originalziel hat zu langsam geantwortet&#39;,
+            msgClientError: &#39;Ein unspezifizierter Clientfehler ist aufgetreten&#39;,
+            msgServerError: &#39;Ein unspezifizierter Serverfehler ist aufgetreten&#39;,
+            documentation: &#39;&lt;h2&gt;CSW hinzufügen&lt;/h2&gt;• In diesem Dialog &#39; +
+              &#39;können Sie mit Hilfe einer CSW-URL &#39; +
+              &#39;einen Kartendienst der Karte hinzufügen.&#39;
         }
     },
 
-<span id='BasiGX-view-button-CSW-property-bind'>    /**
-</span>     *
-     */
-    bind: {
-        text: &#39;{text}&#39;
+<span id='BasiGX-view-form-CSW-property-padding'>    padding: 5,
+</span><span id='BasiGX-view-form-CSW-property-layout'>    layout: &#39;anchor&#39;,
+</span><span id='BasiGX-view-form-CSW-property-defaults'>    defaults: {
+</span>        anchor: &#39;100%&#39;
     },
 
-<span id='BasiGX-view-button-CSW-property-_win'>    /**
-</span>     * The window instance which will be created by this button.
+<span id='BasiGX-view-form-CSW-property-scrollable'>    scrollable: true,
+</span>
+
+    config: {
+
+<span id='BasiGX-view-form-CSW-cfg-cswBaseUrls'>        /**
+</span>         * With these CSW urls we fill the combobox. If this is empty (default),
+         * no combobox will be rendered but a plain textfield.
+         */
+        cswBaseUrls: [],
+
+<span id='BasiGX-view-form-CSW-cfg-defaultUrl'>        /**
+</span>         * Default url for the textfield or combobox.
+         */
+        defaultUrl: &#39;https://data.mundialis.de/geonetwork/srv/ger/csw?&#39;,
+
+<span id='BasiGX-view-form-CSW-cfg-additionalRequestParams'>        /**
+</span>         * Additional parameters that will be applied to the `Ext.Ajax.request`
+         */
+        additionalRequestParams: {
+
+<span id='BasiGX-view-form-CSW-property-useDefaultXhrHeader'>            /**
+</span>             * Whether we will send the `X-Requested-With` header when fetching
+             * the CSW records from the URL. The `X-Requested-With` header is
+             * usually added for XHR, but adding it should lead to a preflight
+             * request (see https://goo.gl/6JzdUI), which some servers fail.
+             *
+             * @type {Boolean}
+             */
+            useDefaultXhrHeader: false,
+
+<span id='BasiGX-view-form-CSW-property-disableCaching'>            /**
+</span>             * Whether the request against the CSW servers will contain the
+             * ExtJS cache buster (`_dc=123…`) or not. If set to `false`, the
+             * param will not be send, if set to `true`, we&#39;ll pass it along
+             * (ExtJS default behaviour).
+             *
+             * The name of this parameter is taken from the config option of
+             * `Ext.Ajax`, turning the boolean logic around would be even more
+             * confusing.
+             *
+             * Defaults to `true`, e.g. the cache buster will be send along in
+             * the GET-request.
+             *
+             * @type {Boolean}
+             */
+            disableCaching: true
+        },
+
+<span id='BasiGX-view-form-CSW-cfg-ajaxProxy'>        /**
+</span>         * Optional AJAX proxy URL, which will be added before the &#39;real&#39;
+         * target CSW URL, e.g. &#39;../my-proxy.action?baseUrl=&#39;
+         * @cfg {String}
+         */
+        ajaxProxy: null
+    },
+
+<span id='BasiGX-view-form-CSW-property-lastErrorMsgKey'>    /**
+</span>     * Keeps track of the viewModel key of the last error (if any).
      *
-     * @type {Ext.window.Window}
      * @private
      */
-    _win: null,
+    lastErrorMsgKey: null,
 
-<span id='BasiGX-view-button-CSW-property-config'>    /**
-</span>     *
-     */
-    config: {
-<span id='BasiGX-view-button-CSW-cfg-windowConfig'>        windowConfig: {
-</span>            // can be used by subclasses to apply/merge
-            // additional/other values for the window
-        }
-    },
-
-<span id='BasiGX-view-button-CSW-method-handler'>    handler: function() {
-</span>        if (!this._win) {
-            var windowConfig = {
-                name: &#39;csw-window&#39;,
-                title: this.getViewModel().get(&#39;windowTitle&#39;),
-                width: 500,
-                height: 400,
-                layout: &#39;fit&#39;,
-                constrain: true,
-                items: [{
-                    xtype: &#39;basigx-form-csw&#39;
-                }],
+<span id='BasiGX-view-form-CSW-property-items'>    items: [
+</span>        {
+            xtype: &#39;fieldset&#39;,
+            layout: &#39;anchor&#39;,
+            defaults: {
+                anchor: &#39;100%&#39;
+            },
+            bind: {
+                title: &#39;{queryParamsFieldSetTitle}&#39;
+            },
+            items: [{
+                xtype: &#39;textfield&#39;,
+                bind: {
+                    fieldLabel: &#39;{cswUrlTextFieldLabel}&#39;
+                },
+                name: &#39;cswUrl&#39;,
+                allowBlank: false,
+                value: null,
                 listeners: {
-                    destroy: this.onDestroy,
-                    scope: this
+                    change: function(textfield) {
+                        var view = textfield.up(&#39;basigx-form-csw&#39;);
+                        view.resetState();
+                    },
+                    beforerender: function(textfield) {
+                        var view = textfield.up(&#39;basigx-form-csw&#39;);
+                        var countUrls = view.cswBaseUrls.length;
+                        if (countUrls !== 0) {
+                            textfield.setHidden(true);
+                        }
+                    }
                 }
-            };
+            }, {
+                xtype: &#39;combobox&#39;,
+                bind: {
+                    fieldLabel: &#39;{cswUrlTextFieldLabel}&#39;
+                },
+                store: null,
+                name: &#39;cswUrlCombo&#39;,
+                allowBlank: false,
+                value: null,
+                listeners: {
+                    change: function(combobox) {
+                        var view = combobox.up(&#39;basigx-form-csw&#39;);
+                        view.resetState();
+                    },
+                    beforerender: function(combobox) {
+                        var view = combobox.up(&#39;basigx-form-csw&#39;);
+                        var countUrls = view.cswBaseUrls.length;
+                        if (countUrls === 0) {
+                            combobox.setHidden(true);
+                        } else {
+                            var urlCsw = view.cswBaseUrls;
+                            combobox.setStore(urlCsw);
+                        }
+                    }
+                }
+            }, {
+                xtype: &#39;textfield&#39;,
+                bind: {
+                    fieldLabel: &#39;{cswSearchTextFieldLabel}&#39;
+                },
+                name: &#39;searchtext&#39;,
+                allowBlank: false,
+                value: null,
+                listeners: {
+                    change: function(textfield) {
+                        var view = textfield.up(&#39;basigx-form-csw&#39;);
+                        view.resetState();
+                    },
+                    specialkey: function(textfield, evt) {
+                        // execute search on ENTER is hit inside the textfield
+                        if (evt.getKey() === evt.ENTER) {
+                            evt.preventDefault();
+                            var view = textfield.up(&#39;basigx-form-csw&#39;);
+                            view.resetState();
+                            view.requestGetRecords();
+                        }
+                    }
+                }
+            }]
+        },
+        {
+            xtype: &#39;fieldset&#39;,
+            name: &#39;fs-available-layers&#39;,
+            layout: &#39;anchor&#39;,
+            scrollable: &#39;y&#39;,
+            maxHeight: 200,
+            hidden: true,
+            padding: 5,
+            defaults: {
+                anchor: &#39;100%&#39;
+            },
+            bind: {
+                title: &#39;{availableLayesFieldSetTitle}&#39;
+            }
+        }
+    ],
 
-            var windowConfigToApply = this.getWindowConfig();
-            Ext.apply(windowConfig, windowConfigToApply);
+<span id='BasiGX-view-form-CSW-property-buttons'>    // Reset and Submit buttons
+</span>    buttons: [
+        {
+            name: &#39;resetFormBtn&#39;,
+            bind: {
+                text: &#39;{resetBtnText}&#39;
+            },
+            handler: function(btn) {
+                var view = btn.up(&#39;basigx-form-csw&#39;);
+                view.getForm().reset();
+                view.removeAddLayersComponents();
+                view.resetState();
+                var defaultValue = view.defaultUrl;
+                var combo = view.down(&#39;combobox[name=cswUrlCombo]&#39;);
+                combo.setValue(defaultValue);
+                var textfield = view.down(&#39;textfield[name=cswUrl]&#39;);
+                textfield.setValue(defaultValue);
+            }
+        },
+        &#39;-&gt;&#39;,
+        {
+            bind: {
+                text: &#39;{requestLayersBtnText}&#39;
+            },
+            name: &#39;requestLayersBtn&#39;,
+            handler: function(btn) {
+                var view = btn.up(&#39;basigx-form-csw&#39;);
+                view.resetState();
+                view.requestGetRecords();
+            }
+        }
+    ],
 
-            this._win = Ext.create(&#39;Ext.window.Window&#39;, windowConfig);
-            this._win.show();
+<span id='BasiGX-view-form-CSW-method-initComponent'>    /**
+</span>     * Initializes the form.
+     */
+    initComponent: function() {
+        var me = this;
+        me.callParent();
+        var defaultValue = me.defaultUrl;
+        var combo = me.down(&#39;combobox[name=cswUrlCombo]&#39;);
+        var textfield = me.down(&#39;textfield[name=cswUrl]&#39;);
+        combo.setValue(defaultValue);
+        textfield.setValue(defaultValue);
+    },
+
+<span id='BasiGX-view-form-CSW-method-resetState'>    /**
+</span>     * Resets our internal state tracking properties for tracking the tried
+     * versions and the last error message key we have determined.
+     *
+     * @private
+     */
+    resetState: function() {
+        var me = this;
+        me.lastErrorMsgKey = null;
+        var addWmsForm = me.down(&#39;basigx-form-addwms&#39;);
+        if (addWmsForm) {
+            addWmsForm.hide();
+        }
+        var buttonsContainer = me.down(&#39;[name=fs-available-layers]&#39;);
+        buttonsContainer.hide();
+    },
+
+<span id='BasiGX-view-form-CSW-method-responseStatusToErrorMsgKey'>    /**
+</span>     * Returns a key for a viewModel property for the passed HTTP status code or
+     * null if we don&#39;t consider the status code an error.
+     *
+     * @param {Number} status The HTTP status code of the last response.
+     * @return {String} An error message key to be looked up in the viewModel.
+     * @private
+     */
+    responseStatusToErrorMsgKey: function(status) {
+        status = parseInt(status, 10);
+        // handle very common ones specifically
+        if (status === 0) {
+            // Most likely CORS
+            // * either not enabled at all
+            // * or misconfigured
+            return &#39;msgCorsMisconfiguration&#39;;
+        } else if (status === 401) {
+            return &#39;msgUnauthorized&#39;;
+        } else if (status === 403) {
+            return &#39;msgForbidden&#39;;
+        } else if (status === 404) {
+            return &#39;msgFileNotFound&#39;;
+        } else if (status === 429) {
+            return &#39;msgTooManyRequests&#39;;
+        } else if (status === 503) {
+            return &#39;msgServiceUnavailable&#39;;
+        } else if (status === 504) {
+            return &#39;msgGatewayTimeOut&#39;;
+        } else if (status &gt;= 400 &amp;&amp; status &lt; 500) {
+            return &#39;msgClientError&#39;;
+        } else if (status &gt;= 500) {
+            return &#39;msgServerError&#39;;
+        }
+        return null;
+    },
+
+<span id='BasiGX-view-form-CSW-method-requestGetRecords'>    /**
+</span>     * Will be called with the `get layers` button. Issues a CSW `GetRecords`
+     * request, parses the response and will create layer entries for all
+     * WMS layers (more support for e.g. WFS to come).
+     */
+    requestGetRecords: function() {
+        var me = this;
+        var form = me.getForm();
+        var combo = me.down(&#39;combo[name=cswUrlCombo]&#39;);
+        var textfield = me.down(&#39;textfield[name=cswUrl]&#39;);
+        var searchtext = me.down(&#39;textfield[name=searchtext]&#39;).getValue();
+        if (combo.isVisible() &amp;&amp; !combo.isValid() ||
+            textfield.isVisible() &amp;&amp; !textfield.isValid()) {
+            return;
+        }
+        me.setLoading(true);
+        me.removeAddLayersComponents();
+        var values = form.getValues();
+        var url;
+
+        if (me.cswBaseUrls.length === 0) {
+            url = values.cswUrl;
         } else {
-            BasiGX.util.Animate.shake(this._win);
+            url = values.cswUrlCombo;
+        }
+
+        // add optional AJAX proxy URL
+        if (!Ext.isEmpty(me.ajaxProxy)) {
+            url = me.ajaxProxy + url;
+        }
+
+        var postBody =
+          &#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#39; +
+            &#39;&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;&#39; +
+            &#39; service=&quot;CSW&quot; version=&quot;2.0.2&quot; resultType=&quot;results&quot;&gt;&#39; +
+              &#39;&lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;&#39; +
+                &#39;&lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;&#39; +
+                &#39;&lt;csw:Constraint version=&quot;1.1.0&quot;&gt;&#39; +
+                  &#39;&lt;Filter xmlns=&quot;http://www.opengis.net/ogc&quot; &#39; +
+                  &#39;xmlns:gml=&quot;http://www.opengis.net/gml&quot;&gt;&#39; +
+                    &#39;&lt;PropertyIsLike wildCard=&quot;%&quot; singleChar=&quot;_&quot; &#39; +
+                    &#39;escapeChar=&quot;\\&quot;&gt;&#39; +
+                      &#39;&lt;PropertyName&gt;AnyText&lt;/PropertyName&gt;&#39; +
+                      &#39;&lt;Literal&gt;%&#39; + searchtext + &#39;%&lt;/Literal&gt;&#39; +
+                    &#39;&lt;/PropertyIsLike&gt;&#39; +
+                  &#39;&lt;/Filter&gt;&#39; +
+                &#39;&lt;/csw:Constraint&gt;&#39; +
+              &#39;&lt;/csw:Query&gt;&#39; +
+            &#39;&lt;/csw:GetRecords&gt;&#39;;
+
+        var options = {
+            url: url,
+            method: &#39;POST&#39;,
+            xmlData: postBody,
+            success: me.onGetRecordsSuccess,
+            failure: me.onGetRecordsFailure,
+            scope: me
+        };
+        Ext.apply(options, me.getAdditionalRequestParams());
+        Ext.Ajax.request(options);
+    },
+
+<span id='BasiGX-view-form-CSW-method-isServiceExceptionReport'>    /**
+</span>     * Returns true if the passed responseText is a service exception report.
+     *
+     * @param {String} responseText The responseText of a request which is
+     *     possibly a service exception report.
+     * @return {Boolean} Whether the response is a service exception report
+     *     document.
+     */
+    isServiceExceptionReport: function(responseText) {
+        if (!responseText) {
+            return false;
+        }
+        return (/&lt;ServiceExceptionReport/g).test(responseText);
+    },
+
+<span id='BasiGX-view-form-CSW-method-onGetRecordsSuccess'>    /**
+</span>     * Called if we could successfully query for the records of a CSW, this
+     * method will examine the answer and eventually set up a fieldset for all
+     * the layers that we have found in the server&#39;s answer.
+     *
+     * @param {XMLHttpRequest} response The response of the request.
+     */
+    onGetRecordsSuccess: function(response) {
+        var me = this;
+        me.lastErrorMsgKey = null;
+        // some servers answer with a ServiceExceptionReport. In that case, we
+        // have to manually call the failure callback.
+        if (me.isServiceExceptionReport(response.responseText)) {
+            me.onGetRecordsFailure(response);
+            return;
+        }
+
+        var viewModel = me.getViewModel();
+        try {
+            var p = new DOMParser();
+            var dom = p.parseFromString(response.responseText, &#39;text/xml&#39;);
+            var records = dom.getElementsByTagName(&#39;csw:Record&#39;);
+            var wmsLayers = [];
+            for (var i = 0; i &lt; records.length; i++) {
+                var record = records[i];
+                var uri = record.getElementsByTagName(&#39;dc:URI&#39;)[0];
+                if (uri) {
+                    var protocol = uri.getAttribute(&#39;protocol&#39;);
+                    if (protocol &amp;&amp; protocol.toUpperCase().indexOf(
+                        &#39;OGC:WMS&#39;) &gt; -1) {
+                        var url = uri.innerHTML;
+                        var name = uri.getAttribute(&#39;name&#39;);
+                        var title = record.getElementsByTagName(&#39;dc:title&#39;)[0];
+                        if (title) {
+                            title = title.innerHTML;
+                        }
+                        var description = record.getElementsByTagName(
+                            &#39;dc:description&#39;)[0];
+                        if (description) {
+                            description = description.innerHTML;
+                        }
+                        wmsLayers.push({
+                            url: url,
+                            name: name,
+                            title: title,
+                            description: description
+                        });
+                    }
+                }
+            }
+        } catch (ex) {
+            BasiGX.warn(viewModel.get(&#39;errorCouldntParseResponse&#39;));
+            me.setLoading(false);
+            return;
+        }
+        me.setLoading(false);
+        if (wmsLayers.length === 0) {
+            BasiGX.warn(me.getErrorMessage(&#39;errorNoServiceFound&#39;));
+        } else {
+            me.fillAvailableLayersFieldset(wmsLayers);
         }
     },
 
-<span id='BasiGX-view-button-CSW-method-onDestroy'>    /**
-</span>     * Do any necessary cleanup (e.g. remove listeners, destroy dependent
-     * objects …).
+<span id='BasiGX-view-form-CSW-method-onGetRecordsFailure'>    /**
+</span>     * Called if we could not successfully query the records of a CSW.
+     *
+     * @param {XMLHttpRequest} response The response of the request.
      */
-    onDestroy: function() {
-        if (this._win) {
-            this._win = null;
+    onGetRecordsFailure: function(response) {
+        var me = this;
+        var status = response.status;
+        var responseText = response.responseText;
+        var errDetails = [];
+        // Keep track of the last error, to eventually inform the user
+        me.lastErrorMsgKey = me.responseStatusToErrorMsgKey(status);
+
+        // we might simply have timed out
+        if (response.timedout) {
+            me.lastErrorMsgKey = &#39;msgRequestTimedOut&#39;;
         }
+
+        // If we still do not have a msg key and a OK status, check if it&#39;s a SE
+        if (me.lastErrorMsgKey === null &amp;&amp; status &gt;= 200 &amp;&amp; status &lt; 300) {
+            if (me.isServiceExceptionReport(responseText)) {
+                // overwrite the key from the status, this should be considered
+                // an error
+                me.lastErrorMsgKey = &#39;msgServiceException&#39;;
+                errDetails = me.exceptionDetailsFromReport(responseText);
+            }
+        }
+
+        me.setLoading(false);
+        BasiGX.warn(me.getErrorMessage(&#39;errorRequestFailed&#39;, errDetails));
+    },
+
+<span id='BasiGX-view-form-CSW-method-exceptionDetailsFromReport'>    /**
+</span>     * Returns an array of `&lt;ServiceException&gt;` text contents of the passed
+     * `&lt;ServiceExceptionReport&gt;` or an empty array.
+     *
+     * @param {String} exceptionReport An OGC ServiceExceptionReport as string.
+     * @return {Array&lt;String&gt;} exceptionReport An array of `&lt;ServiceException&gt;`
+     *     text contents of the passed `&lt;ServiceExceptionReport&gt;` or an empty
+     *     array.
+     */
+    exceptionDetailsFromReport: function(exceptionReport) {
+        var exceptionDetails = [];
+        if (DOMParser) {
+            var parser = new DOMParser();
+            try {
+                var xml = parser.parseFromString(exceptionReport, &#39;text/xml&#39;);
+                var exceptions = Ext.DomQuery.select(&#39;ServiceException&#39;, xml);
+                Ext.each(exceptions, function(exception) {
+                    exceptionDetails.push(exception.innerHTML);
+                });
+            } catch (e) {
+                // pass
+                Ext.Logger.warn(&#39;Failed to parse responseText as XML: &#39; + e);
+            }
+        }
+        return exceptionDetails;
+    },
+
+<span id='BasiGX-view-form-CSW-method-getErrorMessage'>    /**
+</span>     * Returns the error message to display to the user for the passed key,
+     * optionally adding the passed details.
+     *
+     * @param {String} errorKey The key to look up in the view model for the
+     *     error.
+     * @param {Array&lt;String&gt;} [errorDetails] Optional array of details to
+     *     display.
+     * @return {String} The error message to display.
+     * @private
+     */
+    getErrorMessage: function(errorKey, errorDetails) {
+        var me = this;
+        var viewModel = me.getViewModel();
+
+        var msg = viewModel.get(errorKey);
+        if (me.lastErrorMsgKey !== null) {
+            msg += &#39;&lt;br /&gt;&lt;br /&gt;&#39; + viewModel.get(me.lastErrorMsgKey);
+        }
+        if (errorDetails &amp;&amp; errorDetails.length &gt; 0) {
+            msg += &#39;&lt;ul&gt;&#39;;
+            Ext.each(errorDetails, function(errorDetail) {
+                msg += &#39;&lt;li&gt;&#39; + errorDetail + &#39;&lt;/li&gt;&#39;;
+            });
+            msg += &#39;&lt;/ul&gt;&#39;;
+        }
+        return msg;
+    },
+
+<span id='BasiGX-view-form-CSW-method-removeAddLayersComponents'>    /**
+</span>     * Remove the buttons for layers from previous requests.
+     */
+    removeAddLayersComponents: function() {
+        var me = this;
+        var buttonsContainer = me.down(&#39;[name=fs-available-layers]&#39;);
+        buttonsContainer.removeAll();
+    },
+
+<span id='BasiGX-view-form-CSW-method-fillAvailableLayersFieldset'>    /**
+</span>     * Updates the avaialable layers fieldset with matching entries.
+     *
+     * @param {Array} layers The layer objects for which the we shall fill
+     *     the fieldset.
+     */
+    fillAvailableLayersFieldset: function(layers) {
+        var me = this;
+        me.removeAddLayersComponents();
+        var fs = me.down(&#39;[name=fs-available-layers]&#39;);
+        fs.show();
+        var buttons = [];
+        Ext.each(layers, function(layer) {
+            buttons.push({
+                xtype: &#39;button&#39;,
+                text: layer.title || layer.name,
+                layer: layer,
+                autoEl: {
+                    &#39;tag&#39;: &#39;div&#39;,
+                    &#39;data-qtip&#39;: layer.description
+                },
+                handler: me.getWmsLayer
+            });
+        });
+        fs.add(buttons);
+    },
+
+<span id='BasiGX-view-form-CSW-method-getWmsLayer'>    /**
+</span>     * Handles the button click by setting up the basigx-form-addwms,
+     * adding the defaultUrl to it and automatically issue a GetCapabilities
+     * request so the user can select a WMS layer.
+     * TODO: support different OGC services here, not only WMS
+     *
+     * @param {Ext.button.Button} btn The button that has been pressed.
+     *   It contains the layer information to prepare setup of layers.
+     */
+    getWmsLayer: function(btn) {
+        var form = this.up(&#39;form&#39;);
+        var layer = btn.layer;
+        var addWmsForm = form.down(&#39;basigx-form-addwms&#39;);
+        if (!addWmsForm) {
+            addWmsForm = Ext.create(&#39;BasiGX.view.form.AddWms&#39;, {
+                defaultUrl: layer.url
+            });
+            form.add(addWmsForm);
+            var toolBar = addWmsForm.down(&#39;toolbar[dock=bottom]&#39;);
+            if (toolBar) {
+                toolBar.hide();
+            }
+        } else {
+            addWmsForm.setDefaultUrl(layer.url);
+            addWmsForm.down(&#39;textfield[name=url]&#39;).setValue(layer.url);
+
+        }
+        addWmsForm.show();
+        addWmsForm.requestGetCapabilities();
     }
 });
 </pre>
