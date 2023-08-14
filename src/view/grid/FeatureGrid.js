@@ -61,7 +61,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             addPolygonButton: 'Polygon hinzufügen',
             featuresWithModifiedGeometries: [],
             featuresWithRemovedGeometries: [],
-            newFeaturesAdded: false,
+            // Since a newly created item has no primary key,
+            // we will use the store id of the item instead.
+            featuresWithAddedGeometries: [],
             isEditing: false,
             showSaveReminder: false,
             saveReminderTask: undefined
@@ -510,9 +512,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     onAddFeature: function() {
         var me = this;
-        var vm = me.getViewModel();
         me.startEditingFeature();
-        vm.set('newFeaturesAdded', true);
     },
 
     /**
@@ -520,6 +520,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     setLayerStore: function() {
         var me = this;
+        var vm = me.getViewModel();
         var store = new GeoExt.data.store.Features({
             layer: this.editLayer,
             listeners: {
@@ -530,6 +531,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                         return;
                     }
                     me.startEditingFeature();
+                },
+                add: function(st, recs) {
+                    var addedFeatures = vm.get('featuresWithAddedGeometries');
+                    Ext.Array.include(addedFeatures, recs[0].getId());
+                    vm.set('featuresWithAddedGeometries', addedFeatures);
                 }
             }
         });
@@ -623,8 +629,9 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 dataIndex: attribute,
                 filter: me.enableFiltering
             };
-            var isIdField = attribute === me.layer.getProperties().idField;
-            if (me.enableEditing && !isIdField) {
+            var idField = me.layer.getProperties().idField;
+            var isIdField = attribute === idField;
+            if (me.enableEditing && idField && !isIdField) {
                 col.editor = 'textfield';
             }
             columns.push(col);
@@ -773,7 +780,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                 // only update if geometries were edited.
                 var shouldUpdate = me.didGeometryChange();
                 vm.set('featuresWithModifiedGeometries', []);
-                vm.set('newFeaturesAdded', false);
+                vm.set('featuresWithAddedGeometries', []);
                 vm.set('featuresWithRemovedGeometries', []);
                 me.finishEditing();
                 me.resetAllButtons();
@@ -886,17 +893,18 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
      */
     getAddedFeatures: function(store) {
         var me = this;
-        var layerProps = me.layer.getProperties();
-        var idField = layerProps.idField;
+        var vm = me.getViewModel();
         var newFeatures = [];
         store.each(function(rec) {
-            if (!Ext.isDefined(rec.get(idField))) {
+            var recordId = rec.getId();
+            var containsFeature = Ext.Array.contains(
+                vm.get('featuresWithAddedGeometries'), recordId);
+            if (containsFeature) {
                 var data = Ext.Object.merge({}, rec.getData());
                 delete data.id;
                 var feature = new ol.Feature(data);
                 newFeatures.push(feature);
             }
-
         });
         return newFeatures;
     },
@@ -910,7 +918,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var me = this;
         var vm = me.getViewModel();
         var wasModified = vm.get('featuresWithModifiedGeometries').length > 0;
-        var wasAdded = vm.get('newFeaturesAdded');
+        var wasAdded = vm.get('featuresWithAddedGeometries').length > 0;
         var wasRemoved = vm.get('featuresWithRemovedGeometries').length > 0;
         return wasModified || wasAdded || wasRemoved;
     },
@@ -1077,7 +1085,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
         var vm = me.getViewModel();
         vm.set('featuresWithModifiedGeometries', []);
         vm.set('featuresWithRemovedGeometries', []);
-        vm.set('newFeaturesAdded', false);
+        vm.set('featuresWithAddedGeometries', []);
         me.finishEditing();
         me.completeTableEditing();
         me.removeEditLayer();
@@ -1141,6 +1149,8 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
 
         if (me.enableEditing) {
             var vm = me.getViewModel();
+            var layerProps = me.layer.getProperties();
+            var idField = layerProps.idField;
             var map = BasiGX.util.Map.getMapComponent().map;
             var collection = this.editLayer.getSource().getFeaturesCollection();
             var containsPoint = Ext.Array.contains(this.geometryTypes, 'Point');
@@ -1169,7 +1179,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                     }
                 }
             };
-            if (!containsPoint && !containsMultiPoint) {
+            if ((!containsPoint && !containsMultiPoint) || !idField) {
                 pointTool.disabled = true;
             }
             if (containsMultiPoint) {
@@ -1191,7 +1201,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                     }
                 }
             };
-            if (!containsLine && !containsMultiLine) {
+            if ((!containsLine && !containsMultiLine) || !idField) {
                 lineTool.disabled = true;
             }
             if (containsMultiLine) {
@@ -1213,7 +1223,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                     }
                 }
             };
-            if (!containsPolygon && !containsMultiPolygon) {
+            if ((!containsPolygon && !containsMultiPolygon) || !idField) {
                 polygonTool.disabled = true;
             }
             if (containsMultiPolygon) {
@@ -1221,7 +1231,7 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             }
             editTools.tbar.push(polygonTool);
 
-            editTools.tbar.push({
+            var deleteTool = {
                 xtype: 'basigx-button-digitize-delete-object',
                 map: map,
                 collection: collection,
@@ -1233,8 +1243,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                         tooltip: vm.get('removeGeometryButton')
                     }
                 }
-            });
-            editTools.tbar.push({
+            };
+            if (!idField) {
+                deleteTool.disabled = true;
+            }
+            editTools.tbar.push(deleteTool);
+
+            var moveTool = {
                 xtype: 'basigx-button-digitize-move-object',
                 collection: collection,
                 map: map,
@@ -1252,8 +1267,13 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                         me.onChangeFeature(feature);
                     }
                 }
-            });
-            editTools.tbar.push({
+            };
+            if (!idField) {
+                moveTool.disabled = true;
+            }
+            editTools.tbar.push(moveTool);
+
+            var modifyTool = {
                 xtype: 'basigx-button-digitize-modify-object',
                 map: map,
                 collection: collection,
@@ -1271,7 +1291,12 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
                         me.onChangeFeature(feature);
                     }
                 }
-            });
+            };
+            if (!idField) {
+                modifyTool.disabled = true;
+            }
+            editTools.tbar.push(modifyTool);
+
             editTools.tbar.push(' ');
             editTools.tbar.push({
                 xtype: 'button',
