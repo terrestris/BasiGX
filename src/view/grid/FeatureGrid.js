@@ -125,6 +125,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          */
         enableFiltering: false,
         /**
+         * Configures the columns that should use numeric filtering.
+         * Only applicable if enableFiltering is true.
+         */
+        numericFilterColumns: [],
+        /**
          * Configures editing of the grid.
          */
         enableEditing: false,
@@ -633,6 +638,10 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             var isIdField = attribute === idField;
             if (me.enableEditing && idField && !isIdField) {
                 col.editor = 'textfield';
+            }
+            var isNumericColumn = Ext.Array.contains(me.getNumericFilterColumns(), attribute);
+            if (me.enableFiltering && isNumericColumn) {
+                col.filter = 'number';
             }
             columns.push(col);
         });
