@@ -90,6 +90,11 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
          */
         ignoredAttributes: ['id'],
         /**
+         * Names of columns that should be hidden but can be set visible via the
+         * column header in the UI.
+         */
+        hiddenColumns: [],
+        /**
          * If set, grid selection will be synchronous with the features in the
          * layer. Selecting/deselecting features in the grid will add/remove
          * features from the selection layer.
@@ -642,6 +647,10 @@ Ext.define('BasiGX.view.grid.FeatureGrid', {
             var isNumericColumn = Ext.Array.contains(me.getNumericFilterColumns(), attribute);
             if (me.enableFiltering && isNumericColumn) {
                 col.filter = 'number';
+            }
+            var isHiddenColumn = Ext.Array.contains(me.getHiddenColumns(), attribute);
+            if (isHiddenColumn) {
+                col.hidden = true;
             }
             columns.push(col);
         });
