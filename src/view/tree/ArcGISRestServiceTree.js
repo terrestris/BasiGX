@@ -110,59 +110,8 @@ Ext.define('BasiGX.view.tree.ArcGISRestServiceTree', {
         if (expandedNode.hasChildNodes()) {
             return;
         }
-        var serviceUrl = BasiGX.util.ArcGISRest.createMapServerUrl(
-            this.arcGISLayerConfig.url,
-            this.arcGISLayerConfig.service.name,
-            'json'
-        );
-        // TODO requesting service and populating store should
-        // be done by parent component. We should only fire an event
-        this.requestService(serviceUrl)
-            .then(
-                function(response) {
-                    return me.onRequestServiceSuccess(response, expandedNode);
-                },
-                this.onRequestServiceFailure.bind(this)
-            );
-    },
 
-    requestService: function(serviceUrl) {
-        var me = this;
-        return new Ext.Promise(function (resolve, reject) {
-            Ext.Ajax.request({
-                url: serviceUrl,
-                method: 'GET',
-                useDefaultXhrHeader: me.getUseDefaultXhrHeader(),
-                success: function (response) {
-                    var respJson = Ext.decode(response.responseText);
-                    resolve(respJson);
-                },
-                failure: function (response) {
-                    reject(response.status);
-                }
-            });
-        });
-    },
-
-    onRequestServiceSuccess: function(response, expandedNode) {
-        var layers = Ext.Array.map(response.layers, function(layer) {
-            return Ext.create('GeoExt.data.model.ArcGISRestServiceLayer',{
-                layerId: layer.id,
-                name: layer.name,
-                defaultVisibility: layer.defaultVisibility,
-                visibility: layer.defaultVisibility,
-                leaf: true
-            });
-        });
-        expandedNode.appendChild(layers);
-    },
-
-    onRequestServiceFailure: function (status) {
-        // TODO: read text from viewmodel or config
-        var errorText = 'Requesting sublayers failed.';
-        Ext.Logger.error(errorText);
-        Ext.Logger.error(status);
-        BasiGX.warn(errorText);
+        me.fireEvent('arcgisrestservicetreenodeexpand', expandedNode);
     }
 
 });

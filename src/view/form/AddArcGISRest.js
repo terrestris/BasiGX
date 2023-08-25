@@ -631,7 +631,20 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
             checkBoxes.push({
                 xtype: 'basigx-tree-arcgisrestservicetree',
                 arcGISLayerConfig: layer,
-                checked: candidatesInitiallyChecked
+                checked: candidatesInitiallyChecked,
+                listeners: {
+                    arcgisrestservicetreenodeexpand: function (expandedNode) {
+                        me.requestLayer(layer).then(
+                            function (response) {
+                                me.onRequestLayerSuccess(
+                                    response,
+                                    expandedNode
+                                );
+                            },
+                            me.onGetServicesFailure.bind(me)
+                        );
+                    }
+                }
             });
         });
         cbGroup.add(checkBoxes);
@@ -753,7 +766,8 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
      * Checks all checkboxes in the available layers fieldset.
      */
     checkAllLayers: function() {
-        var sel = '[name=fs-available-layers] basigx-tree-arcgisrestservicetree';
+        var sel = '[name=fs-available-layers]' +
+            ' basigx-tree-arcgisrestservicetree';
         var trees = this.query(sel);
         Ext.each(trees, function(tree) {
             tree.getStore().getAt(0).set('checked', true);
@@ -764,7 +778,8 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
      * Unchecks all checkboxes in the available layers fieldset.
      */
     uncheckAllLayers: function() {
-        var sel = '[name=fs-available-layers] basigx-tree-arcgisrestservicetree';
+        var sel = '[name=fs-available-layers]' +
+            ' basigx-tree-arcgisrestservicetree';
         var trees = this.query(sel);
         Ext.each(trees, function(tree) {
             tree.getStore().getAt(0).set('checked', false);
@@ -782,5 +797,53 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         var me = this;
         var vm = me.getViewModel();
         vm.set('availableLayersFieldSetMaxHeight', newValue);
+    },
+
+    /**
+     * Request layer to get information about sub layers within the layer
+     *
+     * @param {Object} config Layer ArcGIS layer config
+     */
+    requestLayer: function(config) {
+        var me = this;
+        var serviceUrl = BasiGX.util.ArcGISRest.createMapServerUrl(
+            config.url,
+            config.service.name,
+            'json'
+        );
+        return new Ext.Promise(function (resolve, reject) {
+            Ext.Ajax.request({
+                url: serviceUrl,
+                method: 'GET',
+                useDefaultXhrHeader: me.getUseDefaultXhrHeader(),
+                success: function (response) {
+                    var respJson = Ext.decode(response.responseText);
+                    resolve(respJson);
+                },
+                failure: function (response) {
+                    reject(response.status);
+                }
+            });
+        });
+    },
+
+    /**
+     * Request layer to get information about sub layers within the layer
+     *
+     * @param {Object} response  ArcGIS Rest response
+     * @param {GeoExt.data.model.ArcGISRestServiceLayer} expandedNode Layer ArcGIS layer config
+     */
+    onRequestLayerSuccess: function(response, expandedNode) {
+        console.log(expandedNode);
+        var layers = Ext.Array.map(response.layers, function(layer) {
+            return Ext.create('GeoExt.data.model.ArcGISRestServiceLayer',{
+                layerId: layer.id,
+                name: layer.name,
+                defaultVisibility: layer.defaultVisibility,
+                visibility: layer.defaultVisibility,
+                leaf: true
+            });
+        });
+        expandedNode.appendChild(layers);
     }
 });
