@@ -1,0 +1,14 @@
+{
+    "currentVersion": 10.41,
+    "folders": [],
+    "services": [
+        {
+            "name": "Copernicus/HighResolutionLayers",
+            "type": "MapServer"
+        },
+        {
+            "name": "Copernicus/HotSpotMonitoring",
+            "type": "MapServer"
+        }
+    ]
+}

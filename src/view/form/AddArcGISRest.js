@@ -388,7 +388,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
                 this.fillAvailableLayersFieldset(mergedConfigs);
                 this.updateControlToolbarState();
                 this.setLoading(false);
-            }.bind(this));
+                            }.bind(this));
     },
 
     /**
@@ -423,7 +423,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
      */
     loadLayersOfFeatureServers: function(featureServers) {
         var me = this;
-        var mappedPromises = Ext.Array.map(featureServers, function(server) {
+                var mappedPromises = Ext.Array.map(featureServers, function(server) {
             return me.requestFeatureServer.call(me, server)
                 .then(function(res) {
                     var config = me.getFeatureServerConfigs(
@@ -834,7 +834,6 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
      * @param {GeoExt.data.model.ArcGISRestServiceLayer} expandedNode Layer ArcGIS layer config
      */
     onRequestLayerSuccess: function(response, expandedNode) {
-        console.log(expandedNode);
         var layers = Ext.Array.map(response.layers, function(layer) {
             return Ext.create('GeoExt.data.model.ArcGISRestServiceLayer',{
                 layerId: layer.id,
