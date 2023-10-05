@@ -85,7 +85,29 @@ Ext.define('BasiGX.util.ArcGISRest', {
             }
 
             return url;
+        },
 
+        createMapServerUrl: function(serviceUrl, serverName, format) {
+            // TODO refactor with createFeatureServerUrl if code works
+            if (!BasiGX.util.ArcGISRest.isArcGISRestUrl(serviceUrl)) {
+                return;
+            }
+            var urlObj = new URL(serviceUrl);
+            var parts = urlObj.pathname.split('/');
+            if (parts[parts.length - 1] === '') {
+                parts.pop();
+            }
+            parts.pop();
+            parts.push(serverName);
+            parts.push('MapServer');
+            var path = parts.join('/');
+
+            var url = urlObj.origin + path;
+            if (format) {
+                url = BasiGX.util.Url.setQueryParam(url, 'f', format);
+            }
+
+            return url;
         },
 
         /**
