@@ -463,6 +463,11 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
      */
     getFeatureServerConfigs: function(response, layerConfig) {
         var res = JSON.parse(response.responseText);
+
+        if (!res.layers) {
+            return [];
+        }
+
         var configs = Ext.Array.map(res.layers, function(layer) {
             var config = Ext.clone(layerConfig);
             config.url = response.request.url;
