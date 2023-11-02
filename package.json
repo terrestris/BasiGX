@@ -62,12 +62,12 @@
         "url": "https://github.com/terrestris/BasiGX.git"
     },
     "peerDependencies": {
-        "@geoext/geoext": ">=5",
-        "ol": ">=7"
+        "@geoext/geoext": ">=6",
+        "ol": ">=8"
     },
     "devDependencies": {
-        "@geoext/geoext": "5.0.0",
-        "ol": "^7.5.1",
+        "@geoext/geoext": "6.0.0",
+        "ol": "^8.1.0",
         "copyfiles": "2.4.1",
         "coveralls": "3.1.1",
         "eslint": "8.52.0",
