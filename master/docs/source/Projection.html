@@ -15,7 +15,7 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">/* Copyright (c) 2016-present terrestris GmbH &amp; Co. KG
+  <pre class="prettyprint lang-js">/* Copyright (c) 2018-present terrestris GmbH &amp; Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,51 +30,82 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-<span id='BasiGX-model-Projection'>/**
-</span> * Projection model for use with the Projections Store
- *
- * @class BasiGX.model.Projection
+<span id='BasiGX-util-Projection'>/**
+</span> * @class BasiGX.util.Projection
  */
-Ext.define(&#39;BasiGX.model.Projection&#39;, {
-    extend: &#39;Ext.data.Model&#39;,
-<span id='BasiGX-model-Projection-property-idProperty'>    idProperty: &#39;code&#39;,
-</span><span id='BasiGX-model-Projection-property-fields'>    fields: [{
-</span>        name: &#39;code&#39;,
-        type: &#39;int&#39;
-    }, {
-        name: &#39;accuracy&#39;,
-        type: &#39;string&#39;
-    }, {
-        name: &#39;area&#39;,
-        type: &#39;string&#39;
-    }, {
-        name: &#39;authority&#39;,
-        type: &#39;string&#39;
-    }, {
-        name: &#39;bbox&#39;,
-        type: &#39;auto&#39;
-    }, {
-        name: &#39;default_trans&#39;,
-        type: &#39;number&#39;
-    }, {
-        name: &#39;kind&#39;,
-        type: &#39;string&#39;
-    }, {
-        name: &#39;name&#39;,
-        type: &#39;string&#39;
-    }, {
-        name: &#39;proj4&#39;,
-        type: &#39;string&#39;
-    }, {
-        name: &#39;trans&#39;,
-        type: &#39;auto&#39;
-    }, {
-        name: &#39;unit&#39;,
-        type: &#39;string&#39;
-    }, {
-        name: &#39;wkt&#39;,
-        type: &#39;string&#39;
-    }]
+Ext.define(&#39;BasiGX.util.Projection&#39;, {
+    requires: [
+        &#39;BasiGX.store.Projections&#39;
+    ],
+
+    statics: {
+
+<span id='BasiGX-util-Projection-static-method-fetchProj4jCrsDefinitions'>        /**
+</span>         * Fetch EPSG code definitions from https://epsg.io for given array
+         * of EPSG codes
+         *
+         * @param {String[]} epsgCodeArray An array of EPSG code string,
+         * e.g. [&#39;EPSG:4326&#39;]
+         * @return {Ext.Promise} An ExtJS promise resolving if all EPSG
+         * information has successfully been fetched from https://epsg.io
+         */
+        fetchProj4jCrsDefinitions: function (epsgCodeArray) {
+            if (!Ext.isArray(epsgCodeArray)) {
+                return Ext.Promise.reject(&#39;No valid array of EPSG codes &#39; +
+                    &#39; provided.&#39;);
+            }
+            var epsgIoBaseUrl = &#39;https://epsg.io/?q={0}&amp;format=json&#39;;
+            var projectionsStore = BasiGX.store.Projections;
+            var epsgPromises = Ext.Array.map(
+                Ext.Array.unique(epsgCodeArray), function (epsgCodeStr) {
+                    var epsgCode = epsgCodeStr.toUpperCase().replace(&#39;EPSG:&#39;, &#39;&#39;);
+                    var existingDef = projectionsStore.getById(epsgCode);
+
+                    if (existingDef) {
+                        return Ext.Promise.resolve(existingDef.getData());
+                    }
+
+                    return new Ext.Promise(function (resolve, reject) {
+                        var epsgUrl = Ext.String.format(epsgIoBaseUrl, epsgCode);
+                        Ext.Ajax.request({
+                            url: epsgUrl,
+                            useDefaultXhrHeader: false,
+                            success: function (response) {
+                                if (response &amp;&amp; response.responseText &amp;&amp;
+                                response.status === 200) {
+                                    var resultObj = Ext.decode(response.responseText);
+                                    projectionsStore.add(Ext.apply({}, resultObj.results[0]));
+                                    resolve(resultObj.results[0]);
+                                } else {
+                                    reject(response.status);
+                                }
+                            },
+                            failure: function (response) {
+                                reject(response.status);
+                            }
+                        });
+                    });
+                });
+            return Ext.Promise.all(epsgPromises);
+        },
+
+<span id='BasiGX-util-Projection-static-method-initProj4Definitions'>        /**
+</span>         * Register crs definitions
+         * @param {Object[]} proj4jObjects An array of objects returned by
+         * https://epsg.io which includes information on projection, in
+         * particular the name, the unit and the proj4 definition
+         */
+        initProj4Definitions: function(proj4jObjects) {
+            Ext.each(proj4jObjects, function(projectionDefinition) {
+                var code = projectionDefinition.code;
+                var proj4Def = projectionDefinition.proj4;
+                // register to PRO4J
+                var newProjCode = &#39;EPSG:&#39; + code;
+                proj4.defs(newProjCode, proj4Def);
+            });
+        }
+    }
+
 });
 </pre>
 </body>

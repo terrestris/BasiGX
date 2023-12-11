@@ -30,726 +30,163 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-<span id='BasiGX-view-form-AddArcGISRest'>/**
-</span> * AddArcGISRest FormPanel
+<span id='BasiGX-view-button-AddArcGISRest'>/**
+</span> * AddArcGISRest Button
  *
- * Used to add an ArcGIS REST layer to the map
+ * Button used to instanciate the basigx-form-addarcgisrest in order to add a
+ * ArcGIS REST layer to the map
  *
- * @class BasiGX.view.form.AddArcGISRest
+ * @class BasiGX.view.button.AddArcGISRest
  */
-Ext.define(&#39;BasiGX.view.form.AddArcGISRest&#39;, {
-    extend: &#39;Ext.form.Panel&#39;,
-    xtype: &#39;basigx-form-addarcgisrest&#39;,
+Ext.define(&#39;BasiGX.view.button.AddArcGISRest&#39;, {
+    extend: &#39;BasiGX.view.button.Base&#39;,
+    xtype: &#39;basigx-button-addarcgisrest&#39;,
 
     requires: [
-        &#39;Ext.button.Button&#39;,
-        &#39;Ext.form.FieldSet&#39;,
-        &#39;Ext.form.field.ComboBox&#39;,
-        &#39;Ext.form.CheckboxGroup&#39;,
-        &#39;Ext.Promise&#39;,
-        &#39;BasiGX.util.Map&#39;,
-        &#39;BasiGX.util.MsgBox&#39;,
-        &#39;BasiGX.util.Url&#39;,
-        &#39;BasiGX.util.ArcGISRest&#39;
+        &#39;Ext.window.Window&#39;,
+        &#39;Ext.app.ViewModel&#39;,
+        &#39;BasiGX.view.form.AddArcGISRest&#39;,
+        &#39;BasiGX.util.Animate&#39;
     ],
 
-<span id='BasiGX-view-form-AddArcGISRest-cfg-viewModel'>    viewModel: {
-</span>        data: {
-            queryParamsFieldSetTitle: &#39;Anfrageparameter&#39;,
-            arcGISUrlTextFieldLabel: &#39;ArcGIS Service URL&#39;,
-            availableLayersFieldSetTitle: &#39;Verfügbare Layer&#39;,
-            resetBtnText: &#39;Zurücksetzen&#39;,
-            requestLayersBtnText: &#39;Verfügbare Layer abfragen&#39;,
-            checkAllLayersBtnText: &#39;Alle auswählen&#39;,
-            uncheckAllLayersBtnText: &#39;Nichts auswählen&#39;,
-            addCheckedLayersBtnText: &#39;Ausgewählte Layer hinzufügen&#39;,
-            errorRequestFailed: &#39;Die angegebene URL konnte nicht abgefragt &#39; +
-                    &#39;werden&#39;,
-            msgRequestTimedOut: &#39;Die Anfrage wurde nicht schnell genug &#39; +
-                    &#39;beantwortet und abgebrochen&#39;,
-            msgCorsMisconfiguration: &#39;HTTP access control (CORS) auf dem &#39; +
-                    &#39;Zielserver vermutlich nicht korrekt konfiguriert&#39;,
-            msgUnauthorized: &#39;Der Client ist nicht gegenüber dem Zielserver &#39; +
-                    &#39;authentifiziert&#39;,
-            msgForbidden: &#39;Der Client hat keinen Zugriff auf die angefragte &#39; +
-                    &#39;Ressource&#39;,
-            msgFileNotFound: &#39;Die angefragte Ressource existiert nicht&#39;,
-            msgTooManyRequests: &#39;Der Client hat zu viele Anfragen gestellt&#39;,
-            msgServiceUnavailable: &#39;Der Server ist derzeit nicht verfügbar &#39; +
-                    &#39;(zu viele Anfragen bzw. Wartungsmodus)&#39;,
-            msgGatewayTimeOut: &#39;Der Server fungierte als Gateway und das &#39; +
-                    &#39;Originalziel hat zu langsam geantwortet&#39;,
-            msgClientError: &#39;Ein unspezifizierter Clientfehler ist aufgetreten&#39;,
-            msgServerError: &#39;Ein unspezifizierter Serverfehler ist aufgetreten&#39;,
-            msgInvalidUrl: &#39;Die angegebene URL ist keine valide ArcGISRest URL&#39;,
-            documentation: &#39;&lt;h2&gt;ArcGISRest Layer hinzufügen&lt;/h2&gt;• In &#39; +
-                &#39;diesem Dialog können Sie mit Hilfe einer ArcGISRest-URL &#39; +
-                &#39;einen beliebigen Kartendienst der Karte hinzufügen.&#39;
+<span id='BasiGX-view-button-AddArcGISRest-property-viewModel'>    /**
+</span>     *
+     */
+    viewModel: {
+        data: {
+            tooltip: &#39;ArcGIS REST Layer hinzufügen&#39;,
+            text: &#39;ArcGIS REST &lt;span style=&quot;font-size: 1.7em; &#39; +
+                &#39;font-weight: normal;&quot;&gt;⊕&lt;/span&gt;&#39;,
+            windowTitle: &#39;ArcGIS REST Layer hinzufügen&#39;,
+            documentation: &#39;&lt;h2&gt;ArcGIS REST Layer hinzufügen&lt;/h2&gt;• Ein Klick&#39; +
+                &#39;auf den Button öffnet ein Fenster, in dem Sie mit Hilfe &#39; +
+                &#39;einer ArcGIS REST-URL einen beliebigen Kartendienst der &#39; +
+                &#39;Karte hinzufügen können.&#39;
         }
     },
 
+<span id='BasiGX-view-button-AddArcGISRest-property-bind'>    /**
+</span>     *
+     */
+    bind: {
+        text: &#39;{text}&#39;
+    },
+
+<span id='BasiGX-view-button-AddArcGISRest-property-liveDemoConfig'>    /**
+</span>     * A config object to show this tool in action (live demo) when using the
+     * context sensitive help
+     */
+    liveDemoConfig: [
+        {
+            moveMouseTo: {
+                component: &#39;basigx-button-addarcgisrest&#39;,
+                moveDuration: 2000
+            }
+        },
+        {
+            clickOnButton: &#39;basigx-button-addarcgisrest&#39;
+        },
+        {
+            moveMouseTo: {
+                component: &#39;window[name=add-arcgisrest-window] &#39; +
+                    &#39;textfield[name=url]&#39;,
+                moveDuration: 2000
+            }
+        },
+        {
+            enterText: {
+                component: &#39;window[name=add-arcgisrest-window] &#39; +
+                    &#39;textfield[name=url]&#39;,
+                text: &#39;https://gis.epa.ie/arcgis/rest/services&#39;,
+                waitAfter: 3500
+            }
+        },
+        {
+            moveMouseTo:
+                &#39;window[name=add-arcgisrest-window] &#39; +
+                &#39;button[name=requestLayersBtn]&#39;
+        },
+        {
+            clickOnButton: {
+                component:
+                    &#39;window[name=add-arcgisrest-window] &#39; +
+                    &#39;button[name=requestLayersBtn]&#39;,
+                waitAfter: 3000
+            }
+        },
+        {
+            scrollTo: {
+                component: &#39;window[name=add-arcgisrest-window] form&#39;,
+                target: {
+                    x: 0,
+                    y: 999,
+                    animate: true
+                }
+            }
+        },
+        {
+            moveMouseTo:
+                &#39;window[name=add-arcgisrest-window] &#39; +
+                &#39;button[name=add-checked-layers]&#39;
+        },
+        {
+            destroy: &#39;window[name=add-arcgisrest-window]&#39;
+        }
+    ],
+
+<span id='BasiGX-view-button-AddArcGISRest-property-_win'>    /**
+</span>     * The window instance which will be created by this button.
+     *
+     * @type {Ext.window.Window}
+     * @private
+     */
+    _win: null,
+
+<span id='BasiGX-view-button-AddArcGISRest-property-config'>    /**
+</span>     *
+     */
     config: {
-<span id='BasiGX-view-form-AddArcGISRest-cfg-candidatesInitiallyChecked'>        /**
-</span>         * Whether layers shall start `checked` or `unchecked` in the available
-         * layers fieldset.
-         */
-        candidatesInitiallyChecked: false,
-
-<span id='BasiGX-view-form-AddArcGISRest-cfg-hasCheckAllBtn'>        /**
-</span>         * Whether to add a `Check all layers` button to the toolbar to interact
-         * with the layers of a ArcGIS Rest response.
-         */
-        hasCheckAllBtn: false,
-
-<span id='BasiGX-view-form-AddArcGISRest-cfg-hasUncheckAllBtn'>        /**
-</span>         * Whether to add a `Uncheck all layers` button to the toolbar to
-         * interact with the layers of a ArcGIS Rest response.
-         */
-        hasUncheckAllBtn: false,
-
-<span id='BasiGX-view-form-AddArcGISRest-cfg-arcGISBaseUrls'>        /**
-</span>         * With these ArcGIS urls we fill the combobox. If this is
-         * empty (default), no combobox will be rendered but a plain textfield.
-         */
-        arcGISBaseUrls: [],
-
-<span id='BasiGX-view-form-AddArcGISRest-cfg-proxyUrl'>        /**
-</span>         * Defines a URL which will be appended to all service requests.
-         * Especially useful when dealing with CORS problems.
-         */
-        proxyUrl: null,
-
-<span id='BasiGX-view-form-AddArcGISRest-cfg-defaultUrl'>        /**
-</span>         * Default url for the textfield or combobox.
-         */
-        defaultUrl: &#39;https://gis.epa.ie/arcgis/rest/services&#39;,
-
-<span id='BasiGX-view-form-AddArcGISRest-property-useDefaultXhrHeader'>        /**
-</span>         * Whether we will send the `X-Requested-With` header when fetching the
-         * document from the URL. The `X-Requested-With` header is
-         * usually added for XHR, but adding it should lead to a preflight
-         * request (see https://goo.gl/6JzdUI), which some servers fail.
-         *
-         * @type {Boolean}
-         */
-        useDefaultXhrHeader: false
+<span id='BasiGX-view-button-AddArcGISRest-cfg-windowConfig'>        windowConfig: {
+</span>            // can be used by subclasses to apply/merge
+            // additional/other values for the window
+        }
     },
 
-<span id='BasiGX-view-form-AddArcGISRest-property-lastErrorMsgKey'>    /**
-</span>     * Keeps track of the viewModel key of the last error (if any).
-     *
-     * @private
-     */
-    lastErrorMsgKey: null,
-
-<span id='BasiGX-view-form-AddArcGISRest-cfg-defaultButton'>    defaultButton: &#39;requestLayersBtn&#39;,
-</span>
-<span id='BasiGX-view-form-AddArcGISRest-property-items'>    items: [
-</span>        {
-            xtype: &#39;fieldset&#39;,
-            layout: &#39;anchor&#39;,
-            defaults: {
-                anchor: &#39;100%&#39;
-            },
-            bind: {
-                title: &#39;{queryParamsFieldSetTitle}&#39;
-            },
-            items: [{
-                xtype: &#39;textfield&#39;,
-                bind: {
-                    fieldLabel: &#39;{arcGISUrlTextFieldLabel}&#39;
-                },
-                name: &#39;url&#39;,
-                allowBlank: false,
-                value: null,
+<span id='BasiGX-view-button-AddArcGISRest-method-handler'>    handler: function() {
+</span>        if (!this._win) {
+            var windowConfig = {
+                name: &#39;add-arcgisrest-window&#39;,
+                title: this.getViewModel().get(&#39;windowTitle&#39;),
+                width: 500,
+                height: 400,
+                layout: &#39;fit&#39;,
+                constrain: true,
+                items: [{
+                    xtype: &#39;basigx-form-addarcgisrest&#39;
+                }],
                 listeners: {
-                    change: function(textfield) {
-                        var view = textfield.up(&#39;basigx-form-addarcgisrest&#39;);
-                        view.resetState();
-                    },
-                    beforerender: function(textfield) {
-                        var view = textfield.up(&#39;basigx-form-addarcgisrest&#39;);
-                        var countUrls = view.arcGISBaseUrls.length;
-                        if (countUrls !== 0) {
-                            textfield.setHidden(true);
-                        }
-                    }
+                    destroy: this.onDestroy,
+                    scope: this
                 }
-            }, {
-                xtype: &#39;combobox&#39;,
-                bind: {
-                    fieldLabel: &#39;{arcGISUrlTextFieldLabel}&#39;
-                },
-                store: null,
-                name: &#39;urlCombo&#39;,
-                allowBlank: false,
-                value: null,
-                listeners: {
-                    change: function(combobox) {
-                        var view = combobox.up(&#39;basigx-form-addarcgisrest&#39;);
-                        view.resetState();
-                    },
-                    beforerender: function(combobox) {
-                        var view = combobox.up(&#39;basigx-form-addarcgisrest&#39;);
-                        var countUrls = view.arcGISBaseUrls.length;
-                        if (countUrls === 0) {
-                            combobox.setHidden(true);
-                        } else {
-                            var urls = view.arcGISBaseUrls;
-                            combobox.setStore(urls);
-                        }
-                    }
-                }
-            }]
-        },
-        {
-            xtype: &#39;fieldset&#39;,
-            name: &#39;fs-available-layers&#39;,
-            layout: &#39;anchor&#39;,
-            scrollable: &#39;y&#39;,
-            maxHeight: 200,
-            defaults: {
-                anchor: &#39;100%&#39;
-            },
-            bind: {
-                title: &#39;{availableLayersFieldSetTitle}&#39;
-            },
-            items: {
-                xtype: &#39;checkboxgroup&#39;,
-                listeners: {
-                    change: {
-                        fn: function(cbGroup) {
-                            var form = cbGroup.up(&#39;basigx-form-addarcgisrest&#39;);
-                            form.updateControlToolbarState();
-                        },
-                        buffer: 50
-                    }
-                },
-                columns: 2,
-                vertical: true
-            }
-        }
-    ],
-
-<span id='BasiGX-view-form-AddArcGISRest-cfg-buttons'>    // Reset and Submit buttons
-</span>    buttons: [
-        {
-            name: &#39;resetFormBtn&#39;,
-            bind: {
-                text: &#39;{resetBtnText}&#39;
-            },
-            handler: function(btn) {
-                var view = btn.up(&#39;basigx-form-addarcgisrest&#39;);
-                view.getForm().reset();
-                view.removeAddLayersComponents();
-                view.resetState();
-                var defaultValue = view.defaultUrl;
-                var combo = view.down(&#39;combobox[name=urlCombo]&#39;);
-                combo.setValue(defaultValue);
-                var textfield = view.down(&#39;textfield[name=url]&#39;);
-                textfield.setValue(defaultValue);
-            }
-        },
-        &#39;-&gt;&#39;,
-        {
-            bind: {
-                text: &#39;{requestLayersBtnText}&#39;
-            },
-            name: &#39;requestLayersBtn&#39;,
-            reference: &#39;requestLayersBtn&#39;,
-            formBind: true, // only enabled once the form is valid
-            disabled: true,
-            handler: function(btn) {
-                var view = btn.up(&#39;basigx-form-addarcgisrest&#39;);
-                view.resetState();
-                view.requestLayers()
-                    .then(
-                        view.onGetServicesSuccess.bind(view),
-                        view.onGetServicesFailure.bind(view)
-                    );
-            }
-        }
-    ],
-
-<span id='BasiGX-view-form-AddArcGISRest-method-initComponent'>    /**
-</span>     * Initializes the form and sets up the parser instance.
-     */
-    initComponent: function() {
-        var me = this;
-        me.callParent();
-        var defaultValue = me.defaultUrl;
-        var combo = me.down(&#39;combobox[name=urlCombo]&#39;);
-        var textfield = me.down(&#39;textfield[name=url]&#39;);
-        combo.setValue(defaultValue);
-        textfield.setValue(defaultValue);
-    },
-
-<span id='BasiGX-view-form-AddArcGISRest-method-resetState'>    /**
-</span>     * Resets our internal state tracking properties for tracking the tried
-     * versions and the last error message key we have determined.
-     *
-     * @private
-     */
-    resetState: function() {
-        var me = this;
-        me.lastErrorMsgKey = null;
-    },
-
-<span id='BasiGX-view-form-AddArcGISRest-method-requestLayers'>    /**
-</span>     * Will be called with the `get layers` button. Issues an ArcGIS Rest folder
-     * request and sets up handlers for reacting on the response.
-     *
-     * @return {Ext.Promise} The resolved request.
-     */
-    requestLayers: function() {
-        var me = this;
-        var form = me.getForm();
-        if (!form.isValid()) {
-            return;
-        }
-        me.setLoading(true);
-        me.uncheckAllLayers();
-        me.removeAddLayersComponents();
-        var values = form.getValues();
-        var url = &#39;&#39;;
-        var originalUrl = &#39;&#39;;
-
-        if (me.getProxyUrl()) {
-            url += me.getProxyUrl();
-        }
-
-        if (me.arcGISBaseUrls.length === 0) {
-            originalUrl = values.url;
-        } else {
-            originalUrl = values.urlCombo;
-        }
-
-        if (!BasiGX.util.ArcGISRest.isArcGISRestUrl(originalUrl)) {
-            me.setLoading(false);
-            BasiGX.warn(me.getErrorMessage(&#39;msgInvalidUrl&#39;), []);
-            return;
-        }
-
-        url += originalUrl;
-
-        url = BasiGX.util.Url.setQueryParam(url, &#39;f&#39;, &#39;json&#39;);
-
-        return Ext.Ajax.request({
-            url: url,
-            method: &#39;POST&#39;,
-            useDefaultXhrHeader: me.getUseDefaultXhrHeader()
-        });
-    },
-
-<span id='BasiGX-view-form-AddArcGISRest-method-onGetServicesSuccess'>    /**
-</span>     * Called if we could successfully query the services of an
-     * ArcGISRest folder. This method will examine the answer
-     * and eventually set up a fieldset for all the services that
-     * we have found in the server&#39;s answer.
-     *
-     * @param {XMLHttpRequest} response The response of the request.
-     */
-    onGetServicesSuccess: function(response) {
-        try {
-            var responseJson = JSON.parse(response.responseText);
-            var hasServicesKey = Object.prototype.hasOwnProperty.call(
-                responseJson, &#39;services&#39;
-            );
-            if (!hasServicesKey) {
-                throw new Error(&#39;Response has no key &quot;services&quot;&#39;);
-            }
-        } catch (e) {
-            Ext.log.warn(&#39;Could not get services&#39;, e);
-            this.setLoading(false);
-            BasiGX.warn(this.getErrorMessage(&#39;msgServerError&#39;, []));
-            return;
-        }
-        var services = responseJson.services;
-
-        var layerConfigs = Ext.Array.map(services, function(service) {
-            return {
-                service: service,
-                url: response.request.url
             };
-        });
-        var featureServers = Ext.Array.filter(
-            layerConfigs, function(layerConfig) {
-                return layerConfig.service.type === &#39;FeatureServer&#39;;
-            }
-        );
-        this.loadLayersOfFeatureServers(featureServers)
-            .then(function(featureServerConfigs) {
-                layerConfigs = Ext.Array.filter(
-                    layerConfigs, function(layerConfig) {
-                        return layerConfig.service.type !== &#39;FeatureServer&#39;;
-                    }
-                );
-                layerConfigs = Ext.Array.merge(
-                    layerConfigs, featureServerConfigs);
-                this.fillAvailableLayersFieldset(layerConfigs);
-                this.updateControlToolbarState();
-                this.setLoading(false);
-            }.bind(this));
-    },
 
-<span id='BasiGX-view-form-AddArcGISRest-method-onGetServicesFailure'>    /**
-</span>     * Called if we could not successfully query for the services of an
-     * ArcGISRest folder.
-     *
-     * @param {XMLHttpRequest} response The response of the request.
-     */
-    onGetServicesFailure: function(response) {
-        var me = this;
-        var status = response.status;
-        var errDetails = [];
-        // Keep track of the last error, to eventually inform the user
-        me.lastErrorMsgKey = me.responseStatusToErrorMsgKey(status);
+            var windowConfigToApply = this.getWindowConfig();
+            Ext.apply(windowConfig, windowConfigToApply);
 
-        // we might simply have timed out
-        if (response.timedout) {
-            me.lastErrorMsgKey = &#39;msgRequestTimedOut&#39;;
-        }
-
-        me.setLoading(false);
-        BasiGX.warn(me.getErrorMessage(&#39;errorRequestFailed&#39;, errDetails));
-    },
-
-<span id='BasiGX-view-form-AddArcGISRest-method-loadLayersOfFeatureServers'>    /**
-</span>     * Loads the layerConfigs for all layers of all FeatureServers.
-     *
-     * @param {object[]} featureServers List of layerConfigs of FeatureServers.
-     * @return {Ext.Promise} A promise that resolves with a list of
-     * layerConfigs, where each layerConfig represents a single layer of a
-     * FeatureServer.
-     */
-    loadLayersOfFeatureServers: function(featureServers) {
-        var me = this;
-        var mappedPromises = Ext.Array.map(featureServers, function(server) {
-            return me.requestFeatureServer.call(me, server)
-                .then(function(res) {
-                    var config = me.getFeatureServerConfigs(
-                        res, server
-                    );
-                    return config;
-                }, function(err) {
-                    Ext.log.warn(&#39;Could not load featureServer info&#39;, err);
-                    return;
-                });
-        });
-        return Ext.Promise.all(mappedPromises)
-            .then(function(responses) {
-                var configs = [];
-                if (!Ext.isEmpty(responses)) {
-                    configs = Ext.Array.reduce(responses, function(acc, conf) {
-                        if (!conf) {
-                            return acc;
-                        }
-                        return Ext.Array.merge(acc, conf);
-                    });
-                }
-                return Ext.Promise.resolve(configs);
-            });
-    },
-
-<span id='BasiGX-view-form-AddArcGISRest-method-requestFeatureServer'>    /**
-</span>     * Make a request to the given featureServer.
-     *
-     * @param {object} featureServer The featureServer config.
-     * See BasiGX.util.ArcGISRest.createOlLayerFromArcGISRest for
-     * a detailed description of the object.
-     * @return {Ext.Promise} The promise.
-     */
-    requestFeatureServer: function(featureServer) {
-        var me = this;
-        var serviceUrl = BasiGX.util.ArcGISRest.createFeatureServerUrl(
-            featureServer.url, featureServer.service.name, &#39;json&#39;);
-        return Ext.Ajax.request({
-            url: serviceUrl,
-            method: &#39;POST&#39;,
-            useDefaultXhrHeader: me.getUseDefaultXhrHeader()
-        });
-    },
-
-<span id='BasiGX-view-form-AddArcGISRest-method-getFeatureServerConfigs'>    /**
-</span>     * Gets the layerConfigs for all FeatureServer layers.
-     *
-     * @param {object} response Resolve Ext.Ajax.request promise.
-     * @param {object} layerConfig The FeatureServer layerConfig.
-     * @return {object[]} List of layerConfigs for each single layer
-     * in a FeatureServer.
-     */
-    getFeatureServerConfigs: function(response, layerConfig) {
-        var res = JSON.parse(response.responseText);
-
-        if (!res.layers) {
-            return [];
-        }
-
-        var configs = Ext.Array.map(res.layers, function(layer) {
-            var config = Ext.clone(layerConfig);
-            config.url = response.request.url;
-            config.layer = {
-                id: layer.id,
-                name: layer.name
-            };
-            return config;
-        });
-        return configs;
-    },
-
-<span id='BasiGX-view-form-AddArcGISRest-method-responseStatusToErrorMsgKey'>    /**
-</span>     * Returns a key for a viewModel property for the passed HTTP status code or
-     * null if we don&#39;t consider the status code an error.
-     *
-     * @param {Number} status The HTTP status code of the last response.
-     * @return {String} An error message key to be looked up in the viewModel.
-     * @private
-     */
-    responseStatusToErrorMsgKey: function(status) {
-        status = parseInt(status, 10);
-        // handle very common ones specifically
-        if (status === 0) {
-            // Most likely CORS
-            // * either not enabled at all
-            // * or misconfigured
-            return &#39;msgCorsMisconfiguration&#39;;
-        } else if (status === 401) {
-            return &#39;msgUnauthorized&#39;;
-        } else if (status === 403) {
-            return &#39;msgForbidden&#39;;
-        } else if (status === 404) {
-            return &#39;msgFileNotFound&#39;;
-        } else if (status === 429) {
-            return &#39;msgTooManyRequests&#39;;
-        } else if (status === 503) {
-            return &#39;msgServiceUnavailable&#39;;
-        } else if (status === 504) {
-            return &#39;msgGatewayTimeOut&#39;;
-        } else if (status &gt;= 400 &amp;&amp; status &lt; 500) {
-            return &#39;msgClientError&#39;;
-        } else if (status &gt;= 500) {
-            return &#39;msgServerError&#39;;
-        }
-        return null;
-    },
-
-<span id='BasiGX-view-form-AddArcGISRest-method-getErrorMessage'>    /**
-</span>     * Returns the error message to display to the user for the passed key,
-     * optionally adding the passed details.
-     *
-     * @param {String} errorKey The key to look up in the view model for the
-     *     error.
-     * @param {Array&lt;String&gt;} [errorDetails] Optional array of details to
-     *     display.
-     * @return {String} The error message to display.
-     * @private
-     */
-    getErrorMessage: function(errorKey, errorDetails) {
-        var me = this;
-        var viewModel = me.getViewModel();
-
-        var msg = viewModel.get(errorKey);
-        if (me.lastErrorMsgKey !== null) {
-            msg += &#39;&lt;br /&gt;&lt;br /&gt;&#39; + viewModel.get(me.lastErrorMsgKey);
-        }
-        if (errorDetails &amp;&amp; errorDetails.length &gt; 0) {
-            msg += &#39;&lt;ul&gt;&#39;;
-            Ext.each(errorDetails, function(errorDetail) {
-                msg += &#39;&lt;li&gt;&#39; + errorDetail + &#39;&lt;/li&gt;&#39;;
-            });
-            msg += &#39;&lt;/ul&gt;&#39;;
-        }
-        return msg;
-    },
-
-<span id='BasiGX-view-form-AddArcGISRest-method-updateControlToolbarState'>    /**
-</span>     * Updates the disabled state of the buttons to control the layer
-     * checkboxes (e.g. check all, uncheck all, add selected).
-     */
-    updateControlToolbarState: function() {
-        var me = this;
-        var cbGroup = me.down(&#39;[name=fs-available-layers] checkboxgroup&#39;);
-        var allCbs = cbGroup.query(&#39;checkbox&#39;);
-        var allChecked = cbGroup.query(&#39;[checked=true]&#39;);
-        var allDisabled = cbGroup.query(&#39;[disabled=true]&#39;);
-        var checkAllBtn = me.down(&#39;[name=check-all-layers]&#39;);
-        var uncheckAllBtn = me.down(&#39;[name=uncheck-all-layers]&#39;);
-        var addBtn = me.down(&#39;[name=add-checked-layers]&#39;);
-        if (allCbs.length === 0) {
-            // no checkboxes, also no control toolbar, return
-            return;
-        }
-        if (allDisabled.length === allCbs.length) {
-            // all checkboxes are disabled, all controls can be disabled
-            addBtn.setDisabled(true);
-            if (checkAllBtn) {
-                checkAllBtn.setDisabled(true);
-            }
-            if (uncheckAllBtn) {
-                uncheckAllBtn.setDisabled(true);
-            }
-            return;
-        }
-        if (allChecked.length &gt; 0) {
-            // at least one checkbox is checked
-            addBtn.setDisabled(false);
+            this._win = Ext.create(&#39;Ext.window.Window&#39;, windowConfig);
+            this._win.show();
         } else {
-            // not even one is checked
-            addBtn.setDisabled(true);
-        }
-
-        if (checkAllBtn) {
-            if (allCbs.length === allChecked.length) {
-                // all are checked already
-                checkAllBtn.setDisabled(true);
-            } else {
-                checkAllBtn.setDisabled(false);
-            }
-        }
-        if (uncheckAllBtn) {
-            if (allChecked.length === 0) {
-                // not a single one is checked
-                uncheckAllBtn.setDisabled(true);
-            } else {
-                uncheckAllBtn.setDisabled(false);
-            }
+            BasiGX.util.Animate.shake(this._win);
         }
     },
 
-<span id='BasiGX-view-form-AddArcGISRest-method-fillAvailableLayersFieldset'>    /**
-</span>     * Takes an array of ArcGIS layer configs and updates the
-     * available layers fieldset with matching entries.
-     *
-     * @param {object[]} layers The ArcGIS layer configs for which we shall fill
-     *     the fieldset.
+<span id='BasiGX-view-button-AddArcGISRest-method-onDestroy'>    /**
+</span>     * Reset window reference
      */
-    fillAvailableLayersFieldset: function(layers) {
-        var me = this;
-        me.removeAddLayersComponents();
-        var fs = me.down(&#39;[name=fs-available-layers]&#39;);
-        var cbGroup = fs.down(&#39;checkboxgroup&#39;);
-        var checkBoxes = [];
-        var candidatesInitiallyChecked = me.getCandidatesInitiallyChecked();
-        Ext.each(layers, function(layer) {
-            var boxLabel = layer.service.name;
-            if (layer.service.type === &#39;FeatureServer&#39;) {
-                boxLabel += &#39;/&#39; + layer.layer.name;
-            }
-            checkBoxes.push({
-                xtype: &#39;checkbox&#39;,
-                boxLabel: boxLabel,
-                checked: candidatesInitiallyChecked,
-                arcGISLayerConfig: layer
-            });
-        });
-        cbGroup.add(checkBoxes);
-
-        var tbItems = [];
-
-        if (me.getHasCheckAllBtn()) {
-            tbItems.push({
-                xtype: &#39;button&#39;,
-                name: &#39;check-all-layers&#39;,
-                bind: {
-                    text: &#39;{checkAllLayersBtnText}&#39;
-                },
-                handler: me.checkAllLayers,
-                scope: me
-            });
+    onDestroy: function() {
+        if (this._win) {
+            this._win = null;
         }
-
-        if (me.getHasUncheckAllBtn()) {
-            tbItems.push({
-                xtype: &#39;button&#39;,
-                name: &#39;uncheck-all-layers&#39;,
-                bind: {
-                    text: &#39;{uncheckAllLayersBtnText}&#39;
-                },
-                handler: me.uncheckAllLayers,
-                scope: me
-            });
-        }
-
-        tbItems.push(&#39;-&gt;&#39;);
-        tbItems.push({
-            xtype: &#39;button&#39;,
-            name: &#39;add-checked-layers&#39;,
-            bind: {
-                text: &#39;{addCheckedLayersBtnText}&#39;
-            },
-            handler: me.addCheckedLayers,
-            scope: me
-        });
-
-        me.add({
-            xtype: &#39;toolbar&#39;,
-            name: &#39;interact-w-available-layers&#39;,
-            items: tbItems
-        });
-    },
-
-<span id='BasiGX-view-form-AddArcGISRest-method-removeAddLayersComponents'>    /**
-</span>     * Remove the checkboxes for layers from previous requests, and also the
-     * interact-toolbar.
-     */
-    removeAddLayersComponents: function() {
-        var me = this;
-        var cbGroup = me.down(&#39;[name=fs-available-layers] checkboxgroup&#39;);
-        var tb = me.down(&#39;toolbar[name=interact-w-available-layers]&#39;);
-        cbGroup.removeAll();
-        if (tb) {
-            me.remove(tb);
-        }
-    },
-
-<span id='BasiGX-view-form-AddArcGISRest-method-addCheckedLayers'>    /**
-</span>     * Examines the available layers fieldset, and adds all checked layers to
-     * the map.
-     */
-    addCheckedLayers: function() {
-        var me = this;
-        var fs = me.down(&#39;[name=fs-available-layers]&#39;);
-        var checkboxes = fs.query(&#39;checkbox[checked=true][disabled=false]&#39;);
-        var map = BasiGX.util.Map.getMapComponent().getMap();
-        var useDefaultHeader = me.getUseDefaultXhrHeader();
-        Ext.each(checkboxes, function(checkbox) {
-            var config = checkbox.arcGISLayerConfig;
-            BasiGX.util.ArcGISRest.createOlLayerFromArcGISRest(
-                config, useDefaultHeader
-            )
-                .then(function(layer) {
-                    if (!layer) {
-                        return;
-                    }
-                    me.fireEvent(&#39;beforearcgisrestadd&#39;, layer);
-                    map.addLayer(layer);
-                    me.fireEvent(&#39;arcgisrestadd&#39;, layer);
-                    checkbox.setDisabled(true);
-                    me.updateControlToolbarState();
-                });
-        });
-    },
-
-<span id='BasiGX-view-form-AddArcGISRest-method-checkAllLayers'>    /**
-</span>     * Checks all checkboxes in the available layers fieldset.
-     */
-    checkAllLayers: function() {
-        var sel = &#39;[name=fs-available-layers] checkbox[disabled=false]&#39;;
-        var checkboxes = this.query(sel);
-        Ext.each(checkboxes, function(checkbox) {
-            checkbox.setValue(true);
-        });
-    },
-
-<span id='BasiGX-view-form-AddArcGISRest-method-uncheckAllLayers'>    /**
-</span>     * Unchecks all checkboxes in the available layers fieldset.
-     */
-    uncheckAllLayers: function() {
-        var sel = &#39;[name=fs-available-layers] checkbox[disabled=false]&#39;;
-        var checkboxes = this.query(sel);
-        Ext.each(checkboxes, function(checkbox) {
-            checkbox.setValue(false);
-        });
     }
 });
 </pre>
