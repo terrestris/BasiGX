@@ -1,0 +1,16 @@
+{
+    "currentVersion": 10.41,
+    "folders": [
+        "BW",
+        "Copernicus",
+        "EPAMapServices",
+        "TimpeallAnTi",
+        "Utilities"
+    ],
+    "services": [
+        {
+            "name": "BasemapHW",
+            "type": "MapServer"
+        }
+    ]
+}

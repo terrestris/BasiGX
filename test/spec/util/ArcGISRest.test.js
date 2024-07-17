@@ -100,4 +100,35 @@ describe('BasiGX.util.ArcGISRest', function() {
         });
 
     });
+
+    describe('#createMapServerUrl', function() {
+
+        it('returns the MapServer url when the service in on the root', function() {
+            var serviceUrl = 'http://example.com/services';
+            var mapServerName = 'foo';
+            var url = serviceUrl + '/' + mapServerName + '/MapServer';
+            var result = BasiGX.util.ArcGISRest.createMapServerUrl(
+                serviceUrl, mapServerName);
+            expect(result).to.equal(url);
+        });
+
+        it('returns the MapServer url when the service is in a folder', function() {
+            var serviceUrl = 'http://example.com/services/folder';
+            var mapServerName = 'folder/servername';
+            var expectedUrl = 'http://example.com/services/folder/servername/MapServer';
+            var result = BasiGX.util.ArcGISRest.createMapServerUrl(
+                serviceUrl, mapServerName);
+            expect(result).to.equal(expectedUrl);
+        });
+
+        it('returns the MapServer url with a specified format', function() {
+            var serviceUrl = 'http://example.com/services';
+            var featureServerName = 'foo';
+            var format = 'bar';
+            var url = serviceUrl + '/' + featureServerName + '/MapServer?f=' + format;
+            var result = BasiGX.util.ArcGISRest.createMapServerUrl(
+                serviceUrl, featureServerName, format);
+            expect(result).to.equal(url);
+        });
+    });
 });
