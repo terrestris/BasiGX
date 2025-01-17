@@ -343,7 +343,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                     return obj.code == mapCode;
                 });
                 me.getViewModel().setData({
-                    srsName: filtered ? filtered[0].name : ''
+                    srsName: !Ext.isEmpty(filtered) ? filtered[0].name : ''
                 });
             }
         }
