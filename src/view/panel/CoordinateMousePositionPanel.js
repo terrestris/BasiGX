@@ -340,7 +340,7 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                     .split(':')[1];
                 var filtered = Ext.Array.filter(proj4jObjects, function(obj) {
                     // convert values to strings as they can be either a string or an int
-                    return obj.code.toString() == mapCode.toString();
+                    Ext.isDefined(obj.code) && (obj.code.toString() === mapCode.toString())
                 });
                 me.getViewModel().setData({
                     srsName: !Ext.isEmpty(filtered) ? filtered[0].name : ''
