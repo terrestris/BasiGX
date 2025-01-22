@@ -339,11 +339,11 @@ Ext.define('BasiGX.view.panel.CoordinateMousePositionPanel', {
                 var mapCode = me.olMap.getView().getProjection().getCode()
                     .split(':')[1];
                 var filtered = Ext.Array.filter(proj4jObjects, function(obj) {
-                    // Loose equality check since code could be a string or an int
-                    return obj.code === mapCode;
+                    // convert values to strings as they can be either a string or an int
+                    Ext.isDefined(obj.code) && (obj.code.toString() === mapCode.toString())
                 });
                 me.getViewModel().setData({
-                    srsName: filtered ? filtered[0].name : ''
+                    srsName: !Ext.isEmpty(filtered) ? filtered[0].name : ''
                 });
             }
         }
