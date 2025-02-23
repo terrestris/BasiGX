@@ -1,0 +1,197 @@
+{
+    "currentVersion": 10.41,
+    "serviceDescription": "",
+    "mapName": "Layers",
+    "description": "",
+    "copyrightText": "",
+    "supportsDynamicLayers": false,
+    "layers": [
+        {
+            "id": 0,
+            "name": "Urban Atlas",
+            "parentLayerId": -1,
+            "defaultVisibility": false,
+            "subLayerIds": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+            ],
+            "minScale": 0,
+            "maxScale": 0
+        },
+        {
+            "id": 1,
+            "name": "Street Trees - Dublin",
+            "parentLayerId": 0,
+            "defaultVisibility": false,
+            "subLayerIds": null,
+            "minScale": 0,
+            "maxScale": 0
+        },
+        {
+            "id": 2,
+            "name": "Street Trees - Galway",
+            "parentLayerId": 0,
+            "defaultVisibility": false,
+            "subLayerIds": null,
+            "minScale": 0,
+            "maxScale": 0
+        },
+        {
+            "id": 3,
+            "name": "Street Trees - Waterford",
+            "parentLayerId": 0,
+            "defaultVisibility": false,
+            "subLayerIds": null,
+            "minScale": 0,
+            "maxScale": 0
+        },
+        {
+            "id": 4,
+            "name": "Land Cover - Cork",
+            "parentLayerId": 0,
+            "defaultVisibility": false,
+            "subLayerIds": null,
+            "minScale": 0,
+            "maxScale": 0
+        },
+        {
+            "id": 5,
+            "name": "Land Cover - Dublin",
+            "parentLayerId": 0,
+            "defaultVisibility": false,
+            "subLayerIds": null,
+            "minScale": 0,
+            "maxScale": 0
+        },
+        {
+            "id": 6,
+            "name": "Land Cover - Galway",
+            "parentLayerId": 0,
+            "defaultVisibility": false,
+            "subLayerIds": null,
+            "minScale": 0,
+            "maxScale": 0
+        },
+        {
+            "id": 7,
+            "name": "Land Cover - Limerick",
+            "parentLayerId": 0,
+            "defaultVisibility": false,
+            "subLayerIds": null,
+            "minScale": 0,
+            "maxScale": 0
+        },
+        {
+            "id": 8,
+            "name": "Land Cover - Waterford",
+            "parentLayerId": 0,
+            "defaultVisibility": false,
+            "subLayerIds": null,
+            "minScale": 0,
+            "maxScale": 0
+        },
+        {
+            "id": 9,
+            "name": "Riparian Zones",
+            "parentLayerId": -1,
+            "defaultVisibility": false,
+            "subLayerIds": [
+                10,
+                11
+            ],
+            "minScale": 0,
+            "maxScale": 0
+        },
+        {
+            "id": 10,
+            "name": "Green Linear Elements",
+            "parentLayerId": 9,
+            "defaultVisibility": false,
+            "subLayerIds": null,
+            "minScale": 0,
+            "maxScale": 0
+        },
+        {
+            "id": 11,
+            "name": "Land Cover",
+            "parentLayerId": 9,
+            "defaultVisibility": false,
+            "subLayerIds": null,
+            "minScale": 0,
+            "maxScale": 0
+        },
+        {
+            "id": 12,
+            "name": "Natura 2000",
+            "parentLayerId": -1,
+            "defaultVisibility": false,
+            "subLayerIds": [
+                13
+            ],
+            "minScale": 0,
+            "maxScale": 0
+        },
+        {
+            "id": 13,
+            "name": "Natura 2000",
+            "parentLayerId": 12,
+            "defaultVisibility": false,
+            "subLayerIds": null,
+            "minScale": 0,
+            "maxScale": 0
+        }
+    ],
+    "tables": [],
+    "spatialReference": {
+        "wkid": 2157,
+        "latestWkid": 2157
+    },
+    "singleFusedMapCache": false,
+    "initialExtent": {
+        "xmin": -2192431.987076646,
+        "ymin": -1622206.551353204,
+        "xmax": 5343982.999664094,
+        "ymax": 3891074.1323311795,
+        "spatialReference": {
+            "wkid": 2157,
+            "latestWkid": 2157
+        }
+    },
+    "fullExtent": {
+        "xmin": 448851.36479999963,
+        "ymin": 533041.3618999999,
+        "xmax": 754159.6705,
+        "ymax": 950054.5759999994,
+        "spatialReference": {
+            "wkid": 2157,
+            "latestWkid": 2157
+        }
+    },
+    "minScale": 0,
+    "maxScale": 0,
+    "units": "esriMeters",
+    "supportedImageFormatTypes": "PNG32,PNG24,PNG,JPG,DIB,TIFF,EMF,PS,PDF,GIF,SVG,SVGZ,BMP",
+    "documentInfo": {
+        "Title": "",
+        "Author": "",
+        "Comments": "",
+        "Subject": "The European Environment Agency, as lead authority under the Copernicus Land Monitoring Service, co-ordinate the development of high resolution \u201clocal component\u201d or \u201chot spot monitoring\u201d datasets. Comparable data is produced across Europe using earth",
+        "Category": "",
+        "AntialiasingMode": "None",
+        "TextAntialiasingMode": "Force",
+        "Keywords": "Copernicus,Land Cover,Land Use,Riparian Zones,Natura,Urban Atlas,Hot Spot Monitoring"
+    },
+    "capabilities": "Map,Query,Data",
+    "supportedQueryFormats": "JSON, AMF, geoJSON",
+    "exportTilesAllowed": false,
+    "maxRecordCount": 1000,
+    "maxImageHeight": 4096,
+    "maxImageWidth": 4096,
+    "supportedExtensions": "KmlServer"
+}

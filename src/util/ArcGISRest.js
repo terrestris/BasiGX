@@ -62,6 +62,37 @@ Ext.define('BasiGX.util.ArcGISRest', {
         },
 
         /**
+         * Creates the URL for a FeatureServer/MapServer/GPServer.
+         *
+         * @param {string} serviceUrl The URL of the service.
+         * @param {string} serverName The name of the Server.
+         * @param {string} format The output format.
+         * @param {string} serverType FeatureServer/MapServer/GPServer.
+         * @return {string} The URL to the FeatureServer/MapServer/GPServer.
+         */
+        createServerUrl: function(serviceUrl, serverName, format, serverType) {
+            if (!BasiGX.util.ArcGISRest.isArcGISRestUrl(serviceUrl)) {
+                return;
+            }
+
+            // Working with the root Url ensures that this code works
+            // with both root and folder level services
+            var rootUrl = BasiGX.util.ArcGISRest.getArcGISRestRootUrl(
+                serviceUrl
+            );
+            var urlObj = new URL(rootUrl);
+            var parts = urlObj.pathname.split('/');
+            var path = parts.concat([serverName, serverType]).join('/');
+
+            var url = urlObj.origin + path;
+            if (format) {
+                url = BasiGX.util.Url.setQueryParam(url, 'f', format);
+            }
+
+            return url;
+        },
+
+        /**
          * Creates the URL for a FeatureServer request.
          *
          * @param {string} serviceUrl The URL of the service.
@@ -70,22 +101,29 @@ Ext.define('BasiGX.util.ArcGISRest', {
          * @return {string} The URL to the FeatureServer.
          */
         createFeatureServerUrl: function(serviceUrl, serverName, format) {
-            if (!BasiGX.util.ArcGISRest.isArcGISRestUrl(serviceUrl)) {
-                return;
-            }
-            var urlObj = new URL(serviceUrl);
-            var parts = urlObj.pathname.split('/');
-            parts.push(serverName);
-            parts.push('FeatureServer');
-            var path = parts.join('/');
+            return BasiGX.util.ArcGISRest.createServerUrl(
+                serviceUrl,
+                serverName,
+                format,
+                'FeatureServer'
+            );
+        },
 
-            var url = urlObj.origin + path;
-            if (format) {
-                url = BasiGX.util.Url.setQueryParam(url, 'f', format);
-            }
-
-            return url;
-
+        /**
+         * Creates the URL for a MapServer request.
+         *
+         * @param {string} serviceUrl The URL of the service.
+         * @param {string} serverName The name of the MapServer.
+         * @param {string} format The output format.
+         * @return {string} The URL to the MapServer.
+         */
+        createMapServerUrl: function(serviceUrl, serverName, format) {
+            return BasiGX.util.ArcGISRest.createServerUrl(
+                serviceUrl,
+                serverName,
+                format,
+                'MapServer'
+            );
         },
 
         /**
@@ -139,8 +177,10 @@ Ext.define('BasiGX.util.ArcGISRest', {
          * @param {number} layerConfig.layer.id The id of a FeatureServer layer.
          * @param {string} layerConfig.layer.name The name of a FeatureServer
          * layer.
-         * @param {boolean} useDefaultHeader Whether to use the default
-         * Xhr header.
+         * @param {Ext.data.TreeStore}  layerConfig.subLayerStore The tree
+         * store containing the sublayers.
+         * @param {boolean} useDefaultHeader Whether to use the default Xhr
+         * header.
          * @return {Ext.Promise} A promise containing the olLayer.
          */
         createOlLayerFromArcGISRest: function(layerConfig, useDefaultHeader) {
@@ -152,6 +192,19 @@ Ext.define('BasiGX.util.ArcGISRest', {
                 Ext.log.warn('Provided URL is not a valid ArcGISRest URL');
                 return Ext.Promise.reject();
             }
+
+            // collect all sublayer indexes that the user has marked as visible
+            var visibleLayerIndexes = [];
+            layerConfig.subLayerStore.each(function(sublayer){
+                var visibility = sublayer.get('visibility');
+                var layerId = sublayer.get('layerId');
+                var layerIdValid = Ext.isNumeric(layerId) && layerId >= 0;
+
+                if (visibility && layerIdValid){
+                    visibleLayerIndexes.push(layerId);
+                }
+            });
+
             var serviceUrl = [rootUrl, service.name, service.type].join('/');
             var onReject = function() {
                 return Ext.Promise.reject();
@@ -172,7 +225,12 @@ Ext.define('BasiGX.util.ArcGISRest', {
                         source = new ol.source.TileArcGISRest({
                             url: serviceUrl,
                             projection: 'EPSG:' +
-                                serviceInfo.spatialReference.wkid
+                                serviceInfo.spatialReference.wkid,
+                            params: {
+                                'LAYERS': 'show:' +
+                                    visibleLayerIndexes.join(',')
+                            }
+
                         });
                         layer = new ol.layer.Tile({
                             source: source,

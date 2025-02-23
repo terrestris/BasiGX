@@ -29,11 +29,16 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         'Ext.form.FieldSet',
         'Ext.form.field.ComboBox',
         'Ext.form.CheckboxGroup',
+        'Ext.tree.Panel',
         'Ext.Promise',
+        'Ext.data.TreeStore',
+        'Ext.data.Model',
+        'Ext.data.proxy.Ajax',
         'BasiGX.util.Map',
         'BasiGX.util.MsgBox',
         'BasiGX.util.Url',
-        'BasiGX.util.ArcGISRest'
+        'BasiGX.util.ArcGISRest',
+        'BasiGX.view.tree.ArcGISRestServiceTree'
     ],
 
     viewModel: {
@@ -67,7 +72,9 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
             msgInvalidUrl: 'Die angegebene URL ist keine valide ArcGISRest URL',
             documentation: '<h2>ArcGISRest Layer hinzufügen</h2>• In ' +
                 'diesem Dialog können Sie mit Hilfe einer ArcGISRest-URL ' +
-                'einen beliebigen Kartendienst der Karte hinzufügen.'
+                'einen beliebigen Kartendienst der Karte hinzufügen.',
+            serviceLayersVisibility: {},
+            availableLayersFieldSetMaxHeight: null
         }
     },
 
@@ -105,7 +112,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         /**
          * Default url for the textfield or combobox.
          */
-        defaultUrl: 'https://gis.epa.ie/arcgis/rest/services',
+        defaultUrl: 'https://gis.epa.ie/arcgis/rest/services/Copernicus',
 
         /**
          * Whether we will send the `X-Requested-With` header when fetching the
@@ -115,7 +122,12 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
          *
          * @type {Boolean}
          */
-        useDefaultXhrHeader: false
+        useDefaultXhrHeader: false,
+
+        /**
+         * Allow parent configure available layers fieldset maxHeight
+         */
+        availableLayersFieldSetMaxHeight: null
     },
 
     /**
@@ -127,18 +139,18 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
 
     defaultButton: 'requestLayersBtn',
 
+    layout: 'vbox',
+
     items: [
         {
             xtype: 'fieldset',
-            layout: 'anchor',
-            defaults: {
-                anchor: '100%'
-            },
+            width: '100%',
             bind: {
                 title: '{queryParamsFieldSetTitle}'
             },
             items: [{
                 xtype: 'textfield',
+                width: '100%',
                 bind: {
                     fieldLabel: '{arcGISUrlTextFieldLabel}'
                 },
@@ -183,19 +195,63 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
                         }
                     }
                 }
+            }, {
+                xtype: 'container',
+                layout: {
+                    type: 'hbox',
+                    pack: 'end'
+                },
+                items: [{
+                    xtype: 'button',
+                    name: 'resetFormBtn',
+                    bind: {
+                        text: '{resetBtnText}'
+                    },
+                    handler: function(btn) {
+                        var view = btn.up('basigx-form-addarcgisrest');
+                        view.getForm().reset();
+                        view.removeAddLayersComponents();
+                        view.resetState();
+                        var defaultValue = view.defaultUrl;
+                        var combo = view.down('combobox[name=urlCombo]');
+                        combo.setValue(defaultValue);
+                        var textfield = view.down('textfield[name=url]');
+                        textfield.setValue(defaultValue);
+                        var fs = view.down('[name=fs-available-layers]');
+                        fs.setHidden(true);
+                    }
+                }, {
+                    xtype: 'button',
+                    bind: {
+                        text: '{requestLayersBtnText}'
+                    },
+                    margin: '0 0 0 5',
+                    name: 'requestLayersBtn',
+                    reference: 'requestLayersBtn',
+                    formBind: true, // only enabled once the form is valid
+                    disabled: true,
+                    handler: function(btn) {
+                        var view = btn.up('basigx-form-addarcgisrest');
+                        view.resetState();
+                        view.requestLayers()
+                            .then(
+                                view.onGetServicesSuccess.bind(view),
+                                view.onGetServicesFailure.bind(view)
+                            );
+                    }
+                }]
             }]
         },
         {
             xtype: 'fieldset',
             name: 'fs-available-layers',
-            layout: 'anchor',
+            flex: 1,
+            width: '100%',
             scrollable: 'y',
-            maxHeight: 200,
-            defaults: {
-                anchor: '100%'
-            },
+            hidden: true,
             bind: {
-                title: '{availableLayersFieldSetTitle}'
+                title: '{availableLayersFieldSetTitle}',
+                maxHeight: '{availableLayersFieldSetMaxHeight}'
             },
             items: {
                 xtype: 'checkboxgroup',
@@ -210,46 +266,6 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
                 },
                 columns: 2,
                 vertical: true
-            }
-        }
-    ],
-
-    // Reset and Submit buttons
-    buttons: [
-        {
-            name: 'resetFormBtn',
-            bind: {
-                text: '{resetBtnText}'
-            },
-            handler: function(btn) {
-                var view = btn.up('basigx-form-addarcgisrest');
-                view.getForm().reset();
-                view.removeAddLayersComponents();
-                view.resetState();
-                var defaultValue = view.defaultUrl;
-                var combo = view.down('combobox[name=urlCombo]');
-                combo.setValue(defaultValue);
-                var textfield = view.down('textfield[name=url]');
-                textfield.setValue(defaultValue);
-            }
-        },
-        '->',
-        {
-            bind: {
-                text: '{requestLayersBtnText}'
-            },
-            name: 'requestLayersBtn',
-            reference: 'requestLayersBtn',
-            formBind: true, // only enabled once the form is valid
-            disabled: true,
-            handler: function(btn) {
-                var view = btn.up('basigx-form-addarcgisrest');
-                view.resetState();
-                view.requestLayers()
-                    .then(
-                        view.onGetServicesSuccess.bind(view),
-                        view.onGetServicesFailure.bind(view)
-                    );
             }
         }
     ],
@@ -360,19 +376,19 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
                 return layerConfig.service.type === 'FeatureServer';
             }
         );
+        var nonFeatureServers = Ext.Array.filter(
+            layerConfigs, function(layerConfig) {
+                return layerConfig.service.type !== 'FeatureServer';
+            }
+        );
         this.loadLayersOfFeatureServers(featureServers)
             .then(function(featureServerConfigs) {
-                layerConfigs = Ext.Array.filter(
-                    layerConfigs, function(layerConfig) {
-                        return layerConfig.service.type !== 'FeatureServer';
-                    }
-                );
-                layerConfigs = Ext.Array.merge(
-                    layerConfigs, featureServerConfigs);
-                this.fillAvailableLayersFieldset(layerConfigs);
+                var mergedConfigs = Ext.Array.merge(
+                    nonFeatureServers, featureServerConfigs);
+                this.fillAvailableLayersFieldset(mergedConfigs);
                 this.updateControlToolbarState();
                 this.setLoading(false);
-            }.bind(this));
+                            }.bind(this));
     },
 
     /**
@@ -407,7 +423,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
      */
     loadLayersOfFeatureServers: function(featureServers) {
         var me = this;
-        var mappedPromises = Ext.Array.map(featureServers, function(server) {
+                var mappedPromises = Ext.Array.map(featureServers, function(server) {
             return me.requestFeatureServer.call(me, server)
                 .then(function(res) {
                     var config = me.getFeatureServerConfigs(
@@ -613,16 +629,27 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         var cbGroup = fs.down('checkboxgroup');
         var checkBoxes = [];
         var candidatesInitiallyChecked = me.getCandidatesInitiallyChecked();
+
+        fs.setHidden(false);
+
         Ext.each(layers, function(layer) {
-            var boxLabel = layer.service.name;
-            if (layer.service.type === 'FeatureServer') {
-                boxLabel += '/' + layer.layer.name;
-            }
             checkBoxes.push({
-                xtype: 'checkbox',
-                boxLabel: boxLabel,
+                xtype: 'basigx-tree-arcgisrestservicetree',
+                arcGISLayerConfig: layer,
                 checked: candidatesInitiallyChecked,
-                arcGISLayerConfig: layer
+                listeners: {
+                    arcgisrestservicetreenodeexpand: function (expandedNode) {
+                        me.requestLayer(layer).then(
+                            function (response) {
+                                me.onRequestLayerSuccess(
+                                    response,
+                                    expandedNode
+                                );
+                            },
+                            me.onGetServicesFailure.bind(me)
+                        );
+                    }
+                }
             });
         });
         cbGroup.add(checkBoxes);
@@ -667,6 +694,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
         me.add({
             xtype: 'toolbar',
             name: 'interact-w-available-layers',
+            width: '100%',
             items: tbItems
         });
     },
@@ -692,11 +720,37 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
     addCheckedLayers: function() {
         var me = this;
         var fs = me.down('[name=fs-available-layers]');
-        var checkboxes = fs.query('checkbox[checked=true][disabled=false]');
+
+        // collect checked layers from form
+        var layerItems = [];
+        var layerConfigTrees = fs.query('basigx-tree-arcgisrestservicetree');
+        Ext.each(layerConfigTrees, function(layerConfig){
+            var store = layerConfig.getStore();
+            if (!store) {
+                return;
+            }
+
+            var root = store.getRoot();
+            if (!root) {
+                return;
+            }
+
+            if (root.get('checked')) {
+                layerItems.push(layerConfig);
+            }
+        });
+
         var map = BasiGX.util.Map.getMapComponent().getMap();
         var useDefaultHeader = me.getUseDefaultXhrHeader();
-        Ext.each(checkboxes, function(checkbox) {
-            var config = checkbox.arcGISLayerConfig;
+        Ext.each(layerItems, function(layerItem) {
+            var config = layerItem.arcGISLayerConfig;
+
+            var subLayerStore = layerItem.getStore();
+            if (!subLayerStore){
+                return;
+            }
+
+            config.subLayerStore = subLayerStore;
             BasiGX.util.ArcGISRest.createOlLayerFromArcGISRest(
                 config, useDefaultHeader
             )
@@ -707,7 +761,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
                     me.fireEvent('beforearcgisrestadd', layer);
                     map.addLayer(layer);
                     me.fireEvent('arcgisrestadd', layer);
-                    checkbox.setDisabled(true);
+                    layerItem.setDisabled(true);
                     me.updateControlToolbarState();
                 });
         });
@@ -717,10 +771,11 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
      * Checks all checkboxes in the available layers fieldset.
      */
     checkAllLayers: function() {
-        var sel = '[name=fs-available-layers] checkbox[disabled=false]';
-        var checkboxes = this.query(sel);
-        Ext.each(checkboxes, function(checkbox) {
-            checkbox.setValue(true);
+        var sel = '[name=fs-available-layers]' +
+            ' basigx-tree-arcgisrestservicetree';
+        var trees = this.query(sel);
+        Ext.each(trees, function(tree) {
+            tree.getStore().getAt(0).set('checked', true);
         });
     },
 
@@ -728,10 +783,71 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
      * Unchecks all checkboxes in the available layers fieldset.
      */
     uncheckAllLayers: function() {
-        var sel = '[name=fs-available-layers] checkbox[disabled=false]';
-        var checkboxes = this.query(sel);
-        Ext.each(checkboxes, function(checkbox) {
-            checkbox.setValue(false);
+        var sel = '[name=fs-available-layers]' +
+            ' basigx-tree-arcgisrestservicetree';
+        var trees = this.query(sel);
+        Ext.each(trees, function(tree) {
+            tree.getStore().getAt(0).set('checked', false);
         });
+    },
+
+    /**
+     * Set the viewModel property availableLayersFieldSetMaxHeight
+     * when the component config property availableLayersFieldSetMaxHeight
+     * changes to it can be used in a binding
+     *
+     * @param {Number} newValue Value to set
+     */
+    updateAvailableLayersFieldSetMaxHeight: function(newValue) {
+        var me = this;
+        var vm = me.getViewModel();
+        vm.set('availableLayersFieldSetMaxHeight', newValue);
+    },
+
+    /**
+     * Request layer to get information about sub layers within the layer
+     *
+     * @param {Object} config Layer ArcGIS layer config
+     */
+    requestLayer: function(config) {
+        var me = this;
+        var serviceUrl = BasiGX.util.ArcGISRest.createMapServerUrl(
+            config.url,
+            config.service.name,
+            'json'
+        );
+        return new Ext.Promise(function (resolve, reject) {
+            Ext.Ajax.request({
+                url: serviceUrl,
+                method: 'GET',
+                useDefaultXhrHeader: me.getUseDefaultXhrHeader(),
+                success: function (response) {
+                    var respJson = Ext.decode(response.responseText);
+                    resolve(respJson);
+                },
+                failure: function (response) {
+                    reject(response.status);
+                }
+            });
+        });
+    },
+
+    /**
+     * Request layer to get information about sub layers within the layer
+     *
+     * @param {Object} response  ArcGIS Rest response
+     * @param {GeoExt.data.model.ArcGISRestServiceLayer} expandedNode Layer ArcGIS layer config
+     */
+    onRequestLayerSuccess: function(response, expandedNode) {
+        var layers = Ext.Array.map(response.layers, function(layer) {
+            return Ext.create('GeoExt.data.model.ArcGISRestServiceLayer',{
+                layerId: layer.id,
+                name: layer.name,
+                defaultVisibility: layer.defaultVisibility,
+                visibility: layer.defaultVisibility,
+                leaf: true
+            });
+        });
+        expandedNode.appendChild(layers);
     }
 });
