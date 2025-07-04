@@ -189,7 +189,7 @@ Ext.define('BasiGX.view.form.AddArcGISRest', {
             xtype: 'fieldset',
             name: 'fs-available-layers',
             layout: 'anchor',
-            scrollable: 'y',
+            scrollable: true,
             maxHeight: 200,
             defaults: {
                 anchor: '100%'
