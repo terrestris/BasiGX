@@ -79,7 +79,7 @@
         "karma-mocha": "2.0.1",
         "karma-mocha-reporter": "2.2.5",
         "karma-sinon": "1.0.5",
-        "mocha": "10.2.0",
+        "mocha": "10.8.2",
         "np": "9.1.0",
         "open-cli": "7.2.0",
         "puppeteer": "21.6.0",
