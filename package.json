@@ -82,7 +82,7 @@
         "mocha": "10.2.0",
         "np": "9.1.0",
         "open-cli": "7.2.0",
-        "puppeteer": "21.6.0",
+        "puppeteer": "24.4.0",
         "rimraf": "5.0.5",
         "serve": "14.2.1",
         "sinon": "17.0.1",
