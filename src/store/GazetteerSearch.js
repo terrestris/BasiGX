@@ -34,7 +34,7 @@ Ext.define('BasiGX.store.GazetteerSearch', {
     _lastRequest: null,
 
     proxy: {
-        url: 'https://nominatim.openstreetmap.org',
+        url: 'https://nominatim.openstreetmap.org/search',
         method: 'GET',
         type: 'ajax',
         extraParams: {
